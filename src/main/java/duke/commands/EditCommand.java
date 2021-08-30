@@ -25,15 +25,15 @@ public class EditCommand extends Command {
         this.lineNumber = lineNumber;
     }
 
-  /**
-   * The execute command that executes the necessary actions when a Task
-   * is edited in the TaskList.
-   *
-   * @param tasks The TaskList to be added to
-   * @param ui The Ui object to interact with the user
-   * @param storage The Storage object that stores the TaskList on the Local Machine
-   */
-  public void execute(TaskList tasks, Ui ui, Storage storage) {
+    /**
+    * The execute command that executes the necessary actions when a Task
+    * is edited in the TaskList.
+    *
+    * @param tasks The TaskList to be added to
+    * @param ui The Ui object to interact with the user
+    * @param storage The Storage object that stores the TaskList on the Local Machine
+    */
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Task editedTask = tasks.editTaskList(lineNumber, this.getCommandType());
         storage.editStorage(lineNumber, this.getCommandType());
         ui.showEditTaskMessage(editedTask, this.getCommandType(), tasks);

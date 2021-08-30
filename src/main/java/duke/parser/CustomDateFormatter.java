@@ -1,6 +1,7 @@
 package duke.parser;
 
-//The code below was referenced from https://stackoverflow.com/questions/23488721/how-to-check-if-string-matches-date-pattern-using-time-api
+// The code below was referenced from
+// https://stackoverflow.com/questions/23488721/how-to-check-if-string-matches-date-pattern-using-time-api
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -14,32 +15,32 @@ import java.time.format.DateTimeParseException;
 public class CustomDateFormatter {
 
     /** The array of common patterns with time. */
-    private final String[] PATTERNS_WITH_TIME = new String[] {
-            "dd-mm-yyyy HH:mm",
-            "dd-mm-yyyy hh:mm:ss.s",
-            "yyyy-mm-dd hh:mm",
-            "yyyy-mm-dd hh:mm:ss.s",
-            "MMM dd yyyy HH:mm",
-            "dd MMM yyyy HH:mm",
+    private final String[] patternsWithTime = new String[] {
+        "dd-mm-yyyy HH:mm",
+        "dd-mm-yyyy hh:mm:ss.s",
+        "yyyy-mm-dd hh:mm",
+        "yyyy-mm-dd hh:mm:ss.s",
+        "MMM dd yyyy HH:mm",
+        "dd MMM yyyy HH:mm",
     };
 
     /** The array of common patterns without time. */
-    private final String[] PATTERNS_WITHOUT_TIME = new String[] {
-            "dd MMM yyyy",
-            "dd-mm-yyyy",
-            "dd-mm-yy",
-            "dd-MM-yyyy",
-            "dd mm yy",
-            "dd mm yyyy",
-            "dd MM yyyy",
-            "dd/mm/yy",
-            "dd/mm/yyyy",
-            "dd/MM/yyyy",
-            "dd.mm.yy",
-            "dd.mm.yyyy",
-            "dd.MM.yyyy",
-            "dd/M/yyyy",
-            "yyyy-mm-dd",
+    private final String[] patternsWithoutTime = new String[] {
+        "dd MMM yyyy",
+        "dd-mm-yyyy",
+        "dd-mm-yy",
+        "dd-MM-yyyy",
+        "dd mm yy",
+        "dd mm yyyy",
+        "dd MM yyyy",
+        "dd/mm/yy",
+        "dd/mm/yyyy",
+        "dd/MM/yyyy",
+        "dd.mm.yy",
+        "dd.mm.yyyy",
+        "dd.MM.yyyy",
+        "dd/M/yyyy",
+        "yyyy-mm-dd",
     };
 
     /**
@@ -60,7 +61,7 @@ public class CustomDateFormatter {
      * @return
      */
     public LocalDateTime formatWithTime(String text) {
-        for (String pattern: PATTERNS_WITH_TIME) {
+        for (String pattern: patternsWithTime) {
             try {
                 return LocalDateTime.parse(text, DateTimeFormatter.ofPattern(pattern));
             } catch (DateTimeParseException e) {
@@ -77,7 +78,7 @@ public class CustomDateFormatter {
      * @return
      */
     public LocalDate formatWithoutTime(String text) {
-        for (String pattern: PATTERNS_WITHOUT_TIME) {
+        for (String pattern: patternsWithoutTime) {
             try {
                 return LocalDate.parse(text, DateTimeFormatter.ofPattern(pattern));
             } catch (DateTimeParseException e) {
@@ -87,11 +88,6 @@ public class CustomDateFormatter {
         return null;
     }
 
-    public static void main(String[] args) {
-        CustomDateFormatter temp = new CustomDateFormatter();
-        LocalDateTime dateTime = temp.formatWithTime("10 Oct 2014 01:00");
-        LocalDate date = temp.formatWithoutTime("12-12-2019");
-    }
 }
 
 

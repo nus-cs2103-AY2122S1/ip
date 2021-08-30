@@ -1,10 +1,11 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import java.util.ArrayList;
 
 /**
  * The SearchCommand class extends the Command class and is the Command that searches
@@ -33,7 +34,7 @@ public class SearchCommand extends Command {
      * @param storage The Storage object that stores the TaskList on the Local Machine
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ArrayList<Task>  listFound = tasks.searchTaskList(this.searchString, tasks);
+        ArrayList<Task> listFound = tasks.searchTaskList(this.searchString, tasks);
         ui.showSearchMessage(listFound);
     }
 

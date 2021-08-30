@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.FileNotFoundException;
+
 import duke.commands.Command;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.FileNotFoundException;
 
 
 public class Duke {
@@ -15,6 +15,11 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * This is the constructor for the Duke object.
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -26,6 +31,7 @@ public class Duke {
         }
     }
 
+    /** This method starts the Duke chat bot. */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

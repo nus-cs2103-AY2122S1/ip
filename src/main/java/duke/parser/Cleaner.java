@@ -26,26 +26,26 @@ public class Cleaner {
         String[] stringArray = fullCommand.split(" ");
         String firstWord = stringArray[0];
         switch (firstWord) {
-            case "list":
-                return listCleaner(fullCommand);
-            case "todo":
-                return todoCleaner(fullCommand);
-            case "deadline":
-                return deadlineCleaner(fullCommand);
-            case "event":
-                return eventCleaner(fullCommand);
-            case "done":
-                return markDoneCleaner(fullCommand, currentCapacity);
-            case "undo":
-                return markUndoCleaner(fullCommand, currentCapacity);
-            case "delete":
-                return deleteCleaner(fullCommand, currentCapacity);
-            case "bye":
-                return byeCleaner(fullCommand);
-            case "find":
-                return findCleaner(fullCommand);
-            default:
-                return "error -1";
+        case "list":
+            return listCleaner(fullCommand);
+        case "todo":
+            return todoCleaner(fullCommand);
+        case "deadline":
+            return deadlineCleaner(fullCommand);
+        case "event":
+            return eventCleaner(fullCommand);
+        case "done":
+            return markDoneCleaner(fullCommand, currentCapacity);
+        case "undo":
+            return markUndoCleaner(fullCommand, currentCapacity);
+        case "delete":
+            return deleteCleaner(fullCommand, currentCapacity);
+        case "bye":
+            return byeCleaner(fullCommand);
+        case "find":
+            return findCleaner(fullCommand);
+        default:
+            return "error -1";
         }
     }
 

@@ -30,50 +30,6 @@ public enum DukeError {
     /** The error message. */
     private final String description;
 
-    /**
-     * This method gets the respective DukeError from the code.
-     *
-     * @param code The error code
-     * @return The respective DukeError
-     */
-    public static DukeError getError(int code) {
-        switch (code) {
-            case -1:
-                return DukeError.INVALID_COMMAND;
-            case 0:
-                return DukeError.ESCAPE_CHARACTER;
-            case 1:
-                return DukeError.POLLUTED_LIST_COMMAND;
-            case 2:
-                return DukeError.EMPTY_TODO_DESCRIPTION;
-            case 3:
-                return DukeError.EMPTY_DEADLINE_DESCRIPTION;
-            case 4:
-                return DukeError.EMPTY_DEADLINE_DATE;
-            case 5:
-                return DukeError.EMPTY_EVENT_DESCRIPTION;
-            case 6:
-                return DukeError.EMPTY_EVENT_DATE;
-            case 7:
-                return DukeError.EMPTY_LIST_NUMBER;
-            case 8:
-                return DukeError.TOO_MANY_INPUTS;
-            case 9:
-                return DukeError.INVALID_LIST_NUMBER;
-            case 10:
-                return DukeError.LIST_FULL;
-            case 11:
-                return DukeError.SEPARATOR_DETECTED;
-            case 12:
-                return DukeError.INVALID_DATE_FORMAT;
-            case 13:
-                return DukeError.POLLUTED_EXIT_COMMAND;
-            case 14:
-                return DukeError.EMPTY_SEARCH_STRING;
-            default:
-                return null;
-        }
-    }
 
     /**
      * The constructor for the DukeError.
@@ -84,6 +40,51 @@ public enum DukeError {
     DukeError(int code, String description) {
         this.code = code;
         this.description = description;
+    }
+
+    /**
+     * This method gets the respective DukeError from the code.
+     *
+     * @param code The error code
+     * @return The respective DukeError
+     */
+    public static DukeError getError(int code) {
+        switch (code) {
+        case -1:
+            return DukeError.INVALID_COMMAND;
+        case 0:
+            return DukeError.ESCAPE_CHARACTER;
+        case 1:
+            return DukeError.POLLUTED_LIST_COMMAND;
+        case 2:
+            return DukeError.EMPTY_TODO_DESCRIPTION;
+        case 3:
+            return DukeError.EMPTY_DEADLINE_DESCRIPTION;
+        case 4:
+            return DukeError.EMPTY_DEADLINE_DATE;
+        case 5:
+            return DukeError.EMPTY_EVENT_DESCRIPTION;
+        case 6:
+            return DukeError.EMPTY_EVENT_DATE;
+        case 7:
+            return DukeError.EMPTY_LIST_NUMBER;
+        case 8:
+            return DukeError.TOO_MANY_INPUTS;
+        case 9:
+            return DukeError.INVALID_LIST_NUMBER;
+        case 10:
+            return DukeError.LIST_FULL;
+        case 11:
+            return DukeError.SEPARATOR_DETECTED;
+        case 12:
+            return DukeError.INVALID_DATE_FORMAT;
+        case 13:
+            return DukeError.POLLUTED_EXIT_COMMAND;
+        case 14:
+            return DukeError.EMPTY_SEARCH_STRING;
+        default:
+            return null;
+        }
     }
 
     /**

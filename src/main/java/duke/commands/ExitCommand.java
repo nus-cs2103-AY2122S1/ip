@@ -15,14 +15,14 @@ public class ExitCommand extends Command {
         super(CommandType.EXIT, true);
     }
 
-  /**
-   * The execute command that executes the necessary actions when issued with the Exit Command.
-   *
-   * @param tasks The TaskList to be added to
-   * @param ui The Ui object to interact with the user
-   * @param storage The Storage object that stores the TaskList on the Local Machine
-   */
-  public void execute(TaskList tasks, Ui ui, Storage storage) {
+    /**
+    * The execute command that executes the necessary actions when issued with the Exit Command.
+    *
+    * @param tasks The TaskList to be added to
+    * @param ui The Ui object to interact with the user
+    * @param storage The Storage object that stores the TaskList on the Local Machine
+    */
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showExitMessage();
     }
 }

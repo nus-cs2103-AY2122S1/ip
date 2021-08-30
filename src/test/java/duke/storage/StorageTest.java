@@ -25,7 +25,7 @@ public class StorageTest {
         CORRECT_ARRAYLIST_OF_TASKS.add((new ToDo("ok4")));
         CORRECT_ARRAYLIST_OF_TASKS.add(new Deadline("ok", LocalDate.of(2019, 12, 12)));
 
-        Storage testStorage = new Storage("data/duke.txt");
+        Storage testStorage = new Storage("src/test/data/duke.txt");
         try {
             assertEquals(CORRECT_ARRAYLIST_OF_TASKS, testStorage.load());
         } catch (FileNotFoundException e) {

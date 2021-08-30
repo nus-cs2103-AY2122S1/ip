@@ -14,6 +14,13 @@ public class Task {
         this.description = "NONE";
         this.isDone = false;
     }
+
+    /**
+     * The public access constructor for inherited classes
+     * to implement or override.
+     *
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
