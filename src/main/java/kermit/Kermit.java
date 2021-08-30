@@ -2,9 +2,6 @@ package kermit;
 
 import kermit.command.Command;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 /**
  * Driver class for Kermit, a frog that keeps tracks of your tasks.
  */
@@ -52,7 +49,7 @@ public class Kermit {
      *
      * @param args  The commandline arguments.
      */
-    public static void main(String[] args){
+    public static void main(String[] args) {
         new Kermit("data/tasks.txt").run();
     }
 }
