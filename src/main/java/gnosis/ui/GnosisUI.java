@@ -100,12 +100,10 @@ public class GnosisUI extends AnchorPane {
      * @param isDataAvailable Whether file system is available or not.
      */
     public void displayGreetMessage(boolean isDataAvailable) {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getGnosisDialog(GnosisConstants.GREET_MESSAGE),
-                DialogBox.getGnosisDialog(isDataAvailable
+        displayMessage(GnosisConstants.GREET_MESSAGE,
+                        isDataAvailable
                         ? GnosisConstants.DATA_TASK_FILE_FOUND_MESSAGE
-                        : GnosisConstants.DATA_TASK_FILE_NOT_FOUND_MESSAGE)
-        );
+                        : GnosisConstants.DATA_TASK_FILE_NOT_FOUND_MESSAGE);
     }
 
     /**
@@ -115,9 +113,9 @@ public class GnosisUI extends AnchorPane {
      * @param keyword keyword used to filter tasks.
      */
     public void displayFoundTasksMessage(List<Task> foundTasks, String keyword) {
-        dialogContainer.getChildren().add(DialogBox.getGnosisDialog(GnosisConstants.LISTING_MATCH_KEYWORD_MESSAGE + keyword));
+        displayMessage(GnosisConstants.LISTING_MATCH_KEYWORD_MESSAGE + keyword);
         for (Task task: foundTasks) {
-            dialogContainer.getChildren().add(DialogBox.getGnosisDialog(task.toString()));
+            displayMessage(task.toString());
         }
 
     }
@@ -130,9 +128,7 @@ public class GnosisUI extends AnchorPane {
      * @param numOfTasks - number of task
      */
     public void updateTaskManagementViewMessage(String action, Task task, int numOfTasks) {
-        dialogContainer.getChildren().add(DialogBox.getGnosisDialog("Task " + action + ":"));
-        dialogContainer.getChildren().add(DialogBox.getGnosisDialog(task.toString()));
-        dialogContainer.getChildren().add(DialogBox.getGnosisDialog("Total tasks in the list: " + numOfTasks));
+        displayMessage("Task " + action + ":", task.toString(), "Total tasks in the list: " + numOfTasks);
     }
 
     /**
@@ -143,11 +139,11 @@ public class GnosisUI extends AnchorPane {
     public void displayAllTasksMessage(List<Task> tasks) {
         int len = tasks.size();
         if (len == 0) {
-            dialogContainer.getChildren().add(DialogBox.getGnosisDialog("There is no task in the list."));
+            displayMessage("There is no task in the list.");
         } else {
-            dialogContainer.getChildren().add(DialogBox.getGnosisDialog("Listing all tasks in list:"));
+            displayMessage("Listing all tasks in list:");
             for (int i = 0; i < len; i++) {
-                dialogContainer.getChildren().add(DialogBox.getGnosisDialog((i + 1) + ". " + tasks.get(i)));
+                displayMessage((i + 1) + ". " + tasks.get(i));
             }
         }
     }
@@ -159,18 +155,7 @@ public class GnosisUI extends AnchorPane {
      * @param taskIndex - task number from task list
      */
     public void displayMarkedTaskMessage(Task task, int taskIndex) {
-        dialogContainer.getChildren().add(DialogBox.getGnosisDialog("Task " + (taskIndex) + " marked as done:"));
-        dialogContainer.getChildren().add(DialogBox.getGnosisDialog("\t" + task));
-    }
-
-    /**
-     * Displays specified message
-     *
-     * @param message Message to display to user.
-     */
-    public void displayMessage(String message) {
-        System.out.println(message);
-        dialogContainer.getChildren().add(DialogBox.getGnosisDialog(message));
+        displayMessage("Task " + (taskIndex) + " marked as done:", "\t" + task);
     }
 
     /**
@@ -178,7 +163,18 @@ public class GnosisUI extends AnchorPane {
      *
      */
     public void displayByeMessage() {
-        dialogContainer.getChildren().add(DialogBox.getGnosisDialog(GnosisConstants.BYE_MESSAGE));
+        displayMessage(GnosisConstants.BYE_MESSAGE);
         Platform.exit();
+    }
+
+    /**
+     * Displays messages in sequence
+     *
+     * @param messages Messages to display to user.
+     */
+    public void displayMessage(String... messages) {
+        for (String msg: messages) {
+            dialogContainer.getChildren().add(DialogBox.getGnosisDialog(msg));
+        }
     }
 }
