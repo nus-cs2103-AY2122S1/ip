@@ -3,14 +3,15 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Static class that parses input lines into Commands
+ * Static class that parses input lines into Commands.
  */
 public class Parser {
     /**
-     * Parses a line of input to a Command object
-     * @param fullCommand string containing exactly one line of input
-     * @return Command object represented by fullCommmand
-     * @throws DukeException
+     * Parses a line of input to a Command object.
+     *
+     * @param fullCommand string containing exactly one line of input.
+     * @return Command object represented by fullCommmand.
+     * @throws DukeException If fullCommand has wrong number of symbols.
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] commandSplit = fullCommand.split(" ", 2);

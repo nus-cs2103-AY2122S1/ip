@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Represents type of task
+ * Represents type of task.
  */
 public enum TaskType {
     TODO,

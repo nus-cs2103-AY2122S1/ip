@@ -5,28 +5,30 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a Task with an additional dateTime field storing a deadline
+ * Represents a Task with an additional date field storing a deadline.
  */
 public class Deadline extends Task {
-    private LocalDate dateTime;
+    private LocalDate date;
 
     /**
-     * @param description Description of Task
-     * @param dateTime Deadline for task, formatted in YYYY-MM-DD
-     * @throws DukeException
+     * @param description Description of Task.
+     * @param date Deadline for task, formatted in YYYY-MM-DD.
+     * @throws DukeException if description is empty.
+     * @throws DateTimeParseException If date format is invalid.
      */
-    public Deadline(String description, String dateTime) throws DukeException, DateTimeParseException {
+    public Deadline(String description, String date) throws DukeException, DateTimeParseException {
         super(description);
-        this.dateTime = LocalDate.parse(dateTime);
+        this.date = LocalDate.parse(date);
     }
+
     public String toString() {
-        String dateString = dateTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        String dateString = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return String.format("[D][%s] %s (by: %s)",
                 getStatusIcon(), description, dateString);
     }
 
-    public String getDateTime() {
-        return dateTime.toString();
+    public String getDate() {
+        return date.toString();
     }
 
     @Override

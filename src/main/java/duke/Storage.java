@@ -8,13 +8,13 @@ import java.io.File;
 import java.io.FileWriter;
 
 /**
- * Represents the persistent storage for tasks in duke.Duke
+ * Represents the persistent storage for tasks in duke.Duke.
  */
 public class Storage {
     private String filePath;
 
     /**
-     * @param filePath Path to tasks data file
+     * @param filePath Path to tasks data file.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -25,10 +25,11 @@ public class Storage {
     }
 
     /**
-     * Loads file data to an ArrayList of tasks
-     * @return ArrayList of tasks loaded from file
-     * @throws DukeException
-     * @throws FileNotFoundException
+     * Loads file data to an ArrayList of tasks.
+     *
+     * @return ArrayList of tasks loaded from file.
+     * @throws DukeException If file format was invalid.
+     * @throws FileNotFoundException If file was not found.
      */
     public ArrayList<Task> load() throws DukeException, FileNotFoundException {
         File file = new File(filePath);
@@ -62,9 +63,10 @@ public class Storage {
     }
 
     /**
-     * Saves an ArrayList of tasks into file
-     * @param tasks ArrayList of tasks to be stored in file
-     * @throws IOException
+     * Saves an ArrayList of tasks into file.
+     *
+     * @param tasks ArrayList of tasks to be stored in file.
+     * @throws IOException If unable to write to file.
      */
     public void save(ArrayList<Task> tasks) throws IOException {
         FileWriter writer = new FileWriter(filePath);
@@ -79,12 +81,12 @@ public class Storage {
             case EVENT:
                 Event event = (Event) task;
                 data += String.format("E | %d | %s | %s\n",
-                        isDone, task.getDescription(), event.getDateTime());
+                        isDone, task.getDescription(), event.getDate());
                 break;
             case DEADLINE:
                 Deadline deadline = (Deadline) task;
                 data += String.format("D | %d | %s | %s\n",
-                        isDone, task.getDescription(), deadline.getDateTime());
+                        isDone, task.getDescription(), deadline.getDate());
                 break;
             }
         }
