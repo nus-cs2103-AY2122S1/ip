@@ -66,11 +66,12 @@ public class TaskList {
     /**
      * Lists the current Tasks in taskArrayList with numbering
      */
-    public void list() {
+    public String list() {
+        String list = "Here are your current tasks:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + "." + tasks.get(i).toString());
+            list += i + 1 + "." + tasks.get(i).toString() + "\n";
         }
-        System.out.println();
+        return list;
     }
 
     /**
@@ -146,13 +147,14 @@ public class TaskList {
      * Finds and prints a list of tasks with matching task name
      * @param taskName Name of task entered by user
      */
-    public void find(String taskName) {
+    public String find(String taskName) {
+        String response = String.format("Here are your tasks that match %s:\n", taskName);
         List<Task> matchingTasks = tasks.stream()
                 .filter(task -> task.getName().contains(taskName))
                 .collect(Collectors.toList());
         for (int i = 0; i < matchingTasks.size(); i++) {
-            System.out.println(i + 1 + "." + matchingTasks.get(i).toString());
+            response += i + 1 + "." + matchingTasks.get(i).toString() + "\n";
         }
-        System.out.println();
+        return response;
     }
 }

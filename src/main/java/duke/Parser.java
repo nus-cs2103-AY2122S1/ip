@@ -37,7 +37,7 @@ public class Parser {
      * @param taskList TaskList object used by Duke
      * @throws DukeException If Duke does not recognize the format provided
      */
-    public static void handle(String userString, TaskList taskList) throws DukeException {
+    public static String handle(String userString, TaskList taskList) throws DukeException {
         Parser.userString = userString;
         Parser.taskList = taskList;
         String[] arr = userString.split(" ");
@@ -47,30 +47,22 @@ public class Parser {
         switch (firstWord) {
         case "bye":
             taskList.saveTasksToStorage();
-            UI.bye();
             isRunning = false;
-            break;
+            return UI.bye();
         case "list":
-            taskList.list();
-            break;
+            return taskList.list();
         case "done":
-            handleDone();
-            break;
+            return handleDone();
         case "todo":
-            handleTodo();
-            break;
+            return handleTodo();
         case "deadline":
-            handleDeadline();
-            break;
+            return handleDeadline();
         case "event":
-            handleEvent();
-            break;
+            return handleEvent();
         case "delete":
-            handleDelete();
-            break;
+            return handleDelete();
         case "find":
-            handleFind();
-            break;
+            return handleFind();
         default:
             throw new InvalidCommandException("Invalid command");
         }
@@ -82,7 +74,7 @@ public class Parser {
      *
      * @throws DukeException If there is no task number or wrong task number
      */
-    public static void handleDone() throws DukeException {
+    public static String handleDone() throws DukeException {
         if (words.length < 2) {
             throw new MissingTaskNumberException("Missing task number");
         }
@@ -92,8 +84,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException("Task does not exist");
         }
-        UI.done(taskNumber);
-        taskList.list();
+        return UI.done(taskNumber) + "\n" + taskList.list();
     }
 
     /**
@@ -102,14 +93,13 @@ public class Parser {
      *
      * @throws DukeException If no name is provided
      */
-    public static void handleTodo() throws DukeException {
+    public static String handleTodo() throws DukeException {
         if (words.length < 2) {
             throw new MissingTaskNameException("Missing task name");
         }
         String remaining = userString.substring(5);
         taskList.add(new ToDo(remaining));
-        UI.added("todo");
-        UI.numberOfTasks(taskList.size());
+        return UI.added("todo") + "\n" + UI.numberOfTasks(taskList.size());
     }
 
 
@@ -119,7 +109,7 @@ public class Parser {
      *
      * @throws DukeException If no name or no deadline is provided
      */
-    public static void handleDeadline() throws DukeException {
+    public static String handleDeadline() throws DukeException {
         if (words.length < 2) {
             throw new MissingTaskNameException("Missing task name");
         }
@@ -131,8 +121,7 @@ public class Parser {
         String deadlineByString = userString.substring(byIndex + 4);
         LocalDate deadlineBy = LocalDate.parse(deadlineByString);
         taskList.add(new Deadline(deadlineName, deadlineBy));
-        UI.added("deadline");
-        UI.numberOfTasks(taskList.size());
+        return UI.added("deadline") + "\n" + UI.numberOfTasks(taskList.size());
     }
 
     /**
@@ -141,7 +130,7 @@ public class Parser {
      *
      * @throws DukeException If no task name or event date is provided
      */
-    public static void handleEvent() throws DukeException {
+    public static String handleEvent() throws DukeException {
         if (words.length < 2) {
             throw new MissingTaskNameException("Missing task name");
         }
@@ -153,8 +142,7 @@ public class Parser {
         String eventAtString = userString.substring(atIndex + 4);
         LocalDate eventAt = LocalDate.parse(eventAtString);
         taskList.add(new Event(eventName, eventAt));
-        UI.added("event");
-        UI.numberOfTasks(taskList.size());
+        return UI.added("event") + "\n" + UI.numberOfTasks(taskList.size());
     }
 
     /**
@@ -163,7 +151,7 @@ public class Parser {
      *
      * @throws DukeException If there is none or invalid task number provided
      */
-    public static void handleDelete() throws DukeException {
+    public static String handleDelete() throws DukeException {
         if (words.length < 2) {
             throw new MissingTaskNumberException("Missing task number");
         }
@@ -173,9 +161,8 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException("Task does not exist");
         }
-        UI.delete(deleteTaskNumber);
-        UI.numberOfTasks(taskList.size());
-        taskList.list();
+        return UI.delete(deleteTaskNumber) + "\n" + UI.numberOfTasks(taskList.size())
+                + "\n" + taskList.list();
     }
 
     /**
@@ -183,11 +170,11 @@ public class Parser {
      * Triggered when find command is identified
      * @throws MissingTaskNameException If no task name provided
      */
-    public static void handleFind() throws MissingTaskNameException {
+    public static String handleFind() throws MissingTaskNameException {
         if (words.length < 2) {
             throw new MissingTaskNameException("Missing task name");
         }
-        taskList.find(words[1]);
+        return taskList.find(words[1]);
     }
 
     public static boolean isRunning() {
