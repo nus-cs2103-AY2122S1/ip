@@ -23,22 +23,60 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Method that adds a To-Do task onto TaskList
+     *
+     * @param description The string that contains the description of the task.
+     *
+     * @return void
+     */
     public void addTodo(String description) {
         tasks.add(new Todo(description));
     }
 
+    /**
+     * Method that returns the particular element of the list of tasks
+     *
+     * @param index The index of the task that needs to be got
+     *
+     * @return Task The task object that is required
+     */
     public Task get(int index) {
         return tasks.get(index);
     }
 
+    /**
+     * Method that adds a Deadline task onto TaskList
+     *
+     * @param description The string that contains the description of the task.
+     * @param date The date mentioned in the task initialization.
+     *
+     * @return void
+     */
     public void addDeadline(String description, LocalDate date) {
         tasks.add(new Deadline(description, date));
     }
 
+    /**
+     * Method that adds an Event onto TaskList
+     *
+     * @param description The string that contains the description of the task.
+     * @param date The date mentioned in the task initialization.
+     *
+     *
+     * @return void
+     */
     public void addEvent(String description, LocalDate date) {
         tasks.add(new Event(description, date));
     }
 
+    /**
+     * Method that deletes a task from the TaskList
+     *
+     * @param index The index of the task that needs to be deleted
+     *
+     * @return void
+     */
     public void delete(int index) {
         tasks.remove(index);
     }
@@ -46,6 +84,14 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return this.tasks;
     }
+
+    /**
+     * Method that runs the Duke by asking for user input
+     *
+     * @param
+     *
+     * @return void
+     */
 
     public void readFromFile() {
         try {
@@ -66,16 +112,6 @@ public class TaskList {
                     String[] splitDate = temp[1].split(":");
                     System.out.println(splitDate[0]);
                     LocalDate date1 = LocalDate.parse(splitDate[1].substring(1));
-                    /**
-                    String[] breakingDate = date.split("/");
-                    String year = breakingDate[2];
-                    String month = breakingDate[1];
-                    String currentDate = breakingDate[0];
-                    int i = Integer.parseInt(currentDate);
-                    if (i < 10) {
-                        currentDate = "0" + currentDate;
-                    }
-                     */
                     this.addDeadline(description, date1);
                 } else if (userInput.substring(0,3).equals("[E]")) {
                     String[] tempEvent = userInput.split("at");
@@ -83,19 +119,6 @@ public class TaskList {
                     String[] splitDate = tempEvent[1].split(":");
                     System.out.println(splitDate[0]);
                     LocalDate date1 = LocalDate.parse(splitDate[1].substring(1));
-                    /**
-                    String date = splitDate[1];
-                    String[] breakingDate = date.split("/");
-                    String year = breakingDate[2];
-                    String month = breakingDate[1];
-                    String currentDate = breakingDate[0];
-                    int i = Integer.parseInt(currentDate);
-                    if (i < 10) {
-                        currentDate = "0" + currentDate;
-                    }
-                    String finalDateFormat = year + "-" + month + "-" + currentDate;
-                    LocalDate date1 = LocalDate.parse(finalDateFormat);
-                     */
                     this.addEvent(description, date1);
                 }
             }
