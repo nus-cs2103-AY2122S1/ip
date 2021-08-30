@@ -1,9 +1,9 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Stores and handles operations for a list of tasks.
@@ -76,7 +76,7 @@ public class TaskList {
             Task doneTask = this.tasks.get(taskNumber - 1);
             doneTask.markDone();
             return "Nice! I've marked this task as done:\n" + "  "
-                    + doneTask.toString() +"\n";
+                    + doneTask.toString() + "\n";
         } catch (Exception e) {
             throw new DukeException("☹ OOPS!!! That task does not exist.");
         }

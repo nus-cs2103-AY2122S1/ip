@@ -1,13 +1,13 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 /**
  * Takes in the user's inputs and processes them to be understood by Duke to run commands.
@@ -72,20 +72,20 @@ public abstract class Parser {
         boolean isDone = taskString.charAt(0) == 'X';
         String[] split = taskString.split("/");
         switch (type) {
-            case 'T':
-                return new ToDo(split[1], isDone);
+        case 'T':
+            return new ToDo(split[1], isDone);
 
-            case 'D':
-                String deadlineName = split[1];
-                String deadlineDateAndTime = split[2];
-                return new Deadline(deadlineName, LocalDateTime.parse(deadlineDateAndTime), isDone);
+        case 'D':
+            String deadlineName = split[1];
+            String deadlineDateAndTime = split[2];
+            return new Deadline(deadlineName, LocalDateTime.parse(deadlineDateAndTime), isDone);
 
-            default:
-                String eventName = split[1];
-                String eventDateAndTime = split[2];
-                String eventEndTime = split[3];
-                return new Event(eventName, LocalDateTime.parse(eventDateAndTime),
-                        LocalTime.parse(eventEndTime), isDone);
+        default:
+            String eventName = split[1];
+            String eventDateAndTime = split[2];
+            String eventEndTime = split[3];
+            return new Event(eventName, LocalDateTime.parse(eventDateAndTime),
+                    LocalTime.parse(eventEndTime), isDone);
         }
     }
 

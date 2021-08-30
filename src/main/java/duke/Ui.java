@@ -1,23 +1,25 @@
 package duke;
 
-import duke.exception.DukeException;
-
 import java.util.Scanner;
+
+import duke.exception.DukeException;
 
 /**
  * Handles the tasks of scanning in user inputs and displaying responses to the console.
  */
 public class Ui {
+    static final String OPENING_MESSAGE = "Hello! I'm Duke\n"
+            + "What can I do for you?\n";
+    static final String CLOSING_MESSAGE = "Bye. Hope to see you again soon!\n";
+    static final String LINE_SEPARATOR = "____________________________________________________________";
     private final Scanner sc;
-    private final String LINE_SEPARATOR = "____________________________________________________________";
+
 
     /**
      * Initialises a new instance of Ui.
      */
     public Ui() {
         this.sc = new Scanner(System.in);
-        String OPENING_MESSAGE = "Hello! I'm Duke\n"
-                + "What can I do for you?\n";
         this.printMessage(OPENING_MESSAGE);
     }
 
@@ -46,7 +48,6 @@ public class Ui {
      * @param string The given String.
      */
     public void printMessage(String string) {
-
         System.out.println(LINE_SEPARATOR + "\n" + string + LINE_SEPARATOR);
     }
 
@@ -55,7 +56,6 @@ public class Ui {
      */
     public void exit() {
         sc.close();
-        String CLOSING_MESSAGE = "Bye. Hope to see you again soon!\n";
         this.printMessage(CLOSING_MESSAGE);
     }
 }

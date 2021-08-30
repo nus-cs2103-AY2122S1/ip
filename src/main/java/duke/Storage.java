@@ -1,10 +1,14 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.task.Task;
-
-import java.io.*;
-import java.util.ArrayList;
 
 /**
  * Handles the reading and writing to the save file.
@@ -39,7 +43,8 @@ public class Storage {
                 while (nextLine != null) {
                     savedList.add(Parser.processTaskString(nextLine));
                     nextLine = br.readLine();
-                }                br.close();
+                }
+                br.close();
 
             } else {
                 // If the save file does not exist, create a new save file.

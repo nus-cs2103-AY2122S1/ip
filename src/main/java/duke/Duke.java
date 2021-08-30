@@ -1,14 +1,14 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 
 /**
  * Handles the logic of Duke e.g. adding, saving and deleting tasks.
@@ -169,6 +169,10 @@ public class Duke {
         }
     }
 
+    /**
+     * The main method.
+     * @param args Any CLI arguments. (Not used)
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("save.txt");
         duke.run();
