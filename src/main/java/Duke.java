@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Duke {
     public static void main(String[] args) {
-        // Task[] arr = new Task[100];
         List<Task> arr = new ArrayList<>();
         int count = 0;
         String logo = " ____        _        \n"
