@@ -14,8 +14,6 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         String from = fromTo[0];
         String to = fromTo[1];
-        System.out.println(from);
-        System.out.println(to);
         this.from = LocalDateTime.parse(from,formatter);
         this.to = LocalDateTime.parse(to,formatter);
     }
@@ -23,9 +21,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at:"
-                + from.format(DateTimeFormatter.ofPattern("MMM-d-yyyy HH:mm"))
+                + from.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
                 +" -- "
-                + to.format(DateTimeFormatter.ofPattern("MMM-d-yyyy HH:mm")) + ")";
+                + to.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")) + ")";
     }
 
     @Override
