@@ -1,9 +1,8 @@
 package duke;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 import duke.task.Task;
-
 
 
 /**
@@ -76,11 +75,13 @@ public class Ui {
     }
 
     /**
-     * Prints tasks that are related to keyword.
+     * Prints tasks that are related to keywords.
+     *
      * @param tasks tasks that are related to keyword.
-     * @param keyword keyword that user is searching for.
+     * @param keywords keywords that user is searching for.
      */
-    public String printRelatedTasks(Tasklist tasks, String keyword) {
-        return "Your match tasks with " + keyword + ":\n" + this.printList(tasks);
+    public String printRelatedTasks(Tasklist tasks, ArrayList<String> keywords) {
+        String strKeywords = keywords.stream().reduce((x, y) -> x + " " + y).orElse("");
+        return "Your tasks that match with " + strKeywords + ":\n" + this.printList(tasks);
     }
 }
