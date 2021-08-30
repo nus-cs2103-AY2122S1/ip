@@ -15,8 +15,8 @@ public class ListCommand extends Command {
         if (tasks.size() == 0) {
             throw DukeException.emptyList();
         }
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println(arrayToString(tasks));
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+
+        String output = arrayToString(tasks);
+        setCommandOutput(output);
     }
 }

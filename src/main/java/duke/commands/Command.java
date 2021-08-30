@@ -13,6 +13,7 @@ import duke.ui.Ui;
  */
 public abstract class Command {
     private boolean isActive = true;
+    private String commandOutput = "Your command hasn't been executed yet.";
 
     public Command() {
     }
@@ -48,4 +49,12 @@ public abstract class Command {
         }
         return answer;
     }
+
+    public String getCommandOutput() {
+        return commandOutput;
+    }
+
+    protected void setCommandOutput(String output) {
+        commandOutput = output;
+    };
 }

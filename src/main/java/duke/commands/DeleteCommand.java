@@ -20,13 +20,14 @@ public class DeleteCommand extends Command {
         if (index < 0 || index > tasks.size() - 1) {
             throw DukeException.invalidIndex();
         } else {
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("This item will be removed:\n"
-                    + tasks.get(index).toString() + "\n");
+            String output = "This item will be removed:\n"
+                    + tasks.get(index).toString() + "\n"
+                    + String.format("You have %d task(s) at the moment!\n", tasks.size() - 1);
+
             tasks.remove(index);
-            System.out.println(String.format("You have %d task(s) at the moment!\n", tasks.size()));
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             storage.write(tasks);
+
+            setCommandOutput(output);
         }
     }
 }

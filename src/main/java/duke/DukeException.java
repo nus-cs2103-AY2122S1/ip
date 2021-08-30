@@ -1,8 +1,8 @@
 package duke;
 
 public class DukeException extends Exception {
-    private static final String INVALID_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
-    private static final String EMPTY_DESC = "☹ OOPS!!! The description of a task cannot be empty.";
+    private static final String INVALID_COMMAND = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String EMPTY_DESC = "OOPS!!! The description of a task cannot be empty.";
     private static final String EMPTY_LIST = "It looks like your list is empty. Add a task first!\n"
             + "Add a task by typing [todo TASKNAME], "
             + "[deadline TASKNAME /by TIME], or [event TASKNAME /at TIME]";

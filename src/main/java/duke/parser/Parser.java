@@ -28,8 +28,7 @@ public class Parser {
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),
-        FIND("find"),
-        ERROR(null);
+        FIND("find");
 
         public final String label;
 
@@ -66,49 +65,53 @@ public class Parser {
         String remainder = tokens.length == 1 ? null : tokens[1];
         int index;
 
-        switch (CommandEnum.valueOfLabel(eventType)) { // Exit routine
-        case EXIT:
-            return new ExitCommand();
-        case LIST:
-            return new ListCommand();
-        case FIND:
-            return new FindCommand(remainder);
-        case DELETE:
-            index = Integer.parseInt(remainder) - 1;
-            return new DeleteCommand(index);
-        case COMPLETE:
-            index = Integer.parseInt(remainder) - 1;
-            return new CompleteCommand(index);
-        case TODO:
-            if (remainder == null) {
-                throw DukeException.emptyDesc();
-            }
-            Todo todo = new Todo(false, remainder);
-
-            return new AddCommand(todo);
-        case DEADLINE:
-            if (remainder == null) {
-                throw DukeException.emptyDesc();
-            }
-            String[] deadlineTokens = remainder.split(" /by ", 2);
-            if (tokens.length == 1) {
-                throw DukeException.emptyTime();
-            }
-            LocalDateTime deadline = LocalDateTime.parse(deadlineTokens[1], DT_INPUT_FORMAT);
-            Deadline deadlineTask = new Deadline(false, deadlineTokens[0], deadline);
-
-            return new AddCommand(deadlineTask);
-        case EVENT:
-            if (remainder == null) {
-                throw DukeException.emptyDesc();
-            }
-            String[] eventTokens = remainder.split(" /at ", 2);
-            LocalDateTime startTime = LocalDateTime.parse(eventTokens[1], DT_INPUT_FORMAT);
-            Event event = new Event(false, eventTokens[0], startTime);
-
-            return new AddCommand(event);
-        default:
+        if (CommandEnum.valueOfLabel(eventType) == null) {
             throw DukeException.invalidCommand();
+        } else {
+            switch (CommandEnum.valueOfLabel(eventType)) { // Exit routine
+            case EXIT:
+                return new ExitCommand();
+            case LIST:
+                return new ListCommand();
+            case FIND:
+                return new FindCommand(remainder);
+            case DELETE:
+                index = Integer.parseInt(remainder) - 1;
+                return new DeleteCommand(index);
+            case COMPLETE:
+                index = Integer.parseInt(remainder) - 1;
+                return new CompleteCommand(index);
+            case TODO:
+                if (remainder == null) {
+                    throw DukeException.emptyDesc();
+                }
+                Todo todo = new Todo(false, remainder);
+
+                return new AddCommand(todo);
+            case DEADLINE:
+                if (remainder == null) {
+                    throw DukeException.emptyDesc();
+                }
+                String[] deadlineTokens = remainder.split(" /by ", 2);
+                if (tokens.length == 1) {
+                    throw DukeException.emptyTime();
+                }
+                LocalDateTime deadline = LocalDateTime.parse(deadlineTokens[1], DT_INPUT_FORMAT);
+                Deadline deadlineTask = new Deadline(false, deadlineTokens[0], deadline);
+
+                return new AddCommand(deadlineTask);
+            case EVENT:
+                if (remainder == null) {
+                    throw DukeException.emptyDesc();
+                }
+                String[] eventTokens = remainder.split(" /at ", 2);
+                LocalDateTime startTime = LocalDateTime.parse(eventTokens[1], DT_INPUT_FORMAT);
+                Event event = new Event(false, eventTokens[0], startTime);
+
+                return new AddCommand(event);
+            default:
+                throw DukeException.invalidCommand();
+            }
         }
     }
 }

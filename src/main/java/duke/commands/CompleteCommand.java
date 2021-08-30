@@ -21,11 +21,11 @@ public class CompleteCommand extends Command {
             throw DukeException.invalidIndex();
         } else {
             tasks.get(index).markAsDone();
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            System.out.println("Awesome! I marked this as done:\n"
-                    + tasks.get(index).toString() + "\n");
-            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             storage.write(tasks);
+
+            String output = "Awesome! I marked this as done:\n"
+                    + tasks.get(index).toString() + "\n";
+            setCommandOutput(output);
         }
     }
 }

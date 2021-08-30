@@ -1,5 +1,24 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
@@ -15,6 +34,17 @@ import duke.ui.Ui;
  * Initializes the application and starts the interaction with the user.
  */
 public class Duke {
+    // JavaFX GUI Elements
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    // Fields for chatbot functionality
+    public static final String FILEPATH = "data/tasks.txt";
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
@@ -32,47 +62,34 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+
     }
 
-    /**
-     * Runs the main Duke program.
-     *
-     */
-    public void run() {
-        boolean isActive = true;
-
-        String welcomeMsg = "Hey, I'm duke.Duke.\n"
-                + "What's up?\n";
-        String exitMsg = "Bye! Hope I helped!\n"
-                + "See you next time :)\n";
-
-        System.out.println(welcomeMsg);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        Scanner sc = new Scanner(System.in);
-
-        while (isActive) {
-            String input = sc.nextLine();
-            try {
-                //String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                isActive = c.isActive();
-
-            } catch (DukeException e) {
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                System.out.println(e.getMessage() + "\n");
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            } catch (DateTimeParseException e) {
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                System.out.println("Please enter the date and time "
-                        + "in dd/mm/yyyy hh:mma format! :\n)");
-                System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-            }
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(FILEPATH);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        } catch (IOException e) {
+            System.out.println("Critical failure while reading io");
         }
+    }
 
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        System.out.println(exitMsg);
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    public String getResponse(String input) {
+        try {
+            //String fullCommand = ui.readCommand();
+            ui.showLine(); // show the divider line ("_______")
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            return c.getCommandOutput();
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return "Please enter the date and time "
+                    + "in dd/mm/yyyy hh:mma format!";
+        }
     }
 }

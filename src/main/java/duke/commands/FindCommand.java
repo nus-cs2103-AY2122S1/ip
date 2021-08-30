@@ -25,9 +25,10 @@ public class FindCommand extends Command {
                 filteredList.add(task);
             }
         }
-        System.out.println("Here are the tasks containing the word : " + toFind);
-        System.out.println(arrayToString(filteredList));
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         storage.write(tasks);
+
+        String output = "Here are the tasks containing the word : \n" + toFind
+                + arrayToString(filteredList);
+        setCommandOutput(output);
     }
 }
