@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -58,7 +59,7 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        URL url = new File("C:\\Users\\65915\\ip\\src\\main\\java\\duke\\Gui.fxml").toURI().toURL();
+        URL url = new File("C:\\Users\\65915\\ip\\src\\main\\java\\duke\\MainWindow.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
         stage.setScene(scene);
