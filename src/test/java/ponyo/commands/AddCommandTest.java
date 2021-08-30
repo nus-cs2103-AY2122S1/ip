@@ -1,12 +1,12 @@
 package ponyo.commands;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.fail;
 
-import ponyo.data.task.Deadline;
-
 import java.time.format.DateTimeParseException;
+
+import org.junit.jupiter.api.Test;
+
+import ponyo.data.task.Deadline;
 
 public class AddCommandTest {
     @Test

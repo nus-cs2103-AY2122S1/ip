@@ -1,11 +1,11 @@
 package ponyo.commands;
 
+import java.util.ArrayList;
+
 import ponyo.data.task.Task;
 import ponyo.data.task.TaskList;
-import ponyo.ui.Ui;
 import ponyo.storage.Storage;
-
-import java.util.ArrayList;
+import ponyo.ui.Ui;
 
 /**
  * Search for a task using a keyword.

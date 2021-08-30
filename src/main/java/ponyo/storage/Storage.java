@@ -3,22 +3,25 @@ package ponyo.storage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+import ponyo.data.exceptions.PonyoException;
+import ponyo.data.task.Deadline;
+import ponyo.data.task.Event;
 import ponyo.data.task.Task;
 import ponyo.data.task.TaskList;
 import ponyo.data.task.Todo;
-import ponyo.data.task.Deadline;
-import ponyo.data.task.Event;
-import ponyo.data.exceptions.PonyoException;
+
 
 /**
  * Handles loading and saving of tasks into the file created.
  */
 public class Storage {
+    private static final String PATH = "src/main/data";
+    private static final String FILENAME = "tasks.txt";
+
     protected String filePath;
 
     /**
@@ -27,9 +30,6 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-
-    private static final String PATH = "src/main/data";
-    private static final String FILENAME = "tasks.txt";
 
     /**
      * @return the list of tasks stored in hard disk.
@@ -78,38 +78,40 @@ public class Storage {
             String taskCode = read.next();
 
             switch (taskCode) {
-                case "T":
-                    int marked = Integer.parseInt(read.next());
-                    String description = read.next();
-                    Task t = new Todo(description);
-                    if (marked == 1) {
-                        t.markAsDone();
-                    }
+            case "T":
+                int marked = Integer.parseInt(read.next());
+                String description = read.next();
+                Task t = new Todo(description);
+                if (marked == 1) {
+                    t.markAsDone();
+                }
 
-                    tasks.add(t);
-                    break;
-                case "D":
-                    marked = Integer.parseInt(read.next());
-                    description = read.next();
-                    String by = read.next();
-                    t = new Deadline(description, by);
-                    if (marked == 1) {
-                        t.markAsDone();
-                    }
+                tasks.add(t);
+                break;
+            case "D":
+                marked = Integer.parseInt(read.next());
+                description = read.next();
+                String by = read.next();
+                t = new Deadline(description, by);
+                if (marked == 1) {
+                    t.markAsDone();
+                }
 
-                    tasks.add(t);
-                    break;
-                case "E":
-                    marked = Integer.parseInt(read.next());
-                    description = read.next();
-                    String at = read.next();
-                    t = new Event(description, at);
-                    if (marked == 1) {
-                        t.markAsDone();
-                    }
+                tasks.add(t);
+                break;
+            case "E":
+                marked = Integer.parseInt(read.next());
+                description = read.next();
+                String at = read.next();
+                t = new Event(description, at);
+                if (marked == 1) {
+                    t.markAsDone();
+                }
 
-                    tasks.add(t);
-                    break;
+                tasks.add(t);
+                break;
+            default:
+                break;
             }
         }
         read.close();

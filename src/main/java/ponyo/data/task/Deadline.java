@@ -6,6 +6,12 @@ package ponyo.data.task;
 public class Deadline extends Task {
     protected String by;
 
+    /**
+     * Constructor for a new deadline instance.
+     *
+     * @param description a string description of the deadline
+     * @param by a string by-date for the task
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;

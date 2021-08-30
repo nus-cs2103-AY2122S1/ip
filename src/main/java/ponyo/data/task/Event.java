@@ -6,6 +6,12 @@ package ponyo.data.task;
 public class Event extends Task {
     protected String at;
 
+    /**
+     * Constructor for a new event instance.
+     *
+     * @param description a string description of the event
+     * @param at a string at-date for the event
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
