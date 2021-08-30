@@ -1,4 +1,4 @@
-package main.java.exception;
+package exception;
 
 /**
  * The TaskNumberException Exception is thrown when a task number referenced is not in the task list.

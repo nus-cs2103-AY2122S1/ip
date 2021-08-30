@@ -1,4 +1,4 @@
-package main.java.task;
+package task;
 
 /**
  * The Todo class is a child class of Task.

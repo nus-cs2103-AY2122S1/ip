@@ -1,4 +1,4 @@
-package main.java.exception;
+package exception;
 
 /**
  * The InvalidCommandException Exception is thrown when an input is not part of the feature set.

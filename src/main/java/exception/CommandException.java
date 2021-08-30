@@ -1,4 +1,4 @@
-package main.java.exception;
+package exception;
 
 /**
  * The CommandException Exception is thrown when a command after "/" is invalid.

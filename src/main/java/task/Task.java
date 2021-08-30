@@ -1,4 +1,4 @@
-package main.java.task;
+package task;
 
 /**
  * Task is the superclass of classes to be stored in the database.

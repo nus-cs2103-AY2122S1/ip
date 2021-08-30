@@ -1,8 +1,8 @@
-package main.java.parser;
+package parser;
 
-import main.java.task.Deadline;
-import main.java.task.Event;
-import main.java.task.Todo;
+import task.Deadline;
+import task.Event;
+import task.Todo;
 
 import java.util.Base64;
 

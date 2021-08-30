@@ -1,4 +1,4 @@
-package main.java.exception;
+package exception;
 
 /**
  * The DescriptionException Exception is thrown when a Task is to be added but is missing description.

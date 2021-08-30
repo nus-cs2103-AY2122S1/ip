@@ -1,17 +1,17 @@
-package main.java.tasklist;
+package tasklist;
 
-import main.java.exception.DescriptionException;
-import main.java.exception.DukeException;
-import main.java.exception.InvalidCommandException;
-import main.java.exception.CommandException;
-import main.java.exception.TaskNumberException;
-import main.java.parser.Parser;
-import main.java.storage.Storage;
-import main.java.task.Deadline;
-import main.java.task.Event;
-import main.java.task.Task;
-import main.java.task.Todo;
-import main.java.ui.Ui;
+import exception.DescriptionException;
+import exception.DukeException;
+import exception.InvalidCommandException;
+import exception.CommandException;
+import exception.TaskNumberException;
+import parser.Parser;
+import storage.Storage;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+import ui.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

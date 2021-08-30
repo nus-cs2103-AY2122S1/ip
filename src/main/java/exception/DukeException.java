@@ -1,4 +1,4 @@
-package main.java.exception;
+package exception;
 
 /**
  * The DukeException Exception is the superclass of all exceptions to be thrown that are specific to the features

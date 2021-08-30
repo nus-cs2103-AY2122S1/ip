@@ -1,11 +1,11 @@
-package main.java.storage;
+package storage;
 
-import main.java.parser.Parser;
-import main.java.task.Deadline;
-import main.java.task.Event;
-import main.java.task.Task;
-import main.java.task.Todo;
-import main.java.ui.Ui;
+import parser.Parser;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+import ui.Ui;
 
 import java.io.File;
 import java.io.FileNotFoundException;
