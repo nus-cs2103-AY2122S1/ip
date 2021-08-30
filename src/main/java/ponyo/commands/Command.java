@@ -1,8 +1,8 @@
 package ponyo.commands;
 
 import ponyo.data.task.TaskList;
-import ponyo.ui.Ui;
 import ponyo.storage.Storage;
+import ponyo.ui.Ui;
 
 /**
  * Represents an executable command

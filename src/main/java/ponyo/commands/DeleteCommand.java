@@ -2,8 +2,8 @@ package ponyo.commands;
 
 import ponyo.data.task.Task;
 import ponyo.data.task.TaskList;
-import ponyo.ui.Ui;
 import ponyo.storage.Storage;
+import ponyo.ui.Ui;
 
 /**
  * Deletes a task identified using its index in the task list.
@@ -20,8 +20,7 @@ public class DeleteCommand extends Command {
         Task task = tasks.retrieveTask(taskToDelete - 1);
         tasks.remove(taskToDelete - 1);
         storage.getFullContents(tasks);
-        ui.show("\tNoted. I've removed this task: \n\t\t" +
-                task,
+        ui.show("\tNoted. I've removed this task: \n\t\t" + task,
                 "\tNow you have " + tasks.size() + " tasks in the list.");
     }
 

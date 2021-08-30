@@ -1,8 +1,8 @@
 package ponyo.ui;
 
-import java.util.Scanner;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 /**
  * Text UI of the application.
@@ -13,11 +13,11 @@ public class Ui {
     private static final String CMD_DIVIDER = "\t____________________________________________________________";
 
     private static final String LOGO =
-            "    ____    ____    ____    __  __   ____ \n" +
-            "   / __ \\  / __ \\  / __ \\  / / / /  / __ \\\n" +
-            "  / /_/ / / /_/ / / / / / / /_/ /  / /_/ /\n" +
-            " / .___/  \\____/ /_/ /_/  \\__, /   \\____/ \n" +
-            "/_/                      /____/           \n";
+            "    ____    ____    ____    __  __   ____ \n"
+                    + "   / __ \\  / __ \\  / __ \\  / / / /  / __ \\\n"
+                    + "  / /_/ / / /_/ / / / / / / /_/ /  / /_/ /\n"
+                    + " / .___/  \\____/ /_/ /_/  \\__, /   \\____/ \n"
+                    + "/_/                      /____/           \n";
 
     private final Scanner in;
     private final PrintStream out;
@@ -26,6 +26,12 @@ public class Ui {
         this(System.in, System.out);
     }
 
+    /**
+     * Constructor for a new UI instance.
+     *
+     * @param in an InputStream input value
+     * @param out a PrintStream output value for printing
+     */
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
