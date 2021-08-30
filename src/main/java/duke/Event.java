@@ -14,8 +14,6 @@ public class Event extends Task {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm");
         String from = fromTo[0];
         String to = fromTo[1];
-        System.out.println(from);
-        System.out.println(to);
         this.from = LocalDateTime.parse(from,formatter);
         this.to = LocalDateTime.parse(to,formatter);
     }
