@@ -7,6 +7,8 @@ public class Parser {
         Duke.RequestType userRequest;
         if (userInput.equals("list")) {
             userRequest = Duke.RequestType.DEFAULT;
+        } else if (userInput.startsWith("find")) {
+            userRequest = Duke.RequestType.FIND;
         } else if (userInput.startsWith("done")) {
             userRequest = Duke.RequestType.DONE;
         } else if (userInput.startsWith("delete")) {

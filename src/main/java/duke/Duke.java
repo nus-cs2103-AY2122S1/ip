@@ -20,6 +20,7 @@ public class Duke {
     
      public enum RequestType {
         DEFAULT,
+        FIND,
         DONE,
         DELETE,
         DEADLINE,
@@ -51,6 +52,9 @@ public class Duke {
             switch (userRequest){
                 case DEFAULT:
                     tasks.list();
+                    break;
+                case FIND:
+                    tasks.find(userInput.substring(5));
                     break;
                 case UNUSUAL:
                     ui.unusualRequest();
