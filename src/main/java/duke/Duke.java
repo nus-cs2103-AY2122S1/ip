@@ -30,7 +30,6 @@ public class Duke {
      * Runs Duke.
      */
     public void run() {
-        this.storage.load();
         this.ui.run();
     }
 
