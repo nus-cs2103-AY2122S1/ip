@@ -48,17 +48,22 @@ public class AddEventCommand extends Command {
      * @param tasks the task list.
      */
     @Override
-    public void execute(TaskList tasks) throws IOException {
+    public String execute(TaskList tasks) throws IOException {
         Event event = new Event(super.getDesc(), at, false);
         tasks.add(event);
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println(event);
+        StringBuilder replyBuilder = new StringBuilder();
+
+        replyBuilder.append("Got it. I've added this task:\n");
+        replyBuilder.append(event + "\n");
 
         if (tasks.size() == 1) {
-            System.out.println("Now you have 1 task in the list.");
+            replyBuilder.append("Now you have 1 task in the list. \n");
         } else {
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            replyBuilder.append("Now you have " + tasks.size() + " tasks in the list. \n");
         }
+
+        return replyBuilder.toString();
     }
+
 }

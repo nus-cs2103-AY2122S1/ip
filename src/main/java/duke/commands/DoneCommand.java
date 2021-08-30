@@ -37,12 +37,14 @@ public class DoneCommand extends Command {
      * @param tasks the task list.
      */
     @Override
-    public void execute(TaskList tasks) throws IOException {
+    public String execute(TaskList tasks) throws IOException {
         tasks.markAsDone(doneIndex - 1);
 
-        System.out.println("-------------------------------------");
-        System.out.println("Very well. This task has been marked as per your request.");
-        System.out.println((doneIndex) + ". " + tasks.get(doneIndex - 1)); //actual index is index - 1
-        System.out.println("-------------------------------------");
+        StringBuilder replyBuilder = new StringBuilder();
+
+        replyBuilder.append("Very well. This task has been marked as per your request.\n");
+        replyBuilder.append((doneIndex) + ". " + tasks.get(doneIndex - 1) + "\n"); //actual index is index - 1
+
+        return replyBuilder.toString();
     }
 }

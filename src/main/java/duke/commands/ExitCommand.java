@@ -31,7 +31,7 @@ public class ExitCommand extends Command {
      * @param tasks the task list.
      */
     @Override
-    public void execute(TaskList tasks) {
-        System.out.println("Have a pleasant day.\n");
+    public String execute(TaskList tasks) {
+        return "Have a pleasant day.";
     }
 }

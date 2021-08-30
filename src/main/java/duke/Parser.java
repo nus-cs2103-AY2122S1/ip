@@ -133,8 +133,8 @@ public class Parser {
         try {
             return LocalDateTime.parse(date, dtf);
         } catch (DateTimeParseException err) {
-            throw new DukeException("Invalid date format\nPlease type out date in following format: d/M/yyyy H:mm "
-                    + "or d-M-yyyy H:mm, in 24-hour format");
+            throw new DukeException("Invalid date format\nPlease format date as the following:\nd/M/yyyy H:mm OR\n"
+                    + "d-M-yyyy H:mm \nin 24-hour format");
         }
     }
 }

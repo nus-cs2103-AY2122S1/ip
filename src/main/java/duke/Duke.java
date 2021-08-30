@@ -26,36 +26,17 @@ public class Duke {
     /**
      * Method used to run the program.
      */
-    public void run() {
+    public String run(String input) {
         Parser parser = new Parser();
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String commandLine = ui.readCommand();
-                Command c = parser.getCommand(commandLine, tasks);
-                c.execute(tasks);
-                isExit = c.isExit();
-            } catch (DukeException | IOException e) {
-                System.out.println("***WARNING*** An error has occurred: " + e.getMessage());
-            }
+        try {
+            Command c = parser.getCommand(input, tasks);
+            return c.execute(tasks);
+        } catch (DukeException | IOException e) {
+            return "***WARNING*** An error has occurred:\n" + e.getMessage();
         }
     }
 
-    /**
-     * The main method of Duke.
-     *
-     * @param args
-     * @throws IOException when an IO operations fails.
-     */
-    public static void main(String[] args) throws IOException {
-        new Duke().run();
-    }
-
-    public String getResponse(String input) throws DukeException {
-        Parser parser = new Parser();
-        Command c = parser.getCommand(input, tasks);
-        return c.getDesc();
+    public String getResponse(String input) {
+        return this.run(input);
     }
 }

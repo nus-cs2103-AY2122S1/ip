@@ -32,16 +32,16 @@ public class ListCommand extends Command {
      * @param tasks the task list.
      */
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
+        StringBuilder replyBuilder = new StringBuilder();
         if (tasks.size() == 0) {
-            System.out.println("You have not added anything to the list, Master Wayne.");
+            return "You have not added anything to the list.";
         } else {
-            System.out.println("-------------------------------------");
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                System.out.println((i + 1) + ". " + " " + task.toString());
+                replyBuilder.append((i + 1) + ". " + " " + task.toString() + "\n");
             }
-            System.out.println("-------------------------------------");
         }
+        return replyBuilder.toString();
     }
 }

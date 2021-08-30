@@ -39,16 +39,21 @@ public class AddDeadlineCommand extends Command {
      * @param tasks the task list.
      */
     @Override
-    public void execute(TaskList tasks) throws IOException {
+    public String execute(TaskList tasks) throws IOException {
         Deadline deadline = new Deadline(super.getDesc(), by, false);
         tasks.add(deadline);
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println(deadline);
+        StringBuilder replyBuilder = new StringBuilder();
+
+        replyBuilder.append("Got it. I've added this task:\n");
+        replyBuilder.append(deadline + "\n");
+
         if (tasks.size() == 1) {
-            System.out.println("Now you have 1 task in the list.");
+            replyBuilder.append("Now you have 1 task in the list. \n");
         } else {
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            replyBuilder.append("Now you have " + tasks.size() + " tasks in the list. \n");
         }
+
+        return replyBuilder.toString();
     }
 }

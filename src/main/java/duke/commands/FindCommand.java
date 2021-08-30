@@ -23,17 +23,21 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
+    public String execute(TaskList tasks) {
         ArrayList<Task> filtered = tasks.filter(keyword);
-        System.out.println("-------------------------------------");
+
+        StringBuilder replyBuilder = new StringBuilder();
+
         if (filtered.size() == 0) {
-            System.out.println("Unfortunately, no match can be found.");
+            replyBuilder.append("Unfortunately, no match can be found.\n");
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            replyBuilder.append("Here are the matching tasks in your list:\n");
             for (int i = 0; i < filtered.size(); i++) {
-                System.out.println((i + 1) + ". " + filtered.get(i));
+                replyBuilder.append((i + 1) + ". " + filtered.get(i) + "\n");
             }
         }
-        System.out.println("-------------------------------------");
+
+        return replyBuilder.toString();
     }
+
 }

@@ -36,18 +36,19 @@ public class DeleteCommand extends Command {
      * Executes the command. Adds deadline to task list. Updates the save file.
      */
     @Override
-    public void execute(TaskList tasks) throws IOException {
-        System.out.println("-------------------------------------");
-        System.out.println("Very well. This task has been deleted as per your request.");
-        System.out.println((deleteIndex) + ". " + tasks.get(deleteIndex - 1)); //actual index is index - 1
+    public String execute(TaskList tasks) throws IOException {
+        StringBuilder replyBuilder = new StringBuilder();
+        replyBuilder.append("Very well. This task has been deleted as per your request. \n");
+        replyBuilder.append((deleteIndex) + ". " + tasks.get(deleteIndex - 1) + "\n"); //actual index is index - 1
 
         tasks.remove(deleteIndex - 1);
 
         if (tasks.size() == 1) {
-            System.out.println("Now you have 1 task in the list.");
+            replyBuilder.append("Now you have 1 task in the list. \n");
         } else {
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            replyBuilder.append("Now you have " + tasks.size() + " tasks in the list. \n");
         }
-        System.out.println("-------------------------------------");
+
+        return replyBuilder.toString();
     }
 }
