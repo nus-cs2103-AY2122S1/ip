@@ -15,22 +15,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class StorageTest {
     @BeforeEach
     public void createTempFile() throws IOException {
-        String tempFileLocation = "resources/temp.txt";
+        String tempFileLocation = "src/test/resources/temp.txt";
         // copy contents of validFileFormat.txt over
         Files.copy(
-                Path.of("resources/validFileFormat.txt"),
+                Path.of("src/test/resources/validFileFormat.txt"),
                 Path.of(tempFileLocation),
                 StandardCopyOption.REPLACE_EXISTING);
     }
 
     @AfterEach
     public void deleteTempFile() throws IOException {
-        Files.delete(Path.of("resources/temp.txt"));
+        Files.delete(Path.of("src/test/resources/temp.txt"));
     }
 
     @Test
     public void constructor_correctLinesAndSize() throws IOException {
-        Storage storage = new Storage("resources/temp.txt");
+        Storage storage = new Storage("src/test/resources/temp.txt");
         ArrayList<String> lines = storage.getLines();
 
         String firstLine = "D | 0 | assignment | 01/09/2021";
