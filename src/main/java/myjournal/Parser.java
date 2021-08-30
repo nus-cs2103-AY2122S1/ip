@@ -32,32 +32,32 @@ public class Parser {
         try {
             String firstWord = line.next();
             switch (firstWord) {
-                case "done":
-                    ui.doneTaskPrint(Parser.parseDone(line, tasks));
-                    break;
-                case "delete":
-                    ui.removeTaskPrint(Parser.parseDelete(line, tasks));
-                    break;
-                case "find":
-                    ui.findTaskPrint(Parser.parseFind(line, tasks));
-                    break;
-                case "list":
-                    Parser.parseList(tasks);
-                    break;
-                case "todo":
-                    tasks.addTask(Parser.parseTodo(line));
-                    ui.taskAddPrint(tasks);
-                    break;
-                case "event":
-                    tasks.addTask(Parser.parseEvent(line));
-                    ui.taskAddPrint(tasks);
-                    break;
-                case "deadline":
-                    tasks.addTask(Parser.parseDeadline(line));
-                    ui.taskAddPrint(tasks);
-                    break;
-                default:
-                    throw new InvalidTypeException("OOPS!!! Please put either todo/event/deadline!");
+            case "done":
+                ui.doneTaskPrint(Parser.parseDone(line, tasks));
+                break;
+            case "delete":
+                ui.removeTaskPrint(Parser.parseDelete(line, tasks));
+                break;
+            case "find":
+                ui.findTaskPrint(Parser.parseFind(line, tasks));
+                break;
+            case "list":
+                Parser.parseList(tasks);
+                break;
+            case "todo":
+                tasks.addTask(Parser.parseTodo(line));
+                ui.taskAddPrint(tasks);
+                break;
+            case "event":
+                tasks.addTask(Parser.parseEvent(line));
+                ui.taskAddPrint(tasks);
+                break;
+            case "deadline":
+                tasks.addTask(Parser.parseDeadline(line));
+                ui.taskAddPrint(tasks);
+                break;
+            default:
+                throw new InvalidTypeException("OOPS!!! Please put either todo/event/deadline!");
             }
         } catch (InvalidTypeException e) {
             System.out.println(e.toString());
