@@ -1,12 +1,14 @@
-import duke.DeadLine;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
+import duke.DeadLine;
+
+
 public class DeadlineTest {
-    String task = "project submission";
-    String deadline = "2/12/2021 1635";
-    DeadLine deadlineTest = new DeadLine(task, deadline);
+    private String task = "project submission";
+    private String deadline = "2/12/2021 1635";
+    private DeadLine deadlineTest = new DeadLine(task, deadline);
 
     @Test
     public void timeFormChangeTest() {
