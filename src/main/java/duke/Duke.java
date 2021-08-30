@@ -1,8 +1,9 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.command.Command;
 
-import java.util.Scanner;
 
 /**
  * Duke is a personal assistant that keep a list of your tasks. Users
@@ -51,6 +52,11 @@ public class Duke {
         this.isRunning = false;
     }
 
+    /**
+     * Starts the entire program
+     * @param args an array of sequence of characters (Strings) that are passed to the
+     *             "main" function
+     */
     public static void main(String[] args) {
         Duke chatBot = new Duke();
         chatBot.startBot();

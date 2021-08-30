@@ -1,8 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,6 +7,10 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Task;
+
 
 /**
  * The Storage class encapsulates the attributes and behaviours of a dynamic storage used by the chat bot.
@@ -97,7 +98,7 @@ public class Storage {
                         String item = temp.substring(0, temp.indexOf(" ")); //name
                         String temp2 = temp.substring(temp.indexOf("("));
                         String deadline = temp2.substring(5, temp2.length() - 1);
-                        LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ','T'),
+                        LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ', 'T'),
                                 DateTimeFormatter.ISO_DATE_TIME);
                         this.tdl.addDeadline(item, dl);
                         if (status == 'X') {
@@ -140,7 +141,7 @@ public class Storage {
                         fw.write(number.toString() + "." + a.logo() + "[ ] " + a.getName()
                                 + " (by: " + ((Deadline) a).getDeadline() + ")\n");
                     } else {
-                        fw.write(number.toString() + "." + a.logo() + "[ ] " + a.toString()+ "\n");
+                        fw.write(number.toString() + "." + a.logo() + "[ ] " + a.toString() + "\n");
                     }
                 }
                 number++;

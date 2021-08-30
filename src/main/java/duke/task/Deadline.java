@@ -38,7 +38,7 @@ public class Deadline extends Task {
     public String getDeadline() {
         Integer month = this.deadline.getMonthValue();
         String strMonth = (month.toString().length() == 1) ? "0" + month.toString() : month.toString();
-        return  this.deadline.getYear() + "-" + strMonth + "-"
+        return this.deadline.getYear() + "-" + strMonth + "-"
                 + this.deadline.getDayOfMonth() + " " + this.deadline.toLocalTime();
     }
 

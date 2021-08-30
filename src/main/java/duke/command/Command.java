@@ -5,7 +5,7 @@ package duke.command;
  *
  * @author leezhixuan
  */
-abstract public class Command {
+public abstract class Command {
 
     /**
      * Performs the appropriate action.

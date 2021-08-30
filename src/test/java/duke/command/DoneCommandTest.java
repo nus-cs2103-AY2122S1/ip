@@ -1,10 +1,12 @@
 package duke.command;
 
-import duke.ToDoList;
-import duke.Ui;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.fail;
+import duke.ToDoList;
+import duke.Ui;
+
 
 public class DoneCommandTest {
 

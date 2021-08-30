@@ -5,7 +5,7 @@ package duke.task;
  *
  * @author leezhixuan
  */
-abstract public class Task {
+public abstract class Task {
     private String name;
     private boolean isCompleted = false;
 
@@ -31,7 +31,7 @@ abstract public class Task {
      *
      * @return Task's logo to indicate the Task type on the ToDoList.
      */
-    abstract public String logo();
+    public abstract String logo();
 
     public String getName() {
         return name;

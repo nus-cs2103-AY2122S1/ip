@@ -1,12 +1,13 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 /**
  * The ToDoList is a class that encapsulates the attributes and behaviours of a list of things to do.
@@ -51,10 +52,10 @@ public class ToDoList {
      * @param num The index of the item that is to be marked as done.
      */
     public void markAsDone(int num) {
-        this.record.get(num-1).setCompleted();
+        this.record.get(num - 1).setCompleted();
         System.out.println("========== " + this.name + " ===========");
         System.out.println("Good! Good! Took you long enough to complete this:");
-        System.out.println("  " + "[X] " + record.get(num-1).toString());
+        System.out.println("  " + "[X] " + record.get(num - 1).toString());
         System.out.println("========== " + this.name + " ===========\n");
     }
 
@@ -114,7 +115,7 @@ public class ToDoList {
      * @param index Index of the Task to be deleted from ToDoList.
      */
     public void delete(int index) {
-        Task removed = this.record.remove(index-1);
+        Task removed = this.record.remove(index - 1);
         String status = removed.isCompleted() ? "[X]" : "[ ]";
         this.totalNumber--;
         System.out.println("========== " + this.name + " ===========");
@@ -143,6 +144,11 @@ public class ToDoList {
         return this.record.get(index);
     }
 
+    /**
+     * Looks for the Task which has a name that contains the specified string
+     *
+     * @param target String to look out for in the Task's name
+     */
     public void find(String target) {
         ArrayList<Task> temp = new ArrayList<>();
         for (Task t : this.record) {

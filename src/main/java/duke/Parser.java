@@ -1,10 +1,21 @@
 package duke;
 
-import duke.command.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.ConfusedCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
+import duke.command.TryAgainCommand;
+
 
 /**
  * Parser is a class that encapsulates the behaviour of an interpreter for commands.
@@ -32,31 +43,31 @@ public class Parser {
                 return DONE.toString().toLowerCase();
             }
         },
-        TODO{
+        TODO {
             @Override
             public String asLowerCase() {
                 return TODO.toString().toLowerCase();
             }
         },
-        EVENT{
+        EVENT {
             @Override
             public String asLowerCase() {
                 return EVENT.toString().toLowerCase();
             }
         },
-        DEADLINE{
+        DEADLINE {
             @Override
             public String asLowerCase() {
                 return DEADLINE.toString().toLowerCase();
             }
         },
-        DELETE{
+        DELETE {
             @Override
             public String asLowerCase() {
                 return DELETE.toString().toLowerCase();
             }
         },
-        FIND{
+        FIND {
             @Override
             public String asLowerCase() {
                 return FIND.toString().toLowerCase();
@@ -130,7 +141,7 @@ public class Parser {
                 if (deadline.startsWith(" ")) {
                     deadline = deadline.substring(1);
                 }
-                LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ','T'),
+                LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ', 'T'),
                         DateTimeFormatter.ISO_DATE_TIME);
                 return new DeadlineCommand(tdl, item, dl);
             } catch (StringIndexOutOfBoundsException e) {
