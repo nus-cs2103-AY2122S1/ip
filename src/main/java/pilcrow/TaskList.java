@@ -67,6 +67,11 @@ public class TaskList {
         return this.taskList.get(index);
     }
 
+    /**
+     * Returns a TaskList filtered to only have tasks with the search string.
+     * @param string String to be searched
+     * @return
+     */
     public TaskList filteredTaskList(String string) {
         TaskList filteredTaskList = new TaskList();
         for (int i = 0; i < this.taskList.size(); i++) {

@@ -1,10 +1,8 @@
 package pilcrow;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 
 public class Task {
     protected String taskName;
@@ -122,7 +120,7 @@ public class Task {
                 throw new InvalidInputException("Must indicate deadline with '/' symbol.");
             }
             String deadlineName = taskName.substring(0, taskName.indexOf("/")).trim();
-            if (deadlineName.length() == 0 ) {
+            if (deadlineName.length() == 0) {
                 throw new InvalidInputException("Must enter valid deadline name.");
             }
             this.taskName = deadlineName;
@@ -160,7 +158,7 @@ public class Task {
     }
 
     private static class Event extends Task {
-        String duration;
+        private String duration;
 
         private Event(String taskName, Boolean isDone) {
             super(taskName, isDone);
@@ -174,7 +172,7 @@ public class Task {
                 throw new InvalidInputException("Must indicate duration with '/' symbol.");
             }
             String eventName = taskName.substring(0, taskName.indexOf("/")).trim();
-            if (eventName.length() == 0 ) {
+            if (eventName.length() == 0) {
                 throw new InvalidInputException("Must enter valid event name.");
             }
             this.taskName = eventName;

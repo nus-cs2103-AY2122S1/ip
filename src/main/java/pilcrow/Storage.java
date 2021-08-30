@@ -1,10 +1,9 @@
 package pilcrow;
 
-import java.io.IOException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -53,7 +52,7 @@ public class Storage {
      * Save specified TaskList into Storage for later loading.
      * @param taskList TaskList to be stored.
      */
-    public void save(TaskList taskList){
+    public void save(TaskList taskList) {
         String storedTasks = "";
         for (int i = 1; i <= taskList.getNumberOfTasks(); i++) {
             storedTasks += taskList.getTask(i).convertToStoredTask() + "\n";
@@ -64,7 +63,7 @@ public class Storage {
             pilcrowFileWriter.write(storedTasks);
             pilcrowFileWriter.close();
         }  catch (IOException exception) {
-
+            // Do nothing
         }
     }
 }

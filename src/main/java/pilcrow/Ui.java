@@ -2,18 +2,10 @@ package pilcrow;
 
 // Abstraction to handle interactions with the user. Usually just prints text out.
 public class Ui {
-    private final static String PILCROW_LOGO = """
-              _____
-             /   | |
-            |    | |
-            |    | |
-             \\___| |
-                 | |
-                 | |
-                _| |_
-               |_|_|_|
-            """;
-
+    private static final String PILCROW_LOGO_FIRST = "              _____\n             /   | |\n            |    | |\n";
+    private static final String PILCROW_LOGO_SECOND = "            |    | |\n             \\___| |\n                 | |\n";
+    private static final String PILCROW_LOGO_THIRD = "                 | |\n                _| |_\n               |_|_|_|\n";
+    private static final String PILCROW_LOGO = PILCROW_LOGO_FIRST + PILCROW_LOGO_SECOND + PILCROW_LOGO_THIRD;
     /**
      * Prints out a "Task Added" message given a Task and TaskList.
      * @param task Recently added Task.

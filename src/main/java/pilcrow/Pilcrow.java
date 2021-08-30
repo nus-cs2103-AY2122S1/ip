@@ -10,7 +10,7 @@ public class Pilcrow {
     private Storage storage;
     private TaskList taskList;
 
-    private final static String PILCROW_FILE_PATH = "data/pilcrow.txt";
+    private static final String PILCROW_FILE_PATH = "data/pilcrow.txt";
 
     private Pilcrow() {
         this.ui = new Ui();
@@ -18,7 +18,10 @@ public class Pilcrow {
         this.taskList = new TaskList(this.storage.load());
     }
 
-
+    /**
+     * Main function for Pilcrow
+     * @param args
+     */
     public static void main(String[] args) {
         Pilcrow pilcrow = new Pilcrow();
         pilcrow.run();
