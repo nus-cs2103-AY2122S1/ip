@@ -1,5 +1,7 @@
-package lania;
+package lania.command;
 
+import lania.Storage;
+import lania.Ui;
 import lania.task.TaskList;
 
 public class ExitCommand extends Command {
