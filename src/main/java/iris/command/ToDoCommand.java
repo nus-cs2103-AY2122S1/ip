@@ -1,5 +1,6 @@
 package iris.command;
 
+import iris.IrisException;
 import iris.TaskList;
 
 public class ToDoCommand extends AddCommand {
@@ -10,7 +11,8 @@ public class ToDoCommand extends AddCommand {
     }
 
     @Override
-    public void runSilently(TaskList tasks) {
+    public String run(TaskList tasks) throws IrisException {
         tasks.addTodo(this.name);
+        return super.run(tasks);
     }
 }
