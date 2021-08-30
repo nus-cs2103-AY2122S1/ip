@@ -6,18 +6,39 @@ import java.time.LocalDateTime;
 import duke.DukeException;
 import duke.Parser;
 
+/**
+ * A task with that spans across a period of time.
+ *
+ * @author Aiken Wong
+ */
 public class Event extends Task {
     protected LocalDateTime startDateTime;
     protected LocalDateTime endDateTime;
     protected String taskType = "[E]";
     protected boolean isDateOnly = false;
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description The description of the Event.
+     * @param startDateTime The start date and/or time of the Event.
+     * @param endDateTime The end date and/or time of the Event.
+     */
     public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime) {
         super(description);
         this.startDateTime = startDateTime;
         this.endDateTime = endDateTime;
     }
 
+    /**
+     * Constructor for Event.
+     *
+     * @param description The description of the Event.
+     * @param startDateTime The start date and/or time of the Event.
+     * @param endDateTime The end date and/or time of the Event.
+     * @param isDone Represents whether the task has been completed.
+     * @param isDateOnly Represents whether only date is given (without time).
+     */
     public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean isDone,
                  boolean isDateOnly) {
         super(description);
@@ -27,7 +48,14 @@ public class Event extends Task {
         this.isDateOnly = isDateOnly;
     }
 
-
+    /**
+     * Constructor for Event.
+     *
+     * @param description The description of the Event.
+     * @param startDateTime The start date and/or time of the Event.
+     * @param endDateTime The end date and/or time of the Event.
+     * @param isDateOnly Represents whether only date is given (without time).
+     */
     public Event(String description, LocalDateTime startDateTime, LocalDateTime endDateTime, boolean isDateOnly) {
         super(description);
         this.startDateTime = startDateTime;
@@ -35,7 +63,14 @@ public class Event extends Task {
         this.isDateOnly = isDateOnly;
     }
 
-
+    /**
+     * Factory constructor for Event. Parses String input to obtain date and/or time for start and end dates.
+     *
+     * @param description The description of the Event.
+     * @param input The input date and/time of an Event.
+     * @return Event with the given inputs.
+     * @throws DukeException
+     */
     public static Event of(String description, String input) throws DukeException {
 
         String exceptionMessage = "Wrong format for event timeline Sir/Mdm. Please use either formats:\n"
@@ -78,14 +113,31 @@ public class Event extends Task {
 
     }
 
+
+    /**
+     * Getter for isDateOnly.
+     *
+     * @return Gives isDateOnly
+     */
     public boolean getIsDateOnly() {
         return isDateOnly ? true : false;
     }
 
+
+    /**
+     * Getter for the start date of the event.
+     *
+     * @return Start date.
+     */
     public LocalDateTime getStartDateTime() {
         return LocalDateTime.parse(startDateTime.toString());
     }
 
+    /**
+     * Getter for the end date of the event.
+     *
+     * @return End date.
+     */
     public LocalDateTime getEndDateTime() {
         return LocalDateTime.parse(endDateTime.toString());
     }

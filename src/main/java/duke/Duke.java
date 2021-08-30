@@ -3,6 +3,8 @@ package duke;
 
 import duke.command.Command;
 import duke.task.TaskList;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 
 /**
@@ -10,13 +12,25 @@ import duke.task.TaskList;
  *
  * @author Aiken Wong
  */
-public class Duke {
+public class Duke extends Application {
 
     private boolean isExit = false;
     private TaskList tasks = new TaskList();
     private Ui ui;
     private Storage storage;
 
+    /**
+     * Initialises a new Duke object with storage path data/taskList.txt
+     */
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage("data/taskList.txt");
+        try {
+            this.tasks = storage.load();
+        } catch (DukeException e) {
+            ui.showException(e);
+        }
+    }
 
     /**
      * Initialises a new Duke object by taking in a filePath for storage.
@@ -57,8 +71,16 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
+
         Duke duke = new Duke("data/taskList.txt");
         duke.run();
     }
 
+    @Override
+    public void start(Stage stage) {
+
+        Duke duke = new Duke("data/taskList.txt");
+        GraphicalUserInterface gui = new GraphicalUserInterface(stage, duke.ui, duke.tasks, duke.storage);
+        gui.showGui();
+    }
 }

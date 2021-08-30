@@ -12,6 +12,15 @@ public class DeleteCommand extends Command {
     private Ui ui;
     private Storage storage;
 
+
+    /**
+     * Instantiates a command to delete a Task from the task list. Task is deleted based on current indexing.
+     *
+     * @param index Given index of the task to delete.
+     * @param tasks The task list to delete task from.
+     * @param ui Ui to handle interactions.
+     * @param storage Storage for tasks.
+     */
     public DeleteCommand(int index, TaskList tasks, Ui ui, Storage storage) {
         this.index = index;
         this.tasks = tasks;
