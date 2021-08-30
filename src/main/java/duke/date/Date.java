@@ -2,17 +2,29 @@ package duke.date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.lang.NumberFormatException;
+import java.time.format.DateTimeParseException;
 import duke.exceptions.WrongDateFormatException;
 import duke.exceptions.WrongTimeFormatException;
 
+
+/**
+ * Class that stores and format date time values
+ */
 public class Date {
     private static final String MORNING_INDICATOR = "am";
     private static final String EVENING_INDICATOR = "pm";
     private final LocalDate globalDate;
     private final LocalTime globalTime;
-
+    
+    /**
+     * Initializes the date class with 
+     * a given string form of date and time 
+     * 
+     * @param dateAndTime String of the date and time user input
+     * @throws WrongTimeFormatException if the expected time format given by user is wrong
+     * @throws WrongDateFormatException if the expected date format given by user is wrong
+     */
     public Date(String dateAndTime) throws WrongTimeFormatException, WrongDateFormatException {
         String[] dateTimeSplit = dateAndTime.split(" ");
         LocalDate inputDate;
@@ -51,6 +63,12 @@ public class Date {
         return currentDate;
     }
 
+    /**
+     * returns the proper format of date 
+     * and time used for ONLY storing
+     * 
+     * @return String of date and time format
+     */
     public String getOriginalFormat() {
         DateTimeFormatter Dateformat = DateTimeFormatter.ofPattern("dd-MM-yyyy");
         return this.globalDate.format(Dateformat) + " " + this.globalTime.toString();

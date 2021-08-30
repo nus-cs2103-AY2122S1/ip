@@ -19,6 +19,10 @@ import java.util.Arrays;
 import java.nio.file.Path;
 import java.nio.file.Files;
 
+/**
+ * Class that manages the reading from and 
+ * writing to local files in the local directory
+ */
 public class Storage {
     private static final String TODO_IDENTIFIER = "T";
     private static final String EVENT_IDENTIFIER = "E";
@@ -36,6 +40,13 @@ public class Storage {
     private final File fileSource;
     private List<String> allStringTasks = new ArrayList<>();
 
+
+    /**
+     * Initializes a new storage class
+     * 
+     * @param filePath String indicating the path of 
+     * the local file to write to or read from.
+     */
     public Storage(String filePath) {
         this.fileSource = new File(filePath);
         Path path = this.fileSource.toPath();
@@ -51,6 +62,14 @@ public class Storage {
         }
     }
 
+    /**
+     * returns all the tasks stored in the local directory as an arraylist
+     * 
+     * @return Arraylist of Task object 
+     * @throws FileNotFoundException if local file directory does not exist
+     * @throws DukeException if either the Todo, Event, Deadline task is not 
+     * initialized because of a wrong input given by the user
+     */
     protected ArrayList<Task> load() throws FileNotFoundException, DukeException {
         HashMap<String, Boolean> stringTasks = new HashMap<>();
         for (String tasks : allStringTasks) {
@@ -98,6 +117,13 @@ public class Storage {
         return finalOutputTasks;
     }
 
+    /**
+     * Reads in all the task that user have keyed in to the bot 
+     * and writes it to the local directory file.
+     * catches exception if the file does not exist and hence cannot be written to.
+     * 
+     * @param storageTaskList arraylist of task
+     */
     public void updateStorageList(ArrayList<Task> storageTaskList) {
         try {
             FileWriter fw = new FileWriter(fileSource);
@@ -170,8 +196,8 @@ public class Storage {
         boolean isDone = this.isTaskCompleted(trimFormatted);
         String[] finalFormatted = this.removeDigitIndicator(trimFormatted);
         String formattedIden = finalFormatted[0];
-        String[] finalToOutuput = this.updateToCommandConverterReadableFormat(formattedIden, finalFormatted);
-        String outputStorageInput = String.join(" ", finalToOutuput);
+        String[] finalToOutput = this.updateToCommandConverterReadableFormat(formattedIden, finalFormatted);
+        String outputStorageInput = String.join(" ", finalToOutput);
         stringStorage.put(outputStorageInput, isDone);
     }
 

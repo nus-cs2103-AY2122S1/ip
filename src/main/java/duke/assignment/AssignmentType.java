@@ -1,5 +1,8 @@
 package duke.assignment;
 
+/**
+ * Enumeration to indicate the type of task
+ */
 public enum AssignmentType {
 
     TODO("[T]"), EVENT("[E]"), DEADLINE("[D]");
@@ -9,6 +12,11 @@ public enum AssignmentType {
         this.type = type;
     }
 
+    /**
+     * returns the task type in their corresponding label format
+     * 
+     * @return String of the Task type
+     */
     public String getStatus() {
         return this.type;
     }
