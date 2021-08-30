@@ -37,6 +37,10 @@ public class TaskItem {
         this.completed = true;
     }
 
+    /**
+     * toFileString returns the TaskItem in a string.
+     * @return returns the Deadline in a string format that is specifically made for the dukeData.txt file.
+     */
     public String toFileString() {
         if (completed) {
             return "[X]" + this.task;

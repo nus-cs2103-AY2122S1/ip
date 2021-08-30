@@ -38,12 +38,9 @@ public class Storage {
                     String taskType = task.substring(1, 2);
 
                     if (taskType.equals("D")) {
-//                        System.out.println(task.split("--")[1]);
                         String dateAndTimeInString = task.split("--")[1];
-                        //System.out.println(dateAndTimeInString);
                         LocalDateTime byDateAndTime = LocalDateTime.parse(dateAndTimeInString);
                         task = " " + task.split("--")[0].substring(7);
-                        //System.out.println(task);
                         Deadline dead = new Deadline(task, byDateAndTime);
                         if (completed.equals("X")) {
                             dead.completeTask();
@@ -69,7 +66,7 @@ public class Storage {
                         }
                         taskItems.add(someEvent);
                     }
-//                    taskItems.add(task);
+
                     task = bufReader.readLine();
                 }
                 bufReader.close();
@@ -108,17 +105,9 @@ public class Storage {
 
         try {
             File dukeData2 = new File("./data/dukeData.txt");
-//            if (dukeData.createNewFile()) {
-//                System.out.println("File is created!");
-//            } else {
-//                System.out.println("Data file already exists.");
-//            }
-
             FileWriter fw = new FileWriter(filePath, appendMode);
-
             for (int i = 0; i < taskList.size(); i++) {
                 fw.write(taskList.get(i).toFileString() + "\n");
-//                System.out.println("Wrote " + arrayList.get(i).toString() + " to file");
             }
 
             fw.close();

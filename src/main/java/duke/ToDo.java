@@ -12,12 +12,6 @@ public class ToDo extends TaskItem {
         super(description);
     }
 
-//    public duke.ToDo(String description, boolean readFromFile) {
-//        super(description);
-//        this.readFromFile = readFromFile;
-//    }
-
-
     /**
      * Overriden toFileString method. Writes the task item into the dukeData file.
      * @return

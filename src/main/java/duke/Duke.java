@@ -1,11 +1,11 @@
 package duke;
 
-import java.util.Arrays;
+
 
 public class Duke {
-    public static boolean active;
-    public static TaskList taskList = new TaskList();
-    public static int listIndex = 0;
+    private static boolean active;
+    private static TaskList taskList = new TaskList();
+    private static int listIndex = 0;
 
     /**
      * awaken() awakens duke.Duke and allows one to input commands to duke.Duke.
@@ -26,6 +26,7 @@ public class Duke {
             boolean cont = Parser.interpretCommand(input);
             if (!cont) {
                 break;
+
             }
         }
     }
@@ -35,14 +36,16 @@ public class Duke {
      * @param taskToBeDeleted the index of the task to be deleted.
      * @throws DukeException An exception stemming from incorrect or awkward input to duke.Duke.
      */
+    @SuppressWarnings("checkstyle:OperatorWrap")
     public static void deleteTask(String taskToBeDeleted) throws DukeException {
         int taskNumber = Integer.parseInt(taskToBeDeleted);
 
         if (taskList.get(taskNumber - 1) == null) {
             throw new DukeException(
-                    "____________________________________________________________\n" +
-                            "☹ OOPS!!! The task you chose to delete does not exist. Use the 'list' command to check the items in your list.\n" +
-                            "____________________________________________________________"
+                    "____________________________________________________________\n"
+                            + "☹ OOPS!!! The task you chose to delete does not exist."
+                            + " Use the 'list' command to check the items in your list.\n"
+                            + "____________________________________________________________"
             );
         }
         TaskItem removedTask = taskList.get(taskNumber - 1);
@@ -62,9 +65,10 @@ public class Duke {
         int taskNumber = Integer.parseInt(taskItemNumber);
         if (taskList.get(taskNumber - 1) == null) {
             throw new DukeException(
-                    "____________________________________________________________\n" +
-                            "☹ OOPS!!! The task you chose does not exist. Use the 'list' command to check the items in your list.\n" +
-                            "____________________________________________________________"
+                    "____________________________________________________________\n"
+                            + "☹ OOPS!!! The task you chose to delete does not exist."
+                            + " Use the 'list' command to check the items in your list.\n"
+                            + "____________________________________________________________"
             );
         }
         taskList.get(taskNumber - 1).completeTask();
@@ -81,8 +85,12 @@ public class Duke {
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
         System.out.println(taskItem.toString());
-        if (listIndex == 1) System.out.println("Now you have " + 1 + " task in the list.");
-        if (listIndex > 1) System.out.println("Now you have " + (Duke.listIndex) + " tasks in your list.");
+        if (listIndex == 1) {
+            System.out.println("Now you have " + 1 + " task in the list.");
+        }
+        if (listIndex > 1) {
+            System.out.println("Now you have " + (Duke.listIndex) + " tasks in your list.");
+        }
         System.out.println("____________________________________________________________");
     }
 
@@ -118,5 +126,28 @@ public class Duke {
      */
     public static void main(String[] args) {
         Duke.awaken();
+    }
+
+    /**
+     * Returns a boolean to indicate whether Duke is still active
+     * @return a boolean active.
+     */
+    public static boolean isActive() {
+        return active;
+    }
+
+    /**
+     * Makes Duke inactive.
+     */
+    public static void makeInactive() {
+        Duke.active = false;
+    }
+
+    /**
+     * Returns the taskList.
+     * @return Duke's taskList.
+     */
+    public static TaskList getTaskList() {
+        return Duke.taskList;
     }
 }

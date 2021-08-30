@@ -1,9 +1,11 @@
-import duke.Deadline;
-import duke.ToDo;
-import org.junit.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
+
+import org.junit.jupiter.api.Test;
+
+import duke.Deadline;
+import duke.ToDo;
 
 public class TaskItemTest {
 

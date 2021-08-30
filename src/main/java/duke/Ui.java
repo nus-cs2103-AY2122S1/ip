@@ -1,18 +1,18 @@
 package duke;
 
 public class Ui {
-    private static final String startMessage = "____________________________________________________________\n" +
-            "Hello! I'm Duke. \nFor " +
-            "events and deadlines, be sure to state the due date or the event timing as such: " +
-            "'XXX /by dd-MM-yyyy HH:mm'\n" +
-            "____________________________________________________________";
-    private static final String endMessage = "____________________________________________________________\n" +
-            "Bye! Hope to see you again soon!\n" +
-            "____________________________________________________________";
+    private static final String startMessage = "____________________________________________________________\n"
+            + "Hello! I'm Duke. \nFor "
+            + "events and deadlines, be sure to state the due date or the event timing as such: "
+            + "'XXX /by dd-MM-yyyy HH:mm'\n"
+            + "____________________________________________________________";
+    private static final String endMessage = "____________________________________________________________\n"
+            + "Bye! Hope to see you again soon!\n"
+            + "____________________________________________________________";
 
-    private static final String taskDoesNotExistError = "____________________________________________________________\n" +
-            "☹ OOPS!!! The task you chose does not exist. Use the 'list' command to check the items in your list.\n" +
-            "____________________________________________________________";
+    private static final String taskDoesNotExistError = "____________________________________________________________\n"
+            + "☹ OOPS!!! The task you chose does not exist. Use the 'list' command to check the items in your list.\n"
+            + "____________________________________________________________";
 
     /**
      * Sends a customised error message, usually from DukeExceptions.
@@ -45,8 +45,12 @@ public class Ui {
         System.out.println("____________________________________________________________");
         System.out.println("Noted. I've removed this task:");
         System.out.println(task.toString());
-        if (taskListSize == 1) System.out.println("Now you have 1 task in the list.");
-        if (taskListSize > 1) System.out.println("Now you have " + taskListSize + " tasks in the list.");
+        if (taskListSize == 1) {
+            System.out.println("Now you have 1 task in the list.");
+        }
+        if (taskListSize > 1) {
+            System.out.println("Now you have " + taskListSize + " tasks in the list.");
+        }
         System.out.println("____________________________________________________________");
     }
 
