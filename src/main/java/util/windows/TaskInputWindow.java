@@ -47,7 +47,11 @@ public class TaskInputWindow extends AnchorPane {
         TaskInputWindow.currentStage = stage;
     }
 
-
+    /**
+     * Sets the Duke for the input window.
+     *
+     * @param duke The duke to put input via.
+     */
     public static void setDuke(Duke duke) {
         TaskInputWindow.duke = duke;
     }

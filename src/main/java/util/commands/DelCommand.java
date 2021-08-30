@@ -41,7 +41,7 @@ public class DelCommand implements Command {
             DatedTask dt = (DatedTask) t;
             dt.removeFromTable(table);
         }
-        return delUI.printTaskDel(t, tasklist.size());
+        return delUI.getOutputFromTaskDeleted(t, tasklist.size());
 
     }
 

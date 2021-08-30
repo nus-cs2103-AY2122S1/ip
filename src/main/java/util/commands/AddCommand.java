@@ -34,7 +34,7 @@ public class AddCommand implements Command {
             return String.format(Messages.TASK_ALREADY_ADDED, task.toString());
         } else {
             tasks.add(task);
-            return ui.printTaskAdded(task, tasks.size());
+            return ui.getOutputFromTaskAdded(task, tasks.size());
         }
     }
 }

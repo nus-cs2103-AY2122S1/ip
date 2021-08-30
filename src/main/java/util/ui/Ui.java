@@ -45,7 +45,7 @@ public class Ui {
      * @param i The number of tasks in the list after the task has been added.
      * @return
      */
-    public String printTaskAdded(Task t, int i) {
+    public String getOutputFromTaskAdded(Task t, int i) {
         return String.format(Messages.TASK_ADDED, t.toString(), i);
     }
 
@@ -57,7 +57,7 @@ public class Ui {
      * @param i The number of tasks in the list after removal.
      * @return
      */
-    public String printTaskDel(Task t, int i) {
+    public String getOutputFromTaskDeleted(Task t, int i) {
         return String.format(Messages.TASK_DELETED, t.toString(), i);
     }
 
@@ -95,7 +95,7 @@ public class Ui {
      *
      * @param e The exception to handle.
      */
-    public void print_error_message(Exception e) {
+    public void printErrorMessage(Exception e) {
         this.print(e.getMessage());
     }
 

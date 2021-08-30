@@ -10,8 +10,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
 import util.commands.AddCommand;
 import util.commands.CommandList;
-import util.commands.ExitCommand;
-import util.commons.Messages;
 import util.parser.Parser;
 import util.storage.Storage;
 import util.tasks.*;
@@ -30,7 +28,7 @@ public class Duke {
 
     private final Parser parser;
     private final Ui ui = new Ui();
-    private final Storage stg;
+    private final Storage storage;
     private final TaskList tasks;
     private final DateTaskTable dateTaskTable;
     private static ListView<Task> out;
@@ -46,11 +44,11 @@ public class Duke {
         this.tasks = new TaskList();
         this.dateTaskTable = new DateTaskTable();
         this.parser = new Parser(this.ui, this.tasks, this.dateTaskTable);
-        this.stg = new Storage(saveDirectory + filename,
+        this.storage = new Storage(saveDirectory + filename,
                 saveDirectory + tempFilePath,
                 this.dateTaskTable);
         try {
-            this.tasks.addAll(this.stg.read());
+            this.tasks.addAll(this.storage.read());
         } catch (IOException | DukeException ex) {
             ui.print(ex.getMessage());
         }
@@ -68,7 +66,7 @@ public class Duke {
         try {
             CommandList cmds = parser.inputsParser(inpt);
             String result = cmds.executeAll();
-            this.stg.write(this.tasks);
+            this.storage.write(this.tasks);
             return result;
         } catch (DukeException e) {
             return e.getMessage();
@@ -93,9 +91,9 @@ public class Duke {
 
         AddCommand taskAdd = new AddCommand(this.tasks, ToDo.of(string));
         try {
-            this.stg.write(this.tasks);
+            this.storage.write(this.tasks);
         } catch (IOException e) {
-            ui.print_error_message(e);
+            ui.printErrorMessage(e);
         }
         taskAdd.execute();
 
@@ -104,36 +102,36 @@ public class Duke {
     /**
      * Function to add a deadline task
      *
-     * @param string
-     * @param date
+     * @param description The description of the input deadline
+     * @param date The date the deadline is by.
      */
-    public void addDeadline(String string, LocalDate date) {
+    public void addDeadline(String description, LocalDate date) {
         try {
-            Deadline deadline = Deadline.of(string, date.toString());
+            Deadline deadline = Deadline.of(description, date.toString());
             AddCommand res = new AddCommand(this.tasks, deadline);
             this.dateTaskTable.add(deadline);
-            this.stg.write(this.tasks);
+            this.storage.write(this.tasks);
             res.execute();
         } catch (DukeException | IOException e) {
-            ui.print_error_message(e);
+            ui.printErrorMessage(e);
         }
     }
 
     /**
      * Function to add an event task
      *
-     * @param string
-     * @param date
+     * @param description The description of the Event to add.
+     * @param date The date the event is at.
      */
-    public void addEvent(String string, LocalDate date) {
+    public void addEvent(String description, LocalDate date) {
         try {
-            Event event = Event.of(string, date.toString());
+            Event event = Event.of(description, date.toString());
             AddCommand addEvent = new AddCommand(this.tasks, event);
             this.dateTaskTable.add(event);
-            this.stg.write(this.tasks);
+            this.storage.write(this.tasks);
             addEvent.execute();
         } catch (DukeException | IOException e) {
-            ui.print_error_message(e);
+            ui.printErrorMessage(e);
         }
     }
 
@@ -163,9 +161,9 @@ public class Duke {
             this.tasks.remove(itemsToRemove.get(i));
         }
         try {
-            this.stg.write(this.tasks);
+            this.storage.write(this.tasks);
         } catch (IOException e) {
-            ui.print_error_message(e);
+            ui.printErrorMessage(e);
         }
 
     }
