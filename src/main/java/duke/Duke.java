@@ -18,6 +18,8 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        assert ui != null : "ui should not be null";
+        assert storage != null : "storage should not be null";
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -35,6 +37,9 @@ public class Duke {
      * Main loop for interactions with user
      */
     public void run() {
+        assert tasks != null : "tasks should not be null";
+        assert ui != null : "ui should not be null";
+        assert storage != null : "storage should not be null";
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -58,6 +63,9 @@ public class Duke {
      * Run commands obtained from GUI to obtain output
      */
     public String getResponse(String fullCommand) {
+        assert tasks != null : "tasks should not be null";
+        assert ui != null : "ui should not be null";
+        assert storage != null : "storage should not be null";
         // Change stdout of UI
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
@@ -76,6 +84,7 @@ public class Duke {
      * Bridging function to print welcome message
      */
     public String getWelcomeMessage() {
+        assert ui != null : "ui should not be null";
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
         ui.showWelcome();

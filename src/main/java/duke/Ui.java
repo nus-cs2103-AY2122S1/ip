@@ -21,6 +21,7 @@ public class Ui {
     }
 
     public String readCommand() {
+        assert scanner != null : "scanner should not be null";
         return scanner.nextLine();
     }
 
