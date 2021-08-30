@@ -1,5 +1,3 @@
-Why hello there! It's Duke here!
-How can I help you today master?
 Alrighty! I have added this task:
    [D][ ] return book (by: Sunday)
 Now you have 1 task(s) in total!

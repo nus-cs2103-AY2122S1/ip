@@ -10,7 +10,7 @@ public class DeadlineTest {
 
     @Test
     public void timeFormChangeTest() {
-        String actual = deadlineTest.timerChange();
+        String actual = deadlineTest.formatChanger();
         String expected = "Dec 02 2021, 4.35 PM";
         assertEquals(actual, expected);
     }
