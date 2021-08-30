@@ -66,16 +66,6 @@ public class TaskList {
                     String[] splitDate = temp[1].split(":");
                     System.out.println(splitDate[0]);
                     LocalDate date1 = LocalDate.parse(splitDate[1].substring(1));
-                    /**
-                    String[] breakingDate = date.split("/");
-                    String year = breakingDate[2];
-                    String month = breakingDate[1];
-                    String currentDate = breakingDate[0];
-                    int i = Integer.parseInt(currentDate);
-                    if (i < 10) {
-                        currentDate = "0" + currentDate;
-                    }
-                     */
                     this.addDeadline(description, date1);
                 } else if (userInput.substring(0,3).equals("[E]")) {
                     String[] tempEvent = userInput.split("at");
@@ -83,19 +73,6 @@ public class TaskList {
                     String[] splitDate = tempEvent[1].split(":");
                     System.out.println(splitDate[0]);
                     LocalDate date1 = LocalDate.parse(splitDate[1].substring(1));
-                    /**
-                    String date = splitDate[1];
-                    String[] breakingDate = date.split("/");
-                    String year = breakingDate[2];
-                    String month = breakingDate[1];
-                    String currentDate = breakingDate[0];
-                    int i = Integer.parseInt(currentDate);
-                    if (i < 10) {
-                        currentDate = "0" + currentDate;
-                    }
-                    String finalDateFormat = year + "-" + month + "-" + currentDate;
-                    LocalDate date1 = LocalDate.parse(finalDateFormat);
-                     */
                     this.addEvent(description, date1);
                 }
             }
