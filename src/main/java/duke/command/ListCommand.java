@@ -19,9 +19,9 @@ public class ListCommand extends Command {
      * @param storage Storage for Duke.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printDivider();
-        taskList.printTaskList();
-        ui.printDivider();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String message = taskList.printTaskList();
+        ui.formatPrint(message);
+        return message;
     }
 }
