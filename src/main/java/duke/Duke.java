@@ -10,6 +10,12 @@ import duke.ui.Ui;
 
 import java.util.Scanner;
 
+/**
+ * Program to keep track of a list of tasks.
+ *
+ * @author Cheong Yee Ming
+ * @version Duke A-JavaDoc
+ */
 public class Duke {
 
     // List to store all user inputs
@@ -18,6 +24,9 @@ public class Duke {
     private final Ui ui;
     private final Parser parser;
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke(){
         taskList = new TaskList();
         storage = new Storage();
@@ -25,6 +34,12 @@ public class Duke {
         parser = new Parser(taskList, storage, ui);
     }
 
+    /**
+     * Runs when bot is first initialised.
+     * Greets the user and loads data from local directory if present
+     * If not, local directory and local data file are created.
+     * Takes in user input and responds respectively.
+     */
     private void initiateSystem() {
         taskList.loadFromStorage(storage.load());
         ui.greet();
@@ -44,6 +59,10 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Main function for Duke program.
+     * @param args Null.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.initiateSystem();

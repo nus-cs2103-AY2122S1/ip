@@ -10,24 +10,47 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Parser takes in all the user input and
+ * parses the information before executing the
+ * respective commands.
+ *
+ * @author Cheong Yee Ming
+ * @version Duke A-JavaDoc
+ */
 public class Parser {
     private final TaskList taskList;
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * Constructor for a Parser.
+     *
+     * @param taskList Handles all operations regarding tasks.
+     * @param storage  Save and load data from local directory.
+     * @param ui       Prints message with respect to user input.
+     */
     public Parser(TaskList taskList, Storage storage, Ui ui) {
         this.taskList = taskList;
         this.storage = storage;
         this.ui = ui;
     }
 
+    /**
+     * Returns a Command based on user input.
+     * Throws a DukeException if the user input is invalid.
+     *
+     * @param userInput User's input on what they want duke to do.
+     * @return The respective Command object.
+     * @throws DukeException If user input is invalid.
+     */
     public Command parseUserInput(String userInput) throws DukeException {
         String[] splitUserInput = userInput.split(" ");
         String commandType = splitUserInput[0];
         String commandDetails = userInput.substring(userInput.indexOf(" ") + 1);
         if (!(commandType.equals("list") || commandType.equals("bye")) &&
                 (commandDetails.isBlank() || userInput.indexOf(" ") == -1)) {
-            throw new NoTaskDecriptionException(ui);
+            throw new NoTaskDescriptionException(ui);
         }
 
         switch (commandType) {
@@ -57,11 +80,18 @@ public class Parser {
         }
     }
 
+    /**
+     *
+     * @param taskType  The type of task.
+     * @param userInput User's input on what they want duke to do.
+     * @return The respective Task.
+     * @throws DukeException If description of task is invalid.
+     */
     public Task parseTaskInput(TaskType taskType, String userInput) throws DukeException {
         String[] splitUserInput = userInput.split(" ");
         String commandDetails = userInput.substring(userInput.indexOf(" ") + 1);
         if (commandDetails.isBlank() || userInput.indexOf(" ") == -1) {
-            throw new NoTaskDecriptionException(ui);
+            throw new NoTaskDescriptionException(ui);
         }
 
         switch (taskType) {
@@ -73,7 +103,7 @@ public class Parser {
                 }
                 String deadlineDetails = commandDetails.substring(0, byIndex);
                 if (deadlineDetails.isBlank()) {
-                    throw new NoTaskDecriptionException(ui);
+                    throw new NoTaskDescriptionException(ui);
                 }
                 try {
                     LocalDateTime by = LocalDateTime.parse(commandDetails.substring(deadlineDetails.indexOf("by") + 3),
@@ -83,7 +113,7 @@ public class Parser {
                     throw new InvalidDateTimeException(ui);
                 }
             } catch (StringIndexOutOfBoundsException e) {
-                throw new NoTaskDecriptionException(ui);
+                throw new NoTaskDescriptionException(ui);
             }
 
 
@@ -95,7 +125,7 @@ public class Parser {
                 }
                 String eventDetails = commandDetails.substring(0, atIndex);
                 if (eventDetails.isBlank()) {
-                    throw new NoTaskDecriptionException(ui);
+                    throw new NoTaskDescriptionException(ui);
                 }
                 try {
                     LocalDateTime at = LocalDateTime.parse(commandDetails.substring(eventDetails.indexOf("at") + 3),
@@ -105,7 +135,7 @@ public class Parser {
                     throw new InvalidDateTimeException(ui);
                 }
             } catch (StringIndexOutOfBoundsException e) {
-                throw new NoTaskDecriptionException(ui);
+                throw new NoTaskDescriptionException(ui);
             }
 
         default:

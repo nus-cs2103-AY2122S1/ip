@@ -10,11 +10,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage saves and loads tasks
+ * from the local directory.
+ *
+ * @author Cheong Yee Ming
+ * @version Duke A-JavaDoc
+ */
 public class Storage {
 
     private static final String FOLDER = "data";
     private static final String FILE = "duke.txt";
 
+    /**
+     * Creates a folder in local directory.
+     */
     public void createFolder(){
         File folder = new File(FOLDER);
         boolean folderCreated = folder.mkdir();
@@ -23,6 +33,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a file in local directory.
+     */
     public void createFile(){
         File file = new File(FOLDER + "/" + FILE);
         boolean fileCreated = false;
@@ -39,6 +52,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks from local directory only if
+     * data is present in local directory.
+     *
+     * @return An ArrayList of Task saved in local directory.
+     */
     public ArrayList<Task> load(){
         ArrayList<Task> taskList = new ArrayList<>();
         File file = new File(FOLDER + "/" + FILE);
@@ -59,6 +78,12 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Saves tasks in TaskList to local directory.
+     * Folder and file will be created if not already present.
+     *
+     * @param taskList
+     */
     public void save(ArrayList<Task> taskList) {
         try {
             FileWriter fileWriter = new FileWriter(FOLDER + "/" + FILE);

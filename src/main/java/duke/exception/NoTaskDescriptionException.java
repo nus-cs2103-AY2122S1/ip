@@ -4,30 +4,29 @@ import duke.ui.Ui;
 
 /**
  * This exception is thrown when
- * user inputs a non-existent task number
- * when executing deletion or marking of tasks.
+ * an invalid task description is missing.
  *
  * @author Cheong Yee Ming
  * @version Duke A-JavaDoc
  */
-public class NoSuchTaskException extends DukeException {
+public class NoTaskDescriptionException extends DukeException {
     /**
      * Constructor for an NoSuchCommandException.
      *
      * @param ui Prints message with respect to user input.
      */
-    public NoSuchTaskException(Ui ui) {
+    public NoTaskDescriptionException(Ui ui) {
         super(ui);
     }
 
     /**
      * Returns an error message to highlight that
-     * the input task number does not exist.
+     * task description is missing.
      *
      * @return The error message.
      */
     @Override
     public String getMessage() {
-        return super.errorMessage("The task does not exist.");
+        return super.errorMessage("The description of a task cannot be empty.");
     }
 }
