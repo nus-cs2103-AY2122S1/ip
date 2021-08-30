@@ -12,7 +12,6 @@ import blue.handler.ExitHandler;
 import blue.handler.FindHandler;
 import blue.handler.ListHandler;
 import blue.handler.ToDoHandler;
-import javafx.application.Application;
 
 /**
  * Entry point of the Blue application.
@@ -25,6 +24,10 @@ public class Blue {
     private TaskList tasks;
     private final Ui ui;
     private HashMap<String, CommandHandler> commandHandlers;
+
+    public Blue() {
+        this("data/tasks.txt");
+    }
 
     /**
      * Constructs a Blue instance.
@@ -130,7 +133,6 @@ public class Blue {
      * @param args Ignored.
      */
     public static void main(String[] args) {
-        Application.launch(GUi.class, args);
-        // new Blue("data/tasks.txt").run();
+        new Blue("data/tasks.txt").run();
     }
 }
