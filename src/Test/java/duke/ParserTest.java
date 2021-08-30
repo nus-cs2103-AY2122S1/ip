@@ -1,12 +1,13 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test
-    public void Dummy() {
+    public void dummyTest_dummyTest_success() {
         assertEquals(2, 2);
     }
 

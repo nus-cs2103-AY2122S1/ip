@@ -4,23 +4,36 @@ package duke;
  * Class to deal with interactions with the user
  */
 public class Ui {
+    /**
+     * Prints a loading error message.
+     */
     public static void showLoadingError() {
-        System.out.println("There was an error loading from the save file!\n" +
-                "Initializing an empty file...");
+        System.out.println("There was an error loading from the save file!\n"
+                + "Initializing an empty file...");
     }
 
+    /**
+     * Prints a tasks saved message.
+     */
     public static void showTasksSaved() {
         System.out.println("Your tasks have been saved!");
     }
 
+    /**
+     * Prints a welcome message.
+     */
     public static void showWelcomeMessage() {
-        System.out.println("Hello! I'm Duke.\n" +
-                "What can I do for you?");
+        System.out.println("Hello! I'm Duke.\n"
+                + "What can I do for you?");
     }
 
+    /**
+     * Prints a goodbye message.
+     */
     public static void showGoodbyeMessage() {
         System.out.println("Bye. Hope to see you again soon!");
     }
+
     /**
      * Prints different message depending on whether a task was checked or unchecked.
      *

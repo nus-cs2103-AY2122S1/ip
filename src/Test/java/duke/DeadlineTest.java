@@ -1,12 +1,10 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
-import java.time.format.DateTimeParseException;
-import java.util.Date;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.format.DateTimeParseException;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
 

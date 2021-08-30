@@ -8,7 +8,7 @@ import java.io.IOException;
  */
 public class Event extends Task {
 
-    String timing;
+    private String timing;
 
     /**
      * Constructor.
@@ -18,7 +18,7 @@ public class Event extends Task {
      */
     public Event(String description) throws DukeException {
         super(description);
-        if(description.strip().equals("")) {
+        if (description.strip().equals("")) {
             throw new DukeException("Your Event cannot be empty :(");
         }
         int index = description.indexOf("/at");
