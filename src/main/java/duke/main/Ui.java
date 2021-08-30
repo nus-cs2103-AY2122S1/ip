@@ -50,6 +50,7 @@ public class Ui {
      */
     public String readCommand() {
         command = sc.nextLine();
+        System.out.println(command);
         return command;
     }
     
@@ -141,15 +142,15 @@ public class Ui {
     }
 
     /**
-     * Lists out all the tasks that falls on a specified date.
-     * 
-     * @param taskArrayList arraylist of task that fall on the specified date.
+     * Lists out all tasks containing the search phrase.
+     *
+     * @param matchingTasks tasks containing the search phrase.
+     * @param message the header message..
      */
-    public void showFilteredTasks(ArrayList<Task> taskArrayList, Date date) {
-        String header = String.format("On %s, you have: ", date.toString());
-        iterate(header, taskArrayList);
+    public void showMatchingTasks(ArrayList<Task> matchingTasks, String message) {
+        iterate(message, matchingTasks);
     }
-    
+
     private void iterate(String headerMessage, ArrayList<Task> tasks) {
         System.out.println(headerMessage);
         for(int i = 0; i < tasks.size(); i++) {

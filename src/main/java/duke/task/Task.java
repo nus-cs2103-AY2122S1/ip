@@ -77,4 +77,14 @@ public class Task {
         return false;
     }
 
+    /**
+     * Checks if task description contains the search phrase.
+     *
+     * @param searchPhrase the phrase use to search for related tasks.
+     * @return true if the task contains the search phrase, false otherwise.
+     */
+    public boolean hasSearchPhrase(String searchPhrase) {
+        return toString().contains(searchPhrase);
+    }
+
 }

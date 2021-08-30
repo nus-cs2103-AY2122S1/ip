@@ -75,4 +75,16 @@ public class Todo extends Task {
     public String getTaskMarker() {
         return TASK_MARKER;
     }
+
+    /**
+     * Checks if task description contains the search phrase.
+     *
+     * @param searchPhrase the phrase use to search for related tasks.
+     * @return true if the task contains the search phrase, false otherwise.
+     */
+    @Override
+    public boolean hasSearchPhrase(String searchPhrase) {
+        return toString().contains(searchPhrase);
+    }
+
 }
