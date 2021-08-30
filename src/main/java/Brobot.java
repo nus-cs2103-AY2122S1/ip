@@ -3,11 +3,23 @@ import brobot.UI;
 import brobot.exception.BroException;
 import brobot.parser.BroParser;
 import brobot.task.TaskList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Represents the main Duke Program, a task manager.
  */
-public class Brobot {
+public class Brobot extends Application {
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
     /**
      * Main java program
      * @param args Arguments for main program
