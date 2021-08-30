@@ -20,7 +20,8 @@ application {
     mainClassName = "myjournal.MyJournal"
 }
 
-run{
+run {
+    enableAssertions = true
     standardInput = System.in
 }
 
