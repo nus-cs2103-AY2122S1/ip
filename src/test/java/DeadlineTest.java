@@ -19,7 +19,7 @@ public class DeadlineTest {
     @Test
     public void deadline_dateOnly_correctStringRepresentation() {
         Deadline deadline = new Deadline("work", "2021-08-23");
-        assertEquals(deadline.toString(), "[D][ ] work (by: Aug 23 2021)");
+        assertEquals("[D][ ] work (by: Aug 23 2021)", deadline.toString());
     }
 
     /**
@@ -28,7 +28,7 @@ public class DeadlineTest {
     @Test
     public void deadline_dateAndTime_correctStringRepresentation() {
         Deadline deadline = new Deadline("work", "2021-08-23", "18:00");
-        assertEquals(deadline.toString(), "[D][ ] work (by: Aug 23 2021 06:00pm)");
+        assertEquals("[D][ ] work (by: Aug 23 2021 06:00PM)", deadline.toString());
     }
 
     /**
@@ -38,7 +38,7 @@ public class DeadlineTest {
     public void markDone_dateOnlyDeadline_correctStringRepresentation() {
         Deadline deadline = new Deadline("work", "2021-08-23");
         deadline.markDone();
-        assertEquals(deadline.toString(), "[D][X] work (by: Aug 23 2021)");
+        assertEquals("[D][X] work (by: Aug 23 2021)", deadline.toString());
     }
 
     /**
@@ -48,7 +48,7 @@ public class DeadlineTest {
     public void markDone_dateAndTimeDeadline_correctStringRepresentation() {
         Deadline deadline = new Deadline("work", "2021-08-23", "18:00");
         deadline.markDone();
-        assertEquals(deadline.toString(), "[D][X] work (by: Aug 23 2021 06:00pm)");
+        assertEquals("[D][X] work (by: Aug 23 2021 06:00PM)", deadline.toString());
     }
 
     /**

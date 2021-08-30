@@ -15,7 +15,7 @@ public class TodoTest {
     @Test
     public void todo_description_correctStringRepresentation() {
         Todo test = new Todo("test string");
-        assertEquals(test.toString(), "[T][ ] test string");
+        assertEquals("[T][ ] test string", test.toString());
     }
 
     /**
@@ -25,6 +25,6 @@ public class TodoTest {
     public void markDone_todo_correctStringRepresentation() {
         Todo test = new Todo("test string");
         test.markDone();
-        assertEquals(test.toString(), "[T][X] test string");
+        assertEquals("[T][X] test string", test.toString());
     }
 }

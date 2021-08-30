@@ -39,15 +39,15 @@ public class StorageTest {
         TaskList loadList = new TaskList();
         Storage loadStorage = new Storage(loadList, file.toString());
 
-        String result = "Here are the tasks in your list:\n"
+        String expectedResult = "Here are the tasks in your list:\n"
                 + "1.[T][X] life is tough\n"
-                + "2.[D][ ] monke (by: Aug 23 2021 06:00pm)\n"
-                + "3.[E][ ] monke (at: Aug 23 2021 06:00pm)";
+                + "2.[D][ ] monke (by: Aug 23 2021 06:00PM)\n"
+                + "3.[E][ ] monke (at: Aug 23 2021 06:00PM)";
 
         try {
             saveStorage.save();
             loadStorage.load();
-            assertEquals(loadList.toString(), result);
+            assertEquals(expectedResult, loadList.toString());
         } catch (Exception e) {
             fail();
         }

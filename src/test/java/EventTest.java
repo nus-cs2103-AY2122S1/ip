@@ -1,9 +1,9 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
 import java.time.format.DateTimeParseException;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import duke.task.Event;
 
@@ -18,7 +18,7 @@ public class EventTest {
     @Test
     public void event_dateOnly_correctStringRepresentation() {
         Event event = new Event("Jon's Birthday", "2021-08-23");
-        assertEquals(event.toString(), "[E][ ] Jon's Birthday (at: Aug 23 2021)");
+        assertEquals("[E][ ] Jon's Birthday (at: Aug 23 2021)", event.toString());
     }
 
     /**
@@ -28,7 +28,7 @@ public class EventTest {
     public void markDone_dateOnlyEvent_correctStringRepresentation() {
         Event event = new Event("Jon's Birthday", "2021-08-23");
         event.markDone();
-        assertEquals(event.toString(), "[E][X] Jon's Birthday (at: Aug 23 2021)");
+        assertEquals("[E][X] Jon's Birthday (at: Aug 23 2021)", event.toString());
     }
 
     /**
@@ -37,7 +37,7 @@ public class EventTest {
     @Test
     public void event_dateAndTime_correctStringRepresentation() {
         Event event = new Event("Save Harambe", "2021-08-23", "18:00");
-        assertEquals(event.toString(), "[E][ ] Save Harambe (at: Aug 23 2021 06:00pm)");
+        assertEquals("[E][ ] Save Harambe (at: Aug 23 2021 06:00PM)", event.toString());
     }
 
     /**
@@ -47,7 +47,7 @@ public class EventTest {
     public void markDone_dateAndTimeEvent_correctStringRepresentation() {
         Event event = new Event("Save Harambe", "2021-08-23", "18:00");
         event.markDone();
-        assertEquals(event.toString(), "[E][X] Save Harambe (at: Aug 23 2021 06:00pm)");
+        assertEquals("[E][X] Save Harambe (at: Aug 23 2021 06:00PM)", event.toString());
     }
 
     /**
