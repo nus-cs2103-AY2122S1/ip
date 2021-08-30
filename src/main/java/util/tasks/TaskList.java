@@ -1,5 +1,8 @@
 package util.tasks;
 
+import javafx.collections.ListChangeListener;
+
+
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
@@ -9,6 +12,8 @@ import java.util.function.Predicate;
  *
  */
 public class TaskList extends ArrayList<Task> {
+
+    private ListChangeListener<Task> listChangeListener;
 
     /**
      * Method for checking if a given task is in an ArrayList.
@@ -43,4 +48,7 @@ public class TaskList extends ArrayList<Task> {
         }
         return result;
     }
+
+
+
 }

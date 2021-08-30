@@ -4,18 +4,17 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
 import javafx.scene.text.Text;
+import util.commands.AddCommand;
 import util.commands.CommandList;
 import util.commands.ExitCommand;
 import util.commons.Messages;
 import util.parser.Parser;
 import util.storage.Storage;
-import util.tasks.DateTaskTable;
-import util.tasks.DukeException;
-import util.tasks.TaskList;
-import util.tasks.ToDo;
-import util.tasks.Deadline;
-import util.tasks.Event;
+import util.tasks.*;
 import util.ui.Ui;
 
 
@@ -34,7 +33,7 @@ public class Duke {
     private final Storage stg;
     private final TaskList tasks;
     private final DateTaskTable dateTaskTable;
-    private static Text out;
+    private static ListView<Task> out;
 
 
     /**
@@ -59,8 +58,12 @@ public class Duke {
     }
 
 
-
-
+    /**
+     * Returns the response from the duke when it takes in a String input.
+     *
+     * @param inpt The input string.
+     * @return
+     */
     public String getResponse(String inpt) {
         try {
             CommandList cmds = parser.inputsParser(inpt);
@@ -75,35 +78,10 @@ public class Duke {
             return e.getMessage();
         }
 
-    }
-
-
-    /**
-     * Running Duke.
-     */
-    public void run() {
-
-        //initialising Duke
-        //via greetings
-        ui.print(Messages.GREETINGS);
-
-        while (!ExitCommand.isExit()) {
-            String inpt = ui.getInput();
-            try {
-                CommandList cmds = parser.inputsParser(inpt);
-                cmds.executeAll();
-                stg.write(this.tasks);
-            } catch (DukeException e) {
-                ui.print_error_message(e);
-            } catch (DateTimeParseException e) {
-                ui.print("Expected date format YYYY MM DD");
-            } catch (IOException e) {
-                ui.print_error_message(e);
-            }
-        }
-        ui.print(Messages.BYE);
 
     }
+
+
 
     /**
      * Function to add a todo task
@@ -113,14 +91,13 @@ public class Duke {
      */
     public void addTodo(String string) {
 
-        this.tasks.add(ToDo.of(string));
-
+        AddCommand taskAdd = new AddCommand(this.tasks, ToDo.of(string));
         try {
             this.stg.write(this.tasks);
-            printToText(out);
         } catch (IOException e) {
             ui.print_error_message(e);
         }
+        taskAdd.execute();
 
     }
 
@@ -133,10 +110,10 @@ public class Duke {
     public void addDeadline(String string, LocalDate date) {
         try {
             Deadline deadline = Deadline.of(string, date.toString());
-            this.tasks.add(deadline);
+            AddCommand res = new AddCommand(this.tasks, deadline);
             this.dateTaskTable.add(deadline);
             this.stg.write(this.tasks);
-            printToText(out);
+            res.execute();
         } catch (DukeException | IOException e) {
             ui.print_error_message(e);
         }
@@ -151,29 +128,46 @@ public class Duke {
     public void addEvent(String string, LocalDate date) {
         try {
             Event event = Event.of(string, date.toString());
-            this.tasks.add(event);
+            AddCommand addEvent = new AddCommand(this.tasks, event);
             this.dateTaskTable.add(event);
             this.stg.write(this.tasks);
-            printToText(out);
+            addEvent.execute();
         } catch (DukeException | IOException e) {
             ui.print_error_message(e);
         }
     }
 
 
-    public void printToText(Text text) {
+    /**
+     * Method to print the input string into the Text box text
+     *
+     * @param text The Text to show at
+     * @param val The value to print in the text.
+     */
+    public void printToText(Text text, String val) {
         if (text == null) {
             return;
         }
-        try {
-            text.setText(this.ui.list(this.tasks));
-        } catch (DukeException e) {
-            this.ui.print_error_message(e);
-        }
+        text.setText(val);
+
     }
 
-    public static void setOut(Text text) {
-        Duke.out = text;
+
+    /**
+     * Handles the moment when the remove button is pressed.
+     *
+     *
+     */
+    public void removeHandler(ObservableList<Task> itemsToRemove) {
+        for (int i = 0; i < itemsToRemove.size(); i++) {
+            this.tasks.remove(itemsToRemove.get(i));
+        }
+        try {
+            this.stg.write(this.tasks);
+        } catch (IOException e) {
+            ui.print_error_message(e);
+        }
+
     }
 
 
@@ -182,15 +176,24 @@ public class Duke {
 
 
     /**
-     * The main function of Duke.
+     * A method to print the list to dukes list feature.
+     * Renders the list command kind of obsolete.
      *
-     * @param args The arguments for duke.
      */
-    public static void main(String[] args) {
-        Duke d = new Duke(saveFilePath, tempFilePath);
-        d.run();
+    public void printList() {
+        Duke.out.setItems(FXCollections.observableArrayList(this.tasks));
+    }
 
+
+    public static void setOut(ListView<Task> viewer) {
+        Duke.out = viewer;
 
 
     }
+
+
+
+
+
+
 }

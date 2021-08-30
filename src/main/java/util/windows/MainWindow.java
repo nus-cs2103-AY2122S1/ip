@@ -1,5 +1,6 @@
 package util.windows;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import util.controller.Duke;
+import util.tasks.Task;
 
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
@@ -33,7 +35,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     @FXML
     private Text taskDisplay;
-
+    @FXML
+    private ListView<Task> listOfTasks;
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -42,10 +45,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        listOfTasks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     public void setDuke(Duke d) {
         duke = d;
+
+        duke.setOut(listOfTasks);
+        duke.printList();
+
+
     }
 
     /**
@@ -60,7 +69,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-
+        duke.printList();
         userInput.clear();
     }
 
@@ -70,7 +79,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void addTask() {
-        duke.setOut(this.taskDisplay);
+
         try {
             Stage stage = new Stage();
             TaskInputWindow.setStage(stage);
@@ -92,4 +101,32 @@ public class MainWindow extends AnchorPane {
 
 
 
+
+    /**
+     * Handle the removal of tasks through the GUI
+     *
+     */
+    @FXML
+    private void handleRemoveEvent() {
+        duke.removeHandler(this.listOfTasks.getSelectionModel().getSelectedItems());
+        duke.printList();
+    }
+
+    /**
+     * Handle the marking of done tasks through the GUI
+     *
+     */
+    @FXML
+    private void handleDoneTasks() {
+        ObservableList<Task> tasks = this.listOfTasks.getSelectionModel().getSelectedItems();
+        for (int i = 0; i < tasks.size(); i++) {
+            tasks.get(i).done();
+        }
+        duke.printList();
+    }
+
+
+
 }
+
+

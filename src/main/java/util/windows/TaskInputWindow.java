@@ -53,22 +53,20 @@ public class TaskInputWindow extends AnchorPane {
     }
 
 
-
     /**
      * Handle the addition of tasks.
-     *
      */
     @FXML
     private void handleAddTodo() {
         String val = todoDescription.getText();
         duke.addTodo(val);
         currentStage.close();
+        duke.printList();
 
     }
 
     /**
      * Handle the addition of tasks.
-     *
      */
     @FXML
     private void handleAddDeadline() {
@@ -76,11 +74,11 @@ public class TaskInputWindow extends AnchorPane {
         LocalDate date = deadlineDate.getValue();
         duke.addDeadline(val, date);
         currentStage.close();
+        duke.printList();
     }
 
     /**
      * Handle the addition of tasks.
-     *
      */
     @FXML
     private void handleAddEvent() {
@@ -88,6 +86,7 @@ public class TaskInputWindow extends AnchorPane {
         LocalDate date = eventDate.getValue();
         duke.addEvent(val, date);
         currentStage.close();
+        duke.printList();
     }
 
 

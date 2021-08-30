@@ -17,6 +17,11 @@ import util.tasks.Task;
 public class Ui {
     private final Scanner sc;
 
+    /**
+     * Constructor method for the Ui.
+     *
+     *
+     */
     public Ui() {
         this.sc = new Scanner(System.in);
     }
@@ -34,10 +39,24 @@ public class Ui {
         System.out.println(Messages.HLINE);
     }
 
+    /**
+     * The output when a task is added.
+     * @param t The task to be added.
+     * @param i The number of tasks in the list after the task has been added.
+     * @return
+     */
     public String printTaskAdded(Task t, int i) {
         return String.format(Messages.TASK_ADDED, t.toString(), i);
     }
 
+
+    /**
+     * The output when a task is removed.
+     *
+     * @param t The task to be removed.
+     * @param i The number of tasks in the list after removal.
+     * @return
+     */
     public String printTaskDel(Task t, int i) {
         return String.format(Messages.TASK_DELETED, t.toString(), i);
     }
