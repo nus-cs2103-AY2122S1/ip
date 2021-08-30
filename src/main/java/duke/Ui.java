@@ -111,17 +111,31 @@ public class Ui {
      * Method to print out all the items in the list.
      * @param list the list that contains the items to be printed out.
      */
-    public static void listAllMessage(MyList list) {
+//    public static void listAllMessage(MyList list) {
+//        int listLength = list.getListSize();
+//        if (listLength == 0) {
+//            System.out.println("Your list is empty.");
+//        } else {
+//            System.out.println("Your list items:");
+//            for (int i = 0; i < listLength; i ++) {
+//                Task t = list.getTask(i);
+//                System.out.printf("%d. %s \n", i + 1, t.toString());
+//            }
+//        }
+//    }
+    public static String listAllMessage(MyList list) {
         int listLength = list.getListSize();
+        String output = "";
         if (listLength == 0) {
-            System.out.println("Your list is empty.");
+            output = "Your list is empty.";
         } else {
-            System.out.println("Your list items:");
+            output = "Your list items: \n";
             for (int i = 0; i < listLength; i ++) {
                 Task t = list.getTask(i);
-                System.out.printf("%d. %s \n", i + 1, t.toString());
+                output += i + 1 + ". " + t.toString();
             }
         }
+        return output;
     }
 
     /**
