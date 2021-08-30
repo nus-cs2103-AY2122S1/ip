@@ -1,7 +1,0 @@
-todo borrow book
-deadline meet girl 1 /by Monday 2359
-event meet girl 2 /at Tuesday 2359
-list
-done 2
-list
-bye
