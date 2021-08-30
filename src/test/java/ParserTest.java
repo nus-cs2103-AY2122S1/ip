@@ -6,11 +6,17 @@ import duke.Parser;
 
 public class ParserTest {
 
+    /**
+     * Testing the creation of a ToDo.
+     */
     @Test
     public void testCommandInterpretation1() {
         assertEquals(true, Parser.interpretCommand("todo kill morty"));
     }
 
+    /**
+     * Testing whether Duke goes to sleep when user input is "bye".
+     */
     @Test
     public void testCommandInterpretation2() {
         assertEquals(false, Parser.interpretCommand("bye"));
