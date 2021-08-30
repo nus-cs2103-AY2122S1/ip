@@ -4,9 +4,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Class to test the Todo class.
+ */
 public class TodoTest {
+    /**
+     * Test if the todo representation is generated as expected.
+     */
     @Test
-    public void isByeMsgTest(){
+    public void todoCreationTest(){
         assertEquals(new Todo("description").toString(),
                 "[T] description");
     }
