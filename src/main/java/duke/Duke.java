@@ -1,8 +1,8 @@
 package duke;
 
-import duke.tasks.*;
-import duke.command.*;
-import duke.exceptions.*;
+import duke.command.Command;
+import duke.exceptions.DukeException;
+import duke.tasks.TaskList;
 
 public class Duke {
 

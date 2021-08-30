@@ -1,8 +1,10 @@
 package duke.command;
 
-import duke.*;
-import duke.tasks.*;
-import duke.exceptions.*;
+import duke.FileController;
+import duke.UI;
+import duke.exceptions.InvalidOperationDukeException;
+import duke.exceptions.UnsavedChangesException;
+import duke.tasks.TaskList;
 
 public class MarkDoneCommand extends Command {
 

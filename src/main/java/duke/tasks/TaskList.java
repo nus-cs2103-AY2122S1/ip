@@ -22,10 +22,6 @@ public class TaskList {
         });
     }
 
-    public void delete(int index) {
-
-    }
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

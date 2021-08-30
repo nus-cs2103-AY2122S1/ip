@@ -32,7 +32,6 @@ public class FileController {
             } catch (FileNotFoundException e) {
                 File f = new File(filePath);
                 f.mkdirs();
-                f.createNewFile();
                 fw = new FileWriter(filePath.concat(fileName));
             }
             fw.write(text);
@@ -45,9 +44,9 @@ public class FileController {
     }
 
     /**
-     * Returns the whole contents of the file in a single String
+     * Returns the whole contents of the file in a single String.
      *
-     * @return contents of file specified in this object
+     * @return contents of file specified in this object.
      */
     public String readContentsAsString() {
         try {

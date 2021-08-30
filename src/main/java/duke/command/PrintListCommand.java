@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.*;
-import duke.tasks.*;
-import duke.exceptions.*;
+import duke.FileController;
+import duke.UI;
+import duke.tasks.TaskList;
 
 public class PrintListCommand extends Command {
     public void execute(TaskList tasks, UI ui, FileController fc) {
