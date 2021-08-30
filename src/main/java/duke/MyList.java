@@ -56,8 +56,8 @@ public class MyList {
     /**
      * Method to list out all the items in the list.
      */
-    public void listAll() {
-        Ui.listAllMessage(this);
+    public String listAll() {
+        return Ui.listAllMessage(this);
     }
 
     /**
