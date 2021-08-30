@@ -35,7 +35,7 @@ public class StorageStub implements IStorage {
     }
 
     @Override
-    public String deleteTask(int index) throws DukeException{
+    public String deleteTask(int index) throws DukeException {
         return "test";
     }
 

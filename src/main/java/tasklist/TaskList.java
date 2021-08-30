@@ -1,11 +1,10 @@
 package tasklist;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 import exception.DukeException;
 import models.Task;
-
-import java.io.Serializable;
-import java.lang.String;
-import java.util.ArrayList;
 
 /**
  * TaskList class that contains all of the tasks that has been inputted by the user.
@@ -13,13 +12,13 @@ import java.util.ArrayList;
 public class TaskList implements Serializable {
 
     /** ArrayList that store all of the Task objects. */
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
 
     /**
      * Constructor of the TaskList class where we initialize ArrayList which will contain all of the Tasks.
      */
     public TaskList() {
-        this.list = new ArrayList<Task>();
+        this.list = new ArrayList<>();
     }
 
     /**
@@ -40,7 +39,7 @@ public class TaskList implements Serializable {
     public void setDone(int index) throws DukeException {
         try {
             this.list.get(index).setDone();
-        } catch(IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("There is no task with number " + (index + 1) + " in the list");
         }
     }
@@ -80,15 +79,20 @@ public class TaskList implements Serializable {
      * @return String value of the deleted Task.
      * @throws DukeException If there is no task with the specified index.
      */
-    public String deleteTask(int index) throws DukeException{
+    public String deleteTask(int index) throws DukeException {
         try {
-            String result = this.list.remove(index).toString();
-            return result;
-        } catch(IndexOutOfBoundsException e) {
+            return this.list.remove(index).toString();
+        } catch (IndexOutOfBoundsException e) {
             throw new DukeException("There is no task with number " + (index + 1) + " in the list");
         }
     }
 
+    /**
+     * Function implementation that returns all of the tasks with the matched keyword in a TaskList.
+     *
+     * @param keyword Keyword that will be searched.
+     * @return TaskList object with all lists that match the keyword.
+     */
     public TaskList findKeyword(String keyword) {
         TaskList result = new TaskList();
         for (int i = 0; i < this.list.size(); i++) {
@@ -109,7 +113,7 @@ public class TaskList implements Serializable {
         String result = "Here are the tasks in your list!\n";
         for (int i = 1; i < this.list.size() + 1; i++) {
             result += i + ". " + this.list.get(i - 1);
-            if(i != this.list.size()) {
+            if (i != this.list.size()) {
                 result += "\n";
             }
         }

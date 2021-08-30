@@ -1,15 +1,15 @@
 package storage;
 
-import exception.DukeException;
-import models.Task;
-import tasklist.TaskList;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+
+import exception.DukeException;
+import models.Task;
+import tasklist.TaskList;
 
 /**
  * Storage implementation that writes and saves the TaskList to local storage.
@@ -55,12 +55,13 @@ public class Storage implements IStorage {
     private TaskList loadTaskListFromFile() {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(this.filePath));
-            TaskList result = (TaskList) objectInputStream.readObject();
-            return result;
+            return (TaskList) objectInputStream.readObject();
         } catch (IOException error) {
-            System.out.println("Fail to retrieve ArrayList from file, error: " + error.getMessage());
+            System.out.println("Fail to retrieve ArrayList from file, error: "
+                    + error.getMessage());
         } catch (ClassNotFoundException error) {
-            System.out.println("Object from the file cannot be casted to ArrayList<Task>, error: " + error.getMessage());
+            System.out.println("Object from the file cannot be casted to ArrayList<Task>, error: "
+                    + error.getMessage());
         }
         return new TaskList();
     }
@@ -80,7 +81,7 @@ public class Storage implements IStorage {
     /**
      * Wrapper function implementation that add task to the TaskList.
      *
-     * @param task
+     * @param task Add a new task to storage.
      */
     public void addTask(Task task) {
         this.list.addTask(task);
@@ -124,7 +125,7 @@ public class Storage implements IStorage {
      * @return String representation of the deleted Task.
      * @throws DukeException If there is no Task with the specified index.
      */
-    public String deleteTask(int index) throws DukeException{
+    public String deleteTask(int index) throws DukeException {
         String result = this.list.deleteTask(index);
         writeTaskListToFile();
         return result;

@@ -10,6 +10,7 @@ public class Ui {
      * @param line response from Dub chatbot before formatted.
      */
     public static void print(String line) {
-        System.out.print("\t" + line.replace("\n", "\n\t") + "\n\t____________________________________________________________\n\n");
+        System.out.print("\t" + line.replace("\n", "\n\t")
+                + "\n\t____________________________________________________________\n\n");
     }
 }

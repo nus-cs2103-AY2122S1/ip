@@ -28,7 +28,7 @@ public class Todo extends Task {
 
         if (obj instanceof Todo) {
             Task temp = (Todo) obj;
-            return temp.toString() == this.toString();
+            return temp.toString().equals(this.toString());
         }
 
         return false;

@@ -1,5 +1,9 @@
 package processor;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.List;
+
 import exception.DukeException;
 import models.Command;
 import models.Deadline;
@@ -8,19 +12,13 @@ import models.Todo;
 import storage.IStorage;
 import ui.Ui;
 
-import java.util.List;
-
-
-import java.time.format.DateTimeParseException;
-import java.time.LocalDate;
-
 /**
  * Processor implementation which processes command.
  */
 public class Processor implements IProcessor {
 
     /** Storage object which writes and reads from local file. */
-    private IStorage storage;
+    private final IStorage storage;
 
     /**
      * Constructor of the processor object.
@@ -103,7 +101,8 @@ public class Processor implements IProcessor {
             } else {
                 throw new DukeException("I don't understand:(");
             }
-            Ui.print("Got it. I've added this task:\n   " + this.storage.getLastTask() + "\nNow you have " + this.storage.getSize() + " tasks in the list.");
+            Ui.print("Got it. I've added this task:\n   " + this.storage.getLastTask()
+                    + "\nNow you have " + this.storage.getSize() + " tasks in the list.");
         } catch (DukeException e) {
             Ui.print(e.getMessage());
         } catch (DateTimeParseException e) {
@@ -130,7 +129,7 @@ public class Processor implements IProcessor {
             int i = Integer.parseInt(index);
             this.storage.setDone(i - 1);
             Ui.print("Nice! I've marked this task as done:\n   " + this.storage.getTask(i - 1));
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             Ui.print(e.getMessage());
         }
     }
@@ -145,7 +144,8 @@ public class Processor implements IProcessor {
         try {
             int i = Integer.parseInt(index);
             String result = this.storage.deleteTask(i - 1);
-            Ui.print("Got it! I've removed this task:\n   " + result + "\nNow you have " + this.storage.getSize() + " tasks in the list.");
+            Ui.print("Got it! I've removed this task:\n   " + result
+                    + "\nNow you have " + this.storage.getSize() + " tasks in the list.");
         } catch (DukeException e) {
             Ui.print(e.getMessage());
         }
