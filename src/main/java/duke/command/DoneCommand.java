@@ -1,9 +1,10 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-import java.io.IOException;
 
 /**
  * Represents how Duke responds to a "done" command.
@@ -43,8 +44,7 @@ public class DoneCommand extends Command {
                 ui.showError("     Error! Please specify a number greater than 0");
             } else if (Integer.parseInt(inputValues[1]) == 1) {
                 ui.showError("     Error! You do not have any tasks in the list");
-            }
-            else {
+            } else {
                 ui.showError("     Error! You do not have " + inputValues[1] + " tasks in the list");
             }
         } catch (IOException exception) {

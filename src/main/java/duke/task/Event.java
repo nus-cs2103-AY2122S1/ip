@@ -1,10 +1,11 @@
 package duke.task;
 
-import duke.exception.EmptyFieldException;
-import duke.exception.InvalidCommandException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.exception.EmptyFieldException;
+import duke.exception.InvalidCommandException;
 
 /**
  * Represents events (a type of tasks) that Duke can keep track of.
