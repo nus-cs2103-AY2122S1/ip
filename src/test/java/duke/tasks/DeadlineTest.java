@@ -1,9 +1,10 @@
 package duke.tasks;
 
-import duke.DukeException;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import duke.DukeException;
 
 public class DeadlineTest {
     @Test

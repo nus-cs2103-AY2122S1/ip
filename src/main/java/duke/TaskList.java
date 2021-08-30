@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Map;
+
 import duke.parser.Parser;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -7,8 +10,6 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 import duke.ui.TextUi;
 
-import java.util.ArrayList;
-import java.util.Map;
 
 public class TaskList {
     private ArrayList<Task> tasks = new ArrayList<>();
@@ -42,11 +43,13 @@ public class TaskList {
         try {
             Map<String, String> m = Parser.parseTextFromInput(text);
             switch (m.get("type")) {
-                case "T": tasks.add(new Todo(m.get("description")));
-                    break;
-                case "D": tasks.add(new Deadline(m.get("description"), m.get("time")));
-                    break;
-                case "E": tasks.add(new Event(m.get("description"), m.get("time")));
+            case "T": tasks.add(new Todo(m.get("description")));
+                break;
+            case "D": tasks.add(new Deadline(m.get("description"), m.get("time")));
+                break;
+            case "E": tasks.add(new Event(m.get("description"), m.get("time")));
+                break;
+            default:
             }
         } catch (DukeException e) {
             throw e;
@@ -71,7 +74,8 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Indicate which task that you want to delete.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The number is out of range. Indicate the correct task number that you want to delete.");
+            throw new DukeException("The number is out of range. "
+                    + "Indicate the correct task number that you want to delete.");
         }
     }
     /**
@@ -89,10 +93,16 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Indicate which task you want to mark as done.");
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("The number is out of range. Indicate the correct task number that you want to mark as done.");
+            throw new DukeException("The number is out of range. "
+                    + "Indicate the correct task number that you want to mark as done.");
         }
     }
 
+    /**
+     * Finds Task with a specific text.
+     * @param text Text to find in the task.
+     * @throws DukeException
+     */
     public void findTask(String text) throws DukeException {
         try {
             text = text.substring(5);
@@ -117,7 +127,6 @@ public class TaskList {
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException("Use the format --find xx--");
         }
-
     }
 
     /**
@@ -125,7 +134,9 @@ public class TaskList {
      */
     public void printList() {
         int len = tasks.size();
-        if (len == 0) { System.out.println("The list is empty!"); }
+        if (len == 0) {
+            System.out.println("The list is empty!");
+        }
         for (int i = 0; i < len; i++) {
             Task t = (Task) tasks.get(i);
             TextUi.showTaskNumbered(i, t);
