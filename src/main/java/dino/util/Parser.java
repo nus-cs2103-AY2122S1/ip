@@ -1,10 +1,5 @@
 package dino.util;
 
-import dino.command.AddTaskCommand;
-import dino.command.Command;
-import dino.command.FindCommand;
-import dino.command.ListCommand;
-import dino.command.MarkCommand;
 import dino.exception.*;
 
 /**
@@ -12,41 +7,21 @@ import dino.exception.*;
  */
 public class Parser {
 
+    public enum CMDTYPE {TODO, DEADLINE, EVENT, DONE, DELETE, LIST, FIND, BYE, INVALID};
+
     /**
-     * Interprets the user input command and parses into corresponding Commands
-     * which can then be understood and executed by the ChatBot
+     * Interprets the user input command and parses it into one of the messages in the
+     * enum class CMDTYPE
+     * If the command doesn't match any message, then it falls into "INVALID"
      *
      * @param input the input command entered by the user
-     * @return a specific command object which corresponds to the user input command
-     * @throws InvalidInputException if the user enters a command that doesn't fit the required pattern
-     * and thus cannot be understood
+     * @return one of the messages in the enum class CMDTYPE
      */
-    public static Command parse(String input) throws InvalidInputException {
-        Command.CMDTYPE type;
+    public static CMDTYPE parse(String input) {
         try {
-            type = Command.CMDTYPE.valueOf(getFirstWord(input).toUpperCase());
+            return CMDTYPE.valueOf(getFirstWord(input).toUpperCase());
         } catch (IllegalArgumentException e) {
-            throw new InvalidInputException();
-        }
-        switch (type) {
-        case TODO:
-        case EVENT:
-        case DEADLINE: {
-            return new AddTaskCommand(input, type);
-        }
-        case DONE:
-        case DELETE: {
-            return new MarkCommand(input, type);
-        }
-        case LIST: {
-            return new ListCommand();
-        }
-        case FIND: {
-            return new FindCommand(input);
-        }
-        default: {
-            throw new InvalidInputException();
-        }
+            return CMDTYPE.INVALID;
         }
     }
 

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +60,7 @@ public class Storage {
      */
     public List<Task> getDataFromStorage(File file)  {
         List<Task> taskList = new ArrayList<>();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy");
         try {
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
@@ -74,12 +76,12 @@ public class Storage {
                     break;
                 }
                 case "D": {
-                    LocalDate time = LocalDate.parse(taskDetails[3]);
+                    LocalDate time = LocalDate.parse(taskDetails[3], dtf);
                     task = new Deadline(description, time);
                     break;
                 }
                 case "E": {
-                    LocalDate time = LocalDate.parse(taskDetails[3]);
+                    LocalDate time = LocalDate.parse(taskDetails[3], dtf);
                     task = new Event(description, time);
                     break;
                 }
@@ -96,6 +98,7 @@ public class Storage {
         } catch (FileNotFoundException | DinoException | DateTimeParseException e) {
             System.out.println(e.getMessage());
         }
+        System.out.println("in load storage: " + taskList.size());
         return taskList;
     }
 
