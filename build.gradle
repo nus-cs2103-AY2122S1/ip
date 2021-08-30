@@ -25,6 +25,10 @@ application {
     mainClassName = javaMainClass
 }
 
+checkstyle {
+    toolVersion = '8.32'
+}
+
 test {
     useJUnitPlatform()
 }
