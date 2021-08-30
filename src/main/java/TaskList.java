@@ -36,4 +36,15 @@ public class TaskList {
     public int getSize() {
         return this.tasklist.size();
     }
+
+    public void printTaskList() {
+        if (this.tasklist.size() == 0) {
+            System.out.println("There are currently no tasks in your list.");
+        } else {
+            System.out.println("Here are the tasks in your list:");
+            for (int i = 0; i < this.tasklist.size(); i++) {
+                System.out.println((i + 1) + "." + this.tasklist.get(i).toString());
+            }
+        }
+    }
 }
