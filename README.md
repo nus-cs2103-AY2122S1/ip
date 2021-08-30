@@ -1,7 +1,7 @@
 ### Duke
 > *“You can do anything, but not everything.” – David Allen* [(source)](https://dansilvestre.com/productivity-quotes/)
 
-Duke allows you to throw away the worry of remembering things you will have to do, it's
+Duke frees you from worry of taking care of everything. You can ask Duke to help you remember things. It's
 * Text-based!
 * Easy to understand!
 * Super Fast to use! :grin:
