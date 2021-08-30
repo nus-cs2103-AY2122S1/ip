@@ -30,7 +30,7 @@ public abstract class Command {
      * @param ui the ui object responsible for user interaction
      * @param storage the storage object responsible for writing and reading txt file
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException;
 
     /**
      * The method that checks if the bot should be stopped.

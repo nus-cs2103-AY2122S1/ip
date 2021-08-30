@@ -22,7 +22,7 @@ public class AddTodoCommand extends Command {
      * @param storage the storage object responsible for writing and reading txt file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
         String content = input.split(" ", 2)[1];
         Todo todo = new Todo(content);
         tasks.addTask(todo);
@@ -31,7 +31,7 @@ public class AddTodoCommand extends Command {
         } catch (IOException e) {
             throw new JwBotException("Sorry bro, I think you made an error with the todo format!");
         }
-        ui.showAddTaskSuccessMessage(todo);
+        return ui.showAddTaskSuccessMessage(todo);
     }
 
     /**

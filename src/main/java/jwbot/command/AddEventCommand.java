@@ -20,14 +20,14 @@ public class AddEventCommand extends Command {
      * @param storage the storage object responsible for writing and reading txt file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
         try {
             String content = input.split(" ", 2)[1];
             String[] separated = content.split(" /at ");
             Event event = new Event(separated[0], separated[1]);
             tasks.addTask(event);
             storage.write(tasks);
-            ui.showAddTaskSuccessMessage(event);
+            return ui.showAddTaskSuccessMessage(event);
         } catch (Exception e) {
             throw new JwBotException("Sorry bro, I think you made an error with the event format!");
         }

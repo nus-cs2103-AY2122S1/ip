@@ -20,13 +20,13 @@ public class DeleteCommand extends Command {
      * @param storage the storage object responsible for writing and reading txt file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws JwBotException {
         try {
             String[] separated = input.split(" ");
             int index = Integer.parseInt(separated[1]);
             Task task = tasks.remove(index - 1);
             storage.write(tasks);
-            ui.showDeleteSuccessMessage(task, tasks.getSize());
+            return ui.showDeleteSuccessMessage(task, tasks.getSize());
         } catch (Exception e) {
             throw new JwBotException("Sorry bro, I think you chose an incorrect index number to delete!");
         }

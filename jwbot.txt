@@ -1,3 +1,5 @@
-[D][ ] study (by: 2020-12-24)
-[T][ ] hihi
-[D][ ] study (by: 2012-11-11)
+[T][X] hihi
+[D][X] study (by: 2012-11-11)
+[E][ ] party (at: 3pm)
+[T][ ] dsdsd
+[T][ ] sdsd

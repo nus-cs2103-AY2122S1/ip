@@ -1,7 +1,6 @@
 package jwbot.ui;
 
 import java.util.List;
-import java.util.Scanner;
 
 import jwbot.data.TaskList;
 import jwbot.data.task.Task;
@@ -13,48 +12,18 @@ import jwbot.data.task.Task;
  */
 public class Ui {
 
-    private Scanner sc;
-
-    private static final String GREETING = "Wassup bro! I'm jwbot.JWBot\n"
-            + "How can I help you?\n";
-
-    private static final String BYE_MESSAGE = "You leaving already? See you soon bro!";
-
-    /**
-     * The constructor of the ui class. Initializes a scanner.
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
-
-    /**
-     * Show welcome messages to the user.
-     */
-    public void showWelcome() {
-        System.out.println(GREETING);
-    }
-
     /**
      * Show bye messages to the user.
      */
-    public void showBye() {
-        System.out.println(BYE_MESSAGE);
-    }
-
-    /**
-     * Read the command entered by the user.
-     *
-     * @return the command entered by the user as string
-     */
-    public String readCommand() {
-        return sc.nextLine();
+    public String showBye() {
+        return "You leaving already? See you soon bro!";
     }
 
     /**
      * Shows the loading error message to the user.
      */
-    public void showLoadingError() {
-        System.out.println("Oops bro, there's an error with loading saved data");
+    public String showLoadingError() {
+        return "Oops bro, there's an error with loading saved data";
     }
 
     /**
@@ -63,10 +32,13 @@ public class Ui {
      * @param task a task that is deleted
      * @param listSize the total size of the list after the deletion
      */
-    public void showDeleteSuccessMessage(Task task, int listSize) {
-        System.out.println("OK Bro, I noted you've deleted this task:\n"
+    public String showDeleteSuccessMessage(Task task, int listSize) {
+        StringBuilder r = new StringBuilder();
+        r.append("OK Bro, I noted you've deleted this task:\n"
                 + task);
-        System.out.println("So bro, now you have " + listSize + " tasks stored in the list!");
+        r.append(System.getProperty("line.separator"));
+        r.append("So bro, now you have " + listSize + " tasks stored in the list!");
+        return r.toString();
     }
 
     /**
@@ -74,12 +46,17 @@ public class Ui {
      *
      * @param tasks The list of the tasks stored currently
      */
-    public void showList(TaskList tasks) {
-        System.out.println("OK bro, the tasks in your list are: ");
+    public String showList(TaskList tasks) {
+        StringBuilder r = new StringBuilder();
+
+        r.append("OK bro, the tasks in your list are: ");
+        r.append(System.getProperty("line.separator"));
         for (int i = 1; i < tasks.getSize() + 1; i++) {
-            System.out.println(i + ". " + tasks.getTask(i - 1));
+            r.append(i + ". " + tasks.getTask(i - 1));
+            r.append(System.getProperty("line.separator"));
         }
-        System.out.println("Bro, now you have " + tasks.getSize() + " task(s) stored in the list!");
+        r.append("Bro, now you have " + tasks.getSize() + " task(s)!");
+        return r.toString();
     }
 
     /**
@@ -87,16 +64,20 @@ public class Ui {
      *
      * @param searchList The list that is the result of user find command
      */
-    public void showSearchList(List<Task> searchList) {
-        System.out.println("OK bro, the matching tasks in your list are: ");
+    public String showSearchList(List<Task> searchList) {
+        StringBuilder r = new StringBuilder();
+        r.append("OK bro, the matching tasks in your list are: ");
+        r.append(System.getProperty("line.separator"));
         for (int i = 1; i < searchList.size() + 1; i++) {
-            System.out.println(i + ". " + searchList.get(i - 1));
+            r.append(i + ". " + searchList.get(i - 1));
+            r.append(System.getProperty("line.separator"));
         }
+        return r.toString();
     }
 
-    public void showDoneSuccessMessage(Task doneTask) {
-        System.out.println("OK Bro, I noted you've done this task:\n"
-                + doneTask);
+    public String showDoneSuccessMessage(Task doneTask) {
+        return "OK Bro, I noted you've done this task:\n"
+                + doneTask;
     }
 
     /**
@@ -104,8 +85,8 @@ public class Ui {
      *
      * @param task The list of the tasks stored currently
      */
-    public void showAddTaskSuccessMessage(Task task) {
-        System.out.println("OK bro, I just added: " + task);
+    public String showAddTaskSuccessMessage(Task task) {
+        return "OK bro, I just added: " + task;
     }
 
     /**
@@ -113,8 +94,8 @@ public class Ui {
      *
      * @param error The error message description
      */
-    public void showError(String error) {
-        System.out.println(error);
+    public String showError(String error) {
+        return error;
     }
 
 }

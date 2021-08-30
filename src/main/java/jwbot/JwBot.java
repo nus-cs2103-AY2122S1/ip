@@ -1,5 +1,7 @@
 package jwbot;
 
+
+import javafx.application.Platform;
 import jwbot.command.Command;
 import jwbot.data.TaskList;
 import jwbot.data.exception.JwBotException;
@@ -17,7 +19,6 @@ public class JwBot {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private static final String TXT_PATH = "jwbot.txt";
 
     /**
      * The constructor of JWBot.
@@ -35,26 +36,17 @@ public class JwBot {
         }
     }
 
-    /**
-     * Starts JWBot.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.readCommand();
-                Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (JwBotException e) {
-                ui.showError(e.getMessage());
-            }
+    public void exit() {
+            System.exit(0);
+    }
+
+    public String getResponse(String input) throws JwBotException {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (JwBotException e) {
+            return ui.showError(e.getMessage());
         }
     }
 
-
-    public static void main(String[] args) {
-        new JwBot(TXT_PATH).run();
-    }
 }
