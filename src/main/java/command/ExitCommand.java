@@ -16,6 +16,15 @@ public class ExitCommand extends Command {
         return true;
     }
 
+    /**
+     * A method to execute the ExitCommand. When the method is executed,
+     * Duke will store the current taskList to the hard disc and quit.
+     *
+     * @param taskList The given Duke TaskList.
+     * @param ui The given Duke Ui.
+     * @param storage The given Duke Storage.
+     * @throws DukeException Exception thrown when execute the ExitCommand.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         storage.saveTaskList(taskList.getTaskList());

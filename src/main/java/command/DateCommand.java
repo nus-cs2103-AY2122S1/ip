@@ -1,19 +1,19 @@
 package command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Locale;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
 import task.Task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Locale;
-
 public class DateCommand extends Command {
     /** The date to be queried. **/
-    public LocalDate date;
+    private final LocalDate date;
 
     /**
      * A public constructor to initialized the DateCommand.
@@ -32,13 +32,13 @@ public class DateCommand extends Command {
      * @param taskList The given Duke TaskList.
      * @param ui The given Duke Ui.
      * @param storage The given Duke Storage.
-     * @throws DukeException
+     * @throws DukeException Exception thrown when execute the DateCommand.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> dateResult = new ArrayList<>();
         for (int i = 0; i < taskList.amountOfTasks(); i++) {
-            if (taskList.getTask(i).onDate(date)) {
+            if (taskList.getTask(i).isOnDate(date)) {
                 dateResult.add(taskList.getTask(i));
             }
         }

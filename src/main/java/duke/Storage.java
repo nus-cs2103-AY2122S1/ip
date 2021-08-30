@@ -1,11 +1,5 @@
 package duke;
 
-import duke.exception.DukeException;
-import task.Deadline;
-import task.Event;
-import task.Task;
-import task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,9 +10,15 @@ import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 public class Storage {
     /** The filePath to load and save the tasks. **/
-    private String filePath;
+    private final String filePath;
 
     /**
      * A public constructor to initialized the Storage.
@@ -34,18 +34,16 @@ public class Storage {
      * in TaskList
      *
      * @return An ArrayList of Task, the list of tasks loaded from the file.
-     * @throws DukeException
+     * @throws DukeException Exception thrown when taskList cannot be loaded.
      */
-    public ArrayList<Task> loadTaskList() throws DukeException{
+    public ArrayList<Task> loadTaskList() throws DukeException {
         File f;
         Scanner sc;
         try {
             f = new File(filePath);
-            /** If folder data does not exist, mkdir. **/
             if (!f.getParentFile().exists()) {
                 f.getParentFile().mkdir();
             }
-            /** If file taskList.txt does not exist, create it. **/
             if (!f.exists()) {
                 f.createNewFile();
             }
@@ -102,7 +100,7 @@ public class Storage {
      * writing the information about the tasks to a given file.
      *
      * @param tasks An ArrayList of Task, the list of tasks to be saved.
-     * @throws DukeException
+     * @throws DukeException Exception thrown when taskList cannot be saved.
      */
     public void saveTaskList(ArrayList<Task> tasks) throws DukeException {
         try {
@@ -112,31 +110,31 @@ public class Storage {
 
             for (int i = 0; i < n; i++) {
                 Task currentTask = tasks.get(i);
-                if (currentTask.getTypeIcon() == "T") {
+                if (currentTask.getTypeIcon().equals("T")) {
                     fw.write(String.format("%d ", 1));
-                } else if (currentTask.getTypeIcon() == "D") {
+                } else if (currentTask.getTypeIcon().equals("D")) {
                     fw.write(String.format("%d ", 2));
                 } else {
                     fw.write(String.format("%d ", 3));
                 }
 
-                fw.write(currentTask.isDone ? "1\n" : "0\n");
+                fw.write(currentTask.isDone() ? "1\n" : "0\n");
 
-                fw.write(currentTask.description + "\n");
+                fw.write(currentTask.getDescription() + "\n");
 
                 if (currentTask instanceof Deadline) {
                     Deadline d = (Deadline) currentTask;
-                    fw.write(d.date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n");
-                    if (d.time != null) {
-                        fw.write(d.time.format(DateTimeFormatter.ofPattern("HHmm")) + "\n");
+                    fw.write(d.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n");
+                    if (d.getTime() != null) {
+                        fw.write(d.getTime().format(DateTimeFormatter.ofPattern("HHmm")) + "\n");
                     } else {
                         fw.write("null\n");
                     }
                 } else if (currentTask instanceof Event) {
                     Event e = (Event) currentTask;
-                    fw.write(e.date.format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n");
-                    if (e.time != null) {
-                        fw.write(e.time.format(DateTimeFormatter.ofPattern("HHmm")) + "\n");
+                    fw.write(e.getDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")) + "\n");
+                    if (e.getTime() != null) {
+                        fw.write(e.getTime().format(DateTimeFormatter.ofPattern("HHmm")) + "\n");
                     } else {
                         fw.write("null\n");
                     }

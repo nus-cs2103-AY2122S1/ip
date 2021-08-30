@@ -8,7 +8,7 @@ import task.Task;
 
 public class DoneCommand extends Command {
     /** The index of the task to be marked as done. **/
-    public int taskIndex;
+    private final int taskIndex;
 
     /**
      * A public constructor to initialized the given DoneCommand.
@@ -27,13 +27,13 @@ public class DoneCommand extends Command {
      * @param taskList The given Duke TaskList.
      * @param ui The given Duke Ui.
      * @param storage The given Duke Storage.
-     * @throws DukeException
+     * @throws DukeException Exception thrown when execute the DoneCommand.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task doneTask = taskList.markAsDone(this.taskIndex);
         ui.printMessage(new String[] {
-                "Nice! I've marked this task as done:",
-                doneTask.toString()});
+            "Nice! I've marked this task as done:",
+            doneTask.toString()});
     }
 }

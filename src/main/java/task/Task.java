@@ -4,15 +4,15 @@ import java.time.LocalDate;
 
 public abstract class Task {
     /** An Enum type of task. **/
-    public static enum TaskType {
+    public enum TaskType {
         TODO, DEADLINE, EVENT
     }
 
     /** A String that stores the description of the task. **/
-    public String description;
+    private final String description;
 
     /** A boolean that indicates whether the task is done. **/
-    public boolean isDone;
+    private boolean isDone;
 
     /**
      * A public constructor to initialize the task.
@@ -22,6 +22,24 @@ public abstract class Task {
     public Task (String description) {
         this.description = description;
         this.isDone = false;
+    }
+
+    /**
+     * A public method to get the description of the task.
+     *
+     * @return A String, the description of the task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * A public method to check whether the task is done.
+     *
+     * @return A boolean indicating whether the task is done.
+     */
+    public boolean isDone() {
+        return this.isDone;
     }
 
     /**
@@ -61,7 +79,7 @@ public abstract class Task {
      * @param date The given date to check.
      * @return A boolean value indicating whether the task happen on that day.
      */
-    public boolean onDate(LocalDate date) {
+    public boolean isOnDate(LocalDate date) {
         return false;
     }
 

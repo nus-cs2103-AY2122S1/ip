@@ -1,26 +1,25 @@
 package command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
-import duke.exception.DukeException;
-import task.Task;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import task.Task;
+
 public class AddCommand extends Command {
     /** The type of the task. **/
-    public Task.TaskType type;
+    private final Task.TaskType type;
 
     /** A String representing the task's description. **/
-    public String description;
+    private final String description;
 
     /** The date of the task. It can be null for some tasks. **/
-    public LocalDate date;
+    private final LocalDate date;
 
     /** The time of the task. It can be null for some tasks. **/
-    public LocalTime time;
+    private final LocalTime time;
 
     /**
      * A public constructor to initialize the AddCommand.
@@ -45,14 +44,13 @@ public class AddCommand extends Command {
      * @param taskList The given Duke TaskList.
      * @param ui The given Duke Ui.
      * @param storage The given Duke Storage.
-     * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask = taskList.add(this.type, this.description, this.date, this.time);
         ui.printMessage(new String[] {
-                "Got it. I've added this task:",
-                "  " + newTask.toString(),
-                "Now you have " + taskList.amountOfTasks() + " tasks in the list."});
+            "Got it. I've added this task:",
+            "  " + newTask.toString(),
+            "Now you have " + taskList.amountOfTasks() + " tasks in the list."});
     }
 }

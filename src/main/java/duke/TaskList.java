@@ -1,15 +1,17 @@
 package duke;
 
-import task.Task;
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
+import task.Task;
+
+
+
 public class TaskList {
     /** The data structure to store all the tasks. **/
-    public ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * A public constructor to initialized the TaskList by declaring a new empty ArrayList.
@@ -55,7 +57,7 @@ public class TaskList {
      *
      * @param taskIndex The index of the task to be deleted.
      * @return A Task object, the deleted task.
-     * @throws DukeException
+     * @throws DukeException Exception thrown when taskIndex is greater than total number of tasks.
      */
     public Task delete(int taskIndex) throws DukeException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
@@ -71,7 +73,7 @@ public class TaskList {
      *
      * @param taskIndex The index of the task.
      * @return A Task object, the task marked as done.
-     * @throws DukeException
+     * @throws DukeException Exception thrown when taskIndex is greater than total number of tasks.
      */
     public Task markAsDone(int taskIndex) throws DukeException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {
@@ -88,7 +90,7 @@ public class TaskList {
      */
     public String[] listAllTasks() {
         int n = tasks.size();
-        String taskList[] = new String[n + 1];
+        String[] taskList = new String[n + 1];
         taskList[0] = "Here are the tasks in your list:";
         for (int i = 1; i <= n; i++) {
             taskList[i] = String.format("  %d. %s", i, tasks.get(i - 1));
@@ -110,7 +112,7 @@ public class TaskList {
      *
      * @param taskIndex The index of the task.
      * @return A Task object, the target task.
-     * @throws DukeException
+     * @throws DukeException Exception thrown when taskIndex is greater than total number of tasks.
      */
     public Task getTask(int taskIndex) throws DukeException {
         if (taskIndex < 0 || taskIndex >= tasks.size()) {

@@ -3,7 +3,6 @@ package command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.exception.DukeException;
 
 public class ListCommand extends Command {
     /**
@@ -14,10 +13,9 @@ public class ListCommand extends Command {
      * @param taskList The given Duke TaskList.
      * @param ui The given Duke Ui.
      * @param storage The given Duke Storage.
-     * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.printMessage(taskList.listAllTasks());
     }
 }

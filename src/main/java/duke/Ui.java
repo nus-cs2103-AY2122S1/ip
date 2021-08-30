@@ -1,12 +1,12 @@
 package duke;
 
-import duke.exception.DukeException;
-
 import java.util.Scanner;
+
+import duke.exception.DukeException;
 
 public class Ui {
     /** A Scanner object to read user command. **/
-    Scanner sc;
+    private final Scanner sc;
 
     /**
      * A public constructor to initialized the Ui.
@@ -31,7 +31,7 @@ public class Ui {
      * A public method to output the greeting message.
      */
     public void greet() {
-        String greetMessage[] = new String[2];
+        String[] greetMessage = new String[2];
         greetMessage[0] = "Hello! I'm duke.Duke";
         greetMessage[1] = "What can I do for you?";
         printMessage(greetMessage);
@@ -41,17 +41,16 @@ public class Ui {
      * A public method to print message with certain indentation and format.
      * Receive an array of String, and output one String per line.
      *
-     * @param messages
+     * @param messages The given messages to be print, one message per row.
      */
-    public void printMessage(String messages[]) {
+    public void printMessage(String[] messages) {
         System.out.println("    ____________________________________________________________");
         int n = messages.length;
         for (int i = 0; i < n; i++) {
             System.out.print("     ");
             System.out.println(messages[i]);
         }
-        System.out.println("    ____________________________________________________________");
-        System.out.println("");
+        System.out.println("    ____________________________________________________________\n");
     }
 
     /**

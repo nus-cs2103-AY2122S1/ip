@@ -5,13 +5,13 @@ import duke.exception.DukeException;
 
 public class Duke {
     /** Duke's Storage. Deals with loading tasks from the file and saving tasks in the file. **/
-    private Storage storage;
+    private final Storage storage;
 
     /** Duke's TaskList. Containing the data structure for storing tasks. **/
     private TaskList taskList;
 
     /** Duke's user interface. Deals with interactions with the user. **/
-    private Ui ui;
+    private final Ui ui;
 
     /**
      * A public constructor to initialized Duke.
@@ -42,13 +42,13 @@ public class Duke {
                 Command c = Parser.parse(fullCommand);
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
-            } catch  (DukeException e) {
+            } catch (DukeException e) {
                 ui.showDukeException(e);
             }
         }
     }
 
-    public static void main(String[] Args){
+    public static void main(String[] args) {
         new Duke("data/taskList.txt").run();
     }
 }

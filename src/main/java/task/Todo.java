@@ -1,7 +1,5 @@
 package task;
 
-import task.Task;
-
 public class Todo extends Task {
 
     /**
@@ -30,6 +28,6 @@ public class Todo extends Task {
     @Override
     public String toString() {
         return String.format("[%s][%s] %s",
-                this.getTypeIcon(), this.getStatusIcon(), this.description);
+                this.getTypeIcon(), this.getStatusIcon(), this.getDescription());
     }
 }
