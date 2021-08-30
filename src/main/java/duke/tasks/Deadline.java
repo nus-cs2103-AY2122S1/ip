@@ -3,11 +3,14 @@ package duke.tasks;
 /**
  * Reflects a particular Deadline Task
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     /** Indicates the date the task is due */
     protected String by;
 
+    /**
+     * Constructor to create a deadline task containing a description, and due date of the task
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = by;

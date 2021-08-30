@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * Deals with invalid inputs.
  */
-public class UnknownCommand extends Command{
+public class UnknownCommand extends Command {
 
     public UnknownCommand() {
 

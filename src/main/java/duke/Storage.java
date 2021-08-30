@@ -1,10 +1,5 @@
 package duke;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -17,17 +12,23 @@ import java.util.List;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidDirectoryException;
 import duke.exceptions.InvalidStorageFilePathException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 /**
  * Represents the class used to store the tasklist data.
  */
 public class Storage {
 
+    /** Contains the filepath for the project's directory */
+    private static final String PROJECT_DIRECTORY = System.getProperty("user.dir") + "/src/main/java/duke";
+
     /** User specified filePath destination */
     private final String givenFilePath;
 
-    /** Contains the filepath for the project's directory */
-    private static final String PROJECT_DIRECTORY = System.getProperty("user.dir") + "/src/main/java/duke";
+    /** Stores relative path of the file */
     private Path p;
 
     /**
@@ -174,7 +175,6 @@ public class Storage {
         case "D":
             Deadline d = new Deadline(words.get(2), words.get(3));
 
-            /** add only if date is specified   */
             if (words.size() == 4) {
                 if (words.get(1).equals("X")) {
                     d = d.markAsDone();
@@ -185,7 +185,6 @@ public class Storage {
         case "E":
             Event e = new Event(words.get(2), words.get(3));
 
-            /** add only if date is specified   */
             if (words.size() == 4) {
                 if (words.get(1).equals("X")) {
                     e = e.markAsDone();

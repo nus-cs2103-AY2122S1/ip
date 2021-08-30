@@ -1,8 +1,7 @@
 package duke.commands;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class DeleteCommandTest {
 
@@ -10,12 +9,12 @@ public class DeleteCommandTest {
     public void testDelete() {
         int index = 5;
         DeleteCommand del = new DeleteCommand(index);
-        assertEquals(del.getDeletionIndex(), 5);
+        Assert.assertEquals(del.getDeletionIndex(), 5);
     }
 
     @Test
     public void testExit() {
         DeleteCommand del = new DeleteCommand(5);
-        assertFalse(del.isExit());
+        Assert.assertFalse(del.isExit());
     }
 }

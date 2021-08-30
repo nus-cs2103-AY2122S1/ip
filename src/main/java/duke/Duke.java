@@ -1,7 +1,6 @@
 package duke;
 
 import duke.commands.Command;
-
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidDirectoryException;
 import duke.exceptions.InvalidStorageFilePathException;
@@ -27,7 +26,7 @@ public class Duke {
      *
      * @param filePath user specified file path to store/load saved data
      */
-    Duke(String filePath)  {
+    Duke(String filePath) {
         this.ui = new Ui();
         try {
             storage = new Storage(filePath);
@@ -40,7 +39,7 @@ public class Duke {
         }
     }
 
-    /** Runs the program until termination condition is met upon parsing of Command.   */
+    /** Runs the program until termination condition is met upon parsing of Command. */
     public void run() {
         this.ui.showWelcomeMessage();
         boolean isExit = false;
@@ -64,5 +63,4 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("data/tasklist.txt").run();
     }
-
 }

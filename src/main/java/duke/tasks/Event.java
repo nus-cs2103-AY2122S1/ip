@@ -3,11 +3,14 @@ package duke.tasks;
 /**
  * Reflects a particular Event task
  */
-public class Event extends Task{
+public class Event extends Task {
 
     /** Indicates the date that the event is held  */
     protected String at;
 
+    /**
+     * Constructor to create an event task containing a description, and the location/date of the task
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;

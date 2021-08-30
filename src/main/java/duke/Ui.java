@@ -1,9 +1,9 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.tasks.Task;
 
 /**
  * Class which deals with the UI
@@ -101,7 +101,8 @@ public class Ui {
     }
 
     /**
-     * Helper method used by printList(TaskList lst) and printFoundTasks(ArrayList<Task> listOfTasks, String keyWord)
+     * Helper method used by {@link #printList(TaskList) printList} &
+     * {@link #printFoundTasks(ArrayList, String) printFoundTasks}
      * Processes the list and concatenates the toString() values of tasks into a readable format
      *
      * @param listOfTasks The list to be processed (filtered by prior conditions in other functions)

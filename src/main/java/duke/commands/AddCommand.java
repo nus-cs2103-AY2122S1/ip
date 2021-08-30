@@ -1,27 +1,27 @@
 package duke.commands;
 
+import java.time.format.DateTimeParseException;
+
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
+import duke.exceptions.InvalidInputException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-import duke.exceptions.DukeException;
-import duke.exceptions.InvalidInputException;
-
-import java.time.format.DateTimeParseException;
-
 /**
  * Adds a task to the task list
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private final String taskType;
     private final String taskDescription;
 
+    /**
+     * Constructor to create an AddCommand
+     */
     public AddCommand(String taskType, String taskDescription) {
         this.taskType = taskType;
         this.taskDescription = taskDescription;
@@ -62,7 +62,7 @@ public class AddCommand extends Command{
                     t = new Event(info[0], info[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new InvalidInputException("   INVALID INPUT: Please specify the date for the event");
-                }  catch (DateTimeParseException e) {
+                } catch (DateTimeParseException e) {
                     throw new InvalidInputException("   INVALID INPUT: Please specify date in "
                             + "'YYYY-MM-DD TIME' format");
                 }

@@ -12,6 +12,9 @@ public class Task {
     /** Indicates the task's state of completion */
     protected boolean isDone;
 
+    /**
+     * Constructor to create a task object
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

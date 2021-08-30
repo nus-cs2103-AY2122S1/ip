@@ -1,13 +1,13 @@
 package duke.commands;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class ExitCommandTest {
 
     @Test
     public void testExit() {
         ExitCommand exit = new ExitCommand();
-        assertTrue(exit.isExit());
+        Assert.assertTrue(exit.isExit());
     }
 }

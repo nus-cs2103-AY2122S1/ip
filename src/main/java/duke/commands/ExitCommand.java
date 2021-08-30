@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * Tells Duke to stop reading inputs.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     public ExitCommand() {
     }

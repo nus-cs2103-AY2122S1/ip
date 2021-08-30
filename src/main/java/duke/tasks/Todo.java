@@ -3,7 +3,7 @@ package duke.tasks;
 /**
  * Reflects a particular task on a Todo list
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     public Todo(String description) {
         super(description);

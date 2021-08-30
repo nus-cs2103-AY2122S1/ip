@@ -1,12 +1,12 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Container class for the lists of tasks
@@ -53,7 +53,7 @@ public class TaskList {
         String deletedTask = listOfTasks.get(deleteIndex - 1).toString();
         if (this.listOfTasks.size() == 1) {
             this.listOfTasks.clear();
-        } else if (deleteIndex == 1){
+        } else if (deleteIndex == 1) {
             this.listOfTasks = new ArrayList<>(listOfTasks.subList(1, listOfTasks.size()));
         } else if (deleteIndex == listOfTasks.size()) {
             this.listOfTasks = new ArrayList<>(listOfTasks.subList(0, listOfTasks.size() - 1));
@@ -89,6 +89,13 @@ public class TaskList {
         return taskInfo;
     }
 
+    /**
+     * Finds a lists of tasks which contains the given keyword within the task (if any).
+     * Else, an empty list would be returned
+     *
+     * @param keyWord input string in question
+     * @return a lists of tasks of size >= 0
+     */
     public ArrayList<Task> findMatching(String keyWord) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (Task t: listOfTasks) {
