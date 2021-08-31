@@ -4,8 +4,8 @@ package duke;
  * Parent task class that represents a generic task
  */
 public class Task {
-    protected boolean isDone;
-    protected String description;
+    private boolean isDone;
+    private String description;
 
     public Task() {
         this.description = null;

@@ -12,8 +12,8 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    String filePath;
-    File file;
+    private String filePath;
+    private File file;
 
     /**
      * Constructor for the Storage object

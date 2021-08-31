@@ -4,7 +4,8 @@ package duke;
  * Represents a deadline task
  */
 public class Deadlines extends Task {
-    protected String time;
+    private String description;
+    private String time;
 
     /**
      * Constructor for the deadline task
@@ -14,6 +15,7 @@ public class Deadlines extends Task {
      */
     public Deadlines(String description, String time) {
         super(description);
+        this.description = description;
         this.time = time;
     }
 

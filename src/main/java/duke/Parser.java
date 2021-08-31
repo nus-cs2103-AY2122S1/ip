@@ -8,9 +8,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
-    TaskList tasks;
-    String userInput;
-    int index;
+    private TaskList tasks;
+    private String userInput;
+    private int index;
 
     /**
      * Constructor for the Parser object
@@ -64,8 +64,8 @@ public class Parser {
         } else {
             tasks.get(i-1).markAsDone();
             String message = "    ----------------------------\n"
-                    +"Nice! I have marked this task as done:\n"
-                    +"[X] " + tasks.get(i-1).getDescription() + "\n" + "    ----------------------------";
+                    + "Nice! I have marked this task as done:\n"
+                    + "[X] " + tasks.get(i-1).getDescription() + "\n" + "    ----------------------------";
             System.out.println(message);
         }
     }
@@ -79,11 +79,11 @@ public class Parser {
             Task A = new ToDo(userInput.substring(5));
             tasks.addTask(A);
             Duke.index++;
-            String message = "    ----------------------------\n"+
-                    "Got it, I've added this task: \n"
+            String message = "    ----------------------------\n"
+                    + "Got it, I've added this task: \n"
                     + A.toString() + "\n"
                     + "Now you have " + Duke.index + " tasks in the list\n"
-                    +"    ----------------------------";
+                    + "    ----------------------------";
             System.out.println(message);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Oops! The description of a todo cannot be empty!");
@@ -98,7 +98,6 @@ public class Parser {
         try {
             int i = userInput.indexOf("/");
             String description = userInput.substring(6,i-1);
-            //String time = userInput.substring(i+1);
             String[] split = userInput.split("at");
             String date = split[1].substring(1);
             LocalDate d = LocalDate.parse(date);
@@ -107,10 +106,10 @@ public class Parser {
             tasks.addTask(A);
             Duke.index++;
             String message = "    ----------------------------\n"
-                    +"Got it, I've added this task: \n"
+                    + "Got it, I've added this task: \n"
                     + A.toString() + "\n"
                     + "Now you have " + Duke.index + " tasks in the list\n"
-                    +"    ----------------------------";
+                    + "    ----------------------------";
             System.out.println(message);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Oops! The description of an event cannot be empty and must contain a time!");

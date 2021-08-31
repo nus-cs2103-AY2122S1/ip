@@ -10,8 +10,12 @@ public class ToDo extends Task {
      *
      * @param description
      */
+
+    private String description;
+
     public ToDo(String description) {
         super(description);
+        this.description = description;
     }
 
     /**

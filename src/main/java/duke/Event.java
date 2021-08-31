@@ -4,7 +4,8 @@ package duke;
  * Represents an event task
  */
 public class Event extends Task {
-    public String time;
+    private String description;
+    private String time;
 
     /**
      * Constructor for the event task
@@ -14,6 +15,7 @@ public class Event extends Task {
      */
     public Event(String description, String time) {
         super(description);
+        this.description = description;
         this.time = time;
     }
 
