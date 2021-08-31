@@ -20,7 +20,7 @@ import kayu.task.Task;
  */
 public class DeadlineCommand extends AddTaskCommand {
 
-    /** Key word for command. */
+    /** Keyword for command. */
     public static final String COMMAND_WORD = "deadline";
 
     /**

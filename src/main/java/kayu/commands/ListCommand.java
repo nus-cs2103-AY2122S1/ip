@@ -18,7 +18,7 @@ import kayu.task.Task;
  */
 public class ListCommand extends Command {
     
-    /** Key word for command. */
+    /** Keyword for command. */
     public static final String COMMAND_WORD = "list";
 
     /**

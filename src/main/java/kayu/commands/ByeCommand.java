@@ -12,7 +12,7 @@ import kayu.storage.Storage;
  */
 public class ByeCommand extends Command {
 
-    /** Key word for command. */
+    /** Keyword for command. */
     public static final String COMMAND_WORD = "bye";
 
     /**

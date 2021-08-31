@@ -19,7 +19,7 @@ import kayu.task.Task;
  */
 public class FindCommand extends Command {
 
-    /** Key word for command. */
+    /** Keyword for command. */
     public static final String COMMAND_WORD = "find";
 
     /**

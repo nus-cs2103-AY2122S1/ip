@@ -17,7 +17,7 @@ import kayu.task.Todo;
  */
 public class TodoCommand extends AddTaskCommand {
 
-    /** Key word for command. */
+    /** Keyword for command. */
     public static final String COMMAND_WORD = "todo";
 
     /**
