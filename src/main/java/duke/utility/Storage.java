@@ -1,10 +1,5 @@
 package duke.utility;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,13 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 /**
  * <h2>Storage</h2>
  * A class that helps read previous task logs from local memory and write to that task log based on user input.
  */
 
 public class Storage {
-    
+
     private final String filePath;
 
     /**
@@ -34,7 +34,7 @@ public class Storage {
         this.filePath = filePath;
         // try to load the file, if not, create it
         File previousLog = new File(this.filePath);
-        if (! previousLog.createNewFile()) { // file already exists
+        if (!previousLog.createNewFile()) { // file already exists
             System.out.println("Successfully established connection with file " + filePath
                     + "\nPrevious duke.task log imported."
                     + "\nAll changes to task log will be saved there.");
@@ -43,7 +43,7 @@ public class Storage {
                     + "\nTask log will be saved there.");
         }
     }
-    
+
     /**
      * Parses the locally saved task log from the file path provided and generates a list of tasks to import.
      * @return a list of tasks generated from parsing the locally saved task log.
@@ -67,7 +67,7 @@ public class Storage {
                 prevTasks.add(Event.createTask(taskName, isCompleted, LocalDateTime.parse(tokens[3].trim(),
                         DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
                 break;
-            case "D":
+            default: // "D"
                 prevTasks.add(Deadline.createTask(taskName, isCompleted, LocalDateTime.parse(tokens[3].trim(),
                         DateTimeFormatter.ISO_LOCAL_DATE_TIME)));
                 break;
@@ -85,7 +85,7 @@ public class Storage {
         fw.write(type + ";" + isCompleted + ";" + detail + "\n");
         fw.close();
     }
-    
+
     void changeTaskLogToCompleted(int lineNum) throws IOException {
         int currentLine = 0;
         Scanner sc = new Scanner(new File(this.filePath));
@@ -121,6 +121,6 @@ public class Storage {
         FileWriter fw = new FileWriter(this.filePath, false); // append false -> overwrite file
         fw.write(sb.toString());
         fw.close();
-        sc.close();   
+        sc.close();
     }
 }

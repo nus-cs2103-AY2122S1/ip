@@ -26,7 +26,7 @@ public abstract class DukeException extends Exception {
     }
 
     /**
-     * An exception that is thrown if the user tries to add a task with the same name as a task already in the list 
+     * An exception that is thrown if the user tries to add a task with the same name as a task already in the list
      * of tasks.
      */
     public static class DuplicateTaskException extends DukeException {
@@ -36,7 +36,7 @@ public abstract class DukeException extends Exception {
     }
 
     /**
-     * An exception that is thrown if the user specifies an invalid task number to delete, e.g. if the task number 
+     * An exception that is thrown if the user specifies an invalid task number to delete, e.g. if the task number
      * specified is {@literal <} 0 or {@literal >} the number of tasks.
      */
     public static class InvalidTaskNumException extends DukeException {
@@ -64,7 +64,7 @@ public abstract class DukeException extends Exception {
     }
 
     /**
-     * An exception that is thrown when the user tries to print or access the list of tasks when there are no tasks 
+     * An exception that is thrown when the user tries to print or access the list of tasks when there are no tasks
      * in the list.
      */
     public static class EmptyTaskListException extends DukeException {

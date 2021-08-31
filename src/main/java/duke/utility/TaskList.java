@@ -1,11 +1,11 @@
 package duke.utility;
 
-import duke.exception.DukeException;
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * <h2>TaskList</h2>
@@ -15,14 +15,22 @@ import java.util.List;
 
 public class TaskList {
 
-    private final List<Task> tasks;
     protected final HashSet<String> existingTasks;
-    
+    private final List<Task> tasks;
+
+    /**
+     * Creates a new tasklist object with a capacity of 100 and a hashset to track tasks that are already in the list
+     */
     public TaskList() {
         this.tasks = new ArrayList<Task>(100);
         this.existingTasks = new HashSet<String>();
     }
-    
+
+    /**
+     * Adds tasks from a provided list of tasks to this tasklist. Used in conjunction with
+     * {@link duke.utility.Storage} for loading from previously saved task logs
+     * @param previousTasks a list of tasks to add to this tasklist
+     */
     public TaskList(List<Task> previousTasks) {
         this.tasks = new ArrayList<Task>(100);
         this.existingTasks = new HashSet<String>();
@@ -31,7 +39,7 @@ public class TaskList {
             this.existingTasks.add(previousTask.getTaskName());
         }
     }
-    
+
     protected String add(Task task) {
         this.tasks.add(task);
         this.existingTasks.add(task.getTaskName());
@@ -49,7 +57,7 @@ public class TaskList {
         this.tasks.add(taskIdx, completedTask.markAsCompleted());
         return "Task marked as completed:\n" + this.tasks.get(taskIdx).toString();
     }
-    
+
     protected String deleteTask(int taskNum) throws DukeException.InvalidTaskNumException {
         if (taskNum > this.tasks.size() || taskNum < 1) {
             throw new DukeException.InvalidTaskNumException("Task number " + taskNum + " does not exist!");
@@ -94,8 +102,8 @@ public class TaskList {
         }
         throw new DukeException.NoSuchTaskException("Task is not in list!");
     }
-    
-    protected String search(String keywords) throws DukeException.InvalidTaskDescriptionException, 
+
+    protected String search(String keywords) throws DukeException.InvalidTaskDescriptionException,
             DukeException.NoSuchTaskException {
         if (keywords.equals("")) {
             throw new DukeException.InvalidTaskDescriptionException("Please enter some keywords to search for!");
@@ -113,10 +121,10 @@ public class TaskList {
                 }
             }
             if (sb.length() == 0) {
-                throw new DukeException.NoSuchTaskException(String.format("No tasks found containing the keyword(s) " 
+                throw new DukeException.NoSuchTaskException(String.format("No tasks found containing the keyword(s) "
                         + "\"%s\"", keywords));
             } else {
-                return String.format("Tasks found with names containing \"%s\" as a substring:\n", keywords) + sb; 
+                return String.format("Tasks found with names containing \"%s\" as a substring:\n", keywords) + sb;
             }
         }
     }

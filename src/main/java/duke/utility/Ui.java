@@ -3,9 +3,8 @@ package duke.utility;
 import java.util.Scanner;
 
 public class Ui {
-    
+
     public Ui() {
-        
     }
 
     /**

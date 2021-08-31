@@ -2,12 +2,12 @@ package duke.task;
 
 public abstract class Task {
 
+    protected static final String DATE_TIME_FORMAT = "E, dd MMM yyyy, HH:mm";
     private final String taskName;
     private final boolean isCompleted;
-    protected static String dateTimeFormat = "E, dd MMM yyyy, HH:mm"; 
 
     /**
-     * Creates a new basic <code>Task</code> object, which has a name and a completion status. 
+     * Creates a new basic <code>Task</code> object, which has a name and a completion status.
      * @param taskName the name of the task.
      * @see ToDo
      */
@@ -23,7 +23,7 @@ public abstract class Task {
 
     /**
      * Changes status of a task to 'completed'.
-     * @return a new {@link duke.task.Task} exactly the same as <code>this</code> but with the 
+     * @return a new {@link duke.task.Task} exactly the same as <code>this</code> but with the
      * <code>isCompleted</code> set to true.
      * @see Event
      * @see ToDo
@@ -49,6 +49,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "[" + (isCompleted ? "X": " ") + "] " + this.taskName;
+        return "[" + (isCompleted ? "X" : " ") + "] " + this.taskName;
     }
 }
