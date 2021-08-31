@@ -50,32 +50,32 @@ public class Duke {
 
     public String getResponse(String[] args) {
         switch (args[0]) {
-            case "list":
-                return ui.showListMessage(tasks);
-            case "done":
-                int index = Integer.parseInt(args[1]) - 1;
-                this.tasks.markDone(index);
-                return ui.showDoneMessage(tasks, index);
-            case "delete":
-                int idx = Integer.parseInt(args[1]) - 1;
-                String description = tasks.get(idx).toString();
-                this.tasks.delete(idx);
-                return ui.showDeleteMessage(tasks, description);
-            case "find":
-                ArrayList<Integer> matches = this.tasks.findTask(args[1]);
-                return ui.showFindMessage(tasks, matches);
-            case "todo":
-                tasks.add(new ToDo(args[1]));
-                return ui.addTaskMessage(tasks);
-            case "event":
-                tasks.add(new Event(args[1], args[2]));
-                return ui.addTaskMessage(tasks);
-            case "deadline":
-                LocalDate date = LocalDate.parse(args[2]);
-                tasks.add(new Deadline(args[1], date, args[3]));
-                return ui.addTaskMessage(tasks);
-            default:
-                return "Jo does not recognise non-frog speak!";
+        case "list":
+            return ui.showListMessage(tasks);
+        case "done":
+            int index = Integer.parseInt(args[1]) - 1;
+            this.tasks.markDone(index);
+            return ui.showDoneMessage(tasks, index);
+        case "delete":
+            int idx = Integer.parseInt(args[1]) - 1;
+            String description = tasks.get(idx).toString();
+            this.tasks.delete(idx);
+            return ui.showDeleteMessage(tasks, description);
+        case "find":
+            ArrayList<Integer> matches = this.tasks.findTask(args[1]);
+            return ui.showFindMessage(tasks, matches);
+        case "todo":
+            tasks.add(new ToDo(args[1]));
+            return ui.addTaskMessage(tasks);
+        case "event":
+            tasks.add(new Event(args[1], args[2]));
+            return ui.addTaskMessage(tasks);
+        case "deadline":
+            LocalDate date = LocalDate.parse(args[2]);
+            tasks.add(new Deadline(args[1], date, args[3]));
+            return ui.addTaskMessage(tasks);
+        default:
+            return "Jo does not recognise non-frog speak!";
         }
     }
 
