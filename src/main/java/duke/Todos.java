@@ -23,10 +23,10 @@ public class Todos extends Task {
      */
     @Override
     public String toString() {
-        if (isDone) {
-            return ("[T] [X] " + name);
+        if (super.isDone()) {
+            return ("[T] [X] " + super.getName());
         } else {
-            return ("[T] [ ] " + name);
+            return ("[T] [ ] " + super.getName());
         }
     }
 
@@ -38,11 +38,11 @@ public class Todos extends Task {
      */
     public String toDataString() {
         StringBuilder string = new StringBuilder();
-        if (isDone) {
-            string.append("T|1|").append(super.name);
+        if (super.isDone()) {
+            string.append("T|1|").append(super.getName());
             return string.toString();
         } else {
-            string.append("T|0|").append(super.name);
+            string.append("T|0|").append(super.getName());
             return string.toString();
         }
     }

@@ -25,7 +25,7 @@ public class Duke {
         Ui.printWelcomeMessage();
 
         //start reading user input
-        while(true) {
+        while (true) {
             String input = scan.nextLine();
             //split input into strings by whitespaces
             String[] inputArray = input.split("\\s");

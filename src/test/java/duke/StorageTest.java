@@ -6,7 +6,7 @@ public class StorageTest {
     @Test
     public void testStorage() {
         TaskList taskList = new TaskList();
-        Storage storage = new Storage("data/test.txt","data", taskList);
+        Storage storage = new Storage("data/test.txt", "data", taskList);
         storage.start();
         Duke duke = new Duke();
 

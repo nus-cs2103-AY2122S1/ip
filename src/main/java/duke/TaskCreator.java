@@ -28,81 +28,81 @@ public class TaskCreator {
         StringBuilder str = new StringBuilder();
         Task tempTask = null;
         switch (taskType) {
-            case TODO: {
-                //reconstruct the string
-                for (int i = 1; i < array.length; i++) {
-                    str.append(array[i]).append(" ");
-                }
-
-                tempTask = new Todos(str.toString());
-                break;
+        case TODO: {
+            //reconstruct the string
+            for (int i = 1; i < array.length; i++) {
+                str.append(array[i]).append(" ");
             }
 
-            case DEADLINE:
-                String time = "";
-                boolean hasEnded = false;
-                //reconstruct the string
-                for (int i = 1; i < array.length; i++) {
-                    //repeatedly append strings in the array until the time is found
-                    String currentArrayElement = array[i];
-                    if (hasEnded) {
-                        time = currentArrayElement;
-                        break;
-                    }
-                    if (currentArrayElement.equals("/by")) {
-                        hasEnded = true;
-                        continue;
-                    }
-                    str.append(currentArrayElement).append(" ");
-                }
-                //check if a time was entered
-                if (!hasEnded) {
-                    Ui.printBadDateFormatError();
-                    return;
-                }
+            tempTask = new Todos(str.toString());
+            break;
+        }
 
-                //check if a valid time was entered
-                try {
-                    LocalDate date = Parser.parseDate(time);
-                    tempTask = new Deadlines(str.toString(), date);
-                } catch (IllegalArgumentException exception) {
-                    Ui.printBadDateFormatError();
-                    return;
+        case DEADLINE:
+            String time = "";
+            boolean hasEnded = false;
+            //reconstruct the string
+            for (int i = 1; i < array.length; i++) {
+                //repeatedly append strings in the array until the time is found
+                String currentArrayElement = array[i];
+                if (hasEnded) {
+                    time = currentArrayElement;
+                    break;
                 }
-                break;
+                if (currentArrayElement.equals("/by")) {
+                    hasEnded = true;
+                    continue;
+                }
+                str.append(currentArrayElement).append(" ");
+            }
+            //check if a time was entered
+            if (!hasEnded) {
+                Ui.printBadDateFormatError();
+                return;
+            }
 
+            //check if a valid time was entered
+            try {
+                LocalDate date = Parser.parseDate(time);
+                tempTask = new Deadlines(str.toString(), date);
+            } catch (IllegalArgumentException exception) {
+                Ui.printBadDateFormatError();
+                return;
+            }
+            break;
 
-            case EVENT:
-                String eventTime = "";
-                boolean hasTerminated = false;
-                for (int i = 1; i < array.length; i++) {
-                    //repeatedly append strings in the array until the eventTime is found
-                    String currentArrayElement = array[i];
-                    if (hasTerminated) {
-                        eventTime = currentArrayElement;
-                        break;
-                    }
-                    if (currentArrayElement.equals("/at")) {
-                        hasTerminated = true;
-                        continue;
-                    }
-                    str.append(currentArrayElement).append(" ");
+        //last case is EVENT
+        default:
+            String eventTime = "";
+            boolean hasTerminated = false;
+            for (int i = 1; i < array.length; i++) {
+                //repeatedly append strings in the array until the eventTime is found
+                String currentArrayElement = array[i];
+                if (hasTerminated) {
+                    eventTime = currentArrayElement;
+                    break;
                 }
-                //check if a duration was entered
-                if (!hasTerminated) {
-                    Ui.printBadDateFormatError();
-                    return;
+                if (currentArrayElement.equals("/at")) {
+                    hasTerminated = true;
+                    continue;
                 }
+                str.append(currentArrayElement).append(" ");
+            }
+            //check if a duration was entered
+            if (!hasTerminated) {
+                Ui.printBadDateFormatError();
+                return;
+            }
 
-                //check if a valid time was entered
-                try {
-                    LocalDate date = Parser.parseDate(eventTime);
-                    tempTask = new Events(str.toString(), date);
-                } catch (IllegalArgumentException exception) {
-                    Ui.printBadDateFormatError();
-                    return;
-                }
-                break;
+            //check if a valid time was entered
+            try {
+                LocalDate date = Parser.parseDate(eventTime);
+                tempTask = new Events(str.toString(), date);
+            } catch (IllegalArgumentException exception) {
+                Ui.printBadDateFormatError();
+                return;
+            }
+            break;
         }
         taskList.addTask(tempTask);
 

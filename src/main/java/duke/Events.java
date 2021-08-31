@@ -17,9 +17,9 @@ public class Events extends Task {
      * Constructor for a Event instance.
      *
      * @param name A String describing the Task.
-     * @oaram time A LocalDate instance describing the duration of the Task.
+     * @param time A LocalDate instance describing the duration of the Task.
      */
-    public Events(String name,LocalDate time) {
+    public Events(String name, LocalDate time) {
         super(name);
         this.time = time;
     }
@@ -32,10 +32,10 @@ public class Events extends Task {
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-        if (isDone) {
-            return ("[E] [X] " + name  + " (at: " + time.format(formatter).toString() + ")");
+        if (super.isDone()) {
+            return ("[E] [X] " + super.getName() + " (at: " + time.format(formatter) + ")");
         } else {
-            return ("[E] [ ] " + name  + " (at: " + time.format(formatter).toString() + ")");
+            return ("[E] [ ] " + super.getName() + " (at: " + time.format(formatter) + ")");
         }
     }
 
@@ -47,11 +47,11 @@ public class Events extends Task {
      */
     public String toDataString() {
         StringBuilder string = new StringBuilder();
-        if (isDone) {
-            string.append("E|1|").append(super.name).append("|").append(time);
+        if (super.isDone()) {
+            string.append("E|1|").append(super.getName()).append("|").append(time);
             return string.toString();
         } else {
-            string.append("E|0|").append(super.name).append("|").append(time);
+            string.append("E|0|").append(super.getName()).append("|").append(time);
             return string.toString();
         }
     }

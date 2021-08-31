@@ -10,16 +10,39 @@ public abstract class Task {
     /**
      * The variants of the Tasks handled by Duke
      */
-    enum Tasks {DEADLINE, EVENT, TODO}
+    enum Tasks { DEADLINE, EVENT, TODO }
 
     //A description of the task
-    String name;
+    private String name;
     //A boolean signifying if the task has been completed
-    boolean isDone;
+    private boolean isDone;
 
+    /**
+     * Constructor for a Task instance.
+     *
+     * @param name A description of the Task.
+     */
     public Task(String name) {
         this.name = name;
         this.isDone = false;
+    }
+
+    /**
+     * Getter for the name of a Task.
+     *
+     * @return A string.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Getter for the isDone field of a Task.
+     *
+     * @return
+     */
+    public boolean isDone() {
+        return isDone;
     }
 
     /**

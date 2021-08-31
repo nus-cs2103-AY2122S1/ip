@@ -71,7 +71,7 @@ public class Parser {
      * @param inputArray The array containing all strings input by the user.
      * @return A boolean indicating if the user wants to quit the program.
      */
-    public static boolean parseInput(TaskList taskList, Storage storage,String firstString, String[] inputArray) {
+    public static boolean parseInput(TaskList taskList, Storage storage, String firstString, String[] inputArray) {
         //case if nothing is entered
         if (firstString.equals("")) {
             Ui.printEmptyInputError();
@@ -108,7 +108,6 @@ public class Parser {
             }
 
             try {
-
                 int index = Integer.parseInt(inputArray[1]);
                 int arrayIndex = index - 1;
                 //case if entered index does not correspond to a task

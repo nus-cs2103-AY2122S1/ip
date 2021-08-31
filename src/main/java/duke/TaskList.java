@@ -71,10 +71,15 @@ public class TaskList {
         return totalTasks;
     }
 
+    /**
+     * Searches for a input string among stored Tasks, and prints results.
+     *
+     * @param string The input string to search for matches.
+     */
     public void find(String string) {
         List<Task> list = new ArrayList<>();
         for (Task task: taskList) {
-            if (task.name.contains(string)) {
+            if (task.getName().contains(string)) {
                 list.add(task);
             }
         }
