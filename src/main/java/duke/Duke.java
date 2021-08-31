@@ -1,11 +1,28 @@
 package duke;
 
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
     private static boolean active;
     private static TaskList taskList = new TaskList();
     private static int listIndex = 0;
+
+    /**
+     * Overriden method from Application
+     * @param stage a Stage
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
 
     /**
      * awaken() awakens duke.Duke and allows one to input commands to duke.Duke.
