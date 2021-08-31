@@ -1,7 +1,7 @@
 package duke;
 
 public enum PrintType {
-    GREETING_LINES("Hello! I'm duke.Duke\nWhat can I do for you?"),
+    GREETING_LINES("Hello! I'm Duke\nWhat can I do for you?"),
     BYE_LINE("Bye. Hope to see you again soon!"),
     TASK_ADDED_LINE("Got it. I've added this task:"),
     TASK_DONE_LINE("Nice! I've marked this task as done: "),
