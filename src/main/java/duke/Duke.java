@@ -18,8 +18,13 @@ import javafx.application.Application;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class Duke {
+    /** An instance of a the Storage class that saves and loads Duke's data. */
     private Storage storage;
+
+    /** The taskList where all tasks are stored. */
     private TaskList taskList;
+
+    /** An instance of the Ui class that is responsible for Duke's user interactions. */
     private final Ui ui;
 
     /**
@@ -38,8 +43,10 @@ public class Duke {
     }
 
     /**
-     * Runs Duke.
-     * Duke starts reading inputs from the user and executes the user's commands accordingly.
+     * Returns Duke's response to a command as a string.
+     *
+     * @param userInput The command that the user typed to Duke.
+     * @return A string representing Duke's reply after executing a command.
      */
     public String getResponse(String userInput) {
         Command c = Parser.parse(userInput);
