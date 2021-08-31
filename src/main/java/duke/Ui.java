@@ -12,6 +12,8 @@ public class Ui {
 
     /**
      * Retrieve the next command from the user and executes it.
+     *
+     * @return The next line of input
      */
     public String nextLine() {
         return s.nextLine();
