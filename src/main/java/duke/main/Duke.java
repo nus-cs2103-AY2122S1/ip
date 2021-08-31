@@ -1,9 +1,9 @@
 package duke.main;
 
-import duke.command.Command;
-
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+
+import duke.command.Command;
 
 /**
  * The Duke program implements an application that takes in user input and acts as task list manager for users.

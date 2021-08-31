@@ -3,7 +3,7 @@ package duke.main;
 /**
  * This class is for representing any errors the Duke application may face.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     /**
      * The class Constructor for DukeException that takes in a message explaining the error.

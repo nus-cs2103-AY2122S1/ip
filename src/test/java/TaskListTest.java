@@ -1,13 +1,14 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 import duke.main.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskListTest {
     @Test
@@ -16,9 +17,9 @@ public class TaskListTest {
         testList.add(new ToDo("homework"));
         testList.add(new Deadline("submit ", "2021-09-03"));
         testList.add(new Event("interview ", "2021-10-04"));
-        String expected = "\t 1. [T][ ] homework\n" +
-                "\t 2. [D][ ] submit (by Sep 3 2021)\n" +
-                "\t 3. [E][ ] interview (at Oct 4 2021)\n";
+        String expected = "\t 1. [T][ ] homework\n"
+                + "\t 2. [D][ ] submit (by Sep 3 2021)\n"
+                + "\t 3. [E][ ] interview (at Oct 4 2021)\n";
         assertEquals(expected, new TaskList(testList).toString());
     }
 

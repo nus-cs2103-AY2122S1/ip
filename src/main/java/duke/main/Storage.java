@@ -1,16 +1,16 @@
 package duke.main;
 
-import duke.task.Deadline;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Event;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * The Storage class is used to read and write data to and from the data file.
@@ -69,13 +69,14 @@ public class Storage {
                 }
                 savedTasks.add(e);
                 break;
+            default:
             }
         }
         return savedTasks;
     }
 
     private boolean checkIfDone(String component) {
-        if (Integer.parseInt(component.substring(1,2)) == 1) {
+        if (Integer.parseInt(component.substring(1, 2)) == 1) {
             return true;
         } else {
             return false;

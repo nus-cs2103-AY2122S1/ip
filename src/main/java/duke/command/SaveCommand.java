@@ -1,11 +1,11 @@
 package duke.command;
+import java.io.IOException;
 
 import duke.main.DukeException;
 import duke.main.Storage;
 import duke.main.TaskList;
 import duke.main.Ui;
 
-import java.io.IOException;
 
 /**
  * The SaveCommand class represents the save command for writing the TaskList to a data file.
@@ -24,7 +24,7 @@ public class SaveCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             storage.writeCurrentData(tasks.getTasks());
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println(e.getMessage());
         }
         ui.displaySaveMessage();

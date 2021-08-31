@@ -1,7 +1,8 @@
 package duke.main;
 
-import duke.task.Task;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * The Ui class handles the reading of user input and outputting messages to the user.

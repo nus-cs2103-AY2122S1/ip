@@ -1,13 +1,21 @@
 package duke.main;
 
-import duke.command.*;
-import duke.task.Deadline;
-import duke.task.ToDo;
-import duke.task.Event;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
+import duke.command.SaveCommand;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
 /**
  * The Parser class holds static methods which are used to parse and evaluate user commands, ensuring the right command
@@ -81,12 +89,12 @@ public class Parser {
         }
 
         String time = command.substring(endOfDescription + 1);
-        if (isInvalidString(time)  || !time.substring(0,3).equals("by ")) {
+        if (isInvalidString(time) || !time.substring(0, 3).equals("by ")) {
             throw new DukeException(errorMessage);
         }
 
         // Remove the at from time and ensures that there is no additional whitespace behind
-        time = time.substring(3,13);
+        time = time.substring(3, 13);
         if (!isValidDate(time) || isInvalidString(time)) {
             throw new DukeException(errorMessage);
         }
@@ -112,12 +120,12 @@ public class Parser {
         }
 
         String time = command.substring(endOfDescription + 1);
-        if (isInvalidString(time) || !time.substring(0,3).equals("at ")) {
+        if (isInvalidString(time) || !time.substring(0, 3).equals("at ")) {
             throw new DukeException(errorMessage);
         }
 
         // Remove the at from time and ensures that there is no additional whitespace behind
-        time = time.substring(3,13);
+        time = time.substring(3, 13);
         if (!isValidDate(time) || isInvalidString(time)) {
             throw new DukeException(errorMessage);
         }
