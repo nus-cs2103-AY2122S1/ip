@@ -35,7 +35,7 @@ public class Parser {
                     return String.format("Nice! I've marked this task as done:\n  %s",
                             taskList.getTask(index));
                 } else {
-                   return ("No task to mark!");
+                    return ("No task to mark!");
                 }
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 throw new NyxException("Invalid task index!");
@@ -104,7 +104,7 @@ public class Parser {
                 }
             } catch (IndexOutOfBoundsException | NumberFormatException e) {
                 throw new NyxException("Invalid task index!");
-            } catch(IOException e) {
+            } catch (IOException e) {
                 throw new NyxException("Unable to save the changes...");
             }
         case "bye":

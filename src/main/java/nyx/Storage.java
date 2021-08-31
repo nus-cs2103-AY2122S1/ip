@@ -1,12 +1,10 @@
 package nyx;
 
-import java.io.FileWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
 import java.util.ArrayList;
 
 /**
@@ -54,7 +52,7 @@ public class Storage {
      * @throws NyxException If the tasks are loaded from the hard disk unsuccessfully.
      */
     public ArrayList<Task> loadData() throws NyxException {
-        ArrayList<Task> taskList= new ArrayList<Task>();
+        ArrayList<Task> taskList = new ArrayList<Task>();
         try {
             if (data.exists()) {
                 ArrayList<String> lines = new ArrayList<String>();

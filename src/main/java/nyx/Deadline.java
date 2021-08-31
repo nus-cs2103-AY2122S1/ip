@@ -37,7 +37,7 @@ public class Deadline extends Task {
      */
     @Override
     public String formatData() {
-        String dateFormat =  by.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        String dateFormat = by.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
         return String.format("D, %d, %s, %s\n", getStatusInt(), getContent(), dateFormat);
     }
 
