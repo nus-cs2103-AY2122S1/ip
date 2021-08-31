@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class encapsulates the parsing of duke.txt to convert the contents of the file
+ * into an ArrayList.
+ */
 public class DukeParser {
     private String filePath;
 
@@ -17,8 +21,8 @@ public class DukeParser {
      * converts them into Task objects into the taskArrayList with the
      * help of the parse() method.
      *
-     * @return taskArrayList the ArrayList to copy the information to
-     * @throws IOException if filePath does not exist
+     * @return TaskArrayList the ArrayList to copy the information to.
+     * @throws IOException If filePath does not exist.
      */
     public ArrayList<Task> copyFileContents() throws IOException {
         File f = new File(this.filePath); // create a File for the given file path
@@ -35,8 +39,8 @@ public class DukeParser {
      * This method parses the string copied from duke.txt and converts them into task objects
      * into the taskArrayList.
      *
-     * @param toParse the string to parse
-     * @return a taskArrayList made up of tasks
+     * @param toParse The string to parse.
+     * @return A taskArrayList made up of tasks.
      */
     public static ArrayList<Task> parse(String toParse) {
         ArrayList<Task> result = new ArrayList<>();
@@ -93,8 +97,8 @@ public class DukeParser {
      * Parses input string in the format "yyyy MM dd" and returns it in the format
      * "YYYY-MM-DD".
      *
-     * @param input string in format "MMM d yyyy"
-     * @return string in format "YYYY-MM-DD"
+     * @param input String in format "MMM d yyyy".
+     * @return String in format "YYYY-MM-DD".
      */
     public static String parseDate(String input) {
         String year = input.substring(0, 4);

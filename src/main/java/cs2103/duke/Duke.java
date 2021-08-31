@@ -1,6 +1,5 @@
 package cs2103.duke;
 
-import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;

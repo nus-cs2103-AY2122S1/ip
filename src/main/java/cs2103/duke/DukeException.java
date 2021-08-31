@@ -1,5 +1,8 @@
 package cs2103.duke;
 
+/**
+ * This class encapsulates the exception thrown when the user enters an erroneous input.
+ */
 public class DukeException extends Exception {
     private static String msg;
 

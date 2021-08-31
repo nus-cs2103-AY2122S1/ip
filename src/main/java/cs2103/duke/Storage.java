@@ -5,7 +5,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * This class encapsulates a Storage object which saves the tasks that have been added by the user, it also
+ * performs the initialization for the duke.txt and its parent folder, if they are not already present.
+ */
 public class Storage {
     private static ArrayList<Task> taskArrayList = new ArrayList<>();
     private final String filePath;
@@ -17,6 +20,8 @@ public class Storage {
     /**
      * Checks the dukeFilePath for the existence of duke.txt, if the file or the folder containing it
      * does not exist, create them.
+     *
+     * @throws IOException If an invalid input is detected.
      */
     public void initialize() throws IOException {
         String dukeFileDirectoryPath = "./data";
@@ -34,10 +39,12 @@ public class Storage {
             System.out.println("'duke.txt' has been created in the 'data/' folder ");
         }
     }
+
     /**
      * Loads the data stored in duke.txt into a taskArrayList.
-     * @return the taskArrayList representation of the data stored in duke.txt, if any.
-     * @throws IOException
+     *
+     * @return The taskArrayList representation of the data stored in duke.txt, if any.
+     * @throws IOException If an invalid input is detected.
      */
     public ArrayList<Task> load() throws IOException {
         // initialize
@@ -50,9 +57,9 @@ public class Storage {
     /**
      * This method overwrites the file.
      *
-     * @param filePath     the path to the file to append to
-     * @param textToAppend the text to append
-     * @throws IOException if filePath does not exist
+     * @param filePath     The path to the file to append to.
+     * @param textToAppend The text to append.
+     * @throws IOException If filePath does not exist.
      */
 
     public void overwriteFile(String filePath, String textToAppend) throws IOException {
@@ -64,9 +71,9 @@ public class Storage {
     /**
      * This method appends to the file instead of overwrites.
      *
-     * @param filePath     the path to the file to append to
-     * @param textToAppend the text to append
-     * @throws IOException if filePath does not exist
+     * @param filePath     The path to the file to append to.
+     * @param textToAppend The text to append.
+     * @throws IOException If filePath does not exist.
      */
 
     public void appendToFile(String filePath, String textToAppend) throws IOException {

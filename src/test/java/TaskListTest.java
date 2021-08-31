@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * This class encapsulates the testing for TaskList in the Duke package,
+ * the names of the test methods are meant to be self-explanatory.
+ */
 public class TaskListTest {
     @Test
     public void dummyTest() {

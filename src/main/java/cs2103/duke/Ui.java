@@ -1,9 +1,12 @@
 package cs2103.duke;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * This class encapsulates an Ui object, which abstracts the user interactions with Duke out of
+ * the Duke class.
+ */
 public class Ui {
     private static final int lv = 8;
     private static final String[] features = {
@@ -25,10 +28,10 @@ public class Ui {
 
     /**
      * This method takes an input string and formats it by including horizontal lines above
-     * and below the input string
+     * and below the input string.
      *
-     * @param str input string to be sandwiched
-     * @return the original string sandwiched between two horizontal lines
+     * @param str Input string to be sandwiched.
+     * @return The original string sandwiched between two horizontal lines.
      */
     public static String sandwich(String str) {
         return "____________________________________________________________\n"
@@ -38,18 +41,16 @@ public class Ui {
 
 
     /**
-     * Shows the welcome message when user runs Duke.
+     * Shows the welcome message when the user runs Duke.
+     *
+     * @return The welcome message to the user.
      */
-    public String showWelcome() throws IOException {
+    public String showWelcome() {
         // populating featuresCombined so each level has all elements of levels before it
         StringBuilder featuresCombined = new StringBuilder();
         for (int count = 0; count <= lv; count++) {
             featuresCombined.append(features[count]);
         }
-//
-//        // parsing duke.txt
-//        DukeParser dp = new DukeParser(dukeFilePath);
-//        taskArrayList = dp.copyFileContents();
 
         // Welcome message
         String welcome = "Hello! I'm Duke: Level " + lv + "\n"
@@ -62,7 +63,9 @@ public class Ui {
     }
 
     /**
-     * Shows the goodbye message when user exits Duke.
+     * Shows the goodbye message when the user exits Duke.
+     *
+     * @return The goodbye message to the user.
      */
     public String showGoodbye() throws IOException {
         // Goodbye message
@@ -75,7 +78,11 @@ public class Ui {
     /**
      * Reads user's inputs and responds to it accordingly.
      *
-     * @param userInput the information entered by the user after the command
+     * @param scanner   The scanner object used to read user inputs.
+     * @param userInput The information entered by the user after the command.
+     * @param tasks     The Tasklist object containing all currently present tasks.
+     * @return The string representing the task added by the user.
+     * @throws DukeException If user enters an invalid input.
      */
     public String handleInput(Scanner scanner, String userInput, TaskList tasks) throws DukeException {
         switch (userInput) {
@@ -122,6 +129,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Alert the user if the duke.txt could not be loaded.
+     *
+     * @return A string alerting the user of the error.
+     */
     public String showLoadingError() {
         return ("Loading error: duke.txt could not be loaded");
     }

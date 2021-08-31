@@ -2,23 +2,35 @@ package cs2103.duke;
 
 import java.util.ArrayList;
 
+/**
+ * This class encapsulates a TaskList object, which represents all the tasks added by a user.
+ */
 public class TaskList {
     private ArrayList<Task> taskArrayList;
 
+    /**
+     * This constructor instantiates a new Tasklist with no tasks inside.
+     */
     public TaskList() {
         this.taskArrayList = new ArrayList<>();
     }
 
+    /**
+     * This constructor instantiates a new TaskList with tasks provided by the input taskArrayList.
+     *
+     * @param taskArrayList The ArrayList containing the tasks with which to instantiate the new TaskList object.
+     * @throws DukeException If an invalid input is detected.
+     */
     public TaskList(ArrayList<Task> taskArrayList) throws DukeException {
         this.taskArrayList = taskArrayList;
     }
 
     /**
      * This method takes an input string and formats it by including horizontal lines above
-     * and below the input string
+     * and below the input string.
      *
-     * @param str input string to be sandwiched
-     * @return the original string sandwiched between two horizontal lines
+     * @param str Input string to be sandwiched.
+     * @return The original string sandwiched between two horizontal lines.
      */
     public static String sandwich(String str) {
         return "____________________________________________________________\n"
@@ -29,7 +41,7 @@ public class TaskList {
     /**
      * This method takes the user's input list and beautifies it for display.
      *
-     * @return the beautified string to display
+     * @return The beautified string to display.
      */
     public String listBeautify() {
         StringBuilder listBeautified = new StringBuilder();
@@ -47,8 +59,8 @@ public class TaskList {
     /**
      * Validates input string to ensure it follows the valid format YYYY-MM-DD, and is a valid date.
      *
-     * @param input the string to be validated
-     * @return true if the string is a valid date
+     * @param input The string to be validated.
+     * @return True if the string is a valid date.
      */
     public boolean isValidDate(String input) {
         String[] splitInputs = input.split("-");
@@ -111,11 +123,11 @@ public class TaskList {
     /**
      * Adds a task into the task list.
      *
-     * @param type the type of task to be added
-     * @param name the name of task to be added
-     * @param description the description of the task
-     * @return string representing the newly added task
-     * @throws DukeException
+     * @param type        The type of task to be added.
+     * @param name        The name of task to be added.
+     * @param description The description of the task.
+     * @return String representing the newly added task.
+     * @throws DukeException if the user input is invalid.
      */
     public String addTask(String type, String name, String description) throws DukeException {
         switch (type) {
@@ -157,10 +169,22 @@ public class TaskList {
         }
     }
 
+    /**
+     * This method lists all tasks in the TaskList.
+     *
+     * @return A string representing all tasks in the TaskList.
+     */
     public String listTasks() {
         return (sandwich(listBeautify()));
     }
 
+    /**
+     * This method marks a task as finished, and returns a string informing the user of the change.
+     *
+     * @param index The index of the task to be marked, the first task will have an index of 1.
+     * @return A string informing the user of the change.
+     * @throws DukeException If the user specified an invalid index.
+     */
     public String finishTask(int index) throws DukeException {
         if (index > taskArrayList.size()) {
             throw new DukeException("This task index is not in the task list!");
@@ -170,11 +194,18 @@ public class TaskList {
                 + taskArrayList.get(index - 1).toString()));
     }
 
+    /**
+     * This method removes a task from the TaskList, and lets the user know which task was removed.
+     *
+     * @param index The index of the task to be deleted, the first task will have an index of 1.
+     * @return A string informing the user of the deletion.
+     * @throws DukeException If the user specified an invalid index.
+     */
     public String deleteTask(int index) throws DukeException {
         if (index > taskArrayList.size()) {
             throw new DukeException("This task index is not in the task list!");
         }
-        String deleteMessage =  (sandwich("Got it, I have deleted this task: "
+        String deleteMessage = (sandwich("Got it, I have deleted this task: "
                 + taskArrayList.get(index - 1).toString()
                 + "\nYou now have "
                 + (taskArrayList.size() - 1)
