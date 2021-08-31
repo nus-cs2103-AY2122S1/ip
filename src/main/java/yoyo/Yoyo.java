@@ -1,54 +1,38 @@
 package yoyo;
 
 import yoyo.command.Command;
+import yoyo.core.DialogHandler;
 import yoyo.core.Parser;
 import yoyo.core.Storage;
-import yoyo.core.Ui;
 import yoyo.exception.YoyoException;
 import yoyo.task.TaskList;
 
 public class Yoyo {
     private final Storage storage;
-    private final Ui ui;
+    private final DialogHandler dialogHandler;
     private TaskList tasks;
 
     /**
      * Constructor for Yoyo program.
-     *
-     * @param filePath File path to the file to be loaded.
      */
-    public Yoyo(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Yoyo() {
+        dialogHandler = new DialogHandler();
+        storage = new Storage("data/yoyo.txt");
         try {
             tasks = storage.load();
         } catch (YoyoException e) {
-            ui.printErrorMessage(e);
             tasks = new TaskList();
         }
     }
 
-    public static void main(String[] args) {
-        new Yoyo("data/yoyo.txt").run();
-    }
-
-    /**
-     * Main method to start running the Yoyo program.
-     */
-    private void run() {
-        ui.greetUser();
-        boolean shouldRun = true;
-        while (shouldRun) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, storage, ui);
-                shouldRun = c.shouldContinueProgram();
-            } catch (YoyoException e) {
-                ui.printErrorMessage(e);
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage, dialogHandler);
+        } catch (YoyoException e) {
+            return e.getMessage();
         }
-    }
 
+    }
 
 }
