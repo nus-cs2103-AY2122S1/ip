@@ -1,10 +1,10 @@
 package duke.parser;
 
+import duke.exception.InvalidDescriptionException;
+import duke.exception.InvalidInputException;
+import duke.exception.InvalidTimeException;
 import duke.storage.Storage;
 import duke.task.*;
-import duke.exception.InvalidInputException;
-import duke.exception.InvalidDescriptionException;
-import duke.exception.InvalidTimeException;
 import duke.ui.Ui;
 
 import java.time.LocalDate;
@@ -45,13 +45,13 @@ public class Parser {
     }
 
     private String getFirstWord(String input) {
-        String arr[] = input.split(" ", 2);
+        String[] arr = input.split(" ", 2);
         String firstWord = arr[0];
         return firstWord;
     }
 
     private String getSecondWord(String input) {
-        String arr[] = input.split(" ", 2);
+        String[] arr = input.split(" ", 2);
         String secondWord = arr[1].strip();
         return secondWord;
     }

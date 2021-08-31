@@ -71,7 +71,7 @@ public class Deadline extends Task {
      */
     public String formatSave() {
         if (time != null) {
-            return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() +  " | "
+            return "D | " + ((super.isDone) ? "1 | " : "0 | ") + super.getDescription() + " | "
                     + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ", "
                     + time.format(DateTimeFormatter.ofPattern("h:mma"));
         } else if (date != null) {
