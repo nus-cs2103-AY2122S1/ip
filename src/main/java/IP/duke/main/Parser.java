@@ -26,6 +26,7 @@ public class Parser {
      * 
      * @param command a string of user input command.
      * @return a command object to execute the user command.
+     * @throws DukeException exception handled by DukeException class.
      */
     public static Command parse(String command) throws DukeException {
         String[] commandDescription = command.split(" ", 0);

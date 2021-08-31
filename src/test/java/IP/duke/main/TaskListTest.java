@@ -23,7 +23,7 @@ public class TaskListTest {
                     new Deadline("deadline submit report by 30/08/2021"),
                     new Event("event attend workshop at 03/09/2021"),
                     new Deadline("deadline sign up for course by 03/09/2021")};
-            ArrayList<Task> taskArrayList = new ArrayList<Task>();
+            ArrayList<Task> taskArrayList = new ArrayList<>();
             for (Task t : taskArray) {
                 taskArrayList.add(t);
             }
@@ -71,8 +71,8 @@ public class TaskListTest {
     public void findTasksMatchingDate_03SEP_ThreeTASKS() {
         Date stubDate = new DateStub().getDate();
         StubTaskList stubTaskList = new StubTaskList();
-        ArrayList<Task> matchingTasks = stubTaskList.getTaskListTest().findTasksMatchingDate(stubDate);
-        assertEquals(matchingTasks.size(), 3);
+        TaskList matchingTasks = stubTaskList.getTaskListTest().findTasksMatchingDate(stubDate);
+        assertEquals(matchingTasks.getNumTasks(), 3);
     }
 
     /**

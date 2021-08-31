@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Represents user interface abstraction.
  * 
  * @author Gordon Yit
- * @Version CS2103T
+ * @version CS2103T
  */
 public class Ui {
     private final String LOGO = " ____        _        \n" 
@@ -81,7 +81,7 @@ public class Ui {
     /**
      * Shows the error message from dukeException class.
      *
-     * @return the error message.
+     * @param errorMessage exception message.
      */
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
@@ -103,15 +103,15 @@ public class Ui {
      * Displays the task deleted.
      * 
      * @param task the deleted task.
-     * @param taskArrayList an arraylist of task after deleting the task.
+     * @param numTaskRemaining number of tasks after deleting the task.
      */
-    public void showTaskDeleted(Task task, ArrayList<Task> taskArrayList) {
+    public void showTaskDeleted(Task task, int numTaskRemaining) {
         String deletionMessage = "Alrighty, I've removed this task:";
         System.out.println(deletionMessage);
         String deletedTask = String.format("~~%s~~", task.toString());
         System.out.println(deletedTask);
-        String tasksRemaining = String.format("Now, you have %s %s remaining", taskArrayList.size(),
-                (taskArrayList.size() > 1 ? "tasks" : "task"));
+        String tasksRemaining = String.format("Now, you have %s %s remaining", numTaskRemaining,
+                (numTaskRemaining > 1 ? "tasks" : "task"));
         System.out.println(tasksRemaining);
     }
 
@@ -119,42 +119,43 @@ public class Ui {
      * Displays the task added.
      * 
      * @param task the task added.
-     * @param taskArrayList arraylist of tasks after adding the new task.
+     * @param newNumTasks number of tasks after adding the new task.
      */
-    public void showTaskAdded(Task task, ArrayList<Task> taskArrayList) {
+    public void showTaskAdded(Task task, int newNumTasks) {
         String additionMessage = "Got it. I've added this task:";
         System.out.println(additionMessage);
         String addedTask = String.format("~~%S~~", task.toString());
         System.out.println(addedTask);
-        String newTally = String.format("Now you have %s %s in the list.", taskArrayList.size(), 
-                                    (taskArrayList.size() > 1 ? "tasks" : "task"));
+        String newTally = String.format("Now you have %s %s in the list.", newNumTasks,
+                                    (newNumTasks > 1 ? "tasks" : "task"));
         System.out.println(newTally);
     }
 
     /**
      * Lists out all the tasks Duke.Duke is keeping track of.
      * 
-     * @param taskArrayList current arraylist of tasks.
+     * @param tasks current taskList of tasks.
      */
-    public void showListOfTasks(ArrayList<Task> taskArrayList) {
+    public void showListOfTasks(TaskList tasks) {
         String header = "Here are the tasks in your list:";
-        iterate(header, taskArrayList);
+        iterate(header, tasks);
     }
 
     /**
      * Lists out all the tasks that falls on a specified date.
-     * 
-     * @param taskArrayList arraylist of task that fall on the specified date.
+     *
+     * @param tasks taskList of task that fall on the specified date.
+     * @param date date used to filter out the tasks.
      */
-    public void showFilteredTasks(ArrayList<Task> taskArrayList, Date date) {
+    public void showFilteredTasks(TaskList tasks, Date date) {
         String header = String.format("On %s, you have: ", date.toString());
-        iterate(header, taskArrayList);
+        iterate(header, tasks);
     }
     
-    private void iterate(String headerMessage, ArrayList<Task> tasks) {
+    private void iterate(String headerMessage, TaskList tasks) {
         System.out.println(headerMessage);
-        for(int i = 0; i < tasks.size(); i++) {
-            System.out.println(String.format("%s.%s", i + 1, tasks.get(i).toString()));
+        for(int i = 0; i < tasks.getNumTasks(); i++) {
+            System.out.println(String.format("%s.%s", i + 1, tasks.getTask(i).toString()));
         }
     }
 }

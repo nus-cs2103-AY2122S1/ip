@@ -38,6 +38,7 @@ public class Event extends Task {
      *
      * @param eventDescription description of event task.
      * @param dateOfTask date of the event task.
+     * @throws ParseException due to improper date format.
      */
     public Event(String eventDescription, String dateOfTask) throws ParseException {
         taskDescription = eventDescription;

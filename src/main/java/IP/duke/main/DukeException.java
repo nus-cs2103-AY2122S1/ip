@@ -30,7 +30,7 @@ public class DukeException extends Exception{
      */
     @Override
     public String getMessage() {
-        if (exception instanceof NumberFormatException) {
+        if (exception instanceof IndexOutOfBoundsException) {
             message = "☹ OH NO!!! The task does not exist.>:(\n";
         } else if (exception instanceof StringIndexOutOfBoundsException || 
                     exception instanceof ArrayIndexOutOfBoundsException) {

@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * Represents the local date format of the given date..
  * 
  * @author Gordon Yit
- * @Version CS2103T Semester 1
+ * @version CS2103T Semester 1
  */
 public class Date {
     protected LocalDate localDate;
@@ -20,7 +20,7 @@ public class Date {
      * Class constructor.
      * 
      * @param dateString string specifying a date in the form DD/MM/YYYY.
-     * @throws DateTimeParseException
+     * @throws DateTimeParseException exception caused by improper time format.
      */
     public Date(String dateString) throws DateTimeParseException {
         date = dateString.split("/");
@@ -41,7 +41,7 @@ public class Date {
     /**
      * Retrieves the local date object.
      * 
-     * return the local date of the date due.
+     * @return the local date of the date due.
      */
     public LocalDate getLocalDate() {
         return this.localDate;
@@ -62,6 +62,7 @@ public class Date {
      * 
      * @param dateString in form of DD MMM YYYY.
      * @return a date object corresponding to the date string.
+     * @throws ParseException exception caused by parsing date in improper format.
      */
     public static Date convertDateStringToDate(String dateString) throws ParseException {
         SimpleDateFormat monthDayFormat = new SimpleDateFormat("MMM D");

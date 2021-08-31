@@ -12,10 +12,16 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    testCompileOnly 'junit:junit:4.13'
+    testRuntimeOnly 'org.junit.vintage:junit-vintage-engine'
 }
 
 test {
     useJUnitPlatform()
+
+    useTestNG()
 
     testLogging {
         events "passed", "skipped", "failed"
@@ -26,10 +32,21 @@ test {
         showStackTraces true
         showStandardStreams = false
     }
+
+    useJUnitPlatform {
+        includeEngines 'junit-vintage'
+        // excludeEngines 'junit-jupiter'
+    }
+
+    useTestNG {
+        preserveOrder true
+
+    }
+
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "IP.duke.main.Duke"
 }
 
 shadowJar {
@@ -43,4 +60,11 @@ checkstyle {
 
 run{
     standardInput = System.in
+}
+
+sourceSets {
+    intTest {
+        compileClasspath += sourceSets.main.output
+        runtimeClasspath += sourceSets.main.output
+    }
 }

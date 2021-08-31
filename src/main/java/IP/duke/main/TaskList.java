@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Represents a list of tasks.
  * 
  * @author Gordon Yit
- * @Version Cs2103T, Semester 2
+ * @version Cs2103T, Semester 2
  */
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -19,7 +19,7 @@ public class TaskList {
      * @param tasksStored an arraylist of tasks.
      */
     public TaskList(ArrayList<Task> tasksStored) {
-        tasks = new ArrayList<>(100);
+        tasks = new ArrayList<>();
         for (Task t : tasksStored) {
             this.tasks.add(t);
         }
@@ -37,11 +37,11 @@ public class TaskList {
      * Adds a task to the tasks list.
      * 
      * @param task a task to be added.
-     * @return the updated tasks arraylist.
+     * @return the added task.
      */
-    public ArrayList<Task> add(Task task) {
+    public Task add(Task task) {
         this.tasks.add(task);
-        return tasks;
+        return task;
     }
 
     /**
@@ -49,17 +49,20 @@ public class TaskList {
      * 
      * @param taskIndex index of the task. 
      * @return a task matching the given index.
+     * @throws IndexOutOfBoundsException if taskIndex is negative or greater than size of tasks.
      */
-    public Task getTask(int taskIndex) {
+    public Task getTask(int taskIndex) throws  IndexOutOfBoundsException{
         return tasks.get(taskIndex);
     }
     
     /**
      * Marks the task corresponding to the done. 
      *
-     * @param taskIndex index of the task to be marked done. 
+     * @param taskIndex index of the task to be marked done.
+     * @return the task marked done.
+     * @throws IndexOutOfBoundsException if taskIndex is negative or greater than size of tasks.
      */
-    public Task markDone(int taskIndex) {
+    public Task markDone(int taskIndex) throws IndexOutOfBoundsException{
         Task task = getTask(taskIndex);
         task.markAsDone();
         return task;
@@ -69,37 +72,39 @@ public class TaskList {
      * Deletes a task from the task list.
      * 
      * @param taskIndex index of the task to be deleted.
-     * @return the updated tasks arraylist.
+     * @return the task deleted.
+     * @throws IndexOutOfBoundsException if taskIndex is negative or greater than size of tasks.
      */
-    public ArrayList<Task> delete(int taskIndex) {
-        this.tasks.remove(taskIndex);
-        return tasks;
+    public Task delete(int taskIndex) throws IndexOutOfBoundsException {
+        Task task = tasks.get(taskIndex);
+        tasks.remove(task);
+        return task;
     }
     
     /**
      * Finds all the tasks matching the date given. 
      * 
      * @param date the date of interest.
-     * @return an arraylist of tasks which fall on that date.
+     * @return an taskList of tasks which fall on that date.
      */
-    public ArrayList<Task> findTasksMatchingDate(Date date) {
+    public TaskList findTasksMatchingDate(Date date) {
         String dateString = date.toString();
-        ArrayList<Task> tasksMatchingDate = new ArrayList<>();
+        TaskList matchingTasks = new TaskList();
         for (Task t: tasks) {
             if (t.isSameDate(dateString)) {
-                tasksMatchingDate.add(t);
+                matchingTasks.add(t);
             }
         }
-        return tasksMatchingDate;
+        return matchingTasks;
     }
 
     /**
-     * Returns the tasks arraylist.
+     * Returns the total number of tasks current tracked by Duke.
      * 
-     * @return arraylist of tasks.
+     * @return size of tasks arraylist.
      */
-    public ArrayList<Task> getTasks() {
-        return tasks;
+    public int getNumTasks() {
+        return tasks.size();
     }
     
 }
