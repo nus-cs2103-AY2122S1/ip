@@ -11,8 +11,11 @@ import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -31,6 +34,9 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/chicken.jpeg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duck.jpeg"));
 
 
     /**
@@ -73,10 +79,11 @@ public class Duke extends Application {
             try {
                 // performing action based on user command
                 ui.showInputPrompt();
-                String fullCommand = ui.readCommand(input);
-                ui.showOpenLine();
+                //String fullCommand = ui.readCommand(input);
+                String fullCommand = userInput.getText();
+                ui.showLine();
                 Command c = Parser.parse(fullCommand, taskList);
-                c.execute(taskList);
+                String response = c.execute(taskList);
                 isBye = c.isBye();
 
             } catch (DukeException e) {
@@ -89,7 +96,7 @@ public class Duke extends Application {
                 ui.showException(new DukeException(DukeExceptionType.INVALID_DATETIME));
 
             } finally {
-                ui.showCloseLine();
+                ui.showLine();
             }
         }
 
@@ -140,6 +147,77 @@ public class Duke extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(ui.showWelcome()), new ImageView(duke)));
+
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+            userInput.clear();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+    }
+
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        String input = userInput.getText();
+        String response = getResponse(userInput.getText());
+        String userBlock = ui.showLine() + input + "\n" + ui.showLine();
+        String dukeBlock = ui.showLine() + response + "\n" + ui.showLine();
+        Label userText = new Label(userBlock);
+        Label dukeText = new Label(dukeBlock);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+
+        if (input.equals("bye")) {
+            System.exit(0);
+        }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    private String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input, taskList);
+            return c.execute(taskList);
+
+        } catch (DukeException e) {
+            return ui.showException(e);
+
+        } catch (NumberFormatException e) {
+            return ui.showException(new DukeException(DukeExceptionType.INVALID_TASK_INDEX));
+
+        } catch (DateTimeParseException e) {
+            return ui.showException(new DukeException(DukeExceptionType.INVALID_DATETIME));
+        }
     }
 
     public static void main(String[] args) {
