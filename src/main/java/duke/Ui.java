@@ -52,6 +52,8 @@ public class Ui {
                 int index = inp.indexOf("/at "); // find index of "/at "
                 Task task = new Event(inp.substring(6, index), inp.substring(index + 4));
                 userList.add(task);
+            } else if (inp.startsWith("find ")) {
+                userList.find(inp.substring(5));
             } else {
                 // Invalid input
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -52,6 +52,17 @@ public class TaskList {
         }
     }
 
+    public void find(String keyword) {
+        int counter = 1;
+        System.out.println("The following tasks contain keyword: " + keyword);
+        for (Task task:userList) {
+            if (task.getDescription().contains(keyword)) {
+                System.out.println(counter + "." + task);
+            }
+            counter++;
+        }
+    }
+
     public static TaskList load() throws FileNotFoundException {
         return new TaskList(Storage.retrieveTaskList());
     }
