@@ -90,7 +90,7 @@ public class Storage {
      *
      * @param toDoList the current list of tasks
      */
-    public void updateLs(ArrayList<Task> toDoList) {
+    public void updateLocalStorage(ArrayList<Task> toDoList) {
         try {
             Files.delete(Paths.get(Duke.getLocalStorageLocation()));
         } catch (IOException e) {

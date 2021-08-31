@@ -91,7 +91,7 @@ public class AddTaskCommand extends Command {
      */
     private void addTaskToList(Task newTask, Ui ui, TaskList tasks, Storage storage) {
         tasks.getTasks().add(newTask);
-        storage.updateLs(tasks.getTasks());
+        storage.updateLocalStorage(tasks.getTasks());
         ui.reply("Got it. I've added this duke.task: \n" + newTask.toString() +
                 "     \nNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
