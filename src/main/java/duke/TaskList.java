@@ -5,14 +5,14 @@ import java.util.ArrayList;
 
 public class TaskList implements Serializable {
     private ArrayList<Task> tasks;
-    private int numTask;
+    private int numberOfTasks;
 
     /**
      * TaskList stores and retrieves tasks created by Duke.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
-        this.numTask = 0;
+        this.numberOfTasks = 0;
     }
 
     /**
@@ -21,17 +21,17 @@ public class TaskList implements Serializable {
      */
     public void addCustom(Task task) {
         tasks.add(task);
-        this.numTask++;
+        this.numberOfTasks++;
         System.out.println("Got it. I've added this task: ");
         System.out.println("  " + task);
-        System.out.printf("Now you have %d %s in the list.\n", this.numTask, this.numTask == 1 ? "task" : "tasks");
+        System.out.printf("Now you have %d %s in the list.\n", this.numberOfTasks, this.numberOfTasks == 1 ? "task" : "tasks");
     }
 
     /**
      * Retrieves all stored tasks and displays them.
      */
     public void list() {
-        for (int i = 0; i < this.numTask; i++) {
+        for (int i = 0; i < this.numberOfTasks; i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
     }
@@ -55,8 +55,8 @@ public class TaskList implements Serializable {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + task);
         tasks.remove(taskNumber - 1);
-        this.numTask--;
-        System.out.printf("Now you have %d %s in the list.\n", this.numTask, this.numTask == 1 ? "task" : "tasks");
+        this.numberOfTasks--;
+        System.out.printf("Now you have %d %s in the list.\n", this.numberOfTasks, this.numberOfTasks == 1 ? "task" : "tasks");
     }
 
     /**
@@ -65,7 +65,7 @@ public class TaskList implements Serializable {
      */
     public ArrayList<Task> find(String query) {
         ArrayList<Task> results = new ArrayList<>();
-        for (int i = 0; i < this.numTask; i++) {
+        for (int i = 0; i < this.numberOfTasks; i++) {
             Task tmp = this.tasks.get(i);
             if (tmp.getDescription().contains(query)) {
                 results.add(tmp);
@@ -80,7 +80,7 @@ public class TaskList implements Serializable {
      * @throws Duke.DukeException issue found in state of empty taskList
      */
     public boolean isEmpty() throws Duke.DukeException {
-        if (this.numTask == 0) {
+        if (this.numberOfTasks == 0) {
             if (!this.tasks.isEmpty()) {
                 throw new Duke.DukeException("TaskList is empty without any items");
             }
