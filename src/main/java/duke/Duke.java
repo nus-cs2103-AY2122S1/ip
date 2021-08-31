@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+import javafx.stage.Stage;
 
 /**
  * Handles the logic of Duke e.g. adding, saving and deleting tasks.
@@ -54,11 +55,11 @@ public class Duke {
                         || type == Parser.CommandType.EVENT;
 
                 if (isFunctionCommand) {
-                    this.handleFunctionCommands(type, userInput);
+                    ui.printMessage(this.handleFunctionCommands(type, userInput));
 
                 } else if (isTaskCommand) {
                     // Adds a Task to the task list.
-                    this.handleTaskCommand(type, userInput);
+                    ui.printMessage(this.handleTaskCommand(type, userInput));
 
                 } else {
                     throw new DukeException(
@@ -70,42 +71,42 @@ public class Duke {
         }
     }
 
-    private void handleFunctionCommands(Parser.CommandType type, String userInput) throws DukeException {
+    private String handleFunctionCommands(Parser.CommandType type, String userInput) throws DukeException {
         if (type == Parser.CommandType.EXIT) {
             //Closes the program.
             this.storage.save(this.taskList);
             this.isOpen = false;
             this.ui.exit();
+            return Ui.CLOSING_MESSAGE;
 
         } else if (type == Parser.CommandType.LIST) {
             // List all tasks in the task list.
-            this.ui.printMessage(this.taskList.listTasks());
+            return this.taskList.listTasks();
 
         } else if (type == Parser.CommandType.DONE) {
             // Mark a certain task as done.
             int taskNumber = Parser.parseDoneCommand(userInput);
-            this.ui.printMessage(this.taskList.markTaskAsDone(taskNumber));
             this.storage.save(this.taskList);
+            return this.taskList.markTaskAsDone(taskNumber);
 
         } else if (type == Parser.CommandType.DELETE) {
             // Deletes a task from the task list.
             int taskNumber = Parser.parseDeleteCommand(userInput);
-            this.ui.printMessage(this.taskList.deleteTask(taskNumber));
             this.storage.save(this.taskList);
+            return this.taskList.deleteTask(taskNumber);
 
         } else if (type == Parser.CommandType.FIND) {
             // Finds the tasks in the task list that contain the String.
             String toSearch = Parser.parseFindCommand(userInput);
-            this.ui.printMessage(this.taskList.findTasksWithSubstring(toSearch));
+            return this.taskList.findTasksWithSubstring(toSearch);
 
         } else {
             throw new DukeException(
                     "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-
     }
 
-    private void handleTaskCommand(Parser.CommandType type, String userInput) throws DukeException {
+    private String handleTaskCommand(Parser.CommandType type, String userInput) throws DukeException {
         String[] splitBySpace = userInput.split(" ", 2);
 
         if (splitBySpace.length > 1 && splitBySpace[1].trim().length() > 0) {
@@ -124,12 +125,42 @@ public class Duke {
                 throw new DukeException(
                         "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-            this.ui.printMessage(this.taskList.addTask(newTask));
             this.storage.save(this.taskList);
+            return this.taskList.addTask(newTask);
 
         } else {
             throw new DukeException("☹ OOPS!!! The description of a " + splitBySpace[0]
                     + " cannot be empty.");
+        }
+    }
+
+    private String runFromGui(String userInput) {
+        try {
+            Parser.CommandType type = Parser.decipherInput(userInput);
+
+            boolean isFunctionCommand = type == Parser.CommandType.EXIT
+                    || type == Parser.CommandType.LIST
+                    || type == Parser.CommandType.DONE
+                    || type == Parser.CommandType.DELETE
+                    || type == Parser.CommandType.FIND;
+
+            boolean isTaskCommand = type == Parser.CommandType.TODO
+                    || type == Parser.CommandType.DEADLINE
+                    || type == Parser.CommandType.EVENT;
+
+            if (isFunctionCommand) {
+                return this.handleFunctionCommands(type, userInput);
+
+            } else if (isTaskCommand) {
+                // Adds a Task to the task list.
+                return this.handleTaskCommand(type, userInput);
+
+            } else {
+                throw new DukeException(
+                        "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (DukeException de) {
+            return de.getMessage();
         }
     }
 
@@ -138,7 +169,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return runFromGui(input);
     }
 
     /**

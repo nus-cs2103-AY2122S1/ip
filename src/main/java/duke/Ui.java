@@ -56,6 +56,5 @@ public class Ui {
      */
     public void exit() {
         sc.close();
-        this.printMessage(CLOSING_MESSAGE);
     }
 }

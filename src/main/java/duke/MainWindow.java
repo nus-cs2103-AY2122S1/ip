@@ -1,7 +1,11 @@
 package duke;
 
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -17,8 +21,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
@@ -28,6 +30,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Ui.OPENING_MESSAGE, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -47,5 +52,14 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (input.trim().equals("bye")) {
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            }, new Date(System.currentTimeMillis() + 1000));
+        }
     }
 }
