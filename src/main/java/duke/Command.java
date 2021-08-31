@@ -14,7 +14,9 @@ public class Command {
     public static String addTask(String task, Type type, LocalDateTime localDateTime, List<Task> tasks) {
         Task taskObj = TaskList.initialiseByType(task, type, false, localDateTime);
         tasks.add(taskObj);
-        String addTaskString = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.", taskObj.toString(), tasks.size());
+        String addTaskString = String.format("Got it. I've added this task:\n"
+                        + "%s\nNow you have %d tasks in the list.",
+                taskObj.toString(), tasks.size());
         System.out.println(addTaskString);
         return addTaskString;
     }
@@ -28,7 +30,8 @@ public class Command {
         Task task = tasks.get(taskNumber);
         task.setDone(true);
         tasks.set(taskNumber, task);
-        String doneTaskString = "Nice! I've marked this task as done:\n" + task.toString();
+        String doneTaskString = "Nice! I've marked this task as done:\n"
+                + task.toString();
         System.out.println(doneTaskString);
         return doneTaskString;
     }
@@ -41,7 +44,9 @@ public class Command {
         taskNumber--;
         Task task = tasks.get(taskNumber);
         tasks.remove(taskNumber);
-        String deleteTaskString = String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.", task.toString(), tasks.size());
+        String deleteTaskString = String.format("Noted. I've removed this task:\n%s"
+                        + "\nNow you have %d tasks in the list.",
+                task.toString(), tasks.size());
         System.out.println(deleteTaskString);
         return deleteTaskString;
     }

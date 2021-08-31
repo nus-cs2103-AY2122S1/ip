@@ -148,6 +148,9 @@ public class TaskList {
         }
     }
 
+    /**
+    * Method to run chatbot with javafx UI.
+     */
     public String runWithGraphicUI(String input) {
         String response = "";
 

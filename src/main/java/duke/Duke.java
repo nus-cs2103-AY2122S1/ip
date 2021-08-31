@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Duke {
 
-    TaskList taskManager = new TaskList();
+    private TaskList taskManager = new TaskList();
 
     /**
      * You should have your own function to generate a response to user input.
