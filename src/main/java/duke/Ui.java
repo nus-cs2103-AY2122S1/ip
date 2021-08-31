@@ -14,32 +14,29 @@ public class Ui {
 
     /**
      * Displays the Duke welcome message.
+     *
+     * @return The welcome message string.
      */
-    public void showWelcome() {
-        showOpenLine();
-        System.out.print("  Hello! I'm Duke.\n  What's up?\n");
-        showCloseLine();
+    public String showWelcome() {
+        return showLine() + "  Hello! I'm Duke.\n  What's up?\n" + showLine();
     }
 
     /**
-     * Displays a line to represent the top of the Duke message box.
+     * Displays a line to represent the top or bottom of the Duke message box.
+     *
+     * @return The line string.
      */
-    public void showOpenLine() {
-        System.out.println("  __________________________________________________________________");
-    }
-
-    /**
-     * Displays a line to represent the bottom of the Duke message box.
-     */
-    public void showCloseLine() {
-        System.out.println("  __________________________________________________________________\n");
+    public String showLine() {
+        return "____________________________________________\n";
     }
 
     /**
      * Displays the user input prompt.
+     *
+     * @return The input prompt string.
      */
-    public void showInputPrompt() {
-        System.out.print("> ");
+    public String showInputPrompt() {
+        return "> ";
     }
 
     /**
@@ -54,31 +51,37 @@ public class Ui {
 
     /**
      * Displays the program closing message.
+     *
+     * @return The program closing message.
      */
-    public void showBye() {
-        System.out.println("  See you next time!");
+    public String showBye() {
+        return "See you next time!";
     }
 
     /**
      * Displays the current task list.
      *
      * @param taskList The task list to be displayed.
+     * @return The task list in string representation.
      */
-    public void showList(ArrayList<Task> taskList) {
-        System.out.println("  Here are the tasks in your list:");
+    public String showList(ArrayList<Task> taskList) {
+        StringBuilder list = new StringBuilder("  Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); ++i) {
-            System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
+            String entry = "  " + (i + 1) + "." + taskList.get(i).listEntry() + "\n";
+            list.append(entry);
         }
+        return list.toString();
     }
 
     /**
      * Displays a message to show that the given task has been set to done.
      *
      * @param toSetDone The task that has been set to done.
+     * @return String representing the task being done.
      */
-    public void showDone(Task toSetDone) {
-        System.out.print("  Nice! I've marked this task as done:\n    "
-                + toSetDone.listEntry() + "\n");
+    public String showDone(Task toSetDone) {
+        return "Nice! I've marked this task as done:\n"
+                + toSetDone.listEntry() + "\n";
     }
 
     /**
@@ -86,11 +89,12 @@ public class Ui {
      *
      * @param deleted The task that has been deleted.
      * @param listLength The new length of the task list after the deletion.
+     * @return String representing the task being deleted.
      */
-    public void showDelete(Task deleted, int listLength) {
-        System.out.print("  Noted. I've removed this task:\n    "
-                + deleted.listEntry()
-                + "\n  Now you have " + listLength + " tasks in the list.\n");
+    public String showDelete(Task deleted, int listLength) {
+        return "Noted. I've removed this task:\n"
+                + deleted.listEntry() + "\n"
+                + "Now you have " + listLength + " tasks in the list.\n";
     }
 
     /**
@@ -99,15 +103,18 @@ public class Ui {
      * @param taskList The task list.
      * @param listLength The length of the current task list.
      * @param desiredDate The date used to find tasks.
+     * @return A list of tasks taking place/to be done on the given date.
      */
-    public void showDateFind(ArrayList<Task> taskList, int listLength, LocalDate desiredDate) {
-        System.out.println("  Here are the tasks for the given day:");
+    public String showDateFind(ArrayList<Task> taskList, int listLength, LocalDate desiredDate) {
+        StringBuilder findList = new StringBuilder("  Here are the tasks for the given day:\n");
         for (int i = 0; i < listLength; ++i) {
             Task currTask = taskList.get(i);
             if (currTask.isTodayTask(desiredDate)) {
-                System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
+                String entry = "  " + (i + 1) + "." + taskList.get(i).listEntry() + "\n";
+                findList.append(entry);
             }
         }
+        return findList.toString();
     }
 
     /**
@@ -116,15 +123,18 @@ public class Ui {
      * @param taskList The task list.
      * @param listLength The length of the current task list.
      * @param keyword The keyword to look for in the task names.
+     * @return A list of tasks containing the given keyword.
      */
-    public void showKeywordFind(ArrayList<Task> taskList, int listLength, String keyword) {
-        System.out.println("  Here are the tasks with the given keyword:");
+    public String showKeywordFind(ArrayList<Task> taskList, int listLength, String keyword) {
+        StringBuilder findList = new StringBuilder("Here are the tasks with the given keyword:\n");
         for (int i = 0; i < listLength; ++i) {
             Task currTask = taskList.get(i);
             if (currTask.containsKeyword(keyword)) {
-                System.out.println("  " + (i + 1) + "." + taskList.get(i).listEntry());
+                String entry = "  " + (i + 1) + "." + taskList.get(i).listEntry() + "\n";
+                findList.append(entry);
             }
         }
+        return findList.toString();
     }
 
     /**
@@ -132,40 +142,48 @@ public class Ui {
      *
      * @param newTask The task that has been added to the task list.
      * @param listLength The new length of the task list after the addition.
+     * @return String representing the task being added.
      */
-    public void showAdd(Task newTask, int listLength) {
-        System.out.print("  Got it. I've added this task:\n    "
-                + newTask.listEntry()
-                + "\n  Now you have " + listLength + " tasks in the list.\n");
+    public String showAdd(Task newTask, int listLength) {
+        return "Got it. I've added this task:\n"
+                + newTask.listEntry() + "\n"
+                + "Now you have " + listLength + " tasks in the list.\n";
     }
 
     /**
      * Displays the error message of the given DukeException.
      *
      * @param e The DukeException whose error message is to be displayed.
+     * @return The DukeException error message.
      */
-    public void showException(DukeException e) {
-        System.out.println(e.getMessage());
+    public String showException(DukeException e) {
+        return e.getMessage();
     }
 
     /**
      * Displays the Duke initialisation message.
+     *
+     * @return The initialisation message string.
      */
-    public void showInitialise() {
-        System.out.println("  Loading Duke...");
+    public String showInitialise() {
+        return "Loading Duke...";
     }
 
     /**
      * Displays a message to show that the hard disk's directory did not exist and has been created.
+     *
+     * @return String representing the creation of the data directory.
      */
-    public void showNewDataDirectory() {
-        System.out.println("  Data directory does not exist, it has been created!");
+    public String showNewDataDirectory() {
+        return "Data directory does not exist, it has been created!";
     }
 
     /**
      * Displays a message to show that the hard disk did not exist and has been created.
+     *
+     * @return String representing the creation of the hard disk.
      */
-    public void showNewHardDisk() {
-        System.out.println("  Hard disk does not exist, a new one has been created!");
+    public String showNewHardDisk() {
+        return "Hard disk does not exist, a new one has been created!";
     }
 }

@@ -24,9 +24,10 @@ public class FindDateCommand extends Command {
      * Executes the command of finding tasks on the given task list that take place on the given date.
      *
      * @param taskList The task list from which tasks taking place on the given date are taken to be listed.
+     * @return String representing the list of tasks found.
      */
     @Override
-    public void execute(TaskList taskList) {
-        taskList.findTasksByDate(desiredDate);
+    public String execute(TaskList taskList) {
+        return taskList.findTasksByDate(desiredDate);
     }
 }

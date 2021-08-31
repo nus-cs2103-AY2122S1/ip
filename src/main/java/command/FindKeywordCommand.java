@@ -18,8 +18,14 @@ public class FindKeywordCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the command of finding tasks containing the given keyword.
+     *
+     * @param taskList The TaskList used in the command.
+     * @return String representing the list of tasks containing the given keyword.
+     */
     @Override
-    public void execute(TaskList taskList) {
-        taskList.findTasksByKeyword(keyword);
+    public String execute(TaskList taskList) {
+        return taskList.findTasksByKeyword(keyword);
     }
 }

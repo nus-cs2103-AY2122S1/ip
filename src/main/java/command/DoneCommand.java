@@ -22,9 +22,10 @@ public class DoneCommand extends Command {
      * Executes the command of setting the given task to done.
      *
      * @param taskList The task list containing the task to be set to done.
+     * @return String representing the setting of the task to done.
      */
     @Override
-    public void execute(TaskList taskList) {
-        taskList.setTaskDone(index);
+    public String execute(TaskList taskList) {
+        return taskList.setTaskDone(index);
     }
 }
