@@ -1,7 +1,18 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.RemoveCommand;
+import duke.exception.DukeException;
+import duke.exception.IncompleteDeadlineException;
+import duke.exception.IncompleteEventException;
+import duke.exception.IncompleteFindException;
+import duke.exception.IncompleteToDoException;
+import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -53,7 +64,7 @@ public class Parser {
      * @param input Input which is being checked.
      * @return true if input is a remove command.
      */
-    public static boolean isRemove(String input){
+    public static boolean isRemove(String input) {
         return input.startsWith("remove ");
     }
 
@@ -64,14 +75,14 @@ public class Parser {
      * @return true if input is a done command.
      */
     public static boolean isDone(String input) {
-//        String[] splited = phrase.split(" ");
-////        System.out.println(splited);
-//        if (splited.length != 2) {
-//            return false;
-//        } else {
-//            return splited[0].equals("done") && splited[1]
-//                  .matches("\\d+") && Integer.valueOf(splited[1]) <= listLength;
-//        }
+        //        String[] splited = phrase.split(" ");
+        ////        System.out.println(splited);
+        //        if (splited.length != 2) {
+        //            return false;
+        //        } else {
+        //            return splited[0].equals("done") && splited[1]
+        //                  .matches("\\d+") && Integer.valueOf(splited[1]) <= listLength;
+        //        }
         return input.startsWith("done ");
     }
 
@@ -166,7 +177,7 @@ public class Parser {
      * @return Command to execute.
      * @throws DukeException If incorrect values are passed for remove or done commands.
      */
-    public static Command parse(String userInput, Ui ui, TaskList tasks) throws DukeException{
+    public static Command parse(String userInput, Ui ui, TaskList tasks) throws DukeException {
         if (userInput.equals("list")) {
             return new ListCommand();
         } else if (Parser.isDone(userInput)) {

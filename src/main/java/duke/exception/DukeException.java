@@ -3,7 +3,7 @@ package duke.exception;
 /**
  * Represents an exception of Duke.
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
 
     /**
      * Constructor for DukeException.

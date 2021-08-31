@@ -16,7 +16,7 @@ public class RemoveCommand extends Command {
      *
      * @param indexToRemove Index of TaskList to be removed.
      */
-    public RemoveCommand(int indexToRemove){
+    public RemoveCommand(int indexToRemove) {
         this.indexToRemove = indexToRemove;
     }
 

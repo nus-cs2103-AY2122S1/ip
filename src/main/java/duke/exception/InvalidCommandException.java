@@ -12,6 +12,6 @@ public class InvalidCommandException extends DukeException {
      * Constructor for InvalidCommandException.
      */
     public InvalidCommandException() {
-            super(LINE + "\n" + MESSAGE + "\n" + LINE);
+        super(LINE + "\n" + MESSAGE + "\n" + LINE);
     }
 }

@@ -17,15 +17,15 @@ import java.util.Scanner;
  */
 public class Storage {
     private ArrayList<Task> toStore;
-    private final String FILEPATH;
-    private final String DIRPATH;
+    private final String FILEPATH = "data" + File.separator + "history.txt";
+    private final String DIRPATH = "data";
 
     /**
      * Constructor for Storage.
      */
     public Storage() {
-        this.FILEPATH = "data" + File.separator + "history.txt";
-        this.DIRPATH = "data";
+        //        this.FILE_PATH = "data" + File.separator + "history.txt";
+        //        this.DIR_PATH = "data";
     }
 
     /**
