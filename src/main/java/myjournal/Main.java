@@ -25,6 +25,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setMyJournal(myJournal);
             stage.show();
+            stage.setTitle("MyJournal");
         } catch (IOException e) {
             e.printStackTrace();
         }

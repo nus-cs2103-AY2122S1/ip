@@ -4,3 +4,4 @@ T|0| read book
 E|0| watch | 2021/02/30
 E|1| watch | 2021/03/40
 E|1| watch | 2021/01/02
+D|0| do hw | THURSDAY, 16 Sep 2021 04:00am
