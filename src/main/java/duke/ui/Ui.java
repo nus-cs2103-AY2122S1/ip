@@ -44,6 +44,8 @@ public class Ui {
         case "find":
             error = Messages.INDENTATION + Messages.EMPTY_FIND_CMD;
             break;
+        default:
+            error = error;
         }
         return error;
     }

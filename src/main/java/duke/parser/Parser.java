@@ -3,7 +3,14 @@ package duke.parser;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
 import duke.data.TaskHandler;
 import duke.data.exception.DukeException;
 import duke.data.task.Task;
