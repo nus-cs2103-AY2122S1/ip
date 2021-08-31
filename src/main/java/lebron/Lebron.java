@@ -3,13 +3,27 @@ package lebron;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+import javafx.application.Application;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Region;
+import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import lebron.task.Deadline;
 import lebron.task.Events;
 import lebron.task.Task;
 import lebron.task.TaskList;
 import lebron.task.ToDo;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * This class represents the chat bot.
@@ -17,7 +31,7 @@ import lebron.task.ToDo;
  * @author Nigel Tan
  */
 
-public class Lebron {
+public class Lebron extends Application {
 
     final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
     public static final String FILE_PATH = "./data/duke.txt";
@@ -25,6 +39,14 @@ public class Lebron {
     private TaskList taskList;
     private Ui ui;
 
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image lebron = new Image(this.getClass().getResourceAsStream("/images/lebron.jpg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/blank.png"));
     /**
      * Available commands that the bot can understand.
      */
@@ -66,14 +88,14 @@ public class Lebron {
      * @throws IOException if stream to file is missing or invalid.
      */
     public Lebron() throws IOException {
-        this.ui = new Ui();
+        this.ui = new Ui(this);
         this.storage = new Storage(FILE_PATH);
         try {
             ArrayList<Task> loadList = storage.loadFileContents(FILE_PATH);
-            taskList = new TaskList(loadList);
+            taskList = new TaskList(loadList, this);
         } catch (Exception e) {
             ArrayList<Task> loadList = new ArrayList<>();
-            taskList = new TaskList(loadList);
+            taskList = new TaskList(loadList, this);
         }
     }
 
@@ -82,29 +104,27 @@ public class Lebron {
      *
      * @throws IOException if stream to file is missing or invalid.
      */
-    public void run() throws IOException {
+    public String run(String text) throws IOException {
         int position = 0;
-        ui.greet();
         Parser parser = new Parser();
-        Scanner sc = new Scanner(System.in);
+        String reply = "";
 
-        String text = sc.nextLine();
-        while (!text.equals("bye")) {
+        if (!text.equals("bye")) {
             String commandWord = parser.parseText(text);
             String[] splitWords = parser.split(text);
             Command command = Command.fromString(commandWord);
             switch (command) {
             case LIST:
-                ui.replyDisplay(taskList);
+                reply = ui.replyDisplay(taskList);
                 break;
             case DONE:
                 int pos = Integer.parseInt(splitWords[1]);
-                taskList.markDone(pos - 1);
+                reply = taskList.markDone(pos - 1);
                 storage.saveToFile(taskList.getLst());
                 break;
             case TODO:
                 try {
-                    taskList.add(new ToDo(splitWords[1]));
+                    reply = taskList.add(new ToDo(splitWords[1]));
                     storage.saveToFile(taskList.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.err.println(HORIZONTAL_LINE
@@ -115,7 +135,7 @@ public class Lebron {
             case DEADLINE:
                 try {
                     String[] splitBy = splitWords[1].split("/by ", 2);
-                    taskList.add(new Deadline(splitBy[0], splitBy[1]));
+                    reply = taskList.add(new Deadline(splitBy[0], splitBy[1]));
                     storage.saveToFile(taskList.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.err.println(HORIZONTAL_LINE
@@ -126,7 +146,7 @@ public class Lebron {
             case EVENT:
                 try {
                     String[] splitAt = splitWords[1].split("/at ", 2);
-                    taskList.add(new Events(splitAt[0], splitAt[1]));
+                    reply = taskList.add(new Events(splitAt[0], splitAt[1]));
                     storage.saveToFile(taskList.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.err.println(HORIZONTAL_LINE
@@ -136,28 +156,122 @@ public class Lebron {
                 break;
             case DELETE:
                 int pos2 = Integer.parseInt(splitWords[1]);
-                taskList.delete(pos2 - 1);
+                reply = taskList.delete(pos2 - 1);
                 storage.saveToFile(taskList.getLst());
                 break;
             case FIND:
                 String keyword = splitWords[1];
-                ui.replyFind(taskList, keyword);
+                reply = ui.replyFind(taskList, keyword);
                 break;
             case OTHER:
-                System.out.println(HORIZONTAL_LINE
+                reply = HORIZONTAL_LINE
                         + "    :( OOPS! I'm sorry, but I don't know what that means.\n"
-                        + HORIZONTAL_LINE);
+                        + HORIZONTAL_LINE;
                 break;
             default:
                 break;
             }
-            text = sc.nextLine();
         }
-        ui.exit();
+        else {
+            reply = ui.exit();
+        }
+        return reply;
     }
 
-    public static void main(String[] args) throws Exception {
-        new Lebron().run();
+    @Override
+    public void start(Stage stage) {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+        Label greeting = new Label(ui.greet());
+
+        userInput = new TextField();
+        sendButton = new Button("Send");
+
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+
+        scene = new Scene(mainLayout);
+
+        stage.setScene(scene);
+        stage.show();
+        stage.setTitle("Lebron");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(400.0);
+
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        scrollPane.setPrefSize(385, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(325.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greeting, new ImageView(lebron))
+        );
+
+        sendButton.setOnMouseClicked((event) -> {
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        userInput.setOnAction((event) -> {
+            try {
+                handleUserInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+    }
+
+    private Node getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() throws IOException {
+        Label userText = new Label(userInput.getText());
+        Label lebronText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(lebronText, new ImageView(lebron))
+        );
+        userInput.clear();
+    }
+
+    private String getResponse(String input) throws IOException {
+        return run(input);
     }
 
 
