@@ -36,10 +36,10 @@ public class Parser {
      * @throws DukeException In the case of invalid inputs.
      */
     public String parse(String input) throws DukeException {
-        String[] firstParameter = input.split(" ", 2);
-        String first = firstParameter[0];
-        if (firstParameter.length == 1) {
-            switch (first) {
+        String[] words = input.split(" ", 2);
+        String firstParameter = words[0];
+        if (words.length == 1) {
+            switch (firstParameter) {
             case ("list"):
                 return list.printTasks();
             case ("done"):
@@ -63,10 +63,10 @@ public class Parser {
                         + "'deadline', 'event' or 'todo'.");
             }
         } else {
-            switch (first) {
+            switch (firstParameter) {
             case ("done"):
                 try {
-                    String listIndexString = firstParameter[1];
+                    String listIndexString = words[1];
                     int listIndex = Integer.parseInt(listIndexString);
                     if (listIndex <= list.size() && listIndex >= 1) {
                         return list.completeTask(listIndex);
@@ -78,7 +78,7 @@ public class Parser {
                     throw new DukeException("Please ensure only a number follows the command 'done'. Try again.");
                 }
             case ("deadline"):
-                String restOfDeadline = firstParameter[1];
+                String restOfDeadline = words[1];
                 if (!restOfDeadline.contains("/by")) {
                     throw new DukeException("Please state the deadline for this task with /by! Try again.");
                 } else {
@@ -100,7 +100,7 @@ public class Parser {
                     }
                 }
             case ("event"):
-                String restOfEvent = firstParameter[1];
+                String restOfEvent = words[1];
                 if (!restOfEvent.contains("/at")) {
                     throw new DukeException("Please state the date and time for this task with /at! Try again.");
                 } else {
@@ -122,11 +122,11 @@ public class Parser {
                     }
                 }
             case ("todo"):
-                String todoDescription = firstParameter[1];
+                String todoDescription = words[1];
                 Todo createdTodoTask = new Todo(todoDescription, false);
                 return list.addToList(createdTodoTask);
             case ("delete"):
-                String toDeleteIndexString = firstParameter[1];
+                String toDeleteIndexString = words[1];
                 try {
                     int toDeleteIndex = Integer.parseInt(toDeleteIndexString);
                     return list.deleteTask(toDeleteIndex);
@@ -137,7 +137,7 @@ public class Parser {
                     throw new DukeException("Please add a number after the command 'delete'. Try again.");
                 }
             case ("find"):
-                String searchTerm = firstParameter[1];
+                String searchTerm = words[1];
                 return list.printFilteredTasks(searchTerm);
             default:
                 throw new DukeException("I didn't quite get what you meant. To add a task, begin with "

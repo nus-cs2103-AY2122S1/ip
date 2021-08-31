@@ -8,11 +8,12 @@ import java.time.format.DateTimeFormatter;
  *
  * @author Hanif Kamal
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate deadline;
 
     /**
      * Class constructor.
+     *
      * @param taskName The name or description of the Deadline.
      * @param isDone Whether or not the Deadline is done.
      * @param deadline The date of the Deadline.
@@ -24,6 +25,7 @@ public class Deadline extends Task{
 
     /**
      * Returns the string representation of the Deadline.
+     *
      * @return The string representation of the Deadline.
      */
     @Override

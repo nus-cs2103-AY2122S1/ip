@@ -21,7 +21,9 @@ public class TaskList {
 
     /**
      * Looks up the Task at the given index in the TaskList and sets the Task as done.
+     *
      * @param index The index of the Task, to be set as done, in the TaskList.
+     * @return A String that acts as a confirmation message by Duke for Task completion.
      */
     public String completeTask(int index) {
         Task task = this.list.get(index - 1);
@@ -31,18 +33,21 @@ public class TaskList {
 
     /**
      * Adds the given Task to the TaskList.
+     *
      * @param task The Task to be added to the TaskList.
+     * @return A String that acts as a confirmation message by Duke for a successfully added Task.
      */
     public String addToList(Task task) {
         this.list.add(task);
-        return "Got it. I've added this task:\n" + "  " + task.toString() + "\n"
+        return ("Got it. I've added this task:\n" + "  " + task.toString() + "\n"
                 + "Now you have " + list.size() + " task" + (list.size() == 1 ? "" : "s")
-                + " in the list.";
+                + " in the list.");
     }
 
     /**
      * Returns, as a String, all Tasks in the TaskList for the user.
      *
+     * @return A String that lists out all the Tasks in the TaskList.
      * @throws DukeException In the case where the TaskList is empty.
      */
     public String printTasks() throws DukeException {
@@ -65,7 +70,9 @@ public class TaskList {
 
     /**
      * Looks up the Task at the given index in the TaskList and removes the Task from the list.
+     *
      * @param index The index of the Task, to be deleted, in the TaskList.
+     * @return A String that acts as a confirmation message by Duke for a successfully deleted Task.
      * @throws DukeException In the case where the TaskList is empty, or the index is out of bounds.
      */
     public String deleteTask(int index) throws DukeException {
@@ -92,8 +99,10 @@ public class TaskList {
     }
 
     /**
-     * Prints a Task List that is filtered such that it only consists of Tasks that contain the given search term.
-     * @param searchTerm The given search term to narrow down the Tasks in the Task List.
+     * Prints a TaskList that is filtered such that it only consists of Tasks that contain the given search term.
+     *
+     * @param searchTerm The given search term to narrow down the Tasks in the TaskList.
+     * @return A String that lists out all the Tasks that match the search term in the TaskList.
      * @throws DukeException In the case where no Tasks matching the search term can be found.
      */
     public String printFilteredTasks(String searchTerm) throws DukeException {

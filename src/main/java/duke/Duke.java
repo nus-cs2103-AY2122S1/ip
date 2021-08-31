@@ -9,10 +9,10 @@ import javafx.application.Application;
  * @author Hanif Kamal
  */
 public class Duke {
+    private static final String FILEPATH = "./data/duke.txt";
     private final Storage storage;
     private final TaskList list;
     private final Ui ui;
-    private static final String FILEPATH = "./data/duke.txt";
 
     /**
      * Class constructor to initialize a Duke instance.
