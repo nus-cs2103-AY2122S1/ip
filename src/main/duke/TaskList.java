@@ -12,7 +12,7 @@ public class TaskList<Task> extends ArrayList<Task>{
     public ArrayList<Task> taskList;
 
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.taskList = new ArrayList<>();
     }
     
     public TaskList(ArrayList<Task> taskList) {

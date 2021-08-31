@@ -11,8 +11,8 @@ public class DoneCommand extends Command {
     private int taskIndex;
 
     public DoneCommand(String fullCommand) {
-        String taskIndexString = fullCommand.replace("done", "");
-        this.taskIndex = Integer.parseInt(taskIndexString.trim());
+        String taskIndexString = fullCommand.replace("done", "").trim();
+        this.taskIndex = Integer.parseInt(taskIndexString);
     }
 
     /**
@@ -23,9 +23,9 @@ public class DoneCommand extends Command {
      * @throws DukeException If execution fails.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task t = (Task) tasks.get(taskIndex - 1);
-        t.finishTask();
-        System.out.println(String.format("Congratulations on finishing this task!\n %s", t));
+        Task task = (Task) tasks.get(taskIndex - 1);
+        task.finishTask();
+        ui.showMessage(String.format("Congratulations on finishing this task!\n %s", task));
         storage.save(tasks);
     }
 
@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
      * Check if user is ending the chatbot.
      * @return True if user is ending the chatbot.
      */
-    public Boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 

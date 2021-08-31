@@ -1,9 +1,9 @@
 package duke.command;
 
+import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
-import duke.DukeException;;
 
 abstract public class Command {
 
@@ -20,6 +20,6 @@ abstract public class Command {
      * Check if user is ending the chatbot.
      * @return True if user is ending the chatbot.
      */
-    abstract public Boolean isExit();
+    abstract public boolean isExit();
 
 }

@@ -12,8 +12,8 @@ public class DeadlineTask extends Task {
      * Format task to be saved in file.
      * @return Formatted string representation of task.
      */
-    public String saveString() {
-        return String.format("D|%s", super.saveString());
+    public String toSaveString() {
+        return String.format("D|%s", super.toSaveString());
     }
 
     /**
@@ -22,6 +22,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by:" + super.time.format(TIME_FORMAT) + ")";
+        String formattedTime = super.time.format(TIME_FORMAT);
+        return "[D]" + super.toString() + " (by:" + formattedTime + ")";
     }
 }

@@ -12,10 +12,10 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(String fullCommand) throws DukeException {
         try {
-            String taskIndexString = fullCommand.replace("delete", "");
-            this.taskIndex = Integer.parseInt(taskIndexString.trim());
+            String taskIndexString = fullCommand.replace("delete", "").trim();
+            this.taskIndex = Integer.parseInt(taskIndexString);
         } catch (NumberFormatException e) {
-            throw new DukeException(e.getMessage());
+            throw new DukeException("Invalid Task Selected");
         }
     }
 
@@ -28,11 +28,11 @@ public class DeleteCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            Task t = (Task) tasks.remove(taskIndex - 1);
-            System.out.println(String.format("Task deleted.\n %s", t));
+            Task task = (Task) tasks.remove(taskIndex - 1);
+            ui.showMessage(String.format("Task deleted.\n %s", task));
             storage.save(tasks);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(e.getMessage());
+            throw new DukeException("Invalid Task Index");
         }
     }
 
@@ -40,7 +40,7 @@ public class DeleteCommand extends Command {
      * Check if user is ending the chatbot.
      * @return True if user is ending the chatbot.
      */
-    public Boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }

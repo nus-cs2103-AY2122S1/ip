@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 
 import duke.DukeException;
 import duke.TaskList;
@@ -29,20 +30,16 @@ public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         String response = "Here are the tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
-            Task t = (Task) tasks.get(i);
-            if (time != null && !t.time().equals(time)) {
+            Task task = (Task) tasks.get(i);
+            if (time != null && !task.getTime().equals(time)) {
                 break;
             } 
             response += String.format("\n%d. %s", i + 1, t);
         }
-        System.out.println(response);
+        ui.showMessage(response);
     }
 
-    /**
-     * Check if user is ending the chatbot.
-     * @return True if user is ending the chatbot.
-     */
-    public Boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 

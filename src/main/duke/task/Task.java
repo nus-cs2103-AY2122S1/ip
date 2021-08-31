@@ -1,10 +1,11 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
 
 /**
  * Represents outstanding task for the user to keep track.
@@ -45,12 +46,11 @@ public class Task {
     private String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
-
     /**
      * Format task to be saved in file.
      * @return Formatted string representation of task.
      */
-    public String saveString() {
+    public String toSaveString() {
         return String.format("%s|%s|%s", isDone, description, time);
     }
 
@@ -58,7 +58,7 @@ public class Task {
      * Get the time of the task.
      * @return Time.
      */
-    public LocalDateTime time() {
+    public LocalDateTime getTime() {
         return time;
     }
 

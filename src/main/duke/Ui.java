@@ -18,6 +18,27 @@ public class Ui {
     }
 
     /**
+     * Display message when Duke chatbot ends.
+     */
+    public void showGoodbye() {
+        System.out.println("Goodbye! Have a nice day!");
+    }
+
+    /**
+     * Display divider line between user command and Duke chatbot response.
+     */
+    public void showLine() {
+        System.out.println("____________________________________________________________");
+    }
+
+    /**
+     * Display input message.
+     */
+    public void showMessage(String message) {
+        System.out.println(String.format("%s", message));
+    }
+
+    /**
      * Display error message.
      * @param error Input error message.
      */
@@ -29,22 +50,7 @@ public class Ui {
      * Display message when file is absent during loading.
      */
     public void showLoadingError() {
-        System.out.println("Oops! Cannot load file! We will start afresh :)");
-    }
-
-    /**
-     * Display divider line between user command and Duke chatbot response.
-     */
-    public void showLine() {
-        System.out.println("____________________________________________________________");
-    }
-
-    /**
-     * Print input message.
-     * @param input Input message.
-     */
-    public void print(String input) {
-        System.out.println(String.format("%s", input));
+        showError("Oops! Cannot load file! We will start afresh :)");
     }
 
     /**

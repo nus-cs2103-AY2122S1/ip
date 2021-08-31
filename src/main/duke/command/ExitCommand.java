@@ -17,14 +17,14 @@ public class ExitCommand extends Command {
      * @throws DukeException If execution fails.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print("Goodbye! Have a nice day!");
+        ui.showGoodbye();
     }
-
+    
     /**
      * Check if user is ending the chatbot.
      * @return True if user is ending the chatbot.
      */
-    public Boolean isExit() {
+    public boolean isExit() {
         return true;
     }
 
