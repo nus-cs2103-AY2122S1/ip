@@ -15,8 +15,8 @@ public class ExitCommand extends Command {
      * @param task The TaskList associated with the current bot.
      * @param userInt The User Interface associated with the current bot.
      * @param storage The storage associated with the current bot.
+     * @return The string to be printed to the GUI.
      * @throws DukeException If any error has occurred during the addition of the task.
-     * @return
      */
     @Override
     public String execute(TaskList task, Ui userInt, Storage storage) {

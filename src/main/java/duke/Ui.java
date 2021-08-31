@@ -66,11 +66,34 @@ public class Ui {
     }
 
     /**
+     * Alerts the user that multiple tasks have been marked as done.
+     */
+    public String notifyMultiDone(ArrayList<Task> doneTasks) {
+        String output =  "You've finished the task? Good job!\n"
+                + "This task has been marked as done:\n";
+        for (int i = 0 ; i < doneTasks.size(); i++) {
+            output += doneTasks.get(i).displayInfo() + "\n";
+        }
+        return output;
+    }
+
+    /**
      * Alerts the user that a task has been deleted.
      */
     public String notifyDelete(Task removedTask) {
         return "Okay! Removing the task:\n"
             + removedTask.displayInfo();
+    }
+
+    /**
+     * Alerts the user that multiple tasks have been deleted.
+     */
+    public String notifyMultiDelete(ArrayList<Task> removedTasks) {
+        String output =  "Okay! Removing the task:\n";
+        for (int i = 0; i < removedTasks.size(); i++) {
+            output += removedTasks.get(i).displayInfo() + "\n";
+        }
+        return output;
     }
 
     /**

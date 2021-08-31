@@ -25,10 +25,10 @@ public class FindCommand extends Command {
 
     /**
      * Lists the tasks with the matching keyword associated with the FindCommand.
-     *  @param tasks The TaskList associated with the current bot.
+     * @param tasks The TaskList associated with the current bot.
      * @param userInt The User Interface associated with the current bot.
      * @param storage The storage associated with the current bot.
-     * @return
+     * @return The string to be printed to the GUI.
      */
     @Override
     public String execute(TaskList tasks, Ui userInt, Storage storage) {
