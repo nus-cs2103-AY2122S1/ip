@@ -45,14 +45,10 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts the Duke program.
+     * Entry point to the program
      *
-     * @param args instructions for Duke
-     * @throws IOException If the File cannot be read/found.
+     * @param stage the stage to be displayed.
      */
-    public static void main(String[] args) throws IOException {
-    }
-
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -128,9 +124,12 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     *
+     * @param dukeBot The DukeBot for the run.
+     * @param parser The parser used for processing input.
+     * @param data The data used for storage.
      */
     private void handleUserInput(Duke dukeBot, Parser parser, Storage data) {
         if (userInput.getText().equals("bye")) {
@@ -147,8 +146,13 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the correct response from the input given.
+     *
+     * @param input The input by user.
+     * @param dukeBot The dukeBot used.
+     * @param parser The parser used.
+     * @param data The data used.
+     * @return The correct response based on input given.
      */
     private String getResponse(String input, Duke dukeBot, Parser parser, Storage data) {
         try {

@@ -39,6 +39,8 @@ public class List {
      *
      * @param input the command given.
      * @throws IOException If the file cannot be read/found.
+     *
+     * @returns The response in String after the action is executed.
      */
     public String addTask(String input, Parser parser, Storage storage) throws IOException {
         if (input.equals("list")) {
@@ -55,6 +57,8 @@ public class List {
     /**
      * Display the current content of the list.
      * Ordered by creation time.
+     *
+     * @returns The list in String.
      */
     public String showList() {
         String result = "";
@@ -69,6 +73,7 @@ public class List {
      *
      * @param array The input command.
      * @throws DukeDoneException If the number of entry is not specified in the command.
+     * @returns The response in String after the action is executed.
      */
     public String done(String[] array) throws DukeDoneException {
         if (array.length == 1) {
@@ -84,6 +89,7 @@ public class List {
      * Deletes the target Task.
      *
      * @param array The input command.
+     * @returns The response in String after the action is executed.
      */
     public String delete(String[] array) {
         int index = parseInt(array[1]);
@@ -101,6 +107,7 @@ public class List {
      * Prints out the new Task added and the total number of Tasks in the List.
      *
      * @param item The new Task created.
+     * @returns The response in String after the action is executed.
      */
     public String echo(Task item) {
         return ("Got it. I've added this task:\n"
@@ -116,6 +123,7 @@ public class List {
      * Prints out the search result based on input.
      *
      * @param input The keyword to be searched.
+     * @returns The response in String after the action is executed.
      */
     public String search(String input) {
         ArrayList<Task> result = new ArrayList<>();
