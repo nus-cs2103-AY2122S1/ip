@@ -17,7 +17,7 @@ public class DukeTest {
             duke.add(invalidTask);
             fail();
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! The description of a todo cannot be empty.", e.getMessage());
+            assertEquals("The description of a todo cannot be empty.", e.getMessage());
         }
     }
 }

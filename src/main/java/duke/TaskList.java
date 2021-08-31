@@ -93,11 +93,11 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        String result = "-----------------------------------------\n" + "Here are the tasks in your list:\n";
+        String result = "Here are the tasks in your list:\n";
         Task[] taskArray = this.al.toArray(new Task[0]);
         for (int i = 0; i < taskArray.length; i++) {
             result += String.format("%s. %s", i + 1, taskArray[i].toString());
         }
-        return result + "-----------------------------------------\n";
+        return result;
     }
 }
