@@ -1,0 +1,14 @@
+diff a/src/main/java/Duke.java b/src/main/java/Duke.java	(rejected hunks)
+@@ -150,6 +150,12 @@
+         return new Task(done, finalAction);
+     }
+ 
++    /**
++     * Check the format of the input for Deadline
++     * @param action
++     * @param date
++     * @throws DeadlineExceptions
++     */
+     private void checkDeadlineFormat(String action, String date) throws DeadlineExceptions {
+         if (!action.equals("")) {
+             String[] formatDate = date.split(":");
