@@ -98,6 +98,61 @@ public class TaskList {
     }
 
     /**
+     * Main engine to run the GUI program.
+     */
+    public String readGuiInput(String input) {
+
+        this.loadData();
+
+        String responseMessage = "";
+
+        //removes additional space from the input
+        input = input.trim();
+
+        //removes space in the command input and stores the strings in an array
+        String[] inputArr = Parser.sanitizeInput(input);
+
+        if (input.equals("bye")) {
+            responseMessage = messages.goodbyeMessageGui();
+        } else if (input.equals("list")) {
+            responseMessage = messages.displayListTasksGui(this.taskList);
+        } else if (inputArr[0].equals("done")) {
+
+            //obtains the task number which we want to mark as done
+            Integer index = Integer.parseInt(inputArr[1]);
+
+            try {
+                responseMessage = this.markAsDoneGui(index);
+            } catch (DukeException e) {
+                responseMessage = messages.displayTextGui(e.toString());
+            }
+
+        } else if (inputArr[0].equals("delete")) {
+            //obtains the task number which we want to delete
+            Integer index = Integer.parseInt(inputArr[1]);
+
+            try {
+                responseMessage = this.deleteTaskGui(index);
+            } catch (DukeException e) {
+                responseMessage = messages.displayTextGui(e.toString());
+            }
+        } else if (inputArr[0].equals("find")) {
+            responseMessage = this.findTasksGui(inputArr);
+        } else {
+            //adds item input by the user into the inputList
+            try {
+                responseMessage = this.addTaskGui(inputArr);
+            } catch (DukeException e) {
+                responseMessage = messages.displayTextGui(e.toString());
+            }
+        }
+
+        //saves the latest copy of the task list
+        this.saveData();
+        return responseMessage;
+    }
+
+    /**
      * Loads data from local storage.
      */
     public void loadData() {
@@ -129,7 +184,25 @@ public class TaskList {
         } catch (DukeException e) {
             messages.displayText(e.toString());
         }
+    }
 
+    public String addTaskGui(String[] inputArr) throws InvalidCommandException {
+        try {
+            if (inputArr[0].equals("todo")) {
+                return this.addTodoGui(inputArr);
+
+            } else if (inputArr[0].equals("deadline")) {
+                return this.addDeadlineGui(inputArr);
+
+            } else if (inputArr[0].equals("event")) {
+                return this.addEventGui(inputArr);
+
+            } else {
+                throw new InvalidCommandException();
+            }
+        } catch (DukeException e) {
+            return messages.displayTextGui(e.toString());
+        }
     }
 
     /**
@@ -149,6 +222,20 @@ public class TaskList {
         Todo todoTask = new Todo(description);
         this.taskList.add(todoTask);
         messages.taskAddMessage(todoTask.toString(), this.taskList.size());
+    }
+
+    public String addTodoGui(String[] inputArr) throws DescriptionException {
+        if (inputArr.length < 2) {
+            throw new DescriptionException("todo");
+        }
+
+        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, inputArr.length);
+
+        String description = String.join(" ", descriptionArray);
+
+        Todo todoTask = new Todo(description);
+        this.taskList.add(todoTask);
+        return messages.taskAddMessageGui(todoTask.toString(), this.taskList.size());
     }
 
     /**
@@ -207,6 +294,51 @@ public class TaskList {
         }
     }
 
+    public String addDeadlineGui(String[] inputArr) throws DescriptionException, CommandException {
+        if (inputArr.length < 2) {
+            throw new DescriptionException("deadline");
+        }
+        boolean commandAbsent = true;
+        int commandIndex = 1;
+        for (int i = 0; i < inputArr.length; i++) {
+            String currentStr = inputArr[i];
+            if (currentStr.equals("/by")) {
+                commandAbsent = false;
+                commandIndex = i;
+                break;
+            }
+        }
+
+        if (commandAbsent) {
+            throw new CommandException("deadline", "/by");
+        } else if (commandIndex == 1) {
+            throw new DescriptionException("deadline");
+        }
+
+        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
+        String description = String.join(" ", descriptionArray);
+
+        try {
+            if (commandIndex + 1 <= inputArr.length - 1) {
+                String[] byArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
+                if (byArray.length == 1) {
+                    LocalDate by = LocalDate.parse(byArray[0]);
+                    Deadline deadlineTask = new Deadline(description, by);
+                    this.taskList.add(deadlineTask);
+                    return messages.taskAddMessageGui(deadlineTask.toString(), this.taskList.size());
+                } else {
+                    throw new DukeException("Command after /by should at most only have date!");
+                }
+            } else {
+                throw new DukeException("Command after /by cannot be empty!");
+            }
+        } catch (DateTimeParseException e) {
+            return messages.wrongDateInputMessageGui();
+        } catch (DukeException e) {
+            return messages.displayTextGui(e.toString());
+        }
+    }
+
     /**
      * Adds an Event Task into the List containing Tasks.
      * @param inputArr String array containing input by the user.
@@ -249,7 +381,44 @@ public class TaskList {
         Event eventTask = new Event(description, at);
         this.taskList.add(eventTask);
         messages.taskAddMessage(eventTask.toString(), this.taskList.size());
+    }
 
+    public String addEventGui(String[] inputArr) throws DescriptionException, CommandException {
+        if (inputArr.length < 2) {
+            throw new DescriptionException("event");
+        }
+
+        boolean commandAbsent = true;
+        int commandIndex = 1;
+        for (int i = 0; i < inputArr.length; i++) {
+            String currentStr = inputArr[i];
+            if (currentStr.equals("/at")) {
+                commandAbsent = false;
+                commandIndex = i;
+                break;
+            }
+        }
+        if (commandAbsent) {
+            throw new CommandException("event", "/at");
+        } else if (commandIndex == 1) {
+            throw new DescriptionException("event");
+        }
+
+        String[] descriptionArray = Arrays.copyOfRange(inputArr, 1, commandIndex);
+        String description = String.join(" ", descriptionArray);
+
+        String at;
+        if (commandIndex + 1 <= inputArr.length - 1) {
+            String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
+            at = String.join(" ", atArray);
+        } else {
+            //TODO: might need to throw error here because this case is /by and nothing behind?
+            at = "No data was inputted";
+        }
+
+        Event eventTask = new Event(description, at);
+        this.taskList.add(eventTask);
+        return messages.taskAddMessageGui(eventTask.toString(), this.taskList.size());
     }
 
     /**
@@ -270,6 +439,19 @@ public class TaskList {
         }
     }
 
+    public String markAsDoneGui(Integer taskNumber) throws TaskNumberException {
+        if (taskNumber > this.taskList.size() || taskNumber < 0) {
+            throw new TaskNumberException();
+
+        } else {
+            //because our list starts from index 0 instead of index 1
+            int realIndex = taskNumber - 1;
+            this.taskList.get(realIndex).markDone();
+
+            return messages.markDoneMessageGui(this.taskList.get(realIndex).toString());
+        }
+    }
+
     /**
      * Deletes a task from the taskList.
      * @param taskNumber task number to be deleted.
@@ -285,6 +467,19 @@ public class TaskList {
             String removedTask = this.taskList.get(realIndex).toString();
             this.taskList.remove(realIndex);
             messages.taskDeleteMessage(removedTask, this.taskList.size());
+        }
+    }
+
+    public String deleteTaskGui(Integer taskNumber) throws TaskNumberException {
+        if (taskNumber > this.taskList.size() || taskNumber < 0) {
+            throw new TaskNumberException();
+
+        } else {
+            //because our list starts from index 0 instead of index 1
+            int realIndex = taskNumber - 1;
+            String removedTask = this.taskList.get(realIndex).toString();
+            this.taskList.remove(realIndex);
+            return messages.taskDeleteMessageGui(removedTask, this.taskList.size());
         }
     }
 
@@ -314,6 +509,23 @@ public class TaskList {
                 .collect(Collectors.toList());
 
         messages.displayFilteredTasks(filteredList);
+    }
+
+    public String findTasksGui(String[] inputArr) {
+        List<Task> filteredList = this.taskList
+                .stream()
+                .filter(task -> {
+                    String description = task.getDescription();
+                    for (String s: inputArr) {
+                        if (description.contains(s)) {
+                            return true;
+                        }
+                    }
+                    return false;
+                })
+                .collect(Collectors.toList());
+
+        return messages.displayFilteredTasksGui(filteredList);
     }
 
 }

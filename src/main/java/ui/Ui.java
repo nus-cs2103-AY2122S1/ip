@@ -24,11 +24,20 @@ public class Ui {
         System.out.println(BORDERLINE + input + BORDERLINE);
     }
 
+    public String displayTextGui(String input) {
+        return input;
+    }
+
     /**
      * Displays welcome message when Duke program starts.
      */
     public void welcomeMessage() {
-        this.displayText(WELCOME_MESSAGE);
+        this.displayText(this.WELCOME_MESSAGE);
+    }
+
+
+    public String welcomeMessageGui() {
+        return WELCOME_MESSAGE;
     }
 
     /**
@@ -38,6 +47,11 @@ public class Ui {
         this.displayText(GOODBYE_MESSAGE);
     }
 
+
+    public String goodbyeMessageGui() {
+        return GOODBYE_MESSAGE;
+    }
+
     /**
      * Displays the message for a task marked as Done.
      * @param taskMarked the task that was marked to be done.
@@ -45,6 +59,12 @@ public class Ui {
     public void markDoneMessage(String taskMarked) {
         String message = String.format("Nice! I've marked this task as done:\n  %s", taskMarked);
         this.displayText(message);
+    }
+
+
+    public String markDoneMessageGui(String taskMarked) {
+        String message = String.format("Nice! I've marked this task as done:\n  %s", taskMarked);
+        return message;
     }
 
     /**
@@ -58,11 +78,21 @@ public class Ui {
         this.displayText(message);
     }
 
+    public String taskDeleteMessageGui(String taskString, int listSize) {
+        String message = "Noted. I've removed this task:\n" + taskString + "\n";
+        message += String.format("Now you have %d tasks in the list.", listSize);
+        return message;
+    }
+
     /**
      * Displays when list is empty.
      */
     public void listEmptyMessage() {
         this.displayText("Your List is Empty");
+    }
+
+    public String listEmptyMessageGui() {
+        return "Your List is Empty";
     }
 
     /**
@@ -74,6 +104,12 @@ public class Ui {
         String message = "Got it. I've added this task:\n" + taskString + "\n";
         message += String.format("Now you have %d tasks in the list.", listSize);
         this.displayText(message);
+    }
+
+    public String taskAddMessageGui(String taskString, int listSize) {
+        String message = "Got it. I've added this task:\n" + taskString + "\n";
+        message += String.format("Now you have %d tasks in the list.", listSize);
+        return message;
     }
 
     /**
@@ -100,11 +136,34 @@ public class Ui {
         System.out.println(BORDERLINE);
     }
 
+    public String displayListTasksGui(List<Task> taskList) {
+
+        //shown when there are no tasks in the list
+        if (taskList.isEmpty()) {
+            return this.listEmptyMessageGui();
+        }
+
+        String message = "";
+
+        for (int i = 0; i < taskList.size(); i++) {
+
+            //displays the current task's status
+            String inputMessage = String.format("%d. %s\n", i + 1, taskList.get(i).toString());
+            message += inputMessage;
+        }
+
+        return message;
+    }
+
     /**
      * Displays the date format to be used.
      */
     public void wrongDateInputMessage() {
         this.displayText("The input should be in the form of yyyy-dd-mm");
+    }
+
+    public String wrongDateInputMessageGui() {
+        return"The input should be in the form of yyyy-dd-mm";
     }
 
     /**
@@ -130,6 +189,24 @@ public class Ui {
         }
 
         System.out.println(BORDERLINE);
+    }
+
+    public String displayFilteredTasksGui(List<Task> taskList) {
+
+        //shown when there are no tasks in the list
+        if (taskList.isEmpty()) {
+            return this.listEmptyMessageGui();
+        }
+
+        String message = "Here are the matching tasks in your list:\n";
+
+        for (int i = 0; i < taskList.size(); i++) {
+
+            //displays the current task's status
+            String inputMessage = String.format("%d. %s\n", i + 1, taskList.get(i).toString());
+            message += inputMessage;
+        }
+        return message;
     }
 
 

@@ -9,11 +9,18 @@ package exception;
  */
 public class DukeException extends Exception {
 
+    private String error;
     /**
      * Superclass of all exceptions that could be thrown by the Duke app.
      * @param message error message to be shown.
      */
     public DukeException(String message) {
         super(message);
+        this.error = message;
+    }
+
+    @Override
+    public String toString() {
+        return this.error;
     }
 }
