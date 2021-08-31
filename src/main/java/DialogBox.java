@@ -18,10 +18,13 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
     private final Insets PHOTO_MARGIN = new Insets(10, 10, 10, 10);
     private final Insets TEXT_MARGIN = new Insets(15, 15, 15, 15);
-    private final Insets DIALOG_MARGIN = new Insets(5, 5, 5, 5);
-    private final CornerRadii BACKGROUND_CORNER_RADII = new CornerRadii(10.0);
-    private final Color BACKGROUND_COLOR = Color.rgb(210, 212, 253);
-    private final BackgroundFill BACKGROUND_FILL = new BackgroundFill(BACKGROUND_COLOR,
+    private static final Insets DIALOG_MARGIN = new Insets(5, 5, 5, 5);
+    private static final CornerRadii BACKGROUND_CORNER_RADII = new CornerRadii(10.0);
+    private static final Color USER_BACKGROUND_COLOR = Color.rgb(210, 212, 253);
+    private static final BackgroundFill USER_BACKGROUND_FILL = new BackgroundFill(USER_BACKGROUND_COLOR,
+            BACKGROUND_CORNER_RADII, DIALOG_MARGIN);
+    private static final Color MORGAN_BACKGROUND_COLOR = Color.rgb(236, 221, 254);
+    private static final BackgroundFill MORGAN_BACKGROUND_FILL = new BackgroundFill(MORGAN_BACKGROUND_COLOR,
             BACKGROUND_CORNER_RADII, DIALOG_MARGIN);
 
     public DialogBox(String string, Image image) {
@@ -37,9 +40,6 @@ public class DialogBox extends HBox {
         this.getChildren().addAll(text, displayPicture);
         this.setMargin(displayPicture, PHOTO_MARGIN);
         this.setMargin(text, TEXT_MARGIN);
-
-        Background background = new Background(BACKGROUND_FILL);
-        this.setBackground(background);
     }
 
     /**
@@ -53,12 +53,19 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String string, Image image) {
-        return new DialogBox(string, image);
+        DialogBox output = new DialogBox(string, image);
+        Background background = new Background(USER_BACKGROUND_FILL);
+        output.setBackground(background);
+        return output;
     }
 
-    public static DialogBox getDukeDialog(String string, Image image) {
-        var db = new DialogBox(string, image);
-        db.flip();
-        return db;
+    public static DialogBox getMorganDialog(String string, Image image) {
+        DialogBox output = new DialogBox(string, image);
+        output.flip();
+        Background background = new Background(MORGAN_BACKGROUND_FILL);
+        output.setBackground(background);
+        return output;
     }
+
+
 }

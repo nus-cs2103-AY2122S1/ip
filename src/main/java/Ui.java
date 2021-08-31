@@ -20,7 +20,7 @@ public class Ui {
      * Prints the starting display to the user.
      */
     public void printStartDisplay() {
-        print(centreLogo());
+        print(logo());
         print(startGreeting());
     }
 
@@ -39,7 +39,7 @@ public class Ui {
         System.out.print(LINE + s + LINE);
     }
 
-    public String centreLogo() {
+    public String logo() {
         String logo = "\t\t\t\t \t—————      —————\n"
                 + "\t\t\t\tM\t|      \\/      |\tM\n"
                 + "\t\t\t\tO\t|              |\tO\n"
@@ -51,21 +51,10 @@ public class Ui {
         return logo;
     }
 
-    public String logo() {
-        String logo = "   —————      —————\n"
-                + "M  |      \\/      |  M\n"
-                + "O  |              |  O\n"
-                + "R  |    |\\  /|    |  R\n"
-                + "G  |    | \\/ |    |  G\n"
-                + "A  |    |    |    |  A\n"
-                + "N  |    |    |    |  N\n"
-                + "    ————      ————";
-        return logo();
-    }
 
     public String startGreeting() {
-        String startGreeting = "Hello, my name is Morgan. I'm your personal task manager.\n"
-                + "What can I do for you today?";
+        String startGreeting = "Hello, my name is Morgan, and I'm your personal task assistant.\n"
+                + " What can I do for you today?";
         return startGreeting;
     }
 

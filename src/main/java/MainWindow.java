@@ -42,7 +42,7 @@ public class MainWindow extends AnchorPane {
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, morganImage)
+                DialogBox.getMorganDialog(response, morganImage)
         );
 
         userInput.clear();

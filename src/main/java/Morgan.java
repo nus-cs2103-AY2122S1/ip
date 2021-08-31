@@ -117,7 +117,7 @@ public class Morgan extends Application {
         AnchorPane.setLeftAnchor(userInput , 5.0);
         AnchorPane.setBottomAnchor(userInput, 5.0);
 
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(ui.startGreeting(), morganImage));
+        dialogContainer.getChildren().add(DialogBox.getMorganDialog(ui.startGreeting(), morganImage));
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -141,7 +141,7 @@ public class Morgan extends Application {
         String morganText = getResponse(userText);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getDukeDialog(morganText, morganImage)
+                DialogBox.getMorganDialog(morganText, morganImage)
         );
         userInput.clear();
 
