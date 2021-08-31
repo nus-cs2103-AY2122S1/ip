@@ -30,6 +30,7 @@ public class Storage {
      *
      * @return The list of tasks stored on hard disk
      */
+    //Solution below adapted from the code of Hong Ai Ling
     public List<Task> loadTasks() {
         try {
             Scanner s = new Scanner(file);
