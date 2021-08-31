@@ -1,6 +1,7 @@
 package duke.tasks;
 import duke.assignment.AssignmentType;
 import duke.exceptions.WrongDateFormatException;
+import duke.exceptions.WrongEventOrDeadlineFormatException;
 import duke.exceptions.WrongTimeFormatException;
 import duke.date.Date;
 import java.util.Optional;
@@ -23,7 +24,8 @@ public class Event extends Task {
 
     public Event(
             String desc) throws WrongDateFormatException,
-            WrongTimeFormatException {
+            WrongTimeFormatException,
+            WrongEventOrDeadlineFormatException {
         super(desc, hasDateTime, taskDirectivePoint);
     }
 

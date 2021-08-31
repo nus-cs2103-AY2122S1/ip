@@ -1,6 +1,7 @@
 package duke.tasks;
 import duke.assignment.AssignmentType;
 import duke.exceptions.WrongDateFormatException;
+import duke.exceptions.WrongEventOrDeadlineFormatException;
 import duke.exceptions.WrongTimeFormatException;
 import duke.date.Date;
 import java.util.Optional;
@@ -21,7 +22,8 @@ public class ToDo extends Task {
      */
     public ToDo(
             String desc) throws WrongDateFormatException,
-            WrongTimeFormatException {
+            WrongTimeFormatException,
+            WrongEventOrDeadlineFormatException {
         super(desc, hasDateTime, "");
     }
 

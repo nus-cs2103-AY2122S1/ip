@@ -2,8 +2,8 @@ package duke.tasks;
 
 import duke.date.Date;
 import duke.exceptions.WrongDateFormatException;
+import duke.exceptions.WrongEventOrDeadlineFormatException;
 import duke.exceptions.WrongTimeFormatException;
-
 import java.util.Optional;
 import duke.status.Status;
 
@@ -29,7 +29,8 @@ public abstract class Task {
     public Task(
             String desc, boolean hasDateTime,
             String taskDirective) throws WrongDateFormatException,
-            WrongTimeFormatException {
+            WrongTimeFormatException,
+            WrongEventOrDeadlineFormatException {
         this.taskDescription = desc;
         this.status = Status.NOT_COMPLETED.getStatus();
         this.date = this.getDateAndTime(desc, hasDateTime, taskDirective);
@@ -38,9 +39,13 @@ public abstract class Task {
     private Optional<Date> getDateAndTime(
             String desc, boolean hasDateTime,
             String taskDirective) throws WrongDateFormatException,
-            WrongTimeFormatException {
+            WrongTimeFormatException,
+            WrongEventOrDeadlineFormatException {
         if (hasDateTime) {
             String[] descArray = desc.split("/" + taskDirective);
+            if (descArray.length <= 1) {
+                throw new WrongEventOrDeadlineFormatException();
+            }
             String dateAndTime = descArray[1].trim();
             Date outputDate = new Date(dateAndTime);
             return Optional.ofNullable(outputDate);

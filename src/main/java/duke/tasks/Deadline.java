@@ -3,6 +3,7 @@ import duke.assignment.AssignmentType;
 import duke.date.Date;
 import java.util.Optional;
 import duke.exceptions.WrongDateFormatException;
+import duke.exceptions.WrongEventOrDeadlineFormatException;
 import duke.exceptions.WrongTimeFormatException;
 
 /**
@@ -23,7 +24,8 @@ public class Deadline extends Task {
      */
     public Deadline(
             String desc) throws WrongDateFormatException,
-            WrongTimeFormatException {
+            WrongTimeFormatException,
+            WrongEventOrDeadlineFormatException {
 
         super(desc, hasDateTime, taskDirectivePoint);
     }

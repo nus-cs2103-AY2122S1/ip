@@ -9,6 +9,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.status.typeTask;
 import duke.exceptions.WrongDateFormatException;
+import duke.exceptions.WrongEventOrDeadlineFormatException;
 import duke.exceptions.WrongTimeFormatException;
 
 public class TaskCommand extends Command {
@@ -26,7 +27,8 @@ public class TaskCommand extends Command {
     public void execute(
             TaskList taskList, Ui ui,
             Storage storage) throws WrongDateFormatException,
-            WrongTimeFormatException {
+            WrongTimeFormatException,
+            WrongEventOrDeadlineFormatException {
         String[] instructions = this.commandDescription.split(" ");
         String importantInstructions = String.join(" ",
                 Arrays.copyOfRange(instructions,
