@@ -5,19 +5,25 @@ package cs2103.duke;
  */
 
 public class Task {
+    protected int index;
     protected String description;
     protected boolean isDone;
-    protected String taskType;
-    protected String reminder;
 
     /**
-     * Creates a task with the specified description, isDone is false by default.
+     * Creates a task with the specified description, isDone false by default.
      *
-     * @param description description of task.
+     * @param index       Index of the task, starting from 0.
+     * @param description Description of the task.
+
      */
-    public Task(String description) {
+    public Task(int index, String description) {
+        this.index = index;
         this.description = description;
         this.isDone = false;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     /**
@@ -27,26 +33,6 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
-    }
-
-    /**
-     * Getter method for type of task using taskType.
-     *
-     * @return A letter representing the type of the task (T, D, E).
-     */
-    public String getTypeIcon() {
-        return (this.taskType == "todo" ? "T" :
-                this.taskType == "deadline" ? "D" :
-                        this.taskType == "event" ? "E" : "NONE");
-    }
-
-    /**
-     * Getter method for task reminder.
-     *
-     * @return The string reminder for the task.
-     */
-    public String getReminder() {
-        return this.reminder;
     }
 
     /**

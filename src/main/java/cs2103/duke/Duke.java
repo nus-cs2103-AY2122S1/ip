@@ -1,16 +1,14 @@
 package cs2103.duke;
 
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.io.IOException;
 
 /**
  * This class encapsulates a Duke chat-bot.
  */
 public class Duke {
-    private static ArrayList<Task> taskArrayList = new ArrayList<>();
-    private static String dukeFilePath;
-    private Storage storage;
+    private final String dukeFilePath;
+    private final Storage storage;
     private TaskList tasks;
     private Ui ui;
 
@@ -26,7 +24,7 @@ public class Duke {
         ui = new Ui(tasks);
     }
 
-    public void run() throws IOException {
+    public void run() {
         System.out.println(ui.showWelcome());
         boolean canExit = false;
         // Scanner to read user inputs
@@ -39,7 +37,6 @@ public class Duke {
                     canExit = true;
                     // store task list
                     String temp = tasks.listBeautify();
-                    System.out.println("temp is: " + temp);
                     storage.overwriteFile(dukeFilePath, temp);
                     System.out.println(ui.showGoodbye());
                 } else { // check first input
