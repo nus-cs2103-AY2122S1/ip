@@ -25,6 +25,11 @@ public class Duke {
         taskList = new TaskList(storage);
     }
 
+    /**
+     * This method takes in the user input as a String and returns Duke output.
+     * @param input String taken from user input.
+     * @return String which Duke shows the user.
+     */
     public String getResponse(String input) {
         String dukeResponse = "";
         try {

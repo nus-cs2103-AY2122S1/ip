@@ -65,6 +65,12 @@ public class TaskList {
         return curr.toString();
     }
 
+    /**
+     * This method searches the input string inside the list of tasks and returns
+     * all the tasks containing the searchString as a list of String.
+     * @param searchString String input to search.
+     * @return List of String of tasks that match the search term.
+     */
     public String findTask(String searchString) {
         int counter = 1;
         String result = "";
