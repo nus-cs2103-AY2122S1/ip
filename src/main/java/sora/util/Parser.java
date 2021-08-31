@@ -21,14 +21,14 @@ public class Parser {
         // Each if else handles one type of command
         if (command.equals("list")) {
             return TaskList::printFullList;
-        } else if (command.matches("^done( .*)?")) {
-            return (tasks) -> tasks.taskDone(command);
         } else if (command.matches("^todo( .*)?")) {
             return (tasks) -> tasks.addTodo(command);
         } else if (command.matches("^deadline( .*)?")) {
             return (tasks) -> tasks.addDeadline(command);
         } else if (command.matches("^event( .*)?")) {
             return (tasks) -> tasks.addEvent(command);
+        } else if (command.matches("^done( .*)?")) {
+            return (tasks) -> tasks.taskDone(command);
         } else if (command.matches("^delete( .*)?")) {
             return (tasks) -> tasks.taskDelete(command);
         } else if (command.matches("^find( .*)?")) {

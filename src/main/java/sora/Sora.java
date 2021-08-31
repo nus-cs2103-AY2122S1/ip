@@ -57,7 +57,10 @@ public class Sora {
         while (!(input = ui.readCommand()).equals("bye")) {
             try {
                 // Interpret and execute the command input by user
-                String message = Parser.interpretCommand(input).execute(taskList);
+                String message =
+                    input.equals("help")
+                    ? Message.HELP.toString()
+                    : Parser.interpretCommand(input).execute(taskList);
                 ui.printMessage(message);
 
                 // Update storage file
@@ -82,6 +85,10 @@ public class Sora {
         // Exit is handled separately
         if (command.equals("bye")) {
             return Message.EXIT.toString();
+        }
+
+        if (command.equals("help")) {
+            return Message.HELP.toString();
         }
 
         String message;

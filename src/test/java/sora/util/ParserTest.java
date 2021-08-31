@@ -28,7 +28,9 @@ class ParserTest {
             UnknownCommandException exception = assertThrows(UnknownCommandException.class,
                 () -> Parser.interpretCommand(command));
 
-            assertEquals("Sorry but my database does not have such command.", exception.getMessage());
+            assertEquals("Sorry but my database does not have such command.\n"
+                    + "Try typing 'help' for more information regarding this app!",
+                exception.getMessage());
         }
     }
 

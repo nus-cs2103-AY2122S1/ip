@@ -12,7 +12,10 @@ public enum Message {
     DONE("Congrats! You have accomplished the following task:"),
     ADD("Alright, new task added to the list:"),
     DELETE("Sure, I've deleted this task:"),
-    LIST("Here are the tasks in your list:");
+    LIST("Here are the tasks in your list:"),
+    HELP("Name: Sora\n"
+        + "Version: The creator lost count...\n"
+        + "Supported Features: help, list, todo, deadline, event, done, delete, find");
 
     private String message;
 
