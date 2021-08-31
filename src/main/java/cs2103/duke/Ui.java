@@ -5,17 +5,18 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    private static final int lv = 8;
+    private static final int lv = 9;
     private static final String[] features = {
             "",
             "Greet, Echo, Exit",
-            ", Add, List",
+            ", Add, List\n",
             ", Mark as Done",
             ", ToDos, Events, Deadlines",
-            ", Handle Errors",
+            ", Handle Errors\n",
             ", Delete",
             ", Save",
-            ", Dates and Times"
+            ", Dates and Times",
+            ", Find\n"
     };
     private static TaskList taskArrayList;
 
@@ -117,6 +118,10 @@ public class Ui {
             String eventName = eventTokens[0];
             String eventReminder = eventTokens[1];
             return tasks.addTask("event", eventName, eventReminder);
+        case "find":
+            if (scanner.hasNext()) {
+                return tasks.findTasks(scanner.nextLine());
+            } else throw new DukeException("unspecified keyword to search for");
         default:
             throw new DukeException("Unknown Input"); // unknown input
         }

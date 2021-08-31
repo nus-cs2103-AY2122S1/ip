@@ -34,7 +34,7 @@ public class TaskList {
     public String listBeautify() {
         StringBuilder listBeautified = new StringBuilder();
         for (int i = 0; i < taskArrayList.size(); i++) {
-            listBeautified.append(i + 1)
+            listBeautified.append(taskArrayList.get(i).getIndex() + 1)
                     .append(".")
                     .append(taskArrayList.get(i).toString());
             if (i < taskArrayList.size() - 1) { // new line except for last item
@@ -111,8 +111,8 @@ public class TaskList {
     /**
      * Adds a task into the task list.
      *
-     * @param type the type of task to be added
-     * @param name the name of task to be added
+     * @param type        the type of task to be added
+     * @param name        the name of task to be added
      * @param description the description of the task
      * @return string representing the newly added task
      * @throws DukeException
@@ -123,7 +123,7 @@ public class TaskList {
             if (name.trim().equals("")) {
                 throw new DukeException("No task name");
             }
-            Task newestTodo = new ToDo(name);
+            Task newestTodo = new ToDo(taskArrayList.size(), name);
             taskArrayList.add(newestTodo);
             return (sandwich("New todo task added:\n"
                     + newestTodo
@@ -134,7 +134,7 @@ public class TaskList {
             if (!isValidDate(description)) {
                 throw new DukeException("Invalid Date, please follow the format YYYY-MM-DD");
             }
-            Task newestDeadline = new Deadline(name, description);
+            Task newestDeadline = new Deadline(taskArrayList.size(), name, description);
             taskArrayList.add(newestDeadline);
             return (sandwich("New deadline task added:\n"
                     + newestDeadline
@@ -145,7 +145,7 @@ public class TaskList {
             if (!isValidDate(description)) {
                 throw new DukeException("Invalid Date, please follow the format YYYY-MM-DD");
             }
-            Task newestEvent = new Event(name, description);
+            Task newestEvent = new Event(taskArrayList.size(), name, description);
             taskArrayList.add(newestEvent);
             return (sandwich("New deadline task added:\n"
                     + newestEvent
@@ -166,7 +166,7 @@ public class TaskList {
             throw new DukeException("This task index is not in the task list!");
         }
         taskArrayList.get(index - 1).markAsDone();
-        return (sandwich("Congratulations! You have finished this task: "
+        return (sandwich("Congratulations! You have finished this task:\n"
                 + taskArrayList.get(index - 1).toString()));
     }
 
@@ -174,7 +174,7 @@ public class TaskList {
         if (index > taskArrayList.size()) {
             throw new DukeException("This task index is not in the task list!");
         }
-        String deleteMessage =  (sandwich("Got it, I have deleted this task: "
+        String deleteMessage = (sandwich("Got it, I have deleted this task:\n"
                 + taskArrayList.get(index - 1).toString()
                 + "\nYou now have "
                 + (taskArrayList.size() - 1)
@@ -182,5 +182,33 @@ public class TaskList {
         // actual logic of deletion
         taskArrayList.remove(index - 1);
         return deleteMessage;
+    }
+
+    /**
+     * This method finds all tasks matching a keyword entered by the user.
+     *
+     * @param keyword The keyword to match tasks to.
+     * @return All tasks matching the keyword.
+     * @throws DukeException If keyword is invalid.
+     */
+    public String findTasks(String keyword) throws DukeException {
+        // if 'keyword' contains more than one word or any spaces
+        if (keyword.trim().split("\\s+").length > 1) {
+            throw new DukeException("Invalid keyword, please enter only one keyword without blanks");
+        } else {
+            ArrayList<Task> subList = new ArrayList<>();
+            for (Task task : taskArrayList) { // for each task in the taskArrayList
+                if (task.description.contains(keyword)) { // add task to subList if contains keyword
+                    subList.add(task);
+                }
+            }
+            if (subList.isEmpty()) {
+                return ("No matches found for keyword: " + keyword.trim());
+            }
+            TaskList matchedTaskList = new TaskList(subList);
+            return sandwich("Here are the matching tasks in your list:\n"
+                    + matchedTaskList.listBeautify()
+            );
+        }
     }
 }

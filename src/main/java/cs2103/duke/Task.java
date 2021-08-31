@@ -5,6 +5,7 @@ package cs2103.duke;
  */
 
 public class Task {
+    protected int index;
     protected String description;
     protected boolean isDone;
     protected String taskType;
@@ -12,12 +13,18 @@ public class Task {
 
     /**
      * Creates a task with the specified description, isDone false by default.
-     *  @param description description of task
      *
+     * @param index       Index of the task, starting from 0.
+     * @param description description of task
      */
-    public Task(String description) {
+    public Task(int index, String description) {
+        this.index = index;
         this.description = description;
         this.isDone = false;
+    }
+
+    public int getIndex() {
+        return index;
     }
 
     /**

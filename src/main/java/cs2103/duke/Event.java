@@ -4,12 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-
+    protected int index;
     protected String at;
     protected LocalDate date;
 
-    public Event(String description, String at) {
-        super(description);
+    public Event(int index, String description, String at) {
+        super(index, description);
+        this.index = index;
         this.at = at;
         this.date = LocalDate.parse(at);
     }

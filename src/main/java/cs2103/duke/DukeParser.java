@@ -51,7 +51,7 @@ public class DukeParser {
             switch (taskType) {
             case 'T':
                 String todoName = nLine.substring(ref + 5, strLength);
-                Task newestTodo = new ToDo(todoName);
+                Task newestTodo = new ToDo(result.size(), todoName);
                 if (isDone) {
                     newestTodo.markAsDone();
                 }
@@ -63,7 +63,7 @@ public class DukeParser {
                 String deadlineName = arrD[0];
                 String deadlineReminder = arrD[1].substring(0, arrD[1].length() - 1);
                 deadlineReminder = parseDate(deadlineReminder);
-                Task newestDeadline = new Deadline(deadlineName, deadlineReminder);
+                Task newestDeadline = new Deadline(result.size(), deadlineName, deadlineReminder);
                 result.add(newestDeadline);
                 if (isDone) {
                     newestDeadline.markAsDone();
@@ -75,7 +75,7 @@ public class DukeParser {
                 String eventName = arrE[0];
                 String eventReminder = arrE[1].substring(0, arrE[1].length() - 1);
                 eventReminder = parseDate(eventReminder);
-                Task newestEvent = new Event(eventName, eventReminder);
+                Task newestEvent = new Event(result.size(), eventName, eventReminder);
                 result.add(newestEvent);
                 if (isDone) {
                     newestEvent.markAsDone();
