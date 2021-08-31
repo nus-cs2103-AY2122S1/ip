@@ -4,6 +4,7 @@ import duke.command.AddTaskCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.MarkDoneCommand;
 
 import duke.task.DeadlineTask;
@@ -57,6 +58,8 @@ public class Parser {
             break;
         case "event":
             return addEvent(splitInput);
+        case "find":
+            return findTask(splitInput);
         case "todo":
             return addTodo(splitInput);
         default:
@@ -182,4 +185,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Finds a Task from the TaskList.
+     * @param input String of user input.
+     * @return FindCommand, null if error.
+     */
+    private Command findTask(String[] input) {
+        try {
+            String[] searchTerms = input[1].split(" ");
+            return new FindCommand(taskList, storage, ui, searchTerms);
+        } catch (IndexOutOfBoundsException e) {
+            ui.showError("Error: Please specify search terms.");
+            return null;
+        }
+    }
 }
