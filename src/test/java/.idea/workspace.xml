@@ -6,10 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8423f16e-2284-4e78-b85a-1ee736eaa834" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../main/java/Duke.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="8423f16e-2284-4e78-b85a-1ee736eaa834" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
