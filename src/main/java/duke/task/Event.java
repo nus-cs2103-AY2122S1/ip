@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * A wrapper for an duke.task.Event which is a duke.task.Task that start at a specific date/time.

@@ -29,11 +29,6 @@ public class DukeTest {
             }
             System.setIn(new ByteArrayInputStream(input.toString().getBytes()));
             new Scanner(System.in);
-
-            Duke duke = new Duke("./data/duke.txt");
-            duke.run();
-
-
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
