@@ -1,4 +1,4 @@
-package Command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
@@ -37,7 +37,7 @@ public class CreateNewToDoCommand extends Command {
      */
     @Override
     public boolean equals(Object o) {
-        return o instanceof CreateNewToDoCommand &&
-                super.getExtraInput().equals(((CreateNewToDoCommand) o).getExtraInput());
+        return o instanceof CreateNewToDoCommand
+                && super.getExtraInput().equals(((CreateNewToDoCommand) o).getExtraInput());
     }
 }

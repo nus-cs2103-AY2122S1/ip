@@ -1,4 +1,4 @@
-package Command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
@@ -25,8 +25,8 @@ public class CreateNewEventCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String[] message_and_eventDate = super.getExtraInput().split("/at ");
-        taskList.add(new Event(message_and_eventDate[0], message_and_eventDate[1]));
+        String[] messageAndEventDate = super.getExtraInput().split("/at ");
+        taskList.add(new Event(messageAndEventDate[0], messageAndEventDate[1]));
     }
 
     /**
@@ -37,7 +37,7 @@ public class CreateNewEventCommand extends Command {
      */
     @Override
     public boolean equals(Object o) {
-        return o instanceof CreateNewEventCommand &&
-                super.getExtraInput().equals(((CreateNewEventCommand) o).getExtraInput());
+        return o instanceof CreateNewEventCommand
+                && super.getExtraInput().equals(((CreateNewEventCommand) o).getExtraInput());
     }
 }

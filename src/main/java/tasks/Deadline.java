@@ -11,7 +11,13 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private final LocalDate endTime;
 
-    public Deadline(String message, String endTime){
+    /**
+     * Constructor for Deadline object.
+     *
+     * @param message name of Deadline
+     * @param endTime deadline time
+     */
+    public Deadline(String message, String endTime) {
         super(message);
         this.endTime = LocalDate.parse(endTime);
     }
@@ -22,8 +28,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " +
-                endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + "(by: "
+                + endTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
     /**
      * Converts contents to a storable String.
