@@ -11,21 +11,28 @@ public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
+    private boolean isUser;
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    public DialogBox(Label l, ImageView iv, boolean isUser) {
+        this.text = l;
+        this.displayPicture = iv;
+        this.isUser = isUser;
 
-        text.setWrapText(true);
-        text.setFont(new Font(15));
-        text.setPadding(new Insets(10));
-        text.setPrefWidth(290);
+        this.text.setWrapText(true);
+        this.text.setFont(new Font(15));
+        this.text.setPadding(new Insets(10));
+        this.text.setPrefWidth(270);
 
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-
+        this.displayPicture.setFitWidth(100.0);
+        this.displayPicture.setFitHeight(100.0);
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
         this.setPadding(new Insets(10));
+
+        if (isUser) {
+            this.getChildren().addAll(displayPicture, text);
+        } else {
+            this.getChildren().addAll(text, displayPicture);
+        }
     }
+
 }
