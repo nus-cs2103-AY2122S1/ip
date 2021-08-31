@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Represents the Ui of Duke.
  */
 public class Ui {
-    public static String LINE = "____________________________________________________________";
+    public static final String LINE = "____________________________________________________________";
     private final Scanner sc;
 
     /**
@@ -31,20 +31,6 @@ public class Ui {
     }
 
     /**
-     * Prints add message in same style as other outputs of Duke whenever
-     * a new Task has been added.
-     *
-     * @param toAdd Task to be added.
-     * @param size Size of TaskList.
-     */
-    public void printAdd(Task toAdd, int size) {
-        String message = "Got it. I've added this task:\n" + "  " + toAdd
-                + "\nNow you have " + size + " tasks in the list.";
-
-        print(message);
-    }
-
-    /**
      * Prints out TaskList in a form of a list for users to see.
      *
      * @param tasks TaskList to be printed.
@@ -58,6 +44,20 @@ public class Ui {
 
         }
         System.out.println(LINE);
+    }
+
+    /**
+     * Prints add message in same style as other outputs of Duke whenever
+     * a new Task has been added.
+     *
+     * @param toAdd Task to be added.
+     * @param size Size of TaskList.
+     */
+    public void printAdd(Task toAdd, int size) {
+        String message = "Got it. I've added this task:\n" + "  " + toAdd
+                + "\nNow you have " + size + " tasks in the list.";
+
+        print(message);
     }
 
     /**

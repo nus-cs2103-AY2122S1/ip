@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * Representation for the find command of Duke.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private final String keyword;
 

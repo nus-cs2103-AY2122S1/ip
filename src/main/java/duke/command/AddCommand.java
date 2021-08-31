@@ -8,7 +8,7 @@ import duke.Ui;
 /**
  * Representation for the add command of Duke.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private final Task toAdd;
 
     /**
@@ -16,7 +16,7 @@ public class AddCommand extends Command{
      *
      * @param toAdd Task to add to taskList.
      */
-    public AddCommand(Task toAdd){
+    public AddCommand(Task toAdd) {
         this.toAdd = toAdd;
     }
 
