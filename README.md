@@ -29,7 +29,7 @@ Everybody needs one!
 1. Open command prompt in the same folder as `ip.jar` and enter `java -jar ip.jar` into the command prompt
 1. Run it and have fun!
 
-Disclaimer: Not responsible for any mishaps that happens to your computer
+*Disclaimer: Not responsible for any mishaps that happens to your computer*
    
 ### END
 
