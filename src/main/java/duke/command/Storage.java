@@ -1,7 +1,10 @@
 package duke.command;
 
 import duke.TaskList;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -52,7 +55,6 @@ public class Storage {
             String task = sc.nextLine();
 
             if (task.equals("\n")) {
-                System.out.println(task);
                 continue;
             }
 

@@ -46,6 +46,8 @@ public class Parser {
             type = InputTypes.DELETE;
         } else if (task.contains(InputTypes.FIND.getValue())) {
             type = InputTypes.FIND;
+        } else if (task.contains(InputTypes.BYE.getValue())) {
+            type = InputTypes.BYE;
         }
         return type;
     }
