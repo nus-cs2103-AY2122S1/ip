@@ -2,6 +2,11 @@ package duke.util;
 
 import java.util.Scanner;
 
+/**
+ * Handle the input and output from and to the user.
+ *
+ * @author Zhang Shi Chen
+ */
 public class Ui {
     private final Scanner sc;
 

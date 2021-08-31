@@ -2,6 +2,8 @@ package duke.util;
 
 /**
  * Stores the messages which UI uses to print.
+ *
+ * @author Zhang Shi Chen
  */
 public enum Message {
     HORIZONTAL_LINE("\t____________________________________________________________\n"),

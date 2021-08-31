@@ -3,6 +3,11 @@ package duke.util;
 import duke.exception.UnknownCommandException;
 import duke.task.TaskList;
 
+/**
+ * Interpreter for user's command.
+ *
+ * @author Zhang Shi Chen
+ */
 public class Parser {
     /**
      * Interprets the command entered by user and returns the corresponding method

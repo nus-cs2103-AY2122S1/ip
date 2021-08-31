@@ -20,6 +20,11 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * Manage the load and save from and to the data file.
+ *
+ * @author Zhang Shi Chen
+ */
 public class Storage {
     private final String filePath;
 
