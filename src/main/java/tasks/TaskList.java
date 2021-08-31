@@ -60,6 +60,10 @@ public class TaskList {
         return true;
     }
 
+    public void clear() {
+        this.tasks.clear();
+    }
+
     /**
      * Returns a task specified by the index.
      * @param taskNumber The index of the task to be retrieved.

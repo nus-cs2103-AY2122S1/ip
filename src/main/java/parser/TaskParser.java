@@ -16,6 +16,7 @@ public class TaskParser {
     private final static int DESCRIPTION_INDEX = 2; // Task description
     private final static int DATETIME_INDEX = 3; // Task date/time (if applicable)
     public final static String DELIMITER = "¬";
+    private final static String TAMPERED_ERROR = "Storage data has been tampered.";
 
     /**
      * Translates a task into its storage string representation.
@@ -52,7 +53,7 @@ public class TaskParser {
     public Task decode(String string) throws MorganException {
         String[] data = string.split(DELIMITER);
         if (data.length <= DESCRIPTION_INDEX) {
-            throw new MorganException("OOPS!!! storage.Storage data has been tampered.");
+            throw new MorganException(TAMPERED_ERROR);
         }
         String taskType = data[TASK_INDEX].trim();
         boolean isDone = Boolean.parseBoolean(data[STATUS_INDEX].trim());
@@ -63,20 +64,23 @@ public class TaskParser {
         switch(taskType) {
         case (EventTask.KEYWORD):
             if (data.length <= DATETIME_INDEX) {
-                throw new MorganException("OOPS!!! storage.Storage data has been tampered.");
+                throw new MorganException(TAMPERED_ERROR);
             }
             dateTimeString = data[DATETIME_INDEX].trim();
             task = new EventTask(description, dateTimeString);
             break;
         case (DeadlineTask.KEYWORD):
             if (data.length <= DATETIME_INDEX) {
-                throw new MorganException("OOPS!!! storage.Storage data has been tampered.");
+                throw new MorganException(TAMPERED_ERROR);
             }
             dateTimeString = data[DATETIME_INDEX].trim();
             task = new DeadlineTask(description, dateTimeString);
             break;
-        default:
+        case (ToDoTask.KEYWORD):
             task = new ToDoTask(description);
+            break;
+        default:
+            throw new MorganException(TAMPERED_ERROR);
         }
         if (isDone) {
             task.markDone();

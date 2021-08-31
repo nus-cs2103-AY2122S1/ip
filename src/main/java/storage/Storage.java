@@ -1,8 +1,9 @@
 package storage;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import exceptions.MorganException;
@@ -19,6 +20,10 @@ public class Storage {
     private final TaskParser parser = new TaskParser();
     private final File file;
     protected static final String DELIMITER = TaskParser.DELIMITER;
+    private static final String FILE_ERROR = "Warning: Unable to locate storage data. " +
+            "A new storage file has been created.";
+    private static final String DECODE_ERROR = "Warning: Some tasks may be missing due " +
+            "to storage file tampering. ";
 
     /**
      * Constructor for storage.Storage.
@@ -39,19 +44,26 @@ public class Storage {
      * @throws MorganException
      */
     public void load(TaskList taskList) throws MorganException {
+        boolean hasInvalidFormatting = false;
         try {
             Scanner sc = new Scanner(this.file);
+            taskList.clear();
             while (sc.hasNextLine()) {
                 String taskString = sc.nextLine();
                 try {
                     Task task = parser.decode(taskString);
                     taskList.addTask(task);
                 } catch (MorganException e) {
-                    throw e;
+                    hasInvalidFormatting = true;
+                    continue;
                 }
             }
-        } catch (IOException e) {
-            throw new MorganException(e.getMessage());
+        } catch (FileNotFoundException e) {
+            this.save(taskList);
+            throw new MorganException(FILE_ERROR);
+        }
+        if (hasInvalidFormatting) {
+            throw new MorganException(DECODE_ERROR);
         }
     }
 
