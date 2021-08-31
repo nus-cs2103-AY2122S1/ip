@@ -1,5 +1,7 @@
 package viper;
 
+import tasks.Task;
+
 import java.util.Scanner;
 
 /**
@@ -13,20 +15,21 @@ public class Ui {
         Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
-    
-    public void showMessage (String[] strings) {
+
+    public void showMessage(String[] strings) {
         System.out.println(DIVIDER);
+
         for (String string : strings) {
             System.out.println(INDENT + string);
         }
         System.out.println(DIVIDER);
     }
-    
-    public void printLine (String str) {
+
+    public void printLine(String str) {
         System.out.println(INDENT + str);
     }
     
-    public void printDiv () {
+    public void printDiv() {
         System.out.println(DIVIDER);
     }
     
@@ -57,10 +60,25 @@ public class Ui {
         showMessage(msg);
     }
 
-    public void showListHeader (String[] strings) {
+    public void showListHeader(String[] strings) {
         System.out.println(DIVIDER);
         for (String string : strings) {
             System.out.println(INDENT + string);
         }
+    }
+    
+    public void showList(TaskList taskList, String keyword) {
+        System.out.println(DIVIDER);
+        if (taskList.getSize() > 0) {
+            printLine("This is what I have found based on the keyword: " + keyword);
+            for (int i = 0; i < taskList.getSize(); i++) {
+                int taskNo = i + 1;
+                Task curr = taskList.getTask(i);
+                printLine(taskNo + "." + curr.toString());
+            }
+        } else {
+            printLine("Oops, based on your keyword: " + keyword + ", I am not able to find any match :(");
+        }
+        System.out.println(DIVIDER);
     }
 }

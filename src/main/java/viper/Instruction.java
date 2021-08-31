@@ -12,7 +12,7 @@ public enum Instruction {
     DELETE("delete"),
     BYE("bye"),
     INVALID("invalid"),
-    EMPTY("empty"),
+    FIND("find"),
     ;
 
     private final String s;
