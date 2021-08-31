@@ -13,6 +13,7 @@ import javafx.scene.control.SelectionMode;
 
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 
 import javafx.scene.text.Text;
@@ -42,7 +43,11 @@ public class MainWindow extends AnchorPane {
     private Text taskDisplay;
     @FXML
     private ListView<Task> listOfTasks;
+    @FXML
+    private BorderPane borderPane;
+
     private Duke duke;
+
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -50,7 +55,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        scrollPane.hvalueProperty().bind(dialogContainer.widthProperty());
+        //To bind the width of the scroll pane to the dialog container
+        scrollPane.fitToWidthProperty().bind(dialogContainer.fillWidthProperty());
         listOfTasks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        
     }
 
     /**
