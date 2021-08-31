@@ -1,6 +1,7 @@
 package duke.task;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * The abstract Task class encapsulates information

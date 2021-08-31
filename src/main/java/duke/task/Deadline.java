@@ -1,8 +1,10 @@
 package duke.task;
 
-import java.util.*;
-import java.time.*;
-import java.time.format.*;
+import java.util.List;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * The Deadline class encapsulates information

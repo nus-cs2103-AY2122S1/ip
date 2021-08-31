@@ -1,6 +1,8 @@
 package duke.util;
 
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+
 import duke.exception.DukeException;
 
 /**
@@ -14,7 +16,6 @@ public class UI {
     private final String tab;
     private final String horizontalLine;
     private final List<String> list;
-    private final Scanner sc;
 
     /**
      * Creates and initalizes a new UI instance.
@@ -23,7 +24,6 @@ public class UI {
         this.tab = " ".repeat(4);
         this.horizontalLine = "_".repeat(60);
         this.list = new ArrayList<>();
-        this.sc = new Scanner(System.in);
     }
 
     /**
@@ -46,15 +46,6 @@ public class UI {
             add(line);
         }
         return print();
-    }
-
-    /**
-     * Reads the next line from standard input.
-     *
-     * @return Returns the line read.
-     */
-    public String readLine() {
-        return sc.nextLine();
     }
 
     /**

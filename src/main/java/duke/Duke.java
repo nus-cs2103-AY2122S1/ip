@@ -1,6 +1,7 @@
 package duke;
 
-import java.io.*;
+import java.io.IOException;
+
 import duke.util.UI;
 import duke.util.Parser;
 import duke.util.Storage;
@@ -36,33 +37,23 @@ public class Duke {
         this.isExit = false;
     }
 
-    public boolean getExitStatus() {
+    /**
+     * Returns the boolean exit status of Duke.
+     * 
+     * @return Returns the boolean exit status of Duke.
+     */
+    public boolean getIsExit() {
         return this.isExit;
     }
 
+    /**
+     * Returns the UI element of Duke. 
+     * 
+     * @return Returns the UI element of Duke.
+     */
     public UI getUI() {
         return this.ui;
     }
-
-    /*
-    private void run() {
-        ui.printStartUpMessage();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String input = ui.readLine();
-                Command command = Parser.parse(input);
-                command.execute(taskList, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException ex) {
-                ui.printErrorMessage(ex);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-    */
 
     /**
      * You should have your own function to generate a response to user input.

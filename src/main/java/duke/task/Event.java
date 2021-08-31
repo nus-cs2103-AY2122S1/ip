@@ -1,6 +1,6 @@
 package duke.task;
 
-import java.util.*;
+import java.util.List;
 
 /**
  * The Event class encapsulates information
