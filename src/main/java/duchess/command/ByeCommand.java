@@ -23,8 +23,8 @@ public class ByeCommand extends Command {
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public boolean handleLogic(Duchess duchess) {
-        return false;
+    public String handleLogic(Duchess duchess) {
+        return "I bid thee farewell.";
     }
 
 }

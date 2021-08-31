@@ -30,30 +30,6 @@ public class Duchess {
         this.sc = new Scanner(System.in);
         this.duchessList = DuchessFileHandler.load();
         this.parser = new Parser();
-        ui.prettyPrint("Good day. I am Duchess.\nWhat can I do for you?");
-    }
-
-    public static void main(String[] args) {
-        new Duchess().run();
-    }
-
-
-    /**
-     * Handles the input from the user and the corresponding response.
-     */
-    public void run()
-    {
-        boolean isRunning = true;
-        while (isRunning) {
-            try {
-                String input = sc.nextLine();
-                Command c = parser.checkPrefix(input);
-                isRunning = c.handleLogic(this);
-            } catch (DuchessException d){
-                ui.prettyPrint(d.getMessage());
-            }
-        }
-        ui.prettyPrint("I bid thee farewell.");
     }
 
     public Ui getUi() {
@@ -62,5 +38,13 @@ public class Duchess {
 
     public DuchessList getDuchessList() {
         return this.duchessList;
+    }
+
+    public String getResponse(String input) {
+        try {
+            return parser.checkPrefix(input).handleLogic(this);
+        } catch (DuchessException d) {
+            return d.getMessage();
+        }
     }
 }

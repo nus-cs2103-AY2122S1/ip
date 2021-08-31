@@ -12,7 +12,9 @@ public class FindCommandTest {
     public void testHandleLogic() {
         DuchessFileHandler.clear();
         Duchess d = new Duchess();
-        d.getDuchessList().add(new ToDo("assignment"));
-        assertEquals(new FindCommand("assignment").handleLogic(d), true);
+        ToDo t = new ToDo("assignment");
+        d.getDuchessList().add(t);
+        assertEquals(new FindCommand("assignment").handleLogic(d), "1. " + t + "\n");
+        assertEquals(new FindCommand("hahaha").handleLogic(d), "There are no tasks with that keyword.");
     }
 }

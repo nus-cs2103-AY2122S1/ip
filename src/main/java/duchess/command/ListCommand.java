@@ -21,8 +21,7 @@ public class ListCommand extends Command {
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public boolean handleLogic(Duchess duchess) {
-        duchess.getUi().prettyPrint(duchess.getDuchessList().printList());
-        return true;
+    public String handleLogic(Duchess duchess) {
+        return duchess.getDuchessList().printList();
     }
 }
