@@ -21,8 +21,8 @@ public class Event extends Task {
     public Event(String description, String at) {
         super(description);
         String[] times = at.split("to", 2);
-        this.startingTime = LocalDateTime.parse(times[0].trim(), Task.formatter);
-        this.endingTime = LocalDateTime.parse(times[1].trim(), Task.formatter);
+        this.startingTime = LocalDateTime.parse(times[0].trim(), Task.FORMATTER);
+        this.endingTime = LocalDateTime.parse(times[1].trim(), Task.FORMATTER);
         if (this.endingTime.isBefore(this.startingTime)) {
             this.swapTime(); // swap them if they are in incorrect sequence
         }
@@ -44,9 +44,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " +
-                this.startingTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + " to " +
-                this.endingTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
+        return "[E]" + super.toString() + " (at: "
+                + this.startingTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + " to "
+                + this.endingTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
     }
 
     /**

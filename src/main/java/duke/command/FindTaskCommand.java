@@ -1,17 +1,17 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.data.Storage;
 import duke.data.TaskList;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command that finds a task with keyword. A subclass of Command.
  */
 public class FindTaskCommand extends Command {
     /** The keyword to be found */
-    String keyword;
+    private String keyword;
 
     /**
      * Constructor of the class `FindTaskCommand`.

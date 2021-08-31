@@ -1,14 +1,14 @@
 package duke;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import duke.command.Command;
 import duke.data.Storage;
 import duke.data.TaskList;
 import duke.exception.DukeException;
 import duke.ui.Parser;
 import duke.ui.Ui;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Represents the Duke program. Manages tasks based on commands received.

@@ -14,7 +14,7 @@ public class MissingCommandDetailException extends DukeException {
      * @param timeFormat Time format of the task.
      */
     public MissingCommandDetailException(String missingDetails, String taskType, String timeFormat) {
-        super(String.format("☹ OOPS!!! The %s of %s cannot be empty.\n", missingDetails, taskType) +
-                Ui.getCommandFormat(taskType, timeFormat));
+        super(String.format("☹ OOPS!!! The %s of %s cannot be empty.\n", missingDetails, taskType)
+                + Ui.getCommandFormat(taskType, timeFormat));
     }
 }

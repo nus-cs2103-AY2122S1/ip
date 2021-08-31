@@ -1,19 +1,20 @@
 package duke.command;
 
-import duke.data.Storage;
-import duke.data.TaskList;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class AddTaskCommandTest {
     private TaskList taskList1 = new TaskList();
@@ -36,7 +37,7 @@ public class AddTaskCommandTest {
     }
 
     @Test
-    public void execute_TaskList_success() {
+    public void execute_taskList_success() {
         Task[] tasks = new Task[] {task1, task2, task3};
         Storage storage = new Storage(path, taskList1);
         for (int i = 0; i < 3; i++) {
@@ -51,7 +52,7 @@ public class AddTaskCommandTest {
     }
 
     @Test
-    public void execute_File_success() {
+    public void execute_file_success() {
         Storage storage = new Storage(path, taskList1);
         AddTaskCommand command = new AddTaskCommand(task1);
         command.execute(taskList1, storage);

@@ -1,9 +1,9 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeException;
-
-import java.util.Scanner;
 
 /**
  * Represents UI of the Duke program.
@@ -11,10 +11,10 @@ import java.util.Scanner;
 public class Ui {
     /** Greeting message to be printed when the program starts */
     private static final String GREETING_MESSAGE =
-            "____________________________________________________________\n" +
-                    "Hello! I'm Duke\n" +
-                    "What can I do for you?\n" +
-                    "____________________________________________________________\n";
+            "____________________________________________________________\n"
+                    + "Hello! I'm Duke\n"
+                    + "What can I do for you?\n"
+                    + "____________________________________________________________\n";
     /** Scanner used to read commands */
     private Scanner input;
 

@@ -1,12 +1,23 @@
 package duke.ui;
 
-import duke.command.*;
-import duke.exception.*;
+import java.time.format.DateTimeParseException;
+
+import duke.command.AddTaskCommand;
+import duke.command.Command;
+import duke.command.DeleteTaskCommand;
+import duke.command.ExitCommand;
+import duke.command.FindTaskCommand;
+import duke.command.GetListCommand;
+import duke.command.TaskDoneCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidTaskNoException;
+import duke.exception.InvalidTimeException;
+import duke.exception.MissingCommandDetailException;
+import duke.exception.MultipleTimeSlotsException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a parser that deals with making sense of the user command.
@@ -15,7 +26,7 @@ public class Parser {
 
     /**
      * Returns parsed command which involves time.
-     * 
+     *
      * @param words An array of words in the command.
      * @param isEvent Whether the command is an `event` command.
      * @return Parsed command.
@@ -93,7 +104,7 @@ public class Parser {
             if (words.length >= 2) {
                 return new AddTaskCommand(new ToDo(words[1]));
             } else {
-                throw new MissingCommandDetailException("description","todo", "");
+                throw new MissingCommandDetailException("description", "todo", "");
             }
         } else if (words[0].equals("deadline")) {
             return Parser.parseCommandWithTime(words, false);
@@ -103,7 +114,7 @@ public class Parser {
             if (words.length >= 2) {
                 return new FindTaskCommand(words[1].trim());
             } else {
-                throw new MissingCommandDetailException("keyword","find", "");
+                throw new MissingCommandDetailException("keyword", "find", "");
             }
         } else {
             throw new InvalidCommandException();

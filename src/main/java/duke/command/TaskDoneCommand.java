@@ -9,7 +9,7 @@ import duke.exception.InvalidTaskNoException;
  */
 public class TaskDoneCommand extends Command {
     /** Index of the task to be deleted in the task list */
-    int taskIndex;
+    private int taskIndex;
 
     /**
      * Constructor of the class `TaskDoneCommand`.

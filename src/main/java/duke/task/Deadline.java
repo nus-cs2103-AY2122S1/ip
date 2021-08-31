@@ -18,7 +18,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.time = LocalDateTime.parse(by.trim(), Task.formatter);
+        this.time = LocalDateTime.parse(by.trim(), Task.FORMATTER);
     }
 
     /**
@@ -28,8 +28,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " +
-                this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
     }
 
     /**
