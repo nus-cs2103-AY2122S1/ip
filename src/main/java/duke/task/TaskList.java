@@ -6,6 +6,9 @@ public class TaskList {
 
     private ArrayList<Task> list;
 
+    /**
+     * Constructor for a TaskList.
+     */
     public TaskList() {
         list = new ArrayList<Task>();
     }

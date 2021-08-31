@@ -16,12 +16,17 @@ public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructor for a Storage instance.
+     * @param filePath file path for file to save/load save data.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
      * Saves TaskList to file.
+     * @param taskList TaskList to be saved.
      */
     public void save(TaskList taskList) throws IOException {
         StringBuilder saveData = new StringBuilder();
@@ -38,6 +43,11 @@ public class Storage {
 
     }
 
+    /**
+     * Creates a new TaskList by reading save data from a Storage object's file path.
+     * @return new TaskList with Tasks from save data.
+     * @throws FileNotFoundException if no save data file exists/is found.
+     */
     public TaskList load() throws FileNotFoundException {
         File file = new File(filePath);
         Scanner sc = new Scanner(file);

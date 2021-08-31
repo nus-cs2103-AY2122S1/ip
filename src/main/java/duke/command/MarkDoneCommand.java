@@ -15,6 +15,13 @@ public class MarkDoneCommand extends Command {
 
     private int taskNumber;
 
+    /**
+     * Constructor for a MarkDoneCommand.
+     * @param taskList TaskList from which to mark Task as done.
+     * @param storage Storage involved in the command.
+     * @param ui Ui involved in the command.
+     * @param taskNumber Number of the Task to be marked as done.
+     */
     public MarkDoneCommand(TaskList taskList, Storage storage, Ui ui, int taskNumber) {
         super(taskList, storage, ui);
         this.taskNumber = taskNumber;

@@ -14,6 +14,10 @@ public class Duke {
 
     private boolean exit;
 
+    /**
+     * Constructor for a Duke instance.
+     * @param filePath file path for file to save/load save data.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -25,6 +29,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke instance by taking user input and running it through Parser.
+     * Will loop continuously until user enters the exit command.
+     */
     public void run() {
         Parser parser = new Parser(this, taskList, storage, ui);
         ui.showWelcome();
@@ -44,6 +52,9 @@ public class Duke {
 
     }
 
+    /**
+     * Triggers the exit boolean to stop the Duke from running.
+     */
     public void triggerExit() {
         exit = true;
     }
