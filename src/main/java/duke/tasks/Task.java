@@ -17,19 +17,19 @@ public class Task {
     public boolean getCompletionStatus() {
         return this.isDone;
     }
-    
+
     public String getDescription() {
         return this.description;
     }
-    
+
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
-    public void taskDone() {
+    public void markTaskDone() {
         this.isDone = true;
     }
-    
+
     public String saveText() {
         String isDone = this.isDone ? "1" : "0";
         return isDone + " / " + this.description;

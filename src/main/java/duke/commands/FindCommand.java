@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class FindCommand extends Command {
     private String searchDescription;
-    
+
     public FindCommand(String s) {
         this.searchDescription = s;
     }

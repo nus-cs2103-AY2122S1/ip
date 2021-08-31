@@ -53,6 +53,7 @@ public class TaskList {
 
     /**
      * Marks a task in the TaskList as done.
+     *
      * @param taskNo index of the task to be marked as done.
      * @throws TaskOutOfRangeException if taskNo is out of range.
      */
@@ -61,7 +62,7 @@ public class TaskList {
             throw new TaskOutOfRangeException(taskList.size());
         } else {
             Task task = this.taskList.get(taskNo - 1);
-            task.taskDone();
+            task.markTaskDone();
             taskList.set(taskNo - 1, task);
         }
     }

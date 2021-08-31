@@ -9,7 +9,7 @@ public class Duke {
     public enum TaskType {
         TODO, DEADLINE, EVENT
     }
-    
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;

@@ -31,6 +31,7 @@ public class Ui {
 
     /**
      * Reads each line of command that user inputs.
+     *
      * @return String containing command and task description.
      */
     public String readCommand() {
@@ -55,6 +56,7 @@ public class Ui {
 
     /**
      * Prints error message from DukeExceptions for users to correct their input.
+     *
      * @param errorMessage message from errors caught.
      */
     public void showError(String errorMessage) {
@@ -63,6 +65,7 @@ public class Ui {
 
     /**
      * Prints IOException error message when opening the duke.txt file upon start.
+     *
      * @param errorMessage message from IOException.
      */
     public void showLoadingError(String errorMessage) {
@@ -75,7 +78,8 @@ public class Ui {
 
     /**
      * Inform user that task has been added.
-     * @param task task that was added.
+     *
+     * @param task     task that was added.
      * @param numTasks number of tasks in the user's tasklist.
      */
     public void showAdded(Task task, int numTasks) {
@@ -87,8 +91,9 @@ public class Ui {
 
     /**
      * Inform user that task has been deleted.
+     *
      * @param deletedTask task that was deleted.
-     * @param numTask number of remaining tasks in the user's tasklist.
+     * @param numTask     number of remaining tasks in the user's tasklist.
      */
     public void showDeleted(Task deletedTask, int numTask) {
         System.out.println("Noted. I've removed this task: \n"
@@ -99,6 +104,7 @@ public class Ui {
 
     /**
      * Inform user that task has already been marked as done.
+     *
      * @param task task that was already done.
      */
     public void showTaskDone(Task task) {
@@ -108,6 +114,7 @@ public class Ui {
 
     /**
      * Inform user that task was marked as done.
+     *
      * @param task task that was marked as done.
      */
     public void showMarkedDone(Task task) {
@@ -117,6 +124,7 @@ public class Ui {
 
     /**
      * Displays the list of tasks in the user's TaskList when 'list' command is used.
+     *
      * @param tasks user's TaskList.
      */
     public void showList(TaskList tasks) {

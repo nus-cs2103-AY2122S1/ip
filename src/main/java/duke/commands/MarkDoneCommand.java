@@ -8,11 +8,11 @@ import duke.tasks.Task;
 
 public class MarkDoneCommand extends Command {
     private int taskNo;
-    
+
     public MarkDoneCommand(int taskNo) {
         this.taskNo = taskNo;
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.getTask(this.taskNo - 1);

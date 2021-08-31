@@ -1,19 +1,28 @@
 package duke;
 
-import duke.commands.*;
-import duke.exceptions.*;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.MarkDoneCommand;
+import duke.exceptions.DukeException;
+import duke.exceptions.EmptyDescriptionException;
+import duke.exceptions.InvalidInputException;
+import duke.exceptions.MissingDateException;
+import duke.exceptions.TaskOutOfRangeException;
 
 import java.time.format.DateTimeParseException;
-import java.util.Date;
 
 /**
  * Deals with making sense of the user command to Duck Chatbot.
  */
 public class Parser {
-    
+
     /**
      * Returns Command called by the user.
-     * 
+     *
      * @param fullCommand Entire line of user input from scanner.
      * @return Command object based on the command word used by user.
      * @throws DukeException If task description is empty, user input for date or task number is invalid.
@@ -31,63 +40,63 @@ public class Parser {
         }
         try {
             switch (commandWord) {
-                case "bye":
-                    command = new ExitCommand();
-                    break;
-                case "list":
-                    command = new ListCommand();
-                    break;
-                case "done":
-                    if (taskDescription == null) {
-                        throw new TaskOutOfRangeException();
-                    }
-                    int taskNo = Integer.parseInt(taskDescription);
-                    command = new MarkDoneCommand(taskNo);
-                    break;
-                case "delete":
-                    if (taskDescription == null) {
-                        throw new TaskOutOfRangeException();
-                    }
-                    taskNo = Integer.parseInt(taskDescription);
-                    command = new DeleteCommand(taskNo);
-                    break;
-                case "todo":
-                    if (taskDescription == null) {
-                        throw new EmptyDescriptionException();
-                    }
-                    command = new AddCommand(Duke.TaskType.TODO, new String[]{taskDescription});
-                    break;
-                case "deadline":
-                    if (taskDescription == null) {
-                        throw new EmptyDescriptionException();
-                    }
-                    String[] descriptionDate;
-                    if (taskDescription.contains("/")) {
-                        descriptionDate = taskDescription.split(" /by ");
-                    } else {
-                        throw new MissingDateException();
-                    }
-                    command = new AddCommand(Duke.TaskType.DEADLINE, descriptionDate);
-                    break;
-                case "event":
-                    if (taskDescription == null) {
-                        throw new EmptyDescriptionException();
-                    }
-                    if (taskDescription.contains("/")) {
-                        descriptionDate = taskDescription.split(" /at ");
-                    } else {
-                        throw new MissingDateException();
-                    }
-                    command = new AddCommand(Duke.TaskType.EVENT, descriptionDate);
-                    break;
-                case "find":
-                    if (taskDescription == null) {
-                        throw new EmptyDescriptionException();
-                    }
-                    command = new FindCommand(taskDescription);
-                    break;
-                default:
-                    throw new InvalidInputException();
+            case "bye":
+                command = new ExitCommand();
+                break;
+            case "list":
+                command = new ListCommand();
+                break;
+            case "done":
+                if (taskDescription == null) {
+                    throw new TaskOutOfRangeException();
+                }
+                int taskNo = Integer.parseInt(taskDescription);
+                command = new MarkDoneCommand(taskNo);
+                break;
+            case "delete":
+                if (taskDescription == null) {
+                    throw new TaskOutOfRangeException();
+                }
+                taskNo = Integer.parseInt(taskDescription);
+                command = new DeleteCommand(taskNo);
+                break;
+            case "todo":
+                if (taskDescription == null) {
+                    throw new EmptyDescriptionException();
+                }
+                command = new AddCommand(Duke.TaskType.TODO, new String[]{taskDescription});
+                break;
+            case "deadline":
+                if (taskDescription == null) {
+                    throw new EmptyDescriptionException();
+                }
+                String[] descriptionDate;
+                if (taskDescription.contains("/")) {
+                    descriptionDate = taskDescription.split(" /by ");
+                } else {
+                    throw new MissingDateException();
+                }
+                command = new AddCommand(Duke.TaskType.DEADLINE, descriptionDate);
+                break;
+            case "event":
+                if (taskDescription == null) {
+                    throw new EmptyDescriptionException();
+                }
+                if (taskDescription.contains("/")) {
+                    descriptionDate = taskDescription.split(" /at ");
+                } else {
+                    throw new MissingDateException();
+                }
+                command = new AddCommand(Duke.TaskType.EVENT, descriptionDate);
+                break;
+            case "find":
+                if (taskDescription == null) {
+                    throw new EmptyDescriptionException();
+                }
+                command = new FindCommand(taskDescription);
+                break;
+            default:
+                throw new InvalidInputException();
             }
         } catch (DateTimeParseException e) {
             System.out.println("OOPS! Please input date in this format: yyyy-mm-dd");

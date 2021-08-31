@@ -4,27 +4,27 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-    protected LocalDate by;
+    protected LocalDate date;
 
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDate.parse(by);
+        this.date = LocalDate.parse(by);
     }
 
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
-        this.by = LocalDate.parse(by);
+        this.date = LocalDate.parse(by);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " 
-                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+        return "[D]" + super.toString() + " (by: "
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ")";
     }
 
     @Override
     public String saveText() {
-        return "D" + " / " + super.saveText() + " / " + by;
+        return "D" + " / " + super.saveText() + " / " + date;
     }
 }
