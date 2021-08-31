@@ -1,24 +1,38 @@
-# Duke project template
+Petal 🌸
+In joy or sadness, flowers are our constant friends.
+Okakura Kakuzo
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+It's okay. Petal is here. Drop your worries and sink into the petals of relief; Petal is here for you.
 
-## Setting up in Intellij
+Petal has the following abetments:
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Text-based
+Simple commands
+Task tracking
+Installation
+A logical thing you might do is wonder—how do I install Petal?
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+There are two methods:
+
+1. Run it in an IDE
+Go to this link.
+Download the folder.
+Open it in IntelliJ or your favorite IDE.
+Then, under the Petal class. add the following main method:
+public static void main(String[] args) {
+        Petal p = new Petal();
+        p.run(); 
+ }
+2. Run the .jar file
+Go to this link.
+Under the Releases tab, open A-Jar and download the .jar file.
+Download the folder.
+Open command prompt from that folder, or your favorite IDE.
+Then, type this into the command prompt: java -jar iP.jar
+Features
+Petal can:
+
+ Keep track of tasks
+ Keep track of the dates of tasks, including deadlines and events.
+ Set reminders (coming soon)
+
