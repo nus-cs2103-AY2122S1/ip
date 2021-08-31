@@ -15,7 +15,7 @@ public class Parser {
      * @param command Input by the user.
      * @return
      */
-    public Command parse(String command) {
+    public static Command parse(String command) {
         if(command.equals("bye")) {
             return new ExitCommand(command);
         } else if(command.equals("list")) {

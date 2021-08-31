@@ -15,14 +15,14 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
             if(tasks.getTask(i).getDescription().contains(command)) {
                 foundTasks.add(tasks.getTask(i));
             }
         }
-        ui.respondToFind(foundTasks);
+        return ui.respondToFind(foundTasks);
     }
 
     @Override

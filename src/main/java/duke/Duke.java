@@ -23,6 +23,11 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
+    public String getResponse(String inputFromUser) {
+        Command c = Parser.parse(inputFromUser);
+        return c.execute(tasks, ui, storage);
+    }
+
     /**
      * Runs the Duke application and prompts users for input.
      */
@@ -32,8 +37,8 @@ public class Duke {
         while (!isExit) {
             String fullCommand = ui.readCommand();
             ui.showLine(); // show the divider line ("_______")
-            Parser parser = new Parser();
-            Command c = parser.parse(fullCommand);
+            //Parser parser = new Parser();
+            Command c = Parser.parse(fullCommand);
             c.execute(tasks, ui, storage);
             isExit = c.isExit();
             ui.showLine();

@@ -11,8 +11,8 @@ public class BlahCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.respondToBlah();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.respondToBlah();
     }
 
     @Override

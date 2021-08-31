@@ -18,7 +18,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if(command.split(" ")[0].equals("todo")) {
                 if(command.split(" ", 2).length == 1) {
@@ -26,8 +26,9 @@ public class AddCommand extends Command {
                 } else {
                     ToDo todo = new ToDo(command.split(" ", 2)[1]);
                     tasks.addTask(todo);
-                    ui.respondToTodo(tasks.getTasks(), todo);
+                    //ui.respondToTodo(tasks.getTasks(), todo);
                     storage.appendToFile(todo);
+                    return ui.respondToTodo(tasks.getTasks(), todo);
                 }
             } else if(command.split(" ")[0].equals("deadline")) {
                 if (command.split(" ", 2).length == 1) {
@@ -37,8 +38,9 @@ public class AddCommand extends Command {
                     String by = command.split("/by ")[1];
                     Deadline deadline = new Deadline(description, by);
                     tasks.addTask(deadline);
-                    ui.respondToDeadline(tasks.getTasks(), deadline);
+                    //ui.respondToDeadline(tasks.getTasks(), deadline);
                     storage.appendToFile(deadline);
+                    return ui.respondToDeadline(tasks.getTasks(), deadline);
                 }
             } else {
                 if (command.split(" ", 2).length == 1) {
@@ -48,13 +50,15 @@ public class AddCommand extends Command {
                     String at = command.split("/at ")[1];
                     Event event = new Event(description, at);
                     tasks.addTask(event);
-                    ui.respondToEvent(tasks.getTasks(), event);
+                    //ui.respondToEvent(tasks.getTasks(), event);
                     storage.appendToFile(event);
+                    return ui.respondToEvent(tasks.getTasks(), event);
                 }
             }
         } catch (DukeException1 e) {
-            ui.showError(e.getMessage());
+            return ui.showError(e.getMessage());
         }
+        return "";
     }
 
     @Override

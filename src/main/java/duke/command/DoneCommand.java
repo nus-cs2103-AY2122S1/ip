@@ -11,11 +11,11 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Integer count = Integer.valueOf(this.taskNumber);
         tasks.getTask(count - 1).markAsDone();
-        ui.respondToDone(tasks.getTasks(), count);
         storage.rewriteFile(tasks.getTasks());
+        return ui.respondToDone(tasks.getTasks(), count);
     }
 
     @Override

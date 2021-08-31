@@ -1,3 +1,8 @@
-T/1/read book
-D/1/return book/02/12/2019 18:00
-T/1/play with sis
+T/1/sleep
+T/0/yay
+T/0/eat
+T/0/hi
+T/0/heythere
+T/0/yoyo
+T/0/yogey
+T/0/lala

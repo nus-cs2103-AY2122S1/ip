@@ -2,7 +2,10 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.tasks.Task;
 import duke.tasks.TaskList;
+
+import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
     String taskNumber;
@@ -11,11 +14,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Integer number = Integer.valueOf(this.taskNumber);
-        ui.respondToDelete(tasks.getTasks(), number - 1);
+        ArrayList<Task> originalTaskList = tasks.getTasks();
+        Task task = tasks.getTask(number - 1);
         tasks.getTasks().remove(number - 1);
         storage.rewriteFile(tasks.getTasks());
+        return ui.respondToDelete(tasks.getTasks(), task);
     }
 
     @Override
