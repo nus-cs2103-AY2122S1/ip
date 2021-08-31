@@ -6,6 +6,13 @@
  */
 package duke;
 
+import java.util.Scanner;
+import java.io.IOException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import duke.command.Command;
 import duke.exceptions.CommandDoesNotExist;
 import duke.exceptions.DukeExceptions;
@@ -13,10 +20,8 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-import java.util.Scanner;
-import java.io.IOException;
 
-public class Duke {
+public class Duke extends Application {
 
     private final Storage storage;
     private final TaskList taskList;
@@ -24,7 +29,7 @@ public class Duke {
     private final Command command;
 
     /**
-     * Constructs a Duke object
+     * Constructs a Duke object.
      *
      * @param filePath The location where information will be saved in the project.
      * @throws IOException
@@ -32,6 +37,18 @@ public class Duke {
     public Duke(String filePath) throws IOException {
         this.ui = new Ui(); // Performs the self introduction upon successful initialization.
         this.storage = new Storage(filePath);
+        this.taskList = new TaskList(storage.load());
+        this.command = new Command(storage, ui);
+    }
+
+    /**
+     * Constructs a Duke object.
+     *
+     * @throws IOException
+     */
+    public Duke() throws IOException {
+        this.ui = new Ui(); // Performs the self introduction upon successful initialization.
+        this.storage = new Storage("data/duke.txt"); //TODO
         this.taskList = new TaskList(storage.load());
         this.command = new Command(storage, ui);
     }
@@ -95,6 +112,15 @@ public class Duke {
                 }
             }
         }
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
     public static void main(String[] args) throws DukeExceptions, IOException {
