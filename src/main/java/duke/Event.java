@@ -17,6 +17,6 @@ public class Event extends Task{
     @Override
     public String toString() {
         return String.format("[%s] %s (at: %s)",
-                this.getTaskSymbol(), super.toString(),dateToString(this.date));
+                this.getTaskSymbol(), super.toString(), dateToString(this.date));
     }
 }

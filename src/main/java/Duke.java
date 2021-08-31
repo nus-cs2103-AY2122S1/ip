@@ -1,40 +1,24 @@
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import java.util.Scanner;
 
-public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Parser parser;
+public class Duke{
+    private final Parser parser;
 
-    public Duke(String filePath) {
-        storage = new Storage(filePath);
+    public Duke() {
+        String filePath = "dukeData.txt";
+        Storage storage = new Storage(filePath);
+        TaskList tasks;
         try {
             tasks = new TaskList(storage.loadData());
         } catch (Exception e) {
-            System.out.println(e + "hellop");
+            System.out.println(e + "hello");
             tasks = new TaskList();
         }
         parser = new Parser(storage, tasks);
     }
 
-    /**
-     * Takes in users input and parses it.
-     */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            String userInput = sc.nextLine();
-            if (!parser.command(userInput)) {
-                break;
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Ui().greeting();
-        new Duke("dukeData.txt").run();
+    public String getResponse(String input) {
+        return parser.command(input);
     }
 }

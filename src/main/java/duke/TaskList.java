@@ -69,7 +69,7 @@ public class TaskList {
         } catch (IllegalArgumentException e) {
             return("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } catch(IOException | StringIndexOutOfBoundsException | DateTimeParseException  e) {
-            return("Invalid Input format -> <taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
+            return("<taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
         }
     }
 
@@ -129,8 +129,8 @@ public class TaskList {
      * @param tasks List of current tasks.
      */
     public String showTasks(List<Task> tasks) {
-        StringBuilder str = new StringBuilder().append("\n");
-        System.out.println("Here are the tasks in your list:");
+        StringBuilder str = new StringBuilder().append("");
+        str.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             str.append(String.format("%d. %s\n", i + 1, tasks.get(i).toString()));
         }

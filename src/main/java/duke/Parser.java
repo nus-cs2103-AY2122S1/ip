@@ -1,7 +1,6 @@
 package duke;
 
 public class Parser {
-    Ui ui;
     Storage storage;
     TaskList taskList;
 
@@ -13,7 +12,6 @@ public class Parser {
     public Parser(Storage storage, TaskList tasks) {
         this.storage = storage;
         this.taskList = tasks;
-        this.ui = new Ui();
     }
 
     /**
@@ -22,11 +20,11 @@ public class Parser {
      * @param userInput Input from user.
      * @return False if user wants to close the program and true otherwise.
      */
-    public Boolean command(String userInput) {
+    public String command(String userInput) {
         String toReply;
         if (userInput.equalsIgnoreCase("bye")) {
-            ui.dukeReply("Bye. Hope to see you again soon!");
-            return false;
+            toReply = "Bye. Hope to see you again soon!";
+
         } else if (userInput.equalsIgnoreCase("list")) {
             toReply = taskList.showTasks(taskList.getTasks());
         } else if (userInput.toLowerCase().startsWith("done")) {
@@ -41,8 +39,7 @@ public class Parser {
             toReply = taskList.addTask(userInput, storage.getDataPath());
         }
 
-        ui.dukeReply(toReply);
-        return true;
+        return toReply;
     }
 }
 
