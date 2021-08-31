@@ -1,14 +1,20 @@
 package duke.commands;
 
+import java.util.HashSet;
+
 import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
-import java.util.HashSet;
-
 public class FindCommand extends Command {
 
     private HashSet<String> keywords = new HashSet<>();
+
+    /**
+     * FindCommand constructor.
+     *
+     * @param keywords Keywords to search for within task list.
+     */
     public FindCommand(String[] keywords) {
         for (String keyword : keywords) {
             this.keywords.add(keyword);

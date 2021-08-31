@@ -1,8 +1,8 @@
 package duke.utils;
 
-import duke.exceptions.DukeException;
-
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
 
 /** Class to handle all printing of messages */
 public class Ui {

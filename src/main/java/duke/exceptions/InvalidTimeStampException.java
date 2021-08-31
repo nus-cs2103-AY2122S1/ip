@@ -2,10 +2,15 @@ package duke.exceptions;
 
 public class InvalidTimeStampException extends DukeException {
 
-    public InvalidTimeStampException(String errorMessage) {
+    /**
+     * InvalidTimeStampException constructor.
+     *
+     * @param timeStamp Invalid timestamp given.
+     */
+    public InvalidTimeStampException(String timeStamp) {
         super(String.format(
                 "This timestamp \"%s\" is invalid, duke.Duke requires d/M/yyyy HHmm format",
-                errorMessage
+                timeStamp
         ));
     }
 }

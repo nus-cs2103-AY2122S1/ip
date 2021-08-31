@@ -1,12 +1,11 @@
 package duke.utils;
 
-import duke.exceptions.InvalidTaskNumberException;
-
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+
+import duke.exceptions.InvalidTaskNumberException;
+import duke.tasks.Task;
 
 /** Class containing all tasks currently stored in Duke */
 public class TaskList {
@@ -47,7 +46,7 @@ public class TaskList {
     public String[] deleteTask(int i) throws InvalidTaskNumberException {
         Task task = getTask(i);
         boolean removed = tasks.remove(task);
-        return new String[] {"I have deleted this task:","    " + task.toString()};
+        return new String[] {"I have deleted this task:", "    " + task.toString()};
     }
 
     /**
