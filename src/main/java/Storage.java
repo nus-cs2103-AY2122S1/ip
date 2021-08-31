@@ -74,7 +74,7 @@ public class Storage {
 
         for (int i = 0; i < counter; i++) {
             Task currTask = taskList.tasks.get(i);
-            System.out.println(i+1 + "." + currTask.toString());
+            System.out.println(i + 1 + "." + currTask.toString());
         }
         System.out.println(dash);
     }

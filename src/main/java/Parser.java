@@ -21,11 +21,11 @@ public class Parser {
 
             tasks.list();
 
-        }  else if (userInput.length() > 3 && userInput.substring(0, 4).matches("done")){
+        } else if (userInput.length() > 3 && userInput.substring(0, 4).matches("done")) {
 
             tasks.markDone(userInput);
 
-        } else if (userInput.length() > 5 && userInput.substring(0, 6).matches("delete")){
+        } else if (userInput.length() > 5 && userInput.substring(0, 6).matches("delete")) {
 
             tasks.delete(userInput);
 
