@@ -4,11 +4,6 @@ import duke.Ui;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 
-<<<<<<< HEAD
-public class DeadlineCommand extends Command {
-    Deadline deadline;
-
-=======
 /**
  * Class to handle the deadline command.
  */
@@ -21,7 +16,6 @@ public class DeadlineCommand extends Command {
      * @param deadline The deadline task.
      * @return A new DeadlineCommand instance with the specified deadline task stored.
      */
->>>>>>> branch-A-JavaDoc
     public DeadlineCommand(Deadline deadline) {
         this.deadline = deadline;
     }

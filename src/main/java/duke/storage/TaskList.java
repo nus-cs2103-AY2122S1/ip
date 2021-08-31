@@ -11,12 +11,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
 /**
  * List class to hold the listed Tasks.
  */
->>>>>>> branch-A-JavaDoc
+
 public class TaskList extends ArrayList<Task> {
 
     private static final String DIVIDER = "%%";

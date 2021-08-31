@@ -29,14 +29,12 @@ public class Ui {
         myScanner = new Scanner(System.in);
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Add the top an bottom border to the output.
      *
      * @param output The message which should be displayed in the output.
      */
->>>>>>> branch-A-JavaDoc
+
     private static void reply(String output) {
         System.out.println(HORIZONTAL_LINE);
         System.out.println(output);
@@ -57,16 +55,11 @@ public class Ui {
      * Returns the next line of user input
      **/
     public String getInput() {
-        String userInput = myScanner.nextLine();
-        return userInput;
+        return myScanner.nextLine();
     }
 
     /**
-<<<<<<< HEAD
-     * Prints a string
-=======
      * Prints a string with proper format
->>>>>>> branch-A-JavaDoc
      **/
     public void print(String s) {
         reply(s);

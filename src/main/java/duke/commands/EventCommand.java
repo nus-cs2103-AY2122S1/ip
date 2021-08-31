@@ -10,15 +10,12 @@ import duke.tasks.Event;
 public class EventCommand extends Command {
     Event event;
 
-<<<<<<< HEAD
-=======
     /**
-     * Public constructor for the EventCommand class
+     * Construct a new EventCommand instance with the specified event task stored.
      *
      * @param event The Event task.
-     * @return A new EventCommand instance with the specified event task stored.
      */
->>>>>>> branch-A-JavaDoc
+
     public EventCommand(Event event) {
         this.event = event;
     }

@@ -64,12 +64,10 @@ public class Storage {
 
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Writes the current tasklisk data into the file.
      */
->>>>>>> branch-A-JavaDoc
+
     public void save() {
         try {
             Files.write(FILE_PATH, tasks.exportToText().getBytes());

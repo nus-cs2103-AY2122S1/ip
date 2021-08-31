@@ -10,15 +10,9 @@ import duke.tasks.ToDo;
 public class ToDoCommand extends Command {
     ToDo toDo;
 
-<<<<<<< HEAD
-=======
     /**
-     * Public constructor for the ToDoCommand class
-     *
-     * @param toDo The toDo task.
-     * @return A new ToDoCommand instance with the specified toDo task stored.
+     * Construct a new ToDoCommand instance with the specified toDo task stored.
      */
->>>>>>> branch-A-JavaDoc
     public ToDoCommand(ToDo toDo) {
         this.toDo = toDo;
     }

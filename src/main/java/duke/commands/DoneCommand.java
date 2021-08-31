@@ -4,11 +4,6 @@ import duke.DukeExceptions;
 import duke.Ui;
 import duke.storage.Storage;
 
-<<<<<<< HEAD
-public class DoneCommand extends Command {
-    int index;
-
-=======
 /**
  * Class to handle the done command.
  */
@@ -21,7 +16,7 @@ public class DoneCommand extends Command {
      * @param input The index of the task to mark as done in the list
      * @return A new DoneCommand instance with the specified inex stored.
      */
->>>>>>> branch-A-JavaDoc
+
     public DoneCommand(int input) {
         this.index = input - 1;
     }

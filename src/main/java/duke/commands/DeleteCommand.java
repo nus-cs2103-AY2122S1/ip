@@ -3,11 +3,7 @@ package duke.commands;
 import duke.Ui;
 import duke.storage.Storage;
 
-<<<<<<< HEAD
-public class DeleteCommand extends Command {
-    int index;
 
-=======
 /**
  * Class to handle the delete command.
  */
@@ -15,12 +11,11 @@ public class DeleteCommand extends Command {
     int index;
 
     /**
-     * Public constructor for the DeleteCommand class
+     * Construct a new DeleteCommand instance with the specified index stored.
      *
      * @param input The index of the task to delete in the list
-     * @return A new DeleteCommand instance with the specified index stored.
      */
->>>>>>> branch-A-JavaDoc
+
     public DeleteCommand(int input) {
         this.index = input - 1;
     }
