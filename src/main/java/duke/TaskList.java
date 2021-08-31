@@ -163,11 +163,11 @@ public class TaskList {
             ui.printAddMessage(addedTask);
             ui.printTaskListSize(this.taskList.size());
         } catch (DateTimeParseException e) {
-            throw new DukeException("Please write your date and time in the following format: " +
-                    "D/MM/YYYY HHMM");
+            throw new DukeException("Please write your date and time in the following format: "
+                    + "D/MM/YYYY HHMM");
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("Please write your event command in the following format: " +
-                    "event task /at datetime");
+            throw new DukeException("Please write your event command in the following format: "
+                    + "event task /at datetime");
         }
     }
 

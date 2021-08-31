@@ -26,6 +26,11 @@ public abstract class Task {
         return (isDone? "[X]" : "[ ]");
     }
 
+    /**
+     * Returns the string format in which to store the task to the disk.
+     *
+     * @return new string format in which to store the task to the disk which is different from toString.
+     */
     public abstract String getFileString();
 
     /**
