@@ -45,11 +45,13 @@ public class HelpCommand extends Command {
      * Prints the available commands.
      */
     @Override
-    public void execute() {
+    public String execute() {
         ui.divide();
-        ui.outputMessage(HELP_MESSAGE);
-        commands.forEach((command) -> ui.outputMessage(command.getUsageMessage() + "\n"));
-        ui.divide();
+        String help = HELP_MESSAGE + "\n";
+        for (Command command : commands) {
+            help += command.getUsageMessage() + "\n";
+        }
+        return help;
     }
 
 }

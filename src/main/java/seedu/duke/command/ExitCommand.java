@@ -28,10 +28,8 @@ public class ExitCommand extends Command {
      * Prints Duke's exit message.
      */
     @Override
-    public void execute() {
-        ui.divide();
-        ui.outputMessage(EXIT_MESSAGE);
-        ui.divide();
+    public String execute() {
+        return EXIT_MESSAGE;
     }
 
 }

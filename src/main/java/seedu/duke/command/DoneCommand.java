@@ -44,19 +44,16 @@ public class DoneCommand extends Command {
      * Mark the task as done in the task list.
      */
     @Override
-    public void execute() throws DukeException {
+    public String execute() throws DukeException {
         boolean isValid = taskList.isValidTaskIndex(index);
         if (isValid) {
             String toUpdate = this.taskList.getTask(index).toString();
             Task task = this.taskList.markTaskAsCompleted(index);
 
-            ui.divide();
-            ui.outputMessage(DONE_MESSAGE);
-            ui.outputMessage(task.toString());
-            ui.outputMessage(taskList.status());
-            ui.divide();
-
             storage.markTaskAsCompleted(task.toString(), toUpdate);
+
+            return String.format("%s\n%s\n%s",
+                    DONE_MESSAGE, task, taskList.status());
         } else {
             throw new DukeException("There is no such task.");
         }

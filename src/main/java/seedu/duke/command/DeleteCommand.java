@@ -43,19 +43,16 @@ public class DeleteCommand extends Command {
      * Deletes the task from the task list.
      */
     @Override
-    public void execute() throws DukeException {
+    public String execute() throws DukeException {
         boolean isValid = taskList.isValidTaskIndex(index);
         if (isValid) {
             Task task = taskList.getTask(index);
             taskList = taskList.deleteTask(index);
 
-            ui.divide();
-            ui.outputMessage(DELETE_MESSAGE);
-            ui.outputMessage(task.toString());
-            ui.outputMessage(taskList.status());
-            ui.divide();
-
             storage.deleteTaskFromFile(this.taskList);
+
+            return String.format("%s\n%s\n%s",
+                    DELETE_MESSAGE, task, taskList.status());
         } else {
             throw new DukeException("There is no such task.");
         }

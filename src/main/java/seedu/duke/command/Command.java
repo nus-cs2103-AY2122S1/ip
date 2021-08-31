@@ -48,6 +48,6 @@ public abstract class Command {
 
     public abstract String getUsageMessage();
 
-    public abstract void execute() throws DukeException;
+    public abstract String execute() throws DukeException;
 
 }

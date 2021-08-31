@@ -44,15 +44,12 @@ public class ToDoCommand extends Command {
      * Adds the ToDo task to the task list.
      */
     @Override
-    public void execute() {
+    public String execute() {
         taskList = taskList.add(task);
         storage.addTaskToFile(task);
 
-        ui.divide();
-        ui.outputMessage(ADD_MESSAGE);
-        ui.outputMessage(task.toString());
-        ui.outputMessage(taskList.status());
-        ui.divide();
+        return String.format("%s\n%s\n%s",
+                ADD_MESSAGE, task, taskList.status());
     }
 
 }

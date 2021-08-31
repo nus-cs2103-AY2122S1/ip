@@ -30,17 +30,15 @@ public class FindCommand extends Command {
      * Finds matching tasks from the task list.
      */
     @Override
-    public void execute() throws DukeException {
+    public String execute() throws DukeException {
         TaskList matchingTasks = taskList.findTasksByKeyword(keyword);
 
         if (matchingTasks.isEmpty()) {
             throw new DukeException("No tasks matches the given keyword.");
         }
 
-        ui.divide();
-        ui.outputMessage(FIND_MESSAGE);
-        ui.outputMessage(matchingTasks.toString());
-        ui.divide();
+        return String.format("%s\n%s",
+                FIND_MESSAGE, matchingTasks.toString());
     }
 
 }

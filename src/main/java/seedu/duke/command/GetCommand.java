@@ -38,12 +38,11 @@ public class GetCommand extends Command {
      * Returns tasks happening or due on the given date.
      */
     @Override
-    public void execute() throws DukeException {
-        ui.divide();
-        ui.outputMessage(GET_MESSAGE);
-        ui.outputMessage(dateTasks.getOrDefault(date, new ArrayList<>())
-                .toString());
-        ui.divide();
+    public String execute() throws DukeException {
+        return String.format("%s\n%s\n%s",
+                GET_MESSAGE,
+                dateTasks.getOrDefault(date, new ArrayList<>())
+                        .toString());
     }
 
 }

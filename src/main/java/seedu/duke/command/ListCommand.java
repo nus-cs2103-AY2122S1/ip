@@ -24,11 +24,8 @@ public class ListCommand extends Command {
      * Prints the current tasks in the task list.
      */
     @Override
-    public void execute() {
-
-        ui.divide();
-        ui.outputMessage(LIST_MESSAGE + taskList.toString());
-        ui.divide();
+    public String execute() {
+        return LIST_MESSAGE + taskList.toString();
     }
 
 }
