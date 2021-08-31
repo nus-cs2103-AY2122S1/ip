@@ -69,17 +69,17 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader("./data/duke.txt"));
             String line;
             while ((line = br.readLine()) != null) {
-                String[] splitLine = line.split(" ");
+                String[] lineParts = line.split(" ");
 
-                switch(splitLine[0].charAt(1)) {
+                switch(lineParts[0].charAt(1)) {
                 case 'T':
-                    String todoName = splitLine[1];
-                    boolean todoStatus = (splitLine[0].charAt(4) == 'X');
+                    String todoName = lineParts[1];
+                    boolean todoStatus = (lineParts[0].charAt(4) == 'X');
                     list.addToList(new Todo(todoName, todoStatus));
                     break;
                 case 'D':
-                    String deadlineName = splitLine[1] + " ";
-                    boolean deadlineStatus = (splitLine[0].charAt(4) == 'X');
+                    String deadlineName = lineParts[1] + " ";
+                    boolean deadlineStatus = (lineParts[0].charAt(4) == 'X');
                     String deadlineByWithBracket = line.substring(line.lastIndexOf("(by: ") + 5);
                     String deadlineBy = deadlineByWithBracket.substring(0, deadlineByWithBracket.length() - 1);
                     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMM yyyy");
@@ -87,8 +87,8 @@ public class Storage {
                     list.addToList(new Deadline(deadlineName, deadlineStatus, correctDeadline));
                     break;
                 case 'E':
-                    String eventName = splitLine[1] + " ";
-                    boolean eventStatus = (splitLine[0].charAt(4) == 'X');
+                    String eventName = lineParts[1] + " ";
+                    boolean eventStatus = (lineParts[0].charAt(4) == 'X');
                     String eventAtWithBracket = line.substring(line.lastIndexOf("(at: ") + 5);
                     String eventAt = eventAtWithBracket.substring(0, eventAtWithBracket.length() - 1);
                     DateTimeFormatter dtf2 = DateTimeFormatter.ofPattern("dd MMM yyy hh:mm a");
