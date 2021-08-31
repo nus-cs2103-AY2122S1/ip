@@ -6,13 +6,24 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /** A chatbot that handles todo-list operations. */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * An empty constructor only for initializing Duke GUI.
+     *
+     */
+    public Duke() {
+    }
 
     /**
      * A constructor for the class Duke.
@@ -58,5 +69,19 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    /**
+     * Start the GUI of Duke using the stage provided.
+     *
+     * @param stage     The primary stage that JavaFX provides.
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 }
