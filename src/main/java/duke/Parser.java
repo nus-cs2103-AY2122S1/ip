@@ -180,9 +180,9 @@ public class Parser {
             } else if (instruction.charAt(currIndex + 7) != '/' &&
                     instruction.charAt(currIndex + 10) != '/') {
                 throw new DukeException("Please format the date as dd/mm/yyy");
-            } else if (instruction.substring(currIndex).length() < 20){
-                throw new DukeException("Please include the time in the 24 hour " +
-                        "format (e.g. 15:00)");
+            } else if (instruction.substring(currIndex).length() < 25){
+                throw new DukeException("Please include the start and end times in the 24 hour " +
+                        "format (e.g. 15:00-16:00)");
             } else {
                 String by = instruction.substring(currIndex + 5);
                 Task newEvent = new Event(taskDescription, by);
@@ -233,8 +233,10 @@ public class Parser {
                     result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
                     num++;
                 } else if (TaskList.getTaskList().get(i) instanceof Event &&
-                        (((Event) TaskList.getTaskList().get(i)).getEventTime()).isAfter(start) &&
-                        (((Event) TaskList.getTaskList().get(i)).getEventTime()).isBefore(end)) {
+                        (((Event) TaskList.getTaskList().get(i)).getEventStart()).isAfter(start) &&
+                        (((Event) TaskList.getTaskList().get(i)).getEventStart()).isBefore(end) &&
+                        (((Event) TaskList.getTaskList().get(i)).getEventEnd()).isAfter(start) &&
+                        (((Event) TaskList.getTaskList().get(i)).getEventEnd()).isBefore(end)) {
                     result += "\t" + num + "." + TaskList.getTaskList().get(i).toString() + "\n";
                     num++;
                 }
