@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import sora.exception.SoraException;
 import sora.exception.IllegalFormatException;
+import sora.exception.SoraException;
 import sora.exception.UnknownCommandException;
 import sora.task.TaskList;
 

@@ -7,9 +7,9 @@ import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
 
-import sora.exception.SoraException;
 import sora.exception.EmptyListException;
 import sora.exception.IllegalFormatException;
+import sora.exception.SoraException;
 import sora.exception.TaskNotFoundException;
 
 class TaskListTest {

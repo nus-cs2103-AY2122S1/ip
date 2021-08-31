@@ -11,8 +11,8 @@ import sora.util.Ui;
 
 public class Sora {
     private final Storage storage;
-    private TaskList taskList;
     private final Ui ui;
+    private TaskList taskList;
 
     /**
      * Initialize each component of the program.
@@ -36,6 +36,15 @@ public class Sora {
                 ui.printMessage(e.getMessage());
             }
         }
+    }
+
+    /**
+     * Initialize and start the program in CLI interface.
+     *
+     * @param args not used
+     */
+    public static void main(String[] args) {
+        new Sora(true).run();
     }
 
     /**
@@ -87,14 +96,5 @@ public class Sora {
         }
 
         return message;
-    }
-
-    /**
-     * Initialize and start the program in CLI interface.
-     *
-     * @param args not used
-     */
-    public static void main(String[] args) {
-        new Sora(true).run();
     }
 }

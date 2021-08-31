@@ -7,13 +7,21 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import sora.controller.MainWindow;
 
 /**
  * A GUI for Sora using FXML.
  */
 public class Main extends Application {
+    /**
+     * Initialize and start the program in GUI interface.
+     *
+     * @param args not used
+     */
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
+    }
+
     @Override
     public void start(Stage stage) {
         try {
@@ -30,14 +38,5 @@ public class Main extends Application {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    /**
-     * Initialize and start the program in GUI interface.
-     *
-     * @param args not used
-     */
-    public static void main(String[] args) {
-        Application.launch(Main.class, args);
     }
 }
