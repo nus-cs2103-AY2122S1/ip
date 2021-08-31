@@ -159,8 +159,8 @@ public class Main extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
         userInput.setFont(defaultFont);
+        sendButton = new Button("Send");
         sendButton.setFont(defaultFont);
 
         AnchorPane mainLayout = new AnchorPane();
@@ -191,7 +191,7 @@ public class Main extends Application {
 
         userInput.setPrefWidth(325.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(75.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 
