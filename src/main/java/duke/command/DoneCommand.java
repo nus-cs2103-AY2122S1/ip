@@ -37,12 +37,12 @@ public class DoneCommand extends Command {
      * @throws DukeException If index is not valid.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             // Mark task as done
             Task task = taskList.getTask(index);
             task.setIsDone(true);
-            ui.reply("Noice! Pepper Jack marked this task as done:\n\t" + task);
+            return ui.reply("Noice! Pepper Jack marked this task as done:\n\t" + task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number does not exist!\n\t" + DoneCommand.USAGE_TEXT);
         }

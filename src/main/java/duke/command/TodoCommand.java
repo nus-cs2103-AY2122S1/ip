@@ -35,10 +35,10 @@ public class TodoCommand extends Command {
      * @param storage Storage of tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         // Add new to do
         Task task = new Todo(description);
         taskList.addTask(task);
-        ui.showTasksReply(true, task.toString(), taskList.size());
+        return ui.showTasksReply(true, task.toString(), taskList.size());
     }
 }

@@ -29,6 +29,7 @@ public class Command {
      * @param storage Storage of tasks.
      * @throws DukeException
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        throw new DukeException("Not supposed to happen!");
     }
 }

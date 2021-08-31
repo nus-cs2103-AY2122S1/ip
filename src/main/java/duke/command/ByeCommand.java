@@ -22,13 +22,13 @@ public class ByeCommand extends Command {
      * @throws DukeException If error occurs while saving tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             // Save taskList
             storage.save(taskList);
         } catch (DukeException e) {
             ui.showLoadingError(e.getMessage());
         }
-        ui.showBye();
+        return ui.showBye();
     }
 }

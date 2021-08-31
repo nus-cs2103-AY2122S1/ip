@@ -35,7 +35,7 @@ public class FindCommand extends Command {
      * @param storage Storage of tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         // List of search results
         TaskList results = TaskList.emptyTaskList();
 
@@ -48,6 +48,6 @@ public class FindCommand extends Command {
         }
 
         // Display results
-        ui.reply("These the tasks yer lookin for:\n" + results.toString());
+        return ui.reply("These the tasks yer lookin for:\n" + results.toString());
     }
 }
