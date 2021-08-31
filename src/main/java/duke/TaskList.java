@@ -94,27 +94,28 @@ public class TaskList {
      * @param s String to filter with
      * @throws DukeException If s is not found
      */
-    public void find(String s) throws DukeException {
+    public String find(String s) throws DukeException {
         List<Task> filteredList = tasks.stream()
                     .filter(task -> task.toString().contains(s)).collect(Collectors.toList());
         if (filteredList.size() == 0) {
             throw new DukeException(s + " not found in list");
         }
-        listItems(filteredList);
+        return listItems(filteredList);
     }
 
     /**
      * Lists out current items.
      */
-    public void listItems() {
-        listItems(this.tasks);
+    public String listItems() {
+        return listItems(this.tasks);
     }
 
-    private void listItems(List<Task> tasks) {
-        System.out.println("     Here are the tasks in your list:");
+    private String listItems(List<Task> tasks) {
+        String message = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
-            System.out.println("      " + num + "." + tasks.get(i).toString());
+            message += num + "." + tasks.get(i).toString() + "\n";
         }
+        return message;
     }
 }

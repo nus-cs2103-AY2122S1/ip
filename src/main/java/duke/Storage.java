@@ -44,7 +44,7 @@ public class Storage {
      *
      * @param list TaskList of tasks.
      */
-    public void save(TaskList list) {
+    public String save(TaskList list) throws DukeException{
         try {
             FileWriter writer = new FileWriter(file);
             for (int i = 0; i < list.getSize(); i++) {
@@ -52,9 +52,10 @@ public class Storage {
                 writer.write(list.get(i).toString() + "\n");
             }
             writer.close();
-            System.out.println("    File saved to /data/duke.txt");
+            return "File saved to /data/duke.txt";
         } catch (IOException e) {
             e.printStackTrace();
+            throw new DukeException("Error saving file");
         }
     }
 

@@ -32,8 +32,8 @@ public class Parser {
      * @param input Input string by user
      * @return True or false. If false, program ends. If true, program continues.
      */
-    public boolean parse(String input) {
-        printLine();
+    public String parse(String input) {
+        String message = "";
         String[] inputArr = input.split(" ", 2);
         try {
             if (inputArr.length < 1) {
@@ -45,7 +45,7 @@ public class Parser {
                 if (inputArr.length < 2) {
                     throw new DukeException("The description of a todo cannot be empty.");
                 }
-                addTask(new Todo(inputArr[1]));
+                message = addTask(new Todo(inputArr[1]));
                 break;
             case "deadline":
                 if (inputArr.length < 2) {
@@ -55,14 +55,14 @@ public class Parser {
                 if (messageArr.length < 2) {
                     throw new DukeException("duke.Deadline needs a /by clause after the description.");
                 }
-                addTask(new Deadline(messageArr[0], messageArr[1]));
+                message = addTask(new Deadline(messageArr[0], messageArr[1]));
                 break;
             case "event":
                 if (inputArr.length < 2) {
                     throw new DukeException("The description of a event cannot be empty.");
                 }
                 messageArr = inputArr[1].split(" /at ", 2);
-                addTask(new Event(messageArr[0], messageArr[1]));
+                message = addTask(new Event(messageArr[0], messageArr[1]));
                 break;
             case "done":
                 if (inputArr.length < 2) {
@@ -72,16 +72,13 @@ public class Parser {
                 if (list.get(number - 1) == null) {
                     throw new DukeException("This task doesn't exist");
                 }
-                System.out.println("    Nice! I've marked this task as done: ");
+                message += "    Nice! I've marked this task as done: \n";
                 list.get(number - 1).markedAsDone();
-                System.out.println("      " + list.get(number - 1).toString());
+                message += "      " + list.get(number - 1).toString();
                 break;
             case "list":
-                list.listItems();
+                message = list.listItems();
                 break;
-            case "bye":
-                System.out.println("    " + "Bye. Hope to see you again soon!");
-                return false;
             case "remove":
                 if (inputArr.length < 2) {
                     throw new DukeException("Please specify which task to delete.");
@@ -90,38 +87,35 @@ public class Parser {
                 if (list.get(removeIndex - 1) == null) {
                     throw new DukeException("This task doesn't exist");
                 }
-                System.out.println("    Noted. I've removed this task: ");
-                System.out.println("      " + list.get(removeIndex - 1).toString());
+                message += "    Noted. I've removed this task: \n";
+                message += "      " + list.get(removeIndex - 1).toString() + "\n";
                 list.remove(removeIndex - 1);
-                System.out.println("     Now you have " + list.getSize() + " tasks in the list.");
+                message += "     Now you have " + list.getSize() + " tasks in the list.";
                 break;
             case "save":
-                storage.save(list);
+                message = storage.save(list);
                 break;
             case "find":
                 if (inputArr.length < 2) {
                     throw new DukeException("The description of a find cannot be empty.");
                 }
-                list.find(inputArr[1]);
+                message = list.find(inputArr[1]);
                 break;
             default:
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException de) {
-            System.out.println("    " + de.getMessage());
+            message = de.getMessage();
         }
-        printLine();
-        return true;
-    }
-    private void printLine() {
-        System.out.println("    ____________________________________________________________");
+        return message;
     }
 
-    private void addTask(Task t) {
-        System.out.println("     Got it. I've added this task: ");
+    private String addTask(Task t) {
+        String message = "     Got it. I've added this task: \n";
         list.add(t);
-        System.out.println("      " + t.toString());
-        System.out.println("     Now you have " + list.getSize() + " tasks in the list.");
+        message += "      " + t.toString() + "\n";
+        message += "     Now you have " + list.getSize() + " tasks in the list.";
+        return message;
     }
 
 }

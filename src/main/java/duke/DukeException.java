@@ -20,6 +20,6 @@ public class DukeException extends Exception {
      * @return
      */
     public String getMessage() {
-        return "☹ OOPS!!! " + super.getMessage();
+        return "OOPS!!! " + super.getMessage();
     }
 }
