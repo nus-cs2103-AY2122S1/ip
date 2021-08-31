@@ -53,7 +53,6 @@ public class Parser {
         do {
             try {
                 arr = input.split(" ");
-                System.out.println(input);
                 if (input.equals("bye")) {
                     return ui.printBye();
                 } else if (arr[0].equals("done")) {
@@ -67,12 +66,10 @@ public class Parser {
                 } else if (arr[0].equals("event")) {
                     return parseEvent(arr);
                 } else if (input.equals("list")) {
-                    System.out.println("LIST");
                     return parseList();
                 } else if (arr[0].equals("find")) {
                     return parseFind(arr);
                 } else {
-                    System.out.println("not found");
                     return "Command not Found";
                 }
             } catch (InvalidCommandException e) {
@@ -105,8 +102,9 @@ public class Parser {
             throw new InvalidValueException("Enter a valid number!");
         } else {
             taskList.markAsDone(parseInt(arr[1]) - 1);
-            ui.printCurrentTask(taskList, parseInt(arr[1]) - 1);
-            return ui.printDone();
+            String str = ui.printDone() + "\n";
+            str += ui.printCurrentTask(taskList, parseInt(arr[1]) - 1) + "\n";
+            return str;
         }
     }
 
@@ -129,9 +127,10 @@ public class Parser {
                 || Integer.parseInt(arr[1]) <= 0)) {
             throw new InvalidValueException("Enter a valid number!");
         } else {
-            ui.printCurrentTask(taskList, parseInt(arr[1]) - 1);
+            String str = ui.printRemove() + "\n";
             taskList.removeTask(parseInt(arr[1]) - 1);
-            return ui.printRemove();
+            str += ui.printCurrentTask(taskList, parseInt(arr[1]) - 1) + "\n";
+            return str;
         }
     }
 
@@ -174,18 +173,15 @@ public class Parser {
         if (arr.length < 2) {
             throw new EmptyDescriptionException("Missing description / date");
         }
-        System.out.println("2");
-        //taskList.addTask(new Event(TaskList.getDescription(arr), TaskList.getDeadline(arr)));
-        str += new Ui().printAddTask(taskList);
-        return str;
+        taskList.addTask(new Event(TaskList.getDescription(arr), TaskList.getDeadline(arr)));
+        return ui.printAddTask(taskList);
     }
 
     /**
      * Deals with the user input when the user types "list".
      */
     public String parseList() {
-        System.out.println("list here");
-        return new Ui().displayList(taskList);
+        return ui.displayList(taskList);
     }
 
     /**

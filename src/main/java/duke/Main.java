@@ -15,6 +15,10 @@ public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Starts the application.
+     * @param stage The stage to set the scene.
+     */
     @Override
     public void start(Stage stage) {
         try {

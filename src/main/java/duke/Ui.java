@@ -49,7 +49,6 @@ public class Ui {
      * @param ls The list of tasks.
      */
     public String printAddTask(TaskList ls) {
-        System.out.println("3");
         return ls.printAddTask();
     }
 
@@ -58,7 +57,6 @@ public class Ui {
      * @param ls The list of tasks.
      */
     public String displayList(TaskList ls) {
-        System.out.println("2");
         return ls.displayList();
     }
 

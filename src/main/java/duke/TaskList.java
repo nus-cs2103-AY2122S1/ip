@@ -35,7 +35,6 @@ public class TaskList {
                 break;
             }
         }
-        System.out.println(str);
         return str;
     }
 
@@ -87,7 +86,6 @@ public class TaskList {
                 }
             }
         }
-        System.out.println(str);
         return str;
     }
 
@@ -97,7 +95,6 @@ public class TaskList {
      * @param task The task to be added.
      */
     public void addTask(Task task) {
-        System.out.println("add task");
         ls.add(task);
     }
 
@@ -142,16 +139,13 @@ public class TaskList {
      * Prints the list of tasks.
      */
     public String displayList() {
-        System.out.println("3");
         if (ls.size() == 0) {
-            System.out.println("4");
             return "You currently do not have any task!";
         } else {
-            System.out.println("5");
             String str = "";
-            str += "Here are the tasks in your list: ";
+            str += "Here are the tasks in your list: \n ";
             for (int i = 0; i < ls.size(); i++) {
-                str += (i + 1) + "." + ls.get(i).toString();
+                str += (i + 1) + "." + ls.get(i).toString() + "\n";
             }
             return str;
         }
@@ -162,11 +156,9 @@ public class TaskList {
      */
     public String printAddTask() {
         String str = "";
-        str += "Got it. I've added this task: ";
-        System.out.println("5");
-        str += ls.get(ls.size() - 1).toString();
-        System.out.println("6");
-        str += "Now you have " + ls.size() + " tasks in the list.";
+        str += "Got it. I've added this task: \n";
+        str += ls.get(ls.size() - 1).toString() + "\n";
+        str += "Now you have " + ls.size() + " tasks in the list. \n";
         return str;
     }
 
