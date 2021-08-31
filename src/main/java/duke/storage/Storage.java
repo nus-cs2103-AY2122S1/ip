@@ -26,12 +26,19 @@ public class Storage {
     /**
      * Default file path where the storage is saved.
      */
-    public static final String DEFAULT_FILE_PATH = "data/duke.txt";
+    public static final String DEFAULT_FILE_PATH = "./data/duke.txt";
     /**
      * Delimiter for the saved format in storage.
      */
     public static final String DELIMITER = " | ";
     private final Path path;
+
+    /**
+     * Constructor of the Storage class.
+     */
+    public Storage() {
+        this(DEFAULT_FILE_PATH);
+    }
 
     /**
      * Constructor of the Storage class.

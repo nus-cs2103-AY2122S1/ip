@@ -1,35 +1,35 @@
 package duke.ui;
 
-import java.io.PrintStream;
+import java.io.IOException;
 import java.util.List;
-import java.util.Scanner;
 
+import duke.Duke;
 import duke.task.Task;
 import duke.task.TaskList;
+import javafx.stage.Stage;
 
 /**
  * This class encapsulates the UI of the Duke app.
  */
 public class Ui {
-    private static final String ROBOT_EMOJI_PREFIX = "\uD83E\uDD16: ";
-    private static final String COLOR_CYAN = "\u001B[36m";
-    private static final String COLOR_RED = "\u001B[91m";
-    private static final String COLOR_RESET = "\u001B[0m";
-    private static final String LOGO =
-            " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private final Scanner in;
-    private final PrintStream out;
+    private final MainWindow mainWindowController;
 
     /**
-     * Initializes the UI input and output streams.
+     * Initializes the GUI.
+     *
+     * @param stage The JavaFX stage.
+     * @param duke The duke app.
+     * @throws IOException Thrown if there was an error loading the GUI.
      */
-    public Ui() {
-        this.in = new Scanner(System.in);
-        this.out = System.out;
+    public Ui(Stage stage, Duke duke) throws IOException {
+        javafx.fxml.FXMLLoader fxmlLoader =
+                new javafx.fxml.FXMLLoader(duke.Main.class.getResource("/view/MainWindow.fxml"));
+        javafx.scene.layout.AnchorPane ap = fxmlLoader.load();
+        javafx.scene.Scene scene = new javafx.scene.Scene(ap);
+        stage.setScene(scene);
+        this.mainWindowController = fxmlLoader.getController();
+        this.mainWindowController.setDuke(duke);
+        stage.show();
     }
 
     /**
@@ -38,49 +38,25 @@ public class Ui {
      * @param string The error message.
      */
     public void printErr(String string) {
-        this.print(COLOR_RED + string + COLOR_RESET);
+        this.mainWindowController.printDukeMessage(string);
     }
 
     /**
-     * Prints formatted messages/
+     * Prints formatted messages
      *
      * @param string The message.
      */
     public void print(String string) {
-        this.out.println(ROBOT_EMOJI_PREFIX + string);
-    }
-
-    /**
-     * Prints the Duke logo.
-     */
-    public void printLogo() {
-        this.out.println(COLOR_CYAN + LOGO + COLOR_RESET);
+        this.mainWindowController.printDukeMessage(string);
     }
 
     /**
      * Prints the exit message.
      */
     public void printExitMessage() {
-        this.print("Bye. Hope to see you again soon!");
+        this.mainWindowController.printDukeMessage("Bye. Hope to see you again soon!");
     }
 
-    /**
-     * Prints all the task from the given task list.
-     *
-     * @param taskList The task list to be printed from.
-     */
-    public void printAllTasks(TaskList taskList) {
-        List<Task> tasks = taskList.getTaskList();
-        if (tasks.size() == 0) {
-            this.print("You have no tasks in your list.");
-            return;
-        }
-
-        this.print("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            this.out.println("\t" + ((i + 1) + ". " + tasks.get(i)));
-        }
-    }
 
     /**
      * Prints the task that was added.
@@ -88,8 +64,9 @@ public class Ui {
      * @param task The task that was added.
      */
     public void printTaskAdded(Task task) {
-        this.print("Got it. I've added this task:");
-        this.out.println("\t" + task);
+        String s = "Got it. I've added this task:\n"
+                + "\t" + task + "\n";
+        this.print(s);
     }
 
     /**
@@ -104,22 +81,10 @@ public class Ui {
     }
 
     /**
-     * Prints the failed to initialize message.
-     *
-     * @param msg The message to be printed.
-     */
-    public void printFailedInitMessage(String msg) {
-        this.printErr("Unable to initialize duke:");
-        this.out.println("\t" + COLOR_RED + msg + COLOR_RESET);
-        this.printErr("Exiting...");
-    }
-
-    /**
      * Greets the user.
      */
     public void printGreeting() {
-        this.print("Hi, im Duke!");
-        this.print("What can i do for you?");
+        this.print("Hi, im Duke!\nWhat can i do for you?\n");
     }
 
     /**
@@ -128,8 +93,7 @@ public class Ui {
      * @param task The task that was marked as done.
      */
     public void printTaskMarkedAsDone(Task task) {
-        this.print("Nice! I've marked this task as done:");
-        this.out.println("\t" + task);
+        this.print("Nice! I've marked this task as done:\n\t" + task);
     }
 
     /**
@@ -138,24 +102,7 @@ public class Ui {
      * @param task The task that was deleted.
      */
     public void printTaskDeleted(Task task) {
-        this.print("Noted. I've removed this task:");
-        this.out.println("\t" + task);
-    }
-
-    /**
-     * Closes the scanner.
-     */
-    public void exit() {
-        this.in.close();
-    }
-
-    /**
-     * Gets the user command.
-     *
-     * @return The user command.
-     */
-    public String readCommand() {
-        return this.in.nextLine();
+        this.print("Noted. I've removed this task:\n\t" + task);
     }
 
     /**
@@ -169,9 +116,36 @@ public class Ui {
             return;
         }
 
-        this.print("Here are the matching tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            this.out.println("\t" + ((i + 1) + ". " + tasks.get(i)));
-        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the matching tasks in your list:\n");
+        printTasksInOrder(tasks, sb);
     }
+
+    /**
+     * Prints all the task from the given task list.
+     *
+     * @param taskList The task list to be printed from.
+     */
+    public void printAllTasks(TaskList taskList) {
+        List<Task> tasks = taskList.getTaskList();
+        if (tasks.size() == 0) {
+            this.print("You have no tasks in your list.");
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
+        printTasksInOrder(tasks, sb);
+    }
+
+    private void printTasksInOrder(List<Task> tasks, StringBuilder sb) {
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append("\t");
+            sb.append(i + 1);
+            sb.append(". ");
+            sb.append(tasks.get(i));
+            sb.append("\n");
+        }
+        this.print(sb.toString());
+    }
+
 }
