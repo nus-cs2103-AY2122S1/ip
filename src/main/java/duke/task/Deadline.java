@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Deadline class, inherits from Task
+ * Deadline class, inherits from Task.
  * Deadline are tasks with a description and a "/by " followed by the time and date
  * The time and date must be properly formatted
  */
@@ -14,7 +14,7 @@ public class Deadline extends Task {
     protected LocalTime deadlineTime;
 
     /**
-     * Constructor for a Deadline
+     * Constructor for a Deadline.
      *
      * @param description String representing the description of the deadline task
      * @param date        LocalDate object representing a date

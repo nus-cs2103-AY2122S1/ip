@@ -8,14 +8,9 @@ import duke.data.TaskList;
 public class Ui {
 
     // ASCII DIVIDER to clean up the output
-    final static String DIVIDER = "---------------------------";
+    final static String DIVIDER = "----------------------------------------------------";
 
     public Ui() {
-        // Intro message
-        System.out.println(
-                "Hello! I'm Duke" + "\n" +
-                        "What can I do for you?" + "\n" +
-                        DIVIDER);
     }
 
     public void showLoadingError() {
@@ -23,7 +18,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message when a done command is successfully called
+     * Displays a message when a done command is successfully called.
      *
      * @param task String representing the task that was done
      * @return A formatted String to display to the user
@@ -35,7 +30,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message when a delete command is successfully called
+     * Displays a message when a delete command is successfully called.
      *
      * @param task String representing the task that was deleted
      * @return A formatted String to display to the user
@@ -48,7 +43,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message when a list command is successfully called
+     * Displays a message when a list command is successfully called.
      *
      * @param tasks TaskList representing the tasks
      * @return A formatted String of all the tasks in the taskList to display to the user
@@ -64,7 +59,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message when a bye command is successfully called
+     * Displays a message when a bye command is successfully called.
      *
      * @return A formatted String to display to the user
      */
@@ -73,7 +68,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message which contains the tasks which match the keyword
+     * Displays a message which contains the tasks which match the keyword.
      *
      * @param foundTasks The tasks that match the keywords
      * @return A formatted String to display to the user
@@ -83,7 +78,7 @@ public class Ui {
     }
 
     /**
-     * Displays a message when a todo, event or deadline command is successfully called
+     * Displays a message when a todo, event or deadline command is successfully called.
      *
      * @param tasks String representing the task that was added
      * @return A formatted String to display to the user

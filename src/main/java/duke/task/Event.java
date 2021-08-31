@@ -2,7 +2,7 @@ package duke.task;
 
 
 /**
- * Event class, inherits from Task
+ * Event class, inherits from Task.
  * Events are tasks with a description and a "/at " followed by the time and date
  */
 public class Event extends Task {
