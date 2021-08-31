@@ -8,6 +8,9 @@ package side.exception;
 
 public class WrongFormatException extends SideException {
 
+    /**
+     * Initialises a WrongFormatException.
+     */
     public WrongFormatException(String format) {
         super("Follow this format, don't make this worse:\n" + format);
     }

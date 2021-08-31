@@ -8,6 +8,9 @@ package side.exception;
 
 public class DeleteIndexException extends SideException {
 
+    /**
+     * Initialises a DeleteIndexException.
+     */
     public DeleteIndexException() {
         super("Can't delete what isn't there...");
     }

@@ -8,6 +8,9 @@ package side.exception;
 
 public class TaskIndexException extends SideException {
 
+    /**
+     * Initialises a TaskIndexException.
+     */
     public TaskIndexException() {
         super("No such task, more energy wasted...");
     }
