@@ -60,4 +60,16 @@ public class Duke {
         Duke duke = new Duke("data/duke.txt");
         duke.run();
     }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public TaskList getTasks() {
+        return tasks;
+    }
+
+    public Ui getUi() {
+        return ui;
+    }
 }
