@@ -1,9 +1,11 @@
 package kayu.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import kayu.exception.DukeException;
 import kayu.exception.StorageException;
@@ -119,15 +121,23 @@ public class TaskList {
      * Returns a Map of {@link kayu.task.Task} and their numberings based on
      * the <code>keyword</code> parameter.
      *
-     * @param keyword Keyword String to find in {@link kayu.task.Task}s.
+     * @param keywords Keyword Strings to find in {@link kayu.task.Task}s.
      * @return A Map of {@link kayu.task.Task} that has similar description to <code>keyword</code>.
      */
-    public Map<Integer, Task> findTasksByDescriptionKeyword(String keyword) {
-        Map<Integer, Task> taskMap = new HashMap<>();
-        for (int idx = 0; idx < tasks.size(); idx++) {
-            Task task = tasks.get(idx);
-            if (task.getDescription().contains(keyword)) {
-                taskMap.put(idx, task);
+    public Map<Integer, Task> findTasksByKeywords(String... keywords) {
+        SortedMap<Integer, Task> taskMap = new TreeMap<>();
+        
+        for (String key: keywords) {
+            key = key.toLowerCase(Locale.ROOT);
+            if (key.isBlank()) {
+                continue; // in case parsed keywords has blanks
+            }
+            
+            for (int idx = 0; idx < tasks.size(); idx++) {
+                Task task = tasks.get(idx);
+                if (task.getDescription().toLowerCase(Locale.ROOT).contains(key)) {
+                    taskMap.put(idx, task);
+                }
             }
         }
         return taskMap;

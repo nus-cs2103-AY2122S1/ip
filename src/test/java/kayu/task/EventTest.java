@@ -27,6 +27,6 @@ public class EventTest {
 
     @Test
     public void testStringConversion() {
-        assertEquals("[E][ ] mock tests (at: 2020-09-14 12:30)", event.toString());
+        assertEquals("[E][ ] mock tests\n     (at: 2020-09-14 12:30)", event.toString());
     }
 }

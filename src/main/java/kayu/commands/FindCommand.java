@@ -38,19 +38,37 @@ public class FindCommand extends Command {
         if (keyword.isEmpty()) {
             throw new DukeException(String.format(ERROR_EMPTY_PARAMS, COMMAND_WORD));
         }
-
-        Map<Integer, Task> taskMap = taskList.findTasksByDescriptionKeyword(keyword);
+        
+        String[] keywords = keyword.split(" ");
+        String params = generateFormattedParameters(keywords); // for message
+        
+        Map<Integer, Task> taskMap = taskList.findTasksByKeywords(keywords);
         if (taskMap.isEmpty()) {
-            return String.format(MESSAGE_NO_MATCHING_CONTENTS, keyword);
+            return String.format(MESSAGE_NO_MATCHING_CONTENTS, params);
         }
         
-        String header = String.format(MESSAGE_MATCHING_CONTENTS, keyword);
-        StringBuilder resultTasksAsString = new StringBuilder(header);
+        String header = String.format(MESSAGE_MATCHING_CONTENTS, params);
+        String body = generateFormattedResponse(taskMap);
+        return header.concat(body);
+    }
+
+    private String generateFormattedParameters(String... keywords) {
+        StringBuilder parameters = new StringBuilder();
+        for (int idx = 0; idx < keywords.length; idx++) {
+            parameters.append(keywords[idx]);
+            if (idx != keywords.length - 1) {
+                parameters.append(", ");
+            }
+        }
+        return parameters.toString();
+    }
+    
+    private String generateFormattedResponse(Map<Integer, Task> taskMap) {
+        StringBuilder resultTasksAsString = new StringBuilder();
         taskMap.forEach((number, task) -> {
             String line = String.format("\n%d. %s", number + 1, task);
             resultTasksAsString.append(line);
         });
-        
         return resultTasksAsString.toString();
     }
 }

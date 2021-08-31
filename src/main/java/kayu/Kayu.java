@@ -1,6 +1,5 @@
 package kayu;
 
-import java.util.Arrays;
 import java.util.List;
 
 import kayu.commands.Command;
@@ -62,6 +61,7 @@ public class Kayu {
             
         } catch (StorageException exception) {
             logger.printError(exception.getMessage());
+            exception.printStackTrace();
             exit(); // force terminate
         }
     }
@@ -90,7 +90,7 @@ public class Kayu {
         } catch (StorageException exception) {
             feedback = exception.getMessage();
             logger.printError(feedback);
-            logger.print(Arrays.toString(exception.getStackTrace()));
+            exception.printStackTrace();
             exit(); // force terminate
         }
         return feedback;
@@ -103,7 +103,7 @@ public class Kayu {
         try {
             Thread.sleep(300); // sleep for 0.3s
         } catch (InterruptedException exception) {
-            // fall through
+            exception.printStackTrace();
         }
         System.exit(0);
     }
