@@ -1,29 +1,33 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.command.Command;
-import duke.command.CommandType;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.storage.TaskList;
-import duke.task.Task;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Represents the main Duke application.
  */
 public class Duke {
-    /** The storage for the application */
+    /**
+     * The storage for the application
+     */
     private Storage storage;
-    /** The task list for the application */
+    /**
+     * The task list for the application
+     */
     private TaskList taskList;
-    /** The UI for the application */
+    /**
+     * The UI for the application
+     */
     private Ui ui;
 
     /**
      * Constructs a Duke class with the given data file.
-     * 
+     *
      * @param filePath The path of the data file for the application
      */
     public Duke(String filePath) {
@@ -42,35 +46,16 @@ public class Duke {
      */
     public void run() {
         ui.greet();
-        while (true) {
+        while (ui.isOpen()) {
             try {
                 Command command = ui.receiveCommand();
-                if (command.type == CommandType.BYE) {
-                    ui.sayGoodbye();
-                    break;
-                } else if (command.type == CommandType.ADD) {
-                    Task task = (Task) command.payload;
-                    taskList.add(task);
-                    ui.displayAddedTask(task, taskList.getTaskCount());
-                } else if (command.type == CommandType.DONE) {
-                    int serialNo = (int) command.payload;
-                    ui.displayDoneTask(taskList.markDone(serialNo));
-                } else if (command.type == CommandType.DELETE) {
-                    int serialNo = (int) command.payload;
-                    ui.displayRemovedTask(taskList.remove(serialNo), taskList.getTaskCount());
-                } else if (command.type == CommandType.LIST) {
-                    ui.displayTasks(taskList.getTasks());
-                } else if (command.type == CommandType.FIND) {
-                    ui.displayFoundTasks(taskList.findMatchingTasks((String) command.payload));
-                }
+                command.execute(taskList, storage, ui);
             } catch (DukeException e) {
                 ui.displayErrorMessage(e.getMessage());
             }
         }
-        ui.close();
-        storage.write(taskList.getTasks());
     }
-    
+
     public static void main(String[] args) {
         new Duke("duke.txt").run();
     }

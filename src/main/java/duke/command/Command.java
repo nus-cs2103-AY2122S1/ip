@@ -1,22 +1,19 @@
 package duke.command;
 
+import duke.storage.Storage;
+import duke.storage.TaskList;
+import duke.ui.Ui;
+
 /**
  * Represents a command with the type and payload of the command.
  */
-public class Command {
-    /** The command type */
-    public CommandType type;
-    /** The payload */
-    public Object payload;
-
+public abstract class Command {
     /**
-     * Constructs a command class with the type and the payload.
-     * 
-     * @param type The type of the command.
-     * @param payload The payload of the command.
+     * Executes the command with the given task list, storage and ui.
+     *
+     * @param taskList The task list to execute the command with.
+     * @param storage  The storage to execute the command with.
+     * @param ui       The UI to execute the command with.
      */
-    public Command(CommandType type, Object payload) {
-        this.type = type;
-        this.payload = payload;
-    }
+    public abstract void execute(TaskList taskList, Storage storage, Ui ui);
 }

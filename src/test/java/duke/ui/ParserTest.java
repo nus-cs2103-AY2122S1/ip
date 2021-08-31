@@ -1,40 +1,39 @@
 package duke.ui;
 
-import duke.command.Command;
-import duke.command.CommandType;
-import duke.exception.DukeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.command.AddCommand;
+import duke.exception.DukeException;
 
 public class ParserTest {
     @Test
     public void parse_addTodo() {
         Parser parser = new Parser();
         try {
-            Command command = parser.parse("todo brush teeth");
-            assertEquals(CommandType.ADD, command.type);
-            assertEquals("[T][ ] brush teeth", command.payload.toString());
+            AddCommand command = (AddCommand) parser.parse("todo brush teeth");
+            assertEquals("[T][ ] brush teeth", command.getTask().toString());
         } catch (DukeException e) {
             e.printStackTrace();
         }
     }
-    
+
     @Test
     public void parse_todoNoDescription_exceptionThrown() {
         Parser parser = new Parser();
         try {
-            Command command = parser.parse("todo ");
+            parser.parse("todo ");
         } catch (DukeException e) {
             assertEquals("Sorry Sir, todo must be followed with a description", e.getMessage());
         }
     }
-    
+
     @Test
     public void parse_incorrectCmd_exceptionThrown() {
         Parser parser = new Parser();
         try {
-            Command command = parser.parse("incorrect");
+            parser.parse("incorrect");
         } catch (DukeException e) {
             assertEquals("Sorry Sir, I cannot understand the command", e.getMessage());
         }

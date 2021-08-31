@@ -1,24 +1,32 @@
 package duke.ui;
 
+import java.util.List;
+import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.Task;
-
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Represents the UI that interacts with the user.
  */
 public class Ui {
-    /** The scanner for the UI */
+    /**
+     * The scanner for the UI
+     */
     private Scanner sc;
-    /** The parser to parse user commands */
+    /**
+     * The parser to parse user commands
+     */
     private Parser parser;
+    /**
+     * The status of the UI
+     */
+    private boolean isOpen = true;
 
     /**
-     * Constructs the UI. Initializes the scanner to receive user input and the 
-     * parser to parse user commands. 
+     * Constructs the UI. Initializes the scanner to receive user input and the
+     * parser to parse user commands.
      */
     public Ui() {
         sc = new Scanner(System.in);
@@ -35,6 +43,7 @@ public class Ui {
 
     /**
      * Returns the command after parsing the user input.
+     *
      * @return the command after parsing the user input.
      * @throws DukeException when the parser cannot parse the user input.
      */
@@ -46,7 +55,7 @@ public class Ui {
 
     /**
      * Displays the given list of tasks to the user.
-     * 
+     *
      * @param tasks The list of tasks to display to the user.
      */
     public void displayTasks(List<Task> tasks) {
@@ -59,7 +68,7 @@ public class Ui {
 
     /**
      * Displays the matching tasks.
-     * 
+     *
      * @param tasks The matching tasks to display.
      */
     public void displayFoundTasks(List<Task> tasks) {
@@ -69,12 +78,12 @@ public class Ui {
             System.out.printf("%d. %s%n", i + 1, tasks.get(i));
         }
     }
-    
+
 
     /**
      * Displays a task marked as completed.
-     * 
-     * @param task The task to be displayed as completed.  
+     *
+     * @param task The task to be displayed as completed.
      */
     public void displayDoneTask(Task task) {
         System.out.println("---------------------------------");
@@ -84,8 +93,8 @@ public class Ui {
 
     /**
      * Displays the task that was removed and the number of tasks remaining.
-     * 
-     * @param task The task that was removed.
+     *
+     * @param task  The task that was removed.
      * @param count The number of tasks remaining.
      */
     public void displayRemovedTask(Task task, int count) {
@@ -97,8 +106,8 @@ public class Ui {
 
     /**
      * Displays an added task and the number of tasks after adding.
-     * 
-     * @param task The task that was added.
+     *
+     * @param task  The task that was added.
      * @param count The number of tasks after adding.
      */
     public void displayAddedTask(Task task, int count) {
@@ -110,7 +119,7 @@ public class Ui {
 
     /**
      * Displays an error message to the user.
-     * 
+     *
      * @param msg The error message to display to the user.
      */
     public void displayErrorMessage(String msg) {
@@ -132,5 +141,15 @@ public class Ui {
      */
     public void close() {
         sc.close();
+        isOpen = false;
+    }
+
+    /**
+     * Returns true if the UI is open or else false.
+     *
+     * @return A boolean value representing whether the UI is open.
+     */
+    public boolean isOpen() {
+        return isOpen;
     }
 }
