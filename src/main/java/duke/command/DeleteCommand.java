@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.TaskManager;
-import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -15,11 +14,11 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, Ui ui) {
+    public String execute(TaskManager taskManager) {
         Task deletedTask = taskManager.deleteTask(id);
-        ui.reply(String.format("Noted. I've removed this task: \n"
+
+        return String.format("Noted. I've removed this task: \n"
                 + "%s\n"
-                + "Now you have %d tasks in the list.", deletedTask.toString(), taskManager.taskCount())
-        );
+                + "Now you have %d tasks in the list.", deletedTask.toString(), taskManager.taskCount());
     }
 }

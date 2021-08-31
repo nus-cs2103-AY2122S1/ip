@@ -1,4 +1,6 @@
 import duke.Duke;
+import javafx.application.Application;
+
 
 public class Main {
 
@@ -8,7 +10,7 @@ public class Main {
      * @param args Not used.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+        Application.launch(Duke.class, args);
+        return;
     }
 }

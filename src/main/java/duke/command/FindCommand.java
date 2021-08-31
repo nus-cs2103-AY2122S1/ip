@@ -3,7 +3,6 @@ package duke.command;
 import java.util.List;
 
 import duke.TaskManager;
-import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -17,13 +16,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, Ui ui) {
+    public String execute(TaskManager taskManager) {
         List<Task> tasks = taskManager.find(this.keyword);
         StringBuilder s = new StringBuilder();
         s.append("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             s.append(String.format("%d.%s\n", i, tasks.get(i)));
         }
-        ui.reply(s.toString());
+        return s.toString();
     }
 }
