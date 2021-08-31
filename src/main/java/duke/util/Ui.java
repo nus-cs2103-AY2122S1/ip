@@ -86,14 +86,4 @@ public class Ui {
         return message;
     }
 
-    /**
-     * Returns the String for the farewell message when the user says bye to Duke.
-     *
-     * @return A String of message printed out in CLI.
-     */
-    public String bidFarewell() {
-        String message = "Bye. Hope to see you again soon!";
-        return message;
-    }
-
 }
