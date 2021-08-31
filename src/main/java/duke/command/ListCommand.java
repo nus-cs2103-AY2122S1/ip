@@ -20,8 +20,8 @@ public class ListCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList){
-        Ui.showTaskList(taskList);
+    public String execute(TaskList taskList){
+        return Ui.showTaskList(taskList);
     }
 
     /**
