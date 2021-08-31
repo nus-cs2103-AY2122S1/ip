@@ -97,6 +97,9 @@ public class Duke {
             case "find":
                 TaskList filteredTasks = tasks.find(command.getDescription());
                 ui.showMatches(filteredTasks);
+                break;
+            default:
+                break;
             }
         }
     }

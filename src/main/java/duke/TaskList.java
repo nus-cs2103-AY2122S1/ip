@@ -54,6 +54,13 @@ public class TaskList implements Serializable {
         return tasks.get(index);
     }
 
+    /**
+     * Returns a new TaskList containing only elements from the original TaskList
+     * which contain the query.
+     *
+     * @param query The string to be searched
+     * @return The filtered TaskList
+     */
     public TaskList find(String query) {
         TaskList output = new TaskList();
         for (int i = 0; i < this.size(); i++) {

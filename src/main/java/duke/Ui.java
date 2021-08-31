@@ -12,8 +12,10 @@ public class Ui {
     static final String READ_SAVE_STRING = "Sorry, there was a problem reading the save file :(";
     static final String WRITE_SAVE_STRING = "Sorry, there was a problem saving your tasks :(";
     static final String NEW_SAVE_STRING = "Empty save file detected - loading a blank list.";
-    static final String EXPECTED_DONE_INDEX_GOT_NONE = "You need to indicate which task number should be marked as done.";
-    static final String EXPECTED_DONE_INDEX_GOT_OTHER = "The task to be marked as done should be indicated its list index.";
+    static final String EXPECTED_DONE_INDEX_GOT_NONE =
+            "You need to indicate which task number should be marked as done.";
+    static final String EXPECTED_DONE_INDEX_GOT_OTHER =
+            "The task to be marked as done should be indicated its list index.";
     static final String EXPECTED_TO_DO_DESCRIPTION = "The description of a todo cannot be empty.";
     static final String EXPECTED_DEADLINE_DESCRIPTION = "The description of a deadline cannot be empty.";
     static final String EXPECTED_DEADLINE_BY = "The done-by date of a deadline cannot be empty.";
@@ -40,22 +42,22 @@ public class Ui {
     }
 
     private String addedString(Task task, int size) {
-        return String.format("Alright, I've added this task: \n" +
-                        "\t%s\n" +
-                        "Now, you have %d tasks in the list.\n",
+        return String.format("Alright, I've added this task: \n"
+                        + "\t%s\n"
+                        + "Now, you have %d tasks in the list.\n",
                 task, size);
     }
 
     private String doneString(Task task) {
-        return String.format("Certainly, I've marked this task as done: \n" +
-                        "\t%s\n",
+        return String.format("Certainly, I've marked this task as done: \n"
+                        + "\t%s\n",
                 task);
     }
 
     private String deletedString(Task task, int size) {
-        return String.format("Certainly, I've deleted this task: \n" +
-                        "\t%s" +
-                        "\nNow, you have %d tasks in the list.\n",
+        return String.format("Certainly, I've deleted this task: \n"
+                        + "\t%s"
+                        + "\nNow, you have %d tasks in the list.\n",
                 task, size);
     }
 
