@@ -28,7 +28,7 @@ public class Duke {
             d.taskList = new TaskList(Storage.load());
         } catch (IOException e) {
             // todo Handle corrupt data
-            System.out.printf("Cannot load tasks\n  %s\n", e.getMessage());
+            System.out.printf("Cannot load tasks\n  %s\nCreated a new task list.", e.getMessage());
             d.taskList = new TaskList();
         }
         return d;
@@ -45,5 +45,14 @@ public class Duke {
         command.setTaskList(taskList);
         CommandResult result = command.execute();
         return result.getMessage();
+    }
+
+    /**
+     * Saves data and ends the program.
+     *
+     * @throws IOException If an exception occurred when writing the data.
+     */
+    public void end() throws IOException {
+        Storage.save(taskList.toSaveFormat());
     }
 }

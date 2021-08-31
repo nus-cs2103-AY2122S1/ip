@@ -12,7 +12,17 @@ public class ExitCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        return new CommandResult("Bye bye");
+        return new CommandResult("Closing...");
+    }
+
+    /**
+     * Checks if the user wants to exit.
+     *
+     * @param userInput The user text input.
+     * @return true if the input matches the exit command, false otherwise.
+     */
+    public static boolean isExit(String userInput) {
+        return "bye".equals(userInput);
     }
 
 }

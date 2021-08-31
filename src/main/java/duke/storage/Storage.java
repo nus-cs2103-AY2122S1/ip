@@ -71,6 +71,6 @@ public class Storage {
      * @throws IOException If an I/O error occurs during writing.
      */
     public static void save(List<String> data) throws IOException {
-        Files.write(FILE_PATH, data, StandardOpenOption.WRITE);
+        Files.write(FILE_PATH, data, StandardOpenOption.TRUNCATE_EXISTING);
     }
 }

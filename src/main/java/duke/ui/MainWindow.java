@@ -1,6 +1,10 @@
 package duke.ui;
 
+import java.io.IOException;
+
 import duke.logic.Duke;
+import duke.logic.commands.ExitCommand;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -54,5 +59,25 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        if (ExitCommand.isExit(input)) {
+            this.exit();
+        }
+    }
+
+    private void exit() {
+        Duration timeout = Duration.seconds(1);
+        try {
+            duke.end();
+        } catch (IOException e) {
+            timeout = Duration.seconds(4);
+            String errorMsg = "Could not save your tasks:\n  " + e.getMessage()
+                    + "\nAll recent changes are not saved.";
+            DialogBox errorDialog = DialogBox.getDukeDialog(errorMsg, dukeImage);
+            dialogContainer.getChildren().add(errorDialog);
+        }
+        PauseTransition delay = new PauseTransition(timeout);
+        delay.setOnFinished(event -> System.exit(0));
+        delay.play();
     }
 }
