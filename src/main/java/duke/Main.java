@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * Bridge between Launcher i.e. entry point and MainWindow i.e. the controller class.
  */
 public class Main extends Application {
-    private Duke duke = Duke.init();
+    private final Duke duke = Duke.init();
 
     @Override
     public void start(Stage primaryStage) {
