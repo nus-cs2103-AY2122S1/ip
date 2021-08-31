@@ -69,11 +69,9 @@ public abstract class Task {
         return this.dueDate;
     }
 
-
     public boolean hasKeyword(String keyword) {
         return this.description.contains(keyword);
     }
-
 
     @Override
     public String toString() {

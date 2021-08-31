@@ -19,6 +19,13 @@ public class Event extends Task {
         this.taskType = "E";
     }
 
+    /**
+     * Alternate constructor which accepts an isDone boolean.
+     *
+     * @param desc   The description of the event
+     * @param at     The time and date of the event
+     * @param isDone Boolean representing whether the task has been completed
+     */
     public Event(String desc, String at, Boolean isDone) {
         super(desc);
         this.dueDate = at;

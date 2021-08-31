@@ -64,6 +64,12 @@ public class TaskList {
         this.taskList.add(task);
     }
 
+    /**
+     * Finds the task that contains the keyword.
+     *
+     * @param keyword the word to be included in the task description
+     * @return The string representing the matching task
+     */
     public String findTask(String keyword) {
         StringBuilder output = new StringBuilder();
         for (int i = 0, j = 1; i < this.getLength(); i++) {
