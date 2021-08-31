@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
+import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -25,13 +25,13 @@ public class FindCommand extends Command {
 
     /**
      * Lists the tasks with the matching keyword associated with the FindCommand.
-     *
-     * @param tasks The TaskList associated with the current bot.
+     *  @param tasks The TaskList associated with the current bot.
      * @param userInt The User Interface associated with the current bot.
      * @param storage The storage associated with the current bot.
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, UI userInt, Storage storage) {
+    public String execute(TaskList tasks, Ui userInt, Storage storage) {
         ArrayList<Task> taskArrList = tasks.getAllTasks();
         int listLength = taskArrList.size();
         ArrayList<Task> matches = new ArrayList<>();
@@ -43,10 +43,11 @@ public class FindCommand extends Command {
             }
         }
         if (matches.size() == 0) {
-            userInt.notifyNoMatching();
+            return userInt.notifyNoMatching();
         } else {
-            userInt.notifyMatchingList(matches);
+            return userInt.notifyMatchingList(matches);
         }
+
     }
 
     /**

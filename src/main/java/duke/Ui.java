@@ -5,12 +5,13 @@ import java.util.Scanner;
 
 import duke.task.Task;
 
+
 /**
  * UI class which handles all the interactions with the user.
  */
-public class UI {
+public class Ui {
 
-    private static String logo = " ____        _ _\n"
+    private static final String LOGO = " ____        _ _\n"
             + "|  _ \\ _   _(_|_)\n"
             + "| | | | | | | | |\n"
             + "| |_| | |_| | | |\n"
@@ -19,17 +20,17 @@ public class UI {
     /**
      * Prints the welcome message to the user's terminal.
      */
-    public void greet(User user) {
-        System.out.println(logo);
-        System.out.println(String.format("Hello %s! I'm Duii, your personal assistant!", user.getUsername()));
-        System.out.println("What do you need help with?");
+    public static String greet(User user) {
+        return LOGO
+                + String.format("Hello %s! I'm Duii, your personal assistant!\n", user.getUsername())
+                + "What do you need help with?";
     }
 
     /**
      * Prints the error message which has occurred during loading of file.
      */
-    public void showLoadingError() {
-        System.out.println("Error starting up Duii.");
+    public String showLoadingError() {
+        return "Error starting up Duii.";
     }
 
     /**
@@ -51,43 +52,44 @@ public class UI {
     /**
      * Prints the error message from the thrown exception.
      */
-    public void showError(String error) {
-        System.out.println(error);
+    public String showError(String error) {
+        return error;
     }
 
     /**
      * Alerts the user that a task has been marked as done.
      */
-    public void notifyDone(Task doneTask) {
-        System.out.println("You've finished the task? Good job!");
-        System.out.println("This task has been marked as done:");
-        System.out.println(doneTask.displayInfo());
+    public String notifyDone(Task doneTask) {
+        return "You've finished the task? Good job!\n"
+                + "This task has been marked as done:\n"
+                + doneTask.displayInfo();
     }
 
     /**
      * Alerts the user that a task has been deleted.
      */
-    public void notifyDelete(Task removedTask) {
-        System.out.println("Okay! Removing the task:");
-        System.out.println(removedTask.displayInfo());
+    public String notifyDelete(Task removedTask) {
+        return "Okay! Removing the task:\n"
+            + removedTask.displayInfo();
     }
 
     /**
      * Displays the list of tasks in the current active session.
      */
-    public void notifyList(ArrayList<Task> taskArrList) {
+    public String notifyList(ArrayList<Task> taskArrList) {
+        String output = "Here's your current list:\n";
         int listLength = taskArrList.size();
-        System.out.println("Here's your current list:");
         for (int i = 0; i < listLength; i++) {
-            System.out.println(String.format("%d. %s", i + 1, taskArrList.get(i).displayInfo()));
+            output += String.format("%d. %s\n", i + 1, taskArrList.get(i).displayInfo());
         }
+        return output;
     }
 
     /**
      * Updates the user that there are no matches in the list.
      */
-    public void notifyNoMatching() {
-        System.out.println("There were no keyword matches!");
+    public String notifyNoMatching() {
+        return "There were no keyword matches!";
     }
 
     /**
@@ -95,12 +97,13 @@ public class UI {
      *
      * @param taskArrList The ArrayList of tasks with matching keywords.
      */
-    public void notifyMatchingList(ArrayList<Task> taskArrList) {
+    public String notifyMatchingList(ArrayList<Task> taskArrList) {
+        String output = "Here's are the matching results:\n";
         int listLength = taskArrList.size();
-        System.out.println("Here's are the matching results:");
         for (int i = 0; i < listLength; i++) {
-            System.out.println(String.format("%d. %s", i + 1, taskArrList.get(i).displayInfo()));
+            output += String.format("%d. %s\n", i + 1, taskArrList.get(i).displayInfo());
         }
+        return output;
     }
 
     /**
@@ -108,40 +111,43 @@ public class UI {
      *
      * @param taskArrList The ArrayList of tasks in the current list.
      */
-    public void notifyAdd(ArrayList<Task> taskArrList) {
+    public String notifyAdd(ArrayList<Task> taskArrList) {
         int listLength = taskArrList.size();
         Task newTask = taskArrList.get(listLength - 1);
-        System.out.println("New Task? I've added it to the list:");
-        System.out.println(newTask.displayInfo());
-        System.out.println(String.format("Now you have %d task(s) in the list.", listLength));
+        return "New Task? I've added it to the list:\n"
+                + newTask.displayInfo()
+                + "\n"
+                + String.format("Now you have %d task(s) in the list.", listLength);
     }
 
     /**
      * Shows the tasks recorded from the previous session.
      * If the user is a new user, nothing is printed to the terminal.
      */
-    public void printPrevSession(TaskList tasks, User user) {
+    public String printPrevSession(TaskList tasks, User user) {
         if (!user.isNewUser()) {
             ArrayList<Task> taskArrList = tasks.getAllTasks();
             int listLength = taskArrList.size();
             if (listLength == 0) {
-                System.out.println("You have no outstanding tasks from the previous session."
-                        + " What a productivity master!");
+                return "You have no outstanding tasks from the previous session."
+                        + " What a productivity master!";
             } else {
-                System.out.println("These tasks are from the previous session:");
+                String output = "These tasks are from the previous session:\n";
                 for (int i = 0; i < taskArrList.size(); i++) {
-                    System.out.println(String.format("%d. %s", i + 1, taskArrList.get(i).displayInfo()));
+                    output += String.format("%d. %s", i + 1, taskArrList.get(i).displayInfo());
                 }
+                return output;
             }
         } else {
             user.hasLoginBefore();
+            return "This is your first session!\n";
         }
     }
 
     /**
      * Prints the exit message to the user's terminal.
      */
-    public void exit() {
-        System.out.println("You're going already? Hope to see you again soon!");
+    public String exit() {
+        return "You're going already? Hope to see you again soon!";
     }
 }
