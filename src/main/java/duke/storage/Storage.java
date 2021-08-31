@@ -7,17 +7,19 @@
 
 package duke.storage;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Scanner;
 import java.io.File;
-import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Storage {
     private final ArrayList<String> commandsSaved = new ArrayList<>(); // array of saved lines in the new txt file
@@ -76,6 +78,7 @@ public class Storage {
                         tasks.add(new Event(taskInfo, eventDetails, taskState));
                         break;
                     }
+                    default:
 
                     }
                 }
@@ -144,7 +147,7 @@ public class Storage {
      * @param ref The index of the item in the commandsSaved being referenced to be removed.
      * @throws IOException
      */
-    public void removeTask(int ref) throws IOException{
+    public void removeTask(int ref) throws IOException {
         commandsSaved.remove(ref);
         update();
     }

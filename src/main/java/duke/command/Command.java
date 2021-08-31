@@ -17,15 +17,20 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 import duke.ui.Ui;
-
-import java.io.IOException;
 import java.time.LocalDate;
+import java.io.IOException;
 
 public class Command {
 
     private final Storage storage;
     private final Ui ui;
 
+    /**
+     * Constructs a Command object.
+     *
+     * @param storage The Storage object handling the information.
+     * @param ui The Ui object handling user interactions.
+     */
     public Command(Storage storage, Ui ui) {
         this.storage = storage;
         this.ui = ui;

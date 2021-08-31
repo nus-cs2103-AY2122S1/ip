@@ -17,6 +17,11 @@ public class Parser {
     private final String command;
     private final String[] commandWords;
 
+    /**
+     * Constructs a Parser object.
+     *
+     * @param command The command issued by the user.
+     */
     public Parser(String command) {
         this.command = command;
         this.commandWords = command.split(" ");
@@ -69,7 +74,7 @@ public class Parser {
             throw new EmptyDescriptionException("todo");
         }
 
-       return this.commandWords[1];
+        return this.commandWords[1];
     }
 
     /**

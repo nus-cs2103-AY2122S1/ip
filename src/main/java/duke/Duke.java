@@ -13,9 +13,8 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
 import java.util.Scanner;
+import java.io.IOException;
 
 public class Duke {
 
@@ -24,6 +23,12 @@ public class Duke {
     private final Ui ui;
     private final Command command;
 
+    /**
+     * Constructs a Duke object
+     *
+     * @param filePath The location where information will be saved in the project.
+     * @throws IOException
+     */
     public Duke(String filePath) throws IOException {
         this.ui = new Ui(); // Performs the self introduction upon successful initialization.
         this.storage = new Storage(filePath);
