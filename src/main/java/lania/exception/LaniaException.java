@@ -3,7 +3,7 @@ package lania.exception;
 /**
  * Represents special type of exception by the Lania class to handle invalid inputs.
  */
-public class LaniaException extends IllegalArgumentException {
+public class LaniaException extends Exception {
 
     /**
      * Constructor for the LaniaException class.

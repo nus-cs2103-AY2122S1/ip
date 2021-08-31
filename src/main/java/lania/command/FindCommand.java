@@ -22,10 +22,11 @@ public class FindCommand extends Command {
      * @param tasks The user's list of tasks.
      * @param storage The object dealing with loading and storing of tasks.
      * @param ui The object dealing with user interactions.
+     * @return The message displayed by executing the find command.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
         TaskList temp = tasks.find(keyword);
-        ui.showListMessage(temp);
+        return ui.showListMessage(temp);
     }
 }
