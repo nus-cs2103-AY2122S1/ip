@@ -15,7 +15,7 @@ public class ListCommand extends Command {
 
     @Override
     public void run(Bot bot, String[] args) {
-        List<Task> taskList = bot.taskList.get();
+        List<Task> taskList = bot.getTaskList().get();
         Ui.print(commandsToStrings(taskList));
     }
 
@@ -27,7 +27,7 @@ public class ListCommand extends Command {
      * @return List of string representation of tasks
      */
     public static String[] commandsToStrings(List<Task> tasks) {
-        List<String> taskStrings =  IntStream.range(0, tasks.size())
+        List<String> taskStrings = IntStream.range(0, tasks.size())
             .mapToObj(i -> {
                 Task t = tasks.get(i);
                 return String.format("%d. %s", i + 1, t.toString());

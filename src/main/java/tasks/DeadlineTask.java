@@ -13,6 +13,12 @@ public class DeadlineTask extends Task {
     private LocalDateTime taskTime;
     private final TaskType TASK_TYPE = TaskType.Deadline;
 
+    /**
+     * Constructor for DeadlineTask
+     *
+     * @param taskText explanatory text for task
+     * @param taskTime time at which task is to be executed
+     */
     public DeadlineTask(String taskText, LocalDateTime taskTime) {
         this.taskText = taskText.trim();
         this.taskTime = taskTime;

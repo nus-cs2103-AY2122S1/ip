@@ -1,6 +1,10 @@
 package bot;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +50,7 @@ public class Storage {
      * @param bot running bot
      */
     public static void save(Bot bot) {
-        Storage.write(bot.taskList.getTaskStringList());
+        Storage.write(bot.getTaskList().getTaskStringList());
     }
 
     /**
@@ -62,7 +66,7 @@ public class Storage {
                 tasks.add(Task.deserialize(taskString));
             }
         }
-        bot.taskList.set(tasks);
+        bot.getTaskList().set(tasks);
     }
 
     private static String getAbsolutePath() {

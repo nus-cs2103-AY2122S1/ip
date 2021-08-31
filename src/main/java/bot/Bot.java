@@ -7,10 +7,10 @@ import commands.Command;
 import exceptions.InvalidTaskException;
 
 /**
- * Bot handles the bot's REPL cycle
+ * Bot handles the Bot's REPL cycle
  */
 public class Bot {
-    public TaskList taskList;
+    private TaskList taskList;
     private Boolean isRunning;
 
 
@@ -47,4 +47,12 @@ public class Bot {
         this.isRunning = false;
     }
 
+    /**
+     * Getter for taskList
+     *
+     * @return Bot's taskList
+     */
+    public TaskList getTaskList() {
+        return this.taskList;
+    }
 }

@@ -10,9 +10,9 @@ import bot.TaskType;
  */
 public abstract class Task {
 
-    public boolean isDone = false;
     public static final DateTimeFormatter INPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
     public static final DateTimeFormatter OUTPUT_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy - hh mm a");
+    private boolean isDone = false;
 
     /**
      * Mark a task as complete
@@ -36,7 +36,11 @@ public abstract class Task {
      * @return String representing task
      */
     public String serialize() {
-        return String.format("%s,%b,%s,%s", this.getTaskType(), this.getTaskDone(), this.getTaskText(), this.getTaskTime());
+        return String.format("%s,%b,%s,%s",
+                this.getTaskType(),
+                this.getTaskDone(),
+                this.getTaskText(),
+                this.getTaskTime());
     }
 
     /**
@@ -108,5 +112,14 @@ public abstract class Task {
      * @return Task's TaskType
      */
     public abstract TaskType getTaskType();
+
+    /**
+     * Get whether task is done
+     *
+     * @return true iff task is done
+     */
+    public boolean isTaskDone() {
+        return this.isDone;
+    }
 
 }

@@ -1,10 +1,10 @@
 package commands;
 
-import tasks.Task;
-import tasks.TodoTask;
 import bot.Bot;
 import bot.Ui;
 import exceptions.InvalidArgumentsException;
+import tasks.Task;
+import tasks.TodoTask;
 
 /**
  * Command for adding a to-do task to the bot
@@ -17,7 +17,7 @@ public class TodoCommand extends Command {
             throw new InvalidArgumentsException(Ui.ERROR_SIGNATURE + "The description of a todo cannot be empty.");
         }
         Task todoTask = new TodoTask(args[0]);
-        bot.taskList.addTask(todoTask);
+        bot.getTaskList().addTask(todoTask);
     }
 
 }

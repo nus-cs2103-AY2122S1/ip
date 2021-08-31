@@ -1,13 +1,13 @@
 package commands;
 
-import tasks.DeadlineTask;
-import tasks.Task;
-
 import java.time.LocalDateTime;
 
 import bot.Bot;
 import bot.Ui;
 import exceptions.InvalidArgumentsException;
+import tasks.DeadlineTask;
+import tasks.Task;
+
 
 /**
  * Command for adding a deadline task to the bot
@@ -26,7 +26,7 @@ public class DeadlineCommand extends Command {
 
         LocalDateTime taskTime = LocalDateTime.parse(splitArgs[1].trim(), Task.INPUT_TIME_FORMAT);
         Task deadlineTask = new DeadlineTask(splitArgs[0], taskTime);
-        bot.taskList.addTask(deadlineTask);
+        bot.getTaskList().addTask(deadlineTask);
     }
 
 }

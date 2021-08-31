@@ -1,13 +1,12 @@
 package commands;
 
-import tasks.EventTask;
-import tasks.Task;
-
 import java.time.LocalDateTime;
 
 import bot.Bot;
 import bot.Ui;
 import exceptions.InvalidArgumentsException;
+import tasks.EventTask;
+import tasks.Task;
 
 /**
  * Command for adding an event task to the bot
@@ -26,7 +25,7 @@ public class EventCommand extends Command {
 
         LocalDateTime taskTime = LocalDateTime.parse(splitArgs[1].trim(), Task.INPUT_TIME_FORMAT);
         Task eventTask = new EventTask(splitArgs[0], taskTime);
-        bot.taskList.addTask(eventTask);
+        bot.getTaskList().addTask(eventTask);
     }
 
 }

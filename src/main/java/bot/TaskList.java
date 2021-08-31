@@ -47,9 +47,9 @@ public class TaskList {
         }
         this.taskList.add(newTask);
         Ui.print(new String[]{
-                "Got it. I've added this task:",
-                Ui.TEXT_BLOCK_MARGIN + newTask.toString(),
-                String.format("Now you have %d task(s) in the list", taskList.size())
+            "Got it. I've added this task:",
+            Ui.TEXT_BLOCK_MARGIN + newTask.toString(),
+            String.format("Now you have %d task(s) in the list", taskList.size())
         });
         return true;
     }
@@ -67,9 +67,9 @@ public class TaskList {
         Task task = getTaskAt(index);
         this.taskList.remove(index);
         Ui.print(new String[]{
-                "Noted. I've removed this task:",
-                Ui.TEXT_BLOCK_MARGIN + task.toString(),
-                String.format("Now you have %d task(s) in the list", taskList.size())
+            "Noted. I've removed this task:",
+            Ui.TEXT_BLOCK_MARGIN + task.toString(),
+            String.format("Now you have %d task(s) in the list", taskList.size())
         });
         return true;
     }

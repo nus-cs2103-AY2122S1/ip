@@ -7,7 +7,7 @@ import bot.Bot;
  */
 public abstract class Command {
 
-    String[] args;
+    private String[] args;
 
     /**
      * Set the command's arguments
