@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 /**
  *  A class that encapsulates the handling of the text input into Duke.
  */
@@ -47,6 +49,10 @@ public class Parser {
                 throw new DukeException("The description of " + inputArray[0] + " cannot be empty.");
             }
             reply = list.addTask(Task.TaskName.getTaskType(inputArray[0]), inputArray[1]);
+            break;
+
+        case "bye":
+            reply = "bye";
             break;
 
         default:

@@ -7,53 +7,43 @@ public class Ui {
     /**
      * Shows the welcome message when first executing Duke.
      */
-    public void showWelcomeMessage() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo + "What can I do for you\n");
-    }
-
-    /**
-     * Shows the goodbye message when finishing executing Duke.
-     */
-    public void showByeMessage() {
-        String bye = "\tBye bye!!. Hope to see you again soon!!\n";
-        showBreakLine();
-        System.out.println(bye);
-        showBreakLine();
+    public static String showWelcomeMessage() {
+        String logo = "DUKE!!";
+        StringBuilder result = new StringBuilder("Hello from \nWhat can I do for you\n");
+        result.insert(11, logo);
+        return result.toString();
     }
 
     /**
      * Shows the error message when encountering a DukeException.
      */
-    public void showErrorMessage(DukeException e) {
-        String red = "\u001B[91m";
-        String def = "\u001B[39m";
+    public static String showErrorMessage(DukeException e) {
         String border = "******************************";
-        System.out.println(red + border + border + "\n\n"
-                + e.toString() + "\n\n" + border + border
-                + def + "\n");
+        StringBuilder result = new StringBuilder(border);
+        result.append(border).append("\n\n")
+                .append(e.toString()).append("\n\n")
+                .append(border).append(border).append("\n");
+        return result.toString();
     }
 
     /**
      * Shows the BreakLine that is shown at the start and end of each Duke's reply.
      */
-    public void showBreakLine() {
+    public static String showBreakLine() {
         String breakLine = "------------------------------";
-        System.out.println(breakLine + breakLine + "\n");
+        StringBuilder result = new StringBuilder(breakLine);
+        result.append(breakLine).append("\n");
+        return result.toString();
     }
 
     /**
-     * Shows the formatted reply from Duke after receiving a input from the user.
+     * Shows the formatted reply from Duke after receiving an input from the user.
      *
      * @param reply The String representation of the reply provided from Duke
      */
-    public void showReply(String reply) {
-        showBreakLine();
-        System.out.println(reply);
-        showBreakLine();
+    public static String showReply(String reply) {
+        StringBuilder result = new StringBuilder(reply);
+        result.insert(0, showBreakLine()).append(showBreakLine());
+        return result.toString();
     }
 }

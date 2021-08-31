@@ -1,11 +1,12 @@
-package duke;
+package duke.task;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A wrapper for a duke.task.Deadline which is a duke.task.Task that needs to be done before a date/time.
+ * A wrapper for a duke.task.Deadline which is a duke.task.
+ * Task that needs to be done before a date/time.
  *
  * @author Wong Yun Rui Chris
  */

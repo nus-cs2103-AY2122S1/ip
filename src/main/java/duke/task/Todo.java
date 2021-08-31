@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * A wrapper for a Todos which is a task without date/time

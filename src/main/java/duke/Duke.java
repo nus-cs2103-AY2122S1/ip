@@ -1,53 +1,50 @@
 package duke;
 
-import java.util.Scanner;
+import duke.gui.Gui;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * Implementation for Duke.
  *
  * @author Wong Yun Rui Chris
  */
-public class Duke {
-    private TaskList list;
-    private Storage storage;
-    private Ui ui;
+public class Duke extends Application {
+    private final TaskList list;
+    private final Storage storage;
+    private final Parser parser;
 
     /**
      * Public constructor to initialise Duke.
      *
-     * @param filepath The String representing the filepath to the Duke.txt file containing
-     *                 the previous saved data
      */
-    public Duke(String filepath) {
-        storage = new Storage(filepath);
+    public Duke() {
+        storage = new Storage("/data/duke.txt");
         list = storage.readData();
-        ui = new Ui();
+        parser = new Parser();
+    }
+
+    @Override
+    public void start(Stage stage) {
+        Gui gui = new Gui();
+        gui.start(stage, this);
     }
 
     /**
-     * Executes the Duke to start up for use.
+     * Handle the saving of the TaskList's data by calling the saveData
      */
-    public void run() {
-        ui.showWelcomeMessage();
-
-        Parser parser = new Parser();
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
-
-        while (!input.equals("bye")) {
-            try {
-                ui.showReply(parser.handleInput(this.list, input));
-                storage.saveData(list);
-            } catch (DukeException e) {
-                ui.showErrorMessage(e);
-            }
-            input = sc.nextLine();
-        }
-
-        ui.showByeMessage();
+    public void saveDataToFile() {
+        this.storage.saveData(this.list);
     }
 
-    public static void main(String[] args) {
-        new Duke("/data/duke.txt").run();
+    /**
+     * Return the User's string input after it was parsed by the parser
+     *
+     * @param input the String that is to be parsed
+     * @return The Duke's String response of the user's input
+     * @throws DukeException Exceptions specific to Duke's input
+     */
+    public String handleInput(String input) throws DukeException {
+        return parser.handleInput(this.list, input);
     }
 }
