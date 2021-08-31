@@ -32,10 +32,20 @@ public class Duke {
      */
     public static void listen() {
         while (true) {
-            boolean bool = parser.nextLine();
+            boolean bool = parser.nextLine().getKey();
             if (!bool) {
                 break;
             }
         }
+    }
+
+    /**
+     * Return the response of the chatbot according to the user input.
+     *
+     * @param input Input from the user.
+     * @return Response from the chatbot.
+     */
+    public String getResponse(String input) {
+        return parser.getResponse(input).getValue();
     }
 }

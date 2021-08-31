@@ -36,26 +36,20 @@ public class Processor implements IProcessor {
      * @param arguments Other arguments for the command.
      */
     @Override
-    public void processCommand(Command command, List<String> arguments) {
+    public String processCommand(Command command, List<String> arguments) {
         switch(command) {
         case BYE:
-            processBye();
-            break;
+            return processBye();
         case LIST:
-            processList();
-            break;
+            return processList();
         case DONE:
-            processDone(arguments.get(1));
-            break;
+            return processDone(arguments.get(1));
         case DELETE:
-            processDelete(arguments.get(1));
-            break;
+            return processDelete(arguments.get(1));
         case FIND:
-            processFind(arguments.get(1));
-            break;
+            return processFind(arguments.get(1));
         default:
-            processDefault(arguments);
-            break;
+            return processDefault(arguments);
         }
     }
 
@@ -63,9 +57,10 @@ public class Processor implements IProcessor {
      * Process command implementation ith type DEFAULT.
      *
      * @param arguments List of arguments related to the command.
+     * @return Response from the chatbot.
      */
     @Override
-    public void processDefault(List<String> arguments) {
+    public String processDefault(List<String> arguments) {
         try {
             String type = arguments.get(0);
             if (type.equals("todo")) {
@@ -101,36 +96,47 @@ public class Processor implements IProcessor {
             } else {
                 throw new DukeException("I don't understand:(");
             }
-            Ui.print("Got it. I've added this task:\n   " + this.storage.getLastTask()
-                    + "\nNow you have " + this.storage.getSize() + " tasks in the list.");
+            String response = "Got it. I've added this task:\n   " + this.storage.getLastTask()
+                    + "\nNow you have " + this.storage.getSize() + " tasks in the list.";
+            Ui.print(response);
+            return response;
         } catch (DukeException e) {
             Ui.print(e.getMessage());
+            return e.getMessage();
         } catch (DateTimeParseException e) {
             Ui.print(e.getMessage());
+            return e.getMessage();
         }
     }
 
     /**
      * Process command implementation with type LIST.
+     *
+     * @return Response from the chatbot.
      */
     @Override
-    public void processList() {
+    public String processList() {
         Ui.print(this.storage.toString());
+        return this.storage.toString();
     }
 
     /**
      * Process command implementation with type DONE.
      *
      * @param index Index that specify which Task is done.
+     * @return Response from the chatbot.
      */
     @Override
-    public void processDone(String index) {
+    public String processDone(String index) {
         try {
             int i = Integer.parseInt(index);
             this.storage.setDone(i - 1);
-            Ui.print("Nice! I've marked this task as done:\n   " + this.storage.getTask(i - 1));
+            String result = "Nice! I've marked this task as done:\n   " + this.storage.getTask(i - 1);
+            Ui.print(result);
+            return result;
         } catch (DukeException e) {
             Ui.print(e.getMessage());
+            return e.getMessage();
         }
     }
 
@@ -138,29 +144,39 @@ public class Processor implements IProcessor {
      * Process command implementation with type DELETE.
      *
      * @param index Index that specify which tASK
+     * @return Response from the chatbot.
      */
     @Override
-    public void processDelete(String index) {
+    public String processDelete(String index) {
         try {
             int i = Integer.parseInt(index);
             String result = this.storage.deleteTask(i - 1);
-            Ui.print("Got it! I've removed this task:\n   " + result
-                    + "\nNow you have " + this.storage.getSize() + " tasks in the list.");
+            String output = "Got it! I've removed this task:\n   " + result
+                    + "\nNow you have " + this.storage.getSize() + " tasks in the list.";
+            Ui.print(output);
+            return output;
         } catch (DukeException e) {
             Ui.print(e.getMessage());
+            return e.getMessage();
         }
     }
 
     /**
      * Process command implementation with type BYE.
+     *
+     * @return Response from the chatbot.
      */
     @Override
-    public void processFind(String keyword) {
-        Ui.print(this.storage.findKeyword(keyword).toString());
+    public String processFind(String keyword) {
+        String response = this.storage.findKeyword(keyword).toString();
+        Ui.print(response);
+        return response;
     }
 
     @Override
-    public void processBye() {
-        Ui.print("Bye. Please meet me again later!");
+    public String processBye() {
+        String response = "Bye. Please meet me again later!";
+        Ui.print(response);
+        return response;
     }
 }

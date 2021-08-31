@@ -1,5 +1,7 @@
 package parser;
 
+import javafx.util.Pair;
+
 /**
  * Interface for the Parser object which parses command from the user.
  */
@@ -10,19 +12,12 @@ public interface IParser {
      * @param line Command that is entered by the user.
      * @return True if the command entered is not bye.
      */
-    boolean parseLine(String line);
+    Pair<Boolean, String> parseLine(String line);
 
     /**
      * Function that allows Parser to take the next command from the user.
      *
-     * @return True if the command entered is not bye.
+     * @return True if the command entered is not bye and the response from the chatbot.
      */
-    boolean nextLine();
-
-    /**
-     * Function that allows Parser to take the next command from UI and return chatbot response.
-     *
-     * @return True if the command entered is not bye.
-     */
-    boolean getResponse(String input);
+    Pair<Boolean, String> nextLine();
 }
