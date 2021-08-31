@@ -6,8 +6,12 @@ public class TodoTask extends Task {
         super(taskCommand);
     }
 
-    public String saveString() {
-        return String.format("T|%s", super.saveString());
+    /**
+     * Format task to be saved in file.
+     * @return Formatted string representation of task.
+     */
+    public String toSaveString() {
+        return String.format("T|%s", super.toSaveString());
     }
 
     @Override

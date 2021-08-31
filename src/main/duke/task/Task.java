@@ -37,11 +37,19 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
-    public String saveString() {
+    /**
+     * Format task to be saved in file.
+     * @return Formatted string representation of task.
+     */
+    public String toSaveString() {
         return String.format("%s|%s|%s", isDone, description, time);
     }
 
-    public LocalDateTime time() {
+    /**
+     * Get the time of the task.
+     * @return Time.
+     */
+    public LocalDateTime getTime() {
         return time;
     }
     

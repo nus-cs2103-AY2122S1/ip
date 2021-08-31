@@ -12,6 +12,9 @@ import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.TodoTask;
 
+/**
+ * Read and Write Duke chatbot's list of tasks to/from a file.
+ */
 public class Storage {
 
     private File file;
@@ -39,7 +42,7 @@ public class Storage {
         if (descriptions[1] == "true") {
             t.finishTask();
         }
-        return t;
+        return task;
     }
 
     public ArrayList<Task> load() throws DukeException {
@@ -64,7 +67,8 @@ public class Storage {
     public void save(TaskList tasks) throws DukeException {
         String listString = "";
         for (int i = 0; i < tasks.size(); i++) {
-            listString += String.format("%s\n", tasks.get(i).saveString());
+            Task task = (Task) tasks.get(i);
+            listString += String.format("%s\n", task.toSaveString());
         }
         try (PrintWriter writer = new PrintWriter(file)){
             if (!listString.isEmpty()) {

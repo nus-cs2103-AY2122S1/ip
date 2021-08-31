@@ -8,8 +8,12 @@ public class DeadlineTask extends Task {
         super(description, time);
     }
 
-    public String saveString() {
-        return String.format("D|%s", super.saveString());
+    /**
+     * Format task to be saved in file.
+     * @return Formatted string representation of task.
+     */
+    public String toSaveString() {
+        return String.format("D|%s", super.toSaveString());
     }
 
     @Override

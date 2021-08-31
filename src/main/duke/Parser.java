@@ -5,29 +5,26 @@ import duke.command.AddCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
-
 
 public class Parser {
     
     public static Command parse(String fullCommand) throws DukeException{
-        Command c;
-        switch (fullCommand.split(" ")[0]) {
+        String type = fullCommand.split(" ")[0];
+        switch (type) {
         case "bye":
-            c = new ExitCommand();
-            break;
+            return new ExitCommand(fullCommand);
         case "list":
-            c = new ListCommand(fullCommand);
-            break;
+            return  new ListCommand(fullCommand);
         case "done":
-            c = new DoneCommand(fullCommand);
-            break;
+            return new DoneCommand(fullCommand);
         case "delete":
-            c = new DeleteCommand(fullCommand);
-            break;
+            return new DeleteCommand(fullCommand);
+        case "find":
+            return new FindCommand(fullCommand);
         default:
-            c = new AddCommand(fullCommand);              
+            return new AddCommand(fullCommand);              
         }
-        return c;
     }
 }

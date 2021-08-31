@@ -44,14 +44,25 @@ public class AddCommand extends Command {
             throw new DukeException("Invalid Command!");
         }
     }
-  
+
+    /**
+     * Execute user commands.
+     * @param tasks List of tasks.
+     * @param ui Ui of Duke chatbot.
+     * @param storage Storage of Duke chatbot.
+     * @throws DukeException If execution fails.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(taskToAdd);
         System.out.println(String.format("Task Added!\n %s", taskToAdd));
         storage.save(tasks);
     }
 
-    public Boolean isExit() {
+    /**
+     * Check if user is ending the chatbot.
+     * @return True if user is ending the chatbot.
+     */
+    public boolean isExit() {
         return false;
     }
 
