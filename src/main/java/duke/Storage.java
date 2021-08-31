@@ -37,6 +37,7 @@ public class Storage {
      */
     public TaskList loadData() throws IOException {
             File file = new File(path);
+            tasks = new TaskList();
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdir();
             }
