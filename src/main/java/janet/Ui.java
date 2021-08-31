@@ -1,13 +1,13 @@
-package duke;
+package janet;
 
 /**
- * Encapsulates methods needed for Duke to interact with the user through printing
+ * Encapsulates methods needed for Janet to interact with the user through printing
  * messages to the console.
  */
 public class Ui {
 
     static final String EXPECTED_SEARCH_QUERY = "The search query of a find operation cannot be empty.";
-    static final String INTRO_STRING = "Hey there! I'm Good Duke. How many I help you today?";
+    static final String INTRO_STRING = "Hey there! I'm Good Janet. How many I help you today?";
     static final String OUTRO_STRING = "That was an excellent chat - I look forward to seeing you again soon!";
     static final String READ_SAVE_STRING = "Sorry, there was a problem reading the save file :(";
     static final String WRITE_SAVE_STRING = "Sorry, there was a problem saving your tasks :(";
@@ -30,7 +30,7 @@ public class Ui {
     /**
      * Returns a string representation of the tasks in the list.
      *
-     * @param taskList Duke's list of tasks
+     * @param taskList Janet's list of tasks
      * @return String representation of list
      */
     public static String taskListString(TaskList taskList) {

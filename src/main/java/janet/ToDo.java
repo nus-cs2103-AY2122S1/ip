@@ -1,4 +1,4 @@
-package duke;
+package janet;
 
 /**
  * Represents a to-do task, which is a task that has a description.

@@ -1,4 +1,4 @@
-package duke;
+package janet;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -23,7 +23,7 @@ public class Storage {
     }
 
     /**
-     * Writes the contents of Duke's task list to the save file
+     * Writes the contents of Janet's task list to the save file
      *
      * @param taskList The list of tasks to be saved
      * @throws IOException If the file cannot be written to

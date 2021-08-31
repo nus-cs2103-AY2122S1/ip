@@ -1,4 +1,4 @@
-package duke;
+package janet;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -25,13 +25,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Janet janet;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Eleanor.jpg"));
+    private Image janetImage = new Image(this.getClass().getResourceAsStream("/images/Janet.jpg"));
 
     public MainWindow() {
-        duke = new Duke(this);
+        janet = new Janet(this);
     }
 
     /**
@@ -40,24 +40,24 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        addDialogsInChatBox(dukeDialog(Ui.INTRO_STRING));
+        addDialogsInChatBox(janetDialog(Ui.INTRO_STRING));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setJanet(Janet janet) {
+        this.janet = janet;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Janet's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = janet.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getJanetDialog(response, janetImage)
         );
         userInput.clear();
     }
@@ -69,8 +69,8 @@ public class MainWindow extends AnchorPane {
         }
     }
 
-    DialogBox dukeDialog(String message) {
-        return DialogBox.getDukeDialog(message, dukeImage);
+    DialogBox janetDialog(String message) {
+        return DialogBox.getJanetDialog(message, janetImage);
     }
 
     DialogBox userDialog(String message) {
