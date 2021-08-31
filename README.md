@@ -32,7 +32,7 @@ Clearly, I am here to clean up Tim's mess, this is what I do daily for this lazy
    - `java -jar Bot.jar`
 5. Enjoy and have fun!
 
-## 3. Features Development
+## 3. Features Development 👩‍💻
 
 - [X] Repond to the following commands:
 ```json
@@ -49,7 +49,7 @@ find        keywords (eg find homework play)                                    
 - [ ] Reminders
 - [ ] Filter, Sorting
 
-## 4. Make me better?
+## 4. Make me better? 📈
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
