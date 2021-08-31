@@ -12,7 +12,7 @@ public class GreetingBot {
 
     private Storage storage;
     private TaskList tasks;
-
+    private Ui ui;
     /**
      * The list of tasks that belongs to the bot.
      */
@@ -22,34 +22,43 @@ public class GreetingBot {
      * Constructor that takes in nothing.
      */
     public GreetingBot() {
+        ui = new Ui();
+    }
 
+    public String startBot() {
+        return this.ui.greet();
+    }
+
+    public String loadList(String filePath) {
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.loadData());
+            if (tasks.getList().size() == 0) {
+                return this.ui.newListLoaded();
+            } else {
+                return this.ui.existingListLoaded();
+            }
+        } catch (DukeException err) {
+            System.out.println(err.toString());
+            return err.toString();
+        }
     }
 
     /**
      * Method that runs the main functions of the bot.
      *
      */
-    public void startBot(String filePath) {
-        Ui ui = new Ui();
-        ui.greet();
-        ui.instruct();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.loadData());
-        } catch (DukeException err) {
-            System.out.println(err.toString());
-        }
-
-        store();
+    protected String exitBot() {
         if (tasks.getList().isEmpty()) {
             try {
                 storage.deleteData();
-                ui.goodbye();
+                return ui.goodbye();
             } catch (DukeException err) {
                 System.out.println(err.toString());
+                return err.toString();
             }
         } else {
-            ui.goodbye();
+            return ui.goodbye();
         }
     }
 
@@ -59,43 +68,45 @@ public class GreetingBot {
     /**
      * Method that reads input and decides what method to call to deal with the input.
      */
-    private void store() {
+    protected String store(String input) {
         Parser parser = new Parser();
-        Scanner inputScanner = new Scanner(System.in);
-        while (true) {
             try {
-                String nextLine = inputScanner.nextLine();
+                String nextLine = input;
                 int action = parser.parse(nextLine);
                 if (action == 0) {
-                    tasks.list();
+                    return tasks.list();
                 } else if (action == 1) {
-                    break;
+                    return exitBot();
                 } else if (action == 2) {
-                    tasks.setDone(nextLine);
+                    String message = tasks.setDone(nextLine);
                     storage.updateData(tasks.getList());
+                    return message;
                 } else if (action == 3) {
-                    tasks.deleteTask(nextLine);
+                    String message = tasks.deleteTask(nextLine);
                     storage.updateData(tasks.getList());
+                    return message;
                 } else if (action == 4) {
-                    tasks.newTodo(nextLine);
+                    String message = tasks.newTodo(nextLine);
                     storage.updateData(tasks.getList());
+                    return message;
                 } else if (action == 5) {
-                    tasks.newDeadline(nextLine);
+                    String message = tasks.newDeadline(nextLine);
                     storage.updateData(tasks.getList());
+                    return message;
                 } else if (action == 6) {
-                    tasks.newEvent(nextLine);
+                    String message = tasks.newEvent(nextLine);
                     storage.updateData(tasks.getList());
+                    return message;
                 } else if (action == 7) {
-                    tasks.findTask(nextLine);
-                    continue;
+                    String message = tasks.findTask(nextLine);
+                    return message;
                 }
 
             } catch (DukeException err) {
                 System.out.println(err.toString());
-                continue;
+                return err.toString();
             }
-            tasks.getInfo();
-        }
+            return tasks.getInfo();
     }
 
 

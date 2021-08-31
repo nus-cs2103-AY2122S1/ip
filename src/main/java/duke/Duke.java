@@ -10,15 +10,16 @@ import javafx.fxml.FXML;
  */
 public class Duke {
 
-    /**
-     * Main method for Duke which runs the program.
-     * @param args main method args.
-     */
-    public static void main(String[] args) {
+    public GreetingBot dukeBot;
+
+
+    public Duke() {
         GreetingBot newBot = new GreetingBot();
-        newBot.startBot("./data/list.txt");
+        dukeBot = newBot;
+        newBot.loadList("./data/list.txt");
 
     }
+
 
 
 
@@ -29,7 +30,7 @@ public class Duke {
      */
     @FXML
     String getResponse(String input) {
-        return "Let me repeat what you said:  " + input;
+        return dukeBot.store(input);
     }
 
 

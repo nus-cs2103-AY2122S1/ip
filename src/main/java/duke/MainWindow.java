@@ -29,13 +29,22 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        duke = new Duke();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        addDukeDialogBox(duke.dukeBot.startBot());
+        addDukeDialogBox(duke.dukeBot.loadList("./data/list.txt"));
     }
 
     public void setDuke(Duke d) {
         duke = d;
+
     }
 
+    public void addDukeDialogBox(String message) {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(message, dukeImage)
+        );
+    }
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -50,4 +59,6 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
+
 }

@@ -24,9 +24,9 @@ public class Task implements Serializable {
      * Method to set the status of the Task to done.
      * @param status the value that done is to be set to.
      */
-    public void setDone(boolean status) {
+    public String setDone(boolean status) {
         isDone = status;
-        System.out.println("Nice! I've marked this task as done:\n[X]" + this.title);
+        return "Nice! I've marked this task as done:\n[X]" + this.title;
     }
 
     /**
