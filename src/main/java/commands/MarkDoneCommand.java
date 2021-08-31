@@ -2,9 +2,10 @@ package commands;
 
 import java.io.IOException;
 
-import duke.*;
-import tasks.*;
-import exceptions.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import tasks.Task;
 
 /**
  * This command marks a task in the task list as done.
@@ -36,5 +37,7 @@ public class MarkDoneCommand implements Command {
         }
     }
 
-    public boolean isQuit() {return false;}
+    public boolean isQuit() {
+        return false;
+    }
 }

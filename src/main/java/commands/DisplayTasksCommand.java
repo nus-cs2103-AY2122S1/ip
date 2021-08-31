@@ -1,8 +1,8 @@
 package commands;
 
-import duke.*;
-import tasks.*;
-import exceptions.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class DisplayTasksCommand implements Command {
 
@@ -17,5 +17,7 @@ public class DisplayTasksCommand implements Command {
         }
     }
 
-    public boolean isQuit() { return false; }
+    public boolean isQuit() {
+        return false;
+    }
 }

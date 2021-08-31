@@ -3,9 +3,10 @@ package commands;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import duke.*;
-import tasks.*;
-import exceptions.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import tasks.Deadline;
 
 public class AddDeadlineCommand extends AddTaskCommand {
     LocalDate deadline;

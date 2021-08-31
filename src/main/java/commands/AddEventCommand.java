@@ -2,9 +2,10 @@ package commands;
 
 import java.io.IOException;
 
-import duke.*;
-import tasks.*;
-import exceptions.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import tasks.Event;
 
 public class AddEventCommand extends AddTaskCommand {
 
