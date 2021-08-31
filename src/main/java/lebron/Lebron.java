@@ -19,11 +19,11 @@ import lebron.task.ToDo;
 
 public class Lebron {
 
+    final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
     public static final String FILE_PATH = "./data/duke.txt";
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
 
     /**
      * Available commands that the bot can understand.
@@ -107,9 +107,9 @@ public class Lebron {
                     taskList.add(new ToDo(splitWords[1]));
                     storage.saveToFile(taskList.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println(HORIZONTAL_LINE +
-                            "    :( OOPS! The description of a todo cannot be empty.\n" +
-                            HORIZONTAL_LINE);
+                    System.err.println(HORIZONTAL_LINE
+                            + "    :( OOPS! The description of a todo cannot be empty.\n"
+                            + HORIZONTAL_LINE);
                 }
                 break;
             case DEADLINE:
@@ -118,9 +118,9 @@ public class Lebron {
                     taskList.add(new Deadline(splitBy[0], splitBy[1]));
                     storage.saveToFile(taskList.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println(HORIZONTAL_LINE +
-                            "    :( OOPS! The description or a time of a deadline cannot be empty.\n" +
-                            HORIZONTAL_LINE);
+                    System.err.println(HORIZONTAL_LINE
+                            + "    :( OOPS! The description or a time of a deadline cannot be empty.\n"
+                            + HORIZONTAL_LINE);
                 }
                 break;
             case EVENT:
@@ -129,9 +129,9 @@ public class Lebron {
                     taskList.add(new Events(splitAt[0], splitAt[1]));
                     storage.saveToFile(taskList.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println(HORIZONTAL_LINE +
-                            "    :( OOPS! The description or a time of an event cannot be empty.\n" +
-                            HORIZONTAL_LINE);
+                    System.err.println(HORIZONTAL_LINE
+                            + "    :( OOPS! The description or a time of an event cannot be empty.\n"
+                            + HORIZONTAL_LINE);
                 }
                 break;
             case DELETE:
@@ -144,9 +144,11 @@ public class Lebron {
                 ui.replyFind(taskList, keyword);
                 break;
             case OTHER:
-                System.out.println(HORIZONTAL_LINE +
-                        "    :( OOPS! I'm sorry, but I don't know what that means.\n" +
-                        HORIZONTAL_LINE);
+                System.out.println(HORIZONTAL_LINE
+                        + "    :( OOPS! I'm sorry, but I don't know what that means.\n"
+                        + HORIZONTAL_LINE);
+                break;
+            default:
                 break;
             }
             text = sc.nextLine();

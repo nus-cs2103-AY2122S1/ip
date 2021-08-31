@@ -26,10 +26,10 @@ public class Ui {
      * Handles the greet event.
      */
     public void greet() {
-        System.out.println(HORIZONTAL_LINE +
-                "    Hello! I'm LebronChatBot\n" +
-                "    What can I do for you?\n" +
-                HORIZONTAL_LINE);
+        System.out.println(HORIZONTAL_LINE
+                + "    Hello! I'm LebronChatBot\n"
+                + "    What can I do for you?\n"
+                + HORIZONTAL_LINE);
     }
 
     /**
@@ -39,18 +39,18 @@ public class Ui {
      */
     public void replyAdd(ArrayList<Task> lst, Task task) {
         String num = String.valueOf(lst.size());
-        System.out.println(HORIZONTAL_LINE + "    Got it. I've added this task: \n" + "    " +
-                task.toString() + "\n" + "    Now you have " + num + " tasks in the list\n" +
-                HORIZONTAL_LINE);
+        System.out.println(HORIZONTAL_LINE + "    Got it. I've added this task: \n" + "    "
+                + task.toString() + "\n" + "    Now you have " + num + " tasks in the list\n"
+                + HORIZONTAL_LINE);
     }
 
     /**
      * Responds to the exit event when the user says bye.
      */
     public void exit() {
-        System.out.println(HORIZONTAL_LINE +
-                "    Bye. Hope to see you again soon!\n" +
-                HORIZONTAL_LINE);
+        System.out.println(HORIZONTAL_LINE
+                + "    Bye. Hope to see you again soon!\n"
+                + HORIZONTAL_LINE);
     }
 
     /**
@@ -74,9 +74,9 @@ public class Ui {
      * @param task The task that is marked done.
      */
     public void replyMarkDone(Task task) {
-        System.out.println(HORIZONTAL_LINE + "    Nice! I've marked this task as done:\n" +
-                "    " + task.toString() +
-                "\n" + HORIZONTAL_LINE);
+        System.out.println(HORIZONTAL_LINE + "    Nice! I've marked this task as done:\n"
+                + "    " + task.toString()
+                + "\n" + HORIZONTAL_LINE);
     }
 
     /**
@@ -87,9 +87,9 @@ public class Ui {
      */
     public void replyDelete(Task task, int size) {
         String num = String.valueOf(size);
-        System.out.println(HORIZONTAL_LINE + "    Noted. I've removed this task:\n" +
-                "    " + task.toString() +
-                "\n" + "    Now you have " + num + " tasks in the list\n"
+        System.out.println(HORIZONTAL_LINE + "    Noted. I've removed this task:\n"
+                + "    " + task.toString()
+                + "\n" + "    Now you have " + num + " tasks in the list\n"
                 + HORIZONTAL_LINE);
     }
 
