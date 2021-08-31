@@ -21,7 +21,7 @@ public class TaskList {
     /**
      * Constructor for duke.TaskList.
      */
-    private TaskList() {
+    public TaskList() {
         this.tasks = new ArrayList<>(100);
     }
 
@@ -79,13 +79,15 @@ public class TaskList {
     /**
      * Lists out the tasks inside the list (if any).
      */
-    public void listTasks() {
+    public String listTasks() {
         if (this.taskIndex == 0) {
-            System.out.println("No tasks added yet!");
+            return "No tasks added yet!";
         } else {
+            String response = "";
             for (int i = 0; i < this.getTasksLength(); i++) {
-                System.out.println((i + 1) + "." + this.tasks.get(i));
+                response += (i + 1) + "." + this.tasks.get(i) + "\n";
             }
+            return response;
         }
     }
 
