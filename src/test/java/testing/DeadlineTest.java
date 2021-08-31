@@ -1,15 +1,11 @@
-package test;
+package testing;
 
 import duke.Duke;
 import duke.exception.WrongCommandFormatException;
 import duke.tasktype.Deadline;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DeadlineTest {
 
@@ -18,7 +14,7 @@ public class DeadlineTest {
     public void testGetTypeIcon() {
         try {
             Duke duke = new Duke();
-            assertEquals("[D]", new Deadline("run /by 2000-12-12", false).getTypeIcon());
+            Assertions.assertEquals("[D]", new Deadline("run /by 2000-12-12", false).getTypeIcon());
         } catch (WrongCommandFormatException e) {
             throw new Error("case 1 failed");
         }
@@ -31,7 +27,7 @@ public class DeadlineTest {
         try {
             new Deadline("run /at 2000-12-12", false);
         } catch (WrongCommandFormatException e) {
-            assertEquals(
+            Assertions.assertEquals(
                     "Wrong keyword used. Please try again with /by",
                     e.getMessage()
             );
@@ -44,7 +40,7 @@ public class DeadlineTest {
         try {
             new Deadline("run /by 20-12-12", false);
         } catch (WrongCommandFormatException e) {
-            assertEquals(
+            Assertions.assertEquals(
                     "Wrong deadline format specified. \n"
                             + "Current format setting: "
                             + Duke.getFormat()

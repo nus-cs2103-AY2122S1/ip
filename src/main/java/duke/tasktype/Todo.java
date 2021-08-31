@@ -88,12 +88,12 @@ public class Todo implements Task {
      * Else indicate that the task has been correctly marked.
      */
     @Override
-    public void markComplete() {
+    public String markComplete() {
         if (isDone) {
-            Ui.taskAlrCompleted(this);
+            return Ui.taskAlrCompleted(this);
         } else {
-            Ui.markCompleteTodo(this);
             this.isDone = true;
+            return Ui.markCompleteTodo(this);
         }
     }
 

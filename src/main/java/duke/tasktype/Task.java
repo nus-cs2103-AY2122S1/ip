@@ -8,7 +8,7 @@ package duke.tasktype;
  */
 public interface Task {
 
-    void markComplete();
+    String markComplete();
 
     String getStatusIcon();
 
