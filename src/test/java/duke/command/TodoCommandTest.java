@@ -3,6 +3,7 @@ package duke.command;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import duke.util.Reply;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.NoActionException;
@@ -16,7 +17,7 @@ public class TodoCommandTest {
     public void execute_goodInput_createTodo() throws SaveFileException, NoActionException {
         TodoCommand command = new TodoCommand("Test Action");
         TaskListStub taskListStub = new TaskListStub();
-        command.execute(taskListStub, new UiStub(), new StorageStub());
+        command.execute(taskListStub, new ReplyStub(), new StorageStub());
         assertEquals(taskListStub.getTask(), new Todo("Test Action"));
     }
 
@@ -25,7 +26,7 @@ public class TodoCommandTest {
         TodoCommand command = new TodoCommand("");
         TaskListStub taskListStub = new TaskListStub();
         assertThrows(NoActionException.class, () -> {
-            command.execute(taskListStub, new UiStub(), new StorageStub());
+            command.execute(taskListStub, new ReplyStub(), new StorageStub());
         });
 
     }
@@ -43,10 +44,9 @@ public class TodoCommandTest {
         }
     }
 
-    private class UiStub extends duke.util.Ui {
-        @Override
-        public void showTaskAdded(Task newTask, TaskList tasks) {
-            return;
+    private static class ReplyStub extends Reply {
+        public static String showTaskAdded(Task newTask, TaskList tasks) {
+            return "";
         }
     }
 

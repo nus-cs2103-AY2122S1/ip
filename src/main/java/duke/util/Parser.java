@@ -69,4 +69,12 @@ public final class Parser {
             throw new InvalidInputException("We don't understand your date format.");
         }
     }
+
+    public static String[] parseInput(String input) {
+        String[] splitInput= input.split(" ", 2);
+        if (splitInput.length == 1) {
+            return new String[] {splitInput[0], ""};
+        }
+        return splitInput;
+    }
 }

@@ -6,7 +6,7 @@ import duke.exception.NoActionException;
 import duke.task.Task;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.util.Reply;
 
 public class FindCommand extends Command {
     private final String searchTerms;
@@ -22,7 +22,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws NoActionException {
+    public CommandResult execute(TaskList tasks, Reply reply, Storage storage) throws NoActionException {
         if (this.searchTerms.length() == 0) {
             throw new NoActionException("Command 'find' requires search terms to be provided.");
         }
@@ -33,7 +33,8 @@ public class FindCommand extends Command {
                 matchList.add(currTask);
             }
         }
-        ui.showMatchingTasks(new TaskList(matchList));
+        return new CommandResult(Reply.showMatchingTasks(new TaskList(matchList)),
+                true, super.isExit());
     }
 
 }

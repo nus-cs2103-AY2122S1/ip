@@ -9,9 +9,9 @@ import duke.exception.SaveFileException;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.util.Parser;
+import duke.util.Reply;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * A command class encapsulating the logic that occurs when the user issues a 'deadline' command.
@@ -33,7 +33,7 @@ public class DeadlineCommand extends Command {
      * Creates and adds a 'deadline' task to the tasks
      *
      * @param tasks List of existing tasks
-     * @param ui User interface current interacting with the user
+     * @param reply User interface current interacting with the user
      * @param storage Storage class handling the persistence of the tasks
      * @throws InvalidInputException if input cannot be parsed into a date
      * @throws NoActionException if no todo list action given
@@ -41,7 +41,7 @@ public class DeadlineCommand extends Command {
      * @throws SaveFileException if there are issues with the save file
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException,
+    public CommandResult execute(TaskList tasks, Reply reply, Storage storage) throws InvalidInputException,
             NoActionException, NoTimeException, SaveFileException {
         String[] deadlineInputs = action.split("/by", 2);
         if (deadlineInputs[0].length() == 0) {
@@ -54,8 +54,8 @@ public class DeadlineCommand extends Command {
         LocalDateTime deadline = Parser.parseDate(deadlineInputs[1].trim());
         Task newTask = new Deadline(deadlineInputs[0].trim(), deadline);
         tasks.add(newTask);
-        ui.showTaskAdded(newTask, tasks);
         storage.save(tasks);
+        return new CommandResult(Reply.showTaskAdded(newTask, tasks), true, super.isExit());
     }
 
     /**

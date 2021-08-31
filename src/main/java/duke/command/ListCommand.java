@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.util.Reply;
 
 
 /**
@@ -17,11 +17,11 @@ public class ListCommand extends Command {
      * Causes the Ui to print the task list
      *
      * @param tasks List of existing tasks
-     * @param ui User interface current interacting with the user
+     * @param reply User interface current interacting with the user
      * @param storage Storage class handling the persistence of the tasks
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showList(tasks);
+    public CommandResult execute(TaskList tasks, Reply reply, Storage storage) {
+        return new CommandResult(Reply.showList(tasks), true, super.isExit());
     }
 
     /**

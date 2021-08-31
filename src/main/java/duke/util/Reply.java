@@ -2,12 +2,13 @@ package duke.util;
 
 import java.util.Scanner;
 
+import duke.command.CommandResult;
 import duke.task.Task;
 
 /**
  * Task representing the user interface of the program.
  */
-public class Ui {
+public class Reply {
     /** Scanner used to get input from the user. */
     private final Scanner scanner;
 
@@ -15,7 +16,7 @@ public class Ui {
      * Constructor of Ui class.
      */
 
-    public Ui() {
+    public Reply() {
         scanner = new Scanner(System.in);
     }
 
@@ -34,22 +35,12 @@ public class Ui {
     }
 
     /**
-     * Retrieves a command from the user.
-     *
-     * @return An array containing the command as the first item and all subsequent words are the second item.
-     */
-    public String[] readCommand() {
-        return new String[] {scanner.next(), scanner.nextLine().trim()};
-    }
-
-    /**
      * Shows the error given an error message.
      *
      * @param errMessage Error message.
      */
-    public void showError(String errMessage) {
-        System.out.println("Ooops! " + errMessage);
-        System.out.println("Please try again.");
+    public static String showError(String errMessage) {
+        return String.format("Ooop! %s\nPlease try again.",errMessage);
     }
 
     /**
@@ -58,9 +49,8 @@ public class Ui {
      * @param task Task that has been added.
      * @param tasks Tasklist which the task has been added to.
      */
-    public void showTaskAdded(Task task, TaskList tasks) {
-        System.out.printf(
-                "Got it. I've added this task: \n   %s \nNow you have %d task in the list.%n",
+    public static String showTaskAdded(Task task, TaskList tasks) {
+        return String.format("Got it. I've added this task: \n   %s \nNow you have %d task in the list.\n",
                 task, tasks.size());
     }
 
@@ -70,8 +60,8 @@ public class Ui {
      * @param task Task that has been removed
      * @param tasks Tasklist which the task has been added to.
      */
-    public void showTaskRemoved(Task task, TaskList tasks) {
-        System.out.printf("Noted. I've removed this task:\n  %s\nNow you have %d task in the list.%n",
+    public static String showTaskRemoved(Task task, TaskList tasks) {
+        return String.format("Noted. I've removed this task:\n  %s\nNow you have %d task in the list.\n",
                 task, tasks.size());
     }
 
@@ -80,19 +70,19 @@ public class Ui {
      *
      * @param task Task that has been completed.
      */
-    public void showTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
+    public static String showTaskDone(Task task) {
+        return String.format("Nice! I've marked this task as done:\n%s", task);
     }
 
     /**
      * Shows a user friendly text version of the tasks in the tasklist.
      */
-    public void showList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
+    public static String showList(TaskList tasks) {
+        StringBuilder out = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.printf("%d. %s%n", i + 1, tasks.get(i));
+            out.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
         }
+        return out.toString();
     }
 
     /**
@@ -100,22 +90,22 @@ public class Ui {
      *
      * @param tasks Tasklist of tasks that matches the search terms.
      */
-    public void showMatchingTasks(TaskList tasks) {
+    public static String showMatchingTasks(TaskList tasks) {
         if (tasks.size() == 0) {
-            System.out.println("There are no matches in your list.\nUse command 'list' to see your whole list");
+            return "There are no matches in your list.\nUse command 'list' to see your whole list";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            StringBuilder out = new StringBuilder("Here are the matching tasks in your list: \n");
             for (int i = 0; i < tasks.size(); i++) {
-                System.out.printf("%d. %s%n", i + 1, tasks.get(i));
+                out.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
             }
+            return out.toString();
         }
-
     }
 
     /**
      * Shows a goodbye message.
      */
-    public void showBye() {
-        System.out.println("Bye. Hope to see you again!");
+    public static String showBye() {
+        return "Bye. Hope to see you again!";
     }
 }

@@ -1,17 +1,18 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.CommandResult;
 import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.util.Reply;
 
 /**
  * Duke class to encapsulate the high level logic of Duke
  */
 public class Duke {
-    private final Ui ui;
+    private final Reply reply;
     private TaskList tasks;
     private final Storage storage;
 
@@ -21,40 +22,24 @@ public class Duke {
      * @param filePath path of the save file
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        reply = new Reply();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            reply.showLoadingError();
             tasks = new TaskList();
         }
     }
 
-    /**
-     * Function that causes Duke to start listening for user input
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String[] fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+    public CommandResult getResponse(String input) {
+        try {
+            String[] parsedInput = Parser.parseInput(input);
+            Command c = Parser.parse(parsedInput);
+            return c.execute(tasks, reply, storage);
+        } catch (DukeException e) {
+            return new CommandResult(Reply.showError(e.getMessage()),
+                    false, false);
         }
-    }
-
-    /**
-     * Main function that instatiates a Duke and runs it.
-     *
-     * @param args Command line arguments
-     */
-    public static void main(String[] args) {
-        new Duke("./data/saveFile.txt").run();
     }
 }
