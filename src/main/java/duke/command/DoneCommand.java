@@ -25,7 +25,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Execute the "Done" Command.
+     * Executes the "Done" Command.
      *
      * @param cmd Command string to be executed.
      */
