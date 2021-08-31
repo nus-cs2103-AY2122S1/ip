@@ -36,20 +36,20 @@ public class AddCommand extends Command {
 
         if (task instanceof Todo) {
             Todo todo = (Todo) this.task;
-            storage.addTodo(todo);
-            return ui.addTodo(taskList, todo);
+            storage.add(todo);
+            return ui.add(taskList, todo);
         }
 
         if (task instanceof Deadline) {
             Deadline deadline = (Deadline) this.task;
-            storage.addDeadline(deadline);
-            return ui.addDeadline(taskList, deadline);
+            storage.add(deadline);
+            return ui.add(taskList, deadline);
         }
 
         if (task instanceof Event) {
             Event event = (Event) this.task;
-            storage.addEvent(event);
-            return ui.addEvent(taskList, event);
+            storage.add(event);
+            return ui.add(taskList, event);
         }
         return ui.showError("unable to add Task to Duke");
     }

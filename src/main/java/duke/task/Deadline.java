@@ -33,11 +33,11 @@ public class Deadline extends Task {
     /**
      * Returns the task type of duke.Deadline.
      *
-     * @return 1 to represent duke.Deadline task type.
+     * @return character D to represent duke.Deadline task type.
      */
     @Override
-    public int getTaskType() {
-        return 1;
+    public char getTaskType() {
+        return 'D';
     }
 
     /**

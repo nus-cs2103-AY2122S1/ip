@@ -93,36 +93,14 @@ public class Ui {
     }
 
     /**
-     * Displays the message to the user after an event task has been added.
+     * Displays the message to the user after a task has been added.
      *
      * @param taskList list of tasks.
-     * @param event to add.
+     * @param task to add.
      */
-    public String addEvent(TaskList taskList, Event event) {
-        return "Got it. I've added this task:\n  " + event + "\nNow you have " + taskList.getTasks().size()
-                + " tasks in the list.";
-    }
-
-    /**
-     * Displays the message to the user after a deadline task has been added.
-     *
-     * @param taskList list of tasks.
-     * @param deadline to add.
-     */
-    public String addDeadline(TaskList taskList, Deadline deadline) {
-        return "Got it. I've added this task:\n  " + deadline + "\nNow you have " + taskList.getTasks().size()
-                + " tasks in the list.";
-    }
-
-    /**
-     * Displays the message to the user after a todo task has been added.
-     *
-     * @param taskList list of tasks.
-     * @param todo to add.
-     */
-    public String addTodo(TaskList taskList, Todo todo) {
-        return "Got it. I've added this task:\n  " + todo + "\nNow you have " + taskList.getTasks().size()
-                + " tasks in the list.";
+    public String add(TaskList taskList, Task task) {
+            return "Got it. I've added this task:\n  " + task + "\nNow you have " + taskList.getTasks().size()
+                    + " tasks in the list.";
     }
 
     /**
@@ -156,6 +134,7 @@ public class Ui {
      * @param taskList current list of all tasks.
      * @param word given by user.
      */
+
     public String find(TaskList taskList, String word) {
         ArrayList<Task> matchingDates = taskList.find(word);
 

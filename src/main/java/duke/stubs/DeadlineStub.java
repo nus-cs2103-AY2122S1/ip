@@ -20,8 +20,8 @@ public class DeadlineStub extends Task implements DeadlineInterface {
         return "[D][ ] Create a deadline task (by: Dec 4 2021)";
     }
 
-    public int getTaskType() {
-        return 1;
+    public char getTaskType() {
+        return 'D';
     }
 
     public String toSavedFormat() {

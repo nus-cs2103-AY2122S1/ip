@@ -27,11 +27,11 @@ public class Todo extends Task {
     /**
      * Returns the task type of duke.Todo.
      *
-     * @return 0 to represent duke.Todo task type.
+     * @return character T to represent duke.Todo task type.
      */
     @Override
-    public int getTaskType() {
-        return 0;
+    public char getTaskType() {
+        return 'T';
     }
 
     /**

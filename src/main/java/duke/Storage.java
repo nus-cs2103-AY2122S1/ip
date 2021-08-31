@@ -63,50 +63,14 @@ public class Storage {
     }
 
     /**
-     * Adds Todo task to the hard disk.
+     * Adds a task to hard disk.
      *
-     * @param todo task to add.
+     * @param task task to add.
      */
-    public void addTodo(Todo todo) {
+    public void add(Task task) {
+        String textToSave = task.getTaskType() + "/~/0/~/" + task.toSavedFormat() + "\n";
+
         try {
-            String textToSave = "T/~/0/~/" + todo.toSavedFormat() + "\n";
-
-            FileWriter fw = new FileWriter("src/data/duke.txt", true);
-            fw.write(textToSave);
-            fw.close();
-
-        } catch (IOException ioException) {
-            System.out.println(ioException);
-        }
-    }
-
-    /**
-     * Adds Deadline task to hard disk.
-     *
-     * @param deadline task to add.
-     */
-    public void addDeadline(Deadline deadline) {
-        try {
-            String textToSave = "D/~/0/~/" + deadline.toSavedFormat() + "\n";
-
-            FileWriter fw = new FileWriter("src/data/duke.txt", true);
-            fw.write(textToSave);
-            fw.close();
-
-        } catch (IOException ioException) {
-            System.out.println(ioException);
-        }
-    }
-
-    /**
-     * Adds Event task to hard disk.
-     *
-     * @param event task to add.
-     */
-    public void addEvent(Event event) {
-        try {
-            String textToSave = "E/~/0/~/" + event.toSavedFormat() + "\n";
-
             FileWriter fw = new FileWriter("src/data/duke.txt", true);
             fw.write(textToSave);
             fw.close();
@@ -124,7 +88,7 @@ public class Storage {
     public void markAsDone(TaskList taskList, int taskToMark) {
         try {
             Task t = taskList.getTasks().get(taskToMark - 1);
-            String taskType = t.getTaskType() == 0 ? "T" : (t.getTaskType() == 1 ? "D" : "E");
+            char taskType = t.getTaskType();
             String done = t.isDone() ? "1" : "0";
             String description = t.toSavedFormat();
             String textToSave = taskType + "/~/" + done + "/~/" + description;

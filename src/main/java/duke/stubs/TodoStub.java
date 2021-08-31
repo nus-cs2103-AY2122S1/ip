@@ -16,8 +16,8 @@ public class TodoStub extends Task implements TodoInterface {
         return "[T][ ] Create a todo task";
     }
 
-    public int getTaskType() {
-        return 0;
+    public char getTaskType() {
+        return 'T';
     }
 
     public String toSavedFormat() {

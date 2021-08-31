@@ -33,11 +33,11 @@ public class Event extends Task {
     /**
      * Returns the task type of duke.Event.
      *
-     * @return 2 to represent duke.Event task type.
+     * @return character E to represent duke.Event task type.
      */
     @Override
-    public int getTaskType() {
-        return 2;
+    public char getTaskType() {
+        return 'E';
     }
 
     /**

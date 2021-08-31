@@ -59,8 +59,8 @@ public class Task {
      *
      * @return int.
      */
-    public int getTaskType() {
-        return -1;
+    public char getTaskType() {
+        return '0';
     }
 
     /**

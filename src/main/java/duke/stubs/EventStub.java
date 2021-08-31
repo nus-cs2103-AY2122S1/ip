@@ -16,8 +16,8 @@ public class EventStub extends Task implements EventInterface {
         return "[E][ ] Create an event task (at: Dec 4 2021)";
     }
 
-    public int getTaskType() {
-        return 1;
+    public char getTaskType() {
+        return 'E';
     }
 
     public String toSavedFormat() {
