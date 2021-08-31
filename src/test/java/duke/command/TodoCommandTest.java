@@ -9,14 +9,16 @@ import duke.exception.NoActionException;
 import duke.exception.SaveFileException;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.util.Reply;
 import duke.util.TaskList;
+
 
 public class TodoCommandTest {
     @Test
     public void execute_goodInput_createTodo() throws SaveFileException, NoActionException {
         TodoCommand command = new TodoCommand("Test Action");
         TaskListStub taskListStub = new TaskListStub();
-        command.execute(taskListStub, new UiStub(), new StorageStub());
+        command.execute(taskListStub, new StorageStub());
         assertEquals(taskListStub.getTask(), new Todo("Test Action"));
     }
 
@@ -25,7 +27,7 @@ public class TodoCommandTest {
         TodoCommand command = new TodoCommand("");
         TaskListStub taskListStub = new TaskListStub();
         assertThrows(NoActionException.class, () -> {
-            command.execute(taskListStub, new UiStub(), new StorageStub());
+            command.execute(taskListStub, new StorageStub());
         });
 
     }
@@ -43,10 +45,9 @@ public class TodoCommandTest {
         }
     }
 
-    private class UiStub extends duke.util.Ui {
-        @Override
-        public void showTaskAdded(Task newTask, TaskList tasks) {
-            return;
+    private static class ReplyStub extends Reply {
+        public static String showTaskAdded(Task newTask, TaskList tasks) {
+            return "";
         }
     }
 

@@ -9,9 +9,9 @@ import duke.exception.SaveFileException;
 import duke.task.Event;
 import duke.task.Task;
 import duke.util.Parser;
+import duke.util.Reply;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
 
 /**
  * A command class encapsulating the logic that occurs when the user issues a 'event' command.
@@ -33,7 +33,6 @@ public class EventCommand extends Command {
      * Instantiates an Event task and adds it to the tasklist
      *
      * @param tasks List of existing tasks
-     * @param ui User interface current interacting with the user
      * @param storage Storage class handling the persistence of the tasks
      * @throws InvalidInputException if invalid datetime is provided
      * @throws NoTimeException if no event time is provided
@@ -41,7 +40,7 @@ public class EventCommand extends Command {
      * @throws SaveFileException if save file errors occur
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException,
+    public CommandResult execute(TaskList tasks, Storage storage) throws InvalidInputException,
         NoTimeException, NoActionException, SaveFileException {
         if (action.trim().length() == 0) {
             throw new NoActionException("Command 'event' requires a task action");
@@ -54,8 +53,8 @@ public class EventCommand extends Command {
         LocalDateTime date = Parser.parseDate(eventInputs[1].trim());
         Task newTask = new Event(eventInputs[0].trim(), date);
         tasks.add(newTask);
-        ui.showTaskAdded(newTask, tasks);
         storage.save(tasks);
+        return new CommandResult(Reply.showTaskAdded(newTask, tasks), true, super.isExit());
     }
 
     @Override
