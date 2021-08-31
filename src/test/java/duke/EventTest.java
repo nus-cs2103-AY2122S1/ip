@@ -1,12 +1,11 @@
 package duke;
 
-import duke.task.Deadlines;
-import duke.task.Events;
+import duke.task.Event;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EventsTest {
+public class EventTest {
 
     @Test
     public void testGetAt() {
@@ -14,7 +13,7 @@ public class EventsTest {
         Parser parser = new Parser();
         String time = parser.getEventTime(input);
         String desc = parser.getEventDescription(input);
-        Events event = new Events(desc, time);
+        Event event = new Event(desc, time);
         assertEquals("Aug 20 2020 18:00", event.getAt());
     }
 
@@ -24,7 +23,7 @@ public class EventsTest {
         Parser parser = new Parser();
         String time = parser.getEventTime(input);
         String desc = parser.getEventDescription(input);
-        Events event = new Events(desc, time);
+        Event event = new Event(desc, time);
         assertEquals("[E][ ] project meeting (at: Aug 20 2020 18:00)", event.toString());
     }
 
@@ -34,7 +33,7 @@ public class EventsTest {
         Parser parser = new Parser();
         String time = parser.getEventTime(input);
         String desc = parser.getEventDescription(input);
-        Events event = new Events(desc, time);
+        Event event = new Event(desc, time);
         assertEquals(false, event.isDone());
     }
 

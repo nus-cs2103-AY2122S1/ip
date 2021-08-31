@@ -82,10 +82,9 @@ public class Ui {
     /**
      * Prints various error messages for various error events.
      *
-     * @param i The case number.
+     * @param caseNumber The case number.
      * @return The error message relevant to the problem.
      */
-
     public String taskErrorMsg(int caseNumber) {
         switch (caseNumber) {
         case 1:

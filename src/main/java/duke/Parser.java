@@ -5,8 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 public class Parser {
 
-    public Parser() {
-    }
+    public Parser() {}
 
     /**
      * Checks if input is a done command.
@@ -75,7 +74,7 @@ public class Parser {
      * @return Event description.
      */
     public String getEventDescription(String input) {
-        return input.substring(6,  input.indexOf("/") - 1);
+        return input.substring(6, input.indexOf("/") - 1);
     }
 
     /**
@@ -124,7 +123,7 @@ public class Parser {
      * @param input Done command.
      * @return Whether index is valid integer.
      */
-    public boolean isInteger(String input) {
+    public boolean isIntegerToBeMarked(String input) {
         return input.substring(5).matches("[0-9]+");
     }
 
@@ -137,8 +136,8 @@ public class Parser {
     public LocalDateTime parseLocalDateTime(String time) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         if (time.substring(0, 1).matches("[0-9]+")) {
-            DateTimeFormatter anotherDTF = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            return LocalDateTime.parse(time, anotherDTF);
+            DateTimeFormatter anotherDtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            return LocalDateTime.parse(time, anotherDtf);
         } else {
             return LocalDateTime.parse(time, dtf);
         }

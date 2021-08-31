@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Deadlines;
-import duke.task.Events;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDos;
+import duke.task.ToDo;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -19,8 +19,9 @@ public class Duke {
     private static final int TASK_TODO = 1;
     private static final int TASK_DEADLINE = 2;
     private static final int TASK_EVENT = 3;
-    private static final int TASK_OUTOFBOUNDS = 4;
-    private static final int TASK_UNKNOWN = 5;
+
+    private static final int ERROR_OUTOFBOUNDS = 4;
+    private static final int ERROR_UNKNOWN = 5;
 
     /**
      * Constructor to initialise variables.
@@ -41,7 +42,7 @@ public class Duke {
 
     public static void main(String[] args) {
         try {
-            new Duke("data/duketest.txt").result();
+            new Duke("data/duketest.txt").run();
         } catch (FileNotFoundException e) {
             ui.fileNotFoundMsg();
         }
@@ -50,7 +51,7 @@ public class Duke {
     /**
      * Executes the program after reading input from file or user.
      */
-    private void result() {
+    private void run() {
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             String input = sc.nextLine();
@@ -63,8 +64,8 @@ public class Duke {
                     if(input.length() == 4) {
                         throw new DukeException(ui.taskErrorMsg(TASK_TODO));
                     }
-                    ToDos todo = new ToDos(parser.getTodoDescription(input));
-                    SL.add(todo);
+                    ToDo todo = new ToDo(parser.getTodoDescription(input));
+                    SL.addTask(todo);
                     ui.taskAddedMsg(todo.toString(), SL.size());
 
                 } else if (parser.isValidDeadline(input)) {
@@ -72,8 +73,8 @@ public class Duke {
                         throw new DukeException(ui.taskErrorMsg(TASK_DEADLINE));
                     }
                     String by = parser.getDeadlineTime(input);
-                    Deadlines dl = new Deadlines(parser.getDeadlineDescription(input), by);
-                    SL.add(dl);
+                    Deadline dl = new Deadline(parser.getDeadlineDescription(input), by);
+                    SL.addTask(dl);
                     ui.taskAddedMsg(dl.toString(), SL.size());
 
                 } else if (parser.isValidEvent(input)) {
@@ -81,19 +82,19 @@ public class Duke {
                         throw new DukeException(ui.taskErrorMsg(TASK_EVENT));
                     }
                     String at = parser.getEventTime(input);
-                    Events event = new Events(parser.getEventDescription(input), at);
-                    SL.add(event);
+                    Event event = new Event(parser.getEventDescription(input), at);
+                    SL.addTask(event);
                     ui.taskAddedMsg(event.toString(), SL.size());
 
                 } else if (parser.isDeleteCmd(input)) {
                     if (input.length() == 6) {
-                        throw new DukeException(ui.taskErrorMsg(TASK_UNKNOWN));
+                        throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                     }
                     int idx = parser.getDeleteIdx(input);
                     SL.delete(idx);
                 } else if (parser.isFindCmd(input)) {
                     if (input.length() == 4) {
-                        throw new DukeException(ui.taskErrorMsg(TASK_UNKNOWN));
+                        throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                     }
                     String keyword = input.substring(5);
                     SL.findAndPrint(keyword);
@@ -108,7 +109,7 @@ public class Duke {
                         ui.displayListContents(SL);
                         break;
                     default:
-                        throw new DukeException(ui.taskErrorMsg(TASK_UNKNOWN));
+                        throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                     }
                 }
                 storage.save(SL);
@@ -129,20 +130,20 @@ public class Duke {
      */
     public void marking(String input) throws DukeException {
         if (input.length() >= 6) {
-            if (parser.isInteger(input)) {
+            if (parser.isIntegerToBeMarked(input)) {
                 int taskNum = Integer.parseInt(input.substring(5)) - 1;
                 if (taskNum < SL.size() && taskNum >= 0) {
                     SL.get(taskNum).markAsDone();
                     ui.taskDoneConfirmation();
                     SL.get(taskNum).displayTask();
                 } else {
-                    throw new DukeException(ui.taskErrorMsg(TASK_OUTOFBOUNDS));
+                    throw new DukeException(ui.taskErrorMsg(ERROR_OUTOFBOUNDS));
                 }
             } else {
-                throw new DukeException(ui.taskErrorMsg(TASK_UNKNOWN));
+                throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
             }
         } else {
-            throw new DukeException(ui.taskErrorMsg(TASK_UNKNOWN));
+            throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
         }
     }
 }

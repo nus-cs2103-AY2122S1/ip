@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Deadlines;
-import duke.task.Events;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDos;
+import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -37,16 +37,16 @@ public class Storage {
             String status = task.isDone() ? "1 " : "0 ";
             String taskDesc = task.getDescription();
             String taskTime = "";
-            if (task instanceof ToDos) {
+            if (task instanceof ToDo) {
                 taskType = "T ";
                 textToAdd += taskType + "| " + status + "| " + taskDesc + "\n";
             } else {
-                if (task instanceof Deadlines) {
+                if (task instanceof Deadline) {
                     taskType = "D ";
-                    taskTime = ((Deadlines) task).getBy();
-                } else if (task instanceof Events) {
+                    taskTime = ((Deadline) task).getBy();
+                } else if (task instanceof Event) {
                     taskType = "E ";
-                    taskTime = ((Events) task).getAt();
+                    taskTime = ((Event) task).getAt();
                 }
                 textToAdd += taskType + "| " + status + "| " + taskDesc + " | " + taskTime + "\n";
             }

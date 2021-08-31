@@ -5,12 +5,12 @@ import duke.Parser;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadlines extends Task {
+public class Deadline extends Task {
     protected String by;
     protected LocalDateTime localDateTime;
     private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
-    public Deadlines(String description, String by) {
+    public Deadline(String description, String by) {
         super(description);
         this.by = by;
     }

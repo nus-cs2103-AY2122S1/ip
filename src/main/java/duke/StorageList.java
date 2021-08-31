@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Deadlines;
-import duke.task.Events;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDos;
+import duke.task.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,23 +28,27 @@ public class StorageList {
 
             if (type == 'T') {
                 String taskDesc = input.substring(8);
-                ToDos todo = new ToDos(taskDesc);
+                ToDo todo = new ToDo(taskDesc);
+
                 if (doneState == 1) {
                     todo.markAsDone();
                 }
                 storageList.add(todo);
+
             } else {
                 int thirdBarIdx = input.indexOf('|', 7);
                 String taskDesc = input.substring(8, thirdBarIdx - 1);
                 String taskTime = input.substring(thirdBarIdx + 2);
+
                 if (type == 'D') {
-                    Deadlines dl = new Deadlines(taskDesc, taskTime);
+                    Deadline dl = new Deadline(taskDesc, taskTime);
                     if (doneState == 1) {
                         dl.markAsDone();
                     }
                     storageList.add(dl);
+
                 } else if (type == 'E') {
-                    Events event = new Events(taskDesc, taskTime);
+                    Event event = new Event(taskDesc, taskTime);
                     if(doneState == 1){
                         event.markAsDone();
                     }
@@ -59,7 +63,7 @@ public class StorageList {
      *
      * @param task
      */
-    public void add(Task task){
+    public void addTask(Task task){
         storageList.add(task);
     }
 
