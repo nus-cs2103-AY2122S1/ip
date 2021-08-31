@@ -28,7 +28,8 @@ public class DukeDB {
                         return x;
                     })
                     .orElseGet(() -> {
-                        Duke.printMsg("Unable to create the file. Check if the file already exists. Defaulting to " + "default database");
+                        Duke.printMsg("Unable to create the file." +
+                                " Check if the file already exists. Defaulting to " + "default database");
                         this.databasePath = "./data/dukeStore.txt";
                         return null;
                     });
@@ -133,7 +134,9 @@ public class DukeDB {
 
             try {
                 LocalDateTime dateBy = Parser.parseDateTime(by)
-                        .orElseThrow(() -> new DukeException("Unable to load " + "date for task" + description + ". Removing the task."));
+                        .orElseThrow(() ->
+                                new DukeException("Unable to load " +
+                                        "date for task" + description + ". Removing the task."));
                 return Optional.of(new Deadline(description,
                         dateBy,
                         isDone));
@@ -149,18 +152,18 @@ public class DukeDB {
             return Optional.empty();
         } else {
             switch (splitCommand[0]) {
-                case "T": {
-                    return this.readTodo(splitCommand);
-                }
-                case "D": {
-                    return this.readDeadline(splitCommand);
-                }
-                case "E": {
-                    return this.readEvent(splitCommand);
-                }
-                default: {
-                    return Optional.empty();
-                }
+            case "T": {
+                return this.readTodo(splitCommand);
+            }
+            case "D": {
+                return this.readDeadline(splitCommand);
+            }
+            case "E": {
+                return this.readEvent(splitCommand);
+            }
+            default: {
+                return Optional.empty();
+            }
 
             }
         }

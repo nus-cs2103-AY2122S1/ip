@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
 
 /**
  * The todo task is type of Task

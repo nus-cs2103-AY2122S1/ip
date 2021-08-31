@@ -2,7 +2,12 @@ package duke.command;
 
 import duke.task.Deadline;
 import duke.task.Task;
-import duke.util.*;
+import duke.util.DukeConfig;
+import duke.util.DukeDB;
+import duke.util.DukeException;
+import duke.util.DukeTaskList;
+import duke.util.Parser;
+import duke.util.Ui;
 
 import java.time.LocalDateTime;
 import java.util.Map;
@@ -16,17 +21,17 @@ public class DeadlineCommand implements DukeActions {
     /**
      * Performs the actions for the Deadline Command when activated
      *
-     * @param map The parsed command
-     * @param list The tasklist
+     * @param map      The parsed command
+     * @param list     The tasklist
      * @param database The database to write to
-     * @param config The configuration settings
-     * @param ui The UI object to interact with
+     * @param config   The configuration settings
+     * @param ui       The UI object to interact with
      * @return boolean to indicate the end of the listen operation
      * @throws DukeException When erroneous inputs are given.
      */
     @Override
-    public boolean runAndCanContinue(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config, Ui ui)
-            throws DukeException {
+    public boolean runAndCanContinue(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config,
+                                     Ui ui) throws DukeException {
         if (!map.containsKey("/by")) {
             throw new DukeException("Missing positional argument " + "'/by'.");
         } else if (map.get("deadline") == null || map.get("/by") == null) {

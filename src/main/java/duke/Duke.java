@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.Scanner;
 
+/**
+ * Class for Duke. Holds all the class variables and methods.
+ */
 public class Duke {
     /** Simple string array to store inputs **/
     private final DukeTaskList list;
