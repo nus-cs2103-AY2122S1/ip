@@ -72,8 +72,9 @@ public class Ui {
      * Helper function to format output between 2 lines.
      *
      * @param output String to be outputted.
+     * @return
      */
     public static void formatAndPrint(String output) {
-        System.out.printf("%s%s\n%s", LINE, output, LINE);
+        System.out.println(LINE + output + LINE);
     }
 }
