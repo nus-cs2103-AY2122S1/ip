@@ -71,7 +71,7 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
     public void start(Stage stage) {
         setUpGuiComponents(stage);
 
-        //Part 3. Add functionality to handle user input.
+        // Handles user input
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -79,9 +79,6 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
-
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
     /**
@@ -120,6 +117,9 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
         this.storage.writeToFile(content);
     }
 
+    /**
+     * Handles the logic when Duke is ended.
+     */
     public void endDuke() {
         this.saveData();
         ChatbotUI.printMessage(FAREWELL_MESSAGE);
@@ -134,10 +134,6 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
 
     public void run() {
         String msg = ChatbotUI.acceptUserInput(this.sc).trim();
-        if (msg.equals(FAREWELL_COMMAND)) {
-            this.endDuke();
-            return;
-        }
         String output = taskMode(msg);
         ChatbotUI.printMessage(output);
         run();

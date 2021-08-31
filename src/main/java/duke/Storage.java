@@ -16,6 +16,10 @@ import java.util.Scanner;
 public class Storage {
     private final String dataStoragePath;
 
+    /**
+     * A constructor for Duke Storage.
+     * @param dataStoragePath the path of the file where Duke data is stored.
+     */
     public Storage(String dataStoragePath) {
         this.dataStoragePath = dataStoragePath;
     }
