@@ -47,7 +47,7 @@ public class Parser {
             } else if (cmd.startsWith("todo ") || cmd.equals("todo")) {
                 String trimmed = cmd.trim();
                 if (trimmed.length() == 4) {
-                    throw new DukeException("Sorry Boss, todo must be followed with a description");
+                    throw new DukeException("Sorry Boss, todo must be followed with a description.");
                 }
                 Task task = new ToDo(trimmed.substring(5).trim(), false);
                 return new AddCommand(task);
@@ -57,7 +57,7 @@ public class Parser {
             } else if (cmd.startsWith("find ")) {
                 return new FindCommand(cmd.split(" ")[1]);
             } else {
-                throw new DukeException("Sorry Boss, I cannot understand the command");
+                throw new DukeException("Sorry Boss, I cannot understand the command.");
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Sorry Boss, please enter your date in the YYYY-MM-DD format.");
