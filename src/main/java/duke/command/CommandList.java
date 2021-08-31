@@ -39,23 +39,23 @@ public class CommandList extends Command {
      * Lists out tasks based on given filters
      */
     @Override
-    public void execute() {
+    public String execute() {
         // List tasks
         if (args != null) {
             // Extract modifiers and filter
             try {
                 ArrayList<Predicate<Task>> filters = listStringToFilter(args);
-                taskList.displayList(filters);
+                return taskList.displayList(filters);
             } catch (DateTimeParseException e) {
-                System.out.println("Please enter a valid date! :(");
+                return "Please enter a valid date! :(";
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                return e.getMessage();
             }
         } else {
             // Display items
             ArrayList<Predicate<Task>> filter = new ArrayList<>();
             filter.add(task -> true);
-            taskList.displayList(filter);
+            return taskList.displayList(filter);
         }
     }
 

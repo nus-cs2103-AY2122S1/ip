@@ -5,7 +5,7 @@ package duke;
  */
 public class Ui {
     public static final String LINE = "____________________________________________________________\n";
-    public static final String OUTPUT_DISPLAY = "  →   ";
+    public static final String OUTPUT_DISPLAY = "  ->   ";
     public static final String OUTPUT_SPACES = "      ";
 
     /**
@@ -54,11 +54,7 @@ public class Ui {
     /**
      * Exit text
      */
-    public static void goodBye() {
-        // Quit the program after listening stops
-        System.out.println(
-                Ui.OUTPUT_DISPLAY + "kimi no unmei no hito wa boku jyanai\n"
-                        + Ui.LINE
-        );
+    public static String goodBye() {
+        return "kimi no unmei no hito wa boku jyanai";
     }
 }

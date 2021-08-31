@@ -36,11 +36,15 @@ public class CommandAddDeadline extends Command {
      * Adds a deadline to the task list if valid
      */
     @Override
-    public void execute() {
+    public String execute() {
         try {
-            taskList.add(new TaskDeadline(input.group(1), Command.getDate(input.group(2)), input.group(3), false));
+            return taskList.add(new TaskDeadline(
+                    input.group(1),
+                    Command.getDate(input.group(2)),
+                    input.group(3),
+                    false));
         } catch (DateTimeParseException e) {
-            System.out.println("Please enter a valid date! :(");
+            return "Please enter a valid date! :(";
         }
     }
 }

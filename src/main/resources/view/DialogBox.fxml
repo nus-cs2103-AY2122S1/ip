@@ -6,13 +6,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="118.0" prefWidth="388.0" style="-fx-background-color: #4a749a;" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" lineSpacing="2.0" style="-fx-padding: 3;" text="Label" wrapText="true">
+        <Label fx:id="dialog" alignment="CENTER" lineSpacing="2.0" maxHeight="1.7976931348623157E308" prefHeight="88.0" style="-fx-padding: 3;" text="Label" textFill="WHITE" wrapText="true">
             <font>
-                <Font size="12.0" />
+                <Font name="Segoe UI Light" size="16.0" />
             </font></Label>
-        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
+        <ImageView fx:id="displayPicture" fitHeight="82.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+         <HBox.margin>
+            <Insets top="5.0" />
+         </HBox.margin></ImageView>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />

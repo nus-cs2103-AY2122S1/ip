@@ -35,11 +35,10 @@ public class TaskList {
     /**
      * Prints the number of tasks in the list
      */
-    public void printSize() {
-        System.out.println(Ui.OUTPUT_DISPLAY
-                + (tasks.size() == 1
-                    ? "There is 1 task in your list"
-                    : "There are " + tasks.size() + " tasks in your list"));
+    public String getSize() {
+        return tasks.size() == 1
+                ? "There is 1 task in your list"
+                : "There are " + tasks.size() + " tasks in your list";
     }
 
     /**
@@ -47,16 +46,15 @@ public class TaskList {
      *
      * @param task Task to add
      */
-    public void add(Task task) {
-        Optional.ofNullable(task)
-                .map(x -> {
-                    System.out.println("Got it. I've added this task:");
-                    System.out.println(Ui.OUTPUT_SPACES + x);
-                    tasks.add(x);
-                    this.printSize();
-                    return null;
-                });
-        Storage.saveList(tasks);
+    public String add(Task task) {
+        if (task != null) {
+            tasks.add(task);
+            Storage.saveList(tasks);
+            return "Got it. I've added this task:\n" + Ui.OUTPUT_SPACES + task + '\n' + getSize();
+        } else {
+            return "Invalid task!";
+        }
+
     }
 
     /**
@@ -65,16 +63,17 @@ public class TaskList {
      * @param index Index of the task displayed by the list command
      *              Actual index is (index - 1)
      */
-    public void toggleDone(int index) {
+    public String toggleDone(int index) {
         try {
             boolean result = tasks.get(index - 1).toggleDone();
-            System.out.println(result
-                    ? Ui.OUTPUT_DISPLAY + "sugoi! Duke-san marked this task as done!"
-                    : Ui.OUTPUT_DISPLAY + "Duke-san marked this task as not done!");
-            System.out.println(Ui.OUTPUT_SPACES + tasks.get(index - 1));
             Storage.saveList(tasks);
+            return (result
+                    ? "sugoi! Duke-san marked this task as done!"
+                    : "Duke-san marked this task as not done!")
+                    + '\n' + Ui.OUTPUT_SPACES + tasks.get(index - 1);
+
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("There's no task at index " + index + "!!");
+            return "There's no task at index " + index + "!!";
         }
     }
 
@@ -84,15 +83,15 @@ public class TaskList {
      * @param index Index of the task displayed by the list command
      *              Actual index is (index - 1)
      */
-    public void delete(int index) {
+    public String delete(int index) {
         try {
             Task removed = tasks.remove(index - 1);
-            System.out.println(Ui.OUTPUT_DISPLAY + "Noted. Duke-san removed this task:");
-            System.out.println(Ui.OUTPUT_SPACES + removed);
-            this.printSize();
             Storage.saveList(tasks);
+            return "Noted. Duke-san removed this task:"
+                    + removed
+                    + getSize();
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("There's no task at index " + index + "!!");
+            return "There's no task at index " + index + "!!";
         }
     }
 
@@ -101,9 +100,9 @@ public class TaskList {
      *
      * @param filters Predicates to filter; return true to display task
      */
-    public void displayList(ArrayList<Predicate<Task>> filters) {
+    public String displayList(ArrayList<Predicate<Task>> filters) {
         if (tasks.size() == 0) {
-            System.out.println(Ui.OUTPUT_DISPLAY + "There is nothing to display! :angery:");
+            return "There is nothing to display! :angery:";
         } else {
             // Get resultant list after applying all filters
             List<Task> list = tasks.stream()
@@ -112,12 +111,15 @@ public class TaskList {
                     .collect(Collectors.toList());
 
             if (list.size() == 0) {
-                System.out.println(Ui.OUTPUT_DISPLAY + "There is nothing to display! :angery:");
+                return "There is nothing to display! :angery:";
             } else {
                 // Add proper formatting and display list
+                StringBuilder result = new StringBuilder();
                 for (int i = 0; i < list.size(); i++) {
-                    System.out.println(Ui.OUTPUT_SPACES + (i + 1) + "." + list.get(i));
+                    result.append(i + 1).append(". ").append(list.get(i)).append('\n');
                 }
+
+                return result.toString();
             }
         }
     }

@@ -1,5 +1,7 @@
 package duke.command;
 
+import duke.Ui;
+
 /**
  * Command to exit program
  */
@@ -18,7 +20,7 @@ public class CommandExit extends Command {
      * This class signals to Duke that it should terminate the program
      */
     @Override
-    public void execute() {
-        return;
+    public String execute() {
+        return Ui.goodBye();
     }
 }

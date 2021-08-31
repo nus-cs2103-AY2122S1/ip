@@ -30,7 +30,7 @@ public class CommandDelete extends Command {
      * Deletes the task at the index in the task list
      */
     @Override
-    public void execute() {
-        taskList.delete(index);
+    public String execute() {
+        return taskList.delete(index);
     }
 }

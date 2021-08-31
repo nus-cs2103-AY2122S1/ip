@@ -14,7 +14,7 @@ public abstract class Command {
     protected String description;
     protected String[] arguments;
 
-    public abstract void execute();
+    public abstract String execute();
 
     protected static LocalDate getDate(String date) throws DateTimeParseException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy");

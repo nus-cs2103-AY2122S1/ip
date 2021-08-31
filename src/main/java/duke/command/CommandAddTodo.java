@@ -32,7 +32,7 @@ public class CommandAddTodo extends Command {
      * Add To-do to task list if valid
      */
     @Override
-    public void execute() {
-        taskList.add(new TaskTodo(desc, false));
+    public String execute() {
+        return taskList.add(new TaskTodo(desc, false));
     }
 }

@@ -30,7 +30,7 @@ public class CommandDone extends Command {
      * Toggles completion of task at index in task list
      */
     @Override
-    public void execute() {
-        taskList.toggleDone(index);
+    public String execute() {
+        return taskList.toggleDone(index);
     }
 }

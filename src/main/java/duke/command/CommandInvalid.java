@@ -25,7 +25,7 @@ public class CommandInvalid extends Command {
      * Display error message
      */
     @Override
-    public void execute() {
-        System.out.println(Ui.OUTPUT_DISPLAY + "☹ eeeeeee~dameda!! " + input + " isn't a valid command!");
+    public String execute() {
+        return "eeeeeee~dameda!!\n" + input + " isn't a valid command!";
     }
 }

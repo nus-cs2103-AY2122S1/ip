@@ -18,21 +18,21 @@ public class CommandHelp extends Command {
      * Display all commands
      */
     @Override
-    public void execute() {
-        displayHelp();
+    public String execute() {
+        return displayHelp();
     }
 
 
     /**
      * Lists out all possible commands
      */
-    private void displayHelp() {
-        System.out.println(new CommandAddTodo(null, null));
-        System.out.println(new CommandAddDeadline(null, null));
-        System.out.println(new CommandAddEvent(null, null));
-        System.out.println(new CommandDone(null, 0));
-        System.out.println(new CommandDelete(null, 0));
-        System.out.println(new CommandList(null, null));
-        System.out.println(new CommandExit());
+    private String displayHelp() {
+        return new CommandAddTodo(null, null).toString()
+                + new CommandAddDeadline(null, null)
+                + new CommandAddEvent(null, null)
+                + new CommandDone(null, 0)
+                + new CommandDelete(null, 0)
+                + new CommandList(null, null)
+                + new CommandExit();
     }
 }
