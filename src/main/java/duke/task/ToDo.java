@@ -5,7 +5,6 @@ package duke.task;
  * A simple task which only has a name and a completion status.
  * For more complex tasks with a date and time see {@link duke.task.Deadline}, {@link duke.task.Event}.
  */
-
 public class ToDo extends Task {
 
     /**
@@ -17,7 +16,7 @@ public class ToDo extends Task {
     public ToDo(String taskName) {
         super(taskName);
     }
-    
+
     private ToDo(ToDo oldTask) {
         super(oldTask);
     }

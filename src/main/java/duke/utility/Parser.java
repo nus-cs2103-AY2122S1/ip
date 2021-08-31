@@ -1,17 +1,17 @@
 package duke.utility;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * <h2>Parser</h2>
@@ -20,10 +20,10 @@ import java.time.format.DateTimeParseException;
  */
 
 public class Parser {
-    
+
     private final TaskList taskList;
     private final Storage storage;
-    
+
     Parser(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;
@@ -58,7 +58,7 @@ public class Parser {
         } catch (DukeException ex) {
             return ex.getMessage();
         } catch (DateTimeParseException ex) {
-            return "Invalid task description: "  
+            return "Invalid task description: "
                     + "invalid date/time\nPlease use [command type] [task name] / [dd-mm-yyyy] [time (in 24hr "
                     + "format)]\ne.g. event lecture / 21-02-2021 1500";
         } catch (IOException ex) {
@@ -72,7 +72,7 @@ public class Parser {
             return "Unexpected error occurred. Please check input.";
         }
     }
-    
+
     private String parseDeleteTask(String taskNum) throws DukeException.InvalidTaskNumException, IOException {
         String message = this.taskList.deleteTask(Integer.parseInt(taskNum.trim()));
         if (this.storage != null) {
@@ -90,7 +90,7 @@ public class Parser {
         }
         return message;
     }
-    
+
     private String parseNewTask(String command) throws DukeException.DuplicateTaskException,
             DukeException.InvalidTaskDescriptionException, DukeException.InvalidCommandException, IOException {
         if (command.length() == 0) {
@@ -100,12 +100,12 @@ public class Parser {
         String taskType = commandTokens[0];
         if (taskType.equals("todo") || taskType.equals("event") || taskType.equals("deadline")) { // valid task
             // remove tasktype to get taskName (+datetime) only
-            String details = command.substring(taskType.length() + 1).trim(); 
+            String details = command.substring(taskType.length() + 1).trim();
             if (details.length() == 0) {
                 throw new DukeException.InvalidTaskDescriptionException("Missing task details!");
             }
             // if task is todo, then name = details, else name will be before the "/"
-            String taskName = details.split("/")[0].trim(); 
+            String taskName = details.split("/")[0].trim();
             if (this.taskList.existingTasks.contains(taskName)) { // task already in list
                 throw new DukeException.DuplicateTaskException("Task already in list!");
             }
@@ -117,10 +117,10 @@ public class Parser {
                 if (this.storage != null) {
                     this.storage.append("T", "F", taskName);
                 }
-            } else { 
-                String[] tokens = details.split("/");  // event or deadline
+            } else {
+                String[] tokens = details.split("/"); // event or deadline
                 // tokens has the structure [task name, dateTime]
-                String[] dateTimeString = tokens[1].trim().split(" "); 
+                String[] dateTimeString = tokens[1].trim().split(" ");
                 LocalDate date = LocalDate.parse(dateTimeString[0], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
                 LocalTime time = LocalTime.parse(dateTimeString[1], DateTimeFormatter.ofPattern("HHmm"));
                 LocalDateTime dateTime = LocalDateTime.of(date, time);
