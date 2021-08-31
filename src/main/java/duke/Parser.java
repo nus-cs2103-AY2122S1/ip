@@ -27,13 +27,13 @@ public class Parser {
         Pattern eventPattern = Pattern.compile("event (.*) /at (.*)");
         Pattern findPattern = Pattern.compile("find (.*)");
 
-        // print out list
+        // Print out list
         if (input.equals("list")) {
             taskList.list();
             return false;
         }
 
-        // finds related tasks
+        // Find related tasks
         Matcher findMatcher = findPattern.matcher(input);
         if (findMatcher.find()) {
             ArrayList<Task> tasks = taskList.find(findMatcher.group(1));
@@ -41,44 +41,48 @@ public class Parser {
             return false;
         }
 
-        // complete a task
+        // Complete a task
         if (Pattern.matches("done \\d", input)) {
             String[] items = input.split(" ");
             taskList.done(Integer.parseInt(items[1]));
             return false;
         }
 
+        // Delete a task
         if (Pattern.matches("delete \\d", input)) {
             String[] items = input.split(" ");
             taskList.delete(Integer.parseInt(items[1]));
             return false;
         }
 
+        // Add a Todo type task
         Matcher todoMatcher = todoPattern.matcher(input);
         if (todoMatcher.find()) {
             taskList.addCustom(new Todo(todoMatcher.group(1)));
             return false;
         }
 
+        // Add a Deadline type task
         Matcher deadlineMatcher = deadlinePattern.matcher(input);
         if (deadlineMatcher.find()) {
             taskList.addCustom(new Deadline(deadlineMatcher.group(1), deadlineMatcher.group(2)));
             return false;
         }
 
+        // Add an Event type task
         Matcher eventMatcher = eventPattern.matcher(input);
         if (eventMatcher.find()) {
             taskList.addCustom(new Event(eventMatcher.group(1), eventMatcher.group(2)));
             return false;
         }
 
-        // exit application
+        // Exit application
         if (input.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
             return true;
         }
 
-        // identify reason for misinput
+        // Identify reason for mis-input
         if (input.length() >= 4 && input.substring(0, 4).equals("todo")) {
             System.out.println("OOPS!!! The description of a todo cannot be empty.");
             return false;
