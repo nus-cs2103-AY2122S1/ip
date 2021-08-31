@@ -16,7 +16,7 @@ bin/
 # Ignore .class files
 *.class
 
-#Ignore artifact directory
+# Ignore artifact directory
 /artifacts
 
 /text-ui-test/ACTUAL.txt
