@@ -1,7 +1,9 @@
 package duke.util;
 
-import duke.task.Task;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * Represents the list of tasks that Duke keeps track of for its user.
@@ -35,12 +37,13 @@ public class TaskList {
      *
      * @param task The task to be added.
      */
-    public void add(Task task) {
+    public String add(Task task, Storage storage) throws IOException {
         this.taskList.add(task);
-        System.out.println("     Got it. I have added this task:");
-        System.out.println("       " + task.toString());
-        System.out.println("     Now you have " + size()
-                + (size() == 1 ? " task" : " tasks") + " in the list.");
+        storage.save(this);
+        return "Got it. I have added this task:\n"
+                + "  " + task.toString()
+                + "\n Now you have " + size()
+                + (size() == 1 ? " task" : " tasks") + " in the list.";
     }
 
     /**
@@ -57,15 +60,14 @@ public class TaskList {
      *
      * @param index The index of the task to mark as completed in the taskList.
      */
-    public void markAsDone(int index) {
+    public String markAsDone(int index, Storage storage) throws IOException {
         Task taskToComplete = get(index - 1);
         if (taskToComplete.getIsDone()) {
-            //if task is already completed
-            System.out.println("     I have already marked this task as completed!");
+            return "I have already marked this task as completed!";
         } else {
             taskToComplete.setIsDone(true);
-            System.out.println("     Nice! I've marked this task as done:");
-            System.out.println("       " + taskToComplete.toString());
+            storage.save(this);
+            return "Nice! I've marked this task as done:\n  " + taskToComplete.toString();
         }
     }
 
@@ -74,12 +76,13 @@ public class TaskList {
      *
      * @param index The index of the task to delete in the taskList.
      */
-    public void delete(int index) {
+    public String delete(int index, Storage storage) throws IOException {
         Task taskToDelete = this.taskList.remove(index - 1);
-        System.out.println("     Noted. I've removed this task:");
-        System.out.println("       " + taskToDelete.toString());
-        System.out.println("     Now you have " + size()
-                + (size() == 1 ? " task" : " tasks") + " in the list.");
+        storage.save(this);
+        return "Noted. I've removed this task:\n"
+                + "  " + taskToDelete.toString()
+                + "\nNow you have " + taskList.size()
+                + (taskList.size() == 1 ? " task" : " tasks") + " in the list.";
     }
 
     /**
@@ -87,7 +90,7 @@ public class TaskList {
      *
      * @param keyword The keyword to search for.
      */
-    public void searchAndDisplay(String keyword) {
+    public String searchAndDisplay(String keyword) {
         ArrayList<Task> temp = new ArrayList<>();
         for (int i = 0; i < size(); i++) {
             if (get(i).getDescription().contains(keyword)) {
@@ -95,14 +98,17 @@ public class TaskList {
             }
         }
         if (temp.size() == 0) {
-            System.out.println("    There are no matching tasks in your list!");
+            return "There are no matching tasks in your list!";
         } else {
-            System.out.println("    Here are the matching tasks in your list");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are the matching tasks in your list:\n");
             for (int i = 0; i < temp.size(); i++) {
                 int currNum = i + 1;
                 Task currTask = temp.get(i);
-                System.out.println("     " + currNum + ". " + currTask.toString());
+                String taskString = "  " + currNum + ". " + currTask.toString() + "\n";
+                sb.append(taskString);
             }
+            return sb.toString();
         }
     }
 
@@ -119,16 +125,19 @@ public class TaskList {
     /**
      * Prints the current contents of the taskList to the screen.
      */
-    public void showList() {
+    public String showList() {
         if (size() == 0) {
-            System.out.println("    There are no tasks in your list currently!");
+            return "There are no tasks in your list currently!";
         } else {
-            System.out.println("    Here are the tasks in your list:");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are the tasks in your list:\n");
             for (int i = 0; i < size(); i++) {
                 int currNum = i + 1;
                 Task currTask = get(i);
-                System.out.println("     " + currNum + ". " + currTask.toString());
+                String taskString = "  " + currNum + ". " + currTask.toString() + "\n";
+                sb.append(taskString);
             }
+            return sb.toString();
         }
     }
 }

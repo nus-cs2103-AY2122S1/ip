@@ -1,7 +1,5 @@
 package duke.util;
 
-import java.util.Scanner;
-
 /**
  * Represents how Duke deals with interactions with the user.
  *
@@ -9,90 +7,49 @@ import java.util.Scanner;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class Ui {
-
-    /** The command that Duke read from the user. */
-    private String command;
-
     /**
-     * Displays a welcome message everytime Duke is activated.
+     * Returns a welcome message everytime Duke is activated.
+     * @return A String representing a welcome message.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        System.out.println("-----------------------------------------");
-        System.out.println(" Hello! I am Duke");
-        System.out.println(" What can I do for you?");
-        System.out.println("-----------------------------------------");
-        System.out.println();
+        return logo + "\n" + "Hello! I am Duke. What can I do for you?";
     }
 
     /**
-     * Displays an error message to the user.
-     *
-     * @param errorMessage The message to be displayed.
+     * Returns am error messages.
+     * @param errorMessage A string representing the error message.
+     * @return A string representing the error message.
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
-     * Displays an error message to the user when there is an error loading the user file.
+     * Returns the an error message from failed file loading.
+     * @return A string representing the error message.
      */
-    public void showLoadingError() {
-        System.out.println("Something went wrong! Seems like I'm unable to load your file!");
+    public String showLoadingError() {
+        return "Something went wrong! Seems like I'm unable to load your file!";
     }
 
     /**
-     * Displays an error message to the user when there is an error saving to the user file.
+     * Returns the an error message from failed file saving.
+     * @return A string representing the error message.
      */
-    public void showSavingError() {
-        System.out.println("Something went wrong! Seems like I'm unable to save to your file!");
+    public String showSavingError() {
+        return "Something went wrong! Seems like I'm unable to save to your file!";
     }
 
     /**
-     * Returns the command read from the user through a scanner.
-     *
-     * @return A string representing the command read from the user.
+     * Returns an exit message before Duke exits.
+     * @return A string representing an exit message.
      */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        this.command = sc.nextLine();
-        return this.command;
-    }
-
-    /**
-     * Returns the command from the user as a String
-     *
-     * @return A string representing the command read from the user.
-     */
-    public String getCommand() {
-        return this.command;
-    }
-
-    /**
-     * Displays an exit message before Duke exits.
-     */
-    public void showExit() {
-        System.out.println("     Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Displays a top line separator.
-     */
-    public void showTopLine() {
-        System.out.println("    -----------------------------------------");
-    }
-
-    /**
-     * Displays a bottom line separator.
-     */
-    public void showBottomLine() {
-        System.out.println("    -----------------------------------------");
-        System.out.println();
+    public String showExit() {
+        return "Bye. Hope to see you again soon!";
     }
 }
