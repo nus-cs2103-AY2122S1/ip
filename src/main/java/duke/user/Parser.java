@@ -1,10 +1,10 @@
 package duke.user;
 
-import duke.data.TaskList;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
+
+import duke.data.TaskList;
 
 /**
  * Represents a parser which reads the user input and performs the checks to verify that the inputs are valid.
@@ -93,8 +93,8 @@ public class Parser {
     public String checkDone(String input) throws DukeException {
         if (input.length() == 4) {
             throw new DukeException("Please use this format: 'done (task number)'");
-        } else if (Integer.parseInt(input.split(" ")[1]) < 0 ||
-                Integer.parseInt(input.split(" ")[1]) > taskList.getLength()) {
+        } else if (Integer.parseInt(input.split(" ")[1]) < 0
+                || Integer.parseInt(input.split(" ")[1]) > taskList.getLength()) {
             throw new DukeException("Invalid task number!");
         }
         return input.split(" ")[1];
@@ -110,8 +110,8 @@ public class Parser {
     public String checkDelete(String input) throws DukeException {
         if (input.length() == 6) {
             throw new DukeException("Please use this format: 'delete (task number)'");
-        } else if (Integer.parseInt(input.split(" ")[1]) < 0 ||
-                Integer.parseInt(input.split(" ")[1]) > taskList.getLength()) {
+        } else if (Integer.parseInt(input.split(" ")[1]) < 0
+                || Integer.parseInt(input.split(" ")[1]) > taskList.getLength()) {
             throw new DukeException("Invalid task number!");
         }
         return input.split(" ")[1];
@@ -150,7 +150,8 @@ public class Parser {
 
         // need to check that for event they use the /at properly else reject
         if (input.length() <= 6 || !input.contains("/at ")) {
-            throw new DukeException("Please use this format: 'event <task> /at <date and time>' to specify the date and time!");
+            throw new DukeException("Please use this format: 'event <task> /at <date and time>' "
+                    + "to specify the date and time!");
         }
         int eventDateIndex = input.indexOf("/at ") + 4;
 
@@ -173,7 +174,8 @@ public class Parser {
     public String checkDeadline(String input) throws DukeException {
         // need to check that for deadline they use the /by properly else reject
         if (!input.contains("/by ")) {
-            throw new DukeException("Please use this format: 'deadline <task> /by YYYY-MM-DD HH:MM' to specify the date and time!");
+            throw new DukeException("Please use this format: 'deadline <task> /by YYYY-MM-DD HH:MM' "
+                    + "to specify the date and time!");
         }
 
         // Hard coded numbers to account for the length of the /by and the date format
@@ -202,6 +204,13 @@ public class Parser {
 
     }
 
+    /**
+     * Axillary function to check that the find command word is used correctly.
+     *
+     * @param input The input String
+     * @return The parsed output of the input with the keyword to be searched for
+     * @throws DukeException only one keyword was not used
+     */
     public String checkFind(String input) throws DukeException {
         if (input.length() == 4) {
             throw new DukeException("Please enter a keyword!");

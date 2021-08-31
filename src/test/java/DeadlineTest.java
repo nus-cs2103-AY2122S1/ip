@@ -1,37 +1,39 @@
-import duke.task.Deadline;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.task.Deadline;
 
 public class DeadlineTest {
+    private Deadline test = new Deadline("homework", LocalDate.parse("2021-08-24"), LocalTime.parse("12:31"));
 
     @Test
-    public void testSampleInput(){
+    public void testSampleInput() {
         Deadline test = new Deadline("homework", LocalDate.parse("2021-08-24"), LocalTime.parse("12:31"));
         assertEquals("[D][ ] homework (by: 24 AUGUST 2021 12:31)", test.toString());
     }
+
     @Test
-    public void testDoneInput(){
+    public void testDoneInput() {
         Deadline test = new Deadline("homework", LocalDate.parse("2021-08-24"), LocalTime.parse("12:31"), true);
         assertEquals("[D][X] homework (by: 24 AUGUST 2021 12:31)", test.toString());
     }
 
-    Deadline test = new Deadline("homework", LocalDate.parse("2021-08-24"), LocalTime.parse("12:31"));
-
     @Test
-    public void testDescription(){
+    public void testDescription() {
         assertEquals("homework", test.getDescription());
     }
 
     @Test
-    public void testDate(){
+    public void testDate() {
         assertEquals(LocalDate.parse("2021-08-24"), test.getDate());
     }
 
     @Test
-    public void testTime(){
+    public void testTime() {
         assertEquals(LocalTime.parse("12:31"), test.getTime());
     }
 

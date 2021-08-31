@@ -8,7 +8,7 @@ import duke.data.TaskList;
 public class Ui {
 
     // ASCII DIVIDER to clean up the output
-    final static String DIVIDER = "----------------------------------------------------";
+    static final String DIVIDER = "----------------------------------------------------";
 
     public Ui() {
     }
@@ -24,9 +24,9 @@ public class Ui {
      * @return A formatted String to display to the user
      */
     public static String displayDoneTaskMessage(String task) {
-        return (DIVIDER + "\n" + "Nice! I've marked this task as done: " + "\n" +
-                task + "\n" +
-                DIVIDER);
+        return (DIVIDER + "\n" + "Nice! I've marked this task as done: " + "\n"
+                + task + "\n"
+                + DIVIDER);
     }
 
     /**
@@ -36,10 +36,10 @@ public class Ui {
      * @return A formatted String to display to the user
      */
     public static String displayDeletedTaskMessage(String task, int taskListSize) {
-        return (DIVIDER + "\n" + "Nice! Noted. I've removed this task: " + "\n" +
-                task + "\n" +
-                "You now have " + taskListSize + " tasks remaining!" + "\n" +
-                DIVIDER);
+        return (DIVIDER + "\n" + "Nice! Noted. I've removed this task: " + "\n"
+                + task + "\n"
+                + "You now have " + taskListSize + " tasks remaining!" + "\n"
+                + DIVIDER);
     }
 
     /**
@@ -84,8 +84,8 @@ public class Ui {
      * @return A formatted String to display to the user
      */
     public static String displayAddTaskMessage(TaskList tasks) {
-        return DIVIDER + "\n" + "added: " + tasks.getTask(tasks.getLength() - 1) + "\n" +
-                "now you have: " + tasks.getLength() + " tasks! type 'list' to see them!" + "\n" + DIVIDER;
+        return DIVIDER + "\n" + "added: " + tasks.getTask(tasks.getLength() - 1) + "\n"
+                + "now you have: " + tasks.getLength() + " tasks! type 'list' to see them!" + "\n" + DIVIDER;
     }
 
     public static String displayDukeExceptionMessage(DukeException e) {

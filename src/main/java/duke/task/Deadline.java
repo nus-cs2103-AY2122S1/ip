@@ -28,6 +28,14 @@ public class Deadline extends Task {
         this.taskType = "D";
     }
 
+    /**
+     * Alternate constructor for Deadline, which accepts a boolean indicating the isDone state.
+     *
+     * @param description String representing the description of the deadline task
+     * @param date        LocalDate object representing a date
+     * @param time        LocalTime object representing a time
+     * @param isDone      Boolean representing whether the task has been completed
+     */
     public Deadline(String description, LocalDate date, LocalTime time, Boolean isDone) {
         super(description);
         this.deadlineDate = date;
@@ -47,8 +55,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[" + taskType + "]" + super.toString() + " (by: " + deadlineDate.getDayOfMonth() + " " +
-                deadlineDate.getMonth() + " " + deadlineDate.getYear() + " " +
-                deadlineTime.toString() + ")";
+        return "[" + taskType + "]" + super.toString() + " (by: " + deadlineDate.getDayOfMonth() + " "
+                + deadlineDate.getMonth() + " " + deadlineDate.getYear() + " "
+                + deadlineTime.toString() + ")";
     }
 }

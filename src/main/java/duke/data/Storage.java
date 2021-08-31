@@ -8,11 +8,10 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Task;
-import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
-
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Represents the storage portion of the Duke program.
@@ -21,10 +20,10 @@ import duke.task.Event;
 public class Storage {
 
     // The file that data is being written to and retrieved from
-    File dataFile;
+    private File dataFile;
 
     // The list of Tasks retrieved from dataFile
-    ArrayList<Task> taskList = new ArrayList<>();
+    private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
      * Basic constructor for a Storage object.
@@ -45,8 +44,8 @@ public class Storage {
 
             // Loop through the taskList and parse the tasks to write it in the dataFile
             for (Task current : taskList) {
-                myWriter.write(current.getTaskType() + " | " + current.getDoneStatus() + " | " +
-                        current.getDescription() + " | " + current.getDueDate() + "\n");
+                myWriter.write(current.getTaskType() + " | " + current.getDoneStatus() + " | "
+                        + current.getDescription() + " | " + current.getDueDate() + "\n");
             }
             myWriter.close(); // Must close the writer after each use
 
@@ -78,7 +77,7 @@ public class Storage {
                     String taskDetails = taskListReader.nextLine();
                     if (taskDetails.startsWith("D ")) {
 
-                        // [0] is the Task category, [1] is the isDone boolean, [2] is the task desc, [3] is the task dueDate
+                        // [0] is the Task category, [1] is isDone boolean, [2] is task desc, [3] is task dueDate
                         if (taskDetails.split(" \\| ")[1].equals("0")) {
                             taskList.add(new Deadline(taskDetails.split(" \\| ")[2],
                                     LocalDate.parse(taskDetails.split(" \\| ")[3].split(" ")[0]),

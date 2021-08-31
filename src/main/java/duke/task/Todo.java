@@ -18,6 +18,12 @@ public class Todo extends Task {
         this.dueDate = "";
     }
 
+    /**
+     * Alternate constructor for a to do which accepts an isDone boolean.
+     *
+     * @param desc   The description of the to do
+     * @param isDone Boolean representing whether the task has been completed
+     */
     public Todo(String desc, Boolean isDone) {
         super(desc);
         this.taskType = "T";
