@@ -3,9 +3,9 @@ package duke.command;
 import duke.Duke;
 import duke.DukeException;
 import duke.Parser;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.ui.Ui;
 
 public class TodoCommand extends Command {
     private static final String COMMAND_WORD = "todo";
@@ -25,13 +25,14 @@ public class TodoCommand extends Command {
      *
      * @param duke   Duke instance that the command is called from.
      * @param parser Parser with the user's input
+     * @return Output to be displayed in GUI.
      * @throws DukeException If input is invalid.
      */
     @Override
-    public void run(Duke duke, Parser parser) throws DukeException {
+    public String run(Duke duke, Parser parser) throws DukeException {
         parser.parseTask();
         Task task = new Todo(parser.getTaskName());
         duke.getList().add(task);
-        Ui.addTaskMessage(task, duke.getList().size());
+        return Ui.addTaskMessage(task, duke.getList().size());
     }
 }

@@ -60,7 +60,7 @@ public class Storage {
      *
      * @return List of Tasks extracted from file.
      * @throws FileNotFoundException If file is not found.
-     * @throws DukeException If task import fails to parse task list.
+     * @throws DukeException         If task import fails to parse task list.
      */
     public List<Task> readFile() throws FileNotFoundException, DukeException {
         List<Task> output = new ArrayList<>();
