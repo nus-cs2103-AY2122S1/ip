@@ -10,8 +10,8 @@ public class Ui {
     /**
      * Prints the welcome message.
      */
-    public void printWelcome() {
-        System.out.println(
+    public String printWelcome() {
+        return (
                 "Hello! I'm Amped :) \n"
                         + "Type: \n"
                         + "1. A task (todo/deadline/event) followed by description to add tasks \n"
@@ -27,38 +27,39 @@ public class Ui {
     /**
      * Prints the goodbye message.
      */
-    public void printBye() {
-        System.out.println("Good Bye. Have a nice day!");
+    public String printBye() {
+        return "Good Bye. Have a nice day!";
     }
 
     /**
      * Informs the user that a task has been marked as done.
      */
-    public void printDone() {
-        System.out.println("Nice! I've marked this task as done: ");
+    public String printDone() { return "Nice! I've marked this task as done: ";
     }
 
     /**
      * Informs the user that a task has been removed from the list.
      */
-    public void printRemove() {
-        System.out.println("Noted. I've removed this task: ");
+    public String printRemove() {
+        return "Noted. I've removed this task: ";
     }
 
     /**
      * Informs the user that a task has been added.
      * @param ls The list of tasks.
      */
-    public void printAddTask(TaskList ls) {
-        ls.printAddTask();
+    public String printAddTask(TaskList ls) {
+        System.out.println("3");
+        return ls.printAddTask();
     }
 
     /**
      * Displays the list of tasks.
      * @param ls The list of tasks.
      */
-    public void displayList(TaskList ls) {
-        ls.displayList();
+    public String displayList(TaskList ls) {
+        System.out.println("2");
+        return ls.displayList();
     }
 
     /**
@@ -66,7 +67,7 @@ public class Ui {
      * @param ls The list of tasks.
      * @param index The index of the tasks in the list.
      */
-    public void printCurrentTask(TaskList ls, int index) {
-        System.out.println(ls.getTask(index).toString());
+    public String printCurrentTask(TaskList ls, int index) {
+        return ls.getTask(index).toString();
     }
 }
