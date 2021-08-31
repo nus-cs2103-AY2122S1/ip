@@ -22,15 +22,15 @@ public class DeadlineCommand extends Command {
      * Guide on how to use this command word.
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD +
-            " <description> /by <date> - add a task to be completed by <date> in yyyy/MM/dd HHmm (24-hour format)\n" +
-            "   Example: " + COMMAND_WORD + " project submission /by 2021/08/30 2359";
+            " <description> /by <date> - add a task to be completed by <date> in yyyy/MM/dd HHmm (24-hour format)\n"
+            + "   Example: " + COMMAND_WORD + " project submission /by 2021/08/30 2359";
 
     private String userCommand;
 
     /**
      * Instantiates DeadlineCommand object.
      *
-     * @param userCommand full user input.
+     * @param userCommand Full user input.
      */
     public DeadlineCommand(String userCommand) {
         super();

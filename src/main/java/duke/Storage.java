@@ -24,7 +24,7 @@ public class Storage {
     /**
      * Instantiates a storage object.
      *
-     * @param filePath path where the file is stored.
+     * @param filePath Path where the file is stored.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -34,8 +34,8 @@ public class Storage {
      * Reads any previously saved file in the specified file path.
      * Creates an empty file if there is no previously saved file.
      *
-     * @return list of task items.
-     * @throws IOException if the file in the specified file path cannot be operated on.
+     * @return List of task items.
+     * @throws IOException If the file in the specified file path cannot be operated on.
      */
     public List<Task> load() throws IOException {
 
@@ -78,8 +78,8 @@ public class Storage {
     /**
      * Writes the list of tasks to the specified file path.
      *
-     * @param tasks list of tasks.
-     * @throws IOException if the file in the specified file path cannot be operated on.
+     * @param tasks List of tasks.
+     * @throws IOException If the file in the specified file path cannot be operated on.
      */
     public void save(List<Task> tasks) throws IOException {
         // Solution adapted from:

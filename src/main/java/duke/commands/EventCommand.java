@@ -21,16 +21,16 @@ public class EventCommand extends Command {
     /**
      * Guide on how to use this command word.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD +
-            " <description> /at <date> - add an event scheduled at <date> in yyyy/MM/dd HHmm (24-hour format)\n" +
-            "   Example: " + COMMAND_WORD + " project meeting /at 2021/08/24 1500";
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " <description> /at <date> - add an event scheduled at <date> in yyyy/MM/dd HHmm (24-hour format)\n"
+            + "   Example: " + COMMAND_WORD + " project meeting /at 2021/08/24 1500";
 
     private String userCommand;
 
     /**
      * Instantiates EventCommand object.
      *
-     * @param userCommand full user input.
+     * @param userCommand Full user input.
      */
     public EventCommand(String userCommand) {
         super();
@@ -65,6 +65,5 @@ public class EventCommand extends Command {
         } catch (DateTimeException e) {
             ui.printError("Please add a valid event date of format yyyy/MM/dd HHmm (24-hour format)!");
         }
-
     }
 }

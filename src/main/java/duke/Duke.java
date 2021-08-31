@@ -15,7 +15,7 @@ public class Duke {
     /**
      * Instantiates a Duke object.
      *
-     * @param filePath string of file path of the previously saved task.txt file (if any).
+     * @param filePath String of file path of the previously saved task.txt file (if any).
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -50,7 +50,7 @@ public class Duke {
     /**
      * Drives the Duke program.
      *
-     * @param args arguments that user inputs.
+     * @param args Arguments that user inputs.
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();

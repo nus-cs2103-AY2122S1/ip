@@ -15,7 +15,7 @@ public class TaskList {
 
     /**
      * Instantiates a task list object.
-     * @param items list of items to be stored in the task list.
+     * @param items List of items to be stored in the task list.
      */
     public TaskList(List<Task> items) {
         this.items = items;
@@ -24,8 +24,8 @@ public class TaskList {
     /**
      * Returns the task at the specified index.
      *
-     * @param index index of the task specified.
-     * @return task at the specified index.
+     * @param index Index of the task specified.
+     * @return Task at the specified index.
      */
     public Task getTask(int index) {
         return items.get(index);
@@ -34,16 +34,16 @@ public class TaskList {
     /**
      * Returns the list of task items.
      *
-     * @return list of task items.
+     * @return List of task items.
      */
     public List<Task> getItems() {
         return items;
     }
 
     /**
-     * Return the number of task items in the list.
+     * Returns the number of task items in the list.
      *
-     * @return number of task items in the list.
+     * @return Number of task items in the list.
      */
     public int getSize() {
         return items.size();
@@ -52,7 +52,7 @@ public class TaskList {
     /**
      * Marks the specified task as completed.
      *
-     * @param index index of the task that has been completed.
+     * @param index Index of the task that has been completed.
      */
     public void markTaskDone(int index) {
         items.get(index).markAsDone();
@@ -61,7 +61,7 @@ public class TaskList {
     /**
      * Adds the specified task to the task list.
      *
-     * @param task task to be added to the list.
+     * @param task Task to be added to the list.
      */
     public void addTask(Task task) {
         this.items.add(task);
@@ -70,7 +70,7 @@ public class TaskList {
     /**
      * Deletes the specified task from the task list.
      *
-     * @param index index of the task to be deleted.
+     * @param index Index of the task to be deleted.
      */
     public void deleteTask(int index) {
         this.items.remove(index);

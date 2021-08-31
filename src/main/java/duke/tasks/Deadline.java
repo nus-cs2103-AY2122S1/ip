@@ -11,8 +11,8 @@ public class Deadline extends Task {
     /**
      * Instantiates a Deadline Object.
      *
-     * @param description description of the task.
-     * @param by due date of the task.
+     * @param description Description of the task.
+     * @param by Due date of the task.
      */
     public Deadline(String description, LocalDateTime by) {
         super(description);
@@ -22,9 +22,9 @@ public class Deadline extends Task {
     /**
      * Instantiates a Deadline Object.
      *
-     * @param description description of the task.
-     * @param isDone true if the task has been completed.
-     * @param by date which the task has to be completed by.
+     * @param description Description of the task.
+     * @param isDone True if the task has been completed.
+     * @param by Date which the task has to be completed by.
      */
     public Deadline(String description, boolean isDone, LocalDateTime by) {
         super(description, isDone);
@@ -34,7 +34,7 @@ public class Deadline extends Task {
     /**
      * Returns the string representation of this Deadline Object.
      *
-     * @return string representation of Deadline object.
+     * @return String representation of Deadline object.
      */
     @Override
     public String toString() {
@@ -44,7 +44,7 @@ public class Deadline extends Task {
     /**
      * Returns the string representation of the task to be saved in the hard disk.
      *
-     * @return string to be saved in the hard disk.
+     * @return String to be saved in the hard disk.
      */
     @Override
     public String toSaveString() {

@@ -27,7 +27,7 @@ public class TodoCommand extends Command {
     /**
      * Instantiates TodoCommand object.
      *
-     * @param userCommand full user input.
+     * @param userCommand Full user input.
      */
     public TodoCommand(String userCommand) {
         super();

@@ -1,6 +1,15 @@
 package duke;
 
-import duke.commands.*;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FindCommand;
+import duke.commands.HelpCommand;
+import duke.commands.ListCommand;
+import duke.commands.TodoCommand;
 
 /**
  * Parses user commands into the program.
@@ -10,9 +19,9 @@ public class Parser {
     /**
      * Parses user commands into the program to determine which command they are categorised as.
      *
-     * @param userCommand full user input string.
-     * @return command object depending on the command keyword.
-     * @throws DukeException if command keyword is invalid.
+     * @param userCommand Full user input string.
+     * @return Command object depending on the command keyword.
+     * @throws DukeException If command keyword is invalid.
      */
     public static Command parse(String userCommand) throws DukeException {
         String[] words = userCommand.strip().split(" ");

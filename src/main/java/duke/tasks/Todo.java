@@ -7,17 +7,17 @@ public class Todo extends Task {
     /**
      * Instantiates a Todo object.
      *
-     * @param description description of the todo task.
+     * @param description Description of the todo task.
      */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * Instantiates a Todo object;
+     * Instantiates a Todo object.
      *
-     * @param description
-     * @param isDone
+     * @param description Description of the todo task.
+     * @param isDone True if the task has been completed, false otherwise.
      */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
@@ -26,7 +26,7 @@ public class Todo extends Task {
     /**
      * Returns the string representation of this Todo Object.
      *
-     * @return string representation of Deadline object.
+     * @return String representation of Deadline object.
      */
     @Override
     public String toString() {
@@ -36,7 +36,7 @@ public class Todo extends Task {
     /**
      * Returns the string representation of the task to be saved in the hard disk.
      *
-     * @return string to be saved in the hard disk.
+     * @return String to be saved in the hard disk.
      */
     @Override
     public String toSaveString() {

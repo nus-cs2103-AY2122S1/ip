@@ -24,7 +24,7 @@ public class Task {
     /**
      * Instantiates a Task object
      *
-     * @param description description of the task item
+     * @param description Description of the task item
      */
     public Task(String description) {
         this.description = description;
@@ -34,8 +34,8 @@ public class Task {
     /**
      * Instantiates a Task Object.
      *
-     * @param description description of the task item.
-     * @param isDone true if the task has been completed.
+     * @param description Description of the task item.
+     * @param isDone True if the task has been completed.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -62,7 +62,7 @@ public class Task {
     /**
      * Returns the string representation of the task item.
      *
-     * @return string representation of the task item.
+     * @return String representation of the task item.
      */
     @Override
     public String toString() {
@@ -72,7 +72,7 @@ public class Task {
     /**
      * Returns the string representation of the task to be saved in the hard disk.
      *
-     * @return string to be saved in the hard disk.
+     * @return String to be saved in the hard disk.
      */
     public String toSaveString() {
         return "|" + (isDone ? "1" : "0") + "|" + this.description;

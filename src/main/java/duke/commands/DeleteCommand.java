@@ -27,7 +27,7 @@ public class DeleteCommand extends Command {
     /**
      * Instantiates DeleteCommand object.
      *
-     * @param userCommand full user input.
+     * @param userCommand Full user input.
      */
     public DeleteCommand(String userCommand) {
         super();

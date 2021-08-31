@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
     /**
      * Instantiates DoneCommand object.
      *
-     * @param userCommand full user input.
+     * @param userCommand Full user input.
      */
     public DoneCommand(String userCommand) {
         this.userCommand = userCommand;

@@ -27,7 +27,7 @@ public class Ui {
     /**
      * Prints a message to show users the number of tasks there are in the list.
      *
-     * @param index index of items, i.e. the number of tasks
+     * @param index Index of items, i.e. the number of tasks
      */
     public void printTaskNum(int index) {
         System.out.printf("\nNow you have %d tasks in the list.\n", index);
@@ -36,7 +36,7 @@ public class Ui {
     /**
      * Prints a message to show the task that has been successfully added to the list.
      *
-     * @param task task added to items list
+     * @param task Task added to items list
      */
     public void printAddTask(Task task) {
         System.out.println("Got it. I've added this task:\n" + task);
@@ -70,8 +70,8 @@ public class Ui {
     /**
      * Prints the message when a task has been added to the list successfully.
      *
-     * @param task task that has been added.
-     * @param size number of items in the list after the task has been added.
+     * @param task Task that has been added.
+     * @param size Number of items in the list after the task has been added.
      */
     public void printTaskAdded(Task task, int size) {
         printHorizontalLine();
@@ -83,7 +83,7 @@ public class Ui {
     /**
      * Reads the user input.
      *
-     * @return user input string.
+     * @return User input string.
      */
     public String readCommand() {
         String input = sc.nextLine();
@@ -98,7 +98,7 @@ public class Ui {
     /**
      * Prints the error message.
      *
-     * @param err error message to be displayed.
+     * @param err Error message to be displayed.
      */
     public void printError(String err) {
         printHorizontalLine();

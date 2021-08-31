@@ -14,11 +14,16 @@ public class FindCommand extends Command {
      * Guide on how to use this command word.
      */
     public static final String MESSAGE_USAGE =
-            COMMAND_WORD + " <description> - displays all task with <description>\n" + "   Example: " + COMMAND_WORD +
-                    " book";
+            COMMAND_WORD + " <description> - displays all task with <description>\n" + "   Example: " + COMMAND_WORD
+                    + " book";
 
     private String userCommand;
 
+    /**
+     * Instantiates FindCommand object.
+     *
+     * @param userCommand Full user input.
+     */
     public FindCommand(String userCommand) {
         this.userCommand = userCommand;
     }
