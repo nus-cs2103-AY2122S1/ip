@@ -34,7 +34,7 @@ public class Ui {
      * @return String representation of list
      */
     public static String taskListString(TaskList taskList) {
-        String output = "";
+        String output = "These are the tasks you've told me:\n";
         for (int i = 0; i < taskList.size(); i++) {
             output += String.format("%d. %s\n", i + 1, taskList.get(i));
         }
