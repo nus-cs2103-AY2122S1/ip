@@ -13,6 +13,7 @@ public class Parser {
      * @param input The command given by the user.
      * @throws DukeException If input do not meet the requirements.
      * @throws IOException If the file cannot be read/found.
+     * @returns The response in String after the action is executed.
      */
     public String process(String input, List list, Storage storage) throws DukeException, IOException {
         String[] split = input.split(" ", 2);

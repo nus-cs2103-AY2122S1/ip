@@ -30,6 +30,11 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/Jiahao.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Ben.jpg"));
 
+    /**
+     * Entry point to the program
+     *
+     * @param stage the stage to be displayed.
+     */
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -105,9 +110,12 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     *
+     * @param dukeBot The DukeBot for the run.
+     * @param parser The parser used for processing input.
+     * @param data The data used for storage.
      */
     private void handleUserInput(Duke dukeBot, Parser parser, Storage data) {
         if (userInput.getText().equals("bye")) {
@@ -124,8 +132,13 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the correct response from the input given.
+     *
+     * @param input The input by user.
+     * @param dukeBot The dukeBot used.
+     * @param parser The parser used.
+     * @param data The data used.
+     * @return The correct response based on input given.
      */
     private String getResponse(String input, Duke dukeBot, Parser parser, Storage data) {
         try {
