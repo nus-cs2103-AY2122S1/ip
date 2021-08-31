@@ -48,7 +48,7 @@ Hmm...
 - [X] an emoji
 - [X] a blockquote
 - [X] a hyper link
-- [ ] inline code
+- [X] inline code
 - [X] some text formatting: bold, italic, stikethrough etc.
 
 looks like i am done
