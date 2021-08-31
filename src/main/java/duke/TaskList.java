@@ -1,13 +1,13 @@
 package duke;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 import duke.exception.DukeException;
 import duke.exception.IndexMismatchException;
 import duke.exception.IndexOutOfBoundException;
 import duke.task.Task;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 /**
  * A class that represents a list of tasks.

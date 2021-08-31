@@ -1,12 +1,13 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class QueryCommand extends Command {
     /**
@@ -33,7 +34,7 @@ public class QueryCommand extends Command {
      * @throws InvalidCommandException If the command body is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) throws InvalidCommandException {
+    public void execute(TaskList taskList, Storage storage) throws DukeException {
         switch (this.commandType) {
         case LIST: {
             Ui.printMessage(taskList.printList());
@@ -51,6 +52,9 @@ public class QueryCommand extends Command {
             Ui.printMessage(taskList.printList(this.commandBody));
             break;
         }
+        default:
+            // Should not reach here
+            throw new DukeException("Something wrong happened when executing Duke!");
         }
     }
 
