@@ -37,13 +37,13 @@ public class Parser {
      *
      * @param information display information.
      */
-    public static void displayLabel(String information) {
+    public static String displayLabel(String information) {
         String label =
                 "    ____________________________________________________________\n" +
                 "     " +
                 information + "\n    " +
                 "____________________________________________________________\n";
-        System.out.println(label);
+        return label;
     }
 
     /**
@@ -53,20 +53,20 @@ public class Parser {
      * @param tasks the list of tasks.
      * @throws DukeException if the input was invalid.
      */
-    public void useInput(TaskList tasks) throws DukeException {
+    public String  useInput(TaskList tasks) throws DukeException {
         exceptionCommand(tasks);
         if (input.equals("list")) {
-            listCommand(tasks);
+            return listCommand(tasks);
         } else if (input.contains("done")) {
-            doneCommand(tasks);
+            return doneCommand(tasks);
         } else if (input.contains("delete")) {
-            deleteCommand(tasks);
+            return deleteCommand(tasks);
         } else if (input.contains("find")) {
-            findCommand(tasks);
+            return findCommand(tasks);
         } else if (input.contains("deadline") || input.contains("event")) {
-            deadlineOrEventCommand(input, tasks);
+            return deadlineOrEventCommand(input, tasks);
         } else {
-            addTaskCommand(input, tasks);
+            return addTaskCommand(input, tasks);
         }
     }
 
@@ -76,9 +76,9 @@ public class Parser {
      *
      * @param tasks the list of tasks.
      */
-    public void listCommand(TaskList tasks) {
+    public String listCommand(TaskList tasks) {
         String itemCollection = getItems(tasks);
-        displayLabel(("Here are the tasks in your list: \n"
+        return displayLabel(("Here are the tasks in your list: \n"
                 + "     " + itemCollection));
     }
 
@@ -87,10 +87,10 @@ public class Parser {
      *
      * @param tasks the list of tasks.
      */
-    public void doneCommand(TaskList tasks) {
+    public String doneCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(5, 6)) - 1;
         tasks.getTask(index).setIsDone();
-        displayLabel("Nice! I've marked this task as done: \n" +
+        return displayLabel("Nice! I've marked this task as done: \n" +
                 "       " + tasks.getTask(index).toString());
     }
 
@@ -100,14 +100,14 @@ public class Parser {
      * @param input the user input.
      * @param tasks the list of tasks.
      */
-    public void addTaskCommand(String input, TaskList tasks) {
+    public String addTaskCommand(String input, TaskList tasks) {
         if (input.contains("todo")) {
             String info = input.substring(5);
             tasks.addTask(new ToDo(info));
         } else {
             tasks.addTask(new Task(input));
         }
-        displayLabel("Got it. I've added this task:  \n" +
+        return displayLabel("Got it. I've added this task:  \n" +
                 "       " + tasks.getTask(tasks.size() - 1).toString() + "\n     " +
                 "Now you have " + Integer.toString(tasks.size()) + " tasks in the list.");
     }
@@ -120,7 +120,7 @@ public class Parser {
      * @param input the user input.
      * @param tasks the list of tasks.
      */
-    public void deadlineOrEventCommand(String input, TaskList tasks) {
+    public String deadlineOrEventCommand(String input, TaskList tasks) {
         if (input.contains("deadline")) {
             String[] info = input.substring(9).split(" /by ");
             tasks.addTask(getDateAndTime(info, input, "deadline"));
@@ -128,7 +128,7 @@ public class Parser {
             String[] info = input.substring(6).split(" /at ");
             tasks.addTask(getDateAndTime(info, input, "event"));
         }
-        displayLabel("Got it. I've added this task:  \n" +
+        return displayLabel("Got it. I've added this task:  \n" +
                 "       " + tasks.getTask(tasks.size() - 1).toString() + "\n     Now you have "
                 + Integer.toString(tasks.size()) + " tasks in the list.");
     }
@@ -157,11 +157,11 @@ public class Parser {
      *
      * @param tasks the list of tasks.
      */
-    public void deleteCommand(TaskList tasks) {
+    public String deleteCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(7, 8)) - 1;
         Task removedTask = tasks.getTask(index);
         tasks.removeTask(removedTask);
-        displayLabel("Noted. I've removed this task:  \n" +
+        return displayLabel("Noted. I've removed this task:  \n" +
                 "       " + removedTask.toString() + "\n     Now you have "
                 + Integer.toString(tasks.size()) + " tasks in the list.");
     }
@@ -172,7 +172,7 @@ public class Parser {
      *
      * @param tasks the list of tasks.
      */
-    public void findCommand(TaskList tasks) {
+    public String findCommand(TaskList tasks) {
         TaskList newTasks = new TaskList(new ArrayList<>());
         if (input.contains("find")) {
             String item = input.split(" ")[1];
@@ -181,10 +181,11 @@ public class Parser {
                     newTasks.addTask(tasks.getTask(i));
                 }
             }
-            displayLabel(
+            return displayLabel(
                     "Here are the matching tasks in your list: \n" +
                             "     " + getItems(newTasks));
         }
+        return displayLabel("No matching tasks, sorry");
     }
 
     /**
