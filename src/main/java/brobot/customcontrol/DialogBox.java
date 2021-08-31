@@ -12,9 +12,9 @@ import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
 
-    private Label text;
-    private ImageView displayPicture;
-    private Circle clip = new Circle(35, 35, 35);
+    private final Label text;
+    private final ImageView displayPicture;
+    private final Circle clip = new Circle(35, 35, 35);
 
 
     /**

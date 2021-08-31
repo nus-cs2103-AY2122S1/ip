@@ -18,19 +18,24 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Represents the main Duke Program, a task manager.
+ * Represents the main Brobot Program, a task manager.
  */
 public class Brobot extends Application {
-    private Storage storage = new Storage("./data/list1.txt");
-    private TaskList list = storage.readList();
-    private BroParser parser = new BroParser(list, storage);
+    private final Storage storage = new Storage("./data/list1.txt");
+    private final TaskList list = storage.readList();
+    private final BroParser parser = new BroParser(list, storage);
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/brobot.jpeg"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
+    private final Image brobot = new Image(this.getClass().getResourceAsStream("/images/brobot.jpeg"));
+
+    /**
+     * Sets up GUI for the Brobot program.
+     * @param stage The main stage to show in the GUI.
+     */
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -89,22 +94,11 @@ public class Brobot extends Application {
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
 
-        return textToAdd;
-    }
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Brobot's reply and then
+     * appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
@@ -112,13 +106,15 @@ public class Brobot extends Application {
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getDukeDialog(dukeText, new ImageView(brobot))
         );
         userInput.clear();
     }
+
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Receives the user input, parses it and outputs Brobot's response
+     * @param input The user input
+     * @return Brobot's response
      */
     private String getResponse(String input) {
         try {
@@ -128,7 +124,7 @@ public class Brobot extends Application {
         }
     }
     /**
-     * Main java program
+     * Main Brobot program for CLI interfacing. Ignore this if using GUI
      * @param args Arguments for main program
      */
     public static void main(String[] args) {

@@ -42,7 +42,8 @@ public class BroParser {
      * Takes in raw input of user, processes it and execute the  appropriate action.
      *
      * @param rawInput Raw user input string
-     * @throws BroException
+     * @return Brobot's response to the input
+     * @throws BroException An exception that represents an error in the Brobot programme
      */
     public String parse(String rawInput) throws BroException {
         Scanner inputScanner = new Scanner(rawInput);
@@ -80,8 +81,9 @@ public class BroParser {
      * Action for list command.
      *
      * @param inputScanner Command Parameters.
-     * @return List
-     * @throws InvalidCommandParameterException
+     * @return List in string format
+     * @throws InvalidCommandParameterException Exception that represents an invalid parameter error for
+     * the inputted command
      */
     public String handleList(Scanner inputScanner) throws InvalidCommandParameterException {
         if (inputScanner.hasNext()) {
@@ -95,8 +97,10 @@ public class BroParser {
      * Action for done command.
      *
      * @param inputScanner Command Parameters.
-     * @throws InvalidCommandParameterException
-     * @throws NoSuchTaskException
+     * @return Message for done command
+     * @throws InvalidCommandParameterException Exception that represents an invalid parameter error for
+     * the inputted command
+     * @throws NoSuchTaskException Exception that represents an invalid task number error
      */
     public String handleDone(Scanner inputScanner) throws InvalidCommandParameterException,
             NoSuchTaskException {
@@ -114,8 +118,10 @@ public class BroParser {
      * Action for delete command.
      *
      * @param inputScanner Command Parameters.
-     * @throws InvalidCommandParameterException
-     * @throws NoSuchTaskException
+     * @return Message for delete command
+     * @throws InvalidCommandParameterException Exception that represents an invalid parameter error for
+     * the inputted command
+     * @throws NoSuchTaskException Exception that represents an invalid task number error
      */
     public String handleDelete(Scanner inputScanner) throws InvalidCommandParameterException,
             NoSuchTaskException {
@@ -133,7 +139,9 @@ public class BroParser {
      * Action for todo command.
      *
      * @param inputScanner Command Parameters.
-     * @throws InvalidCommandParameterException
+     * @return Message for todo command
+     * @throws InvalidCommandParameterException Exception that represents an invalid parameter error for
+     * the inputted command
      */
     public String handleTodo(Scanner inputScanner) throws InvalidCommandParameterException {
         if (inputScanner.hasNextLine()) {
@@ -150,7 +158,9 @@ public class BroParser {
      * Action for deadline command.
      *
      * @param inputScanner Command Parameters.
-     * @throws InvalidCommandParameterException
+     * @return Message for deadline command
+     * @throws InvalidCommandParameterException Exception that represents an invalid parameter error for
+     * the inputted command
      */
     public String handleDeadline(Scanner inputScanner) throws InvalidCommandParameterException {
         if (inputScanner.hasNextLine()) {
@@ -169,7 +179,9 @@ public class BroParser {
      * Action for Event command.
      *
      * @param inputScanner Command Parameters.
-     * @throws InvalidCommandParameterException
+     * @return Message for event command
+     * @throws InvalidCommandParameterException Exception that represents an invalid parameter error for the
+     * inputted command
      */
     public String handleEvent(Scanner inputScanner) throws InvalidCommandParameterException {
         if (inputScanner.hasNextLine()) {
@@ -188,7 +200,9 @@ public class BroParser {
      * Action for Find Command.
      *
      * @param inputScanner Command Parameters.
-     * @throws InvalidCommandParameterException
+     * @return Message for find command
+     * @throws InvalidCommandParameterException Exception that represents an invalid parameter error for the
+     * inputted command
      */
     public String handleFind(Scanner inputScanner) throws InvalidCommandParameterException {
         if (inputScanner.hasNextLine()) {
