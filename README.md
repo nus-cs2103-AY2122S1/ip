@@ -1,24 +1,37 @@
-# Morgan project template
+# Morgan
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Morgan is a virtual task assitant that provides both speed and convenience in managing your day-to-day tasks.
+Equipped with a simple Graphical User Interface (GUI), Morgan is optimized for use via a Command Line Interface (CLI).
 
-## Setting up in Intellij
+Download Morgan [here](https://github.com/jennibearduit/ip/releases) and you'll never worry about missing a deadline!
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Commands
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Morgan.java` file, right-click it, and choose `Run Morgan.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+1. `list` : lists all existing tasks in storage.
+
+Input format: `list`
+
+2. `todo` : adds a to-do task into the list of tasks.
+
+Input format: `todo [task]`
+
+3. `event` : adds an event task into the list of tasks.
+
+Input format: `event <task> /at [dd-mm-yyyy hh:mm]`
+
+4. `deadline` : adds a deadline task into the list of tasks.
+
+Input format: `deadline [task] /by [dd-mm-yyyy hh:mm]`
+
+5. `delete` : deletes a task from the list of tasks.
+
+Input format: `delete [task number]`
+
+6. `done` : marks a specified task as done.
+
+Input format: `done [task number]`
+
+7. `find` : lists all existing tasks containing a specified keyword.
+
+Input format: `find [keyword]`
+   
