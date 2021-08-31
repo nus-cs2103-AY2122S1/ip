@@ -45,7 +45,7 @@ test {
 
 application {
     // This class should contain the main method
-    mainClassName = "jarvis.Jarvis"
+    mainClassName = "jarvis.Launcher"
 }
 
 shadowJar {
@@ -57,6 +57,6 @@ checkstyle {
     toolVersion = '8.29'
 }
 
-run{
+run {
     standardInput = System.in
 }
