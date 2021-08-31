@@ -30,82 +30,119 @@ public class TaskList {
     }
 
     /**
-     * Add a to-do task to the list and prints a message to the user.
+     * Adds a to-do task to the list and returns a message to the user.
      *
      * @param userInput The input of the user.
      * @param ui        Ui class to print messages to the user.
+     * @return The String message.
      */
-    protected void addTodoTask(String userInput, Ui ui) {
+    protected String addTodoTask(String userInput, Ui ui) {
+        if (userInput.equals("todo")) {
+            return "☹ OOPS!!! You need to enter a description of the task!";
+        }
         ToDo todo = new ToDo(userInput.substring(5));
         tasks.add(todo);
-        ui.showTodoMessage(todo, tasks);
+        return ui.showTodoMessage(todo, tasks);
     }
 
     /**
-     * Add a deadline task to the list and prints a message to the user.
+     * Adds a deadline task to the list and returns a message to the user.
      *
      * @param userInput The input of the user.
      * @param ui        Ui class to print messages to the user.
+     * @return The String message.
      */
-    protected void addDeadlineTask(String userInput, Ui ui) throws DateTimeParseException {
+    protected String addDeadlineTask(String userInput, Ui ui) throws DateTimeParseException {
+        if (userInput.equals("deadline")) {
+            return "☹ OOPS!!! You need to enter a description along with the deadline!";
+        }
         int index = userInput.indexOf('/');
         String by = userInput.substring(index + 4);
         LocalDate localDate = LocalDate.parse(by);
         Deadline deadline = new Deadline(userInput.substring(9, index),
                 localDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
         tasks.add(deadline);
-        ui.showDeadlineMessage(deadline, tasks);
+        return ui.showDeadlineMessage(deadline, tasks);
     }
 
     /**
-     * Add an event task to the list and prints a message to the user.
+     * Adds an event task to the list and returns a message to the user.
      *
      * @param userInput The input of the user.
      * @param ui        Ui class to print messages to the user.
+     * @return The String message.
      */
-    protected void addEventTask(String userInput, Ui ui) {
+    protected String addEventTask(String userInput, Ui ui) {
+        if (userInput.equals("event")) {
+            return "☹ OOPS!!! You need to enter a description along with the event timings!";
+        }
         int index = userInput.indexOf('/');
         String at = userInput.substring(index + 4);
         Event event = new Event(userInput.substring(6, index), at);
         tasks.add(event);
-        ui.showEventMessage(event, tasks);
+        return ui.showEventMessage(event, tasks);
     }
 
     /**
-     * Deletes a task from the list and prints a message to the user.
+     * Deletes a task from the list and returns a message to the user.
      *
      * @param userInput The input of the user.
      * @param ui        Ui class to print messages to the user.
+     * @return The String message.
      */
-    protected void deleteTask(String userInput, Ui ui) {
+    protected String deleteTask(String userInput, Ui ui) {
+        if (tasks.size() == 0) {
+            return "You have nothing in your list to delete!";
+        }
         int index = Integer.parseInt(userInput.split(" ")[1]);
+        if (index > tasks.size()) {
+            return "You do not have that many tasks!";
+        } else if (index <= 0) {
+            return "☹ OOPS!!! You need to input a POSITIVE INTEGER!";
+        }
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
-        ui.showDeleteMessage(task, tasks);
+        return ui.showDeleteMessage(task, tasks);
     }
 
     /**
      * Prints out all the user tasks.
+     *
+     * @return The user tasks.
      */
-    protected void printTaskList() {
+    protected String printTaskList() {
+        if (tasks.size() == 0) {
+            return "You have nothing in your list! You are free!!!";
+        }
+        StringBuilder result = new StringBuilder();
         int counter = 1;
         for (Task t : tasks) {
-            System.out.println(counter + "." + t.toString());
+            result.append(counter).append(".").append(t.toString()).append("\n");
             counter++;
         }
+        return result.toString();
     }
 
     /**
-     * Marks a task as done and prints a message to the user.
+     * Marks a task as done and returns a message to the user.
      *
      * @param userInput The input of the user.
      * @param ui        Ui class to print messages to the user.
+     * @return The String message.
      */
-    protected void markTaskAsDone(String userInput, Ui ui) {
+    protected String markTaskAsDone(String userInput, Ui ui) {
+        if (tasks.size() == 0) {
+            return "You have nothing in your list to mark as done!";
+        }
         int index = Integer.parseInt(userInput.split(" ")[1]);
+        if (index > tasks.size()) {
+            return "You do not have that many tasks!";
+        } else if (index <= 0) {
+            return "☹ OOPS!!! You need to input a POSITIVE INTEGER!";
+        }
         tasks.get(index - 1).markAsDone();
         Task task = tasks.get(index - 1);
-        ui.showDoneMessage(task);
+        return ui.showDoneMessage(task);
     }
 
     /**
@@ -113,8 +150,12 @@ public class TaskList {
      *
      * @param userInput The input of the user.
      * @param ui        Ui class to print messages to the user.
+     * @return The matching tasks.
      */
-    protected void findTasks(String userInput, Ui ui) {
+    protected String findTasks(String userInput, Ui ui) {
+        if (userInput.equals("find")) {
+            return "☹ OOPS!!! You need to input a keyword!";
+        }
         String keyword = userInput.split(" ")[1];
         List<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
@@ -124,6 +165,9 @@ public class TaskList {
                 }
             }
         }
-        ui.showMatchingTasks(matchingTasks);
+        if (matchingTasks.size() == 0) {
+            return "I found no matching tasks :(";
+        }
+        return ui.showMatchingTasks(matchingTasks);
     }
 }

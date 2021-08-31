@@ -16,41 +16,44 @@ public class Parser {
      * @param ui        Ui class to print messages.
      * @throws UhtredRagnarsonException Throws this exception if the user inputs an invalid command.
      */
-    protected static void parse(String userInput, TaskList taskList, Ui ui) throws UhtredRagnarsonException {
+    protected static String parse(String userInput, TaskList taskList, Ui ui) throws UhtredRagnarsonException {
+        String result = "";
         String commandType = userInput.split(" ")[0];
         try {
             switch (commandType) {
             case "list":
-                taskList.printTaskList();
+                result = taskList.printTaskList();
                 break;
             case "done":
-                taskList.markTaskAsDone(userInput, ui);
+                result = taskList.markTaskAsDone(userInput, ui);
                 break;
             case "delete":
-                taskList.deleteTask(userInput, ui);
+                result = taskList.deleteTask(userInput, ui);
                 break;
             case "todo":
-                taskList.addTodoTask(userInput, ui);
+                result = taskList.addTodoTask(userInput, ui);
                 break;
             case "deadline":
-                taskList.addDeadlineTask(userInput, ui);
+                result = taskList.addDeadlineTask(userInput, ui);
                 break;
             case "event":
-                taskList.addEventTask(userInput, ui);
+                result = taskList.addEventTask(userInput, ui);
                 break;
             case "find":
-                taskList.findTasks(userInput, ui);
+                result = taskList.findTasks(userInput, ui);
                 break;
             default:
-                throw new UhtredRagnarsonException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                result = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+                throw new UhtredRagnarsonException(result);
             }
         } catch (DateTimeParseException e) {
-            throw new UhtredRagnarsonException("☹ OOPS!!! You have to enter a valid date in the form "
-                    + "yyyy-mm-dd");
+            result = "☹ OOPS!!! You have to enter a valid date in the form "
+                    + "yyyy-mm-dd";
+            throw new UhtredRagnarsonException(result);
         } catch (UhtredRagnarsonException e) {
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            e.printStackTrace();
+            result = e.getMessage();
+            throw new UhtredRagnarsonException(result);
         }
+        return result;
     }
 }

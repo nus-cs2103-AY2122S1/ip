@@ -11,70 +11,72 @@ public class Ui {
     }
 
     /**
-     * Prints a welcome message when the user first runs the bot.
+     * Returns a welcome message when the user first runs the bot.
+     *
+     * @return The String message.
      */
-    protected void showWelcomeMessage() {
-        String message = "Hello! My name is Uhtred Ragnarson, son of Uhtred, of Bebbanburg!\n"
+    protected String showWelcomeMessage() {
+        return "Hello! My name is Uhtred Ragnarson, son of Uhtred, of Bebbanburg!\n"
                 + "What can i do for you?";
-        System.out.println(message);
     }
 
     /**
-     * Prints a bye message when the user exits the bot.
+     * Returns a bye message when the user exits the bot.
+     *
+     * @return The String message.
      */
-    protected void showByeMessage() {
-        String message = "Bye. Hope to see you again soon!";
-        System.out.println(message);
+    protected String showByeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints a message when a to-do is added.
+     * Returns a message when a to-do is added.
      *
      * @param todo  The task added.
      * @param tasks List of tasks.
+     * @return The String message.
      */
-    protected void showTodoMessage(ToDo todo, List<Task> tasks) {
-        String message = "Got it. I've added this task:\n" + "  "
+    protected String showTodoMessage(ToDo todo, List<Task> tasks) {
+        return "Got it. I've added this task:\n" + "  "
                 + todo + "\nNow you have " + tasks.size()
                 + " task(s) in the list.";
-        System.out.println(message);
     }
 
     /**
-     * Prints a message when a deadline is added.
+     * Returns a message when a deadline is added.
      *
      * @param deadline The task added.
      * @param tasks    List of tasks.
+     * @return The String message.
      */
-    protected void showDeadlineMessage(Deadline deadline, List<Task> tasks) {
-        String message = "Got it. I've added this task:\n" + "  "
+    protected String showDeadlineMessage(Deadline deadline, List<Task> tasks) {
+        return "Got it. I've added this task:\n" + "  "
                 + deadline + "\nNow you have " + tasks.size()
                 + " task(s) in the list.";
-        System.out.println(message);
     }
 
     /**
-     * Prints a message when an event is added.
+     * Returns a message when an event is added.
      *
      * @param event The task added.
      * @param tasks List of tasks.
+     * @return The String message.
      */
-    protected void showEventMessage(Event event, List<Task> tasks) {
-        String message = "Got it. I've added this task:\n" + "  "
+    protected String showEventMessage(Event event, List<Task> tasks) {
+        return "Got it. I've added this task:\n" + "  "
                 + event + "\nNow you have " + tasks.size()
                 + " task(s) in the list.";
-        System.out.println(message);
     }
 
     /**
      * Marks a task as done.
      *
      * @param task The task to be marked as done.
+     * @return The String message.
      */
-    protected void showDoneMessage(Task task) {
-        String message = "Nice! I've marked this task as done:\n"
+    protected String showDoneMessage(Task task) {
+        return "Nice! I've marked this task as done:\n"
                 + "  " + task.toString();
-        System.out.println(message);
     }
 
     /**
@@ -82,23 +84,23 @@ public class Ui {
      *
      * @param task  The task to be deleted.
      * @param tasks List of tasks.
+     * @return The String message.
      */
-    protected void showDeleteMessage(Task task, List<Task> tasks) {
-        String message = "Noted. I've removed this task:\n"
+    protected String showDeleteMessage(Task task, List<Task> tasks) {
+        return "Noted. I've removed this task:\n"
                 + "  " + task + "\nNow you have " + tasks.size()
                 + " task(s) in the list.";
-        System.out.println(message);
     }
 
     /**
      * Prints the matching tasks based on the given keyword.
      *
      * @param tasks List of tasks.
+     * @return The String message.
      */
-    protected void showMatchingTasks(List<Task> tasks) {
+    protected String showMatchingTasks(List<Task> tasks) {
         if (tasks.size() == 0) {
-            System.out.println("I can't find any matching tasks in your list! :(");
-            return;
+            return "I can't find any matching tasks in your list! :(";
         }
         StringBuilder result = new StringBuilder("Here are the matching tasks in your list:\n");
         int counter = 1;
@@ -106,6 +108,6 @@ public class Ui {
             result.append(counter).append(".").append(task.toString()).append("\n");
             counter++;
         }
-        System.out.println(result);
+        return result.toString();
     }
 }

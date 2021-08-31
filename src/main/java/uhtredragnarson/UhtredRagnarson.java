@@ -14,10 +14,9 @@ public class UhtredRagnarson {
 
     /**
      * The constructor for UhtredRagnarson.
-     *
-     * @param filePath The file path of the .txt file to read from.
      */
-    public UhtredRagnarson(String filePath) {
+    public UhtredRagnarson() {
+        String filePath = "src/main/java/data/UhtredRagnarson.txt";
         storage = new Storage(filePath);
         ui = new Ui();
         try {
@@ -28,8 +27,18 @@ public class UhtredRagnarson {
         }
     }
 
-    public static void main(String[] args) {
-        new UhtredRagnarson("src/main/java/data/UhtredRagnarson.txt").run();
+    protected String showWelcomeMessage() {
+        return ui.showWelcomeMessage();
+    }
+
+    protected String getResponse(String userInput) {
+        String result;
+        try {
+            result = Parser.parse(userInput, taskList, ui);
+        } catch (UhtredRagnarsonException e) {
+            result = e.getMessage();
+        }
+        return result;
     }
 
     /**
