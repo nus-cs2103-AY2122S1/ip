@@ -45,11 +45,10 @@ public class Storage {
 
             } else {
                 System.out.println("Here's your progress:");
-                Scanner file_sc = new Scanner(FILE);
+                Scanner fileSc = new Scanner(FILE);
 
-
-                while (file_sc.hasNext()) {
-                    String nextLine = file_sc.nextLine();
+                while (fileSc.hasNext()) {
+                    String nextLine = fileSc.nextLine();
 
                     // Interprets each line of the file / each command
                     String[] txtFileCmd = nextLine.split("@");
@@ -80,7 +79,7 @@ public class Storage {
 
                     }
                 }
-                file_sc.close();
+                fileSc.close();
 
                 for (int count = 0; count < tasks.size(); count++) {
                     System.out.println((count + 1) + ". " + tasks.get(count).toString());

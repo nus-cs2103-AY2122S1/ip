@@ -43,6 +43,7 @@ public class Task {
      *
      * @returns the string representation of the task completion
      */
+    // TODO use String.format for all the tasks instead of String concat
     public String toString() {
         return "[" + this.getStatusIcon() + "] ";
     }
