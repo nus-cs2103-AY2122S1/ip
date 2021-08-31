@@ -4,9 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
 
-import duke.constant.EditType;
 import org.junit.jupiter.api.Test;
 
+import duke.constant.EditType;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -28,7 +28,7 @@ public class UiTest {
                 + "3.[E][ ] Team meeting (at: 2 September 2021)\n",
                 ui.formatTaskList(taskList));
     }
-    
+
     @Test
     public void formatTaskListTest_emptyTaskList() {
         TaskList taskList = new TaskList(List.of());

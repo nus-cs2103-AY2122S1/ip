@@ -23,11 +23,11 @@ public class DialogBox extends HBox {
     /** Label containing text from the speaker. */
     @FXML
     private Label dialog;
-    
+
     /** ImageView containing the speaker's avatar. */
     @FXML
     private ImageView displayPicture;
-    
+
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(DialogBox.class.getResource("/view/DialogBox.fxml"));

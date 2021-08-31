@@ -21,7 +21,7 @@ public class Ui {
 
     /**
      * Returns a string to be displayed when the user exits Duke.
-     * 
+     *
      * @return A string containing Duke's exit message.
      */
     public String getGoodbyeMessage() {
@@ -66,7 +66,7 @@ public class Ui {
      * @param editedTask The task that has been edited.
      * @param numberOfTasks The number of tasks in the user's task list.
      * @param editType The edit done to the task.
-     * @return A string containing the edited task, formatted to be displayed to the user. 
+     * @return A string containing the edited task, formatted to be displayed to the user.
      * If the task was deleted, the number of remaining tasks on the task list is displayed as well.
      */
     public String formatEditedTask(Task editedTask, int numberOfTasks, EditType editType) {
