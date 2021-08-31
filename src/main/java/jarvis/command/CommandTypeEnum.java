@@ -4,7 +4,7 @@ import jarvis.exception.UnknownCommandException;
 import jarvis.parser.Parser;
 
 /**
- * Encapsulates all the possible and valid command types
+ * Encapsulates all the possible and valid command types.
  */
 public enum CommandTypeEnum {
     DEADLINE("deadline"),
@@ -25,9 +25,9 @@ public enum CommandTypeEnum {
     /**
      * Identifies the correct CommandTypeEnum depending on user input.
      *
-     * @param userInput User input
-     * @return The appropriate CommandTypeEnum
-     * @throws UnknownCommandException If user input has no valid command type
+     * @param userInput User input.
+     * @return The appropriate CommandTypeEnum.
+     * @throws UnknownCommandException If user input has no valid command type.
      */
     public static CommandTypeEnum identifyCommandType(String userInput) throws UnknownCommandException {
         String commandTrigger = Parser.getCommandTriggerFromInput(userInput);
@@ -42,9 +42,9 @@ public enum CommandTypeEnum {
     }
 
     /**
-     * Gets the length of the command trigger string
+     * Gets the length of the command trigger string.
      *
-     * @return length of the command trigger string
+     * @return length of the command trigger string.
      */
     public int getCommandTypeStringLength() {
         return commandTrigger.length();

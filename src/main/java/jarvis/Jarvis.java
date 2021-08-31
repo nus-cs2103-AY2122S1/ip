@@ -10,7 +10,7 @@ import jarvis.ui.Ui;
 import javafx.application.Platform;
 
 /**
- * Encapsulates the jarvis.Jarvis chatbot
+ * Encapsulates the Jarvis chatbot.
  */
 public class Jarvis {
     private TaskList taskList;
@@ -18,9 +18,9 @@ public class Jarvis {
     private Ui ui;
 
     /**
-     * Constructor for Jarvis
+     * Constructor for Jarvis.
      *
-     * @param storageFilePath Storage file path name
+     * @param storageFilePath Storage file path name.
      */
     public Jarvis(String storageFilePath) {
         this.ui = new Ui();
@@ -45,16 +45,16 @@ public class Jarvis {
     }
 
     /**
-     * Gets the greeting message to be shown to the user when in GUI mode
+     * Gets the greeting message to be shown to the user when in GUI mode.
      *
-     * @return Formatted greeting message
+     * @return Formatted greeting message.
      */
     public String getGreetingMessage() {
         return ui.getGreetingMessage().getFormattedMessage();
     }
 
     /**
-     * Launch the application in command line interface mode
+     * Launch the application in command line interface mode.
      */
     public void launchInCliMode() {
         Ui.showFormattedOutputMessage(ui.getGreetingMessage());

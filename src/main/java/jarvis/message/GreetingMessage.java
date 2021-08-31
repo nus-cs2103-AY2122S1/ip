@@ -2,7 +2,7 @@ package jarvis.message;
 
 
 /**
- * Encapsulates a greeting message that is shown when program starts
+ * Encapsulates a greeting message that is shown when program starts.
  */
 public class GreetingMessage extends OutputMessage {
     private static final String DEFAULT_GREETING_MESSAGE = String.format(
@@ -14,16 +14,16 @@ public class GreetingMessage extends OutputMessage {
     );
 
     /**
-     * Default constructor for GreetingMessage that contains DEFAULT_GREETING_MESSAGE
+     * Default constructor for GreetingMessage that contains DEFAULT_GREETING_MESSAGE.
      */
     public GreetingMessage() {
         super(GreetingMessage.DEFAULT_GREETING_MESSAGE);
     }
 
     /**
-     * Constructor for GreetingMessage that contains a custom message
+     * Constructor for GreetingMessage that contains a custom message.
      *
-     * @param message A custom greeting message
+     * @param message A custom greeting message.
      */
     public GreetingMessage(String message) {
         super(message);

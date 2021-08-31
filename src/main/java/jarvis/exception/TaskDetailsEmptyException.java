@@ -1,13 +1,13 @@
 package jarvis.exception;
 
 /**
- * Encapsulates an exception when the task details are empty
+ * Encapsulates an exception when the task details are empty.
  */
 public class TaskDetailsEmptyException extends JarvisException {
     /**
-     * Constructor for TaskDetailsEmptyException
+     * Constructor for TaskDetailsEmptyException.
      *
-     * @param emptyField The field that is empty
+     * @param emptyField The field that is empty.
      */
     public TaskDetailsEmptyException(String emptyField) {
         super(String.format(

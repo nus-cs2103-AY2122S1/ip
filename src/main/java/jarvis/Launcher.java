@@ -6,9 +6,9 @@ import javafx.application.Application;
 
 public class Launcher {
     /**
-     * Main method for the Jarvis application
+     * Main method for the Jarvis application.
      *
-     * @param args Command line arguments
+     * @param args Command line arguments.
      */
     public static void main(String[] args) {
         if (args.length > 0) {

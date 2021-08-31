@@ -1,22 +1,22 @@
 package jarvis.task;
 
 /**
- * Encapsulates the todo task which contains a description
+ * Encapsulates the todo task which contains a description.
  */
 public class Todo extends Task {
     /**
-     * Constructor for Todo
+     * Constructor for Todo.
      *
-     * @param description The todo task description
+     * @param description The todo task description.
      */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * String representation of an todo task
+     * String representation of an todo task.
      *
-     * @return String representation of a todo task
+     * @return String representation of a todo task.
      */
     @Override
     public String toString() {
@@ -24,9 +24,9 @@ public class Todo extends Task {
     }
 
     /**
-     * String representation of a todo task that is to be saved to storage file
+     * String representation of a todo task that is to be saved to storage file.
      *
-     * @return String representation that is to be saved
+     * @return String representation that is to be saved.
      */
     @Override
     public String toStorageFormatString() {

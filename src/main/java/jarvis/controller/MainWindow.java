@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
     private Image jarvisImage = new Image(this.getClass().getResourceAsStream("/images/jarvis.png"));
 
     /**
-     * Initializes the main window
+     * Initializes the main window.
      */
     @FXML
     public void initialize() {

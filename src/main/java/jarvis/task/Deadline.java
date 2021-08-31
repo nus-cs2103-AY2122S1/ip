@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import jarvis.exception.InvalidDateTimeInputException;
 
 /**
- * Encapsulates the deadline task which contains a description and a deadline
+ * Encapsulates the deadline task which contains a description and a deadline.
  */
 public class Deadline extends Task {
     private static final String INPUT_FORMAT = "dd-MM-yyyy HHmm";
@@ -15,11 +15,11 @@ public class Deadline extends Task {
     private LocalDateTime deadline;
 
     /**
-     * Constructor for Deadline
+     * Constructor for Deadline.
      *
-     * @param description The deadline task description
-     * @param deadline The task deadline
-     * @throws InvalidDateTimeInputException If deadline is not of proper format
+     * @param description The deadline task description.
+     * @param deadline The task deadline.
+     * @throws InvalidDateTimeInputException If deadline is not of proper format.
      */
     public Deadline(String description, String deadline) throws InvalidDateTimeInputException {
         super(description);
@@ -32,9 +32,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of a deadline task
+     * String representation of a deadline task.
      *
-     * @return String representation of a deadline task
+     * @return String representation of a deadline task.
      */
     @Override
     public String toString() {
@@ -44,9 +44,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of a deadline task that is to be saved to storage file
+     * String representation of a deadline task that is to be saved to storage file.
      *
-     * @return String representation that is to be saved
+     * @return String representation that is to be saved.
      */
     @Override
     public String toStorageFormatString() {

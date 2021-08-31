@@ -106,7 +106,7 @@ public class TaskList {
      */
     public TaskList getListWithKeyword(String keyword) {
         ArrayList<Task> taskArrayList = new ArrayList<>();
-        for (Task task: taskList) {
+        for (Task task : taskList) {
             if (task.toString().toLowerCase().contains(keyword)) {
                 taskArrayList.add(task);
             }

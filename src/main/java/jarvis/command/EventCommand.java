@@ -17,10 +17,10 @@ public class EventCommand extends Command {
     private String eventTime;
 
     /**
-     * Constructor for EventCommand
+     * Constructor for EventCommand.
      *
-     * @param userInputWithoutCommandTrigger User input without the command trigger
-     * @throws TaskDetailsEmptyException If any of the required details are empty
+     * @param userInputWithoutCommandTrigger User input without the command trigger.
+     * @throws TaskDetailsEmptyException If any of the required details are empty.
      */
     public EventCommand(String userInputWithoutCommandTrigger) throws TaskDetailsEmptyException {
         String[] splitStrings = Parser.getEventInfoArray(userInputWithoutCommandTrigger);
@@ -35,13 +35,13 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Creates the event task, adds to storage file and shows the ui message to user
+     * Creates the event task, adds to storage file and shows the ui message to user.
      *
-     * @param taskList The list in which the tasks are stored
-     * @param storage Storage to save or load tasks to hard-disk
-     * @param ui Ui to show information to the user
-     * @return A OutputMessage that needs to be shown to the user after execution
-     * @throws StorageFileException If there is an error when writing to storage file
+     * @param taskList The list in which the tasks are stored.
+     * @param storage Storage to save or load tasks to hard-disk.
+     * @param ui Ui to show information to the user.
+     * @return A OutputMessage that needs to be shown to the user after execution.
+     * @throws StorageFileException If there is an error when writing to storage file.
      */
     @Override
     public OutputMessage execute(TaskList taskList, Storage storage, Ui ui) throws StorageFileException {
