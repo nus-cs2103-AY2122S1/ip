@@ -17,20 +17,21 @@ public class FindCommand extends Command{
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        String response = "";
         switch (type) {
         case FIND_BY_DATE: {
 
             Task[] tasksOnDate = tasks.tasksOnDate(commands);
             for (Task task : tasksOnDate) {
-                System.out.println(task);
+                response += task + "\n";
             }
             break;
         }
         case FIND: {
             Task[] searchResults = tasks.findByKeyword(commands);
             for (Task task : searchResults) {
-                System.out.println(task);
+                response += task + "\n";
             }
             break;
         }
@@ -38,6 +39,6 @@ public class FindCommand extends Command{
             break;
         }
         }
-
+        return response;
     }
 }

@@ -14,11 +14,12 @@ public class UpdateCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        String response = "";
         if (commands.matches("\\d+")) {
             Task item = tasks.getItem(Integer.parseInt(commands) - 1);
             if (item != null) {
-                ui.printOutput(item.completeItem());
+                response = item.completeItem();
                 storage.updateFile(tasks);
             } else {
                 throw new DukeException("☹ OOPS!!! Input a valid index");
@@ -26,6 +27,7 @@ public class UpdateCommand extends Command {
         } else {
             throw new DukeException("☹ OOPS!!! Input a valid index");
         }
+        return response;
     }
     
 }

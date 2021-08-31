@@ -15,15 +15,11 @@ import duke.task.TaskList;
 import duke.DukeException;
 
 public class Storage {
-    private String filepath;
 
     /**
      * Constructor for Storage object.
-     *
-     * @param filepath path of file to be loaded or modified
      */
-    public Storage(String filepath) {
-        this.filepath = filepath;
+    public Storage() {
     }
 
     /**
@@ -35,9 +31,9 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> listOfTasks = new ArrayList<>();
         try {
-            File directory = new File("../../../data");
+            File directory = new File("data");
             directory.mkdir();
-            File data = new File("../../../data", "duke.txt");
+            File data = new File("data", "duke.txt");
             data.createNewFile();
             Scanner reader = new Scanner(data);
             while (reader.hasNextLine()) {
@@ -84,7 +80,7 @@ public class Storage {
      */
     public static void updateFile(TaskList l) {
         try {
-            FileWriter writer = new FileWriter("../../../data/duke.txt", false);
+            FileWriter writer = new FileWriter("data/duke.txt", false);
             writer.write(l.format());
             writer.close();
         } catch (IOException e) {

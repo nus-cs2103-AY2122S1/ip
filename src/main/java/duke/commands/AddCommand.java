@@ -14,19 +14,20 @@ public class AddCommand extends Command {
     private TaskType type;
     private String commands;
 
-    public AddCommand(TaskType type, String commands ) {
+    public AddCommand(TaskType type, String commands) {
         this.type = type;
         this.commands = commands;
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        String response = "";
         switch (type) {
         case TO_DO: {
             if (commands.length() > 0){
                 ToDo td = new ToDo(commands);
                 tasks.addToList(td);
-                ui.printOutput("Got it. I've added this task:\n" + td + "\nNow you have " + tasks.getLength() + " tasks in the list.");
+                response = "Got it. I've added this task:\n" + td + "\nNow you have " + tasks.getLength() + " tasks in the list.";
                 storage.updateFile(tasks);
             } else {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -42,7 +43,7 @@ public class AddCommand extends Command {
                     } else {
                         Deadline deadline = new Deadline(details[0], details[1]);
                         tasks.addToList(deadline);
-                        ui.printOutput("Got it. I've added this task:\n" + deadline + "\nNow you have " + tasks.getLength() + " tasks in the list.");
+                        response = "Got it. I've added this task:\n" + deadline + "\nNow you have " + tasks.getLength() + " tasks in the list.";
                         storage.updateFile(tasks);
                     }
                 } catch (DateTimeParseException e) {
@@ -64,7 +65,7 @@ public class AddCommand extends Command {
                     } else {
                         Event event = new Event(details[0], details[1]);
                         tasks.addToList(event);
-                        ui.printOutput("Got it. I've added this task:\n" + event + "\nNow you have " + tasks.getLength() + " tasks in the list.");
+                        response = "Got it. I've added this task:\n" + event + "\nNow you have " + tasks.getLength() + " tasks in the list.";
                         storage.updateFile(tasks);
                     }
                 } catch (DateTimeParseException e) {
@@ -80,5 +81,6 @@ public class AddCommand extends Command {
             break;
         }
         }
+        return response;
     }
 }

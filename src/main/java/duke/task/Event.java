@@ -1,4 +1,5 @@
 package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -13,8 +14,8 @@ public class Event extends Task {
      * @param at date/time of event.
      * @throws DateTimeParseException
      */
-    public Event(String input, String at) throws DateTimeParseException {
 
+    public Event(String input, String at) throws DateTimeParseException {
         super(input);
         int space = at.indexOf(" ");
         String format = space > 0 ? "d/MM/yyyy HHmm" : "d/MM/yyyy"; 
@@ -35,7 +36,7 @@ public class Event extends Task {
     }
 
     @Override
-    public  String toString() {
+    public String toString() {
         return "[E] " + super.toString() + "(at: " + this.at.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

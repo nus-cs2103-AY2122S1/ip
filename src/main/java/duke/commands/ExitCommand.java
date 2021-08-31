@@ -10,7 +10,7 @@ public class ExitCommand  extends Command {
         this.isExit = true;
     }
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printOutput("Bye. Hope to see you again soon!");
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        return "Bye. Hope to see you again soon!";
     }
 }
