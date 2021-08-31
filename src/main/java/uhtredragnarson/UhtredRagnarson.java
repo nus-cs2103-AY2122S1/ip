@@ -30,6 +30,11 @@ public class UhtredRagnarson {
         return ui.showWelcomeMessage();
     }
 
+    /**
+     * Returns a message based on the user's input command.
+     * @param userInput The command text that the user inputs.
+     * @return The message to be printed to the user.
+     */
     protected String getResponse(String userInput) {
         String result;
         try {
