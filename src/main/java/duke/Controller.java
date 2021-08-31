@@ -1,23 +1,13 @@
 package duke;
 
-import duke.MyList;
-import duke.Parser;
-import duke.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-
-import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-
-import java.io.File;
-import java.net.URL;
 
 public class Controller {
     @FXML
@@ -55,8 +45,8 @@ public class Controller {
         if (!this.command.equals("")) {
             dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
             this.dialogContainer.getChildren().addAll(
-                    new DialogBox(getUserDialog(), new ImageView(icon)),
-                    new DialogBox(getDukeResponse(), new ImageView(icon))
+                    new DialogBox(getUserDialog(), new ImageView(icon), true),
+                    new DialogBox(getDukeResponse(), new ImageView(icon), false)
             );
         }
     }
