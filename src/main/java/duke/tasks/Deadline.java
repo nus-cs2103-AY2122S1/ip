@@ -9,6 +9,12 @@ public class Deadline extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Constructs a Deadline object.
+     *
+     * @param description Deadline description
+     * @param date Date
+     */
     public Deadline(String description, LocalDate date) {
         super(description);
         this.date = date;
@@ -16,6 +22,13 @@ public class Deadline extends Task {
 
     }
 
+    /**
+     * Constructs a Deadline object.
+     *
+     * @param description Deadline description
+     * @param date Date
+     * @param time Time
+     */
     public Deadline(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;

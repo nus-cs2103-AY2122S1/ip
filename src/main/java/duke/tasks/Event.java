@@ -9,12 +9,25 @@ public class Event extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Constructs a Event object.
+     *
+     * @param description Event description
+     * @param date Date
+     */
     public Event(String description, LocalDate date) {
         super(description);
         this.date = date;
         this.time = null;
     }
 
+    /**
+     * Constructs a Event object.
+     *
+     * @param description Event description
+     * @param date Date
+     * @param time Time
+     */
     public Event(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;

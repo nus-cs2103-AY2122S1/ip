@@ -1,11 +1,10 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 
-/** 
+import duke.tasks.Task;
+
+/**
  * Class that handles an ArrayList of Tasks.
  */
 public class TaskList {
@@ -64,12 +63,17 @@ public class TaskList {
         }
         return res.substring(0, res.length() - 1);
     }
-    
+
+    /**
+     * Returns a String for Find command.
+     *
+     * @return String for Find
+     */
     public String stringifyTasksForFind(String keyword) {
         if (this.tasks.size() == 0) {
             return "No tasks added yet!";
         }
-        
+
         boolean found = false;
         StringBuilder res = new StringBuilder();
         for (int i = 0; i < this.tasks.size(); i++) {
@@ -77,9 +81,9 @@ public class TaskList {
             if (t.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 found = true;
                 res.append(i + 1).append(". ").append(t.toString()).append("\n");
-            }            
+            }
         }
-        
+
         if (!found) {
             return "No tasks match that keyword :(";
         } else {

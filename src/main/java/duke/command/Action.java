@@ -1,13 +1,13 @@
 package duke.command;
 
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidFormatException;
 import duke.exception.InvalidIntegerException;
 import duke.exception.InvalidTaskNumberException;
-import duke.Storage;
-import duke.TaskList;
 import duke.tasks.Task;
-import duke.Ui;
 
 /**
  * Class that handles the Done and Delete command
@@ -18,17 +18,23 @@ public class Action extends Command {
         DONE,
         DELETE
     }
-    
+
     private final Type type;
     private final String[] words;
 
+    /**
+     * Constructs an Action object for Done and Delete commands.
+     *
+     * @param type 0 for Done and 1 for Delete
+     * @param words User input split by whitespace
+     */
     public Action(int type, String[] words) {
         this.type = type == 0 ? Type.DONE : Type.DELETE;
         this.words = words;
     }
 
     /**
-     * Validates the input for Done and Delete commands and 
+     * Validates the input for Done and Delete commands and
      * executes the command
      *
      * @param taskList Current list of tasks
@@ -53,7 +59,7 @@ public class Action extends Command {
                 if (this.type == Type.DONE) {
                     Task t = taskList.get(index - 1);
                     t.markAsDone();
-                    ui.print("Nice, I've marked this task as done!\n   " 
+                    ui.print("Nice, I've marked this task as done!\n   "
                             + t.toString());
                 } else if (this.type == Type.DELETE) {
                     Task t = taskList.remove(index - 1);
@@ -63,7 +69,7 @@ public class Action extends Command {
                         plurality += "s";
                     }
 
-                    ui.print("Noted, I've removed this task:\n   " 
+                    ui.print("Noted, I've removed this task:\n   "
                             + t.toString() + "\nNow you have " + taskList.getSize()
                             + plurality + " in the list.");
                 }

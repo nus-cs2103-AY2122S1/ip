@@ -1,26 +1,22 @@
 package duke;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
+
 import duke.exception.DukeException;
 import duke.exception.LoadingError;
 import duke.exception.SavingError;
-
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
 
 /**
  * Class that handles laoding and saving tasks to a file.
@@ -39,9 +35,9 @@ public class Storage {
     }
 
     /**
-     * Returns an ArrayList<Task> of loaded Tasks from the file.
+     * Returns an ArrayList of loaded Tasks from the file.
      *
-     * @return ArrayList<Task> of tasks
+     * @return ArrayList of Tasks
      * @throws DukeException that indicates what the issue was in opening/parsing the file
      */
     public ArrayList<Task> load() throws DukeException {
@@ -124,7 +120,7 @@ public class Storage {
         }
 
         try {
-            Files.write(Paths.get(home,this.filepath), text.getBytes());
+            Files.write(Paths.get(home, this.filepath), text.getBytes());
         } catch (IOException e) {
             throw new SavingError("Could not write to file :(");
         }

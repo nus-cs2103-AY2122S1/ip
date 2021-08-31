@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.tasks.Task;
 import duke.Ui;
+import duke.exception.DukeException;
+import duke.tasks.Task;
 
 public class Add extends Command {
 

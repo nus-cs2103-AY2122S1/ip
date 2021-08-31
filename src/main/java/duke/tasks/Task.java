@@ -4,13 +4,13 @@ package duke.tasks;
  * Class to encapsulate a Task
  */
 public class Task {
-    
+
     protected String description;
     protected boolean isDone;
 
     /**
      * Task constructor.
-     * 
+     *
      * @param description String description of task
      */
     public Task(String description) {
@@ -20,7 +20,7 @@ public class Task {
 
     /**
      * Returns string representation of status, X for done and empty otherwise.
-     * 
+     *
      * @return String icon
      */
     public String getStatusIcon() {
@@ -35,7 +35,7 @@ public class Task {
     public String getSaveIcon() {
         return (isDone ? "1" : "0");
     }
-    
+
     public String getDescription() {
         return this.description;
     }
@@ -54,7 +54,7 @@ public class Task {
 
     /**
      * String for saving a task.
-     * 
+     *
      * @return String for saving
      */
     public String toSaveString() {

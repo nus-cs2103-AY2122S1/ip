@@ -26,7 +26,7 @@ public class Ui {
     public Ui () {
         this.sc = new Scanner(System.in);
     }
-    
+
     private static String wrapOutput(String s) {
         // Align list items properly
         // Adapted regex from https://stackoverflow.com/questions/15888934/how-to-indent-a-multi-line-paragraph-being-written-to-the-console-in-java
@@ -72,7 +72,7 @@ public class Ui {
 
     /**
      * Reads user input in.
-     * 
+     *
      * @return User input as string
      */
     public String readCommand() {

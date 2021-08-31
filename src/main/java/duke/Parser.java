@@ -1,34 +1,32 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 import duke.command.Action;
 import duke.command.Add;
 import duke.command.Command;
 import duke.command.End;
 import duke.command.Find;
 import duke.command.List;
-
 import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidFormatException;
 import duke.exception.MissingDescriptionException;
 import duke.exception.UnknownCommandException;
-
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * Class that handles the user input parsing to something meaningful.
  */
 public class Parser {
 
-    /** 
+    /**
      * Enum class to distinguish between done, delete, deadline and event commands.
-     * Used within Parser and Action classes. 
+     * Used within Parser and Action classes.
      */
     private enum Type {
         DEADLINE,
@@ -53,7 +51,7 @@ public class Parser {
             String[] words = command.split(" ");
             String mainCommand = words[0];
 
-            switch (mainCommand) { 
+            switch (mainCommand) {
             case "done":
                 c = new Action(0, words);
                 break;
@@ -62,7 +60,7 @@ public class Parser {
                 break;
             case "find":
                 c = new Find(words);
-                break;                    
+                break;
             case "todo":
                 String[] split = command.split(" ");
                 if (split.length < 2) {
@@ -85,7 +83,7 @@ public class Parser {
 
         return c;
     }
-    
+
     private static Task handleFormat(String[] split, String message, Type type) throws DukeException {
         Task t;
         if (split.length < 2) {

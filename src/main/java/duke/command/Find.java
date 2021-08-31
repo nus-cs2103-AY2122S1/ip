@@ -12,11 +12,11 @@ import duke.exception.InvalidFormatException;
 public class Find extends Command {
 
     private final String[] words;
-    
+
     public Find(String[] words) {
         this.words = words;
     }
-    
+
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (this.words.length != 2) {
