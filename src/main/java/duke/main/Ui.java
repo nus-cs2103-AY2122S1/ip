@@ -35,11 +35,11 @@ public class Ui {
 
     /**
      * Returns an error message.
-     * @param errorMessage The error message to be displayed.
+     * @param error The error that occurred.
      * @return String The error message.
      */
-    public String displayError(String errorMessage) {
-        return errorMessage;
+    public String displayError(DukeException error) {
+        return error.getMessage();
     }
 
     /**
