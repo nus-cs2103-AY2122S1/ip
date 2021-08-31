@@ -1,11 +1,6 @@
 package viper;
 
-import commands.Command;
-import commands.AddCommand;
-import commands.ByeCommand;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.ListCommand;
+import commands.*;
 
 import exceptions.DukeException;
 
@@ -27,6 +22,8 @@ public class Parser {
                     splitStr[0].equalsIgnoreCase("deadline") ||
                     splitStr[0].equalsIgnoreCase("event")) {
                 return new AddCommand(str);
+            } else if (splitStr[0].equalsIgnoreCase("find")) {
+                return new FindCommand(splitStr[1]);
             } else if (splitStr[0].equalsIgnoreCase("bye")) {
                 return new ByeCommand();
             } else {

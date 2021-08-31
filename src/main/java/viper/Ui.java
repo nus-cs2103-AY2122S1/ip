@@ -1,5 +1,8 @@
 package viper;
 
+import tasks.Task;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -15,7 +18,7 @@ public class Ui {
         return sc.nextLine();
     }
     
-    public void showMessage (String[] strings) {
+    public void showMessage(String[] strings) {
         System.out.println(div);
         for (String string : strings) {
             System.out.println(indent + string);
@@ -23,11 +26,11 @@ public class Ui {
         System.out.println(div);
     }
     
-    public void printLine (String str) {
+    public void printLine(String str) {
         System.out.println(indent + str);
     }
     
-    public void printDiv () {
+    public void printDiv() {
         System.out.println(div);
     }
     
@@ -58,10 +61,25 @@ public class Ui {
         showMessage(msg);
     }
 
-    public void showListHeader (String[] strings) {
+    public void showListHeader(String[] strings) {
         System.out.println(div);
         for (String string : strings) {
             System.out.println(indent + string);
         }
+    }
+    
+    public void showList(TaskList taskList, String keyword) {
+        System.out.println(div);
+        if (taskList.getSize() > 0) {
+            printLine("This is what I have found based on the keyword: " + keyword);
+            for (int i = 0; i < taskList.getSize(); i++) {
+                int taskNo = i + 1;
+                Task curr = taskList.getTask(i);
+                printLine(taskNo + "." + curr.toString());
+            }
+        } else {
+            printLine("Oops, based on your keyword: " + keyword + ", I am not able to find any match :(");
+        }
+        System.out.println(div);
     }
 }

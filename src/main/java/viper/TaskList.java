@@ -43,4 +43,15 @@ public class TaskList {
             tasks.get(index).setDone();
         }
     }
+    
+    public TaskList findTask(String keyword) {
+        ArrayList<Task> resultTasks = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currTask = tasks.get(i);
+            if (currTask.toString().contains(keyword)) {
+                resultTasks.add(currTask);
+            }
+        }
+        return new TaskList(resultTasks);
+    }
 }
