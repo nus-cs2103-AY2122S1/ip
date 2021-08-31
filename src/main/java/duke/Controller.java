@@ -1,11 +1,15 @@
 package duke;
 
+import duke.MyList;
+import duke.Parser;
+import duke.Storage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -16,16 +20,6 @@ import java.io.File;
 import java.net.URL;
 
 public class Controller {
-    @FXML
-    private Button addBth;
-    @FXML
-    private Button deleteBtn;
-    @FXML
-    private Button listAllBtn;
-    @FXML
-    private Button markBtn;
-    @FXML
-    private Button sendBtn;
     @FXML
     private VBox dialogContainer;
     @FXML
@@ -38,6 +32,7 @@ public class Controller {
     private String command;
     private MyList list;
     private Storage storage;
+    private Image icon = new Image("https://static.zerochan.net/Shinomiya.Kaguya.full.2917139.png");
 
     public Controller() {
         this.list = new MyList();
@@ -59,17 +54,15 @@ public class Controller {
         this.userInput.setText("");
         if (!this.command.equals("")) {
             dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-            this.dialogContainer.getChildren().addAll(getUserDialog(), getDukeResponse());
+            this.dialogContainer.getChildren().addAll(
+                    new DialogBox(getUserDialog(), new ImageView(icon)),
+                    new DialogBox(getDukeResponse(), new ImageView(icon))
+            );
         }
-
-
     }
 
     public Label getUserDialog() {
         Label textToAdd = new Label(this.command);
-        textToAdd.setFont(new Font(15));
-        textToAdd.setWrapText(true);
-        textToAdd.setPadding(new Insets(10));
         return textToAdd;
     }
 
@@ -77,9 +70,6 @@ public class Controller {
         Parser p = new Parser(this.list, this.storage);
         String response = p.dukeResponse(this.command);
         Label textToAdd = new Label(response);
-        textToAdd.setWrapText(true);
-        textToAdd.setFont(new Font(15));
-        textToAdd.setPadding(new Insets(10));
         return textToAdd;
 
     }
