@@ -142,11 +142,6 @@ public class Parser {
 
     public String dukeResponse(String command) {
         Scanner s = new Scanner(command);
-        if (!s.hasNext()) {
-            System.out.println("rip scanner");
-            return null;
-        }
-
         String input = s.next();
         String response = "";
 
