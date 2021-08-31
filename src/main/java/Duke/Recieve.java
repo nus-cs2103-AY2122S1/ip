@@ -1,7 +1,6 @@
 package Duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * An UI that recieve's user's input to run Duke
@@ -9,7 +8,6 @@ import java.util.Scanner;
  * UI also carries the parser created.
  */
 public class Recieve {
-    private String input;
     private Parser parser;
 
     /**
@@ -22,45 +20,33 @@ public class Recieve {
 
     /**
      * Runs the Duke Application.
+     *
+     * @param input The user's input.
+     * @return Returns the string representation of the response from Duke.
      */
-    public void run() {
-        System.out.println("Hello! I'm Duke\n" +
-                "To add a Duke.Todo, type -> todo <Description> \n" +
-                "To add a Duke.Deadline, type -> deadline <Description> /by <deadline>\n" +
-                "To add an Duke.Event, type -> event <Description> /at <details>\n" +
-                "To mark as done, type -> done <task list index>\n" +
-                "To see all of your tasks, type -> list\n" +
-                "To end session, type -> bye\n" +
-                "What can I do for you today?");
+    public String run(String input) {
 
-        Scanner sc = new Scanner(System.in);
-
-        while (true) {
             try {
                 parser.getStorage().load();
-                input = sc.nextLine();
 
                 if (input.equals("bye")) {
-                    parser.endSession();
-                    break;
+                    return parser.endSession();
                 } else if (input.startsWith("done ") || input.startsWith("done")) {
-                    parser.done(input);
+                    return parser.done(input);
                 } else if (input.equals("list")) {
-                    parser.list();
+                    return parser.list();
                 } else if (input.startsWith("delete ") || input.startsWith("delete")) {
-                    parser.delete(input);
+                    return parser.delete(input);
                 } else if (input.startsWith("find ") || input.startsWith("find")) {
-                    parser.find(input);
+                    return parser.find(input);
                 } else {
-                    parser.add(input);
+                    return parser.add(input);
                 }
             } catch (DukeException | InvalidTaskIndexException |
                     InvalidFormatException | IOException e) {
-                System.out.println(e.toString());
+                return e.toString();
             }
         }
-        sc.close();
-    }
 
 
 }

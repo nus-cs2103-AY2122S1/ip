@@ -32,12 +32,12 @@ public class TaskList {
      * @param index The index of the task.
      * @return An updated array list of tasks.
      */
-    public ArrayList<Task> markDone(int index) {
+    public String markDone(int index) {
 
         tasks.get(index).markAsDone();
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(tasks.get(index).toString());
-            return tasks;
+
+        String temp = tasks.get(index).toString();
+        return "Nice! I've marked this task as done: \n" + temp;
     }
 
     /**
@@ -46,15 +46,13 @@ public class TaskList {
      * @param details The description of the Todo.
      * @return The updated array list of tasks.
      */
-    public ArrayList<Task> addTodo(String details) {
+    public String addTodo(String details) {
         Todo task = new Todo(details);
 
         tasks.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+        return "Got it. I've added this task: /n" + task + "\n" +
+                "Now you have " + tasks.size() + " task(s) in the list.";
 
-        return tasks;
     }
 
     /**
@@ -64,15 +62,13 @@ public class TaskList {
      * @param date The date of the Deadline.
      * @return The updated array list of tasks.
      */
-    public ArrayList<Task> addDeadline(String details, LocalDate date) {
+    public String addDeadline(String details, LocalDate date) {
         Deadline task = new Deadline(details, date);
 
         tasks.add(task);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
+        return "Got it. I've added this task: \n" + task + "\n" +
+                "Now you have " + tasks.size() + " task(s) in the list.";
 
-        return tasks;
     }
 
     /**
@@ -82,16 +78,13 @@ public class TaskList {
      * @param at The details of the event.
      * @return The updated array list of tasks.
      */
-    public ArrayList<Task> addEvent(String details, String at) {
+    public String addEvent(String details, String at) {
         Event task = new Event(details, at);
         tasks.add(task);
 
 
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
-
-        return tasks;
+        return "Got it. I've added this task: \n" + task + "\n" +
+                "Now you have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -100,30 +93,29 @@ public class TaskList {
      * @param index The task index.
      * @return An updated array list of tasks.
      */
-    public ArrayList<Task> deleteTask(int index) {
+    public String deleteTask(int index) {
         String temp = tasks.get(index).toString();
 
         tasks.remove(index);
 
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println(temp);
-
-        System.out.println("Now you have " + tasks.size() + " task(s) in the list.");
-
-        return tasks;
+        return "Got it. I've removed this task: \n" + temp + "\n" +
+                "Now you have " + tasks.size() + " task(s) in the list.";
     }
 
     /**
      * Lists out all tasks in the Task List.
      */
-    public void listTasks() {
+    public String listTasks() {
         if (tasks.size() == 0) {
-            System.out.println("There is no task for now :)");
+            return "There is no task for now :)";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            String res = "Here are the tasks in your list: \n";
+
             for (int i = 1; i < tasks.size() + 1; i++) {
-                System.out.println(i + "." + tasks.get(i - 1).toString());
+                String task = i + "." + tasks.get(i - 1).toString() + "\n";
+                res = res + task;
             }
+            return res;
         }
     }
 
