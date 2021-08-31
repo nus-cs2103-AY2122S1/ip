@@ -19,9 +19,13 @@ import javafx.scene.paint.Color;
 public class UiPane extends AnchorPane {
     /* The object representing the main application class. Commands are sent back to this object to process. */
     private final Duke duke;
+    /* The Label for the message in the UI */
     private Label messageLabel = new Label();
+    /* The TextField to accept commands in the UI */
     private TextField commandField = new TextField();
+    /* The Execute button in UI */
     private Button execButton = new Button("Execute");
+    /* The TaskListPane in the UI */
     private TaskListPane taskListPane = new TaskListPane();
 
     /**
