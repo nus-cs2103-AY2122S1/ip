@@ -30,7 +30,7 @@ public class Event extends Task {
      */
     public Event(String description, String date, String time) {
         super(description, "[E]");
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM dd yyyy"));
         this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("h:ma"));
     }
 
@@ -43,7 +43,7 @@ public class Event extends Task {
     public String getDescription() {
         return super.getDescription()
                 + " (at: "
-                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + this.time.format(DateTimeFormatter.ofPattern(" h:mma"))
                 + ")";
     }
