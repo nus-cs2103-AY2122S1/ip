@@ -1,13 +1,13 @@
 package kayu;
 
+import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import kayu.commands.Command;
 import kayu.exception.DukeException;
 import kayu.exception.StorageException;
 import kayu.parser.Parser;
-import kayu.service.ChatBot;
+import kayu.service.Logger;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
 import kayu.task.Task;
@@ -21,70 +21,90 @@ import kayu.task.Task;
  */
 public class Kayu {
 
+    private static final String GREETING = "Hello!\n"
+            + "I'm Kayu, your alternative personal task management to Duke!\n"
+            + "What can I do for you?";
+    
     private final Parser parser = new Parser();
     private final TaskList taskList = new TaskList();
     private final Storage storage = new Storage();
-    private final ChatBot chatBot = new ChatBot();
-    private final Scanner scanner = new Scanner(System.in);
+    private final Logger logger = new Logger();
+    
+    private boolean isRecentCommandBye = false;
 
     /**
-     * Runs the whole program process. Greets user, loads data,
-     * reads commands, and terminates upon {@link kayu.commands.ByeCommand#COMMAND_WORD}.
+     * Returns whether the recent command parsed and executed is a {@link kayu.commands.ByeCommand}.
+     *
+     * @return Boolean true if recent command is a {@link kayu.commands.ByeCommand}, else false.
      */
-    public void runProgram() {
-        chatBot.printLogo();
-        initializeData();
-        chatBot.printGreetingMessage();
-        readCommandsAndExecute();
-        chatBot.printExitMessage();
+    public boolean isRecentCommandBye() {
+        return isRecentCommandBye;
+    }
+
+    /**
+     * Returns the greeting message for user.
+     *
+     * @return A String greeting message.
+     */
+    public String getGreeting() {
+        return GREETING;
     }
 
     /**
      * Initializes the data stored in file to taskList.
      */
-    public void initializeData() {
+    public void initialize() {
         try {
+            logger.printLogo();
+            logger.printMessage(GREETING);
             List<Task> tasks = storage.load();
             taskList.initializeTasks(tasks);
+            
         } catch (StorageException exception) {
-            chatBot.printError(exception.getMessage());
-            terminate();
+            logger.printError(exception.getMessage());
+            exit(); // force terminate
         }
     }
 
     /**
-     * Reads the commands inputted by user, parses them into {@link kayu.commands.Command}
-     * and executes them. {@link kayu.service.ChatBot} helps output the responses from such
-     * executions.
+     * Executes the command fed by user and returns the response string.
+     *
+     * @param userInput User input string to parse and execute.
+     * @return A String response from the parsing and execution of the command.
      */
-    public void readCommandsAndExecute() {
-        Command command;
-        do {
-            String userInput = scanner.nextLine().trim();
-            command = parser.parseToCommand(userInput);
-            try {
-                String feedback = command.execute(taskList);
-                List<Task> tasks = taskList.getTasks();
-                storage.saveTasks(tasks);
-                chatBot.printMessage(feedback);
+    public String getResponse(String userInput) {
+        String feedback;
+        Command command = parser.parseToCommand(userInput);
+        isRecentCommandBye = (command.isBye()); // updates internally as a field
+        
+        try {
+            feedback = command.execute(taskList);
+            List<Task> tasks = taskList.getTasks();
+            storage.saveTasks(tasks);
+            logger.printMessage(feedback);
 
-            } catch (DukeException exception) {
-                chatBot.printError(exception.getMessage());
+        } catch (DukeException exception) {
+            feedback = exception.getMessage();
+            logger.printError(feedback);
 
-            } catch (StorageException exception) {
-                chatBot.printErrorOnSave();
-                terminate();
-            }
-        } while (!command.isBye());
-        scanner.close();
+        } catch (StorageException exception) {
+            feedback = exception.getMessage();
+            logger.printError(feedback);
+            logger.print(Arrays.toString(exception.getStackTrace()));
+            exit(); // force terminate
+        }
+        return feedback;
     }
 
     /**
-     * Terminates the program, based on {@link kayu.exception.StorageException}.
+     * Exits the whole program.
      */
-    public void terminate() {
-        chatBot.printTerminateMessage();
-        scanner.close();
-        System.exit(1); // exit with error status
+    public void exit() {
+        try {
+            Thread.sleep(300); // sleep for 0.3s
+        } catch (InterruptedException exception) {
+            // fall through
+        }
+        System.exit(0);
     }
 }

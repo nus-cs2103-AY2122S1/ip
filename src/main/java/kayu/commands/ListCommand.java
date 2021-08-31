@@ -38,7 +38,7 @@ public class ListCommand extends Command {
         
         StringBuilder tasksAsString = new StringBuilder(MESSAGE_LIST_CONTENTS);
         for (int idx = 0; idx < tasks.size(); idx++) {
-            tasksAsString.append(String.format("\n\t%d. %s", idx + 1, tasks.get(idx)));
+            tasksAsString.append(String.format("\n%d. %s", idx + 1, tasks.get(idx)));
         }
         return tasksAsString.toString();
     }

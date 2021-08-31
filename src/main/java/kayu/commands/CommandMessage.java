@@ -7,18 +7,19 @@ public class CommandMessage {
 
     // Message formats.
     protected static final String MESSAGE_EMPTY_LIST = "List is empty, try adding some tasks first.";
-    protected static final String MESSAGE_TASK_DONE = "Nice! I've marked this task as done:\n\t%s";
+    protected static final String MESSAGE_TASK_DONE = "Nice! I've marked this task as done:\n  %s";
     protected static final String MESSAGE_LIST_CONTENTS = "Here are the task(s) in your list:";
     protected static final String MESSAGE_MATCHING_CONTENTS = "Here are the matching task(s) to '%s' in your list:";
     protected static final String MESSAGE_NO_MATCHING_CONTENTS = "There are no matching tasks to '%s' in your list:";
+    protected static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
     protected static final String MESSAGE_DELETED_TASK =
-            "Noted. I've removed this task:\n\t%s\nNow you have %d task(s) in the list.";
+            "Noted. I've removed this task:\n  %s\nNow you have %d task(s) in the list.";
     protected static final String MESSAGE_CREATED_TODO =
-            "Got it. I've added this TODO task:\n\t%s\nNow you have %d task(s) in the list.";
+            "Got it. I've added this TODO task:\n  %s\nNow you have %d task(s) in the list.";
     protected static final String MESSAGE_CREATED_EVENT =
-            "Got it. I've added this EVENT task:\n\t%s\nNow you have %d task(s) in the list.";
+            "Got it. I've added this EVENT task:\n  %s\nNow you have %d task(s) in the list.";
     protected static final String MESSAGE_CREATED_DEADLINE =
-            "Got it. I've added this DEADLINE task:\n\t%s\nNow you have %d task(s) in the list.";
+            "Got it. I've added this DEADLINE task:\n  %s\nNow you have %d task(s) in the list.";
 
     // Error formats.
     protected static final String ERROR_EMPTY_COMMAND = "Instruction cannot be empty.";

@@ -1,6 +1,6 @@
 package kayu.storage;
 
-import static kayu.storage.Storage.INVALID_TASK_FORMAT;
+import static kayu.storage.Storage.UNABLE_TO_PARSE_TASK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -102,7 +102,7 @@ public class StorageTest {
             fail();
             
         } catch (StorageException exception) {
-            String expected = String.format(INVALID_TASK_FORMAT, problematicLine);
+            String expected = String.format(UNABLE_TO_PARSE_TASK, problematicLine);
             assertEquals(expected, exception.getMessage());
         }
     }

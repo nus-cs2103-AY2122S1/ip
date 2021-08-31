@@ -27,7 +27,8 @@ public class Storage {
     protected static final String UNABLE_TO_CREATE_DIRECTORY = "Load/save directory ./%s cannot be created.";
     protected static final String UNABLE_TO_CREATE_FILE = "Load/save file ./%s cannot be created.";
     protected static final String UNABLE_TO_LOAD_PATH = "Path ./%s cannot be accessed/loaded.";
-    protected static final String INVALID_TASK_FORMAT = "'%s' is an invalid Task entry.";
+    protected static final String UNABLE_TO_SAVE = "Error updating task file.";
+    protected static final String UNABLE_TO_PARSE_TASK = "'%s' is an invalid Task entry.";
     
     // Default task file directory.
     private String taskDirectoryPath = "data";
@@ -130,10 +131,10 @@ public class Storage {
                 return new Deadline(desc, isDone, date, time);
                 
             default:
-                throw new StorageException(String.format(INVALID_TASK_FORMAT, stringTask));
+                throw new StorageException(String.format(UNABLE_TO_PARSE_TASK, stringTask));
             }
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException exception) {
-            throw new StorageException(String.format(INVALID_TASK_FORMAT, stringTask));
+            throw new StorageException(String.format(UNABLE_TO_PARSE_TASK, stringTask));
         }
     }
 
@@ -152,7 +153,7 @@ public class Storage {
             Files.write(filePath, taskLines);
             
         } catch (IOException exception) {
-            throw new StorageException(String.format(UNABLE_TO_LOAD_PATH, taskFilePath));
+            throw new StorageException(UNABLE_TO_SAVE);
         }
     }
 }

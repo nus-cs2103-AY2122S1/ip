@@ -3,7 +3,7 @@ package kayu.service;
 /**
  * Communicates to the user on the command line through {@link kayu.Kayu}.
  */
-public class ChatBot {
+public class Logger {
 
     private static final String LOGO = "\n"
             + " /$$   /$$  /$$$$$$  /$$     /$$ /$$   /$$\n"
@@ -14,28 +14,15 @@ public class ChatBot {
             + "| $$\\  $$ | $$  | $$    | $$    | $$  | $$\n"
             + "| $$ \\  $$| $$  | $$    | $$    |  $$$$$$/\n"
             + "|__/  \\__/|__/  |__/    |__/     \\______/ \n";
+
     private static final String LINE_SPLIT = "____________________________________"
             + "_______________________________________";
-    private static final String GREETING = "Hello!\n"
-            + "I'm Kayu, your alternative personal task management to Duke!\n"
-            + "What can I do for you?";
-    private static final String BYE = "Bye. Hope to see you again soon!";
-    private static final String ERROR_ON_SAVE = "Error updating task file.";
-    private static final String ERROR_EXIT = "Please check your saved file, exiting program...";
-
-    /** Prints logo. */
+    
+    /**
+     * Prints logo.
+     */
     public void printLogo() {
-        print(LOGO);
-    }
-
-    /** Prints greeting message. */
-    public void printGreetingMessage() {
-        printMessage(GREETING);
-    }
-
-    /** Prints a closing statement before program terminates. */
-    public void printExitMessage() {
-        printMessage(BYE);
+        printMessage(LOGO);
     }
 
     /**
@@ -44,19 +31,7 @@ public class ChatBot {
      * @param message Message to display within {@link #LINE_SPLIT}.
      */
     public void printMessage(String message) {
-        if (!message.isBlank()) {
-            print(LINE_SPLIT + '\n' + message + '\n' + LINE_SPLIT + '\n');
-        }
-    }
-
-    /** Generates an error on save message. */
-    public void printErrorOnSave() {
-        printError(ERROR_ON_SAVE);
-    }
-
-    /** Generates an exit error message. */
-    public void printTerminateMessage() {
-        printMessage(ERROR_EXIT);
+        print(message + '\n' + LINE_SPLIT);
     }
 
     /**
@@ -74,6 +49,6 @@ public class ChatBot {
      * @param errorMessage Error message to display.
      */
     public void printError(String errorMessage) {
-        printMessage("=( Error: " + errorMessage);
+        printMessage("Error: " + errorMessage);
     }
 }

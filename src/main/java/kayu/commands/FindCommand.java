@@ -47,7 +47,7 @@ public class FindCommand extends Command {
         String header = String.format(MESSAGE_MATCHING_CONTENTS, keyword);
         StringBuilder resultTasksAsString = new StringBuilder(header);
         taskMap.forEach((number, task) -> {
-            String line = String.format("\n\t%d. %s", number + 1, task);
+            String line = String.format("\n%d. %s", number + 1, task);
             resultTasksAsString.append(line);
         });
         
