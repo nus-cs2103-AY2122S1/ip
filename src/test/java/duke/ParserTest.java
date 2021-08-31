@@ -17,15 +17,6 @@ public class ParserTest {
         TaskList taskList = new TaskList();
         Storage storage = new Storage("./data/duke.txt");
         Parser parser = new Parser(taskList, storage);
-        assertFalse(parser.parseCommand("bye"));
+        assertEquals("bye", parser.parseCommand("bye"));
     }
-
-    @Test
-    public void listTest() throws DukeException {
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage("./data/duke.txt");
-        Parser parser = new Parser(taskList, storage);
-        assertTrue(parser.parseCommand("list"));
-    }
-
 }

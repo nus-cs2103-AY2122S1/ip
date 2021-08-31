@@ -46,4 +46,13 @@ public class Ui {
     public void showError(DukeException error) {
         System.err.println(error.getMessage());
     }
+
+    /**
+     * Displays a response from Duke.
+     *
+     * @param response the message to be displayed.
+     */
+    public void display(String response) {
+        System.out.println(response);
+    }
 }
