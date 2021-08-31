@@ -24,6 +24,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+
+    /** An instance of Duke. */
     private Duke duke;
 
     /** Duke dialog box image. */
