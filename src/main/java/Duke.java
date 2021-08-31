@@ -1,3 +1,4 @@
+import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -15,6 +16,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.Scanner;
 
 /**
  * Duke is a personal assistant chatbot that helps keep track of various tasks.
@@ -64,13 +67,22 @@ public class Duke extends Application {
      * Starts the Duke program.
      */
     public void run() {
-        boolean isRunning = true;
-        ui.intro();
         ui.greet();
+        ui.intro();
+        boolean isRunning = true;
         parser = new Parser(tasks, storage);
+        Scanner sc = new Scanner(System.in);
+        String input;
+
         while (isRunning) {
-            isRunning = parser.parseCommand();
+            input = sc.nextLine();
+            if (parser.parseCommand(input).equals("Bye!")) {
+                isRunning = false;
+            } else {
+                Ui.printMessage(parser.parseCommand(input));
+            }
         }
+        Ui.exit();
     }
 
     /**
@@ -108,7 +120,13 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        parser = new Parser(tasks, storage);
+        String response = parser.parseCommand(input);
+        if (response == null) {
+            return "I cannot understand what you are saying!";
+        } else {
+            return response;
+        }
     }
 
     @Override
@@ -175,6 +193,8 @@ public class Duke extends Application {
     }
 
     public static void main(String[] args) {
-        new Duke(LOCATION).run();
+//        new Duke(LOCATION).run();
+        Duke duke = new Duke();
+        duke.run();
     }
 }
