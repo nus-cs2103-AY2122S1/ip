@@ -4,7 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import task.Task;
 
-import java.io.*;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -13,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Tests the functionality of the Storage class.
  */
 public class StorageTest {
-    Storage testStorage = new Storage("data", "duke.txt");
+    private final Storage testStorage = new Storage("data", "duke.txt");
 
     /**
      * Tests the Storage load function with an empty list.
@@ -34,18 +39,18 @@ public class StorageTest {
         FileWriter writer = new FileWriter(duke, true);
         writer.write("bruh");
         writer.close();
-        
+
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newOut));
-        
+
         testStorage.load();
         FileWriter rewriter = new FileWriter(duke);
-        
-        String expected = "  __________________________________________________________________\n" 
-                + "  Loading Duke...\n" 
-                + "  __________________________________________________________________\n" 
-                + "\n" 
-                + "  OOPS!!! There was a problem with reading tasks in the hard disk!\n" 
+
+        String expected = "  __________________________________________________________________\n"
+                + "  Loading Duke...\n"
+                + "  __________________________________________________________________\n"
+                + "\n"
+                + "  OOPS!!! There was a problem with reading tasks in the hard disk!\n"
                 + "  Check out duke.txt for any erroneous entries or incorrect formatting.\n";
 
         assertEquals(expected, newOut.toString());
