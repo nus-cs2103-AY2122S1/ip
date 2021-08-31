@@ -1,7 +1,7 @@
 package duke;
 
-import java.io.*;
-import java.lang.module.FindException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**

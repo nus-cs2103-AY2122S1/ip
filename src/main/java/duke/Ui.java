@@ -6,10 +6,10 @@ import java.util.ArrayList;
  * Deals with the interaction of a user.
  */
 public class Ui {
-    final private String INTRO = "Hello! I'm Duke\n" +
-            "What can I do for you today?";
+    private final String INTRO = "Hello! I'm Duke\n"
+            + "What can I do for you today?";
 
-    final private String OUTRO = "Bye. Hope to see you again soon!";
+    private final String OUTRO = "Bye. Hope to see you again soon!";
 
     /**
      * Prints intro message.
@@ -51,16 +51,16 @@ public class Ui {
     /**
      * Prints the task added.
      *
-     * @param currentTask The task added.
+     * @param description The task added.
      * @param list The list of tasks.
      */
-    public void showListMessage(String desc, ArrayList<Task> list) {
-        System.out.format("Here are the %s tasks in your list:\n", desc);
+    public void showListMessage(String description, ArrayList<Task> list) {
+        System.out.format("Here are the %s tasks in your list:\n", description);
         for (int i = 0; i < list.size(); i++) {
             Task currentTask = list.get(i);
             System.out.println((i + 1) + "." + currentTask.toString());
         }
-        System.out.format("You have a total of " + list.size() + " %s tasks.\n", desc);
+        System.out.format("You have a total of " + list.size() + " %s tasks.\n", description);
     }
 
     public void showTaskMessage(Task currentTask, ArrayList<Task> list) {

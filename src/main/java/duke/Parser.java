@@ -6,10 +6,10 @@ import java.io.IOException;
  * Parser class to parse the input commands by the user.
  */
 public class Parser {
-    String command;
-    Ui ui;
-    Storage storage;
-    TaskList tasks;
+    private String command;
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
 
     enum Activity {
         TODO, DONE, EVENT, DELETE, DEADLINE, BYE, LIST, NORMAL, FIND
@@ -62,7 +62,7 @@ public class Parser {
             activity = Activity.EVENT;
         } else if (command.startsWith("deadline")) {
             activity = Activity.DEADLINE;
-        } else if (command.startsWith("delete")){
+        } else if (command.startsWith("delete")) {
             activity = Activity.DELETE;
         } else if (command.startsWith("find")) {
             activity = Activity.FIND;

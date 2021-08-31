@@ -11,7 +11,6 @@ import java.util.Scanner;
  */
 public class Storage {
     private static String filePath;
-
     private boolean shouldExit = false;
 
     /**

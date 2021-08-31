@@ -7,12 +7,12 @@ import java.time.format.DateTimeFormatter;
  * Event class is a task. The input must be in such a format
  * "Event <event name> /at <event date>".
  */
-public class Event extends Task{
+public class Event extends Task {
     protected boolean isDone;
-    final String EVENT = "[E]";
+    private final String EVENT = "[E]";
     protected String dateAndTime;
     protected LocalDateTime localDateTime;
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     /**
      * Constructs an event.

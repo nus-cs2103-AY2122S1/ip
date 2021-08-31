@@ -12,7 +12,7 @@ public class Deadline extends Task {
     final String DEADLINE = "[D]";
     protected String dateAndTime;
     protected LocalDateTime localDateTime;
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+    private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     /**
      * Constructs a deadline.
