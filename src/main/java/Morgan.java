@@ -18,7 +18,7 @@ import tasks.TaskList;
 
 public class Morgan extends Application {
     public static final String EXIT_KEYWORD = "bye";
-    private final TaskList taskList = new TaskList();
+    private final TaskList taskList;
     private final Ui ui;
     private final Storage storage;
 
@@ -34,6 +34,7 @@ public class Morgan extends Application {
     public Morgan() {
         this.ui = new Ui();
         this.storage = new Storage();
+        this.taskList = new TaskList();
     }
 
     public static void main(String[] args) {
@@ -107,6 +108,12 @@ public class Morgan extends Application {
         AnchorPane.setBottomAnchor(userInput, 5.0);
 
         dialogContainer.getChildren().add(DialogBox.getMorganDialog(ui.startGreeting(), morganImage));
+
+        try {
+            this.storage.load(this.taskList);
+        } catch (MorganException e) {
+            dialogContainer.getChildren().add(DialogBox.getMorganDialog(e.getMessage(), morganImage));
+        }
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
