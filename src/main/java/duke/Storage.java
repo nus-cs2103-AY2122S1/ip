@@ -36,6 +36,9 @@ public class Storage {
             while (myReader.hasNextLine()) {
                 String item = myReader.nextLine();
                 String[] splitItem = item.split("\\|");
+                if (splitItem.length < 2) {
+                    continue;
+                }
                 String taskType = splitItem[0];
                 String completed = splitItem[1];
                 String desc = splitItem[2];
