@@ -3,9 +3,9 @@ package botto.command;
 import botto.BottoException;
 import botto.task.Task;
 import botto.task.Todo;
+import botto.util.Dialog;
 import botto.util.Storage;
 import botto.util.TaskList;
-import botto.util.Ui;
 
 /**
  * Command for adding an event
@@ -27,12 +27,12 @@ public class AddToDoCommand implements Command {
      * add task to the tasklist, update the storage and print relevant messages
      *
      * @param taskList the task list involved
-     * @param ui the ui of the Botto bot
+     * @param dialog the ui of the Botto bot
      * @param storage storage of the Botto bot
      * @throws BottoException when the there is no description inserted
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws BottoException {
+    public void execute(TaskList taskList, Dialog dialog, Storage storage) throws BottoException {
         String description;
 
         try {
@@ -44,7 +44,7 @@ public class AddToDoCommand implements Command {
         Task task = new Todo(description);
         taskList.addTask(task);
 
-        ui.respondAdd(task, taskList.getSize());
+        dialog.respondAdd(task, taskList.getSize());
         storage.save(taskList.getTasks());
     }
 }
