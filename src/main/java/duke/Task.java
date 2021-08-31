@@ -1,45 +1,44 @@
 package duke;
 
 /**
- * The Task
+ * The Task.
  */
 public class Task {
-    /**
-     * The task description
-     */
+    /** The task description */
     protected String description;
-    /**
-     * The task status. True if it is done, else false
-     */
+
+    /** The task status. True if it is done, else false */
     protected boolean isDone;
 
     /**
-     * Create a new Task object (Constructor)
-     * @param description The new task description
+     * Constructor for a Task.
+     * @param description The new task description.
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     /**
-     * Marks the task as done
+     * Marks the task as done.
      */
     public void markDone() {
         this.isDone = true;
     }
 
     /**
-     * Gets the task status icon
-     * @return "X" if the test is done, else " "
+     * Returns a string for the task status icon.
+     * @return "X" if the test is done, else " ".
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return isDone
+                ? "X"
+                : " ";
     }
 
     /**
-     * Returns the string representation of a task
-     * @return The description of the task
+     * Returns the string representation of a task.
+     * @return The description of the task.
      */
     public String toString() {
         return "[" + this.getStatusIcon() + "] " +  this.description;

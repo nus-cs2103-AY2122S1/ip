@@ -2,17 +2,17 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 /**
- * A Task of type Deadline
+ * A Task of type Deadline.
  */
 public class Deadline extends Task{
-    /**
-     * When is the deadline due on?
-     */
+
+    /** The deadline date time */
     protected LocalDateTime by;
 
     /**
-     * The Constructor
+     * The Deadline constructor.
      * @param description The description of the task.
      * @param by The deadline of the task.
      */
@@ -27,6 +27,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        return "[D]" + super.toString()
+                + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 }

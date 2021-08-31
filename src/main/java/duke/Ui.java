@@ -54,13 +54,13 @@ public class Ui {
     }
 
     /**
-     * Show the list of commands
+     * Returns the manual for all the commands
      * @return A String of all the commands and their description
      */
-    public String getCommandMenu() {
+    public String getHelpMenu() {
         StringBuilder sb = new StringBuilder();
         int i = 1;
-        for (Constants.Commands c : Constants.Commands.values()) {
+        for (Constant.Command c : Constant.Command.values()) {
             sb.append("(" + i++ + ") ");
             sb.append(c.toString());
             sb.append("\n");
@@ -75,7 +75,7 @@ public class Ui {
     public String getAllAcceptedDates() {
         StringBuilder sb = new StringBuilder();
         int i = 1;
-        for (Constants.Dates c : Constants.Dates.values()) {
+        for (Constant.Date c : Constant.Date.values()) {
             sb.append("(" + i++ + ") ");
             sb.append(c.toString());
             sb.append("\n");

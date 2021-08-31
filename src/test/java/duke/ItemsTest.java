@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class ItemsTest {
     @Test
     public void addTaskTest() {
-        Items item = new Items();
+        TaskList item = new TaskList();
         String msg;
         try {
             msg = item.addItem(new Todo("abc"));
@@ -20,7 +20,7 @@ public class ItemsTest {
 
     @Test
     public void markDoneTest() {
-        Items item = new Items();
+        TaskList item = new TaskList();
         String msg;
         try {
             msg = item.addItem(new Todo("abc"));

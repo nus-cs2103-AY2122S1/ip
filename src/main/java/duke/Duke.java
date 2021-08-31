@@ -1,129 +1,141 @@
 package duke;
 
 /**
- * The Duke chat bot app
+ * The Duke chat bot app.
  */
-
 public class Duke {
 
-    // UI related stuff
+    /** Duke UI */
     private final Ui ui;
 
-    // Saved data related stuff
+    /** Hard disk storage */
     private final Storage storage;
 
-    // Parsing user input stuff
+    /** User input parser */
     private final Parser parser;
 
-    // The list of items
-    private Items list;
+    /** The list of tasks */
+    private TaskList list;
+
 
     /**
-     * Duke Constructor
-     * @param directory Relative path to directory of the saved data
-     * @param file File name of the saved data
+     * Duke class constructor.
+     * @param directory Relative path to directory of the saved data.
+     * @param file Name of the saved data file.
      */
     public Duke(String directory, String file) {
         ui = new Ui();
         storage = new Storage(directory, file);
         parser = new Parser();
         try {
-            list = new Items(storage.load());
+            list = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showMessage(e.getMessage());
-            list = new Items();
+            list = new TaskList();
         }
     }
 
     /**
-     * Entry point of the Duke program
-     * @param args Command line arguments
+     * Entry point of the Duke program.
+     * @param args Command line arguments.
      */
     public static void main(String[] args) {
         new Duke("./data", "duke.txt").run();
     }
 
+
     /**
-     * The Duke application run function
+     * Displays the Duke UI and process user input commands.
      */
     public void run() {
 
-        // Show Greetings
+        // Show Greetings.
         ui.showGreetings();
 
+        // Get and process input.
         String rawInput = ui.getInput();
         String output = "";
         label:
         while (true) {
-
             try {
-                String[] input = parser.parseInput(rawInput);
-                Constants.Commands command = Constants.Commands.valueOf(input[0]);
+                // Parses user input.
+                String[] inputs = parser.parseInput(rawInput);
+                Constant.Command command = Constant.Command.valueOf(inputs[0]);
                 String task;
 
+                // Process user input.
                 switch (command) {
-                    case help:
-                        // Show help
-                        output = ui.getCommandMenu();
+                case HELP:
+                    // Gets user manual.
+                    output = ui.getHelpMenu();
 
-                        break;
-                    case bye:
-                        // Quit program
-                        break label;
-                    case list:
-                        // Displays the tasks in the list
-                        output = list.getListMessage();
+                    break;
+                case BYE:
+                    // Quits program.
+                    break label;
+                case LIST:
+                    // Gets the string represented tasks in the task list.
+                    output = list.getAllTask();
 
-                        break;
-                    case done:
-                        int idx = Integer.parseInt(input[1]);
-                        // Marks a task as done.
-                        output = list.markDone(idx);
-                        // Edit the file content.
-                        task = storage.getFileLine(idx - 1);
-                        task = task.substring(0, 4) + "1" + task.substring(5);
-                        storage.updateLineFile(idx - 1, task);
+                    break;
+                case DONE:
+                    // Marks a task as being completed.
+                    int index = parser.convertToInt(inputs[1]);
+                    output = list.markDone(index);
 
-                        break;
-                    case todo:
-                        // Add a todo task in the list.
-                        output = list.addItem(new Todo(input[1]));
-                        // Add to file content.
-                        task = "T | 0 | " + input[1];
-                        storage.addToFile(task);
+                    // Edits the file content.
+                    task = storage.getFileLine(index - 1);
+                    task = task.substring(0, 4) + "1" + task.substring(5);
+                    storage.updateLineFile(index - 1, task);
 
-                        break;
-                    case deadline:
-                        // Add a deadline task in the list.
-                        output = list.addItem(new Deadline(input[1], input[2]));
-                        // Add to file content.
-                        task = "D | 0 | " + input[1] + " | " + input[2];
-                        storage.addToFile(task);
+                    break;
+                case TODO:
+                    // Adds a todo-typed task to the task list.
+                    output = list.addItem(new Todo(inputs[1]));
 
-                        break;
-                    case event:
-                        // Add an event task in the list.
-                        output = list.addItem(new Event(input[1], input[2]));
-                        // Add to file content.
-                        task = "E | 0 | " + input[1] + " | " + input[2];
-                        storage.addToFile(task);
+                    // Add to file content.
+                    task = "T | 0 | " + inputs[1];
+                    storage.addToFile(task);
 
-                        break;
-                    case delete:
-                        int id = Integer.parseInt(input[1]);
-                        // Delete an event from the list.
-                        output = list.removeItem(id);
-                        // Remove from file content.
-                        storage.removeFromFile(id-1);
+                    break;
+                case DEADLINE:
+                    // Adds a deadline-typed task in the task list.
+                    output = list.addItem(new Deadline(inputs[1], inputs[2]));
 
-                        break;
-                    case dates:
-                        output = ui.getAllAcceptedDates();
+                    // Add to file content.
+                    task = "D | 0 | " + inputs[1] + " | " + inputs[2];
+                    storage.addToFile(task);
 
-                        break;
-                    case find:
-                        output = list.find(input[1]);
+                    break;
+                case EVENT:
+                    // Adds an event-typed task in the task list.
+                    output = list.addItem(new Event(inputs[1], inputs[2]));
+
+                    // Add to file content.
+                    task = "E | 0 | " + inputs[1] + " | " + inputs[2];
+                    storage.addToFile(task);
+
+                    break;
+                case DELETE:
+                    // Deletes a task from the task list.
+                    int id = parser.convertToInt(inputs[1]);
+                    output = list.removeItem(id);
+
+                    // Remove from file content.
+                    storage.removeFromFile(id - 1);
+
+                    break;
+                case DATES:
+                    // Gets the accepted date types.
+                    output = ui.getAllAcceptedDates();
+
+                    break;
+                case FIND:
+                    // Gets the task matching the queried keyword.
+                    output = list.find(inputs[1]);
                 }
+
+                // Displays the output message.
                 ui.showMessage(output);
             } catch (DukeException e) {
                 ui.showMessage(e.getMessage());
@@ -132,6 +144,7 @@ public class Duke {
                 return;
             }
 
+            // Gets user input
             rawInput = ui.getInput();
         }
         // Good bye message
