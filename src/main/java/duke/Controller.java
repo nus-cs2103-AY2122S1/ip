@@ -66,6 +66,11 @@ public class Controller {
             listContent += (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
         }
         listLabel.setText("Here are the tasks in your list:\n" + listContent);
+        try {
+            storage.save(tasks);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         addTaskError.setText("");
         deleteError.setText("");
         doneError.setText("");
