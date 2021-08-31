@@ -28,9 +28,10 @@ public class EventCommand extends Command {
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public boolean handleLogic(Duchess duchess)  {
+    public String handleLogic(Duchess duchess)  {
         String invalidMessage = "The command \"event\" should be followed by " +
                 "a task and a date and time, e.g (meeting /at 2/10/2019 2pm-4pm).";
+        String reply;
         String taskAndDuration = getName();
         try {
             if (!taskAndDuration.contains(" /at "))
@@ -50,13 +51,13 @@ public class EventCommand extends Command {
             Event event = new Event(task, events[0], events[1]);
             duchess.getDuchessList().add(event);
             int listSize = duchess.getDuchessList().getSize();
-            duchess.getUi().prettyPrint("Understood. I've added this task:\n    " + event
+            reply = "Understood. I've added this task:\n    " + event
                     + "\nYou now have " + listSize
-                    + (listSize > 1 ? " tasks in the list." : " task in the list."));
+                    + (listSize > 1 ? " tasks in the list." : " task in the list.");
             DuchessFileHandler.writeToFile(duchess.getDuchessList());
         } catch (DuchessException e) {
-            duchess.getUi().prettyPrint(e.getMessage());
+            reply = e.getMessage();
         }
-        return true;
+        return reply;
     }
 }

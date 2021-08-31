@@ -11,6 +11,6 @@ public class ListCommandTest {
     public void testHandleLogic() {
         DuchessFileHandler.clear();
         Duchess d = new Duchess();
-        assertEquals(new ListCommand().handleLogic(d), true);
+        assertEquals(new ListCommand().handleLogic(d), d.getDuchessList().printList());
     }
 }

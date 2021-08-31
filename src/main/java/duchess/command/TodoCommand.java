@@ -26,17 +26,18 @@ public class TodoCommand extends Command {
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public boolean handleLogic(Duchess duchess) {
+    public String handleLogic(Duchess duchess) {
         String task = getName();
+        String reply;
         // Valid input
         ToDo todo = new ToDo(task);
         duchess.getDuchessList().add(todo);
         int listSize = duchess.getDuchessList().getSize();
-        duchess.getUi().prettyPrint("Understood. I've added this task:\n    " + todo
+        reply = "Understood. I've added this task:\n    " + todo
                 + "\nYou now have " + listSize
-                + (listSize > 1 ? " tasks in the list." : " task in the list."));
+                + (listSize > 1 ? " tasks in the list." : " task in the list.");
         DuchessFileHandler.writeToFile(duchess.getDuchessList());
-        return true;
+        return reply;
     }
 
 }

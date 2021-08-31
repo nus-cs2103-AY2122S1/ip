@@ -14,9 +14,10 @@ public class FindCommand extends Command {
      * @param duchess The Duchess to return the output to.
      * @return The tasks which match the condition input.
      */
-    public boolean handleLogic(Duchess duchess) {
+    public String handleLogic(Duchess duchess) {
         String invalidMessage = "There are no tasks with that keyword.";
         String keyword = getName();
+        String reply;
         String results = "";
         int counter = 0;
         for (int i = 0; i < duchess.getDuchessList().getSize(); i++) {
@@ -25,9 +26,9 @@ public class FindCommand extends Command {
                 results += String.format("%d. %s\n", ++counter, t);
         }
         if (results.isEmpty())
-            duchess.getUi().prettyPrint(invalidMessage);
+            reply = invalidMessage;
         else
-            duchess.getUi().prettyPrint(results);
-        return true;
+            reply = results;
+        return reply;
     }
 }

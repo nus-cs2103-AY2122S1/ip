@@ -54,5 +54,5 @@ public abstract class Command {
     }
 
     /** Handles the logic specific to the command.*/
-    public abstract boolean handleLogic(Duchess duchess);
+    public abstract String handleLogic(Duchess duchess);
 }

@@ -11,6 +11,6 @@ public class ByeCommandTest {
     public void testHandleLogic() {
         DuchessFileHandler.clear();
         Duchess d = new Duchess();
-        assertEquals(new ByeCommand().handleLogic(d), false);
+        assertEquals(new ByeCommand().handleLogic(d), "I bid thee farewell.");
     }
 }

@@ -27,15 +27,16 @@ public class DeleteCommand extends Command {
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public boolean handleLogic(Duchess duchess)  {
+    public String handleLogic(Duchess duchess)  {
         String index = getName();
+        String reply;
         // Parsing a non-numeric string will throw a NumberFormatException
         try {
             if (duchess.getDuchessList().checkWithinRange(Integer.parseInt(index))) {
                 // Valid delete task
                 Task deletedTask = duchess.getDuchessList().delete(Integer.parseInt(index));
-                duchess.getUi().prettyPrint("Alright. I've removed this task:   \n  " + deletedTask
-                        + "\nNow you have " + duchess.getDuchessList().getSize() + " tasks in the list.");
+                reply = "Alright. I've removed this task:   \n  " + deletedTask
+                        + "\nNow you have " + duchess.getDuchessList().getSize() + " tasks in the list.";
                 DuchessFileHandler.writeToFile(duchess.getDuchessList());
             } else {
                 // "delete" followed by an integer outside of range of the list
@@ -44,10 +45,10 @@ public class DeleteCommand extends Command {
         } catch (NumberFormatException|DuchessException e) {
             // "delete" followed by an invalid non-integer string input
             if (e instanceof NumberFormatException)
-                duchess.getUi().prettyPrint("The command \"delete\" should be followed by an integer.");
+                reply = "The command \"delete\" should be followed by an integer.";
             else
-                duchess.getUi().prettyPrint(((DuchessException) e).getMessage());
+                reply = ((DuchessException) e).getMessage();
         }
-        return true;
+        return reply;
     }
 }
