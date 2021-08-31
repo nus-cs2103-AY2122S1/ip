@@ -1,7 +1,5 @@
 package duke;
 
-import duke.*;
-
 public class Parser {
     public Parser() {
 

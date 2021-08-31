@@ -9,14 +9,14 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             TaskList found = new TaskList();
             for (int i = 0; i < tasks.numOfTasks(); i++) {
                 Task curr = tasks.getTask(i);
                 if (curr.checkDescription(userInput.substring(5))) found.addTask(curr);
             }
-            ui.showFoundTasks(found);
+            return ui.showFoundTasks(found);
         } catch (NumberFormatException nfe) {
             throw new DukeException("Please only enter an integer after command 'delete'!");
         } catch (IndexOutOfBoundsException e) {

@@ -15,12 +15,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Storage {
-    private String filePath;
     Path currentRelativePath = Paths.get("");
     String s = currentRelativePath.toAbsolutePath().toString();
 
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage() {
+
     }
 
     public ArrayList<Task> load() throws DukeException {

@@ -12,18 +12,17 @@ public class AddCommand implements Command {
         this.userInput = userInput;
     }
 
-    public static void addToDo(String s, TaskList tasks, Ui ui) throws DukeException {
+    public static String addToDoResponse(String s, TaskList tasks, Ui ui) throws DukeException {
         try {
             Task curr = new ToDo(s.substring(5));
             tasks.addTask(curr);
-            ui.showAddTask(curr, tasks.numOfTasks());
-
+            return ui.showAddTask(curr, tasks.numOfTasks());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The description of a todo cannot be empty.");
         }
     }
 
-    public static void addEvent(String s, TaskList tasks, Ui ui) throws DukeException {
+    public static String addEventResponse(String s, TaskList tasks, Ui ui) throws DukeException {
         try {
             int at = s.lastIndexOf(" /at ");
             Task curr = new Event(
@@ -31,7 +30,7 @@ public class AddCommand implements Command {
                     LocalDateTime.parse(s.substring(at + 5), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
             );
             tasks.addTask(curr);
-            ui.showAddTask(curr, tasks.numOfTasks());
+            return ui.showAddTask(curr, tasks.numOfTasks());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The description and time of an event cannot be empty.");
         } catch (DateTimeParseException e) {
@@ -39,7 +38,7 @@ public class AddCommand implements Command {
         }
     }
 
-    public static void addDeadline(String s, TaskList tasks, Ui ui) throws DukeException {
+    public static String addDeadlineResponse(String s, TaskList tasks, Ui ui) throws DukeException {
         try {
             int by = s.lastIndexOf(" /by ");
             Task curr = new Deadline(
@@ -47,7 +46,7 @@ public class AddCommand implements Command {
                     LocalDateTime.parse(s.substring(by + 5), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"))
             );
             tasks.addTask(curr);
-            ui.showAddTask(curr, tasks.numOfTasks());
+            return ui.showAddTask(curr, tasks.numOfTasks());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("The description and time of a deadline cannot be empty.");
         } catch (DateTimeParseException e) {
@@ -58,16 +57,16 @@ public class AddCommand implements Command {
 
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String getResponse (TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (userInput.startsWith("todo")) {
-            addToDo(userInput, tasks, ui);
             storage.saveTasks(tasks);
+            return addToDoResponse(userInput, tasks, ui);
         } else if (userInput.startsWith("event")) {
-            addEvent(userInput, tasks, ui);
             storage.saveTasks(tasks);
+            return addEventResponse(userInput, tasks, ui);
         } else if (userInput.startsWith("deadline")) {
-            addDeadline(userInput, tasks, ui);
             storage.saveTasks(tasks);
+            return addDeadlineResponse(userInput, tasks, ui);
         } else { // any other input from user
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
