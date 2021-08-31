@@ -8,8 +8,6 @@
 
 <fx:root
         alignment="TOP_RIGHT"
-        maxHeight="1.7976931348623157E308"
-        maxWidth="1.7976931348623157E308"
         prefWidth="400.0"
         type="javafx.scene.layout.HBox"
         xmlns="http://javafx.com/javafx/8.0.171"
@@ -20,6 +18,7 @@
                 fx:id="dialog"
                 text="Label"
                 wrapText="true"
+                style="-fx-background-color: #E9967A; -fx-background-radius: 5; -fx-padding: 10"
         >
             <font>
                 <Font name="Comic Sans MS Italic" size="12.5" />
@@ -27,13 +26,13 @@
         </Label>
         <ImageView
                 fx:id="displayPicture"
-                fitHeight="50"
-                fitWidth="50"
+                fitHeight="50.0"
+                fitWidth="50.0"
                 pickOnBounds="true"
                 preserveRatio="true"
         />
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
+        <Insets bottom="15.0" top="15.0" />
     </padding>
 </fx:root>

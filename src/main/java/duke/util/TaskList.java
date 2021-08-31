@@ -12,7 +12,6 @@ import duke.task.Task;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class TaskList {
-
     /** An ArrayList to store user's tasks. */
     private final ArrayList<Task> taskList;
 
@@ -33,9 +32,11 @@ public class TaskList {
     }
 
     /**
-     * Adds a task into the taskList and prints the added task to the screen.
+     * Adds a task into the taskList and returns the added task as a string.
      *
      * @param task The task to be added.
+     * @param storage An instance of a the Storage class that saves and loads Duke's data.
+     * @return A string representing the task that has been added.
      */
     public String add(Task task, Storage storage) throws IOException {
         this.taskList.add(task);
@@ -56,9 +57,11 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as completed and prints the completed task to the screen.
+     * Marks a task as completed and returns the completed task to the screen as a string.
      *
      * @param index The index of the task to mark as completed in the taskList.
+     * @param storage An instance of a the Storage class that saves and loads Duke's data.
+     * @return A string representing the task that has been marked as completed.
      */
     public String markAsDone(int index, Storage storage) throws IOException {
         Task taskToComplete = get(index - 1);
@@ -72,9 +75,11 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task and prints the deleted task to the screen.
+     * Deletes a task and returns the deleted task as a string.
      *
      * @param index The index of the task to delete in the taskList.
+     * @param storage An instance of a the Storage class that saves and loads Duke's data.
+     * @return A string representing the task that has been deleted.
      */
     public String delete(int index, Storage storage) throws IOException {
         Task taskToDelete = this.taskList.remove(index - 1);
@@ -86,9 +91,10 @@ public class TaskList {
     }
 
     /**
-     * Searches for all tasks whose description contains the specified keyword and prints them to screen.
+     * Searches for all tasks whose description contains the specified keyword returns them as a string.
      *
      * @param keyword The keyword to search for.
+     * @return A string representing all tasks that match the keyword.
      */
     public String searchAndDisplay(String keyword) {
         ArrayList<Task> temp = new ArrayList<>();
@@ -123,7 +129,9 @@ public class TaskList {
     }
 
     /**
-     * Prints the current contents of the taskList to the screen.
+     * Searches for all tasks whose description contains the specified keyword returns them as a string.
+     *
+     * @return A string representing all tasks in the task list.
      */
     public String showList() {
         if (size() == 0) {

@@ -13,7 +13,11 @@ import duke.util.Ui;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class DoneCommand extends Command {
-
+    /**
+     * Constructor of the DoneCommand class.
+     *
+     * @param userInput A string representing the user's input.
+     */
     public DoneCommand(String userInput) {
         super(userInput);
     }
@@ -24,6 +28,7 @@ public class DoneCommand extends Command {
      * @param taskList The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
+     * @return A string representing Duke's reply after executing this command.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

@@ -14,7 +14,6 @@ import duke.exception.InvalidCommandException;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class Event extends Task {
-
     /** A string representing the start date and time of an Event. */
     protected String at;
 
@@ -36,15 +35,15 @@ public class Event extends Task {
         super(description);
         if (description.equals("") || at.equals("")) {
             //check for empty description or by
-            throw new EmptyFieldException("     Error! Description or date and time is empty!");
+            throw new EmptyFieldException("Error! Description or date and time is empty!");
         } else {
             String[] dateTime = at.split(" ");
             if (dateTime.length > 2) {
                 //check for more than 1 date and time entered
                 throw new InvalidCommandException(
-                        "     Error! You can only enter one date and time, Eg: \"2021-09-12 18:00\",\n"
-                                + "     one date, Eg: \"2021-09-12\" (This will enter time as 23:59 by default),\n"
-                                + "     or one time, Eg: \"18:00\" (This will enter today's date by default)");
+                        "Error! You can only enter one date and time, Eg: \"2021-09-12 18:00\",\n"
+                                + "one date, Eg: \"2021-09-12\" (This will enter time as 23:59 by default),\n"
+                                + "or one time, Eg: \"18:00\" (This will enter today's date by default)");
             } else {
                 this.at = at;
                 if (dateTime.length == 1) {

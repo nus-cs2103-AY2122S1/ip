@@ -18,7 +18,6 @@ import duke.command.TodoCommand;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class Parser {
-
     /**
      * Returns the appropriate Command Object after Duke processes the user input.
      *

@@ -4,7 +4,6 @@ package duke.exception;
  * Represents the exception when users enter empty fields in their commands to Duke.
  */
 public class EmptyFieldException extends DukeException {
-
     /**
      * Constructor of the EmptyFieldException class.
      *

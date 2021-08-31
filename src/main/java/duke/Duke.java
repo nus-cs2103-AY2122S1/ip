@@ -31,9 +31,9 @@ public class Duke {
             this.storage = new Storage(filepath);
             this.taskList = new TaskList(this.storage.load());
         } catch (IOException exception) {
-            ui.showLoadingError();
+            System.out.println(ui.showLoadingError());
         } catch (DukeException exception) {
-            ui.showError(exception.getMessage());
+            System.out.println(ui.showError(exception.getMessage()));
         }
     }
 

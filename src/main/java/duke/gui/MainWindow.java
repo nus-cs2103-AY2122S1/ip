@@ -11,6 +11,9 @@ import javafx.scene.layout.VBox;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ *
+ * @author Javier Phon Zhee Kai.
+ * @version CS2103T AY21/22 Sem 1.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -21,19 +24,33 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
-
     private Duke duke;
 
+    /** Duke dialog box image. */
     private final Image dukeImage = new Image(this.getClass()
             .getResourceAsStream("/images/DukeIcon.png"));
+
+    /** User dialog box image. */
     private final Image userImage = new Image(this.getClass()
             .getResourceAsStream("/images/UserIcon.png"));
 
+    /**
+     * Initialises the scroll pane and the dialogContainer.
+     */
     @FXML
     public void initialize() {
         this.scrollPane.vvalueProperty().bind(this.dialogContainer.heightProperty());
+        String welcomeMessage = "Hello! I am Duke.\nWhat can I do for you?";
+        this.dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
+        );
     }
 
+    /**
+     * Initialises Duke.
+     *
+     * @param d An instance of the Duke class.
+     */
     public void setDuke(Duke d) {
         this.duke = d;
     }
@@ -51,18 +68,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         this.userInput.clear();
-    }
-
-    public void showWelcome() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String welcomeMessage = "Hello! I am Duke.\nWhat can I do for you?";
-        this.dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
-        );
     }
 }
 

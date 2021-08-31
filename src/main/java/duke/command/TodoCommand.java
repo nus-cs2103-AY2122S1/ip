@@ -2,6 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.util.Storage;
@@ -15,7 +16,11 @@ import duke.util.Ui;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class TodoCommand extends Command {
-
+    /**
+     * Constructor of the TodoCommand class.
+     *
+     * @param userInput A string representing the user's input.
+     */
     public TodoCommand(String userInput) {
         super(userInput);
     }
@@ -26,6 +31,7 @@ public class TodoCommand extends Command {
      * @param taskList The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
+     * @return A string representing Duke's reply after executing this command.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
@@ -41,6 +47,8 @@ public class TodoCommand extends Command {
                 return taskList.add(toDo, storage);
             } catch (IOException exception) {
                 return ui.showSavingError();
+            } catch (DukeException exception) {
+                return ui.showError(exception.getMessage());
             }
         }
     }
