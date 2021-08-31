@@ -1,8 +1,6 @@
 package ponyo.ui;
 
-import java.io.InputStream;
-import java.io.PrintStream;
-import java.util.Scanner;
+import ponyo.gui.MainWindow;
 
 /**
  * Text UI of the application.
@@ -19,28 +17,10 @@ public class Ui {
                     + " / .___/  \\____/ /_/ /_/  \\__, /   \\____/ \n"
                     + "/_/                      /____/           \n";
 
-    private final Scanner in;
-    private final PrintStream out;
-
-    public Ui() {
-        this(System.in, System.out);
-    }
-
-    /**
-     * Constructor for a new UI instance.
-     *
-     * @param in an InputStream input value
-     * @param out a PrintStream output value for printing
-     */
-    public Ui(InputStream in, PrintStream out) {
-        this.in = new Scanner(in);
-        this.out = out;
-    }
-
     /**
      * Generates and prints the welcome message at the start of the application.
      */
-    public void showWelcomeMessage() {
+    public static void showWelcomeMessage() {
         show(LOGO,
                 "Hello! I'm Ponyo.",
                 "What can I do for you?",
@@ -55,18 +35,9 @@ public class Ui {
     }
 
     /**
-     * Read the next command input by user.
-     *
-     * @return user's input command
-     */
-    public String readCommand() {
-        return in.nextLine();
-    }
-
-    /**
      * Prints a line divider after every command.
      */
-    public void showLine() {
+    public static void showLine() {
         show(CMD_DIVIDER);
     }
 
@@ -75,7 +46,7 @@ public class Ui {
      *
      * @param msg the error message provided
      */
-    public void showError(String msg) {
+    public static void showError(String msg) {
         show(msg);
     }
 
@@ -84,9 +55,9 @@ public class Ui {
      *
      * @param msg the messages to be printed
      */
-    public void show(String... msg) {
+    public static void show(String... msg) {
         for (String m : msg) {
-            out.println(m);
+//            MainWindow.showMessageFromPonyo(m);
         }
     }
 }

@@ -15,10 +15,10 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         tasks.retrieveTask(taskToMarkDone - 1).markAsDone();
         storage.getFullContents(tasks);
-        ui.show("\tNice! I've marked this task as done: \n\t\t" + tasks.retrieveTask(taskToMarkDone - 1));
+        Ui.show("\tNice! I've marked this task as done: \n\t\t" + tasks.retrieveTask(taskToMarkDone - 1));
     }
 
     @Override

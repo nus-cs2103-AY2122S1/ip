@@ -15,7 +15,7 @@ public abstract class Command {
      * @param ui A Ui object to communicate with the user.
      * @param storage Load tasks and save tasks to file
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract void execute(TaskList tasks, Storage storage);
 
     /**
      * @return true if the command is meant to exit the program,

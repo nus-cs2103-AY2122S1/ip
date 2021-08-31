@@ -1,5 +1,6 @@
 package ponyo;
 
+import javafx.application.Application;
 import ponyo.commands.Command;
 import ponyo.data.exceptions.PonyoException;
 import ponyo.data.task.TaskList;
@@ -13,49 +14,51 @@ public class Ponyo {
     private static final String FILENAME = "tasks.txt";
     private static final String FILEPATH = PATH + "/" + FILENAME;
 
-    private final Storage storage;
+    private Storage storage;
     private TaskList tasks;
-    private final Ui ui;
 
     /**
      * Create a new Ponyo program instance
-     *
-     * @param filePath indicates where to store the hardcopy of tasks
      */
-    public Ponyo(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Ponyo() {
         try {
+            storage = new Storage(FILEPATH);
             tasks = new TaskList(storage.load());
         } catch (PonyoException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
-    /**
-     * Runs the program until termination: exit
-     */
-    public void run() {
-        ui.showWelcomeMessage();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (PonyoException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
 
-    public static void main(String[] args) {
-        new Ponyo(FILEPATH).run();
+    public void runWhenFirstStartup() {
+        Ui.showWelcomeMessage();
+    }
+
+    /**
+     * Generates response to user input.
+     *
+     * @param input Input provided by user.
+     * @return Response message by system.
+     */
+    public String handleInput(String input) {
+//        Ui.showWelcomeMessage();
+//        boolean isExit = false;
+//
+//        while (!isExit) {
+//            try {
+//                Command c = Parser.parse(input);
+//                c.execute(tasks, storage);
+//                isExit = c.isExit();
+//            } catch (PonyoException e) {
+//                Ui.showError(e.getMessage());
+//            } finally {
+//                Ui.showLine();
+//            }
+//        }
+//        return "";
+        return "DUKE SAID: " + input;
     }
 }

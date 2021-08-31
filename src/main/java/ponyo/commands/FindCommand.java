@@ -18,7 +18,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Storage storage) {
         ArrayList<Task> taskClone = new ArrayList<>();
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -28,12 +28,12 @@ public class FindCommand extends Command {
         }
 
         if (taskClone.size() != 0) {
-            ui.show("\tHere are the matching tasks in your list: ");
+            Ui.show("\tHere are the matching tasks in your list: ");
             for (int i = 0; i < taskClone.size(); i++) {
-                ui.show("\t" + (i + 1) + "." + taskClone.get(i));
+                Ui.show("\t" + (i + 1) + "." + taskClone.get(i));
             }
         } else {
-            ui.show("There are no matching tasks in your list.");
+            Ui.show("There are no matching tasks in your list.");
         }
     }
 
