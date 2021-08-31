@@ -21,8 +21,17 @@ public class Task {
         this.isDone = false;
     }
 
-    /** Sets isDone to true to mark task as done */
-    public void setDone(boolean b) {
+    /**
+     * Returns description of task.
+     *
+     * @return Description of task.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
+    /** Sets isDone to given boolean */
+    public void setIsDone(boolean b) {
         isDone = b;
     }
 

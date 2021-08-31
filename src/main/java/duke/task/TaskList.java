@@ -63,8 +63,13 @@ public class TaskList {
         return tasks.size();
     }
 
-    /** Returns ArrayList of tasks */
-    public ArrayList<Task> getTaskList() {
-        return tasks;
+    @Override
+    public String toString() {
+        String listOfTasks = "\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            listOfTasks = listOfTasks + String.format("\t%d. %s\n", i + 1, tasks.get(i));
+        }
+
+        return listOfTasks;
     }
 }
