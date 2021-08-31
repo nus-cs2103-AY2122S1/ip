@@ -5,9 +5,9 @@ import java.util.List;
 
 import botto.BottoException;
 import botto.task.Task;
+import botto.util.Dialog;
 import botto.util.Storage;
 import botto.util.TaskList;
-import botto.util.Ui;
 
 public class FindCommand implements Command {
     private String command;
@@ -17,7 +17,7 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws BottoException {
+    public void execute(TaskList taskList, Dialog dialog, Storage storage) throws BottoException {
         String keyword;
 
         try {
@@ -34,6 +34,6 @@ public class FindCommand implements Command {
             }
         }
 
-        ui.showTasks(matchesTasks, "Here are the matching tasks in your list:");
+        dialog.showTasks(matchesTasks, "Here are the matching tasks in your list:");
     }
 }

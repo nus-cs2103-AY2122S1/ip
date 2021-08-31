@@ -6,9 +6,9 @@ import java.time.format.DateTimeFormatter;
 import botto.BottoException;
 import botto.task.Deadline;
 import botto.task.Task;
+import botto.util.Dialog;
 import botto.util.Storage;
 import botto.util.TaskList;
-import botto.util.Ui;
 
 /**
  * Command for adding a deadline
@@ -29,12 +29,12 @@ public class AddDeadlineCommand implements Command {
      * add task to the tasklist, update the storage and print relevant messages
      *
      * @param taskList the task list involved
-     * @param ui the ui of the Botto bot
+     * @param dialog the ui of the Botto bot
      * @param storage storage of the Botto bot
      * @throws BottoException when the there is no description inserted or when the command format is wrong
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws BottoException {
+    public void execute(TaskList taskList, Dialog dialog, Storage storage) throws BottoException {
         String detail;
 
         try {
@@ -50,7 +50,7 @@ public class AddDeadlineCommand implements Command {
             Task task = new Deadline(information[0], LocalDateTime.parse(information[1], formatter));
             taskList.addTask(task);
 
-            ui.respondAdd(task, taskList.getSize());
+            dialog.respondAdd(task, taskList.getSize());
             storage.save(taskList.getTasks());
         } catch (Exception e) {
             String message = "☹ OOPS!!! The command is in wrong format.\n"

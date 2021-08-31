@@ -1,10 +1,13 @@
 package botto;
 
 import botto.command.Command;
+import botto.ui.Main;
+import botto.util.Dialog;
 import botto.util.Parser;
 import botto.util.Storage;
 import botto.util.TaskList;
-import botto.util.Ui;
+import javafx.application.Application;
+import javafx.scene.layout.VBox;
 
 /**
  * A task tracking bot
@@ -12,46 +15,42 @@ import botto.util.Ui;
 public class Botto {
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private Dialog dialog;
 
     /**
      * Constructor for a Botto bot
-     *
-     * @param filePath Filepath of the file that keeps track of the tasks
      */
-    public Botto(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Botto() {
+        dialog = new Dialog();
+        storage = new Storage("data/botto.txt");
         try {
             taskList = new TaskList(storage.load());
         } catch (BottoException e) {
-            ui.showError(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
-
 
     /**
-     * Handle the logic of the bot
+     * evaluate user input and execute necessary action
+     * @param input user input
      */
-    private void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (BottoException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public void handleUserInput(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(taskList, dialog, storage);
+        } catch (BottoException e) {
+            dialog.showError(e.getMessage());
         }
     }
 
+    /**
+     * set up dialog container in the ui
+     * @param container dialog container
+     */
+    public void setUpDialogContainer(VBox container) {
+        dialog.setUp(container);
+        dialog.showWelcome();
+    }
 
     /**
      * This method will instantiate the Botto bot
@@ -59,7 +58,7 @@ public class Botto {
      * @param args sequence of characters (Strings) that are passed to the function.
      */
     public static void main(String[] args) {
-        new Botto("data/botto.txt").run();
+        Application.launch(Main.class, args);
     }
 
 }

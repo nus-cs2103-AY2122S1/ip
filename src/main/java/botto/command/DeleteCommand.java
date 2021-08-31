@@ -2,9 +2,9 @@ package botto.command;
 
 import botto.BottoException;
 import botto.task.Task;
+import botto.util.Dialog;
 import botto.util.Storage;
 import botto.util.TaskList;
-import botto.util.Ui;
 
 /**
  * Command for deleting a task
@@ -25,12 +25,12 @@ public class DeleteCommand implements Command {
      * delete the task from the tasklist, update the storage and print relevant messages
      *
      * @param taskList the task list involved
-     * @param ui the ui of the Botto bot
+     * @param dialog the ui of the Botto bot
      * @param storage storage of the Botto bot
      * @throws BottoException when the task is not specified
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws BottoException {
+    public void execute(TaskList taskList, Dialog dialog, Storage storage) throws BottoException {
         String integer = command.replaceAll("\\D+", "");
         int index;
 
@@ -42,7 +42,7 @@ public class DeleteCommand implements Command {
 
         Task task = taskList.deleteTask(index);
         int size = taskList.getSize();
-        ui.respondDelete(task, size);
+        dialog.respondDelete(task, size);
 
         storage.save(taskList.getTasks());
     }

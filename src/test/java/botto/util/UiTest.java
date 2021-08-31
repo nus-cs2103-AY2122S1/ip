@@ -12,24 +12,18 @@ import org.junit.jupiter.api.Test;
 public class UiTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    private Ui ui;
+    private Dialog ui;
 
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
-        ui = new Ui();
+        ui = new Dialog();
     }
 
     @Test
     public void dummyTest() {
         System.out.println("Hello Baeldung Readers!!");
         assertEquals("Hello Baeldung Readers!!", outputStreamCaptor.toString().trim());
-    }
-
-    @Test
-    public void showLine_noInput_success() {
-        ui.showLine();
-        assertEquals("    ------------------------------\n", outputStreamCaptor.toString());
     }
 
 
