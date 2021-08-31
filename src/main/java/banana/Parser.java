@@ -36,6 +36,7 @@ public class Parser {
      * Prints the information.
      *
      * @param information display information.
+     * @return the label
      */
     public static String displayLabel(String information) {
         String label =
@@ -51,6 +52,7 @@ public class Parser {
      * input command.
      *
      * @param tasks the list of tasks.
+     * @return the label.
      * @throws DukeException if the input was invalid.
      */
     public String  useInput(TaskList tasks) throws DukeException {
@@ -75,6 +77,7 @@ public class Parser {
      * list of tasks.
      *
      * @param tasks the list of tasks.
+     * @return the label.
      */
     public String listCommand(TaskList tasks) {
         String itemCollection = getItems(tasks);
@@ -86,6 +89,7 @@ public class Parser {
      * Indicates a task as done.
      *
      * @param tasks the list of tasks.
+     * @return the label.
      */
     public String doneCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(5, 6)) - 1;
@@ -99,6 +103,7 @@ public class Parser {
      *
      * @param input the user input.
      * @param tasks the list of tasks.
+     * @return the label.
      */
     public String addTaskCommand(String input, TaskList tasks) {
         if (input.contains("todo")) {
@@ -119,6 +124,7 @@ public class Parser {
      *
      * @param input the user input.
      * @param tasks the list of tasks.
+     * @return the label.
      */
     public String deadlineOrEventCommand(String input, TaskList tasks) {
         if (input.contains("deadline")) {
@@ -138,6 +144,7 @@ public class Parser {
      * commands/inputs have been entered.
      *
      * @param tasks the list of tasks.
+     * @return the label.
      * @throws DukeException the exception.
      */
     public void exceptionCommand(TaskList tasks) throws DukeException {
@@ -156,6 +163,7 @@ public class Parser {
      * Delete a task from the list.
      *
      * @param tasks the list of tasks.
+     * @return the label.
      */
     public String deleteCommand(TaskList tasks) {
         int index = Integer.parseInt(input.substring(7, 8)) - 1;
@@ -171,6 +179,7 @@ public class Parser {
      * or matches the user's input.
      *
      * @param tasks the list of tasks.
+     * @return the label.
      */
     public String findCommand(TaskList tasks) {
         TaskList newTasks = new TaskList(new ArrayList<>());

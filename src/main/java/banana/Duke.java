@@ -1,14 +1,6 @@
 package banana;
 
 import javafx.application.Application;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -19,6 +11,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The Duke class runs the duke/chatbot
@@ -42,6 +40,31 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
+    public Duke() {
+
+    }
+
+    /**
+     * Tries starting up the program and
+     * loading all the information from the files.
+     *
+     * @param filePath the file to be accessed.
+     */
+    public void init(String filePath) {
+        try {
+            store = new Storage(filePath);
+            tasks = store.load(
+                    new File(store.getFilePath()));
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Starts the GUI program.
+     *
+     * @param stage the screen.
+     */
     @Override
     public void start(Stage stage) {
         scrollPane = new ScrollPane();
@@ -53,7 +76,6 @@ public class Duke extends Application {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         scene = new Scene(mainLayout);
-
         stage.setScene(scene);
         stage.show();
         stage.setTitle("Duke");
@@ -67,9 +89,7 @@ public class Duke extends Application {
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
         userInput.setPrefWidth(440.0);
         sendButton.setPrefWidth(55.0);
 
@@ -90,6 +110,14 @@ public class Duke extends Application {
         });
     }
 
+    /**
+     * The tasks to be printed
+     * on the screen.
+     *
+     * @param dc the dialogContainer.
+     * @param ui the Textfield
+     * @param tasks the list of tasks.
+     */
     public void addToScreen(VBox dc, TextField ui, TaskList tasks) {
         try {
             Parser p = new Parser(ui.getText());
@@ -117,25 +145,6 @@ public class Duke extends Application {
         textToAdd.setWrapText(true);
 
         return textToAdd;
-    }
-
-    public Duke() {
-    }
-
-    /**
-     * Tries starting up the program and
-     * loading all the information from the files.
-     *
-     * @param filePath the file to be accessed.
-     */
-    public void init(String filePath) {
-        try {
-            store = new Storage(filePath);
-            tasks = store.load(
-                    new File(store.getFilePath()));
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
     }
 
 

@@ -8,5 +8,4 @@ public class Launcher {
         Application.launch(Duke.class, args);
     }
 
-
 }

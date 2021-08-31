@@ -2,3 +2,4 @@ Yes ~ eat cheese
 T ~ Yes ~ shower
 Yes ~ cheese
 No ~ eat cheese
+T ~ No ~ eat food
