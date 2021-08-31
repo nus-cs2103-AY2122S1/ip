@@ -16,6 +16,25 @@ public class Duke {
     private Parser parser;
     private TaskList taskList;
 
+    public static Duke init() {
+        Duke d = new Duke();
+        d.parser = new Parser();
+        try {
+            d.taskList = new TaskList(Storage.load());
+        } catch (IOException e) {
+            System.out.printf("Cannot load tasks\n  %s\n", e.getMessage());
+            d.taskList = new TaskList();
+        }
+        return d;
+    }
+
+    public String getResponse(String userCommandText) {
+        Command command = parser.parse(userCommandText);
+        command.setTaskList(taskList);
+        CommandResult result = command.execute();
+        return result.getMessage();
+    }
+
     public static void main(String[] args) {
         new Duke().run();
     }
