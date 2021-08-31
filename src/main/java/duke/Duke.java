@@ -8,16 +8,21 @@ import java.io.InputStream;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  * Represents the main Duke program. Running this class's main function executes the program.
  */
-public class Duke {
+public class Duke extends Application {
 
     private final Ui ui;
     private final TaskList taskList;
 
     /**
-     * Constructor for the Duke program.
+     * Constructor for the Duke program with custom filepath.
      *
      * @param fileDirectory Directory of the hard disk.
      * @param fileName The hard disk.
@@ -25,6 +30,16 @@ public class Duke {
     public Duke(String fileDirectory, String fileName) {
         ui = new Ui();
         Storage storage = new Storage(fileDirectory, fileName);
+        taskList = new TaskList(storage);
+    }
+
+    /**
+     * Default constructor for the Duke program.
+     * Uses filepath data/duke.txt by default.
+     */
+    public Duke() {
+        ui = new Ui();
+        Storage storage = new Storage("data", "duke.txt");
         taskList = new TaskList(storage);
     }
 
@@ -69,7 +84,16 @@ public class Duke {
         input.close();
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public static void main(String[] args) {
-        new Duke("data", "duke.txt").run(System.in);
+        new Duke().run(System.in);
     }
 }
