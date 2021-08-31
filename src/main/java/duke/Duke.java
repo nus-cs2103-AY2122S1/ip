@@ -23,7 +23,7 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            System.out.println("RESET!");
             tasks = new TaskList();
         } catch (IOException e) {
             System.out.println("File failed to load.");
@@ -34,20 +34,6 @@ public class Duke {
      * A method that allows user give input and runs the program.
      * Contains a parser which reads command from the input.
      */
-//    public void run() {
-//        try {
-//            Parser parser = new Parser(tasks, ui, storage);
-//            parser.readTask();
-//        } catch (IOException e) {
-//            ui.printErrorMessage("File fails to update");
-//        }
-//    }
-
-
-//    public static void main(String[] args) {
-//        Duke duke = new Duke(".\\src\\main\\level-7.txt");
-//        duke.run();
-//    }
 
 
     @FXML

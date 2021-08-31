@@ -42,7 +42,6 @@ public class TaskList {
         for (int i = 1; i <= list.size(); i++) {
             str = str + i + ". " + list.get(i-1) + "\n";
         }
-        System.out.println(str);
         return str;
     }
 
@@ -62,9 +61,6 @@ public class TaskList {
         } else {
             Task task = list.get(index - 1);
             task.markAsDone();
-            System.out.println("Nice! I have marked this task as done!");
-            System.out.println(task);
-
             String result = "Nice! I have marked this task as done!\n" + task.toString() ;
             return result;
         }
@@ -122,14 +118,9 @@ public class TaskList {
                 }
 
                 String result = "Got it. I've added this task.\n"
-                        + list.get(list.size() - 1).toString()
+                        + list.get(list.size() - 1).toString() + "\r\n"
                         + "Now you have " + list.size()
                         + (list.size() == 1 ? " task in the list" : " tasks in the list.");
-
-                System.out.println("Got it. I've added this task.");
-                System.out.println(list.get(list.size() - 1));
-                System.out.println("Now you have " + list.size()
-                        + (list.size() == 1 ? " task in the list" : " tasks in the list."));
                 return result;
             }
         }
@@ -151,14 +142,10 @@ public class TaskList {
             Task task = list.get(index - 1);
             list.remove(index - 1);
 
-            String result = "Noted. I've removed this task: " + task.toString()
+            String result = "Noted. I've removed this task: \n" + task.toString() + "\r\n"
                     + "Now you have " + list.size()
                     + (list.size() == 1 ? " task in the list" : " tasks in the list.");
 
-            System.out.println("Noted. I've removed this task: ");
-            System.out.println(task);
-            System.out.println("Now you have " + list.size()
-                    + (list.size() == 1 ? " task in the list" : " tasks in the list."));
             return result;
         }
     }
@@ -184,10 +171,9 @@ public class TaskList {
         if (l.isEmpty()) {
             throw new TaskDoesNotExistException();
         } else {
-            String result = "Here are the matching tasks in your list:";
-            System.out.println("Here are the matching tasks in your list:");
+            String result = "Here are the matching tasks in your list: \n";
             TaskList list = new TaskList(l);
-            result += list.printList();
+            result += list.printList() + "\r\n";
             return result;
         }
     }

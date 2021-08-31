@@ -1,1 +1,4 @@
-T | 0 | homework
+T | 1 | hello
+T | 1 | bbabi
+T | 1 | dance
+T | 0 | fly
