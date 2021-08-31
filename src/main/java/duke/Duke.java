@@ -31,84 +31,89 @@ public class Duke {
     }
 
     /**
-     * Starts interaction with the user.
+     * Constructor for duke.Duke class.
      */
-    public void run() {
-        String[] inputWords = null;
-        Ui.greet();
-        do {
-            inputWords = Parser.parse(Ui.readCommand());
-            try {
-                switch (inputWords[0]) {
-                case "bye":
-                    break;
-                case "list":
-                    tasks.printTasks();
-                    break;
-                case "done": {
-                    if (inputWords.length == 1) {
-                        throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
-                    }
-                    int taskId = Integer.parseInt(inputWords[1]);
-                    tasks.markTaskAsDone(taskId);
-                    storage.saveFile(tasks.tasksAsString());
-                    break;
-                }
-                case "todo":
-                    if (inputWords.length == 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-                    }
-                    tasks.addTodo(inputWords[1]);
-                    storage.saveFile(tasks.tasksAsString());
-                    break;
-                case "deadline":
-                    if (inputWords.length == 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-                    }
-                    tasks.addDeadline(inputWords[1]);
-                    storage.saveFile(tasks.tasksAsString());
-                    break;
-                case "event":
-                    if (inputWords.length == 1) {
-                        throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-                    }
-                    tasks.addEvent(inputWords[1]);
-                    storage.saveFile(tasks.tasksAsString());
-                    break;
-                case "delete":
-                    if (inputWords.length == 1) {
-                        throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
-                    }
-                    int taskId = Integer.parseInt(inputWords[1]);
-                    tasks.deleteTask(taskId);
-                    storage.saveFile(tasks.tasksAsString());
-                    break;
-                case "find":
-                    if (inputWords.length != 2) {
-                        throw new DukeException("☹ OOPS!!! Please provide a only one keyword.");
-                    }
-                    tasks.findTask(inputWords[1]);
-                    break;
-                default:
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-            } catch (DateTimeException e) {
-                Ui.printError("Please provide date/time in the correct format: yyyy-mm-dd HH:mm");
-            } catch (Exception e) {
-                Ui.printError(e.getMessage());
-            }
-        }
-        while (!inputWords[0].equals("bye"));
-        System.out.println("Bye, hope to see you again!");
+
+    public Duke() {
+        this("./data/", "duke.txt");
     }
 
     /**
-     * Creates an instance of duke.Duke and starts the user interaction.
+     * Handles user input.
      *
-     * @param args Command line arguments.
+     * @return Response to user input.
      */
-    public static void main(String[] args) {
-        new Duke("./data/", "duke.txt").run();
+    public String getResponse(String input) {
+        String output = "";
+        String[] inputWords = null;
+
+        inputWords = Parser.parse(input);
+        try {
+            switch (inputWords[0]) {
+            case "bye":
+                System.out.println("Bye, hope to see you again!");
+                output += "Bye, hope to see you again!";
+                break;
+            case "list":
+                output += tasks.getAllTasksString();
+                break;
+            case "done": {
+                if (inputWords.length == 1) {
+                    throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
+                }
+                int taskId = Integer.parseInt(inputWords[1]);
+                output = tasks.markTaskAsDone(taskId);
+                storage.saveFile(tasks.getAllTasksString());
+                break;
+            }
+            case "todo":
+                if (inputWords.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                }
+                output = tasks.addTodo(inputWords[1]);
+                storage.saveFile(tasks.getAllTasksString());
+                break;
+            case "deadline":
+                if (inputWords.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                }
+                output = tasks.addDeadline(inputWords[1]);
+                storage.saveFile(tasks.getAllTasksString());
+                break;
+            case "event":
+                if (inputWords.length == 1) {
+                    throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
+                }
+                output = tasks.addEvent(inputWords[1]);
+                storage.saveFile(tasks.getAllTasksString());
+                break;
+            case "delete":
+                if (inputWords.length == 1) {
+                    throw new DukeException("☹ OOPS!!! Please provide a task ID that exists.");
+                }
+                int taskId = Integer.parseInt(inputWords[1]);
+                output = tasks.deleteTask(taskId);
+                storage.saveFile(tasks.getAllTasksString());
+                break;
+            case "find":
+                if (inputWords.length != 2) {
+                    throw new DukeException("☹ OOPS!!! Please provide a only one keyword.");
+                }
+                output = tasks.findTask(inputWords[1]);
+                break;
+            default:
+                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            }
+        } catch (DateTimeException e) {
+            Ui.printError("Please provide date/time in the correct format: yyyy-mm-dd HH:mm, where" +
+                    "time is optional.");
+            output += "Please provide date/time in the correct format: yyyy-mm-dd HH:mm, where" +
+                    "time is optional.";
+        } catch (Exception e) {
+            Ui.printError(e.getMessage());
+            output += e.getMessage();
+        }
+        return output;
     }
 }
 

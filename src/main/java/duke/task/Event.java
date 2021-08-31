@@ -13,7 +13,7 @@ public class Event extends Task {
     protected LocalDateTime dateTime;
     protected LocalDate date;
     protected DateTimeFormatter formatInput;
-    protected DateTimeFormatter formatOutputTime = DateTimeFormatter.ofPattern("MMM d yyyy hh:m a");
+    protected DateTimeFormatter formatOutputTime = DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a");
     protected DateTimeFormatter formatOutputNoTime = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
@@ -24,8 +24,9 @@ public class Event extends Task {
      * @param formatInput Format of the date and time inputted.
      * @param hasTime     Whether time was supplied.
      */
-    public Event(String description, String dateString, DateTimeFormatter formatInput, boolean hasTime) {
-        super(description);
+    public Event(String description, String dateString, DateTimeFormatter formatInput, boolean hasTime,
+                 boolean isDone) {
+        super(description, isDone);
         this.formatInput = formatInput;
         this.hasTime = hasTime;
         if (!hasTime) {
