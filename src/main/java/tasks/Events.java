@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents an event task that takes in date and time.
+ */
 public class Events extends Task {
     protected LocalDate date;
     protected LocalTime time;

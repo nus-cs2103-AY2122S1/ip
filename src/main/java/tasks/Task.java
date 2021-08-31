@@ -2,6 +2,9 @@ package tasks;
 
 import viper.Instruction;
 
+/**
+ * Represents a task in Viper.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -13,10 +16,17 @@ public class Task {
         this.type = type;
     }
 
+    /**
+     * Returns the status of task
+     * @return X if true, " " if false
+     */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
-    
+
+    /**
+     * Sets isDone of Task to true when task is done
+     */
     public void setDone() {
         this.isDone = true;
     }

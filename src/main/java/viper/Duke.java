@@ -7,12 +7,20 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
+/**
+ * A chatbot that manages user input tasks.
+ */
 public class Duke {
     
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke, initialise Ui, Storage and TaskList
+     * @param filePath
+     * @throws IOException
+     */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -24,6 +32,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts duke.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

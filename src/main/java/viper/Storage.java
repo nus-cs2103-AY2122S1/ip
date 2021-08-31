@@ -20,7 +20,6 @@ import java.util.Scanner;
 /**
  * Deals with loading tasks from the file and saving tasks in the file
  */
-
 public class Storage {
     
     private final String filePath;
@@ -32,7 +31,14 @@ public class Storage {
         file.getParentFile().mkdirs();
         file.createNewFile();
     }
-    
+
+    /**
+     * Reads lines from txt file, convert to respective tasks and add to task list.
+     * @return list of Tasks.
+     * @throws FileNotFoundException If txt file does not exist.
+     * @throws DukeException If line read is missing any information.
+     * @throws ParseException If string cannot be parsed to date.
+     */
     public ArrayList<Task> loadTasks() throws FileNotFoundException, DukeException, ParseException {
         ArrayList<Task> taskList = new ArrayList<>();
         Scanner sc = new Scanner(file);
@@ -98,13 +104,23 @@ public class Storage {
         }
         return taskList;
     }
-    
+
+    /**
+     * Adds a line in the txt file.
+     * @param task Task to be added.
+     * @throws IOException If the task is invalid.
+     */
     public void writeTask(Task task) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(task.toString() + System.lineSeparator());
         fw.close();
     }
-   
+
+    /**
+     * Removes line in the txt file.
+     * @param task Task to be deleted.
+     * @throws IOException If the task is invalid.
+     */
     public void deleteTask(Task task) throws IOException {
         File tempFile = File.createTempFile("temp", ".txt", file.getParentFile());
 
@@ -124,7 +140,12 @@ public class Storage {
         fw.close();
         boolean success = tempFile.renameTo(file);
     }
-    
+
+    /**
+     * Marks task as done.
+     * @param task Task to be marked done.
+     * @throws IOException If the task is invalid.
+     */
     public void doneTask(Task task) throws IOException {
         File tempFile = File.createTempFile("temp", ".txt", file.getParentFile());
         

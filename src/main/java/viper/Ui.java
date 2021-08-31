@@ -5,7 +5,6 @@ import java.util.Scanner;
 /**
  * deals with interactions with the user
  */
-
 public class Ui {
     private static final String indent = "       ";
     private static final String div = "\n ---------------------------------------------------------- \n";

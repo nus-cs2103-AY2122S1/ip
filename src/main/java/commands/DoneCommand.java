@@ -1,13 +1,15 @@
 package commands;
 
 import tasks.Task;
-import viper.Instruction;
 import viper.Storage;
 import viper.TaskList;
 import viper.Ui;
 
 import java.io.IOException;
 
+/**
+ * Marks task specified by user as done, using index.
+ */
 public class DoneCommand extends Command {
     String t;
     String[] s;
@@ -19,7 +21,7 @@ public class DoneCommand extends Command {
         this.s = t.split(" ", 2);
         index = Integer.parseInt(s[1]);
     }
-    
+
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         if (index < tasks.getSize() + 1) {

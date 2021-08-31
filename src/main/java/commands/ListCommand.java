@@ -5,6 +5,9 @@ import viper.Storage;
 import viper.TaskList;
 import viper.Ui;
 
+/**
+ * Lists everything in the taskList.
+ */
 public class ListCommand extends Command {
     
     @Override

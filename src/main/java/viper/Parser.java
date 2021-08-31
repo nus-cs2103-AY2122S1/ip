@@ -10,10 +10,16 @@ import commands.ListCommand;
 import exceptions.DukeException;
 
 /**
- * deals with making sense of the user command
+ * deals with making sense of the user command.
  */
 public class Parser {
-    
+
+    /**
+     * Returns a command based on user input.
+     * @param str User input.
+     * @return Command class.
+     * @throws DukeException If user input is invalid.
+     */
     public static Command parse(String str) throws DukeException {
         try {
             String[] splitStr = str.split(" ", 2);

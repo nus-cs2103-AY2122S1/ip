@@ -7,6 +7,9 @@ import tasks.Task;
 
 import java.io.IOException;
 
+/**
+ * Deletes command specified by user based on index
+ */
 public class DeleteCommand extends Command {
     String t;
     String[] s;
@@ -18,7 +21,14 @@ public class DeleteCommand extends Command {
         this.s = t.split(" ", 2);
         this.index = Integer.parseInt(s[1]);
     }
-    
+
+    /**
+     * Executes the delete command.
+     * @param tasks current tasklist.
+     * @param ui user input format.
+     * @param storage stores created command into the txt file.
+     * @throws IOException if task to be deleted is null.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         if (index < tasks.getSize() + 1) {
