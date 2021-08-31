@@ -9,12 +9,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
@@ -27,8 +31,8 @@ import java.util.ArrayList;
 
 public class Sados extends Application {
 
-    ObservableList<Task> tasks = FXCollections.observableArrayList();
-    ListView<Task> listView = new ListView<>(tasks);
+    private final ObservableList<Task> tasks = FXCollections.observableArrayList();
+    private final ListView<Task> listView = new ListView<>(tasks);
 
     @Override
     public void start(Stage stage) {
@@ -37,7 +41,7 @@ public class Sados extends Application {
 
         BorderPane topPanel = new BorderPane(); //Top panel
         Label nowDate = new Label();
-        nowDate.setText("Hello! Today's date is: " +  Ui.printDate(LocalDate.now()));
+        nowDate.setText("Hello! Today's date is: " + Ui.printDate(LocalDate.now()));
 
         HBox saveLoad = new HBox();
         Button save = new Button("Save");
@@ -111,7 +115,7 @@ public class Sados extends Application {
                 } else {
                     String searchName = nameInput.getText();
                     System.out.println("Finding " + searchName);
-                    filter(1, searchName, LocalDate.of(1,1,1));
+                    filter(1, searchName, LocalDate.of(1, 1, 1));
                 }
             } else {
                 if (dateInput.getText().isEmpty()) {
@@ -170,8 +174,6 @@ public class Sados extends Application {
         borders.setCenter(listView);
         borders.setBottom(bottomPanel);
 
-//        stage.setOnCloseRequest(e -> Storage.saveToFile(tasks));
-
         Scene home = new Scene(borders, 500, 250);
         stage.setScene(home);
         stage.show();
@@ -217,7 +219,7 @@ public class Sados extends Application {
                         if (e.dateEquals(date)) {
                             list.add(i.toString());
                         }
-                    } else if (i instanceof Deadline){
+                    } else if (i instanceof Deadline) {
                         Deadline d = (Deadline) i;
                         if (d.dateEquals(date)) {
                             list.add(i.toString());

@@ -23,6 +23,11 @@ public class Task {
         return ((isDone ? "[X] " : "[ ] ") + this.description);
     }
 
+    /**
+     * Checks if the description contains the keyword provided.
+     * @param str String to be queried.
+     * @return true if found, false otherwise.
+     */
     public boolean nameContains(String str) {
         String[] split = description.split(" ");
         boolean result = false;

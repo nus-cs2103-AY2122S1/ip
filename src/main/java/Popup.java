@@ -12,6 +12,10 @@ import javafx.stage.Stage;
 
 public class Popup {
 
+    /**
+     * Creates a popup window with the given message and an acknowledgement button.
+     * @param message Message to be displayed.
+     */
     public static void errorPopup(String message) {
         Stage window = new Stage();
 
@@ -33,6 +37,12 @@ public class Popup {
         window.show();
     }
 
+    /**
+     *
+     * Creates a popup window with the given message and an acknowledgement button.
+     * @param list List of items to be displayed.
+     * @param str String representation of the terms used for the filtering.
+     */
     public static void filterPopup(ObservableList<String> list, String str) {
         Stage window = new Stage();
 
