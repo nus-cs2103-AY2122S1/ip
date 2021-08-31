@@ -1,8 +1,8 @@
-import nyx.Ui;
+import nyx.NyxException;
 import nyx.Parser;
 import nyx.Storage;
 import nyx.TaskList;
-import nyx.NyxException;
+import nyx.Ui;
 
 /**
  * Entry point of the Nyx chatbot application.

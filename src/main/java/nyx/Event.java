@@ -37,7 +37,7 @@ public class Event extends Task {
      */
     @Override
     public String formatData() {
-        String dateFormat =  at.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        String dateFormat = at.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
         return String.format("E, %d, %s, %s\n", getStatusInt(), getContent(), dateFormat);
     }
 
