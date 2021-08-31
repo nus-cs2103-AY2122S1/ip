@@ -23,7 +23,7 @@ public abstract class Task {
         return String.format("%d|%s", this.isComplete ? 1 : 0, this.desc);
     };
 
-    public static Task parseRepr(String s) throws DukeException {
+    public static Task fromRepr(String s) throws DukeException {
         if (!s.matches("[TED][|][01][|].+[|].*")) {
             throw new DukeException.ParseException(s);
         }

@@ -6,105 +6,217 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
-    public static void main(String[] args) {
-        ArrayList<Task> tasks = new ArrayList<>();
-        try {
-            File dir = new File("./data");
-            File f = new File("./data/duke.txt");
-            if (!dir.exists()) {
-                dir.mkdirs();
-                f.createNewFile();
-            } else if (!f.exists()) {
-                f.createNewFile();
-            } else { // read line by line
-                BufferedReader reader = new BufferedReader(new FileReader(f));
-                String row;
-                while ((row = reader.readLine()) != null) {
-                    try {
-                        tasks.add(Task.parseRepr(row));
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
-                }
+    private Ui ui;
+    private Storage storage;
+    private TaskList tasks;
+    private Parser parser;
+
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        this.tasks = new TaskList();
+        this.parser = new Parser();
+    }
+
+    public void run() {
+        ArrayList<String> lines =  this.storage.readFile();
+        for (String line : lines) {
+            try {
+                this.tasks.addTaskFromRepr(line);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-        } catch (java.io.IOException e) {
-            System.out.println(e.getMessage());
+        }
+        this.ui.init();
+        boolean b;
+        while ((b = this.parser.parseCommand(this.ui.readInput()))) {}
+        return;
+    }
+
+    public class Storage {
+        String filePath;
+
+        public Storage(String filePath) {
+            this.filePath = filePath;
         }
 
-        Scanner scanner = new Scanner(System.in);
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        String input;
+        public ArrayList<String> readFile() {
+            ArrayList<String> arr = new ArrayList<>();
+            try {
+                File f = new File(filePath);
+                if (!f.exists()) {
+                    f.createNewFile();
+                } else { // read line by line
+                    BufferedReader reader = new BufferedReader(new FileReader(f));
+                    String row;
+                    while ((row = reader.readLine()) != null) {
+                        arr.add(row);
+                    }
+                }
+            } catch (java.io.IOException e) {
+                System.out.println(e.getMessage());
+            }
+            return arr;
+        }
 
-        while (true) {
-            input = scanner.nextLine();
-            switch (input) {
+        public void writeFile(ArrayList<String> lines) {
+            try {
+                FileWriter fw = new FileWriter(filePath, false);
+                lines.forEach((line) -> {
+                    try {
+                        fw.write(line); // write each task
+                        fw.write("\n");
+                    } catch (java.io.IOException e) {
+                        System.out.println(e.getMessage());
+                    }
+                });
+                fw.close();
+            } catch (java.io.IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        public void appendFile(String line) {
+            try {
+                FileWriter fw = new FileWriter(filePath, true);
+                fw.write(line); // write each task
+                fw.write("\n");
+                fw.close();
+            } catch (java.io.IOException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public class TaskList {
+        ArrayList<Task> tasks;
+
+        public TaskList() {
+            this.tasks = new ArrayList<>();
+        }
+
+        public boolean addTaskFromRepr(String repr) {
+            try {
+               Task t = Task.fromRepr(repr);
+               return tasks.add(t);
+            } catch (DukeException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+        }
+
+        public boolean addTask(Task t) {
+            return tasks.add(t);
+        }
+
+        public void printTasks() {
+            for (int i = 0; i < tasks.size(); i++) {
+                System.out.printf("%d.%s\n", i + 1, tasks.get(i));
+            }
+        }
+
+        public Task markAsComplete(int i)  {
+            Task t = tasks.get(i - 1);
+            t.markAsComplete();
+            return t;
+        }
+
+        public Task deleteTask(int i)  {
+            return tasks.remove(i - 1);
+        }
+
+        public int numberOfTasks() {
+            return tasks.size();
+        }
+
+        public ArrayList<String> toRepr() {
+            ArrayList<String> arr = new ArrayList<>();
+            for (Task t: tasks) {
+                arr.add(t.getRepr());
+            }
+            return arr;
+        }
+
+    }
+
+    public class Ui {
+        Scanner scanner;
+
+        public Ui() {
+            this.scanner = new Scanner(System.in);
+        }
+
+        public void init() {
+            String logo = " ____        _        \n"
+                    + "|  _ \\ _   _| | _____ \n"
+                    + "| | | | | | | |/ / _ \\\n"
+                    + "| |_| | |_| |   <  __/\n"
+                    + "|____/ \\__,_|_|\\_\\___|\n";
+            System.out.println("Hello from\n" + logo);
+        }
+
+        public String readInput() {
+            return scanner.nextLine();
+        }
+    }
+
+    public class Parser {
+
+        public boolean parseCommand(String command) {
+            switch (command) {
             case "bye": // exit
                 System.out.println("Bye. Hope to see you again soon!");
-                return;
-            case "list": // read
-                for (int i = 0; i < tasks.size(); i++) {
-                    System.out.printf("%d.%s\n", i + 1, tasks.get(i));
-                }
-                break;
-            default: // update & delete
-                if (input.matches("done \\d+")) {
-                    int i = Integer.parseInt(input.substring("done ".length()));
+                return false;
+            case "list": // READ: print tasks
+                tasks.printTasks();
+                return true;
+            default: // UPDATE | DELETE
+                if (command.matches("done \\d+")) {
+                    int i = Integer.parseInt(command.substring("done ".length()));
                     System.out.println("Nice! I've marked this task as done:");
-                    Task t = tasks.get(i - 1);
-                    t.markAsComplete();
+                    Task t = tasks.markAsComplete(i);
                     System.out.println(t);
-                } else if (input.matches("delete \\d+")) {
-                    int i = Integer.parseInt(input.substring("delete ".length()));
+                    storage.writeFile(tasks.toRepr());
+                } else if (command.matches("delete \\d+")) {
+                    int i = Integer.parseInt(command.substring("delete ".length()));
                     System.out.println("Noted. I've removed this task:");
-                    Task t = tasks.remove(i - 1);
+                    Task t = tasks.deleteTask(i);
                     System.out.println(t);
-                } else { // add task
+                    storage.writeFile(tasks.toRepr());
+                } else { // CREATE: new task
                     try {
                         Task t;
-                        if (input.matches("event.*")) {
-                            int k = input.indexOf("/at");
+                        if (command.matches("event.*")) {
+                            int k = command.indexOf("/at");
                             if (k < 0) {
                                 throw new DukeException.MissingArgumentException("/at");
                             }
-                            t = new Task.Event(false, input.substring("event".length(), k).trim(), input.substring(k + 3).trim());
-                        } else if (input.matches("deadline.*")) {
-                            int k = input.indexOf("/by");
+                            t = new Task.Event(false, command.substring("event".length(), k).trim(), command.substring(k + 3).trim());
+                        } else if (command.matches("deadline.*")) {
+                            int k = command.indexOf("/by");
                             if (k < 0) {
                                 throw new DukeException.MissingArgumentException("/by");
                             }
-                            t = new Task.Deadline(false, input.substring("deadline".length(), k).trim(), input.substring(k + 3).trim());
-                        } else if (input.matches("todo.*")) {
-                            t = new Task.Todo(false, input.substring("todo".length()));
+                            t = new Task.Deadline(false, command.substring("deadline".length(), k).trim(), command.substring(k + 3).trim());
+                        } else if (command.matches("todo.*")) {
+                            t = new Task.Todo(false, command.substring("todo".length()));
                         } else {
                             throw new DukeException.UnknownInputException();
                         }
-                        tasks.add(t);
-                        System.out.printf("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n", t, tasks.size());
+                        tasks.addTask(t);
+                        storage.appendFile(t.getRepr());
+                        System.out.printf("Got it. I've added this task:\n%s\nNow you have %d tasks in the list\n", t, tasks.numberOfTasks());
                     } catch (DukeException e) {
                         System.out.println(e.getMessage());
                     }
                 }
-                try {
-                    FileWriter fw = new FileWriter("./data/duke.txt", false);
-                    tasks.forEach((task) -> {
-                        try {
-                            fw.write(task.getRepr()); // write each task
-                            fw.write("\n");
-                        } catch (java.io.IOException e) {
-                            System.out.println(e.getMessage());
-                        }
-                    });
-                    fw.close();
-                } catch (java.io.IOException e) {
-                    System.out.println(e.getMessage());
-                }
+                return true;
             }
         }
+    }
+
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }
 
