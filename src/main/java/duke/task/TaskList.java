@@ -34,7 +34,7 @@ public class TaskList {
     }
 
     private static Integer getTaskNumber(String input) {
-        String arr[] = input.split(" ", 2);
+        String[] arr = input.split(" ", 2);
         Integer taskNumber = Integer.parseInt(arr[1]);
         return taskNumber;
     }

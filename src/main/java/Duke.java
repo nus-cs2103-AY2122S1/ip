@@ -1,9 +1,7 @@
 import duke.parser.Parser;
-import duke.task.TaskList;
 import duke.storage.Storage;
+import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.lang.String;
 
 /**
  * Duke is a personal assistant chatbot that helps keep track of various tasks.
