@@ -1,10 +1,12 @@
 package petal;
 
+import javafx.application.Application;
 import petal.command.Command;
 import petal.components.Parser;
 import petal.components.Storage;
 import petal.components.TaskList;
 import petal.components.Ui;
+import petal.gui.Main;
 
 /**
  * The class for the Petal bot. It is able to respond to
@@ -46,6 +48,10 @@ public class Petal {
     public void run(String message) {
         Command command = parser.handleInput(message);
         command.execute(taskList, ui, storage);
+    }
+
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
 }
 
