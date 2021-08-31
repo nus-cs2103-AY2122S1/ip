@@ -8,11 +8,6 @@ import java.time.LocalDate;
  */
 public class Event extends Task {
     /**
-     * The date of the event
-     */
-    private LocalDate date;
-
-    /**
      * Constructs an Event class with the given description, completion status and the date of the event.
      *
      * @param description The description of the event.
@@ -20,8 +15,7 @@ public class Event extends Task {
      * @param isDone      The completion status of the event.
      */
     public Event(String description, LocalDate date, boolean isDone) {
-        super(description, isDone);
-        this.date = date;
+        super("Event", description, date, isDone);
     }
 
     @Override

@@ -8,11 +8,6 @@ import java.time.LocalDate;
  */
 public class Deadline extends Task {
     /**
-     * The date of the deadline
-     */
-    private LocalDate date;
-
-    /**
      * Creates a deadline task with the given description, completion status and the due date.
      *
      * @param description The description of the task.
@@ -20,7 +15,7 @@ public class Deadline extends Task {
      * @param isDone      The completion status of the task.
      */
     public Deadline(String description, LocalDate date, boolean isDone) {
-        super(description, isDone);
+        super("Deadline", description, date, isDone);
         this.date = date;
     }
 

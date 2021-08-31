@@ -3,15 +3,14 @@ package duke.storage;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 
 /**
  * Represents a Task list that can be added to and removed from.
  */
 public class TaskList {
-    /**
-     * The current list of tasks
-     */
+    /* The current list of tasks */
     private List<Task> tasks;
 
     /**
@@ -38,7 +37,12 @@ public class TaskList {
      * @param serialNo The serial number of the task to remove.
      * @return The task that was removed.
      */
-    public Task remove(int serialNo) {
+    public Task remove(int serialNo) throws DukeException {
+        if (tasks.isEmpty()) {
+            throw new DukeException("Sorry Boss, there is no task to remove.");
+        } else if (serialNo < 1 || serialNo > tasks.size()) {
+            throw new DukeException("Sorry Boss, please provide the correct serial no.");
+        }
         return this.tasks.remove(serialNo - 1);
     }
 
@@ -48,7 +52,12 @@ public class TaskList {
      * @param serialNo The serial number of the task to be marked.
      * @return The task that was marked.
      */
-    public Task markDone(int serialNo) {
+    public Task markDone(int serialNo) throws DukeException {
+        if (tasks.isEmpty()) {
+            throw new DukeException("Sorry Boss, there is no task to mark as done.");
+        } else if (serialNo < 1 || serialNo > tasks.size()) {
+            throw new DukeException("Sorry Boss, please provide the correct serial no.");
+        }
         Task task = tasks.get(serialNo - 1);
         task.markAsDone();
         return task;

@@ -1,28 +1,31 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Base class for all task classes. Contains a description of the task and a boolean value indicating
  * if the task is completed.
  */
 public class Task {
-    /**
-     * The description for the task
-     */
+    /* The description for the task */
     protected String description;
-    /**
-     * The completion status of the task
-     */
+    /* The completion status of the task */
     protected boolean isDone;
-
+    /* The date for the task */
+    protected LocalDate date;
+    /* The type of task */
+    private final String taskType;
     /**
      * Creates a task class with the given description and the completion status.
      *
      * @param description Description of the task.
      * @param isDone      Completion status of the task.
      */
-    public Task(String description, boolean isDone) {
+    public Task(String taskType, String description, LocalDate date, boolean isDone) {
+        this.taskType = taskType;
         this.description = description;
         this.isDone = isDone;
+        this.date = date;
     }
 
     /**
@@ -42,13 +45,29 @@ public class Task {
     }
 
     /**
-     * Returns the status icon of the task depending on the completion status. The status icon is used
-     * when displaying the task in the UI.
+     * Returns true if the task has been marked as done or else false.
      *
-     * @return the status icon for this task.
+     * @return A boolean indicating if the task has been marked as done.
      */
-    public String getStatusIcon() {
-        return isDone ? "X" : " ";
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
+     * Returns the date of the task. This value can be null if the task is a Todo.
+     *
+     * @return The date of the task.
+     */
+    public LocalDate getDate() {
+        return date;
+    }
+
+    /**
+     * Returns the type of this task as a String.
+     * @return The type of this task.
+     */
+    public String getTaskType() {
+        return taskType;
     }
 
     /**
@@ -60,13 +79,4 @@ public class Task {
         return String.format("T | %d | %s", isDone ? 1 : 0, this.description);
     }
 
-    /**
-     * Returns the string representation of the task meant to be displayed in the UI.
-     *
-     * @return the string representation of the task to be displayed in the UI.
-     */
-    @Override
-    public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), getDescription());
-    }
 }

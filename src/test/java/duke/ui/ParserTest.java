@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import duke.command.AddCommand;
 import duke.exception.DukeException;
+import duke.parser.Parser;
 
 public class ParserTest {
     @Test
