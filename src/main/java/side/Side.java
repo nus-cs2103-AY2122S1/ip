@@ -80,6 +80,7 @@ public class Side {
 
     /**
      * Launches GUI.
+     *
      * @param args Standard main method args.
      */
     public static void main(String[] args) {
