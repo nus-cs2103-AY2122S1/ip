@@ -1,9 +1,9 @@
 package duke.task;
 
-import duke.Storage;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.Storage;
 
 /**
  * duke.task.TaskCollection represents the collection of tasks stored in the Duke application.
@@ -27,7 +27,7 @@ public class TaskCollection {
     public void saveTasks() {
         StringBuilder taskCollectionString = new StringBuilder();
 
-        for (int index = 0; index < this.tasks.size(); index ++) {
+        for (int index = 0; index < this.tasks.size(); index++) {
             if (index > 0) {
                 taskCollectionString.append(System.lineSeparator());
             }

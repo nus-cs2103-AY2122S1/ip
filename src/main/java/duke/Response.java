@@ -4,10 +4,10 @@ package duke;
  * A duke.Response from the application to some user input.
  */
 public class Response {
-    public static String BASE_INDENT = "    ";
-    public static String MESSAGE_INDENT = " ";
+    private static final String BASE_INDENT = "    ";
+    private static final String MESSAGE_INDENT = " ";
 
-    public static String LINE = "____________________________________________________________";
+    private static final String LINE = "____________________________________________________________";
 
     private String message;
 
@@ -59,7 +59,7 @@ public class Response {
         outputLines[0] = Response.BASE_INDENT + Response.LINE;
         outputLines[numberOfOutputLines - 1] = Response.BASE_INDENT + Response.LINE;
 
-        for (int index = 0; index < messageLines.length; index ++) {
+        for (int index = 0; index < messageLines.length; index++) {
             outputLines[index + messageOffset] = Response.BASE_INDENT + Response.MESSAGE_INDENT + messageLines[index];
         }
 

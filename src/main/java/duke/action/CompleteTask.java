@@ -33,8 +33,8 @@ public class CompleteTask implements Action {
      */
     private Response respond() {
         return new Response(new String[]{
-                "Nice! I've marked this task as done:",
-                String.format("  %s", this.task.toString()),
+            "Nice! I've marked this task as done:",
+            String.format("  %s", this.task.toString()),
         });
     }
 }

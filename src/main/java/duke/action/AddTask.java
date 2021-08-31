@@ -37,9 +37,9 @@ public class AddTask implements Action {
      */
     private Response respond() {
         return new Response(new String[]{
-                "Got it. I've added this task:",
-                String.format("  %s", this.task.toString()),
-                String.format("Now you have %d tasks in the list.", this.taskCollection.size())
+            "Got it. I've added this task:",
+            String.format("  %s", this.task.toString()),
+            String.format("Now you have %d tasks in the list.", this.taskCollection.size())
         });
     }
 }

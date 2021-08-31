@@ -1,7 +1,6 @@
 package duke.action;
 
 import duke.Response;
-import duke.action.Action;
 import duke.task.TaskCollection;
 
 /**
@@ -33,8 +32,8 @@ public class ListTasks implements Action {
      */
     private Response respond() {
         return new Response(new String[]{
-                "Here are the tasks in your list:",
-                this.taskCollection.toString(),
+            "Here are the tasks in your list:",
+            this.taskCollection.toString(),
         });
     }
 }

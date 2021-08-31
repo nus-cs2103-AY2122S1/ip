@@ -38,9 +38,9 @@ public class DeleteTask implements Action {
      */
     private Response respond(Task deletedTask) {
         return new Response(new String[]{
-                "Noted. I've removed this task:",
-                String.format("  %s", deletedTask.toString()),
-                String.format("Now you have %d tasks in the list.", this.taskCollection.size())
+            "Noted. I've removed this task:",
+            String.format("  %s", deletedTask.toString()),
+            String.format("Now you have %d tasks in the list.", this.taskCollection.size())
         });
     }
 }

@@ -1,7 +1,6 @@
 package duke.action;
 
 import duke.Response;
-import duke.action.Action;
 
 public class GoodbyeUser implements Action {
     /**
@@ -10,7 +9,7 @@ public class GoodbyeUser implements Action {
      */
     public Response execute() {
         return new Response(new String[]{
-                "Bye. Hope to see you again soon!",
+            "Bye. Hope to see you again soon!",
         });
     }
 }

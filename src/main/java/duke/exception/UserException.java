@@ -2,8 +2,6 @@ package duke.exception;
 
 import duke.Response;
 
-import java.lang.Exception;
-
 /**
  * A duke.exception.UserException represents an Exception thrown because of an invalid input by the User.
  */

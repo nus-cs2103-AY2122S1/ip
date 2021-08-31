@@ -4,11 +4,11 @@ package duke.task;
  * duke.task.Task is the base class for all tasks stored in the Duke application.
  */
 public class Task {
-    private static final String NOT_DONE_STATUS_ICON = " ";
-    private static final String DONE_STATUS_ICON = "X";
-
     protected static final String STORAGE_STRING_PARSING_DELIMITER = " \\| ";
     protected static final String STORAGE_STRING_DELIMITER = " | ";
+
+    private static final String NOT_DONE_STATUS_ICON = " ";
+    private static final String DONE_STATUS_ICON = "X";
     private static final String DONE_CHARACTER = "1";
     private static final String NOT_DONE_CHARACTER = "0";
 
@@ -87,9 +87,10 @@ public class Task {
             task = new ToDo(taskSubstrings[2]);
             break;
         default:
-            throw new RuntimeException(
-                    String.format("duke.task.TaskType %s is not accounted for in switch statement.", taskType.toString())
-            );
+            throw new RuntimeException(String.format(
+                "duke.task.TaskType %s is not accounted for in switch statement.",
+                taskType.toString()
+            ));
         }
 
         if (taskSubstrings[1].equals(Task.DONE_CHARACTER)) {

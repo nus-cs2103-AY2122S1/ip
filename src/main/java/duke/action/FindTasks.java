@@ -1,10 +1,10 @@
 package duke.action;
 
+import java.util.List;
+
 import duke.Response;
 import duke.task.Task;
 import duke.task.TaskCollection;
-
-import java.util.List;
 
 /**
  * duke.action.FindTasks is an Action that finds a List of duke.task.Tasks that match a given String.
