@@ -39,13 +39,13 @@ public class FindCommand extends Command {
         Pattern pattern = Pattern.compile(keyword, Pattern.CASE_INSENSITIVE);
         for (int i = 0; i < taskList.amountOfTasks(); i++) {
             Matcher matcher = pattern.matcher(taskList.getTask(i).getDescription());
+            System.out.println(taskList.getTask(i).getDescription() + matcher.find());
             if (matcher.find()) {
                 findResult.add(taskList.getTask(i));
             }
         }
 
         String[] findResultString = new String[findResult.size() + 1];
-        findResultString[0] = "Here are the matching tasks in your list:";
         for (int i = 0; i < findResult.size(); i++) {
             findResultString[i + 1] = "  " + (i + 1) + ". " + findResult.get(i).toString();
         }

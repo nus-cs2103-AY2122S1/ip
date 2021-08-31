@@ -34,13 +34,21 @@ public class Parser {
             }
             if (fullCommand.length() >= 6 && fullCommand.substring(0, 4).equals("done")) {
                 String s2 = fullCommand.substring(5);
-                int taskIndex = Integer.parseInt(s2) - 1;
-                return new DoneCommand(taskIndex);
+                try {
+                    int taskIndex = Integer.parseInt(s2) - 1;
+                    return new DoneCommand(taskIndex);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Cannot parse this command.");
+                }
             }
             if (fullCommand.length() >= 8 && fullCommand.substring(0, 6).equals("delete")) {
                 String s2 = fullCommand.substring(7);
-                int taskIndex = Integer.parseInt(s2) - 1;
-                return new DeleteCommand(taskIndex);
+                try {
+                    int taskIndex = Integer.parseInt(s2) - 1;
+                    return new DeleteCommand(taskIndex);
+                } catch (NumberFormatException e) {
+                    throw new DukeException("Cannot parse this command.");
+                }
             }
             if (fullCommand.length() >= 6 && fullCommand.substring(0, 4).equals("todo")) {
                 String description = fullCommand.substring(5);
