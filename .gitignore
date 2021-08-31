@@ -3,7 +3,6 @@
 /out/
 /*.iml
 src/test/java/.idea/
-src/main/java/.idea/
 
 # Gradle build files
 /.gradle/

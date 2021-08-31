@@ -2,6 +2,7 @@ package duke;
 
 import java.util.Scanner;
 import duke.task.Task;
+import java.util.ArrayList;
 
 /**
  * Represents the UI of the chatbot.

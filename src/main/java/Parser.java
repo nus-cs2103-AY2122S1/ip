@@ -13,6 +13,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
+import duke.command.FindCommand;
 import duke.exception.IllegalCommandException;
 import duke.exception.IllegalTaskException;
 
@@ -101,10 +102,16 @@ public class Parser {
             localTime = LocalTime.parse(splitDateTime[1], DateTimeFormatter.ofPattern("HHmm"));
             return new AddCommand(new Event(task, localDate, localTime));
         }
-        case "bye":
+        case "find" : {
+            String keyword = fullCommand.replaceFirst("find ", "");
+            return new FindCommand(keyword);
+        }
+        case "bye": {
             return new ExitCommand();
-        default:
+        }
+        default: {
             throw new IllegalCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
         }
     }
 
