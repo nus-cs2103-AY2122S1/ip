@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 /**
  * Represents the storage file that stores the user's tasklist.
+ *
+ * @author Ne Zhijian, Didymus A0218159Y
  */
 public class Storage {
     private final String FILE_PATH;

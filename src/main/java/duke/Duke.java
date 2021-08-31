@@ -150,8 +150,14 @@ public class Duke {
 //        }
 //    }
 
+    /**
+     * Gets the response from the duke based on user input.
+     * @param input user input into the textfield.
+     * @return duke response based on user input.
+     * @throws DukeException if user input violates given rules.
+     */
     public String getResponse(String input) throws DukeException {
-
+        this.openDukeChatBot();
         File output = new File(this.FILE_PATH);
 
         if (!output.isFile()) {

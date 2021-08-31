@@ -5,6 +5,8 @@ import duke.task.TaskList;
 
 /**
  * Represents the user interface that interacts with the user for text.
+ *
+ * @author Ne Zhijian, Didymus A0218159Y
  */
 public class Ui {
 

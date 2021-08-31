@@ -99,6 +99,11 @@ public class GUI {
                 "\t" + task + "\n");
     }
 
+    /**
+     * Prints the success message when task is found.
+     * @param tasks list of tasks saved by the Duke chatbot.
+     * @return tasks that match the user keyword.
+     */
     public static String printFindMessage(TaskList tasks) {
         return GUI.formatDukeMessage("Here are the matching tasks in your list:\n" +
                 tasks.toString());

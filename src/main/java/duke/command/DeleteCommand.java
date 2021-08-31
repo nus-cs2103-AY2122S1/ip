@@ -6,7 +6,6 @@ import duke.task.TaskList;
 import duke.GUI;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Represents the general delete command.

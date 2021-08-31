@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.exception.DukeFindIncorrectArgument;
 import duke.exception.DukeIncorrectInputs;
 import duke.exception.DukeNoSuchTask;
 import duke.exception.DukeUnableToFind;
@@ -89,6 +88,13 @@ public class TaskList {
         return this.listOfTasks.remove(i - 1);
     }
 
+    /**
+     * Finds the tasks based on the keyword from the user.
+     * @param keyword keyword from user.
+     * @return all tasks that have the keyword.
+     * @throws DukeIncorrectInputs if the command entered violates given
+     * rules.
+     */
     public TaskList findTasks(String keyword) throws DukeIncorrectInputs {
         int len = this.listOfTasks.size();
         TaskList tasksWithKey = new TaskList();

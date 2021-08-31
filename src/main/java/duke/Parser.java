@@ -6,6 +6,11 @@ import duke.exception.*;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the Parser that parses all commands from user.
+ *
+ * @author Ne Zhijian, Didymus A0218159Y
+ */
 public class Parser {
 
     /**

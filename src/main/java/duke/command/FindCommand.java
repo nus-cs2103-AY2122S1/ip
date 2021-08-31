@@ -2,11 +2,7 @@ package duke.command;
 
 import duke.Duke;
 import duke.GUI;
-import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class FindCommand extends Command {
     private final String keyword;

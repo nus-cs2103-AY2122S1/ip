@@ -3,6 +3,8 @@ package duke.exception;
 /**
  * Represents the Incorrect Argument Exception class that is thrown
  * when the user does not enter an integer after 'done' or 'delete.
+ *
+ * @author Ne Zhijian, Didymus A0218159Y
  */
 public class DukeUnableToFind extends DukeIncorrectInputs {
     /**
