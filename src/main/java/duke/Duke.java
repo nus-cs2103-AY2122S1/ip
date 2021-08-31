@@ -1,59 +1,59 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+
 /**
  * This class encapsulates Duke, an interactive task management chat-bot.
  *
  * @author Kleon Ang
  */
-public class Duke {
-    private final Parser parser;
-    private final Storage storage;
-    private final Ui ui;
-    private TaskList tasks;
+public class Duke extends Application {
+    private static Parser parser;
+    private static Storage storage;
+    private static TaskList tasks;
+    private final String DATA_FILENAME = "duke.txt";
+    private Ui ui;
 
     /**
-     * Constructor for a Duke chat-bot.
-     *
-     * @param fileName The name of the file to store data in.
+     * Empty constructor for Duke to be launched by Launcher.
      */
-    public Duke(String fileName) {
-        this.ui = new Ui();
-        this.storage = new Storage(fileName);
+    public Duke() {
+    }
+
+    /**
+     * Gets response from Parser, then exit or rewrite data if needed.
+     *
+     * @param input User input.
+     * @return The response from Duke.
+     * @throws DukeException A Duke-specific exception that may occur when parsing user input.
+     */
+    public static String getResponse(String input) throws DukeException {
+        String response = parser.parse(input);
+        if (parser.toExit()) {
+            return response;
+        }
+        if (parser.toRewrite()) {
+            storage.rewriteData(tasks);
+        }
+        return response;
+    }
+
+    /**
+     * Starts up the user interface with a given Stage.
+     * @param stage A Stage for the user interface.
+     */
+    @Override
+    public void start(Stage stage) {
+        this.ui = new Ui(stage);
+        storage = new Storage(DATA_FILENAME);
         try {
-            this.tasks = new TaskList(this.storage.load());
+            tasks = new TaskList(storage.load());
+            this.ui.showLoadingSuccess(DATA_FILENAME);
         } catch (DukeException e) {
-            this.ui.showLoadingError(fileName);
-            this.tasks = new TaskList();
+            tasks = new TaskList();
+            this.ui.showLoadingError(DATA_FILENAME);
         }
-        this.parser = new Parser(this.tasks);
-    }
-
-    /**
-     * Run Duke, accepting commands until a "bye" command is issued.
-     */
-    public void run() {
-        while (true) {
-            try {
-                String readIn = this.ui.nextLine();
-                this.tasks = this.parser.parse(readIn);
-                if (this.parser.toExit()) {
-                    break;
-                }
-                if (this.parser.toRewrite()) {
-                    this.storage.rewriteData(this.tasks);
-                }
-            } catch (DukeException e) {
-                Ui.printReply(e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * Main method where Duke is run from.
-     *
-     * @param args Command-line arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("duke.txt").run();
+        parser = new Parser(tasks);
     }
 }

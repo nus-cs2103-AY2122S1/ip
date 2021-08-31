@@ -28,7 +28,7 @@ public class Parser {
         this.isFind = false;
     }
 
-    private void list(TaskList tasks) throws DukeException {
+    private String list(TaskList tasks) throws DukeException {
         if (tasks.size() == 0) {
             throw new DukeException("There are currently no tasks in your list.");
         }
@@ -44,16 +44,16 @@ public class Parser {
                 tasksBuilder.append("\n");
             }
         }
-        Ui.printReply(tasksBuilder.toString());
+       return tasksBuilder.toString();
     }
 
-    private void done(int counter) throws DukeException {
+    private String done(int counter) throws DukeException {
         if (counter <= 0 || counter > tasks.size()) {
             throw new DukeException("Sorry, no such task of index " + counter + ".");
         }
         Task doneTask = tasks.get(counter - 1);
         doneTask.markAsDone();
-        Ui.printReply("Nice! I've marked this task as done:\n  " + doneTask);
+        return "Nice! I've marked this task as done:\n  " + doneTask;
     }
 
     /**
@@ -81,12 +81,12 @@ public class Parser {
      * @return A TaskList containing the updated Tasks after command is parsed.
      * @throws DukeException A Duke-specific exception that occurs when user input is parsed.
      */
-    public TaskList parse(String readIn) throws DukeException {
+    public String parse(String readIn) throws DukeException {
         if (readIn.equals("bye")) {
-            Ui.printReply("Bye. Hope to see you again soon!");
             this.isExit = true;
+            return "Bye. Hope to see you again soon!";
         } else if (readIn.equals("list")) {
-            list(this.tasks);
+            return list(this.tasks);
         } else {
             String[] commandArguments = readIn.split(" ", 2);
             String command = commandArguments[0];
@@ -95,17 +95,14 @@ public class Parser {
                 arguments = commandArguments[1];
             }
 
-            switch (command) {
-            case "done": {
+            if (command.equals("done")) {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
                 }
                 this.toRewriteData = true;
                 int counter = Integer.parseInt(arguments);
-                done(counter);
-                break;
-            }
-            case "deadline": {
+                return done(counter);
+            } else if (command.equals("deadline")) {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
                 }
@@ -118,13 +115,11 @@ public class Parser {
                 String byString = splitTask[1];
                 try {
                     LocalDateTime by = LocalDateTime.parse(byString, FORMATTER);
-                    this.tasks.addTask(new Deadline(description, by));
+                    return this.tasks.addTask(new Deadline(description, by));
                 } catch (DateTimeParseException e) {
-                    Ui.printReply("Datetime should be in YYYY-MM-DD hr:min (24h clock) format.");
+                    throw new DukeException("Datetime should be in YYYY-MM-DD hr:min (24h clock) format.");
                 }
-                break;
-            }
-            case "event": {
+            } else if (command.equals("event")) {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
                 }
@@ -137,30 +132,24 @@ public class Parser {
                 String atString = splitTask[1];
                 try {
                     LocalDateTime at = LocalDateTime.parse(atString, FORMATTER);
-                    this.tasks.addTask(new Event(description, at));
+                    return this.tasks.addTask(new Event(description, at));
                 } catch (DateTimeParseException e) {
-                    Ui.printReply("Datetime should be in YYYY-MM-DD hr:min (24h clock) format.");
+                    throw new DukeException("Datetime should be in YYYY-MM-DD hr:min (24h clock) format.");
                 }
-                break;
-            }
-            case "todo": {
+            } else if (command.equals("todo")) {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The description of '" + command + "' cannot be empty.");
                 }
                 this.toRewriteData = true;
-                tasks.addTask(new Todo(arguments));
-                break;
-            }
-            case "delete": {
+                return this.tasks.addTask(new Todo(arguments));
+            } else if (command.equals("delete")) {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The index of '" + command + "' cannot be empty.");
                 }
                 this.toRewriteData = true;
                 int counter = Integer.parseInt(arguments);
-                tasks.deleteTask(counter);
-                break;
-            }
-            case "find": {
+                return this.tasks.deleteTask(counter);
+            } else if (command.equals("find")) {
                 if (commandArguments.length < 2) {
                     throw new DukeException("☹ OOPS!!! The keyword(s) of '" + command + "' cannot be empty.");
                 }
@@ -175,13 +164,10 @@ public class Parser {
                         }
                     }
                 }
-                list(matchingTasks);
-                break;
-            }
-            default:
+                return list(matchingTasks);
+            } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
-        return tasks;
     }
 }

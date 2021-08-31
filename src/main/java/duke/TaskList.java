@@ -30,12 +30,12 @@ public class TaskList extends ArrayList<Task> {
      * Adds a given task to the TaskList
      *
      * @param task The Task to be added into the TaskList.
+     * @return A confirmation message indicating the Task has been added.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.add(task);
-        String addMessage = "Got it. I've added this task:\n  " + task
+        return "Got it. I've added this task:\n  " + task
                 + "\nNow you have " + this.size() + " tasks in the list.";
-        Ui.printReply(addMessage);
     }
 
     /**
@@ -44,12 +44,12 @@ public class TaskList extends ArrayList<Task> {
      * @param counter The index of the Task to delete.
      * @throws DukeException A Duke-specific exception that occurs when index is out of bounds.
      */
-    public void deleteTask(int counter) throws DukeException {
+    public String deleteTask(int counter) throws DukeException {
         if (counter <= 0 || counter > this.size()) {
             throw new DukeException("Sorry, no such task of index " + counter + ".");
         }
         Task taskToRemove = this.remove(counter - 1);
-        Ui.printReply("Noted. I've removed this task:\n  " + taskToRemove
-                + "\nNow you have " + this.size() + " tasks in the list.");
+        return "Noted. I've removed this task:\n  " + taskToRemove
+                + "\nNow you have " + this.size() + " tasks in the list.";
     }
 }
