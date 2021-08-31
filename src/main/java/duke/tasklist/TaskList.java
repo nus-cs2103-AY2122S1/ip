@@ -27,17 +27,25 @@ public class TaskList {
     /**
      * Prints the list of tasks
      */
-    public void print() {
+    public String print() {
         boolean allTasksDone = true;
+        StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < this.size(); i++) {
-            int ind = i + 1;
-            System.out.println(ind + ". " + this.get(i).toString());
             if (!this.get(i).getStatus()) {
                 allTasksDone = false;
             }
+            String taskString = this.get(i).toString();
+            stringBuilder.append("\n").append(i+1).append(". ").append(taskString);
         }
+
+        return "Here are the tasks in your list:" + stringBuilder.toString() + taskDoneMessage(allTasksDone);
+    }
+
+    public String taskDoneMessage(boolean allTasksDone){
         if (allTasksDone) {
-            System.out.println("All tasks are complete!!");
+            return "All tasks are complete!!";
+        } else {
+            return "";
         }
     }
 
@@ -45,11 +53,11 @@ public class TaskList {
         return taskList.remove(i);
     }
 
-    public void printRemainingTasks() {
+    public String printRemainingTasks() {
         if (taskList.size() == 1) {
-            System.out.println("Now you have 1 task in the list.");
+            return "Now you have 1 task in the list.";
         } else {
-            System.out.printf("Now you have %s tasks in the list.\n", taskList.size());
+            return "Now you have "+ taskList.size() +" tasks in the list.\n";
         }
     }
 

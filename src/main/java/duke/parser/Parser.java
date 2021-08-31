@@ -1,13 +1,6 @@
 package duke.parser;
 
-import duke.commands.AddCommand;
-import duke.commands.ByeCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.TasksOnCommand;
+import duke.commands.*;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.IncorrectFormatException;
 import duke.exceptions.InvalidKeywordException;
@@ -21,6 +14,7 @@ import duke.tasks.ToDo;
 import duke.utils.Constants;
 
 import java.time.LocalDate;
+
 
 /**
  * The Parser class encapsulates the parsing, interpretation and validation of the user's input commands
@@ -59,7 +53,6 @@ public class Parser {
                 return parseTask(input, taskList);
             default:
                 throw new InvalidKeywordException();
-
             }
     }
 

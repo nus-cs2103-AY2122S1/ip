@@ -44,7 +44,7 @@ public class Duke {
                 String fullCommand = ui.read();
                 ui.displayLine();
                 Command c = Parser.parse(fullCommand, taskList);
-                c.execute(taskList, ui);
+                getResponse(fullCommand, ui);
                 storage.saveTasks(taskList);
                 isExit = c.isExit();
             } catch (DukeException ex) {
@@ -53,9 +53,16 @@ public class Duke {
                 ui.displayLine();
             }
         }
+        System.exit(0);
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+
+    public String getResponse(String input, Ui ui) {
+       try {
+           Command c = Parser.parse(input, taskList);
+           return c.execute(taskList, ui);
+       } catch (DukeException ex) {
+           return ui.displayError(ex.getMessage());
+       }
     }
 }

@@ -37,7 +37,7 @@ public class TasksOnCommand extends Command {
      * @param ui the ui in which the result message of the command execution is displayed to the user
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         TaskList list = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
@@ -52,6 +52,6 @@ public class TasksOnCommand extends Command {
                 }
             }
         }
-        ui.displayTasksOn(date, list);
+        return ui.displayTasksOn(date, list);
     }
 }

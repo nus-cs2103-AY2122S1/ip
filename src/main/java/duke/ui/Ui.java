@@ -45,62 +45,54 @@ public class Ui {
     }
 
 
-    public void displayBye() {
-        System.out.println(Constants.BYE);
-        System.exit(0);
+    public String displayBye() {
+        return Constants.BYE;
     }
 
-    public void displayList(TaskList list) {
-        System.out.println("Here are the tasks in your list:");
-        list.print();
+    public String displayList(TaskList list) {
+        return list.print();
     }
 
-    public void displayDone(String taskDetails) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(taskDetails);
+    public String displayDone(String taskDetails) {
+        return "Nice! I've marked this task as done:\n" + taskDetails;
     }
 
 
-    public void displayDelete(String taskDetails, TaskList list) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(taskDetails);
-        list.printRemainingTasks();
-
+    public String displayDelete(String taskDetails, TaskList list) {
+        return "Noted. I've removed this task:\n"
+                + taskDetails + "\n" + list.printRemainingTasks();
     }
 
-    public void displayTasksOn(LocalDate date, TaskList list) {
+    public String displayTasksOn(LocalDate date, TaskList list) {
         if (!list.isEmpty()) {
-            list.print();
+            return list.print();
         } else {
-            System.out.println("No tasks are due on " + date + "!");
+            return "No tasks are due on " + date + "!";
         }
     }
 
-    public void displayFind(String word, TaskList list) {
+    public String displayFind(String word, TaskList list) {
         if (!list.isEmpty()) {
-            System.out.println("Here are the matching tasks in your list:");
-            list.print();
+            return "Here are the matching tasks in your list:" + list.print();
         } else {
-            System.out.printf("Sorry there are no tasks containing '%s' in the list\n", word);
+            return "Sorry there are no tasks containing '%s' in the list\n";
         }
     }
 
-    public void displayLoadingError(Exception ex) {
-        System.out.println(ex.toString());
+    public String displayLoadingError(Exception ex) {
+        return ex.toString();
     }
 
-    public void displayError(String message) {
-        System.out.println(message);
+    public String displayError(String message) {
+        return message;
     }
 
-    public void displayLine() {
-        System.out.println(Constants.LINE);
+    public String displayLine() {
+        return Constants.LINE;
     }
 
-    public void displayAdd(Task task, TaskList taskList) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(task.toString());
-        taskList.printRemainingTasks();
+    public String displayAdd(Task task, TaskList taskList) {
+       return "Got it. I've added this task:\n" + task.toString() + "\n" + taskList.printRemainingTasks();
     }
 
 }

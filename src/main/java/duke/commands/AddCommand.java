@@ -33,12 +33,12 @@ public class AddCommand extends Command {
      * @param ui the ui in which the result message of the command execution is displayed to the user
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         if (taskList.containsTask(task)) {
             throw new RepeatedTaskException();
         } else {
             taskList.add(task);
-            ui.displayAdd(task, taskList);
+            return ui.displayAdd(task, taskList);
         }
     }
 }

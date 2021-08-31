@@ -29,7 +29,7 @@ public class ListCommand extends Command {
      */
 
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        ui.displayList(taskList);
+    public String execute(TaskList taskList, Ui ui) {
+        return ui.displayList(taskList);
     }
 }

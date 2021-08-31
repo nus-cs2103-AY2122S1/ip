@@ -26,7 +26,7 @@ public class ByeCommand extends Command {
      * @param ui the ui in which the result message of the command execution is displayed to the user
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
-        ui.displayBye();
+    public String execute(TaskList taskList, Ui ui) {
+        return ui.displayBye();
     }
 }

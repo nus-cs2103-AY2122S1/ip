@@ -35,10 +35,10 @@ public class DeleteCommand extends Command {
      * @param ui the ui in which the result message of the command execution is displayed to the user
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         try {
             Task currTask = taskList.remove(index - 1);
-            ui.displayDelete(currTask.toString(), taskList);
+            return ui.displayDelete(currTask.toString(), taskList);
         } catch (IndexOutOfBoundsException | NumberFormatException | NullPointerException ex) {
             throw new InvalidNumberInputException();
         }

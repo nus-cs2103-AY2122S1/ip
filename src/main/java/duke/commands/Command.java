@@ -14,7 +14,7 @@ public abstract class Command {
      * @param taskList the list of tasks upon which the operations need to be performed
      * @param ui the ui in which the result message of the command execution is displayed to the user
      */
-    public abstract void execute(TaskList taskList, Ui ui);
+    public abstract String execute(TaskList taskList, Ui ui);
 
     /**
      * Checks whether the chatbot should exit following the execution of the command

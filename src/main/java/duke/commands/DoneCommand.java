@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
      * @param ui the ui in which the result message of the command execution is displayed to the user
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList, Ui ui) {
         try {
             Task currTask = taskList.get((index - 1));
             if (currTask.getStatus()) {
@@ -45,7 +45,7 @@ public class DoneCommand extends Command {
             } else {
                 currTask.markAsDone();
             }
-            ui.displayDone(currTask.toString());
+            return ui.displayDone(currTask.toString());
         } catch (IndexOutOfBoundsException | NumberFormatException | NullPointerException ex) {
             throw new InvalidNumberInputException();
         }
