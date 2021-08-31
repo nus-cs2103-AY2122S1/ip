@@ -1,10 +1,11 @@
 package duke.command;
 
-import duke.Storage;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
+
 import duke.Ui;
+import duke.Storage;
 
 import java.time.LocalDate;
 
@@ -12,6 +13,7 @@ import java.time.LocalDate;
  * Represents a command to add a task with deadline
  */
 public class DeadlineCommand extends Command {
+
     public static final String COMMAND_WORD = "deadline";
     public static final String USAGE_TEXT = "Usage: deadline [description] /by [date in YYYY-MM-DD format]";
 

@@ -34,8 +34,7 @@ public class Event extends Task {
         String[] input = desc_date.split(" /at ",2);
         try {
             return new Event(input[0], LocalDate.parse(input[1]));
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             LocalDate d = LocalDate.parse(input[1], DateTimeFormatter.ofPattern("MMM d yyyy"));
             return new Event(input[0], d);
         }

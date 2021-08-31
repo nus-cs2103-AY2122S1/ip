@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.DukeException;
-import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
+
+import duke.DukeException;
+import duke.Storage;
 import duke.Ui;
 
 /**
@@ -40,7 +41,7 @@ public class DoneCommand extends Command {
         try {
             // Mark task as done
             Task task = taskList.getTask(index);
-            task.setDone();
+            task.setDone(true);
             ui.reply("Noice! Pepper Jack marked this task as done:\n\t" + task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Task number does not exist!\n\t" + DoneCommand.USAGE_TEXT);

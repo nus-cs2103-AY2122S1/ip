@@ -1,9 +1,10 @@
 package duke.command;
 
-import duke.Storage;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
+
+import duke.Storage;
 import duke.Ui;
 
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
  * Represents a command to add an event
  */
 public class EventCommand extends Command {
+
     public static final String COMMAND_WORD = "event";
     public static final String USAGE_TEXT = "Usage: event [description] /at [date in YYYY-MM-DD format]";
 
