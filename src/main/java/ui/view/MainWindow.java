@@ -25,7 +25,7 @@ public class MainWindow extends AnchorPane {
             .getResourceAsStream("/images/User.png")));
     private final Image chatbotImage = new Image(Objects.requireNonNull(this.getClass()
             .getResourceAsStream("/images/Dude.jpg")));
-    private IChatbot IChatbot = null;
+    private IChatbot chatbot = null;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -38,10 +38,10 @@ public class MainWindow extends AnchorPane {
     /**
      * Sets the chatbot for this Window.
      *
-     * @param IChatbot Chatbot.
+     * @param chatbot Chatbot.
      */
-    public void setChatbot(IChatbot IChatbot) {
-        this.IChatbot = IChatbot;
+    public void setChatbot(IChatbot chatbot) {
+        this.chatbot = chatbot;
     }
     
     /**
@@ -62,8 +62,8 @@ public class MainWindow extends AnchorPane {
             String input = userInput.getText();
             System.out.println();
             addUserDialog(input);
-            if (IChatbot != null) {
-                IChatbot.processResponse(input);
+            if (chatbot != null) {
+                chatbot.processResponse(input);
             }
         } catch (Exception e) {
             e.printStackTrace();

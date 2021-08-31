@@ -29,13 +29,13 @@ public class Dude implements IChatbot {
      */
     @Override
     public void initialize() {
-        String LOGO = " ____        ____      \n"
+        String logo = " ____        ____      \n"
                 + "|   _ \\ _   _|   _  \\___\n"
                 + "|  | |  | | | |  | | / __ \\\n"
                 + "|  |_| | |_| |  |_|    __/\n"
                 + "|____/ \\__,|____\\____|\n";
         
-        ui.printSentence("Hello from\n" + LOGO + " Sup Dude!");
+        ui.printSentence("Hello from\n" + logo + " Sup Dude!");
     }
     
     /**

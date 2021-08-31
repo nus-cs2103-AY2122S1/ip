@@ -22,7 +22,7 @@ public class GuiUiImpl implements IUi {
         mainWindow.addBotDialog(formattedList);
     }
     
-    public <T> String formatListToString(List<T> list) {
+    private <T> String formatListToString(List<T> list) {
         int numbering = 1;
         StringBuilder string = new StringBuilder();
         
@@ -37,7 +37,9 @@ public class GuiUiImpl implements IUi {
         }
         
         // remove the last extra \n if there is at least an item in the list
-        if (list.size() > 0) string.deleteCharAt(string.length() - 1);
+        if (list.size() > 0) {
+            string.deleteCharAt(string.length() - 1);
+        }
         
         return string.toString();
     }
