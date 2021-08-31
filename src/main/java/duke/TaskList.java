@@ -39,7 +39,7 @@ public class TaskList {
      * @param storage Storage object used by Duke to assist with file handling.
      * @taskNo Index of the task that is being marked as done in the list.
      */
-    void makeDone(Storage storage, int taskNo) {
+    boolean makeDone(Storage storage, int taskNo) {
         String toBeDone = lines.get(taskNo);
         if (toBeDone.contains("[ ]")) {
             toBeDone = toBeDone.substring(0, 4) + "X" + toBeDone.substring(5);
@@ -50,8 +50,10 @@ public class TaskList {
                 e.printStackTrace();
             }
             ui.showMarkedAsDone(toBeDone);
+            return true;
         } else {
             ui.showAlreadyDone();
+            return false;
         }
     }
 
@@ -78,13 +80,15 @@ public class TaskList {
      * @param storage   Storage object used by Duke to assist with file handling.
      * @param toBeAdded Task that is being added.
      */
-    void add(Storage storage, String toBeAdded) {
+    boolean add(Storage storage, String toBeAdded) {
         if (!TaskList.lines.contains(toBeAdded)) {
             TaskList.lines.add(toBeAdded);
             ui.showTaskAdded(toBeAdded);
             ui.showListSize(TaskList.lines.size());
+            return true;
         } else {
             ui.showAlreadyInList(toBeAdded);
+            return false;
         }
     }
 }
