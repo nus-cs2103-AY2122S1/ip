@@ -28,14 +28,19 @@ public class Parser {
     }
 
     /**
-     * Returns the command (the first word) given.
+     * Returns the first word (the command) given.
      *
-     * @return Command (which is the first word) from the user
+     * @return The first word from the user, which is the command
      */
     public String getFirstWord() {
         return commandWords[0].toLowerCase();
     }
 
+    /**
+     * Returns the second word given.
+     *
+     * @return The second word from the user.
+     */
     public String getSecondWord() throws EmptyDescriptionException {
         if (commandWords.length == 1) {
             throw new EmptyDescriptionException("todo");
@@ -48,7 +53,7 @@ public class Parser {
      *
      * @param size The length of the taskList
      * @return The second word (aka the number) from the user
-     * @throws NotDoneRightException
+     * @throws NotDoneRightException If there are issues with extracting the second integer from user input.
      */
     public int getSecondInteger(int size) throws NotDoneRightException {
 
@@ -66,7 +71,7 @@ public class Parser {
      * Returns the information of a Todo task.
      *
      * @return The description of a Todo task
-     * @throws EmptyDescriptionException
+     * @throws EmptyDescriptionException If the user input is missing extra information after the command.
      */
     public String getTodoInfo() throws EmptyDescriptionException {
 
@@ -81,7 +86,7 @@ public class Parser {
      * Returns information about a Deadline task.
      *
      * @return The description of a Deadline task
-     * @throws EmptyDescriptionException
+     * @throws EmptyDescriptionException If the user input is missing extra information after the command.
      */
     public String getDeadlineInfo() throws EmptyDescriptionException {
 
@@ -97,7 +102,7 @@ public class Parser {
      * Returns the date of a Deadline task.
      *
      * @return The date of a Deadline task
-     * @throws EmptyDescriptionException
+     * @throws EmptyDescriptionException If the user input is missing extra information after the command.
      */
     public LocalDate getDeadlineDate() throws EmptyDescriptionException {
 
@@ -114,7 +119,7 @@ public class Parser {
      * Returns the information of an Event task.
      *
      * @return The description of an Event task
-     * @throws EmptyDescriptionException
+     * @throws EmptyDescriptionException If the user input is missing extra information after the command.
      */
     public String getEventInfo() throws EmptyDescriptionException {
 
@@ -130,7 +135,7 @@ public class Parser {
      * Returns the location/additional information of an Event task.
      *
      * @return The location/context of an Event task
-     * @throws EmptyDescriptionException
+     * @throws EmptyDescriptionException If the user input is missing extra information after the command.
      */
     public String getEventLocation() throws EmptyDescriptionException {
         if (commandWords.length == 1 || this.command.split(" ", 2).length == 1) {

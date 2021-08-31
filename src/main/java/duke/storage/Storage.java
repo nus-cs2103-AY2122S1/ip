@@ -22,9 +22,15 @@ import duke.tasks.Todo;
 
 
 public class Storage {
+
     private final ArrayList<String> commandsSaved = new ArrayList<>(); // array of saved lines in the new txt file
     private final File FILE;
 
+    /**
+     * Constructs a Storage object.
+     *
+     * @param filePath The filePath where the file is found or will be created.
+     */
     public Storage(String filePath) {
         FILE = new File(filePath);
     }
@@ -33,7 +39,7 @@ public class Storage {
      * Loads the existing file for the todo list if it exists, or creates a file if it does not.
      *
      * @return an ArrayList of tasks for the todo list
-     * @throws IOException
+     * @throws IOException If there are errors processing the file.
      */
     public ArrayList<Task> load() throws IOException {
 
@@ -105,7 +111,7 @@ public class Storage {
     /**
      * Updates the file.
      *
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException If the file is not found.
      */
     private void update() throws FileNotFoundException {
         StringBuilder txt = new StringBuilder();
@@ -123,7 +129,7 @@ public class Storage {
      *
      * @param ref The index of the item in the textArr being referenced to
      * @param s The string to be added to the textArr
-     * @throws IOException
+     * @throws IOException If there are errors processing the file.
      */
     public void updateDone(int ref, String s) throws IOException {
         commandsSaved.set(ref, s);
@@ -134,7 +140,7 @@ public class Storage {
      * Adds a task to the commandsSaved.
      *
      * @param s The string to be added to the commandsSaved.
-     * @throws IOException
+     * @throws IOException If there are errors processing the file.
      */
     public void addTask(String s) throws IOException {
         commandsSaved.add(s);
@@ -145,7 +151,7 @@ public class Storage {
      * Removes the task referenced to from commandsSaved.
      *
      * @param ref The index of the item in the commandsSaved being referenced to be removed.
-     * @throws IOException
+     * @throws IOException If there are errors processing the file.
      */
     public void removeTask(int ref) throws IOException {
         commandsSaved.remove(ref);
