@@ -9,12 +9,17 @@ import java.util.ArrayList;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 /**
  *  Duke class that contains run and main method to run the program
  *
  * @author Chua Sue-Ann
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList taskList;
@@ -34,6 +39,8 @@ public class Duke {
         }
     }
 
+    public Duke() {}
+
     /**
      * Run method triggers file to be created and welcomes user with welcome message.
      *
@@ -52,6 +59,15 @@ public class Duke {
         }
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!");
+        Scene scene = new Scene(helloWorld);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
     /**
      * Main method for program. Creates file path and creates file.
      *
@@ -62,7 +78,6 @@ public class Duke {
         Files.createDirectories(Paths.get("data/"));
         File dukeFile = new File("data/duke.txt");
         new Duke(dukeFile).run();
-
     }
 }
 
