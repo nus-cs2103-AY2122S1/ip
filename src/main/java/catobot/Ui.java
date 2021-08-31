@@ -1,8 +1,8 @@
 package catobot;
 
-import catobot.exception.LoadingException;
-
 import java.util.Scanner;
+
+import catobot.exception.LoadingException;
 
 /**
  * Represents the User Interface.
@@ -10,12 +10,11 @@ import java.util.Scanner;
 public class Ui {
     private static final String BANNER = "(=^^=)(=^^=)(=^^=)(=^^=)";
 
-    private static final String WELCOME
-            = String.format("Hello I am %s (>^^<)\n    What can I do for you meow?", Catobot.NAME);
+    private static final String WELCOME =
+            String.format("Hello I am %s (>^^<)\n    What can I do for you meow?", Catobot.NAME);
 
-    private static final String BYE
-            = "Bye meow! I will always wait here meow(>^^<)";
-    
+    private static final String BYE =
+            "Bye meow! I will always wait here meow(>^^<)";
     /** The Scanner to receive input. */
     private final Scanner sc;
 

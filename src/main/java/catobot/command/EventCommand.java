@@ -1,5 +1,9 @@
 package catobot.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import catobot.Storage;
 import catobot.Ui;
 import catobot.exception.BotException;
@@ -9,9 +13,6 @@ import catobot.exception.InvalidEventException;
 import catobot.item.Event;
 import catobot.item.TaskList;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents the command to add an event to tasks.

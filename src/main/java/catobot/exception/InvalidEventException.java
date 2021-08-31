@@ -10,5 +10,4 @@ public class InvalidEventException extends BotException {
     public InvalidEventException() {
         super("Oh no, please give me a valid event with date >.<");
     }
-
 }

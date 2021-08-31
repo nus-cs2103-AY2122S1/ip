@@ -1,16 +1,21 @@
 package catobot;
 
-import catobot.command.Command;
-import catobot.command.Parser;
-import catobot.exception.*;
-import catobot.item.Task;
-import catobot.item.TaskList;
-import catobot.item.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import catobot.command.Command;
+import catobot.command.Parser;
+import catobot.exception.BotException;
+import catobot.exception.EmptyCommandException;
+import catobot.exception.EmptyTaskListException;
+import catobot.exception.InvalidCommandException;
+import catobot.exception.OutOfBoundException;
+import catobot.item.Task;
+import catobot.item.TaskList;
+import catobot.item.Todo;
 
 public class CatobotTest {
     private static final String filePath = "./data/Catobot.txt";

@@ -9,7 +9,7 @@ import catobot.item.TaskList;
 /**
  * Represents a command from the user.
  */
-public class Command implements Executable{
+public class Command implements Executable {
     /**
      * Executes the command given.
      *

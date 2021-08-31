@@ -8,9 +8,9 @@ public class InvalidDateTimeException extends BotException {
      * Creates a InvalidDateTimeException.
      */
     public InvalidDateTimeException() {
-        super("Meow! " +
-                "I only know kindergarten math, " +
-                "so please pass in format like 2021-08-12 1800");
+        super("Meow! "
+                + "I only know kindergarten math, "
+                + "so please pass in format like 2021-08-12 1800");
     }
 
 }

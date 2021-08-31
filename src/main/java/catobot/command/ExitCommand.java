@@ -1,11 +1,11 @@
 package catobot.command;
 
+import java.io.IOException;
+
 import catobot.Storage;
 import catobot.Ui;
 import catobot.exception.BotException;
 import catobot.item.TaskList;
-
-import java.io.IOException;
 
 /**
  * Represents the command to exit from Ui.
