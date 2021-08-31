@@ -1,11 +1,25 @@
 package duke.tasks;
 
+/**
+ * This class represents a Todo Task.
+ */
 public class Todo extends Task {
 
+    /**
+     * Constructs a Todo Task with the given description that is not marked as done.
+     * 
+     * @param description Description of the Todo Task.
+     */
     public Todo(String description) {
         super(description, false);
     }
-    
+
+    /**
+     * Constructs a Todo Task with the given description that can be marked as done.
+     * 
+     * @param description Description of the Todo Task.
+     * @param isDone Whether task is done.
+     */
     public Todo(String description, boolean isDone) {
         super(description, isDone);
     }

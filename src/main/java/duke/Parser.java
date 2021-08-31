@@ -11,7 +11,17 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
 
+/**
+ * This class represents a Parser used to parse user input and return Commands that can be executed by Duke.
+ */
 public class Parser {
+    /**
+     * Parses user input into a Command that should be executed by the Duke chatbot.
+     * 
+     * @param answer User input parsed into a String.
+     * @return Command that is to be executed by Duke based on user input.
+     * @throws DukeException
+     */
     public static Command parse(String answer) throws DukeException {
         String[] parts = answer.split(" ");
         String command = parts[0];

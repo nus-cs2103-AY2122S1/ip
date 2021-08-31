@@ -13,9 +13,17 @@ import java.util.ArrayList;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
+/**
+ * This class represents a Storage that is used to save and load Tasks from a file.
+ */
 public class Storage {
     private final String filePath;
-    
+
+    /**
+     * Constructs a Storage that saves and loads tasks from the file specified by filePath/
+     * 
+     * @param filePath Path to file where tasks are saved and loaded.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -31,6 +39,12 @@ public class Storage {
         return store;
     }
 
+    /**
+     * Loads tasks from file specified by filePath into an ArrayList of Tasks.
+     * 
+     * @return ArrayList of Tasks loaded from the filePath.
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -51,6 +65,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves tasks in the file specified by filePath.
+     * 
+     * @param tasks TaskList containing Tasks that should be saved.
+     */
     public void saveTasks(TaskList tasks) {
         try {
             File store = getStoreFile();
