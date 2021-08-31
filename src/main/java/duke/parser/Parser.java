@@ -13,14 +13,14 @@ import duke.command.ToDoCommand;
 
 
 /**
- * Processes the commands from Duke and initialises the appropriate command for it.
+ * Processes the commands from duke.Duke and initialises the appropriate command for it.
  */
 
 public class Parser {
     /**
-     * Processes the commands from Duke.
-     * @param command the command from Duke
-     * @return a command based on the commands from Duke
+     * Processes the commands from duke.Duke.
+     * @param command the command from duke.Duke
+     * @return a command based on the commands from duke.Duke
      */
     public Command parse(String command) {
         if (command.equals("list")) {
@@ -51,7 +51,7 @@ public class Parser {
 
     /**
      * Initialises the ToDo command.
-     * @param command the ToDo command from Duke
+     * @param command the ToDo command from duke.Duke
      * @return ToDo command to be executed
      */
     Command prepToDo(String command) {
@@ -63,7 +63,7 @@ public class Parser {
 
     /**
      * Initialises the DeadLine command.
-     * @param command the DeadLine command from Duke
+     * @param command the DeadLine command from duke.Duke
      * @return DeadLine command to be executed
      */
     Command prepDeadLine(String command) {
@@ -75,7 +75,7 @@ public class Parser {
 
     /**
      * Initialises the Event command.
-     * @param command the Event command from Duke
+     * @param command the Event command from duke.Duke
      * @return Event command to be executed
      */
     Command prepEvent(String command) {
@@ -87,7 +87,7 @@ public class Parser {
 
     /**
      * Initialises the Done command.
-     * @param command the Done command from Duke
+     * @param command the Done command from duke.Duke
      * @return Done command to be executed
      */
     Command prepDone(String command) {
@@ -99,7 +99,7 @@ public class Parser {
 
     /**
      * Initialises the Delete command.
-     * @param command the Delete command from Duke
+     * @param command the Delete command from duke.Duke
      * @return Delete command to be executed
      */
     Command prepDelete(String command) {
@@ -111,7 +111,7 @@ public class Parser {
 
     /**
      * Initialises the Find command.
-     * @param command the Find command from Duke
+     * @param command the Find command from duke.Duke
      * @return Find command to be executed
      */
     Command prepFind(String command) {

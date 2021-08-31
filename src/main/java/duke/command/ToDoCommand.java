@@ -24,17 +24,14 @@ public class ToDoCommand extends Command {
      * Executes the to do command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (task.length() == 0) {
-            ui.showError("OOPS!!! The description of a todo cannot be empty.\n");
-            return;
+            return ui.showError("OOPS!!! The description of a todo cannot be empty.\n");
         }
         Todo taskToDo = new Todo(task);
         taskList.add(taskToDo);
         storage.save(taskList);
-        ui.addMessage();
-        ui.showTask(taskToDo);
-        ui.showListLength(taskList);
+        return ui.addMessage() + ui.showTask(taskToDo) + ui.showListLength(taskList);
 
     }
 }

@@ -17,13 +17,14 @@ public class Ui {
     }
 
     /**
-     * Displays the welcome text for Duke.
-     * @param taskList to output the list of tasks Duke currently has at start
+     * Displays the welcome text for duke.Duke.
+     * @param taskList to output the list of tasks duke.Duke currently has at start
      */
-    public void showWelcome(TaskList taskList) {
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?\n");
-        System.out.println("These are the current tasks I have:");
-        listView(taskList.getAllTasks());
+    public String showWelcome(TaskList taskList) {
+        String greeting = "Hello! I'm duke.Duke\n" + "What can I do for you?\n";
+        String currTasks = "These are the current tasks I have:\n";
+        String lst = listView(taskList.getAllTasks());
+        return greeting + currTasks + lst;
 
     }
 
@@ -37,71 +38,71 @@ public class Ui {
     }
 
     /**
-     * Displays the bye text for Duke.
+     * Displays the bye text for duke.Duke.
      */
-    public void showBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String showBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Displays an error text based on the error message.
      * @param errorMsg error message to be displayed
      */
-    public void showError(String errorMsg) {
-        System.out.println(errorMsg);
+    public String showError(String errorMsg) {
+        return errorMsg;
     }
 
     /**
      * Displays a text when the user adds a task.
      */
-    public void addMessage() {
-        System.out.println("Got it. I've added this task:\n");
+    public String addMessage() {
+        return "Got it. I've added this task:\n";
     }
 
     /**
      * Displays the task's toString() method with a new line at the end.
      * @param task task to be displayed
      */
-    public void showTask(Task task) {
-        System.out.println(task.toString() + "\n");
+    public String showTask(Task task) {
+        return task.toString() + "\n";
     }
 
     /**
-     * Displays the number of tasks that Duke currently has.
+     * Displays the number of tasks that duke.Duke currently has.
      * @param lst the list of tasks needed to output the number of items in it
      */
-    public void showListLength(TaskList lst) {
-        System.out.println("Now you have " + lst.size() + " tasks in the list\n");
+    public String showListLength(TaskList lst) {
+        return "Now you have " + lst.size() + " tasks in the list\n";
     }
 
     /**
      * Displays a message when a task has been removed.
      */
-    public void deletedMsg() {
-        System.out.println("Noted. I've removed this task:\n");
+    public String deletedMsg() {
+        return "Noted. I've removed this task:\n";
     }
 
     /**
-     * Displays a list view of the tasks that Duke has.
+     * Displays a list view of the tasks that duke.Duke has.
      * @param lst the list of tasks to be displayed
      */
-    public void listView(ArrayList<Task> lst) {
+    public String listView(ArrayList<Task> lst) {
         String res = "";
         int counter = 1;
         for (Task tsk : lst) {
             res += counter + ". " + tsk.toString() + System.lineSeparator();
             counter++;
         }
-        System.out.println("Here are the tasks in your list:\n" + res);
+        return "Here are the tasks in your list:\n" + res;
     }
 
     /**
      * Displays a message when a task is marked done.
      * @param tsk the task that was done
      */
-    public void doneTask(Task tsk) {
-        System.out.println("Nice! I've marked this task as done:\n");
-        System.out.println(tsk.toString());
+    public String doneTask(Task tsk) {
+        String initialMsg = "Nice! I've marked this task as done:\n";
+        return initialMsg + tsk.toString();
     }
 
     /**
@@ -114,7 +115,7 @@ public class Ui {
     /**
      * Displays a message for the matching tasks.
      */
-    public void matchingTasks() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String matchingTasks() {
+        return "Here are the matching tasks in your list:";
     }
 }

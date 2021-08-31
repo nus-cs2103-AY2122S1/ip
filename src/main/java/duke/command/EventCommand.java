@@ -16,10 +16,9 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (task.length() == 0) {
-            ui.showError("OOPS!!! The description of an event cannot be empty.\n");
-            return;
+            return ui.showError("OOPS!!! The description of an event cannot be empty.\n");
         }
         char[] data = task.toCharArray();
         String eventTask = "";
@@ -41,10 +40,7 @@ public class EventCommand extends Command {
         }
         Event event = new Event(eventTask, by);
         taskList.add(event);
-        ui.addMessage();
-        ui.showTask(event);
-        ui.showListLength(taskList);
         storage.save(taskList);
+        return ui.addMessage() + ui.showTask(event) + ui.showListLength(taskList);
     }
-
 }

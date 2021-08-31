@@ -24,10 +24,10 @@ public class DeadLineCommand extends Command {
      * added to the list.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         if (task.length() == 0) {
-            ui.showError("OOPS!!! The description of a deadline cannot be empty.\n");
-            return;
+            return ui.showError("OOPS!!! The description of a deadline cannot be empty.\n");
+
         }
         char[] data = task.toCharArray();
         String taskWithDeadLine = "";
@@ -49,9 +49,7 @@ public class DeadLineCommand extends Command {
         }
         DeadLine deadLine = new DeadLine(taskWithDeadLine, by);
         taskList.add(deadLine);
-        ui.addMessage();
-        ui.showTask(deadLine);
-        ui.showListLength(taskList);
         storage.save(taskList);
+        return ui.addMessage() + ui.showTask(deadLine) + ui.showListLength(taskList);
     }
 }

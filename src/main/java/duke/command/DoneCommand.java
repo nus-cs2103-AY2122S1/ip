@@ -21,13 +21,13 @@ public class DoneCommand extends Command {
      * Executes the done command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.done(taskNum);
         storage.save(taskList);
         try {
-            ui.doneTask(taskList.getAllTasks().get(taskNum));
+            return ui.doneTask(taskList.getAllTasks().get(taskNum));
         } catch (IndexOutOfBoundsException ioobe) {
-            System.out.println("That task doesn't exist!");
+            return "That task doesn't exist!";
         }
     }
 }
