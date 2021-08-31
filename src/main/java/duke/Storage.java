@@ -1,14 +1,17 @@
 package duke;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+/**
+ * Class that implements methods to store Entries.
+ */
 public class Storage {
 
     private final String PROJECT_ROOT = System.getProperty("user.dir");

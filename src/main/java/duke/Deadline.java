@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class that inherits from Entry to encapsulate Deadlines.
+ */
 public class Deadline extends Entry {
 
     private LocalDate deadline;
@@ -11,7 +14,7 @@ public class Deadline extends Entry {
     /**
      * Constructor for Deadline.
      */
-    Deadline() {
+    public Deadline() {
         super();
         this.deadline = LocalDate.now();
     }
@@ -23,7 +26,7 @@ public class Deadline extends Entry {
      * @param deadline Deadline of entry.
      * @throws DukeException Error thrown if deadline is in wrong format.
      */
-    Deadline(String task, String deadline) throws DukeException {
+    public Deadline(String task, String deadline) throws DukeException {
         super(task);
         try {
             this.deadline = LocalDate.parse(deadline);
@@ -62,5 +65,7 @@ public class Deadline extends Entry {
      * @return Boolean corresponding to Deadline's length.
      */
     @Override
-    public boolean isEmpty() { return super.isEmpty() && !deadline.isAfter(LocalDate.now()); }
+    public boolean isEmpty() {
+        return super.isEmpty() && !deadline.isAfter(LocalDate.now());
+    }
 }

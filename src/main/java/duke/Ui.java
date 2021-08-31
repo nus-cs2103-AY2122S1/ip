@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Class that implements methods to present the Duke.
+ */
 public class Ui {
 
     /**
@@ -31,7 +34,7 @@ public class Ui {
      * @param entry THe newly-added entry.
      * @param id The #id of the newly-added entry.
      */
-    public void addEntry (Entry entry, int id) {
+    public void addEntry(Entry entry, int id) {
         System.out.println("I've added entry to your list!");
         this.printEntry(entry, id);
         System.out.println(HORIZONTAL_DIVIDE);
@@ -65,7 +68,7 @@ public class Ui {
     /**
      * Prints out farewell message.
      */
-    public void goodByeUser() {
+    public void printGoodByeUser() {
         System.out.println("Bye. Hope to see you again soon!");
         System.out.println(HORIZONTAL_DIVIDE);
     }

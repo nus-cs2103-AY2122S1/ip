@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Abstract class that defines entry.
+ */
 public abstract class Entry {
     private final String ENTRY;
 

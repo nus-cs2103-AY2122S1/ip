@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Class that implements methods to store an Arraylist of Entries
+ */
 public class EntryList extends ArrayList<Entry> {
 
     private int numberOfEntries;
@@ -44,7 +47,7 @@ public class EntryList extends ArrayList<Entry> {
                 ui.printEntry(currentEntry, count++);
             }
         }
-        ui.end();
+        ui.endCommand();
     }
 
     /**

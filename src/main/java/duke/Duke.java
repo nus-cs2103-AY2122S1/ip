@@ -103,7 +103,7 @@ public class Duke {
             }
             input = inputScanner.nextLine();
         }
-        this.dukeUi.goodByeUser();
+        this.dukeUi.printGoodByeUser();
     }
 
     /**

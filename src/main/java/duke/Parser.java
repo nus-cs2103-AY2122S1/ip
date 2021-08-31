@@ -3,6 +3,9 @@ package duke;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Class that implements method to parse user inputs.
+ */
 public class Parser {
 
     /**
@@ -33,7 +36,7 @@ public class Parser {
     }
 
     private void parseString(String input, ArrayList<String> terms) {
-        //Function to store all terms in input as separate Strings (separated by space in the input)
+        // Function to store all terms in input as separate Strings (separated by space in the input)
         int length = input.length();
         if (length >= 1) {
             StringBuilder currentWord = new StringBuilder();
@@ -71,7 +74,7 @@ public class Parser {
     private void parseEntry(ArrayList<String> terms) {
         if (!terms.isEmpty()) {
             StringBuilder entry = new StringBuilder();
-            //Combine All Strings Until End of List or '/' character is found
+            // Combine All Strings Until End of List or '/' character is found
             ArrayList<String> termsCopy = new ArrayList<>(terms);
             for (String term : termsCopy) {
                 if (term.startsWith("/")) {

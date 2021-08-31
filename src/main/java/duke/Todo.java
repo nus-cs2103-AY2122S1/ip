@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Class that inherits from Entry to encapsulate Todos.
+ */
 public class Todo extends Entry {
 
     /**
@@ -11,6 +14,8 @@ public class Todo extends Entry {
 
     /**
      * Constructor for Todo.
+     *
+     * @param task The String that will be stored as a Todo.
      */
     Todo(String task) {
         super(task);
