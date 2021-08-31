@@ -24,6 +24,21 @@ public class TaskList {
     }
 
     /**
+     * Enumerates the list of tasks.
+     *
+     * @param taskList to enumerate
+     * @return String enumeration of taskList.
+     */
+    public static String enumerateTasks(List<Task> taskList) {
+        String toPrint = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            int index = i + 1;
+            toPrint += ("\t " + index + ". " + taskList.get(i) + "\n");
+        }
+        return toPrint;
+    }
+
+    /**
      * Adds a task to TaskList.
      *
      * @param task Task to be added.
@@ -85,7 +100,7 @@ public class TaskList {
      * @return String for storing TaskList.
      */
     public List<String> formatForStorage() {
-        return taskList.stream().map(Task::storageString).collect(Collectors.toList());
+        return taskList.stream().map(Task::generateStorageString).collect(Collectors.toList());
     }
 
     /**
@@ -95,21 +110,6 @@ public class TaskList {
      */
     public boolean isEmpty() {
         return this.taskList.size() == 0;
-    }
-
-    /**
-     * Enumerates the list of tasks.
-     *
-     * @param taskList to enumerate
-     * @return String enumeration of taskList.
-     */
-    public static String enumerateTasks(List<Task> taskList) {
-        String toPrint = "";
-        for (int i = 0; i < taskList.size(); i++) {
-            int index = i + 1;
-            toPrint += ("\t " + index + ". " + taskList.get(i) + "\n");
-        }
-        return toPrint;
     }
 
     @Override

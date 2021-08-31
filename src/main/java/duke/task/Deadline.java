@@ -68,7 +68,7 @@ public class Deadline extends Task {
      * @return formatted String for storing Deadline.
      */
     @Override
-    public String storageString() {
+    public String generateStorageString() {
         return "D | " + super.completed + " | " + super.description + " | " + this.by;
     }
 

@@ -42,7 +42,7 @@ public class ToDo extends Task {
      * @return formatted storage String.
      */
     @Override
-    public String storageString() {
+    public String generateStorageString() {
         return "T | " + super.completed + " | " + super.description;
     }
 

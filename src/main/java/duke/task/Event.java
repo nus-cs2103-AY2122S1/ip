@@ -5,6 +5,9 @@ import duke.main.DukeException;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * The class Event encapsulates an event with a time
+ */
 public class Event extends Task {
 
     private LocalDate at;
@@ -66,7 +69,7 @@ public class Event extends Task {
      * @return formatted String for storing Event.
      */
     @Override
-    public String storageString() {
+    public String generateStorageString() {
         return "E | " + super.completed + " | " + super.description + " | " + this.at;
     }
 

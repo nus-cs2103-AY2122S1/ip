@@ -22,12 +22,6 @@ abstract public class Task {
         this.completed = false;
     }
 
-    @Override
-    public String toString() {
-        String check = this.completed ? "[X] " : "[ ] ";
-        return check + description;
-    }
-
     /**
      * Parse the given time.
      *
@@ -53,6 +47,12 @@ abstract public class Task {
         return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    @Override
+    public String toString() {
+        String check = this.completed ? "[X] " : "[ ] ";
+        return check + description;
+    }
+
     /**
      * Marks the Task as done.
      */
@@ -67,7 +67,7 @@ abstract public class Task {
      *
      * @return String for storing the Task.
      */
-    abstract public String storageString();
+    abstract public String generateStorageString();
 
     /**
      * Checks if the task contains any keyword.

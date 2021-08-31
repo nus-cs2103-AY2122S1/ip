@@ -76,11 +76,11 @@ public class Parser {
     private Task selectTask(String taskNumString) {
         try {
             int taskNum = Integer.parseInt(taskNumString);
-            Task inFocus = taskList.getTask(taskNum);
-            if (inFocus == null) {
+            Task taskInFocus = taskList.getTask(taskNum);
+            if (taskInFocus == null) {
                 throw new DukeException("\tSorry, I can't seem to find that task\n");
             }
-            return inFocus;
+            return taskInFocus;
         } catch (NumberFormatException e) {
             throw new DukeException("\tI'm Sorry, WHAT?!?!\n");
         }
