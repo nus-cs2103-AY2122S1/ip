@@ -20,7 +20,7 @@ public class Deadlines extends Task {
     }
 
     /**
-     * Method to obtain the correct task icon
+     * Obtains the correct task icon for a deadline task
      *
      * @return Task icon
      */

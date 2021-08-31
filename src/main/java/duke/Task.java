@@ -22,12 +22,18 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Retrieves the task icon of referenced task
+     *
+     * @return Task icon of task
+     */
+    //thank you @Jeromesyl for pointing out I was missing this
     public String getTaskIcon() {
         return "a";
     }
 
     /**
-     * Method to retrieve the status of a task on whether it is done or not
+     * Retrieves the status of a task on whether it is done or not
      *
      * @return 1 if the task is done and 0 otherwise
      */
@@ -36,7 +42,7 @@ public class Task {
     }
 
     /**
-     * Method to retrieve the description of a task
+     * Retrieves the description of a task
      *
      * @return The description of a task
      */

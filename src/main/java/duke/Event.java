@@ -20,7 +20,7 @@ public class Event extends Task {
     }
 
     /**
-     * Method to obtain the correct task icon
+     * Obtains the correct task icon for an event task
      *
      * @return Task icon
      */

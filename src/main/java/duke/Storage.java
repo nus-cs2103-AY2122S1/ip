@@ -26,7 +26,7 @@ public class Storage {
     }
 
     /**
-     * Method to parse and load the tasks from hard disk
+     * Parses and load the tasks from hard disk
      *
      * @return The list of tasks stored on hard disk
      */
