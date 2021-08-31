@@ -7,20 +7,26 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import kayu.Kayu;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    
     @FXML
     private ScrollPane scrollPane;
+    
     @FXML
     private VBox dialogContainer;
+    
     @FXML
     private TextField userInput;
+    
     @FXML
     private Button sendButton;
 
-    private UserInterface userInterface;
+    private Kayu kayu = new Kayu();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -28,10 +34,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setUserInterface(UserInterface ui) {
-        userInterface = ui;
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog("hi", dukeImage)
+        );
+        kayu.initializeData();
     }
 
     /**
@@ -40,8 +46,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText();
-        String response = userInterface.getResponse(input);
+        String input = userInput.getText().trim();
+        String response = kayu.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

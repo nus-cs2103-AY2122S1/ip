@@ -78,6 +78,26 @@ public class Kayu {
         } while (!command.isBye());
         scanner.close();
     }
+    
+    public String getResponse(String userInput) {
+        Command command;
+        command = parser.parseToCommand(userInput);
+        try {
+            String feedback = command.execute(taskList);
+            List<Task> tasks = taskList.getTasks();
+            storage.saveTasks(tasks);
+            chatBot.printMessage(feedback);
+            return feedback;
+
+        } catch (DukeException exception) {
+            chatBot.printError(exception.getMessage());
+            return exception.getMessage();
+
+        } catch (StorageException exception) {
+            chatBot.printErrorOnSave();
+            return exception.getMessage();
+        }
+    }
 
     /**
      * Terminates the program, based on {@link kayu.exception.StorageException}.

@@ -13,8 +13,12 @@ import javafx.stage.Stage;
  */
 public class Launcher extends Application {
 
-    private UserInterface userInterface = new UserInterface();
-
+    /**
+     * Starts the Kayu UI window.
+     * {@inheritDoc}
+     *
+     * @param stage {@inheritDoc}
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -22,8 +26,8 @@ public class Launcher extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setUserInterface(userInterface);
             stage.show();
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
