@@ -11,8 +11,8 @@ public class EmptyCommand extends Command {
      * @param taskList the list of Tasks which is being stored.
      * @param storage  the database where the Tasks are being saved for progression.
      */
-    public void execute(TaskList taskList, Storage storage) {
-
+    public String execute(TaskList taskList, Storage storage) {
+        return "Hi how can I help you?";
     }
 
     /**

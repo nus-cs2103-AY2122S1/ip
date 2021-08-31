@@ -24,10 +24,16 @@ public class DoneCommand extends Command {
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
+        int index = Integer.parseInt(this.taskId) - 1;
         try {
-            taskList.doneItem(this.taskId);
-            storage.updateDone(this.taskId);
+            taskList.doneItem(index);
+            storage.updateDone(index);
+
+            // return Ui.printMessage(
+            // Ui.DONE_MESSAGE + "\n" + Ui.INDENT + " " +
+            // taskList.getTaskList().get(index).toString());
+            return Ui.printMessage(Ui.DONE_MESSAGE + "\n" + taskList.getTaskList().get(index).toString());
         } catch (DukeStorageUpdateException err) {
             throw new DukeStorageUpdateException(err.toString());
         }

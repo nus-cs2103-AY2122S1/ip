@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class Duke {
     private final TaskList taskList;
     private final Storage storage;
+    private String response;
 
     /**
      * Class Constructor.
@@ -23,40 +24,25 @@ public class Duke {
         this.taskList = new TaskList();
     }
 
-    /**
-     * Starts the application, allows the application to start taking in inputs from
-     * the users.
-     */
-    public void start() {
-        String userInput;
-        Scanner sc = new Scanner(System.in);
+    public void loadDataFromStorage() {
         ArrayList<Task> savedTasks = storage.loadData();
-
         taskList.loadFromStorage(savedTasks);
-
-        Ui.printIntro();
-        while (true) {
-            userInput = sc.nextLine();
-
-            try {
-                Parser parser = new Parser();
-
-                Command command = parser.parseCommands(userInput);
-                command.execute(taskList, storage);
-                if (command.getIsExit()) {
-                    sc.close();
-                    return;
-                }
-
-            } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.printMessage(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
-            }
-
-        }
-
     }
 
-    public String getResponse(String input) {
-        return "hi";    
+    public String getResponse(String userInput) {
+
+        // Ui.printIntro();
+
+        try {
+            Parser parser = new Parser();
+
+            Command command = parser.parseCommands(userInput);
+            this.response = command.execute(taskList, storage);
+            return this.response;
+        } catch (ArrayIndexOutOfBoundsException e) {
+            Ui.printMessage(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
+            return "error";
+        }
+
     }
 }

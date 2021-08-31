@@ -1,7 +1,10 @@
 package seedu.duke.commands;
 
+import java.util.ArrayList;
+
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
+import seedu.duke.tasks.Task;
 
 public class FindCommand extends Command {
     private final String find;
@@ -18,8 +21,9 @@ public class FindCommand extends Command {
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        taskList.find(this.find);
+    public String execute(TaskList taskList, Storage storage) {
+        ArrayList<Task> foundList = taskList.find(this.find);
+        return Ui.printList(foundList, Ui.FIND_ZERO_SIZE, Ui.FIND_LIST_MESSAGE);
     }
 
     /**

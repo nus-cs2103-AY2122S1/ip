@@ -12,8 +12,8 @@ public class ExitCommand extends Command {
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        Ui.printBye();
+    public String execute(TaskList taskList, Storage storage) {
+        return Ui.printBye();
     }
 
     /**

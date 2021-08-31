@@ -120,8 +120,7 @@ public class Storage {
      * @throws DukeStorageUpdateException when Scanner is not able to read or locate
      *                                    the file from the given file path.
      */
-    public void updateDone(String number) throws DukeStorageUpdateException {
-        int index = Integer.parseInt(number);
+    public void updateDone(int index) throws DukeStorageUpdateException {
         int count = 0;
         String currLine;
         String finalAppend = "";
@@ -152,8 +151,7 @@ public class Storage {
      * @throws DukeStorageDeleteException when Scanner is not able to read or locate
      *                                    the file from the given file path.
      */
-    public void deleteTaskFromData(String number) throws DukeStorageDeleteException {
-        int index = Integer.parseInt(number);
+    public void deleteTaskFromData(int index) throws DukeStorageDeleteException {
         int count = 0;
         String currLine;
         String finalAppend = "";

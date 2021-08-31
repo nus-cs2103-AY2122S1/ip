@@ -22,8 +22,8 @@ public class UiCommand extends Command {
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        Ui.printMessage(this.uiMsg);
+    public String execute(TaskList taskList, Storage storage) {
+        return Ui.printMessage(this.uiMsg);
     }
 
     /**

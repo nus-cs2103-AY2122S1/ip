@@ -12,8 +12,8 @@ public class ListCommand extends Command {
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        Ui.printList(taskList.getTaskList(), Ui.NO_TASK_MESSAGE, Ui.LIST_MESSAGE);
+    public String execute(TaskList taskList, Storage storage) {
+        return Ui.printList(taskList.getTaskList(), Ui.NO_TASK_MESSAGE, Ui.LIST_MESSAGE);
     }
 
     /**

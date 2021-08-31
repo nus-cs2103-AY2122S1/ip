@@ -10,7 +10,7 @@ public abstract class Command {
      * @param taskList the list of Tasks which is being stored.
      * @param storage  the database where the Tasks are being saved for progression.
      */
-    public abstract void execute(TaskList taskList, Storage storage);
+    public abstract String execute(TaskList taskList, Storage storage);
 
     /**
      * Checks if the user wants to exit from the application.

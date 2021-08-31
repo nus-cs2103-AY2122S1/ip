@@ -7,9 +7,12 @@ import seedu.duke.tasks.Task;
 public class Ui {
     public static final String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-    public static final String INDENTED_HORIZONTAL_LINE = "    ____________________________________________________________";
-    public static final String INDENT = "     ";
-    public static final String INTRODUCTION = "Hello! I'm Ricky\n" + Ui.INDENT + "What can I do for you?";
+    // public static final String INDENTED_HORIZONTAL_LINE = "
+    // ____________________________________________________________";
+    // public static final String INDENT = " ";
+    // public static final String INTRODUCTION = "Hello! I'm Ricky\n" + Ui.INDENT +
+    // "What can I do for you?";
+    public static final String INTRODUCTION = "Hello! I'm Ricky\n" + "What can I do for you?";
     public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
     public static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
     public static final String LIST_MESSAGE = "Here are the tasks in your list:";
@@ -30,10 +33,9 @@ public class Ui {
      * 
      * @param message is the message which will be printed.
      */
-    public static void printMessage(String message) {
-        System.out.println(Ui.INDENTED_HORIZONTAL_LINE);
-        System.out.println(Ui.INDENT + message);
-        System.out.println(Ui.INDENTED_HORIZONTAL_LINE + "\n");
+    public static String printMessage(String message) {
+        String appendedLine = message + "\n";
+        return appendedLine;
     }
 
     /**
@@ -47,8 +49,8 @@ public class Ui {
     /**
      * Prints the bye message.
      */
-    public static void printBye() {
-        Ui.printMessage(Ui.BYE_MESSAGE);
+    public static String printBye() {
+        return Ui.printMessage(Ui.BYE_MESSAGE);
     }
 
     /**
@@ -59,16 +61,19 @@ public class Ui {
      * @param zeroSizeMsg is the message when the size of the list is zero.
      * @param listMsg     message when the size of list is not zero.
      */
-    public static void printList(ArrayList<Task> taskList, String zeroSizeMsg, String listMsg) {
+    public static String printList(ArrayList<Task> taskList, String zeroSizeMsg, String listMsg) {
+        String message = "";
+
         if (taskList.size() == 0) {
-            Ui.printMessage(zeroSizeMsg);
-            return;
+            return Ui.printMessage(zeroSizeMsg);
         }
-        System.out.println(Ui.INDENTED_HORIZONTAL_LINE);
-        System.out.println(Ui.INDENT + listMsg);
+        // message = Ui.INDENTED_HORIZONTAL_LINE + "\n" + Ui.INDENT + listMsg + "\n";
+        message = listMsg + "\n";
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.println(Ui.INDENT + (i + 1) + ". " + taskList.get(i).toString());
+            // message += Ui.INDENT + (i + 1) + ". " + taskList.get(i).toString() + "\n";
+            message += (i + 1) + ". " + taskList.get(i).toString() + "\n";
         }
-        System.out.println(Ui.INDENTED_HORIZONTAL_LINE + "\n");
+        // message += Ui.INDENTED_HORIZONTAL_LINE + "\n\n";
+        return message;
     }
 }
