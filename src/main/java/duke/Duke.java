@@ -23,7 +23,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|";
         Ui.print("Hello from\n" + logo);
-        Ui.print("Wait, I'm not Duke. I'm Dub!\nWhat can I do for you?");
+        Ui.print("Wait, I'm not duke.Duke. I'm Dub!\nWhat can I do for you?");
         listen();
     }
 
