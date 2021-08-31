@@ -13,14 +13,14 @@ class Parser {
     static Task convertRecordToTask(String record) {
         String[] strings = record.split("&&");
         switch (strings[0]) {
-            case "T":
-                return new Todo(strings[2], strings[1].equals("Done"));
-            case "D":
-                return new Deadline(strings[2], strings[3], strings[1].equals("Done"));
-            case "E":
-                return new Event(strings[2], strings[3], strings[1].equals("Done"));
-            default:
-                return null;
+        case "T":
+            return new Todo(strings[2], strings[1].equals("Done"));
+        case "D":
+            return new Deadline(strings[2], strings[3], strings[1].equals("Done"));
+        case "E":
+            return new Event(strings[2], strings[3], strings[1].equals("Done"));
+        default:
+            return null;
         }
     }
 
@@ -28,42 +28,42 @@ class Parser {
         String[] infos = input.split(" ", 2);
         String type = infos[0];
         switch (type) {
-            case "bye":
-                ui.showGoodbye();
-                System.exit(0);
-                //return null;
-            case "list":
-                if (infos.length == 1) {
-                    ui.printList(taskList);
-                    return null;
-                } else {
-                    return "Wrong input format";
-                }
-            case "schedule":
-                return getSchedule(input, taskList);
-            case "done":
-                if (infos.length == 2) {
-                    String index = infos[1];
-                    return doTask(index, taskList);
-                } else {
-                    return "Wrong input format";
-                }
-            case "find":
-                if (infos.length == 2) {
-                    String content = infos[1];
-                    return findContent(content, taskList);
-                } else {
-                    return "Wrong input format";
-                }
-            case "delete":
-                if (infos.length == 2) {
-                    String index = infos[1];
-                    return deleteTask(index, taskList);
-                } else {
-                    return "Wrong input format";
-                }
-            default:
-                return addList(input, taskList);
+        case "bye":
+            ui.showGoodbye();
+            System.exit(0);
+            //fallthrough
+        case "list":
+            if (infos.length == 1) {
+                ui.printList(taskList);
+                return null;
+            } else {
+                return "Wrong input format";
+            }
+        case "schedule":
+            return getSchedule(input, taskList);
+        case "done":
+            if (infos.length == 2) {
+                String index = infos[1];
+                return doTask(index, taskList);
+            } else {
+                return "Wrong input format";
+            }
+        case "find":
+            if (infos.length == 2) {
+                String content = infos[1];
+                return findContent(content, taskList);
+            } else {
+                return "Wrong input format";
+            }
+        case "delete":
+            if (infos.length == 2) {
+                String index = infos[1];
+                return deleteTask(index, taskList);
+            } else {
+                return "Wrong input format";
+            }
+        default:
+            return addList(input, taskList);
         }
     }
 
@@ -76,44 +76,44 @@ class Parser {
      * @param taskList the taskList containing all tasks
      * @return a string showing the added task and number of tasks
      */
-     static String addList(String input, TaskList taskList) {
-         ArrayList<Task> lst = taskList.getTasks();
-         ArrayList<String> validType = new ArrayList<>(
-                 Arrays.asList("deadline", "event", "todo"));
-         String type = input.split(" ", 2)[0];
-         String content;
-         if (!validType.contains(type)) {
-             return "I'm sorry, but I don't know what that means :-(";
-         }
-         try {
-             content = input.split(" ", 2)[1];
-         } catch (IndexOutOfBoundsException e) {
-             return "The description of a todo cannot be empty.";
-         }
+    static String addList(String input, TaskList taskList) {
+        ArrayList<Task> lst = taskList.getTasks();
+        ArrayList<String> validType = new ArrayList<>(
+                Arrays.asList("deadline", "event", "todo"));
+        String type = input.split(" ", 2)[0];
+        String content;
+        if (!validType.contains(type)) {
+            return "I'm sorry, but I don't know what that means :-(";
+        }
+        try {
+            content = input.split(" ", 2)[1];
+        } catch (IndexOutOfBoundsException e) {
+            return "The description of a todo cannot be empty.";
+        }
 
-         if (type.equals("todo")) {
-             lst.add(new Todo(content));
-         } else if (type.equals("deadline")) {
-             String[] strings = content.split(" /by ");
-             if (strings.length != 2) {
-                 return "Please check the format of your deadline.";
-             }
-             lst.add(new Deadline(content.split(" /by ")[0], content.split( " /by ")[1]));
-         } else if (type.equals("event")) {
-             String[] strings = content.split(" /at ");
-             if (strings.length != 2) {
-                 return "Please check the format of your event.";
-             }
-             lst.add(new Event(content.split(" /at ")[0], content.split(" /at ")[1]));
-         }
+        if (type.equals("todo")) {
+            lst.add(new Todo(content));
+        } else if (type.equals("deadline")) {
+            String[] strings = content.split(" /by ");
+            if (strings.length != 2) {
+                return "Please check the format of your deadline.";
+            }
+            lst.add(new Deadline(content.split(" /by ")[0], content.split(" /by ")[1]));
+        } else if (type.equals("event")) {
+            String[] strings = content.split(" /at ");
+            if (strings.length != 2) {
+                return "Please check the format of your event.";
+            }
+            lst.add(new Event(content.split(" /at ")[0], content.split(" /at ")[1]));
+        }
 
-         String output = "    ____________________________________________________________\n"
-                 + "     Got it. I've added this task: \n"
-                 + "      " + lst.get(lst.size() - 1).toString() + "\n"
-                 + "     Now you have " + lst.size() +" tasks in the list. \n"
-                 + "    ____________________________________________________________\n";
-         return output;
-     }
+        String output = "    ____________________________________________________________\n"
+                + "     Got it. I've added this task: \n"
+                + "      " + lst.get(lst.size() - 1).toString() + "\n"
+                + "     Now you have " + lst.size() + " tasks in the list. \n"
+                + "    ____________________________________________________________\n";
+        return output;
+    }
 
 
     /**
@@ -213,7 +213,7 @@ class Parser {
         String output = "    ____________________________________________________________\n"
                 + "     Noted. I've removed this task: \n"
                 + "      " + currTask.toString() + "\n"
-                + "     Now you have " + tasks.size() +" tasks in the list. \n"
+                + "     Now you have " + tasks.size() + " tasks in the list. \n"
                 + "    ____________________________________________________________\n";
         return output;
     }

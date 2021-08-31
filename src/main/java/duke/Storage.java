@@ -13,6 +13,11 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads tasks from filePath and returns as a list
+     * @return An ArrayList of tasks
+     * @throws DukeException
+     */
     public ArrayList<Task> loadTasks() throws DukeException {
         File f = new File(filePath);
         Scanner s;
@@ -31,6 +36,11 @@ public class Storage {
 
     }
 
+    /**
+     * Stores tasks in taskList to filePath
+     * @param taskList taskList containing all tasks
+     * @throws DukeException
+     */
     public void saveData(TaskList taskList) throws DukeException {
         ArrayList<Task> lst = taskList.getTasks();
         try {
