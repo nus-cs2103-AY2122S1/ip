@@ -1,0 +1,12 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
+}
+
+run {
+    mainClassName = 'banana.Duke'
+}
+
+
+
