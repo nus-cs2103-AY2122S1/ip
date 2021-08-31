@@ -15,8 +15,8 @@ public class Duke {
      * Represents the storage to read/write files and the list to
      * hold any tasks created.
      */
-    Storage storage;
-    TaskList list;
+    private final Storage storage;
+    private final TaskList list;
 
     /**
      * Creates a duke with storage pointing to the right file.
@@ -34,132 +34,132 @@ public class Duke {
      * which will result in the bot saving the current task list into the file
      * provided before shutting down.
      */
-    public void Run() {
+    public void run() {
         Scanner scanner = new Scanner(System.in);
 
-        Ui.Logo();
+        Ui.logo();
         storage.read(list);
-        Ui.WelcomeMessage();
+        Ui.welcomeMessage();
 
         String input = scanner.next();
 
         while (!Objects.equals(input, "bye")) {
             switch (input) {
-                case "list":
-                    Ui.Border();
-                    list.display();
-                    Ui.Border();
+            case "list":
+                Ui.border();
+                list.display();
+                Ui.border();
+                input = scanner.next();
+                break;
+
+            case "done":
+                try {
+                    int temp = scanner.nextInt();
+
+                    Task cur = list.get(temp - 1);
+                    cur.done();
+                    Ui.border();
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println(cur);
+                    Ui.border();
+                    input = scanner.next();
+                    break;
+                } catch (InputMismatchException | DukeException e) {
+                    System.out.println(e.getMessage());
+                    Ui.border();
+                    input = scanner.next();
+                    break;
+                }
+
+            case "todo":
+                String tdLabel = scanner.nextLine();
+                Ui.border();
+                try {
+                    Todo todo = new Todo(tdLabel);
+                    list.add(todo);
+                    Ui.border();
+                    input = scanner.next();
+                    break;
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                    Ui.border();
+                    input = scanner.next();
+                    break;
+                }
+
+            case "deadline":
+                try {
+                    String dlLabel = scanner.nextLine();
+                    Ui.border();
+                    Task deadline = Parser.check(dlLabel, "/by ");
+                    list.add(deadline);
+                    Ui.border();
+                    input = scanner.next();
+                    break;
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                    Ui.border();
+                    input = scanner.next();
+                    break;
+                }
+
+            case "event":
+                try {
+                    String eLabel = scanner.nextLine();
+                    Ui.border();
+                    Task event = Parser.check(eLabel, "/at ");
+                    list.add(event);
+                    Ui.border();
+                    input = scanner.next();
+                    break;
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                    Ui.border();
+                    input = scanner.next();
+                    break;
+                }
+
+            case "delete":
+                try {
+                    Ui.border();
+                    int temp = scanner.nextInt();
+                    list.delete(temp);
+                    Ui.border();
+                    input = scanner.next();
+                    break;
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                    Ui.border();
+                    input = scanner.next();
+                    break;
+                }
+
+            case "find":
+                try {
+                    String find = scanner.nextLine();
+                    Ui.border();
+                    list.find(find);
+                    Ui.border();
                     input = scanner.next();
                     break;
 
-                case "done":
-                    try {
-                        int temp = scanner.nextInt();
-
-                        Task cur = list.get(temp - 1);
-                        cur.Done();
-                        Ui.Border();
-                        System.out.println("Nice! I've marked this task as done:");
-                        System.out.println(cur);
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-                    } catch (InputMismatchException | DukeException e) {
-                        System.out.println(e.getMessage());
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-                    }
-
-                case "todo":
-                    String tdLabel = scanner.nextLine();
-                    Ui.Border();
-                    try {
-                        Todo todo = new Todo(tdLabel);
-                        list.add(todo);
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-                    }
-
-                case "deadline":
-                    try {
-                        String dlLabel = scanner.nextLine();
-                        Ui.Border();
-                        Task deadline = Parser.check(dlLabel, "/by ");
-                        list.add(deadline);
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-                    }
-
-                case "event":
-                    try {
-                        String eLabel = scanner.nextLine();
-                        Ui.Border();
-                        Task event = Parser.check(eLabel, "/at ");
-                        list.add(event);
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-                    }
-
-                case "delete":
-                    try {
-                        Ui.Border();
-                        int temp = scanner.nextInt();
-                        list.delete(temp);
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-                    }
-
-                case "find":
-                    try {
-                        String find = scanner.nextLine();
-                        Ui.Border();
-                        list.find(find);
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                        Ui.Border();
-                        input = scanner.next();
-                        break;
-                    }
-
-                default:
-                    scanner.nextLine();
-                    Ui.UnknownCommand();
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                    Ui.border();
                     input = scanner.next();
                     break;
+                }
+
+            default:
+                scanner.nextLine();
+                Ui.unknownCommand();
+                input = scanner.next();
+                break;
             }
         }
 
-        Ui.Border();
+        Ui.border();
         storage.write(list);
-        Ui.Goodbye();
+        Ui.goodbye();
     }
 }

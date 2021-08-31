@@ -13,14 +13,14 @@ public class Parser {
      * Represents the DateValidators the parser uses to interpret users inputs.
      */
     private static final DateValidator ISOLocalDateValidator =
-            new DateValidator(DateTimeFormatter.ISO_LOCAL_DATE);
+        new DateValidator(DateTimeFormatter.ISO_LOCAL_DATE);
     private static final DateValidator LocalDateValidator =
-            new DateValidator(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        new DateValidator(DateTimeFormatter.ofPattern("MMM dd yyyy"));
 
     /**
      * Interpret what task the user is trying to create.
      *
-     * @param str the description of the task.
+     * @param str   the description of the task.
      * @param check used to verify what task to create.
      * @return the relevant task from the strings provided.
      */
@@ -40,28 +40,28 @@ public class Parser {
         }
 
         switch (check) {
-            case "/by ":
-                if (date == null) {
-                    return new Deadline(str1, str2);
-                } else {
-                    return new Deadline(str1, date);
-                }
-
-            case " (by: ":
+        case "/by ":
+            if (date == null) {
                 return new Deadline(str1, str2);
+            } else {
+                return new Deadline(str1, date);
+            }
 
-            case "/at ":
-                if (date == null) {
-                    return new Event(str1, str2);
-                } else {
-                    return new Event(str1, date);
-                }
+        case " (by: ":
+            return new Deadline(str1, str2);
 
-            case " (at: ":
+        case "/at ":
+            if (date == null) {
                 return new Event(str1, str2);
+            } else {
+                return new Event(str1, date);
+            }
 
-            default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        case " (at: ":
+            return new Event(str1, str2);
+
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -77,27 +77,27 @@ public class Parser {
         char doneCheck = string.charAt(4);
 
         switch (taskType) {
-            case "[T]":
-                String tdLabel = string.substring(7);
-                task = new Todo(tdLabel);
-                break;
+        case "[T]":
+            String tdLabel = string.substring(7);
+            task = new Todo(tdLabel);
+            break;
 
-            case "[D]":
-                String dlLabel = string.substring(7, string.length() - 1);
-                task = Parser.check(dlLabel, " (by: ");
-                break;
+        case "[D]":
+            String dlLabel = string.substring(7, string.length() - 1);
+            task = Parser.check(dlLabel, " (by: ");
+            break;
 
-            case "[E]":
-                String eLabel = string.substring(7, string.length() - 1);
-                task = Parser.check(eLabel, " (at: ");
-                break;
+        case "[E]":
+            String eLabel = string.substring(7, string.length() - 1);
+            task = Parser.check(eLabel, " (at: ");
+            break;
 
-            default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         if (doneCheck == 'X') {
-            task.Done();
+            task.done();
         }
         return task;
 

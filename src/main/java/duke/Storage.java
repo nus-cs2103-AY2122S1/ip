@@ -15,7 +15,7 @@ public class Storage {
     /**
      * Represents the file to read/write the TaskList to.
      */
-    File taskList;
+    private final File taskList;
 
     /**
      * Creates a Storage with the provided file.
