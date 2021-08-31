@@ -42,4 +42,7 @@ Here is a random filler quote because I don't know what else to add:
 > Death is like the wind. Always by my side - Yasuo
 
 To conclude, please click [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) if you are interested to find out more about my project. 
-That is all!
+
+Nah I'm just messing with you, do click [here](https://github.com/hmanhduc2k/ip/releases/download/v01/DuC-1.0-all.jar) instead to try out my product.
+
+Peace~~~
