@@ -194,9 +194,10 @@ public class Parser {
      * @return The prepared command.
      */
     private Command handleFind(String[] tokens) {
-        if (tokens.length != 2) {
-            return new InvalidCommand("What would you like to find? I can search for exactly 1 keyword.");
+        if (tokens.length < 2) {
+            return new InvalidCommand("What would you like to find? Separate your keywords with a space.");
         }
-        return new FindCommand(tokens[1]);
+        String[] keywords = tokens[1].split("\\s+");
+        return new FindCommand(keywords);
     }
 }

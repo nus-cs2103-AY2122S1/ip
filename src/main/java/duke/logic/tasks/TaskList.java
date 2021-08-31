@@ -1,8 +1,10 @@
 package duke.logic.tasks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Represents a list of tasks.
@@ -76,13 +78,16 @@ public class TaskList {
     }
 
     /**
-     * Finds all tasks whose descriptions contain the specified keyword.
+     * Finds all tasks whose descriptions contain one of the specified keywords.
      *
-     * @param keyword The keyword to search for.
+     * @param keywords The array of keywords to search for.
      * @return A list of resulting tasks.
      */
-    public List<Task> find(String keyword) {
-        return list.stream().filter(t -> t.containsKeyword(keyword)).collect(Collectors.toList());
+    public List<Task> find(String[] keywords) {
+        Stream<String> searchWords = Arrays.stream(keywords);
+        return list.stream()
+                .filter(task -> searchWords.anyMatch(task::containsKeyword))
+                .collect(Collectors.toList());
     }
 
     /**

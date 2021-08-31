@@ -43,7 +43,10 @@ public class TaskListTest {
             list.add(new TaskStub(i));
         }
         list.add(new TaskStub(4));
-        assertEquals(2, list.find("4").size());
+        assertEquals(2, list.find(new String[]{"4"}).size());
+        list.add(new TaskStub(3));
+        assertEquals(4, list.find(new String[]{"3", "4", "random"}).size());
+        assertEquals(6, list.find(new String[]{"Stub", "tas", "3", "4"}).size());
     }
 
     @Test

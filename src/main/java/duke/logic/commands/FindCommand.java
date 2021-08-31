@@ -9,15 +9,15 @@ import duke.logic.tasks.Task;
  * Finds the tasks whose descriptions contain the keyword.
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private String[] keywords;
 
     /**
      * Creates a command to find matching tasks.
      *
-     * @param keyword The keyword to search for.
+     * @param keywords The array of keywords to search for.
      */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String[] keywords) {
+        this.keywords = keywords;
     }
 
     /**
@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      */
     @Override
     public CommandResult execute() {
-        List<Task> matches = getTaskList().find(keyword);
+        List<Task> matches = getTaskList().find(keywords);
         List<String> results = new ArrayList<>();
         results.add("Here are the matching tasks in your list:");
         for (int i = 0; i < matches.size(); i++) {
