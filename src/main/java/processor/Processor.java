@@ -47,7 +47,7 @@ public class Processor implements IProcessor {
         case DELETE:
             return processDelete(arguments.get(1));
         case FIND:
-            return processFind(arguments.get(1));
+            return processFind(arguments.toArray(new String[0]));
         default:
             return processDefault(arguments);
         }
@@ -167,8 +167,8 @@ public class Processor implements IProcessor {
      * @return Response from the chatbot.
      */
     @Override
-    public String processFind(String keyword) {
-        String response = this.storage.findKeyword(keyword).toString();
+    public String processFind(String ... keywords) {
+        String response = this.storage.findKeyword(keywords).toString();
         Ui.print(response);
         return response;
     }

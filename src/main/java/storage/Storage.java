@@ -140,8 +140,8 @@ public class Storage implements IStorage {
         return this.list.getSize();
     }
 
-    public TaskList findKeyword(String keyword) {
-        return this.list.findKeyword(keyword);
+    public TaskList findKeyword(String ... keywords) {
+        return this.list.findKeyword(keywords);
     }
 
     /**

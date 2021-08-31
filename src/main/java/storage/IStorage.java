@@ -56,5 +56,5 @@ public interface IStorage {
      */
     int getSize();
 
-    TaskList findKeyword(String keyword);
+    TaskList findKeyword(String ... keywords);
 }
