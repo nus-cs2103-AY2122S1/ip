@@ -48,7 +48,7 @@ public class Duke {
     }
 
     /**
-     * entry point of the due chatbot.
+     * entry point of the duke chatbot.
      * @throws DukeException in case any unexpected input is passed
      * @throws IOException in case of file issues
      */
@@ -63,7 +63,7 @@ public class Duke {
      * @throws IOException thrown if file handling fails
      */
     public void interact() throws DukeException, IOException {
-        String[] input;
+        String[] inputWords;
         List<Task> fileContent = storage.loadData();
 
         if (fileContent == null) {
@@ -74,19 +74,19 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
         while(flag) {
-            input = Ui.getInput(sc).split("\\s+");
-            String command = input[0];
+            inputWords = Ui.getInput(sc).split("\\s+");
+            String command = inputWords[0];
             String str;
             String output = "";
             try {
-                String[] task = parser.compileInput(input);
+                String[] task = parser.compileInput(inputWords);
                 switch (command) {
                 case "list":
                     output = items.printList();
 
                     break;
                 case "done":
-                    int idx = Integer.parseInt(input[1]);
+                    int idx = Integer.parseInt(inputWords[1]);
                     output = items.markDone(idx);
                     str = storage.getFileLine(idx);
                     str = str.substring(0, 4) + "1" + str.substring(5);
@@ -116,7 +116,7 @@ public class Duke {
 
                     break;
                 case "delete":
-                    int id = Integer.parseInt(input[1]);
+                    int id = Integer.parseInt(inputWords[1]);
                     output = items.deleteItem(id);
                     storage.deleteFromFile(id);
 

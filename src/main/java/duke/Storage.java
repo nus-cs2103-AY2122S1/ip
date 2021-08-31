@@ -22,7 +22,7 @@ public class Storage {
     private final String file;
 
     // The contents of the file as a List of Strings
-    private ArrayList<String> fileContent;
+    private ArrayList<String> fileTasks;
 
     /**
      * Constructor
@@ -32,7 +32,7 @@ public class Storage {
     public Storage(String fileDir, String file) {
         this.directory = fileDir;
         this.file = file;
-        this.fileContent = new ArrayList<>();
+        this.fileTasks = new ArrayList<>();
     }
 
     /**
@@ -55,10 +55,10 @@ public class Storage {
         ArrayList<Task> fileList = new ArrayList<>();
         try {
             Scanner fileReader = new Scanner(dataFile);
-            fileContent.clear();
+            fileTasks.clear();
             while (fileReader.hasNextLine()) {
                 String rawData = fileReader.nextLine();
-                fileContent.add(rawData);
+                fileTasks.add(rawData);
                 String[] data = rawData.split(" \\| ");
                 String taskType = data[0];
                 boolean isDone = data[1].equals("1");
@@ -98,7 +98,7 @@ public class Storage {
      * @throws DukeException When saving the file fails
      */
     public void addToFile(String task) throws DukeException, IOException {
-        fileContent.add(task);
+        fileTasks.add(task);
         saveToFile();
     }
 
@@ -108,7 +108,7 @@ public class Storage {
      * @throws DukeException When saving the file fails
      */
     public void deleteFromFile(int id) throws DukeException, IOException {
-        fileContent.remove(id - 1);
+        fileTasks.remove(id - 1);
         saveToFile();
     }
 
@@ -119,7 +119,7 @@ public class Storage {
      * @throws DukeException when saving file fails
      */
     public void updateListTask(int id, String task) throws DukeException, IOException {
-        fileContent.set(id - 1, task);
+        fileTasks.set(id - 1, task);
         saveToFile();
     }
 
@@ -131,7 +131,7 @@ public class Storage {
      */
     public String getFileLine(int index) throws DukeException{
         try {
-            return fileContent.get(index - 1);
+            return fileTasks.get(index - 1);
         } catch (Exception e) {
             throw new DukeException("Task doesn't exist" +
                     "\nAre you sure you have entered the correct index?");
@@ -140,12 +140,12 @@ public class Storage {
 
 
     /**
-     * Saving the file content to the hard drive
+     * Saves the file content to the hard drive
      * @throws DukeException when saving the file fails
      */
     private void saveToFile() throws DukeException {
         try {
-            Files.write(Paths.get(directory + "/" + file), fileContent, StandardCharsets.UTF_8);
+            Files.write(Paths.get(directory + "/" + file), fileTasks, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new DukeException("Error: could not save to file.");
         }

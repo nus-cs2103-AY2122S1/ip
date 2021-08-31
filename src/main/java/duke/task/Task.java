@@ -15,7 +15,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Create a new Task object (Constructor)
+     * Creates a new Task object (Constructor)
      * @param description The new task description
      */
     public Task(String description) {
@@ -41,7 +41,7 @@ public class Task {
     }
 
     /**
-     * The task string representation
+     * generates the string representation of task
      * @return The description of the task
      */
     public String toString() {

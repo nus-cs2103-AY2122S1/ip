@@ -13,13 +13,13 @@ public class Items {
     /**
      * items to be stored in the list.
      */
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for Items
      */
     public Items() {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -27,21 +27,21 @@ public class Items {
      * @param tasks An ArrayList of Tasks
      */
     public  Items(ArrayList<Task> tasks) {
-        list = tasks;
+        this.tasks = tasks;
     }
 
     /**
-     * Add an item to the list.
+     * Adds an item to the list.
      * @param task A task to represent the item added
      * @return A status message to be displayed
      */
     public String addItem(Task task) {
-        list.add(task);
+        tasks.add(task);
         String output = "Got it, I've added this task:\n" + task.toString();
-        if (list.size() == 1) {
+        if (tasks.size() == 1) {
             output += "\nNow you have 1 task in the list.";
         } else {
-            output += "\nNow you have " + list.size() + " tasks in the list.";
+            output += "\nNow you have " + tasks.size() + " tasks in the list.";
         }
         return output;
     }
@@ -55,13 +55,13 @@ public class Items {
         if (index <= 0) {
             throw new DukeException("Invalid index. Only non-negative values are accepted.");
         }
-        if (list.size() == 0) {
+        if (tasks.size() == 0) {
             throw new DukeException("You have 0 tasks. Add some tasks first.");
         }
-        if (index > list.size()) {
+        if (index > tasks.size()) {
             throw new DukeException("You don't have these many tasks!");
         }
-        Task task = list.get(index - 1);
+        Task task = tasks.get(index - 1);
         return task.doneTask();
     }
 
@@ -75,44 +75,50 @@ public class Items {
         if (index < 0) {
             throw new DukeException("Invalid index. Only positive values are accepted.");
         }
-        if (list.size() == 0) {
+        if (tasks.size() == 0) {
             throw new DukeException("You have 0 tasks. Add some tasks first.");
         }
-        if (index > list.size()) {
+        if (index > tasks.size()) {
             throw new DukeException("You don't have these many tasks!");
         }
-        Task task = list.get(index - 1);
-        list.remove(index - 1);
+        Task task = tasks.get(index - 1);
+        tasks.remove(index - 1);
         return "Noted. I have removed this task:\n" + task.toString()
-                + "\n Number of tasks remaining: " + list.size();
+                + "\n Number of tasks remaining: " + tasks.size();
 
     }
 
     /**
-     * The String representation of the items object.
+     * generates the String representation of the items object.
      * @return The String representation of the items object.
      */
     public String printList() throws DukeException {
-        if (list.size() == 0) {
+        if (tasks.size() == 0) {
             throw new DukeException("You have 0 items in your list");
         }
         StringBuilder str = new StringBuilder("These are your tasks: \n");
 
-        for (int i = 0; i < list.size(); i++) {
-            if (i < list.size() - 1) {
-                str.append(" ").append(i + 1).append(". ").append(list.get(i).toString()).append("\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            if (i < tasks.size() - 1) {
+                str.append(" ").append(i + 1).append(". ").append(tasks.get(i).toString()).append("\n");
             } else {
-                str.append(" ").append(i + 1).append(". ").append(list.get(i).toString());
+                str.append(" ").append(i + 1).append(". ").append(tasks.get(i).toString());
             }
         }
         return str.toString();
     }
 
+    /**
+     * finds the task containing the given keyword
+     * @param keyword word in task
+     * @return string containing all the tasks with the keyword
+     * @throws DukeException if there is no task that matches the given keyword
+     */
     public String findTask(String keyword) throws DukeException {
         StringBuilder output = new StringBuilder();
         output.append("Here are the matching tasks in your list: ");
         int ctr = 0;
-        for (Task task : list) {
+        for (Task task : tasks) {
             String[] splitString = task.toString().split("\\s");
             for (String word : splitString) {
                 if (word.equals(keyword)) {

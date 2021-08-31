@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 
 public class Parser {
     /**
-     * combine an array of strings into a space seperated sentence.
+     * combines an array of strings into a space seperated sentence.
      * @param input the string array.
      * @return the sentence.
      */
@@ -23,7 +23,7 @@ public class Parser {
     }
 
     /**
-     * Convert the user input string into meaningful commands.
+     * Converts the user input string into meaningful commands.
      * @param input the user input string.
      * @return the meaningful commands.
      */

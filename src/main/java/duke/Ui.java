@@ -22,7 +22,7 @@ public class Ui {
     }
 
     /**
-     * method to greet the user
+     * returns a greeting to the user
      */
     public void greet() {
         System.out.println(LOGO);
@@ -30,7 +30,7 @@ public class Ui {
     }
 
     /**
-     * Get the user input
+     * Gets the user input
      * @param sc The scanner to get the input
      * @return The string representation of the user input
      */
@@ -39,7 +39,7 @@ public class Ui {
     }
 
     /**
-     * print all bot messages in a specific format.
+     * prints all bot messages in a specific format.
      * @param message message from the bot.
      */
     public static void printMessage(String message) {
