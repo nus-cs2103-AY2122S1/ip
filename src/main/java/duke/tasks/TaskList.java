@@ -25,16 +25,16 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        boolean first = true;
+        boolean isFirst = true;
         for (int i = 0; i < storedList.size(); i++) {
-            if (first) {
-                first = false;
+            if (isFirst) {
+                isFirst = false;
             } else {
                 sb.append("\n");
             }
             sb.append(String.format("%d.%s", i + 1, storedList.get(i)));
         }
-        if (first) {
+        if (isFirst) {
             sb.append("\n");
         }
         return sb.toString();
@@ -46,10 +46,10 @@ public class TaskList {
 
     public String serialize() {
         StringBuilder sb = new StringBuilder();
-        boolean first = true;
+        boolean isFirst = true;
         for(Task task : storedList) {
-            if (first) {
-                first = false;
+            if (isFirst) {
+                isFirst = false;
             } else {
                 sb.append("\n");
             }

@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.FileController;
-import duke.UI;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
@@ -15,7 +14,7 @@ public class FindCommand extends Command{
         this.toFind = toFind;
     }
 
-    public void execute(TaskList tasks, UI ui, FileController fc) {
+    public String execute(TaskList tasks, FileController fc) {
         StringBuilder sb = new StringBuilder();
         int size = tasks.size();
         int count = 0;
@@ -30,7 +29,7 @@ public class FindCommand extends Command{
             }
         }
         sb.insert(0, String.format("Found %d entries", count));
-        ui.printText(sb.toString());
+        return sb.toString();
 
     }
 }

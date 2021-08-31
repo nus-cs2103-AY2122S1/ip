@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.*;
-import duke.tasks.*;
-import duke.exceptions.*;
+import duke.FileController;
+import duke.exceptions.UnsavedChangesException;
+import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 /** Command to add tasks */
 public class AddTaskCommand extends Command {
@@ -13,11 +14,11 @@ public class AddTaskCommand extends Command {
         this.task = task;
     }
 
-    public void execute(TaskList tasks, UI ui, FileController fc) throws UnsavedChangesException {
+    public String execute(TaskList tasks, FileController fc) throws UnsavedChangesException {
         tasks.add(task);
         if (!fc.writeText(tasks.serialize())) {
             throw new UnsavedChangesException();
         }
-        ui.printText(String.format("Added: %s\nNow you have %d tasks", task, tasks.size()));
+        return String.format("Added: %s\nNow you have %d tasks", task, tasks.size());
     }
 }

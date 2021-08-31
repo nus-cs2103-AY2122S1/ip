@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.FileController;
-import duke.UI;
 import duke.exceptions.InvalidOperationDukeException;
 import duke.exceptions.UnsavedChangesException;
 import duke.tasks.Task;
@@ -15,7 +14,7 @@ public class DeleteTaskCommand extends Command {
         this.index = index;
     }
 
-    public void execute(TaskList tasks, UI ui, FileController fc) throws UnsavedChangesException {
+    public String execute(TaskList tasks, FileController fc) throws UnsavedChangesException {
         if (index < 1 || index > tasks.size()) {
             throw new InvalidOperationDukeException("Number is out of bounds");
         }
@@ -23,6 +22,6 @@ public class DeleteTaskCommand extends Command {
         if (!fc.writeText(tasks.serialize())) {
             throw new UnsavedChangesException();
         }
-        ui.printText(String.format("Removed task %d %s", index, task));
+        return String.format("Removed task %d %s", index, task);
     }
 }

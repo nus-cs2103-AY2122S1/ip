@@ -1,4 +1,7 @@
-import duke.tasks.*;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+import duke.tasks.TaskUtils;
+import duke.tasks.Todo;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 

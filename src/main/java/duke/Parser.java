@@ -1,6 +1,11 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddTaskCommand;
+import duke.command.Command;
+import duke.command.DeleteTaskCommand;
+import duke.command.FindCommand;
+import duke.command.MarkDoneCommand;
+import duke.command.PrintListCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandDukeException;
 import duke.exceptions.NoArgumentDukeException;
@@ -41,8 +46,6 @@ public class Parser {
                 return addEvent(getArgs(command));
             case "delete":
                 return delete(getArgs(command));
-            case "bye":
-                return new ExitCommand();
             case "find":
                 return find(getArgs(command));
             default:

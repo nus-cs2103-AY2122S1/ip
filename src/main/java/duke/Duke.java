@@ -11,38 +11,32 @@ public class Duke {
     
     TaskList taskList;
     FileController fc;
-    UI ui;
+    Parser parser;
 
-    private Duke() {
+    public Duke() {
         fc = new FileController(FILE_PATH, "list.txt");
         String contents = fc.readContentsAsString();
         taskList = new TaskList(contents);
-        ui = new UI();
-        ui.showWelcome();
+        parser = new Parser();
     }
 
 
-    private void start() {
-        Parser parser = new Parser();
-        System.out.println("Hello, what can I do for you.\n");
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String input = ui.readCommand();
-                Command c = parser.parseCommand(input);
-                c.execute(taskList, ui, fc);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printText(e.getMessage());
-            }
-
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parseCommand(input);
+            return c.execute(taskList, fc);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
-
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
+    public String getWelcome() {
+        return "Hello from\n" + " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
     }
+
 
 }
