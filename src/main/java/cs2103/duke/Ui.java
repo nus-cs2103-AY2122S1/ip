@@ -23,7 +23,7 @@ public class Ui {
     private static TaskList taskArrayList;
 
     public Ui(TaskList tasks) {
-        this.taskArrayList = tasks;
+        taskArrayList = tasks;
     }
 
     /**

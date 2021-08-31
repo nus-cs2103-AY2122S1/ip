@@ -12,7 +12,7 @@ public class TaskList {
      * This constructor instantiates a new Tasklist with no tasks inside.
      */
     public TaskList() {
-        this.taskArrayList = new ArrayList<>();
+        taskArrayList = new ArrayList<>();
     }
 
     /**
