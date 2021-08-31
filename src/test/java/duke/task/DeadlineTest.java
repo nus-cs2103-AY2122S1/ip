@@ -9,7 +9,7 @@ public class DeadlineTest {
 
     @Test
     public void build_validDescriptionAndTime_returnDeadline() {
-        Deadline dl = Deadline.build("test /by 2000-02-02");
+        Deadline dl = Deadline.build("test (by: Feb 02 2000)");
         assertEquals(dl.description, "test");
         assertEquals(dl.date, LocalDate.parse("2000-02-02"));
     }
