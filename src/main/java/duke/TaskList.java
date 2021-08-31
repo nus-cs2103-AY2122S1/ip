@@ -138,24 +138,28 @@ public class TaskList {
     /**
      * Prints the list of tasks.
      */
-    public void displayList() {
+    public String displayList() {
         if (ls.size() == 0) {
-            System.out.println("You currently do not have any task!");
+            return ("You currently do not have any task!");
         } else {
-            System.out.println("Here are the tasks in your list: ");
+            String str = "";
+            str += "Here are the tasks in your list: ";
             for (int i = 0; i < ls.size(); i++) {
-                System.out.println((i + 1) + "." + ls.get(i).toString());
+                str += (i + 1) + "." + ls.get(i).toString();
             }
+            return str;
         }
     }
 
     /**
      * Prints the acknowledgement and the current number of tasks in the list.
      */
-    public void printAddTask() {
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(ls.get(ls.size() - 1).toString());
-        System.out.println("Now you have " + ls.size() + " tasks in the list.");
+    public String printAddTask() {
+        String str = "";
+        str += "Got it. I've added this task: ";
+        str += ls.get(ls.size() - 1).toString();
+        str += "Now you have " + ls.size() + " tasks in the list.";
+        return str;
     }
 
     /**
