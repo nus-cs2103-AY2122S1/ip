@@ -171,6 +171,7 @@ public class Duke {
 
     /**
      * Method for duke.Duke to mark a task done.
+     *
      * @throws DukeException Thrown when user gives an index out of range
      * or not a number after the command done.
      */
