@@ -20,8 +20,8 @@ public class Ui {
     /**
      * Prints a welcome message.
      */
-    public void welcome() {
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+    public String printWelcomeMessage() {
+        return ("Hello! I'm Duke\n" + "What can I do for you?");
     }
 
     /**
@@ -35,7 +35,7 @@ public class Ui {
     /**
      * Prints a goodbye message.
      */
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String printGoodbyeMessage() {
+        return ("Bye. Hope to see you again soon!");
     }
 }
