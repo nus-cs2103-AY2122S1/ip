@@ -21,14 +21,14 @@ public class Ui {
      */
     public void printStartDisplay() {
         print(logo());
-        print(startGreeting());
+        print(this.getGreeting());
     }
 
     /**
      * Prints the ending display to the user.
      */
     public void printEndDisplay() {
-        print(endGreeting());
+        print(this.getBye());
     }
 
     /**
@@ -52,14 +52,14 @@ public class Ui {
     }
 
 
-    public String startGreeting() {
-        String startGreeting = "Hello, my name is Morgan, and I'm your personal task assistant.\n"
+    public String getGreeting() {
+        String greeting = "Hello, my name is Morgan, and I'm your personal task assistant.\n"
                 + " What can I do for you today?";
-        return startGreeting;
+        return greeting;
     }
 
-    public String endGreeting() {
-        String endGreeting = "Bye. Hope to see you again soon.";
-        return endGreeting;
+    public String getBye() {
+        String bye = "Bye. Hope to see you again soon.";
+        return bye;
     }
 }

@@ -12,9 +12,9 @@ public class DeleteCommand extends Command {
     private final int taskNumber;
     public static final String KEYWORD = "delete";
     private static final String INPUT_FORMAT = String.format("\t\"%s [task number]\"", KEYWORD);
-    private static final String INPUT_FORMAT_ERROR_MESSAGE = String.format("Please " +
+    private static final String INPUT_FORMAT_ERROR = String.format("Please " +
             "ensure your input is in the following format:\n" + INPUT_FORMAT);
-    private static final String TASK_NUMBER_ERROR_MESSAGE = String.format("Please " +
+    private static final String TASK_NUMBER_ERROR = String.format("Please " +
             "provide a valid task number.");
 
     /**
@@ -27,14 +27,14 @@ public class DeleteCommand extends Command {
 
         // Checks if user specified task number
         if (intString.isEmpty()) {
-            throw new MorganException(INPUT_FORMAT_ERROR_MESSAGE);
+            throw new MorganException(INPUT_FORMAT_ERROR);
         }
 
         // Checks if task number is an integer
         try {
             this.taskNumber = Integer.parseInt(intString);
         } catch (NumberFormatException e) {
-            throw new MorganException(TASK_NUMBER_ERROR_MESSAGE);
+            throw new MorganException(TASK_NUMBER_ERROR);
         }
     }
 
@@ -49,7 +49,7 @@ public class DeleteCommand extends Command {
 
         // Checks if task number is valid
         if (!isValidTaskNumber) {
-            throw new MorganException(TASK_NUMBER_ERROR_MESSAGE);
+            throw new MorganException(TASK_NUMBER_ERROR);
         }
 
         // Obtain task and remove

@@ -9,7 +9,7 @@ import tasks.TaskList;
  * valid command.
  */
 public class InvalidCommand extends Command {
-    private final String INVALID_COMMAND_ERROR_MESSAGE = "Please enter a valid command.";
+    private final String INVALID_COMMAND_ERROR = "Please enter a valid command.";
 
     /**
      * Throws an exception to prompt user to enter a valid command.
@@ -18,6 +18,6 @@ public class InvalidCommand extends Command {
      * @throws MorganException
      */
     public String execute(TaskList taskList, Storage storage) throws MorganException {
-        throw new MorganException(INVALID_COMMAND_ERROR_MESSAGE);
+        throw new MorganException(INVALID_COMMAND_ERROR);
     }
 }

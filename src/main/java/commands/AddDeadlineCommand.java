@@ -15,7 +15,7 @@ public class AddDeadlineCommand extends AddCommand {
     private static final int INPUT_PARAMETERS = 2;
     private static final String INPUT_FORMAT = String.format("\t\"%s [task] %s " +
             "[dd-mm-yyyy hh:mm]\"", KEYWORD, DELIMITER);
-    private static final String INPUT_FORMAT_ERROR_MESSAGE = String.format("Please " +
+    private static final String INPUT_FORMAT_ERROR = String.format("Please " +
             "ensure your input is in the following format:\n" + INPUT_FORMAT);
 
     /**
@@ -27,14 +27,14 @@ public class AddDeadlineCommand extends AddCommand {
         // Check whether input contains delimiter
         boolean hasDelimiter = userInput.contains(DELIMITER);
         if (!hasDelimiter) {
-            throw new MorganException(INPUT_FORMAT_ERROR_MESSAGE);
+            throw new MorganException(INPUT_FORMAT_ERROR);
         }
 
         // Check whether input contains task and date/time
         String[] inputData = userInput.substring(KEYWORD.length()).trim().split(DELIMITER);
         boolean isValidInput = (inputData.length == INPUT_PARAMETERS);
         if (!isValidInput) {
-            throw new MorganException(INPUT_FORMAT_ERROR_MESSAGE);
+            throw new MorganException(INPUT_FORMAT_ERROR);
         }
 
         // Retrieve input parameters
@@ -43,7 +43,7 @@ public class AddDeadlineCommand extends AddCommand {
         try {
             this.task = new DeadlineTask(taskName, dateTime);
         } catch(DateTimeParseException e) {
-            throw new MorganException(INPUT_FORMAT_ERROR_MESSAGE);
+            throw new MorganException(INPUT_FORMAT_ERROR);
         }
     }
 

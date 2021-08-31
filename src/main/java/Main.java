@@ -1,23 +1,15 @@
-import java.io.IOException;
-
-import commands.Command;
 import exceptions.MorganException;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import parser.CommandParser;
-import storage.Storage;
-import tasks.TaskList;
 
 /**
  * A GUI for Duke using FXML.

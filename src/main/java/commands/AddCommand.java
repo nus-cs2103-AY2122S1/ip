@@ -20,11 +20,7 @@ public abstract class AddCommand extends Command {
     public String execute(TaskList taskList, Storage storage) throws MorganException {
         taskList.addTask(task);
         int numTasks = taskList.getNumOfTasks();
-        try {
-            storage.save(taskList);
-        } catch (MorganException e) {
-            throw e;
-        }
+        storage.save(taskList);
         return "Got it. I've added this task:\n\t" + this.task
                 + "\nNow you have " + numTasks + " tasks in the list.";
     }

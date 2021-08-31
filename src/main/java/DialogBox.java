@@ -13,19 +13,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
-
-    private Label text;
-    private ImageView displayPicture;
     private final Insets PHOTO_MARGIN = new Insets(10, 10, 10, 10);
     private final Insets TEXT_MARGIN = new Insets(15, 15, 15, 15);
     private static final Insets DIALOG_MARGIN = new Insets(5, 5, 5, 5);
-    private static final CornerRadii BACKGROUND_CORNER_RADII = new CornerRadii(10.0);
+    private static final CornerRadii DIALOG_CORNER_RADII = new CornerRadii(10.0);
     private static final Color USER_BACKGROUND_COLOR = Color.rgb(210, 212, 253);
-    private static final BackgroundFill USER_BACKGROUND_FILL = new BackgroundFill(USER_BACKGROUND_COLOR,
-            BACKGROUND_CORNER_RADII, DIALOG_MARGIN);
     private static final Color MORGAN_BACKGROUND_COLOR = Color.rgb(236, 221, 254);
-    private static final BackgroundFill MORGAN_BACKGROUND_FILL = new BackgroundFill(MORGAN_BACKGROUND_COLOR,
-            BACKGROUND_CORNER_RADII, DIALOG_MARGIN);
+
+    private Label text;
+    private ImageView displayPicture;
 
     public DialogBox(String string, Image image) {
         text = new Label(string);
@@ -33,8 +29,8 @@ public class DialogBox extends HBox {
 
         text.setWrapText(true);
         text.setPrefWidth(300.0);
-        displayPicture.setFitWidth(75.0);
-        displayPicture.setFitHeight(75.0);
+        displayPicture.setFitWidth(50.0);
+        displayPicture.setFitHeight(50.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
@@ -54,7 +50,9 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String string, Image image) {
         DialogBox output = new DialogBox(string, image);
-        Background background = new Background(USER_BACKGROUND_FILL);
+        BackgroundFill backgroundFill = new BackgroundFill(USER_BACKGROUND_COLOR,
+                DIALOG_CORNER_RADII, DIALOG_MARGIN);
+        Background background = new Background(backgroundFill);
         output.setBackground(background);
         return output;
     }
@@ -62,7 +60,9 @@ public class DialogBox extends HBox {
     public static DialogBox getMorganDialog(String string, Image image) {
         DialogBox output = new DialogBox(string, image);
         output.flip();
-        Background background = new Background(MORGAN_BACKGROUND_FILL);
+        BackgroundFill backgroundFill = new BackgroundFill(MORGAN_BACKGROUND_COLOR,
+                DIALOG_CORNER_RADII, DIALOG_MARGIN);
+        Background background = new Background(backgroundFill);
         output.setBackground(background);
         return output;
     }

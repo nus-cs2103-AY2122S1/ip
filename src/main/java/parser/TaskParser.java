@@ -52,9 +52,12 @@ public class TaskParser {
      */
     public Task decode(String string) throws MorganException {
         String[] data = string.split(DELIMITER);
+
+        // Checks if storage data has been tampered
         if (data.length <= DESCRIPTION_INDEX) {
             throw new MorganException(TAMPERED_ERROR);
         }
+
         String taskType = data[TASK_INDEX].trim();
         boolean isDone = Boolean.parseBoolean(data[STATUS_INDEX].trim());
         String description = data[DESCRIPTION_INDEX].trim();

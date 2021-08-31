@@ -1,13 +1,3 @@
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import commands.Command;
 import exceptions.MorganException;
@@ -45,7 +35,7 @@ public class Morgan {
     }
 
     public String getGreeting() {
-        return ui.startGreeting();
+        return ui.getGreeting();
     }
 
     private void run() {
@@ -60,11 +50,9 @@ public class Morgan {
             } catch (MorganException e) {
                 this.ui.print(e.getMessage());
             }
-
             userInput = this.ui.getInput();
             isExitKeyword = userInput.trim().equalsIgnoreCase(EXIT_KEYWORD);
         }
-
         this.ui.printEndDisplay();
     }
 

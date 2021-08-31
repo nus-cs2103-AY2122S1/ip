@@ -9,7 +9,7 @@ import tasks.ToDoTask;
 public class AddToDoCommand extends AddCommand {
     public static final String KEYWORD = "todo";
     private static final String INPUT_FORMAT = String.format("\t\"%s [task]\"", KEYWORD);
-    private static final String INPUT_FORMAT_ERROR_MESSAGE = String.format("Please " +
+    private static final String INPUT_FORMAT_ERROR = String.format("Please " +
             "ensure your input is in the following format:\n" + INPUT_FORMAT);
 
     /**
@@ -23,7 +23,7 @@ public class AddToDoCommand extends AddCommand {
         // Check whether input contains task
         boolean hasTask = !inputData.isEmpty();
         if (!hasTask) {
-            throw new MorganException(INPUT_FORMAT_ERROR_MESSAGE);
+            throw new MorganException(INPUT_FORMAT_ERROR);
         }
 
         this.task = new ToDoTask(inputData);
