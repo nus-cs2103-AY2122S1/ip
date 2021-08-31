@@ -6,9 +6,9 @@ import java.time.format.DateTimeFormatter;
  * This is an EventTask class, which inherits from Task.
  */
 public class EventTask extends Task {
+    public static final String KEYWORD = "[Event]";
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d-M-yyyy k:mm");
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy hh.mma");
-    public static final String KEYWORD = "[Event]";
     private final LocalDateTime dateTime;
 
     /**

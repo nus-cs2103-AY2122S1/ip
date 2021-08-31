@@ -1,4 +1,5 @@
 package commands;
+
 import exceptions.MorganException;
 import storage.Storage;
 import tasks.TaskList;
@@ -11,15 +12,16 @@ import tasks.TaskList;
 public class FindCommand extends Command {
     public static final String KEYWORD = "find";
     private static final String INPUT_FORMAT = String.format("\t\"%s [keyword]\"", KEYWORD);
-    private static final String INPUT_FORMAT_ERROR = String.format("Please " +
-            "ensure your input is in the following format:\n" + INPUT_FORMAT);
-    private final String NOT_FOUND_ERROR = "No matching task found. "
+    private static final String INPUT_FORMAT_ERROR = String.format("Please "
+            + "ensure your input is in the following format:\n" + INPUT_FORMAT);
+    private static final String NOT_FOUND_ERROR = "No matching task found. "
             + "Please try another keyword.";
     private final String keyTerm;
 
     /**
      * Constructor for command.
      * @param userInput The input string entered by the user.
+     * @throws MorganException If input format is invalid.
      */
     public FindCommand(String userInput) throws MorganException {
         String inputData = userInput.substring(KEYWORD.length()).trim();
@@ -41,7 +43,7 @@ public class FindCommand extends Command {
 
         // Throws exception if no matching task found
         if (foundTasks.isEmpty()) {
-            throw new MorganException(NOT_FOUND_ERROR) ;
+            throw new MorganException(NOT_FOUND_ERROR);
         }
 
         // Message displayed upon execution

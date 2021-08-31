@@ -9,18 +9,18 @@ import tasks.TaskList;
  * The execution of this command will mark a task as done.
  */
 public class MarkDoneCommand extends Command {
-    private final int taskNumber;
     public static final String KEYWORD = "done";
     private static final String INPUT_FORMAT = String.format("\t\"%s [task number]\"", KEYWORD);
-    private static final String INPUT_FORMAT_ERROR = String.format("Please " +
-            "ensure your input is in the following format:\n" + INPUT_FORMAT);
-    private static final String TASK_NUMBER_ERROR = String.format("Please " +
-            "provide a valid task number.");
+    private static final String INPUT_FORMAT_ERROR = String.format("Please "
+            + "ensure your input is in the following format:\n" + INPUT_FORMAT);
+    private static final String TASK_NUMBER_ERROR = String.format("Please "
+            + "provide a valid task number.");
+    private final int taskNumber;
 
     /**
      * Constructor for MarkDoneCommand.
      * @param userInput The input string entered by the user.
-     * @throws MorganException
+     * @throws MorganException If input format is invalid.
      */
     public MarkDoneCommand(String userInput) throws MorganException {
         String intString = userInput.substring(KEYWORD.length()).trim();
@@ -42,7 +42,7 @@ public class MarkDoneCommand extends Command {
      * Mark a task as done.
      * @param taskList The existing list where the task is.
      * @return The completion message after execution.
-     * @throws MorganException
+     * @throws MorganException If input format is invalid.
      */
     public String execute(TaskList taskList, Storage storage) throws MorganException {
         boolean isValidTaskNumber = this.taskNumber <= taskList.getNumOfTasks()

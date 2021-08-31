@@ -1,24 +1,31 @@
 package parser;
-
-import commands.*;
+import commands.AddDeadlineCommand;
+import commands.AddEventCommand;
+import commands.AddToDoCommand;
+import commands.Command;
+import commands.DeleteCommand;
+import commands.FindCommand;
+import commands.InvalidCommand;
+import commands.ListCommand;
+import commands.MarkDoneCommand;
 import exceptions.MorganException;
-import storage.Storage;
+
 
 /**
  * This is an parser.CommandParser class, which translates user input
  * into commands.
  */
 public class CommandParser {
-    private final static String DELIMITER = "\\s+";
-    private final static int COMMAND_INDEX = 0;
-    private final static String DELIMITER_FOUND_ERROR_MESSAGE = "Please "
+    private static final int COMMAND_INDEX = 0;
+    private static final String DELIMITER = "\\s+";
+    private static final String DELIMITER_FOUND_ERROR_MESSAGE = "Please "
             + "avoid using the symbol \"" + TaskParser.DELIMITER + "\".";
 
     /**
      * Returns the command specified by the user.
      * @param userInput The input string entered by the user.
      * @return The command specified by the user.
-     * @throws MorganException
+     * @throws MorganException If input format is invalid.
      */
     public Command getCommand(String userInput) throws MorganException {
         String trimmedUserInput = userInput.trim();
