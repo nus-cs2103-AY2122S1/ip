@@ -11,6 +11,6 @@ public class DukeIncorrectCommandWord extends DukeIncorrectInputs {
      * @param err error that is to be thrown
      */
     public DukeIncorrectCommandWord(Throwable err) {
-        super("\t⚠️ OOPS! I'm sorry, but I don't know what that means! ⚠️", err);
+        super("⚠️ OOPS! I'm sorry, but I don't know what that means! ⚠️", err);
     }
 }

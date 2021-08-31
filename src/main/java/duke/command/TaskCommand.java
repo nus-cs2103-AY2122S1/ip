@@ -3,10 +3,9 @@ package duke.command;
 import duke.Duke;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.GUI;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Represents the general task command.
@@ -17,17 +16,16 @@ public class TaskCommand extends Command {
     /**
      * Constructor for the Task command.
      * @param duke Duke chatbot that is in use.
-     * @param sc Scanner object that is in use.
      * @param description full command in String inputted by the user.
      */
-    public TaskCommand(Duke duke, Scanner sc, String description) {
-        super(duke, sc);
+    public TaskCommand(Duke duke, String description) {
+        super(duke);
         this.DESCRIPTION = description;
     }
 
     @Override
-    public void execute(TaskList taskList) throws IOException, DukeException {
-        Ui.printAddedTaskMessage(this.duke.addTaskToList(DESCRIPTION), taskList.getTotal());
+    public String execute(TaskList taskList) throws IOException, DukeException {
         this.duke.saveTasks();
+        return GUI.printAddedTaskMessage(this.duke.addTaskToList(DESCRIPTION), taskList.getTotal());
     }
 }

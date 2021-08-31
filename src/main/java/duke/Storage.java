@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 /**
  * Represents the storage file that stores the user's tasklist.
+ *
+ * @author Ne Zhijian, Didymus A0218159Y
  */
 public class Storage {
     private final String FILE_PATH;
@@ -35,7 +37,7 @@ public class Storage {
             tasksToWrite.append(listOfTasks.getTask(i).saveToFile() + "\n");
         }
 
-        FileWriter fileWriter = new FileWriter(this.FILE_PATH);
+        FileWriter fileWriter = new FileWriter(this.FILE_PATH, false);
         fileWriter.write(tasksToWrite.toString());
         fileWriter.close();
     }

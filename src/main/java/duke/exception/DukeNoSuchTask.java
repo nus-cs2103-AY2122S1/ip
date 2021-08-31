@@ -10,6 +10,6 @@ public class DukeNoSuchTask extends DukeIncorrectInputs {
      * Constructor for the DukeNoSuchTask exception.
      */
     public DukeNoSuchTask(Throwable err) {
-        super("\tThere is no such task saved in the list.", err);
+        super("There is no such task saved in the list.", err);
     }
 }
