@@ -12,11 +12,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
 
-    private static String[] DEADLINE_KEYWORDS = new String[] {"deadline", "/by"};
-
     @Test
     public void testParseDeadlineInput() throws DukeException {
-        String command = "deadline PLACEHOLDER /by 21/8/2021 1800";
+        String command = "deadline PLACEHOLDER /by 24/8/2021 1800";
         Command expected = new AddDeadlineCommand(new String[] {"PLACEHOLDER", "24/8/2021 1800"});
         Command actual = Parser.parseNext(command);
         assertEquals(
@@ -38,7 +36,7 @@ public class ParserTest {
 
     @Test
     public void testParseEventInput() throws DukeException {
-        String command = "event PLACEHOLDER /at 24/12/2022 1859";
+        String command = "event PLACEHOLDER /at 24/8/2021 1800";
         Command expected = new AddEventCommand(new String[] {"PLACEHOLDER", "24/8/2021 1800"});
         Command actual = Parser.parseNext(command);
         assertEquals(
