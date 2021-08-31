@@ -13,7 +13,6 @@ import java.util.Scanner;
 public class StorageList {
     private final ArrayList<Task> storageList = new ArrayList<>();
     private File file;
-    private Ui ui = new Ui();
 
     public StorageList(File file) throws FileNotFoundException {
         this.file = file;
@@ -92,22 +91,21 @@ public class StorageList {
      * @param idx The index of the task to be deleted.
      */
     public void delete(int idx) {
-        String desc = storageList.get(idx).getDescription();
         storageList.remove(idx);
-        ui.taskDeleteMsg(desc, storageList.size());
     }
 
-    public void findAndPrint(String keyword) {
-        System.out.println("    Here are the matching tasks in your list:");
+    public String findAndReturn(String keyword) {
+        String output = "    Here are the matching tasks in your list:";
         int size = storageList.size();
         int itemNumber = 1;
         for (int i = 0; i < size; i++) {
             Task task = storageList.get(i);
             if (task.getDescription().contains(keyword)) {
-                System.out.println("        " + itemNumber + "." + task.toString());
+                output += "\n        " + itemNumber + "." + task.toString();
                 itemNumber++;
             }
         }
+        return output;
     }
 
 }
