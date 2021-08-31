@@ -1,8 +1,10 @@
 T | 1 | new
 T | 0 | fly
 T | 1 | new
-E | 1 | something  | china
-D | 0 | eat  | dinner
 T | 0 | return book
 T | 0 | remove book
 T | 1 | enjoy food
+E | 1 | something | 02/08/2021 1600
+D | 1 | eat | 02/08/2021 1600
+T | 0 | running
+E | 0 | dancing  | 08/09/2021 1600
