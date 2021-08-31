@@ -44,14 +44,24 @@ public class Duke {
     }
 
     /**
+     * Saves the current TaskList into a document.
+     */
+    public void saveTask() {
+        try {
+            this.taskList.safeTasks(store);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container.
      *
      * @param input A String representing the input of user in the text box.
      * @param dialogContainer A VBox instance on main window.
-     * @return A boolean representing if duke is shutting down.
      */
-    public boolean getResponse(String input, VBox dialogContainer) {
+    public void getResponse(String input, VBox dialogContainer) {
         try {
             Command command = Parser.decipher(input);
             String output = command.execute(this.taskList, this.store, this.ui);
@@ -61,14 +71,12 @@ public class Duke {
                     DialogBox.getUserDialog(input, userAvatar),
                     DialogBox.getDukeDialog(dukeText, dukeAvatar)
             );
-            return command.isExit();
         } catch (DukeException e) {
             String dukeTextWhenException = "FullOfBugs:\n" + e.getMessage();
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userAvatar),
                     DialogBox.getDukeDialog(dukeTextWhenException, dukeAvatarWhenException)
             );
-            return false;
         }
     }
 
