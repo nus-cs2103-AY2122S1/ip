@@ -69,7 +69,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);*/
-        new Duke("/Users/ravi57004/ip/src/main/java/Tasks.txt").run();
+        //new Duke("/Users/ravi57004/ip/src/main/java/Tasks.txt").run();
     }
 
     /**
