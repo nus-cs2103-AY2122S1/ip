@@ -33,7 +33,7 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke" as Property<String>
+    archiveBaseName = "duke"
     archiveClassifier = null
 }
 
