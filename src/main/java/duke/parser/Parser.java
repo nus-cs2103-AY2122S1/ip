@@ -50,7 +50,6 @@ public class Parser {
                     ListCommand lc = new ListCommand(taskHandler, storage);
                     lc.execute(cmd);
                     break;
-
                 case DoneCommand.COMMAND_WORD:
                     DoneCommand dc = new DoneCommand(taskHandler, storage);
                     dc.execute(cmd);
