@@ -11,8 +11,9 @@ public abstract class Command {
     /**
      * An abstract execute method to be inherited by sub-classes of Command.
      * @param taskList The existing list where the task.
+     * @param storage The storage object of morgan.
      * @return The completion message after execution.
-     * @throws MorganException
+     * @throws MorganException If input is invalid.
      */
     public abstract String execute(TaskList taskList, Storage storage) throws MorganException;
 }

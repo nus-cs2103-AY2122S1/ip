@@ -1,5 +1,4 @@
 package tasks;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -7,9 +6,9 @@ import java.time.format.DateTimeFormatter;
  * This is a DeadlineTask class, which inherits from Task.
  */
 public class DeadlineTask extends Task {
+    public static final String KEYWORD = "[Deadline]";
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d-M-yyyy k:mm");
     private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy hh.mma");
-    public static final String KEYWORD = "[Deadline]";
     private final LocalDateTime dateTime;
 
     /**

@@ -13,16 +13,21 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
-    private final Insets PHOTO_MARGIN = new Insets(10, 10, 10, 10);
-    private final Insets TEXT_MARGIN = new Insets(15, 15, 15, 15);
-    private static final Insets DIALOG_MARGIN = new Insets(5, 5, 5, 5);
-    private static final CornerRadii DIALOG_CORNER_RADII = new CornerRadii(10.0);
     private static final Color USER_BACKGROUND_COLOR = Color.rgb(210, 212, 253);
     private static final Color MORGAN_BACKGROUND_COLOR = Color.rgb(236, 221, 254);
+    private static final CornerRadii DIALOG_CORNER_RADII = new CornerRadii(10.0);
+    private static final Insets PHOTO_MARGIN = new Insets(10, 10, 10, 10);
+    private static final Insets TEXT_MARGIN = new Insets(15, 15, 15, 15);
+    private static final Insets DIALOG_MARGIN = new Insets(5, 5, 5, 5);
+
+
 
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Constructor for DialogBox.
+     */
     public DialogBox(String string, Image image) {
         text = new Label(string);
         displayPicture = new ImageView(image);
@@ -66,6 +71,4 @@ public class DialogBox extends HBox {
         output.setBackground(background);
         return output;
     }
-
-
 }

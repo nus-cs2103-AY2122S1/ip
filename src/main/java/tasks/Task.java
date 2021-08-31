@@ -46,6 +46,6 @@ public class Task {
     @Override
     public String toString() {
         String status = isDone ? "X" : " ";
-        return "[" + status + "]  " + this.taskName ;
+        return "[" + status + "]  " + this.taskName;
     }
 }

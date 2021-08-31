@@ -10,7 +10,7 @@ import tasks.TaskList;
  */
 public class ListCommand extends Command {
     public static final String KEYWORD = "list";
-    private final String EMPTY_LIST_ERROR = "There is no existing task.";
+    private static final String EMPTY_LIST_ERROR = "There is no existing task.";
 
     /**
      * Return list of tasks.

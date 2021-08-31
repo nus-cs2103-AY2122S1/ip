@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 import exceptions.MorganException;
 import parser.TaskParser;
-import tasks.TaskList;
 import tasks.Task;
+import tasks.TaskList;
 
 /**
  * This is a storage.Storage class, which encapsulates storage of tasks.
@@ -17,17 +17,16 @@ import tasks.Task;
 public class Storage {
     private static final String DIRECTORY_PATH = "./morgan-files";
     private static final String FILE_PATH = DIRECTORY_PATH + "/tasks.txt";
+    private static final String FILE_ERROR = "Warning: Unable to locate storage data. "
+            + "A new storage file has been created.";
+    private static final String DECODE_ERROR = "Warning: Some tasks may be missing due "
+            + "to storage file tampering. ";
+
     private final TaskParser parser = new TaskParser();
     private final File file;
-    protected static final String DELIMITER = TaskParser.DELIMITER;
-    private static final String FILE_ERROR = "Warning: Unable to locate storage data. " +
-            "A new storage file has been created.";
-    private static final String DECODE_ERROR = "Warning: Some tasks may be missing due " +
-            "to storage file tampering. ";
 
     /**
-     * Constructor for storage.Storage.
-     * @throws MorganException
+     * Constructor for Storage.
      */
     public Storage() {
         File directory = new File(DIRECTORY_PATH);
@@ -41,7 +40,7 @@ public class Storage {
     /**
      * Loads data from specified file.
      * @param taskList The existing list of tasks from the file.
-     * @throws MorganException
+     * @throws MorganException If storage data has been tampered.
      */
     public void load(TaskList taskList) throws MorganException {
         boolean hasInvalidFormatting = false;
@@ -71,7 +70,7 @@ public class Storage {
     /**
      * Saves the list of tasks into a file.
      * @param taskList The list of tasks to be saved.
-     * @throws MorganException
+     * @throws MorganException If storage data has been tampered.
      */
     public void save(TaskList taskList) throws MorganException {
         try {

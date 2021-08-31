@@ -1,4 +1,5 @@
 package commands;
+
 import exceptions.MorganException;
 import storage.Storage;
 import tasks.Task;
@@ -9,18 +10,18 @@ import tasks.TaskList;
  * The execution of this command will delete a task from the task list.
  */
 public class DeleteCommand extends Command {
-    private final int taskNumber;
     public static final String KEYWORD = "delete";
     private static final String INPUT_FORMAT = String.format("\t\"%s [task number]\"", KEYWORD);
-    private static final String INPUT_FORMAT_ERROR = String.format("Please " +
-            "ensure your input is in the following format:\n" + INPUT_FORMAT);
-    private static final String TASK_NUMBER_ERROR = String.format("Please " +
-            "provide a valid task number.");
+    private static final String INPUT_FORMAT_ERROR = String.format("Please "
+            + "ensure your input is in the following format:\n" + INPUT_FORMAT);
+    private static final String TASK_NUMBER_ERROR = String.format("Please "
+            + "provide a valid task number.");
+    private final int taskNumber;
 
     /**
      * Constructor for DeleteCommand
      * @param userInput The input string entered by the user.
-     * @throws MorganException
+     * @throws MorganException If input format is invalid.
      */
     public DeleteCommand(String userInput) throws MorganException {
         String intString = userInput.substring(KEYWORD.length()).trim();

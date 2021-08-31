@@ -1,9 +1,9 @@
 package parser;
 
 import exceptions.MorganException;
-import tasks.Task;
-import tasks.EventTask;
 import tasks.DeadlineTask;
+import tasks.EventTask;
+import tasks.Task;
 import tasks.ToDoTask;
 
 /**
@@ -11,12 +11,12 @@ import tasks.ToDoTask;
  * into a Task object and vise versa.
  */
 public class TaskParser {
-    private final static int TASK_INDEX = 0; // Task type
-    private final static int STATUS_INDEX = 1; // Task status
-    private final static int DESCRIPTION_INDEX = 2; // Task description
-    private final static int DATETIME_INDEX = 3; // Task date/time (if applicable)
-    public final static String DELIMITER = "¬";
-    private final static String TAMPERED_ERROR = "Storage data has been tampered.";
+    public static final String DELIMITER = "¬";
+    private static final int TASK_INDEX = 0; // Task type
+    private static final int STATUS_INDEX = 1; // Task status
+    private static final int DESCRIPTION_INDEX = 2; // Task description
+    private static final int DATETIME_INDEX = 3; // Task date/time (if applicable)
+    private static final String TAMPERED_ERROR = "Storage data has been tampered.";
 
     /**
      * Translates a task into its storage string representation.
@@ -48,7 +48,7 @@ public class TaskParser {
      * Translates a task in string format to a Task object.
      * @param string The string to be parsed.
      * @return The Task object based on the string.
-     * @throws MorganException
+     * @throws MorganException If storage data has been tampered.
      */
     public Task decode(String string) throws MorganException {
         String[] data = string.split(DELIMITER);
