@@ -27,20 +27,11 @@ public class FindCommand extends Command {
      * @param taskList The task list currently loaded on Duke.
      * @param ui The object representing the UI of Duke.
      * @param storage The object representing the storage of the Duke program.
+     * @return A string to be displayed to the user on the user interface.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList results = taskList.getMatchingTasks(this.keyword);
-        ui.printMatchingTasks(results);
-    }
-
-    /**
-     * Checks if the command exits Duke.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return ui.formatMatchingTasks(results);
     }
 }
