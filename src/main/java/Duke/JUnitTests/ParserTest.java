@@ -5,14 +5,16 @@
  */
 package duke.junittests;
 
-import duke.command.Parser;
-import duke.excpetions.DukeException;
-import org.testng.annotations.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.testng.annotations.Test;
+
+import duke.command.Parser;
+import duke.excpetions.DukeException;
+
 
 public class ParserTest {
 

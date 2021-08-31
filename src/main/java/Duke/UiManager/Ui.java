@@ -7,12 +7,12 @@
  */
 package duke.uimanager;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.command.Parser;
 import duke.excpetions.DukeException;
 import duke.task.TaskList;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
     private static final String LINE = "____________________________________________________________";
@@ -27,9 +27,9 @@ public class Ui {
     /**
      * Prints Hello Message to users.
      */
-    public void HelloMessage() {
-        String helloMessage = "Hello! I'm Duke\n" +
-                "What can I do for you?\n";
+    public void helloMessage() {
+        String helloMessage = "Hello! I'm Duke\n"
+                + "What can I do for you?\n";
 
         System.out.println(LINE + "\n" + helloMessage + LINE);
     }
@@ -85,8 +85,8 @@ public class Ui {
     public void add(String parsedTask, int size) {
         System.out.println("Got it. I've added this task: ");
         System.out.println(" " + parsedTask);
-        System.out.println("Now you have " + size + "" +
-                " tasks in the list.");
+        System.out.println("Now you have " + size + ""
+                + " tasks in the list.");
     }
 
     /**
@@ -115,7 +115,7 @@ public class Ui {
     }
 
     /**
-     * Returns the key 4 information from users' input encapsulated in a ArrayList<String>.
+     * Returns the key 4 information from users' input encapsulated in a ArrayList of String.
      * They are: operationType, task, time, index. They will be useful when executing in Duke programme.
      *
      * @return Size of 4 ArrayList contains Message of operationType, task, time and index.

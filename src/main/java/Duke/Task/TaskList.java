@@ -6,17 +6,17 @@
  */
 package duke.task;
 
-import duke.command.Parser;
-import duke.excpetions.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import duke.command.Parser;
+import duke.excpetions.DukeException;
+
 public class TaskList {
 
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor to store all the tasks in a Generic ArrayList.
@@ -41,13 +41,13 @@ public class TaskList {
      */
     public void getSpecificDateEvent(String time) {
         Parser parser = new Parser("");
-        int count = 0;//count the number of the events happen on the time.
+        int count = 0; //count the number of the events happen on the time.
 
         for (int i = 0; i < tasks.size(); i++) {
             String message = tasks.get(i).getTaskInfo();
             String unParsedInfo = tasks.get(i).getTime();
-            String timeInFormat = (parser.parseTime(time) != null) ?
-                    parser.parseTime(time).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
+            String timeInFormat = (parser.parseTime(time) != null)
+                    ? parser.parseTime(time).format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm", Locale.ENGLISH))
                     : "Nope";
 
             if ((unParsedInfo != null && (unParsedInfo.contains(time) || unParsedInfo.contains(timeInFormat)))
@@ -70,10 +70,10 @@ public class TaskList {
         int count = 0;
 
         for (int i = 0; i < tasks.size(); i++) {
-            String Message = tasks.get(i).getTaskInfo();
-            if (Message.contains(keyword)) {
+            String message = tasks.get(i).getTaskInfo();
+            if (message.contains(keyword)) {
                 count++;
-                System.out.println(count + "." + Message);
+                System.out.println(count + "." + message);
             }
         }
 
@@ -163,16 +163,24 @@ public class TaskList {
     public enum OperationType {
         bye, done, delete, tell, find, list, todo, deadline, event;
 
+        /**
+         * Returns a task in a specific operationType. It can be either todo, deadline or event.
+         *
+         * @param type
+         * @param task
+         * @param time
+         * @return Task in a specific operationType. It can be either todo, deadline or event.
+         */
         public Task assignTaskType(OperationType type, String task, LocalDateTime time) {
             switch (type) {
-                case todo:
-                    return new ToDos(false, task);
-                case deadline:
-                    return new Deadlines(false, task, time);
-                case event:
-                    return new Events(false, task, time);
-                default:
-                    return null;
+            case todo:
+                return new ToDos(false, task);
+            case deadline:
+                return new Deadlines(false, task, time);
+            case event:
+                return new Events(false, task, time);
+            default:
+                return null;
             }
         }
     }

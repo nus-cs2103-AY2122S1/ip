@@ -8,13 +8,15 @@
  */
 package duke;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.excpetions.DukeException;
 import duke.saveloadmanager.Storage;
 import duke.task.TaskList;
 import duke.uimanager.Ui;
 
-import java.io.IOException;
-import java.util.ArrayList;
+
 
 public class Duke {
 
@@ -23,9 +25,9 @@ public class Duke {
     private Ui ui;
 
     /**
+     * initialize Ui, storage and load TaskLists from specific filePath for Duke
+     *
      * @param filePath
-     * @author Hang Zelin
-     * @description initialize Ui, storage and load tasklists from specific filePath for Duke
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -113,8 +115,8 @@ public class Duke {
 
     /**
      * Runs the programme of Duke. It will firstly say Hello to users. Then it will repeatedly accept input from
-     * users and filter out key commands, then call OperationForDuke to execute a task by commands. The process will not stop
-     * until users enter "goodbye".
+     * users and filter out key commands, then call OperationForDuke to execute a task by commands.
+     * The process will not stop until users enter "goodbye".
      * Noted: Every time an execution is done, the savedata will be updated.
      */
     public void run() {
@@ -124,7 +126,7 @@ public class Duke {
         String task = "";
         String time = "";
         int index = 0;
-        ui.HelloMessage();
+        ui.helloMessage();
 
         while (true) {
             try {

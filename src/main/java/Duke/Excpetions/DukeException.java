@@ -15,14 +15,14 @@ public class DukeException extends Exception {
      *
      * @param errorMessage Detail info of the error.
      */
-    public DukeException(String errorMessage){
+    public DukeException(String errorMessage) {
         this.errorMessage = errorMessage;
     }
 
     /**
      * Prints out the Error Message in DukeException.
      */
-    public void printErrorMessage(){
+    public void printErrorMessage() {
         System.out.println(this.errorMessage);
     }
 

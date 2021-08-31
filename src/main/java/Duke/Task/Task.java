@@ -31,7 +31,8 @@ public abstract class Task {
     public abstract String getTime();
 
     /**
-     * Returns the task info in the format of save data requirement, that is: "taskType | done or not | task info | time".
+     * Returns the task info in the format of save data requirement,
+     * that is: "taskType | done or not | task info | time".
      *
      * @return Task info in the format of "taskType | done or not | task info | time".
      */

@@ -10,21 +10,23 @@
 
 package duke.command;
 
-import duke.excpetions.DukeException;
-import duke.task.TaskList;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
+import duke.excpetions.DukeException;
+import duke.task.TaskList;
+
+
+
 public class Parser {
-    String Message;
+    private String message;
 
     /**
-     * @param Message Message users take in to be parsed.
+     * @param message Message users take in to be parsed.
      */
-    public Parser(String Message) {
-        this.Message = Message;
+    public Parser(String message) {
+        this.message = message;
     }
 
 
@@ -123,11 +125,11 @@ public class Parser {
      */
     public String getSaveTask() {
         String task;
-        char taskType = Message.charAt(0);
+        char taskType = message.charAt(0);
         if (taskType == 'D' || taskType == 'E') {
-            task = Message.substring(8, Message.indexOf("|", 8) - 1);
+            task = message.substring(8, message.indexOf("|", 8) - 1);
         } else {
-            task = Message.substring(8);
+            task = message.substring(8);
         }
 
         return task;
@@ -142,9 +144,9 @@ public class Parser {
     public String getSaveTime() {
         String time;
 
-        char taskType = Message.charAt(0);
-        if ((taskType == 'D' || taskType == 'E') && Message.contains("/")) {
-            time = Message.substring(Message.lastIndexOf("|") + 2);
+        char taskType = message.charAt(0);
+        if ((taskType == 'D' || taskType == 'E') && message.contains("/")) {
+            time = message.substring(message.lastIndexOf("|") + 2);
         } else {
             time = "";
         }
@@ -159,18 +161,18 @@ public class Parser {
      * duke can do.
      */
     public String getOperationType() throws DukeException {
-        String OperationType;
-        if (Message.contains(" ")) {
-            OperationType = Message.substring(0, Message.indexOf(" "));
+        String operationType;
+        if (message.contains(" ")) {
+            operationType = message.substring(0, message.indexOf(" "));
         } else {
-            OperationType = Message;
+            operationType = message;
         }
 
         //If the task type does not belong to the three types, throw an error.
         TaskList.OperationType[] operationTypes = TaskList.OperationType.values();
         for (TaskList.OperationType o : operationTypes) {
-            if (Message.startsWith(o.toString())) {
-                return OperationType;
+            if (message.startsWith(o.toString())) {
+                return operationType;
             }
         }
         throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -186,15 +188,16 @@ public class Parser {
     public String getTask() throws DukeException {
         String task = "";
 
-        if (Message.startsWith("deadline") || Message.startsWith("event") || Message.startsWith("todo") || Message.startsWith("find")) {
+        if (message.startsWith("deadline") || message.startsWith("event") || message.startsWith("todo")
+                || message.startsWith("find")) {
             //Get Task description and time if it has it.
-            if (Message.contains("/")) {
-                task = Message.substring(Message.indexOf(" ") + 1, Message.indexOf("/") - 1);
+            if (message.contains("/")) {
+                task = message.substring(message.indexOf(" ") + 1, message.indexOf("/") - 1);
             } else {
-                if (!Message.contains(" ")) {
-                    throw new DukeException("☹ OOPS!!! The description of a " + Message + " cannot be empty.");
+                if (!message.contains(" ")) {
+                    throw new DukeException("☹ OOPS!!! The description of a " + message + " cannot be empty.");
                 } else {
-                    task = Message.substring(Message.indexOf(" ") + 1);
+                    task = message.substring(message.indexOf(" ") + 1);
                 }
             }
         }
@@ -213,17 +216,17 @@ public class Parser {
         String time = "";
 
         //throw exceptions for deadline or events' format.
-        if (Message.startsWith("todo") || Message.startsWith("deadline") || Message.startsWith("event")) {
-            if (Message.contains("/")) {
-                if (Message.startsWith("deadline")) {
-                    if (Message.contains("/by")) {
-                        time = Message.substring(Message.indexOf("/by") + 4);
+        if (message.startsWith("todo") || message.startsWith("deadline") || message.startsWith("event")) {
+            if (message.contains("/")) {
+                if (message.startsWith("deadline")) {
+                    if (message.contains("/by")) {
+                        time = message.substring(message.indexOf("/by") + 4);
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but the format of deadline is wrong :-(");
                     }
-                } else if (Message.startsWith("event")) {
-                    if (Message.contains("/at")) {
-                        time = Message.substring(Message.indexOf("/at") + 4);
+                } else if (message.startsWith("event")) {
+                    if (message.contains("/at")) {
+                        time = message.substring(message.indexOf("/at") + 4);
                     } else {
                         throw new DukeException("☹ OOPS!!! I'm sorry, but the format of event is wrong :-(");
                     }
@@ -231,17 +234,19 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! I'm sorry, but the format of todo is wrong :-(");
                 }
             }
-        } else if (Message.startsWith("tell")) {
-            if (!Message.contains(" ")) {
+        } else if (message.startsWith("tell")) {
+            if (!message.contains(" ")) {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but the format of tell is wrong :-(");
             } else {
-                time = Message.substring(Message.indexOf(" ") + 1);
+                time = message.substring(message.indexOf(" ") + 1);
             }
         }
 
         //Time for deadlines or event cannot be empty.
-        if ((Message.startsWith("event") || Message.startsWith("deadline") || Message.startsWith("tell")) && time.equals("")) {
-            throw new DukeException("☹ OOPS!!! The time of a " + Message.substring(0, Message.indexOf(" ")) + " cannot be empty.");
+        if ((message.startsWith("event") || message.startsWith("deadline")
+                || message.startsWith("tell")) && time.equals("")) {
+            throw new DukeException("☹ OOPS!!! The time of a "
+                    + message.substring(0, message.indexOf(" ")) + " cannot be empty.");
         }
 
         return time;
@@ -255,8 +260,8 @@ public class Parser {
      * @return Index parsed from users' one line of command if it contains an index.
      */
     public Integer getIndex() {
-        int index = (Message.contains(" ") && (Message.startsWith("done") || Message.startsWith("delete")))
-                ? Integer.parseInt(Message.substring(Message.indexOf(" ") + 1)) - 1
+        int index = (message.contains(" ") && (message.startsWith("done") || message.startsWith("delete")))
+                ? Integer.parseInt(message.substring(message.indexOf(" ") + 1)) - 1
                 : -1;
 
         return index;
