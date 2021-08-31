@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
+
+
 
 /**
  * AddCommand class which indicates input is adding new tasks.
@@ -30,13 +32,14 @@ public class AddCommand extends Command {
      * @param userInt The User Interface associated with the current bot.
      * @param storage The storage associated with the current bot.
      * @throws DukeException If any error has occurred during the addition of the task.
+     * @return
      */
     @Override
-    public void execute(TaskList tasks, UI userInt, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui userInt, Storage storage) throws DukeException {
         tasks.add(this.newTask);
         ArrayList<Task> taskArrList = tasks.getAllTasks();
-        userInt.notifyAdd(taskArrList);
         storage.save(tasks);
+        return userInt.notifyAdd(taskArrList);
     }
 
     /**

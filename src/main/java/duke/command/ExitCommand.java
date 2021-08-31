@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -16,10 +16,11 @@ public class ExitCommand extends Command {
      * @param userInt The User Interface associated with the current bot.
      * @param storage The storage associated with the current bot.
      * @throws DukeException If any error has occurred during the addition of the task.
+     * @return
      */
     @Override
-    public void execute(TaskList task, UI userInt, Storage storage) {
-        userInt.exit();
+    public String execute(TaskList task, Ui userInt, Storage storage) {
+        return userInt.exit();
     }
 
     /**

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
+import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -17,9 +17,10 @@ public abstract class Command {
      * @param task The TaskList associated with the current bot.
      * @param userInt The User Interface associated with the current bot.
      * @param storage The storage associated with the current bot.
+     * @return The string to be printed out by the bot to the GUI.
      * @throws DukeException If any error has occurred during the execution of the commands.
      */
-    public abstract void execute(TaskList task, UI userInt, Storage storage) throws DukeException;
+    public abstract String execute(TaskList task, Ui userInt, Storage storage) throws DukeException;
 
 
     /**

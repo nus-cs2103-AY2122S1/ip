@@ -28,7 +28,7 @@ public class Storage {
      * Public constructor to initialise the storage for the Duii Bot.
      */
     public Storage() {
-        this.dateTimeFormat = DateTimeFormatter.ofPattern("yyyy MMM dd HH:mm");
+        this.dateTimeFormat = DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm");
     }
 
     /**
@@ -38,7 +38,7 @@ public class Storage {
      *
      * @return The abstract representation of the pathname of the created file
      */
-    public File getfiles() {
+    public File getFiles() {
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "ip", "data");
         File directory = new File(path.toString());
@@ -56,7 +56,7 @@ public class Storage {
                 file.createNewFile();
                 System.out.println("File created.");
             } catch (IOException e) {
-                System.out.println("IO error occured");
+                System.out.println("IO error occurred");
             }
         }
         return file;
@@ -72,13 +72,15 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         try {
-            file = this.getfiles();
+            file = this.getFiles();
             FileReader reader = new FileReader(file);
             BufferedReader buffreader = new BufferedReader(reader);
+
             String text;
             ArrayList<Task> saved = new ArrayList<>();
+
             while ((text = buffreader.readLine()) != null) {
-                String[] lineArr = text.split(" | ");
+                String[] lineArr = text.split(" \\| ");
                 switch (lineArr.length) {
                 case 3:
                     // To complete TaskList class
@@ -92,9 +94,15 @@ public class Storage {
                     if (lineArr[0].equals("D")) {
                         Deadline deadline = new Deadline(lineArr[2], LocalDateTime.parse(lineArr[3],
                                 this.dateTimeFormat));
+                        if (lineArr[1].equals("1")) {
+                            deadline.complete();
+                        }
                         saved.add(deadline);
                     } else if (lineArr[0].equals("E")) {
                         Event event = new Event(lineArr[2], LocalDateTime.parse(lineArr[3], this.dateTimeFormat));
+                        if (lineArr[1].equals("1")) {
+                            event.complete();
+                        }
                         saved.add(event);
                     }
                     break;
@@ -112,6 +120,7 @@ public class Storage {
      * Writes the tasks of the current session into the dynamically created file
      * on the local filesystem.
      *
+     * @param list The task list to be written into the local file system.
      * @throws DukeException If an IOException occurs during writing of file, which
      *                       is passed on to the main() method of Duke class.
      */
@@ -119,7 +128,7 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(file, false);
             for (Task item : list.getAllTasks()) {
-                writer.write(item.displayInfo() + "\n");
+                writer.write(item.getSaveInfo() + "\n");
             }
             writer.close();
         } catch (IOException e) {
