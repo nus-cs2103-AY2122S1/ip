@@ -60,6 +60,11 @@ public class Duke extends Application {
         ui.close();
     }
 
+    /**
+     * Sets up the GUI and the DukeBot functionality.
+     *
+     * @param stage The Stage to be used for the GUI.
+     */
     @Override
     public void start(Stage stage) {
         initialize();

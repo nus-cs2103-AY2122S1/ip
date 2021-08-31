@@ -32,11 +32,19 @@ public class MainWindow extends AnchorPane {
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png"))
     );
 
+    /**
+     * Creates a ScrollPane with the height of the dialog container.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Initializes the Duke Chatbot.
+     *
+     * @param d The Duke Chatbot to be used for the MainWindow.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

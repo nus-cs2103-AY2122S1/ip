@@ -17,6 +17,11 @@ public class Main extends Application {
 
     private final Duke duke = new Duke();
 
+    /**
+     * Starts the GUI and initalizes the DukeBot.
+     *
+     * @param stage The stage to set the GUI on.
+     */
     @Override
     public void start(Stage stage) {
         try {

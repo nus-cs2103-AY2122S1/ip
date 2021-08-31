@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Represents a UI that the user interacts with.
  */
 public class Ui {
-    private static final String line = "\n\t_______________________________________________________________";
+    private static final String LINE = "\n\t_______________________________________________________________";
     private final Scanner in;
 
     /**
@@ -39,11 +39,11 @@ public class Ui {
         String msg = "\t I'm IntelliBot. What can I do for you today?";
 
         if ("05:00:00".compareTo(localTime) <= 0 && localTime.compareTo("12:00:00") < 0) {
-            System.out.println(line + "\n\t Good morning!\n" + msg + line);
+            System.out.println(LINE + "\n\t Good morning!\n" + msg + LINE);
         } else if ("12:00:00".compareTo(localTime) <= 0 && localTime.compareTo("18:00:00") < 0) {
-            System.out.println(line + "\n\t Good afternoon!\n" + msg + line);
+            System.out.println(LINE + "\n\t Good afternoon!\n" + msg + LINE);
         } else {
-            System.out.println(line + "\n\t Good evening!\n" + msg + line);
+            System.out.println(LINE + "\n\t Good evening!\n" + msg + LINE);
         }
     }
 
@@ -54,7 +54,7 @@ public class Ui {
      * @return A response to user.
      */
     public String showToUser(String message) {
-        return line + message + line;
+        return LINE + message + LINE;
     }
 
     protected void close() {
