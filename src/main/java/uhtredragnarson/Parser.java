@@ -1,4 +1,4 @@
-package lawbringer;
+package uhtredragnarson;
 
 import java.time.format.DateTimeParseException;
 
@@ -14,9 +14,9 @@ public class Parser {
      * @param userInput The input of the user.
      * @param taskList  The class that contains a list of tasks.
      * @param ui        Ui class to print messages.
-     * @throws LawbringerException Throws this exception if the user inputs an invalid command.
+     * @throws UhtredRagnarsonException Throws this exception if the user inputs an invalid command.
      */
-    protected static void parse(String userInput, TaskList taskList, Ui ui) throws LawbringerException {
+    protected static void parse(String userInput, TaskList taskList, Ui ui) throws UhtredRagnarsonException {
         String commandType = userInput.split(" ")[0];
         try {
             switch (commandType) {
@@ -42,12 +42,12 @@ public class Parser {
                 taskList.findTasks(userInput, ui);
                 break;
             default:
-                throw new LawbringerException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new UhtredRagnarsonException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (DateTimeParseException e) {
-            throw new LawbringerException("☹ OOPS!!! You have to enter a valid date in the form "
+            throw new UhtredRagnarsonException("☹ OOPS!!! You have to enter a valid date in the form "
                     + "yyyy-mm-dd");
-        } catch (LawbringerException e) {
+        } catch (UhtredRagnarsonException e) {
             System.out.println(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();

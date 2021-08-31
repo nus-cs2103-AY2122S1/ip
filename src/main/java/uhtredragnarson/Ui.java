@@ -1,9 +1,9 @@
-package lawbringer;
+package uhtredragnarson;
 
 import java.util.List;
 
 /**
- * This class handles all the messages the Lawbringer bot will show to the user.
+ * This class handles all the messages the UhtredRagnarson bot will show to the user.
  */
 public class Ui {
 
@@ -14,7 +14,7 @@ public class Ui {
      * Prints a welcome message when the user first runs the bot.
      */
     protected void showWelcomeMessage() {
-        String message = "Hello! I'm Lawbringer!\n"
+        String message = "Hello! My name is Uhtred Ragnarson, son of Uhtred, of Bebbanburg!\n"
                 + "What can i do for you?";
         System.out.println(message);
     }

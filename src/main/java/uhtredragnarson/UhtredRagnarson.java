@@ -1,23 +1,23 @@
-package lawbringer;
+package uhtredragnarson;
 
 import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Lawbringer is a chat bot that help users to manage their to-dos, deadlines and events.
+ * UhtredRagnarson is a chat bot that help users to manage their to-dos, deadlines and events.
  */
-public class Lawbringer {
+public class UhtredRagnarson {
 
     private final Storage storage;
     private final Ui ui;
     private TaskList taskList;
 
     /**
-     * The constructor for Lawbringer.
+     * The constructor for UhtredRagnarson.
      *
      * @param filePath The file path of the .txt file to read from.
      */
-    public Lawbringer(String filePath) {
+    public UhtredRagnarson(String filePath) {
         storage = new Storage(filePath);
         ui = new Ui();
         try {
@@ -29,7 +29,7 @@ public class Lawbringer {
     }
 
     public static void main(String[] args) {
-        new Lawbringer("src/main/java/data/Lawbringer.txt").run();
+        new UhtredRagnarson("src/main/java/data/UhtredRagnarson.txt").run();
     }
 
     /**
@@ -43,7 +43,7 @@ public class Lawbringer {
         while (!userInput.equals("bye")) {
             try {
                 Parser.parse(userInput, taskList, ui);
-            } catch (LawbringerException e) {
+            } catch (UhtredRagnarsonException e) {
                 e.printStackTrace();
             }
             userInput = scanner.nextLine();
