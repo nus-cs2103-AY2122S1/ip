@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
  * Contains a list of tasks.
  */
 public class TaskList {
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     TaskList() {
         tasks = new ArrayList<>();
@@ -32,12 +32,14 @@ public class TaskList {
             case 'D':
                 s = s.substring(7);
                 String[] parsedDeadline = s.split("by: ");
-                t = new Deadline(parsedDeadline[0].substring(0, parsedDeadline[0].length() - 2), parsedDeadline[1].substring(0, parsedDeadline[1].length() - 1));
+                t = new Deadline(parsedDeadline[0].substring(0, parsedDeadline[0].length() - 2),
+                            parsedDeadline[1].substring(0, parsedDeadline[1].length() - 1));
                 break;
             case 'E':
                 s = s.substring(7);
                 String[] parsedEvent = s.split("at: ");
-                t = new Event(parsedEvent[0].substring(0, parsedEvent[0].length() - 2), parsedEvent[1].substring(0, parsedEvent[1].length() - 1));
+                t = new Event(parsedEvent[0].substring(0, parsedEvent[0].length() - 2),
+                            parsedEvent[1].substring(0, parsedEvent[1].length() - 1));
                 break;
             default:
                 throw new DukeException("File not in the correct format");
@@ -63,7 +65,7 @@ public class TaskList {
      *
      * @param i Index of task to be removed.
      */
-    public void remove(int i){
+    public void remove(int i) {
         tasks.remove(i);
     }
 
@@ -86,8 +88,15 @@ public class TaskList {
         return tasks.get(i);
     }
 
+    /**
+     * Finds a task containing the string s
+     *
+     * @param s String to filter with
+     * @throws DukeException If s is not found
+     */
     public void find(String s) throws DukeException {
-        List<Task> filteredList = tasks.stream().filter(task -> task.toString().contains(s)).collect(Collectors.toList());
+        List<Task> filteredList = tasks.stream()
+                    .filter(task -> task.toString().contains(s)).collect(Collectors.toList());
         if (filteredList.size() == 0) {
             throw new DukeException(s + " not found in list");
         }

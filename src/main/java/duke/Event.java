@@ -22,7 +22,7 @@ public class Event extends Task {
         super(description);
         try {
             this.date = new SimpleDateFormat("dd/MM/yyyy").parse(at);
-        }catch (ParseException e) {
+        } catch (ParseException e) {
             throw new DukeException("Date format incorrect");
         }
     }

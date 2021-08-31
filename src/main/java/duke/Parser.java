@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.List;
-
 /**
  * Parser class handles input messages from the user
  */

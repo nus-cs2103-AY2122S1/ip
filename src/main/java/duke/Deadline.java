@@ -2,7 +2,6 @@ package duke;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Date;
 
 /**
@@ -19,7 +18,7 @@ public class Deadline extends Task {
      * @param by By a certain date
      * @throws DukeException If date is in an incorrect format
      */
-    public Deadline(String description, String by) throws DukeException{
+    public Deadline(String description, String by) throws DukeException {
         super(description);
         try {
             date = new SimpleDateFormat("dd/MM/yyyy").parse(by);

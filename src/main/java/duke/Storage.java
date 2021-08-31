@@ -58,6 +58,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads file into an arraylist of strings. Each line is a line in the file
+     *
+     * @return File in form of arraylist of strings
+     * @throws DukeException If file is not found
+     */
     public ArrayList<String> load() throws DukeException {
         ArrayList<String> stringList = new ArrayList<>();
         try {

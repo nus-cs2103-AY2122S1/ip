@@ -7,6 +7,17 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    private Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
     /**
      * Initialize a Duke instance with the file path for the task list.
      *
@@ -25,14 +36,4 @@ public class Duke {
         }
     }
 
-    private Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
-    }
 }
