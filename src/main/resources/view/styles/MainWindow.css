@@ -1,0 +1,35 @@
+/*
+ * CSS Styling
+ * https://stackoverflow.com/questions/41804373/javafx-scrollpane-styling
+ */
+
+.scroll-pane, .viewport {
+    -fx-background-color: #222;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-color: #eee;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #ddd;
+    -fx-background-radius: 5em;
+}
+.text-input {
+    -fx-text-fill: white;
+    -fx-text-inner-color: white;
+}

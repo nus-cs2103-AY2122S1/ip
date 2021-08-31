@@ -56,12 +56,12 @@ public class Ui {
 
     String showDeletedMessage(Task task, int size) {
         return print("Understood, meow! Deleted this task:\n   "
-                + task + "\n" + "|  Now you have " + size + " tasks in the list.");
+                + task + "\n" + "Now you have " + size + " tasks in the list.");
     }
 
     String showAddedMessage(Task task, int size) {
         return print("Meow. I've added this task:\n   "
-                + task + "\n" + "|  Now you have " + size + " tasks in the list.");
+                + task + "\n" + "Now you have " + size + " tasks in the list.");
     }
 
     String showExitMessage() {
