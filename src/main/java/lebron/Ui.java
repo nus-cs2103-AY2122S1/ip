@@ -11,22 +11,23 @@ import java.util.ArrayList;
  * @author Nigel Tan
  */
 public class Ui {
-
     private final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
     private int count;
+    private Lebron app;
 
     /**
      * Constructor
      */
-    public Ui() {
+    public Ui(Lebron lebron) {
         this.count = 1;
+        this.app = lebron;
     }
 
     /**
      * Handles the greet event.
      */
-    public void greet() {
-        System.out.println(HORIZONTAL_LINE
+    public String greet() {
+        return (HORIZONTAL_LINE
                 + "    Hello! I'm LebronChatBot\n"
                 + "    What can I do for you?\n"
                 + HORIZONTAL_LINE);
@@ -37,9 +38,9 @@ public class Ui {
      *
      * @param lst the TaskList that the user wants to add the task to
      */
-    public void replyAdd(ArrayList<Task> lst, Task task) {
+    public String replyAdd(ArrayList<Task> lst, Task task) {
         String num = String.valueOf(lst.size());
-        System.out.println(HORIZONTAL_LINE + "    Got it. I've added this task: \n" + "    "
+        return (HORIZONTAL_LINE + "    Got it. I've added this task: \n" + "    "
                 + task.toString() + "\n" + "    Now you have " + num + " tasks in the list\n"
                 + HORIZONTAL_LINE);
     }
@@ -47,8 +48,8 @@ public class Ui {
     /**
      * Responds to the exit event when the user says bye.
      */
-    public void exit() {
-        System.out.println(HORIZONTAL_LINE
+    public String exit() {
+        return (HORIZONTAL_LINE
                 + "    Bye. Hope to see you again soon!\n"
                 + HORIZONTAL_LINE);
     }
@@ -58,14 +59,15 @@ public class Ui {
      *
      * @param lst The TaskList to be displayed.
      */
-    public void replyDisplay(TaskList lst) {
+    public String replyDisplay(TaskList lst) {
+        String reply = HORIZONTAL_LINE + "    Here are the tasks in your list:\n";
         this.count = 1;
-        System.out.println(HORIZONTAL_LINE + "    Here are the tasks in your list:");
-        lst.getLst().forEach(item -> {
-            System.out.println("    " + count + ". " + item.toString());
+        for (int i = 0; i < lst.getSize(); i++) {
+            reply += ("    " + count + ". " + lst.getItem(i).toString()) + "\n";
             count++;
-        });
-        System.out.println(HORIZONTAL_LINE);
+        }
+        reply += HORIZONTAL_LINE;
+        return reply;
     }
 
     /**
@@ -73,10 +75,10 @@ public class Ui {
      *
      * @param task The task that is marked done.
      */
-    public void replyMarkDone(Task task) {
-        System.out.println(HORIZONTAL_LINE + "    Nice! I've marked this task as done:\n"
+    public String replyMarkDone(Task task) {
+        return HORIZONTAL_LINE + "    Nice! I've marked this task as done:\n"
                 + "    " + task.toString()
-                + "\n" + HORIZONTAL_LINE);
+                + "\n" + HORIZONTAL_LINE;
     }
 
     /**
@@ -85,12 +87,12 @@ public class Ui {
      * @param task the task in the list to delete.
      * @param size the size of the TaskList.
      */
-    public void replyDelete(Task task, int size) {
+    public String replyDelete(Task task, int size) {
         String num = String.valueOf(size);
-        System.out.println(HORIZONTAL_LINE + "    Noted. I've removed this task:\n"
+        return HORIZONTAL_LINE + "    Noted. I've removed this task:\n"
                 + "    " + task.toString()
                 + "\n" + "    Now you have " + num + " tasks in the list\n"
-                + HORIZONTAL_LINE);
+                + HORIZONTAL_LINE;
     }
 
     /**
@@ -99,17 +101,17 @@ public class Ui {
      * @param lst the current TaskList
      * @param keyword the keyword
      */
-    public void replyFind(TaskList lst, String keyword) {
+    public String replyFind(TaskList lst, String keyword) {
         this.count = 1;
-        System.out.println(HORIZONTAL_LINE + "    Here are the matching tasks in your list:");
-        lst.getLst().forEach(item -> {
-            if (item.getName().contains(keyword)) {
-                System.out.println("    " + count + ". " + item.toString());
+        String reply = HORIZONTAL_LINE + "    Here are the matching tasks in your list:\n";
+        for (int i = 0; i < lst.getSize(); i++) {
+            if (lst.getItem(i).getName().contains(keyword)) {
+                reply += "    " + count + ". " + lst.getItem(i).toString() + "\n";
                 count++;
             }
-
-        });
-        System.out.println(HORIZONTAL_LINE);
+        }
+        reply += HORIZONTAL_LINE;
+        return reply;
     }
 
 }
