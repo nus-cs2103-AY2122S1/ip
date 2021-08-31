@@ -1,11 +1,5 @@
 package duke.utils;
 
-import duke.exceptions.DukeException;
-
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +7,12 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 /** Class to deal with saving/loading tasks from disk */
 public class Storage {
@@ -73,6 +73,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the task list to disc.
+     *
+     * @param tasks
+     */
     public void save(TaskList tasks) {
         String data = tasks.getData();
         try (PrintWriter out = new PrintWriter(filePath)) {

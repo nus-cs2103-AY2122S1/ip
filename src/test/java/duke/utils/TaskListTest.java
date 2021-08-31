@@ -1,9 +1,11 @@
 package duke.utils;
 
-import duke.tasks.Todo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.tasks.Todo;
+
 
 public class TaskListTest {
 

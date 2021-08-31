@@ -13,6 +13,11 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Duke constructor.
+     *
+     * @param filePath File path of where the saved task list is.
+     */
     public Duke(String filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
@@ -24,6 +29,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Method to initialize Duke.
+     */
     public void run() {
         ui.showWelcome();
         Command command;
@@ -41,6 +49,11 @@ public class Duke {
         while (!isExited);
     }
 
+    /**
+     * Main method for Duke.
+     *
+     * @param args Placeholder argument.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("data/duke.txt");
         duke.run();

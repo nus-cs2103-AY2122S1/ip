@@ -1,12 +1,12 @@
 package duke.commands;
 
-import duke.exceptions.InvalidTaskNumberException;
-import duke.exceptions.InvalidTimeStampException;
-import duke.utils.TaskList;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.InvalidTaskNumberException;
+import duke.utils.TaskList;
 
 public class DeleteTaskCommandTest {
 
@@ -24,8 +24,7 @@ public class DeleteTaskCommandTest {
     public void test0Index() {
         Command command = new DeleteTaskCommand("0");
         assertThrows(
-                InvalidTaskNumberException.class,
-                () -> command.execute(new TaskList(), null, null)
+                InvalidTaskNumberException.class, () -> command.execute(new TaskList(), null, null)
         );
     }
 
@@ -33,8 +32,7 @@ public class DeleteTaskCommandTest {
     public void testInvalidIndex() {
         Command command = new DeleteTaskCommand("1");
         assertThrows(
-                InvalidTaskNumberException.class,
-                () -> command.execute(new TaskList(), null, null)
+                InvalidTaskNumberException.class, () -> command.execute(new TaskList(), null, null)
         );
     }
 }

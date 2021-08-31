@@ -2,7 +2,6 @@ package duke.utils;
 
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
-import duke.commands.AddTaskCommand;
 import duke.commands.AddTodoCommand;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
@@ -10,11 +9,8 @@ import duke.commands.DeleteTaskCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.MarkDoneCommand;
-
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownCommandException;
-
-import java.util.Scanner;
 
 /** Class to parse user inputs */
 public class Parser {
@@ -44,7 +40,7 @@ public class Parser {
         } else if (input.matches("done [0-9]{1,}")) {
             String[] keywords = extractKeywordsFromCommand(input, new String[] {"done"});
             command = new MarkDoneCommand(keywords[0]);
-        }  else if (input.matches("delete [0-9]{1,}")) {
+        } else if (input.matches("delete [0-9]{1,}")) {
             String[] keywords = extractKeywordsFromCommand(input, new String[] {"delete"});
             command = new DeleteTaskCommand(keywords[0]);
         } else if (input.matches("find .{1,}")) {

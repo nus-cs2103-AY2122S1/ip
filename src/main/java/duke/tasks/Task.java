@@ -12,6 +12,11 @@ public abstract class Task {
         this.taskDetails = taskDetails;
     }
 
+    /**
+     * Marks the task as done and checks if it was previously completed.
+     *
+     * @return boolean indicating whether the task status has been changed from not done to done.
+     */
     public boolean markDone() {
         if (!done) {
             done = true;
@@ -42,6 +47,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", done ? "X": " ", taskDetails);
+        return String.format("[%s] %s", done ? "X" : " ", taskDetails);
     }
 }
