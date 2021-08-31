@@ -9,14 +9,14 @@ import java.nio.file.Files;
 import java.nio.charset.StandardCharsets;
 
 public class Storage {
-    private final BufferedReader reader;
+    private BufferedReader reader;
     private BufferedWriter writer;
-    private final Formatter formatter;
+    private Formatter formatter;
     public static final String DEFAULT_FILE_NAME = "duke.txt";
     public static final String DEFAULT_FILE_DIRECTORY = "data";
-    private final Path targetDirectory;
+    private Path targetDirectory;
 
-    private Storage() throws DukeException {
+    private Storage() {
         try {
             this.targetDirectory =
                     Paths.get(".", DEFAULT_FILE_DIRECTORY, DEFAULT_FILE_NAME)
@@ -33,11 +33,11 @@ public class Storage {
             this.reader = Files.newBufferedReader(this.targetDirectory, StandardCharsets.UTF_8);
             this.formatter = new Formatter();
         } catch (IOException e) {
-            throw new DukeException("Something happened when initializing the duke.Storage.\n" + e);
+            e.printStackTrace();
         }
     }
 
-    private Storage(String[] args) throws DukeException {
+    private Storage(String[] args) {
         try {
             this.targetDirectory =
                     Paths.get(".", args).toAbsolutePath().normalize();
@@ -59,15 +59,15 @@ public class Storage {
             this.reader = Files.newBufferedReader(this.targetDirectory, StandardCharsets.UTF_8);
             this.formatter = new Formatter();
         } catch (IOException e) {
-            throw new DukeException("Something happened when initializing the duke.Storage.\n" + e);
+            e.printStackTrace();
         }
     }
 
-    public static Storage createStorage() throws DukeException {
+    public static Storage createStorage() {
         return new Storage();
     }
 
-    public static Storage createStorage(String filePath) throws DukeException {
+    public static Storage createStorage(String filePath) {
         return new Storage(filePath.split("/"));
     }
 

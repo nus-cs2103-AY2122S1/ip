@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.fxml.FXML;
 /**
  * The driver class of Duke.
  */
@@ -10,77 +11,42 @@ public class Duke {
 
     /**
      * A constructor method that creates the driver, with the default storage file path used.
-     * @throws DukeException if the file is unable to be read.
      */
-    public Duke() throws DukeException {
+    public Duke() {
         this.userInterface = new UserInterface();
         this.list = new TaskList();
         this.storage = Storage.createStorage();
-    }
+        try {
+            this.list = this.storage.load(this.list);
+        } catch (DukeException e) {
+            System.out.println("DB file is corrupted.\n" + e.getMessage());
+        }    }
 
     /**
      * A constructor method that creates the driver, with the input filepath used.
      * @param filePath the filepath of the file.
-     * @throws DukeException if the file is unable to be read.
      */
-    public Duke(String filePath) throws DukeException {
+    public Duke(String filePath) {
         this.userInterface = new UserInterface();
         this.list = new TaskList();
         this.storage = Storage.createStorage(filePath);
-    }
-
-    /**
-     * The main driver method.
-     */
-    public static void main(String[] args) {
-        try {
-            Duke duke = new Duke("data/duke.txt");
-            duke.run();
-        } catch (DukeException e) {
-            System.out.println("Unable to initialize database. Using default document to start up\n");
-        }
-        try {
-            Duke duke = new Duke();
-            duke.run();
-        } catch (DukeException e) {
-            System.out.println("Unable to initialize database.");
-            System.exit(0);
-        }
-    }
-
-    /**
-     * The method that runs the process until a "bye" command is input.
-     */
-    public void run() {
-        this.userInterface.printInitialGreeting();
         try {
             this.list = this.storage.load(this.list);
-        } catch(DukeException e) {
-            userInterface.showError(e);
-        }
-        this.runLoop();
-        try {
-            this.storage.save(this.list);
-        } catch(DukeException e) {
-            userInterface.showError(e);
-        }
-        this.userInterface.printGoodByeGreeting();
-        System.exit(0);
-    }
-
-    public void runLoop() {
-        String commandLine;
-        boolean isExit = false;
-        while (!isExit) {
-            commandLine = this.userInterface.nextCommand();
-            try {
-                CommandResult commandResult = new Parser(this.list).parse(commandLine);
-                userInterface.showResult(commandResult);
-                isExit = commandResult.isExit();
-            } catch (DukeException e) {
-                userInterface.showError(e);
-            }
+        } catch (DukeException e) {
+            System.out.println("DB file is corrupted.\n" + e.getMessage());
         }
     }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    @FXML
+    CommandResult getResponse(String input) throws DukeException {
+        return new Parser(this.list).parse(input);
+    }
+
+    public void save() throws DukeException {
+        this.storage.save(this.list);
+    }
 }

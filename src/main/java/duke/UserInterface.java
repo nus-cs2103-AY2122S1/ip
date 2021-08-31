@@ -15,14 +15,12 @@ public class UserInterface {
         return sc.nextLine();
     }
 
-    public void printInitialGreeting() {
-        printLogo();
-        System.out.println("Hello I'm Duke\n" + "What can I do for you?");
+    public String printInitialGreeting() {
+        return "Hello I'm Duke\n" + "What can I do for you?";
     }
 
-    public void printGoodByeGreeting() {
-
-        System.out.println("Bye. Hope to see you again soon!");
+    public String printGoodByeGreeting() {
+        return "Bye. Hope to see you again soon!";
     }
 
     public void showError(DukeException e) {
