@@ -1,4 +1,4 @@
-# Duke project template
+# Duke User Guide
 
 ![image](https://user-images.githubusercontent.com/66522537/131479345-bb3dfaa2-87e6-425c-aab8-c17ba279f79e.png)
 Product Screenshot
@@ -84,25 +84,6 @@ These are your tasks:
 Your list of tasks is empty!
 ```
 
-### Searching Tasks
-After creating your tasks, you can search for tasks that contain a particular string in its description.
-
-*Command*
-```
-find <string-to-match>
-```
-*Expected Output*
-```
-Alrighty, I found some tasks! Here they are:
-1. <task-info>
-2. <task-info>
-...
-```
-*No Matching Tasks Output*
-```
-Ah dang it! There are no matching tasks ):
-```
-
 ### Completing Tasks
 Once you have finished your task, you can update the task and mark them as done. Refer to the task number that is given in the `list` command.
 
@@ -120,7 +101,7 @@ delete <task-number>
 ```
 
 ### Finding Tasks
-You can search your list of tasks for matching tasks to a specified input text.
+You can search your list of tasks for tasks with that contains a specified input text as a substring to its description.
 
 *Command*
 ```
