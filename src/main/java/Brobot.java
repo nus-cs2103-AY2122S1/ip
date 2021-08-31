@@ -121,7 +121,11 @@ public class Brobot extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            return parser.parse(input);
+        } catch (BroException e) {
+            return UI.printError(e);
+        }
     }
     /**
      * Main java program
