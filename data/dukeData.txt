@@ -1,6 +1,4 @@
 D |0| return book | 02 Dec 2019 6.00PM
 T |0| read book
-T |0| dye hair
-T |0| buy books
+T |1| buy books
 T |0| comb hair
-T |0| buy drinks
