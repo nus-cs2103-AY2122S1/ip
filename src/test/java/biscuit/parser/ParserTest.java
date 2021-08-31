@@ -1,6 +1,5 @@
 package biscuit.parser;
 
-
 import biscuit.commands.Command;
 import biscuit.exceptions.BiscuitException;
 import org.junit.jupiter.api.Test;
