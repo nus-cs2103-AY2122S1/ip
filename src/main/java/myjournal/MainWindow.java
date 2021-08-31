@@ -1,5 +1,7 @@
 package myjournal;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,8 +9,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -24,12 +24,18 @@ public class MainWindow extends AnchorPane {
 
     private boolean isOffline = true;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/flower.png"));
+    private Image journalImage = new Image(this.getClass().getResourceAsStream("/images/journal.png"));
 
+    /**
+     * Initializes MainWindow.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getMyJournalDialog(Ui.welcomeMessage(), journalImage));
+        isOffline = false;
     }
 
     public void setMyJournal(MyJournal d) {
@@ -43,23 +49,20 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws IOException {
         if (isOffline) {
+            initialize();
+        }
+        String input = userInput.getText();
+        if (input.equals("bye")) {
+            isOffline = true;
             dialogContainer.getChildren().addAll(
-                    DialogBox.getMyJournalDialog(Ui.welcomeMessage(), dukeImage));
-            isOffline = false;
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getMyJournalDialog(Ui.goodByeMessage(), journalImage));
         } else {
-            String input = userInput.getText();
-            if (input.equals("bye")) {
-                isOffline = true;
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getMyJournalDialog(Ui.goodByeMessage(), dukeImage));
-            } else {
-                String response = myJournal.getResponse(input);
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(input, userImage),
-                        DialogBox.getMyJournalDialog(response, dukeImage)
-                );
-            }
+            String response = myJournal.getResponse(input);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getMyJournalDialog(response, journalImage)
+            );
         }
         userInput.clear();
     }

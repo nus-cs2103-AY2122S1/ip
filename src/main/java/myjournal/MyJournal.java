@@ -1,5 +1,9 @@
 package myjournal;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -7,15 +11,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Creates chatBot called MyJournal.
@@ -53,6 +52,9 @@ public class MyJournal extends Application {
         }
     }
 
+    /**
+     * Constructs the object MyJournal.
+     */
     public MyJournal() {
         ui = new Ui();
         parser = new Parser();
@@ -87,6 +89,11 @@ public class MyJournal extends Application {
         ui.goodByeMessage();
     }
 
+    /**
+     * Starts GUI.
+     *
+     * @param stage The stage.
+     */
     public void start(Stage stage) {
         //Step 1. Setting up required components
 

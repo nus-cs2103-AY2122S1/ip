@@ -17,7 +17,7 @@ repositories {
 }
 
 application {
-    mainClassName = "myjournal.MyJournal"
+    mainClassName = "myjournal.Launcher"
 }
 
 run {
@@ -31,7 +31,7 @@ shadowJar {
 }
 
 dependencies {
-    String javaFxVersion = '11'
+    String javaFxVersion = '16'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
