@@ -2,6 +2,7 @@ todo borrow book
 event dinner with friends at 2021-12-03
 event project meeting at 2021-12-03
 deadline return book by 2021-12-03
+find book
 done 4
 smth blah blah
 todo
