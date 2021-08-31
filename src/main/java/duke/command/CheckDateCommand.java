@@ -29,8 +29,8 @@ public class CheckDateCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.checkDate(taskList, dateToCheck);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.checkDate(taskList, dateToCheck);
     }
 
     /**

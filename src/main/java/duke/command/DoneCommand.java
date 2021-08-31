@@ -27,10 +27,10 @@ public class DoneCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.getTasks().get(markAsDone - 1).markAsDone();
         storage.markAsDone(taskList, markAsDone);
-        ui.done(taskList, markAsDone);
+        return ui.done(taskList, markAsDone);
     }
 
     /**

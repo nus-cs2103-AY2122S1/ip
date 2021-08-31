@@ -31,26 +31,27 @@ public class AddCommand extends Command {
      * @param storage
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.addTask(this.task);
 
         if (task instanceof Todo) {
             Todo todo = (Todo) this.task;
             storage.addTodo(todo);
-            ui.addTodo(taskList, todo);
+            return ui.addTodo(taskList, todo);
         }
 
         if (task instanceof Deadline) {
             Deadline deadline = (Deadline) this.task;
             storage.addDeadline(deadline);
-            ui.addDeadline(taskList, deadline);
+            return ui.addDeadline(taskList, deadline);
         }
 
         if (task instanceof Event) {
             Event event = (Event) this.task;
             storage.addEvent(event);
-            ui.addEvent(taskList, event);
+            return ui.addEvent(taskList, event);
         }
+        return ui.showError("unable to add Task to Duke");
     }
 
     /**

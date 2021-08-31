@@ -26,8 +26,8 @@ public class InvalidCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.invalidUserInput();
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return ui.invalidUserInput();
     }
 
     /**
