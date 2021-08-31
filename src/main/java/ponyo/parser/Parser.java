@@ -13,7 +13,7 @@ import ponyo.data.exceptions.PonyoException;
  * Makes sense of the user commands
  */
 public class Parser {
-    private static final String MESSAGE_IDK = "\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String MESSAGE_IDK = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     /**
      * Parses the full input command to produce the type of command
