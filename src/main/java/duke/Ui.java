@@ -16,8 +16,8 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    public void showTaskList(TaskList taskList) {
-        System.out.println(taskList.toString());
+    public String showTaskList(TaskList taskList) {
+        return taskList.toString();
     }
 
     /**
@@ -58,12 +58,10 @@ public class Ui {
      * @param newTask Task to be added.
      * @param newList TaskList after adding Task.
      */
-    public void showAddMessage(Task newTask, TaskList newList) {
-        System.out.println("-----------------------------------------\n"
-                + "Got it. I've added this task:\n"
+    public String showAddMessage(Task newTask, TaskList newList) {
+        return "Got it. I've added this task:\n"
                 + newTask.toString()
-                + String.format("Now you have %s tasks in the list.\n", newList.getLength())
-                + "-----------------------------------------\n");
+                + String.format("Now you have %s tasks in the list.\n", newList.getLength());
     }
 
     /**
@@ -71,11 +69,10 @@ public class Ui {
      *
      * @param markedTask Task to be marked as done.
      */
-    public void showMarkDoneMessage(Task markedTask) {
-        System.out.println("-----------------------------------------\n"
-                + "Nice! I've marked this task as done:\n"
-                + markedTask.toString()
-                + "-----------------------------------------\n");
+    public String showMarkDoneMessage(Task markedTask) {
+
+        return "Nice! I've marked this task as done:\n"
+                + markedTask.toString();
     }
 
     /**
@@ -84,23 +81,17 @@ public class Ui {
      * @param deletedTask Task to be deleted.
      * @param newList TaskList after deletion.
      */
-    public void showDeleteMessage(Task deletedTask, TaskList newList) {
-        System.out.println("-----------------------------------------\n"
-                + "Noted. I've removed this task:\n"
+    public String showDeleteMessage(Task deletedTask, TaskList newList) {
+        return "Noted. I've removed this task:\n"
                 + deletedTask.toString()
-                + String.format("Now you have %s tasks in the list.\n", newList.getLength())
-                + "-----------------------------------------\n");
+                + String.format("Now you have %s tasks in the list.\n", newList.getLength());
     }
 
     /**
      * Shows message after search.
      * @param result String of all relevant Tasks.
      */
-    public void showSearchResults(String result) {
-        System.out.println("-----------------------------------------\n"
-                + "Here are the matching tasks in your list:\n"
-                + result
-                + "-----------------------------------------\n");
-
+    public String showSearchResults(String result) {
+        return "Here are the matching tasks in your list:\n" + result;
     }
 }
