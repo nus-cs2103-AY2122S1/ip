@@ -16,19 +16,19 @@ Commands include a keyword, some mandatory arguments, and some optional argument
 
 The features offered are:
 
-- Adding a task(#adding-tasks)
-- Deleting a task(#deleting-a-task)
-- Marking a task as done(#marking-a-task-as-done)
-- Finding a task(#finding-a-task)
-- Clearing all tasks(#clearing-all-tasks)
-- Listing all tasks(#listing-all-tasks)
-- Exiting the app(#exiting-the-app)
+- [Adding a task](#adding-tasks)
+- [Deleting a task](#deleting-a-task)
+- [Marking a task as done](#marking-a-task-as-done)
+- [Finding a task](#finding-a-task)
+- [Clearing all tasks](#clearing-all-tasks)
+- [Listing all tasks](#listing-all-tasks)
+- [Exiting the app](#exiting-the-app)
 - Searching by priority (to be implemented)
 
 Some advanced features include
-- Substitutable keywords(#substitutable-keywords)
-- Automatic date correction(#automatic-date-correction)
-- Partial loading in case the storage file is corrupted(#partial-loading)
+- [Substitutable keywords](#substitutable-keywords)
+- [Automatic date correction](#automatic-date-correction)
+- [Partial loading in case the storage file is corrupted](#partial-loading)
 
 ## Usage
 
