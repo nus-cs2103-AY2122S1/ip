@@ -35,6 +35,7 @@ public class TaskList {
                 break;
             }
         }
+        System.out.println(str);
         return str;
     }
 
@@ -86,6 +87,7 @@ public class TaskList {
                 }
             }
         }
+        System.out.println(str);
         return str;
     }
 
@@ -95,6 +97,7 @@ public class TaskList {
      * @param task The task to be added.
      */
     public void addTask(Task task) {
+        System.out.println("add task");
         ls.add(task);
     }
 
@@ -139,9 +142,12 @@ public class TaskList {
      * Prints the list of tasks.
      */
     public String displayList() {
+        System.out.println("3");
         if (ls.size() == 0) {
-            return ("You currently do not have any task!");
+            System.out.println("4");
+            return "You currently do not have any task!";
         } else {
+            System.out.println("5");
             String str = "";
             str += "Here are the tasks in your list: ";
             for (int i = 0; i < ls.size(); i++) {
@@ -157,7 +163,9 @@ public class TaskList {
     public String printAddTask() {
         String str = "";
         str += "Got it. I've added this task: ";
+        System.out.println("5");
         str += ls.get(ls.size() - 1).toString();
+        System.out.println("6");
         str += "Now you have " + ls.size() + " tasks in the list.";
         return str;
     }
@@ -167,7 +175,7 @@ public class TaskList {
      *
      * @param search The search term.
      */
-    public void findTask(String search) {
+    public String findTask(String search) {
         searchList = new ArrayList<>();
         for (int i = 0; i < ls.size(); i++) {
             String[] arr = ls.get(i).getDescription().split(" ");
@@ -178,12 +186,14 @@ public class TaskList {
             }
         }
         if (searchList.size() == 0) {
-            System.out.println("No matching tasks!");
+            return "No matching tasks!";
         } else {
-            System.out.println("Here are the matching tasks in your list: ");
+            String str = "";
+            str += "Here are the matching tasks in your list: ";
             for (int i = 0; i < searchList.size(); i++) {
-                System.out.println((i + 1) + "." + searchList.get(i).toString());
+                str += (i + 1) + "." + searchList.get(i).toString();
             }
+            return str;
         }
     }
 }

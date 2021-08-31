@@ -49,39 +49,40 @@ public class Parser {
     /**
      * Makes sense of the user input.
      */
-    public void parse() {
+    public String parse(String input) {
         do {
             try {
-                input = scan.nextLine();
                 arr = input.split(" ");
+                System.out.println(input);
                 if (input.equals("bye")) {
-                    break;
+                    return ui.printBye();
                 } else if (arr[0].equals("done")) {
-                    parseDone(arr);
+                    return parseDone(arr);
                 } else if (arr[0].equals("delete")) {
-                    parseDelete(arr);
+                    return parseDelete(arr);
                 } else if (arr[0].equals("todo")) {
-                    parseTodo(arr);
+                    return parseTodo(arr);
                 } else if (arr[0].equals("deadline")) {
-                    parseDeadline(arr);
+                    return parseDeadline(arr);
                 } else if (arr[0].equals("event")) {
-                    parseEvent(arr);
+                    return parseEvent(arr);
                 } else if (input.equals("list")) {
-                    parseList();
+                    System.out.println("LIST");
+                    return parseList();
                 } else if (arr[0].equals("find")) {
-                    parseFind(arr);
+                    return parseFind(arr);
                 } else {
-                    throw new InvalidCommandException("Command not Found");
+                    System.out.println("not found");
+                    return "Command not Found";
                 }
-                storage.saveFile(taskList);
             } catch (InvalidCommandException e) {
-                System.out.println(e.toString());
+                return e.toString();
             } catch (EmptyDescriptionException e) {
-                System.out.println(e.toString());
+                return e.toString();
             } catch (InvalidValueException e) {
-                System.out.println(e.toString());
+                return e.toString();
             } catch (DateTimeParseException e) {
-                System.out.println(e.getMessage());
+                return e.getMessage();
             }
         } while (!input.equals("bye"));
     }
@@ -92,7 +93,7 @@ public class Parser {
      * @param arr Array of strings from the user input.
      * @throws InvalidCommandException If the following input is not valid.
      */
-    public void parseDone(String[] arr) throws InvalidCommandException {
+    public String parseDone(String[] arr) throws InvalidCommandException {
         if (arr.length == 1) {
             throw new InvalidCommandException("Please specify a number");
         } else if (!isNumeric(arr[1])) {
@@ -103,9 +104,9 @@ public class Parser {
                 || Integer.parseInt(arr[1]) <= 0)) {
             throw new InvalidValueException("Enter a valid number!");
         } else {
-            ui.printDone();
             taskList.markAsDone(parseInt(arr[1]) - 1);
             ui.printCurrentTask(taskList, parseInt(arr[1]) - 1);
+            return ui.printDone();
         }
     }
 
@@ -116,7 +117,7 @@ public class Parser {
      * @throws InvalidCommandException If the following input is not valid.
      * @throws InvalidValueException If the following input is not a valid number.
      */
-    public void parseDelete(String[] arr) throws InvalidCommandException,
+    public String parseDelete(String[] arr) throws InvalidCommandException,
             InvalidValueException {
         if (arr.length == 1) {
             throw new InvalidCommandException("Please specify a number");
@@ -128,9 +129,9 @@ public class Parser {
                 || Integer.parseInt(arr[1]) <= 0)) {
             throw new InvalidValueException("Enter a valid number!");
         } else {
-            ui.printRemove();
             ui.printCurrentTask(taskList, parseInt(arr[1]) - 1);
             taskList.removeTask(parseInt(arr[1]) - 1);
+            return ui.printRemove();
         }
     }
 
@@ -140,12 +141,12 @@ public class Parser {
      * @param arr Array of strings from the user input.
      * @throws EmptyDescriptionException If the next input is missing.
      */
-    public void parseTodo(String[] arr) throws EmptyDescriptionException {
+    public String parseTodo(String[] arr) throws EmptyDescriptionException {
         if (arr.length < 2) {
             throw new EmptyDescriptionException("Missing description / date");
         }
         taskList.addTask(new Todo(TaskList.getDescription(arr)));
-        ui.printAddTask(taskList);
+        return ui.printAddTask(taskList);
     }
 
     /**
@@ -154,12 +155,12 @@ public class Parser {
      * @param arr Array of strings from the user input.
      * @throws EmptyDescriptionException If the next input is missing.
      */
-    public void parseDeadline(String[] arr) throws EmptyDescriptionException {
+    public String parseDeadline(String[] arr) throws EmptyDescriptionException {
         if (arr.length < 2) {
             throw new EmptyDescriptionException("Missing description / date");
         }
         taskList.addTask(new Deadline(TaskList.getDescription(arr), TaskList.getDeadline(arr)));
-        ui.printAddTask(taskList);
+        return ui.printAddTask(taskList);
     }
 
     /**
@@ -168,19 +169,23 @@ public class Parser {
      * @param arr Array of strings from the user input.
      * @throws EmptyDescriptionException If the next input is missing.
      */
-    public void parseEvent(String[] arr) throws EmptyDescriptionException {
+    public String parseEvent(String[] arr) throws EmptyDescriptionException {
+        String str = "";
         if (arr.length < 2) {
             throw new EmptyDescriptionException("Missing description / date");
         }
-        taskList.addTask(new Event(TaskList.getDescription(arr), TaskList.getDeadline(arr)));
-        ui.printAddTask(taskList);
+        System.out.println("2");
+        //taskList.addTask(new Event(TaskList.getDescription(arr), TaskList.getDeadline(arr)));
+        str += new Ui().printAddTask(taskList);
+        return str;
     }
 
     /**
      * Deals with the user input when the user types "list".
      */
-    public void parseList() {
-        ui.displayList(taskList);
+    public String parseList() {
+        System.out.println("list here");
+        return new Ui().displayList(taskList);
     }
 
     /**
@@ -189,7 +194,7 @@ public class Parser {
      * @param arr Array of strings from the user input.
      * @throws InvalidCommandException If the following input is not valid.
      */
-    public void parseFind(String[] arr) throws InvalidCommandException {
+    public String parseFind(String[] arr) throws InvalidCommandException {
         if (arr.length == 1) {
             throw new InvalidCommandException("Please specify a task you want to search");
         } else if (taskList.getSize() == 0) {
@@ -197,7 +202,7 @@ public class Parser {
         } else if (arr.length > 2) {
             throw new InvalidCommandException("Please enter a single keyword!");
         } else {
-            taskList.findTask(arr[1]);
+            return taskList.findTask(arr[1]);
         }
     }
 }

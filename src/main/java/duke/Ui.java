@@ -28,20 +28,20 @@ public class Ui {
      * Prints the goodbye message.
      */
     public String printBye() {
-        return ("Good Bye. Have a nice day!");
+        return "Good Bye. Have a nice day!";
     }
 
     /**
      * Informs the user that a task has been marked as done.
      */
-    public String printDone() { return ("Nice! I've marked this task as done: ");
+    public String printDone() { return "Nice! I've marked this task as done: ";
     }
 
     /**
      * Informs the user that a task has been removed from the list.
      */
     public String printRemove() {
-        return ("Noted. I've removed this task: ");
+        return "Noted. I've removed this task: ";
     }
 
     /**
@@ -49,6 +49,7 @@ public class Ui {
      * @param ls The list of tasks.
      */
     public String printAddTask(TaskList ls) {
+        System.out.println("3");
         return ls.printAddTask();
     }
 
@@ -57,6 +58,7 @@ public class Ui {
      * @param ls The list of tasks.
      */
     public String displayList(TaskList ls) {
+        System.out.println("2");
         return ls.displayList();
     }
 
@@ -66,6 +68,6 @@ public class Ui {
      * @param index The index of the tasks in the list.
      */
     public String printCurrentTask(TaskList ls, int index) {
-        return (ls.getTask(index).toString());
+        return ls.getTask(index).toString();
     }
 }

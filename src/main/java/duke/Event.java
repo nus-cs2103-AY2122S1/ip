@@ -16,6 +16,7 @@ public class Event extends Task {
         super(description);
         this.by = by.equals("") ? "at: " : by;
         super.deadline = this.by;
+        System.out.println("event");
     }
 
     /**

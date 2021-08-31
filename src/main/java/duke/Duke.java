@@ -59,9 +59,10 @@ public class Duke extends Application {
      */
     public void run() {
         Scanner scan = new Scanner(System.in);
+        String input = scan.nextLine();
         storage.readFile(taskList);
         ui.printWelcome();
-        new Parser(scan, storage, taskList, ui).parse();
+        new Parser(scan, storage, taskList, ui).parse(input);
         ui.printBye();
     }
 
@@ -173,8 +174,8 @@ public class Duke extends Application {
         String input = userInput.getText();
         String response = getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, new Image(String.valueOf(user))),
-                DialogBox.getDukeDialog(response, new Image(String.valueOf(duke)))
+                DialogBox.getUserDialog(input, user),
+                DialogBox.getDukeDialog(response, duke)
         );
         userInput.clear();
     }
@@ -184,7 +185,10 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        Scanner scan = new Scanner(System.in);
+        String parsed = new Parser(scan, storage, taskList, ui).parse(input);
+        //storage.saveFile(taskList);
+        return "Duke says: " + parsed;
     }
 
 
