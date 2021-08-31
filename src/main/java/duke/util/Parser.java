@@ -3,7 +3,6 @@ package duke.util;
 import duke.Duke;
 import duke.commands.*;
 import duke.exceptions.ExceedListSizeException;
-import duke.exceptions.InvalidInputException;
 import duke.exceptions.NoDescriptionException;
 import duke.exceptions.UserInputError;
 import duke.tasks.Task;
@@ -26,27 +25,12 @@ public class Parser {
     }
 
     /**
-     * Parse the input to make input more readable.
+     * Parses input to get the appropriate Command object. Throws a UserInputError if user command does not exist in
+     * Duke.
      *
-     * @return Array of string sectioned into separate parts.
+     * @return Command type according to input.
      * @throws UserInputError
      */
-//    public String[] parse() throws UserInputError {
-//        if (input.equals("list") || input.equals("bye")) {
-//            return new String[] {command};
-//        } else if (command.equals("done") || command.equals("delete")) {
-//            int index = getTaskNumber() - 1;
-//            checkIndexRange(index);
-//            return new String[] {command, Integer.toString(index)};
-//        } else if (command.equals("todo") || command.equals("deadline")
-//                || command.equals("event") || command.equals("find")) {
-//            checkDescExist();
-//            return new String[] {command, getDesc(input)};
-//        } else {
-//            throw new InvalidInputException();
-//        }
-//    }
-
     public Command parse() throws UserInputError {
         Command cmd = null;
         int index;
