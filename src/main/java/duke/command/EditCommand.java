@@ -36,9 +36,10 @@ public class EditCommand extends Command {
      * @param taskList Task list of the user loaded on Duke.
      * @param ui The object representing Duke's UI.
      * @param storage The object representing Duke's data and storage.
+     * @return A string to be displayed to the user on the user interface.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task editedTask;
             switch (this.editType) {
@@ -52,20 +53,10 @@ public class EditCommand extends Command {
                 throw new DukeException("Unknown command.");
             }
             storage.overwriteSave(taskList);
-            ui.updateUserOnEditedTask(editedTask, taskList.getNumberOfTasks(), this.editType);
+            return ui.formatEditedTask(editedTask, taskList.getNumberOfTasks(), this.editType);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Please enter a valid task number.");
         }
-    }
-
-    /**
-     * Checks whether the command exits Duke.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 
     /**

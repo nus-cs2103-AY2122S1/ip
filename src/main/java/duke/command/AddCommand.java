@@ -43,9 +43,10 @@ public class AddCommand extends Command {
      * @param taskList Task list of the user loaded on Duke.
      * @param ui The object representing Duke's UI.
      * @param storage The object representing Duke's data and storage.
+     * @return A string to be displayed to the user on the user interface.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task newTask;
         switch (this.taskType) {
         case DEADLINE:
@@ -62,17 +63,7 @@ public class AddCommand extends Command {
         }
         taskList.add(newTask);
         storage.appendToSave(newTask);
-        ui.updateUserOnAddedTask(newTask, taskList.getNumberOfTasks());
-    }
-
-    /**
-     * Checks whether the command exits Duke.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return ui.formatAddedTask(newTask, taskList.getNumberOfTasks());
     }
 
     /**

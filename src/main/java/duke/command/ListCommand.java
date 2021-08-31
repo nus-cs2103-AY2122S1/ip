@@ -15,20 +15,11 @@ public class ListCommand extends Command {
      * @param taskList Task list of the user loaded on Duke.
      * @param ui The object representing Duke's UI.
      * @param storage The object representing Duke's data and storage.
+     * @return A string to be displayed to the user on the user interface.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printTaskList(taskList);
-    }
-
-    /**
-     * Checks whether the command exits Duke.
-     *
-     * @return false.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.formatTaskList(taskList);
     }
 
     /**

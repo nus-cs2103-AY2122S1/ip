@@ -1,6 +1,5 @@
 package duke;
 
-import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -31,30 +30,30 @@ public class Duke {
             this.storage = new Storage();
             this.tasks = new TaskList(Parser.parseSaveFile(this.storage.getSavedContents()));
         } catch (DukeException e) {
-            this.ui.printErrorMessage(e);
             this.tasks = new TaskList();
         }
     }
 
     /**
-     * Runs the Duke program.
+     * Returns a string to be displayed by the GUI based on the input string entered by the user.
+     *
+     * @param input The input string entered by the user.
+     * @return The string to be displayed by Duke's GUI.
      */
-    public void run() {
-        boolean isExit = false;
-        this.ui.printStartMessage();
-        while (!isExit) {
-            try {
-                String userInput = this.ui.readUserInput();
-                Command command = Parser.parseUserInput(userInput);
-                command.execute(this.tasks, this.ui, this.storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                this.ui.printErrorMessage(e);
-            }
+    public String getResponse(String input) {
+        try {
+            return Parser.parseUserInput(input).execute(this.tasks, this.ui, this.storage);
+        } catch (DukeException e) {
+            return this.ui.formatErrorMessage(e);
         }
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+    /**
+     * Returns the string to be displayed on initializing Duke's GUI.
+     *
+     * @return The string to be displayed on initializing Duke's GUI.
+     */
+    public String getStartMessage() {
+        return this.ui.getStartMessage();
     }
 }
