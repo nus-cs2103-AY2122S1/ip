@@ -208,6 +208,7 @@ public class Duke {
 
     /**
      * Main method for Duke.
+     *
      * @param args Optional arguments for CLI.
      */
     public static void main(String[] args) {
