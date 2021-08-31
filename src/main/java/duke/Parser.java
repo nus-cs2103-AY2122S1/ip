@@ -6,6 +6,7 @@ public class Parser {
 
     /**
      * Parses the input provided into relevant Commands
+     *
      * @param input String of next line of user input
      * @return Relevant Command corresponding to input
      * @throws DukeException

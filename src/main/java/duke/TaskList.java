@@ -14,6 +14,7 @@ public class TaskList {
 
     /**
      * Constructs a TaskList using an ArrayList of Tasks
+     *
      * @param list ArrayList of Tasks to be used
      */
     public TaskList(ArrayList<Task> list) {
@@ -22,19 +23,17 @@ public class TaskList {
 
     /**
      * Adds Task to TaskList
+     *
      * @param task
      */
     public void addTask(Task task) {
         list.add(task);
     }
 
+
     /**
-     * Obtains Task from TaskList
-     * @param index Index of task to be retrieved
-     * @return Task corresponding to index
-     * @throws DukeException
-     */
      * Returns a copy of the list
+     *
      * @return ArrayList copy containing all of the tasks
      */
     public ArrayList<Task> getList() {
@@ -42,6 +41,13 @@ public class TaskList {
         return list;
     }
 
+    /**
+     * Obtains Task from TaskList
+     *
+     * @param index Index of task to be retrieved
+     * @return Task corresponding to index
+     * @throws DukeException
+     */
     public Task getTask(int index) throws DukeException {
         Task task;
         try {
@@ -54,6 +60,7 @@ public class TaskList {
 
     /**
      * Deletes Task from TaskList
+     *
      * @param index Index of task to be deleted
      * @return Task that was deleted from list
      * @throws DukeException
@@ -66,6 +73,7 @@ public class TaskList {
 
     /**
      * Sets Task from TaskList to completed
+     *
      * @param index Index of task to be completed
      * @return Task that was completed
      * @throws DukeException
@@ -78,6 +86,7 @@ public class TaskList {
 
     /**
      * Outputs list of all Tasks with descriptions
+     *
      * @return List of all Tasks with descriptions
      */
     public String allTasks() {
@@ -92,6 +101,7 @@ public class TaskList {
 
     /**
      * Returns size of list
+     *
      * @return Current size of task list
      */
     public int size() {
@@ -100,6 +110,7 @@ public class TaskList {
 
     /**
      * Gets toString() of all tasks in list
+     *
      * @return String containing all tasks in list
      */
     @Override

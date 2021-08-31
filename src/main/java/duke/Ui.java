@@ -19,6 +19,7 @@ public class Ui {
 
     /**
      * Gets next line of user input
+     *
      * @return String of user input
      */
     public String readCommand() {
@@ -27,6 +28,7 @@ public class Ui {
 
     /**
      * Shows user a regular message
+     *
      * @param message Message to be shown
      */
     public void print(String message) {
@@ -35,6 +37,7 @@ public class Ui {
 
     /**
      * Shows user an error message
+     *
      * @param message Error message to be shown
      */
     public void showError(String message) {

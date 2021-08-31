@@ -13,6 +13,7 @@ public class Task {
 
     /**
      * Constructs generic Task object
+     *
      * @param description Description of task
      * @param status Completion status of Task
      */
@@ -23,6 +24,7 @@ public class Task {
 
     /**
      * Returns the corresponding status icon
+     *
      * @return Corresponding status icon
      */
     public String getStatusIcon() {
@@ -45,6 +47,7 @@ public class Task {
 
         /**
          * Constructs Todo task
+         *
          * @param description Description for the task
          * @param status Completion status of task
          */
@@ -59,6 +62,7 @@ public class Task {
 
         /**
          * Formats task information into String format to be saved onto storage
+         *
          * @return String containing task info
          */
         @Override
@@ -74,6 +78,7 @@ public class Task {
 
         /**
          * Constructs Todo task
+         *
          * @param description Description for the task
          * @param status Completion status of task
          * @param by Deadline of task in YYYY-MM-DD format
@@ -90,6 +95,7 @@ public class Task {
 
         /**
          * Returns description of task including deadline
+         *
          * @return Description of task including deadline
          */
         @Override
@@ -100,6 +106,7 @@ public class Task {
 
         /**
          * Formats task information into String format to be saved onto storage
+         *
          * @return String containing task info
          */
         @Override
@@ -114,6 +121,7 @@ public class Task {
 
         /**
          * Constructs Todo task
+         *
          * @param description Description for the task
          * @param status Completion status of task
          * @param at Deadline of task in YYYY-MM-DD format
@@ -130,6 +138,7 @@ public class Task {
 
         /**
          * Returns description of task including date
+         *
          * @return Description of task including date
          */
         @Override
@@ -140,6 +149,7 @@ public class Task {
 
         /**
          * Formats task information into String format to be saved onto storage
+         *
          * @return String containing task info
          */
         @Override

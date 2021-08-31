@@ -18,6 +18,7 @@ public class Storage {
 
     /**
      * Loads task data from storage
+     *
      * @return ArrayList of tasks
      * @throws DukeException
      */
@@ -52,6 +53,7 @@ public class Storage {
 
     /**
      * Saves all tasks in TaskList to filepath of storage
+     *
      * @param list TaskList to be saved
      */
     public void save(TaskList list) {

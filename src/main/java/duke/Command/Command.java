@@ -8,6 +8,7 @@ import duke.Ui;
 public abstract class Command {
     /**
      * Executes command based on which command it is
+     *
      * @param tasks Current TaskList
      * @param ui Ui object of bot
      * @param storage Storage object of bot
@@ -17,6 +18,7 @@ public abstract class Command {
 
     /**
      * Checks if Command is ExitCommand
+     * 
      * @return true if ExitCommand
      */
     public abstract boolean isExit();
