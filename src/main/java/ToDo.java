@@ -2,6 +2,7 @@ package duke.task;
 
 /**
  * Represents a ToDo task.
+ * A ToDo task contains a String describing the task.
  */
 
 public class ToDo extends Task {
