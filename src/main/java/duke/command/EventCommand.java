@@ -33,7 +33,6 @@ public class EventCommand extends Command {
      * Instantiates an Event task and adds it to the tasklist
      *
      * @param tasks List of existing tasks
-     * @param reply User interface current interacting with the user
      * @param storage Storage class handling the persistence of the tasks
      * @throws InvalidInputException if invalid datetime is provided
      * @throws NoTimeException if no event time is provided
@@ -41,7 +40,7 @@ public class EventCommand extends Command {
      * @throws SaveFileException if save file errors occur
      */
     @Override
-    public CommandResult execute(TaskList tasks, Reply reply, Storage storage) throws InvalidInputException,
+    public CommandResult execute(TaskList tasks, Storage storage) throws InvalidInputException,
         NoTimeException, NoActionException, SaveFileException {
         if (action.trim().length() == 0) {
             throw new NoActionException("Command 'event' requires a task action");

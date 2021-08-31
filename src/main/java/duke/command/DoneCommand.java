@@ -29,7 +29,6 @@ public class DoneCommand extends Command {
      * Sets a task to complete.
      *
      * @param tasks List of existing tasks
-     * @param reply User interface current interacting with the user
      * @param storage Storage class handling the persistence of the tasks
      * @throws TaskNotFoundException if index of task is out of bounds
      * @throws InvalidInputException if input cannot be parsed into an integer
@@ -37,7 +36,7 @@ public class DoneCommand extends Command {
      * @throws SaveFileException if there are issues with the save file
      */
     @Override
-    public CommandResult execute(TaskList tasks, Reply reply, Storage storage) throws TaskNotFoundException,
+    public CommandResult execute(TaskList tasks, Storage storage) throws TaskNotFoundException,
             InvalidInputException, TaskCompletedException, SaveFileException {
         try {
             int taskNumber = Integer.parseInt(action);

@@ -4,9 +4,9 @@ import duke.exception.NoActionException;
 import duke.exception.SaveFileException;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.util.Reply;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Reply;
 
 /**
  * A command class encapsulating the logic that occurs when the user issues a 'todo' command.
@@ -28,13 +28,13 @@ public class TodoCommand extends Command {
      * Creates and adds a Todo to the tasks.
      *
      * @param tasks List of existing tasks
-     * @param reply User interface current interacting with the user
      * @param storage Storage class handling the persistence of the tasks
      * @throws NoActionException if no action was provided
      * @throws SaveFileException if there is a save file related error
      */
     @Override
-    public CommandResult execute(TaskList tasks, Reply reply, Storage storage) throws NoActionException, SaveFileException {
+    public CommandResult execute(TaskList tasks, Storage storage)
+            throws NoActionException, SaveFileException {
         if (action.length() == 0) {
             throw new NoActionException("Command 'todo' requires a task action");
         }

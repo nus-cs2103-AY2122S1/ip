@@ -1,7 +1,6 @@
 package duke.ui;
 
 import duke.Duke;
-import duke.command.Command;
 import duke.command.CommandResult;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,6 +10,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * This controller represents the main window of the application.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -48,13 +50,18 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Handles the logic depending on the attributes of the CommandResult
+     *
+     * @param result CommandResult after executing the command.
+     */
     private void handleCommandResult(CommandResult result) {
         if (result.isReply()) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(result.getFeedbackToUser(), dukeImage)
             );
         } else {
-            dialogContainer.getChildren().add(ErrorBox.getErrorBox(result.getFeedbackToUser()));
+            dialogContainer.getChildren().add(new ErrorBox(result.getFeedbackToUser()));
         }
 
         if (result.isExit()) {
@@ -62,7 +69,8 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    //TODO add exit
     private void handleExit() {
-
+        return;
     }
 }

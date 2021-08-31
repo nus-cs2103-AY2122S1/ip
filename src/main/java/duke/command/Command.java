@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.util.Reply;
 import duke.util.Storage;
 import duke.util.TaskList;
 
@@ -23,14 +22,13 @@ public abstract class Command {
     }
 
     /**
-     * Execute the logic of the command
+     * Execute the logic of the command and returns a CommandResult.
      *
      * @param tasks List of existing tasks
-     * @param reply User interface current interacting with the user
      * @param storage Storage class handling the persistence of the tasks
      * @throws DukeException if there is a Duke related exception
      */
-    public abstract CommandResult execute(TaskList tasks, Reply reply, Storage storage) throws DukeException;
+    public abstract CommandResult execute(TaskList tasks, Storage storage) throws DukeException;
 
     /**
      *

@@ -29,14 +29,13 @@ public class DeleteCommand extends Command {
      * Deletes a task from the tasks
      *
      * @param tasks List of existing tasks
-     * @param reply User interface current interacting with the user
      * @param storage Storage class handling the persistence of the tasks
      * @throws TaskNotFoundException if task does not exist
      * @throws InvalidInputException if input cannot be parsed into a number
      * @throws SaveFileException if there are issues with the save file
      */
     @Override
-    public CommandResult execute(TaskList tasks, Reply reply, Storage storage) throws TaskNotFoundException,
+    public CommandResult execute(TaskList tasks, Storage storage) throws TaskNotFoundException,
             InvalidInputException, SaveFileException {
         try {
             int taskNumber = Integer.parseInt(todoNumber);

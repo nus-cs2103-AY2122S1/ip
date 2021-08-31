@@ -2,7 +2,6 @@ package duke.util;
 
 import java.util.Scanner;
 
-import duke.command.CommandResult;
 import duke.task.Task;
 
 /**
@@ -40,7 +39,7 @@ public class Reply {
      * @param errMessage Error message.
      */
     public static String showError(String errMessage) {
-        return String.format("Ooop! %s\nPlease try again.",errMessage);
+        return String.format("Ooop! %s\nPlease try again.", errMessage);
     }
 
     /**

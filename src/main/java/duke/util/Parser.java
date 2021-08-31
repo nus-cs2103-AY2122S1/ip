@@ -70,8 +70,14 @@ public final class Parser {
         }
     }
 
+    /**
+     * Splits one input into the command and the action
+     *
+     * @param input Input from the user
+     * @return String array with length 2. First element is the command. Second element is the action
+     */
     public static String[] parseInput(String input) {
-        String[] splitInput= input.split(" ", 2);
+        String[] splitInput = input.split(" ", 2);
         if (splitInput.length == 1) {
             return new String[] {splitInput[0], ""};
         }

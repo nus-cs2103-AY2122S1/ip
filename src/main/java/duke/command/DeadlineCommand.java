@@ -33,15 +33,15 @@ public class DeadlineCommand extends Command {
      * Creates and adds a 'deadline' task to the tasks
      *
      * @param tasks List of existing tasks
-     * @param reply User interface current interacting with the user
      * @param storage Storage class handling the persistence of the tasks
      * @throws InvalidInputException if input cannot be parsed into a date
      * @throws NoActionException if no todo list action given
      * @throws NoTimeException if no deadline is provided
      * @throws SaveFileException if there are issues with the save file
      */
+
     @Override
-    public CommandResult execute(TaskList tasks, Reply reply, Storage storage) throws InvalidInputException,
+    public CommandResult execute(TaskList tasks, Storage storage) throws InvalidInputException,
             NoActionException, NoTimeException, SaveFileException {
         String[] deadlineInputs = action.split("/by", 2);
         if (deadlineInputs[0].length() == 0) {

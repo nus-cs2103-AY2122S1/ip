@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.util.Reply;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Reply;
 
 
 /**
@@ -20,11 +20,10 @@ public class ByeCommand extends Command {
      * Causes the UI to print a bye message.
      *
      * @param tasks List of existing tasks
-     * @param reply User interface current interacting with the user
      * @param storage Storage class handling the persistence of the tasks
      */
     @Override
-    public CommandResult execute(TaskList tasks, Reply reply, Storage storage) {
+    public CommandResult execute(TaskList tasks, Storage storage) {
         return new CommandResult(Reply.showBye(), true, super.isExit());
     }
 }

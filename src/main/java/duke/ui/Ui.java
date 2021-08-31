@@ -1,5 +1,7 @@
 package duke.ui;
 
+import java.io.IOException;
+
 import duke.Duke;
 import duke.Main;
 import javafx.fxml.FXMLLoader;
@@ -7,11 +9,18 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
+/**
+ * This class is an abstraction of the Ui of the application.
+ */
 public class Ui {
 
-    public void start(Stage primaryStage, Duke duke){
+    /**
+     * Loads the JavaFX components
+     *
+     * @param primaryStage JavaFX stage
+     * @param duke Duke instance that handles the logic
+     */
+    public void start(Stage primaryStage, Duke duke) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

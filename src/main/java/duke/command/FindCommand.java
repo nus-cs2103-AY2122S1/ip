@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import duke.exception.NoActionException;
 import duke.task.Task;
+import duke.util.Reply;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Reply;
 
 public class FindCommand extends Command {
     private final String searchTerms;
@@ -22,7 +22,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Reply reply, Storage storage) throws NoActionException {
+    public CommandResult execute(TaskList tasks, Storage storage) throws NoActionException {
         if (this.searchTerms.length() == 0) {
             throw new NoActionException("Command 'find' requires search terms to be provided.");
         }
