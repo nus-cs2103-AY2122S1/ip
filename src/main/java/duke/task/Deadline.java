@@ -23,7 +23,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a {@code string} representation of a deadline.
-     * @return deadline name and whether it is completed.
+     * @return Deadline name and whether it is completed.
      */
     @Override
     public String toString() {

@@ -62,15 +62,6 @@ public class Duke {
     }
 
     /**
-     * Returns the welcome message for GUI mode.
-     *
-     * @return Welcome message {@code String} for GUI mode.
-     */
-    public String getWelcomeMessage() {
-        return this.ui.getGreeting();
-    }
-
-    /**
      * Run main body of a {@code Duke} object.
      */
     public void run() {
@@ -87,7 +78,6 @@ public class Duke {
         }
         ui.close();
     }
-
 
     /**
      * Main class that Duke builds from.

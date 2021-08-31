@@ -25,12 +25,16 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructor for TaskList.
+     * Constructor for {@code TaskList}.
      */
     public TaskList() {
         this(new ArrayList<>());
     }
 
+    /**
+     * Initialise constructor for {@code TaskList}.
+     * @param tasks The Arraylist of tasks.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
