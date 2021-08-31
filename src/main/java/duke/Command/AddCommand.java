@@ -2,7 +2,7 @@ package duke.Command;
 
 import duke.*;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private String type;
     private String description;
 

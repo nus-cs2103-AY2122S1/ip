@@ -2,7 +2,7 @@ package duke.Command;
 
 import duke.*;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     private int index;
 
