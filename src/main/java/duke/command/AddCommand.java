@@ -42,7 +42,7 @@ public class AddCommand extends Command {
         ui.add("Got it. I've added this task:");
         ui.add("  " + task);
         ui.add(String.format("Now you have %d task(s) in the list.", taskList.size()));
-        this.setOutput(ui.print());
+        this.setOutput(ui.getOutput());
         storage.saveTasks(taskList.getTasks());
     }
 }

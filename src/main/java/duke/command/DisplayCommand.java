@@ -36,7 +36,7 @@ public class DisplayCommand extends Command {
                 counter++;
             }
         }
-        this.setOutput(ui.print());
+        this.setOutput(ui.getOutput());
         storage.saveTasks(taskList.getTasks());
     }
 }

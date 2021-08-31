@@ -42,7 +42,7 @@ public class DeleteCommand extends Command {
         ui.add("  " + taskList.get(this.index));
         taskList.delete(index);
         ui.add(String.format("Now you have %d task(s) in the list.", taskList.size()));
-        this.setOutput(ui.print());
+        this.setOutput(ui.getOutput());
         storage.saveTasks(taskList.getTasks());
     }
 }

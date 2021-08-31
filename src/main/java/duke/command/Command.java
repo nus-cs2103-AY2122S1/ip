@@ -17,10 +17,18 @@ import duke.task.TaskList;
 public abstract class Command {
     private String output;
 
+    /**
+     * Returns the output to this command after being executed.
+     * 
+     * @return Returns the output to this command after being executed.
+     */
     public String getOutput() {
         return this.output;
     }
 
+    /**
+     * Sets the output of this command to the specified string argument.
+     */
     public void setOutput(String string) {
         this.output = string;
     }

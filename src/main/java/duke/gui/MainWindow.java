@@ -40,7 +40,8 @@ public class MainWindow extends AnchorPane {
     }
 
     public void printStartUpMessage() {
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.getUI().printStartUpMessage(), dukeImage));
+        dialogContainer.getChildren()
+                .addAll(DialogBox.getDukeDialog(duke.getUI().getStartUpMessage(), dukeImage));
     }
 
     /**

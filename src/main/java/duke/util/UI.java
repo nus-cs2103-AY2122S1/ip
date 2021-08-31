@@ -14,63 +14,64 @@ import duke.exception.DukeException;
  */
 public class UI {
     private final String tab;
-    private final String horizontalLine;
-    private final List<String> list;
+    private final List<String> outputLines;
 
     /**
      * Creates and initalizes a new UI instance.
      */
     public UI() {
         this.tab = " ".repeat(4);
-        this.horizontalLine = "_".repeat(60);
-        this.list = new ArrayList<>();
+        this.outputLines = new ArrayList<>();
     }
 
     /**
-     * Prints a start-up message to standard output.
+     * Returns the start-up message of Duke.
+     * 
+     * @return Return the String start-up message of Duke.
      */
-    public String printStartUpMessage() {
+    public String getStartUpMessage() {
         add("Hello! I'm Duke");
         add("What can I do for you?");
-        return print();
+        return getOutput();
     }
 
     /**
-     * Prints the error message of the specified exception.
+     * Returns the error message of the specified exception.
      *
      * @param ex The exception whose error messages will be printed.
+     * @return Returns the String error message of the specified duke exception.
      */
-    public String printErrorMessage(DukeException ex) {
+    public String getErrorMessage(DukeException ex) {
         add(ex.getMessage());
         for (String line : ex.getHelpMessages()) {
             add(line);
         }
-        return print();
+        return getOutput();
     }
 
     /**
-     * Appends the line of output to the list of lines to be printed.
+     * Appends the line of output to the list of output lines.
      *
-     * @param line The string to be appended to the list.
+     * @param line The string to be appended to the output lines.
      */
     public void add(String line) {
-        this.list.add(line);
+        this.outputLines.add(line);
     }
 
     /**
-     * Clears the list containing lines to be printed.
+     * Clears the list of output lines.
      */
     public void clear() {
-        this.list.clear();
+        this.outputLines.clear();
     }
 
     /**
-     * Prints all lines in the list of lines to be printed,
-     * then clears the list.
+     * Returns the output as a single string,
+     * then clears the output list.
      */
-    public String print() {
+    public String getOutput() {
         String output = "";
-        for (String line : list) {
+        for (String line : outputLines) {
             output += tab + " " + line + "\n";
         }
         clear();

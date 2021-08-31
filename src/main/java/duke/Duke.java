@@ -66,7 +66,7 @@ public class Duke {
             isExit = command.isExit();
             return command.getOutput();
         } catch (DukeException ex) {
-            return ui.printErrorMessage(ex);
+            return ui.getErrorMessage(ex);
         } catch (IOException ex) {
             return ex.getMessage();
         }

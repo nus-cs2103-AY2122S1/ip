@@ -27,7 +27,7 @@ public class ExitCommand extends Command {
      */
     public void execute(TaskList taskList, UI ui, Storage storage) throws IOException {
         ui.add("Bye. Hope to see you again soon!");
-        this.setOutput(ui.print());
+        this.setOutput(ui.getOutput());
         storage.saveTasks(taskList.getTasks());
     }
 
