@@ -1,6 +1,12 @@
 package duke;
 
+import java.io.EOFException;
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.Objects;
+
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,117 +19,34 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.EOFException;
-import java.io.IOException;
-import java.util.Scanner;
-
 /**
  * Main class of the Duke chat-bot. When the main class is run, it creates an
  * instance of Duke which allows text-based user interaction.
  */
 public class Duke extends Application {
-    private final Ui ui;
-    private final Scanner sc = new Scanner(System.in);
     private final Storage storage;
+    private final Image userImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/DaUser.jpg")));
+    private final Image dukeImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/DaDuke.jpg")));
     private TaskList tasks = new TaskList();
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     /**
      * Class constructor for Duke.
      */
     public Duke() {
-        ui = new Ui();
         storage = new Storage("duke.txt");
-    }
-
-    /**
-     * Point of entry through which Duke can be run.
-     *
-     * @param args The commandline arguments.
-     */
-    public static void main(String[] args) {
-        new Duke().run();
-    }
-
-    /**
-     * Loads the save file and begins to accept user input.
-     */
-    public void run() {
-        try {
-            tasks = storage.readSave();
-        } catch (EOFException e) {
-            ui.showNewSave();
-        } catch (IOException | ClassNotFoundException e) {
-            ui.showReadSaveError();
-        }
-        ui.showIntro();
-        outer:
-        while (true) {
-            String userEntry = sc.nextLine();
-            Command command;
-            try {
-                command = Parser.parseUserInput(userEntry);
-            } catch (DukeException e) {
-                ui.print(e.toString());
-                continue;
-            }
-            Task task;
-            switch (command.getOperation()) {
-            case "bye":
-                ui.showOutro();
-                try {
-                    storage.writeSave(tasks);
-                } catch (IOException e) {
-                    ui.showWriteSaveError();
-                }
-                break outer;
-            case "list":
-                ui.showTasks(tasks);
-                break;
-            case "done":
-                task = tasks.get(command.getIndex() - 1);
-                task.setDone(true);
-                ui.showDone(task);
-                break;
-            case "todo":
-                task = new ToDo(command.getDescription());
-                tasks.add(task);
-                ui.showAdded(task, tasks.size());
-                break;
-            case "deadline":
-                task = new Deadline(command.getDescription(), command.getTime());
-                tasks.add(task);
-                ui.showAdded(task, tasks.size());
-                break;
-            case "event":
-                task = new Event(command.getDescription(), command.getTime());
-                tasks.add(task);
-                ui.showAdded(task, tasks.size());
-                break;
-            case "delete":
-                task = tasks.get(command.getIndex() - 1);
-                tasks.delete(command.getIndex() - 1);
-                ui.showDeleted(task, tasks.size());
-                break;
-            case "find":
-                TaskList filteredTasks = tasks.find(command.getDescription());
-                ui.showMatches(filteredTasks);
-                break;
-            default:
-                break;
-            }
-        }
     }
 
     @Override
     public void start(Stage stage) {
         // Code reused from Jeffry Lum (https://se-education.org/)
+
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -162,6 +85,16 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        // Initialise and show intro message
+        try {
+            tasks = storage.readSave();
+        } catch (EOFException e) {
+            addDialogsInChatBox(dukeDialog(Ui.NEW_SAVE_STRING));
+        } catch (IOException | ClassNotFoundException e) {
+            addDialogsInChatBox(dukeDialog(Ui.READ_SAVE_STRING));
+        }
+        addDialogsInChatBox(dukeDialog(Ui.INTRO_STRING));
+
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
@@ -177,13 +110,9 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
     }
 
     private Label getDialogLabel(String text) {
@@ -194,16 +123,78 @@ public class Duke extends Application {
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                userDialog(userText),
+                dukeDialog(dukeText)
         );
         userInput.clear();
     }
 
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        Command command;
+        try {
+            command = Parser.parseUserInput(input);
+        } catch (DukeException e) {
+            return e.toString();
+        }
+        Task task;
+        switch (command.getOperation()) {
+        case "bye":
+            try {
+                storage.writeSave(tasks);
+            } catch (IOException e) {
+                return Ui.WRITE_SAVE_STRING;
+            }
+            Platform.exit();
+            return "";
+        case "list":
+            return Ui.taskListString(tasks);
+        case "done":
+            task = tasks.get(command.getIndex() - 1);
+            task.setDone(true);
+            return Ui.doneString(task);
+        case "todo":
+            task = new ToDo(command.getDescription());
+            tasks.add(task);
+            return Ui.addedString(task, tasks.size());
+        case "deadline":
+            task = new Deadline(command.getDescription(), command.getTime());
+            tasks.add(task);
+            return Ui.addedString(task, tasks.size());
+        case "event":
+            task = new Event(command.getDescription(), command.getTime());
+            tasks.add(task);
+            return Ui.addedString(task, tasks.size());
+        case "delete":
+            try {
+                task = tasks.get(command.getIndex() - 1);
+            } catch (IndexOutOfBoundsException e) {
+                return Ui.outOfBoundsString(command.getIndex());
+            }
+            tasks.delete(command.getIndex() - 1);
+            return Ui.deletedString(task, tasks.size());
+        case "find":
+            TaskList filteredTasks = tasks.find(command.getDescription());
+            return Ui.matchesString(filteredTasks);
+        default:
+            return "";
+        }
+    }
+
+    private void addDialogsInChatBox(DialogBox... dialogs) {
+        dialogContainer.getChildren().addAll(dialogs[0]);
+        if (dialogs.length != 1) {
+            addDialogsInChatBox(Arrays.copyOfRange(dialogs, 1, dialogs.length));
+        }
+    }
+
+    private DialogBox dukeDialog(String message) {
+        return DialogBox.getDukeDialog(new Label(message), new ImageView(dukeImage));
+    }
+
+    private DialogBox userDialog(String message) {
+        return DialogBox.getUserDialog(new Label(message), new ImageView(userImage));
     }
 }

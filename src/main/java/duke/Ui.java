@@ -25,7 +25,7 @@ public class Ui {
     static final String EXPECTED_DELETED_INDEX_GOT_OTHER = "The task to be deleted should be indicated its list index.";
     static final String UNRECOGNISED_OPERATION = "Sorry, I do not understand this command.";
     static final String SHOW_MATCHES_STRING = "Here are the matching tasks in your list:";
-
+    static final String INDEX_OUT_OF_BOUNDS_STRING = "Sorry, there is no task with the index number ";
 
     /**
      * Returns a string representation of the tasks in the list.
@@ -41,20 +41,40 @@ public class Ui {
         return output;
     }
 
-    private String addedString(Task task, int size) {
+    /**
+     * Returns a string to confirm that a task has been added to the list.
+     *
+     * @param task Task that has been added
+     * @param size Total number of tasks in the list
+     * @return String confirming that the task has been added
+     */
+    public static String addedString(Task task, int size) {
         return String.format("Alright, I've added this task: \n"
                         + "\t%s\n"
                         + "Now, you have %d tasks in the list.\n",
                 task, size);
     }
 
-    private String doneString(Task task) {
+    /**
+     * Returns a string to confirm that a task has marked as complete.
+     *
+     * @param task The task that has been marked as complete
+     * @return String confirming that the task has been marked as complete
+     */
+    public static String doneString(Task task) {
         return String.format("Certainly, I've marked this task as done: \n"
                         + "\t%s\n",
                 task);
     }
 
-    private String deletedString(Task task, int size) {
+    /**
+     * Returns a string to confirm that a task has been deleted from the list.
+     *
+     * @param task Task that has been deleted
+     * @param size Total number of tasks left in the list
+     * @return String confirming that the task has been deleted
+     */
+    public static String deletedString(Task task, int size) {
         return String.format("Certainly, I've deleted this task: \n"
                         + "\t%s"
                         + "\nNow, you have %d tasks in the list.\n",
@@ -62,95 +82,21 @@ public class Ui {
     }
 
     /**
-     * Prints a message to the console, bounded by dashed horizontal lines
-     * before and after the message.
+     * Returns a string that lists the tasks that match a particular search query.
      *
-     * @param str Message to be displayed
+     * @param filteredList A list of filtered tasks
+     * @return A string showing the list of filtered tasks
      */
-    public void print(String str) {
-        String horizontalLine = "________________________________________________________________________________";
-        System.out.println(horizontalLine);
-        System.out.println(str);
-        System.out.println(horizontalLine);
+    public static String matchesString(TaskList filteredList) {
+        return SHOW_MATCHES_STRING + "\n" + taskListString(filteredList);
     }
 
     /**
-     * Prints the intro message.
+     * Returns a string that is shown when a user tries to access a non-existent task index.
+     * @param index The index of the non-existent task that the user tried to access
+     * @return String to inform the user of index out of bounds error
      */
-    public void showIntro() {
-        print(INTRO_STRING);
-    }
-
-    /**
-     * Prints the outro message.
-     */
-    public void showOutro() {
-        print(OUTRO_STRING);
-    }
-
-    /**
-     * Prints a confirmation of the task that has been added and the number of
-     * tasks being tracked so far.
-     *
-     * @param task Task that has been added to list
-     * @param size Number of tasks in list
-     */
-    public void showAdded(Task task, int size) {
-        print(addedString(task, size));
-    }
-
-    /**
-     * Prints a message to inform the user that a task has been marked as having
-     * been completed.
-     *
-     * @param task Task that has been marked as done
-     */
-    public void showDone(Task task) {
-        print(doneString(task));
-    }
-
-    /**
-     * Prints a message to inform the user that a task has been deleted from the
-     * list, along with the number of tasks remaining.
-     *
-     * @param task Task that has been deleted from list
-     * @param size Number of remaining tasks
-     */
-    public void showDeleted(Task task, int size) {
-        print(deletedString(task, size));
-    }
-
-    /**
-     * Prints the list of tasks to the console.
-     *
-     * @param tasks List of all the tasks
-     */
-    public void showTasks(TaskList tasks) {
-        print(taskListString(tasks));
-    }
-
-    /**
-     * Prints a message to inform the user about an error in reading the save.
-     */
-    public void showReadSaveError() {
-        print(READ_SAVE_STRING);
-    }
-
-    /**
-     * Prints a message to inform the user about an error in writing the save.
-     */
-    public void showWriteSaveError() {
-        print(WRITE_SAVE_STRING);
-    }
-
-    /**
-     * Prints a message to inform the user that a new save is necessary.
-     */
-    public void showNewSave() {
-        print(NEW_SAVE_STRING);
-    }
-
-    public void showMatches(TaskList tasks) {
-        print(SHOW_MATCHES_STRING + "\n" + taskListString(tasks));
+    public static String outOfBoundsString(int index) {
+        return INDEX_OUT_OF_BOUNDS_STRING + index + ".";
     }
 }
