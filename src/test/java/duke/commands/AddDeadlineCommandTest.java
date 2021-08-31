@@ -1,9 +1,11 @@
 package duke.commands;
 
-import duke.exceptions.InvalidTimeStampException;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.InvalidTimeStampException;
+
 
 
 public class AddDeadlineCommandTest {

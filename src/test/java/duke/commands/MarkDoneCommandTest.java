@@ -1,11 +1,14 @@
 package duke.commands;
 
-import duke.exceptions.InvalidTaskNumberException;
-import duke.utils.TaskList;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.InvalidTaskNumberException;
+import duke.utils.TaskList;
+
+
 
 public class MarkDoneCommandTest {
 
@@ -23,8 +26,7 @@ public class MarkDoneCommandTest {
     public void test0Index() {
         Command command = new MarkDoneCommand("0");
         assertThrows(
-                InvalidTaskNumberException.class,
-                () -> command.execute(new TaskList(), null, null)
+                InvalidTaskNumberException.class, () -> command.execute(new TaskList(), null, null)
         );
     }
 
@@ -32,8 +34,7 @@ public class MarkDoneCommandTest {
     public void testInvalidIndex() {
         Command command = new MarkDoneCommand("1");
         assertThrows(
-                InvalidTaskNumberException.class,
-                () -> command.execute(new TaskList(), null, null)
+                InvalidTaskNumberException.class, () -> command.execute(new TaskList(), null, null)
         );
     }
 }
