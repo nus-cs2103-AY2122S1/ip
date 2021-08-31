@@ -6,6 +6,7 @@ import duke.commands.ExitCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ListCommand;
 import duke.commands.DeleteCommand;
+import duke.commands.FindCommand;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
