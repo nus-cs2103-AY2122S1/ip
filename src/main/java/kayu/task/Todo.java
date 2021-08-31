@@ -4,6 +4,7 @@ package kayu.task;
  * Represents the simplest {@link kayu.task.Task} which only has a description.
  */
 public class Todo extends Task {
+    
     /** Keyword for Todo {@link kayu.task.Task} class. */
     public static final String KEYWORD = "T";
 

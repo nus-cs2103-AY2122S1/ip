@@ -99,7 +99,7 @@ public class Storage {
     protected List<Task> decodeAll(List<String> taskLines) throws StorageException {
         List<Task> savedTaskList = new ArrayList<>();
         
-        for (String stringTask : taskLines) {
+        for (String stringTask: taskLines) {
             Task task = decodeToTask(stringTask);
             savedTaskList.add(task);
         }
