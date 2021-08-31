@@ -15,6 +15,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
+/**
+ * Encapsulates the Dialog box that is shown in the GUI.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -44,12 +47,26 @@ public class DialogBox extends HBox {
         );
     }
 
+    /**
+     * Gets the user dialog box.
+     *
+     * @param text Text that is inside the dialog box.
+     * @param img The image beside the dialog box.
+     * @return The user dialog box.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
         dialogBox.speechBubble.getStyleClass().add("user-speech-bubble");
         return dialogBox;
     }
 
+    /**
+     * Gets the jarvis dialog box.
+     *
+     * @param text Text that is inside the dialog box.
+     * @param img The image beside the dialog box.
+     * @return The jarvis dialog box.
+     */
     public static DialogBox getJarvisDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
