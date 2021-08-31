@@ -13,9 +13,8 @@ public abstract class Command {
      * Executes the user's command.
      * @param tasks Current tasklist.
      * @param ui User interface of Duke.
-     * @param storage Storage object which updates the local file.
      * @return String output result of user's command.
      * @throws UserInputError
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws UserInputError;
+    public abstract String execute(TaskList tasks, Ui ui) throws UserInputError;
 }

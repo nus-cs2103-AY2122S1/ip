@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 /**
  * The Storage class that deals with loading tasks from a file and saving tasks to a file.
@@ -45,15 +46,15 @@ public class Storage {
     /**
      * Write current ist of tasks into the database.
      *
-     * @param list Arraylist of tasks needed to be written to database.
+     * @param tasklist Tasklist of current tasks.
      */
-    public static void writeDatabase(ArrayList<Task> list) {
+    public static void writeDatabase(TaskList tasklist) {
         Path filePath = Paths.get(System.getProperty("user.dir"), "database", "database.txt");
         Path dirPath = Paths.get(System.getProperty("user.dir"), "database");
 
         try {
             StringBuilder db = new StringBuilder();
-            list.forEach(x -> db.append(x.taskToString()).append(System.lineSeparator()));
+            tasklist.toArrayList().forEach(x -> db.append(x.taskToString()).append(System.lineSeparator()));
             byte[] dbByte = db.toString().getBytes();
 
             if (!Files.isDirectory(dirPath)) {

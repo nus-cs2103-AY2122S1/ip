@@ -2,7 +2,6 @@ package duke.commands;
 
 import duke.exceptions.UserInputError;
 import duke.tasks.TaskList;
-import duke.util.Storage;
 import duke.util.Ui;
 
 public class FindCommand extends Command {
@@ -12,7 +11,7 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws UserInputError {
+    public String execute(TaskList tasks, Ui ui) throws UserInputError {
         StringBuilder op = new StringBuilder();
 
         for (int i = 0; i < tasks.length(); i++) {
