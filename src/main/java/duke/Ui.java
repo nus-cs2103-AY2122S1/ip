@@ -1,7 +1,5 @@
 package duke;
 
-import duke.Task;
-import duke.TaskList;
 
 import java.util.Scanner;
 
@@ -11,58 +9,41 @@ public class Ui {
     public Ui() {
     }
 
-
-    public void showWelcome() {
-        System.out.println("*******************************************");
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-        System.out.println("*******************************************");
+    public String showExitMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
-    public void showExitMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("*******************************************");
-    }
-
-    public void showLoadingError() {
-        System.out.println("There is a problem loading saved data.");
-        System.out.println("*******************************************");
+    public String showLoadingError() {
+        return "There is a problem loading saved data.";
     }
     
-    public void showAddTask(Task task, int numOfTasks) {
-        System.out.println("Got it. I've added this task:\n  "
+    public String showAddTask(Task task, int numOfTasks) {
+        return "Got it. I've added this task:\n  "
                 + task.toString() + "\nNow you have " + numOfTasks
-                + " task(s) in the list.");
-        System.out.println("*******************************************");
+                + " task(s) in the list.";
     }
 
-    public void showDeleteTask(Task task, int numOfTasks) {
-        System.out.println("Noted. I've removed this task:\n  "
+    public String showDeleteTask(Task task, int numOfTasks) {
+        return "Noted. I've removed this task:\n  "
                 + task.toString() + "\nNow you have " + numOfTasks
-                + " task(s) in the list.");
-        System.out.println("*******************************************");
+                + " task(s) in the list.";
     }
 
-    public void showTaskList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(tasks.toString());
-        System.out.println("*******************************************");
+    public String showTaskList(TaskList tasks) {
+        return "Here are the tasks in your list:" + tasks.toString();
     }
 
-    public void showFoundTasks(TaskList tasks) {
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(tasks.toString());
-        System.out.println("*******************************************");
+    public String showFoundTasks(TaskList tasks) {
+        return "Here are the matching tasks in your list:" + tasks.toString();
     }
 
-    public void showTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n  "
-                + task.toString());
-        System.out.println("*******************************************");
+    public String showTaskDone(Task task) {
+        return "Nice! I've marked this task as done:\n  "
+                + task.toString();
     }
 
-    public void showError(String s) {
-        System.out.println(s);
-        System.out.println("*******************************************");
+    public String showError(String s) {
+        return s;
     }
 
     public boolean hasUserInput() {

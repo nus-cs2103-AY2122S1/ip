@@ -9,12 +9,12 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             int taskNum = Integer.parseInt(userInput.substring(5));
             Task curr = tasks.getTask(taskNum - 1);
             curr.markAsDone();
-            ui.showTaskDone(curr);
+            return ui.showTaskDone(curr);
         } catch (NumberFormatException nfe) {
             throw new DukeException("Please only enter an integer after command 'done'!");
         } catch (IndexOutOfBoundsException e) {

@@ -5,8 +5,8 @@ public class ExitCommand implements Command {
         super();
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showExitMessage();
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showExitMessage();
     };
 
     public boolean isExit() {

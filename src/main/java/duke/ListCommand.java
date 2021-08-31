@@ -5,8 +5,8 @@ public class ListCommand implements Command {
         super();
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showTaskList(tasks);
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showTaskList(tasks);
     };
 
     public boolean isExit() {

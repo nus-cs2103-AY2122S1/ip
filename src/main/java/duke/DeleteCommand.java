@@ -9,12 +9,12 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String getResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             int taskNum = Integer.parseInt(userInput.substring(7));
             Task curr = tasks.removeTask(taskNum - 1);
-            ui.showDeleteTask(curr, tasks.numOfTasks());
             storage.saveTasks(tasks);
+            return ui.showDeleteTask(curr, tasks.numOfTasks());
         } catch (NumberFormatException nfe) {
             throw new DukeException("Please only enter an integer after command 'delete'!");
         } catch (IndexOutOfBoundsException e) {
@@ -26,4 +26,5 @@ public class DeleteCommand implements Command {
     public boolean isExit() {
         return false;
     }
+
 }
