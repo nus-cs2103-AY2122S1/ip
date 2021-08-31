@@ -68,4 +68,14 @@ public class Parser implements IParser {
         System.out.println("\t" + "____________________________________________________________");
         return parseLine(line);
     }
+
+    /**
+     * Function implementation that allows Parser to take the next command from UI and return chatbot response.
+     *
+     * @return True if the command entered is not bye.
+     */
+    @Override
+    public boolean getResponse(String input) {
+        return parseLine(input);
+    }
 }

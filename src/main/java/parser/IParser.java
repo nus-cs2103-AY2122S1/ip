@@ -18,4 +18,11 @@ public interface IParser {
      * @return True if the command entered is not bye.
      */
     boolean nextLine();
+
+    /**
+     * Function that allows Parser to take the next command from UI and return chatbot response.
+     *
+     * @return True if the command entered is not bye.
+     */
+    boolean getResponse(String input);
 }
