@@ -10,15 +10,13 @@ import java.util.ArrayList;
  * Text UI of the application.
  */
 public class Ui {
-    public static final String DIVIDER = "=================================";
 
     /**
      * Generates and prints the welcome message upon the start of the application.
      */
     public static String showWelcomeMessage() {
-        String welcomeMsg = "Hello from Duke! \n"
+        return "Hello from Duke! \n"
                 + "What do you need to do today?";
-        return welcomeMsg;
     }
 
     /**
@@ -45,8 +43,7 @@ public class Ui {
      * @param list the tasklist that is added unto
      */
     public static String showAddedTask(TaskList list) {
-        String addedTask = String.format("added: %s\n", list.getTask(list.count()));
-        return addedTask;
+        return String.format("added: %s\n", list.getTask(list.count()));
     }
 
     /**
@@ -55,8 +52,7 @@ public class Ui {
      * @param task the deleted task
      */
     public static String showDeletedTask(Task task) {
-        String deletedTask = "Got it! I've removed this task: \n" + task;
-        return deletedTask;
+        return "Got it! I've removed this task: \n" + task;
     }
 
     /**
@@ -65,8 +61,7 @@ public class Ui {
      * @param task the completed task
      */
     public static String showDoneTask(Task task) {
-        String completedTask = "Good job! I've marked this task as done: \n" + task;
-        return completedTask;
+        return "Good job! I've marked this task as done: \n" + task;
     }
 
     /**
@@ -75,8 +70,7 @@ public class Ui {
      * @param tasks the tasklist
      */
     public static String showTaskCount(TaskList tasks) {
-        String taskCount = String.format("Now you have %d tasks in your list.%n%n", tasks.count());
-        return taskCount;
+        return String.format("Now you have %d tasks in your list.%n%n", tasks.count());
 
     }
 
@@ -99,12 +93,12 @@ public class Ui {
         if (results.isEmpty()) {
             return "Sorry, no matches found :(";
         } else {
-            String searchResults = "Here are the matching tasks in your list: \n";
+            StringBuilder searchResults = new StringBuilder("Here are the matching tasks in your list: \n");
             int index = 1;
             for (Task item : results) {
-                searchResults += index + ". " + item;
+                searchResults.append(index).append(". ").append(item);
             }
-            return searchResults;
+            return searchResults.toString();
         }
     }
 }
