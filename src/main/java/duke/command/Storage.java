@@ -17,9 +17,15 @@ public class Storage {
     private File src;
     private TaskList taskList;
 
-    public Storage(String path, TaskList taskList) {
+    /**
+     * Constructor of Storage class asking for a filePath and a taskList
+     *
+     * @param filePath The path of the input file.
+     * @param taskList The TaskList stored tasks' information.
+     */
+    public Storage(String filePath, TaskList taskList) {
         try {
-            this.src = new File(path);
+            this.src = new File(filePath);
             this.taskList = taskList;
             if (this.src.createNewFile()) {
                 System.out.println("I have created a new file for you :)");
@@ -29,6 +35,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Deals with updating the tasks file when taskList is modified.
+     */
     public void modifyTasks() {
         try {
             FileWriter fileWriter = new FileWriter(this.src);
@@ -50,6 +59,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads through the src file and update the taskList.
+     *
+     * @param sc The scanner for the src file.
+     */
     public void readEvents(Scanner sc) {
         while (sc.hasNextLine()) {
             String task = sc.nextLine();
@@ -85,6 +99,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Adds new task to the file when it is added to the taskList.
+     * @param task
+     */
     public void saveNewTask(Task task) {
         try {
             FileWriter fileWriter = new FileWriter(this.src, true);
@@ -95,6 +113,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads tasks saved on the src file.
+     */
     public void loadSavedTasks() {
         try {
             Scanner sc = new Scanner(src);

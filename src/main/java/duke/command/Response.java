@@ -6,11 +6,12 @@ import duke.task.Task;
 import java.util.List;
 
 /**
- * Dealing with responding user's input on the command line.
+ * Dealing with responding user's input. Return corresponding response
  */
 public class Response {
-    private TaskList taskList;
+    private final TaskList taskList;
     private StringBuilder builder;
+
     /**
      * Constructor of Ui.
      *
@@ -21,7 +22,7 @@ public class Response {
     }
 
     /**
-     * Store welcome message in a StringBuilder and return it.
+     * Stores welcome message in a StringBuilder and return it.
      *
      * @return StringBuilder that contains the welcome message.
      */
@@ -41,7 +42,7 @@ public class Response {
     }
 
     /**
-     * Return a StringBuilder that contains new message when a task is marked as done.
+     * Returns a StringBuilder that contains new message when a task is marked as done.
      *
      * @param itemDone The number of the item that user want to mark as done.
      * @return return a StringBuilder contains the message that a task is marked as done.
@@ -54,7 +55,7 @@ public class Response {
     }
 
     /**
-     * Return a StringBuilder that contains Goodbye message.
+     * Returns a StringBuilder that contains Goodbye message.
      *
      * @return return a StringBuilder contains the message that the programme has end.
      */
@@ -65,7 +66,7 @@ public class Response {
     }
 
     /**
-     * Store tasks information in a StringBuilder and return it.
+     * Stores tasks information in a StringBuilder and return it.
      *
      * @return Return a StringBuilder that contains information of the current tasks stored in the list.
      */
@@ -79,7 +80,7 @@ public class Response {
     }
 
     /**
-     * Store new message when user want to delete a task in a StringBuilder and return it.
+     * Stores new message when user want to delete a task in a StringBuilder and return it.
      *
      * @param deletedTask The task that user want to delete
      * @return Return a StringBuilder that contains the delete task message.
@@ -93,7 +94,7 @@ public class Response {
     }
 
     /**
-     * Store new message of found lists in a StringBuilder and return it.
+     * Stores new message of found lists in a StringBuilder and return it.
      *
      * @param nums A List containing numbers of the found tasks.
      * @return Return a StringBuilder that contains the found lists.

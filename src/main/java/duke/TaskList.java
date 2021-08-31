@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Wrap out a list containing the tasks of the user.
+ * Wraps out a list containing the tasks of the user.
  */
 public class TaskList {
     private List<Task> tasks = new ArrayList<>();
 
     /**
-     * Add new task to the task list.
+     * Adds new task to the task list.
      * @param task The new task user wants to add to the list.
      */
     public void add(Task task) {
@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Return the current number of elements in the list.
+     * Returns the current number of elements in the list.
      *
      * @return The current number of elements in the list.
      */
@@ -29,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * Get the item that user wants.
+     * Gets the item that user wants.
      *
      * @param i The number of item that user wants to get.
      * @return The task that user wants to get.
@@ -39,7 +39,7 @@ public class TaskList {
     }
 
     /**
-     * Remove the task from the task list.
+     * Removes the task from the task list.
      *
      * @param i The number of the task which user wants to remove.
      * @return The removed task.

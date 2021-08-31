@@ -15,9 +15,11 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-
 import java.io.IOException;
 
+/**
+ * The dialogBox containing the dialog and photo of user of Duke. A customized HBox.
+ */
 public class DialogBox extends HBox {
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
@@ -46,14 +48,26 @@ public class DialogBox extends HBox {
         this.setHeight(dialog.getHeight());
     }
 
-
-
+    /**
+     * Returns the dialogBox containing user's input message and image.
+     *
+     * @param text User's input message.
+     * @param img User's photo.
+     * @return The dialogBox containing user's input message and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
         dialogBox.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, new CornerRadii(0), Insets.EMPTY)));
         return dialogBox;
     }
 
+    /**
+     * Returns the dialogBox containing Duke's response message and image.
+     *
+     * @param text Duke's response.
+     * @param img Duke's photo.
+     * @return The dialogBox containing Duke's response and image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
         dialogBox.flip();

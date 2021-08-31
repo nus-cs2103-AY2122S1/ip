@@ -15,7 +15,7 @@ public class Parser {
     private static final int MIN_DONE_ITEM_LENGTH = 5;
 
     /**
-     * Return whether the user's input equals to "bye".
+     * Returns whether the user's input equals to "bye".
      *
      * @param task The input of user.
      * @return Whether the user want to terminate program.
@@ -25,7 +25,7 @@ public class Parser {
     }
 
     /**
-     * Return the type of operation that user inputs.
+     * Returns the type of operation that user inputs.
      *
      * @param task The input of user.
      * @return the type of the operation that user wants.
@@ -53,7 +53,7 @@ public class Parser {
     }
 
     /**
-     * Test whether it has a valid Todo task format. If yes, return the
+     * Tests whether it has a valid Todo task format. If yes, return the
      * corresponding Todo task. Otherwise, throw a exception saying that
      * it is not valid.
      *
@@ -70,7 +70,7 @@ public class Parser {
     }
 
     /**
-     * Test whether the input operation has a valid Deadline task format. If yes, return the
+     * Tests whether the input operation has a valid Deadline task format. If yes, return the
      * corresponding Deadline task. Otherwise, throw a exception saying that it is not valid.
      *
      * @param task The input of user.
@@ -88,7 +88,7 @@ public class Parser {
     }
 
     /**
-     * Test whether the input operation has a valid Event task format. If yes, return the
+     * Tests whether the input operation has a valid Event task format. If yes, return the
      * corresponding Deadline task. Otherwise, throw a exception saying that it is not valid.
      *
      * @param task The input of user.
@@ -106,7 +106,7 @@ public class Parser {
     }
 
     /**
-     * Test whether the input operation means to delete an item. If yes, return the
+     * Tests whether the input operation means to delete an item. If yes, return the
      * corresponding item's number. Otherwise, throw a exception saying that it is not valid.
      *
      * @param task The input of user.
@@ -121,7 +121,7 @@ public class Parser {
     }
 
     /**
-     * Test whether the input operation means to mark item as done. If yes, return the
+     * Tests whether the input operation means to mark item as done. If yes, return the
      * corresponding item's number. Otherwise, throw a exception saying that it is not valid.
      *
      * @param task The input of user.
