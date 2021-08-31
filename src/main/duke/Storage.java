@@ -48,7 +48,6 @@ public class Storage {
         if (isDone) {
             task.finishTask();
         }
-        System.out.println("ok");
         return task;
     }
 

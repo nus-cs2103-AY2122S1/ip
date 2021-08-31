@@ -6,7 +6,6 @@ public class TodoTask extends Task {
         super(taskCommand);
     }
 
-
     /**
      * Format task to be saved in file.
      * @return Formatted string representation of task.
