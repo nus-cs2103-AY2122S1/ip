@@ -22,7 +22,7 @@ public class EventCommand extends AddTaskCommand {
     public static final String COMMAND_WORD = "event";
 
     /**
-     * Initializes a Event- {@link kayu.commands.AddTaskCommand}.
+     * Initializes an Event- {@link kayu.commands.AddTaskCommand}.
      *
      * @param commandParams String parameters fed into the command by user.
      * @param dateTimeFormat {@link kayu.parser.DateTimeFormat} used in parsing, if required.

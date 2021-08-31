@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Represents a {@link kayu.task.Task} that has an {@link #KEYWORD} for its DateTime field.
+ * Represents a {@link kayu.task.Task} that has a {@link #KEYWORD} for its DateTime field.
  */
 public class Event extends Task {
 

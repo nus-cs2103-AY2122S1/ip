@@ -12,7 +12,7 @@ import kayu.service.TaskList;
 public class InvalidCommand extends Command {
 
     /**
-     * Initializes a InvalidCommand- {@link kayu.commands.Command}.
+     * Initializes an InvalidCommand- {@link kayu.commands.Command}.
      */
     public InvalidCommand() {
         super(INVALID);

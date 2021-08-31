@@ -12,7 +12,7 @@ import kayu.service.TaskList;
 public class EmptyCommand extends Command {
 
     /**
-     * Initializes a EmptyCommand- {@link kayu.commands.Command}.
+     * Initializes an EmptyCommand- {@link kayu.commands.Command}.
      */
     public EmptyCommand() {
         super(EMPTY);

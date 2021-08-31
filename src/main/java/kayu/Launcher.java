@@ -11,7 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Kayu using FXML.
+ * Represents and renders the GUI for Kayu using FXML.
  */
 public class Launcher extends Application {
 

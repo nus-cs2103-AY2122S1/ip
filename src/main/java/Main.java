@@ -7,7 +7,7 @@ import kayu.Launcher;
 public class Main {
 
     /**
-     * Driver function for main logic using {@link kayu.Kayu}.
+     * Driver function for main logic using {@link kayu.Kayu} and JavaFX through {@link kayu.Launcher}.
      *
      * @param args Command line arguments fed.
      */
