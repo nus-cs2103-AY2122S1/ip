@@ -7,16 +7,17 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final Scanner sc = new Scanner(System.in);
-    private static final String GREETING_MESSAGE = 
-    "Hello! I'm Duke" + "\n" + "What can I do for you?";
+    private static final String GREETING_MESSAGE = "Hello! I'm Duke"
+            + "\n"
+            + "What can I do for you?";
 
     /**
-     * Instantiats a new UI class
+     * Instantiates a new UI class.
      */
-    public Ui() {}
+    public Ui() { }
 
     /**
-     * Prints out the welcome message when user first uses the bot
+     * Prints out the welcome message when user first uses the bot.
      */
     protected void showWelcome() {
         System.out.println(GREETING_MESSAGE);
@@ -30,16 +31,16 @@ public class Ui {
     }
 
     /**
-     * Prints segmentation line 
+     * Prints segmentation line.
      */
     protected void showLine() {
         System.out.println("________________________________");
     }
 
     /**
-     * Returns user input as string to be 
-     * used in the duke bot for processing
-     * 
+     * Returns user input as string to be
+     * used in the duke bot for processing.
+     *
      * @return String of the user input
      */
     protected String readCommand() {
@@ -58,35 +59,45 @@ public class Ui {
 
     /**
      * Prints the task that is marked completed by user.
-     * 
+     *
      * @param completedMessage String of task that is completed
      */
     public void displayCompletedMessage(String completedMessage) {
-        System.out.println("Nice! I've marked this task as done:" + 
-        "\n" + completedMessage);
+        System.out.println("Nice! I've marked this task as done:"
+                + "\n"
+                + completedMessage);
     }
 
     /**
      * Prints the task that is going to be deleted by user.
-     * 
+     *
      * @param deleteMessage String of task to be deleted
      * @param taskLength Integer of length of taskList ArrayList
      */
     public void displayDeleteMessage(String deleteMessage, int taskLength) {
-        System.out.println("Noted. I've removed this task" +
-        "\n" + "Now you have " + taskLength + " tasks in the list.");
+        System.out.println("Noted. I've removed this task"
+                + "\n"
+                + "Now you have "
+                + taskLength
+                + " tasks in the list.");
     }
 
     /**
      * Prints the task that user has just specified to be stored in TaskList
-     * 
+     *
      * @param displayMessage String of task to be added to TaskList
      * @param taskLength Integer of length of taskList ArrayList
      */
-    public void displayTaskInstructions(String displayMessage, int taskLength) {
-        System.out.println("Got it. I've added this task:" + 
-        "\n" + displayMessage + "\n" + "Now you have " + taskLength + 
-        " tasks in the list.");
+    public void displayTaskInstructions(
+            String displayMessage,
+            int taskLength) {
+        System.out.println("Got it. I've added this task:"
+                + "\n"
+                + displayMessage
+                + "\n"
+                + "Now you have "
+                + taskLength
+                + " tasks in the list.");
     }
 
     /**
@@ -95,12 +106,14 @@ public class Ui {
      * @param listMessage String of the all the tasks stored in taskList
      */
     public void displayTaskList(String listMessage) {
-        System.out.println("Here are the tasks in your list:" + 
-        "\n" + listMessage);
+        System.out.println("Here are the tasks in your list:"
+                + "\n"
+                + listMessage);
     }
 
     public void displayFoundTasks(String tasksFound) {
-        System.out.println("Here are the matching tasks in your list:" + 
-        "\n" + tasksFound);
+        System.out.println("Here are the matching tasks in your list:"
+                + "\n"
+                + tasksFound);
     }
 }

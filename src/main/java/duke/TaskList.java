@@ -7,14 +7,15 @@ import duke.exceptions.DeleteOutOfBoundsException;
 
 
 /**
- * Class that keeps track of all the tasks given by the user
+ * Class that keeps track of all the tasks given by the user.
  */
 public class TaskList {
     private final ArrayList<Task> allTasks;
 
     /**
-     * Initializes the TaskList class with arraylist to store tasks in future
-     * 
+     * Initializes the TaskList class with
+     * arraylist to store tasks in future.
+     *
      * @param allTasks arraylist of tasks to be stored
      */
     public TaskList(ArrayList<Task> allTasks) {
@@ -23,15 +24,17 @@ public class TaskList {
 
     /**
      * Overloaded constructor that returns a TaskList class
-     * with no prior tasks stored, which may due to reading error from storage class
+     * with no prior tasks stored, which may due to reading
+     * error from storage class.
      */
     public TaskList() {
         this.allTasks = new ArrayList<>();
     }
 
     /**
-     * Adds a newly input task by user into the tasklist arraylist for keeping track
-     * 
+     * Adds a newly input task by user into the
+     * task arraylist for keeping track.
+     *
      * @param newTask Task object of the new task to be added
      * @return boolean whether a new task has been added to the task arraylist
      */
@@ -41,8 +44,8 @@ public class TaskList {
 
     /**
      * Returns all the tasks that users have input thus far.
-     * 
-     * @return ArrayList of all the tasks 
+     *
+     * @return ArrayList of all the tasks
      */
     public ArrayList<Task> getTaskList() {
         return allTasks;
@@ -50,11 +53,13 @@ public class TaskList {
 
     /**
      * Returns the task that user wishes to mark as completed.
-     * 
-     * @param taskNumber Integer of the position of task to be marked as completed
+     *
+     * @param taskNumber Integer of the position
+     * of task to be marked as completed
      * @return Task that is marked as completed
-     * @throws DoneOutOfBoundsException if user specify the task number to be marked done
-     * is greater than the total tasks in the tracking arraylist.
+     * @throws DoneOutOfBoundsException if user specify the task number
+     * to be marked done is greater than the total tasks in the
+     * tracking arraylist
      */
     public Task markTaskAsDone(int taskNumber) throws DoneOutOfBoundsException {
         if (taskNumber > allTasks.size()) {
@@ -70,17 +75,18 @@ public class TaskList {
 
     /**
      * Returns the task that user wishes to remove.
-     * 
-     * @param taskNumber Integer of the position of 
+     *
+     * @param taskNumber Integer of the position of
      * task to be removed from tracking arraylist.
      * @return Task that is going to be removed from tracking arraylist
-     * @throws DeleteOutOfBoundsException if user specify the task number to be deleted
-     * is greater than the total tasks in the tracking arraylist
+     * @throws DeleteOutOfBoundsException if user specify the task
+     * number to be deleted is greater than the total tasks
+     * in the tracking arraylist
      */
 
     public Task deleteTask(
             int taskNumber) throws DeleteOutOfBoundsException {
-        if (taskNumber > allTasks.size()){ 
+        if (taskNumber > allTasks.size()) {
             throw new DeleteOutOfBoundsException(allTasks.size());
         }
         return allTasks.remove(taskNumber - 1);
@@ -88,7 +94,7 @@ public class TaskList {
 
     /**
      * returns length of arraylist of tasks that are stored.
-     * 
+     *
      * @return Integer of the length of all the tasks user has input
      */
     public int getTaskListLength() {

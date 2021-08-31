@@ -7,16 +7,18 @@ import duke.date.Date;
 import java.util.Optional;
 
 /**
- * Class that specifies the properties of event task
+ * Class that specifies the properties of event task.
  */
 public class Event extends Task {
     private static final String taskDirectivePoint = "at";
-    private static final String assignmentType = AssignmentType.EVENT.getStatus();
+    private static final String assignmentType = AssignmentType.
+            EVENT.
+            getStatus();
     private static final boolean hasDateTime = true;
 
     /**
-     * Initializes event class with a description given by user
-     * 
+     * Initializes event class with a description given by user.
+     *
      * @param desc String of user input
      * @throws WrongDateFormatException if format of date in event is wrong
      * @throws WrongTimeFormatException if format of time in event is wrong
@@ -30,8 +32,8 @@ public class Event extends Task {
     }
 
     /**
-     * Initializes a new event class with a change of the completion status
-     * 
+     * Initializes a new event class with a change of the completion status.
+     *
      * @param desc String of the user input
      * @param newStatus String updated status of the task
      * @param date Optional date if date exist
@@ -41,8 +43,8 @@ public class Event extends Task {
     }
 
     /**
-     * returns new event task with its completion status updated
-     * 
+     * returns new event task with its completion status updated.
+     *
      * @param newStatus String new completion status of the event task
      */
     @Override
@@ -55,15 +57,25 @@ public class Event extends Task {
      */
     @Override
     public String getOriginalFormatForStorage() {
-        return assignmentType + this.status + " " + this.getOutputMessage(this.date.get().getOriginalFormat());
+        return assignmentType
+                + this.status
+                + " "
+                + this.getOutputMessage(
+                        this.date.
+                                get().
+                                getOriginalFormat());
     }
 
     @Override
     public String toString() {
         String outputString = this.getOutputMessage(
-                this.date.get().toString());
-        String assignmentProg = assignmentType +
-                this.status + " " + outputString;
+                this.date.
+                        get().
+                        toString());
+        String assignmentProg = assignmentType
+                + this.status
+                + " "
+                + outputString;
         return assignmentProg;
     }
 
@@ -77,8 +89,11 @@ public class Event extends Task {
             }
             sb.append(item + " ");
         }
-        return sb.toString() + "(" +
-                taskDirectivePoint + ": " +
-                dateExpression + ")";
+        return sb.toString()
+                + "("
+                + taskDirectivePoint
+                + ": "
+                + dateExpression
+                + ")";
     }
 }

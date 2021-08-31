@@ -20,8 +20,8 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 
 /**
- * Class that manages the reading from and 
- * writing to local files in the local directory
+ * Class that manages the reading from and
+ * writing to local files in the local directory.
  */
 public class Storage {
     private static final String TODO_IDENTIFIER = "T";
@@ -42,9 +42,9 @@ public class Storage {
 
 
     /**
-     * Initializes a new storage class
-     * 
-     * @param filePath String indicating the path of 
+     * Initializes a new storage class.
+     *
+     * @param filePath String indicating the path of
      * the local file to write to or read from.
      */
     public Storage(String filePath) {
@@ -63,14 +63,15 @@ public class Storage {
     }
 
     /**
-     * returns all the tasks stored in the local directory as an arraylist
-     * 
+     * returns all the tasks stored in the local directory as an arraylist.
+     *
      * @return Arraylist of Task object 
      * @throws FileNotFoundException if local file directory does not exist
-     * @throws DukeException if either the Todo, Event, Deadline task is not 
+     * @throws DukeException if either the Todo, Event, Deadline task is not
      * initialized because of a wrong input given by the user
      */
-    protected ArrayList<Task> load() throws FileNotFoundException, DukeException {
+    protected ArrayList<Task> load() throws FileNotFoundException,
+            DukeException {
         HashMap<String, Boolean> stringTasks = new HashMap<>();
         for (String tasks : allStringTasks) {
             this.storeDiskStorageInputs(tasks, stringTasks);
@@ -85,36 +86,38 @@ public class Storage {
             String fullInstructions = entry.getKey();
             String[] instructionsArray = fullInstructions.split(" ");
             String crucialInstructions = String.join(" ",
-                    Arrays.copyOfRange(instructionsArray,
-                            1, instructionsArray.length));
+                    Arrays.copyOfRange(
+                            instructionsArray,
+                            1,
+                            instructionsArray.length));
             String identity = instructionsArray[0];
             if (identity.equals(TODO_FULL_IDEN)) {
-                Task ToDoTask;
+                Task toDoTask;
                 if (entry.getValue()) {
-                    ToDoTask = new ToDo(crucialInstructions).
+                    toDoTask = new ToDo(crucialInstructions).
                             updateStatus(Status.COMPLETED.getStatus());
                 } else {
-                    ToDoTask = new ToDo(crucialInstructions);
+                    toDoTask = new ToDo(crucialInstructions);
                 }
-                finalOutputTasks.add(ToDoTask);
+                finalOutputTasks.add(toDoTask);
             } else if (identity.equals(EVENT_FULL_IDEN)) {
-                Task EventTask;
+                Task eventTask;
                 if (entry.getValue()) {
-                    EventTask = new Event(crucialInstructions).
+                    eventTask = new Event(crucialInstructions).
                             updateStatus(Status.COMPLETED.getStatus());
                 } else {
-                    EventTask = new Event(crucialInstructions);
+                    eventTask = new Event(crucialInstructions);
                 }
-                finalOutputTasks.add(EventTask);
+                finalOutputTasks.add(eventTask);
             } else if (identity.equals(DEADLINE_FULL_IDEN)) {
-                Task DeadlineTask;
+                Task deadlineTask;
                 if (entry.getValue()) {
-                    DeadlineTask = new Deadline(crucialInstructions).
+                    deadlineTask = new Deadline(crucialInstructions).
                             updateStatus(Status.COMPLETED.getStatus());
                 } else {
-                    DeadlineTask = new Deadline(crucialInstructions);
+                    deadlineTask = new Deadline(crucialInstructions);
                 }
-                finalOutputTasks.add(DeadlineTask);
+                finalOutputTasks.add(deadlineTask);
             } else {
                 String errorMsg = "No such task!";
                 throw new DukeException(errorMsg);
@@ -124,10 +127,11 @@ public class Storage {
     }
 
     /**
-     * Reads in all the task that user have keyed in to the bot 
+     * Reads in all the task that user have keyed in to the bot
      * and writes it to the local directory file.
-     * catches exception if the file does not exist and hence cannot be written to.
-     * 
+     * catches exception if the file does not
+     * exist and hence cannot be written to.
+     *
      * @param storageTaskList arraylist of task
      */
     public void updateStorageList(ArrayList<Task> storageTaskList) {
@@ -161,25 +165,37 @@ public class Storage {
             String details = String.join(" ",
                     Arrays.copyOfRange(instr, 1, instr.length));
             if (indicator.contains("X")) {
-                details = TODO_IDENTIFIER + " | 1 | " + details;
+                details = TODO_IDENTIFIER
+                        + " | 1 | "
+                        + details;
             } else {
-                details = TODO_IDENTIFIER + " | 0 | " + details;
+                details = TODO_IDENTIFIER
+                        + " | 0 | "
+                        + details;
             }
             sb.append(details + extra);
         } else if (indicator.contains(DEADLINE_IDENTIFIER)) {
             String details = this.getImptContentsOfDescription(fullInstr);
             if (indicator.contains("X")) {
-                details = DEADLINE_IDENTIFIER + " | 1 | " + details;
+                details = DEADLINE_IDENTIFIER
+                        + " | 1 | "
+                        + details;
             } else {
-                details = DEADLINE_IDENTIFIER + " | 0 | " + details;
+                details = DEADLINE_IDENTIFIER
+                        + " | 0 | "
+                        + details;
             }
             sb.append(details + extra);
         } else {
             String details = this.getImptContentsOfDescription(fullInstr);
             if (indicator.contains("X")) {
-                details = EVENT_IDENTIFIER + " | 1 | " + details;
+                details = EVENT_IDENTIFIER
+                        + " | 1 | "
+                        + details;
             } else {
-                details = EVENT_IDENTIFIER + " | 0 | " + details;
+                details = EVENT_IDENTIFIER
+                        + " | 0 | "
+                        + details;
             }
             sb.append(details + extra);
         }
@@ -191,8 +207,8 @@ public class Storage {
         String[] stringParts = input.split(" ");
         for (int i = 0; i < stringParts.length; i++) {
             String str = stringParts[i];
-            if (str.matches("[/|(a-zA-Z0-9)|-]+") &&
-                    i != stringParts.length - 1) {
+            if (str.matches("[/|(a-zA-Z0-9)|-]+")
+                    && i != stringParts.length - 1) {
                 sb.append(str + " ");
             } else if (i == stringParts.length - 1) {
                 sb.append(str.substring(0, str.length() - 1));
@@ -204,7 +220,9 @@ public class Storage {
     private void storeDiskStorageInputs(
             String input, HashMap<String, Boolean> stringStorage) {
         String[] formatted = input.trim().split("[|]+");
-        String[] trimFormatted = this.formatStringToProperInput(formatted).split(" ");
+        String[] trimFormatted = this.formatStringToProperInput(
+                formatted).
+                split(" ");
         boolean isDone = this.isTaskCompleted(trimFormatted);
         String[] finalFormatted = this.removeDigitIndicator(trimFormatted);
         String formattedIden = finalFormatted[0];
@@ -216,19 +234,22 @@ public class Storage {
     }
 
     private String[] updateToCommandConverterReadableFormat(
-            String identifier, String[] finalFormatted) {
+            String identifier,
+            String[] finalFormatted) {
         if (identifier.equals(TODO_IDENTIFIER)) {
             finalFormatted[0] = "todo";
             return finalFormatted;
         } else if (identifier.equals(EVENT_IDENTIFIER)) {
             finalFormatted[0] = "event";
             return this.addIndicator(
-                    finalFormatted, 3,
+                    finalFormatted,
+                    3,
                     INDICATOR_EVENT);
         } else {
             finalFormatted[0] = "deadline";
             return this.addIndicator(
-                    finalFormatted, 3,
+                    finalFormatted,
+                    3,
                     INDICATOR_DEADLINE);
         }
     }
@@ -238,7 +259,9 @@ public class Storage {
     }
 
     private String[] addIndicator(
-            String[] input, int index, String indicator) {
+            String[] input,
+            int index,
+            String indicator) {
         String[] output = new String[input.length + 1];
         for (int i = 0; i < output.length; i++) {
             if (i == index) {

@@ -14,7 +14,7 @@ public abstract class Command {
     /**
      * Initializes the Command class with user input
      * 
-     * @param command_description String of the user input
+     * @param commandDescription String of the user input
      */
     Command(String commandDescription) {
         this.commandDescription = commandDescription;

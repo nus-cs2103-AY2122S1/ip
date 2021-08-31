@@ -23,19 +23,19 @@ public class Parser {
     private static final String FIND_COMMAND = "find";
 
     /**
-     * Instantiates a new Parser class
+     * Instantiates a new Parser class.
      */
-    public Parser() {}
+    public Parser() { }
 
 
     /**
      * Reads the given string by the user and checks what type of command is it.
      * Returns the matching Command Object.
-     * 
-     * @param input String instructions given by the user 
+     *
+     * @param input String instructions given by the user
      * @return Command object of the relating to the input given by user
-     * @throws NoSuchCommandException If command do not fulfill the requirements of the bot
-     * and thus not recognized
+     * @throws NoSuchCommandException If command do not fulfill
+     * the requirements of the bot and thus not recognized
      */
     Command parse(String input) throws NoSuchCommandException {
         String formattedInput = input.trim();
@@ -49,11 +49,14 @@ public class Parser {
     }
 
     private Command extractSpecialCommand(
-        String commandName, String fullCommandInput, String[] commandList)
+        String commandName,
+        String fullCommandInput,
+        String[] commandList)
             throws NoSuchCommandException {
         if (commandList.length == 1) {
-            String errorMessage = "☹ OOPS!!! The description of a " +
-                    commandName + " cannot be empty.";
+            String errorMessage = "☹ OOPS!!! The description of a "
+                    + commandName
+                    + " cannot be empty.";
             throw new NoSuchCommandException(errorMessage);
         }
         String actualInputs = String.join(" ", commandList);
@@ -62,15 +65,17 @@ public class Parser {
 
 
     /**
-     * returns the respective command of the user as a Command object 
-     * 
+     * returns the respective command of the user as a Command object.
+     *
      * @param commandName String of the name of the type of the command given
      * @param fullCommandInput String of the full instructions given by user
      * @return Command of the correct type
-     * @throws NoSuchCommandException if the command given by user is not something that this bot is supposed to handle
+     * @throws NoSuchCommandException if the command given by user is not
+     * something that this bot is supposed to handle
      */
     private Command extractNormalCommand(
-        String commandName, String fullCommandInput) throws NoSuchCommandException {
+        String commandName,
+        String fullCommandInput) throws NoSuchCommandException {
         if (commandName.equals(DELETE_COMMAND)) {
             return new DeleteCommand(fullCommandInput);
         } else if (commandName.equals(LIST_COMMAND)) {
@@ -82,16 +87,18 @@ public class Parser {
         } else if (commandName.equals(FIND_COMMAND)) {
             return new FindCommand(fullCommandInput);
         }
-        String errorMessage = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        String errorMessage = "☹ OOPS!!! I'm sorry, "
+                + "but I don't know what that means :-(";
         throw new NoSuchCommandException(errorMessage);
     }
 
     /**
-     * Checks if the respective command is of todo, deadline or event 
-     * to distinguish how the command Object is to be initialized
-     * 
+     * Checks if the respective command is of todo, deadline or event
+     * to distinguish how the command Object is to be initialized.
+     *
      * @param commandName String of the command
-     * @return boolean to indicate if the command given is a todo, event, deadline or otherwise
+     * @return boolean to indicate if the command given
+     * is a todo, event, deadline or otherwise
      */
     private boolean isNormalCommandType(String commandName) {
         return (!commandName.equals(TODO_COMMAND))

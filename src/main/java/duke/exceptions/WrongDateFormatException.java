@@ -2,12 +2,11 @@ package duke.exceptions;
 
 /**
  * Class of exception that handles marking task
- * with a wrong format of date
+ * with a wrong format of date.
  */
 public class WrongDateFormatException extends DukeException {
     
-    /**
-     * Instantiates a exception that is wrong in its date format
+    /**Instantiates a exception that is wrong in its date format.
      */
 
     public WrongDateFormatException() {
