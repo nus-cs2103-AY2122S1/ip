@@ -34,7 +34,7 @@ public class Ui {
      * @return String representation of list
      */
     public static String taskListString(TaskList taskList) {
-        String output = "These are the tasks you've told me:\n";
+        String output = "Here's what I found:\n";
         for (int i = 0; i < taskList.size(); i++) {
             output += String.format("%d. %s\n", i + 1, taskList.get(i));
         }
@@ -79,16 +79,6 @@ public class Ui {
                         + "\t%s"
                         + "\nNow, you have %d tasks in the list.\n",
                 task, size);
-    }
-
-    /**
-     * Returns a string that lists the tasks that match a particular search query.
-     *
-     * @param filteredList A list of filtered tasks
-     * @return A string showing the list of filtered tasks
-     */
-    public static String matchesString(TaskList filteredList) {
-        return SHOW_MATCHES_STRING + "\n" + taskListString(filteredList);
     }
 
     /**

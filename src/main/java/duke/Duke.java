@@ -72,7 +72,7 @@ public class Duke {
             return Ui.deletedString(task, tasks.size());
         case "find":
             TaskList filteredTasks = tasks.find(command.getDescription());
-            return Ui.matchesString(filteredTasks);
+            return Ui.taskListString(filteredTasks);
         default:
             return "";
         }
