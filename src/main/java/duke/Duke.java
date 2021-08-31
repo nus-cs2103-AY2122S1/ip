@@ -1,6 +1,12 @@
 package duke;
 
+import duke.gui.DukeDialogBox;
+import duke.gui.DukeGui;
+import duke.gui.UserDialogBox;
 import duke.task.Task;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -11,7 +17,7 @@ import java.util.Scanner;
  * @author Jovyn Tan
  * @version CS2103 AY21/22 Sem 1
  */
-public class Duke implements ChatbotUI, Parser {
+public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
     private static final String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String FAREWELL_MESSAGE = "See you soon! :)";
     private static final String FAREWELL_COMMAND = "bye";
@@ -40,20 +46,54 @@ public class Duke implements ChatbotUI, Parser {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        Duke duke = new Duke("../../data/duke_storage.txt");
+        Duke duke = new Duke();
 
         duke.greet();
-        duke.taskMode();
+        duke.run();
     }
 
     /**
      * A constructor for Duke chatbot.
      */
-    public Duke(String dataStoragePath) {
+    public Duke() {
         this.taskList = new TaskList();
-        this.storage = new Storage(dataStoragePath);
+        this.storage = new Storage("../../../../data/duke_storage.txt");
         this.loadData();
         this.sc = new Scanner(System.in);
+    }
+
+
+    /**
+     * Starts the JavaFX GUI.
+     * @param stage The primary stage that JavaFX provides
+     */
+    @Override
+    public void start(Stage stage) {
+        setUpGuiComponents(stage);
+
+        // Handles user input
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+    }
+
+    /**
+     * Iteration 2:
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(taskMode(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new UserDialogBox(userText, new ImageView(user)),
+                new DukeDialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
     }
 
     /**
@@ -77,6 +117,9 @@ public class Duke implements ChatbotUI, Parser {
         this.storage.writeToFile(content);
     }
 
+    /**
+     * Handles the logic when Duke is ended.
+     */
     public void endDuke() {
         this.saveData();
         ChatbotUI.printMessage(FAREWELL_MESSAGE);
@@ -89,54 +132,43 @@ public class Duke implements ChatbotUI, Parser {
         ChatbotUI.printMessage(GREETING_MESSAGE);
     }
 
-    /**
-     * Echoes the user's input, until the user says "bye".
-     */
-    public void echo() {
-        String message = ChatbotUI.acceptUserInput(this.sc);
-        if (message.equals("bye")) {
-            ChatbotUI.printMessage(FAREWELL_MESSAGE);
-        } else {
-            ChatbotUI.printMessage(message);
-            echo();
-        }
+    public void run() {
+        String msg = ChatbotUI.acceptUserInput(this.sc).trim();
+        String output = taskMode(msg);
+        ChatbotUI.printMessage(output);
+        run();
     }
 
     /**
      * Handles the logic for managing a user's tasks.
      */
-    public void taskMode() {
-        String msg = ChatbotUI.acceptUserInput(this.sc).trim();
+    public String taskMode(String msg) {
         if (msg.equals(FAREWELL_COMMAND)) {
             this.endDuke();
-            return;
+            return "I've saved the tasks. You can close Duke now!";
         }
         try {
-            String output;
             TaskList tasks = this.taskList;
             if (msg.equals(LIST_COMMAND)) {
-                output = tasks.toString();
+                return tasks.toString();
             } else if (msg.startsWith(COMPLETE_TASK_COMMAND)) {
-                output = tasks.completeTask(Parser.getIntFrom(COMPLETE_TASK_COMMAND, msg));
+                return tasks.completeTask(Parser.getIntFrom(COMPLETE_TASK_COMMAND, msg));
             } else if (msg.startsWith(FIND_TASK_COMMAND)) {
-                output = tasks.findTasks(Parser.getStringFrom(FIND_TASK_COMMAND, msg));
+                return tasks.findTasks(Parser.getStringFrom(FIND_TASK_COMMAND, msg));
             } else if (msg.startsWith(DELETE_TASK_COMMAND)) {
-                output = tasks.deleteTask(Parser.getIntFrom(DELETE_TASK_COMMAND, msg));
+                return tasks.deleteTask(Parser.getIntFrom(DELETE_TASK_COMMAND, msg));
             } else if (msg.startsWith(CREATE_TODO_COMMAND)) {
-                output = tasks.addNewTodo(Parser.getStringFrom(CREATE_TODO_COMMAND, msg));
+                return tasks.addNewTodo(Parser.getStringFrom(CREATE_TODO_COMMAND, msg));
             } else if (msg.startsWith(CREATE_EVENT_COMMAND)) {
-                output = tasks.addNewEvent(Parser.getStringFrom(CREATE_EVENT_COMMAND, msg));
+                return tasks.addNewEvent(Parser.getStringFrom(CREATE_EVENT_COMMAND, msg));
             } else if (msg.startsWith(CREATE_DEADLINE_COMMAND)) {
-                output = tasks.addNewDeadline(Parser.getStringFrom(CREATE_DEADLINE_COMMAND, msg));
+                return tasks.addNewDeadline(Parser.getStringFrom(CREATE_DEADLINE_COMMAND, msg));
             } else {
                 throw new DukeException("I don't know what that command means." +
                         "\nPlease input a valid command.");
             }
-            ChatbotUI.printMessage(output);
         } catch (DukeException e) {
-            ChatbotUI.printMessage(e.getMessage());
-        } finally {
-            taskMode();
+            return e.getMessage();
         }
     }
 }
