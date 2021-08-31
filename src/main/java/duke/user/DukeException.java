@@ -1,7 +1,7 @@
 package duke.user;
 
 /**
- * Custom exception class which catches all Duke-specific exceptions
+ * Custom exception class which catches all Duke-specific exceptions.
  */
 public class DukeException extends Exception {
     public DukeException() {

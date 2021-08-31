@@ -20,14 +20,14 @@ import duke.task.Event;
  */
 public class Storage {
 
-    // The file that data is being written to and retrived from
+    // The file that data is being written to and retrieved from
     File dataFile;
 
     // The list of Tasks retrieved from dataFile
     ArrayList<Task> taskList = new ArrayList<>();
 
     /**
-     * Basic constructor for a Storage object
+     * Basic constructor for a Storage object.
      *
      * @param fileName the string of the file name (e.g. "Duke.txt")
      */
@@ -36,7 +36,7 @@ public class Storage {
     }
 
     /**
-     * Saves the list to the dataFile stored locally
+     * Saves the list to the dataFile stored locally.
      * Parses the tasks and separates the different parameters with " | " for ease of parsing
      */
     public void saveToFile() {
@@ -58,7 +58,7 @@ public class Storage {
     }
 
     /**
-     * Retrieves the data from the dataFile and returns it as an ArrayList of Tasks
+     * Retrieves the data from the dataFile and returns it as an ArrayList of Tasks.
      *
      * @return ArrayList representing the tasks in the dataFile
      */
@@ -66,9 +66,9 @@ public class Storage {
         try { // Make a new file if possible
             dataFile.getParentFile().mkdirs();
             if (dataFile.createNewFile()) {
-                System.out.println("New task list saved at: " + dataFile.getName());
+                //System.out.println("New task list saved at: " + dataFile.getName());
             } else {
-                System.out.println("Loading your previous task list...");
+                //System.out.println("Loading your previous task list...");
 
                 // Read the txt into the taskList arrayList
                 Scanner taskListReader = new Scanner(dataFile);

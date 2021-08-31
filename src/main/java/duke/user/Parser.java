@@ -14,7 +14,7 @@ public class Parser {
     protected TaskList taskList;
 
     /**
-     * Basic Constructor for the parser object
+     * Basic Constructor for the parser object.
      *
      * @param taskList the TaskList where all the tasks are stored
      */
@@ -24,7 +24,7 @@ public class Parser {
 
     /**
      * Checks the user input by making sure the first word is a valid command, and then calling an axillary method
-     * to further check the use of the command word
+     * to further check the use of the command word.
      *
      * @param input The String entered by the user
      * @return A String[] with each index storing the key information after the input is parsed
@@ -84,7 +84,7 @@ public class Parser {
     }
 
     /**
-     * Axillary function to check that the done command word is used correctly
+     * Axillary function to check that the done command word is used correctly.
      *
      * @param input The input String
      * @return The parsed output of the input with only the task number left (no formatting)
@@ -101,7 +101,7 @@ public class Parser {
     }
 
     /**
-     * Axillary function to check that the delete command word is used correctly
+     * Axillary function to check that the delete command word is used correctly.
      *
      * @param input The input String
      * @return The parsed output of the input with only the task number left (no formatting)
@@ -118,39 +118,53 @@ public class Parser {
     }
 
     /**
-     * Axillary function to check that the to do command word is used correctly
+     * Axillary function to check that the to do command word is used correctly.
      *
      * @param input The input String
      * @return The parsed output of the input with only the to do description left (no formatting)
      * @throws DukeException if the task number is invalid
      */
     public String checkTodo(String input) throws DukeException {
-        if (input.length() == 4) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+
+        System.out.println(input);
+
+        if (input.length() <= 5) {
+            throw new DukeException("The description of a todo cannot be empty!");
         }
+
+        if (input.charAt(5) == ' ') {
+            throw new DukeException("The description of a todo cannot be empty!");
+        }
+
         return input.substring(5);
     }
 
     /**
-     * Axillary function to check that the event command word is used correctly
+     * Axillary function to check that the event command word is used correctly.
      *
      * @param input The input String
      * @return The parsed output of the input with only the event description and date left (no formatting)
      * @throws DukeException if the format is not followed
      */
     public String checkEvent(String input) throws DukeException {
+
         // need to check that for event they use the /at properly else reject
-        if (!input.contains("/at ")) {
+        if (input.length() <= 6 || !input.contains("/at ")) {
             throw new DukeException("Please use this format: 'event <task> /at <date and time>' to specify the date and time!");
         }
         int eventDateIndex = input.indexOf("/at ") + 4;
+
         String eventDesc = input.substring(6, eventDateIndex - 4);
+        if (input.charAt(6) == ' ' || input.charAt(6) == '/') {
+            throw new DukeException("The description cannot be empty!");
+        }
+
         String eventDate = input.substring(eventDateIndex);
         return eventDesc + " | " + eventDate;
     }
 
     /**
-     * Axillary function to check that the deadline command word is used correctly
+     * Axillary function to check that the deadline command word is used correctly.
      *
      * @param input The input String
      * @return The parsed output of the input with only the deadline description, date and time left (no formatting)
@@ -175,7 +189,11 @@ public class Parser {
             LocalTime.parse(time);
             LocalDate.parse(date);
 
+            if (input.charAt(9) == ' ' || input.charAt(9) == '/') {
+                throw new DukeException("The description cannot be empty!");
+            }
             String deadlineDesc = input.substring(9, deadlineDateIndex - 4); //skip the "deadline "
+
             return deadlineDesc + " | " + date + " | " + time;
 
         } catch (DateTimeParseException | IndexOutOfBoundsException e) {
@@ -192,5 +210,6 @@ public class Parser {
         }
         return input.split(" ")[1];
     }
+
 
 }

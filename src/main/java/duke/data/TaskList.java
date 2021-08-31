@@ -5,14 +5,14 @@ import java.util.ArrayList;
 import duke.task.Task;
 
 /**
- * Represents the list of tasks that the user writes to
+ * Represents the list of tasks that the user writes to.
  */
 public class TaskList {
 
     protected ArrayList<Task> taskList;
 
     /**
-     * Constructor for the TaskList object
+     * Constructor for the TaskList object.
      *
      * @param taskList an ArrayList of tasks representing the saved task from a previous program execution
      */
@@ -21,14 +21,14 @@ public class TaskList {
     }
 
     /**
-     * Default constructor for the TaskList
+     * Default constructor for the TaskList.
      */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
     /**
-     * Returns the number of tasks in the taskList
+     * Returns the number of tasks in the taskList.
      *
      * @return the number of tasks in the taskList
      */
@@ -37,7 +37,7 @@ public class TaskList {
     }
 
     /**
-     * Gets a specific task from the taskList
+     * Gets a specific task from the taskList.
      *
      * @param index The index of the item in the taskList (0-indexed)
      * @return The task at [index] position
@@ -47,7 +47,7 @@ public class TaskList {
     }
 
     /**
-     * Removes a specific task from the taskList
+     * Removes a specific task from the taskList.
      *
      * @param task The task object in the taskList
      */
@@ -56,7 +56,7 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the taskList
+     * Adds a task to the taskList.
      *
      * @param task The task to be added to the taskList
      */

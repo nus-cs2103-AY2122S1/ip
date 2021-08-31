@@ -2,7 +2,7 @@ package duke.task;
 
 
 /**
- * Represents a generic Task which all the actual tasks inherit from
+ * Represents a generic Task which all the actual tasks inherit from.
  */
 public abstract class Task {
 

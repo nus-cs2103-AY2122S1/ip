@@ -1,0 +1,17 @@
+todo 2103T individual project
+event Welcome Tea /at at SoC
+list
+delete 1
+delete 0
+delete 10
+list
+todo
+todo done delete 1
+event Music Concert at Stadium
+done 1
+deadline do homework /by tonight
+deadline do Orbital /by 16th Aug 2359
+done 2
+delete 2
+list
+bye
