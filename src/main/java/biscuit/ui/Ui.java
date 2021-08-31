@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    Scanner scanner;
+    private final Scanner scanner;
 
     /**
      * Constructs Ui class.
@@ -40,7 +40,6 @@ public class Ui {
                 + "      ██░░░░░░██░░░░░░██░░░░░░░░░░░░░░██\n"
                 + "      ██░░░░░░██░░░░░░██░░░░░░░░░░████\n"
                 + "████████████████████████████████████████\n";
-
         System.out.println("Woof from\n" + logo);
         System.out.println("Woof! I'm Biscuit.\nWhat can I do for you?");
         showLine();

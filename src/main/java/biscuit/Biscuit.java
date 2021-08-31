@@ -1,5 +1,7 @@
 package biscuit;
 
+import java.util.ArrayList;
+
 import biscuit.commands.Command;
 import biscuit.exceptions.BiscuitException;
 import biscuit.parser.Parser;
@@ -7,7 +9,7 @@ import biscuit.storage.Storage;
 import biscuit.task.TaskList;
 import biscuit.ui.Ui;
 
-import java.util.ArrayList;
+
 
 /**
  * Biscuit is a Personal Assistant Chatbot that helps a person to keep track of various things.

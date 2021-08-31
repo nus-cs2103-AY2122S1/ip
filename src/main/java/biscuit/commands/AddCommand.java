@@ -1,5 +1,10 @@
 package biscuit.commands;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import biscuit.exceptions.BiscuitException;
 import biscuit.storage.Storage;
 import biscuit.task.Deadline;
@@ -9,15 +14,11 @@ import biscuit.task.TaskList;
 import biscuit.task.ToDo;
 import biscuit.ui.Ui;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Add command to add task.
  */
-public class AddCommand extends Command {
+public class AddCommand extends biscuit.commands.Command {
 
     /**
      * Constructs AddCommand class.
@@ -56,7 +57,8 @@ public class AddCommand extends Command {
             ui.showMessage("Got it. I've added this task:\n\t" + task
                     + "\nNow you have " + taskList.size() + " tasks in the list.");
         } else {
-            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The description of " + userInputs[0] + " cannot be empty.");
+            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The description of "
+                    + userInputs[0] + " cannot be empty.");
         }
     }
 
@@ -76,8 +78,8 @@ public class AddCommand extends Command {
                 throw new BiscuitException("Woof! Please use the date format of dd-MM-yyy (eg. 02-22-2021).");
             }
         } else {
-            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for deadline cannot be empty.\n" +
-                    "Please use the format: deadline <name> /by dd-MM-yyy");
+            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for deadline cannot be empty.\n"
+                    + "Please use the format: deadline <name> /by dd-MM-yyy");
         }
     }
 
@@ -94,11 +96,12 @@ public class AddCommand extends Command {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
                 return new Event(eventData[0].trim(), LocalDateTime.parse(eventData[1], formatter));
             } catch (DateTimeParseException e) {
-                throw new BiscuitException("Woof! Please use the date format of dd-MM-yyy HH:mm (eg. 02-22-2021 22:02).");
+                throw new BiscuitException("Woof! Please use the date format of "
+                        + "dd-MM-yyy HH:mm (eg. 02-22-2021 22:02).");
             }
         } else {
-            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for event cannot be empty.\n" +
-                    "Please use the format: event <name> /at dd-MM-yyy HH:mm");
+            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for event cannot be empty.\n"
+                    + "Please use the format: event <name> /at dd-MM-yyy HH:mm");
         }
     }
 

@@ -1,11 +1,5 @@
 package biscuit.storage;
 
-import biscuit.exceptions.BiscuitException;
-import biscuit.task.Deadline;
-import biscuit.task.Event;
-import biscuit.task.Task;
-import biscuit.task.ToDo;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +8,12 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import biscuit.exceptions.BiscuitException;
+import biscuit.task.Deadline;
+import biscuit.task.Event;
+import biscuit.task.Task;
+import biscuit.task.ToDo;
 
 /**
  * Storage class deals with loading tasks from the file and saving tasks in the file.
