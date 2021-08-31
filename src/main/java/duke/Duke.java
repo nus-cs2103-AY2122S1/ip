@@ -53,6 +53,21 @@ public class Duke {
         ui.exitMessage();
     }
 
+    public String getResponse(String message) {
+         message = sc.nextLine().strip();
+        try {
+            Command command = Parser.parseChat(message);
+            if (command == null) {
+                ui.exitMessage();
+            } else {
+                command.execute(taskList, ui);
+            }
+        } catch (DukeException e) {
+            ui.chatErrorMessage();
+        }
+
+    }
+
     /**
      * Runs the chatbot.
      */
