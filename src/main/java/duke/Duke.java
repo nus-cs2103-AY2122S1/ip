@@ -10,6 +10,9 @@ import duke.task.TaskCollection;
 import java.util.Queue;
 import java.util.LinkedList;
 
+/**
+ * Duke is the class that represents the entire command line application.
+ */
 public class Duke {
 
     public static String LOGO = " ____        _        \n"
