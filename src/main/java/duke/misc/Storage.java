@@ -66,11 +66,15 @@ public class Storage {
      */
     public void writeData(ArrayList<Task> al) throws IOException {
         if (!fileDirExists) {
-            filePath.getParent().toFile().mkdir();
+            Path parentPath = filePath.getParent();
+            File parentDir = parentPath.toFile();
+            parentDir.mkdir();
         }
         FileWriter fw = new FileWriter(filePath.toFile());
         for (int i = 1; i <= al.size(); i++) {
-            fw.write(al.get(i - 1).getData() + "\n");
+            Task task = al.get(i - 1);
+            String taskData = task.getData() + "\n";
+            fw.write(taskData);
         }
         fw.close();
     }

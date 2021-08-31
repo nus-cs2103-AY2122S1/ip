@@ -43,7 +43,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overrides Task class toString method.
+     * Overrides Task class's toString method.
      *
      * @return A String describing details of Deadline class.
      */

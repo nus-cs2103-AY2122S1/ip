@@ -52,7 +52,7 @@ public class TaskList {
      * @param task The task to be added.
      * @return The String output by toString method of task to be added.
      */
-    public String add(Task task) {
+    public String addTask(Task task) {
         tasks.add(task);
         return task.toString();
     }
@@ -80,7 +80,7 @@ public class TaskList {
      * @return The String output by toString method of task to be added.
      * @throws DukeException In case index of task is out of bounds.
      */
-    public String complete(int idx) throws DukeException {
+    public String completeTask(int idx) throws DukeException {
         if (idx <= 0 || idx > tasks.size()) {
             throw new InvalidIndexException();
         }

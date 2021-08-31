@@ -13,7 +13,7 @@ class TaskListTest {
     void testDelete() {
         TaskList tl = new TaskList();
         Todo task = new Todo("bake cake");
-        tl.add(task);
+        tl.addTask(task);
         try {
             assertEquals(task.toString(), tl.delete(1));
         } catch (DukeException e) {
@@ -24,7 +24,7 @@ class TaskListTest {
     @Test
     void testComplete() {
         try {
-            assertEquals("test", new TaskList().complete(1));
+            assertEquals("test", new TaskList().completeTask(1));
             fail();
         } catch (DukeException e) {
             assertEquals("duke.exception.InvalidIndexException: Sorry >.< but this task does not exist!",

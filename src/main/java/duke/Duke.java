@@ -33,7 +33,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            return p.execute(input, tl);
+            return p.executeCommand(input, tl);
         } catch (DukeException | IOException e) {
             return e.toString();
         }

@@ -27,40 +27,40 @@ public class Parser {
     public Task makeTask(String input) throws DukeException {
         int idx = input.indexOf(' ');
         String commandType = "";
-        String[] arguments = {};
+        String[] args = {};
         if (idx >= 0) {
             commandType = input.substring(0, idx).trim();
-            arguments = input.substring(idx + 1).split("/");
-            for (int i = 0; i < arguments.length; i++) {
-                arguments[i] = arguments[i].trim();
+            args = input.substring(idx + 1).split("/");
+            for (int i = 0; i < args.length; i++) {
+                args[i] = args[i].trim();
             }
         }
         switch(commandType) {
         case "todo":
-            return new Todo(arguments[0]);
+            return new Todo(args[0]);
         case "event":
             if (!input.matches("event [\\s\\S]+/[\\s\\S]+")) {
                 throw new InvalidFormatException();
             }
-            if (DateTime.isInvalidDate(arguments[1])) {
+            if (DateTime.isInvalidDate(args[1])) {
                 throw new InvalidDateException();
             }
-            return new Event(arguments[0], arguments[1]);
+            return new Event(args[0], args[1]);
         case "deadline":
             if (!input.matches("deadline [\\s\\S]+/[\\s\\S]+")) {
                 throw new InvalidFormatException();
             }
-            if (DateTime.isInvalidDate(arguments[1])) {
+            if (DateTime.isInvalidDate(args[1])) {
                 throw new InvalidDateException();
             }
-            return new Deadline(arguments[0], arguments[1]);
+            return new Deadline(args[0], args[1]);
         default:
             throw new InvalidCommandException();
         }
     }
 
     /**
-     * Determines the action to be executed according to user command.
+     * Executes the appropriate action according to user command.
      *
      * @param input User's command input.
      * @param tl TaskList which action is executed on.
@@ -68,7 +68,7 @@ public class Parser {
      * @throws DukeException In case of errors.
      * @throws IOException In case of Invalid directory.
      */
-    public String execute(String input, TaskList tl) throws DukeException, IOException {
+    public String executeCommand(String input, TaskList tl) throws DukeException, IOException {
         String prefix = input;
         String suffix = "";
         int idx = input.indexOf(' ');
@@ -90,23 +90,23 @@ public class Parser {
             return Ui.LIST_MSG + tl.displayList();
         case "done":
             try {
-                idx = Integer.parseInt(suffix);
+                int taskIdx = Integer.parseInt(suffix);
+                return Ui.DONE_MSG + tl.completeTask(taskIdx);
             } catch (NumberFormatException e) {
                 throw new InvalidIndexException();
             }
-            return Ui.DONE_MSG + tl.complete(idx);
         case "delete":
             try {
-                idx = Integer.parseInt(suffix);
+                int taskIdx = Integer.parseInt(suffix);
+                return Ui.DELETE_MSG + tl.delete(taskIdx);
             } catch (NumberFormatException e) {
                 throw new InvalidIndexException();
             }
-            return Ui.DELETE_MSG + tl.delete(idx);
         case "find":
             return Ui.FIND_MSG + tl.find(suffix);
         default:
             Task task = makeTask(input);
-            return Ui.ADD_MSG + tl.add(task);
+            return Ui.ADD_MSG + tl.addTask(task);
         }
     }
 }
