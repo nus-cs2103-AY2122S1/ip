@@ -13,6 +13,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * A class to handle all the GUI/JavaFX portion of Duke
+ */
 public class Gui {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -22,7 +25,7 @@ public class Gui {
     private Duke duke;
 
     /**
-     * Start the GUI application of Duke.
+     * Starts the GUI application of Duke.
      *
      * @param stage The stage passed on by Duke start()
      * @param duke Duke instance that was used to call this method
@@ -84,7 +87,7 @@ public class Gui {
     }
 
     /**
-     * Handle the text input by the user.
+     * Handles the text input by the user.
      */
     private void handleUserInput() {
         DialogBox userText = DialogBox.getUserDialog(this.userInput.getText());

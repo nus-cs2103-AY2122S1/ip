@@ -31,14 +31,14 @@ public class Duke extends Application {
     }
 
     /**
-     * Handle the saving of the TaskList's data by calling the saveData
+     * Handles the saving of the TaskList's data by calling the saveData
      */
     public void saveDataToFile() {
         this.storage.saveData(this.list);
     }
 
     /**
-     * Return the User's string input after it was parsed by the parser
+     * Returns the User's string input after it was parsed by the parser
      *
      * @param input the String that is to be parsed
      * @return The Duke's String response of the user's input

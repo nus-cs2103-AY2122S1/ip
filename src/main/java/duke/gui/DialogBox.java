@@ -8,6 +8,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
+/**
+ * Class to encapsulate each response dialogue box in Duke's GUI
+ */
 public class DialogBox extends HBox {
     private Label text;
 
@@ -36,7 +39,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return the DialogBox corresponding to Duke's respond.
+     * Returns the DialogBox corresponding to Duke's respond.
      *
      * @param s The String inputted by the user
      * @return The DialogBox with the user input
@@ -59,7 +62,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Return the DialogBox corresponding to Duke's respond. Duke's DialogBox is flipped
+     * Returns the DialogBox corresponding to Duke's respond. Duke's DialogBox is flipped
      * that of the user's DialogBox.
      *
      * @param s The String returned from Duke that is to be displayed to the user
