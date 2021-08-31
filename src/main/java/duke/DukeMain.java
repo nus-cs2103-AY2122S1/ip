@@ -1,12 +1,12 @@
 package duke;
 
-import duke.classes.TaskList;
-import duke.exceptions.DukeException;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+
+import duke.classes.TaskList;
+import duke.exceptions.DukeException;
 
 public class DukeMain {
 
@@ -57,7 +57,7 @@ public class DukeMain {
                 ui.printDateTimeError();
             }
         }
-        try{
+        try {
             storage.saveList(taskList);
         } catch (IOException e) {
             System.out.println("A file error occurred.");

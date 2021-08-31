@@ -1,9 +1,5 @@
 package duke;
 
-import duke.classes.TaskList;
-import duke.exceptions.DukeException;
-import duke.tasks.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,12 +8,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.classes.TaskList;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 public class DukeStorage {
     /**
      * Class Constructor
      */
     public DukeStorage(){
-    };
+    }
 
     /**
      * Retrieves file indicated in the String and writes it into a List of Tasks.
@@ -36,12 +39,12 @@ public class DukeStorage {
 
                 //Logic to piece through task strings
                 String[] words = data.split(" ");
-                boolean isDone = words[1].equals("X") ? true : false;
+                boolean isDone = words[1].equals("X");
                 String desc = "";
                 for (int i = 2; i < words.length - 1; i++) {
                     desc += words[i] + " ";
                 }
-                desc.trim();
+                desc = desc.trim();
 
                 if (words[0].equals("T")) {
                     //Task is a toDo
@@ -55,7 +58,7 @@ public class DukeStorage {
                     //Task is a Deadline
                     taskList.add(new Deadline(desc, words[words.length - 1], isDone));
                 } else {
-                    throw new DukeException("Invalid Fileformat");
+                    throw new DukeException("Invalid FileFormat");
                 }
             }
             listScanner.close();
@@ -65,17 +68,16 @@ public class DukeStorage {
 
     /**
      * Saves the list to a local file. If the file is not present, function creates the file as well
-     * @param tasklist List to save to the file
+     * @param taskList List to save to the file
      * @throws IOException Thrown if there is an issue creating, retrieving or writing the file
      */
-    public void saveList(TaskList tasklist) throws IOException {
-            File savedList = new File("localList.txt");
-            FileWriter listWriter = new FileWriter(savedList);
-            // Task format: [Type] [isDone] [Description] [Time/Deadline (if applicable)]
-            for (Task tsk : tasklist.getTaskList()) {
-                listWriter.write(tsk.toFileString() + "\n");
-            }
-            listWriter.close();
-
+    public void saveList(TaskList taskList) throws IOException {
+        File savedList = new File("localList.txt");
+        FileWriter listWriter = new FileWriter(savedList);
+        // Task format: [Type] [isDone] [Description] [Time/Deadline (if applicable)]
+        for (Task tsk : taskList.getTaskList()) {
+            listWriter.write(tsk.toFileString() + "\n");
+        }
+        listWriter.close();
     }
 }

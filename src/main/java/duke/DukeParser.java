@@ -1,8 +1,6 @@
 package duke;
 
-import duke.classes.TaskList;
-import duke.exceptions.DukeException;
-import duke.tasks.*;
+import static java.lang.Integer.parseInt;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,7 +8,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static java.lang.Integer.parseInt;
+import duke.classes.TaskList;
+import duke.exceptions.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 public class DukeParser {
     //List of enum keywords
@@ -160,43 +163,45 @@ public class DukeParser {
         }
 
         switch (key) {
-            case list:
-                ui.printList(taskList);
-                break;
-            case todo:
-                taskList.add(new ToDo(desc));
-                ui.printTask(taskList);
-                break;
-            case deadline:
-                taskList.add(new Deadline(desc, time));
-                ui.printTask(taskList);
-                break;
-            case event:
-                taskList.add(new Event(desc, time));
-                ui.printTask(taskList);
-                break;
-            case done:
-                if (index >= taskList.size()) {
-                    throw new DukeException("!!! The number you input exceeds the size of the list !!!");
-                }
-                taskList.completeTask(index);
-                ui.completeTask(taskList.get(index));
-                break;
-            case delete:
-                if (index >= taskList.size()) {
-                    throw new DukeException("!!! The number you input exceeds the size of the list !!!");
-                }
-                Task task = taskList.remove(index);
-                ui.removeTask(task, taskList.size());
-                break;
-            case find:
-                ui.printFiltered(filtered);
-                break;
-            case bye:
-                return true;
-            case error:
-                throw new DukeException("!!! I'm sorry, but I don't know what that means. !!!");
+        case list:
+            ui.printList(taskList);
+            break;
+        case todo:
+            taskList.add(new ToDo(desc));
+            ui.printTask(taskList);
+            break;
+        case deadline:
+            taskList.add(new Deadline(desc, time));
+            ui.printTask(taskList);
+            break;
+        case event:
+            taskList.add(new Event(desc, time));
+            ui.printTask(taskList);
+            break;
+        case done:
+            if (index >= taskList.size()) {
+                throw new DukeException("!!! The number you input exceeds the size of the list !!!");
+            }
+            taskList.completeTask(index);
+            ui.completeTask(taskList.get(index));
+            break;
+        case delete:
+            if (index >= taskList.size()) {
+                throw new DukeException("!!! The number you input exceeds the size of the list !!!");
+            }
+            Task task = taskList.remove(index);
+            ui.removeTask(task, taskList.size());
+            break;
+        case find:
+            ui.printFiltered(filtered);
+            break;
+        case bye:
+            return true;
+        case error:
+            throw new DukeException("!!! I'm sorry, but I don't know what that means. !!!");
+        default:
+            throw new IllegalStateException("Unexpected value: " + key);
         }
-    return false;
+        return false;
     }
 }

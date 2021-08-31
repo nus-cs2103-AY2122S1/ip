@@ -1,15 +1,12 @@
 package duke;
 
+import java.util.List;
+
 import duke.classes.TaskList;
 import duke.tasks.Task;
 
-import java.util.List;
-
 public class DukeUI {
-    public DukeUI() {}
-
-    //Logo
-    static String logo = " ____        _        \n"
+    private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -24,8 +21,7 @@ public class DukeUI {
     }
 
     /**
-     * Initial Greeting from Duke
-     * Nullary Function that prints the intro message when called
+     * Initial Greeting from Duke printing greeting message
      */
     public static void greetings() {
         System.out.println(logo);

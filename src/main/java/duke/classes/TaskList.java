@@ -1,13 +1,12 @@
 package duke.classes;
 
-import duke.tasks.Task;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.tasks.Task;
+
 public class TaskList {
-    private List<Task> taskList;
+    private final List<Task> taskList;
 
     /**
      * Class Constructor

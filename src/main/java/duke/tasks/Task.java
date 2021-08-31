@@ -1,7 +1,7 @@
 package duke.tasks;
 
 public class Task {
-    enum Type {
+    protected enum Type {
         T,
         D,
         E,
@@ -50,7 +50,9 @@ public class Task {
      * Returns the task as a string format to be saved in the localList file
      * @return Task as a String in the appropriate format
      */
-    public String toFileString() { return type.toString() + " " + doneString() + " " + description;}
+    public String toFileString() {
+        return type.toString() + " " + doneString() + " " + description;
+    }
 
     /**
      * Returns the status of the task as a string
@@ -64,7 +66,9 @@ public class Task {
      * Returns X if the task is done and O if the task is undone
      * @return X or O
      */
-    public String doneString() {return (isDone ? "X" : "O");}
+    public String doneString() {
+        return (isDone ? "X" : "O");
+    }
 
     public boolean descContains(String str) {
         return description.contains(str);

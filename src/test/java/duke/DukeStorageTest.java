@@ -1,23 +1,22 @@
 package duke;
 
-import duke.exceptions.DukeException;
-import duke.tasks.*;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import duke.exceptions.DukeException;
+import duke.tasks.Task;
 
 public class DukeStorageTest {
     @Test
-    public void Test1(){
+    public void test1() {
         DukeStorage storage = new DukeStorage();
         List<Task> test = new ArrayList<>();
-        try{
+        try {
             test = storage.retrieve("test.txt");
         } catch (DukeException | FileNotFoundException e) {
             System.out.println(e.getMessage());
