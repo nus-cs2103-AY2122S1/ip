@@ -54,7 +54,7 @@ public class Duke {
     }
 
     public String getResponse(String message) {
-        message = sc.nextLine().strip();
+        message = message.strip();
         try {
             Command command = Parser.parseChat(message);
             if (command == null) {
@@ -65,7 +65,6 @@ public class Duke {
         } catch (DukeException e) {
             return ui.chatErrorMessage().toString();
         }
-
     }
 
     /**
