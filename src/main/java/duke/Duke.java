@@ -2,9 +2,11 @@ package duke;
 
 import java.util.Scanner;
 
+import duke.command.Command;
+
+
 /**
  *  This is my attempt at Duke!
- *  I have sought help from peers like Charlton Tan, Wilbur Fong and Ng Jia Yuan.
  * @author A0222594A
  *
  */
@@ -18,7 +20,6 @@ public class Duke {
 
     /**
      * Constructor for Duke
-     * @param filePath Specified file path.
      */
     public Duke(String filePath) {
         ui = new UI();
@@ -29,76 +30,12 @@ public class Duke {
 
 
     /**
-     * Calls the appropriate methods depending on what the user has input.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void start() {
-        boolean isRunning = true;
-        UI.greet();
-        String input = sc.nextLine();
+    String getResponse(String input) {
         Command command = parser.inputToCommand(input);
-        while (isRunning) {
-            switch (command) {
-            case BYE:
-                isRunning = false;
-                ui.exit();
-                break;
-            case LIST:
-                TaskList.showList();
-                break;
-            case DEADLINE:
-                try {
-                    parser.addDeadline(input);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case DELETE:
-                try {
-                    TaskList.delete(input);
-                    TaskList.update();
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case EVENT:
-                try {
-                    parser.addEvent(input);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case TODO:
-                try {
-                    parser.addTodo(input);
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            case DONE:
-                try {
-                    TaskList.markDone(input);
-                    TaskList.update();
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-                break;
-            default:
-                //If no cases above are entered,Duke will not understand the command and prompt the user.
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-            if (isRunning) {
-                input = sc.nextLine();
-                command = parser.inputToCommand(input);
-            }
-        }
+        return command.getResponse(input);
     }
 
-    /**
-     * Run Duke
-     * @param args Ignore for main method.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke("data/data.txt");
-        duke.start();
-    }
 }

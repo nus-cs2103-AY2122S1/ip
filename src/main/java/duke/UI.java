@@ -22,8 +22,8 @@ public class UI {
     /**
      * Handles the exiting or halting of Duke when the user has given the appropriate input.
      */
-    public void exit() {
+    public static String exit() {
         String exitText = "Bye. Hope to see you again soon!";
-        System.out.println(exitText);
+        return exitText;
     }
 }

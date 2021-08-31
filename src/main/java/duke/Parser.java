@@ -1,5 +1,15 @@
 package duke;
 
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.WrongCommand;
+
+
 public class Parser {
     private final TaskList dukeList;
     private final Data data;
@@ -19,88 +29,28 @@ public class Parser {
      * @param input User's input
      * @return The correct command that is interpreted from the user input.
      */
-    public static Command inputToCommand(String input) {
+    public Command inputToCommand(String input) {
         String[] inputs = input.split(" ", 2);
-        return Command.readInput(inputs[0]);
+        String command = inputs[0].toLowerCase();
+        switch (command) {
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ListCommand(dukeList);
+        case "delete":
+            return new DeleteCommand(dukeList);
+        case "done":
+            return new DoneCommand(dukeList);
+        case "find":
+            return new FindCommand(dukeList);
+        case "deadline":
+        case "event":
+        case "todo":
+            return new AddCommand(dukeList, data, command);
+        default:
+            //If no cases above are entered,Duke will not understand the command and prompt the user.
+            return new WrongCommand();
+        }
     }
 
-    /**
-     * Adds a Deadline to all Tasks that Duke has stored.
-     * @param input The entire String that the user has input i.e. "deadline Whatever /by Whenever".
-     * @throws DukeException If an incorrect input is entered.
-     */
-    public void addDeadline(String input) throws DukeException {
-        // First check if the user has only input the one word "deadline".
-        if (input.split(" ", 2).length == 1) {
-            throw new DukeException("☹ Oops! Looks like you are missing the description and the deadline date! "
-                    + "Try again :-)");
-        }
-        // If "deadline" is entered with more words, check information.
-        String[] information = input.split(" ", 2);
-        String [] description = information[1].split("/by ", 2);
-
-        //In the case where date is not entered.
-        if (description.length == 1) {
-            throw new DukeException("☹ Oops! Looks like you are missing the deadline date! Try again :-)");
-        }
-        Deadline newDL = new Deadline(description[0], description[1]);
-        dukeList.add(newDL);
-        Data.writeToFile(newDL);
-        System.out.println(UI.getAddedText()
-                + newDL.toString()
-                + "\nNow you have "
-                + TaskList.numberOfTasks()
-                + " tasks in the list");
-    }
-
-    /**
-     * Adds an DukePakage.Event to all Tasks that Duke has stored.
-     * @param input The entire String that the user has input i.e. "event Here /at There".
-     * @throws DukeException If an incorrect input is entered.
-     */
-    public void addEvent(String input) throws DukeException {
-        // First check if the user has only input the one word "event".
-        if (input.split(" ", 2).length == 1) {
-            throw new DukeException("☹ Oops! Looks like you are missing the description and the event location!"
-                    + " Try again :-)");
-        }
-        // If "event" is entered with more words, check information.
-        String[] information = input.split(" ", 2);
-        String [] description = information[1].split("/at ", 2);
-
-        //In the case where location is not entered.
-        if (description.length == 1) {
-            throw new DukeException("☹ Oops! Looks like you are missing the event location! Try again :-)");
-        }
-        Event newEV = new Event(description[0], description[1]);
-        dukeList.add(newEV);
-        Data.writeToFile(newEV);
-        System.out.println(UI.getAddedText()
-                + newEV.toString()
-                + "\nNow you have "
-                + TaskList.numberOfTasks()
-                + " tasks in the list");
-    }
-
-    /**
-     * Adds a DukePakage.Todo to all Tasks that DukePakage.Duke has stored.
-     * @param input The entire String that the user has input i.e. "todo This task".
-     * @throws DukeException If an incorrect input is entered.
-     */
-    public void addTodo(String input) throws DukeException {
-        // First check if the user has only input the one word "todo".
-        if (input.split(" ", 2).length == 1) {
-            throw new DukeException("☹ Oops! Looks like you are missing the description! Try again :-)");
-        }
-        //If "todo" is entered with more words, use the information.
-        String[] information = input.split(" ", 2);
-        Todo newTD = new Todo(information[1]);
-        dukeList.add(newTD);
-        Data.writeToFile(newTD);
-        System.out.println(UI.getAddedText()
-                + newTD.toString()
-                + "\nNow you have "
-                + TaskList.numberOfTasks()
-                + " tasks in the list");
-    }
 }
