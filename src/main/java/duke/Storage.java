@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,22 +29,18 @@ public class Storage {
     public TaskList load() throws DukeException {
         File tasks = new File(filePath);
         TaskList taskList = TaskList.emptyTaskList();
+
         if (tasks.exists()) {
             // Read tasks from text file
-            Scanner s = null;
             try {
-                s = new Scanner(tasks);
-            } catch (FileNotFoundException e) {
-                throw new DukeException("File not found!");
-            }
-            while (s.hasNext()) {
-                // Parse string to get task type, status, and description
-                String regex = "\\[(?<type>[A-Z])\\]\\[(?<status>[X\\s])\\]\\s(?<desc>.*)";
-                Pattern pattern = Pattern.compile(regex);
-                Matcher matcher = pattern.matcher(s.nextLine());
+                Scanner sc = new Scanner(tasks);
+                while (sc.hasNext()) {
+                    // Parse string to get task type, status, and description
+                    String regex = "\\[(?<type>[A-Z])\\]\\[(?<status>[X\\s])\\]\\s(?<desc>.*)";
+                    Pattern pattern = Pattern.compile(regex);
+                    Matcher matcher = pattern.matcher(sc.nextLine());
 
-                // Check task type, status, description
-                while (matcher.find()) {
+                    // Check task type, status, description
                     String type = matcher.group("type");
                     String desc = matcher.group("desc");
 
@@ -56,11 +53,14 @@ public class Storage {
                         toAdd = Event.build(desc);
                     }
 
-                    if (matcher.group("status").equals("X")) {
-                        toAdd.setDone();
+                    if (matcher.group("status").equals(Task.DONE_MARKER)) {
+                        toAdd.setDone(true);
                     }
+
                     taskList.addTask(toAdd);
                 }
+            } catch (FileNotFoundException e) {
+                throw new DukeException("File not found!");
             }
         }
         return taskList;

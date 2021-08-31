@@ -2,6 +2,9 @@ package duke.task;
 
 public class Task {
 
+    public static final String DONE_MARKER = "X";
+    public static final String NOT_DONE_MARKER = " ";
+
     protected String description;
     protected boolean isDone;
 
@@ -10,16 +13,18 @@ public class Task {
         this.isDone = false;
     }
 
-    public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
-    }
-
-    public void setDone() {
-        isDone = true;
+    public void setDone(boolean b) {
+        isDone = b;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        String marker;
+        if (isDone) {
+            marker = DONE_MARKER;
+        } else {
+            marker = NOT_DONE_MARKER;
+        }
+        return String.format("[%s] %s", marker, description);
     }
 }

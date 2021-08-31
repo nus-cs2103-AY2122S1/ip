@@ -59,6 +59,7 @@ public class Ui {
 
     public void showTasksReply(boolean isAdd, String taskDesc, int numOfTasks) {
         String end = "\nYou have " + numOfTasks +" task(s) now so get off that crack rock!";
+
         // If adding new task reply with add task message
         if (isAdd) {
             System.out.print(formatReply("Pepper Jack added this task:\n\t" + taskDesc + end));
@@ -82,6 +83,7 @@ public class Ui {
         for (String help_text : LIST_OF_COMMAND_USAGE_TEXT) {
             all_help_text = all_help_text + "\t" + help_text + "\n";
         }
+
         System.out.print(formatReply("What you sayin brah! You better start makin sense or else...\n"
                 + "*Speak in words Pepper Jack can understand*\n" + all_help_text));
     }

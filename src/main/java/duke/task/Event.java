@@ -6,11 +6,11 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
-    protected LocalDate dt;
+    protected LocalDate date;
 
-    public Event(String description, LocalDate dt) {
+    public Event(String description, LocalDate date) {
         super(description);
-        this.dt = dt;
+        this.date = date;
     }
 
     public static Event build(String desc_date) {
@@ -18,8 +18,7 @@ public class Event extends Task {
         String[] input = desc_date.split(" /at ",2);
         try {
             return new Event(input[0], LocalDate.parse(input[1]));
-        }
-        catch (DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             LocalDate d = LocalDate.parse(input[1], DateTimeFormatter.ofPattern("MMM d yyyy"));
             return new Event(input[0], d);
         }
@@ -27,6 +26,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dt.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
