@@ -208,7 +208,7 @@ public class Ui {
 //                + ")"
 //        );
 //        System.out.println("WEW that's another task completed");
-        String s = "Completed: "
+        String s = "Completed:"
                 + e.getDescription()
                 + " (by:"
                 + e.getTimeframe()
@@ -239,7 +239,7 @@ public class Ui {
 //                + d.getDeadline().format(d.getCurrentFormat()) + ")"
 //        );
 //        System.out.println("You didn't overshoot the deadline right?");
-        String s = "Completed:"
+        String s = "Completed: "
                 + d.getDescription()
                 + " (by:"
                 + d.getDeadline().format(d.getCurrentFormat()) + ")\n"
