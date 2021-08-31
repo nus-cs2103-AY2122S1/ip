@@ -1,5 +1,6 @@
 package commands;
 import exceptions.MorganException;
+import storage.Storage;
 import tasks.TaskList;
 
 /**
@@ -13,5 +14,5 @@ public abstract class Command {
      * @return The completion message after execution.
      * @throws MorganException
      */
-    public abstract String execute(TaskList taskList) throws MorganException;
+    public abstract String execute(TaskList taskList, Storage storage) throws MorganException;
 }

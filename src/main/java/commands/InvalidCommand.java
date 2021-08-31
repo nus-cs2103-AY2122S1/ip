@@ -1,5 +1,6 @@
 package commands;
 import exceptions.MorganException;
+import storage.Storage;
 import tasks.TaskList;
 
 /**
@@ -16,7 +17,7 @@ public class InvalidCommand extends Command {
      * @return The completion message after execution.
      * @throws MorganException
      */
-    public String execute(TaskList taskList) throws MorganException {
+    public String execute(TaskList taskList, Storage storage) throws MorganException {
         throw new MorganException(INVALID_COMMAND_ERROR_MESSAGE);
     }
 }

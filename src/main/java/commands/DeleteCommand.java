@@ -1,5 +1,6 @@
 package commands;
 import exceptions.MorganException;
+import storage.Storage;
 import tasks.Task;
 import tasks.TaskList;
 
@@ -42,7 +43,7 @@ public class DeleteCommand extends Command {
      * @param taskList The existing list where a task will be deleted from.
      * @return The completion message after execution.
      */
-    public String execute(TaskList taskList) throws MorganException {
+    public String execute(TaskList taskList, Storage storage) throws MorganException {
         boolean isValidTaskNumber = this.taskNumber <= taskList.getNumOfTasks()
                 && this.taskNumber > 0;
 
@@ -54,6 +55,11 @@ public class DeleteCommand extends Command {
         // Obtain task and remove
         Task task = taskList.getTask(this.taskNumber);
         taskList.remove(this.taskNumber);
+        try {
+            storage.save(taskList);
+        } catch (MorganException e) {
+            throw e;
+        }
 
         // Message displayed upon execution
         return "Noted. I've removed this task:\n\t" + task.toString()

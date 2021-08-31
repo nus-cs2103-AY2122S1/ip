@@ -11,66 +11,55 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import commands.Command;
 import exceptions.MorganException;
+import parser.CommandParser;
+import storage.Storage;
 import tasks.TaskList;
+
 
 public class Morgan extends Application {
     public static final String EXIT_KEYWORD = "bye";
-    private static final TaskList taskList = new TaskList();
-    private static final Ui ui = new Ui();
+    private final TaskList taskList = new TaskList();
+    private final Ui ui;
+    private final Storage storage;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image morganImage = new Image(this.getClass().getResourceAsStream("/images/Morgan.png"));
 
-    public static void main(String[] args) {
-        Morgan.run();
+    public Morgan() {
+        this.ui = new Ui();
+        this.storage = new Storage();
     }
 
-    private static void run() {
-        // Initialize Ui
-        Ui ui = new Ui();
-        ui.printStartDisplay();
+    public static void main(String[] args) {
+        Morgan morgan = new Morgan();
+        morgan.run();
+    }
 
-        // Initialize TaskList and CommandParser
+    private void run() {
         CommandParser p = new CommandParser();
-
-        try {
-            // Initialize and load storage
-            Storage s = new Storage();
-            s.load(taskList);
-
-            // Read user input and check whether input is exit keyword
-            String userInput = ui.getInput();
-            boolean isExitKeyword = userInput.trim().equalsIgnoreCase(EXIT_KEYWORD);
-            while (!isExitKeyword) {
-                try {
-                    // Obtain and execute command to retrieve output message
-                    Command command = p.getCommand(userInput);
-                    String output = command.execute(taskList);
-
-                    // Save updated task list
-                    s.save(taskList);
-
-                    // Print output message
-                    ui.print(output);
-                } catch (MorganException e) {
-                    ui.print(e.getMessage());
-                }
-
-                // Retrieves user input and check if input is exit keyword
-                userInput = ui.getInput();
-                isExitKeyword = userInput.trim().equalsIgnoreCase(EXIT_KEYWORD);
+        String userInput = this.ui.getInput();
+        boolean isExitKeyword = userInput.trim().equalsIgnoreCase(EXIT_KEYWORD);
+        while (!isExitKeyword) {
+            try {
+                Command command = p.getCommand(userInput);
+                String output = command.execute(this.taskList, this.storage);
+                this.ui.print(output);
+            } catch (MorganException e) {
+                this.ui.print(e.getMessage());
             }
 
-            // Print end display
-            ui.printEndDisplay();
-        } catch (MorganException e) {
-            ui.print(e.getMessage());
+            userInput = this.ui.getInput();
+            isExitKeyword = userInput.trim().equalsIgnoreCase(EXIT_KEYWORD);
         }
-    }
+
+        this.ui.printEndDisplay();
+}
 
     @Override
     public void start(Stage stage) {
@@ -145,7 +134,7 @@ public class Morgan extends Application {
         );
         userInput.clear();
 
-        if (userText.equals(EXIT_KEYWORD)) {
+        if (userText.trim().equalsIgnoreCase(EXIT_KEYWORD)) {
             Platform.exit();
         }
     }
@@ -160,7 +149,7 @@ public class Morgan extends Application {
         CommandParser cp = new CommandParser();
         try {
             command = cp.getCommand(input);
-            output = command.execute(taskList);
+            output = command.execute(taskList, this.storage);
         } catch(MorganException e) {
             output = e.getMessage();
         }
