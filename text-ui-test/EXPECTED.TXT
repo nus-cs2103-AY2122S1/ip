@@ -8,6 +8,9 @@ Added: [E][ ] project meeting (at: 3 December 2021)
 There are 3 tasks in the list
 Added: [D][ ] return book (by: 3 December 2021)
 There are 4 tasks in the list
+2 matching task(s):
+1. [T][ ] borrow book
+2. [D][ ] return book (by: 3 December 2021)
 Marked as done:
 return book (by: 3 December 2021)
 Sorry, I don't understand what that means. :(

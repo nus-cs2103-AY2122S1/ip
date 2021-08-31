@@ -17,6 +17,15 @@ public class TaskList {
         list.add(task);
     }
 
+    /**
+     * Returns a copy of the list
+     * @return ArrayList copy containing all of the tasks
+     */
+    public ArrayList<Task> getList() {
+        ArrayList<Task> list = (ArrayList<Task>) this.list.clone();
+        return list;
+    }
+
     public Task getTask(int index) throws DukeException {
         Task task;
         try {

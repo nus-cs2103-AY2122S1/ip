@@ -28,8 +28,15 @@ public class Parser {
                 throw new DukeException("Sorry, please enter an integer after 'delete'. (e.g. delete 2)");
             }
             return new DeleteCommand(index);
-        }
-        else {
+        } else if (first_word.equals("find")){
+            String remaining;
+            try {
+                remaining = input.split(" ", 2)[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Sorry, please enter a keyword after 'find'.");
+            }
+            return new FindCommand(remaining);
+        } else {
             String remaining;
             try {
                 remaining = input.split(" ", 2)[1];
