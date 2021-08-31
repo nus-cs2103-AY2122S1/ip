@@ -16,11 +16,11 @@ public class Ui {
     /**
      * Duke's greeting message seen by the user upon start-up.
      */
-    public void greeting() {
+    public String greeting() {
         // Credits to http://allaboutfrogs.org/gallery/frogstuff/ascii.html
         // for the frog ASCII text art!
         String frog =
-                        "    _____\n" +
+                "    _____\n" +
                         "   /     \\______\n" +
                         "  | o     |     \\____\n" +
                         "  /\\_____/           \\___\n" +
@@ -35,15 +35,14 @@ public class Ui {
                         "                       \\ \\  /\\/\\\n" +
                         "                       /\\/\\\n";
         String greeting = "I am Jo the Frog! RIBBIT! \n";
-        System.out.println(frog + greeting + "How may I help you?\n" + LINE);
+        return frog + greeting + "How may I help you?\n" + LINE;
     }
 
     /**
      * Message to be seen by user upon closing the program.
      */
-    public void goodbye() {
-        System.out.println("See you again in my frog hole! RIBBIT!");
-        in.close();
+    public String goodbye() {
+        return "See you again in my frog hole! RIBBIT!";
     }
 
     /**
@@ -56,7 +55,7 @@ public class Ui {
         try {
             DukeException.checkInput(input.trim());
         } catch (DukeException e) {
-            throw new DukeException(e.getMessage());
+            return e.getMessage();
         }
         return input;
     }
@@ -64,15 +63,15 @@ public class Ui {
     /**
      * Message to be seen by user if hard disk file does not exist.
      */
-    public void showLoadingError() {
-        System.out.println("File not detected, new file will be created!");
+    public String showLoadingError() {
+        return "File not detected, new file will be created!";
     }
 
     /**
      * Divider line.
      */
-    public void showLine() {
-        System.out.println(LINE);
+    public String showLine() {
+        return LINE;
     }
 
     /**
@@ -80,8 +79,8 @@ public class Ui {
      *
      * @param msg The error message
      */
-    public void showError(String msg) {
-        System.out.println("ERROR: " + msg);
+    public String showError(String msg) {
+        return String.format("ERROR: %s", msg);
     }
 
     /**
@@ -90,23 +89,21 @@ public class Ui {
      * @param tasks The TaskList to be affected
      * @param index The index of the task to be marked done
      */
-    public void showDoneMessage(TaskList tasks, int index) {
-        System.out.println("You have swallowed that pesky fly! RIBBIT!");
-        System.out.println("  " + tasks.get(index).toString());
+    public String showDoneMessage(TaskList tasks, int index) {
+        return "You have swallowed that pesky fly! RIBBIT!\n" +
+                "  " + tasks.get(index).toString() + "\n";
     }
 
     /**
      * Message to be seen by user upon deleting the given task.
      *
      * @param tasks The TaskList to be affected
-     * @param index The index of the task to be deleted
+     * @param description The description of the task to be deleted
      */
-    public void showDeleteMessage(TaskList tasks, int index) {
-        System.out.println("Rotten flies deserve to die!");
-        System.out.println("  " + tasks.get(index).toString());
-        System.out.printf("Now you have %d flies to eat! RIBBIT!\n",
-                tasks.size() - 1);
-
+    public String showDeleteMessage(TaskList tasks, String description) {
+        return "Rotten flies deserve to die!\n" +
+                " " + description + "\n" +
+                "Now you have " + tasks.size() + " flies to eat! RIBBIT!\n";
     }
 
     /**
@@ -114,11 +111,13 @@ public class Ui {
      *
      * @param tasks The TaskList to be affected
      */
-    public void showListMessage(TaskList tasks) {
-        System.out.println("Here is your menu for today:");
+    public String showListMessage(TaskList tasks) {
+        StringBuilder message = new StringBuilder();
+        message.append("Here is your menu for today:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + "." + tasks.get(i).toString());
+            message.append(i + 1 + "." + tasks.get(i).toString() + "\n");
         }
+        return message.toString();
     }
 
     /**
@@ -126,16 +125,19 @@ public class Ui {
      *
      * @param tasks The TaskList to be affected
      */
-    public void addTaskMessage(TaskList tasks) {
-        System.out.println("A fly has been added to the menu:");
-        System.out.println("  " + tasks.get(tasks.size() - 1).toString());
-        System.out.println("Now you have " + tasks.size() + " flies to eat! RIBBIT!");
+    public String addTaskMessage(TaskList tasks) {
+        return "A fly has been added to the menu:\n" +
+                " " + tasks.get(tasks.size() - 1).toString() + "\n" +
+                "Now you have " + tasks.size() + " flies to eat! RIBBIT!";
     }
 
-    public void showFindMessage(TaskList tasks, ArrayList<Integer> matches) {
-        System.out.println("Here are the flies with the matching smell:");
+    public String showFindMessage(TaskList tasks, ArrayList<Integer> matches) {
+        StringBuilder message = new StringBuilder();
+        message.append("Here are the flies with the matching smell:\n");
         for (int i = 0; i < matches.size(); i++) {
-            System.out.println(i + 1 + "." + tasks.get(matches.get(i)).toString());
+            message.append(i + 1 + "." + tasks.get(matches.get(i)).toString());
         }
+        return message.toString();
     }
 }
+

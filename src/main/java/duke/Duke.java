@@ -8,14 +8,12 @@ import java.util.ArrayList;
  */
 public class Duke {
 
-    private final Storage storage;
-    private TaskList tasks;
-    private final Ui ui;
+    private Storage storage = new Storage("./src/main/data/duke.txt");
+    private TaskList tasks = new TaskList();;
+    private Ui ui = new Ui();
 
-    public Duke(String filePath) {
-        ui = new Ui();
+    public Duke() {
         ui.greeting();
-        storage = new Storage(filePath);
         try {
             tasks = storage.load();
         } catch (DukeException e) {
@@ -38,7 +36,7 @@ public class Duke {
                 } else {
                     ui.showLine();
                     String[] commands = Parser.parse(input);
-                    this.run(commands);
+                    this.getResponse(commands);
                 }
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -50,45 +48,38 @@ public class Duke {
         storage.save();
     }
 
-    public void run(String[] args) {
+    public String getResponse(String[] args) {
         switch (args[0]) {
-        case "done":
-            int index = Integer.parseInt(args[1]) - 1;
-            this.tasks.markDone(index);
-            ui.showDoneMessage(tasks, index);
-            break;
-        case "delete":
-            int idx = Integer.parseInt(args[1]) - 1;
-            ui.showDeleteMessage(tasks, idx - 1);
-            this.tasks.delete(idx);
-            break;
-        case "list":
-            ui.showListMessage(tasks);
-            break;
-        case "find":
-            ArrayList<Integer> matches = this.tasks.findTask(args[1]);
-            ui.showFindMessage(tasks, matches);
-            break;
-        case "todo":
-            tasks.add(new ToDo(args[1]));
-            ui.addTaskMessage(tasks);
-            break;
-        case "deadline":
-            LocalDate date = LocalDate.parse(args[2]);
-            tasks.add(new Deadline(args[1], date, args[3]));
-            ui.addTaskMessage(tasks);
-            break;
-        case "event":
-            tasks.add(new Event(args[1], args[2]));
-            ui.addTaskMessage(tasks);
-            break;
-        default:
-            System.out.println("Jo does not recognise non-frog speak!");
-            break;
+            case "list":
+                return ui.showListMessage(tasks);
+            case "done":
+                int index = Integer.parseInt(args[1]) - 1;
+                this.tasks.markDone(index);
+                return ui.showDoneMessage(tasks, index);
+            case "delete":
+                int idx = Integer.parseInt(args[1]) - 1;
+                String description = tasks.get(idx).toString();
+                this.tasks.delete(idx);
+                return ui.showDeleteMessage(tasks, description);
+            case "find":
+                ArrayList<Integer> matches = this.tasks.findTask(args[1]);
+                return ui.showFindMessage(tasks, matches);
+            case "todo":
+                tasks.add(new ToDo(args[1]));
+                return ui.addTaskMessage(tasks);
+            case "event":
+                tasks.add(new Event(args[1], args[2]));
+                return ui.addTaskMessage(tasks);
+            case "deadline":
+                LocalDate date = LocalDate.parse(args[2]);
+                tasks.add(new Deadline(args[1], date, args[3]));
+                return ui.addTaskMessage(tasks);
+            default:
+                return "Jo does not recognise non-frog speak!";
         }
     }
 
     public static void main(String[] args) {
-        new Duke("./src/main/data/duke.txt").run();
+        new Duke().run();
     }
 }

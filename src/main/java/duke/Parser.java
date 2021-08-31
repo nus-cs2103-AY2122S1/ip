@@ -14,26 +14,26 @@ public class Parser {
         String arg = str[0];
 
         switch (arg) {
-        case "done":
-            return new String[]{ "done", str[1] };
-        case "delete":
-            return new String[]{ "delete", str[1] };
-        case "list":
-            return new String[]{ "list" };
-        case "find":
-            return new String[] { "find", str[1] };
-        default:
-            String task = str[1];
-            if (arg.equals("todo")) {
+            case "done":
+                return new String[]{ "done", str[1] };
+            case "delete":
+                return new String[]{ "delete", str[1] };
+            case "list":
+                return new String[]{ "list" };
+            case "find":
+                return new String[] { "find", str[1] };
+            case "todo":
+                String task = str[1];
                 return new String[]{ "todo", task };
-            } else if (str[0].equals("deadline")) {
-                String[] taskDetail = task.split("/by ");
-                String[] s = taskDetail[1].split(" ", 2);
-                return new String[]{ "deadline", taskDetail[0], s[0], s[1] };
-            } else { // is an duke.Event
-                String[] taskDetail = str[1].split(" /at ");
-                return new String[]{ "event", taskDetail[0], taskDetail[1] };
-            }
+            case "deadline":
+                String[] taskDetails = str[1].split("/by ");
+                String[] s = taskDetails[1].split(" ", 2);
+                return new String[]{ "deadline", taskDetails[0], s[0], s[1] };
+            case "event":
+                String[] eventDetail = str[1].split(" /at ");
+                return new String[]{ "event", eventDetail[0], eventDetail[1] };
+            default:
+                return new String[]{ "" };
         }
     }
 }
