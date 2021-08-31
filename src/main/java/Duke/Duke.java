@@ -21,37 +21,41 @@ public class Duke {
     /**
      * A public constructor to initialize a session with Duke.
      *
-     * @param filePath The given string for the path of the file where the
-     *                 task list of the user is saved into.
      * @throws IOException Thrown when the file is not found.
      */
-    public Duke(String filePath) throws IOException {
-        storage = new Storage(filePath);
+    public Duke() throws IOException {
+        String dukeFile = "duke.txt";
+        storage = new Storage(dukeFile);
         try {
             tasks = new TaskList(storage.load());
             parser = new Parser(tasks, storage);
             recieve = new Recieve(parser);
+//            recieve.run();
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
             System.out.println("Creating new file... Please try again!");
         }
     }
 
-    /**
-     * Main method for Duke.
-     *
-     * @param args Ignored and unused command line arguments.
-     * @throws IOException Thrown when the file is not found.
-     */
-    public static void main(String[] args) throws IOException {
-
-        String dukeFile = "duke.txt";
-
-        Duke duke = new Duke(dukeFile);
-        duke.recieve.run();
-
-        }
-
+    String welcomeMessage() {
+        return "Hello! I'm Duke\n" +
+                "To add a Todo, type -> todo <Description> \n" +
+                "To add a Deadline, type -> deadline <Description> /by <deadline>\n" +
+                "To add an Event, type -> event <Description> /at <details>\n" +
+                "To mark as done, type -> done <task list index>\n" +
+                "To see all of your tasks, type -> list\n" +
+                "To end session, type -> bye\n" +
+                "What can I do for you today?";
     }
+
+    /**
+     *
+     */
+    String getResponse(String input) {
+        return recieve.run(input);
+    }
+
+
+}
 
 

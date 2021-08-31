@@ -1,2 +1,4 @@
-[T][ ] hw
-[D][ ] wpork --(by: 2021-12-23)
+[T][X] hw
+[D][ ] work --(by: 2022-12-23)
+[E][X] cca --(at: utown)
+[D][X] coding --(by: 2022-03-04)
