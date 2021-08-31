@@ -21,7 +21,7 @@ public class MainWindow extends AnchorPane {
 
     private Yoyo yoyo;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Yoyo.jpeg"));
+    private Image yoyoImage = new Image(this.getClass().getResourceAsStream("/images/Yoyo.jpeg"));
 
     /**
      * Actions to be executed when starting up GUI.
@@ -30,7 +30,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Hi there, I am Yoyo! What tasks do you have in mind?", dukeImage)
+                DialogBox.getYoyoDialog("Hi there, I am Yoyo! What tasks do you have in mind?", yoyoImage)
         );
     }
 
@@ -44,7 +44,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Yoyo's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
         String response = yoyo.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getYoyoDialog(response, yoyoImage)
         );
         userInput.clear();
     }
