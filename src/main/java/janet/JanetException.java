@@ -1,10 +1,10 @@
-package duke;
+package janet;
 
 /**
- * Represents the exception to be thrown when invalid user input into Duke is
+ * Represents the exception to be thrown when invalid user input into Janet is
  * detected.
  */
-public class DukeException extends Exception {
+public class JanetException extends Exception {
     private final String log;
 
     /**
@@ -13,7 +13,7 @@ public class DukeException extends Exception {
      *
      * @param log Cause of the exception
      */
-    public DukeException(String log) {
+    public JanetException(String log) {
         this.log = log;
     }
 

@@ -1,4 +1,4 @@
-package duke;
+package janet;
 
 import javafx.application.Application;
 

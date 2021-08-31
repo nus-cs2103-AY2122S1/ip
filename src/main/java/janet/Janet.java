@@ -1,24 +1,23 @@
-package duke;
+package janet;
 
-import java.io.EOFException;
 import java.io.IOException;
 
 import javafx.application.Platform;
 
 /**
- * Main class of the Duke chat-bot. When the main class is run, it creates an
- * instance of Duke which allows text-based user interaction.
+ * Main class of the Janet chat-bot. When the main class is run, it creates an
+ * instance of Janet which allows text-based user interaction.
  */
-public class Duke {
+public class Janet {
     private final Storage storage;
     private TaskList tasks = new TaskList();
     private MainWindow window;
 
     /**
-     * Class constructor for Duke.
+     * Class constructor for Janet.
      */
-    public Duke(MainWindow window) {
-        storage = new Storage("duke.txt");
+    public Janet(MainWindow window) {
+        storage = new Storage("janet.txt");
         this.window = window;
         try {
             tasks = storage.readSave();
@@ -31,7 +30,7 @@ public class Duke {
         Command command;
         try {
             command = Parser.parseUserInput(input);
-        } catch (DukeException e) {
+        } catch (JanetException e) {
             return e.toString();
         }
         Task task;

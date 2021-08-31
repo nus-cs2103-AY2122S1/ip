@@ -1,10 +1,10 @@
-package duke;
+package janet;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Represents the list of tasks tracked by Duke.
+ * Represents the list of tasks tracked by Janet.
  */
 public class TaskList implements Serializable {
     private final ArrayList<Task> tasks;

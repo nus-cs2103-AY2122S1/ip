@@ -1,7 +1,7 @@
-package dukeTest;
+package janetTest;
 
-import duke.Task;
-import duke.TaskList;
+import janet.Task;
+import janet.TaskList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

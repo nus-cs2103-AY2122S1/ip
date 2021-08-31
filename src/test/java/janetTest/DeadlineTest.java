@@ -1,6 +1,6 @@
-package dukeTest;
+package janetTest;
 
-import duke.Deadline;
+import janet.Deadline;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

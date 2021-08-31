@@ -1,7 +1,7 @@
-package duke;
+package janet;
 
 /**
- * Represents the action requested by the user that Duke understands.
+ * Represents the action requested by the user that Janet understands.
  */
 public class Command {
     private String operation;
@@ -12,7 +12,7 @@ public class Command {
     /**
      * Class constructor specifying an operation that requires no other input.
      *
-     * @param operation the operation for Duke to execute
+     * @param operation the operation for Janet to execute
      */
     public Command(String operation) {
         this.operation = operation;
@@ -21,8 +21,8 @@ public class Command {
     /**
      * Class constructor specifying an operation that takes a task index.
      *
-     * @param operation The operation for Duke to execute
-     * @param index The index of the task in Duke's task list
+     * @param operation The operation for Janet to execute
+     * @param index The index of the task in Janet's task list
      */
     public Command(String operation, int index) {
         this.operation = operation;
@@ -32,7 +32,7 @@ public class Command {
     /**
      * Class constructor specifying an operation that takes a description.
      *
-     * @param operation The operation for Duke to execute
+     * @param operation The operation for Janet to execute
      * @param description Description of the task
      */
     public Command(String operation, String description) {
@@ -45,7 +45,7 @@ public class Command {
      * a time string. The time string will be converted to a LocalDate object
      * if it is of the form YYYY-MM-DD.
      *
-     * @param operation The operation for Duke to execute
+     * @param operation The operation for Janet to execute
      * @param description Description of the task
      * @param time Time that the task will occur / should be done by
      */
@@ -56,16 +56,16 @@ public class Command {
     }
 
     /**
-     * Returns the specific operation as a String that Duke is able to understand.
+     * Returns the specific operation as a String that Janet is able to understand.
      *
-     * @return Duke operation
+     * @return Janet operation
      */
     public String getOperation() {
         return operation;
     }
 
     /**
-     * Returns the index of the task in Duke's task list for commands that require
+     * Returns the index of the task in Janet's task list for commands that require
      * the user to specify it.
      *
      * @return Index of task in task list
