@@ -139,4 +139,111 @@ public class Parser {
             this.isRunning = false;
         }
     }
+
+    public String dukeResponse(String command) {
+        Scanner s = new Scanner(command);
+        if (!s.hasNext()) {
+            System.out.println("rip scanner");
+            return null;
+        }
+
+        String input = s.next();
+        String response = "";
+
+        if (!input.equals("bye")) {
+            if (input.equals("list")) {
+                response = this.list.listAll();
+            } else if (input.equals("done")) {
+                Scanner s1 = new Scanner(s.nextLine());
+                int counter = 0;
+
+                while (s1.hasNextInt()) {
+                    int index = s1.nextInt();
+                    response += this.list.markComplete(index);
+                    this.storage.writeToFile();
+                    counter ++;
+                }
+                if (counter == 0) {
+                    response = Ui.invalidIndexMessage();
+                }
+            } else if (input.equals("todo")) {
+                Scanner s2 = new Scanner(s.nextLine());
+                String description = "";
+                while (s2.hasNextLine()) {
+                    description = s2.nextLine();
+                }
+                try {
+                    Todo newTodo = new Todo(description, false);
+                    response = this.list.addTask(newTodo);
+                    this.storage.writeToFile();
+                } catch (WrongCommandFormatException e) {
+                    response = Ui.formatExceptionMessage(e);
+                }
+
+            } else if (input.equals("deadline")) {
+                Scanner s3 = new Scanner(s.nextLine());
+                String description = "";
+                while (s3.hasNextLine()) {
+                    description = s3.nextLine();
+                }
+                try {
+                    Deadline newDeadline = new Deadline(description, false);
+                    response = this.list.addTask(newDeadline);
+                    this.storage.writeToFile();
+                } catch (WrongCommandFormatException e) {
+                    response = Ui.formatExceptionMessage(e);
+                }
+            } else if (input.equals("event")) {
+                Scanner s4 = new Scanner(s.nextLine());
+                String description = "";
+                while (s4.hasNextLine()) {
+                    description = s4.nextLine();
+                }
+                try {
+                    Event newEvent = new Event(description, false);
+                    response = this.list.addTask(newEvent);
+                    this.storage.writeToFile();
+                } catch (WrongCommandFormatException e) {
+                    response = Ui.formatExceptionMessage(e);
+                }
+            } else if (input.equals("delete")) {
+                Scanner s5 = new Scanner(s.nextLine());
+                if (s5.hasNextInt()) {
+                    int index = s5.nextInt();
+                    response = this.list.deleteTask(index);
+                    this.storage.writeToFile();
+                } else {
+                    response = Ui.invalidIndexMessage();
+                }
+            } else if (input.equals("setFormat")) {
+                Scanner s6 = new Scanner(s.nextLine());
+                if (s6.hasNextLine()) {
+                    try {
+                        Duke.setFormat(s6.nextLine().substring(1));
+                        response = Ui.formatUpdatedMessage();
+                        this.storage.writeToFile();
+                    } catch (IllegalArgumentException e) {
+                        response = Ui.unacceptableFormatMessage();
+                    }
+                } else {
+                    response = Ui.noFormatSpecifiedMessage();
+                }
+            } else if (input.equals("format")) {
+                return Ui.currentDateFormatMessage();
+            } else if (input.equals("find")) {
+                Scanner s7 = new Scanner(s.nextLine());
+                if (s7.hasNextLine()) {
+                    response = this.list.find(s7.nextLine());
+                } else {
+                    response = Ui.noKeywordSpecifiedMessage();
+                }
+            } else {
+                response = Ui.noSpecificCmdMessage();
+            }
+        } else {
+            response = Ui.botShutdownMessage();
+            this.isRunning = false;
+        }
+        return response;
+    }
 }

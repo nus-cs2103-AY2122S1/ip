@@ -154,12 +154,12 @@ public class Deadline implements Task {
      * Else indicate that the task has been correctly marked.
      */
     @Override
-    public void markComplete() {
+    public String markComplete() {
         if (this.isDone) {
-            Ui.taskAlrCompleted(this);
+            return Ui.taskAlrCompleted(this);
         } else {
-            Ui.markCompleteDeadline(this);
             this.isDone = true;
+            return Ui.markCompleteDeadline(this);
         }
     }
 

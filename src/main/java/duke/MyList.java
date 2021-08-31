@@ -48,9 +48,9 @@ public class MyList {
      * Subsequently prints out the total number of items in the list.
      * @param t the duke.tasks.Task to be added into the list
      */
-    public void addTask(Task t) {
+    public String addTask(Task t) {
         myList.add(t);
-        Ui.addTaskMessage(t, this);
+        return Ui.addTaskMessage(t, this);
     }
 
     /**
@@ -66,11 +66,11 @@ public class MyList {
      *              If the index specified is invalid, prompt the user
      *              for another input.
      */
-    public void markComplete(int index) {
+    public String markComplete(int index) {
         try {
-            myList.get(index - 1).markComplete();
+            return myList.get(index - 1).markComplete();
         } catch (IndexOutOfBoundsException e) {
-            Ui.invalidIndexMessage();
+            return Ui.invalidIndexMessage();
         }
     }
 
@@ -80,17 +80,9 @@ public class MyList {
      *              If the index specified is invalid, prompt the user
      *              for another input.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         Task removed = this.myList.remove(index - 1);
-        Ui.deleteTaskMessage(removed, this);
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(removed.toString());
-        int noOfItems = this.myList.size();
-        if (noOfItems == 1) {
-            System.out.printf("You now have %d item in your list \n", noOfItems);
-        } else {
-            System.out.printf("You now have %d items in your list \n", noOfItems);
-        }
+        return Ui.deleteTaskMessage(removed, this);
     }
 
     /**
@@ -98,7 +90,7 @@ public class MyList {
      * Not case-sensitive.
      * @param keyword The keyword to be looking for.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
         int counter = 0;
         Task[] matchingList = new Task[getListSize()];
         for (int i = 0; i < getListSize(); i++) {
@@ -109,8 +101,9 @@ public class MyList {
                 counter++;
             }
         }
-        Ui.containsKeyword(counter);
-        Ui.containsKeywordTask(matchingList);
+        String s = Ui.containsKeyword(counter);
+        s += Ui.containsKeywordTask(matchingList);
+        return s;
     }
 
     /**
