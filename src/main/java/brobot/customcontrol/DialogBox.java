@@ -2,6 +2,7 @@ package brobot.customcontrol;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -13,7 +14,7 @@ public class DialogBox extends HBox {
 
     private Label text;
     private ImageView displayPicture;
-    private Circle clip = new Circle(50, 50, 50);
+    private Circle clip = new Circle(35, 35, 35);
 
 
     /**
@@ -26,12 +27,14 @@ public class DialogBox extends HBox {
         displayPicture = iv;
 
         text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        text.setPadding(new Insets(0, 10, 0, 10));
+        displayPicture.setFitWidth(70.0);
+        displayPicture.setFitHeight(70.0);
         displayPicture.setClip(clip);
 
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+        this.setPadding(new Insets(10, 10, 10, 10));
     }
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
