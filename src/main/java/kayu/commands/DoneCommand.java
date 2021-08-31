@@ -5,7 +5,9 @@ import static kayu.commands.CommandMessage.MESSAGE_TASK_DONE;
 import static kayu.commands.CommandType.DONE;
 
 import kayu.exception.DukeException;
+import kayu.exception.StorageException;
 import kayu.service.TaskList;
+import kayu.storage.Storage;
 import kayu.task.Task;
 
 /**
@@ -30,10 +32,11 @@ public class DoneCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
         try {
             int taskNumber = Integer.parseInt(commandParams);
             Task selectedTask = taskList.updateTaskAsDone(taskNumber);
+            super.saveTasks(taskList, storage);
             return String.format(MESSAGE_TASK_DONE, selectedTask);
 
         } catch (NumberFormatException exception) {

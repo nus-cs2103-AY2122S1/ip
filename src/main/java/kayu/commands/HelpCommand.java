@@ -3,7 +3,9 @@ package kayu.commands;
 import static kayu.commands.CommandType.HELP;
 
 import kayu.exception.DukeException;
+import kayu.exception.StorageException;
 import kayu.service.TaskList;
+import kayu.storage.Storage;
 
 /**
  * Represents a {@link kayu.commands.Command} that lists the possible commands a user can key in for operations.
@@ -24,18 +26,16 @@ public class HelpCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList) throws DukeException {
-        return "1. General:\n"
+    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
+        return "Commands:\n"
                 + "  - bye\n"
                 + "  - help \n"
-                + "2. Create tasks:\n"
-                + "  - todo <desc>\n"
-                + "  - event <desc> /at <date> <time>\n"
-                + "  - deadline <desc> /by <date> <time>\n"
-                + "3. Task actions:\n"
                 + "  - list\n"
-                + "  - delete <task-number>\n"
-                + "  - done <task-number>\n"
-                + "  - find <keyword>";
+                + "  - todo [desc]\n"
+                + "  - event [desc] /at [date] [time]\n"
+                + "  - deadline [desc] /by [date] [time]\n"
+                + "  - delete [task-number]\n"
+                + "  - done [task-number]\n"
+                + "  - find [keywords...]";
     }
 }

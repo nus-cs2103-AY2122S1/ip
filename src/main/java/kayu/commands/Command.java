@@ -1,7 +1,12 @@
 package kayu.commands;
 
+import java.util.List;
+
 import kayu.exception.DukeException;
+import kayu.exception.StorageException;
 import kayu.service.TaskList;
+import kayu.storage.Storage;
+import kayu.task.Task;
 
 /**
  * Holds the base logic required for other Command classes to utilise.
@@ -37,11 +42,13 @@ public abstract class Command {
      * Executes the command based on the implemented child instances
      * and returns the outcome as a String.
      *
-     * @param taskList TaskList instance to execute on.
+     * @param taskList {@link kayu.service.TaskList} instance to execute on.
+     * @param storage {@link kayu.storage.Storage} instance to save information with.
      * @return String feedback of execution/outcome.
      * @throws DukeException If execution of Command fails.
+     * @throws StorageException If saving of information using <code>storage</code> fails.
      */
-    public abstract String execute(TaskList taskList) throws DukeException;
+    public abstract String execute(TaskList taskList, Storage storage) throws DukeException, StorageException;
 
     /**
      * Returns the of the instance.
@@ -69,5 +76,17 @@ public abstract class Command {
      */
     public boolean isBye() {
         return commandType.equals(CommandType.BYE);
+    }
+
+    /**
+     * Updates the file storage with the current {@link kayu.service.TaskList}.
+     *
+     * @param taskList {@link kayu.service.TaskList} instance to execute on.
+     * @param storage {@link kayu.storage.Storage} instance to save information with.
+     * @throws StorageException If saving of information using <code>storage</code> fails.
+     */
+    public void saveTasks(TaskList taskList, Storage storage) throws StorageException {
+        List<Task> tasks = taskList.getTasks();
+        storage.saveTasks(tasks);
     }
 }

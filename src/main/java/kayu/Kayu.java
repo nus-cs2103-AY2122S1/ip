@@ -78,9 +78,7 @@ public class Kayu {
         isRecentCommandBye = (command.isBye()); // updates internally as a field
         
         try {
-            feedback = command.execute(taskList);
-            List<Task> tasks = taskList.getTasks();
-            storage.saveTasks(tasks);
+            feedback = command.execute(taskList, storage);
             logger.printMessage(feedback);
 
         } catch (DukeException exception) {

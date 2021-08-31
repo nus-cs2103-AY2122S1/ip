@@ -7,8 +7,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import kayu.exception.DukeException;
+import kayu.exception.StorageException;
 import kayu.parser.DateTimeFormat;
 import kayu.service.TaskList;
+import kayu.storage.Storage;
 import kayu.task.Event;
 import kayu.task.Task;
 
@@ -35,7 +37,7 @@ public class EventCommand extends AddTaskCommand {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
         String[] paramArray = super.splitUserParams(commandParams, COMMAND_WORD, Event.SPLIT_WORD);
         
         String desc = super.extractDesc(paramArray, COMMAND_WORD);
@@ -44,6 +46,8 @@ public class EventCommand extends AddTaskCommand {
         
         Task event = new Event(desc, atDate, atTime);
         taskList.addTask(event);
+        super.saveTasks(taskList, storage);
+        
         return String.format(MESSAGE_CREATED_EVENT, event, taskList.getCapacity());
     }
 }

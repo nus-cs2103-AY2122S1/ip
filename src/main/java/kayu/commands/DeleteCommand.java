@@ -5,7 +5,9 @@ import static kayu.commands.CommandMessage.MESSAGE_DELETED_TASK;
 import static kayu.commands.CommandType.DELETE;
 
 import kayu.exception.DukeException;
+import kayu.exception.StorageException;
 import kayu.service.TaskList;
+import kayu.storage.Storage;
 import kayu.task.Task;
 
 /**
@@ -30,10 +32,11 @@ public class DeleteCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
         try {
             int taskNumber = Integer.parseInt(commandParams);
             Task selectedTask = taskList.deleteTask(taskNumber);
+            super.saveTasks(taskList, storage);
             return String.format(MESSAGE_DELETED_TASK, selectedTask, taskList.getCapacity());
             
         } catch (NumberFormatException exception) {

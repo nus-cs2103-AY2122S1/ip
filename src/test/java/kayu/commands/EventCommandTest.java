@@ -10,13 +10,16 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import kayu.exception.DukeException;
+import kayu.exception.StorageException;
 import kayu.parser.DateTimeFormat;
 import kayu.service.TaskList;
+import kayu.storage.Storage;
 import kayu.task.Event;
 import kayu.task.Task;
 
@@ -24,8 +27,12 @@ public class EventCommandTest {
 
     private static final List<String> DATE_LIST = new ArrayList<>();
     private static final List<String> TIME_LIST = new ArrayList<>();
+    private static final String RESOURCE_PATH = "src/test/resources";
+    private static final String FILE_PATH = RESOURCE_PATH + "/storage_test_blank.txt";
+    
     private TaskList taskList;
     private DateTimeFormat dateTimeFormat;
+    private Storage storage;
     
     @BeforeAll
     public static void setFormats() {
@@ -52,6 +59,13 @@ public class EventCommandTest {
     public void setUp() {
         taskList = new TaskList();
         dateTimeFormat = DateTimeFormat.generateInstance();
+        storage = new Storage();
+        storage.setDirectoryAndFilePath(FILE_PATH);
+    }
+    
+    @AfterEach
+    public void tearDown() throws StorageException {
+        storage.saveTasks(new ArrayList<>());
     }
     
     @Test
@@ -68,10 +82,10 @@ public class EventCommandTest {
         String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, 1);
         
         try {
-            String feedback = eventCommand.execute(taskList);
+            String feedback = eventCommand.execute(taskList, storage);
             assertEquals(expectedFeedback, feedback);
             
-        } catch (DukeException exception) {
+        } catch (DukeException | StorageException exception) {
             System.out.println(exception.getMessage());
             fail();
         }
@@ -91,12 +105,12 @@ public class EventCommandTest {
             try {
                 String parameters = String.format(paramFormat, DATE_LIST.get(idx));
                 Command eventCommand = new EventCommand(parameters, dateTimeFormat);
-                String feedback = eventCommand.execute(taskList);
+                String feedback = eventCommand.execute(taskList, storage);
                 
                 String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, idx + 1);
                 assertEquals(expectedFeedback, feedback);
                 
-            } catch (DukeException exception) {
+            } catch (DukeException | StorageException exception) {
                 System.out.println(exception.getMessage());
                 fail();
             }
@@ -117,12 +131,12 @@ public class EventCommandTest {
             try {
                 String parameters = String.format(paramFormat, TIME_LIST.get(idx));
                 Command eventCommand = new EventCommand(parameters, dateTimeFormat);
-                String feedback = eventCommand.execute(taskList);
+                String feedback = eventCommand.execute(taskList, storage);
 
                 String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, idx + 1);
                 assertEquals(expectedFeedback, feedback);
 
-            } catch (DukeException exception) {
+            } catch (DukeException | StorageException exception) {
                 System.out.println(exception.getMessage());
                 fail();
             }
@@ -130,12 +144,12 @@ public class EventCommandTest {
     }
 
     @Test
-    public void execute_invalidDateFormat_throwsException() {
+    public void execute_invalidDateFormat_throwsException() throws StorageException {
         String parameters = "meeting with friends /at 20.10.2021 13:45";
         Command eventCommand = new EventCommand(parameters, dateTimeFormat);
 
         try {
-            eventCommand.execute(taskList);
+            eventCommand.execute(taskList, storage);
             fail();
 
         } catch (DukeException exception) {
@@ -144,12 +158,12 @@ public class EventCommandTest {
     }
 
     @Test
-    public void execute_invalidParamFormat_throwsException() {
+    public void execute_invalidParamFormat_throwsException() throws StorageException {
         String parameters = "meeting with friends /at 13:45";
         Command eventCommand = new EventCommand(parameters, dateTimeFormat);
 
         try {
-            eventCommand.execute(taskList);
+            eventCommand.execute(taskList, storage);
             fail();
 
         } catch (DukeException exception) {
