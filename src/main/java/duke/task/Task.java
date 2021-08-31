@@ -68,19 +68,19 @@ public class Task {
 
         Task task;
         switch (taskType) {
-            case DEADLINE:
-                task = new Deadline(taskSubstrings[2], taskSubstrings[3]);
-                break;
-            case EVENT:
-                task = new Event(taskSubstrings[2], taskSubstrings[3]);
-                break;
-            case TODO:
-                task = new ToDo(taskSubstrings[2]);
-                break;
-            default:
-                throw new RuntimeException(
-                        String.format("duke.task.TaskType %s is not accounted for in switch statement.", taskType.toString())
-                );
+        case DEADLINE:
+            task = new Deadline(taskSubstrings[2], taskSubstrings[3]);
+            break;
+        case EVENT:
+            task = new Event(taskSubstrings[2], taskSubstrings[3]);
+            break;
+        case TODO:
+            task = new ToDo(taskSubstrings[2]);
+            break;
+        default:
+            throw new RuntimeException(
+                    String.format("duke.task.TaskType %s is not accounted for in switch statement.", taskType.toString())
+            );
         }
 
         if (taskSubstrings[1].equals(Task.DONE_CHARACTER)) {
