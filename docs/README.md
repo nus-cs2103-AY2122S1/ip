@@ -90,7 +90,7 @@ Excellent! I've added this event:
 ```
 _________
 
-To add a new Deadline, the usage is: `deadline [deadline description] /by [deadline due date] /priority [H|M|L]`. The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm`. The year input string should be **exactly** 4 characters, and their other date parameters should be **exactly** 2 characters. 
+To add a new Deadline, the usage is: `deadline [deadline description] /by [deadline due date] /priority [H|M|L]`. The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm`. The year input string should be **exactly** 4 characters, and their other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
 
 Example: `deadline eat dinner /by 16:00` - creates a new Deadline named "eat dinner" at [today's date] 16:00.
 
@@ -108,10 +108,10 @@ Expected outcome: (assume today's date is 2021-08-31).
 Excellent! I've added this event:
 [D] [L] Eat dinner (by 2021-08-31 16:00)
 ```
-Substitutable keywords: `dateline`.
+> Substitutable keywords: `dateline`.
 
 **Due to the way data is stored, Tiger bans you from inputting semicolons (;).**
-
+__________
 ### Deleting a task
 Deletes the task at the specified index. Use `list` to get the list of tasks and indicies. The usage is `delete [task index]`.
 
@@ -122,8 +122,8 @@ Expected outcome:
 Feeling lazy today? I've deleted:
 [T] [M] CS2103 Code Review
 ```
-Substitutable keywords: `del`, `remove`.
-
+> Substitutable keywords: `del`, `remove`.
+_________
 ### Marking a task as done
 Marks the task at a specified index as done. `list` to get the list of tasks and indicies. The usage is `done [task index]`.
 
@@ -134,7 +134,7 @@ Expected outcome:
 Nice! I've marked this tasks as done:
 [T] [X] Type out GT assignment
 ```
-
+________
 
 ### Finding a task
 Tiger can also help you find tasks based on a specific keyword. It is not case sensitive, ie. `search woodlands` and `search Woodlands` should return the same list. The usage is `search [substring]`. 
@@ -144,8 +144,8 @@ Expected outcome:
 ```
 [T] [M] Buy earphones at Woodlands
 ```
-Substitutable keywords: `find`. 
-
+> Substitutable keywords: `find`. 
+___________
 ### Clearing all tasks
 If for some reason your list of tasks is too full, or you're too lazy, you can clear all the tasks at one go. The usage is `clear`.
 
@@ -155,7 +155,7 @@ Expected outcome:
 ```
 I've cleared all your tasks!
 ```
-
+__________
 ### Listing all tasks
 Tiger can help you list all tasks. (After all, that's the whole point of a Todo app right?) The usage is `list`.
 
@@ -167,8 +167,8 @@ Expected outcome:
 2. [E] [H] Feed fish (at 2021-09-01 16:00)
 3. [D] [L] Graph theory assignment (by 2022-11-21 14:25)
 ```
-Substitutable keywords: `ls`. 
-
+> Substitutable keywords: `ls`. 
+________
 ### Exiting the app
 If you're bored of Tiger, you can leave the app. The usage is `bye`. 
 
@@ -180,7 +180,7 @@ Bye! Hope to see you again!
 ```
 Note that the window waits for a second to close.
 
-Substitutable keywords: `exit`, `quit`.
+> Substitutable keywords: `exit`, `quit`.
 
 ## Advanced features
 
@@ -206,7 +206,7 @@ Expected outcome:
 2. [E] [H] Feed fish (at 2021-09-01 16:00)
 3. [D] [L] Graph theory assignment (by 2022-11-21 14:25)
 ```
-
+__________
 ### Automatic date correction
 On top of interpreting the current date as today if the user doesn't specify the date, Tiger will do some minor corrections if the user inputs an invalid date by accident. 
 
@@ -236,7 +236,7 @@ Expected outcome:
 ```
 Please ensure you key in dates in the input specified.
 ```
-
+__________
 ### Partial loading
 Tiger knows that users love to mess around with its data files, sometimes corrupting it in the process. As such, Tiger is equipped with a mechanism called partial loading. If the data file is corrupted for _some reason_ (ahem ahem, the users), it tries to recover what it can. When Tiger detects it's data has been corrupted, it starts up with the following message, directly blaming the user:
 
