@@ -4,42 +4,46 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ui {
+public class Command {
 
     /**
      * Method to add a task to our list.
      * @param task The string of the task.
      * @param type The type of the task: event, deadline, or other type.
      */
-    public static void addTask(String task, Type type, LocalDateTime localDateTime, List<Task> tasks) {
+    public static String addTask(String task, Type type, LocalDateTime localDateTime, List<Task> tasks) {
         Task taskObj = TaskList.initialiseByType(task, type, false, localDateTime);
         tasks.add(taskObj);
-        System.out.println(String.format("Got it. I've added this task:\n" + taskObj.toString()));
-        System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+        String addTaskString = String.format("Got it. I've added this task:\n%s\nNow you have %d tasks in the list.", taskObj.toString(), tasks.size());
+        System.out.println(addTaskString);
+        return addTaskString;
     }
 
     /**
      * Method to check the task off as done in the list.
      * @param taskNumber The number of the task in our list.
      */
-    public static void doneTask(int taskNumber, List<Task> tasks) {
+    public static String doneTask(int taskNumber, List<Task> tasks) {
         taskNumber--;
         Task task = tasks.get(taskNumber);
         task.setDone(true);
         tasks.set(taskNumber, task);
-        System.out.println("Nice! I've marked this task as done:\n" + task.toString());
+        String doneTaskString = "Nice! I've marked this task as done:\n" + task.toString();
+        System.out.println(doneTaskString);
+        return doneTaskString;
     }
 
     /**
      * Method to delete the task from the list.
      * @param taskNumber The number of the task in our list.
      */
-    public static void deleteTask(int taskNumber, List<Task> tasks) {
+    public static String deleteTask(int taskNumber, List<Task> tasks) {
         taskNumber--;
         Task task = tasks.get(taskNumber);
         tasks.remove(taskNumber);
-        System.out.println("Noted. I've removed this task:\n" + task.toString());
-        System.out.println(String.format("Now you have %d tasks in the list.", tasks.size()));
+        String deleteTaskString = String.format("Noted. I've removed this task:\n%s\nNow you have %d tasks in the list.", task.toString(), tasks.size());
+        System.out.println(deleteTaskString);
+        return deleteTaskString;
     }
 
     /**
@@ -55,6 +59,7 @@ public class Ui {
                 filteredTasks.add(task);
             }
         }
+        System.out.println(filteredTasks);
         return filteredTasks;
     }
 

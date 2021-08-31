@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.Storage.Storage;
+
 public class TaskList {
 
     /** Initialising an empty array into which tasks can be added/manipulated/deleted */
@@ -60,19 +62,23 @@ public class TaskList {
      * @param input The string of input command.
      * @throws DukeException Exceptions specific to this chatbot.
      */
-    public void interpretInput(String input) throws DukeException {
+    public String interpretInput(String input) throws DukeException {
         String task;
         Type type;
         LocalDateTime localDateTime;
         if (input.equals("bye")) {
             System.out.println(byeString());
+            return byeString();
         } else if (input.equals("list")) {
             System.out.println(taskListString(tasks));
+            return taskListString(tasks);
         } else if (input.equals("hello")) {
             System.out.println("Hello! I'm duke.Duke\n"
                     + "What can I do for you?");
+            return "Hello! I'm duke.Duke\n"
+                    + "What can I do for you?";
         } else if (input.startsWith("done ")) {
-            Ui.doneTask(Integer.parseInt(input.substring(5)), tasks);
+            return Command.doneTask(Integer.parseInt(input.substring(5)), tasks);
         } else if (input.startsWith("todo ")) {
             // Remove all whitespaces to test if it is empty
             String testInput = input.replaceAll("\\s+", "");
@@ -82,26 +88,26 @@ public class TaskList {
             task = input.substring(5);
             type = Type.TODO;
             localDateTime = null;
-            Ui.addTask(task, type, localDateTime, tasks);
+            return Command.addTask(task, type, localDateTime, tasks);
         } else if (input.startsWith("deadline ")) {
             task = input.substring(9);
             type = Type.DEADLINE;
             String[] tokens = task.split(" /by ");
             localDateTime = Parser.parseDate(tokens[1]);
             task = tokens[0];
-            Ui.addTask(task, type, localDateTime, tasks);
+            return Command.addTask(task, type, localDateTime, tasks);
         } else if (input.startsWith("event ")) {
             task = input.substring(6);
             type = Type.EVENT;
             String[] tokens = task.split(" /at ");
             localDateTime = Parser.parseDate(tokens[1]);
             task = tokens[0];
-            Ui.addTask(task, type, localDateTime, tasks);
+            return Command.addTask(task, type, localDateTime, tasks);
         } else if (input.startsWith("delete ")) {
-            Ui.deleteTask(Integer.parseInt(input.substring(7)), tasks);
+            Command.deleteTask(Integer.parseInt(input.substring(7)), tasks);
         } else if (input.startsWith("find ")) {
-            List<Task> filteredTasks = Ui.findTasks(input.substring(5), tasks);
-            System.out.println(taskListString(filteredTasks));
+            List<Task> filteredTasks = Command.findTasks(input.substring(5), tasks);
+            return filteredTasks.toString();
         } else {
             throw new CommandNotFoundException();
         }
@@ -110,7 +116,7 @@ public class TaskList {
         } catch (IOException err) {
             System.out.println(err);
         }
-
+        return null;
     }
 
     /**
@@ -140,5 +146,17 @@ public class TaskList {
                 run(scanner);
             }
         }
+    }
+
+    public String runWithGraphicUI(String input) {
+        String response = "";
+
+        try {
+            response = interpretInput(input);
+        } catch (Exception err) {
+            System.out.println(err);
+        }
+
+        return response;
     }
 }
