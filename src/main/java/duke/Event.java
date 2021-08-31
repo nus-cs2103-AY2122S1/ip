@@ -8,7 +8,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     protected String time;
     protected String timeToDisplay;
-    protected LocalDateTime eventTime;
+    protected LocalDateTime eventStart;
+    protected LocalDateTime eventEnd;
 
     /**
      * To create event tasks
@@ -21,20 +22,33 @@ public class Event extends Task {
         int date = Integer.parseInt(time.substring(0, 2));
         int month = Integer.parseInt(time.substring(3, 5));
         int year = Integer.parseInt(time.substring(6, 10));
-        int hour = Integer.parseInt(time.substring(11, 13));
-        int min = Integer.parseInt(time.substring(14, 16));
+        int startHour = Integer.parseInt(time.substring(11, 13));
+        int startMin = Integer.parseInt(time.substring(14, 16));
+        int endHour = Integer.parseInt(time.substring(17, 19));
+        int endMin = Integer.parseInt(time.substring(20, 22));
 
-        LocalDateTime taskDate = LocalDateTime.of(year, month, date, hour, min);
-        this.timeToDisplay = taskDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
-        eventTime = taskDate;
+        LocalDateTime start = LocalDateTime.of(year, month, date, startHour, startMin);
+        LocalDateTime end = LocalDateTime.of(year, month, date, endHour, endMin);
+        this.timeToDisplay = start.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")) +
+                " to " + end.format(DateTimeFormatter.ofPattern("HH:mm"));
+        eventStart = start;
+        eventEnd = end;
     }
 
     /**
-     * Returns the time at which the event starts and ends as a LocalDateTime object
-     * @return the time at which the event starts and ends as a LocalDateTime object
+     * Returns the time at which the event starts as a LocalDateTime object
+     * @return the time at which the event starts as a LocalDateTime object
      */
-    public LocalDateTime getEventTime() {
-        return this.eventTime;
+    public LocalDateTime getEventStart() {
+        return this.eventStart;
+    }
+
+    /**
+     * Returns the time at which the event ends as a LocalDateTime object
+     * @return the time at which the event ends as a LocalDateTime object
+     */
+    public LocalDateTime getEventEnd() {
+        return this.eventEnd;
     }
 
     /**
