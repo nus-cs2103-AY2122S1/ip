@@ -52,7 +52,7 @@ public class Parser {
     
     private static Todo parseTodo(String taskDetails) throws DukeException {
         checkEmptyTaskDetails(taskDetails);
-        return new Todo(taskDetails, false);
+        return new Todo(taskDetails);
     }
 
     private static Event parseEvent(String taskDetails) throws DukeException {
@@ -63,7 +63,7 @@ public class Parser {
         }
         String description = parts[0];
         String at = parts[1];
-        return new Event(description, at, false);
+        return new Event(description, at);
     }
 
     private static Deadline parseDeadline(String taskDetails) throws DukeException {
@@ -74,7 +74,7 @@ public class Parser {
         }
         String description = parts[0];
         String by = parts[1];
-        return new Deadline(description, by, false);
+        return new Deadline(description, by);
     }
 
     protected static int getTaskIndex(String answer) throws DukeException {

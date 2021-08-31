@@ -1,12 +1,13 @@
 package duke.commands;
 
-import duke.tasks.Task;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+import duke.tasks.Task;
 
 public class AddTaskCommand extends Command {
     Task task;
+    
     public AddTaskCommand(Task task) {
         this.task = task;
     }

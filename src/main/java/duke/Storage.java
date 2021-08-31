@@ -86,7 +86,7 @@ public class Storage {
                     throw new DukeException("Could not parse task type on file line " + lineNo);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Duke.Task details are missing on file line " + lineNo);
+            throw new DukeException("Task details are missing on file line " + lineNo);
         }
     }
 }

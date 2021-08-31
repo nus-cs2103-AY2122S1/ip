@@ -5,11 +5,11 @@ import duke.tasks.Task;
 import java.util.Scanner;
 
 public class Ui {
-    private final Scanner myScanner;
+    private final Scanner scanner;
     private final String DIVIDER_LINE = "_______________________________________________";
     
     public Ui() {
-        myScanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
     
     public void showLoadingError() {
@@ -25,7 +25,7 @@ public class Ui {
     }
     
     public String readCommand() {
-        return myScanner.nextLine();
+        return scanner.nextLine();
     }
     
     public void showLine() {
@@ -56,6 +56,6 @@ public class Ui {
     }
     
     public void close() {
-        myScanner.close();
+        scanner.close();
     }
 }
