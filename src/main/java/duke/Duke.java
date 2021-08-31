@@ -52,9 +52,6 @@ public class Duke extends Application {
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -84,7 +81,6 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -96,7 +92,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
@@ -133,11 +129,11 @@ public class Duke extends Application {
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -146,8 +142,9 @@ public class Duke extends Application {
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response to a command from Duke.
+     *
+     * @param command The command that was entered.
      */
     public String getResponse(String command) {
 
@@ -185,9 +182,9 @@ public class Duke extends Application {
             taskNo--;
             String toBeDone = TaskList.lines.get(taskNo);
             boolean notAlreadyDone = taskList.makeDone(storage, taskNo);
-            if(notAlreadyDone){
+            if (notAlreadyDone) {
                 return "Task " + toBeDone + " is now marked as done. Well done.";
-            }else{
+            } else {
                 return "It is ALREADY DONE WOW!!!!!!";
             }
         } else if (command.contains("delete") || command.contains("remove")) {
@@ -224,9 +221,9 @@ public class Duke extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if(notAlreadyInside) {
+            if (notAlreadyInside) {
                 return "Task " + toBeAdded + " has been added. SPARKTASTIC.";
-            }else{
+            } else {
                 return "It is already inside. WOWZA!";
             }
 
@@ -258,9 +255,9 @@ public class Duke extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if(notAlreadyInside) {
+            if (notAlreadyInside) {
                 return "Task " + toBeAdded + " has been added. SPARKTASTIC.";
-            }else{
+            } else {
                 return "It is already inside. WOWZA!";
             }
 
@@ -291,14 +288,14 @@ public class Duke extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if(notAlreadyInside) {
+            if (notAlreadyInside) {
                 return "Task " + toBeAdded + " has been added. SPARKTASTIC.";
-            }else{
+            } else {
                 return "It is already inside. WOWZA!";
             }
 
         } else if (command.contains("find")) {
-            String searchQuery=command.substring(5);
+            String searchQuery = command.substring(5);
             int c = 1;
             String output = "Here are the search results for \"" + searchQuery + "\":" + System.lineSeparator();
             for (String task : TaskList.lines) {
