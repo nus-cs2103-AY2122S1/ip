@@ -1,8 +1,8 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class StorageTest {
     @Test
@@ -11,9 +11,9 @@ public class StorageTest {
         task.done();
         try {
             assertEquals(task, Storage.convertTaskStringToTask("T&&1&&hello world!&&"));
-        } catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        assertEquals(2,2);
+        assertEquals(2, 2);
     }
 }

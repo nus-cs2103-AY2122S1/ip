@@ -4,7 +4,7 @@ package duke;
  * Command that deletes tasks.
  */
 public class DeleteCommand extends Command {
-    private int deletedTaskIndex;// the index in the list
+    private int deletedTaskIndex; // the index in the list
 
     public DeleteCommand(int deletedTaskIndex) {
         this.deletedTaskIndex = deletedTaskIndex;
