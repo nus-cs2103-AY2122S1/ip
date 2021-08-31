@@ -1,19 +1,25 @@
 package duke;
 
-import duke.exceptions.AuguryException;
+import duke.controllers.AppWindow;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 /**
- * The {@code App} class starts an instance of Augury.
+ * The {@code App} class starts the GUI for Augury.
  */
-public class App {
+public class App extends Application {
 
-    /**
-     * Initializes the {@code Augury} application.
-     */
-    public static void main(String[] args) throws AuguryException {
-        Augury a = new Augury("data/tasks.txt");
-        a.init();
-        a.greet();
-        a.loop();
+    private final Augury augury = new Augury("data/tasks.txt");
+
+    @Override
+    public void start(Stage stage) {
+        AppWindow app = new AppWindow(augury);
+        Scene scene = new Scene(app);
+        scene.getStylesheets().add("/styles/augury.css");
+        stage.setScene(scene);
+        stage.setTitle("Augury");
+        stage.show();
     }
 }

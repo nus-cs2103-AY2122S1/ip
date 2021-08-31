@@ -25,7 +25,7 @@ import duke.util.StringCleaner;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    private final String VER     = "v0.9.1"; // Level-9 Find, A-CodingStandard + A-JavaDocs
+    private final String VER     = "v1.0.0"; // Level-10 GUI
     private final String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -46,6 +46,7 @@ public class Augury {
      * provided {@code String path} as location of the .txt save file.
      *
      * @param path A {@code String} containing the location of the .txt save file.
+     * @param isConsole Whether {@code Augury} is running in console mode.
      */
     public Augury(String path) {
         ui = new Ui();
@@ -120,7 +121,10 @@ public class Augury {
                 ui.speak(e.getMessage() + "\n\t Please try again.");
             }
         }
+    }
 
+    public String getResponse(String input) {
+        return ("Duke " + input);
     }
 
     private void handleAddTask(String arg) throws AuguryException {
