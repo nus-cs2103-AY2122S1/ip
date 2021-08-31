@@ -2,11 +2,14 @@ package test;
 
 import duke.Duke;
 import duke.exception.WrongCommandFormatException;
+<<<<<<< Updated upstream:src/test/java/test/DeadlineTest.java
 import duke.tasktype.Deadline;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+=======
+>>>>>>> Stashed changes:src/main/java/duke/tasktype/DeadlineTest.java
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
