@@ -29,4 +29,17 @@ public interface ChatbotUI {
         System.out.println("\t" + message.replace("\n", "\n\t"));
         System.out.println("---------------------------------------------------------");
     }
+
+    /**
+     * Prints out a given message in a pretty format.
+     *
+     * @param messages The messages to be printed out.
+     */
+    static void printMessage(String ... messages) {
+        System.out.println("---------------------------------------------------------");
+        for (String msg : messages) {
+            System.out.println("\t" + msg);
+        }
+        System.out.println("---------------------------------------------------------");
+    }
 }

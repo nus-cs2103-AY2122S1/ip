@@ -105,7 +105,7 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
             Task task = Task.parseTaskFromSavedText(lines.get(i));
             this.taskList.addTask(task);
         }
-        ChatbotUI.printMessage("Loaded tasks from save file!" + this.taskList.countTasks());
+        ChatbotUI.printMessage("Loaded tasks from save file!", this.taskList.countTasks());
     }
 
     /**
