@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import task.*;
-import ui.*;
+import task.Task;
+import task.Tasklist;
+import ui.Parser;
+import ui.Ui;
 
 /**
  * Storage for todo list information
@@ -33,7 +35,7 @@ public class Storage {
      * @return a tasklist from specified filepath
      */
     public Tasklist load() {
-        System.out.println(Ui.breakline);
+        Ui.printBreakline();
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filepath);
@@ -58,11 +60,11 @@ public class Storage {
 
             }
             System.out.printf("Loaded old tasklist...\n");
-            System.out.println(Ui.breakline);
+            Ui.printBreakline();
 
         } catch (FileNotFoundException e) {
             System.out.printf("Initializing new tasklist...\n");
-            System.out.println(Ui.breakline);
+            Ui.printBreakline();
         }
         tasklist = new Tasklist(tasks);
         return tasklist;
@@ -74,7 +76,7 @@ public class Storage {
     public void save() {
         File file = new File(filepath);
 
-       // Creates all the file directories
+        // Creates all the file directories
         String[] fileDirectories = filepath.split("/");
         int len = fileDirectories.length;
         String currDir = "";
@@ -82,7 +84,7 @@ public class Storage {
         for (int i = 0; i < len - 1; i++) {
             currDir += fileDirectories[i];
             File currFile = new File(currDir);
-            if(currFile.mkdir()) {
+            if (currFile.mkdir()) {
                 System.out.printf("Added directory %s\n", currDir);
             }
             currDir += "/";
@@ -107,7 +109,7 @@ public class Storage {
             for (int i = 0; i < tasklist.size(); i++) {
                 Task task = tasklist.get(i);
                 String listEntry = String.format("%d,%s,%b,%s,%s\n",
-                        i+1, task.getTaskCat(), task.isDone(), task.getName(), task.getDetail());
+                        i + 1, task.getTaskCat(), task.isDone(), task.getName(), task.getDetail());
                 fileWriter.append(listEntry);
             }
             fileWriter.close();

@@ -5,10 +5,10 @@ package task;
  *
  * @author: Wei Yangken
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
-    private String deadline;
     private static String taskCat = "deadline";
+    private String deadline;
 
     /**
      *  Constructor to create an DEADLINE task
@@ -26,7 +26,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        if(this.isDone()) {
+        if (this.isDone()) {
             return String.format("[D][X] %s (by: %s)", this.getName(), this.deadline);
         } else {
             return String.format("[D][ ] %s (by: %s)", this.getName(), this.deadline);
@@ -64,7 +64,7 @@ public class Deadline extends Task{
 
         Deadline task = (Deadline) o;
         // Compare the data members and return accordingly
-        return this.getName().equals(task.getName()) &&
-                this.deadline.equals(task.getDeadline());
+        return this.getName().equals(task.getName())
+                && this.deadline.equals(task.getDeadline());
     }
 }

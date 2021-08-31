@@ -5,7 +5,7 @@ package task;
  *
  * @author: Wei Yangken
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     private static String taskCat = "todo";
 
@@ -23,8 +23,8 @@ public class Todo extends Task{
      */
     @Override
     public String toString() {
-        if(this.isDone()) {
-           return String.format("[T][X] %s", this.getName());
+        if (this.isDone()) {
+            return String.format("[T][X] %s", this.getName());
         } else {
             return String.format("[T][ ] %s", this.getName());
         }

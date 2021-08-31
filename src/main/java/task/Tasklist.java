@@ -1,8 +1,9 @@
 package task;
 
 import java.util.ArrayList;
-import duke.*;
-import ui.*;
+
+import duke.DukeException;
+import ui.Ui;
 
 /**
  * Class that contains the initialization of a list to store the tasks
@@ -30,7 +31,7 @@ public class Tasklist {
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            System.out.println(Ui.breakline);
+            Ui.printBreakline();
             return;
         }
 
@@ -40,7 +41,7 @@ public class Tasklist {
         String counterMsg = String.format("Now you have %d tasks in the list.", taskList.size());
         System.out.println(addMsg);
         System.out.println(counterMsg);
-        System.out.println(Ui.breakline);
+        Ui.printBreakline();
     }
 
     /**
@@ -55,15 +56,15 @@ public class Tasklist {
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            System.out.println(Ui.breakline);
+            Ui.printBreakline();
             return;
         }
 
         System.out.println("Here are the tasks in your list:");
-        for(int i = 0;i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             System.out.printf("%d. %s\n", i + 1, this.taskList.get(i).toString());
         }
-        System.out.println(Ui.breakline);
+        Ui.printBreakline();
 
     }
 
@@ -78,20 +79,24 @@ public class Tasklist {
             removedTask = this.taskList.remove(idx - 1);
         } catch (IndexOutOfBoundsException e) {
             System.out.printf("Task number %d not found.\n", idx);
-            System.out.println(Ui.breakline);
+            Ui.printBreakline();
             return;
         }
-        String removeMsg = String.format("Noted. I've removed this task:\n%s",removedTask.toString());
+        String removeMsg = String.format("Noted. I've removed this task:\n%s", removedTask.toString());
         System.out.println(removeMsg);
         System.out.printf("Now you have %d task(s) in the list.\n", taskList.size());
-        System.out.println(Ui.breakline);
+        Ui.printBreakline();
     }
 
+    /**
+     * Check if string is found in tasklist
+     * @param item key to search for
+     */
     public void findString(String item) {
         Tasklist filteredList = new Tasklist(new ArrayList<>());
-        for(int i=0; i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
-            if(task.getName().contains(item)) {
+            if (task.getName().contains(item)) {
                 filteredList.add(task);
             }
         }
@@ -103,12 +108,12 @@ public class Tasklist {
      * @param idx Index in the arraylist
      * @return Task of a particular index
      */
-    public Task getTask(int idx) throws DukeException.TaskNotFoundException{
+    public Task getTask(int idx) throws DukeException.TaskNotFoundException {
         Task task = null;
         try {
             task = taskList.get(idx);
         } catch (IndexOutOfBoundsException e) {
-            String errMsg = String.format("Task number %d not found.",idx + 1);
+            String errMsg = String.format("Task number %d not found.", idx + 1);
             throw new DukeException.TaskNotFoundException(errMsg);
         }
         return task;
@@ -123,9 +128,9 @@ public class Tasklist {
         try {
             Task task = this.getTask(idx);
             task.setToCompleted();
-        } catch(DukeException.TaskNotFoundException e) {
+        } catch (DukeException.TaskNotFoundException e) {
             System.out.println(e.getMessage());
-            System.out.println(Ui.breakline);
+            Ui.printBreakline();
         }
     }
 
@@ -157,12 +162,12 @@ public class Tasklist {
             return false;
         }
         Tasklist tasklist = (Tasklist) o;
-        if(tasklist.size() != this.size()) {
+        if (tasklist.size() != this.size()) {
             return false;
         } else {
-            for(int i=0; i < this.size(); i++) {
-                if(!tasklist.get(i).equals(this.get(i))) {
-                    System.out.printf("different %d",i);
+            for (int i = 0; i < this.size(); i++) {
+                if (!tasklist.get(i).equals(this.get(i))) {
+                    System.out.printf("different %d", i);
                     return false;
                 }
             }

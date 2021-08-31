@@ -1,11 +1,15 @@
 package ui;
 
-import duke.*;
-import task.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.Todo;
+
 
 public class Parser {
     /**
@@ -25,22 +29,22 @@ public class Parser {
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            System.out.println(Ui.breakline);
+            Ui.printBreakline();
             return null;
         }
 
         try {
             switch (taskType) {
-                case "todo":
-                    return new Todo(taskName, isDone);
-                case "deadline":
-                    split = "/by ";
-                    break;
-                case "event":
-                    split = "/at ";
-                    break;
-                default:
-                    throw new DukeException.TaskTypeNotFoundException("TaskType cannot be found");
+            case "todo":
+                return new Todo(taskName, isDone);
+            case "deadline":
+                split = "/by ";
+                break;
+            case "event":
+                split = "/at ";
+                break;
+            default:
+                throw new DukeException.TaskTypeNotFoundException("TaskType cannot be found");
             }
 
             if (!taskName.contains(split)) {
@@ -58,7 +62,7 @@ public class Parser {
             }
             Task task = null;
 
-            if(taskType.equals("deadline")) {
+            if (taskType.equals("deadline")) {
                 task = new Deadline(name, time, isDone);
             } else if (taskType.equals("event")) {
                 task = new Event(name, time, isDone);
@@ -66,7 +70,7 @@ public class Parser {
             return task;
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            System.out.println(Ui.breakline);
+            Ui.printBreakline();
             return null;
         }
 

@@ -1,7 +1,7 @@
 package duke;
 
-import task.*;
-import ui.*;
+import task.Tasklist;
+import ui.Ui;
 
 /**
  * Allows for the main initialization of the Duke Program
@@ -10,10 +10,10 @@ import ui.*;
  */
 public class Duke {
 
+    private static final String DEFAULT_ADDRESS = "src/main/java/data/tasklist.txt";
     private Storage storage;
     private Tasklist tasklist;
     private String exitCmd = "bye";
-    private static final String DEFAULT_ADDRESS = "src/main/java/data/tasklist.txt";
 
     /**
      * Constructs Duke Object that stores information in filepath
@@ -40,12 +40,16 @@ public class Duke {
         boolean isExit = false;
         Ui user = new Ui(storage, tasklist);
         while (!isExit) {
-            if(user.readCommand().equals(exitCmd)) {
+            if (user.readCommand().equals(exitCmd)) {
                 break;
             }
         }
     }
 
+    /**
+     * Main function to run Duke Program
+     * @param args
+     */
     public static void main(String[] args) {
         String filepath = DEFAULT_ADDRESS;
         new Duke(filepath).run();

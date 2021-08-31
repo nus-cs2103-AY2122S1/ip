@@ -1,6 +1,6 @@
 package task;
 
-import ui.*;
+import ui.Ui;
 
 /**
  * Encapsulates the creation of tasks found in the to-do list
@@ -48,7 +48,7 @@ public class Task {
         this.isDone = true;
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(this);
-        System.out.println(Ui.breakline);
+        Ui.printBreakline();
     }
 
     /**

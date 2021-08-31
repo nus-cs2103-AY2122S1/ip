@@ -6,10 +6,10 @@ package task;
  *
  * @author: Wei Yangken
  */
-public class Event extends Task{
+public class Event extends Task {
 
-    private String eventDetails;
     private static String taskCat = "event";
+    private String eventDetails;
 
     /**
      *  Constructor to create an EVENT task
@@ -27,7 +27,7 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        if(this.isDone()) {
+        if (this.isDone()) {
             return String.format("[E][X] %s (at: %s)", this.getName(), this.eventDetails);
         } else {
             return String.format("[E][ ] %s (at: %s)", this.getName(), this.eventDetails);
@@ -65,7 +65,7 @@ public class Event extends Task{
 
         Event task = (Event) o;
         // Compare the data members and return accordingly
-        return this.getName().equals(task.getName()) &&
-                this.eventDetails.equals(task.getEventDetails());
+        return this.getName().equals(task.getName())
+                && this.eventDetails.equals(task.getEventDetails());
     }
 }
