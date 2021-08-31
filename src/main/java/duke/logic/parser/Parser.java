@@ -27,7 +27,7 @@ public class Parser {
      * @return The command based on the user input.
      */
     public Command parse(String text) {
-        String[] tokens = text.split(" ", 2); // split at the first white space
+        String[] tokens = text.trim().split("\\s+", 2); // split at the first white space
         Command command = parseTokens(tokens);
         return command;
     }
