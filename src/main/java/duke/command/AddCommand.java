@@ -6,6 +6,7 @@ import duke.task.Task;
 import duke.ui.UiPane;
 
 public class AddCommand extends Command {
+    /* The task to add when executing */
     private final Task task;
 
     public AddCommand(Task task) {
