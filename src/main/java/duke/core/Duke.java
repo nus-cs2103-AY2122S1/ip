@@ -135,6 +135,12 @@ public class Duke extends Application {
         return result;
     }
 
+
+    /**
+     * give response to GUI when user types in text
+     * @param input
+     * @return
+     */
     public String getResponse(String input) {
         if (input.equals("")) {
             return ui.logo + "\n" + "\n" + ui.greeting + "\n";
