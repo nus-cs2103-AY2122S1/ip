@@ -14,7 +14,6 @@ public class Ui {
      */
     public Ui() {
     }
-
     
     /**
      * Prints all Strings in msgs to screen with the appropriate format.
