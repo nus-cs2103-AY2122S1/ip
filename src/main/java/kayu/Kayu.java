@@ -62,7 +62,7 @@ public class Kayu {
             
         } catch (StorageException exception) {
             logger.printError(exception.getMessage());
-            exit();
+            exit(); // force terminate
         }
     }
 
@@ -91,7 +91,7 @@ public class Kayu {
             feedback = exception.getMessage();
             logger.printError(feedback);
             logger.print(Arrays.toString(exception.getStackTrace()));
-            isRecentCommandBye = true; // force termination on file save error
+            exit(); // force terminate
         }
         return feedback;
     }
