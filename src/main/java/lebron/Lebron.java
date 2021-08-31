@@ -19,12 +19,15 @@ import lebron.task.ToDo;
 
 public class Lebron {
 
-    private static final String FILE_PATH = "./data/duke.txt";
+    public static final String FILE_PATH = "./data/duke.txt";
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
     final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
 
+    /**
+     * Available commands that the bot can understand.
+     */
     public enum Command {
         LIST("list"),
         DONE("done"),

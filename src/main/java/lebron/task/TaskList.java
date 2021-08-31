@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private ArrayList<Task> lst;
+    private ArrayList<Task> tasks;
     private int position;
     private Ui ui = new Ui();
 
@@ -21,7 +21,7 @@ public class TaskList {
      * @param lst The list of tasks.
      */
     public TaskList(ArrayList<Task> lst) {
-        this.lst = lst;
+        this.tasks = lst;
         this.position = 1;
     }
 
@@ -31,8 +31,8 @@ public class TaskList {
      * @param task the Task that the user wants to add
      */
     public void add(Task task) {
-        lst.add(task);
-        ui.replyAdd(this.lst, task);
+        tasks.add(task);
+        ui.replyAdd(this.tasks, task);
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList {
      * @param pos the position of the Task in the ArrayList lst
      */
     public void markDone(int pos) {
-        Task task = lst.get(pos);
+        Task task = tasks.get(pos);
         task.mark();
         ui.replyMarkDone(task);
     }
@@ -52,15 +52,15 @@ public class TaskList {
      * @param pos the position of the task in the list to delete
      */
     public void delete(int pos) {
-        Task task = lst.remove(pos);
-        ui.replyDelete(task, lst.size());
+        Task task = tasks.remove(pos);
+        ui.replyDelete(task, tasks.size());
     }
 
     public ArrayList<Task> getLst() {
-        return lst;
+        return this.tasks;
     }
 
     public int getSize() {
-        return lst.size();
+        return this.tasks.size();
     }
 }
