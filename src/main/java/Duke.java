@@ -17,12 +17,27 @@ import duke.exception.FolderNotFoundException;
 import duke.command.Command;
 import duke.task.Task;
 
+/**
+ * <h1> Duke TaskList ChatBot! </h1>
+ * The duke program implements and application that keeps track of all the users task!
+ * The user is able to add, delete and "mark as complete" tasks from the task list!
+ * Currently the Duke ChatBot is only able to keep track of ToDos, Deadlines and Events!
+ *
+ * @author Ong Cheng Seong
+ * @version 1.0
+ * @since 2021-08-31
+ */
+
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Duke ChatBot Object that has a Ui, and a TaskList populated by the data read from the storage.
+     * @param filePath text document that contains the task list for Storage to read from.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -34,6 +49,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -51,6 +69,15 @@ public class Duke {
             }
         }
     }
+
+    /**
+     * Main method which starts the Duke bot.
+     * @param args user input
+     * @throws FileNotFoundException when filepath does not exist.
+     * @throws FolderNotFoundException when filepath folder does not exist.
+     * @throws IOException On input error.
+     * @see IOException
+     */
     public static void main(String[] args) throws FileNotFoundException, FolderNotFoundException, IOException {
         new Duke("../../../data/tasks.txt").run();
     }
