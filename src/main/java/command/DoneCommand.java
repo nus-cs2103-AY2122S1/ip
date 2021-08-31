@@ -43,7 +43,8 @@ public class DoneCommand extends Command {
                     + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
 
         } catch (NumberFormatException e) {
-            throw new DukeException("It looks like you did not enter a valid integer for the \"done\" command. Please try again!");
+            throw new DukeException(
+                    "It looks like you did not enter a valid integer for the \"done\" command. Please try again!");
         }
     }
 }

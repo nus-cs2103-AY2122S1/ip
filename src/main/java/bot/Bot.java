@@ -22,7 +22,7 @@ public class Bot {
         ui = new UserInterface();
 
         try {
-           tasks = Storage.load();
+           tasks = Storage.loadStorage();
         } catch (DukeException e) {
            ui.showLoadingError();
            tasks = new TaskList();

@@ -15,6 +15,8 @@ public class UserInterface {
 
     private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy - hh:mm a");
 
+    private static final String divider = "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n";
+
     /**
      * Constructor for the UserInterface class.
      *
@@ -41,23 +43,21 @@ public class UserInterface {
      * @param error The error message to be shown to the user.
      */
     public void showError(String error) {
-        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n" + error
-                + "\n-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+        System.out.println(divider + error + divider);
     }
 
     /**
      * Shows the error message to the user, specifically when local data is not found.
      */
     public void showLoadingError() {
-        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                + "Creating a new storage for the user..." + "\n-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+        System.out.println(divider + "Creating a new storage for the user..." + divider);
     }
 
     /**
      * Shows the welcome message to the user.
      */
     public void showWelcomeMessage() {
-        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
+        System.out.println(divider
                 + "Hello! My name is Duke!\n\n"
                 + " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -65,15 +65,14 @@ public class UserInterface {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n\n"
                 + "What can I do for you today?\n"
-                + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+                + divider);
     }
 
     /**
      * Shows the exit message to the user.
      */
     public void showExitMessage() {
-        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n" + "Bye... Hope to see you again soon!\n"
-                + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+        System.out.println(divider + "Bye... Hope to see you again soon!\n" + divider);
         Bot.stop();
     }
 
@@ -92,30 +91,37 @@ public class UserInterface {
         String prefix;
 
         switch (type) {
-            case 1:
-                taskType = "task (Todo)";
-                prefix = "[T][ ]";
-                break;
-            case 2:
-                taskType = "task (Deadline)";
-                prefix = "[D][ ]";
-                break;
-            case 3:
-                taskType = "task (Event)";
-                prefix = "[E][ ]";
-                break;
-            default:
-                taskType = "";
-                prefix = "";
+        case 1:
+            taskType = "task (Todo)";
+            prefix = "[T][ ]";
+            break;
+        case 2:
+            taskType = "task (Deadline)";
+            prefix = "[D][ ]";
+            break;
+        case 3:
+            taskType = "task (Event)";
+            prefix = "[E][ ]";
+            break;
+        default:
+            taskType = "";
+            prefix = "";
         }
 
+        String taskDescription = "Alright. I've added the following " + taskType + ":\n--> " + prefix + " " + input;
+
+        String taskTime =
+            type == 2
+                ? "(By: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
+                : type == 3
+                    ? "(At: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
+                    : "";
+
         // Return the message accordingly
-        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n" + "Alright. I've added the following "
-                + taskType + ":\n--> " + prefix + " " + input
-                + (type == 2 ? "(By: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
-                        : type == 3 ? "(At: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
-                                : "")
+        System.out.println(divider
+                + taskDescription
+                + taskTime
                 + "\n\n" + "You now have " + (length + 1) + (length == 0 ? " task" : " tasks")
-                + " in the list.\n" + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+                + " in the list.\n" + divider);
     }
 }

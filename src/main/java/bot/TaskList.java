@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructor for the TaskList class.
@@ -17,7 +17,7 @@ public class TaskList {
      * Takes no parameters.
      */
     TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -28,16 +28,16 @@ public class TaskList {
      * @return An ArrayList of Task objects.
      */
     public ArrayList<Task> getList() {
-        return this.list;
+        return this.tasks;
     }
 
     /**
      * Sets the current ArrayList within the TaskList as the one given.
      *
-     * @param list The list to be set as the new ArrayList within the TaskList object.
+     * @param tasks The list to be set as the new ArrayList within the TaskList object.
      */
-    public void setList(ArrayList<Task> list) {
-        this.list = list;
+    public void setList(ArrayList<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -47,7 +47,7 @@ public class TaskList {
      * @return A Task object at the given index.
      */
     public Task getTask(int index) {
-        return this.list.get(index);
+        return this.tasks.get(index);
     }
 
     /**
@@ -57,7 +57,7 @@ public class TaskList {
      * @param task The new Task object to replace the current Task object at the given index.
      */
     public void setTask(int index, Task task) {
-        this.list.set(index, task);
+        this.tasks.set(index, task);
     }
 
     /**
@@ -66,7 +66,7 @@ public class TaskList {
      * @param task The new Task object to be added to TaskList.
      */
     public void addTask(Task task) {
-        this.list.add(task);
+        this.tasks.add(task);
     }
 
     /**
@@ -75,7 +75,7 @@ public class TaskList {
      * @param index The index of the Task object to be removed.
      */
     public void removeTask(int index) {
-        this.list.remove(index);
+        this.tasks.remove(index);
     }
 
     /**
@@ -85,5 +85,5 @@ public class TaskList {
      *
      * @return The size of the TaskList.
      */
-    public int getSize() { return this.list.size(); }
+    public int getSize() { return this.tasks.size(); }
 }

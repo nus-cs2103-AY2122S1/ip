@@ -19,10 +19,10 @@ public class TodoTask extends Task {
      * This constructor is invoked when reading from the local data, in order to show the correct Task state.
      *
      * @param task The task to be stored within this TodoTask object.
-     * @param state The state of the TodoTask object.
+     * @param isDone The state of the TodoTask object.
      */
-    public TodoTask(String task, boolean state) {
-        super(task, state);
+    public TodoTask(String task, boolean isDone) {
+        super(task, isDone);
     }
 
     /**
@@ -45,7 +45,7 @@ public class TodoTask extends Task {
     @Override
     public String convertToStorageFormat() {
         return "T,"
-                + (state ? "1," : "0,")
+                + (isDone ? "1," : "0,")
                 + task;
     }
 }

@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 public class Task {
 
     protected String task;
-    protected boolean state;
+    protected boolean isDone;
     protected DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
     protected DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy - hh:mm a");
 
@@ -19,7 +19,7 @@ public class Task {
      */
     public Task(String task) {
         this.task = task;
-        this.state = false;
+        this.isDone = false;
     }
 
     /**
@@ -27,11 +27,11 @@ public class Task {
      * This constructor is invoked when reading from the local data, in order to show the correct Task state.
      *
      * @param task The task to be stored within this Task object.
-     * @param state The state of the Task object.
+     * @param isDone The state of the Task object.
      */
-    public Task(String task, boolean state) {
+    public Task(String task, boolean isDone) {
         this.task = task;
-        this.state = state;
+        this.isDone = isDone;
     }
 
     /**
@@ -42,7 +42,7 @@ public class Task {
      * @return A String enumerating this Task object.
      */
     public String getTaskState() {
-        return this.state ? "[X] " + this.task : "[ ] " + this.task;
+        return this.isDone ? "[X] " + this.task : "[ ] " + this.task;
     }
 
     /**
@@ -60,7 +60,7 @@ public class Task {
      * Takes no parameters.
      */
     public void markAsDone() {
-        this.state = true;
+        this.isDone = true;
     }
 
     /**
