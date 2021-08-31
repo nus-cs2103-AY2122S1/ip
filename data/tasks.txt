@@ -1,8 +1,9 @@
 E|1|project meeting|21 Aug 2021 2359
 T|1|read book
-D|0|return book|21 Aug 2021 1200
+D|1|return book|21 Aug 2021 1200
 D|0|return book |21 Aug 2021 1200
 T|0|return book
 D|0|return book|21 Jan 2021 1200
 E|0|meeting|21 Feb 2021 1000
-E|0|meeting|20 Aug 2021 1700
+E|1|meeting|20 Aug 2021 1700
+T|0|2103ip

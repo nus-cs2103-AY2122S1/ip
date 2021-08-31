@@ -1,8 +1,8 @@
 package duke;
 
-import duke.commands.Command;
-
 import java.io.IOException;
+
+import duke.commands.Command;
 
 /**
  * Container for Duke program.

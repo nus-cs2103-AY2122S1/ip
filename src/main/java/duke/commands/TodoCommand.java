@@ -1,11 +1,11 @@
 package duke.commands;
 
+import java.io.IOException;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Todo;
-
-import java.io.IOException;
 
 /**
  * Adds a todo task to the task list.

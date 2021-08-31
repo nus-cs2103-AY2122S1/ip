@@ -1,8 +1,8 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.Scanner;
+
+import duke.tasks.Task;
 
 /**
  * Prints various messages.
@@ -52,8 +52,8 @@ public class Ui {
                 + "|  |_|  \\  /  ____  \\  |  |\n"
                 + "|_______/ /__/    \\__\\ |__|\n";
         System.out.println(logo);
-        System.out.println("Hello! I'm Bai.\n" +
-                "What can I do for you?");
+        System.out.println("Hello! I'm Bai.\n"
+                + "What can I do for you?");
         printHorizontalLine();
 
     }
@@ -62,9 +62,9 @@ public class Ui {
      * Prints the exit message when exit command is called.
      */
     public void printExitMessage() {
-        System.out.println("====================================================\n" +
-                "Goodbai. Hope to see you again soon! （ ● ___ ●.）" +
-                "\n====================================================");
+        System.out.println("====================================================\n"
+                + "Goodbai. Hope to see you again soon! （ ● ___ ●.）"
+                + "\n====================================================");
     }
 
     /**

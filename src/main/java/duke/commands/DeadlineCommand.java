@@ -1,13 +1,13 @@
 package duke.commands;
 
+import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Deadline;
-
-import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
 
 /**
  * Adds a deadline task to the task list.
@@ -21,8 +21,8 @@ public class DeadlineCommand extends Command {
     /**
      * Guide on how to use this command word.
      */
-    public static final String MESSAGE_USAGE = COMMAND_WORD +
-            " <description> /by <date> - add a task to be completed by <date> in yyyy/MM/dd HHmm (24-hour format)\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " <description> /by <date> - add a task to be completed by <date> in yyyy/MM/dd HHmm (24-hour format)\n"
             + "   Example: " + COMMAND_WORD + " project submission /by 2021/08/30 2359";
 
     private String userCommand;
@@ -51,7 +51,7 @@ public class DeadlineCommand extends Command {
             }
 
             String by = userCommand.substring(byIndex + 4);
-            LocalDateTime date = LocalDateTime.parse(by, Command.inputFormatter);
+            LocalDateTime date = LocalDateTime.parse(by, Command.INPUT_FORMATTER);
             Deadline newDeadline = new Deadline(userCommand.substring(9, byIndex - 1), date);
 
             tasks.addTask(newDeadline);

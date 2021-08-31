@@ -1,10 +1,5 @@
 package duke;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,12 +9,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
+
 /**
  * Reads and writes valid user inputs into the task list to be saved to the hard disk.
  */
 public class Storage {
-    private String filePath;
     private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+
+    private String filePath;
 
     /**
      * Instantiates a storage object.
