@@ -1,29 +1,16 @@
-# DukeBoi
+# Duke project template
 
-As my mother used to say:
-> Duke is love, duke is life.
+This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
 
-DukeBoi is ~~so-so~~ excellent. It is
-* quite fast
-* quite easy to learn
-* **singaporean**
-
-All you need to do is,
-1. Download the jar file [here](https://www.youtube.com/watch?v=dQw4w9WgXcQ) and run in your command line
-2. Try to figure out how to input the commands correctly
-3. Screw up and quit 🙃
-
-Features:
-- [ ] Add stuff
-- [ ] Find stuff
-- [ ] Delete stuff
-
-Here is some code to give you some PTSD
-```
-function functional_expressionism() {
-   const decrement_repeater =
-	   repeater =>
-		   repeater((iter_count, x) => iter_count)(zero_repeater);
-}
-```
-
+Prerequisites: JDK 11, update Intellij to the most recent version.
+   1. If there are any further prompts, accept the defaults.
+1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
+   In the same dialog, set the **Project language level** field to the `SDK default` option.
+3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+3. After that, locate the `src/main/java/duke/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+Hello from
+ ____        _        
+|  _ \ _   _| | _____ 
+| | | | | | | |/ / _ \
+| |_| | |_| |   <  __/
+|____/ \__,_|_|\_\___|
