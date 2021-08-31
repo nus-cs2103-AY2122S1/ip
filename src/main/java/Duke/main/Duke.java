@@ -43,13 +43,15 @@ public class Duke {
      * Every time an execution is done, the task will be stored to the local file called tasks.txt
      * via Storage.
      *
-     * @param operationType Type of the operation users input.
-     * @param task Task info users input.
-     * @param time Time info users input.
      * @param index Index of the task users input.
+     * @param Command JavaVarargs Commands users input.
      */
-    public String operationForDuke(String operationType, String task, String time, int index) {
+    public String operationForDuke(int index, String... Command) {
         String text = "";
+        String operationType = Command[0];
+        String task = Command[1];
+        String time = Command[2];
+
         switch (operationType) {
         case "bye": {
             text = ui.goodbyeMessage();
@@ -140,7 +142,7 @@ public class Duke {
         time = messages.get(2);
         index = Integer.parseInt(messages.get(3));
 
-        dukeResponse = operationForDuke(operationType, task, time, index);
+        dukeResponse = operationForDuke(index, operationType, task, time);
 
         updateSaveData(); //Update the SaveData every time a round of operation is done.
 
