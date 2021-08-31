@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class GreetingMessageTest {
     private static final String DEFAULT_GREETING_MESSAGE = String.format(
             "%s\n%s",
-            "Hello! I'm jarvis.Jarvis!",
+            "Hello! I'm Jarvis!",
             "What can I do for you?"
     );
 
@@ -20,7 +20,7 @@ public class GreetingMessageTest {
     @Test
     public void greetingMessage_emptyConstructor_defaultGreetingMessageFormatted() {
         GreetingMessage greetingMessage = new GreetingMessage();
-        assertEquals(greetingMessage.getFormattedMessage(), String.format("\n%s\n", DEFAULT_GREETING_MESSAGE));
+        assertEquals(greetingMessage.getFormattedMessage(), String.format("%s\n", DEFAULT_GREETING_MESSAGE));
     }
 
     @Test

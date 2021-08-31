@@ -16,7 +16,7 @@ public class ExitMessageTest {
     @Test
     public void exitMessage_emptyConstructor_defaultExitMessageFormatted() {
         ExitMessage exitMessage = new ExitMessage();
-        assertEquals(exitMessage.getFormattedMessage(), String.format("\n%s\n", DEFAULT_EXIT_MESSAGE));
+        assertEquals(exitMessage.getFormattedMessage(), String.format("%s\n", DEFAULT_EXIT_MESSAGE));
     }
 
     @Test
