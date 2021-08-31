@@ -1,4 +1,3 @@
-[D][X] submission (by: Sep 02 2021)
 [T][X] homework x3
-[T][ ] homework x4
-[E][ ] bp concert (at: 3pm)
+[T][X] homework x4
+[E][X] blackpink concert (at: Sep 01 2021 14:00)
