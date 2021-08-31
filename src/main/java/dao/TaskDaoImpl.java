@@ -149,6 +149,6 @@ public class TaskDaoImpl implements TaskDao {
         int size = getSize();
         boolean isIndexOutOfBound = index >= getSize() || index < 0;
         
-        return size != INVALID_SIZE && !isIndexOutOfBound;
+        return size == INVALID_SIZE || isIndexOutOfBound;
     }
 }
