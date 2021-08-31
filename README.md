@@ -1,24 +1,56 @@
-# duke.duke project template
+# Welcome to Duke Point O!
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+> "why waste you brain space for boring stuff" -nobody
 
-## Setting up in Intellij
+Duke Point O helps you keep track of mundane tasks so that you can free your brain
+~~and let them rot~~ for greater stuff!
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+Who doesn't like task list??
+Everybody needs one!
+- [ ] Do me
+- [ ] Do me!
+- [ ] Do me!!
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/duke.duke.java` file, right-click it, and choose `Run duke.duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### What it can do
+- Add task
+- Mark task as done
+- Delete task
+- Okay I know it sounds boring already
+- but I assure you it is **AWESOME**!!1!
+- And many more...
+
+### In future release
+- [ ] Read your mind and automatically input tasks
+- [ ] Do the tasks for you
+- [ ] Solve world hunger
+
+###Try it (at your own risk)!
+1. Go to my recent [release](https://github.com/bklimey/ip/releases/tag/A-Jar) and download `ip.jar`
+1. Open command prompt in the same folder as `ip.jar` and enter `java -jar ip.jar` into the command prompt
+1. Run it and have fun!
+
+Disclaimer: Not responsible for any mishaps that happens to your computer
+   
+### END
+
+Btw, I liek Python :snake:
+```python
+def isAwesome():
+  return True
+```
+
+Hmm...
+- [X] a heading 
+- [X] a bullet list
+- [X] a numbered list
+- [X] a fenced code block (with syntax highlighting)
+- [X] a task list
+- [X] an emoji
+- [X] a blockquote
+- [X] a hyper link
+- [ ] inline code
+- [X] some text formatting: bold, italic, stikethrough etc.
+
+looks like i am done
+
+kthxbai
