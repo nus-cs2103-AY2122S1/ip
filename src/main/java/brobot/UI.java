@@ -26,24 +26,27 @@ public class UI {
     /**
      * Prints the greeting message to the terminal.
      */
-    public static void printGreeting() {
+    public static String printGreeting() {
         System.out.println(greetingText);
+        return greetingText;
     }
 
     /**
      * Prints the goodbye message to the terminal.
      */
-    public static void printBye() {
+    public static String printBye() {
         System.out.println(byeText);
+        return byeText;
     }
 
     /**
      * Prints a task list to the terminal.
      * @param list The TaskList to be printed.
      */
-    public static void printList(TaskList list) {
+    public static String printList(TaskList list) {
         String s = "Alright here are the tasks in your list bro:" + list.toString();
         System.out.println(formatWithSpace(s));
+        return formatWithSpace(s);
     }
 
     /**
@@ -59,13 +62,17 @@ public class UI {
      * Prints the "task added" message for a list.
      * @param list The list with the new task added.
      */
-    public static void printTaskAdded(TaskList list) {
+    public static String printTaskAdded(TaskList list) {
         int taskAmount = list.getTaskAmount();
         System.out.println(
                 formatWithSpace("Alright bro. I've added this task:\n"
                         + list.getTask(taskAmount)
                         + listTaskAmount(taskAmount)
                 )
+        );
+        return formatWithSpace("Alright bro. I've added this task:\n"
+                + list.getTask(taskAmount)
+                + listTaskAmount(taskAmount)
         );
 
     }
@@ -74,8 +81,9 @@ public class UI {
      * Prints the "task done" message for the specified task.
      * @param task The specified task.
      */
-    public static void printTaskDone(Task task) {
+    public static String printTaskDone(Task task) {
         System.out.println(formatWithSpace("Good job bro! I've marked this task as done:\n " + task));
+        return formatWithSpace("Good job bro! I've marked this task as done:\n " + task);
     }
 
     /**
@@ -83,11 +91,15 @@ public class UI {
      * @param task The deleted task.
      * @param list The list from which the task was deleted.
      */
-    public static void printTaskDeleted(Task task, TaskList list) {
+    public static String printTaskDeleted(Task task, TaskList list) {
         System.out.println(
                 formatWithSpace("Ok Bro, I removed the following task:\n "
                     + task
-                    + listTaskAmount(list.getTaskAmount())));
+                    + listTaskAmount(list.getTaskAmount()))
+        );
+        return formatWithSpace("Ok Bro, I removed the following task:\n "
+                + task
+                + listTaskAmount(list.getTaskAmount()));
     }
 
     /**
@@ -102,16 +114,18 @@ public class UI {
      * Prints the error message to the terminal.
      * @param e The error.
      */
-    public static void printError(Exception e) {
+    public static String printError(Exception e) {
         System.out.println(formatWithSpace(e.getMessage()));
+        return formatWithSpace(e.getMessage());
     }
 
     /**
      * Prints the list of matching tasks to the terminal.
      * @param list The list to be printed.
      */
-    public static void printSearchList(TaskList list) {
+    public static String printSearchList(TaskList list) {
         String s = "Here are the matching tasks in your list bro:" + list.toString();
         System.out.println(formatWithSpace(s));
+        return formatWithSpace(s);
     }
 }
