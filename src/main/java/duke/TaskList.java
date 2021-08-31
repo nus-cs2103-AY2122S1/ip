@@ -21,6 +21,7 @@ public class TaskList {
      * Delete a task from the list.
      *
      * @param index Index of the task to be deleted.
+     * @throws DukeException Error if index is out of range.
      */
     public void deleteTask(int index) throws DukeException {
         if (index > tasks.size() - 1) {
@@ -33,6 +34,8 @@ public class TaskList {
      * Get task.
      *
      * @param i Index of the task to be retrieve.
+     * @return Task Retrieved Task.
+     * @throws DukeException Error if index is out of range.
      */
     public Task get(Integer i) throws DukeException {
         if (i > tasks.size() - 1) {
@@ -43,7 +46,9 @@ public class TaskList {
 
     /**
      * Marks a task complete.
+     *
      * @param i Index of the task.
+     * @throws DukeException Error if index is out of range.
      */
     public void completeTask(Integer i) throws DukeException {
         if (i > tasks.size() - 1) {
@@ -67,15 +72,15 @@ public class TaskList {
      * @return Array of indexes.
      */
     public ArrayList<Integer> find(String query) {
-        ArrayList<Integer> output = new ArrayList<>();
+        ArrayList<Integer> outputs = new ArrayList<>();
 
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(query)) {
-                output.add(i);
+                outputs.add(i);
             }
         }
 
-        return output;
+        return outputs;
     }
 
     /**

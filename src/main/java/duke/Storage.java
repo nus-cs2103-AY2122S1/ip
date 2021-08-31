@@ -45,6 +45,7 @@ public class Storage {
      * Returns empty Tasklist if save file does not exist.
      *
      * @return TaskList of loaded save file
+     * @throws DukeException Error with load.
      */
     public TaskList load() throws DukeException {
         TaskList tasks = new TaskList();
