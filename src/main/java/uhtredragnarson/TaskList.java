@@ -1,5 +1,6 @@
 package uhtredragnarson;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -36,12 +37,13 @@ public class TaskList {
      * @param ui        Ui class to print messages to the user.
      * @return The String message.
      */
-    protected String addTodoTask(String userInput, Ui ui) {
+    protected String addTodoTask(String userInput, Ui ui, Storage storage) throws IOException {
         if (userInput.equals("todo")) {
             return "☹ OOPS!!! You need to enter a description of the task!";
         }
         ToDo todo = new ToDo(userInput.substring(5));
         tasks.add(todo);
+        storage.appendToFile(todo.toString());
         return ui.showTodoMessage(todo, tasks);
     }
 
@@ -52,7 +54,8 @@ public class TaskList {
      * @param ui        Ui class to print messages to the user.
      * @return The String message.
      */
-    protected String addDeadlineTask(String userInput, Ui ui) throws DateTimeParseException {
+    protected String addDeadlineTask(String userInput, Ui ui, Storage storage) throws DateTimeParseException,
+            IOException {
         if (userInput.equals("deadline")) {
             return "☹ OOPS!!! You need to enter a description along with the deadline!";
         }
@@ -62,6 +65,7 @@ public class TaskList {
         Deadline deadline = new Deadline(userInput.substring(9, index),
                 localDate.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
         tasks.add(deadline);
+        storage.appendToFile(deadline.toString());
         return ui.showDeadlineMessage(deadline, tasks);
     }
 
@@ -72,7 +76,7 @@ public class TaskList {
      * @param ui        Ui class to print messages to the user.
      * @return The String message.
      */
-    protected String addEventTask(String userInput, Ui ui) {
+    protected String addEventTask(String userInput, Ui ui, Storage storage) throws IOException {
         if (userInput.equals("event")) {
             return "☹ OOPS!!! You need to enter a description along with the event timings!";
         }
@@ -80,6 +84,7 @@ public class TaskList {
         String at = userInput.substring(index + 4);
         Event event = new Event(userInput.substring(6, index), at);
         tasks.add(event);
+        storage.appendToFile(event.toString());
         return ui.showEventMessage(event, tasks);
     }
 
@@ -90,7 +95,7 @@ public class TaskList {
      * @param ui        Ui class to print messages to the user.
      * @return The String message.
      */
-    protected String deleteTask(String userInput, Ui ui) {
+    protected String deleteTask(String userInput, Ui ui, Storage storage) throws IOException {
         if (tasks.size() == 0) {
             return "You have nothing in your list to delete!";
         }
@@ -102,6 +107,7 @@ public class TaskList {
         }
         Task task = tasks.get(index - 1);
         tasks.remove(index - 1);
+        storage.deleteFromFile(task.toString());
         return ui.showDeleteMessage(task, tasks);
     }
 
@@ -130,7 +136,7 @@ public class TaskList {
      * @param ui        Ui class to print messages to the user.
      * @return The String message.
      */
-    protected String markTaskAsDone(String userInput, Ui ui) {
+    protected String markTaskAsDone(String userInput, Ui ui, Storage storage) throws IOException {
         if (tasks.size() == 0) {
             return "You have nothing in your list to mark as done!";
         }
@@ -140,8 +146,10 @@ public class TaskList {
         } else if (index <= 0) {
             return "☹ OOPS!!! You need to input a POSITIVE INTEGER!";
         }
+        storage.deleteFromFile(tasks.get(index - 1).toString());
         tasks.get(index - 1).markAsDone();
         Task task = tasks.get(index - 1);
+        storage.appendToFile(task.toString());
         return ui.showDoneMessage(task);
     }
 

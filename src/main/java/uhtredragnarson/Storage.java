@@ -38,6 +38,28 @@ public class Storage {
         fw.close();
     }
 
+    protected void appendToFile(String textToAppend) throws IOException {
+        FileWriter fw = new FileWriter(filePath, true);
+        fw.write(textToAppend + "\n");
+        fw.close();
+    }
+
+    protected void deleteFromFile(String textToDelete) throws IOException {
+        File file = new File(filePath);
+        Scanner s = new Scanner(file);
+        String newFileText = "";
+        while (s.hasNext()) {
+            String line = s.nextLine();
+            if (textToDelete.equals(line)) {
+                continue;
+            }
+            newFileText += line + "\n";
+        }
+        FileWriter fw = new FileWriter("src/main/java/data/Lawbringer.txt");
+        fw.write(newFileText);
+        fw.close();
+    }
+
     /**
      * Reads from the .txt file and returns a list of user tasks.
      *

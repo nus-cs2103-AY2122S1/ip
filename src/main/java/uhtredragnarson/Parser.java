@@ -1,5 +1,6 @@
 package uhtredragnarson;
 
+import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -16,7 +17,8 @@ public class Parser {
      * @param ui        Ui class to print messages.
      * @throws UhtredRagnarsonException Throws this exception if the user inputs an invalid command.
      */
-    protected static String parse(String userInput, TaskList taskList, Ui ui) throws UhtredRagnarsonException {
+    protected static String parse(String userInput, TaskList taskList, Ui ui, Storage storage)
+            throws UhtredRagnarsonException, IOException {
         String result = "";
         String commandType = userInput.split(" ")[0];
         try {
@@ -25,19 +27,19 @@ public class Parser {
                 result = taskList.printTaskList();
                 break;
             case "done":
-                result = taskList.markTaskAsDone(userInput, ui);
+                result = taskList.markTaskAsDone(userInput, ui, storage);
                 break;
             case "delete":
-                result = taskList.deleteTask(userInput, ui);
+                result = taskList.deleteTask(userInput, ui, storage);
                 break;
             case "todo":
-                result = taskList.addTodoTask(userInput, ui);
+                result = taskList.addTodoTask(userInput, ui, storage);
                 break;
             case "deadline":
-                result = taskList.addDeadlineTask(userInput, ui);
+                result = taskList.addDeadlineTask(userInput, ui, storage);
                 break;
             case "event":
-                result = taskList.addEventTask(userInput, ui);
+                result = taskList.addEventTask(userInput, ui, storage);
                 break;
             case "find":
                 result = taskList.findTasks(userInput, ui);
