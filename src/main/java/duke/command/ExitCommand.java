@@ -4,6 +4,9 @@ import duke.ui.Storage;
 import duke.ui.TaskList;
 import duke.ui.Ui;
 
+/**
+ * ExitCommand class to handle the closing of the bot
+ */
 public class ExitCommand extends Command { //ExitCommand to handle the shutting down of bots
 
     /**

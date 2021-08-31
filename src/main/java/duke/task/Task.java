@@ -4,8 +4,8 @@ package duke.task;
  * Base Task class
  */
 public class Task { //Base Task Class
-    private final String name;
     protected boolean isDone;
+    private final String name;
 
     /**
      * Constructor of Task class

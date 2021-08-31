@@ -1,7 +1,13 @@
 package duke.ui;
 
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
-import duke.command.*;
 
 public class Parser { //The Parser to handle the inputs from the terminal
 

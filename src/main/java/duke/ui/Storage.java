@@ -1,13 +1,17 @@
 package duke.ui;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.io.BufferedReader;
 import java.nio.file.Paths;
 
 public class Storage { //Storage class used to handle the writing of the file after each actions
-    private static Path filePath;
     private static Path txtPath;
 
     /**
@@ -15,7 +19,7 @@ public class Storage { //Storage class used to handle the writing of the file af
      * @param path the filepath where the txt file will be/is created
      */
     public Storage(String path) {
-        filePath = Paths.get(path);
+        Path filePath = Paths.get(path);
         if (!Files.exists(filePath)) {
             new File(filePath.toString()).mkdirs();
         }

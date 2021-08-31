@@ -1,8 +1,8 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
 
@@ -14,11 +14,13 @@ public class EventTest {
 
     @Test
     public void test2() {
-        assertEquals("E | 0 | Adopt kat | Oct 10 2020" ,new Event("Adopt kat", "2020-10-10").write());
+        assertEquals("E | 0 | Adopt kat | Oct 10 2020" ,
+                new Event("Adopt kat", "2020-10-10").write());
     }
 
     @Test
     public void test3() {
-        assertEquals("[E][ ] Slap brother (at: Jan 10 2021 0900PM)" ,new Event("Slap brother", "2021-01-10 21:00").toString());
+        assertEquals("[E][ ] Slap brother (at: Jan 10 2021 0900PM)" ,
+                new Event("Slap brother", "2021-01-10 21:00").toString());
     }
 }

@@ -1,15 +1,19 @@
 package duke.ui;
 
-import duke.exception.DukeException;
-import duke.task.*;
-
 import java.io.BufferedReader;
-import java.util.ArrayList;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskTime;
+import duke.task.Todo;
 
 public class TaskList { //TaskList class used to store the tasks and will be updated from the Command class
-    private final ArrayList<Task> listArray;
     protected int count;
+    private final ArrayList<Task> listArray;
 
     /**
      * Constructor for TaskList

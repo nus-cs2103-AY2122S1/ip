@@ -1,13 +1,15 @@
 package duke.command;
 
-import duke.Duke;
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.ui.Storage;
 import duke.ui.TaskList;
 import duke.ui.Ui;
 
-import java.io.IOException;
-
+/**
+ * DoneCommand Class to handle the done command
+ */
 public class DoneCommand extends Command { //DoneCommand to handle the updating of list
     private final int index;
 
