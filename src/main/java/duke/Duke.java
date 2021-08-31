@@ -1,18 +1,19 @@
 package duke;
 
-import java.time.LocalTime;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
-import duke.task.Task;
-import duke.task.Todo;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import duke.data.Storage;
 import duke.data.TaskList;
-import duke.user.Ui;
-import duke.user.Parser;
-import duke.user.DukeException;
 
+import duke.user.DukeException;
+import duke.user.Parser;
+import duke.user.Ui;
 
 /**
  * Main class for the Duke program.
