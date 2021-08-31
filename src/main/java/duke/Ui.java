@@ -13,14 +13,14 @@ public class Ui {
         // Load data and list task
         try {
             userList = TaskList.load();
+            System.out.println("Hello! Welcome back!");
+            System.out.println("These are the task(s) you have left off:");
+            userList.list();
         } catch (Exception exception) {
-            System.out.println(exception);
-            System.out.println("Duke.Task list not found.");
             userList = new TaskList();
-            System.out.println("New task list created");
+            System.out.println("Hello! I'm Duke");
         }
 
-        System.out.println("Hello! I'm Duke.Duke");
         System.out.println("What can I do for you?");
 
         Scanner sc = new Scanner(System.in);

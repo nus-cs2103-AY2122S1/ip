@@ -47,6 +47,9 @@ public class TaskList {
             System.out.println(counter + "." + task);
             counter++;
         }
+        if (counter == 1) {
+            System.out.println("You have no more task!");
+        }
     }
 
     public static TaskList load() throws FileNotFoundException {
