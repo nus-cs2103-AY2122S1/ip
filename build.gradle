@@ -29,12 +29,12 @@ test {
 }
 
 application {
-    mainClassName = "Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveClassifier = null
+    archiveBaseName.set("duke")
+    archiveClassifier.set(null)
 }
 
 checkstyle {
