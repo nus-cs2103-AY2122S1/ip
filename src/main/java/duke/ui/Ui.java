@@ -84,9 +84,10 @@ public class Ui {
      * Prints the error to the user.
      *
      * @param errorMessage The error message you wish to show to the user.
+     * @return The string representing the error message.
      */
-    public void showError(String errorMessage) {
-        printToUser("☹ OOPS!!! " + errorMessage);
+    public String showError(String errorMessage) {
+        return "OOPS!!! " + errorMessage;
     }
 
 }

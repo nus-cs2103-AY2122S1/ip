@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -75,16 +77,17 @@ public class Storage {
      * Saves the list of tasks. If location doesn't exist, creates it.
      *
      * @param tasks The list of tasks to be saved.
-     * @throws DukeException If cannot save list at specified path.
+     * @throws DukeException If storage cannot save list at specified path.
      */
     public void write(TaskList tasks) throws DukeException {
         try {
-            // need to use the filePath and cut off file name
-            File directoryName = new File("./data");
+            Path filePath = Paths.get(this.filePath);
+            Path directoryPath = filePath.getParent();
+            File directoryName = new File(directoryPath.toString());
             if (!directoryName.exists()) {
                 directoryName.mkdirs();
             }
-            FileWriter fw = new FileWriter(filePath);
+            FileWriter fw = new FileWriter(this.filePath);
             for (Task currTask : tasks.getTasks()) {
                 fw.write(currTask.getTaskType() + "|" + (currTask.getIsDone() ? "1" : "0") + "|"
                         + currTask.getDescription()

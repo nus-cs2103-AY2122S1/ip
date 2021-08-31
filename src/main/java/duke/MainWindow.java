@@ -29,10 +29,27 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String logo = "\t____         _        \n"
+                   + "\t|  _ \\ _   _| | _____ \n"
+                   + "\t| | | | | | | |/ / _ \\\n"
+                   + "\t| |_| | |_| |   <  __/\n"
+                   + "\t|____/ \\__,_|_|\\_\\___|\n";
+        String welcomeMessage = logo + "Hello I'm Duke! What can I do for you?";
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
+        );
     }
 
+    /**
+     * Boot up duke and load up task list.
+     * @param d The duke bot you are booting up.
+     */
     public void setDuke(Duke d) {
         duke = d;
+        String loadingMessage = duke.loadTasks();
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(loadingMessage, dukeImage)
+        ); 
     }
 
     /**
@@ -49,19 +66,5 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-    
-    @FXML
-    public void handleBotWelcome() {
-        String logo = "\t ____        _        \n"
-                + "\t|  _ \\ _   _| | _____ \n"
-                + "\t| | | | | | | |/ / _ \\\n"
-                + "\t| |_| | |_| |   <  __/\n"
-                + "\t|____/ \\__,_|_|\\_\\___|\n";
-        String message = logo + "Hello I'm Duke!\n" 
-                + "What can I do for you?";
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(message, dukeImage)
-        );
-    }
-    
+
 }

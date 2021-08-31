@@ -41,11 +41,20 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+
+    }
+
+    /**
+     * Load tasks, returning the appropriate message.
+     * @return A successful message, if task list is found, else return the error message.
+     */
+    public String loadTasks() {
         try {
             tasks = new TaskList(storage.load());
+            return "I have loaded up your tasks successfully.";
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
             tasks = new TaskList();
+            return ui.showError(e.getMessage());
         }
     }
 
@@ -65,7 +74,9 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            String botResponse = c.execute(tasks, ui, storage);
+            storage.write(tasks);
+            return botResponse;
         } catch (DukeException e) {
             return e.getMessage(); 
         }
