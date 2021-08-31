@@ -13,8 +13,8 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
+/legacy/text-ui-test/ACTUAL.txt
+legacy/text-ui-test/EXPECTED-UNIX.TXT
 
 
 # compile files

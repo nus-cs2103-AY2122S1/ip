@@ -39,8 +39,8 @@ public abstract class Command {
      * @param tasks Tasks currently in the Yoyo program.
      * @param storage Storage instance of the Yoyo program.
      * @param dialogHandler Ui instance of Yoyo program.
+     * @return A string to be shown to user.
      * @throws YoyoException
-     * @return
      */
     public abstract String execute(TaskList tasks, Storage storage, DialogHandler dialogHandler)
             throws YoyoException;

@@ -16,6 +16,11 @@ public class Main extends Application {
 
     private Yoyo yoyo = new Yoyo();
 
+    /**
+     * Main entry point for GUI.
+     *
+     * @param stage Stage for setting the scene.
+     */
     @Override
     public void start(Stage stage) {
         try {

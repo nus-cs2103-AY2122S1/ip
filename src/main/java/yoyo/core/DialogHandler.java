@@ -4,7 +4,8 @@ import yoyo.task.Task;
 import yoyo.task.TaskList;
 
 public class DialogHandler {
-    public DialogHandler() {}
+    public DialogHandler() {
+    }
 
     /**
      * Say goodbye to users.
@@ -23,7 +24,7 @@ public class DialogHandler {
         if (currListLength == 0) {
             return "You have no task at the moment.";
         } else {
-            String res = "";
+            String res = "Here are the tasks you currently have:\n";
             for (int i = 0; i < currListLength; i++) {
                 String toAdd = i + 1 + "." + tasks.get(i).showStatus() + "\n";
                 res += toAdd;
@@ -55,7 +56,7 @@ public class DialogHandler {
     /**
      * Prints a message indicating selected task has been marked as done.
      *
-     * @param tasks TaskList of the program.
+     * @param tasks     TaskList of the program.
      * @param taskIndex Index of the Task to be marked as done.
      */
     public String printMarkTaskMessage(TaskList tasks, int taskIndex) {
@@ -68,7 +69,7 @@ public class DialogHandler {
      * Prints a message indicating selected task has been removed.
      *
      * @param toRemove The Task that has been removed.
-     * @param tasks TaskList of the program.
+     * @param tasks    TaskList of the program.
      */
     public String printRemoveTaskMessage(Task toRemove, TaskList tasks) {
         String res = "Noted. I've removed this task:\n"
@@ -92,15 +93,6 @@ public class DialogHandler {
                 + tasks.size()
                 + " tasks in the list.\n";
         return res;
-    }
-
-    /**
-     * Prints the Exception's error message.
-     *
-     * @param exception Error whose message is to be printed.
-     */
-    public String printErrorMessage(Exception exception) {
-        return exception.getMessage();
     }
 
 }

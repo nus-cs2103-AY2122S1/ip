@@ -1,7 +1,6 @@
 package yoyo.gui;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -19,24 +18,27 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Yoyo yoyo;
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Yoyo.jpeg"));
 
-    public MainWindow() {}
-
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
+    /**
+     * Actions to be executed when starting up GUI.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Welcome! What can i do for you?", dukeImage)
+                DialogBox.getDukeDialog("Hi there, I am Yoyo! What tasks do you have in mind?", dukeImage)
         );
     }
 
+    /**
+     * Sets up Yoyo instance for MainWindow.
+     *
+     * @param y Yoyo instance.
+     */
     public void setYoyo(Yoyo y) {
         yoyo = y;
     }
