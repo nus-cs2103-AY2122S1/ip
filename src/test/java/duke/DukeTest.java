@@ -22,50 +22,22 @@ public class DukeTest {
 
     @Test
     public void byeTest() {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         String data = "bye\n";
-        System.setOut(new PrintStream(outputStream));
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
-        new Duke("data/test.txt").run();
-        resetStreams();
-        String expected = (Ui.LOGO + "\n"
-                + "__________________________________________________________________________________\n"
-                + "|  Cat:  Meow-ning!\n"
-                + "__________________________________________________________________________________\n"
-                + "\n"
-                + "__________________________________________________________________________________\n"
-                + "|  Cat:  See you again, meow!\n"
-                + "__________________________________________________________________________________\n"
-                + "\n").replaceAll("\n", "").replaceAll("\r", "");
+        String output = new Duke("data/test.txt").getResponse("bye");
+        String expected = ("See you again, meow!\n").replaceAll("\n", "").replaceAll("\r", "");
 
-        assertEquals(expected, outputStream.toString().replaceAll("\n", "").replaceAll("\r", ""));
+        assertEquals(expected, output.replaceAll("\n", "").replaceAll("\r", ""));
     }
 
     @Test
     public void eventTest() {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        String data = "event christmas day /at 25Dec\nbye\n";
-        System.setOut(new PrintStream(outputStream));
-        System.setIn(new ByteArrayInputStream(data.getBytes()));
-        new Duke("data/test.txt").run();
-        resetStreams();
-        String expected = (Ui.LOGO + "\n"
-                + "__________________________________________________________________________________\n"
-                + "|  Cat:  Meow-ning!\n"
-                + "__________________________________________________________________________________\n"
-                + "\n"
-                + "__________________________________________________________________________________\n"
-                + "|  Cat:  Meow. I've added this task:\n"
+        String data = "event christmas day /at 25Dec";
+        String output = new Duke("data/test.txt").getResponse(data);
+        String expected = ("Meow. I've added this task:\n"
                 + "   [E][ ] christmas day (at: Dec 25 2021 All day)\n"
-                + "|  Now you have 1 tasks in the list.\n"
-                + "__________________________________________________________________________________\n"
-                + "\n"
-                + "__________________________________________________________________________________\n"
-                + "|  Cat:  See you again, meow!\n"
-                + "__________________________________________________________________________________\n"
-                + "\n").replaceAll("\n", "").replaceAll("\r", "");
+                + "Now you have 1 tasks in the list.\n").replaceAll("\n", "").replaceAll("\r", "");
 
-        assertEquals(expected, outputStream.toString().replaceAll("\n", "").replaceAll("\r", ""));
+        assertEquals(expected, output.replaceAll("\n", "").replaceAll("\r", ""));
     }
 
 }
