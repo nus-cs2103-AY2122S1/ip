@@ -7,6 +7,12 @@ public class Parser {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates Parser object.
+     *
+     * @param tasks A list of Tasks to interact with.
+     * @param ui Way to get user input.
+     */
     public Parser(TaskList tasks, Ui ui) {
         this.tasks = tasks;
         this.ui = ui;

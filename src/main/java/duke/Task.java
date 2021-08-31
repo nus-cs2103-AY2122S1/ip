@@ -8,11 +8,22 @@ public class Task {
     private String desc;
     private boolean isDone;
 
+    /**
+     * Creates a Task object.
+     *
+     * @param desc Description of the Task.
+     */
     public Task(String desc) {
         this.desc = desc;
         this.isDone = false;
     }
 
+    /**
+     * Creates a Task object.
+     *
+     * @param desc Description of the Task.
+     * @param isDone Status of the Task.
+     */
     public Task(String desc, boolean isDone) {
         this.desc = desc;
         this.isDone = isDone;

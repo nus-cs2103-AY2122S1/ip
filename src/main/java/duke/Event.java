@@ -6,11 +6,24 @@ package duke;
 public class Event extends Task {
     private String duration;
 
+    /**
+     * Constructs an Event object.
+     *
+     * @param desc Description of Event.
+     * @param duration The time frame of the Event.
+     */
     public Event(String desc, String duration) {
         super(desc.trim());
         this.duration = duration;
     }
 
+    /**
+     * Constructs an Event object.
+     *
+     * @param desc Description of Event.
+     * @param duration The time frame of the Event.
+     * @param isDone Status of the Event.
+     */
     public Event(String desc, String duration, boolean isDone) {
         super(desc.trim(), isDone);
         this.duration = duration.trim();

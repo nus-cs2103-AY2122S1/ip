@@ -16,6 +16,12 @@ public class Storage {
     private Path saveFile;
     private Ui ui;
 
+    /**
+     * Creates Storage object.
+     *
+     * @param saveFile Path to hard drive.
+     * @param ui Way to interact with user.
+     */
     public Storage(Path saveFile, Ui ui) {
         this.saveFile = saveFile;
         this.ui = ui;
@@ -36,7 +42,7 @@ public class Storage {
                     String[] taskComps = taskln.split("\\|");
                     if (taskComps[0].equals("T")) {
                         tasks.add(new Todo(taskComps[2], Boolean.parseBoolean(taskComps[1])));
-                    } else if (taskComps[0]. equals("D")) {
+                    } else if (taskComps[0].equals("D")) {
                         tasks.add(new Deadline(taskComps[2], taskComps[3], Boolean.parseBoolean(taskComps[1])));
                     } else if (taskComps[0].equals("E")) {
                         tasks.add(new Event(taskComps[2], taskComps[3], Boolean.parseBoolean(taskComps[1])));

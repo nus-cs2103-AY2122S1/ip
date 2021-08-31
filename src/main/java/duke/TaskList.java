@@ -10,6 +10,12 @@ public class TaskList {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Creates a TaskList object.
+     *
+     * @param storage Provides access to hard drive.
+     * @param ui Allows for interaction with user.
+     */
     public TaskList(Storage storage, Ui ui) {
         this.tasks = new ArrayList<>(100);
         this.storage = storage;
@@ -26,21 +32,19 @@ public class TaskList {
      * Displays contents of list to screen.
      */
     public void displayList() {
-        String line = "____________________________________________________________";
-        String indent = "    ";
 
         if (tasks.size() == 0) {
             ui.toScreen("You currently have no tasks.");
             return;
         }
 
-        System.out.println(indent + line + "\n" +
-                indent + "Here are the tasks in your list: ");
+        System.out.println(Ui.INDENT + Ui.LINE + "\n"
+                + Ui.INDENT + "Here are the tasks in your list: ");
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(indent + indent + (i + 1) + "." + tasks.get(i).toString());
+            System.out.println(Ui.INDENT + Ui.INDENT + (i + 1) + "." + tasks.get(i).toString());
         }
 
-        System.out.println(indent + line);
+        System.out.println(Ui.INDENT + Ui.LINE);
     }
 
     /**
@@ -159,8 +163,6 @@ public class TaskList {
             return;
         }
 
-        String line = "____________________________________________________________";
-        String indent = "    ";
         ArrayList<Task> temp = new ArrayList<>();
         for (Task t : tasks) {
             if (t.toString().contains(key)) {
@@ -173,13 +175,13 @@ public class TaskList {
             return;
         }
 
-        System.out.println(indent + line + "\n" +
-                indent + "Here are the tasks that match your search: ");
+        System.out.println(Ui.INDENT + Ui.LINE + "\n"
+                + Ui.INDENT + "Here are the tasks that match your search: ");
         for (int i = 0; i < temp.size(); i++) {
-            System.out.println(indent + indent + (i + 1) + "." + temp.get(i).toString());
+            System.out.println(Ui.INDENT + Ui.INDENT + (i + 1) + "." + temp.get(i).toString());
         }
 
-        System.out.println(indent + line);
+        System.out.println(Ui.INDENT + Ui.LINE);
     }
 
     /**

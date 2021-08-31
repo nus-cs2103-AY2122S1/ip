@@ -6,9 +6,12 @@ import java.util.Scanner;
  * Handles user interaction.
  */
 public class Ui {
-    private static final String LINE = "____________________________________________________________";
-    private static final String INDENT = "    ";
+    public static final String LINE = "____________________________________________________________";
+    public static final String INDENT = "    ";
 
+    /**
+     * Empty Constructor to create Ui object.
+     */
     public Ui() {
     }
 

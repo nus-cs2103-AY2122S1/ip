@@ -12,6 +12,11 @@ public class Duke {
     private Parser parser;
     private Ui ui;
 
+    /**
+     * Constructs a Duke object initialised with a path to hard drive.
+     *
+     * @param saveFile The given hard drive path.
+     */
     public Duke(Path saveFile) {
         ui = new Ui();
         storage = new Storage(saveFile, ui);
@@ -20,12 +25,12 @@ public class Duke {
     }
 
     /**
-     * Main driver that starts the program
+     * Main driver that starts the program.
      */
     public void run() {
         ui.firstWelcome();
         boolean cont = true;
-        while(cont) {
+        while (cont) {
             String c = ui.readCommand();
             cont = parser.parse(c);
         }
