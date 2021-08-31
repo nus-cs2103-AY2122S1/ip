@@ -4,7 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * Helps to parse user input time string
+ */
 public class TimeHandler {
+
+    /**
+     * Returns a formatted data and time string.
+     *
+     * @param timeString string input from user
+     * @return a formatted data and time string
+     */
     public static String parse(String timeString) {
         String[] s = timeString.trim().split("\\s+");
         String formattedDate = "";
@@ -24,7 +34,7 @@ public class TimeHandler {
                 String minute = s2.substring(2);
                 String meridiem = (hour > 11) ? "PM" : "AM";
                 hour = (hour - 1) % 12 + 1;
-                formattedTime = " " + String.valueOf(hour) + ":" + minute + " " + meridiem;
+                formattedTime = " " + hour + ":" + minute + " " + meridiem;
             }
         }
         return formattedDate + formattedTime;

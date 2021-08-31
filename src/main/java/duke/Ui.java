@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Represents a front end user interface.
+ */
 public class Ui {
 
     public static void run() {

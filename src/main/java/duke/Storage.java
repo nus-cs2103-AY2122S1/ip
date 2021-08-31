@@ -9,6 +9,9 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.List;
 
+/**
+ * Represents a helper class to save and retrieve task list.
+ */
 public class Storage {
 
     private static final String FILE_PATH = "./data/duke.txt";
@@ -55,7 +58,7 @@ public class Storage {
         }
         if (taskType.equals("T")) {
             String description = taskString.substring(secondBarIndex + 1).strip();
-            return new Todo(description, doneStatus == "1" ? true : false);
+            return new Todo(description, doneStatus.equals("1"));
         }
         int lastBarIndex = taskString.lastIndexOf("|");
         assert lastBarIndex != -1; // There should at least be 1 bar
@@ -65,10 +68,10 @@ public class Storage {
         String description = taskString.substring(secondBarIndex + 1, lastBarIndex).strip();
         String timing = taskString.substring(lastBarIndex + 1).strip();
         if (taskType.equals("D")) {
-            return new Deadline(description, doneStatus == "1" ? true : false, timing);
+            return new Deadline(description, doneStatus.equals("1"), timing);
         } else {
             assert taskType.equals("E");
-            return new Event(description, doneStatus == "1" ? true : false, timing);
+            return new Event(description, doneStatus.equals("1"), timing);
         }
     }
 
