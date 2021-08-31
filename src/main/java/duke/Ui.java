@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 /**
  * Class which stores basic output of the bot

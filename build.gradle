@@ -1,8 +1,6 @@
 plugins {
     id 'java'
     id 'application'
-    id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'org.example'
@@ -11,18 +9,14 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
-        }
-    }
-}
+
+
 dependencies {
     implementation 'org.junit.jupiter:junit-jupiter:5.7.0'
-    compile 'junit:junit:4.12'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 
-    String javaFxVersion = '11'
+    String javaFxVersion = '16'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'

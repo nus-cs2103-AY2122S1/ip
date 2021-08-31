@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 /**
  * Class which converts user command to functions
@@ -10,6 +10,7 @@ public class Parser {
     public Parser(TaskList taskList) {
         this.taskList = taskList;
     }
+
 
     /**
      * Takes in the user input and run functions that are associated with the input
@@ -55,6 +56,8 @@ public class Parser {
             System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
+
+
 
 
 }

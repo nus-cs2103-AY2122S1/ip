@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
