@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.tasks.Task;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+import duke.tasks.Task;
 
 /**
  * Represents a command to add a Task to a TaskList.

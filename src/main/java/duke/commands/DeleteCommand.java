@@ -1,10 +1,10 @@
 package duke.commands;
 
 import duke.DukeException;
-import duke.tasks.Task;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+import duke.tasks.Task;
 
 /**
  * Represents Command to delete a Task from a TaskList.

@@ -9,14 +9,14 @@ import java.util.Scanner;
  * It deals with user interactions like reading user input and displaying messages to the user.
  */
 public class Ui {
-    private final Scanner myScanner;
+    private final Scanner scanner;
     private final String DIVIDER_LINE = "_______________________________________________";
 
     /**
      * Constructs a Ui object with a Scanner.
      */
     public Ui() {
-        myScanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     /**
@@ -46,7 +46,7 @@ public class Ui {
      * @return Parsed user input as String.
      */
     public String readCommand() {
-        return myScanner.nextLine();
+        return scanner.nextLine();
     }
 
     /**
@@ -110,6 +110,6 @@ public class Ui {
      * Closes Scanner stored in Ui.
      */
     public void close() {
-        myScanner.close();
+        scanner.close();
     }
 }

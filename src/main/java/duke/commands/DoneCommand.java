@@ -1,16 +1,17 @@
 package duke.commands;
 
 import duke.DukeException;
-import duke.tasks.Task;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+import duke.tasks.Task;
 
 /**
  * Represents Command to mark a Task in a TaskList as done.
  */
 public class DoneCommand extends Command {
     private final int taskIndex;
+    
     public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
