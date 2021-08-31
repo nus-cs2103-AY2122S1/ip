@@ -1,12 +1,12 @@
 package nyx;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
     @Test
-    public void testStringConversion_done(){
+    public void testStringConversion_done() {
         ToDo toDo = new ToDo("return book", true);
         assertEquals("[T][X] return book", toDo.toString());
     }
@@ -30,7 +30,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void testSetDone(){
+    public void testSetDone() {
         ToDo toDo = new ToDo("return book");
         toDo.setDone();
         assertEquals("[T][X] return book", toDo.toString());

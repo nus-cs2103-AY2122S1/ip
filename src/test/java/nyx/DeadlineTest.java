@@ -1,12 +1,12 @@
 package nyx;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
-    public void testStringConversion_done(){
+    public void testStringConversion_done() {
         Deadline deadline = new Deadline("return book", "2021-04-12 15:35", true);
         assertEquals("[D][X] return book (by: Mon 12 Apr 2021, 3:35PM)", deadline.toString());
     }

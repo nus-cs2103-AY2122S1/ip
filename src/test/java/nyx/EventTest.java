@@ -1,12 +1,12 @@
 package nyx;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
     @Test
-    public void testStringConversion_done(){
+    public void testStringConversion_done() {
         Event event = new Event("party", "2021-04-12 15:35", true);
         assertEquals("[E][X] party (at: Mon 12 Apr 2021, 3:35PM)", event.toString());
     }
