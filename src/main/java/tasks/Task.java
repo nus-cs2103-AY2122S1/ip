@@ -13,7 +13,12 @@ public abstract class Task {
     private final String message;
     private Boolean completed;
 
-    public Task(String message){
+    /**
+     * Constructor for Task object.
+     *
+     * @param message name of Task
+     */
+    public Task(String message) {
         this.message = message;
         this.completed = false;
     }
@@ -36,11 +41,11 @@ public abstract class Task {
         case "todo":
             return new ToDo(input);
         case "event":
-            String[] message_and_eventDate = input.split("/at ");
-            return new Event(message_and_eventDate[0], message_and_eventDate[1]);
+            String[] messageAndEventDate = input.split("/at ");
+            return new Event(messageAndEventDate[0], messageAndEventDate[1]);
         case "deadline":
-            String[] message_and_endTime = input.split("/by ");
-            return new Deadline(message_and_endTime[0], message_and_endTime[1]);
+            String[] messageAndEndTime = input.split("/by ");
+            return new Deadline(messageAndEndTime[0], messageAndEndTime[1]);
         default:
             throw new NoSuchCommandException("No such command!");
         }
@@ -82,7 +87,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + (this.completed ? "X" : " ")  + "] " + this.message;
+        return "[" + (this.completed ? "X" : " ") + "] " + this.message;
     }
 
     /**

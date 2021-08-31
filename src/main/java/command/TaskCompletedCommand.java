@@ -1,4 +1,4 @@
-package Command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
@@ -6,18 +6,18 @@ import duke.Ui;
 import exceptions.DukeException;
 
 /**
- * Command to search for a Task matching a search term.
+ * Command to mark a task as complete.
  *
  * @author Quan Teng Foong
  */
-public class SearchCommand extends Command {
+public class TaskCompletedCommand extends Command {
 
-    public SearchCommand(String searchTerm) {
-        super(searchTerm);
+    public TaskCompletedCommand(String taskIndex) {
+        super(taskIndex);
     }
 
     /**
-     * Searches current TaskList for a search term.
+     * Marks a task as complete.
      *
      * @param taskList the current list of tasks
      * @param ui the user interface object
@@ -25,7 +25,7 @@ public class SearchCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        TaskList matchingTasks = taskList.search(super.getExtraInput());
-        ui.showSearchResults(matchingTasks);
+        taskList.doTask(Integer.parseInt(super.getExtraInput()) - 1);
+        ui.showList(taskList);
     }
 }

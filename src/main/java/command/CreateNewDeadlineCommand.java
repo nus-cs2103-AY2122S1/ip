@@ -1,4 +1,4 @@
-package Command;
+package command;
 
 import duke.Storage;
 import duke.TaskList;
@@ -25,8 +25,8 @@ public class CreateNewDeadlineCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String[] message_and_endTime = super.getExtraInput().split("/by ");
-        taskList.add(new Deadline(message_and_endTime[0], message_and_endTime[1]));
+        String[] messageAndEndTime = super.getExtraInput().split("/by ");
+        taskList.add(new Deadline(messageAndEndTime[0], messageAndEndTime[1]));
     }
 
     /**
@@ -37,7 +37,7 @@ public class CreateNewDeadlineCommand extends Command {
      */
     @Override
     public boolean equals(Object o) {
-        return o instanceof CreateNewDeadlineCommand &&
-                super.getExtraInput().equals(((CreateNewDeadlineCommand) o).getExtraInput());
+        return o instanceof CreateNewDeadlineCommand
+                && super.getExtraInput().equals(((CreateNewDeadlineCommand) o).getExtraInput());
     }
 }

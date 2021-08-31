@@ -1,9 +1,9 @@
 package duke;
 
-import Command.Command;
-import exceptions.DukeException;
-
 import java.io.IOException;
+
+import command.Command;
+import exceptions.DukeException;
 
 /**
  * Duke is a bot capable of storing a todo list with an interactive interface.
@@ -12,9 +12,9 @@ import java.io.IOException;
  */
 public class Duke {
 
+    private static TaskList taskList;
     private Storage storage;
     private Ui ui;
-    private static TaskList taskList;
 
     /**
      * Constructor for Duke.

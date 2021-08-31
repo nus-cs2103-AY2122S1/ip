@@ -8,7 +8,8 @@ import java.util.Scanner;
  * @author Quan Teng Foong
  */
 public class Ui {
-    Scanner sc;
+
+    private Scanner sc;
 
     public Ui() {
         sc = new Scanner(System.in);
@@ -84,8 +85,8 @@ public class Ui {
      */
     public void showAddedTask(TaskList taskList) {
         reply("Alright, I've added the following task:");
-        System.out.println("      " + taskList.get(taskList.size() - 1) + "\n      Now you have " + taskList.size() +
-                " tasks in the list.\n");
+        System.out.println("      " + taskList.get(taskList.size() - 1) + "\n      Now you have " + taskList.size()
+                + " tasks in the list.\n");
     }
 
     /**

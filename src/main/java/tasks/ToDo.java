@@ -7,7 +7,7 @@ package tasks;
  */
 
 public class ToDo extends Task {
-    public ToDo(String message){
+    public ToDo(String message) {
         super(message);
     }
 

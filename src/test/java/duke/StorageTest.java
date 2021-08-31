@@ -1,9 +1,7 @@
 package duke;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import tasks.Event;
-import tasks.ToDo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,15 +9,18 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import tasks.Event;
+import tasks.ToDo;
 
 /**
  * JUnit test class for Storage.
  */
 public class StorageTest {
-    Storage storage;
-    String filePath;
+    private Storage storage;
+    private String filePath;
 
     @BeforeEach
     public void setUp() {

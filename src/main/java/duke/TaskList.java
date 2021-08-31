@@ -1,13 +1,16 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import exceptions.NoSearchResultException;
 import exceptions.NoSuchCommandException;
 import exceptions.NoTaskNameException;
 import exceptions.TaskDoesNotExistException;
 import tasks.Task;
-
-import java.io.*;
-import java.util.ArrayList;
 
 /**
  * Encapsulates all information for a list of Tasks.
@@ -30,7 +33,7 @@ public class TaskList {
      * @throws NoSuchCommandException if the command does not match any of the known
      * commands
      */
-    public TaskList(File storedTasks) throws IOException, NoTaskNameException, NoSuchCommandException{
+    public TaskList(File storedTasks) throws IOException, NoTaskNameException, NoSuchCommandException {
         FileReader fileReader = new FileReader(storedTasks);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = bufferedReader.readLine();

@@ -1,17 +1,18 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import tasks.Deadline;
 import tasks.ToDo;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * JUnit test class for TaskList.
  */
 public class TaskListTest {
-    TaskList taskList;
+    private TaskList taskList;
 
     @BeforeEach
     public void setUp() {

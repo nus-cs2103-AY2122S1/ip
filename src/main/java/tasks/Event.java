@@ -11,7 +11,13 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private final LocalDate eventDate;
 
-    public Event(String message, String eventDate){
+    /**
+     * Constructor for Event object.
+     *
+     * @param message name of Event
+     * @param eventDate date of Event
+     */
+    public Event(String message, String eventDate) {
         super(message);
         this.eventDate = LocalDate.parse(eventDate);
     }
@@ -22,8 +28,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " +
-                eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))+ ")";
+        return "[E]" + super.toString() + "(at: "
+                + eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /**

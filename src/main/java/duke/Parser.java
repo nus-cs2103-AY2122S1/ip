@@ -1,9 +1,10 @@
 package duke;
 
-import Command.Command;
+import java.util.Scanner;
+
+import command.Command;
 import exceptions.NoSuchCommandException;
 
-import java.util.Scanner;
 
 /**
  * The Parser class encapsulates the parsing of user input into commands for Duke.
