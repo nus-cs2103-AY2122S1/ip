@@ -11,20 +11,20 @@ public class Ui {
     /**
      * Prints greeting message.
      */
-    public void greetingMsg() {
+    public String greetingMsg() {
         String str = "Hello from\n"
                 + LOGO
                 + LINEBREAK
                 + "My favorite partner is back! How can I help?\n"
                 + LINEBREAK;
-        System.out.print(str);
+        return (str);
     }
 
     /**
      * Prints goodbye message.
      */
-    public void goodbyeMsg() {
-        System.out.print(LINEBREAK
+    public String goodbyeMsg() {
+        return (LINEBREAK
                 + "Have a good day, friend!\n"
                 + LINEBREAK);
     }
@@ -34,8 +34,8 @@ public class Ui {
      *
      * @param taskList Task list to be printed.
      */
-    public void listTaskList(TaskList taskList) {
-        System.out.print(LINEBREAK
+    public String listTaskList(TaskList taskList) {
+        return (LINEBREAK
                 + taskList.toString()
                 + LINEBREAK);
     }
@@ -45,8 +45,8 @@ public class Ui {
      *
      * @param task Task to be printed.
      */
-    public void doneTaskMsg(Task task) {
-        System.out.print(LINEBREAK
+    public String doneTaskMsg(Task task) {
+        return (LINEBREAK
                 + "Well Done, I'll get it marked:\n"
                 + task.checkIsDone()
                 + " " + task.getDescription() + "\n"
@@ -58,8 +58,8 @@ public class Ui {
      *
      * @param task Task to be printed.
      */
-    public void deleteTaskMsg(Task task, int noOfTask) {
-        System.out.print(LINEBREAK
+    public String deleteTaskMsg(Task task, int noOfTask) {
+        return (LINEBREAK
                 + "Roger! I will remove this task from the list: \n"
                 + task.getTaskType()
                 + task.checkIsDone()
@@ -75,8 +75,8 @@ public class Ui {
      *
      * @param task Task to be printed.
      */
-    public void addTaskMsg(Task task, int noOfTask) {
-        System.out.print(LINEBREAK
+    public String addTaskMsg(Task task, int noOfTask) {
+        return (LINEBREAK
                 + "Roger! I will add this task in: \n"
                 + task.getTaskType()
                 + task.checkIsDone()
@@ -93,8 +93,8 @@ public class Ui {
      *
      * @param taskList Task list that contains relevant tasks to be printed.
      */
-    public void findTaskMsg(TaskList taskList) {
-        System.out.print(LINEBREAK
+    public String findTaskMsg(TaskList taskList) {
+        return (LINEBREAK
                 + "Are these what you were looking for?\n"
                 + taskList.toString()
                 + LINEBREAK);

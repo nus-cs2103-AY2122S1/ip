@@ -31,7 +31,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String date, String time) {
         super(description, "[D]");
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy"));
+        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM dd yyyy"));
         this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("h:ma"));
     }
 
@@ -44,7 +44,7 @@ public class Deadline extends Task {
     public String getDescription() {
         return super.getDescription()
                 + " (by: "
-                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + this.time.format(DateTimeFormatter.ofPattern(" h:mma"))
                 + ")";
     }
