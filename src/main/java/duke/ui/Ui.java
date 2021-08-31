@@ -45,9 +45,8 @@ public class Ui {
     /**
      * Prints out a message when a 'bye' command is entered  (when the program ends).
      */
-    public void showBye() {
-        System.out.println("Bye bye!! It was nice meeting you!");
-        System.out.println(LINEBREAK);
+    public String showBye() {
+        return "Bye bye!! It was nice meeting you!" + LINEBREAK;
     }
 
     /**
@@ -56,8 +55,8 @@ public class Ui {
      * @param taskType The type of task which has been added (Deadline, Todo or Event).
      * @param command The command the user inputted.
      */
-    public void showAddition(String taskType, String command) {
-        System.out.println("added: " + command);
+    public String showAddition(String taskType, String command) {
+        return "added: " + command;
     }
 
     /**
@@ -66,10 +65,10 @@ public class Ui {
      * @param taskRemoved The task removed by the user.
      * @param taskListSize The size of the current list of tasks
      */
-    public void showRemoval(String taskRemoved, int taskListSize) {
-        System.out.println("Oki! I have removed this task:");
-        System.out.println(taskRemoved);
-        System.out.println(taskListSize + " more tasks to go!");
+    public String showRemoval(String taskRemoved, int taskListSize) {
+            return String.format("Oki! I have removed this task: %s \n %d more tasks to go!",
+                    taskRemoved,
+                    taskListSize); //TODO linebreak
     }
 
     /**
@@ -77,13 +76,15 @@ public class Ui {
      *
      * @param tasks The current list of tasks.
      */
-    public void showList(TaskList tasks) {
+    public String showList(TaskList tasks) {
         if (tasks.size() == 0) {
-            System.out.println("Yay! Nothing on your list right now :>");
+            return "Yay! Nothing on your list right now :>";
         } else {
+            StringBuilder tasksString = new StringBuilder();
             for (int count = 0; count < tasks.size(); count++) {
-                System.out.println((count + 1) + ". " + tasks.get(count).toString());
+                tasksString.append((count + 1) + ". " + tasks.get(count).toString());
             }
+            return tasksString.toString();
         }
     }
 
@@ -91,10 +92,10 @@ public class Ui {
      * Logs the completion of a Task.
      *
      * @param command The task which has been completed.
+     * @return
      */
-    public void showCompletion(String command) {
-        System.out.println("Yay good job!");
-        System.out.println(command + " has been completed");
+    public String showCompletion(String command) {
+        return String.format("Yay good job! %s has been completed", command);
     }
 
     /**
@@ -102,17 +103,17 @@ public class Ui {
      *
      * @param wordList The list of commands with matches to the searched word.
      */
-    public void showSearch(ArrayList<String> wordList) {
+    public String showSearch(ArrayList<String> wordList) {
 
         if (wordList.isEmpty()) {
-            System.out.println("You don't have anything in your todo list with that word!");
+           return "You don't have anything in your todo list with that word!";
 
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            StringBuilder words = new StringBuilder();
             for (String s : wordList) {
-                System.out.println(s);
+                words.append(s).append("\n");
             }
-            System.out.println("Good luck!");
+            return String.format("Here are the matching tasks in your list: %s Good luck!", words.toString());
         }
     }
 }

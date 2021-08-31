@@ -45,7 +45,7 @@ public class Command {
      * @throws EmptyDescriptionException
      * @throws IOException
      */
-    public void addDeadline(String userCommand, String cmd, TaskList taskList)
+    public String addDeadline(String userCommand, String cmd, TaskList taskList)
             throws EmptyDescriptionException, IOException {
         Parser parser = new Parser(userCommand);
         String deadlineInfo = parser.getDeadlineInfo();
@@ -53,8 +53,7 @@ public class Command {
 
         taskList.add(new Deadline(deadlineInfo, date));
         storage.addTask(taskList.getLastStatusString());
-        ui.showAddition(cmd, userCommand);
-        ui.showLine();
+        return ui.showAddition(cmd, userCommand);
     }
 
     /**
@@ -66,7 +65,7 @@ public class Command {
      * @throws EmptyDescriptionException
      * @throws IOException
      */
-    public void addEvent(String userCommand, String cmd, TaskList taskList)
+    public String addEvent(String userCommand, String cmd, TaskList taskList)
             throws EmptyDescriptionException, IOException {
         Parser parser = new Parser(userCommand);
         String eventInfo = parser.getEventInfo();
@@ -74,8 +73,7 @@ public class Command {
 
         taskList.add(new Event(eventInfo, eventDetails));
         storage.addTask(taskList.getLastStatusString());
-        ui.showAddition(cmd, userCommand);
-        ui.showLine();
+        return ui.showAddition(cmd, userCommand);
     }
 
     /**
@@ -87,22 +85,21 @@ public class Command {
      * @throws EmptyDescriptionException
      * @throws IOException
      */
-    public void addTodo(String userCommand, String cmd, TaskList taskList)
+    public String addTodo(String userCommand, String cmd, TaskList taskList)
             throws EmptyDescriptionException, IOException {
         Parser parser = new Parser(userCommand);
         String taskInfo = parser.getTodoInfo();
 
         taskList.add(new Todo(taskInfo));
         storage.addTask(taskList.getLastStatusString());
-        ui.showAddition(cmd, userCommand);
-        ui.showLine();
+        return ui.showAddition(cmd, userCommand);
     }
 
     /**
      * Logs the goodbye message.
      */
-    public void bye() {
-        ui.showBye();
+    public String bye() {
+        return ui.showBye();
     }
 
     /**
@@ -113,14 +110,13 @@ public class Command {
      * @throws NotDoneRightException
      * @throws IOException
      */
-    public void delete(String userCommand, TaskList taskList) throws NotDoneRightException, IOException {
+    public String delete(String userCommand, TaskList taskList) throws NotDoneRightException, IOException {
         Parser parser = new Parser(userCommand);
         int ref = parser.getSecondInteger(taskList.size()) - 1;
-
-        ui.showRemoval(taskList.get(ref).toString(), taskList.size() - 1);
+        String taskRemoved = taskList.get(ref).toString();
         taskList.remove(ref);
         storage.removeTask(ref);
-        ui.showLine();
+        return ui.showRemoval(taskRemoved, taskList.size());
     }
 
     /**
@@ -131,7 +127,7 @@ public class Command {
      * @throws NotDoneRightException
      * @throws IOException
      */
-    public void done(String userCommand, TaskList taskList) throws IOException, NotDoneRightException {
+    public String done(String userCommand, TaskList taskList) throws IOException, NotDoneRightException {
         Parser parser = new Parser(userCommand);
         // Throws exception if there is error accessing the integer following "done"
         // Marks the task as done and prints statements as proof
@@ -139,15 +135,13 @@ public class Command {
         Task task = taskList.get(ref);
 
         if (task.getStatusIcon().equals("X")) {
-            System.out.println("You've already done this!");
+            return "You've already done this!";
 
         } else {
             task.markAsDone();
             storage.updateDone(ref, task.getStatusString());
-            ui.showCompletion(taskList.get(ref).toString());
+            return ui.showCompletion(taskList.get(ref).toString());
         }
-
-        ui.showLine();
     }
 
     /**
@@ -157,11 +151,10 @@ public class Command {
      * @param taskList The task list which contains the tasks
      * @throws EmptyDescriptionException
      */
-    public void find(String userCommand, TaskList taskList) throws EmptyDescriptionException {
+    public String find(String userCommand, TaskList taskList) throws EmptyDescriptionException {
         Parser parser = new Parser(userCommand);
         String wordSearch = parser.getSecondWord().toLowerCase();
-        ui.showSearch(taskList.search(wordSearch));
-        ui.showLine();
+        return ui.showSearch(taskList.search(wordSearch));
     }
 
     /**
@@ -169,8 +162,7 @@ public class Command {
      *
      * @param taskList The task list which contains the tasks.
      */
-    public void list(TaskList taskList) {
-        ui.showList(taskList);
-        ui.showLine();
+    public String list(TaskList taskList) {
+        return ui.showList(taskList);
     }
 }
