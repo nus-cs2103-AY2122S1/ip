@@ -44,15 +44,15 @@ public class TaskList {
      *
      * @param input String that the user inputs.
      */
-    public void markTaskDone(String input) {
+    public String markTaskDone(String input) {
         try {
             int taskDoneNum = getTaskNumber(input);
             Task taskDone = tasks.get(taskDoneNum - 1);
             taskDone.markAsDone();
-            Ui.printMessage("Nice! I've marked this task as done:" + '\n' + taskDone.toString());
             Storage.saveData(this);
+            return "Nice! I've marked this task as done:" + '\n' + taskDone.toString();
         } catch (IndexOutOfBoundsException e) {
-            Ui.printMessage("☹ OOPS!!! No such task can be marked as done!");
+            return "☹ OOPS!!! No such task can be marked as done!";
         }
     }
 
@@ -61,17 +61,16 @@ public class TaskList {
      *
      * @param input String that the user inputs.
      */
-    public void deleteTask(String input) {
+    public String deleteTask(String input) {
         try {
             int taskDeleteNum = getTaskNumber(input);
             Task taskToDelete = tasks.get(taskDeleteNum - 1);
             taskToDelete.markUndone();
-            Ui.printMessage("Noted. I've removed this task:" + '\n' + taskToDelete.toString());
             tasks.remove(taskDeleteNum - 1);
-            printTaskNumber(this);
             Storage.saveData(this);
+            return "Noted. I've removed this task:" + '\n' + taskToDelete.toString() + printTaskNumber(this);
         } catch (IndexOutOfBoundsException e) {
-            Ui.printMessage("☹ OOPS!!! No such task can be deleted!");
+            return "☹ OOPS!!! No such task can be deleted!";
         }
     }
 
@@ -117,11 +116,13 @@ public class TaskList {
      *
      * @param tasks a Tasklist object containing the tasks.
      */
-    public static void printItemList(TaskList tasks) {
-        Ui.printMessage("Here are the tasks in your list:");
+    public static String printItemList(TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            Ui.printMessage(i + 1 + "." + tasks.get(i).toString());
+            sb.append(i + 1 + "." + tasks.get(i).toString() + '\n');
         }
+        return sb.toString();
     }
 
     /**
@@ -129,9 +130,9 @@ public class TaskList {
      *
      * @param tasks a TaskList object containing the tasks.
      */
-    public void printTaskNumber(TaskList tasks) {
-        Ui.printMessage("Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks")
-                + " in the list.");
+    public String printTaskNumber(TaskList tasks) {
+        return "Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks")
+                + " in the list.";
     }
 
 }

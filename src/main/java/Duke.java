@@ -33,20 +33,19 @@ public class Duke {
         tasks = new TaskList(storage.loadData());
     }
 
-    /**
-     * Starts the Duke program.
-     */
-    public void run() {
-        boolean isRunning = true;
-        ui.intro();
-        ui.greet();
-        parser = new Parser(tasks, storage);
-        while (isRunning) {
-            isRunning = parser.parseCommand();
-        }
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(LOCATION);
+        tasks = new TaskList(storage.loadData());
     }
 
-    public static void main(String[] args) {
-        new Duke(LOCATION).run();
+    public String getResponse(String input) {
+        parser = new Parser(tasks, storage);
+        String response = parser.parseCommand(input);
+        if (response == null) {
+            return "I cannot understand what you are saying!";
+        } else {
+            return response;
+        }
     }
 }
