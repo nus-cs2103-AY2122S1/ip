@@ -1,8 +1,7 @@
 import javafx.application.Application;
-import javafx.scene.Node;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -10,21 +9,21 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import commands.Command;
 import exceptions.MorganException;
 import tasks.TaskList;
 
 public class Morgan extends Application {
-    private static final String EXIT_KEYWORD = "bye";
+    public static final String EXIT_KEYWORD = "bye";
+    private static final TaskList taskList = new TaskList();
+    private static final Ui ui = new Ui();
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
-    private Image morgan = new Image(this.getClass().getResourceAsStream("/images/Morgan.png"));
-
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image morganImage = new Image(this.getClass().getResourceAsStream("/images/Morgan.png"));
 
     public static void main(String[] args) {
         Morgan.run();
@@ -36,13 +35,12 @@ public class Morgan extends Application {
         ui.printStartDisplay();
 
         // Initialize TaskList and CommandParser
-        TaskList tl = new TaskList();
         CommandParser p = new CommandParser();
 
         try {
             // Initialize and load storage
             Storage s = new Storage();
-            s.load(tl);
+            s.load(taskList);
 
             // Read user input and check whether input is exit keyword
             String userInput = ui.getInput();
@@ -51,10 +49,10 @@ public class Morgan extends Application {
                 try {
                     // Obtain and execute command to retrieve output message
                     Command command = p.getCommand(userInput);
-                    String output = command.execute(tl);
+                    String output = command.execute(taskList);
 
                     // Save updated task list
-                    s.save(tl);
+                    s.save(taskList);
 
                     // Print output message
                     ui.print(output);
@@ -105,9 +103,7 @@ public class Morgan extends Application {
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-        scrollPane.setStyle("-fx-background-color: champagne pink");
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -120,6 +116,8 @@ public class Morgan extends Application {
 
         AnchorPane.setLeftAnchor(userInput , 5.0);
         AnchorPane.setBottomAnchor(userInput, 5.0);
+
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(ui.startGreeting(), morganImage));
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -135,38 +133,21 @@ public class Morgan extends Application {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Node getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        //TODO: EDIT THIS
         String userText = userInput.getText();
-        Label userTextLabel = new Label(userText);
         String morganText = getResponse(userText);
-        Label morganTextLabel = new Label(morganText);
-
-        ImageView userImageView = new ImageView(user);
-        ImageView morganImageView = new ImageView(morgan);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userTextLabel, userImageView),
-                DialogBox.getDukeDialog(morganTextLabel, morganImageView)
+                DialogBox.getUserDialog(userText, userImage),
+                DialogBox.getDukeDialog(morganText, morganImage)
         );
         userInput.clear();
+
+        if (userText.equals(EXIT_KEYWORD)) {
+            Platform.exit();
+        }
     }
 
     /**
@@ -174,7 +155,17 @@ public class Morgan extends Application {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        //TODO: EDIT THIS
-        return "Morgan heard: " + input;
+        String output;
+        Command command;
+        CommandParser cp = new CommandParser();
+        try {
+            command = cp.getCommand(input);
+            output = command.execute(taskList);
+        } catch(MorganException e) {
+            output = e.getMessage();
+        }
+        return output;
     }
+
+
 }
