@@ -8,7 +8,7 @@ public class DukeTest {
 
     @Test
     public void dummyTest() {
-        Duke d = new Duke();
+        Duke d = new Duke("test.txt");
         assertEquals(2, 2);
     }
 }

@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.main.DukeException;
+import duke.main.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -56,10 +57,9 @@ abstract public class Task {
     /**
      * Marks the Task as done.
      */
-    public void markAsDone() {
+    public String markAsDone() {
         this.completed = true;
-        System.out.println("\t Nice! I've marked this task as done:");
-        System.out.println("\t\t " + this + "\n");
+        return Ui.getTaskDoneMessage(this);
     }
 
     /**

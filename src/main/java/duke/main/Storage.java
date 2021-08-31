@@ -78,11 +78,10 @@ public class Storage {
     /**
      * Clear text file containing tasks.
      */
-    public void resetTasks() {
+    public String resetTasks() {
         try {
-            System.out.println("\tClearing tasks...\n");
             Files.newBufferedWriter(filePath);
-            System.out.println("\tYou can now start anew...\n");
+            return Ui.getResetTasksMessage();
         } catch (IOException e) {
             throw new DukeException("\t☹ OOPS!!! Continuing without saving.\n");
         }

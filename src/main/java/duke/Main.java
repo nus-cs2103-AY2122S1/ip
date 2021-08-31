@@ -7,14 +7,15 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
-    private Duke duke = new Duke();
+    String filePath = System.getProperty("user.dir") + File.separator + "tasks.txt";
+    private Duke duke = new Duke(filePath);
 
     @Override
     public void start(Stage stage) {

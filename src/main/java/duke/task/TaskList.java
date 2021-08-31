@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.main.DukeException;
+import duke.main.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,11 +44,9 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.taskList.add(task);
-        System.out.println("\t Got it. I've added this task:");
-        System.out.println("\t \t " + task);
-        System.out.println(taskSummary());
+        return Ui.getAddTaskMessage(task, this);
     }
 
     /**
@@ -55,7 +54,7 @@ public class TaskList {
      *
      * @return String summary of TaskList.
      */
-    public String taskSummary() {
+    public String getTaskListSummary() {
         int numTasks = this.taskList.size();
         String size = numTasks == 0 ? "no" : String.valueOf(numTasks);
         String maybePlural = numTasks == 1 ? " task " : " tasks ";
@@ -67,11 +66,9 @@ public class TaskList {
      *
      * @param task Task to remove.
      */
-    public void deleteTask(Task task) {
+    public String deleteTask(Task task) {
         this.taskList.remove(task);
-        System.out.println("\t Got it. I've removed this task:");
-        System.out.println("\t \t " + task);
-        System.out.println(taskSummary());
+        return Ui.getRemoveTaskMessage(task, this);
     }
 
     /**
@@ -120,8 +117,9 @@ public class TaskList {
     /**
      * Clear the TaskList.
      */
-    public void clearTasks() {
+    public String clearTasks() {
         taskList.clear();
+        return Ui.getClearTasksMessage();
     }
 
     /**

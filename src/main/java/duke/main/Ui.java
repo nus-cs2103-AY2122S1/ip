@@ -2,94 +2,55 @@ package duke.main;
 
 import duke.task.Task;
 import duke.task.TaskList;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.util.List;
-import java.util.Scanner;
+import java.util.Map;
+import java.util.function.Consumer;
 
 public class Ui {
-    private final Scanner inputScanner;
-    private Stage stage;
-    private Scene scene;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private AnchorPane mainLayout;
-
+    private Map<String, Consumer<String>> uiCommands;
 
     /**
-     * Constructor for Duke UI
+     * Overloaded Constructor for Duke UI
      */
-    public Ui(Stage stage) {
-        this.stage = stage;
-        this.inputScanner = new Scanner(System.in);
+    public Ui() {
     }
 
-    public void start() {
-        //Step 1. Setting up required components
-        this.scrollPane = new ScrollPane();
-        this.dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        this.userInput = new TextField();
-        this.sendButton = new Button("Send");
-
-        this.mainLayout = new AnchorPane();
-
-        this.scene = new Scene(mainLayout);
-
-        formatWindow();
-
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        stage.setScene(scene);
-        stage.show();
-        // more code to be added here later
+    /**
+     * Overloaded constructor for Duke UI
+     */
+    public Ui(Map<String, Consumer<String>> uiCommands) {
+        this.uiCommands = uiCommands;
+        greetOnStart();
     }
 
-    public void formatWindow() {
-        //Step 1. Formatting the window to look as expected
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+    public static String getAddTaskMessage(Task task, TaskList taskList) {
+        return "\t Got it. I've added this task:\n" +
+                "\t \t " + task + taskList.getTaskListSummary();
+    }
 
-        mainLayout.setPrefSize(400.0, 600.0);
+    public static String getClearTasksMessage() {
+        return "Your previous tasks have been cleared.";
+    }
 
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+    public static String getRemoveTaskMessage(Task task, TaskList taskList) {
+        return "\t Got it. I've removed this task:\n" +
+                "\t \t " + task + taskList.getTaskListSummary();
+    }
 
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
+    public static String getTaskDoneMessage(Task task) {
+        return "\t Nice! I've marked this task as done:\n" + "\t\t " + task + "\n";
+    }
 
-        // You will need to import `javafx.scene.layout.Region` for this.
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        // more code to be added here later
+    public static String getResetTasksMessage() {
+        return "\tClearing tasks...\n" + "\tYou can now start anew...\n";
     }
 
     /**
      * Greets user upon starting the assistant.
+     *
+     * @return String message.
      */
     public void greetOnStart() {
         String logo = " ____        _        \n"
@@ -97,85 +58,78 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-
-    /**
-     * Gets the next input from the user.
-     *
-     * @return String input.
-     */
-    public String getNextInput() {
-        return inputScanner.nextLine();
-    }
-
-    /**
-     * Stops taking inputs from the user.
-     */
-    public void closeInput() {
-        inputScanner.close();
+        uiCommands.get("showDukeResponse").accept("Hello from\n" + logo);
     }
 
     /**
      * Displays error when user input is empty.
+     *
+     * @return String message.
      */
-    public void showEmptyInputMessage() {
-        System.out.println("\tTake your time :)\n");
+    public String getEmptyInputMessage() {
+        return "\tTake your time :)\n";
     }
 
     /**
      * Displays error when user command is not found.
-     */
-    public void showUnknownCommandMessage(String command) {
-        System.out.println("\tI don't understand " + command + " (yet...)\n");
-    }
-
-    /**
-     * Displays the message in the DukeException.
      *
-     * @param message to display.
+     * @return String message.
      */
-    public void showDukeException(String message) {
-        System.out.println(message);
+    public String getUnknownCommandMessage(String command) {
+        return "\tI don't understand " + command + " (yet...)\n";
     }
 
     /**
      * Displays the TaskList.
      *
      * @param taskList to display.
+     * @return String message.
      */
-    public void displayTaskList(TaskList taskList) {
+    public String getTaskListSummary(TaskList taskList) {
         if (taskList.isEmpty()) {
-            System.out.println("\tYou haven't added any tasks yet\n");
+            return "\tYou haven't added any tasks yet\n";
         } else {
-            System.out.println(taskList);
+            return taskList.toString();
         }
+    }
+
+    /**
+     * Displays the message in the DukeException.
+     *
+     * @param exception message to display.
+     */
+    public void showDukeException(Exception exception) {
+        uiCommands.get("showDukeResponse").accept(exception.getMessage());
     }
 
     /**
      * Greets an existing user.
      *
      * @param tasks User's existing tasks to be displayed with the greeting.
+     * @return String message.
      */
     public void greetWithFamiliarity(TaskList tasks) {
-        System.out.println("\tNice to see you again.");
-        System.out.println(tasks.taskSummary());
+        String greeting = "\tNice to see you again.\n";
+        greeting += tasks.getTaskListSummary() + "\n";
+
         if (!tasks.isEmpty()) {
-            System.out.println(tasks);
+            greeting += tasks;
         }
+        uiCommands.get("showDukeResponse").accept(greeting);
     }
 
     /**
      * Displays matching tasks.
      *
      * @param matchingTasks to be displayed.
+     * @return String message.
      */
-    public void showMatchingTasks(List<Task> matchingTasks) {
+    public String getMatchingTasksSummary(List<Task> matchingTasks) {
         if (matchingTasks.isEmpty()) {
-            System.out.println("\tNo matching tasks found!\n");
+            return "\tNo matching tasks found!\n";
         } else {
-            System.out.println("\tHere are the matching tasks from your list:\n");
-            System.out.println(TaskList.enumerateTasks(matchingTasks));
+            return "\tHere are the matching tasks from your list:\n"
+                    + TaskList.enumerateTasks(matchingTasks);
         }
     }
 
