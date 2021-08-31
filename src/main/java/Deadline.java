@@ -20,6 +20,20 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), this.by);
+        return String.format("[%s]%s (by: %s)", TaskType.DEADLINE.toString(), super.toString(), this.by);
+    }
+
+    /**
+     * Converts the Deadline into a String to be stored in Storage.
+     * @return String to be stored
+     */
+    @Override
+    public String toStorageString() {
+        String taskString = super.toStorageString();
+        return TaskType.DEADLINE.toString()
+                + Task.STORAGE_STRING_DELIMITER
+                + taskString
+                + Task.STORAGE_STRING_DELIMITER
+                + this.by;
     }
 }

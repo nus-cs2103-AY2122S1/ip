@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,6 +7,62 @@ import java.util.List;
  */
 public class TaskCollection {
     private List<Task> tasks = new ArrayList<>();
+    private final Storage storage;
+
+    /**
+     * Creates a TaskCollection that consists of a Storage file at the specified pathname.
+     * @param pathname Pathname of the Storage file
+     */
+    public TaskCollection(String pathname) {
+        this.storage = new Storage(pathname);
+        this.tasks = this.getTasks();
+    }
+
+    /**
+     * Saves the List of Tasks into the TaskCollection's Storage file.
+     */
+    public void saveTasks() {
+        StringBuilder taskCollectionString = new StringBuilder();
+
+        for (int index = 0; index < this.tasks.size(); index ++) {
+            if (index > 0) {
+                taskCollectionString.append(System.lineSeparator());
+            }
+            taskCollectionString.append(this.tasks.get(index).toStorageString());
+        }
+
+        this.storage.write(taskCollectionString.toString());
+    }
+
+    /**
+     * Retrieves a List of all the Tasks saved.
+     * @return List of all Tasks.
+     */
+    private List<Task> getTasks() {
+        String storageContents = this.storage.read();
+        return this.parse(storageContents);
+    }
+
+    /**
+     * Parse a String of Tasks into a List.
+     * @param string The input String of Tasks
+     * @return The List of Tasks
+     */
+    private List<Task> parse(String string) {
+        if (string == null) {
+            return new ArrayList<>();
+        }
+
+        String[] taskStrings = string.split(System.lineSeparator());
+        List<Task> taskList = new ArrayList<>();
+
+        for (String taskString : taskStrings) {
+            Task task = Task.fromStorageString(taskString);
+            taskList.add(task);
+        }
+
+        return taskList;
+    }
 
     /**
      * Adds a task to the TaskCollection.
@@ -28,7 +85,8 @@ public class TaskCollection {
      * @return The size of the TaskCollection.
      */
     public Task delete(int identifier) {
-        return this.tasks.remove(identifier - 1);
+        Task deletedTask = this.tasks.remove(identifier - 1);
+        return deletedTask;
     }
 
     /**
