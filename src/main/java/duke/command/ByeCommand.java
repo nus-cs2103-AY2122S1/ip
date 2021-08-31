@@ -17,7 +17,8 @@ public class ByeCommand implements DukeActions {
 
 
     /**
-     * Performs the actions for the ByeCommand when activated
+     * Performs the actions for the ByeCommand when activated.
+     *
      * @param map The parsed command
      * @param list The tasklist
      * @param database The database to write to

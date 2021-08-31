@@ -78,7 +78,7 @@ public class DukeDB {
             return Optional.of(arr);
         } catch (FileNotFoundException e) {
             Duke.printMsg(e.toString());
-        } catch (Error f) {
+        } catch (Error error) {
             Duke.printMsg("Problem reading the database format. Was the database modified externally?");
         }
         return Optional.empty();

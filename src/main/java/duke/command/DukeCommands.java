@@ -5,9 +5,9 @@ import java.util.Optional;
 
 
 /**
- * The DukeCommands enum encapsulates the logic for commands.
+ * The DukeCommand enum encapsulates the logic for commands.
  */
-public enum DukeCommands {
+public enum DukeCommand {
 
     BYE("bye",new ByeCommand()),
     LIST("list", new ListCommand()),
@@ -24,12 +24,12 @@ public enum DukeCommands {
     final public DukeActions action;
 
     /**
-     * Simple constructor to initialise a duke.command.DukeCommands enum
+     * Simple constructor to initialise a duke.command.DukeCommand enum
      *
      * @param command The command that this instance serves.
      * @param action  The action that the command has.
      */
-    DukeCommands(String command, DukeActions action) {
+    DukeCommand(String command, DukeActions action) {
         this.command = command;
         this.action = action;
     }
@@ -41,8 +41,8 @@ public enum DukeCommands {
      * @param command The raw user input.
      * @return An optional of the enum. Returns an empty optional if not found.
      */
-    public static Optional<DukeCommands> getCommand(String command) {
-        return Arrays.stream(DukeCommands.values())
+    public static Optional<DukeCommand> getCommand(String command) {
+        return Arrays.stream(DukeCommand.values())
                 .filter(x -> command.toLowerCase()
                         .startsWith(x.command))
                 .findFirst();

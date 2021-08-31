@@ -15,6 +15,7 @@ public class DeadlineCommand implements DukeActions {
 
     /**
      * Performs the actions for the Deadline Command when activated
+     *
      * @param map The parsed command
      * @param list The tasklist
      * @param database The database to write to

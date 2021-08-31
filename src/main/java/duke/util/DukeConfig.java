@@ -22,7 +22,7 @@ public class DukeConfig {
             this.format = format;
         }
 
-        public static Optional<DukeDateConfig> getDukeDateConfig(String config) {
+        public static Optional<DukeDateConfig> matchDukeDateConfig(String config) {
             return Arrays.stream(DukeDateConfig.values()).filter(x -> x.format.equals("config")).findFirst();
         }
     }
@@ -38,13 +38,17 @@ public class DukeConfig {
     }
 
     /**
-     * A factory method to initialise a DukeConfig class
+     * A factory method to initialise a DukeConfig class.
+     * If the config is invalid, return a default config.
+     *
      * @param config The string config of the date
      *
      * @return DukeConfig object
      */
     public static DukeConfig of (String config) {
-        return DukeDateConfig.getDukeDateConfig(config).map(DukeConfig::new).orElseGet(DukeConfig::new);
+        return DukeDateConfig.matchDukeDateConfig(config)
+                .map(DukeConfig::new)
+                .orElseGet(DukeConfig::new);
     }
 
     public String getDateConfig() {
