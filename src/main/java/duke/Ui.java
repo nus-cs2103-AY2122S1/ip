@@ -20,7 +20,7 @@ class Ui {
     /**
      * Shows output to user.
      *
-     * @param lines lines to show user.
+     * @param lines Lines to show user.
      */
     static void show(String... lines) {
         System.out.println("\t____________________________________");
