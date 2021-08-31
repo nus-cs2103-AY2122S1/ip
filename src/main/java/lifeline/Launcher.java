@@ -13,10 +13,10 @@ import javafx.application.Application;
 public class Launcher {
 
     /**
-     * Starts the GUI or the console version of the program depending on the mode specified by the user
-     * If the user does not specify a mode, GUI version is run by default
+     * Starts the GUI or the console version of the program depending on the mode specified by the user.
+     * If the user does not specify a mode, GUI version is run by default.
      *
-     * @param args Arguments specified by the user
+     * @param args Arguments specified by the user.
      */
     public static void main(String[] args) {
         try {
@@ -39,7 +39,7 @@ public class Launcher {
     }
 
     /**
-     * Starts the console program
+     * Starts the console program.
      */
     public static void startConsole() {
         Lifeline lifeline = new Lifeline("save" + File.separator + "tasks.json");

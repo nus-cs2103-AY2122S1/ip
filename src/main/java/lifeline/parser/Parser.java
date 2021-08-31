@@ -4,16 +4,16 @@ import lifeline.command.Command;
 import lifeline.exception.LifelineException;
 
 /**
- * The class Parser parses the input from the user
+ * The class Parser parses the input from the user.
  */
 public class Parser {
 
     /**
-     * Returns parsed command from user input
+     * Returns parsed command from user input.
      *
-     * @param command Command read from user
-     * @return Command to be executed based on user input
-     * @throws LifelineException if command is invalid
+     * @param command Command read from user.
+     * @return Command to be executed based on user input.
+     * @throws LifelineException if command is invalid.
      */
     public static Command parse(String command) throws LifelineException {
         String cleanAndLowerString = command.split("\\s", 2)[0].toLowerCase();

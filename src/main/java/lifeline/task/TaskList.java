@@ -5,54 +5,54 @@ import java.util.ArrayList;
 import lifeline.exception.LifelineException;
 
 /**
- * The class TaskList encapsulates a list of tasks using an ArrayList of tasks
+ * The class TaskList encapsulates a list of tasks using an ArrayList of tasks.
  */
 public class TaskList {
 
     private ArrayList<Task> taskList;
 
     /**
-     * Default constructor for a TaskList
+     * Default constructor for a TaskList.
      *
-     * @param taskList List of tasks to be stored
+     * @param taskList List of tasks to be stored.
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
 
     /**
-     * Adds a task to TaskList
+     * Adds a task to TaskList.
      *
-     * @param task Task to be added
+     * @param task Task to be added.
      */
     public void add(Task task) {
         taskList.add(task);
     }
 
     /**
-     * Returns task based on given index
+     * Returns task based on given index.
      *
-     * @param index Index of task to be returned
-     * @return Task at specified index
+     * @param index Index of task to be returned.
+     * @return Task at specified index.
      */
-    public Task get(int index) {
+    public Task getTask(int index) {
         return taskList.get(index);
     }
 
     /**
-     * Returns number of tasks in TaskList
+     * Returns number of tasks in TaskList.
      *
-     * @return Number of tasks in TaskList
+     * @return Number of tasks in TaskList.
      */
     public int getSize() {
         return taskList.size();
     }
 
     /**
-     * Deletes a task in TaskList at specified index
+     * Deletes a task in TaskList at specified index.
      *
-     * @param index Index of task to be deleted
-     * @return Deleted task
+     * @param index Index of task to be deleted.
+     * @return Deleted task.
      */
     public Task deleteTask(int index) {
         Task taskToDelete = taskList.get(index);
@@ -61,11 +61,11 @@ public class TaskList {
     }
 
     /**
-     * Completes task in the TaskList at the specified index
+     * Completes task in the TaskList at the specified index.
      *
-     * @param index Index of task to be completed
-     * @return Completed task
-     * @throws LifelineException If task is already completed
+     * @param index Index of task to be completed.
+     * @return Completed task.
+     * @throws LifelineException If task is already completed.
      */
     public Task completeTask(int index) throws LifelineException {
         Task taskToMarkAsComplete = taskList.get(index);
@@ -77,11 +77,11 @@ public class TaskList {
     }
 
     /**
-     * Returns list of tasks containing keyword
+     * Returns list of tasks containing keyword.
      *
-     * @param keyword Keyword used to search for tasks
-     * @return List of tasks containing keyword
-     * @throws LifelineException If no tasks with keyword is found
+     * @param keyword Keyword used to search for tasks.
+     * @return List of tasks containing keyword.
+     * @throws LifelineException If no tasks with keyword is found.
      */
     public TaskList findTasks(String keyword) throws LifelineException {
         TaskList foundTasks = new TaskList(new ArrayList<>());
@@ -98,9 +98,9 @@ public class TaskList {
     }
 
     /**
-     * Returns list of tasks
+     * Returns list of tasks.
      *
-     * @return ArrayList containing tasks
+     * @return ArrayList containing tasks.
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;

@@ -38,9 +38,9 @@ public class TaskListTest {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         ToDo todo = new ToDo("read book");
         taskList.add(todo);
-        assertFalse(taskList.get(0).isDone());
+        assertFalse(taskList.getTask(0).isDone());
         taskList.completeTask(0);
-        assertTrue(taskList.get(0).isDone());
+        assertTrue(taskList.getTask(0).isDone());
     }
 
     @Test
@@ -68,6 +68,6 @@ public class TaskListTest {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         ToDo todo = new ToDo("read book");
         taskList.add(todo);
-        assertEquals(todo, taskList.get(0));
+        assertEquals(todo, taskList.getTask(0));
     }
 }

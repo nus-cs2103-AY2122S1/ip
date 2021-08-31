@@ -38,7 +38,7 @@ public class CommandHandlerTest {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         Ui ui = new Ui();
         Command.TODO.getExecute().apply("todo read book", storage, taskList, ui);
-        assertEquals("[T][ ] read book", taskList.get(0).toString());
+        assertEquals("[T][ ] read book", taskList.getTask(0).toString());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class CommandHandlerTest {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         Ui ui = new Ui();
         Command.EVENT.getExecute().apply("event wedding /at 04/03/21 1400-1600", storage, taskList, ui);
-        assertEquals("[E][ ] wedding (at: Mar 4 2021 2:00 PM - 4:00 PM)", taskList.get(0).toString());
+        assertEquals("[E][ ] wedding (at: Mar 4 2021 2:00 PM - 4:00 PM)", taskList.getTask(0).toString());
     }
 
 
@@ -139,7 +139,7 @@ public class CommandHandlerTest {
         TaskList taskList = new TaskList(new ArrayList<Task>());
         Ui ui = new Ui();
         Command.DEADLINE.getExecute().apply("deadline project /by 04/03/21 1830", storage, taskList, ui);
-        assertEquals("[D][ ] project (by: Mar 4 2021 6:30 PM)", taskList.get(0).toString());
+        assertEquals("[D][ ] project (by: Mar 4 2021 6:30 PM)", taskList.getTask(0).toString());
     }
 
     @Test
@@ -190,7 +190,7 @@ public class CommandHandlerTest {
         TaskList taskList = new TaskList(tasks);
         Ui ui = new Ui();
         Command.DONE.getExecute().apply("done 1", storage, taskList, ui);
-        assertEquals("[T][X] read book", taskList.get(0).toString());
+        assertEquals("[T][X] read book", taskList.getTask(0).toString());
     }
 
 

@@ -36,7 +36,7 @@ public class StorageTest {
         TaskList taskList = new TaskList(tasks);
         storage.save(taskList);
         TaskList loadedTaskList = storage.load();
-        assertEquals(taskList.get(0).toString(), loadedTaskList.get(0).toString());
+        assertEquals(taskList.getTask(0).toString(), loadedTaskList.getTask(0).toString());
     }
 
     @AfterEach

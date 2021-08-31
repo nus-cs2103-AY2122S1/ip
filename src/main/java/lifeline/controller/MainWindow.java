@@ -35,8 +35,8 @@ public class MainWindow extends AnchorPane {
     private Image lifelineImage = new Image(this.getClass().getResourceAsStream("/images/DaLifeline.png"));
 
     /**
-     * Initializes an instance of Lifeline to respond to user input and forces ScrollPane to automatically scroll down
-     * Display DialogBox containing lifeline greeting message and image
+     * Initializes an instance of Lifeline to respond to user input and forces ScrollPane to automatically scroll down.
+     * Display DialogBox containing lifeline greeting message and image.
      */
     @FXML
     public void initialize() {

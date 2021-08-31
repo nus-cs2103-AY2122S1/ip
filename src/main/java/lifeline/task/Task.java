@@ -1,7 +1,7 @@
 package lifeline.task;
 
 /**
- * The Task class represents a task
+ * The Task class represents a task.
  */
 public class Task {
 
@@ -11,7 +11,7 @@ public class Task {
     /**
      * Default constructor for a Task. A new task is not done by default.
      *
-     * @param name Name of task
+     * @param name Name of task.
      */
     public Task(String name) {
         this.name = name;
@@ -19,18 +19,18 @@ public class Task {
     }
 
     /**
-     * Constructor to be used when loading saved tasks
+     * Constructor to be used when loading saved tasks.
      *
-     * @param name Name of task
-     * @param isDone Indicates whether task is completed
+     * @param name Name of task.
+     * @param isDone Indicates whether task is completed.
      */
     public Task(String name, boolean isDone) {
         this.name = name;
         this.isDone = isDone;
     }
 
-    public void setDone(boolean done) {
-        this.isDone = done;
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public String getName() {

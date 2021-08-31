@@ -15,25 +15,19 @@ import lifeline.ui.Ui;
  */
 public class Lifeline {
 
-    /**
-     * List of tasks created by the user
-     */
+    /** List of tasks created by the user */
     private TaskList taskList;
 
-    /**
-     * Used to save new tasks or load saved tasks
-     */
+    /** Used to save new tasks or load saved tasks */
     private Storage storage;
 
-    /**
-     * Used to display information to the user
-     */
+    /** Used to display information to the user */
     private Ui ui;
 
     /**
-     * Default constructor for a Lifeline
+     * Default constructor for a Lifeline.
      *
-     * @param filepath Path to load or save tasks
+     * @param filepath Path to load or save tasks.
      */
     public Lifeline(String filepath) {
         this.storage = new Storage(filepath);
@@ -46,10 +40,10 @@ public class Lifeline {
     }
 
     /**
-     * Gets the appropriate response from Lifeline if user inputs a valid command
-     * Method is used only for GUI
+     * Gets the appropriate response from Lifeline if user inputs a valid command.
+     * Method is used only for GUI.
      *
-     * @param command User input
+     * @param command User input.
      * @return Response from Lifeline if user inputs a valid command. If user inputs invalid command, error
      * message is returned instead.
      */
@@ -63,7 +57,7 @@ public class Lifeline {
     }
 
     /**
-     * Starts the console program
+     * Starts the console program.
      */
     public void start() {
         ui.printToConsole(ui.consoleGreet());
@@ -71,17 +65,17 @@ public class Lifeline {
     }
 
     /**
-     * Greets user when user starts GUI
+     * Greets user when user starts GUI.
      *
-     * @return Greeting message when user starts GUI
+     * @return Greeting message when user starts GUI.
      */
     public String getGreetingMessage() {
         return ui.guiGreet();
     }
 
     private void getInput() {
-        boolean exit = false;
-        while (!exit) {
+        boolean isExit = false;
+        while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 if (fullCommand.equals("")) {
@@ -92,7 +86,7 @@ public class Lifeline {
                 String response = c.getExecute().apply(fullCommand, storage, taskList, ui);
                 ui.printToConsole(response);
                 if (c == Command.BYE) {
-                    exit = true;
+                    isExit = true;
                 }
             } catch (LifelineException e) {
                 ui.printToConsole(ui.showError(e.getMessage()));

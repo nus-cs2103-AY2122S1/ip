@@ -16,31 +16,31 @@ import lifeline.task.ToDo;
 import lifeline.ui.Ui;
 
 /**
- * The class CommandHandler handles all commands supplied by the user
+ * The class CommandHandler handles all commands supplied by the user.
  */
 public class CommandHandler {
 
     /**
-     * Prints out given TaskList using the given Ui
+     * Prints out given TaskList using the given Ui.
      *
-     * @param command User input
-     * @param storage Storage to save or load tasks
-     * @param taskList List of tasks
-     * @param ui Ui to display information to user
-     * @return String to represent all tasks
+     * @param command User input.
+     * @param storage Storage to save or load tasks.
+     * @param taskList List of tasks.
+     * @param ui Ui to display information to user.
+     * @return String to represent all tasks.
      */
     public static String handleList(String command, Storage storage, TaskList taskList, Ui ui) {
         return ui.showTaskList(taskList);
     }
 
     /**
-     * Displays goodbye message to the user when user exits the program
+     * Displays goodbye message to the user when user exits the program.
      *
-     * @param command User input
-     * @param storage Storage to save or load tasks
-     * @param taskList List of tasks
-     * @param ui Ui to display information to user
-     * @return Goodbye message
+     * @param command User input.
+     * @param storage Storage to save or load tasks.
+     * @param taskList List of tasks.
+     * @param ui Ui to display information to user.
+     * @return Goodbye message.
      */
     public static String handleBye(String command, Storage storage, TaskList taskList, Ui ui) {
         return ui.exit();
@@ -51,14 +51,14 @@ public class CommandHandler {
     }
 
     /**
-     * Creates and saves an instance of a Deadline. Instance is added to TaskList
+     * Creates and saves an instance of a Deadline. Instance is added to TaskList.
      *
-     * @param command User input
-     * @param storage Storage to save or load tasks
-     * @param taskList List of tasks
-     * @param ui Ui to display information to user
-     * @return Message to notify user that the deadline has been created
-     * @throws LifelineException if command is incomplete or not of the correct format or tasklist is not able to be
+     * @param command User input.
+     * @param storage Storage to save or load tasks.
+     * @param taskList List of tasks.
+     * @param ui Ui to display information to user.
+     * @return Message to notify user that the deadline has been created.
+     * @throws LifelineException if command is incomplete or not of the correct format or tasklist is not able to be.
      *                           saved
      */
     public static String handleDeadline(String command, Storage storage, TaskList taskList, Ui ui)
@@ -88,15 +88,15 @@ public class CommandHandler {
     }
 
     /**
-     * Creates and saves an instance of an Event. Instance is added to TaskList
+     * Creates and saves an instance of an Event. Instance is added to TaskList.
      *
-     * @param command User input
-     * @param storage Storage to save or load tasks
-     * @param taskList List of tasks
-     * @param ui Ui to display information to user
-     * @return Message to notify user that the event has been created
+     * @param command User input.
+     * @param storage Storage to save or load tasks.
+     * @param taskList List of tasks.
+     * @param ui Ui to display information to user.
+     * @return Message to notify user that the event has been created.
      * @throws LifelineException if command is incomplete or not of the correct format or tasklist is not able to be
-     *                           saved
+     *                           saved.
      */
     public static String handleEvent(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
@@ -150,14 +150,14 @@ public class CommandHandler {
     }
 
     /**
-     * Finds tasks in taskList with given keyword
+     * Finds tasks in taskList with given keyword.
      *
-     * @param command User input
-     * @param storage Storage to save or load tasks
-     * @param taskList List of tasks
-     * @param ui Ui to display information to user
-     * @return All tasks whose name contains the keyword
-     * @throws LifelineException if user does not specify a keyword or no tasks are found
+     * @param command User input.
+     * @param storage Storage to save or load tasks.
+     * @param taskList List of tasks.
+     * @param ui Ui to display information to user.
+     * @return All tasks whose name contains the keyword.
+     * @throws LifelineException if user does not specify a keyword or no tasks are found.
      */
     public static String handleFind(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
@@ -167,15 +167,15 @@ public class CommandHandler {
     }
 
     /**
-     * Creates and saves an instance of ToDo. Instance is added to TaskList
+     * Creates and saves an instance of ToDo. Instance is added to TaskList.
      *
-     * @param command User input
-     * @param storage Storage to save or load tasks
-     * @param taskList List of tasks
-     * @param ui Ui to display information to user
-     * @return Message to notify user that the todo has been created
+     * @param command User input.
+     * @param storage Storage to save or load tasks.
+     * @param taskList List of tasks.
+     * @param ui Ui to display information to user.
+     * @return Message to notify user that the todo has been created.
      * @throws LifelineException if command is incomplete or not of the correct format or tasklist is not able to be
-     *                           saved
+     *                           saved.
      */
     public static String handleToDo(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
@@ -187,15 +187,15 @@ public class CommandHandler {
     }
 
     /**
-     * Marks a task at specified index as completed
+     * Marks a task at specified index as completed.
      *
-     * @param command User input
-     * @param storage Storage to save or load tasks
-     * @param taskList List of tasks
-     * @param ui Ui to display information to user
-     * @return Message to notify user that the task has been marked as completed
+     * @param command User input.
+     * @param storage Storage to save or load tasks.
+     * @param taskList List of tasks.
+     * @param ui Ui to display information to user.
+     * @return Message to notify user that the task has been marked as completed.
      * @throws LifelineException if command is incomplete or the index given is out of bounds or not an integer or
-     *                           taskList is not able to be saved
+     *                           taskList is not able to be saved.
      */
     public static String handleDone(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
@@ -203,25 +203,25 @@ public class CommandHandler {
         int taskIndex = convertIndexToInt(commands[0], commands[1], taskList);
         taskList.completeTask(taskIndex);
         storage.save(taskList);
-        return ui.showCompletedTask(taskList.get(taskIndex));
+        return ui.showCompletedTask(taskList.getTask(taskIndex));
     }
 
     /**
-     * Deletes a task at specified index
+     * Deletes a task at specified index.
      *
-     * @param command User input
-     * @param storage Storage to save or load tasks
-     * @param taskList List of tasks
-     * @param ui Ui to display information to user
-     * @return Message to the user that the task has been deleted
+     * @param command User input.
+     * @param storage Storage to save or load tasks.
+     * @param taskList List of tasks.
+     * @param ui Ui to display information to user.
+     * @return Message to the user that the task has been deleted.
      * @throws LifelineException if command is incomplete or the index given is out of bounds or not an integer or
-     *                           taskList is not able to be saved
+     *                           taskList is not able to be saved.
      */
     public static String handleDelete(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
         int taskIndex = convertIndexToInt(commands[0], commands[1], taskList);
-        Task taskToDelete = taskList.get(taskIndex);
+        Task taskToDelete = taskList.getTask(taskIndex);
         taskList.deleteTask(taskIndex);
         storage.save(taskList);
         return ui.showDeletedTask(taskToDelete);

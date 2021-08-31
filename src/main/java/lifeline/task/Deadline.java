@@ -11,9 +11,9 @@ public class Deadline extends Task {
     private LocalDateTime by;
 
     /**
-     * Default constructor for a Deadline
+     * Default constructor for a Deadline.
      *
-     * @param name Name of the task with a deadline
+     * @param name Name of the task with a deadline.
      * @param by Indicates when the task has to completed by.
      */
     public Deadline(String name, LocalDateTime by) {
@@ -22,11 +22,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor to be used when loading saved deadline
+     * Constructor to be used when loading saved deadline.
      *
-     * @param name Name of the task with a deadline
+     * @param name Name of the task with a deadline.
      * @param by Indicates when the task has to completed by.
-     * @param isDone Indicates if the task is completed
+     * @param isDone Indicates if the task is completed.
      */
     public Deadline(String name, LocalDateTime by, boolean isDone) {
         super(name, isDone);

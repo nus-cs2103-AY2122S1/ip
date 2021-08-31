@@ -10,14 +10,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * The Main class starts the program
+ * The Main class starts the program.
  */
 public class Main extends Application {
 
     /**
-     * Starts the GUI program
+     * Starts the GUI program.
      *
-     * @param stage Main stage which represents primary window of JavaFX application
+     * @param stage Main stage which represents primary window of JavaFX application.
      */
     @Override
     public void start(Stage stage) {
