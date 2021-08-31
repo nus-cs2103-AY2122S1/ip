@@ -21,9 +21,12 @@ public class Ui {
 
     /**
      * Greets the user.
+     *
+     * @return Greeting to the user.
      */
-    public static void greet() {
+    public String greet() {
         System.out.println("Hello, how can I help you?");
+        return "Hello, how can I help you?";
     }
 
     /**

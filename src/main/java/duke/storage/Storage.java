@@ -47,9 +47,10 @@ public class Storage {
             Scanner s = new Scanner(this.txtFile);
             while (s.hasNext()) {
                 String line = s.nextLine();
+                boolean isDone = line.charAt(7) == 'X';
                 switch (line.charAt(4)) {
                 case 'T':
-                    arr.add(new Todo(line.substring(10)));
+                    arr.add(new Todo(line.substring(10), isDone));
                     break;
                 case 'D': {
                     int index = line.indexOf(" (by: ");
@@ -57,9 +58,9 @@ public class Storage {
                     String dateTime = line.substring(index + 6, line.length() - 1);
                     String[] dateTimeArray = dateTime.split(" ");
                     if (dateTimeArray.length > 3) {
-                        arr.add(new Deadline(description, dateTime, FORMAT_TIME_FILE, true));
+                        arr.add(new Deadline(description, dateTime, FORMAT_TIME_FILE, true, isDone));
                     } else {
-                        arr.add(new Deadline(description, dateTime, FORMAT_NO_TIME_FILE, false));
+                        arr.add(new Deadline(description, dateTime, FORMAT_NO_TIME_FILE, false, isDone));
                     }
                     break;
                 }
@@ -69,9 +70,9 @@ public class Storage {
                     String dateTime = line.substring(index + 6, line.length() - 1);
                     String[] dateTimeArray = dateTime.split(" ");
                     if (dateTimeArray.length > 3) {
-                        arr.add(new Event(description, dateTime, FORMAT_TIME_FILE, true));
+                        arr.add(new Event(description, dateTime, FORMAT_TIME_FILE, true, isDone));
                     } else {
-                        arr.add(new Event(description, dateTime, FORMAT_NO_TIME_FILE, false));
+                        arr.add(new Event(description, dateTime, FORMAT_NO_TIME_FILE, false, isDone));
                     }
                     break;
                 }
@@ -82,6 +83,7 @@ public class Storage {
 
     /**
      * Saves a list to the file.
+     *
      * @param textToSave Text representing the list.
      * @throws IOException If file is not found.
      */
