@@ -46,7 +46,7 @@ public class Storage {
     /**
      * Adds a new task to the end of the file.
      *
-     * @param task task to be added to the end of the file
+     * @param task task to be added to the end of the file.
      */
     public void appendToFile(Task task) {
         try {
@@ -62,7 +62,7 @@ public class Storage {
     /**
      * Rewrites the contents of the file with all tasks.
      *
-     * @param tasks tasks to be written to the file
+     * @param tasks tasks to be written to the file.
      */
     public void saveToFile(List<Task> tasks) {
         try {

@@ -19,7 +19,7 @@ import javafx.scene.shape.Circle;
  * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
- * Referenced from https://se-education.org/guides/tutorials/javaFx.html
+ * Referenced from https://se-education.org/guides/tutorials/javaFx.html.
  */
 public class DialogBox extends HBox {
     private final Circle clip = new Circle(48, 50, 50);

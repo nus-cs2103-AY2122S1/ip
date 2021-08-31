@@ -36,11 +36,11 @@ public class Parser {
     );
 
     /**
-     * Executes a command represented by input string and updates provided tasklist.
+     * Executes a command represented by input string and updates provided Tasklist.
      *
-     * @param input command to execute
-     * @param tasks TaskList to update
-     * @return message to present to the user
+     * @param input command to execute.
+     * @param tasks TaskList to update.
+     * @return message to present to the user.
      */
     public String execute(String input, TaskList tasks) {
         String[] tmp = input.split(" ", 2);
@@ -119,18 +119,18 @@ public class Parser {
 
     private String completeTask(String args, TaskList tasks) {
         try {
-            int idx = Integer.parseInt(args);
+            int index = Integer.parseInt(args);
             if (tasks.size() == 0) {
                 return ERR_NO_TASKS;
             }
-            if (idx < 1 || idx > tasks.size()) {
+            if (index < 1 || index > tasks.size()) {
                 return String.format(ERR_OUT_OF_BOUNDS, tasks.size());
             }
-            if (tasks.get(idx - 1).isComplete()) {
-                return String.format(ERR_TASK_COMPLETE, tasks.get(idx - 1).getName());
+            if (tasks.get(index - 1).isComplete()) {
+                return String.format(ERR_TASK_COMPLETE, tasks.get(index - 1).getName());
             }
-            tasks.markComplete(idx);
-            return String.format(MSG_TASK_COMPLETE, String.format("   %s", tasks.get(idx - 1)));
+            tasks.markComplete(index);
+            return String.format(MSG_TASK_COMPLETE, String.format("   %s", tasks.get(index - 1)));
         } catch (NumberFormatException e) {
             return ERR_DONE_FORMAT;
         }
@@ -138,15 +138,15 @@ public class Parser {
 
     private String deleteTask(String args, TaskList tasks) {
         try {
-            int idx = Integer.parseInt(args);
+            int index = Integer.parseInt(args);
             if (tasks.size() == 0) {
                 return ERR_NO_TASKS;
             }
-            if (idx < 1 || idx > tasks.size()) {
+            if (index < 1 || index > tasks.size()) {
                 return String.format(ERR_OUT_OF_BOUNDS, tasks.size());
             }
-            Task deletedTask = tasks.get(idx - 1);
-            tasks.remove(idx - 1);
+            Task deletedTask = tasks.get(index - 1);
+            tasks.remove(index - 1);
             return MSG_TASK_DELETED + "\n"
                     + "   " + deletedTask.toString() + "\n"
                     + String.format(MSG_TASK_COUNT, tasks.size());

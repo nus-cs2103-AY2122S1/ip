@@ -29,9 +29,9 @@ public abstract class Task {
     /**
      * Returns a Task that is represented by the input string s.
      *
-     * @param s input string that represents task
-     * @return new Task that corresponds to its string format
-     * @throws IllegalArgumentException if string does not follow format
+     * @param s input string that represents task.
+     * @return new Task that corresponds to its string format.
+     * @throws IllegalArgumentException if string does not follow format.
      */
     public static Task strToObj(String s) throws IllegalArgumentException {
         if (!s.matches("[T] [|] [10] [|] [\\w\\s]+$")
@@ -53,7 +53,7 @@ public abstract class Task {
     /**
      * Returns a string representation of Task conforming to file format.
      *
-     * @return string representation of Task
+     * @return string representation of Task.
      */
     public String toFile() {
         return String.format("%d | %s", isComplete ? 1 : 0, name);
