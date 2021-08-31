@@ -28,7 +28,8 @@ public class ExitCommand extends Command {
      * @param ui ui instance initialised when duke is created.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
         storage.writeToDisk(taskList.compileTasks());
+        return ui.exitMessage();
     }
 }

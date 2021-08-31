@@ -28,30 +28,32 @@ public class Duke {
     }
 
     /**
-     * Greets user once and attempt to load data from local storage.
-     * Subsequently, an infinite loop is formed to prompt user for input
-     * and response printed according to user inputs. Function terminates when
-     * "bye" command detected.
+     * Gets a response from duke based on user input message.
+     * @param input user instructions for duke in form of string.
+     * @return string derived from executing a command or exception message
      */
-    protected void run() {
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parseInputs(input);
+            String resp = c.execute(storage, taskList, ui);
+            return "Duke says: " + resp + "\n" + ui.promptNext();
+        } catch (DukeException e) {
+            return ui.respond(e.getMessage());
+        }
+    }
+
+    /**
+     * Greets user once and attempt to load data from local storage.
+     * and response printed according to user inputs.
+     *
+     * @return A string to indicate if duke has been initialised.
+     */
+    protected String initDuke() {
         try {
             taskList.readFile(storage.loadDataFile());
+            return ui.greet();
         } catch (DukeException e) {
-            ui.respond(e.getMessage());
+            return ui.respond(e.getMessage());
         }
-
-        ui.greet();
-        boolean exit = false;
-        while (!exit) {
-            try {
-                Command c = Parser.parseInputs(ui.nextCommand());
-                c.execute(storage, taskList, ui);
-                exit = c.isExit();
-                ui.promptNext();
-            } catch (DukeException e) {
-                ui.respond(e.getMessage());
-            }
-        }
-        ui.respond("Ooooh yeah! Can do!");
     }
 }

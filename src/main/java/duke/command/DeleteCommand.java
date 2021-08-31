@@ -30,9 +30,10 @@ public class DeleteCommand extends Command {
      * @param taskList task list instance initialised when duke is created.
      * @param ui ui instance initialised when duke is created.
      * @throws DukeException task number is invalid.
+     * @return String on whether task is deleted, or wrong format entered.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
         try {
             Task task = taskList.deleteTask(taskNumber);
             storage.writeToDisk(taskList.compileTasks());
@@ -41,7 +42,7 @@ public class DeleteCommand extends Command {
                             taskNumber,
                             task,
                             taskList.getSize());
-            ui.respond(response);
+            return ui.respond(response);
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new DukeException(String.format("Task number %d invalid.", taskNumber));
         }

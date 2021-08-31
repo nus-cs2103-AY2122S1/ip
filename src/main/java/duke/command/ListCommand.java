@@ -14,10 +14,12 @@ public class ListCommand extends Command {
      * @param storage storage instance initialised when duke is created.
      * @param taskList task list instance initialised when duke is created.
      * @param ui ui instance initialised when duke is created.
+     *
+     * @return String message to indicate if task listed out successfully.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) {
-        ui.respond(
+    public String execute(Storage storage, TaskList taskList, Ui ui) {
+        return ui.respond(
                 String.format("Ooh yeah! Here are your %d tasks\n%s",
                     taskList.getSize(),
                     taskList.list())

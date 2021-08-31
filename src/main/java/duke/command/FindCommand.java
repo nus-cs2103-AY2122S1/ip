@@ -12,13 +12,21 @@ public class FindCommand extends Command {
         this.searchTerm = searchTerm;
     }
 
+    /**
+     * Finds all task names that contains of search term.
+     *
+     * @param storage storage instance initialised when duke is created.
+     * @param taskList task list instance initialised when duke is created.
+     * @param ui ui instance initialised when duke is created.
+     * @return String to indicate if tasks has been searched successfully.
+     */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) {
+    public String execute(Storage storage, TaskList taskList, Ui ui) {
         Task[] tasks = taskList.findTasksWithName(this.searchTerm);
         if (tasks.length < 1) {
-            ui.respond(String.format("No task found with search term %s", this.searchTerm));
+            return ui.respond(String.format("No task found with search term %s", this.searchTerm));
         } else {
-            ui.findResponse(tasks);
+            return ui.findResponse(tasks);
         }
     }
 }

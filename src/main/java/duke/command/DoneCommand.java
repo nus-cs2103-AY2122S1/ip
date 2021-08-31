@@ -28,17 +28,18 @@ public class DoneCommand extends Command {
      * @param storage storage instance initialised when duke is created.
      * @param taskList task list instance initialised when duke is created.
      * @param ui ui instance initialised when duke is created.
-     * @throws DukeException task number is invalid
+     * @throws DukeException task number is invalid.
+     * @return String to indicate whether task is mark completed,or wrong format entered.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
         try {
             Task task = taskList.markAsDone(this.taskNumber);
             storage.writeToDisk(taskList.compileTasks());
             String response = String.format("Ooh yeah! Task %d marked as done:\n  %s",
                     taskNumber,
                     task);
-            ui.respond(response);
+            return ui.respond(response);
         } catch (IndexOutOfBoundsException | NullPointerException e) {
             throw new DukeException(String.format("Task number %d invalid.", taskNumber));
         }

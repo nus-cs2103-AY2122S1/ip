@@ -11,14 +11,15 @@ import duke.util.Ui;
 public abstract class Command {
     /**
      * Abstract method that performs a series of action to change the state of Duke
-     * according to the command type.
+     * and returns a message depending on the command type.
      *
      * @param storage storage instance initialised when duke is created.
      * @param taskList task list instance initialised when duke is created.
      * @param ui ui instance initialised when duke is created.
      * @throws DukeException command cannot be executed successfully.
+     * @return String to provide details on the execution process.
      */
-    public abstract void execute(Storage storage, TaskList taskList, Ui ui) throws DukeException;
+    public abstract String execute(Storage storage, TaskList taskList, Ui ui) throws DukeException;
 
     /**
      * Verify if the user has instructed the duke to exit.
