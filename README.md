@@ -1,5 +1,7 @@
-# Peter Griffin MBBPH (My Big Boy Peter Helper) ┏ (゜ω゜)=☞
+# Peter Griffin MBBPH (My Big Boy Peter Helper)
 
+> ┏ (゜ω゜)=☞ 
+> 
 > Here're some jokes to lighten your mood before you get all serious and read my codes: 😁
 > 1. “I have an idea so smart that my head would explode if I even began to know what I was talking about.” — Peter Griffin, Family Guy, Season 2: Love Thy Trophy
 > 2. “I can be just as non-competitive as anybody. Matter of fact, I'm the most non-competitive. So I win.” — Peter Griffin, Family Guy, Season 2: Running Mates
