@@ -41,7 +41,7 @@ public class Ui {
         }
     }
 
-    protected static String formatResponse(String[] messages) {
+    protected static String formatResponse(String... messages) {
         String response = "";
         for (int i = 0; i < messages.length; i++) {
             response += messages[i];
