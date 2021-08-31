@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
+
+import duke.exception.DukeException;
 
 /**
  * A class that represents tasks.

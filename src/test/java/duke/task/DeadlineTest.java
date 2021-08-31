@@ -1,12 +1,12 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     public static final LocalDate LOCALDATE = LocalDate.parse("2021-01-01");
@@ -46,9 +46,9 @@ public class DeadlineTest {
 
     @Test
     public void toStringTest() {
-        assertEquals("[D][ ] project (by: "+ LOCAL_DATE_STRING +")",
+        assertEquals("[D][ ] project (by: " + LOCAL_DATE_STRING + ")",
                 new Deadline("project", LOCALDATE).toString());
-        assertEquals("[D][X] project (by: "+ LOCAL_DATE_STRING +")",
+        assertEquals("[D][X] project (by: " + LOCAL_DATE_STRING + ")",
                 new Deadline("project", true, LOCALDATE).toString());
     }
 }

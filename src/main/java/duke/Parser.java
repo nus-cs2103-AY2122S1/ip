@@ -1,15 +1,19 @@
 package duke;
 
-import duke.command.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
+import duke.command.AddTaskCommand;
+import duke.command.Command;
+import duke.command.ExitCommand;
+import duke.command.ModifyTaskCommand;
+import duke.command.QueryCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * A class that deal with making sense of the user command.
@@ -154,7 +158,7 @@ public class Parser {
      *     <li>{@code bye}: terminate the bot.</li>
      * </ul>
      *
-     * @param command  The command to perform certain action.
+     * @param command The command to perform certain action.
      * @throws DukeException When the command is invalid.
      */
     public static Command parseCommand(String command) throws DukeException {

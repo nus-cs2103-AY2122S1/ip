@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.exception.IndexMismatchException;
 import duke.task.Task;
 
@@ -31,7 +32,7 @@ public class ModifyTaskCommand extends Command {
      * @throws IndexMismatchException If the command body cannot be parsed as a positive integer.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) throws IndexMismatchException {
+    public void execute(TaskList taskList, Storage storage) throws DukeException {
         if (!this.commandBody.matches("\\d+")) {
             throw new IndexMismatchException();
         }
@@ -51,6 +52,9 @@ public class ModifyTaskCommand extends Command {
             Ui.removeTaskMessage(taskList, task);
             break;
         }
+        default:
+            // Should not reach here
+            throw new DukeException("Something wrong happened when executing Duke!");
         }
     }
 
