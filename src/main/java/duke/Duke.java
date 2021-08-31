@@ -1,7 +1,11 @@
 package duke;
 
 import duke.command.Command;
+
+import duke.control.DialogBox;
+
 import duke.exception.DukeException;
+
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
@@ -13,6 +17,14 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    /**
+     * An empty constructor only for initializing Duke GUI.
+     *
+     */
+    public Duke() {
+
+    }
 
     /**
      * A constructor for the class Duke.
@@ -58,5 +70,19 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    /**
+     * Generate a response to user input.
+     *
+     * @param input The user input.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.toString();
+        }
     }
 }

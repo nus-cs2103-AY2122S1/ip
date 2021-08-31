@@ -16,7 +16,7 @@ public class ListCommand extends Command {
      * @param storage The storage that deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder result = new StringBuilder();
         int currentIndex = 1;
         for (Task task : tasks.getTasks()) {
@@ -27,7 +27,7 @@ public class ListCommand extends Command {
                         .append(task);
             currentIndex ++;
         }
-        System.out.println("\tHere are the tasks in your list:" + result);
+        return "\tHere are the tasks in your list:" + result;
     }
 
     /**

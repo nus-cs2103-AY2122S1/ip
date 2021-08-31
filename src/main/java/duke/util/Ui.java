@@ -65,8 +65,7 @@ public class Ui {
      *
      * @param errorMessage The error message based on the exception caught/.
      */
-    public void showError(String errorMessage) {
-        System.out.println("\tSomething went wrong: ");
-        System.out.println("\t" + errorMessage);
+    public String showError(String errorMessage) {
+        return "\tSomething went wrong: \t"+ errorMessage;
     }
 }
