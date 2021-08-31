@@ -5,6 +5,11 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
+checkstyle {
+    toolVersion = '8.29'
+    configFile = file("config/checkstyle/checkstyle.xml")
+}
+
 repositories {
     mavenCentral()
 }
@@ -29,7 +34,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
