@@ -5,6 +5,7 @@ public enum Commands {
     FIND("find"),
     DONE("done"),
     DELETE("delete"),
+    CLEAR("clear"),
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),

@@ -144,7 +144,11 @@ public class TaskList {
         }
 
         System.out.println(indent + line);
+    }
 
-        
+    public void clearTasks() {
+        tasks = new ArrayList<>(100);
+        storage.updateFile(tasks);
+        ui.toScreen("All tasks have been deleted.");
     }
 }

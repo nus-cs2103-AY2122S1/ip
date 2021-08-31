@@ -26,7 +26,7 @@ public class TaskListTest {
         int after = TASKS.sizeOf();
 
         assertEquals(init + 3 * n, after);
-        STORAGE.clearFile();
+        TASKS.clearTasks();
     }
 
     @Test
@@ -40,7 +40,7 @@ public class TaskListTest {
         int after = TASKS.sizeOf();
 
         assertEquals(init - 1, after);
-        STORAGE.clearFile();
+        TASKS.clearTasks();
     }
 
 

@@ -71,12 +71,4 @@ public class Storage {
         }
     }
 
-    public void clearFile() {
-        try {
-            new PrintWriter(String.valueOf(saveFile)).close();
-        } catch (IOException e) {
-            ui.toScreen("File could not be cleared.");
-        }
-    }
-
 }

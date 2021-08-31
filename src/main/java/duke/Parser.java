@@ -33,6 +33,10 @@ public class Parser {
             int deletedTaskIndex = Integer.parseInt(remainder);
             tasks.deleteTask(deletedTaskIndex - 1);
             return true;
+        case CLEAR:
+            //clear all tasks
+            tasks.clearTasks();
+            return true;
         case TODO:
             //add Todo task
             tasks.addTodo(remainder.trim());
