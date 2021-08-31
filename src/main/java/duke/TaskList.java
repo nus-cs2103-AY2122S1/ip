@@ -3,7 +3,6 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Contains a list of tasks.
@@ -88,7 +87,7 @@ public class TaskList {
     }
 
     public void find(String s) throws DukeException {
-        List<Task> filteredList = list.stream().filter(task -> task.toString().contains(s)).collect(Collectors.toList());
+        List<Task> filteredList = tasks.stream().filter(task -> task.toString().contains(s)).collect(Collectors.toList());
         if (filteredList.size() == 0) {
             throw new DukeException(s + " not found in list");
         }
@@ -99,7 +98,7 @@ public class TaskList {
      * Lists out current items.
      */
     public void listItems() {
-        listItems(this.list);
+        listItems(this.tasks);
     }
 
     private void listItems(List<Task> tasks) {
