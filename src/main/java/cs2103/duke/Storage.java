@@ -14,12 +14,17 @@ public class Storage {
         this.filePath = dukeFilePath;
     }
 
-    public ArrayList<Task> load() throws IOException {
-        // load the data from the hard disk for dukeFile
-        File dukeFile = new File(filePath);
-
+    /**
+     * Checks the dukeFilePath for the existence of duke.txt, if the file or the folder containing it
+     * does not exist, create them.
+     */
+    public void initialize() throws IOException {
+        String dukeFileDirectoryPath = "./data";
+        String dukeFilePath = "./data/duke.txt";
+        File dukeFileDirectory = new File(dukeFileDirectoryPath);
+        File dukeFile = new File(dukeFilePath);
         // creates directory if it does not exist
-        if (dukeFile.mkdir()) {
+        if (dukeFileDirectory.mkdir()) {
             // dukeFile.mkdir();
             System.out.println("folder: 'data/' has been created");
         }
@@ -28,7 +33,16 @@ public class Storage {
             // dukeFile.createNewFile();
             System.out.println("'duke.txt' has been created in the 'data/' folder ");
         }
-
+    }
+    /**
+     * Loads the data stored in duke.txt into a taskArrayList.
+     * @return the taskArrayList representation of the data stored in duke.txt, if any.
+     * @throws IOException
+     */
+    public ArrayList<Task> load() throws IOException {
+        // initialize
+        initialize();
+        // load the data from the hard disk for dukeFile
         DukeParser p = new DukeParser(filePath);
         return p.copyFileContents();
     }

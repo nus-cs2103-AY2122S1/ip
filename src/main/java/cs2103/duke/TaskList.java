@@ -29,10 +29,9 @@ public class TaskList {
     /**
      * This method takes the user's input list and beautifies it for display.
      *
-     * @param taskArrayList the user's input list to be beautified
      * @return the beautified string to display
      */
-    public String listBeautify(ArrayList<Task> taskArrayList) {
+    public String listBeautify() {
         StringBuilder listBeautified = new StringBuilder();
         for (int i = 0; i < taskArrayList.size(); i++) {
             listBeautified.append(i + 1)
@@ -159,7 +158,7 @@ public class TaskList {
     }
 
     public String listTasks() {
-        return (sandwich(listBeautify(taskArrayList)));
+        return (sandwich(listBeautify()));
     }
 
     public String finishTask(int index) throws DukeException {

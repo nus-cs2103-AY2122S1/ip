@@ -17,11 +17,10 @@ public class Ui {
             ", Save",
             ", Dates and Times"
     };
-    private static ArrayList<Task> taskArrayList = new ArrayList<>();
-    private static final String dukeFilePath = "./data/duke.txt";
+    private static TaskList taskArrayList;
 
-    public Ui() {
-
+    public Ui(TaskList tasks) {
+        this.taskArrayList = tasks;
     }
 
     /**
@@ -37,24 +36,6 @@ public class Ui {
                 + "____________________________________________________________";
     }
 
-    /**
-     * This method takes the user's input list and beautifies it for display.
-     *
-     * @param taskArrayList the user's input list to be beautified
-     * @return the beautified string to display
-     */
-    public static String listBeautify(ArrayList<Task> taskArrayList) {
-        StringBuilder listBeautified = new StringBuilder();
-        for (int i = 0; i < taskArrayList.size(); i++) {
-            listBeautified.append(i + 1)
-                    .append(".")
-                    .append(taskArrayList.get(i).toString());
-            if (i < taskArrayList.size() - 1) { // new line except for last item
-                listBeautified.append("\n");
-            }
-        }
-        return listBeautified.toString();
-    }
 
     /**
      * Shows the welcome message when user runs Duke.
@@ -65,17 +46,17 @@ public class Ui {
         for (int count = 0; count <= lv; count++) {
             featuresCombined.append(features[count]);
         }
-
-        // parsing duke.txt
-        DukeParser dp = new DukeParser(dukeFilePath);
-        taskArrayList = dp.copyFileContents();
+//
+//        // parsing duke.txt
+//        DukeParser dp = new DukeParser(dukeFilePath);
+//        taskArrayList = dp.copyFileContents();
 
         // Welcome message
         String welcome = "Hello! I'm Duke: Level " + lv + "\n"
                 + "What would you like to do today?\n"
                 + "My current features are: " + featuresCombined + "\n"
                 + "Here are your tasks: " + "\n"
-                + sandwich(listBeautify(taskArrayList));
+                + sandwich(taskArrayList.listBeautify());
 
         return (sandwich(welcome));
     }

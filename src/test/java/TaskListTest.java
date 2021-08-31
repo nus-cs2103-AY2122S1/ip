@@ -17,7 +17,7 @@ public class TaskListTest {
         TaskList tl = new TaskList();
         assertEquals("____________________________________________________________\n"
                         + "New todo task added:\n"
-                        + "[T][ ] test1\n"
+                        + "[T][ ]test1\n"
                         + "You now have 1 item(s) in your task list.\n"
                         + "____________________________________________________________",
                 tl.addTask("todo", "test1", ""));
@@ -28,7 +28,7 @@ public class TaskListTest {
         TaskList tl = new TaskList();
         assertEquals("____________________________________________________________\n"
                         + "New deadline task added:\n"
-                        + "[D][ ] ms3 (by: 2021 07 20)\n"
+                        + "[D][ ]ms3 (by: 2021 07 20)\n"
                         + "You now have 1 item(s) in your task list.\n"
                         + "____________________________________________________________",
                 tl.addTask("deadline", "ms3", "2021-07-20"));

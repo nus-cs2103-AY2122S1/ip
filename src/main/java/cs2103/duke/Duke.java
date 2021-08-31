@@ -1,5 +1,6 @@
 package cs2103.duke;
 
+import java.io.File;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.IOException;
@@ -9,13 +10,13 @@ import java.io.IOException;
  */
 public class Duke {
     private static ArrayList<Task> taskArrayList = new ArrayList<>();
-    private static final String dukeFilePath = "./data/duke.txt";
+    private static String dukeFilePath;
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     public Duke(String dukeFilePath) {
-        ui = new Ui();
+        this.dukeFilePath = dukeFilePath;
         storage = new Storage(dukeFilePath);
         try {
             tasks = new TaskList(storage.load());
@@ -23,6 +24,7 @@ public class Duke {
             System.out.println(ui.showLoadingError());
             tasks = new TaskList();
         }
+        ui = new Ui(tasks);
     }
 
     public void run() throws IOException {
@@ -37,7 +39,8 @@ public class Duke {
                 if (userInput.equals("bye")) { // user inputs "bye", set canExit to true and Exit
                     canExit = true;
                     // store task list
-                    String temp = tasks.listTasks();
+                    String temp = tasks.listBeautify();
+                    System.out.println("temp is: " + temp);
                     storage.overwriteFile(dukeFilePath, temp);
                     System.out.println(ui.showGoodbye());
                 } else { // check first input
@@ -49,7 +52,10 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) throws IOException, DukeException {
-        new Duke("data/duke.txt").run();
+    public static void main(String[] args) throws IOException {
+        String dukeFilePath = "./data/duke.txt";
+        Storage s = new Storage(dukeFilePath);
+        s.initialize();
+        new Duke(dukeFilePath).run();
     }
 }
