@@ -1,14 +1,17 @@
 package duke.controller;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.Duke;
 import duke.util.Message;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * Controller for Main Window.
@@ -21,12 +24,13 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
+    @FXML
+    private Button sendButton;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private Duke duke;
-    private Stage stage;
 
     /**
      * Initialize components of the Main Window.
@@ -37,9 +41,8 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Message.WELCOME.toString(), dukeImage));
     }
 
-    public void setDuke(Duke duke, Stage stage) {
+    public void setDuke(Duke duke) {
         this.duke = duke;
-        this.stage = stage;
     }
 
     /**
@@ -63,7 +66,17 @@ public class MainWindow extends AnchorPane {
 
         // Shutdown upon receiving exit message
         if (response.equals(Message.EXIT.toString())) {
-            stage.close();
+            // Disable all mode of input
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+
+            // Display the exit message and then exit after 1s
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            }, 1000);
         }
     }
 }
