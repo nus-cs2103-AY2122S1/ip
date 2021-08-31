@@ -20,8 +20,6 @@ public class DialogBox extends HBox {
     private static final Insets TEXT_MARGIN = new Insets(15, 15, 15, 15);
     private static final Insets DIALOG_MARGIN = new Insets(5, 5, 5, 5);
 
-
-
     private Label text;
     private ImageView displayPicture;
 
