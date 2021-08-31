@@ -17,7 +17,7 @@ public class FindCommand implements Executable {
      * 
      * @param taskList current taskList
      */
-    public void execute(TaskList taskList) {
-        taskList.find(keyword);
+    public String execute(TaskList taskList) {
+        return taskList.find(keyword);
     }
 }

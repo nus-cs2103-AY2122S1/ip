@@ -43,13 +43,35 @@ public class Ui {
         System.out.println(SPACE_STRING + inputString);
         System.out.println(DECORATOR_STRING);
     }
-    
+
+    /**
+     * Print in the format with lines.
+     *
+     * @param inputString string to print
+     */
+    public static void printStringCli(String inputString) {
+        System.out.println(DECORATOR_STRING);
+        System.out.println(SPACE_STRING + inputString);
+        System.out.println(DECORATOR_STRING);
+    }
+
     /** 
      * Method that adjust printing format to suit list printing.
      * 
      * @param taskString multi-line string of tasks to be printed
      */
     public static void printList(String taskString) {
+        System.out.println(DECORATOR_STRING);
+        System.out.print(SPACE_STRING + taskString);
+        System.out.println(DECORATOR_STRING);
+    }
+
+    /**
+     * Method that adjust printing format to suit list printing.
+     *
+     * @param taskString multi-line string of tasks to be printed
+     */
+    public static void printListCli(String taskString) {
         System.out.println(DECORATOR_STRING);
         System.out.print(SPACE_STRING + taskString);
         System.out.println(DECORATOR_STRING);

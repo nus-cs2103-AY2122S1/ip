@@ -9,6 +9,6 @@ public class DukeExcpetion extends Exception {
     }
 
     public String toString() {
-        return "\uD83E\uDD74 OOPS!!! " + this.getMessage();
+        return "OOPS!!! " + this.getMessage();
     }
 }

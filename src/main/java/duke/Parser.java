@@ -105,8 +105,8 @@ public class Parser {
      * Parse a string of time typed by user of format hhmm.
      * 
      * @param timeString String of hhmm format to parse.
-     * @return 
-     * @throws DukeExcpetion
+     * @return time parsed
+     * @throws DukeExcpetion if the format is not correct
      */
     private static LocalTime parseTime(String timeString) throws DukeExcpetion {
         String expanded = timeString.substring(0, 2) + ":" + timeString.substring(2) + ":00";
