@@ -40,4 +40,14 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
+    /**
+     * Sends the user a greeting message.
+     */
+    public void greet() {
+        Label greeting = new Label(duke.getUi().greet());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greeting)
+        );
+    }
 }
