@@ -14,8 +14,8 @@ public class Ui {
      * Prints a welcome message when the user first runs the bot.
      */
     protected void showWelcomeMessage() {
-        String message = "Hello! I'm Lawbringer!\n" +
-                "What can i do for you?";
+        String message = "Hello! I'm Lawbringer!\n"
+                + "What can i do for you?";
         System.out.println(message);
     }
 
@@ -34,9 +34,9 @@ public class Ui {
      * @param tasks List of tasks.
      */
     protected void showTodoMessage(ToDo todo, List<Task> tasks) {
-        String message = "Got it. I've added this task:\n" + "  " +
-                todo + "\nNow you have " + tasks.size() +
-                " task(s) in the list.";
+        String message = "Got it. I've added this task:\n" + "  "
+                + todo + "\nNow you have " + tasks.size()
+                + " task(s) in the list.";
         System.out.println(message);
     }
 
@@ -47,9 +47,9 @@ public class Ui {
      * @param tasks    List of tasks.
      */
     protected void showDeadlineMessage(Deadline deadline, List<Task> tasks) {
-        String message = "Got it. I've added this task:\n" + "  " +
-                deadline + "\nNow you have " + tasks.size() +
-                " task(s) in the list.";
+        String message = "Got it. I've added this task:\n" + "  "
+                + deadline + "\nNow you have " + tasks.size()
+                + " task(s) in the list.";
         System.out.println(message);
     }
 
@@ -60,9 +60,9 @@ public class Ui {
      * @param tasks List of tasks.
      */
     protected void showEventMessage(Event event, List<Task> tasks) {
-        String message = "Got it. I've added this task:\n" + "  " +
-                event + "\nNow you have " + tasks.size() +
-                " task(s) in the list.";
+        String message = "Got it. I've added this task:\n" + "  "
+                + event + "\nNow you have " + tasks.size()
+                + " task(s) in the list.";
         System.out.println(message);
     }
 
@@ -72,8 +72,8 @@ public class Ui {
      * @param task The task to be marked as done.
      */
     protected void showDoneMessage(Task task) {
-        String message = "Nice! I've marked this task as done:\n" +
-                "  " + task.toString();
+        String message = "Nice! I've marked this task as done:\n"
+                + "  " + task.toString();
         System.out.println(message);
     }
 
@@ -84,9 +84,9 @@ public class Ui {
      * @param tasks List of tasks.
      */
     protected void showDeleteMessage(Task task, List<Task> tasks) {
-        String message = "Noted. I've removed this task:\n" +
-                "  " + task + "\nNow you have " + tasks.size() +
-                " task(s) in the list.";
+        String message = "Noted. I've removed this task:\n"
+                + "  " + task + "\nNow you have " + tasks.size()
+                + " task(s) in the list.";
         System.out.println(message);
     }
 

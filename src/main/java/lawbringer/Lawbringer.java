@@ -1,8 +1,7 @@
 package lawbringer;
 
-import java.util.Scanner;
-
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Lawbringer is a chat bot that help users to manage their to-dos, deadlines and events.
