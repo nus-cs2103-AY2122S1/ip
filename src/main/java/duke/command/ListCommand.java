@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import duke.task.Task;
+import duke.util.Message;
 import duke.util.TaskList;
 import duke.util.Ui;
 
@@ -21,14 +22,15 @@ public class ListCommand implements Command {
      *
      * @param taskList duke.main.TaskList to execute the command.
      * @param ui       To interact with the user.
+     * @return message to be used by either the graphic UI or command line UI.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public Message execute(TaskList taskList, Ui ui) {
         List<Task> allTask = taskList.getTaskList();
         String[] task = IntStream.range(0, allTask.size())
                 .mapToObj(x -> (x + 1) + ". " + allTask.get(x).toString())
                 .collect(Collectors.toList())
                 .toArray(new String[0]);
-        ui.listTask(task);
+        return ui.listTask(task);
     }
 }

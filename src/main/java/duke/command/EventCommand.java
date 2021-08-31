@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.util.Keyword;
+import duke.util.Message;
 import duke.util.TaskList;
 import duke.util.Ui;
 
@@ -30,12 +31,12 @@ public class EventCommand implements Command {
      * @param ui To interact with the user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public Message execute(TaskList taskList, Ui ui) {
         try {
             String[] details = message.split(Keyword.EVENTS.getSeparator());
-            taskList.addEvent(details[0].substring(Keyword.EVENTS.length() + 1), details[1]);
+            return taskList.addEvent(details[0].substring(Keyword.EVENTS.length() + 1), details[1]);
         } catch (IndexOutOfBoundsException e) {
-            ui.eventErrorMessage();
+            return ui.eventErrorMessage();
         }
     }
 }

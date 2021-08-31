@@ -18,12 +18,13 @@ public class Ui {
      * Lists out all the task stored by the user.
      *
      * @param taskArray To list out all the task.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void listTask(String[] taskArray) {
+    public Message listTask(String[] taskArray) {
         if (taskArray.length == 0) {
-            printMessage("You have no task.");
+            return new Message("You have no task.");
         } else {
-            printMessage(taskArray);
+            return new Message(taskArray);
         }
     }
 
@@ -32,9 +33,10 @@ public class Ui {
      *
      * @param task duke.task.Task that is added.
      * @param totalTask Total number of task stored.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void addMessage(Task task, int totalTask) {
-        printMessage("Got it. I've added this task:",
+    public Message addMessage(Task task, int totalTask) {
+        return new Message("Got it. I've added this task:",
                 task.toString(),
                 String.format("Now you have %o task(s).", totalTask));
     }
@@ -43,9 +45,10 @@ public class Ui {
      * Prints out a message when the task is marked as done.
      *
      * @param task duke.task.Task that is marked as done.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void doneSuccessMessage(Task task) {
-        printMessage("Nice! I've did mark this task as done:", task.toString());
+    public Message doneSuccessMessage(Task task) {
+        return new Message("Nice! I've did mark this task as done:", task.toString());
     }
 
     /**
@@ -53,9 +56,10 @@ public class Ui {
      * is already marked as done.
      *
      * @param task duke.task.Task to be marked as done.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void doneFailedMessage(Task task) {
-        printMessage("Ugh! This task was already done:", task.toString());
+    public Message doneFailedMessage(Task task) {
+        return new Message("Ugh! This task was already done:", task.toString());
     }
 
     /**
@@ -63,9 +67,10 @@ public class Ui {
      *
      * @param task duke.task.Task to be deleted.
      * @param totalTask Total number of task stored.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void deleteMessage(Task task, int totalTask) {
-        printMessage("Noted. I've removed this task:",
+    public Message deleteMessage(Task task, int totalTask) {
+        return new Message("Noted. I've removed this task:",
                 task.toString(),
                 String.format("Now you have %o task(s).", totalTask));
     }
@@ -74,156 +79,199 @@ public class Ui {
      * Prints out all the task that is found.
      *
      * @param tasks Tasks to be printed.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void searchOutputMessage(List<String> tasks) {
+    public Message searchOutputMessage(List<String> tasks) {
         if (tasks.size() == 0) {
             tasks.add(0, "There are no matching tasks found.");
-            return;
+        } else {
+            tasks.add(0, "Here are the matching task(s) in your list:");
         }
-        tasks.add(0, "Here are the matching task(s) in your list:");
-        printMessage(tasks.toArray(new String[0]));
+        return new Message(tasks.toArray(new String[0]));
     }
 
     /**
      * Prints out a message when a task is unable to be exported and saved.
      *
      * @param task duke.task.Task to be exported and saved.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void exportTaskErrorMessage(Task task) {
-        printMessage(String.format("Unable to save %s", task.toString()));
+    public Message exportTaskErrorMessage(Task task) {
+        return new Message(String.format("Unable to save %s", task.toString()));
     }
 
     /**
      * Prints out a message when all the task is unable to be exported and saved.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void exportTaskErrorMessage() {
-        printMessage("Unable to save task.");
+    public Message exportTaskErrorMessage() {
+        return new Message("Unable to save task.");
     }
 
     /**
      * Prints out a message when the task cannot be imported.
      *
      * @param description Description of task to be imported.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void importTaskErrorMessage(String description) {
-        printMessage(String.format("Cant import %s", description));
+    public Message importTaskErrorMessage(String description) {
+        return new Message(String.format("Cant import %s", description));
     }
 
     /**
      * Prints out a message if this is the first time the user is using duke.Duke.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void importTaskErrorMessage() {
-        printMessage("This are the commands that I recognised:",
+    public Message importTaskErrorMessage() {
+        return new Message("This are the commands that I recognised:",
                 "bye - Ends the chat session.",
                 "todo <description> - Adds a new todo to the task list.",
                 "deadline <description> /by <date/time> - Adds a new deadline to the task list",
                 "event <description> /at <date/time> - Adds a new event to the task list",
                 "list - return a list of all the task",
                 "done <number> - Sets the task to be done",
+                "find <search field> - Find task containing search field",
                 "delete <number> - Delete the task");
     }
 
     /**
      * Prints out the greeting message used when the chat started.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void greetMessage() {
-        printMessage("Good day there! I'm DUKE\n", "What can I do for you?");
+    public Message greetMessage() {
+        return new Message("Good day there! I'm DUKE\n", "What can I do for you?");
     }
 
     /**
      * Echos the message the user sends for level-1.
      *
      * @param s Message user sent.
+     * @return message to be used by either the graphic UI or command line UI.
      * @Deprecated Level-2
      */
-    public void echoMessage(String s) {
-        printMessage(s);
+    public Message echoMessage(String s) {
+        return new Message(s);
     }
 
     /**
      * Prints out the exit message when chat ends.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void exitMessage() {
-        printMessage("Farewell! Hope to see you again.");
+    public Message exitMessage() {
+        return new Message("Farewell! Hope to see you again.");
     }
 
     /**
      * Prints out chat error message when command is not recognized.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void chatErrorMessage() {
-        printMessage("Ugh! Only the following commands are recognised.",
+    public Message chatErrorMessage() {
+        return new Message("Ugh! Only the following commands are recognised.",
                 "bye - Ends the chat session.",
                 "todo <description> - Adds a new todo to the task list.",
                 "deadline <description> /by <date/time> - Adds a new deadline to the task list",
                 "event <description> /at <date/time> - Adds a new event to the task list",
                 "list - return a list of all the task",
                 "done <number> - Sets the task to be done",
+                "find <search field> - Find task containing search field",
                 "delete <number> - Delete the task");
     }
 
     /**
      * Prints out error message if done message does not contains number.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void doneErrorMessage() {
-        printMessage("Ugh! The command should be in this format:",
+    public Message doneErrorMessage() {
+        return new Message("Ugh! The command should be in this format:",
                 "done <number>");
     }
 
     /**
      * Prints out error message if done message is out of range.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void doneIndexErrorMessage() {
-        printMessage("Ugh! The command should be in this format:",
+    public Message doneIndexErrorMessage() {
+        return new Message("Ugh! The command should be in this format:",
                 "done <number>",
                 "Note: number is based on the number from command 'list'");
     }
 
     /**
      * Prints out error message if todo message does not contains description.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void todoErrorMessage() {
-        printMessage("Ugh! The command should be in this format:",
+    public Message todoErrorMessage() {
+        return new Message("Ugh! The command should be in this format:",
                 "todo <description>");
     }
 
     /**
-     * Prints out error message if deadline message does not contains /by.
+     * Prints out error message if find message does not contains words.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void deadlineErrorMessage() {
-        printMessage("Ugh! The command should be in this format:",
+    public Message findIndexErrorMessage() {
+        return new Message("Ugh! The command should be in this format:",
+                "find <description>");
+    }
+
+
+    /**
+     * Prints out error message if deadline message does not contains /by.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
+     */
+    public Message deadlineErrorMessage() {
+        return new Message("Ugh! The command should be in this format:",
                 "deadline <description> /by <date/time>");
     }
 
     /**
      * Prints out error message if delete message does not contains number.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void deleteErrorMessage() {
-        printMessage("Ugh! The command should be in this format:",
+    public Message deleteErrorMessage() {
+        return new Message("Ugh! The command should be in this format:",
                 "delete <number>");
     }
 
     /**
      * Prints out error message if delete message is out of range.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void deleteIndexErrorMessage() {
-        printMessage("Ugh! The command should be in this format:",
+    public Message deleteIndexErrorMessage() {
+        return new Message("Ugh! The command should be in this format:",
                 "delete <number>",
                 "Note: number is based on the number from command 'list'");
     }
 
     /**
      * Prints out error message if event message does not contains /at.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void eventErrorMessage() {
-        printMessage("Ugh! The command should be in this format:",
+    public Message eventErrorMessage() {
+        return new Message("Ugh! The command should be in this format:",
                 "event <description> /at <date/time>");
     }
 
     /**
      * Prints out error message if dateTime format is invalid.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void dateTimeErrorMessage() {
-        printMessage("Date/Time format is wrong. Ensure that it is in the this format:",
+    public Message dateTimeErrorMessage() {
+        return new Message("Date/Time format is wrong. Ensure that it is in the this format:",
                 "dd/mm/yy hhmm (24hrs format)");
     }
 
@@ -232,7 +280,7 @@ public class Ui {
      *
      * @param strings Arbitrary number of strings to be printed out
      */
-    private void printMessage(String... strings) {
+    protected static void printMessage(String... strings) {
         System.out.println("\t____________________________________________________________");
         for (String str: strings) {
             System.out.println("\t" + str);

@@ -42,10 +42,11 @@ public class TaskList {
      * Adds the task entered by the user into the list.
      *
      * @param task task input by the user.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    private void addTask(Task task) {
+    private Message addTask(Task task) {
         taskList.add(task);
-        ui.addMessage(task, taskList.size());
+        return ui.addMessage(task, taskList.size());
     }
 
     /**
@@ -53,13 +54,15 @@ public class TaskList {
      *
      * @param s Description of the task.
      * @param dateTime Date and time of the event.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void addEvent(String s, String dateTime) {
+    public Message addEvent(String s, String dateTime) {
         try {
-            addTask(new Events(s, dateTime));
+            Message message = addTask(new Events(s, dateTime));
             saveTaskList();
+            return message;
         } catch (ParseException e) {
-            ui.dateTimeErrorMessage();
+            return ui.dateTimeErrorMessage();
         }
     }
 
@@ -68,27 +71,31 @@ public class TaskList {
      *
      * @param s Description of the task.
      * @param dateTime Deadline of the task.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void addDeadline(String s, String dateTime) {
+    public Message addDeadline(String s, String dateTime) {
         try {
-            addTask(new Deadlines(s, dateTime));
+            Message message = addTask(new Deadlines(s, dateTime));
             saveTaskList();
+            return message;
         } catch (ParseException e) {
-            ui.dateTimeErrorMessage();
+            return ui.dateTimeErrorMessage();
         }
     }
 
     /**
      * Adds a new todo to the task list.
      *
-     * @param message Description of the task.
+     * @param s Description of the task.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void addTodo(String message) {
+    public Message addTodo(String s) {
         try {
-            addTask(new ToDos(message));
+            Message message = addTask(new ToDos(s));
             saveTaskList();
+            return message;
         } catch (IndexOutOfBoundsException e) {
-            ui.todoErrorMessage();
+            return ui.todoErrorMessage();
         }
     }
 
@@ -96,15 +103,16 @@ public class TaskList {
      * Marks the nth task as done.
      *
      * @param n the task to be mark as done.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void markDone(int n) {
+    public Message markDone(int n) {
         Task task = taskList.get(n - 1);
         boolean success = task.markDone();
         if (success) {
             saveTaskList();
-            ui.doneSuccessMessage(task);
+            return ui.doneSuccessMessage(task);
         } else {
-            ui.doneFailedMessage(task);
+            return ui.doneFailedMessage(task);
         }
     }
 
@@ -112,11 +120,12 @@ public class TaskList {
      * Deletes the nth task from the task list.
      *
      * @param n the task to be deleted.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void deleteTask(int n) {
+    public Message deleteTask(int n) {
         Task task = taskList.remove(n - 1);
         saveTaskList();
-        ui.deleteMessage(task, taskList.size());
+        return ui.deleteMessage(task, taskList.size());
     }
 
     /**
@@ -131,13 +140,14 @@ public class TaskList {
      * all the tasks.
      *
      * @param s Keyword to search for the task.
+     * @return message to be used by either the graphic UI or command line UI.
      */
-    public void findTask(String s) {
+    public Message findTask(String s) {
         List<String> taskFiltered = taskList.stream()
                 .filter(task -> task.getTask().contains(s))
                 .map(x -> x.toString())
                 .collect(Collectors.toList());
-        ui.searchOutputMessage(taskFiltered);
+        return ui.searchOutputMessage(taskFiltered);
     }
 
     public List<Task> getTaskList() {

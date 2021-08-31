@@ -33,7 +33,7 @@ public class Duke {
      * Starts the chatbot and get it to chat with the user.
      */
     private void chat() {
-        ui.greetMessage();
+        ui.greetMessage().printMessage();
         String message;
         Command command;
         boolean isRunning = true;
@@ -44,26 +44,26 @@ public class Duke {
                 if (command == null) {
                     isRunning = false;
                 } else {
-                    command.execute(taskList, ui);
+                    command.execute(taskList, ui).printMessage();
                 }
             } catch (DukeException e) {
-                ui.chatErrorMessage();
+                ui.chatErrorMessage().printMessage();
             }
         }
-        ui.exitMessage();
+        ui.exitMessage().printMessage();
     }
 
     public String getResponse(String message) {
-         message = sc.nextLine().strip();
+        message = sc.nextLine().strip();
         try {
             Command command = Parser.parseChat(message);
             if (command == null) {
-                ui.exitMessage();
+                return ui.exitMessage().toString();
             } else {
-                command.execute(taskList, ui);
+                return command.execute(taskList, ui).toString();
             }
         } catch (DukeException e) {
-            ui.chatErrorMessage();
+            return ui.chatErrorMessage().toString();
         }
 
     }

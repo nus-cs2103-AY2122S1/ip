@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.util.Keyword;
+import duke.util.Message;
 import duke.util.TaskList;
 import duke.util.Ui;
 
@@ -28,15 +29,16 @@ public class DeleteCommand implements Command {
      *
      * @param taskList duke.main.TaskList to execute the command.
      * @param ui To interact with the user.
+     * @return message to be used by either the graphic UI or command line UI.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public Message execute(TaskList taskList, Ui ui) {
         try {
-            taskList.deleteTask(Integer.parseInt(message.substring(Keyword.DELETE.length() + 1)));
+            return taskList.deleteTask(Integer.parseInt(message.substring(Keyword.DELETE.length() + 1)));
         } catch (NumberFormatException e) {
-            ui.deleteErrorMessage();
+            return ui.deleteErrorMessage();
         } catch (IndexOutOfBoundsException e) {
-            ui.deleteIndexErrorMessage();
+            return ui.deleteIndexErrorMessage();
         }
     }
 }

@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.util.Keyword;
+import duke.util.Message;
 import duke.util.TaskList;
 import duke.util.Ui;
 
@@ -28,14 +29,15 @@ public class DeadlineCommand implements Command {
      *
      * @param taskList duke.main.TaskList to execute the command.
      * @param ui       To interact with the user.
+     * @return message to be used by either the graphic UI or command line UI.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui) {
+    public Message execute(TaskList taskList, Ui ui) {
         try {
             String[] details = message.split(Keyword.DEADLINE.getSeparator());
-            taskList.addDeadline(details[0].substring(Keyword.DEADLINE.length() + 1), details[1]);
+            return taskList.addDeadline(details[0].substring(Keyword.DEADLINE.length() + 1), details[1]);
         } catch (IndexOutOfBoundsException e) {
-            ui.deadlineErrorMessage();
+            return ui.deadlineErrorMessage();
         }
     }
 }
