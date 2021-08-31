@@ -4,7 +4,7 @@
 /*.iml
 
 # Gradle build files
-/.gradle/
+.gradle/
 /build/
 src/main/resources/docs/
 
@@ -13,7 +13,7 @@ src/main/resources/docs/
 *.iml
 bin/
 
-/text-ui-test/ACTUAL.txt
+text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
-/text-ut-test/data/*
-/data/*
+text-ut-test/data/*
+data/*
