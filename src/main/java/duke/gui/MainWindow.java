@@ -1,6 +1,9 @@
 package duke.gui;
 
+import duke.command.Command;
 import duke.main.Duke;
+import duke.main.DukeException;
+import duke.main.Parser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -32,8 +35,17 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void handleUserInput() {
-        Label input = new Label(userInput.getText());
-        Label response = new Label(userInput.getText());
+        String userCommand = userInput.getText();
+        Label input = new Label(userCommand);
+        Label response;
+        try {
+            Command command = Parser.parse(userCommand);
+            String message = command.execute(duke.getTasks(), duke.getUi(), duke.getStorage());
+            response = new Label(message);
+        } catch (DukeException e) {
+            response = new Label(duke.getUi().displayError(e));
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input),
                 DialogBox.getDukeDialog(response)
