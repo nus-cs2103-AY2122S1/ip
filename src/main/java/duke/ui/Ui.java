@@ -23,84 +23,84 @@ public class Ui {
                                         + "Im Duke\nWhat can I do for you?";
 
     /**
-     * Prints the introductory message for Duke
+     * Returns the introductory message for Duke
      */
-    public void PrintIntro() {
-        System.out.println(INTRO);
+    public static String intro() {
+        return INTRO;
     }
 
     /**
-     * Prints the input message for Duke.
+     * Returns the formatted input message for Duke.
      * Message is lined with the borders stored in the attribute of the class.
      *
      * @param message The message to be printed.
      */
-    public void PrintMessage(String message) {
-        System.out.println(BORDER);
-        System.out.println(message);
-        System.out.println(BORDER);
+    public String formatMessage(String message) {
+        return BORDER + '\n' + message + '\n' + BORDER;
     }
 
     /**
-     * Prints the entire taskList.
+     * Returns the entire formatted taskList.
      *
      * @param taskList The taskList to be printed.
      */
-    public void PrintList(TaskList taskList) {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(BORDER);
+    public String formatList(TaskList taskList) {
+        String formattedList = "Here are the tasks in your list:" + '\n';
+        formattedList += BORDER + '\n';
         for (int i = 1; i <= taskList.size(); i++) {
-            Task thisTask = taskList.get(i-1);
-            String toPrint = String.format("%d. %s", i, thisTask);
-            System.out.println(toPrint);
+            Task thisTask = taskList.get(i - 1);
+            String task = String.format("%d. %s", i, thisTask);
+            formattedList += task + '\n';
         }
-        System.out.println(BORDER);
+        formattedList += BORDER;
+        return formattedList;
     }
 
     /**
-     * Prints the message after special tasks are added to the taskList.
+     * Returns the formatted message after special tasks are added to the taskList.
      *
      * @param taskList The taskList which the tasks are added to.
      */
-    public void PrintSpecialTasks(TaskList taskList) {
+    public String formatSpecialTasks(TaskList taskList) {
         String message = taskList.get(taskList.size() - 1).toString();
         int total = taskList.size();
-        String newMsg = String.
-                format("Got it, I've added this task:\n  %s\nNow you have a total of %d tasks in the list.",
+        String newMsg = String
+                .format("Got it, I've added this task:\n  %s\nNow you have a total of %d tasks in the list.",
                 message, total);
-        PrintMessage(newMsg);
+        return formatMessage(newMsg);
     }
 
     /**
-     * Prints the message after a deletion of a task.
+     * Returns the message after a deletion of a task.
      * The deleted task is also printed,
      * together with the number of remaining tasks in the taskList.
      *
      * @param deleted The deleted task.
      * @param taskList The taskList the task was deleted from.
      */
-    public void PrintDelete(Task deleted, TaskList taskList) {
+    public String formatDelete(Task deleted, TaskList taskList) {
         String message = deleted.toString();
         int total = taskList.size();
-        String newMsg = String.
-                format("Noted. I've removed this task:\n  %s\nNow you have a total of %d tasks in the list.",
+        String newMsg = String
+                .format("Noted. I've removed this task:\n  %s\nNow you have a total of %d tasks in the list.",
                         message, total);
-        PrintMessage(newMsg);
+        return formatMessage(newMsg);
     }
 
     /**
-     * Prints the message after a find of tasks.
+     * Returns the message after a find of tasks.
      *
      * @param matchedTasks The list of matched tasks.
      */
-    public void PrintFind(TaskList matchedTasks) {
-        System.out.println(BORDER);
+    public String formatFind(TaskList matchedTasks) {
+        String toReturn = BORDER + '\n';
         System.out.println("Here are the matching tasks in your list: ");
         for (int i = 1; i <= matchedTasks.size(); i++) {
-            Task thisTask = matchedTasks.get(i-1);
-            String toPrint = String.format("%d. %s", i, thisTask);
-            System.out.println(toPrint);
+            Task thisTask = matchedTasks.get(i - 1);
+            String task = String.format("%d. %s", i, thisTask);
+            toReturn += task + '\n';
         }
-        System.out.println(BORDER);
+        toReturn += BORDER;
+        return toReturn;
     }
 }
