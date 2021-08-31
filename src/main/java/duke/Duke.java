@@ -42,6 +42,5 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke().run();
-        System.out.println("a0");
     }
 }
