@@ -49,10 +49,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        boolean isExit = duke.getResponse(input, this.dialogContainer);
-        userInput.clear();
-        if (isExit) {
-            this.stage.close();
+        if (input.split(" ")[0].equals("bye")) {
+            duke.saveTask();
+            Platform.exit();
+        } else {
+            duke.getResponse(input, this.dialogContainer);
+            userInput.clear();
         }
     }
 }

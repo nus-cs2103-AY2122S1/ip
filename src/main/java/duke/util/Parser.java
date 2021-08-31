@@ -6,7 +6,6 @@ import duke.commands.AddCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.exceptions.EmptyDescriptionException;
@@ -31,9 +30,6 @@ public class Parser {
         String commandType = s.next();
 
         switch (commandType) {
-        case "bye":
-            return new ExitCommand();
-
         case "list":
             return new ListCommand();
 
