@@ -15,7 +15,7 @@ public class ParserTest {
     }
 
     /**
-     * Testing whether Duke goes to sleep when user input is "bye".
+     * Testing whether Duke goes to sleep when user input is "bye". Should return false to pass the test case.
      */
     @Test
     public void testCommandInterpretation2() {
