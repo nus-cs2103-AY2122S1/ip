@@ -107,6 +107,12 @@ public class Ui {
         System.out.println();
     }
 
+
+    /**
+     * Show the result when searching for a keyword.
+     * @param taskList task list in the duke instance
+     * @param keyword keyword to be searched upon
+     */
     public void showSearchResult(TaskList taskList, String keyword) {
         if (taskList.isEmpty()) {
             System.out.println("\tYou have no task in your list.\n");
@@ -166,5 +172,4 @@ public class Ui {
     public void showDukeException(DukeException e) {
         System.out.printf("\t%s\n\n", e);
     }
-
 }
