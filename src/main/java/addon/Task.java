@@ -25,6 +25,7 @@ public class Task {
 
     /**
      * Checks if the description contains the keyword provided.
+     *
      * @param str String to be queried.
      * @return true if found, false otherwise.
      */
@@ -53,6 +54,7 @@ public class Task {
 
         /**
          * Deadline constructor.
+         *
          * @param description Name of deadline.
          * @param by Deadline of task.
          */
@@ -78,6 +80,7 @@ public class Task {
 
         /**
          * Todo constructor.
+         *
          * @param description Name of task.
          */
         public Todo(String description) {
@@ -112,6 +115,7 @@ public class Task {
 
         /**
          * Event constructor.
+         *
          * @param description Name of event.
          * @param at Date of event.
          */
