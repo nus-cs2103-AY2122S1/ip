@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -43,6 +45,7 @@ public abstract class Task {
         case 'T':
             t = new Todo(isComplete, desc);
             break;
+
         default:
             throw new DukeException.ParseException(s); // shouldnt come here
         }
