@@ -67,6 +67,8 @@ public class Parser {
         case "event":
             taskType = TaskType.EVENT;
             break;
+        default:
+            return null;    // Invalid input
         }
 
         if (!userInputScanner.hasNext()) {

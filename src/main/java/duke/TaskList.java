@@ -35,8 +35,15 @@ public class TaskList {
         return tasks.size();
     }
 
-    public Task getTask(int taskNum) {
-        return tasks.get(taskNum - 1);
+    /**
+     * Retrieves the task of the specified index from the list.
+     * Uses 1-based indexing.
+     *
+     * @param taskIndex the new task to be added.
+     * @return the task with the specified index.
+     */
+    public Task getTask(int taskIndex) {
+        return tasks.get(taskIndex - 1);
     }
 
     /**
@@ -49,23 +56,25 @@ public class TaskList {
     }
 
     /**
-     * Marks a task in the list as done.
+     * Marks the task of the specified index in the list as done.
+     * Uses 1-based indexing.
      *
-     * @param taskNum the number of the task to be marked as done.
+     * @param taskIndex the index of the task to be marked as done.
      * @return the task that has been marked as done.
      */
-    public Task completeTask(int taskNum) {
-        tasks.get(taskNum - 1).setDone(true);
-        return tasks.get(taskNum - 1);
+    public Task completeTask(int taskIndex) {
+        tasks.get(taskIndex - 1).setDone(true);
+        return tasks.get(taskIndex - 1);
     }
 
     /**
-     * Deletes a task from the list.
+     * Deletes a task of the specified index from the list.
+     * Uses 1-based indexing.
      *
-     * @param taskNum the number of the task to be deleted from the list.
+     * @param taskIndex the index of the task to be deleted from the list.
      * @return the task that has been deleted from the list.
      */
-    public Task deleteTask(int taskNum) {
-        return tasks.remove(taskNum - 1);
+    public Task deleteTask(int taskIndex) {
+        return tasks.remove(taskIndex - 1);
     }
 }

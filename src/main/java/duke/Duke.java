@@ -38,6 +38,8 @@ public class Duke {
             } catch (DukeException e) {
                 ui.printErrorMessage(e.getMessage());
             }
+        // Duke will keep accepting user input until user inputs "bye",
+        // which will lead to executeCommand() exiting the program.
         } while (true);
     }
 
@@ -46,7 +48,14 @@ public class Duke {
     }
 
     private void executeCommand(String userInput) throws DukeException {
+        // First, extract the command type inputted by the user.
+        // parseCommandType() will throw an UnsupportedOperationException if
+        // no valid command types was inputted by the user.
         CommandType commandType = Parser.parseCommandType(userInput);
+
+        // Decide the action to take depending on command type given.
+        // parseNewTask() and parseTaskNum() will throw MissingInputException
+        // if no valid further input is entered by the user.
         switch (commandType) {
         case EXIT:
             ui.printExitMessage();

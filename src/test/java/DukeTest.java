@@ -1,4 +1,10 @@
-import duke.*;
+import duke.CommandType;
+import duke.DukeException;
+import duke.MissingInputException;
+import duke.Parser;
+import duke.Task;
+import duke.TaskList;
+import duke.ToDo;
 import duke.UnsupportedOperationException;
 import org.junit.jupiter.api.Test;
 

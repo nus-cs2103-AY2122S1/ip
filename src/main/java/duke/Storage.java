@@ -30,7 +30,8 @@ public class Storage {
      * If a save file does not exist, then a new save file
      * will be created.
      *
-     * @return ArrayList of saved Tasks.
+     * @return ArrayList of saved Tasks if save file exists, otherwise
+     *                returns an empty ArrayList instead.
      * @throws LoadingException  if an IOException occurs while loading
      *                the save file.
      */
@@ -46,7 +47,7 @@ public class Storage {
                 e.printStackTrace();
                 throw new LoadingException();
             }
-            return null;
+            return new ArrayList<>();
         }
     }
 
