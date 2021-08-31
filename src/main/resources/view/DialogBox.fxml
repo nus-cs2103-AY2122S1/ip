@@ -5,19 +5,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<fx:root alignment = "TOP_RIGHT" maxHeight = "1.7976931348623157E308" maxWidth = "1.7976931348623157E308" prefWidth = "400.0" type = "javafx.scene.layout.HBox" xmlns = "http://javafx.com/javafx/16" xmlns:fx = "http://javafx.com/fxml/1">
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
 	<children>
-		<Text fx:id = "dialog" strokeType = "OUTSIDE" strokeWidth = "0.0" text = "Text" wrappingWidth = "275.0">
+		<Text fx:id="dialog" fill="#50ff00" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="273.0">
 			<HBox.margin>
-				<Insets left = "5.0" right = "5.0"/>
+				<Insets left="5.0" right="5.0" />
 			</HBox.margin>
 			<font>
-				<Font name = "Consolas" size = "12.0"/>
+				<Font name="Consolas" size="12.0" />
 			</font>
 		</Text>
-		<ImageView fx:id = "displayPicture" fitHeight = "99.0" fitWidth = "99.0" pickOnBounds = "true" preserveRatio = "true"/>
+		<ImageView fx:id="displayPicture" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true" />
 	</children>
 	<padding>
-		<Insets bottom = "15.0" left = "5.0" right = "5.0" top = "15.0"/>
+		<Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
 	</padding>
 </fx:root>

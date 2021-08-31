@@ -50,7 +50,7 @@ application {
 
 shadowJar {
     archiveBaseName = "sora"
-    archiveVersion = "1.0"
+    archiveVersion = "2.0"
     archiveClassifier = null
 }
 

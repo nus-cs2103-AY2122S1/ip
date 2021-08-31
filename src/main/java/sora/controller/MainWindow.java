@@ -18,8 +18,8 @@ import sora.util.Message;
  * Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private final Image soraImage = new Image(this.getClass().getResourceAsStream("/images/Sora.jpg"));
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Message.WELCOME.toString(), dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Message.WELCOME.toString(), soraImage));
     }
 
     public void setDuke(Sora sora) {
@@ -56,7 +56,7 @@ public class MainWindow extends AnchorPane {
         String response = sora.getResponse(input);
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, dukeImage)
+            DialogBox.getDukeDialog(response, soraImage)
         );
 
         // Remove previous input
