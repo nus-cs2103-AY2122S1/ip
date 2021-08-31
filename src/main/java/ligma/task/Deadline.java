@@ -1,15 +1,25 @@
 package ligma.task;
 
-import java.time.format.DateTimeParseException;
-import java.util.InputMismatchException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 
 /**
  * This class represents a Deadline Task.
  */
 public class Deadline extends Task {
     private LocalDate time;
+
+    private Deadline(String details, LocalDate time) {
+        super(details);
+        this.time = time;
+    }
+
+    private Deadline(String details, LocalDate time, boolean isDone) {
+        super(details, isDone);
+        this.time = time;
+    }
 
     /**
      * Factory method that creates a Deadline object.
@@ -50,16 +60,6 @@ public class Deadline extends Task {
         } else {
             throw new InputMismatchException("");
         }
-    }
-
-    private Deadline(String details, LocalDate time) {
-        super(details);
-        this.time = time;
-    }
-
-    private Deadline(String details, LocalDate time, boolean isDone) {
-        super(details, isDone);
-        this.time = time;
     }
 
     @Override

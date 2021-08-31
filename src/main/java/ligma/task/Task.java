@@ -33,15 +33,31 @@ public class Task {
         this.isDone = isDone;
     }
 
+    /**
+     * Marks this task as done.
+     *
+     * @return this task object
+     */
     public Task markAsDone() {
         this.isDone = true;
         return this;
     }
 
+    /**
+     * Returns task description of this task.
+     *
+     * @return task description
+     */
     public String getTaskDesc() {
         return desc;
     }
 
+    /**
+     * Determine if task contains target string.
+     *
+     * @param target string to search for in task description
+     * @return true if it's a match, false otherwise
+     */
     public boolean match(String target) {
         return desc.contains(target);
     }

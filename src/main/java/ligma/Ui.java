@@ -10,6 +10,11 @@ public class Ui {
                 + line + "\n" + PARTITION);
     }
 
+    /**
+     * Prints the lines given in proper format with partitioning.
+     *
+     * @param lines strings to be printed line by line
+     */
     public static void printFormattedReply(String[] lines) {
         String reply = PARTITION;
         for (int i = 0; i < lines.length; i++) {
@@ -19,6 +24,11 @@ public class Ui {
         System.out.println(reply);
     }
 
+    /**
+     * Prints all tasks from the tasklist given.
+     *
+     * @param tasks tasklist whose tasks are to be printed
+     */
     public static void printTaskList(TaskList tasks) {
         String[] tasksText = tasks.getStringArr();
         int len = tasksText.length;
@@ -28,6 +38,11 @@ public class Ui {
         Ui.printFormattedReply(tasksText);
     }
 
+    /**
+     * Prints tasks that matches a target string for a FindCommand.
+     *
+     * @param tasks tasks that match the target string
+     */
     public static void printFoundTasks(Task[] tasks) {
         int len = tasks.length;
         String reply = PARTITION + "\n Found " + len + " matches:";
@@ -38,14 +53,21 @@ public class Ui {
         System.out.println(reply);
     }
 
+    /**
+     * Prints Ligma's introduction.
+     */
     public static void introduceSelf() {
         String[] intro = {"Hello! I'm Ligma, Ligma Balls.", "What can I do for you?"};
         printFormattedReply(intro);
     }
 
+    /**
+     * Prints Ligma's exit message.
+     */
     public static void sayGoodbye() {
-        String[] bye = {"Bye. I love Imagine Dragons...\n\n\n",
-                "Imagine Dragon Deez Nuts Cross Your Face."};
+        String line1 = "Bye. I love Imagine Dragons...\n\n\n";
+        String line2 = "Imagine Dragon Deez Nuts Cross Your Face.";
+        String[] bye = {line1, line2};
         printFormattedReply(bye);
     }
 

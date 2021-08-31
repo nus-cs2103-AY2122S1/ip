@@ -1,15 +1,25 @@
 package ligma.task;
 
-import java.time.format.DateTimeParseException;
-import java.util.InputMismatchException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 
 /**
  * This class represents an Event Task.
  */
 public class Event extends Task {
     private LocalDate time;
+
+    private Event(String details, LocalDate time) {
+        super(details);
+        this.time = time;
+    }
+
+    private Event(String details, LocalDate time, boolean isDone) {
+        super(details, isDone);
+        this.time = time;
+    }
 
     /**
      * Factory method that creates an Event object.
@@ -50,16 +60,6 @@ public class Event extends Task {
         } else {
             throw new InputMismatchException();
         }
-    }
-
-    private Event(String details, LocalDate time) {
-        super(details);
-        this.time = time;
-    }
-
-    private Event(String details, LocalDate time, boolean isDone) {
-        super(details, isDone);
-        this.time = time;
     }
 
     @Override

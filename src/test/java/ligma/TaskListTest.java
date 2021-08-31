@@ -1,13 +1,14 @@
 package ligma;
 
-import ligma.task.Task;
-import ligma.task.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import ligma.task.Task;
+import ligma.task.Todo;
 
 public class TaskListTest {
 
@@ -17,7 +18,11 @@ public class TaskListTest {
                 Arrays.asList(new Todo("shave beard"), new Todo("cry")));
         TaskList taskList = new TaskList(temp);
         String[] expected = new String[]{"[T][ ] shave beard", "[T][ ] cry"};
-        assertEquals(expected, taskList.getStringArr());
+        String [] actual = taskList.getStringArr();
+        assertEquals(2, actual.length);
+        for (int i = 0; i < 2; i++) {
+            assertEquals(expected[i], actual[i]);
+        }
     }
 
 }

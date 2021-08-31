@@ -1,11 +1,11 @@
 package ligma.command;
 
+import java.io.IOException;
+
 import ligma.Storage;
 import ligma.TaskList;
 import ligma.Ui;
 import ligma.task.Task;
-
-import java.io.IOException;
 
 /**
  * This class represents a command to delete a task.

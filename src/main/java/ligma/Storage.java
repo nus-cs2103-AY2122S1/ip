@@ -1,12 +1,12 @@
 package ligma;
 
-import ligma.task.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import ligma.task.Task;
 
 /**
  * This class represents the storage for a particular
@@ -58,7 +58,7 @@ public class Storage {
     }
 
     /**
-     * Delete task from file.
+     * Deletes task from file.
      *
      * @param task          task to be deleted from file
      * @throws IOException  if there was an error in writing to file
@@ -68,7 +68,7 @@ public class Storage {
     }
 
     /**
-     * Update completion status of task in file.
+     * Updates completion status of task in file.
      *
      * @param task          task to be updated
      * @throws IOException  if there was an error in writing to file
@@ -80,24 +80,26 @@ public class Storage {
 
     private void rewriteLine(String target, String replace)
             throws IOException {
-        File temp = File.createTempFile("temp",".txt", f.getParentFile());
+        File temp = File.createTempFile("temp", ".txt", f.getParentFile());
         Scanner scanner = new Scanner(f);
         FileWriter tempWriter = new FileWriter(temp, true);
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             if (line.contains(target)) {
-                if (replace.isEmpty()) continue;
+                if (replace.isEmpty()) {
+                    continue;
+                }
                 tempWriter.write(replace);
             } else {
                 tempWriter.write(line);
             }
-            if (scanner.hasNextLine()) tempWriter.write(System.lineSeparator());
+            if (scanner.hasNextLine()) {
+                tempWriter.write(System.lineSeparator());
+            }
         }
         tempWriter.close();
         f.delete();
         temp.renameTo(f);
     }
-
-
 
 }

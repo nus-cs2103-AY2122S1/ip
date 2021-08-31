@@ -5,9 +5,6 @@ import ligma.TaskList;
 import ligma.Ui;
 import ligma.task.Task;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 /**
  * This class represents a command to find
  * tasks containing a specific target string.

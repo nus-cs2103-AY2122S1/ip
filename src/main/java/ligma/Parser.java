@@ -1,13 +1,19 @@
 package ligma;
 
-import ligma.command.*;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
+
+import ligma.command.AddCommand;
+import ligma.command.Command;
+import ligma.command.DeleteCommand;
+import ligma.command.DoneCommand;
+import ligma.command.ExitCommand;
+import ligma.command.FindCommand;
+import ligma.command.ListCommand;
 import ligma.task.Deadline;
 import ligma.task.Event;
 import ligma.task.Task;
 import ligma.task.Todo;
-
-import java.time.format.DateTimeParseException;
-import java.util.InputMismatchException;
 
 /**
  * This class contains functions that help parse strings into
@@ -100,14 +106,14 @@ public class Parser {
         String desc = s.substring(7);
         boolean isDone = s.charAt(4) == 'X';
         switch (taskType) {
-            case 'T':
-                return new Todo(desc, isDone);
-            case 'D':
-                return Deadline.createDeadline(desc, isDone);
-            case 'E':
-                return Event.createEvent(desc, isDone);
-            default:
-                throw new IllegalArgumentException("File improperly formatted");
+        case 'T':
+            return new Todo(desc, isDone);
+        case 'D':
+            return Deadline.createDeadline(desc, isDone);
+        case 'E':
+            return Event.createEvent(desc, isDone);
+        default:
+            throw new IllegalArgumentException("File improperly formatted");
         }
     }
 }

@@ -1,11 +1,11 @@
 package ligma;
 
-import ligma.command.Command;
-
-import java.time.format.DateTimeParseException;
-import java.util.*;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
+import ligma.command.Command;
 /**
  * This class represents a Ligma program that keeps track of your to-do list.
  * Storage object corresponds to the persistent storage
@@ -16,6 +16,11 @@ public class Ligma {
     private static Storage storage;
     private TaskList tasks;
 
+    /**
+     * Constructor for a Ligma object.
+     *
+     * @param filePath Location of file to store data
+     */
     public Ligma(String filePath) {
         this.storage = new Storage(filePath);
         try {
@@ -35,7 +40,9 @@ public class Ligma {
             try {
                 Command c = Parser.parseCommand(sc.nextLine());
                 c.execute(tasks, storage);
-                if (c.isExit()) break;
+                if (c.isExit()) {
+                    break;
+                }
             } catch (InputMismatchException | NoSuchMethodException e1) {
                 Ui.printErrorMessage(e1);
             } catch (DateTimeParseException e2) {
