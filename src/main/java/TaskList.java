@@ -55,7 +55,7 @@ public class TaskList {
      * Returns the number of Tasks stored in the TaskList.
      * @return Number of Tasks stored in the TaskList.
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 }
