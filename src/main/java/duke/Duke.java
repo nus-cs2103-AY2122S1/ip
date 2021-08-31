@@ -1,13 +1,15 @@
 package duke;
 
 import java.io.FileNotFoundException;
-import java.util.List;
 import java.util.Scanner;
 
 import duke.command.Command;
 import duke.command.Parser;
-import duke.task.Task;
-import duke.util.*;
+import duke.util.DukeException;
+import duke.util.Message;
+import duke.util.Storage;
+import duke.util.TaskList;
+import duke.util.Ui;
 
 public class Duke {
     /** For the chatboard to read the user input. */
@@ -28,6 +30,11 @@ public class Duke {
         storage = new Storage(ui);
     }
 
+    /**
+     * Loads the saved task list for duke.
+     *
+     * @return Message to be printed out by UI.
+     */
     public Message loadTaskList() {
         try {
             taskList = new TaskList(storage.importTask(), ui, storage);
