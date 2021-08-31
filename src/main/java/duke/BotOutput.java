@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * BotOutput class encapsulates responses from duke.
+ */
 public class BotOutput {
     private final String botOutput;
     private final boolean isExit;

@@ -6,6 +6,9 @@ import duke.util.Storage;
 
 import java.util.ArrayList;
 
+/**
+ * DoneCommand class which handles the logic of finishing tasks.
+ */
 public class DoneCommand extends Command {
     private final String fullCommand;
 

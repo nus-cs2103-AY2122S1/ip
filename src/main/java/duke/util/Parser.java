@@ -3,7 +3,17 @@ package duke.util;
 import duke.command.*;
 import duke.exceptions.UnknownException;
 
+/**
+ * Parser class to handle user commands.
+ */
 public class Parser {
+    /**
+     * Returns command objects according to user command.
+     *
+     * @param command User's command input.
+     * @return Respective command object.
+     * @throws UnknownException In case of errors.
+     */
     public static Command parse(String command) throws UnknownException {
         if (command.startsWith("todo")) {
             return new AddCommand(command, "todo");

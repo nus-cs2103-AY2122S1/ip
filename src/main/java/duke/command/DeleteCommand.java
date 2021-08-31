@@ -7,6 +7,9 @@ import duke.util.Storage;
 
 import java.util.ArrayList;
 
+/**
+ * DeleteCommand class which handles the logic of deleting tasks.
+ */
 public class DeleteCommand extends Command {
     private final String fullCommand;
 

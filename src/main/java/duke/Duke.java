@@ -49,8 +49,11 @@ public class Duke {
     }
     
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns an appropriate text reply for duke in the dialog box according
+     * to user's input message.
+     *      
+     * @param input The user's input.
+     * @return A text that duke should reply with.
      */
     public BotOutput getBotOutput (String input) {
         List<String> botOutputs = new ArrayList<>();

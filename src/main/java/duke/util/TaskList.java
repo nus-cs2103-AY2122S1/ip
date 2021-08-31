@@ -6,6 +6,10 @@ import duke.exceptions.DukeIndexException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TaskList class which encapsulates all tasks, as well as handle information and
+ * operations relating to the tasks.
+ */
 public class TaskList {
     private List<Task> list;
 

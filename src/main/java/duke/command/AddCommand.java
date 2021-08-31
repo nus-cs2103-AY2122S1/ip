@@ -10,7 +10,9 @@ import duke.util.Ui;
 import duke.util.Storage;
 import java.util.ArrayList;
 
-
+/**
+ * AddCommand class which handles the logic of adding tasks.
+ */
 public class AddCommand extends Command {
     private final String fullCommand;
     private final String taskType;

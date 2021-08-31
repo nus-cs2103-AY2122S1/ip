@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Storage class to retrieve and store tasks in Duke.
+ */
 public class Storage {
     private final String filePath;
 
@@ -89,7 +92,7 @@ public class Storage {
     }
 
     /**
-     * Creates empty file
+     * Creates empty file.
      */
     public void createEmptyFile(File file) {
         try {
@@ -101,7 +104,10 @@ public class Storage {
     }
 
     /**
-     * Writes to file
+     * Writes to file.
+     * 
+     * @param list The list of tasks to write from.
+     * @throws IOException In case of Invalid directory.
      */
     public void writeToFile(List<Task> list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
@@ -112,7 +118,7 @@ public class Storage {
     }
 
     /**
-     * Saves list of tasks to data storage.
+     * Stores list of tasks.
      */
     public void saveToStorage(List<Task> tasks) {
         try {

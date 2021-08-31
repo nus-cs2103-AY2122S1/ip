@@ -1,7 +1,9 @@
 package duke.task;
 
-import duke.exceptions.UnclearInstructionException;
 
+/**
+ * Task class which encapsulates task description and status of completion.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -58,9 +60,7 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
     
-//    public String toFileString() {
-//        return "|" + this.getDoneIndicator() + "|" + this.description;
-//    }
+
     public String toFileString() {
         return "/" + this.description + "/" + this.getDoneIndicator();
     }

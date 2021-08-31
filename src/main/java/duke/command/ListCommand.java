@@ -6,6 +6,9 @@ import duke.util.Storage;
 
 import java.util.ArrayList;
 
+/**
+ * ListCommand class which handles the logic of listing tasks.
+ */
 public class ListCommand extends Command {
     public ListCommand() {}
 

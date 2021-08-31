@@ -5,13 +5,13 @@ import duke.exceptions.UnclearInstructionException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event class which encapsulates event date.
+ */
 public class Event extends Task {
     private String atString;
     private LocalDate atDate;
-    public Event(String description, LocalDate at) {
-        super(description);
-        this.atDate = at;
-    }
+    
 
     /**
      * Constructor method of Event.

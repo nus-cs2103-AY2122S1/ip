@@ -6,13 +6,12 @@ import duke.task.Task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class which encapsulates task's deadline.
+ */
 public class Deadline extends Task {
     private String byString;
     private LocalDate byDate;
-    public Deadline(String description, LocalDate by) {
-        super(description);
-        this.byDate = by;
-    }
 
     /**
      * Constructor method of Deadline.
@@ -46,8 +45,7 @@ public class Deadline extends Task {
      */
     public static String extractTaskDescription(String text) throws UnclearInstructionException {
         String[] contents = text.split(" ", 3);
-        String task_type = contents[0];
-        String description = "";
+        String description;
 
         if (contents.length != 3) {
             throw new UnclearInstructionException(

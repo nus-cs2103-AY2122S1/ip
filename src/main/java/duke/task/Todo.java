@@ -1,7 +1,9 @@
 package duke.task;
 
-import duke.task.Task;
 
+/**
+ * Todo class to represent a class without a deadline.
+ */
 public class Todo extends Task {
 
     protected String by;
@@ -26,7 +28,6 @@ public class Todo extends Task {
     }
 
     
-
 
     @Override
     public String toString() {

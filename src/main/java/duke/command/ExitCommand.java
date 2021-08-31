@@ -6,6 +6,9 @@ import duke.util.Storage;
 
 import java.util.ArrayList;
 
+/**
+ * ExitCommand class which handles the logic of exiting.
+ */
 public class ExitCommand extends Command {
     public ExitCommand() {}
 

@@ -6,6 +6,9 @@ import duke.util.Storage;
 
 import java.util.ArrayList;
 
+/**
+ * FindCommand class which handles the logic of finding matching tasks.
+ */
 public class FindCommand extends Command{
     private final String fullCommand;
 

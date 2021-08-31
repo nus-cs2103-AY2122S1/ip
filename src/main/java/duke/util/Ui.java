@@ -1,6 +1,10 @@
 package duke.util;
 
 import java.util.Scanner;
+
+/**
+ * Ui class to encapsulate display messages and handle input/output of duke.
+ */
 public class Ui {
     private final Scanner sc;
     /**
