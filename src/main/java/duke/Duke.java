@@ -18,34 +18,23 @@ public class Duke {
      * Initialize each component of the program.
      * Loads any data available from filePath.
      *
-     * @param filePath path to the storage file
+     * @param isCli enable cli output
      */
-    public Duke(String filePath) {
-        storage = new Storage(filePath);
-        ui = new Ui();
-        ui.printMessage(Message.WELCOME);
-
-        try {
-            taskList = new TaskList(storage.load());
-        } catch (DukeException | IOException e) {
-            ui.printMessage(e.getMessage());
-            taskList = new TaskList();
-        }
-    }
-
-    /**
-     * Overloading constructor for Duke used in JavaFX.
-     * Initialize each component of the program.
-     * Loads any data available from data.txt.
-     */
-    public Duke() {
+    public Duke(boolean isCli) {
         storage = new Storage("data.txt");
-        ui = null;
+        ui = isCli ? new Ui() : null;
+
+        if (isCli) {
+            ui.printMessage(Message.WELCOME);
+        }
 
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException | IOException e) {
             taskList = new TaskList();
+            if (isCli) {
+                ui.printMessage(e.getMessage());
+            }
         }
     }
 
@@ -106,6 +95,6 @@ public class Duke {
      * @param args not used
      */
     public static void main(String[] args) {
-        new Duke("data.txt").run();
+        new Duke(true).run();
     }
 }
