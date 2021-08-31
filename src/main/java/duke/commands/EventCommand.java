@@ -1,13 +1,13 @@
 package duke.commands;
 
+import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Event;
-
-import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
 
 /**
  * Adds an event to the task list.
@@ -51,7 +51,7 @@ public class EventCommand extends Command {
             }
 
             String at = userCommand.substring(atIndex + 4);
-            LocalDateTime date = LocalDateTime.parse(at, Command.inputFormatter);
+            LocalDateTime date = LocalDateTime.parse(at, Command.INPUT_FORMATTER);
             Event newEvent = new Event(userCommand.substring(6, atIndex - 1), date);
 
             tasks.addTask(newEvent);

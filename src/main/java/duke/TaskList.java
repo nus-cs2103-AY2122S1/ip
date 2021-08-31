@@ -1,11 +1,10 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import duke.tasks.Task;
 
 /**
  * Container for a list of task items.
@@ -76,6 +75,11 @@ public class TaskList {
         this.items.remove(index);
     }
 
+    /**
+     * Finds a task with the given description.
+     *
+     * @param desc Description of the task that the user wants to find.
+     */
     public void findTask(String desc) {
         if (items.size() > 0) {
             List<Task> foundItems = new ArrayList<>();

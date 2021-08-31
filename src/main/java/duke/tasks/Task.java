@@ -7,14 +7,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class Task {
     /**
-     * Describes the task item.
-     */
-    protected String description;
-
-    /**
      * Formatter for parsing string into date.
      */
     protected static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
+
+    /**
+     * Describes the task item.
+     */
+    protected String description;
 
     /**
      * True if the task item has been completed; false otherwise.
