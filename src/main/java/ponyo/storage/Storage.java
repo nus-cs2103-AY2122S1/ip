@@ -50,7 +50,7 @@ public class Storage {
      * @param filePath path to check
      * @throws IOException if file creation fails
      */
-    public void fileFolderCheck(String filePath) throws IOException {
+    public void checkIfFileFolderExists(String filePath) throws IOException {
         File file = new File(filePath);
         File directory = new File(PATH);
 
@@ -70,7 +70,7 @@ public class Storage {
      * @throws IOException if error reading file
      */
     public void readTasksFromFile(ArrayList tasks, String filePath) throws IOException {
-        fileFolderCheck(filePath);
+        checkIfFileFolderExists(filePath);
         Scanner read = new Scanner(new File(filePath));
         read.useDelimiter(Pattern.compile("(\\n)| - "));
 
@@ -156,7 +156,7 @@ public class Storage {
      * @throws IOException if text appending fails
      */
     public void appendToFile(String filePath, String textToAppend) throws IOException {
-        fileFolderCheck(filePath);
+        checkIfFileFolderExists(filePath);
         FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
         fw.write(textToAppend);
         fw.close();
@@ -170,7 +170,7 @@ public class Storage {
      * @throws IOException if overwriting file fails
      */
     public void overwriteFile(String filePath, String fileContent) throws IOException {
-        fileFolderCheck(filePath);
+        checkIfFileFolderExists(filePath);
         FileWriter fw = new FileWriter(filePath); // create a FileWriter
         fw.write(fileContent);
         fw.close();

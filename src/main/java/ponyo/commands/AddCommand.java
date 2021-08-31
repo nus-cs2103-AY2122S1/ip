@@ -37,7 +37,7 @@ public class AddCommand extends Command {
         case "deadline":
             try {
                 int slashIndex = taskToAdd[1].indexOf("/");
-                Task t = new Deadline(taskToAdd[1].substring(0, slashIndex), dateFormatter(taskToAdd[1], slashIndex));
+                Task t = new Deadline(taskToAdd[1].substring(0, slashIndex), formatDate(taskToAdd[1], slashIndex));
                 tasks.add(t);
                 storage.fileLineToWrite(t);
                 return showTask(t, tasks.size());
@@ -49,7 +49,7 @@ public class AddCommand extends Command {
         case "event":
             try {
                 int slashIndex = taskToAdd[1].indexOf("/");
-                Task t = new Event(taskToAdd[1].substring(0, slashIndex), dateFormatter(taskToAdd[1], slashIndex));
+                Task t = new Event(taskToAdd[1].substring(0, slashIndex), formatDate(taskToAdd[1], slashIndex));
                 tasks.add(t);
                 storage.fileLineToWrite(t);
                 return showTask(t, tasks.size());
@@ -83,7 +83,7 @@ public class AddCommand extends Command {
      * @return The string representation of the date in MMM d yyyy
      * @throws DateTimeParseException Thrown when the inputDate is of wrong format.
      */
-    public String dateFormatter(String inputDate, int slashIndex) throws DateTimeParseException {
+    public String formatDate(String inputDate, int slashIndex) throws DateTimeParseException {
         LocalDate date = LocalDate.parse(inputDate.substring(slashIndex + 4));
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
