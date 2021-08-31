@@ -34,11 +34,6 @@ public class CommandTest {
     }
 
     @Test
-    public void exitCommand_sameResult() {
-        assertEquals("bye", new ExitCommand().toString());
-    }
-
-    @Test
     public void listCommand_sameResult() {
         assertEquals("list", new ListCommand().toString());
     }

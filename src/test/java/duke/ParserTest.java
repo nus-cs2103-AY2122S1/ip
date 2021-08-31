@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import duke.commands.AddCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
 import duke.commands.ListCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyDescriptionException;
@@ -103,12 +102,6 @@ public class ParserTest {
         } catch (DukeException e) {
             assertEquals(new EmptyDescriptionException("done").getMessage(), e.getMessage());
         }
-    }
-
-    @Test
-    public void exitCommandTest_sameResult()
-            throws EmptyDescriptionException, UnknownCommandException {
-        assertEquals(new ExitCommand(), Parser.decipher("bye"));
     }
 
     @Test
