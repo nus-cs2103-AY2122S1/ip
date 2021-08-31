@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.ui.Storage;
 import duke.ui.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Base Command Class for the other Command classes

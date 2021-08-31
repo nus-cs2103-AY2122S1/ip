@@ -1,12 +1,15 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 import duke.ui.Storage;
 import duke.ui.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * AddCommand class to handle all the adding of events to the list.
