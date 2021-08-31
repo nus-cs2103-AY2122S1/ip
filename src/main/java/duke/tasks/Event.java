@@ -4,7 +4,6 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import duke.exceptions.NoDescriptionException;
 import duke.exceptions.UserInputError;
 
 /**
@@ -27,7 +26,7 @@ public class Event extends Task {
         try {
             this.when = LocalDate.parse(when.trim());
         } catch (DateTimeException e) {
-            throw new NoDescriptionException("Wrong datetime format");
+            throw new UserInputError("Wrong datetime format");
         }
     }
 

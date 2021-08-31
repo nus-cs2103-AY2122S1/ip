@@ -1,9 +1,7 @@
 package duke;
 
 import duke.commands.Command;
-import duke.exceptions.InvalidInputException;
 import duke.exceptions.UserInputError;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
@@ -16,17 +14,17 @@ public class Duke {
 
     private static final String LINE =
         "     ____________________________________________________________\n";
-    public static TaskList taskList = new TaskList(Storage.readDatabase());
-    private Ui ui = new Ui();
+    public final TaskList taskList = new TaskList(Storage.readDatabase());
+    private final Ui ui = new Ui(taskList);
 
     public String getResponse(String input) {
-        Parser parser = new Parser(input);
+        Parser parser = new Parser(input, taskList);
         String output;
         try {
             Command command = parser.parse();
-            output = command.execute(taskList, ui, new Storage());
+            output = command.execute(taskList, ui);
         } catch (UserInputError e) {
-            output = e.getMessage();
+            output = ui.formatOutput(e.getMessage());
         }
         return output;
     }

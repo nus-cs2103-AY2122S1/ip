@@ -4,7 +4,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
 import duke.Duke;
-import duke.exceptions.NoDescriptionException;
 import duke.exceptions.UserInputError;
 
 /**
@@ -98,7 +97,7 @@ public abstract class Task {
             }
             break;
         default:
-            newTask = new Todo(desc, isDone);
+            newTask = null;
         }
 
         return newTask;
@@ -110,11 +109,11 @@ public abstract class Task {
      * @param str String of details.
      * @param key Delimiter.
      * @return Array of description and datetime.
-     * @throws NoDescriptionException
+     * @throws UserInputError
      */
-    private static String[] separateDetails(String str, String key) throws NoDescriptionException {
+    private static String[] separateDetails(String str, String key) throws UserInputError {
         if (str.split(key).length <= 1) {
-            throw new NoDescriptionException(
+            throw new UserInputError(
                     "Oops! Please use the correct format with " + key + " to indicate datetime");
         }
         return str.split(key);
@@ -155,12 +154,12 @@ public abstract class Task {
     }
 
     /**
-     * Return a formated icon to symbolise if task is completed.
+     * Return a formatted icon to symbolise if task is completed.
      *
      * @return String icon representing completeness.
      */
     private String getStatusIcon() {
-        return (isDone ? "[X]" : "[ ]"); // mark done task with X
+        return (isDone ? "[X]" : "[  ]"); // mark done task with X
     }
 
     /**

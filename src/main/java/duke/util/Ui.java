@@ -1,7 +1,7 @@
 package duke.util;
 
-import duke.Duke;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 /**
  * The Ui class that deals with interactions with the user.
@@ -15,10 +15,23 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private boolean isEndChat = false;
+    private TaskList taskList;
 
+    public Ui(TaskList tasklist) {
+        this.taskList = tasklist;
+    }
+
+    /**
+     * Wrapper to render Duke output in a consistent format.
+     *
+     * @param str String representing Duke output.
+     */
     public String formatOutput(String str) {
-        return LINE + str + LINE;
+        StringBuilder sb = new StringBuilder();
+        sb.append(LINE);
+        str.lines().forEach(line -> sb.append("         ").append(line).append('\n'));
+        sb.append(LINE);
+        return sb.toString();
     }
 
     /**
@@ -32,7 +45,7 @@ public class Ui {
                         + INDENT
                         + task.toString()
                         + "\nNow you have "
-                        + Duke.taskList.length()
+                        + taskList.length()
                         + " tasks in the list.";
         return formatOutput(output);
     }
@@ -48,7 +61,7 @@ public class Ui {
                         + INDENT
                         + task.toString()
                         + "\nNow you have "
-                        + Duke.taskList.length()
+                        + taskList.length()
                         + " tasks in the list.";
         return formatOutput(output);
     }

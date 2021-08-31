@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.Duke;
-
 import java.util.ArrayList;
 
 /**
@@ -68,11 +66,11 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder op = new StringBuilder();
-        for (int i = 0; i < Duke.taskList.length(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             op
                     .append(i + 1)
                     .append(". ")
-                    .append(Duke.taskList.getTask(i).toString())
+                    .append(taskList.get(i).toString())
                     .append("\n");
         }
         return "Here are the tasks in your list:\n" + op;

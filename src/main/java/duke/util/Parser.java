@@ -1,11 +1,16 @@
 package duke.util;
 
-import duke.Duke;
-import duke.commands.*;
-import duke.exceptions.ExceedListSizeException;
-import duke.exceptions.NoDescriptionException;
+import duke.commands.AddCommand;
+import duke.commands.Command;
+import duke.commands.CompleteCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.ExitCommand;
+import duke.commands.FalseCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
 import duke.exceptions.UserInputError;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 
 /**
  * The Parser class that makes sense of the user input.
@@ -13,15 +18,16 @@ import duke.tasks.Task;
 public class Parser {
     private final String input;
     private final String command;
-
+    private final TaskList taskList;
     /**
      * Constructor to make a parser.
      *
      * @param input Details of the user input.
      */
-    public Parser(String input) {
+    public Parser(String input, TaskList taskList) {
         this.input = input;
-        command = getFirstWord(input);
+        this.command = getFirstWord(input);
+        this.taskList = taskList;
     }
 
     /**
@@ -99,19 +105,19 @@ public class Parser {
      * Check that input index is valid.
      *
      * @param index Input index proposed by user.
-     * @throws ExceedListSizeException
+     * @throws UserInputError
      */
-    private void checkIndexRange(int index) throws ExceedListSizeException {
+    private void checkIndexRange(int index) throws UserInputError {
         if (index < 0) {
-            throw new ExceedListSizeException(
+            throw new UserInputError(
                     "Invalid task reference!\nIndex should be more than 0."
             );
         }
 
-        if (index > Duke.taskList.length() - 1) {
-            throw new ExceedListSizeException(
+        if (index > taskList.length() - 1) {
+            throw new UserInputError(
                     "Invalid task reference!\nYou currently have "
-                            + Duke.taskList.length()
+                            + taskList.length()
                             + " tasks."
             );
         }
@@ -130,11 +136,11 @@ public class Parser {
     /**
      * Check user input contains needed description.
      *
-     * @throws NoDescriptionException
+     * @throws UserInputError
      */
-    private void checkDescExist() throws NoDescriptionException {
+    private void checkDescExist() throws UserInputError {
         if (input.split(" ").length == 1) {
-            throw new NoDescriptionException(
+            throw new UserInputError(
                     "Oops! Please add description for your command."
             );
         }
