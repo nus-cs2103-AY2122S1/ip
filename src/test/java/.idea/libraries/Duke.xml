@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Duke">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../main/out/artifacts/java_jar/Duke.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
