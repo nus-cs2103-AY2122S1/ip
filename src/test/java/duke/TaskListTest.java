@@ -1,13 +1,13 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import org.junit.jupiter.api.Test;
+
 public class TaskListTest {
     @Test
-    public void taskListConstructor_emptyString_DukeExceptionThrown() {
+    public void taskListConstructor_emptyString_dukeExceptionThrown() {
         try {
             TaskList taskList = new TaskList("");
             fail();

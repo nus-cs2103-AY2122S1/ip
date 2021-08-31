@@ -24,8 +24,8 @@ public class Ui {
      * @param task The Task that has been added.
      */
     public void displayAddUi(TaskList taskList, TaskList.Task task) {
-        System.out.println("Got it. I've added this task:\n" + "  " + task + "\n" +
-                "Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Got it. I've added this task:\n" + "  " + task + "\n"
+                + "Now you have " + taskList.size() + " tasks in the list.");
     }
 
     /**
