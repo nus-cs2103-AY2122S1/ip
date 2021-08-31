@@ -11,7 +11,6 @@ public class Ui {
         this.storage = storage;
         this.taskList = taskList;
     }
-    private final Scanner scanner = new Scanner(System.in);
     public void showLine() {
         System.out.println("______________________________________________");
     }
