@@ -18,4 +18,9 @@ public abstract class DukeException extends Exception {
             super("Missing argument: " +  arg);
         }
     }
+    public static class ParseException extends DukeException {
+        public ParseException(String s) {
+            super("Error reading line:" + s);
+        }
+    }
 }
