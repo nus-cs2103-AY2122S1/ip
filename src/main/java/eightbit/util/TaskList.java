@@ -1,9 +1,8 @@
 package eightbit.util;
 
-import eightbit.task.Task;
-
 import java.util.List;
-import java.util.function.Predicate;
+
+import eightbit.task.Task;
 
 /**
  * Represents the user's list of tasks.

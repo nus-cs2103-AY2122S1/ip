@@ -1,8 +1,8 @@
 package eightbit.util;
 
-import eightbit.EightBitException;
-
 import java.util.Scanner;
+
+import eightbit.EightBitException;
 
 /**
  * Responsible for accepting user inputs and printing messages.
@@ -15,8 +15,8 @@ public class Ui {
      * @param msg Message to be printed.
      */
     public void printWithLines(String msg) {
-        String LINE = "-------------------------------------------------------";
-        System.out.println(LINE + "\n" + msg + "\n" + LINE);
+        String line = "-------------------------------------------------------";
+        System.out.println(line + "\n" + msg + "\n" + line);
     }
 
     /**
