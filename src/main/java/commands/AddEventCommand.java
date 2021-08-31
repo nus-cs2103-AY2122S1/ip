@@ -17,14 +17,14 @@ public class AddEventCommand extends AddTaskCommand {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         Event newEvent = new Event(this.desc, this.isDone, this.time);
         taskList.addTask(newEvent);
-        ui.printAddTask(newEvent);
         try {
             storage.writeTasksToFile(taskList, storage.getTaskFile());
         } catch (IOException e) {
-            ui.printFileWriteFail(storage.getTaskFile());
+            return ui.getFileWriteFailResponse(storage.getTaskFile());
         }
+        return ui.getAddTaskResponse(newEvent);
     }
 }

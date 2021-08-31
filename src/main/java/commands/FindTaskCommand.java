@@ -14,16 +14,18 @@ public class FindTaskCommand implements Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
-        System.out.println("Here are the tasks matching your query!");
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks matching your query! \n");
         int matchingTaskCount = 0;
         for (int i = 0; i < taskList.numberOfTasks(); i++) {
             Task task = taskList.getTask(i);
             if (task.getDescription().contains(query)) {
-                System.out.println((matchingTaskCount + 1) + ". " + task);
+                sb.append((matchingTaskCount + 1) + ". " + task + "\n");
                 matchingTaskCount++;
             }
         }
+        return sb.toString();
     }
 
     @Override

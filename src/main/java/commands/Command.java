@@ -13,7 +13,7 @@ import exceptions.*;
  * only the commands.QuitCommand will return true in general.
  */
 public interface Command {
-    void execute(Ui ui, TaskList taskList, Storage storage);
+    String execute(Ui ui, TaskList taskList, Storage storage);
 
     boolean isQuit();
 }

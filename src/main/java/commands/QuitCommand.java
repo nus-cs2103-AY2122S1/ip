@@ -6,8 +6,8 @@ import duke.Ui;
 
 public class QuitCommand implements Command {
 
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
+        return "Bye. Hope to see you again soon!";
     }
 
     public boolean isQuit() {

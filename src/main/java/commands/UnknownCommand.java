@@ -7,8 +7,8 @@ import duke.Ui;
 public class UnknownCommand implements Command {
 
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
-        ui.printUnknownCommand();
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
+        return ui.getUnknownCommandResponse();
     }
 
     @Override

@@ -22,15 +22,15 @@ public class AddTaskCommand implements Command {
         this.isDone = isDone;
     }
 
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         Task newTask = new Task(this.desc, this.isDone);
         taskList.addTask(newTask);
-        ui.printAddTask(newTask);
         try {
             storage.writeTasksToFile(taskList, storage.getTaskFile());
         } catch (IOException e) {
-            ui.printFileWriteFail(storage.getTaskFile());
+            return ui.getFileWriteFailResponse(storage.getTaskFile());
         }
+        return ui.getAddTaskResponse(newTask);
     }
 
     public boolean isQuit() {

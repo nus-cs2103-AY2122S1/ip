@@ -14,14 +14,14 @@ public class AddTodoCommand extends AddTaskCommand {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         Todo newTodo = new Todo(this.desc, this.isDone);
         taskList.addTask(newTodo);
-        ui.printAddTask(newTodo);
         try {
             storage.writeTasksToFile(taskList, storage.getTaskFile());
         } catch (IOException e) {
-            ui.printFileWriteFail(storage.getTaskFile());
+            return ui.getFileWriteFailResponse(storage.getTaskFile());
         }
+        return ui.getAddTaskResponse(newTodo);
     }
 }

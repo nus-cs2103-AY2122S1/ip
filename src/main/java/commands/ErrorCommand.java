@@ -13,8 +13,8 @@ public class ErrorCommand implements Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
-        System.out.println(msg);
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
+        return msg;
     }
 
     @Override

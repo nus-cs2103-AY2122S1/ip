@@ -17,21 +17,22 @@ public class DeleteTaskCommand implements Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         try {
-            Task t = taskList.getTask(this.index);
+            Task task = taskList.getTask(this.index);
             taskList.deleteTask(this.index);
-            ui.printDeleteTask(t, this.index);
             storage.writeTasksToFile(taskList, storage.getTaskFile());
+            return ui.getDeleteTaskResponse(task, this.index);
         } catch (IndexOutOfBoundsException e) {
             if (taskList.numberOfTasks() > 0) {
-                System.out.println("Invalid index given, enter a number from 1 to " + taskList.numberOfTasks());
+                return "Invalid index given, enter a number from 1 to " + taskList.numberOfTasks();
             } else if (taskList.numberOfTasks() == 0) {
-                System.out.println("You cannot delete any task because you have no tasks!");
+                return "You cannot delete any task because you have no tasks!";
             }
         } catch (IOException e) {
-            ui.printFileWriteFail(storage.getTaskFile());
+            return ui.getFileWriteFailResponse(storage.getTaskFile());
         }
+        return "";
     }
 
     @Override
