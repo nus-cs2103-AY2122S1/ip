@@ -11,6 +11,32 @@ import duke.util.Ui;
  * @version CS2103T AY21/22 Sem 1.
  */
 public abstract class Command {
+    /** A String representing the user's input. */
+    protected String userInput;
+
+    /**
+     * Constructor of the Command class.
+     *
+     * @param userInput A string representing the user's input.
+     */
+    public Command(String userInput) {
+        this.userInput = userInput;
+    }
+
+    /**
+     * Empty Constructor of the Command class.
+     */
+    public Command() {
+    }
+
+    /**
+     * Returns the user input.
+     *
+     * @return A string representing the user input.
+     */
+    public String getUserInput() {
+        return this.userInput;
+    }
 
     /**
      * Asks Duke to execute a specific command.
@@ -19,13 +45,7 @@ public abstract class Command {
      * @param tasks The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
+     * @return A string representing Duke's reply after executing a command.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
-
-    /**
-     * Returns a boolean that tells Duke when to exit.
-     *
-     * @return A boolean representing the exit condition.
-     */
-    public abstract boolean isExit();
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 }

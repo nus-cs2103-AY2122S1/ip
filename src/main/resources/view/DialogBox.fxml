@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root
+        alignment="TOP_RIGHT"
+        prefWidth="400.0"
+        type="javafx.scene.layout.HBox"
+        xmlns="http://javafx.com/javafx/8.0.171"
+        xmlns:fx="http://javafx.com/fxml/1"
+>
+    <children>
+        <Label
+                fx:id="dialog"
+                text="Label"
+                wrapText="true"
+                style="-fx-background-color: #E9967A; -fx-background-radius: 5; -fx-padding: 10"
+        >
+            <font>
+                <Font name="Comic Sans MS Italic" size="12.5" />
+            </font>
+        </Label>
+        <ImageView
+                fx:id="displayPicture"
+                fitHeight="50.0"
+                fitWidth="50.0"
+                pickOnBounds="true"
+                preserveRatio="true"
+        />
+    </children>
+    <padding>
+        <Insets bottom="15.0" top="15.0" />
+    </padding>
+</fx:root>

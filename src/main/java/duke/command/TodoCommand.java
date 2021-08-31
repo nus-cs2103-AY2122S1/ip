@@ -2,6 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.util.Storage;
@@ -15,15 +16,13 @@ import duke.util.Ui;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class TodoCommand extends Command {
-
     /**
-     * Returns a boolean that tells Duke if this is the command to exit.
+     * Constructor of the TodoCommand class.
      *
-     * @return A boolean representing the exit condition.
+     * @param userInput A string representing the user's input.
      */
-    @Override
-    public boolean isExit() {
-        return false;
+    public TodoCommand(String userInput) {
+        super(userInput);
     }
 
     /**
@@ -32,22 +31,24 @@ public class TodoCommand extends Command {
      * @param taskList The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
+     * @return A string representing Duke's reply after executing this command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String command = ui.getCommand();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String command = super.getUserInput();
         String[] inputValues = command.split(" ");
         if (inputValues.length == 1) {
             //catch empty to-do
-            ui.showError("     Error! Description cannot be empty.");
+            return ui.showError("Error! Description cannot be empty.");
         } else {
             try {
                 String description = command.substring(inputValues[0].length() + 1);
                 Task toDo = new ToDo(description);
-                taskList.add(toDo);
-                storage.save(taskList);
+                return taskList.add(toDo, storage);
             } catch (IOException exception) {
-                ui.showSavingError();
+                return ui.showSavingError();
+            } catch (DukeException exception) {
+                return ui.showError(exception.getMessage());
             }
         }
     }

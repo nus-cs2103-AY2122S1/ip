@@ -7,7 +7,6 @@ package duke.task;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class Task {
-
     /** A string representing the description of a task. */
     protected String description;
 

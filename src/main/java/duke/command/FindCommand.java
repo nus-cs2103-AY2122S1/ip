@@ -11,15 +11,13 @@ import duke.util.Ui;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class FindCommand extends Command {
-
     /**
-     * Returns a boolean that tells Duke if this is the command to exit.
+     * Constructor of the FindCommand class.
      *
-     * @return A boolean representing the exit condition.
+     * @param userInput A string representing the user's input.
      */
-    @Override
-    public boolean isExit() {
-        return false;
+    public FindCommand(String userInput) {
+        super(userInput);
     }
 
     /**
@@ -28,17 +26,18 @@ public class FindCommand extends Command {
      * @param taskList The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
+     * @return A string representing Duke's reply after executing this command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String command = ui.getCommand();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String command = super.getUserInput();
         String[] inputValues = command.split(" ");
         if (inputValues.length == 1) {
             //first check for empty keyword
-            ui.showError("     Error! Please search for a keyword.");
+            return ui.showError("Error! Please search for a keyword.");
         } else {
             String keyword = command.substring(inputValues[0].length() + 1).strip();
-            taskList.searchAndDisplay(keyword);
+            return taskList.searchAndDisplay(keyword);
         }
     }
 }

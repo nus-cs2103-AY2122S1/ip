@@ -7,7 +7,6 @@ package duke.exception;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class InvalidCommandException extends DukeException {
-
     /**
      * Constructor of the EmptyFieldException class.
      *

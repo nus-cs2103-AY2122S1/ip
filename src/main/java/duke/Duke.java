@@ -4,11 +4,12 @@ import java.io.IOException;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.gui.Main;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
-
+import javafx.application.Application;
 
 /**
  * Represents a chat bot called Duke.
@@ -17,26 +18,22 @@ import duke.util.Ui;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class Duke {
-
-    private static final String FILEPATH = "data/duke.txt";
     private Storage storage;
     private TaskList taskList;
     private final Ui ui;
 
     /**
      * Constructor for the Duke class.
-     *
-     * @param filePath A string representing a filepath to save or load Duke's responses.
      */
-    public Duke(String filePath) {
+    public Duke(String filepath) {
         this.ui = new Ui();
         try {
-            this.storage = new Storage(filePath);
+            this.storage = new Storage(filepath);
             this.taskList = new TaskList(this.storage.load());
         } catch (IOException exception) {
-            ui.showLoadingError();
+            System.out.println(ui.showLoadingError());
         } catch (DukeException exception) {
-            ui.showError(exception.getMessage());
+            System.out.println(ui.showError(exception.getMessage()));
         }
     }
 
@@ -44,21 +41,12 @@ public class Duke {
      * Runs Duke.
      * Duke starts reading inputs from the user and executes the user's commands accordingly.
      */
-    public void run() {
-        this.ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            String fullCommand = this.ui.readCommand();
-            ui.showTopLine();
-            Command c = Parser.parse(fullCommand);
-            c.execute(this.taskList, this.ui, this.storage);
-            ui.showBottomLine();
-            isExit = c.isExit();
-        }
+    public String getResponse(String userInput) {
+        Command c = Parser.parse(userInput);
+        return c.execute(this.taskList, this.ui, this.storage);
     }
 
     public static void main(String[] args) {
-        new Duke(FILEPATH).run();
+        Application.launch(Main.class, args);
     }
 }

@@ -21,7 +21,6 @@ import duke.task.ToDo;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class Storage {
-
     /** A file that Duke stores information of its user in. */
     private final File file;
 

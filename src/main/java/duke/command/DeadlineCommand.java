@@ -17,15 +17,13 @@ import duke.util.Ui;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class DeadlineCommand extends Command {
-
     /**
-     * Returns a boolean that tells Duke if this is the command to exit.
+     * Constructor of the DeadlineCommand class.
      *
-     * @return A boolean representing the exit condition.
+     * @param userInput A string representing the user's input.
      */
-    @Override
-    public boolean isExit() {
-        return false;
+    public DeadlineCommand(String userInput) {
+        super(userInput);
     }
 
     /**
@@ -34,19 +32,20 @@ public class DeadlineCommand extends Command {
      * @param taskList The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
+     * @return A string representing Duke's reply after executing this command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String command = ui.getCommand();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String command = super.getUserInput();
         String[] inputValues = command.split(" ");
         if (inputValues.length == 1) {
             //first check if deadline is empty
-            ui.showError("     Error! The description and date/time cannot be empty.");
+            return ui.showError("Error! The description and date/time cannot be empty.");
         } else if (!command.contains("/by")) {
             //check for date separator
-            ui.showError("     Invalid deadline format!\n"
-                    + "     Please ensure you specify your date and time after a \"/by\"\n"
-                    + "     Eg: deadline Submit Assignment /by 2021-08-29 15:00"
+            return ui.showError("Invalid deadline format!\n"
+                    + "Please ensure you specify your date and time after a \"/by\"\n"
+                    + "Eg: deadline Submit Assignment /by 2021-08-29 15:00"
             );
         } else {
             int dateTimeIndex = command.indexOf("/");
@@ -54,19 +53,17 @@ public class DeadlineCommand extends Command {
             String dateTime = command.substring(dateTimeIndex + 3).strip();
             try {
                 Task deadline = new Deadline(description, dateTime);
-                taskList.add(deadline);
-                storage.save(taskList);
+                return taskList.add(deadline, storage);
             } catch (DateTimeException exception) {
-                ui.showError(
-                        "     Error! Ensure your date and time is valid and formatted correctly!\n"
-                        + "     Date: \"YYYY-MM-DD\" format, eg: 2021-08-23\n"
-                        + "     Time: 24Hr format, \"HH:mm\", eg: 18:00");
+                return ui.showError(
+                        "Error! Ensure your date and time is valid and formatted correctly!\n"
+                        + "Date: \"YYYY-MM-DD\" format, eg: 2021-08-23\n"
+                        + "Time: 24Hr format, \"HH:mm\", eg: 18:00");
             } catch (DukeException exception) {
-                ui.showError(exception.getMessage());
+                return ui.showError(exception.getMessage());
             } catch (IOException exception) {
-                ui.showSavingError();
+                return ui.showSavingError();
             }
-
         }
     }
 }

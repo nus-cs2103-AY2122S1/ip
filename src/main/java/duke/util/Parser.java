@@ -18,7 +18,6 @@ import duke.command.TodoCommand;
  * @version CS2103T AY21/22 Sem 1.
  */
 public class Parser {
-
     /**
      * Returns the appropriate Command Object after Duke processes the user input.
      *
@@ -33,18 +32,18 @@ public class Parser {
             return new ListCommand();
         } else if (inputValues[0].equals("done") && inputValues.length == 2) {
             //treat as unknown command if there is more than 1 number after "done".
-            return new DoneCommand();
+            return new DoneCommand(command);
         } else if (inputValues[0].equals("delete") && inputValues.length == 2) {
             //treat as unknown command if there is more than 1 number after "delete".
-            return new DeleteCommand();
+            return new DeleteCommand(command);
         } else if (inputValues[0].equals("deadline")) {
-            return new DeadlineCommand();
+            return new DeadlineCommand(command);
         } else if (inputValues[0].equals("event")) {
-            return new EventCommand();
+            return new EventCommand(command);
         } else if (inputValues[0].equals("todo")) {
-            return new TodoCommand();
+            return new TodoCommand(command);
         } else if (inputValues[0].equals("find")) {
-            return new FindCommand();
+            return new FindCommand(command);
         } else {
             return new InvalidCommand();
         }
