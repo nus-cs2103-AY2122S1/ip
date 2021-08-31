@@ -47,7 +47,7 @@ public interface IProcessor {
      */
     String processDelete(String index);
 
-    String processFind(String keyword);
+    String processFind(String ... keywords);
 
     /**
      * Process command with type DEFAULT.

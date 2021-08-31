@@ -90,14 +90,16 @@ public class TaskList implements Serializable {
     /**
      * Function implementation that returns all of the tasks with the matched keyword in a TaskList.
      *
-     * @param keyword Keyword that will be searched.
+     * @param keywords Keywords that will be searched.
      * @return TaskList object with all lists that match the keyword.
      */
-    public TaskList findKeyword(String keyword) {
+    public TaskList findKeyword(String ... keywords) {
         TaskList result = new TaskList();
-        for (int i = 0; i < this.list.size(); i++) {
-            if (this.list.get(i).toString().contains(keyword)) {
-                result.addTask(this.list.get(i));
+        for (String keyword: keywords) {
+            for (int i = 0; i < this.list.size(); i++) {
+                if (this.list.get(i).toString().contains(keyword)) {
+                    result.addTask(this.list.get(i));
+                }
             }
         }
         return result;
