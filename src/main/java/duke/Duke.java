@@ -2,6 +2,7 @@ package duke;
 
 import duke.logic.LStorage;
 import duke.task.TaskList;
+import duke.ui.TextCliUi;
 
 /**
  * Duke is a personal assistant that allows users to keep track of events, deadlines and things to do.
@@ -23,6 +24,14 @@ public class Duke {
     }
 
     /**
+     * Creates a new instance of a duke chat-bot, with default filepath and limit.
+     */
+    public Duke() {
+        taskList = new TaskList(100);
+        lStorage = new LStorage("./dukedata.txt", taskList);
+    }
+
+    /**
      * Runs the duke chat-bot with default filepath and limit.
      *
      * @param args irrelevant for now
@@ -35,7 +44,7 @@ public class Duke {
      * Runs the duke chat-bot.
      */
     public void run() {
-        Ui ui = new Ui();
+        TextCliUi ui = new TextCliUi();
         while (!ui.willExit()) {
             ui.checkInput(taskList, lStorage);
         }

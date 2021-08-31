@@ -1,7 +1,7 @@
 package duke.logic;
 
 import duke.DukeException;
-import duke.Ui;
+import duke.ui.TextCliUi;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TasksEnum;
@@ -26,7 +26,7 @@ public class LCommandParser {
      * @param storage  The storage logic that allows the command parser to write the task list data to it.
      * @param taskList The list of tasks.
      */
-    public LCommandParser(String input, TaskList taskList, LStorage storage, Ui ui) {
+    public LCommandParser(String input, TaskList taskList, LStorage storage, TextCliUi ui) {
         if (input == null || input.equals("")) {
             throw new DukeException(EMPTY_INPUT_MESSAGE);
         }

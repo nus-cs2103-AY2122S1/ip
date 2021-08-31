@@ -1,10 +1,11 @@
-package duke;
+package duke.ui;
 
 import static java.util.AbstractMap.SimpleImmutableEntry;
 
 import java.util.List;
 import java.util.Scanner;
 
+import duke.DukeException;
 import duke.logic.LCommandParser;
 import duke.logic.LCommandsEnum;
 import duke.logic.LStorage;
@@ -14,7 +15,7 @@ import duke.task.TaskList;
 /**
  * The user interface of Duke. Deals with printing messages to the console and reading user input.
  */
-public class Ui {
+public class TextCliUi {
     private final Scanner sc;
     private final String name;
     private boolean willExit;
@@ -22,7 +23,7 @@ public class Ui {
     /**
      * Creates a new instance of a user interface by creating a new scanner and querying for the user's name.
      */
-    public Ui() {
+    public TextCliUi() {
         sc = new Scanner(System.in);
         String name = "";
         willExit = false;
