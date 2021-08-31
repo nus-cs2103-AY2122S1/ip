@@ -21,6 +21,18 @@ public class Deadline extends Task {
         this.date = LocalDate.parse(date);
     }
 
+    public Deadline clone() {
+        try {
+            Deadline clone = new Deadline(description, date.toString());
+            if (isDone) {
+                clone.markAsDone();
+            }
+            return clone;
+        } catch (DukeException e) {
+            return null; // This Exception can never happen.
+        }
+    }
+
     public String toString() {
         String dateString = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return String.format("[D][%s] %s (by: %s)",

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Wraps around an ArrayList of tasks.
  */
-public class TaskList {
+public class TaskList implements Cloneable {
     private ArrayList<Task> tasks;
 
     /**
@@ -20,6 +20,23 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public TaskList clone() {
+        ArrayList<Task> clonedTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            clonedTasks.add(task.clone());
+        }
+        return new TaskList(clonedTasks);
+    }
+
+    /**
+     * Note: other becomes unusable after this function.
+     *
+     * @param other Source to move tasks from.
+     */
+    public void moveTasks(TaskList other) {
+        tasks = other.tasks;
     }
 
     /**

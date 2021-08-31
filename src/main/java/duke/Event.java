@@ -20,6 +20,19 @@ public class Event extends Task {
         super(description);
         this.date = LocalDate.parse(date);
     }
+
+    public Event clone() {
+        try {
+            Event clone = new Event(description, date.toString());
+            if (isDone) {
+                clone.markAsDone();
+            }
+            return clone;
+        } catch (DukeException e) {
+            return null; // This Exception can never happen.
+        }
+    }
+
     public String toString() {
         String dateString = date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         return String.format("[E][%s] %s (at: %s)",

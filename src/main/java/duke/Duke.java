@@ -11,6 +11,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private HistoryManager history;
 
     /**
      * @param filePath path to tasks storage file.
@@ -31,6 +32,7 @@ public class Duke {
             ui.showException(e);
             tasks = new TaskList();
         }
+        history = new HistoryManager(tasks);
     }
 
     /**
@@ -40,6 +42,7 @@ public class Duke {
         assert tasks != null : "tasks should not be null";
         assert ui != null : "ui should not be null";
         assert storage != null : "storage should not be null";
+        assert history != null : "history should not be null";
         ui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
@@ -47,7 +50,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showDivider();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, ui, storage, history);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showDukeException(e);
@@ -66,12 +69,13 @@ public class Duke {
         assert tasks != null : "tasks should not be null";
         assert ui != null : "ui should not be null";
         assert storage != null : "storage should not be null";
+        assert history != null : "history should not be null";
         // Change stdout of UI
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         System.setOut(new PrintStream(output));
         try {
             Command c = Parser.parse(fullCommand);
-            c.execute(tasks, ui, storage);
+            c.execute(tasks, ui, storage, history);
         } catch (DukeException e) {
             ui.showDukeException(e);
         } catch (Exception e) {

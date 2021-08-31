@@ -3,7 +3,7 @@ package duke;
 /**
  * Represents base class for all tasks that can be marked as done.
  */
-public abstract class Task {
+public abstract class Task implements Cloneable {
     protected String description;
     protected boolean isDone;
 
@@ -18,6 +18,8 @@ public abstract class Task {
         this.description = description;
         this.isDone = false;
     }
+
+    public abstract Task clone();
 
     /**
      * Marks Task as done.
