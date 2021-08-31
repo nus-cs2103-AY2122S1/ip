@@ -51,10 +51,11 @@ public class GraphicalUserInterface {
         this.ui = ui;
         this.tasks = tasks;
         this.storage = storage;
+        this.stage = stage;
 
         ui.addGui(this);
 
-
+        // setting variables
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -62,41 +63,31 @@ public class GraphicalUserInterface {
         sendButton = new Button("Send");
         mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        System.out.println(mainLayout);
         scene = new Scene(mainLayout);
 
-        this.stage = stage;
+        // setup styling/ formatting
         stage.setScene(scene);
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
-
         mainLayout.setPrefSize(400.0, 600.0);
-
         scrollPane.setPrefSize(385, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
-
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
         userInput.setPrefWidth(325.0);
-
         sendButton.setPrefWidth(55.0);
-
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-
         AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
 
+        // Create event listeners
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -105,8 +96,6 @@ public class GraphicalUserInterface {
             handleUserInput();
         });
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-
     }
 
     /**

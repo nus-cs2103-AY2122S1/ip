@@ -29,10 +29,6 @@ public class TaskList {
         this.tasks.remove(index);
     }
 
-    protected ArrayList<Task> getList() {
-        return (ArrayList<Task>) tasks.subList(0, tasks.size());
-    }
-
     public int size() {
         return this.tasks.size();
     }
@@ -49,7 +45,6 @@ public class TaskList {
      * @return All tasks with matching dates.
      */
     public TaskList findByDate(LocalDate date) {
-
 
         TaskList foundTasks = new TaskList();
 
@@ -71,7 +66,6 @@ public class TaskList {
             }
         }
 
-
         return foundTasks;
     }
 
@@ -87,16 +81,12 @@ public class TaskList {
 
         for (int i = 0; i < this.tasks.size(); i++) {
             Task task = this.tasks.get(i);
-
-
-            if (task.description.indexOf(input) != -1) {
+            if (task.description.contains(input)) {
                 foundTasks.add(task);
             }
-            ;
         }
 
         return foundTasks;
-
     }
 
     @Override
@@ -109,8 +99,6 @@ public class TaskList {
             return this.tasks.equals(taskList.tasks);
         }
         return false;
-
-
     }
 
     @Override

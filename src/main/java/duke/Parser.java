@@ -48,100 +48,20 @@ public class Parser {
      * @throws DukeException
      */
     public static Command parse(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException {
-
         if (input.equals("bye")) {
             return new ExitCommand(ui);
         } else if (input.equals("list")) {
             return new ListCommand(tasks, ui);
         } else if (input.split(" ")[0].equals("done")) {
-            String[] parsedInput = input.split(" ");
-
-            if (parsedInput.length != 2) {
-                throw (new DukeException("Please specify a task you would like marked as done Sir/Mdm:\n"
-                    + ui.list(tasks)));
-            }
-
-            int taskToMark;
-
-            try {
-                taskToMark = Integer.parseInt(parsedInput[1]) - 1;
-            } catch (NumberFormatException e) {
-                throw new DukeException("Please enter a proper number within this range Sir/Mdm:\n" + ui.list(tasks));
-            }
-
-            if (tasks.size() == 0) {
-                throw (new DukeException("You have no tasks to mark as done Sir/Mdm!"));
-            }
-
-            if (taskToMark < 0 || taskToMark > tasks.size() - 1) {
-                throw (new DukeException("Please specify a task within this range Sir/Mdm:\n" + ui.list(tasks)));
-            }
-            return new MarkDoneCommand(tasks.get(taskToMark), tasks, ui, storage);
-
+            return generateMarkTaskCommand(input, ui, tasks, storage);
         } else if (input.split(" ")[0].equals("delete")) {
-            String[] parsedInput = input.split(" ");
-
-            if (parsedInput.length != 2) {
-                throw (new DukeException("Please specify a task you would like to delete Sir/Mdm:\n"
-                    + ui.list(tasks)));
-            }
-
-            int taskToDelete;
-
-            try {
-                taskToDelete = Integer.parseInt(parsedInput[1]) - 1;
-            } catch (NumberFormatException e) {
-                throw new DukeException("Please enter a proper number within this range Sir/Mdm:\n" + ui.list(tasks));
-            }
-
-            if (tasks.size() == 0) {
-                throw (new DukeException("You have no tasks to delete Sir/Mdm!"));
-            }
-
-            if (taskToDelete < 0 || taskToDelete > tasks.size() - 1) {
-                throw (new DukeException("Please specify a task within this range Sir/Mdm:\n" + ui.list(tasks)));
-            }
-
-            return new DeleteCommand(taskToDelete, tasks, ui, storage);
-
+            return generateDeleteTaskCommand(input, ui, tasks, storage);
         } else if (input.split(" ")[0].equals("find/date")) {
-
-            String[] values = input.split(" ");
-            if (values.length != 2) {
-                throw new DukeException("Please specify a date for which to find deadlines and events "
-                    + "Sir/Mdm!");
-            } else {
-                try {
-                    LocalDate date = Parser.parseDate(values[1]);
-                    return new FindByDateCommand(date, tasks, ui);
-                } catch (DukeException e) {
-                    throw new DukeException("Wrong format for date Sir/Mdm. Examples of dates accepted: "
-                        + "2/12/2019, 2019-12-02");
-                }
-            }
+            return generateFindByDateCommand(input, ui, tasks);
         } else if (input.startsWith("find")) {
-
-            String searchPhrase = input.substring(4).trim();
-
-            return new FindByDescriptionCommand(searchPhrase, tasks, ui);
-
+            return generateFindByDescriptionCommand(input, ui, tasks);
         } else {
-            Pattern todoPattern = Pattern.compile("(^(todo ))");
-            Pattern deadlinePattern = Pattern.compile("(^(deadline ))");
-            Pattern eventPattern = Pattern.compile("(^(event ))");
-
-            if (todoPattern.matcher(input).find() || input.equals("todo")) {
-                Task newTask = Task.taskFactory(TaskType.TODO, input);
-                return new AddCommand(newTask, tasks, ui, storage);
-            } else if (deadlinePattern.matcher(input).find() || input.equals("deadline")) {
-                Task newTask = Task.taskFactory(TaskType.DEADLINE, input);
-                return new AddCommand(newTask, tasks, ui, storage);
-            } else if (eventPattern.matcher(input).find() || input.equals("event")) {
-                Task newTask = Task.taskFactory(TaskType.EVENT, input);
-                return new AddCommand(newTask, tasks, ui, storage);
-            } else {
-                throw new DukeException("Pardon me Sir/Mdm, but I do not understand.");
-            }
+            return generateAddCommand(input, ui, tasks, storage);
         }
     }
 
@@ -226,4 +146,98 @@ public class Parser {
         return time;
     }
 
+    private static Command generateMarkTaskCommand(String input, Ui ui, TaskList tasks, Storage storage) {
+        String[] parsedInput = input.split(" ");
+        int taskToMark;
+
+        // No task given to mark
+        if (parsedInput.length != 2) {
+            throw (new DukeException("Please specify a task you would like marked as done Sir/Mdm:\n"
+                + ui.list(tasks)));
+        }
+        try {
+            taskToMark = Integer.parseInt(parsedInput[1]) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please enter a proper number within this range Sir/Mdm:\n" + ui.list(tasks));
+        }
+
+
+        // No tasks in task list
+        if (tasks.size() == 0) {
+            throw (new DukeException("You have no tasks to mark as done Sir/Mdm!"));
+        }
+
+        // Task not in enumerated range
+        if (taskToMark < 0 || taskToMark > tasks.size() - 1) {
+            throw (new DukeException("Please specify a task within this range Sir/Mdm:\n" + ui.list(tasks)));
+        }
+        return new MarkDoneCommand(tasks.get(taskToMark), tasks, ui, storage);
+    }
+
+    private static Command generateDeleteTaskCommand(String input, Ui ui, TaskList tasks, Storage storage) {
+        String[] parsedInput = input.split(" ");
+        int taskToDelete;
+        //No task given to delete
+        if (parsedInput.length != 2) {
+            throw (new DukeException("Please specify a task you would like to delete Sir/Mdm:\n"
+                + ui.list(tasks)));
+        }
+        try {
+            taskToDelete = Integer.parseInt(parsedInput[1]) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please enter a proper number within this range Sir/Mdm:\n" + ui.list(tasks));
+        }
+
+        // No tasks in task list
+        if (tasks.size() == 0) {
+            throw (new DukeException("You have no tasks to delete Sir/Mdm!"));
+        }
+
+        // Task not in enumerated range
+        if (taskToDelete < 0 || taskToDelete > tasks.size() - 1) {
+            throw (new DukeException("Please specify a task within this range Sir/Mdm:\n" + ui.list(tasks)));
+        }
+        return new DeleteCommand(taskToDelete, tasks, ui, storage);
+    }
+
+    private static Command generateFindByDateCommand(String input, Ui ui, TaskList tasks) {
+        String[] values = input.split(" ");
+        // No date given
+        if (values.length != 2) {
+            throw new DukeException("Please specify a date for which to find deadlines and events "
+                + "Sir/Mdm!");
+        } else {
+            try {
+                LocalDate date = Parser.parseDate(values[1]);
+                return new FindByDateCommand(date, tasks, ui);
+            } catch (DukeException e) {
+                throw new DukeException("Wrong format for date Sir/Mdm. Examples of dates accepted: "
+                    + "2/12/2019, 2019-12-02");
+            }
+        }
+    }
+
+    private static Command generateFindByDescriptionCommand(String input, Ui ui, TaskList tasks) {
+        String searchPhrase = input.substring(4).trim();
+        return new FindByDescriptionCommand(searchPhrase, tasks, ui);
+    }
+
+    private static Command generateAddCommand(String input, Ui ui, TaskList tasks, Storage storage) {
+        Pattern todoPattern = Pattern.compile("(^(todo ))");
+        Pattern deadlinePattern = Pattern.compile("(^(deadline ))");
+        Pattern eventPattern = Pattern.compile("(^(event ))");
+
+        if (todoPattern.matcher(input).find() || input.equals("todo")) {
+            Task newTask = Task.taskFactory(TaskType.TODO, input);
+            return new AddCommand(newTask, tasks, ui, storage);
+        } else if (deadlinePattern.matcher(input).find() || input.equals("deadline")) {
+            Task newTask = Task.taskFactory(TaskType.DEADLINE, input);
+            return new AddCommand(newTask, tasks, ui, storage);
+        } else if (eventPattern.matcher(input).find() || input.equals("event")) {
+            Task newTask = Task.taskFactory(TaskType.EVENT, input);
+            return new AddCommand(newTask, tasks, ui, storage);
+        } else {
+            throw new DukeException("Pardon me Sir/Mdm, but I do not understand.");
+        }
+    }
 }
