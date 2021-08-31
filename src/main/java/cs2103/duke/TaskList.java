@@ -6,7 +6,7 @@ public class TaskList {
     private ArrayList<Task> taskArrayList;
 
     public TaskList() {
-        this.taskArrayList = new ArrayList<>();
+        taskArrayList = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> taskArrayList) throws DukeException {

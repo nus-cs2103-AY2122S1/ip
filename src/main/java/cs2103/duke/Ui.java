@@ -20,7 +20,7 @@ public class Ui {
     private static TaskList taskArrayList;
 
     public Ui(TaskList tasks) {
-        this.taskArrayList = tasks;
+        taskArrayList = tasks;
     }
 
     /**
@@ -46,10 +46,6 @@ public class Ui {
         for (int count = 0; count <= lv; count++) {
             featuresCombined.append(features[count]);
         }
-//
-//        // parsing duke.txt
-//        DukeParser dp = new DukeParser(dukeFilePath);
-//        taskArrayList = dp.copyFileContents();
 
         // Welcome message
         String welcome = "Hello! I'm Duke: Level " + lv + "\n"
