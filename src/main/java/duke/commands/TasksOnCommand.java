@@ -1,18 +1,19 @@
 package duke.commands;
 
+import java.time.LocalDate;
+
+import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
-import duke.tasklist.TaskList;
 import duke.ui.Ui;
-import java.time.LocalDate;
 
 /**
  * The TasksOnCommand class is a Command that returns the tasks which have deadlines/end dates on the input date
  */
 public class TasksOnCommand extends Command {
 
-    LocalDate date;
+    private LocalDate date;
 
     /**
      * Public constructor which is used to initialise the input date

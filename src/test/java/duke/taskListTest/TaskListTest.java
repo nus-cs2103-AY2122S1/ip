@@ -1,17 +1,21 @@
 package duke.taskListTest;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import duke.parser.DateTimeParser;
+import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-import duke.tasklist.TaskList;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskListTest {
-    TaskList testList = new TaskList();
+    private TaskList testList = new TaskList();
 
     public void loadTestList(TaskList testList) {
         testList.add(new ToDo("clean room"));

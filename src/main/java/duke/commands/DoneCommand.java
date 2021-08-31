@@ -2,8 +2,8 @@ package duke.commands;
 
 import duke.exceptions.InvalidNumberInputException;
 import duke.exceptions.RepeatedDoneException;
-import duke.tasks.Task;
 import duke.tasklist.TaskList;
+import duke.tasks.Task;
 import duke.ui.Ui;
 
 
@@ -13,7 +13,7 @@ import duke.ui.Ui;
  */
 public class DoneCommand extends Command {
 
-    int index;
+    private int index;
 
     /**
      * Public constructor which initialises the value of the index of the task to be marked done

@@ -1,12 +1,12 @@
 package duke.ui;
 
-import duke.exceptions.DukeException;
-import duke.tasks.Task;
-import duke.tasklist.TaskList;
-import duke.utils.Constants;
-
 import java.time.LocalDate;
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
+import duke.tasklist.TaskList;
+import duke.tasks.Task;
+import duke.utils.Constants;
 
 
 /**

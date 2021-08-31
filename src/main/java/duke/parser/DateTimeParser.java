@@ -1,11 +1,12 @@
 package duke.parser;
 
-import duke.exceptions.IncorrectFormatException;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.format.ResolverStyle;
+
+import duke.exceptions.IncorrectFormatException;
 
 /**
  * The DateTimeParser class encapsulates the formatting of the date and/or time for an event or deadline
@@ -25,9 +26,9 @@ public class DateTimeParser extends Parser {
             return LocalDate.parse(date, DateTimeFormatter.ofPattern("uuuu-MM-dd")
                     .withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException ex) {
-           throw new IncorrectFormatException("Incorrect date format! " +
-                   "\nPlease enter a valid date in the given format:" +
-                   " yyyy-MM-dd");
+            throw new IncorrectFormatException("Incorrect date format! "
+                  + "\nPlease enter a valid date in the given format:"
+                  + " yyyy-MM-dd");
         }
     }
 
@@ -62,9 +63,9 @@ public class DateTimeParser extends Parser {
             return LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("uuuu-MM-dd HHmm")
                     .withResolverStyle(ResolverStyle.STRICT));
         } catch (DateTimeParseException ex) {
-            throw new IncorrectFormatException("Incorrect date and time format! " +
-                    "\nPlease enter a valid date in the given format:" +
-                    " yyyy-MM-dd HHmm");
+            throw new IncorrectFormatException("Incorrect date and time format! "
+                    + "\nPlease enter a valid date in the given format:"
+                    + " yyyy-MM-dd HHmm");
         }
     }
 

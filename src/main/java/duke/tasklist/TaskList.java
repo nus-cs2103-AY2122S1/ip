@@ -1,8 +1,9 @@
 package duke.tasklist;
 
+import java.util.ArrayList;
+
 import duke.exceptions.InvalidNumberInputException;
 import duke.tasks.Task;
-import java.util.ArrayList;
 
 /**
  * The TaskList is an abstraction for a list of tasks
@@ -28,7 +29,7 @@ public class TaskList {
      */
     public void print() {
         boolean allTasksDone = true;
-        for(int i = 0; i < this.size(); i++) {
+        for (int i = 0; i < this.size(); i++) {
             int ind = i + 1;
             System.out.println(ind + ". " + this.get(i).toString());
             if (!this.get(i).getStatus()) {

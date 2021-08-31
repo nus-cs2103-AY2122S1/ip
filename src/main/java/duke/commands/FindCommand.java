@@ -9,7 +9,7 @@ import duke.ui.Ui;
  */
 public class FindCommand extends Command {
 
-    String word;
+    private String word;
 
     /**
      * Public constructor which is used to initialise the input word

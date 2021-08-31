@@ -1,8 +1,8 @@
 package duke.commands;
 
 import duke.exceptions.InvalidNumberInputException;
-import duke.tasks.Task;
 import duke.tasklist.TaskList;
+import duke.tasks.Task;
 import duke.ui.Ui;
 
 
@@ -11,7 +11,7 @@ import duke.ui.Ui;
  */
 public class DeleteCommand extends Command {
 
-    int index;
+    private int index;
 
     /**
      * Public constructor which initialises the index of the task to be deleted

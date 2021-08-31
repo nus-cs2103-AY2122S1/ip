@@ -1,26 +1,25 @@
 package duke.parser;
 
-import duke.commands.Command;
-import duke.commands.DoneCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.ByeCommand;
 import duke.commands.AddCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TasksOnCommand;
-
-import duke.exceptions.InvalidKeywordException;
-import duke.exceptions.NonExistentTaskException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.IncorrectFormatException;
+import duke.exceptions.InvalidKeywordException;
 import duke.exceptions.InvalidNumberInputException;
-
+import duke.exceptions.NonExistentTaskException;
+import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.ToDo;
-import duke.tasklist.TaskList;
 import duke.utils.Constants;
+
 import java.time.LocalDate;
 
 /**
@@ -41,7 +40,7 @@ public class Parser {
         String[] parsedInput = input.trim().split("\\s", 2);
         String command = parsedInput[0];
 
-            switch(command.toUpperCase()) {
+        switch(command.toUpperCase()) {
             case "BYE":
                 return parseBye();
             case "LIST":

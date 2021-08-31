@@ -1,15 +1,15 @@
 package duke.commands;
 
 import duke.exceptions.RepeatedTaskException;
-import duke.tasks.Task;
 import duke.tasklist.TaskList;
+import duke.tasks.Task;
 import duke.ui.Ui;
 
 /**
  * The AddCommand task is a Command that adds a task to a list of tasks.
  */
 public class AddCommand extends Command {
-    Task task;
+    private Task task;
 
     /**
      * Constructor - Initialises the task to be added.

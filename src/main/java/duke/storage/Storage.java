@@ -1,18 +1,17 @@
 package duke.storage;
 
-import duke.exceptions.DukeException;
-import duke.parser.DateTimeParser;
-import duke.tasklist.TaskList;
-
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
+import duke.parser.DateTimeParser;
+import duke.tasklist.TaskList;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
 
 
 /**
@@ -144,6 +143,4 @@ public class Storage {
             }
         return str;
     }
-
-
 }

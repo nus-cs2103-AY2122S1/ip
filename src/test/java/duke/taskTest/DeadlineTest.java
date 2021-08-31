@@ -1,14 +1,16 @@
 package duke.taskTest;
 
-import duke.parser.DateTimeParser;
-import duke.tasks.Deadline;
-import duke.tasks.Task;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import duke.parser.DateTimeParser;
+import duke.tasks.Deadline;
+import duke.tasks.Task;
+
 
 public class DeadlineTest {
 
