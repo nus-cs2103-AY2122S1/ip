@@ -1,9 +1,9 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
+
 import duke.commands.Command;
 import duke.exceptions.DukeException;
-
-import java.time.format.DateTimeParseException;
 
 public class Duke {
     public enum TaskType {
