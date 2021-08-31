@@ -22,6 +22,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
 
 /**
  * Encapsulates the entire Duke program.
@@ -201,10 +202,38 @@ public class Main extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        // more code to be added here later
+        //Step 3. Add functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText(), defaultFont));
+            userInput.clear();
+        });
+
+        userInput.setOnAction((event) -> {
+            dialogContainer.getChildren().add(getDialogLabel(userInput.getText(), defaultFont));
+            userInput.clear();
+        });
+
+        //Scroll down to the end every time dialogContainer's height changes.
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+    /**
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
+     */
+    private Label getDialogLabel(String text, Font font) {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label(text);
+        textToAdd.setFont(font);
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
     }
 
     public static void main(String[] args) {
         new Main().run();
     }
 }
+
