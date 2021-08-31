@@ -1,7 +1,6 @@
-package duke;
 import duke.task.Deadline;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import java.time.LocalDate;
 
