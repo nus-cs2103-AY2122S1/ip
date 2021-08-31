@@ -6,7 +6,7 @@ import duke.TaskList;
 import duke.UI;
 
 /**
- * Encapsulates the formats command, used to print the valid date-time formats
+ * Encapsulates the formats command, used to print the valid date-time formats.
  */
 public class FormatsCommand extends Command {
 

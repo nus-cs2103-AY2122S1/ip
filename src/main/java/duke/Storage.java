@@ -7,15 +7,15 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 
 /**
- * Encapsulates a class which interacts with the output file to save data after
+ * Encapsulates a class which interacts with the output file to save data after.
  */
 public class Storage {
     private File txt;
 
     /**
-     * Loads file to save task list data
+     * Loads file to save task list data.
      *
-     * @throws Exception IO or Security Exception thrown by createNewFile
+     * @throws Exception IO or Security Exception thrown by createNewFile.
      */
     public void loadFile() throws Exception {
         Path p = Paths.get("data");
@@ -28,9 +28,9 @@ public class Storage {
     }
 
     /**
-     * Reads the output file and loads any saved tasks
+     * Reads the output file and loads any saved tasks.
      *
-     * @param t the TaskList object to save the list of tasks
+     * @param t the TaskList object to save the list of tasks.
      */
     public void readFromFile(TaskList t) {
         try {
@@ -63,10 +63,10 @@ public class Storage {
     }
 
     /**
-     * Writes the task list stored to an output file to persist its data
+     * Writes the task list stored to an output file to persist its data.
      *
-     * @param t The TaskList object that stores the task list to be written to the file
-     * @throws Exception IO Exception from BufferedWriter
+     * @param t The TaskList object that stores the task list to be written to the file.
+     * @throws Exception IO Exception from BufferedWriter.
      */
     public void writeToFile(TaskList t) throws Exception {
         BufferedWriter bw = new BufferedWriter(new FileWriter(txt));

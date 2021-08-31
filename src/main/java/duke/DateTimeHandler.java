@@ -8,13 +8,21 @@ import java.time.format.DateTimeParseException;
  * Encapsulates a class that handles parsing of date-time inputs.
  */
 public class DateTimeHandler {
+    /**
+     * Array of valid formats as Strings.
+     */
     private final String[] FORMATS = {
             "dd-MM-yyyy hh:mm a",
             "dd-MM-yyyy HHmm",
             "dd/MM/yyyy hh:mm a",
             "dd/MM/yyyy HHmm"
     };
+
+    /**
+     * Array of DateTimeFormatters converted from Strings in FORMATS.
+     */
     private final DateTimeFormatter[] dtfList = new DateTimeFormatter[FORMATS.length];
+
 
     public DateTimeHandler() {
         for(int i = 0; i< FORMATS.length; i++) {
@@ -39,9 +47,9 @@ public class DateTimeHandler {
     }
 
     /**
-     * Returns a LocalDateTime if able to parse the given string using one of the DateTimeFormatters in dtfList
+     * Returns a LocalDateTime if able to parse the given string using one of the DateTimeFormatters in dtfList.
      *
-     * @param s String to be parsed
+     * @param s String to be parsed.
      * @return The created LocalDateTime object if the string can be parsed, null if it cannot be parsed.
      */
     public LocalDateTime parseDate(String s) {
@@ -54,9 +62,9 @@ public class DateTimeHandler {
     }
 
     /**
-     * Returns a String array of valid date formats
+     * Returns a String array of valid date formats.
      *
-     * @return The String array containing the valid date formats
+     * @return The String array containing the valid date formats.
      */
     public String[] getFormatList() {
         String[] res = new String[FORMATS.length+1];
@@ -66,9 +74,9 @@ public class DateTimeHandler {
     }
 
     /**
-     * Returns a String to be printed when an invalid format is entered
+     * Returns a String to be printed when an invalid format is entered.
      *
-     * @return The String to be printed
+     * @return The String to be printed.
      */
     public String invalidFormat() {
         return "Please enter a valid date-time format. Type formats to see valid formats";

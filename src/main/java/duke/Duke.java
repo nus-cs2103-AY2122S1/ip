@@ -23,6 +23,9 @@ public class Duke {
         initialize();
     }
 
+    /**
+     * Loads the output file if it exists, and reads the tasks from it.
+     */
     public void initialize() {
         try {
             storage.loadFile();
@@ -32,6 +35,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Returns a String to be displayed to the user after processing the given input as a command.
+     *
+     * @param input The given String input to be processed as a command.
+     * @return The String to be displayed to the user.
+     */
     public String getResponse(String input) {
         Command command = parser.parse(input);
         if (command == null) {

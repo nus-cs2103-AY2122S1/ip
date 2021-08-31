@@ -3,7 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 
 /**
- * Encapsulates a deadline task with a deadline
+ * Encapsulates a deadline task with a deadline.
  */
 public class Deadline extends Task{
     private LocalDateTime deadlineDate;

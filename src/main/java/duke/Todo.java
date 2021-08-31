@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Encapsulates a task that only contains a description, classified as a todo
+ * Encapsulates a task that only contains a description, classified as a todo.
  */
 public class Todo extends Task {
 
