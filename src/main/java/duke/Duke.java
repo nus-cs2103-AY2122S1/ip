@@ -34,6 +34,7 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(storagePath);
         try {
+            //todo make new directory
             boolean isFileCreated = dataFile.createNewFile();
             if (!isFileCreated) {
                 taskList = new TaskList(storage.load());
