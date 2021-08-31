@@ -5,7 +5,7 @@ Because I am **generic**, it means that there is absolutely no risk of using me.
 
 Most importantly, please learn how to pronounce my name after using DuC. Concluded with thanks.
 
-So, enough ~~hidden marketing~~ long-winding introduction already. What can I offer to you?
+So, enough ~~hidden marketing~~ long-winding introduction that sound like a rip-off light novel title already. What can I offer to you?
 
 1. Schedule a to-do task
 2. Schedule a deadline task with prescribed date
