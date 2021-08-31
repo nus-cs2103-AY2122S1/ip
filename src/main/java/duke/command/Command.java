@@ -16,11 +16,9 @@ public abstract class Command {
     /**
      * Constructor for Command.
      * @param duke
-     * @param sc
      */
-    public Command(Duke duke, Scanner sc) {
+    public Command(Duke duke) {
         this.duke = duke;
-        this.sc = sc;
     }
 
     /**
@@ -29,5 +27,5 @@ public abstract class Command {
      * @throws IOException if there is an error in saving the file.
      * @throws DukeException if there is any internal Duke chatbot related errors.
      */
-    public abstract void execute(TaskList taskList) throws IOException, DukeException;
+    public abstract String execute(TaskList taskList) throws IOException, DukeException;
 }

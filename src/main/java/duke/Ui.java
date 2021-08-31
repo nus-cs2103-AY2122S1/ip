@@ -4,7 +4,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * Represents the user interface that interacts with the user.
+ * Represents the user interface that interacts with the user for text.
  */
 public class Ui {
 

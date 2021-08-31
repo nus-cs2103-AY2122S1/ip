@@ -35,7 +35,7 @@ public class Storage {
             tasksToWrite.append(listOfTasks.getTask(i).saveToFile() + "\n");
         }
 
-        FileWriter fileWriter = new FileWriter(this.FILE_PATH);
+        FileWriter fileWriter = new FileWriter(this.FILE_PATH, false);
         fileWriter.write(tasksToWrite.toString());
         fileWriter.close();
     }

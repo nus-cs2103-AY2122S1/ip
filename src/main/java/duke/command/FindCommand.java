@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.Duke;
-import duke.Ui;
+import duke.GUI;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -11,14 +11,14 @@ import java.util.Scanner;
 public class FindCommand extends Command {
     private final String keyword;
 
-    public FindCommand(Duke duke, Scanner sc, String keyword) {
-        super(duke, sc);
+    public FindCommand(Duke duke, String keyword) {
+        super(duke);
         this.keyword = keyword;
     }
 
     @Override
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         TaskList tasksFound = this.duke.findTasks(this.keyword);
-        Ui.printFindMessage(tasksFound);
+        return GUI.printFindMessage(tasksFound);
     }
 }

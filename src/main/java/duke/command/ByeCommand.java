@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Duke;
 import duke.task.TaskList;
-import duke.Ui;
+import duke.GUI;
 
 import java.util.Scanner;
 
@@ -14,17 +14,16 @@ public class ByeCommand extends Command{
     /**
      * Constructor for the Bye command.
      * @param duke chatbot that is in use.
-     * @param sc scanner that is in use.
      */
-    public ByeCommand(Duke duke, Scanner sc) {
-        super(duke, sc);
+    public ByeCommand(Duke duke) {
+        super(duke);
     }
 
     @Override
-    public void execute(TaskList taskList) {
-        Ui.printClosingMessage();
+    public String execute(TaskList taskList) {
         this.duke.closeDukeChatBot();
-        this.sc.close();
+
+        return GUI.printClosingMessage();
     }
 
 }

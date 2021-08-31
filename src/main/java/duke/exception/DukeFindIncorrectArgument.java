@@ -9,7 +9,7 @@ public class DukeFindIncorrectArgument extends DukeIncorrectInputs {
      * Constructor for the DukeDoneIncorrectArgument Exception.
      */
     public DukeFindIncorrectArgument() {
-        super("\t⚠️ After the keyword, you have to enter ONE keyword.",
+        super("⚠️ After the keyword, you have to enter ONE keyword.",
                 new IllegalArgumentException());
     }
 }

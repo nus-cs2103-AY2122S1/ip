@@ -74,12 +74,11 @@ public class Parser {
      * routes the command accordingly.
      * @param userInput full command inputted by the user.
      * @param d Duke chatbot that is in use.
-     * @param sc Scanner object that is in use.
      * @return Command action that is interpreted from the user input.
      * @throws IOException if there is an error in reading the file.
      * @throws DukeException if there is an error from Duke's internal system.
      */
-    public static Command parse(String userInput, Duke d, Scanner sc) throws IOException, DukeException {
+    public static Command parse(String userInput, Duke d) throws IOException, DukeException {
         String firstWord = Parser.getFirstWord(userInput);
         firstWord = firstWord.equals("todo") || firstWord.equals("event") || firstWord.equals("deadline")
                 ? "task" : firstWord;
@@ -89,22 +88,22 @@ public class Parser {
 
         switch (actionCommand) {
         case BYE:
-            c = new ByeCommand(d, sc);
+            c = new ByeCommand(d);
             break;
         case LIST:
-            c = new ListCommand(d, sc);
+            c = new ListCommand(d);
             break;
         case DONE:
-            c = new DoneCommand(d, sc, Parser.getSecondNum(userInput));
+            c = new DoneCommand(d, Parser.getSecondNum(userInput));
             break;
         case DELETE:
-            c = new DeleteCommand(d, sc, Parser.getSecondNum(userInput));
+            c = new DeleteCommand(d, Parser.getSecondNum(userInput));
             break;
         case FIND:
-            c = new FindCommand(d, sc, Parser.getKeyword(userInput));
+            c = new FindCommand(d, Parser.getKeyword(userInput));
             break;
         case TASK:
-            c = new TaskCommand(d, sc, userInput);
+            c = new TaskCommand(d, userInput);
             break;
         case ERRORS:
             throw new DukeIncorrectCommandWord(new IllegalArgumentException());
