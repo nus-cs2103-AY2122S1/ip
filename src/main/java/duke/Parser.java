@@ -1,12 +1,12 @@
 package duke;
 
-import duke.Exception.DukeException;
+import java.time.format.DateTimeParseException;
+
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.ToDo;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Handles the user commands to Duke and executes commands accordingly.
@@ -47,8 +47,8 @@ public class Parser {
         switch (commandWord) {
         case "done":
             if (commandDesc.equals("")) {
-                throw new DukeException("\tOOPS!!! Please specify the task number for the task " +
-                        "you want to complete.");
+                throw new DukeException("\tOOPS!!! Please specify the task number for the task "
+                        + "you want to complete.");
             }
             try {
                 int taskNumber = Integer.parseInt(commandDesc);
@@ -81,8 +81,8 @@ public class Parser {
                 String time = dateAndTimeSplit[1];
                 this.tasks.addTask(new Deadline(commandDescSplit[0].trim(), date, time));
             } catch (DateTimeParseException e) {
-                throw new DukeException("You've entered a date or time in an invalid format! " +
-                        "\nIt should be in the form: yyyy-mm-dd hrs:mins");
+                throw new DukeException("You've entered a date or time in an invalid format! "
+                        + "\nIt should be in the form: yyyy-mm-dd hrs:mins");
             }
             break;
         case "event":
@@ -95,8 +95,8 @@ public class Parser {
             break;
         case "delete":
             if (commandDesc.equals("")) {
-                throw new DukeException("\tOOPS!!! Please specify the task number for the task " +
-                        "you want to delete.");
+                throw new DukeException("\tOOPS!!! Please specify the task number for the task "
+                        + "you want to delete.");
             }
             try {
                 int taskNumber = Integer.parseInt(commandDesc);

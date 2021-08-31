@@ -1,9 +1,10 @@
 package duke;
 
-import duke.Exception.DukeException;
-import duke.task.TaskList;
 
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.TaskList;
 
 /**
  * The class for the chat bot, Duke
@@ -37,9 +38,9 @@ public class Duke {
         boolean end = false;
 
         //Main functionality of duke.Duke
-        while(!end) {
+        while (!end) {
             String command = "";
-            if(sc.hasNextLine()) {
+            if (sc.hasNextLine()) {
                 command = sc.nextLine().trim();
             }
             try {

@@ -1,12 +1,16 @@
 package duke;
 
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * Handles the interactions with the data file.
@@ -89,7 +93,7 @@ public class Storage {
 
             // Scan the data file and add each of the different tasks.
             while (s.hasNext()) {
-                String[] lineSplit = s.nextLine().split(" \\| ",5);
+                String[] lineSplit = s.nextLine().split(" \\| ", 5);
 
                 switch (lineSplit[0]) {
                 case "T":
@@ -100,6 +104,8 @@ public class Storage {
                     break;
                 case "E":
                     loadedTaskList.add(new Event(lineSplit[2], lineSplit[3]));
+                    break;
+                default:
                     break;
                 }
 

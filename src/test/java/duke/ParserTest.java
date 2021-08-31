@@ -1,18 +1,21 @@
 package duke;
 
-import duke.Exception.DukeException;
-import duke.task.TaskList;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
+import duke.task.TaskList;
+
 public class ParserTest {
-    TaskList tasks = new TaskList();
-    Parser parser = new Parser(tasks);
+
 
     @Test
     public void parse_invalidCommand_dukeExceptionThrown() {
+        TaskList tasks = new TaskList();
+        Parser parser = new Parser(tasks);
+
         DukeException thrown = assertThrows(DukeException.class, () -> parser.parse("abcde"));
         assertEquals("\tOOPS!!! You have entered an invalid command, please try again!",
                 thrown.getMessage());
@@ -20,6 +23,9 @@ public class ParserTest {
 
     @Test
     public void parse_doneTaskEmptyNumber_dukeExceptionThrown() {
+        TaskList tasks = new TaskList();
+        Parser parser = new Parser(tasks);
+
         DukeException thrown = assertThrows(DukeException.class, () -> parser.parse("done "));
         assertEquals("\tOOPS!!! Please specify the task number for the task you want to complete.",
                 thrown.getMessage());
