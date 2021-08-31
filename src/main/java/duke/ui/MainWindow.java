@@ -14,6 +14,12 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String DUKE_PHOTO_URL =
+            "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Duke_%28Java_mascot%29_waving.svg/"
+            + "568px-Duke_%28Java_mascot%29_waving.svg.png";
+    private static final String USER_PHOTO_URL =
+            "https://image.flaticon.com/icons/png/512/1946/1946429.png";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -25,8 +31,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image("https://se-education.org/guides/tutorials/images/javafx/DaUser.png");
-    private final Image dukeImage = new Image("https://se-education.org/guides/tutorials/images/javafx/DaDuke.png");
+    private final Image userImage = new Image(USER_PHOTO_URL);
+    private final Image dukeImage = new Image(DUKE_PHOTO_URL);
 
     @FXML
     public void initialize() {
