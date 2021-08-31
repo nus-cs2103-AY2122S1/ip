@@ -99,7 +99,8 @@ public class Ui {
      * @param event to add.
      */
     public String addEvent(TaskList taskList, Event event) {
-        return "Got it. I've added this task:\n  " + event + "\nNow you have " + taskList.getTasks().size() + " tasks in the list.";
+        return "Got it. I've added this task:\n  " + event + "\nNow you have " + taskList.getTasks().size()
+                + " tasks in the list.";
     }
 
     /**
@@ -109,7 +110,8 @@ public class Ui {
      * @param deadline to add.
      */
     public String addDeadline(TaskList taskList, Deadline deadline) {
-        return "Got it. I've added this task:\n  " + deadline + "\nNow you have " + taskList.getTasks().size() + " tasks in the list.";
+        return "Got it. I've added this task:\n  " + deadline + "\nNow you have " + taskList.getTasks().size()
+                + " tasks in the list.";
     }
 
     /**
@@ -119,7 +121,8 @@ public class Ui {
      * @param todo to add.
      */
     public String addTodo(TaskList taskList, Todo todo) {
-        return "Got it. I've added this task:\n  " + todo + "\nNow you have " + taskList.getTasks().size() + " tasks in the list.";
+        return "Got it. I've added this task:\n  " + todo + "\nNow you have " + taskList.getTasks().size()
+                + " tasks in the list.";
     }
 
     /**

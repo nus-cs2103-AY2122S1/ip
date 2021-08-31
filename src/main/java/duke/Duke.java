@@ -1,19 +1,18 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
-import java.io.IOException;
 
 /**
  * Duke is a personal Assistant Chatbot that helps the user to keep track of various things.
@@ -150,8 +149,10 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates Duke's response to the user input.
+     *
+     * @param input user input to GUI.
+     * @return Duke's response.
      */
     public String getResponse(String input) {
         try {
@@ -185,6 +186,12 @@ public class Duke extends Application {
         return ui.showWelcome();
     }
 
+    /**
+     * Checks whether the user input is 'bye' to exit application. (for GUI only)
+     *
+     * @param input user input.
+     * @return boolean of whether the input is 'bye'.
+     */
     public boolean isExit(String input) {
         try {
             return this.parser.parse(input).isExit();
