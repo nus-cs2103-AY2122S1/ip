@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
         try {
             int index = Integer.parseInt(content.substring("done".length()).trim());
             Ui.respond(tasks.completeTask(index));
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new InvalidCommandException();
         }
     }

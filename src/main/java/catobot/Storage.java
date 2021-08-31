@@ -1,12 +1,5 @@
 package catobot;
 
-import catobot.exception.EmptyCommandException;
-import catobot.exception.LoadingException;
-import catobot.item.Deadline;
-import catobot.item.Event;
-import catobot.item.Task;
-import catobot.item.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,6 +9,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import catobot.exception.EmptyCommandException;
+import catobot.exception.LoadingException;
+import catobot.item.Deadline;
+import catobot.item.Event;
+import catobot.item.Task;
+import catobot.item.Todo;
 
 /**
  * Represents the local memory of tasks.
@@ -89,6 +89,8 @@ public class Storage {
                         todo.markAsDone();
                     }
                     taskList.add(todo);
+                    break;
+                default:
                     break;
                 }
             }

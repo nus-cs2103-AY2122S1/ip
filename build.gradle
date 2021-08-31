@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "catobot.Catobot"
 }
 
 shadowJar {
@@ -39,6 +39,14 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.29'
+}
+
+checkstyleMain {
+    source ='src/main/java'
+}
+
+checkstyleTest {
+    source ='src/test/java'
 }
 
 run{

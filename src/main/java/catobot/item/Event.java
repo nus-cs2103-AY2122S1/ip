@@ -1,9 +1,9 @@
 package catobot.item;
 
-import catobot.exception.EmptyCommandException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import catobot.exception.EmptyCommandException;
 
 /**
  * Represents a type of Task which happen at a specific timing.

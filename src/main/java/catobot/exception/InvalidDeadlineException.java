@@ -10,5 +10,4 @@ public class InvalidDeadlineException extends BotException {
     public InvalidDeadlineException() {
         super("Don't cheat me, give me a due time so I can watch you >.<");
     }
-
 }

@@ -1,10 +1,10 @@
 package catobot.item;
 
-import catobot.exception.EmptyTaskListException;
-import catobot.exception.OutOfBoundException;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import catobot.exception.EmptyTaskListException;
+import catobot.exception.OutOfBoundException;
 
 /**
  * Represents a list of tasks.
@@ -152,7 +152,9 @@ public class TaskList {
 
         for (int i = 0; i < taskList.size(); i++) {
             s.append(this.taskList.get(i).toStringInDoc());
-            if (i == taskList.size() - 1) { break; }
+            if (i == taskList.size() - 1) {
+                break;
+            }
             s.append("\n");
         }
         return s.toString();

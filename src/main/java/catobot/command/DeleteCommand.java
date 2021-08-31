@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
         try {
             int index = Integer.parseInt(content.substring("delete".length()).trim());
             Ui.respond(tasks.deleteTask(index));
-        } catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
             throw new InvalidCommandException();
         }
     }

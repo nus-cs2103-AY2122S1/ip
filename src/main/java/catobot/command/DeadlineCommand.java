@@ -1,5 +1,9 @@
 package catobot.command;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import catobot.Storage;
 import catobot.Ui;
 import catobot.exception.BotException;
@@ -8,10 +12,6 @@ import catobot.exception.InvalidDateTimeException;
 import catobot.exception.InvalidDeadlineException;
 import catobot.item.Deadline;
 import catobot.item.TaskList;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents the commands to add a deadline.
