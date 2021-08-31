@@ -2,7 +2,6 @@ package duke;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
-import java.io.File;
 
 /**
  * Class which operates Jarvis the chat-bot
@@ -28,59 +27,42 @@ public class Duke {
     }
 
     /**
-     * Scans for user input and calls the corresponding method once the command has been processed
-     * by Parser.parseCommand()
-     * @throws IOException if there is an error in the reading user input or Jarvis's output
-     * @throws DukeException if user input is formatted incorrectly
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() throws IOException, DukeException {
-        Scanner sc = new Scanner(System.in);
-        String instruction = sc.nextLine();
-
-        while (!Parser.parseCommand(instruction).equals("bye")) {
+    public String getResponse(String input) {
+        while (!Parser.parseCommand(input).equals("bye")) {
             try {
-                if (Parser.parseCommand(instruction).equals("list")) {
+                if (Parser.parseCommand(input).equals("list")) {
                     if (TaskList.getCounter() == 0) {
-                        System.out.println("\tThere are currently no tasks on your list :)");
+                        return "\tThere are currently no tasks on your list :)";
                     } else {
-                        Parser.parseList();
+                        return Parser.parseList();
                     }
-                } else if (Parser.parseCommand(instruction).equals("done")) {
-                    Parser.parseDone(instruction);
-                } else if (Parser.parseCommand(instruction).equals("delete")) {
-                    Parser.parseDelete(instruction);
-                } else if (Parser.parseCommand(instruction).equals("todo")) {
-                    Parser.parseTodo(instruction);
-                } else if (Parser.parseCommand(instruction).equals("deadline")) {
-                    Parser.parseDeadline(instruction);
-                } else if (Parser.parseCommand(instruction).equals("event")) {
-                    Parser.parseEvent(instruction);
-                } else if (Parser.parseCommand(instruction).equals("today")) {
-                    Parser.parseToday();
-                } else if (Parser.parseCommand(instruction).equals("find")) {
-                    Parser.parseFind(instruction);
+                } else if (Parser.parseCommand(input).equals("done")) {
+                    return Parser.parseDone(input);
+                } else if (Parser.parseCommand(input).equals("delete")) {
+                    return Parser.parseDelete(input);
+                } else if (Parser.parseCommand(input).equals("todo")) {
+                    return Parser.parseTodo(input);
+                } else if (Parser.parseCommand(input).equals("deadline")) {
+                    return Parser.parseDeadline(input);
+                } else if (Parser.parseCommand(input).equals("event")) {
+                    return Parser.parseEvent(input);
+                } else if (Parser.parseCommand(input).equals("today")) {
+                    return Parser.parseToday();
+                } else if (Parser.parseCommand(input).equals("find")) {
+                    return Parser.parseFind(input);
                 } else {
-                    throw new DukeException("\tOOPS!!! I'm sorry, but I don't " +
+                    throw new DukeException("OOPS!!! I'm sorry, but I don't " +
                             "know what that means :-(");
                 }
             } catch (DukeException | IOException e) {
-                System.err.println(e);
+                //System.err.println(e);
+                return "" + e;
             }
-            System.out.println("----------------------------------");
-            instruction = sc.nextLine();
         }
-        System.out.println("\t" + "Bye! Hope to see you soon :)");
-        System.out.println("----------------------------------");
-    }
-
-    /**
-     * Runs Jarvis and starts the input/output calls
-     * @param args
-     * @throws IOException if there is an error in the reading user input or Jarvis's output
-     * @throws DukeException if user input is formatted incorrectly
-     */
-    public static void main (String[]args) throws IOException, DukeException {
-        new Duke("data/jarvis.txt").run();
+        return "Bye! Hope to see you soon :)";
     }
 }
 
