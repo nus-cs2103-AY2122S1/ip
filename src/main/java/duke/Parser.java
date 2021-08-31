@@ -30,7 +30,7 @@ public class Parser {
      * @param dateStr date in String
      * @return true if String is valid date.
      */
-    public boolean isValid(String dateStr) {
+    public boolean isValidDate(String dateStr) {
         try {
             LocalDate.parse(dateStr, FORMATTER);
         } catch (DateTimeParseException e) {
@@ -59,7 +59,7 @@ public class Parser {
             if (message.trim().equals("list")) {
                 response = response + "\n" + duke.getUi().showList();
             } else if (message.startsWith("delete")) { // Delete tasks
-                if (message.length() > 7 && message.substring(6, 7).equals(" ")
+                if (message.length() > 7 && message.charAt(6) == ' '
                     && message.substring(7).trim().chars().allMatch(Character::isDigit)) {
                     int taskIndex = Integer.parseInt(message.substring(7).trim()) - 1;
                     ArrayList<Task> list = duke.getTasks().getList();
@@ -79,7 +79,7 @@ public class Parser {
                     throw new DukeException.DukeTaskFailException();
                 }
             } else if (message.startsWith("done")) { // Mark tasks as done
-                if (message.length() > 5 && message.substring(4, 5).equals(" ")
+                if (message.length() > 5 && message.charAt(4) == ' '
                     && message.substring(5).trim().chars().allMatch(Character::isDigit)) {
                     int taskIndex = Integer.parseInt(message.substring(5).trim()) - 1;
                     if (0 <= taskIndex && taskIndex < duke.getTasks().getList().size()) {
@@ -114,6 +114,7 @@ public class Parser {
                         }
                     }
                     if (isFound) {
+                        assert resultsArray.size() > 0 : "result found, resultsArray should not be empty";
                         response = response + "\n" + duke.getUi().showSearchResults(resultsArray);
                     } else {
                         response = response + "\n" + duke.getUi().showNoSearchResults();
@@ -136,7 +137,7 @@ public class Parser {
                         String by = message.substring(message.indexOf("/by") + 4).trim();
                         LocalDate d1 = null;
 
-                        if (isValid(by)) {
+                        if (isValidDate(by)) {
                             d1 = LocalDate.parse(by);
                             by = d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
                         }
@@ -149,7 +150,8 @@ public class Parser {
                             throw new DukeException.DukeNoTimeGivenException();
                         } else {
                             // proper description and by
-                            if (isValid(by)) {
+                            if (isValidDate(by)) {
+                                assert d1 != null : "LocalDate should have been assigned";
                                 response = response + "\n" + duke.getTasks().createTaskDate(description,
                                     d1, Task.Category.DEADLINE,
                                     false, true);
@@ -178,7 +180,7 @@ public class Parser {
                         String at = message.substring(message.indexOf("/at") + 4).trim();
                         LocalDate d1 = null;
 
-                        if (isValid(at)) {
+                        if (isValidDate(at)) {
                             d1 = LocalDate.parse(at);
                             at = d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
                         }
@@ -190,7 +192,8 @@ public class Parser {
                             throw new DukeException.DukeNoTimeGivenException();
                         } else {
                             // proper description and by
-                            if (isValid(at)) {
+                            if (isValidDate(at)) {
+                                assert d1 != null : "LocalDate should have been assigned";
                                 response = response + "\n" + duke.getTasks().createTaskDate(description,
                                     d1, Task.Category.EVENT,
                                     false, true);
@@ -218,7 +221,7 @@ public class Parser {
         } catch (DukeException error) {
             response = response + "\n" + duke.getUi().showDukeError(error);
         }
-        
+
         return response;
     }
 }
