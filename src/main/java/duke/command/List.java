@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+/**
+ * Class that handles the List command
+ */
 public class List extends Command {
 
     @Override

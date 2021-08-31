@@ -18,12 +18,12 @@ public class Add extends Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.add(t);
         String plurality = " task";
-        if (taskList.size() != 1) {
+        if (taskList.getSize() != 1) {
             plurality += "s";
         }
 
         ui.print("Got it! I've added this task:\n   "
-                + t.toString() + "\nNow you have " + taskList.size()
+                + t.toString() + "\nNow you have " + taskList.getSize()
                 + plurality + " in the list.");
     }
 

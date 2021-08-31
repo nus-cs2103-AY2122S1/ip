@@ -4,12 +4,14 @@ import duke.exception.DukeException;
 import duke.exception.InvalidFormatException;
 import duke.exception.InvalidIntegerException;
 import duke.exception.InvalidTaskNumberException;
-import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.tasks.Task;
 import duke.Ui;
 
+/**
+ * Class that handles the Done and Delete command
+ */
 public class Action extends Command {
 
     private enum Type {
@@ -36,7 +38,7 @@ public class Action extends Command {
             } catch (NumberFormatException ex) {
                 throw new InvalidIntegerException();
             }
-            if (index < 1 || index > taskList.size()) {
+            if (index < 1 || index > taskList.getSize()) {
                 throw new InvalidTaskNumberException();
             } else {
                 if (this.type == Type.DONE) {
@@ -48,12 +50,12 @@ public class Action extends Command {
                     Task t = taskList.remove(index - 1);
 
                     String plurality = " task";
-                    if (taskList.size() != 1) {
+                    if (taskList.getSize() != 1) {
                         plurality += "s";
                     }
 
                     ui.print("Noted, I've removed this task:\n   " 
-                            + t.toString() + "\nNow you have " + taskList.size()
+                            + t.toString() + "\nNow you have " + taskList.getSize()
                             + plurality + " in the list.");
                 }
             }

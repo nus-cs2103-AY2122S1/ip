@@ -92,7 +92,7 @@ public class TaskList {
      *
      * @return size as an int
      */
-    public int size() {
+    public int getSize() {
         return this.tasks.size();
     }
 

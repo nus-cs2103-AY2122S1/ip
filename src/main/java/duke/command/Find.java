@@ -5,8 +5,10 @@ import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidFormatException;
-import duke.tasks.Task;
 
+/**
+ * Class that handles the Find command
+ */
 public class Find extends Command {
 
     private final String[] words;
