@@ -24,7 +24,7 @@ Everybody needs one!
 - [ ] Do the tasks for you
 - [ ] Solve world hunger
 
-###Try it (at your own risk)!
+### Try it (at your own risk)!
 1. Go to my recent [release](https://github.com/bklimey/ip/releases/tag/A-Jar) and download `ip.jar`
 1. Open command prompt in the same folder as `ip.jar` and enter `java -jar ip.jar` into the command prompt
 1. Run it and have fun!
