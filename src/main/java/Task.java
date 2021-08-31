@@ -1,14 +1,11 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Optional;
+
 public abstract class Task {
     protected String desc;
     protected boolean isComplete;
-
-    public Task(String desc) throws DukeException.EmptyDescriptionException {
-        this.desc = desc.trim();
-        if (desc.trim().length() == 0) {
-            throw new DukeException.EmptyDescriptionException();
-        }
-        this.isComplete = false;
-    }
 
     public Task(boolean isComplete, String desc) throws DukeException.EmptyDescriptionException {
         this.desc = desc.trim();
@@ -55,5 +52,72 @@ public abstract class Task {
     @Override
     public String toString() {
         return String.format("[%c] %s", this.isComplete ? 'X' : ' ', this.desc);
+    }
+
+    public static class Event extends Task {
+        String at;
+        LocalDate date;
+
+        public Event(boolean isComplete, String desc, String at) throws DukeException.EmptyDescriptionException {
+            super(isComplete, desc);
+            this.at = at;
+        }
+
+        @Override
+        public String getRepr() {
+            return String.format("E|%s|%s", super.getRepr(), this.at);
+        }
+
+        @Override
+        public String toString() {
+            return String.format("[E]%s (at: %s)", super.toString(), this.at);
+        }
+    }
+
+
+    public static class Deadline extends Task {
+        String by;
+        Optional<LocalDate> date;
+        public Deadline(boolean isComplete, String desc, String by) throws DukeException.EmptyDescriptionException {
+            super(isComplete, desc);
+            try {
+                this.date = Optional.of(LocalDate.parse(by));
+            } catch (DateTimeParseException e) {
+                this.by = by;
+                this.date = Optional.empty();
+            }
+        }
+
+        private String getDate(String pattern) {
+            return this.date.map((date) -> date.format(DateTimeFormatter.ofPattern(pattern)))
+                    .orElse(this.by);
+        }
+
+        @Override
+        public String getRepr() {
+            return String.format("D|%s|%s", super.getRepr(), this.getDate("yyyy-MM-d"));
+        }
+
+        @Override
+        public String toString() {
+            return String.format("[D]%s (by: %s)", super.toString(), this.getDate("MMM d yyyy"));
+        }
+    }
+
+    public static class Todo extends Task {
+
+        public Todo(boolean isComplete, String desc) throws DukeException.EmptyDescriptionException {
+            super(isComplete, desc);
+        }
+
+        @Override
+        public String getRepr() {
+            return String.format("T|%s|null", super.getRepr());
+        }
+
+        @Override
+        public String toString() {
+            return String.format("[T]%s", super.toString());
+        }
     }
 }

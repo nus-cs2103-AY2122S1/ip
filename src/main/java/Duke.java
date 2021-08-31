@@ -71,15 +71,15 @@ public class Duke {
                             if (k < 0) {
                                 throw new DukeException.MissingArgumentException("/at");
                             }
-                            t = new Event(input.substring("event".length(), k).trim(), input.substring(k + 3).trim());
+                            t = new Task.Event(false, input.substring("event".length(), k).trim(), input.substring(k + 3).trim());
                         } else if (input.matches("deadline.*")) {
                             int k = input.indexOf("/by");
                             if (k < 0) {
                                 throw new DukeException.MissingArgumentException("/by");
                             }
-                            t = new Deadline(input.substring("deadline".length(), k).trim(), input.substring(k + 3).trim());
+                            t = new Task.Deadline(false, input.substring("deadline".length(), k).trim(), input.substring(k + 3).trim());
                         } else if (input.matches("todo.*")) {
-                            t = new Todo(input.substring("todo".length()));
+                            t = new Task.Todo(false, input.substring("todo".length()));
                         } else {
                             throw new DukeException.UnknownInputException();
                         }
