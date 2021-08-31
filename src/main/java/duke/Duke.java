@@ -1,3 +1,5 @@
+package duke;
+
 import config.Setting;
 import parser.Parser;
 import processor.Processor;
@@ -21,7 +23,7 @@ public class Duke {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|";
         Ui.print("Hello from\n" + logo);
-        Ui.print("Wait, I'm not Duke. I'm Dub!\nWhat can I do for you?");
+        Ui.print("Wait, I'm not duke.Duke. I'm Dub!\nWhat can I do for you?");
         listen();
     }
 
@@ -30,10 +32,20 @@ public class Duke {
      */
     public static void listen() {
         while (true) {
-            boolean bool = parser.nextLine();
+            boolean bool = parser.nextLine().getKey();
             if (!bool) {
                 break;
             }
         }
+    }
+
+    /**
+     * Return the response of the chatbot according to the user input.
+     *
+     * @param input Input from the user.
+     * @return Response from the chatbot.
+     */
+    public String getResponse(String input) {
+        return parser.getResponse(input).getValue();
     }
 }

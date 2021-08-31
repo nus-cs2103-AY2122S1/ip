@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+import javafx.util.Pair;
 import models.Command;
 import processor.IProcessor;
 
@@ -35,37 +36,40 @@ public class Parser implements IParser {
      * @return True if the command entered is not bye.
      */
     @Override
-    public boolean parseLine(String line) {
+    public Pair<Boolean, String> parseLine(String line) {
         List<String> arguments = new ArrayList<>(Arrays.asList(line.split(" ")));
         if (line.equals("bye")) {
-            this.processor.processCommand(Command.BYE, arguments);
-            return false;
+            return new Pair<>(false, this.processor.processCommand(Command.BYE, arguments));
         } else if (line.equals("list")) {
-            this.processor.processCommand(Command.LIST, arguments);
-            return true;
+            return new Pair<>(true, this.processor.processCommand(Command.LIST, arguments));
         } else if (arguments.get(0).equals("done")) {
-            this.processor.processCommand(Command.DONE, arguments);
-            return true;
+            return new Pair<>(true, this.processor.processCommand(Command.DONE, arguments));
         } else if (arguments.get(0).equals("delete")) {
-            this.processor.processCommand(Command.DELETE, arguments);
-            return true;
+            return new Pair<>(true, this.processor.processCommand(Command.DELETE, arguments));
         } else if (arguments.get(0).equals("find")) {
-            this.processor.processCommand(Command.FIND, arguments);
-            return true;
+            return new Pair<>(true, this.processor.processCommand(Command.FIND, arguments));
         } else {
-            this.processor.processCommand(Command.DEFAULT, arguments);
-            return true;
+            return new Pair<>(true, this.processor.processCommand(Command.DEFAULT, arguments));
         }
     }
 
     /**
      * Function implementation that allows Parser to take the next command from the user.
      *
-     * @return True if the command entered is not bye.
+     * @return True if the command entered is not bye and the response from the chatbot.
      */
-    public boolean nextLine() {
+    public Pair<Boolean, String> nextLine() {
         String line = scanner.nextLine();
         System.out.println("\t" + "____________________________________________________________");
         return parseLine(line);
+    }
+
+    /**
+     * Function implementation that allows Parser to take command from the user and get response.
+     *
+     * @return True if the command entered is not bye and the response from the chatbot.
+     */
+    public Pair<Boolean, String> getResponse(String input) {
+        return parseLine(input);
     }
 }

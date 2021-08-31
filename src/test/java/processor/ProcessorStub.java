@@ -7,37 +7,37 @@ import models.Command;
 public class ProcessorStub implements IProcessor {
 
     @Override
-    public void processCommand(Command command, List<String> arguments) {
-
+    public String processCommand(Command command, List<String> arguments) {
+        return "";
     }
 
     @Override
-    public void processDefault(List<String> arguments) {
-
+    public String processDefault(List<String> arguments) {
+        return "";
     }
 
     @Override
-    public void processList() {
-
+    public String processList() {
+        return "";
     }
 
     @Override
-    public void processDone(String index) {
-
+    public String processDone(String index) {
+        return "";
     }
 
     @Override
-    public void processDelete(String index) {
-
+    public String processDelete(String index) {
+        return "";
     }
 
     @Override
-    public void processBye() {
-
+    public String processBye() {
+        return "";
     }
 
     @Override
-    public void processFind(String keyword) {
-
+    public String processFind(String keyword) {
+        return "";
     }
 }
