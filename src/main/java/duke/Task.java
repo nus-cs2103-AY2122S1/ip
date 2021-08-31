@@ -18,12 +18,12 @@ public abstract class Task {
         this.isDone = false;
     }
 
-    public void setIsDone(boolean isDone) {
+    public void setDone(boolean isDone) {
         this.isDone = isDone;
     }
 
     public String getStatusIcon() {
-        return (isDone? "[X]" : "[ ]");
+        return (isDone ? "[X]" : "[ ]");
     }
 
     /**
