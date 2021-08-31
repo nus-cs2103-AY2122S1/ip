@@ -2,6 +2,7 @@ package jarvis.command;
 
 import jarvis.exception.JarvisException;
 import jarvis.exception.TaskDetailsEmptyException;
+import jarvis.message.OutputMessage;
 import jarvis.parser.Parser;
 import jarvis.storage.Storage;
 import jarvis.task.Deadline;
@@ -39,12 +40,13 @@ public class DeadlineCommand extends Command {
      * @param taskList The list in which the tasks are stored
      * @param storage Storage to save or load tasks to hard-disk
      * @param ui Ui to show information to the user
+     * @return A OutputMessage that needs to be shown to the user after execution
      * @throws JarvisException If there is an error
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) throws JarvisException {
+    public OutputMessage execute(TaskList taskList, Storage storage, Ui ui) throws JarvisException {
         Deadline newDeadlineTask = taskList.addTaskWithDeadline(taskDescription, deadline);
         storage.addToStorageFile(newDeadlineTask.toStorageFormatString());
-        ui.showTaskAddedMessage(newDeadlineTask, taskList);
+        return ui.getTaskAddedMessage(newDeadlineTask, taskList);
     }
 }

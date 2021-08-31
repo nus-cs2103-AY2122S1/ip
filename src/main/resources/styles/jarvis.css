@@ -1,0 +1,13 @@
+.root {
+    -fx-font-family: Helvetica;
+    -fx-font-size: 11pt;
+}
+
+.speech-bubble {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 30px;
+}
+
+.user-speech-bubble {
+    -fx-background-color: rgba(252, 171, 171, 0.79);
+}

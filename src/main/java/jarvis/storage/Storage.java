@@ -48,7 +48,8 @@ public class Storage {
      * @throws StorageFileException If there is an error when trying to read data from storage file
      * @throws InvalidDateTimeInputException If the date time input is invalid in storage file
      */
-    public ArrayList<Task> loadTasksFromFile() throws InvalidStorageTaskException, StorageFileException, InvalidDateTimeInputException {
+    public ArrayList<Task> loadTasksFromFile()
+            throws InvalidStorageTaskException, StorageFileException, InvalidDateTimeInputException {
         Scanner s;
 
         try {

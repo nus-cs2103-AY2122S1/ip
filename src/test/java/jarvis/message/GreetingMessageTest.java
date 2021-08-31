@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class GreetingMessageTest {
     private static final String DEFAULT_GREETING_MESSAGE = String.format(
             "%s\n%s",
-            "Hello! I'm Jarvis!",
+            "Hello! I'm jarvis.Jarvis!",
             "What can I do for you?"
     );
 

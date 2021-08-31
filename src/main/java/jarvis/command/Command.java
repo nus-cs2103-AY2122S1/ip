@@ -1,6 +1,7 @@
 package jarvis.command;
 
 import jarvis.exception.JarvisException;
+import jarvis.message.OutputMessage;
 import jarvis.parser.Parser;
 import jarvis.storage.Storage;
 import jarvis.task.TaskList;
@@ -48,7 +49,8 @@ public abstract class Command {
      * @param taskList The list in which the tasks are stored
      * @param storage Storage to save or load tasks to hard-disk
      * @param ui Ui to show information to the user
+     * @return A OutputMessage that needs to be shown to the user after execution
      * @throws JarvisException If there is an error
      */
-    public abstract void execute(TaskList taskList, Storage storage, Ui ui) throws JarvisException;
+    public abstract OutputMessage execute(TaskList taskList, Storage storage, Ui ui) throws JarvisException;
 }

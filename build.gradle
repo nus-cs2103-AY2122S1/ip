@@ -45,7 +45,7 @@ test {
 
 application {
     // This class should contain the main method
-    mainClassName = "jarvis.Jarvis"
+    mainClassName = "jarvis.Launcher"
 }
 
 shadowJar {

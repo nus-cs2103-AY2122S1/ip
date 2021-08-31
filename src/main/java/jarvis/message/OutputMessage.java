@@ -30,7 +30,7 @@ public class OutputMessage {
      * @return Formatted message
      */
     public String getFormattedMessage() {
-        return String.format("\n%s\n", this.getMessage());
+        return String.format("%s\n", this.getMessage());
     }
 
     /**
