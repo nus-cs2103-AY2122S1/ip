@@ -4,11 +4,11 @@ import java.util.Scanner;
 
 /**
  * Represent the Ui class the is responsible for the interaction with user.
- * 
+ *
  * @author Sherman Ng Wei Sheng
  */
 public class Ui {
-    Scanner sc;
+    private Scanner sc;
 
     /**
      * Constructor for the Ui object.
@@ -39,7 +39,6 @@ public class Ui {
     public String getInput() {
         return sc.nextLine();
     }
-    
     /**
      * Prints the formatted list of content in Task List.
      */
@@ -56,12 +55,12 @@ public class Ui {
      */
     public void printAddedTaskMessage(Task task, TaskList list) {
         String message =
-                "Got it. I've added this task:\n" +
-                "  " + task + "\n" +
-                String.format("Now you have %d tasks in the list.", list.size());
+                "Got it. I've added this task:\n"
+                        + "  " + task + "\n"
+                        + String.format("Now you have %d tasks in the list.", list.size());
         printMessage(message);
     }
-    
+
     /**
      * Prints the input content to console with formatting.
      *
@@ -69,9 +68,9 @@ public class Ui {
      */
     public void printMessage(String content) {
         String format =
-                "        ____________________________________________________________\n" +
-                "        %s\n" +
-                "        ____________________________________________________________\n";
+                "        ____________________________________________________________\n"
+                + "        %s\n"
+                + "        ____________________________________________________________\n";
         System.out.printf(format, content.replaceAll("\n", "\n        "));
     }
 }

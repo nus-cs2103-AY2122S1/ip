@@ -2,7 +2,7 @@ package duke;
 
 /**
  * Represents an abstract Command class.
- * 
+ *
  * @author Sherman Ng Wei Sheng
  */
 public abstract class Command {
@@ -16,7 +16,7 @@ public abstract class Command {
 
     /**
      * Executes the given command.
-     * 
+     *
      * @param list TaskList before execution of the command.
      * @param ui Ui object to log the execution of the command.
      * @param storage Storage object that references the path to store the updated list of tasks.

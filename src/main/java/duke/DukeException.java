@@ -2,7 +2,7 @@ package duke;
 
 /**
  * Represents DukeException that contains all the Exceptions related to this program.
- * 
+ *
  * @author Sherman Ng Wei Sheng
  */
 public class DukeException extends Exception {

@@ -2,7 +2,7 @@ package duke;
 
 /**
  * Represents a command to mark a task as done.
- * 
+ *
  * @author Sherman Ng Wei Sheng
  */
 public class MarkDoneCommand extends Command {
@@ -12,7 +12,7 @@ public class MarkDoneCommand extends Command {
 
     /**
      * Constructor for the command to mark a task as done.
-     * 
+     *
      * @param index The index of the task to be removed.
      */
     public MarkDoneCommand(int index) {
@@ -32,7 +32,7 @@ public class MarkDoneCommand extends Command {
 
     /**
      * Executes the command to mark a task as done.
-     * 
+     *
      * @param list TaskList before execution of the command.
      * @param ui Ui object to log the execution of the command.
      * @param storage Storage object that references the path to store the updated list of tasks.
@@ -43,8 +43,8 @@ public class MarkDoneCommand extends Command {
         boolean markedDone = list.markDoneAtIndex(index);
         if (markedDone) {
             String message =
-                    "Nice! I've marked this task as done:\n" +
-                    list.get(index);
+                    "Nice! I've marked this task as done:\n"
+                    + list.get(index);
             ui.printMessage(message);
             storage.save(list.convertToStorageString());
         } else {

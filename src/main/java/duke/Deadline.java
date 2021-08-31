@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     private final LocalDate dateTime;
-    
+
     /**
      * Constructor to initialize a new Deadline.
      *
@@ -49,7 +49,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation of this task that is suitable for storage.
-     * 
+     *
      * @return The string representation of the encoded string for storage.
      */
     @Override

@@ -11,7 +11,7 @@ public abstract class Task {
 
     /**
      * Constructor to initialize a new Task.
-     * 
+     *
      * @param description The description of the task.
      */
     public Task(String description) {
@@ -32,7 +32,7 @@ public abstract class Task {
 
     /**
      * Returns the status icon of the particular task.
-     * 
+     *
      * @return The status icon depending on whether the task is marked as done.
      */
     public String getStatusIcon() {
@@ -48,7 +48,7 @@ public abstract class Task {
 
     /**
      * Returns the string representation of the task in a desired format.
-     * 
+     *
      * @return The String representation of the task, prefixed with a status icon.
      */
     @Override
@@ -58,7 +58,7 @@ public abstract class Task {
 
     /**
      * Returns the description of the task.
-     * 
+     *
      * @return The description of the task.
      */
     public String getDescription() {
@@ -67,7 +67,7 @@ public abstract class Task {
 
     /**
      * Returns the boolean value whether the task is done.
-     * 
+     *
      * @return True if the task is marked done and false if otherwise.
      */
     public boolean getIsDone() {
@@ -76,7 +76,7 @@ public abstract class Task {
 
     /**
      * Returns the encoded string for storage.
-     * 
+     *
      * @return The string that is suitable for saving the data.
      */
     public abstract String encodeTaskForStorage();

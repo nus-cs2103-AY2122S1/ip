@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Represents a list that contains a <code>List</code> of tasks.
- * 
+ *
  * @author Sherman Ng Wei Sheng
  */
 public class TaskList {
@@ -18,7 +18,6 @@ public class TaskList {
     public TaskList() {
         this.list = new ArrayList<>();
     }
-    
     /**
      * Constructor to initialize a new TaskList
      */
@@ -29,7 +28,7 @@ public class TaskList {
 
     /**
      * Adds a new task to the list.
-     * 
+     *
      * @param task Task to be added
      */
     public void add(Task task) {
@@ -38,7 +37,7 @@ public class TaskList {
 
     /**
      * Returns the size of the list.
-     * 
+     *
      * @return The size of the TaskList.
      */
     public int size() {
@@ -47,7 +46,7 @@ public class TaskList {
 
     /**
      * Returns the Task at the given index.
-     * 
+     *
      * @param index The index to retrieve the Task from in the TaskList.
      * @return The Task that is located at the given index.
      */
@@ -59,7 +58,7 @@ public class TaskList {
      * Marks the task at the index as done.
      * If given a valid index, returns true and mark the Task as done.
      * If given an invalid index, returns false.
-     * 
+     *
      * @param index The given index to mark the Task located there as done.
      * @return A boolean value, true if successfully marked as done and false if invalid index given.
      */
@@ -75,7 +74,7 @@ public class TaskList {
 
     /**
      * Removes the task at the given index and returns that Task.
-     * 
+     *
      * @param index The index of the task to be removed.
      * @return The task that is removed.
      */
@@ -89,7 +88,7 @@ public class TaskList {
 
     /**
      * Returns the string that should be printed when asked to print the current task list.
-     * 
+     *
      * @return The string that should be printed when the print command is executed.
      */
     public String generateMessage() {
@@ -106,7 +105,7 @@ public class TaskList {
 
     /**
      * Loads the data from storage and update the task list.
-     * 
+     *
      * @param data The string data retrieved from storage.
      */
     private void loadFromStorage(String data) {
@@ -135,13 +134,15 @@ public class TaskList {
                 Event eventTask = new Event(description, LocalDate.parse(dateTimeString), isDone);
                 this.add(eventTask);
                 break;
+            default:
+                break;
             }
         }
     }
 
     /**
      * Returns the string that is suitable for the storage of the entire task list in a txt file.
-     * 
+     *
      * @return The string with each task encoded that is suitable for storage.
      */
     public String convertToStorageString() {
