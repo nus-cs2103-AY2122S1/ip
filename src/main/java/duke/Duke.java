@@ -16,7 +16,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for the Duke class.
+     * Constructs Duke.
      *
      * @param filePath Filepath to store.
      */

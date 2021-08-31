@@ -5,18 +5,16 @@ package duke;
  * "todo <todo name>".
  */
 public class ToDo extends Task {
-    protected String description;
     protected boolean isDone;
     private final String TODO = "[T]";
 
     /**
-     * Public constructor for a todo.
+     * Constructs a todo.
      *
      * @param description Description of the event.
      */
     public ToDo(String description) {
         super(description);
-        this.description = description;
         this.isDone = false;
     }
 

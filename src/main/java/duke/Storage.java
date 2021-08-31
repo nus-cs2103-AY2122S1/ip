@@ -12,10 +12,10 @@ import java.util.Scanner;
 public class Storage {
     private static String filePath;
 
-    private boolean exit = false;
+    private boolean shouldExit = false;
 
     /**
-     * Public constructor of the Storage.
+     * Constructs Storage.
      *
      * @param filePath The filepath to store tasks.
      */
@@ -114,13 +114,13 @@ public class Storage {
      * @return True if program should end, false otherwise.
      */
     public boolean isExit() {
-        return exit;
+        return shouldExit;
     }
 
     /**
      * Sets the boolean deciding whether a program should end.
      */
     public void setExit() {
-        exit = true;
+        shouldExit = true;
     }
 }

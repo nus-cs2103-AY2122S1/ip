@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  * "Event <event name> /at <event date>".
  */
 public class Event extends Task{
-    protected String description;
     protected boolean isDone;
     final String EVENT = "[E]";
     protected String dateAndTime;
@@ -16,14 +15,13 @@ public class Event extends Task{
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     /**
-     * Public constructor for an event.
+     * Constructs an event.
      *
      * @param description Description of the event.
      * @param dateAndTime Date and time of the event.
      */
     public Event(String description, String dateAndTime) {
         super(description);
-        this.description = description;
         this.isDone = false;
         this.dateAndTime = dateAndTime;
     }

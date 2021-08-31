@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  * "deadline <deadline name> /by <deadline date>".
  */
 public class Deadline extends Task {
-    protected String description;
     protected boolean isDone;
     final String DEADLINE = "[D]";
     protected String dateAndTime;
@@ -16,14 +15,13 @@ public class Deadline extends Task {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
 
     /**
-     * Public constructor for a deadline.
+     * Constructs a deadline.
      *
      * @param description Description of the event.
      * @param dateAndTime Date and time of the event.
      */
     public Deadline(String description, String dateAndTime) {
         super(description);
-        this.description = description;
         this.isDone = false;
         this.dateAndTime = dateAndTime;
     }

@@ -16,7 +16,7 @@ public class TaskList extends ArrayList<Task> {
     }
 
     /**
-     * Stores a prior Tasklist.
+     * Constructs a Tasklist.
      *
      * @param list Arraylist of tasks.
      */

@@ -16,7 +16,7 @@ public class Parser {
     }
 
     /**
-     * Public constructor for Parser.
+     * Constructs a Parser.
      *
      * @param command The input command of the user.
      * @param ui The Ui to return messages to the user.
@@ -45,6 +45,7 @@ public class Parser {
      * @throws DukeException If task input by user is incomplete.
      * @throws DeleteException If delete is incomplete.
      * @throws IOException If an input or output operation is failed or interpreted.
+     * @throws FindException If Find is incomplete.
      */
     public void parseCommand() throws DukeException, DeleteException, IOException, FindException {
 

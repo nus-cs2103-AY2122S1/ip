@@ -8,7 +8,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Public constructor for a task.
+     * Constructs a task.
      *
      * @param description Description of the event.
      */
@@ -27,7 +27,7 @@ public class Task {
     }
 
     /**
-     * Set boolean if task is done, or not.
+     * Sets boolean if task is done, or not.
      */
     public void setDone() {
         this.isDone = true;
