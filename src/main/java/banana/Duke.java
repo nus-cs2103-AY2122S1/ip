@@ -47,14 +47,14 @@ public class Duke {
     public void run() {
         try {
             Parser.displayLabel(WELCOME_LABEL);
-            while (true) {
-                String input = ui.getInput();
-                if (input.equals("bye")) {
-                    break;
+            String input = ui.getInput();
+            while (!input.equals("bye")) {
+                if (!input.equals("")) {
+                    Parser p = new Parser(input);
+                    p.useInput(tasks);
+                    writeToFile(input, tasks);
                 }
-                Parser p = new Parser(input);
-                p.useInput(tasks);
-                writeToFile(input, tasks);
+                input = ui.getInput();
             }
             Parser.displayLabel(BYE_LABEL);
         } catch (DukeException | IOException e) {

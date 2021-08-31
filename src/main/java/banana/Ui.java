@@ -26,7 +26,10 @@ public class Ui {
      * @return the user input.
      */
     public String getInput() {
-        return userInput.nextLine();
+        if (userInput.hasNextLine()) {
+            return userInput.nextLine();
+        }
+        return "";
     }
 
     /**
