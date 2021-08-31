@@ -16,7 +16,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
-@SuppressWarnings("checkstyle:Regexp")
 public class DukeFx extends Application {
 
     private ScrollPane scrollPane;

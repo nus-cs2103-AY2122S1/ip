@@ -14,6 +14,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
+/**
+ * A dialog box for user and duke messages in GUI.
+ */
 public class DialogBox extends HBox {
 
     private Label text;
@@ -58,6 +61,13 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
+    /**
+     * Gets a dialog box for user input.
+     *
+     * @param l  Label of user input.
+     * @param iv ImageView of user avatar.
+     * @return Dialog box for the user.
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         var userDialog = new DialogBox(l, iv);
         // set user dialog background color
@@ -66,6 +76,13 @@ public class DialogBox extends HBox {
         return userDialog;
     }
 
+    /**
+     * Gets a dialog box for duke response.
+     *
+     * @param l  Label of duke response.
+     * @param iv ImageView of duke avatar.
+     * @return Dialog box for duke.
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
