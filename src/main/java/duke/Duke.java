@@ -42,9 +42,9 @@ public class Duke {
         TaskList taskList = storage.initialise();
 
         ui.init();
-        boolean ended = false;
+        boolean hasEnded = false;
 
-        while (!ended) {
+        while (!hasEnded) {
             String input = "";
 
             // Reading data using readLine
@@ -56,7 +56,7 @@ public class Duke {
                 break;
             }
 
-            ended = parser.parse(input, taskList);
+            hasEnded = parser.parse(input, taskList);
         }
 
         storage.store(taskList);
