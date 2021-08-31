@@ -29,7 +29,7 @@ Clearly, I am here to clean up Tim's mess, this is what I do daily for this lazy
 
 1. Download this [`Bot.jar`](https://github.com/Timothyoung97/ip/releases/download/A-Jar/Bot.jar) file.
 2. Open up your preferred terminal.
-3. Navigate to the directory where you saved `Bot.jar`.
+3. Navigate to the directory where you save `Bot.jar`.
 4. Run the following command to start using me!
    - `java -jar Bot.jar`
 5. Enjoy and have fun!
