@@ -1,9 +1,9 @@
-package duke.commands;
+package duke.logic.commands;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.tasks.Task;
+import duke.logic.tasks.Task;
 
 /**
  * Finds the tasks whose descriptions contain the keyword.

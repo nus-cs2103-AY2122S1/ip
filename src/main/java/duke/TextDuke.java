@@ -2,41 +2,24 @@ package duke;
 
 import java.io.IOException;
 
-import duke.commands.Command;
-import duke.commands.CommandResult;
-import duke.commands.ExitCommand;
-import duke.parser.Parser;
+import duke.logic.commands.Command;
+import duke.logic.commands.CommandResult;
+import duke.logic.commands.ExitCommand;
+import duke.logic.parser.Parser;
+import duke.logic.tasks.TaskList;
 import duke.storage.Storage;
-import duke.tasks.TaskList;
-import duke.ui.Ui;
+import duke.ui.TextUi;
 
-/** Entry point of Duke. Initializes the application and runs the program. */
-public class Duke {
-    private Ui ui;
+/**
+ * Entry point for the text-based version of Duke. Initializes the program and runs in the CLI.
+ */
+public class TextDuke {
+    private TextUi textUi;
     private Parser parser;
     private TaskList taskList;
 
-    public static Duke init() {
-        Duke d = new Duke();
-        d.parser = new Parser();
-        try {
-            d.taskList = new TaskList(Storage.load());
-        } catch (IOException e) {
-            System.out.printf("Cannot load tasks\n  %s\n", e.getMessage());
-            d.taskList = new TaskList();
-        }
-        return d;
-    }
-
-    public String getResponse(String userCommandText) {
-        Command command = parser.parse(userCommandText);
-        command.setTaskList(taskList);
-        CommandResult result = command.execute();
-        return result.getMessage();
-    }
-
     public static void main(String[] args) {
-        new Duke().run();
+        new TextDuke().run();
     }
 
     /** Runs the program in three steps: start, loop for input, end. */
@@ -50,15 +33,15 @@ public class Duke {
      * Sets up the required objects, loads the data from the storage file, and displays the welcome message.
      */
     private void start() {
-        ui = new Ui();
+        textUi = new TextUi();
         parser = new Parser();
         try {
             taskList = new TaskList(Storage.load());
         } catch (IOException e) {
-            ui.showLoadingError(e.getMessage());
+            textUi.showLoadingError(e.getMessage());
             taskList = new TaskList();
         }
-        ui.showWelcome();
+        textUi.showWelcome();
     }
 
     /**
@@ -67,14 +50,14 @@ public class Duke {
     private void runCommandLoopUntilExitCommand() {
         Command command;
         do {
-            String userCommandText = ui.getUserCommand();
-            ui.showHorizontalLine();
+            String userCommandText = textUi.getUserCommand();
+            textUi.showHorizontalLine();
             command = parser.parse(userCommandText);
             command.setTaskList(taskList);
             CommandResult result = command.execute();
-            ui.showResultToUser(result);
-            ui.showHorizontalLine();
-            ui.showBlankLine();
+            textUi.showResultToUser(result);
+            textUi.showHorizontalLine();
+            textUi.showBlankLine();
         } while (!(command instanceof ExitCommand));
     }
 
@@ -85,10 +68,10 @@ public class Duke {
         try {
             Storage.save(taskList.toSaveFormat());
         } catch (IOException e) {
-            ui.showSavingError(e.getMessage());
+            textUi.showSavingError(e.getMessage());
         }
-        ui.showGoodbye();
-        ui.close();
+        textUi.showGoodbye();
+        textUi.close();
         System.exit(0);
     }
 }

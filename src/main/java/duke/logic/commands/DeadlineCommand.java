@@ -1,8 +1,8 @@
-package duke.commands;
+package duke.logic.commands;
 
 import java.time.LocalDateTime;
 
-import duke.tasks.Deadline;
+import duke.logic.tasks.Deadline;
 
 /**
  * Adds a new deadline task to the task list.

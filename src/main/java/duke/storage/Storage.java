@@ -9,10 +9,10 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.ToDo;
+import duke.logic.tasks.Deadline;
+import duke.logic.tasks.Event;
+import duke.logic.tasks.Task;
+import duke.logic.tasks.ToDo;
 
 // to divide into
 // encoder

@@ -1,4 +1,4 @@
-package duke.tasks;
+package duke.logic.tasks;
 
 /**
  * Represents a to-do task.

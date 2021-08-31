@@ -1,4 +1,4 @@
-package duke.tasks;
+package duke.logic.tasks;
 
 public class TaskStub extends Task {
     private final int stubNo;

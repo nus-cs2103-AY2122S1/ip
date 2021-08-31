@@ -1,19 +1,19 @@
-package duke.parser;
+package duke.logic.parser;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.commands.Command;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.EventCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.InvalidCommand;
-import duke.commands.ListCommand;
-import duke.commands.ToDoCommand;
+import duke.logic.commands.Command;
+import duke.logic.commands.DeadlineCommand;
+import duke.logic.commands.DeleteCommand;
+import duke.logic.commands.DoneCommand;
+import duke.logic.commands.EventCommand;
+import duke.logic.commands.ExitCommand;
+import duke.logic.commands.FindCommand;
+import duke.logic.commands.InvalidCommand;
+import duke.logic.commands.ListCommand;
+import duke.logic.commands.ToDoCommand;
 
 /**
  * Parses user input.

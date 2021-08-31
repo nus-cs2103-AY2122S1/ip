@@ -1,8 +1,8 @@
-package duke.commands;
+package duke.logic.commands;
 
 import java.time.LocalDateTime;
 
-import duke.tasks.Event;
+import duke.logic.tasks.Event;
 
 /**
  * Adds a new event task to the task list.

@@ -1,4 +1,4 @@
-package duke.commands;
+package duke.logic.commands;
 
 /**
  * Exits the program.

@@ -1,4 +1,4 @@
-package duke.commands;
+package duke.logic.commands;
 
 /**
  * Represents a syntactically invalid command.

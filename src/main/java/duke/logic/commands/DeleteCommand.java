@@ -1,6 +1,6 @@
-package duke.commands;
+package duke.logic.commands;
 
-import duke.tasks.TaskList;
+import duke.logic.tasks.TaskList;
 
 /**
  * Deletes a task from the task list.

@@ -1,4 +1,4 @@
-package duke.commands;
+package duke.logic.commands;
 
 /**
  * Lists out all current tasks in the task list.

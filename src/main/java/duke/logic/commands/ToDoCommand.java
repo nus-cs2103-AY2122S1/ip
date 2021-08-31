@@ -1,6 +1,6 @@
-package duke.commands;
+package duke.logic.commands;
 
-import duke.tasks.ToDo;
+import duke.logic.tasks.ToDo;
 
 /**
  * Adds a new to-do task to the task list.

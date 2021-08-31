@@ -3,12 +3,12 @@ package duke.ui;
 import java.io.PrintStream;
 import java.util.Scanner;
 
-import duke.commands.CommandResult;
+import duke.logic.commands.CommandResult;
 
 /**
- * UI of the Duke bot. It interacts with the user, including reading inputs and displaying messages.
+ * Text UI of the Duke bot. It interacts with the user through the CLI, reading inputs and displaying messages.
  */
-public class Ui {
+public class TextUi {
     private static final String LOGO = " ____        _\n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -22,7 +22,7 @@ public class Ui {
     private PrintStream out;
 
     /** Creates an instance of the UI with stdin as the input source and stdout as the output source. */
-    public Ui() {
+    public TextUi() {
         in = new Scanner(System.in);
         out = System.out;
     }
