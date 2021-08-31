@@ -55,6 +55,7 @@ public class Duke {
 
     /**
      * Runs Duke when launched from the GUI
+     *
      * @param command The command for Duke to handle.
      * @return Response from Duke.
      */
@@ -102,7 +103,7 @@ public class Duke {
     }
 
     /**
-     * Method to delete task.
+     * Delete task from Duke.
      *
      * @throws DukeException Thrown whenever user requests delete of a
      * task out of range or not a number. e.g. <code>delete hi</code>
@@ -171,6 +172,7 @@ public class Duke {
 
     /**
      * Method for duke.Duke to mark a task done.
+     *
      * @throws DukeException Thrown when user gives an index out of range
      * or not a number after the command done.
      */
@@ -207,6 +209,7 @@ public class Duke {
 
     /**
      * Main method for Duke.
+     *
      * @param args Optional arguments for CLI.
      */
     public static void main(String[] args) {

@@ -29,6 +29,7 @@ public class SceneController extends AnchorPane {
 
     /**
      * Initialise chat when user launches GUI.
+     *
      * @param duke The Duke object interacting with the user.
      */
     public void intialiseChat(Duke duke) {

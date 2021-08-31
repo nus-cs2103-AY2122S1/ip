@@ -24,6 +24,7 @@ public class Storage {
 
     /**
      * This method loads the tasks from the hard disk.
+     *
      * @param tasks The list to transfer the tasks to from storage.
      */
     public void loadTasksFromFile(TaskList tasks) {
@@ -62,6 +63,7 @@ public class Storage {
 
     /**
      * Creates the file if file does not exist at the <code>filePath</code>.
+     *
      * @throws DukeException Thrown if there is an <code>IOException</code>
      */
     public void createFileIfNotFound() throws DukeException {

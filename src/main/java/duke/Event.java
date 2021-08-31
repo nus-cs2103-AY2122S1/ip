@@ -15,6 +15,7 @@ public class Event extends Task {
     /**
      * Returns a <code>Duke</code> object that can reply to
      * commands. Duke can save the tasks at the specified <code>filePath</code>.
+     *
      * @param description The description of the event task.
      * @param ld The <code>LocalDate</code> object to represent
      *           the date of the event.

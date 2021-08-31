@@ -31,6 +31,7 @@ public class DukeUI {
     /**
      * Informs the user that the task they requested
      * to mark as done is done.
+     *
      * @param task The task that was marked as done.
      */
     public String markTaskDone(Task task) {
@@ -44,6 +45,7 @@ public class DukeUI {
     /**
      * Informs the user that the task they requested
      * to mark as deleted is deleted.
+     *
      * @param tasksLength The number of tasks left after deletion.
      */
     public String showDeleteTaskMessage(int tasksLength) {
@@ -54,6 +56,7 @@ public class DukeUI {
     /**
      * Informs the user that the task they requested
      * to add was added.
+     *
      * @param tasksLength The number of tasks after adding.
      * @param task The task that was added.
      */
@@ -65,6 +68,7 @@ public class DukeUI {
 
     /**
      * Return the list of tasks.
+     *
      * @param tasks The tasks.
      */
     public String showTasksWithKeyword(ArrayList<Task> tasks) {
