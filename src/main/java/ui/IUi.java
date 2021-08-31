@@ -6,7 +6,6 @@ import java.util.List;
  * Interface for UI.
  * Sole responsibility is to determine the UI to user.
  */
-@SuppressWarnings("checkstyle:Regexp")
 public interface IUi {
     /**
      * Displays the sentence for the CLI.
