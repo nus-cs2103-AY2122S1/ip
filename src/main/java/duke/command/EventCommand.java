@@ -1,9 +1,8 @@
 package duke.command;
 
 import duke.data.TaskHandler;
-import duke.data.task.Event;
 import duke.data.exception.DukeException;
-
+import duke.data.task.Event;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
@@ -54,5 +53,3 @@ public class EventCommand extends Command {
         }
     }
 }
-
-

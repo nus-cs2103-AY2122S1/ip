@@ -1,9 +1,9 @@
 package duke.data;
 
+import java.util.ArrayList;
+
 import duke.data.task.*;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Class that contains the tasklist and handles all tasklist operations.

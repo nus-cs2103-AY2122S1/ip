@@ -25,7 +25,7 @@ public class Ui {
 
     /**
      * Informs the user that they have inputted an empty task.
-     * 
+     *
      * @param s Type of task input.
      * @return The error message to the user.
      */
@@ -54,7 +54,7 @@ public class Ui {
      * @return Error message to the user.
      */
     public static String inputUnknown() {
-       return Messages.INDENTATION + Messages.UNKNOWN_INPUT_MESSAGE;
+        return Messages.INDENTATION + Messages.UNKNOWN_INPUT_MESSAGE;
     }
 
     /**
@@ -117,9 +117,9 @@ public class Ui {
         System.out.println(Messages.INDENTATION + Messages.MATCHING_TASK_FOUND);
     }
 
-     /**
-      *  Prints no tasks found message.
-      */
+    /**
+     * Prints no tasks found message.
+     */
     public static void noSuchTasksFound() {
         System.out.println(Messages.INDENTATION + Messages.NO_MATCHING_TASK_FOUND);
     }
