@@ -1,14 +1,17 @@
+package storage;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.FileWriter;
 import java.util.Scanner;
 
 import exceptions.MorganException;
+import parser.TaskParser;
 import tasks.TaskList;
 import tasks.Task;
 
 /**
- * This is a Storage class, which encapsulates storage of tasks.
+ * This is a storage.Storage class, which encapsulates storage of tasks.
  */
 public class Storage {
     private static final String DIRECTORY_PATH = "./morgan-files";
@@ -18,21 +21,16 @@ public class Storage {
     protected static final String DELIMITER = TaskParser.DELIMITER;
 
     /**
-     * Constructor for Storage.
+     * Constructor for storage.Storage.
      * @throws MorganException
      */
-    public Storage() throws MorganException {
+    public Storage() {
         File directory = new File(DIRECTORY_PATH);
         boolean isDirectoryExist = directory.exists();
         if (!isDirectoryExist) {
             directory.mkdir();
         }
         this.file = new File(FILE_PATH);
-        try {
-            this.file.createNewFile();
-        } catch (IOException e) {
-            throw new MorganException("OOPS!!! " + e.getMessage());
-        }
     }
 
     /**
@@ -49,8 +47,7 @@ public class Storage {
                     Task task = parser.decode(taskString);
                     taskList.addTask(task);
                 } catch (MorganException e) {
-                    //TODO: edit this
-                    continue;
+                    throw e;
                 }
             }
         } catch (IOException e) {
@@ -79,7 +76,7 @@ public class Storage {
             fileWriter.write(String.valueOf(storageString));
             fileWriter.close();
         } catch (IOException e) {
-            throw new MorganException("OOPS!!! " + e.getMessage());
+            throw new MorganException(e.getMessage());
         }
     }
 }

@@ -1,5 +1,6 @@
 package commands;
 import exceptions.MorganException;
+import storage.Storage;
 import tasks.TaskList;
 
 /**
@@ -16,10 +17,12 @@ public class ListCommand extends Command {
      * @param taskList The existing list of tasks.
      * @return The list of tasks.
      */
-    public String execute(TaskList taskList) throws MorganException {
-        if (taskList.isEmpty()) {
+    public String execute(TaskList taskList, Storage storage) throws MorganException {
+        TaskList tasks = new TaskList();
+        storage.load(tasks);
+        if (tasks.isEmpty()) {
             throw new MorganException(EMPTY_LIST_ERROR_MESSAGE);
         }
-        return "Here are the tasks in your list:\n" + taskList.toString();
+        return "Here are the tasks in your list:\n" + tasks;
     }
 }

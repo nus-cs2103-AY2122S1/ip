@@ -1,5 +1,6 @@
 package commands;
 import exceptions.MorganException;
+import storage.Storage;
 import tasks.Task;
 import tasks.TaskList;
 
@@ -43,7 +44,7 @@ public class MarkDoneCommand extends Command {
      * @return The completion message after execution.
      * @throws MorganException
      */
-    public String execute(TaskList taskList) throws MorganException {
+    public String execute(TaskList taskList, Storage storage) throws MorganException {
         boolean isValidTaskNumber = this.taskNumber <= taskList.getNumOfTasks()
                 && this.taskNumber > 0;
 
@@ -55,6 +56,11 @@ public class MarkDoneCommand extends Command {
         // Obtain task and mark done
         taskList.markAsDone(this.taskNumber);
         Task task = taskList.getTask(this.taskNumber);
+        try {
+            storage.save(taskList);
+        } catch (MorganException e) {
+            throw e;
+        }
 
         // Message displayed upon execution
         return "Nice! I've marked this task as done:\n\t"

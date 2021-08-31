@@ -1,5 +1,6 @@
 package commands;
 import exceptions.MorganException;
+import storage.Storage;
 import tasks.TaskList;
 
 /**
@@ -35,7 +36,7 @@ public class FindCommand extends Command {
      * @param taskList The existing list of tasks.
      * @return The list of tasks containing the specified keyword.
      */
-    public String execute(TaskList taskList) throws MorganException {
+    public String execute(TaskList taskList, Storage storage) throws MorganException {
         TaskList foundTasks = taskList.findTasks(keyTerm);
 
         // Throws exception if no matching task found

@@ -1,15 +1,18 @@
+package parser;
+
 import commands.*;
 import exceptions.MorganException;
+import storage.Storage;
 
 /**
- * This is an CommandParser class, which translates user input
+ * This is an parser.CommandParser class, which translates user input
  * into commands.
  */
 public class CommandParser {
     private final static String DELIMITER = "\\s+";
     private final static int COMMAND_INDEX = 0;
     private final static String DELIMITER_FOUND_ERROR_MESSAGE = "Please "
-            + "avoid using the symbol \"" + Storage.DELIMITER + "\".";
+            + "avoid using the symbol \"" + TaskParser.DELIMITER + "\".";
 
     /**
      * Returns the command specified by the user.
