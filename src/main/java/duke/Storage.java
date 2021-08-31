@@ -1,18 +1,35 @@
 package duke;
 
+import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.FileNotFoundException;
-import java.io.File;
-import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Stores tasks locally on the hard disk.
  */
 public class Storage {
+
+    /** Stores the path of the text file */
+    String file = "data/duke.txt";
+
+    /** Stores the path of the data directory in the project folder */
+    Path dirPath = Paths.get("data");
+
+    /** Stores the path of the data file in the project folder */
+    Path filePath = Paths.get("data/duke.txt");
+
+    /** Stores if the path of the data directory in the project folder exists */
+    boolean existsDirPath = Files.exists(dirPath);
+
+    /** Stores if the path of the data file in the data directory in the project folder exists */
+    boolean existsFilePath = Files.exists(filePath);
 
 
     /**
@@ -39,15 +56,54 @@ public class Storage {
         fw.close();
     }
 
-    /**
-     * Reads tasks from the text file.
-     * @param filePath
-     * @return
-     * @throws FileNotFoundException
-     */
-    public Scanner readFile(String filePath) throws FileNotFoundException {
-        File f = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
-        return s;
+
+    public ArrayList<Task> load(String filePath) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        if (existsDirPath) {
+            if (existsFilePath) {
+                try {
+                    List<String> lines = Files.readAllLines(Path.of(filePath));
+                    for(int i=0;i<lines.size();i++){
+                        String line = lines.get(i);
+                        if (line.charAt(1) == 'T') {
+                            Task t = new Task(line, Duke.Category.TODO);
+                            t.setPreExisting();
+                            tasks.add(t);
+                        } else if (line.charAt(1) == 'D') {
+                            Task t = new Task(line, Duke.Category.DEADLINE);
+                            t.setPreExisting();
+                            tasks.add(t);
+                        } else if (line.charAt(1) == 'E') {
+                            Task t = new Task(line, Duke.Category.EVENT);
+                            t.setPreExisting();
+                            tasks.add(t);
+                        }
+                    }
+                    return tasks;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return tasks;
+                }
+
+
+            } else {
+                try {
+                    Files.createFile(Path.of(filePath));
+                } catch (IOException e) {
+                    System.out.println("Sorry! Data storage file couldn't be created.");
+                }
+            }
+        } else {
+
+            try {
+                Files.createDirectories(dirPath);
+                Files.createFile(Path.of(filePath));
+            } catch (IOException e) {
+                System.out.println("Sorry! Data directory couldn't be created.");
+            }
+
+        }
+        return tasks;
     }
+
 }
