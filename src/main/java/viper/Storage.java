@@ -122,7 +122,7 @@ public class Storage {
         }
         
         fw.close();
-        boolean success = tempFile.renameTo(file);
+        tempFile.renameTo(file);
     }
     
     public void doneTask(Task task) throws IOException {
@@ -143,7 +143,7 @@ public class Storage {
         }
         
         fw.close();
-        boolean success = tempFile.renameTo(file);
+        tempFile.renameTo(file);
     }
        
 }
