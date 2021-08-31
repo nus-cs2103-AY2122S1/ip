@@ -3,7 +3,7 @@ package duke.task;
 /**
  * <h2>ToDo</h2>
  * A simple task which only has a name and a completion status.
- * For more complex tasks with a date & time see {@link duke.task.Deadline}, {@link duke.task.Event}.
+ * For more complex tasks with a date and time see {@link duke.task.Deadline}, {@link duke.task.Event}.
  */
 
 public class ToDo extends Task {

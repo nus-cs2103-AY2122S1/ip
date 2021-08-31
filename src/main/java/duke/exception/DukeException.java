@@ -37,7 +37,7 @@ public abstract class DukeException extends Exception {
 
     /**
      * An exception that is thrown if the user specifies an invalid task number to delete, e.g. if the task number 
-     * specified is < 0 or > the number of tasks.
+     * specified is {@literal <} 0 or {@literal >} the number of tasks.
      */
     public static class InvalidTaskNumException extends DukeException {
         public InvalidTaskNumException(String message) {
