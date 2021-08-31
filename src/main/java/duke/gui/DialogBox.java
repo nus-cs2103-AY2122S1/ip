@@ -8,11 +8,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.layout.Region;
 
 /**
  * An example of a custom control using FXML.
@@ -22,42 +25,62 @@ import javafx.scene.layout.HBox;
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
+    
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(DialogBox.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    public void initialize() {
+        Circle clip = new Circle(30, 30, 30);
+        this.displayPicture.setClip(clip);
+    }
 
-        dialog.setText(text);
-        dialog.setMaxHeight(Double.MAX_VALUE);
-        displayPicture.setImage(img);
-        this.prefHeightProperty().bind(dialog.heightProperty());
+    private void setDialog(String text) {
+        this.dialog.setText(text);
+    }
+
+    private void setImage(Image img) {
+        this.displayPicture.setImage(img);
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+    private static HBox flip(HBox db) {
+        ObservableList<Node> tmp = FXCollections.observableArrayList(db.getChildren());
         Collections.reverse(tmp);
-        getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
-    }
-
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
+        db.getChildren().setAll(tmp);
         return db;
+    }
+
+    public static HBox getUserDialog(String text, Image img) {
+        HBox db = DialogBox.getDialog(text, img);
+        ObservableList<Node> tmp = FXCollections.observableArrayList(db.getChildren());
+        tmp.forEach(child -> {
+                    if (child instanceof Label) {
+                        ((Label) child).setAlignment(Pos.TOP_RIGHT);
+                        ((Region) child).setPadding(new Insets(15.0, 15.0, 15.0, 15.0));
+                    }
+                });
+        return db;
+    }
+
+    public static HBox getDukeDialog(String text, Image img) {
+        HBox db = DialogBox.getDialog(text, img);
+        db = DialogBox.flip(db);
+        return db;
+    }
+
+    private static HBox getDialog(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(DialogBox.class.getResource("/view/DialogBox.fxml"));
+            HBox db = fxmlLoader.load();
+            fxmlLoader.<DialogBox>getController().setDialog(text);
+            fxmlLoader.<DialogBox>getController().setImage(img);
+            return db;
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            return null;
+        }
     }
 }
