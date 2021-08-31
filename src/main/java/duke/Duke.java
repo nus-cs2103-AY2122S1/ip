@@ -5,17 +5,28 @@ import duke.main.Parser;
 import duke.main.Storage;
 import duke.main.Ui;
 import duke.task.TaskList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
-import java.io.File;
-
-public class Duke {
+/**
+ * The entry point to the Duke chatbot.
+ */
+public class Duke extends Application {
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
     private Parser parser;
 
     /**
-     * Constructor for Duke.
+     * Default constructor for GUI Launcher.
+     */
+    public Duke() {
+    }
+
+    /**
+     * Overloaded constructor for Duke.
      *
      * @param filePath for storing tasks.
      */
@@ -37,6 +48,16 @@ public class Duke {
         }
     }
 
+//    /**
+//     * Main method to start Duke
+//     *
+//     * @param args
+//     */
+//    public static void main(String[] args) {
+//        String filePath = System.getProperty("user.dir") + File.separator + "tasks.txt";
+//        new Duke(filePath).run();
+//    }
+
     /**
      * Starts the assistant.
      */
@@ -57,9 +78,17 @@ public class Duke {
         ui.closeInput();
     }
 
-    public static void main(String[] args) {
-        String filePath = System.getProperty("user.dir") + File.separator + "tasks.txt";
-        new Duke(filePath).run();
+    /**
+     * Start the Duke GUI.
+     *
+     * @param stage to be displayed
+     */
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
     }
 
 }
