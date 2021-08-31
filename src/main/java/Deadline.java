@@ -1,8 +1,11 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Deadline is a task that needs to be done before a specific date/time.
  */
 public class Deadline extends Task {
-    protected String by;
+    protected LocalDate by;
 
     /**
      * Creates a Deadline with the provided description and date/time.
@@ -11,7 +14,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = by;
+        this.by = LocalDate.parse(by);
     }
 
     /**
@@ -20,7 +23,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", TaskType.DEADLINE.toString(), super.toString(), this.by);
+        return String.format("[%s]%s (by: %s)", TaskType.DEADLINE.toString(), super.toString(), this.by.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
     }
 
     /**
