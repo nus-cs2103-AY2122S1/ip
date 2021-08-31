@@ -12,6 +12,19 @@ import duke.util.Ui;
  */
 public abstract class Command {
 
+    protected String userInput;
+
+    public Command(String userInput) {
+        this.userInput = userInput;
+    }
+
+    public Command() {
+    }
+
+    public String getUserInput() {
+        return this.userInput;
+    }
+
     /**
      * Asks Duke to execute a specific command.
      * The method body must be implemented by its subclasses.
@@ -20,12 +33,5 @@ public abstract class Command {
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
-
-    /**
-     * Returns a boolean that tells Duke when to exit.
-     *
-     * @return A boolean representing the exit condition.
-     */
-    public abstract boolean isExit();
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 }

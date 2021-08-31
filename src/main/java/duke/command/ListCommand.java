@@ -13,16 +13,6 @@ import duke.util.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Returns a boolean that tells Duke if this is the command to exit.
-     *
-     * @return A boolean representing the exit condition.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes a "list" command.
      *
      * @param taskList The taskList where all tasks are stored.
@@ -30,7 +20,7 @@ public class ListCommand extends Command {
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        taskList.showList();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return taskList.showList();
     }
 }

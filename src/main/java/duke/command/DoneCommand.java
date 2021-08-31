@@ -14,14 +14,8 @@ import duke.util.Ui;
  */
 public class DoneCommand extends Command {
 
-    /**
-     * Returns a boolean that tells Duke if this is the command to exit.
-     *
-     * @return A boolean representing the exit condition.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+    public DoneCommand(String userInput) {
+        super(userInput);
     }
 
     /**
@@ -32,23 +26,22 @@ public class DoneCommand extends Command {
      * @param storage An instance of a the Storage class that saves and loads Duke's data.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        String[] inputValues = ui.getCommand().split(" ");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        String[] inputValues = super.getUserInput().split(" ");
         try {
-            taskList.markAsDone(Integer.parseInt(inputValues[1]));
-            storage.save(taskList);
+            return taskList.markAsDone(Integer.parseInt(inputValues[1]), storage);
         } catch (NumberFormatException e) {
-            ui.showError("     Error! Please ensure a number is entered after done (eg: done 2)");
+            return ui.showError("Error! Please ensure a number is entered after done (eg: done 2)");
         } catch (IndexOutOfBoundsException e) {
             if (Integer.parseInt(inputValues[1]) <= 0) {
-                ui.showError("     Error! Please specify a number greater than 0");
+                return ui.showError("Error! Please specify a number greater than 0");
             } else if (Integer.parseInt(inputValues[1]) == 1) {
-                ui.showError("     Error! You do not have any tasks in the list");
+                return ui.showError("Error! You do not have any tasks in the list");
             } else {
-                ui.showError("     Error! You do not have " + inputValues[1] + " tasks in the list");
+                return ui.showError("Error! You do not have " + inputValues[1] + " tasks in the list");
             }
         } catch (IOException exception) {
-            ui.showSavingError();
+            return ui.showSavingError();
         }
     }
 }
