@@ -5,13 +5,13 @@ import duke.main.Parser;
 import duke.main.Storage;
 import duke.main.Ui;
 import duke.task.TaskList;
-import javafx.application.Application;
-import javafx.stage.Stage;
+
+import java.io.File;
 
 /**
  * The entry point to the Duke chatbot.
  */
-public class Duke extends Application {
+public class Duke {
     private Storage storage;
     private Ui ui;
     private TaskList taskList;
@@ -21,28 +21,21 @@ public class Duke extends Application {
      * Default constructor for GUI Launcher.
      */
     public Duke() {
-    }
-
-    /**
-     * Overloaded constructor for Duke.
-     *
-     * @param filePath for storing tasks.
-     */
-    public Duke(String filePath) {
+        String filePath = System.getProperty("user.dir") + File.separator + "tasks.txt";
         storage = new Storage(filePath);
-        try {
-            taskList = storage.load();
-            ui.greetWithFamiliarity(taskList);
-        } catch (DukeException e) {
-            ui.showDukeException(e.getMessage());
-            storage.resetTasks();
-
-            if (taskList != null) {
-                taskList.clearTasks();
-            }
-        } finally {
-            parser = new Parser(storage, ui, taskList);
-        }
+//        try {
+//            taskList = storage.load();
+//            ui.greetWithFamiliarity(taskList);
+//        } catch (DukeException e) {
+//            ui.showDukeException(e.getMessage());
+//            storage.resetTasks();
+//
+//            if (taskList != null) {
+//                taskList.clearTasks();
+//            }
+//        } finally {
+//            parser = new Parser(storage, ui, taskList);
+//        }
     }
 
 //    /**
@@ -54,6 +47,14 @@ public class Duke extends Application {
 //        String filePath = System.getProperty("user.dir") + File.separator + "tasks.txt";
 //        new Duke(filePath).run();
 //    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 
     /**
      * Starts the assistant.
@@ -74,17 +75,4 @@ public class Duke extends Application {
         }
         ui.closeInput();
     }
-
-    /**
-     * Start the Duke GUI.
-     *
-     * @param stage to be displayed
-     */
-    @Override
-    public void start(Stage stage) {
-        ui = new Ui(stage);
-        ui.start();
-    }
-
-
 }
