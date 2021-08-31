@@ -6,9 +6,9 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     /** The index of the task in the list. */
-    private int index;
+    private final int index;
 
     /**
      * Constructs a delete command using the given action and index.

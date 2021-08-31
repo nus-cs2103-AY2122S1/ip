@@ -4,9 +4,9 @@ import duke.Action;
 import duke.Storage;
 import duke.task.TaskList;
 
-public class SetCommand extends Command{
+public class SetCommand extends Command {
     /** The index of the task in the list. */
-    private int index;
+    private final int index;
 
     /**
      * Constructs a set command using the given action and index.

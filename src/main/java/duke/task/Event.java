@@ -1,15 +1,14 @@
 package duke.task;
 
-import duke.Parser;
-import duke.Ui;
-
 import java.time.LocalDateTime;
 import java.util.Objects;
+
+import duke.Parser;
+import duke.Ui;
 
 /**
  * This class represents an event task.
  */
-
 public class Event extends Task {
     /** Start or end time of the event. */
     private final LocalDateTime eventTime;
@@ -44,7 +43,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + eventTime.format(Ui.dateTimeFormatter) + ")";
+        return "[E]" + super.toString() + " (at: " + eventTime.format(Ui.DATE_TIME_FORMATTER) + ")";
     }
 
     /**
@@ -55,7 +54,7 @@ public class Event extends Task {
     @Override
     public String toTxtFormat() {
         return "E" + Parser.SPLITER + super.toTxtFormat()
-                + Parser.SPLITER + eventTime.format(Parser.inputDateTimeFormatter);
+                + Parser.SPLITER + eventTime.format(Parser.INPUT_DATE_TIME_FORMATTER);
     }
 
     /**
@@ -66,8 +65,12 @@ public class Event extends Task {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Event event = (Event) o;
         return super.equals(o) && Objects.equals(eventTime, event.eventTime);
     }

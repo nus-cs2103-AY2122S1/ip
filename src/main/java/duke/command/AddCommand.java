@@ -1,14 +1,24 @@
 package duke.command;
 
-import duke.*;
+import duke.Action;
+import duke.DukeException;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-public class AddCommand extends Command{
-    private String info;
+public class AddCommand extends Command {
+    private final String info;
 
+    /**
+     * Constructs an AddCommand instance using the given action and info.
+     *
+     * @param action The given action.
+     * @param info The given info.
+     */
     public AddCommand(Action action, String info) {
         super(action);
         this.info = info;
@@ -47,6 +57,8 @@ public class AddCommand extends Command{
             Ui.showAddTaskMessage(temp, taskList.getSize());
             break;
         }
+        default:
+            throw new DukeException("Error: wrong action type for add command");
         }
     }
 }

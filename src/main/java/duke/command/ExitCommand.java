@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     /**
      * Constructs an exit command using the given action and set isExit to true.
      *

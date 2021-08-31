@@ -1,14 +1,14 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.Action;
 import duke.Storage;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.ArrayList;
-
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     /** The query from the user */
     private String query;
 

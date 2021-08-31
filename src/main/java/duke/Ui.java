@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * This class contains some common utility methods regrading text ui.
@@ -14,7 +14,7 @@ public class Ui {
     /** Text UI: indentation. */
     public static final String INDENTATION = "    ";
     /** Text UI: date time format. */
-    public static final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy");
+    public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm MMM dd yyyy");
 
     /**
      * Prints greeting message.
@@ -90,7 +90,7 @@ public class Ui {
 
     /**
      * Prints all the matching tasks in the given task list.
-     * 
+     *
      * @param taskList The given task list.
      */
     public static void showFindTasks(List<Task> taskList) {
@@ -108,7 +108,7 @@ public class Ui {
 
     /**
      * Prints all the tasks in the given task list.
-     * 
+     *
      * @param tasks The given task list.
      */
     public static void showTasks(List<Task> tasks) {

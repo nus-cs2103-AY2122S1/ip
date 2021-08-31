@@ -1,23 +1,27 @@
 package duke;
 
-import duke.command.Command;
-import duke.task.*;
-
 import java.util.Scanner;
+
+import duke.command.Command;
+import duke.task.TaskList;
 
 /**
  * Duke is a chatbot application for CS2103T individual project.
  */
 public class Duke {
-    /** The local file path. */
+    /**
+     * The local file path.
+     */
     private static final String filePath = "data/duke.txt";
-    /** The storage instance. */
+    /**
+     * The storage instance.
+     */
     private static final Storage storage = new Storage(filePath);
 
     /**
      * Receives input from the user and executes Duke's actions
      *
-     * @param sc The given scanner instance
+     * @param sc       The given scanner instance
      * @param taskList The given task list instance.
      */
     public static void run(Scanner sc, TaskList taskList) {
@@ -35,6 +39,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Executes the main method.
+     *
+     * @param args the given args.
+     */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         try {

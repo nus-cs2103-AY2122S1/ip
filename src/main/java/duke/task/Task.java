@@ -1,15 +1,15 @@
 package duke.task;
 
-import duke.Parser;
-
 import java.util.Objects;
+
+import duke.Parser;
 
 /**
  * This class represents a task.
  */
 public class Task {
     /** Description of the task. */
-    private String description;
+    private final String description;
     /** State of the task. */
     private boolean isDone;
 
@@ -86,8 +86,12 @@ public class Task {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Task task = (Task) o;
         return isDone == task.isDone && Objects.equals(description, task.description);
     }

@@ -5,7 +5,7 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
-public class ShowCommand extends Command{
+public class ShowCommand extends Command {
 
     /**
      * Constructs a show command instance using the given action.

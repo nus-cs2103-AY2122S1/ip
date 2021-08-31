@@ -53,7 +53,9 @@ public class Todo extends Task {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
+        if (this == obj) {
+            return true;
+        }
         if (obj instanceof Todo) {
             Todo todo = (Todo) obj;
             return (this.getDescription().equals(todo.getDescription())) && (this.isDone() == todo.isDone());

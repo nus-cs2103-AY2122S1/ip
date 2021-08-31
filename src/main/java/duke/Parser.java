@@ -1,26 +1,30 @@
 package duke;
 
-import duke.command.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.SetCommand;
+import duke.command.ShowCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * The Parser class handles all actions from users' input.
  */
 public class Parser {
-
-
     /** The spliter for the date time. */
     public static final String SPLITER = ",";
 
     /** The date time format. */
-    public static final DateTimeFormatter inputDateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    public static final DateTimeFormatter INPUT_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     /**
      * Returns an action based on the given input string.
@@ -94,7 +98,7 @@ public class Parser {
      */
     public static LocalDateTime parseDateTime(String input) {
         try {
-            LocalDateTime ldt = LocalDateTime.parse(input, inputDateTimeFormatter);
+            LocalDateTime ldt = LocalDateTime.parse(input, INPUT_DATE_TIME_FORMATTER);
             return ldt;
         } catch (DateTimeParseException e) {
             throw new DukeException("time should be in the format: DD/MM/YYYY HH:MM");

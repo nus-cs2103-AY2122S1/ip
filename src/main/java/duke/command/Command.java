@@ -5,8 +5,8 @@ import duke.Storage;
 import duke.task.TaskList;
 
 public abstract class Command {
-    private Action action;
-    private boolean isExit;
+    private final Action action;
+    private final boolean isExit;
 
     /**
      * Constructs a command instance using the given action and set isExit to false.
