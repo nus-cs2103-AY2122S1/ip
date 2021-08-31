@@ -10,12 +10,7 @@ public class ListCommand extends Command {
 
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        // Show list
-        String lst_display = "\n";
-
-        for (int i = 0; i < taskList.size(); i++) {
-            lst_display = lst_display + String.format("\t%d. %s\n", i + 1, taskList.getTask(i));
-        }
-        ui.reply(lst_display);
+        // Display taskList
+        ui.reply(taskList.toString());
     }
 }

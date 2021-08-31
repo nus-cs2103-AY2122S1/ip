@@ -8,6 +8,9 @@ event
 event project meeting
 event project meeting /by tmr
 event project meeting /at 2021-01-01
+find
+find nonsense
+find book
 done
 done ur momma
 done 0

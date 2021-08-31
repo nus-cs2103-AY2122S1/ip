@@ -82,8 +82,8 @@ public class Storage {
                 FileWriter fw = new FileWriter(filePath);
 
                 // Write current task list into file
-                for (Task t : taskList.getTaskList()) {
-                    fw.write(t.toString());
+                for (int i = 0; i < taskList.size(); i++) {
+                    fw.write(taskList.getTask(i).toString());
                     fw.write(System.lineSeparator());
                 }
                 fw.close();

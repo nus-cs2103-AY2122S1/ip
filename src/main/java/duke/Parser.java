@@ -1,14 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.ByeCommand;
-import duke.command.ListCommand;
-import duke.command.DoneCommand;
-import duke.command.DeleteCommand;
-import duke.command.TodoCommand;
-import duke.command.DeadlineCommand;
-import duke.command.EventCommand;
-import duke.command.HelpCommand;
+import duke.command.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -50,6 +42,9 @@ public class Parser {
 
             case EventCommand.COMMAND_WORD:
                 return prepareEvent(args);
+
+            case FindCommand.COMMAND_WORD:
+                return new FindCommand(args);
 
             case HelpCommand.COMMAND_WORD: // Fallthrough
             default:
