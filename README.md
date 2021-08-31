@@ -1,24 +1,49 @@
-# duke.Duke project template
+# Duke chat bot :robot:
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+>Creativity is intelligence having FUN - Albert Einstein
 
-## Setting up in Intellij
+This is the chat bot that lets you manage your tasks easily!([download it from here](https://github.com/LuoZhijie-tom/ip.git))
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### Commands:
+* __todo__ *description* : Add a ToDo task.
+* __deadline__ *description* __/by__ *deadline* : Add a Deadline task.
+* __event__ *description* __/at__ *event time* : Add an Event.
+* __done__ *taskIndex*: Marks the task at *taskIndex* as done.
+* __list__ : See all existing tasks.
+* __find__ *keyword* : Find all tasks with *keyword*.
+* __delete__ *taskIndex* : Delete task at *taskIndex*.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/duke.Duke.java` file, right-click it, and choose `Run duke.Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### Current features:
+1. add delete and mark three types of tasks which are ToDo, Deadline, and Event.
+2. mark the task as done.
+3. list all existing tasks.
+4. search for tasks based on keyword.
+
+### Features:
+- [X] Managing tasks(add, delete, mark as done, list, find)
+- [ ] GUI
+
+### Sample codes(`run()` method):
+```java
+public void run() {
+        try {
+            tasks = storage.convertFileToTaskList();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return;
+        }
+        ui.greet();
+        boolean isExit = false;
+        Parser parser = new Parser(" ");
+        while (!isExit) {
+            try {
+                String fullCommand = ui.readCommand();
+                Command c = parser.parse(fullCommand);
+                c.execute(tasks, ui, storage);
+                isExit = c.isExit();
+            } catch (DukeException e) {
+                ui.showError(e.getMessage());
+            }
+        }
+    }
+```
