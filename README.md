@@ -25,7 +25,7 @@ Clearly, I am here to clean up Tim's mess, this is what I do daily for this lazy
 
 ## 2. Do you want to get a piece of me? 🎃
 
-### **Here's what you gonna do!**
+### **Here's what you're gonna do!**
 
 1. Download this [`Bot.jar`](https://github.com/Timothyoung97/ip/releases/download/A-Jar/Bot.jar) file.
 2. Open up your preferred terminal.
