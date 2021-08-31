@@ -22,13 +22,13 @@ public class Duke {
      * @param filePath the path to a text file for storage
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
-            this.tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
-            this.tasks = new TaskList();
+            tasks = new TaskList();
         }
     }
 
