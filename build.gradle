@@ -2,10 +2,7 @@ plugins {
     id 'java'
     id 'com.github.johnrengelman.shadow' version '7.0.0'
     id 'checkstyle'
-}
-
-checkstyle {
-    toolVersion = '8.29'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 group 'org.example'
@@ -14,26 +11,15 @@ version '1.0-SNAPSHOT'
 repositories {
     mavenCentral()
 }
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
-        }
-    }
-}
-I
-jar {
-    manifest {
-        attributes(
-                'Main-Class': 'duke.Duke'
-        )
-    }
-}
 
 dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+//    testImplementation 'junit:junit:5.4'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
     String javaFxVersion = '11'
 
-    testImplementation 'junit:junit:5.4'
+    implementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -46,4 +32,24 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'duke.Duke'
+        )
+    }
 }
