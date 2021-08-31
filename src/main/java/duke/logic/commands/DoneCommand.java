@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
         if (taskNo > taskList.size() || taskNo <= 0) {
             String msg = taskList.size() == 0
                     ? "You don't have any tasks!"
-                    : "Invalid take number! Must be between 1 and " + taskList.size();
+                    : "Invalid task number! Must be between 1 and " + taskList.size();
             return new CommandResult(msg);
         }
         return (taskList.markAsDone(taskNo))
