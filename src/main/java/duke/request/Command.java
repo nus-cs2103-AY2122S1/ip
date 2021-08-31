@@ -7,6 +7,7 @@ import duke.exception.UserException;
  */
 public enum Command {
     BYE("bye"),
+    FIND("find"),
     LIST("list"),
     DONE("done"),
     DELETE("delete"),

@@ -39,6 +39,8 @@ public abstract class Request {
             return new DeleteRequest(taskCollection, commandInput);
         case LIST:
             return new ListRequest(taskCollection);
+        case FIND:
+            return new FindRequest(taskCollection, commandInput);
 
         case DEADLINE:
             return new DeadlineRequest(taskCollection, commandInput);
