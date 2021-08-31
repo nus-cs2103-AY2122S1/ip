@@ -20,7 +20,7 @@ public class DukeParserTest {
         TaskList taskList = new TaskList(new ArrayList<>());
         DukeUI ui = new DukeUI();
 
-        DukeParser test = new DukeParser(taskList, ui);
+        DukeParser test = new DukeParser(taskList);
         try {
             test.parse("test");
         } catch (DukeException e) {
@@ -40,7 +40,7 @@ public class DukeParserTest {
         TaskList taskList = new TaskList(new ArrayList<>());
         DukeUI ui = new DukeUI();
 
-        DukeParser test = new DukeParser(taskList, ui);
+        DukeParser test = new DukeParser(taskList);
         try {
             test.parse("todo Test");
         } catch (DukeException e) {

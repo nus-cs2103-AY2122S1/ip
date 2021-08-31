@@ -30,16 +30,13 @@ public class DukeParser {
     }
 
     private TaskList taskList;
-    private DukeUI ui;
 
     /**
      * Class Constructor
      * @param taskList The tasklist to be modified through user-input
-     * @param ui The UI instance that is used handle printing of replies and errors
      */
-    public DukeParser(TaskList taskList, DukeUI ui) {
+    public DukeParser(TaskList taskList) {
         this.taskList = taskList;
-        this.ui = ui;
     }
 
     /**
@@ -89,7 +86,7 @@ public class DukeParser {
      *         as a direct result of the "bye" command (True if hasQuit)
      * @throws DukeException Exception thrown when any issues are encountered
      */
-    public boolean parse(String str) throws DukeException {
+    public String parse(String str) throws DukeException {
         String[] words = str.split(" ");
         String desc = str;
 
@@ -164,44 +161,36 @@ public class DukeParser {
 
         switch (key) {
         case list:
-            ui.printList(taskList);
-            break;
+            return DukeUI.printList(taskList);
         case todo:
             taskList.add(new ToDo(desc));
-            ui.printTask(taskList);
-            break;
+            return DukeUI.printTask(taskList);
         case deadline:
             taskList.add(new Deadline(desc, time));
-            ui.printTask(taskList);
-            break;
+            return DukeUI.printTask(taskList);
         case event:
             taskList.add(new Event(desc, time));
-            ui.printTask(taskList);
-            break;
+            return DukeUI.printTask(taskList);
         case done:
             if (index >= taskList.size()) {
                 throw new DukeException("!!! The number you input exceeds the size of the list !!!");
             }
             taskList.completeTask(index);
-            ui.completeTask(taskList.get(index));
-            break;
+            return DukeUI.completeTask(taskList.get(index));
         case delete:
             if (index >= taskList.size()) {
                 throw new DukeException("!!! The number you input exceeds the size of the list !!!");
             }
             Task task = taskList.remove(index);
-            ui.removeTask(task, taskList.size());
-            break;
+            return DukeUI.removeTask(task, taskList.size());
         case find:
-            ui.printFiltered(filtered);
-            break;
+            return DukeUI.printFiltered(filtered);
         case bye:
-            return true;
+            return "Good Bye";
         case error:
             throw new DukeException("!!! I'm sorry, but I don't know what that means. !!!");
         default:
             throw new IllegalStateException("Unexpected value: " + key);
         }
-        return false;
     }
 }
