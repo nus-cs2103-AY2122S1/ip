@@ -24,8 +24,8 @@ public class Parser {
             return new Command.ListCommand();
         case "done":
             if (inputs.length == 1) {
-                throw new DukeException("Insufficient input received! " +
-                        "Please indicate the task number of the completed task.");
+                throw new DukeException("Insufficient input received! "
+                        + "Please indicate the task number of the completed task.");
             } else {
                 try {
                     int index = Integer.parseInt(inputs[1]);

@@ -3,7 +3,6 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -105,7 +104,7 @@ public class TaskList {
      * @return The Task object that is marked as done.
      * @throws DukeException Throw DukeException.
      */
-    public Task done(int i) throws DukeException{
+    public Task done(int i) throws DukeException {
         if (i > taskList.size() || i < 1) {
             throw new DukeException("Please enter a valid task number!");
         }
@@ -204,7 +203,7 @@ public class TaskList {
     /**
      * Abstract class used to represent a task.
      */
-    public static abstract class Task {
+    public abstract static class Task {
         /** Description of the task */
         private String task;
         /** Checks if the task has been completed */
@@ -278,7 +277,7 @@ public class TaskList {
          * @param description Task description.
          */
         public Todo(boolean isDone, String description) {
-            super.isDone =  isDone;
+            super.isDone = isDone;
             super.task = description;
         }
 
