@@ -27,6 +27,7 @@ public abstract class Command {
      * @param tasks The user's list of tasks.
      * @param storage The object dealing with loading and storing of tasks.
      * @param ui The object dealing with user interactions.
+     * @return The message displayed by executing the corresponding command.
      */
-    public abstract void execute(TaskList tasks, Storage storage, Ui ui);
+    public abstract String execute(TaskList tasks, Storage storage, Ui ui);
 }

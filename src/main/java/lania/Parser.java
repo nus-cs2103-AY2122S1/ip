@@ -25,7 +25,7 @@ public class Parser {
      * @param fullCommand The input given by user.
      * @return The type of command to be executed.
      */
-    public Command parse(String fullCommand) {
+    public Command parse(String fullCommand) throws LaniaException {
         String firstCommand = parseCommand(fullCommand);
         if (firstCommand.equals("bye")) {
             return new ExitCommand();

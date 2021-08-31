@@ -4,6 +4,11 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import lania.command.Command;
 import lania.exception.LaniaException;
 import lania.task.TaskList;
@@ -21,6 +26,18 @@ public class Lania {
     private Storage storage;
     /** Deals with making sense of the user command */
     private Parser parser;
+
+    public Lania() {
+        ui = new Ui();
+        storage = new Storage("data/lania.txt");
+        parser = new Parser();
+        try {
+            tasks = storage.load();
+        } catch (IOException e) {
+            ui.showError();
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Constructor for the Lania object.
