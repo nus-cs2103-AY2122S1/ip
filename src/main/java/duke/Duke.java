@@ -2,13 +2,20 @@ package duke;
 
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+
 /**
  * Main class. Starts the program.
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
+    public Duke() { }
 
     /**
      * Constructor.
@@ -52,6 +59,12 @@ public class Duke {
         new Duke("data/duke.txt").run();
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
 
-
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
 }
