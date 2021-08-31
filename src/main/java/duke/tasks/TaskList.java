@@ -47,12 +47,12 @@ public class TaskList {
      * Adds a task to the list of Tasks with a confirmation message printed out after.
      * @param task The duke.tasks.Task to be added to the list of Tasks
      */
-    public void addToList(Task task) {
+    public String addToList(Task task) {
         taskList.add(task);
 
         String message = "Got it. I've added this task: Added: " + task;
         String taskGrammar = (taskList.size() == 1) ? " task" : " tasks";
-        Ui.printMessage(message + "Now you have " + taskList.size() + taskGrammar + " in the list.");
+        return message + "\nNow you have " + taskList.size() + taskGrammar + " in the list.";
     }
 
     /**
@@ -61,12 +61,11 @@ public class TaskList {
      * @throws EmptyListException if the list of Tasks is empty and there is nothing to be printed.
      */
 
-    public void displayList() throws EmptyListException {
+    public String displayList() throws EmptyListException {
         if (taskList.size() == 0) {
             throw new EmptyListException();
         }
-
-        Ui.printList(taskList);
+        return Ui.printList(taskList);
     }
 
     /**
@@ -77,7 +76,7 @@ public class TaskList {
      * @throws InvalidIndexException If the index of the Task provided is out of range of the current list of Tasks.
      */
 
-    public void markDone(String taskIndex) throws EmptyListException, InvalidIndexException {
+    public String markDone(String taskIndex) throws EmptyListException, InvalidIndexException {
         int intTaskIndex = Integer.parseInt(taskIndex) - 1; // -1 because user inputs start from 1 not 0
         int taskListSize = taskList.size();
 
@@ -88,10 +87,12 @@ public class TaskList {
         }
 
         Task task = taskList.get(intTaskIndex);
+        if (task.isDone()) {
+            return task + " has already been marked as done!";
+        }
         task.markAsDone();
 
-        String message = "Nice! I've marked this task as done:\n" + task;
-        Ui.printMessage(message);
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
     /**
@@ -101,7 +102,7 @@ public class TaskList {
      * @throws IncorrectFormatException If the deadline command is used but a "/by" is not present in the message.
      */
 
-    public void addDeadline(String deadline) throws IncorrectFormatException,
+    public String addDeadline(String deadline) throws IncorrectFormatException,
             InvalidDateTimeException, MessageEmptyException {
         String[] result = deadline.split("/by");
 
@@ -125,7 +126,7 @@ public class TaskList {
         }
 
         Deadline d = new Deadline(description, finalBy);
-        addToList(d);
+        return addToList(d);
     }
 
     /**
@@ -134,9 +135,9 @@ public class TaskList {
      * @param todo Todo to be added to the list of Tasks.
      */
 
-    public void addTodo(String todo) {
+    public String addTodo(String todo) {
         Todo tempTask = new Todo(todo);
-        addToList(tempTask);
+        return addToList(tempTask);
     }
 
     /**
@@ -145,7 +146,7 @@ public class TaskList {
      * @throws IncorrectFormatException If the event command is used but a "/at" is not present in the message.
      */
 
-    public void addEvent(String event) throws IncorrectFormatException, MessageEmptyException,
+    public String addEvent(String event) throws IncorrectFormatException, MessageEmptyException,
             InvalidDateTimeException, InvalidDurationException {
         String[] result = event.split("/at");
 
@@ -190,7 +191,7 @@ public class TaskList {
 
         Event e = new Event(description, finalDate, finalStartTime, finalEndTime);
 
-        addToList(e);
+        return addToList(e);
     }
 
     /**
@@ -201,7 +202,7 @@ public class TaskList {
      * @throws InvalidIndexException If the index of the Task provided is out of range of the current list of Tasks.
      */
 
-    public void deleteTask(String taskIndex) throws EmptyListException, InvalidIndexException {
+    public String deleteTask(String taskIndex) throws EmptyListException, InvalidIndexException {
         int intTaskIndex = Integer.parseInt(taskIndex) - 1; // -1 because user inputs start from 1 not 0
         int taskListSize = taskList.size();
 
@@ -217,7 +218,7 @@ public class TaskList {
 
         String taskGrammar = (taskList.size() == 1) ? " task" : " tasks";
 
-        Ui.printMessage(message + "Now you have " + taskList.size() + taskGrammar + " in the list.");
+        return message + "\nNow you have " + taskList.size() + taskGrammar + " in the list.";
     }
 
     /**

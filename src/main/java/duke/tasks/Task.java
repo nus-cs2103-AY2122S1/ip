@@ -29,7 +29,14 @@ public class Task {
      * Marks task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
+    }
+
+    /**
+     * Returns done status of task.
+     */
+    public boolean isDone() {
+        return isDone;
     }
 
     /**
@@ -39,6 +46,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 }

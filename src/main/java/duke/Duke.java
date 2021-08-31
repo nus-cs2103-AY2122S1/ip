@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.parser.Parser;
@@ -17,6 +16,9 @@ import duke.ui.Ui;
 
 public class Duke {
 
+    /** Path to data storage file. */
+    private static final String LOCATION_OF_FILE = "data.txt";
+
     /** Handles loading and saving of Tasks. */
     private final Storage storage;
 
@@ -26,54 +28,53 @@ public class Duke {
     /** Handles interactions with users. */
     private final Ui ui;
 
+    /** Parses commands by users for Duke to understand. */
+    private final Parser parser;
+
     /**
-     * Constructor for the DUke chatbot.
+     * Constructor for the Duke chatbot.
      * Loads any pre-existing data from the provided filePath.
-     *
-     * @param filePath path to the data storage file
      */
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(LOCATION_OF_FILE);
 
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException | DukeException e) {
             tasks = new TaskList();
-            Ui.printMessage(e.getMessage());
+            ui.printMessage(e.getMessage());
+        } finally {
+            parser = new Parser(tasks, ui, storage);
         }
     }
 
     /**
-     * Runs the Duke chat bot.
+     * Runs the command line version of the Duke chat bot.
      */
 
     private void run() {
 
-        Parser parser = new Parser(tasks);
-
-        ui.greet();
-
         String input;
-        Scanner sc = new Scanner(System.in);
+
+        ui.printMessage(Ui.greet());
 
         /* user input trimmed to remove unwanted spaces at the front and back of user input
         allows for greater margin of error when typing in commands */
-        while (!(input = sc.nextLine().trim()).equals("bye")) {
+        while (!(input = ui.getNextLine()).equals("bye")) {
             // continuously runs the bot as long as the "bye" command is not issued
-            parser.handleCommands(input);
+            String response = parser.handleCommands(input);
+            ui.printMessage(response);
         }
-
-        sc.close();
 
         try {
             storage.save(tasks.getTaskList());
         } catch (IOException e) {
-            Ui.printMessage(e.getMessage());
+            ui.printMessage(e.getMessage());
         }
 
-        ui.exit();
+        ui.printMessage(ui.exit());
     }
 
     /**
@@ -82,6 +83,14 @@ public class Duke {
      * @param args command line arguments.
      */
     public static void main(String[] args) {
-        new Duke("data.txt").run();
+        new Duke().run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return parser.handleCommands(input);
     }
 }

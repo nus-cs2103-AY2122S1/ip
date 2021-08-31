@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import duke.tasks.Task;
 
@@ -9,23 +10,32 @@ import duke.tasks.Task;
  */
 public class Ui {
 
+    private final Scanner sc;
+
+    /**
+     * Constructor for Ui.
+     */
+    public Ui() {
+        sc = new Scanner(System.in);
+    }
+
+    public String getNextLine() {
+        return sc.nextLine().trim();
+    }
+
     /**
      * Prints out a greeting for the user when the bot is first ran.
      */
-    public void greet() {
-        System.out.println("__________________________________");
-        System.out.println("Hello! I'm Duke.");
-        System.out.println("What can I do for you?");
-        System.out.println("__________________________________");
+    public static String greet() {
+        return "Hello! I'm Duke.\nWhat can I do for you?";
     }
 
     /**
      * Prints out a goodbye message when the bot is exited.
      */
-    public void exit() {
-        System.out.println("__________________________________");
-        System.out.println("Bye. Hope to see you again soon!");
-        System.out.println("__________________________________");
+    public String exit() {
+        sc.close();
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -33,7 +43,7 @@ public class Ui {
      *
      * @param message message to be printed.
      */
-    public static void printMessage(String message) {
+    public void printMessage(String message) {
         System.out.println("__________________________________");
         System.out.println(message);
         System.out.println("__________________________________");
@@ -44,8 +54,7 @@ public class Ui {
      *
      * @param tasks various tasks in an ArrayList.
      */
-    public static void printList(ArrayList<Task> tasks) {
-        System.out.println("__________________________________");
+    public static String printList(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             sb.append(i + 1);
@@ -55,8 +64,7 @@ public class Ui {
                 sb.append("\n");
             }
         }
-        System.out.println(sb);
-        System.out.println("__________________________________");
+        return sb.toString();
     }
 
 }

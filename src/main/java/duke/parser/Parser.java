@@ -1,5 +1,6 @@
 package duke.parser;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -10,6 +11,7 @@ import duke.exception.InvalidCommandException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.MessageEmptyException;
 import duke.exception.TaskNotFoundException;
+import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -21,16 +23,24 @@ import duke.ui.Ui;
 
 public class Parser {
 
-    /** List of tasks */
-    private final TaskList taskList;
+    /** List of tasks. */
+    private final TaskList tasks;
+
+    /** UI to handle user inputs. */
+    private final Ui ui;
+
+    /** Storage that handles saving and loading of the data file. */
+    private final Storage storage;
 
     /**
      * Constructor for Parser.
      *
-     * @param taskList list of tasks.
+     * @param tasks list of tasks.
      */
-    public Parser(TaskList taskList) {
-        this.taskList = taskList;
+    public Parser(TaskList tasks, Ui ui, Storage storage) {
+        this.tasks = tasks;
+        this.ui = ui;
+        this.storage = storage;
     }
 
     /**
@@ -40,26 +50,26 @@ public class Parser {
      * @param input The entire user input.
      */
 
-    public void handleCommands(String input) {
+    public String handleCommands(String input) {
         // isolates the command word
         String[] words = input.split(" ");
         String command = words[0];
 
         try {
             switch (command) {
+            case "bye": // only applicable to GUI Duke
+                storage.save(tasks.getTaskList());
+                return ui.exit();
             case "list":
-                taskList.displayList();
-                break;
+                return tasks.displayList();
             case "done":
                 if (words.length == 1) {
                     // throws an error if there is no message input after the command word
                     throw new MessageEmptyException();
                 }
-
                 // extracts index of task to mark as done
                 String doneTaskIndex = words[words.length - 1];
-                taskList.markDone(doneTaskIndex);
-                break;
+                return tasks.markDone(doneTaskIndex);
             case "deadline":
                 if (words.length == 1) {
                     // throws an error if there is no message input after the command word
@@ -67,65 +77,71 @@ public class Parser {
                 }
                 try {
                     // excludes command "deadline " from the string
-                    taskList.addDeadline(input.substring(9));
+                    return tasks.addDeadline(input.substring(9));
                 } catch (InvalidDateTimeException | MessageEmptyException | IncorrectFormatException e) {
-                    System.out.println(e.getMessage());
+                    return e.getMessage();
                 }
-                break;
             case "todo":
                 if (words.length == 1) {
                     // throws an error if there is no message input after the command word
                     throw new MessageEmptyException();
                 }
-
                 // excludes command "todo" from the string
-                taskList.addTodo(input.substring(5));
-                break;
+                return tasks.addTodo(input.substring(5));
             case "event":
                 if (words.length == 1) {
                     // throws an error if there is no message input after the command word
                     throw new MessageEmptyException();
                 }
                 // excludes command "event" from the string
-                taskList.addEvent(input.substring(6));
-                break;
+                return tasks.addEvent(input.substring(6));
             case "delete":
                 if (words.length == 1) {
                     // throws an error if there is no message input after the command word
                     throw new MessageEmptyException();
                 }
-
                 // extracts index of task to delete
                 String deleteTaskIndex = words[words.length - 1];
-                taskList.deleteTask(deleteTaskIndex);
-                break;
+                return tasks.deleteTask(deleteTaskIndex);
             case "find":
-                if (words.length == 1) {
-                    throw new MessageEmptyException();
-                }
-
-                ArrayList<String> isolateCommand = new ArrayList<>(Arrays.asList(words));
-
-                // remove "find"
-                isolateCommand.remove(0);
-
-                String query = String.join(" ", isolateCommand);
-
-                ArrayList<Task> matchedTasks = taskList.findTask(query);
-
-                if (matchedTasks.size() == 0) {
-                    throw new TaskNotFoundException();
-                }
-
-                Ui.printList(matchedTasks);
-                break;
+                ArrayList<Task> matchedTasks = findCommand(words);
+                return Ui.printList(matchedTasks);
             case "": // empty user input
                 throw new EmptyCommandException();
             default: // all other inputs that are not supported
                 throw new InvalidCommandException();
             }
-        } catch (DukeException e) {
-            Ui.printMessage(e.getMessage());
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
         }
+    }
+
+    /**
+     * Processes the find command.
+     *
+     * @param words words to be found.
+     * @return ArrayList of Tasks that match the words to be found.
+     * @throws MessageEmptyException if no words are given after the command.
+     * @throws TaskNotFoundException if no tasks of the specified query can be found.
+     */
+    private ArrayList<Task> findCommand(String[] words) throws MessageEmptyException, TaskNotFoundException {
+        if (words.length == 1) {
+            throw new MessageEmptyException();
+        }
+
+        ArrayList<String> isolateCommand = new ArrayList<>(Arrays.asList(words));
+
+        // remove "find"
+        isolateCommand.remove(0);
+
+        String query = String.join(" ", isolateCommand);
+
+        ArrayList<Task> matchedTasks = tasks.findTask(query);
+
+        if (matchedTasks.size() == 0) {
+            throw new TaskNotFoundException();
+        }
+
+        return matchedTasks;
     }
 }
