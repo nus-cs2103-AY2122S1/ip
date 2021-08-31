@@ -25,6 +25,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs a DialogBox.
+     *
+     * @param text The text to be inputted into the DialogBox.
+     * @param img The image associated with the "sender" of the text.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(duke.ui.MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,10 +55,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * This presents the UserDialog in the form of a DialogBox.
+     *
+     * @param text The text inputted by the user.
+     * @param img The image representative of the user.
+     * @return the user's dialogue in the form of a DialogBox.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * This presents the Robot's Dialog in the form of a DialogBox.
+     *
+     * @param text The text outputted by the robot.
+     * @param img The image representative of the robot.
+     * @return the robot's dialogue in the form of a DialogBox.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

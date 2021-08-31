@@ -1,7 +1,12 @@
+/**
+ * This function is responsible for the Main Window of the GUI.
+ *
+ * @author Megan Wee Rui En
+ * @version CS2103T AY21/22 Semester 1
+ */
+
 package duke.ui;
 
-import duke.DialogBox;
-import duke.exceptions.DukeExceptions;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,14 +15,19 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import duke.DialogBox;
 import duke.Duke;
+import duke.exceptions.DukeExceptions;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private Duke duke;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -27,16 +37,24 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private final Image userImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/DaUser.png")));
+    private final Image dukeImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/DaDuke.png")));
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
+    /**
+     * Initialises a dialog container.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Assigns parameter d to the duke attribute to param d.
+     *
+     * @param d The duke object the attribute duke will be assigned to.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

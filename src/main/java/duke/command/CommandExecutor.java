@@ -1,12 +1,17 @@
+/**
+ * This function interprets the user command and invokes the corresponding commands.
+ *
+ * @author Megan Wee Rui En
+ * @version CS2103T AY21/22 Semester 1
+ */
+
 package duke.command;
+
+import java.io.IOException;
 
 import duke.exceptions.CommandDoesNotExist;
 import duke.exceptions.DukeExceptions;
 import duke.parser.Parser;
-
-import java.io.IOException;
-import java.util.Scanner;
-
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
@@ -18,6 +23,13 @@ public class CommandExecutor {
     private final Storage storage;
     private final TaskList taskList;
 
+    /**
+     * Contructs a CommandExecutor object.
+     *
+     * @param storage Handles the storage and retrieval of information from a file.
+     * @param ui Handles user interface.
+     * @param taskList Handles the list of tasks.
+     */
     public CommandExecutor(Storage storage, Ui ui, TaskList taskList) {
         this.command = new Command(storage, ui);
         this.ui = ui;
@@ -26,14 +38,17 @@ public class CommandExecutor {
     }
 
     /**
-     * This function is the body of the chat bot, and contains the flow and commands.
+     * Interprets the user input and executes the corresponding commands.
+     *
+     * @param userCommand The user input.
+     * @return A String for the robot to output in response to the user input.
+     * @throws DukeExceptions If there are errors with processing the user input.
+     * @throws IOException If there are errors processing the file.
      */
     public String execute(String userCommand) throws DukeExceptions, IOException {
-        ui.showWelcome();
-        String cmd; // this is the container for the first word of the command received from the user
-
+        ui.showWelcome(); // TODO print the welcome messages before the user starts
         Parser parser = new Parser(userCommand);
-        cmd = parser.getFirstWord();
+        String cmd = parser.getFirstWord(); // the first word of the command received from the user
 
         // 'bye' : Ends the program
         if (userCommand.equals("bye") || cmd.equals("bye")) {
@@ -51,6 +66,7 @@ public class CommandExecutor {
         } else if (cmd.equals("delete")) {
             return command.delete(userCommand, taskList);
 
+            // 'find' [String] : finds all matching instances and prints them
         } else if (cmd.equals("find")) {
             return command.find(userCommand, taskList);
 
@@ -65,6 +81,7 @@ public class CommandExecutor {
         } else if (cmd.equals("event")) {
             return command.addEvent(userCommand, cmd, taskList);
 
+            // If the command did not match the previous commands, throw an error
         } else {
             throw new CommandDoesNotExist(userCommand);
         }

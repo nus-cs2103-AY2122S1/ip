@@ -97,6 +97,8 @@ public class Command {
 
     /**
      * Logs the goodbye message.
+     *
+     * @return The bot's output for the bye command.
      */
     public String bye() {
         return ui.showBye();
@@ -107,8 +109,9 @@ public class Command {
      *
      * @param userCommand The command inputted from the user
      * @param taskList The task list which contains the tasks
-     * @throws NotDoneRightException
-     * @throws IOException
+     * @return The bot's output for the delete command.
+     * @throws NotDoneRightException If there are errors processing the "done" command.
+     * @throws IOException If there are errors processing the file.
      */
     public String delete(String userCommand, TaskList taskList) throws NotDoneRightException, IOException {
         Parser parser = new Parser(userCommand);
@@ -124,8 +127,9 @@ public class Command {
      *
      * @param userCommand The command inputted from the user
      * @param taskList The task list which contains the tasks
-     * @throws NotDoneRightException
-     * @throws IOException
+     * @return The bot's output for the done command.
+     * @throws NotDoneRightException If there are errors processing the "done" command.
+     * @throws IOException If there are errors processing the file.
      */
     public String done(String userCommand, TaskList taskList) throws IOException, NotDoneRightException {
         Parser parser = new Parser(userCommand);
@@ -149,7 +153,8 @@ public class Command {
      *
      * @param userCommand The command inputted from the user
      * @param taskList The task list which contains the tasks
-     * @throws EmptyDescriptionException
+     * @return The bot's output for the find command.
+     * @throws EmptyDescriptionException If the user input is missing extra information after the command.
      */
     public String find(String userCommand, TaskList taskList) throws EmptyDescriptionException {
         Parser parser = new Parser(userCommand);
@@ -161,6 +166,7 @@ public class Command {
      * Lists all the items in the task list.
      *
      * @param taskList The task list which contains the tasks.
+     * @return The bot's output for the list command.
      */
     public String list(TaskList taskList) {
         return ui.showList(taskList);
