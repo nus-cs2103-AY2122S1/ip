@@ -2,7 +2,6 @@ package duke;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
-
 /**
  * DukeMan is a new update from the Duke program previously. It manages the tasks of the user.
  *
@@ -14,6 +13,16 @@ public class DukeMan {
     private Storage storage;
     private taskList tasks;
     private Ui ui;
+
+    public DukeMan() {
+        System.out.println("hello");
+    }
+
+    void filter(String ... keywords) {
+
+        String x = keywords[0];
+
+    }
 
     /**
      * this is the constructor for the DukeMan function. the input of the program is the
