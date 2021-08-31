@@ -22,10 +22,8 @@ public class Duke {
         this.window = window;
         try {
             tasks = storage.readSave();
-        } catch (EOFException e) {
-            window.addDialogsInChatBox(window.dukeDialog(Ui.NEW_SAVE_STRING));
         } catch (IOException | ClassNotFoundException e) {
-            window.addDialogsInChatBox(window.dukeDialog(Ui.READ_SAVE_STRING));
+            System.out.println(e);
         }
     }
 
