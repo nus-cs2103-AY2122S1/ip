@@ -17,7 +17,8 @@ public class DoneCommand extends Command{
     }
 
     /**
-     * Method that checks if the bot needs to exit
+     * Checks if the bot needs to exit
+     *
      * @return whether the bot should exit
      */
     @Override
@@ -26,8 +27,9 @@ public class DoneCommand extends Command{
     }
 
     /**
-     * Method that executes the parsing of user input and the message
+     * Executes the parsing of user input and the message
      * to print to the command line
+     *
      * @param tasks the current list of tasks
      * @param ui the ui that interacts with the user
      * @param storage the place where the list of tasks will be stored

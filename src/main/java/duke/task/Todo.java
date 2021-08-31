@@ -8,12 +8,14 @@ public class Todo extends Task {
 
     /**
      * Checks if the task is marked as done.
+     *
      * @return if the task is marked as done.
      */
     public boolean getIsDone() { return this.isDone;}
 
     /**
      * Retrieves the description of the task instance.
+     *
      * @return the string description of the task
      */
     public String getDescription() { return this.description; }

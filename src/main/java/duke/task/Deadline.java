@@ -20,18 +20,21 @@ public class Deadline extends Task {
 
     /**
      * Checks if the task is marked as done.
+     *
      * @return if the task is marked as done.
      */
     public boolean getIsDone() { return this.isDone;}
 
     /**
      * Retrieves the description of the task instance.
+     *
      * @return the string description of the task
      */
     public String getDescription() { return this.description; }
 
     /**
      * Returns the date that the deadline should be done by
+     *
      * @return a string of the date
      */
     public String getBy() {return this.by;}

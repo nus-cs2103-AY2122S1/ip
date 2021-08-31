@@ -30,8 +30,9 @@ public class Storage {
     }
 
     /**
-     * Method that will load the existing (if any) list of tasks from
-     * the user's hard disk. If the file does not exist, one will be made.
+     * Loads the existing (if any) list of tasks from the user's
+     * hard disk. If the file does not exist, one will be made.
+     *
      * @return the list of tasks from the file
      * @throws FileNotFoundException if the file is not found
      */
@@ -75,7 +76,7 @@ public class Storage {
     }
 
     /**
-     * A method to update the file stored on the user's hard disk once
+     * Updates the file stored on the user's hard disk once
      * the user ends the usage of the bot.
      */
     public void updateFile(TaskList tasks) {
@@ -115,7 +116,6 @@ public class Storage {
             allLines += System.lineSeparator();
         }
         try {
-//        try (BBufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND)ufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND)) {
             tasksFile.createNewFile();
             FileWriter writer = new FileWriter(tasksFile, false);
             writer.write(allLines);

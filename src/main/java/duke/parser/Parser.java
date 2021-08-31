@@ -13,8 +13,10 @@ import java.util.regex.Pattern;
 public class Parser {
     private static final Pattern pattern = Pattern.compile("-?\\d+(\\.\\d+)?");
     private static TaskList tasks;
+
     /**
-     * The main method to decide which parsing is needed for the user input
+     * Decides which parsing is needed for the user input
+     *
      * @param input the input keyed in by user
      * @return the type of command the input is
      * @throws DukeException if the users enter a wrong input
@@ -53,7 +55,8 @@ public class Parser {
     }
 
     /**
-     * A method that parses users inputs that wishes to mark a task as done
+     * Parses users inputs that wishes to mark a task as done
+     *
      * @param input the user's input
      * @return the index of the task user wishes to mark as done
      * @throws DukeException if the user's input is in an wrong format
@@ -75,7 +78,8 @@ public class Parser {
     }
 
     /**
-     * A method that parses users inputs that wishes to delete a task
+     * Parses users inputs that wishes to delete a task
+     *
      * @param input the user's input
      * @return the index of the task user wishes to delete
      * @throws DukeException if the user's input is in an wrong format
@@ -93,7 +97,8 @@ public class Parser {
     }
 
     /**
-     * A method that parses users inputs that wishes to add a todo task
+     * Parses users inputs that wishes to add a todo task
+     *
      * @param input the user's input
      * @return the task that the user added
      * @throws DukeException if the user's input is in an wrong format
@@ -114,7 +119,8 @@ public class Parser {
     }
 
     /**
-     * A method that parses users inputs that wishes to add a deadline task
+     * Parses users inputs that wishes to add a deadline task
+     *
      * @param input the user's input
      * @return the task that the user added
      * @throws DukeException if the user's input is in an wrong format
@@ -130,7 +136,8 @@ public class Parser {
     }
 
     /**
-     * A method that parses users inputs that wishes to add a event task
+     * Parses users inputs that wishes to add a event task
+     *
      * @param input the user's input
      * @return the task that the user added
      * @throws DukeException if the user's input is in an wrong format

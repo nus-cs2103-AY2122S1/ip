@@ -49,7 +49,7 @@ public class Duke {
     }
 
     /**
-     * Method to call when user wishes to see a list of all events
+     * Starts the bot
      */
     public static void main(String[] args) {
         new Duke(FILE_PATH).run();
