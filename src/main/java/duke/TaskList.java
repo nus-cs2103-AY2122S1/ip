@@ -36,60 +36,67 @@ public class TaskList {
 
     /**
      * Instructs the Ui to display the current task list.
+     *
+     * @return String representing the displayed list.
      */
-    public void showList() {
-        ui.showList(list);
+    public String showList() {
+        return ui.showList(list);
     }
 
     /**
      * Sets the task with the given index to done.
      *
      * @param index The index of the task to be set to done.
+     * @return String representing the setting of the task to done.
      */
-    public void setTaskDone(int index) {
+    public String setTaskDone(int index) {
         Task toSetDone = list.get(index);
         storage.setDbEntryDone(toSetDone.databaseEntry());
         toSetDone.setDone();
-        ui.showDone(toSetDone);
+        return ui.showDone(toSetDone);
     }
 
     /**
      * Deletes the task with the given index.
      *
      * @param index The index of the task to be deleted.
+     * @return String representing the task being deleted.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         Task deleted = list.remove(index);
         storage.deleteDbEntry(deleted.databaseEntry());
-        ui.showDelete(deleted, list.size());
+        return ui.showDelete(deleted, list.size());
     }
 
     /**
      * Instructs the Ui to display a list of tasks that take place on the given date.
      *
      * @param desiredDate The date used to find tasks.
+     * @return String representing the displayed list.
      */
-    public void findTasksByDate(LocalDate desiredDate) {
-        ui.showDateFind(list, list.size(), desiredDate);
+    public String findTasksByDate(LocalDate desiredDate) {
+        return ui.showDateFind(list, list.size(), desiredDate);
     }
 
     /**
      * Instructs the Ui to display a list of tasks that contain the given keyword.
      *
      * @param keyword The keyword to look for in task names.
+     * @return String representing the displayed list.
      */
-    public void findTasksByKeyword(String keyword) {
-        ui.showKeywordFind(list, list.size(), keyword);
+    public String findTasksByKeyword(String keyword) {
+        return ui.showKeywordFind(list, list.size(), keyword);
     }
 
     /**
      * Adds the given task to the task list.
      *
      * @param newTask The task to be added to the task list.
+     * @return String representing the task being added to the list.
      */
-    public void addTask(Task newTask) {
+    public String addTask(Task newTask) {
         list.add(newTask);
         storage.addDbEntry(newTask.databaseEntry());
-        ui.showAdd(newTask, list.size());
+        return ui.showAdd(newTask, list.size());
     }
 }

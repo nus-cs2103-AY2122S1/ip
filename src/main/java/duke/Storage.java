@@ -52,7 +52,7 @@ public class Storage {
 
         try {
             // Display initialisation message
-            ui.showOpenLine();
+            ui.showLine();
             ui.showInitialise();
             if (direc.mkdirs()) {
                 ui.showNewDataDirectory();
@@ -60,7 +60,7 @@ public class Storage {
             if (duke.createNewFile()) {
                 ui.showNewHardDisk();
             }
-            ui.showCloseLine();
+            ui.showLine();
 
             // Initialise file reader
             BufferedReader reader = new BufferedReader(new FileReader(duke));

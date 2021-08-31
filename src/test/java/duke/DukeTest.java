@@ -18,19 +18,19 @@ public class DukeTest {
      */
     @Test
     public void testBye() {
-        
+
         ByteArrayInputStream newIn = new ByteArrayInputStream("bye".getBytes());
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
-        
+
         System.setIn(newIn);
         System.setOut(new PrintStream(newOut));
-        
+
         Duke.main(new String[0]);
-        
+
         String expected = "  __________________________________________________________________\n"
                 + "  Loading Duke...\n"
                 + "  __________________________________________________________________\n"
-                + "\n" 
+                + "\n"
                 + "  __________________________________________________________________\n"
                 + "  Hello! I'm Duke.\n"
                 + "  What's up?\n"
@@ -40,7 +40,7 @@ public class DukeTest {
                 + "  See you next time!\n"
                 + "  __________________________________________________________________\n"
                 + "\n";
-        
+
         assertEquals(expected, newOut.toString());
     }
 
@@ -84,7 +84,7 @@ public class DukeTest {
      */
     @Test
     public void testAddDeadline_invalidDesc_success() {
-        
+
         ByteArrayInputStream newIn = new ByteArrayInputStream("deadline\nbye".getBytes());
         ByteArrayOutputStream newOut = new ByteArrayOutputStream();
 

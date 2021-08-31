@@ -20,8 +20,9 @@ public abstract class Command {
      * Executes the command.
      *
      * @param taskList The TaskList used in the command.
+     * @return String representing the task being executed.
      */
-    public abstract void execute(TaskList taskList);
+    public abstract String execute(TaskList taskList);
 
     public boolean isBye() {
         return isBye;

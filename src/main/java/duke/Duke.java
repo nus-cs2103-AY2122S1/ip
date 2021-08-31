@@ -8,6 +8,16 @@ import java.io.InputStream;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Represents the main Duke program. Running this class's main function executes the program.
  */
@@ -16,8 +26,21 @@ public class Duke {
     private final Ui ui;
     private final TaskList taskList;
 
+    private ScrollPane scrollPane;
+    private TextField userInput;
+
     /**
-     * Constructor for the Duke program.
+     * Default constructor for the Duke program.
+     * Uses filepath data/duke.txt by default.
+     */
+    public Duke() {
+        ui = new Ui();
+        Storage storage = new Storage("data", "duke.txt");
+        taskList = new TaskList(storage);
+    }
+
+    /**
+     * Constructor for the Duke program with custom filepath.
      *
      * @param fileDirectory Directory of the hard disk.
      * @param fileName The hard disk.
@@ -46,8 +69,9 @@ public class Duke {
             try {
                 // performing action based on user command
                 ui.showInputPrompt();
-                String fullCommand = ui.readCommand(input);
-                ui.showOpenLine();
+                ui.readCommand(input);
+                String fullCommand = userInput.getText();
+                ui.showLine();
                 Command c = Parser.parse(fullCommand, taskList);
                 c.execute(taskList);
                 isBye = c.isBye();
@@ -62,14 +86,34 @@ public class Duke {
                 ui.showException(new DukeException(DukeExceptionType.INVALID_DATETIME));
 
             } finally {
-                ui.showCloseLine();
+                ui.showLine();
             }
         }
 
         input.close();
     }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input, taskList);
+            return c.execute(taskList);
+
+        } catch (DukeException e) {
+            return ui.showException(e);
+
+        } catch (NumberFormatException e) {
+            return ui.showException(new DukeException(DukeExceptionType.INVALID_TASK_INDEX));
+
+        } catch (DateTimeParseException e) {
+            return ui.showException(new DukeException(DukeExceptionType.INVALID_DATETIME));
+        }
+    }
+
     public static void main(String[] args) {
-        new Duke("data", "duke.txt").run(System.in);
+        new Duke().run(System.in);
     }
 }

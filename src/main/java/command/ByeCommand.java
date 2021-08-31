@@ -21,9 +21,10 @@ public class ByeCommand extends Command {
      * Executes the command of closing the program.
      *
      * @param taskList TaskList not used in this execution.
+     * @return String representing the closing of the program.
      */
     @Override
-    public void execute(TaskList taskList) {
-        ui.showBye();
+    public String execute(TaskList taskList) {
+        return ui.showBye();
     }
 }

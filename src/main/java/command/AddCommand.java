@@ -23,9 +23,10 @@ public class AddCommand extends Command {
      * Executes the command of adding the task to the given task list.
      *
      * @param taskList The task list to which the task is added.
+     * @return String representing the task being added to the list.
      */
     @Override
-    public void execute(TaskList taskList) {
-        taskList.addTask(newTask);
+    public String execute(TaskList taskList) {
+        return taskList.addTask(newTask);
     }
 }
