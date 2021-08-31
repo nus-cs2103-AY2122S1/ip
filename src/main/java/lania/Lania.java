@@ -5,16 +5,9 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import lania.command.Command;
 import lania.exception.LaniaException;
@@ -23,7 +16,7 @@ import lania.task.TaskList;
 /**
  * Represents the chatbot Lania that helps manage your tasks.
  */
-public class Lania extends Application {
+public class Lania {
 
     /** Contains the task list */
     private TaskList tasks;
@@ -101,11 +94,5 @@ public class Lania extends Application {
     public static void main(String[] args) {
         Lania lania = new Lania("data/lania.txt");
         lania.run();
-    }
-
-    @Override
-    public void start(Stage stage) {
-        Gui gui = new Gui(stage, tasks, ui, storage, parser);
-        gui.runGui();
     }
 }

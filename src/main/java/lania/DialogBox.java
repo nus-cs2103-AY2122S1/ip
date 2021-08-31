@@ -2,38 +2,42 @@ package lania;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
+
+import java.io.IOException;
 
 //@@author nguyiyang-reused
 //Reused from https://se-education.org/guides/tutorials/javaFx.html
 // with minor modifications
 public class DialogBox extends HBox {
 
-    private Label text;
+    @FXML
+    private Label dialog;
+    @FXML
     private ImageView displayPicture;
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
-        displayPicture.setClip(new Circle(50, 50, 50));
-        text.setPadding(new Insets(0, 10, 0, 10));
-
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
-        this.setPadding(new Insets(10, 0, 10, 0));
+        dialog.setText(text);
+        displayPicture.setImage(img);
     }
 
     private void flip() {
@@ -43,17 +47,17 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        DialogBox UserDialogBox = new DialogBox(l, iv);
-        UserDialogBox.setDialogBoxBackgroundColor("#ff9191");
-        return UserDialogBox;
+    public static DialogBox getUserDialog(String l, Image image) {
+        DialogBox userDialogBox = new DialogBox(l, image);
+        userDialogBox.setDialogBoxBackgroundColor("#ff9191");
+        return userDialogBox;
     }
 
-    public static DialogBox getLaniaDialog(Label l, ImageView iv) {
-        DialogBox LaniaDialogBox = new DialogBox(l, iv);
-        LaniaDialogBox.flip();
-        LaniaDialogBox.setDialogBoxBackgroundColor("#ffe591");
-        return LaniaDialogBox;
+    public static DialogBox getLaniaDialog(String l, Image image) {
+        DialogBox laniaDialogBox = new DialogBox(l, image);
+        laniaDialogBox.flip();
+        laniaDialogBox.setDialogBoxBackgroundColor("#ffe591");
+        return laniaDialogBox;
     }
 
     private void setDialogBoxBackgroundColor(String hexValue) {
