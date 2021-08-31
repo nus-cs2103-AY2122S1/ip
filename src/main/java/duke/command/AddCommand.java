@@ -1,16 +1,16 @@
-package duke.Command;
+package duke.command;
+
+import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents user command to add a task to the TaskList.
@@ -47,12 +47,12 @@ public class AddCommand extends Command {
             try {
                 String task = input.substring(6);
                 int split = task.indexOf("/at");
-                String description = task.substring(0,split);
-                String at = task.substring(split+4);
+                String description = task.substring(0, split);
+                String at = task.substring(split + 4);
                 this.task = new Event(description, at);
             } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
                 throw new DukeException("Invalid format. Please try again.\n");
-            }  catch (DateTimeParseException e) {
+            } catch (DateTimeParseException e) {
                 throw new DukeException("Please enter the date and time with format [yyyy-mm-dd HH:mm].\n");
             }
         }

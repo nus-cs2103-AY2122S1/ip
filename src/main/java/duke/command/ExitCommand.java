@@ -1,4 +1,4 @@
-package duke.Command;
+package duke.command;
 
 import duke.DukeException;
 import duke.Storage;
@@ -6,12 +6,13 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Represents the user command to output all the tasks in the TaskList.
+ * Represents the user command to exit the program.
  */
-public class ListCommand extends Command {
+public class ExitCommand extends Command {
 
     /**
-     * Executes the list command. Each task in the TaskList is printed in order.
+     * Executes the exit command. A goodbye message is shown to the user, then the tasks
+     * from the TaskList are written and saved into the file.
      *
      * @param taskList A TaskList object that contains an arraylist of Task objects.
      * @param ui A Ui object that deals with interactions with the user.
@@ -19,15 +20,16 @@ public class ListCommand extends Command {
      */
     @Override
     public void runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.printTasks(taskList);
+        ui.showGoodbye();
+        storage.save(taskList);
     }
 
     /**
      * Indicates if the command ends the program after executing.
-     * @return false
+     * @return true
      */
     @Override
     public boolean isExit() {
-        return false;
+        return true;
     }
 }

@@ -1,6 +1,14 @@
 package duke;
 
-import duke.Command.*;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+
 
 /**
  * Class to handle the input commands of the user.
@@ -23,9 +31,9 @@ public class Parser {
             return new DeleteCommand(input);
         } else if (input.toUpperCase().startsWith("FIND")) {
             return new FindCommand(input);
-        } else if (input.toUpperCase().startsWith("TODO") ||
-                input.toUpperCase().startsWith("DEADLINE") ||
-                input.toUpperCase().startsWith("EVENT")) {
+        } else if (input.toUpperCase().startsWith("TODO")
+                || input.toUpperCase().startsWith("DEADLINE")
+                || input.toUpperCase().startsWith("EVENT")) {
             return new AddCommand(input);
 
         } else {

@@ -1,28 +1,34 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.task.Task;
+import duke.task.Todo;
+
+
+
+
 
 public class TaskListTest {
     @Test
-    public void isEmptyTest(){
+    public void isEmptyTest() {
         assertTrue(new TaskList().isEmpty());
     }
 
     @Test
-    public void toStringTest(){
+    public void toStringTest() {
         ArrayList<Task> testList = new ArrayList<>();
         testList.add(new Todo("Test"));
         assertEquals(String.format("1.[T][ ] Test%n"), new TaskList(testList).toString());
     }
 
     @Test
-    public void getSizeTest(){
+    public void getSizeTest() {
         ArrayList<Task> testList = new ArrayList<>();
         testList.add(new Todo("Test1"));
         testList.add(new Todo("Test2"));

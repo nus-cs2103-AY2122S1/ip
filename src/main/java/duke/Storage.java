@@ -1,20 +1,19 @@
 package duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Class to handle loading and storing tasks in the file specified.
@@ -30,7 +29,7 @@ public class Storage {
      * Reads the tasks contained in the file specified. If the file or directory
      * does not exist, a new empty file will be created.
      *
-     * @return ArrayList<Task> The ArrayList containing tasks from the file.
+     * @return ArrayList The ArrayList containing tasks from the file.
      * @throws DukeException If something is wrong with the file.
      */
     public ArrayList<Task> load() throws DukeException {

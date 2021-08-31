@@ -63,6 +63,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s %s hrs)",super.toString(),this.getDate(), this.getTime());
+        return String.format("[E]%s (at: %s %s hrs)", super.toString(), this.getDate(), this.getTime());
     }
 }

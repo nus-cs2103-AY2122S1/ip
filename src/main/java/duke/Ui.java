@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Class that deals with interacting with the users.
@@ -35,6 +35,7 @@ public class Ui {
                 + "deadline [Description] /by [yyyy-mm-dd]      - add deadline\n"
                 + "event [Description] /at [yyyy-mm-dd HH:mm]   - add event\n"
                 + "done [Task Number]                           - mark task as done\n"
+                + "find [Description]                           - search for task with word\n"
                 + "bye                                          - say goodbye\n";
         System.out.println(logo + greeting + "\n"
                 + usage);
@@ -115,7 +116,7 @@ public class Ui {
      *
      * @param taskList The TaskList object containing all tasks.
      */
-    public void showTaskListSize(TaskList taskList){
+    public void showTaskListSize(TaskList taskList) {
         System.out.printf("You have %d task(s) in the list.\n\n", taskList.getSize());
     }
 

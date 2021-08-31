@@ -1,6 +1,6 @@
 package duke;
 
-import duke.Command.Command;
+import duke.command.Command;
 
 /**
  * A chatbot that helps manages your tasks.

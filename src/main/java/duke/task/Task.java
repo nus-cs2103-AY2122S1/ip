@@ -24,7 +24,7 @@ public class Task {
      * @return String "X" if task is done and an empty string if task is not done.
      */
     public String getStatusIcon() {
-        return (isDone ? "X":" ");
+        return (isDone ? "X" : " ");
     }
 
     /**

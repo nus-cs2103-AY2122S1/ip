@@ -1,8 +1,9 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 
-import java.util.ArrayList;
 
 /**
  * Class that modifies and keeps track of the ArrayList of tasks.
@@ -16,7 +17,7 @@ public class TaskList {
      *
      * @param taskList An existing arraylist of tasks.
      */
-    public TaskList(ArrayList<Task> taskList){
+    public TaskList(ArrayList<Task> taskList) {
         this.tasks = taskList;
     }
 
@@ -99,7 +100,7 @@ public class TaskList {
 
     /**
      * Searches the arraylist for tasks that contain the filter string.
-     * 
+     *
      * @param filter The string to search for.
      * @return TaskList object that contains the arraylist of tasks that match the filter.
      */
@@ -108,7 +109,7 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task.getDescription().contains(filter)) {
-               searchResult.add(task);
+                searchResult.add(task);
             }
         }
         return new TaskList(searchResult);
@@ -121,7 +122,7 @@ public class TaskList {
      */
     public String toSave() {
         String saveTasks = "";
-        for (int i = 0; i<tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             String taskToWrite = tasks.get(i).toWrite();
             saveTasks = saveTasks.concat(taskToWrite + "\n");
         }
