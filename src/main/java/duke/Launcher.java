@@ -1,0 +1,16 @@
+package duke;
+
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
+
+import java.io.File;
+
+/**
+ * A launcher class to workaround classpath issues.
+ */
+public class Launcher {
+    public static void main(String[] args) {
+        Application.launch(Duke.class, args);
+    }
+}

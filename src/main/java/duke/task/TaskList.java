@@ -1,5 +1,8 @@
 package duke.task;
 
+import duke.Gui;
+import duke.Ui;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +14,8 @@ import java.util.List;
 public class TaskList {
     
     private List<Task> items = new ArrayList<>(100);
+    private Ui ui = new Ui();
+    private Gui gui = new Gui();
 
     /**
      * Creates new TaskList instance.
@@ -24,13 +29,18 @@ public class TaskList {
     /**
      * Lists all the Tasks down in numerical form.
      */
-    public void list() {
+    public String list() {
+        String r = "";
         for (int i = 1; i <= items.size(); i++) {
-            System.out.println(i + ". "
-                    + items.get(i - 1).toString());
+            r = r + gui.dukeResponse(i + ". "
+                    + items.get(i - 1) + "\n".toString());
         }
-        System.out.println("");
+        r = r + gui.dukeResponse("");
+        return r;
     }
+    
+    
+    
 
     /**
      * Marks a specific task as done.
@@ -81,18 +91,19 @@ public class TaskList {
      * 
      * @param substring the user search request
      */
-    public void find(String substring){
+    public String find(String substring){
+        StringBuilder r = new StringBuilder();
         int list = 1;
         for(int i = 1; i <= items.size(); i++){
             if(this.getTask(i).description.contains(substring)){
-                System.out.println(list + ". " + items.get(i-1).toString());
+                r.append(gui.dukeResponse(list + ". " + items.get(i - 1)  + "\n".toString()));
                 list++;
             }
         }
         if(list == 1){
-            System.out.println("No such tasks found");
+            return gui.dukeResponse("No such tasks found");
         }
-        System.out.println("");
+        return r + gui.dukeResponse("");
     }
 
 }
