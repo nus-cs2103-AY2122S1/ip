@@ -22,7 +22,7 @@ public class Task {
     }
 
     /**
-     * Returns "X" if uncompleted and " " otherwise.
+     * Returns "X" if completed and " " otherwise.
      *
      * @return "X" or " " depending on status.
      */
@@ -47,7 +47,7 @@ public class Task {
     /**
      * Marks the task as done.
      */
-    public void markDone() {
+    public void markAsDone() {
         isDone = true;
     }
 

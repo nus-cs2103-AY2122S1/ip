@@ -98,7 +98,7 @@ public class Parser {
         case "delete":
             try {
                 int taskIdx = Integer.parseInt(suffix);
-                return Ui.DELETE_MSG + tl.delete(taskIdx);
+                return Ui.DELETE_MSG + tl.deleteTask(taskIdx);
             } catch (NumberFormatException e) {
                 throw new InvalidIndexException();
             }

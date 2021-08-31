@@ -9,10 +9,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 /**
  * An example of a custom control using FXML.
@@ -21,7 +22,9 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private TextFlow tf;
+    @FXML
+    private Text dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -39,6 +42,10 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    public Text getDialog() {
+        return dialog;
+    }
+
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -50,11 +57,16 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: mistyrose");
+        db.getDialog().setStyle("-fx-padding: 10 10 10 0");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: cornsilk");
+        db.getDialog().setStyle("-fx-padding: 10 0 0 10");
         db.flip();
         return db;
     }

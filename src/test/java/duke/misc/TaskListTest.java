@@ -15,7 +15,7 @@ class TaskListTest {
         Todo task = new Todo("bake cake");
         tl.addTask(task);
         try {
-            assertEquals(task.toString(), tl.delete(1));
+            assertEquals(task.toString(), tl.deleteTask(1));
         } catch (DukeException e) {
             fail();
         }

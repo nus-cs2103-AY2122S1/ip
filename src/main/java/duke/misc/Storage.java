@@ -31,7 +31,6 @@ public class Storage {
      */
     public ArrayList<Task> readData() throws IOException {
         ArrayList<Task> al = new ArrayList<>();
-
         if (!filePathExists) {
             return al;
         }
@@ -40,16 +39,16 @@ public class Storage {
         while (sc.hasNextLine()) {
             String data = sc.nextLine();
             String[] args = data.split(" // ");
-            Boolean isDone = Integer.parseInt(args[1]) != 0;
+            Boolean isTaskDone = Integer.parseInt(args[1]) != 0;
             switch(args[0]) {
             case "Todo":
-                al.add(new Todo(args[2], isDone));
+                al.add(new Todo(args[2], isTaskDone));
                 break;
             case "Event":
-                al.add(new Event(args[2], args[3], isDone));
+                al.add(new Event(args[2], args[3], isTaskDone));
                 break;
             case "Deadline":
-                al.add(new Deadline(args[2], args[3], isDone));
+                al.add(new Deadline(args[2], args[3], isTaskDone));
                 break;
             default:
                 break;

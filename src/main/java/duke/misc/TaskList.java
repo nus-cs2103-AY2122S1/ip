@@ -64,7 +64,7 @@ public class TaskList {
      * @return The String output by toString method of task to be added.
      * @throws DukeException In case the index of task is out of bounds.
      */
-    public String delete(int idx) throws DukeException {
+    public String deleteTask(int idx) throws DukeException {
         if (idx <= 0 || idx > tasks.size()) {
             throw new InvalidIndexException();
         }
@@ -84,7 +84,7 @@ public class TaskList {
         if (idx <= 0 || idx > tasks.size()) {
             throw new InvalidIndexException();
         }
-        tasks.get(idx - 1).markDone();
+        tasks.get(idx - 1).markAsDone();
         return tasks.get(idx - 1).toString();
     }
 
