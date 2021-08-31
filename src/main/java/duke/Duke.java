@@ -3,6 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.exception.DukeException;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -115,6 +116,9 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.setPadding(new Insets(10, 10, 10, 10));
+        dialogContainer.setSpacing(10);
         userInput.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -122,7 +126,6 @@ public class Duke extends Application {
         AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         // javaFx lifecycle hooks
         sendButton.setOnMouseClicked((event) -> processInput(userInput.getText()));
