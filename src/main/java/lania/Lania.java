@@ -30,8 +30,8 @@ public class Lania extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Lania.png"));
 
 
     /** Contains the task list */
@@ -142,7 +142,6 @@ public class Lania extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -158,7 +157,7 @@ public class Lania extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(new Label(ui.showGreetingMessage()), new ImageView(duke)));
+                DialogBox.getLaniaDialog(new Label(ui.showGreetingMessage()), new ImageView(duke)));
 
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -167,6 +166,7 @@ public class Lania extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
@@ -177,17 +177,17 @@ public class Lania extends Application {
             Label dukeText = new Label(c.execute(tasks, storage, ui));
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(userText, new ImageView(user)),
-                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                    DialogBox.getLaniaDialog(dukeText, new ImageView(duke))
             );
         } catch (LaniaException e) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(userText, new ImageView(user)),
-                    DialogBox.getDukeDialog(new Label(ui.showLaniaException(e)), new ImageView(duke))
+                    DialogBox.getLaniaDialog(new Label(ui.showLaniaException(e)), new ImageView(duke))
             );
         } catch (DateTimeParseException e) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(userText, new ImageView(user)),
-                    DialogBox.getDukeDialog(new Label(ui.showDateTimeException()), new ImageView(duke))
+                    DialogBox.getLaniaDialog(new Label(ui.showDateTimeException()), new ImageView(duke))
             );
         }
         userInput.clear();

@@ -120,7 +120,7 @@ public class Ui {
      */
     public String showLaniaException(LaniaException e) {
         System.out.println(e);
-        return e.getMessage();
+        return e.toString();
     }
 
     /**
