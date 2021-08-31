@@ -1,13 +1,13 @@
 package duke.gui;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -23,7 +23,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private Stage stage;
 
     @FXML
     public void initialize() {
@@ -33,12 +32,10 @@ public class MainWindow extends AnchorPane {
     /**
      * Initializes duke and welcome message when Gui opens.
      *
-     * @param d
-     * @param stage
+     * @param d A duke instance.
      */
-    public void setDuke(Duke d, Stage stage) {
+    public void setDuke(Duke d) {
         this.duke = d;
-        this.stage = stage;
         dialogContainer.getChildren().addAll(d.welcomeUser());
     }
 
