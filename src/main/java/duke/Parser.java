@@ -1,4 +1,5 @@
 package duke;
+
 /**
  * Encapsulates a Parser class. Parses user input into commands.
  */
@@ -23,7 +24,7 @@ public class Parser {
      */
     public String[] parseCommand(String command) throws DukeException {
         if (command.equals("bye")) {
-            return Ui.BYE_MSG;
+            return new String[] {Ui.BYE_MSG};
         } else if (command.equals("list")) {
             return tasks.getTaskStrings();
         } else if (command.startsWith("find ")) {
@@ -34,12 +35,12 @@ public class Parser {
             return tasks.deleteTask(Integer.parseInt(command.substring(7)) - 1);
         } else if (command.startsWith("todo")) {
             if (command.length() < 6) {
-                throw new DukeException("The description of a todo cannot be empty.");
+                throw new DukeException("Don't give me an empty todo!");
             }
             return tasks.addTask(new Todo(command.substring(5)));
         } else if (command.startsWith("deadline")) {
             if (command.length() < 10) {
-                throw new DukeException("The description of a deadline cannot be empty.");
+                throw new DukeException("Don't give me an empty deadline!");
             }
             int byIndex = command.indexOf("/by");
             if (byIndex == -1) {
@@ -50,7 +51,7 @@ public class Parser {
                 command.substring(byIndex + 4)));
         } else if (command.startsWith("event")) {
             if (command.length() < 7) {
-                throw new DukeException("The description of an event cannot be empty.");
+                throw new DukeException("Don't give me an empty event!");
             }
             int atIndex = command.indexOf("/at");
             if (atIndex == -1) {
@@ -60,7 +61,7 @@ public class Parser {
                 command.substring(6, atIndex - 1),
                 command.substring(atIndex + 4)));
         } else {
-            throw new DukeException("I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("What on earth does that mean? Are you okay?");
         }
     }
 }

@@ -1,9 +1,11 @@
 package duke;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
 /**
  * Encapsulates the storage for a Duke program.
  */
@@ -11,7 +13,7 @@ public class Storage {
     private final File cache;
 
     /**
-     * Constructs a Storage.
+     * Constructs a Storage object.
      *
      * @param filePath Path where cache is stored.
      */
@@ -39,15 +41,12 @@ public class Storage {
                     try {
                         if (scanner.hasNextLine()) {
                             String nextInput = scanner.nextLine();
-                            String[] resultMsg = parser.parseCommand(nextInput);
-                            if (Ui.isByeMsg(resultMsg)) {
-                                exit = true;
-                            }
+                            parser.parseCommand(nextInput);
                         } else {
                             exit = true;
                         }
                     } catch (DukeException e) {
-                        // Ignore previous invalid statements, continue adding tasks.
+                        // Skip invalid statements, continue adding tasks.
                     }
                 }
                 scanner.close();

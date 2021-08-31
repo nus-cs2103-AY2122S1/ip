@@ -1,17 +1,15 @@
 package duke;
-import java.util.Arrays;
-import java.util.Scanner;
+
 /**
  * Encapsulates the user interface. Scans for input and responds to user.
  */
 public class Ui {
 
-    public static final String[] WELCOME_MSG = new String[] {
-        "What's up, I'm duke!"
-    };
-    public static final String[] BYE_MSG = new String[] {"Bye mate!"};
+    public static final String WELCOME_MSG = "What's up, I'm duke!";
+    public static final String BYE_MSG = "Bye mate!";
     private final TaskList tasks;
     private final Storage storage;
+    private Parser parser;
 
     /**
      * Constructs a user interface.
@@ -25,56 +23,42 @@ public class Ui {
     }
 
     /**
-     * Runs the Ui and read input from the user.
+     * Initialize the user interface.
+     *
+     * @return Response as string.
      */
-    public void run() {
-        // Print a welcome message
-        printMsg(WELCOME_MSG);
-        // Let user input commands and take actions accordingly.
-        Scanner scanner = new Scanner(System.in);
-        Parser parser = new Parser(tasks);
-        boolean exit = false;
-        while (!exit) {
-            try {
-                if (scanner.hasNextLine()) {
-                    String command = scanner.nextLine();
-                    storage.cache(command);
-                    String[] resultMsg = parser.parseCommand(command);
-                    printMsg(resultMsg);
-                    if (isByeMsg(resultMsg)) {
-                        exit = true;
-                    }
-                } else {
-                    exit = true;
-                }
-            } catch (DukeException e) {
-                printMsg(new String[] {e.getMessage()});
-            }
-
-        }
-        scanner.close();
+    protected String initialize() {
+        parser = new Parser(tasks);
+        return WELCOME_MSG;
     }
 
-    /**
-     * Prints out an array of messages.
-     *
-     * @param msgs Messages to be printed, as a string array.
-     */
-    public static void printMsg(String[] msgs) {
-        System.out.println("    ---");
-        for (String msg : msgs) {
-            System.out.println("    " + msg);
+    protected String respond(String message) {
+        try {
+            storage.cache(message);
+            return formatResponse(parser.parseCommand(message));
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-        System.out.println("    ---");
+    }
+
+    protected static String formatResponse(String[] messages) {
+        String response = "";
+        for (int i = 0; i < messages.length; i++) {
+            response += messages[i];
+            if (i < messages.length - 1) {
+                response += "\n";
+            }
+        }
+        return response;
     }
 
     /**
      * Checks if a message is a terminating message.
      *
-     * @param msg Message string to be checked.
+     * @param message Message string to be checked.
      * @return Boolean describing if the message is terminal.
      */
-    public static boolean isByeMsg(String[] msg) {
-        return Arrays.equals(msg, BYE_MSG);
+    public static boolean isByeMsg(String message) {
+        return message.equals(BYE_MSG);
     }
 }

@@ -1,4 +1,5 @@
 package duke;
+
 import java.util.ArrayList;
 /**
  * Encapsulates a TaskList. Stores an array of tasks.
@@ -114,6 +115,4 @@ public class TaskList {
     private boolean isInvalidID(int id) {
         return id < 0 || id >= taskArray.size();
     }
-
-
 }

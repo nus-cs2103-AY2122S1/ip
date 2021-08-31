@@ -1,5 +1,8 @@
-hi
-todo 1234
-list
-bye
-bye
+todo Try listing all tasks using "list"
+todo Try adding a todo task using "todo [description]"
+todo Try adding an event using "event [description] /at YYYY-MM-DD"
+todo Try adding a deadline using "deadline [description] /by YYYY-MM-DD"
+todo Try marking a task as completed using "done [task number]"
+todo Try deleting a task as completed using "delete [task number]"
+todo Try finding a task using "find [search query]"
+todo Try exiting Duke using "bye"
