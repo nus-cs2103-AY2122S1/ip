@@ -22,18 +22,18 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Method which executes the deleting of the specific Task from the TaskList.
-     *
+     * Executes the delete Command, which deletes a Task from the list.
      * @param tasks The list of Task.
      * @param ui The Ui objects that handles input from user and output to user.
      * @param storage The Storage object that handles reading/writing of data.
+     * @return String The message to be displayed on successful delete.
      * @throws DukeException On index out of bounds.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             tasks.deleteTask(index);
-            ui.displayDeleteMessage(tasks, index);
+            return ui.displayDeleteMessage(tasks, index);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("\t List number out of range, please enter a valid number\n");
         }

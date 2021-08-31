@@ -13,20 +13,20 @@ import duke.main.Ui;
 public class SaveCommand extends Command {
 
     /**
-     * Method which executes the saving of Task in the TaskList to a data file.
-     *
+     * Executes the save command which saves the current TaskList to the datafile.
      * @param tasks The list of Task.
      * @param ui The Ui objects that handles input from user and output to user.
      * @param storage The Storage object that handles reading/writing of data.
-     * @throws DukeException On input error during writing to file.
+     * @return String The message to be displayed on successful save.
+     * @throws DukeException Unused.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             storage.writeCurrentData(tasks.getTasks());
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
-        ui.displaySaveMessage();
+        return ui.displaySaveMessage();
     }
 }

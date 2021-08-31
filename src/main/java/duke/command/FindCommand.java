@@ -21,9 +21,17 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Executes the find command which locates tasks that are similar to a keyword provided.
+     * @param tasks The list of Task.
+     * @param ui The Ui objects that handles input from user and output to user.
+     * @param storage The Storage object that handles reading/writing of data.
+     * @return String The list of Task that match the keyword.
+     * @throws DukeException Unused.
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         TaskList resultList = tasks.findMatchingTask(this.keyword);
-        ui.displayListOfTasks(resultList);
+        return ui.displayListOfTasks(resultList);
     }
 }

@@ -11,16 +11,15 @@ import duke.main.Ui;
 public class ExitCommand extends Command {
 
     /**
-     * Method which stops the program.
-     *
+     * Executes the exit command, which exit the application.
      * @param tasks The list of Task.
      * @param ui The Ui objects that handles input from user and output to user.
      * @param storage The Storage object that handles reading/writing of data.
+     * @return String The exit message.
      * @throws DukeException Unused.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.displayExitMessage();
-        System.exit(0);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.displayExitMessage();
     }
 }

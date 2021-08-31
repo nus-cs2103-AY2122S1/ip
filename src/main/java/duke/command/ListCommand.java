@@ -11,15 +11,15 @@ import duke.main.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Method which calls for the Ui to display the list of Task.
-     *
+     * Executes the list command which displays all the currently added Task in TaskList.
      * @param taskList
      * @param ui The Ui objects that handles input from user and output to user.
      * @param storage The Storage object that handles reading/writing of data.
+     * @return String The String representation of the full list of Task.
      * @throws DukeException Unused.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.displayListOfTasks(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return ui.displayListOfTasks(taskList);
     }
 }

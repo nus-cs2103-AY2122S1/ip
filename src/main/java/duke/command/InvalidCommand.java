@@ -11,15 +11,15 @@ import duke.main.Ui;
 public class InvalidCommand extends Command {
 
     /**
-     * Method which throws an error message indicating that the user has entered an invalid command.
-     *
+     * Executes the throwing of an error message when user entered an invalid command.
      * @param tasks The list of Task.
      * @param ui The Ui objects that handles input from user and output to user.
      * @param storage The Storage object that handles reading/writing of data.
+     * @return String Unused.
      * @throws DukeException Always as user has entered invalid command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String errorMessage = "\t Sorry I do not understand this command \n";
         errorMessage += "\t Please use one of the following commands: \n";
         errorMessage += "\t \t list - To list the added tasks so far\n";

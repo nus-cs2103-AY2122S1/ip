@@ -23,16 +23,16 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Method which executes the adding of Task to the list.
-     *
+     * Executes the add command, which adds a Task to the list.
      * @param tasks The list of Task.
      * @param ui The Ui objects that handles input from user and output to user.
      * @param storage The Storage object that handles reading/writing of data.
+     * @return String The message to display once add command has been completed.
      * @throws DukeException Unused.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(this.task);
-        ui.displayAddedMessage(this.task, tasks);
+        return ui.displayAddedMessage(this.task, tasks);
     }
 }
