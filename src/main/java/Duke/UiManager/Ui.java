@@ -7,39 +7,31 @@
  */
 package duke.uimanager;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
 import duke.command.Parser;
 import duke.excpetions.DukeException;
 import duke.task.TaskList;
 
-public class Ui {
-    private static final String LINE = "____________________________________________________________";
+import java.util.ArrayList;
 
-    /**
-     * Prints a line for users.
-     */
-    public void printAline() {
-        System.out.println(LINE);
-    }
+public class Ui {
 
     /**
      * Prints Hello Message to users.
      */
-    public void helloMessage() {
+    public String helloMessage() {
         String helloMessage = "Hello! I'm Duke\n"
                 + "What can I do for you?\n";
 
-        System.out.println(LINE + "\n" + helloMessage + LINE);
+        return helloMessage;
     }
 
     /**
      * Prints Goodbye Message to users.
      */
-    public void goodbyeMessage() {
+    public String goodbyeMessage() {
         String goodbyeMessage = "Bye. Hope to see you again soon!";
-        System.out.println(goodbyeMessage);
+
+        return goodbyeMessage;
     }
 
     /**
@@ -47,11 +39,13 @@ public class Ui {
      *
      * @param tasks TaskList contains all the tasks to be printed.
      */
-    public void printList(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
+    public String printList(TaskList tasks) {
+        String text = "";
+        text += "Here are the tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + "." + tasks.get(i).getTaskInfo());
+            text += i + 1 + "." + tasks.get(i).getTaskInfo() + "\n";
         }
+        return text;
     }
 
     /**
@@ -59,9 +53,11 @@ public class Ui {
      *
      * @param parsedTask Detailed info for a task that is parsed into a specific format.
      */
-    public void markDone(String parsedTask) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(" " + parsedTask);
+    public String markDone(String parsedTask) {
+        String text = "";
+        text += "Nice! I've marked this task as done:\n" + " " + parsedTask +"\n";
+
+        return text;
     }
 
     /**
@@ -70,10 +66,11 @@ public class Ui {
      * @param parsedTask Detailed info for a task that is parsed into a specific format
      * @param size Size of the TaskList.
      */
-    public void delete(String parsedTask, int size) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(" " + parsedTask);
-        System.out.println("Now you have " + size + " tasks in the list.");
+    public String delete(String parsedTask, int size) {
+        String text = "";
+        text += "Noted. I've removed this task:\n" + " " + parsedTask + "\nNow you have " + size + " tasks in the list.\n";
+
+        return text;
     }
 
     /**
@@ -82,36 +79,27 @@ public class Ui {
      * @param parsedTask Detailed info for a task that is parsed into a specific format
      * @param size Size of the TaskList.
      */
-    public void add(String parsedTask, int size) {
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(" " + parsedTask);
-        System.out.println("Now you have " + size + ""
-                + " tasks in the list.");
+    public String add(String parsedTask, int size) {
+        String text = "";
+        text += "Got it. I've added this task: \n" + "\n " + parsedTask
+                + "\nNow you have " + size + ""
+                + " tasks in the list.\n";
+
+        return text;
     }
 
     /**
      * Prints the Ui info for the getSpecificDateEvent method in Tasklists.
      */
-    public void getSpecificDateEvent() {
-        System.out.println("Here are all the tasks taking place on the date you give me:");
+    public String getSpecificDateEvent() {
+        return "Here are all the tasks taking place on the date you give me:";
     }
 
     /**
      * Prints the Ui info for the FindTask method in Tasklists.
      */
-    public void findTasks() {
-        System.out.println("Here are the matching tasks in your list:");
-    }
-
-    /**
-     * Returns the line of input from users.
-     *
-     * @return Line of command input by users.
-     */
-    public String getInput() {
-        Scanner scanner = new Scanner(System.in);
-
-        return scanner.nextLine();
+    public String findTasks() {
+        return "Here are the matching tasks in your list:\n";
     }
 
     /**
@@ -122,14 +110,12 @@ public class Ui {
      * @throws DukeException Throws when the input cannot be parsed.
 
      */
-    public ArrayList<String> getInputForARound() throws DukeException {
+    public ArrayList<String> getInputForARound(String input) throws DukeException {
         System.out.println();
         Parser parser;
         ArrayList<String> parsedMessageList = new ArrayList<>();
-        String message;
 
-        message = getInput();
-        parser = new Parser(message);
+        parser = new Parser(input);
 
         parsedMessageList.add(parser.getOperationType());
         parsedMessageList.add(parser.getTask());
@@ -142,14 +128,14 @@ public class Ui {
     /**
      * Shows the Loading Error Text.
      */
-    public void showLoadingError() {
-        System.out.println("Cannot Load From Data.");
+    public String showLoadingError() {
+        return "Cannot Load From Data.\n";
     }
 
     /**
      * Shows the Saving Error Text.
      */
-    public void showSavingError() {
-        System.out.println("Cannot Save the Data.");
+    public String showSavingError() {
+        return "Cannot Save the Data.\n";
     }
 }

@@ -6,20 +6,19 @@
  * delete the task if the task is finished.
  * You can also search a specific task by its date, keyword.
  */
-package duke;
-
-import java.io.IOException;
-import java.util.ArrayList;
+package duke.main;
 
 import duke.excpetions.DukeException;
 import duke.saveloadmanager.Storage;
 import duke.task.TaskList;
 import duke.uimanager.Ui;
 
-
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class Duke {
 
+    private final String FILEPATH = "data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -27,11 +26,10 @@ public class Duke {
     /**
      * initialize Ui, storage and load TaskLists from specific filePath for Duke
      *
-     * @param filePath
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILEPATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -50,56 +48,57 @@ public class Duke {
      * @param time Time info users input.
      * @param index Index of the task users input.
      */
-    public void operationForDuke(String operationType, String task, String time, int index) {
+    public String operationForDuke(String operationType, String task, String time, int index) {
+        String text = "";
         switch (operationType) {
         case "bye": {
-            ui.goodbyeMessage();
+            text = ui.goodbyeMessage();
             break;
         }
         case "list": {
-            ui.printList(tasks);
+            text = ui.printList(tasks);
             break;
         }
         case "done": {
             try {
                 tasks.detectIndex(index);
                 tasks.markDone(index);
-                ui.markDone(tasks.get(index).getTaskInfo());
+                text = ui.markDone(tasks.get(index).getTaskInfo());
             } catch (DukeException e) {
-                e.printErrorMessage();
+                text = e.getMessage();
             }
             break;
         }
         case "delete": {
             try {
                 tasks.detectIndex(index);
-                ui.delete(tasks.get(index).getTaskInfo(), tasks.size() - 1);
+                text = ui.delete(tasks.get(index).getTaskInfo(), tasks.size() - 1);
                 tasks.delete(index);
             } catch (DukeException e) {
-                e.printErrorMessage();
+                text = e.getMessage();
             }
             break;
         }
         case "tell": {
-            ui.getSpecificDateEvent();
-            tasks.getSpecificDateEvent(time);
+            text = ui.getSpecificDateEvent() + tasks.getSpecificDateEvent(time);
             break;
         }
         case "find": {
-            ui.findTasks();
-            tasks.findTasks(task);
+            text = ui.findTasks() + tasks.findTasks(task);
             break;
         }
         default: {
             try {
                 tasks.add(operationType, task, time);
-                ui.add(tasks.get(tasks.size() - 1).getTaskInfo(), tasks.size());
+                text =ui.add(tasks.get(tasks.size() - 1).getTaskInfo(), tasks.size());
             } catch (DukeException e) {
-                e.printErrorMessage();
+                text = e.getMessage();
             }
             break;
         }
         }
+
+        return text;
     }
 
     /**
@@ -119,46 +118,30 @@ public class Duke {
      * The process will not stop until users enter "goodbye".
      * Noted: Every time an execution is done, the savedata will be updated.
      */
-    public void run() {
-        //Say Hello to the User
+    public String getResponse(String input) {
         ArrayList<String> messages;
-        String operationType = "";
-        String task = "";
-        String time = "";
-        int index = 0;
-        ui.helloMessage();
+        String operationType;
+        String task;
+        String time;
+        String dukeResponse;
+        int index;
 
-        while (true) {
-            try {
-                messages = ui.getInputForARound();
-            } catch (DukeException e) {
-                ui.printAline();
-                e.printErrorMessage();
-                ui.printAline();
-                continue;
-            }
-
-            if (messages.size() < 4) {
-                continue;
-            }
-
-            operationType = messages.get(0);
-            task = messages.get(1);
-            time = messages.get(2);
-            index = Integer.parseInt(messages.get(3));
-
-            ui.printAline();
-            operationForDuke(operationType, task, time, index);
-            ui.printAline();
-
-            updateSaveData(); //Update the SaveData every time a round of operation is done.
-            if (operationType.equals("bye")) {
-                break;
-            }
+        try {
+            messages = ui.getInputForARound(input);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
+
+        operationType = messages.get(0);
+        task = messages.get(1);
+        time = messages.get(2);
+        index = Integer.parseInt(messages.get(3));
+
+        dukeResponse = operationForDuke(operationType, task, time, index);
+
+        updateSaveData(); //Update the SaveData every time a round of operation is done.
+
+        return dukeResponse;
     }
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
 }

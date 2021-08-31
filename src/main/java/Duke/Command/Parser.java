@@ -10,12 +10,12 @@
 
 package duke.command;
 
+import duke.excpetions.DukeException;
+import duke.task.TaskList;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
-
-import duke.excpetions.DukeException;
-import duke.task.TaskList;
 
 
 
@@ -175,7 +175,7 @@ public class Parser {
                 return operationType;
             }
         }
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
     }
 
@@ -195,7 +195,7 @@ public class Parser {
                 task = message.substring(message.indexOf(" ") + 1, message.indexOf("/") - 1);
             } else {
                 if (!message.contains(" ")) {
-                    throw new DukeException("☹ OOPS!!! The description of a " + message + " cannot be empty.");
+                    throw new DukeException("OOPS!!! The description of a " + message + " cannot be empty.");
                 } else {
                     task = message.substring(message.indexOf(" ") + 1);
                 }
@@ -222,21 +222,21 @@ public class Parser {
                     if (message.contains("/by")) {
                         time = message.substring(message.indexOf("/by") + 4);
                     } else {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but the format of deadline is wrong :-(");
+                        throw new DukeException("OOPS!!! I'm sorry, but the format of deadline is wrong :-(");
                     }
                 } else if (message.startsWith("event")) {
                     if (message.contains("/at")) {
                         time = message.substring(message.indexOf("/at") + 4);
                     } else {
-                        throw new DukeException("☹ OOPS!!! I'm sorry, but the format of event is wrong :-(");
+                        throw new DukeException("OOPS!!! I'm sorry, but the format of event is wrong :-(");
                     }
                 } else {
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but the format of todo is wrong :-(");
+                    throw new DukeException("OOPS!!! I'm sorry, but the format of todo is wrong :-(");
                 }
             }
         } else if (message.startsWith("tell")) {
             if (!message.contains(" ")) {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but the format of tell is wrong :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but the format of tell is wrong :-(");
             } else {
                 time = message.substring(message.indexOf(" ") + 1);
             }
@@ -245,7 +245,7 @@ public class Parser {
         //Time for deadlines or event cannot be empty.
         if ((message.startsWith("event") || message.startsWith("deadline")
                 || message.startsWith("tell")) && time.equals("")) {
-            throw new DukeException("☹ OOPS!!! The time of a "
+            throw new DukeException("OOPS!!! The time of a "
                     + message.substring(0, message.indexOf(" ")) + " cannot be empty.");
         }
 

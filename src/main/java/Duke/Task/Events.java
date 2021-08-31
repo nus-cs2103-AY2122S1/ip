@@ -12,7 +12,7 @@ import java.util.Locale;
 
 public class Events extends Task {
 
-    private boolean done;
+    private boolean isDone;
     private String task;
     private LocalDateTime time;
     private String taskType = "E";
@@ -21,12 +21,12 @@ public class Events extends Task {
      * Constructor for Events containing boolean value if the task is done, the
      * specific task info, and the time for the task.
      *
-     * @param done
+     * @param isDone
      * @param task
      * @param time
      */
-    public Events(boolean done, String task, LocalDateTime time) {
-        this.done = done;
+    public Events(boolean isDone, String task, LocalDateTime time) {
+        this.isDone = isDone;
         this.task = task;
         this.time = time;
     }
@@ -39,7 +39,7 @@ public class Events extends Task {
     @Override
     public String getTaskInfo() {
         String doneStr = "";
-        if (!this.done) {
+        if (!this.isDone) {
             doneStr = " ";
         } else {
             doneStr = "X";
@@ -93,7 +93,7 @@ public class Events extends Task {
      */
     @Override
     public String getSaveDataInfo() {
-        return this.taskType + " | " + (this.done ? 1 : 0) + " | " + task + " | " + getTime();
+        return this.taskType + " | " + (this.isDone ? 1 : 0) + " | " + task + " | " + getTime();
     }
 
     /**
@@ -101,7 +101,7 @@ public class Events extends Task {
      */
     @Override
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
 

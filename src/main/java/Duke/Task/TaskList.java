@@ -6,13 +6,13 @@
  */
 package duke.task;
 
+import duke.command.Parser;
+import duke.excpetions.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
-
-import duke.command.Parser;
-import duke.excpetions.DukeException;
 
 public class TaskList {
 
@@ -39,8 +39,9 @@ public class TaskList {
      *
      * @param time String message that indicates time users take in to find specific event.
      */
-    public void getSpecificDateEvent(String time) {
+    public String getSpecificDateEvent(String time) {
         Parser parser = new Parser("");
+        String text = "";
         int count = 0; //count the number of the events happen on the time.
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -53,12 +54,14 @@ public class TaskList {
             if ((unParsedInfo != null && (unParsedInfo.contains(time) || unParsedInfo.contains(timeInFormat)))
                     || message.contains(time) || message.contains(timeInFormat)) {
                 count++;
-                System.out.println(count + "." + message);
+                text += count + "." + message + "\n";
             }
         }
         if (count == 0) {
-            System.out.println("Sorry. There is no tasks occurred on the time you give me!! :(");
+            return "Sorry. There is no tasks occurred on the time you give me!! :(\n";
         }
+
+        return text;
     }
 
     /**
@@ -66,20 +69,23 @@ public class TaskList {
      *
      * @param keyword String message that indicates the keyword users want to search.
      */
-    public void findTasks(String keyword) {
+    public String findTasks(String keyword) {
+        String text = "";
         int count = 0;
 
         for (int i = 0; i < tasks.size(); i++) {
             String message = tasks.get(i).getTaskInfo();
             if (message.contains(keyword)) {
                 count++;
-                System.out.println(count + "." + message);
+                text += count + "." + message + "\n";
             }
         }
 
         if (count == 0) {
-            System.out.println("Sorry. There is no tasks matching the keyword you give me!! :(");
+            return "Sorry. There is no tasks matching the keyword you give me!! :(\n";
         }
+
+        return text;
     }
 
     /**
@@ -152,7 +158,7 @@ public class TaskList {
      */
     public void detectIndex(int index) throws DukeException {
         if (index < 0 || index >= this.tasks.size()) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but the index is invalid :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but the index is invalid :-(");
         }
     }
 

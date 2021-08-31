@@ -19,12 +19,6 @@ public class DukeException extends Exception {
         this.errorMessage = errorMessage;
     }
 
-    /**
-     * Prints out the Error Message in DukeException.
-     */
-    public void printErrorMessage() {
-        System.out.println(this.errorMessage);
-    }
 
     /**
      * Returns the Error Message in DukeException.
