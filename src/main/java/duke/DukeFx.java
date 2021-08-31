@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+import duke.task.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +16,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
+@SuppressWarnings("checkstyle:Regexp")
 public class DukeFx extends Application {
 
     private ScrollPane scrollPane;
@@ -24,6 +27,21 @@ public class DukeFx extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/UserCat.jpeg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DukeCat.jpg"));
+
+    /**
+     * storage instance to handle task list storage.
+     */
+    private final Storage storage = new Storage("./data/", "duke.txt");
+
+    /**
+     * task list instance to store tasks.
+     */
+    private final TaskList tasks = this.storage.readData();
+
+    /**
+     * Parser instance to handle parsing.
+     */
+    private final Parser parser = new Parser();
 
     public static void main(String[] args) {
         // ...
@@ -144,6 +162,170 @@ public class DukeFx extends Application {
      * @param input String of user input.
      */
     private String getResponse(String input) {
-        return "Copy cat: " + input;
+        if (input.equals("bye")) {
+            // end bot
+            try {
+                // save all data
+                storage.writeTasksToData(tasks);
+                return "Bye. See you next time!";
+            } catch (DukeException e) {
+                return e.getMessage();
+            }
+        } else {
+            switch (parser.getCommandAction(input)) {
+            case "list":
+                // view list
+                return tasks.toString();
+            case "done":
+                return done(input);
+            case "todo":
+                return todo(input);
+            case "event":
+                return event(input);
+            case "deadline":
+                return deadline(input);
+            case "delete":
+                return delete(input);
+            case "find":
+                return find(input);
+            default:
+                // Message for unrecognised task type
+                return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            }
+        }
+    }
+
+    /**
+     * Duke response message for done command.
+     *
+     * @param input Input command string.
+     * @return String of response.
+     */
+    private String done(String input) {
+        try {
+            int doneIndex = parser.getCommandActionIndex(input);
+            try {
+                tasks.get(doneIndex - 1).markAsDone();
+                storage.writeTasksToData(tasks);
+                return "Nice! I've marked this task as done:\n\t" + tasks.get(doneIndex - 1);
+
+            } catch (IndexOutOfBoundsException e) {
+                // Task at doneIndex does not exist
+                return "Task " + doneIndex + " does not exist. Please check your task list!";
+
+            }
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+            // command done is not followed by a number
+            return "☹ OOPS!!! The index of a task done must be an integer.";
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * Duke response message for todo command.
+     *
+     * @param input Input command string.
+     * @return String of response.
+     */
+    private String todo(String input) {
+        Task todo;
+        try {
+            todo = parser.commandToTask(input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        tasks.add(todo);
+        try {
+            storage.writeTasksToData(tasks);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        return "Got it. I've added this task:\n\t" + todo
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
+    }
+
+    /**
+     * Duke response message for event command.
+     *
+     * @param input Input command string.
+     * @return String of response.
+     */
+    private String event(String input) {
+        Task event;
+        try {
+            event = parser.commandToTask(input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        tasks.add(event);
+        try {
+            storage.writeTasksToData(tasks);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        return "Got it. I've added this task:\n\t" + event
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
+
+    }
+
+    /**
+     * Duke response message for deadline command.
+     *
+     * @param input Input command string.
+     * @return String of response.
+     */
+    private String deadline(String input) {
+        Task deadline;
+        try {
+            deadline = parser.commandToTask(input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        tasks.add(deadline);
+        try {
+            storage.writeTasksToData(tasks);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        return "Got it. I've added this task:\n\t" + deadline
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
+    }
+
+    /**
+     * Duke response message for delete command.
+     *
+     * @param input Input command string.
+     * @return String of response.
+     */
+    private String delete(String input) {
+        try {
+            int deleteIndex = parser.getCommandActionIndex(input);
+            try {
+                Task removed = tasks.remove(deleteIndex - 1);
+                storage.writeTasksToData(tasks);
+                return "Noted. I've removed this task:\n\t" + removed;
+
+            } catch (IndexOutOfBoundsException e) {
+                // Task at deleteIndex does not exist
+                return "Task " + deleteIndex + " does not exist. Please check your task list!";
+            }
+        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+            // command delete is not followed by a number
+            return "☹ OOPS!!! The index of a task to be deleted must be an integer.";
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * Find tasks from task list that contains a given pattern and print the tasks.
+     *
+     * @param input Input command string.
+     * @return String of response.
+     */
+    private String find(String input) {
+        String pattern = input.split("find ", 2)[1];
+        return tasks.getMatchedTasksString(pattern);
     }
 }
