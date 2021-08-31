@@ -27,34 +27,36 @@ public class Storage {
      * @param tasks The list to transfer the tasks to from storage.
      */
     public void loadTasksFromFile(TaskList tasks) {
-        File f = new File(this.filePath);
-        Scanner s = null;
-        try {
-            s = new Scanner(f);
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        int currentTask = 1;
-        while (s.hasNext()) {
-            String currentLine = s.nextLine();
-            String[] commands = currentLine.split(",");
-            Task.TaskType type = Duke.convertToTaskType(commands[0]);
-            switch (type) {
-            case TODO:
-                tasks.addTask(commands[2]);
-                break;
-            case EVENT:
-            case DEADLINE:
-                String[] dateAndTime = commands[3].split(" ");
-                tasks.addTask(commands[2], type, LocalDate.parse(dateAndTime[0]), dateAndTime[1]);
-                break;
-            default:
-                break;
+        if (tasks.getTasksLength() == 0) {
+            File f = new File(this.filePath);
+            Scanner s = null;
+            try {
+                s = new Scanner(f);
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
             }
-            if (commands[1].equals("[X]")) {
-                tasks.getTask(currentTask).markAsDone();
+            int currentTask = 1;
+            while (s.hasNext()) {
+                String currentLine = s.nextLine();
+                String[] commands = currentLine.split(",");
+                Task.TaskType type = Duke.convertToTaskType(commands[0]);
+                switch (type) {
+                case TODO:
+                    tasks.addTask(commands[2]);
+                    break;
+                case EVENT:
+                case DEADLINE:
+                    String[] dateAndTime = commands[3].split(" ");
+                    tasks.addTask(commands[2], type, LocalDate.parse(dateAndTime[0]), dateAndTime[1]);
+                    break;
+                default:
+                    break;
+                }
+                if (commands[1].equals("[X]")) {
+                    tasks.getTask(currentTask).markAsDone();
+                }
+                currentTask++;
             }
-            currentTask++;
         }
     }
 

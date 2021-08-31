@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+
 /**
  * Represents the Duke chatbot to store different types of tasks,
  * todos, deadlines and events.
@@ -13,27 +14,21 @@ public class Duke {
     private static final String DATABASE_PATH = "data/duke.txt";
     private static final Pattern DATE_PATTERN = Pattern.compile("^((19|2[0-9])[0-9]{2})-(0[1-9]|1[012])-"
             + "(0[1-9]|[12][0-9]|3[01]) ([01]?[0-9]|2[0-3])[0-5][0-9]$");
-    private TaskList tasks;
+    private final TaskList tasks;
     private final DukeUI ui;
     private final Storage storage;
     private final Parser parser;
+    private boolean isRunning;
 
     /**
-     * Returns a <code>Duke</code> object that can reply to
-     * commands. Duke can save the tasks at the specified <code>filePath</code>.
-     *
-     * @param filePath The file path where Duke will save the tasks.
+     * Returns a <code>Duke</code> object that can reply to command.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new DukeUI();
-        storage = new Storage(filePath);
+        storage = new Storage(DATABASE_PATH);
         parser = new Parser();
-        try {
-            tasks = TaskList.createTaskList();
-            this.storage.loadTasksFromFile(this.tasks);
-        } catch (DukeException e) {
-            this.ui.showError(e);
-        }
+        isRunning = false;
+        tasks = new TaskList();
     }
 
     /**
@@ -42,41 +37,16 @@ public class Duke {
      * delete, list. Other commands are ignored.
      */
     public void run() {
+        storage.loadTasksFromFile(tasks);
         String command;
-        boolean stillRunning = true;
+        isRunning = true;
         Scanner scanner = new Scanner(System.in);
-        while (stillRunning) {
+        while (isRunning) {
             command = scanner.nextLine();
             parser.interpretCommand(command);
             String firstCommand = this.parser.getFirstCommand();
             try {
-                switch (firstCommand) {
-                case "bye":
-                    this.ui.goodBye();
-                    stillRunning = false;
-                    break;
-                case "done":
-                    markDone();
-                    break;
-                case "deadline":
-                case "todo":
-                case "event":
-                    addTask();
-                    break;
-                case "delete":
-                    deleteTask();
-                    break;
-                case "list":
-                    this.tasks.listTasks();
-                    break;
-                case "find":
-                    String keyword = this.parser.findKeyword();
-                    ArrayList<Task> tasksWithKeyword = this.tasks.findTasksUsingKeyword(keyword);
-                    this.ui.showTasksWithKeyword(tasksWithKeyword);
-                    break;
-                default:
-                    throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
+                ui.respondToUser(respondToFirstCommand(firstCommand));
             } catch (DukeException e) {
                 this.ui.showError(e);
             }
@@ -84,26 +54,69 @@ public class Duke {
     }
 
     /**
+     * Runs Duke when launched from the GUI
+     * @param command The command for Duke to handle.
+     * @return Response from Duke.
+     */
+    public String runGui(String command) {
+        try {
+            storage.loadTasksFromFile(tasks);
+            parser.interpretCommand(command);
+            String firstCommand = parser.getFirstCommand();
+            return respondToFirstCommand(firstCommand);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    private String respondToFirstCommand(String firstCommand) {
+        String response;
+        switch (firstCommand) {
+        case "bye":
+            response = ui.goodBye();
+            isRunning = false;
+            break;
+        case "done":
+            response = markDone();
+            break;
+        case "deadline":
+        case "todo":
+        case "event":
+            response = addTask();
+            break;
+        case "delete":
+            response = deleteTask();
+            break;
+        case "list":
+            response = tasks.listTasks();
+            break;
+        case "find":
+            String keyword = this.parser.findKeyword();
+            ArrayList<Task> tasksWithKeyword = this.tasks.findTasksUsingKeyword(keyword);
+            response = ui.showTasksWithKeyword(tasksWithKeyword);
+            break;
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+        return response;
+    }
+
+    /**
      * Method to delete task.
      *
      * @throws DukeException Thrown whenever user requests delete of a
-     * task out of range or not a number. eg. <code>delete hi</code>
+     * task out of range or not a number. e.g. <code>delete hi</code>
      */
-    public void deleteTask() throws DukeException {
+    public String deleteTask() throws DukeException {
         try {
             this.tasks.deleteTask(parser.findCommandIndex());
-            this.ui.showDeleteTaskMessage(this.tasks.getTasksLength());
             this.writeDataToDuke();
+            return this.ui.showDeleteTaskMessage(this.tasks.getTasksLength());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! Index out of range!");
         } catch (NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! Put a number after 'delete'!");
         }
-    }
-
-    private void findTasks() {
-        String keyword = parser.findKeyword();
-
     }
 
     private void writeDataToDuke() {
@@ -117,7 +130,7 @@ public class Duke {
      * or when the user does not give a date for an event or deadline task,
      * or when the user formats the date wrongly.
      */
-    public void addTask() throws DukeException {
+    public String addTask() throws DukeException {
         String firstCommand = this.parser.getFirstCommand();
         String date = this.parser.findDateInCommand();
         String taskDesc = this.parser.findTaskDescription();
@@ -134,26 +147,26 @@ public class Duke {
                 String dateString = dateSplit[0];
                 String timeString = dateSplit[1];
                 LocalDate ld = LocalDate.parse(dateString);
-
                 this.tasks.addTask(taskDesc, convertToTaskType(firstCommand), ld, timeString);
-
-                this.confirmAdditionOfTask();
+                this.writeDataToDuke();
+                return this.confirmAdditionOfTask();
             } else {
                 throw new DukeException("You need to put the date in yyyy-mm-dd hhmm format!");
             }
         } else {
             this.tasks.addTask(taskDesc);
-            this.confirmAdditionOfTask();
+            this.writeDataToDuke();
+            return this.confirmAdditionOfTask();
         }
-        this.writeDataToDuke();
+
     }
 
     /**
      * Confirms the addition of a task.
      */
-    public void confirmAdditionOfTask() {
+    public String confirmAdditionOfTask() {
         int tasksLength = this.tasks.getTasksLength();
-        this.ui.showTaskAddedMessage(tasksLength, this.tasks.getTask(tasksLength).toString());
+        return this.ui.showTaskAddedMessage(tasksLength, this.tasks.getTask(tasksLength).toString());
     }
 
     /**
@@ -161,13 +174,13 @@ public class Duke {
      * @throws DukeException Thrown when user gives an index out of range
      * or not a number after the command done.
      */
-    private void markDone() throws DukeException {
+    private String markDone() throws DukeException {
         try {
             int taskIndex = parser.findCommandIndex();
             this.tasks.markTaskDone(taskIndex);
             Task task = this.tasks.getTask(taskIndex);
-            this.ui.markTaskDone(task);
             this.writeDataToDuke();
+            return this.ui.markTaskDone(task);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("☹ OOPS!!! The number you gave is out of range!");
         } catch (NumberFormatException e) {
@@ -197,7 +210,7 @@ public class Duke {
      * @param args Optional arguments for CLI.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke(DATABASE_PATH);
+        Duke duke = new Duke();
         duke.ui.greetUser();
         duke.run();
     }

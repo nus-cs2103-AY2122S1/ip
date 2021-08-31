@@ -6,21 +6,26 @@ import java.util.ArrayList;
  */
 public class DukeUI {
 
-    public void goodBye() {
-        System.out.println("Goodbye!");
+    public void respondToUser(String response) {
+        System.out.println(response);
+    }
+
+    public String goodBye() {
+        return "Goodbye!";
     }
 
     /**
      * Greets user on startup.
      */
-    public void greetUser() {
+    public String greetUser() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from \n" + logo);
-        System.out.println("What can I do for you?");
+        String firstLine = "Hello from \n" + logo + "\n";
+        String secondLine = "What can I do for you?";
+        return firstLine + secondLine;
     }
 
     /**
@@ -28,13 +33,12 @@ public class DukeUI {
      * to mark as done is done.
      * @param task The task that was marked as done.
      */
-    public void markTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(task);
+    public String markTaskDone(Task task) {
+        return "Nice! I've marked this task as done: \n" + task;
     }
 
-    public void showError(Exception e) {
-        System.out.println(e.getMessage());
+    public String showError(Exception e) {
+        return e.getMessage();
     }
 
     /**
@@ -42,9 +46,9 @@ public class DukeUI {
      * to mark as deleted is deleted.
      * @param tasksLength The number of tasks left after deletion.
      */
-    public void showDeleteTaskMessage(int tasksLength) {
-        System.out.println("Noted. I've removed this task: ");
-        System.out.println("Now you have " + tasksLength + " tasks in the list.");
+    public String showDeleteTaskMessage(int tasksLength) {
+        return "Noted. I've removed this task: \n"
+                + "Now you have " + tasksLength + " tasks in the list.";
     }
 
     /**
@@ -53,20 +57,21 @@ public class DukeUI {
      * @param tasksLength The number of tasks after adding.
      * @param task The task that was added.
      */
-    public void showTaskAddedMessage(int tasksLength, String task) {
-        System.out.println("Got it. I've added this task: ");
-        System.out.println(task);
-        System.out.println("Now you have " + tasksLength + " tasks in the list.");
+    public String showTaskAddedMessage(int tasksLength, String task) {
+        return "Got it. I've added this task: \n"
+                + task + "\n Now you have "
+                + tasksLength + " tasks in the list.";
     }
 
     /**
      * Return the list of tasks.
      * @param tasks The tasks.
      */
-    public void showTasksWithKeyword(ArrayList<Task> tasks) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showTasksWithKeyword(ArrayList<Task> tasks) {
+        String response = "Here are the matching tasks in your list: \n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(tasks.get(i).toString());
+            response += tasks.get(i).toString() + "\n";
         }
+        return response;
     }
 }

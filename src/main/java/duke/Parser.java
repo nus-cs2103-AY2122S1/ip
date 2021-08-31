@@ -19,8 +19,8 @@ public class Parser {
     /**
      * Method to obtain the main command in the whole command.
      *
-     * eg. <code>≈done 5</code> -> returns "done".
-     * eg. <code>deadline hw /by 2000-10-10 1000</code> -> returns "deadline"
+     * e.g. <code>done 5</code> -> returns "done".
+     * e.g. <code>deadline hw /by 2000-10-10 1000</code> -> returns "deadline"
      * @return The first command.
      */
     public String getFirstCommand() {
@@ -30,8 +30,8 @@ public class Parser {
     /**
      * Finds the index of the command.
      *
-     * eg. <code>done 5</code> -> returns 5
-     * eg. <code>delete 3</code> -> returns 3
+     * e.g. <code>done 5</code> -> returns 5
+     * e.g. <code>delete 3</code> -> returns 3
      * @return The command index.
      * @throws NumberFormatException Thrown when user does not put a number.
      */
