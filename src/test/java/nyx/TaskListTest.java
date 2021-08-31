@@ -10,7 +10,7 @@ public class TaskListTest {
     @Test
     public void testStringConversion_empty() {
         TaskList taskList = new TaskList();
-        assertEquals("You do not have any task currently", taskList.toString());
+        assertEquals("You do not have any tasks currently", taskList.toString());
     }
 
     @Test
