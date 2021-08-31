@@ -47,9 +47,9 @@ application {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
-    archiveClassifier = null
-    archiveVersion = "v0.1"
+    archiveBaseName.set("duke")
+    archiveClassifier.set(null)
+    archiveVersion.set("v0.1")
 }
 
 checkstyle {
