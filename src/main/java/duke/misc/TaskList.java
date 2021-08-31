@@ -103,7 +103,7 @@ public class TaskList {
      * @param key keyword to search.
      * @return String of all tasks found appended in rows.
      */
-    public String find(String key) {
+    public String findTasks(String key) {
         StringBuilder sb = new StringBuilder();
         int idx = 0;
         for (Task task: tasks) {

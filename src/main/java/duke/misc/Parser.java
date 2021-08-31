@@ -103,7 +103,7 @@ public class Parser {
                 throw new InvalidIndexException();
             }
         case "find":
-            return Ui.FIND_MSG + tl.find(suffix);
+            return Ui.FIND_MSG + tl.findTasks(suffix);
         default:
             Task task = makeTask(input);
             return Ui.ADD_MSG + tl.addTask(task);
