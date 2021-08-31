@@ -2,7 +2,6 @@
 /.idea/
 /out/
 /*.iml
-test.txt
 
 # Gradle build files
 /.gradle/
@@ -17,3 +16,4 @@ bin/
 /text-ui-test/ACTUAL.txt
 text-ui-test/EXPECTED-UNIX.TXT
 /taskList.txt
+test.txt
