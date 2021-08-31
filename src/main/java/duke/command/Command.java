@@ -8,51 +8,52 @@ import java.util.List;
 
 public class Command {
     private TaskList taskList;
-    private Ui ui;
+    private Response response;
     private Storage storage;
 
-    public Command(TaskList taskList, Ui ui, Storage storage) {
+    public Command(TaskList taskList, Response response, Storage storage) {
         this.taskList = taskList;
-        this.ui = ui;
+        this.response = response;
         this.storage = storage;
     }
 
-    public void addNewTodo(String task) throws Exception {
+
+    private StringBuilder addNewTodo(String task) throws Exception {
         Task todoTask = Parser.isValidTodoTask(task);
         taskList.add(todoTask);
-        ui.showAddNewTask();
         storage.saveNewTask(todoTask);
+        return response.getAddNewTaskMessage();
     }
 
-    public void addNewDeadline(String task) throws Exception {
+    private StringBuilder addNewDeadline(String task) throws Exception {
         Task deadlineTask = Parser.isValidDeadlineTask(task);
         taskList.add(deadlineTask);
-        ui.showAddNewTask();
         storage.saveNewTask(deadlineTask);
+        return response.getAddNewTaskMessage();
     }
 
-    public void addNewEvent(String task) throws Exception {
+    private StringBuilder addNewEvent(String task) throws Exception {
         Task eventTask = Parser.isValidEventTask(task);
         taskList.add(eventTask);
-        ui.showAddNewTask();
         storage.saveNewTask(eventTask);
+        return response.getAddNewTaskMessage();
     }
 
-    public void setTaskDone(String task) throws Exception {
+    private StringBuilder setTaskDone(String task) throws Exception {
         int itemDone = Parser.findFinishedItem(task);
         taskList.get(itemDone - 1).finished();
-        ui.showMarkTaskDone(itemDone);
         storage.modifyTasks();
+        return response.getMarkTaskDoneMessage(itemDone);
     }
 
-    public void deleteTask(String task) throws Exception {
+    private StringBuilder deleteTask(String task) throws Exception {
         int itemDeleted = Parser.findDeleteItem(task);
         Task deletedTask = taskList.remove(itemDeleted - 1);
-        ui.showDeleteMessage(deletedTask);
         storage.modifyTasks();
+        return response.getDeleteMessage(deletedTask);
     }
 
-    public void findTask(String task) {
+    private StringBuilder findTask(String task) {
         String target = task.substring(5);
         List<Integer> result = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
@@ -61,22 +62,48 @@ public class Command {
                 result.add(i);
             }
         }
-        ui.showFindingTasks(result);
+        return response.getFoundTasks(result);
+    }
+
+    private StringBuilder getTasks() {
+        return response.getListMessage();
     }
 
     public void loadSavedTasks() {
         storage.loadSavedTasks();
     }
 
-    public void showLogo() {
-        ui.showLogo();
+    public StringBuilder welcomeUser() {
+        return response.getWelcomeMessage();
     }
 
-    public void showList() {
-        ui.showList();
+    public StringBuilder goodByeUser() {
+        return response.getGoodByeMessage();
     }
 
-    public void showGoodBye() {
-        ui.showGoodBye();
+    public StringBuilder getCorrespondingMessage(String task) {
+        try {
+            switch (Parser.judgeType(task)) {
+            case TODO:
+                return addNewTodo(task);
+            case EVENT:
+                return addNewEvent(task);
+            case DEADLINE:
+                return addNewDeadline(task);
+            case DONE:
+                return setTaskDone(task);
+            case LIST:
+                return getTasks();
+            case DELETE:
+                return deleteTask(task);
+            case FIND:
+                return findTask(task);
+            case BYE:
+                return goodByeUser();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new StringBuilder("Cannot understand");
     }
 }
