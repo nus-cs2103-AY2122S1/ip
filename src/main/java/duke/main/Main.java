@@ -1,3 +1,5 @@
+package duke.main;
+
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -27,7 +29,7 @@ import javafx.scene.image.ImageView;
 
 /**
  * Encapsulates the entire Duke program.
- * Main class contains the storage, ui, tasklist, parser and finder objects,
+ * duke.main.Main class contains the storage, ui, tasklist, parser and finder objects,
  * to help run the program.
  *
  * @author: Jason Ng
@@ -54,7 +56,7 @@ public class Main extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/Timetable.png"));
 
     /**
-     * Constructor for a Main() class.
+     * Constructor for a duke.main.Main() class.
      */
     public Main() {
         this.storage = new Storage();
