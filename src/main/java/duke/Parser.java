@@ -4,6 +4,12 @@ import duke.Command.*;
 
 public class Parser {
 
+    /**
+     * Parses the input provided into relevant Commands
+     * @param input String of next line of user input
+     * @return Relevant Command corresponding to input
+     * @throws DukeException
+     */
     public static Command parse(String input) throws DukeException{
         String first_word = input.split(" ")[0];
 

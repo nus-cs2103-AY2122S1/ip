@@ -16,6 +16,11 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    /**
+     * Loads task data from storage
+     * @return ArrayList of tasks
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
         File list_data = new File(filepath);
@@ -45,6 +50,10 @@ public class Storage {
         return list;
     }
 
+    /**
+     * Saves all tasks in TaskList to filepath of storage
+     * @param list TaskList to be saved
+     */
     public void save(TaskList list) {
         try {
             File list_data = new File(filepath);

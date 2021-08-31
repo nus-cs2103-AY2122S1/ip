@@ -5,9 +5,4 @@ public class DukeException extends Exception{
         super(errorMessage);
     }
 
-    public class InvalidInputException extends DukeException {
-        public InvalidInputException(String errorMessage) {
-            super(errorMessage);
-        }
-    }
 }
