@@ -18,11 +18,11 @@ public class ListCommand extends Command {
      * @return The list of tasks.
      */
     public String execute(TaskList taskList, Storage storage) throws MorganException {
-        TaskList tl = new TaskList();
-        storage.load(tl);
-        if (taskList.isEmpty()) {
+        TaskList tasks = new TaskList();
+        storage.load(tasks);
+        if (tasks.isEmpty()) {
             throw new MorganException(EMPTY_LIST_ERROR_MESSAGE);
         }
-        return "Here are the tasks in your list:\n" + tl.toString();
+        return "Here are the tasks in your list:\n" + tasks;
     }
 }
