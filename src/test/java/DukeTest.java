@@ -87,7 +87,6 @@ public class DukeTest {
         final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-
         Duke testDuke = new Duke("testInput/duke2.txt");
         testDuke.run(new BufferedReader(new StringReader(input)), new PrintWriter(System.out));
         assertEquals(expected, outContent.toString());
