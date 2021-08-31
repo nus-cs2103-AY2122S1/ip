@@ -21,7 +21,8 @@ public class Parser {
     }
 
     /**
-     * Splits the text into 2 portions. The first word is the first element in the array, the rest is the second element.
+     * Splits the text into 2 portions.
+     * The first word is the first element in the array, the rest is the second element.
      *
      * @param text the text.
      * @return an array where the first element is the first word, and the second element is the rest of the text.
