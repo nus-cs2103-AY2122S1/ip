@@ -25,8 +25,9 @@ public class Ui {
     /**
      * Welcomes the user when Duke starts up.
      */
-    public void showWelcome() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    public String showWelcome() {
+
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
@@ -44,14 +45,14 @@ public class Ui {
      *
      * @param taskList list of tasks.
      */
-    public void list(TaskList taskList) {
+    public String list(TaskList taskList) {
         ArrayList<Task> savedInputs = taskList.getTasks();
         StringBuilder outputList = new StringBuilder();
         outputList.append("Here are the tasks in your list:\n");
         for (int i = 1; i <= savedInputs.size(); i++) {
             outputList.append(i + "." + savedInputs.get(i - 1).toString() + "\n");
         }
-        System.out.println(outputList);
+        return outputList.toString();
     }
 
     /**
@@ -60,9 +61,8 @@ public class Ui {
      * @param taskList list of tasks.
      * @param donePos position of task to mark as done.
      */
-    public void done(TaskList taskList, int donePos) {
-        System.out.println("Nice! I've marked this task as done:\n  "
-                + taskList.getTasks().get(donePos - 1).toString());
+    public String done(TaskList taskList, int donePos) {
+        return "Nice! I've marked this task as done:\n  " + taskList.getTasks().get(donePos - 1).toString();
     }
 
     /**
@@ -71,9 +71,9 @@ public class Ui {
      * @param taskList list of tasks.
      * @param deletePos position of task to delete.
      */
-    public void delete(TaskList taskList, int deletePos) {
-        System.out.println("Noted. I've removed this task:\n  " + taskList.getTasks().get(deletePos - 1).toString());
-        System.out.println("Now you have " + (taskList.getTasks().size() - 1) + " tasks in the list.");
+    public String delete(TaskList taskList, int deletePos) {
+        return "Noted. I've removed this task:\n  " + taskList.getTasks().get(deletePos - 1).toString()
+                + "\nNow you have " + (taskList.getTasks().size() - 1) + " tasks in the list.";
     }
 
     /**
@@ -82,14 +82,14 @@ public class Ui {
      * @param taskList list of tasks.
      * @param localDate date to compare to.
      */
-    public void checkDate(TaskList taskList, LocalDate localDate) {
+    public String checkDate(TaskList taskList, LocalDate localDate) {
         ArrayList<Task> matchingDates = taskList.checkDate(localDate);
 
         String output = "";
         for (int i = 1; i <= matchingDates.size(); i++) {
             output = output + i + ". " + matchingDates.get(i - 1).toString() + "\n";
         }
-        System.out.println(output);
+        return output;
     }
 
     /**
@@ -98,9 +98,8 @@ public class Ui {
      * @param taskList list of tasks.
      * @param event to add.
      */
-    public void addEvent(TaskList taskList, Event event) {
-        System.out.println("Got it. I've added this task:\n  " + event);
-        System.out.println("Now you have " + taskList.getTasks().size() + " tasks in the list.");
+    public String addEvent(TaskList taskList, Event event) {
+        return "Got it. I've added this task:\n  " + event + "\nNow you have " + taskList.getTasks().size() + " tasks in the list.";
     }
 
     /**
@@ -109,9 +108,8 @@ public class Ui {
      * @param taskList list of tasks.
      * @param deadline to add.
      */
-    public void addDeadline(TaskList taskList, Deadline deadline) {
-        System.out.println("Got it. I've added this task:\n  " + deadline);
-        System.out.println("Now you have " + taskList.getTasks().size() + " tasks in the list.");
+    public String addDeadline(TaskList taskList, Deadline deadline) {
+        return "Got it. I've added this task:\n  " + deadline + "\nNow you have " + taskList.getTasks().size() + " tasks in the list.";
     }
 
     /**
@@ -120,9 +118,8 @@ public class Ui {
      * @param taskList list of tasks.
      * @param todo to add.
      */
-    public void addTodo(TaskList taskList, Todo todo) {
-        System.out.println("Got it. I've added this task:\n  " + todo);
-        System.out.println("Now you have " + taskList.getTasks().size() + " tasks in the list.");
+    public String addTodo(TaskList taskList, Todo todo) {
+        return "Got it. I've added this task:\n  " + todo + "\nNow you have " + taskList.getTasks().size() + " tasks in the list.";
     }
 
     /**
@@ -130,8 +127,8 @@ public class Ui {
      *
      * @param message to print.
      */
-    public void showError(String message) {
-        System.out.println(message);
+    public String showError(String message) {
+        return message;
     }
 
     /**
@@ -139,15 +136,15 @@ public class Ui {
      *
      * @throws DukeException
      */
-    public void invalidUserInput() throws DukeException {
-        throw new DukeException("Oops! I'm sorry, but I don't know what that means :-(");
+    public String invalidUserInput() throws DukeException {
+        return new DukeException("Oops! I'm sorry, but I don't know what that means :-(").toString();
     }
 
     /**
      * Displays the exit message to user
      */
-    public void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -156,13 +153,17 @@ public class Ui {
      * @param taskList current list of all tasks.
      * @param word given by user.
      */
-    public void find(TaskList taskList, String word) {
+    public String find(TaskList taskList, String word) {
         ArrayList<Task> matchingDates = taskList.find(word);
 
         String output = "Here are the matching tasks in your list: \n";
         for (int i = 1; i <= matchingDates.size(); i++) {
             output = output + i + ". " + matchingDates.get(i - 1).toString() + "\n";
         }
-        System.out.println(output);
+        return output;
+    }
+
+    public void printToConsole(String response) {
+        System.out.println(response);
     }
 }
