@@ -47,9 +47,9 @@ public class Storage {
     public ArrayList<Task> load() throws DukeException {
         String home = System.getProperty("user.dir");
         Path path = Paths.get(home, this.filepath);
-        boolean directoryExists = Files.exists(path);
+        boolean isDirectoryFound = Files.exists(path);
 
-        if (directoryExists) {
+        if (isDirectoryFound) {
             try {
                 List<String> lines = Files.readAllLines(path);
                 ArrayList<Task> tasks = new ArrayList<>();
@@ -64,25 +64,25 @@ public class Storage {
                         t = new ToDo(data[3]);
                         break;
                     case "E":
-                        LocalDate date = LocalDate.parse(data[4]);
+                        LocalDate eventDate = LocalDate.parse(data[4]);
                         if (data.length == 5) {
-                            t = new Event(data[3], date);
+                            t = new Event(data[3], eventDate);
                         } else {
                             String hour = data[5].replace(":", "").substring(0, 2);
                             String minute = data[5].replace(":", "").substring(2, 4);
                             LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
-                            t = new Event(data[3], date, time);
+                            t = new Event(data[3], eventDate, time);
                         }
                         break;
                     case "D":
-                        LocalDate date2 = LocalDate.parse(data[4]);
+                        LocalDate deadlineDate = LocalDate.parse(data[4]);
                         if (data.length == 5) {
-                            t = new Deadline(data[3], date2);
+                            t = new Deadline(data[3], deadlineDate);
                         } else {
                             String hour = data[5].replace(":", "").substring(0, 2);
                             String minute = data[5].replace(":", "").substring(2, 4);
                             LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
-                            t = new Deadline(data[3], date2, time);
+                            t = new Deadline(data[3], deadlineDate, time);
                         }
                         break;
                     default:
@@ -113,9 +113,9 @@ public class Storage {
         String home = System.getProperty("user.dir");
         String text = taskList.stringifyTasksForSave();
         Path path = Paths.get(home, this.filepath);
-        boolean directoryExists = Files.exists(path);
+        boolean isDirectoryFound = Files.exists(path);
 
-        if (!directoryExists) {
+        if (!isDirectoryFound) {
             try {
                 Files.createDirectories(path.getParent());
             } catch (IOException e) {

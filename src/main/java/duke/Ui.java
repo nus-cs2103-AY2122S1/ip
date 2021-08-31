@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Class that handles user interactions.
  */
 public class Ui {
-    private static final String welcomeMessage = "\n\tHi! I'm Herbert, you can call me Herb  ٩(˘◡˘)۶\n"
+    private static final String WELCOME_MESSAGE = "\n\tHi! I'm Herbert, you can call me Herb  ٩(˘◡˘)۶\n"
             + "\tHow can I help you?\n\n"
             + "\tYou can type:\n"
             + "\t\t `list` to get a list of tasks\n"
@@ -17,7 +17,7 @@ public class Ui {
             + "\t\t `delete ${i}` to delete task i\n"
             + "\t\t `find ${keyword}` to find tasks by keyword\n"
             + "\t\t `bye` to end this chat\n";
-    private static final String endMessage = "\n\tSad to see you go :(\n\t...shutting down...";
+    private static final String END_MESSAGE = "\n\tSad to see you go :(\n\t...shutting down...";
     private final Scanner sc;
 
     /**
@@ -39,14 +39,14 @@ public class Ui {
      * Shows welcome message.
      */
     public void showWelcome() {
-        System.out.println(wrapOutput(welcomeMessage));
+        System.out.println(wrapOutput(WELCOME_MESSAGE));
     }
 
     /**
      * Shows end message.
      */
     public void sayBye() {
-        System.out.println(endMessage);
+        System.out.println(END_MESSAGE);
     }
 
     /**

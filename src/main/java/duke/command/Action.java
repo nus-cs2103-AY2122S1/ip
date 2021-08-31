@@ -27,6 +27,15 @@ public class Action extends Command {
         this.words = words;
     }
 
+    /**
+     * Validates the input for Done and Delete commands and 
+     * executes the command
+     *
+     * @param taskList Current list of tasks
+     * @param ui Ui to interact with user
+     * @param storage Storage that allows loading/saving
+     * @throws DukeException if an error is encountered
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (this.words.length != 2) {
