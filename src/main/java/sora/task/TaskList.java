@@ -233,9 +233,9 @@ public class TaskList {
         // Throw exception if command does not follow format
         validateCommand(command, "^find .*", "find [keyword]");
 
-        String keyword = command.substring(5).trim();
+        String keyword = command.substring(5).trim().toLowerCase();
         List<Task> filteredTasks = tasks.stream()
-            .filter(task -> task.matchDescription(keyword))
+            .filter(task -> task.match(keyword))
             .collect(Collectors.toList());
 
         return printList(filteredTasks);
