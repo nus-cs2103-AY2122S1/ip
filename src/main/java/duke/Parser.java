@@ -2,7 +2,8 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * duke.Parser that handles all the string manipulation. The users input is taken in as a string and passed to parser
@@ -58,39 +59,43 @@ public class Parser {
      * Used to parse a different kind of string format and package into and arraylist of task. Only for strings
      * found in the history, aka persistent storage
      * @param previousHistory ArrayList of strings in previous history
-     * @return
+     * @return Returns a list of packaged commands
      * @throws InvalidCommandException
      */
-    public static ArrayList<Command> parsePreloadedTasks(ArrayList<String> previousHistory) throws InvalidCommandException {
+    public static ArrayList<Command> parsePreloadedTasks(
+            ArrayList<String> previousHistory) throws InvalidCommandException {
         int eventTypeIndex = 1;
         int isCompletedIndex = 4;
         ArrayList<Command> preloadedList = new ArrayList<>();
 
         for (String line : previousHistory) {
-            String[] temp_packaged_history = line.split(" ");
-            ArrayList<String> packaged_history = new ArrayList<>();
-            Collections.addAll(packaged_history, temp_packaged_history);
+            String[] tempPackagedHistory = line.split(" ");
+            ArrayList<String> packagedHistory = new ArrayList<>();
+            Collections.addAll(packagedHistory, tempPackagedHistory);
 
             Task.TaskType eventType = Task.TaskType.NOTAPPLICABLE;
-            char temp = packaged_history.get(0).charAt(eventTypeIndex);
-            switch (packaged_history.get(0).charAt(eventTypeIndex)) {
+            char temp = packagedHistory.get(0).charAt(eventTypeIndex);
+            switch (packagedHistory.get(0).charAt(eventTypeIndex)) {
             case 'T':
                 eventType = Task.TaskType.TODO;
                 break;
             case 'E':
                 eventType = Task.TaskType.EVENT;
-                packaged_history.remove("event");
+                packagedHistory.remove("event");
                 break;
             case 'D':
                 eventType = Task.TaskType.DEADLINE;
-                packaged_history.remove("deadline");
+                packagedHistory.remove("deadline");
                 break;
             case 'N':
                 eventType = Task.TaskType.NOTAPPLICABLE;
+                break;
+            default:
+                break;
             }
-            packaged_history.remove(0);
+            packagedHistory.remove(0);
             System.out.println(eventType);
-            Command command = new Command(eventType, packaged_history, String.join(" ", packaged_history));
+            Command command = new Command(eventType, packagedHistory, String.join(" ", packagedHistory));
             preloadedList.add(command);
         }
         return preloadedList;

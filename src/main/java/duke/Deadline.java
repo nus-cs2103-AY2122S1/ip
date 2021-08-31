@@ -1,15 +1,15 @@
 package duke;
 
-/**
- * Deadline class that extends tasks. Should come with a name for the task as well as a deadline for the task
- */
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline class that extends tasks. Should come with a name for the task as well as a deadline for the task
+ */
 public class Deadline extends Task {
 
-    private LocalDateTime deadline;
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private LocalDateTime deadline;
 
     /**
      * Constructor for Deadline task
@@ -17,8 +17,8 @@ public class Deadline extends Task {
      * @param deadline Use to indicate the deadline of the task
      */
     public Deadline(String name, LocalDateTime deadline) {
-           super(name);
-           this.deadline = deadline;
+        super(name);
+        this.deadline = deadline;
     }
 
 

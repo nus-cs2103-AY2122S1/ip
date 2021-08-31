@@ -5,10 +5,10 @@ package duke;
  */
 public class Task {
 
+    private static int numberOfTask = 0;
     private boolean isCompleteStatus = false;
     private String name;
     private int taskNumber;
-    private static int numberOfTask = 0;
 
     /**
      * duke.Task type enum
@@ -48,7 +48,7 @@ public class Task {
         } else {
             status = "[X] ";
         }
-       return status + name;
+        return status + name;
     }
 
     /**

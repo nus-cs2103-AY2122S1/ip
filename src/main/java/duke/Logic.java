@@ -125,6 +125,8 @@ public class Logic {
             break;
         case NOTAPPLICABLE:
             //For echoing commands
+        default:
+            System.out.println("Should never reach here");
         }
         DataHandlerLayer.updateHistory();
         DataHandlerLayer.printHistory();

@@ -48,8 +48,8 @@ public class DataHandlerLayer {
      * Prints log of tasks. No parameters needed. To change task representation, see duke.Task.
      */
     public static void printLog() {
-        System.out.println("Here are your tasks summoner. Please do complete them as fast as possible. I have" +
-                "been waiting for so many others for countless of centuries. Perhaps I am just an npc");
+        System.out.println("Here are your tasks summoner. Please do complete them as fast as possible. I have"
+                + "been waiting for so many others for countless of centuries. Perhaps I am just an npc");
         for (int i = 0; i < log.size(); i++) {
             Task currentTask = log.get(i);
             int taskNumber = i + 1;
@@ -70,7 +70,11 @@ public class DataHandlerLayer {
         }
     }
 
-
+    /**
+     * Used for the filter keyword. Searches the log for any strings
+     * and prints any task that contains it.
+     * @param keyword keyword that is being searched
+     */
     public static void filterLog(String keyword) {
         for (int i = 0; i < log.size(); i++) {
             Task temp = log.get(i);
@@ -119,7 +123,7 @@ public class DataHandlerLayer {
      * @throws InvalidCommandException thrown when any of the commands in string cannot be packaged as a command class.
      */
     public static ArrayList<Command> loadPreset() throws InvalidCommandException {
-        return Parser.parsePreloadedTasks(history.getAll_lines());
+        return Parser.parsePreloadedTasks(history.getAllLines());
     }
 
     /**

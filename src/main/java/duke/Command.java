@@ -33,7 +33,8 @@ public class Command {
      * @param log See above
      * @param localDateTime Includes the localDateTime for command
      */
-    public Command(Task.TaskType taskType, ArrayList<String> listOfCommandInputs, String log, LocalDateTime localDateTime) {
+    public Command(Task.TaskType taskType, ArrayList<String> listOfCommandInputs,
+                   String log, LocalDateTime localDateTime) {
         this.taskType = taskType;
         this.listOfCommandInputs = listOfCommandInputs;
         this.log = log;
