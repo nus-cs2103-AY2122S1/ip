@@ -4,6 +4,9 @@ import viper.Storage;
 import viper.TaskList;
 import viper.Ui;
 
+/**
+ * Exits Viper and shows a bye message.
+ */
 public class ByeCommand extends Command {
     
     @Override

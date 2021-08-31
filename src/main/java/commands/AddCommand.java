@@ -9,9 +9,8 @@ import tasks.Todos;
 import java.io.IOException;
 
 /**
- * for TODO, DEADLINE and EVENT commands
+ * Adds todo, deadline and event command to tasklist and storage.
  */
-
 public class AddCommand extends Command {
     String line;
 

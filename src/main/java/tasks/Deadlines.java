@@ -1,11 +1,13 @@
 package tasks;
 
-import exceptions.DukeException;
 import viper.Instruction;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Deadline task that takes in date.
+ */
 public class Deadlines extends Task {
     protected LocalDate date;
     

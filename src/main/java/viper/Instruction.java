@@ -1,5 +1,8 @@
 package viper;
 
+/**
+ * Stores the types of Instruction a command can have.
+ */
 public enum Instruction {
     LIST("list"),
     DONE("done"),
@@ -17,6 +20,11 @@ public enum Instruction {
         this.s = s;
     }
 
+    /**
+     * Compares Instruction with string.
+     * @param str Input string.
+     * @return Instruction if such an instruction exist, otherwise invalid
+     */
     public static Instruction comparesTo(String str) {
         for (Instruction i : Instruction.values()) {
             if (i.s.equalsIgnoreCase(str)) {
