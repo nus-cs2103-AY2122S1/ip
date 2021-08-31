@@ -1,3 +1,5 @@
+package cs2103.duke;
+
 import java.util.ArrayList;
 
 public class TaskList {

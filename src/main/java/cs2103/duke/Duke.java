@@ -1,3 +1,5 @@
+package cs2103.duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;

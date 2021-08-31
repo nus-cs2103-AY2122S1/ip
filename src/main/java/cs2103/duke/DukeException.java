@@ -1,3 +1,5 @@
+package cs2103.duke;
+
 public class DukeException extends Exception {
     private static String msg;
 

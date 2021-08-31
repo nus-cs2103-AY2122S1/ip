@@ -1,3 +1,5 @@
+package cs2103.duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 

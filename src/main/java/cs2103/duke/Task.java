@@ -1,3 +1,5 @@
+package cs2103.duke;
+
 /**
  * This class encapsulates a Task object.
  */
