@@ -23,10 +23,10 @@ public class AddCommand extends Command {
      * @param storage Saves the updated TaskList to disk
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         storage.save(tasks);
-        ui.showMessage("Task added successfully!");
+        return "Task added successfully!";
     }
 
     @Override

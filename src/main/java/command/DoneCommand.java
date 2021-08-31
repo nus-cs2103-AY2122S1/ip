@@ -26,13 +26,13 @@ public class DoneCommand extends Command{
      * @param storage Saves the updated TaskList to disk
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (taskNumber > tasks.getSize() || taskNumber < 0) {
             throw new DukeException("Please insert a valid task.Task Number!");
         } else {
             tasks.getTask(taskNumber).markAsDone();
             storage.save(tasks);
-            ui.showMessage("Task marked as done!");
+            return "Task marked as done!";
         }
     }
 

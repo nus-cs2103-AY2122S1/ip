@@ -26,13 +26,13 @@ public class DeleteCommand extends Command {
      * @param storage Saves the updated TaskList to disk
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (taskNumber > tasks.getSize() || taskNumber <= 0) {
             throw new DukeException("Please insert a valid task.Task Number!");
         } else {
             tasks.deleteTask(taskNumber);
             storage.save(tasks);
-            ui.showMessage("Task deleted!");
+            return "Task deleted!";
         }
     }
 
