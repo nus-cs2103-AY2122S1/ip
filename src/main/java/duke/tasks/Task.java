@@ -46,6 +46,10 @@ public class Task {
         return " | " + isDoneString + " | " + description;
     }
 
+    public boolean containsKeyword(String keyword) {
+        return description.contains(keyword);
+    }
+    
     /**
      * Returns a string representation of a task to be shown to the user.
      *

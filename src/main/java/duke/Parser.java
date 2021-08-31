@@ -5,6 +5,7 @@ import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.FindTasksCommand;
 import duke.commands.ListCommand;
 
 import duke.tasks.Deadline;
@@ -47,13 +48,23 @@ public class Parser {
             case "deadline":
                 Deadline deadline = parseDeadline(taskDetails);
                 return new AddTaskCommand(deadline);
+            case "find":
+                String keyword = parseKeyword(taskDetails);
+                return new FindTasksCommand(keyword);
             case "bye":
                 return new ByeCommand();
             default:
                 throw new DukeException("Unknown command.");
         }
     }
-    
+
+    private static String parseKeyword(String taskDetails) throws DukeException {
+        if (taskDetails.isEmpty()) {
+            throw new DukeException("Keyword for find command cannot be empty");
+        }
+        return taskDetails;
+    }
+
     private static void checkEmptyTaskDetails(String taskDetails) throws DukeException {
         if (taskDetails.isEmpty()) {
             throw new DukeException("Task details cannot be empty");
