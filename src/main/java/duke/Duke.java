@@ -1,13 +1,13 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 import duke.command.Command;
 import duke.command.Parser;
-import duke.util.DukeException;
-import duke.util.Storage;
-import duke.util.TaskList;
-import duke.util.Ui;
+import duke.task.Task;
+import duke.util.*;
 
 public class Duke {
     /** For the chatboard to read the user input. */
@@ -26,7 +26,15 @@ public class Duke {
         sc = new Scanner(System.in);
         ui = new Ui();
         storage = new Storage(ui);
-        taskList = new TaskList(storage.importTask(), ui, storage);
+    }
+
+    public Message loadTaskList() {
+        try {
+            taskList = new TaskList(storage.importTask(), ui, storage);
+            return ui.loadTaskSuccessMessage();
+        } catch (FileNotFoundException e) {
+            return ui.importTaskErrorMessage();
+        }
     }
 
     /**
@@ -34,6 +42,7 @@ public class Duke {
      */
     private void chat() {
         ui.greetMessage().printMessage();
+        loadTaskList().printMessage();
         String message;
         Command command;
         boolean isRunning = true;

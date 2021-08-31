@@ -110,6 +110,15 @@ public class Ui {
     }
 
     /**
+     * Prints out a message if task from previous interactions is loaded.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
+     */
+    public Message loadTaskSuccessMessage() {
+        return new Message("I have loaded in task(s) saved from our previous interactions.");
+    }
+
+    /**
      * Prints out a message when the task cannot be imported.
      *
      * @param description Description of task to be imported.

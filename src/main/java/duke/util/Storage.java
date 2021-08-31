@@ -72,39 +72,35 @@ public class Storage {
      *
      * @return A list of all the task stored.
      */
-    public List<Task> importTask() {
+    public List<Task> importTask() throws FileNotFoundException {
         File file = new File(LOCATION_OF_FILE);
         List<Task> taskList = new ArrayList<>();
-        try {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            bufferedReader.lines()
-                    .forEach(task -> {
-                        String[] taskData = task.split(" \\| ");
-                        if (taskData.length == 3 || taskData.length == 4) {
-                            if (taskData[0].equals(Keyword.DEADLINE.getSaveWord())) {
-                                try {
-                                    taskList.add(new Deadlines(taskData[1], taskData[3],
-                                            taskData[2].equals("1") ? true : false));
-                                } catch (ParseException e) {
-                                    ui.importTaskErrorMessage(taskData[1]);
-                                }
-                            } else if (taskData[0].equals(Keyword.EVENTS.getSaveWord())) {
-                                try {
-                                    taskList.add(new Events(taskData[1], taskData[3],
-                                            taskData[2].equals("1") ? true : false));
-                                } catch (ParseException e) {
-                                    ui.importTaskErrorMessage(taskData[1]);
-                                }
-                            } else if (taskData[0].equals(Keyword.TODOS.getSaveWord())) {
-                                taskList.add(new ToDos(taskData[1],
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        bufferedReader.lines()
+                .forEach(task -> {
+                    String[] taskData = task.split(" \\| ");
+                    if (taskData.length == 3 || taskData.length == 4) {
+                        if (taskData[0].equals(Keyword.DEADLINE.getSaveWord())) {
+                            try {
+                                taskList.add(new Deadlines(taskData[1], taskData[3],
                                         taskData[2].equals("1") ? true : false));
+                            } catch (ParseException e) {
+                                ui.importTaskErrorMessage(taskData[1]);
                             }
+                        } else if (taskData[0].equals(Keyword.EVENTS.getSaveWord())) {
+                            try {
+                                taskList.add(new Events(taskData[1], taskData[3],
+                                        taskData[2].equals("1") ? true : false));
+                            } catch (ParseException e) {
+                                ui.importTaskErrorMessage(taskData[1]);
+                            }
+                        } else if (taskData[0].equals(Keyword.TODOS.getSaveWord())) {
+                            taskList.add(new ToDos(taskData[1],
+                                    taskData[2].equals("1") ? true : false));
                         }
-                    });
-        } catch (FileNotFoundException e) {
-            ui.importTaskErrorMessage();
-        }
+                    }
+                });
         return taskList;
     }
 }
