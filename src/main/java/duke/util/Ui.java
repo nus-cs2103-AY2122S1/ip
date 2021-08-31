@@ -36,11 +36,36 @@ public class Ui {
     }
 
     /**
+     * Formats the provided strings appropriately. The strings
+     * provided will be formatted to be printable line by line.
+     *
+     * @param strings Strings to format to be line-by-line.
+     * @return The formatted {@code String}s.
+     */
+    public String printLines(String... strings) {
+        StringBuilder returnString = new StringBuilder();
+
+        for (String string : strings) {
+            returnString.append(String.format("%s\n", string));
+        }
+
+        return returnString.toString();
+    }
+
+    /**
+     * Returns a {@code string} greeting.
+     * @return greeting message.
+     */
+    public String getGreeting() {
+        return GREET;
+    }
+
+    /**
      * Prints goodbye.
      */
-    public void close() {
+    public String close() {
         sc.close();
-        print(EXIT);
+        return EXIT;
     }
 
 }

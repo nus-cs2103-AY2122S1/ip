@@ -1,25 +1,26 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.storage.Storage;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
+import duke.storage.Storage;
 
 /**
  * JUnit test class for {@code Storage}.
  */
 public class StorageTest {
-    @Test
 
     /**
      * Tests the {@code load} method when the directory of the save
      * file does not exist.
      */
+    @Test
     public void load_folderDoesNotExist() {
         try {
             Storage storageOne = new Storage("storageTestFolder/data.txt");

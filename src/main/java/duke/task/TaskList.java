@@ -16,13 +16,20 @@ import duke.exception.TaskNotFoundException;
  * Represent a task list object that performs operations on tasks.
  */
 public class TaskList {
-    private static final String DONE = "Nice! (ᵔ.ᵔ) Task done:";
+    private static final String DONE = "Nice! Task done:";
     private static final String LIST = "Here's your tasks!";
     private static final String ADD = "Nee added this task:";
     private static final String DELETE = "Nee has deleted this task:";
     private static final String FIND = "Nee found matching tasks!";
 
     private ArrayList<Task> tasks;
+
+    /**
+     * Constructor for TaskList.
+     */
+    public TaskList() {
+        this(new ArrayList<>());
+    }
 
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -81,6 +88,7 @@ public class TaskList {
 
     /**
      * Returns the list of tasks.
+     *
      * @return List of tasks.
      */
     public ArrayList<Task> getTasks() {

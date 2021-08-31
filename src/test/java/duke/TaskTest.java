@@ -1,16 +1,18 @@
 package duke;
 
-import duke.task.Task;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
+import duke.task.Task;
 
 /**
  * JUnit test class for {@code Task}.
  */
 public class TaskTest {
+
     /**
      * Tests the {@code getDescription()} method.
      */
@@ -53,5 +55,4 @@ public class TaskTest {
         assertEquals("[X] Do you like pizza?", testTask.toString());
 
     }
-
 }
