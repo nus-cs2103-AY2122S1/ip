@@ -138,7 +138,7 @@ public class Storage {
         }
         
         fw.close();
-        boolean success = tempFile.renameTo(file);
+        tempFile.renameTo(file);
     }
 
     /**
@@ -164,7 +164,7 @@ public class Storage {
         }
         
         fw.close();
-        boolean success = tempFile.renameTo(file);
+        tempFile.renameTo(file);
     }
        
 }

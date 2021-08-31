@@ -12,15 +12,15 @@ import java.io.IOException;
  * Adds todo, deadline and event command to tasklist and storage.
  */
 public class AddCommand extends Command {
-    String line;
+    protected String cmdLine;
 
-    public AddCommand(String line) {
-        this.line = line;
+    public AddCommand(String cmdLine) {
+        this.cmdLine = cmdLine;
     }
     
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String[] splitLine = line.split(" ", 2);
+        String[] splitLine = cmdLine.split(" ", 2);
         try {
             if (splitLine[1].isBlank()) {
                 throw new DukeException("Oh no!! Something is missing from this " + splitLine[0] + " !!! ☹");

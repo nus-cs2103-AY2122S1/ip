@@ -6,8 +6,8 @@ import java.util.Scanner;
  * deals with interactions with the user
  */
 public class Ui {
-    private static final String indent = "       ";
-    private static final String div = "\n ---------------------------------------------------------- \n";
+    private static final String INDENT = "       ";
+    private static final String DIVIDER = "\n ---------------------------------------------------------- \n";
 
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
@@ -15,19 +15,19 @@ public class Ui {
     }
     
     public void showMessage (String[] strings) {
-        System.out.println(div);
+        System.out.println(DIVIDER);
         for (String string : strings) {
-            System.out.println(indent + string);
+            System.out.println(INDENT + string);
         }
-        System.out.println(div);
+        System.out.println(DIVIDER);
     }
     
     public void printLine (String str) {
-        System.out.println(indent + str);
+        System.out.println(INDENT + str);
     }
     
     public void printDiv () {
-        System.out.println(div);
+        System.out.println(DIVIDER);
     }
     
     public void showWelcome() {
@@ -58,9 +58,9 @@ public class Ui {
     }
 
     public void showListHeader (String[] strings) {
-        System.out.println(div);
+        System.out.println(DIVIDER);
         for (String string : strings) {
-            System.out.println(indent + string);
+            System.out.println(INDENT + string);
         }
     }
 }

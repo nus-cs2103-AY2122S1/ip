@@ -11,15 +11,13 @@ import java.io.IOException;
  * Deletes command specified by user based on index
  */
 public class DeleteCommand extends Command {
-    String t;
-    String[] s;
+    String cmdLine;
     int index;
-    Task deleteTask;
 
-    public DeleteCommand(String t) {
-        this.t = t;
-        this.s = t.split(" ", 2);
-        this.index = Integer.parseInt(s[1]);
+    public DeleteCommand(String cmdLine) {
+        this.cmdLine = cmdLine;
+        String[] splitLine = cmdLine.split(" ", 2);
+        this.index = Integer.parseInt(splitLine[1]);
     }
 
     /**
@@ -32,7 +30,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         if (index < tasks.getSize() + 1) {
-            deleteTask = tasks.getTask(index - 1);
+            Task deleteTask = tasks.getTask(index - 1);
             
             tasks.deleteTask(index - 1);
             storage.deleteTask(deleteTask);
