@@ -1,6 +1,9 @@
 package duke;
 
-public enum Commands {
+/**
+ * An enum of all available commands + invalid command.
+ */
+public enum Command {
     LIST("list"),
     FIND("find"),
     DONE("done"),
@@ -14,16 +17,22 @@ public enum Commands {
 
     private String c;
 
-    Commands(String c) {
+    Command(String c) {
         this.c = c;
     }
 
-    public static Commands fromString(String text) {
-        for (Commands cmd : Commands.values()) {
+    /**
+     * Converts a String to a Command while ignoring case.
+     *
+     * @param text The String to be converted.
+     * @return The corresponding Command.
+     */
+    public static Command fromString(String text) {
+        for (Command cmd : Command.values()) {
             if (cmd.c.equalsIgnoreCase(text)) {
                 return cmd;
             }
         }
-        return Commands.INVALID;
+        return Command.INVALID;
     }
 }

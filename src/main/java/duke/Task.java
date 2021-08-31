@@ -1,5 +1,9 @@
 package duke;
 
+/**
+ * Represents a task with a description and its status.
+ * Is extended by several other classes. (Todo, Deadline, Event).
+ */
 public class Task {
     private String desc;
     private boolean isDone;
@@ -22,14 +26,24 @@ public class Task {
         return isDone;
     }
 
-    public String statusIcon() {
-        return isDone ? "[X] " : "[ ] ";
-    }
-
     public void markAsDone() {
         this.isDone = true;
     }
 
+    /**
+     * Returns a formatted String based on the status of the task.
+     *
+     * @return the formatted String.
+     */
+    public String statusIcon() {
+        return isDone ? "[X] " : "[ ] ";
+    }
+
+    /**
+     * Returns the task as a String formatted to be saved.
+     *
+     * @return The formatted String.
+     */
     public String saveTask() {
         return "T|" + isDone + "\\|" + desc;
     }

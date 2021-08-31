@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 
+/**
+ * Wrapper for the Tasks.
+ */
 public class TaskList {
     private ArrayList<Task> tasks;
     private Storage storage;
@@ -19,6 +22,9 @@ public class TaskList {
         return tasks.size();
     }
 
+    /**
+     * Displays contents of list to screen.
+     */
     public void displayList() {
         String line = "____________________________________________________________";
         String indent = "    ";
@@ -37,6 +43,11 @@ public class TaskList {
         System.out.println(indent + line);
     }
 
+    /**
+     * Marks task at given index as done.
+     *
+     * @param index Index of task.
+     */
     public void doneTask(int index) {
         try {
             Task finishedTask = tasks.get(index);
@@ -49,6 +60,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes task at given index.
+     *
+     * @param index Index of task.
+     */
     public void deleteTask(int index) {
         try {
             Task deletedTask = tasks.get(index);
@@ -61,6 +77,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Todo to the list of tasks.
+     *
+     * @param desc Description of Todo.
+     */
     public void addTodo(String desc) {
         try {
             if (desc.isEmpty()) {
@@ -78,6 +99,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds Deadline to list of tasks.
+     *
+     * @param req Array of Strings containing the description and the deadline.
+     */
     public void addDeadline(String[] req) {
         try {
             if (req.length != 2) {
@@ -98,6 +124,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds Event to list of tasks.
+     *
+     * @param req Array of Strings containing the description and the time fram.
+     */
     public void addEvent(String[] req) {
         try {
             if (req.length != 2) {
@@ -117,6 +148,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Displays tasks that contain the given key to screen.
+     *
+     * @param key THe given String to match.
+     */
     public void findTask(String key) {
         if (key.isEmpty()) {
             ui.toScreen("Please include a search word.");
@@ -146,6 +182,9 @@ public class TaskList {
         System.out.println(indent + line);
     }
 
+    /**
+     * Deletes all tasks in list and hard drive.
+     */
     public void clearTasks() {
         tasks = new ArrayList<>(100);
         storage.updateFile(tasks);

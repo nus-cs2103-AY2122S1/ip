@@ -7,6 +7,9 @@ import java.text.SimpleDateFormat;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
 
+/**
+ * Represents a task that has a deadline.
+ */
 public class Deadline extends Task {
     private LocalDateTime deadline;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy, hh:mm a");
@@ -34,6 +37,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns the task as a String formatted to be saved.
+     *
+     * @return The formatted String.
+     */
     @Override
     public String saveTask() {
         return "D|" + this.isDone() + "|" + getDesc() + "|" + deadline.format(SAVE_FORMAT) + "\n";

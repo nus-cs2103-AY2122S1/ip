@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a simple Task.
+ */
 public class Todo extends Task {
     public Todo(String desc) {
         super(desc.trim());
@@ -9,6 +12,11 @@ public class Todo extends Task {
         super(desc.trim(), isDone);
     }
 
+    /**
+     * Returns the task as a String formatted to be saved.
+     *
+     * @return The formatted String.
+     */
     @Override
     public String saveTask() {
         return "T|" + this.isDone() + "|" + this.getDesc() + "\n";

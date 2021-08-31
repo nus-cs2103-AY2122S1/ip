@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a task with a time frame.
+ */
 public class Event extends Task {
     private String duration;
 
@@ -13,6 +16,11 @@ public class Event extends Task {
         this.duration = duration.trim();
     }
 
+    /**
+     * Returns the task as a String formatted to be saved.
+     *
+     * @return The formatted String.
+     */
     @Override
     public String saveTask() {
         return "E|" + this.isDone() + "|" + getDesc() + "|" + duration + "\n";

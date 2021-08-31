@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Deciphers user inputs and calls appropriate functions.
+ */
 public class Parser {
     private TaskList tasks;
     private Ui ui;
@@ -9,9 +12,16 @@ public class Parser {
         this.ui = ui;
     }
 
+    /**
+     * Main function of class.
+     * Converts user inputs to Command and calls the corresponding functions.
+     *
+     * @param fullCommand User inputted String.
+     * @return Whether or not the program continues or ends.
+     */
     public boolean parse(String fullCommand) {
         String[] temp = fullCommand.split("\\s+", 2);
-        Commands cmd = Commands.fromString(temp[0]);
+        Command cmd = Command.fromString(temp[0]);
         String remainder = temp.length > 1 ? temp[1] : "";
 
         switch (cmd) {

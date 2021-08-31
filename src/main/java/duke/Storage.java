@@ -9,6 +9,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Handles read/write calls to hard disk.
+ */
 public class Storage {
     private Path saveFile;
     private Ui ui;
@@ -18,6 +21,11 @@ public class Storage {
         this.ui = ui;
     }
 
+    /**
+     * Initialises tasks from hard drive.
+     *
+     * @param tasks The place tasks are stored.
+     */
     public void initialiseTasks(ArrayList<Task> tasks) {
         try {
             File sf = new File(String.valueOf(saveFile));
@@ -50,6 +58,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes given task to hard drive.
+     *
+     * @param t The given task.
+     */
     public void writeTask(Task t) {
         try {
             FileWriter taskWriter = new FileWriter(String.valueOf(saveFile), true);
@@ -60,6 +73,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Rewrites hard drive with tasks in the given list of Tasks
+     *
+     * @param task The given list of Tasks.
+     */
     public void updateFile(ArrayList<Task> task) {
         try {
             new PrintWriter(String.valueOf(saveFile)).close();

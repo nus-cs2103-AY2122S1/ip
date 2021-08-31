@@ -4,7 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
- *
+ * Main class to run the program.
  */
 public class Duke {
     private TaskList tasks;
@@ -19,6 +19,9 @@ public class Duke {
         parser = new Parser(tasks, ui);
     }
 
+    /**
+     * Main driver that starts the program
+     */
     public void run() {
         ui.firstWelcome();
         boolean cont = true;
