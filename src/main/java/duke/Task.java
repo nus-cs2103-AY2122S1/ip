@@ -28,8 +28,8 @@ public class Task implements Executable, Serializable {
      * 
      * @param taskList Current list of tasks.
      */
-    public void execute(TaskList taskList) {
-        taskList.addTask(this);
+    public String execute(TaskList taskList) {
+        return taskList.addTask(this);
     }
 
     public String toString() {

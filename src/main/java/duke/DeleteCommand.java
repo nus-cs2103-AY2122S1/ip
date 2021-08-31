@@ -15,9 +15,9 @@ public class DeleteCommand implements Executable {
     /**
      * Execute the delete command. 
      * 
-     * @param Current list of tasks.
+     * @param tasklist current list of tasks.
      */
-    public void execute(TaskList tasklist) {
-        tasklist.deteteTask(index);
+    public String execute(TaskList tasklist) {
+        return tasklist.deteteTask(index);
     }
 }

@@ -9,6 +9,19 @@ import java.util.Scanner;
  */
 public class Duke {
 
+    private TaskList taskList;
+
+    public Duke(TaskList taskList) {
+        this.taskList = taskList;
+    }
+
+    protected TaskList getTaskList() {
+        return taskList;
+    }
+
+    /**
+     * run command line duke
+     */
     private static void run() {
         Ui.greet();
         TaskList taskList = Storage.load(); 
@@ -24,9 +37,5 @@ public class Duke {
         }
         input.close();
         Ui.exit();
-    }
-
-    public static void main(String[] args) {
-        run();
     }
 }

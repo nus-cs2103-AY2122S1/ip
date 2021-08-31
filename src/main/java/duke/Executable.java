@@ -6,5 +6,5 @@ package duke;
  * @author Tianqi-Zhu
  */
 public interface Executable {
-    public void execute(TaskList taskList);
+    public String execute(TaskList taskList);
 }
