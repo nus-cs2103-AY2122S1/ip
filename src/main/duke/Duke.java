@@ -1,7 +1,9 @@
 package duke;
-
 import duke.command.Command;
 
+/**
+ *  The Duke interactive chatbot, which allows users to keep track of schedules.
+ */
 public class Duke {
 
     private Storage storage;
@@ -37,6 +39,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the Duke chatbot.
+     *
+     * @param args Command line arguments to be passed into Duke. Not Used
+     */
     public static void main(String[] args) {
         new Duke("tasks.txt").run();
     }

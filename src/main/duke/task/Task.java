@@ -6,7 +6,9 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 
-
+/**
+ * Represents outstanding task for the user to keep track.
+ */
 public class Task {
 
     protected static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyy HH:mm");
@@ -29,22 +31,41 @@ public class Task {
         }
     }
 
+    /**
+     * Mark task as done.
+     */
     public void finishTask() {
         isDone = true;
     }
 
+    /**
+     * Check if a task is done, in a list.
+     * @return Indictor if task is done
+     */
     private String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
 
+    /**
+     * Format task to be saved in file.
+     * @return Formatted string representation of task.
+     */
     public String saveString() {
         return String.format("%s|%s|%s", isDone, description, time);
     }
 
+    /**
+     * Get the time of the task.
+     * @return Time.
+     */
     public LocalDateTime time() {
         return time;
     }
-    
+
+    /**
+     * Format task to be displayed in list.
+     * @return Formatted string representation of task.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

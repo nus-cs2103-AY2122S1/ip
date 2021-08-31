@@ -17,6 +17,11 @@ public class AddCommand extends Command {
         parseTask(fullCommand);
     }
 
+    /**
+     * Differentate which tasks user is adding.
+     * @param fullCommand Unedited user command.
+     * @throws DukeException If an invalid command format is written.
+     */
     private void parseTask(String fullCommand) throws DukeException{
         switch (fullCommand.split(" ")[0]) {
         case "todo":
@@ -44,13 +49,24 @@ public class AddCommand extends Command {
             throw new DukeException("Invalid Command!");
         }
     }
-  
+
+    /**
+     * Execute user command.
+     * @param tasks List of tasks.
+     * @param ui UI of Duke Chatbot.
+     * @param storage Storage of Duke Chatbot.
+     * @throws DukeException If execution fails.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(taskToAdd);
         System.out.println(String.format("Task Added!\n %s", taskToAdd));
         storage.save(tasks);
     }
 
+    /**
+     * Check if user is ending the chatbot.
+     * @return True if user is ending the chatbot.
+     */
     public Boolean isExit() {
         return false;
     }
