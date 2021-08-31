@@ -2,18 +2,20 @@ package duke;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.io.FileNotFoundException;
+import javafx.scene.text.Text;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    @FXML
+    private Label firstGreeting;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -33,6 +35,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(firstGreeting.getText(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
