@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.exception.DukeException;
 import duke.task.TaskList;
+import duke.util.Message;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
@@ -17,17 +18,23 @@ public class Duke {
      * Initialize each component of the program.
      * Loads any data available from filePath.
      *
-     * @param filePath path to the storage file
+     * @param isCli enable cli output
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Duke(boolean isCli) {
+        storage = new Storage("data.txt");
+        ui = isCli ? new Ui() : null;
+
+        if (isCli) {
+            ui.printMessage(Message.WELCOME);
+        }
 
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException | IOException e) {
-            ui.printMessage(e.getMessage());
             taskList = new TaskList();
+            if (isCli) {
+                ui.printMessage(e.getMessage());
+            }
         }
     }
 
@@ -56,11 +63,38 @@ public class Duke {
     }
 
     /**
-     * Initialize and start the program.
+     * Handles command from user and returns corresponding message from executing the command.
+     * Used by JavaFX.
      *
-     * @param args any CLI input but currently not used in program
+     * @param command command input by user
+     * @return response message of the command or error message
+     */
+    public String getResponse(String command) {
+        // Exit is handled separately
+        if (command.equals("bye")) {
+            return Message.EXIT.toString();
+        }
+
+        String message;
+        try {
+            // Interpret and execute the command by user
+            message = Parser.interpretCommand(command).execute(taskList);
+
+            // Update storage file
+            storage.save(taskList.getTasks());
+        } catch (DukeException | IOException e) {
+            message = e.getMessage();
+        }
+
+        return message;
+    }
+
+    /**
+     * Initialize and start the program in CLI interface.
+     *
+     * @param args not used
      */
     public static void main(String[] args) {
-        new Duke("data.txt").run();
+        new Duke(true).run();
     }
 }
