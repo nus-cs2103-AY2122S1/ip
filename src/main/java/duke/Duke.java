@@ -29,29 +29,6 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/Jiahao.jpg"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Ben.jpg"));
-    /**
-     * Greeting message from Duke.
-     */
-    public void greet() {
-        String message = "Hello! I'm Duke\nWhat can I do for you?";
-        System.out.println(message);
-    }
-
-    /**
-     * Message from Duke when the program ends.
-     */
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Starts the Duke program.
-     *
-     * @param args instructions for Duke
-     * @throws IOException If the File cannot be read/found.
-     */
-    public static void main(String[] args) throws IOException {
-    }
 
     @Override
     public void start(Stage stage) {
