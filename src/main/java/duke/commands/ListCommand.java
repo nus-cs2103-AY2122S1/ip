@@ -9,8 +9,8 @@ public class ListCommand extends Command {
     public ListCommand() {}
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printOutput(tasks.toString());
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
+        return tasks.toString();
     }
     
 }
