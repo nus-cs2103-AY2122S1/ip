@@ -27,7 +27,7 @@ public class ToDo extends Task {
      * @return String representation of the todo task in the format required to save into hard disk.
      */
     @Override
-    public String dataFormat() {
+    public String formatData() {
         return String.format("T, %d, %s\n", getStatusInt(), getContent());
     }
 

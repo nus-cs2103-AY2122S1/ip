@@ -20,13 +20,13 @@ public class ToDoTest {
     @Test
     public void testDataFormatConversion_notDone() {
         ToDo toDo = new ToDo("return book");
-        assertEquals("T, 0, return book\n", toDo.dataFormat());
+        assertEquals("T, 0, return book\n", toDo.formatData());
     }
 
     @Test
     public void testDataFormatConversion_done() {
         ToDo toDo = new ToDo("return book", true);
-        assertEquals("T, 1, return book\n", toDo.dataFormat());
+        assertEquals("T, 1, return book\n", toDo.formatData());
     }
 
     @Test

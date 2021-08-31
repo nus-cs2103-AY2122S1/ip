@@ -34,7 +34,7 @@ public abstract class Task {
      * Returns a String representation of the task in the format required for saving into hard disk.
      * @return String representation of the task in the format required to save into text hard disk.
      */
-    public abstract String dataFormat();
+    public abstract String formatData();
 
     /**
      * Mark task as done.

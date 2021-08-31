@@ -36,7 +36,7 @@ public class Event extends Task {
      * @return String representation of the event in the format required to save into hard disk.
      */
     @Override
-    public String dataFormat() {
+    public String formatData() {
         String dateFormat =  at.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
         return String.format("E, %d, %s, %s\n", getStatusInt(), getContent(), dateFormat);
     }

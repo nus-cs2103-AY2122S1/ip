@@ -1,6 +1,5 @@
 package nyx;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -77,9 +76,9 @@ public class TaskList {
      * in the format required for saving into hard disk.
      * @return String representation of all the tasks in the list in the format required for saving into hard disk.
      */
-    public String genSaveFormat() {
+    public String getSaveFormat() {
         StringBuilder sb = new StringBuilder();
-        tasks.stream().map(Task::dataFormat).forEach(sb::append);
+        tasks.stream().map(Task::formatData).forEach(sb::append);
         return sb.toString();
     }
 
@@ -101,7 +100,7 @@ public class TaskList {
     @Override
     public String toString() {
         if (tasks.isEmpty()) {
-            return "You do not have any task currently";
+            return "You do not have any tasks currently";
         } else {
             StringBuilder output = new StringBuilder("Here are the tasks in your list:\n");
             for (int i = 1; i <= tasks.size(); i++) {

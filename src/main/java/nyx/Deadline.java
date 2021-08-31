@@ -36,7 +36,7 @@ public class Deadline extends Task {
      * @return String representation of the deadline task in the format required to save into hard disk.
      */
     @Override
-    public String dataFormat() {
+    public String formatData() {
         String dateFormat =  by.format(DateTimeFormatter.ofPattern(DATETIME_FORMAT));
         return String.format("D, %d, %s, %s\n", getStatusInt(), getContent(), dateFormat);
     }

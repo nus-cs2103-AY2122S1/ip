@@ -79,7 +79,7 @@ public class Storage {
      */
     public void overwriteData(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(data.getAbsolutePath());
-        fw.write(taskList.genSaveFormat());
+        fw.write(taskList.getSaveFormat());
         fw.close();
     }
 
@@ -90,7 +90,7 @@ public class Storage {
      */
     public void addData(Task task) throws IOException {
         FileWriter fw = new FileWriter(data.getAbsolutePath(), true);
-        fw.write(task.dataFormat());
+        fw.write(task.formatData());
         fw.close();
     }
 }

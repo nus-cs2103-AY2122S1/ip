@@ -16,8 +16,8 @@ public class Nyx {
             + "| |   \\   |  / /    / / \\ \\\n"
             + "|_|    \\__| /_/    /_/   \\_\\\n";
     private final Ui ui;
-    private TaskList taskList;
     private final Storage storage;
+    private TaskList taskList;
 
     /**
      * Constructs a Nyx object to initialize the chatbot with the specified folder and file names.

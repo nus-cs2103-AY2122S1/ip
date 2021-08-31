@@ -20,13 +20,13 @@ public class DeadlineTest {
     @Test
     public void testDataFormatConversion_notDone() {
         Deadline deadline = new Deadline("return book", "2021-04-12 15:35");
-        assertEquals("D, 0, return book, 2021-04-12 15:35\n", deadline.dataFormat());
+        assertEquals("D, 0, return book, 2021-04-12 15:35\n", deadline.formatData());
     }
 
     @Test
     public void testDataFormatConversion_done() {
         Deadline deadline = new Deadline("return book", "2021-04-12 15:35", true);
-        assertEquals("D, 1, return book, 2021-04-12 15:35\n", deadline.dataFormat());
+        assertEquals("D, 1, return book, 2021-04-12 15:35\n", deadline.formatData());
     }
 
     @Test
