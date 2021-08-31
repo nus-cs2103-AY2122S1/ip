@@ -302,6 +302,12 @@ public class Parser extends Application {
         }
         return response;
     }
+
+    /**
+     * Empty start method to extend the Application class.
+     *
+     * @param stage Method is not used.
+     */
     @Override
     public void start(Stage stage) {
     }
