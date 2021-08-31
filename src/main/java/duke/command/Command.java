@@ -8,9 +8,9 @@ import duke.Parser;
  * This class encapsulates a user's command.
  */
 public abstract class Command {
-    public static final Command[] COMMANDS = new Command[] { new DeadlineCommand(), new DeleteCommand(),
+    public static final Command[] COMMANDS = new Command[]{new DeadlineCommand(), new DeleteCommand(),
         new DoneCommand(), new EndCommand(), new EventCommand(), new FindCommand(), new ListCommand(),
-        new TodoCommand() };
+        new TodoCommand()};
 
     /**
      * Identifies the command from the user's input.
@@ -40,7 +40,8 @@ public abstract class Command {
      *
      * @param duke   Duke instance that the command is called from.
      * @param parser Parser with the user's input
+     * @return Output to be displayed in GUI.
      * @throws DukeException If input is invalid.
      */
-    public abstract void run(Duke duke, Parser parser) throws DukeException;
+    public abstract String run(Duke duke, Parser parser) throws DukeException;
 }

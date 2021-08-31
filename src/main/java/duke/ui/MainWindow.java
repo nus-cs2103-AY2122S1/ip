@@ -1,5 +1,7 @@
-package duke.gui;
+package duke.ui;
 
+import duke.Duke;
+import duke.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image("https://se-education.org/guides/tutorials/images/javafx/DaUser.png");
-    private Image dukeImage = new Image("https://se-education.org/guides/tutorials/images/javafx/DaDuke.png");
+    private final Image userImage = new Image("https://se-education.org/guides/tutorials/images/javafx/DaUser.png");
+    private final Image dukeImage = new Image("https://se-education.org/guides/tutorials/images/javafx/DaDuke.png");
 
     @FXML
     public void initialize() {
@@ -33,6 +35,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.welcomeMessage(), dukeImage));
     }
 
     /**
@@ -42,11 +45,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+        try {
+            String response = duke.listen(input);
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(response, dukeImage));
+        } catch (DukeException e) {
+            dialogContainer.getChildren().add(DialogBox.getDukeDialog(e.getMessage(), dukeImage));
+        }
         userInput.clear();
     }
 }

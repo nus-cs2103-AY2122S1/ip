@@ -3,8 +3,8 @@ package duke.command;
 import duke.Duke;
 import duke.DukeException;
 import duke.Parser;
-import duke.Ui;
 import duke.task.Task;
+import duke.ui.Ui;
 
 public class DeleteCommand extends Command {
     private static final String COMMAND_WORD = "delete";
@@ -24,10 +24,11 @@ public class DeleteCommand extends Command {
      *
      * @param duke   Duke instance that the command is called from.
      * @param parser Parser with the user's input
+     * @return Output to be displayed in GUI.
      * @throws DukeException If input is invalid.
      */
     @Override
-    public void run(Duke duke, Parser parser) throws DukeException {
+    public String run(Duke duke, Parser parser) throws DukeException {
         // Retrieve value inputted by user and subtract 1 to get the index in the array.
         int index = parser.getNumber();
         // Error handling: negative number or number more than list length.
@@ -35,6 +36,6 @@ public class DeleteCommand extends Command {
             throw new DukeException("Invalid number.");
         }
         Task task = duke.getList().remove(index);
-        Ui.deleteMessage(task, duke.getList().size());
+        return Ui.deleteMessage(task, duke.getList().size());
     }
 }

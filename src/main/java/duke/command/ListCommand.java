@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Duke;
 import duke.Parser;
-import duke.Ui;
+import duke.ui.Ui;
 
 public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
@@ -22,9 +22,10 @@ public class ListCommand extends Command {
      *
      * @param duke   Duke instance that the command is called from.
      * @param parser Parser with the user's input
+     * @return Output to be displayed in GUI.
      */
     @Override
-    public void run(Duke duke, Parser parser) {
-        Ui.displayTasks(duke.getList(), duke.getList().size());
+    public String run(Duke duke, Parser parser) {
+        return Ui.displayTasks(duke.getList(), duke.getList().size());
     }
 }

@@ -1,41 +1,23 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 
 /**
  * This class represents an instance of the Duke chatbot.
  */
 public class Duke {
-    private boolean isStopped = false;
     private TaskList list;
 
     /**
-     * Starts the Duke chatbot.
+     * Constructor for a Duke instance.
+     * Initialises Duke's task list.
      */
-    public void start() {
-        Ui.welcomeMessage();
+    public Duke() {
         try {
             list = new TaskList();
         } catch (DukeException e) {
-            Ui.formatAndPrint(e.getMessage());
+            System.out.println(e.getMessage());
         }
-        while (!this.isStopped) {
-            try {
-                listen();
-            } catch (DukeException e) {
-                Ui.formatAndPrint(e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * Stops the Duke chatbot.
-     */
-    public void stop() {
-        Ui.goodbyeMessage();
-        this.isStopped = true;
     }
 
     /**
@@ -52,11 +34,9 @@ public class Duke {
      *
      * @throws DukeException If input is invalid.
      */
-    public void listen() throws DukeException {
-        Scanner sc = new Scanner(System.in);
-        String input = sc.nextLine();
+    public String listen(String input) throws DukeException {
         Parser parser = new Parser(input);
         Command command = Command.identifyCommand(parser.getCommandWord());
-        command.run(this, parser);
+        return command.run(this, parser);
     }
 }
