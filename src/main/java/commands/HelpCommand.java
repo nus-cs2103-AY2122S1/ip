@@ -1,14 +1,14 @@
 package commands;
 
-import duke.*;
-import tasks.*;
-import exceptions.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class HelpCommand implements Command {
 
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
-        ui.printHelp();
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
+        return ui.getHelpMessage();
     }
 
     @Override

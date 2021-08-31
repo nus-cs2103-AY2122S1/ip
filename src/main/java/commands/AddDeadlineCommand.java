@@ -3,9 +3,10 @@ package commands;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import duke.*;
-import tasks.*;
-import exceptions.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import tasks.Deadline;
 
 public class AddDeadlineCommand extends AddTaskCommand {
     LocalDate deadline;
@@ -16,14 +17,14 @@ public class AddDeadlineCommand extends AddTaskCommand {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
-        Deadline newDeadline = new Deadline(this.desc, this.isDone, this.deadline);
-        taskList.addTask(newDeadline);
-        ui.printAddTask(newDeadline);
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         try {
+            Deadline newDeadline = new Deadline(this.desc, this.isDone, this.deadline);
+            taskList.addTask(newDeadline);
             storage.writeTasksToFile(taskList, storage.getTaskFile());
+            return ui.getAddTaskResponse(newDeadline);
         } catch (IOException e) {
-            ui.printFileWriteFail(storage.getTaskFile());
+            return ui.getFileWriteFailResponse(storage.getTaskFile());
         }
     }
 }

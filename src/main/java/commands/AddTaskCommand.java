@@ -2,9 +2,10 @@ package commands;
 
 import java.io.IOException;
 
-import duke.*;
-import tasks.*;
-import exceptions.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import tasks.Task;
 
 /**
  * This command adds a task to the taskList, given a description and flag.
@@ -21,16 +22,18 @@ public class AddTaskCommand implements Command {
         this.isDone = isDone;
     }
 
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
-        Task newTask = new Task(this.desc, this.isDone);
-        taskList.addTask(newTask);
-        ui.printAddTask(newTask);
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
         try {
+            Task newTask = new Task(this.desc, this.isDone);
+            taskList.addTask(newTask);
             storage.writeTasksToFile(taskList, storage.getTaskFile());
+            return ui.getAddTaskResponse(newTask);
         } catch (IOException e) {
-            ui.printFileWriteFail(storage.getTaskFile());
+            return ui.getFileWriteFailResponse(storage.getTaskFile());
         }
     }
 
-    public boolean isQuit() { return false; }
+    public boolean isQuit() {
+        return false;
+    }
 }

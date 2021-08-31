@@ -1,8 +1,8 @@
 package commands;
 
-import duke.*;
-import tasks.*;
-import exceptions.*;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 public class ErrorCommand implements Command {
 
@@ -13,8 +13,8 @@ public class ErrorCommand implements Command {
     }
 
     @Override
-    public void execute(Ui ui, TaskList taskList, Storage storage) {
-        System.out.println(msg);
+    public String execute(Ui ui, TaskList taskList, Storage storage) {
+        return msg;
     }
 
     @Override

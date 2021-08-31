@@ -25,16 +25,16 @@ public class Ui {
      * Prints the initial greeting upon starting an instance of Duke.
      *
      */
-    public void greet() {
-        System.out.println("Hello! I'm Duke. \n"
+    public String greet() {
+        return "Hello! I'm Duke. \n"
                 + "What can I do for you? \n"
-                + SEP_LINE);
+                + SEP_LINE;
     }
 
     /**
      * Prints the help guide when user types the command 'help'
      */
-    public void printHelp() {
+    public String getHelpMessage() {
         String helpMessage = "HELP \n" + SEP_LINE + "\n"
                 + "Available commands: \n"
                 + "'help' - Opens this dialog. \n"
@@ -52,45 +52,45 @@ public class Ui {
                 + SEP_LINE + "\n"
                 + "To use any command, follow the structure as shown, entering your values \n"
                 + "in place of anything in brackets. \n";
-        System.out.println(helpMessage);
+        return helpMessage;
     }
 
-    public void printSepLine() {
-        System.out.println(SEP_LINE);
+    public String printSepLine() {
+        return SEP_LINE;
     }
 
     /**
      * Prints out the message when a task has been successfully added to the TaskList in Duke.
-     * @param t The task that was added to the TaskList.
+     * @param task The task that was added to the TaskList.
      */
-    public void printAddTask(Task t) {
-        System.out.println("The following task has been added! \n" + t);
+    public String getAddTaskResponse(Task task) {
+        return "The following task has been added! \n" + task.toString();
     }
 
     /**
      * Prints out the message when a task has been successfully marked as done.
-     * @param t The task that was marked as done.
+     * @param task The task that was marked as done.
      * @param index The index of the task t in the TaskList.
      */
-    public void printTaskDone(Task t, int index) {
-        System.out.println("The task has been marked as done! \n" + (index + 1) + ". " + t);
+    public String getTaskDoneResponse(Task task, int index) {
+        return "The task has been marked as done! \n" + (index + 1) + ". " + task.toString();
     }
 
     /**
      * Prints out the message when a task has been successfully deleted.
-     * @param t The task that was deleted.
+     * @param task The task that was deleted.
      * @param index The index of the task t in the TaskList.
      */
-    public void printDeleteTask(Task t, int index) {
-        System.out.println("The task has been removed! \n" + (index + 1) + ". " + t);
+    public String getDeleteTaskResponse(Task task, int index) {
+        return "The task has been removed! \n" + (index + 1) + ". " + task.toString();
     }
 
-    public void printUnknownCommand() {
-        System.out.println("I did not understand that command. Type 'help' for more info.");
+    public String getUnknownCommandResponse() {
+       return "I did not understand that command. Type 'help' for more info.";
     }
 
-    public void printFileWriteFail(File file) {
-        System.out.println("Failed to write to file at " + file);
+    public String getFileWriteFailResponse(File file) {
+        return "Failed to write to file at " + file.toString();
     }
 
     /**

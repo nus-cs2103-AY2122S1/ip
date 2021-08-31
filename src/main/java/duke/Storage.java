@@ -49,7 +49,7 @@ public class Storage {
      * @param taskList The ArrayList which will contain the Tasks in the file.
      * @throws DukeException If the letter in each line does not match any of the task types.
      */
-    private void process(String taskLine, ArrayList<Task> taskList) throws DukeException {
+    private void processFileLine(String taskLine, ArrayList<Task> taskList) throws DukeException {
         String[] parsedLine = taskLine.split(" \\| ", 3);
         String command = parsedLine[0];
         Boolean isDone = parsedLine[1].equals("1");
@@ -85,7 +85,8 @@ public class Storage {
             ArrayList<Task> taskList = new ArrayList<>();
             String line;
             while ((line = br.readLine()) != null && !line.equals("")) {
-                this.process(line, taskList);
+                this.processFileLine(line, taskList);
+                System.out.println(line);
             }
             return taskList;
         } catch (FileNotFoundException e) {
@@ -114,7 +115,7 @@ public class Storage {
     public void writeTasksToFile(TaskList taskList, File taskFile) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter(this.taskFile));
         for (int i = 0; i < taskList.numberOfTasks(); i++) {
-            String line = taskList.getTask(i).saveText();
+            String line = taskList.getTask(i).getSaveText();
             writer.write(line);
         }
         writer.close();
