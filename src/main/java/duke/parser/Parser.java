@@ -32,7 +32,7 @@ public class Parser {
     public static Command parseCommand(String input)
             throws UnknownCommandException, InvalidArgumentsException, UnableToParseException {
         // index 0 has command, index 1 has command arguments (if applicable)
-        String[] splitInput = input.trim().split(" ", 2);
+        String[] splitInput = input.split(" ", 2);
         String stringCmd = splitInput[0];
         switch (stringCmd) {
         case "todo":

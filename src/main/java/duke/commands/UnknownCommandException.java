@@ -4,6 +4,6 @@ import duke.DukeException;
 
 public class UnknownCommandException extends DukeException {
     public UnknownCommandException() {
-        super("Unknown command!");
+        super("Me no understanderino");
     }
 }
