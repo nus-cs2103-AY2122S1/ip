@@ -18,13 +18,13 @@ public class AddDeadlineCommand extends AddTaskCommand {
 
     @Override
     public String execute(Ui ui, TaskList taskList, Storage storage) {
-        Deadline newDeadline = new Deadline(this.desc, this.isDone, this.deadline);
-        taskList.addTask(newDeadline);
         try {
+            Deadline newDeadline = new Deadline(this.desc, this.isDone, this.deadline);
+            taskList.addTask(newDeadline);
             storage.writeTasksToFile(taskList, storage.getTaskFile());
+            return ui.getAddTaskResponse(newDeadline);
         } catch (IOException e) {
             return ui.getFileWriteFailResponse(storage.getTaskFile());
         }
-        return ui.getAddTaskResponse(newDeadline);
     }
 }

@@ -63,11 +63,11 @@ public class Duke extends Application {
 
         while (this.isRunning) {
             String input = sc.nextLine();
-            Command c = this.ui.parseInput(input);
+            Command command = this.ui.parseInput(input);
             this.ui.printSepLine();
-            c.execute(this.ui, this.taskList, this.storage);
+            System.out.println(command.execute(this.ui, this.taskList, this.storage));
             this.ui.printSepLine();
-            this.isRunning = !c.isQuit();
+            this.isRunning = !command.isQuit();
         }
 
         sc.close();
@@ -112,8 +112,8 @@ public class Duke extends Application {
     }
 
     private String getResponse(String input) {
-        Command c = this.ui.parseInput(input);
-        String dukeResponse = c.execute(ui, taskList, storage);
+        Command command = this.ui.parseInput(input);
+        String dukeResponse = command.execute(this.ui, this.taskList, this.storage);
         return dukeResponse;
     }
 

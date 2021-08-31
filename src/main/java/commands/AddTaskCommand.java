@@ -23,14 +23,14 @@ public class AddTaskCommand implements Command {
     }
 
     public String execute(Ui ui, TaskList taskList, Storage storage) {
-        Task newTask = new Task(this.desc, this.isDone);
-        taskList.addTask(newTask);
         try {
+            Task newTask = new Task(this.desc, this.isDone);
+            taskList.addTask(newTask);
             storage.writeTasksToFile(taskList, storage.getTaskFile());
+            return ui.getAddTaskResponse(newTask);
         } catch (IOException e) {
             return ui.getFileWriteFailResponse(storage.getTaskFile());
         }
-        return ui.getAddTaskResponse(newTask);
     }
 
     public boolean isQuit() {

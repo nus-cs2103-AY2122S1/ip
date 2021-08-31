@@ -13,7 +13,7 @@ public class Todo extends Task {
      * @return The string representation of this deadline for the file to be saved to.
      */
     @Override
-    public String saveText() {
+    public String getSaveText() {
         int isDone = this.isDone ? 1 : 0;
         return "T | " + isDone + " | " + desc + "\n";
     }
