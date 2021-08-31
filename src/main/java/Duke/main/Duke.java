@@ -117,6 +117,9 @@ public class Duke {
      * users and filter out key commands, then call OperationForDuke to execute a task by commands.
      * The process will not stop until users enter "goodbye".
      * Noted: Every time an execution is done, the savedata will be updated.
+     *
+     * @param input Input user take in.
+     * @return Response Duke gives.
      */
     public String getResponse(String input) {
         ArrayList<String> messages;

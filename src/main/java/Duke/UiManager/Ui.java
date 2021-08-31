@@ -16,7 +16,9 @@ import java.util.ArrayList;
 public class Ui {
 
     /**
-     * Prints Hello Message to users.
+     * Returns Hello Message to users.
+     *
+     * @return Default helloMessage.
      */
     public String helloMessage() {
         String helloMessage = "Hello! I'm Duke\n"
@@ -26,7 +28,9 @@ public class Ui {
     }
 
     /**
-     * Prints Goodbye Message to users.
+     * Returns Goodbye Message to users.
+     *
+     * @return Default goodbyeMessage.
      */
     public String goodbyeMessage() {
         String goodbyeMessage = "Bye. Hope to see you again soon!";
@@ -35,9 +39,10 @@ public class Ui {
     }
 
     /**
-     * Prints all the tasks in a given list.
+     * Returns all the tasks in a given list.
      *
      * @param tasks TaskList contains all the tasks to be printed.
+     * @return A list of tasks info.
      */
     public String printList(TaskList tasks) {
         String text = "";
@@ -49,9 +54,10 @@ public class Ui {
     }
 
     /**
-     * Prints the Ui info for the MarkDone method in Tasklists.
+     * Returns the Ui info for the MarkDone method in TaskList.
      *
      * @param parsedTask Detailed info for a task that is parsed into a specific format.
+     * @return Ui message when markDone is invoked.
      */
     public String markDone(String parsedTask) {
         String text = "";
@@ -61,10 +67,11 @@ public class Ui {
     }
 
     /**
-     * Prints the Ui info for the Delete method in TaskList.
+     * Returns the Ui info for the Delete method in TaskList.
      *
      * @param parsedTask Detailed info for a task that is parsed into a specific format
      * @param size Size of the TaskList.
+     * @return Ui message when delete is invoked.
      */
     public String delete(String parsedTask, int size) {
         String text = "";
@@ -74,10 +81,11 @@ public class Ui {
     }
 
     /**
-     * Prints the Ui info for the add method in Tasklists.
+     * Returns the Ui info for the add method in Tasklists.
      *
      * @param parsedTask Detailed info for a task that is parsed into a specific format
      * @param size Size of the TaskList.
+     * @return Ui message when add is invoked.
      */
     public String add(String parsedTask, int size) {
         String text = "";
@@ -89,14 +97,18 @@ public class Ui {
     }
 
     /**
-     * Prints the Ui info for the getSpecificDateEvent method in Tasklists.
+     * Returns the Ui info for the getSpecificDateEvent method in TaskLists.
+     *
+     * @return Ui message when getSpecificDateEvent is invoked.
      */
     public String getSpecificDateEvent() {
         return "Here are all the tasks taking place on the date you give me:";
     }
 
     /**
-     * Prints the Ui info for the FindTask method in Tasklists.
+     * Returns the Ui info for the FindTask method in Tasklists.
+     *
+     * @return Ui message when findTask is invoked.
      */
     public String findTasks() {
         return "Here are the matching tasks in your list:\n";
@@ -108,7 +120,6 @@ public class Ui {
      *
      * @return Size of 4 ArrayList contains Message of operationType, task, time and index.
      * @throws DukeException Throws when the input cannot be parsed.
-
      */
     public ArrayList<String> getInputForARound(String input) throws DukeException {
         System.out.println();
@@ -126,14 +137,18 @@ public class Ui {
     }
 
     /**
-     * Shows the Loading Error Text.
+     * Returns the Loading Error Text.
+     *
+     * @return Error Message in loading.
      */
     public String showLoadingError() {
         return "Cannot Load From Data.\n";
     }
 
     /**
-     * Shows the Saving Error Text.
+     * Returns the Saving Error Text.
+     *
+     * @return Error Message in saving.
      */
     public String showSavingError() {
         return "Cannot Save the Data.\n";

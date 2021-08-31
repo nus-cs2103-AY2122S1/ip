@@ -1,3 +1,8 @@
+/**
+ * @author Hang Zelin
+ *
+ * Controller for MainWindow. Provides the layout for the other controls.
+ */
 package duke.uimanager;
 
 import duke.main.Duke;
@@ -9,9 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-/**
- * Controller for MainWindow. Provides the layout for the other controls.
- */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -27,11 +29,19 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Initialize DialogBox and MainWindow stuff.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Constructor for MainWindow, initialize with a helloMessage.
+     *
+     * @param d
+     */
     public void setDuke(Duke d) {
         duke = d;
         Ui ui = new Ui();

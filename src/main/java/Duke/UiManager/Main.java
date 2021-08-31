@@ -1,3 +1,8 @@
+/**
+ * @Author Hang Zelin
+ *
+ * A GUI for Duke using FXML.
+ */
 package duke.uimanager;
 
 import duke.main.Duke;
@@ -9,13 +14,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * A GUI for Duke using FXML.
- */
 public class Main extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Start the GUI process with a specific stage.
+     *
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         try {

@@ -1,3 +1,9 @@
+/**
+ * @author Hang Zelin
+ *
+ * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * containing text from the speaker.
+ */
 package duke.uimanager;
 
 import javafx.collections.FXCollections;
@@ -14,11 +20,6 @@ import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.util.Collections;
 
-/**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
- */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -49,10 +50,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox for user.
+     *
+     * @param text
+     * @param img
+     * @return DialogBox for user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox for Duke.
+     *
+     * @param text
+     * @param img
+     * @return DialogBox for Duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

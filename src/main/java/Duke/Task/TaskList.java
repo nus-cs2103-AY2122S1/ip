@@ -35,9 +35,10 @@ public class TaskList {
     }
 
     /**
-     * Gets all the tasks that match the time users take in.
+     * Returns all the tasks that match the time users take in.
      *
      * @param time String message that indicates time users take in to find specific event.
+     * @return All the tasks that match the time users take in.
      */
     public String getSpecificDateEvent(String time) {
         Parser parser = new Parser("");
@@ -65,9 +66,10 @@ public class TaskList {
     }
 
     /**
-     * Finds all the tasks that match the key word users take in.
+     * Returns all the tasks that match the key word users take in.
      *
      * @param keyword String message that indicates the keyword users want to search.
+     * @return All the tasks that match the key word users take in.
      */
     public String findTasks(String keyword) {
         String text = "";
