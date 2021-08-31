@@ -32,8 +32,8 @@ public class Ui {
     /**
      * Sends Duke's end message when Duke goes to sleep.
      */
-    public static void sendEndMessage() {
-        System.out.println(Ui.endMessage);
+    public static String sendEndMessage() {
+        return Ui.endMessage;
     }
 
     /**
@@ -41,28 +41,36 @@ public class Ui {
      * @param task The task that got deleted.
      * @param taskListSize The updated TaskList size.
      */
-    public static void deletedTaskMessage(TaskItem task, int taskListSize) {
-        System.out.println("____________________________________________________________");
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(task.toString());
+    public static String deletedTaskMessage(TaskItem task, int taskListSize) {
+        String body = "";
         if (taskListSize == 1) {
-            System.out.println("Now you have 1 task in the list.");
+            /* System.out.println("Now you have " + 1 + " task in the list."); */
+            body = "Now you have " + 1 + " task in the list.\n";
         }
         if (taskListSize > 1) {
-            System.out.println("Now you have " + taskListSize + " tasks in the list.");
+            /* System.out.println("Now you have " + (Duke.listIndex) + " tasks in your list."); */
+            body = "Now you have " + taskListSize + " tasks in your list.\n";
         }
-        System.out.println("____________________________________________________________");
+        return "____________________________________________________________\n"
+                + "Noted. I've removed this task:\n"
+                + task.toString() + "\n"
+                + body
+                + "____________________________________________________________";
     }
 
     /**
      * Prints a notification to the user about a Task that the user just marked as complete.
      * @param task The Task that was marked as complete.
      */
-    public static void completedTaskMessage(TaskItem task) {
+    public static String completedTaskMessage(TaskItem task) {
         System.out.println("____________________________________________________________");
         System.out.println("Nice! I've marked this task as done:");
         System.out.println(task.toString());
         System.out.println("____________________________________________________________");
+        return "____________________________________________________________\n"
+                + "Nice! I've marked this task as done:\n"
+                + task.toString()
+                + "\n____________________________________________________________";
     }
 
     /**

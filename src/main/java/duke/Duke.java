@@ -1,27 +1,47 @@
 package duke;
 
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
-public class Duke extends Application {
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
+
+
+public class Duke {
     private static boolean active;
     private static TaskList taskList = new TaskList();
     private static int listIndex = 0;
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/IMG_5401.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/IMG_4596.png"));
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        taskList = new TaskList(Storage.loadData());
+        return Parser.getResponse(input);
+    }
 
     /**
-     * Overriden method from Application
-     * @param stage a Stage
+     * Iteration 1:
+     * Creates a label with the specified text and adds it to the dialog container.
+     * @param text String containing text to add
+     * @return a label with the specified text that has word wrap enabled.
      */
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+    private Label getDialogLabel(String text) {
+        Label textToAdd = new Label(text);
+        textToAdd.setWrapText(true);
 
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+        return textToAdd;
     }
 
     /**
@@ -53,8 +73,7 @@ public class Duke extends Application {
      * @param taskToBeDeleted the index of the task to be deleted.
      * @throws DukeException An exception stemming from incorrect or awkward input to duke.Duke.
      */
-    @SuppressWarnings("checkstyle:OperatorWrap")
-    public static void deleteTask(String taskToBeDeleted) throws DukeException {
+    public static String deleteTask(String taskToBeDeleted) throws DukeException {
         int taskNumber = Integer.parseInt(taskToBeDeleted);
 
         if (taskList.get(taskNumber - 1) == null) {
@@ -68,7 +87,7 @@ public class Duke extends Application {
         TaskItem removedTask = taskList.get(taskNumber - 1);
         taskList.remove(taskNumber - 1);
         int taskListSize = taskList.size();
-        Ui.deletedTaskMessage(removedTask, taskListSize);
+        return Ui.deletedTaskMessage(removedTask, taskListSize);
 
     }
 
@@ -78,7 +97,7 @@ public class Duke extends Application {
      * @param taskItemNumber the index of the task to be marked as finished.
      * @throws DukeException An exception stemming from incorrect or awkward input to duke.Duke.
      */
-    public static void markAsFinished(String taskItemNumber) throws DukeException {
+    public static String markAsFinished(String taskItemNumber) throws DukeException {
         int taskNumber = Integer.parseInt(taskItemNumber);
         if (taskList.get(taskNumber - 1) == null) {
             throw new DukeException(
@@ -89,43 +108,55 @@ public class Duke extends Application {
             );
         }
         taskList.get(taskNumber - 1).completeTask();
-        Ui.completedTaskMessage(taskList.get(taskNumber - 1));
+        return Ui.completedTaskMessage(taskList.get(taskNumber - 1));
     }
 
     /**
      * addToList adds a taskItem of type duke.TaskItem to the list.
      * @param taskItem a duke.TaskItem that is to be added to duke.Duke's list.
      */
-    public static void addToList(TaskItem taskItem) {
+    public static String addToList(TaskItem taskItem) {
         Duke.taskList.add(taskItem);
         Duke.listIndex = taskList.size();
+        String body = "";
+        /*
         System.out.println("____________________________________________________________");
         System.out.println("Got it. I've added this task:");
         System.out.println(taskItem.toString());
+        */
         if (listIndex == 1) {
-            System.out.println("Now you have " + 1 + " task in the list.");
+            /* System.out.println("Now you have " + 1 + " task in the list."); */
+            body = "Now you have " + 1 + " task in the list.\n";
         }
         if (listIndex > 1) {
-            System.out.println("Now you have " + (Duke.listIndex) + " tasks in your list.");
+            /* System.out.println("Now you have " + (Duke.listIndex) + " tasks in your list."); */
+            body = "Now you have " + (Duke.listIndex) + " tasks in your list.\n";
         }
-        System.out.println("____________________________________________________________");
+        return "____________________________________________________________\n"
+                + "Got it. I've added this task:\n"
+                + taskItem.toString() + "\n"
+                + body
+                + "____________________________________________________________";
     }
 
     /**
      * prints the list upon inputting the 'list' command.
      */
-    public static void printList() {
+    public static String printList() {
         int number = 1;
+        String output = "____________________________________________________________\n"
+                + "Here are the tasks in your list:\n";
+        /*
         System.out.println("____________________________________________________________");
         System.out.println("Here are the tasks in your list:");
+        */
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i) != null) {
-                System.out.println(number + "." + taskList.get(i).toString());
-
+                output += number + "." + taskList.get(i).toString() + "\n";
                 number++;
             }
         }
-        System.out.println("____________________________________________________________");
+        return output;
     }
 
     /**

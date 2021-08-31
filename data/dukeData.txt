@@ -1,1 +1,3 @@
 [T][ ] kill morty
+[T][ ] kill wilbur
+[E][ ] kill wilbur --2021-09-01T12:00
