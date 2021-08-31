@@ -1,18 +1,16 @@
 package duke;
 
+import java.io.File;
+import java.net.URL;
+import java.time.format.DateTimeFormatter;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.net.URL;
-import java.time.format.DateTimeFormatter;
+
 
 /**
  * The main class for the bot
@@ -25,6 +23,19 @@ public class Duke extends Application {
     private MyList list;
     private Storage storage;
 
+    /**
+     * Constructor for the duke class.
+     * Initialises the list and storage.
+     */
+    public Duke() {
+        this.list = new MyList();
+        this.storage = new Storage(this.list, "./Data.txt");
+    }
+
+    /**
+     * Main method to start duke.
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke().start();
         //launch();
@@ -49,22 +60,18 @@ public class Duke extends Application {
         format = newFormat;
     }
 
-    /**
-     * Constructor for the duke class.
-     * Initialises the list and storage.
-     */
-    public Duke() {
-        this.list = new MyList();
-        this.storage = new Storage(this.list, "./Data.txt");
-    }
 
+    /**
+     * Overidden start method from application.
+     * Used to start up the duke GUI.
+     * @param stage The stage for the GUI
+     * @throws Exception
+     */
     @Override
     public void start(Stage stage) throws Exception {
         URL url = new File("C:\\Users\\65915\\ip\\src\\main\\java\\duke\\MainWindow.fxml").toURI().toURL();
         Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
-//        Image icon = new Image("https://static.zerochan.net/Shinomiya.Kaguya.full.2917139.png");
-//        stage.getIcons().add(icon);
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
