@@ -5,6 +5,7 @@ public class Event extends Task {
 
     /**
      * Task associated with a given start time
+     *
      * @param description description of the event
      * @param eventTime when the event will occur
      */

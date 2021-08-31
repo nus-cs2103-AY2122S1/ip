@@ -9,6 +9,7 @@ public class Parser {
 
     /**
      * Parses inputs provided by ui, and directs ui to print corresponding output.
+     *
      * @param ui ui used to interact with users.
      */
     public Parser(Ui ui) {
@@ -17,6 +18,7 @@ public class Parser {
 
     /**
      * Executes action associated with provided string input, and prints out relevant details to console.
+     *
      * @param input command associated with an action
      * @param taskList storage used to carry out actions
      * @return whether Duke has completed executing

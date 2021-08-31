@@ -10,6 +10,7 @@ public class Duke {
 
     /**
      * Configures a Duke runtime to use a taskList storage file at specified location.
+     *
      * @param taskListFileName path to taskList storage file.
      */
     public Duke(String taskListFileName) {
@@ -32,6 +33,7 @@ public class Duke {
     /**
      * Runs the Duke programme with provided inputs and outputs. Normally invoked by run() unless dependencies need
      * to be injected by test.
+     *
      * @param in BufferedReader taking in user input.
      * @param out PrintWriter to write responses to user input.
      */

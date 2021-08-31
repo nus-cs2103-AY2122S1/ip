@@ -3,6 +3,9 @@ package duke;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class TaskList implements Serializable {
     private ArrayList<Task> tasks;
     private int numberOfTasks;
@@ -17,6 +20,7 @@ public class TaskList implements Serializable {
 
     /**
      * General-purpose method that stores any task created by Duke.
+     *
      * @param task the task to be stored
      */
     public void addCustom(Task task) {
@@ -38,6 +42,7 @@ public class TaskList implements Serializable {
 
     /**
      * Marks a task as done, represented in the future with a cross in the associated column.
+     *
      * @param taskNumber position of task in the TaskList
      */
     public void done(int taskNumber) {
@@ -48,6 +53,7 @@ public class TaskList implements Serializable {
 
     /**
      * Removes target task.
+     *
      * @param taskNumber position of target task
      */
     public void delete(int taskNumber) {
@@ -61,6 +67,7 @@ public class TaskList implements Serializable {
 
     /**
      * Finds stored tasks by keyword
+     *
      * @param query keywords for task-finding
      */
     public ArrayList<Task> find(String query) {
@@ -76,6 +83,7 @@ public class TaskList implements Serializable {
 
     /**
      * Indicates whether the taskList contains any tasks. Primarily used for testing.
+     *
      * @return whether taskList is empty.
      * @throws Duke.DukeException issue found in state of empty taskList
      */

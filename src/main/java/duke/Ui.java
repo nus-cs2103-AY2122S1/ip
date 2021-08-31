@@ -11,6 +11,7 @@ public class Ui {
 
     /**
      * Handles user interaction. I/O dependencies are exposed for injection in tests.
+     *
      * @param in source of user input.
      * @param out output to respond to user input.
      */
@@ -36,6 +37,7 @@ public class Ui {
 
     /**
      * Prints tasks found from find query
+     *
      * @param tasks tasks found by taskList
      */
     public void printFind(ArrayList<Task> tasks) {
@@ -49,6 +51,7 @@ public class Ui {
 
     /**
      * Reads next user input.
+     *
      * @return user input in string format.
      * @throws IOException issue found in reading file.
      */

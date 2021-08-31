@@ -8,6 +8,7 @@ public class Task implements Serializable {
 
     /**
      * Generic task that stores a description and whether the task is completed.
+     *
      * @param description description of task.
      */
     public Task(String description) {
@@ -25,6 +26,7 @@ public class Task implements Serializable {
 
     /**
      * Getter for task description.
+     *
      * @return description of task
      */
     public String getDescription() {

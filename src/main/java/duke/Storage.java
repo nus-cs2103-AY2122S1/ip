@@ -15,6 +15,7 @@ public class Storage {
 
     /**
      * Handles saving of taskLists between Duke runtime sessions to text file by serialisation.
+     *
      * @param taskListFileName path to text file to store taskList in.
      */
     public Storage(String taskListFileName) {
@@ -29,6 +30,7 @@ public class Storage {
 
     /**
      * Loads taskList from textFile configured in constructor if it exists, else initialises empty taskList.
+     *
      * @return stored taskList if present, or empty taskList.
      */
     public TaskList initialise() {
@@ -52,6 +54,7 @@ public class Storage {
 
     /**
      * Serialises a taskList into a text file for use in future sessions.
+     *
      * @param taskList taskList to be serialised.
      */
     public void store(TaskList taskList) {

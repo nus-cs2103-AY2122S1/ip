@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     /**
      * Task with a specified deadline.
+     *
      * @param description description of task.
      * @param deadline deadline of task.
      */
