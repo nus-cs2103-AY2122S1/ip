@@ -43,22 +43,14 @@ public class Ponyo {
      * @param input Input provided by user.
      * @return Response message by system.
      */
-    public String handleInput(String input) {
-//        Ui.showWelcomeMessage();
-//        boolean isExit = false;
-//
-//        while (!isExit) {
-//            try {
-//                Command c = Parser.parse(input);
-//                c.execute(tasks, storage);
-//                isExit = c.isExit();
-//            } catch (PonyoException e) {
-//                Ui.showError(e.getMessage());
-//            } finally {
-//                Ui.showLine();
-//            }
-//        }
-//        return "";
-        return "DUKE SAID: " + input;
+    public String[] handleInput(String input) {
+        boolean isExit = false;
+
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage);
+        } catch (PonyoException e) {
+            return new String[]{ e.getMessage() };
+        }
     }
 }

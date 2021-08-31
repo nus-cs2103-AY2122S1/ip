@@ -9,10 +9,12 @@ import ponyo.ui.Ui;
  */
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public String[] execute(TaskList tasks, Storage storage) {
+        String[] args = new String[tasks.size()];
         for (int i = 0; i < tasks.size(); i++) {
-            Ui.show("\t" + (i + 1) + "." + tasks.retrieveTask(i));
+            args[i] = (i + 1) + ". " + tasks.retrieveTask(i);
         }
+        return Ui.show(args);
     }
 
     @Override

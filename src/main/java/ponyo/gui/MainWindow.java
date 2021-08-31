@@ -1,5 +1,6 @@
 package ponyo.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -43,16 +44,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = ponyo.handleInput(input);
+        String[] response = ponyo.handleInput(input);
+
+        if (response == null) {
+            Platform.exit();
+        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getPonyoDialog(response, ponyoImage)
+                DialogBox.getPonyoDialog(String.join("\n", response), ponyoImage)
         );
         userInput.clear();
     }
-
-//    @FXML
-//    private static void showMessageFromPonyo(String msg) {
-//        dialogContainer.getChildren().add(DialogBox.getPonyoDialog(msg, ponyoImage));
-//    }
 }

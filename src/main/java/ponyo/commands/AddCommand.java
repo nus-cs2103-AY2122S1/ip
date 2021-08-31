@@ -23,47 +23,45 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public String[] execute(TaskList tasks, Storage storage) {
         switch (taskToAdd[0]) {
         case "todo":
             try {
                 Task t = new Todo(taskToAdd[1]);
                 tasks.add(t);
                 storage.fileLineToWrite(t);
-                showTask(t, tasks.size());
+                return showTask(t, tasks.size());
             } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.show("\t☹ OOPS!!! The description of a todo cannot be empty.");
+                return Ui.show("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            break;
         case "deadline":
             try {
                 int slashIndex = taskToAdd[1].indexOf("/");
                 Task t = new Deadline(taskToAdd[1].substring(0, slashIndex), dateFormatter(taskToAdd[1], slashIndex));
                 tasks.add(t);
                 storage.fileLineToWrite(t);
-                showTask(t, tasks.size());
+                return showTask(t, tasks.size());
             } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.show("\t☹ OOPS!!! The description of a deadline cannot be empty.");
+                return Ui.show("☹ OOPS!!! The description of a deadline cannot be empty.");
             } catch (DateTimeParseException e) {
-                Ui.show("\t☹ OOPS!!! Please use the date format: yyyy-mm-dd.");
+                return Ui.show("☹ OOPS!!! Please use the date format: yyyy-mm-dd.");
             }
-            break;
         case "event":
             try {
                 int slashIndex = taskToAdd[1].indexOf("/");
                 Task t = new Event(taskToAdd[1].substring(0, slashIndex), dateFormatter(taskToAdd[1], slashIndex));
                 tasks.add(t);
                 storage.fileLineToWrite(t);
-                showTask(t, tasks.size());
+                return showTask(t, tasks.size());
             } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.show("\t☹ OOPS!!! The description of an event cannot be empty.");
+                return Ui.show("☹ OOPS!!! The description of an event cannot be empty.");
             } catch (DateTimeParseException e) {
-                Ui.show("\t☹ OOPS!!! Please use the date format: yyyy-mm-dd.");
+                return Ui.show("☹ OOPS!!! Please use the date format: yyyy-mm-dd.");
             }
-            break;
         default:
             break;
         }
+        return new String[0];
     }
 
     /**
@@ -72,10 +70,9 @@ public class AddCommand extends Command {
      * @param task The task that is added.
      * @param size The size of the task list array.
      */
-    public static void showTask(Task task, int size) {
-        Ui.show("\tGot it. I've added this task:",
-                "\t\t" + task,
-                "\tNow you have " + size + " tasks in the list.");
+    public static String[] showTask(Task task, int size) {
+        return Ui.show("Got it. I've added this task: \n\t" + task,
+                "\nNow you have " + size + " tasks in the list.");
     }
 
     /**

@@ -1,7 +1,5 @@
 package ponyo.ui;
 
-import ponyo.gui.MainWindow;
-
 /**
  * Text UI of the application.
  */
@@ -51,13 +49,22 @@ public class Ui {
     }
 
     /**
-     * Shows message(s) to user.
+     * Shows messages to user.
      *
-     * @param msg the messages to be printed
+     * @param messages the messages to be printed
+     * @return an array of strings to be printed in order
      */
-    public static void show(String... msg) {
-        for (String m : msg) {
-//            MainWindow.showMessageFromPonyo(m);
-        }
+    public static String[] show(String... messages) {
+        return messages;
+    }
+
+    /**
+     * Shows a message to user.
+     *
+     * @param msg the message to be printed
+     * @return an array of a string to be printed
+     */
+    public static String[] show(String msg) {
+        return new String[] { msg };
     }
 }

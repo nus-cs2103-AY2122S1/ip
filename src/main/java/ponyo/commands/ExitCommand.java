@@ -2,7 +2,6 @@ package ponyo.commands;
 
 import ponyo.data.task.TaskList;
 import ponyo.storage.Storage;
-import ponyo.ui.Ui;
 
 /**
  * Exits the program.
@@ -11,8 +10,8 @@ public class ExitCommand extends Command {
     private static final String MESSAGE_BYE = "\tBye. Hope to see you again soon!";
 
     @Override
-    public void execute(TaskList tasks, Storage storage) {
-        Ui.show(MESSAGE_BYE);
+    public String[] execute(TaskList tasks, Storage storage) {
+        return null;
     }
 
     @Override
