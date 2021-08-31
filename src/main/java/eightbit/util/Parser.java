@@ -1,13 +1,13 @@
 package eightbit.util;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
+
 import eightbit.EightBitException;
 import eightbit.command.*;
 import eightbit.task.Deadline;
 import eightbit.task.Event;
 import eightbit.task.ToDo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 
 /**
  * Responsible for handling the user commands.

@@ -1,12 +1,12 @@
 package eightbit.command;
 
+import java.util.ArrayList;
+import java.util.Locale;
+
 import eightbit.task.Task;
 import eightbit.util.Storage;
 import eightbit.util.TaskList;
 import eightbit.util.Ui;
-
-import java.util.ArrayList;
-import java.util.Locale;
 
 /**
  * Represents a command for finding tasks based on some keywords.

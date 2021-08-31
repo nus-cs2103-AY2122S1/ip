@@ -1,20 +1,18 @@
 package eightbit.util;
 
-import eightbit.task.Deadline;
-import eightbit.task.Event;
-import eightbit.task.Task;
-import eightbit.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import eightbit.task.Deadline;
+import eightbit.task.Event;
+import eightbit.task.Task;
+import eightbit.task.ToDo;
 
 /**
  * Responsible for reading/writing data from/to a file.

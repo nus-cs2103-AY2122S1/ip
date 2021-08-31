@@ -1,13 +1,14 @@
 package eightbit.util;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
 import eightbit.EightBitException;
 import eightbit.command.Command;
 import eightbit.command.DeadlineCommand;
 import eightbit.command.DoneCommand;
 import eightbit.command.ListCommand;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
 
@@ -32,7 +33,7 @@ class ParserTest {
     }
 
     @Test
-    void parse_InvalidDoneCommand_exceptionThrown() {
+    void parse_invalidDoneCommand_exceptionThrown() {
         assertThrows(EightBitException.class, () -> Parser.parse("done -5"));
     }
 
@@ -47,7 +48,7 @@ class ParserTest {
     }
 
     @Test
-    void parse_InvalidDeadlineCommand_exceptionThrown() {
+    void parse_invalidDeadlineCommand_exceptionThrown() {
         assertThrows(EightBitException.class, () -> Parser.parse("deadline abc /by 2021-20-20"));
         assertThrows(EightBitException.class, () -> Parser.parse("deadline qwerty"));
     }
