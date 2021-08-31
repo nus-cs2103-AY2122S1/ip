@@ -1,16 +1,21 @@
 package duke.commands;
 
-import duke.ui.Ui;
+import duke.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.commands.TaskType;
-import duke.DukeException;
 
-public class FindCommand extends Command{
+
+public class FindCommand extends Command {
     private TaskType type;
     private String commands;
 
+    /**
+     * Constructor for FindCommand class
+     *
+     * @param type type of task.
+     * @param commands command input by user.
+     */
     public FindCommand(TaskType type, String commands) {
         this.type = type;
         this.commands = commands;

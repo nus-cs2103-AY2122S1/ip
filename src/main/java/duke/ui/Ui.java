@@ -16,10 +16,10 @@ public class Ui {
      */
     public void showWelcome() {
         String logo = " ____        _\n"
-        + "|  _ \\ _   _| | _____\n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";
+            + "|  _ \\ _   _| | _____\n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello! I'm\n" + logo + "\nHow can I help?");
     }
 
@@ -36,7 +36,7 @@ public class Ui {
      * @param output output string to be printed.
      */
     public void printOutput(String output) {
-        System.out.println(output); 
+        System.out.println(output);
     }
 
     /**

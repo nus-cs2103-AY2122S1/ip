@@ -25,7 +25,7 @@ public class Parser {
         if (commands.length > 1) {
             rest = fullCommand.substring(first.length() + 1);
         }
-        
+        // return command based on user input
         switch (first) {
         case "list": {
             return new ListCommand();

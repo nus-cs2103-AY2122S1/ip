@@ -1,18 +1,18 @@
 package duke.storage;
 
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.TaskList;
-import duke.DukeException;
+import duke.task.ToDo;
 
 public class Storage {
 
@@ -64,12 +64,11 @@ public class Storage {
                 listOfTasks.add(t);
             }
             reader.close();
-            
         } catch (FileNotFoundException e) {
             throw new DukeException(e.getMessage());
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
-        } 
+        }
         return listOfTasks;
     }
 
@@ -85,6 +84,6 @@ public class Storage {
             writer.close();
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        }    
+        }
     }
 }

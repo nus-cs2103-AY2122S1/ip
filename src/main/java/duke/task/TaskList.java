@@ -1,10 +1,12 @@
 package duke.task;
-import duke.DukeException;
 
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+
+import duke.DukeException;
+
 public class TaskList {
     private ArrayList<Task> list;
 
@@ -12,7 +14,7 @@ public class TaskList {
      * Constructor for a new list of tasks.
      */
     public TaskList() {
-       this.list = new ArrayList<>();
+        this.list = new ArrayList<>();
     }
 
     /**
@@ -66,11 +68,10 @@ public class TaskList {
      * @return String representation of all the tasks in the tasklist.
      */
     public String format() {
-        String x =  "";
+        String x = "";
         for (Task task : this.list) {
             x += task.formatTask() + "\n";
         }
-        
         return x;
     }
 
@@ -91,6 +92,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Find tasks by keyword.
+     *
+     * @param search keyword input.
+     * @return Array of tasks containing given keyword.
+     */
     public Task[] findByKeyword(String search) {
         Task[] filtered = this.list.stream().filter(task -> task.compareKeyword(search)).toArray(Task[]::new);
         return filtered;

@@ -12,6 +12,11 @@ public class Task {
     private boolean completed;
 
 
+    /**
+     * Constructor for Task object.
+     *
+     * @param input title of task.
+     */
     public Task(String input) {
         this.title = input.trim();
         this.completed = false;

@@ -1,12 +1,11 @@
 package duke.commands;
 
-import duke.ui.Ui;
 import duke.DukeException;
 import duke.storage.Storage;
-import duke.task.TaskList;
 import duke.task.Task;
+import duke.task.TaskList;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private String commands;
 
     public DeleteCommand(String commands) {
@@ -23,7 +22,7 @@ public class DeleteCommand extends Command{
                 response = "Noted. I've removed this task:\n" + task + "\nNow you have " + tasks.getLength() + " tasks in the list.";
                 storage.updateFile(tasks);
             } else {
-                throw new DukeException("☹ OOPS!!! Input a valid index"); 
+                throw new DukeException("☹ OOPS!!! Input a valid index");
             }
         } else {
             throw new DukeException("☹ OOPS!!! Input a valid index");

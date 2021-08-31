@@ -1,10 +1,14 @@
-import duke.task.Event;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import duke.task.Event;
 import duke.task.ToDo;
+
+
 public class DukeTest {
     @Test
-    public void toStringTest(){
+    public void toStringTest() {
         assertEquals("[T] [ ] submit iP ", new ToDo("submit iP").toString());
     }
 

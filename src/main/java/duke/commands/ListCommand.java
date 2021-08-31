@@ -1,9 +1,9 @@
 package duke.commands;
 
-import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.DukeException;
 import duke.storage.Storage;
+import duke.task.TaskList;
+
 
 public class ListCommand extends Command {
     public ListCommand() {}
@@ -12,5 +12,4 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         return tasks.toString();
     }
-    
 }

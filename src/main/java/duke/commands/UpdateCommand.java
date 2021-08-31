@@ -1,10 +1,10 @@
 package duke.commands;
 
-import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
+import duke.task.TaskList;
+
 
 public class UpdateCommand extends Command {
     private String commands;
@@ -29,5 +29,4 @@ public class UpdateCommand extends Command {
         }
         return response;
     }
-    
 }

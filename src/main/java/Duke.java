@@ -1,8 +1,9 @@
 import duke.DukeException;
 import duke.commands.Command;
 import duke.parser.Parser;
-import duke.task.TaskList;
 import duke.storage.Storage;
+import duke.task.TaskList;
+
 
 
 
@@ -31,7 +32,7 @@ public class Duke {
         try {
             Command c = Parser.parseCommand(input);
             response = c.execute(tasks, storage);
-            isExit = c.isExit;
+            isExit = c.getExitStatus();
         } catch (DukeException e) {
             response = e.getMessage();
         }

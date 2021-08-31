@@ -18,7 +18,7 @@ public class Event extends Task {
     public Event(String input, String at) throws DateTimeParseException {
         super(input);
         int space = at.indexOf(" ");
-        String format = space > 0 ? "d/MM/yyyy HHmm" : "d/MM/yyyy"; 
+        String format = space > 0 ? "d/MM/yyyy HHmm" : "d/MM/yyyy";
         this.at = LocalDate.parse(at.trim(), DateTimeFormatter.ofPattern(format));
         if (this.at.isBefore(LocalDate.now())) {
             super.completeItem();

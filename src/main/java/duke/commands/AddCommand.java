@@ -2,18 +2,23 @@ package duke.commands;
 
 import java.time.format.DateTimeParseException;
 
-import duke.ui.Ui;
+import duke.DukeException;
 import duke.storage.Storage;
-import duke.task.TaskList;
-import duke.task.ToDo;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.DukeException;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 public class AddCommand extends Command {
     private TaskType type;
     private String commands;
 
+    /**
+     * Constructor for AddCommand object.
+     *
+     * @param type type of task.
+     * @param commands command input by user.
+     */
     public AddCommand(TaskType type, String commands) {
         this.type = type;
         this.commands = commands;
@@ -24,7 +29,7 @@ public class AddCommand extends Command {
         String response = "";
         switch (type) {
         case TO_DO: {
-            if (commands.length() > 0){
+            if (commands.length() > 0) {
                 ToDo td = new ToDo(commands);
                 tasks.addToList(td);
                 response = "Got it. I've added this task:\n" + td + "\nNow you have " + tasks.getLength() + " tasks in the list.";
@@ -36,7 +41,7 @@ public class AddCommand extends Command {
         }
         case DEADLINE: {
             if (commands.length() > 0) {
-                try{
+                try {
                     String[] details = commands.split("/by ");
                     if (details.length == 1) {
                         throw new DukeException("☹ OOPS!!! Add a '/by deadline'");

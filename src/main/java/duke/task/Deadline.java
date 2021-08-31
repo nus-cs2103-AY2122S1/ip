@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     private LocalDate by;
 
     /**
@@ -13,10 +13,10 @@ public class Deadline extends Task{
      * @param by date/time of deadline.
      * @throws DateTimeParseException
      */
-    public Deadline(String input, String by) throws DateTimeParseException{
+    public Deadline(String input, String by) throws DateTimeParseException {
         super(input);
         int space = by.indexOf(" ");
-        String format = space > 0 ? "d/MM/yyyy HHmm" : "d/MM/yyyy"; 
+        String format = space > 0 ? "d/MM/yyyy HHmm" : "d/MM/yyyy";
         this.by = LocalDate.parse(by.trim(), DateTimeFormatter.ofPattern(format));
         if (this.by.isBefore(LocalDate.now())) {
             super.completeItem();
@@ -34,7 +34,7 @@ public class Deadline extends Task{
     }
 
     @Override
-    public  String toString() {
+    public String toString() {
         return "[D] " + super.toString() + "(by: " + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
     }
 }

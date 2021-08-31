@@ -5,5 +5,5 @@ public enum TaskType {
     DEADLINE,
     EVENT,
     FIND,
-    FIND_BY_DATE 
+    FIND_BY_DATE
 }
