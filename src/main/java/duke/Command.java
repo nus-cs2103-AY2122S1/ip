@@ -56,7 +56,7 @@ public abstract class Command {
             try {
                 TaskList.Task task = taskList.add(input, taskType);
 
-                ui.addUi(taskList, task);
+                ui.displayAddUi(taskList, task);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -89,7 +89,7 @@ public abstract class Command {
         @Override
         public void execute(TaskList taskList, Ui ui, Storage storage) {
             try {
-                ui.doneUi(taskList.done(taskNumber));
+                ui.displayDoneUi(taskList.done(taskNumber));
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -122,7 +122,7 @@ public abstract class Command {
         @Override
         public void execute(TaskList taskList, Ui ui, Storage storage) {
             try {
-                ui.deleteUi(taskList, taskList.delete(taskNumber));
+                ui.displayDeleteUi(taskList, taskList.delete(taskNumber));
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
@@ -147,7 +147,7 @@ public abstract class Command {
          */
         @Override
         public void execute(TaskList taskList, Ui ui, Storage storage) {
-            ui.listUi(taskList);
+            ui.displayListUi(taskList);
         }
     }
 
@@ -172,7 +172,7 @@ public abstract class Command {
         public void execute(TaskList taskList, Ui ui, Storage storage) {
             storage.write(taskList);
 
-            ui.exitUi();
+            ui.displayExitUi();
         }
 
         /**
@@ -205,7 +205,7 @@ public abstract class Command {
          */
         @Override
         public void execute(TaskList taskList, Ui ui, Storage storage) {
-            ui.unknownUi();
+            ui.displayUnknownUi();
         }
 
         @Override
@@ -251,7 +251,7 @@ public abstract class Command {
         @Override
         public void execute(TaskList taskList, Ui ui, Storage storage) {
             taskList.find(relatedList, keyword);
-            ui.findUi(relatedList);
+            ui.displayFindUi(relatedList);
         }
     }
 }

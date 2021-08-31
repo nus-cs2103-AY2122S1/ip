@@ -21,7 +21,7 @@ public class Duke {
             taskList = new TaskList(storage.load());
 
             ui.greet2();
-            ui.listUi(taskList);
+            ui.displayListUi(taskList);
             ui.showLine();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
