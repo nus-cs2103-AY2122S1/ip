@@ -1,7 +1,7 @@
 package duke.request;
 
-import duke.action.ListTasks;
 import duke.action.Action;
+import duke.action.ListTasks;
 import duke.task.TaskCollection;
 
 /**

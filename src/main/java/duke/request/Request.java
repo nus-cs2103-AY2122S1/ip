@@ -48,11 +48,11 @@ public abstract class Request {
             return new EventRequest(taskCollection, commandInput);
         case TODO:
             return new ToDoRequest(taskCollection, commandInput);
-        }
-
-        throw new RuntimeException(String.format(
+        default:
+            throw new RuntimeException(String.format(
                 "duke.request.Command %s exists but is not mapped to a corresponding duke.request.Request.",
                 commandString
-        ));
+            ));
+        }
     }
 }

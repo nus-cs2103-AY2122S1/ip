@@ -1,12 +1,10 @@
 package duke.request;
 
-import duke.task.Task;
-import duke.task.TaskCollection;
-import duke.exception.UserException;
 import duke.action.Action;
 import duke.action.CompleteTask;
-
-import java.lang.NumberFormatException;
+import duke.exception.UserException;
+import duke.task.Task;
+import duke.task.TaskCollection;
 
 /**
  * duke.request.DoneRequest represents a request from the user to mark a duke.task.Task as done in the application.

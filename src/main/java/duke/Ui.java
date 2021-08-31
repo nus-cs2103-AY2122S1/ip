@@ -6,7 +6,7 @@ import java.util.Scanner;
  * duke.Ui represents the class that deals with interactions with the user
  */
 public class Ui {
-    Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
 
     /**
      * Prints the duke.Response to the console.

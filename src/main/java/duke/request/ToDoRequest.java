@@ -1,8 +1,8 @@
 package duke.request;
 
-import duke.exception.UserException;
 import duke.action.Action;
 import duke.action.AddTask;
+import duke.exception.UserException;
 import duke.task.TaskCollection;
 import duke.task.ToDo;
 

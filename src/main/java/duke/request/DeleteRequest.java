@@ -1,14 +1,13 @@
 package duke.request;
 
-import duke.action.DeleteTask;
-import duke.task.TaskCollection;
-import duke.exception.UserException;
 import duke.action.Action;
-
-import java.lang.NumberFormatException;
+import duke.action.DeleteTask;
+import duke.exception.UserException;
+import duke.task.TaskCollection;
 
 /**
- * duke.request.DeleteRequest represents a request from the user to delete a duke.task.Task from the duke.task.TaskCollection.
+ * duke.request.DeleteRequest represents a request from the user to delete a duke.task.Task from the
+ * duke.task.TaskCollection.
  */
 public class DeleteRequest extends TaskCollectionRequest {
     private final int taskId;

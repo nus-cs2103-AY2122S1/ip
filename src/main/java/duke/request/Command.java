@@ -3,7 +3,8 @@ package duke.request;
 import duke.exception.UserException;
 
 /**
- * A duke.request.Command represents a string in a duke.request.Request that instructs the application to perform an Action.
+ * A duke.request.Command represents a string in a duke.request.Request that instructs the application to
+ * perform an Action.
  */
 public enum Command {
     BYE("bye"),

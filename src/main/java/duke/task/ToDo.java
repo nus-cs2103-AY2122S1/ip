@@ -1,8 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-import duke.task.TaskType;
-
 /**
  * Todo is a task without any date/time attached to it.
  */

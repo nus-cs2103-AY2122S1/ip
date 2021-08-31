@@ -1,7 +1,7 @@
 package duke.request;
 
-import duke.action.GoodbyeUser;
 import duke.action.Action;
+import duke.action.GoodbyeUser;
 
 /**
  * duke.request.ByeRequest represents a request from the user to stop the application.

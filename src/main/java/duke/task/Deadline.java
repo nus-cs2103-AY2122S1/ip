@@ -25,7 +25,11 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s (by: %s)", TaskType.DEADLINE.toString(), super.toString(), this.by.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
+        return String.format(
+            "[%s]%s (by: %s)",
+            TaskType.DEADLINE.toString(),
+            super.toString(),
+            this.by.format(DateTimeFormatter.ofPattern("dd MMM yyyy")));
     }
 
     /**

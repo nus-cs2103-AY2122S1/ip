@@ -1,10 +1,10 @@
 package duke.request;
 
-import duke.task.TaskCollection;
-import duke.exception.UserException;
 import duke.action.Action;
 import duke.action.AddTask;
+import duke.exception.UserException;
 import duke.task.Deadline;
+import duke.task.TaskCollection;
 
 /**
  * duke.request.DeadlineRequest represents a request from the user to create a duke.task.Deadline in the application.
@@ -45,8 +45,8 @@ public class DeadlineRequest extends TaskCollectionRequest {
 
         if (substrings.length != 2) {
             String[] exceptionMessages = new String[]{
-                    "A request to create a deadline task must follow the format:",
-                    "  deadline <description> /by <datetime>"
+                "A request to create a deadline task must follow the format:",
+                "  deadline <description> /by <datetime>"
             };
             throw new UserException(String.join(System.lineSeparator(), exceptionMessages));
         }

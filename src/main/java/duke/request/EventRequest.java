@@ -45,8 +45,8 @@ public class EventRequest extends TaskCollectionRequest {
 
         if (substrings.length != 2) {
             String[] exceptionMessages = new String[]{
-                    "A request to create an event task must follow the format:",
-                    "  event <description> /by <datetime>"
+                "A request to create an event task must follow the format:",
+                "  event <description> /by <datetime>"
             };
             throw new UserException(String.join(System.lineSeparator(), exceptionMessages));
         }
