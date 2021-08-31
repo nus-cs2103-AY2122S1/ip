@@ -15,7 +15,7 @@ public class Deadline extends Task {
         DateTimeFormatter.ofPattern("dd-MM-uuuu HHmm");
 
     /**
-     * Factor method of Deadline class
+     * Factory method of Deadline class
      *
      * @param taskSummary task description
      * @param byDate
@@ -62,9 +62,11 @@ public class Deadline extends Task {
     private void updateDateTimeDeadline(String byDate) {
         try {
             LocalDateTime parsedDateTime = Deadline.stringToLocalDateTime(byDate);
-            if (parsedDateTime.isBefore(dateTimeTaskCreation)) {
-                throw new IllegalArgumentException("Time of deadline is in the past!");
-            }
+            // replace buggy code
+            // prob: after deadline passed, when its in the store, loading it will cause an exception to be thrown
+//            if (parsedDateTime.isBefore(dateTimeTaskCreation)) {
+//                throw new IllegalArgumentException("Time of deadline is in the past!");
+//            }
             this.dateTimeDeadline = parsedDateTime;
         } catch (DateTimeParseException e) {
             throw DukeException.of("date",

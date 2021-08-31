@@ -19,10 +19,10 @@ public class Duke {
     }
 
     public Duke(String filePathToStorage) {
-        Storage DUKE_STORE = new Storage(filePathToStorage);
-        TaskList TASKLIST = TaskList.of(DUKE_STORE);
-        this.PARSER = Parser.initialize(TASKLIST);
-        this.UI = new Ui();
+        Storage dukeStore = new Storage(filePathToStorage);
+        TaskList taskList = TaskList.of(dukeStore);
+        PARSER = Parser.initialize(taskList);
+        UI = new Ui();
     }
 
     public void run() {
@@ -37,7 +37,7 @@ public class Duke {
             }
 
             try {
-                String reply = this.PARSER.parseCommand(userInput);
+                String reply = PARSER.parseCommand(userInput);
                 Ui.printFormatted(reply);
             } catch (DukeException e) {
                 Ui.printFormatted(e.toString());

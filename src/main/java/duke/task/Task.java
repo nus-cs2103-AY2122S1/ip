@@ -3,7 +3,6 @@ package duke.task;
 import java.util.Arrays;
 import java.util.List;
 
-//make abstract class?
 public class Task {
     private boolean isDone;
     private String taskSummary;

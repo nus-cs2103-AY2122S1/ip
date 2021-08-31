@@ -26,6 +26,7 @@ public final class TaskList {
             Scanner sc = new Scanner(tasksStorageFile);
             while (sc.hasNext()) {
                 String line = sc.nextLine();
+                //can't use polymorphism because parseLine has to be static method
                 Task task = Task.parseLine(line);
                 tasks.add(task);
             }
