@@ -1,5 +1,7 @@
 package duke;
 
+import javafx.application.Application;
+
 /**
  * Represents Duke, a text-based Java chatbot that helps to
  * keep track of various tasks.
@@ -8,23 +10,17 @@ package duke;
  */
 public class Duke {
 
+    private static final String STORAGE_FILE_PATH = "./data/duke.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
      * Class constructor.
-     *
-     * @param filePath The file path of the text file to be used for storage.
-     *                 The data in the file will be read and Duke will be initialized
-     *                 with task information from the file.
-     *                 If the file does not exist or if the data in the file is corrupted,
-     *                 Duke will be initialized without prior task information and the file
-     *                 will be reset.
      */
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(STORAGE_FILE_PATH);
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -34,22 +30,23 @@ public class Duke {
     }
 
     /**
-     * Starts the chatbot.
+     * Gets the appropriate response to be shown to the user given a user input.
+     *
+     * @param input The user input.
+     * @return The response to be shown to the user.
      */
-    private void start() {
-        ui.hello();
-        String userInput = ui.getUserInput();
+    public String getResponse(String input) {
         Parser parser = new Parser(tasks);
-        while (!userInput.equals("bye")) {
-            try {
-                ui.printMessage(parser.parse(userInput));
-                storage.save(tasks);
-            } catch (DukeException e) {
-                ui.printMessage(e.getMessage());
-            }
-            userInput = ui.getUserInput();
+        if (input.equals("bye")) {
+            System.exit(0);
         }
-        ui.goodbye();
+        try {
+            String response = parser.parse(input);
+            storage.save(tasks);
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -58,7 +55,7 @@ public class Duke {
      * @param args Command line arguments (currently not used).
      */
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").start();
+        Application.launch(Main.class, args);
     }
 
 }
