@@ -5,29 +5,29 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Encapsulates a class that handles parsing of date-time inputs
+ * Encapsulates a class that handles parsing of date-time inputs.
  */
 public class DateTimeHandler {
-    String[] formats = {
+    private final String[] FORMATS = {
             "dd-MM-yyyy hh:mm a",
             "dd-MM-yyyy HHmm",
             "dd/MM/yyyy hh:mm a",
             "dd/MM/yyyy HHmm"
     };
-    private final DateTimeFormatter[] dtfList = new DateTimeFormatter[formats.length];
+    private final DateTimeFormatter[] dtfList = new DateTimeFormatter[FORMATS.length];
 
     public DateTimeHandler() {
-        for(int i=0; i<formats.length; i++) {
-            dtfList[i] = DateTimeFormatter.ofPattern(formats[i]);
+        for(int i = 0; i< FORMATS.length; i++) {
+            dtfList[i] = DateTimeFormatter.ofPattern(FORMATS[i]);
         }
     }
 
     /**
-     * Returns whether or not the input string can be parsed by the given formatter
+     * Returns whether or not the input string can be parsed by the given formatter.
      *
-     * @param dtf The DateTimeFormatter object
-     * @param s The string to be parsed
-     * @return Whether or not the string can be parsed
+     * @param dtf The DateTimeFormatter object.
+     * @param s The string to be parsed.
+     * @return Whether or not the string can be parsed.
      */
     private boolean tryToParse(DateTimeFormatter dtf, String s) {
         try {
@@ -59,9 +59,9 @@ public class DateTimeHandler {
      * @return The String array containing the valid date formats
      */
     public String[] getFormatList() {
-        String[] res = new String[formats.length+1];
+        String[] res = new String[FORMATS.length+1];
         res[0] = "Valid date formats:";
-        System.arraycopy(formats, 0, res, 1, formats.length);
+        System.arraycopy(FORMATS, 0, res, 1, FORMATS.length);
         return res;
     }
 
