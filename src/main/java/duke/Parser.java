@@ -39,7 +39,6 @@ public class Parser {
 
         while (!input.equals("bye")) {
             if (input.equals("list")) {
-                System.out.println("Here are the tasks on your list: ");
                 list.printList();
             } else if (input.startsWith("done")) {
                 try {

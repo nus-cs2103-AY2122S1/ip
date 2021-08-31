@@ -38,7 +38,7 @@ public class TaskList {
      * @return String representation of all the tasks inside the current TaskList.
      */
     public String printList() {
-        String str = "";
+        String str = "Here are the tasks on your list: \n";
         for (int i = 1; i <= list.size(); i++) {
             str = str + i + ". " + list.get(i-1) + "\n";
         }
@@ -54,7 +54,7 @@ public class TaskList {
      * @throws OutOfBoundException Thrown when user inputs task number that is out of the given task range.
      * @throws NumberFormatException Thrown when user gives a non-number as the task number.
      */
-    public Task markAsDone(String str) throws OutOfBoundException, NumberFormatException {
+    public String markAsDone(String str) throws OutOfBoundException, NumberFormatException {
         String i = str.substring(str.length()-1);
         int index = Integer.parseInt(i);
         if (index < 0 || index > list.size()) {
@@ -64,7 +64,9 @@ public class TaskList {
             task.markAsDone();
             System.out.println("Nice! I have marked this task as done!");
             System.out.println(task);
-            return task;
+
+            String result = "Nice! I have marked this task as done!\n" + task.toString() ;
+            return result;
         }
     }
 
@@ -78,7 +80,7 @@ public class TaskList {
      * @throws InvalidDeadlineException Thrown when users give an incorrect deadline.
      */
 
-    public Task addTask(String str) throws EmptyDescriptionException
+    public String addTask(String str) throws EmptyDescriptionException
             , InvalidTaskException, InvalidDeadlineException {
         //first check if the task only contain 1 word
         if (str.split(" ").length == 1) {
@@ -119,11 +121,16 @@ public class TaskList {
                     }
                 }
 
+                String result = "Got it. I've added this task.\n"
+                        + list.get(list.size() - 1).toString()
+                        + "Now you have " + list.size()
+                        + (list.size() == 1 ? " task in the list" : " tasks in the list.");
+
                 System.out.println("Got it. I've added this task.");
                 System.out.println(list.get(list.size() - 1));
                 System.out.println("Now you have " + list.size()
                         + (list.size() == 1 ? " task in the list" : " tasks in the list."));
-                return task;
+                return result;
             }
         }
     }
@@ -134,7 +141,7 @@ public class TaskList {
      * @return Task after it is deleted.
      * @throws OutOfBoundException Thrown when user gives a task number that is outside of the range of TaskList.
      */
-    public Task deleteTask(String str) throws OutOfBoundException {
+    public String deleteTask(String str) throws OutOfBoundException {
         String i = str.substring(str.length()-1);
         int index = Integer.parseInt(i);
 
@@ -143,11 +150,16 @@ public class TaskList {
         } else {
             Task task = list.get(index - 1);
             list.remove(index - 1);
+
+            String result = "Noted. I've removed this task: " + task.toString()
+                    + "Now you have " + list.size()
+                    + (list.size() == 1 ? " task in the list" : " tasks in the list.");
+
             System.out.println("Noted. I've removed this task: ");
             System.out.println(task);
             System.out.println("Now you have " + list.size()
                     + (list.size() == 1 ? " task in the list" : " tasks in the list."));
-            return task;
+            return result;
         }
     }
 
@@ -159,7 +171,7 @@ public class TaskList {
      * @throws TaskDoesNotExistException when there is no task that matches.
      */
 
-    public TaskList findTask(String str)throws TaskDoesNotExistException {
+    public String findTask(String str)throws TaskDoesNotExistException {
         String t = str.substring(5);
         ArrayList<Task> l = new ArrayList<>();
 
@@ -172,10 +184,11 @@ public class TaskList {
         if (l.isEmpty()) {
             throw new TaskDoesNotExistException();
         } else {
+            String result = "Here are the matching tasks in your list:";
             System.out.println("Here are the matching tasks in your list:");
             TaskList list = new TaskList(l);
-            list.printList();
-            return list;
+            result += list.printList();
+            return result;
         }
     }
 

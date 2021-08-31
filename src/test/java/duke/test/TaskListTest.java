@@ -40,8 +40,8 @@ public class TaskListTest {
     @Test
     public void addTaskTest() throws DukeException {
         TaskList list = new TaskList(new ArrayList<>());
-        Task t = list.addTask("todo shower");
-        assertEquals("[T][ ]shower", t.toString());
+        String t = list.addTask("todo shower");
+        assertEquals("[T][ ]shower", t);
     }
 
     /**
@@ -52,7 +52,7 @@ public class TaskListTest {
     public void addTaskTest2() {
         try {
             TaskList list = new TaskList(new ArrayList<>());
-            Task t = list.addTask("deadline hw");
+            String t = list.addTask("deadline hw");
             fail();
         } catch (DukeException e) {
             assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-( " +
@@ -71,8 +71,8 @@ public class TaskListTest {
         ArrayList<Task> l = new ArrayList<>();
         l.add(task1);
         TaskList list = new TaskList(l);
-        Task t = list.deleteTask("1");
-        assertEquals("[T][ ]shower", t.toString());
+        String t = list.deleteTask("1");
+        assertEquals("[T][ ]shower", t);
     }
 
     /**
@@ -105,8 +105,8 @@ public class TaskListTest {
         ArrayList<Task> l = new ArrayList<>();
         l.add(task1);
         TaskList list = new TaskList(l);
-        Task t = list.markAsDone("1");
-        assertEquals("[T][X]shower", t.toString());
+        String t = list.markAsDone("1");
+        assertEquals("[T][X]shower", t);
     }
 
     /**
@@ -120,7 +120,7 @@ public class TaskListTest {
             ArrayList<Task> l = new ArrayList<>();
             l.add(task1);
             TaskList list = new TaskList(l);
-            Task t = list.markAsDone("2");
+            String t = list.markAsDone("2");
             fail();
         } catch (DukeException e) {
             assertEquals("Task does not exist. " +
