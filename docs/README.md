@@ -238,7 +238,7 @@ Please ensure you key in dates in the input specified.
 ```
 __________
 ### Partial loading
-Tiger knows that users love to mess around with its data files, sometimes corrupting it in the process. As such, Tiger is equipped with a mechanism called partial loading. If the data file is corrupted for _some reason_ (ahem ahem, the users), it tries to recover what it can. When Tiger detects it's data has been corrupted, it starts up with the following message, directly blaming the user:
+Tiger knows that users love to mess around with its data files, sometimes corrupting it in the process. As such, Tiger is equipped with a mechanism called partial loading. If the data file is corrupted for _some reason_ (ahem ahem, the users), it tries to recover what it can. When Tiger detects it's data has been corrupted, it starts up with the following accusatory message:
 
 ```
 Error encountered in loading the file! Did you alter my memory directly?
@@ -275,3 +275,5 @@ Expected outcome:
 Please enter Y or N only
 ```
 At this point, the user has tried to alter Tiger's data files and is not following simple instructions. Tiger is clearly pissed and does not bother put in a full-stop at the end of his sentences anymore.
+
+**And that's all! Tiger is ready for you to enter in the *wrong* commands!**
