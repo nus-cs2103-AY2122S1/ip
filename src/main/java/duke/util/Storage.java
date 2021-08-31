@@ -32,10 +32,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public Storage() {
-        filePath = "";
-    }
-
     /**
      * Saves data stored locally.
      * If file does not exist, then a new file will be created.
