@@ -37,7 +37,7 @@ public class ProcessorStub implements IProcessor {
     }
 
     @Override
-    public String processFind(String keyword) {
+    public String processFind(String ... keywords) {
         return "";
     }
 }

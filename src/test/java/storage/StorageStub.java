@@ -45,7 +45,7 @@ public class StorageStub implements IStorage {
     }
 
     @Override
-    public TaskList findKeyword(String keyword) {
+    public TaskList findKeyword(String ... keywords) {
         return null;
     }
 }

@@ -1,6 +1,7 @@
 package duke;
 
 import config.Setting;
+import javafx.util.Pair;
 import parser.Parser;
 import processor.Processor;
 import storage.Storage;
@@ -45,7 +46,7 @@ public class Duke {
      * @param input Input from the user.
      * @return Response from the chatbot.
      */
-    public String getResponse(String input) {
-        return parser.getResponse(input).getValue();
+    public Pair<Boolean, String> getResponse(String input) {
+        return parser.getResponse(input);
     }
 }
