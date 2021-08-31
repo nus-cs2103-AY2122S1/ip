@@ -2,17 +2,16 @@ package duke;
 
 /**
  * Represents a command to delete a task.
- * 
+ *
  * @author Sherman Ng Wei Sheng
  */
 public class DeleteCommand extends Command {
-    
     private boolean isExit;
     private int index;
 
     /**
      * Constructor for the delete command.
-     * 
+     *
      * @param index The index of the task in the TaskList to be deleted.
      */
     public DeleteCommand(int index) {
@@ -22,7 +21,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Returns true if the command is a programme terminating command.
-     * 
+     *
      * @return True if it is a terminating command and false otherwise.
      */
     @Override
@@ -43,9 +42,9 @@ public class DeleteCommand extends Command {
         Task removed = list.deleteAtIndex(this.index);
         if (removed != null) {
             String message =
-                    "Noted.I've removed this task:\n" +
-                    "  " + removed + "\n" +
-                    String.format("Now you have %d tasks in the list.", list.size());
+                    "Noted.I've removed this task:\n"
+                    + "  " + removed + "\n"
+                    + String.format("Now you have %d tasks in the list.", list.size());
             ui.printMessage(message);
             storage.save(list.convertToStorageString());
         } else {

@@ -6,7 +6,6 @@ package duke;
  * @author Sherman Ng Wei Sheng
  */
 public class ToDo extends Task {
-    
     /**
      * Constructor to initialize a new ToDo.
      *
@@ -25,7 +24,6 @@ public class ToDo extends Task {
     public ToDo(String description, boolean isDone) {
         super(description, isDone);
     }
-    
     /**
      * Returns the string representation of the task in a desired format.
      *

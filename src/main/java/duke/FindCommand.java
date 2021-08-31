@@ -2,24 +2,22 @@ package duke;
 
 /**
  * Represents the command to find tasks containing a particular keyword.
- * 
+ *
  * @author Sherman Ng Wei Sheng
  */
 public class FindCommand extends Command {
-    
     private boolean isExit;
     private String keyword;
 
     /**
      * Constructor for the command object.
-     * 
+     *
      * @param keyword The keyword to be searched for.
      */
     public FindCommand(String keyword) {
         this.isExit = false;
         this.keyword = keyword;
     }
-    
     /**
      * Returns true if the command is a programme terminating command.
      *

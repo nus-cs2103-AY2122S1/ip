@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     private final LocalDate dateTime;
-    
     /**
      * Constructor to initialize a new Event.
      *
