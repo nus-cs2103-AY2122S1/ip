@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.Ui;
+
 /**
  * General tasks to be completed by the user with no time property.
  */
@@ -45,7 +47,7 @@ public class Task {
      * Marks the task as completed.
      */
     public void complete() {
-        this.isDone = true;
+            this.isDone = true;
     }
 
     /**

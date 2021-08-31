@@ -33,81 +33,113 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         String[] inputArr = input.split(" ");
-        String[] details;
-        String description;
-        String[] dateTimeArr;
-        LocalDate date;
-        LocalTime time;
-        LocalDateTime dateTimeInfo;
-        int taskid;
         switch (inputArr[0]) {
         case "list":
-            return new ListCommand();
+           return parseList();
         case "done":
-            if (inputArr.length == 1) {
-                throw new DukeException("Indicate the id of the task which you have completed!");
-            }
-            taskid = Integer.parseInt(inputArr[1]);
-            return new DoneCommand(taskid);
+            return parseDone(inputArr);
         case "delete":
-            if (inputArr.length == 1) {
-                throw new DukeException("Indicate the id of the task which you want to remove!");
-            }
-            taskid = Integer.parseInt(inputArr[1]);
-            return new DeleteCommand(taskid);
+           return parseDelete(inputArr);
         case "todo":
-            if (inputArr.length == 1) {
-                throw new DukeException("Input in the format: todo *description*");
-            }
-            description = input.replaceFirst("todo ", "");
-            return new AddCommand(new Task(description));
+            return parseToDo(inputArr);
         case "event":
-            details = input.split(" /at ");
-            description = details[0].replaceFirst("event ", "");
-            if (details.length == 1 || description.equals("")) {
-                throw new DukeException("Input the following format: event *description* /at *DD/MM/YYYY* *24H-Time*");
-            }
-            try {
-                dateTimeArr = details[1].split(" ");
-                date = LocalDate.parse(dateTimeArr[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                time = dateTimeArr.length == 1
-                        ? LocalTime.of(0, 0)
-                        : LocalTime.parse(dateTimeArr[1], DateTimeFormatter.ofPattern("HHmm"));
-                dateTimeInfo = LocalDateTime.of(date, time);
-                return new AddCommand(new Event(description, dateTimeInfo));
-            } catch (DateTimeParseException e) {
-                throw new DukeException(e.getMessage());
-            }
+            return parseEvent(input);
         case "deadline":
-            details = input.split(" /by ");
-            description = details[0].replaceFirst("deadline ", "");
-            if (details.length == 1 || description.equals("")) {
-                throw new DukeException("Input the following format: "
-                        + "deadline *description* /at *DD/MM/YYYY* *24H-Time*");
-            }
-            try {
-                dateTimeArr = details[1].split(" ");
-                date = LocalDate.parse(dateTimeArr[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                time = dateTimeArr.length == 1
-                        ? LocalTime.of(0, 0)
-                        : LocalTime.parse(dateTimeArr[1], DateTimeFormatter.ofPattern("HHmm"));
-                dateTimeInfo = LocalDateTime.of(date, time);
-                return new AddCommand(new Deadline(description, dateTimeInfo));
-            } catch (DateTimeParseException e) {
-                throw new DukeException(e.getMessage());
-            }
+            return parseDeadline(input);
         case "bye":
             return new ExitCommand();
         case "find":
-            if (inputArr.length == 1) {
-                throw new DukeException("Input the keyword to be used for the search!");
-            } else {
-                return new FindCommand(inputArr[1]);
-            }
+            return parseFind(inputArr);
         default:
             throw new DukeException("I don't get what you mean? Try again!");
         }
+    }
 
+    public static Command parseList() {
+        return new ListCommand();
+    }
+
+    public static Command parseDone(String[] inputArr) {
+        if (inputArr.length == 1) {
+            throw new DukeException("Indicate the id of the task which you have completed, "
+                    + "seperated by commas for multiple ids!");
+        }
+        String[] strTaskId = inputArr[1].split(",");
+        int numTasks = strTaskId.length;
+        int[] taskIds = new int[numTasks];
+        for (int i = 0; i < numTasks; i++) {
+            taskIds[i] = Integer.parseInt(strTaskId[i]);
+        }
+        return new DoneCommand(taskIds);
+    }
+
+    public static Command parseDelete(String[] inputArr) {
+        if (inputArr.length == 1) {
+            throw new DukeException("Indicate the id of the task which you want to remove, "
+                    + "seperated by commas for multiple ids!");
+        }
+        String[] strTaskId = inputArr[1].split(",");
+        int numTasks = strTaskId.length;
+        int[] taskIds = new int[numTasks];
+        for (int i = 0; i < numTasks; i++) {
+            taskIds[i] = Integer.parseInt(strTaskId[i]);
+        }
+        return new DeleteCommand(taskIds);
+    }
+
+    public static Command parseToDo(String[] inputArr) {
+        if (inputArr.length == 1) {
+            throw new DukeException("Input in the format: todo *description*");
+        }
+        String description = inputArr[1];
+        return new AddCommand(new Task(description));
+    }
+
+    public static Command parseEvent(String input) {
+        String[] details = input.split(" /at ");
+        String description = details[0].replaceFirst("event ", "");
+        if (details.length == 1 || description.equals("")) {
+            throw new DukeException("Input the following format: event *description* /at *DD/MM/YYYY* *24H-Time*");
+        }
+        try {
+            String[] dateTimeArr = details[1].split(" ");
+            LocalDate date = LocalDate.parse(dateTimeArr[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            LocalTime time = dateTimeArr.length == 1
+                    ? LocalTime.of(0, 0)
+                    : LocalTime.parse(dateTimeArr[1], DateTimeFormatter.ofPattern("HHmm"));
+            LocalDateTime dateTimeInfo = LocalDateTime.of(date, time);
+            return new AddCommand(new Event(description, dateTimeInfo));
+        } catch (DateTimeParseException e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
+
+    public static Command parseDeadline(String input) {
+        String[] details = input.split(" /by ");
+        String description = details[0].replaceFirst("deadline ", "");
+        if (details.length == 1 || description.equals("")) {
+            throw new DukeException("Input the following format: "
+                    + "deadline *description* /at *DD/MM/YYYY* *24H-Time*");
+        }
+        try {
+            String[] dateTimeArr = details[1].split(" ");
+            LocalDate date = LocalDate.parse(dateTimeArr[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            LocalTime time = dateTimeArr.length == 1
+                    ? LocalTime.of(0, 0)
+                    : LocalTime.parse(dateTimeArr[1], DateTimeFormatter.ofPattern("HHmm"));
+            LocalDateTime dateTimeInfo = LocalDateTime.of(date, time);
+            return new AddCommand(new Deadline(description, dateTimeInfo));
+        } catch (DateTimeParseException e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
+
+    public static Command parseFind(String[] inputArr) {
+        if (inputArr.length == 1) {
+            throw new DukeException("Input the keyword to be used for the search!");
+        } else {
+            return new FindCommand(inputArr[1]);
+        }
     }
 
 }
