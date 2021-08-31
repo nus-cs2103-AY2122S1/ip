@@ -1,7 +1,7 @@
 package exception;
 
 /**
- * Exception class for duke.Duke processes.
+ * Exception class for Duke processes.
  */
 public class DukeException extends Exception {
     /**

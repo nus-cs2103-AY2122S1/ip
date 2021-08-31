@@ -7,6 +7,9 @@ import processor.Processor;
 import storage.Storage;
 import ui.Ui;
 
+/**
+ * Main class for Dub chatbot.
+ */
 public class Duke {
 
     private static final Parser parser = new Parser(
@@ -33,8 +36,8 @@ public class Duke {
      */
     public static void listen() {
         while (true) {
-            boolean bool = parser.nextLine().getKey();
-            if (!bool) {
+            boolean isListening = parser.nextLine().getKey();
+            if (!isListening) {
                 break;
             }
         }

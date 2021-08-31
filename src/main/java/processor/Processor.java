@@ -94,7 +94,7 @@ public class Processor implements IProcessor {
                 LocalDate time = LocalDate.parse(input[1].trim());
                 this.storage.addTask(new Event(input[0], time));
             } else {
-                throw new DukeException("I don't understand:(");
+                throw new DukeException("I don't understand :(");
             }
             String response = "Got it. I've added this task:\n   " + this.storage.getLastTask()
                     + "\nNow you have " + this.storage.getSize() + " tasks in the list.";

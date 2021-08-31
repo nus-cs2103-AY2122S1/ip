@@ -24,14 +24,14 @@ public class Task implements Serializable {
     }
 
     /**
-     * Make the Task done.
+     * Makes the Task done.
      */
     public void setDone() {
         this.isDone = true;
     }
 
     /**
-     * Equals function that check whether 2 objects are equal or not.
+     * Returns true if two objects are equal.
      *
      * @param obj Object that will be compared.
      * @return True if the object are equal.
@@ -51,7 +51,7 @@ public class Task implements Serializable {
     }
 
     /**
-     * Return string implementation of the Task object.
+     * Returns string implementation of the Task object.
      *
      * @return String implementation of the Task.
      */

@@ -48,7 +48,7 @@ public class Storage implements IStorage {
     }
 
     /**
-     * Retrieve the TaskList saved inside the local storage file.
+     * Retrieves the TaskList saved inside the local storage file.
      *
      * @return Saved TaskList in the local memory.
      */

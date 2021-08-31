@@ -23,7 +23,7 @@ public class Event extends Task {
     }
 
     /**
-     * Equals function that check whether 2 objects are equal or not.
+     * Returns true if two objects are equal.
      *
      * @param obj Object that will be compared.
      * @return True if the object are equal.
