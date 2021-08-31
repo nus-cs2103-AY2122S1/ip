@@ -15,6 +15,6 @@ public class TodoTaskTest {
 
     @Test
     public void saveString_validInput_success() throws Exception {
-        assertEquals("T|false|read book|null", new TodoTask("read book").saveString());
+        assertEquals("T|false|read book|null", new TodoTask("read book").toSaveString());
     }
 }

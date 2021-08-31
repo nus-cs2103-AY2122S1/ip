@@ -9,10 +9,18 @@ public class ExitCommand extends Command {
     public ExitCommand() {}
 
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print("Goodbye! Have a nice day!");
+        ui.showGoodbye();
     }
 
+<<<<<<< Updated upstream
     public Boolean isExit() {
+=======
+    /**
+     * Check if user is ending the chatbot.
+     * @return True if user is ending the chatbot.
+     */
+    public boolean isExit() {
+>>>>>>> Stashed changes
         return true;
     }
 

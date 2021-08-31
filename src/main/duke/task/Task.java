@@ -1,10 +1,11 @@
 package duke.task;
 
+import duke.DukeException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.DukeException;
 
 
 public class Task {
@@ -37,11 +38,27 @@ public class Task {
         return (isDone ? "X" : " ");
     }
 
+<<<<<<< Updated upstream
     public String saveString() {
         return String.format("%s|%s|%s", isDone, description, time);
     }
 
     public LocalDateTime time() {
+=======
+    /**
+     * Format task to be saved in file.
+     * @return Formatted string representation of task.
+     */
+    public String toSaveString() {
+        return String.format("%s|%s|%s", isDone, description, time);
+    }
+
+    /**
+     * Get the time of the task.
+     * @return Time.
+     */
+    public LocalDateTime getTime() {
+>>>>>>> Stashed changes
         return time;
     }
     

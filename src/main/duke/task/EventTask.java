@@ -8,12 +8,22 @@ public class EventTask extends Task {
         super(description, time);
     }
 
+<<<<<<< Updated upstream
     public String saveString() {
         return String.format("E|%s", super.saveString());
+=======
+    /**
+     * Format task to be saved in file.
+     * @return Formatted string representation of task.
+     */
+    public String toSaveString() {
+        return String.format("E|%s", super.toSaveString());
+>>>>>>> Stashed changes
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at:" + super.time.format(TIME_FORMAT) + ")";
+        String formattedString = super.time.format(TIME_FORMAT);
+        return "[E]" + super.toString() + " (at:" + formattedString + ")";
     }
 }

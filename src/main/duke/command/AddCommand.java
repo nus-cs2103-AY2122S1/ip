@@ -1,13 +1,13 @@
 package duke.command;
 
+import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
-import duke.DukeException;
-import duke.task.Task;
-import duke.task.TodoTask;
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.TodoTask;
 
 public class AddCommand extends Command {
 
@@ -18,27 +18,32 @@ public class AddCommand extends Command {
     }
 
     private void parseTask(String fullCommand) throws DukeException{
-        switch (fullCommand.split(" ")[0]) {
+        String type = fullCommand.split(" ")[0];
+        switch (type) {
         case "todo":
-            String todoDescriptions = fullCommand.replace("todo", "");
-            if (todoDescriptions.trim().isEmpty()) {
+            String todoDescription = fullCommand.replace("todo", "").trim();
+            if (todoDescription.isEmpty()) {
                 throw new DukeException("Empty Todo Command!");
             }
-            this.taskToAdd = new TodoTask(todoDescriptions.trim());
+            this.taskToAdd = new TodoTask(todoDescription);
             break;
         case "deadline":
             String[] deadlineDescriptions = fullCommand.replace("deadline", "").split("/by");
-            if (deadlineDescriptions[0].trim().isEmpty() || deadlineDescriptions[1].trim().isEmpty()) {
+            String deadlineDescription = deadlineDescriptions[0].trim();
+            String deadlineTime = deadlineDescriptions[1].trim();
+            if (deadlineDescription.isEmpty() || deadlineTime.isEmpty()) {
                 throw new DukeException("Empty Deadline Command!");
             }
-            this.taskToAdd = new DeadlineTask(deadlineDescriptions[0].trim(), deadlineDescriptions[1].trim());
+            this.taskToAdd = new DeadlineTask(deadlineDescription, deadlineTime);
             break;
         case "event":
             String[] eventDescriptions = fullCommand.replace("event", "").split("/at");
-            if (eventDescriptions[0].trim().isEmpty() || eventDescriptions[1].trim().isEmpty()) {
+            String eventDescription = eventDescriptions[0].trim();
+            String eventTime = eventDescriptions[1].trim();
+            if (eventDescription.isEmpty() || eventTime.isEmpty()) {
                 throw new DukeException("Empty Event Command!");
             }
-            this.taskToAdd = new EventTask(eventDescriptions[0].trim(), eventDescriptions[1].trim());
+            this.taskToAdd = new EventTask(eventDescription, eventTime);
             break;
         default:
             throw new DukeException("Invalid Command!");
@@ -46,12 +51,20 @@ public class AddCommand extends Command {
     }
   
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        ui.showMessage(String.format("Task Added!\n %s", taskToAdd));
         tasks.add(taskToAdd);
-        System.out.println(String.format("Task Added!\n %s", taskToAdd));
         storage.save(tasks);
     }
 
+<<<<<<< Updated upstream
     public Boolean isExit() {
+=======
+    /**
+     * Check if user is ending the chatbot.
+     * @return True if user is ending the chatbot.
+     */
+    public boolean isExit() {
+>>>>>>> Stashed changes
         return false;
     }
 
