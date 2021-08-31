@@ -1,4 +1,4 @@
-package duke;
+package main.java.duke;
 
 /**
  * class that extends task

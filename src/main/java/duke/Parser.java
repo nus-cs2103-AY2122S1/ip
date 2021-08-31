@@ -1,4 +1,4 @@
-package duke;
+package main.java.duke;
 
 /**
  * Class which converts user command to functions

@@ -1,4 +1,4 @@
-package duke;
+package main.java.duke;
 
 /**
  * Task class used by the duke class
