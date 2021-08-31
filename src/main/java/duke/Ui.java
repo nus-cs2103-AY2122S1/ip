@@ -81,8 +81,9 @@ public class Ui {
     /**
      * Prints a message confirming that Task is completed.
      */
-    public static void printTaskCompleted() {
+    public static void printTaskCompleted(Task task) {
         System.out.println(TASK_COMPLETED);
+        System.out.println(task.toString());
     }
 
     /**

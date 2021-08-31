@@ -81,7 +81,7 @@ public class Storage {
             FileWriter writer = new FileWriter(dataFile);
             StringBuilder string = new StringBuilder();
             //repeatedly append the task strings until all tasks have been saved
-            for (int i = 0; i < taskList.getTaskNumber(); i++) {
+            for (int i = 0; i < taskList.getTotalTasks(); i++) {
                 Task task = taskList.getTask(i);
                 string.append(task.toDataString()).append("\n");
             }

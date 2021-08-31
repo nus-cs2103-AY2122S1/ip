@@ -13,13 +13,13 @@ public class TaskList {
     //The List containing the Tasks
     private List<Task> taskList;
     //An integer storing the number of tasks in the list
-    private int taskNumber;
+    private int totalTasks;
 
     /**
      * Constructor for a TaskList instance. Initialises the taskList.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
     }
 
     /**
@@ -39,7 +39,7 @@ public class TaskList {
      */
     public void deleteTask(int number) {
         taskList.remove(number);
-        taskNumber -= 1;
+        totalTasks -= 1;
     }
 
     /**
@@ -49,7 +49,7 @@ public class TaskList {
      */
     public void deleteTask(Task task) {
         taskList.remove(task);
-        taskNumber -= 1;
+        totalTasks -= 1;
     }
 
     /**
@@ -59,7 +59,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         taskList.add(task);
-        taskNumber += 1;
+        totalTasks += 1;
     }
 
     /**
@@ -67,8 +67,8 @@ public class TaskList {
      *
      * @return An integer representing the number of Tasks in the list.
      */
-    public int getTaskNumber() {
-        return taskNumber;
+    public int getTotalTasks() {
+        return totalTasks;
     }
 
     public void find(String string) {

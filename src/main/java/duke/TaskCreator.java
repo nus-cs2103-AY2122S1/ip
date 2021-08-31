@@ -108,7 +108,7 @@ public class TaskCreator {
 
         Ui.printAddTaskCompletionMessage();
         System.out.println(tempTask.toString());
-        Ui.printTaskNumberReminder(taskList.getTaskNumber());
+        Ui.printTaskNumberReminder(taskList.getTotalTasks());
         storage.saveData();
 
     }

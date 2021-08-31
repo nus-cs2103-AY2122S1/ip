@@ -39,19 +39,25 @@ public class Parser {
         //case if task stored is a Event
         case "E":
             Task event = new Events(splitArray[2], Parser.parseDate(splitArray[3]));
-            if (splitArray[1].equals("1")) { event.setCompleted(); }
+            if (splitArray[1].equals("1")) {
+                event.setCompleted();
+            }
             return event;
             //no need for break, as function has terminated at the return statement
         //case if task stored is a Deadline
         case "D":
             Task deadline = new Deadlines(splitArray[2], Parser.parseDate(splitArray[3]));
-            if (splitArray[1].equals("1")) { deadline.setCompleted(); }
+            if (splitArray[1].equals("1")) {
+                deadline.setCompleted();
+            }
             return deadline;
         //no need for break, as function has terminated at the return statement
         //last case will always be "T", or a Todo
         default:
             Task todo = new Todos(splitArray[2]);
-            if (splitArray[1].equals("1")) { todo.setCompleted(); }
+            if (splitArray[1].equals("1")) {
+                todo.setCompleted();
+            }
             return todo;
         }
     }
@@ -81,12 +87,12 @@ public class Parser {
         //case if user wants to view the list
         if (firstString.equals("list")) {
             //if list is empty
-            if (taskList.getTaskNumber() == 0) {
+            if (taskList.getTotalTasks() == 0) {
                 Ui.printNoTaskError();
                 return false;
             }
             //repeatedly print tasks in the list
-            for (int i = 0; i < taskList.getTaskNumber(); i++) {
+            for (int i = 0; i < taskList.getTotalTasks(); i++) {
                 int listNumber = i + 1;
                 System.out.println(listNumber + ". " + taskList.getTask(i).toString());
             }
@@ -106,7 +112,7 @@ public class Parser {
                 int index = Integer.parseInt(inputArray[1]);
                 int arrayIndex = index - 1;
                 //case if entered index does not correspond to a task
-                if (index > taskList.getTaskNumber() || index < 1) {
+                if (index > taskList.getTotalTasks() || index < 1) {
                     Ui.printTaskError();
                 }
                 //retrieve the task
@@ -114,15 +120,13 @@ public class Parser {
                 if (firstString.equals("done")) {
                     //case to complete a task
                     currentTask.setCompleted();
-                    Ui.printTaskCompleted();
-                    System.out.println(currentTask.toString());
+                    Ui.printTaskCompleted(currentTask);
                 } else {
                     //remaining case is to delete the task.
                     taskList.deleteTask(currentTask);
-                    Ui.printTaskCompleted();
-                    System.out.println(currentTask.toString());
+                    Ui.printTaskCompleted(currentTask);
                 }
-                Ui.printTaskNumberReminder(taskList.getTaskNumber());
+                Ui.printTaskNumberReminder(taskList.getTotalTasks());
                 storage.saveData();
 
             } catch (NumberFormatException exception) {
