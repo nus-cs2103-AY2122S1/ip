@@ -78,7 +78,7 @@ public class Event extends Task {
      * @return End datetime for instance.
      */
     public DateTime getEndDatetime() {
-        return this.startDatetime;
+        return this.endDatetime;
     }
 
     /**
