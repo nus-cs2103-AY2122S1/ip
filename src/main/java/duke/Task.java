@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a Task
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -33,7 +36,7 @@ public class Task {
 
     protected String serialise() {
         return " | " + (isDone ? "1" : "0") + " | " + description;
-    };
+    }
 
     @Override
     public String toString()

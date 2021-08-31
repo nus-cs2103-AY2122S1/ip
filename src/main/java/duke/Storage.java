@@ -9,6 +9,9 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.List;
 
+/**
+ * Represents a helper class to save and retrieve task list.
+ */
 public class Storage {
 
     private static final String FILE_PATH = "./data/duke.txt";

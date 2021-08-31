@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * Represents a list of Task
+ */
 public class TaskList {
 
     protected List<Task> userList;
@@ -16,6 +19,11 @@ public class TaskList {
         userList = taskList;
     }
 
+    /**
+     * Adds a task to task list.
+     *
+     * @param task a task to be added to list
+     */
     public void add(Task task) {
         userList.add(task);
         System.out.println("Got it. I've added this task: ");
@@ -24,6 +32,11 @@ public class TaskList {
         save();
     }
 
+    /**
+     * Marks a task as done.
+     *
+     * @param number the task number in the task list
+     */
     public void markDone(int number) {
         Task task = userList.get(number - 1);
         task.markDone();
@@ -32,6 +45,11 @@ public class TaskList {
         save();
     }
 
+    /**
+     * Removes task from task list.
+     *
+     * @param number the task number in the task list
+     */
     public void remove(int number) {
         Task task = userList.get(number - 1);
         userList.remove(number - 1);
@@ -41,6 +59,9 @@ public class TaskList {
         save();
     }
 
+    /**
+     * Prints all the task in task list.
+     */
     public void list() {
         int counter = 1;
         for (Task task:userList) {
@@ -63,10 +84,18 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns task list saved from previous session.
+     *
+     * @return a TaskList object
+     */
     public static TaskList load() throws FileNotFoundException {
         return new TaskList(Storage.retrieveTaskList());
     }
 
+    /**
+     * Stores task list on local computer as a text file.
+     */
     public void save() {
         try {
             Storage.saveTaskList(userList);
