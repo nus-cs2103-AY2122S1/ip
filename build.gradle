@@ -30,6 +30,7 @@ test {
 
 application {
     mainClassName = "duke.Duke"
+    
 }
 
 shadowJar {
