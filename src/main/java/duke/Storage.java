@@ -32,17 +32,17 @@ public class Storage {
      * @throws DukeException If there was an error reading or writing to the save file.
      */
     public ArrayList<Task> load() throws DukeException {
-        File save = new File(this.filePath);
+        File saveFile = new File(this.filePath);
         try {
             ArrayList<Task> savedList = new ArrayList<>();
 
-            if (save.isFile()) {
+            if (saveFile.isFile()) {
                 // If the save file exists, return the previously saved list.
                 BufferedReader br = new BufferedReader(new FileReader(this.filePath));
-                String nextLine = br.readLine();
-                while (nextLine != null) {
-                    savedList.add(Parser.processTaskString(nextLine));
-                    nextLine = br.readLine();
+                String nextTask = br.readLine();
+                while (nextTask != null) {
+                    savedList.add(Parser.convertStringToTask(nextTask));
+                    nextTask = br.readLine();
                 }
                 br.close();
 

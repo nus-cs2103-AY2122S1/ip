@@ -111,7 +111,7 @@ public class TaskList {
      * @param string The given String.
      * @return A String representing the list of tasks that contain the given String.
      */
-    public String find(String string) {
+    public String findTasksWithSubstring(String string) {
         ArrayList<Task> found = new ArrayList<>();
         for (Task task : this.tasks) {
             if (task.hasSubString(string)) {
