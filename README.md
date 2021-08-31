@@ -1,19 +1,10 @@
-# Duke project template
+# Duke 
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+>_"A failure to plan is a plan to fail."_ - Wise Man
 
-## Setting up in Intellij
-
-Prerequisites: JDK 11, update Intellij to the most recent version.
-
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project first)
-1. Open the project into Intellij as follows:
-   1. Click `Open`.
-   1. Select the project directory, and click `OK`.
-   1. If there are any further prompts, accept the defaults.
-1. Configure the project to use **JDK 11** (not other versions) as explained in [here](https://www.jetbrains.com/help/idea/sdk.html#set-up-jdk).<br>
-   In the same dialog, set the **Project language level** field to the `SDK default` option.
-3. After that, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()` (if the code editor is showing compile errors, try restarting the IDE). If the setup is correct, you should see something like the below as the output:
+This is a project named after the Java mascot _Duke_. Given below are instructions on how to use it.
+Duke helps you become a _much better_ person, __never__ again missing your deadlines!
+## Features
    ```
    Hello from
     ____        _        
@@ -22,3 +13,28 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+Features include:
+* Adding various tasks such as deadlines and events
+* Marking tasks that are completed
+* Listing out all your tasks in a nice concise manner
+* `Search` function
+* Save/Load feature for your task list
+
+How to use:
+1. Download any of the releases from https://github.com/meerian/ip/releases
+2. Run the .jar file
+3. ???
+4. Profit! 😎
+
+Task List:
+- [x] Done
+- [ ] Not Done
+
+Here's a sample block code:
+```javascript
+function fancyAlert(arg) {
+  if(arg) {
+    $.facebox({div:'#foo'})
+  }
+}
+```
