@@ -59,7 +59,7 @@ public class Ui {
     /**
      * Shows the welcome message when user runs Duke.
      */
-    public void showWelcome() throws IOException {
+    public String showWelcome() throws IOException {
         // populating featuresCombined so each level has all elements of levels before it
         StringBuilder featuresCombined = new StringBuilder();
         for (int count = 0; count <= lv; count++) {
@@ -77,18 +77,18 @@ public class Ui {
                 + "Here are your tasks: " + "\n"
                 + sandwich(listBeautify(taskArrayList));
 
-        System.out.println(sandwich(welcome));
+        return (sandwich(welcome));
     }
 
     /**
      * Shows the goodbye message when user exits Duke.
      */
-    public void showGoodbye() throws IOException {
+    public String showGoodbye() throws IOException {
         // Goodbye message
         String goodbye = "Thank you for using Duke: Level " + lv + "\n"
                 + "See you soon!";
 
-        System.out.println(sandwich(goodbye));
+        return (sandwich(goodbye));
     }
 
     /**
@@ -96,30 +96,26 @@ public class Ui {
      *
      * @param userInput the information entered by the user after the command
      */
-    public void handleInput(Scanner scanner, String userInput, TaskList tasks) throws DukeException {
+    public String handleInput(Scanner scanner, String userInput, TaskList tasks) throws DukeException {
         switch (userInput) {
         case "list":  // user inputs 'list', return all text stored
-            tasks.listTasks();
-            break;
+            return tasks.listTasks();
         case "done":  // first input is done, check second input for integer
             if (scanner.hasNextInt()) {
                 int taskNum = scanner.nextInt();
-                tasks.finishTask(taskNum);
+                return tasks.finishTask(taskNum);
             } else throw new DukeException("unspecified task to mark as done");
-            break;
         case "delete":
             if (scanner.hasNextInt()) {
                 int taskNum = scanner.nextInt();
-                tasks.deleteTask(taskNum);
+                return tasks.deleteTask(taskNum);
             } else throw new DukeException("unspecified task to delete");
-            break;
         case "todo":
             String todoName = scanner.nextLine();
             if (todoName.trim().equals("")) {
                 throw new DukeException("No task description");
             }
-            tasks.addTask("todo", todoName, "");
-            break;
+            return tasks.addTask("todo", todoName, "");
         case "deadline":
             String[] deadlineTokens = scanner.nextLine().split("\\s*/by\\s*");
             if (deadlineTokens.length == 0) {
@@ -129,8 +125,7 @@ public class Ui {
             }
             String deadlineName = deadlineTokens[0];
             String deadlineReminder = deadlineTokens[1];
-            tasks.addTask("deadline", deadlineName, deadlineReminder);
-            break;
+            return tasks.addTask("deadline", deadlineName, deadlineReminder);
         case "event":
             String[] eventTokens = scanner.nextLine().split("\\s*/at\\s*");
             if (eventTokens.length == 0) {
@@ -140,15 +135,14 @@ public class Ui {
             }
             String eventName = eventTokens[0];
             String eventReminder = eventTokens[1];
-            tasks.addTask("event", eventName, eventReminder);
-            break;
+            return tasks.addTask("event", eventName, eventReminder);
         default:
             throw new DukeException("Unknown Input"); // unknown input
         }
     }
 
-    public void showLoadingError() {
-        System.out.println("Loading error: duke.txt could not be loaded");
+    public String showLoadingError() {
+        return ("Loading error: duke.txt could not be loaded");
     }
 
 }

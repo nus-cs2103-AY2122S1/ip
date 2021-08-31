@@ -115,9 +115,10 @@ public class TaskList {
      * @param type the type of task to be added
      * @param name the name of task to be added
      * @param description the description of the task
+     * @return string representing the newly added task
      * @throws DukeException
      */
-    public void addTask(String type, String name, String description) throws DukeException {
+    public String addTask(String type, String name, String description) throws DukeException {
         switch (type) {
         case "todo":
             if (name.trim().equals("")) {
@@ -125,64 +126,62 @@ public class TaskList {
             }
             Task newestTodo = new ToDo(name);
             taskArrayList.add(newestTodo);
-            System.out.println(sandwich("New todo task added:\n"
+            return (sandwich("New todo task added:\n"
                     + newestTodo
                     + "\nYou now have "
                     + taskArrayList.size()
                     + " item(s) in your task list."));
-            break;
         case "deadline":
             if (!isValidDate(description)) {
                 throw new DukeException("Invalid Date, please follow the format YYYY-MM-DD");
             }
             Task newestDeadline = new Deadline(name, description);
             taskArrayList.add(newestDeadline);
-            System.out.println(sandwich("New deadline task added:\n"
+            return (sandwich("New deadline task added:\n"
                     + newestDeadline
                     + "\nYou now have "
                     + taskArrayList.size()
                     + " item(s) in your task list."));
-            break;
         case "event":
             if (!isValidDate(description)) {
                 throw new DukeException("Invalid Date, please follow the format YYYY-MM-DD");
             }
             Task newestEvent = new Event(name, description);
             taskArrayList.add(newestEvent);
-            System.out.println(sandwich("New deadline task added:\n"
+            return (sandwich("New deadline task added:\n"
                     + newestEvent
                     + "\nYou now have "
                     + taskArrayList.size()
                     + " item(s) in your task list."));
-            break;
         default:
             throw new DukeException("Unknown task type");
         }
     }
 
-    public void listTasks() {
-        System.out.println(sandwich(listBeautify(taskArrayList)));
+    public String listTasks() {
+        return (sandwich(listBeautify(taskArrayList)));
     }
 
-    public void finishTask(int index) throws DukeException {
+    public String finishTask(int index) throws DukeException {
         if (index > taskArrayList.size()) {
             throw new DukeException("This task index is not in the task list!");
         }
         taskArrayList.get(index - 1).markAsDone();
-        System.out.println(sandwich("Congratulations! You have finished this task: "
+        return (sandwich("Congratulations! You have finished this task: "
                 + taskArrayList.get(index - 1).toString()));
     }
 
-    public void deleteTask(int index) throws DukeException {
+    public String deleteTask(int index) throws DukeException {
         if (index > taskArrayList.size()) {
             throw new DukeException("This task index is not in the task list!");
         }
-        System.out.println(sandwich("Got it, I have deleted this task: "
+        String deleteMessage =  (sandwich("Got it, I have deleted this task: "
                 + taskArrayList.get(index - 1).toString()
                 + "\nYou now have "
                 + (taskArrayList.size() - 1)
                 + " item(s) in your task list."));
         // actual logic of deletion
         taskArrayList.remove(index - 1);
+        return deleteMessage;
     }
 }

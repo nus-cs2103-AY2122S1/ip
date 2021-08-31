@@ -86,7 +86,6 @@ public class DukeParser {
                 break;
             }
         }
-        System.out.println("result is: " + result);
         return result;
     }
 

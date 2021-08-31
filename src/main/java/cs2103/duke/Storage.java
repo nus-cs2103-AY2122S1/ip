@@ -1,9 +1,10 @@
 package cs2103.duke;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.io.File;
+
 
 public class Storage {
     private static ArrayList<Task> taskArrayList = new ArrayList<>();
@@ -19,10 +20,12 @@ public class Storage {
 
         // creates directory if it does not exist
         if (dukeFile.mkdir()) {
+            // dukeFile.mkdir();
             System.out.println("folder: 'data/' has been created");
         }
         // creates file if it does not exist
         if (dukeFile.createNewFile()) {
+            // dukeFile.createNewFile();
             System.out.println("'duke.txt' has been created in the 'data/' folder ");
         }
 
