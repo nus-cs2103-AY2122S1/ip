@@ -21,6 +21,7 @@ public class Ui {
      * @param msgs Variable length of String messages.
      */
     public void toScreen(String... msgs) {
+        // I did varargs a long time ago lmao
         System.out.println(INDENT + LINE);
         for (String msg : msgs) {
             System.out.println(INDENT + msg);
