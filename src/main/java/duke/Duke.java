@@ -48,7 +48,7 @@ public class Duke extends Application {
         try {
             this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            uiPane.showError(e.getMessage());
+            uiPane.showErrorMessage(e.getMessage());
             this.taskList = new TaskList(new ArrayList<>());
         }
     }
@@ -61,7 +61,7 @@ public class Duke extends Application {
             Command command = parser.parse(cmd);
             command.execute(taskList, storage, uiPane);
         } catch (DukeException e) {
-            uiPane.showError(e.getMessage());
+            uiPane.showErrorMessage(e.getMessage());
         }
     }
 

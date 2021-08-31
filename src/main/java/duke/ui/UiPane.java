@@ -82,7 +82,7 @@ public class UiPane extends AnchorPane {
      *
      * @param message The error message to show.
      */
-    public void showError(String message) {
+    public void showErrorMessage(String message) {
         messageLabel.setTextFill(Color.RED);
         messageLabel.setText(message);
     }
