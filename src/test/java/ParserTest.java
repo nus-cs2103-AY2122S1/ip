@@ -7,7 +7,7 @@ import duke.Parser;
 public class ParserTest {
 
     /**
-     * Testing the creation of a ToDo.
+     * Testing the creation of a ToDo. Should return true if the test case passes.
      */
     @Test
     public void testCommandInterpretation1() {
