@@ -11,6 +11,7 @@ public class CommandMessage {
     protected static final String MESSAGE_LIST_CONTENTS = "Here are the task(s) in your list:";
     protected static final String MESSAGE_MATCHING_CONTENTS = "Here are the matching task(s) to '%s' in your list:";
     protected static final String MESSAGE_NO_MATCHING_CONTENTS = "There are no matching tasks to '%s' in your list:";
+    protected static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
     protected static final String MESSAGE_DELETED_TASK =
             "Noted. I've removed this task:\n\t%s\nNow you have %d task(s) in the list.";
     protected static final String MESSAGE_CREATED_TODO =

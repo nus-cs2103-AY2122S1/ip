@@ -25,6 +25,6 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList) throws DukeException {
-        return ""; // fall through
+        return CommandMessage.MESSAGE_BYE;
     }
 }

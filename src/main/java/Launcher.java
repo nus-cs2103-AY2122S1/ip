@@ -1,10 +1,10 @@
-package ui;
-
 import java.io.IOException;
+import java.util.Objects;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -13,6 +13,10 @@ import javafx.stage.Stage;
  */
 public class Launcher extends Application {
 
+    // Resource paths (starting from /src/main/java/resources).
+    private static final String ICON_PATH = "/images/icon.png";
+    private static final String FXML_PATH = "/view/MainWindow.fxml";
+    
     /**
      * Starts the Kayu UI window.
      * {@inheritDoc}
@@ -22,14 +26,18 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("/view/MainWindow.fxml"));
+            stage.setTitle("Kayu");
+            stage.getIcons().add(new Image(Objects.requireNonNull(this.getClass().getResourceAsStream(ICON_PATH))));
+            
+            FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(FXML_PATH));
             AnchorPane ap = fxmlLoader.load();
+            
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.show();
             
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 }
