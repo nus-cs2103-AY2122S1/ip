@@ -17,7 +17,7 @@ public class Event extends Task {
     private LocalDate time = null;
 
     /**
-     * Creates a event with the specified description.
+     * Creates an event with the specified description.
      *
      * @param str1 The event's description.
      * @param str2 The event's date in a string
@@ -29,7 +29,7 @@ public class Event extends Task {
     }
 
     /**
-     * Creates a event with the specified description.
+     * Creates an event with the specified description.
      *
      * @param str1 The event's description.
      * @param time The event's date in a localDate
@@ -51,8 +51,8 @@ public class Event extends Task {
         if (time == null) {
             return "[E]" + super.toString() + " (at: " + when + ")";
         } else {
-            return "[E]" + super.toString() + " (at: " +
-                    time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
+            return "[E]" + super.toString() + " (at: "
+                + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         }
     }
 }

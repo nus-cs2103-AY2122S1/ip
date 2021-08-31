@@ -1,11 +1,11 @@
 package duke;
 
-import duke.Duke;
-
 import java.io.File;
 import java.io.IOException;
 
 public class Main {
+    /** Runs Duke
+     */
     public static void main(String[] args) {
         try {
             File note = new File("duke.txt");
@@ -13,7 +13,7 @@ public class Main {
                 System.out.println("created");
             }
             Duke duke = new Duke(note);
-            duke.Run();
+            duke.run();
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
