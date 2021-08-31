@@ -43,7 +43,9 @@ public class Storage {
                 String completed = splitItem[1];
                 String desc = splitItem[2];
                 String date = "";
-                if (splitItem.length > 3) date = splitItem[3];
+                if (splitItem.length > 3) {
+                    date = splitItem[3];
+                }
                 Task nextTask = null;
                 switch (taskType) {
                 case ("T"):
@@ -55,7 +57,9 @@ public class Storage {
                 case ("E"):
                     nextTask = new Event(desc, date);
                 }
-                if (completed.equals("1") && nextTask != null) nextTask.markAsDone();
+                if (completed.equals("1") && nextTask != null) {
+                    nextTask.markAsDone();
+                }
                 taskList.add(nextTask);
             }
             myReader.close();
