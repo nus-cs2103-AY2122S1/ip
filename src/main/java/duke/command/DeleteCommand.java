@@ -27,13 +27,17 @@ public class DeleteCommand extends Command {
      * @param storage The storage that deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTasks().get(this.taskNum - 1);
         tasks.delete(this.taskNum - 1);
         storage.save(tasks);
-        System.out.println("\tNoted. I've %s this task:");
-        System.out.println("\t " + task);
-        System.out.println("\tNow you have " + tasks.getTaskNum() + " tasks in the list.");
+
+        String response = String.format("%s%s%s",
+                "Noted. I've deleted this task:\n",
+                "\t " + task,
+                "\nNow you have " + tasks.getTaskNum() + " tasks in the list.");
+
+        return response;
     }
 
     /**

@@ -84,7 +84,7 @@ public class AddCommand extends Command{
      * @throws InvalidDateFormatException The exception for handling command with invalid date format.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws IncompleteDescriptionException,
             InvalidDateFormatException {
         try {
@@ -96,12 +96,13 @@ public class AddCommand extends Command{
             tasks.add(task);
             storage.save(tasks);
 
-            System.out.println("\tGot it. I've added this task:");
-            System.out.println("\t " + task);
-            System.out.println("\tNow you have " + tasks.getTaskNum() + " tasks in the list.");
+            return String.format("%s%s%s",
+                    "Got it. I've added this task:\n",
+                    "\t " + task,
+                    "\nNow you have " + tasks.getTaskNum() + " tasks in the list.");
 
         } catch (DateTimeParseException e) {
-            new Ui().showError(e.getMessage());
+            return new Ui().showError(e.getMessage());
         }
     }
 

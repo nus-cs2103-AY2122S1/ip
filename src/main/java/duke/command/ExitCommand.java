@@ -15,8 +15,8 @@ public class ExitCommand extends Command {
      * @param storage The storage that deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("\tBye (*´▽｀)ノシ. Have a nice day!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "\tBye. Have a nice day!";
     }
 
     /**

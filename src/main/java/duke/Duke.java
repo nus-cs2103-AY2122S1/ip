@@ -23,6 +23,7 @@ public class Duke {
      *
      */
     public Duke() {
+
     }
 
     /**
@@ -72,10 +73,16 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generate a response to user input.
+     *
+     * @param input The user input.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.toString();
+        }
     }
 }

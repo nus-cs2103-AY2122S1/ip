@@ -27,12 +27,16 @@ public class DoneCommand extends Command {
      * @param storage The storage that deals with loading tasks from the file and saving tasks in the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTasks().get(this.taskNum - 1);
         task.markAsDone();
         storage.save(tasks);
-        System.out.println("\tNice! I've marked this task as done:");
-        System.out.println("\t " + task);
+
+        String response = String.format("%s%s",
+                "Nice! I've marked this task as done:\n\t",
+                task);
+
+        return response;
     }
 
     /**
