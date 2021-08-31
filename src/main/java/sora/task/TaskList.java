@@ -222,7 +222,8 @@ public class TaskList {
     }
 
     /**
-     * Prints only the tasks in the list that contains the keyword in their descriptions.
+     * Prints only the tasks in the list that contains the keyword in their descriptions;
+     * or task of the same type as keyword (e.g. keyword = "event").
      *
      * @param command command entered by user (find [keyword])
      * @return string representation of the list of matched tasks

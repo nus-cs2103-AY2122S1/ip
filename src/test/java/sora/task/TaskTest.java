@@ -26,14 +26,18 @@ class TaskTest {
 
     @Test
     public void matchDescription_success() {
-        Task task = new Task("test task");
+        Task task = new Event("test task", null, null, null);
 
-        assertTrue(task.matchDescription("test"));
-        assertTrue(task.matchDescription("task"));
-        assertTrue(task.matchDescription("t"));
+        assertTrue(task.match("test"));
+        assertTrue(task.match("task"));
+        assertTrue(task.match("t"));
 
-        assertFalse(task.matchDescription("apple"));
-        assertFalse(task.matchDescription("banana"));
-        assertFalse(task.matchDescription("tet"));
+        assertFalse(task.match("apple"));
+        assertFalse(task.match("banana"));
+        assertFalse(task.match("tet"));
+
+        assertFalse(task.match("todo"));
+        assertFalse(task.match("deadline"));
+        assertTrue(task.match("event"));
     }
 }

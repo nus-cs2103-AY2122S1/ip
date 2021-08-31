@@ -29,7 +29,7 @@ public class Task {
 
     /**
      * Checks if description contains the keyword. Also checks if keyword is a type of Task, e.g. Event, and
-     * in those cases, return all Task of type Event.
+     * in those cases, return all tasks of that type.
      *
      * @param keyword keyword to match
      */
