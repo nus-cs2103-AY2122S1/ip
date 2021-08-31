@@ -18,8 +18,7 @@ public class Ui {
     }
 
     /**
-     * Method that utilizes the scanner to read the user input.
-     *
+     * Utilizes the scanner to read the user input and return the user input.
      * @return String The user input.
      */
     public String readCommand() {
@@ -27,74 +26,78 @@ public class Ui {
     }
 
     /**
-     * Method that displays the greeting message.
+     * Returns a greeting message.
+     * @return String The greeting message.
      */
-    public void greet() {
-        System.out.println("\t Hello! I'm Duke");
+    public String greet() {
+        return ("Hello! I'm Duke");
     }
 
     /**
-     * Method that displays any error message.
-     *
+     * Returns an error message.
      * @param errorMessage The error message to be displayed.
+     * @return String The error message.
      */
-    public void displayError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String displayError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
-     * Method that displays a message that informs user that a task has been successfully added and displays the number
+     * Returns a message that informs user that a task has been successfully added and displays the number
      * of tasks in the TaskList
-     *
      * @param t The newly added Task.
      * @param tasks The current list of Task.
+     * @return String The successfully added message.
      */
-    public void displayAddedMessage(Task t, TaskList tasks) {
-        System.out.println("\t I have added to the list: \n\t \t" + t.toString());
-        System.out.println("\t There are " + tasks.getSize() + " items in the list");
+    public String displayAddedMessage(Task t, TaskList tasks) {
+        String s = "I have added to the list: \n\t \t" + t.toString()
+                + "There are " + tasks.getSize() + " items in the list";
+        return s;
     }
 
     /**
-     * Method that displays a message that informs user that the task has been marked as done.
-     *
+     * Returns a message that informs user that the task has been marked as done.
      * @param taskDone The task that has been marked as done.
+     * @return String The successfully completed message.
      */
-    public void displayCompletedMessage(Task taskDone) {
-        System.out.println("\t Good job! This task has been completed:");
-        System.out.println("\t \t" + taskDone.toString());
+    public String displayCompletedMessage(Task taskDone) {
+        String s = "Good job! This task has been completed: \n" + "\t \t" + taskDone.toString();
+        return s;
     }
 
     /**
-     * Method that displays all the current Task in the TaskList.
-     *
+     * Returns all the current Task in the TaskList in a String.
      * @param tasks The list of Task inputted by the user.
+     * @return String The String representation of the list of Task.
      */
-    public void displayListOfTasks(TaskList tasks) {
-        System.out.println(tasks.toString());
+    public String displayListOfTasks(TaskList tasks) {
+        return tasks.toString();
     }
 
     /**
-     * Method that displays message when user exits program.
+     * Returns exit message when user exits program.
+     * @return String The exit message.
      */
-    public void displayExitMessage() {
-        System.out.println("\t Bye. Hope to see you again soon");
+    public String displayExitMessage() {
+        return "Bye. Hope to see you again soon";
     }
 
     /**
-     * Method that displays message to inform user that their list has been saved.
+     * Returns message to inform user that their list has been saved.
+     * @return String The save message.
      */
-    public void displaySaveMessage() {
-        System.out.println("\t List successfully saved");
+    public String displaySaveMessage() {
+        return "List successfully saved";
     }
 
     /**
      * Method that displays message informing user that the task indicated has been removed.
-     *
      * @param taskList The list of Task.
      * @param index The index of the Task deleted.
+     * @return String The successfully deleted message.
      */
-    public void displayDeleteMessage(TaskList taskList, int index) {
-        System.out.println("\t Noted. The task has been removed!");
+    public String displayDeleteMessage(TaskList taskList, int index) {
+        return " Noted. The task has been removed!";
     }
 
 }
