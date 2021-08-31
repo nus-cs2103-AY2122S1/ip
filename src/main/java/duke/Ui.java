@@ -17,6 +17,10 @@ public class Ui {
         System.out.println(output);
     }
 
+    public void showLoadingError(String errorMessage) {
+        System.out.println(errorMessage);
+    }
+
     /**
      * Displays all the tasks in the taskList.
      * @param taskList the TaskList to be printed
