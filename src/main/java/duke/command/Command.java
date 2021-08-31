@@ -13,15 +13,15 @@ public abstract class Command {
 
     /**
      * Function for the children of the command class to implement when a command is executed.
-     * @param tasks the list of tasks that Duke has
+     * @param tasks the list of tasks that duke.Duke has
      * @param ui the UI components available
      * @param storage the location to write the file back to (if necessary)
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
-     * Returns a boolean to indicate whether the command allows Duke to exit.
-     * @return a boolean indicating whether Duke can exit
+     * Returns a boolean to indicate whether the command allows duke.Duke to exit.
+     * @return a boolean indicating whether duke.Duke can exit
      */
     public boolean isExit() {
         return false;

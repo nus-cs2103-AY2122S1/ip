@@ -12,7 +12,7 @@ public class ErrorCommand extends Command {
      * Executes the error command if an invalid command is used.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showError("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.showError("OOPS!!! I'm sorry, but I don't know what that means :-(\n");
     }
 }

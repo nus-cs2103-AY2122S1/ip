@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      * Executes the Find command.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> res = new ArrayList<Task>();
         for (Task tsk : tasks.getAllTasks()) {
             String currTask = tsk.toString();
@@ -32,7 +32,6 @@ public class FindCommand extends Command {
                 res.add(tsk);
             }
         }
-        ui.matchingTasks();
-        ui.listView(res);
+        return ui.matchingTasks() + ui.listView(res);
     }
 }

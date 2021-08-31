@@ -13,13 +13,14 @@ public class ByeCommand extends Command {
      * Executes the bye command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showBye();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         storage.save(taskList);
+        return ui.showBye();
+
     }
 
     /**
-     * Overrides the isExit function to tell Duke to exit.
+     * Overrides the isExit function to tell duke.Duke to exit.
      */
     @Override
     public boolean isExit() {
