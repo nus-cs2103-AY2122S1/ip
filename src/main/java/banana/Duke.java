@@ -19,8 +19,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Duke class runs the duke/chatbot
- * program.
+ * The Duke class is the program's
+ * fundamental class.
  *
  * @author: Ravi Ananya
  **/
