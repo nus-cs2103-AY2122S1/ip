@@ -24,7 +24,8 @@ public class DateTimeConverter {
     public String convertDateAndTime(String datetime) {
         String time = datetime.substring(datetime.length() - 4);
         int actualTime = Integer.parseInt(time);
-        String hour, minute;
+        String hour;
+        String minute;
         if (actualTime >= 1200) {
             if ((actualTime - 1200) / 100 < 1) {
                 hour = "12";
