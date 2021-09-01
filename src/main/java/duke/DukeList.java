@@ -49,7 +49,7 @@ public class DukeList implements Iterable<Task> {
     }
 
     /**
-     * Add a new task.
+     * Adds a new task.
      *
      * @param task Task to be added.
      */
@@ -58,7 +58,7 @@ public class DukeList implements Iterable<Task> {
     }
 
     /**
-     * Delete a task.
+     * Deletes a task.
      *
      * @param i Index of the task to be deleted.
      */

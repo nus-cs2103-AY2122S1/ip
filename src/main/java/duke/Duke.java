@@ -1,7 +1,6 @@
 package duke;
 
 import duke.command.DukeCommand;
-import duke.command.ExitCommand;
 import duke.exception.CorruptedFileException;
 import duke.exception.DukeException;
 
@@ -9,37 +8,29 @@ import duke.exception.DukeException;
  * Main class of duke package.
  */
 public class Duke {
+
+    protected DukeList list;
+
     /**
-     * Static method to start the bot.
+     * Public constructor to create a Duke Object.
      */
-    private static void runDuke() {
-        DukeList list = new DukeList();
-        Ui.greet();
-        Ui.display(Storage.load(list));
-        Ui.begin();
-        while (true) {
-            String input = Ui.readLine();
-            DukeCommand command = Parser.parseInput(input);
-            if (command instanceof ExitCommand) {
-                break;
-            }
-            try {
-                Ui.display(command.run(list));
-            } catch (DukeException e) {
-                Ui.display(e.getMessage());
-            }
-        }
+    public Duke() {
+        list = new DukeList();
         try {
-            Storage.saveFile(list);
-            Ui.display("File saved");
+            Storage.load(list);
         } catch (CorruptedFileException e) {
-            Ui.display("Error saving file");
+            list = new DukeList();
         }
-        Ui.bye();
     }
 
-    public static void main(String[] args) {
-        runDuke();
+    public String getResponse(String input) {
+        String response = "";
+        DukeCommand command = Parser.parseInput(input);
+        try {
+            response = command.run(list);
+        } catch (DukeException e) {
+            response = e.getMessage();
+        }
+        return response;
     }
-
 }

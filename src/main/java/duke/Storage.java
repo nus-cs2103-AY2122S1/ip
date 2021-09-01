@@ -25,9 +25,9 @@ public class Storage {
      * Returns the Success/Error message after loading save file.
      *
      * @param list DukeList to be populated.
-     * @return Success/Error message.
+     * @throws CorruptedFileException If error occurs while writing into save file.
      */
-    public static String load(DukeList list) {
+    public static void load(DukeList list) throws CorruptedFileException {
         File file = new File(SAVE_FILE);
         try {
             Scanner scanner = new Scanner(file);
@@ -37,11 +37,8 @@ public class Storage {
                 list.add(task);
             }
             scanner.close();
-            return "Save file successfully loaded";
-        } catch (DukeException e) {
-            return "Error loading save file, list might be messed up";
-        } catch (FileNotFoundException e) {
-            return "No save file found, making a new one";
+        } catch (DukeException | FileNotFoundException e) {
+            throw new CorruptedFileException();
         }
     }
 
