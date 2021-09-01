@@ -15,7 +15,7 @@ import java.time.temporal.ChronoUnit;
  */
 public class TaskList {
     ArrayList<Task> taskArr;
-    int counter;
+    private int counter;
 
     /**
      * Constructor for TaskList.
