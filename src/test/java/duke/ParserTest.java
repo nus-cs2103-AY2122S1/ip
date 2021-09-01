@@ -17,7 +17,7 @@ public class ParserTest {
         Parser parser = new Parser(tasks);
 
         DukeException thrown = assertThrows(DukeException.class, () -> parser.parse("abcde"));
-        assertEquals("\tOOPS!!! You have entered an invalid command, please try again!",
+        assertEquals("OOPS!!! You have entered an invalid command, please try again!",
                 thrown.getMessage());
     }
 
@@ -27,7 +27,7 @@ public class ParserTest {
         Parser parser = new Parser(tasks);
 
         DukeException thrown = assertThrows(DukeException.class, () -> parser.parse("done "));
-        assertEquals("\tOOPS!!! Please specify the task number for the task you want to complete.",
+        assertEquals("OOPS!!! Please specify the task number for the task you want to complete.",
                 thrown.getMessage());
     }
 

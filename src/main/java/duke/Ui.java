@@ -15,6 +15,17 @@ public class Ui {
     }
 
     /**
+     * Prints a given message enclosed with horizontal lines.
+     *
+     * @param message The given message.
+     */
+    public void printMessage(String message) {
+        printLine();
+        System.out.println(message);
+        printLine();
+    }
+
+    /**
      * Prints the welcome message when Duke is ran.
      */
     public void printWelcomeMessage() {
@@ -28,7 +39,7 @@ public class Ui {
      */
     public void printGoodbyeMessage() {
         printLine();
-        System.out.println("\tBye. Hope to see you again soon!");
+        System.out.println("Bye. Hope to see you again soon!");
         printLine();
     }
 
@@ -37,10 +48,8 @@ public class Ui {
      *
      * @param task The task that the user has marked as done.
      */
-    public static void printDoneMessage(Task task) {
-        printLine();
-        System.out.println("\tNice! I've marked this done:\n\t  " + task);
-        printLine();
+    public static String getDoneMessage(Task task) {
+        return "Nice! I've marked this done:\n  " + task;
     }
 
     /**
@@ -49,11 +58,9 @@ public class Ui {
      * @param task The task that the user deletes from the task list.
      * @param taskCount The number of tasks left in the task list.
      */
-    public static void printDeleteMessage(Task task, int taskCount) {
-        printLine();
-        System.out.println("\tNoted. I've removed this task:\n\t  " + task);
-        printTaskCount(taskCount);
-        printLine();
+    public static String getDeleteMessage(Task task, int taskCount) {
+        return "Noted. I've removed this task:\n  " + task
+                + "\n" + getTaskCountMessage(taskCount);
     }
 
     /**
@@ -62,11 +69,9 @@ public class Ui {
      * @param task The task that the user adds to the task list.
      * @param taskCount The number of tasks in the list after adding.
      */
-    public static void printAddedMessage(Task task, int taskCount) {
-        printLine();
-        System.out.println("\tGot it. I've added this task:\n" + "\t  " + task);
-        printTaskCount(taskCount);
-        printLine();
+    public static String getAddedMessage(Task task, int taskCount) {
+        return "Got it. I've added this task:\n  " + task
+                + "\n" + getTaskCountMessage(taskCount);
     }
 
     /**
@@ -74,8 +79,8 @@ public class Ui {
      *
      * @param taskCount The number of tasks in the task list.
      */
-    private static void printTaskCount(int taskCount) {
-        System.out.println("\tNow you have " + taskCount + " tasks in the list.");
+    private static String getTaskCountMessage(int taskCount) {
+        return "Now you have " + taskCount + " tasks in the list.";
     }
 
 }
