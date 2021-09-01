@@ -26,8 +26,9 @@ public class CreateNewToDoCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(new ToDo(super.getExtraInput()));
-        ui.showAddedTask(taskList);
-        return "";
+        return "Alright, I've added the following task:\n"
+                + "      " + taskList.get(taskList.size() - 1) + "\n      Now you have " + taskList.size()
+                + " tasks in the list.\n";
     }
 
     /**
