@@ -16,6 +16,10 @@ public class Todo extends Task {
         super(description);
     }
 
+    /**
+     * Retrieves the description of this Todo object.
+     * @return string describing Todo object's status.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

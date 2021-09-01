@@ -1,12 +1,7 @@
 package duke;
 
-import javafx.application.Platform;
 import tasklist.TaskList;
-import ui.MainWindow;
 import ui.Ui;
-
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
 
 /**
  * The Duke program implements an application that helps to track tasks that the user requires to be tracked.
@@ -30,7 +25,6 @@ public class Duke {
         engine.runProgram();
         messages.goodbyeMessage();
     }
-
 
     /**
      * You should have your own function to generate a response to user input.

@@ -30,7 +30,6 @@ import java.util.stream.Collectors;
  */
 public class Storage {
 
-
     private Path dir;
     private Path fileDir;
     private Ui messages = new Ui();

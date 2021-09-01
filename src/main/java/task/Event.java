@@ -29,6 +29,10 @@ public class Event extends Task {
         return this.at;
     }
 
+    /**
+     * Retrieves a string describing the Event's status.
+     * @return string describing the Event's status.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
