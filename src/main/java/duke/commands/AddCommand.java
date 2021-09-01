@@ -63,11 +63,6 @@ public class AddCommand implements Command {
         this.taskType = taskType;
     }
 
-    /**
-     * This method returns the string of task added and tells the user the number of tasks in list.
-     * @param taskList TaskList that is currently used.
-     * @return
-     */
     @Override
     public String execute(TaskList taskList) {
         String output = "";
@@ -93,10 +88,5 @@ public class AddCommand implements Command {
         }
 
         return output;
-    }
-
-    @Override
-    public boolean isRunning() {
-        return true;
     }
 }

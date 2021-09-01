@@ -2,15 +2,13 @@ package duke.commands;
 
 import duke.TaskList;
 
+/**
+ * This class handles command meant for quitting Duke.
+ */
 public class ExitCommand implements Command {
 
     @Override
     public String execute(TaskList taskList) {
-        return "Bye. Hope to see you again soon!";
-    }
-
-    @Override
-    public boolean isRunning() {
-        return false;
+        return "bye";
     }
 }
