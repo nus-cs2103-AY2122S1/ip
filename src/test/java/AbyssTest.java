@@ -34,10 +34,9 @@ public class AbyssTest {
     @Test
     public void formatReply() {
         String[] messages = {"Hello.", "This is a test reply."};
-        String reply = "\t......................................................\n";
-        reply += "\t " + messages[0] + "\n";
-        reply += "\t " + messages[1] + "\n";
-        reply += "\n\t......................................................";
+        String reply = "";
+        reply += messages[0] + "\n";
+        reply += messages[1] + "\n";
 
         assertEquals(reply, Ui.formatReply(messages));
     }
