@@ -1,16 +1,16 @@
 package main.java.duke.tasks;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task{
+public class Event extends Task {
     protected String prefix;
     protected String time;
     protected LocalDateTime timeFormatted;
 
     /**
      * Constructs a new event task.
-     * 
      * @param name name of the task
      * @param time date of the task
      */
@@ -36,12 +36,10 @@ public class Event extends Task{
             return false;
         }
         return true;
-    
     }
 
     /**
      * Converts a string to date time format.
-     * 
      * @param time the given time string
      * @return the time in LocalDateTime format
      */
@@ -50,9 +48,8 @@ public class Event extends Task{
     }
 
     /**
-     * show the prefix of the event
-     * 
-     * @return the prefix 
+     * Shows the prefix of the event
+     * @return the prefix
      */
     @Override
     public String showPrefix() {
@@ -86,6 +83,5 @@ public class Event extends Task{
         } else {
             return (this.prefix + " " + super.showStatus() + this.name + ":" + this.time);
         }
-        
     }
 }

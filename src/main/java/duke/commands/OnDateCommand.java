@@ -7,18 +7,17 @@ import java.util.ArrayList;
 
 import main.java.duke.DukeException;
 import main.java.duke.Storage;
+import main.java.duke.TaskList;
 import main.java.duke.Ui;
 import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Event;
 import main.java.duke.tasks.Task;
-import main.java.duke.TaskList;
 
 public class OnDateCommand extends Command {
     private String dateString;
 
     /**
      * Constructs a new find tasks on a date command with the given date.
-     * 
      * @param dateString the string of the date
      */
     public OnDateCommand(String dateString) {
@@ -27,7 +26,6 @@ public class OnDateCommand extends Command {
 
     /**
      * Executes the find tasks on a date command.
-     * 
      * @param tasks given list of tasks
      * @param ui given ui object
      * @param storage given storage object
@@ -54,7 +52,9 @@ public class OnDateCommand extends Command {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 if (deadline.getDateFormatted() != null) {
-                    if (deadline.getDateFormatted().equals(date)) tasksOnDate.add(deadline); 
+                    if (deadline.getDateFormatted().equals(date)) {
+                        tasksOnDate.add(deadline);
+                    }
                 }
             } else if (task instanceof Event) {
                 Event event = (Event) task;

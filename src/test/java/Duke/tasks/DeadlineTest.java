@@ -1,12 +1,13 @@
 package duke.tasks;
 
-import main.java.duke.tasks.Deadline;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+import main.java.duke.tasks.Deadline;
 
 public class DeadlineTest {
     @Test

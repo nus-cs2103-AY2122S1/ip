@@ -16,7 +16,6 @@ public class Parser {
 
     /**
      * Parses user input and responds with corresponding commands.
-     * 
      * @param userInput input by user
      * @return corresponding command of the input
      * @throws DukeException
@@ -25,10 +24,12 @@ public class Parser {
         int firstBlankIndex = userInput.indexOf(" ");
         String commandWord = firstBlankIndex == -1 ? userInput : userInput.substring(0, firstBlankIndex);
         switch (commandWord) {
-        case "bye" : 
+        case "bye" : {
             return new ExitCommand();
-        case "list" : 
+        }
+        case "list" : {
             return new ListCommand();
+        }
         case "on" : {
             String dateString = userInput.substring(3);
             return new OnDateCommand(dateString);
@@ -40,7 +41,7 @@ public class Parser {
         case "done" : {
             int taskNum = Integer.parseInt(userInput.substring(5));
             return new DoneCommand(taskNum);
-        } 
+        }
         case "delete": {
             int taskNum = Integer.parseInt(userInput.substring(7));
             return new DeleteCommand(taskNum);
@@ -75,8 +76,9 @@ public class Parser {
             Event event = new Event(name, time);
             return new AddCommand(event);
         }
-        default : 
+        default : {
             return new UnknownCommand();
+        }
         }
     }
 }

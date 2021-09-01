@@ -24,7 +24,6 @@ public class Ui {
 
     /**
      * Reads user input from scanner.
-     * 
      * @return the user input as string
      */
     public String readCommand() {
@@ -38,7 +37,6 @@ public class Ui {
 
     /**
      * Displays the error message.
-     * 
      * @param error the error message
      */
     public void showError(String error) {

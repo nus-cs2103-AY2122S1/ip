@@ -1,7 +1,7 @@
 package main.java.duke;
-import main.java.duke.commands.Command;
-
 import java.io.IOException;
+
+import main.java.duke.commands.Command;
 
 public class Duke {
     private Storage storage;
@@ -10,7 +10,6 @@ public class Duke {
 
     /**
      * Constructs a new Duke object with the given file path.
-     * 
      * @param filePath file path for creating the text file of interactions
      */
     public Duke(String filePath) {
@@ -26,6 +25,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the duke programme flow.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;

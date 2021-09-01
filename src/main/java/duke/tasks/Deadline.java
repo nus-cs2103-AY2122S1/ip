@@ -5,14 +5,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected String prefix;
     protected String date;
     protected LocalDate dateFormatted;
 
     /**
      * Constructs a new deadline task.
-     * 
      * @param name name of the task
      * @param date date of the task
      */
@@ -34,7 +33,6 @@ public class Deadline extends Task{
             return false;
         }
         return true;
-    
     }
 
     public LocalDate getDateFormatted() {
@@ -43,7 +41,6 @@ public class Deadline extends Task{
 
     /**
      * Converts a date string to local date format
-     * 
      * @param dateString
      * @return a local date of the string
      */
@@ -52,9 +49,8 @@ public class Deadline extends Task{
     }
 
     /**
-     * show the prefix of the deadline
-     * 
-     * @return the prefix 
+     * Shows the prefix of the deadline
+     * @return the prefix
      */
     @Override
     public String showPrefix() {
@@ -72,11 +68,11 @@ public class Deadline extends Task{
     @Override
     public void showThisTask() {
         if (canBeFormattedDate(this.date)) {
-            System.out.println(this.prefix + super.showStatus() + this.name + "(by:" + this.dateFormatted.format(DateTimeFormatter.ofPattern("MMM d uuuu")) + ")");
+            System.out.println(this.prefix + super.showStatus()
+                    + this.name + "(by:" + this.dateFormatted.format(DateTimeFormatter.ofPattern("MMM d uuuu")) + ")");
         } else {
             System.out.println(this.prefix + super.showStatus() + this.name + "(by:" + this.date + ")");
         }
-        
     }
 
     /**

@@ -1,7 +1,7 @@
 package main.java.duke.commands;
 import main.java.duke.Storage;
-import main.java.duke.Ui;
 import main.java.duke.TaskList;
+import main.java.duke.Ui;
 
 public class ExitCommand extends Command {
 
@@ -14,7 +14,6 @@ public class ExitCommand extends Command {
 
     /**
      * Executes the exit command.
-     * 
      * @param tasks given list of tasks
      * @param ui given ui object
      * @param storage given storage object

@@ -1,19 +1,21 @@
 package duke.tasks;
 
-import main.java.duke.tasks.Event;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+import main.java.duke.tasks.Event;
 
 public class EventTest {
     @Test
     public void fromStringToDateTime_correct_success() {
         Event actual = new Event("jogging", " 2020/09/13 08:22");
         LocalDateTime actualFormatted = actual.fromStringToDateTime(" 2020/09/13 08:22");
-        LocalDateTime expectedFormatted = LocalDateTime.parse("2020/09/13 08:22", DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
+        LocalDateTime expectedFormatted =
+                LocalDateTime.parse("2020/09/13 08:22", DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"));
         assertEquals(actualFormatted, expectedFormatted);
     }
 

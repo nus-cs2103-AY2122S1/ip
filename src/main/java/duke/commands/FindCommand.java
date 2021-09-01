@@ -7,7 +7,7 @@ import main.java.duke.TaskList;
 import main.java.duke.Ui;
 import main.java.duke.tasks.Task;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private String keyword;
 
     public FindCommand(String keyword) {

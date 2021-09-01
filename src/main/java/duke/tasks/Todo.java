@@ -1,5 +1,5 @@
 package main.java.duke.tasks;
-public class Todo extends Task{
+public class Todo extends Task {
     protected String prefix;
 
     /**
@@ -12,9 +12,8 @@ public class Todo extends Task{
     }
 
     /**
-     * show the prefix of the todo
-     * 
-     * @return the prefix 
+     * Shows the prefix of the todo
+     * @return the prefix
      */
     @Override
     public String showPrefix() {

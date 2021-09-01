@@ -6,7 +6,6 @@ public class Task {
 
     /**
      * Constructs a new task
-     * 
      * @param name the task name
      */
     public Task(String name) {
@@ -25,7 +24,6 @@ public class Task {
 
     /**
      * show the status of the task
-     * 
      * @return status symbol of the task
      */
     public String showStatus() {
@@ -38,8 +36,7 @@ public class Task {
 
     /**
      * show the prefix of the task
-     * 
-     * @return the prefix 
+     * @return the prefix
      */
     public String showPrefix() {
         return this.prefix;

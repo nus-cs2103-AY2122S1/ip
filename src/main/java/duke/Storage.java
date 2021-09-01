@@ -28,7 +28,9 @@ public class Storage {
      */
     private Task stringToTask(String s) {
         boolean isDone = false;
-        if (s.substring(4,7).equals("[X]")) isDone = true;
+        if (s.substring(4, 7).equals("[X]")) {
+            isDone = true;
+        }
         Task task;
         if (s.startsWith("[T]")) {
             task = new Todo(s.substring(8));
@@ -43,13 +45,12 @@ public class Storage {
         }
         if (isDone) {
             task.markAsDone();
-        } 
+        }
         return task;
     }
 
     /**
      * Loads stored tasks from text file
-     * 
      * @return the list of tasks stored in file
      * @throws DukeException
      * @throws IOException
@@ -69,7 +70,6 @@ public class Storage {
             }
             scanner.close();
         }
-        
         return taskList;
     }
 
@@ -87,9 +87,10 @@ public class Storage {
 
     /**
      * Deletes a task from the text file
+     *
      * @param num the index of the task in the list
      * @param scanner scanner for the text file
-     * @return the updated text file string
+     * @param tasks the task list
      * @throws IOException
      */
     public void deleteTaskFromFile(int num, Scanner scanner, TaskList tasks) throws IOException {
@@ -100,7 +101,6 @@ public class Storage {
             String input = scanner.nextLine();
             fileString += input + "\n";
         }
-        
         System.out.println(task.toString());
         String newFile = fileString.replace(task.toString() + "\n", "");
         FileWriter writer = new FileWriter(new File(this.filePath));
@@ -108,10 +108,8 @@ public class Storage {
         writer.flush();
         writer.close();
     }
-    
     /**
      * Marks a task as done in the list in the text file.
-     * 
      * @param num the index of the task in the list
      * @param scanner scanner for the file
      * @param tasks the given tasks list

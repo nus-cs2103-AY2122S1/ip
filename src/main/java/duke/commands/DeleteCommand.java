@@ -6,16 +6,15 @@ import java.util.Scanner;
 
 import main.java.duke.DukeException;
 import main.java.duke.Storage;
+import main.java.duke.TaskList;
 import main.java.duke.Ui;
 import main.java.duke.tasks.Task;
-import main.java.duke.TaskList;
 
 public class DeleteCommand extends Command {
     private int taskNum;
 
     /**
      * Constructs a new delete task command with the given index.
-     * 
      * @param taskNum the given task index
      */
     public DeleteCommand(int taskNum) {
@@ -24,7 +23,6 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the delete command.
-     * 
      * @param tasks given list of tasks
      * @param ui given ui object
      * @param storage given storage object
