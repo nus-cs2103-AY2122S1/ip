@@ -3,7 +3,7 @@ package bobbybot;
 /**
  * Represents a task without any time restrictions
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      *

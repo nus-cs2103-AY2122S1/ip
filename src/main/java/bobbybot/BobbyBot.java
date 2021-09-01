@@ -8,7 +8,7 @@ import java.util.Scanner;
  * Represents the chatbot
  */
 public class BobbyBot {
-    private final String DBPATH = "data/database.txt";
+    private static final String DBPATH = "data/database.txt";
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;

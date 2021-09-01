@@ -11,6 +11,10 @@ public class Ui {
     public void showLine() {
         System.out.println("____________________________________________________________");
     }
+
+    /**
+     * Show welcome message
+     */
     public void showWelcome() {
         showLine();
         System.out.println("Hello! I'm Bobby\nWhat can I do for you?\n");

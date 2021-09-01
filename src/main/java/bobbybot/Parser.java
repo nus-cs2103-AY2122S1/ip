@@ -79,9 +79,11 @@ public class Parser {
             tasks.createEvent(description, at);
             break;
         case FIND:
-            String keyword  = userInputList.get(1);
+            String keyword = userInputList.get(1);
             tasks.findMatchingTasks(keyword);
             break;
+        default:
+            System.out.println("Invalid keyword");
         }
     }
 
