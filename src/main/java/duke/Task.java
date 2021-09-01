@@ -29,4 +29,6 @@ abstract class Task {
     }
 
     abstract String logo();
+
+    abstract String saveWithFormat();
 }

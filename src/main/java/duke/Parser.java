@@ -7,6 +7,7 @@ import java.time.LocalDate;
  */
 public class Parser {
     TaskList taskList = new TaskList();
+    Ui ui = new Ui();
 
     Parser() {
     }
@@ -24,44 +25,62 @@ public class Parser {
         return false;
     }
 
+    public void load() {
+        taskList.load();
+    }
+
     /**
      * Take in input from user and checks what commands to run
      *
      * @param input from user
      */
-    public void commands(String input) {
+    public String commands(String input) {
         try {
-            if (input.equals("list")) {
-                taskList.printList();
-            } else if (input.length() > 5 && input.substring(0, 5).equals("done ")) {
+            if (input.equals("list")) { //checks for list
+                return taskList.printList();
+            } else if (input.length() > 5 && input.substring(0, 5).equals("done ")) { //checks for done
                 String[] split = input.split("\\s+");
                 int number = Integer.parseInt(split[1]);
-                taskList.changeStatus(number);
-            } else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) { //date then time
-                String[] split = input.substring(9).split(" /by ");
-                String[] split2 = split[1].split("\\s+"); //split into date and time
-                LocalDate ld_D = LocalDate.parse(split2[0]);
-                taskList.list(new Deadline(split[0], ld_D, split2[1]));
-            } else if (input.length() > 5 && input.substring(0, 5).equals("todo ")) { //empty
-                taskList.list(new ToDo(input.substring(5)));
-            } else if (input.length() > 6 && input.substring(0, 6).equals("event ")) { //date
-                String[] split = input.substring(6).split(" /at ");
-                LocalDate ld_E = LocalDate.parse(split[1]);
-                taskList.list(new Event(split[0], ld_E));
+                return taskList.changeStatus(number);
+            } else if (input.length() > 9 && input.substring(0, 9).equals("deadline ")) { //checks for deadline
+
+                try {
+                    String[] split = input.substring(9).split(" /by ");
+                    String[] split2 = split[1].split("\\s+"); //split into date and time
+                    LocalDate ld_D = LocalDate.parse(split2[0]);
+                    return taskList.list(new Deadline(split[0], ld_D, split2[1]));
+                } catch (Exception e) {
+                    return "Invalid description/date/time";
+                }
+
+            } else if (input.length() > 5 && input.substring(0, 5).equals("todo ")) { //checks for todo
+                return taskList.list(new ToDo(input.substring(5)));
+            } else if (input.length() > 6 && input.substring(0, 6).equals("event ")) { //checks for event
+
+                try {
+                    String[] split = input.substring(6).split(" /at ");
+                    LocalDate ld_E = LocalDate.parse(split[1]);
+                    return taskList.list(new Event(split[0], ld_E));
+                } catch (Exception e) {
+                    return e.getMessage();
+                }
+
             } else if (input.length() > 7 && input.substring(0, 7).equals("delete ")) {
                 String[] split = input.substring(6).split("\\s+");
-                taskList.deleteTask(Integer.parseInt(split[1]));
+                return taskList.deleteTask(Integer.parseInt(split[1]));
             } else if (input.length() > 5 && input.substring(0, 5).equals("find ")) {
                 String toFind = input.substring(5);
-                taskList.find(toFind);
+                return taskList.find(toFind);
             } else if (checkInvalidDescription(input)) {
                 throw new InvalidDescription(input);
-            } else if (input.length() > 0) {
-                throw new InvalidArguement();
+            } else if (input.equals("bye")) {
+                return ui.bye();
+            } else {
+                throw new InvalidArgument();
             }
 
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 }

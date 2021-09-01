@@ -1,7 +1,7 @@
 package duke;
 
-public class InvalidArguement extends DukeException{
-    InvalidArguement() {
+public class InvalidArgument extends DukeException {
+    InvalidArgument() {
         super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }

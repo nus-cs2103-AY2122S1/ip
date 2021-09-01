@@ -13,7 +13,7 @@ public class DukeExceptionTest {
 
     @Test
     public void invalidTest() {
-        assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", new InvalidArguement().getMessage());
+        assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(", new InvalidArgument().getMessage());
         assertEquals("☹ OOPS!!! The description of a test cannot be empty.", new InvalidDescription("test").getMessage());
     }
 }
