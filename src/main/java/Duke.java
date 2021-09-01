@@ -31,27 +31,11 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     
-//    private Duke(String str) throws IOException {
-//        taskList = Storage.readFile();
-//        parser = new Parser(taskList);
-//    }
-    
     public Duke() throws IOException {
         taskList = Storage.readFile();
         parser = new Parser(taskList);
         System.out.println("Duke constructor called");
     }
-    
-//    private void load() {
-//        Ui.intro();
-//        parser.run("");
-//    }  
-//    
-//    public static void main(String[] args) throws IOException {
-//        Duke duke = new Duke("");
-//        System.out.println("Duke main called");
-//        duke.load();
-//    }
 
     @Override
     public void start(Stage stage) {

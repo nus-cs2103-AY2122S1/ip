@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -18,6 +19,8 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+
+    private final Circle clip = new Circle(50, 50, 50);
 
     private DialogBox(String text, Image img) {
         try {
@@ -30,6 +33,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        displayPicture.setClip(clip);
         displayPicture.setImage(img);
     }
 
@@ -40,15 +44,18 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userDialogBox = new DialogBox(text, img);
+        userDialogBox.setStyle("-fx-background-color: lavender;");
+        return userDialogBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: aliceblue;");
         db.flip();
         return db;
     }
