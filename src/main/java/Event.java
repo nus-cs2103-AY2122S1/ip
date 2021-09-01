@@ -12,7 +12,7 @@ public class Event extends Task{
     }
 
     @Override
-    public String PopulateSaveData() {
+    public String populateSaveData() {
         return "E | " + (this.isDone ? 1 : 0) + " | " + this.description + " | " + this.period;
     }
 }

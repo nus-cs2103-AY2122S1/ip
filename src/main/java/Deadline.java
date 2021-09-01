@@ -26,7 +26,7 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String PopulateSaveData() {
+    public String populateSaveData() {
         return "D | " + (this.isDone ? 1 : 0) + " | " + this.description + " | " + this.by;
     }
 }
