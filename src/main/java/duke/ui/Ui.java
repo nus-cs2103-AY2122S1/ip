@@ -27,7 +27,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n|____/ \\__,_|_|\\_\\___|";
         System.out.println(LINE);
         System.out.println(logo);
-        System.out.println("Hi, I'm duke.Duke, your Personal Assistant Chatbot\n"
+        System.out.println("Hi, I'm Duke, your Personal Assistant Chatbot\n"
                 + "What can I do for you today?");
         System.out.println(LINE);
     }

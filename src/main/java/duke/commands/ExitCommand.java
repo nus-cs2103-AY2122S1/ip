@@ -27,8 +27,8 @@ public class ExitCommand extends Command {
      *               saving into a file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String message = "Goodbye, hope to see you again soon!";
-        ui.reply(message);
+        return message;
     }
 }

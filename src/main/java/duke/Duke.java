@@ -44,7 +44,8 @@ public class Duke {
                 String input = ui.readInput();
                 ui.showLine();
                 Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
+                String message = c.execute(tasks, ui, storage);
+                ui.reply(message);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -55,9 +56,26 @@ public class Duke {
     }
 
     /**
+     * Returns the appropriate response given an input by the user.
+     *
+     * @param input The input by the user.
+     * @return The response by Duke.
+     */
+    public String getResponse(String input) {
+        String response;
+        try {
+            Command c = Parser.parse(input);
+            response = c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            response = e.getMessage();
+        }
+        return response;
+    }
+
+    /**
      * This is the entry point for the Duke program.
      *
-     * @param args An array of String arguments that stick to convention.
+     * @param args An array of String arguments to follow convention.
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
