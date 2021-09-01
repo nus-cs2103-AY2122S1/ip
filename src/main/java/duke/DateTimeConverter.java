@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * This class converts the input string of date and time into
- * a better formatted, understandable date and time.
+ * a better, understandable date and time format.
  */
 public class DateTimeConverter {
 
