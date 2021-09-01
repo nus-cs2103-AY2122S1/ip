@@ -12,7 +12,7 @@ public abstract class Task {
      * Creates a String object that contains all the task details
      * that is to be saved in the save file.
      *
-     * @return the String object containing the task details.
+     * @return The String object containing the task details.
      */
     public abstract String toSaveFormat();
 
@@ -20,9 +20,9 @@ public abstract class Task {
      * Class constructor specifying the name and type of the task
      * and whether the task is done.
      *
-     * @param taskName the name of the task.
-     * @param taskType the type of task.
-     * @param isDone whether the task is done.
+     * @param taskName The name of the task.
+     * @param taskType The type of task.
+     * @param isDone Whether the task is done.
      */
     public Task(String taskName, TaskType taskType, boolean isDone) {
         this.taskName = taskName;
@@ -34,8 +34,8 @@ public abstract class Task {
      * Class constructor specifying the name and type of the task.
      * The task is initialised as not done.
      *
-     * @param taskName the name of the task.
-     * @param taskType the type of task.
+     * @param taskName The name of the task.
+     * @param taskType The type of task.
      */
     public Task(String taskName, TaskType taskType) {
         this(taskName, taskType, false);

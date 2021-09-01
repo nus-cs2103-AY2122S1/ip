@@ -11,9 +11,9 @@ public class Parser {
     /**
      * Returns type of command given in the specified user input.
      *
-     * @param userInput the whole line of command from the user.
-     * @return the type of command requested.
-     * @throws UnsupportedOperationException  if the user entered a
+     * @param userInput The whole line of command from the user.
+     * @return The type of command requested.
+     * @throws UnsupportedOperationException  If the user entered a
      *                command that is not recognized.
      */
     public static CommandType parseCommandType(String userInput)
@@ -49,9 +49,9 @@ public class Parser {
      * The user command given is expected to be "todo", "deadline"
      * or "event".
      *
-     * @param userInput the whole line of command from the user.
-     * @return the new task that was requested.
-     * @throws MissingInputException  if the user did not enter any
+     * @param userInput The whole line of command from the user.
+     * @return The new task that was requested.
+     * @throws MissingInputException  If the user did not enter any
      *                other task details after the command word.
      */
     public static Task parseNewTask(String userInput) throws MissingInputException {
@@ -95,8 +95,8 @@ public class Parser {
      * Returns the task number specified in the user command.
      * The user command given is expected to be "done" or "delete".
      *
-     * @param userInput the whole line of command from the user.
-     * @return the number of the task to execute the command on.
+     * @param userInput The whole line of command from the user.
+     * @return The number of the task to execute the command on.
      */
     public static int parseTaskNum(String userInput) {
         Scanner userInputScanner = new Scanner(userInput);

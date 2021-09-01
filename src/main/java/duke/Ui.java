@@ -43,7 +43,7 @@ public class Ui {
     /**
      * Prints the current list of tasks.
      *
-     * @param tasks the TaskList containing all the current tasks.
+     * @param tasks The TaskList containing all the current tasks.
      */
     public void printTaskList(TaskList tasks) {
         for (int i = 1; i <= tasks.getSize(); i++) {
@@ -55,8 +55,8 @@ public class Ui {
     /**
      * Prints the message when the program has added a task to the list.
      *
-     * @param tasks the TaskList containing all the current tasks.
-     * @param newTask the task that was added to the list.
+     * @param tasks The TaskList containing all the current tasks.
+     * @param newTask The task that was added to the list.
      */
     public void printAddTask(TaskList tasks, Task newTask) {
         System.out.println(DUKE + "\n\tAdded:\n\t\t" + newTask);
@@ -66,7 +66,7 @@ public class Ui {
     /**
      * Prints the message when the program has marked a task as completed.
      *
-     * @param completedTask the task that was marked as completed.
+     * @param completedTask The task that was marked as completed.
      */
     public void printCompleteTask(Task completedTask) {
         System.out.println(DUKE + "\n\tMarking task as completed:");
@@ -76,8 +76,8 @@ public class Ui {
     /**
      * Prints the message when the program has deleted a task from the list.
      *
-     * @param tasks the TaskList containing all the current tasks.
-     * @param deletedTask the task that was deleted from the list.
+     * @param tasks The TaskList containing all the current tasks.
+     * @param deletedTask The task that was deleted from the list.
      */
     public void printDeleteTask(TaskList tasks, Task deletedTask) {
         System.out.println(DUKE + "\n\tRemoving task:");
@@ -88,27 +88,27 @@ public class Ui {
     /**
      * Prints a list of tasks whose names contain the subject.
      *
-     * @param tasks the TaskList containing all the current tasks.
-     * @param subject the keyword that is being searched for.
+     * @param tasks The TaskList containing all the current tasks.
+     * @param subject The keyword that is being searched for.
      */
     public void printTasksWithSubject(TaskList tasks, String subject) {
-        int nResults = 0;
+        int numOfResults = 0;
         System.out.println("\tTasks with \"" + subject + "\":");
         for (int i = 1; i <= tasks.getSize(); i++) {
             if (tasks.getTask(i).getTaskName().contains(subject)) {
-                nResults++;
+                numOfResults++;
                 System.out.printf("\t\t%d.%s\n", i, tasks.getTask(i));
             }
         }
 
-        if (nResults == 0) {
+        if (numOfResults == 0) {
             System.out.println("\n\tNo results found.");
         }
-        else if (nResults == 1) {
+        else if (numOfResults == 1) {
             System.out.println("\tTotal of 1 result found.");
         }
         else {
-            System.out.println("\tTotal of " + nResults + " results found.");
+            System.out.println("\tTotal of " + numOfResults + " results found.");
         }
     }
 
@@ -116,7 +116,7 @@ public class Ui {
      * Prints the message when the program has loaded the list of tasks
      * from a previous save file.
      *
-     * @param tasks the TaskList containing all the current tasks
+     * @param tasks The TaskList containing all the current tasks
      *             that was loaded.
      */
     public void printLoadTasks(TaskList tasks) {
@@ -127,7 +127,7 @@ public class Ui {
     /**
      * Prints the error message when the program encountered an error.
      *
-     * @param message the error message from the exception.
+     * @param message The error message from the exception.
      */
     public void printErrorMessage(String message) {
         System.out.println(DUKE);

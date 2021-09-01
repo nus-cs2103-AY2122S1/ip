@@ -20,7 +20,7 @@ public class TaskList {
     /**
      * Class constructor specifying an initial list of tasks.
      *
-     * @param tasks the list of tasks to initialise with.
+     * @param tasks The list of tasks to initialise with.
      */
     public TaskList(ArrayList<Task> tasks) {
         if (tasks != null) {
@@ -39,8 +39,8 @@ public class TaskList {
      * Retrieves the task of the specified index from the list.
      * Uses 1-based indexing.
      *
-     * @param taskIndex the new task to be added.
-     * @return the task with the specified index.
+     * @param taskIndex The new task to be added.
+     * @return The task with the specified index.
      */
     public Task getTask(int taskIndex) {
         return tasks.get(taskIndex - 1);
@@ -49,7 +49,7 @@ public class TaskList {
     /**
      * Adds a task to the list of tasks.
      *
-     * @param newTask the new task to be added.
+     * @param newTask The new task to be added.
      */
     public void addTask(Task newTask) {
         tasks.add(newTask);
@@ -59,8 +59,8 @@ public class TaskList {
      * Marks the task of the specified index in the list as done.
      * Uses 1-based indexing.
      *
-     * @param taskIndex the index of the task to be marked as done.
-     * @return the task that has been marked as done.
+     * @param taskIndex The index of the task to be marked as done.
+     * @return The task that has been marked as done.
      */
     public Task completeTask(int taskIndex) {
         tasks.get(taskIndex - 1).setDone(true);
@@ -71,8 +71,8 @@ public class TaskList {
      * Deletes a task of the specified index from the list.
      * Uses 1-based indexing.
      *
-     * @param taskIndex the index of the task to be deleted from the list.
-     * @return the task that has been deleted from the list.
+     * @param taskIndex The index of the task to be deleted from the list.
+     * @return The task that has been deleted from the list.
      */
     public Task deleteTask(int taskIndex) {
         return tasks.remove(taskIndex - 1);

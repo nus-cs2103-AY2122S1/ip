@@ -19,7 +19,7 @@ public class Storage {
     /**
      * Class constructor.
      *
-     * @param filepath  filepath to the save file.
+     * @param filepath  Filepath to the save file.
      */
     public Storage(String filepath) {
         savePath = Path.of(System.getProperty("user.dir"), filepath);
@@ -32,7 +32,7 @@ public class Storage {
      *
      * @return ArrayList of saved Tasks if save file exists, otherwise
      *                returns an empty ArrayList instead.
-     * @throws LoadingException  if an IOException occurs while loading
+     * @throws LoadingException  If an IOException occurs while loading
      *                the save file.
      */
     public ArrayList<Task> load() throws LoadingException {
@@ -89,7 +89,7 @@ public class Storage {
     /**
      * Saves all the tasks and their information onto the save file.
      *
-     * @param tasks  TaskList containing the tasks to be saved.
+     * @param tasks TaskList containing the tasks to be saved.
      */
     public void saveTasks(TaskList tasks) {
         try {
@@ -98,7 +98,7 @@ public class Storage {
                 writer.write(tasks.getTask(i).toSaveFormat() + "\n");
             }
             writer.close();
-        } catch(IOException ex){
+        } catch(IOException ex) {
             ex.printStackTrace();
         }
     }
