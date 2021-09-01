@@ -17,6 +17,6 @@ javafx/
 *.iml
 bin/
 
-text-ui-test/ACTUAL.txt
-text-ui-test/EXPECTED-UNIX.TXT
-text-ui-test/memory/*
+text-textUi-test/ACTUAL.txt
+text-textUi-test/EXPECTED-UNIX.TXT
+text-textUi-test/memory/*

@@ -3,10 +3,10 @@ package bobcat.view;
 import bobcat.exception.BobCatException;
 
 /**
- * Represents the view of the application. Implements the "View" aspect of the MVC pattern. A <code>Ui</code>
+ * Represents the view of the application. Implements the "View" aspect of the MVC pattern. A <code>TextUi</code>
  * object dictates <i>how</i> information should be presented.
  */
-public class Ui {
+public class TextUi {
     private static void hLine() {
         System.out.println("\t----------------------------------------------");
     }
@@ -24,7 +24,7 @@ public class Ui {
     /**
      * Displays error message to the user. This is used primarily to standardise formatting of
      * error messages, particularly BobCatException.
-     * @param errorObj a BobCatException which is thrown by ExecutionUnit
+     *  @param errorObj a BobCatException which is thrown by ExecutionUnit
      */
     public void respondError(BobCatException errorObj) {
         respondError(errorObj.getMessage());
