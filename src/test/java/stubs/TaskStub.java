@@ -27,13 +27,8 @@ public class TaskStub extends Task {
     }
 
     @Override
-    public void taskDone() {
-        this.isDone = true;
-    }
-
-    @Override
     public String toString() {
-        return "[" + super.getStatusIcon() + "] " + "run";
+        return "[" + super.getStatusIcon() + "] " + "Go for a run";
     }
 
 }

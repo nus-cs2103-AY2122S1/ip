@@ -1,8 +1,6 @@
 package petal.gui;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -11,8 +9,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import petal.Petal;
 import petal.components.Responses;
+import petal.components.Ui;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -29,10 +27,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    //Reads the sys out
-    private ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-    private Petal petal;
+    private Ui ui;
 
     //Images to be used
 
@@ -45,37 +40,21 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Set the Petal instance and checks if user has been greeted
-     * If not, greets the user
-     * @param p Petal instance
+     * Sets the Ui instance
+     * @param ui
      */
-    public void setPetal(Petal p) {
-        petal = p;
-        String startMsg = petal.greetUser();
-        dialogContainer.getChildren().addAll(
-                PetalDialogBox.getPetalDialog(startMsg));
+    public void setUi(Ui ui) {
+        this.ui = ui;
+        ui.setMainWindow(this);
     }
 
     /**
-     * Sets up the ByetArray/Output stream so that the sysout can be read as a String
+     * Sends the output to the interface to be read by the user
+     *
+     * @param input The user's input
+     * @param output The output
      */
-    public void setUp() {
-        outputStream = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outputStream));
-    }
-
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    @FXML
-    private void handleUserInput() throws IOException {
-        setUp();
-
-        String input = userInput.getText().trim();
-        petal.run(input);
-        String output = outputStream.toString().trim();
-
+    public void sendUserReply(String input, String output) {
         dialogContainer.getChildren().addAll(
                 UserDialogBox.getUserDialog(input),
                 PetalDialogBox.getPetalDialog(output)
@@ -84,7 +63,30 @@ public class MainWindow extends AnchorPane {
         if (output.equals(Responses.GOODBYE.toString())) {
             Platform.exit();
         }
-
         userInput.clear();
+    }
+
+    /**
+     * Sends the output to the interface to be read by the user
+     * This method is used when it is one-sided (the user does not need
+     * to send an input)
+     *
+     * @param output The output message
+     */
+    public void sendUserReply(String output) {
+        dialogContainer.getChildren().addAll(
+                PetalDialogBox.getPetalDialog(output)
+        );
+        userInput.clear();
+    }
+
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     */
+    @FXML
+    private void handleUserInput() throws IOException {
+        String input = userInput.getText().trim();
+        ui.readCommand(input);
     }
 }

@@ -3,49 +3,60 @@ package stubs;
 import java.util.ArrayList;
 import java.util.List;
 
-import petal.components.Responses;
 import petal.components.TaskList;
-import petal.components.Ui;
 import petal.task.Task;
 
 public class TaskListStub extends TaskList {
 
-    private List<TaskStub> taskList = new ArrayList<>();
-    private Ui ui;
+    private List<TaskStub> tasks = new ArrayList<>();
 
     /**
      * Constructor for the TaskListStub class
-     * @param ui The Ui instance
      */
-    public TaskListStub(Ui ui) {
-        super(ui);
-        this.ui = ui;
-        taskList.add(new TaskStub());
+    public TaskListStub() {
+        tasks.add(new TaskStub());
     }
 
     @Override
     public String printList() {
-        return "No items in list yet!";
+        return "1. [T][ ] Go for a run";
     }
 
     @Override
-    public void markTaskAsDone(String indexOfTask) {
-        TaskStub taskStub = taskList.get(0);
+    public String markTaskAsDone(String indexOfTask) {
+        TaskStub taskStub = tasks.get(0);
         taskStub.taskDone();
-        System.out.println(Responses.LINE + "\nYou have completed the task: " + "'"
-                                          + "run!"
-                                          + "\nI am so happy for you!\n"
-                                          + Responses.LINE);
+        return "\nYou have completed the task: "
+                + "'"
+                + "go for a run" + "'!"
+                + "\nI am so happy for you!\n";
     }
 
     @Override
-    public void deleteTask(String index) {
+    public String deleteTask(String index) {
         TaskStub toBeDeleted = new TaskStub();
-        System.out.println("Okay. I've deleted this task:\n" + toBeDeleted + "\nYou now have 1 task(s)!");
+        return "Okay. I've deleted this task:\n" + toBeDeleted + "\nYou now have 1 task(s)!";
     }
 
     @Override
-    public void addTask(Task task) {
-        System.out.println("Okay. I've added this task:\n" + task + "\nYou now have 1 task!");
+    public String addTask(Task task) {
+        return "Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size() + "task!";
     }
+
+    @Override
+    public String handleTask(String type, String message) {
+        Task task = new TaskStub();
+        return addTask(task);
+    }
+
+    @Override
+    public String findTaskWithKeyword(String keyword) {
+        return "No tasks!";
+    }
+
+    @Override
+    public String showTaskOnDate(String date) {
+        return "No tasks on this date!";
+    }
+
 }

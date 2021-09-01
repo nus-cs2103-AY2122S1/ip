@@ -1,13 +1,11 @@
 package petal.components;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,9 +17,8 @@ public class StorageTest {
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     private final Petal petal = new Petal();
-    private final Ui ui = new Ui(petal);
-    private final TaskListStub taskListStub = new TaskListStub(ui);
-    private final Storage storage = new Storage(taskListStub, ui);
+    private final TaskListStub taskListStub = new TaskListStub();
+    private final Storage storage = new Storage(taskListStub);
     private final String folderPath = System.getProperty("user.dir") + "/PetalData";
     private final String filePath = folderPath + "/Tasks.txt";
 
@@ -32,17 +29,12 @@ public class StorageTest {
 
     @Test
     public void createDirectory_noInput_folderAndFileExists() {
-        storage.createDirectory();
-        Path folder = Paths.get(folderPath);
-        Path file = Paths.get(filePath);
-        assertEquals(true, Files.exists(folder));
-        assertEquals(true, Files.exists(file));
+        assertEquals(Responses.WELCOME_BACK.toString(), storage.createDirectory());
     }
 
     @Test
-    public void retrieveTasks_noInput_returnFalse() {
-        boolean tasksAvailable = storage.retrieveTasks();
-        assertEquals(true, tasksAvailable);
+    public void testIfPetalUsedBefore_noInput_truePetalUsedBefore() {
+        assertTrue(storage.hasUsedPetalBefore());
     }
 
     @Test

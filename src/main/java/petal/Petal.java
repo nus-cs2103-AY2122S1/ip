@@ -24,30 +24,34 @@ public class Petal {
     private final TaskList taskList;
 
     /**
-     * Constructor for the Petal class
+     * Constructs a Petal instance
      */
     public Petal() {
-        ui = new Ui();
-        taskList = new TaskList(ui);
-        storage = new Storage(taskList, ui);
+        ui = new Ui(this);
+        taskList = new TaskList();
+        storage = new Storage(taskList);
         parser = new Parser();
     }
 
     /**
      * Returns either start message or welcome back message
-     * @return String greeting the user
      */
-    public String greetUser() {
+    public void greetUser() {
         //It calls createDirectory as it has to check if user has used Petal before
-        return storage.createDirectory();
+        ui.sendToGui(storage.createDirectory());
+    }
+
+    public Ui getUi() {
+        return this.ui;
     }
 
     /**
-     * Starts the Petal instance
+     * Takes the user input and sends output to ui instance
      */
     public void run(String message) {
         Command command = parser.handleInput(message);
-        command.execute(taskList, ui, storage);
+        String reply = command.execute(taskList, storage);
+        ui.sendToGui(message, reply);
     }
 
     public static void main(String[] args) {

@@ -19,6 +19,7 @@ public class Main extends Application {
 
     /**
      * Starts the GUI for Petal
+     *
      * @param stage The stage to be used
      */
     @Override
@@ -28,7 +29,11 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setPetal(petal);
+
+            /*This is done to ensure that Ui has an association to MainWindow and Petal,
+              MainWindow has an association to Ui, and Petal has an association to Ui*/
+            fxmlLoader.<MainWindow>getController().setUi(petal.getUi());
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

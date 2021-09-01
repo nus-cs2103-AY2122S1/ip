@@ -1,34 +1,39 @@
 package petal.components;
 
+import petal.Petal;
+import petal.gui.MainWindow;
+
 /**
  * The Ui is responsible for handling the output, and interactions
  * with the user
  */
 public class Ui {
 
-    /**
-     * Terminates the Petal instance
-     */
-    public void sayGoodbye() {
-        output(Responses.GOODBYE);
-    }
+    private final Petal petal;
+    private MainWindow mainWindow;
 
     /**
-     * Outputs given message with lines above and below the message
-     *
-     * @param message Response that is converted to string that then displayed
+     * Constructs a Ui instance
      */
-    public void output(Responses message) {
-        System.out.println(message.toString());
+    public Ui(Petal petal) {
+        this.petal = petal;
     }
 
-    /**
-     * Outputs given message with lines above and below the message
-     *
-     * @param message String to be printed
-     */
-    public void output(String message) {
-        System.out.println(message);
+    public void setMainWindow(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+        petal.greetUser();
+    }
+
+    public void readCommand(String userInput) {
+        petal.run(userInput);
+    }
+
+    public void sendToGui(String message, String reply) {
+        mainWindow.sendUserReply(message, reply);
+    }
+
+    public void sendToGui(String reply) {
+        mainWindow.sendUserReply(reply);
     }
 
 }

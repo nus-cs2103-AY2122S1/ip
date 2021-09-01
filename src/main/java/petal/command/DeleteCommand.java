@@ -1,9 +1,7 @@
 package petal.command;
 
-import petal.components.Responses;
 import petal.components.Storage;
 import petal.components.TaskList;
-import petal.components.Ui;
 import petal.exception.InvalidInputException;
 
 /**
@@ -27,16 +25,14 @@ public class DeleteCommand implements Command {
      * Deletes the task corresponding to the input
      *
      * @param taskList TaskList instance
-     * @param ui Ui instance
      * @param storage Storage instance
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
-            taskList.deleteTask(input);
+            return taskList.deleteTask(input);
         } catch (InvalidInputException e) {
-            ui.output(e.getMessage());
-            ui.output(Responses.REQUIRED_FORMAT);
+            return e.getMessage();
         }
     }
 }

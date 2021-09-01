@@ -29,6 +29,7 @@ public class PetalDialogBox extends HBox {
 
     /**
      * Constructs a PetalDialogBox instance
+     *
      * @param text The output
      */
     private PetalDialogBox(String text) {
@@ -48,6 +49,7 @@ public class PetalDialogBox extends HBox {
 
     /**
      * Returns a PetalDialogBox instance
+     *
      * @param text The output
      * @return The PetalDialogBox instance with the output
      */

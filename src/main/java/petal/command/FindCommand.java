@@ -2,7 +2,6 @@ package petal.command;
 
 import petal.components.Storage;
 import petal.components.TaskList;
-import petal.components.Ui;
 import petal.exception.InvalidInputException;
 
 /**
@@ -26,15 +25,14 @@ public class FindCommand implements Command {
      * Finds the task with the given keyword
      *
      * @param taskList TaskList instance
-     * @param ui Ui instance
      * @param storage Storage instance
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         try {
-            taskList.findTaskWithKeyword(input);
+            return taskList.findTaskWithKeyword(input);
         } catch (InvalidInputException e) {
-            ui.output(e.getMessage());
+            return e.getMessage();
         }
     }
 }

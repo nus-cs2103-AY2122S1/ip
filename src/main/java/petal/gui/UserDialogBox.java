@@ -29,6 +29,7 @@ public class UserDialogBox extends HBox {
 
     /**
      * Constructs a UserDialogBox instance
+     *
      * @param text The input
      */
     private UserDialogBox(String text) {
@@ -48,6 +49,7 @@ public class UserDialogBox extends HBox {
 
     /**
      * Returns a UserDialogBox instance with the input
+     *
      * @param text The input
      * @return The UserDialogBox instance with the input
      */

@@ -31,16 +31,13 @@ public class Storage {
     private final String filePath;
 
     private final TaskList taskList;
-    private final Ui ui;
 
     /**
      * Constructs a Storage instance
      *
      * @param taskList Instance of TaskList being used
-     * @param ui The Ui instance being used
      */
-    public Storage(TaskList taskList, Ui ui) {
-        this.ui = ui;
+    public Storage(TaskList taskList) {
         this.taskList = taskList;
         this.folderPath = System.getProperty("user.dir") + "/PetalData";
         this.filePath = folderPath + "/Tasks.txt";
@@ -53,7 +50,7 @@ public class Storage {
      */
     public String createDirectory() {
         try {
-            if (retrieveTasks()) {
+            if (hasUsedPetalBefore()) {
                 return Responses.WELCOME_BACK.toString();
             }
             Path path = Paths.get(folderPath);
@@ -68,11 +65,13 @@ public class Storage {
     }
 
     /**
-     * Parses the text from Tasks.txt in tasks and retrieves it as tasks
+     * Parses the text from Tasks.txt in tasks and retrieves it as tasks. If it is
+     * able to retrieve the tasks, this means that Petal was opened by the user at least
+     * once before
      *
      * @return True if tasks were retrieved, false if no tasks (new user) or exception occurred
      */
-    public boolean retrieveTasks() {
+    public boolean hasUsedPetalBefore() {
         try {
             File tasks = new File(filePath);
             Scanner scanner = new Scanner(tasks);
@@ -95,7 +94,7 @@ public class Storage {
                     break;
                 }
             }
-            taskList.addTask(addPasts);
+            taskList.addSavedTasks(addPasts);
             scanner.close();
             return true;
         } catch (FileNotFoundException | NoSuchElementException e) {

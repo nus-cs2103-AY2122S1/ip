@@ -63,12 +63,12 @@ public abstract class Task {
     /**
      * Sets the task instance as done
      */
-    public void taskDone() {
+    public String taskDone() {
         this.isDone = true;
-        System.out.println("\nYou have completed the task: "
-                              + "'"
-                              + this.description + "'!"
-                              + "\nI am so happy for you!\n");
+        return "\nYou have completed the task: "
+                + "'"
+                + this.description + "'!"
+                + "\nI am so happy for you!\n";
     }
 
     /**

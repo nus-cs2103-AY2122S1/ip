@@ -4,13 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import petal.Petal;
 import petal.command.Command;
-import stubs.FormatTest;
 import stubs.StorageStub;
 import stubs.TaskListStub;
 
@@ -18,12 +19,11 @@ import stubs.TaskListStub;
 public class ParserTest {
 
     private final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    private final FormatTest formatTest = new FormatTest();
+
     private final Parser parser = new Parser();
     private final Petal petal = new Petal();
-    private final Ui ui = new Ui(petal);
-    private final TaskListStub taskListStub = new TaskListStub(ui);
-    private final StorageStub storageStub = new StorageStub(taskListStub, ui);
+    private final TaskListStub taskListStub = new TaskListStub();
+    private final StorageStub storageStub = new StorageStub(taskListStub);
 
     @BeforeEach
     public void setUp() {
@@ -31,46 +31,53 @@ public class ParserTest {
     }
 
     @Test
-    public void parseInput_list_matchExpected() {
+    public void parseInput_list_listCommand() {
         Command command = parser.handleInput("list");
-        command.execute(taskListStub, ui, storageStub);
-        assertEquals(formatTest.formatForTest("No items in list yet!"), outputStream.toString().trim());
+        assertEquals("1. [T][ ] Go for a run", command.execute(taskListStub, storageStub));
     }
 
     @Test
-    public void parseInput_bye_matchExpected() {
+    public void parseInput_bye_byeCommand() {
         Command command = parser.handleInput("bye");
-        command.execute(taskListStub, ui, storageStub);
-        assertEquals(formatTest.formatForTest("You're leaving :( I hope you return soon!"),
-                outputStream.toString().trim());
-
+        assertEquals(Responses.GOODBYE.toString(), command.execute(taskListStub, storageStub));
     }
 
     @Test
-    public void parseInput_todo_matchExpected() {
-        Command command = parser.handleInput("todo run");
-        command.execute(taskListStub, ui, storageStub);
-        assertEquals("Okay. I've added this task:\n" + "[T][ ] Run" + "\nYou now have 1 task!",
-                             outputStream.toString().trim());
+    public void parseInput_todo_taskCommand() {
+        Command command = parser.handleInput("todo go for a run");
+        assertEquals("Okay. I've added this task:\n"
+                        + "[ ] Go for a run"
+                        + "\nYou now have " + "1"
+                        + "task!",
+                command.execute(taskListStub, storageStub));
     }
 
     @Test
-    public void parseInput_done_matchExpected() {
-        Command command = parser.handleInput("done 1");
-        command.execute(taskListStub, ui, storageStub);
-        String expected = Responses.LINE + "\nYou have completed the task: " + "'"
-                                         + "run!"
-                                         + "\nI am so happy for you!\n"
-                                         + Responses.LINE;
-        assertEquals(expected, outputStream.toString().trim());
+    public void parseInput_date_dateCommand() {
+        Command command = parser.handleInput("date 2/12/2021");
+        assertEquals("No tasks on this date!", command.execute(taskListStub, storageStub));
     }
 
     @Test
-    public void parseInput_delete_matchExpected() {
-        Command command = parser.handleInput("delete 1");
-        command.execute(taskListStub, ui, storageStub);
-        String expected = "Okay. I've deleted this task:\n[ ] " + "run" + "\nYou now have 1 task(s)!";
-        assertEquals(expected, outputStream.toString().trim());
+    public void parseInput_find_findCommand() {
+        Command command = parser.handleInput("find hi");
+        assertEquals("No tasks!", command.execute(taskListStub, storageStub));
+    }
+
+    @Test
+    public void parseInput_unintelligible_unintelligibleCommand() {
+        Command command = parser.handleInput("qwndiqwndqwn");
+        assertEquals(Responses.UNINTELLIGIBLE.toString(), command.execute(taskListStub, storageStub));
+    }
+
+    @Test
+    public void correctTimeReturn_time_localTime() {
+        assertEquals(LocalTime.parse("18:00"), Parser.parseTime("1800"));
+    }
+
+    @Test
+    public void correctDateReturn_time_localDate() {
+        assertEquals(LocalDate.parse("2021-12-02"), Parser.parseDate("2/12/2021"));
     }
 
 }

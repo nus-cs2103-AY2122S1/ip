@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
-import petal.exception.InvalidInputException;
 import petal.task.Task;
 import petal.task.Timeable;
 
@@ -48,7 +47,7 @@ public class Calendar {
      *
      * @param date date to be used
      */
-    public String showTasksOnDate(LocalDate date) throws InvalidInputException {
+    public String showTasksOnDate(LocalDate date) {
         int count = 1;
         Optional<ArrayList<Timeable>> current = Optional.ofNullable(dateAndTimeables.get(date));
         if (current.isPresent()) {

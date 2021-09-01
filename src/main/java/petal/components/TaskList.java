@@ -19,16 +19,12 @@ import petal.task.ToDo;
 public class TaskList {
 
     private final List<Task> tasks;
-    private final Ui ui;
     private final Calendar calendar;
 
     /**
      * Constructs a TaskList instance
-     *
-     * @param ui The instance of Ui used
      */
-    public TaskList(Ui ui) {
-        this.ui = ui;
+    public TaskList() {
         this.tasks = new ArrayList<>();
         calendar = new Calendar();
     }
@@ -38,9 +34,8 @@ public class TaskList {
      *
      * @param addTasks The arraylist of previously saved tasks
      */
-    public void addTask(ArrayList<Task> addTasks) {
+    public void addSavedTasks(ArrayList<Task> addTasks) {
         tasks.addAll(addTasks);
-        ui.output(Responses.WELCOME_BACK);
     }
 
     /**
@@ -48,10 +43,10 @@ public class TaskList {
      *
      * @param task The task to be added
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         tasks.add(task);
         String plural = (tasks.size() + 1) > 0 ? " tasks!" : " task!";
-        ui.output("Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size() + plural);
+        return "Okay. I've added this task:\n" + task + "\nYou now have " + tasks.size() + plural;
     }
 
     /**
@@ -62,15 +57,15 @@ public class TaskList {
      *                               when index is out-of-bounds/not valid int or when
      *                               desc is empty
      */
-    public void deleteTask(String index) throws InvalidInputException {
+    public String deleteTask(String index) throws InvalidInputException {
         try {
             int indexOfTask = Integer.parseInt(index) - 1;
             Task toBeDeleted = tasks.remove(indexOfTask);
             if (toBeDeleted.isTimeable()) {
                 calendar.updateCalendar(tasks);
             }
-            ui.output("Okay. I've deleted this task:\n" + toBeDeleted + "\nYou now have " + tasks.size()
-                    + " task(s)!");
+            return "Okay. I've deleted this task:\n" + toBeDeleted + "\nYou now have " + tasks.size()
+                    + " task(s)!";
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException(Responses.INVALID_TASK_NUMBER, e);
         }
@@ -84,7 +79,7 @@ public class TaskList {
      * @throws EmptyDescException Thrown when the task lacks a description
      * @throws InvalidInputException Thrown when an invalid format is given or when a time is not given
      */
-    public void handleTask(String type, String message) throws EmptyDescException, InvalidInputException {
+    public String handleTask(String type, String message) throws EmptyDescException, InvalidInputException {
         Task task;
         String[] deadlineEvent = type.equals("deadline") ? message.split("/by")
                 : message.split("/at");
@@ -113,10 +108,10 @@ public class TaskList {
                 throw new InvalidInputException(Responses.INVALID_DATE_TIME);
             }
         }
-        addTask(task);
         if (task.isTimeable()) {
             calendar.addToCalendar((Timeable) task);
         }
+        return addTask(task);
     }
 
     /**
@@ -126,10 +121,10 @@ public class TaskList {
      * @throws IndexOutOfBoundsException Thrown if string is not within size of list
      * @throws NumberFormatException Thrown if string cannot be converted into valid int
      */
-    public void markTaskAsDone(String indexOfTask) throws InvalidInputException {
+    public String markTaskAsDone(String indexOfTask) throws InvalidInputException {
         try {
             Task taskToBeCompleted = tasks.get(Integer.parseInt(indexOfTask) - 1);
-            taskToBeCompleted.taskDone();
+            return taskToBeCompleted.taskDone();
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new InvalidInputException(Responses.INVALID_TASK_NO);
         }
@@ -163,16 +158,16 @@ public class TaskList {
      * @param date The date given
      * @throws InvalidInputException Thrown if the parameter has an invalid format/input
      */
-    public void showTaskOnDate(String date) throws InvalidInputException {
-        ui.output(calendar.showTasksOnDate(Parser.parseDate(date)));
+    public String showTaskOnDate(String date) throws InvalidInputException {
+        return calendar.showTasksOnDate(Parser.parseDate(date));
     }
 
     /**
-     * Displays tasks with the keyword
+     * Returns string of tasks that contain the keyword
      *
-     * @param keyword The keyword
+     * @param keyword The keyword to be found
      */
-    public void findTaskWithKeyword(String keyword) throws InvalidInputException {
+    public String findTaskWithKeyword(String keyword) throws InvalidInputException {
         keyword = keyword.trim();
         if (keyword.equals("")) {
             throw new InvalidInputException(Responses.INVALID_FORMAT);
@@ -185,15 +180,16 @@ public class TaskList {
                 }
             }
             if (count == 1) { //No tasks appended
-                ui.output("No tasks!");
+                return "No tasks!";
             } else {
-                ui.output(result.toString());
+                return result.toString();
             }
         }
     }
 
     /**
      * Returns a formatted string representation of the list of tasks that can be used for saving
+     *
      * @return Formatted string representation of all the user-added tasks
      */
     public String formatForSaving() {
