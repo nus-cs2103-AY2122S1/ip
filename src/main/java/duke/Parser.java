@@ -47,31 +47,27 @@ public class Parser {
         switch (commandWord) {
         case "done":
             if (commandDesc.equals("")) {
-                throw new DukeException("\tOOPS!!! Please specify the task number for the task "
+                throw new DukeException("OOPS!!! Please specify the task number for the task "
                         + "you want to complete.");
             }
             try {
                 int taskNumber = Integer.parseInt(commandDesc);
-                tasks.markDone(taskNumber - 1);
+                return tasks.markDone(taskNumber - 1);
             } catch (NumberFormatException e) {
-                System.out.println("\tOOPS!!! Please input a task number instead.");
+                System.out.println("OOPS!!! Please input a task number instead.");
             }
 
             break;
         case "list":
-            this.tasks.listTasks();
-
-            break;
+            return tasks.listTasks();
         case "todo":
             if (commandDesc.equals("")) {
-                throw new DukeException("\tOOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
-            tasks.addTask(new ToDo(commandDesc));
-
-            break;
+            return tasks.addTask(new ToDo(commandDesc));
         case "deadline":
             if (commandDesc.equals("")) {
-                throw new DukeException("\tOOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             }
             try {
                 String[] commandDescSplit = commandDesc.split("/by");
@@ -79,40 +75,36 @@ public class Parser {
                 String[] dateAndTimeSplit = dateAndTime.split(" ");
                 String date = dateAndTimeSplit[0];
                 String time = dateAndTimeSplit[1];
-                tasks.addTask(new Deadline(commandDescSplit[0].trim(), date, time));
+                return tasks.addTask(new Deadline(commandDescSplit[0].trim(), date, time));
             } catch (DateTimeParseException e) {
                 throw new DukeException("You've entered a date or time in an invalid format! "
                         + "\nIt should be in the form: yyyy-mm-dd hrs:mins");
             }
-            break;
         case "event":
             if (commandDesc.equals("")) {
-                throw new DukeException("\tOOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a event cannot be empty.");
             }
             String[] commandDescSplit = commandDesc.split("/at");
-            tasks.addTask(new Event(commandDescSplit[0].trim(), commandDescSplit[1].trim()));
-
-            break;
+            return tasks.addTask(new Event(commandDescSplit[0].trim(), commandDescSplit[1].trim()));
         case "delete":
             if (commandDesc.equals("")) {
-                throw new DukeException("\tOOPS!!! Please specify the task number for the task "
+                throw new DukeException("OOPS!!! Please specify the task number for the task "
                         + "you want to delete.");
             }
             try {
                 int taskNumber = Integer.parseInt(commandDesc);
-                tasks.deleteTask(taskNumber - 1);
+                return tasks.deleteTask(taskNumber - 1);
             } catch (NumberFormatException e) {
-                System.out.println("\tOOPS!!! Please input a task number instead.");
+                System.out.println("OOPS!!! Please input a task number instead.");
             }
             break;
         case "find":
             if (commandDesc.equals("")) {
-                throw new DukeException("\tOOPS!!! The description of a event cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a event cannot be empty.");
             }
-            tasks.findTask(commandDesc.toLowerCase());
-            break;
+            return tasks.findTask(commandDesc.toLowerCase());
         default:
-            throw new DukeException("\tOOPS!!! You have entered an invalid command, please try again!");
+            throw new DukeException("OOPS!!! You have entered an invalid command, please try again!");
         }
         return "";
     }

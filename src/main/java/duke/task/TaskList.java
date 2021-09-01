@@ -34,30 +34,35 @@ public class TaskList {
      *
      * @param taskNumber The task number that is used to specify which task to mark as done.
      */
-    public void markDone(int taskNumber) {
+    public String markDone(int taskNumber) {
+        String message = "";
         try {
-            Task completedTask = this.tasks.get(taskNumber);
+            Task completedTask = tasks.get(taskNumber);
             completedTask.markDone();
-            Ui.printDoneMessage(completedTask);
+            message = Ui.getDoneMessage(completedTask);
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("\tOOPS!!! This is not a valid task number.");
+            System.out.println("OOPS!!! This is not a valid task number.");
         }
+        return message;
     }
 
     /**
      * Prints the entire TaskList if the TaskList is not empty. If the TaskList is empty,
      * a message that informs the user that they do not have any tasks is printed.
      */
-    public void listTasks() {
-        if (!this.tasks.isEmpty()) {
-            Ui.printLine();
-            System.out.println("\tHere are the tasks in your list:");
-            for (int i = 0; i < this.tasks.size(); i++) {
-                System.out.println("\t" + (i + 1) + ". " + this.tasks.get(i));
+    public String listTasks() {
+        StringBuilder message = new StringBuilder();
+        if (!tasks.isEmpty()) {
+            message.append("Here are the tasks in your list:");
+            for (int i = 0; i < tasks.size(); i++) {
+                message.append("\n")
+                        .append(i + 1)
+                        .append(". ")
+                        .append(tasks.get(i));
             }
-            Ui.printLine();
+            return message.toString();
         } else {
-            System.out.println("\tYou don't have any tasks in your list!");
+            return "You don't have any tasks in your list!";
         }
     }
 
@@ -66,9 +71,9 @@ public class TaskList {
      *
      * @param task The specified Task to add into the TaskList.
      */
-    public void addTask(Task task) {
-        this.tasks.add(task);
-        Ui.printAddedMessage(task, this.tasks.size());
+    public String addTask(Task task) {
+        tasks.add(task);
+        return Ui.getAddedMessage(task, tasks.size());
     }
 
     /**
@@ -76,13 +81,13 @@ public class TaskList {
      *
      * @param taskNumber The task number of the Task that is to be deleted.
      */
-    public void deleteTask(int taskNumber) {
+    public String deleteTask(int taskNumber) {
         try {
-            Task removedTask = this.tasks.get(taskNumber);
-            this.tasks.remove(taskNumber);
-            Ui.printDeleteMessage(removedTask, this.tasks.size());
+            Task removedTask = tasks.get(taskNumber);
+            tasks.remove(taskNumber);
+            return Ui.getDeleteMessage(removedTask, tasks.size());
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("\tOOPS!!! This is not a valid task number.");
+            return "OOPS!!! This is not a valid task number.";
         }
     }
 
@@ -91,25 +96,23 @@ public class TaskList {
      *
      * @param keyword The keyword specified by the user to search for.
      */
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
         boolean canFindMatch = false;
-
-        Ui.printLine();
+        StringBuilder message = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             String currentTask = tasks.get(i).toString();
             if (currentTask.substring(7).matches("(?i)(.*)" + keyword + "(.*)")) {
                 if (!canFindMatch) {
                     canFindMatch = true;
-                    System.out.println("\tHere are the matching tasks in your list:");
+                    message.append("Here are the matching tasks in your list:");
                 }
-                System.out.println("\t" + (i + 1) + ". " + currentTask);
+                message.append("\n").append(i + 1).append(". ").append(currentTask);
             }
         }
-
         if (!canFindMatch) {
-            System.out.println("\tSorry!, I couldn't find any tasks with that keyword.");
+            return "Sorry!, I couldn't find any tasks with that keyword.";
         }
-        Ui.printLine();
+        return message.toString();
     }
 
     /**
@@ -128,6 +131,6 @@ public class TaskList {
      * @return The number of Tasks in the TaskList.
      */
     public int size() {
-        return this.tasks.size();
+        return tasks.size();
     }
 }

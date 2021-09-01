@@ -47,14 +47,14 @@ public class Duke {
                 didUserEnd = true;
                 ui.printGoodbyeMessage();
                 storage.save(tasks);
+            } else {
+                try {
+                    String message = parser.parse(command);
+                    ui.printMessage(message);
+                } catch (DukeException e) {
+                    System.out.println(e.getMessage());
+                }
             }
-            try {
-                String message = parser.parse(command);
-                ui.printMessage(message);
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-
         }
         sc.close();
     }
