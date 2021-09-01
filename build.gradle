@@ -21,8 +21,6 @@ dependencies {
 test {
     useJUnitPlatform()
 
-    useTestNG()
-
     testLogging {
         events "passed", "skipped", "failed"
 
@@ -33,20 +31,10 @@ test {
         showStandardStreams = false
     }
 
-    useJUnitPlatform {
-        includeEngines 'junit-vintage'
-        // excludeEngines 'junit-jupiter'
-    }
-
-    useTestNG {
-        preserveOrder true
-
-    }
-
 }
 
 application {
-    mainClassName = "IP.duke.main.Duke"
+    mainClassName = "duke.main.Duke"
 }
 
 shadowJar {
