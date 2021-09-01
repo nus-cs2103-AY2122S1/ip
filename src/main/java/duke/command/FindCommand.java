@@ -1,17 +1,12 @@
 package duke.command;
-
-import duke.task.Task;
-
 import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
-
-import java.util.ArrayList;
 
 public class FindCommand extends Command {
-    protected String description;
     public static final String INSTRUCTION_FIND = "find";
+    protected String description;
 
     /**
      * Class constructor for FindCommand Class specifying the task number

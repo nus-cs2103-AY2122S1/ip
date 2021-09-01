@@ -1,24 +1,23 @@
 package duke.command;
 
-import duke.task.Event;
-
 import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+import duke.task.Event;
 
 public class EventCommand extends Command {
-    protected Event event;
     public static final String INSTRUCTION_EVENT = "event";
+    protected Event event;
 
     /**
      * Class constructor for EventCommand Class specifying parameter_1 and parameter_2
      */
-    public EventCommand(String parameter_1, String parameter_2) throws DukeException {
-        if (parameter_1.equals("") || parameter_2.equals("")) {
+    public EventCommand(String parameter1, String parameter2) throws DukeException {
+        if (parameter1.equals("") || parameter2.equals("")) {
             throw new DukeException("☹ OOPS!!! The description and the date of an event cannot be empty.");
         }
-        event = new Event(parameter_1, parameter_2);
+        event = new Event(parameter1, parameter2);
     }
 
     /**

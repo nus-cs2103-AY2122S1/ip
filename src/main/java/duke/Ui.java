@@ -5,7 +5,7 @@ import java.util.Scanner;
 import duke.task.Task;
 
 public class Ui {
-    Scanner sc;
+    protected Scanner sc;
 
     /**
      * Class constructor for Ui Class
@@ -76,8 +76,8 @@ public class Ui {
      */
     public void printList(TaskList tasks) {
         int count = 1;
-        System.out.print("\n    ____________________________________________________________" +
-                "\n    Here are the tasks in your list:\n");
+        System.out.print("\n    ____________________________________________________________"
+                + "\n    Here are the tasks in your list:\n");
         for (Task task : tasks.getList()) {
             System.out.printf("     %d.%s\n", count, task.toString());
             count++;

@@ -18,7 +18,8 @@ public class Event extends Task {
 
         String rawDate = dateTime[0];
         String[] dayMonthYear = rawDate.split("/");
-        LocalDate date = LocalDate.of(Integer.parseInt(dayMonthYear[2]), Integer.parseInt(dayMonthYear[1]), Integer.parseInt(dayMonthYear[0]));
+        LocalDate date = LocalDate.of(Integer.parseInt(dayMonthYear[2]), Integer.parseInt(dayMonthYear[1]),
+                Integer.parseInt(dayMonthYear[0]));
         String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
         if (dateTime.length > 1) {

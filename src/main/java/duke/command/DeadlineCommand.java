@@ -1,24 +1,24 @@
 package duke.command;
 
-import duke.task.Deadline;
 
 import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+import duke.task.Deadline;
 
 public class DeadlineCommand extends Command {
-    protected Deadline deadline;
     public static final String INSTRUCTION_DEADLINE = "deadline";
+    protected Deadline deadline;
 
     /**
      * Class constructor for DeadlineCommand Class specifying parameter_1 and parameter_2
      */
-    public DeadlineCommand(String parameter_1, String parameter_2) throws DukeException {
-        if (parameter_1.equals("") || parameter_2.equals("")) {
+    public DeadlineCommand(String parameter1, String parameter2) throws DukeException {
+        if (parameter1.equals("") || parameter2.equals("")) {
             throw new DukeException("☹ OOPS!!! The description or the date a deadline cannot be empty.");
         }
-        deadline = new Deadline(parameter_1, parameter_2);
+        deadline = new Deadline(parameter1, parameter2);
     }
 
     /**
