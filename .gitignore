@@ -1,14 +1,15 @@
 # IDEA files
-/.idea/
+.idea/
 /out/
 /*.iml
 
 # Gradle build files
-/.gradle/
-/build/
+.gradle/
+build/
+build/.gradle
 src/main/resources/docs/
 
-# Javafx
+# Javafx library
 javafx/
 
 # MacOS custom attributes files created by Finder
