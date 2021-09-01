@@ -28,8 +28,4 @@ public class Event extends Task {
     public String toString() {
         return super.getName() + " (at: " + this.duration + ")";
     }
-
-    public String getDuration() {
-        return this.duration;
-    }
 }

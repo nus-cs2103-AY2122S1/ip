@@ -32,18 +32,18 @@ public class ToDoList {
     /**
      * Displays the content in ToDoList as a numbered list.
      */
-    public void displayList() {
+    public String displayList() {
         Integer number = 1;
-        System.out.println("========== " + this.name + " ===========");
+        String response = "Here are the Tasks on your ToDoList: \n";
         for (Task a : this.record) {
             if (a.isCompleted()) {
-                System.out.println(number.toString() + "." + a.logo() + "[X] " + a.toString());
+                response += number.toString() + "." + a.logo() + "[X] " + a.toString() + "\n";
             } else {
-                System.out.println(number.toString() + "." + a.logo() + "[ ] " + a.toString());
+                response += number.toString() + "." + a.logo() + "[ ] " + a.toString() + "\n";
             }
             number++;
         }
-        System.out.println("========== " + this.name + " ===========\n");
+        return response;
     }
 
     /**
@@ -51,12 +51,11 @@ public class ToDoList {
      *
      * @param num The index of the item that is to be marked as done.
      */
-    public void markAsDone(int num) {
+    public String markAsDone(int num) {
         this.record.get(num - 1).setCompleted();
-        System.out.println("========== " + this.name + " ===========");
-        System.out.println("Good! Good! Took you long enough to complete this:");
-        System.out.println("  " + "[X] " + record.get(num - 1).toString());
-        System.out.println("========== " + this.name + " ===========\n");
+        String response = "Good! Good! Took you long enough to complete this: \n";
+        response += "  " + "[X] " + record.get(num - 1).toString() +"\n";
+        return response;
     }
 
     /**
@@ -64,15 +63,14 @@ public class ToDoList {
      *
      * @param item Name of ToDo.
      */
-    public void addToDo(String item) {
+    public String addToDo(String item) {
         ToDo todo = new ToDo(item);
         this.record.add(todo);
         this.totalNumber++;
-        System.out.println("========== " + this.name + " ===========");
-        System.out.println("Aye Aye Capt'. I've added this To Do:");
-        System.out.println("  [T][ ] " + item);
-        System.out.println("Now you have " + this.totalNumber.toString() + " in the list. Wew.....");
-        System.out.println("========== " + this.name + " ===========\n");
+        String response = "Aye Aye Capt'. I've added this To Do: \n";
+        response += "  [T][ ] " + item + "\n";
+        response += "Now you have " + this.totalNumber.toString() + " in the list. Wew.....";
+        return response;
     }
 
     /**
@@ -81,15 +79,14 @@ public class ToDoList {
      * @param item Name of Event.
      * @param duration Time between start and end of Event.
      */
-    public void addEvent(String item, String duration) {
+    public String addEvent(String item, String duration) {
         Event event = new Event(item, duration);
         this.record.add(event);
         this.totalNumber++;
-        System.out.println("========== " + this.name + " ===========");
-        System.out.println("Aye Aye Capt'. I've added this Event:");
-        System.out.println("  [E][ ] " + item + " (at: " + duration + ")");
-        System.out.println("Now you have " + this.totalNumber.toString() + " in the list");
-        System.out.println("========== " + this.name + " ===========\n");
+        String response = "Aye Aye Capt'. I've added this Event: \n";
+        response += "  [E][ ] " + item + " (at: " + duration + ")\n";
+        response += "Now you have " + this.totalNumber.toString() + " in the list";
+        return response;
     }
 
     /**
@@ -98,15 +95,14 @@ public class ToDoList {
      * @param item Name of Task.
      * @param deadline Date and Time at which the Task is due.
      */
-    public void addDeadline(String item, LocalDateTime deadline) {
+    public String addDeadline(String item, LocalDateTime deadline) {
         Deadline dl = new Deadline(item, deadline);
         this.record.add(dl);
         this.totalNumber++;
-        System.out.println("========== " + this.name + " ===========");
-        System.out.println("Aye Aye Capt'. I've added this Deadline:");
-        System.out.println("  [D][ ] " + dl.toString());
-        System.out.println("Now you have " + this.totalNumber.toString() + " in the list");
-        System.out.println("========== " + this.name + " ===========\n");
+        String response = "Aye Aye Capt'. I've added this Deadline:\n";
+        response += "  [D][ ] " + dl.toString() +"\n";
+        response += "Now you have " + this.totalNumber.toString() + " in the list";
+        return response;
     }
 
     /**
@@ -114,21 +110,21 @@ public class ToDoList {
      *
      * @param index Index of the Task to be deleted from ToDoList.
      */
-    public void delete(int index) {
+    public String delete(int index) {
         Task removed = this.record.remove(index - 1);
         String status = removed.isCompleted() ? "[X]" : "[ ]";
         this.totalNumber--;
-        System.out.println("========== " + this.name + " ===========");
-        System.out.println("Got it sir. I've removed this task:");
+
+        String response = "Got it sir. I've removed this task: \n";
         if (removed instanceof ToDo) {
-            System.out.println("  [T]" + status + " " + removed.toString());
+            response += "  [T]" + status + " " + removed.toString() + "\n";
         } else if (removed instanceof Event) {
-            System.out.println("  [E]" + status + " " + removed.toString());
+            response += "  [E]" + status + " " + removed.toString() + "\n";
         } else {
-            System.out.println("  [D]" + status + " " + removed.toString());
+            response += "  [D]" + status + " " + removed.toString() + "\n";
         }
-        System.out.println("Now you have " + this.totalNumber.toString() + " in the list");
-        System.out.println("========== " + this.name + " ===========\n");
+        response += "Now you have " + this.totalNumber.toString() + " in the list";
+        return response;
     }
 
     /**
@@ -149,7 +145,7 @@ public class ToDoList {
      *
      * @param target String to look out for in the Task's name
      */
-    public void find(String target) {
+    public String find(String target) {
         ArrayList<Task> temp = new ArrayList<>();
         for (Task t : this.record) {
             if (t.getName().contains(target)) {
@@ -157,21 +153,21 @@ public class ToDoList {
             }
         }
         Integer number = 1;
-        System.out.println("========== " + this.name + " ===========");
+        String response = "";
         if (temp.size() > 0) {
-            System.out.println("Here are the matching tasks in your list:");
+            response += "Here are the matching tasks in your list: \n";
             for (Task t : temp) {
                 if (t.isCompleted()) {
-                    System.out.println(number.toString() + "." + t.logo() + "[X] " + t.toString());
+                    response += number.toString() + "." + t.logo() + "[X] " + t.toString() +"\n";
                 } else {
-                    System.out.println(number.toString() + "." + t.logo() + "[ ] " + t.toString());
+                    response += number.toString() + "." + t.logo() + "[ ] " + t.toString() +"\n";
                 }
                 number++;
             }
         } else {
-            System.out.println("No luck here.. Sorry buddy.");
+            response += "No luck here.. Sorry buddy.";
         }
-        System.out.println("========== " + this.name + " ===========\n");
+        return response;
     }
 }
 

@@ -22,7 +22,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        this.tdl.find(target);
+    public String execute() {
+        return this.tdl.find(target);
     }
 }

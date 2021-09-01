@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 
 
@@ -16,29 +14,18 @@ import duke.command.Command;
 public class Duke {
 
     private static String name = "Duke";
-    private boolean isRunning = false;
+    private boolean isRunning = true;
     private ToDoList tdl;
     private Storage storage;
     private Ui ui;
     private Parser parser;
 
-    private Duke() {
+    public Duke() {
         this.ui = new Ui(Duke.name);
-        this.ui.greet();
         this.tdl = new ToDoList(Duke.name);
         this.storage = new Storage(this.tdl);
         this.storage.reloadTask();
         this.parser = new Parser();
-    }
-
-    private void startBot() {
-        this.isRunning = true;
-        Scanner input = new Scanner(System.in);
-        while (this.isRunning) {
-            String command = input.nextLine();
-            Command c = this.parser.parse(command, this.tdl, this.ui, this, this.storage);
-            c.execute();
-        }
     }
 
     public static String getName() {
@@ -53,12 +40,21 @@ public class Duke {
     }
 
     /**
-     * Starts the entire program
-     * @param args an array of sequence of characters (Strings) that are passed to the
-     *             "main" function
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public static void main(String[] args) {
-        Duke chatBot = new Duke();
-        chatBot.startBot();
+    protected String getResponse(String input) {
+        Command c = this.parser.parse(input, this.tdl, this.ui, this, this.storage);
+        String response = c.execute();
+        return Duke.name + " heard: \n" + response;
+    }
+
+    /**
+     * Checks if Duke is still running
+     *
+     * @return true if Duke is still running, false otherwise
+     */
+    public boolean isRunning() {
+        return isRunning;
     }
 }

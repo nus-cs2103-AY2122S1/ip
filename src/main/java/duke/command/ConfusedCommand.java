@@ -21,7 +21,7 @@ public class ConfusedCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        this.ui.printProper("I'm confused... I need a raise...");
+    public String execute() {
+        return "I'm confused... Put in a little more effort this time?";
     }
 }

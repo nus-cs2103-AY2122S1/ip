@@ -4,17 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.ConfusedCommand;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.ToDoCommand;
-import duke.command.TryAgainCommand;
+import duke.command.*;
 
 
 /**
@@ -105,19 +95,17 @@ public class Parser {
                 int index = Integer.parseInt(substring);
                 return new DoneCommand(tdl, ui, index);
             } catch (NumberFormatException e) {
-                ui.printProper("Dude, the format is done <index>");
+                return new TipCommand("Dude, the format is done <index>");
             } catch (DukeException e) {
-                ui.printProper(e.getMessage());
+                return new TipCommand(e.getMessage());
             }
         } else if (command.startsWith(Commands.TODO.asLowerCase())) {
             try {
                 formatChecker(command);
                 String substring = command.substring(5);
                 return new ToDoCommand(tdl, substring);
-            } catch (StringIndexOutOfBoundsException e) {
-                ui.printProper("OOPS!!! The description of a todo cannot be empty.");
             } catch (DukeException e) {
-                ui.printProper(e.getMessage());
+                return new TipCommand(e.getMessage());
             }
         } else if (command.startsWith(Commands.EVENT.asLowerCase())) {
             try {
@@ -127,10 +115,10 @@ public class Parser {
                 String duration = substring.substring(substring.indexOf("/") + 1).substring(2);
                 return new EventCommand(tdl, item, duration);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.printProper("Hold up... You got the format all wrong! It's supposed to "
+                return new TipCommand("Hold up... You got the format all wrong! It's supposed to "
                         + "be <event> <name> /at <duration>");
             } catch (DukeException e) {
-                ui.printProper(e.getMessage());
+                return new TipCommand(e.getMessage());
             }
         } else if (command.startsWith(Commands.DEADLINE.asLowerCase())) {
             try {
@@ -145,12 +133,12 @@ public class Parser {
                         DateTimeFormatter.ISO_DATE_TIME);
                 return new DeadlineCommand(tdl, item, dl);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.printProper("Hold up... You got the format all wrong! It's supposed to "
+                return new TipCommand("Hold up... You got the format all wrong! It's supposed to "
                         + "be <deadline> <name> /by <dueDate>");
             } catch (DateTimeParseException e) {
-                System.out.println("Please key in the date time as YYYY-MM-dd HH:mm");
+                return new TipCommand("Doesn't hurt to key in the date time as YYYY-MM-dd HH:mm right..?");
             } catch (DukeException e) {
-                ui.printProper(e.getMessage());
+                return new TipCommand(e.getMessage());
             }
         } else if (command.startsWith(Commands.DELETE.asLowerCase())) {
             try {
@@ -159,11 +147,11 @@ public class Parser {
                 int index = Integer.parseInt(substring);
                 return new DeleteCommand(tdl, ui, index);
             } catch (StringIndexOutOfBoundsException e) {
-                ui.printProper("And which item do you want to delete...?");
+                return new TipCommand("And which item do you want to delete...?");
             } catch (NumberFormatException e) {
-                ui.printProper("Dude, the format is delete <index>");
+                return new TipCommand("Dude, the format is delete <index>");
             } catch (DukeException e) {
-                ui.printProper(e.getMessage());
+                return new TipCommand(e.getMessage());
             }
         } else if (command.startsWith(Commands.FIND.asLowerCase())) {
             try {
@@ -171,12 +159,11 @@ public class Parser {
                 String substring = command.substring(5);
                 return new FindCommand(tdl, substring);
             } catch (DukeException e) {
-                ui.printProper(e.getMessage());
+                return new TipCommand(e.getMessage());
             }
         } else {
             return new ConfusedCommand(ui);
         }
-        return new TryAgainCommand(ui);
     }
 
     private static void formatChecker(String command) throws DukeException {
@@ -208,7 +195,7 @@ public class Parser {
                 throw new DukeException("You got the format wrong.. Geez it's supposed to be <deadline> "
                         + "<name> /by <dueDate>");
             } else if (command.substring(8).isBlank()) {
-                throw new DukeException("Hold up.. last i checked doing nothing has no deadline");
+                throw new DukeException("Y'know.. last i checked, doing nothing has no deadline");
             }
         }
     }

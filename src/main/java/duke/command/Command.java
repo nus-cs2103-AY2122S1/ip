@@ -10,5 +10,5 @@ public abstract class Command {
     /**
      * Performs the appropriate action.
      */
-    public abstract void execute();
+    public abstract String execute();
 }

@@ -44,12 +44,7 @@ public class Storage {
             sResult = s.mkdir();
             if (sResult) {
                 File f = new File("./data/task-list.txt");
-                fResult = f.createNewFile();
-                if (fResult) {
-                    System.out.println("I've created a task list for you.");
-                }
-            } else {
-                System.out.println("Welcome back I guess..");
+                f.createNewFile();
             }
         } catch (IOException e) {
             System.out.println("Hey.. You smell smoke..?");
@@ -154,3 +149,4 @@ public class Storage {
         }
     }
 }
+

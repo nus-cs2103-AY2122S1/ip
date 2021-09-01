@@ -31,12 +31,11 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         this.chatBot.stopRunning();
-        System.out.println("========== " + Duke.getName() + " ===========");
-        System.out.println("Wow! I can get off work now :D");
         this.storage.save();
-        System.out.println("Saved your work by the way!");
-        System.out.println("========== " + Duke.getName() + " ===========\n");
+        String response = "Wow! I can get off work now :D\n";
+        response += "Saved your work by the way!\n";
+        return response;
     }
 }

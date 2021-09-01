@@ -20,7 +20,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        this.tdl.displayList();
+    public String execute() {
+        return this.tdl.displayList();
     }
 }

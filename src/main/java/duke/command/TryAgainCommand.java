@@ -21,7 +21,7 @@ public class TryAgainCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        this.ui.printProper("Try again...? ");
+    public String execute() {
+        return "Try again...? ";
     }
 }

@@ -29,7 +29,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        this.tdl.addDeadline(this.item, this.deadline);
+    public String execute() {
+        return this.tdl.addDeadline(this.item, this.deadline);
     }
 }

@@ -28,11 +28,11 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         try {
-            this.tdl.delete(index);
+            return this.tdl.delete(index);
         } catch (IndexOutOfBoundsException e) {
-            ui.printProper("You're trying to delete something non-existent? Damn who is this guy?");
+            return "You're trying to delete something non-existent? Damn who is this guy?";
         }
     }
 }

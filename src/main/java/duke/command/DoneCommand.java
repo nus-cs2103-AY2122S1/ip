@@ -27,13 +27,13 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         try {
-            this.tdl.markAsDone(this.index);
+            return this.tdl.markAsDone(this.index);
         } catch (StringIndexOutOfBoundsException e) {
-            ui.printProper("And I'm supposed to guess which item you're done with?");
+            return "And I'm supposed to guess which item you're done with?";
         } catch (IndexOutOfBoundsException e) {
-            ui.printProper("Where's this item? It's not even on the list!");
+            return "Where's this item? It's not even on the list!";
         }
     }
 }

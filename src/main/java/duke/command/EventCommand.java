@@ -27,7 +27,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public void execute() {
-        this.tdl.addEvent(this.item, this.duration);
+    public String execute() {
+        return this.tdl.addEvent(this.item, this.duration);
     }
 }
