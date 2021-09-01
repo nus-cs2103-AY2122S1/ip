@@ -15,7 +15,7 @@ public abstract class Command {
      * @param storage Storage that store tasks in hard-drive.
      * @throws DukeException If arguments enters has error.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Checks whether the command is an exit command.

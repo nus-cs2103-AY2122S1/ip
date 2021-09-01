@@ -14,8 +14,8 @@ public class LostCommand extends Command {
      * @param storage Storage that store tasks in hard-drive.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showLost();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showLost();
     }
 
     /**

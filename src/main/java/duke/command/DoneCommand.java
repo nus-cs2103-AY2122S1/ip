@@ -27,10 +27,10 @@ public class DoneCommand extends Command {
      * @throws DukeException If arguments enters has error.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.doneTask(taskNumber);
         storage.save(tasks);
-        ui.showDone(tasks.getTask(taskNumber));
+        return ui.showDone(tasks.getTask(taskNumber));
     }
 
     /**

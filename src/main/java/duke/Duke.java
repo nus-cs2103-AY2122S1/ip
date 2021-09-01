@@ -29,25 +29,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Execute a Duke object to run.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-    }
-
 
     /**
      * You should have your own function to generate a response to user input.
@@ -56,15 +37,12 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            c.execute(tasks, ui, storage);
-            String response = "something";
+            String response = c.execute(tasks, ui, storage);;
             return response;
         } catch (DukeException e) {
             return e.getMessage();
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("data.txt").run();
-    }
+
 }

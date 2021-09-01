@@ -64,10 +64,10 @@ public class AddCommand extends Command {
      * @throws DukeException If arguments enters has error.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(task);
         storage.save(tasks);
-        ui.showAddTask(task, tasks);
+        return ui.showAddTask(task, tasks);
     }
 
     /**

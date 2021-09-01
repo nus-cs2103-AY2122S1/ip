@@ -1,7 +1,6 @@
 package duke.ui;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.task.Task;
@@ -10,42 +9,13 @@ import duke.task.TaskList;
 
 public class Ui {
 
-    /**
-     * Returns inputs entered by user.
-     *
-     * @return User's input.
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        String userInput = sc.nextLine();
-        return userInput;
-    }
-
-    private void sendMessage(String message) {
-        String start = "_____________________________________\n";
-        String end = "\n_____________________________________";
-        String output = start + message + end;
-        System.out.println(output);
-    }
-
-    /**
-     * Shows welcome message when user start the program.
-     */
-    public void showWelcome() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
 
     /**
      * Shows exit message when user exit the programs
      */
-    public void showExit() {
+    public String showExit() {
         String bye = "Bye. Hope to see you again soon!";
-        this.sendMessage(bye);
+        return bye;
     }
 
     /**
@@ -54,10 +24,10 @@ public class Ui {
      * @param task Task that is added.
      * @param taskList The list of tasks.
      */
-    public void showAddTask(Task task, TaskList taskList) {
+    public String showAddTask(Task task, TaskList taskList) {
         String addTask = String.format("Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.",
                 task.toString(), taskList.totalTask());
-        this.sendMessage(addTask);
+        return addTask;
     }
 
     /**
@@ -66,10 +36,10 @@ public class Ui {
      * @param task Task that is deleted.
      * @param taskList The list of tasks.
      */
-    public void showDeleteTask(Task task, TaskList taskList) {
+    public String showDeleteTask(Task task, TaskList taskList) {
         String deleteTask = String.format("Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.",
                 task.toString(), taskList.totalTask());
-        this.sendMessage(deleteTask);
+        return deleteTask;
     }
 
     /**
@@ -77,9 +47,9 @@ public class Ui {
      *
      * @param task Task that is marked as done.
      */
-    public void showDone(Task task) {
+    public String showDone(Task task) {
         String done = String.format("Nice! I've marked this task as done:\n%s", task.toString());
-        this.sendMessage(done);
+        return done;
     }
 
     /**
@@ -88,7 +58,7 @@ public class Ui {
      * @param taskList The list of tasks that are stored.
      * @throws DukeException If task list has error.
      */
-    public void showList(TaskList taskList) throws DukeException {
+    public String showList(TaskList taskList) throws DukeException {
         int numTask = taskList.totalTask();
         String task;
 
@@ -103,15 +73,15 @@ public class Ui {
 
         String listStatement = "Here are the tasks in your list:\n";
         String output = listStatement + task;
-        this.sendMessage(output);
+        return output;
     }
 
     /**
      * Tells user that Duke can't understand the input.
      */
-    public void showLost() {
+    public String showLost() {
         String lost = "OOPS!!! I'm sorry, but I don't know what that means :-(";
-        this.sendMessage(lost);
+        return lost;
     }
 
     /**
@@ -119,15 +89,15 @@ public class Ui {
      *
      * @param errorMessage Error message to be shown to the user.
      */
-    public void showError(String errorMessage) {
-        this.sendMessage(errorMessage);
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
      * Tells user that there is an error loading the file.
      */
-    public void showLoadingError() {
-        this.sendMessage("OOPS!!! There is a loading error.");
+    public String showLoadingError() {
+        return "OOPS!!! There is a loading error.";
     }
 
     /**
@@ -135,10 +105,10 @@ public class Ui {
      *
      * @param tasks List of tasks that match the key word.
      */
-    public void showFindTask(ArrayList<Task> tasks) {
+    public String showFindTask(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {
             String noMatch = "Sorry, no match found";
-            this.sendMessage(noMatch);
+            return noMatch;
         } else {
             int numTask = tasks.size();
 
@@ -149,7 +119,7 @@ public class Ui {
 
             task = "Here are the matching tasks in your list:\n" + task;
 
-            this.sendMessage(task);
+            return task;
         }
     }
 
