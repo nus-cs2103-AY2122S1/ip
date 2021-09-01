@@ -15,9 +15,9 @@ public class Ui {
     //todo show loading error need?
 
     /**
-     * Prints the welcome message of the programme.
+     * Returns the welcome message of the programme.
      */
-    public void showWelcome() {
+    public static String showWelcome() {
         //        String logo = " ____        _        \n"
 //                + "|  _ \\ _   _| | _____ \n"
 //                + "| | | | | | | |/ / _ \\\n"
@@ -27,51 +27,43 @@ public class Ui {
 
         String message = "Hello! I'm Duke\n"
                 + "What can I do for you?";
-        System.out.println(message);
+        return message;
     }
 
     /**
-     * Prints the exit message of the programme.
+     * Returns the exit message of the programme.
      */
-    public void showExit() {
+    public static String showExit() {
         String message = "Bye. Hope to see you again soon!";
-        System.out.println(message);
+        return message;
     }
 
     /**
-     * Prints a divider line.
-     */
-    public void showLine() {
-        String divider = "------------------------------------------------------";
-        System.out.println(divider);
-    }
-
-    /**
-     * Prints the error occurred in the programme.
+     * Returns the error occurred in Duke.
      *
-     * @param error
+     * @param error the error occurred in Duke
      */
-    public void showError(String error) {
-        System.out.println(error);
+    public String showError(String error) {
+        return error;
     }
 
     /**
-     * Prints a message when a Task is removed.
+     * Returns a message when a Task is removed.
      *
-     * @param removedTask
-     * @param tasks
+     * @param removedTask the task removed
+     * @param tasks the TaskList
      */
-    public void showDeleteTask(Task removedTask, TaskList tasks) {
+    public String showDeleteTask(Task removedTask, TaskList tasks) {
         String displayedMessage = "Noted. I've removed this task:\n"
                 + "  " + removedTask.toString() + "\n"
                 + getTotalTaskString(tasks);
-        System.out.println(displayedMessage);
+        return displayedMessage;
     }
 
     /**
-     * Reads the command from the user.
+     * Returns the command from the user.
      *
-     * @param sc
+     * @param sc the scanner to receive user inputs
      * @return a string representing the command provided
      */
     public String readCommand(Scanner sc) {
