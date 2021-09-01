@@ -1,4 +1,5 @@
-import bot.Bot;
+import gui.Test;
+import javafx.application.Application;
 
 public class Duke {
     /**
@@ -7,8 +8,11 @@ public class Duke {
      * @param args program arguments
      */
     public static void main(String[] args) {
-        // Initialize and start bot
-        Bot bot = new Bot();
-        bot.start();
+        // Gui
+        Application.launch(Test.class, args);
+
+        // Cli
+        // Bot bot = new Bot();
+        // bot.start();
     }
 }

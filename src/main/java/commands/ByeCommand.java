@@ -1,6 +1,7 @@
 package commands;
 
 import bot.Bot;
+import bot.Ui;
 
 /**
  * Command to exit the bot
@@ -8,8 +9,9 @@ import bot.Bot;
 public class ByeCommand extends Command {
 
     @Override
-    public void run(Bot bot, String[] args) {
+    public String[] run(Bot bot, String[] args) {
         bot.stop();
+        return Ui.END_MESSAGES;
     }
 
 }

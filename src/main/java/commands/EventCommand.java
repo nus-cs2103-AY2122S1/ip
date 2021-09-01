@@ -14,7 +14,7 @@ import tasks.Task;
 public class EventCommand extends Command {
 
     @Override
-    public void run(Bot bot, String[] args) {
+    public String[] run(Bot bot, String[] args) {
         if (args[0].equals("")) {
             throw new InvalidArgumentsException(Ui.ERROR_SIGNATURE + "The description of an event cannot be empty.");
         }
@@ -25,7 +25,7 @@ public class EventCommand extends Command {
 
         LocalDateTime taskTime = LocalDateTime.parse(splitArgs[1].trim(), Task.INPUT_TIME_FORMAT);
         Task eventTask = new EventTask(splitArgs[0], taskTime);
-        bot.getTaskList().addTask(eventTask);
+        return bot.getTaskList().addTask(eventTask);
     }
 
 }

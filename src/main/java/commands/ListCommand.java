@@ -14,9 +14,9 @@ import tasks.Task;
 public class ListCommand extends Command {
 
     @Override
-    public void run(Bot bot, String[] args) {
+    public String[] run(Bot bot, String[] args) {
         List<Task> taskList = bot.getTaskList().get();
-        Ui.print(commandsToStrings(taskList));
+        return commandsToStrings(taskList);
     }
 
     /**

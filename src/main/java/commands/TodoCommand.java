@@ -12,12 +12,12 @@ import tasks.TodoTask;
 public class TodoCommand extends Command {
 
     @Override
-    public void run(Bot bot, String[] args) {
+    public String[] run(Bot bot, String[] args) {
         if (args[0].equals("")) {
             throw new InvalidArgumentsException(Ui.ERROR_SIGNATURE + "The description of a todo cannot be empty.");
         }
         Task todoTask = new TodoTask(args[0]);
-        bot.getTaskList().addTask(todoTask);
+        return bot.getTaskList().addTask(todoTask);
     }
 
 }

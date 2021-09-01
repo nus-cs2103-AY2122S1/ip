@@ -1,7 +1,6 @@
 package commands;
 
 import bot.Bot;
-import bot.Ui;
 import tasks.GeneralTask;
 import tasks.Task;
 
@@ -11,14 +10,9 @@ import tasks.Task;
 public class AddTaskCommand extends Command {
 
     @Override
-    public void run(Bot bot, String[] args) {
+    public String[] run(Bot bot, String[] args) {
         Task generalTask = new GeneralTask(args[0]);
-        Boolean success = bot.getTaskList().addTask(generalTask);
-        Ui.print(new String[]{
-            success
-                ? String.format("added: %s", args[0])
-                : "Task list capacity reached"
-        });
+        return bot.getTaskList().addTask(generalTask);
     }
 
 }

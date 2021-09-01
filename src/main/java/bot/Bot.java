@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import commands.Command;
+import exceptions.InvalidArgumentsException;
 import exceptions.InvalidTaskException;
 
 /**
@@ -13,9 +14,13 @@ public class Bot {
     private TaskList taskList;
     private Boolean isRunning;
 
-
+    /**
+     * Constructor for Bot
+     */
     public Bot() {
         this.taskList = new TaskList(new ArrayList<>());
+        Storage.load(this);
+        this.isRunning = true;
     }
 
     /**
@@ -23,21 +28,22 @@ public class Bot {
      */
     public void start() {
         Ui.printWelcome();
-        Storage.load(this);
-        this.isRunning = true;
         while (this.isRunning) {
-            Command cmd = Parser.getCommand();
-            try {
-                cmd.run(this, cmd.getArgs());
-                Storage.save(this);
-            } catch (InvalidTaskException | DateTimeParseException e) {
-                Ui.print(new String[]{
-                        e.getMessage()
-                });
-            }
+            String cmdString = Parser.getInput();
+            Ui.print(getOutput(cmdString));
         }
-        Ui.printGoodbye();
         Parser.closeScanner();
+    }
+
+    public String[] getOutput(String input) {
+        try {
+            Command cmd = Parser.commandFromString(input);
+            String[] resp = cmd.run(this, cmd.getArgs());
+            Storage.save(this);
+            return resp;
+        } catch (InvalidTaskException | InvalidArgumentsException | DateTimeParseException e) {
+            return new String[]{ e.getMessage() };
+        }
     }
 
     /**
