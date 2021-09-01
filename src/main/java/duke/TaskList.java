@@ -57,9 +57,24 @@ public class TaskList {
         return "Noted. Removed this task:\n" + t.toString();
     }
 
+
     public void save() {
         if (this.dataFile != null) {
             this.dataFile.saveToDisk(this.list());
         }
     }
+
+    public String findTask(String searchString) {
+        String result = "";
+        for (Task t : this.arrayList) {
+            if (t.getDescription().contains(searchString)) {
+                result += t.toString() + "\n";
+            }
+        }
+        return result;
+    }
+
 }
+// >>>>>>> branch-Level-9
+
+

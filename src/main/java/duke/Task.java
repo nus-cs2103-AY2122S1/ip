@@ -14,6 +14,10 @@ abstract public class Task {
         this.type = ' ';
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String toString() {
         return "[" + this.type + "]" + (this.isDone ? "[x] " : "[ ] ") + this.description;

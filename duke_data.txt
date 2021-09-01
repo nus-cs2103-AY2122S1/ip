@@ -3,3 +3,5 @@
 3. [E][x] ghi (at: 456)
 4. [D][x] d (by: tmr)
 5. [D][ ] y (by: today)
+6. [E][ ] defend (at: today)
+7. [T][ ] defg

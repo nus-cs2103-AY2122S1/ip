@@ -66,6 +66,9 @@ public class Duke {
                 String substr = str.replaceFirst("delete ", "");
                 int index = Integer.parseInt(substr);
                 System.out.println(taskList.delete(index));
+            } else if (str.startsWith("find")) {
+                String substr = str.replaceFirst("find ", "");
+                System.out.println(taskList.findTask(substr));
             } else {
                 System.out.println("??? Unknown command!");
             }
@@ -88,10 +91,13 @@ public class Duke {
             String substr = str.replaceFirst("done ", "");
             int index = Integer.parseInt(substr);
             System.out.println(taskList.markDone(index));
-        } else if (str.startsWith("delete")){
+        } else if (str.startsWith("delete")) {
             String substr = str.replaceFirst("delete ", "");
             int index = Integer.parseInt(substr);
             System.out.println(taskList.delete(index));
+        } else if (str.startsWith("find")) {
+            String substr = str.replaceFirst("find", "").stripLeading();
+            System.out.println(taskList.findTask(substr));
         } else if (str.startsWith("todo")) {
             String substr = str.replaceFirst("todo", "").stripLeading();
             System.out.println(taskList.addToDo(substr));
