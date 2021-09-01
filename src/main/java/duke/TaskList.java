@@ -213,12 +213,11 @@ public class TaskList {
         private DateTimeFormatter outputFormat = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma");
 
         private String isDone() {
-            return (this.isDone ? "X" : " ");
+            return (this.isDone ? "X" : "  ");
         }
 
         private boolean markAsDone() {
             if (isDone) {
-                System.out.println("This task has already been done.");
                 return false;
             } else {
                 isDone = true;
