@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class TaskList {
-    public List<Task> tasks;
+    private List<Task> tasks;
 
     public TaskList() {
         this.tasks = new LinkedList<>();
@@ -12,19 +12,19 @@ public class TaskList {
 
     protected Chatbot.ChatContinue addTask(Chatbot.TaskCommands command, String input, Ui ui, FileDB fileDB) throws DukeIOException, DukeDateParseException {
         switch (command) {
-            case DONE:
-                return this.markDone(input, ui);
-            case DELETE:
-                return this.delete(input, ui);
-            case TODO:
-                return this.addTodo(input, fileDB, ui);
-            case DEADLINE:
-                return this.addDeadline(input, fileDB, ui);
-            case EVENT:
-                return this.addEvent(input, fileDB, ui);
-            default:
-                ui.showNotSupported();
-                return Chatbot.ChatContinue.CONTINUE;
+        case TASK_COMMAND_DONE:
+            return this.markDone(input, ui);
+        case TASK_COMMAND_DELETE:
+            return this.delete(input, ui);
+        case TASK_COMMAND_TODO:
+            return this.addTodo(input, fileDB, ui);
+        case TASK_COMMAND_DEADLINE:
+            return this.addDeadline(input, fileDB, ui);
+        case TASK_COMMAND_EVENT:
+            return this.addEvent(input, fileDB, ui);
+        default:
+            ui.showNotSupported();
+            return Chatbot.ChatContinue.CHAT_CONTINUE;
         }
     }
 
@@ -33,7 +33,7 @@ public class TaskList {
         tasks.add(todo);
         fileDB.save(todo);
         ui.showAddTaskSuccessful(todo);
-        return Chatbot.ChatContinue.CONTINUE;
+        return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 
     private Chatbot.ChatContinue addDeadline(String input, FileDB fileDB, Ui ui) throws DukeIOException, DukeDateParseException {
@@ -41,7 +41,7 @@ public class TaskList {
         tasks.add(deadline);
         fileDB.save(deadline);
         ui.showAddTaskSuccessful(deadline);
-        return Chatbot.ChatContinue.CONTINUE;
+        return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 
     private Chatbot.ChatContinue addEvent(String input, FileDB fileDB, Ui ui) throws DukeIOException, DukeDateParseException {
@@ -49,7 +49,7 @@ public class TaskList {
         tasks.add(event);
         fileDB.save(event);
         ui.showAddTaskSuccessful(event);
-        return Chatbot.ChatContinue.CONTINUE;
+        return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 
 
@@ -64,7 +64,7 @@ public class TaskList {
         } catch (NumberFormatException e) {
             throw new DukeArgumentException("The index is invalid");
         }
-        return Chatbot.ChatContinue.CONTINUE;
+        return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 
     private Chatbot.ChatContinue delete(String args, Ui ui) {
@@ -80,7 +80,7 @@ public class TaskList {
         } catch (NumberFormatException e) {
             throw new DukeTaskException("duke.Task does not exist!");
         }
-        return Chatbot.ChatContinue.CONTINUE;
+        return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 
     protected Chatbot.ChatContinue list(Ui ui) {
@@ -89,6 +89,6 @@ public class TaskList {
         } else {
             ui.showAllTasks(this.tasks);
         }
-        return Chatbot.ChatContinue.CONTINUE;
+        return Chatbot.ChatContinue.CHAT_CONTINUE;
     }
 }
