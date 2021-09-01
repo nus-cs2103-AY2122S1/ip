@@ -4,7 +4,7 @@ import tasklist.TaskList;
 import ui.Ui;
 
 /**
- * The Duke program implements an application that helps to track tasks that the user requires to be tracked.
+ * The Duke app implements tracks tasks that the user requires to be tracked.
  *
  * @author  Hoon Darren
  * @version 1.0
@@ -12,6 +12,7 @@ import ui.Ui;
  */
 public class Duke {
     TaskList engineGui = new TaskList();
+
     /**
      * Initialises app.
      * @param args empty args.

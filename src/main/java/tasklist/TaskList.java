@@ -22,11 +22,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
- * The TaskList class provides dependency injection for the classes that require access to the functionality of
- * editing the tasks list.
- * @author  Hoon Darren
- * @version 1.0
- * @since   2021-08-21
+ * The TaskList class provides the functionality of editing the tasks list.
  */
 public class TaskList {
     private final Ui messages = new Ui();
@@ -35,7 +31,7 @@ public class TaskList {
     private List<Task> taskList = new ArrayList<Task>();
 
     /**
-     * Main engine to run the program.
+     * Runs the program.
      */
     public void runProgram() {
 
@@ -98,7 +94,7 @@ public class TaskList {
     }
 
     /**
-     * Main engine to run the GUI program.
+     * Runs the GUI program.
      */
     public String readGuiInput(String input) {
 
@@ -161,7 +157,6 @@ public class TaskList {
         this.taskList = databaseEngine.readFromDatabase();
     }
 
-
     /**
      * Adds a TooDo Task into the List containing Tasks.
      * @param inputArr String array containing input by the user.
@@ -186,6 +181,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a TooDo Task into the List containing Tasks.
+     * @param inputArr String array containing input by the user.
+     * @return reply to be displayed on GUI.
+     * @throws InvalidCommandException if inputArr length < 2.
+     */
     public String addTaskGui(String[] inputArr) throws InvalidCommandException {
         try {
             if (inputArr[0].equals("todo")) {
@@ -224,6 +225,12 @@ public class TaskList {
         messages.taskAddMessage(todoTask.toString(), this.taskList.size());
     }
 
+    /**
+     * Adds a Todo Task into the List containing Tasks.
+     * @param inputArr String array containing input by the user.
+     * @return reply to be displayed on GUI.
+     * @throws DescriptionException if inputArr length < 2.
+     */
     public String addTodoGui(String[] inputArr) throws DescriptionException {
         if (inputArr.length < 2) {
             throw new DescriptionException("todo");
@@ -272,18 +279,21 @@ public class TaskList {
             if (commandIndex + 1 <= inputArr.length - 1) {
                 String[] byArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
 
+                /*
                 if (byArray.length >= 3) {
-                    throw new DukeException("Command after /by should at most only have 2 parts for date and time!");
+                    throw new DukeException("Command after /by should at most only have 2 parts
+                    for date and time!");
                 }
+                */
 
                 if (byArray.length == 1) {
                     LocalDate by = LocalDate.parse(byArray[0]);
                     Deadline deadlineTask = new Deadline(description, by);
                     this.taskList.add(deadlineTask);
                     messages.taskAddMessage(deadlineTask.toString(), this.taskList.size());
+                } else {
+                    throw new DukeException("Command after /by should only have date yyyy-mm-dd!");
                 }
-
-
             } else {
                 throw new DukeException("Command after /by cannot be empty!");
             }
@@ -294,6 +304,13 @@ public class TaskList {
         }
     }
 
+    /**
+     * Adds a Deadline Task into the List containing Tasks.
+     * @param inputArr String array containing input by the user.
+     * @return reply to be displayed on GUI.
+     * @throws DescriptionException if inputArr length < 2.
+     * @throws CommandException if "/by" is absent from input.
+     */
     public String addDeadlineGui(String[] inputArr) throws DescriptionException, CommandException {
         if (inputArr.length < 2) {
             throw new DescriptionException("deadline");
@@ -325,7 +342,9 @@ public class TaskList {
                     LocalDate by = LocalDate.parse(byArray[0]);
                     Deadline deadlineTask = new Deadline(description, by);
                     this.taskList.add(deadlineTask);
-                    return messages.taskAddMessageGui(deadlineTask.toString(), this.taskList.size());
+                    return messages.taskAddMessageGui(deadlineTask.toString(),
+                            this.taskList.size());
+
                 } else {
                     throw new DukeException("Command after /by should at most only have date!");
                 }
@@ -383,6 +402,13 @@ public class TaskList {
         messages.taskAddMessage(eventTask.toString(), this.taskList.size());
     }
 
+    /**
+     * Adds an Event Task into the List containing Tasks.
+     * @param inputArr String array containing input by the user.
+     * @return reply to be displayed on GUI.
+     * @throws DescriptionException if inputArr length < 2.
+     * @throws CommandException if "/at" is absent from input.
+     */
     public String addEventGui(String[] inputArr) throws DescriptionException, CommandException {
         if (inputArr.length < 2) {
             throw new DescriptionException("event");
@@ -439,6 +465,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Marks a task in the taskList as done.
+     * @param taskNumber task number to be marked as done.
+     * @return reply to be displayed on GUI.
+     * @throws TaskNumberException if the number is < 0 or > taskList size.
+     */
     public String markAsDoneGui(Integer taskNumber) throws TaskNumberException {
         if (taskNumber > this.taskList.size() || taskNumber < 0) {
             throw new TaskNumberException();
@@ -470,6 +502,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Deletes a task from the taskList.
+     * @param taskNumber task number to be deleted.
+     * @return reply to be displayed on GUI.
+     * @throws TaskNumberException if the number is < 0 or > taskList size.
+     */
     public String deleteTaskGui(Integer taskNumber) throws TaskNumberException {
         if (taskNumber > this.taskList.size() || taskNumber < 0) {
             throw new TaskNumberException();
@@ -511,6 +549,11 @@ public class TaskList {
         messages.displayFilteredTasks(filteredList);
     }
 
+    /**
+     * Displays the tasks that have the keywords inputted.
+     * @param inputArr the array containing the keywords.
+     * @return reply to be displayed on GUI.
+     */
     public String findTasksGui(String[] inputArr) {
         List<Task> filteredList = this.taskList
                 .stream()

@@ -1,6 +1,7 @@
 package task;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The Deadline class is a child class of Task.
@@ -37,6 +38,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+        String deadline = by.format(formatter);
+        return "[D]" + super.toString() + " (by: " + deadline + ")";
     }
 }

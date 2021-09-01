@@ -1,17 +1,14 @@
 package exception;
 
 /**
- * The DukeException Exception is the superclass of all exceptions to be thrown that are specific to the features
- * of the Duke Application.
- * @author  Hoon Darren
- * @version 1.0
- * @since   2021-08-21
+ * The DukeException is the superclass of all exceptions to be thrown from the app.
  */
 public class DukeException extends Exception {
 
     private String error;
+
     /**
-     * Superclass of all exceptions that could be thrown by the Duke app.
+     * Constructs a new DukeException.
      * @param message error message to be shown.
      */
     public DukeException(String message) {

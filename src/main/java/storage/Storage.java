@@ -22,11 +22,8 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
- * The Storage class provides dependency injection for classes that require access to the device's local storage.
+ * Storage provides dependency injection to access and edit the device's local storage.
  * Data is stored locally in the form of a text (.txt) file.
- * @author  Hoon Darren
- * @version 1.0
- * @since   2021-08-21
  */
 public class Storage {
 
@@ -57,32 +54,17 @@ public class Storage {
                 String line = "";
                 if (task instanceof Deadline) {
                     Deadline deadlineTask = (Deadline) task;
-                    /*
-                    String encodedString = Base64.getEncoder().encodeToString(deadlineTask.getDescription().getBytes());
-                    line += "deadline " + deadlineTask.getIsDone() + " " + deadlineTask.getBy() + " " + encodedString;
-                     */
                     line += Parser.encodeDeadline(deadlineTask);
 
                 } else if (task instanceof Event) {
                     Event eventTask = (Event) task;
-                    /*
-                    String encodedDescription = Base64.getEncoder().encodeToString(eventTask.getDescription().getBytes());
-                    String encodedAt = Base64.getEncoder().encodeToString(eventTask.getAt().getBytes());
-                    line += "event " + eventTask.getIsDone() + " " + encodedAt + " " + encodedDescription;
-                    */
-
                     line += Parser.encodeEvent(eventTask);
 
                 } else {
                     //task instance of Todo
                     Todo todoTask = (Todo) task;
-                    /*
-                    String encodedString = Base64.getEncoder().encodeToString(task.getDescription().getBytes());
-                    line += "todo " + task.getIsDone() + " " + encodedString;
-                     */
                     line += Parser.encodeTodo(todoTask);
                 }
-
                 line += "\n";
                 return line;
             }).collect(Collectors.toList());
@@ -124,9 +106,7 @@ public class Storage {
                         deadlineTask.markDone();
                     }
                     taskList.add(deadlineTask);
-                }
-
-                else if (dataArr[0].equals("event")) {
+                } else if (dataArr[0].equals("event")) {
                     Boolean isDone = Boolean.valueOf(dataArr[1]);
                     String at = new String(Base64.getDecoder().decode(dataArr[2]));
                     String description = new String(Base64.getDecoder().decode(dataArr[3]));
@@ -136,10 +116,7 @@ public class Storage {
                         eventTask.markDone();
                     }
                     taskList.add(eventTask);
-
-                }
-
-                else {
+                } else {
                     Boolean isDone = Boolean.valueOf(dataArr[1]);
                     String description = new String(Base64.getDecoder().decode(dataArr[2]));
 
@@ -189,11 +166,10 @@ public class Storage {
      * Creates a directory if not present in local storage.
      */
     public void createDirectory() {
-
         try {
-            if(!Files.exists(this.dir)) {
-                messages.displayText("You currently do not have a directory to save the database. " +
-                        "Creating one now at: " + this.dir);
+            if (!Files.exists(this.dir)) {
+                messages.displayText("You currently do not have a directory to save the database. "
+                        + "Creating one now at: " + this.dir);
                 Files.createDirectory(this.dir);
             }
         } catch (IOException e) {

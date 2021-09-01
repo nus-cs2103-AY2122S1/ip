@@ -2,10 +2,7 @@ package task;
 
 /**
  * Task is the superclass of classes to be stored in the database.
- * All subclasses require a description field and have an isDone field that indicates completion status.
- * @author  Hoon Darren
- * @version 1.0
- * @since   2021-08-21
+ * Subclasses require a description field and have an isDone field that indicates completion status.
  */
 public class Task {
 
@@ -20,16 +17,17 @@ public class Task {
         this.description = description;
         this.isDone = false;
     }
+
     /**
-     * Gets the status of the current task object
-     * @return the string status where X means done and blank is not done
+     * Gets the status of the current task object.
+     * @return the string status where X means done and blank is not done.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done task with X
     }
 
     /**
-     * Marks this task as done by changing the isDone boolean to true
+     * Marks this task as done by changing the isDone boolean to true.
      */
     public void markDone() {
         this.isDone = true;
