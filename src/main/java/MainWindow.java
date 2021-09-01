@@ -1,11 +1,13 @@
 import duke.Duke;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
+
 
 // This class is taken from JavaFX tutorial 4 by Jeffry Lum https://se-education.org/guides/tutorials/javaFxPart4.html
 
@@ -26,7 +28,6 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Tom.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Jerry.png"));
-
 
     /**
      * Initialize the MainWindow.

@@ -3,32 +3,32 @@ package duke;
 import java.time.LocalDate;
 
 /**
- * Represents a specific type of Task with an additional deadline(ddl) field.
+ * Represents a specific type of Task with an additional deadline field.
  */
 public class Deadline extends Task {
-    private LocalDate ddl;
+    private LocalDate deadline;
 
     /**
      * The constructor for a Deadline Object.
      */
-    public Deadline(String taskTitle, LocalDate ddl) {
+    public Deadline(String taskTitle, LocalDate deadline) {
         super(taskTitle);
-        this.ddl = ddl;
+        this.deadline = deadline;
     }
 
     public LocalDate getDdl() {
-        return ddl;
+        return deadline;
     }
 
     /**
      * Customizes the string representation of a deadline object.
      *
-     * @return string representation of a deadline in the form [D][{X}] {description} (by: {ddl})
+     * @return string representation of a deadline in the form [D][{X}] {description} (by: {deadline})
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + ddl.getMonth().toString() + " "
-                + ddl.getDayOfMonth() + " " + ddl.getYear() + ")";
+        return "[D]" + super.toString() + "(by: " + deadline.getMonth().toString() + " "
+                + deadline.getDayOfMonth() + " " + deadline.getYear() + ")";
     }
 
 
@@ -39,7 +39,7 @@ public class Deadline extends Task {
     public boolean equals(Object another) {
         if (another instanceof Deadline) {
             Deadline anotherTask = (Deadline) another;
-            return super.equals(another) && ddl.equals(anotherTask.getDdl());
+            return super.equals(another) && deadline.equals(anotherTask.getDdl());
         }
         return false;
     }

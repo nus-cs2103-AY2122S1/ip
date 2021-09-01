@@ -37,29 +37,7 @@ public class Storage {
             Scanner scanner = new Scanner(Paths.get("data", "record"));
             while (scanner.hasNextLine()) {
                 String itemInfo = scanner.nextLine();
-                if (itemInfo.startsWith("[T]")) {
-                    Task task = new ToDo(itemInfo.substring(7));
-                    if (itemInfo.contains("[X]")) {
-                        task.setDone(true);
-                    }
-                    userInputRecords.add(task);
-                } else if (itemInfo.startsWith("[D]")) {
-                    Task task = new Deadline(itemInfo.substring(7, itemInfo.indexOf("(by")),
-                            convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(by") + 5,
-                                    itemInfo.length() - 1)));
-                    if (itemInfo.contains("[X]")) {
-                        task.setDone(true);
-                    }
-                    userInputRecords.add(task);
-                } else if (itemInfo.startsWith("[E]")) {
-                    Task task = new Event(itemInfo.substring(7, itemInfo.indexOf("(at")),
-                            convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(at") + 5,
-                                    itemInfo.length() - 1)));
-                    if (itemInfo.contains("[X]")) {
-                        task.setDone(true);
-                    }
-                    userInputRecords.add(task);
-                }
+                addTask(itemInfo);
             }
             scanner.close();
         } catch (IOException e) {
@@ -110,34 +88,13 @@ public class Storage {
      * @return the response on whether a file is successfully loaded.
      */
     public String load(String filePath) {
+        int indexAfterSquareBoxes = 7;
         try {
             filePath = filePath.replace("load ", "");
             Scanner scanner = new Scanner(Paths.get(filePath));
             while (scanner.hasNextLine()) {
                 String itemInfo = scanner.nextLine();
-                if (itemInfo.startsWith("[T]")) {
-                    Task task = new ToDo(itemInfo.substring(7));
-                    if (itemInfo.contains("[X]")) {
-                        task.setDone(true);
-                    }
-                    userInputRecords.add(task);
-                } else if (itemInfo.startsWith("[D]")) {
-                    Task task = new Deadline(itemInfo.substring(7, itemInfo.indexOf("(by")),
-                            convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(by") + 5,
-                                    itemInfo.length() - 1)));
-                    if (itemInfo.contains("[X]")) {
-                        task.setDone(true);
-                    }
-                    userInputRecords.add(task);
-                } else if (itemInfo.startsWith("[E]")) {
-                    Task task = new Event(itemInfo.substring(7, itemInfo.indexOf("(at")),
-                            convertToLocalTime(itemInfo.substring(itemInfo.indexOf("(at") + 5,
-                                    itemInfo.length() - 1)));
-                    if (itemInfo.contains("[X]")) {
-                        task.setDone(true);
-                    }
-                    userInputRecords.add(task);
-                }
+                addTask(itemInfo);
             }
             scanner.close();
             return "Load successfully.\n";
@@ -186,5 +143,33 @@ public class Storage {
         copy = copy.replace(day + " ", "");
         int yearValue = Integer.parseInt(copy);
         return LocalDate.of(yearValue, monthValue, dayValue);
+    }
+
+    private void addTask(String taskRecord) {
+        int indexForDescriptionStart = 7;
+        int indexForTimeStart = 5;
+        Task task;
+        if (taskRecord.startsWith("[T]")) {
+            task = new ToDo(taskRecord.substring(indexForDescriptionStart));
+        } else if (taskRecord.startsWith("[D]")) {
+            task = new Deadline(taskRecord.substring(indexForDescriptionStart, taskRecord.indexOf("(by")),
+                    convertToLocalTime(taskRecord.substring(taskRecord.indexOf("(by") + indexForTimeStart,
+                            taskRecord.length() - 1)));
+        } else if (taskRecord.startsWith("[E]")) {
+            task = new Event(taskRecord.substring(indexForDescriptionStart, taskRecord.indexOf("(at")),
+                    convertToLocalTime(taskRecord.substring(taskRecord.indexOf("(at") + indexForTimeStart,
+                            taskRecord.length() - 1)));
+        } else {
+            //Should not reach here unless the file is corrupted; skip the line that is not properly formatted.
+            return;
+        }
+        setDone(taskRecord,task);
+        userInputRecords.add(task);
+    }
+
+    private void setDone(String taskRecord, Task task) {
+        if (taskRecord.contains("[X]")) {
+            task.setDone(true);
+        }
     }
 }

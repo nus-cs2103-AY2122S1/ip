@@ -60,31 +60,13 @@ public class Parser {
      */
     public String parse(String userInput) {
         if (userInput.equals("list")) {
-            ArrayList<Task> userInputRecords = tasks.getStorage().getUserInputRecords();
-            if (userInputRecords.isEmpty()) {
-                return "Ah oh, seems like nothing is added yet :( \n" + "Try to input something first! \n";
-            } else {
-                StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append("Here are the tasks in your list:\n");
-                for (int i = 0; i < userInputRecords.size(); i++) {
-                    stringBuilder.append("  " + (i + 1) + "." + userInputRecords.get(i) + "\n");
-                }
-                return stringBuilder.toString();
-            }
+            return printList();
         } else if (userInput.startsWith("done")) {
-            if (checkDoneCommand(userInput)) {
-                return tasks.markAsDone(userInput, tasks.getStorage().getUserInputRecords());
-            } else {
-                return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
-            }
+            return printDoneMessage(userInput);
         } else if (userInput.equals("deleteAll")) {
             return tasks.deleteAll(tasks.getStorage().getUserInputRecords());
         } else if (userInput.startsWith("delete")) {
-            if (checkDeleteCommand(userInput)) {
-                return tasks.delete(userInput, tasks.getStorage().getUserInputRecords());
-            } else {
-                return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
-            }
+            return printDeleteMessage(userInput);
         } else if (userInput.startsWith("save ")) {
             return tasks.getStorage().save(userInput);
         } else if (userInput.startsWith("load ")) {
@@ -92,20 +74,54 @@ public class Parser {
         } else if (userInput.startsWith("find")) {
             return tasks.search(userInput, tasks.getStorage().getUserInputRecords());
         } else if (userInput.equals("help")) {
-            StringBuilder builder = new StringBuilder();
-            builder.append("todo <description>\n");
-            builder.append("deadline <description> /by <time in format yyyy-mm-dd>\n");
-            builder.append("event <description> /at <time in format yyyy-mm-dd>\n");
-            builder.append("save <directory>\n");
-            builder.append("load <directory>\n");
-            builder.append("done <number>\n");
-            builder.append("delete <number>\n");
-            builder.append("deleteAll\n");
-            builder.append("find <keyword>\n");
-            return builder.toString();
+            return printHelpMessage();
         } else if (userInput.startsWith("todo ") || userInput.startsWith("deadline ")
                 || userInput.startsWith("event ")) {
             return tasks.add(userInput, tasks.getStorage().getUserInputRecords());
+        } else {
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+        }
+    }
+
+    private String printHelpMessage() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("todo <description>\n");
+        builder.append("deadline <description> /by <time in format yyyy-mm-dd>\n");
+        builder.append("event <description> /at <time in format yyyy-mm-dd>\n");
+        builder.append("save <directory>\n");
+        builder.append("load <directory>\n");
+        builder.append("done <number>\n");
+        builder.append("delete <number>\n");
+        builder.append("deleteAll\n");
+        builder.append("find <keyword>\n");
+        return builder.toString();
+    }
+
+    private String printList() {
+        ArrayList<Task> userInputRecords = tasks.getStorage().getUserInputRecords();
+        if (userInputRecords.isEmpty()) {
+            return "Ah oh, seems like nothing is added yet :( \n" + "Try to input something first! \n";
+        } else {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("Here are the tasks in your list:\n");
+            for (int i = 0; i < userInputRecords.size(); i++) {
+                stringBuilder.append("  " + (i + 1) + "." + userInputRecords.get(i) + "\n");
+            }
+            return stringBuilder.toString();
+        }
+    }
+
+    private String printDeleteMessage(String userInput) {
+        if (checkDeleteCommand(userInput)) {
+            return tasks.delete(userInput, tasks.getStorage().getUserInputRecords());
+        } else {
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+        }
+    }
+
+    private String printDoneMessage(String userInput) {
+        if (checkDoneCommand(userInput)) {
+            return tasks.markAsDone(userInput, tasks.getStorage().getUserInputRecords());
         } else {
             return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
         }

@@ -1,16 +1,21 @@
+import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
 // This class is taken from JavaFX tutorial 4 by Jeffry Lum https://se-education.org/guides/tutorials/javaFxPart4.html
 
@@ -24,6 +29,7 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    private Circle circle;
 
     private DialogBox(String text, Image img) {
         try {
@@ -50,12 +56,17 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var box = new DialogBox(text, img);
+        Background background = new Background(new BackgroundFill(Paint.valueOf("#00bfff"),new CornerRadii(5.0), Insets.EMPTY));
+        box.setBackground(background);
+        return box;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+        var box = new DialogBox(text, img);
+        Background background = new Background(new BackgroundFill(Paint.valueOf("#7fffd4"),new CornerRadii(5.0), Insets.EMPTY));
+        box.setBackground(background);
+        box.flip();
+        return box;
     }
 }

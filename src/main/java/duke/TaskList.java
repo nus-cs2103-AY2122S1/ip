@@ -35,10 +35,11 @@ public class TaskList {
             task = new ToDo(description);
         } else if (userInput.startsWith("deadline")) {
             try {
+                int lengthOfDeadlineString = 9;
                 int byPosition = userInput.lastIndexOf("/by");
-                String description = userInput.substring(9, byPosition); //Length of "deadline" = 9
-                LocalDate ddl = LocalDate.parse(userInput.substring(byPosition + 4));
-                task = new Deadline(description, ddl);
+                String description = userInput.substring(lengthOfDeadlineString, byPosition);
+                LocalDate deadline = LocalDate.parse(userInput.substring(byPosition + 4));
+                task = new Deadline(description, deadline);
             } catch (StringIndexOutOfBoundsException e) {
                 return "OOPS!!! The description of a deadline cannot be empty.\n";
             } catch (DateTimeParseException e) {
@@ -46,8 +47,9 @@ public class TaskList {
             }
         } else if (userInput.startsWith("event")) {
             try {
+                int lengthOfEventString = 6;
                 int atPosition = userInput.lastIndexOf("/at");
-                String description = userInput.substring(6, atPosition); //Length of "event " = 6
+                String description = userInput.substring(lengthOfEventString, atPosition);
                 LocalDate time = LocalDate.parse(userInput.substring(atPosition + 4));
                 task = new Event(description, time);
             } catch (StringIndexOutOfBoundsException e) {
