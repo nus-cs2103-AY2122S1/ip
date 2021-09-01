@@ -50,7 +50,7 @@ public class TaskList {
         Todo task = new Todo(details);
 
         tasks.add(task);
-        return "Got it. I've added this task: /n" + task + "\n" +
+        return "Got it. I've added this task: \n" + task + "\n" +
                 "Now you have " + tasks.size() + " task(s) in the list.";
 
     }
