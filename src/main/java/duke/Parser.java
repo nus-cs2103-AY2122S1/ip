@@ -116,7 +116,7 @@ public class Parser {
                 tasks.remove(taskNum - 1);
                 output += "Noted. I have deleted the following:\n    " + task;
                 output += String.format(
-                    "%s\nYou now have %d tasks in the list", output, tasks.size());
+                    "\nYou now have %d tasks in the list", tasks.size());
                 break;
             case MARK_COMPLETE:
                 task.setComplete(true);
