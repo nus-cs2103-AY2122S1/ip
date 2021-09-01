@@ -12,17 +12,31 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
+
+/**
+ * Class to facilitate the storing of tasks
+ */
 public class Storage {
 
     private final String filePath;
     private final File f;
 
+    /**
+     * Constructor for the storage class
+     * @param filePath - refers to the path where the data has been stored
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.f = new File(filePath);
     }
 
 
+    /**
+     * To load the existing data of tasks from the hard disk
+     * @param taskList - the list of tasks
+     * @throws FileNotFoundException - the file does not exist
+     * @throws FileFormatException - incorrect format
+     */
     public void loadData(TaskManager taskList)
             throws FileNotFoundException, FileFormatException {
 
@@ -60,12 +74,20 @@ public class Storage {
         }
     }
 
+    /**
+     * Creates a new File
+     * @throws IOException - Standard Input Output Exception
+     */
     public void createFile() throws IOException {
         Path pathToFile = Paths.get(filePath);
         Files.createDirectories(pathToFile.getParent());
         f.createNewFile();
     }
 
+    /**
+     * Initialises the task list
+     * @return - Returns the taskList with a message
+     */
     public TaskManagerUi initialiseTaskList(){
         TaskManager taskList = new TaskManager();
         String message = "";
@@ -90,6 +112,11 @@ public class Storage {
         return new TaskManagerUi(taskList, message);
     }
 
+    /**
+     * Writing the data into the file
+     * @param taskList - the list of tasks
+     * @throws IOException - Standard Input Output Exception
+     */
     private void _writeToFile(TaskManager taskList) throws IOException{
         FileWriter fw = new FileWriter(f);
         for (Task task : taskList.tasks){
@@ -98,6 +125,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Writing the data into the file
+     * @param taskList - the list of tasks
+     * @return - empty String
+     */
     public String writeToFile(TaskManager taskList){
         try {
             _writeToFile(taskList);
