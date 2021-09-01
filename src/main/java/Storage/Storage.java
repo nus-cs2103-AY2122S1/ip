@@ -17,7 +17,7 @@ public class Storage {
      */
     public void getDataInputList(TaskList lst) {
         try {
-            File f = new File("src/main/Duke/Duke.txt");
+            File f = new File("src/main/java/Duke/Duke.txt");
             if(!f.exists()){
                 f.createNewFile();
             }

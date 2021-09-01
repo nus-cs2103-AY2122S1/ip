@@ -50,7 +50,7 @@ class Ui {
      */
     public void bye() {
         System.out.println("Bye. Hope to see you again soon!");
-        store.saveListInFile("src/main/Duke/Duke.txt", taskList);
+        store.saveListInFile("src/main/java/Duke/Duke.txt", taskList);
     }
     /**
      * The original method to simply generate an echo message.
@@ -60,8 +60,11 @@ class Ui {
      */
     public boolean echo() {
         Scanner user = new Scanner(System.in);
-        String input = user.nextLine();
-        return choiceOfAction(input);
+        while(user.hasNextLine()) {
+            String input = user.nextLine();
+            return choiceOfAction(input);
+        }
+        return false;
     }
 
     /**
