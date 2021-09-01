@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 
 import java.time.LocalDate;
@@ -94,8 +100,8 @@ public class Parser {
         if (splitInput2.length == 2) {
             String[] splitTask2 = splitInput2[1].split(" +");
             String[] splitTask = taskType.equals("deadline")
-                    ? splitInput2[1].split("/by") :
-                    splitInput2[1].split("/at");
+                    ? splitInput2[1].split("/by")
+                    : splitInput2[1].split("/at");
             if (splitTask.length == 2 && !splitTask[0].isBlank()) {
                 switch (taskType) {
                 case "deadline":

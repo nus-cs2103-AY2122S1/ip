@@ -1,11 +1,5 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,8 +7,15 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * A class which encapsulates interaction with the file,
@@ -59,7 +60,7 @@ public class Storage {
                 throw new DukeException("");
 
             } catch (SecurityException e) {
-
+                System.out.println("Oh No! There seems to be something wrong with the file...");
             }
         }
     }
@@ -96,7 +97,8 @@ public class Storage {
                     LocalDateTime dateTime = LocalDateTime.parse(splitString[3].trim(), dtf);
                     userInput.add(new Event(splitString[2], dateTime));
                     break;
-
+                default:
+                    break;
                 }
 
                 if (splitString.length > 2 && splitString[1].equals("Y")) {
@@ -118,14 +120,14 @@ public class Storage {
      * @return The string representing the task.
      */
     public String fileString(Task task) {
-        String toAdd = task.taskIndicator() + " | " +
-                (task.getStatusIcon().equals("X")
+        String toAdd = task.taskIndicator() + " | "
+                + (task.getStatusIcon().equals("X")
                         ? "Y" : "N") + " | " + task.getDescription().trim();
 
         if (task.taskIndicator().equals("D")) {
             Deadline temp = (Deadline) task;
             toAdd += " | " + temp.changeDateFormat().trim();
-        }  else if(task.taskIndicator().equals("E")) {
+        } else if (task.taskIndicator().equals("E")) {
 
             Event temp = (Event) task;
             toAdd += " | " + temp.getAt().trim();

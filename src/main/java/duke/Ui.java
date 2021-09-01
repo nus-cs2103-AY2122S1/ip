@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * A class which deals with the interaction
@@ -10,17 +10,17 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    /** The scanner to read user input */
-    private Scanner scanner;
-
-    /** The divider line */
-    private final static String DIVIDER = "  ---------------------------------------------";
-
     /** The indentation for 4 spaces */
     public final static String INDENT_1 = "    ";
 
     /** The indentation for 6 spaces */
     public final static String INDENT_2 = "      ";
+
+    /** The divider line */
+    private final static String DIVIDER = "  ---------------------------------------------";
+
+    /** The scanner to read user input */
+    private Scanner scanner;
 
     /**
      * A public constructor to initialize the scanner.
@@ -82,8 +82,8 @@ public class Ui {
      */
     public void doneTask(Task temp) {
         System.out.println(INDENT_1 + "YAY good job for completing the task :)\n"
-                + INDENT_1 + "I've marked it as done:\n" + INDENT_2 +
-                        temp.toString());
+                + INDENT_1 + "I've marked it as done:\n" + INDENT_2
+                        + temp.toString());
     }
 
     /**
@@ -127,8 +127,8 @@ public class Ui {
      * @param taskList The list of tasks.
      */
     public void numberOfTasks(TaskList taskList) {
-        String numberOfTasks = INDENT_1 + "Now you have " + taskList.size() +
-                (taskList.size() == 1 ? " task" : " tasks")
+        String numberOfTasks = INDENT_1 + "Now you have " + taskList.size()
+                + (taskList.size() == 1 ? " task" : " tasks")
                         + " in the list.";
         System.out.println(numberOfTasks);
     }
@@ -139,7 +139,7 @@ public class Ui {
      * @return The user command.
      */
     public String readCommand() {
-        if(scanner.hasNextLine()) {
+        if (scanner.hasNextLine()) {
             return scanner.nextLine();
         } else {
             return null;
@@ -189,8 +189,8 @@ public class Ui {
      * @return The string containing the error message.
      */
     public String incorrectAtOrBy(String taskType) {
-        return INDENT_1 + "☹ OOPS!!! The " +
-                (taskType.equals("event")
+        return INDENT_1 + "☹ OOPS!!! The "
+                + (taskType.equals("event")
                         ? "period which the event occurs"
                         : "deadline") + " is not inputted correctly. Use "
                                 + (taskType.equals("event") ? "/at" : "/by")

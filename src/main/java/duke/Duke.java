@@ -65,4 +65,5 @@ public class Duke {
         new Duke("data/tasks.txt").run();
 
     }
+
 }
