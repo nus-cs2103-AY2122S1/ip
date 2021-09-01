@@ -9,10 +9,18 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the file
+ */
 public class Storage {
     private String filepath;
     private File file;
-    
+
+    /**
+     * Constructor for the Storage class where the filepath is initialized
+     *
+     * @param filepath Filepath of the file (duke.txt) where the task data is stored.
+     */
     public Storage(String filepath) {
         this.filepath = filepath;
         try {
@@ -25,7 +33,12 @@ public class Storage {
             System.out.println("Something went wrong: " + e.getMessage());
         }
     }
-    
+
+    /**
+     * Loads the task data from the duke.txt file into the list variable.
+     *
+     * @param taskList TaskList where the tasks are stored.
+     */
     public void loadTaskListData(TaskList taskList) {
         try {
             Scanner s = new Scanner(this.file); // create a Scanner using the File as the source
@@ -60,7 +73,7 @@ public class Storage {
                             task.markAsDone();
                         }
                         taskList.addTask(task);
-                    } 
+                    }
                 }
                 Ui.printMessage("End of task list");
             }
@@ -69,6 +82,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Writes the task data to the duke.txt file whenever the list variable is updated.
+     *
+     * @param filePath Filepath of the file (duke.txt) where the task data is stored.
+     * @param tl TaskList where the tasks are stored.
+     */
     public void writeToFile(String filePath, TaskList tl) {
         try {
             FileWriter fw = new FileWriter(filePath);
