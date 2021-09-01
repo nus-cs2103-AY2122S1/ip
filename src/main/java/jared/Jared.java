@@ -1,10 +1,12 @@
+package jared;
+
 import jared.common.DukeException;
 import jared.storage.Storage;
 import jared.task.TaskList;
 import jared.ui.Ui;
 
 /**
- * Class for the Jared project. Allows user to create a task list to keep track of Todos, Deadlines and Events.
+ * Class for the jared.Jared project. Allows user to create a task list to keep track of Todos, Deadlines and Events.
  */
 public class Jared {
     private static final String FILE_NAME = "data.txt";
@@ -13,7 +15,7 @@ public class Jared {
     private Ui ui;
 
     /**
-     * Constructor for the Jared Class.
+     * Constructor for the jared.Jared Class.
      * @param filePath file path where the data of the task list resides.
      */
     public Jared(String filePath) {
@@ -27,7 +29,7 @@ public class Jared {
     }
 
     /**
-     * Runs the Jared instance. Starts up the scanner to receive tasks.
+     * Runs the jared.Jared instance. Starts up the scanner to receive tasks.
      */
     public void run() {
         try {
