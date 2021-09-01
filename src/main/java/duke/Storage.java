@@ -24,33 +24,38 @@ public class Storage {
 
     /**
      * Writes the list of tasks to a text file.
-     * @throws IOException The exception is thrown if an error occurred while writing to the text file.
+     * @throws DukeException The exception is thrown if an error occurred while writing to the text file.
      */
-    public void saveTasks(TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter(filePath);
-        ArrayList<Task> taskList = tasks.getTaskList();
-        for (Task task : taskList) {
-            String taskDetails;
-            String done = task.checkStatus() ? "1" : "0";
-            if (task instanceof Todo) {
-                taskDetails = "T" + BAR + done + BAR + task.getDescription() + "\n";
-            } else if (task instanceof Deadline) {
-                Deadline deadline = (Deadline) task;
-                taskDetails = "D" + BAR + done + BAR + deadline.getDescription()
-                        + BAR + deadline.getBy() + "\n";
-            } else {
-                Event event = (Event) task;
-                taskDetails = "E" + BAR + done + BAR + event.getDescription()
-                        + BAR + event.getAt() + "\n";
+    public void saveTasks(TaskList tasks) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(filePath);
+            ArrayList<Task> taskList = tasks.getTaskList();
+            for (Task task : taskList) {
+                String taskDetails;
+                String done = task.checkStatus() ? "1" : "0";
+                if (task instanceof Todo) {
+                    taskDetails = "T" + BAR + done + BAR + task.getDescription() + "\n";
+                } else if (task instanceof Deadline) {
+                    Deadline deadline = (Deadline) task;
+                    taskDetails = "D" + BAR + done + BAR + deadline.getDescription()
+                            + BAR + deadline.getBy() + "\n";
+                } else {
+                    Event event = (Event) task;
+                    taskDetails = "E" + BAR + done + BAR + event.getDescription()
+                            + BAR + event.getAt() + "\n";
+                }
+                fw.write(taskDetails);
             }
-            fw.write(taskDetails);
+            fw.close();
+        } catch (IOException e) {
+            throw new DukeException("Unable to save your tasks");
         }
-        fw.close();
+
     }
 
     /**
      * Reads the list of tasks from a text file.
-     * @throws FileNotFoundException The exception is thrown if the text file does not exist in the directory.
+     * @throws DukeException The exception is thrown if the text file does not exist in the directory.
      */
     public ArrayList<Task> loadTasks() throws DukeException {
         try {

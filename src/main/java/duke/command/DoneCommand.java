@@ -18,6 +18,7 @@ public class DoneCommand extends Command {
         Task task = tasks.getTaskById(taskId);
         task.setDone(true);
         ui.showTaskDone(task);
+        storage.saveTasks(tasks);
     }
 
 }

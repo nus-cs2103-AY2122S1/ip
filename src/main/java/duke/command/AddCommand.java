@@ -17,13 +17,8 @@ public class AddCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        try {
-            tasks.addTask(task);
-            ui.showAddTask(tasks, task);
-            storage.saveTasks(tasks);
-        } catch (IOException e) {
-            throw new DukeException("Oops!!! somthing wehnt wrong :/");
-        }
-
+        tasks.addTask(task);
+        ui.showAddTask(tasks, task);
+        storage.saveTasks(tasks);
     }
 }
