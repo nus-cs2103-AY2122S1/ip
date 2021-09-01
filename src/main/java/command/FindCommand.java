@@ -1,9 +1,9 @@
-package main.java.command;
+package command;
 
-import main.java.bot.DukeException;
-import main.java.bot.TaskList;
-import main.java.bot.UserInterface;
-import main.java.task.Task;
+import bot.DukeException;
+import bot.TaskList;
+import bot.UserInterface;
+import task.Task;
 
 /**
  * A class that encapsulates a Find Command given to Duke.

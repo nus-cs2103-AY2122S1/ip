@@ -1,12 +1,13 @@
-package main.java.bot;
+package bot;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import main.java.task.Task;
+import java.io.IOException;
+
+import task.Task;
 
 /**
  * A class that handles the storage of list data in a txt format.
@@ -25,7 +26,7 @@ public class Storage {
      * @return A TaskList object that will contain all the tasks given to Duke by the user.
      * @throws DukeException if there is an error loading the local data.
      */
-    public static TaskList loadStorage() throws DukeException {
+    public static TaskList load() throws DukeException {
         try {
             // Set up the list of lines and the reader
             TaskList list = new TaskList();
@@ -52,7 +53,7 @@ public class Storage {
      * @param list The list to be saved into the local Data directory.
      * @throws DukeException if there is an error saving the local data.
      */
-    public static void saveStorage(TaskList list) throws DukeException {
+    public static void save(TaskList list) throws DukeException {
 
         // Set up the file
         String absolutePath = new File(FILE_PATH).getAbsolutePath();

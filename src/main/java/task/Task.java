@@ -1,4 +1,4 @@
-package main.java.task;
+package task;
 
 import java.time.format.DateTimeFormatter;
 
@@ -75,14 +75,14 @@ public class Task {
         String taskType = splitTask[0];
 
         switch (taskType) {
-            case "T":
-                return new TodoTask(splitTask[2], splitTask[1].equals("1"));
-            case "D":
-                return new DeadlineTask(splitTask[2], splitTask[3], splitTask[1].equals("1"));
-            case "E":
-                return new EventTask(splitTask[2], splitTask[3], splitTask[1].equals("1"));
-            default:
-                return new Task("");
+        case "T":
+            return new TodoTask(splitTask[2], splitTask[1].equals("1"));
+        case "D":
+            return new DeadlineTask(splitTask[2], splitTask[3], splitTask[1].equals("1"));
+        case "E":
+            return new EventTask(splitTask[2], splitTask[3], splitTask[1].equals("1"));
+        default:
+            return new Task("");
         }
     }
 

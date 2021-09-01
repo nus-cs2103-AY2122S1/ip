@@ -1,19 +1,18 @@
-package java.task;
+package task;
 
-import main.java.task.EventTask;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class EventTaskTest {
 
-    DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
-    String testTimeInput = "11/11/1111 1111";
-    LocalDateTime testTime = LocalDateTime.parse(testTimeInput.trim(), inputFormatter);
-    EventTask testTask = new EventTask("Test", testTime);
+    private DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
+    private String testTimeInput = "11/11/1111 1111";
+    private LocalDateTime testTime = LocalDateTime.parse(testTimeInput.trim(), inputFormatter);
+    private EventTask testTask = new EventTask("Test", testTime);
 
     @Test
     public void testGetTaskState() {

@@ -1,8 +1,8 @@
-package main.java.bot;
-
-import main.java.task.Task;
+package bot;
 
 import java.util.ArrayList;
+
+import task.Task;
 
 /**
  * A class that encapsulates the list of tasks that the user currently has on Duke.

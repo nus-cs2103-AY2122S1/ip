@@ -1,4 +1,4 @@
-package main.java.bot;
+package bot;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,13 +9,13 @@ import java.util.Scanner;
  */
 public class UserInterface {
 
-    private Scanner reader;
+    private static final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
 
-    private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("d/MM/yyyy kkmm");
-
-    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy - hh:mm a");
+    private static final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy - hh:mm a");
 
     private static final String divider = "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n";
+
+    private final Scanner reader;
 
     /**
      * Constructor for the UserInterface class.

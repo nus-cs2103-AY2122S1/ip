@@ -1,4 +1,4 @@
-package main.java.bot;
+package bot;
 
 /**
  * A class that handles exceptions for Duke.

@@ -1,4 +1,4 @@
-package main.java.task;
+package task;
 
 /**
  * A class that encapsulates a Todo Task stored by Duke.

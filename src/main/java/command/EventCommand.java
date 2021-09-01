@@ -1,12 +1,13 @@
-package main.java.command;
+package command;
 
-import java.time.format.DateTimeParseException;
 import java.time.LocalDateTime;
-import main.java.bot.DukeException;
-import main.java.bot.Storage;
-import main.java.bot.TaskList;
-import main.java.bot.UserInterface;
-import main.java.task.EventTask;
+import java.time.format.DateTimeParseException;
+
+import bot.DukeException;
+import bot.Storage;
+import bot.TaskList;
+import bot.UserInterface;
+import task.EventTask;
 
 /**
  * A class that encapsulates an Event Command given to Duke.
