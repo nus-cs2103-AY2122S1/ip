@@ -13,11 +13,13 @@ import duke.ui.Ui;
  * The EventCommand class encapsulates the execution of the event command from the user.
  */
 public class EventCommand extends Command {
+
     /** The event command inputted by the user. */
-    String fullCommand;
+    private String fullCommand;
 
     /**
      * Constructor to intialise an EventCommand.
+     *
      * @param fullCommand The event command inputted by the user.
      */
     public EventCommand(String fullCommand) {
@@ -26,6 +28,7 @@ public class EventCommand extends Command {
 
     /**
      * Executes the response to the event command from the user.
+     *
      * @param storage The storage Duke uses to save and load the tasklist from.
      * @param taskList The list of tasks Duke needs to execute on.
      * @param ui The Ui Duke utilises to interact with the user.
@@ -40,8 +43,8 @@ public class EventCommand extends Command {
             String eventDescription = fullCommand.split(" ", 2)[1];
             int pos = eventDescription.indexOf("/");
             String description = eventDescription.substring(0, pos - 1);
-            String at = eventDescription.substring(pos + 4);
-            LocalDateTime atDateTime = LocalDateTime.parse(at);
+            String eventTime = eventDescription.substring(pos + 4);
+            LocalDateTime atDateTime = LocalDateTime.parse(eventTime);
 
             Event event = new Event(description, atDateTime);
             taskList.storeTask(event);

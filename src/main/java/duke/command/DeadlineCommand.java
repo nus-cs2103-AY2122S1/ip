@@ -13,11 +13,13 @@ import duke.ui.Ui;
  * The DeadlineCommand class encapsulates the execution of the deadline command from the user.
  */
 public class DeadlineCommand extends Command {
+
     /** The deadline command inputted by the user. */
-    String fullCommand;
+    private String fullCommand;
 
     /**
      * Constructor to intialise a DeadlineCommand.
+     *
      * @param fullCommand The deadline command inputted by the user.
      */
     public DeadlineCommand(String fullCommand) {
@@ -26,6 +28,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes the response to the deadline command from the user.
+     *
      * @param storage The storage Duke uses to save and load the tasklist from.
      * @param taskList The list of tasks Duke needs to execute on.
      * @param ui The Ui Duke utilises to interact with the user.
@@ -40,8 +43,8 @@ public class DeadlineCommand extends Command {
             String deadlineDescription = fullCommand.split(" ", 2)[1];
             int pos = deadlineDescription.indexOf("/");
             String description = deadlineDescription.substring(0, pos - 1);
-            String by = deadlineDescription.substring(pos + 4);
-            LocalDate byDate = LocalDate.parse(by);
+            String dueDate = deadlineDescription.substring(pos + 4);
+            LocalDate byDate = LocalDate.parse(dueDate);
 
             Deadline deadline = new Deadline(description, byDate);
             taskList.storeTask(deadline);

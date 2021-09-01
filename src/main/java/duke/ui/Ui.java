@@ -10,6 +10,7 @@ import duke.tasklist.TaskList;
  * The Ui class encapsulates the user interactions Duke will provide to the user.
  */
 public class Ui {
+
     // The lines that Duke will print
     /** The Duke chatbot's logo. */
     private final String LOGO = " ____        _        \n"
@@ -49,6 +50,7 @@ public class Ui {
 
     /**
      * Reads the inputs from the user.
+     *
      * @return The input given by the user.
      */
     public String readCommand() {
@@ -80,6 +82,7 @@ public class Ui {
 
     /**
      * Prints the full added task message when a task is added successfully.
+     *
      * @param task The added task.
      * @param taskList The tasklist the task is added to.
      */
@@ -90,6 +93,7 @@ public class Ui {
 
     /**
      * Prints the full deleted task message when a task is deleted successfully.
+     *
      * @param task The deleted task.
      * @param taskList The tasklist the task is deleted from.
      */
@@ -101,6 +105,7 @@ public class Ui {
 
     /**
      * Prints the full done task message when a task is indicated to be done.
+     *
      * @param task The done task.
      */
     public void showTaskDone(Task task) {
@@ -110,6 +115,7 @@ public class Ui {
 
     /**
      * Prints the full list task message.
+     *
      * @param taskList The tasklist to be printed.
      */
     public void showList(TaskList taskList) {
@@ -124,6 +130,7 @@ public class Ui {
 
     /**
      * Prints the full list of tasks that matches the description.
+     *
      * @param taskList The tasklist to be searched in.
      * @param description The keyword to be searched.
      */
@@ -149,6 +156,7 @@ public class Ui {
 
     /**
      * Prints the error message should an error come up during an interaction.
+     *
      * @param errorMessage
      */
     public void showError(String errorMessage) {

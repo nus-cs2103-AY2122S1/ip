@@ -7,34 +7,38 @@ import java.time.LocalDate;
  * The Deadline class encapsulates a deadline task.
  */
 public class Deadline extends Task {
+
     /** The deadline for the task. */
-    protected LocalDate by;
+    protected LocalDate dueDate;
 
     /**
      * Constructor to initialise a Deadline task.
+     *
      * @param description The description of the Deadline task.
-     * @param by The deadline for the Deadline task.
+     * @param dueDate The deadline for the Deadline task.
      */
-    public Deadline(String description, LocalDate by) {
+    public Deadline(String description, LocalDate dueDate) {
         super(description);
-        this.by = by;
+        this.dueDate = dueDate;
     }
 
     /**
      * Gets the by description for the Deadline task.
+     *
      * @return The by description for the Deadline task.
      */
     public LocalDate getBy() {
-        return this.by;
+        return this.dueDate;
     }
 
     /**
      * Returns the string representation of the Deadline task.
+     *
      * @return The string representation of the Deadline task.
      */
     @Override
     public String toString() {
         return "[D]" + super.toString()
-                + " (by: " + by.format(DateTimeFormatter.ofPattern("MM dd yyyy")) + ")";
+                + " (by: " + dueDate.format(DateTimeFormatter.ofPattern("MM dd yyyy")) + ")";
     }
 }

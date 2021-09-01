@@ -11,11 +11,13 @@ import duke.ui.Ui;
  * The DoneCommand class encapsulates the execution of the done command from the user.
  */
 public class DoneCommand extends Command {
+
     /** The done command inputted by the user. */
-    String doneDescription;
+    private String doneDescription;
 
     /**
      * Constructor for the DoneCommand.
+     *
      * @param doneDescription The delete command inputted by the user.
      */
     public DoneCommand(String doneDescription) {
@@ -24,6 +26,7 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the response to the delete command from the user.
+     *
      * @param storage The storage Duke uses to save and load the tasklist from.
      * @param taskList The list of tasks Duke needs to execute on.
      * @param ui The Ui Duke utilises to interact with the user.

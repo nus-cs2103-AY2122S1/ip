@@ -17,6 +17,7 @@ import duke.task.Todo;
  * The Storage class encapsulates the action of saving the taskList created by Duke.
  */
 public class Storage {
+
     /** The file for the Storage to save the tasklist in. */
     private File file;
 
@@ -25,6 +26,7 @@ public class Storage {
 
     /**
      * Constructor to initialise the Storage.
+     *
      * @param pathName The path name to be converted to create a new File instance.
      */
     public Storage(String pathName) {
@@ -36,6 +38,7 @@ public class Storage {
 
     /**
      * Saves the contents of the tasklist to the designated file.
+     *
      * @param taskList The current state of the tasklist handled by Duke.
      */
     public void saveFile(ArrayList<Task> taskList) throws IOException {
@@ -79,6 +82,7 @@ public class Storage {
 
     /**
      * Loads the contents of the previously saved tasklist from the designated file.
+     *
      * @return The current state of the tasklist handled by Duke.
      * @throws IOException
      */

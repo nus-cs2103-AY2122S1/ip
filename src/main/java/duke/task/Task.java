@@ -4,6 +4,7 @@ package duke.task;
  * The Task class encapsulates a task.
  */
 public class Task {
+
     /** The given task description. */
     protected String description;
     /** Boolean to represent if the task is done, true if done, false otherwise. */
@@ -11,6 +12,7 @@ public class Task {
 
     /**
      * Constructor for initialising a Task.
+     *
      * @param description The given task description.
      */
     public Task(String description) {
@@ -20,6 +22,7 @@ public class Task {
 
     /**
      * Returns the task description.
+     *
      * @return Description of the task.
      */
     public String getTaskDescription() {
@@ -28,6 +31,7 @@ public class Task {
 
     /**
      * Checks and returns the status of a task in the form of "X" or " ".
+     *
      * @return If the task is done "X" will be returned, else " " will be returned.
      */
     public String getStatusIcon() {
@@ -47,6 +51,7 @@ public class Task {
 
     /**
      * Returns the string representation of the Task.
+     *
      * @return String representation of the Task.
      */
     public String toString() {

@@ -15,8 +15,10 @@ import duke.command.TodoCommand;
  * The Parser class encapsulates the dealing of user commands by Duke.
  */
 public class Parser {
+
     /**
      * Produces the corresponding type of executable command from the user input.
+     *
      * @param fullCommand The full command input by the user.
      * @return The corresponding type of executable command from the user input.
      */

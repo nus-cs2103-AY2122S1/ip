@@ -12,11 +12,13 @@ import duke.ui.Ui;
  * The DeadlineCommand class encapsulates the execution of the todo command from the user.
  */
 public class TodoCommand extends Command {
+
     /** The todo command inputted by the user. */
-    String fullCommand;
+    private String fullCommand;
 
     /**
      * Constructor to intialise a TodoCommand.
+     *
      * @param fullCommand The todo command inputted by the user.
      */
     public TodoCommand(String fullCommand) {
@@ -25,6 +27,7 @@ public class TodoCommand extends Command {
 
     /**
      * Executes the response to the todo command from the user.
+     *
      * @param storage The storage Duke uses to save and load the tasklist from.
      * @param taskList The list of tasks Duke needs to execute on.
      * @param ui The Ui Duke utilises to interact with the user.
