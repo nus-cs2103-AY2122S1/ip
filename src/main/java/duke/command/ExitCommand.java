@@ -22,8 +22,21 @@ public class ExitCommand extends Command {
      * @param storage The local storage of duke.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public void executeAndShow(TaskList taskList, Storage storage) {
         Ui.bye();
         storage.writeToTaskTxt(taskList.getTasks());
+    }
+
+    /**
+     * Returns the result of executing the exit command.
+     *
+     * @param taskList The task list of duke.
+     * @param storage  The local storage of duke.
+     * @return A string representation of the result.
+     */
+    @Override
+    public String execute(TaskList taskList, Storage storage) {
+        storage.writeToTaskTxt(taskList.getTasks());
+        return "Bye. Hope to see you again soon!\n";
     }
 }

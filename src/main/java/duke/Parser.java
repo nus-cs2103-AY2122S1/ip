@@ -148,7 +148,7 @@ public class Parser {
             if (firstWordIndex == -1) {
                 throw new DukeException("The description of an event cannot be empty.");
             }
-            return new AddCommand(Action.DEADLINE, rest);
+            return new AddCommand(Action.EVENT, rest);
         }
         case DELETE: {
             try {

@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Action;
 import duke.Storage;
+import duke.Ui;
 import duke.task.TaskList;
 
 public class SetCommand extends Command {
@@ -26,7 +27,19 @@ public class SetCommand extends Command {
      * @param storage  The local storage of duke.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        taskList.markTaskAsDone(index);
+    public void executeAndShow(TaskList taskList, Storage storage) {
+        Ui.showMultiLines(taskList.markTaskAsDone(index));
+    }
+
+    /**
+     * Returns the result of executing the command.
+     *
+     * @param taskList The task list of duke.
+     * @param storage  The local storage of duke.
+     * @return A string representation of the result.
+     */
+    @Override
+    public String execute(TaskList taskList, Storage storage) {
+        return taskList.markTaskAsDone(index);
     }
 }

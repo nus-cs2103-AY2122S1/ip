@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Action;
 import duke.Storage;
+import duke.StringUtils;
 import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -28,8 +29,21 @@ public class DeleteCommand extends Command {
      * @param storage  The local storage of duke.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public void executeAndShow(TaskList taskList, Storage storage) {
         Task temp = taskList.removeTask(index);
         Ui.showRemoveTaskMessage(temp, taskList.getSize());
+    }
+
+    /**
+     * Returns the result of executing the delete command.
+     *
+     * @param taskList The task list of duke.
+     * @param storage  The local storage of duke.
+     * @return A string representation of the result.
+     */
+    @Override
+    public String execute(TaskList taskList, Storage storage) {
+        Task temp = taskList.removeTask(index);
+        return StringUtils.getRemoveTaskMessage(temp, taskList.getSize());
     }
 }

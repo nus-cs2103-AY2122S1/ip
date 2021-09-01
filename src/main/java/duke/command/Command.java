@@ -48,10 +48,19 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command.
+     * Executes the command and prints the result in console.
      *
      * @param taskList The task list of duke.
      * @param storage The local storage of duke.
      */
-    public abstract void execute(TaskList taskList, Storage storage);
+    public abstract void executeAndShow(TaskList taskList, Storage storage);
+
+    /**
+     * Returns the result of executing the command.
+     *
+     * @param taskList The task list of duke.
+     * @param storage The local storage of duke.
+     * @return A string representation of the result.
+     */
+    public abstract String execute(TaskList taskList, Storage storage);
 }

@@ -72,22 +72,23 @@ public class TaskList {
     }
 
     /**
+     * Returns the string of mark message and
      * Marks the task specified by the given index as done.
      *
      * @param index The given index.
+     * @return The string representation of marking as done result.
      * @throws DukeException If the index is out of range.
      */
-    public void markTaskAsDone(int index) throws DukeException {
+    public String markTaskAsDone(int index) throws DukeException {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("Task number: " + (index + 1) + " does not exist.");
         }
         Task temp = tasks.get(index);
         temp.markAsDone();
         tasks.set(index, temp);
-        System.out.println(Ui.HORIZONTAL_LINE);
-        System.out.println(Ui.INDENTATION + "Nice! I've marked this task as done:");
-        System.out.println(Ui.INDENTATION + temp.toString());
-        System.out.println(Ui.HORIZONTAL_LINE);
+        String result = "Nice! I've marked this task as done:\n";
+        result += temp.toString();
+        return result;
     }
 
     /**

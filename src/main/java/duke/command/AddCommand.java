@@ -4,6 +4,7 @@ import duke.Action;
 import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
+import duke.StringUtils;
 import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -24,14 +25,31 @@ public class AddCommand extends Command {
         this.info = info;
     }
 
+    /**
+     * Executes the command and prints the result in console.
+     *
+     * @param taskList The task list of duke.
+     * @param storage The local storage of duke.
+     */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public void executeAndShow(TaskList taskList, Storage storage) {
+        Ui.showMultiLines(execute(taskList, storage));
+    }
+
+    /**
+     * Returns the result of executing the add command.
+     *
+     * @param taskList The task list of duke.
+     * @param storage  The local storage of duke.
+     * @return A string representation of the result.
+     */
+    @Override
+    public String execute(TaskList taskList, Storage storage) {
         switch (super.getAction()) {
         case TODO: {
             Todo temp = new Todo(info);
             taskList.addTask(temp);
-            Ui.showAddTaskMessage(temp, taskList.getSize());
-            break;
+            return StringUtils.getAddTasKMessage(temp, taskList.getSize());
         }
         case DEADLINE: {
             String[] arr = info.split(" /by ");
@@ -42,8 +60,7 @@ public class AddCommand extends Command {
             String detail = arr[1];
             Deadline temp = new Deadline(description, Parser.parseDateTime(detail));
             taskList.addTask(temp);
-            Ui.showAddTaskMessage(temp, taskList.getSize());
-            break;
+            return StringUtils.getAddTasKMessage(temp, taskList.getSize());
         }
         case EVENT: {
             String[] arr = info.split(" /at ");
@@ -54,8 +71,7 @@ public class AddCommand extends Command {
             String detail = arr[1];
             Event temp = new Event(description, Parser.parseDateTime(detail));
             taskList.addTask(temp);
-            Ui.showAddTaskMessage(temp, taskList.getSize());
-            break;
+            return StringUtils.getAddTasKMessage(temp, taskList.getSize());
         }
         default:
             throw new DukeException("Error: wrong action type for add command");

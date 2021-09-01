@@ -9,29 +9,34 @@ import duke.task.TaskList;
  * Duke is a chatbot application for CS2103T individual project.
  */
 public class Duke {
-    /**
-     * The local file path.
-     */
+    /** The local file path. */
     private static final String filePath = "data/duke.txt";
+    /** The storage instance. */
+    private final Storage storage;
+    /** The task list. */
+    private final TaskList taskList;
+
     /**
-     * The storage instance.
+     * Constructs a duke instance.
      */
-    private static final Storage storage = new Storage(filePath);
+    public Duke() {
+        storage = new Storage(filePath);
+        taskList = new TaskList(storage.readFromTaskTxt());
+    }
 
     /**
      * Receives input from the user and executes Duke's actions
      *
      * @param sc       The given scanner instance
-     * @param taskList The given task list instance.
      */
-    public static void run(Scanner sc, TaskList taskList) {
+    public void run(Scanner sc) {
         Ui.greet();
         boolean isExit = false;
         while (!isExit && sc.hasNextLine()) {
             try {
                 String input = sc.nextLine();
                 Command command = Parser.parseCommand(input);
-                command.execute(taskList, storage);
+                command.executeAndShow(taskList, storage);
                 isExit = command.isExit();
             } catch (DukeException e) {
                 Ui.showMessage(e.getMessage());
@@ -46,13 +51,21 @@ public class Duke {
      */
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        new Duke().run(sc);
+        sc.close();
+    }
+
+
+    /**
+     * Returns the result string based on the given input.
+     */
+    public Response getResponse(String input) {
         try {
-            TaskList taskList = new TaskList(storage.readFromTaskTxt());
-            run(sc, taskList);
+            Command command = Parser.parseCommand(input);
+            String message = command.execute(taskList, storage);
+            return new Response(message, command.isExit());
         } catch (DukeException e) {
-            Ui.showMessage(e.getMessage());
-        } finally {
-            sc.close();
+            return new Response(e.getMessage(), false);
         }
     }
 }

@@ -83,9 +83,7 @@ public class Ui {
      * Prints bye message.
      */
     public static void bye() {
-        System.out.println(HORIZONTAL_LINE);
-        System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
-        System.out.println(HORIZONTAL_LINE);
+        showMessage("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -119,6 +117,22 @@ public class Ui {
         } else {
             for (int i = 0; i < tasks.size(); ++i) {
                 System.out.println(Ui.INDENTATION + (i + 1) + ". " + tasks.get(i).toString());
+            }
+        }
+        System.out.println(Ui.HORIZONTAL_LINE);
+    }
+
+    /**
+     * Prints multilines message in the console.
+     *
+     * @param input The given multiline message.
+     */
+    public static void showMultiLines(String input) {
+        String[] strings = input.split("\n");
+        System.out.println(Ui.HORIZONTAL_LINE);
+        for (String string : strings) {
+            if (string != "") {
+                System.out.println(Ui.INDENTATION + string);
             }
         }
         System.out.println(Ui.HORIZONTAL_LINE);
