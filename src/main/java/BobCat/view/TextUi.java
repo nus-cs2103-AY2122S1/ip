@@ -3,10 +3,10 @@ package BobCat.view;
 import BobCat.exception.BobCatException;
 
 /**
- * Represents the view of the application. Implements the "View" aspect of the MVC pattern. A <code>Ui</code>
+ * Represents the view of the application. Implements the "View" aspect of the MVC pattern. A <code>TextUi</code>
  * object dictates <i>how</i> information should be presented.
  */
-public class Ui {
+public class TextUi {
     private static void hLine() {
         System.out.println("\t----------------------------------------------");
     }
