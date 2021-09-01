@@ -20,6 +20,9 @@ public abstract class Task {
         return isDone ? "[X]" : "[ ]";
     }
 
+    /**
+     * Sets the done status of task to true
+     */
     public void isDone() {
         isDone = true;
     }

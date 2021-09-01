@@ -33,16 +33,14 @@ public class TaskList {
      *
      * @param index
      */
-    public void markDone(int index) {
+    public String markDone(int index) {
         int trueIndex = index - 1;
         list.get(trueIndex).isDone();
-        String taskDoneMessage = "    ____________________________________________________________\n"
-                + "     Nice! I've marked this task as done:\n"
+        String taskDoneMessage = "     Nice! I've marked this task as done:\n"
                 + "       " + "[" + list.get(trueIndex).showType() + "]"
                 + list.get(trueIndex).checkDone() + " "
-                + list.get(trueIndex).showTask() + "\n"
-                + "    ____________________________________________________________";
-        System.out.println(taskDoneMessage);
+                + list.get(trueIndex).showTask() + "\n";
+        return taskDoneMessage;
     }
 
     /**
@@ -50,17 +48,16 @@ public class TaskList {
      *
      * @param index
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         int trueIndex = index - 1;
         String listData = "[" + list.get(trueIndex).showType() + "]"
                 + list.get(trueIndex).checkDone() + " "
                 + list.get(trueIndex).showTask() + "\n";
-        System.out.println("    ____________________________________________________________\n"
-                + "     Noted. I've removed this task:\n"
+        String deletedData = "     Noted. I've removed this task:\n"
                 + "       " + listData
-                + "     Now you have " + (list.size() - 1) + " tasks in the list\n"
-                + "    ____________________________________________________________");
+                + "     Now you have " + (list.size() - 1) + " tasks in the list\n";
         list.remove(trueIndex);
+        return deletedData;
     }
 
     /**
@@ -75,8 +72,7 @@ public class TaskList {
     /**
      * Prints out all the tasks in the entire TaskList object.
      */
-    public void showList() {
-        System.out.println("    ____________________________________________________________");
+    public String showList() {
         String fullList = "     " + "Here are the tasks in your list:";
         for (int i = 0; i < list.size(); i++) {
                 String taskItem = "\n" + "     " + (i + 1) + "." + "["
@@ -85,8 +81,7 @@ public class TaskList {
                         + list.get(i).showTask();
                 fullList += taskItem;
         }
-        System.out.println(fullList);
-        System.out.println("    ____________________________________________________________");
+        return fullList;
     }
 
     /**
@@ -112,8 +107,13 @@ public class TaskList {
         return refreshList;
     }
 
-    public void searchList(String keyword) {
-        System.out.println("    ____________________________________________________________");
+    /**
+     * Searches the list for tasks containing the keyword and returns the respective tasks.
+     *
+     * @param keyword keyword of tasks to search in the taskList
+     * @return tasks that contain the respective keyword
+     */
+    public String searchList(String keyword) {
         String searchList = "     " + "Here are the matching tasks in your list:";
         for (int k = 0; k < list.size(); k++) {
             if (list.get(k).showTaskOnly().contains(keyword)) {
@@ -124,8 +124,7 @@ public class TaskList {
                 searchList += searchItem;
             }
         }
-        System.out.println(searchList);
-        System.out.println("    ____________________________________________________________");
+        return searchList;
     }
 
 }
