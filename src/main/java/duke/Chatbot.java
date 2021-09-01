@@ -1,11 +1,20 @@
 package duke;
 
-import java.util.*;
+import java.util.Scanner;
 
+
+/**
+ * @Chatbot represents a chatbot.
+ * @author spdpnd98.
+ */
 public class Chatbot {
+    /**
+     * @ChatCommands are enumerations used for chatbot commands.
+     */
     private enum ChatCommands {
-        BYE("bye"),
-        LIST("list");
+        CHAT_COMMAND_BYE("bye"),
+        CHAT_COMMAND_LIST("list");
+        CHAT_COMMAND_FIND("find");
 
         private final String command;
 
@@ -23,12 +32,16 @@ public class Chatbot {
         }
     }
 
-    enum TaskCommands {
-        DONE("done"),
-        DELETE("delete"),
-        TODO("todo"),
-        DEADLINE("deadline"),
-        EVENT("event");
+
+    /**
+     * @TaskCommands are enumerations used to identify individual tasks and actions to be taken.
+     */
+    protected enum TaskCommands {
+        TASK_COMMAND_DONE("done"),
+        TASK_COMMAND_DELETE("delete"),
+        TASK_COMMAND_TODO("todo"),
+        TASK_COMMAND_DEADLINE("deadline"),
+        TASK_COMMAND_EVENT("event");
 
         private final String command;
 
@@ -47,9 +60,13 @@ public class Chatbot {
         }
     }
 
-    enum ChatContinue {
-        CONTINUE,
-        END,
+
+    /**
+     * @ChatContinue are enumerations to indicate if a chat should continue or terminate.
+     */
+    protected enum ChatContinue {
+        CHAT_CONTINUE,
+        CHAT_END,
     }
 
     private Scanner scanner;
@@ -57,6 +74,9 @@ public class Chatbot {
     private Ui ui;
     private TaskList taskList;
 
+    /**
+     * Creates a Chatbot instance.
+     */
     public Chatbot() {
         this.scanner = new Scanner(System.in);
         this.ui = new Ui();
@@ -70,12 +90,15 @@ public class Chatbot {
         }
     }
 
+    /**
+     * @chat initiates a chat with the user, and checks for handled exceptions.
+     */
     public void chat() {
-        boolean keepChatting = true;
-        while (keepChatting) {
+        boolean isChatting = true;
+        while (isChatting) {
             ui.showChatting();
             try {
-                keepChatting = interpret() == ChatContinue.CONTINUE;
+                isChatting = interpret() == ChatContinue.CHAT_CONTINUE;
             } catch (DukeArgumentException e) {
                 System.out.println(e.getMessage());
             } catch (DukeTaskException e) {
@@ -88,11 +111,20 @@ public class Chatbot {
         };
     }
 
-    private ChatContinue interpret() throws DukeIOException, DukeDateParseException {
+    /**
+     * @interpret contains the logic to understand user inputs.
+     *
+     * @return ChatContinue enum to indicate if the chat should continue or terminate.
+     * @throws DukeIOException thrown by TaskList.addTask method, if fails to store in FileDB.
+     * @throws DukeDateParseException thrown by TaskList.addTask method, if fails to parse the date.
+     * @throws DukeArgumentException if not enough arguments are given to TaskCommand methods.
+     */
+    private ChatContinue interpret() throws DukeIOException, DukeDateParseException, DukeArgumentException {
         String input = scanner.nextLine();
-        ChatCommands command = ChatCommands.toEnum(input);
+        String[] parseInput = input.split(" ", 2);
+        ChatCommands command = ChatCommands.toEnum(parseInput[0]);
         if (command != null) {
-            return builtInCommands(command);
+            return builtInCommands(command, parseInput.length == 1 ? "" : parseInput[1]);
         }
         TaskCommands taskCommand = TaskCommands.toEnum(input);
         if (taskCommand != null) {
@@ -105,22 +137,36 @@ public class Chatbot {
         throw new DukeArgumentException("Looks like I don't support those commands yet...");
     }
 
-
-
+    /**
+     * Executes any no argument commands provided to chatbot.
+     *
+     * @param command the user's input.
+     * @return ChatContinue enums to indicate if a chat should continue or terminnate.
+     */
     private ChatContinue builtInCommands(ChatCommands command) {
         switch (command) {
-            case BYE:
-                return this.farewell();
-            case LIST:
-                return this.taskList.list(this.ui);
-            default:
-                this.ui.showNotSupported();
-                return ChatContinue.END;
+        case CHAT_COMMAND_BYE:
+            return this.farewell();
+        case CHAT_COMMAND_LIST:
+            return this.taskList.list(this.ui);
+        case CHAT_COMMAND_FIND:
+                TaskList findTaskList = this.taskList.findTasks(argument);
+                System.out.println(findTaskList.tasks.size());
+                System.out.println(findTaskList.list(this.ui));
+                return ChatContinue.CONTINUE;
+        default:
+            this.ui.showNotSupported();
+            return ChatContinue.CHAT_END;
         }
     }
 
+    /**
+     * Terminates the chat session with user.
+     *
+     * @return ChatContinue enums to indicate if a chat should continue or terminnate.
+     */
     private ChatContinue farewell() {
         this.ui.showFarewell();
-        return ChatContinue.END;
+        return ChatContinue.CHAT_END;
     }
 }
