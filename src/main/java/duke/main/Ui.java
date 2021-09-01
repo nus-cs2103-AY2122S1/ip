@@ -4,108 +4,164 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 import java.util.List;
-import java.util.Scanner;
+import java.util.Map;
+import java.util.function.Consumer;
 
+
+/**
+ * Handles the user interface.
+ */
 public class Ui {
-    private final Scanner inputScanner;
+    private Map<String, Consumer<String>> uiCommands;
 
     /**
-     * Constructor for Duke UI
+     * Overloaded Constructor for Duke UI
      */
     public Ui() {
-        this.inputScanner = new Scanner(System.in);
-        greetOnStart();
     }
 
     /**
-     * Greets user upon starting the assistant.
+     * Overloaded constructor for Duke UI
      */
-    public void greetOnStart() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    public Ui(Map<String, Consumer<String>> uiCommands) {
+        this.uiCommands = uiCommands;
     }
 
     /**
-     * Gets the next input from the user.
+     * Returns a response to the add task command.
      *
-     * @return String input.
+     * @param task     Task added.
+     * @param taskList TaskList to be displayed.
+     * @return String response to added task.
      */
-    public String getNextInput() {
-        return inputScanner.nextLine();
+    public static String getAddTaskMessage(Task task, TaskList taskList) {
+        return "\t Got it. I've added this task:\n" +
+                "\t \t " + task + taskList.getTaskListSummary();
     }
 
     /**
-     * Stops taking inputs from the user.
-     */
-    public void closeInput() {
-        inputScanner.close();
-    }
-
-    /**
-     * Displays error when user input is empty.
-     */
-    public void showEmptyInputMessage() {
-        System.out.println("\tTake your time :)\n");
-    }
-
-    /**
-     * Displays error when user command is not found.
-     */
-    public void showUnknownCommandMessage(String command) {
-        System.out.println("\tI don't understand " + command + " (yet...)\n");
-    }
-
-    /**
-     * Displays the message in the DukeException.
+     * Returns a response to the clear command.
      *
-     * @param message to display.
+     * @return String tasks cleared message.
      */
-    public void showDukeException(String message) {
-        System.out.println(message);
+    public static String getClearTasksMessage() {
+        return "Your previous tasks have been cleared.";
     }
 
     /**
-     * Displays the TaskList.
+     * Returns a response to the remove task command.
+     *
+     * @param task     Task removed.
+     * @param taskList TaskList to be displayed.
+     * @return String response to removed task.
+     */
+    public static String getRemoveTaskMessage(Task task, TaskList taskList) {
+        return "\t Got it. I've removed this task:\n" +
+                "\t \t " + task + taskList.getTaskListSummary();
+    }
+
+    /**
+     * Returns a response to the mark task as done command.
+     *
+     * @param task Task marked as done.
+     * @return String response to completed task.
+     */
+    public static String getTaskDoneMessage(Task task) {
+        return "\t Nice! I've marked this task as done:\n" + "\t\t " + task + "\n";
+    }
+
+
+    /**
+     * Returns a response to the taskList reset command.
+     *
+     * @return String response to reset task.
+     */
+    public static String getResetTasksMessage() {
+        return "\tClearing tasks...\n" + "\tYou can now start anew...\n";
+    }
+
+    /**
+     * Returns error when user input is empty.
+     *
+     * @return String message.
+     */
+    public String getEmptyInputMessage() {
+        return "\tTake your time :)\n";
+    }
+
+    /**
+     * Returns error when user command is not found.
+     *
+     * @return String message.
+     */
+    public String getUnknownCommandMessage(String command) {
+        return "\tI don't understand " + command + " (yet...)\n";
+    }
+
+    /**
+     * Returns the TaskList.
      *
      * @param taskList to display.
+     * @return String message.
      */
-    public void displayTaskList(TaskList taskList) {
+    public String getTaskListSummary(TaskList taskList) {
         if (taskList.isEmpty()) {
-            System.out.println("\tYou haven't added any tasks yet\n");
+            return "\tYou haven't added any tasks yet\n";
         } else {
-            System.out.println(taskList);
+            return taskList.toString();
         }
+    }
+
+    /**
+     * Returns the message in the DukeException.
+     *
+     * @param exception message to display.
+     */
+    public void showDukeException(Exception exception) {
+        uiCommands.get("showDukeResponse").accept(exception.getMessage());
     }
 
     /**
      * Greets an existing user.
      *
      * @param tasks User's existing tasks to be displayed with the greeting.
+     * @return String message.
      */
     public void greetWithFamiliarity(TaskList tasks) {
-        System.out.println("\tNice to see you again.");
-        System.out.println(tasks.taskSummary());
+        String greeting = "\tNice to see you again.\n";
+        greeting += tasks.getTaskListSummary() + "\n";
+
         if (!tasks.isEmpty()) {
-            System.out.println(tasks);
+            greeting += tasks;
+        }
+        uiCommands.get("showDukeResponse").accept(greeting);
+    }
+
+    /**
+     * Returns matching tasks.
+     *
+     * @param matchingTasks to be displayed.
+     * @return String message.
+     */
+    public String getMatchingTasksSummary(List<Task> matchingTasks) {
+        if (matchingTasks.isEmpty()) {
+            return "\tNo matching tasks found!\n";
+        } else {
+            return "\tHere are the matching tasks from your list:\n"
+                    + TaskList.enumerateTasks(matchingTasks);
         }
     }
 
     /**
-     * Displays matching tasks.
+     * Terminates the program with a parting message.
      *
-     * @param matchingTasks to be displayed.
+     * @return String parting message.
      */
-    public void showMatchingTasks(List<Task> matchingTasks) {
-        if (matchingTasks.isEmpty()) {
-            System.out.println("\tNo matching tasks found!\n");
-        } else {
-            System.out.println("\tHere are the matching tasks from your list:\n");
-            System.out.println(TaskList.enumerateTasks(matchingTasks));
-        }
+    public String exitWithGoodbye() {
+        new Thread(() -> {
+            uiCommands.get("exit").accept("");
+        }).start();
+        return "Hope to see you soon!!";
     }
 
 }

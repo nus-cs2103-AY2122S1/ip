@@ -13,6 +13,9 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Handles the loading/saving of tasks from local storage.
+ */
 public class Storage {
     private final Path filePath;
 
@@ -50,15 +53,15 @@ public class Storage {
                         foundTask = new Event(description, time, done);
                         break;
                     default:
-                        throw new DukeException("\t☹ OOPS!!! I can't find your tasks.\n");
+                        throw new DukeException("\t OOPS!!! I can't find your tasks.\n");
                 }
                 return foundTask;
             }).collect(Collectors.toList());
             return new TaskList(taskList);
         } catch (IOException e) {
-            throw new DukeException("\t☹ OOPS!!! I can't find your tasks.\n");
+            throw new DukeException("\t OOPS!!! I can't find your tasks.\n");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\t☹ OOPS!!! Your tasks might be corrupted.");
+            throw new DukeException("\t OOPS!!! Your tasks might be corrupted.");
         }
     }
 
@@ -71,20 +74,19 @@ public class Storage {
         try {
             Files.write(filePath, tasklist.formatForStorage(), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new DukeException("\t☹ OOPS!!! I can't store any changes you make. \n");
+            throw new DukeException("\t OOPS!!! I can't store any changes you make. \n");
         }
     }
 
     /**
      * Clear text file containing tasks.
      */
-    public void resetTasks() {
+    public String resetTasks() {
         try {
-            System.out.println("\tClearing tasks...\n");
             Files.newBufferedWriter(filePath);
-            System.out.println("\tYou can now start anew...\n");
+            return Ui.getResetTasksMessage();
         } catch (IOException e) {
-            throw new DukeException("\t☹ OOPS!!! Continuing without saving.\n");
+            throw new DukeException("\t OOPS!!! Continuing without saving.\n");
         }
     }
 

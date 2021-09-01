@@ -5,6 +5,9 @@ import duke.main.DukeException;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Encapsulates an event with a time
+ */
 public class Event extends Task {
 
     private LocalDate at;
@@ -42,7 +45,7 @@ public class Event extends Task {
 
     private static String extractDesc(String descAndTime) throws DukeException {
         if (descAndTime.equals("")) {
-            throw new DukeException("\t☹ OOPS!!! Your event needs a description.\n");
+            throw new DukeException("\t\\u2639 OOPS!!! Your event needs a description.\n");
         }
         return descAndTime.split(" at ")[0];
     }
@@ -51,13 +54,13 @@ public class Event extends Task {
         try {
             return descAndTime.split(" at ")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\t☹ OOPS!!! You need to specify a time.\n");
+            throw new DukeException("\t OOPS!!! You need to specify a time.\n");
         }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Task.printTime(at) + ")";
+        return "[E]" + super.toString() + " (at: " + Task.printTime(at) + ")\n";
     }
 
     /**
@@ -66,7 +69,7 @@ public class Event extends Task {
      * @return formatted String for storing Event.
      */
     @Override
-    public String storageString() {
+    public String generateStorageString() {
         return "E | " + super.completed + " | " + super.description + " | " + this.at;
     }
 

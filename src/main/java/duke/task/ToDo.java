@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.main.DukeException;
 
+/**
+ * Encapsulates a task to be done.
+ */
 public class ToDo extends Task {
 
     /**
@@ -26,14 +29,14 @@ public class ToDo extends Task {
 
     private static String getDescription(String description) throws DukeException {
         if (description.equals("")) {
-            throw new DukeException("\t☹ OOPS!!! Your todo needs a description.\n");
+            throw new DukeException("\t OOPS!!! Your todo needs a description.\n");
         }
         return description;
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + "\n";
     }
 
     /**
@@ -42,7 +45,7 @@ public class ToDo extends Task {
      * @return formatted storage String.
      */
     @Override
-    public String storageString() {
+    public String generateStorageString() {
         return "T | " + super.completed + " | " + super.description;
     }
 

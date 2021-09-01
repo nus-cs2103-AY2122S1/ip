@@ -1,12 +1,16 @@
 package duke.task;
 
 import duke.main.DukeException;
+import duke.main.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a collection of tasks.
+ */
 public class TaskList {
     private List<Task> taskList;
 
@@ -24,15 +28,28 @@ public class TaskList {
     }
 
     /**
+     * Enumerates the list of tasks.
+     *
+     * @param taskList to enumerate
+     * @return String enumeration of taskList.
+     */
+    public static String enumerateTasks(List<Task> taskList) {
+        String toPrint = "";
+        for (int i = 0; i < taskList.size(); i++) {
+            int index = i + 1;
+            toPrint += ("\t " + index + ". " + taskList.get(i));
+        }
+        return toPrint;
+    }
+
+    /**
      * Adds a task to TaskList.
      *
      * @param task Task to be added.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         this.taskList.add(task);
-        System.out.println("\t Got it. I've added this task:");
-        System.out.println("\t \t " + task);
-        System.out.println(taskSummary());
+        return Ui.getAddTaskMessage(task, this);
     }
 
     /**
@@ -40,7 +57,7 @@ public class TaskList {
      *
      * @return String summary of TaskList.
      */
-    public String taskSummary() {
+    public String getTaskListSummary() {
         int numTasks = this.taskList.size();
         String size = numTasks == 0 ? "no" : String.valueOf(numTasks);
         String maybePlural = numTasks == 1 ? " task " : " tasks ";
@@ -52,11 +69,9 @@ public class TaskList {
      *
      * @param task Task to remove.
      */
-    public void deleteTask(Task task) {
+    public String deleteTask(Task task) {
         this.taskList.remove(task);
-        System.out.println("\t Got it. I've removed this task:");
-        System.out.println("\t \t " + task);
-        System.out.println(taskSummary());
+        return Ui.getRemoveTaskMessage(task, this);
     }
 
     /**
@@ -85,7 +100,7 @@ public class TaskList {
      * @return String for storing TaskList.
      */
     public List<String> formatForStorage() {
-        return taskList.stream().map(Task::storageString).collect(Collectors.toList());
+        return taskList.stream().map(Task::generateStorageString).collect(Collectors.toList());
     }
 
     /**
@@ -97,21 +112,6 @@ public class TaskList {
         return this.taskList.size() == 0;
     }
 
-    /**
-     * Enumerates the list of tasks.
-     *
-     * @param taskList to enumerate
-     * @return String enumeration of taskList.
-     */
-    public static String enumerateTasks(List<Task> taskList) {
-        String toPrint = "";
-        for (int i = 0; i < taskList.size(); i++) {
-            int index = i + 1;
-            toPrint += ("\t " + index + ". " + taskList.get(i) + "\n");
-        }
-        return toPrint;
-    }
-
     @Override
     public String toString() {
         return enumerateTasks(taskList);
@@ -120,8 +120,9 @@ public class TaskList {
     /**
      * Clear the TaskList.
      */
-    public void clearTasks() {
+    public String clearTasks() {
         taskList.clear();
+        return Ui.getClearTasksMessage();
     }
 
     /**

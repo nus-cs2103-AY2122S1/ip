@@ -6,8 +6,9 @@ import duke.main.Storage;
 import duke.main.Ui;
 import duke.task.TaskList;
 
-import java.io.File;
-
+/**
+ * The entry point to the Duke chatbot.
+ */
 public class Duke {
     private Storage storage;
     private Ui ui;
@@ -15,20 +16,22 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Constructor for Duke.
-     *
-     * @param filePath for storing tasks.
+     * Default constructor for GUI Launcher.
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
+    }
+
+    /**
+     * Start the assistant.
+     */
+    public void start() {
         try {
             taskList = storage.load();
             ui.greetWithFamiliarity(taskList);
         } catch (DukeException e) {
-            ui.showDukeException(e.getMessage());
+            ui.showDukeException(e);
             storage.resetTasks();
-
             if (taskList != null) {
                 taskList.clearTasks();
             }
@@ -38,28 +41,23 @@ public class Duke {
     }
 
     /**
-     * Starts the assistant.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        String input = ui.getNextInput();
-
-        while (true) {
-            try {
-                boolean keepParsing = parser.parse(input);
-                if (!keepParsing) {
-                    break;
-                }
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-            input = ui.getNextInput();
+    public String getResponse(String input) {
+        try {
+            return parser.parse(input);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-        ui.closeInput();
     }
 
-    public static void main(String[] args) {
-        String filePath = System.getProperty("user.dir") + File.separator + "tasks.txt";
-        new Duke(filePath).run();
+    /**
+     * Set the ui to the given Ui object.
+     *
+     * @param ui Ui to be set
+     */
+    public void setUi(Ui ui) {
+        this.ui = ui;
     }
-
 }

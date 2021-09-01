@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.main.DukeException;
+import duke.main.Ui;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -8,6 +9,9 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * Encapsulates a task.
+ */
 abstract public class Task {
     protected boolean completed;
     protected String description;
@@ -22,12 +26,6 @@ abstract public class Task {
         this.completed = false;
     }
 
-    @Override
-    public String toString() {
-        String check = this.completed ? "[X] " : "[ ] ";
-        return check + description;
-    }
-
     /**
      * Parse the given time.
      *
@@ -39,7 +37,7 @@ abstract public class Task {
         try {
             return LocalDate.parse(time);
         } catch (DateTimeParseException e) {
-            throw new DukeException("\t☹ OOPS!!! Please specify the time in the yyyy-mm-dd format.\n");
+            throw new DukeException("\t OOPS!!! Please specify the time in the yyyy-mm-dd format.\n");
         }
     }
 
@@ -53,13 +51,18 @@ abstract public class Task {
         return time.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    @Override
+    public String toString() {
+        String check = this.completed ? "[X] " : "[ ] ";
+        return check + description;
+    }
+
     /**
      * Marks the Task as done.
      */
-    public void markAsDone() {
+    public String markAsDone() {
         this.completed = true;
-        System.out.println("\t Nice! I've marked this task as done:");
-        System.out.println("\t\t " + this + "\n");
+        return Ui.getTaskDoneMessage(this);
     }
 
     /**
@@ -67,7 +70,7 @@ abstract public class Task {
      *
      * @return String for storing the Task.
      */
-    abstract public String storageString();
+    abstract public String generateStorageString();
 
     /**
      * Checks if the task contains any keyword.

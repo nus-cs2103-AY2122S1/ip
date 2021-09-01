@@ -8,6 +8,9 @@ import duke.task.ToDo;
 
 import java.util.List;
 
+/**
+ * Handles the parsing of user commands.
+ */
 public class Parser {
     private Storage storage;
     private Ui ui;
@@ -20,67 +23,78 @@ public class Parser {
     }
 
     /**
+     * Checks if user has entered the terminating command.
+     *
+     * @param command String user input.
+     * @return true if input is terminating command else false.
+     */
+    public static boolean isTerminateCommand(String command) {
+        return command.equals("bye");
+    }
+
+    /**
      * Parses user inputs.
      *
      * @param input String from user.
-     * @return true if input is not "bye", else false.
+     * @return String response from the parser.
      */
-    public boolean parse(String input) {
+    public String parse(String input) {
         String[] commandAndDesc = input.split(" ", 2);
         String command = commandAndDesc[0];
         String description = commandAndDesc.length == 2 ? commandAndDesc[1] : "";
-
+        String response;
         switch (command) {
             case "bye":
-                return false;
+                response = ui.exitWithGoodbye();
+                break;
             case "find":
                 List<Task> matches = taskList.find(description);
-                ui.showMatchingTasks(matches);
+                response = ui.getMatchingTasksSummary(matches);
                 break;
             case "clear":
-                storage.resetTasks();
-                taskList.clearTasks();
+                String resetTaskMessage = storage.resetTasks();
+                String clearTaskMessage = taskList.clearTasks();
+                response = resetTaskMessage + clearTaskMessage;
                 break;
             case "list":
-                ui.displayTaskList(taskList);
+                response = ui.getTaskListSummary(taskList);
                 break;
             case "deadline":
-                taskList.addTask(new Deadline(description));
+                response = taskList.addTask(new Deadline(description));
                 break;
             case "event":
-                taskList.addTask(new Event(description));
+                response = taskList.addTask(new Event(description));
                 break;
             case "todo":
-                taskList.addTask(new ToDo(description));
+                response = taskList.addTask(new ToDo(description));
                 break;
             case "done":
                 Task selectedTask = selectTask(description);
-                selectedTask.markAsDone();
+                response = selectedTask.markAsDone();
                 break;
             case "delete":
                 Task toDelete = selectTask(description);
-                taskList.deleteTask(toDelete);
+                response = taskList.deleteTask(toDelete);
                 break;
             default:
                 if (command.equals("")) {
-                    ui.showEmptyInputMessage();
+                    response = ui.getEmptyInputMessage();
                 } else {
-                    ui.showUnknownCommandMessage(command);
+                    response = ui.getUnknownCommandMessage(command);
                 }
-                break;
         }
         storage.write(taskList);
-        return true;
+        return response;
     }
 
     private Task selectTask(String taskNumString) {
         try {
             int taskNum = Integer.parseInt(taskNumString);
-            Task inFocus = taskList.getTask(taskNum);
-            if (inFocus == null) {
+            Task taskInFocus = taskList.getTask(taskNum);
+            if (taskInFocus == null) {
                 throw new DukeException("\tSorry, I can't seem to find that task\n");
             }
-            return inFocus;
+            return taskInFocus;
         } catch (NumberFormatException e) {
             throw new DukeException("\tI'm Sorry, WHAT?!?!\n");
         }
