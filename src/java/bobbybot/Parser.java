@@ -80,7 +80,7 @@ public class Parser {
             break;
         case FIND:
             String keyword  = userInputList.get(1);
-            tasks.find(keyword);
+            tasks.findMatchingTasks(keyword);
             break;
         }
     }

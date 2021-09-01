@@ -100,12 +100,16 @@ public class TaskList {
         }
     }
 
-    public void find(String keyword) {
+    /**
+     * Finds all tasks with a keyword
+     * @param keyword keyword to search for
+     */
+    public void findMatchingTasks(String keyword) {
         int i = 1;
         System.out.println("Here are the tasks you're looking for sir!");
         for (Task task : tasks) {
             String sentence = task.toString();
-            if (sentence.toLowerCase().indexOf(keyword.toLowerCase()) != -1) {
+            if (sentence.toLowerCase().contains(keyword.toLowerCase())) {
                 System.out.println(i + "." + sentence);
                 i++;
             }
