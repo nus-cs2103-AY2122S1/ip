@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * @DukeArgumentException is an exception that is thrown when arguments passed into Duke commands are incorrect.
+ */
 public class DukeArgumentException extends IllegalArgumentException{
     public DukeArgumentException(String msg) {
         super(msg);
