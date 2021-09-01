@@ -14,14 +14,13 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
-
-
 /**
  * This class deals with making sense of the user command.
  */
 public class Parser {
 
     private final String input;
+    private boolean isByeCommand;
 
     /** A list of all valid commands recognised */
     enum Commands {
@@ -35,6 +34,11 @@ public class Parser {
      */
     public Parser(String input) {
         this.input = input;
+        this.isByeCommand = false;
+    }
+
+    public boolean getIsByeCommand() {
+        return isByeCommand;
     }
 
     /**
@@ -76,22 +80,23 @@ public class Parser {
      * @param tasks The current list of tasks.
      * @param ui The current user interface.
      * @param storage The storage to store/load data from.
-     * @return A boolean value signifying if there are any more commands to execute after this command.
+     * @return
      */
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String str;
         if (input.equals(Commands.BYE.toString().toLowerCase())) {
-            byeCommand(ui);
-            return true;
+            this.isByeCommand = true;
+            return byeCommand(ui);
         }
         Task t;
         if (input.equals(Commands.LIST.toString().toLowerCase())) {
-            taskCommand(tasks, ui);
+            str = taskCommand(tasks, ui);
         } else if (input.startsWith(Commands.DONE.toString().toLowerCase())) {
-            doneCommand(tasks, ui);
+            str = doneCommand(tasks, ui);
         } else if (input.startsWith(Commands.DELETE.toString().toLowerCase())) {
-            deleteCommand(tasks, ui);
+            str = deleteCommand(tasks, ui);
         } else if (input.startsWith(Commands.FIND.toString().toLowerCase())) {
-            findCommand(tasks, ui);
+            str = findCommand(tasks, ui);
         } else {
             if (input.startsWith(Commands.TODO.toString().toLowerCase())) {
                 t = todoCommand();
@@ -102,14 +107,14 @@ public class Parser {
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
-            tasks.addTask(t, ui);
+            str = tasks.addTask(t, ui);
         }
         try {
             storage.saveToDisk(tasks);
         } catch (IOException e) {
-            ui.printError(e);
+            str = ui.printError(e);
         }
-        return false;
+        return str;
     }
 
     /**
@@ -118,38 +123,37 @@ public class Parser {
      * @param tasks The current list of tasks by the user.
      * @param ui The current user interface by the user.
      */
-    public void findCommand(TaskList tasks, Ui ui) {
+    public String findCommand(TaskList tasks, Ui ui) {
         ArrayList<Task> list = new ArrayList<>();
         String description = input.substring("find".length()).trim();
-        ui.matchTaskMessage();
+        String str = ui.matchTaskMessage();
         for (int i = 0; i < tasks.numberOfTasks(); i++) {
             if (tasks.taskNumber(i).getDescription().contains(description)) {
                 list.add(tasks.taskNumber(i));
             }
         }
         TaskList matchingTasks = new TaskList(list);
-        matchingTasks.printAllTasks();
+        return str + matchingTasks.printAllTasks();
     }
 
     /** Prints out all user's tasks in numerical order. */
-    public void taskCommand(TaskList tasks, Ui ui) {
-        ui.taskListMessage();
-        tasks.printAllTasks();
+    public String taskCommand(TaskList tasks, Ui ui) {
+        return ui.taskListMessage() + "\n" + tasks.printAllTasks();
     }
 
     /** Marks a task as done. */
-    public void doneCommand(TaskList tasks, Ui ui) {
+    public String doneCommand(TaskList tasks, Ui ui) {
         String[] splitStr = input.split("\\s+");
         tasks.taskNumber(Integer.parseInt(splitStr[1]) - 1).markTaskDone();
-        ui.taskDone(tasks.taskNumber(Integer.parseInt(splitStr[1]) - 1));
+        return ui.taskDone(tasks.taskNumber(Integer.parseInt(splitStr[1]) - 1));
     }
 
     /** Deletes a task from the list. */
-    public void deleteCommand(TaskList tasks, Ui ui) {
+    public String deleteCommand(TaskList tasks, Ui ui) {
         String[] splitStr = input.split("\\s+");
-        ui.deleteTask(tasks.taskNumber(Integer.parseInt(splitStr[1]) - 1));
+        String str = ui.deleteTask(tasks.taskNumber(Integer.parseInt(splitStr[1]) - 1));
         tasks.removeTask(Integer.parseInt(splitStr[1]) - 1);
-        ui.printTaskLength(tasks);
+        return str + ui.printTaskLength(tasks);
     }
 
     /**
@@ -204,7 +208,7 @@ public class Parser {
     }
 
     /** Signals the end of the program */
-    private void byeCommand(Ui ui) {
-        ui.byeMessage();
+    private String byeCommand(Ui ui) {
+        return ui.byeMessage();
     }
 }

@@ -43,12 +43,12 @@ public class Ui {
         return sc.nextLine();
     }
 
-    public void printError(Exception e) {
-        System.out.println(e.getMessage());
+    public String printError(Exception e) {
+        return e.getMessage();
     }
 
-    public void taskListMessage() {
-        System.out.println("Here are the tasks in your list: ");
+    public String taskListMessage() {
+        return "Here are the tasks in your list: ";
     }
 
     /**
@@ -56,13 +56,12 @@ public class Ui {
      *
      * @param t The task to be marked as done.
      */
-    public void taskDone(Task t) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  " + t);
+    public String taskDone(Task t) {
+        return "Nice! I've marked this task as done: \n  " + t + '\n';
     }
 
-    public void printTaskLength(TaskList tasks) {
-        System.out.println("Now you have " + tasks.numberOfTasks() + " tasks in the list.");
+    public String printTaskLength(TaskList tasks) {
+        return "Now you have " + tasks.numberOfTasks() + " tasks in the list.\n";
     }
 
     /**
@@ -70,13 +69,12 @@ public class Ui {
      *
      * @param t The task to be added.
      */
-    public void addTaskMessage(Task t) {
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("  " + t);
+    public String addTaskMessage(Task t) {
+        return "Got it. I've added this task: \n  " + t + '\n';
     }
 
-    public void byeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String byeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -84,16 +82,15 @@ public class Ui {
      *
      * @param t The task to be deleted.
      */
-    public void deleteTask(Task t) {
-        System.out.println("Noted! I've removed this task: ");
-        System.out.println("  " + t);
+    public String deleteTask(Task t) {
+        return "Noted! I've removed this task: \n  " + t + '\n';
     }
 
-    public void showLoadingError() {
-        System.out.println("No past saved data!");
+    public static String showLoadingError() {
+        return "No past saved data!\n";
     }
 
-    public void matchTaskMessage() {
-        System.out.println("Here are the matching tasks in your list:");
+    public String matchTaskMessage() {
+        return "Here are the matching tasks in your list: \n";
     }
 }
