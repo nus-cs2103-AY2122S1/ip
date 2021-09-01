@@ -7,10 +7,9 @@ import duke.taskTypes.Event;
 import duke.taskTypes.Task;
 import duke.taskTypes.Todo;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-import java.util.LinkedHashMap;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * contains the task list that has operations to add/delete tasks in the list
@@ -56,6 +55,7 @@ public class TaskList {
             mapper.put(pastTask.getDescription(), pastTask);
         }
     }
+
 
 
 
@@ -171,8 +171,27 @@ public class TaskList {
         return check;
     }
 
-    public LinkedHashMap getMapper() {
-        return this.mapper;
+    public String[] find(String key) {
+
+        Collection<Task> values = mapper.values();
+        Iterator<Task> look = values.iterator();
+        List<String> keyFound = new ArrayList<>();
+
+        Pattern p = Pattern.compile(key);
+
+        int pos = 1;
+
+        while (look.hasNext()){
+            Task curr = look.next();
+            Matcher m = p.matcher(curr.getDescription());
+
+            if (m.find()) {
+                String taskDisplay = pos + ". " + curr.toString();
+                keyFound.add(taskDisplay);
+                pos++;
+            }
+        }
+        return keyFound.toArray(keyFound.toArray(new String[0]));
     }
 
     /**

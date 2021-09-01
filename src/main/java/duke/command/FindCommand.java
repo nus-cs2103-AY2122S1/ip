@@ -26,27 +26,8 @@ public class FindCommand extends Command {
 
     @Override
     public boolean exec() throws DukeException {
-        LinkedHashMap mapper = taskList.getMapper();
 
-        Collection<Task> values = mapper.values();
-        Iterator<Task> look = values.iterator();
-        List<String> keyFound = new ArrayList<>();
-
-        Pattern p = Pattern.compile(key);
-
-        int pos = 1;
-
-        while (look.hasNext()){
-            Task curr = look.next();
-            Matcher m = p.matcher(curr.getDescription());
-
-            if (m.find()) {
-                String taskDisplay = pos + ". " + curr.toString();
-                keyFound.add(taskDisplay);
-                pos++;
-            }
-        }
-        String[] keyFoundArr = keyFound.toArray(new String[0]);
+        String[] keyFoundArr = taskList.find(key);
 
         if (keyFoundArr.length == 0){
             ui.listMsg(new String[]{"None Found"}, taskList);
