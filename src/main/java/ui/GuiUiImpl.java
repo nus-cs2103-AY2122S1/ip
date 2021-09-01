@@ -1,25 +1,28 @@
 package ui;
 
-import ui.view.MainWindow;
+import ui.view.IWindowController;
 
 import java.util.List;
 
 public class GuiUiImpl implements IUi {
-    private final MainWindow mainWindow;
+    /**
+     * The first window controller in the array is reserved for the main window.
+     */
+    private final IWindowController[] mainWindow;
     
-    public GuiUiImpl(MainWindow mainWindow) {
+    public GuiUiImpl(IWindowController... mainWindow) {
         this.mainWindow = mainWindow;
     }
     
     @Override
     public void printSentence(String sentence) {
-        mainWindow.addBotDialog(sentence);
+        mainWindow[0].addBotDialog(sentence);
     }
     
     @Override
     public <T> void printIndexedList(List<T> list) {
         String formattedList = formatListToString(list);
-        mainWindow.addBotDialog(formattedList);
+        mainWindow[0].addBotDialog(formattedList);
     }
     
     private <T> String formatListToString(List<T> list) {

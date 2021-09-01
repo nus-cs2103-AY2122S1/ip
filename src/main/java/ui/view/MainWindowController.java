@@ -19,7 +19,7 @@ import java.util.logging.Logger;
 /**
  * Main Gui that creates the window for chatting.
  */
-public class MainWindow extends AnchorPane {
+public class MainWindowController extends AnchorPane implements IWindowController {
     private static final Logger logger = Logger.getLogger(DialogBox.class.getName());
     private final Image userImage = new Image(Objects.requireNonNull(this.getClass()
             .getResourceAsStream("/images/User.png")));
@@ -72,16 +72,19 @@ public class MainWindow extends AnchorPane {
         }
     }
     
-    private void addUserDialog(String s) {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void addUserDialog(String s) {
         System.out.println(this.dialogContainer.toString());
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(s, userImage));
     }
     
     /**
-     * Displays the dialog box for the bot which can be used when the bot wants to announce without user inputs.
-     *
-     * @param s String to be displayed.
+     * {@inheritDoc}
      */
+    @Override
     public void addBotDialog(String s) {
         System.out.println(this.dialogContainer.toString());
         dialogContainer.getChildren().addAll(DialogBox.getBotDialog(s, chatbotImage));

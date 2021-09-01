@@ -10,7 +10,7 @@ import logic.CommandLogicUnitImpl;
 import logic.ICommandLogicUnit;
 import ui.GuiUiImpl;
 import ui.IUi;
-import ui.view.MainWindow;
+import ui.view.MainWindowController;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class MainGui extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
-            MainWindow mainWindow = fxmlLoader.getController();
+            MainWindowController mainWindow = fxmlLoader.getController();
             
             // this is circular dependency, due to my bad design :(
             TaskDao taskDao = new TaskDaoImpl();
