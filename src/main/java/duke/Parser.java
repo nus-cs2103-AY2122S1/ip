@@ -16,7 +16,9 @@ public class Parser {
      */
     public Command parse(String command, TaskList taskArr) throws DukeException {
         String[] commandArr = command.split(" ");
-        if (command.equals("list")) {
+        if (command.equals("bye")) {
+            return new ByeCommand();
+        } else if (command.equals("list")) {
             return new ListCommand();
         } else if (commandArr[0].equals("done")) {
             int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
@@ -29,7 +31,7 @@ public class Parser {
                 String keyword = commandArr[1];
                 return new FindCommand(keyword);
             } catch (ArrayIndexOutOfBoundsException e) {
-                System.out.println("Please insert a word after \"done\"");
+                return new ErrorCommand("Please insert a word after \"done\"");
             }
 
         } else {
@@ -47,9 +49,9 @@ public class Parser {
 
             } else if (commandArr[0].equals("deadline")) {
                 if (wrongArrayLength) {
-                    throw new DukeException("The description of a deadline cannot be empty!");
+                    return new ErrorCommand("The description of a deadline cannot be empty!");
                 } else if (!command.contains("/by ")) {
-                    throw new DukeException("Remember to type input in this format:\"[deadline] [task] /by [date]\"");
+                    return new ErrorCommand("Remember to type input in this format:\"[deadline] [task] /by [date]\"");
                 } else {
                     System.out.println(taskAdded);
                     int spaceIndex = command.indexOf(" ");
@@ -61,10 +63,10 @@ public class Parser {
 
             } else if (commandArr[0].equals("event")) {
                 if (wrongArrayLength) {
-                    throw new DukeException("The description of an event cannot be empty!");
+                    return new ErrorCommand("The description of an event cannot be empty!");
 
                 } else if (!command.contains("/at ")) {
-                    throw new DukeException("Remember to enter event in this format:\"[event] [task] /at [date]\"");
+                    return new ErrorCommand("Remember to enter event in this format:\"[event] [task] /at [date]\"");
                 } else {
                     System.out.println(taskAdded);
                     int spaceIndex = command.indexOf(" ");
@@ -75,11 +77,10 @@ public class Parser {
                 }
 
             } else {
-                throw new DukeException("I'm sorry, but I don't know what that means!");
+                return new ErrorCommand("I'm sorry, but I don't know what that means!");
             }
 
         }
-        throw new DukeException("I'm sorry, but I don't know what that means!");
     }
 
 
