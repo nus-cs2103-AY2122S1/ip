@@ -37,7 +37,7 @@ public class ExceptionCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printDukeException(e.getMessage());
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.printDukeException(e.getMessage());
     }
 }

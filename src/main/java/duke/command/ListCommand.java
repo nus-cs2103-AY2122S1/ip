@@ -28,12 +28,13 @@ public class ListCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printStartList();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        StringBuilder response = new StringBuilder();
+        response.append(ui.printStartList());
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            ui.printTask(task, i + 1);
+            response.append(ui.printTask(task, i + 1));
         }
-        ui.printLine();
+        return response.toString();
     }
 }

@@ -29,7 +29,7 @@ public abstract class Task {
      * Marks the task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
+        this.isDone = !isDone;
     }
 
     /**

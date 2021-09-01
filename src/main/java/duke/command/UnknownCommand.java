@@ -29,7 +29,7 @@ public class UnknownCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printUnknownCommand();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.printUnknownCommand();
     }
 }

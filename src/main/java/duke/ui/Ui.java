@@ -28,11 +28,8 @@ public class Ui {
     /**
      * Greets the user.
      */
-    public void sayHello() {
-        System.out.println("Greetings from\n" + logo);
-        this.printLine();
-        System.out.println("What can I do for you?");
-        this.printLine();
+    public String sayHello() {
+        return "Greetings from Bribot\nWhat can I do for you?\n";
     }
 
     /**
@@ -46,18 +43,18 @@ public class Ui {
     /**
      * prints out a separator line
      */
-    public void printLine() {
-        System.out.println("____________________________________________________________");
+    public String printLine() {
+        return "____________________________________________________________";
     }
 
     /**
      * Prints out that the given tasks has been marked.
      * @param task the given task.
      */
-    public void markTask(Task task) {
-        this.printLine();
-        System.out.println(task);
-        this.printLine();
+    public String markTask(Task task) {
+        // this.printLine();
+        return task.toString();
+        // this.printLine();
     }
 
     /**
@@ -65,66 +62,61 @@ public class Ui {
      * @param task given task
      * @param index index to show the position in the list.
      */
-    public void printTask(Task task, int index) {
-        System.out.println(index + ". " + task);
+    public String printTask(Task task, int index) {
+        return index + ". " + task.toString()+ "\n";
     }
 
     /**
      * Prints the start of the list feature.
      */
-    public void printStartList() {
-        this.printLine();
-        System.out.println("Here are the tasks in your list:");
+    public String printStartList() {
+        return "Here are the tasks in your list:\n";
     }
 
     /**
      * Prints that the given command is not understood by the program.
      */
-    public void printUnknownCommand() {
-        this.printLine();
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        this.printLine();
+    public String printUnknownCommand() {
+//        this.printLine();
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
+//        this.printLine();
     }
 
     /**
      * Says good bye to the user.
      */
-    public void sayGoodBye() {
-        this.printLine();
-        System.out.println("Bye. Hope to see you soon!");
-        this.printLine();
+    public String sayGoodBye() {
+//        this.printLine();
+        return "Bye. Hope to see you soon!\n";
+//        this.printLine();
     }
 
     /**
      * Prints out the given message.
      * @param message the given message.
      */
-    public void printDukeException(String message) {
-        this.printLine();
-        System.out.println(message);
-        this.printLine();
+    public String printDukeException(String message) {
+        return message;
     }
 
     /**
      * Prints that the task has been successfully added to the user.
      * @param task the given task to be printed.
      */
-    public void printAddedTask(Task task) {
-        this.printLine();
-        System.out.println("Done! added the following task:");
-        System.out.println(task);
-        this.printLine();
+    public String printAddedTask(Task task) {
+//        this.printLine();
+        return "Done! added the following task:\n" + task;
+//        this.printLine();
     }
 
     /**
      * Prints that the given task has been successfully deleted to the user.
      * @param task the given task to be deleted.
      */
-    public void printDeletedTask(Task task) {
-        this.printLine();
-        System.out.println("Done! deleted the following task:");
-        System.out.println(task);
-        this.printLine();
+    public String printDeletedTask(Task task) {
+//        this.printLine();
+        return "Done! deleted the following task:\n" + task;
+//        this.printLine();
     }
 
     /**
@@ -137,11 +129,11 @@ public class Ui {
     /**
      * Show that there was an error reading from the text file.
      */
-    public void showLoadingError() {
-        System.out.println("ERROR LOADING FILE");
+    public String showLoadingError() {
+        return "ERROR LOADING FILE";
     }
 
-    public void printMessage(String s) {
-        System.out.println(s);
+    public String printMessage(String s) {
+        return s;
     }
 }
