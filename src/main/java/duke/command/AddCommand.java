@@ -51,7 +51,7 @@ public class AddCommand extends Command {
     private String addDeadline(String input) {
         // First check if the user has only input the one word "deadline".
         if (input.split(" ", 2).length == 1) {
-            return "☹ Oops! Looks like you are missing the description and the deadline date! "
+            return "Oops! Looks like you are missing the description and the deadline date! "
                     + "Try again :-)";
         }
         // If "deadline" is entered with more words, check information.
@@ -60,7 +60,7 @@ public class AddCommand extends Command {
 
         //In the case where date is not entered.
         if (description.length == 1) {
-            return "☹ Oops! Looks like you are missing the deadline date! Try again :-)";
+            return "Oops! Looks like you are missing the deadline date! Try again :-)";
         }
         Deadline newDL = new Deadline(description[0], description[1]);
         try {
@@ -84,7 +84,7 @@ public class AddCommand extends Command {
     private String addEvent(String input) {
         // First check if the user has only input the one word "event".
         if (input.split(" ", 2).length == 1) {
-            return "☹ Oops! Looks like you are missing the description and the event location!"
+            return "Oops! Looks like you are missing the description and the event location!"
                     + " Try again :-)";
         }
         // If "event" is entered with more words, check information.
@@ -93,7 +93,7 @@ public class AddCommand extends Command {
 
         //In the case where location is not entered.
         if (description.length == 1) {
-            return "☹ Oops! Looks like you are missing the event location! Try again :-)";
+            return "Oops! Looks like you are missing the event location! Try again :-)";
         }
         Event newEV = new Event(description[0], description[1]);
         try {
@@ -117,7 +117,7 @@ public class AddCommand extends Command {
     private String addTodo(String input) {
         // First check if the user has only input the one word "todo".
         if (input.split(" ", 2).length == 1) {
-            return "☹ Oops! Looks like you are missing the description! Try again :-)";
+            return "Oops! Looks like you are missing the description! Try again :-)";
         }
         //If "todo" is entered with more words, use the information.
         String[] information = input.split(" ", 2);

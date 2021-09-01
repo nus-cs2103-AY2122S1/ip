@@ -32,7 +32,7 @@ public class TaskList {
      */
     public static String showList() {
         String showListText = "Here are the tasks in your list:";
-        String emptyListText = "☹ Oops! Looks like you have no tasks in your list!";
+        String emptyListText = "Oops! Looks like you have no tasks in your list!";
 
         if (dukeList.size() == 0) {
             return emptyListText;
@@ -105,5 +105,13 @@ public class TaskList {
             }
         }
         return results;
+    }
+
+    /**
+     * Updates the dukeList.
+     * @throws DukeException if cannot be updated.
+     */
+    public static void update() throws DukeException{
+        Data.updateData(dukeList);
     }
 }

@@ -6,6 +6,6 @@ public class WrongCommand extends Command {
 
     @Override
     public String getResponse(String input) {
-        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+        return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 }

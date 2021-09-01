@@ -16,10 +16,10 @@ public class FindCommand extends Command {
     @Override
     public String getResponse(String input) {
         if (input.split(" ", 2).length == 1) {
-            return "☹ Oops! Looks like you are missing the keyword you wish to search! Try again :-)";
+            return "Oops! Looks like you are missing the keyword you wish to search! Try again :-)";
         }
         if (input.split(" ", 2).length > 2) {
-            return "☹ Oops! Looks like you are searching for multiple keywords! Try again with one keyword:-)";
+            return "Oops! Looks like you are searching for multiple keywords! Try again with one keyword:-)";
         }
         String[] information = input.split(" ", 2);
         String output = "Here are the matching tasks in your list:\n";
