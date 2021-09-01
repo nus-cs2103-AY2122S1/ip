@@ -1,6 +1,2 @@
-T | 0 | a
-T | 0 | b
-T | 0 | bb
-T | 0 | bbb
-T | 0 | c
-D | 0 | go | today
+T | 0 | Buy pen
+T | 1 | submit lab2

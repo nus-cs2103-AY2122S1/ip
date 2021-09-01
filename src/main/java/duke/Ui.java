@@ -31,13 +31,13 @@ public class Ui {
     }
 
     public void showAddTask(TaskList tasks, Task task) {
-        System.out.println("    Got it. I've added this task: \n      " + task);
-        System.out.println("    Now you have " + tasks.getListSize() + " in the list.");
+        System.out.println("\tGot it. I've added this task: \n      " + task);
+        System.out.println("\tNow you have " + tasks.getListSize() + " in the list.");
     }
 
     public void showDeleteTask(TaskList tasks, Task task) {
-        System.out.println("    Noted. I've removed this task: \n      " + task);
-        System.out.println("    Now you have " + tasks.getListSize() + " in the list.");
+        System.out.println("\tNoted. I've removed this task: \n      " + task);
+        System.out.println("\tNow you have " + tasks.getListSize() + " in the list.");
     }
 
     public void showLoadingError() {
