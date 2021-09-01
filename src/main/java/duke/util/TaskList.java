@@ -1,12 +1,20 @@
+package duke.util;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class TaskList {
 
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
 
     public TaskList(ArrayList<Task> tasks) {
         list = tasks;
+    }
+
+    public TaskList() {
+        list = new ArrayList<>();
     }
 
     public Task get(int index) {
@@ -17,8 +25,16 @@ public class TaskList {
         list.add(task);
     }
 
-    public void delete(int i) throws NoSuchTaskException {
-        list.remove(i);
+    public void delete(int i) {
+        try {
+            list.remove(i);
+        } catch (IndexOutOfBoundsException e) {
+            System.err.println(e);
+        }
+    }
+
+    public int index() {
+        return list.indexOf(this);
     }
 
     public int size() {

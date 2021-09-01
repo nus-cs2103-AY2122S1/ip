@@ -1,3 +1,5 @@
+package duke.task;
+
 import org.json.simple.JSONObject;
 
 public class ToDo extends Task {

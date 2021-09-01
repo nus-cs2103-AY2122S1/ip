@@ -1,6 +1,9 @@
+package duke.task;
+
+import duke.InvalidInputException;
 import org.json.simple.JSONObject;
 
-public class Task {
+public abstract class Task {
 
     protected boolean isCompleted;
     protected String description;
@@ -9,18 +12,6 @@ public class Task {
         this.isCompleted = false;
         this.description = description;
     }
-
-//    public void handle(String input) throws InvalidInputException {
-//        // parse input first
-//        String firstWord = "";
-//        switch (firstWord) {
-//            case "todo":
-//                // create todo and let the todo handle it
-//            case "event":
-//            case "deadline":
-//            default:
-//        }
-//    }
 
     public boolean checkCompletion() {
         return this.isCompleted;

@@ -1,82 +1,67 @@
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.ui.Ui;
+import duke.util.Parser;
+import duke.util.TaskList;
+import duke.task.ToDo;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Duke {
 
-    private static final String FILEPATH = "./data/tasks.json";
-    private static Duke.Storage storage = new Duke.Storage(FILEPATH);
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+    private Parser parser;
+
+
     private static final String tab = "      ";
     private static final String line = "------------------------------------------------------------";
 
-    public static void textBox(String... messages) {
 
-        System.out.println(tab + line);
-        for (int i = 0; i < messages.length; i++) {
-            System.out.println(tab + " " + messages[i]);
-        }
-        System.out.println(tab + line);
-    }
-
-    public static void main(String[] args) throws NoSuchTaskException, InvalidInputException, FileNotFoundException {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-        String necroLogo =
-                  " ___    _                \n"
-                + "|   \\  | |   _____     ___    _  __     _____  \n"
-                + "| |\\ \\ | |  / __  \\  /   _|  | v __|  /  ___  \\ \n"
-                + "| | \\ \\| | |    __/  |  <_   |  /    |   |_|   |\n"
-                + "|_|  \\___|  \\_____|  \\____|  |__|     \\  ___  / \n";
-        System.out.println("Hello from\n" + necroLogo);
-        String tab = "      ";
-        String line = "------------------------------------------------------------";
-        Duke.textBox("Hello. My name is Necro.",
-                "What can I do for you on this horrible day?");
-
-//        String FILEPATH = "./data/tasks.json";
-//        Storage storage = new Storage(FILEPATH);
-        Scanner sc = new Scanner(System.in);
-
-        TaskList tasks;
+    public Duke(String filePath) {
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            tasks = new TaskList(new ArrayList<>());
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
+    }
+
+    public void run() throws NoSuchTaskException, InvalidInputException, FileNotFoundException {
+
+        ui.showWelcome();
+        Scanner sc = new Scanner(System.in);
 
         while (true) {
-            String input = sc.nextLine();
+            String input = sc.nextLine().trim().replaceAll(" +", " ");
 
             // POLYMORPHISM! make a general method in the Task class and have each
             // different task handle the input differently!
 
+            parser.parse(input);
+
             if (input.startsWith("delete ")) {
                 String[] strings = input.split(" ");
                 if (tasks.size() == 0) {
-                    Duke.textBox("There are currently no tasks.",
-                            "You can't delete something that doesn't exist.");
+                    ui.showEmptyList();
                 } else {
                     try {
                         if (strings.length < 2) {
-                            Duke.textBox("You did not specify which task to delete. Please wake up.");
+                            ui.textBox("You did not specify which task to delete. Please wake up.");
                         } else {
                             int taskNumber = Integer.parseInt(strings[1]) - 1;
                             if (taskNumber < tasks.size()) {
-                                // todo: abstract this out to a separate method
-                                Duke.textBox("Since you are so lazy, I've helped you delete this task:",
-                                        tasks.get(taskNumber).toString(),
-                                        "Go do something useful with your life.");
+                                ui.showDelete(tasks.get(taskNumber).toString());
+                                // todo: make this a try catch
                                 tasks.delete(taskNumber);
                             } else {
-                                Duke.textBox("You have entered an invalid task number. Fool.");
+                                ui.textBox("You have entered an invalid task number. Fool.");
                             }
                         }
                     } catch (NumberFormatException ex) {
@@ -87,22 +72,19 @@ public class Duke {
             } else if (input.startsWith("done ")) {
                 String[] strings = input.split(" ");
                 if (tasks.size() == 0) {
-                    Duke.textBox("There are currently no tasks. ",
-                            "You can't do something that doesn't exist.");
+                    ui.showEmptyList();
                 } else {
                     try {
                         if (strings.length < 2) {
-                            Duke.textBox("You did not specify which task to complete.");
+                            ui.textBox("You did not specify which task to complete.");
                         } else {
                             int taskNumber = Integer.parseInt(strings[1]) - 1;
                             if (taskNumber < tasks.size()) {
                                 if (tasks.get(taskNumber).checkCompletion()) {
-                                    Duke.textBox("The task has already been completed, please be more attentive.");
+                                    ui.textBox("The task has already been completed, please be more attentive.");
                                 } else {
                                     tasks.get(taskNumber).complete();
-                                    Duke.textBox("Wow. Congratulations. You have completed the following task:",
-                                            tasks.get(taskNumber).toString(),
-                                            "Are you happy now?");
+                                    ui.showComplete(tasks.get(taskNumber).toString());
                                 }
                             } else {
                                 System.out.println("You have entered an invalid task number. Fool.");
@@ -114,7 +96,7 @@ public class Duke {
                 }
             } else if (input.equals("list")) {
                 if (tasks.size() == 0) {
-                    System.out.println("You currently do not have any tasks. Fool.");
+                    ui.showEmptyList();
                 } else {
                     System.out.println(tab + line);
                     System.out.println(tab + "Here are the tasks in your list:");
@@ -124,8 +106,8 @@ public class Duke {
                     System.out.println(tab + line);
                 }
             } else if (input.equals("bye")) {
-                Duke.textBox("Farewell, may we never meet again.");
                 storage.write(tasks);
+                ui.showGoodbye();
                 break;
             } else {
                 String output;
@@ -188,79 +170,13 @@ public class Duke {
                     }
 
                 }
-                Duke.textBox("Fine. I've added this meaningless task to your list: ",
-                        " --> " + output,
-                        "Satisfied now? You have " + (tasks.size() + 1) + " items in your list. ");
-                //tasks.add(new Task(output));
-                //tasks.get(counter).status = tasks.get(counter).status.substring(4);
+                ui.showAdd(output, tasks.size());
             }
         }
 
     }
 
-    public static class Storage {
-
-        private String filePath;
-        private FileWriter fileWriter;
-        private JSONParser jsonParser;
-
-        public Storage(String filePath) {
-            this.filePath = filePath;
-        }
-
-        @SuppressWarnings("unchecked")
-        public ArrayList<Task> parseFromJson(String filePath) {
-            ArrayList<Task> tasks = new ArrayList<>();
-            jsonParser = new JSONParser();
-            try (FileReader reader = new FileReader(filePath)) {
-                JSONArray arr = (JSONArray) jsonParser.parse(reader);
-                arr.forEach((task) -> {
-                    try {
-                        tasks.add(Task.fromJsonObject((JSONObject) task));
-                    } catch (InvalidInputException e) {
-                        e.printStackTrace();
-                    }
-                });
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
-            }
-            return tasks;
-        }
-
-        //
-        @SuppressWarnings("unchecked")
-        public void write(TaskList tasks) {
-            JSONArray arr = new JSONArray();
-            tasks.forEach((task) -> arr.add(task.toJsonObject()));
-            try {
-                fileWriter = new FileWriter(filePath);
-                fileWriter.write(arr.toJSONString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                try {
-                    fileWriter.flush();
-                    fileWriter.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-
-        // Done
-        public ArrayList<Task> load() throws FileNotFoundException {
-            try {
-                File file = new File(filePath);
-                boolean directoryExists = !file.getParentFile().mkdir();
-                boolean fileExists = !file.createNewFile();
-                if (directoryExists && fileExists) {
-                    return parseFromJson(filePath);
-                }
-                throw new FileNotFoundException();
-            } catch (IOException e) {
-                throw new FileNotFoundException();
-            }
-        }
-
+    public static void main(String[] args) throws InvalidInputException, NoSuchTaskException, FileNotFoundException {
+        new Duke("./data/tasks.json").run();
     }
 }
