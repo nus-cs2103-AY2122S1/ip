@@ -16,7 +16,8 @@ public class Parser {
     protected static final String WORD_EVENT_AT = " /at ";
     protected static final String WORD_DELETE = "delete ";
     protected static final String DIVIDER_WORD = " \\| ";
-    
+    protected static final String WORD_FIND = "find ";
+
     public static DukeAction stringToDukeAction(String s, int listSize) throws DukeException {
         // Remove all leading whitespaces
         s = s.stripLeading();
@@ -26,6 +27,9 @@ public class Parser {
         }
         else if (s.equals(WORD_LIST)) {
             return DukeAction.PRINT_LIST;
+        }
+        else if (isFind(s)) {
+            return DukeAction.FIND;
         }
         else if (isMarkDown(s, listSize)) {
             return DukeAction.MARK_DONE;
@@ -42,14 +46,24 @@ public class Parser {
         else if (isEvent(s)) {
             return DukeAction.EVENT;
         } else {
-            throw Arrays.asList(new String[] {"todo", "done", "event", "delete", "deadline"})
+            throw Arrays.asList(new String[] {"todo", "done", "event", "delete", "deadline", "find"})
                     .contains(s)
                     ? new DukeException(ExceptionType.MISSING_OPERAND)
                     : new DukeException(ExceptionType.INVALID_COMMAND);
         }
     }
 
+    private static boolean isFind(String s) throws DukeException {
+        if (s.equals(WORD_FIND)) {
+            throw new DukeException(ExceptionType.MISSING_OPERAND);
+        }
+        return s.length() > WORD_FIND.length() && s.startsWith(WORD_FIND);
+    }
+
     private static boolean isMarkDown(String s, int listSize) throws DukeException {
+        if (s.equals(WORD_MARK)) {
+            throw new DukeException(ExceptionType.MISSING_OPERAND);
+        }
         if (s.length() > WORD_MARK.length() && s.startsWith(WORD_MARK)) {
             try {
                 int taskIndex = parseMarkString(s);
@@ -127,6 +141,10 @@ public class Parser {
             }
         }
         return false;
+    }
+
+    protected static String parseFindString(String s) {
+        return s.substring(WORD_FIND.length());
     }
 
     protected static String[] parseDeadlineString(String s) {

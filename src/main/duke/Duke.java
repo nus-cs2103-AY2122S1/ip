@@ -69,6 +69,9 @@ public class Duke {
                 case DELETE:
                     onTaskRemoved(Parser.parseDeleteString(userInput));
                     break;
+                case FIND:
+                    onFindTask(Parser.parseFindString(userInput));
+                    break;
                 case TODO:
                     ToDo toDo = new ToDo(userInput.substring(5));
                     onNewTaskAdded(toDo);
@@ -97,6 +100,14 @@ public class Duke {
     }
 
     // Handlers
+
+    private void onFindTask(String keyWord) {
+        Ui.printFoundTasks(taskList.stream()
+                .filter(t -> t.getDescription().contains(keyWord))
+                .map(Task::toString)
+                .toArray(String[]::new)
+        );
+    }
 
     private <T extends Task> void onNewTaskAdded(T t) throws DukeException{
         taskList.add(t);
