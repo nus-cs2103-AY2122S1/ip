@@ -4,23 +4,26 @@ import jared.common.DukeException;
 import jared.storage.Storage;
 import jared.task.TaskList;
 import jared.ui.Ui;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
- * Class for the jared.Jared project. Allows user to create a task list to keep track of Todos, Deadlines and Events.
+ * Class for the Jared project. Allows user to create a task list to keep track of Todos, Deadlines and Events.
  */
-public class Jared {
+public class Jared extends Application {
     private static final String FILE_NAME = "data.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
-     * Constructor for the jared.Jared Class.
-     * @param filePath file path where the data of the task list resides.
+     * Constructor for the Jared Class.
      */
-    public Jared(String filePath) {
+    public Jared() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_NAME);
         try {
             tasks = new TaskList(storage.loadData(), storage);
         } catch (DukeException e) {
@@ -29,7 +32,7 @@ public class Jared {
     }
 
     /**
-     * Runs the jared.Jared instance. Starts up the scanner to receive tasks.
+     * Runs the Jared instance. Starts up the scanner to receive tasks.
      */
     public void run() {
         try {
@@ -40,11 +43,20 @@ public class Jared {
         }
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
     /**
      * Main function.
      */
     public static void main(String[] args) {
-        new Jared(FILE_NAME).run();
+        new Jared().run();
     }
 
 }
