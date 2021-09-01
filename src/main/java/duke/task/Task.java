@@ -30,7 +30,7 @@ public abstract class Task {
       * @return String of the status of the task.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " ");
+        return (isDone ? "\u2713" : " ");
     }
 
     /**
