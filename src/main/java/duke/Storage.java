@@ -107,7 +107,6 @@ public class Storage {
             fw.close();
             Files.delete(filePath);
             Files.copy(temp, filePath);
-            //noinspection ResultOfMethodCallIgnored
             tempFile.delete();
         } catch (IOException e) {
             throw new DukeException("D: OH NOOOOO! Something wrong with the file!!" + e.getMessage());
