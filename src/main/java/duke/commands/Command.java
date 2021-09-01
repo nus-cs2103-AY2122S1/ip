@@ -3,7 +3,7 @@ package duke.commands;
 import duke.DateTimeHandler;
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
+import duke.Ui;
 
 /**
  * Encapsulates the abstract command class that concrete command implementations extend from
@@ -32,14 +32,14 @@ public abstract class Command {
      * @param dth The DateTimeHandler object to interact with date-times.
      * @return The String to be printed
      */
-    public abstract String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth);
+    public abstract String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth);
 
     /**
      * Returns the prefix of the command
      *
      * @return The command prefix
      */
-    public abstract String startsWith();
+    public abstract String getCommandPrefix();
 
     /**
      * Closes the program if true

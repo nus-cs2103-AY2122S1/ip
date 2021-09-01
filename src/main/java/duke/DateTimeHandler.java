@@ -12,10 +12,10 @@ public class DateTimeHandler {
      * Array of valid formats as Strings.
      */
     private final String[] FORMATS = {
-            "dd-MM-yyyy hh:mm a",
-            "dd-MM-yyyy HHmm",
-            "dd/MM/yyyy hh:mm a",
-            "dd/MM/yyyy HHmm"
+        "dd-MM-yyyy hh:mm a",
+        "dd-MM-yyyy HHmm",
+        "dd/MM/yyyy hh:mm a",
+        "dd/MM/yyyy HHmm"
     };
 
     /**
@@ -23,9 +23,11 @@ public class DateTimeHandler {
      */
     private final DateTimeFormatter[] dtfList = new DateTimeFormatter[FORMATS.length];
 
-
+    /**
+     * Constructs a DateTimeHandler object and populates dtfList.
+     */
     public DateTimeHandler() {
-        for(int i = 0; i< FORMATS.length; i++) {
+        for (int i = 0; i < FORMATS.length; i++) {
             dtfList[i] = DateTimeFormatter.ofPattern(FORMATS[i]);
         }
     }
@@ -40,7 +42,7 @@ public class DateTimeHandler {
     private boolean tryToParse(DateTimeFormatter dtf, String s) {
         try {
             LocalDateTime.parse(s, dtf);
-        } catch(DateTimeParseException e) {
+        } catch (DateTimeParseException e) {
             return false;
         }
         return true;
@@ -67,7 +69,7 @@ public class DateTimeHandler {
      * @return The String array containing the valid date formats.
      */
     public String[] getFormatList() {
-        String[] res = new String[FORMATS.length+1];
+        String[] res = new String[FORMATS.length + 1];
         res[0] = "Valid date formats:";
         System.arraycopy(FORMATS, 0, res, 1, FORMATS.length);
         return res;

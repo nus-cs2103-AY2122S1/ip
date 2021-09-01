@@ -1,10 +1,10 @@
 package duke.commands;
 
 import duke.DateTimeHandler;
-import duke.Task;
 import duke.Storage;
+import duke.Task;
 import duke.TaskList;
-import duke.UI;
+import duke.Ui;
 
 /**
  * Encapsulates the delete command, used to delete tasks from the task list
@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
         String args = super.getArguments();
         if (args.length() == 0) {
             return "Please enter a number after delete";
@@ -43,7 +43,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String startsWith() {
+    public String getCommandPrefix() {
         return "delete";
     }
 }

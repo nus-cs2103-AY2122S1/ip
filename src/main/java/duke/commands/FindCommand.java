@@ -3,7 +3,7 @@ package duke.commands;
 import duke.DateTimeHandler;
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
+import duke.Ui;
 
 public class FindCommand extends Command {
 
@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
         String args = super.getArguments();
         if (args.length() == 0) {
             return "Please enter a search term after find";
@@ -28,7 +28,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String startsWith() {
+    public String getCommandPrefix() {
         return "find";
     }
 }

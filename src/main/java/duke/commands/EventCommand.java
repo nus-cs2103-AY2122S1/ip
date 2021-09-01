@@ -1,13 +1,12 @@
 package duke.commands;
 
+import java.time.LocalDateTime;
+
 import duke.DateTimeHandler;
 import duke.Event;
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
-
-
-import java.time.LocalDateTime;
+import duke.Ui;
 
 /**
  * Encapsulates the event command, used to create event tasks
@@ -24,7 +23,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
         String args = super.getArguments();
         if (args.length() == 0) {
             return "Please enter the name of the task after event";
@@ -44,7 +43,7 @@ public class EventCommand extends Command {
     }
 
     @Override
-    public String startsWith() {
+    public String getCommandPrefix() {
         return "event";
     }
 }

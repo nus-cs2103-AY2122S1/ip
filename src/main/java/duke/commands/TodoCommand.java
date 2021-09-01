@@ -4,7 +4,7 @@ import duke.DateTimeHandler;
 import duke.Storage;
 import duke.TaskList;
 import duke.Todo;
-import duke.UI;
+import duke.Ui;
 
 /**
  * Encapsulates the todo command, used to create a todo task
@@ -21,7 +21,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
         String args = super.getArguments();
         if (args.length() == 0) {
             return "Please enter the name of the task after todo";
@@ -32,7 +32,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public String startsWith() {
+    public String getCommandPrefix() {
         return "todo";
     }
 }

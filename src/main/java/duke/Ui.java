@@ -3,7 +3,7 @@ package duke;
 /**
  * Encapsulates a class that contains methods for interacting with the user.
  */
-public class UI {
+public class Ui {
 
     /**
      * Returns a single String that is multiple Strings from a string array appended with new lines.
@@ -13,7 +13,7 @@ public class UI {
      */
     public String formatMessage(String[] messages) {
         StringBuilder res = new StringBuilder();
-        for(String s : messages) {
+        for (String s : messages) {
             res.append(s).append("\n");
         }
         return res.toString();
@@ -24,7 +24,7 @@ public class UI {
      *
      * @return the String message.
      */
-    public String welcomeMessage() {
+    public String getWelcomeMessage() {
         return "Hello! I'm duke.Duke\n" + "     What can I do for you?";
     }
 
@@ -33,7 +33,7 @@ public class UI {
      *
      * @return the String message.
      */
-    public String goodByeMessage() {
+    public String getGoodByeMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
@@ -42,7 +42,7 @@ public class UI {
      *
      * @return the String response.
      */
-    public String unrecognisedCommand() {
+    public String getUnrecognisedCommandMessage() {
         return "That is not a recognised command";
     }
 

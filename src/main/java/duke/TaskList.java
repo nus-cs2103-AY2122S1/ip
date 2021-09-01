@@ -34,8 +34,8 @@ public class TaskList {
      */
     public String[] printList() {
         String[] res = new String[list.size()];
-        for (int counter = 1; counter<=list.size(); counter++) {
-            res[counter-1] = counter + ". " + list.get(counter-1);
+        for (int counter = 1; counter <= list.size(); counter++) {
+            res[counter - 1] = counter + ". " + list.get(counter - 1);
         }
         return res;
     }
@@ -48,9 +48,9 @@ public class TaskList {
      */
     public String[] taskAddedMessage(Task t) {
         return new String[]{
-                "Got it, I've added this task:",
-                t.toString(),
-                numOfTasks()
+            "Got it, I've added this task:",
+            t.toString(),
+            numOfTasks()
         };
     }
 
@@ -62,9 +62,9 @@ public class TaskList {
      */
     public String[] taskCompletedMessage(Task t) {
         return new String[]{
-                "Nice! I've marked this task as done:",
-                t.toString(),
-                numOfTasks()
+            "Nice! I've marked this task as done:",
+            t.toString(),
+            numOfTasks()
         };
     }
 
@@ -76,9 +76,9 @@ public class TaskList {
      */
     public String[] taskDeletedMessage(Task t) {
         return new String[]{
-                "Noted. I've removed this task:",
-                t.toString(),
-                numOfTasks()
+            "Noted. I've removed this task:",
+            t.toString(),
+            numOfTasks()
         };
     }
 
@@ -109,11 +109,11 @@ public class TaskList {
         List<String> res = new ArrayList<>();
         res.add("Here are the matching tasks in your list:");
         for (Task t : list) {
-            if(t.toString().contains(searchTerm)) {
+            if (t.toString().contains(searchTerm)) {
                 res.add(t.toString());
             }
         }
-        String[] result =  new String[res.size()];
+        String[] result = new String[res.size()];
         result = res.toArray(result);
         return result;
     }

@@ -8,8 +8,15 @@ import java.time.LocalDateTime;
 public class Event extends Task {
     private LocalDateTime startDate;
 
-    public Event(String description, Boolean completionStatus, LocalDateTime startDate) {
-        super(description, completionStatus);
+    /**
+     * Constructs an Event task object.
+     *
+     * @param description Task description.
+     * @param isCompleted Completion status of task.
+     * @param startDate Start date of task.
+     */
+    public Event(String description, Boolean isCompleted, LocalDateTime startDate) {
+        super(description, isCompleted);
         this.startDate = startDate;
     }
 

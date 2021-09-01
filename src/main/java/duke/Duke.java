@@ -8,14 +8,17 @@ import javafx.application.Application;
  * Encapsulates the main Duke class which contains the main function to run the chat bot
  */
 public class Duke {
-    private final UI ui;
+    private final Ui ui;
     private final Storage storage;
     private final DateTimeHandler dth;
     private final TaskList taskList;
     private final Parser parser;
 
+    /**
+     * Constructs a Duke object.
+     */
     public Duke() {
-        ui = new UI();
+        ui = new Ui();
         taskList = new TaskList();
         storage = new Storage();
         dth = new DateTimeHandler();
@@ -44,7 +47,7 @@ public class Duke {
     public String getResponse(String input) {
         Command command = parser.parse(input);
         if (command == null) {
-            return ui.unrecognisedCommand();
+            return ui.getUnrecognisedCommandMessage();
         }
         String returnString = command.execute(taskList, storage, ui, dth);
         try {

@@ -3,7 +3,7 @@ package duke.commands;
 import duke.DateTimeHandler;
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
+import duke.Ui;
 
 /**
  * Encapsulates the formats command, used to print the valid date-time formats.
@@ -20,12 +20,12 @@ public class FormatsCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
         return ui.formatMessage(dth.getFormatList());
     }
 
     @Override
-    public String startsWith() {
+    public String getCommandPrefix() {
         return "formats";
     }
 }

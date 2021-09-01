@@ -1,12 +1,12 @@
 package duke.commands;
 
+import java.time.LocalDateTime;
+
 import duke.DateTimeHandler;
 import duke.Deadline;
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
-
-import java.time.LocalDateTime;
+import duke.Ui;
 
 /**
  * Encapsulates the deadline command, used to create a deadline task
@@ -23,7 +23,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
         String args = super.getArguments();
         if (args.length() == 0) {
             return "Please enter the name of the task after deadline";
@@ -43,7 +43,7 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public String startsWith() {
+    public String getCommandPrefix() {
         return "deadline";
     }
 }

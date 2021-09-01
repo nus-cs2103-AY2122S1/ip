@@ -1,6 +1,10 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -40,19 +44,27 @@ public class Storage {
                 String[] parts = curLine.split(" ", 3);
                 String[] descriptionParts;
                 char taskType = parts[0].charAt(1);
-                boolean completionStatus = parts[1].charAt(1) == 'X';
-                switch(taskType){
+                boolean isCompleted = parts[1].charAt(1) == 'X';
+                switch(taskType) {
                 case 'T':
-                    t.addToList(new Todo(parts[2], completionStatus));
+                    t.addToList(new Todo(parts[2], isCompleted));
                     break;
                 case 'D':
                     descriptionParts = parts[2].split(" \\(by: ");
-                    Deadline d = new Deadline(descriptionParts[0], completionStatus, LocalDateTime.parse(descriptionParts[1].substring(0, descriptionParts[1].length()-1)));
+                    Deadline d = new Deadline(
+                            descriptionParts[0],
+                            isCompleted,
+                            LocalDateTime.parse(descriptionParts[1].substring(0, descriptionParts[1].length() - 1))
+                    );
                     t.addToList(d);
                     break;
                 case 'E':
                     descriptionParts = parts[2].split(" \\(at: ");
-                    Event e = new Event(descriptionParts[0], completionStatus, LocalDateTime.parse(descriptionParts[1].substring(0, descriptionParts[1].length()-1)));
+                    Event e = new Event(
+                            descriptionParts[0],
+                            isCompleted,
+                            LocalDateTime.parse(descriptionParts[1].substring(0, descriptionParts[1].length() - 1))
+                    );
                     t.addToList(e);
                     break;
                 }
@@ -71,7 +83,7 @@ public class Storage {
     public void writeToFile(TaskList t) throws Exception {
         BufferedWriter bw = new BufferedWriter(new FileWriter(txt));
         String curLine;
-        for(int i=0; i<t.size(); i++) {
+        for (int i = 0; i < t.size(); i++) {
             curLine = t.getTask(i).toString();
             bw.write(curLine + "\n");
         }

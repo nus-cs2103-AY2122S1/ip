@@ -8,15 +8,15 @@ import duke.commands.*;
  */
 public class Parser {
     private final Command[] COMMAND_LIST = {
-            new ListCommand(""),
-            new ByeCommand(""),
-            new TodoCommand(""),
-            new FormatsCommand(""),
-            new DoneCommand(""),
-            new DeleteCommand(""),
-            new DeadlineCommand(""),
-            new EventCommand(""),
-            new FindCommand(""),
+        new ListCommand(""),
+        new ByeCommand(""),
+        new TodoCommand(""),
+        new FormatsCommand(""),
+        new DoneCommand(""),
+        new DeleteCommand(""),
+        new DeadlineCommand(""),
+        new EventCommand(""),
+        new FindCommand(""),
     };
 
     /**
@@ -26,12 +26,12 @@ public class Parser {
      * @return The created command object.
      */
     public Command parse(String input) {
-        for(Command c : COMMAND_LIST) {
-            if(input.startsWith(c.startsWith())) {
-                if (input.equals(c.startsWith())) {
+        for (Command c : COMMAND_LIST) {
+            if (input.startsWith(c.getCommandPrefix())) {
+                if (input.equals(c.getCommandPrefix())) {
                     return c.of("");
                 }
-                return c.of(input.substring(c.startsWith().length()+1));
+                return c.of(input.substring(c.getCommandPrefix().length() + 1));
             }
         }
         return null;

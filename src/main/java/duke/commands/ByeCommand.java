@@ -3,7 +3,7 @@ package duke.commands;
 import duke.DateTimeHandler;
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
+import duke.Ui;
 
 /**
  * Encapsulates the bye command, for terminating the program.
@@ -20,12 +20,12 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tl, Storage s, UI ui, DateTimeHandler dth) {
+    public String execute(TaskList tl, Storage s, Ui ui, DateTimeHandler dth) {
         return "";
     }
 
     @Override
-    public String startsWith() {
+    public String getCommandPrefix() {
         return "bye";
     }
 
