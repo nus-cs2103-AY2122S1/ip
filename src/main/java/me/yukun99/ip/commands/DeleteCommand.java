@@ -7,17 +7,25 @@ import me.yukun99.ip.exceptions.HelpBotInvalidTaskException;
 import me.yukun99.ip.tasks.Task;
 
 public class DeleteCommand extends Command {
-	Storage storage;
+    private final Storage storage;
 
-	public DeleteCommand(String[] args, TaskList taskList, Ui ui, Storage storage) {
-		super(args, taskList, ui);
-		this.storage = storage;
-	}
+    /**
+     * Constructor for a DeleteCommand instance.
+     *
+     * @param args Arguments of the command.
+     * @param taskList TaskList to add task to.
+     * @param ui Ui to send feedback to.
+     * @param storage Storage instance to delete task from.
+     */
+    public DeleteCommand(String[] args, TaskList taskList, Ui ui, Storage storage) {
+        super(args, taskList, ui);
+        this.storage = storage;
+    }
 
-	@Override
-	public void run() throws HelpBotInvalidTaskException {
-		Task deleted = taskList.deleteTask(args[0]);
-		deleted.deleteMessage(ui);
-		storage.updateTasks();
-	}
+    @Override
+    public void run() throws HelpBotInvalidTaskException {
+        Task deleted = taskList.deleteTask(args[0]);
+        deleted.deleteMessage(ui);
+        storage.updateTasks();
+    }
 }

@@ -9,21 +9,29 @@ import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
 import me.yukun99.ip.tasks.Task;
 
 public class UpdateCommand extends Command {
-	Storage storage;
+    private final Storage storage;
 
-	public UpdateCommand(String[] args, TaskList taskList, Ui ui, Storage storage) {
-		super(args, taskList, ui);
-		this.storage = storage;
-	}
+    /**
+     * Constructor for an UpdateCommand instance.
+     *
+     * @param args Arguments of the command.
+     * @param taskList TaskList to add task to.
+     * @param ui Ui to send feedback through.
+     * @param storage Storage instance to save task info to.
+     */
+    public UpdateCommand(String[] args, TaskList taskList, Ui ui, Storage storage) {
+        super(args, taskList, ui);
+        this.storage = storage;
+    }
 
-	@Override
-	public void run() throws HelpBotInvalidTaskException, HelpBotInvalidTaskTypeException {
-		try {
-			Task updated = taskList.updateTask(args[0], args[1]);
-			ui.update(updated);
-			storage.updateTasks();
-		} catch (HelpBotDateTimeFormatException e) {
-			ui.error(e);
-		}
-	}
+    @Override
+    public void run() throws HelpBotInvalidTaskException, HelpBotInvalidTaskTypeException {
+        try {
+            Task updated = taskList.updateTask(args[0], args[1]);
+            ui.update(updated);
+            storage.updateTasks();
+        } catch (HelpBotDateTimeFormatException e) {
+            ui.error(e);
+        }
+    }
 }

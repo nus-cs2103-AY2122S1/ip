@@ -1,5 +1,10 @@
 plugins {
     id 'java'
+    id 'checkstyle'
+}
+
+checkstyle {
+    toolVersion = '8.29'
 }
 
 group 'me.yukun'
