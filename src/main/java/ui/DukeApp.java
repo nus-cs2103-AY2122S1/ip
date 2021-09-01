@@ -34,6 +34,7 @@ public final class DukeApp extends Application{
     public DukeApp() {
         this.ui = new Ui();
         this.storage = new Storage();
+        this.parser = new Parser();
         try {
             storage.createFiles();
         } catch (DukeException e) {
@@ -101,7 +102,7 @@ public final class DukeApp extends Application{
 
     private void handleUserInput() {
         String inputText = userInput.getText();
-        Command c = new Parser().parse(inputText);
+        Command c = parser.parse(inputText);
         if (c!= null) {
             Label userText = new Label(inputText);
             String executeResult = c.execute(lst, ui, storage);
