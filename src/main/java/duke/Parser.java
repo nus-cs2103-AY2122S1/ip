@@ -2,13 +2,26 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Deals with making sense of the user command
+ */
 public class Parser {
     private String command;
-    
+
+    /**
+     * Constructor for the Parser class where the user command is initialized
+     *
+     * @param command Command typed the user.
+     */
     public Parser(String command) {
         this.command = command;
     }
-    
+
+    /**
+     * Returns the instance of the type of command entered by the user.
+     *
+     * @return Command object.
+     */
     public Command parse() {
         if (command.equals("list")) {
             return new listCommand(command);
@@ -26,35 +39,23 @@ public class Parser {
             } else if (command.startsWith("delete")) {
                 return new deleteCommand(command);
             } else {
-                return new InvalidCommand(command);    
+                return new InvalidCommand(command);
             }
         }
-    }    
-    
+    }
+
+    /**
+     * Checks if the user types the command 'bye' or the user clicks enter without typing any command.
+     *
+     * @return True or False.
+     */
     public boolean isExit() {
-        if (command.equals("bye")) {
+        if (command.equals("bye") || command.equals("")) {
             Ui.bye();
             Ui.showLine();
             return true;
         }
-        if (command.equals("")) {
-            return true;
-        }
         return false;
     }
-    
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

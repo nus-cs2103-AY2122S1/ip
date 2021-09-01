@@ -12,18 +12,38 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the user command when the user enters a deadline.
+ */
 public class deadlineCommand extends Command {
     private String command;
-    
+
+    /**
+     * Constructor for the deadlineCommand class where the user command is initialized.
+     *
+     * @param command Command entered by the user.
+     */
     public deadlineCommand(String command) {
         super(command);
         this.command = command;
     }
 
+    /**
+     * Returns the string representation of the class.
+     *
+     * @return String description of the class.
+     */
     public String toString() {
         return "This is a deadline command";
     }
 
+    /**
+     * Executes the response when the user enters a 'deadline' command and updates the task list and storage 
+     * file (duke.txt)
+     *
+     * @param taskList TaskList that stores the tasks.
+     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
+     */
     public void execute(TaskList taskList, Storage storage) {
         if (command.length() <= 9) {
             DukeException exp = new EmptyDescriptionException("OOPS!!! The description of a deadline cannot be empty.");

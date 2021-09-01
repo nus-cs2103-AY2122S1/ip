@@ -8,13 +8,13 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    
+
     public Duke(String filePath) {
         taskList = new TaskList();
         storage = new Storage(filePath);
         ui = new Ui(taskList, storage);
     }
-    
+
     public void run() {
         ui.showWelcome();
         ui.showLine();
@@ -30,7 +30,7 @@ public class Duke {
             isExit = parser.isExit();
         }
     }
-    
+
     public static void main(String[] args) {
         new Duke("./duke.txt").run();
     }

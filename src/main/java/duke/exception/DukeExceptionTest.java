@@ -1,6 +1,5 @@
 package duke.exception;
 
-import duke.Parser;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -22,6 +21,4 @@ public class DukeExceptionTest {
         Assert.assertEquals("The format of your command is incorrect! It should be deadline/by " + "<yyyy-mm-dd HHmm>", 
                 new InvalidCommandException("The format of your command is incorrect! It should be deadline/by <yyyy-mm-dd HHmm>").toString());
     }
-    
-    
 }

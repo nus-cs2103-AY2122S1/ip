@@ -12,18 +12,38 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents the user command when the user enters an event.
+ */
 public class eventCommand extends Command {
     private String command;
-    
+
+    /**
+     * Constructor for the eventCommand class where the user command is initialized.
+     *
+     * @param command Command entered by the user.
+     */
     public eventCommand(String command) {
         super(command);
         this.command = command;
     }
-    
+
+    /**
+     * Returns the string representation of the class.
+     *
+     * @return String description of the class.
+     */
     public String toString() {
         return "This is an event command";
     }
 
+    /**
+     * Executes the response when the user enters an 'event' command and updates the task list and storage 
+     * file (duke.txt)
+     *
+     * @param taskList TaskList that stores the tasks.
+     * @param storage Storage that deals with loading tasks from the file and saving tasks in the file.            
+     */
     public void execute(TaskList taskList, Storage storage) {
         if (command.length() <= 6) {
             DukeException exp = new EmptyDescriptionException("OOPS!!! The description of an event cannot be empty.");
@@ -42,6 +62,6 @@ public class eventCommand extends Command {
                         "<yyyy-mm-dd HHmm>");
                 System.out.println(exp);
             }
-        } 
+        }
     }
 }
