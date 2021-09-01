@@ -1,3 +1,8 @@
+package duke;
+
+import duke.task.*;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
@@ -43,9 +48,9 @@ public class Ui {
         printWithIndent("Bye. Hope to see you again soon!");
     }
 
-    protected static void printList(String[] listStringArr) {
-        for (int i = 0; i < listStringArr.length; i++) {
-            printWithIndent((i+1) + "." + listStringArr[i]);
+    protected static void printList(ArrayList<Task> taskList) {
+        for (int i = 0; i < taskList.size(); i++) {
+            printWithIndent((i+1) + "." + taskList.get(i).toString());
         }
     }
 
@@ -53,9 +58,19 @@ public class Ui {
         printWithIndent(getTaskCountString(listSize));
     }
 
-    protected static <T extends Task> void printNewTask(T task) {
+    protected static void printNewTask(String taskStr) {
         printWithIndent("Got it. I've added this task:");
-        printWithIndent("  " + task);
+        printWithIndent("  " + taskStr);
+    }
+
+    protected static void printRemoveTask(String taskStr) {
+        printWithIndent("Noted. I've removed this task: ");
+        printWithIndent("  " + taskStr);
+    }
+
+    protected static void printMarkDone(String taskStr) {
+        Ui.printWithIndent("Nice! I've marked this task as done: ");
+        Ui.printWithIndent("  " + taskStr);
     }
 
     protected static void printErrorMessage(DukeException e, String userInput) {
@@ -68,19 +83,24 @@ public class Ui {
                 break;
             case DDL_MISSING_KEYWORD:
                 printWithIndent(e.getMessage() + ". Correct format is:");
-                printWithIndent("deadline {task description} /by {due time}");
+                printWithIndent("deadline {description} /by {due time}");
                 printWithIndent("Example: deadline return book /by Sunday");
                 break;
             case EVENT_MISSING_KEYWORD:
                 printWithIndent(e.getMessage() + ". Correct format is:");
-                printWithIndent("event {task description} /at {time period}");
+                printWithIndent("event {description} /at {time period}");
                 printWithIndent("Example: event project meeting /at Mon 2-4pm");
+                break;
+            case PIPE_SYMBOL:
+            case FAIL_TO_READ:
+            case FAIL_TO_WRITE:
+                printWithIndent(e.getMessage());
                 break;
         }
     }
 
-    protected static void printErrorMessage(String s) {
-        printWithIndent(s);
+    protected static void printErrorMessage(DukeException e) {
+        printErrorMessage(e, "");
     }
 
     protected static String getTaskCountString(int listSize) {

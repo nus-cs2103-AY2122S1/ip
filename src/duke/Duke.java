@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.*;
+
 public class Duke {
     private Ui ui;
     private Storage storage;
@@ -7,12 +11,22 @@ public class Duke {
         ui = new Ui();
         taskList = new TaskList();
         storage = new Storage();
+        try {
+            storage.initialize();
+        } catch (DukeException e) {
+            Ui.printErrorMessage(e);
+        }
     }
     
     public Duke(String pathStr) {
         ui = new Ui();
         taskList = new TaskList();
-        storage = new Storage(pathStr);
+        storage = new Storage();
+        try {
+            storage.initialize(pathStr);
+        } catch (DukeException e) {
+            Ui.printErrorMessage(e);
+        }
     }
     
 
@@ -20,8 +34,12 @@ public class Duke {
         Ui.printWelcomeMessage();
         boolean isExit = false;
 
-        if (!storage.isEmpty()) {
-            taskList.add(storage.getFileContents());
+        try {
+            if (!storage.isEmpty()) {
+                taskList.load(storage.getFileContents());
+            }
+        } catch (DukeException e) {
+            Ui.printErrorMessage(e);
         }
 
         // Echo loop till exit word is entered
@@ -32,8 +50,7 @@ public class Duke {
                 Ui.printDividerLine();
 
                 if (userInput.contains("|")) {
-                    throw new DukeException("OOPS!!! Duke cannot identify the symbol \"|\". Please do not include it " +
-                            "within your input :)");
+                    throw new DukeException(ExceptionType.PIPE_SYMBOL);
                 }
 
                 DukeAction dukeAction = Parser.stringToDukeAction(userInput, taskList.size());
@@ -44,7 +61,7 @@ public class Duke {
                     isExit = true;
                     break;
                 case PRINT_LIST:
-                    Ui.printList(taskList.toStringArr());
+                    Ui.printList(taskList);
                     break;
                 case MARK_DONE:
                     onTaskDone(Parser.parseMarkString(userInput));
@@ -81,26 +98,24 @@ public class Duke {
 
     // Handlers
 
-    private <T extends Task> void onNewTaskAdded(T t) {
+    private <T extends Task> void onNewTaskAdded(T t) throws DukeException{
         taskList.add(t);
+        Ui.printNewTask(t.toString());
+        Ui.printTaskCount(taskList.size());
         storage.writeLine(t.populateSaveData() + System.lineSeparator());
-        Ui.printNewTask(t);
-        Ui.printTaskCount(taskList.size());
     }
 
-    private void onTaskRemoved(int index) {
-        Ui.printWithIndent("Noted. I've removed this task: ");
-        Ui.printWithIndent("  " + taskList.get(index));
-        taskList.remove(index);
+    private void onTaskRemoved(int index) throws DukeException {
         storage.removeLine(index);
+        Ui.printRemoveTask(taskList.get(index).toString());
+        taskList.remove(index);
         Ui.printTaskCount(taskList.size());
     }
 
-    private void onTaskDone(int index) {
+    private void onTaskDone(int index) throws DukeException {
         Task task = taskList.get(index);
-        task.isDone = true;
         storage.setLine(index, task.toString());
-        Ui.printWithIndent("Nice! I've marked this task as done: ");
-        Ui.printWithIndent("  " + task);
+        task.setStatus(true);
+        Ui.printMarkDone(task.toString());
     }
 }

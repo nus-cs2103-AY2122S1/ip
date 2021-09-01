@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,6 +12,17 @@ public class Deadline extends Task{
 
     public Deadline(String description, String by) {
         super(description);
+        try {
+            date = LocalDate.parse(by);
+            hasDate = true;
+        } catch (DateTimeParseException e) {
+            hasDate = false;
+            this.by = by;
+        }
+    }
+
+    public Deadline(String description, String by, boolean isDone) {
+        super(description, isDone);
         try {
             date = LocalDate.parse(by);
             hasDate = true;
