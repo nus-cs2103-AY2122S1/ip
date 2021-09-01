@@ -109,8 +109,7 @@ public class Ui {
             Ui.exit();
             return "bye";
         case "list":
-            tasklist.list();
-            break;
+            return tasklist.list();
         case "done":
             int idx = Integer.parseInt(input.trim()) - 1;
             tasklist.setToCompleted(idx);

@@ -9,9 +9,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import ui.MainWindow;
+import ui.DukeInterface;
 
 public class Main extends Application{
-    private Duke duke = new Duke();
+    private DukeInterface dukeInterface = new DukeInterface();
 
     @Override
     public void start(Stage stage) {
@@ -20,7 +21,7 @@ public class Main extends Application{
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDukeInterface(dukeInterface);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

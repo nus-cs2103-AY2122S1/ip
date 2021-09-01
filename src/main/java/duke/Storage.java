@@ -73,7 +73,7 @@ public class Storage {
     /**
      * Saves the tasklist to the specified filepath
      */
-    public void save() {
+    public String save() {
         File file = new File(filepath);
 
         // Creates all the file directories
@@ -81,11 +81,13 @@ public class Storage {
         int len = fileDirectories.length;
         String currDir = "";
 
+        String returnMsg = "";
+
         for (int i = 0; i < len - 1; i++) {
             currDir += fileDirectories[i];
             File currFile = new File(currDir);
             if (currFile.mkdir()) {
-                System.out.printf("Added directory %s\n", currDir);
+                returnMsg += String.format("Added directory %s\n", currDir);
             }
             currDir += "/";
         }
@@ -93,9 +95,9 @@ public class Storage {
         //Creates file
         try {
             if (file.createNewFile()) {
-                System.out.printf("Saved file at %s\n", filepath);
+                returnMsg += String.format("Saved file at %s\n", filepath);
             } else {
-                System.out.printf("File already exists at %s\n", filepath);
+                returnMsg += String.format("File already exists at %s\n", filepath);
             }
 
         } catch (IOException e) {
@@ -113,10 +115,12 @@ public class Storage {
                 fileWriter.append(listEntry);
             }
             fileWriter.close();
-            System.out.println("Successfully wrote to the file.");
+            returnMsg += String.format("Successfully wrote to the file.\n");
         } catch (IOException e) {
-            System.out.println("An error occurred while writing to file.");
+            returnMsg += String.format("An error occurred while writing to file.\n");
         }
+
+        return returnMsg;
     }
 
 }

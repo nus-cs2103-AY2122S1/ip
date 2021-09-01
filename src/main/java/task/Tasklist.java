@@ -49,22 +49,24 @@ public class Tasklist {
      * Checks for the scenario where list is empty.
      * @return
      */
-    public void list() {
+    public String list() {
+        String returnMsg = "";
         try {
             if (this.taskList.size() == 0) {
                 throw new DukeException.EmptyListException("List is empty :(");
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            returnMsg += e.getMessage();
             Ui.printBreakline();
-            return;
+            return returnMsg;
         }
 
-        System.out.println("Here are the tasks in your list:");
+        returnMsg += String.format("Here are the tasks in your list:\n");
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("%d. %s\n", i + 1, this.taskList.get(i).toString());
+            returnMsg += String.format("%d. %s\n", i + 1, this.taskList.get(i).toString());
         }
         Ui.printBreakline();
+        return returnMsg;
 
     }
 
