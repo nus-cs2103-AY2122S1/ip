@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Locale;
 
 import whobot.main.UI;
+import whobot.main.WhoBot;
 import whobot.main.WhoBotException;
 import whobot.task.Deadline;
 import whobot.task.Event;
@@ -121,19 +122,24 @@ public class TaskList {
             if (index < list.size()) {
                 Task temp = list.get(index);
 
-                //Check for confirmation before deleting
-                ui.echo("Are you sure you want to delete this task: \"" + temp.getDescription() + "\" ? (Yes/No)",
-                        UI.Type.COMPLETE);
-                System.out.print(UI.COLOR_PURPLE + "> " + UI.COLOR_RESET);
-                String confirm = UI.CMD_READER.nextLine().trim();
-                if (confirm.toLowerCase(Locale.ROOT).equals("yes")) {
+                if (!WhoBot.isGui()) {
+                    ui.echo("Are you sure you want to delete this task: \"" + temp.getDescription() + "\" ? (Yes/No)",
+                            UI.Type.COMPLETE);
+                    System.out.print(UI.COLOR_PURPLE + "> " + UI.COLOR_RESET);
+                    String confirm = UI.CMD_READER.nextLine().trim();
+                    if (confirm.toLowerCase(Locale.ROOT).equals("yes")) {
+                        list.remove(index);
+                        ui.echo("I have deleted this task from the list: \"" + temp.getDescription() + "\"",
+                                UI.Type.START);
+                        ui.echo("You now have " + list.size() + " task(s) in the list.", UI.Type.END);
+                    } else {
+                        ui.echo("The deletion has been cancelled.", UI.Type.COMPLETE);
+                    }
+                } else {
                     list.remove(index);
                     ui.echo("I have deleted this task from the list: \"" + temp.getDescription() + "\"", UI.Type.START);
                     ui.echo("You now have " + list.size() + " task(s) in the list.", UI.Type.END);
-                } else {
-                    ui.echo("The deletion has been cancelled.", UI.Type.COMPLETE);
                 }
-
             } else {
                 throw new WhoBotException("Oops, The index you gave is out of bound. "
                         + "There are only " + list.size() + " tasks");

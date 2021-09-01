@@ -3,6 +3,7 @@ package whobot.utils;
 import java.util.Locale;
 
 import whobot.main.UI;
+import whobot.main.WhoBot;
 import whobot.main.WhoBotException;
 
 /***
@@ -35,7 +36,9 @@ public class Parser {
         //All commands are taken as case-insensitive
         if (command.toLowerCase(Locale.ROOT).equals("bye") || command.toLowerCase(Locale.ROOT).equals("goodbye")) {
             // If input is bye or goodbye, quits program
-            ui.goodbye();
+            if (!WhoBot.isGui()) {
+                ui.goodbye();
+            }
             storage.saveMemory(taskList.getList());
             return -1;
         } else if (command.toLowerCase(Locale.ROOT).equals("list")) {

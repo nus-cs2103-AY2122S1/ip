@@ -2,6 +2,8 @@ package whobot.main;
 
 import java.util.Scanner;
 
+import whobot.main.gui.DisplayBuffer;
+
 public class UI {
 
     /** Colors used to Display Text */
@@ -44,7 +46,7 @@ public class UI {
             + "\t\t                                                   \\______/\n";
 
     /** Enum Type for indicating the type of echo */
-    public enum Type { START, MIDDLE, END, COMPLETE, ERROR };
+    public enum Type { START, MIDDLE, END, COMPLETE, ERROR }
 
     /***
      * Prints Greeting Message
@@ -77,22 +79,31 @@ public class UI {
      * @param type specifies the type of formatting to use
      */
     public void echo(String answer, UI.Type type) {
-        if (type == UI.Type.COMPLETE) {
-            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
-            System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
-            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
-        } else if (type == UI.Type.START) {
-            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
-            System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
-        } else if (type == UI.Type.END) {
-            System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
-            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
-        } else if (type == UI.Type.MIDDLE) {
-            System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
-        } else if (type == UI.Type.ERROR) {
-            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
-            System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RED + answer + COLOR_RESET);
-            System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+        if (WhoBot.isGui()) {
+            if (type == Type.COMPLETE || type == Type.END || type == Type.ERROR) {
+                DisplayBuffer.addToBuffer(answer);
+                DisplayBuffer.printBuffer();
+            } else {
+                DisplayBuffer.addToBuffer(answer);
+            }
+        } else {
+            if (type == UI.Type.COMPLETE) {
+                System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+                System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
+                System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+            } else if (type == UI.Type.START) {
+                System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+                System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
+            } else if (type == UI.Type.END) {
+                System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
+                System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+            } else if (type == UI.Type.MIDDLE) {
+                System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RESET + answer);
+            } else if (type == UI.Type.ERROR) {
+                System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+                System.out.println(COLOR_BLUE + "WhoBot > " + COLOR_RED + answer + COLOR_RESET);
+                System.out.println(COLOR_CYAN + LINE + COLOR_RESET);
+            }
         }
     }
 
