@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 
 /**
@@ -23,41 +21,31 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+    }
+
+    /**
+     * Initialise Duke with TaskList.
+     *
+     * @return Initial Duke Response
+     */
+    public String initialize() {
         try {
             tasks = new TaskList(storage.load(), storage);
+            return ui.greet();
         } catch (DukeException e) {
-            ui.showLoadingError();
             tasks = new TaskList(storage);
+            return ui.showLoadingError() + ui.greet();
         }
     }
 
-    /**
-     * Starts Duke chat bot.
-     */
-    public void run() {
-        ui.greet();
+    public String getResponse(String input) {
         boolean isExit = false;
-        // Create a Scanner object
-        Scanner scanner = new Scanner(System.in);
-        while (!isExit) {
-            String input = scanner.nextLine();
-            try {
-                Command c = Parser.parse(input);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printError(e.getMessage());
-            }
+        try {
+            Command c = Parser.parse(input);
+            isExit = c.isExit();
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.printError(e.getMessage());
         }
     }
-
-    /**
-     * Main function for Duke.
-     *
-     * @param args command line arguments
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
 }

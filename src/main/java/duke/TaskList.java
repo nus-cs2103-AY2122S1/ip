@@ -46,14 +46,14 @@ public class TaskList {
      * @param str User input of what task to delete
      * @throws DukeException Exception based on invalid user input
      */
-    public void deleteTask(String str) throws DukeException {
+    public String deleteTask(String str) throws DukeException {
         try {
             int i = Integer.parseInt(str);
 
             if (i > 0 && i <= list.size()) {
                 Task t = list.remove(i - 1);
                 storage.saveFile(list);
-                dukePrint("Got it. I've removed this task:\n" + t + "\n" + "Now you have "
+                return dukePrint("Got it. I've removed this task:\n" + t + "\n" + "Now you have "
                         + list.size() + " task" + (list.size() < 2 ? " " : "s ") + "in the list.");
             } else {
                 throw new DukeException("No such task found in list.");
@@ -69,15 +69,15 @@ public class TaskList {
      * @param str User input of what task to delete
      * @throws DukeException Exception based on invalid user input
      */
-    public void markDone(String str) throws DukeException {
+    public String markDone(String str) throws DukeException {
         try {
             int i = Integer.parseInt(str);
 
             if (i > 0 && i <= list.size()) {
                 Task t = list.get(i - 1);
                 t.markDone();
-                dukePrint("Nice! I've marked this task as done:\n" + t);
                 storage.saveFile(list);
+                return dukePrint("Nice! I've marked this task as done:\n" + t);
             } else {
                 throw new DukeException("No such task found in list.");
             }
@@ -92,11 +92,11 @@ public class TaskList {
      * @param str User input of description
      * @throws DukeException Exception based on invalid user input
      */
-    public void addEvent(String str) throws DukeException {
+    public String addEvent(String str) throws DukeException {
         if (str.contains("/at ")) {
             String[] arr = str.split("/at ", 2);
             Task t = new Event(arr[0], arr[1]);
-            addTask(t);
+            return addTask(t);
         } else {
             throw new DukeException("Date cannot be empty!");
         }
@@ -108,11 +108,11 @@ public class TaskList {
      * @param str User input of description
      * @throws DukeException Exception based on invalid user input
      */
-    public void addDeadline(String str) throws DukeException {
+    public String addDeadline(String str) throws DukeException {
         if (str.contains("/by ")) {
             String[] arr = str.split("/by ", 2);
             Task t = new Deadline(arr[0], arr[1]);
-            addTask(t);
+            return addTask(t);
         } else {
             throw new DukeException("Date cannot be empty!");
         }
@@ -124,27 +124,26 @@ public class TaskList {
      * @param str User input of description
      * @throws DukeException Exception based on invalid user input
      */
-    public void addToDo(String str) throws DukeException {
+    public String addToDo(String str) throws DukeException {
         Task t = new ToDo(str);
-        addTask(t);
+        return addTask(t);
     }
 
-    private void addTask(Task t) throws DukeException {
+    private String addTask(Task t) throws DukeException {
         list.add(t);
-        dukePrint("Got it. I've added this task:\n" + t + "\n" + "Now you have "
-                + list.size() + " task" + (list.size() < 2 ? " " : "s ") + "in the list.");
         storage.saveFile(list);
+        return dukePrint("Got it. I've added this task:\n" + t + "\n" + "Now you have "
+                + list.size() + " task" + (list.size() < 2 ? " " : "s ") + "in the list.");
     }
 
     /**
      * Displays full list of task in TaskList.
      */
-    public void displayList() {
+    public String displayList() {
         if (list.size() == 0) {
-            dukePrint("list empty");
-            return;
+            return dukePrint("list empty");
         }
-        dukePrint("Here are the tasks in your list:\n"
+        return dukePrint("Here are the tasks in your list:\n"
                 + IntStream.range(0, list.size()).mapToObj((i) -> (i + 1) + ". " + list.get(i).toString())
                 .reduce("", (str1, str2) -> str1 + str2 + "\n"));
     }
@@ -154,7 +153,7 @@ public class TaskList {
      *
      * @param desc user input to find in task list
      */
-    public void findTask(String desc) {
+    public String findTask(String desc) {
         StringBuilder builder = new StringBuilder("Here are the matching tasks in your list:\n");
         int count = 0;
         for (int i = 0; i < list.size(); i++) {
@@ -164,9 +163,9 @@ public class TaskList {
             }
         }
         if (count == 0) {
-            dukePrint("No tasks in list were matched.");
+            return dukePrint("No tasks in list were matched.");
         } else {
-            dukePrint(builder.toString());
+            return dukePrint(builder.toString());
         }
     }
 }

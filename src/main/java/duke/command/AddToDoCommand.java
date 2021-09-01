@@ -21,8 +21,8 @@ public class AddToDoCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
-        task.addToDo(desc);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.addToDo(desc);
     }
 
     @Override

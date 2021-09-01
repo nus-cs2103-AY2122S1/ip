@@ -13,8 +13,8 @@ import duke.Ui;
 public class ExitCommand implements Command {
 
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) {
-        dukePrint("Bye. Hope to see you again soon!\n");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return dukePrint("Bye. Hope to see you again soon!\n");
     }
 
     @Override

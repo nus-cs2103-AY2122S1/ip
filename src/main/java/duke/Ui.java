@@ -6,13 +6,13 @@ import java.util.Scanner;
  * Ui helper for display functions.
  */
 public class Ui {
-    private static final String divider = "\t____________________________________________________________\n";
+    private static final String divider = "__________________________________________\n";
 
     /**
      * Prints greeting message for Duke.
      */
-    public void greet() {
-        dukePrint("Hello! I'm Duke.\n" + "What can I do for you?");
+    public String greet() {
+        return dukePrint("Hello! I'm Duke.\n" + "What can I do for you?");
     }
 
 
@@ -21,29 +21,32 @@ public class Ui {
      *
      * @param str message to be printed
      */
-    public static void dukePrint(String str) {
+    public static String dukePrint(String str) {
+        StringBuilder builder = new StringBuilder();
         Scanner scanner = new Scanner(str);
-        System.out.print(divider);
+        builder.append(divider);
         while (scanner.hasNextLine()) {
-            System.out.print("\t");
-            System.out.println(scanner.nextLine());
+            builder.append(scanner.nextLine());
+            builder.append("\n");
         }
-        System.out.print(divider);
+        builder.append(divider);
+        return builder.toString();
     }
 
     /**
      * Prints Errors message for Loading Error.
      */
-    public void showLoadingError() {
-        printError("Error with loading save file. New save will be created.");
+    public String showLoadingError() {
+        return printError("Error with loading save file. New save will be created.");
     }
 
     /**
      * Prints Error message for Duke.
      *
      * @param errorMessage Error Message to be printed
+     * @return
      */
-    public void printError(String errorMessage) {
-        dukePrint("☹ OOPS!!! " + errorMessage);
+    public String printError(String errorMessage) {
+        return dukePrint("☹ OOPS!!! " + errorMessage);
     }
 }

@@ -21,8 +21,8 @@ public class AddEventCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
-        task.addEvent(desc);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.addEvent(desc);
     }
 
     @Override

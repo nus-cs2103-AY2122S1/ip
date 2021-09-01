@@ -21,8 +21,8 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
-        task.deleteTask(desc);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.deleteTask(desc);
     }
 
     @Override

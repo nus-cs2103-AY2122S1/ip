@@ -16,26 +16,13 @@ public class UiTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
 
-    @BeforeEach
-    public void setStreams() {
-        System.setOut(new PrintStream(out));
-        System.setErr(new PrintStream(err));
-    }
-
-    @AfterEach
-    public void restoreInitialStreams() {
-        System.setOut(originalOut);
-        System.setErr(originalErr);
-    }
-
     @Test
     public void greetTest() {
         Ui ui = new Ui();
-        ui.greet();
-        assertEquals("\t____________________________________________________________\n"
-                + "\tHello! I'm Duke.\n"
-                + "\tWhat can I do for you?\n"
-                + "\t____________________________________________________________\n", out.toString());
+        assertEquals("__________________________________________\n"
+                + "Hello! I'm Duke.\n"
+                + "What can I do for you?\n"
+                + "__________________________________________\n", ui.greet());
     }
 
 }

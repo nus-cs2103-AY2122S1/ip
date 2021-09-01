@@ -21,8 +21,8 @@ public class AddDeadlineCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) throws DukeException {
-        task.addDeadline(desc);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.addDeadline(desc);
     }
 
     @Override

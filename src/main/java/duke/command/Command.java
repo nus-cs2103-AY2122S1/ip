@@ -12,12 +12,12 @@ public interface Command {
     /**
      * Executes command to be done.
      *
-     * @param task    TaskList of Duke
+     * @param tasks    TaskList of Duke
      * @param ui      Ui of Duke
      * @param storage Storage of Duke
      * @throws DukeException Exception related to running the command
      */
-    void execute(TaskList task, Ui ui, Storage storage) throws DukeException;
+    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns if the command is the Exit Command.
