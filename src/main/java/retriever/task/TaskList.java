@@ -211,15 +211,7 @@ public class TaskList {
      * Prints the tasks stored in the list.
      */
     public void printTaskList() {
-        // If the list is empty
-        if (userTaskList.size() == 0) {
-            System.out.println("My Memory Is Empty, Please Feed Items!");
-        } else {
-            System.out.println("-> Your Tasks, My Master:");
-            for (int i = 0; i < userTaskList.size(); i++) {
-                System.out.println("\t" + ((i + 1) + ". " + userTaskList.get(i)));
-            }
-        }
+        ui.printTaskList(userTaskList);
     }
 }
 
