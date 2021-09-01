@@ -32,14 +32,13 @@ public class Parser {
      * @param command command entered by the user.
      * @param listSize current size of the task list.
      * @return index of the required task in the task list if valid.
-     * @throws BlitzException if the computed index is invalid.
      */
     public static int getIndex(String command, int listSize) throws BlitzException {
         String keyword = command.substring(0, command.indexOf(' '));
         int index = getTaskNumber(keyword, command);
         if (index < 0 || index >= listSize) {
             throw new BlitzException("You are attempting to "
-                + (keyword.equals("done") ? "mark" : "delete")
+                    + (keyword.equals("done") ? "mark" : "delete")
                     + " an invalid task number!");
         }
         return index;
@@ -51,12 +50,9 @@ public class Parser {
      *
      * @param command command entered by the user.
      * @param tasks current list of tasks
-     * @param ui current user interface instance
-     * @throws BlitzException if the command description is missing, or
-     *     if a request to print an empty list is made or if the user enters
-     *     an invalid command.
+     *
      */
-    public static void parse(String command, TaskList tasks, Ui ui) throws BlitzException {
+    public static String parse(String command, TaskList tasks) {
         String[] keywords = command.split(" ");
 
         //stores the first word (keyword) in the user input
@@ -68,63 +64,64 @@ public class Parser {
         boolean isFeature = firstKeyword.equals("list") || firstKeyword.equals("done")
                 || firstKeyword.equals("delete") || firstKeyword.equals("find");
 
+        //stores the string representation of parse result
+        String result = "";
+
         //suppose it's a valid keyword
         if (isTask || isFeature) {
 
             //when keyword is not followed by anything
             if (isTask && command.length() < firstKeyword.length() + 2) {
-                throw new BlitzException("The description of a " + firstKeyword
-                        + " cannot be empty.");
+                return new BlitzException("The description of a " + firstKeyword
+                        + " cannot be empty.").toString();
             }
 
             if (isFeature) {
                 switch (firstKeyword) {
                 case "list":
                     if (tasks.size() == 0) {
-                        throw new BlitzException("No items added to list yet!");
+                        result = new BlitzException("No items added to list yet!").toString();
+                    } else {
+                        result = tasks.listToString("Here are the tasks in your list:");
                     }
-                    ui.printLine();
-                    ui.printList(tasks, "Here are the tasks in your list:");
-                    ui.printLine();
+
                     break;
                 case "done":
                     try {
                         int index = getIndex(command, tasks.size());
                         Task finished = tasks.get(index);
                         finished.markAsDone();
-                        ui.printFormatted("Nice! I've marked this task as done:\n" + "\t\t"
-                                + finished);
+                        result = "Nice! I've marked this task as done:\n" + "\t"
+                                + finished;
                     } catch (BlitzException ex) {
-                        ui.printFormatted(ex.toString());
+                        return ex.toString();
                     }
                     break;
                 case "delete":
                     try {
                         int index = Parser.getIndex(command, tasks.size());
                         Task deleted = tasks.deleteTask(index);
-                        ui.printFormatted("Noted. I've removed this task:" + "\n\t\t" + deleted
-                                + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                        result = "Noted. I've removed this task:" + "\n\t" + deleted
+                                + "\n\nNow you have " + tasks.size() + " tasks in the list.";
                     } catch (BlitzException ex) {
-                        ui.printFormatted(ex.toString());
+                        return ex.toString();
                     }
                     break;
                 default:
                     String findKeyword = keywords[1];
 
                     if (tasks.size() == 0) {
-                        throw new BlitzException("Cannot perform find on empty list!!");
+                        return new BlitzException("Cannot perform find on empty list!!").toString();
+                    } else {
+                        TaskList matchingList = tasks.findMatchingTasks(findKeyword);
+                        if (matchingList.size() == 0) {
+                            return new BlitzException("No matches found").toString();
+                        } else {
+                            return matchingList.listToString("Here are the matching tasks in your list:");
+                        }
                     }
-
-                    TaskList matchingList = tasks.findMatchingTasks(findKeyword);
-
-                    if (matchingList.size() == 0) {
-                        throw new BlitzException("No matches found!");
-                    }
-
-                    ui.printLine();
-                    ui.printList(matchingList, "Here are the matching tasks in your list:");
-                    ui.printLine();
                 }
+
             } else {
                 Task current = new Task("");
                 switch (firstKeyword) {
@@ -139,8 +136,8 @@ public class Parser {
                         current = new Deadline(command.substring(9,
                                 command.indexOf('/') - 1), d);
                     } catch (DateTimeParseException e) {
-                        throw new BlitzException("Incorrect date/time format! Please enter "
-                                + "deadline date/time in \"d M yyyy HHmm\" format");
+                        return new BlitzException("Incorrect date/time format! Please enter "
+                                + "deadline date/time in \"d M yyyy HHmm\" format").toString();
                     }
 
                     break;
@@ -151,19 +148,20 @@ public class Parser {
                                 DateTimeFormatter.ofPattern("d/M/yyyy HHmm"));
                         current = new Event(command.substring(6, command.indexOf('/') - 1), ed);
                     } catch (DateTimeParseException e) {
-                        throw new BlitzException("Incorrect date/time format! Please enter "
-                                + "event date/time in \"d M yyyy HHmm\" format");
+                        return new BlitzException("Incorrect date/time format! Please enter "
+                                + "event date/time in \"d M yyyy HHmm\" format").toString();
                     }
                     break;
                 }
 
                 tasks.addTask(current);
-                ui.printFormatted("Got it. I've added this task:" + "\n\t\t" + current
-                        + "\n\tNow you have " + tasks.size() + " tasks in the list.");
+                result = "Got it. I've added this task:" + "\n\t" + current
+                        + "\n\nNow you have " + tasks.size() + " tasks in the list.";
             }
         } else {
             //if the keyword is not valid
-            throw new BlitzException("Sorry, but I don't know what that means :-(");
+            result = new BlitzException("Sorry, but I don't know what that means :-(").toString();
         }
+        return result;
     }
 }

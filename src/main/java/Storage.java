@@ -24,8 +24,6 @@ public class Storage {
      * Loads contents from the file and stores data in a list.
      *
      * @return list containing tasks from the file.
-     * @throws BlitzException if there's an error while creating the file
-     *     in case it doesn't exist.
      */
     public ArrayList<Task> loadFileContents() throws BlitzException {
         ArrayList<Task> tasks = new ArrayList<Task>();
@@ -49,7 +47,7 @@ public class Storage {
                     current = new Event(keywords[2], LocalDateTime.parse(keywords[3],
                             DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")));
                 }
-                if (done.equals(1)) {
+                if (done.equals("X")) {
                     current.markAsDone();
                 }
                 tasks.add(current);

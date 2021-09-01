@@ -1,6 +1,3 @@
-import java.io.IOException;
-import java.util.Scanner;
-
 public class Blitz {
 
     private Storage storage;
@@ -8,10 +5,9 @@ public class Blitz {
     private Ui ui;
 
     /**
-     * Creates a Blitz object with a storage object that
-     *     accesses the given file path.
+     * Creates Blitz object with given file path.
      *
-     * @param filePath file path that the storage object will access.
+     * @param filePath
      */
     public Blitz(String filePath) {
         ui = new Ui();
@@ -25,36 +21,29 @@ public class Blitz {
     }
 
     /**
-     * Begins running the application.
+     * Returns Blitz's storage object.
+     *
+     * @return Blitz's storage object.
      */
-    public void run() {
-        ui.printGreeting();
-        ui.printList(tasks, "Here are the tasks in your list:");
-        ui.printFormatted("So what can I do for you today?");
-
-        Scanner scanner = new Scanner(System.in);
-
-        //command from the user
-        String command = scanner.nextLine();
-
-        while (!command.equals("bye")) {
-            try {
-                Parser.parse(command, tasks, ui);
-            } catch (BlitzException ex) {
-                ui.printFormatted(ex.toString());
-            }
-            command = scanner.nextLine();
-        }
-
-        try {
-            storage.saveTasksInFile(tasks);
-        } catch (IOException e) {
-            System.err.println(e);
-        }
-        ui.printGoodbye();
+    public Storage getStorage() {
+        return storage;
     }
 
-    public static void main(String[] args) {
-        new Blitz("data/blitz.txt").run();
+    /**
+     * Returns list of tasks.
+     *
+     * @return list of tasks.
+     */
+    public TaskList getTasks() {
+        return tasks;
+    }
+
+    /**
+     * Returns Blitz's Ui.
+     *
+     * @return Blitz's Ui.
+     */
+    public Ui getUi() {
+        return ui;
     }
 }

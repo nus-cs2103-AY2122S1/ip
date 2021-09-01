@@ -1,63 +1,31 @@
 public class Ui {
 
-    private String greetingMessage = "\tHola! I'm Blitz :)";
+    private String greetingMessage = "Hola! I'm Blitz :)\nHere are the tasks in your list:";
     private String goodbyeMessage = "Adiós. Hope to see you again soon!";
+    private String loadErrorMessage = "Error loading contents from file!!";
 
     /**
-     * Prints dotted line.
-     */
-    public void printLine() {
-        System.out.print('\t');
-        for (int i = 0; i < 100; i++) {
-            System.out.print('_');
-        }
-        System.out.println("");
-    }
-
-    /**
-     * Prints given string within dotted lines.
+     * Returns greeting message.
      *
-     * @param str string to be printed within dotted lines.
+     * @return greeting message.
      */
-    public void printFormatted(String str) {
-        printLine();
-        System.out.println("\t" + str);
-        printLine();
+    public String getGreetingMessage() {
+        return greetingMessage;
     }
 
     /**
-     * Prints the given list of tasks after the given string.
+     * Returns goodbye message.
      *
-     * @param tasks list of tasks to be printed.
-     * @param str string to be printed before the list of tasks.
+     * @return goodbye message.
      */
-    public void printList(TaskList tasks, String str) {
-        int ctr = 1;
-        System.out.println("\t" + str);
-        if (tasks.size() == 0) {
-            System.out.println("\t---No items stored yet---");
-        } else {
-            tasks.printList();
-        }
+    public String getGoodbyeMessage() {
+        return goodbyeMessage;
     }
 
     /**
-     * Prints greeting message preceeded by dotted line.
+     * Returns loading error message.
      */
-    public void printGreeting() {
-        printLine();
-        System.out.println(this.greetingMessage);
+    public String showLoadingError() {
+        return loadErrorMessage;
     }
-
-    public void printGoodbye() {
-        printFormatted(this.goodbyeMessage);
-    }
-
-    /**
-     * Displays loading error message.
-     */
-    public void showLoadingError() {
-        System.err.print("Error loading contents from file!!");
-    }
-
 }

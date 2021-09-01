@@ -32,6 +32,28 @@ public class TaskList {
     }
 
     /**
+     * Returns string representation of list items to be printed on screen.
+     *
+     * @param str string to be displayed before list.
+     * @return string representation of list items to be printed on screen.
+     */
+    public String listToString(String str) {
+        String result = str;
+        if (taskList.size() == 0) {
+            result = result.concat("\n\n---No items added yet ---\n");
+        } else {
+            int ctr = 1;
+            for (Task t: taskList) {
+                result = result.concat("\n" + ctr + ". " + taskList.get(ctr - 1));
+                ctr++;
+            }
+            System.out.println(result);
+        }
+
+        return result + "\n";
+    }
+
+    /**
      * Prints list of tasks.
      */
     public void printList() {
