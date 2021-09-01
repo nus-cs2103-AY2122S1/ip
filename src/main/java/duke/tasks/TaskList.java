@@ -1,7 +1,7 @@
 package duke.tasks;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -21,7 +21,8 @@ public class TaskList {
 
     /**
      * Constructs a TaskList given a list of Tasks.
-     * @param tasks the list of Tasks
+     *
+     * @param tasks The list of Tasks.
      */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
@@ -29,7 +30,8 @@ public class TaskList {
 
     /**
      * Returns the list of tasks.
-      * @return the list of tasks
+     *
+      * @return The list of tasks.
      */
     public List<Task> getTasks() {
         return tasks;
@@ -37,7 +39,8 @@ public class TaskList {
 
     /**
      * Adds a task into the TaskList.
-     * @param task the task to be added
+     *
+     * @param task The task to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);
@@ -46,8 +49,9 @@ public class TaskList {
     /**
      * Marks a Task at the specified position in the TaskList as completed and
      * returns the completed Task.
-     * @param index the index of the Task in the TaskList to be marked as completed
-     * @return the completed Task
+     *
+     * @param index The index of the Task in the TaskList to be marked as completed.
+     * @return The completed Task.
      */
     public Task markTaskAsDone(int index) {
         return tasks.get(index - 1).markAsDone();
@@ -55,7 +59,8 @@ public class TaskList {
 
     /**
      * Returns the number of Task in the TaskList.
-     * @return the size of the TaskList
+     *
+     * @return The size of the TaskList.
      */
     public int size() {
         return tasks.size();
@@ -64,16 +69,27 @@ public class TaskList {
     /**
      * Deletes a Task at the specified position in the TaskList and
      * returns the deleted Task.
-     * @param index the index of the Task in the TaskList to be delted
-     * @return the deleted Task
+     *
+     * @param index The index of the Task in the TaskList to be deleted.
+     * @return The deleted Task.
      */
     public Task deleteTask(int index) {
         return tasks.remove(index - 1);
     }
 
+    /**
+     * Finds a list of tasks given the search query.
+     *
+     * @param keyword The search query.
+     * @return The message that contains the list of task that matches the search query.
+     */
     public String find(String keyword) {
-        List<Task> filteredTasks = tasks.stream().filter(task -> task.getDescription().contains(keyword)).collect(Collectors.toList());
-        String str = String.format("Here are the matching %s in your list:\n", filteredTasks.size() <= 1 ? "task" : "tasks");
+        List<Task> filteredTasks = tasks
+                .stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .collect(Collectors.toList());
+        String str = String.format("Here are the matching %s in your list:\n",
+                filteredTasks.size() <= 1 ? "task" : "tasks");
         StringBuilder result = new StringBuilder(str);
         int len = filteredTasks.size();
         if (len == 0) {

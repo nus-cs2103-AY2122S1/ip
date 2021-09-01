@@ -19,7 +19,8 @@ public class Duke {
 
     /**
      * Constructs a Duke instance.
-     * @param filePath the path to a text file for storage
+     *
+     * @param filePath The path to a text file for storage.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -55,7 +56,8 @@ public class Duke {
 
     /**
      * This is the entry point for the Duke program.
-     * @param args an array of String arguments that stick to convention
+     *
+     * @param args An array of String arguments that stick to convention.
      */
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();

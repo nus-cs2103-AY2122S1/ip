@@ -12,7 +12,8 @@ public abstract class Task {
 
     /**
      * Constructs a Task given the description.
-     * @param description the task description
+     *
+     * @param description The task description.
      */
     public Task(String description) {
         this.description = description;
@@ -20,9 +21,10 @@ public abstract class Task {
     }
 
     /**
-     * Constructs a Task given both the description and completion status
-     * @param description the task description
-     * @param isDone whether the task is completed
+     * Constructs a Task given both the description and completion status.
+     *
+     * @param description The task description.
+     * @param isDone Whether the task is completed.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -30,8 +32,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns a String icon to indicate if the task is completed
-     * @return "X" if the task is completed and an empty string if it is not
+     * Returns a String icon to indicate if the task is completed.
+     *
+     * @return "X" if the task is completed and an empty string if it is not.
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
@@ -39,7 +42,8 @@ public abstract class Task {
 
     /**
      * Mark the Task as completed.
-     * @return the completed Task
+     *
+     * @return The completed Task.
      */
     public Task markAsDone() {
         isDone = true;
@@ -52,9 +56,10 @@ public abstract class Task {
 
     /**
      * Formats the Task into a String that will be saved into a text file for storage.
-     * @return a String representation of the task
+     *
+     * @return A String representation of the task.
      */
-    abstract public String format();
+    public abstract String format();
 
     @Override
     public String toString() {

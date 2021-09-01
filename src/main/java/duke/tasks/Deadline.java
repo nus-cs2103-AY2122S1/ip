@@ -14,8 +14,9 @@ public class Deadline extends Task {
 
     /**
      * Constructs a Deadline given the description and the deadline.
-     * @param description the deadline description
-     * @param by the deadline of this task
+     *
+     * @param description The deadline description.
+     * @param by The deadline of this task.
      */
     public Deadline(String description, LocalDate by) {
         super(description);
@@ -25,9 +26,10 @@ public class Deadline extends Task {
     /**
      * Constructs a Deadline given the description,
      * completion status and deadline.
-     * @param description the task description
-     * @param isDone whether the task is completed
-     * @param by the deadline of this task
+     *
+     * @param description The task description.
+     * @param isDone Whether the task is completed.
+     * @param by The deadline of this task.
      */
     public Deadline(String description, boolean isDone, LocalDate by) {
         super(description, isDone);

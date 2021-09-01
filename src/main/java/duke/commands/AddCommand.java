@@ -16,7 +16,8 @@ public class AddCommand extends Command {
 
     /**
      * Constructs a AddCommand given a Task.
-     * @param task the task that will be added into the TastList
+     *
+     * @param task The task that will be added into the TaskList.
      */
     public AddCommand(Task task) {
         super(false);
@@ -25,11 +26,12 @@ public class AddCommand extends Command {
 
     /**
      * Executes the AddCommand and add the Task into the TaskList.
-     * @param tasks the collection of tasks
-     * @param ui the user interface that handles input and output
-     * @param storage the storage manager that deals with loading from and
-     *               saving into a file
-     * @throws DukeException if the file that act as storage can not be found
+     *
+     * @param tasks The collection of tasks.
+     * @param ui The user interface that handles input and output.
+     * @param storage The storage manager that deals with loading from and
+     *               saving into a file.
+     * @throws DukeException If the file that act as storage can not be found.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

@@ -15,8 +15,9 @@ public class DoneCommand extends Command {
     private final int index;
 
     /**
-     * Constucts a DoneCommand given an index.
-     * @param index the index of the Task to be marked as done
+     * Constructs a DoneCommand given an index.
+     *
+     * @param index The index of the Task to be marked as done.
      */
     public DoneCommand(int index) {
         super(false);
@@ -26,11 +27,12 @@ public class DoneCommand extends Command {
     /**
      * Executes the DoneCommand and mark the Task at the specified index
      * in the TaskList as done.
-     * @param tasks the collection of tasks
-     * @param ui the user interface that handles input and output
-     * @param storage the storage manager that deals with loading from and
-     *               saving into a file
-     * @throws DukeException if the file that act as storage can not be found
+     *
+     * @param tasks The collection of tasks.
+     * @param ui The user interface that handles input and output.
+     * @param storage The storage manager that deals with loading from and
+     *               saving into a file.
+     * @throws DukeException If the file that act as storage can not be found.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
