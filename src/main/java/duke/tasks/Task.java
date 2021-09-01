@@ -39,7 +39,6 @@ public class Task {
      */
     public static Task createTask(String inputString, Type type) {
         inputString = inputString.trim();
-        String[] args;
         switch (type) {
         case TODO:
             return new TodoTask(inputString);
@@ -60,7 +59,7 @@ public class Task {
      * @return Task object
      */
     public static Task stringToTask(String stringifiedTask) {
-        // {TYPE}|{DESCRIPTION}|{DATE or DATES or BLANK}
+        // {isComplete}|{type}|{description}|{date or dates or blank}
         String[] taskAttributes = stringifiedTask.split(Pattern.quote(DELIMITER));
         if (taskAttributes.length < 3 || taskAttributes.length > 4) {
             throw new IllegalArgumentException(
