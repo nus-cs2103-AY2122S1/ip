@@ -5,7 +5,6 @@ package duke;
  * Deals with interactions with the user.
  */
 public class Ui {
-    //private Scanner sc = new Scanner(System.in);
     private String horizontal = "_______________________\n";
     private String logo =
             "                     _               _         \n"
@@ -26,16 +25,10 @@ public class Ui {
     /**
      * Prints the welcome message.
      */
-    public void welcome() {
-        System.out.println("Hello from\n" + logo);
+    public String welcome() {
+        return ("Hello from\n" + logo);
     }
 
-    /**
-     * Show divider.
-     */
-    public void showLine() {
-        System.out.println(horizontal);
-    }
 
     /**
      * Print exit message.
@@ -44,17 +37,6 @@ public class Ui {
         return ("Byebye ~ nya");
     }
 
-    /*
-    public String readCommand() {
-        String command = sc.nextLine();
-        return command;
-    }
-
-     */
-
-    public String wrap(String input) {
-        return horizontal + input + horizontal;
-    }
 
     /**
      * Output the error message.
@@ -64,6 +46,5 @@ public class Ui {
     public static String showError(String error) {
         return ("OvO I found the following errors! " + error);
     }
-
 
 }

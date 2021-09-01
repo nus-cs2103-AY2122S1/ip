@@ -29,30 +29,12 @@ public class Duke {
         taskList = new TaskList(storage.load());
     }
 
-
-    /*
-    public void run() {
-        ui.welcome();
-        boolean isExist = true;
-
-        while (isExist) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExist = c.isExist();
-            } catch (DukeException e) {
-                Ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    */
-
-
+    /**
+     * Return the output of command.
+     *
+     * @param input Input from gui label.
+     * @return Output response.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
@@ -61,11 +43,4 @@ public class Duke {
             return Ui.showError(e.getMessage());
         }
     }
-
-    /*
-    public static void main(String[] args) {
-        new Duke("./data/tasks.txt").run();
-    }
-    */
-
 }

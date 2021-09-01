@@ -37,7 +37,7 @@ public class Task {
      */
     public String markAsDone() {
         this.isDone = true;
-        return ("Yayyyy done yayyy~~\n" + toString());
+        return ("Yayyyy done ~~\n" + toString());
     }
 
     /**
