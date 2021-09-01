@@ -5,7 +5,7 @@ package duke;
  */
 public class UI {
     /**
-     * Returns welcome message
+     * Returns welcome message when the user opens Duke
      *
      * @return Welcome message
      */
@@ -36,6 +36,7 @@ public class UI {
 
     /**
      * Returns a message when a task is marked as done
+     *
      * @param taskNumber Number of the task in TaskList
      */
     public static String done(int taskNumber) {
@@ -54,6 +55,7 @@ public class UI {
 
     /**
      * Returns a message when a task is deleted from TaskList
+     *
      * @param taskNumber Number of task in TaskList
      */
     public static String delete(int taskNumber) {
@@ -61,7 +63,8 @@ public class UI {
     }
 
     /**
-     * Prints a message to show the number of current tasks
+     * Returns a message to show the number of current tasks
+     *
      * @param numberOfTasks Number of current tasks
      */
     public static String numberOfTasks(int numberOfTasks) {
@@ -69,7 +72,9 @@ public class UI {
     }
 
     /**
-     * Lists the current Tasks in taskArrayList with numbering
+     * Returns a string of the current Tasks in taskArrayList with numbering
+     *
+     * @return String of tasks
      */
     public static String list(TaskList taskList) {
         String list = "Here are your current tasks:\n";
@@ -77,5 +82,14 @@ public class UI {
             list += i + "." + taskList.get(i).toString() + "\n";
         }
         return list;
+    }
+
+    /**
+     * Returns a short message to greet the user
+     *
+     * @return Short message string to greet the user
+     */
+    public static String hi() {
+        return "Hello! How can I help?";
     }
 }

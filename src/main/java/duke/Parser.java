@@ -1,6 +1,7 @@
 package duke;
 
 import java.time.LocalDate;
+import java.util.Locale;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
@@ -38,10 +39,14 @@ public class Parser {
         Parser.userString = userString;
         Parser.taskList = taskList;
         String[] arr = userString.split(" ");
-        String firstWord = arr[0];
+        String firstWord = arr[0].toLowerCase();
         Parser.words = arr;
 
         switch (firstWord) {
+        case "hi":
+            return UI.hi();
+        case "hello":
+            return UI.hi();
         case "bye":
             taskList.saveTasksToStorage();
             return UI.bye();
