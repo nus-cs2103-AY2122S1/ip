@@ -28,16 +28,16 @@ class TaskTest {
     public void matchDescription_success() {
         Task task = new Event("test task", null, null, null);
 
-        assertTrue(task.match("test"));
-        assertTrue(task.match("task"));
-        assertTrue(task.match("t"));
+        assertTrue(task.matchesKeyword("test"));
+        assertTrue(task.matchesKeyword("task"));
+        assertTrue(task.matchesKeyword("t"));
 
-        assertFalse(task.match("apple"));
-        assertFalse(task.match("banana"));
-        assertFalse(task.match("tet"));
+        assertFalse(task.matchesKeyword("apple"));
+        assertFalse(task.matchesKeyword("banana"));
+        assertFalse(task.matchesKeyword("tet"));
 
-        assertFalse(task.match("todo"));
-        assertFalse(task.match("deadline"));
-        assertTrue(task.match("event"));
+        assertFalse(task.matchesKeyword("todo"));
+        assertFalse(task.matchesKeyword("deadline"));
+        assertTrue(task.matchesKeyword("event"));
     }
 }

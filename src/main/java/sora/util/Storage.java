@@ -31,7 +31,7 @@ public class Storage {
     /**
      * Constructor for Storage.
      *
-     * @param filePath file path to local storage
+     * @param filePath File path to local storage
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -41,9 +41,9 @@ public class Storage {
      * Saves data stored locally.
      * If file does not exist, then a new file will be created.
      *
-     * @param tasks the list of tasks to be saved into local storage
-     * @throws IOException if the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason
+     * @param tasks The list of tasks to be saved into local storage
+     * @throws IOException If the named file exists but is a directory rather than a regular file,
+     *         does not exist but cannot be created, or cannot be opened for any other reason
      */
     public void save(List<Task> tasks) throws IOException {
         // Reformat the list of tasks for storage
@@ -61,10 +61,10 @@ public class Storage {
      * Loads data stored locally.
      * If file does not exist, then a new file will be created.
      *
-     * @return an array list of tasks containing any tasks that can be read from local storage
-     * @throws DataIntegrityException if the data in the save file is not in the correct format
-     * @throws IOException if the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason
+     * @return An array list of tasks containing any tasks that can be read from local storage
+     * @throws DataIntegrityException If the data in the save file is not in the correct format
+     * @throws IOException If the named file exists but is a directory rather than a regular file,
+     *         does not exist but cannot be created, or cannot be opened for any other reason
      */
     public ArrayList<Task> load() throws DataIntegrityException, IOException {
         // List of tasks to be returned
@@ -130,8 +130,8 @@ public class Storage {
 
         String[] info = time.split("[,-]");
         info = Arrays.stream(info)
-            .map(String::trim)
-            .toArray(String[]::new);
+                .map(String::trim)
+                .toArray(String[]::new);
 
         LocalDate date;
         LocalTime startTime, endTime;

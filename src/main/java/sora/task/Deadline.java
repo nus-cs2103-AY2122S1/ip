@@ -15,17 +15,22 @@ public class Deadline extends Task {
     /**
      * Constructor for deadline.
      *
-     * @param description description of the deadline
-     * @param dateTime due date and time of the deadline
+     * @param description Description of the deadline
+     * @param dateTime Due date and time of the deadline
      */
     public Deadline(String description, LocalDateTime dateTime) {
         super(description);
         this.dateTime = dateTime;
     }
 
+    /**
+     * Formats deadline in the form of: [D][ ] description (by: MMM d yyyy, h:mm a)
+     *
+     * @return A string representation of the deadline
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
-            + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")) + ")";
+                + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")) + ")";
     }
 }

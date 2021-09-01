@@ -23,9 +23,7 @@ import sora.util.Message;
 public class TaskList {
     private final ArrayList<Task> tasks;
 
-    /**
-     * Constructor for TaskList.
-     */
+    /** Constructor for TaskList. */
     public TaskList() {
         this(new ArrayList<>());
     }
@@ -34,7 +32,7 @@ public class TaskList {
      * Overloading constructor for TaskList.
      * Allows user to input a list of tasks.
      *
-     * @param tasks an existing list of tasks
+     * @param tasks An existing list of tasks
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -47,10 +45,10 @@ public class TaskList {
     /**
      * Deletes the task with the same task number specified by user.
      *
-     * @param command command entered by user (delete [task number])
-     * @return confirmation message for successfully deleted a task
-     * @throws IllegalFormatException if user gives empty or invalid task number
-     * @throws TaskNotFoundException if the task specified by the task number does not exist
+     * @param command Command entered by user (delete [task number])
+     * @return Confirmation message for successfully deleted a task
+     * @throws IllegalFormatException If user gives empty or invalid task number
+     * @throws TaskNotFoundException If the task specified by the task number does not exist
      */
     public String taskDelete(String command) throws IllegalFormatException, TaskNotFoundException {
         // Throw exception if user gives empty or non-integer task number
@@ -75,21 +73,21 @@ public class TaskList {
 
         // Return confirmation message
         return Message.DELETE + "\n  "
-            + task + "\n" + (
-            size == 0
-            ? "You have no more task in the list!"
-            : size == 1
-              ? "You still have 1 task in the list."
-              : "You still have " + tasks.size() + " tasks in the list.");
+                + task + "\n" + (
+                size == 0
+                ? "You have no more tasks in the list!"
+                : size == 1
+                  ? "You still have 1 task in the list."
+                  : "You still have " + tasks.size() + " tasks in the list.");
     }
 
     /**
      * Marks the task with the same task number specified by user as done.
      *
-     * @param command command entered by user (done [task number])
-     * @return confirmation message for successfully marked a task as done
-     * @throws IllegalFormatException if user gives empty or invalid task number
-     * @throws TaskNotFoundException if the task specified by the task number does not exist
+     * @param command Command entered by user (done [task number])
+     * @return Confirmation message for successfully marked a task as done
+     * @throws IllegalFormatException If user gives empty or invalid task number
+     * @throws TaskNotFoundException If the task specified by the task number does not exist
      */
     public String taskDone(String command) throws IllegalFormatException, TaskNotFoundException {
         // Throw exception if user gives empty or non-integer task number
@@ -118,9 +116,9 @@ public class TaskList {
     /**
      * Adds a new event to the list of tasks.
      *
-     * @param command command entered by user (event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm])
-     * @return confirmation message for successfully added a new event
-     * @throws IllegalFormatException if user inputs an invalid command
+     * @param command Command entered by user (event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm])
+     * @return Confirmation message for successfully added a new event
+     * @throws IllegalFormatException If user inputs an invalid command
      */
     public String addEvent(String command) throws IllegalFormatException {
         String correctFormat = "event [description] /at [dd/MM/yy] /from [HHmm] /to [HHmm]";
@@ -131,8 +129,8 @@ public class TaskList {
         // Separate info and trim each of them
         String[] info = command.substring(6).split("/at|/from|/to");
         info = Arrays.stream(info)
-            .map(String::trim)
-            .toArray(String[]::new);
+                .map(String::trim)
+                .toArray(String[]::new);
 
         LocalDate date;
         LocalTime startTime, endTime;
@@ -163,9 +161,9 @@ public class TaskList {
     /**
      * Adds a new deadline to the list of tasks.
      *
-     * @param command command entered by user (deadline [description] /by [dd/MM/yy] [HHmm])
-     * @return confirmation message for successfully added a new deadline
-     * @throws IllegalFormatException if user inputs an invalid command
+     * @param command Command entered by user (deadline [description] /by [dd/MM/yy] [HHmm])
+     * @return Confirmation message for successfully added a new deadline
+     * @throws IllegalFormatException If user inputs an invalid command
      */
     public String addDeadline(String command) throws IllegalFormatException {
         String correctFormat = "deadline [description] /by [dd/MM/yy] [HHmm]";
@@ -176,8 +174,8 @@ public class TaskList {
         // Separate info and trim each of them
         String[] info = command.substring(9).split("/by");
         info = Arrays.stream(info)
-            .map(String::trim)
-            .toArray(String[]::new);
+                .map(String::trim)
+                .toArray(String[]::new);
 
         LocalDateTime dateTime;
 
@@ -199,9 +197,9 @@ public class TaskList {
     /**
      * Adds a new todo to the list of tasks.
      *
-     * @param command command entered by user (todo [description])
-     * @return confirmation message for successfully added a new todo
-     * @throws IllegalFormatException if user inputs an invalid command
+     * @param command Command entered by user (todo [description])
+     * @return Confirmation message for successfully added a new todo
+     * @throws IllegalFormatException If user inputs an invalid command
      */
     public String addTodo(String command) throws IllegalFormatException {
         // Throw exception if command does not follow format
@@ -217,18 +215,18 @@ public class TaskList {
 
     private String formatAddMessage(Task task, int size) {
         return Message.ADD + "\n  "
-            + task + "\n"
-            + "Now you have " + size + " task" + (size == 1 ? "" : "s") + " in the list.";
+                + task + "\n"
+                + "Now you have " + size + " task" + (size == 1 ? "" : "s") + " in the list.";
     }
 
     /**
      * Prints only the tasks in the list that contains the keyword in their descriptions;
      * or task of the same type as keyword (e.g. keyword = "event").
      *
-     * @param command command entered by user (find [keyword])
-     * @return string representation of the list of matched tasks
-     * @throws EmptyListException if number of matched tasks in the list is 0
-     * @throws IllegalFormatException if user inputs an invalid command
+     * @param command Command entered by user (find [keyword])
+     * @return String representation of the list of matched tasks
+     * @throws EmptyListException If number of matched tasks in the list is 0
+     * @throws IllegalFormatException If user inputs an invalid command
      */
     public String findInList(String command) throws EmptyListException, IllegalFormatException {
         // Throw exception if command does not follow format
@@ -236,8 +234,8 @@ public class TaskList {
 
         String keyword = command.substring(5).trim().toLowerCase();
         List<Task> filteredTasks = tasks.stream()
-            .filter(task -> task.match(keyword))
-            .collect(Collectors.toList());
+                .filter(task -> task.matchesKeyword(keyword))
+                .collect(Collectors.toList());
 
         return printList(filteredTasks);
     }
@@ -245,8 +243,8 @@ public class TaskList {
     /**
      * Prints all the tasks in the list.
      *
-     * @return string representation of the list of tasks
-     * @throws EmptyListException if the list of tasks is empty
+     * @return String representation of the list of tasks
+     * @throws EmptyListException If the list of tasks is empty
      */
     public String printFullList() throws EmptyListException {
         return printList(tasks);
@@ -264,15 +262,15 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < size - 1; i++) {
             sb.append(i + 1)
-                .append(". ")
-                .append(tasks.get(i))
-                .append("\n");
+                    .append(". ")
+                    .append(tasks.get(i))
+                    .append("\n");
         }
 
         // Last task is special as it does not need the '\n'
         sb.append(size)
-            .append(". ")
-            .append(tasks.get(size - 1));
+                .append(". ")
+                .append(tasks.get(size - 1));
 
         // Return string representation of the list of tasks
         return Message.LIST + "\n" + sb;

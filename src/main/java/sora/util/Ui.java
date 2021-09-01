@@ -10,9 +10,7 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner sc;
 
-    /**
-     * Constructor for Ui.
-     */
+    /** Constructor for Ui. */
     public Ui() {
         // Initialize scanner and print welcome message
         sc = new Scanner(System.in);
@@ -21,7 +19,7 @@ public class Ui {
     /**
      * Reads a line of command input by the user with leading and trailing space removed.
      *
-     * @return command input by user
+     * @return Command input by user
      */
     public String readCommand() {
         return sc.nextLine().trim();
@@ -39,12 +37,12 @@ public class Ui {
      * <br>
      * -----------
      *
-     * @param message message to be displayed
+     * @param message Message to be displayed
      */
     public void printMessage(String message) {
         String format = Message.HORIZONTAL_LINE
-            + "\t%s\n"
-            + Message.HORIZONTAL_LINE;
+                + "\t%s\n"
+                + Message.HORIZONTAL_LINE;
         System.out.printf(format, message.replaceAll("\n", "\n\t"));
     }
 
@@ -61,15 +59,13 @@ public class Ui {
      * <br>
      * -----------
      *
-     * @param message message to be displayed
+     * @param message Message to be displayed
      */
     public void printMessage(Message message) {
         printMessage(message.toString());
     }
 
-    /**
-     * Close the scanner and print exit message.
-     */
+    /** Close the scanner and print exit message. */
     public void exit() {
         sc.close();
         printMessage(Message.EXIT);

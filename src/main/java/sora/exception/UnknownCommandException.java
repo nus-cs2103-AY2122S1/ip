@@ -12,6 +12,6 @@ public class UnknownCommandException extends SoraException {
      */
     public UnknownCommandException() {
         super("Sorry but my database does not have such command.\n"
-            + "Try typing 'help' for more information regarding this app!");
+                + "Try typing 'help' for more information regarding this app!");
     }
 }

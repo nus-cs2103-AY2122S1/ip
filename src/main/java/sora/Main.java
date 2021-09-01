@@ -9,9 +9,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import sora.controller.MainWindow;
 
-/**
- * A GUI for Sora using FXML.
- */
+/** A GUI for Sora using FXML. */
 public class Main extends Application {
     @Override
     public void start(Stage stage) {

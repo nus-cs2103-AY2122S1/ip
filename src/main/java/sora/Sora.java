@@ -18,7 +18,7 @@ public class Sora {
      * Initialize each component of the program.
      * Loads any data available from filePath.
      *
-     * @param isCli enable cli output
+     * @param isCli Enable cli output
      */
     public Sora(boolean isCli) {
         storage = new Storage("data.txt");
@@ -41,15 +41,13 @@ public class Sora {
     /**
      * Initialize and start the program in CLI interface.
      *
-     * @param args not used
+     * @param args Not used
      */
     public static void main(String[] args) {
         new Sora(true).run();
     }
 
-    /**
-     * Run the program.
-     */
+    /** Run the program. */
     public void run() {
         String input;
 
@@ -58,9 +56,9 @@ public class Sora {
             try {
                 // Interpret and execute the command input by user
                 String message =
-                    input.equals("help")
-                    ? Message.HELP.toString()
-                    : Parser.interpretCommand(input).execute(taskList);
+                        input.equals("help")
+                        ? Message.HELP.toString()
+                        : Parser.interpretCommand(input).execute(taskList);
                 ui.printMessage(message);
 
                 // Update storage file
@@ -78,8 +76,8 @@ public class Sora {
      * Handles command from user and returns corresponding message from executing the command.
      * Used by JavaFX.
      *
-     * @param command command input by user
-     * @return response message of the command or error message
+     * @param command Command input by user
+     * @return Response message of the command or error message
      */
     public String getResponse(String command) {
         // Exit is handled separately

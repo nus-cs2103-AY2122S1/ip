@@ -10,12 +10,11 @@ import sora.task.TaskList;
  */
 public class Parser {
     /**
-     * Interprets the command entered by user and returns the corresponding method
-     * wrapped in a CheckedFunction.
+     * Interprets the command entered by user and returns the corresponding method wrapped in a CheckedFunction.
      *
-     * @param command command to be interpreted
-     * @return a CheckedFunction containing the method
-     * @throws UnknownCommandException if user inputs invalid command
+     * @param command Command to be interpreted
+     * @return A CheckedFunction containing the method
+     * @throws UnknownCommandException If user inputs invalid command
      */
     public static CheckedFunction interpretCommand(String command) throws UnknownCommandException {
         // Each if else handles one type of command

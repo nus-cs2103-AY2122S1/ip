@@ -18,10 +18,10 @@ public class Event extends Task {
     /**
      * Constructor for event.
      *
-     * @param description description of the event
-     * @param date date of the event
-     * @param startTime start time of the event
-     * @param endTime end time of the event
+     * @param description Description of the event
+     * @param date Date of the event
+     * @param startTime Start time of the event
+     * @param endTime End time of the event
      */
     public Event(String description, LocalDate date, LocalTime startTime, LocalTime endTime) {
         super(description);
@@ -31,12 +31,17 @@ public class Event extends Task {
         this.endTime = endTime;
     }
 
+    /**
+     * Formats event in the form of: [E][ ] description (at: MMM d yyyy, h:mm a - h:mm a)
+     *
+     * @return A string representation of the event
+     */
     @Override
     public String toString() {
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a");
         return "[E]" + super.toString() + " (at: "
-            + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
-            + startTime.format(timeFormatter) + " - "
-            + endTime.format(timeFormatter) + ")";
+                + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
+                + startTime.format(timeFormatter) + " - "
+                + endTime.format(timeFormatter) + ")";
     }
 }

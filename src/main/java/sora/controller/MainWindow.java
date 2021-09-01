@@ -30,9 +30,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     private Sora sora;
 
-    /**
-     * Initialize components of the Main Window.
-     */
+    /** Initialize components of the Main Window. */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -44,8 +42,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Sora's reply
-     * and then appends them to the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Sora's reply and then appends
+     * them to the dialog container.
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -55,8 +54,8 @@ public class MainWindow extends AnchorPane {
         // Obtain and display response to user input
         String response = sora.getResponse(input);
         dialogContainer.getChildren().addAll(
-            DialogBox.getUserDialog(input, userImage),
-            DialogBox.getDukeDialog(response, soraImage)
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, soraImage)
         );
 
         // Remove previous input
