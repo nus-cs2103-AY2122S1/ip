@@ -82,7 +82,7 @@ public class CustomDateFormatter {
             try {
                 return LocalDate.parse(text, DateTimeFormatter.ofPattern(pattern));
             } catch (DateTimeParseException e) {
-                // Don't want to print anything here as it would disrupt the UI
+                System.out.println("Invalid date time exception caught!");
             }
         }
         return null;

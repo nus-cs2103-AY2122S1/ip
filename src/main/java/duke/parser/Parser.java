@@ -10,6 +10,22 @@ import duke.commands.ErrorCommand;
 import duke.commands.ExitCommand;
 import duke.commands.ListCommand;
 import duke.commands.SearchCommand;
+import duke.errors.EmptyDeadlineDateException;
+import duke.errors.EmptyDeadlineDescriptionException;
+import duke.errors.EmptyEventDateException;
+import duke.errors.EmptyEventDescriptionException;
+import duke.errors.EmptyListNumberException;
+import duke.errors.EmptySearchStringException;
+import duke.errors.EmptyToDoDescriptionException;
+import duke.errors.EscapeCharacterException;
+import duke.errors.InvalidCommandException;
+import duke.errors.InvalidDateFormatException;
+import duke.errors.InvalidListNumberException;
+import duke.errors.ListFullException;
+import duke.errors.PollutedExitCommandException;
+import duke.errors.PollutedListCommandException;
+import duke.errors.SeparatorInStringException;
+import duke.errors.TooManyInputsException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -146,12 +162,46 @@ public class Parser {
     /**
      * This method parses the command for the error Command.
      *
-     * @param input The cleaned user input
+     * @param errorParse The cleaned user input
      * @return The appropriate Command object
      */
-    public static Command errorParser(String input) {
-        int code = Integer.parseInt(input.substring((6)));
-        return new ErrorCommand(code);
+    public static Command errorParser(String errorParse) {
+        switch (errorParse) {
+        case "INVALID_COMMAND_EXCEPTION":
+            return new ErrorCommand(new InvalidCommandException());
+        case "ESCAPE_CHARACTER_EXCEPTION":
+            return new ErrorCommand(new EscapeCharacterException());
+        case "POLLUTED_LIST_COMMAND_EXCEPTION":
+            return new ErrorCommand(new PollutedListCommandException());
+        case "EMPTY_TODO_DESCRIPTION_EXCEPTION":
+            return new ErrorCommand(new EmptyToDoDescriptionException());
+        case "EMPTY_DEADLINE_DESCRIPTION_EXCEPTION":
+            return new ErrorCommand(new EmptyDeadlineDescriptionException());
+        case "EMPTY_DEADLINE_DATE_EXCEPTION":
+            return new ErrorCommand(new EmptyDeadlineDateException());
+        case "EMPTY_EVENT_DESCRIPTION_EXCEPTION":
+            return new ErrorCommand(new EmptyEventDescriptionException());
+        case "EMPTY_EVENT_DATE_EXCEPTION":
+            return new ErrorCommand(new EmptyEventDateException());
+        case "EMPTY_LIST_NUMBER_EXCEPTION":
+            return new ErrorCommand(new EmptyListNumberException());
+        case "TOO_MANY_INPUTS_EXCEPTION":
+            return new ErrorCommand(new TooManyInputsException());
+        case "INVALID_LIST_NUMBER_EXCEPTION":
+            return new ErrorCommand(new InvalidListNumberException());
+        case "LIST_FULL_EXCEPTION":
+            return new ErrorCommand(new ListFullException());
+        case "SEPARATOR_IN_STRING_EXCEPTION":
+            return new ErrorCommand(new SeparatorInStringException());
+        case "INVALID_DATE_FORMAT_EXCEPTION":
+            return new ErrorCommand(new InvalidDateFormatException());
+        case "POLLUTED_EXIT_COMMAND_EXCEPTION":
+            return new ErrorCommand(new PollutedExitCommandException());
+        case "EMPTY_SEARCH_STRING_EXCEPTION":
+            return new ErrorCommand(new EmptySearchStringException());
+        default:
+            return null;
+        }
     }
 
 }

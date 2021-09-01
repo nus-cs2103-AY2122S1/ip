@@ -19,9 +19,9 @@ public class Cleaner {
         if (fullCommand.length() < 1) {
             return "";
         } else if (fullCommand.contains("\n")) {
-            return "error 0";
+            return "ESCAPE_CHARACTER_EXCEPTION";
         } else if (fullCommand.contains("_~_")) {
-            return "error 11";
+            return "SEPARATOR_IN_STRING_EXCEPTION";
         }
         String[] stringArray = fullCommand.split(" ");
         String firstWord = stringArray[0];
@@ -45,7 +45,7 @@ public class Cleaner {
         case "find":
             return findCleaner(fullCommand);
         default:
-            return "error -1";
+            return "INVALID_COMMAND_EXCEPTION";
         }
     }
 
@@ -57,7 +57,7 @@ public class Cleaner {
      */
     private String findCleaner(String fullCommand) {
         if (fullCommand.strip().length() == 4) {
-            return "error 14";
+            return "EMPTY_SEARCH_STRING_EXCEPTION";
         }
         String searchString = fullCommand.substring(5);
         return "find " + searchString.strip();
@@ -71,7 +71,7 @@ public class Cleaner {
      */
     private String listCleaner(String fullCommand) {
         if (fullCommand.strip().length() >= 5) {
-            return "error 1";
+            return "POLLUTED_LIST_COMMAND_EXCEPTION";
         } else {
             return "list";
         }
@@ -85,7 +85,7 @@ public class Cleaner {
      */
     private String byeCleaner(String fullCommand) {
         if (fullCommand.strip().length() > 4) {
-            return "error 1";
+            return "POLLUTED_EXIT_COMMAND_EXCEPTION";
         } else {
             return "bye";
         }
@@ -99,7 +99,7 @@ public class Cleaner {
      */
     public static String todoCleaner(String fullCommand) {
         if (fullCommand.strip().length() < 5) {
-            return "error 2";
+            return "EMPTY_TODO_DESCRIPTION_EXCEPTION";
         } else {
             return fullCommand.strip();
         }
@@ -113,14 +113,14 @@ public class Cleaner {
      */
     public static String deadlineCleaner(String fullCommand) {
         if (fullCommand.split("/by")[0].strip().length() == 8) {
-            return "error 3";
+            return "EMPTY_DEADLINE_DESCRIPTION_EXCEPTION";
         } else if (!fullCommand.contains("/by")
                 || fullCommand.split("/by").length < 2
                 || fullCommand.split("/by")[1].strip().length() < 1) {
-            return "error 4";
+            return "EMPTY_DEADLINE_DATE_EXCEPTION";
         } else {
             if (CustomDateFormatter.getLocalDateFromString(fullCommand.split("/by")[1].strip()) == null) {
-                return "error 12";
+                return "INVALID_DATE_FORMAT_EXCEPTION";
             }
             return fullCommand.strip();
         }
@@ -134,14 +134,14 @@ public class Cleaner {
      */
     public static String eventCleaner(String fullCommand) {
         if (fullCommand.split("/at")[0].strip().length() == 5) {
-            return "error 5";
+            return "EMPTY_EVENT_DESCRIPTION_EXCEPTION";
         } else if (!fullCommand.contains("/at")
                 || fullCommand.split("/at").length < 2
                 || fullCommand.split("/at")[1].strip().length() < 1) {
-            return "error 6";
+            return "EMPTY_EVENT_DATE_EXCEPTION6";
         } else {
             if (CustomDateFormatter.getLocalDateFromString(fullCommand.split("/at")[1].strip()) == null) {
-                return "error 12";
+                return "INVALID_DATE_FORMAT_EXCEPTION";
             }
             return fullCommand.strip();
         }
@@ -156,9 +156,9 @@ public class Cleaner {
      */
     public static String markDoneCleaner(String fullCommand, int currentCapacity) {
         if (fullCommand.strip().split(" ").length < 2) {
-            return "error 7";
+            return "EMPTY_LIST_NUMBER_EXCEPTION";
         } else if (fullCommand.strip().split(" ").length > 2) {
-            return "error 8";
+            return "TOO_MANY_INPUTS_EXCEPTION";
         } else {
             String digit = fullCommand.split(" ")[1];
             char[] chars = digit.toCharArray();
@@ -167,13 +167,13 @@ public class Cleaner {
                 if (Character.isDigit(c)) {
                     sb.append(c);
                 } else {
-                    return "error 9";
+                    return "INVALID_LIST_NUMBER_EXCEPTION";
                 }
             }
             Integer intToCheck = Integer.parseInt(sb.toString());
             if (intToCheck > currentCapacity
                     || intToCheck < 1) {
-                return "error 9";
+                return "INVALID_LIST_NUMBER_EXCEPTION";
             } else {
                 intToCheck -= 1;
                 return "done " + intToCheck;
@@ -190,9 +190,9 @@ public class Cleaner {
      */
     public static String markUndoCleaner(String fullCommand, int currentCapacity) {
         if (fullCommand.strip().split(" ").length < 2) {
-            return "error 7";
+            return "EMPTY_LIST_NUMBER_EXCEPTION";
         } else if (fullCommand.strip().split(" ").length > 2) {
-            return "error 8";
+            return "TOO_MANY_INPUTS_EXCEPTION";
         } else {
             String digit = fullCommand.split(" ")[1];
             char[] chars = digit.toCharArray();
@@ -201,13 +201,13 @@ public class Cleaner {
                 if (Character.isDigit(c)) {
                     sb.append(c);
                 } else {
-                    return "error 9";
+                    return "INVALID_LIST_NUMBER_EXCEPTION";
                 }
             }
             Integer intToCheck = Integer.parseInt(sb.toString());
             if (intToCheck > currentCapacity
                     || intToCheck < 1) {
-                return "error 9";
+                return "INVALID_LIST_NUMBER_EXCEPTION";
             } else {
                 intToCheck -= 1;
                 return "undo " + intToCheck;
@@ -224,9 +224,9 @@ public class Cleaner {
      */
     public static String deleteCleaner(String fullCommand, int currentCapacity) {
         if (fullCommand.strip().split(" ").length < 2) {
-            return "error 7";
+            return "EMPTY_LIST_NUMBER_EXCEPTION";
         } else if (fullCommand.strip().split(" ").length > 2) {
-            return "error 8";
+            return "TOO_MANY_INPUTS_EXCEPTION";
         } else {
             String digit = fullCommand.split(" ")[1];
             char[] chars = digit.toCharArray();
@@ -235,13 +235,13 @@ public class Cleaner {
                 if (Character.isDigit(c)) {
                     sb.append(c);
                 } else {
-                    return "error 9";
+                    return "INVALID_LIST_NUMBER_EXCEPTION";
                 }
             }
             Integer intToCheck = Integer.parseInt(sb.toString());
             if (intToCheck > currentCapacity
                     || intToCheck < 1) {
-                return "error 9";
+                return "INVALID_LIST_NUMBER_EXCEPTION";
             } else {
                 intToCheck -= 1;
                 return "delete " + intToCheck;

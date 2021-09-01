@@ -12,16 +12,16 @@ import duke.ui.Response;
 public class ErrorCommand extends Command {
 
     /** The error code. */
-    private final int code;
+    private final DukeException dukeException;
 
     /**
      * The constructor for the ErrorCommand object.
      *
-     * @param code The error code
+     * @param dukeException The error code
      */
-    public ErrorCommand(int code) {
+    public ErrorCommand(DukeException dukeException) {
         super(CommandType.ERROR, false);
-        this.code = code;
+        this.dukeException = dukeException;
     }
 
     /**
@@ -34,7 +34,7 @@ public class ErrorCommand extends Command {
      */
     public String execute(TaskList tasks, Response response, Storage storage) {
         try {
-            throw new DukeException(this.code);
+            throw this.dukeException;
         } catch (DukeException e) {
             return response.showError(e);
         }

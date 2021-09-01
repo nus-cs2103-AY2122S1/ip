@@ -33,42 +33,58 @@ public class Storage {
         int actualLineNumber = lineNumber + 1;
         try {
             Scanner myScanner = new Scanner(storageFile);
-            String newFileString = "";
-            int currentLine = 1;
-            while (myScanner.hasNextLine()) {
-                String nextLine = myScanner.nextLine();
-                if (currentLine == actualLineNumber) {
-                    switch (commandType) {
-                    case DONE:
-                        char[] doneArray = nextLine.toCharArray();
-                        doneArray[4] = '1';
-                        newFileString += String.valueOf(doneArray) + "\n";
-                        break;
-                    case UNDO:
-                        char[] undoArray = nextLine.toCharArray();
-                        undoArray[4] = '0';
-                        newFileString += String.valueOf(undoArray) + "\n";
-                        break;
-                    case DELETE:
-                        newFileString += "";
-                        break;
-                    default: newFileString += "";
-                    }
-                } else {
-                    newFileString += nextLine + "\n";
-                }
-                currentLine += 1;
-            }
+            String newFileString = editStorageScanner(
+                    myScanner,
+                    actualLineNumber,
+                    commandType
+            );
             myScanner.close();
-            if (newFileString.endsWith("\n")) {
-                newFileString = newFileString.substring(0, newFileString.length() - 1);
-            }
-            FileWriter myWriter = new FileWriter(storageFile);
-            myWriter.write(newFileString);
-            myWriter.close();
+            writeToFile(newFileString);
         } catch (FileNotFoundException e) {
             System.out.println("File not found!");
             e.printStackTrace();
+        }
+    }
+
+    private String editStorageScanner(Scanner myScanner, int lineNumber, CommandType commandType) {
+        int currentLine = 1;
+        String newFileString = "";
+        while (myScanner.hasNextLine()) {
+            String nextLine = myScanner.nextLine();
+            if (currentLine == lineNumber) {
+                switch (commandType) {
+                case DONE:
+                    char[] doneArray = nextLine.toCharArray();
+                    doneArray[4] = '1';
+                    newFileString += String.valueOf(doneArray) + "\n";
+                    break;
+                case UNDO:
+                    char[] undoArray = nextLine.toCharArray();
+                    undoArray[4] = '0';
+                    newFileString += String.valueOf(undoArray) + "\n";
+                    break;
+                case DELETE:
+                    newFileString += "";
+                    break;
+                default:
+                    newFileString += "";
+                }
+            } else {
+                newFileString += nextLine + "\n";
+            }
+            currentLine += 1;
+        }
+        if (newFileString.endsWith("\n")) {
+            newFileString = newFileString.substring(0, newFileString.length() - 1);
+        }
+        return newFileString;
+    }
+
+    private void writeToFile(String newFileString) {
+        try {
+            FileWriter myWriter = new FileWriter(storageFile);
+            myWriter.write(newFileString);
+            myWriter.close();
         } catch (IOException e) {
             System.out.println("IOException caught~");
             e.printStackTrace();
