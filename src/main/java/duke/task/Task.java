@@ -6,6 +6,12 @@ public class Task {
     private String detail;
     private String type;
 
+    /**
+     * Method to initialize task
+     * @param detail Description of task
+     * @param type The type of task: Deadline, Event or todo
+     */
+
     public Task(String detail, String type) {
         this.detail = detail;
         this.isDone = false;

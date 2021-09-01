@@ -1,14 +1,17 @@
 package duke;
 
-import duke.command.Command;
-
 import java.util.ArrayList;
+
+import duke.command.Command;
 
 public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
+    /**
+     * Method to initialise Duke.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage();

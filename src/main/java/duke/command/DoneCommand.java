@@ -8,7 +8,7 @@ import duke.Ui;
 /**
  * This class is used to mark a task as completed
  */
-public class DoneCommand implements  Command {
+public class DoneCommand implements Command {
     private String number;
 
     /**

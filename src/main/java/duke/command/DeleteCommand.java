@@ -8,7 +8,7 @@ import duke.Ui;
 /**
  * This class deletes a task from the current list of tasks
  */
-public class DeleteCommand implements  Command {
+public class DeleteCommand implements Command {
     private String text;
 
     /**

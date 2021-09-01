@@ -7,8 +7,13 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
     private LocalDateTime at;
 
+    /**
+     * Method to initialize event
+     * @param detail Description of event
+     * @param at Timing of event in LocalDateTime format
+     */
     public Event(String detail, LocalDateTime at) {
-        super(detail,"E");
+        super(detail, "E");
         this.at = at;
     }
 

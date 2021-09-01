@@ -1,12 +1,12 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * This class finds tasks using a search keyword
@@ -16,6 +16,10 @@ public class FindCommand implements Command {
     private String keyword;
     private ArrayList<Task> filtered;
 
+    /**
+     * Method to initialize Find Command
+     * @param keyword to search for tasks that match the keyword
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword.toLowerCase();
         this.filtered = new ArrayList<>();
@@ -31,7 +35,7 @@ public class FindCommand implements Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> tasks = taskList.getTasks();
-        for(int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDetail().toLowerCase().contains(keyword)) {
                 filtered.add(tasks.get(i));
             }

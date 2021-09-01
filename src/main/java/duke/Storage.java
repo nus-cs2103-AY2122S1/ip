@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +8,11 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * This class loads and saves a user's tasks
@@ -36,7 +36,8 @@ public class Storage {
 
         if (!f.getParentFile().exists()) {
             f.getParentFile().mkdir();
-        } if (!f.exists()) {
+        }
+        if (!f.exists()) {
             try {
                 f.createNewFile();
             } catch (IOException e) {
@@ -47,7 +48,7 @@ public class Storage {
         try {
             w = new FileWriter(filePath);
             w.write("");
-            for(int i = 0; i < tasks.size(); i++) {
+            for (int i = 0; i < tasks.size(); i++) {
                 Task t = tasks.get(i);
                 String taskDesc = t.getType() + (t.isDone() ? " | 1 | " : " | 0 | ") + t.getDetail();
                 if (t instanceof Deadline) {
@@ -76,7 +77,8 @@ public class Storage {
 
         if (!f.getParentFile().exists()) {
             f.getParentFile().mkdir();
-        } if (!f.exists()) {
+        }
+        if (!f.exists()) {
             try {
                 f.createNewFile();
             } catch (IOException e) {
@@ -85,7 +87,7 @@ public class Storage {
         }
         try {
             Scanner sc = new Scanner(f);
-            while(sc.hasNextLine()) {
+            while (sc.hasNextLine()) {
                 Task newTask = null;
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
                 String[] t = sc.nextLine().split("\\|", 4);
@@ -93,7 +95,7 @@ public class Storage {
                     newTask = new ToDo(t[2].trim());
                 } else if (t[0].contains("D")) {
                     newTask = new Deadline(t[2].trim(), LocalDateTime.parse(t[3].trim(), formatter));
-                } else if (t[0].contains("E")){
+                } else if (t[0].contains("E")) {
                     newTask = new Event(t[2].trim(), LocalDateTime.parse(t[3].trim(), formatter));
                 }
 

@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * This class manages all current tasks
@@ -20,6 +20,10 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Method to add a task to user's current list of tasks
+     * @param t Task to be added
+     */
     public void addTask(Task t) {
         tasks.add(t);
         storage.save(tasks);

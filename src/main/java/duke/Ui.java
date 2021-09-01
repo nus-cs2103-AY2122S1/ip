@@ -1,19 +1,20 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * This class prints messages for the user
  */
 public class Ui {
-    private Scanner sc = new Scanner(System.in);
+    private static final String DIV_LINE = "    __________________________________________________"
+           + "__________________________";
     private static final String BYE_OUTPUT = "Bye. Hope to see you again soon!";
     private static final String GREET_OUTPUT = "Hello! I'm Duke. What can I do for you?";
     private static final String INDENT = "    ";
-    private static final String DIV_LINE = "    ____________________________________________________________________________";
+    private Scanner sc = new Scanner(System.in);
 
     public String readCommand() {
         return sc.nextLine();
@@ -23,8 +24,8 @@ public class Ui {
         echo(e.toString());
     }
 
-    public void echo(String next_input) {
-        System.out.println(DIV_LINE + "\n" + INDENT + next_input + "\n" + DIV_LINE);
+    public void echo(String input) {
+        System.out.println(DIV_LINE + "\n" + INDENT + input + "\n" + DIV_LINE);
     }
 
     public void exit() {
@@ -35,6 +36,11 @@ public class Ui {
         echo(GREET_OUTPUT);
     }
 
+    /**
+     * Method to print tasks.
+     * @param tasks the list of tasks to be printed
+     * @param heading The heading to precede the list of tasks
+     */
     public void printAll(ArrayList<Task> tasks, String heading) {
         System.out.println(DIV_LINE);
         System.out.println(INDENT + heading);

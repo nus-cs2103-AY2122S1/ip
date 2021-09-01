@@ -1,19 +1,17 @@
-import duke.DukeException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import org.junit.jupiter.api.Test;
+
 import duke.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class TaskListTest {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     @Test
     public void addTask_deadlineFormat() {
