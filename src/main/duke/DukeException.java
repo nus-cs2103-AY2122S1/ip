@@ -1,14 +1,27 @@
 package duke;
 
+/**
+ * Signals that an exception has occurred during runtime.
+ * Any exception during runtime will be converted to DukeException, resulting an error message to System.out.
+ */
 public class DukeException extends Exception {
 
     protected ExceptionType type;
 
+    /**
+     * Constructs a DukeException with type of that exception.
+     * @param type Type of exception
+     */
     public DukeException(ExceptionType type) {
         super(errorTypeToMessage(type));
         this.type = type;
     }
 
+    /**
+     * Constructs a DukeException with the type of that exception and additional information describing it.
+     * @param type type of exception
+     * @param otherMessage additional information describing the exception
+     */
     public DukeException(ExceptionType type, String otherMessage) {
         super(errorTypeToMessage(type) + " " + otherMessage);
         this.type = type;
