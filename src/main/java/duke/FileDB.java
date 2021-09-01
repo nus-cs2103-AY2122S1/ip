@@ -4,11 +4,16 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * @FileDB represents a storage for Tasks added.
+ */
 public class FileDB {
+    /** Defines a default saved file location. */
     private static String DEFAULT_SAVE = "ip/src/main/resources/storage.txt";
     private File fileDB;
     private boolean isFileExists;
     private Parser parser;
+
 
     public FileDB() throws DukeIOException{
         this.fileDB = new File(DEFAULT_SAVE);
@@ -26,6 +31,12 @@ public class FileDB {
         }
     }
 
+    /**
+     * Creates a FileDB instance.
+     *
+     * @param location the location of where the file should be stored at.
+     * @throws DukeIOException when the file is at an inaccessible location.
+     */
     public FileDB(String location) throws DukeIOException{
         this.fileDB = new File(location);
         this.parser = new Parser();
@@ -37,6 +48,12 @@ public class FileDB {
         }
     }
 
+    /**
+     * Saves the task into the storage.
+     *
+     * @param task the task to be stored.
+     * @throws DukeIOException when no date is present in the task.
+     */
     public void save(Task task) throws DukeIOException {
         try {
             String parseTask = this.parser.parseTask(task);
