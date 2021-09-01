@@ -1,18 +1,15 @@
 package duke.task;
 
-import duke.util.DukeException;
-import duke.util.Parser;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.util.DukeException;
+import duke.util.Parser;
 
 /**
  * A TaskList which stores Tasks.
  */
 public class TaskList {
-
-    private final List<Task> taskArr;
-
     // Messages
     private static final String OUT_OF_BOUNDS_TASK = "Could not find task. Check the task number again?";
     private static final String NUMBER_OF_TASKS_MESSAGE = "Now you have %d %s in the list.";
@@ -22,10 +19,7 @@ public class TaskList {
     private static final String NO_TASK_FOUND_MESSAGE = "Unfortunately no tasks with that name are found";
     private static final String MATCHING_TASKS_MESSAGE = "Here are the matching tasks in your list:\n";
 
-    // Nouns for plural and singular
-    private String taskWord() {
-        return this.size() <= 1 ? "task" : "tasks";
-    }
+    private final List<Task> taskArr;
 
     /**
      * Constructor for TaskList
@@ -41,6 +35,12 @@ public class TaskList {
     public TaskList() {
         this.taskArr = new ArrayList<>();
     }
+
+    // Nouns for plural and singular
+    private String taskWord() {
+        return this.size() <= 1 ? "task" : "tasks";
+    }
+
 
     /**
      * The size of the array storing the Tasks.
@@ -78,9 +78,9 @@ public class TaskList {
             }
         }
         if (index == 1) {
-            printedList.insert(0, NO_TASK_FOUND_MESSAGE );
+            printedList.insert(0, NO_TASK_FOUND_MESSAGE);
         } else {
-            printedList.insert(0, MATCHING_TASKS_MESSAGE );
+            printedList.insert(0, MATCHING_TASKS_MESSAGE);
         }
         // Remove the last newline
         return printedList.toString().trim();
@@ -135,7 +135,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes the task from the tasklist
+     * Deletes the task from the taskList
      *
      * @param taskIndex The index to delete
      * @return Returns the String message when the task is done

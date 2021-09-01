@@ -1,8 +1,8 @@
 package duke.util;
 
-import java.util.Scanner;
-
 import static java.lang.Math.max;
+
+import java.util.Scanner;
 
 /**
  * Class to handle the UI shown to the end user.
@@ -16,7 +16,8 @@ public class Ui {
     public static final String DONE_MESSAGE = "Nice! I've marked this task as done:\n %s";
     public static final String INVALID_NUMBER = "Please input a valid task number";
     public static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
-    public static final String TOO_MANY_ARGUMENTS_LIST_MESSAGE = "An argument after 'list' is not required. Just 'list' will do.";
+    public static final String TOO_MANY_ARGUMENTS_LIST_MESSAGE = "An argument after 'list' is not required. "
+            + "Just 'list' will do.";
 
     /** Errors */
     public static final String MISSING_DELETE_NUMBER_MESSAGE = "Please input a number after the delete command";

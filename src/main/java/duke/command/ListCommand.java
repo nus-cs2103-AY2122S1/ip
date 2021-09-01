@@ -1,13 +1,13 @@
 package duke.command;
 
+import static duke.util.Ui.LIST_MESSAGE;
+import static duke.util.Ui.NO_TASKS_IN_LIST_MESSAGE;
+import static duke.util.Ui.TOO_MANY_ARGUMENTS_LIST_MESSAGE;
+
 import duke.task.TaskList;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.Ui;
-
-import static duke.util.Ui.LIST_MESSAGE;
-import static duke.util.Ui.NO_TASKS_IN_LIST_MESSAGE;
-import static duke.util.Ui.TOO_MANY_ARGUMENTS_LIST_MESSAGE;
 
 public class ListCommand extends Command {
     protected static final String COMMAND = "list";

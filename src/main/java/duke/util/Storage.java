@@ -1,17 +1,17 @@
 package duke.util;
 
-import duke.task.TaskList;
-
-import java.io.FileNotFoundException;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Scanner;
 
+import duke.task.TaskList;
+
 /**
- * Storage class for storing the TaskList in taskList.txt
+ * Storage class for storing the TaskList in taskList.txt.
  */
 public class Storage {
     private static final String CREATE_FILE_ERROR = "An error occurred. Unable to create taskList file.";
@@ -22,7 +22,7 @@ public class Storage {
     private boolean didTaskFileExist = false;
 
     /**
-     * Constructor for Storage
+     * Constructor for Storage.
      */
     public Storage(Path filePath) {
         taskFile = new File(String.valueOf(filePath));
@@ -37,18 +37,18 @@ public class Storage {
     }
 
     /**
-     * Returns whether the task file exists or not
+     * Returns whether the task file exists or not.
      *
-     * @return whether the task file exists or not
+     * @return Whether the task file exists or not.
      */
     public boolean didTaskFileExist() {
         return this.didTaskFileExist;
     }
 
     /**
-     * Copies the contents of the taskList into taskList.txt
+     * Copies the contents of the taskList into taskList.txt.
      *
-     * @param taskList the TaskList
+     * @param taskList the TaskList.
      */
     public void updateTaskListToFile(TaskList taskList) {
         try {
@@ -62,9 +62,9 @@ public class Storage {
     }
 
     /**
-     * Copies taskList.txt into TaskList
+     * Copies taskList.txt into TaskList.
      *
-     * @param taskList the TaskList
+     * @param taskList the TaskList.
      */
     public void readTaskFile(TaskList taskList) {
         try {
@@ -83,8 +83,14 @@ public class Storage {
         }
     }
 
+    /**
+     * Outputs a string representing the tasks in taskList.txt.
+     *
+     * @return A string representing the tasks in taskList.txt.
+     * @throws DukeException Exception to be handled.
+     */
     public String load() throws DukeException {
-        StringBuilder taskList = new StringBuilder("");
+        StringBuilder taskList = new StringBuilder();
         try {
             Scanner taskScanner = new Scanner(this.taskFile);
             while (taskScanner.hasNextLine()) {
@@ -99,7 +105,7 @@ public class Storage {
     }
 
     /**
-     * Creates the outer directory. In this case data
+     * Creates the outer directory. In this case the directory data.
      */
     private static void createOuterDirectory(File taskFile) {
         taskFile.getParentFile().mkdirs();

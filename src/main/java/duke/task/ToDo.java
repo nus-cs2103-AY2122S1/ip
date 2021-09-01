@@ -6,7 +6,7 @@ import duke.util.DukeException;
  * Event is created by 'todo eat breakfast'
  * Events are a type of Task.
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
     public static final char SYMBOL = 'T';
 
     // Messages
@@ -60,9 +60,9 @@ public class ToDo extends Task{
      * The format of the Todo in taskList.txt
      * @return The String format of the Todo in taskList.txt
      */
-    public String getSaveFormat(){
+    public String getSaveFormat() {
         return String.format("%c | %d | %s", SYMBOL, super.getDoneInt(), this.getText());
-    };
+    }
 
     /**
      * The format of the todo in console.

@@ -1,26 +1,29 @@
 package duke.task;
 
+import java.time.format.DateTimeParseException;
+
 import duke.util.DateTime;
 import duke.util.DukeException;
-
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Deadline is created by 'deadline eat breakfast /by 0800'.
  * Deadlines are a type of Task.
  */
 public class Deadline extends Task {
-    private final DateTime dueDate;
-
-    private static final String DEADLINE_DELIMITER = "/by";
     public static final char SYMBOL = 'D';
 
+    private static final String DEADLINE_DELIMITER = "/by";
+
     // Messages
-    private static final String INVALID_DEADLINE_MESSAGE = "Invalid use of deadline command. Use 'deadline <text> /by <datetime>'";
-    private static final String INVALID_DEADLINE_FORMAT_MESSAGE = "Invalid DateTime format for deadline. DateTime must be in the format of yyyy-MM-dd HHmm (2019-02-01 1800)";
-    private static final String MISSING_DEADLINE_MESSAGE = "Some arguments are missing. Use 'deadline <text> /by <datetime>'";
+    private static final String INVALID_DEADLINE_MESSAGE = "Invalid use of deadline command. "
+            + "Use 'deadline <text> /by <datetime>'";
+    private static final String INVALID_DEADLINE_FORMAT_MESSAGE = "Invalid DateTime format for deadline. "
+            + "DateTime must be in the format of yyyy-MM-dd HHmm (2019-02-01 1800)";
+    private static final String MISSING_DEADLINE_MESSAGE = "Some arguments are missing. "
+            + "Use 'deadline <text> /by <datetime>'";
     private static final String INVALID_SAVE_MESSAGE = "Deadline save is given in the wrong format";
+
+    private final DateTime dueDate;
 
     /**
      * Constructor for the deadline object.
@@ -56,7 +59,7 @@ public class Deadline extends Task {
         }
         String deadline = deadlineInfo[1].trim();
         String deadlineText = deadlineInfo[0].trim();
-        return new Deadline(deadlineText, deadline, false);
+        return new Deadline(deadlineText, deadline, isDone);
     }
 
     /**
@@ -80,9 +83,10 @@ public class Deadline extends Task {
      * The format of the Deadline in taskList.txt
      * @return The String format of the Deadline in taskList.txt
      */
-    public String getSaveFormat(){
-        return String.format("%c | %d | %s | %s", SYMBOL, super.getDoneInt(), this.getText(), this.dueDate.getSaveFormat());
-    };
+    public String getSaveFormat() {
+        return String.format("%c | %d | %s | %s", SYMBOL, super.getDoneInt(),
+                this.getText(), this.dueDate.getSaveFormat());
+    }
 
     /**
      * The format of the deadline in console.
