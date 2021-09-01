@@ -1,7 +1,7 @@
 package duke.core;
 
 /**
- * Ui encapsulates the user interface which the user interacts with. It can greet the player
+ * Ui encapsulates the user interface of text-based Duke which the user interacts with. It can greet the player
  * and print the results return by the commands.
  *
  * @author Clifford
@@ -25,7 +25,7 @@ public class Ui {
     }
 
     /**
-     * Decorates the results returned by commands to be presented to users.
+     * Decorates the results returned by commands to be presented to users in text-based Duke.
      *
      * @param input the results returned by command
      */
