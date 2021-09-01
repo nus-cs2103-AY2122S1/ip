@@ -5,14 +5,12 @@ import task.Task;
 import java.util.List;
 
 /**
- * The Ui class provides dependency injection for the classes to show the response from a user's command line input.
- * @author  Hoon Darren
- * @version 1.0
- * @since   2021-08-21
+ * The Ui class shows the response from a user's command line input.
  */
 public class Ui {
     private static final String WELCOME_MESSAGE = "Hello! I'm Duke\n" + "What can I do for you?";
-    private static final String BORDERLINE = "\n____________________________________________________________\n";
+    private static final String BORDERLINE =
+            "\n____________________________________________________________\n";
     private static final String GOODBYE_MESSAGE = "Bye. Hope to see you again soon!";
 
 
@@ -61,7 +59,11 @@ public class Ui {
         this.displayText(message);
     }
 
-
+    /**
+     * Displays the message for a task marked as Done.
+     * @param taskMarked the task that was marked to be done.
+     * @return response informing user that task has been marked as done.
+     */
     public String markDoneMessageGui(String taskMarked) {
         String message = String.format("Nice! I've marked this task as done:\n  %s", taskMarked);
         return message;
@@ -78,6 +80,12 @@ public class Ui {
         this.displayText(message);
     }
 
+    /**
+     * Message displayed when a task is deleted.
+     * @param taskString the task deleted from the list.
+     * @param listSize size of the task list after deletion.
+     * @return response informing user that task has been deleted.
+     */
     public String taskDeleteMessageGui(String taskString, int listSize) {
         String message = "Noted. I've removed this task:\n" + taskString + "\n";
         message += String.format("Now you have %d tasks in the list.", listSize);
@@ -91,6 +99,10 @@ public class Ui {
         this.displayText("Your List is Empty");
     }
 
+    /**
+     * Displays when list is empty.
+     * @return response informing user that the list is empty.
+     */
     public String listEmptyMessageGui() {
         return "Your List is Empty";
     }
@@ -106,6 +118,12 @@ public class Ui {
         this.displayText(message);
     }
 
+    /**
+     * Message displayed when a task is added.
+     * @param taskString the task added.
+     * @param listSize size of the task list after the addition.
+     * @return response informing user that the task has been added to the list.
+     */
     public String taskAddMessageGui(String taskString, int listSize) {
         String message = "Got it. I've added this task:\n" + taskString + "\n";
         message += String.format("Now you have %d tasks in the list.", listSize);
@@ -136,6 +154,11 @@ public class Ui {
         System.out.println(BORDERLINE);
     }
 
+    /**
+     * Displays all items and their completion status.
+     * @param taskList the list containing Task objects.
+     * @return response showing all the tasks in the list.
+     */
     public String displayListTasksGui(List<Task> taskList) {
 
         //shown when there are no tasks in the list
@@ -162,8 +185,12 @@ public class Ui {
         this.displayText("The input should be in the form of yyyy-dd-mm");
     }
 
+    /**
+     * Displays the date format to be used.
+     * @return response informing user that the wrong date format has been inputted.
+     */
     public String wrongDateInputMessageGui() {
-        return"The input should be in the form of yyyy-dd-mm";
+        return "The input should be in the form of yyyy-dd-mm";
     }
 
     /**
@@ -191,6 +218,11 @@ public class Ui {
         System.out.println(BORDERLINE);
     }
 
+    /**
+     * Displays all the tasks with the keywords.
+     * @param taskList the list containing filtered tasks.
+     * @return response showing all the tasks in the list that fit the filter criteria.
+     */
     public String displayFilteredTasksGui(List<Task> taskList) {
 
         //shown when there are no tasks in the list

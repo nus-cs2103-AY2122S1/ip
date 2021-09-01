@@ -33,18 +33,27 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Constructs the GUI's Main Window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the GUI's Duke object.
+     * @param d duke object to be passed into MainWindow.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes.
+     * One echos user input and the other containing Duke's reply and then appends them to
+     * the dialog container.
+     * Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -57,7 +66,8 @@ public class MainWindow extends AnchorPane {
 
         System.out.println(userInput.getText());
         if (userInput.getText().equals("bye")) {
-            CompletableFuture.delayedExecutor(TRANSITION, TimeUnit.MILLISECONDS).execute(() -> Platform.exit());
+            CompletableFuture.delayedExecutor(TRANSITION,
+                    TimeUnit.MILLISECONDS).execute(() -> Platform.exit());
         }
         userInput.clear();
     }

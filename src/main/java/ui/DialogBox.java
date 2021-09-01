@@ -17,19 +17,27 @@ import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
+ * DialogBox control consists of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+
     private Circle circleMask;
 
+    /**
+     * Constructs a new DialogBox.
+     * @param text text to be shown on the user interface.
+     * @param img image to be shown on the user interface.
+     */
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class
+                    .getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -37,8 +45,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        // @@author benedictkhoomw-reused
-        // Display mask idea taken from Benedict Khoo from my tutorial group.
+        // @@author DrWala-reused
+        // Display mask idea taken from Azeem Arshad Vasanwala from https://github.com/DrWala/.
         setupDisplayMask();
 
         dialog.setText(text);
@@ -46,6 +54,9 @@ public class DialogBox extends HBox {
         displayPicture.setClip(circleMask);
     }
 
+    /**
+     * Formats the image to have a circular frame.
+     */
     private void setupDisplayMask() {
         double centerX = displayPicture.getFitWidth() / 2;
         double centerY = displayPicture.getFitHeight() / 2;
@@ -63,10 +74,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Retrieves a DialogBox for the user.
+     * @param text text the user inputted.
+     * @param img image avatar of the user
+     * @return DialogBox containing the text of user and image of user.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Retrieves a DialogBox for duke.
+     * @param text text the user inputted.
+     * @param img image avatar of duke.
+     * @return DialogBox containing the text from duke and image of duke.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
