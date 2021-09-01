@@ -10,12 +10,12 @@ import exceptions.InvalidTaskException;
 public class DeleteCommand extends Command {
 
     @Override
-    public void run(Bot bot, String[] args) {
+    public String[] run(Bot bot, String[] args) {
         int index = Integer.parseInt(args[0]) - 1;
         if (index < 0 || index >= bot.getTaskList().get().size()) {
             throw new InvalidTaskException(Ui.ERROR_SIGNATURE + "This task does not exist in the task list!");
         }
-        bot.getTaskList().removeTask(index);
+        return bot.getTaskList().removeTask(index);
     }
 
 }

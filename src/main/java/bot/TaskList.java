@@ -41,17 +41,16 @@ public class TaskList {
      * @param newTask task being added
      * @return success boolean
      */
-    public Boolean addTask(Task newTask) {
+    public String[] addTask(Task newTask) {
         if (this.taskList.size() >= this.MAX_TASKS) {
-            return false;
+            return new String[] { "Task list capacity reached" };
         }
         this.taskList.add(newTask);
-        Ui.print(new String[]{
+        return new String[]{
             "Got it. I've added this task:",
             Ui.TEXT_BLOCK_MARGIN + newTask.toString(),
             String.format("Now you have %d task(s) in the list", taskList.size())
-        });
-        return true;
+        };
     }
 
     /**
@@ -60,18 +59,17 @@ public class TaskList {
      * @param index index of task in list
      * @return success boolean
      */
-    public Boolean removeTask(int index) {
+    public String[] removeTask(int index) {
         if (index < 0 || index >= taskList.size()) {
-            return false;
+            return new String[0];
         }
         Task task = getTaskAt(index);
         this.taskList.remove(index);
-        Ui.print(new String[]{
+        return new String[]{
             "Noted. I've removed this task:",
             Ui.TEXT_BLOCK_MARGIN + task.toString(),
             String.format("Now you have %d task(s) in the list", taskList.size())
-        });
-        return true;
+        };
     }
 
     /**

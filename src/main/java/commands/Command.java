@@ -33,6 +33,6 @@ public abstract class Command {
      * @param bot  the bot that invokes the command
      * @param args list of argument strings
      */
-    public abstract void run(Bot bot, String[] args);
+    public abstract String[] run(Bot bot, String[] args);
 
 }

@@ -15,14 +15,14 @@ import tasks.Task;
 public class FindCommand extends Command {
 
     @Override
-    public void run(Bot bot, String[] args) {
+    public String[] run(Bot bot, String[] args) {
         List<Task> taskList = bot.getTaskList().get();
         List<Task> matchingTasks = taskList.stream()
                 .filter(t -> t.getTaskText().contains(args[0]))
                 .collect(Collectors.toList());
         List<String> taskStrings = new ArrayList<String>(Arrays.asList(ListCommand.commandsToStrings(matchingTasks)));
         taskStrings.add(0, "Here are the matching tasks in your list:");
-        Ui.print(taskStrings.toArray(new String[0]));
+        return taskStrings.toArray(new String[0]);
     }
 
 }

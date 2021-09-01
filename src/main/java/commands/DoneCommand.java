@@ -11,17 +11,17 @@ import tasks.Task;
 public class DoneCommand extends Command {
 
     @Override
-    public void run(Bot bot, String[] args) {
+    public String[] run(Bot bot, String[] args) {
         int index = Integer.parseInt(args[0]) - 1;
         if (index < 0 || index >= bot.getTaskList().get().size()) {
             throw new InvalidTaskException(Ui.ERROR_SIGNATURE + "This task does not exist in the task list!");
         }
         Task task = bot.getTaskList().getTaskAt(index);
         task.markDone();
-        Ui.print(new String[]{
+        return new String[]{
             "Nice! I've marked this task as done:",
             Ui.TEXT_BLOCK_MARGIN + task.toString()
-        });
+        };
     }
 
 }

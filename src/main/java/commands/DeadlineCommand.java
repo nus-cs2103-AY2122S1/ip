@@ -1,6 +1,7 @@
 package commands;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 
 import bot.Bot;
 import bot.Ui;
@@ -15,7 +16,7 @@ import tasks.Task;
 public class DeadlineCommand extends Command {
 
     @Override
-    public void run(Bot bot, String[] args) {
+    public String[] run(Bot bot, String[] args) {
         if (args[0].equals("")) {
             throw new InvalidArgumentsException(Ui.ERROR_SIGNATURE + "The description of a deadline cannot be empty.");
         }
@@ -26,7 +27,7 @@ public class DeadlineCommand extends Command {
 
         LocalDateTime taskTime = LocalDateTime.parse(splitArgs[1].trim(), Task.INPUT_TIME_FORMAT);
         Task deadlineTask = new DeadlineTask(splitArgs[0], taskTime);
-        bot.getTaskList().addTask(deadlineTask);
+        return bot.getTaskList().addTask(deadlineTask);
     }
 
 }
