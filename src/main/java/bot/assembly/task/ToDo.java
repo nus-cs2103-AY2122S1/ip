@@ -1,15 +1,14 @@
 package bot.assembly.task;
 
-import java.lang.String;
 import java.time.LocalDateTime;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     /**
      * Constructor
      * @param taskTitle
      */
-    public ToDo (String taskTitle){
+    public ToDo (String taskTitle) {
         super(taskTitle, "T");
     }
 
@@ -27,10 +26,9 @@ public class ToDo extends Task{
      * @return String task status (formatted)
      */
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("[%s][%s] %s",
-                this.getTaskType(),
-                (this.isDone ? "X" : " "),
+                this.getTaskType(), (this.getIsDone() ? "X" : " "),
                 this.getTaskTitle());
     }
 }

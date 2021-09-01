@@ -1,14 +1,13 @@
 package bot.assembly;
 
+import java.util.Scanner;
 
-import bot.assembly.function.BotPrinter;
 import bot.assembly.function.BotCommandResponderUnit;
+import bot.assembly.function.BotPrinter;
 import bot.assembly.function.BotTaskStatusGeneratorUnit;
 import bot.assembly.memory.BotDynamicMemoryUnit;
 import bot.assembly.memory.BotStaticMemoryUnit;
 import bot.assembly.memory.CommandInput;
-
-import java.util.Scanner;
 
 /**
  * A class that assembles all features of the bot
@@ -40,25 +39,25 @@ public class BotBrain {
         CommandInput commandInitial = botCommandResponderUnit.identifyCommand(input);
 
         switch (commandInitial) {
-            case BYE:
-                botPrinter.print(botStaticMemoryUnit.MESSAGE_GOODBYE);
-                isTerminated = true;
-                return;
-            case LIST:
-                botTaskGeneratorUnit.generateTaskTrackerReport();
-                break;
-            case DONE:
-                botCommandResponderUnit.markTaskAsDone(input);
-                break;
-            case DELETE:
-                botCommandResponderUnit.deleteTaskFromList(input);
-                break;
-            case FIND:
-                botCommandResponderUnit.findTaskFromList(input);
-                break;
-            default:
-                botCommandResponderUnit.addTask(input);
-                botTaskGeneratorUnit.generateAddTaskFeedback();
+        case BYE:
+            botPrinter.print(botStaticMemoryUnit.MESSAGE_GOODBYE);
+            isTerminated = true;
+            return;
+        case LIST:
+            botTaskGeneratorUnit.generateTaskTrackerReport();
+            break;
+        case DONE:
+            botCommandResponderUnit.markTaskAsDone(input);
+            break;
+        case DELETE:
+            botCommandResponderUnit.deleteTaskFromList(input);
+            break;
+        case FIND:
+            botCommandResponderUnit.findTaskFromList(input);
+            break;
+        default:
+            botCommandResponderUnit.addTask(input);
+            botTaskGeneratorUnit.generateAddTaskFeedback();
         }
     }
 
@@ -88,8 +87,7 @@ public class BotBrain {
                 String input = sc.nextLine().trim();
                 reactToCommand(input);
                 botDynamicMemoryUnit.saveToHardDisk();
-            }
-            catch (Exception error){
+            } catch (Exception error) {
                 botPrinter.print(botStaticMemoryUnit.ERROR_MESSAGE_PROMPT + error.getMessage());
             }
         }

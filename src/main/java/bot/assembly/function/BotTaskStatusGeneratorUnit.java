@@ -1,12 +1,11 @@
 package bot.assembly.function;
 
-import bot.assembly.memory.BotStaticMemoryUnit;
-import bot.assembly.memory.BotDynamicMemoryUnit;
-import bot.assembly.error.EmptyTaskListException;
-
-import bot.assembly.task.Task;
-
 import java.util.List;
+
+import bot.assembly.error.EmptyTaskListException;
+import bot.assembly.memory.BotDynamicMemoryUnit;
+import bot.assembly.memory.BotStaticMemoryUnit;
+import bot.assembly.task.Task;
 
 /**
  * A class that handles generation of responses to the user
@@ -16,7 +15,7 @@ public class BotTaskStatusGeneratorUnit {
     private BotPrinter botPrinter = new BotPrinter();
     private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
     private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
-    private List<Task> taskTracker = botDynamicMemoryUnit.taskTracker;
+    private List<Task> taskTracker = botDynamicMemoryUnit.getTaskTacker();
 
     /**
      * Constructor
@@ -31,10 +30,10 @@ public class BotTaskStatusGeneratorUnit {
         String output = String.format(
                 "%s\n\t\t%s\n\t",
                 botStaticMemoryUnit.MESSAGE_ADD_TASK_NOTICE,
-                taskTracker.get(taskTracker.size()-1).toString()
+                taskTracker.get(taskTracker.size() - 1).toString()
         );
 
-        output+= String.format(
+        output += String.format(
                 botStaticMemoryUnit.MESSAGE_ADD_TASK_SUMMARY,
                 taskTracker.size()
         );
@@ -55,15 +54,9 @@ public class BotTaskStatusGeneratorUnit {
 
         StringBuilder formattedTask = new StringBuilder();
         formattedTask.append(botStaticMemoryUnit.MESSAGE_TASK_REPORT + "\n\t");
-        taskTracker.stream().
-                forEach(
-                        x -> formattedTask.append(
-                                (taskTracker.indexOf(x) + 1)
-                                        + ". "
-                                        + x.toString()
-                                        + "\n\t"
-                        )
-                );
+        taskTracker.stream()
+                        .forEach(
+                            x -> formattedTask.append((taskTracker.indexOf(x) + 1) + ". " + x.toString() + "\n\t"));
 
         formattedTask.append("(end)");
 
