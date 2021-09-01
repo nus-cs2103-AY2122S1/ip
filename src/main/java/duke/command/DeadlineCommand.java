@@ -16,7 +16,7 @@ public class DeadlineCommand extends Command {
      */
     public DeadlineCommand(String parameter1, String parameter2) throws DukeException {
         if (parameter1.equals("") || parameter2.equals("")) {
-            throw new DukeException("☹ OOPS!!! The description or the date a deadline cannot be empty.");
+            throw new DukeException("OOPS!!! The description or the date a deadline cannot be empty.");
         }
         deadline = new Deadline(parameter1, parameter2);
     }
@@ -27,12 +27,15 @@ public class DeadlineCommand extends Command {
      * @param tasks    the TaskList
      * @param ui       the Ui
      * @param storage  the data source
+     *
+     * @return         string stating the command result
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save(this.deadline);
         tasks.add(this.deadline);
-        ui.formatPrint("Got it. I've added this task:", "  " + this.deadline.toString(), tasks.toString());
+//        ui.formatPrint("Got it. I've added this task:", "  " + this.deadline.toString(), tasks.toString());
+        return "Got it. I've added this task:\n" + "  " + this.deadline.toString() + "\n" + tasks.toString();
     }
 
     /**

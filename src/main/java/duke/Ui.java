@@ -84,4 +84,19 @@ public class Ui {
         }
         System.out.println("    ____________________________________________________________\n");
     }
+
+    /**
+     * Format print all the tasks in TaskList with indentation
+     *
+     * @param tasks a TaskList of all the tasks
+     */
+    public String getList(TaskList tasks) {
+        int count = 1;
+        StringBuilder str = new StringBuilder("Here are the tasks in your list:\n");
+        for (Task task : tasks.getList()) {
+            str.append("   ").append(count).append(". ").append(task.toString()).append("\n");
+            count++;
+        }
+        return str.toString();
+    }
 }

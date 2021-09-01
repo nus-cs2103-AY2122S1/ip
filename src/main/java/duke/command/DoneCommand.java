@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String taskNumber) throws DukeException {
         if (taskNumber.equals("")) {
-            throw new DukeException("☹ OOPS!!! The task number of done cannot be empty.");
+            throw new DukeException("OOPS!!! The task number of done cannot be empty.");
         }
         this.taskNumber = Integer.parseInt(taskNumber);
     }
@@ -26,12 +26,15 @@ public class DoneCommand extends Command {
      * @param tasks    the TaskList
      * @param ui       the Ui
      * @param storage  the data source
+     *
+     * @return         string stating the command result
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.markAsDone(taskNumber - 1);
         storage.update(taskNumber, task, "m");
-        ui.formatPrint("Nice! I've marked this task as done:", "  [X] " + task.toString());
+//        ui.formatPrint("Nice! I've marked this task as done:", "  [X] " + task.toString());
+        return "Nice! I've marked this task as done:\n" + "  [X] " + task.toString();
     }
 
     /**

@@ -44,7 +44,7 @@ public class Parser {
             case ExitCommand.INSTRUCTION_EXIT:
                 return new ExitCommand();
             default:
-                return new IncorrectCommand("☹ OOPS!!! I'm sorry, but I don't know what "
+                return new IncorrectCommand("OOPS!!! I'm sorry, but I don't know what "
                         + "that means :-(");
             }
         } catch (DukeException e) {

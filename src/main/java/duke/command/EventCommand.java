@@ -15,7 +15,7 @@ public class EventCommand extends Command {
      */
     public EventCommand(String parameter1, String parameter2) throws DukeException {
         if (parameter1.equals("") || parameter2.equals("")) {
-            throw new DukeException("☹ OOPS!!! The description and the date of an event cannot be empty.");
+            throw new DukeException("OOPS!!! The description and the date of an event cannot be empty.");
         }
         event = new Event(parameter1, parameter2);
     }
@@ -26,12 +26,15 @@ public class EventCommand extends Command {
      * @param tasks    the TaskList
      * @param ui       the Ui
      * @param storage  the data source
+     *
+     * @return         string stating the command result
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save(this.event);
         tasks.add(this.event);
-        ui.formatPrint("Got it. I've added this task:", "  " + this.event.toString(), tasks.toString());
+//        ui.formatPrint("Got it. I've added this task:", "  " + this.event.toString(), tasks.toString());
+        return "Got it. I've added this task:\n" + "  " + this.event.toString() + "\n" + tasks.toString();
     }
 
     /**
