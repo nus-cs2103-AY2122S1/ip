@@ -13,7 +13,7 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
-        tasklist.add(Task.createTask("todo", this.args));
+    public String execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
+        return tasklist.add(Task.createTask("todo", this.args));
     }
 }

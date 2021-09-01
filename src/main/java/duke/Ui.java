@@ -4,17 +4,17 @@ import java.util.Scanner;
 
 public class Ui {
 
-    private final Scanner Sc;
+    private final Scanner sc;
 
     public Ui() {
-        this.Sc = new Scanner(System.in);
+        this.sc = new Scanner(System.in);
     }
 
     public String getInput() {
-        return Sc.nextLine() + " ";
+        return sc.nextLine() + " ";
     }
 
     public void close() {
-        this.Sc.close();
+        this.sc.close();
     }
 }

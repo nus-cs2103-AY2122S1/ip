@@ -1,6 +1,7 @@
 package command;
 
 import duke.Duke;
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -12,7 +13,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
-        tasklist.deleteTask(Integer.valueOf(this.args));
+    public String execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
+        try {
+            int index = Integer.valueOf(this.args);
+            tasklist.deleteTask(index);
+            return "Deleted task number " + index;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

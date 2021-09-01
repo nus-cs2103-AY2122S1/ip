@@ -12,7 +12,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
-        tasklist.printTasks();
+    public String execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
+        return tasklist.printTasks();
     }
 }
