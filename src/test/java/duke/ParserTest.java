@@ -3,9 +3,6 @@ package duke;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,7 +12,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ParserTest {
     /**
-     * Test the parse method when a list command is given with an empty TaskList.
+     * Tests the parse method when a list command is given with an empty TaskList.
      */
     @Test
     public void parse_list_exceptionThrown() {
@@ -25,7 +22,7 @@ public class ParserTest {
     }
 
     /**
-     * Test the parse method when a new Deadline is added.
+     * Tests the parse method when a new Deadline is added.
      *
      * @throws DukeException A Duke-specific exception that may occur when adding a new Deadline.
      */
@@ -33,10 +30,9 @@ public class ParserTest {
     public void parse_newDeadline_taskAdded() throws DukeException {
         TaskList taskList = new TaskList();
         Parser parser = new Parser(taskList);
-        TaskList expectedTaskList = new TaskList();
-        LocalDateTime by = LocalDateTime.parse("2021-09-04 14:00", DateTimeFormatter.ofPattern("yyyy-MM-d H:mm"));
-        Deadline deadline = new Deadline("lab 1", by);
-        expectedTaskList.add(deadline);
-        assertEquals(expectedTaskList.toString(), parser.parse("deadline lab 1 /by 2021-09-04 14:00").toString());
+        String expected = "Got it. I've added this task:\n  "
+                + "[D][ ] lab 1 (by: Sep 4 2021, 2:00 pm)"
+                + "\nNow you have 1 tasks in the list.";
+        assertEquals(expected, parser.parse("deadline lab 1 /by 2021-09-04 14:00"));
     }
 }

@@ -75,15 +75,14 @@ public class Storage {
                 tasks.add(importedTask);
             }
             fileReader.close();
-            Ui.printReply("duke.txt found. Tasks have been imported.");
         } catch (FileNotFoundException e) {
             try {
                 File dataFile = new File(DATA_FILEPATH + this.fileName);
                 dataFile.createNewFile();
                 String message = this.fileName + " not found. File has been created.";
-                Ui.printReply(message);
+                throw new DukeException(message);
             } catch (IOException ioException) {
-                Ui.printReply(ioException.getMessage());
+                throw new DukeException(ioException.getMessage());
             }
         }
         return tasks;
@@ -94,7 +93,7 @@ public class Storage {
      *
      * @param tasks A TaskList containing the most updated tasks.
      */
-    public void rewriteData(TaskList tasks) {
+    public void rewriteData(TaskList tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(DATA_FILEPATH + this.fileName, false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -104,7 +103,7 @@ public class Storage {
             }
             bufferedWriter.close();
         } catch (IOException e) {
-            Ui.printReply(e.getMessage());
+            throw new DukeException(e.getMessage());
         }
     }
 }
