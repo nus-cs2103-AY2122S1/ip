@@ -12,7 +12,7 @@ public class FindMessage extends DukeMessage {
         this.searchStr = searchStr;
     }
 
-    public void display() {
+    public String display() {
         ArrayList<Task> taskList = (ArrayList<Task>) TaskList.getTaskList().getTasks();
         ArrayList<Task> searchResults = new ArrayList<>();
         for(Task task: taskList) {
@@ -22,11 +22,13 @@ public class FindMessage extends DukeMessage {
             }
         }
         int count = 1;
-        System.out.println("Here are the matching tasks in your list:\n");
+        String reply = "Here are the matching tasks in your list:\n";
         for(Task task : searchResults) {
             System.out.println(count + "." + task.getTaskString());
+            reply = reply + count + "." + task.getTaskString() + "\n";
             count = count + 1;
         }
+        return reply;
     }
 }
 

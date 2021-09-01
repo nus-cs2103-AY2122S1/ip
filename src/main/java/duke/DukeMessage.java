@@ -7,6 +7,6 @@ public abstract class DukeMessage {
     /**
      * This method displays the Duke's response to user input.
      */
-    public abstract void display();
+    public abstract String display();
 }
 
