@@ -1,5 +1,8 @@
 package duke.gui;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -9,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -25,8 +30,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.jpeg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.jpeg"));
 
     @FXML
     public void initialize() {
@@ -51,12 +56,11 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
         if (input.equals("bye")) {
-            try {
-                Thread.sleep(1000);
-                Platform.exit();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            new Timer().schedule(new TimerTask() {
+                public void run() {
+                    Platform.exit();
+                }
+            }, 1000);
         }
     }
 }
