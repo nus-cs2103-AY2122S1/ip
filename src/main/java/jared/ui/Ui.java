@@ -1,11 +1,11 @@
 package jared.ui;
 
+import java.util.Scanner;
+
 import jared.common.DukeException;
 import jared.common.Message;
 import jared.parser.Parser;
 import jared.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Deals with user interactions.
@@ -13,6 +13,9 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner scan;
 
+    /**
+     * Constructor for Ui.
+     */
     public Ui() {
         scan = new Scanner(System.in);
         showWelcomeMessage();
