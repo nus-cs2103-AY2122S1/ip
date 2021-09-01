@@ -1,10 +1,12 @@
-package bubbles;
+package bubbles.tasks;
+
+import bubbles.exceptions.EmptyTaskException;
 
 /**
  * A child class of Task, representing the tasks without any
  * date/time attached to it.
  */
-class ToDo extends Task {
+public class ToDo extends Task {
     private ToDo(String description, boolean isDone) {
         super(description, isDone);
     }

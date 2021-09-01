@@ -1,11 +1,11 @@
-package bubbles;
+package bubbles.exceptions;
 
 /**
  * A class that represents the exception that is thrown
  * when the index of the task that the user wants to perform an action to (eg. mark
  * as done, or to delete the Task) is out of bounds of the TaskList.
  */
-class IndexOutOfBoundsException extends Exception {
+public class IndexOutOfBoundsException extends Exception {
     /**
      * A public constrcutor for the IndexOutOfBoundsException.
      * @param message The message containing details of the IndexOutOfBoundsException.

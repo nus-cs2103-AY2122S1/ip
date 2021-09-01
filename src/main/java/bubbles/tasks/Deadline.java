@@ -1,4 +1,4 @@
-package bubbles;
+package bubbles.tasks;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
@@ -7,7 +7,7 @@ import java.time.LocalDate;
  * A child class of Task, representing the tasks that need to be
  * done before a specific date/time.
  */
-class Deadline extends Task {
+public class Deadline extends Task {
     private LocalDate dueDate;
 
     private Deadline(String description, boolean isDone, String dueDate) {

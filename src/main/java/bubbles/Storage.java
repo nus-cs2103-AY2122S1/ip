@@ -1,5 +1,8 @@
 package bubbles;
 
+import bubbles.tasks.Task;
+import bubbles.tasks.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,7 +15,7 @@ import java.util.Scanner;
  * saved on the hard disk, followed by saving the tasks in the Bubbles bot
  * back into the file after the program ends.
  */
-class Storage {
+public class Storage {
     private File bubbles;
     private Parser parser;
     private TaskList taskList;

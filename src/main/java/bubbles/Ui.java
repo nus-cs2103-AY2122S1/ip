@@ -1,5 +1,7 @@
 package bubbles;
 
+import bubbles.tasks.TaskList;
+
 import java.util.Scanner;
 
 /**
@@ -7,7 +9,7 @@ import java.util.Scanner;
  * mainly accepting user input and echoing back to the user
  * through System output.
  */
-class Ui {
+public class Ui {
     /**
      * Echos the user input through printing out the input
      * String onto the System output line.

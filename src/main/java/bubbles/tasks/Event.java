@@ -1,4 +1,4 @@
-package bubbles;
+package bubbles.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * A child class of Task, representing the tasks that start at
  * a specific time.
  */
-class Event extends Task {
+public class Event extends Task {
     private LocalDate eventTime;
 
     private Event(String description, boolean isDone, String eventTime) {

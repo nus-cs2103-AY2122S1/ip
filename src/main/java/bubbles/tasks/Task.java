@@ -1,4 +1,4 @@
-package bubbles;
+package bubbles.tasks;
 
 import java.time.LocalDate;
 
@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * A class that represents a Task object - a piece of
  * work to be done or undertaken.
  */
-class Task {
+public class Task {
     protected String description;
     protected boolean isDone;
 

@@ -5,7 +5,7 @@ package bubbles;
  * namely ToDos, Deadlines and Events.
  */
 
-class Bubbles {
+public class Bubbles {
     private String FILEPATH = "data/bubbles.txt";
     private Storage storage;
     private Ui ui;

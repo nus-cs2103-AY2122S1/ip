@@ -1,4 +1,8 @@
-package bubbles;
+package bubbles.tasks;
+
+import bubbles.exceptions.EmptyTaskException;
+import bubbles.exceptions.IndexOutOfBoundsException;
+import bubbles.exceptions.InvalidCommandException;
 
 import java.util.ArrayList;
 
@@ -6,7 +10,7 @@ import java.util.ArrayList;
  * A list of Task objects, that contains and tracks the Tasks the Bubbles bot
  * user has entered (including previous entries read from the hard dusk file).
  */
-class TaskList {
+public class TaskList {
     private final String SEPARATOR = "-----------------------------------------------------------------";
     private enum taskType {
         ToDo,

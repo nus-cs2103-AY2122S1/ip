@@ -1,10 +1,10 @@
-package bubbles;
+package bubbles.exceptions;
 
 /**
  * A class that represents the exception that is thrown
  * when the description of the Task is empty.
  */
-class EmptyTaskException extends Exception {
+public class EmptyTaskException extends Exception {
     private String taskType;
 
     /**
