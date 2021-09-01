@@ -76,15 +76,6 @@ public class Parser {
         case "delete":
             command = new DeleteCommand(input);
             break;
-        case "find":
-            if (fullCommand.length < 2) {
-                command = new WrongCommand("You have to specify a keyword.");
-            } else if (fullCommand.length < 3) {
-                command = new FindCommand(fullCommand[1]);
-            } else {
-                command = new WrongCommand("Idk.");
-            }
-            break;
         default:
             command = new WrongCommand("Check your input again, fool.");
             break;

@@ -34,10 +34,6 @@ public abstract class Task {
         this.isCompleted = true;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
     public abstract String toString();
 
     public abstract JSONObject toJsonObject();
