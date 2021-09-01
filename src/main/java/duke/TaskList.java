@@ -62,7 +62,8 @@ public class TaskList {
      */
     public void deleteTask(int taskID) throws IndexOutOfBoundsException{
         if (taskID <=0 || taskID > this.tasks.size()) {
-            Ui.noTask();
+            Ui.showNoTask();
+            Response.showNoTask();
             throw new IndexOutOfBoundsException();
         } else {
             Ui.showSuccessfulDelete();
@@ -127,7 +128,7 @@ public class TaskList {
 //    }
     public String findTasks(String keyword) {
         int count = 0;
-//        Ui.showSuccessfulFind();
+        Ui.showSuccessfulFind();
         String output = Response.showSuccessfulFind() +"\n";
         for (int i = 0; i < this.tasks.size(); i++) {
             String taskDescription = this.getIndividualTask(i).toString();
@@ -136,11 +137,13 @@ public class TaskList {
 
             if (index != -1) {
                 count += 1;
-                Response.showResults(output, count, taskDescription);
+                Ui.showResults(count, taskDescription);
+                output = Response.showResults(output, count, taskDescription);
             }
         }
 
         if (count == 0) {
+            Ui.showUnsuccessfulFind();
             output = Response.showUnsuccessfulFind();
         }
         return output;

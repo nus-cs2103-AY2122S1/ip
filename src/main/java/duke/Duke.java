@@ -63,7 +63,7 @@ public class Duke {
             PrintWriter writer = this.storage.load();
             return Parser.getCommandResponse(this.taskList, dukeFile, writer, input);
         } catch (IOException | DukeException e) {
-            return "ERROR!";
+            return "ERROR! Please provide the correct input!";
         }
     }
 

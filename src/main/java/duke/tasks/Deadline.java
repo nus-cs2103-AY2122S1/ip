@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import duke.Response;
 import duke.Ui;
 import duke.exceptions.MissingDueDateDescriptionException;
 
@@ -58,7 +59,8 @@ public class Deadline extends Task {
     public static String getDeadlineDescription(String input) throws MissingDueDateDescriptionException {
         String[] strArr = input.split(" /by", 2);
         if (strArr.length < 2) {
-            Ui.missingDeadline();
+            Ui.showMissingDeadline();
+            Response.showMissingDeadline();
             throw new MissingDueDateDescriptionException();
         } else {
             return strArr[0];

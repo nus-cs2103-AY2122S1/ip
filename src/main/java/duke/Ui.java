@@ -53,7 +53,7 @@ public class Ui {
     /**
      * Method to show message to warn user that task number is missing
      */
-    public static void warningMissingNumber() {
+    public static void showWarningMissingNumber() {
         String message = "OOPS!!! To delete a task, the task number must be stated.";
         showToUser(LINE, message, LINE);
     }
@@ -61,7 +61,7 @@ public class Ui {
     /**
      * Method to show message to warn user that keyword is missing
      */
-    public static void warningMissingKeyword() {
+    public static void showWarningMissingKeyword() {
         String message = "OOPS!!! To find a task, a keyword must be stated.";
         showToUser(LINE, message, LINE);
     }
@@ -70,7 +70,7 @@ public class Ui {
      * Method that warns user that there is a missing description for the task.
      * @param command
      */
-    public static void warningMissingDescription(String command) {
+    public static void showWarningMissingDescription(String command) {
         switch (command) {
         case "todo":
             String todoMessage = "OOPS!!! The description of a todo cannot be empty.";
@@ -140,7 +140,7 @@ public class Ui {
     /**
      * Shows message if number does not correspond to any task
      */
-    public static void noTask() {
+    public static void showNoTask() {
         String message = "No such task exists.";
         showToUser(LINE, message, LINE);
     }
@@ -165,7 +165,7 @@ public class Ui {
     /**
      * Shows message that warns user that due date of a deadline cannot be empty
      */
-    public static void missingDeadline() {
+    public static void showMissingDeadline() {
         System.out.println("---------------------------------------------");
         System.out.println("OOPS!!! The due date of a deadline cannot be empty.");
         System.out.println("Use format \"/by yyyy-mm-dd {time}\" when providing due date.");
@@ -175,7 +175,7 @@ public class Ui {
     /**
      * Shows message that warns user that details of an event cannot be empty
      */
-    public static void missingEventDetails() {
+    public static void showMissingEventDetails() {
         System.out.println("---------------------------------------------");
         System.out.println("OOPS!!! The details of an event cannot be empty.");
         System.out.println("Please input time, day, or - if details unknown.");

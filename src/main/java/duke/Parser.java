@@ -36,7 +36,8 @@ public class Parser {
     public static int taskNumber(String input) throws MissingTaskNumberException {
         String[] strArr = input.split(" ", 2);
         if (strArr.length < 2) {
-            Ui.warningMissingNumber();
+            Ui.showWarningMissingNumber(); //show in log
+            Response.showWarningMissingNumber(); //show in app
             throw new MissingTaskNumberException();
         } else {
             String number = strArr[1];
@@ -54,7 +55,8 @@ public class Parser {
     public static String getKeyword(String input) throws MissingKeywordException{
         String[] strArr = input.split(" ", 2);
         if (strArr.length < 2) {
-            Ui.warningMissingKeyword();
+            Ui.showWarningMissingKeyword();
+            Response.showWarningMissingKeyword();
             throw new MissingKeywordException();
         } else {
             return strArr[1];
@@ -71,7 +73,8 @@ public class Parser {
     public static String getDescription(String input) throws MissingDescriptionException {
         String[] strArr = input.split(" ", 2);
         if (strArr.length < 2) {
-            Ui.warningMissingDescription(strArr[0]);
+            Ui.showWarningMissingDescription(strArr[0]);
+            Response.showWarningMissingDescription(strArr[0]);
             throw new MissingDescriptionException();
         } else {
             return strArr[1];
@@ -91,18 +94,18 @@ public class Parser {
         String description = Parser.getDescription(input);
 
         switch (command) {
-            case "todo":
-                return new Todo(description);
-            case "deadline":
-                String deadlineDescription = Deadline.getDeadlineDescription(description);
-                Deadline deadline = new Deadline(deadlineDescription, Deadline.getDate(input), Deadline.getTime(input)); //todo
-                return deadline;
-            case "event":
-                String eventDescription = Event.getEventDescription(description);
-                Event event = new Event(eventDescription, Event.getEventDetails(input));
-                return event;
-            default:
-                return new Task("NA");
+        case "todo":
+            return new Todo(description);
+        case "deadline":
+            String deadlineDescription = Deadline.getDeadlineDescription(description);
+            Deadline deadline = new Deadline(deadlineDescription, Deadline.getDate(input), Deadline.getTime(input)); //todo
+            return deadline;
+        case "event":
+            String eventDescription = Event.getEventDescription(description);
+            Event event = new Event(eventDescription, Event.getEventDetails(input));
+            return event;
+        default:
+            return new Task("NA");
         }
     }
 
@@ -187,7 +190,7 @@ public class Parser {
             Task taskToDelete = taskList.getIndividualTask(num - 1);
             Storage.markAsDeleted(file, taskToDelete); //todo
             taskList.deleteTask(num); //todo
-            return Response.showSuccessfulDelete(taskToDelete);
+            return Response.showSuccessfulDelete(taskToDelete, taskList.getLength());
         case "find":
             String keyword = getKeyword(action);
             return taskList.findTasks(keyword);

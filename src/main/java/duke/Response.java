@@ -6,32 +6,31 @@ public class Response {
     /**
      * Method to show message to warn user that task number is missing
      */
-    public static void warningMissingNumber() {
-        String message = "OOPS!!! To delete a task, the task number must be stated.";
+    public static String showWarningMissingNumber() {
+        return "OOPS!!! To delete a task, the task number must be stated.";
     }
 
     /**
      * Method to show message to warn user that keyword is missing
      */
-    public static void warningMissingKeyword() {
-        String message = "OOPS!!! To find a task, a keyword must be stated.";
+    public static String showWarningMissingKeyword() {
+        return "OOPS!!! To find a task, a keyword must be stated.";
     }
 
     /**
      * Method that warns user that there is a missing description for the task.
      * @param command
      */
-    public static void warningMissingDescription(String command) {
+    public static String showWarningMissingDescription(String command) {
         switch (command) {
         case "todo":
-            String todoMessage = "OOPS!!! The description of a todo cannot be empty.";
-            break;
+            return "OOPS!!! The description of a todo cannot be empty.";
         case "deadline":
-            String deadlineMessage = "OOPS!!! The description of a deadline cannot be empty.";
-            break;
+            return "OOPS!!! The description of a deadline cannot be empty.";
         case "event":
-            String eventMessage = "OOPS!!! The description of an event cannot be empty.";
-            break;
+            return "OOPS!!! The description of an event cannot be empty.";
+        default:
+            return "";
         }
     }
 
@@ -72,8 +71,7 @@ public class Response {
      * Shows list of all the tasks that have not been deleted
      */
     public static String showList(TaskList tasklist) {
-        String message = "Here are the tasks in your list:\n";
-        String output = "";
+        String output = "Here are the tasks in your list:\n";
         for (int i = 0; i < tasklist.getLength(); i++) {
             int j = i + 1;
             output += j +". " + tasklist.getIndividualTask(i).toString() + "\n";
@@ -84,43 +82,33 @@ public class Response {
     /**
      * Shows message if number does not correspond to any task
      */
-    public static void noTask() {
-        String message = "No such task exists.";
+    public static String showNoTask() {
+        return "No such task exists.";
     }
 
     /**
      * Show message upon successfully deleting a task
      */
-    public static String showSuccessfulDelete(Task task) {
-        return "Noted I've removed this task:\n" + task.toString();
-    }
-
-    /**
-     * Shows updated number of tasks in the list
-     * @param numTasks
-     */
-    public static void showUpdatedNumber(int numTasks) {
-        String updatedListNumber = "Now you have " + numTasks + " task(s) in the list.";
+    public static String showSuccessfulDelete(Task task, int num) {
+        return "Noted I've removed this task:\n"
+                + task.toString() + "\n"
+                + "Now you have " +  num + " task(s) in the list.";
     }
 
     /**
      * Shows message that warns user that due date of a deadline cannot be empty
      */
-    public static void missingDeadline() {
-        System.out.println("---------------------------------------------");
-        System.out.println("OOPS!!! The due date of a deadline cannot be empty.");
-        System.out.println("Use format \"/by yyyy-mm-dd {time}\" when providing due date.");
-        System.out.println("---------------------------------------------");
+    public static String showMissingDeadline() {
+        return "OOPS!!! The due date of a deadline cannot be empty.\n" +
+                "Use format \"/by yyyy-mm-dd {time}\" when providing due date.";
     }
 
     /**
      * Shows message that warns user that details of an event cannot be empty
      */
-    public static void missingEventDetails() {
-        System.out.println("---------------------------------------------");
-        System.out.println("OOPS!!! The details of an event cannot be empty.");
-        System.out.println("Please input time, day, or - if details unknown.");
-        System.out.println("---------------------------------------------");
+    public static String showMissingEventDetails() {
+        return "OOPS!!! The details of an event cannot be empty.\n " +
+                "Please input time, day, or - if details unknown.";
     }
 
     /**
@@ -142,16 +130,6 @@ public class Response {
      */
     public static String showResults(String output, int count, String description) {
         return output + count + ". " + description + "\n";
-    }
-
-    /**
-     * method that takes in mutliple strings to form a message shown to the user
-     * @param message
-     */
-    public static void showToUser(String... message) {
-        for (String m : message) {
-            System.out.println(m);
-        }
     }
 
 }

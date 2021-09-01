@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import duke.Response;
 import duke.Ui;
 import duke.exceptions.MissingEventDetailsException;
 
@@ -51,7 +52,8 @@ public class Event extends Task {
     public static String getEventDescription(String input) throws MissingEventDetailsException {
         String[] strArr = input.split(" /at", 2);
         if (strArr.length < 2) {
-            Ui.missingEventDetails();
+            Ui.showMissingEventDetails();
+            Response.showMissingEventDetails();
             throw new MissingEventDetailsException();
         } else {
             return strArr[0] + " (at:" + strArr[1] + ")";
