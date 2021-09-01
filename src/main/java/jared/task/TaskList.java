@@ -1,12 +1,12 @@
 package jared.task;
 
-import jared.common.DukeException;
-import jared.storage.Storage;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import jared.common.DukeException;
+import jared.storage.Storage;
 
 /**
  * Deals with tasks.
@@ -15,6 +15,11 @@ public class TaskList {
     private ArrayList<Task> tasks;
     private Storage storage;
 
+    /**
+     * Constructor for task list.
+     * @param tasks List of tasks stored on database.
+     * @param storage Storage object.
+     */
     public TaskList(ArrayList<Task> tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
@@ -119,7 +124,7 @@ public class TaskList {
 
         try {
             taskNum = Integer.valueOf(next.split(" ", 2)[1]);
-            currTask = tasks.get(taskNum-1);
+            currTask = tasks.get(taskNum - 1);
         } catch (Exception e) {
             throw new DukeException("Invalid task number provided.");
         }
@@ -155,6 +160,11 @@ public class TaskList {
                 currTask.toString(), tasks.size()));
     }
 
+    /**
+     * Lists the tasks in string format.
+     * @param tasks List of task to be listed into a string.
+     * @return String of list of tasks.
+     */
     public String listTasks(ArrayList<Task> tasks) {
         String res = "";
         for (int i = 0; i < tasks.size(); i++) {

@@ -6,10 +6,15 @@ import jared.common.DukeException;
  * Parses user input.
  */
 public class Parser {
+
+    /**
+     * Parses user input into command.
+     * @param s user input string.
+     * @return the command in user input.
+     */
     public static String parseCommand(String s) {
-        String[] inputArr = s.split(" ",2);
-        String command = inputArr[0];
-        return command;
+        String[] inputArr = s.split(" ", 2);
+        return inputArr[0];
     }
 
     /**
@@ -18,9 +23,8 @@ public class Parser {
      * @param s user input string.
      * @param output data output required.
      * @return the required data specified.
-     * @throws DukeException
+     * @throws DukeException if data cannot be parsed.
      */
-
     public static String parseData(String s, String output) throws DukeException {
         String[] dataArr = s.split(" _ ");
         try {

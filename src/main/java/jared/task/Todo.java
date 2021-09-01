@@ -1,7 +1,5 @@
 package jared.task;
 
-import jared.task.Task;
-
 /**
  * Represents a todo task.
  */

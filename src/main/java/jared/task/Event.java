@@ -1,8 +1,9 @@
 package jared.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 
 /**
  * Represents an event task.
@@ -11,11 +12,22 @@ public class Event extends Task {
     protected LocalDate date;
     protected LocalTime time;
 
+    /**
+     * Constructor for event task if date is provided.
+     * @param description of event.
+     * @param date of event.
+     */
     public Event(String description, LocalDate date) {
         super(description);
         this.date = date;
     }
 
+    /**
+     * Constructor for event task if time and date is provided.
+     * @param description of event.
+     * @param date of event.
+     * @param time time of event.
+     */
     public Event(String description, LocalDate date, LocalTime time) {
         super(description);
         this.date = date;
