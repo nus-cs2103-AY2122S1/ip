@@ -12,7 +12,7 @@ public class StorageTest {
     @Test
     public void load_loadTestDB_success() throws FileNotFoundException {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        Storage storage = new Storage("testDatabase.txt");
+        Storage storage = new Storage("src/test/java/testDatabase.txt");
         List<Task> tasks = storage.load();
         System.out.println(tasks);
         String actualString = "[[T][X] to this as well, [T][X] and this,"
