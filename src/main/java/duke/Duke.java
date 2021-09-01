@@ -16,7 +16,8 @@ public class Duke {
     private final Ui ui;
     private final InputParser parser;
 
-    public Duke(String filepath) {
+    public Duke() {
+        String filepath = "data/Duke.txt";
         ui = new Ui();
         listOfItems = new Tasklist();
         parser = new InputParser();
@@ -29,25 +30,44 @@ public class Duke {
                 f.createNewFile();
             }
         } catch (IOException e) {
-            ui.outputWrapper("An error occurred when opening the file. Try rerunning Duke again.");
+            getResponse("An error occurred when opening the file. Try rerunning Duke again.");
         }
         storage = new Storage(FILE_PATH);
         listOfItems = storage.load();
     }
+
+//    public Duke(String filepath) {
+//        ui = new Ui();
+//        listOfItems = new Tasklist();
+//        parser = new InputParser();
+//
+//        Path FILE_PATH = Paths.get(System.getProperty("user.dir"), filepath);
+//        try {
+//            if (Files.notExists(FILE_PATH)) {
+//                File f = new File(FILE_PATH.toString());
+//                f.getParentFile().mkdirs();
+//                f.createNewFile();
+//            }
+//        } catch (IOException e) {
+//            ui.outputWrapper("An error occurred when opening the file. Try rerunning Duke again.");
+//        }
+//        storage = new Storage(FILE_PATH);
+//        listOfItems = storage.load();
+//    }
 
     /**
      * Marks an item on the list as completed.
      *
      * @param input Command line input from the user.
      */
-    private void markAsDone(String input) {
+    private String markAsDone(String input) {
         String[] keywords = input.split(" ");
         String command = keywords[0];
         Integer idx = keywords.length > 1 ? Integer.parseInt(keywords[1]) : -1;
         Task task = listOfItems.getTask(idx);
         task.setDone();
         String completionMessage = String.format("You have successfully completed task %s:\n", keywords[1]);
-        ui.outputWrapper(completionMessage + task);
+        return completionMessage + task;
     }
 
 
@@ -56,7 +76,7 @@ public class Duke {
      *
      * @param input Command line input from the user.
      */
-    private void addAsTodo(String input) throws DukeException {
+    private String addAsTodo(String input) throws DukeException {
         // split input into command and text
         String[] elements = input.split(" ", 2);
         if (elements.length == 1) {
@@ -65,7 +85,7 @@ public class Duke {
         String textDescription = elements[1];
         Task todo = new Todo(textDescription);
         listOfItems.addTask(todo);
-        ui.printAdditionConfirmation(todo, listOfItems);
+        return ui.printAdditionConfirmation(todo, listOfItems);
     }
 
     /**
@@ -73,7 +93,7 @@ public class Duke {
      *
      * @param input Command line input from the user.
      */
-    private void addAsEvent(String input) throws DukeException {
+    private String addAsEvent(String input) throws DukeException {
         String[] keywords = input.split(" ", 2);
         if (keywords.length == 1) {
             throw new DukeException("you need to describe your event to me in format: event (description)!");
@@ -87,14 +107,14 @@ public class Duke {
         String textDescription = elements[0];
         Task event = new Event(textDescription, time);
         listOfItems.addTask(event);
-        ui.printAdditionConfirmation(event, listOfItems);
+        return ui.printAdditionConfirmation(event, listOfItems);
     }
     /**
      * Adds an item to the list as deadline.
      *
      * @param input Command line input from the user.
      */
-    private void addAsDeadline(String input) throws DukeException {
+    private String addAsDeadline(String input) throws DukeException {
         String[] keywords = input.split(" ", 2);
         if (keywords.length == 1) {
             throw new DukeException("you need to describe your deadline to me in format: deadline (description)!");
@@ -107,7 +127,7 @@ public class Duke {
         String textDescription = elements[0];
         Task deadline = new Deadline(textDescription, time);
         listOfItems.addTask(deadline);
-        ui.printAdditionConfirmation(deadline, listOfItems);
+        return ui.printAdditionConfirmation(deadline, listOfItems);
     }
 
     /**
@@ -116,12 +136,12 @@ public class Duke {
      * @param input Command line input from the user to be parsed.
      * @throws DukeException Throws an exception if index is not on the list or with wrong input.
      */
-    private void deleteItem(String input) throws DukeException {
+    private String deleteItem(String input) throws DukeException {
         try {
             Integer idx = Integer.parseInt(parser.getDescription(input));
             Task item = listOfItems.getTask(idx);
             listOfItems.removeTask(idx);
-            ui.printDeletionConfirmation(item, listOfItems);
+            return ui.printDeletionConfirmation(item, listOfItems);
         } catch (NumberFormatException e) {
             throw new DukeException("you need to choose a number from the list in the form: delete (list index)!");
         } catch (IndexOutOfBoundsException e) {
@@ -135,11 +155,11 @@ public class Duke {
      * @param input Command line input from the user.
      * @throws DukeException Throws an exception if no keyword was entered or if no tasks match the keyword given.
      */
-    private void findItems(String input) throws DukeException {
+    private String findItems(String input) throws DukeException {
         try {
             String keyword = parser.getDescription(input);
             Tasklist validItems = listOfItems.findAllBy(keyword);
-            ui.outputWrapper(validItems);
+            return ui.listToPrintableString(validItems);
         }catch (ArrayIndexOutOfBoundsException e){
             throw new DukeException("please input a keyword in the format: [find] (keyword)");
         } catch (NullPointerException e) {
@@ -165,67 +185,60 @@ public class Duke {
      *
      * @param input Command line input from the user.
      */
-    private void handleInput(String input) {
+    public String getResponse(String input) {
         String command = parser.getCommand(input);
         try {
             switch(command) {
                 case "items":
-                    ui.outputWrapper(listOfItems);
-                    break;
+                    return ui.listToPrintableString(listOfItems);
                 case "completed":
-                    markAsDone(input);
-                    break;
+                    return markAsDone(input);
                 case "todo":
-                    addAsTodo(input);
-                    break;
+                    return addAsTodo(input);
                 case "event":
-                    addAsEvent(input);
-                    break;
+                    return addAsEvent(input);
                 case "deadline":
-                    addAsDeadline(input);
-                    break;
+                    return addAsDeadline(input);
                 case "delete":
-                    deleteItem(input);
-                    break;
+                    return deleteItem(input);
                 case "find":
-                    findItems(input);
-                    break;
+                    return findItems(input);
                 default:
                     markAsInvalid(input);
                     break;
             }
         } catch (DukeException e) {
-            ui.outputWrapper(e.getMessage());
+            return e.getMessage();
         }
-
+        return "something";
     }
 
     /**
      * Starts the current session for the bot.
      */
-    public void startBot()  {
+//    public void startBot()  {
+//
+//        Scanner i = new Scanner(System.in);
+//        String input = i.nextLine();
+//
+//        while (!input.equals("bye")) {
+//            handleInput(input);
+//            input = i.nextLine();
+//        }
+//
+//        try {
+//            storage.save(listOfItems);
+//        } catch (IOException e) {
+//            return ("Sorry, data could not be saved.");
+//        }
+//
+//        ui.outputWrapper("Thanks for using me. See you again soon!");
+//        i.close();
+//    }
 
-        Scanner i = new Scanner(System.in);
-        String input = i.nextLine();
-
-        while (!input.equals("bye")) {
-            handleInput(input);
-            input = i.nextLine();
-        }
-
-        try {
-            storage.save(listOfItems);
-        } catch (IOException e) {
-            ui.outputWrapper("Sorry, data could not be saved.");
-        }
-
-        ui.outputWrapper("Thanks for using me. See you again soon!");
-        i.close();
-    }
-
-    public static void main(String[] args) {
-        System.out.println("Hello this is Jeeves, your personal chatbot. What can i do you for today?");
-        Duke bot = new Duke("data/Duke.txt");
-        bot.startBot();
-    }
+//    public static void main(String[] args) {
+//        System.out.println("Hello this is Jeeves, your personal chatbot. What can i do you for today?");
+//        Duke bot = new Duke("data/Duke.txt");
+//        bot.startBot();
+//    }
 }
