@@ -87,4 +87,8 @@ public class Duke extends Application {
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
     }
+
+    public String getGreetingMessage() {
+        return this.ui.getGreetingMessage();
+    }
 }

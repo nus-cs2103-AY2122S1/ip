@@ -32,6 +32,10 @@ public class Ui {
         System.out.println(Ui.GREETING_MESSAGE);
     }
 
+    public String getGreetingMessage() {
+        return Ui.GREETING_MESSAGE;
+    }
+
     /**
      * Returns command received from keyboard.
      *
