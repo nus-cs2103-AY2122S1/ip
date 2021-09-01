@@ -31,6 +31,10 @@ public class Deadline extends Task {
         return this.by.toString();
     }
 
+    /**
+     * Retrieves a string describing the Deadline's status.
+     * @return string describing the Deadline's status.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";

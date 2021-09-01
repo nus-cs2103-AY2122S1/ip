@@ -43,10 +43,18 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Retrieves the boolean value of this object's isDone status.
+     * @return boolean of this object's isDone.
+     */
     public boolean getIsDone() {
         return this.isDone;
     }
 
+    /**
+     * Retrieves the description of this object's status.
+     * @return string description of the object's status.
+     */
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
