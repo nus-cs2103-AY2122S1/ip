@@ -6,7 +6,7 @@ import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class that stores a Task that contains a date(by).
+ * Class that stores a Task that contains a date(deadline).
  */
 public class Deadline extends Task {
 
