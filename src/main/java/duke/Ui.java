@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Handles the System input and output
+ * Handles the System input and output.
  */
 public class Ui {
     private Scanner scanner;
@@ -25,7 +25,7 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    public void showln(String s) {
+    public void showLine(String s) {
         System.out.println(s);
     }
 
@@ -42,16 +42,18 @@ public class Ui {
     }
 
     /**
-     * Prints error message from duke
-     * @param e Erorr thrown by duke.Duke
+     * Prints error message from duke.
+     *
+     * @param e Erorr thrown by duke.Duke.
      */
     public void showDukeException(DukeException e) {
         System.out.printf("HuAI Liddat!!! %s\n", e);
     }
 
     /**
-     * Prints stack trace of other error messages
-     * @param e Erorr thrown by Java
+     * Prints stack trace of other error messages.
+     *
+     * @param e Erorr thrown by Java.
      */
     public void showException(Exception e) {
         e.printStackTrace();

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a function interface callable with parameters taskList, ui, storage
+ * Represents a function interface callable with parameters taskList, ui, storage.
  */
 @FunctionalInterface
 public interface TriConsumer {

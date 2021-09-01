@@ -3,14 +3,15 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Static class that parses input lines into Commands
+ * Static class that parses input lines into Commands.
  */
 public class Parser {
     /**
-     * Parses a line of input to a Command object
-     * @param fullCommand string containing exactly one line of input
-     * @return Command object represented by fullCommmand
-     * @throws DukeException
+     * Parses a line of input to a Command object.
+     *
+     * @param fullCommand string containing exactly one line of input.
+     * @return Command object represented by fullCommmand.
+     * @throws DukeException If fullCommand has wrong number of symbols.
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] commandSplit = fullCommand.split(" ", 2);
@@ -28,9 +29,9 @@ public class Parser {
         case "list":
             command = new Command((taskList, ui, storage) -> {
                 ArrayList<Task> tasks = taskList.getTasks();
-                ui.showln("Here are the tasks in your list:");
+                ui.showLine("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    ui.showln(String.format("%d. %s", i + 1, tasks.get(i)));
+                    ui.showLine(String.format("%d. %s", i + 1, tasks.get(i)));
                 }
             }, false);
             break;
@@ -38,7 +39,7 @@ public class Parser {
             command = new Command((taskList, ui, storage) -> {
                 int i = Integer.parseInt(commandSplit[1].trim());
                 Task task = taskList.markTaskAsDone(i - 1);
-                ui.showln("Nice! I've marked this task as done:");
+                ui.showLine("Nice! I've marked this task as done:");
                 ui.showTask(task);
                 storage.save(taskList.getTasks());
             }, false);
@@ -52,7 +53,7 @@ public class Parser {
                 Task newTask = new Todo(taskName);
                 taskList.addTask((newTask));
                 storage.save(taskList.getTasks());
-                ui.showln("Got it. I've added this task: ");
+                ui.showLine("Got it. I've added this task: ");
                 ui.showTask(newTask);
                 ui.showTaskCount(taskList.getSize());
             }, false);
@@ -71,7 +72,7 @@ public class Parser {
                 Task newTask = new Deadline(taskName, dateTime);
                 taskList.addTask((newTask));
                 storage.save(taskList.getTasks());
-                ui.showln("Got it. I've added this task: ");
+                ui.showLine("Got it. I've added this task: ");
                 ui.showTask(newTask);
                 ui.showTaskCount(taskList.getSize());
             }, false);
@@ -91,7 +92,7 @@ public class Parser {
                 Task newTask = new Event(taskName, dateTime);
                 taskList.addTask((newTask));
                 storage.save(taskList.getTasks());
-                ui.showln("Got it. I've added this task: ");
+                ui.showLine("Got it. I've added this task: ");
                 ui.showTask(newTask);
                 ui.showTaskCount(taskList.getSize());
             }, false);
@@ -102,7 +103,7 @@ public class Parser {
                 int i = Integer.parseInt(commandSplit[1].trim());
                 Task task = taskList.removeTask(i - 1);
                 storage.save(taskList.getTasks());
-                ui.showln("Noted. I've removed this task:");
+                ui.showLine("Noted. I've removed this task:");
                 ui.showTask(task);
                 ui.showTaskCount(taskList.getSize());
             }, false);
@@ -114,9 +115,9 @@ public class Parser {
             command = new Command((taskList, ui, storage) -> {
                 String key = commandSplit[1].trim();
                 ArrayList<Task> tasks = taskList.findTasks(key);
-                ui.showln("Here are the matching tasks in your list:");
+                ui.showLine("Here are the matching tasks in your list:");
                 for (int i = 0; i < tasks.size(); i++) {
-                    ui.showln(String.format("%d. %s", i + 1, tasks.get(i)));
+                    ui.showLine(String.format("%d. %s", i + 1, tasks.get(i)));
                 }
             }, false);
             break;

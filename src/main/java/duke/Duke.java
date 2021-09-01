@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
 /**
- * Main class for running duke.Duke
+ * Represents main logic of duke.Duke.
  */
 public class Duke {
     private Storage storage;
@@ -13,7 +13,7 @@ public class Duke {
     private Ui ui;
 
     /**
-     * @param filePath path to tasks storage file
+     * @param filePath path to tasks storage file.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -34,7 +34,7 @@ public class Duke {
     }
 
     /**
-     * Main loop for interactions with user
+     * Handles CLI interactions with user.
      */
     public void run() {
         assert tasks != null : "tasks should not be null";
@@ -60,7 +60,7 @@ public class Duke {
     }
 
     /**
-     * Run commands obtained from GUI to obtain output
+     * Runs commands obtained from GUI to obtain output.
      */
     public String getResponse(String fullCommand) {
         assert tasks != null : "tasks should not be null";
@@ -81,7 +81,7 @@ public class Duke {
     }
 
     /**
-     * Bridging function to print welcome message
+     * Returns welcome message from UI.
      */
     public String getWelcomeMessage() {
         assert ui != null : "ui should not be null";
@@ -92,7 +92,7 @@ public class Duke {
     }
 
     /**
-     * Main entry method for duke.Duke
+     * Runs CLI interface for duke.Duke.
      */
     public static void main(String[] args) {
         new duke.Duke("data/tasks.txt").run();
