@@ -4,11 +4,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @Event are Tasks that have an attached date as the time the Task will happen.
+ */
 public class Event extends Task{
     private Date date;
     protected static final String EVENT_LABEL = "E";
 
-    public Event(String str) throws DukeDateParseException {
+    /**
+     * Creates an Event instance.
+     *
+     * @param str the commands used to initialise an Event instance.
+     * @throws DukeDateParseException when there is an error parsing the date provided.
+     * @throws DukeArgumentException when there is insufficient/incorrect argument(s) provided.
+     */
+    public Event(String str) throws DukeDateParseException, DukeArgumentException {
         super(str.split(" /", 2)[0]);
         String[] command = str.split(" /", 2);
         if (command.length == 1) {

@@ -2,9 +2,14 @@ package duke;
 
 import java.util.*;
 
+
+/**
+ * @Chatbot represents a chatbot.
+ * @author spdpnd98.
+ */
 public class Chatbot {
     /**
-     * Chatbot is the main obj that is imported to any runner as an application
+     * @ChatCommands are enumerations used for chatbot commands.
      */
     private enum ChatCommands {
         BYE("bye"),
@@ -26,7 +31,10 @@ public class Chatbot {
         }
     }
 
-    enum TaskCommands {
+    /**
+     * @TaskCommands are enumerations used to identify individual tasks and actions to be taken.
+     */
+    protected enum TaskCommands {
         DONE("done"),
         DELETE("delete"),
         TODO("todo"),
@@ -50,7 +58,10 @@ public class Chatbot {
         }
     }
 
-    enum ChatContinue {
+    /**
+     * @ChatContinue are enumerations to indicate if a chat should continue or terminate.
+     */
+    protected enum ChatContinue {
         CONTINUE,
         END,
     }
@@ -60,6 +71,9 @@ public class Chatbot {
     private Ui ui;
     private TaskList taskList;
 
+    /**
+     * Creates a Chatbot instance.
+     */
     public Chatbot() {
         this.scanner = new Scanner(System.in);
         this.ui = new Ui();
@@ -73,6 +87,9 @@ public class Chatbot {
         }
     }
 
+    /**
+     * @chat initiates a chat with the user, and checks for handled exceptions.
+     */
     public void chat() {
         boolean keepChatting = true;
         while (keepChatting) {
@@ -91,7 +108,15 @@ public class Chatbot {
         };
     }
 
-    private ChatContinue interpret() throws DukeIOException, DukeDateParseException {
+    /**
+     * @interpret contains the logic to understand user inputs.
+     *
+     * @return ChatContinue enum to indicate if the chat should continue or terminate.
+     * @throws DukeIOException thrown by TaskList.addTask method, if fails to store in FileDB.
+     * @throws DukeDateParseException thrown by TaskList.addTask method, if fails to parse the date.
+     * @throws DukeArgumentException if not enough arguments are given to TaskCommand methods.
+     */
+    private ChatContinue interpret() throws DukeIOException, DukeDateParseException, DukeArgumentException {
         String input = scanner.nextLine();
         ChatCommands command = ChatCommands.toEnum(input);
         if (command != null) {
@@ -108,8 +133,12 @@ public class Chatbot {
         throw new DukeArgumentException("Looks like I don't support those commands yet...");
     }
 
-
-
+    /**
+     * Executes any no argument commands provided to chatbot.
+     *
+     * @param command the user's input.
+     * @return ChatContinue enums to indicate if a chat should continue or terminnate.
+     */
     private ChatContinue builtInCommands(ChatCommands command) {
         switch (command) {
             case BYE:
@@ -122,6 +151,11 @@ public class Chatbot {
         }
     }
 
+    /**
+     * Terminates the chat session with user.
+     *
+     * @return ChatContinue enums to indicate if a chat should continue or terminnate.
+     */
     private ChatContinue farewell() {
         this.ui.showFarewell();
         return ChatContinue.END;
