@@ -1,11 +1,12 @@
 package duke.ui;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
 
@@ -15,7 +16,7 @@ public class Ui {
      * @return User's input.
      */
     public String readCommand() {
-        Scanner sc= new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         String userInput = sc.nextLine();
         return userInput;
     }
@@ -67,7 +68,7 @@ public class Ui {
      */
     public void showDeleteTask(Task task, TaskList taskList) {
         String deleteTask = String.format("Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.",
-                task.toString(), taskList.totalTask()) ;
+                task.toString(), taskList.totalTask());
         this.sendMessage(deleteTask);
     }
 
@@ -77,7 +78,7 @@ public class Ui {
      * @param task Task that is marked as done.
      */
     public void showDone(Task task) {
-        String done = String.format("Nice! I've marked this task as done:\n%s", task.toString()) ;
+        String done = String.format("Nice! I've marked this task as done:\n%s", task.toString());
         this.sendMessage(done);
     }
 
@@ -95,7 +96,7 @@ public class Ui {
             task = "";
         } else {
             task = "1. " + taskList.getTask(1).toString();
-            for(int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
+            for (int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
                 task = task + "\n" + taskNumber + ". " + taskList.getTask(taskNumber).toString();
             }
         }
@@ -142,8 +143,8 @@ public class Ui {
             int numTask = tasks.size();
 
             String task = "1. " + tasks.get(0).toString();
-            for(int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
-                task = task + "\n" + taskNumber + ". " + tasks.get(taskNumber -1 ).toString();
+            for (int taskNumber = 2; taskNumber <= numTask; taskNumber++) {
+                task = task + "\n" + taskNumber + ". " + tasks.get(taskNumber - 1).toString();
             }
 
             task = "Here are the matching tasks in your list:\n" + task;

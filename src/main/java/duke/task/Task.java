@@ -28,7 +28,7 @@ public class Task {
      *
      * @return decription of task
      */
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 

@@ -1,9 +1,8 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.exception.DukeException;
 
 public class TaskList {
 
@@ -116,12 +115,12 @@ public class TaskList {
      * @return Array of tasks that match the keyword
      * @throws DukeException If task get method has an error.
      */
-    public ArrayList<Task> findTask(String keyWord) throws DukeException{
+    public ArrayList<Task> findTask(String keyWord) throws DukeException {
         ArrayList<Task> newTasks = new ArrayList<>();
 
         int numTask = this.totalTask();
 
-        for(int i = 1; i <= numTask; i++) {
+        for (int i = 1; i <= numTask; i++) {
             Task task = this.getTask(i);
             if (task.isKeyWordPresent(keyWord)) {
                 newTasks.add(task);

@@ -2,8 +2,12 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 import duke.ui.Ui;
-import duke.task.*;
 
 public class AddCommand extends Command {
     private Task task;
@@ -15,7 +19,7 @@ public class AddCommand extends Command {
      * @param description The description to be added when creating a task.
      * @throws DukeException If description given is invalid.
      */
-    public AddCommand(String command, String description) throws DukeException{
+    public AddCommand(String command, String description) throws DukeException {
         if (command.equals("todo")) {
             String[] splitString = description.split("todo ");
 
