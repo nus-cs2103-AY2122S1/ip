@@ -32,6 +32,7 @@ public class Parser {
 
     /**
      * Public constructor for Parser.
+     *
      * @param tasks A list of tasks.
      * @param ui Ui for Duke.
      */
@@ -42,6 +43,7 @@ public class Parser {
 
     /**
      * Reads in and executes user's input based on string given.
+     *
      * @param cmd String from user's input.
      * @throws DukeException
      */
@@ -60,12 +62,12 @@ public class Parser {
 
         switch (command) {
         case LIST:
-            this.tasks.iterList();
+            this.tasks.printTaskList();
             break;
         case TODO:
             task = new Todo(cmd.substring(5));
             this.tasks.add(task);
-            ui.addTaskMsg(task);
+            ui.showAddTaskMsg(task);
             break;
         case DEADLINE:
             middle = Arrays.asList(tokens).indexOf("/by");
@@ -78,7 +80,7 @@ public class Parser {
                 by = LocalDateTime.parse(dateString, format);
                 task = new Deadline(description, by);
                 this.tasks.add(task);
-                ui.addTaskMsg(task);
+                ui.showAddTaskMsg(task);
             } catch (DateTimeParseException e) {
                 System.out.println("Please enter a date in the following format: dd/MM/yyyy HHmm");
             }
@@ -94,7 +96,7 @@ public class Parser {
                 at = LocalDateTime.parse(dateString, format);
                 task = new Event(description, at);
                 this.tasks.add(task);
-                ui.addTaskMsg(task);
+                ui.showAddTaskMsg(task);
             } catch (DateTimeParseException e) {
                 System.out.println("Please enter a date in the following format: dd/MM/yyyy HHmm");
             }
@@ -103,18 +105,18 @@ public class Parser {
             index = Integer.parseInt(tokens[1]) - 1;
             task = this.tasks.get(index);
             this.tasks.complete(index);
-            ui.completeTaskMsg(task);
+            ui.showCompleteTaskMsg(task);
             break;
         case DELETE:
             index = Integer.parseInt(tokens[1]) - 1;
             task = this.tasks.get(index);
             this.tasks.delete(index);
-            ui.deleteTaskMsg(task);
-            ui.listCountMsg();
+            ui.showDeleteTaskMsg(task);
+            ui.showListCountMsg();
             break;
         case FIND:
             String keyword = cmd.substring(5);
-            tasks.searchKeyword(keyword);
+            tasks.printMatchingTasks(keyword);
             break;
         }
     }

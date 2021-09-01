@@ -33,7 +33,7 @@ public class Duke {
 
     private void run() {
         Scanner sc = new Scanner(System.in);
-        ui.greeting();
+        ui.showGreeting();
         String cmd = sc.nextLine();
         while (!cmd.equals("bye")) {
             try {
@@ -45,7 +45,7 @@ public class Duke {
             cmd = sc.nextLine();
         }
         sc.close();
-        ui.farewellMsg();
+        ui.showFarewellMsg();
     }
 
     public static void main(String[] args) {

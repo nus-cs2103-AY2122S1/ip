@@ -25,7 +25,7 @@ public class TaskList {
     /**
      * Prints all items in a TaskList.
      */
-    public void iterList() {
+    public void printTaskList() {
         System.out.println("Here are the tasks in your list:");
         if (lst.size() == 0) {
             System.out.println("---- No Tasks currently ----");
@@ -39,6 +39,7 @@ public class TaskList {
 
     /**
      * Adds a Task to TaskList.
+     *
      * @param text
      */
     public void add(Task text) {
@@ -47,6 +48,7 @@ public class TaskList {
 
     /**
      * Completes a Task in a Tasklist with a given index.
+     *
      * @param index Index of Task in the List (0-indexed)
      * @throws DukeException
      */
@@ -60,6 +62,7 @@ public class TaskList {
 
     /**
      * Deletes a Task in a Tasklist with a given index.
+     *
      * @param index Index of Task in the List (0-indexed)
      * @throws DukeException
      */
@@ -76,9 +79,10 @@ public class TaskList {
 
     /**
      * Returns a length of TaskList.
+     *
      * @return An integer that represents the number of Tasks in a TaskList.
      */
-    public int count() {
+    public int getLength() {
         return lst.size();
     }
 
@@ -92,13 +96,14 @@ public class TaskList {
 
     /**
      * Prints all relevant tasks that contain a certain keyword.
+     *
      * @param keyword Keyword to be contained in the Task's description.
      */
-    public void searchKeyword(String keyword) {
+    public void printMatchingTasks(String keyword) {
         System.out.println("Here are the matching tasks in your list:");
         int i = 1;
         for (Task task : lst) {
-            if (task.findKeyword(keyword)) {
+            if (task.containsKeyword(keyword)) {
                 System.out.println(i + "." + task);
                 i++;
             }

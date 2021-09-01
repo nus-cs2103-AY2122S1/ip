@@ -9,6 +9,7 @@ package duke.commands;
 public class Todo extends Task {
     /**
      * Public constructor for Todo.
+     *
      * @param description Description to be stored.
      */
     public Todo(String description) {
@@ -17,6 +18,7 @@ public class Todo extends Task {
 
     /**
      * Overloaded public constructor for Todo.
+     *
      * @param description Description to be stored.
      * @param isDone Boolean that represents Todo completion status.
      */
@@ -26,6 +28,7 @@ public class Todo extends Task {
 
     /**
      * Returns a string representation of Todo.
+     *
      * @return A string representation of Todo.
      */
     @Override
@@ -35,10 +38,11 @@ public class Todo extends Task {
 
     /**
      * Returns a string formatted for saving purposes.
+     *
      * @return A string representation of Todo for saving.
      */
     @Override
-    public String printFormat() {
+    public String printInSaveFormat() {
         String[] info = {"T", isDone ? "1" : "0", description};
         return String.join(" | ", info);
     }

@@ -14,6 +14,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event.
+     *
      * @param description Description to be stored in an Event.
      * @param at Event Time.
      */
@@ -24,6 +25,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event.
+     *
      * @param description Description to be stored in an Event.
      * @param isDone Boolean that represents Task completion status.
      * @param at Event Time.
@@ -35,6 +37,7 @@ public class Event extends Task {
 
     /**
      * Returns a string representation of Event.
+     *
      * @return A string representation of Event.
      */
     @Override
@@ -46,10 +49,11 @@ public class Event extends Task {
 
     /**
      * Returns a string formatted for saving purposes.
+     *
      * @return A string representation of Event for saving.
      */
     @Override
-    public String printFormat() {
+    public String printInSaveFormat() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String dateString = at.format(format);
         String[] info = {"E", isDone ? "1" : "0", description, dateString};

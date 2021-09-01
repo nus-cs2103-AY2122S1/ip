@@ -13,6 +13,7 @@ public abstract class Task {
 
     /**
      * Constructor for Task.
+     *
      * @param description Description to be stored in a Task.
      */
     public Task(String description) {
@@ -22,6 +23,7 @@ public abstract class Task {
 
     /**
      * Overloaded Constructor for Task.
+     *
      * @param description Description to be stored in a Task.
      * @param isDone Completion state.
      */
@@ -44,6 +46,7 @@ public abstract class Task {
 
     /**
      * Returns a string representation of Task.
+     *
      * @return A string representation of Task.
      */
     @Override
@@ -53,10 +56,11 @@ public abstract class Task {
 
     /**
      * Checks if the description contains a keyword.
+     *
      * @param keyword Keyword to be searched in the description.
      * @return A boolean representing if the description .
      */
-    public boolean findKeyword(String keyword) {
+    public boolean containsKeyword(String keyword) {
         return description.contains(keyword);
     }
 
@@ -64,5 +68,5 @@ public abstract class Task {
      * Returns a string formatted for saving purposes.
      * @return A string representation of Task for saving.
      */
-    public abstract String printFormat();
+    public abstract String printInSaveFormat();
 }

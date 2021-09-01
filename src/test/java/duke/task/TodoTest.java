@@ -22,6 +22,6 @@ public class TodoTest {
     @Test
     public void saveFormatTest() {
        Task todo = new Todo("do homework", true);
-       assertEquals("T | 1 | do homework", todo.printFormat());
+       assertEquals("T | 1 | do homework", todo.printInSaveFormat());
     }
 }

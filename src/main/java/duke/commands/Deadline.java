@@ -14,6 +14,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline.
+     *
      * @param description Description to be stored in Deadline.
      * @param by Deadline.
      */
@@ -24,6 +25,7 @@ public class Deadline extends Task {
 
     /**
      * Overloaded constructor for Deadline.
+     *
      * @param description Description to be stored.
      * @param isDone Boolean that represents Deadline completion status.
      * @param by Deadline.
@@ -49,7 +51,7 @@ public class Deadline extends Task {
      * @return A string representation of Deadline for saving.
      */
     @Override
-    public String printFormat() {
+    public String printInSaveFormat() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         String dateString = by.format(format);
         String[] info = {"D", isDone ? "1" : "0", description, dateString};

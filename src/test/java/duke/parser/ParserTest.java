@@ -32,7 +32,7 @@ public class ParserTest {
             parser.parse(cmd);
             cmd = "delete 1";
             parser.parse(cmd);
-            assertEquals(0, taskList.count());
+            assertEquals(0, taskList.getLength());
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }

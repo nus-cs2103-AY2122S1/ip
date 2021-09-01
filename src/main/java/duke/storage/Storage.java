@@ -24,6 +24,7 @@ public class Storage {
 
     /**
      * Public constructor of Storage.
+     *
      * @param path Path of text file stored.
      * @param tasks Associated TaskList.
      */
@@ -66,7 +67,7 @@ public class Storage {
             FileWriter writer = new FileWriter(path);
             ArrayList<Task> lst = tasks.getList();
             for (Task task: lst) {
-                writer.write(task.printFormat());
+                writer.write(task.printInSaveFormat());
                 writer.write("\n");
             }
             writer.close();
@@ -76,9 +77,9 @@ public class Storage {
     }
 
     private Task parseTask(String task) {
+        // Format to Parse: T | 0 | description | addInfo
         String[] tokens = task.split(" \\| ");
         Task t = null;
-        // T | 0 | description | addInfo
         boolean isDone = tokens[1].equals("1");
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime timestamp = null;
