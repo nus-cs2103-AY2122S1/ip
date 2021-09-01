@@ -18,9 +18,9 @@ public class Storage {
     private Path folderPath;
     private Path filePath;
 
-    public Storage() {
-        folderPath = Paths.get("data");
-        filePath = Paths.get("data/duke.txt");
+    public Storage(String filePath) {
+        this.filePath = Paths.get(filePath);
+        this.folderPath = this.filePath.getParent();
     }
 
     /**
@@ -45,15 +45,14 @@ public class Storage {
     /**
      * Loads the file and produce it as list.
      *
-     * @param p Path of the file.
      * @return List of task.
      * @throw IOException.
      */
-    public List<Task> load(Path p) throws IOException {
+    public List<Task> load() throws IOException {
         String currContent;
         String[] parts;
         ArrayList<Task> taskList = new ArrayList<>();
-        List<String> fileContents = Files.readAllLines(p);
+        List<String> fileContents = Files.readAllLines(this.filePath);
         for (int i = 0; i< fileContents.size(); i++) {
             currContent = fileContents.get(i);
             parts = currContent.split("\\|");
