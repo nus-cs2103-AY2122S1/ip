@@ -6,23 +6,22 @@ import duke.taskTypes.Task;
 
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+
 
 public class DoneCommand extends Command {
 
-    private final String chosenList;
+    private final String taskChosen;
 
     /**
      * Basic Constructor
      *
      * @param storage Storage object to save
      * @param taskList Tasklist to add task to
-     * @param ui Ui to display msg
-     * @param chosenList contains the string that describes which task to be declared done
+     * @param taskChosen contains the string that describes which task to be declared done
      */
-    public DoneCommand(Storage storage, TaskList taskList, Ui ui, String chosenList) {
-        super(storage, taskList, ui);
-        this.chosenList = chosenList;
+    public DoneCommand(Storage storage, TaskList taskList, String taskChosen) {
+        super(storage, taskList, false);
+        this.taskChosen = taskChosen;
     }
 
     /**
@@ -32,11 +31,16 @@ public class DoneCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public boolean exec() throws DukeException {
-        Task doneTask = taskList.done(chosenList);
-        ui.doneMsg(doneTask);
+    public String exec() throws DukeException {
+        Task doneTask = taskList.done(taskChosen);
         storage.saveUpdate(taskList);
-        return true;
+        return doneMsg(doneTask);
+    }
+
+    private String doneMsg(Task task) {
+        String msg = task.toString();
+        String dukeAdded = "Nice! I've marked this task as done:" + msg;
+        return dukeAdded;
     }
 
 }

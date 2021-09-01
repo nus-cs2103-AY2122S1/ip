@@ -152,31 +152,27 @@ public class TaskList {
      *
      * @return String array that contains the details
      */
-    public String[] getList() {
+    public String getList() {
         if (mapper.size() == 0) {
-            return new String[]{"Empty List"};
+            return "Empty List";
         }
-        int maxLen = 0;
         Collection<Task> values = mapper.values();
         Iterator<Task> look = values.iterator();
-        String[] check = new String[mapper.size()];;
+        String check = "";
         int pos = 0;
         while (look.hasNext()){
             String listPos = pos+1 + ". ";
-            check[pos] = listPos + look.next().toString();
-            maxLen = Math.max(maxLen, check[pos].length());
+            check = check + listPos + look.next().toString() +"\n";
             pos++;
         }
-        listLen = maxLen;
         return check;
     }
 
-    public String[] find(String key) {
+    public String find(String key) {
 
         Collection<Task> values = mapper.values();
         Iterator<Task> look = values.iterator();
-        List<String> keyFound = new ArrayList<>();
-
+        String keyFound = "";
         Pattern p = Pattern.compile(key);
 
         int pos = 1;
@@ -187,11 +183,11 @@ public class TaskList {
 
             if (m.find()) {
                 String taskDisplay = pos + ". " + curr.toString();
-                keyFound.add(taskDisplay);
-                pos++;
+                keyFound = keyFound + taskDisplay + "\n";
             }
+            pos++;
         }
-        return keyFound.toArray(keyFound.toArray(new String[0]));
+        return keyFound;
     }
 
     /**
@@ -212,13 +208,5 @@ public class TaskList {
         return check;
     }
 
-    /**
-     * Retyrns the number of task currently in the list
-     *
-     * @return int
-     */
-    public int listMaxLen() {
-        return listLen;
-    }
 
 }

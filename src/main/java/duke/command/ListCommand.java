@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+
 
 
 public class ListCommand  extends Command{
@@ -16,8 +16,8 @@ public class ListCommand  extends Command{
      * @param taskList Tasklist to add task to
      * @param ui Ui to display msg
      */
-    public ListCommand(Storage storage, TaskList taskList, Ui ui){
-        super(storage, taskList, ui);
+    public ListCommand(Storage storage, TaskList taskList){
+        super(storage, taskList, false);
     }
 
     /**
@@ -27,9 +27,7 @@ public class ListCommand  extends Command{
      * @throws DukeException
      */
     @Override
-    public boolean exec() throws DukeException {
-        String[] listOutput = taskList.getList();
-        ui.listMsg(listOutput, taskList);
-        return true;
+    public String exec() throws DukeException {
+        return taskList.getList();
     }
 }
