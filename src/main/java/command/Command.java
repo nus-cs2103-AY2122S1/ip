@@ -24,13 +24,14 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command with the given input.
+     * Returns the proper response according to the given input.
      * This is an abstract method.
      *
      * @param list The list of tasks to be modified by the command.
      * @param ui The UI of Duke to be invoked by the command.
+     * @return A response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
-    public abstract void execute(TaskList list, UserInterface ui) throws DukeException;
+    public abstract String execute(TaskList list, UserInterface ui) throws DukeException;
 
 }

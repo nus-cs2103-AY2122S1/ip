@@ -19,13 +19,14 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Executes the list command with the given input.
+     * Returns the proper response according to the given input.
      *
      * @param list The list of tasks to be modified by the command.
      * @param ui The UI of Duke to be invoked by the command.
+     * @return A response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
-    public void execute(TaskList list, UserInterface ui) {
+    public String execute(TaskList list, UserInterface ui) {
 
         String tasks = "";
         for (int i = 0; i < list.getSize(); i++) {
@@ -36,8 +37,6 @@ public class ListCommand extends Command {
                     + "\n";
         }
 
-        System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                + tasks
-                + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+        return ui.showTaskList(tasks);
     }
 }

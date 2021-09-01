@@ -21,13 +21,14 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Executes the done command with the given input.
+     * Returns the proper response according to the given input.
      *
      * @param list The list of tasks to be modified by the command.
      * @param ui The UI of Duke to be invoked by the command.
+     * @return A response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
-    public void execute(TaskList list, UserInterface ui) throws DukeException {
+    public String execute(TaskList list, UserInterface ui) throws DukeException {
         try {
 
             int index = Integer.parseInt(input.substring(5)) - 1;
@@ -35,12 +36,7 @@ public class DoneCommand extends Command {
             newTask.markAsDone();
             list.setTask(index, newTask);
             Storage.save(list);
-
-            System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                    + "Great! I've marked the following task as done:\n"
-                    + list.getTask(index).getTaskState()
-                    + "\n"
-                    + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+            return ui.showTaskDone(list.getTask(index).getTaskState());
 
         } catch (NumberFormatException e) {
             throw new DukeException(

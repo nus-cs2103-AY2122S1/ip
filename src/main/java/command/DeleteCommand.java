@@ -21,13 +21,14 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes the delete command with the given input.
+     * Returns the proper response according to the given input.
      *
      * @param list The list of tasks to be modified by the command.
      * @param ui The UI of Duke to be invoked by the command.
+     * @return A response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
-    public void execute(TaskList list, UserInterface ui) throws DukeException {
+    public String execute(TaskList list, UserInterface ui) throws DukeException {
         try {
 
             int index = Integer.parseInt(input.substring(7)) - 1;
@@ -35,13 +36,7 @@ public class DeleteCommand extends Command {
             list.removeTask(index);
             Storage.save(list);
 
-            System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n"
-                    + "Noted. I've removed the following task:\n"
-                    + (index + 1)
-                    + ". "
-                    + removedTask.getTaskState()
-                    + "\n"
-                    + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
+            return ui.showTaskDeleted("" + (index + 1) + ". " + removedTask.getTaskState());
 
         } catch (NumberFormatException e) {
             throw new DukeException("It looks like you did not enter a valid integer for the \"delete\" command. Please try again!");

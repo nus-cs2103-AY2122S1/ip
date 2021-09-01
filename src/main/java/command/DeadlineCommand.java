@@ -24,13 +24,14 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Executes the deadline command with the given input.
+     * Returns the proper response according to the given input.
      *
      * @param list The list of tasks to be modified by the command.
      * @param ui The UI of Duke to be invoked by the command.
+     * @return A response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
-    public void execute(TaskList list, UserInterface ui) throws DukeException {
+    public String execute(TaskList list, UserInterface ui) throws DukeException {
 
         int position = input.indexOf("/by");
         String newTask = input.substring(9, position);
@@ -44,7 +45,7 @@ public class DeadlineCommand extends Command {
                 LocalDateTime time = LocalDateTime.parse(newTime.trim(), inputFormatter);
                 list.addTask(new DeadlineTask(newTask, time));
                 Storage.save(list);
-                UserInterface.showTaskAdded(newTask, 2, list.getSize() - 1, newTime.trim());
+                return ui.showTaskAdded(newTask, 2, list.getSize() - 1, newTime.trim());
             } catch (DateTimeParseException e) {
                 throw new DukeException(
                         "Your time format is wrong. Please enter the time in the format DD/MM/YYYY HHMM and try again!");
