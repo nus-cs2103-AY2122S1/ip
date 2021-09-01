@@ -4,10 +4,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 
-public class Duke {
+public class Duke{
     private FileUpdater fileUpdater;
     private TaskList tasks;
     private Ui ui;
+    private GUI gui;
 
     /**
      * Constructor for Duke class
@@ -16,12 +17,21 @@ public class Duke {
     public Duke(String filePath){
         tasks = new TaskList();
         ui = new Ui(tasks);
+        gui = new GUI(tasks);
         try {
             File f = new File(filePath);
             this.fileUpdater = new FileUpdater(f, tasks);
         } catch (FileNotFoundException e){
             fileUpdater.showError();
         }
+    }
+
+    public GUI getGui(){
+        return gui;
+    }
+
+    public FileUpdater getFileUpdater() {
+        return fileUpdater;
     }
 
     /**

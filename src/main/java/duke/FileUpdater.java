@@ -24,7 +24,6 @@ public class FileUpdater {
         if (!f.exists()) {
             throw new FileNotFoundException("file does not exist!");
         }
-
     }
 
     /**
@@ -58,18 +57,19 @@ public class FileUpdater {
      */
     public void updateLine(String s){
         String fs = "";
+        String ans = "";
         boolean isCompleted = false;
         if(findFirstSection(cut(s)).equals("1")) isCompleted = true;
 
         if(s.charAt(0) == 'T'){
             fs = "todo " + (cut(cut(s)));
-            lst.addTodo(fs, isCompleted);
+            ans = lst.addTodo(fs, isCompleted);
         } else if(s.charAt(0) == 'E'){
             fs = "event " + findFirstSection(cut(cut(s))) + " /at " + (cut(cut(cut(s))));
-            lst.addEvent(fs, isCompleted);
+            ans =lst.addEvent(fs, isCompleted);
         } else if(s.charAt(0) == 'D'){
             fs = "deadline " + findFirstSection(cut(cut(s))) + " /by " + (cut(cut(cut(s))));
-            lst.addDeadline(fs, isCompleted);
+            ans = lst.addDeadline(fs, isCompleted);
         }
     }
 
