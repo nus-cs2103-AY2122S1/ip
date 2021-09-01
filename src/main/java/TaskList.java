@@ -37,4 +37,8 @@ public class TaskList {
         }
         return null;
     }
+
+    public List<Task> getTasks() {
+        return taskList;
+    }
 }
