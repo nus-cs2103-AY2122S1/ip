@@ -33,9 +33,12 @@ public class TaskList {
      * Marks a specified task in the TaskList as done.
      *
      * @param taskNumber The task number that is used to specify which task to mark as done.
+     * @return A String containing the message to be shown to the user when a task is
+     * marked as done.
      */
     public String markDone(int taskNumber) {
         String message = "";
+
         try {
             Task completedTask = tasks.get(taskNumber);
             completedTask.markDone();
@@ -49,9 +52,13 @@ public class TaskList {
     /**
      * Prints the entire TaskList if the TaskList is not empty. If the TaskList is empty,
      * a message that informs the user that they do not have any tasks is printed.
+     *
+     * @return A String of the list of tasks in the task list. If the user does not have
+     * tasks, the String returned will inform the user accordingly.
      */
     public String listTasks() {
         StringBuilder message = new StringBuilder();
+
         if (!tasks.isEmpty()) {
             message.append("Here are the tasks in your list:");
             for (int i = 0; i < tasks.size(); i++) {
@@ -70,6 +77,8 @@ public class TaskList {
      * Adds a specified Task into the TaskList.
      *
      * @param task The specified Task to add into the TaskList.
+     * @return A String containing the message to be shown to the user when a task
+     * is added into the task list.
      */
     public String addTask(Task task) {
         tasks.add(task);
@@ -80,6 +89,8 @@ public class TaskList {
      * Deletes a specified Task from the TaskList.
      *
      * @param taskNumber The task number of the Task that is to be deleted.
+     * @return A String containing the message to be shown to the user when a task
+     * is removed from the task list.
      */
     public String deleteTask(int taskNumber) {
         try {
@@ -95,10 +106,12 @@ public class TaskList {
      * Prints all the Tasks in the taskList that contain the specified keyword.
      *
      * @param keyword The keyword specified by the user to search for.
+     * @return A String of the list of tasks found using the keyword.
      */
     public String findTask(String keyword) {
         boolean canFindMatch = false;
         StringBuilder message = new StringBuilder();
+
         for (int i = 0; i < tasks.size(); i++) {
             String currentTask = tasks.get(i).toString();
             if (currentTask.substring(7).matches("(?i)(.*)" + keyword + "(.*)")) {

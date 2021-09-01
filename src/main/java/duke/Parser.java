@@ -28,11 +28,9 @@ public class Parser {
 
     /**
      * Reads the user commands and executes the commands accordingly.
-     * Messages will be printed if the user enters invalid commands.
      *
      * @param command The user command to be read.
-     * @return If the user does not exit the program, the integer 0 will be returned.
-     * Else if the user does exit the program, the integer 1 will be returned.
+     * @return A String containing the message to be shown to the user.
      * @throws DukeException If the user enters an invalid input command, a DukeException
      * will be thrown.
      */

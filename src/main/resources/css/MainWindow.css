@@ -1,0 +1,40 @@
+.button {
+    -fx-background-color: "#2E2D2D";
+    -fx-text-fill: white;
+}
+
+VBox {
+    -fx-background-color: "#121212";
+}
+
+Hbox {
+    -fx-background-color: "#2E2D2D"
+}
+
+.scroll-pane {
+    -fx-background-color: "#121212";
+}
+
+.scroll-pane {
+    -fx-background-color: black;
+}
+
+.scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: white;
+    -fx-background-radius: 5em;
+}

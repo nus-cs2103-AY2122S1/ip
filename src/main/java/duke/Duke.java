@@ -29,6 +29,9 @@ public class Duke {
         tasks = storage.load();
     }
 
+    /**
+     * Used to run Duke using the CLI.
+     */
     private void run() {
         //Welcome message
         ui.printWelcomeMessage();
@@ -59,7 +62,12 @@ public class Duke {
         sc.close();
     }
 
-
+    /**
+     * Used by JavaFX to process the user's commands and execute accordingly.
+     *
+     * @param command The command input by the user.
+     * @return A String containing the message to be shown to the user in the GUI.
+     */
     public String getResponse(String command) {
         Parser parser = new Parser(tasks);
 
