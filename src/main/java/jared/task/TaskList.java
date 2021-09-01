@@ -31,7 +31,7 @@ public class TaskList {
      * @param next Full user input string.
      * @throws DukeException If user input command is invalid.
      */
-    public void add(String command, String next) throws DukeException {
+    public String add(String command, String next) throws DukeException {
         Task newTask;
         String desc;
         String dateStr;
@@ -98,19 +98,19 @@ public class TaskList {
         tasks.add(newTask);
         storage.saveData(tasks);
 
-        System.out.println(String.format("Got it. I've added this task:\n"
+        return String.format("Got it. I've added this task:\n"
                         + "%s\nNow you have %d tasks in the list.",
-                newTask, tasks.size())
+                newTask, tasks.size()
         );
     }
 
     /**
      * Lists the tasks.
      */
-    public void list() {
+    public String list() {
         String res = "Here are the tasks in your list:\n";
         String tasksStr = listTasks(this.tasks);
-        System.out.println(res + tasksStr);
+        return (res + tasksStr);
     }
 
     /**
@@ -118,7 +118,7 @@ public class TaskList {
      * @param next Full user input string.
      * @throws DukeException If task is invalid.
      */
-    public void done(String next) throws DukeException {
+    public String done(String next) throws DukeException {
         int taskNum;
         Task currTask;
 
@@ -134,7 +134,7 @@ public class TaskList {
 
         String res = String.format("Nice! I've marked this task as done:\n%s",
                 currTask);
-        System.out.println(res);
+        return res;
     }
 
     /**
@@ -142,7 +142,7 @@ public class TaskList {
      * @param next Full user input string.
      * @throws DukeException If task is invalid.
      */
-    public void delete(String next) throws DukeException {
+    public String delete(String next) throws DukeException {
         int taskNum;
         Task currTask;
         int index;
@@ -155,7 +155,7 @@ public class TaskList {
         }
         tasks.remove(index);
         storage.saveData(tasks);
-        System.out.println(String.format("Noted. I've removed this task:\n"
+        return (String.format("Noted. I've removed this task:\n"
                 + "%s\nNow you have %d tasks in the list.",
                 currTask.toString(), tasks.size()));
     }
@@ -178,7 +178,7 @@ public class TaskList {
      * Finds the task from keyword.
      * @param next User input string.
      */
-    public void find(String next) {
+    public String find(String next) {
         String word = next.split(" ")[1];
         ArrayList<Task> matchedTasks = new ArrayList<>();
         String findMessage = "Here are the matching tasks in your list:\n";
@@ -188,6 +188,6 @@ public class TaskList {
                 matchedTasks.add(task);
             }
         }
-        System.out.println(findMessage + listTasks(matchedTasks));
+        return (findMessage + listTasks(matchedTasks));
     }
 }

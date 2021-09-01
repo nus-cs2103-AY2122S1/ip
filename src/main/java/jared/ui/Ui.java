@@ -38,30 +38,28 @@ public class Ui {
     /**
      * Starts the scanner to scan for tasks from user.
      */
-    public void runScanner(TaskList tasks) {
-        while (scan.hasNextLine()) {
-            String next = scan.nextLine();
-            String command = Parser.parseCommand(next);
+    public String runLogic(String input, TaskList tasks) {
+        String command = Parser.parseCommand(input);
 
-            try {
-                if (command.equals("bye")) {
-                    showExitMessage();
-                    System.exit(0);
-                    scan.close();
-                } else if (command.equals("list")) {
-                    tasks.list();
-                } else if (command.equals("done")) {
-                    tasks.done(next);
-                } else if (command.equals("delete")) {
-                    tasks.delete(next);
-                } else if (command.equals("find")) {
-                    tasks.find(next);
-                } else {
-                    tasks.add(command, next);
-                }
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
+        try {
+            if (command.equals("bye")) {
+                showExitMessage();
+                System.exit(0);
+                scan.close();
+            } else if (command.equals("list")) {
+                return tasks.list();
+            } else if (command.equals("done")) {
+                return tasks.done(input);
+            } else if (command.equals("delete")) {
+                return tasks.delete(input);
+            } else if (command.equals("find")) {
+                return tasks.find(input);
+            } else {
+                return tasks.add(command, input);
             }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
+        return "Error";
     }
 }
