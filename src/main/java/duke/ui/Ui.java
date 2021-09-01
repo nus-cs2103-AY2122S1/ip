@@ -10,7 +10,7 @@ import duke.data.TaskList;
  * @version Duke Level-9
  */
 public class Ui {
-    TaskList tasks;
+    private TaskList tasks;
 
     /**
      * Public constructor for Ui.

@@ -1,16 +1,20 @@
 package duke.storage;
 
-import duke.commands.Deadline;
-import duke.commands.Task;
-import duke.commands.Todo;
-import duke.commands.Event;
-import duke.data.TaskList;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.Task;
+import duke.commands.Todo;
+import duke.data.TaskList;
 
 /**
  * Encapsulates a Storage object that handles loading and saving of Tasks.
@@ -84,25 +88,26 @@ public class Storage {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
         LocalDateTime timestamp = null;
         switch (tokens[0]) {
-            case "T":
-                t = new Todo(tokens[2], isDone);
-                break;
-            case "D":
-                try {
-                    timestamp = LocalDateTime.parse(tokens[3], format);
-                    t = new Deadline(tokens[2], isDone, timestamp);
-                } catch (DateTimeParseException e) {
-                    System.out.println("Error parsing task from saved file");
-                }
-                break;
-            case "E":
-                try {
-                    timestamp = LocalDateTime.parse(tokens[3], format);
-                    t = new Event(tokens[2], isDone, timestamp);
-                } catch (DateTimeParseException e) {
-                    System.out.println("Error parsing task from saved file");
-                }
-                break;
+        case "T":
+            t = new Todo(tokens[2], isDone);
+            break;
+        case "D":
+            try {
+                timestamp = LocalDateTime.parse(tokens[3], format);
+                t = new Deadline(tokens[2], isDone, timestamp);
+            } catch (DateTimeParseException e) {
+                System.out.println("Error parsing task from saved file");
+            }
+            break;
+        case "E":
+            try {
+                timestamp = LocalDateTime.parse(tokens[3], format);
+                t = new Event(tokens[2], isDone, timestamp);
+            } catch (DateTimeParseException e) {
+                System.out.println("Error parsing task from saved file");
+            }
+            break;
+        default:
         }
         return t;
     }
