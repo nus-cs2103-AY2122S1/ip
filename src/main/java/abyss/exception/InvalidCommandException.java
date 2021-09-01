@@ -5,7 +5,7 @@ package abyss.exception;
  */
 public class InvalidCommandException extends AbyssException {
     /**
-     * Constructor for InvalidCommandException.
+     * Constructs an InvalidCommandException.
      *
      * @param message Error message.
      */

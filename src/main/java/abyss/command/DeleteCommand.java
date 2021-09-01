@@ -13,8 +13,8 @@ public class DeleteCommand implements Command {
 
     protected DeleteCommand(String content) throws InvalidCommandException {
         if (!content.matches(DELETE_REGEX)) {
-            throw new InvalidCommandException("Command 'delete' should be followed by " +
-                    "the index of the task piece.");
+            throw new InvalidCommandException("Command 'delete' should be followed by "
+                                                  + "the index of the task piece.");
         }
 
         if (Abyss.getNumberOfTasks() == 0) {
@@ -24,8 +24,8 @@ public class DeleteCommand implements Command {
 
         int i = Integer.parseInt(content);
         if (i < 1 || i > Abyss.getNumberOfTasks()) {
-            throw new InvalidCommandException("Index should be positive and not more than " +
-                    Abyss.getNumberOfTasks());
+            throw new InvalidCommandException("Index should be positive and not more than "
+                                                  + Abyss.getNumberOfTasks());
         }
 
         this.index = i;

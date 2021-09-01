@@ -5,7 +5,7 @@ package abyss.exception;
  */
 public class LoadTaskException extends AbyssException {
     /**
-     * Constructor for LoadTaskException.
+     * Constructs a LoadTaskException.
      *
      * @param message Error message.
      */

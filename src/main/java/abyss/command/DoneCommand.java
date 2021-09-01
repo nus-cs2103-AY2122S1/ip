@@ -13,8 +13,8 @@ public class DoneCommand implements Command {
 
     protected DoneCommand(String content) throws InvalidCommandException {
         if (!content.matches(DONE_REGEX)) {
-            throw new InvalidCommandException("Command 'done' should be followed by " +
-                    "the index of the task piece.");
+            throw new InvalidCommandException("Command 'done' should be followed by "
+                                                  + "the index of the task piece.");
         }
 
         if (Abyss.getNumberOfTasks() == 0) {
@@ -24,8 +24,8 @@ public class DoneCommand implements Command {
 
         int i = Integer.parseInt(content);
         if (i < 1 || i > Abyss.getNumberOfTasks()) {
-            throw new InvalidCommandException("Index should be positive and not more than " +
-                    Abyss.getNumberOfTasks());
+            throw new InvalidCommandException("Index should be positive and not more than "
+                                                  + Abyss.getNumberOfTasks());
         }
 
         this.index = i;

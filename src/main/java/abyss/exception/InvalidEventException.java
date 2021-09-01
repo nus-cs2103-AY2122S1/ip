@@ -5,10 +5,10 @@ package abyss.exception;
  */
 public class InvalidEventException extends InvalidCommandException {
     /**
-     * Constructor for InvalidEventException.
+     * Constructs an InvalidEventException.
      */
     public InvalidEventException() {
-        super("Description and date of a 'event' task piece " +
-                "cannot be empty.");
+        super("Description and date of a 'event' task piece "
+                  + "cannot be empty.");
     }
 }

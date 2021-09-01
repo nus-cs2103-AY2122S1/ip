@@ -1,14 +1,14 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import abyss.Ui;
 import abyss.command.Parser;
-import abyss.command.TodoCommand;
 import abyss.exception.InvalidCommandException;
 import abyss.exception.InvalidTodoException;
 import abyss.task.Task;
 import abyss.task.TaskList;
 import abyss.task.ToDo;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AbyssTest {
     @Test

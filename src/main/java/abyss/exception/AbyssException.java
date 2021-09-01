@@ -5,7 +5,7 @@ package abyss.exception;
  */
 public class AbyssException extends Exception {
     /**
-     * Constructor for AbyssException.
+     * Constructs an AbyssException.
      *
      * @param message Error message.
      */

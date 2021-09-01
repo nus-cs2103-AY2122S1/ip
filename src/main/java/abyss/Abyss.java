@@ -1,14 +1,23 @@
 package abyss;
 
-import abyss.command.*;
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+import java.util.Scanner;
+
+import abyss.command.Command;
+import abyss.command.DeadlineCommand;
+import abyss.command.DeleteCommand;
+import abyss.command.DoneCommand;
+import abyss.command.EventCommand;
+import abyss.command.ExitCommand;
+import abyss.command.FindCommand;
+import abyss.command.ListCommand;
+import abyss.command.Parser;
+import abyss.command.TodoCommand;
 import abyss.exception.AbyssException;
 import abyss.exception.LoadTaskException;
 import abyss.task.Task;
 import abyss.task.TaskList;
-
-import java.io.IOException;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
  * The Abyss is an application which keeps track of tasks, allowing users to
@@ -20,7 +29,7 @@ public class Abyss {
     private static Storage storage;
     private static final String FILE_PATH = "./data/abyss.txt";
     private static final String[] START_MESSAGES = {"Hello beautiful. Welcome to the Abyss.",
-            "What can we do for you today?"};
+        "What can we do for you today?"};
     private static final String EXIT_MESSAGE = "Exiting the Abyss. We look forward to your return.";
 
     /**
@@ -73,7 +82,7 @@ public class Abyss {
                 } else if (cmd.getClass() == FindCommand.class) {
                     FindCommand find = (FindCommand) cmd;
                     tasks.find(find.getKeyword());
-                }  else if (cmd.getClass() == ListCommand.class) {
+                } else if (cmd.getClass() == ListCommand.class) {
                     tasks.list();
                 } else if (cmd.getClass() == ExitCommand.class) {
                     Ui.reply(EXIT_MESSAGE);

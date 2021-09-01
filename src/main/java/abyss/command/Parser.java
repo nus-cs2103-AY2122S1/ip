@@ -1,6 +1,5 @@
 package abyss.command;
 
-import abyss.command.*;
 import abyss.exception.InvalidCommandException;
 
 /**

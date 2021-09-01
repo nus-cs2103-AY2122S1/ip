@@ -44,5 +44,5 @@ public abstract class Task {
      *
      * @return Formatted task details.
      */
-    abstract public String toFileEntry();
+    public abstract String toFileEntry();
 }

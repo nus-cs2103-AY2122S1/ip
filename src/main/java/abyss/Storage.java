@@ -1,14 +1,14 @@
 package abyss;
 
-import abyss.exception.LoadTaskException;
-import abyss.task.Task;
-import abyss.task.TaskList;
-
-import java.io.IOException;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.BufferedReader;
+import java.io.IOException;
+
+import abyss.exception.LoadTaskException;
+import abyss.task.Task;
+import abyss.task.TaskList;
 
 /**
  * Represents a storage file which stores user tasks.
@@ -18,7 +18,7 @@ public class Storage {
     private File file;
 
     /**
-     * Constructor for Storage.
+     * Constructs a Storage.
      *
      * @param filePath File path of the storage file.
      */

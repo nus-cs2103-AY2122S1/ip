@@ -5,7 +5,7 @@ package abyss.task;
  */
 public class ToDo extends Task {
     /**
-     * Constructor for to-do.
+     * Constructs a to-do.
      *
      * @param description Description of the to-do.
      */

@@ -5,10 +5,10 @@ package abyss.exception;
  */
 public class InvalidDeadlineException extends InvalidCommandException {
     /**
-     * Constructor for InvalidDeadlineException.
+     * Constructs an InvalidDeadlineException.
      */
     public InvalidDeadlineException() {
-        super("Description and date of a 'deadline' task piece " +
-                "cannot be empty.");
+        super("Description and date of a 'deadline' task piece "
+                  + "cannot be empty.");
     }
 }
