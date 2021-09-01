@@ -25,6 +25,11 @@ public class Duke {
         }
     }
 
+    //for GUI
+    String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
+
     /**
      * Runs program
      */
