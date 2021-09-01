@@ -1,5 +1,6 @@
 # Duke
 > “Your mind is for having ideas, not holding them.” – David Allen
+
 Duke is an application that allows you to manage your tasks more efficiently!!! 😄
 
 * Text-based
