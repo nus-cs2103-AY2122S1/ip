@@ -11,7 +11,7 @@ public abstract class Command {
      * @param ui <code>Ui</code> responsible for user interactions
      * @param storage <code>Storage</code> responsible for saving tasks to drive
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Returns true if <code>Command</code> is <code>ByeCommand</code> false otherwise

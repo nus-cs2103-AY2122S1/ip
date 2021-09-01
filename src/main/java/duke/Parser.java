@@ -32,6 +32,10 @@ public class Parser {
         } else if (lowerCaseInput.equals("list")) {
             return new ListCommand();
         } else if (lowerCaseInput.equals("done")) {
+            if (inputArr.length < 2) {
+                DukeException exception = new DukeException("Please enter a number!");
+                throw exception;
+            }
             int index = Integer.parseInt(inputArr[1]);
             return new DoneCommand(index);
         } else if (lowerCaseInput.equals("todo")) {
@@ -82,9 +86,17 @@ public class Parser {
                 return new AddEventCommand(event);
             }
         } else if (lowerCaseInput.equals("delete")) {
+            if (inputArr.length < 2) {
+                DukeException exception = new DukeException("Please enter a number!");
+                throw exception;
+            }
             int index = Integer.parseInt(inputArr[1]);
             return new DeleteCommand(index);
         } else if (lowerCaseInput.equals("get")) {
+            if (inputArr.length < 2) {
+                DukeException exception = new DukeException("Please enter a date!");
+                throw exception;
+            }
             String[] dateArr = inputArr[1].split("-");
             int year = Integer.parseInt(dateArr[0]);
             int month = Integer.parseInt(dateArr[1]);
@@ -96,6 +108,10 @@ public class Parser {
             LocalDate newDate = LocalDate.of(year, month, day);
             return new GetCommand(newDate);
         } else if (lowerCaseInput.equals("find")) {
+            if (inputArr.length < 2) {
+                DukeException exception = new DukeException("Please enter a description!");
+                throw exception;
+            }
             String matchString = inputArr[1];
             return new FindCommand(matchString);
         } else {

@@ -10,15 +10,16 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> savedTasks = tasks.getTasks();
+        String message = "Here are the matching tasks in your list:\n";
         int counter = 1;
-        System.out.println("Here are the matching tasks in your list:");
         for (Task i : savedTasks) {
             if (i.getBody().contains(this.sequence)) {
-                System.out.println(counter + ". " + i);
+                message += counter + ". " + i + "\n";
                 counter++;
             }
         }
+        return message;
     }
 }

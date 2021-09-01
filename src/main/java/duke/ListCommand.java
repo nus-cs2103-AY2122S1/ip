@@ -14,18 +14,20 @@ public class ListCommand extends Command {
      * @param storage <code>Storage</code> responsible for saving tasks to drive
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> savedTasks = tasks.getTasks();
+        String message = "";
         if (savedTasks.size() == 0) {
-            System.out.println("No tasks in your list! Add one using todo, deadline or event!");
+            return "No tasks in your list! Add one using todo, deadline or event!";
         }
         else {
-            System.out.println("Here are the tasks in your list:");
+            message += "Here are the tasks in your list:\n";
             for (int i = 0; i < savedTasks.size(); i++) {
                 Task currTask = savedTasks.get(i);
                 int index = i + 1;
-                System.out.println(index + ". " + currTask);
+                message += index + ". " + currTask + "\n";
             }
         }
+        return message;
     }
 }

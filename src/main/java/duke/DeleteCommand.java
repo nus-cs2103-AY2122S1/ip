@@ -23,16 +23,19 @@ public class DeleteCommand extends Command {
      * @param storage <code>Storage</code> responsible for saving tasks to drive
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> savedTasks = tasks.getTasks();
+        String message = "";
         if (this.index > savedTasks.size() || this.index < 1) {
             DukeException exception = new DukeException("Number out of range!");
             System.out.println(exception);
+            return exception.getMessage();
         } else {
             Task removedTask = savedTasks.get(this.index-1);
             tasks.deleteTask(this.index-1);
-            System.out.println("Alright! I've removed this task:\n" + removedTask);
-            System.out.println(String.format("Now you have %d tasks left in the list!", savedTasks.size()));
+            message += "Alright! I've removed this task:\n" + removedTask;
+            message += String.format("\nNow you have %d tasks left in the list!", savedTasks.size());
+            return message;
         }
     }
 }

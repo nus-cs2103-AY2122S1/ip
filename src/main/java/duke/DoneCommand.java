@@ -23,16 +23,19 @@ public class DoneCommand extends Command {
      * @param storage <code>Storage</code> responsible for saving tasks to drive
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> savedTasks = tasks.getTasks();
+        String message = "";
         if (this.index > savedTasks.size() || this.index < 1) {
             DukeException exception = new DukeException("Number out of range!");
             System.out.println(exception);
+            return exception.getMessage();
         } else {
             Task oldTask = savedTasks.get(this.index-1);
             Task newTask = oldTask.setDone();
             tasks.replaceTask(this.index-1, newTask);
-            System.out.println("Nice! I've marked this task as done:\n" + newTask);
+            message += "Nice! I've marked this task as done:\n" + newTask;
+            return message;
         }
     }
 }

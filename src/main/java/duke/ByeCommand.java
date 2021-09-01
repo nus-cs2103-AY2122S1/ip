@@ -12,8 +12,8 @@ public class ByeCommand extends Command {
      * @param storage <code>Storage</code> responsible for saving tasks to drive
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Bye! Hope to see you again soon!");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "Bye! Hope to see you again soon!";
     }
 
     /**
