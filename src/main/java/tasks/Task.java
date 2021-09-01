@@ -17,6 +17,11 @@ public class Task {
         this.isDone = false;
     }
 
+    /**
+     * Get the description of the task.
+     * 
+     * @return Task description.
+     */
     public String getDescription() {
         return this.description;
     }
@@ -50,7 +55,7 @@ public class Task {
      * @return The string representation.
      */
     public String toSaveInHardDisk() {
-        return "";
+        return "Placeholder"; // tobe fixed later
     }
 
     @Override

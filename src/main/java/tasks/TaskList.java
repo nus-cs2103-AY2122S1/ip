@@ -31,6 +31,7 @@ public class TaskList {
      * Add a task to the list
      *
      * @param task The added task.
+     * @return The result of the operation.
      */
     public String addTask(Task task) {
         tasks.add(task);
@@ -110,13 +111,13 @@ public class TaskList {
      *
      * @return Size of the task list.
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 
     @Override
     public String toString() {
-        if (this.size() == 0) {
+        if (this.getSize() == 0) {
             return "There is no task in the list";
         } else {
             StringBuilder res = new StringBuilder("Here are the tasks in your list:\n");

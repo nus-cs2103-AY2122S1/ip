@@ -6,7 +6,7 @@ import duke.Ui;
  */
 public class Duke {
     public static void main(String[] args) {
-        Ui.greetings();
+        Ui.sendGreetings();
         Parser parser = new Parser();
         parser.start();
     }

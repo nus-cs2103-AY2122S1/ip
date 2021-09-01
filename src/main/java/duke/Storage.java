@@ -25,7 +25,6 @@ public class Storage {
      *
      * @param tasks The task list to be saved.
      */
-
     public static void saveTaskListToHardDisk(ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(FILEPATH);
@@ -51,9 +50,9 @@ public class Storage {
     public static ArrayList<Task> loadTaskListFromHardDisk() throws IOException {
         File dir = new File(DIRECTORY);
         File logs = new File(FILEPATH);
-        ArrayList<Task> result = new ArrayList<>();
+        ArrayList<Task> results = new ArrayList<>();
         try {
-            result = parseSavedTaskList(logs);
+            results = parseSavedTaskList(logs);
         } catch (FileNotFoundException e) {
             if (!dir.exists()) {
                 dir.mkdirs();
@@ -66,7 +65,7 @@ public class Storage {
             logs.createNewFile();
             Ui.displayContent("There's an error with the save file, the saved task list is deleted");
         }
-        return result;
+        return results;
     }
 
     private static ArrayList<Task> parseSavedTaskList(File logs)

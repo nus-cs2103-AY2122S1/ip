@@ -1,7 +1,11 @@
 package duke;
 
 import org.junit.jupiter.api.Test;
-import tasks.*;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.ToDo;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class StorageTest {
     @Test
-    public void checkIfSavedFileExist() {
+    public void saveFileTest() {
         ArrayList<Task> saved = new ArrayList<>();
         try {
             Storage.loadTaskListFromHardDisk();

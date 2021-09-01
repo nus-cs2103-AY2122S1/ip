@@ -4,8 +4,10 @@ package duke;
  * Utility to help deals with interactions with the user
  */
 public class Ui {
-
-    public static void greetings() {
+    /**
+     * Greet the user.
+     */
+    public static void sendGreetings() {
         String logo = "\t  ____        _        \n"
                 + "\t |  _ \\ _   _| | _____ \n"
                 + "\t | | | | | | | |/ / _ \\\n"

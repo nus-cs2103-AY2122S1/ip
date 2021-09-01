@@ -1,9 +1,9 @@
 package duke;
 
-import tasks.ToDo;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.TaskList;
+import tasks.ToDo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -35,9 +35,9 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeInvalidCommandException("OOPS!!! The task number you type in is not a number.");
         }
-        if (parsedNumber < 0 || parsedNumber > taskList.size()) {
+        if (parsedNumber < 0 || parsedNumber > taskList.getSize()) {
             throw new DukeInvalidCommandException("OOPS!!! The task number should be between 0 and "
-                    + taskList.size() + ".");
+                    + taskList.getSize() + ".");
         }
         return parsedNumber;
     }
@@ -61,7 +61,7 @@ public class Parser {
         }
         int taskIndex = parseTaskIndex(parsedInput[1]);
         // where to properly handle this?
-        if (taskList.size() == 0) {
+        if (taskList.getSize() == 0) {
             throw new DukeInvalidCommandException("OOPS!!! The task list is currently empty.");
         }
         Ui.displayContentBetweenLines(taskList.markTaskAsDone(taskIndex));
@@ -114,7 +114,7 @@ public class Parser {
         }
         int taskIndex = parseTaskIndex(parsedInput[1]);
 
-        if (taskList.size() == 0) {
+        if (taskList.getSize() == 0) {
             throw new DukeInvalidCommandException("OOPS!!! The task list is currently empty.");
         }
         Ui.displayContentBetweenLines(taskList.delete(taskIndex));
