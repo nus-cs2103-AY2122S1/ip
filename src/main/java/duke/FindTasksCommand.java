@@ -13,13 +13,13 @@ public class FindTasksCommand implements ICommand {
     }
 
     @Override
-    public void execute(TaskManager tm, Ui ui, Storage storage) {
+    public void execute(TaskManager tm, ResponseManager responseManager, Storage storage) {
         ArrayList<Task> originalTasks = new ArrayList<Task>();
         originalTasks.addAll(tm.getTasks());
 
         ArrayList<Task> filteredTasks = (ArrayList<Task>) originalTasks.stream().filter(task -> task.getName().contains(keyword)).collect(Collectors.toList());
 
-        reply = ui.getListTasksMessage(filteredTasks);
+        reply = responseManager.getListTasksMessage(filteredTasks);
     }
 
     public String getReply() {

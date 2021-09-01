@@ -8,7 +8,7 @@ public class AddEventCommand implements ICommand {
 
     private final String input;
     TaskManager tm;
-    Ui ui;
+    ResponseManager responseManager;
     Storage storage;
     Task addedEvent;
     String reply;
@@ -24,18 +24,18 @@ public class AddEventCommand implements ICommand {
     /**
      * Adds the event task by interacting with the relevant instances as mentioned above.
      * @param tm The TaskManager object controlling the tasks in Duke.
-     * @param ui The Ui object managing Duke's user interface.
+     * @param responseManager The Ui object managing Duke's user interface.
      * @param storage The Storage object managing the local storing of tasks.
      */
-    public void execute(TaskManager tm, Ui ui, Storage storage) {
+    public void execute(TaskManager tm, ResponseManager responseManager, Storage storage) {
         try {
             Task addedEvent = tm.addEvent(input);
             this.tm = tm;
-            this.ui = ui;
+            this.responseManager = responseManager;
             this.storage = storage;
             this.addedEvent = addedEvent;
             if (addedEvent != null) {
-                reply = ui.getTaskAdditionMessage(addedEvent, tm.getTasks().size());
+                reply = responseManager.getTaskAdditionMessage(addedEvent, tm.getTasks().size());
                 storage.updateSave(tm.getTasks());
             } else {
                 throw new DukeException.NoTimeSpecifiedException("Please use the format YYYY-MM-DD HH:MM when entering when the event is \n" +
@@ -43,7 +43,7 @@ public class AddEventCommand implements ICommand {
             }
         } catch (DukeException.NoNameException |
                 DukeException.NoTimeSpecifiedException e) {
-            reply = ui.getErrorMessage(e);
+            reply = responseManager.getErrorMessage(e);
         }
     }
 

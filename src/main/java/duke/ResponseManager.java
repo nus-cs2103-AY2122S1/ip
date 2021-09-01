@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * This class encapsulated the management of the user interface.
  */
-public class Ui {
+public class ResponseManager {
 
     /**
      * Introduction method shown when program is first run.

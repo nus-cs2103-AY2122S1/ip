@@ -8,7 +8,7 @@ public class DoneCommand implements ICommand {
 
     String taskIndex;
     TaskManager tm;
-    Ui ui;
+    ResponseManager responseManager;
     Storage storage;
     Task completedTask;
     String reply;
@@ -26,23 +26,23 @@ public class DoneCommand implements ICommand {
      * Marks the desired task completed by interacting with the relevant instances as mentioned above.
      *
      * @param tm The TaskManager object controlling the tasks in Duke.
-     * @param ui The Ui object managing Duke's user interface.
+     * @param responseManager The Ui object managing Duke's user interface.
      * @param storage The Storage object managing the local storing of tasks.
      */
-    public void execute(TaskManager tm, Ui ui, Storage storage) {
+    public void execute(TaskManager tm, ResponseManager responseManager, Storage storage) {
         try {
             completedTask = tm.completeTask(taskIndex);
-            this.ui = ui;
+            this.responseManager = responseManager;
             this.tm = tm;
             this.storage = storage;
             if (completedTask == null) {
-                reply = ui.getInvalidIndexMessage();
+                reply = responseManager.getInvalidIndexMessage();
             } else {
-                reply = ui.getTaskCompletionMessage(completedTask, tm.getTasks().size());
+                reply = responseManager.getTaskCompletionMessage(completedTask, tm.getTasks().size());
                 storage.updateSave(tm.getTasks());
             }
         } catch (DukeException.InvalidInputException e) {
-            reply = ui.getErrorMessage(e);
+            reply = responseManager.getErrorMessage(e);
         }
     }
 

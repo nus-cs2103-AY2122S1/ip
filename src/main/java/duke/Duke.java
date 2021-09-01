@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -25,7 +24,7 @@ public class Duke extends Application {
     private Scene scene;
 
     private Duke duke;
-    private Ui ui;
+    private ResponseManager responseManager;
     private TaskManager taskManager;
     private Storage storage;
     private boolean isRunning = true;
@@ -139,7 +138,7 @@ public class Duke extends Application {
      */
     String getResponse(String input) {
         ICommand c = parser.getInput(input);
-        c.execute(taskManager, ui, storage);
+        c.execute(taskManager, responseManager, storage);
         return c.getReply();
     }
 
@@ -149,7 +148,7 @@ public class Duke extends Application {
      * @param saveFileLocation The path to where the save file is to be stored.
      */
     public Duke(String saveFileLocation) {
-        ui = new Ui();
+        responseManager = new ResponseManager();
         storage = new Storage(saveFileLocation);
         taskManager = new TaskManager(storage.loadSave());
     }
@@ -167,7 +166,7 @@ public class Duke extends Application {
         //ui.introduceYourself();
 
         ICommand c = parser.getInput(input);
-        c.execute(taskManager, ui, storage);
+        c.execute(taskManager, responseManager, storage);
         return c.getReply();
     }
 
