@@ -17,6 +17,7 @@ class DeadlineTest {
     public void testToFileString() throws DukeException {
         assertEquals("D |   | sleep | 2019-12-12", new Deadline("sleep", "2019-12-12").toFileString());
         assertEquals("D |   | eat | 2022-01-12", new Deadline("eat", "2022-01-12").toFileString());
+        assertEquals("D |   | walk | 2030-02-12", new Deadline("walk", "2030-02-12").toFileString());
     }
 
     @Test
