@@ -15,10 +15,21 @@ public class Storage {
     private String filePath;
     private FileWriter fileWriter;
 
+    /**
+     * Default constructor for a Storage instance.
+     *
+     * @param filePath The specified file path to store the save data.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Parses the file from its JSON format.
+     *
+     * @param filePath The specified file to parse.
+     * @return An ArrayList of Tasks.
+     */
     @SuppressWarnings("unchecked")
     public ArrayList<Task> parseFromJson(String filePath) {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -38,6 +49,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes the TaskList into a JSON File format and saves it.
+     *
+     * @param tasks The TaskList to convert into JSON file format.
+     */
     @SuppressWarnings("unchecked")
     public void write(TaskList tasks) {
         JSONArray arr = new JSONArray();
@@ -57,6 +73,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the TaskList from a JSON File format.
+     *
+     * @return An ArrayList of Tasks loaded from the save data.
+     * @throws FileNotFoundException When the specified file is not found.
+     */
     public ArrayList<Task> load() throws FileNotFoundException {
         try {
             File file = new File(filePath);

@@ -8,15 +8,28 @@ public abstract class Task {
     protected boolean isCompleted;
     protected String description;
 
+    /**
+     * Default constructor for a Task.
+     *
+     * @param description The description of a task.
+     */
     public Task(String description) {
         this.isCompleted = false;
         this.description = description;
     }
 
+    /**
+     * Checks if a specific task has been completed.
+     *
+     * @return A boolean representing whether a task has been completed.
+     */
     public boolean checkCompletion() {
         return this.isCompleted;
     }
 
+    /**
+     * Marks a task as completed.
+     */
     public void complete() {
         this.isCompleted = true;
     }
@@ -25,6 +38,13 @@ public abstract class Task {
 
     public abstract JSONObject toJsonObject();
 
+    /**
+     * Converts a JSON Object into a Task.
+     *
+     * @param obj The Task in JSON Object format.
+     * @return The task as a Task.
+     * @throws InvalidInputException If the input is deemed invalid.
+     */
     public static Task fromJsonObject(JSONObject obj) throws InvalidInputException {
         Task task;
         String taskType = (String) obj.get("type");

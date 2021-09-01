@@ -15,7 +15,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-
+    /**
+     * Constructor for a Duke instance.
+     *
+     * @param filePath The specified path of the file we will write and load information from.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -27,6 +31,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke chatbot.
+     *
+     * @throws InvalidInputException If the input is deemed invalid.
+     */
     public void run() throws InvalidInputException {
 
         ui.showWelcome();

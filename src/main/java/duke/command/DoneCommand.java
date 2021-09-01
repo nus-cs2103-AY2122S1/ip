@@ -13,8 +13,15 @@ public class DoneCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Executes the specified command.
+     *
+     * @param tasks The TaskList which we are modifying.
+     * @param ui The Ui we will use for user interaction.
+     * @param storage The Storage we will use for storing save data.
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         String[] strings = input.split(" ");
         if (tasks.size() == 0) {
             ui.showEmptyList();

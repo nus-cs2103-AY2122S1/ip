@@ -12,21 +12,49 @@ public class Deadline extends Task {
 
     private String by;
 
+    /**
+     * Default constructor for a Deadline.
+     *
+     * @param description The description of the Deadline.
+     * @param by The deadline of the Deadline task.
+     */
     protected Deadline(String description, String by) {
         super(description);
         this.by = by;
     }
 
+    /**
+     * A constructor for a Deadline which includes a boolean isCompleted.
+     *
+     * @param description The description of the Deadline.
+     * @param by The deadline of the Deadline task.
+     * @param isCompleted Whether the Deadline has been completed.
+     */
     protected Deadline(String description, String by, boolean isCompleted) {
         super(description);
         this.by = by;
         this.isCompleted = isCompleted;
     }
 
+    /**
+     * Default factory method for a Deadline.
+     *
+     * @param description The description of the Deadline.
+     * @param by The deadline of the Deadline task.
+     * @return A new Deadline with the given description.
+     */
     public static Deadline of(String description, String by) {
         return new Deadline(description, by);
     }
 
+    /**
+     * A factory method for a Deadline which includes a boolean isCompleted.
+     *
+     * @param description The description of the Deadline.
+     * @param by The deadline of the Deadline task.
+     * @param isCompleted Whether the Deadline has been completed.
+     * @return A new Deadline with the given description.
+     */
     public static Deadline of(String description, String by, boolean isCompleted) {
         return new Deadline(description, by, isCompleted);
     }

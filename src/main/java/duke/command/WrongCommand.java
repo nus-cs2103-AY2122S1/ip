@@ -13,8 +13,15 @@ public class WrongCommand extends Command {
         this.errorMessage = errorMessage;
     }
 
+    /**
+     * Executes the specified command.
+     *
+     * @param tasks The TaskList which we are modifying.
+     * @param ui The Ui we will use for user interaction.
+     * @param storage The Storage we will use for storing save data.
+     */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         Ui.showError(errorMessage);
     }
 

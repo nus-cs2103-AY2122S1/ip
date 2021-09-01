@@ -1,7 +1,6 @@
 package duke.util;
 
 import duke.command.*;
-import duke.exception.InvalidInputException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -9,12 +8,23 @@ import duke.task.ToDo;
 public class Parser {
 
 
+    /**
+     * Trims the input String into the default reading format.
+     *
+     * @param input The input String.
+     * @return The trimmed input String to be processed.
+     */
     public static String parseInput(String input) {
         return input.trim().replaceAll(" +", " ");
     }
 
-    //todo: use switch statement and everything to create cases
-    public static Command parseCommand(String input) throws InvalidInputException {
+    /**
+     * Parses the given String into a Command.
+     *
+     * @param input The input String.
+     * @return The specific Command to execute.
+     */
+    public static Command parseCommand(String input) {
 
         String[] fullCommand = input.split(" ", 2);
         Command command = null;

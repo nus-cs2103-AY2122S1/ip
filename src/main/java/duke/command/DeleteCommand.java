@@ -13,6 +13,14 @@ public class DeleteCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Executes the specified command.
+     *
+     * @param tasks The TaskList which we are modifying.
+     * @param ui The Ui we will use for user interaction.
+     * @param storage The Storage we will use for storing save data.
+     * @throws InvalidInputException When the input is deemed invalid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
         String[] strings = input.split(" ");
