@@ -29,10 +29,11 @@ public class Done extends Command {
      * @param storage The storage.
      * @throws NoListException If there is no list to be loaded.
      */
-    public void exec(TaskList tasks, Ui ui, Storage storage) throws NoListException {
+    public String exec(TaskList tasks, Ui ui, Storage storage) throws NoListException {
         try {
             tasks.get(this.index - 1).markAsDone();
             storage.save(tasks);
+            return "Done.";
         } catch (NoListException e) {
             throw e;
         }
