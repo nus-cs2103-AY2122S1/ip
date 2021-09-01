@@ -86,7 +86,7 @@ public class Parser {
         } else if (userInput.matches(Deadline.COMMAND_REGEX)) {
             //eg. deadline xxx /by dd-MM-uuuu HHmm
             String inputBody = userInput.split(" ", 2)[1];
-            String[] deadlineDetails = inputBody.split("\s/by\s", 2);
+            String[] deadlineDetails = inputBody.split("\\s/by\\s", 2);
             String deadlineTask = deadlineDetails[0];
             String deadlineByDate = deadlineDetails[1];
 
@@ -101,7 +101,7 @@ public class Parser {
         } else if (userInput.matches(Event.COMMAND_REGEX)) {
             //eg. event xxx /by xxx
             String inputBody = userInput.split(" ", 2)[1];
-            String[] eventDetails = inputBody.split("\s/at\s", 2);
+            String[] eventDetails = inputBody.split("\\s/at\\s", 2);
             String eventTask = eventDetails[0];
             String eventTime = eventDetails[1];
 

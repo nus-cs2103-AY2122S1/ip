@@ -27,12 +27,16 @@ public class Task {
      */
     public static Task parseLine(String storageLine) {
         String taskSymbol = Character.toString(storageLine.charAt(0));
-        return switch (taskSymbol) {
-            case "T" -> ToDo.parse(storageLine);
-            case "E" -> Event.parse(storageLine);
-            case "D" -> Deadline.parse(storageLine);
-            default -> throw new IllegalArgumentException("Should not enter here");
-        };
+        switch (taskSymbol) {
+        case "T":
+            return ToDo.parse(storageLine);
+        case "E":
+            return Event.parse(storageLine);
+        case "D":
+            return Deadline.parse(storageLine);
+        default:
+            throw new IllegalArgumentException("Should not enter here");
+        }
     }
 
     /**

@@ -48,12 +48,16 @@ public class DukeException extends IllegalArgumentException {
 
         if (userInput.matches("\\w+\\s*")) {
             String inputWord = userInput.split(" ", 2)[0].toLowerCase();
-            return switch (inputWord) {
-                case "todo" -> ToDo.syntax();
-                case "deadline" -> Deadline.syntax();
-                case "event" -> Event.syntax();
-                default -> defaultReply;
-            };
+            switch (inputWord) {
+            case "todo":
+                return ToDo.syntax();
+            case "deadline":
+                return Deadline.syntax();
+            case "event":
+                return Event.syntax();
+            default:
+                return defaultReply;
+            }
         } else {
             return defaultReply;
         }
