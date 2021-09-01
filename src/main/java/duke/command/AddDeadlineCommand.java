@@ -24,7 +24,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks) {
         Matcher matcher = PATTERN_DEADLINE.matcher(input);
         if (!matcher.find()) {
             throw new DukeException("Give me a deadline like this: deadline <task> /by YYYY-MM-DD");
@@ -38,8 +38,6 @@ public class AddDeadlineCommand extends Command {
         tasks.add(deadline);
 
         // Inform user
-        ui.notifyAdd(deadline, tasks.size());
-
-        return false;
+        return Ui.notifyAdd(deadline, tasks.size());
     }
 }

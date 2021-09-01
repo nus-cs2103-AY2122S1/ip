@@ -13,8 +13,7 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui) {
-        ui.printTasks(tasks);
-        return false;
+    public String execute(TaskList tasks) {
+        return Ui.printTasks(tasks);
     }
 }

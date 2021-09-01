@@ -9,60 +9,30 @@ import java.util.List;
  */
 public class Ui {
     /**
-     * Divider line to denote Duke's speech.
-     */
-    private static final String line = "    ____________________________________________________________";
-
-    /**
-     * Prints the divider line used by Duke.
-     */
-    private void printDividerLine() {
-        System.out.println(line);
-    }
-
-    /**
-     * Prints an array of Strings between 2 lines.
-     * @param lines
-     */
-    private void say(String... lines) {
-        printDividerLine();
-        for (String line : lines) {
-            System.out.println("    " + line);
-        }
-        printDividerLine();
-    }
-
-    /**
      * Greets the user when Duke is started.
      */
-    public void greet() {
-        this.say("Hello from",
-                " ____        _        ",
-                "|  _ \\ _   _| | _____ ",
-                "| | | | | | | |/ / _ \\",
-                "| |_| | |_| |   <  __/",
-                "|____/ \\__,_|_|\\_\\___|",
-                "Make me do something!");
+    public static String greet() {
+        return "Hello, I'm Duke! I'm here to help you with ANYTHING";
     }
 
     /**
      * Prints the list of tasks stored by Duke.
      * @param tasks list of Tasks
      */
-    public void printTasks(TaskList tasks) {
+    public static String printTasks(TaskList tasks) {
         if (tasks.size() == 0) {
             // Inform user if nothing has been stored.
-            this.say("The list is empty!");
-            return;
+            return "The list is empty!";
         }
 
+        StringBuilder sb = new StringBuilder();
         String[] listItems = new String[tasks.size()];
 
         for (int i = 0; i < tasks.size(); ++i) {
-            listItems[i] = String.format("%d. %s", i + 1, tasks.getTask(i));
+            sb.append(String.format("%d. %s\n", i + 1, tasks.getTask(i)));
         }
 
-        this.say(listItems);
+        return sb.toString();
     }
 
     /**
@@ -70,9 +40,9 @@ public class Ui {
      * @param task Task that was added
      * @param index Position of the task in the list
      */
-    public void notifyAdd(Task task, int index) {
-        this.say(String.format("I have added a new %s!", task.getClass().getSimpleName().toLowerCase()),
-                String.format("%d. %s", index, task));
+    public static String notifyAdd(Task task, int index) {
+        return String.format("I have added a new %s!\n", task.getClass().getSimpleName().toLowerCase()) +
+                String.format("%d. %s", index, task);
     }
 
     /**
@@ -80,10 +50,10 @@ public class Ui {
      * @param task Task that was deleted
      * @param taskCount Number of remaining tasks left
      */
-    public void notifyDelete(Task task, int taskCount) {
-        this.say("I have removed this task!",
-                String.format("   %s", task),
-                String.format("You have %d task%s left.", taskCount, taskCount == 1 ? "" : "s"));
+    public static String notifyDelete(Task task, int taskCount) {
+        return "I have removed this task!\n" +
+                String.format("   %s\n", task) +
+                String.format("You have %d task%s left.", taskCount, taskCount == 1 ? "" : "s");
     }
 
     /**
@@ -91,32 +61,21 @@ public class Ui {
      * @param task task marked as done
      * @param index position of the task in the list
      */
-    public void notifyMarkDone(Task task, int index) {
-        this.say("I have marked the task as done!", String.format("%d. %s", index + 1, task));
+    public static String notifyMarkDone(Task task, int index) {
+        return "I have marked the task as done!" + String.format("%d. %s", index + 1, task);
     }
 
     /**
      * Notify user on results of find command.
      * @param results tasks found through find command
      */
-    public void notifyFindResults(List<TaskList.FindResult> results) {
-        String[] listItems = new String[results.size() + 1];
-
-        listItems[0] = "Here are some tasks matching your search:";
-        for (int i = 0; i < results.size(); ++i) {
-            TaskList.FindResult result = results.get(i);
-            listItems[i + 1] = String.format("%d. %s", result.index + 1, result.task);
+    public static String notifyFindResults(List<TaskList.FindResult> results) {
+        StringBuilder sb = new StringBuilder("Here are some tasks matching your search:\n");
+        for (TaskList.FindResult result : results) {
+            sb.append(String.format("%d. %s\n", result.index + 1, result.task));
         }
 
-        this.say(listItems);
-    }
-
-    /**
-     * Relays an exception's message to the user.
-     * @param exception DukeException thrown by Duke.
-     */
-    public void notifyError(DukeException exception) {
-        this.say(exception.getMessage());
+        return sb.toString();
     }
 
     /**
@@ -124,7 +83,7 @@ public class Ui {
      *
      * Used after the bye command.
      */
-    public void goodbye() {
-        this.say("Bye bye, see you next time.");
+    public static String goodbye() {
+        return "Bye bye, see you next time.";
     }
 }

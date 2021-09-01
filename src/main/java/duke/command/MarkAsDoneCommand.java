@@ -23,7 +23,7 @@ public class MarkAsDoneCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks) {
         // Check if user is attempting to mark a task as done.
         Matcher matcher =  PATTERN_DONE.matcher(input);
         if (!matcher.find()) {
@@ -35,7 +35,6 @@ public class MarkAsDoneCommand extends Command {
 
         Task task = tasks.markAsDone(taskPosition - 1);
 
-        ui.notifyMarkDone(task, taskPosition - 1);
-        return false;
+        return Ui.notifyMarkDone(task, taskPosition - 1);
     }
 }

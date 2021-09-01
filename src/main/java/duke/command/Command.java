@@ -37,5 +37,5 @@ abstract public class Command {
         this.input = input;
     }
 
-    abstract public boolean execute(TaskList tasks, Ui ui);
+    abstract public String execute(TaskList tasks);
 }
