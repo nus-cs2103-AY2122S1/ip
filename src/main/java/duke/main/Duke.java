@@ -1,11 +1,12 @@
 package duke.main;
 
 import duke.exception.DukeException;
+
 import duke.task.TaskList;
+
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
-import java.io.IOException;
 
 /**
  * Encapsulates duke program
@@ -32,27 +33,17 @@ public class Duke {
     }
 
     /**
-     * Runs the duke program
+     * Returns response by duke after user input.
+     *
+     * @param input
+     * @return String representation of duke response to user
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                isExit = Parser.parse(fullCommand, taskList, ui, storage);
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        try {
+            return Parser.parse(input, taskList, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
         }
-
     }
 
-
-    public static void main(String[] args) {
-        new Duke("duke.txt").run();
-    }
 }
