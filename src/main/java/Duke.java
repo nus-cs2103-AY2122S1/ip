@@ -40,20 +40,8 @@ public class Duke {
         while (true){
             String command = ui.getResponse();
             if ("bye".equals(command)){
-                dukeData = dukePath.toFile();
-                try {
-                    PrintWriter dukeWriter = new PrintWriter(dukeData);
-                    for (Task task : tasks) {
-                        dukeWriter.println(task.toCsvRow());
-                    }
-                    dukeWriter.close();
-                    System.out.println("File successfully saved to data/duke.csv");
-                } catch (FileNotFoundException e) {
-                    System.err.println("Error: Could not save file");
-                } finally {
-                    ui.displayFarewell();
-                    break;
-                }
+                storage.save(ui, taskList);
+                break;
             }
             else if ("list".equals(command)){
                 System.out.println("Here are the tasks in your list:");
