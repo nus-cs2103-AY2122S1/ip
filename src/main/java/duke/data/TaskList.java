@@ -1,9 +1,9 @@
 package duke.data;
 
+import java.util.ArrayList;
+
 import duke.commands.Task;
 import duke.exceptions.DukeException;
-
-import java.util.ArrayList;
 
 /**
  * Encapsulates a TodoList that contains Tasks.

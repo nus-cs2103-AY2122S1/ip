@@ -1,11 +1,13 @@
 package duke.parser;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import duke.data.TaskList;
 import duke.exceptions.DukeException;
 import duke.ui.Ui;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
     @Test

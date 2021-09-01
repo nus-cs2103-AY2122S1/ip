@@ -1,10 +1,10 @@
+import java.util.Scanner;
+
 import duke.data.TaskList;
 import duke.exceptions.DukeException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
-import duke.parser.Parser;
-
-import java.util.Scanner;
 
 /**
  * Encapsulates a bot that manages tasks for users.
@@ -21,7 +21,7 @@ public class Duke {
     /**
      * Constructor for Duke.
      *
-     * @param filepath
+     * @param filepath Path for data to be stored.
      */
     public Duke(String filepath) {
         tasks = new TaskList();

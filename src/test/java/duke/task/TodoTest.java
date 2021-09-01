@@ -1,10 +1,11 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import duke.commands.Task;
 import duke.commands.Todo;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class TodoTest {
     @Test
@@ -21,7 +22,7 @@ public class TodoTest {
 
     @Test
     public void saveFormatTest() {
-       Task todo = new Todo("do homework", true);
-       assertEquals("T | 1 | do homework", todo.printInSaveFormat());
+        Task todo = new Todo("do homework", true);
+        assertEquals("T | 1 | do homework", todo.printInSaveFormat());
     }
 }

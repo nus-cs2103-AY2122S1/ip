@@ -1,5 +1,10 @@
 package duke.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+
 import duke.commands.Deadline;
 import duke.commands.Event;
 import duke.commands.Task;
@@ -7,11 +12,6 @@ import duke.commands.Todo;
 import duke.data.TaskList;
 import duke.exceptions.DukeException;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 /**
  * Encapsulates a Parser object that reads in and executes commands based on user's input.
@@ -118,6 +118,8 @@ public class Parser {
             String keyword = cmd.substring(5);
             tasks.printMatchingTasks(keyword);
             break;
+        default:
+            throw new DukeException("Unknown command passed.");
         }
     }
 
