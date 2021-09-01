@@ -1,48 +1,29 @@
 package seedu.duke;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.rules.TemporaryFolder;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 import seedu.duke.task.Task;
 import seedu.duke.task.TaskList;
 import seedu.duke.task.ToDo;
 
 import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 
 public class StorageTest {
 
-    @Rule
-    public TemporaryFolder folder= new TemporaryFolder();
-
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-    private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
-    private final PrintStream initialOut = System.out;
-    private final PrintStream initialErr = System.err;
-
-
-    @BeforeEach
-    public void setUpStreamsAndEmptyFile() {
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-    }
-
-    @AfterEach
-    public void restoreStreams() {
-        System.setOut(initialOut);
-        System.setErr(initialErr);
-    }
+    @TempDir
+    File tempFolder;
 
     @Test
     public void loadData_fileNotFound_doesNotThrowException() {
@@ -58,7 +39,7 @@ public class StorageTest {
         TaskList taskList = new TaskList();
         HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
 
-        String filePath = folder.getRoot().getPath() + "/temp.text";
+        String filePath = tempFolder.getPath() + "/temp.text";
         Storage storage = new Storage(filePath);
         storage.loadData(dateTasks, taskList);
 
@@ -69,10 +50,10 @@ public class StorageTest {
     @Test
     public void addTask_validTask_updateFile() {
         Task toAdd = new ToDo("eat lunch");
-        String filePath = folder.getRoot().getPath() + "/temp.text";
+        String filePath = tempFolder.getPath() + "/temp.text";
         Storage storage = new Storage(filePath);
         storage.addTaskToFile(toAdd);
-        String lastLine ="";
+        String lastLine = "";
         String line;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));

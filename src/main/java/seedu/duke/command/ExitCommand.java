@@ -3,6 +3,10 @@ package seedu.duke.command;
 import seedu.duke.Ui;
 import seedu.duke.task.TaskList;
 
+/**
+ * Represents an exit command. An <code>ExitCommand</code> exits
+ * the system when a user types bye to Duke.
+ */
 public class ExitCommand extends Command {
     private static final String EXIT_MESSAGE = "Bye. Hope to see you again soon!";
 
@@ -24,10 +28,8 @@ public class ExitCommand extends Command {
      * Prints Duke's exit message.
      */
     @Override
-    public void execute() {
-        ui.divide();
-        ui.outputMessage(EXIT_MESSAGE);
-        ui.divide();
+    public String execute() {
+        return EXIT_MESSAGE;
     }
 
 }

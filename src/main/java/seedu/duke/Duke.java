@@ -22,25 +22,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
+
 /**
  * Represents a chatbot for organising user tasks and to do list.
  * A <code>Duke</code> object takes in user commands and updates the
  * user's tasks.
  */
-class Duke {
-
-    private enum UserCommands {
-        DONE, TODO, DEADLINE, EVENT, FIND, GET, DELETE, LIST, BYE;
-    }
-
+public class Duke {
     /**
      * Represents a parser for interpreting user inputs.
      * A <code>Parser</code> object takes in user inputs and
      * interprets it to Duke to execute relevant tasks.
      */
     private class Parser {
-        private String[] list_of_words = new String[0];
-        private String userInput ="";
+        private String[] listOfWords = new String[0];
+        private String userInput = "";
         private DateTimeManager manager = new DateTimeManager(
                 DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         private int taskIndex = -1;
@@ -63,7 +59,7 @@ class Duke {
                 handleInvalidInputs(userInput);
             }
 
-            this.list_of_words = arrOfCommandWords;
+            this.listOfWords = arrOfCommandWords;
             // Check the command word
             String commandWord = arrOfCommandWords[0];
             switch (commandWord) {
@@ -72,11 +68,11 @@ class Duke {
                         arrOfCommandWords[1], storage);
             case "deadline":
                 parseDescription(userInput, "/by ");
-                return new DeadlineCommand(ui, taskList, list_of_words[1],
+                return new DeadlineCommand(ui, taskList, listOfWords[1],
                         date, storage);
             case "event":
                 parseDescription(userInput, "/at ");
-                return new EventCommand(ui, taskList, list_of_words[1],
+                return new EventCommand(ui, taskList, listOfWords[1],
                         date, storage);
             case "done":
                 try {
@@ -87,11 +83,11 @@ class Duke {
                 }
                 return new DoneCommand(ui, taskList, taskIndex, storage);
             case "find":
-                return new FindCommand(ui, taskList, list_of_words[1]);
+                return new FindCommand(ui, taskList, listOfWords[1]);
             case "get":
                 try {
-                    manager.parseDateTime(arrOfCommandWords[1]);
-                    return new GetCommand(ui, taskList, list_of_words[1], dateTasks);
+                    LocalDate tasksDate = manager.parseDateTime(arrOfCommandWords[1]);
+                    return new GetCommand(ui, taskList, tasksDate, dateTasks);
                 } catch (DateTimeParseException e) {
                     throw new DukeException("Invalid date format.");
                 }
@@ -117,7 +113,7 @@ class Duke {
                 }
 
                 String description = userInput.substring(startOfDescription, indexOfDate);
-                list_of_words[1] = description;
+                listOfWords[1] = description;
                 LocalDate date = manager.parseDateTime(
                         userInput.substring(indexOfDate + command.length())
                 );
@@ -164,11 +160,15 @@ class Duke {
          * @param type The type of Command specifying the action to
          *             be executed.
          */
-        private void executeTasks(Command type) throws DukeException {
-            type.execute();
+        private String executeTasks(Command type) throws DukeException {
+            String response = type.execute();
+            type.updateDateTasks(dateTasks, manager);
             if (type.updatesTaskList()) {
                 taskList = type.getTaskList();
             }
+            isExit = type.isExit();
+
+            return response;
         }
 
     }
@@ -176,44 +176,60 @@ class Duke {
     /**
      * Task list to keep track.
      */
-    private TaskList taskList;
+    private TaskList taskList = new TaskList();
+
+    private boolean isExit = false;
+
     /**
      * Storage to handle file manipulation.
      */
-    private Storage storage;
-    private Ui ui;
+    private Storage storage = new Storage("./data/duke.text");
+    private Ui ui = new Ui();
     private Parser parser = new Parser();
     private HashMap<LocalDate, ArrayList<Task>> dateTasks = new HashMap<>();
+
+    public Duke() {
+        taskList = storage.loadData(dateTasks, taskList);
+    }
 
     /**
      * Public constructor for Duke
      */
     public Duke(TaskList taskList, Storage storage, Ui ui) {
-        this.taskList = taskList;
         this.storage = storage;
         this.ui = ui;
+        this.taskList = storage.loadData(dateTasks, taskList);
     }
 
     /**
      * Prints Duke's greetings.
      */
-    private void greet() {
-        ui.divide();
-        ui.outputMessage(
-                String.format("Hello! I'm Duke\n%4sWhat can I do for you?",
-                        " "));
-        ui.divide();
+    protected String getGreeting() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) {
+        try {
+            Command command = parser.parseString(input);
+            String response = parser.executeTasks(command);
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    protected boolean getExit() {
+        return isExit;
     }
 
     /**
      * Runs the Duke chatbot.
      */
     private void run() {
-        taskList = storage.loadData(dateTasks, taskList);
-
-        // Greeting the user
-        greet();
-
         // Taking in commands
         Scanner sc = new Scanner(System.in);
 
@@ -255,7 +271,7 @@ class Duke {
             }
         }
 
-        Duke duke = new Duke(new TaskList(), new Storage(filePath), new Ui());
+        Duke duke = new Duke();
         duke.run();
     }
 }

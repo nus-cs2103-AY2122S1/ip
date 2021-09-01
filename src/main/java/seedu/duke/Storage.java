@@ -52,7 +52,7 @@ public class Storage {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
             String task = "";
-            while((task = reader.readLine()) != null) {
+            while ((task = reader.readLine()) != null) {
                 char type = task.charAt(1);
                 boolean isCompleted = task.charAt(4) == 'X';
 
@@ -169,9 +169,9 @@ public class Storage {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(filePath));
 
-            String line ="";
+            String line = "";
             String newContent = "";
-            while((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 if (line.compareTo(toUpdate) == 0) {
                     line = task;
                 }

@@ -3,6 +3,11 @@ package seedu.duke.command;
 import seedu.duke.Ui;
 import seedu.duke.task.TaskList;
 
+
+/**
+ * Represents a list command. A <code>ListCommand</code> returns
+ * the list of tasks when a user requests for it.
+ */
 public class ListCommand extends Command {
     private static final String LIST_MESSAGE = "Here are the tasks in your list:\n";
 
@@ -19,11 +24,8 @@ public class ListCommand extends Command {
      * Prints the current tasks in the task list.
      */
     @Override
-    public void execute() {
-
-        ui.divide();
-        ui.outputMessage(LIST_MESSAGE + taskList.toString());
-        ui.divide();
+    public String execute() {
+        return LIST_MESSAGE + taskList.toString();
     }
 
 }
