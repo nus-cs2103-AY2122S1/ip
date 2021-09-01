@@ -5,7 +5,7 @@ import tasks.TaskList;
 import utils.Storage;
 import utils.Ui;
 
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     private static final String DONE_MSG = "Well done.";
 

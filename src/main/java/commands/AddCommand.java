@@ -5,7 +5,7 @@ import tasks.TaskList;
 import utils.Storage;
 import utils.Ui;
 
-public class AddCommand extends Command{
+public class AddCommand extends Command {
 
     private static final String NEW_TASK_MSG = "New task added:";
 

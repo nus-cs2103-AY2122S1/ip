@@ -15,7 +15,7 @@ public class TaskList {
 
         int len = tasks.size();
 
-        for (int i = 0; i < len - 1; i ++) {
+        for (int i = 0; i < len - 1; i++) {
             data.append(tasks.get(i).getFormattedData() + "\n");
         }
 
@@ -44,7 +44,7 @@ public class TaskList {
         StringBuilder taskString = new StringBuilder();
         int len = tasks.size();
 
-        for (int i = 0; i < len - 1; i ++) {
+        for (int i = 0; i < len - 1; i++) {
             taskString.append(i + 1 + ". " + tasks.get(i).toString() + "\n");
         }
 
@@ -58,7 +58,7 @@ public class TaskList {
         int len = tasks.size();
         int count = 1;
 
-        for (int i = 0; i < len - 1; i ++) {
+        for (int i = 0; i < len - 1; i++) {
             Task task = tasks.get(i);
 
             if (task.contains(keyword)) {
