@@ -42,7 +42,6 @@ public class Parser {
             return new MarkAsDoneCommand(taskList, arguments);
         }
         if (command.equals(InputType.FIND.getInputType())) {
-            //Change this to Find command
             return new FindCommand(taskList, arguments);
         }
         return new EmptyCommand(taskList);
