@@ -35,6 +35,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private String filePath;
+    private boolean closed;
 
 
     public static boolean isValid(String dateStr) {
@@ -48,6 +49,7 @@ public class Duke {
     }
 
     public Duke() {
+        closed = false;
         this.filePath = "./data/duke.txt" ;
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadFile());
@@ -71,8 +73,16 @@ public class Duke {
         new Duke("./data/duke.txt").run();
     }*/
     public String process(String input) {
-        storage.saveFile(tasks);
-        return Parser.parse(input, this.tasks);
+        String output = Parser.parse(input, this.tasks);
+        if (input.equals("bye")) {
+            storage.saveFile(tasks);
+            closed = true;
+        }
+        return output;
+    }
+
+    public boolean isClosed() {
+        return closed;
     }
 
 

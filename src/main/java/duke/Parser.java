@@ -122,7 +122,7 @@ public class Parser {
      */
     public static String toDoOutput(String in, TaskList taskList) {
         if (in.length() == 4) {
-            return "☹ OOPS!!! The description of a todo cannot be empty.";
+            return "OOPS!!! The description of a todo cannot be empty.";
         } else {
             return taskList.addToDoTask(in);
         }

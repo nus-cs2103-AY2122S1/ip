@@ -1,5 +1,7 @@
 import duke.Duke;
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +13,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Main extends Application {
     private ScrollPane scrollPane;
@@ -26,9 +34,9 @@ public class Main extends Application {
         // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
-
         return textToAdd;
     }
+
 
     private void handleUserInput() {
         String userText = userInput.getText();
@@ -38,13 +46,15 @@ public class Main extends Application {
                 DialogBox.getDukeDialog(dukeText, dukeImage)
         );
         userInput.clear();
-    }
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+        if (duke.isClosed()) {
+            TimerTask task = new TimerTask() {
+                public void run() {
+                    System.exit(0);
+                }
+            };
+            Timer timer = new Timer("Timer");
+            timer.schedule(task,1000);
+        }
     }
 
     @Override
@@ -109,11 +119,11 @@ public class Main extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+                handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+                handleUserInput();
         });
     }
 }
