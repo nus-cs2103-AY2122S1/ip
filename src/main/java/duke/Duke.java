@@ -20,6 +20,8 @@ public class Duke {
     /** The UI for the program */
     private Ui ui;
 
+    private boolean isExit;
+
     /**
      * The constructor for Duke class
      */
@@ -34,28 +36,25 @@ public class Duke {
         }
     }
 
+
+
     /**
-     * The method to start the program
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException | IOException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String getResponse(String input) {
+        String output = "";
+        try {
+            Command c = Parser.parse(input);
+            output = c.execute(tasks, ui, storage);
+            isExit = c.isExit();
+        } catch (DukeException e) {
+            output = e.getMessage();
         }
+        return output;
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+    public boolean isExit() {
+        return this.isExit;
     }
 }
