@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.App;
 import duke.Augury;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -42,15 +43,19 @@ public class AppWindow extends VBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        String welcomeMessage = "Welcome to Augury!";
+        dialogContainer.getChildren().add(
+                DialogBox.getAuguryDialog(welcomeMessage)
+        );
     }
 
+    /**
+     * Allows {@code scrollPane} to scroll when new messages are added
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setDuke(Augury a) {
-        augury = a;
     }
 
     /**
@@ -66,5 +71,8 @@ public class AppWindow extends VBox {
                 DialogBox.getAuguryDialog(response)
         );
         userInput.clear();
+        if (response.equals("The readiness is all.")) {
+            Platform.exit();
+        }
     }
 }

@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 
-<fx:root prefWidth="400.0"
+<fx:root prefWidth="372.0"
+         minWidth="-Infinity"
          type="HBox"
          alignment="CENTER_RIGHT"
          xmlns="http://javafx.com/javafx/8.0.17"
          xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <HBox fx:id="dialogContainer">
-            <children>
-                <Label fx:id="dialog"
-                       styleClass="dialog__text"
-                       text="Label"
-                       wrapText="true"
-                       HBox.hgrow="ALWAYS"/>
-            </children>
-        </HBox>
-    </children>
+    <HBox fx:id="messageContainer">
+        <Label fx:id="dialog"
+               styleClass="dialog__text"
+               text="Label"
+               wrapText="true"
+               HBox.hgrow="ALWAYS"/>
+    </HBox>
 </fx:root>

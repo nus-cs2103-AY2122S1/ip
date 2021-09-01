@@ -47,7 +47,6 @@ public class Augury {
      * provided {@code String path} as location of the .txt save file.
      *
      * @param path A {@code String} containing the location of the .txt save file.
-     * @param isConsole Whether {@code Augury} is running in console mode.
      */
     public Augury(String path) {
         ui = new Ui();
@@ -107,7 +106,17 @@ public class Augury {
     }
 
     public String getResponse(String input) {
-        return ("Duke " + input);
+        try {
+            Command command = parser.parse(input);
+            String result = command.execute(taskList, storage);
+            if (result.equals("ExitCommand")) {
+                return "The readiness is all.";
+            } else {
+                return result;
+            }
+        } catch (AuguryException e) {
+            return e.getMessage() + "\n\t Please try again.";
+        }
     }
 
 }

@@ -3,18 +3,19 @@
 }
 
 .dialog {
-    -fx-background-color: #ebebeb;
-    -fx-border-insets: 5px;
-    -fx-background-insets: 5px;
+    -fx-background-color: #ABB2BF;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
     -fx-padding: 20px;
-    -fx-background-radius: 50px;
-    -fx-border-radius: 50px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
 }
 
 .dialog__text {
     -fx-text-fill: #494b53;
+    -fx-font-size: 14px;
 }
 
 .dialog--augury {
-    -fx-background-color: #ABB2BF;
+    -fx-background-color: #ebebeb;
 }

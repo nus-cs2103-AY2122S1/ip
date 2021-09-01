@@ -10,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
@@ -22,7 +21,7 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
-    private ImageView displayPicture;
+    private HBox dialogContainer;
 
     private DialogBox(String text) {
         try {
@@ -33,6 +32,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        dialog.setMinHeight(Label.USE_PREF_SIZE); // stops message from truncating
         dialog.setText(text);
     }
 
