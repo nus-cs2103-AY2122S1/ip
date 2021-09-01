@@ -30,6 +30,8 @@ public class Duke {
 
     /**
      * Returns the response from Duke given the user input to be shown on the GUI.
+     *
+     * @param input the command typed in by the user
      */
     String getResponse(String input) {
         String response;
