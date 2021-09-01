@@ -1,16 +1,15 @@
 package duke.controllers;
 
+import java.io.IOException;
+
 import duke.App;
 import duke.Augury;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
 
 /**
  * Controller for AppWindow. Provides the layout for the other controls.
@@ -27,6 +26,11 @@ public class AppWindow extends VBox {
 
     private Augury augury;
 
+    /**
+     * Main window of the {@code Augury} GUI.
+     *
+     * @param a Augury instance.
+     */
     public AppWindow(Augury a) {
         this.augury = a;
 

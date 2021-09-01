@@ -1,11 +1,12 @@
 package duke.tasks;
 
-import duke.exceptions.AuguryException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.format.DateTimeParseException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.exceptions.AuguryException;
 
 public class TaskFactoryTest {
 

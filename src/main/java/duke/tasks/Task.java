@@ -11,10 +11,6 @@ public abstract class Task {
     protected String description;
     protected boolean isDone = false;
 
-    public enum TaskTypes {
-        TODO, DEADLINE, EVENT
-    }
-
     /**
      * Initializes an instance of {@code Task} with {@code String description}.
      *

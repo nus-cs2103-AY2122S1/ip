@@ -18,7 +18,7 @@ public class TaskFactory {
      * This method signature is called when creating tasks from the save file.
      *
      * @param newTaskDetails {@code String} containing details of the task.
-     *                                     Example: {@code [E] event (at: 6 Sep 2021, Tue, 21:00)}
+     *                       Example: {@code [E] event (at: 6 Sep 2021, Tue, 21:00)}
      */
     public Task createTask(String newTaskDetails) {
         // this method is used when reading from duke.tasks.txt file
@@ -57,27 +57,27 @@ public class TaskFactory {
      *
      * @param newTaskType {@code String}, one of: 'todo', 'event', 'deadline'.
      * @param newTaskDetails {@code String} representing full user input.
-     *                                     Example: {@code event shopping /at 2021-08-08 2300}
-     * @throws InvalidTaskCreationException If user input has missing paramenters or malformed date.
+     *                       Example: {@code event shopping /at 2021-08-08 2300}
+     * @throws InvalidTaskCreationException If user input has missing parameters or malformed date.
      */
     public Task createTask(String newTaskType, String newTaskDetails) throws AuguryException {
         if (newTaskType == null) {
             return null;
-        } else if (newTaskType.equalsIgnoreCase(Task.TaskTypes.TODO.toString())) {
+        } else if (newTaskType.equalsIgnoreCase(TaskTypes.TODO.toString())) {
             checkDetailsNonEmpty(newTaskType, newTaskDetails);
-            String description = newTaskDetails.substring(5).trim();
+            String description = newTaskDetails.trim();
             return new TodoTask(description);
-        } else if (newTaskType.equalsIgnoreCase(Task.TaskTypes.EVENT.toString())) {
+        } else if (newTaskType.equalsIgnoreCase(TaskTypes.EVENT.toString())) {
             checkDetailsNonEmpty(newTaskType, newTaskDetails);
             checkTaskIncludesTime(newTaskType, newTaskDetails);
-            String description = newTaskDetails.substring(6).split("/at ")[0].trim();
+            String description = newTaskDetails.split("/at ")[0].trim();
             String timeString = newTaskDetails.split("/at ")[1].trim();
             LocalDateTime time = StringCleaner.toLocalDateTime(timeString);
             return new EventTask(description, time);
-        } else if (newTaskType.equalsIgnoreCase(Task.TaskTypes.DEADLINE.toString())) {
+        } else if (newTaskType.equalsIgnoreCase(TaskTypes.DEADLINE.toString())) {
             checkDetailsNonEmpty(newTaskType, newTaskDetails);
             checkTaskIncludesTime(newTaskType, newTaskDetails);
-            String description = newTaskDetails.substring(9).split("/by ")[0].trim();
+            String description = newTaskDetails.split("/by ")[0].trim();
             String timeString = newTaskDetails.split("/by ")[1].trim();
             LocalDateTime time = StringCleaner.toLocalDateTime(timeString);
             return new DeadlineTask(description, time);
@@ -87,20 +87,19 @@ public class TaskFactory {
     }
 
     private void checkDetailsNonEmpty(String newTaskType, String details) throws AuguryException {
-        int commandLength = newTaskType.length() + 1;
-        if (details.length() <= commandLength
-                || details.contains("/at") && details.split("/at")[0].length() <= commandLength
-                || details.contains("/by") && details.split("/by")[0].length() <= commandLength) {
+        if (details.length() <= 1
+                || details.contains("/at") && details.split("/at")[0].length() < 1
+                || details.contains("/by") && details.split("/by")[0].length() < 1) {
             throw new InvalidTaskCreationException("Description of " + newTaskType + " cannot be empty!");
         }
     }
 
     private void checkTaskIncludesTime(String newTaskType, String details) throws AuguryException {
-        if (newTaskType.equalsIgnoreCase(Task.TaskTypes.EVENT.toString())) {
+        if (newTaskType.equalsIgnoreCase(TaskTypes.EVENT.toString())) {
             if (details.split("/at ").length < 2 || details.split("/at ")[1].length() <= 1) {
                 throw new InvalidTaskCreationException("Event task must include time! (use /at YYYY-MM-DD HHMM)");
             }
-        } else if (newTaskType.equalsIgnoreCase(Task.TaskTypes.DEADLINE.toString())) {
+        } else if (newTaskType.equalsIgnoreCase(TaskTypes.DEADLINE.toString())) {
             if (details.split("/by ").length < 2 || details.split("/by ")[1].length() <= 1) {
                 throw new InvalidTaskCreationException("Deadline task must include time! (use /by YYYY-MM-DD HHMM)");
             }

@@ -1,10 +1,10 @@
 package duke;
 
-import duke.exceptions.AuguryException;
-import javafx.application.Application;
-
 import java.util.Arrays;
 import java.util.List;
+
+import duke.exceptions.AuguryException;
+import javafx.application.Application;
 
 /**
  * The {@code Launcher} class is the entry point of Augury.

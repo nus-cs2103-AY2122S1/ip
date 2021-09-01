@@ -1,11 +1,11 @@
 package duke.ui;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class UiTest {
 
@@ -18,9 +18,9 @@ public class UiTest {
         Ui ui = new Ui();
         ui.speak("ABC");
 
-        String expectedOutput  = "\t_________________________________\r\n" +
-                "\t ABC\r\n" +
-                "\t_________________________________\r\n";
+        String expectedOutput = "\t_________________________________\r\n"
+                + "\t ABC\r\n"
+                + "\t_________________________________\r\n";
 
         // Do the actual assertion.
         assertEquals(expectedOutput, outContent.toString());

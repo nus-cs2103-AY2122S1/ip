@@ -1,41 +1,49 @@
 package duke.io;
 
+import duke.commands.Command;
+import duke.commands.CommandTypes;
+import duke.exceptions.AuguryException;
+import duke.exceptions.InvalidActionException;
+import duke.exceptions.UnknownCommandException;
+
 /**
  * The {@code Parser} class handles command parsing.
  */
 public class Parser {
-    private final String COMMAND_MAKE_TASK = "COMMAND_MAKE_TASK";
-    private final String COMMAND_LIST_TASKS = "COMMAND_LIST_TASKS";
-    private final String COMMAND_FIND_TASKS = "COMMAND_FIND_TASKS";
-    private final String COMMAND_QUIT = "COMMAND_QUIT";
-    private final String COMMAND_MARK_TASK_STATUS = "COMMAND_MARK_TASK_STATUS";
-    private final String COMMAND_DELETE_TASK = "COMMAND_DELETE_TASK";
-    private final String COMMAND_UNKNOWN = "COMMAND_UNKNOWN";
 
     public Parser() { }
 
     /**
-     * Converts the provided user {@code String input} and parses the desired command.
+     * Converts the provided user {@code String input} into a {@code Command}.
      *
      * @param input {@code String} of user input.
      * @return {@code String} which corresponds to the command that the user entered.
      */
-    public String parse(String input) {
+    public Command parse(String input) throws AuguryException {
 
         if (input.equals("bye") || input.equals("exit") || input.equals("quit")) {
-            return COMMAND_QUIT;
+            return Command.of(CommandTypes.QUIT);
         } else if (input.equals("list") || input.equals("ls")) {
-            return COMMAND_LIST_TASKS;
-        } else if (input.length() >= 4 && input.startsWith("done")) {
-            return COMMAND_MARK_TASK_STATUS;
-        } else if (input.length() >= 6 && input.startsWith("delete")) {
-            return COMMAND_DELETE_TASK;
-        } else if (input.startsWith("event") || input.startsWith("deadline") || input.startsWith("todo")) {
-            return COMMAND_MAKE_TASK;
+            return Command.of(CommandTypes.LIST);
+        } else if (input.startsWith("done")) {
+            String indexes = input.substring(4).trim();
+            if (indexes.length() == 0) {
+                throw new InvalidActionException("Please enter the task number which you want to mark as done.");
+            }
+            return Command.of(CommandTypes.MARKDONE, indexes);
+        } else if (input.startsWith("delete")) {
+            String indexes = input.substring(6).trim();
+            if (indexes.length() == 0) {
+                throw new InvalidActionException("Please enter the task number which you want to delete.");
+            }
+            return Command.of(CommandTypes.DELETE, indexes);
         } else if (input.startsWith("find")) {
-            return COMMAND_FIND_TASKS;
+            String queries = input.replace("find ", "");
+            return Command.of(CommandTypes.FIND, queries);
+        } else if (input.startsWith("event") || input.startsWith("deadline") || input.startsWith("todo")) {
+            return Command.of(CommandTypes.MAKE, input);
         } else {
-            return COMMAND_UNKNOWN;
+            throw new UnknownCommandException("Unknown command entered.");
         }
     }
 
