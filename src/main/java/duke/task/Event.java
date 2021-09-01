@@ -1,3 +1,6 @@
+package duke.task;
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -14,7 +17,7 @@ public class Event extends Task {
             LocalDate localDate = LocalDate.parse(at);
             this.date = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException e) {
-            throw new DukeException("Event date should be in a yyyy-mm-dd format.");
+            throw new DukeException("duke.task.Event date should be in a yyyy-mm-dd format.");
         }
 
         if (description.isEmpty() || description == "" || description == " ") {

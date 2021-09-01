@@ -1,3 +1,5 @@
+package duke.task;
+
 abstract public class Task {
     protected String description;
     protected boolean isDone;
@@ -23,6 +25,10 @@ abstract public class Task {
     public void markAsDone() {
         this.isDone = true;
         System.out.println("Nice! I've marked this task as done: \n" + this.toString());
+    }
+
+    public boolean checkIfDone() {
+        return this.isDone;
     }
 
     public String getType() {
