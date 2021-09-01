@@ -24,15 +24,6 @@ public class Ui {
     }
 
     /**
-     * Shows the welcome message.
-     */
-    public String showWelcome() {
-        System.out.println("Hello from\n" + logo);
-        //Start Prompt.
-        return getPattern("Hello! I'm duke.Duke\n   What can I do for you?");
-    }
-
-    /**
      * Returns the formatted string output.
      *
      * @param task The possible task string representations.
@@ -60,14 +51,6 @@ public class Ui {
         String out = empty + curr + "\n" + empty + r + "\n" + empty + curr + "\n";
         result.append(out);
         return result.toString();
-    }
-
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    public String showLine() {
-        return "   " + "*".repeat(80);
     }
 
     /**

@@ -1,10 +1,5 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;

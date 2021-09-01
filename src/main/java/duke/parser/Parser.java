@@ -21,7 +21,7 @@ public class Parser {
      * @param input String input.
      * @return Content of input is digit or not.
      */
-    public static boolean chekDigit(String input) {
+    public static boolean checkDigit(String input) {
         boolean isDigit = true;
         int i = 0;
         if (input.charAt(0) == '-') {
@@ -90,7 +90,7 @@ public class Parser {
                 && Task.isDate(response.substring(5))) {
             return Operation.DATE;
         } else if (response.startsWith("done ")
-                && chekDigit(response.substring(5))) {
+                && checkDigit(response.substring(5))) {
             return Operation.DONE;
         } else if (response.startsWith("todo ") && len > 5) {
             return Operation.TODO;
@@ -101,7 +101,7 @@ public class Parser {
                 && response.substring(6).contains(" /at ")) {
             return Operation.EVENT;
         } else if (response.startsWith("delete ")
-                && chekDigit(response.substring(7))) {
+                && checkDigit(response.substring(7))) {
             return Operation.DELETE;
         } else if (response.equals("delete") || response.equals("todo") || response.equals("deadline")
                 || response.equals("event") || response.equals("done") || response.equals("date")

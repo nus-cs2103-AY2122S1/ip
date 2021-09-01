@@ -98,7 +98,7 @@ public class Task {
         int monthValue = Integer.parseInt(month);
         boolean validDay = dayValue <= 31 && dayValue >= 1;
         boolean validMonth = monthValue <= 12 && monthValue >= 1;
-        return Parser.chekDigit(day) && Parser.chekDigit(year) && Parser.chekDigit(month) && validDay
+        return Parser.checkDigit(day) && Parser.checkDigit(year) && Parser.checkDigit(month) && validDay
                 && validMonth;
     }
 
@@ -120,7 +120,7 @@ public class Task {
             }
             String date = parts[0];
             String time = parts[1];
-            if (date.length() > 10 || time.length() != 4 || !Parser.chekDigit(time)
+            if (date.length() > 10 || time.length() != 4 || !Parser.checkDigit(time)
                     || !date.contains("/")) {
                 return false;
             }

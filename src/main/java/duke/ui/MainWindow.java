@@ -1,5 +1,7 @@
-package duke;
+package duke.ui;
 
+import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,12 +11,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
-import java.util.Objects;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    private static final String GREETING = "Hello! I'm Duke, what can I do for you?";
+    private static final String FAREWELL = "Bye. Hope to see you again soon!";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -32,8 +37,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello!" + "\n" + "I'm Duke, your task manager!", dukeImage));
+        showWelcome();
     }
 
     public void setDuke(Duke d) {
@@ -53,5 +57,27 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.trim().equals("bye")) {
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            }, 1500);
+            Platform.exit();
+            System.exit(0);
+        }
+    }
+
+    @FXML
+    private void showWelcome() {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(GREETING, dukeImage));
+    }
+
+    @FXML
+    private void showFarewell() {
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(FAREWELL, dukeImage));
     }
 }
