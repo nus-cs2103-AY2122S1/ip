@@ -9,6 +9,7 @@ import duke.ui.Ui;
 import java.util.ArrayList;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
@@ -37,8 +38,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/bot.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/bot.jpg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/elsa.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/olaf.png"));
 
     public Duke() {
         storage = new Storage(filePath);
@@ -60,6 +61,9 @@ public class Duke extends Application {
         userInput = new TextField();
         sendButton = new Button("Send");
 
+        dialogContainer.setSpacing(10.0);
+        dialogContainer.setPadding(new Insets(15));
+
         AnchorPane mainLayout = new AnchorPane();
 
         Label dukeWelcome = new Label("Hello from Duke! \nWhat do you need to do today?");
@@ -77,11 +81,11 @@ public class Duke extends Application {
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setMinWidth(600.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(600.0, 600.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(595, 535);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -90,9 +94,9 @@ public class Duke extends Application {
 
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(535.0);
 
-        sendButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(60.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
 

@@ -52,7 +52,7 @@ public class Ui {
      * @param task the deleted task
      */
     public static String showDeletedTask(Task task) {
-        return "Got it! I've removed this task: \n" + task;
+        return "Got it! I've removed this task: \n" + task + "\n";
     }
 
     /**
@@ -96,7 +96,8 @@ public class Ui {
             StringBuilder searchResults = new StringBuilder("Here are the matching tasks in your list: \n");
             int index = 1;
             for (Task item : results) {
-                searchResults.append(index).append(". ").append(item);
+                searchResults.append(index).append(". ").append(item).append("\n");
+                index += 1;
             }
             return searchResults.toString();
         }
