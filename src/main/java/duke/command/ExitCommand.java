@@ -1,10 +1,11 @@
 package duke.command;
 
+import static duke.Ui.dukePrint;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import static duke.Ui.dukePrint;
 
 /**
  * Represents command to exit loop.

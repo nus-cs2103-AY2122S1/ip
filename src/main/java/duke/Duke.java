@@ -1,8 +1,8 @@
 package duke;
 
-import duke.command.Command;
-
 import java.util.Scanner;
+
+import duke.command.Command;
 
 /**
  * Main driver for Duke chat bot.
@@ -37,7 +37,8 @@ public class Duke {
     public void run() {
         ui.greet();
         boolean isExit = false;
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+        // Create a Scanner object
+        Scanner scanner = new Scanner(System.in);
         while (!isExit) {
             String input = scanner.nextLine();
             try {

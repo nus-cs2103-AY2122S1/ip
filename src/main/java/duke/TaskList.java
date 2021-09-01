@@ -1,14 +1,14 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import static duke.Ui.dukePrint;
 
 import java.util.ArrayList;
 import java.util.stream.IntStream;
 
-import static duke.Ui.dukePrint;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * A list of Tasks recorded by Duke.
@@ -53,8 +53,8 @@ public class TaskList {
             if (i > 0 && i <= list.size()) {
                 Task t = list.remove(i - 1);
                 storage.saveFile(list);
-                dukePrint("Got it. I've removed this task:\n" + t + "\n" + "Now you have " +
-                        list.size() + " task" + (list.size() < 2 ? " " : "s ") + "in the list.");
+                dukePrint("Got it. I've removed this task:\n" + t + "\n" + "Now you have "
+                        + list.size() + " task" + (list.size() < 2 ? " " : "s ") + "in the list.");
             } else {
                 throw new DukeException("No such task found in list.");
             }
@@ -131,8 +131,8 @@ public class TaskList {
 
     private void addTask(Task t) throws DukeException {
         list.add(t);
-        dukePrint("Got it. I've added this task:\n" + t + "\n" + "Now you have " +
-                list.size() + " task" + (list.size() < 2 ? " " : "s ") + "in the list.");
+        dukePrint("Got it. I've added this task:\n" + t + "\n" + "Now you have "
+                + list.size() + " task" + (list.size() < 2 ? " " : "s ") + "in the list.");
         storage.saveFile(list);
     }
 
@@ -144,8 +144,9 @@ public class TaskList {
             dukePrint("list empty");
             return;
         }
-        dukePrint("Here are the tasks in your list:\n" +
-                IntStream.range(0, list.size()).mapToObj((i) -> (i + 1) + ". " + list.get(i).toString()).reduce("", (str1, str2) -> str1 + str2 + "\n"));
+        dukePrint("Here are the tasks in your list:\n"
+                + IntStream.range(0, list.size()).mapToObj((i) -> (i + 1) + ". " + list.get(i).toString())
+                .reduce("", (str1, str2) -> str1 + str2 + "\n"));
     }
 
     /**

@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,6 +7,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 
 /**
  * Storage helper for storage related tasks.
@@ -67,8 +68,9 @@ public class Storage {
                 return new Deadline(stringProcessor.next(), stringProcessor.next(), stringProcessor.next());
             case "E":
                 return new Event(stringProcessor.next(), stringProcessor.next(), stringProcessor.next());
+            default:
+                return null;
             }
-            return null;
         } catch (NoSuchElementException e) {
             throw new DukeException("Save file has invalid format.");
         }
@@ -82,7 +84,7 @@ public class Storage {
             file.createNewFile();
             FileWriter writer = new FileWriter(file);
             writer.write(list.stream().map(Task::saveString).reduce(
-                    "", (string1, string2) -> string1 + string2 + "\n"));
+                "", (string1, string2) -> string1 + string2 + "\n"));
             writer.close();
         } catch (IOException e) {
             throw new DukeException("IO Exception File Cannot Be Found");
