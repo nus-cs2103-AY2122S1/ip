@@ -103,8 +103,8 @@ public class Duke {
         // Put things back. Important!
         System.out.flush();
         System.setOut(old);
-        // Show what happened in the terminal on IntelliJ
-        System.out.println("Here: " + narutoStream.toString());
+        // Show what happened in the terminal on IntelliJ if needed
+        // System.out.println("Here: " + narutoStream.toString());
 
         return "Naruto's reply! " + narutoStream.toString();
     }
