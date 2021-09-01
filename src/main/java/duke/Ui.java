@@ -12,16 +12,16 @@ public class Ui {
 
     public static void printWelcome() {
         String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
         String greeting = LINE
-            + INDENT + "Hello! I'm Duke\n"
-            + INDENT + "What can I do for you?\n"
-            + LINE;
+                + INDENT + "Hello! I'm Duke\n"
+                + INDENT + "What can I do for you?\n"
+                + LINE;
         System.out.println(greeting);
     }
 
@@ -44,15 +44,15 @@ public class Ui {
 
     public static void printDoneTask(String taskString) {
         System.out.println(LINE + INDENT + "Nice! I've marked this task as done:\n"
-            + INDENT + INDENT + taskString + "\n"
-            + LINE);
+                + INDENT + INDENT + taskString + "\n"
+                + LINE);
     }
 
     public static void printDeleteTask(String taskString, int taskNo) {
         System.out.println(LINE + INDENT + "Noted. I've removed this task:\n"
-            + INDENT + INDENT + taskString + "\n"
-            + INDENT + String.format("Now you have %d tasks in the list.\n", taskNo)
-            + LINE);
+                + INDENT + INDENT + taskString + "\n"
+                + INDENT + String.format("Now you have %d tasks in the list.\n", taskNo)
+                + LINE);
     }
 
     public static void printFindTask(List<Task> matchingTaskList) {
@@ -66,9 +66,9 @@ public class Ui {
 
     public static void printAddTask(String taskString, int taskNo) {
         System.out.println(LINE + INDENT + "Got it. I've added this task:\n"
-            + INDENT + INDENT + taskString + "\n"
-            + INDENT + String.format("Now you have %d tasks in the list.\n", taskNo)
-            + LINE);
+                + INDENT + INDENT + taskString + "\n"
+                + INDENT + String.format("Now you have %d tasks in the list.\n", taskNo)
+                + LINE);
     }
 
     public static void printFarewell() {
