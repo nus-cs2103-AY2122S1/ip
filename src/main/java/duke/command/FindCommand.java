@@ -11,12 +11,12 @@ import duke.ui.Ui;
  * Contains the executables when the user uses the 'Find' command.
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private String[] keyword;
     /**
      * Constructor for the find command.
      * @param keyword the keyword to search for
      */
-    public FindCommand(String keyword) {
+    public FindCommand(String ... keyword) {
         this.keyword = keyword;
     }
 
@@ -26,10 +26,12 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> res = new ArrayList<Task>();
-        for (Task tsk : tasks.getAllTasks()) {
-            String currTask = tsk.toString();
-            if (currTask.contains(keyword)) {
-                res.add(tsk);
+        for (String keyword : this.keyword) {
+            for (Task tsk : tasks.getAllTasks()) {
+                String currTask = tsk.toString();
+                if (currTask.contains(keyword)) {
+                    res.add(tsk);
+                }
             }
         }
         return ui.matchingTasks() + ui.listView(res);
