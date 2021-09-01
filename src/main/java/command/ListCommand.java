@@ -16,11 +16,11 @@ public class ListCommand extends Command {
      * @param storage Not used for this command
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getSize() == 0) {
-            ui.showMessage("You have no tasks saved!");
+            return ui.showMessage("You have no tasks saved!");
         } else {
-            ui.showTasks(tasks);
+            return ui.showTasks(tasks);
         }
     }
 

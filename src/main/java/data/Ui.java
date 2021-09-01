@@ -20,10 +20,12 @@ public class Ui {
     private static final String DIVIDER = "===================================================";
 
     /** Shows message(s) to the user */
-    public void showToUser(String... message) {
+    public static String showToUser(String... message) {
+        String displayedMessage = "";
         for (String m : message) {
-            System.out.println(m + "\n");
+            displayedMessage += (m + "\n");
         }
+        return displayedMessage;
     }
 
     public void showWelcome() {
@@ -33,80 +35,34 @@ public class Ui {
             DIVIDER);
     }
 
-    public void showGoodbye() {
-        showToUser(MESSAGE_EXIT);
+    public static String showGoodbye() {
+        return showToUser(MESSAGE_EXIT);
     }
 
-    public void showLine() {
-        showToUser(DIVIDER);
+    public String showLine() {
+        return showToUser(DIVIDER);
     }
 
-    public void showLoadingError() {
-        showToUser(
+    public String showLoadingError() {
+        return showToUser(
             DIVIDER,
             MESSAGE_LOADING_ERROR,
             DIVIDER);
     }
 
-    public void showError(String e) {
-        showToUser(e);
+    public String showError(String e) {
+        return showToUser(e);
     }
 
-    public void showMessage(String message) {
-        showToUser(message);
+    public String showMessage(String message) {
+        return showToUser(message);
     }
 
-    public void showTasks(TaskList tasks) {
-        showToUser("Here are your tasks:");
+    public String showTasks(TaskList tasks) {
+        String displayedTasks = "Here are your tasks:";
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println(tasks.getTask(i).toString());
+            displayedTasks += (tasks.getTask(i).toString() + "\n");
         }
-    }
-
-    /**
-     * The following methods shouldIgnore, isCommentLine, readCommand and the string COMMENT_LINE_FORMAT_REGEX
-     * were taken from addressbook-level2(https://github.com/se-edu/addressbook-level2) and edited slightly
-     * to fit into iP
-     */
-    /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
-    private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
-
-    /**
-     * Returns true if the user input line should be ignored.
-     * Input should be ignored if it is parsed as a comment, is only whitespace, or is empty.
-     *
-     * @param rawInputLine full raw user input line.
-     * @return true if the entire user input line should be ignored.
-     */
-    private boolean shouldIgnore(String rawInputLine) {
-        return rawInputLine.trim().isEmpty() || isCommentLine(rawInputLine);
-    }
-
-    /**
-     * Returns true if the user input line is a comment line.
-     *
-     * @param rawInputLine full raw user input line.
-     * @return true if input line is a comment.
-     */
-    private boolean isCommentLine(String rawInputLine) {
-        return rawInputLine.trim().matches(COMMENT_LINE_FORMAT_REGEX);
-    }
-
-    /**
-     * Prompts for the command and reads the text entered by the user.
-     * Ignores empty, pure whitespace, and comment lines.
-     * Echos the task back to the user.
-     * @return task (full line) entered by the user
-     */
-    public String readCommand() {
-        System.out.println("Enter task: ");
-        String userInputLine = userInput.nextLine();
-
-        // silently consume all ignored lines
-        while (shouldIgnore(userInputLine)) {
-            userInputLine = userInput.nextLine();
-        }
-
-        return userInputLine;
+        return displayedTasks;
     }
 }

@@ -21,12 +21,45 @@ public class Parser {
     };
 
     /**
+     * The following methods shouldIgnore, isCommentLine, readCommand and the string COMMENT_LINE_FORMAT_REGEX
+     * were taken from addressbook-level2(https://github.com/se-edu/addressbook-level2) and edited slightly
+     * to fit into iP
+     */
+    /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
+    private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
+
+    /**
+     * Returns true if the user input line should be ignored.
+     * Input should be ignored if it is parsed as a comment, is only whitespace, or is empty.
+     *
+     * @param rawInputLine full raw user input line.
+     * @return true if the entire user input line should be ignored.
+     */
+    private static boolean shouldIgnore(String rawInputLine) {
+        return rawInputLine.trim().isEmpty() || isCommentLine(rawInputLine);
+    }
+
+    /**
+     * Returns true if the user input line is a comment line.
+     *
+     * @param rawInputLine full raw user input line.
+     * @return true if input line is a comment.
+     */
+    private static boolean isCommentLine(String rawInputLine) {
+        return rawInputLine.trim().matches(COMMENT_LINE_FORMAT_REGEX);
+    }
+
+    /**
      * Checks the keyword of the input and return the corresponding command.
      *
      * @param userInput The text that the user inputs
      * @return A Command that does what the keyword intended when executed
      */
     public static Command parse(String userInput) {
+        if (shouldIgnore(userInput)) {
+            throw new DukeException("Invalid Keyword.");
+        }
+
         String[] userInputArray = userInput.split(" ");
         String keyword = userInputArray[0];
 
