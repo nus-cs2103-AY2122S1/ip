@@ -26,7 +26,7 @@ public class Parser {
      * @return true if input is terminating command else false.
      */
     public static boolean isTerminateCommand(String command) {
-        return command == "bye";
+        return command.equals("bye");
     }
 
     /**
@@ -41,6 +41,9 @@ public class Parser {
         String description = commandAndDesc.length == 2 ? commandAndDesc[1] : "";
         String response;
         switch (command) {
+            case "bye":
+                response = ui.exitWithGoodbye();
+                break;
             case "find":
                 List<Task> matches = taskList.find(description);
                 response = ui.getMatchingTasksSummary(matches);

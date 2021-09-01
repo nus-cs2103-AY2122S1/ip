@@ -118,4 +118,11 @@ public class Ui {
         }
     }
 
+    public String exitWithGoodbye() {
+        new Thread(() -> {
+            uiCommands.get("exit").accept("");
+        }).start();
+        return "Hope to see you soon!!";
+    }
+
 }

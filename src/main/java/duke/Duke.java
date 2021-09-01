@@ -44,9 +44,6 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            if (Parser.isTerminateCommand(input)) {
-                terminateDuke();
-            }
             return parser.parse(input);
         } catch (DukeException e) {
             return e.getMessage();
@@ -55,12 +52,5 @@ public class Duke {
 
     public void setUi(Ui ui) {
         this.ui = ui;
-    }
-
-    /**
-     * Stops the assistant.
-     */
-    public void terminateDuke() {
-
     }
 }
