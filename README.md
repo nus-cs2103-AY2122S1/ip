@@ -62,7 +62,7 @@ add deadline return book /by 6/6/2021 1600
 
 ```java
 public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
+     new Duke("data/tasks.txt").run();
+ }
  ```
     
