@@ -8,6 +8,7 @@ public enum PrintType {
     TASK_DELETED_LINE("Noted. I've removed this task:"),
     LIST_INTRO_LINE("Here are the tasks in your list"),
     NOT_RECOGNISED_LINE(":( Oh no! Command not recognized"),
+    FIND_INTRO_LINE("Here are the matching tasks in your list:"),
     DONE_FORMAT_LINE(":( Oh no! Delete must follow the format: delete <index>"),
     DELETED_FORMAT_LINE(":( Oh no! Delete must follow the format: delete <index>"),
     OUT_OF_RANGE_LINE(":( Oh no! The index given is out of the range of the number of tasks."),

@@ -185,6 +185,33 @@ public class TaskManager {
 
     }
 
+
+    /**
+     * Finds the list of similar tasks the user wants
+     * @param arguments - the user input
+     * @return - the list of tasks found in the String form
+     * @throws NotFoundException - the task has not been found
+     */
+    public String findTask(String arguments) throws NotFoundException {
+        String foundList = PrintType.FIND_INTRO_LINE.getPrintType() + arguments + "'";
+
+        int numFound = 0;
+
+        // Add each item to foundList
+        for (int i = 1; i <= tasks.size(); ++i) {
+            if (tasks.get(i - 1).getDescription().toLowerCase().contains(arguments.toLowerCase())) {
+                numFound += 1;
+                foundList = foundList + "\n" + i + ". " + tasks.get(i - 1).showTask();
+            }
+        }
+
+        if (numFound == 0){
+            throw new NotFoundException();
+        }
+        return foundList;
+    }
+
+
     /**
      * Clear the list of all the tasks
      */
