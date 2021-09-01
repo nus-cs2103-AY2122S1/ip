@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 public class FindTasksCommand implements ICommand {
 
     private String keyword;
+    String reply;
 
     public FindTasksCommand(String input) {
         keyword = input.substring(5);
@@ -18,6 +19,10 @@ public class FindTasksCommand implements ICommand {
 
         ArrayList<Task> filteredTasks = (ArrayList<Task>) originalTasks.stream().filter(task -> task.getName().contains(keyword)).collect(Collectors.toList());
 
-        ui.printTasks(filteredTasks);
+        reply = ui.getListTasksMessage(filteredTasks);
+    }
+
+    public String getReply() {
+        return reply;
     }
 }

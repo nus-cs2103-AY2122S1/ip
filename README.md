@@ -1,6 +1,6 @@
-# Do Understand Know Empower (Duke)
+# Do Understand Know Empower (duke)
 
-Hello 😄 This is Ryan Ong's evolution of the **Duke Chatbot** with the purpose of keeping track of the tasks *you* ~~die die~~ need to do.
+Hello 😄 This is Ryan Ong's evolution of the **duke Chatbot** with the purpose of keeping track of the tasks *you* ~~die die~~ need to do.
 > Quidquid latine dictum sit, altum videtur
 
 ## Features

@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * This class encapsulates exceptions which the Duke program could throw/

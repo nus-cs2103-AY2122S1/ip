@@ -1,10 +1,12 @@
-package Duke;
+package duke;
 
 /**
  * This class encapsulates the command to cease the conversation with Duke.
  * It is triggered by the parser and uses the Ui.
  */
 public class ByeCommand implements ICommand {
+
+    String reply;
 
     /**
      * Called the Ui object to display the 'bye' message then ends the program.
@@ -13,8 +15,12 @@ public class ByeCommand implements ICommand {
      * @param storage The Storage object managing the local storing of tasks.
      */
     public void execute(TaskManager tm, Ui ui, Storage storage) {
-        ui.printByeMessage();
+        reply = ui.getByeMessage();
         System.exit(0);
+    }
+
+    public String getReply() {
+        return getReply();
     }
 
 }

@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 import java.util.Scanner;
 
@@ -14,8 +14,8 @@ public class Parser {
      * Gets the user's input and return the relevant command to execute.
      * @return A command which determines how the program should react.
      */
-    public ICommand getInput() {
-        String input = sc.nextLine();
+    public ICommand getInput(String input) {
+        //String input = sc.nextLine();
 
         // Exit
         if (input.equals("bye")) {

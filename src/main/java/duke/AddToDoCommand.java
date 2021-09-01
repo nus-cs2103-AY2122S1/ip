@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * This class encapsulates the command to add a To-Do type task.
@@ -6,14 +6,15 @@ package Duke;
  */
 public class AddToDoCommand implements ICommand {
 
-    private final String INPUT;
+    String input;
+    private String reply;
 
     /**
      * Constructor for the command.
      * @param input The user's input which triggered the creation of this command.
      */
     public AddToDoCommand(String input) {
-        this.INPUT = input;
+        this.input = input;
     }
 
     /**
@@ -24,11 +25,15 @@ public class AddToDoCommand implements ICommand {
      */
     public void execute(TaskManager tm, Ui ui, Storage storage) {
         try {
-            Task addedTask = tm.addToDo(INPUT);
-            ui.printTaskAddition(addedTask, tm.getTasks().size());
+            Task addedTask = tm.addToDo(input);
+            reply = ui.getTaskAdditionMessage(addedTask, tm.getTasks().size());
             storage.updateSave(tm.getTasks());
         } catch (DukeException.NoNameException e) {
-            ui.printErrorMessage(e);
+            reply = ui.getErrorMessage(e);
         }
+    }
+
+    public String getReply() {
+        return reply;
     }
 }

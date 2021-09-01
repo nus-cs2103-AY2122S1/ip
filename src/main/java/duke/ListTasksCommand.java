@@ -1,10 +1,12 @@
-package Duke;
+package duke;
 
 /**
  * This class encapsulates the command to display the current tasks.
  * It is triggered by the parser and uses the TaskManager and Ui.
  */
 public class ListTasksCommand implements ICommand {
+
+    String reply;
 
     /**
      * Calls the Ui object to display the current list of tasks.
@@ -13,7 +15,11 @@ public class ListTasksCommand implements ICommand {
      * @param storage The Storage object managing the local storing of tasks.
      */
     public void execute(TaskManager tm, Ui ui, Storage storage) {
-        ui.printTasks(tm.getTasks());
+        reply = ui.getListTasksMessage(tm.getTasks());
+    }
+
+    public String getReply() {
+        return reply;
     }
 
 }

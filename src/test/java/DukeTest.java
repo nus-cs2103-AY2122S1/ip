@@ -1,10 +1,10 @@
-import Duke.AddEventCommand;
-import Duke.AddDeadlineCommand;
-import Duke.TaskManager;
-import Duke.Task;
-import Duke.Storage;
-import Duke.Ui;
-import Duke.AddToDoCommand;
+import duke.AddEventCommand;
+import duke.AddDeadlineCommand;
+import duke.TaskManager;
+import duke.Task;
+import duke.Storage;
+import duke.Ui;
+import duke.AddToDoCommand;
 
 import org.junit.jupiter.api.Test;
 

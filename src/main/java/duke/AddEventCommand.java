@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * This class encapsulates the command to add an event type task.
@@ -7,6 +7,11 @@ package Duke;
 public class AddEventCommand implements ICommand {
 
     private final String input;
+    TaskManager tm;
+    Ui ui;
+    Storage storage;
+    Task addedEvent;
+    String reply;
 
     /**
      * Constructor for the command.
@@ -25,15 +30,24 @@ public class AddEventCommand implements ICommand {
     public void execute(TaskManager tm, Ui ui, Storage storage) {
         try {
             Task addedEvent = tm.addEvent(input);
+            this.tm = tm;
+            this.ui = ui;
+            this.storage = storage;
+            this.addedEvent = addedEvent;
             if (addedEvent != null) {
-                ui.printTaskAddition(addedEvent, tm.getTasks().size());
+                reply = ui.getTaskAdditionMessage(addedEvent, tm.getTasks().size());
                 storage.updateSave(tm.getTasks());
             } else {
-                throw new DukeException.NoTimeSpecifiedException("");
+                throw new DukeException.NoTimeSpecifiedException("Please use the format YYYY-MM-DD HH:MM when entering when the event is \n" +
+                        "E.g. 2021-08-28 18:30");
             }
         } catch (DukeException.NoNameException |
                 DukeException.NoTimeSpecifiedException e) {
-            ui.printErrorMessage(e);
+            reply = ui.getErrorMessage(e);
         }
+    }
+
+    public String getReply() {
+        return reply;
     }
 }

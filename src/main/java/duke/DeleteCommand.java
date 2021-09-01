@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * This class encapsulates the command to delete a task.
@@ -7,6 +7,12 @@ package Duke;
 public class DeleteCommand implements ICommand {
 
     String taskIndex;
+    TaskManager tm;
+    Ui ui;
+    Storage storage;
+    Task deletedTask;
+    String reply;
+
 
     /**
      * Constructor for the command.
@@ -26,15 +32,20 @@ public class DeleteCommand implements ICommand {
      */
     public void execute(TaskManager tm, Ui ui, Storage storage) {
         try {
-            Task deletedTask = tm.deleteTask(taskIndex);
+            deletedTask = tm.deleteTask(taskIndex);
+            this.ui = ui;
             if (deletedTask == null) {
-                ui.printInvalidIndexMessage();
+                reply = ui.getInvalidIndexMessage();
             } else {
-                ui.printTaskDeletion(deletedTask, tm.getTasks().size());
+                reply = ui.getTaskDeletionMessage(deletedTask, tm.getTasks().size());
                 storage.updateSave(tm.getTasks());
             }
         } catch (DukeException.InvalidInputException e) {
-            ui.printErrorMessage(e);
+            reply = ui.getErrorMessage(e);
         }
+    }
+
+    public String getReply() {
+        return reply;
     }
 }

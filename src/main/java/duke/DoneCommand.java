@@ -1,4 +1,4 @@
-package Duke;
+package duke;
 
 /**
  * This class encapsulates the command to complete a task.
@@ -7,6 +7,11 @@ package Duke;
 public class DoneCommand implements ICommand {
 
     String taskIndex;
+    TaskManager tm;
+    Ui ui;
+    Storage storage;
+    Task completedTask;
+    String reply;
 
     /**
      * Constructor for the command.
@@ -26,16 +31,22 @@ public class DoneCommand implements ICommand {
      */
     public void execute(TaskManager tm, Ui ui, Storage storage) {
         try {
-            Task completedTask = tm.completeTask(taskIndex);
+            completedTask = tm.completeTask(taskIndex);
+            this.ui = ui;
+            this.tm = tm;
+            this.storage = storage;
             if (completedTask == null) {
-                ui.printInvalidIndexMessage();
+                reply = ui.getInvalidIndexMessage();
             } else {
-                ui.printTaskCompletion(completedTask, tm.getTasks().size());
+                reply = ui.getTaskCompletionMessage(completedTask, tm.getTasks().size());
                 storage.updateSave(tm.getTasks());
             }
         } catch (DukeException.InvalidInputException e) {
-            ui.printErrorMessage(e);
+            reply = ui.getErrorMessage(e);
         }
     }
 
+    public String getReply() {
+        return reply;
+    }
 }
