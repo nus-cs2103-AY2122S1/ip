@@ -4,11 +4,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * @Deadline are Tasks that have an attached date as the time a Task needs to be completed by.
+ */
 public class Deadline extends Task{
     private Date date;
     protected static final String DEADLINE_LABEL = "D";
 
-    public Deadline(String str) throws DukeDateParseException {
+    /**
+     * Creates a Deadline instance.
+     *
+     * @param str the arguments provided to chatbot to initialize the Deadline Task.
+     * @throws DukeDateParseException when there is an error parsing the date provided.
+     * @throws DukeArgumentException when there is insufficient/incorrect argument(s) provided.
+     */
+    public Deadline(String str) throws DukeDateParseException, DukeArgumentException {
         super(str.split(" /", 2)[0]);
         String[] command = str.split(" /", 2);
         if (command.length == 1) {
