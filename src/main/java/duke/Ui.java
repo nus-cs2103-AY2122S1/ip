@@ -10,6 +10,12 @@ public class Ui {
 
     }
 
+    /**
+     * Returns a list that has been converted to a displayable string on the GUI.
+     *
+     * @param elements The list of elements to be converted.
+     * @return A list that has been converted to a string.
+     */
     public String listToPrintableString(Tasklist elements) {
         ListIterator<Task> it = elements.toIterable();
         if (elements.size() == 0) {
@@ -24,6 +30,13 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns a confirmation that a task has been added.
+     *
+     * @param task Task that was added to the task list.
+     * @param listOfItems Total number of tasks in the task list currently.
+     * @return String confirmation to be displayed on the GUI.
+     */
     public String printAdditionConfirmation(Task task, Tasklist listOfItems) {
         String confirmationMessage = "You have successfully added an item:\n" + task + "\nto the list.\n";
 
@@ -33,7 +46,13 @@ public class Ui {
                 listOfItems.size() != 1 ? "items" : "item");
         return confirmationMessage + numberOfItems;
     }
-
+    /**
+     * Returns a confirmation that a task has been deleted.
+     *
+     * @param task Task that was deleted from the task list.
+     * @param listOfItems Total number of tasks in the task list currently.
+     * @return String confirmation to be displayed on the GUI.
+     */
     public String printDeletionConfirmation(Task task, Tasklist listOfItems) {
         String confirmationMessage = "You have successfully deleted an item:\n" + task + "\nfrom the list.\n";
 
