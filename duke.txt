@@ -1,5 +1,0 @@
-1. duke.task.Deadline | | return book | by: Sep 9 2021, 7 PM
-2. duke.task.Todo | | read book
-3. duke.task.Todo | | watch tv
-4. duke.task.Event | | write book | by: Dec 17 2017, 9 PM
-5. duke.task.Event | | wash hands | by: Dec 11 2014, 12 AM

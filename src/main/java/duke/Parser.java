@@ -8,6 +8,7 @@ import duke.command.listCommand;
 import duke.command.InvalidCommand;
 import duke.command.deleteCommand;
 import duke.command.todoCommand;
+import duke.command.findCommand;
 
 /**
  * Deals with making sense of the user command

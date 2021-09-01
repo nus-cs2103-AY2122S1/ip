@@ -33,7 +33,7 @@ public class findCommand extends Command {
         String[] parts = this.command.split(" ", 2);
         String wordToFind = parts[1];
         int count = 1;
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
             String[] partsBeforeSlash = task.toString().split("\\(", 2);
             String[] furtherBreakdownIntoParts = partsBeforeSlash[0].split(" ");
