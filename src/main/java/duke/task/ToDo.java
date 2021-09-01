@@ -3,14 +3,14 @@ package duke.task;
 /**
  * Encapsulates a task to be done.
  */
-public class ToDos extends Task {
+public class ToDo extends Task {
 
     /**
      * Constructs a ToDos object.
      *
      * @param description Description of the task.
      */
-    public ToDos(String description) {
+    public ToDo(String description) {
         super(description);
     }
 

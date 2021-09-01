@@ -10,8 +10,8 @@ import duke.DukeException;
  * Encapsulation of the list in Duke.
  */
 public class DukeList {
-    /** The list in which Duke stores Tasks. */
 
+    /** The list in which Duke stores Tasks. */
     private final ArrayList<Task> tasks = new ArrayList<>();
 
 
@@ -38,7 +38,6 @@ public class DukeList {
      * @param text Description of the task to be added.
      */
     public void add(String text) {
-
         tasks.add(new Task(text));
         System.out.println("added: " + text);
     }
@@ -57,29 +56,29 @@ public class DukeList {
 
         switch (type) {
         case "todo":
-            task = new ToDos(body);
+            task = new ToDo(body);
             break;
         case "deadline":
             sections = body.split(" /by ", 2);
-            task = new Deadlines(sections[0], sections[1]);
+            task = new Deadline(sections[0], sections[1]);
             break;
         case "event":
             sections = body.split(" /at ", 2);
-            task = new Events(sections[0], sections[1]);
+            task = new Event(sections[0], sections[1]);
             break;
         default:
             throw new DukeException("☹ OOPS!!! Unknown task type in saved data");
         }
 
         if (state.equals("1")) {
-            task.done();
+            task.setDone();
         }
 
         this.tasks.add(task);
     }
 
     /**
-     * Adds a ToDos task to the list.
+     * Adds a ToDo task to the list.
      *
      * @param text Body of the duke.task to be added.
      * @return The message associated to the task being displayed.
@@ -92,7 +91,7 @@ public class DukeList {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
 
-        ToDos input = new ToDos(message);
+        ToDo input = new ToDo(message);
 
         tasks.add(input);
 
@@ -100,17 +99,17 @@ public class DukeList {
     }
 
     /**
-     * Adds a Deadlines task to the list.
+     * Adds a Deadline task to the list.
      *
      * @param text Body of the task to be added.
      * @return The message associated to the task being displayed.
      */
-    public String addDeadlines(String text) throws DukeException {
+    public String addDeadline(String text) throws DukeException {
         String[] strings = text.split(" /by ", 2);
 
         String limit = strings[1];
         try {
-            Deadlines input = new Deadlines(strings[0].trim(), limit);
+            Deadline input = new Deadline(strings[0].trim(), limit);
 
             tasks.add(input);
 
@@ -121,17 +120,17 @@ public class DukeList {
     }
 
     /**
-     * Adds an Events task to the list.
+     * Adds an Event task to the list.
      *
      * @param text Body of the task to be added.
      * @return The message associated to the task being displayed.
      */
-    public String addEvents(String text) {
+    public String addEvent(String text) {
         String[] strings = text.split(" /at ", 2);
 
         String limit = strings.length == 1 ? "" : strings[1];
 
-        Events input = new Events(strings[0].trim(), limit);
+        Event input = new Event(strings[0].trim(), limit);
 
         tasks.add(input);
 
@@ -160,7 +159,7 @@ public class DukeList {
      */
     public String done(int item) {
         Task task = tasks.get(item - 1);
-        task.done();
+        task.setDone();
 
         String response = "Nice! I've marked this task as done:\n";
         return response + task.toString();

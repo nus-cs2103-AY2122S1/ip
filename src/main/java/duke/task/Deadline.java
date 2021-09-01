@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Encapsulates a task to be done with a deadline.
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
     /** When the task must be done by. */
     private final LocalDate limit;
 
@@ -16,7 +16,7 @@ public class Deadlines extends Task {
      * @param description Description of the task.
      * @param limit When the task must be done by.
      */
-    public Deadlines(String description, String limit) {
+    public Deadline(String description, String limit) {
         super(description);
         this.limit = LocalDate.parse(limit.replace("/", "-"));
     }

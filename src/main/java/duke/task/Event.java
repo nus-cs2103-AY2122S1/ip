@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Encapsulates a task to be done at a specified time.
  */
-public class Events extends Task {
+public class Event extends Task {
     /** When the task begins */
     private final String limit;
 
@@ -13,7 +13,7 @@ public class Events extends Task {
      * @param description Description of the task.
      * @param limit When the task begins.
      */
-    public Events(String description, String limit) {
+    public Event(String description, String limit) {
         super(description);
         this.limit = limit;
     }

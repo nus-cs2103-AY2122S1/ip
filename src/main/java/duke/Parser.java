@@ -49,10 +49,10 @@ public class Parser {
                 response = list.addToDo(input.split("todo", 2)[1]);
                 storage.save();
             } else if (segment[0].equals("deadline")) {
-                response = list.addDeadlines(input.split("deadline", 2)[1]);
+                response = list.addDeadline(input.split("deadline", 2)[1]);
                 storage.save();
             } else if (segment[0].equals("event")) {
-                response = list.addEvents(input.split("event", 2)[1]);
+                response = list.addEvent(input.split("event", 2)[1]);
                 storage.save();
             } else if (segment[0].equals("find")) {
                 response = list.find(input.split("find", 2)[1]);

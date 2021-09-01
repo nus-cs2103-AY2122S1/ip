@@ -8,13 +8,13 @@ public class ToDosTest {
 
     @Test
     public void toStringTest() {
-        ToDos toDos = new ToDos("buy bread");
-        assertEquals("[T][ ] buy bread", toDos.toString());
+        ToDo toDo = new ToDo("buy bread");
+        assertEquals("[T][ ] buy bread", toDo.toString());
     }
 
     @Test
     public void saveDataTest() {
-        ToDos toDos = new ToDos("buy bread");
-        assertEquals("todo 0 buy bread", toDos.saveData());
+        ToDo toDo = new ToDo("buy bread");
+        assertEquals("todo 0 buy bread", toDo.saveData());
     }
 }
