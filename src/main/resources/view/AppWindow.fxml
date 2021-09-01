@@ -6,7 +6,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.layout.HBox?>
 
-<?import javafx.geometry.Insets?>
 <fx:root prefHeight="600.0"
          prefWidth="400.0"
          type="VBox"
