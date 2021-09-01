@@ -38,8 +38,7 @@ public class Storage {
     public ArrayList<Task> load() throws LoadingException {
         if (Files.exists(savePath)) {
             return loadTasks(savePath);
-        }
-        else {
+        } else {
             try {
                 Files.createDirectories(savePath.getParent());
                 Files.createFile(savePath);
@@ -76,6 +75,8 @@ public class Storage {
                     tasks.add(new Event(taskDesc,
                             LocalDate.parse(saveDataScanner.next()), isTaskDone));
                     break;
+                default:
+                    break; //Error
                 }
                 saveDataScanner.close();
             }
@@ -98,7 +99,7 @@ public class Storage {
                 writer.write(tasks.getTask(i).toSaveFormat() + "\n");
             }
             writer.close();
-        } catch(IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }

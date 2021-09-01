@@ -25,8 +25,7 @@ public class TaskList {
     public TaskList(ArrayList<Task> tasks) {
         if (tasks != null) {
             this.tasks = tasks;
-        }
-        else {
+        } else {
             this.tasks = new ArrayList<>();
         }
     }
