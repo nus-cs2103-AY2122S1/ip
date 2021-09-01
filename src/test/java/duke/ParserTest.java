@@ -1,3 +1,5 @@
+package duke;
+
 import duke.DukeException;
 import duke.Parser;
 import duke.command.ExitCommand;

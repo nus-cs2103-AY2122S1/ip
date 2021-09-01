@@ -1,3 +1,5 @@
+package duke.task;
+
 import duke.task.Event;
 import org.junit.jupiter.api.Test;
 
