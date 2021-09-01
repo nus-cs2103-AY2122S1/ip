@@ -2,3 +2,20 @@ T | 0 | read book
 T | 1 | run 5km
 D | 0 | run 10km | 2021-11-19 | 18:00
 T | 0 | run
+T | 0 | read book
+T | 1 | read book
+T | 0 | read book
+T | 0 | read book
+T | 0 | read book
+T | 0 | read book
+T | 0 | run!
+D | 0 | return books | 2021-12-12 | 19:00
+T | 0 | read book
+T | 0 | dance
+T | 0 | muay thai
+T | 1 | read book
+T | 0 | roar
+T | 0 | roar
+T | 0 | roar
+T | 0 | read book
+T | 1 | read book

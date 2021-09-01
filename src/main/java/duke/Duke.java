@@ -1,33 +1,28 @@
 package duke;
 
-import duke.command.Command;
-
 import duke.exceptions.DukeException;
-
-import duke.parser.Parser;
-
 import duke.storage.Storage;
-
 import duke.task.TaskList;
-
 import duke.ui.Ui;
 
-public class Duke {
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class Duke extends Application {
+    private final String DEFAULT_FILEPATH = "data/tasks.txt";
 
     private final Storage storage;
     private TaskList tasks;
-    private final Ui ui;
+    private Ui ui;
 
     /**
-     * Constructor for duke.Duke.
+     * Constructor for Duke.
+     * No parameter constructor fallbacks to DEFAULT_FILEPATH.
      * Loads the tasks from the file.
      * If fail, start with an empty TaskList.
-     *
-     * @param filePath File path of the Storage txt file.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Duke() {
+        storage = new Storage(DEFAULT_FILEPATH);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -36,28 +31,11 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs the duke.Duke program.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
+    @Override
+    public void start(Stage stage) {
+        ui = new Ui(stage, storage, tasks);
 
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        // Initialize the UI and start the program
+        ui.init();
     }
 }

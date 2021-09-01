@@ -5,18 +5,15 @@ import static duke.parser.Parser.COMMAND_DEADLINE;
 import static duke.parser.Parser.COMMAND_EVENT;
 
 import duke.exceptions.DukeException;
-
-import java.util.Map;
-
 import duke.storage.Storage;
-
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TodoTask;
-
 import duke.ui.Ui;
+
+import java.util.Map;
 
 public class AddCommand extends Command {
     public enum TaskType {
