@@ -16,8 +16,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpeg"));
+    private Duke dukeApplication = new Duke();
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -32,7 +33,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setMain(this);
+            fxmlLoader.<MainWindow>getController().setMain(this, dukeApplication);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,41 +102,41 @@ public class Main extends Application {
 //        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 //    }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
+//    /**
+//     * Iteration 1:
+//     * Creates a label with the specified text and adds it to the dialog container.
+//     * @param text String containing text to add
+//     * @return a label with the specified text that has word wrap enabled.
+//     */
+//    private Label getDialogLabel(String text) {
+//        // You will need to import `javafx.scene.control.Label`.
+//        Label textToAdd = new Label(text);
+//        textToAdd.setWrapText(true);
+//
+//        return textToAdd;
+//    }
 
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText.toString(), new ImageView(user).getImage()),
-                DialogBox.getDukeDialog(dukeText.toString(), new ImageView(duke).getImage())
-        );
-        userInput.clear();
-    }
+//    /**
+//     * Iteration 2:
+//     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+//     * the dialog container. Clears the user input after processing.
+//     */
+//    private void handleUserInput() {
+//        Label userText = new Label(userInput.getText());
+//        Label dukeText = new Label(getResponse(userInput.getText()));
+//        dialogContainer.getChildren().addAll(
+//                DialogBox.getUserDialog(userText.toString(), new ImageView(user).getImage()),
+//                DialogBox.getDukeDialog(dukeText.toString(), new ImageView(duke).getImage())
+//        );
+//        userInput.clear();
+//    }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public void getResponse(String input) {
+        dukeApplication.processInput(input);
     }
 
 }

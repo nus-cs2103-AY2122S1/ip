@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.task.Task;
+import javafx.scene.layout.VBox;
 
 /**
  * Ui class to print lines and intake inputs from user.
@@ -13,7 +14,8 @@ public class Ui {
     private static String ind = "    ";
     //for sentences
     private static String ind2 = "     ";
-    private static String div = ind + "____________________________________________________________";
+    private static String div = "";
+    private static MainWindow mainWindow = null;
     private Scanner sc = new Scanner(System.in);
 
     /**
@@ -40,7 +42,9 @@ public class Ui {
      * @param s takes in the content
      */
     public static void myPrint(String s) {
-        System.out.println(div + "\n" + ind2 + s + "\n" + div);
+        if (mainWindow != null) {
+            mainWindow.sendDukeResponse(div + "\n" + ind2 + s + "\n" + div + "\n");
+        }
     }
 
     /**
@@ -49,7 +53,9 @@ public class Ui {
      * @param e takes in the exception
      */
     public static void showError(DukeException e) {
-        System.out.println(e);
+        if (mainWindow != null) {
+            mainWindow.sendDukeResponse(e.toString());
+        }
     }
 
     /**
@@ -58,10 +64,14 @@ public class Ui {
      * @param taskList takes in a list of tasks
      */
     public static void printTasks(ArrayList<Task> taskList) {
+        String tasks = "";
         int i = 1;
         for (Task task : taskList) {
-            System.out.println(ind2 + i + ". " + task);
+            tasks += ind2 + i + ". " + task + "\n";
             i++;
+        }
+        if (mainWindow != null) {
+            mainWindow.sendDukeResponse(tasks);
         }
     }
 
@@ -73,11 +83,13 @@ public class Ui {
      * @param sOrNot  check use "task" or "tasks" in the sentence.
      */
     public static void sayDelete(Task deleted, int total, String sOrNot) {
-        System.out.println(div);
-        System.out.println(ind2 + "Noted. I've removed this task: ");
-        System.out.println(ind2 + " " + deleted);
-        System.out.println(ind2 + "Now you have " + total + " " + sOrNot + " in the list.");
-        System.out.println(div);
+        String s = div + "\n" + ind2 + "Noted. I've removed this task: " + "\n"
+                + ind2 + " " + deleted + "\n"
+                + ind2 + "Now you have " + total + " " + sOrNot + " in the list." + "\n"
+                + div + "\n";
+        if (mainWindow != null) {
+            mainWindow.sendDukeResponse(s);
+        }
     }
 
     /**
@@ -88,11 +100,14 @@ public class Ui {
      * @param sOrNot check use "task" or "tasks" in the sentence.
      */
     public static void sayAdd(Task t, int total, String sOrNot) {
-        System.out.println(div);
-        System.out.println(ind2 + "Got it. I've added this task: ");
-        System.out.println(ind2 + " " + t);
-        System.out.println(ind2 + "Now you have " + total + " " + sOrNot + " in the list.");
-        System.out.println(div);
+        String s = div + "\n" + ind2 + "Got it. I've added this task: " + "\n"
+                + ind2 + " " + t + "\n"
+                + ind2 + "Now you have " + total + " " + sOrNot + " in the list." + "\n"
+                + div + "\n";
+
+        if (mainWindow != null) {
+            mainWindow.sendDukeResponse(s);
+        }
     }
 
     /**
@@ -101,7 +116,22 @@ public class Ui {
      * @param p takes in the String of the task
      */
     public static void sayDone(String p) {
-        System.out.println(div + "\n" + ind2 + "Nice! I've marked this task as done: " + "\n"
-                + ind2 + ind2 + p + "\n" + div);
+        String s = div + "\n" + ind2 + "Nice! I've marked this task as done: " + "\n"
+                + ind2 + ind2 + p + "\n" + div + "\n";
+
+        if (mainWindow != null) {
+            mainWindow.sendDukeResponse(s);
+        }
+    }
+
+    public void setMainWindow(MainWindow mainWindow) {
+        this.mainWindow = mainWindow;
+        greeting();
+    }
+
+    private static void greeting() {
+        String g = "Hello! I'm Duke";
+        String g2 = "What can I do for you?";
+        Ui.myPrint(g + "\n" + ind2 + g2);
     }
 }

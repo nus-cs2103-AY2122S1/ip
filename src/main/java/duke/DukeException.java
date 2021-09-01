@@ -10,7 +10,7 @@ public class DukeException extends Exception {
     private static String ind = "    ";
     //for sentences
     private static String ind2 = "     ";
-    private static String div = ind + "____________________________________________________________";
+    private static String div = ind + "";
     private String message;
 
     /**

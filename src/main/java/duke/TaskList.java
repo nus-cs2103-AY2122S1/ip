@@ -28,7 +28,7 @@ public class TaskList {
     private static String ind = "    ";
     //for sentences
     private static String ind2 = "     ";
-    private static String div = ind + "____________________________________________________________";
+    private static String div = ind + "";
 
     /**
      * Adds a new task according to instruction
