@@ -27,7 +27,8 @@ public class ExitCommand extends Command {
      * @param storage Storage for Duke.
      */
     @Override
-    public void execute(TaskHandler taskHandler, Storage storage, Ui ui) {
+    public String execute(TaskHandler taskHandler, Storage storage, Ui ui) {
         ui.printExitMessage();
+        return "Bye!";
     }
 }

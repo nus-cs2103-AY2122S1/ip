@@ -18,8 +18,8 @@ public class ListCommand extends Command {
      * @param storage Storage for Duke.
      */
     @Override
-    public void execute(TaskHandler taskHandler, Storage storage, Ui ui) {
-        taskHandler.printTasks();
+    public String execute(TaskHandler taskHandler, Storage storage, Ui ui) {
+        return taskHandler.printTasks();
     }
 
     /**

@@ -27,8 +27,7 @@ public class DoneCommand extends Command {
      * @throws DukeException If there is error adding the task or saving data.
      */
     @Override
-    public void execute(TaskHandler taskHandler, Storage storage, Ui ui) throws DukeException {
-        taskHandler.markTaskAsDone(taskId);
-        taskHandler.updateData();
+    public String execute(TaskHandler taskHandler, Storage storage, Ui ui) throws DukeException {
+        return taskHandler.markTaskAsDone(taskId);
     }
 }
