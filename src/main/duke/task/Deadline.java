@@ -15,6 +15,7 @@ public class Deadline extends Task{
         try {
             date = LocalDate.parse(by);
             hasDate = true;
+            this.by = by;
         } catch (DateTimeParseException e) {
             hasDate = false;
             this.by = by;
@@ -26,6 +27,7 @@ public class Deadline extends Task{
         try {
             date = LocalDate.parse(by);
             hasDate = true;
+            this.by = by;
         } catch (DateTimeParseException e) {
             hasDate = false;
             this.by = by;

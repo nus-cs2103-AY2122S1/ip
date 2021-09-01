@@ -1,6 +1,6 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class TaskList extends ArrayList<Task>{
             try {
                 super.add(Parser.fileContentsToTask(s));
             } catch (DukeException e) {
-                Ui.printWithIndent(e.getMessage());
+                Ui.printErrorMessage(e);
             }
         }
     }

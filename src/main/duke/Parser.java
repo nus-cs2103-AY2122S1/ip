@@ -17,7 +17,7 @@ public class Parser {
     protected static final String WORD_DELETE = "delete ";
     protected static final String DIVIDER_WORD = " \\| ";
     
-    protected static DukeAction stringToDukeAction(String s, int listSize) throws DukeException {
+    public static DukeAction stringToDukeAction(String s, int listSize) throws DukeException {
         // Remove all leading whitespaces
         s = s.stripLeading();
 
@@ -98,7 +98,7 @@ public class Parser {
             if (s.length() <= WORD_DEADLINE.length()) {
                 throw new DukeException(ExceptionType.MISSING_OPERAND);
             } else if (s.contains(WORD_DEADLINE_BY)) {
-                String[] strArr = parseEventString(s);
+                String[] strArr = parseDeadlineString(s);
                 if (strArr.length == 2 && !strArr[0].equals("") && !strArr[1].equals("")) {
                     return true;
                 } else {
