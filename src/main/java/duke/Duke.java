@@ -1,16 +1,17 @@
 package duke;
 
-import duke.task.Task;
-import duke.command.Command;
-
-import java.util.ArrayList;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+
+import duke.command.Command;
+import duke.task.Task;
+
 
 public class Duke {
 
     protected Storage storage;
-    private TaskList tasks;
+    protected TaskList tasks;
     protected Ui ui;
 
     /**

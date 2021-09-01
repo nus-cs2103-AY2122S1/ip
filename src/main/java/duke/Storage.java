@@ -1,23 +1,20 @@
 package duke;
 
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.task.Task;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.Todo;
-
 
 public class Storage {
     protected Path filePath;
-    private Ui ui;
+    protected Ui ui;
 
     /**
      * Class constructor for Storage Class specifying the filepath
@@ -112,12 +109,12 @@ public class Storage {
             if (dataValues.length > 3) {
                 date = dataValues[3];
                 switch (type) {
-                    case "D":
-                        return new Deadline(description, isCompleted, date);
-                    case "E":
-                        return new Event(description, isCompleted, date);
-                    default :
-                        throw new DukeException("something went wrong");
+                case "D":
+                    return new Deadline(description, isCompleted, date);
+                case "E":
+                    return new Event(description, isCompleted, date);
+                default :
+                    throw new DukeException("something went wrong");
                 }
             }
             return new Todo(description, isCompleted);

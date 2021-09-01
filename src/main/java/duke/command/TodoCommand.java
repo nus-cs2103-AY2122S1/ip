@@ -1,24 +1,23 @@
 package duke.command;
 
-import duke.task.Todo;
-
 import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+import duke.task.Todo;
 
 public class TodoCommand extends Command {
-    protected Todo todo;
     public static final String INSTRUCTION_TODO = "todo";
+    protected Todo todo;
 
     /**
      * Class constructor for TodoCommand Class specifying parameter_1
      */
-    public TodoCommand(String parameter_1) throws DukeException {
-        if (parameter_1.equals("")) {
+    public TodoCommand(String parameter1) throws DukeException {
+        if (parameter1.equals("")) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        todo = new Todo(parameter_1);
+        todo = new Todo(parameter1);
     }
 
     /**

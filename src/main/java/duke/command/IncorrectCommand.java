@@ -1,11 +1,10 @@
 package duke.command;
-
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 
 public class IncorrectCommand extends Command {
-    String errorMessage;
+    protected String errorMessage;
 
     /**
      * Class constructor for IncorrectCommand Class specifying the error message

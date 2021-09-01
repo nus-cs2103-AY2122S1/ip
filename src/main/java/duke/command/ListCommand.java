@@ -1,10 +1,10 @@
 package duke.command;
 
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
 
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     public static final String INSTRUCTION_LIST = "list";
 
     /**

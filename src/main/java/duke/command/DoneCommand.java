@@ -1,15 +1,14 @@
 package duke.command;
 
-import duke.task.Task;
-
 import duke.DukeException;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Storage;
+import duke.task.Task;
 
 public class DoneCommand extends Command {
-    protected int taskNumber;
     public static final String INSTRUCTION_DONE = "done";
+    protected int taskNumber;
 
     /**
      * Class constructor for DoneCommand Class specifying the task number
