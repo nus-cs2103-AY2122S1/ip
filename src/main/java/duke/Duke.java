@@ -8,6 +8,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    protected GUi gui;
 
     /**
      * Constructs a new Duke object with the given file path.
@@ -49,7 +50,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        new Duke("src/main/data/tasks.txt").run();
-    }
+//    public static void main(String[] args) {
+//        new Duke("src/main/data/tasks.txt").run();
+//    }
 }
