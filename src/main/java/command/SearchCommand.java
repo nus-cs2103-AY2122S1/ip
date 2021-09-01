@@ -26,7 +26,6 @@ public class SearchCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         TaskList matchingTasks = taskList.search(super.getExtraInput());
-        ui.showSearchResults(matchingTasks);
-        return "";
+        return "Here are your search results:\n" + matchingTasks;
     }
 }
