@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import tasks.TaskList;
 
 public class Parser {
@@ -17,78 +15,64 @@ public class Parser {
      * Method that is called and runs until the bye command in inputted. 
      * Listens for all the commands input and responds accordingly.
      */
-    public void run() {
+    public String run(String str) {
         
-        boolean end = false;
-        int i = 0;
-        Scanner sc = new Scanner(System.in);
-    
-        while (!end) {
-            String str = sc.nextLine();
+        String helpCommands = "These are the services I can provide you:\n" +
+                "todo           [description]- Make a todo task\n" +
+                "deadline       [description] /at YYYY-MM-DD xxxx  - Make a new deadline event\n" +
+                "event          [description] /at YYYY-MM-DD xxxx  - Make a event\n" +
+                "list           List out your events\n" +
+                "done {index}   Complete the task at mentioned index\n" +
+                "delete {index} Complete the task at mentioned index\n" +
+                "help           Show all available commands\n" +
+                "bye            Quit Duke.\n";
+        String output;
             str = str.trim();
             try {
-                // command "bye"
-                if (str.equals("bye")) {
-                    end = true;
-                    System.out.println(LINE);
-                    System.out.println("Bye. Hope to see you again soon!");
-                    sc.close();
-                }
-
                 //command done
-                else if (str.contains("done")) {
-                    System.out.println(LINE);
-                    System.out.println(taskList.markDone(str));
+                if (str.contains("done")) {
+                    output = taskList.markDone(str);
+                    return output;
                 }
-
                 //command list
                 else if (str.equals("list")) {
-                    System.out.println(LINE);
-                    System.out.println(taskList.showList(""));
+                    output = taskList.showList("");
+                    return output;
                 }
-
+                //command find 
                 else if (str.contains("find")) {
-                    System.out.println(LINE);
-                    System.out.println(taskList.findTask(str.substring(5)));
+                    output = taskList.findTask(str.substring(5));
+                    return output;
                 }
-
                 //command to do
                 else if (str.contains("todo")) {
-                    System.out.println(LINE);
-                    System.out.println(taskList.todoTask(str));
+                    output = taskList.todoTask(str);
+                    return output;
                 }
-
                 //command deadline
                 else if (str.contains("deadline")) {
-                    System.out.println(LINE);
-                    System.out.println(taskList.deadlineTask(str));
+                    output = taskList.deadlineTask(str);
+                    return output;
                 }
-
                 //command event
                 else if (str.contains("event")) {
-                    System.out.println(LINE);
-                    System.out.println(taskList.eventsTask(str));
+                    output = taskList.eventsTask(str);
+                    return output;
                 } 
-                
+                // command delete
                 else if (str.contains("delete")) {
-                    System.out.println(LINE);
-                    System.out.println(taskList.deleteTask(str));
+                    output = taskList.deleteTask(str);
+                    return output;
                 } 
-                
                 else if (str.contains("help")) {
-                    Ui.allCommands();
+                    return helpCommands;
                 }
-                
                 else {
                     throw new DukeException("Command is not valid!");
                 }
             } catch (DukeException e) {
                 System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
-        }
-        System.out.println(LINE);
+            return "Victoria heard:" + str;
     }
-
-    
-        
 }
