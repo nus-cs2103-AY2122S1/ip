@@ -13,8 +13,8 @@ public class Parser {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-d H:mm");
     private final TaskList tasks;
     private boolean toRewriteData;
-    private boolean isExit;
-    private boolean isFind;
+    private boolean toExit;
+    private boolean toFind;
 
     /**
      * Constructor for a Parser class.
@@ -24,8 +24,8 @@ public class Parser {
     public Parser(TaskList tasks) {
         this.tasks = tasks;
         this.toRewriteData = false;
-        this.isExit = false;
-        this.isFind = false;
+        this.toExit = false;
+        this.toFind = false;
     }
 
     /**
@@ -39,7 +39,7 @@ public class Parser {
         if (tasks.size() == 0) {
             throw new DukeException("There are currently no tasks in your list.");
         }
-        String matching = this.isFind ? "matching " : "";
+        String matching = this.toFind ? "matching " : "";
         StringBuilder tasksBuilder = new StringBuilder();
         tasksBuilder.append("Here are the ").append(matching).append("tasks in your list:\n");
         for (int i = 0; i < tasks.size(); ++i) {
@@ -75,7 +75,7 @@ public class Parser {
      *
      * @return True if data in Storage needs to be rewritten.
      */
-    public boolean toRewrite() {
+    public boolean needsToRewrite() {
         return this.toRewriteData;
     }
 
@@ -84,8 +84,8 @@ public class Parser {
      *
      * @return True if ready to exit Duke after "bye" command.
      */
-    public boolean toExit() {
-        return this.isExit;
+    public boolean needsToExit() {
+        return this.toExit;
     }
 
     /**
@@ -97,7 +97,7 @@ public class Parser {
      */
     public String parse(String readIn) throws DukeException {
         if (readIn.equals("bye")) {
-            this.isExit = true;
+            this.toExit = true;
             return "Bye. Hope to see you again soon!";
         } else if (readIn.equals("list")) {
             return list(this.tasks);
@@ -128,8 +128,8 @@ public class Parser {
                 String description = splitTask[0];
                 String byString = splitTask[1];
                 try {
-                    LocalDateTime by = LocalDateTime.parse(byString, FORMATTER);
-                    return this.tasks.addTask(new Deadline(description, by));
+                    LocalDateTime deadlineDateTime = LocalDateTime.parse(byString, FORMATTER);
+                    return this.tasks.addTask(new Deadline(description, deadlineDateTime));
                 } catch (DateTimeParseException e) {
                     throw new DukeException("Datetime should be in YYYY-MM-DD hr:min (24h clock) format.");
                 }
@@ -145,8 +145,8 @@ public class Parser {
                 String description = splitTask[0];
                 String atString = splitTask[1];
                 try {
-                    LocalDateTime at = LocalDateTime.parse(atString, FORMATTER);
-                    return this.tasks.addTask(new Event(description, at));
+                    LocalDateTime eventDateTime = LocalDateTime.parse(atString, FORMATTER);
+                    return this.tasks.addTask(new Event(description, eventDateTime));
                 } catch (DateTimeParseException e) {
                     throw new DukeException("Datetime should be in YYYY-MM-DD hr:min (24h clock) format.");
                 }
@@ -168,7 +168,7 @@ public class Parser {
                     throw new DukeException("☹ OOPS!!! The keyword(s) of '" + command + "' cannot be empty.");
                 }
                 this.toRewriteData = false;
-                this.isFind = true;
+                this.toFind = true;
                 String[] splitKeywords = arguments.split(" ");
                 TaskList matchingTasks = new TaskList();
                 for (Task task : this.tasks) {

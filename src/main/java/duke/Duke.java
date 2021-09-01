@@ -30,10 +30,10 @@ public class Duke extends Application {
      */
     public static String getResponse(String input) throws DukeException {
         String response = parser.parse(input);
-        if (parser.toExit()) {
+        if (parser.needsToExit()) {
             return response;
         }
-        if (parser.toRewrite()) {
+        if (parser.needsToRewrite()) {
             storage.rewriteData(tasks);
         }
         return response;
