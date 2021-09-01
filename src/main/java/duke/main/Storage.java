@@ -13,6 +13,9 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Handles the loading/saving of tasks from local storage.
+ */
 public class Storage {
     private final Path filePath;
 

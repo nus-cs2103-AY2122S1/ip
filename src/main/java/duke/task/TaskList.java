@@ -8,6 +8,9 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a collection of tasks.
+ */
 public class TaskList {
     private List<Task> taskList;
 

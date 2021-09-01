@@ -2,6 +2,9 @@ package duke.task;
 
 import duke.main.DukeException;
 
+/**
+ * Encapsulates a task to be done.
+ */
 public class ToDo extends Task {
 
     /**

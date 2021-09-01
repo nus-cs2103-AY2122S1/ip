@@ -7,6 +7,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
+
+/**
+ * Handles the user interface.
+ */
 public class Ui {
     private Map<String, Consumer<String>> uiCommands;
 
@@ -23,31 +27,61 @@ public class Ui {
         this.uiCommands = uiCommands;
     }
 
+    /**
+     * Returns a response to the add task command.
+     *
+     * @param task     Task added.
+     * @param taskList TaskList to be displayed.
+     * @return String response to added task.
+     */
     public static String getAddTaskMessage(Task task, TaskList taskList) {
         return "\t Got it. I've added this task:\n" +
                 "\t \t " + task + taskList.getTaskListSummary();
     }
 
+    /**
+     * Returns a response to the clear command.
+     *
+     * @return String tasks cleared message.
+     */
     public static String getClearTasksMessage() {
         return "Your previous tasks have been cleared.";
     }
 
+    /**
+     * Returns a response to the remove task command.
+     *
+     * @param task     Task removed.
+     * @param taskList TaskList to be displayed.
+     * @return String response to removed task.
+     */
     public static String getRemoveTaskMessage(Task task, TaskList taskList) {
         return "\t Got it. I've removed this task:\n" +
                 "\t \t " + task + taskList.getTaskListSummary();
     }
 
+    /**
+     * Returns a response to the mark task as done command.
+     *
+     * @param task Task marked as done.
+     * @return String response to completed task.
+     */
     public static String getTaskDoneMessage(Task task) {
         return "\t Nice! I've marked this task as done:\n" + "\t\t " + task + "\n";
     }
 
 
+    /**
+     * Returns a response to the taskList reset command.
+     *
+     * @return String response to reset task.
+     */
     public static String getResetTasksMessage() {
         return "\tClearing tasks...\n" + "\tYou can now start anew...\n";
     }
 
     /**
-     * Displays error when user input is empty.
+     * Returns error when user input is empty.
      *
      * @return String message.
      */
@@ -56,7 +90,7 @@ public class Ui {
     }
 
     /**
-     * Displays error when user command is not found.
+     * Returns error when user command is not found.
      *
      * @return String message.
      */
@@ -65,7 +99,7 @@ public class Ui {
     }
 
     /**
-     * Displays the TaskList.
+     * Returns the TaskList.
      *
      * @param taskList to display.
      * @return String message.
@@ -79,7 +113,7 @@ public class Ui {
     }
 
     /**
-     * Displays the message in the DukeException.
+     * Returns the message in the DukeException.
      *
      * @param exception message to display.
      */
@@ -104,7 +138,7 @@ public class Ui {
     }
 
     /**
-     * Displays matching tasks.
+     * Returns matching tasks.
      *
      * @param matchingTasks to be displayed.
      * @return String message.
@@ -118,6 +152,11 @@ public class Ui {
         }
     }
 
+    /**
+     * Terminates the program with a parting message.
+     *
+     * @return String parting message.
+     */
     public String exitWithGoodbye() {
         new Thread(() -> {
             uiCommands.get("exit").accept("");

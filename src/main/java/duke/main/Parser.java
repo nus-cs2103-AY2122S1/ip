@@ -8,6 +8,9 @@ import duke.task.ToDo;
 
 import java.util.List;
 
+/**
+ * Handles the parsing of user commands.
+ */
 public class Parser {
     private Storage storage;
     private Ui ui;

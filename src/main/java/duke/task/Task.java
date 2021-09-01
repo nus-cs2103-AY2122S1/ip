@@ -9,6 +9,9 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Objects;
 
+/**
+ * Encapsulates a task.
+ */
 abstract public class Task {
     protected boolean completed;
     protected String description;

@@ -5,6 +5,9 @@ import duke.main.DukeException;
 import java.time.LocalDate;
 import java.util.Objects;
 
+/**
+ * Encapsulates a task with a deadline.
+ */
 public class Deadline extends Task {
 
     private LocalDate by;

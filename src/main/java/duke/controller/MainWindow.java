@@ -37,10 +37,18 @@ public class MainWindow extends AnchorPane {
             ".jpg")));
 
     @FXML
+    /**
+     * Forces ScrollPane to automatically scroll down.
+     */
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the duke to the given Duke object.
+     *
+     * @param d Duke to be set.
+     */
     public void setDuke(Duke d) {
         Map<String, Consumer<String>> uiCommands =
                 Map.of("showDukeResponse", this::showDukeResponse,
@@ -65,16 +73,31 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Shows the response on the interface.
+     *
+     * @param response String to be displayed.
+     */
     public void showDukeResponse(String response) {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(response, dukeImage));
     }
 
+    /**
+     * Closes the UI.
+     *
+     * @param message String response before closing the UI.
+     */
     public void exit(String message) {
         sleep(1500);
         Platform.exit();
     }
 
+    /**
+     * Pauses execution for the given time(in milliseconds).
+     *
+     * @param milliseconds int period of pause.
+     */
     public void sleep(int milliseconds) {
         try {
             Thread.sleep(1000);

@@ -22,6 +22,9 @@ public class Duke {
         storage = new Storage(filePath);
     }
 
+    /**
+     * Start the assistant.
+     */
     public void start() {
         try {
             taskList = storage.load();
@@ -29,7 +32,6 @@ public class Duke {
         } catch (DukeException e) {
             ui.showDukeException(e);
             storage.resetTasks();
-
             if (taskList != null) {
                 taskList.clearTasks();
             }
@@ -50,6 +52,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Set the ui to the given Ui object.
+     *
+     * @param ui Ui to be set
+     */
     public void setUi(Ui ui) {
         this.ui = ui;
     }

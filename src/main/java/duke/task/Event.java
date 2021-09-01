@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * The class Event encapsulates an event with a time
+ * Encapsulates an event with a time
  */
 public class Event extends Task {
 
