@@ -1,5 +1,4 @@
 import javafx.application.Application;
-
 import util.windows.Main;
 
 public class Launcher {

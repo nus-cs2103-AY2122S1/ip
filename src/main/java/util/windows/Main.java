@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
 import util.controller.Duke;
 
 /**
@@ -17,7 +16,7 @@ public class Main extends Application {
 
     private static final String saveFilePath = "save.txt";
     private static final String tempFilePath = "temp.txt";
-    private Duke duke = new Duke(saveFilePath,tempFilePath);
+    private Duke duke = new Duke(saveFilePath, tempFilePath);
 
     @Override
     public void start(Stage stage) {

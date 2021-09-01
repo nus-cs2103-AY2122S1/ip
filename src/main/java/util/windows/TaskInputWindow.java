@@ -1,19 +1,14 @@
 package util.windows;
 
-import javafx.fxml.FXML;
-
-import javafx.scene.control.TextField;
-import javafx.scene.control.Tab;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TabPane;
-
-import javafx.scene.layout.AnchorPane;
-
-import javafx.stage.Stage;
-
-
 import java.time.LocalDate;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import util.controller.Duke;
 
 /**
@@ -21,6 +16,9 @@ import util.controller.Duke;
  *
  */
 public class TaskInputWindow extends AnchorPane {
+
+    private static Stage currentStage;
+    private static Duke duke;
 
     @FXML
     private TabPane tabs;
@@ -41,8 +39,7 @@ public class TaskInputWindow extends AnchorPane {
     @FXML
     private DatePicker deadlineDate;
 
-    private static Duke duke;
-    private static Stage currentStage;
+
 
     public static void setStage(Stage stage) {
         TaskInputWindow.currentStage = stage;

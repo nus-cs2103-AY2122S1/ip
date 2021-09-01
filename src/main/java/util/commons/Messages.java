@@ -9,7 +9,6 @@ public class Messages {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
     public static final String GREETINGS = "Greetings! I'm Duke\n\tWhat can I do for you?";
-    public static final String BYE = "Godspeed young padawan!";
     public static final String HLINE = "\t----------------------------";
 
 

@@ -12,7 +12,13 @@ import util.commands.AddCommand;
 import util.commands.CommandList;
 import util.parser.Parser;
 import util.storage.Storage;
-import util.tasks.*;
+import util.tasks.DateTaskTable;
+import util.tasks.Deadline;
+import util.tasks.DukeException;
+import util.tasks.Event;
+import util.tasks.Task;
+import util.tasks.TaskList;
+import util.tasks.ToDo;
 import util.ui.Ui;
 
 
@@ -25,13 +31,14 @@ public class Duke {
     private static final String saveDirectory = "data/";
     private static final String saveFilePath = "save.txt";
     private static final String tempFilePath = "temp.txt";
+    private static ListView<Task> out;
 
     private final Parser parser;
     private final Ui ui = new Ui();
     private final Storage storage;
     private final TaskList tasks;
     private final DateTaskTable dateTaskTable;
-    private static ListView<Task> out;
+
 
 
     /**
