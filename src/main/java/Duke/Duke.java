@@ -1,7 +1,7 @@
-import java.time.LocalDate;
-import java.util.ArrayList;
+package Duke;
+
+
 import java.util.Scanner;
-import java.time.format.DateTimeFormatter;
 import Storage.*;
 import Task.TaskList;
 import Task.Task;
@@ -50,7 +50,7 @@ class Ui {
      */
     public void bye() {
         System.out.println("Bye. Hope to see you again soon!");
-        store.saveListInFile("Duke.txt", taskList);
+        store.saveListInFile("src/main/Duke/Duke.txt", taskList);
     }
     /**
      * The original method to simply generate an echo message.
@@ -125,6 +125,3 @@ class Ui {
         store.getDataInputList(this.taskList);
     }
 }
-///////////////////////////////////////////////////////////////////
-
-
