@@ -9,14 +9,20 @@ import duke.task.Task;
  * Manages the user interface and contains all user outputs to print during user interaction.
  */
 public class Ui {
-    private Scanner s;
 
     /**
      * Creates new Ui object.
      */
     public Ui() {
-        this.s = new Scanner(System.in);
         printIntro();
+    }
+
+    public static String[] display(String... messages) {
+        return messages;
+    }
+
+    public static String[] display(String msg) {
+        return new String[] { msg };
     }
 
     /**
@@ -29,15 +35,6 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello FROM\n" + logo);
-    }
-
-    /**
-     * Reads commands from text file line by line.
-     *
-     * @return Command from text file.
-     */
-    public String readCommand() {
-        return s.nextLine().trim();
     }
 
     /**
@@ -56,7 +53,6 @@ public class Ui {
         System.out.println("    ______________________________________");
         System.out.println("     Bye. Hope to see you again soon!");
         System.out.println("    ______________________________________");
-        s.close();
     }
 
     /**
@@ -76,12 +72,14 @@ public class Ui {
      * @param task Task that is currently being added into the list.
      * @param size Size of current list including current Task being added.
      */
-    public void printTaskAdded(Task task, int size) {
+    public String[] printTaskAdded(Task task, int size) {
         System.out.println("    ______________________________________");
         System.out.println("     Got it. I've added this task: ");
         System.out.printf("       %s\n", task);
         System.out.printf("     Now you have %d tasks in the list\n", size);
         System.out.println("    ______________________________________");
+        return display("Got it. I've added this task: ",
+                task.toString(), "Now you have " + size + " tasks in the list");
     }
 
     /**

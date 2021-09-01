@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 
+import duke.Ui;
 import duke.exception.DukeException;
 
 /**
@@ -115,25 +116,19 @@ public class TaskList {
         store.remove(taskNumber);
     }
 
-    /**
-     * Prints out the current list of tasks the user has.
-     *
-     * @param command Command entered by the user.
-     * @throws DukeException Upon invalid commands or empty tasks list.
-     */
-    public void printList(String command) throws DukeException {
+    public String[] printList(String command) throws DukeException {
         String[] words = command.split(" ");
         if (words.length > 1) {
             throw new DukeException("invalidCommand");
         } else if (store.size() == 0) {
             throw new DukeException("noTasksException");
         } else {
-            System.out.println("    ______________________________________");
-            System.out.println("     Here are the tasks in your list:");
+            String[] output = new String[store.size() + 1];
+            output[0] = "Here are the tasks in your list:";
             for (int i = 0; i < store.size(); i++) {
-                System.out.printf("     %d.%s\n", i + 1, store.get(i).toString());
+                output[i + 1] = (i + 1) + ". " + store.get(i).toString();
             }
-            System.out.println("    ______________________________________");
+            return output;
         }
     }
 

@@ -4,19 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -47,22 +34,12 @@ public class Duke {
     private static TaskList tasks;
     private Ui ui;
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
     /**
      * Creates a Duke object.
-     *
-     * @param filePath Filepath to retrieve task history from.
      */
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(fileAddress);
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -71,33 +48,19 @@ public class Duke {
         }
     }
 
-    public Duke() {}
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() {
-
-    }
-
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    String[] getResponse(String input) {
+        return commands(input);
     }
 
+    /*
     public void run() {
         commands();
     }
+     */
 
 
     /**
@@ -106,7 +69,7 @@ public class Duke {
      * @param command Command entered by the user.
      * @throws DukeException Upon invalid command format.
      */
-    public void addToDo(String command, boolean printOutput) throws DukeException {
+    public String[] addToDo(String command, boolean printOutput) throws DukeException {
         if (command.length() < 6 || command == null) {
             throw new DukeException("invalidToDo");
         } else {
@@ -117,12 +80,12 @@ public class Duke {
                 try {
                     storage.appendToFile(fileAddress, "T - 0 - " + name);
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    return new String[] {e.toString()};
                 }
-                ui.printTaskAdded(task, tasks.size());
+                return ui.printTaskAdded(task, tasks.size());
             }
         }
-
+        return new String[0];
     }
 
     /**
@@ -259,42 +222,25 @@ public class Duke {
      *
      * @throws DukeException If command is not recognised or improperly formatted.
      */
-    private void commands() throws DukeException {
-        ui.start();
-        String command;
-        while (!(command = ui.readCommand()).equals("bye")) {
-            String parsed = Parser.process(command);
-            try {
-                switch (parsed) {
-                case ("list"):
-                    tasks.printList(command);
-                    break;
-                case ("todo"):
-                    addToDo(command, true);
-                    break;
-                case ("deadline"):
-                    addDeadline(command, true);
-                    break;
-                case ("event"):
-                    addEvent(command, true);
-                    break;
-                case ("done"):
-                    markCompleted(command, true);
-                    break;
-                case ("delete"):
-                    deleteTask(command);
-                    break;
-                case ("find"):
-                    findTasks(command);
-                    break;
-                default:
-                    throw new DukeException("invalidCommand");
-                }
-            } catch (DukeException err) {
-                ui.printError(err);
+    private String[] commands(String command) throws DukeException {
+        String parsed = Parser.process(command);
+        try {
+            switch (parsed) {
+            case ("list"):
+                return tasks.printList(command);
+            case ("todo"):
+                return addToDo(command, true);
+            case ("deadline"):
+            case ("event"):
+            case ("done"):
+            case ("delete"):
+            case ("find"):
+            default:
+                return new String[] {"invalid command"};
             }
+        } catch (DukeException err) {
+            return new String[] {err.toString()};
         }
-        ui.end();
     }
 
     private void findTasks(String command) {
