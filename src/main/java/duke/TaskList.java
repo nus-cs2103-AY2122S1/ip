@@ -16,8 +16,8 @@ public class TaskList {
      * initialises the TaskList (supposed to have loading functionality, but will add on later)
      */
 
-    public TaskList() {
-        myList = new ArrayList<>();
+    public TaskList(ArrayList<Task> parsedList) {
+        myList = parsedList;
     }
 
     /**

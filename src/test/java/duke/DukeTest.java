@@ -1,13 +1,14 @@
 package duke;
 
 import org.junit.jupiter.api.Test;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     @Test
     public void testAddTask() {
-        TaskList tasks = new TaskList();
+        TaskList tasks = new TaskList(new ArrayList<>());
         tasks.action("todo task1");
         tasks.action("event task2 /2021-08-24");
         tasks.action("event task3 /2021-08-25");
@@ -20,7 +21,7 @@ public class DukeTest {
 
     @Test
     public void testDoneTask() {
-        TaskList tasks = new TaskList();
+        TaskList tasks = new TaskList(new ArrayList<>());
         tasks.action("todo task1");
         tasks.action("done 1");
 
@@ -30,7 +31,7 @@ public class DukeTest {
 
     @Test
     public void testDeleteTask() {
-        TaskList tasks = new TaskList();
+        TaskList tasks = new TaskList(new ArrayList<>());
         tasks.action("todo task1");
         tasks.action("todo task2");
         tasks.action("delete 2");

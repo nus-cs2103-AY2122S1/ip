@@ -16,7 +16,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
-        tasks = new TaskList();
+        tasks = new TaskList(storage.loadTasks());
     }
 
     private static void endBot() {

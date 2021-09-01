@@ -1,1 +1,2 @@
-[T][ ] hehe
+[T][ ] run
+[D][ ] jump (by: Aug 24 2020)
