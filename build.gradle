@@ -57,3 +57,12 @@ checkstyle {
 run {
     standardInput = System.in
 }
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'duke.Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
