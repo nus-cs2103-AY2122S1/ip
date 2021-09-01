@@ -40,12 +40,12 @@ public class MarkDoneCommand extends Command {
 
     /**
      * Mark a task as done.
-     * @param taskList The existing list where the task is.
+     * @param tasks The existing list where the task is.
      * @return The completion message after execution.
      * @throws MorganException If input format is invalid.
      */
-    public String execute(TaskList taskList, Storage storage) throws MorganException {
-        boolean isValidTaskNumber = this.taskNumber <= taskList.getNumOfTasks()
+    public String execute(TaskList tasks, Storage storage) throws MorganException {
+        boolean isValidTaskNumber = this.taskNumber <= tasks.getNumOfTasks()
                 && this.taskNumber > 0;
 
         // Checks if task number is valid
@@ -54,13 +54,9 @@ public class MarkDoneCommand extends Command {
         }
 
         // Obtain task and mark done
-        taskList.markAsDone(this.taskNumber);
-        Task task = taskList.getTask(this.taskNumber);
-        try {
-            storage.save(taskList);
-        } catch (MorganException e) {
-            throw e;
-        }
+        tasks.markAsDone(this.taskNumber);
+        Task task = tasks.getTask(this.taskNumber);
+        storage.save(tasks);
 
         // Message displayed upon execution
         return "Nice! I've marked this task as done:\n\t"

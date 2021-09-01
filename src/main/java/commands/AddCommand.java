@@ -14,13 +14,13 @@ public abstract class AddCommand extends Command {
 
     /**
      * Add a task to the task list.
-     * @param taskList The existing list where the task will be added to.
+     * @param tasks The existing list where the task will be added to.
      * @return The completion message after execution.
      */
-    public String execute(TaskList taskList, Storage storage) throws MorganException {
-        taskList.addTask(task);
-        int numTasks = taskList.getNumOfTasks();
-        storage.save(taskList);
+    public String execute(TaskList tasks, Storage storage) throws MorganException {
+        tasks.addTask(task);
+        int numTasks = tasks.getNumOfTasks();
+        storage.save(tasks);
         return "Got it. I've added this task:\n\t" + this.task
                 + "\nNow you have " + numTasks + " tasks in the list.";
     }

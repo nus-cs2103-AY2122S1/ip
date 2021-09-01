@@ -14,13 +14,13 @@ public class ListCommand extends Command {
 
     /**
      * Return list of tasks.
-     * @param taskList The existing list of tasks.
+     * @param tasks The existing list of tasks.
      * @return The list of tasks.
      */
-    public String execute(TaskList taskList, Storage storage) throws MorganException {
-        if (taskList.isEmpty()) {
+    public String execute(TaskList tasks, Storage storage) throws MorganException {
+        if (tasks.isEmpty()) {
             throw new MorganException(EMPTY_LIST_ERROR);
         }
-        return "Here are the tasks in your list:\n" + taskList;
+        return "Here are the tasks in your list:\n" + tasks;
     }
 }

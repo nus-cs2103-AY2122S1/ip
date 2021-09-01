@@ -21,6 +21,8 @@ public class Storage {
             + "A new storage file has been created.";
     private static final String DECODE_ERROR = "Warning: Some tasks may be missing due "
             + "to storage file tampering. ";
+    private static final String ENCODE_ERROR = "Warning: Unable to store latest update "
+            + "to task data";
 
     private final TaskParser parser = new TaskParser();
     private final File file;
@@ -53,14 +55,16 @@ public class Storage {
                     Task task = parser.decode(taskString);
                     taskList.addTask(task);
                 } catch (MorganException e) {
+                    //Exception will be thrown after obtaining all uncorrupted task data.
                     hasInvalidFormatting = true;
-                    continue;
                 }
             }
         } catch (FileNotFoundException e) {
             this.save(taskList);
             throw new MorganException(FILE_ERROR);
         }
+
+        //User will be notified that the storage file has been tampered.
         if (hasInvalidFormatting) {
             throw new MorganException(DECODE_ERROR);
         }
@@ -69,17 +73,17 @@ public class Storage {
 
     /**
      * Saves the list of tasks into a file.
-     * @param taskList The list of tasks to be saved.
+     * @param tasks The list of tasks to be saved.
      * @throws MorganException If storage data has been tampered.
      */
-    public void save(TaskList taskList) throws MorganException {
+    public void save(TaskList tasks) throws MorganException {
         try {
             FileWriter fileWriter = new FileWriter(this.file);
             StringBuilder storageString = new StringBuilder();
-            int numOfTasks = taskList.getNumOfTasks();
+            int numOfTasks = tasks.getNumOfTasks();
             for (int i = 1; i <= numOfTasks; i++) {
-                Task t = taskList.getTask(i);
-                storageString.append(parser.encode(t));
+                Task t = tasks.getTask(i);
+                storageString.append(this.parser.encode(t));
                 if (i != numOfTasks) {
                     storageString.append("\n");
                 }
@@ -87,7 +91,7 @@ public class Storage {
             fileWriter.write(String.valueOf(storageString));
             fileWriter.close();
         } catch (IOException e) {
-            throw new MorganException(e.getMessage());
+            throw new MorganException(ENCODE_ERROR);
         }
     }
 }

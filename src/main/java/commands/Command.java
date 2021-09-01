@@ -15,5 +15,5 @@ public abstract class Command {
      * @return The completion message after execution.
      * @throws MorganException If input is invalid.
      */
-    public abstract String execute(TaskList taskList, Storage storage) throws MorganException;
+    public abstract String execute(TaskList tasks, Storage storage) throws MorganException;
 }

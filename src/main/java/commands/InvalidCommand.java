@@ -13,11 +13,11 @@ public class InvalidCommand extends Command {
 
     /**
      * Throws an exception to prompt user to enter a valid command.
-     * @param taskList The existing list of tasks.
+     * @param tasks The existing list of tasks.
      * @return The completion message after execution.
      * @throws MorganException If no matching command is found.
      */
-    public String execute(TaskList taskList, Storage storage) throws MorganException {
+    public String execute(TaskList tasks, Storage storage) throws MorganException {
         throw new MorganException(INVALID_COMMAND_ERROR);
     }
 }

@@ -24,7 +24,6 @@ public class TaskParser {
      * @return The storage string representation of the task.
      */
     public String encode(Task task) {
-        StringBuilder output = new StringBuilder();
         String status = String.valueOf(task.getStatus());
         String description = task.getDescription();
 
@@ -37,7 +36,6 @@ public class TaskParser {
             return DeadlineTask.KEYWORD + DELIMITER + status + DELIMITER
                     + description + DELIMITER + deadline.getDateTime();
         } else if (task instanceof ToDoTask) {
-            ToDoTask todo = (ToDoTask) task;
             return ToDoTask.KEYWORD + DELIMITER + status + DELIMITER
                     + description;
         }
@@ -85,9 +83,11 @@ public class TaskParser {
         default:
             throw new MorganException(TAMPERED_ERROR);
         }
+
         if (isDone) {
             task.markDone();
         }
+
         return task;
     }
 }

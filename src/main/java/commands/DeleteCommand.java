@@ -41,11 +41,11 @@ public class DeleteCommand extends Command {
 
     /**
      * Delete a task from the task list.
-     * @param taskList The existing list where a task will be deleted from.
+     * @param tasks The existing list where a task will be deleted from.
      * @return The completion message after execution.
      */
-    public String execute(TaskList taskList, Storage storage) throws MorganException {
-        boolean isValidTaskNumber = this.taskNumber <= taskList.getNumOfTasks()
+    public String execute(TaskList tasks, Storage storage) throws MorganException {
+        boolean isValidTaskNumber = this.taskNumber <= tasks.getNumOfTasks()
                 && this.taskNumber > 0;
 
         // Checks if task number is valid
@@ -54,17 +54,13 @@ public class DeleteCommand extends Command {
         }
 
         // Obtain task and remove
-        Task task = taskList.getTask(this.taskNumber);
-        taskList.remove(this.taskNumber);
-        try {
-            storage.save(taskList);
-        } catch (MorganException e) {
-            throw e;
-        }
+        Task task = tasks.getTask(this.taskNumber);
+        tasks.remove(this.taskNumber);
+        storage.save(tasks);
 
         // Message displayed upon execution
         return "Noted. I've removed this task:\n\t" + task.toString()
-                + "\nNow you have " + taskList.getNumOfTasks()
+                + "\nNow you have " + tasks.getNumOfTasks()
                 + " tasks in the list.";
     }
 }
