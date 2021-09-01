@@ -60,7 +60,7 @@ public class TaskList {
 
         try {
             int listNum = Integer.parseInt(num);
-            this.taskList.get(listNum - 1).setIsDone(true);
+            this.taskList.get(listNum - 1).setDone(true);
             Task doneTask = this.taskList.get(listNum - 1);
             storage.replaceFileLine(doneTask.getFileString(), listNum - 1);
             ui.printDoneMessage(doneTask);
