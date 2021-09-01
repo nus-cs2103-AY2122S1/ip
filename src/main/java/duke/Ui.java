@@ -12,7 +12,6 @@ import java.util.Scanner;
  */
 public class Ui {
     public static final String DEFAULT_SPACES = "    ";
-    public static final String INDENTED_SPACES = "     ";
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -30,12 +29,10 @@ public class Ui {
 
     /**
      * Shows the welcome message.
+     * @return welcome message.
      */
-    public static void showWelcome() {
-        Ui.showLine();
-        System.out.println(DEFAULT_SPACES + "Hello! I'm Duke");
-        System.out.println(DEFAULT_SPACES + "What can I do for you?");
-        Ui.showLine();
+    public static String showWelcome() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
@@ -47,99 +44,121 @@ public class Ui {
         return input.nextLine();
     }
 
+
     /**
      * Displays the tasks currently in the task list.
      *
      * @param taskList the current task list.
+     * @return the tasks in the list.
      */
-    public static void listTasks(ArrayList<Task> taskList) {
+    public static String listTasks(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
-            System.out.println(DEFAULT_SPACES + "You have no tasks in your list!");
-            System.out.println(DEFAULT_SPACES + "Try adding some tasks with todo, event, or deadline");
+            return "You have no tasks in your list!\nTry adding some tasks with todo, event, or deadline.";
         } else {
-            System.out.println(DEFAULT_SPACES + "Here are the tasks in your list:");
+            String output = "Here are the tasks in your list:\n";
             for (int i = 0; i < taskList.size(); i++) {
-                System.out.println(INDENTED_SPACES + (i + 1) + "." + taskList.get(i));
+                output += (i + 1) + "." + taskList.get(i) + "\n";
             }
+            return output;
         }
     }
 
+
     /**
-     * Displays the message when a user finishes a task.
+     * Returns the String message instead of printing
      *
-     * @param task the task to be completed.
+     * @param task task to be completed
+     * @return String of the message
      */
-    public static void finishTask(Task task) {
-        System.out.println(DEFAULT_SPACES + "Nice! I've marked this task as done:");
-        System.out.println(INDENTED_SPACES + task);
+    public static String finishTask(Task task) {
+        String str = "Nice! I've marked this task as done:\n";
+        str = str + task;
+        return str;
     }
 
     /**
      * Displays the remaining tasks in the list.
      *
      * @param tasks task list.
+     * @return the remaining tasks in the list.
      */
-    public static void remainingTasks(ArrayList<Task> tasks) {
-        System.out.printf(DEFAULT_SPACES + "Now you have %d tasks in the list.%n", tasks.size());
+    public static String remainingTasks(ArrayList<Task> tasks) {
+        return String.format("Now you have %d tasks in the list.", tasks.size());
     }
 
     /**
      * Displays a message when a task is deleted.
      *
      * @param task task to be deleted.
+     * @return message when task is deleted.
      */
-    public static void deleteTask(Task task) {
-        System.out.println(DEFAULT_SPACES + "Noted. I've removed this task:");
-        System.out.println(INDENTED_SPACES + task);
+    public static String deleteTask(Task task) {
+        String out = "Noted. I've removed this task:\n";
+        out += task;
+        return out;
     }
 
     /**
      * Displays the exit message for Duke.
+     *
+     * @return exit message.
      */
-    public static void endDuke() {
-        System.out.println(DEFAULT_SPACES + "Bye. Hope to see you again soon!");
+    public static String endDuke() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Displays the error message for a number format exception.
+     *
+     * @return number format exception message.
      */
-    public static void numberFormatExceptionMessage() {
-        System.out.println(DEFAULT_SPACES + "☹ OOPS!!! The value you inputted is not valid!");
+    public static String numberFormatExceptionMessage() {
+        return "☹ OOPS!!! The value you inputted is not valid!";
     }
 
     /**
      * Displays the error message for a date time parse exception.
+     *
+     * @return date time parse exception message.
      */
-    public static void dateTimeParseExceptionMessage() {
-        System.out.println(DEFAULT_SPACES + "☹ OOPS!!!  You used an invalid date! Hint: Use 'YYYY-MM-DD HH:mm'");
+    public static String dateTimeParseExceptionMessage() {
+        return "☹ OOPS!!!  You used an invalid date! Hint: Use 'YYYY-MM-DD HH:mm'";
     }
 
     /**
      * Displays the error message for an array index out of bounds exception.
+     *
+     * @return array out of bounds message.
      */
-    public static void arrayIndexOutOfBoundsExceptionMessage() {
-        System.out.println(DEFAULT_SPACES + "☹ OOPS!!!  Did you miss a term?");
+    public static String arrayIndexOutOfBoundsExceptionMessage() {
+        return "☹ OOPS!!!  Did you miss a term?";
     }
 
     /**
      * Displays the hint when there is an error message for a the creation of a todo.
+     *
+     * @return hint for toDo.
      */
-    public static void toDoHint() {
-        System.out.println(DEFAULT_SPACES + "Hint: add a description!");
+    public static String toDoHint() {
+        return "Hint: add a description!";
     }
 
     /**
      * Displays the hint when there is an error message for a the creation of a deadline.
+     *
+     * @return hint for deadline.
      */
-    public static void deadlineHint() {
-        System.out.println(DEFAULT_SPACES + "Hint: Use /by to add a deadline!");
+    public static String deadlineHint() {
+        return "Hint: Use /by to add a deadline!";
     }
 
     /**
      * Displays the hint when there is an error message for a the creation of a event.
+     *
+     * @return hint for event.
      */
-    public static void eventHint() {
-        System.out.println(DEFAULT_SPACES + "Hint: Use /at to add a timing for the event!");
+    public static String eventHint() {
+        return "Hint: Use /at to add a timing for the event!";
     }
 
     /**
@@ -167,26 +186,31 @@ public class Ui {
      * Displays a message when a task is added.
      *
      * @param task task to be added
+     * @return message that task is added.
      */
-    public static void addTask(Task task) {
-        System.out.println(DEFAULT_SPACES + "Got it. I've added this task:");
-        System.out.println(INDENTED_SPACES + task);
+    public static String addTask(Task task) {
+        String s = "Got it. I've added this task:\n";
+        s += task + "\n";
+        return s;
     }
 
     /**
      * Displays the number of tasks in the task list.
      *
      * @param tasks the task list
+     * @return number of tasks in the list.
      */
-    public static void numberOfTasks(ArrayList<Task> tasks) {
-        System.out.printf(DEFAULT_SPACES + "Now you have %d tasks in the list.%n", tasks.size());
+    public static String numberOfTasks(ArrayList<Task> tasks) {
+        return String.format("Now you have %d tasks in the list.%n", tasks.size());
     }
 
     /**
      * Displays the default message when an input is not understood.
+     *
+     * @return default message when input not understood.
      */
-    public static void defaultMessage() {
-        System.out.println(DEFAULT_SPACES + "OOPS I did not quite understand that :(");
+    public static String defaultMessage() {
+        return "OOPS I did not quite understand that :(";
     }
 
     /**
@@ -200,22 +224,26 @@ public class Ui {
      * Given a task list which is the result of a search operation, prints out the results.
      *
      * @param taskList task list comprising matching search terms.
+     * @return lists search results.
      */
-    public static void listTasksSearchResults(ArrayList<Task> taskList) {
+    public static String listTasksSearchResults(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
-            System.out.println(DEFAULT_SPACES + "There were no search results. Try another keyword!");
+            return "There were no search results. Try another keyword!";
         } else {
-            System.out.println(DEFAULT_SPACES + "Here are the matching tasks in your list:");
+            String output = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < taskList.size(); i++) {
-                System.out.println(INDENTED_SPACES + (i + 1) + "." + taskList.get(i));
+                output += (i + 1) + "." + taskList.get(i) + "\n";
             }
+            return output;
         }
     }
 
     /**
      * Provides the hint for users when they use the find command.
+     *
+     * @return hint for find.
      */
-    public static void findHint() {
-        System.out.println(DEFAULT_SPACES + "Add the keyword at the back of find!");
+    public static String findHint() {
+        return "Add the keyword at the back of find!";
     }
 }

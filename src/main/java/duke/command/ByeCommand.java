@@ -17,10 +17,10 @@ public class ByeCommand extends Command {
      * @param ui ui
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
         String saveFileString = tasks.save();
         storage.save(saveFileString);
-        Ui.endDuke();
+        return Ui.endDuke();
     }
 
     /**

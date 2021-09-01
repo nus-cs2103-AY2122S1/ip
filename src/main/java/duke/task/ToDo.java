@@ -20,7 +20,7 @@ public class ToDo extends Task {
      */
     @Override
     public String getType() {
-     return "T";
+        return "T";
     }
 
     /**

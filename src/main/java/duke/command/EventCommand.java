@@ -1,16 +1,14 @@
 package duke.command;
-
 import duke.Storage;
 import duke.Ui;
 import duke.task.Event;
 import duke.task.TaskList;
-
 import java.time.LocalDateTime;
 
 /**
  * This class represents the Command when the user types "event" validly.
  */
-public class EventCommand extends Command{
+public class EventCommand extends Command {
     private String task;
     private LocalDateTime time;
 
@@ -31,13 +29,15 @@ public class EventCommand extends Command{
      * @param tasks task list
      * @param storage storage
      * @param ui ui
+     * @return output for this command.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
         Event event = new Event(task, time);
-        tasks.add(event, true);
+        String output = tasks.add(event, true);
         String saveFileString = tasks.save();
         storage.save(saveFileString);
+        return output;
     }
 
     /**

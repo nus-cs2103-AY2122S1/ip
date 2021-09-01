@@ -5,26 +5,24 @@ import duke.Ui;
 import duke.task.TaskList;
 
 /**
- * This class represents an EmptyCommand, when nothing should be done.
- * Main purpose of this class is so the default case is this, and the while loop does not terminate.
+ * This command shows the welcome message.
  */
-public class EmptyCommand extends Command {
+public class WelcomeCommand extends Command {
     /**
-     * Does nothing.
+     * Shows the welcome message.
      *
      * @param tasks task list
      * @param storage storage
      * @param ui ui
-     * @return nothing.
+     * @return the welcome message.
      */
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) {
-        // Do nothing
-        return null;
+        return Ui.showWelcome();
     }
 
     /**
-     * Should not terminate.
+     * Returns false as the program should not exit.
      *
      * @return false.
      */

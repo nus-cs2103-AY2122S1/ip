@@ -60,11 +60,13 @@ public class Task {
      *
      * @param shouldPrint determines if the task being marked as done should be printed.
      */
-    public void doneTask(boolean shouldPrint) {
+    public String doneTask(boolean shouldPrint) {
         this.isDone = true;
+        String output = null;
         if (shouldPrint) {
-            Ui.finishTask(this);
+            output = Ui.finishTask(this);
         }
+        return output;
     }
 
     /**
@@ -85,6 +87,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return (isDone ? "[X] " : "[ ] ") +  this.taskName;
+        return (isDone ? "[X] " : "[ ] ") + this.taskName;
     }
 }

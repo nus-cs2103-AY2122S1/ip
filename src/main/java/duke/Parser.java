@@ -1,9 +1,20 @@
 package duke;
 
-import duke.command.*;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EmptyCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
+import duke.command.UnexpectedCommand;
+import duke.command.WelcomeCommand;
 
 /**
  * This class represents a Parser, which parses the input given by the user.
@@ -22,15 +33,17 @@ public class Parser {
         Command output;
         output = new EmptyCommand();
         switch (command) {
+        case "welcome":
+            output = new WelcomeCommand();
+            break;
         case "todo":
             try {
                 String toDoTask = splitText[1];
                 output = new ToDoCommand(toDoTask);
                 break;
             } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.arrayIndexOutOfBoundsExceptionMessage();
-                Ui.toDoHint();
-                throw e;
+                output = new UnexpectedCommand("array out of bounds exception, todo");
+                break;
             }
         case "event":
             try {
@@ -40,12 +53,11 @@ public class Parser {
                 output = new EventCommand(eventTask, eventTime);
                 break;
             } catch (DateTimeParseException e) {
-                Ui.dateTimeParseExceptionMessage();
-                throw e;
+                output = new UnexpectedCommand("date time parse exception");
+                break;
             } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.arrayIndexOutOfBoundsExceptionMessage();
-                Ui.eventHint();
-                throw e;
+                output = new UnexpectedCommand("array out of bounds exception, event");
+                break;
             }
         case "deadline":
             try {
@@ -55,12 +67,11 @@ public class Parser {
                 output = new DeadlineCommand(deadlineTask, deadlineBy);
                 break;
             } catch (DateTimeParseException e) {
-                Ui.dateTimeParseExceptionMessage();
-                throw e;
+                output = new UnexpectedCommand("date time parse exception");
+                break;
             } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.arrayIndexOutOfBoundsExceptionMessage();
-                Ui.deadlineHint();
-                throw e;
+                output = new UnexpectedCommand("array out of bounds exception, deadline");
+                break;
             }
         case "list":
             output = new ListCommand();
@@ -71,11 +82,11 @@ public class Parser {
                 output = new DoneCommand(index);
                 break;
             } catch (NumberFormatException e) {
-                Ui.numberFormatExceptionMessage();
-                throw e;
+                output = new UnexpectedCommand("number format exception");
+                break;
             } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.arrayIndexOutOfBoundsExceptionMessage();
-                throw e;
+                output = new UnexpectedCommand("array out of bounds exception");
+                break;
             }
         case "delete":
             try {
@@ -83,11 +94,11 @@ public class Parser {
                 output = new DeleteCommand(index);
                 break;
             } catch (NumberFormatException e) {
-                Ui.numberFormatExceptionMessage();
-                throw e;
+                output = new UnexpectedCommand("number format exception");
+                break;
             } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.arrayIndexOutOfBoundsExceptionMessage();
-                throw e;
+                output = new UnexpectedCommand("array out of bounds exception");
+                break;
             }
         case "find":
             try {
@@ -95,18 +106,16 @@ public class Parser {
                 output = new FindCommand(keyword);
                 break;
             } catch (ArrayIndexOutOfBoundsException e) {
-                Ui.arrayIndexOutOfBoundsExceptionMessage();
-                Ui.findHint();
-                throw e;
+                output = new UnexpectedCommand("array out of bounds exception, find");
+                break;
             }
         case "bye":
             output = new ByeCommand();
             break;
         default:
-            Ui.defaultMessage();
+            output = new UnexpectedCommand("");
             break;
         }
         return output;
-
     }
 }
