@@ -1,13 +1,12 @@
-package java.task;
-
-import main.java.task.TodoTask;
-import org.junit.jupiter.api.Test;
+package task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 public class TodoTaskTest {
 
-    TodoTask testTask = new TodoTask("Test");
+    private TodoTask testTask = new TodoTask("Test");
 
     @Test
     public void testGetTaskState() {

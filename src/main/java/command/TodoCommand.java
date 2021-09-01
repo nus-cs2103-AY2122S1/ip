@@ -1,10 +1,10 @@
-package main.java.command;
+package command;
 
-import main.java.bot.DukeException;
-import main.java.bot.Storage;
-import main.java.bot.TaskList;
-import main.java.bot.UserInterface;
-import main.java.task.TodoTask;
+import bot.DukeException;
+import bot.Storage;
+import bot.TaskList;
+import bot.UserInterface;
+import task.TodoTask;
 
 /**
  * A class that encapsulates a Todo Command given to Duke.

@@ -1,6 +1,6 @@
-package main.java.bot;
+package bot;
 
-import main.java.command.Command;
+import command.Command;
 
 /**
  * A class that encapsulates the main runtime operations of Duke.
@@ -8,9 +8,9 @@ import main.java.command.Command;
  */
 public class Bot {
 
+    private static boolean isRunning;
     private TaskList tasks;
     private UserInterface ui;
-    private static boolean isRunning;
 
     /**
      * Constructor for the Bot class.
@@ -22,10 +22,10 @@ public class Bot {
         ui = new UserInterface();
 
         try {
-           tasks = Storage.load();
+            tasks = Storage.load();
         } catch (DukeException e) {
-           ui.showLoadingError();
-           tasks = new TaskList();
+            ui.showLoadingError();
+            tasks = new TaskList();
         }
     }
 

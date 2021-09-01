@@ -1,14 +1,14 @@
-package main.java.bot;
+package bot;
 
-import main.java.command.Command;
-import main.java.command.DeadlineCommand;
-import main.java.command.DeleteCommand;
-import main.java.command.DoneCommand;
-import main.java.command.EventCommand;
-import main.java.command.ExitCommand;
-import main.java.command.FindCommand;
-import main.java.command.ListCommand;
-import main.java.command.TodoCommand;
+import command.Command;
+import command.DeadlineCommand;
+import command.DeleteCommand;
+import command.DoneCommand;
+import command.EventCommand;
+import command.ExitCommand;
+import command.FindCommand;
+import command.ListCommand;
+import command.TodoCommand;
 
 /**
  * A class that handles the parsing of various inputs given to Duke by the user.

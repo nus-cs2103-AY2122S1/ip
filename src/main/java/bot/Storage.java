@@ -1,13 +1,13 @@
-package main.java.bot;
-
-import main.java.task.Task;
+package bot;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+
+import task.Task;
 
 /**
  * A class that handles the storage of list data in a txt format.

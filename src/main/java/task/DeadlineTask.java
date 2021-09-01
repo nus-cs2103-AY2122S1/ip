@@ -1,4 +1,4 @@
-package main.java.task;
+package task;
 
 import java.time.LocalDateTime;
 
@@ -27,10 +27,10 @@ public class DeadlineTask extends Task {
      *
      * @param task The task to be stored within this DeadlineTask object.
      * @param storedTime The String representation of the Deadline "by".
-     * @param state The state of the DeadlineTask object.
+     * @param isDone The state of the DeadlineTask object.
      */
-    public DeadlineTask(String task, String storedTime, boolean state) {
-        super(task, state);
+    public DeadlineTask(String task, String storedTime, boolean isDone) {
+        super(task, isDone);
         this.storedTime = storedTime;
     }
 
@@ -54,7 +54,7 @@ public class DeadlineTask extends Task {
     @Override
     public String convertToStorageFormat() {
         return "D,"
-                + (state ? "1," : "0,")
+                + (isDone ? "1," : "0,")
                 + task
                 + ","
                 + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime);

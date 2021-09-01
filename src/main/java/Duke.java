@@ -1,6 +1,4 @@
-package main.java;
-
-import main.java.bot.Bot;
+import bot.Bot;
 
 /**
  * A class that represents the main Duke bot.

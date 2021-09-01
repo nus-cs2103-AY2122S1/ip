@@ -1,4 +1,4 @@
-package main.java.task;
+package task;
 
 import java.time.LocalDateTime;
 
@@ -27,10 +27,10 @@ public class EventTask extends Task {
      *
      * @param task The task to be stored within this EventTask object.
      * @param storedTime The String representation of the Event "at".
-     * @param state The state of the EventTask object.
+     * @param isDone The state of the EventTask object.
      */
-    public EventTask(String task, String storedTime, boolean state) {
-        super(task, state);
+    public EventTask(String task, String storedTime, boolean isDone) {
+        super(task, isDone);
         this.storedTime = storedTime;
     }
 
@@ -54,7 +54,7 @@ public class EventTask extends Task {
     @Override
     public String convertToStorageFormat() {
         return "E,"
-                + (state ? "1," : "0,")
+                + (isDone ? "1," : "0,")
                 + task
                 + ","
                 + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime);

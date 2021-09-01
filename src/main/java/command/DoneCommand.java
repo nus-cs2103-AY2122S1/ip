@@ -1,10 +1,10 @@
-package main.java.command;
+package command;
 
-import main.java.bot.DukeException;
-import main.java.bot.Storage;
-import main.java.bot.TaskList;
-import main.java.bot.UserInterface;
-import main.java.task.Task;
+import bot.DukeException;
+import bot.Storage;
+import bot.TaskList;
+import bot.UserInterface;
+import task.Task;
 
 /**
  * A class that encapsulates a Done Command given to Duke.
@@ -43,7 +43,8 @@ public class DoneCommand extends Command {
                     + "-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\n");
 
         } catch (NumberFormatException e) {
-            throw new DukeException("It looks like you did not enter a valid integer for the \"done\" command. Please try again!");
+            throw new DukeException(
+                    "It looks like you did not enter a valid integer for the \"done\" command. Please try again!");
         }
     }
 }
