@@ -8,6 +8,6 @@ public class EmptyTaskListException extends BotException {
      * Constructor for EmptyTaskListException.
      */
     public EmptyTaskListException() {
-        super("There is no tasks currently! Try to add one!");
+        super("There are no tasks currently! Try to add one!");
     }
 }
