@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 
@@ -10,10 +10,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    private Duke duke = new Duke("/taskFile/taskList.txt");
+    private Duke duke = new Duke("taskFile/taskList.txt");
     @Override
     public void start(Stage primaryStage) throws Exception {
-        duke.run();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();

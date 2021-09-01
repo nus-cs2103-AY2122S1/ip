@@ -1,6 +1,7 @@
-package duke;
+package duke.ui;
 
 import duke.main.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -25,9 +26,21 @@ public class MainWindow extends AnchorPane {
 
     private Image dukeImage = new Image((this.getClass().getResourceAsStream("/images/DaDuke.png")));
 
+    private String welcomeMessage =
+            " ____       _________\\\n"
+            + "|  _ \\ _   _| |______/\n"
+            + "| | | | | | | |     \n"
+            + "| |_| | |_| | |______|\n"
+            + "|____/ \\__,_|_|______|\n";
+
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        welcomeMessage = "Hello from\n" + welcomeMessage;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage),
+                DialogBox.getDukeDialog("What can I do for you today?", dukeImage)
+        );
     }
 
     public void setDuke(Duke duke) {
@@ -35,17 +48,19 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws InterruptedException {
         String input = userInput.getText();
-        String response = getResponse(input);
+        if (input.equalsIgnoreCase("bye")) {
+            Platform.exit();
+        }
+        String response = duke.reply(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, userImage)
+        );
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(response, dukeImage),
+                DialogBox.getDukeDialog("What else can I do for you?", dukeImage)
         );
         userInput.clear();
-    }
-
-    private String getResponse(String input) {
-        return "Echoing: " + input;
     }
 }

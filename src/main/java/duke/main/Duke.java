@@ -6,7 +6,6 @@ import duke.exceptions.DukeException;
 public class Duke {
 
     private final TaskList taskList;
-    private final Ui ui;
     private final File file;
 
     /**
@@ -17,27 +16,17 @@ public class Duke {
         this.taskList = new TaskList();
         this.file = new File(fileName);
         Storage.loadData(file, taskList);
-        this.ui = new Ui();
     }
 
-    /**
-     * Run Duke. UI is first started, then any command is processed
-     * through the Parser class to retrieve a reply, with task list
-     * and storage being constantly updated after each cycle
-     */
-    public void run() {
-        ui.start();
-        String command = ui.readCommand();
-        while (!Parser.isExit(command)) {
-            try {
-                ui.respondWith(Parser.parse(command, taskList).reply());
-            } catch (DukeException e) {
-                ui.respondWith(e.getMessage());
-            } finally {
-                Storage.saveData(file, taskList);
-                command = ui.readCommand();
-            }
+    public String reply(String input) {
+        String response;
+        try {
+            response = Parser.parse(input, taskList).reply();
+        } catch (DukeException e) {
+            response = e.getMessage();
+        } finally {
+            Storage.saveData(file, taskList);
         }
-        ui.exit();
+        return response;
     }
 }

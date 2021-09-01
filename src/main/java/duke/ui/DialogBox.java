@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,8 +37,9 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
         displayPicture.setImage(image);
-//        Circle circle = new Circle(50, 50, 50);
-//        displayPicture.setClip(circle);
+        Circle circle = new Circle(50, 50, 50);
+        displayPicture.setClip(circle);
+        this.setSpacing(10);
     }
 
     private void flip() {
