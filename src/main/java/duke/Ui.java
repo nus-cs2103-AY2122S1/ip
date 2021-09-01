@@ -8,13 +8,12 @@ public class Ui {
     /**
      * Displays the greeting message.
      */
-    public void showGreeting() {
+    public String showGreeting() {
         String output = "    ____________________________________________________________\n"
                 + "     Hello! I'm Duke\n"
                 + "     What can I do for you?\n"
                 + "    ____________________________________________________________\n";
-
-        System.out.println(output);
+        return output;
     }
 
     public void showLoadingError(String errorMessage) {
@@ -25,7 +24,7 @@ public class Ui {
      * Displays all the tasks in the taskList.
      * @param taskList the TaskList to be printed
      */
-    public void printList(TaskList taskList) {
+    public String printList(TaskList taskList) {
         ArrayList<Task> lst = taskList.getTasks();
         StringBuilder s = new StringBuilder();
         s.append("    ____________________________________________________________\n");
@@ -33,7 +32,7 @@ public class Ui {
             s.append(String.format("     %d. %s\n", i + 1, lst.get(i).toString()));
         }
         s.append("    ____________________________________________________________\n");
-        System.out.println(s.toString());
+        return s.toString();
     }
 
     /**
@@ -50,19 +49,21 @@ public class Ui {
      *
      * @param taskList the taskList to manipulate
      */
-    public void readInput(TaskList taskList) {
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            String input = sc.nextLine();
-            input = input.trim();
-            if (input.equals("")) {
-                continue;
-            }
-            String output = Parser.parseInput(input, taskList, this);
-            if (output != null) {
-                System.out.println(output);
-            }
+    public String readInput(TaskList taskList, String input) {
+//        Scanner sc = new Scanner(System.in);
+//        while (sc.hasNext()) {
+//            String input = sc.nextLine();
+        input = input.trim();
+//        if (input.equals("")) {
+//            continue;
+//        }
+        String output = Parser.parseInput(input, taskList, this);
+        if (output != null) {
+            return output;
+        } else {
+            return "Please give a meaningful input";
         }
+//        }
 
 
     }

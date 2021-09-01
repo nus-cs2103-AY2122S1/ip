@@ -34,8 +34,7 @@ class Parser {
             //fallthrough
         case "list":
             if (infos.length == 1) {
-                ui.printList(taskList);
-                return null;
+                return ui.printList(taskList);
             } else {
                 return "Wrong input format";
             }
