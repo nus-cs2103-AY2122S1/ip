@@ -17,6 +17,14 @@ import duke.task.DukeSimpleTask;
 import duke.task.DukeTask;
 import duke.task.TaskList;
 
+/**
+ * Represents commands available in the Duke CLI as enums.
+ *
+ * Every value in the enum evokes the object constructor with
+ * its name, description, command configuration describing
+ * the kind of parameters it accepts, and a function that
+ * defines the behavior of the command given certain arguments.
+ */
 public enum DukeCommand implements DukeCommandAction {
     ADD_TASK(
         "add",
@@ -179,13 +187,20 @@ public enum DukeCommand implements DukeCommandAction {
         }
     );
 
-    private final String command;
+    private final String name;
     private final String description;
     private final DukeCommandConfig config;
     private final DukeCommandAction action;
 
-    DukeCommand(String command, String description, DukeCommandConfig config, DukeCommandAction action) {
-        this.command = command;
+    /**
+     * Creates a DukeCommand instance with the given name, description, configuration and action.
+     * @param name The name of the command
+     * @param description The description of what the command does
+     * @param config The configuration of the command (what kind of parameters it accepts)
+     * @param action A function that defines what the command should do, given a set of parameters
+     */
+    DukeCommand(String name, String description, DukeCommandConfig config, DukeCommandAction action) {
+        this.name = name;
         this.description = description;
         this.config = config;
         this.action = action;
@@ -204,7 +219,7 @@ public enum DukeCommand implements DukeCommandAction {
      * @return the name of the command
      */
     public String getName() {
-        return command;
+        return name;
     }
 
     /**
@@ -213,7 +228,7 @@ public enum DukeCommand implements DukeCommandAction {
      * @return the command formatted to print in the help function.
      */
     private String formatCommand() {
-        return String.format("%s%s%s", command, formatPositionalArgument(), formatNamedArguments());
+        return String.format("%s%s%s", name, formatPositionalArgument(), formatNamedArguments());
     }
 
     /**
@@ -291,7 +306,7 @@ public enum DukeCommand implements DukeCommandAction {
 
     @Override
     public String toString() {
-        return String.format("%-11s %s", command, description);
+        return String.format("%-11s %s", name, description);
     }
 
     /**
