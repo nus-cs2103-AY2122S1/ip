@@ -1,5 +1,8 @@
 package duke.controller;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -27,9 +31,16 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/bezos.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/elon.png"));
 
+    /**
+     * Initialize main window with greeting message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String greetingMsg = "Hi, I'm Sync-Me Sebby.\n"
+                + "I'm here to assist you with tracking and synchronizing of your personal tasks.\n"
+                + "Let me know how I can help?";
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greetingMsg, dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -49,5 +60,16 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
+        // close the GUI window
+        if (input.equals("bye")) {
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            }, 1500);
+        }
+
     }
 }

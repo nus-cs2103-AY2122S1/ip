@@ -17,15 +17,6 @@ public class Ui {
     }
 
     /**
-     * Prints greeting message.
-     */
-    public String greet() {
-        return display("Hi, I'm Sync-Me Sebby.\n    "
-                + "I'm here to assist you with tracking and synchronizing of your personal tasks.\n    "
-                + "Let me know how I can help?");
-    }
-
-    /**
      * Prints exit message.
      */
     public String exit() {
