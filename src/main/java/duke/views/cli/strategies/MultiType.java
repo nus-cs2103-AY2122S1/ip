@@ -1,7 +1,6 @@
 package duke.views.cli.strategies;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -9,6 +8,7 @@ import duke.constants.Constants;
 import duke.domain.Deadline;
 import duke.domain.Event;
 import duke.domain.Task;
+import duke.domain.TaskList;
 import duke.domain.Todo;
 import duke.shared.DukeException;
 import duke.shared.DukeException.ExceptionCode;
@@ -27,13 +27,13 @@ public class MultiType extends RespondWith {
     private final String on = "on";
     private final String find = "find";
 
-    private final List<Task> userTasks;
+    private final TaskList userTasks;
 
     /**
      * Creates a responder that handles multiple types of tasks.
      */
     public MultiType() {
-        userTasks = new ArrayList<>();
+        userTasks = new TaskList();
         commands.put(list, this::listString);
         commands.put(done, this::markDone);
         commands.put(todo, this::addTodo);
@@ -88,7 +88,7 @@ public class MultiType extends RespondWith {
         }
     }
 
-    private String stringifyTasks(List<Task> tasks) {
+    private String stringifyTasks(TaskList tasks) {
         String result = "";
         for (int i = 0; i < tasks.size(); i++) {
             result += String.format("%d. %s%s", (i + 1), tasks.get(i), System.lineSeparator());
@@ -96,11 +96,11 @@ public class MultiType extends RespondWith {
         return result;
     }
 
-    private String listTasksWithMessage(String message, List<Task> tasks) {
+    private String listTasksWithMessage(String message, TaskList tasks) {
         return listTasksWithMessage(message, tasks, "Nothing found");
     }
 
-    private String listTasksWithMessage(String message, List<Task> tasks, String emptyMessage) {
+    private String listTasksWithMessage(String message, TaskList tasks, String emptyMessage) {
         if (tasks.size() == 0) {
             return emptyMessage + System.lineSeparator();
         }
@@ -145,10 +145,17 @@ public class MultiType extends RespondWith {
                 System.lineSeparator(), formatTaskCount(), System.lineSeparator());
     }
 
+    private String getDuplicateMessage() {
+        return "Note: You have attempted to add a duplicate task. It will not be added again." + System.lineSeparator();
+    }
+
     private String addTodo(String query) {
         assert query != null;
         Task task = new Todo(query.substring(todo.length()).strip());
-        userTasks.add(task);
+        boolean isUnique = userTasks.add(task);
+        if (!isUnique) {
+            return getDuplicateMessage();
+        }
         return formatAdd(task);
     }
 
@@ -159,7 +166,10 @@ public class MultiType extends RespondWith {
             throw DukeException.createArgumentCountException(2, queries.length);
         }
         Task task = new Deadline(queries[0].strip(), queries[1].strip());
-        userTasks.add(task);
+        boolean isUnique = userTasks.add(task);
+        if (!isUnique) {
+            return getDuplicateMessage();
+        }
         return formatAdd(task);
     }
 
@@ -170,7 +180,10 @@ public class MultiType extends RespondWith {
             throw DukeException.createArgumentCountException(2, queries.length);
         }
         Task task = new Event(queries[0].strip(), queries[1].strip());
-        userTasks.add(task);
+        boolean isUnique = userTasks.add(task);
+        if (!isUnique) {
+            return getDuplicateMessage();
+        }
         return formatAdd(task);
     }
 
@@ -196,7 +209,7 @@ public class MultiType extends RespondWith {
             dateQuery = Constants.Input.DATETIME_FORMATTER.format(LocalDateTime.now());
         }
 
-        List<Task> relevantTasks = new ArrayList<>();
+        TaskList relevantTasks = new TaskList();
         for (Task task : userTasks) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
@@ -222,7 +235,7 @@ public class MultiType extends RespondWith {
                 .filter(task -> task.match(keyword))
                 .collect(Collectors.toList());
         return listTasksWithMessage("Here are the matching tasks in your list:",
-                filteredTasks, "No matches found");
+                new TaskList(filteredTasks), "No matches found");
     }
 
     @Override

@@ -134,7 +134,24 @@ public class DateRange {
     public String toString() {
         String start = Constants.Display.DATETIME_FORMATTER.format(this.start);
         String end = Constants.Display.DATETIME_FORMATTER.format(this.end);
-        assert isValid(); // can only print valid date ranges
+        assert !isInvalid(); // can only print valid date ranges
         return String.format("between %s and %s", start, end);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof DateRange) {
+            DateRange d = (DateRange) o;
+            return this.start.equals(d.start) && this.end.equals(d.end);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return GenericHelpers.combineHashCodes(start.hashCode(), end.hashCode());
     }
 }

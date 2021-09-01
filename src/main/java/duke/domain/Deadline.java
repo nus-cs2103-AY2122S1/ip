@@ -6,6 +6,7 @@ import java.util.List;
 
 import duke.constants.Constants;
 import duke.shared.DateHelpers;
+import duke.shared.GenericHelpers;
 
 /**
  * Encapsulates a task with a deadline.
@@ -79,5 +80,22 @@ public class Deadline extends Task {
         String base = super.toString();
         String result = String.format("%s (by: %s)", base, Constants.Display.DATETIME_FORMATTER.format(dueDate));
         return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o instanceof Deadline) {
+            Deadline d = (Deadline) o;
+            return this.getName().equals(d.getName()) && this.dueDate.equals(d.dueDate);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return GenericHelpers.combineHashCodes(super.hashCode(), dueDate.hashCode());
     }
 }

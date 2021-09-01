@@ -118,4 +118,9 @@ public class Task implements PrintableMixin {
         return String.format("%s %s %s",
                 getTypeString() == null ? "" : StringHelpers.bracketWrap(getTypeString()), state, getName());
     }
+
+    @Override
+    public int hashCode() {
+        return getName().hashCode();
+    }
 }
