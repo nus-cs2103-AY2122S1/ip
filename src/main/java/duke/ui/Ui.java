@@ -23,13 +23,8 @@ public class Ui {
      * Prints a welcome message that includes a logo.
      */
     public void showWelcome() {
-        String logo = """
-                 ____        _       \s
-                |  _ \\ _   _| | _____\s
-                | | | | | | | |/ / _ \\
-                | |_| | |_| |   <  __/
-                |____/ \\__,_|_|\\_\\___|
-                """;
+        String logo = " ____        _       \n|  _ \\ _   _| | _____\n| | | | | | | |/ / _ \\\n" +
+                "| |_| | |_| |   <  __/\n|____/ \\__,_|_|\\_\\___|";
         System.out.println(LINE);
         System.out.println(logo);
         System.out.println("Hi, I'm duke.Duke, your Personal Assistant Chatbot\n" +
