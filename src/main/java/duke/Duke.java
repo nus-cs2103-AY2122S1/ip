@@ -1,7 +1,8 @@
 package duke;
 
-import duke.commands.Command;
 import java.util.Scanner;
+
+import duke.commands.Command;
 
 /**
  * Represents an interactive to-do list bot that can be run
@@ -21,10 +22,9 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
-    public static void main(String[] args) {
-        new Duke();
-    }
-
+    /**
+     * Constructor.
+     */
     public Duke() {
         this.storage = null;
         this.ui = new Ui();
@@ -38,6 +38,10 @@ public class Duke {
 
         System.out.println(LOGO);
         this.run();
+    }
+
+    public static void main(String[] args) {
+        new Duke();
     }
 
     /**

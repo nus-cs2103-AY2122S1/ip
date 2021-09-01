@@ -1,7 +1,8 @@
 package duke;
 
-import duke.items.Item;
 import java.util.LinkedList;
+
+import duke.items.Item;
 
 /**
  * Represents the to-do list that contains entries.

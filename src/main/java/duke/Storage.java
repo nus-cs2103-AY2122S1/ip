@@ -1,9 +1,10 @@
 package duke;
 
-import duke.items.Event;
 import duke.items.Deadline;
+import duke.items.Event;
 import duke.items.Item;
 import duke.items.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
