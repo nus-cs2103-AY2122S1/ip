@@ -35,7 +35,7 @@ public class Storage {
             return new Storage(file);
         }
         catch(IOException e){
-            throw new DukeException("☹ OOPS!!! Error occurs when try to create a new data file");
+            throw new DukeException(" OOPS!!! Error occurs when try to create a new data file");
         }
     }
 
@@ -54,7 +54,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("☹ OOPS!!! Error occurs when save the data");
+            throw new DukeException(" OOPS!!! Error occurs when save the data");
         }
     }
 

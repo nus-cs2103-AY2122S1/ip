@@ -28,7 +28,7 @@ public class Parser {
                 task.doneTask();
                 Ui.done(task);
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("☹ OOPS!!! Invalid task number");
+                throw new DukeException("OOPS!!! Invalid task number");
             }
 
         } else if (command.equals("todo")) {
@@ -37,7 +37,7 @@ public class Parser {
                 taskList.add(newTask);
                 Ui.addTask(taskList, newTask);
             } catch (ArrayIndexOutOfBoundsException e){
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
         } else if (command.equals("event")) {
             try {
@@ -49,7 +49,7 @@ public class Parser {
                 taskList.add(newTask);
                 Ui.addTask(taskList, newTask);
             } catch (ArrayIndexOutOfBoundsException e){
-                throw new DukeException("☹ Please enter the event command in 'event [task description]/at [start time]' format");
+                throw new DukeException("Please enter the event command in 'event [task description]/at [start time]' format");
             }
         } else if (command.equals("deadline")) {
             try {
@@ -62,7 +62,7 @@ public class Parser {
                 Ui.addTask(taskList, newTask);
             }
             catch (ArrayIndexOutOfBoundsException e){
-                throw new DukeException("☹ Please enter the event command in 'deadline [task description]/by [end time]' format");
+                throw new DukeException("Please enter the event command in 'deadline [task description]/by [end time]' format");
             }
         } else if (command.equals("delete")){
             try {
@@ -71,7 +71,7 @@ public class Parser {
                 taskList.remove(task);
                 Ui.delete(taskList, task);
             } catch (IndexOutOfBoundsException e){
-                throw new DukeException("☹ OOPS!!! Invalid task number");
+                throw new DukeException("OOPS!!! Invalid task number");
             }
 
         } else if (command.equals("find")) {
@@ -85,7 +85,7 @@ public class Parser {
             System.out.println("    Here are the matching tasks in your list:");
             Ui.list(tempList);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         if(command == "bye") {
