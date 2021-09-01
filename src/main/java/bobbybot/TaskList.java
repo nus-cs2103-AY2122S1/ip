@@ -9,8 +9,8 @@ import java.util.List;
  * Represents a task list
  */
 public class TaskList {
+    private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
     private final List<Task> tasks;
-    private final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }
@@ -56,11 +56,11 @@ public class TaskList {
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + taskToDelete);
         tasks.remove(taskToDelete);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list." );
+        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
     /**
-     * Creates a todo task
+     * Creates a too task
      * @param description description of task
      */
     public void createToDo(String description) {

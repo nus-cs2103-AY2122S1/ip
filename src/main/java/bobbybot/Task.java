@@ -36,7 +36,7 @@ public class Task {
      */
     public String getSaveFormatString() {
         int isDoneInt = isDone ? 1 : 0;
-        return("T," + isDoneInt + "," + description);
+        return ("T," + isDoneInt + "," + description);
     }
 
     @Override

@@ -14,8 +14,9 @@ import java.util.Scanner;
  */
 public class Storage {
 
+    private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
     private String filePath;
-    private final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
+
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -49,6 +50,8 @@ public class Storage {
                 // load event
                 tasks.add(new Event(row[2], row[3], row[1].equals("1")));
                 break;
+            default:
+                System.out.println("Invalid task format");
             }
             totalTasks += 1;
         }

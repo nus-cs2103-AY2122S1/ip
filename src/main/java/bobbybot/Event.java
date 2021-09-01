@@ -10,7 +10,7 @@ public class Event extends Task {
      * @param description description of task
      * @param at time period of bobbybot.Event (start-end)
      */
-    public Event(String description, String at)  {
+    public Event(String description, String at) {
         super(description);
         this.at = at;
     }
@@ -21,7 +21,7 @@ public class Event extends Task {
      * @param at time period of Event (start-end)
      * @param isDone boolean flag if task is done
      */
-    public Event(String description, String at, boolean isDone)  {
+    public Event(String description, String at, boolean isDone) {
         super(description);
         this.at = at;
         this.isDone = isDone;
@@ -33,7 +33,7 @@ public class Event extends Task {
     @Override
     public String getSaveFormatString() {
         int isDoneInt = isDone ? 1 : 0;
-        return("E," + isDoneInt + "," + description + "," + at);
+        return ("E," + isDoneInt + "," + description + "," + at);
     }
     @Override
     public String toString() {
