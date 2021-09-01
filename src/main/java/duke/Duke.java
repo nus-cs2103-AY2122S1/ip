@@ -2,35 +2,52 @@ package duke;
 
 import duke.parser.Parser;
 import duke.task.TaskList;
-import duke.ui.UserInterface;
 
 import java.util.Locale;
-import java.util.Scanner;
 
+/**
+ * Represents an instance of a duke, which is our program that
+ * interacts with users based on the user's input.
+ *
+ * @author yeo-yiheng
+ */
 public class Duke {
     private static final TaskList TASK = new TaskList();
-    private static final Scanner SCANNER = new Scanner(System.in);
     private static final Parser PARSER = new Parser();
-    private static final UserInterface USER_INTERFACE = new UserInterface();
 
     /**
-     * The main method that drives the operation and execution of the
-     * Duke program.
-     *
-     * @param args user input during the execution of program
+     * Loads the file contents into an arraylist.
      */
-    public static void main(String[] args) {
-
-        USER_INTERFACE.greet();
-        TASK.loadArrayList(); // Loads the array list based on our file on hard disk
-        boolean breakWhile;
-
-        while (SCANNER.hasNext()) {
-            String firstWord = SCANNER.next().toLowerCase(Locale.ROOT);
-            breakWhile = PARSER.firstCommandParser(firstWord, SCANNER);
-            if (breakWhile) {
-                break;
-            }
-        }
+    public void loadArray() {
+        TASK.loadArrayList();
     }
+
+    /**
+     * Retrieves the response from the program based on the user's
+     * input.
+     *
+     * @param input the user input
+     * @return reponse from the program
+     */
+    public String getResponse(String input) {
+        String response = feedIntoParser(input);
+        return "Duke: " + response;
+    }
+
+    /**
+     * Feeds the user's input into the parser for processing.
+     *
+     * @param command the user input
+     * @return response received by the program
+     */
+    private String feedIntoParser(String command) {
+        String response = PARSER.parse(command.toLowerCase(Locale.ROOT));
+        return response; // TODO
+    }
+
+    /**
+     * A function that does nothing at all.
+     */
+    public static void nullFunction() {}
+
 }

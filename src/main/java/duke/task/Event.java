@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.DukeException.FileNotFoundException;
 import duke.parser.Parser;
 
 import java.io.IOException;
@@ -9,6 +10,8 @@ import java.time.LocalDate;
  * Represents a possible type of task in our task list, known as an Event. This task has
  * additional information that supports adding deadlines in terms of dates and a specific
  * 24-hour time range.
+ *
+ * @author yeo-yiheng
  */
 public class Event extends TaskList {
     private final String time;
@@ -26,7 +29,7 @@ public class Event extends TaskList {
      * @param isExisting the boolean that distinguishes between an existing task loaded from
      *                   the task file or a newly added task during program execution
      */
-    public Event(String description, String time, boolean isExisting) {
+    public Event(String description, String time, boolean isExisting) throws FileNotFoundException {
         super(description);
         this.time = time;
         if (!isExisting) {
@@ -38,9 +41,8 @@ public class Event extends TaskList {
             }
             try {
                 FILE.saveTask(this); // Saves task to hard disk
-                USER_INTERFACE.taskAdded(this);
             } catch (IOException e) {
-                USER_INTERFACE.fileNotFoundWarning();
+                throw new FileNotFoundException();
             }
         } else {
             Parser.parseEventTime(time, localDate, startTime, endTime);

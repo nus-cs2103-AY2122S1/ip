@@ -1,17 +1,18 @@
 package duke.parser;
 
-import duke.ui.UserInterface;
+import duke.Duke;
+import duke.commands.Command;
 import duke.task.TaskList;
-import duke.exception.DukeException;
 
 import java.time.LocalDate;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * This class is responsible for the parsing of all user inputs, as well as file
  * contents back into tasks during the initial loading of file.
+ *
+ * @author yeo-yiheng
  */
 public class Parser {
 
@@ -25,71 +26,29 @@ public class Parser {
      */
     public Parser() {}
 
-    private final static UserInterface USER_INTERFACE = new UserInterface();
+    private final Command mainCommand = new Command();
 
     /**
-     * This method is responsible for detecting what the user wants. It allows the
-     * program to respond based on the first input word by the user.
+     * Detects what the user wants. It allows the program to
+     * respond based on the first input word by the user.
      *
      * @param command the input provided by the user through the command line
-     * @param scanner the scanner that reads in the user's input
-     * @return true if there is a request to terminate execution and false otherwise
      */
-    public boolean firstCommandParser(String command, Scanner scanner) {
-        TaskList task = new TaskList();
-
-        switch (command) {
-        case "bye":
-            USER_INTERFACE.exit();
-            return true;
-        case "done":
-            String stringIndex = scanner.next();
-            try {
-                int index = Integer.parseInt(stringIndex) - 1;
-                if (task.markDone(index)) {
-                    USER_INTERFACE.taskComplete(TaskList.getTask(index));
-                }
-                break;
-            } catch (NumberFormatException e) {
-                USER_INTERFACE.integerInputWarning();
-                break;
-            }
-        case "list":
-            TaskList.displayList();
-            break;
-        case "delete":
-            try {
-                String stringIndex2 = scanner.next();
-                int index2 = Integer.parseInt(stringIndex2) - 1;
-                TaskList deletedTask = TaskList.getTask(index2);
-                if (deletedTask == null) {
-                    break;
-                }
-                task.delete(index2);
-                USER_INTERFACE.taskDeleted(deletedTask);
-                break;
-            } catch (NumberFormatException e) {
-                USER_INTERFACE.integerInputWarning();
-                break;
-            }
-        case "find":
-            String searchWord = scanner.next();
-            USER_INTERFACE.printArrayList(TaskList.findMatching(searchWord));
-            break;
-        default:
-            String remaining = command.concat(" " + scanner.nextLine());
-            try {
-                task.add(remaining);
-                break;
-            } catch (DukeException e) {
-                System.out.println(e);
-            }
+    public String parse(String command) {
+        String[] singleCommandCheck = command.split(" ");
+        if (singleCommandCheck.length == 1) {
+            return mainCommand.interpretCommand(singleCommandCheck[0], "");
         }
-        return false;
+
+        String[] commandWords = command.split(" ", 2);
+        String keyword = commandWords[0];
+        String description = commandWords[1];
+
+        return mainCommand.interpretCommand(keyword, description);
     }
 
     /**
-     * This method detects the format of a yyyy-mm-dd date in a sentence
+     * Detects the format of a yyyy-mm-dd date in a sentence
      * and extracts it out for use.
      *
      * @param input the input string that is typically the timeline given by the user
@@ -105,7 +64,7 @@ public class Parser {
     }
 
     /**
-     * This method detects the format of a 4 integer timing in a sentence
+     * Detects the format of a 4 integer timing in a sentence
      * and extracts it out for use.
      *
      * @param input the input string that is typically the timeline given by the user
@@ -129,7 +88,7 @@ public class Parser {
     }
 
     /**
-     * This method detects the format of a 4 integer to 4 integer
+     * Detects the format of a 4 integer to 4 integer
      * range timing in a sentence.
      *
      * @param input the input string that is typically the timeline given by the user
@@ -153,7 +112,7 @@ public class Parser {
     }
 
     /**
-     * This method converts the String input 24-hour time format
+     * Converts the String input 24-hour time format
      * into a 12-hour format with A.M. and P.M.
      *
      * @param input 24-hour time format
@@ -200,7 +159,7 @@ public class Parser {
             }
             ld = LocalDate.parse(timeFormat);
         } catch (ArrayIndexOutOfBoundsException e) {
-            USER_INTERFACE.nullFunction();
+            Duke.nullFunction();
         }
     }
 
@@ -232,7 +191,7 @@ public class Parser {
             }
             ld = LocalDate.parse(timeFormat);
         } catch (ArrayIndexOutOfBoundsException e) {
-            USER_INTERFACE.nullFunction();
+            Duke.nullFunction();
         }
     }
 
@@ -256,10 +215,10 @@ public class Parser {
     }
 
     /**
-     * This method is responsible for the parsing of contents from
-     * the file storage during the initial execution of the program.
-     * This method breaks down the information to be provided to the
-     * task class to create the respective tasks.
+     * Parses the contents from the file storage during the
+     * initial execution of the program. Breaks down the
+     * information to be provided to the task class to create
+     * the respective tasks.
      *
      * @param line a line of content from the storage file
      * @return a task which is created in the task class based on the given parameters

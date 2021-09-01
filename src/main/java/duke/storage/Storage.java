@@ -1,12 +1,11 @@
 package duke.storage;
 
-import duke.task.TaskList;
-import duke.ui.UserInterface;
 import duke.parser.Parser;
+import duke.task.TaskList;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -14,12 +13,13 @@ import java.util.Scanner;
 /**
  * This class represents the storage of the task list and handles all the
  * interaction between the user and the file contents.
+ *
+ * @author yeo-yiheng
  */
 public class Storage {
 
     private final File file;
     private final String filePath;
-    private final static UserInterface USER_INTERFACE = new UserInterface();
 
     /**
      * Creates an instance of the Storage class.
@@ -35,23 +35,27 @@ public class Storage {
      * Prints the content of the task file. Prints a notification to alert the user if the
      * file is empty or a warning if the file is not found.
      */
-    public void printTaskFile() {
+    public String printTaskFile() {
         try {
             Scanner sc = new Scanner(file);
             boolean isEmpty = !sc.hasNext();
+            StringBuilder sb = new StringBuilder();
+            String listContents = "Oh no! Your list is empty!";
             int index = 1;
 
             while (sc.hasNext()) {
-                System.out.println(index + ". " + sc.nextLine());
+                sb.append(index).append(". ").append(sc.nextLine()).append("\n");
                 index++;
             }
 
-            if (isEmpty) {
-                USER_INTERFACE.emptyListWarning();
+            if (!isEmpty) {
+                listContents = sb.toString();
             }
 
+            return listContents;
+
         } catch (FileNotFoundException e) {
-            USER_INTERFACE.fileNotFoundWarning();
+            return e.getMessage();
         }
     }
 
@@ -81,7 +85,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            USER_INTERFACE.generalErrorWarning(e.getMessage());
+//            USER_INTERFACE.generalErrorWarning(e.getMessage());
         }
     }
 
@@ -97,7 +101,7 @@ public class Storage {
                 Parser.parseFromFile(line);
             }
         } catch (FileNotFoundException e) {
-            USER_INTERFACE.fileNotFoundWarning();
+            e.getMessage();
         }
     }
 }

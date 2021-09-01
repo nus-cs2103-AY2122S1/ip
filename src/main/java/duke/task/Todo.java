@@ -1,11 +1,15 @@
 package duke.task;
 
+import duke.exception.DukeException.FileNotFoundException;
+
 import java.io.IOException;
 
 /**
  * Represents a possible type of task in our task list, known as a Todo.
  * This task is the most basic, with no added functionality to support deadline and
  * timing.
+ *
+ * @author yeo-yiheng
  */
 public class Todo extends TaskList {
 
@@ -16,14 +20,13 @@ public class Todo extends TaskList {
      * @param isExisting the boolean that distinguishes between an existing task loaded from
      *                   the task file or a newly added task during program execution
      */
-    public Todo(String description, boolean isExisting) {
+    public Todo(String description, boolean isExisting) throws FileNotFoundException {
         super(description);
         if (!isExisting) {
             try {
                 FILE.saveTask(this); // Saves task to hard disk
-                USER_INTERFACE.taskAdded(this);
             } catch (IOException e) {
-                USER_INTERFACE.fileNotFoundWarning();
+                throw new FileNotFoundException();
             }
         }
     }

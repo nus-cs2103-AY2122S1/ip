@@ -1,14 +1,16 @@
 package duke.task;
 
-import duke.storage.Storage;
-import duke.ui.UserInterface;
+import duke.commands.Command;
 import duke.exception.DukeException;
+import duke.storage.Storage;
 
 import java.util.ArrayList;
 
 /**
  * Represents the central task class that implements all operations on a task. This
  * class is responsible for the behaviour of all its subclasses; Todo, Event and Deadline.
+ *
+ * @author yeo-yiheng
  */
 public class TaskList {
 
@@ -16,7 +18,7 @@ public class TaskList {
     private boolean isDone;
     protected static final Storage FILE = new Storage("data/tasks.txt");
     protected static final ArrayList<TaskList> TASKS = new ArrayList<>();
-    protected static final UserInterface USER_INTERFACE = new UserInterface();
+    protected static final Command USER_INTERFACE = new Command();
 
     /**
      * Creates an instance of a TaskList class. This is the parent task class which
@@ -44,7 +46,7 @@ public class TaskList {
     }
 
     /**
-     * This method sets the task with input index as done. This causes the
+     * Sets the task with input index as done. This causes the
      * method call of setDone on that particular instance of task. Thereafter,
      * a file overwrite is called to update the file contents. This method
      * similarly checks if the input index is valid. If it isn't valid, a warning
@@ -55,7 +57,6 @@ public class TaskList {
      */
     public boolean markDone(int index) {
         if (index < 0 || index >= TASKS.size()) {
-            USER_INTERFACE.invalidIntegerWarning();
             return false;
         } else {
             TASKS.get(index).setDone();
@@ -64,7 +65,7 @@ public class TaskList {
     }
 
     /**
-     * This method removes the task at the specified index on the task list. Thereafter,
+     * Removes the task at the specified index on the task list. Thereafter,
      * a file overwrite is called to update the file contents.
      *
      * @param index the index of the task on the task list to be deleted
@@ -75,17 +76,17 @@ public class TaskList {
     }
 
     /**
-     * This method is responsible for distinguishing the type of task to be created
-     * as inputted by the user. If it is none of the 3 subclass tasks, a custom
-     * DukeException is thrown to warn the users that the input is unrecognized.
-     * Once recognized, if the description of the task is empty, a custom DukeException
-     * is thrown to warn the users that the input lacks a description. Additionally,
-     * the timeline of the Deadline and Event subclasses cannot be empty or another
-     * custom DukeException is thrown to warn users that the input lacks a timeline.
+     * Distinguishes the type of task to be created as inputted by the user. If
+     * it is none of the 3 subclass tasks, a custom DukeException is thrown to
+     * warn the users that the input is unrecognized. Once recognized, if the
+     * description of the task is empty, a custom DukeException is thrown to warn
+     * the users that the input lacks a description. Additionally, the timeline of
+     * the Deadline and Event subclasses cannot be empty or another custom DukeException
+     * is thrown to warn users that the input lacks a timeline.
      *
      * @param input the user input from the command line
      */
-    public void add(String input) {
+    public TaskList add(String input) throws DukeException {
         input = input.trim();
         String emptyTimelineError = null;
         String[] splitTask = input.split(" ", 2);
@@ -97,8 +98,7 @@ public class TaskList {
                 emptyDescription = true;
                 break;
             }
-            new Todo(splitTask[1], false);
-            break;
+            return new Todo(splitTask[1], false);
         case "deadline":
             if (splitTask.length == 1) {
                 emptyDescription = true;
@@ -111,8 +111,7 @@ public class TaskList {
                 break;
             }
 
-            new Deadline(splitTime[0], splitTime[1], false);
-            break;
+            return new Deadline(splitTime[0], splitTime[1], false);
         case "event":
             if (splitTask.length == 1) {
                 emptyDescription = true;
@@ -125,21 +124,20 @@ public class TaskList {
                 break;
             }
 
-            new Event(splitTimeEvent[0], splitTimeEvent[1], false);
-            break;
+            return new Event(splitTimeEvent[0], splitTimeEvent[1], false);
         default:
             throw new DukeException.InvalidCommandException(input);
         }
 
         if (emptyDescription) {
             throw new DukeException.EmptyDescriptionException();
-        } else if (emptyTimelineError != null) {
+        } else {
             throw new DukeException.EmptyTimelineDescription(emptyTimelineError);
         }
     }
 
     /**
-     * This method is responsible for creating the task based on the file storage contents. This
+     * Responsible for creating the task based on the file storage contents. This
      * method differs from the original add method as it does not go through any checks and parsing
      * is already done.
      *
@@ -167,7 +165,7 @@ public class TaskList {
     }
 
     /**
-     * This method is in charge of loading the contents of the file storage into the temporary
+     * In-charge of loading the contents of the file storage into the temporary
      * arraylist that holds the tasks in order. This ensures that the user is always interacting
      * with the contents of the storage file at the start.
      */
@@ -177,14 +175,13 @@ public class TaskList {
     }
 
     /**
-     * This method retrieves the task based on the index in the task list.
+     * Retrieves the task based on the index in the task list.
      *
      * @param index the index of the task in the task list to be retrieved
      * @return the specified task retrieved from the task list
      */
     public static TaskList getTask(int index) {
         if (index < 0 || index >= TASKS.size()) {
-            USER_INTERFACE.invalidIntegerWarning();
             return null;
         } else {
             return TASKS.get(index);
@@ -192,7 +189,7 @@ public class TaskList {
     }
 
     /**
-     * This method finds the tasks that matches the input keyword and subsequently
+     * Finds the tasks that matches the input keyword and subsequently
      * returns a collection of all tasks that matches the keyword.
      *
      * @param searchWord the provided keyword to match to the tasks
@@ -206,7 +203,6 @@ public class TaskList {
                 matchingTasks.add(t);
             }
         }
-        USER_INTERFACE.matchingTaskListHeader(searchWord);
         return matchingTasks;
     }
 
@@ -237,8 +233,7 @@ public class TaskList {
     /**
      * Prints the contents of the task list onto the command line.
      */
-    public static void displayList() {
-        USER_INTERFACE.taskListHeader();
-        FILE.printTaskFile();
+    public static String displayList() {
+        return FILE.printTaskFile();
     }
 }

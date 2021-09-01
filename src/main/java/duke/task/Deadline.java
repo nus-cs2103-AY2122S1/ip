@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.DukeException.FileNotFoundException;
 import duke.parser.Parser;
 
 import java.io.IOException;
@@ -8,6 +9,8 @@ import java.time.LocalDate;
 /**
  * Represents a possible type of task in our task list, known as a Deadline. This task has
  * additional information that supports adding deadlines in terms of dates and 24 hour time.
+ *
+ * @author yeo-yiheng
  */
 public class Deadline extends TaskList {
 
@@ -23,9 +26,10 @@ public class Deadline extends TaskList {
      * @param isExisting the boolean that distinguishes between an existing task loaded from
      *                   the task file or a newly added task during program execution
      */
-    public Deadline(String description, String time, boolean isExisting) {
+    public Deadline(String description, String time, boolean isExisting) throws FileNotFoundException {
         super(description);
         this.time = time;
+        System.out.println(description + " TIME: " + time);
         if (!isExisting) {
             localDate = Parser.findDate(time);
             deadLineTiming = Parser.findTime(time);
@@ -34,9 +38,8 @@ public class Deadline extends TaskList {
             }
             try {
                 FILE.saveTask(this); // Saves task to hard disk
-                USER_INTERFACE.taskAdded(this);
             } catch (IOException e) {
-                USER_INTERFACE.fileNotFoundWarning();
+                throw new FileNotFoundException();
             }
         } else {
             Parser.parseDeadlineTime(time, localDate, deadLineTiming);
