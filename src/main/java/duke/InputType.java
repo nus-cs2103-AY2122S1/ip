@@ -8,6 +8,7 @@ public enum InputType {
     DEADLINE("deadline"),
     EVENT("event"),
     DELETE("delete"),
+    FIND("find"),
     DONE("done");
 
     public final String str;

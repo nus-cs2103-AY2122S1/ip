@@ -11,6 +11,6 @@ public class ListCommand extends Command{
     public CommandResult execute() throws Exception{
         String message = taskList.getList();
 
-        return new CommandResult(message, false, taskList);
+        return new CommandResult(message, false);
     }
 }
