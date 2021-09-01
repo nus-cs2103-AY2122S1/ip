@@ -43,7 +43,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[D]" + super.getTaskState() + "(By: " + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime) + ")";
+        return "[D]" + super.getTaskState() + " (By: " + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime) + ")";
     }
 
     /**

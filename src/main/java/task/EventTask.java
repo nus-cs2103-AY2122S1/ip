@@ -43,7 +43,7 @@ public class EventTask extends Task {
      */
     @Override
     public String getTaskState() {
-        return "[E]" + super.getTaskState() + "(At: " + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime) + ")";
+        return "[E]" + super.getTaskState() + " (At: " + (storedTime.isEmpty() ? time.format(outputFormatter) : storedTime) + ")";
     }
 
     /**
