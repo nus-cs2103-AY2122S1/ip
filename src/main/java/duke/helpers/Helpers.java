@@ -1,5 +1,8 @@
 package duke.helpers;
 
+/**
+ * Helpers Class with helper methods which can be shared throughout the application.
+ */
 public class Helpers {
 
     /**

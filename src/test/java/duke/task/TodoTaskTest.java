@@ -1,10 +1,11 @@
 package duke.task;
 
-import duke.exceptions.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import duke.exceptions.DukeException;
+
+import org.junit.jupiter.api.Test;
 
 public class TodoTaskTest {
     private static final String DELIMITER_SPLIT = " \\| ";

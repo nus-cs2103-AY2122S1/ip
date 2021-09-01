@@ -52,7 +52,7 @@ abstract public class Task {
     }
 
     /**
-     * Get duke.task string to be inputted into file.
+     * Gets duke.task string to be inputted into file.
      *
      * @return string in the respective duke.task format.
      */

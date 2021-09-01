@@ -9,6 +9,9 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exceptions.DukeException;
 
+/**
+ * Parser class parses the user inputs.
+ */
 public class Parser {
     /**
      * List of Command Strings.
@@ -32,7 +35,6 @@ public class Parser {
     /**
      * Returns the Command corresponding to the full String duke.command input.
      * String input examples:
-     * <p>
      * bye
      * list
      * todo read book
