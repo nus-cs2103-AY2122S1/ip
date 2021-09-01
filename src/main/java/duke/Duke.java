@@ -26,8 +26,7 @@ public class Duke {
         Duke duke = new Duke();
         duke.runDuke();
     }
-
-
+    
     public void runDuke() throws DukeException, IOException {
         storage.fetchData();
         ui.displayWelcomeMessage();

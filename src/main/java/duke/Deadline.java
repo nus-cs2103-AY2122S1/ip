@@ -1,7 +1,7 @@
 package duke;
 
 /**
- *
+ * duke.Deadline represents the Deadline tasks in Duke
  */
 public class Deadline extends Task {
 
