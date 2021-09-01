@@ -26,6 +26,14 @@ public class TaskList {
     }
 
     /**
+     * Function adds a new Task into the tempList as a result of find request without
+     * breaking the encapsulation. So no need to print message.
+     * @param newTask is the newly created Task to be added to the tempList.
+     */
+    public void addTaskWithoutMessage(Task newTask) {
+        taskList.add(newTask);
+    }
+    /**
      * function removes the task located at the index of the task list.
      *
      * @param newInput contains information for the Task to be deleted.

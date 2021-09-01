@@ -1,0 +1,3 @@
+Todo r
+Deadline r /by 12/12/2019
+Events rt /at 12/12/2019 1800

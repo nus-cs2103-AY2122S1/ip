@@ -95,5 +95,13 @@ public class Task {
     public boolean getIsDone() {
         return isDone;
     }
+
+    /**
+     * Getter to return the finalAction String of the Task.
+     * @return finalAction.
+     */
+    public String getFinalAction() {
+        return finalAction;
+    }
 }
 

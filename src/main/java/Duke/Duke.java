@@ -85,25 +85,12 @@ class Ui {
             String[] newInput = input.split(" ");
             String instruction = newInput[0];
             if (instruction.equals("done")) {
-                if (newInput.length < 2) {
-                    System.out.println("Please input the index of the Task to be done!");
-                } else {
-                    int index = Integer.parseInt(newInput[1]);
-                    if (index <= taskList.getTaskList().size() && index > 0) {
-                        taskList.getTaskList().get(index - 1).done();
-                        System.out.println("Nice! I've marked this task as done: ");
-                        System.out.println("    " + this.taskList.getTaskList().get(index - 1));
-                    } else {
-                        System.out.println("invalid index");
-                    }
-                }
+                doneAction(newInput);
             } else if (instruction.equals("delete")) {
-                try {
-                    taskList.deleteTask(newInput);
-                }catch (Exception e) {
-                    System.out.println(e.getLocalizedMessage());
-                }
-            }else {
+                deleteAction(newInput);
+            }else if (instruction.equals("find")) {
+                findAction(newInput);
+            } else {
                 try {
                     Task newTask = store.createTask(input);
                     taskList.addTask(newTask);
@@ -126,5 +113,59 @@ class Ui {
      */
     public void getDataInputList() {
         store.getDataInputList(this.taskList);
+    }
+
+    /**
+     * Function performs task when Done instruction is provided.
+     * @param newInput is a String Array containing the Done and index of the Task.
+     */
+    private void doneAction(String[] newInput) {
+        if (newInput.length < 2) {
+            System.out.println("Please input the index of the Task to be done!");
+        } else {
+            int index = Integer.parseInt(newInput[1]);
+            if (index <= taskList.getTaskList().size() && index > 0) {
+                taskList.getTaskList().get(index - 1).done();
+                System.out.println("Nice! I've marked this task as done: ");
+                System.out.println("    " + this.taskList.getTaskList().get(index - 1));
+            } else {
+                System.out.println("invalid index");
+            }
+        }
+    }
+
+    /**
+     * Function perform the action of deleting a task when requested. It also catches
+     * the Exception throw.
+     * @param newInput is the String Array containing the index of the Task.
+     */
+    private void deleteAction(String[] newInput) {
+        try {
+            taskList.deleteTask(newInput);
+        }catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+    }
+
+    /**
+     * Action find keywords in main TaskList the fits the request.
+     * @param newInput is a String Array that contains the keyword needed for the search.
+     * @return TaskList Object containing the searched Tasks.
+     */
+    private void findAction(String[] newInput) {
+        System.out.println("Here are the matching tasks in your list:");
+        if (newInput.length >= 2) {
+            String keyword = newInput[1];
+            //TaskList tempList = new TaskList();
+            for (Task curTask : this.taskList.getTaskList()) {
+                for (String information : curTask.getFinalAction().split(" ")) {
+                    if (information.equals(keyword)) {
+                        //tempList.addTaskWithoutMessage(curTask);
+                        System.out.println(curTask);
+                    }
+                }
+            }
+            //tempList.showList();
+        }
     }
 }
