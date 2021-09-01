@@ -1,3 +1,10 @@
+import model.DeadlineTask;
+import model.EventTask;
+import model.TaskList;
+import model.ToDoTask;
+import parser.JadenInputException;
+import parser.ParsedInput;
+
 import java.util.Scanner;
 
 public class Session {

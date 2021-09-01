@@ -1,3 +1,5 @@
+package model;
+
 public class EventTask extends Task {
 
     public String eventDuration;

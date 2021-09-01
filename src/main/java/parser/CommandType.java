@@ -1,3 +1,5 @@
+package parser;
+
 /**
  * Command types as an enum.
  */

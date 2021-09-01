@@ -1,3 +1,7 @@
+package model;
+
+import model.Task;
+
 public class ToDoTask extends Task {
 
     public ToDoTask(String description) {

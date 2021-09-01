@@ -1,3 +1,5 @@
+package parser;
+
 public class JadenInputException extends Exception {
 
     private JadenInputException(String description) {

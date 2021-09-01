@@ -1,3 +1,5 @@
+package parser;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -5,11 +7,11 @@ import java.time.format.DateTimeParseException;
  * Parsed input that can easily be processed into a task.
  */
 public class ParsedInput {
-    CommandType commandType;
-    String taskDescription = "";
-    LocalDate deadline;
-    String eventPeriod = "";
-    int taskIndex = -1;
+    public final CommandType commandType;
+    public String taskDescription = "";
+    public LocalDate deadline;
+    public String eventPeriod = "";
+    public int taskIndex = -1;
 
     InputValidator inputValidator = InputValidator.getInstance();
 

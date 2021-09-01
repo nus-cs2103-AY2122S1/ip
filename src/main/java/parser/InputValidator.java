@@ -1,3 +1,5 @@
+package parser;
+
 public class InputValidator {
     private static InputValidator singleInstance = null;
 
