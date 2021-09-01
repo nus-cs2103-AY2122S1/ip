@@ -2,16 +2,10 @@ plugins {
     id 'java'
     id 'checkstyle'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 checkstyle {
     toolVersion = '8.29'
-}
-
-javafx {
-    version = '11'
-    modules = ['javafx.controls', 'javafx.fxml', 'javafx.swing', 'javafx.media', 'javafx.graphics']
 }
 
 test {
@@ -20,8 +14,6 @@ test {
 
 group 'org.example'
 version '1.0-SNAPSHOT'
-
-mainClassName = 'duke.Duke'
 
 repositories {
     mavenCentral()
