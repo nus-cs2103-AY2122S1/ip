@@ -11,10 +11,10 @@ Duke is an application that allows you to manage your tasks more efficiently!!! 
 ## Features
 
 - [X] Add tasks such as todos, deadlines or events
-- [ ] Mark them as done
-- [ ] Find tasks using specific key words
-- [ ] Delete tasks
-- [ ] List out all your tasks
+- [X] Mark them as done
+- [X] Find tasks using specific key words
+- [X] Delete tasks
+- [X] List out all your tasks
 
 ## Setup
 
