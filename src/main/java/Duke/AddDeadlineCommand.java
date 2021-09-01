@@ -17,7 +17,9 @@ public class AddDeadlineCommand implements ICommand {
     }
 
     /**
-     * Adds the deadline task by interacting with the relevant instances as mentioned above.
+     * Adds the deadline task by interacting with the
+     * relevant instances as mentioned above.
+     *
      * @param tm The TaskManager object controlling the tasks in Duke.
      * @param ui The Ui object managing Duke's user interface.
      * @param storage The Storage object managing the local storing of tasks.
