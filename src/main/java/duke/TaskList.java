@@ -52,6 +52,16 @@ public class TaskList {
         return Chatbot.ChatContinue.CONTINUE;
     }
 
+    public TaskList findTasks(String target) {
+        TaskList taskList = new TaskList();
+        for(int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            if (currentTask.description.contains(target)) {
+                taskList.tasks.add(currentTask);
+            }
+        }
+        return taskList;
+    }
 
     private Chatbot.ChatContinue markDone(String args, Ui ui) {
         try {

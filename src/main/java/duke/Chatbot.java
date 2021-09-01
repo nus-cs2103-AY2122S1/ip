@@ -5,7 +5,8 @@ import java.util.*;
 public class Chatbot {
     private enum ChatCommands {
         BYE("bye"),
-        LIST("list");
+        LIST("list"),
+        FIND("find");
 
         private final String command;
 
@@ -90,9 +91,10 @@ public class Chatbot {
 
     private ChatContinue interpret() throws DukeIOException, DukeDateParseException {
         String input = scanner.nextLine();
-        ChatCommands command = ChatCommands.toEnum(input);
+        String[] parseInput = input.split(" ", 2);
+        ChatCommands command = ChatCommands.toEnum(parseInput[0]);
         if (command != null) {
-            return builtInCommands(command);
+            return builtInCommands(command, parseInput.length == 1 ? "" : parseInput[1]);
         }
         TaskCommands taskCommand = TaskCommands.toEnum(input);
         if (taskCommand != null) {
@@ -107,12 +109,17 @@ public class Chatbot {
 
 
 
-    private ChatContinue builtInCommands(ChatCommands command) {
+    private ChatContinue builtInCommands(ChatCommands command, String argument) {
         switch (command) {
             case BYE:
                 return this.farewell();
             case LIST:
                 return this.taskList.list(this.ui);
+            case FIND:
+                TaskList findTaskList = this.taskList.findTasks(argument);
+                System.out.println(findTaskList.tasks.size());
+                System.out.println(findTaskList.list(this.ui));
+                return ChatContinue.CONTINUE;
             default:
                 this.ui.showNotSupported();
                 return ChatContinue.END;
