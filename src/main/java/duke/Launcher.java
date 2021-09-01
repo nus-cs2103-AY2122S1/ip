@@ -1,6 +1,9 @@
-import duke.Duke;
+package duke;
 
-public class Main {
+import javafx.application.Application;
+
+
+public class Launcher {
 
     /**
      * Entry point of Duke project.
@@ -8,7 +11,7 @@ public class Main {
      * @param args Not used.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+        Application.launch(Duke.class, args);
+        return;
     }
 }

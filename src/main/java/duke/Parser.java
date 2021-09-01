@@ -24,7 +24,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException, IllegalArgumentException {
         String[] parts = fullCommand.split(" ", 2);
-        String [] args;
+        String[] args;
         String action = parts[0];
         switch (action) {
         case "list":
@@ -36,7 +36,7 @@ public class Parser {
             return new DoneCommand(Integer.parseInt(parts[1]));
         case "delete":
             assertInputSize(parts, 2, "Not enough arguments");
-            return new DeleteCommand(Integer.parseInt(parts[1]));
+            return new DeleteCommand(Integer.parseInt(parts[1]) - 1);
         case "find":
             assertInputSize(parts, 2, "Not enough arguments");
             return new FindCommand(parts[1]);

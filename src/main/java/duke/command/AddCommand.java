@@ -4,7 +4,6 @@ import java.time.DateTimeException;
 
 import duke.InvalidDukeCommandException;
 import duke.TaskManager;
-import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -30,7 +29,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, Ui ui) throws InvalidDukeCommandException, DateTimeException {
+    public String execute(TaskManager taskManager) throws InvalidDukeCommandException, DateTimeException {
         Task task;
         switch (type) {
         case "todo":
@@ -48,10 +47,9 @@ public class AddCommand extends Command {
 
         taskManager.addTask(task);
 
-        ui.reply(String.format(
-                "Got it. I've added this task: \n"
-                        + "%s\n"
-                        + "Now you have %d tasks in the list", task.toString(), taskManager.taskCount()
-        ));
+        return String.format("Got it. I've added this task: \n"
+                + "%s\n"
+                + "Now you have %d tasks in the list", task.toString(), taskManager.taskCount()
+        );
     }
 }
