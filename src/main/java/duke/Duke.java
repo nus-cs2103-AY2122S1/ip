@@ -12,8 +12,8 @@ import duke.ui.Ui;
  * required to parse and return user input.
  */
 public class Duke {
-    private final Storage STORAGE;
-    private final Ui UI;
+    private final Storage storage;
+    private final Ui ui;
     private TaskList taskList;
 
     /**
@@ -21,12 +21,12 @@ public class Duke {
      * UI, Storage and tries to load an existing Task List.
      */
     public Duke() {
-        this.UI = new Ui();
-        this.STORAGE = new Storage("/data/duke.txt");
+        this.ui = new Ui();
+        this.storage = new Storage("/data/duke.txt");
 
         try {
             /* try loading text file from storage */
-            this.taskList = new TaskList(STORAGE.load());
+            this.taskList = new TaskList(storage.load());
         } catch (DukeException de) {
             this.taskList = new TaskList();
         }
@@ -41,8 +41,8 @@ public class Duke {
     public String getResponse(String input) {
         String response = "";
 
-        try{
-            response = new Parser(input, this.taskList, this.STORAGE, this.UI).compute();
+        try {
+            response = new Parser(input, this.taskList, this.storage, this.ui).compute();
         } catch (DukeException de) {
             response = de.toString();
         }
@@ -56,6 +56,6 @@ public class Duke {
      * @return Duke's welcome message
      */
     public String welcomeMessage() {
-        return this.UI.welcomeMessage();
+        return this.ui.welcomeMessage();
     }
 }

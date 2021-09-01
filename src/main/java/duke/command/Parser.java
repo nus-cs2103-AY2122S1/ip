@@ -1,14 +1,14 @@
 package duke.command;
 
+import java.time.format.DateTimeFormatter;
+
 import duke.exception.DukeException;
 import duke.io.Storage;
-import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.ToDo;
 import duke.task.TaskList;
-
-import java.time.format.DateTimeFormatter;
+import duke.task.ToDo;
+import duke.ui.Ui;
 
 /**
  * Parser class encapsulates a parser within the Duke bot that processes
@@ -16,10 +16,10 @@ import java.time.format.DateTimeFormatter;
  * and returns a description of the command.
  */
 public class Parser {
-    String input;
-    TaskList taskList;
-    Storage storage;
-    Ui ui;
+    private String input;
+    private TaskList taskList;
+    private Storage storage;
+    private Ui ui;
 
     /**
      * Constructor for a Parser

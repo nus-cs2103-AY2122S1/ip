@@ -7,21 +7,31 @@ import java.time.format.DateTimeFormatter;
  * Represents the "Event" task type. It encapsulates an Event's name, type and deadline
  */
 public class Event extends Task {
-    private String taskName, at, type = "E";
+    private String taskName;
+    private String at;
+    private String type = "E";
     private LocalDate date;
-    private int time, day, month, year;
+    private int time;
+    private int day;
+    private int month;
+    private int year;
 
+    /**
+     * Constructor for an Event task
+     *
+     * @param taskName a short description of the task
+     */
     public Event(String taskName) {
-        String[] TaskAtSplit = taskName.split("/", 2);
+        String[] taskAtSplit = taskName.split("/", 2);
 
         if (taskName.contains("|")) {
-            TaskAtSplit = taskName.split("\\|", 2);
+            taskAtSplit = taskName.split("\\|", 2);
         } else if (taskName.contains("/at")) {
-            TaskAtSplit = taskName.split("/at", 2);
+            taskAtSplit = taskName.split("/at", 2);
         }
 
-        this.taskName = TaskAtSplit[0].trim();
-        this.at = TaskAtSplit[1].trim();
+        this.taskName = taskAtSplit[0].trim();
+        this.at = taskAtSplit[1].trim();
         String[] dateTimeSplit = this.at.split(" ", 2);
         this.time = Integer.parseInt(dateTimeSplit[1]);
 
@@ -52,14 +62,18 @@ public class Event extends Task {
      *
      * @return name of the Event task
      */
-    public String showTaskOnly() { return this.taskName; }
+    public String showTaskOnly() {
+        return this.taskName;
+    }
 
     /**
      * Returns the deadline of the Event task
      *
      * @return deadline of the Event task
      */
-    public String showWhen() { return this.at; }
+    public String showWhen() {
+        return this.at;
+    }
 
     /**
      * Returns the type of the Event task
@@ -75,12 +89,16 @@ public class Event extends Task {
      *
      * @return date of the Event task
      */
-    public LocalDate showDate() { return this.date; }
+    public LocalDate showDate() {
+        return this.date;
+    }
 
     /**
      * Returns ths time of the Event task in 24-hour format
      *
      * @return time of the Event task
      */
-    public int showTime() { return this.time; }
+    public int showTime() {
+        return this.time;
+    }
 }
