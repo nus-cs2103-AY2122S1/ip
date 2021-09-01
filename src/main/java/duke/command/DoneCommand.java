@@ -37,10 +37,10 @@ public class DoneCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task temp = tasks.get(taskNum - 1);
         temp.markAsDone();
-        ui.doneTask(temp);
         storage.editFileAll(tasks);
+        return ui.doneTask(temp);
     }
 }

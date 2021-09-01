@@ -33,27 +33,24 @@ public class Ui {
     /**
      * Prints the divider.
      */
-    public void showLine() {
-
-        System.out.println(DIVIDER);
+    public String showLine() {
+        return DIVIDER;
     }
 
     /**
      * Prints the greeting message.
      */
-    public void greetUser() {
-        showLine();
-        System.out.println("    Hello! I'm Duke");
-        System.out.println("    What can I do for you?");
-        showLine();
+    public String greetUser() {
+        return "    Hello! I'm Duke/n" + INDENT_1 + "What can I do for you?";
+
     }
 
     /**
      * Prints the goodbye message.
      */
-    public void sayBye() {
-        System.out.println(INDENT_1 + "Bye! Hope to see you again soon :)");
+    public String sayBye() {
         scanner.close();
+        return INDENT_1 + "Bye! Hope to see you again soon :)";
     }
 
     /**
@@ -62,17 +59,16 @@ public class Ui {
      * @param num The index of the task.
      * @param temp The task to be printed.
      */
-    public void listNumber(int num, Task temp) {
+    public String listNumber(int num, Task temp) {
 
-        System.out.println(INDENT_2 + (num + 1) + ". " + temp.toString());
+        return INDENT_2 + (num + 1) + ". " + temp.toString() + System.lineSeparator();
     }
 
     /**
      * Prints the message for listing tasks.
      */
-    public void showList() {
-        System.out.println(INDENT_1
-                + "Here are the tasks in your list:");
+    public String showList() {
+        return INDENT_1 + "Here are the tasks in your list:";
     }
 
     /**
@@ -80,10 +76,10 @@ public class Ui {
      *
      * @param temp The task which is done.
      */
-    public void doneTask(Task temp) {
-        System.out.println(INDENT_1 + "YAY good job for completing the task :)\n"
+    public String doneTask(Task temp) {
+        return INDENT_1 + "YAY good job for completing the task :)\n"
                 + INDENT_1 + "I've marked it as done:\n" + INDENT_2
-                        + temp.toString());
+                        + temp.toString();
     }
 
     /**
@@ -91,24 +87,24 @@ public class Ui {
      *
      * @param task The task to be removed.
      */
-    public void removeTask(Task task) {
-        System.out.println(INDENT_1 + "Sure! I've removed this task:");
-        System.out.println(INDENT_2 + task.toString());
-        ;
+    public String removeTask(Task task) {
+        return INDENT_1 + "Sure! I've removed this task:\n"
+                + INDENT_2 + task.toString();
     }
 
     /**
      * Prints the message for finding matching tasks.
      */
-    public void findTask() {
-        System.out.println(INDENT_1 + "I have found these matching tasks!!");
+    public String findTask() {
+
+        return INDENT_1 + "I have found these matching tasks!!";
     }
 
     /**
      * Prints message for failure of finding any matching tasks.
      */
-    public void noSuchTask() {
-        System.out.println(INDENT_1 + "I cannot find any matching tasks :(");
+    public String noSuchTask() {
+        return INDENT_1 + "I cannot find any matching tasks :(";
     }
 
     /**
@@ -116,9 +112,9 @@ public class Ui {
      *
      * @param task The task to be added.
      */
-    public void addTask(Task task) {
-        System.out.println(INDENT_1 + "Sure! I've added this task:");
-        System.out.println(INDENT_2 + task.toString());
+    public String addTask(Task task) {
+        return INDENT_1 + "Sure! I've added this task:\n"
+                + INDENT_2 + task.toString();
     }
 
     /**
@@ -126,11 +122,11 @@ public class Ui {
      *
      * @param taskList The list of tasks.
      */
-    public void numberOfTasks(TaskList taskList) {
+    public String numberOfTasks(TaskList taskList) {
         String numberOfTasks = INDENT_1 + "Now you have " + taskList.size()
                 + (taskList.size() == 1 ? " task" : " tasks")
                         + " in the list.";
-        System.out.println(numberOfTasks);
+        return numberOfTasks;
     }
 
     /**

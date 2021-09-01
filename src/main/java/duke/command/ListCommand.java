@@ -30,14 +30,16 @@ public class ListCommand extends Command {
      * @param storage The storage which saves and edits file content.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showList();
         int point = 0;
+        String taskString = "";
         while (point < tasks.size()) {
             Task temp = tasks.get(point);
-            ui.listNumber(point, temp);
+            taskString += ui.listNumber(point, temp);
             point++;
         }
-        ui.numberOfTasks(tasks);
+        return ui.showList() + System.lineSeparator()
+                + taskString + ui.numberOfTasks(tasks);
     }
 }
