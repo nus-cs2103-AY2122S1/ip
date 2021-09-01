@@ -21,5 +21,6 @@ text-ui-test/EXPECTED-UNIX.TXT
 /data/duke.txt
 
 # Artifact / JAR files
-
+.settings
+.project
 /src/META-INF/
