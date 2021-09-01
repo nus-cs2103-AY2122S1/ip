@@ -273,4 +273,41 @@ public class Ui {
             System.out.println(e.getMessage());
         }
     }
+
+    /**
+     * A method to process input from parsing to replying to writing into file.
+     *
+     * @param input The given command.
+     * @param arListTask The initial ArrayList of Tasks.
+     */
+    public String getReplyUniversal(String input, ArrayList<Task> arListTask) {
+        try {
+            if (parser.isDone(input)) {
+                storage.writeIntoFile(arListTask);
+                return new Ui().getReply(Command.DONE, input, arListTask);
+            } else if (parser.isDeadline(input)) {
+                storage.writeIntoFile(arListTask);
+                return new Ui().getReply(Command.DEADLINE, input, arListTask);
+            } else if (parser.isEvent(input)) {
+                storage.writeIntoFile(arListTask);
+                return new Ui().getReply(Command.EVENT, input, arListTask);
+            } else if (parser.isToDo(input)) {
+                storage.writeIntoFile(arListTask);
+                return new Ui().getReply(Command.TODO, input, arListTask);
+            } else if (parser.isBye(input)) {
+                return new Ui().getReply(Command.BYE, input, arListTask);
+            } else if (parser.isList(input)) {
+                storage.writeIntoFile(arListTask);
+                return new Ui().getReply(Command.LIST, input, arListTask);
+            } else if (parser.isDelete(input)) {
+                return new Ui().getReply(Command.DELETE, input, arListTask);
+            } else if (parser.isFind(input)) {
+                return new Ui().getReply(Command.FIND, input, arListTask);
+            } else {
+                return new Ui().getReply(Command.INVALID, input, arListTask);
+            }
+        } catch (BernException e) {
+            return e.getMessage();
+        }
+    }
 }
