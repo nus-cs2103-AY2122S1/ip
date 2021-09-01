@@ -19,7 +19,7 @@ import duke.task.ToDo;
  */
 public class Storage {
 
-    private static String filePath = "data/list.txt";
+    private String filePath = "data/list.txt";
     private Ui ui;
 
     public Storage() {
