@@ -9,29 +9,27 @@ Download Morgan [here](https://github.com/jennibearduit/ip/releases) and you'll 
 
 1. `list` : lists all existing tasks in storage.
 
-Input format: `list`
 
-2. `todo` : adds a to-do task into the list of tasks.
 
-Input format: `todo [task]`
+2. `todo [task]` : adds a to-do task into the list of tasks.
 
-3. `event` : adds an event task into the list of tasks.
 
-Input format: `event <task> /at [dd-mm-yyyy hh:mm]`
 
-4. `deadline` : adds a deadline task into the list of tasks.
+3. `event [task] /at [dd-mm-yyyy hh:mm]` : adds an event task into the list of tasks.
 
-Input format: `deadline [task] /by [dd-mm-yyyy hh:mm]`
 
-5. `delete` : deletes a task from the list of tasks.
 
-Input format: `delete [task number]`
+4. `deadline [task] /by [dd-mm-yyyy hh:mm]` : adds a deadline task into the list of tasks.
 
-6. `done` : marks a specified task as done.
 
-Input format: `done [task number]`
 
-7. `find` : lists all existing tasks containing a specified keyword.
+5. `delete [task number]` : deletes a task from the list of tasks.
 
-Input format: `find [keyword]`
-   
+
+
+6. `done [task number]` marks a specified task as done.
+
+
+
+7. `find [keyword]` : lists all existing tasks containing a specified keyword.
+
