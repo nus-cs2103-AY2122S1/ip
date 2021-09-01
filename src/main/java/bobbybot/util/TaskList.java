@@ -1,4 +1,9 @@
-package bobbybot;
+package bobbybot.util;
+
+import bobbybot.tasks.Deadline;
+import bobbybot.tasks.Event;
+import bobbybot.tasks.Task;
+import bobbybot.tasks.ToDo;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -45,7 +50,7 @@ public class TaskList {
 
     /**
      * Delete a task
-     * @param taskNo bobbybot.Task Number (starting from index 1)
+     * @param taskNo bobbybot.tasks.Task Number (starting from index 1)
      */
     public void deleteTask(int taskNo) {
         if (taskNo > tasks.size() || taskNo < 1) {
@@ -73,7 +78,7 @@ public class TaskList {
     /**
      * Creates an event task
      * @param description description of task
-     * @param at time period of bobbybot.Event (start-end)
+     * @param at time period of bobbybot.tasks.Event (start-end)
      */
     public void createEvent(String description, String at) {
         Task newEvent = new Event(description, at);

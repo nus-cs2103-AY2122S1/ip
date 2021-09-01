@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "bobbybot.BobbyBot"
+    mainClassName = "bobbybot.util.BobbyBot"
 }
 
 shadowJar {

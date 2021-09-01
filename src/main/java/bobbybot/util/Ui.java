@@ -1,4 +1,4 @@
-package bobbybot;
+package bobbybot.util;
 
 /**
  * Encapsulates all user-facing interactions

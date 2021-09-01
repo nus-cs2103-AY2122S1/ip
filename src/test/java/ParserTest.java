@@ -1,9 +1,9 @@
 
-import bobbybot.InvalidArgumentException;
-import bobbybot.Parser;
-import bobbybot.TaskList;
-import bobbybot.TooManyArgumentsException;
-import bobbybot.Ui;
+import bobbybot.exceptions.InvalidArgumentException;
+import bobbybot.util.Parser;
+import bobbybot.util.TaskList;
+import bobbybot.exceptions.TooManyArgumentsException;
+import bobbybot.util.Ui;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;

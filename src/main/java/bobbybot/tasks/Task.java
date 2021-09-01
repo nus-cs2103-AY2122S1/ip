@@ -1,4 +1,4 @@
-package bobbybot;
+package bobbybot.tasks;
 
 /**
  * Represents a task that can be completed

@@ -1,4 +1,9 @@
-package bobbybot;
+package bobbybot.util;
+
+import bobbybot.tasks.Deadline;
+import bobbybot.tasks.Event;
+import bobbybot.tasks.Task;
+import bobbybot.tasks.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;

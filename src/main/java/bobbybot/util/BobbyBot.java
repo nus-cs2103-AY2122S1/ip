@@ -1,4 +1,7 @@
-package bobbybot;
+package bobbybot.util;
+
+import bobbybot.exceptions.InvalidArgumentException;
+import bobbybot.exceptions.TooManyArgumentsException;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

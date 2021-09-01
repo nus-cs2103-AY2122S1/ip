@@ -1,6 +1,6 @@
-package bobbybot;
+package bobbybot.tasks;
 
-/** Represents a bobbybot.Task that should be completed at a specified time period
+/** Represents a bobbybot.tasks.Task that should be completed at a specified time period
  */
 public class Event extends Task {
     protected String at;
@@ -8,7 +8,7 @@ public class Event extends Task {
     /**
      *
      * @param description description of task
-     * @param at time period of bobbybot.Event (start-end)
+     * @param at time period of bobbybot.tasks.Event (start-end)
      */
     public Event(String description, String at) {
         super(description);

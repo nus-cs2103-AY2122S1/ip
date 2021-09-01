@@ -1,4 +1,8 @@
-package bobbybot;
+package bobbybot.util;
+
+import bobbybot.enums.BotCommand;
+import bobbybot.exceptions.InvalidArgumentException;
+import bobbybot.exceptions.TooManyArgumentsException;
 
 import java.util.Arrays;
 import java.util.LinkedList;

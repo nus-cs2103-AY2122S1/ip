@@ -1,4 +1,4 @@
-package bobbybot;
+package bobbybot.tasks;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
