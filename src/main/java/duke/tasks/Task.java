@@ -59,6 +59,9 @@ public class Task {
         isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
     /**
      * Returns the string representation of the task item.
      *

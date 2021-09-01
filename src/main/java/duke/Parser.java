@@ -10,6 +10,7 @@ import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
+import duke.commands.WelcomeCommand;
 
 /**
  * Parses user commands into the program.
@@ -27,6 +28,9 @@ public class Parser {
         String[] words = userCommand.strip().split(" ");
 
         switch (words[0].toLowerCase()) {
+        case WelcomeCommand.COMMAND_WORD:
+            return new WelcomeCommand();
+
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 

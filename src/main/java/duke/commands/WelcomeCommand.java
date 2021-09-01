@@ -1,26 +1,24 @@
 package duke.commands;
 
-import java.time.format.DateTimeFormatter;
-
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-/**
- * Abstract Command class to categorise user commands.
- */
-public abstract class Command {
+public class WelcomeCommand extends Command {
     /**
-     * Formatter for parsing String into Date.
+     * The command word that identifies an ExitCommand instance.
      */
-    public static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy/MM/dd HHmm");
+    public static final String COMMAND_WORD = "hello";
 
     /**
      * Returns true if the command is an exit command, return false otherwise.
      *
      * @return True if the command is an exit command, return false otherwise.
      */
-    public abstract boolean isExit();
+    @Override
+    public boolean isExit() {
+        return false;
+    }
 
     /**
      * Executes the respective command given and displays the result or error message(s).
@@ -29,5 +27,8 @@ public abstract class Command {
      * @param ui Ui instance that prints various messages.
      * @param storage Storage instance that reads and writes the task list.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
+    @Override
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.printWelcomeMessage();
+    }
 }
