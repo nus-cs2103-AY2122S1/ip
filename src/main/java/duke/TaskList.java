@@ -31,8 +31,15 @@ public class TaskList {
      */
     public void add(Task newTask) {
         taskList.add(newTask);
-        System.out.println("Just added:\n" + newTask.toString());
-        System.out.println("You currently have " + taskList.size() + " tasks in the list.");
+    }
+
+    /**
+     * A method to get the number of tasks in the list.
+     *
+     * @return The number of tasks in the list.
+     */
+    public int getLength() {
+        return taskList.size();
     }
 
     /**
@@ -41,7 +48,7 @@ public class TaskList {
      * @param input Array containing the command and the index of the task to be edited.
      * @throws DukeException If an invalid index is given as input.
      */
-    public void editTask(String[] input) throws DukeException {
+    public String editTask(String[] input) throws DukeException {
         String num = input[1];
         int index = Integer.parseInt(num) - 1;
         if (index >= taskList.size() || index == -1) {
@@ -52,17 +59,14 @@ public class TaskList {
         case "done":
             Task toMark = taskList.get(index);
             toMark.markAsDone();
-            System.out.println("Nice! I've marked this task as done:\n"
-                    + toMark.toString());
-            break;
+            return "Nice! I've marked this task as done:\n" + toMark.toString();
         case "delete":
-            System.out.println("Poof!\n" + taskList.get(index).toString() + "\nis gone");
+            String deletedTask = taskList.get(index).toString();
             taskList.remove(index);
-            System.out.println("Now you have " + taskList.size() + " tasks in the list");
-            break;
+            return "Poof!\n" + deletedTask + "\nis gone"
+                    + "\nNow you have " + taskList.size() + " tasks in the list";
         default:
-            System.out.println("Didn't understand that :(");
-            break;
+            return "Didn't understand that :(";
         }
     }
 
@@ -102,9 +106,6 @@ public class TaskList {
 
     @Override
     public String toString() {
-        if (taskList.isEmpty()) {
-            return "Your list is empty :(";
-        }
         String result = "";
         for (int i = 0; i < taskList.size(); i++) {
             String curr = taskList.get(i).toString();
