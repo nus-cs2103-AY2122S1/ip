@@ -91,14 +91,44 @@ public class TaskList {
     }
 
     /**
+     * Gets the number of tasks in the tasklist.
+     *
+     * @return Number of tasks in the tasklist.
+     */
+    public int getLength() {
+        return this.tasks.size();
+    }
+
+    /**
      * Allows users to find a task by searching for a keyword
      * and using command 'find'
      *
      * @param keyword
      */
-    public void findTasks(String keyword) {
+//    public void findTasks(String keyword) {
+//        int count = 0;
+//        Ui.showSuccessfulFind();
+//        for (int i = 0; i < this.tasks.size(); i++) {
+//            String taskDescription = this.getIndividualTask(i).toString();
+//
+//            int index = taskDescription.indexOf(keyword);
+//
+//            if (index != -1) {
+//                count += 1;
+//                Ui.showResults(count, taskDescription);
+//            }
+//        }
+//
+//        if (count == 0) {
+//            Ui.showUnsuccessfulFind();
+//        }
+//
+//        Ui.showLine();
+//    }
+    public String findTasks(String keyword) {
         int count = 0;
-        Ui.showSuccessfulFind();
+//        Ui.showSuccessfulFind();
+        String output = Response.showSuccessfulFind() +"\n";
         for (int i = 0; i < this.tasks.size(); i++) {
             String taskDescription = this.getIndividualTask(i).toString();
 
@@ -106,14 +136,13 @@ public class TaskList {
 
             if (index != -1) {
                 count += 1;
-                Ui.showResults(count, taskDescription);
+                Response.showResults(output, count, taskDescription);
             }
         }
 
         if (count == 0) {
-            Ui.showUnsuccessfulFind();
+            output = Response.showUnsuccessfulFind();
         }
-
-        Ui.showLine();
+        return output;
     }
 }

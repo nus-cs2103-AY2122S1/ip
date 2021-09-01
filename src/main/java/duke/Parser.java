@@ -149,4 +149,50 @@ public class Parser {
             }
         }
     }
+
+    /**
+     * Parses user input to find the command and generate the corresponding response.
+     *
+     * @param taskList
+     * @param file
+     * @param writer
+     * @param action
+     * @return Corresponding response for the user input.
+     * @throws DukeException
+     */
+    public static String getCommandResponse(TaskList taskList, File file, PrintWriter writer, String action) throws DukeException {
+        String command = Parser.getCommand(action);
+
+        switch (command) {
+        case "done":
+            int taskNum = Parser.taskNumber(action);
+            String oldDescription = taskList.getIndividualTask(taskNum - 1).toString();
+            taskList.completeTask(taskNum); //todo
+            Storage.saveAsCompleted(file, taskList.getIndividualTask(taskNum - 1), oldDescription); //todo
+            return Response.showCompletedMessage(taskList.getIndividualTask(taskNum - 1));
+        case "todo":
+        case "deadline":
+        case "event":
+            Task task = identifyType(action);
+            taskList.addTask(task); //todo
+            Storage.addData(writer, identifyType(action));
+            return Response.showAddedTask(task, taskList.getLength());
+        case "list":
+            taskList.listItems(); //todo
+            return Response.showList(taskList);
+        case "bye":
+            return Response.showGoodbyeMessage();
+        case "delete":
+            int num = Parser.taskNumber(action);
+            Task taskToDelete = taskList.getIndividualTask(num - 1);
+            Storage.markAsDeleted(file, taskToDelete); //todo
+            taskList.deleteTask(num); //todo
+            return Response.showSuccessfulDelete(taskToDelete);
+        case "find":
+            String keyword = getKeyword(action);
+            return taskList.findTasks(keyword);
+        default:
+            return Response.showInvalidInputMessage();
+        }
+    }
 }

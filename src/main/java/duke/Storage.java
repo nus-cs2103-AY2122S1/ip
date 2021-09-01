@@ -38,9 +38,9 @@ public class Storage {
         PrintWriter writer = new PrintWriter(this.file);
 
         if (this.file.createNewFile()) {
-            System.out.println("New file created");
+            //System.out.println("New file created");
         } else {
-            System.out.println("Data file already exists. No new file created.");
+            //System.out.println("Data file already exists. No new file created.");
             writer.flush(); // ensures that file is empty before starting
             writer.println("Format is as follows: " +
                     "[Task Type][X if completed, else empty] {task description}");
