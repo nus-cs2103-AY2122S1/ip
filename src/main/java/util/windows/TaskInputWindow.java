@@ -46,6 +46,8 @@ public class TaskInputWindow extends AnchorPane {
 
     public static void setStage(Stage stage) {
         TaskInputWindow.currentStage = stage;
+        //make the input form not resizable
+        stage.setResizable(false);
     }
 
     /**

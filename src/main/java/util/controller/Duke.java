@@ -90,12 +90,13 @@ public class Duke {
     public void addTodo(String string) {
 
         AddCommand taskAdd = new AddCommand(this.tasks, ToDo.of(string));
+
+        taskAdd.execute();
         try {
             this.storage.write(this.tasks);
         } catch (IOException e) {
             ui.printErrorMessage(e);
         }
-        taskAdd.execute();
 
     }
 
@@ -110,8 +111,8 @@ public class Duke {
             Deadline deadline = Deadline.of(description, date.toString());
             AddCommand res = new AddCommand(this.tasks, deadline);
             this.dateTaskTable.add(deadline);
-            this.storage.write(this.tasks);
             res.execute();
+            this.storage.write(this.tasks);
         } catch (DukeException | IOException e) {
             ui.printErrorMessage(e);
         }
@@ -128,8 +129,8 @@ public class Duke {
             Event event = Event.of(description, date.toString());
             AddCommand addEvent = new AddCommand(this.tasks, event);
             this.dateTaskTable.add(event);
-            this.storage.write(this.tasks);
             addEvent.execute();
+            this.storage.write(this.tasks);
         } catch (DukeException | IOException e) {
             ui.printErrorMessage(e);
         }
