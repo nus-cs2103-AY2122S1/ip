@@ -3,6 +3,8 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import duke.DukeException;
 
@@ -25,7 +27,14 @@ public class Event extends Task {
     public Event(String... content) throws duke.DukeException {
         super(content);
         try {
-            time = content[3];
+            // manipulate the array given to get the task time
+            ArrayList<String> holder = new ArrayList<>(Arrays.asList(content));
+            holder.remove(0);
+            holder.trimToSize();
+            int dateMarkIndex = holder.indexOf("/");
+            String taskTime = holder.get(dateMarkIndex + 1);
+
+            time = taskTime;
             this.localDate = LocalDate.parse(time);
         } catch (DateTimeParseException e) {
             throw new duke.DukeException(" D: SORZ but I only understand date in yyyy-MM-dd format!");

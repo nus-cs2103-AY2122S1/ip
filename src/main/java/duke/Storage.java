@@ -61,7 +61,7 @@ public class Storage {
 
                 case "D":
                     duke.task.Deadline deadline = new duke.task.Deadline("deadline ",
-                            content[2].trim(), " /", content[3].trim());
+                            content[2].trim(), "/", content[3].trim());
                     if (content[1].equals("1")) {
                         deadline.doneTask();
                     }
@@ -70,7 +70,7 @@ public class Storage {
 
                 case "E":
                     duke.task.Event event = new duke.task.Event(
-                            "event ", content[2].trim(), " /", content[3].trim());
+                            "event ", content[2].trim(), "/", content[3].trim());
                     if (content[1].equals("1")) {
                         event.doneTask();
                     }
@@ -78,12 +78,11 @@ public class Storage {
                     break;
 
                 default:
-                    continue;
                 }
             }
             s.close();
             return result;
-        } catch (IOException | DukeException e) {
+        } catch (IOException e) {
             throw new DukeException("D: OH NOOOOO! I cannot locate the file!!" + e.getMessage());
         }
     }
