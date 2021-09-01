@@ -7,6 +7,10 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
+
 /**
  * A chat-bot called Naruto that acts as a task list.
  */
@@ -21,6 +25,16 @@ public class Duke {
      * @param persistedData the relative path to the persisted data starting from the project directory.
      */
     public Duke(String persistedData) {
+        ui = new Ui();
+        storage = new Storage(persistedData);
+        tasks = new TaskList(storage.loadPersistedData());
+    }
+
+    /**
+     * Constructor for the Duke chat-bot.
+     */
+    public Duke() {
+        String persistedData = "data/duke.txt";
         ui = new Ui();
         storage = new Storage(persistedData);
         tasks = new TaskList(storage.loadPersistedData());
@@ -46,7 +60,53 @@ public class Duke {
             }
         }
     }
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+
+    public String getResponse(String fullCommand) {
+        // Create a stream to hold the output
+        ByteArrayOutputStream narutoStream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(narutoStream);
+        // IMPORTANT: Save the old System.out!
+        PrintStream old = System.out;
+        // Tell Java to use your special stream
+        System.setOut(ps);
+
+        // Now execute the entire command from user. It goes to my special stream
+        try {
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            ui.showError(e);
+        } finally {
+            ui.showLines();
+        }
+
+        // Put things back. Important!
+        System.out.flush();
+        System.setOut(old);
+        // Show what happened in the terminal on IntelliJ
+        System.out.println("Here: " + narutoStream.toString());
+
+        return "Naruto's reply! " + narutoStream.toString();
     }
+
+    public String initialMessageFromNaruto() {
+        // Create a stream to hold the output
+        ByteArrayOutputStream narutoStream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(narutoStream);
+        // IMPORTANT: Save the old System.out!
+        PrintStream old = System.out;
+        // Tell Java to use your special stream
+        System.setOut(ps);
+
+        ui.showWelcome();
+
+        // Put things back. Important!
+        System.out.flush();
+        System.setOut(old);
+        // Show what happened in the terminal on IntelliJ if needed
+        // System.out.println("Here: " + narutoStream.toString());
+
+        return "Naruto's reply! " + narutoStream.toString();
+    }
+
 }
