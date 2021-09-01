@@ -1,4 +1,9 @@
-package duke;
+package duke.command;
+
+import duke.DukeException;
+import duke.Task;
+import duke.TaskList;
+import duke.Ui;
 
 public class DoneCommand implements Command {
     private int idx;
