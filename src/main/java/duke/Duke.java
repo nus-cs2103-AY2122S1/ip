@@ -5,7 +5,6 @@ import java.io.IOException;
 import duke.command.Command;
 import duke.task.TaskList;
 
-
 /**
  * Duke class which is the main entry point to run the application.
  */
@@ -27,26 +26,10 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
-    /**
-     * Starts the Duke app.
-     */
-    public void run() {
-        ui.greet();
-
-        boolean isExit = false;
-
-        while (!isExit) {
-            String userInput = ui.readCommand();
-            Command cmd = Parser.parse(userInput);
-            cmd.execute(tasks, ui, storage);
-            isExit = cmd.isExit();
-        }
-
-        ui.exit();
-    }
-
-    public static void main(String[] args) throws IOException {
-        new Duke("data/duke.txt").run();
+    public String getResponse(String userInput) {
+        Command cmd = Parser.parse(userInput);
+        String outputMsg = cmd.execute(tasks, ui, storage);
+        return outputMsg;
     }
 
 }

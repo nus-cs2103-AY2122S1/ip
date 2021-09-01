@@ -20,14 +20,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.isTaskExists(this.taskNumber)) {
             Task task = tasks.getTask(this.taskNumber - 1);
             task.markAsDone();
             storage.writeToFile(tasks.getAllTasks());
-            ui.display("Nice! This task is marked as done: \n" + "      " + task);
+            return ui.display("Nice! This task is marked as done: \n" + "      " + task);
         } else {
-            ui.display("This task does not exist! Please try again.");
+            return ui.display("This task does not exist! Please try again.");
         }
     }
 

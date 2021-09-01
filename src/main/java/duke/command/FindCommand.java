@@ -22,18 +22,19 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> filteredList = tasks.filter(this.searchQuery);
-        System.out.println("    * * * * * * * * * * * * * * * * * * * *");
+        String msg;
         if (filteredList.size() > 0) {
-            System.out.println("    Here are the matching tasks in your list: ");
+            msg = "Here are the tasks in your list: \n";
             for (int i = 0; i < filteredList.size(); i++) {
                 String item = "    " + (i + 1) + "." + filteredList.get(i);
-                System.out.println(item);
+                msg += item;
             }
         } else {
-            System.out.println("    Oops... There is no matching task in your list! Please try again.");
+            msg = "Oops... There is no matching task in your list! Please try again.";
         }
-        System.out.println("    * * * * * * * * * * * * * * * * * * * *\n");
+        return msg;
+
     }
 }

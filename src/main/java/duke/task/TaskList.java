@@ -22,14 +22,13 @@ public class TaskList {
     /**
      * Prints all items in the list.
      */
-    public void displayAllItems() {
-        System.out.println("    * * * * * * * * * * * * * * * * * * * *");
-        System.out.println("    Here are the tasks in your list: ");
+    public String displayAllItems() {
+        String msg = "Here are the tasks in your list: \n";
         for (int i = 0; i < this.tasksList.size(); i++) {
-            String item = "    " + (i + 1) + "." + this.tasksList.get(i);
-            System.out.println(item);
+            String item = "    " + (i + 1) + "." + this.tasksList.get(i) + "\n";
+            msg += item;
         }
-        System.out.println("    * * * * * * * * * * * * * * * * * * * *\n");
+        return msg;
     }
 
     /**
