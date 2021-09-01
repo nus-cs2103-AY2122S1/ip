@@ -3,22 +3,34 @@ package duke;
 import java.io.IOException;
 
 public class Duke {
-    private static String USER_DIR = System.getProperty("user.dir");
+    private static String userDir = System.getProperty("user.dir");
     private DukeTaskList dukeTaskList;
     private Storage storage;
     private boolean isRunning;
 
+    /**
+     * Constructor for the Duke class.
+     */
     public Duke() {
         dukeTaskList = new DukeTaskList();
-        storage = new Storage(USER_DIR, dukeTaskList);
+        storage = new Storage(userDir, dukeTaskList);
         isRunning = true;
     }
 
+    /**
+     * Main method.
+     *
+     * @param args java main args.
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.run();
     }
 
+    /**
+     * Run Duke: load data from storage file, print welcome message,
+     * execute user inputs, and finally store data to file.
+     */
     public void run() {
         try {
             storage.loadDataFile();

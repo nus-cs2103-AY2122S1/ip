@@ -1,17 +1,20 @@
 package duke;
 
-import duke.task.*;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.task.Deadlines;
+import duke.task.Events;
+import duke.task.Task;
+import duke.task.ToDos;
+
 /**
  * Encapsulates the list in Duke that stores all the tasks
  */
 public class DukeTaskList {
-    public List<Task> taskList;
+    private List<Task> taskList;
 
     /**
      * Constructor for the DukeTaskList class.
@@ -39,14 +42,14 @@ public class DukeTaskList {
             break;
         case "D":
             currTask = new Deadlines(bodySplit[0],
-                LocalDate.parse(bodySplit[1]),
-                LocalTime.parse(bodySplit[2]));
+                    LocalDate.parse(bodySplit[1]),
+                    LocalTime.parse(bodySplit[2]));
             break;
         case "E":
             currTask = new Events(bodySplit[0],
-                LocalDate.parse(bodySplit[1]),
-                LocalTime.parse(bodySplit[2]),
-                LocalTime.parse(bodySplit[3]));
+                    LocalDate.parse(bodySplit[1]),
+                    LocalTime.parse(bodySplit[2]),
+                    LocalTime.parse(bodySplit[3]));
             break;
         }
 
@@ -63,11 +66,11 @@ public class DukeTaskList {
      * @return a string that represents all tasks in list for storing in the save file.
      */
     public String sendListToFile() {
-        StringBuilder StrBuilder = new StringBuilder();
+        StringBuilder strBuilder = new StringBuilder();
         for (Task task : taskList) {
-            StrBuilder.append(task.toDataFileString()).append("\n");
+            strBuilder.append(task.toDataFileString()).append("\n");
         }
-        return StrBuilder.toString();
+        return strBuilder.toString();
     }
 
     /**
@@ -121,7 +124,7 @@ public class DukeTaskList {
         for (Task task : taskList) {
             String[] taskDescriptionWords = task.getDescription().split(" ");
             for (String word : taskDescriptionWords) {
-                if (word.equals(keyword)){
+                if (word.equals(keyword)) {
                     matchingTaskList.add(task);
                     break;
                 }
@@ -145,14 +148,13 @@ public class DukeTaskList {
      * Method to add a deadline task to the list. Input format for deadline:
      * /by yyyy-mm-dd hh:mm (ISO_LOCAL_DATE, space, ISO_LOCAL_TIME)
      *
-     * @param DdlText description of the deadline task
-     * @param DdlDate date when deadline is due.
+     * @param ddlText description of the deadline task
+     * @param ddlDate date when deadline is due.
      *                Must be in the format yyyy-mm-dd.
-     * @param DdlTime time point when deadline is due.
-     *                Must be in the format hh:mm in 24-hours time.
+     * @param ddlTime time point when deadline is due.
      */
-    public void addDeadline(String DdlText, LocalDate DdlDate, LocalTime DdlTime) {
-        Task currTask = new Deadlines(DdlText, DdlDate, DdlTime);
+    public void addDeadline(String ddlText, LocalDate ddlDate, LocalTime ddlTime) {
+        Task currTask = new Deadlines(ddlText, ddlDate, ddlTime);
         taskList.add(currTask);
         Ui.printAddTask(currTask.toString(), taskList.size());
     }

@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Abstract parent class for all possible tasks stored in Duke.
  */
-abstract public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -49,7 +49,7 @@ abstract public class Task {
      *
      * @return task represented in a string for print.
      */
-    abstract public String toString();
+    public abstract String toString();
 
     /**
      * Abstract method that returns the task
@@ -57,5 +57,5 @@ abstract public class Task {
      *
      * @return task represented in a string for saving in the data file.
      */
-    abstract public String toDataFileString();
+    public abstract String toDataFileString();
 }

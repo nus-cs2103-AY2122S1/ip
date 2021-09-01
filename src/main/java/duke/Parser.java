@@ -17,13 +17,14 @@ public class Parser {
     /**
      * Static parse method of the class.
      *
-     * @param userInput user inputs.
+     * @param userInput    user inputs.
      * @param dukeTaskList a dukeTaskList object of the current run of Duke.
      * @throws NumberFormatException if user doesn't enter valid integers when entering task numbers.
      */
     public static void parse(String userInput, DukeTaskList dukeTaskList) {
         String[] slashSplitInput = userInput.split("/", 2);
-        String[] spaceSplitInput = slashSplitInput[0].split(" ", 2); // Everything before the slash, split again by space
+        // Everything before the slash, split again by space
+        String[] spaceSplitInput = slashSplitInput[0].split(" ", 2);
 
         try {
             if (userInput.equals("bye")) { // Exit
@@ -36,7 +37,8 @@ public class Parser {
                     // No task number entered
                     throw new DukeException("Done Task number is missing!\n");
                 }
-                int doneTaskNo = Integer.parseInt(spaceSplitInput[1]); // Throws NumberFormatException if string cannot be parsed into valid int
+                // Throws NumberFormatException if string cannot be parsed into valid int
+                int doneTaskNo = Integer.parseInt(spaceSplitInput[1]);
 
                 dukeTaskList.doneTask(doneTaskNo);
             } else if (spaceSplitInput[0].equals("delete")) {
@@ -44,7 +46,8 @@ public class Parser {
                     // No task number entered
                     throw new DukeException("Delete task number is missing!\n");
                 }
-                int deleteTaskNo = Integer.parseInt(spaceSplitInput[1]); // Throws NumberFormatException if string cannot be parsed into valid int
+                // Throws NumberFormatException if string cannot be parsed into valid int
+                int deleteTaskNo = Integer.parseInt(spaceSplitInput[1]);
 
                 dukeTaskList.deleteTask(deleteTaskNo);
             } else if (spaceSplitInput[0].equals("find")) {
@@ -72,16 +75,17 @@ public class Parser {
                     throw new DukeException("Deadline must have a date and time written after a slash!\n");
                 }
 
-                String[] DdlDateTimeArr = slashSplitInput[1].split(" ", 3);
-                if (DdlDateTimeArr.length < 3) {
+                String[] ddlDateTimeArr = slashSplitInput[1].split(" ", 3);
+                if (ddlDateTimeArr.length < 3) {
                     // If there're less than 3 words behind slash e.g. No "by", nothing behind "by", etc.
                     throw new DukeException("Deadline date must be in the format of 'by date time'!\n");
                 }
-                LocalDate DdlDate = LocalDate.parse(DdlDateTimeArr[1]); // Throws DateTimeParseException if date cannot be parsed
-                LocalTime DdlTime = LocalTime.parse(DdlDateTimeArr[2]);
-                String DdlText = spaceSplitInput[1].trim();
+                // Throws DateTimeParseException if date cannot be parsed
+                LocalDate ddlDate = LocalDate.parse(ddlDateTimeArr[1]);
+                LocalTime ddlTime = LocalTime.parse(ddlDateTimeArr[2]);
+                String ddlText = spaceSplitInput[1].trim();
 
-                dukeTaskList.addDeadline(DdlText, DdlDate, DdlTime);
+                dukeTaskList.addDeadline(ddlText, ddlDate, ddlTime);
             } else if (spaceSplitInput[0].equals("event")) {
                 if (spaceSplitInput.length < 2) {
                     // Event has no description
@@ -97,7 +101,8 @@ public class Parser {
                     // If there're less than 3 words behind slash e.g. No "at", nothing behind "at", etc.
                     throw new DukeException("Event date must be in the format of 'by date time-time'!\n");
                 }
-                LocalDate eventDate = LocalDate.parse(eventDateTimeArr[1]); // Throws DateTimeParseException if date cannot be parsed
+                // Throws DateTimeParseException if date cannot be parsed
+                LocalDate eventDate = LocalDate.parse(eventDateTimeArr[1]);
 
                 String[] eventTimes = eventDateTimeArr[2].split("-", 2); // split the start and end time
                 if (eventTimes.length < 2) {
@@ -118,7 +123,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             Ui.printError("Please enter a valid integer for task number!\n");
         } catch (DateTimeParseException e) {
-            Ui.printError("Please enter date in the valid format: Deadlines:yyyy-mm-dd hh:mm; Events:yyyy-mm-dd hh:mm-hh:mm\n");
+            Ui.printError("Please enter date in the valid format: yyyy-mm-dd hh:mm\n");
         }
     }
 }

@@ -6,36 +6,36 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * Represents a storage class that contains methods to read from
+ * Represent a storage class that contains methods to read from
  * and write to the save file.
  */
 public class Storage {
-    private String user_dir;
+    private String userDir;
     private DukeTaskList dukeTaskList;
 
     /**
      * Constructor of the Storage class.
      *
-     * @param user_dir current directory where the user runs Duke from
+     * @param userDir      current directory where the user runs Duke from
      * @param dukeTaskList a dukeTaskList object of the current run of Duke.
      */
-    public Storage(String user_dir, DukeTaskList dukeTaskList) {
-        this.user_dir = user_dir;
+    public Storage(String userDir, DukeTaskList dukeTaskList) {
+        this.userDir = userDir;
         this.dukeTaskList = dukeTaskList;
     }
 
     /**
-     * Method to read data from save file. If the save file and dir don't exist,
+     * Read data from save file. If the save file and dir don't exist,
      * create them.
      *
      * @throws IOException if file or dir cannot be created
      */
     public void loadDataFile() throws IOException {
-        File dataDir = new File(user_dir + "/data");
-        File dataFile = new File(user_dir + "/data/dataFile.txt");
+        File dataDir = new File(userDir + "/data");
+        File dataFile = new File(userDir + "/data/dataFile.txt");
         if (!dataDir.exists()) {
             dataDir.mkdir();
-            dataFile.createNewFile();// Throws IOException is something goes wrong
+            dataFile.createNewFile(); // Throws IOException is something goes wrong
         } else {
             if (!dataFile.exists()) {
                 dataFile.createNewFile();
@@ -51,12 +51,13 @@ public class Storage {
     }
 
     /**
-     * Method to write data into the file.
+     * Write data into the file.
      *
      * @throws IOException if file cannot be written to.
      */
     public void saveToDataFile() throws IOException {
-        FileWriter fileWriter = new FileWriter(user_dir + "/data/dataFile.txt"); // Throws IOException is something goes wrong
+        // Throws IOException is something goes wrong
+        FileWriter fileWriter = new FileWriter(userDir + "/data/dataFile.txt");
         fileWriter.write(dukeTaskList.sendListToFile());
         fileWriter.close();
     }
