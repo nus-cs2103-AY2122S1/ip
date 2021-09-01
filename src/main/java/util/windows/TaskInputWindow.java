@@ -44,6 +44,11 @@ public class TaskInputWindow extends AnchorPane {
     private static Duke duke;
     private static Stage currentStage;
 
+    /**
+     * Sets the stage for the window.
+     *
+     * @param stage The stage where the window is at.
+     */
     public static void setStage(Stage stage) {
         TaskInputWindow.currentStage = stage;
         //make the input form not resizable
