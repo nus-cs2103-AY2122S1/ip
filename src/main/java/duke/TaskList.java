@@ -1,18 +1,18 @@
 package duke;
 
-import duke.Deadline;
-import duke.Event;
-import duke.Storage;
-import duke.Task;
-import duke.ToDo;
+//import duke.Deadline;
+//import duke.Event;
+//import duke.Storage;
+//import duke.Task;
+//import duke.ToDo;
 
 import java.util.ArrayList;
 
 public class TaskList {
 
+    static String dash = "__________________________________";
     public ArrayList<Task> tasks;
     public int counter = 0;
-    static String dash = "__________________________________";
 
     /**
      * Creates a TaskList object that stores a list of tasks in an ArrayList.
@@ -29,7 +29,7 @@ public class TaskList {
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < counter; i++) {
             Task currTask = tasks.get(i);
-            System.out.println(i+1 + "." + currTask.toString());
+            System.out.println(i + 1 + "." + currTask.toString());
         }
         System.out.println(dash);
     }
@@ -41,7 +41,7 @@ public class TaskList {
      */
     public void markDone(String userInput) {
         if (userInput.substring(4).length() == 0) {
-            System.out.println(dash + '\n' + "Sorry, which task do you wish to mark as completed?" + '\n'+ dash);
+            System.out.println(dash + '\n' + "Sorry, which task do you wish to mark as completed?" + '\n' + dash);
             // throw new DukeException("User has not indicated task to mark as complete.");
 
         } else {
@@ -74,7 +74,7 @@ public class TaskList {
      */
     public void delete(String userInput) {
         if (userInput.substring(6).length() == 0) {
-            System.out.println(dash + '\n' + "Sorry, which task do you wish to delete?" + '\n'+ dash);
+            System.out.println(dash + '\n' + "Sorry, which task do you wish to delete?" + '\n' + dash);
             // throw new DukeException("User has not indicated task to delete.");
 
         } else {
@@ -99,7 +99,7 @@ public class TaskList {
      */
     public void makeTodo(String userInput) {
         if (userInput.substring(4).length() == 0) {
-            System.out.println(dash + '\n' + "YIKES!! The description of a todo cannot be empty!" + '\n'+ dash);
+            System.out.println(dash + '\n' + "YIKES!! The description of a todo cannot be empty!" + '\n' + dash);
             // throw new DukeException("YIKES!! The description of a todo cannot be empty!");
         } else {
             tasks.add(new ToDo(userInput.substring(5)));
@@ -132,7 +132,7 @@ public class TaskList {
      */
     public void makeEvent(String userInput) {
         if (userInput.substring(5).length() == 0) {
-            System.out.println(dash + '\n' + "YIKES!! The description of an Event cannot be empty!" + '\n'+ dash);
+            System.out.println(dash + '\n' + "YIKES!! The description of an Event cannot be empty!" + '\n' + dash);
             // throw new DukeException("YIKES!! The description of an Event cannot be empty!");
         } else {
             String output = userInput.substring(6);
@@ -168,7 +168,7 @@ public class TaskList {
      */
     public void makeDeadline(String userInput) {
         if (userInput.substring(8).length() == 0) {
-            System.out.println(dash + '\n' + "YIKES!! The description of a Deadline cannot be empty!" + '\n'+ dash);
+            System.out.println(dash + '\n' + "YIKES!! The description of a Deadline cannot be empty!" + '\n' + dash);
             // throw new DukeException("YIKES!! The description of a Deadline cannot be empty!");
         } else {
             String output = userInput.substring(9);
@@ -205,7 +205,7 @@ public class TaskList {
      */
     public void find(String userInput) {
         if (userInput.substring(4).length() == 0) {
-            System.out.println(dash + '\n' + "Uh Oh!! Please specify the keyword of a task!" + '\n'+ dash);
+            System.out.println(dash + '\n' + "Uh Oh!! Please specify the keyword of a task!" + '\n' + dash);
 
         } else {
             String keyword = userInput.substring(5);
@@ -220,7 +220,7 @@ public class TaskList {
             System.out.println(dash);
             System.out.println("Here are the tasks that fit your criteria:");
             for (int i = 0; i < matchedTasks.size(); i++) {
-                System.out.println(i+1 + "." + matchedTasks.get(i).toString());
+                System.out.println(i + 1 + "." + matchedTasks.get(i).toString());
             }
             System.out.println(dash);
         }
@@ -230,7 +230,7 @@ public class TaskList {
      * Alerts user to an invalid command.
      */
     public void error() {
-        System.out.println(dash + '\n' + "OOPS!! I don't know how to respond to this command! :-(" + '\n'+ dash);
+        System.out.println(dash + '\n' + "OOPS!! I don't know how to respond to this command! :-(" + '\n' + dash);
         // throw new DukeException("OOPS!! I don't know how to respond to this command! :-(");
     }
 
