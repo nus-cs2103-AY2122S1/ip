@@ -31,6 +31,12 @@ public class Duke {
         new Ui(taskStorage, tasks).start();
     }
 
+    /**
+     * Attempts to start the Duke application by loading in the file
+     * located in the user's hard disk.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         try {
             new Duke(STORAGE_LOCATION).run();
