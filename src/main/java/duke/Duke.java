@@ -1,4 +1,7 @@
 package duke;
+
+
+
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -28,11 +31,13 @@ public class Duke {
      * @param dateStr Date taken in to check for validity
      * @return If date is valid
      */
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public static boolean isValid(String dateStr) {
+
+    /* public static boolean isValid(String dateStr) {
         try {
             LocalDate.parse(dateStr, DateTimeFormatter.ISO_LOCAL_DATE);
         } catch (DateTimeParseException e) {
@@ -69,6 +74,11 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("C:\\Users\\ronal\\OneDrive\\Desktop\\CS2103\\DUKE\\data\\duke.txt").run();
+        new Duke("./data/duke.txt").run();
+    }*/
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
+
+
 }
