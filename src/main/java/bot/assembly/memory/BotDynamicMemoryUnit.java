@@ -1,13 +1,5 @@
 package bot.assembly.memory;
 
-import bot.assembly.task.Task;
-import bot.assembly.task.Deadline;
-import bot.assembly.task.Event;
-import bot.assembly.task.ToDo;
-import bot.assembly.function.BotTemporalUnit;
-import bot.assembly.error.InvalidDataFormatException;
-import bot.assembly.error.InvalidFileException;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,20 +7,27 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import bot.assembly.error.InvalidDataFormatException;
+import bot.assembly.error.InvalidFileException;
+import bot.assembly.function.BotTemporalUnit;
+import bot.assembly.task.Deadline;
+import bot.assembly.task.Event;
+import bot.assembly.task.Task;
+import bot.assembly.task.ToDo;
+
 /**
  * A class that handles the task list
  */
 public class BotDynamicMemoryUnit {
 
+
+    private static BotDynamicMemoryUnit dynamicMemoryUnit = null;
+    private List<Task> taskTracker = new ArrayList<Task>();
     private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
     private BotTemporalUnit botTemporalUnit = new BotTemporalUnit();
 
     private final String HARD_DISK_DATA_NAME = "data.txt";
     private final String HARD_DISK_DATA_STORAGE_DIRECTORY = System.getProperty("user.home");
-
-    public List<Task> taskTracker = new ArrayList<Task>();
-
-    private static BotDynamicMemoryUnit dynamicMemoryUnit = null;
 
     /**
      * Constructor
@@ -57,24 +56,24 @@ public class BotDynamicMemoryUnit {
         String taskType = task.getTaskType();
 
         switch (taskType) {
-            case "T": {
-                return String.format(
-                        "%s | %s | %s\n",
-                        task.getTaskType(),
-                        task.getIsDone(),
-                        task.getTaskTitle()
-                );
-            }
+        case "T": {
+            return String.format(
+                    "%s | %s | %s\n",
+                    task.getTaskType(),
+                    task.getIsDone(),
+                    task.getTaskTitle()
+            );
+        }
 
-            default: {
-                return String.format(
-                        "%s | %s | %s | %s\n",
-                        task.getTaskType(),
-                        task.getIsDone(),
-                        task.getTaskTitle(),
-                        task.getDateTime()
-                );
-            }
+        default: {
+            return String.format(
+                    "%s | %s | %s | %s\n",
+                    task.getTaskType(),
+                    task.getIsDone(),
+                    task.getTaskTitle(),
+                    task.getDateTime()
+            );
+        }
         }
     }
 
@@ -119,24 +118,24 @@ public class BotDynamicMemoryUnit {
         String stringDataType = stringDataToken[0];
 
         try {
-            switch (stringDataType){
-                case "T":
-                    return new ToDo(
-                            stringDataToken[1].equals("true") ? true : false,
-                            stringDataToken[2]);
-                case "D":
-                    return new Deadline(
-                            stringDataToken[1].equals("true") ? true : false,
-                            stringDataToken[2],
-                            botTemporalUnit.convertStringToTemporalData(stringDataToken[3]));
-                case "E":
-                    return new Event(
-                            stringDataToken[1].equals("true") ? true : false,
-                            stringDataToken[2],
-                            botTemporalUnit.convertStringToTemporalData(stringDataToken[3]));
-                default:
-                    throw new InvalidDataFormatException(
-                            String.format(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_DATA_FORMAT, stringData));
+            switch (stringDataType) {
+            case "T":
+                return new ToDo(
+                        stringDataToken[1].equals("true") ? true : false,
+                        stringDataToken[2]);
+            case "D":
+                return new Deadline(
+                        stringDataToken[1].equals("true") ? true : false,
+                        stringDataToken[2],
+                        botTemporalUnit.convertStringToTemporalData(stringDataToken[3]));
+            case "E":
+                return new Event(
+                        stringDataToken[1].equals("true") ? true : false,
+                        stringDataToken[2],
+                        botTemporalUnit.convertStringToTemporalData(stringDataToken[3]));
+            default:
+                throw new InvalidDataFormatException(
+                        String.format(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_DATA_FORMAT, stringData));
             }
         } catch (InvalidDataFormatException e) {
             throw new InvalidDataFormatException(
@@ -175,6 +174,14 @@ public class BotDynamicMemoryUnit {
         } catch (IOException e) {
             throw new InvalidFileException(botStaticMemoryUnit.ERROR_MESSAGE_INVALID_FILE);
         }
+    }
+
+    /**
+     * A method to get task tracker
+     * @return List of tasks
+     */
+    public List<Task> getTaskTacker() {
+        return this.taskTracker;
     }
 
     /**

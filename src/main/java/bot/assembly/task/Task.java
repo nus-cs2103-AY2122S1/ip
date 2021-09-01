@@ -4,9 +4,9 @@ import java.time.LocalDateTime;
 
 public abstract class Task {
 
-    public String taskTitle;
-    public boolean isDone;
-    public String taskType;
+    private String taskTitle;
+    private boolean isDone;
+    private String taskType;
 
     /**
      * Constructor
@@ -18,6 +18,12 @@ public abstract class Task {
         this.taskType = taskType;
     }
 
+    /**
+     * Constructor
+     * @param taskTitle
+     * @param isDone
+     * @param taskType
+     */
     public Task (String taskTitle, boolean isDone, String taskType) {
         this.taskTitle = taskTitle;
         this.isDone = isDone;
