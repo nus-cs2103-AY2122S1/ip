@@ -58,6 +58,9 @@ public class Duke {
         }
     }
 
+    public Ui getUi() {
+        return this.ui;
+    }
 
 
     /**
