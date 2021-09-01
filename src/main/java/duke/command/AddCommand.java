@@ -54,7 +54,7 @@ public class AddCommand extends Command {
      */
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
         if (taskType.equals("todo")) {
             String[] addTask = command.split(" +", 2);
@@ -79,8 +79,7 @@ public class AddCommand extends Command {
         }
 
         tasks.add(task);
-        ui.addTask(task);
-        ui.numberOfTasks(tasks);
         storage.appendToFile(storage.fileString(task));
+        return ui.addTask(task) + System.lineSeparator() + ui.numberOfTasks(tasks);
     }
 }

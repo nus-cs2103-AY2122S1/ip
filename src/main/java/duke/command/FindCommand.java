@@ -27,7 +27,7 @@ public class FindCommand extends Command {
      * @param ui The Ui to deal with interactions with user.
      * @param storage The storage which saves and edits file content.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String keyWord = command.split(" +", 2)[1].trim();
         int count = 0;
         String matchingTasks = "";
@@ -39,10 +39,9 @@ public class FindCommand extends Command {
             }
         }
         if (count == 0) {
-            ui.noSuchTask();
+            return ui.noSuchTask();
         } else {
-            ui.findTask();
-            System.out.println(matchingTasks);
+            return ui.findTask() + System.lineSeparator() + matchingTasks;
         }
     }
 }

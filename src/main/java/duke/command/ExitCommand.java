@@ -43,8 +43,7 @@ public class ExitCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-
-        ui.sayBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.sayBye();
     }
 }
