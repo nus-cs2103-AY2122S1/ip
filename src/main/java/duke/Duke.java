@@ -1,7 +1,8 @@
 package duke;
 
-import duke.commands.Command;
 import java.io.IOException;
+
+import duke.commands.Command;
 import javafx.application.Platform;
 import javafx.scene.image.Image;
 
