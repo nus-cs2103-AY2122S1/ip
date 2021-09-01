@@ -1,7 +1,6 @@
 package duke;
 
 
-import duke.command.Command;
 import duke.task.TaskList;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -14,22 +13,20 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
-    private boolean isExit = false;
     private TaskList tasks = new TaskList();
-    private Ui ui;
     private Storage storage;
 
     /**
      * Initialises a new Duke object with storage path data/taskList.txt
      */
     public Duke() {
-        this.ui = new Ui();
         this.storage = new Storage("data/taskList.txt");
         try {
             this.tasks = storage.load();
         } catch (DukeException e) {
-            ui.showException(e);
+            System.out.println(e.getMessage());
         }
+
     }
 
     /**
@@ -38,49 +35,17 @@ public class Duke extends Application {
      * @param filePath This will be the location where user tasks are in the hard disk.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
             this.tasks = storage.load();
         } catch (DukeException e) {
-            ui.showException(e);
+            System.out.println(e.getMessage());
         }
-    }
-
-    /**
-     * This method runs the app.
-     */
-    private void run() {
-        ui.greet();
-        while (!isExit) {
-            try {
-                String input = ui.readCommand();
-                Command command = Parser.parse(input, ui, tasks, storage);
-                command.execute();
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showException(e);
-            }
-        }
-
-    }
-
-    /**
-     * This is the main method which makes use of the run method.
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-
-        Duke duke = new Duke("data/taskList.txt");
-        duke.run();
     }
 
     @Override
     public void start(Stage stage) {
-
-        Duke duke = new Duke("data/taskList.txt");
-        GraphicalUserInterface gui = new GraphicalUserInterface(stage, duke.ui, duke.tasks, duke.storage);
-        gui.showGui();
+        Ui ui = new Ui(stage);
+        ui.showGui(this.tasks, this.storage);
     }
 }
