@@ -8,6 +8,8 @@ import java.util.Scanner;
 public class Ui {
     /**
      * Displays large logo and welcome message.
+     *
+     * @return string of logo
      */
     public String showWelcome() {
         String logo = " ____        _        \n"
@@ -26,13 +28,17 @@ public class Ui {
 
     /**
      * Displays loading error message.
+     *
+     * @return file loading error message
      */
     public String showLoadingError() {
-        return  "An error occurred when loading file.";
+        return "An error occurred when loading file.";
     }
 
     /**
      * Displays goodbye message.
+     *
+     * @return goodbye message
      */
     public String showBye() {
         return "Bye. Hope to see you again soon!";
@@ -40,6 +46,8 @@ public class Ui {
 
     /**
      * Displays error message.
+     *
+     * @return error message
      */
     public String showError(String message) {
         return "☹ OOPS!!! " + message;
@@ -47,6 +55,8 @@ public class Ui {
 
     /**
      * Displays a line.
+     *
+     * @return line message
      */
     public String showLine() {
         return "____________________________________________________________";
@@ -54,6 +64,8 @@ public class Ui {
 
     /**
      * Returns user input of command line.
+     *
+     * @return user's input
      */
     public String readCommand() {
         Scanner scanner = new Scanner(System.in);

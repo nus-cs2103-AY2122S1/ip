@@ -21,7 +21,7 @@ public class DukeTest {
     @Test
     public void test_create_deadline() {
         Deadline dl = new Deadline("return book ", LocalDateTime.of(2021,
-                                        Month.JULY, 29, 12, 0, 0));
+                Month.JULY, 29, 12, 0, 0));
 
         assertEquals(dl.toString(), "[D][ ] return book (by: 2021 Jul 29 12.00 PM)");
         dl.setDone();

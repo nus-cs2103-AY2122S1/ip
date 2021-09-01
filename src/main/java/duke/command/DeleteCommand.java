@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
     /**
      * Returns if command exits program.
      *
-     * @return if command exists program.
+     * @return true if command exists program.
      */
     @Override
     public boolean isExit() {

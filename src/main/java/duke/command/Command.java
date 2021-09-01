@@ -1,7 +1,10 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
+import duke.tasklist.Task;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
 
@@ -30,7 +33,15 @@ public abstract class Command {
      * @throws DukeException If errors occur within list.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        storage.save(tasks.getTasks());
+
+        List<Task> tasksTasks = tasks.getTasks();
+
+        String[] saveList = new String[tasksTasks.size()];
+        for (int i = 0; i < tasksTasks.size(); i++) {
+            saveList[i] = tasksTasks.get(i).save();
+        }
+
+        storage.save(saveList);
         return "";
     }
 

@@ -35,7 +35,7 @@ public class FindCommand extends Command {
     /**
      * Returns if command Finds program.
      *
-     * @return if command exists program.
+     * @return true if command exists program.
      */
     @Override
     public boolean isExit() {
