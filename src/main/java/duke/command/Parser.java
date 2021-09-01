@@ -1,172 +1,199 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.io.Storage;
+import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 import duke.task.TaskList;
 
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parser class encapsulates a parser within the Duke bot that processes
+ * user inputs. The parser takes in a command from the user, processes it
+ * and returns a description of the command.
+ */
 public class Parser {
     String input;
     TaskList taskList;
     Storage storage;
+    Ui ui;
 
-    public Parser(String input, TaskList taskList, Storage storage) {
+    /**
+     * Constructor for a Parser
+     *
+     * @param input user input in the form of a command
+     * @param taskList list of tasks
+     * @param storage text file to read and write from
+     * @param ui user interface containing messages to return to the user
+     */
+    public Parser(String input, TaskList taskList, Storage storage, Ui ui) {
         this.input = input;
         this.taskList = taskList;
         this.storage = storage;
+        this.ui = ui;
     }
 
-    public void newEvent(String taskName, TaskList tList) throws IOException {
-        Event newEvent = new Event(taskName);
+    /**
+     * Initializes a new Event task, writes the task to the text file,
+     * and returns a full description of the Event task.
+     *
+     * @param taskDescription a short description of the Event task
+     * @param tList list of tasks
+     * @return a full description of the Event task
+     * @throws ArrayIndexOutOfBoundsException
+     */
+    public String newEvent(String taskDescription, TaskList tList) throws ArrayIndexOutOfBoundsException {
+        Event newEvent = new Event(taskDescription);
         tList.addTask(newEvent);
 
         String textToAppend = newEvent.showType() + " | "
                 + ((newEvent.checkDone()).equals("[X]") ? "1" : "0") + " | "
                 + newEvent.showTaskOnly() + " | "
                 + newEvent.showWhen() + "\n";
-        this.storage.save(textToAppend, true);
 
-        String eventMessage = "    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       " + "[" + newEvent.showType() + "]"
-                + newEvent.checkDone() + " "
-                + newEvent.showTaskOnly() + " at "
-                + newEvent.showDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
-                + newEvent.showTime() + "\n"
-                + "     Now you have " + tList.length() + " tasks in the list.\n"
-                + "    ____________________________________________________________";
-        System.out.println(eventMessage);
+        try {
+            this.storage.save(textToAppend, true);
+        } catch (DukeException de) {
+            return de.toString();
+        }
+
+        return this.ui.deadlineOrEventAddedMessage(
+                newEvent.showType(), newEvent.checkDone(), newEvent.showTaskOnly(),
+                newEvent.showDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                newEvent.showTime(), taskList);
     }
 
-    public void newDeadline(String taskName, TaskList tList) throws IOException {
-        Deadline newDeadline = new Deadline(taskName);
+    /**
+     * Initializes a new Deadline task, writes the task to the text file,
+     * and returns a full description of the Deadline task.
+     *
+     * @param taskDescription a short description of the Deadline task
+     * @param tList list of tasks
+     * @return a full description of the Deadline task
+     * @throws ArrayIndexOutOfBoundsException
+     */
+    public String newDeadline(String taskDescription, TaskList tList) throws ArrayIndexOutOfBoundsException {
+        Deadline newDeadline = new Deadline(taskDescription);
         tList.addTask(newDeadline);
 
         String textToAppend = newDeadline.showType() + " | "
                 + ((newDeadline.checkDone()).equals("[X]") ? "1" : "0") + " | "
                 + newDeadline.showTaskOnly() + " | "
                 + newDeadline.showWhen() + "\n";
-        this.storage.save(textToAppend, true);
 
-        String deadlineMessage = "    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       " + "[" + newDeadline.showType() + "]"
-                + newDeadline.checkDone() + " "
-                + newDeadline.showTaskOnly() + " by "
-                + newDeadline.showDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ", "
-                + newDeadline.showTime() + "\n"
-                + "     Now you have " + tList.length() + " tasks in the list.\n"
-                + "    ____________________________________________________________";
-        System.out.println(deadlineMessage);
+        try {
+            this.storage.save(textToAppend, true);
+        } catch (DukeException de) {
+            return de.toString();
+        }
+
+        return this.ui.deadlineOrEventAddedMessage(
+                newDeadline.showType(), newDeadline.checkDone(), newDeadline.showTaskOnly(),
+                newDeadline.showDate().format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                newDeadline.showTime(), taskList);
     }
 
-    public void newToDo(String taskName, TaskList tList) throws IOException {
-        ToDo newToDo = new ToDo(taskName);
+    /**
+     * Initializes a new ToDo task, writes the task to the text file,
+     * and returns a full description of the ToDo task.
+     *
+     * @param taskDescription a short description of the ToDo task
+     * @param tList list of tasks
+     * @return a full description of the ToDo task
+     * @throws ArrayIndexOutOfBoundsException
+     */
+    public String newToDo(String taskDescription, TaskList tList) throws ArrayIndexOutOfBoundsException {
+        ToDo newToDo = new ToDo(taskDescription);
         tList.addTask(newToDo);
 
         String textToAppend = newToDo.showType() + " | "
                 + ((newToDo.checkDone()).equals("[X]") ? "1" : "0") + " | "
                 + newToDo.showTask() + "\n";
-        this.storage.save(textToAppend, true);
+        try {
+            this.storage.save(textToAppend, true);
+        } catch (DukeException de) {
+            return de.toString();
+        }
 
-        String toDoMessage = "    ____________________________________________________________\n"
-                + "     Got it. I've added this task:\n"
-                + "       " + "[" + newToDo.showType() + "]"
-                + newToDo.checkDone() + " "
-                + newToDo.showTask() + "\n"
-                + "     Now you have " + tList.length() + " tasks in the list.\n"
-                + "    ____________________________________________________________";
-        System.out.println(toDoMessage);
+        return this.ui.todoAddedMessage(
+                newToDo.showType(), newToDo.checkDone(), newToDo.showTask(), this.taskList);
     }
 
-    public void compute(String input) {
-        String[] instruction = input.split(" ", 2);
+    /**
+     * Takes the input received by the parser and deciphers the command
+     *
+     * @return the respective descriptions of the task or command
+     * @throws DukeException
+     */
+    public String compute() throws DukeException {
+        String output = "";
+
+        String[] instruction = this.input.split(" ", 2);
 
         switch (instruction[0]) {
-            case "todo":
-                try {
-                    newToDo(instruction[1], this.taskList);
-                } catch (ArrayIndexOutOfBoundsException a) {
-                    System.out.println("    ____________________________________________________________\n"
-                            + "     " + "\uD83D\uDE41" + " OOPS!!! The description of a todo cannot be empty.\n"
-                            + "    ____________________________________________________________");
-                } catch (IOException i) {
-                    System.out.println("    ____________________________________________________________\n"
-                            + "     " + "\uD83D\uDE41" + " OOPS!!! The file that you requested cannot be found.\n"
-                            + "    ____________________________________________________________");
+        case "todo":
+            // Fallthrough
+        case "deadline":
+            // Fallthrough
+        case "event":
+            try {
+                if (instruction[0].equals("todo")) {
+                    output = newToDo(instruction[1], this.taskList);
+                } else if (instruction[0].equals("deadline")) {
+                    output = newDeadline(instruction[1], this.taskList);
+                } else {
+                    output = newEvent(instruction[1], this.taskList);
                 }
                 break;
-            case "deadline":
-                try {
-                    newDeadline(instruction[1], this.taskList);
-                } catch (ArrayIndexOutOfBoundsException a) {
-                    System.out.println("    ____________________________________________________________\n"
-                            + "     " + "\uD83D\uDE41" + " OOPS!!! The description of a deadline cannot be empty.\n"
-                            + "    ____________________________________________________________");
-                } catch (IOException i) {
-                    System.out.println("    ____________________________________________________________\n"
-                            + "     " + "\uD83D\uDE41" + " OOPS!!! The file that you requested cannot be found.\n"
-                            + "    ____________________________________________________________");
-                }
-                break;
-            case "event":
-                try {
-                    newEvent(instruction[1], this.taskList);
-                } catch (ArrayIndexOutOfBoundsException a) {
-                    System.out.println("    ____________________________________________________________\n"
-                            + "     " + "\uD83D\uDE41" + " OOPS!!! The description of an event cannot be empty.\n"
-                            + "    ____________________________________________________________");
-                } catch (IOException i) {
-                    System.out.println("    ____________________________________________________________\n"
-                            + "     " + "\uD83D\uDE41" + " OOPS!!! The file that you requested cannot be found.\n"
-                            + "    ____________________________________________________________");
-                }
-                break;
-            case "delete":
-                try {
-                    int deleteIndex = Integer.parseInt(instruction[1]);
-                    this.taskList.deleteTask(deleteIndex);
-                    this.storage.refresh(this.taskList);
-                } catch (IndexOutOfBoundsException | NumberFormatException | IOException i) {
-                    System.out.println("    ____________________________________________________________\n"
-                            + "     " + "\uD83D\uDE41" + " OOPS!!! Please enter a valid item number.\n"
-                            + "    ____________________________________________________________");
-                }
-                break;
-            case "done":
-                try {
-                    int doneIndex = Integer.parseInt(instruction[1]);
-                    this.taskList.markDone(doneIndex);
-                    this.storage.refresh(this.taskList);
-                } catch (IndexOutOfBoundsException | NumberFormatException | IOException i) {
-                    System.out.println("    ____________________________________________________________\n"
-                            + "     " + "\uD83D\uDE41" + " OOPS!!! Please enter a valid item number.\n"
-                            + "    ____________________________________________________________");
-                }
-                break;
-            case "list":
-                this.taskList.showList();
-                break;
-            case "find":
-                String keyword = instruction[1];
-                this.taskList.searchList(keyword);
-                break;
-            default:
-                try {
-                    System.out.println("    ____________________________________________________________\n"
-                            + "     " + "\uD83D\uDE41" + " OOPS!!! I'm sorry, but I don't know what that means :-(\n"
-                            + "    ____________________________________________________________");
+            } catch (ArrayIndexOutOfBoundsException a) {
+                throw new DukeException("The description of a " + instruction[0] + " cannot be empty.");
+            }
+        case "done":
+            // Fallthrough
+        case "delete":
+            try {
+                int taskIndex = Integer.parseInt(instruction[1]);
+                String taskOutput = "";
 
-                    this.storage.refresh(this.taskList);
-                } catch (IOException i) {
-                    System.out.println("    ____________________________________________________________\n"
-                            + "     " + "\uD83D\uDE41" + " OOPS!!! The file you requested is unavailable.\n"
-                            + "    ____________________________________________________________");
+                if (instruction[0].equals("delete")) {
+                    taskOutput = this.taskList.deleteTask(taskIndex);
+                } else {
+                    taskOutput = this.taskList.markDone(taskIndex);
                 }
+
+                try {
+                    this.storage.rewrite(this.taskList);
+                } catch (DukeException de) {
+                    System.out.println(de);
+                }
+
+                output = taskOutput;
+                break;
+            } catch (NumberFormatException | IndexOutOfBoundsException e) {
+                throw new DukeException("Please enter a valid task number.");
+            }
+        case "list":
+            output = this.taskList.showList();
+            break;
+        case "find":
+            output = this.taskList.searchList(instruction[1]);
+            break;
+        case "bye":
+            output = this.ui.goodbyeMessage();
+            break;
+        default:
+            try {
+                this.storage.rewrite(this.taskList);
+            } catch (DukeException de) {
+                System.out.println(de);
+            }
+
+            output = new DukeException("I'm sorry, but I don't know what that means :-(").toString();
         }
+
+        return output;
     }
 }
