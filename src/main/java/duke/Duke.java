@@ -11,6 +11,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/** A class for Duke program. */
 public class Duke {
     private Ui ui;
     private TaskList taskList;
@@ -42,9 +43,7 @@ public class Duke {
                 Command c = Parser.parse(response);
                 c.execute(taskList, ui, storage);
                 isExit = c.isExit();
-            } catch (IOException e) {
-                ui.sayError(e.getMessage());
-            } catch (DukeException e) {
+            } catch (IOException | DukeException e) {
                 ui.sayError(e.getMessage());
             }
         }
