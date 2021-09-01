@@ -30,6 +30,10 @@ public class Task {
         return toString();
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String toString() {
         if(completed) {
             return "[X] " + name;

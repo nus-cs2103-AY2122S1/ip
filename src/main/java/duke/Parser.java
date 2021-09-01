@@ -59,8 +59,9 @@ public class Parser {
                 LocalDate time = LocalDate.parse(timePieces[1]);
                 Task newTask = new Deadline(name, time);
                 taskList.add(newTask);
-                taskList.add(newTask);
-            } catch (ArrayIndexOutOfBoundsException e){
+                Ui.addTask(taskList, newTask);
+            }
+            catch (ArrayIndexOutOfBoundsException e){
                 throw new DukeException("☹ Please enter the event command in 'deadline [task description]/by [end time]' format");
             }
         } else if (command.equals("delete")){
@@ -73,7 +74,17 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! Invalid task number");
             }
 
-        }else {
+        } else if (command.equals("find")) {
+            TaskList tempList = new TaskList();
+            for(int i = 0; i < taskList.size(); i++) {
+                Task checkTask = taskList.get(i);
+                if (checkTask.getName().contains(pieces[1])) {
+                    tempList.add(checkTask);
+                }
+            }
+            System.out.println("    Here are the matching tasks in your list:");
+            Ui.list(tempList);
+        } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
