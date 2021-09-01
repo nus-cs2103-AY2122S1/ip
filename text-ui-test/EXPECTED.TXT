@@ -5,7 +5,7 @@
 	|   ||                      *   |
 	|   ||   a task manager         |
 	|      *             *          |
-	|             *         v0.9.1  |
+	|             *         v0.9.9  |
 	+-------------------------------+
 	_________________________________
 	 Hello! How may I help you?
@@ -36,7 +36,7 @@
 	 Please try again.
 	_________________________________
 	_________________________________
-	 Task 500 does not exist, please try again
+	 Task 500 does not exist.
 	 Please try again.
 	_________________________________
 	_________________________________
@@ -44,7 +44,7 @@
 	 Please try again.
 	_________________________________
 	_________________________________
-	 Deadline task must include time! (use /by YYYY-MM-DD HHMM)
+	 Description of deadline cannot be empty!
 	 Please try again.
 	_________________________________
 	_________________________________
@@ -73,7 +73,7 @@
 	 2 tasks in total.
 	_________________________________
 	_________________________________
-	 Task 3 does not exist, please try again
+	 Task 3 does not exist.
 	 Please try again.
 	_________________________________
 	_________________________________
@@ -83,53 +83,55 @@
 	_________________________________
 	_________________________________
 	 I've added your todo:
-		[T][ ] 5
+		[T][ ] five
 	 3 tasks in total.
 	_________________________________
 	_________________________________
 	 I've added your todo:
-		[T][ ] 6
+		[T][ ] six
 	 4 tasks in total.
 	_________________________________
 	_________________________________
 	 I've added your todo:
-		[T][ ] 7
+		[T][ ] seven
 	 5 tasks in total.
 	_________________________________
 	_________________________________
 	 I've added your todo:
-		[T][ ] 8
+		[T][ ] eight
 	 6 tasks in total.
 	_________________________________
 	_________________________________
-	 Task 9 does not exist, please try again.
+	 Task 9 does not exist.
 	 Please try again.
 	_________________________________
 	_________________________________
-	 Task 9 does not exist, please try again.
+	 Task 9 does not exist.
 	 Please try again.
 	_________________________________
 	_________________________________
 	 I've removed these tasks: 
-		[T][ ] 7
+		[T][ ] seven
 		[E][ ] item four (at: 22 May 2021, Sat, 23:59)
 	 4 tasks remain.
 	_________________________________
 	_________________________________
-	 Please enter the search string which you want to find.
+	 Please enter the search string you want to find.
 	 Please try again.
 	_________________________________
 	_________________________________
 	 Your search matched these tasks:
 	 1. [T][ ] item one
-	 
+	 2. [T][ ] five
+	 3. [T][ ] six
+	 4. [T][ ] eight
 	_________________________________
 	_________________________________
 	 Here are your tasks:
 	 1. [T][ ] item one
-	 2. [T][ ] 5
-	 3. [T][ ] 6
-	 4. [T][ ] 8
+	 2. [T][ ] five
+	 3. [T][ ] six
+	 4. [T][ ] eight
 	_________________________________
 	_________________________________
 	 The readiness is all.

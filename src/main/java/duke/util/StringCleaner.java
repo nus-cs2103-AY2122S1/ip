@@ -1,30 +1,44 @@
 package duke.util;
 
-import duke.exceptions.AuguryException;
-import duke.exceptions.InvalidTaskCreationException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+
+import duke.exceptions.AuguryException;
+import duke.exceptions.InvalidTaskCreationException;
 
 /**
  * The {@code StringCleaner} class is a utility class that operates on {@code Strings}.
  */
 public class StringCleaner {
+
+    /**
+     * Returns an {@code ArrayList<Integer>} from a {@code String}.
+     *
+     * @param commaSeparatedString User provided String.
+     * @return An {@code ArrayList<Integer>}.
+     */
     public static ArrayList<Integer> toArrayListInteger(String commaSeparatedString) {
-        String[] s_String = commaSeparatedString.split(",");
-        for (int i = 0; i < s_String.length; i++) {
+        String[] strings = commaSeparatedString.split(",");
+        for (int i = 0; i < strings.length; i++) {
             // trim whitespace on each item
-            s_String[i] = s_String[i].trim();
+            strings[i] = strings[i].trim();
         }
         // convert String[] to ArrayList<Integer>
-        ArrayList<Integer> s_Integer = new ArrayList<>();
-        for (String ss : s_String) {
-            s_Integer.add(Integer.parseInt(ss));
+        ArrayList<Integer> integers = new ArrayList<>();
+        for (String s : strings) {
+            integers.add(Integer.parseInt(s));
         }
-        return s_Integer;
+        return integers;
     }
 
+    /**
+     * Returns an {@code LocalDateTime} from a {@code String}.
+     *
+     * @param input User provided String.
+     * @return A {@code LocalDateTime} object.
+     * @throws InvalidTaskCreationException If input String does not match format.
+     */
     public static LocalDateTime toLocalDateTime(String input) throws AuguryException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");

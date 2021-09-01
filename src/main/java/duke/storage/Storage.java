@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exceptions.AuguryException;
-import duke.exceptions.FileIOException;
+import duke.exceptions.FileIoException;
 import duke.tasks.Task;
 import duke.tasks.TaskFactory;
 import duke.tasks.TaskList;
@@ -51,7 +51,7 @@ public class Storage {
      * Saves the given {@code TaskList t} into the save file.
      *
      * @param t {@code TaskList} to read data from.
-     * @throws FileIOException If file cannot be found or written to
+     * @throws FileIoException If file cannot be found or written to
      */
     public void saveTaskListToStorage(TaskList t) throws AuguryException {
         try {
@@ -60,7 +60,7 @@ public class Storage {
             writeStringToStorage(s);
         } catch (IOException e) {
             e.printStackTrace();
-            throw new FileIOException("File error occured");
+            throw new FileIoException("File error occured");
         }
     }
 
