@@ -20,8 +20,7 @@ public class SaveAndExitCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.goodbye();
-        return "";
+        return "Nice talking to you, goodbye!";
     }
 
     /**
