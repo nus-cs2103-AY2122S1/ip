@@ -1,13 +1,12 @@
 package duke.commands;
 
-import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
-
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Event;
+import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 
 /**
  * Adds an event to the task list.
@@ -17,6 +16,11 @@ public class EventCommand extends Command {
      * The command word that identifies an EventCommand instance.
      */
     public static final String COMMAND_WORD = "event";
+
+    /**
+     * Length of the command word.
+     */
+    public static final int COMMAND_LENGTH = COMMAND_WORD.length();
 
     /**
      * Guide on how to use this command word.
@@ -45,26 +49,25 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            int atIndex = userCommand.indexOf("/at");
+            // a valid command with task description and date should give a String[] of length 2.
+            // splitCommand[0] will be of format event <description>.
+            // splitCommand[1] will be the date.
+            String[] splitCommand = userCommand.split("/at");
 
-            if (userCommand.length() < 6 || atIndex <= 6 || userCommand.length() <= atIndex + 4) {
+            if (userCommand.length() <= COMMAND_LENGTH || splitCommand[0].strip().length() <= COMMAND_LENGTH
+                    || splitCommand.length < 2 ) {
                 throw new IllegalArgumentException("Please add a description and/or date for your event!");
             } else {
-                String at = userCommand.substring(atIndex + 4);
-                LocalDateTime date = LocalDateTime.parse(at, Command.INPUT_FORMATTER);
-                Event newEvent = new Event(userCommand.substring(6, atIndex - 1), date);
+                LocalDateTime date = LocalDateTime.parse(splitCommand[1].strip(), Command.INPUT_FORMATTER);
+                Event newEvent = new Event(splitCommand[0].substring(COMMAND_LENGTH).strip(), date);
 
                 tasks.addTask(newEvent);
                 storage.save(tasks.getItems());
 
                 return ui.printTaskAdded(newEvent, tasks.getSize());
-
             }
-
-
         } catch (IOException | IllegalArgumentException e) {
             return ui.printError(e.getMessage());
-
         } catch (DateTimeException e) {
             return ui.printError("Please add a valid event date of format yyyy/MM/dd HHmm (24-hour format)!");
         }

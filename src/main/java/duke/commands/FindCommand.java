@@ -11,6 +11,11 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
     /**
+     * Length of the command word.
+     */
+    public static final int COMMAND_LENGTH = COMMAND_WORD.length();
+
+    /**
      * Guide on how to use this command word.
      */
     public static final String MESSAGE_USAGE = COMMAND_WORD + " <description> - displays all task with <description>\n"
@@ -47,13 +52,10 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
-            if (userCommand.length() < 5) {
+            if (userCommand.length() <= COMMAND_LENGTH) {
                 throw new IllegalArgumentException("Please add a description for the task you want to find!");
             } else {
-                String desc = userCommand.substring(5);
-                // ui.printHorizontalLine();
-                return tasks.findTask(desc);
-                // ui.printHorizontalLine();
+                return tasks.findTask(userCommand.substring(COMMAND_LENGTH).strip());
             }
 
         } catch (IllegalArgumentException e) {

@@ -90,25 +90,21 @@ public class TaskList {
             Pattern pattern = Pattern.compile(desc, Pattern.CASE_INSENSITIVE);
 
             for (Task item : items) {
-                if (pattern.matcher(item.toString()).find()) {
+                if (pattern.matcher(item.getDescription()).find()) {
                     foundItems.add(item);
                 }
             }
 
             if (foundItems.size() > 0) {
-                // System.out.println("Here are the matching tasks in your list:");
                 StringBuilder temp = new StringBuilder("Here are the matching tasks in your list:\n");
                 for (int i = 0; i < foundItems.size(); i++) {
-                    // System.out.printf("%d. " + foundItems.get(i) + "\n", i + 1);
                     temp.append(i + 1).append(". ").append(foundItems.get(i)).append("\n");
                 }
                 return temp.toString();
             } else {
-                // System.out.println("There is no task with the specified description!");
                 return "There is no task with the specified description!";
             }
         } else {
-            // System.out.println("You have no tasks in your list to find a matching task.");
             return "You have no tasks in your list to find a matching task.";
         }
     }
@@ -120,17 +116,13 @@ public class TaskList {
      */
     public String printList() {
         if (items.size() > 0) {
-            // System.out.println("Here are the tasks in your list:");
             StringBuilder temp = new StringBuilder("Here are the tasks in your list:\n");
 
             for (int i = 0; i < items.size(); i++) {
-                // System.out.printf("%d. " + items.get(i) + "\n", i + 1);
                 temp.append(i + 1).append(". ").append(items.get(i)).append("\n");
             }
-            // System.out.println(temp.toString());
             return temp.toString();
         } else {
-            // System.out.println("You have no tasks in your list.");
             return "You have no tasks in your list.";
         }
     }

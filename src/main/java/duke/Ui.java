@@ -18,23 +18,12 @@ public class Ui {
     }
 
     /**
-     * Prints a horizontal line.
-     *
-     * @return Horizontal line.
-     */
-    public String printHorizontalLine() {
-        // System.out.println("----------------------------------------------------");
-        return "----------------------------------------------------";
-    }
-
-    /**
      * Prints a message to show users the number of tasks there are in the list.
      *
      * @param index Index of items, i.e. the number of tasks
      * @return Message showing the number of tasks.
      */
     public String printTaskNum(int index) {
-        // System.out.printf("\nNow you have %d tasks in the list.\n", index);
         return "\nNow you have " + index + " tasks in the list.\n";
     }
 
@@ -45,7 +34,6 @@ public class Ui {
      * @return Success message showing that the specified task has been added.
      */
     public String printAddTask(Task task) {
-        // System.out.println("Got it. I've added this task:\n" + task);
         return "Got it. I've added this task:\n" + task;
     }
 
@@ -60,12 +48,7 @@ public class Ui {
                 + "|  |_|  /     /  /\\  \\    |   |\n"
                 + "|  |_|  \\   /    __   \\   |   |\n"
                 + "|______/ /__/    \\__\\ |__|\n";
-//        System.out.println(logo);
-//        System.out.println("Hello! I'm Bai.\n"
-//                + "What can I do for you?");
-//        printHorizontalLine();
         return logo + "Hello! I'm Bai.\nWhat can I do for you?";
-
     }
 
     /**
@@ -74,9 +57,6 @@ public class Ui {
      * @return Exit message.
      */
     public String printExitMessage() {
-        // System.out.println("====================================================\n"
-        //        + "Goodbai. Hope to see you again soon! （ ● ___ ●.）"
-        //        + "\n====================================================");
         return "Goodbai. Hope to see you again soon! （ ● ___ ●.）";
     }
 
@@ -88,11 +68,7 @@ public class Ui {
      * @return Success message of the added task.
      */
     public String printTaskAdded(Task task, int size) {
-        // printHorizontalLine();
-        String temp = printAddTask(task);
-        temp += printTaskNum(size);
-        // printHorizontalLine();
-        return temp;
+        return printAddTask(task) + printTaskNum(size);
     }
 
     /**
@@ -137,9 +113,6 @@ public class Ui {
      * @return Error message.
      */
     public String printError(String err) {
-//        printHorizontalLine();
-//        System.out.println(err);
-//        printHorizontalLine();
         return err;
     }
 }
