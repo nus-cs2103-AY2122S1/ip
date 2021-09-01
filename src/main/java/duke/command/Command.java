@@ -8,7 +8,9 @@ package duke.command;
 public abstract class Command {
 
     /**
-     * Performs the appropriate action.
+     * Executes the appropriate action.
+     *
+     * @return status message
      */
     public abstract String execute();
 }

@@ -4,8 +4,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import duke.ToDoList;
-import duke.Ui;
+import duke.util.ToDoList;
 
 
 public class DeleteCommandTest {
@@ -14,8 +13,7 @@ public class DeleteCommandTest {
     public void execute_indexOutOfBounds_exceptionThrown() {
         String name = "Testing Bot";
         ToDoList tdl = new ToDoList(name);
-        Ui ui = new Ui(name);
-        DeleteCommand dc = new DeleteCommand(tdl, ui, 100);
+        DeleteCommand dc = new DeleteCommand(tdl, 100);
         try {
             dc.execute();
         } catch (IndexOutOfBoundsException e) {

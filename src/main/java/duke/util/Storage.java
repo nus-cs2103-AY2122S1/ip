@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -26,7 +26,7 @@ public class Storage {
      * @param tdl The ToDoList that will either be saving its contents onto memory or have its content loaded
      *            from memory.
      */
-    protected Storage(ToDoList tdl) {
+    public Storage(ToDoList tdl) {
         this.tdl = tdl;
         Storage.createTaskListStorage();
     }
@@ -35,7 +35,7 @@ public class Storage {
      * Checks if there is already a storage directory created on the user's machine.
      * If not, creates one of such for the user.
      */
-    protected static void createTaskListStorage() {
+    public static void createTaskListStorage() {
         //creates a file to store content
         File s = new File("./data");
         boolean sResult;
@@ -54,7 +54,7 @@ public class Storage {
     /**
      * Loads content from memory (if any) into the current instance of ToDoList.
      */
-    protected void reloadTask() {
+    public void reloadTask() {
         try {
             int counter = 0;
             File file = new File("./data/task-list.txt");

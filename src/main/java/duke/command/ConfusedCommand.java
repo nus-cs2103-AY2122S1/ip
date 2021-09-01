@@ -1,7 +1,5 @@
 package duke.command;
 
-import duke.Ui;
-
 /**
  * Confused command is a Command that encapsulates the attributes and behaviour of someone confused.
  *
@@ -9,15 +7,10 @@ import duke.Ui;
  */
 public class ConfusedCommand extends Command {
 
-    private Ui ui;
-
     /**
      * Creates an instance of ConfusedCommand.
-     *
-     * @param ui Instance of User Interface in used.
      */
-    public ConfusedCommand(Ui ui) {
-        this.ui = ui;
+    public ConfusedCommand() {
     }
 
     @Override

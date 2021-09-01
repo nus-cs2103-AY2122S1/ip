@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.ToDoList;
+import duke.util.ToDoList;
 
 /**
  * ListCommand is a Command that encapsulates the attributes and behaviours of listing Tasks in ToDoList.

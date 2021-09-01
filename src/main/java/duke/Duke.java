@@ -1,6 +1,9 @@
 package duke;
 
 import duke.command.Command;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.ToDoList;
 
 
 /**
@@ -17,11 +20,12 @@ public class Duke {
     private boolean isRunning = true;
     private ToDoList tdl;
     private Storage storage;
-    private Ui ui;
     private Parser parser;
 
+    /**
+     * Creates a Duke object.
+     */
     public Duke() {
-        this.ui = new Ui(Duke.name);
         this.tdl = new ToDoList(Duke.name);
         this.storage = new Storage(this.tdl);
         this.storage.reloadTask();
@@ -40,11 +44,13 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Processes user input in order to generate the appropriate response.
+     *
+     * @param input Input from user
+     * @return response from the chat bot
      */
-    protected String getResponse(String input) {
-        Command c = this.parser.parse(input, this.tdl, this.ui, this, this.storage);
+    public String getResponse(String input) {
+        Command c = this.parser.parse(input, this.tdl, this, this.storage);
         String response = c.execute();
         return Duke.name + " heard: \n" + response;
     }

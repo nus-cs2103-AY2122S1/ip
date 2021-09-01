@@ -1,4 +1,4 @@
-package duke;
+package duke.util;
 
 /**
  * DukeException is an Exception to be thrown when functionalities of the chat bot fails.

@@ -1,11 +1,21 @@
-package duke;
+package duke.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.command.*;
-
+import duke.Duke;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.ConfusedCommand;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TipCommand;
+import duke.command.ToDoCommand;
 
 /**
  * Parser is a class that encapsulates the behaviour of an interpreter for commands.
@@ -78,14 +88,13 @@ public class Parser {
      *
      * @param command Input commands from the user.
      * @param tdl The ToDoList used by the chat bot to track tasks.
-     * @param ui The user interface that the chat bot uses.
      * @param chatBot The instance of the chat bot itself.
      * @param storage The Storage that the chat bot uses.
      * @return The type of Command to be executed.
      */
-    protected Command parse(String command, ToDoList tdl, Ui ui, Duke chatBot, Storage storage) {
+    public Command parse(String command, ToDoList tdl, Duke chatBot, Storage storage) {
         if (command.equals(Commands.BYE.asLowerCase())) {
-            return new ByeCommand(chatBot, ui, tdl, storage);
+            return new ByeCommand(chatBot, tdl, storage);
         } else if (command.equals(Commands.LIST.asLowerCase())) {
             return new ListCommand(tdl);
         } else if (command.startsWith(Commands.DONE.asLowerCase())) {
@@ -93,7 +102,7 @@ public class Parser {
                 formatChecker(command);
                 String substring = command.substring(5);
                 int index = Integer.parseInt(substring);
-                return new DoneCommand(tdl, ui, index);
+                return new DoneCommand(tdl, index);
             } catch (NumberFormatException e) {
                 return new TipCommand("Dude, the format is done <index>");
             } catch (DukeException e) {
@@ -145,7 +154,7 @@ public class Parser {
                 formatChecker(command);
                 String substring = command.substring(7);
                 int index = Integer.parseInt(substring);
-                return new DeleteCommand(tdl, ui, index);
+                return new DeleteCommand(tdl, index);
             } catch (StringIndexOutOfBoundsException e) {
                 return new TipCommand("And which item do you want to delete...?");
             } catch (NumberFormatException e) {
@@ -162,7 +171,7 @@ public class Parser {
                 return new TipCommand(e.getMessage());
             }
         } else {
-            return new ConfusedCommand(ui);
+            return new ConfusedCommand();
         }
     }
 

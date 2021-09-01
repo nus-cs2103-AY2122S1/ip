@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.ToDoList;
+import duke.util.ToDoList;
 
 /**
  * EventCommand is a Command that encapsulates the attributes and behaviour of adding an Event to the

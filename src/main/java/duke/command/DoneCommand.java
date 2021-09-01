@@ -1,7 +1,6 @@
 package duke.command;
 
-import duke.ToDoList;
-import duke.Ui;
+import duke.util.ToDoList;
 
 /**
  * DoneCommand is a Command that encapsulates the attributes and behaviour of marking a Task as completed.
@@ -10,19 +9,16 @@ import duke.Ui;
  */
 public class DoneCommand extends Command {
     private ToDoList tdl;
-    private Ui ui;
     private int index;
 
     /**
      * Creates an instance of DoneCommand.
      *
      * @param tdl Instance of ToDoList in use.
-     * @param ui Instance of User Interface in use.
      * @param num Index of the Task on ToDoList to be marked as completed.
      */
-    public DoneCommand(ToDoList tdl, Ui ui, int num) {
+    public DoneCommand(ToDoList tdl, int num) {
         this.tdl = tdl;
-        this.ui = ui;
         this.index = num;
     }
 

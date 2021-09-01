@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.ToDoList;
+import duke.util.ToDoList;
 
 /**
  * FindCommand is a Command that encapsulates the attributes and behavior of looking for a Task

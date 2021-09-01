@@ -2,7 +2,7 @@ package duke.command;
 
 import java.time.LocalDateTime;
 
-import duke.ToDoList;
+import duke.util.ToDoList;
 
 /**
  * DeadlineCommand is a Command that encapsulates the behaviour of adding a Deadline to the ToDoList.
