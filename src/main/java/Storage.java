@@ -1,20 +1,24 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
-public class SaveToDisk {
-    TaskList ls;
-    String fileName = "duke.txt";
+public class Storage {
+    String filePath;
     PrintWriter writer;
+    TaskList ls;
 
-    public SaveToDisk(TaskList ls) {
-        this.ls = ls;
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
     public void rewriteFile(TaskList ls) {
+        this.ls = ls;
         try {
-            FileWriter fw = new FileWriter(fileName, false);
+            FileWriter fw = new FileWriter(filePath, false);
             writer = new PrintWriter(fw);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -39,4 +43,51 @@ public class SaveToDisk {
         }
         writer.close();
     }
+
+    public TaskList load() throws IOException, DukeException {
+        TaskList ls = new TaskList();
+        File directory = new File("duke.txt");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
+        File data = new File(filePath);
+        data.createNewFile();
+        Scanner s = new Scanner(data);
+        while (s.hasNext()) {
+            ls.addTask(parseTask(s.nextLine()));
+        }
+        return ls;
+    }
+
+    public Task parseTask(String input) throws DukeException {
+        if (input.startsWith("T")) {
+            String taskDesc = input.substring(7);
+            Todo tTask = new Todo(taskDesc);
+            return tTask;
+        } else if (input.startsWith("D")) {
+            String taskDesc = input.substring(7);
+            String taskDate = getDate(input);
+            Deadline dTask = new Deadline(taskDesc, taskDate);
+            return dTask;
+        } else {
+            String taskDesc = input.substring(7);
+            String taskDate = getDate(input);
+            Event eTask = new Event(taskDesc, taskDate);
+            return eTask;
+        }
+    }
+
+    public String getDate(String input) {
+        int endIndex = 0;
+        int count = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '|') {
+                if (count == 3) {
+                    endIndex = i;
+                }
+            }
+        }
+        return input.substring(endIndex);
+    }
+
 }
