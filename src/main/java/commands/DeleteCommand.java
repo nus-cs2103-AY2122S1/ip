@@ -5,10 +5,10 @@ import tasks.TaskList;
 import utils.Storage;
 import utils.Ui;
 
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     private static final String DELETE_MSG = "The following have been deleted:";
-    
+
     private int index;
 
     public DeleteCommand(int index) {
@@ -24,5 +24,4 @@ public class DeleteCommand extends Command{
 
         return false;
     }
-    
 }

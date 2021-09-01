@@ -1,7 +1,9 @@
+import exceptions.InvalidInputException;
+
 import commands.Command;
 
-import exceptions.InvalidInputException;
 import tasks.TaskList;
+
 import utils.Parser;
 import utils.Storage;
 import utils.Ui;
@@ -31,7 +33,7 @@ public class Duke {
 
         boolean isExitCommand = false;
 
-        while(!isExitCommand) {
+        while (!isExitCommand) {
             try {
                 String userCommand = ui.readCommand();
                 Command command = Parser.parse(userCommand);
@@ -40,7 +42,7 @@ public class Duke {
 
             } catch (InvalidInputException e) {
                 ui.printError(e.getMessage());
-            }          
+            }
         }
         ui.printExitMessage();
     }

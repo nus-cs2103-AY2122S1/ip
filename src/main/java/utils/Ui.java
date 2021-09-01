@@ -49,8 +49,8 @@ public class Ui {
     }
 
     private static String formatString(String message) {
-        return "\t____________________________\n" +
-                "\t " + message.replace("\n", "\n\t ") + "\n" +
-                "\t____________________________\n";
+        return "\t____________________________\n"
+                + "\t " + message.replace("\n", "\n\t ") + "\n"
+                + "\t____________________________\n";
     }
 }

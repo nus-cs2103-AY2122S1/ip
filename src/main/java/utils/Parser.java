@@ -2,8 +2,16 @@ package utils;
 
 import java.time.LocalDate;
 
-import commands.*;
+import commands.Command;
+import commands.AddCommand;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.ExitCommand;
+import commands.FindCommand;
+import commands.ListCommand;
+
 import exceptions.InvalidInputException;
+
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -19,7 +27,7 @@ public class Parser {
         command = commands[0];
 
         String description = commands.length > 1 ? commands[1] : "";
-        
+
         if (command.equals("bye")) {
             return new ExitCommand();
         } else if (command.equals("list")) {
@@ -32,13 +40,13 @@ public class Parser {
             int index = Integer.valueOf(description) - 1;
 
             return new DeleteCommand(index);
-        } else if (command.equals("find")){
+        } else if (command.equals("find")) {
             if (description.isBlank()) {
                 throw new InvalidInputException("find's description cannot be empty!");
             } else {
                 return new FindCommand(description);
             }
-        } else if (command.equals("todo")){
+        } else if (command.equals("todo")) {
             if (description.isBlank()) {
                 throw new InvalidInputException("todo's description cannot be empty!");
             } else {
@@ -58,7 +66,7 @@ public class Parser {
 
                 return new AddCommand(newTask);
             }
-        } else if (command.equals("event")){
+        } else if (command.equals("event")) {
             if (description.isBlank()) {
                 throw new InvalidInputException("event's description cannot be empty!");
             } else {
@@ -75,5 +83,5 @@ public class Parser {
         } else {
             throw new InvalidInputException("Invalid command");
         }
-    }   
+    }
 }

@@ -4,9 +4,9 @@ import tasks.TaskList;
 import utils.Storage;
 import utils.Ui;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
-    private final static String FIND_MESSAGE = "Here are the matching tasks in your list:";
+    private static final String FIND_MESSAGE = "Here are the matching tasks in your list:";
 
     private String keyword;
 

@@ -26,9 +26,9 @@ public class Storage {
     /**
      * Returns ArrayList of Tasks loaded from filePath location
      */
-    public ArrayList<Task> load() {        
+    public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
-        
+
         try {
             Scanner dataReader = new Scanner(this.file);
 
@@ -55,16 +55,16 @@ public class Storage {
             try {
                 file.createNewFile();
             } catch (IOException ioException) {
-                return tasks; 
+                return tasks;
             }
         }
-        return tasks; 
+        return tasks;
     }
 
     /**
      * Writes formatted data into filePath location
      */
-    public void save(String formattedTaskList){
+    public void save(String formattedTaskList) {
         try {
             FileWriter writer = new FileWriter(filePath);
             writer.write(formattedTaskList);
@@ -73,5 +73,4 @@ public class Storage {
             return;
         }
     }
-    
 }

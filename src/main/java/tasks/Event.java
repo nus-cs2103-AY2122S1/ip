@@ -3,7 +3,7 @@ package tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Event extends Task {
 
     private LocalDate startTime;
     private LocalDate endTime;
@@ -24,14 +24,14 @@ public class Event extends Task{
     public String getFormattedData() {
         String formattedStatus = super.isDone() ? "1|" : "0|";
         return "E|" + formattedStatus + super.getDescription()
-                + "|" + this.startTime.toString() 
+                + "|" + this.startTime.toString()
                 + "|" + this.endTime.toString();
     }
 
     @Override
     public String toString() {
-        return super.toString() + " (from " 
-                + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) 
+        return super.toString() + " (from "
+                + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + " to " + this.startTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ")";
     }
