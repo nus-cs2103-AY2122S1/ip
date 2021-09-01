@@ -1,5 +1,6 @@
-package duke.main;
+package duke;
 
+import duke.main.Parser;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
