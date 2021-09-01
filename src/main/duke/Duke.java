@@ -2,11 +2,18 @@ package duke;
 
 import duke.task.*;
 
+/**
+ * Wrapper of Duke's implementation.
+ * Duke is a Personal Assistant Chatbot that helps a person to keep track of various things.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;
-    protected TaskList taskList;
+    private TaskList taskList;
 
+    /**
+     * Initializes duke with default data save path.
+     */
     public Duke() {
         ui = new Ui();
         taskList = new TaskList();
@@ -17,7 +24,11 @@ public class Duke {
             Ui.printErrorMessage(e);
         }
     }
-    
+
+    /**
+     * Initializes duke with given data save path.
+     * @param pathStr string of save path, ending with the name of save file
+     */
     public Duke(String pathStr) {
         ui = new Ui();
         taskList = new TaskList();
@@ -28,8 +39,10 @@ public class Duke {
             Ui.printErrorMessage(e);
         }
     }
-    
 
+    /**
+     * Starts interacting with user. Exit the loop when detecting {@link duke.Parser#WORD_EXIT Parser.WORD_EXIT}.
+     */
     public void run() {
         Ui.printWelcomeMessage();
         boolean isExit = false;

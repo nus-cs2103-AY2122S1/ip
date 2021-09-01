@@ -5,6 +5,9 @@ import duke.task.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Provides methods to interact with user.
+ */
 public class Ui {
     // Constant Strings
     protected static final String HORIZONTAL_LINE = "____________________________________________________________";
@@ -16,6 +19,10 @@ public class Ui {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Read next line of user command from System.in.
+     * @return next line of user command as string
+     */
     protected String readCommand() {
         return scanner.nextLine();
     }
@@ -73,6 +80,11 @@ public class Ui {
         Ui.printWithIndent("  " + taskStr);
     }
 
+    /**
+     * Prints an error message based on exception type of DukeException.
+     * @param e exception to print
+     * @param userInput the lastest user command before exception happens
+     */
     protected static void printErrorMessage(DukeException e, String userInput) {
         switch (e.type) {
             case INDEX_OUT_OF_BOUND:
@@ -94,11 +106,17 @@ public class Ui {
             case PIPE_SYMBOL:
             case FAIL_TO_READ:
             case FAIL_TO_WRITE:
+            case FAIL_TO_CREATE_FILE:
+            case OTHERS:
                 printWithIndent(e.getMessage());
                 break;
         }
     }
 
+    /**
+     * Prints an error message based on exception type of DukeException.
+     * @param e exception to print
+     */
     protected static void printErrorMessage(DukeException e) {
         printErrorMessage(e, "");
     }

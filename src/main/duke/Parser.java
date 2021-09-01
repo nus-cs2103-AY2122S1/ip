@@ -4,6 +4,9 @@ import duke.task.*;
 
 import java.util.Arrays;
 
+/**
+ * Provides methods to parse user command and saved contents.
+ */
 public class Parser {
     // Constant words
     protected static final String WORD_EXIT = "bye";
@@ -16,7 +19,14 @@ public class Parser {
     protected static final String WORD_EVENT_AT = " /at ";
     protected static final String WORD_DELETE = "delete ";
     protected static final String DIVIDER_WORD = " \\| ";
-    
+
+    /**
+     * Convert user command to {@link duke.DukeAction DukeAction}.
+     * @param s user command
+     * @param listSize size of current task list
+     * @return type of duke action
+     * @throws DukeException if user command is missing operand or invalid
+     */
     public static DukeAction stringToDukeAction(String s, int listSize) throws DukeException {
         // Remove all leading whitespaces
         s = s.stripLeading();
@@ -129,24 +139,55 @@ public class Parser {
         return false;
     }
 
+    /**
+     * Parses deadline command to description and due time.
+     * @param s deadline command
+     * @return An string array of length 2, with the first element being description and the second being due time.
+     */
     protected static String[] parseDeadlineString(String s) {
         return s.substring(WORD_DEADLINE.length()).split(WORD_DEADLINE_BY, 2);
     }
 
+    /**
+     * Parses event command to description and time period.
+     * @param s event command
+     * @return An string array of length 2, with the first element being description and the second being time period.
+     */
     protected static String[] parseEventString(String s) throws DukeException {
         return s.substring(WORD_EVENT.length()).split(WORD_EVENT_AT, 2);
     }
 
+    /**
+     * Parses mark command to index of task to mark as done.
+     * @param s mark command
+     * @return index of task to mark as done
+     */
     protected static int parseMarkString(String s) {
         return Integer.parseInt(s.substring(WORD_MARK.length())) - 1;
     }
 
+    /**
+     * Parses delete command to index of task to remove.
+     * @param s delete command
+     * @return index of task to remove
+     */
     protected static int parseDeleteString(String s) {
         return Integer.parseInt(s.substring(WORD_DELETE.length())) - 1;
     }
-    
-    protected static Task fileContentsToTask(String s) throws DukeException{
+
+    /**
+     * Converts save data string to task.
+     * @see Task#populateSaveData()
+     * @param s save data string
+     * @return a new task constructs based on the given string
+     * @throws DukeException if the string is not aligned with save data format
+     */
+    public static Task fileContentsToTask(String s) throws DukeException{
         String[] arr = s.split(DIVIDER_WORD, 4);
+        if (arr.length < 4) {
+            throw new DukeException(ExceptionType.FAIL_TO_READ);
+        }
+
         boolean isDone = arr[1].equals("1");
         switch (arr[0]) {
             case "T":

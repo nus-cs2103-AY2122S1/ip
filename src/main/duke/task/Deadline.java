@@ -10,6 +10,12 @@ public class Deadline extends Task{
     protected LocalDate date;
     private boolean hasDate;
 
+    /**
+     * Constructs a deadline instance with description and due time.
+     * @param description description of deadline
+     * @param by due time. If given string is in format xxxx-xx-xx(x is number), a LocalDate instance will be created to
+     *          store the date
+     */
     public Deadline(String description, String by) {
         super(description);
         try {
@@ -22,6 +28,13 @@ public class Deadline extends Task{
         }
     }
 
+    /**
+     * Constructs a deadline instance with description, due time and task status.
+     * @param description description of deadline
+     * @param by due time. If given string is in format xxxx-xx-xx(x is number), a LocalDate instance will be created to
+     *          store the date
+     * @param isDone task status
+     */
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         try {

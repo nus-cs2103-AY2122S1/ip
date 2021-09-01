@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Provides methods to create local file and perform I/O operations with it.
+ */
 public class Storage {
     // About save file
     private static final String[] SAVE_DIRECTORY = new String[] {"data"};
@@ -22,6 +25,10 @@ public class Storage {
         this.initialized = false;
     }
 
+    /**
+     * Initializes save path with default save path.
+     * @throws DukeException if failed to create file
+     */
     protected void initialize() throws DukeException {
         try {
             Path path = Arrays.stream(SAVE_DIRECTORY)
@@ -45,10 +52,15 @@ public class Storage {
             savePath = path;
             this.initialized = true;
         } catch (IOException e) {
-            throw new DukeException(ExceptionType.FAIL_TO_READ, e.getMessage());
+            throw new DukeException(ExceptionType.FAIL_TO_CREATE_FILE, e.getMessage());
         }
     }
 
+    /**
+     * Initializes save path with given save path.
+     * @param pathStr string of given path, ending with save file name
+     * @throws DukeException if failed to create file
+     */
     protected void initialize(String pathStr) throws DukeException{
         try {
             Path path = Paths.get(pathStr);
@@ -70,10 +82,15 @@ public class Storage {
             savePath = path;
             this.initialized = true;
         } catch (IOException e) {
-            throw new DukeException(ExceptionType.FAIL_TO_READ, e.getMessage());
+            throw new DukeException(ExceptionType.FAIL_TO_CREATE_FILE, e.getMessage());
         }
     }
 
+    /**
+     * Appends a line of text to the end of save file.
+     * @param textToWrite text to write to save file
+     * @throws DukeException if failed to write to save file
+     */
     protected void writeLine(String textToWrite) throws DukeException {
         if (!this.initialized) return;
         try {
@@ -85,6 +102,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Remove a line of text in save file
+     * @param lineIndex index of line to remove
+     * @throws DukeException if failed to write to save file
+     */
     protected void removeLine(int lineIndex) throws DukeException {
         if (!this.initialized) return;
         try {
@@ -96,6 +118,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Change a line in save file
+     * @param lineIndex index of line to change
+     * @param textToWrite new text at the line
+     * @throws DukeException if failed to write to save file
+     */
     protected void setLine(int lineIndex, String textToWrite) throws DukeException {
         if (!this.initialized) return;
         try {
@@ -107,6 +135,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Checks if save file is empty.
+     * @return true if save file is empty, false otherwise
+     * @throws DukeException if failed to read from save file
+     */
     protected boolean isEmpty() throws DukeException {
         if (!this.initialized) return true;
         try {
@@ -116,6 +149,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Reads all lines from save file.
+     * @return the lines from save file as a list
+     * @throws DukeException if failed to read from save file
+     */
     protected List<String> getFileContents() throws DukeException {
         if (!this.initialized) return new ArrayList<String>();
         try {

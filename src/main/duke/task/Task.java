@@ -23,6 +23,12 @@ public class Task {
         return "[" + this.getStatusIcon() + "] " + description;
     }
 
+    /**
+     * Convert the task into a string to store in local file.
+     * The fields are divide by "|"; second parameter is 1 if the task is done, 0 otherwise.
+     * @see duke.Parser#fileContentsToTask(String)
+     * @return a string to store in local file that represents the task.
+     */
     public String populateSaveData() {
         return "T | " + (isDone ? 1 : 0) + " | " + description;
     }

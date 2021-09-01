@@ -9,10 +9,6 @@ public class ToDo extends Task{
         super(description, isDone);
     }
 
-    protected static ToDo stringToToDo(String s) {
-        return new ToDo(s.substring(12));
-    }
-
     @Override
     public String toString() {
         return "[T]" + super.toString();
