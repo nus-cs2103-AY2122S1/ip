@@ -1,3 +1,7 @@
-E | 0 | anEvent | 2100-09-09 12:23
-E | 1 | dedline | 2105-04-20
-E | 0 | anotherEvent | 3241-01-02 00:03
+E | 1 | eventname | 2021-12-12 12:21
+T | 1 | this
+T | 1 | that
+T | 1 | this
+T | 0 | this
+T | 0 | that
+E | 1 | event2 | 2021-12-12 12:12

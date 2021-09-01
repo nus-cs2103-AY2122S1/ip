@@ -1,3 +1,5 @@
+package duke;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,26 +15,25 @@ public class Storage {
 
     private Task toTask(String fileRecord) {
         Task t = null;
-        String[] params = fileRecord.split(" | ");
+        String[] params = fileRecord.split(" \\| ");
         String type = params[0];
-        boolean isDone = params[2].equals("1");
-        String desc = params[4];
+        boolean isDone = params[1].equals("1");
+        String desc = params[2];
         switch (type) {
         case ("T"):
             t = new ToDo(desc, isDone);
             break;
         case ("E"):
-            t = new Event(desc, isDone, params[6] + " " + params[7]);
+            t = new Event(desc, isDone, params[3]);
             break;
         case ("D"):
-            t = new Deadline(desc, isDone, params[6]);
+            t = new Deadline(desc, isDone, params[3]);
             break;
         }
         return t;
     }
 
-    public TaskList loadTasksFromFile() {
-        try {
+    public TaskList loadTasksFromFile() throws IOException {
             FileReader fileReader = new FileReader(filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             String line;
@@ -42,10 +43,6 @@ public class Storage {
             }
             fileReader.close();
             return new TaskList(tasks);
-        } catch (IOException e) {
-            System.out.println(Ui.format(e.toString()));
-            return new TaskList();
-        }
     }
 
     public void writeTasksToFile(List<Task> tasks) {
