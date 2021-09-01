@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 import java.io.IOException;
 
@@ -29,13 +29,13 @@ public class CommandDone extends Command {
      * @param storage The Storage object that auto-saves after modification.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             String msg = tasks.markTaskDone(index);
             tasks.saveToFile(storage);
-            ui.printMsg(msg);
+            return msg;
         } catch (DukeException | IOException e) {
-            ui.showError(e.getMessage());
+            return e.getMessage();
         }
     }
 }

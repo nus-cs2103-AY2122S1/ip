@@ -6,7 +6,7 @@ import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 import java.io.FileNotFoundException;
 
@@ -81,5 +81,19 @@ public class Duke {
         this.ui = ui;
         this.storage = storage;
         this.tasks = taskList;
+    }
+
+    /**
+     * Get response messages from Duke according input.
+     * @param input The input string to be parsed.
+     * @return      Execution message of the input or error messages.
+     * @throws DukeException when something goes wrong.
+     */
+
+    public String getResponse(String input) throws DukeException {
+        Command cmd = Parser.parseCommand(input);
+        String executeMsg = cmd.execute(tasks, ui, storage);
+
+        return executeMsg;
     }
 }

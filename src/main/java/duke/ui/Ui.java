@@ -1,4 +1,4 @@
-package duke.util;
+package duke.ui;
 
 import java.util.Scanner;
 
@@ -48,7 +48,6 @@ public class Ui {
         System.out.println("Hello " + name + "!");
         System.out.println("I'm Duke");
         printHorizLine();
-        System.out.println("");
     }
 
     /**

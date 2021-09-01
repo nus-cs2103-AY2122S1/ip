@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * The class that models a list command.
@@ -16,8 +16,8 @@ public class CommandList extends Command {
      * @param storage The Storage object that auto-saves after modification.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printMsg("Here are the tasks in your list:");
-        ui.printMsg(tasks.toString());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "Here are the tasks in your list:" + "\n"
+                + tasks.toString();
     }
 }

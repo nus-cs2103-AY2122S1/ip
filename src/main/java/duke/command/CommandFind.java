@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * The class that models a find command.
@@ -21,13 +21,13 @@ public class CommandFind extends Command {
      * @param storage The Storage object that auto-saves after modification.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList matched = tasks.find(keyword);
         if(matched.isEmpty()) {
-            ui.printMsg("There are no matching tasks in your list.");
+            return "There are no matching tasks in your list.";
         } else {
-            ui.printMsg("Here are the matching tasks in your list:");
-            ui.printMsg(matched.toString());
+            return "Here are the matching tasks in your list:" + "\n"
+                    + matched.toString();
         }
     }
 }

@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * A class that models a command to say bye and exit the program.
@@ -16,8 +16,9 @@ public class CommandBye extends Command {
      * @param storage The Storage object that auto-saves after modification.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.sayBye("Alex");
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         this.isExit = true;
+        return "Bye, hope to see you soon!";
+
     }
 }
