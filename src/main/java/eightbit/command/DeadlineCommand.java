@@ -3,7 +3,6 @@ package eightbit.command;
 import eightbit.task.Deadline;
 import eightbit.util.Storage;
 import eightbit.util.TaskList;
-import eightbit.util.Ui;
 
 /**
  * Represents a command to add a deadline.
@@ -25,14 +24,14 @@ public class DeadlineCommand extends Command {
      * Adds the deadline into the user's list.
      *
      * @param taskList User's list of tasks.
-     * @param ui Ui responsible for printing messages.
-     * @param storage Storage responsible for reading/writing the file.
+     * @param storage  Storage responsible for reading/writing the file.
+     * @return The response after executing the command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         taskList.add(deadline);
         storage.appendToFile(deadline);
-        ui.printWithLines("Got it. I've added this task:\n  " + deadline
-                + "\nNow you have " + taskList.size() + " tasks in the list.");
+        return "Got it. I've added this task:\n  " + deadline
+                + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
 }
