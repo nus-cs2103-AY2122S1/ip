@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "sora.Main"
+    mainClassName = "sora.Launcher"
 }
 
 shadowJar {
