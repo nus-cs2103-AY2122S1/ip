@@ -15,7 +15,7 @@ public class Event extends Task {
         this.formattedDtf = formattedDtf;
     }
 
-    public String taskListOnDisk() {
+    public String getTaskListOnDisk() {
         return "duke.task.Event |" + super.getStatusIcon() + "| " + description + " | by: " + formattedDtf;
     }
     

@@ -1,6 +1,5 @@
 package duke.exception;
 
-import duke.Parser;
 import org.junit.Test;
 import org.junit.Assert;
 

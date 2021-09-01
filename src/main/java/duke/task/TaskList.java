@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.Ui;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -23,7 +24,7 @@ public class TaskList {
         }
     }
     
-    public int size() {
+    public int getSize() {
         return userList.size();
     }
     
@@ -39,15 +40,3 @@ public class TaskList {
         userList.remove(val);
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-

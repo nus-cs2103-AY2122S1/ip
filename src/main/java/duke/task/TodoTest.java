@@ -15,7 +15,7 @@ public class TodoTest {
     public void taskListOnDisk_todoObject_success() {
         Task task = new Todo("Watch football");
         task.markAsDone();
-        Assert.assertEquals("duke.task.Todo |X| Watch football", task.taskListOnDisk());
+        Assert.assertEquals("duke.task.Todo |X| Watch football", task.getTaskListOnDisk());
     }
 
     @Test

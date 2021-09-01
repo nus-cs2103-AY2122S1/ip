@@ -1,12 +1,15 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.exception.EmptyDescriptionException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-import duke.Ui;
+
 import duke.Storage;
+
+import duke.exception.DukeException;
+import duke.exception.EmptyDescriptionException;
+
+import duke.Ui;
 
 public class todoCommand extends Command {
     private String command;

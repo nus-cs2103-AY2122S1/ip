@@ -1,7 +1,7 @@
-import duke.Storage;
+package duke;
+
 import duke.task.TaskList;
-import duke.Ui;
-import duke.Parser;
+
 import duke.command.Command;
 
 public class Duke {
@@ -20,7 +20,7 @@ public class Duke {
         ui.showLine();
         boolean isExit = false;
         while (!isExit) {
-            String command = ui.command();
+            String command = ui.getCommand();
             Parser parser = new Parser(command);
             if (parser.isExit()) {
                 break;

@@ -15,7 +15,7 @@ public class Deadline extends Task {
         this.formattedDtf = formattedDtf;
     }
     
-    public String taskListOnDisk() {
+    public String getTaskListOnDisk() {
         return "duke.task.Deadline |" + super.getStatusIcon() + "| " + description + " | by: " + formattedDtf;
     }
     

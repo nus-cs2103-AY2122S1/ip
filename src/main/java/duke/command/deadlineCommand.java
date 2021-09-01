@@ -3,11 +3,15 @@ package duke.command;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
+
 import duke.Storage;
+
 import duke.exception.EmptyDescriptionException;
 import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
+
 import duke.Ui;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -38,8 +42,8 @@ public class deadlineCommand extends Command {
                 Ui.taskResponse(task);
                 storage.writeToFile("./duke.txt", taskList);
             } catch (DateTimeParseException e) {
-                DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be deadline/by " +
-                        "<yyyy-mm-dd HHmm>");
+                DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be deadline/by " 
+                        + "<yyyy-mm-dd HHmm>");
                 System.out.println(exp);
             }
         }

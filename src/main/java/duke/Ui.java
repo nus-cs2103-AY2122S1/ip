@@ -1,8 +1,9 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.task.Task;
 import duke.task.TaskList;
-import java.util.Scanner;
 
 public class Ui {
     Scanner sc;
@@ -15,7 +16,7 @@ public class Ui {
        this.storage = storage;
     }
 
-    public String command() {
+    public String getCommand() {
         if (sc.hasNextLine()) {
             String str = sc.nextLine();
             return str;
@@ -24,14 +25,14 @@ public class Ui {
     }
     
     public void showWelcome() {
-        System.out.println("Hello from Duke!");
+        System.out.println("Hello from duke.Duke!");
         System.out.println("");
         storage.loadTaskListData(taskList);
         System.out.println("");
         System.out.println("Hope you are doing well. How can I help you?");
     }
     
-    public static void bye() {
+    public static void sayBye() {
         System.out.println("Bye. Have a great day!");
     }
     
@@ -46,7 +47,7 @@ public class Ui {
     public static void taskResponse(Task task) {
         System.out.println("Got it. I've added this task:");
         System.out.println(task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
     }
     
     public static void doneResponse(Task task) {
@@ -58,17 +59,6 @@ public class Ui {
     public static void deleteResponse(Task task) {
         System.out.println("Noted. I've removed this task:");
         System.out.println(task);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
     }
 }
-
-
-
-
-
-
-
-
-
-
-

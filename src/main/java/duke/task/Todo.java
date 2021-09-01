@@ -5,7 +5,7 @@ public class Todo extends Task {
         super(description);
     }
 
-    public String taskListOnDisk() {
+    public String getTaskListOnDisk() {
         return "duke.task.Todo |" + super.getStatusIcon() + "| " + description;
     }
     

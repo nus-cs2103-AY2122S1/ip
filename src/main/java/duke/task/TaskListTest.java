@@ -34,19 +34,6 @@ public class TaskListTest {
         taskList.addTask(todo);
         taskList.addTask(todo2);
         taskList.addTask(todo3);
-        Assert.assertEquals(3, taskList.size());
+        Assert.assertEquals(3, taskList.getSize());
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

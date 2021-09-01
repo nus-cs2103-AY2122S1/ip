@@ -17,7 +17,7 @@ public abstract class Task {
         this.isDone = true;
     }
 
-    public abstract String taskListOnDisk();
+    public abstract String getTaskListOnDisk();
     
     @Override
     public String toString() {
