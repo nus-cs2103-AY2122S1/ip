@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.Command;
 
 import duke.exception.DukeException;
@@ -9,31 +11,32 @@ import duke.util.TaskList;
 import java.util.Scanner;
 
 /**
- * Main Duke class
+ *fw duke.Duke class
  */
 public class Duke {
 
     private final Parser parser;
     private final TaskList taskList;
     private final Storage storage;
+    private boolean isBye;
 
     /**
      * Basic Constructor
      *
-     * @param filePath the path where file savedOutput.txt. which contains past state is located
      * @throws DukeException
      */
-    public Duke(String filePath) throws DukeException{
-        storage = new Storage(filePath);
+    public Duke(){
+        storage = new Storage("src/main/java/resources");
         taskList = new TaskList();
         parser = new Parser(storage, taskList);
         parser.loadTask();
     }
 
     /**
-     * Continuous scan loops until user input "bye"
+     * duke program that prints in commandLine
      */
-    private void  textBasedRun() {
+    private void textProcess() {
+
         boolean isBye = false;
         Scanner scan = new Scanner(System.in);
         while (!isBye) {
@@ -50,6 +53,22 @@ public class Duke {
 
 
 
+    public String guiProcess(String input) {
+        String output = "";
+        try {
+            Command c = parser.parse(input);
+            output = c.exec();
+            isBye = c.checkIsBye();
+        } catch (DukeException e) {
+            return e.toString();
+        }
+        return output;
+    }
+
+    public boolean checkIsBye() {
+        return this.isBye;
+    }
+
 
     /**
      * Main program
@@ -57,12 +76,7 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        try {
-            new Duke("src/main/resource").textBasedRun();
-
-        } catch (DukeException e) {
-            System.out.println(e);
-        }
-
+        Duke duke = new Duke();
+        duke.textProcess();
     }
 }

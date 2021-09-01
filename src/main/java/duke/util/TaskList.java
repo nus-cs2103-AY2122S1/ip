@@ -75,9 +75,9 @@ public class TaskList {
             mapper.put(key, mapper.get(key).setDone());
             return mapper.get(key);
         } catch (NumberFormatException e) {
-            throw new InvalidFormatException("Ensure that list position in NUMERICAL form");
+            throw new InvalidFormatException("\nEnsure that list position in NUMERICAL form");
         } catch (NullPointerException e) {
-            throw new InvalidFormatException("Ensure that number inputted can be found in the list");
+            throw new InvalidFormatException("\nEnsure that number inputted can be found in the list");
         }
     }
 

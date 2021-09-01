@@ -51,15 +51,15 @@ public class Task {
                 String[] timeFormat = input.trim().split(" ");
                 this.date = LocalDate.parse(timeFormat[0]);
                 int hoursMins = Integer.parseInt(timeFormat[1]);
-                if (hoursMins <2401 && hoursMins > 999 && hoursMins%100 <60) {
+                if (hoursMins <2400 && hoursMins > 0 && hoursMins%100 <60) {
                     this.time = hoursMins;
                 } else {
-                    throw new InvalidTimeException("Invalid time format (use 24hr format)");
+                    throw new InvalidTimeException("\nInvalid time format (use 24hr format)");
                 }
             } catch (DateTimeParseException e) {
-                throw new InvalidDateException("Wrong date format(use YYYY-MM-DD)");
+                throw new InvalidDateException("\nWrong date format(use YYYY-MM-DD)");
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new EmptyTimeException("Missing time");
+                throw new EmptyTimeException("\nMissing time");
             }
         }
     }

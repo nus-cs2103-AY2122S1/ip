@@ -78,9 +78,9 @@ public class Parser {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("User input an invalid action.");
+            throw new DukeException("\nUser input an invalid action.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Missing info after action");
+            throw new DukeException("\nMissing info after action");
         }
     }
 }
