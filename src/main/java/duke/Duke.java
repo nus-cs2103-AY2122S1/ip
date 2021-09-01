@@ -2,6 +2,11 @@ package duke;
 
 import duke.command.Command;
 import duke.dukeexception.DukeException;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 
 /**
  * Represents the Entry point for Chat bot Duke as a whole.
@@ -39,7 +44,7 @@ public class Duke {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.exec(this.tasks, this.ui, this.storage);
+                System.out.println(c.exec(this.tasks, this.ui, this.storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -47,7 +52,17 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-            new Duke("./data/file.txt").run();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.exec(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
+
+   /*
+   public static void main(String[] args) {
+            new Duke("./data/file.txt").run();
+    }*/
 }

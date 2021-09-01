@@ -29,15 +29,15 @@ public class Delete extends Command {
      * @param storage The storage.
      * @throws NoListException If there is no list to be loaded.
      */
-    public void exec(TaskList tasks, Ui ui, Storage storage) throws NoListException {
+    public String exec(TaskList tasks, Ui ui, Storage storage) throws NoListException {
         Task temp = tasks.get(index - 1);
         tasks.delete(index);
         try {
             storage.save(tasks);
-            System.out.println("Noted. I've removed this task:\n"
+            return "Noted. I've removed this task:\n"
                     + temp.toString() + "\n"
 
-                    + "Now you have " + tasks.size() + " tasks in the list.");
+                    + "Now you have " + tasks.size() + " tasks in the list.";
         } catch (NoListException e) {
             throw new NoListException(e);
         }

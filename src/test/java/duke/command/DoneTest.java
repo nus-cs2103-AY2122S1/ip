@@ -5,8 +5,8 @@ import duke.TaskList;
 import duke.Ui;
 import duke.dukeexception.NoListException;
 import duke.task.Todo;
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 public class DoneTest {

@@ -16,8 +16,8 @@ public class Exit extends Command {
      * @param ui The ui.
      * @param storage The storage.
      */
-    public void exec(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String exec(TaskList tasks, Ui ui, Storage storage) {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

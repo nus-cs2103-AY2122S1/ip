@@ -57,10 +57,12 @@ public class TaskList {
     /**
      * Displays all the tasks in a tasklist.
      */
-    public void display() {
+    public String showTask() {
+        String temp = "";
         for (int i = 0; i < this.list.size(); i++) {
-            System.out.println(String.format("%s. %s", i+1, this.list.get(i).toString()));
+            temp += String.format("%s. %s\n", i+1, this.list.get(i).toString());
         }
+        return temp;
     }
 
     /**

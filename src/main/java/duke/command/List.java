@@ -16,7 +16,7 @@ public class List extends Command {
      * @param ui The ui.
      * @param storage The storage.
      */
-    public void exec(TaskList tasks, Ui ui, Storage storage) {
-        tasks.display();
+    public String exec(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.showTask();
     }
 }
