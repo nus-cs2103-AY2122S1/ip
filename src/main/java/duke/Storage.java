@@ -1,11 +1,5 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.exception.EmptyValueException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,6 +8,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.exception.EmptyValueException;
+import duke.exception.InvalidCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -103,6 +105,8 @@ public class Storage {
             tasks.add(new Event(des, ld));
             break;
         }
+        default:
+            throw new InvalidCommandException();
         }
     }
 

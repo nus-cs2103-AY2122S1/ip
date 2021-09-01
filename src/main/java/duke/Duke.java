@@ -29,7 +29,7 @@ public class Duke {
         ui.welcome();
         boolean isExist = true;
 
-        while(isExist) {
+        while (isExist) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line

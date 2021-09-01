@@ -31,7 +31,7 @@ public class Event extends Task {
                 + super.toString()
                 + " / "
                 + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
-        );
+            );
     }
 
     /**
@@ -45,6 +45,6 @@ public class Event extends Task {
                 + super.toString()
                 + " / "
                 + time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-        );
+            );
     }
 }

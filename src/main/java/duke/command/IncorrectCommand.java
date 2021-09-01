@@ -1,8 +1,8 @@
 package duke.command;
-import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 
 /**
@@ -15,16 +15,6 @@ public class IncorrectCommand extends Command {
      */
     public IncorrectCommand() {
     }
-
-//    /**
-//     * When user input incorrect command, the programme will quit.
-//     *
-//     * @return False.
-//     */
-//    @Override
-//    public boolean isExist() {
-//        return false;
-//    }
 
     /**
      * Method to execute command.

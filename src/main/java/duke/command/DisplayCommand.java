@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.TaskList;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 
 /**
@@ -24,7 +24,7 @@ public class DisplayCommand extends Command {
      * @param storage Handles interaction with the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.display();
     }
 }

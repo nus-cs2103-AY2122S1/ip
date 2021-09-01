@@ -1,8 +1,10 @@
 package duke.command;
-import duke.TaskList;
-import duke.exception.DukeException;
+
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
+
 
 /**
  * The general command class.
