@@ -6,7 +6,6 @@ import java.util.Locale;
 import eightbit.task.Task;
 import eightbit.util.Storage;
 import eightbit.util.TaskList;
-import eightbit.util.Ui;
 
 /**
  * Represents a command for finding tasks based on some keywords.
@@ -28,11 +27,11 @@ public class FindCommand extends Command {
      * Retrieves the tasks containing the search keyword and prints them.
      *
      * @param taskList User's list of tasks.
-     * @param ui Ui responsible for printing messages.
-     * @param storage Storage responsible for reading/writing the file.
+     * @param storage  Storage responsible for reading/writing the file.
+     * @return The response after executing the command.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         // Get tasks containing the keyword
         ArrayList<Task> results = new ArrayList<>();
         for (int i = 0; i < taskList.size(); i++) {
@@ -54,6 +53,6 @@ public class FindCommand extends Command {
             }
         }
 
-        ui.printWithLines(message.toString());
+        return message.toString();
     }
 }

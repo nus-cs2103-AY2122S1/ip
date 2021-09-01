@@ -4,49 +4,38 @@ import eightbit.command.Command;
 import eightbit.util.Parser;
 import eightbit.util.Storage;
 import eightbit.util.TaskList;
-import eightbit.util.Ui;
 
 /**
  * Represents the chat bot.
  */
 public class EightBit {
 
-    private String filepath;
-    private Storage storage;
-    private TaskList taskList;
-    private Ui ui;
+    private final String filepath;
+    private final Storage storage;
+    private final TaskList taskList;
 
     /**
      * Constructs the chat bot.
-     *
-     * @param filepath Path of file to store the tasks in local machine.
      */
-    public EightBit(String filepath) {
-        this.filepath = filepath;
+    public EightBit() {
+        this.filepath = "data/eightBit.txt";
         this.storage = new Storage(filepath);
         this.taskList = new TaskList(storage.loadFileContents());
-        this.ui = new Ui();
     }
 
     /**
-     * Starts the chat bot.
-     * Displays a welcome message, takes in user inputs, and displays exit message at the end.
+     * Executes the user command and returns the response to be printed.
+     *
+     * @param input User command.
+     * @return Response to be printed after executing the command.
      */
-    public void run() {
-        ui.showWelcome();
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (EightBitException e) {
-                ui.printError(e);
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String response = c.execute(taskList, storage);
+            return response;
+        } catch (EightBitException e) {
+            return e.toString();
         }
-
-        ui.showBye();
     }
 }
