@@ -1,6 +1,12 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
 
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
@@ -11,11 +17,13 @@ public class Parser {
         case ("list"):
             return new ListCommand();
         case ("done"):
-            if (params.length == 1) {
+            try {
+                int doneIdx = Integer.parseInt(params[1]) - 1;
+                return new DoneCommand(doneIdx);
+            } catch (IndexOutOfBoundsException e) {
                 throw new DukeException("☹ OOPS!!! Please enter the task you'd like to" +
                         "mark as done in the following format: \n\t done [task number]");
             }
-            return new DoneCommand(Integer.parseInt(params[1]) - 1);
         case ("delete"):
             if (params.length == 1) {
                 throw new DukeException("☹ OOPS!!! Please enter the task you'd like to" +

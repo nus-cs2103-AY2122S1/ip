@@ -1,7 +1,13 @@
 package duke;
 
 public class DukeException extends RuntimeException {
+    private String msg;
     public DukeException(String message) {
-        super(message);
+        msg = message;
+    }
+
+    @Override
+    public String toString() {
+        return msg;
     }
 }

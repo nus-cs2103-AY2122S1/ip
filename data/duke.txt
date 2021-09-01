@@ -1,7 +1,0 @@
-E | 1 | eventname | 2021-12-12 12:21
-T | 1 | this
-T | 1 | that
-T | 1 | this
-T | 0 | this
-T | 0 | that
-E | 1 | event2 | 2021-12-12 12:12
