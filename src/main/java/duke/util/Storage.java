@@ -38,11 +38,10 @@ public class Storage {
     public static void createTaskListStorage() {
         //creates a file to store content
         File s = new File("./data");
-        boolean sResult;
-        boolean fResult;
+        boolean isDirectoryCreated;
         try {
-            sResult = s.mkdir();
-            if (sResult) {
+            isDirectoryCreated = s.mkdir();
+            if (isDirectoryCreated) {
                 File f = new File("./data/task-list.txt");
                 f.createNewFile();
             }
@@ -64,10 +63,10 @@ public class Storage {
                 if (str.isBlank()) {
                     break;
                 }
-                char type = str.charAt(3);
-                char status = str.charAt(6);
+                char type = str.charAt(3); //retrieves the logo to identify the type of Task
+                char status = str.charAt(6); //retrieves task status "X" (completed), " " (not done)
                 if (type == 'T') {
-                    String item = str.substring(9);
+                    String item = str.substring(9); //retrieves name of ToDo
                     this.tdl.addToDo(item);
                     if (status == 'X') {
                         this.tdl.getTask(counter).setCompleted();
@@ -75,10 +74,11 @@ public class Storage {
                     counter++;
                 } else if (type == 'E') {
                     try {
-                        String temp = str.substring(9);
-                        String item = temp.substring(0, temp.indexOf(" ")); //name
-                        String temp2 = temp.substring(temp.indexOf("("));
-                        String duration = temp2.substring(5, temp2.length() - 1);
+                        //ignores content from the start of the entry up to the start of the name
+                        String filtered = str.substring(9);
+                        String item = filtered.substring(0, filtered.indexOf(" ")); //name
+                        String temp = filtered.substring(filtered.indexOf("("));
+                        String duration = temp.substring(5, temp.length() - 1);
                         this.tdl.addEvent(item, duration);
                         if (status == 'X') {
                             this.tdl.getTask(counter).setCompleted();
@@ -89,10 +89,11 @@ public class Storage {
                     }
                 } else {
                     try {
-                        String temp = str.substring(9);
-                        String item = temp.substring(0, temp.indexOf(" ")); //name
-                        String temp2 = temp.substring(temp.indexOf("("));
-                        String deadline = temp2.substring(5, temp2.length() - 1);
+                        //ignores content from the start of the entry up to the start of the name
+                        String filtered = str.substring(9);
+                        String item = filtered.substring(0, filtered.indexOf(" ")); //name
+                        String temp = filtered.substring(filtered.indexOf("("));
+                        String deadline = temp.substring(5, temp.length() - 1);
                         LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ', 'T'),
                                 DateTimeFormatter.ISO_DATE_TIME);
                         this.tdl.addDeadline(item, dl);

@@ -154,17 +154,17 @@ public class ToDoList {
      * @return A String representation of the List of items that matched.
      */
     public String find(String target) {
-        ArrayList<Task> temp = new ArrayList<>();
+        ArrayList<Task> matchingResults = new ArrayList<>();
         for (Task t : this.record) {
             if (t.getName().contains(target)) {
-                temp.add(t);
+                matchingResults.add(t);
             }
         }
         Integer number = 1;
         String response = "";
-        if (temp.size() > 0) {
+        if (matchingResults.size() > 0) {
             response += "Here are the matching tasks in your list: \n";
-            for (Task t : temp) {
+            for (Task t : matchingResults) {
                 if (t.isCompleted()) {
                     response += number.toString() + "." + t.logo() + "[X] " + t.toString() + "\n";
                 } else {

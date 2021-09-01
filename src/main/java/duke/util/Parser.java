@@ -95,8 +95,10 @@ public class Parser {
     public Command parse(String command, ToDoList tdl, Duke chatBot, Storage storage) {
         if (command.equals(Commands.BYE.asLowerCase())) {
             return new ByeCommand(chatBot, tdl, storage);
+
         } else if (command.equals(Commands.LIST.asLowerCase())) {
             return new ListCommand(tdl);
+
         } else if (command.startsWith(Commands.DONE.asLowerCase())) {
             try {
                 formatChecker(command);
@@ -108,6 +110,7 @@ public class Parser {
             } catch (DukeException e) {
                 return new TipCommand(e.getMessage());
             }
+
         } else if (command.startsWith(Commands.TODO.asLowerCase())) {
             try {
                 formatChecker(command);
@@ -116,6 +119,7 @@ public class Parser {
             } catch (DukeException e) {
                 return new TipCommand(e.getMessage());
             }
+
         } else if (command.startsWith(Commands.EVENT.asLowerCase())) {
             try {
                 formatChecker(command);
@@ -129,6 +133,7 @@ public class Parser {
             } catch (DukeException e) {
                 return new TipCommand(e.getMessage());
             }
+
         } else if (command.startsWith(Commands.DEADLINE.asLowerCase())) {
             try {
                 formatChecker(command);
@@ -141,6 +146,7 @@ public class Parser {
                 LocalDateTime dl = LocalDateTime.parse(deadline.replace(' ', 'T'),
                         DateTimeFormatter.ISO_DATE_TIME);
                 return new DeadlineCommand(tdl, item, dl);
+
             } catch (StringIndexOutOfBoundsException e) {
                 return new TipCommand("Hold up... You got the format all wrong! It's supposed to "
                         + "be <deadline> <name> /by <dueDate>");
@@ -149,6 +155,7 @@ public class Parser {
             } catch (DukeException e) {
                 return new TipCommand(e.getMessage());
             }
+
         } else if (command.startsWith(Commands.DELETE.asLowerCase())) {
             try {
                 formatChecker(command);
@@ -162,6 +169,7 @@ public class Parser {
             } catch (DukeException e) {
                 return new TipCommand(e.getMessage());
             }
+
         } else if (command.startsWith(Commands.FIND.asLowerCase())) {
             try {
                 formatChecker(command);
@@ -180,18 +188,22 @@ public class Parser {
             if (!command.substring(4).startsWith(" ")) {
                 throw new DukeException("Hey hey hey, the format is done <index>");
             }
+
         } else if (command.startsWith("delete")) {
             if (!command.substring(6).startsWith(" ")) {
                 throw new DukeException("Hey hey hey, the format is delete <index>");
             }
+
         } else if (command.startsWith("find")) {
             if (!command.substring(4).startsWith(" ")) {
                 throw new DukeException("Hey hey hey, the format is find <target>");
             }
+
         } else if (command.startsWith("todo")) {
             if (command.substring(4).isBlank()) {
                 throw new DukeException("C'mon.. you're gonna do nothing?");
             }
+
         } else if (command.startsWith("event")) {
             if (!command.substring(command.indexOf("/")).startsWith("/at")) {
                 throw new DukeException("You got the format wrong.. Geez it's supposed to be <event> "
@@ -199,6 +211,7 @@ public class Parser {
             } else if (command.substring(5).isBlank()) {
                 throw new DukeException("Really? An event of nothing?");
             }
+
         } else {
             if (!command.substring(command.indexOf("/")).startsWith("/by")) {
                 throw new DukeException("You got the format wrong.. Geez it's supposed to be <deadline> "
