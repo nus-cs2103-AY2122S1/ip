@@ -128,8 +128,8 @@ public class Parser {
             throw new InvalidValueException("Enter a valid number!");
         } else {
             String str = ui.printRemove() + "\n";
-            taskList.removeTask(parseInt(arr[1]) - 1);
             str += ui.printCurrentTask(taskList, parseInt(arr[1]) - 1) + "\n";
+            taskList.removeTask(parseInt(arr[1]) - 1);
             return str;
         }
     }

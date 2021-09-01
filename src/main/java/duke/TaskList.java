@@ -104,6 +104,7 @@ public class TaskList {
      * @param index Index of the task to be removed.
      */
     public void removeTask(int index) {
+        System.out.println(index);
         ls.remove(index);
     }
 
