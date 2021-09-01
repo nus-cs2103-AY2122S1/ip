@@ -19,7 +19,8 @@ public class Ui {
 
     /**
      * Reads the user input.
-     * @return returns the user input 
+     *
+     * @return returns the user input
      */
     public String readCommand() {
         Scanner sc = new Scanner(System.in);
@@ -37,7 +38,7 @@ public class Ui {
     /**
      * Prints the Loading Error Message.
      */
-    public void showLoadingError(){
+    public void showLoadingError() {
         System.out.println("There was an error reading the saved file :(");
     }
 

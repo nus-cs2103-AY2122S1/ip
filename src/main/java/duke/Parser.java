@@ -1,9 +1,8 @@
 package duke;
 
 /**
- * 
  * Deals with making sense of the user's command.
- * It takes in user inputs and filters it to its respective command. 
+ * It takes in user inputs and filters it to its respective command.
  */
 public class Parser {
     public Parser() {
@@ -11,13 +10,11 @@ public class Parser {
     }
 
     /**
-     * 
-     * 
      * @param command Command is the user input.
-     * @param taskArr List of tasks in a TaskList. 
+     * @param taskArr List of tasks in a TaskList.
      * @throws DukeException If input is unexpected or invalid.
      */
-    public Command parse(String command, TaskList taskArr) throws DukeException{
+    public Command parse(String command, TaskList taskArr) throws DukeException {
         String[] commandArr = command.split(" ");
         if (command.equals("list")) {
             return new ListCommand();
@@ -34,7 +31,7 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 System.out.println("Please insert a word after \"done\"");
             }
-            
+
         } else {
             boolean wrongArrayLength = commandArr.length <= 1;
             String taskAdded = "Got it. I've added this task: ";
@@ -52,12 +49,13 @@ public class Parser {
                 if (wrongArrayLength) {
                     throw new DukeException("The description of a deadline cannot be empty!");
                 } else if (!command.contains("/by ")) {
-                    throw new DukeException("Remember to enter deadline in this format:\"[deadline] [task] /by [date]\"");
+                    throw new DukeException("Remember to type input in this format:\"[deadline] [task] /by [date]\"");
                 } else {
                     System.out.println(taskAdded);
                     int spaceIndex = command.indexOf(" ");
                     int slashIndex = command.indexOf("/by ");
-                    Task task = new Deadline(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
+                    Task task = new Deadline(command.substring(spaceIndex + 1, slashIndex - 1),
+                            command.substring(slashIndex + 4));
                     return new DeadlineCommand(task);
                 }
 
@@ -71,7 +69,8 @@ public class Parser {
                     System.out.println(taskAdded);
                     int spaceIndex = command.indexOf(" ");
                     int slashIndex = command.indexOf("/at ");
-                    Task task = new Event(command.substring(spaceIndex + 1, slashIndex - 1), command.substring(slashIndex + 4));
+                    Task task = new Event(command.substring(spaceIndex + 1, slashIndex - 1),
+                            command.substring(slashIndex + 4));
                     return new EventCommand(task);
                 }
 
@@ -82,7 +81,6 @@ public class Parser {
         }
         throw new DukeException("I'm sorry, but I don't know what that means!");
     }
-    
 
 
 }

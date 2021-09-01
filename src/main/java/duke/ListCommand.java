@@ -1,12 +1,11 @@
 package duke;
 
 /**
- * 
  * Command to list existing tasks
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     ListCommand() {
-        
+
     }
 
     @Override

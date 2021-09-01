@@ -1,10 +1,9 @@
 package duke;
 
 /**
- *
  * Command to add a Deadline Task to the existing list of tasks.
  */
-public class DeadlineCommand extends Command{
+public class DeadlineCommand extends Command {
 
     private Task task;
 

@@ -2,34 +2,38 @@ package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-import java.io.FileWriter;
-import java.io.IOException;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
- * 
  */
 public class Storage {
 
     private String filePath;
-    public ArrayList<Task> taskArr;
+    private ArrayList<Task> taskArr;
 
+    /**
+     * Constructor of a Storage object
+     *
+     * @param filePath
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.taskArr = new ArrayList<Task>();
     }
 
     /**
-     * 
      * Loads existing save file if it exists.
      * Otherwise, it will create a new file.
-     * @return ArrayList of Tasks containing existing tasks from previous saves. 
+     *
+     * @return ArrayList of Tasks containing existing tasks from previous saves.
      */
     public ArrayList<Task> loadFile() {
         File f = new File(filePath);
@@ -54,11 +58,11 @@ public class Storage {
     }
 
     /**
-     * 
      * Carries tasks from previous save file to current application run.
+     *
      * @param line Line of previous save file.
      * @throws ParseException If date format is incorrect.
-     * @throws DukeException If line from previous save file was invalid.
+     * @throws DukeException  If line from previous save file was invalid.
      */
     public void convertToTask(String line) throws ParseException, DukeException {
         Task task;
@@ -100,6 +104,7 @@ public class Storage {
 
     /**
      * Create a new file if there is no existing file.
+     *
      * @param f file variable.
      */
     public void createFile(File f) {
@@ -113,7 +118,8 @@ public class Storage {
 
     /**
      * Update save file so that it remains up to date upon closure.
-     * @param taskArr List of tasks in a TaskList. 
+     *
+     * @param taskArr List of tasks in a TaskList.
      * @throws IOException If IO operation fails.
      */
     public void writeToFile(TaskList taskArr) throws IOException {
@@ -122,5 +128,12 @@ public class Storage {
             fw.write(taskArr.get(i).toString() + System.lineSeparator());
         }
         fw.close();
+    }
+
+    /**
+     * For testing.
+     */
+    String returnFirstTask() {
+        return taskArr.get(0).toString();
     }
 }

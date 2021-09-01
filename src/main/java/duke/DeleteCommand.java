@@ -1,10 +1,9 @@
 package duke;
 
 /**
- * 
  * Command to delete a task from existing list of tasks.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     private int index;
 

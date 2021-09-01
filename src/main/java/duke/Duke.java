@@ -2,9 +2,10 @@ package duke;
 
 import java.io.IOException;
 
+
 /**
  * Represents a Duke object. It is the object used to kickstart the Duke application.
- * This application acts as a task tracker to help its users keep track of Deadlines, Events and To-dos. 
+ * This application acts as a task tracker to help its users keep track of Deadlines, Events and To-dos.
  */
 public class Duke {
 
@@ -13,6 +14,11 @@ public class Duke {
     private Ui ui;
     private Parser parser;
 
+    /**
+     * Constructor of a Duke object
+     *
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -46,7 +52,11 @@ public class Duke {
         ui.goodbye();
     }
 
-
+    /**
+     * Main method to run program
+     *
+     * @param args
+     */
     public static void main(String[] args) {
 
         Duke duke = new Duke("./data/duke.txt");

@@ -1,13 +1,12 @@
 package duke;
 
 /**
- * 
  * Command to set a task as completed.
  */
-public class DoneCommand extends Command{
-    
+public class DoneCommand extends Command {
+
     private int index;
-    
+
     DoneCommand(int index) {
         this.index = index;
     }

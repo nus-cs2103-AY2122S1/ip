@@ -6,8 +6,8 @@ import java.util.ArrayList;
  * Object containing the list of tasks currently on hand.
  */
 public class TaskList {
-    
-    public ArrayList<Task> taskList;
+
+    private ArrayList<Task> taskList;
 
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;

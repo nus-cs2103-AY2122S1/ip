@@ -1,10 +1,9 @@
 package duke;
 
 /**
- * 
  * Command to find a task from existing list of tasks with a given keyword.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private String keyword;
 

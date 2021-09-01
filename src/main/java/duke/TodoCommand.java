@@ -1,10 +1,9 @@
 package duke;
 
 /**
- *
  * Command to add a Todo Task to the existing list of tasks.
  */
-public class TodoCommand extends Command{
+public class TodoCommand extends Command {
 
     private Task task;
 

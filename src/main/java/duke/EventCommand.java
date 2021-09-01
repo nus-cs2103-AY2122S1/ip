@@ -1,10 +1,9 @@
 package duke;
 
 /**
- *
  * Command to add an Event Task to the existing list of tasks.
  */
-public class EventCommand extends Command{
+public class EventCommand extends Command {
 
     private Task task;
 
