@@ -19,7 +19,11 @@ public class ShowListCommand extends Command {
      * @param storage the storage object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showList(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        if (taskList.toString().equals("")) {
+            return "Your todo list is empty!";
+        } else {
+            return "Checking your todo list..." + taskList;
+        }
     }
 }

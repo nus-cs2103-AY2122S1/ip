@@ -19,8 +19,9 @@ public class SaveAndExitCommand extends Command {
      * @param storage the storage object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         ui.goodbye();
+        return "";
     }
 
     /**

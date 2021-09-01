@@ -24,9 +24,10 @@ public class CreateNewDeadlineCommand extends Command {
      * @param storage the storage object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         String[] messageAndEndTime = super.getExtraInput().split("/by ");
         taskList.add(new Deadline(messageAndEndTime[0], messageAndEndTime[1]));
+        return "";
     }
 
     /**

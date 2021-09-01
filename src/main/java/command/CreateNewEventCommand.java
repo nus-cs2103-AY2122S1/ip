@@ -24,9 +24,10 @@ public class CreateNewEventCommand extends Command {
      * @param storage the storage object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         String[] messageAndEventDate = super.getExtraInput().split("/at ");
         taskList.add(new Event(messageAndEventDate[0], messageAndEventDate[1]));
+        return "";
     }
 
     /**

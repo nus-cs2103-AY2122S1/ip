@@ -24,9 +24,10 @@ public class CreateNewToDoCommand extends Command {
      * @param storage the storage object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         taskList.add(new ToDo(super.getExtraInput()));
         ui.showAddedTask(taskList);
+        return "";
     }
 
     /**

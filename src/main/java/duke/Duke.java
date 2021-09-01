@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import command.Command;
 import exceptions.DukeException;
+import exceptions.NoSuchCommandException;
 
 /**
  * Duke is a bot capable of storing a todo list with an interactive interface.
@@ -47,30 +48,42 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs a Duke instance.
-     */
-    public void run() {
-        ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-        try {
-            storage.save(taskList);
-        } catch (IOException e) {
-            ui.showError("ERROR: TaskList could not be saved!");
-        }
-    }
+//    /**
+//     * Runs a Duke instance.
+//     */
+//    public void run() {
+//        ui.greet();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.readCommand();
+//                Command c = Parser.parse(fullCommand);
+//                c.execute(taskList, ui, storage);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.showError(e.getMessage());
+//            }
+//        }
+//        try {
+//            storage.save(taskList);
+//        } catch (IOException e) {
+//            ui.showError("ERROR: TaskList could not be saved!");
+//        }
+//    }
 
     public static void main(String[] args) {
-        new Duke("./storage/save.txt").run();
+        new Duke("./storage/save.txt");
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (NoSuchCommandException e) {
+            e.printStackTrace();
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
+        return "bruh";
     }
 }

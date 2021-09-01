@@ -24,8 +24,9 @@ public class TaskCompletedCommand extends Command {
      * @param storage the storage object
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.doTask(Integer.parseInt(super.getExtraInput()) - 1);
         ui.showList(taskList);
+        return "";
     }
 }
