@@ -14,6 +14,7 @@ public class Chatbot {
     private enum ChatCommands {
         CHAT_COMMAND_BYE("bye"),
         CHAT_COMMAND_LIST("list");
+        CHAT_COMMAND_FIND("find");
 
         private final String command;
 
@@ -120,9 +121,10 @@ public class Chatbot {
      */
     private ChatContinue interpret() throws DukeIOException, DukeDateParseException, DukeArgumentException {
         String input = scanner.nextLine();
-        ChatCommands command = ChatCommands.toEnum(input);
+        String[] parseInput = input.split(" ", 2);
+        ChatCommands command = ChatCommands.toEnum(parseInput[0]);
         if (command != null) {
-            return builtInCommands(command);
+            return builtInCommands(command, parseInput.length == 1 ? "" : parseInput[1]);
         }
         TaskCommands taskCommand = TaskCommands.toEnum(input);
         if (taskCommand != null) {
@@ -147,6 +149,11 @@ public class Chatbot {
             return this.farewell();
         case CHAT_COMMAND_LIST:
             return this.taskList.list(this.ui);
+        case CHAT_COMMAND_FIND:
+                TaskList findTaskList = this.taskList.findTasks(argument);
+                System.out.println(findTaskList.tasks.size());
+                System.out.println(findTaskList.list(this.ui));
+                return ChatContinue.CONTINUE;
         default:
             this.ui.showNotSupported();
             return ChatContinue.CHAT_END;
