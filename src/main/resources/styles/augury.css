@@ -1,0 +1,21 @@
+.button {
+    -fx-text-fill: blue;
+}
+
+.dialog {
+    -fx-background-color: #ABB2BF;
+    -fx-border-insets: 10px;
+    -fx-background-insets: 10px;
+    -fx-padding: 20px;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.dialog__text {
+    -fx-text-fill: #494b53;
+    -fx-font-size: 14px;
+}
+
+.dialog--augury {
+    -fx-background-color: #ebebeb;
+}

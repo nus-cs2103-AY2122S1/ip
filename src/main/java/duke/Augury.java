@@ -7,6 +7,10 @@ import duke.commands.Command;
 import duke.exceptions.AuguryException;
 import duke.exceptions.FileIoException;
 import duke.exceptions.InvalidActionException;
+<<<<<<< HEAD
+=======
+import duke.exceptions.InvalidTaskCreationException;
+>>>>>>> branch-Level-10
 import duke.exceptions.UnknownCommandException;
 import duke.io.Parser;
 import duke.storage.Storage;
@@ -25,7 +29,7 @@ import duke.ui.Ui;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    private final String VER     = "v0.9.9"; // Level-9 Find, Commands
+    private final String VER     = "v1.0.0"; // Level-10 GUI
     private final String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -36,10 +40,10 @@ public class Augury {
             "\t|      *             *          |\n" +
             "\t|             *         "+VER+"  |\n" +
             "\t+-------------------------------+";
-    private TaskList taskList = new TaskList();
-    private Storage storage;
-    private Ui ui;
-    private Parser parser;
+    private final TaskList taskList = new TaskList();
+    private final Storage storage;
+    private final Ui ui;
+    private final Parser parser;
 
     /**
      * Initialises a new {@code Augury} object which uses the
@@ -102,7 +106,19 @@ public class Augury {
                 ui.speak(e.getMessage() + "\n\t Please try again.");
             }
         }
-
     }
 
+    public String getResponse(String input) {
+        try {
+            Command command = parser.parse(input);
+            String result = command.execute(taskList, storage);
+            if (result.equals("ExitCommand")) {
+                return "The readiness is all.";
+            } else {
+                return result;
+            }
+        } catch (AuguryException e) {
+            return e.getMessage() + "\n\t Please try again.";
+        }
+    }
 }
