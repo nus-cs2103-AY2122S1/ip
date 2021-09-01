@@ -27,7 +27,7 @@ public class Duke {
      */
     public void start() {
         try {
-            taskList = storage.load();
+            taskList = storage.loadTaskList();
             ui.greetWithFamiliarity(taskList);
         } catch (DukeException e) {
             ui.showDukeException(e);

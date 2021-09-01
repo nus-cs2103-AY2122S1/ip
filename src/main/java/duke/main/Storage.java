@@ -33,7 +33,7 @@ public class Storage {
      *
      * @return Loaded TaskList.
      */
-    public TaskList load() {
+    public TaskList loadTaskList() {
         try {
             List<Task> taskList = Files.lines(filePath).map((line) -> {
                 String[] fragments = line.split(" \\| ");

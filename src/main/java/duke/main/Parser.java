@@ -48,7 +48,7 @@ public class Parser {
                 response = ui.exitWithGoodbye();
                 break;
             case "find":
-                List<Task> matches = taskList.find(description);
+                List<Task> matches = taskList.findTasks(description);
                 response = ui.getMatchingTasksSummary(matches);
                 break;
             case "clear":

@@ -80,7 +80,7 @@ public class TaskList {
      * @param query for matching Tasks.
      * @return List of matching Tasks.
      */
-    public List<Task> find(String query) {
+    public List<Task> findTasks(String query) {
         if (query.isEmpty()) {
             throw new DukeException("\tYou haven't specified any keywords\n");
         }

@@ -32,7 +32,7 @@ public class StorageTest {
     @Test
     public void loadTasks_fileExists_loadsPrevious() {
         setupStorage();
-        TaskList retrievedTasks = storage.load();
+        TaskList retrievedTasks = storage.loadTaskList();
         TaskList toCompareList = new TaskList();
         toCompareList.addTask(new ToDo("abcd"));
         assertEquals(toCompareList, retrievedTasks, "Unable to Load Tasks from Memory");
