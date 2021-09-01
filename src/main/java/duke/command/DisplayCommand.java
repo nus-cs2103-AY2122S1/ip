@@ -24,7 +24,7 @@ public class DisplayCommand extends Command {
      * @param storage Handles interaction with the file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.display();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return tasks.display();
     }
 }

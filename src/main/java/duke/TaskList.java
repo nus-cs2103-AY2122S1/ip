@@ -43,9 +43,9 @@ public class TaskList {
      *
      * @param t Task to be added.
      */
-    public void add(Task t) {
+    public String add(Task t) {
         tasks.add(t);
-        System.out.println("Ok~ I've added the task:\n" + t.toString());
+        return ("Ok~ I've added the task:\n" + t.toString());
     }
 
     /**
@@ -53,20 +53,22 @@ public class TaskList {
      *
      * @param index Index of the task to be deleted
      */
-    public void delete(int index) throws IndexOutOfBoundsException {
+    public String delete(int index) throws IndexOutOfBoundsException {
         Task deleted = tasks.get(index);
         tasks.remove(index);
-        System.out.println("Ok~ I've deleted the task:\n" + deleted.toString());
+        return ("Ok~ I've deleted the task:\n" + deleted.toString());
     }
 
     /**
      * Display all the tasks in the list.
      */
-    public void display() {
-        System.out.println("Here are your tasks ~ OwO");
+    public String display() {
+        String result = "";
+        result += "Here are your tasks ~ OwO\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + ". " + tasks.get(i).toString());
+            result += ((i + 1) + ". " + tasks.get(i).toString() + "\n");
         }
+        return result;
     }
 
     /**

@@ -1,13 +1,12 @@
 package duke;
 
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user.
  */
 public class Ui {
-    private Scanner sc = new Scanner(System.in);
-    private String horizontal = "_______________________";
+    //private Scanner sc = new Scanner(System.in);
+    private String horizontal = "_______________________\n";
     private String logo =
             "                     _               _         \n"
                     + "                    | |             | |        \n"
@@ -41,18 +40,20 @@ public class Ui {
     /**
      * Print exit message.
      */
-    public void exit() {
-        System.out.println("Byebye ~ nya");
+    public String exit() {
+        return ("Byebye ~ nya");
     }
 
-    /**
-     * Read the next line of user inpput.
-     *
-     * @return User's next line.
-     */
+    /*
     public String readCommand() {
         String command = sc.nextLine();
         return command;
+    }
+
+     */
+
+    public String wrap(String input) {
+        return horizontal + input + horizontal;
     }
 
     /**
@@ -60,8 +61,8 @@ public class Ui {
      *
      * @param error Error name.
      */
-    public static void showError(String error) {
-        System.out.println("OvO I found the following errors! " + error);
+    public static String showError(String error) {
+        return ("OvO I found the following errors! " + error);
     }
 
 

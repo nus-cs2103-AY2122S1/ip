@@ -47,10 +47,11 @@ public class AddCommand extends Command {
      * @throws DukeException All exceptions related to Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String time = "";
         String[] info = cmd.split("/");
         String description = info[0].strip();
+        String result = "";
         if (description.equals("")) {
             throw new EmptyValueException();
         }
@@ -64,16 +65,18 @@ public class AddCommand extends Command {
 
         try {
             if ("todo".equals(category)) {
-                tasks.add(new Todo(description));
+                result = tasks.add(new Todo(description));
             } else if ("deadline".equals(category)) {
                 LocalDate ld = LocalDate.parse(time);
-                tasks.add(new Deadline(description, ld));
+                result = tasks.add(new Deadline(description, ld));
             } else if ("event".equals(category)) {
                 LocalDate ld = LocalDate.parse(time);
-                tasks.add(new Event(description, ld));
+                result = tasks.add(new Event(description, ld));
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("Wrong date time format! Please use yyyy-MM-dd.");
         }
+
+        return result;
     }
 }

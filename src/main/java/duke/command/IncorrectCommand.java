@@ -25,7 +25,7 @@ public class IncorrectCommand extends Command {
      * @throws DukeException All exceptions related to Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         throw new InvalidCommandException();
     }
 

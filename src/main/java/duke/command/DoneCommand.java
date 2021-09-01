@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
      * @throws DukeException All exceptions related to Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int id;
         try {
             id = Integer.parseInt(cmd.strip()) - 1;
@@ -42,7 +42,7 @@ public class DoneCommand extends Command {
 
         try {
             Task task = tasks.get(id);
-            task.markAsDone();
+            return task.markAsDone();
         } catch (IndexOutOfBoundsException e) {
             throw new OutOfBoundsException();
         }

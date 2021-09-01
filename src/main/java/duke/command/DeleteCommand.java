@@ -30,10 +30,12 @@ public class DeleteCommand extends Command {
      * @param ui The user interface.
      * @param storage Handles interaction with the file.
      * @throws DukeException All exceptions related to Duke.
+     * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         int id;
+        String result = "";
         try {
             id = Integer.parseInt(cmd.strip());
         } catch (NumberFormatException e) {
@@ -41,9 +43,10 @@ public class DeleteCommand extends Command {
         }
 
         try {
-            taskList.delete(id);
+            result = taskList.delete(id);
         } catch (IndexOutOfBoundsException e) {
             throw new OutOfBoundsException();
         }
+        return result;
     }
 }

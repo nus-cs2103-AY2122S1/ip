@@ -35,10 +35,9 @@ public class Task {
     /**
      * Mark a task as done.
      */
-    public void markAsDone() {
+    public String markAsDone() {
         this.isDone = true;
-        System.out.println("Yayyyy done yayyy~~");
-        System.out.println(toString());
+        return ("Yayyyy done yayyy~~\n" + toString());
     }
 
     /**

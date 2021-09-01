@@ -34,6 +34,7 @@ public class Command {
      * @param storage Handles interaction with the file.
      * @throws DukeException All exceptions related to Duke.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return "null";
     }
 }
