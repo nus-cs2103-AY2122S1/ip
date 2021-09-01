@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.PrintType;
-import duke.Tasks.TaskManager;
+import duke.tasks.TaskManager;
 
 public class EmptyCommand extends Command{
 

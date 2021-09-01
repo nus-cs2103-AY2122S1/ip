@@ -1,7 +1,7 @@
 import duke.InputType;
 import duke.Parser;
 import duke.Storage;
-import duke.Tasks.*;
+import duke.tasks.*;
 import duke.Ui;
 import duke.command.Command;
 import duke.command.CommandResult;

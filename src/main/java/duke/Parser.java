@@ -1,7 +1,7 @@
 package duke;
 
-import duke.Tasks.TaskManager;
-import duke.Tasks.TaskType;
+import duke.tasks.TaskManager;
+import duke.tasks.TaskType;
 import duke.command.*;
 
 public class Parser {

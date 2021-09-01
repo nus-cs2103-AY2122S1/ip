@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Tasks.TaskManager;
+import duke.tasks.TaskManager;
 
 public class CommandResult {
     private String feedbackMessage;

@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke.tasks;
 
 import duke.PrintType;
 import duke.RegexType;

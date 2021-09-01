@@ -1,6 +1,6 @@
 package duke;
 
-import duke.Tasks.*;
+import duke.tasks.*;
 import duke.exceptions.FileFormatException;
 
 import java.io.File;
@@ -33,7 +33,7 @@ public class Storage {
             // Check if entry is in the correct format
             if(!entry.matches(RegexType.TODO_REGEX.getRegexType())
                     && !entry.matches(RegexType.EVENT_DEADLINE_REGEX.getRegexType())) {
-                throw new FileFormatException();
+                throw new FileFormatException("File formatting error");
             }
 
             String[] entrySplit= entry.split(RegexType.SPLIT_REGEX.getRegexType());

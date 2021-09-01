@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.Tasks.TaskManager;
-import duke.Tasks.TaskType;
+import duke.tasks.TaskManager;
+import duke.tasks.TaskType;
 
 public class AddCommand extends Command{
     public TaskType type;
