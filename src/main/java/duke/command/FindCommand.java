@@ -13,7 +13,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(String description) throws DukeException {
         if (description.equals("")) {
-            throw new DukeException("☹ OOPS!!! The task number of delete cannot be empty.");
+            throw new DukeException("OOPS!!! The task number of delete cannot be empty.");
         }
         this.description = description;
     }
@@ -24,11 +24,14 @@ public class FindCommand extends Command {
      * @param tasks    the TaskList
      * @param ui       the Ui
      * @param storage  the data source
+     *
+     * @return         string stating the command result
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList foundTasks = new TaskList(tasks.match(description));
-        ui.printList(foundTasks);
+//        ui.printList(foundTasks);
+        return ui.getList(foundTasks);
     }
 
     /**

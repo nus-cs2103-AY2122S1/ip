@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String taskNumber) throws DukeException {
         if (taskNumber.equals("")) {
-            throw new DukeException("☹ OOPS!!! The task number of delete cannot be empty.");
+            throw new DukeException("OOPS!!! The task number of delete cannot be empty.");
         }
         this.taskNumber = Integer.parseInt(taskNumber);
     }
@@ -26,12 +26,15 @@ public class DeleteCommand extends Command {
      * @param tasks    the TaskList
      * @param ui       the Ui
      * @param storage  the data source
+     *
+     * @return         string stating the command result
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.remove(taskNumber - 1);
         storage.update(taskNumber, task, "d");
-        ui.formatPrint("Noted. I've removed this task:", "  " + task.toString(), tasks.toString());
+//        ui.formatPrint("Noted. I've removed this task:", "  " + task.toString(), tasks.toString());
+        return "Noted. I've removed this task:" + "  " + task.toString() + tasks.toString();
     }
 
     /**

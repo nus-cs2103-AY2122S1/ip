@@ -11,8 +11,10 @@ public abstract class Command {
      * @param tasks    the TaskList
      * @param ui       the Ui
      * @param storage  the data source
+     *
+     * @return         string stating the command result
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Check if the command is an ExitCommand

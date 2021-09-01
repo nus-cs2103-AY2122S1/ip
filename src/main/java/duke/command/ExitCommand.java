@@ -12,10 +12,13 @@ public class ExitCommand extends Command {
      * @param tasks    the TaskList
      * @param ui       the Ui
      * @param storage  the data source
+     *
+     * @return         string stating the command result
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showFarewell();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+//        ui.showFarewell();
+        return "See ya round, buckaroo.";
     }
 
     /**

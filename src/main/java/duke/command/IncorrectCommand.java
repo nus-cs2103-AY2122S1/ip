@@ -19,10 +19,13 @@ public class IncorrectCommand extends Command {
      * @param tasks    the TaskList
      * @param ui       the Ui
      * @param storage  the data source
+     *
+     * @return         string stating the command result
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showError(errorMessage);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+//        ui.showError(errorMessage);
+        return errorMessage;
     }
 
     /**

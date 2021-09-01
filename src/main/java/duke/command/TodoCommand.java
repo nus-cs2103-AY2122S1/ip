@@ -15,7 +15,7 @@ public class TodoCommand extends Command {
      */
     public TodoCommand(String parameter1) throws DukeException {
         if (parameter1.equals("")) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         }
         todo = new Todo(parameter1);
     }
@@ -28,10 +28,10 @@ public class TodoCommand extends Command {
      * @param storage  the data source
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.save(this.todo);
         tasks.add(this.todo);
-        ui.formatPrint("Got it. I've added this task:", "  " + this.todo.toString(), tasks.toString());
+        return "Got it. I've added this task:\n" + "  " + this.todo.toString() + "\n" + tasks.toString();
     }
 
     /**

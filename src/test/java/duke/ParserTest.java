@@ -1,5 +1,9 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -8,10 +12,12 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ParserTest {
+    /**
+     * Test the parse method
+     * @throws DukeException
+     */
     @Test
     public void testParse() throws DukeException {
         Command deadlineActual = Parser.parse("deadline gym /by 25/8/2021 0800");
