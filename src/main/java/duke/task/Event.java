@@ -3,6 +3,8 @@ package duke.task;
 import duke.util.DateTime;
 import duke.util.DukeException;
 
+import java.time.format.DateTimeParseException;
+
 /**
  * Event is created by 'event eat breakfast /at 0800'.
  * Events are a type of Task.
@@ -15,9 +17,9 @@ public class Event extends Task{
 
     // Messages
     private static final String INVALID_EVENT_MESSAGE = "Invalid use of event command. Use 'event <text> /at <datetime>'";
+    private static final String INVALID_EVENT_FORMAT_MESSAGE = "Invalid DateTime format for event. DateTime must be in the format of yyyy-MM-dd HHmm (2019-02-01 1800)";
     private static final String MISSING_EVENT_MESSAGE = "Some arguments are missing. Use 'event <text> /at <datetime>'";
     private static final String INVALID_SAVE_MESSAGE = "Event save is given in the wrong format";
-
 
     /**
      * Constructor for the event object.
@@ -28,7 +30,11 @@ public class Event extends Task{
      */
     private Event(String text, String eventDatetime, boolean isDone) throws DukeException {
         super(text, isDone);
-        this.eventDatetime = new DateTime(eventDatetime);
+        try {
+            this.eventDatetime = new DateTime(eventDatetime);
+        } catch (DateTimeParseException err) {
+            throw new DukeException(INVALID_EVENT_FORMAT_MESSAGE);
+        }
     }
 
     /**

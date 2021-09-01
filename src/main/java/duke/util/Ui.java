@@ -23,7 +23,7 @@ public class Ui {
     public static final String MISSING_DONE_NUMBER_MESSAGE = "Please input a number after the done command";
 
     /** Properties of Message Box */
-    private static final int BOX_LENGTH = 80;
+    private static final int BOX_LENGTH = 120;
     private static final int INDENT_LENGTH = 4;
     private static final String INDENT = " ".repeat(INDENT_LENGTH);
 

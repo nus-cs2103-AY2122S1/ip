@@ -4,6 +4,7 @@ import duke.util.DateTime;
 import duke.util.DukeException;
 
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Deadline is created by 'deadline eat breakfast /by 0800'.
@@ -17,6 +18,7 @@ public class Deadline extends Task {
 
     // Messages
     private static final String INVALID_DEADLINE_MESSAGE = "Invalid use of deadline command. Use 'deadline <text> /by <datetime>'";
+    private static final String INVALID_DEADLINE_FORMAT_MESSAGE = "Invalid DateTime format for deadline. DateTime must be in the format of yyyy-MM-dd HHmm (2019-02-01 1800)";
     private static final String MISSING_DEADLINE_MESSAGE = "Some arguments are missing. Use 'deadline <text> /by <datetime>'";
     private static final String INVALID_SAVE_MESSAGE = "Deadline save is given in the wrong format";
 
@@ -29,7 +31,11 @@ public class Deadline extends Task {
      */
     private Deadline(String text, String dueDate, boolean isDone) throws DukeException {
         super(text, isDone);
-        this.dueDate = new DateTime(dueDate);
+        try {
+            this.dueDate = new DateTime(dueDate);
+        } catch (DateTimeParseException err) {
+            throw new DukeException(INVALID_DEADLINE_FORMAT_MESSAGE);
+        }
     }
 
     /**
