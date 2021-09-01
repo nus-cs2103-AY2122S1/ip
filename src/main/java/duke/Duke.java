@@ -53,7 +53,6 @@ public class Duke {
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("your index cannot be found in the task list!");
         }
-
     }
 
 
@@ -147,7 +146,7 @@ public class Duke {
      * Displays a list of items on the command line that contain the keyword entered by the user.
      *
      * @param input Command line input from the user.
-     * @param String list of items on the task list.
+     * @return String list of items on the task list.
      * @throws DukeException Throws an exception if no keyword was entered or if no tasks match the keyword given.
      */
     private String findItems(String input) throws DukeException {
@@ -199,6 +198,14 @@ public class Duke {
                     return deleteItem(input);
                 case "find":
                     return findItems(input);
+                case "bye":
+                    try {
+                        storage.save(listOfItems);
+                        return "your data has been successfully saved!";
+                    } catch (IOException e) {
+                        throw new DukeException("your data could not be saved.");
+                    }
+
                 default:
                     markAsInvalid(input);
                     break;
