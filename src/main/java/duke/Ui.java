@@ -21,35 +21,48 @@ public class Ui {
 
     /**
      * Prints the welcome message.
+     *
+     * @return Output String.
      */
-    public void printWelcome() {
-        System.out.println("Hello! I'm \nWhat can I do for you?");
+    public String printWelcome() {
+        String response = "Hello! I'm \nWhat can I do for you?";
+        System.out.println(response);
+        return response;
     }
 
     /**
      * Prints the goodbye message.
+     *
+     * @return Output String.
      */
-    public void printGoodbye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String printGoodbye() {
+        String response = "Bye. Hope to see you again soon!";
+        System.out.println(response);
+        return response;
     }
 
 
     /**
      * Prints the message for successful load.
+     *
+     * @return Output String.
      */
-    public void printLoadSuccess() {
-        System.out.println("Save file successfully loaded");
+    public String printLoadSuccess() {
+        String response = "Save file successfully loaded";
+        System.out.println(response);
+        return response;
     }
 
     /**
      * Prints the list of task.
      *
      * @param tasks TaskList to be printed.
+     * @return Output String.
      */
-    public void printList(TaskList tasks) {
-        System.out.println("---------");
-        System.out.println(tasks.toString());
-        System.out.println("---------");
+    public String printList(TaskList tasks) {
+        String response = "---------\n" + tasks.toString() + "\n---------";
+        System.out.println(response);
+        return response;
     }
 
 
@@ -57,47 +70,54 @@ public class Ui {
      * Prints the error of a given DukeException.
      *
      * @param err Exception to be printed.
+     * @return Output String.
      */
-    public void printDukeException(DukeException err) {
-        System.out.println("---------");
-        System.out.println("Error: " + err.getMessage());
-        System.out.println("---------");
+    public String printDukeException(DukeException err) {
+        String response = "Error: " + err.getMessage();
+        System.out.println(response);
+        return response;
     }
 
 
     /**
      * Print message when adding a new task.
      * @param tasks TaskList of the program.
+     * @return Output String.
      * @throws DukeException When TaskList cannot retreive the last element in the list.
      */
-    public void printNewTask(TaskList tasks) throws DukeException {
-        System.out.println("---------");
-        System.out.println("Got it. I've added this task:");
-        System.out.println(tasks.get(tasks.count() - 1).toString());
-        System.out.println("Now you have " + tasks.count() + " task in the list");
-        System.out.println("---------");
+    public String printNewTask(TaskList tasks) throws DukeException {
+        String response = "---------\n";
+        response += "Got it. I've added this task:\n";
+        response += tasks.get(tasks.count() - 1).toString() + "\n";
+        response += "Now you have " + tasks.count() + " task in the list\n";
+        response += "---------";
+
+        System.out.println(response);
+        return response;
     }
 
     /**
      * Prints message when a task is marked as completed.
      * @param task Task that was marked complete.
+     * @return Output String.
      */
-    public void printDoneTask(Task task) {
-        System.out.println("---------");
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(task);
-        System.out.println("---------");
+    public String printDoneTask(Task task) {
+        String response = "---------\nNice! I've marked this task as done:\n" + task + "\n---------";
+        System.out.println(response);
+        return response;
     }
 
     /**
      * Prints message when a task is deleted.
      * @param size Current size of the TaskList.
+     * @return Output String.
      */
-    public void printDeleteTask(int size) {
-        System.out.println("---------");
-        System.out.println("Noted. I've removed this task");
-        System.out.println("Now you have " + size + " task in the list");
-        System.out.println("---------");
+    public String printDeleteTask(int size) {
+        String response = "---------\nNoted. I've removed this task\n" +
+                "Now you have " + size + " task in the list " +
+                 "\n---------";
+        System.out.println(response);
+        return response;
     }
 
     /**
@@ -105,9 +125,10 @@ public class Ui {
      *
      * @param indexes Indexes of the results.
      * @param tasks List of tasks.
+     * @return Output String.
      * @throws DukeException Any index does not exist in the TaskList.
      */
-    public void printSearchResult(ArrayList<Integer> indexes, TaskList tasks) throws DukeException{
+    public String printSearchResult(ArrayList<Integer> indexes, TaskList tasks) throws DukeException{
         System.out.println("---------");
         int i = 1;
         for (int index : indexes) {
@@ -115,6 +136,7 @@ public class Ui {
             i++;
         }
         System.out.println("---------");
+        return "";
     }
 
     /**

@@ -46,59 +46,80 @@ public class Duke {
         String nextLine;
         Command nextCommand = Command.INVALID;
         do {
-            try {
-                nextLine = ui.nextLine();
-                nextCommand = parser.parseCommand(nextLine);
-                String[] arguments = parser.parseArguments(nextCommand, nextLine);
-                execute(nextCommand, arguments);
-            } catch (DukeException e) {
-                ui.printDukeException(e);
-            }
+            nextLine = ui.nextLine();
+            this.handleCommand(nextLine);
         } while (!parser.isBye(nextCommand));
 
     }
 
     /**
+     * Parses and execute a command.
+     *
+     * @param command Command to be executed.
+     * @throws DukeException When the command is wrongly formatted.
+     * @return Response from the program.
+     */
+    public String handleCommand (String command) {
+        try {
+            Command nextCommand = parser.parseCommand(command);
+            String[] arguments = parser.parseArguments(nextCommand, command);
+            String response = execute(nextCommand, arguments);
+            return response;
+        } catch (DukeException err) {
+            return ui.printDukeException(err);
+        }
+
+
+
+    }
+    /**
      * Execute the given Command with the arguments.
+     *
      *
      * @param c Command to be executed
      * @param arguments Arguments of the Command
      * @throws DukeException
      */
-    private void execute(Command c, String[] arguments) throws DukeException {
-        switch (c) {
-        case TODO:
-            tasks.addTask(new ToDo(arguments[0]));
-            ui.printNewTask(tasks);
-            break;
-        case DEADLINE:
-            tasks.addTask(new Deadline(arguments[0], parser.parseDate(arguments[1])));
-            ui.printNewTask(tasks);
-            break;
-        case EVENT:
-            tasks.addTask(new Event(arguments[0], arguments[1]));
-            ui.printNewTask(tasks);
-            break;
-        case DONE:
-            int index = parser.parseInt(arguments[0]) - 1;
-            tasks.completeTask(index);
-            ui.printDoneTask(tasks.get(index));
-            break;
-        case DELETE:
-            tasks.deleteTask(parser.parseInt(arguments[0]) - 1);
-            ui.printDeleteTask(tasks.count());
-            break;
-        case LIST:
-            ui.printList(tasks);
-            break;
-        case FIND:
-            ArrayList<Integer> indexes = tasks.find(arguments[0]);
-            ui.printSearchResult(indexes, tasks);
-            break;
-        case BYE:
-            ui.printGoodbye();
-            ui.closeScanner();
-            break;
+    private String execute(Command c, String[] arguments) {
+        try {
+            String response = "";
+            switch (c) {
+            case TODO:
+                tasks.addTask(new ToDo(arguments[0]));
+                response = ui.printNewTask(tasks);
+                break;
+            case DEADLINE:
+                tasks.addTask(new Deadline(arguments[0], parser.parseDate(arguments[1])));
+                response =  ui.printNewTask(tasks);
+                break;
+            case EVENT:
+                tasks.addTask(new Event(arguments[0], arguments[1]));
+                response = ui.printNewTask(tasks);
+                break;
+            case DONE:
+                int index = parser.parseInt(arguments[0]) - 1;
+                tasks.completeTask(index);
+                response =  ui.printDoneTask(tasks.get(index));
+                break;
+            case DELETE:
+                tasks.deleteTask(parser.parseInt(arguments[0]) - 1);
+                response =  ui.printDeleteTask(tasks.count());
+                break;
+            case LIST:
+                response =  ui.printList(tasks);
+                break;
+            case FIND:
+                ArrayList<Integer> indexes = tasks.find(arguments[0]);
+                response =  ui.printSearchResult(indexes, tasks);
+                break;
+            case BYE:
+                response =  ui.printGoodbye();
+                ui.closeScanner();
+                break;
+            }
+            return response;
+        } catch (DukeException err) {
+            return ui.printDukeException(err);
         }
     }
 }
