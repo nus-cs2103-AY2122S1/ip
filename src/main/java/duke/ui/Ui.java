@@ -35,7 +35,7 @@ public class Ui {
      * Greets the user.
      */
     public static String greet() {
-        return "Hello! I'm Duke" + '\n' + "What can I do for you?";
+        return "Hello! I'm Faker!" + '\n' + "What can I do for you?";
     }
 
     /**
