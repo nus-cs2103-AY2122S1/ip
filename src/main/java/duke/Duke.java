@@ -5,22 +5,21 @@ import main.java.duke.commands.Command;
 import java.io.IOException;
 
 public class Duke {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
-    protected GUi gui;
+    protected Storage storage;
+    protected TaskList tasks;
+    protected MainWindow gui;
 
     /**
      * Constructs a new Duke object with the given file path.
      * @param filePath file path for creating the text file of interactions
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        gui = new MainWindow();
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError();
+            gui.showLoadingError();
             tasks = new TaskList();
         } catch (IOException e) {
             e.printStackTrace();
@@ -31,21 +30,18 @@ public class Duke {
      * Starts the duke programme flow.
      */
     public void run() {
-        ui.showWelcome();
+        gui.showWelcome();
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                String fullCommand = gui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, gui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                gui.showError(e.getMessage());
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                ui.showLine();
             }
         }
     }

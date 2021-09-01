@@ -1,7 +1,7 @@
 package main.java.duke.commands;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import main.java.duke.*;
+
+import java.io.IOException;
 
 public class ExitCommand extends Command {
 
@@ -15,14 +15,13 @@ public class ExitCommand extends Command {
     /**
      * Executes the exit command.
      * @param tasks given list of tasks
-     * @param ui given ui object
+     * @param gui given ui object
      * @param storage given storage object
      * @throws IOException
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("Bye! Neko wishes to see you again soon!\n");
-        ui.getScanner().close();
+    public String execute(TaskList tasks, MainWindow gui, Storage storage) throws IOException, DukeException {
+        return ("Bye! Neko wishes to see you again soon!\n");
     };
 
     public boolean isExit() {

@@ -22,7 +22,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return (this.prefix + " " + super.showStatus() + this.name);
+        return (this.prefix + " " + super.showStatus() + this.name + "\n");
     }
 
     /**

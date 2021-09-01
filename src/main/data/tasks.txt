@@ -1,5 +1,2 @@
-[T] [ ] haha
-[T] [ ] download book
-[T] [ ] read book
-[E] [ ] borrow book :2020-08-13T09:00
-[D] [ ] buy book :2020-09-17
+[T] [X] haha
+[D] [ ] do homework :2021-09-13

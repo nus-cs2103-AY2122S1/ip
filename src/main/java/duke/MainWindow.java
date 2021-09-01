@@ -7,6 +7,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import main.java.duke.commands.Command;
+
+import java.io.IOException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -39,13 +43,60 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws IOException, DukeException {
         String input = userInput.getText();
-        String response = duke.gui.getResponse(input);
+        String response = getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    protected String getResponse(String input) throws DukeException, IOException {
+        String response = "";
+            try {
+                String fullCommand = readCommand();
+                Command c = Parser.parse(fullCommand);
+                response = c.execute(duke.tasks, duke.gui, duke.storage);
+            } catch (DukeException e) {
+                response = showError(e.getMessage());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        return response;
+    }
+
+    /**
+     * Shows welcome message and creates scanner for user input.
+     * @return the welcome message
+     */
+    public static String showWelcome() {
+        return "Hello from Neko!\nWhat can I do for you?\n" ;
+    }
+
+    /**
+     * Displays the error message.
+     * @param error the error message
+     * @return the error message
+     */
+    public String showError(String error) {
+        return error;
+    }
+
+    /**
+     * Displays loading error message.
+     */
+    public String showLoadingError() {
+        return "Oops! Error in loading the document...";
+    }
+
+    /**
+     * Reads user input from scanner.
+     * @return the user input as string
+     */
+    public String readCommand() {
+        return userInput.getText();
     }
 }

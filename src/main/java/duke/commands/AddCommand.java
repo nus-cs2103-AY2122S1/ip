@@ -1,10 +1,7 @@
 package main.java.duke.commands;
 import java.io.IOException;
 
-import main.java.duke.DukeException;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import main.java.duke.*;
 import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Event;
 import main.java.duke.tasks.Task;
@@ -24,24 +21,24 @@ public class AddCommand extends Command {
     /**
      * Executes the add task command.
      * @param tasks given list of tasks
-     * @param ui given ui object
+     * @param gui given gui object
      * @param storage given storage object
      * @throws IOException
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList tasks, MainWindow gui, Storage storage) throws IOException, DukeException {
         if (this.task instanceof Todo) {
-            addTask(this.task, tasks);
             storage.saveTaskToFile(task.toString() + "\n");
+            return addTask(this.task, tasks);
         } else if (this.task instanceof Deadline) {
             Deadline deadline = (Deadline) this.task;
-            addTask(deadline, tasks);
             storage.saveTaskToFile(task.toString() + "\n");
+            return addTask(deadline, tasks);
         } else {
             Event event = (Event) this.task;
-            addTask(event, tasks);
             //System.out.println(event.timeFormatted);
             storage.saveTaskToFile(task.toString() + "\n");
+            return addTask(event, tasks);
         }
     };
 
@@ -49,9 +46,9 @@ public class AddCommand extends Command {
      * Adds the task to the taskslist.
      * @param task the task to be added
      */
-    private void addTask(Task task, TaskList tasks) {
-        System.out.println("Got it. I've added this task: ");
-        task.showThisTask();
+    private String addTask(Task task, TaskList tasks) {
+        String message1 = ("Got it. I've added this task: \n");
+        String message2 = task.toString();
         tasks.getTaskList().add(task);
         String taskform;
         if (tasks.getTaskList().size() == 1) {
@@ -59,7 +56,8 @@ public class AddCommand extends Command {
         } else {
             taskform = " tasks";
         }
-        System.out.println("Now you have " + (tasks.getTaskList().size()) + taskform + " in the list.");
+        String message3 = ("Now you have " + (tasks.getTaskList().size()) + taskform + " in the list.");
+        return message1 + message2 + message3;
     }
 
     public boolean isExit() {

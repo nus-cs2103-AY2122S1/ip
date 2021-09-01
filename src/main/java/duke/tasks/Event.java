@@ -79,9 +79,9 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (this.timeFormatted != null) {
-            return (this.prefix + " " + super.showStatus() + this.name + ":" + this.timeFormatted);
+            return (this.prefix + " " + super.showStatus() + this.name + ":" + this.timeFormatted + "\n");
         } else {
-            return (this.prefix + " " + super.showStatus() + this.name + ":" + this.time);
+            return (this.prefix + " " + super.showStatus() + this.name + ":" + this.time + "\n");
         }
     }
 }

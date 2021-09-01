@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import main.java.duke.DukeException;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import main.java.duke.*;
 import main.java.duke.tasks.Task;
 
 public class DoneCommand extends Command {
@@ -24,19 +21,19 @@ public class DoneCommand extends Command {
     /**
      * Executes the mark as done command.
      * @param tasks given list of tasks
-     * @param ui given ui object
+     * @param gui given gui object
      * @param storage given storage object
      * @throws IOException
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList tasks, MainWindow gui, Storage storage) throws IOException, DukeException {
         ArrayList<Task> taskList = tasks.getTaskList();
         if (taskList.size() < this.taskNum) {
             throw new DukeException("You cannot complete a task that does not exist!");
         } else {
             Scanner newSc = new Scanner(new File(storage.getFilePath()));
             storage.markAsDoneInFile(taskNum, newSc, tasks);
-            completeTask(taskList.get(taskNum - 1));
+            return completeTask(taskList.get(taskNum - 1));
         }
     };
 
@@ -48,9 +45,10 @@ public class DoneCommand extends Command {
      * Mark a task's statis as done and print out the result.
      * @param task the task to be marked as done
      */
-    public void completeTask(Task task) {
-        System.out.println("Nice! I've marked this task as done: ");
+    public String completeTask(Task task) {
+        String message1 = ("Nice! I've marked this task as done: \n");
         task.markAsDone();
-        task.showThisTask();
+        String message2 = task.toString();
+        return message1 + message2;
     }
 }

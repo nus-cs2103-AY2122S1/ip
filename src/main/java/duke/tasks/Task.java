@@ -55,6 +55,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return (this.prefix + " " + showStatus() + this.name);
+        return (this.prefix + " " + showStatus() + this.name + "\n");
     }
 }

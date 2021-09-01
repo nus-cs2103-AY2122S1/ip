@@ -4,10 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import main.java.duke.DukeException;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import main.java.duke.*;
 import main.java.duke.tasks.Task;
 
 public class DeleteCommand extends Command {
@@ -24,12 +21,12 @@ public class DeleteCommand extends Command {
     /**
      * Executes the delete command.
      * @param tasks given list of tasks
-     * @param ui given ui object
+     * @param gui given gui object
      * @param storage given storage object
      * @throws IOException
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList tasks, MainWindow gui, Storage storage) throws IOException, DukeException {
         if (tasks.getTaskList().size() < this.taskNum) {
             throw new DukeException("You cannot complete a task that does not exist!");
         } else {
@@ -38,15 +35,16 @@ public class DeleteCommand extends Command {
             ArrayList<Task> taskList = tasks.getTaskList();
             Task taskToDelete = taskList.get(taskNum - 1);
             taskList.remove(taskToDelete);
-            System.out.println("Noted. I've removed this task: ");
-            taskToDelete.showThisTask();
+            String message1 = ("Noted. I've removed this task: \n");
+            String message2 = taskToDelete.toString();
             String taskform;
             if (taskList.size() == 1 || taskList.size() == 0) {
                 taskform = " task";
             } else {
                 taskform = " tasks";
             }
-            System.out.println("Now you have " + taskList.size() + taskform + " in the list.");
+            String message3 = ("Now you have " + taskList.size() + taskform + " in the list.");
+            return message1 + message2 + message3;
         }
     };
 

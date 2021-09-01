@@ -1,10 +1,7 @@
 package main.java.duke.commands;
 import java.io.IOException;
 
-import main.java.duke.DukeException;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import main.java.duke.*;
 
 public class UnknownCommand extends Command {
 
@@ -18,12 +15,12 @@ public class UnknownCommand extends Command {
     /**
      * Executes the unknown command.
      * @param tasks given list of tasks
-     * @param ui given ui object
+     * @param gui given gui object
      * @param storage given storage object
      * @throws IOException
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, MainWindow gui, Storage storage) throws DukeException {
         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
     };
 

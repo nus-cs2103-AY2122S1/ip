@@ -5,10 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import main.java.duke.DukeException;
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import main.java.duke.*;
 import main.java.duke.tasks.Deadline;
 import main.java.duke.tasks.Event;
 import main.java.duke.tasks.Task;
@@ -27,24 +24,24 @@ public class OnDateCommand extends Command {
     /**
      * Executes the find tasks on a date command.
      * @param tasks given list of tasks
-     * @param ui given ui object
+     * @param gui given gui object
      * @param storage given storage object
      * @throws IOException
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, MainWindow gui, Storage storage) {
         boolean isFormattedDate = true;
         try {
             LocalDate.parse(this.dateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         } catch (DateTimeParseException e) {
             isFormattedDate = false;
         }
-        if (isFormattedDate) {
-            identifyTasksByDate(dateString, tasks);
-        }
+        //if (isFormattedDate) {
+            return identifyTasksByDate(dateString, tasks);
+        //}
     };
 
-    private void identifyTasksByDate(String dateString, TaskList tasks) {
+    private String identifyTasksByDate(String dateString, TaskList tasks) {
         LocalDate date = LocalDate.parse(dateString, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         ArrayList<Task> tasksOnDate = new ArrayList<>();
         ArrayList<Task> taskList = tasks.getTaskList();
@@ -66,10 +63,11 @@ public class OnDateCommand extends Command {
                 }
             }
         }
-        System.out.println("On this day you have the following task(s):");
+        String message = ("On this day you have the following task(s):");
         for (Task task : tasksOnDate) {
-            task.showThisTask();
+            message += task.toString();
         }
+        return message;
     }
 
     public boolean isExit() {

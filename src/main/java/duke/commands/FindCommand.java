@@ -2,9 +2,9 @@ package main.java.duke.commands;
 
 import java.util.ArrayList;
 
+import main.java.duke.MainWindow;
 import main.java.duke.Storage;
 import main.java.duke.TaskList;
-import main.java.duke.Ui;
 import main.java.duke.tasks.Task;
 
 public class FindCommand extends Command {
@@ -14,11 +14,11 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        identifyTasksByKeyword(tasks);
+    public String execute(TaskList tasks, MainWindow gui, Storage storage) {
+        return identifyTasksByKeyword(tasks);
     }
 
-    private void identifyTasksByKeyword(TaskList tasks) {
+    private String identifyTasksByKeyword(TaskList tasks) {
         ArrayList<Task> taskList = tasks.getTaskList();
         ArrayList<Task> tasksWithKeyword = new ArrayList<>();
         for (Task task : taskList) {
@@ -26,10 +26,12 @@ public class FindCommand extends Command {
                 tasksWithKeyword.add(task);
             }
         }
-        System.out.println("Here are the matching tasks in your list:");
+        String message1 = ("Here are the matching tasks in your list: \n");
+        String message2 = "";
         for (Task task : tasksWithKeyword) {
-            task.showThisTask();
+            message2 += task.toString();
         }
+        return message1 + message2;
     }
 
     public boolean isExit() {
