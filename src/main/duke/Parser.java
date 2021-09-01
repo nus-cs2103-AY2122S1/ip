@@ -149,14 +149,14 @@ public class Parser {
         String[] arr = s.split(DIVIDER_WORD, 4);
         boolean isDone = arr[1].equals("1");
         switch (arr[0]) {
-            case "T":
-                return new ToDo(arr[2], isDone);
-            case "D":
-                return new Deadline(arr[2], arr[3], isDone);
-            case "E":
-                return new Event(arr[2], arr[3], isDone);
-            default:
-                throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in file.");
+        case "T":
+            return new ToDo(arr[2], isDone);
+        case "D":
+            return new Deadline(arr[2], arr[3], isDone);
+        case "E":
+            return new Event(arr[2], arr[3], isDone);
+        default:
+            throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in file.");
         }
     }
 }

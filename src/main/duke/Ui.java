@@ -75,27 +75,27 @@ public class Ui {
 
     protected static void printErrorMessage(DukeException e, String userInput) {
         switch (e.type) {
-            case INDEX_OUT_OF_BOUND:
-            case INVALID_COMMAND:
-            case INVALID_OPERAND:
-            case MISSING_OPERAND:
-                printWithIndent(userInput + ": " + e.getMessage());
-                break;
-            case DDL_MISSING_KEYWORD:
-                printWithIndent(e.getMessage() + ". Correct format is:");
-                printWithIndent("deadline {description} /by {due time}");
-                printWithIndent("Example: deadline return book /by Sunday");
-                break;
-            case EVENT_MISSING_KEYWORD:
-                printWithIndent(e.getMessage() + ". Correct format is:");
-                printWithIndent("event {description} /at {time period}");
-                printWithIndent("Example: event project meeting /at Mon 2-4pm");
-                break;
-            case PIPE_SYMBOL:
-            case FAIL_TO_READ:
-            case FAIL_TO_WRITE:
-                printWithIndent(e.getMessage());
-                break;
+        case INDEX_OUT_OF_BOUND:
+        case INVALID_COMMAND:
+        case INVALID_OPERAND:
+        case MISSING_OPERAND:
+            printWithIndent(userInput + ": " + e.getMessage());
+            break;
+        case DDL_MISSING_KEYWORD:
+            printWithIndent(e.getMessage() + ". Correct format is:");
+            printWithIndent("deadline {description} /by {due time}");
+            printWithIndent("Example: deadline return book /by Sunday");
+            break;
+        case EVENT_MISSING_KEYWORD:
+            printWithIndent(e.getMessage() + ". Correct format is:");
+            printWithIndent("event {description} /at {time period}");
+            printWithIndent("Example: event project meeting /at Mon 2-4pm");
+            break;
+        case PIPE_SYMBOL:
+        case FAIL_TO_READ:
+        case FAIL_TO_WRITE:
+            printWithIndent(e.getMessage());
+            break;
         }
     }
 
