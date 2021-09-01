@@ -18,23 +18,12 @@ public class Duke {
         System.out.println("Hello from\n" + logo2);
         System.out.println("Hello! I'm Dude");
 
-
-        Scanner stdIn =  new Scanner(System.in);
+        Scanner stdIn = new Scanner(System.in);
         boolean isRunning = true;
-        TaskList taskList;
 
-        File dukeData = new File("./duke_data.txt");
-
+        DataFile dataFile = new DataFile("./duke_data.txt");
+        TaskList taskList = new TaskList(dataFile);
         System.out.println("What can I do for you?");
-
-        try {
-            dukeData.createNewFile();
-            taskList = new TaskList(dukeData);
-
-        } catch (IOException e) {
-            System.out.println("Cannot create/access data file\n" + e.toString());
-            taskList = new TaskList();
-        }
 
         while (isRunning) {
             String input = getPrompt(stdIn);
@@ -46,10 +35,39 @@ public class Duke {
         return sc.nextLine();
     }
 
-    static boolean processInput(String str, TaskList taskList){
-        if (str.equals("bye")) {
+    static boolean processInput(String str, TaskList taskList) {
+
+        Task newTask = Parser.parseInput(str);
+
+        if (newTask == null) {
+            if (str.equals("bye")) {
+                System.out.println("Bye. Hope to see you again soon!");
+                taskList.save();
+                return false;
+            } else if (str.equals("list")) {
+                System.out.println(taskList.list());
+            } else if (str.startsWith("done")) {
+                String substr = str.replaceFirst("done ", "");
+                int index = Integer.parseInt(substr);
+                System.out.println(taskList.markDone(index));
+            } else if (str.startsWith("delete")) {
+                String substr = str.replaceFirst("delete ", "");
+                int index = Integer.parseInt(substr);
+                System.out.println(taskList.delete(index));
+            } else {
+                System.out.println("??? Unknown command!");
+            }
+        } else {
+            System.out.println(taskList.add(newTask));
+        }
+        return true;
+    }
+
+}
+
+/*        if (str.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
-            taskList.saveToFile();
+            taskList.save();
             return false;
         } else if (str.equals("list")) {
             System.out.println(taskList.list());
@@ -78,4 +96,4 @@ public class Duke {
         return true;
     }
 
-}
+}*/
