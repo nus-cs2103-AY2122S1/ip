@@ -38,6 +38,11 @@ public class TaskList {
      */
     public void addTask(String t) throws DukeException {
         String[] ss = t.split(" ");
+        processAddingTask(ss);
+    }
+
+    private void processAddingTask(String ... s) throws DukeException {
+        String[] ss = s;
         switch (ss[0]) {
         case ("todo"):
             String i = "";
@@ -99,6 +104,7 @@ public class TaskList {
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+
     }
 
     private void noteAdded(Task t) {

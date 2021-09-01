@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.task.Task;
-import javafx.scene.layout.VBox;
 
 /**
  * Ui class to print lines and intake inputs from user.
@@ -133,5 +132,10 @@ public class Ui {
         String g = "Hello! I'm Duke";
         String g2 = "What can I do for you?";
         Ui.myPrint(g + "\n" + ind2 + g2);
+    }
+
+    public static void sayBye() {
+        Ui.myPrint("Bye. Hope to see you again soon!");
+        System.exit(0);
     }
 }
