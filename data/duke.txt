@@ -1,6 +1,6 @@
 [T][X] read book
 [E][X] movie night (at: 23 Aug 2021)
-[D][ ] cs2103t (by: 25 Aug 2021 23:59)
+[D][X] cs2103t (by: 25 Aug 2021 23:59)
 [T][ ] finish sogp stuff
 [T][ ] testing
 [D][ ] cs2013t (by: 15:00)
