@@ -1,20 +1,20 @@
 package duke.parser;
 
-import duke.commands.Command;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+
 import duke.commands.AddCommand;
-import duke.commands.ExitCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ListCommand;
+import duke.commands.Command;
 import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
+import duke.commands.ListCommand;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 /**
  * Represents a Parser that deals with making sense
@@ -27,9 +27,10 @@ public class Parser {
     /**
      * Takes in a String input by the user and
      * returns a Command.
-     * @param input the String input by the user
-     * @return a Command
-     * @throws DukeException if the user input is not in the correct form
+     *
+     * @param input The String input by the user.
+     * @return A Command.
+     * @throws DukeException If the user input is not in the correct form.
      */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye") || input.equals("exit")) {

@@ -9,7 +9,7 @@ import duke.ui.Ui;
  *
  * @author ruiquan
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     /**
      * Constructs a ListCommand.
      */
@@ -19,10 +19,11 @@ public class ListCommand extends Command{
 
     /**
      * Executes the ListCommand and list out all the tasks in the TaskList.
-     * @param tasks the collection of tasks
-     * @param ui the user interface that handles input and output
-     * @param storage the storage manager that deals with loading from and
-     *               saving into a file
+     *
+     * @param tasks The collection of tasks.
+     * @param ui The user interface that handles input and output.
+     * @param storage The storage manager that deals with loading from and
+     *               saving into a file.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

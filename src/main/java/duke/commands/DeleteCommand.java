@@ -16,7 +16,8 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructs a DeleteCommand given an index.
-     * @param index the index of the Task to be deleted
+     *
+     * @param index The index of the Task to be deleted.
      */
     public DeleteCommand(int index) {
         super(false);
@@ -25,12 +26,13 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the DeleteCommand and deletes the Task at the specified index
-     * from the TaskList
-     * @param tasks the collection of tasks
-     * @param ui the user interface that handles input and output
-     * @param storage the storage manager that deals with loading from and
-     *               saving into a file
-     * @throws DukeException if the file that act as storage can not be found
+     * from the TaskList.
+     *
+     * @param tasks The collection of tasks.
+     * @param ui The user interface that handles input and output.
+     * @param storage The storage manager that deals with loading from and
+     *               saving into a file.
+     * @throws DukeException If the file that act as storage can not be found.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

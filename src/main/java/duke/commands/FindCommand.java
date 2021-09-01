@@ -7,6 +7,11 @@ import duke.ui.Ui;
 public class FindCommand extends Command {
     private final String keyword;
 
+    /**
+     * Constructs a FindCommand given the search query.
+     *
+     * @param keyword The search query.
+     */
     public FindCommand(String keyword) {
         super(false);
         this.keyword = keyword;

@@ -19,11 +19,12 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Excutes the ExitCommand and exit the program.
-     * @param tasks the collection of tasks
-     * @param ui the user interface that handles input and output
-     * @param storage the storage manager that deals with loading from and
-     *               saving into a file
+     * Executes the ExitCommand and exit the program.
+     *
+     * @param tasks The collection of tasks.
+     * @param ui The user interface that handles input and output.
+     * @param storage The storage manager that deals with loading from and
+     *               saving into a file.
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {

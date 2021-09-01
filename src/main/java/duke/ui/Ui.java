@@ -8,7 +8,7 @@ import java.util.Scanner;
  * @author ruiquan
  */
 public class Ui {
-    private final String LINE = "____________________________________________________________";
+    static final String LINE = "____________________________________________________________";
     private final Scanner scanner = new Scanner(System.in);
 
     /**
@@ -23,12 +23,12 @@ public class Ui {
      * Prints a welcome message that includes a logo.
      */
     public void showWelcome() {
-        String logo = " ____        _       \n|  _ \\ _   _| | _____\n| | | | | | | |/ / _ \\\n" +
-                "| |_| | |_| |   <  __/\n|____/ \\__,_|_|\\_\\___|";
+        String logo = " ____        _       \n|  _ \\ _   _| | _____\n| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n|____/ \\__,_|_|\\_\\___|";
         System.out.println(LINE);
         System.out.println(logo);
-        System.out.println("Hi, I'm duke.Duke, your Personal Assistant Chatbot\n" +
-                "What can I do for you today?");
+        System.out.println("Hi, I'm duke.Duke, your Personal Assistant Chatbot\n"
+                + "What can I do for you today?");
         System.out.println(LINE);
     }
 
@@ -41,7 +41,8 @@ public class Ui {
 
     /**
      * Prints an error message.
-     * @param errorMessage the error message to be printed
+     *
+     * @param errorMessage The error message to be printed.
      */
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
@@ -49,7 +50,8 @@ public class Ui {
 
     /**
      * Reads and returns a String representing the user input.
-     * @return a String representing the user input
+     *
+     * @return A String representing the user input.
      */
     public String readInput() {
         return scanner.nextLine();
@@ -57,7 +59,8 @@ public class Ui {
 
     /**
      * Prints a message.
-     * @param message the message to be printed
+     *
+     * @param message The message to be printed.
      */
     public void reply(String message) {
         System.out.println(message);

@@ -14,8 +14,9 @@ public class Event extends Task {
 
     /**
      * Constructs an Event given the description and start date.
-     * @param description the event description
-     * @param at the start date of this event
+     *
+     * @param description The event description.
+     * @param at The start date of this event.
      */
     public Event(String description, LocalDate at) {
         super(description);
@@ -25,9 +26,10 @@ public class Event extends Task {
     /**
      * Constructs an Event given the description,
      * completion status and start time.
-     * @param description the event description
-     * @param isDone whether the task is completed
-     * @param at the start time of this event
+     *
+     * @param description The event description.
+     * @param isDone Whether the task is completed.
+     * @param at The start time of this event.
      */
     public Event(String description, boolean isDone, LocalDate at) {
         super(description, isDone);
