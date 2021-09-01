@@ -2,10 +2,17 @@ package tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     protected LocalDateTime by;
 
+    /**
+     * Creates a Deadline with the given description, date and time by
+     *    which the task is to be completed.
+     *
+     * @param description mentions what the task to be completed is.
+     * @param by date and time by which the task is to be completed.
+     */
     public Deadline(String description, LocalDateTime by) {
         super(description);
         this.by = by;

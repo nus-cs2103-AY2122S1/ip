@@ -1,12 +1,11 @@
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 public class Parser {
 
@@ -21,7 +20,7 @@ public class Parser {
     private static int getTaskNumber(String keyword, String task) {
         int idx = 0;
         for (int i = task.length() - 1; i > keyword.length(); i--) {
-            idx+= (task.charAt(i) - 48) * Math.pow(10, task.length() - 1 - i);
+            idx += (task.charAt(i) - 48) * Math.pow(10, task.length() - 1 - i);
         }
         return idx - 1;
     }
@@ -37,7 +36,7 @@ public class Parser {
      */
     public static int getIndex(String command, int listSize) throws BlitzException {
         String keyword = command.substring(0, command.indexOf(' '));
-        int index = getTaskNumber(keyword,command);
+        int index = getTaskNumber(keyword, command);
         if (index < 0 || index >= listSize) {
             throw new BlitzException("You are attempting to "
                 + (keyword.equals("done") ? "mark" : "delete")
@@ -57,7 +56,7 @@ public class Parser {
      *     if a request to print an empty list is made or if the user enters
      *     an invalid command.
      */
-    public static void parse(String command, TaskList tasks, Ui ui) throws BlitzException{
+    public static void parse(String command, TaskList tasks, Ui ui) throws BlitzException {
         String[] keywords = command.split(" ");
 
         //stores the first word (keyword) in the user input
@@ -70,7 +69,7 @@ public class Parser {
                 || firstKeyword.equals("delete") || firstKeyword.equals("find");
 
         //suppose it's a valid keyword
-        if(isTask || isFeature) {
+        if (isTask || isFeature) {
 
             //when keyword is not followed by anything
             if (isTask && command.length() < firstKeyword.length() + 2) {
@@ -112,13 +111,13 @@ public class Parser {
                 default:
                     String findKeyword = keywords[1];
 
-                    if(tasks.size() == 0) {
+                    if (tasks.size() == 0) {
                         throw new BlitzException("Cannot perform find on empty list!!");
                     }
 
                     TaskList matchingList = tasks.findMatchingTasks(findKeyword);
 
-                    if(matchingList.size() == 0) {
+                    if (matchingList.size() == 0) {
                         throw new BlitzException("No matches found!");
                     }
 
@@ -145,7 +144,7 @@ public class Parser {
                     }
 
                     break;
-                case "event":
+                default:
                     String eventDate = command.substring(command.indexOf('/') + 4);
                     try {
                         LocalDateTime ed = LocalDateTime.parse(eventDate,

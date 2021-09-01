@@ -1,8 +1,5 @@
 package tasks;
 
-import tasks.Task;
-import tasks.Todo;
-
 public class Todo extends Task {
 
 

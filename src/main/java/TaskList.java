@@ -1,7 +1,7 @@
-import tasks.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import tasks.Task;
 
 public class TaskList {
 
@@ -31,6 +31,9 @@ public class TaskList {
         return taskList.size();
     }
 
+    /**
+     * Prints list of tasks.
+     */
     public void printList() {
         int ctr = 1;
         for (Task task: taskList) {
@@ -39,10 +42,16 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds tasks which contain the given keyword.
+     *
+     * @param keyword specifies keyword to be searched for.
+     * @return list of tasks that contain the given keyword.
+     */
     public TaskList findMatchingTasks(String keyword) {
         ArrayList<Task> matchList = new ArrayList<>();
-        for(Task task : taskList) {
-            if(task.toString().contains(keyword)) {
+        for (Task task : taskList) {
+            if (task.toString().contains(keyword)) {
                 matchList.add(task);
             }
         }

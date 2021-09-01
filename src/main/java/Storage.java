@@ -1,19 +1,16 @@
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-
 import java.util.ArrayList;
-
 import java.util.Scanner;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.Todo;
 
 public class Storage {
 
@@ -52,13 +49,13 @@ public class Storage {
                     current = new Event(keywords[2], LocalDateTime.parse(keywords[3],
                             DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")));
                 }
-                if(done.equals(1)) {
+                if (done.equals(1)) {
                     current.markAsDone();
                 }
                 tasks.add(current);
             }
         } catch (FileNotFoundException e) {
-            if(f.getParentFile() != null && !f.getParentFile().exists()) {
+            if (f.getParentFile() != null && !f.getParentFile().exists()) {
                 f.getParentFile().mkdirs();
             }
             try {
@@ -79,8 +76,8 @@ public class Storage {
      */
     public void saveTasksInFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter("data/blitz.txt");
-        for(Task t : tasks.getTaskList()) {
-            if(t instanceof Todo) {
+        for (Task t : tasks.getTaskList()) {
+            if (t instanceof Todo) {
                 fw.write("T | " + t.getStatusIcon() + " | " + t.getDescription()
                         + System.lineSeparator());
             } else if (t instanceof Deadline) {

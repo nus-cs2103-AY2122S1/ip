@@ -1,6 +1,5 @@
-import java.util.Scanner;
-
 import java.io.IOException;
+import java.util.Scanner;
 
 public class Blitz {
 
@@ -8,6 +7,12 @@ public class Blitz {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates a Blitz object with a storage object that
+     *     accesses the given file path.
+     *
+     * @param filePath file path that the storage object will access.
+     */
     public Blitz(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -34,7 +39,7 @@ public class Blitz {
 
         while (!command.equals("bye")) {
             try {
-                Parser.parse(command,tasks,ui);
+                Parser.parse(command, tasks, ui);
             } catch (BlitzException ex) {
                 ui.printFormatted(ex.toString());
             }

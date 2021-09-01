@@ -3,10 +3,16 @@ package tasks;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+public class Event extends Task {
 
     protected LocalDateTime date;
 
+    /**
+     * Creates an Event based on the given description, date and time.
+     *
+     * @param description mentions what the event is.
+     * @param date date and time of event.
+     */
     public Event(String description, LocalDateTime date) {
         super(description);
         this.date = date;
