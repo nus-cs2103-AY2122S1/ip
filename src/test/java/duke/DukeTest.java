@@ -1,20 +1,21 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.command.Command;
 import duke.command.IncorrectCommand;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.Todo;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 
 public class DukeTest {
     @Test
     public void parser_parseIncorrectString_incorrectCommand() {
         String input = "hello";
         int expected = new IncorrectCommand().hashCode();
-        int actual =  Parser.parse(input).hashCode();
+        int actual = Parser.parse(input).hashCode();
         assertEquals(expected, actual);
     }
 
@@ -33,8 +34,8 @@ public class DukeTest {
         TaskList tested = new TaskList();
         Todo todo = new Todo("have dinner");
         tested.add(todo);
-        Command c = Parser.parse("done 0");
-        c.execute(tested, new Ui(), new Storage(filePath) );
+        Command c = Parser.parse("done 1");
+        c.execute(tested, new Ui(), new Storage(filePath));
         boolean actual = tested.get(0).isDone();
         assertEquals(true, actual);
     }

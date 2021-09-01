@@ -1,7 +1,17 @@
+
 package duke;
 
-import duke.command.*;
 import java.util.Scanner;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DisplayCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.IncorrectCommand;
+
 
 /**
  * To understand user's input.
@@ -38,7 +48,8 @@ public class Parser {
             return new AddCommand(msg, "todo");
         case (FindCommand.COMMAND_WORD):
             return new FindCommand(msg);
+        default:
+            return new IncorrectCommand();
         }
-        return new IncorrectCommand();
     }
 }

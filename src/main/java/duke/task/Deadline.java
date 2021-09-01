@@ -32,7 +32,7 @@ public class Deadline extends Task {
                 + super.toString()
                 + " / "
                 + time.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
-        );
+            );
     }
 
     /**
@@ -46,6 +46,6 @@ public class Deadline extends Task {
                 + super.toString()
                 + " / "
                 + time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-        );
+            );
     }
 }

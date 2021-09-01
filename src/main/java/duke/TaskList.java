@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import duke.task.Task;
 
 /**
@@ -52,7 +53,7 @@ public class TaskList {
      *
      * @param index Index of the task to be deleted
      */
-    public void delete(int index) throws IndexOutOfBoundsException{
+    public void delete(int index) throws IndexOutOfBoundsException {
         Task deleted = tasks.get(index);
         tasks.remove(index);
         System.out.println("Ok~ I've deleted the task:\n" + deleted.toString());
@@ -78,6 +79,12 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Gets list of filtered list by keyword.
+     *
+     * @param keyword String representation of the keyword to find.
+     * @return Filtered task list.
+     */
     public TaskList filterByKeyword(String keyword) {
         List<Task> filtered = new ArrayList<>();
         for (Task curr : tasks) {

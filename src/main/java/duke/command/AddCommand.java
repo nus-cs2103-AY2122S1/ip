@@ -1,26 +1,30 @@
-package duke.command;
 
-import duke.TaskList;
-import duke.exception.DukeException;
-import duke.Storage;
-import duke.Ui;
-import duke.exception.EmptyValueException;
-import duke.exception.NoTimeException;
-import duke.task.*;
+package duke.command;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.DukeException;
+import duke.exception.EmptyValueException;
+import duke.exception.NoTimeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
 
 /**
  * This class handles command that add task to list.
  */
 public class AddCommand extends Command {
 
-    private final String cmd;
-    private final String category;
     public static final String ADD_EVENT = "event";
     public static final String ADD_DEADLINE = "deadline";
     public static final String ADD_TODO = "todo";
+    private final String cmd;
+    private final String category;
+
 
     /**
      * Constructor for AddCommand.
@@ -72,7 +76,4 @@ public class AddCommand extends Command {
             throw new DukeException("Wrong date time format! Please use yyyy-MM-dd.");
         }
     }
-
-
-
 }

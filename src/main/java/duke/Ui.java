@@ -6,17 +6,17 @@ import java.util.Scanner;
  * Deals with interactions with the user.
  */
 public class Ui {
-    Scanner sc = new Scanner(System.in);
-    String horizontal = "_______________________";
-    String logo =
-            "                     _               _         \n" +
-                    "                    | |             | |        \n" +
-                    "  _ __ ___     ___  | |   ___     __| |  _   _ \n" +
-                    " | '_ ` _ \\   / _ \\ | |  / _ \\   / _` | | | | |\n" +
-                    " | | | | | | |  __/ | | | (_) | | (_| | | |_| |\n" +
-                    " |_| |_| |_|  \\___| |_|  \\___/   \\__,_|  \\__, |\n" +
-                    "                                          __/ |\n" +
-                    "                                         |___/ ";
+    private Scanner sc = new Scanner(System.in);
+    private String horizontal = "_______________________";
+    private String logo =
+            "                     _               _         \n"
+                    + "                    | |             | |        \n"
+                    + "  _ __ ___     ___  | |   ___     __| |  _   _ \n"
+                    + " | '_ ` _ \\   / _ \\ | |  / _ \\   / _` | | | | |\n"
+                    + " | | | | | | |  __/ | | | (_) | | (_| | | |_| |\n"
+                    + " |_| |_| |_|  \\___| |_|  \\___/   \\__,_|  \\__, |\n"
+                    + "                                          __/ |\n"
+                    + "                                         |___/ ";
 
     /**
      * Constructor of Ui.
@@ -33,8 +33,6 @@ public class Ui {
 
     /**
      * Show divider.
-     *
-     * @return Horizontal divider line.
      */
     public void showLine() {
         System.out.println(horizontal);
@@ -43,7 +41,7 @@ public class Ui {
     /**
      * Print exit message.
      */
-    public void exit(){
+    public void exit() {
         System.out.println("Byebye ~ nya");
     }
 

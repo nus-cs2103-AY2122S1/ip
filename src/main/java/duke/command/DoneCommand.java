@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.exception.OutOfBoundsException;
 import duke.task.Task;
