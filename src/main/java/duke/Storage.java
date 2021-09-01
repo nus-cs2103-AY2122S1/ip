@@ -88,6 +88,6 @@ public class Storage {
             fw.write(s + "\n");
         }
         fw.close();
-        System.out.println("written to file successfully");
+//        System.out.println("written to file successfully");
     }
 }
