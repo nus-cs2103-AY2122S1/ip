@@ -4,8 +4,11 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 /**
@@ -32,6 +35,15 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setRetriever(retriever);
             stage.show();
+
+            // To show a welcome splash screen
+            Stage welcomeStage = new Stage();
+            Label welcomeLabel = new Label("Welcome to Retreiver the Chatbot! \n Type in a Command Below...");
+            welcomeLabel.setFont(new Font("Courier New", 20));
+            welcomeLabel.setPadding(new Insets(25, 25, 25, 25));
+            Scene welcomeScene = new Scene(welcomeLabel);
+            welcomeStage.setScene(welcomeScene);
+            welcomeStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
