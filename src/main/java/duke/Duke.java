@@ -32,6 +32,12 @@ public class Duke {
         return run(input);
     }
 
+    /**
+     * Parses user's input and returns the appropriate message.
+     *
+     * @param userInput
+     * @return appropriate message based on user's input
+     */
     public String run(String userInput) {
         try {
             String fullCommand = userInput.trim();
@@ -41,7 +47,7 @@ public class Duke {
             case LIST:
                 return ui.showTasks(tasks.getTaskList());
             case BYE:
-                return ui.printGoodbye();
+                return ui.showGoodbye();
             case FIND:
                 return tasks.find(fullCommand.substring(5), ui);
             case DELETE:

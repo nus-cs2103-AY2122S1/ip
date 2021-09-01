@@ -8,50 +8,61 @@ import java.util.ArrayList;
 public class Ui {
 
     /**
+     * Returns error message.
      *
-     * @param error
-     * @return
+     * @param error message
+     * @return error message
      */
     public String showError(String error) {
         return error;
     }
 
     /**
+     * Returns greeting when program first begins.
      *
-     * @return
+     * @return greeting message
      */
-    public String printGreeting() {
+    public String showGreeting() {
         return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
+     * Returns message showing the task marked as done.
      *
-     * @param doneTask
-     * @return
+     * @param doneTask the task marked as done
+     * @return message acknowledging the task is marked as done
      */
-    public String printDoneMessage(Task doneTask) {
+    public String showDoneMessage(Task doneTask) {
         return String.format("Nice! I've marked this task as done: %s", doneTask);
     }
 
     /**
+     * Returns message showing the task that was deleted.
      *
-     * @param deletedTask
-     * @return
+     * @param deletedTask the task that was deleted
+     * @return message acknowledging the task as deleted
      */
-    public String printDeleteMessage(Task deletedTask) {
+    public String showDeletedMessage(Task deletedTask) {
         return String.format("Noted. I've removed this task: %s", deletedTask);
     }
 
-    public String printAddMessage(Task addedTask) {
+    /**
+     * Returns message showing the task that was added.
+     *
+     * @param addedTask the task that was added
+     * @return message acknowledging the task as added
+     */
+    public String showAddMessage(Task addedTask) {
         return String.format("Got it. I've added this task: %s", addedTask);
     }
 
     /**
+     * Returns message showing how many tasks are in the task list
      *
-     * @param size
-     * @return
+     * @param size of the task list
+     * @return message showing how many tasks are in the task list
      */
-    public String printTaskListSize(int size) {
+    public String showTaskListSize(int size) {
         if (size == 1) {
             return "Now you have 1 task in the list." ;
         } else {
@@ -60,17 +71,19 @@ public class Ui {
     }
 
     /**
+     * Returns goodbye when program ends.
      *
-     * @return
+     * @return goodbye message
      */
-    public String printGoodbye() {
+    public String showGoodbye() {
         return "Bye. Hope to see you again soon!";
     }
 
     /**
+     * Returns all the tasks that match the user's search term.
      *
-     * @param matchingTaskList
-     * @return
+     * @param matchingTaskList task list of tasks that matches the user's search term
+     * @return message showing all the tasks in the matching task list
      */
     public String showMatchingTasks(ArrayList<Task> matchingTaskList) {
         if (matchingTaskList.size() == 0) {
@@ -88,9 +101,10 @@ public class Ui {
     }
 
     /**
+     * Returns all the tasks that the user has.
      *
-     * @param taskList
-     * @return
+     * @param taskList list of tasks
+     * @return message showing all the tasks the user has
      */
     public String showTasks(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {

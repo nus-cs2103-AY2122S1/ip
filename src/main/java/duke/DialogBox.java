@@ -46,6 +46,7 @@ public class DialogBox extends HBox {
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Sets certain properties on flipped box to distinguish it from the normally-oriented box.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -55,16 +56,33 @@ public class DialogBox extends HBox {
         setBackground(new Background(new BackgroundFill(Color.valueOf("71C9CE"), CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
+    /**
+     * Sets certain properties on  box to distinguish it from the flipped box.
+     */
     private void normal() {
         setBackground(new Background(new BackgroundFill(Color.valueOf("CBF1F5"), CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
+    /**
+     * Creates a dialog box to represent user information.
+     *
+     * @param text represents input shown by user
+     * @param img represents picture of user
+     * @return dialog box containing user's message and picture
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.normal();
         return db;
     }
 
+    /**
+     * Creates a dialog box to represent program information.
+     *
+     * @param text represents message shown by program
+     * @param img represents picture of program
+     * @return dialog box containing program's message and picture
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

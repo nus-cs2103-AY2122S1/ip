@@ -16,6 +16,10 @@ public class Main extends Application {
     private Duke duke = new Duke();
 
 
+    /**
+     * Loads MainWindow onto stage.
+     * @param stage represents main window in program
+     */
     @Override
     public void start(Stage stage) {
         try {
