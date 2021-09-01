@@ -14,7 +14,6 @@ public class Duke {
         tasklist = new TaskList();
         this.store.retrieveTasks(tasklist);
         this.ui = new Ui();
-        System.out.println("Hello! I'm Duke.Duke\n" + "What can I do for you?");
     }
 
     private void run() {
@@ -31,6 +30,19 @@ public class Duke {
 
     public void close() {
         isRunning = false;
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command cmd = Command.createCommand(input);
+            return cmd.execute(this.tasklist, this.ui, this.store, this);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     public static void main(String[] args) {

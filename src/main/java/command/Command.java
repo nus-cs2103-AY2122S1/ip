@@ -56,5 +56,5 @@ public abstract class Command {
         return cmd;
     }
 
-    public abstract void execute(TaskList tasklist, Ui ui, Storage store, Duke bot);
+    public abstract String execute(TaskList tasklist, Ui ui, Storage store, Duke bot);
 }

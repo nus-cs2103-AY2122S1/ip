@@ -1,6 +1,7 @@
 package command;
 
 import duke.Duke;
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -12,8 +13,12 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
-        tasklist.doneTask(Integer.valueOf(this.args));
-        tasklist.printTasks();
+    public String execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
+        try {
+            tasklist.doneTask(Integer.valueOf(this.args));
+            return tasklist.printTasks();
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

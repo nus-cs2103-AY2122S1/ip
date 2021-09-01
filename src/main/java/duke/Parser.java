@@ -9,8 +9,8 @@ public class Parser {
      * @return Array with 2 elements containing first word and the rest.
      */
     public static String[] parseUserInput(String input) {
-        String[] cmd_args = input.split(" ", 2);
-        return stripStrings(cmd_args);
+        String[] cmdArgs = input.split(" ", 2);
+        return stripStrings(cmdArgs);
     }
 
     /**
@@ -21,9 +21,9 @@ public class Parser {
      * @return Array with 2 elements containing task name and time.
      */
     public static String[] parseArgs(String args, String delim) {
-        String[] name_time = args.split(delim);
-        checkArg(name_time);
-        return stripStrings(name_time);
+        String[] nameTime = args.split(delim);
+        checkArg(nameTime);
+        return stripStrings(nameTime);
     }
 
     /**

@@ -13,7 +13,8 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
-        tasklist.add(Task.createTask("deadline", this.args));
+    public String execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
+        return tasklist.add(Task.createTask("deadline", this.args));
+
     }
 }

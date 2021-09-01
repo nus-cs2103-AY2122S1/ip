@@ -26,20 +26,20 @@ public abstract class Task {
      */
     public static Task createTask(String type, String rest) throws DukeException {
         Task newTask;
-        String[] name_delimit;
+        String[] nameDelimit;
         switch (type) {
         case "todo":
             newTask = new ToDo(rest);
             break;
 
         case "deadline":
-            name_delimit = Parser.parseArgs(rest, "/by");
-            newTask = new Deadline(name_delimit[0], name_delimit[1]);
+            nameDelimit = Parser.parseArgs(rest, "/by");
+            newTask = new Deadline(nameDelimit[0], nameDelimit[1]);
             break;
 
         case "event":
-            name_delimit = Parser.parseArgs(rest, "/at");
-            newTask = new Event(name_delimit[0], name_delimit[1]);
+            nameDelimit = Parser.parseArgs(rest, "/at");
+            newTask = new Event(nameDelimit[0], nameDelimit[1]);
             break;
 
         default:

@@ -12,9 +12,10 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
+    public String execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
         ui.close();
         store.saveToFile(tasklist);
         bot.close();
+        return "See You Again";
     }
 }

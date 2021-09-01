@@ -1,6 +1,7 @@
 package command;
 
 import duke.Duke;
+import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -12,7 +13,11 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
-        tasklist.findTasks(this.args);
+    public String execute(TaskList tasklist, Ui ui, Storage store, Duke bot) {
+        try {
+            return tasklist.findTasks(this.args);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
