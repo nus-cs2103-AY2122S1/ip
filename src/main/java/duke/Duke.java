@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import command.Command;
 import exceptions.DukeException;
-import exceptions.NoSuchCommandException;
 
 /**
  * Duke is a bot capable of storing a todo list with an interactive interface.
@@ -18,23 +17,8 @@ public class Duke {
     private Ui ui;
 
     /**
-     * Constructor for Duke.
-     *
-     * @param filePath the path to access saved tasks/ store tasks upon termination
+     * Constructor for Duke. Creates a new storage file at filepath: ./storage/save.txt
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        try {
-            taskList = new TaskList(storage.retrieve());
-        } catch (DukeException e) {
-            ui.showError(e.getMessage());
-            ui.showList(taskList);
-        } catch (IOException e) {
-            ui.showError(e.getMessage());
-        }
-    }
-
     public Duke() {
         ui = new Ui();
         storage = new Storage("./storage/save.txt");
@@ -48,42 +32,41 @@ public class Duke {
         }
     }
 
-//    /**
-//     * Runs a Duke instance.
-//     */
-//    public void run() {
-//        ui.greet();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String fullCommand = ui.readCommand();
-//                Command c = Parser.parse(fullCommand);
-//                c.execute(taskList, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.showError(e.getMessage());
-//            }
-//        }
-//        try {
-//            storage.save(taskList);
-//        } catch (IOException e) {
-//            ui.showError("ERROR: TaskList could not be saved!");
-//        }
-//    }
+    //Commented out but might use in future
+    ///**
+    // * Runs a Duke instance.
+    // */
+    //public void run() {
+    //    ui.greet();
+    //    boolean isExit = false;
+    //    while (!isExit) {
+    //        try {
+    //            String fullCommand = ui.readCommand();
+    //            Command c = Parser.parse(fullCommand);
+    //            c.execute(taskList, ui, storage);
+    //            isExit = c.isExit();
+    //        } catch (DukeException e) {
+    //            ui.showError(e.getMessage());
+    //        }
+    //    }
+    //    try {
+    //        storage.save(taskList);
+    //    } catch (IOException e) {
+    //        ui.showError("ERROR: TaskList could not be saved!");
+    //    }
+    //}
 
     public static void main(String[] args) {
-        new Duke("./storage/save.txt");
+        new Duke();
     }
 
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             return c.execute(taskList, ui, storage);
-        } catch (NoSuchCommandException e) {
-            e.printStackTrace();
         } catch (DukeException e) {
             e.printStackTrace();
+            return "bruh";
         }
-        return "bruh";
     }
 }
