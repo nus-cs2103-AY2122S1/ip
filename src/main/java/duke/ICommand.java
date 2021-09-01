@@ -5,7 +5,7 @@ package duke;
  */
 public interface ICommand {
 
-    void execute(TaskManager tm, Ui ui, Storage storage);
+    void execute(TaskManager tm, ResponseManager responseManager, Storage storage);
 
     String getReply();
 
