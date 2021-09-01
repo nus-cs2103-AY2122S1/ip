@@ -1,7 +1,7 @@
-package duke;
+package duke.util;
 
+import duke.exception.InvalidInputException;
 import duke.task.Task;
-import duke.util.TaskList;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;

@@ -6,21 +6,24 @@ public class Event extends Task {
 
     private String at;
 
-    public Event(String name, String at) {
-        super(name);
+    protected Event(String description, String at) {
+        super(description);
         this.at = at;
     }
 
-    public Event(String name, String at, boolean isCompleted) {
-        super(name);
+    protected Event(String description, String at, boolean isCompleted) {
+        super(description);
         this.at = at;
         this.isCompleted = isCompleted;
     }
 
-//    @Override
-//    public String toString() {
-//        return "[E][ ] " + super.toString() + "(at: " + this.at + ")";
-//    }
+    public static Event of(String description, String at) {
+        return new Event(description, at);
+    }
+
+    public static Event of(String description, String at, boolean isCompleted) {
+        return new Event(description, at, isCompleted);
+    }
 
     @Override
     public String toString() {

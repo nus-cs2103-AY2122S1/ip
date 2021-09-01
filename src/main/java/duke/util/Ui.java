@@ -1,4 +1,6 @@
-package duke.ui;
+package duke.util;
+
+import duke.exception.InvalidInputException;
 
 import java.util.Scanner;
 
@@ -25,16 +27,27 @@ public class Ui {
     }
 
     public String readCommand() {
-        return sc.nextLine().trim();
+        String parsedInput = "";
+            parsedInput = Parser.parseInput(sc.nextLine());
+
+        return parsedInput;
+    }
+
+    public static void showError(String errorMessage) {
+        try {
+            throw new InvalidInputException(errorMessage);
+        } catch (InvalidInputException e) {
+            System.err.println(e);
+        }
     }
 
     public void showEmptyList() {
         textBox("There are currently no tasks, fool.");
     }
 
-    public void showAdd(String output, int listSize) {
+    public void showAdd(String taskString, int listSize) {
         textBox("Fine. I've added this meaningless task to your list: ",
-                " --> " + output,
+                " --> " + taskString,
                 "Satisfied now? You have " + listSize + " items in your list. ");
     }
 

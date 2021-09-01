@@ -25,16 +25,12 @@ public class TaskList {
         list.add(task);
     }
 
-    public void delete(int i) {
+    public void delete(int index) {
         try {
-            list.remove(i);
+            list.remove(index);
         } catch (IndexOutOfBoundsException e) {
             System.err.println(e);
         }
-    }
-
-    public int index() {
-        return list.indexOf(this);
     }
 
     public int size() {

@@ -1,29 +1,40 @@
 package duke.task;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+
 import org.json.simple.JSONObject;
 
 public class Deadline extends Task {
 
     private String by;
 
-    public Deadline(String name, String by) {
-        super(name);
+    protected Deadline(String description, String by) {
+        super(description);
         this.by = by;
     }
 
-    public Deadline(String name, String by, boolean isCompleted) {
-        super(name);
+    protected Deadline(String description, String by, boolean isCompleted) {
+        super(description);
         this.by = by;
         this.isCompleted = isCompleted;
     }
 
+    public static Deadline of(String description, String by) {
+        return new Deadline(description, by);
+    }
+
+    public static Deadline of(String description, String by, boolean isCompleted) {
+        return new Deadline(description, by, isCompleted);
+    }
+
+
     @Override
-    public String toString() {
-        String[] date = by.split(" ",2);
+    public String toString() throws DateTimeException {
+        String[] date = by.split(" ", 2);
         LocalDate ld = LocalDate.parse(date[0], DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         String formattedDate = ld.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL));
         LocalTime lt = LocalTime.parse(date[1], DateTimeFormatter.ofPattern("HHmm"));

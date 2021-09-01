@@ -1,18 +1,29 @@
 package duke.task;
 
+import duke.exception.InvalidInputException;
+import duke.util.Ui;
 import org.json.simple.JSONObject;
 
 public class ToDo extends Task {
 
-    public ToDo(String description) {
+    protected ToDo(String description) {
         super(description);
         this.description = description;
     }
 
-    public ToDo(String description, boolean isCompleted) {
+    protected ToDo(String description, boolean isCompleted) {
         super(description);
         this.isCompleted = isCompleted;
     }
+
+    public static ToDo of(String description) {
+        return new ToDo(description);
+    }
+
+    public static ToDo of(String description, boolean isCompleted) {
+        return new ToDo(description, isCompleted);
+    }
+
 
     @Override
     public String toString() {
