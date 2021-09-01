@@ -63,8 +63,6 @@ public class Storage {
                 }
             }
             this.writer = new FileWriter(this.directoryName.concat(this.filename));
-        } catch (FileNotFoundException e) {
-            throw new AilurusException(AilurusException.Error.LOAD);
         } catch (IOException e) {
             throw new AilurusException(AilurusException.Error.LOAD);
         }

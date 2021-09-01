@@ -40,7 +40,7 @@ public class Ailurus {
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
+                String fullCommand = this.ui.readCommand();
                 String command = Parser.parse(fullCommand);
                 switch (command) {
                 case "bye":
@@ -49,65 +49,37 @@ public class Ailurus {
                     isExit = true;
                     break;
                 case "list":
-                    try {
-                        this.ui.sayList(this.tasks);
-                    } catch (AilurusException e) {
-                        this.ui.showError(e.getMessage());
-                    }
+                    this.ui.sayList(this.tasks);
                     break;
                 case "done":
-                    try {
-                        String str = Parser.parseMessage(fullCommand);
-                        this.ui.sayDone(this.tasks.done(str));
-                    } catch (AilurusException e) {
-                        this.ui.showError(e.getMessage());
-                    }
+                    String str = Parser.parseMessage(fullCommand);
+                    this.ui.sayDone(this.tasks.done(str));
                     break;
                 case "todo":
-                    try {
-                        String todoMessage = Parser.parseMessage(fullCommand);
-                        this.ui.sayAdd(this.tasks.addTask(new Todo(todoMessage)), this.tasks.length());
-                    } catch (AilurusException e) {
-                        this.ui.showError(e.getMessage());
-                    }
+                    String todoMessage = Parser.parseMessage(fullCommand);
+                    this.ui.sayAdd(this.tasks.addTask(new Todo(todoMessage)), this.tasks.length());
                     break;
                 case "deadline":
-                    try {
-                        String deadlineMessage = Parser.parseMessage(fullCommand);
-                        this.ui.sayAdd(this.tasks.addTask(new Deadline(deadlineMessage)), this.tasks.length());
-                    } catch (AilurusException e) {
-                        this.ui.showError(e.getMessage());
-                    }
+                    String deadlineMessage = Parser.parseMessage(fullCommand);
+                    this.ui.sayAdd(this.tasks.addTask(new Deadline(deadlineMessage)), this.tasks.length());
                     break;
                 case "event":
-                    try {
-                        String eventMessage = Parser.parseMessage(fullCommand);
-                        this.ui.sayAdd(this.tasks.addTask(new Event(eventMessage)), this.tasks.length());
-                    } catch (AilurusException e) {
-                        this.ui.showError(e.getMessage());
-                    }
+                    String eventMessage = Parser.parseMessage(fullCommand);
+                    this.ui.sayAdd(this.tasks.addTask(new Event(eventMessage)), this.tasks.length());
                     break;
                 case "delete":
-                    try {
-                        String str = Parser.parseMessage(fullCommand);
-                        this.ui.sayDelete(this.tasks.deleteTask(str), this.tasks.length());
-                    } catch (AilurusException e) {
-                        this.ui.showError(e.getMessage());
-                    }
+                    String deleteMessage = Parser.parseMessage(fullCommand);
+                    this.ui.sayDelete(this.tasks.deleteTask(deleteMessage), this.tasks.length());
                     break;
                 case "find":
-                    try {
-                        String match = Parser.parseMessage(fullCommand);
-                        this.ui.sayFind(Parser.parseFind(match, this.tasks));
-                    } catch (AilurusException e) {
-                        this.ui.showError(e.getMessage());
-                    }
+                    String match = Parser.parseMessage(fullCommand);
+                    this.ui.sayFind(Parser.parseFind(match, this.tasks));
                     break;
                 default:
                     this.ui.sayInvalidCommand();
                 }
             } catch (AilurusException e) {
-                ui.showError(e.getMessage());
+                this.ui.showError(e.getMessage());
             }
         }
     }

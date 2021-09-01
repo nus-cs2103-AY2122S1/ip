@@ -1,6 +1,10 @@
 package ailurus;
 
-import ailurus.task.*;
+import ailurus.task.Deadline;
+import ailurus.task.Event;
+import ailurus.task.TaskList;
+import ailurus.task.Todo;
+import ailurus.task.Task;
 
 public class Parser {
 
