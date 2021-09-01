@@ -11,6 +11,6 @@ public class DukeSimpleTask extends DukeTask {
 
     @Override
     public String toSerializedString() {
-        return String.format("%s/%d/simple", name, done ? 1 : 0);
+        return String.format("%s/%d/simple", getName(), isDone() ? 1 : 0);
     }
 }

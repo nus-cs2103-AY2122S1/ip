@@ -4,9 +4,14 @@ import duke.command.DukeCommandWithArgs;
 import duke.exception.DukeStorageException;
 import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
+    private static final boolean USE_GUI = true;
     private static final String SAVE_FILE_LOCATION = "duke-task-list.txt";
+
     private final Ui ui;
     private final TaskList taskList;
     private final Storage storage;
@@ -16,52 +21,62 @@ public class Duke {
      * Duke constructor
      */
     public Duke() {
-        this.ui = new Ui(System.in, System.out);
         this.storage = new Storage(SAVE_FILE_LOCATION);
+        if (USE_GUI) {
+            this.ui = new Gui(storage);
+        } else {
+            this.ui = new Cli(System.in, System.out);
+        }
         TaskList taskList;
         try {
             taskList = storage.loadTaskList();
         } catch (DukeStorageException e) {
-            ui.outputLine(e.getMessage());
+            if (ui instanceof Cli) {
+                Cli cli = (Cli) ui;
+                cli.outputLine(e.getMessage());
+            }
             taskList = new TaskList();
         }
         this.taskList = taskList;
         this.parser = new Parser();
     }
 
-    /**
-     * Runs Duke.
-     * @param args The arguments passed in from the command line
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.start();
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        assert(USE_GUI);
+        Gui gui = (Gui) ui;
+        Scene scene = new Scene(gui.getRootNode());
+        primaryStage.setTitle("Duke");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     /**
-     * Starts duke.
+     * Starts Duke CLI.
      */
-    public void start() {
-        ui.printWelcomeMessage();
-        ui.printHelp();
-        while (ui.shouldContinue()) {
-            String commandStr = ui.nextCommand();
+    public void startCli() {
+        assert(!USE_GUI);
+        Cli cli = (Cli) ui;
+        cli.printWelcomeMessage();
+        cli.printHelp();
+        while (cli.shouldContinue()) {
+            String commandStr = cli.nextCommand();
             DukeCommandWithArgs command = parser.parse(commandStr);
             if (command == null) {
                 // Command not found
-                ui.outputLine(String.format("Unknown command: %s. Type \"help\" for a list of available commands.",
+                cli.outputLine(String.format("Unknown command: %s. Type \"help\" for a list of available commands.",
                         commandStr));
             } else {
                 try {
-                    command.runWith(taskList, ui, storage);
+                    command.runWith(taskList, cli, storage);
                 } catch (InvalidCommandException e) {
-                    ui.outputLine(
+                    cli.outputLine(
                             String.format("Error in \"%s\": %s\nType \"help %s\" to view proper usage of the command.",
                                     command.getBaseCommand().getName(), e.getMessage(),
                                     command.getBaseCommand().getName()));
                 }
             }
         }
-        ui.printExitMessage();
+        cli.printExitMessage();
     }
 }

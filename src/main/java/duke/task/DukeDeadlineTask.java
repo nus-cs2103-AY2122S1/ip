@@ -16,22 +16,30 @@ public class DukeDeadlineTask extends DukeTask {
 
     /**
      * Creates a task with a name, deadline and whether or not it is marked as done.
-     * @param name THe name of the event
+     * @param name THe name of the task
      * @param isDone If the event is marked as done
-     * @param deadline The deadline of the event
+     * @param deadline The deadline of the task
      */
     public DukeDeadlineTask(String name, boolean isDone, String deadline) {
         super(name, isDone);
         this.deadline = DukeDate.of(deadline);
     }
 
+    /**
+     * Returns the deadline of the task.
+     * @return the deadline of the task
+     */
+    public DukeDate getDeadline() {
+        return deadline;
+    }
+
     @Override
-    public String toString() {
+    public String toCliString() {
         return String.format("%s (by %s)", super.toString(), deadline);
     }
 
     @Override
     public String toSerializedString() {
-        return String.format("%s/%d/by/%s", name, isDone ? 1 : 0, deadline);
+        return String.format("%s/%d/by/%s", getName(), isDone() ? 1 : 0, deadline);
     }
 }

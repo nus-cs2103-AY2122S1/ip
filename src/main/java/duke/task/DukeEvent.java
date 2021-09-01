@@ -24,13 +24,21 @@ public class DukeEvent extends DukeTask {
         this.date = DukeDate.of(date);
     }
 
+    /**
+     * Returns the date of the event.
+     * @return the date of the event
+     */
+    public DukeDate getDate() {
+        return date;
+    }
+
     @Override
-    public String toString() {
-        return String.format("%s (at %s)", super.toString(), date);
+    public String toCliString() {
+        return String.format("%s (at %s)", super.toCliString(), date);
     }
 
     @Override
     public String toSerializedString() {
-        return String.format("%s/%d/at/%s", name, done ? 1 : 0, date);
+        return String.format("%s/%d/at/%s", getName(), isDone() ? 1 : 0, date);
     }
 }

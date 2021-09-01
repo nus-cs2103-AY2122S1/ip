@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import duke.Cli;
 import duke.Storage;
 import duke.Ui;
 import duke.exception.InvalidCommandException;
@@ -46,7 +47,10 @@ public enum DukeCommand implements DukeCommandAction {
             }
             taskList.addTask(task);
             storage.saveTaskList(taskList);
-            ui.outputLine(String.format("Task added with title: %s", arg));
+            if (ui instanceof Cli) {
+                Cli cli = (Cli) ui;
+                cli.outputLine(String.format("Task added with title: %s", arg));
+            }
         }
     ),
     DELETE_TASK(
@@ -63,8 +67,11 @@ public enum DukeCommand implements DukeCommandAction {
         (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
             DukeTask task = taskList.removeTaskAt(parseTaskIndex(taskList, arg));
             storage.saveTaskList(taskList);
-            ui.outputLine("I've removed the following task.");
-            ui.outputLine(task.toString());
+            if (ui instanceof Cli) {
+                Cli cli = (Cli) ui;
+                cli.outputLine("I've removed the following task.");
+                cli.outputLine(task.toString());
+            }
         }
     ),
     EXIT(
@@ -72,7 +79,10 @@ public enum DukeCommand implements DukeCommandAction {
         "Exit Duke",
         DukeCommandConfig.NO_ARGUMENTS,
         (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
-            ui.markExit();
+            if (ui instanceof Cli) {
+                Cli cli = (Cli) ui;
+                cli.markExit();
+            }
         }
     ),
     FIND_TASK(
@@ -88,11 +98,14 @@ public enum DukeCommand implements DukeCommandAction {
         ),
         (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
             List<DukeTask> dukeTasks = taskList.getTasks().stream()
-                    .filter(dukeTask -> dukeTask.name.toLowerCase().contains(arg.toLowerCase()))
+                    .filter(dukeTask -> dukeTask.getName().toLowerCase().contains(arg.toLowerCase()))
                     .collect(Collectors.toList());
             TaskList filteredTaskList = new TaskList(dukeTasks);
-            ui.outputLine(String.format("Here are the tasks with titles containing \"%s\"", arg));
-            ui.printTaskList(filteredTaskList);
+            if (ui instanceof Cli) {
+                Cli cli = (Cli) ui;
+                cli.outputLine(String.format("Here are the tasks with titles containing \"%s\"", arg));
+                cli.printTaskList(filteredTaskList);
+            }
         }
     ),
     HELP(
@@ -107,18 +120,21 @@ public enum DukeCommand implements DukeCommandAction {
             Map.of()
         ),
         (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
-            if (arg.isEmpty()) {
-                ui.outputLine("ALL COMMANDS:");
-                Arrays.stream(DukeCommand.values())
-                        .sorted(Comparator.comparing(DukeCommand::getName))
-                        .map(DukeCommand::toString)
-                        .forEach(ui::outputLine);
-            } else {
-                Optional<DukeCommand> command = getClosestMatch(arg);
-                if (command.isEmpty()) {
-                    throw new InvalidCommandException(String.format("No command named \"%s\".", arg));
+            if (ui instanceof Cli) {
+                Cli cli = (Cli) ui;
+                if (arg.isEmpty()) {
+                    cli.outputLine("ALL COMMANDS:");
+                    Arrays.stream(DukeCommand.values())
+                            .sorted(Comparator.comparing(DukeCommand::getName))
+                            .map(DukeCommand::toString)
+                            .forEach(cli::outputLine);
                 } else {
-                    ui.outputLine(command.get().toDetailedString());
+                    Optional<DukeCommand> command = getClosestMatch(arg);
+                    if (command.isEmpty()) {
+                        throw new InvalidCommandException(String.format("No command named \"%s\".", arg));
+                    } else {
+                        cli.outputLine(command.get().toDetailedString());
+                    }
                 }
             }
         }
@@ -128,8 +144,12 @@ public enum DukeCommand implements DukeCommandAction {
         "List all tasks",
         DukeCommandConfig.NO_ARGUMENTS,
         (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
-            ui.outputLine(String.format("You have %d %s.", taskList.size(), taskList.size() == 1 ? "task" : "tasks"));
-            ui.printTaskList(taskList);
+            if (ui instanceof Cli) {
+                Cli cli = (Cli) ui;
+                cli.outputLine(
+                        String.format("You have %d %s.", taskList.size(), taskList.size() == 1 ? "task" : "tasks"));
+                cli.printTaskList(taskList);
+            }
         }
     ),
     MARK_DONE(
@@ -145,14 +165,17 @@ public enum DukeCommand implements DukeCommandAction {
         ),
         (TaskList taskList, Ui ui, Storage storage, String arg, Map<String, String> namedArgs) -> {
             DukeTask task = taskList.getTaskAt(parseTaskIndex(taskList, arg));
-            if (task.isDone()) {
-                ui.outputLine("The following task is already marked as done! Good job!");
-            } else {
-                task.markAsDone();
-                storage.saveTaskList(taskList);
-                ui.outputLine("I've marked the following task as done!");
+            if (ui instanceof Cli) {
+                Cli cli = (Cli) ui;
+                if (task.isDone()) {
+                    cli.outputLine("The following task is already marked as done! Good job!");
+                } else {
+                    task.markAsDone();
+                    storage.saveTaskList(taskList);
+                    cli.outputLine("I've marked the following task as done!");
+                }
+                cli.outputLine(task.toString());
             }
-            ui.outputLine(task.toString());
         }
     );
 

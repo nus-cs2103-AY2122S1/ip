@@ -1,31 +1,51 @@
 package duke.task;
 
 import duke.exception.TaskParseException;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public abstract class DukeTask {
-    public final String name;
-    protected boolean isDone;
+    private final StringProperty name;
+    private final BooleanProperty isDone;
 
     public DukeTask(String name) {
         this(name, false);
     }
 
     DukeTask(String name, boolean isDone) {
-        this.name = name;
-        this.isDone = isDone;
+        this.name = new SimpleStringProperty(name);
+        this.isDone = new SimpleBooleanProperty(isDone);
     }
 
     public boolean isDone() {
+        return isDone.getValue();
+    }
+
+    public String getName() {
+        return name.getValue();
+    }
+
+    public BooleanProperty isDoneProperty() {
         return isDone;
     }
 
     public void markAsDone() {
-        isDone = true;
+        isDone.setValue(true);
+    }
+
+    public StringProperty nameProperty() {
+        return name;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", isDone ? "X" : " ", name);
+        return name.getValue();
+    }
+
+    public String toCliString() {
+        return String.format("[%s] %s", isDone() ? "X" : " ", name);
     }
 
     /**
