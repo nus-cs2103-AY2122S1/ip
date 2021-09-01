@@ -8,8 +8,10 @@ import duke.Event;
 import duke.Task;
 import duke.TaskList;
 import duke.ToDo;
-import duke.Ui;
 
+/**
+ * This class handles commands meant for adding tasks.
+ */
 public class AddCommand implements Command {
 
     private String description;
@@ -19,11 +21,23 @@ public class AddCommand implements Command {
     private LocalDate localDate;
     private String taskType;
 
+    /**
+     * Constructor which takes in task description and a letter as task type.
+     * @param description String that is the name of task.
+     * @param taskType String that is a letter to describe task type.
+     */
     public AddCommand(String description, String taskType) {
         this.description = description;
         this.taskType = taskType;
     }
 
+    /**
+     * Constructor which takes in task description, a letter as task type
+     * and Object which is either localDate or localDateTime
+     * @param description String that is the name of task.
+     * @param dateObj Object that is either localDate or localDateTime.
+     * @param taskType String that is a letter to describe task type.
+     */
     public AddCommand(String description, Object dateObj, String taskType) {
         this.description = description;
         this.localDateTime = dateObj;
@@ -31,6 +45,15 @@ public class AddCommand implements Command {
 
     }
 
+    /**
+     * Constructor which takes in task description, a letter for task type,
+     * two LocalTimes and a LocalDate.
+     * @param description String that is the name of task.
+     * @param localDate LocalDate type to represent due date.
+     * @param startTime LocalTime to represent starting time of event.
+     * @param endTime LocalTime to represent ending time of event.
+     * @param taskType String that is a letter to describe task type.
+     */
     public AddCommand(String description, LocalDate localDate,
                       LocalTime startTime, LocalTime endTime, String taskType) {
         this.description = description;
@@ -40,8 +63,13 @@ public class AddCommand implements Command {
         this.taskType = taskType;
     }
 
+    /**
+     * This method returns the string of task added and tells the user the number of tasks in list.
+     * @param taskList TaskList that is currently used.
+     * @return
+     */
     @Override
-    public String execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList) {
         String output = "";
 
         switch (taskType) {

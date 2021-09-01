@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.TaskList;
-import duke.Ui;
 
 public class FindCommand implements Command {
 
@@ -12,7 +11,7 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui) {
+    public String execute(TaskList taskList) {
         String output = "Here are the matching tasks in your list:\n" + taskList.findTask(searchString);
         if (taskList.isTaskFound()) {
             return output;

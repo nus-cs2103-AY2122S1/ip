@@ -12,7 +12,6 @@ public class Duke {
 
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
 
     /**
      * This is a constructor for Duke bot which is necessary to run Duke
@@ -20,7 +19,6 @@ public class Duke {
      * @param filePath Duke stores a text file of tasks input and loads them at the given file path.
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         taskList = new TaskList(storage);
     }
@@ -34,7 +32,7 @@ public class Duke {
         String dukeResponse = "";
         try {
             Command c = Parser.parse(input, taskList);
-            dukeResponse = c.execute(taskList, ui);
+            dukeResponse = c.execute(taskList);
             if (!c.isRunning()) {
                 System.exit(0);
             }
