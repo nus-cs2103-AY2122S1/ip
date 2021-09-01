@@ -32,13 +32,13 @@ public class TaskList {
      * @param index the index starting with 1.
      * @throws IndexOutOfBoundsException thrown when index out of bound
      */
-    public void remove(int index) throws IndexOutOfBoundsException {
-        Task task = tasks.remove(index - 1);
-        Ui.showMessage("Noted. I've removed this task:\n  "
+    public String remove(int index) throws IndexOutOfBoundsException {
+        Task task = tasks.remove(index);
+        return "Noted. I've removed this task:\n  "
                 + task
                 + "\nNow you have "
                 + tasks.size()
-                + " tasks in the list.\n");
+                + " tasks in the list.\n";
     }
 
     /**
@@ -46,15 +46,14 @@ public class TaskList {
      *
      * @param task the task to be added.
      */
-    public void add(Task task) {
+    public String add(Task task) {
         tasks.add(task);
-        String msg = "Got it. I've added this task:\n  "
+
+        return "Got it. I've added this task:\n  "
                 + task
                 + "\nNow you have "
                 + tasks.size()
                 + " tasks in the list.\n";
-
-        Ui.showMessage(msg);
     }
 
     /**
@@ -62,10 +61,10 @@ public class TaskList {
      *
      * @param index the index starting with 1.
      */
-    public void setDone(int index) {
-        Task task = tasks.get(index - 1);
+    public String setDone(int index) {
+        Task task = tasks.get(index);
         task.setDone();
-        Ui.showMessage("Nice! I've marked this task as done:\n" + task + "\n");
+        return "Nice! I've marked this task as done:\n" + task + "\n";
     }
 
     /**
@@ -73,7 +72,7 @@ public class TaskList {
      *
      * @param searchString the string contained by the description.
      */
-    public void filter(String searchString) {
+    public String filter(String searchString) {
         List<Task> searchResult = tasks
                 .stream()
                 .filter(str -> str.getDescription().contains(searchString))
@@ -90,7 +89,7 @@ public class TaskList {
             }
         }
 
-        Ui.showMessage(output.toString());
+        return output.toString();
     }
 
     @Override

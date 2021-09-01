@@ -18,8 +18,8 @@ public class Parser {
         LocalDate time;
         Command command;
         switch (action) {
-        case BYE:
-            command = new ExitCommand();
+        case SAVE:
+            command = new SaveCommand();
             break;
         case LIST:
             command = new ListCommand();
@@ -69,8 +69,8 @@ public class Parser {
         String action = input.split(" ")[0].toLowerCase();
 
         switch (action) {
-        case "bye":
-            return Action.BYE;
+        case "save":
+            return Action.SAVE;
         case "list":
             return Action.LIST;
         case "find":
