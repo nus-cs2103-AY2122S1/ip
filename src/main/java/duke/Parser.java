@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.format.DateTimeParseException;
+
 import duke.commands.AddCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
@@ -12,8 +14,6 @@ import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.InvalidInputException;
 import duke.exceptions.MissingDateException;
 import duke.exceptions.TaskOutOfRangeException;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Deals with making sense of the user command to Duck Chatbot.
@@ -64,7 +64,7 @@ public class Parser {
                 if (taskDescription == null) {
                     throw new EmptyDescriptionException();
                 }
-                command = new AddCommand(Duke.TaskType.TODO, new String[]{taskDescription});
+                command = new AddCommand(TaskType.TODO, new String[]{taskDescription});
                 break;
             case "deadline":
                 if (taskDescription == null) {
@@ -76,7 +76,7 @@ public class Parser {
                 } else {
                     throw new MissingDateException();
                 }
-                command = new AddCommand(Duke.TaskType.DEADLINE, descriptionDate);
+                command = new AddCommand(TaskType.DEADLINE, descriptionDate);
                 break;
             case "event":
                 if (taskDescription == null) {
@@ -87,7 +87,7 @@ public class Parser {
                 } else {
                     throw new MissingDateException();
                 }
-                command = new AddCommand(Duke.TaskType.EVENT, descriptionDate);
+                command = new AddCommand(TaskType.EVENT, descriptionDate);
                 break;
             case "find":
                 if (taskDescription == null) {

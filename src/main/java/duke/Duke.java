@@ -6,17 +6,13 @@ import duke.commands.Command;
 import duke.exceptions.DukeException;
 
 public class Duke {
-    public enum TaskType {
-        TODO, DEADLINE, EVENT
-    }
-
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    public Duke(String filePath, String path) {
+    
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath, path);
+        storage = new Storage("data/duke.txt", "data/");
         tasks = new TaskList(storage.load());
     }
 
@@ -36,9 +32,17 @@ public class Duke {
             }
         }
     }
+    
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
+        return "Duke heard: " + input;
+    }
 
     public static void main(String[] args) {
-        new Duke("data/duke.txt", "data/").run();
+        new Duke().run();
     }
 }
 

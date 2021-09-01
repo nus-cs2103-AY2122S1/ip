@@ -3,6 +3,7 @@ package duke.commands;
 import duke.Duke;
 import duke.Storage;
 import duke.TaskList;
+import duke.TaskType;
 import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
@@ -11,10 +12,10 @@ import duke.tasks.Task;
 import duke.tasks.Todo;
 
 public class AddCommand extends Command {
-    private Duke.TaskType taskType;
+    private TaskType taskType;
     private String[] taskDescription;
 
-    public AddCommand(Duke.TaskType taskType, String[] taskDescription) {
+    public AddCommand(TaskType taskType, String[] taskDescription) {
         this.taskType = taskType;
         this.taskDescription = taskDescription;
     }

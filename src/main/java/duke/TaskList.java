@@ -1,16 +1,16 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.exceptions.TaskOutOfRangeException;
 import duke.tasks.Task;
-
-import java.util.ArrayList;
 
 /**
  * Contains the task list.
  * Includes operations to add/delete duke.tasks in the list.
  */
 public class TaskList {
-    ArrayList<Task> taskList;
+    protected ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
