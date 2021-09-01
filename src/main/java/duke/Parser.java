@@ -1,28 +1,30 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
+import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.ToDoCommand;
-import duke.commands.FindCommand;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.ToDo;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
- * Main function to breakdown the input of the user
+ * Main function to break down the input of the user.
  */
 public class Parser {
 
-    private static final String TIME_PARSE_ERROR = "Hmm.. Seems like the time format is foreign to me. \n"
+    private static final String TIME_PARSE_ERROR =
+            "Hmm.. Seems like the time format is foreign to me. \n"
             + "Please use the following format:\n"
             + "yyyy-MM-dd HH:MM (e.g 2020-05-19 15:30)";
 
@@ -79,17 +81,17 @@ public class Parser {
         case "event":
             try {
                 if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
-                    throw new DukeExceptions("Oops," +
-                            "you need to tell me the description and the time of the event");
+                    throw new DukeExceptions("Oops,"
+                            + "you need to tell me the description and the time of the event");
                 }
                 String[] splitBody = splitUserInput[1].split("/at", 2);
                 if (splitBody[0].equals("")) {
-                    throw new DukeExceptions("Oops," +
-                            "you need to tell me the description and the time of the event");
+                    throw new DukeExceptions("Oops,"
+                            + "you need to tell me the description and the time of the event");
 
                 } else if (splitBody.length == 1 || splitBody[1].strip().equals("")) {
-                    throw new DukeExceptions("Oops! I need to know when the event is. \n" +
-                            "Use the /at argument followed by yyyy-MM-dd HH:mm please");
+                    throw new DukeExceptions("Oops! I need to know when the event is. \n"
+                            + "Use the /at argument followed by yyyy-MM-dd HH:mm please");
                 }
 
                 String desc = splitBody[0].strip();
@@ -103,17 +105,17 @@ public class Parser {
 
         case "deadline":
             if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
-                throw new DukeExceptions("Oops, " +
-                        "you need to tell me the description and the time of the deadline");
+                throw new DukeExceptions("Oops, "
+                        + "you need to tell me the description and the time of the deadline");
             }
             try {
                 String[] splitBody = splitUserInput[1].split("/by", 2);
                 if (splitBody[0].equals("")) {
-                    throw new DukeExceptions("Oops," +
-                            "you need to tell me the description and the time of the deadline");
+                    throw new DukeExceptions("Oops,"
+                            + "you need to tell me the description and the time of the deadline");
                 } else if (splitBody.length == 1 || splitBody[1].strip().equals("")) {
-                    throw new DukeExceptions("Oops! I need to know when the deadline is. \n" +
-                            "Use the /by argument followed by yyyy-MM-dd HH:mm please");
+                    throw new DukeExceptions("Oops! I need to know when the deadline is. \n"
+                            + "Use the /by argument followed by yyyy-MM-dd HH:mm please");
                 }
                 String desc = splitBody[0].strip();
                 LocalDateTime time = LocalDateTime.parse(splitBody[1].strip(),
@@ -128,16 +130,16 @@ public class Parser {
 
         case "todo":
             if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
-                throw new DukeExceptions("Oops, " +
-                        "you need to tell me the description of the task on hand");
+                throw new DukeExceptions("Oops, "
+                        + "you need to tell me the description of the task on hand");
             }
             ToDo toDo = ToDo.create(splitUserInput[1]);
             return new ToDoCommand(toDo);
 
         case "find":
             if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
-                throw new DukeExceptions("Oops, " +
-                        "you need to tell me the keyword you are looking for");
+                throw new DukeExceptions("Oops, "
+                        + "you need to tell me the keyword you are looking for");
             }
             return new FindCommand(splitUserInput[1]);
 

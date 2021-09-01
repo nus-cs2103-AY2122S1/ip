@@ -3,7 +3,7 @@ package duke.tasks;
 /**
  * Class to handle ToDo tasks
  */
-public class ToDo extends Task{
+public class ToDo extends Task {
 
     private ToDo(String description) {
         super(description, "T");

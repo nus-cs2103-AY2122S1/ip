@@ -8,10 +8,12 @@ import duke.tasks.ToDo;
  * Class to handle the todo command.
  */
 public class ToDoCommand extends Command {
-    ToDo toDo;
+    private ToDo toDo;
 
     /**
      * Construct a new ToDoCommand instance with the specified toDo task stored.
+     *
+     * @param toDo the ToDo task to be stored.
      */
     public ToDoCommand(ToDo toDo) {
         this.toDo = toDo;

@@ -7,10 +7,12 @@ import duke.storage.Storage;
  * Class to handle Find command
  */
 public class FindCommand extends Command {
-    String keyword;
+    private String keyword;
 
     /**
      * Public constructor to create a new FindCommand with the keyword stored
+     *
+     * @param keyword The keyword to be stored.
      */
     public FindCommand(String keyword) {
         this.keyword = keyword;

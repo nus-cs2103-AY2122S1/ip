@@ -1,14 +1,14 @@
 package duke.storage;
 
-import duke.tasks.Task;
-import duke.DukeExceptions;
-
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+import duke.DukeExceptions;
+import duke.tasks.Task;
 
 public class TaskListTest {
-    Task task = new Task("desc", "s");
-    TaskList taskList= new TaskList();
+    private Task task = new Task("desc", "s");
+    private TaskList taskList = new TaskList();
 
     @Test
     //Test to ensure first mark as finished does not throw exception

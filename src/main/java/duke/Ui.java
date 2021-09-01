@@ -7,7 +7,8 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    private static final String HORIZONTAL_LINE = "_____________________________________________________________________";
+    private static final String HORIZONTAL_LINE =
+            "_____________________________________________________________________";
     private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -42,7 +43,9 @@ public class Ui {
     }
 
     /**
-     * Prints greetings & goodbyes
+     * Prints greetings and goodbyes
+     *
+     * @param isGreeting Boolean to indicate if it is a greeting or goodbye
      **/
     public void greet(Boolean isGreeting) {
         String printMessage = isGreeting
@@ -52,21 +55,27 @@ public class Ui {
     }
 
     /**
-     * Returns the next line of user input
+     * Get the next line of user input.
+     *
+     * @return The next line of the user input.
      **/
     public String getInput() {
         return myScanner.nextLine();
     }
 
     /**
-     * Prints a string with proper format
+     * Prints a string with proper format.
+     *
+     * @param s The String to be printed.
      **/
     public void print(String s) {
         reply(s);
     }
 
     /**
-     * Prints error message of an exception
+     * Prints error message of an exception.
+     *
+     * @param e The exception which holds the message to be printed.
      **/
     public void printException(Exception e) {
         reply(e.getMessage());

@@ -8,7 +8,7 @@ import duke.tasks.Event;
  * Class to handle the event command.
  */
 public class EventCommand extends Command {
-    Event event;
+    private Event event;
 
     /**
      * Construct a new EventCommand instance with the specified event task stored.

@@ -8,13 +8,12 @@ import duke.storage.Storage;
  * Class to handle the done command.
  */
 public class DoneCommand extends Command {
-    int index;
+    private int index;
 
     /**
-     * Public constructor for the DoneCommand class
+     * Constructor for a new DoneCommand instance with the specified index stored.
      *
-     * @param input The index of the task to mark as done in the list
-     * @return A new DoneCommand instance with the specified inex stored.
+     * @param input The index of the task to mark as done in the list.
      */
 
     public DoneCommand(int input) {

@@ -10,9 +10,11 @@ import duke.storage.Storage;
 public class Duke {
 
     /**
-     * Main function of the duke program
+     * Main function of the duke program.
      * Loops taking user input and converting it into commands to
-     * execute until look is broken (using bye command)
+     * execute until look is broken (using bye command).
+     *
+     * @param args The arguments from console.
      */
 
     public static void main(String[] args) {

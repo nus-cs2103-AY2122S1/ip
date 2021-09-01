@@ -1,16 +1,16 @@
 package duke;
 
-import duke.commands.ToDoCommand;
-import duke.tasks.ToDo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import duke.commands.ToDoCommand;
+import duke.tasks.ToDo;
 
 public class ParserTest {
-    Parser parser = new Parser();
-    String input1 = "";
-    String input2 = "bob";
-    String input3 = "todo playgames";
+    private Parser parser = new Parser();
+    private String input1 = "";
+    private String input2 = "bob";
+    private String input3 = "todo playgames";
     @Test
     void parseTestNullInput() {
         Assertions.assertThrows(DukeExceptions.class, ()-> parser.parse(input1));
@@ -29,7 +29,7 @@ public class ParserTest {
         ToDoCommand toDoCommand = new ToDoCommand(ToDo.create("t"));
         try {
             o = parser.parse(input3);
-        } catch (DukeExceptions e){
+        } catch (DukeExceptions e) {
             System.out.println(e.getMessage());
         }
 

@@ -8,7 +8,7 @@ import duke.storage.Storage;
  * Class to handle the delete command.
  */
 public class DeleteCommand extends Command {
-    int index;
+    private int index;
 
     /**
      * Construct a new DeleteCommand instance with the specified index stored.

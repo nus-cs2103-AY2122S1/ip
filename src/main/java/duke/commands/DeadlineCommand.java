@@ -8,13 +8,12 @@ import duke.tasks.Deadline;
  * Class to handle the deadline command.
  */
 public class DeadlineCommand extends Command {
-    Deadline deadline;
+    private Deadline deadline;
 
     /**
-     * Public constructor for the DeadlineCommand class
+     * Constructor for a new DeadlineCommand instance with the specified deadline task stored.
      *
      * @param deadline The deadline task.
-     * @return A new DeadlineCommand instance with the specified deadline task stored.
      */
     public DeadlineCommand(Deadline deadline) {
         this.deadline = deadline;

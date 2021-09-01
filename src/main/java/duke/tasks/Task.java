@@ -50,7 +50,7 @@ public class Task {
 
     /** Returns 'X' if the task is mark as done, a black space if not **/
     public String getStatusIcon() {
-        return (isDone? "X" : " ");
+        return (isDone ? "X" : " ");
     }
 
     /**
@@ -58,7 +58,7 @@ public class Task {
      *
      * @param t boolean input for the isDone property to follow
      */
-    public void markFinished(boolean t){
+    public void markFinished(boolean t) {
         this.isDone = t;
     }
 
