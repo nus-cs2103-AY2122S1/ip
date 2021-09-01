@@ -62,7 +62,7 @@ public class Duke {
     }
 
     /**
-     *
+     * Runs Duke.
      */
     public void run() {
         if (!myStorage.didTaskFileExist()) {
@@ -70,7 +70,6 @@ public class Duke {
         } else {
             Ui.displayMessage(REWELCOME_MESSAGE);
         }
-        myStorage.readTaskFile(taskList);
         inputLoop();
         ui.closeScanner();
         Ui.displayMessage(EXIT_MESSAGE);

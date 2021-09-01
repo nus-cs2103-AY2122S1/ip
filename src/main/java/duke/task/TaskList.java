@@ -34,7 +34,7 @@ public class TaskList {
         this.taskArr = new ArrayList<>();
         String[] taskArrStr = taskList.split("\n");
         for (String task : taskArrStr) {
-            addSavedTask(task);
+            this.addSavedTask(task);
         }
     }
 
@@ -61,10 +61,10 @@ public class TaskList {
     }
 
     /**
-     * Finds tasks which matches the input string and prints the output
+     * Finds tasks which matches the input string and prints the output.
      *
-     * @param input The input string
-     * @return Returns a string message with the matching Tasks
+     * @param input The input string.
+     * @return Returns a string message with the matching Tasks.
      */
     public String findTask(String input) {
         StringBuilder printedList = new StringBuilder();

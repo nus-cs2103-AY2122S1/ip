@@ -26,7 +26,7 @@ public class Event extends Task{
      * @param eventDatetime The date where it is due, to be converted to a DateTime object
      * @param isDone Whether the Event is finished
      */
-    private Event(String text, String eventDatetime, boolean isDone) {
+    private Event(String text, String eventDatetime, boolean isDone) throws DukeException {
         super(text, isDone);
         this.eventDatetime = new DateTime(eventDatetime);
     }
@@ -74,7 +74,7 @@ public class Event extends Task{
      * @return The String format of the Event in taskList.txt
      */
     public String getSaveFormat() {
-        return String.format("%c | %d | %s | %s", SYMBOL, super.getDoneInt(), this.getText(), this.eventDatetime);
+        return String.format("%c | %d | %s | %s", SYMBOL, super.getDoneInt(), this.getText(), this.eventDatetime.getSaveFormat());
     };
 
     /**

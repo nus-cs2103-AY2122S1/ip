@@ -83,7 +83,7 @@ public class Storage {
         }
     }
 
-    public String load() throws DukeException{
+    public String load() throws DukeException {
         StringBuilder taskList = new StringBuilder("");
         try {
             Scanner taskScanner = new Scanner(this.taskFile);
@@ -92,10 +92,10 @@ public class Storage {
                 taskList.append(taskLine).append("\n");
             }
             taskScanner.close();
-            return taskList.toString();
         } catch (FileNotFoundException err) {
             throw new DukeException(FILE_NOT_FOUND_MESSAGE);
         }
+        return taskList.toString();
     }
 
     /**

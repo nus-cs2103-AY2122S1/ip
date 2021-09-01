@@ -43,7 +43,7 @@ public abstract class Task {
 
     /**
      * Gets the description of the Task.
-     * @return
+     * @return Description of the Task.
      */
     public String getText() {
         return this.text;

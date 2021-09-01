@@ -3,6 +3,8 @@ package duke.task;
 import duke.util.DateTime;
 import duke.util.DukeException;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Deadline is created by 'deadline eat breakfast /by 0800'.
  * Deadlines are a type of Task.
@@ -21,21 +23,21 @@ public class Deadline extends Task {
     /**
      * Constructor for the deadline object.
      *
-     * @param text The description of the deadline
-     * @param dueDate The date where it is due, to be converted to a DateTime object
-     * @param isDone Whether the Deadline is finished
+     * @param text The description of the deadline.
+     * @param dueDate The date where it is due, to be converted to a DateTime object.
+     * @param isDone Whether the Deadline is finished.
      */
-    private Deadline(String text, String dueDate, boolean isDone) {
+    private Deadline(String text, String dueDate, boolean isDone) throws DukeException {
         super(text, isDone);
         this.dueDate = new DateTime(dueDate);
     }
 
     /**
      * Factory method for creating a deadline object.
-     * @param input The remaining input after the initial 'deadline' string
-     * @param isDone Whether the Deadline is finished
-     * @return A Deadline object
-     * @throws DukeException An exception thrown according to the message given
+     * @param input The remaining input after the initial 'deadline' string.
+     * @param isDone Whether the Deadline is finished.
+     * @return A Deadline object.
+     * @throws DukeException An exception thrown according to the message given.
      */
     public static Deadline newDeadline(String input, boolean isDone) throws DukeException {
         if (input.split(" ").length < 3) {
@@ -73,7 +75,7 @@ public class Deadline extends Task {
      * @return The String format of the Deadline in taskList.txt
      */
     public String getSaveFormat(){
-        return String.format("%c | %d | %s | %s", SYMBOL, super.getDoneInt(), this.getText(), this.dueDate);
+        return String.format("%c | %d | %s | %s", SYMBOL, super.getDoneInt(), this.getText(), this.dueDate.getSaveFormat());
     };
 
     /**
