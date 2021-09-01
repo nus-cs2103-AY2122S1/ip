@@ -3,7 +3,11 @@ package duke.ui;
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
@@ -23,8 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
@@ -53,6 +57,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Greets the user by displaying the greeting message when the gui starts running.
+     */
     public void greetTheUser() {
         String greetingMessage = duke.getGreetingMessage();
         dialogContainer.getChildren().add(
@@ -60,6 +67,9 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Alerts the user and terminates the duke program.
+     */
     public void exit() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Exit");
