@@ -68,7 +68,7 @@ public class Parser {
             taskType = TaskType.EVENT;
             break;
         default:
-            return null;    // Invalid input
+            return null; // Invalid input
         }
 
         if (!userInputScanner.hasNext()) {
@@ -87,7 +87,7 @@ public class Parser {
             return new Event(userInputScanner.next().trim(),
                     LocalDate.parse(userInputScanner.next().trim()));
         default:
-            return null;    // Error
+            return null; // Error
         }
     }
 
@@ -104,6 +104,13 @@ public class Parser {
         return userInputScanner.nextInt();
     }
 
+    /**
+     * Returns the search term to be searched for among the names
+     * of tasks in the list.
+     *
+     * @param userInput The whole line of command from the user.
+     * @return The search term specified in the user command.
+     */
     public static String parseSearchSubject(String userInput) {
         Scanner userInputScanner = new Scanner(userInput);
         userInputScanner.next();

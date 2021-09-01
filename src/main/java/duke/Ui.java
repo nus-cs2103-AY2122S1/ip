@@ -4,13 +4,13 @@ package duke;
  * Ui is the class that deals with all output to the user.
  */
 public class Ui {
-    private final String LOGO = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
                               + "|  _ \\ _   _| | _____ \n"
                               + "| | | | | | | |/ / _ \\\n"
                               + "| |_| | |_| |   <  __/\n"
                               + "|____/ \\__,_|_|\\_\\___|\n";
-    private final String DUKE = "\nDuke:";
-    private final String USER = "\nUser:";
+    private static final String DUKE_HEADER = "\nDuke:";
+    private static final String USER_HEADER = "\nUser:";
 
     /**
      * Class constructor.
@@ -30,14 +30,14 @@ public class Ui {
      * Prints the message when the program is ready to accept user commands.
      */
     public void printStartInteractionsMessage() {
-        System.out.println(DUKE + "Hi, what do you want from me?");
+        System.out.println(DUKE_HEADER + "Hi, what do you want from me?");
     }
 
     /**
      * Prints the message when waiting for the user's next command.
      */
     public void printWaitingUserInput() {
-        System.out.print(USER);
+        System.out.print(USER_HEADER);
     }
 
     /**
@@ -59,7 +59,7 @@ public class Ui {
      * @param newTask The task that was added to the list.
      */
     public void printAddTask(TaskList tasks, Task newTask) {
-        System.out.println(DUKE + "\n\tAdded:\n\t\t" + newTask);
+        System.out.println(DUKE_HEADER + "\n\tAdded:\n\t\t" + newTask);
         System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
     }
 
@@ -69,7 +69,7 @@ public class Ui {
      * @param completedTask The task that was marked as completed.
      */
     public void printCompleteTask(Task completedTask) {
-        System.out.println(DUKE + "\n\tMarking task as completed:");
+        System.out.println(DUKE_HEADER + "\n\tMarking task as completed:");
         System.out.printf("\t\t%s\n", completedTask);
     }
 
@@ -80,7 +80,7 @@ public class Ui {
      * @param deletedTask The task that was deleted from the list.
      */
     public void printDeleteTask(TaskList tasks, Task deletedTask) {
-        System.out.println(DUKE + "\n\tRemoving task:");
+        System.out.println(DUKE_HEADER + "\n\tRemoving task:");
         System.out.printf("\t\t%s\n", deletedTask);
         System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
     }
@@ -103,11 +103,9 @@ public class Ui {
 
         if (numOfResults == 0) {
             System.out.println("\n\tNo results found.");
-        }
-        else if (numOfResults == 1) {
+        } else if (numOfResults == 1) {
             System.out.println("\tTotal of 1 result found.");
-        }
-        else {
+        } else {
             System.out.println("\tTotal of " + numOfResults + " results found.");
         }
     }
@@ -120,7 +118,7 @@ public class Ui {
      *             that was loaded.
      */
     public void printLoadTasks(TaskList tasks) {
-        System.out.println(DUKE + "I have loaded your past tasks list!");
+        System.out.println(DUKE_HEADER + "I have loaded your past tasks list!");
         printTaskList(tasks);
     }
 
@@ -130,7 +128,7 @@ public class Ui {
      * @param message The error message from the exception.
      */
     public void printErrorMessage(String message) {
-        System.out.println(DUKE);
+        System.out.println(DUKE_HEADER);
         System.out.println("\tError: " + message + ".");
     }
 
@@ -138,6 +136,6 @@ public class Ui {
      * Prints the message when the program is being exited.
      */
     public void printExitMessage() {
-        System.out.println(DUKE + "Bye. Have a nice day.");
+        System.out.println(DUKE_HEADER + "Bye. Have a nice day.");
     }
 }

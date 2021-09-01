@@ -8,6 +8,11 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
+    /**
+     * Class constructor.
+     *
+     * @param filepath The file path to the save file for Duke.
+     */
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
@@ -23,6 +28,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the operation of Duke task manager.
+     */
     public void run() {
         ui.printStartInteractionsMessage();
 
@@ -60,6 +68,7 @@ public class Duke {
         case EXIT:
             ui.printExitMessage();
             System.exit(0);
+            break;
         case LIST:
             ui.printTaskList(tasks);
             break;
@@ -75,6 +84,8 @@ public class Duke {
         case FIND_TASK:
             findTask(Parser.parseSearchSubject(userInput));
             break;
+        default:
+            throw new UnsupportedOperationException(); // Error
         }
     }
 

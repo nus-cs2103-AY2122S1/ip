@@ -1,3 +1,8 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
 import duke.CommandType;
 import duke.DukeException;
 import duke.MissingInputException;
@@ -7,15 +12,10 @@ import duke.TaskList;
 import duke.ToDo;
 import duke.UnsupportedOperationException;
 
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
 public class DukeTest {
 
     @Test
-    public void taskListTest(){
+    public void taskListTest() {
         TaskList taskList = new TaskList();
         assertEquals(taskList.getSize(), 0);
 

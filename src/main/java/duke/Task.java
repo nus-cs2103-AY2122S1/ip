@@ -9,14 +9,6 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Creates a String object that contains all the task details
-     * that is to be saved in the save file.
-     *
-     * @return The String object containing the task details.
-     */
-    public abstract String toSaveFormat();
-
-    /**
      * Class constructor specifying the name and type of the task
      * and whether the task is done.
      *
@@ -40,6 +32,14 @@ public abstract class Task {
     public Task(String taskName, TaskType taskType) {
         this(taskName, taskType, false);
     }
+
+    /**
+     * Creates a String object that contains all the task details
+     * that is to be saved in the save file.
+     *
+     * @return The String object containing the task details.
+     */
+    public abstract String toSaveFormat();
 
     public String getTaskName() {
         return taskName;
@@ -67,5 +67,3 @@ public abstract class Task {
         return String.format("[%s] %s", checked, taskName);
     }
 }
-
-;

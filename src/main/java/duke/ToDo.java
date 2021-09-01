@@ -1,6 +1,6 @@
 package duke;
 
-public class ToDo extends Task{
+public class ToDo extends Task {
     public ToDo(String taskName, boolean isDone) {
         super(taskName, TaskType.TODO, isDone);
     }

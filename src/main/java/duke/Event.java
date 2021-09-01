@@ -7,6 +7,13 @@ public class Event extends Task {
     private LocalDate taskDate;
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
 
+    /**
+     * Class constructor.
+     *
+     * @param taskName The name and description of task.
+     * @param taskDate The date and time of the event in the task.
+     * @param isDone Whether the task is done or not.
+     */
     public Event(String taskName, LocalDate taskDate, boolean isDone) {
         super(taskName, TaskType.EVENT, isDone);
         this.taskDate = taskDate;
