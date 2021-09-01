@@ -31,12 +31,20 @@ public class Duke {
     }
 
     /**
-     * Runs the whole application
+     * Sends a greeting message when the user first starts up Duke
+     * @return the greeting message when user starts up Duke
+     */
+    public String greetUser() {
+        return "Hello! I'm Duke!\nHow may I be of service to you?";
+    }
+
+    /**
+     * Runs the whole application with only Text
      */
     public void run() {
         ui.greetUser();
-        boolean isExit = false;
         Scanner sc = new Scanner(System.in);
+        boolean isExit = false;
         while (!isExit) {
             try {
                 String userInput = sc.nextLine();
@@ -50,7 +58,24 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Initialises and runs Duke in text-based form
+     * @param args the user input
+     */
     public static void main(String[] args) {
         new Duke().run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String userInput) {
+        try {
+            Commandable c = Parser.identifyCommand(userInput);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

@@ -24,7 +24,7 @@ public class TaskList {
     private Storage tasksStorage;
 
     /**
-     *
+     * Initialises TaskList without an associated storage.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -33,8 +33,9 @@ public class TaskList {
     }
 
     /**
+     * Initialises the TaskList and its associated storage to save the tasks in.
      *
-     * @param tasksStorage
+     * @param tasksStorage the storage to store task in TaskList
      */
     public TaskList(Storage tasksStorage) {
         this.tasks = new ArrayList<>();
