@@ -10,7 +10,6 @@ import duke.task.TaskType;
 import duke.task.Todo;
 import duke.util.DukeException;
 import duke.util.Storage;
-import duke.util.Ui;
 
 
 /**
@@ -45,17 +44,14 @@ public class AddCommand extends Command {
      *
      * @param storage storage instance initialised when duke is created.
      * @param taskList task list instance initialised when duke is created.
-     * @param ui ui instance initialised when duke is created.
      * @return String of confirmation message to indicate task added.
      */
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
+    public String execute(Storage storage, TaskList taskList) throws DukeException {
         taskList.addTask(task);
         storage.writeToDisk(taskList.compileTasks());
-        return ui.respond(
-            String.format("Caan Do!\n  added: %s\nLook at me! %d tasks in the list now!",
+        return String.format("Caan Do!\n  added: %s\nLook at me! %d tasks in the list now!",
                 this.task,
-                taskList.getSize())
-        );
+                taskList.getSize());
     }
 }

@@ -3,7 +3,6 @@ package duke.command;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.util.Storage;
-import duke.util.Ui;
 
 public class FindCommand extends Command {
     private final String searchTerm;
@@ -17,16 +16,20 @@ public class FindCommand extends Command {
      *
      * @param storage storage instance initialised when duke is created.
      * @param taskList task list instance initialised when duke is created.
-     * @param ui ui instance initialised when duke is created.
      * @return String to indicate if tasks has been searched successfully.
      */
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) {
+    public String execute(Storage storage, TaskList taskList) {
         Task[] tasks = taskList.findTasksWithName(this.searchTerm);
         if (tasks.length < 1) {
-            return ui.respond(String.format("No task found with search term %s", this.searchTerm));
+            return String.format("No task found with search term %s", this.searchTerm);
         } else {
-            return ui.findResponse(tasks);
+            StringBuilder res = new StringBuilder();
+            res.append("Found ").append(tasks.length).append(" tasks");
+            for (Task task : tasks) {
+                res.append("\n").append(task.toString());
+            }
+            return res.toString();
         }
     }
 }

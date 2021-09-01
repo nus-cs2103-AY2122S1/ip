@@ -3,7 +3,6 @@ package duke.command;
 import duke.task.TaskList;
 import duke.util.DukeException;
 import duke.util.Storage;
-import duke.util.Ui;
 
 /**
  * Abstract class comprising information required to change the state of duke when executed.
@@ -15,11 +14,10 @@ public abstract class Command {
      *
      * @param storage storage instance initialised when duke is created.
      * @param taskList task list instance initialised when duke is created.
-     * @param ui ui instance initialised when duke is created.
-     * @throws DukeException command cannot be executed successfully.
      * @return String to provide details on the execution process.
+     * @throws DukeException command cannot be executed successfully.
      */
-    public abstract String execute(Storage storage, TaskList taskList, Ui ui) throws DukeException;
+    public abstract String execute(Storage storage, TaskList taskList) throws DukeException;
 
     /**
      * Verify if the user has instructed the duke to exit.

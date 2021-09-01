@@ -1,5 +1,12 @@
 package duke;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
+import duke.command.Command;
+import duke.util.DialogBox;
+import duke.util.DukeException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -44,10 +52,19 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response;
+        try {
+            Command command = duke.getCommand(input);
+            if (command.isExit()) {
+                CompletableFuture.delayedExecutor(3, TimeUnit.SECONDS).execute(Platform::exit);
+            }
+            response = command.execute(this.duke.storage, this.duke.taskList);
+        } catch (DukeException e) {
+            response = e.getMessage();
+        }
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog("You said: " + response, dukeImage)
+                DialogBox.getUserDialog("You said: \n" + input, userImage),
+                DialogBox.getDukeDialog("Duke says: \n" + response + "\n" , dukeImage)
         );
         userInput.clear();
     }

@@ -8,7 +8,6 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.util.DukeException;
 import duke.util.Storage;
-import duke.util.Ui;
 
 public class DoneCommandTest {
 
@@ -19,8 +18,7 @@ public class DoneCommandTest {
             TaskList tl = new TaskList();
             tl.addTask(new Todo(false, "test"));
             Storage storage = new Storage();
-            Ui ui = new Ui();
-            new DoneCommand(taskNumber).execute(storage, tl, ui);
+            new DoneCommand(taskNumber).execute(storage, tl);
         } catch (DukeException e) {
             assertEquals(String.format("Task number %d invalid.", taskNumber), e.getMessage());
         }

@@ -42,6 +42,7 @@ public class Storage {
     /**
      * Writes duke data to local storage.
      *
+     * @param data Duke data in string form to be stored on local device.
      * @throws DukeException if error encountered when writing to data file on local storage.
      */
     public void writeToDisk(String data) throws DukeException {
@@ -51,7 +52,7 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
-            throw new DukeException("Unable to write to disk :(");
+            throw new DukeException("Unable to write to disk :( \n pls give me another chance !");
         }
     }
 }

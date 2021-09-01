@@ -3,7 +3,6 @@ package duke.command;
 import duke.task.TaskList;
 import duke.util.DukeException;
 import duke.util.Storage;
-import duke.util.Ui;
 
 /**
  * Set program state to exit.
@@ -25,11 +24,12 @@ public class ExitCommand extends Command {
      *
      * @param storage storage instance initialised when duke is created.
      * @param taskList task list instance initialised when duke is created.
-     * @param ui ui instance initialised when duke is created.
+     * @return message to confirm command execution.
+     * @throws DukeException on error writing to disk.
      */
     @Override
-    public String execute(Storage storage, TaskList taskList, Ui ui) throws DukeException {
+    public String execute(Storage storage, TaskList taskList) throws DukeException {
         storage.writeToDisk(taskList.compileTasks());
-        return ui.exitMessage();
+        return "Ooooh yeah! Can do!";
     }
 }
