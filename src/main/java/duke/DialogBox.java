@@ -7,8 +7,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -48,6 +50,7 @@ public class DialogBox extends HBox {
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
+        setMargin(tmp.get(0), new Insets(0, 10, 0, 0));
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }
@@ -60,7 +63,9 @@ public class DialogBox extends HBox {
      * @return DialogBox that captures the text and image of the user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: darksalmon");
+        return db;
     }
 
     /**
@@ -72,6 +77,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: peachpuff");
         db.flip();
         return db;
     }

@@ -68,7 +68,7 @@ public class TaskList {
             taskToDelete.markUndone();
             tasks.remove(taskDeleteNum - 1);
             Storage.saveData(this);
-            return "Noted. I've removed this task:" + '\n' + taskToDelete.toString() + printTaskNumber(this);
+            return "Noted. I've removed this task: " + taskToDelete.toString() + '\n' + printTaskNumber(this);
         } catch (IndexOutOfBoundsException e) {
             return "☹ OOPS!!! No such task can be deleted!";
         }
