@@ -2,11 +2,10 @@ package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.FileWriter;
-
-import java.util.Scanner;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Implements a Storage object that deals with loading and saving tasks from a file.
@@ -23,7 +22,7 @@ public class Storage {
             myTask = new File(fileName);
             myTask.getParentFile().mkdir();
             myTask.createNewFile();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("cannot create file leh");
             e.printStackTrace();
         }
@@ -41,7 +40,7 @@ public class Storage {
                 writer.write(task.toString() + "\n");
             }
             writer.close();
-        } catch(IOException e) {
+        } catch (IOException e) {
             System.out.println("cannot save the file leh");
         }
     }
@@ -68,10 +67,12 @@ public class Storage {
                 case 'E':
                     loadEvent(data, list);
                     break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + taskType);
                 }
             }
             scanner.close();
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             throw new DukeException("cannot find file");
         }
         return list;

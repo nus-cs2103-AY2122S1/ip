@@ -1,12 +1,12 @@
 package duke;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 
 public class DukeTest {
     private final String divider = "________________________________";
@@ -19,7 +19,7 @@ public class DukeTest {
 
         String expected = divider + "\r\nHello i is Duke\nWhat u want?\r\n" + divider + "\r\n"
                 + divider + "\r\none more thing: [T][ ] eat\nNow you got 1 thing(s). sian\r\n" + divider + "\r\n"
-                + divider + "\r\ni zao first\r\n"  + divider;
+                + divider + "\r\ni zao first\r\n" + divider;
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(out);
         System.setOut(printStream);
@@ -36,7 +36,7 @@ public class DukeTest {
 
         String expected = divider + "\r\nHello i is Duke\nWhat u want?\r\n" + divider + "\r\n"
                 + divider + "\r\ncan type properly pls\r\n" + divider + "\r\n"
-                + divider + "\r\ni zao first\r\n"  + divider;
+                + divider + "\r\ni zao first\r\n" + divider;
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(out);
         System.setOut(printStream);
@@ -53,8 +53,8 @@ public class DukeTest {
         System.setIn(in);
 
         String expected = divider + "\r\nHello i is Duke\nWhat u want?\r\n" + divider + "\r\n"
-                + divider + "\r\nthis one no more liao ah :\n[T][ ] eat\nNow you got 0 thing(s). sian\r\n" + divider + "\r\n"
-                + divider + "\r\ni zao first\r\n"  + divider;
+                + divider + "\r\nthis one no more liao ah :\n[T][ ] eat\nNow you got 0 thing(s). sian\r\n"
+                + divider + "\r\n" + divider + "\r\ni zao first\r\n" + divider;
         ByteArrayOutputStream out = new ByteArrayOutputStream();
         PrintStream printStream = new PrintStream(out);
         System.setOut(printStream);

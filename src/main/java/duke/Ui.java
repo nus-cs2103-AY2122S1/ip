@@ -101,6 +101,10 @@ public class Ui {
                 + "\nNow you got " + length + " thing(s). sian");
     }
 
+    /**
+     * Prints the list of matching Tasks.
+     * @param tasks The list of matching Tasks.
+     */
     public void displayMatchingList(TaskList tasks) {
         System.out.println("all these similar one:");
         for (int i = 0; i < tasks.length(); i++) {

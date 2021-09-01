@@ -55,11 +55,11 @@ public class TaskList {
             currTask.markAsDone();
             ui.done(currTask);
             storage.saveTask(tasks);
-        } catch(StringIndexOutOfBoundsException err) {
+        } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("can type properly? liddis: 'done taskNumber'");
-        } catch(NumberFormatException err) {
+        } catch (NumberFormatException err) {
             throw new DukeException("can enter number only pls? dun anyhow");
-        } catch(ArrayIndexOutOfBoundsException err) {
+        } catch (ArrayIndexOutOfBoundsException err) {
             throw new DukeException("you where got so many tasks?");
         }
     }
@@ -81,7 +81,7 @@ public class TaskList {
         try {
             Todo todo = new Todo(input.substring(5));
             add(todo, storage, ui);
-        } catch(StringIndexOutOfBoundsException err) {
+        } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("u never say what to do?");
         }
     }
@@ -99,7 +99,7 @@ public class TaskList {
             int split = input.indexOf("/");
             Deadline deadline = new Deadline(input.substring(9, split - 1), input.substring(split + 4));
             add(deadline, storage, ui);
-        } catch(StringIndexOutOfBoundsException err) {
+        } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("this one by when ah? can do it liddis or not: 'deadline task /by when'");
         }
     }
@@ -117,7 +117,7 @@ public class TaskList {
             int split = input.indexOf("/");
             Event event = new Event(input.substring(6, split - 1), input.substring(split + 4));
             add(event, storage, ui);
-        } catch(StringIndexOutOfBoundsException err) {
+        } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("this one when ah? can do it liddis or not: 'event task /at when'");
         }
     }
@@ -136,15 +136,20 @@ public class TaskList {
             ui.delete(tasks.get(taskNumber), tasks.size() - 1);
             tasks.remove(taskNumber);
             storage.saveTask(tasks);
-        } catch(StringIndexOutOfBoundsException err) {
+        } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("what u wan delete?");
-        } catch(NumberFormatException err) {
+        } catch (NumberFormatException err) {
             throw new DukeException("can enter number only pls? dun anyhow");
-        } catch(ArrayIndexOutOfBoundsException err) {
+        } catch (ArrayIndexOutOfBoundsException err) {
             throw new DukeException("you where got so many tasks?");
         }
     }
 
+    /**
+     * Finds the Tasks that matches the input from the ArrayList.
+     * @param input The user input.
+     * @param ui The Ui object.
+     */
     public void handleFind(String input, Ui ui) {
         String keyword = input.substring(5);
         ArrayList<Task> matchingTasks = new ArrayList<>();
