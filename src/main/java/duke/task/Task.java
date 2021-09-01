@@ -34,7 +34,7 @@ abstract public class Task {
         try {
             return LocalDate.parse(time);
         } catch (DateTimeParseException e) {
-            throw new DukeException("\t☹ OOPS!!! Please specify the time in the yyyy-mm-dd format.\n");
+            throw new DukeException("\t OOPS!!! Please specify the time in the yyyy-mm-dd format.\n");
         }
     }
 

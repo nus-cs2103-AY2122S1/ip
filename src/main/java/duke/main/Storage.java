@@ -50,15 +50,15 @@ public class Storage {
                         foundTask = new Event(description, time, done);
                         break;
                     default:
-                        throw new DukeException("\t☹ OOPS!!! I can't find your tasks.\n");
+                        throw new DukeException("\t OOPS!!! I can't find your tasks.\n");
                 }
                 return foundTask;
             }).collect(Collectors.toList());
             return new TaskList(taskList);
         } catch (IOException e) {
-            throw new DukeException("\t☹ OOPS!!! I can't find your tasks.\n");
+            throw new DukeException("\t OOPS!!! I can't find your tasks.\n");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\t☹ OOPS!!! Your tasks might be corrupted.");
+            throw new DukeException("\t OOPS!!! Your tasks might be corrupted.");
         }
     }
 
@@ -71,7 +71,7 @@ public class Storage {
         try {
             Files.write(filePath, tasklist.formatForStorage(), StandardCharsets.UTF_8);
         } catch (IOException e) {
-            throw new DukeException("\t☹ OOPS!!! I can't store any changes you make. \n");
+            throw new DukeException("\t OOPS!!! I can't store any changes you make. \n");
         }
     }
 
@@ -83,7 +83,7 @@ public class Storage {
             Files.newBufferedWriter(filePath);
             return Ui.getResetTasksMessage();
         } catch (IOException e) {
-            throw new DukeException("\t☹ OOPS!!! Continuing without saving.\n");
+            throw new DukeException("\t OOPS!!! Continuing without saving.\n");
         }
     }
 

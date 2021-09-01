@@ -45,7 +45,7 @@ public class Event extends Task {
 
     private static String extractDesc(String descAndTime) throws DukeException {
         if (descAndTime.equals("")) {
-            throw new DukeException("\t☹ OOPS!!! Your event needs a description.\n");
+            throw new DukeException("\t\\u2639 OOPS!!! Your event needs a description.\n");
         }
         return descAndTime.split(" at ")[0];
     }
@@ -54,13 +54,13 @@ public class Event extends Task {
         try {
             return descAndTime.split(" at ")[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\t☹ OOPS!!! You need to specify a time.\n");
+            throw new DukeException("\t OOPS!!! You need to specify a time.\n");
         }
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + Task.printTime(at) + ")";
+        return "[E]" + super.toString() + " (at: " + Task.printTime(at) + ")\n";
     }
 
     /**

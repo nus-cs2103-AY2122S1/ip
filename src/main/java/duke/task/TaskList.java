@@ -34,7 +34,7 @@ public class TaskList {
         String toPrint = "";
         for (int i = 0; i < taskList.size(); i++) {
             int index = i + 1;
-            toPrint += ("\t " + index + ". " + taskList.get(i) + "\n");
+            toPrint += ("\t " + index + ". " + taskList.get(i));
         }
         return toPrint;
     }

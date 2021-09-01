@@ -21,7 +21,6 @@ public class Ui {
      */
     public Ui(Map<String, Consumer<String>> uiCommands) {
         this.uiCommands = uiCommands;
-        greetOnStart();
     }
 
     public static String getAddTaskMessage(Task task, TaskList taskList) {
@@ -45,20 +44,6 @@ public class Ui {
 
     public static String getResetTasksMessage() {
         return "\tClearing tasks...\n" + "\tYou can now start anew...\n";
-    }
-
-    /**
-     * Greets user upon starting the assistant.
-     *
-     * @return String message.
-     */
-    public void greetOnStart() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        uiCommands.get("showDukeResponse").accept("Hello from\n" + logo);
     }
 
     /**
