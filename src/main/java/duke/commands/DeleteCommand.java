@@ -23,12 +23,14 @@ public class DeleteCommand extends Command{
      * @param storage Persistent storage for data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public String execute(TaskList tasks, Ui ui, Storage storage){
         try {
             tasks.deleteTask(index);
             Storage.removeLine(Integer.parseInt(index)-1);
+            return "Deleted!";
         } catch (Exception e){
             System.out.println(e);
+            return e.getMessage();
         }
     }
     

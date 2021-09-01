@@ -27,8 +27,9 @@ public class GetAtCommand extends Command{
      * @param storage Persistent storage for data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public String execute(TaskList tasks, Ui ui, Storage storage){
         ArrayList<Task> userInputs = tasks.getTasks();
+        String tasksToPrint = "";
         for (int i = 0; i < userInputs.size(); i++) {
             Task task = userInputs.get(i);
             if (task instanceof TaskWithDate) {
@@ -36,10 +37,11 @@ public class GetAtCommand extends Command{
                 TaskWithDate datedTask = (TaskWithDate) task;
                 if (datedTask.date.equals(date)) {
                     // Print out only if its equals to the date of interest
-                    System.out.println((i + 1) + ". " + task);
+                    tasksToPrint += (task + " ");
                 }
             }
         }
+        return tasksToPrint;
     }
 
     @Override

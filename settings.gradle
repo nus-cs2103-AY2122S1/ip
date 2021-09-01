@@ -8,4 +8,4 @@
  */
 
 rootProject.name = 'ip'
-include('lib')
+include('src')

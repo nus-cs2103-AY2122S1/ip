@@ -12,18 +12,20 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
+            String tasksToPrint = "";
             ArrayList<Task> userInputs = tasks.getTasks();
             for (int i = 0; i < userInputs.size(); i++) {
                 Task task = userInputs.get(i);
                 String description = task.getDescription();
                 if (description.contains(keyword)) {
-                    System.out.println(task);
+                    tasksToPrint += (task + " ");
                 }
             }
+            return tasksToPrint;
         } catch (Exception e) {
-            System.out.println(e);
+            return e.getMessage();
         }
     }
 

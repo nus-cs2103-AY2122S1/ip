@@ -36,7 +36,7 @@ public class AddCommand extends Command {
      * @param storage Persistent storage for data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String description;
         String time;
         Task task;
@@ -67,8 +67,9 @@ public class AddCommand extends Command {
                 Storage.saveToDisc("event" + "," + "0"  + "," + description + "," + time);
             }
             tasks.addTask(task);
+            return "Heard ya! Saved your task!";
         } catch (Exception e) {
-            System.out.println(e);
+            return e.getMessage();
         }
     }
 

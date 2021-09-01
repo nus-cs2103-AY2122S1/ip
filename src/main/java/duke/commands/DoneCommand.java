@@ -23,15 +23,14 @@ public class DoneCommand extends Command {
      * @param storage Persistent storage for data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public String execute(TaskList tasks, Ui ui, Storage storage){
         try {
             Task task = tasks.getTask(index);
             task.markAsDone();
             Storage.updateLine(Integer.parseInt(index)-1);
-            System.out.println("Nice! I've marked this task as done: ");
-            System.out.println(" " + task);
+            return "Nice! I've marked this task as done: " + task;
         } catch (Exception e) {
-            System.out.println(e);
+            return e.getMessage();
         }
     }
 

@@ -17,12 +17,14 @@ public class ListCommand extends Command {
      * @param storage Persistent storage for data
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> userInputs = tasks.getTasks();
+        String tasksToPrint = "";
         for (int i = 0; i < userInputs.size(); i++) {
             Task task = userInputs.get(i);
-            System.out.println((i + 1) + ". " + task);
+            tasksToPrint += (task + " ");
         }
+        return tasksToPrint;
     }
 
     @Override
