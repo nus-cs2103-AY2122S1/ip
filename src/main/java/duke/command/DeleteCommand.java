@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.exception.TaskDoesNotExistException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -20,7 +21,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws TaskDoesNotExistException {
         if (tasks.isTaskExists(this.taskNumber)) {
             Task taskDel = tasks.getTask(this.taskNumber - 1);
             tasks.deleteTask(this.taskNumber - 1);
@@ -28,7 +29,7 @@ public class DeleteCommand extends Command {
             return ui.display("Gotchu mate. I've removed this task: \n" + "      " + taskDel + "\n    Now you have "
                     + tasks.length() + (tasks.length() <= 1 ? " task" : " tasks") + " in the list.");
         } else {
-            return ui.display("This task does not exist! Please try again.");
+            throw new TaskDoesNotExistException();
         }
     }
 

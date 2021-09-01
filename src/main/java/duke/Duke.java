@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
@@ -27,9 +28,13 @@ public class Duke {
     }
 
     public String getResponse(String userInput) {
-        Command cmd = Parser.parse(userInput);
-        String outputMsg = cmd.execute(tasks, ui, storage);
-        return outputMsg;
+        try {
+            Command cmd = Parser.parse(userInput);
+            String outputMsg = cmd.execute(tasks, ui, storage);
+            return outputMsg;
+        } catch (DukeException error) {
+            return error.getMessage();
+        }
     }
 
 }

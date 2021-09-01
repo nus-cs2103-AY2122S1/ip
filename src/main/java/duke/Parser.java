@@ -9,6 +9,12 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
+import duke.exception.DateNotFoundException;
+import duke.exception.DescriptionNotFoundException;
+import duke.exception.DukeException;
+import duke.exception.QueryNotFoundException;
+import duke.exception.TaskNotFoundException;
+import duke.exception.TimeNotFoundException;
 
 /**
  * Parser class that encapsulates handling of user input.
@@ -21,7 +27,7 @@ public class Parser {
      * @param userInput The commands that user entered in console.
      * @return Command The action item to be executed by Duke.
      */
-    public static Command parse(String userInput) {
+    public static Command parse(String userInput) throws DukeException {
         String command = getCommand(userInput);
         switch (command) {
         case "todo":
@@ -60,32 +66,53 @@ public class Parser {
         return userInput.split(" ")[0];
     }
 
-    private static String getDescription(String userInput, String splitText, String splitTime) {
-        String[] splitInput = userInput.split(splitText)[1].split(splitTime);
-        return splitInput[0].trim();
-    }
-
-    private static String getDate(String userInput, String splitTime) {
-        String[] splitInput = userInput.split(splitTime);
-        String date = splitInput[1];
-        if (date.split(" ").length > 1) {
-            return date.split(" ")[0];
+    private static String getDescription(String userInput, String splitText, String splitTime)
+            throws DescriptionNotFoundException {
+        try {
+            String[] splitInput = userInput.split(splitText)[1].split(splitTime);
+            return splitInput[0].trim();
+        } catch (ArrayIndexOutOfBoundsException error) {
+            throw new DescriptionNotFoundException();
         }
-        return date;
     }
 
-    private static String getTime(String userInput) {
-        String[] splitInput = userInput.split(" ");
-        String time = splitInput[splitInput.length - 1];
-        return time.substring(0, 2) + ":" + time.substring(2);
+    private static String getDate(String userInput, String splitTime) throws DateNotFoundException {
+        try {
+            String[] splitInput = userInput.split(splitTime);
+            String date = splitInput[1];
+            if (date.split(" ").length > 1) {
+                return date.split(" ")[0];
+            }
+            return date;
+        } catch (ArrayIndexOutOfBoundsException error) {
+            throw new DateNotFoundException();
+        }
     }
 
-    private static int getTaskNumber(String userInput) {
-        return Integer.parseInt(userInput.split(" ")[1]);
+    private static String getTime(String userInput) throws TimeNotFoundException {
+        try {
+            String[] splitInput = userInput.split(" ");
+            String time = splitInput[splitInput.length - 1];
+            return time.substring(0, 2) + ":" + time.substring(2);
+        } catch (ArrayIndexOutOfBoundsException error) {
+            throw new TimeNotFoundException();
+        }
     }
 
-    private static String getSearchQuery(String userInput) {
-        return userInput.split("find ")[1];
+    private static int getTaskNumber(String userInput) throws TaskNotFoundException {
+        try {
+            return Integer.parseInt(userInput.split(" ")[1]);
+        } catch (ArrayIndexOutOfBoundsException error) {
+            throw new TaskNotFoundException();
+        }
+    }
+
+    private static String getSearchQuery(String userInput) throws QueryNotFoundException {
+        String[] searchArr = userInput.split("find ");
+        if (searchArr.length <= 1) {
+            throw new QueryNotFoundException();
+        }
+        return searchArr[1];
     }
 
 }

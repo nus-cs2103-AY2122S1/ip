@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.exception.TaskDoesNotExistException;
 import duke.task.TaskList;
 
 /**
@@ -36,6 +37,6 @@ public abstract class Command {
      * @param ui      Ui object that user interacts with.
      * @param storage Storage object that stores and writes to file in hard disk.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws TaskDoesNotExistException;
 
 }

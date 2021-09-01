@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.exception.TaskDoesNotExistException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -20,14 +21,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws TaskDoesNotExistException {
         if (tasks.isTaskExists(this.taskNumber)) {
             Task task = tasks.getTask(this.taskNumber - 1);
             task.markAsDone();
             storage.writeToFile(tasks.getAllTasks());
             return ui.display("Nice! This task is marked as done: \n" + "      " + task);
         } else {
-            return ui.display("This task does not exist! Please try again.");
+            throw new TaskDoesNotExistException();
         }
     }
 

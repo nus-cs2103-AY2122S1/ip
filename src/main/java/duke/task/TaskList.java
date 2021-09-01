@@ -111,24 +111,13 @@ public class TaskList {
     }
 
     /**
-     * Checks if description is given for Todo, Deadline and Event tasks.
-     *
-     * @param userInput User input provided by scanner.
-     * @return True if description is provided; false otherwise.
-     */
-    public boolean isDescExists(String userInput) {
-        String[] arr = userInput.split(" ");
-        return arr.length >= 2;
-    }
-
-    /**
      * Checks if a task exists in the list.
      *
      * @param taskNumber Index of the element to be checked.
      * @return True if the task exists. Otherwise, false.
      */
     public boolean isTaskExists(int taskNumber) {
-        return taskNumber <= this.tasksList.size();
+        return taskNumber >= 1 && taskNumber <= this.tasksList.size();
     }
 
     /**
