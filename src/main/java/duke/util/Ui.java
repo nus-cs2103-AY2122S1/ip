@@ -1,36 +1,39 @@
 package duke.util;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
+import duke.task.Task;
+
 public class Ui {
-    String logo = "   _       _\n"
+    public String logo = "   _       _\n"
             + "  /_\\  ___| |__  _   _\n"
             + " //_\\\\/ __| '_ \\| | | |\n"
             + "/  _  \\__ \\ | | | |_| |\n"
             + "\\_/ \\_/___/_| |_|\\__, |\n"
             + "                 |___/\n";
 
-    public void greetingMessage() {
-        System.out.println("Hello! I'm\n" + logo + "\nWhat can I do for you?");
+    public String greetingMessage() {
+        return "Hello! I'm\n" + logo + "\nWhat can I do for you?";
     }
 
-    public void exitMessaage() {
-        System.out.println("\t ByeBye! Hope to see you again!");
+    public String exitMessaage() {
+        return "\t ByeBye! Hope to see you again!";
     }
 
-    public void listTasksOutput(ArrayList<Task> commands) {
-        System.out.println("Here are the tasks in your list:");
+    @SuppressWarnings("checkstyle:MissingJavadocMethod")
+    public String listTasksOutput(ArrayList<Task> commands) {
+        String output = "Here are the tasks in your list: \n";
         for (int i = 0; i < commands.size(); i++) {
-            System.out.println((i + 1) + ". " + commands.get(i));
+            output += (i + 1) + ". " + commands.get(i) + "\n";
         }
+        return output;
     }
 
-    public void doneOutput(Task task, int tasksRemaining) {
-        System.out.println("Good job! I've marked this task as completed:");
-        System.out.println(task);
-        System.out.println("You now have " + tasksRemaining + " tasks to complete");
+    @SuppressWarnings("checkstyle:MissingJavadocMethod")
+    public String doneOutput(Task task, int tasksRemaining) {
+        String output = "Good job! I've marked this task as completed: \n" + task
+                + "\n You now have " + tasksRemaining + " tasks to complete";
+        return output;
     }
 
     public void dottedLine() {
@@ -41,9 +44,10 @@ public class Ui {
         System.out.println("------------------------------------------------------------");
     }
 
-    public void removeOutput(Task task, int tasksRemaining) {
-        System.out.println("Okay! I have removed this task for you:");
-        System.out.println(task);
-        System.out.println("You now have " + tasksRemaining + " tasks in your list.");
+    @SuppressWarnings("checkstyle:MissingJavadocMethod")
+    public String removeOutput(Task task, int tasksRemaining) {
+        String output = "Okay! I have removed this task for you: \n" + task
+        + "\n You now have " + tasksRemaining + " tasks in your list.";
+        return output;
     }
 }

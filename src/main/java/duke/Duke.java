@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyTaskDescriptionException;
@@ -24,8 +23,6 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-
-
 public class Duke {
     private ArrayList<Task> commands = new ArrayList<>();
     private int doneTasks = 0;
@@ -33,6 +30,7 @@ public class Duke {
     private Storage storage = new Storage();
     private Parser parser = new Parser();
     private TaskList taskList = new TaskList();
+    // ...
 
     /**
      * Executes the commands entered
@@ -40,9 +38,10 @@ public class Duke {
      * @param input description of the command
      * @param isDone checks if the task is completed
      */
-    public void execute(DukeCommands command, String input, int isDone) {
+    public String execute(DukeCommands command, String input, int isDone) {
         DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("d-MM-yyyy");
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d-MM-yyyy HHmm");
+        String response = "";
         try {
             boolean taskToAdd = false;
             int taskIndex;
@@ -101,14 +100,14 @@ public class Duke {
                 if (keyword.length > 1) {
                     throw new MultipleKeywordException();
                 }
-                taskList.find(keyword[0], commands);
+                response = taskList.find(keyword[0], commands);
                 break;
             case LIST:
-                taskList.list(commands);
+                response = taskList.list(commands);
                 break;
             case BYE:
                 storage.saveCommands(commands);
-                ui.exitMessaage();
+                response = ui.exitMessaage();
                 System.exit(0);
                 break;
             case DONE:
@@ -116,7 +115,7 @@ public class Duke {
                     throw new EmptyTaskNumberException();
                 } else {
                     taskIndex = Integer.parseInt(input.trim());
-                    done(taskIndex - 1);
+                    response = done(taskIndex - 1);
                 }
                 break;
             case DELETE:
@@ -124,25 +123,24 @@ public class Duke {
                     throw new EmptyTaskNumberException();
                 } else {
                     taskIndex = Integer.parseInt(input.trim());
-                    taskList.remove(taskIndex - 1, commands);
+                    response = taskList.remove(taskIndex - 1, commands);
                 }
                 break;
             default:
                 throw new UnknownInputException();
             }
             if (taskToAdd) {
-                System.out.println("I have added this task:");
-                System.out.println(commands.get(commands.size() - 1));
-                System.out.println("You now have " + commands.size() + " tasks in your list");
+                response = "I have added this task: \n" + commands.get(commands.size() - 1)
+                        + "\n" + "You now have " + commands.size() + " tasks in your list";
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            response = e.getMessage();
         }
-
-
+        return response;
     }
 
-    void done(int listNumber) {
+    String done(int listNumber) {
+        String response = "";
         try {
             if (listNumber < commands.size()) {
                 if (!commands.get(listNumber).isDone) {
@@ -151,41 +149,38 @@ public class Duke {
                     throw new TaskDoneAlreadyException();
                 }
                 doneTasks++;
-                ui.doneOutput(commands.get(listNumber), (commands.size() - doneTasks));
+                response = ui.doneOutput(commands.get(listNumber), (commands.size() - doneTasks));
             } else {
                 throw new InvalidTaskException();
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            response = e.getMessage();
         }
-
+        return response;
     }
 
     /**
      * Execute the program
      */
-    void run() {
-        storage.loadCommands(this);
+    String run(String input) {
+        String response;
         ui.greetingMessage();
-        Scanner sc = new Scanner(System.in);
-        //Echo
-        while (sc.hasNext()) {
-            //Exit command
-            ui.dottedLine();
-            String command = sc.next().trim();
-            String input = sc.nextLine().trim();
-            try {
-                DukeCommands dukeCommand = parser.parseCommand(command);
-                execute(dukeCommand, input, 0);
-            } catch (IllegalArgumentException e) {
-                System.out.println("I'm sorry, I don't know what that means! ☹");
-            }
-            ui.line();
+        String []parse = input.split(" ", 2);
+        String command = parse[0].trim();
+        String description = "";
+        if (parse.length >= 2) {
+            description = parse[1].trim();
         }
-        sc.close();
+        try {
+            DukeCommands dukeCommand = parser.parseCommand(command);
+            response = execute(dukeCommand, description, 0);
+        } catch (IllegalArgumentException e) {
+            response = "I'm sorry, I don't know what that means! ☹";
+        }
+        return response;
     }
 
     public static void main(String[] args) {
-        new Duke().run();
+        //new Duke().run();
     }
 }
