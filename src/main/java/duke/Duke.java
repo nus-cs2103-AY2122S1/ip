@@ -48,6 +48,22 @@ public class Duke {
         }
     }
 
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+            String response = "something";
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
     public static void main(String[] args) {
         new Duke("data.txt").run();
     }
