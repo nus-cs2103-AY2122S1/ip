@@ -11,6 +11,7 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * Creates a command that adds a {@link Deadline} to the user's tasks.
+     *
      * @param arguments Command arguments.
      */
     public AddDeadlineCommand(String arguments) throws Exception {
@@ -22,10 +23,13 @@ public class AddDeadlineCommand extends Command {
 
     /**
      * Adds a deadline to the user's tasklist.
+     *
      * @param taskList The tasklist.
      * @param ui The instance of the {@link Ui} class.
      * @param storage The instance of the {@link Storage} class.
+     * @throws IOException when unable to save tasks.
      */
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
         Task deadline = Deadline.fromInput(arguments);
         taskList.addTask(deadline);
@@ -35,6 +39,7 @@ public class AddDeadlineCommand extends Command {
                 + taskList.size() + " tasks in your list.");
     }
 
+    @Override
     public boolean shouldExit() {
         return false;
     }

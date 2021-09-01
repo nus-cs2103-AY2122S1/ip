@@ -10,6 +10,7 @@ public class FilterTasksCommand extends Command {
 
     /**
      * Creates a command that filters a user's tasklist by the search string.
+     *
      * @param arguments Command arguments.
      */
     public FilterTasksCommand(String arguments) throws Exception {
@@ -21,11 +22,13 @@ public class FilterTasksCommand extends Command {
 
     /**
      * Filters a user's tasklist.
+     *
      * @param taskList The tasklist.
      * @param ui The instance of the {@link Ui} class.
      * @param storage The instance of the {@link Storage} class.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
+    @Override
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList filteredTaskList = taskList.filterTasks(searchInput);
 
         StringBuilder builder = new StringBuilder();
@@ -38,9 +41,9 @@ public class FilterTasksCommand extends Command {
 
             for (int i = 0; i < numTasks; i++) {
                 Task item = filteredTaskList.getTask(i);
-                builder.append(i + 1);
-                builder.append(". ");
-                builder.append(item.toString());
+                builder.append(i + 1)
+                        .append(". ")
+                        .append(item.toString());
                 if (i < numTasks - 1) {
                     builder.append("\n");
                 }
@@ -50,6 +53,7 @@ public class FilterTasksCommand extends Command {
         }
     }
 
+    @Override
     public boolean shouldExit() {
         return false;
     }

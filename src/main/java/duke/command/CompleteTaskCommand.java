@@ -10,6 +10,7 @@ public class CompleteTaskCommand extends Command {
 
     /**
      * Creates a command that marks a task as completed.
+     *
      * @param arguments Command arguments.
      */
     public CompleteTaskCommand(String arguments) throws Exception {
@@ -21,10 +22,13 @@ public class CompleteTaskCommand extends Command {
 
     /**
      * Marks a user's task on the tasklist as completed.
+     *
      * @param taskList The tasklist.
      * @param ui The instance of the {@link Ui} class.
      * @param storage The instance of the {@link Storage} class.
+     * @throws Exception when unable to find task or when unable to save tasks.
      */
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
         Task task;
         try {
@@ -41,6 +45,7 @@ public class CompleteTaskCommand extends Command {
         ui.printMessage("Marking task as completed:\n    " + task.toString());
     }
 
+    @Override
     public boolean shouldExit() {
         return false;
     }

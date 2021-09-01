@@ -11,6 +11,7 @@ public class Todo extends Task {
 
     /**
      * Constructs a new Todo object from an input string.
+     *
      * @param input Input string used to create todo object.
      */
     public static Todo fromInput(String input) throws Exception {

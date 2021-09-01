@@ -6,6 +6,7 @@ public abstract class Task {
 
     /**
      * Constructs a new Task object.
+     *
      * @param description Task description.
      */
     public Task(String description) {
@@ -15,6 +16,7 @@ public abstract class Task {
 
     /**
      * Constructs a new Task object.
+     *
      * @param description Task description.
      * @param isCompleted Task completion status.
      */

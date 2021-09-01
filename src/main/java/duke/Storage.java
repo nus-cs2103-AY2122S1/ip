@@ -17,6 +17,7 @@ public class Storage {
 
     /**
      * Creates a Storage object to store data at the provided filepath.
+     *
      * @param filePath The filepath to store data at.
      * @throws An IO Exception if a file cannot be created at the provided filepath.
      */
@@ -33,7 +34,9 @@ public class Storage {
     }
 
     /**
-     * Loads tasks from the storage file and populates a {@link TaskList}.
+     * Loads tasks from the storage file.
+     *
+     * @return List of tasks read from the file.
      * @throws Error if there is a problem with the file format of the stored file.
      */
     public List<Task> loadTasks() throws Exception {
@@ -81,6 +84,7 @@ public class Storage {
 
     /**
      * Saves tasks from the given tasklist to the storage file.
+     *
      * @param taskList The tasklist to save.
      * @throws IO Exception if file cannot be written to.
      */
@@ -94,6 +98,13 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Writes the stringified form of a task to the provided {@link FileWriter}.
+     *
+     * @param writer Writer to write to.
+     * @param task Task to convert to a string.
+     * @throws IO Exception if writer cannot be written to.
+     */
     private void writeTask(FileWriter writer, Task task) throws IOException {
         if (task instanceof Todo) {
             writer.write("T | ");

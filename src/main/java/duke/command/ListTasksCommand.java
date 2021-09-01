@@ -8,6 +8,7 @@ import duke.task.Task;
 public class ListTasksCommand extends Command {
     /**
      * Creates a command that lists all the user's tasks.
+     *
      * @param arguments Command arguments.
      */
     public ListTasksCommand(String arguments) throws Exception {
@@ -18,10 +19,12 @@ public class ListTasksCommand extends Command {
 
     /**
      * Lists all tasks to the user.
+     *
      * @param taskList The tasklist.
      * @param ui The instance of the {@link Ui} class.
      * @param storage The instance of the {@link Storage} class.
      */
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         StringBuilder builder = new StringBuilder();
         int numTasks = taskList.size();
@@ -31,9 +34,9 @@ public class ListTasksCommand extends Command {
         } else {
             for (int i = 0; i < numTasks; i++) {
                 Task item = taskList.getTask(i);
-                builder.append(i + 1);
-                builder.append(". ");
-                builder.append(item.toString());
+                builder.append(i + 1)
+                        .append(". ")
+                        .append(item.toString());
                 if (i < numTasks - 1) {
                     builder.append("\n");
                 }
@@ -43,6 +46,7 @@ public class ListTasksCommand extends Command {
         }
     }
 
+    @Override
     public boolean shouldExit() {
         return false;
     }

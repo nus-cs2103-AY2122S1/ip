@@ -9,6 +9,7 @@ public class Event extends Task {
 
     /**
      * Constructs a new Event object.
+     *
      * @param description Event description.
      * @param time Event time.
      */
@@ -19,6 +20,7 @@ public class Event extends Task {
 
     /**
      * Constructs a new Event object.
+     *
      * @param description Event description.
      * @param time Event time.
      * @param isCompleted Event completion status.
@@ -34,6 +36,7 @@ public class Event extends Task {
 
     /**
      * Constructs a new Event object from an input string.
+     *
      * @param input Input string used to create Event object.
      */
     public static Event fromInput(String input) throws Exception {

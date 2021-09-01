@@ -10,6 +10,7 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Creates a command that deletes a task.
+     *
      * @param arguments Command arguments.
      */
     public DeleteTaskCommand(String arguments) throws Exception {
@@ -21,10 +22,13 @@ public class DeleteTaskCommand extends Command {
 
     /**
      * Delete a task from the user's tasklist.
+     *
      * @param taskList The tasklist.
      * @param ui The instance of the {@link Ui} class.
      * @param storage The instance of the {@link Storage} class.
+     * @throws Exception when unable to find task or when unable to save tasks.
      */
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws Exception {
         Task task;
         try {
@@ -41,6 +45,7 @@ public class DeleteTaskCommand extends Command {
                 + taskList.size() + " tasks in your list.");
     }
 
+    @Override
     public boolean shouldExit() {
         return false;
     }

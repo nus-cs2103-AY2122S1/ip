@@ -7,6 +7,7 @@ import duke.Ui;
 public class ByeCommand extends Command {
     /**
      * Creates a command that exits the program.
+     *
      * @param arguments Command arguments.
      */
     public ByeCommand(String arguments) throws Exception {
@@ -15,9 +16,12 @@ public class ByeCommand extends Command {
         }
     }
 
+    @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        // No-op.
     }
 
+    @Override
     public boolean shouldExit() {
         return true;
     }

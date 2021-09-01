@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a new Deadline object.
+     *
      * @param description Deadline description.
      * @param time Deadline time.
      */
@@ -19,6 +20,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a new Deadline object.
+     *
      * @param description Deadline description.
      * @param time Deadline time.
      * @param isCompleted Deadline completion status.
@@ -34,6 +36,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a new Deadline object from an input string.
+     *
      * @param input Input string used to create Deadline object.
      */
     public static Deadline fromInput(String input) throws Exception {

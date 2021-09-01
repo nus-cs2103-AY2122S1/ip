@@ -40,23 +40,24 @@ public class Duke {
 
     /**
      * Initializes an instance of the {@link Duke} class and runs the program.
+     *
      * @param args The command-line arguments.
      */
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+        Scanner inputScanner = new Scanner(System.in);
         String filePath = "duke.txt";
         Duke duke;
 
         try {
-            duke = new Duke(input, filePath);
+            duke = new Duke(inputScanner, filePath);
         } catch (Exception e) {
             // TODO: figure out static/non-static Ui class
             System.out.println("Unable to initialize data file");
-            input.close();
+            inputScanner.close();
             return;
         }
 
         duke.run();
-        input.close();
+        inputScanner.close();
     }
 }

@@ -17,7 +17,9 @@ public class Parser {
 
     /**
      * Parses the user's input string into a command.
+     *
      * @param fullCommand The full command string input by the user.
+     * @return The new parsed {@link Command}.
      * @throws An exception if the input is not a valid command.
      */
     public static Command parse(String fullCommand) throws Exception {
