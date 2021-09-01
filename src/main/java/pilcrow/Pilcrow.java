@@ -44,8 +44,6 @@ public class Pilcrow {
                 this.respondToInput(fullCommand);
 
                 isExit = (parser.getCommandWord().equals("bye"));
-                if (isExit) {
-                }
             } catch (InvalidInputException exception) {
                 ui.printException(exception);
             }
@@ -93,7 +91,7 @@ public class Pilcrow {
             break;
         case "search":
             String searchString = parser.getRestOfCommand();
-            text = ui.printTaskList(taskList.filteredTaskList(searchString));
+            text = ui.printTaskList(taskList.getFilteredTaskList(searchString));
             break;
         case "delete":
             index = parser.getIndex();

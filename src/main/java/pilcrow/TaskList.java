@@ -72,7 +72,7 @@ public class TaskList {
      * @param string String to be searched
      * @return
      */
-    public TaskList filteredTaskList(String string) {
+    public TaskList getFilteredTaskList(String string) {
         TaskList filteredTaskList = new TaskList();
         for (int i = 0; i < this.taskList.size(); i++) {
             if (taskList.get(i).containsString(string)) {
