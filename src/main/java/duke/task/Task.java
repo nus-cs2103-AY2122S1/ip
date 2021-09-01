@@ -21,10 +21,12 @@ public abstract class Task {
      * Prints out the message to be shown when a new task has been added to the duke.task.Task list.
      * @param size Total number of tasks in the list
      */
-    public void addResponse(int size) {
+    public String addResponse(int size) {
         System.out.println("Got it. I've added this task:");
         System.out.println(this.toString());
         System.out.println("Now you have " + size + " tasks in your list.");
+        return "Got it. I've added this task: \n" + this.toString() + "\n"
+                + "Now you have " + size + " tasks in your list.";
     }
 
     public String getName() {
@@ -42,10 +44,16 @@ public abstract class Task {
         this.completed = !this.completed;
     }
 
-    //TODO
+    /**
+     * Obtains the type of the task
+     * @return String type of task
+     */
     public abstract String getType();
 
-    //TODO
+    /**
+     * Obtains the additional information of the task. If not additional information, just return empty string
+     * @return String containing additional info on task
+     */
     public abstract String getInfo();
 
     /**

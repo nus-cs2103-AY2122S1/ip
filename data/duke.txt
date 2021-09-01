@@ -1,4 +1,5 @@
 T/X/homework
 E/ /Welcome party/25 Aug
-D/ /iP/2021-09-05
-T/ /hw
+D/X/iP/2021-09-05
+T/ /graphics
+E/ /runNUS/someday

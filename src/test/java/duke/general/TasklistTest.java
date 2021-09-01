@@ -83,7 +83,7 @@ public class TasklistTest {
 
             list.deleteTask(new String[] {"delete"});
         } catch (DukeException error) {
-            assertEquals("That is an invalid index!", error.getMessage());
+            assertEquals("That is an invalid index!!", error.getMessage());
         }
     }
 }

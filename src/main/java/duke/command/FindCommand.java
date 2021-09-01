@@ -19,8 +19,11 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
+    public String execute(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
+        if (input.length < 2) {
+            throw new DukeException("Please add in a search keyword!!");
+        }
         ArrayList<Task> foundList = tasks.findTasks(input[1]);
-        ui.findResponse(foundList);
+        return ui.findResponse(foundList);
     }
 }

@@ -91,7 +91,7 @@ public class Tasklist {
      * @param inputSplit input given by user
      * @return Task that is being deleted
      */
-    public Task deleteTask(String[] inputSplit) {
+    public Task deleteTask(String[] inputSplit) throws DukeException {
         Task t = null;
         try {
             int i = Integer.parseInt(inputSplit[1]);
@@ -99,6 +99,7 @@ public class Tasklist {
             list.remove(i - 1);
         } catch (IndexOutOfBoundsException e) {
             System.out.println("That is an invalid index!!");
+            throw new DukeException("That is an invalid index!!");
         }
         return t;
     }
