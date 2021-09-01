@@ -91,8 +91,8 @@ public class Event extends Task {
     }
 
     @Override
-    public List<String> storageFields() {
-        List<String> fields = super.storageFields();
+    public List<String> getStorageFields() {
+        List<String> fields = super.getStorageFields();
         fields.add(dateRange.toStorageString());
 
         return fields;

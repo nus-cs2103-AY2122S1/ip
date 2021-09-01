@@ -52,7 +52,6 @@ public class Cli implements InteractionLayer, PrintableMixin {
      */
     @Override
     public void listen() {
-
         print(greeter.greet());
 
         String query = "";

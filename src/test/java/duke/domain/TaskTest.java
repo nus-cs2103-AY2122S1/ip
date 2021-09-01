@@ -45,7 +45,7 @@ class TaskTest {
     @Test
     void storageFields_getListOfFields_correctOrderAndValues() {
         task = new Task(TASK_NAME);
-        List<String> list = task.storageFields();
+        List<String> list = task.getStorageFields();
         assertEquals(list.get(0), null);
         assertEquals(list.get(1), 0);
         assertEquals(list.get(2), TASK_NAME);

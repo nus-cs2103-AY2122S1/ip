@@ -68,8 +68,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public List<String> storageFields() {
-        List<String> fields = super.storageFields();
+    public List<String> getStorageFields() {
+        List<String> fields = super.getStorageFields();
         fields.add(Constants.Input.DATETIME_FORMATTER.format(dueDate));
         return fields;
     }

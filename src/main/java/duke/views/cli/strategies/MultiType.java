@@ -53,22 +53,17 @@ public class MultiType extends RespondWith {
         String typeString = fields[0];
         Task task = null;
         switch (typeString) {
-        case Todo.TYPE_STRING: {
+        case Todo.TYPE_STRING:
             task = Todo.generateFromString(fields);
             break;
-        }
-        case Event.TYPE_STRING: {
+        case Event.TYPE_STRING:
             task = Event.generateFromString(fields);
             break;
-        }
-
-        case Deadline.TYPE_STRING: {
+        case Deadline.TYPE_STRING:
             task = Deadline.generateFromString(fields);
             break;
-        }
-        default: {
+        default:
             throw new DukeException(ExceptionCode.UNPROCESSABLE_ENTITY);
-        }
         }
 
         return task;
@@ -78,7 +73,7 @@ public class MultiType extends RespondWith {
     public String persistToStore() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Task task : userTasks) {
-            List<String> fields = task.storageFields();
+            List<String> fields = task.getStorageFields();
             String stringToStore = String.join(Constants.Storage.PERSISTENCE_SEPARATOR_PRETTY, fields);
             stringBuilder.append(stringToStore);
             stringBuilder.append(System.lineSeparator());

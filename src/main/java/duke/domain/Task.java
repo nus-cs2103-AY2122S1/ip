@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import duke.interfaces.PrintableMixin;
 import duke.shared.StringHelpers;
 
 /**
  * Encapsulates a generic task.
  */
-public class Task {
+public class Task implements PrintableMixin {
 
     public static final String TYPE_STRING = null;
     private String typeString = null;
@@ -49,7 +50,7 @@ public class Task {
             this.setName(name);
             typeString = (String) this.getClass().getField("TYPE_STRING").get(null);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            System.out.println("Reflection error");
+            print("Reflection error");
         }
     }
 
@@ -66,7 +67,7 @@ public class Task {
             this.setName(name);
             typeString = (String) this.getClass().getField("TYPE_STRING").get(null);
         } catch (NoSuchFieldException | IllegalAccessException e) {
-            System.out.println("Reflection error");
+            print("Reflection error");
         }
     }
 
@@ -103,7 +104,7 @@ public class Task {
      *
      * @return A list of string fields representing the task.
      */
-    public List<String> storageFields() {
+    public List<String> getStorageFields() {
         return new ArrayList<>(Arrays.asList(this.getTypeString(), this.state.getStoredRepresentation(), getName()));
     }
 

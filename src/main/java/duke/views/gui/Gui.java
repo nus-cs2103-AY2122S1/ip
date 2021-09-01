@@ -44,13 +44,11 @@ public class Gui implements InteractionLayer {
      * Begins listening to user input.
      */
     @Override
-    public void listen() {
-    }
+    public void listen() {}
 
     /**
      * Runs before the application terminates.
      */
     @Override
-    public void end() {
-    }
+    public void end() {}
 }

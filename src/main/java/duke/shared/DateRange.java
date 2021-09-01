@@ -62,15 +62,6 @@ public class DateRange {
     }
 
     /**
-     * Returns whether the date range is valid.
-     *
-     * @return Whether the date range is valid.
-     */
-    public boolean isValid() {
-        return !isInvalid();
-    }
-
-    /**
      * Returns whether the date range is invalid.
      *
      * @return Whether the date range is invalid.
