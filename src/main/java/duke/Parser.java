@@ -29,56 +29,54 @@ public class Parser {
     /**
      * The main method that processes the Ui input,
      * @param in The input from the Ui to be processed
-     * @param ui Ui to close when necessary
      * @param tasklist The list that is adjusted when a specific input is given
      */
-    public static void parse(String in, Ui ui, TaskList tasklist) {
+    public static String parse(String in, TaskList tasklist) {
         try {
             if (in.equals("bye") || in.equals("Bye")) {
-                Parser.byeOutput();
-                ui.input.close();
+                return Parser.byeOutput();
             } else if (in.equals("list") || in.equals("List")) {
-                Parser.listOutput(tasklist);
+                return Parser.listOutput(tasklist);
             } else if (in.substring(0, 4).equals("done")) {
-                Parser.doneOutput(in, tasklist);
+                return Parser.doneOutput(in, tasklist);
             } else if (in.substring(0, 6).equals("delete")) {
-                Parser.deleteOutput(in, tasklist);
+                return Parser.deleteOutput(in, tasklist);
             } else if (in.substring(0, 4).equals("todo")) {
-                Parser.toDoOutput(in, tasklist);
+                return Parser.toDoOutput(in, tasklist);
             } else if (in.substring(0, 5).equals("event")) {
-                Parser.eventOutput(in, tasklist);
+                return Parser.eventOutput(in, tasklist);
             } else if (in.substring(0, 8).equals("deadline")) {
-                Parser.deadlineOutput(in, tasklist);
+                return Parser.deadlineOutput(in, tasklist);
             } else if (in.substring(0,4).equals("find")) {
-                Parser.findOutput(in, tasklist);
+                return Parser.findOutput(in, tasklist);
             } else {
-                Parser.invalidInputResponse();
+                return Parser.invalidInputResponse();
             }
         } catch (StringIndexOutOfBoundsException e) {
-            Parser.invalidInputResponse();
+            return Parser.invalidInputResponse();
         }
     }
 
     /**
      * The default message when the input is not a proper command
      */
-    public static void invalidInputResponse() {
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public static String invalidInputResponse() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     /**
      * Exits Duke and closes the scanner
      */
-    public static void byeOutput() {
-        System.out.println("Bye. Hope to see you again!");
+    public static String byeOutput() {
+        return "Bye. Hope to see you again!";
     }
 
     /**
      * Lists out the items in the list
      * @param tasklist items to be listed
      */
-    public static void listOutput(TaskList tasklist) {
-        tasklist.showList();
+    public static String listOutput(TaskList tasklist) {
+        return tasklist.showList();
     }
 
     /**
@@ -86,15 +84,15 @@ public class Parser {
      * @param in task to be marked as done
      * @param taskList
      */
-    public static void doneOutput(String in, TaskList taskList) {
+    public static String doneOutput(String in, TaskList taskList) {
         if (in.length() < 6) {
-            System.out.println("Invalid Input for done command");
+            return "Invalid Input for done command";
         } else {
             int taskDone = parseInt(in.substring(5));
             if (taskDone > 100) {
-                System.out.println("Invalid Input for done command");
+                return "Invalid Input for done command";
             } else {
-                taskList.doTask(taskDone);
+                return taskList.doTask(taskDone);
             }
         }
     }
@@ -104,15 +102,15 @@ public class Parser {
      * @param in task to be marked as deleted
      * @param taskList
      */
-    public static void deleteOutput(String in, TaskList taskList) {
+    public static String deleteOutput(String in, TaskList taskList) {
         if (in.length() < 8) {
-            System.out.println("Invalid Input for delete command");
+            return "Invalid Input for delete command";
         } else {
             try {
                 int taskDeleted = parseInt(in.substring(7));
-                taskList.deleteTask(taskDeleted);
+                return taskList.deleteTask(taskDeleted);
             } catch (NumberFormatException e) {
-                System.out.println("Invalid Input for delete command");
+                return "Invalid Input for delete command";
             }
         }
     }
@@ -122,11 +120,11 @@ public class Parser {
      * @param in todo task to be added
      * @param taskList
      */
-    public static void toDoOutput(String in, TaskList taskList) {
+    public static String toDoOutput(String in, TaskList taskList) {
         if (in.length() == 4) {
-            System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+            return "☹ OOPS!!! The description of a todo cannot be empty.";
         } else {
-            taskList.addToDoTask(in);
+            return taskList.addToDoTask(in);
         }
     }
 
@@ -135,19 +133,20 @@ public class Parser {
      * @param in event task to be added
      * @param taskList
      */
-    public static void eventOutput(String in, TaskList taskList) {
+    public static String eventOutput(String in, TaskList taskList) {
         int i = in.indexOf("/");
         if (i < 0) {
-            System.out.println("Time not detected. Please try again");
+            return "Time not detected. Please try again";
         } else {
             try {
                 if (isValid(in.substring(i + 1, i + 11))) {
-                    taskList.addEventTask(in, i);
+                    return taskList.addEventTask(in, i);
                 }
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("Invalid date and time. Use yyyy-mm-dd format for date");
+                return "Invalid date and time. Use yyyy-mm-dd format for date";
             }
         }
+        return "Invalid date and time";
     }
 
     /**
@@ -155,19 +154,20 @@ public class Parser {
      * @param in deadline task to be added
      * @param taskList
      */
-    public static void deadlineOutput(String in, TaskList taskList) {
+    public static String deadlineOutput(String in, TaskList taskList) {
         int i = in.indexOf("/");
         if (i < 0) {
-            System.out.println("Time not detected. Please try again");
+            return "Time not detected. Please try again";
         } else {
             try {
                 if (isValid(in.substring(i + 1, i + 11))) {
-                    taskList.addDeadlineTask(in, i);
+                    return taskList.addDeadlineTask(in, i);
                 }
             } catch (StringIndexOutOfBoundsException e) {
-                System.out.println("Invalid date and time");
+                return "Invalid date and time";
             }
         }
+        return "Invalid date and time";
     }
 
     /**
@@ -175,8 +175,8 @@ public class Parser {
      * @param in keyword to be found
      * @param tasklist
      */
-    public static void findOutput(String in, TaskList tasklist) {
+    public static String findOutput(String in, TaskList tasklist) {
         String keyword = in.substring(4);
-        tasklist.findTask(keyword);
+        return tasklist.findTask(keyword);
     }
 }

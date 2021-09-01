@@ -21,15 +21,16 @@ public class TaskList {
      * Marks a task in the tasklist as done
      * @param i Takes in an integer to find the correct string placement
      */
-    public void doTask(int i) {
+    public String doTask(int i) {
         if (i > tasks.size()) {
-            System.out.println("Invalid Input for done command");
+            return "Invalid Input for done command";
         } else if (!tasks.get(i - 1).isDone) {
-            System.out.println("Nice! I've marked this task as done:");
+            String output = "Nice! I've marked this task as done:\n";
             tasks.get(i - 1).markAsDone();
-            System.out.println(tasks.get(i - 1));
+            output += tasks.get(i - 1);
+            return output;
         } else {
-            System.out.println("This task is already marked as done");
+            return "This task is already marked as done";
         }
     }
 
@@ -38,15 +39,16 @@ public class TaskList {
      * @param in Provides the string input for the event task
      * @param i Takes in an integer to find the correct string placement in the string input
      */
-    public void addEventTask(String in, int i) {
-        System.out.println("Got it. I've added this task:");
+    public String addEventTask(String in, int i) {
+        String output = "Got it. I've added this task: \n";
         tasks.add(new EventTask(in.substring(6, i), in.substring(i + 1)));
-        System.out.println(tasks.get(tasks.size()-1));
+        output += tasks.get(tasks.size()-1) + "\n";
         if (tasks.size() == 1) {
-            System.out.println("Now you have " + tasks.size() + " task in the list.");
+            output += "Now you have " + tasks.size() + " task in the list.";
         } else {
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            output += "Now you have " + tasks.size() + " tasks in the list.";
         }
+        return output;
     }
 
     /**
@@ -54,63 +56,67 @@ public class TaskList {
      * @param in Provides the string input for the deadline task
      * @param i Takes in an integer to find the correct string placement in the string input
      */
-    public void addDeadlineTask(String in, int i) {
-        System.out.println("Got it. I've added this task:");
+    public String addDeadlineTask(String in, int i) {
+        String output = "Got it. I've added this task: \n";
         tasks.add(new DeadlineTask(in.substring(9, i), in.substring(i + 1)));
-        System.out.println(tasks.get(tasks.size()-1));
+        output += tasks.get(tasks.size()-1) + "\n";
         if (tasks.size() == 1) {
-            System.out.println("Now you have " + tasks.size() + " task in the list.");
+            output += "Now you have " + tasks.size() + " task in the list.";
         } else {
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            output += "Now you have " + tasks.size() + " tasks in the list.";
         }
+        return output;
     }
 
     /**
      * Adds a todo task to the task list
      * @param in Provides the string input for the todo task
      */
-    public void addToDoTask(String in) {
-        System.out.println("Got it. I've added this task:");
+    public String addToDoTask(String in) {
+        String output = "Got it. I've added this task: \n";
         tasks.add(new ToDoTask(in.substring(5)));
-        System.out.println(tasks.get(tasks.size()-1));
+        output += tasks.get(tasks.size()-1) + "\n";
         if (tasks.size() == 1) {
-            System.out.println("Now you have " + tasks.size() + " task in the list.");
+            output += "Now you have " + tasks.size() + " task in the list.";
         } else {
-            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+            output += "Now you have " + tasks.size() + " tasks in the list.";
         }
+        return output;
     }
 
     /**
      * Displays the tasklist
      */
-    public void showList() {
+    public String showList() {
         int counter = 1;
-        System.out.println(" Here are the tasks in your list:");
+        String output = new String();
+        output += " Here are the tasks in your list: \n";
         for (Task item: tasks) {
             if(item != null) {
-                System.out.println(counter + ". " + item.toString());
+                output += counter + ". " + item.toString() + "\n";
                 counter++;
             }
-
         }
+        return output;
     }
 
     /**
      * Delets a task from the tasklist
      * @param i
      */
-    public void deleteTask(int i) {
+    public String deleteTask(int i) {
         if (tasks.isEmpty()) {
-            System.out.println("The list is empty.");
+            return "The list is empty.";
         } else {
             if (i > 100) {
-                System.out.println("Invalid Input for delete command");
+                return "Invalid Input for delete command";
             } else if (i > tasks.size()) {
-                System.out.println("Invalid Input for delete command");
+                return "Invalid Input for delete command";
             } else {
-                System.out.println("Noted. I've removed this task:");
-                System.out.println(tasks.get(i - 1));
+                String output = "Noted. I've removed this task: \n";
+                output += tasks.get(i - 1);
                 tasks.remove(i - 1);
+                return output;
             }
         }
     }
@@ -119,13 +125,14 @@ public class TaskList {
      * Finds all tasks containing a keyword
      * @param in keyword to be found
      */
-    public void findTask(String in) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String findTask(String in) {
+        String output = "Here are the matching tasks in your list: \n";
         for (Task item : tasks) {
             if (item.toString().contains(in)) {
-                System.out.println(item.toString());
+                output += item.toString() + "\n";
             }
         }
+        return output;
     }
 
     public String toString() {

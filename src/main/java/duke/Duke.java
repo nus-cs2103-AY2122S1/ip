@@ -34,10 +34,10 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private String filePath;
 
 
-    /* public static boolean isValid(String dateStr) {
+    public static boolean isValid(String dateStr) {
         try {
             LocalDate.parse(dateStr, DateTimeFormatter.ISO_LOCAL_DATE);
         } catch (DateTimeParseException e) {
@@ -47,20 +47,14 @@ public class Duke {
         return true;
     }
 
-    public Duke(String filePath) {
-        ui = new Ui();
+    public Duke() {
+        this.filePath = "./data/duke.txt" ;
         storage = new Storage(filePath);
         tasks = new TaskList(storage.loadFile());
     }
-
+/*
     public void run() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+
         Scanner input = new Scanner(System.in);
         ui.input = input;
         try {
@@ -76,8 +70,9 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("./data/duke.txt").run();
     }*/
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String process(String input) {
+        storage.saveFile(tasks);
+        return Parser.parse(input, this.tasks);
     }
 
 

@@ -1,3 +1,4 @@
+import duke.Duke;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -18,7 +19,8 @@ public class Main extends Application {
     private Button sendButton;
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Duke duke = new Duke();
 
     private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
@@ -30,10 +32,10 @@ public class Main extends Application {
 
     private void handleUserInput() {
         String userText = userInput.getText();
-        String dukeText = "yo";
+        String dukeText = duke.process(userText);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
+                DialogBox.getDukeDialog(dukeText, dukeImage)
         );
         userInput.clear();
     }
@@ -48,6 +50,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         //Step 1. Formatting the window to look as expected.
+        this.duke = duke;
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
