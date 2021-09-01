@@ -134,6 +134,7 @@ public class DateRange {
     public String toString() {
         String start = Constants.Display.DATETIME_FORMATTER.format(this.start);
         String end = Constants.Display.DATETIME_FORMATTER.format(this.end);
+        assert isValid(); // can only print valid date ranges
         return String.format("between %s and %s", start, end);
     }
 }

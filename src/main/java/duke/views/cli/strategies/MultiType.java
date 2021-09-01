@@ -117,6 +117,7 @@ public class MultiType extends RespondWith {
     }
 
     private String markDone(String query) throws DukeException {
+        assert query != null;
         try {
             int index = Integer.parseInt(query.substring(done.length()).strip()) - 1;
             if (index >= userTasks.size() || index < 0) {
@@ -145,12 +146,14 @@ public class MultiType extends RespondWith {
     }
 
     private String addTodo(String query) {
+        assert query != null;
         Task task = new Todo(query.substring(todo.length()).strip());
         userTasks.add(task);
         return formatAdd(task);
     }
 
     private String addDeadline(String query) throws DukeException {
+        assert query != null;
         String[] queries = query.substring(deadline.length()).split("/by");
         if (queries.length != 2) {
             throw DukeException.createArgumentCountException(2, queries.length);
@@ -161,6 +164,7 @@ public class MultiType extends RespondWith {
     }
 
     private String addEvent(String query) throws DukeException {
+        assert query != null;
         String[] queries = query.substring(event.length()).split("/at");
         if (queries.length != 2) {
             throw DukeException.createArgumentCountException(2, queries.length);
@@ -171,6 +175,7 @@ public class MultiType extends RespondWith {
     }
 
     private String deleteTask(String query) throws DukeException {
+        assert query != null;
         try {
             int index = Integer.parseInt(query.substring(delete.length()).strip()) - 1;
             if (index >= userTasks.size() || index < 0) {
@@ -185,6 +190,7 @@ public class MultiType extends RespondWith {
     }
 
     private String occurringOn(String query) throws DukeException {
+        assert query != null;
         String dateQuery = query.substring(on.length()).strip();
         if (dateQuery.length() == 0) {
             dateQuery = Constants.Input.DATETIME_FORMATTER.format(LocalDateTime.now());
@@ -210,6 +216,7 @@ public class MultiType extends RespondWith {
     }
 
     private String findTask(String query) {
+        assert query != null;
         String keyword = query.substring(find.length()).strip();
         List<Task> filteredTasks = userTasks.stream()
                 .filter(task -> task.match(keyword))
@@ -220,6 +227,7 @@ public class MultiType extends RespondWith {
 
     @Override
     public String respond(String query) {
+        assert query != null;
         try {
             String specialResponse = super.respond(query);
             if (specialResponse != null) {
