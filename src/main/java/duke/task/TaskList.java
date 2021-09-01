@@ -31,17 +31,19 @@ public class TaskList {
      *
      * @param t The task to be added.
      */
-    public void addTask(Task t, Ui ui) {
-        ui.addTaskMessage(t);
+    public String addTask(Task t, Ui ui) {
+        String str = ui.addTaskMessage(t);
         tasks.add(t);
-        ui.printTaskLength(this);
+        return str + ui.printTaskLength(this);
     }
 
     /** Prints all tasks in the variable tasks */
-    public void printAllTasks() {
+    public String printAllTasks() {
+        StringBuilder str = new StringBuilder("");
         for (int i = 0; i < this.numberOfTasks(); i++) {
-            System.out.println((i + 1) + "." + this.taskNumber(i));
+            str.append(i + 1).append(".").append(this.taskNumber(i)).append("\n");
         }
+        return str.toString();
     }
 
     /**
