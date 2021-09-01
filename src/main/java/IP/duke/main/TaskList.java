@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Represents a list of tasks.
  * 
  * @author Gordon Yit
- * @Version Cs2103T, Semester 2
+ * @version Cs2103T, Semester 2
  */
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -19,7 +19,7 @@ public class TaskList {
      * @param tasksStored an arraylist of tasks.
      */
     public TaskList(ArrayList<Task> tasksStored) {
-        tasks = new ArrayList<>(100);
+        tasks = new ArrayList<>();
         for (Task t : tasksStored) {
             this.tasks.add(t);
         }
@@ -49,9 +49,9 @@ public class TaskList {
      * 
      * @param taskIndex index of the task. 
      * @return a task matching the given index.
-     * @throws IndexOutOfBoundsException if taskIndex is negative or more than number of tasks.
+     * @throws IndexOutOfBoundsException if taskIndex is negative or greater than size of tasks.
      */
-    public Task getTask(int taskIndex) throws IndexOutOfBoundsException {
+    public Task getTask(int taskIndex) throws  IndexOutOfBoundsException{
         return tasks.get(taskIndex);
     }
     
@@ -59,9 +59,10 @@ public class TaskList {
      * Marks the task corresponding to the done. 
      *
      * @param taskIndex index of the task to be marked done.
-     *                   @throws IndexOutOfBoundsException if taskIndex is negative or more than number of tasks.
+     * @return the task marked done.
+     * @throws IndexOutOfBoundsException if taskIndex is negative or greater than size of tasks.
      */
-    public Task markDone(int taskIndex) throws IndexOutOfBoundsException {
+    public Task markDone(int taskIndex) throws IndexOutOfBoundsException{
         Task task = getTask(taskIndex);
         task.markAsDone();
         return task;
@@ -75,8 +76,9 @@ public class TaskList {
      *  @throws IndexOutOfBoundsException if taskIndex is negative or more than number of tasks.
      */
     public Task delete(int taskIndex) throws IndexOutOfBoundsException {
-        Task taskDeleted = getTask(taskIndex);
-        return taskDeleted;
+        Task task = tasks.get(taskIndex);
+        tasks.remove(task);
+        return task;
     }
     
     /**

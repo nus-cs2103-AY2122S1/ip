@@ -39,9 +39,9 @@ public class Storage {
      * Loads all the tasks saved in the storage folder into a tasks arraylist.
      * 
      * @return an arraylist of tasks.
-     * @throws IOException
+     * @throws DukeException exception handled by DukeException class.
      */
-    public  ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File fileDirectory = new File(filePath);
@@ -97,9 +97,9 @@ public class Storage {
 
     /**
      * Stores all the tasks from the tasks array into the storage file.
-     * 
-     * @param tasks an taskList of tasks.
-     * @throws IOException
+     *
+     * @param tasks an arraylist of tasks.
+     * @throws IOException exception caused in creating new file.
      */
     public void store(TaskList tasks) throws IOException{
         file.delete();

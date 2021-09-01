@@ -37,5 +37,6 @@ public class FilterCommand extends Command {
         TaskList matchingTasks = tasks.findMatchingTasks(date.toString());
         String message = String.format("On %s, you have:", date.toString());
         ui.showMatchingTasks(matchingTasks, date.toString(), message);
+
     }
 }

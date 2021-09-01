@@ -1,5 +1,6 @@
 package IP.duke.command;
 
+import IP.duke.main.DukeException;
 import IP.duke.task.Task;
 import IP.duke.main.Storage;
 import IP.duke.main.TaskList;
@@ -33,11 +34,17 @@ public class DeleteCommand extends Command {
      * @param tasks lists of tasks
      * @param ui the user interface.
      * @param storage the storage file.
+     * @throws DukeException exception handled by DukeException class.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task DeletedTask = tasks.getTask(taskNumber - 1);
-        ui.showTaskDeleted(DeletedTask, tasks.getNumTasks());
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        try {
+            Task deletedTask = tasks.delete(taskNumber - 1);
+            int numTasksRemaining = tasks.getNumTasks();
+            ui.showTaskDeleted(deletedTask, numTasksRemaining);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(e);
+        }
     }
     
 }

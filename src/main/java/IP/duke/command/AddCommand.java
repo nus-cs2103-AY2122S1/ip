@@ -14,7 +14,7 @@ import java.time.format.DateTimeParseException;
  * Represents a command to add a task.
  * 
  * @author Gordon Yit
- * @Version CS2103T, Semester 2
+ * @version CS2103T, Semester 2
  */
 public class AddCommand extends Command {
     private String addCommand;
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
      * @param tasks lists of tasks
      * @param ui the user interface.
      * @param storage the storage file.
-     * @throws DukeException
+     * @throws DukeException exception handled by DukeException class
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -49,8 +49,9 @@ public class AddCommand extends Command {
             } else {
                 task = new Todo(addCommand);
             }
-            tasks.add(task);
-            ui.showTaskAdded(task, tasks.getNumTasks());
+
+            Task taskAdded = tasks.add(task);
+            ui.showTaskAdded(taskAdded, tasks.getNumTasks());
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException(e);
         } catch (DateTimeParseException e) {

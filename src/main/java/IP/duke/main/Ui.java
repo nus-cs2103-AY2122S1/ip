@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Represents user interface abstraction.
  * 
  * @author Gordon Yit
- * @Version CS2103T
+ * @version CS2103T
  */
 public class Ui {
     private final String LOGO = " ____        _        \n" 
@@ -81,7 +81,7 @@ public class Ui {
     /**
      * Shows the error message from dukeException class.
      *
-     * @return the error message.
+     * @param errorMessage exception message.
      */
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
@@ -103,9 +103,9 @@ public class Ui {
      * Displays the task deleted.
      * 
      * @param task the deleted task.
-     * @param numTasksRemaining number of tasks remaining after deletion.
+     * @param numTaskRemaining number of tasks after deleting the task.
      */
-    public void showTaskDeleted(Task task, int numTasksRemaining) {
+    public void showTaskDeleted(Task task, int numTaskRemaining) {
         String deletionMessage = "Alrighty, I've removed this task:";
         System.out.println(deletionMessage);
         String deletedTask = String.format("~~%s~~", task.toString());
@@ -134,7 +134,7 @@ public class Ui {
     /**
      * Lists out all the tasks Duke.Duke is keeping track of.
      * 
-     * @param tasks current list of tasks.
+     * @param tasks current taskList of tasks.
      */
     public void showListOfTasks(TaskList tasks) {
         String header = "Here are the tasks in your list:";
