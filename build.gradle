@@ -16,7 +16,7 @@ dependencies {
 }
 
 javafx {
-    version = '11.0.2'
+    version = "11"
     modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
@@ -35,7 +35,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {

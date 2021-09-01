@@ -2,14 +2,24 @@ package duke;
 
 import java.util.Scanner;
 
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
 import duke.command.Command;
 
-public class Duke {
+public class Duke extends Application {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
 
-    Duke(Scanner in, String filePath) throws Exception {
+    public Duke() {
+    }
+
+    public Duke(Scanner in, String filePath) throws Exception {
+        super();
         this.ui = new Ui(in);
         this.storage = new Storage(filePath);
         // TODO: throw error if unable to create file?
@@ -59,5 +69,18 @@ public class Duke {
 
         duke.run();
         inputScanner.close();
+    }
+
+    /**
+     * Starts the JavaFX GUI.
+     */
+    @Override
+    public void start(Stage stage) {
+        String javaVersion = System.getProperty("java.version");
+        String javafxVersion = System.getProperty("javafx.version");
+        Label l = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
+        Scene scene = new Scene(new StackPane(l), 640, 480);
+        stage.setScene(scene);
+        stage.show();
     }
 }
