@@ -1,8 +1,0 @@
-D | 0 | some work | null
-E | 0 | read book | 
-E | 0 | read book | 
-D | 0 | read book | 
-D | 0 |  | Sunday
-T | 0 | sada
-E | 0 | event asdad | asd
-D | 0 | deadline sad | ask

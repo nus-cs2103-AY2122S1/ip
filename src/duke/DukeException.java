@@ -1,14 +1,16 @@
+package duke;
+
 public class DukeException extends Exception {
 
     protected ExceptionType type;
 
-    public DukeException(String errorMessage) {
-        super(errorMessage);
-        this.type = ExceptionType.OTHERS;
-    }
-
     public DukeException(ExceptionType type) {
         super(errorTypeToMessage(type));
+        this.type = type;
+    }
+
+    public DukeException(ExceptionType type, String otherMessage) {
+        super(errorTypeToMessage(type) + " " + otherMessage);
         this.type = type;
     }
 
@@ -26,13 +28,15 @@ public class DukeException extends Exception {
                 return "invalid command";
             case INVALID_OPERAND:
                 return "invalid operand";
+            case PIPE_SYMBOL:
+                return "OOPS!!! Duke cannot identify the symbol \"|\". Please do not include it " +
+                        "within your input :)";
+            case FAIL_TO_READ:
+                return "Failed to read from file";
+            case FAIL_TO_WRITE:
+                return "Failed to write to file";
             default:
                 return "";
         }
-    }
-
-    @Override
-    public String getMessage() {
-        return super.getMessage();
     }
 }

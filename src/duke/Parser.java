@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.*;
+
 import java.util.Arrays;
 
 public class Parser {
@@ -48,11 +52,12 @@ public class Parser {
     private static boolean isMarkDown(String s, int listSize) throws DukeException {
         if (s.length() > WORD_MARK.length() && s.startsWith(WORD_MARK)) {
             try {
-                int taskIndex = Integer.parseInt(s.substring(WORD_MARK.length()));
-                if (taskIndex >= 1 && taskIndex <= listSize)
+                int taskIndex = parseMarkString(s);
+                if (taskIndex >= 0 && taskIndex < listSize) {
                     return true;
-                else
+                } else {
                     throw new DukeException(ExceptionType.INDEX_OUT_OF_BOUND);
+                }
             } catch (NumberFormatException e) {
                 throw new DukeException(ExceptionType.INVALID_OPERAND);
             }
@@ -63,11 +68,13 @@ public class Parser {
     private static boolean isDelete(String s, int listSize) throws DukeException {
         if (s.length() > WORD_DELETE.length() && s.startsWith(WORD_DELETE)) {
             try {
-                int taskIndex = Integer.parseInt(s.substring(WORD_DELETE.length()));
-                if (taskIndex >= 1 && taskIndex <= listSize)
+                int taskIndex = parseDeleteString(s);
+                if (taskIndex >= 0 && taskIndex < listSize) {
                     return true;
-                else
+                }
+                else {
                     throw new DukeException(ExceptionType.INDEX_OUT_OF_BOUND);
+                }
             } catch (NumberFormatException e) {
                 throw new DukeException(ExceptionType.INVALID_OPERAND);
             }
@@ -90,10 +97,15 @@ public class Parser {
         if (s.startsWith(WORD_DEADLINE)) {
             if (s.length() <= WORD_DEADLINE.length()) {
                 throw new DukeException(ExceptionType.MISSING_OPERAND);
-            } else if (!s.substring(WORD_DEADLINE.length()).contains(WORD_DEADLINE_BY)) {
-                throw new DukeException(ExceptionType.DDL_MISSING_KEYWORD);
+            } else if (s.contains(WORD_DEADLINE_BY)) {
+                String[] strArr = parseEventString(s);
+                if (strArr.length == 2 && !strArr[0].equals("") && !strArr[1].equals("")) {
+                    return true;
+                } else {
+                    throw new DukeException(ExceptionType.MISSING_OPERAND);
+                }
             } else {
-                return true;
+                throw new DukeException(ExceptionType.DDL_MISSING_KEYWORD);
             }
         }
         return false;
@@ -103,21 +115,26 @@ public class Parser {
         if (s.startsWith(WORD_EVENT)) {
             if (s.length() <= WORD_EVENT.length()) {
                 throw new DukeException(ExceptionType.MISSING_OPERAND);
-            } else if (!s.substring(WORD_EVENT.length()).contains(WORD_EVENT_AT)) {
-                throw new DukeException(ExceptionType.EVENT_MISSING_KEYWORD);
+            } else if (s.contains(WORD_EVENT_AT)) {
+                String[] strArr = parseEventString(s);
+                if (strArr.length == 2 && !strArr[0].equals("") && !strArr[1].equals("")) {
+                    return true;
+                } else {
+                    throw new DukeException(ExceptionType.MISSING_OPERAND);
+                }
             } else {
-                return true;
+                throw new DukeException(ExceptionType.EVENT_MISSING_KEYWORD);
             }
         }
         return false;
     }
 
     protected static String[] parseDeadlineString(String s) {
-        return s.split(WORD_DEADLINE_BY, 2);
+        return s.substring(WORD_DEADLINE.length()).split(WORD_DEADLINE_BY, 2);
     }
 
     protected static String[] parseEventString(String s) throws DukeException {
-        return s.split(WORD_EVENT_AT, 2);
+        return s.substring(WORD_EVENT.length()).split(WORD_EVENT_AT, 2);
     }
 
     protected static int parseMarkString(String s) {
@@ -128,23 +145,18 @@ public class Parser {
         return Integer.parseInt(s.substring(WORD_DELETE.length())) - 1;
     }
     
-    protected static Task saveDataToTask(String s) throws DukeException{
+    protected static Task fileContentsToTask(String s) throws DukeException{
         String[] arr = s.split(DIVIDER_WORD, 4);
+        boolean isDone = arr[1].equals("1");
         switch (arr[0]) {
             case "T":
-                ToDo todo = new ToDo(arr[2]);
-                todo.isDone = arr[1].equals("1");
-                return todo;
+                return new ToDo(arr[2], isDone);
             case "D":
-                Deadline deadline = new Deadline(arr[2], arr[3]);
-                deadline.isDone = arr[1].equals("1");
-                return deadline;
+                return new Deadline(arr[2], arr[3], isDone);
             case "E":
-                Event event = new Event(arr[2], arr[3]);
-                event.isDone = arr[1].equals("1");
-                return event;
+                return new Event(arr[2], arr[3], isDone);
             default:
-                throw new DukeException("Unknown symbol in save file.");
+                throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in file.");
         }
     }
 }
