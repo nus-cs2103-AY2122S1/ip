@@ -58,6 +58,17 @@ public class Ui {
         printWithIndent(getTaskCountString(listSize));
     }
 
+    protected static void printFoundTasks(String[] tasks) {
+        if (tasks != null) {
+            printWithIndent("Here are the matching tasks in your list:");
+            for (int i = 0; i < tasks.length; i++) {
+                printWithIndent((i + 1) + "." + tasks[i]);
+            }
+        } else {
+            printWithIndent("There is no matching task in your list.");
+        }
+    }
+
     protected static void printNewTask(String taskStr) {
         printWithIndent("Got it. I've added this task:");
         printWithIndent("  " + taskStr);

@@ -37,6 +37,10 @@ public class Task {
         return this.isDone;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     public void setStatus(boolean isDone) {
         this.isDone = isDone;
     }

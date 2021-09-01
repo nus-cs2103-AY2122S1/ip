@@ -4,9 +4,6 @@ import duke.task.*;
 
 import java.util.Arrays;
 
-/**
- * Provides methods to parse user command and saved contents.
- */
 public class Parser {
     // Constant words
     protected static final String WORD_EXIT = "bye";
@@ -19,14 +16,8 @@ public class Parser {
     protected static final String WORD_EVENT_AT = " /at ";
     protected static final String WORD_DELETE = "delete ";
     protected static final String DIVIDER_WORD = " \\| ";
+    protected static final String WORD_FIND = "find ";
 
-    /**
-     * Convert user command to {@link duke.DukeAction DukeAction}.
-     * @param s user command
-     * @param listSize size of current task list
-     * @return type of duke action
-     * @throws DukeException if user command is missing operand or invalid
-     */
     public static DukeAction stringToDukeAction(String s, int listSize) throws DukeException {
         // Remove all leading whitespaces
         s = s.stripLeading();
@@ -36,6 +27,9 @@ public class Parser {
         }
         else if (s.equals(WORD_LIST)) {
             return DukeAction.PRINT_LIST;
+        }
+        else if (isFind(s)) {
+            return DukeAction.FIND;
         }
         else if (isMarkDown(s, listSize)) {
             return DukeAction.MARK_DONE;
@@ -52,14 +46,24 @@ public class Parser {
         else if (isEvent(s)) {
             return DukeAction.EVENT;
         } else {
-            throw Arrays.asList(new String[] {"todo", "done", "event", "delete", "deadline"})
+            throw Arrays.asList(new String[] {"todo", "done", "event", "delete", "deadline", "find"})
                     .contains(s)
                     ? new DukeException(ExceptionType.MISSING_OPERAND)
                     : new DukeException(ExceptionType.INVALID_COMMAND);
         }
     }
 
+    private static boolean isFind(String s) throws DukeException {
+        if (s.equals(WORD_FIND)) {
+            throw new DukeException(ExceptionType.MISSING_OPERAND);
+        }
+        return s.length() > WORD_FIND.length() && s.startsWith(WORD_FIND);
+    }
+
     private static boolean isMarkDown(String s, int listSize) throws DukeException {
+        if (s.equals(WORD_MARK)) {
+            throw new DukeException(ExceptionType.MISSING_OPERAND);
+        }
         if (s.length() > WORD_MARK.length() && s.startsWith(WORD_MARK)) {
             try {
                 int taskIndex = parseMarkString(s);
@@ -139,65 +143,38 @@ public class Parser {
         return false;
     }
 
-    /**
-     * Parses deadline command to description and due time.
-     * @param s deadline command
-     * @return An string array of length 2, with the first element being description and the second being due time.
-     */
+    protected static String parseFindString(String s) {
+        return s.substring(WORD_FIND.length());
+    }
+
     protected static String[] parseDeadlineString(String s) {
         return s.substring(WORD_DEADLINE.length()).split(WORD_DEADLINE_BY, 2);
     }
 
-    /**
-     * Parses event command to description and time period.
-     * @param s event command
-     * @return An string array of length 2, with the first element being description and the second being time period.
-     */
     protected static String[] parseEventString(String s) throws DukeException {
         return s.substring(WORD_EVENT.length()).split(WORD_EVENT_AT, 2);
     }
 
-    /**
-     * Parses mark command to index of task to mark as done.
-     * @param s mark command
-     * @return index of task to mark as done
-     */
     protected static int parseMarkString(String s) {
         return Integer.parseInt(s.substring(WORD_MARK.length())) - 1;
     }
 
-    /**
-     * Parses delete command to index of task to remove.
-     * @param s delete command
-     * @return index of task to remove
-     */
     protected static int parseDeleteString(String s) {
         return Integer.parseInt(s.substring(WORD_DELETE.length())) - 1;
     }
-
-    /**
-     * Converts save data string to task.
-     * @see Task#populateSaveData()
-     * @param s save data string
-     * @return a new task constructs based on the given string
-     * @throws DukeException if the string is not aligned with save data format
-     */
-    public static Task fileContentsToTask(String s) throws DukeException{
+    
+    protected static Task fileContentsToTask(String s) throws DukeException{
         String[] arr = s.split(DIVIDER_WORD, 4);
-        if (arr.length < 4) {
-            throw new DukeException(ExceptionType.FAIL_TO_READ);
-        }
-
         boolean isDone = arr[1].equals("1");
         switch (arr[0]) {
-        case "T":
-            return new ToDo(arr[2], isDone);
-        case "D":
-            return new Deadline(arr[2], arr[3], isDone);
-        case "E":
-            return new Event(arr[2], arr[3], isDone);
-        default:
-            throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in file.");
+            case "T":
+                return new ToDo(arr[2], isDone);
+            case "D":
+                return new Deadline(arr[2], arr[3], isDone);
+            case "E":
+                return new Event(arr[2], arr[3], isDone);
+            default:
+                throw new DukeException(ExceptionType.FAIL_TO_WRITE, "Unknown symbol in file.");
         }
     }
 }
