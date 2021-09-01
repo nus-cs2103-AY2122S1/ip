@@ -62,7 +62,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns a string containing the Deadline description
+     * Return a string containing the Deadline description
      * and its completion status.
      *
      * @return String containing the Deadline description
