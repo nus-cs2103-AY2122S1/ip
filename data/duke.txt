@@ -1,3 +1,4 @@
 [T][X] borrow book
-[D][ ] return book ->by: 2021-12-10
-[D][ ] complete assignment ->by: 2021-09-02
+[D][X] return book ->by: 2021-12-10
+[T][ ] task
+[E][ ] attend class ->at: 2021-12-12
