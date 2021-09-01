@@ -97,10 +97,13 @@ public class Duke {
                     throw new MultipleKeywordException();
                 }
                 String[] keyword = input.trim().split(" ");
-                if (keyword.length > 1) {
+                if (keyword.length == 1) {
+                    response = taskList.find(commands, keyword[0]);
+                } else if (keyword.length == 2) {
+                    response = taskList.find(commands, keyword[0], keyword[1]);
+                } else {
                     throw new MultipleKeywordException();
                 }
-                response = taskList.find(keyword[0], commands);
                 break;
             case LIST:
                 response = taskList.list(commands);

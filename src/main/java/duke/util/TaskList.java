@@ -56,18 +56,20 @@ public class TaskList {
      * @param keyword  keyword to look for in tasks
      * @param commands all tasks in chatbot
      */
-    public String find(String keyword, ArrayList<Task> commands) {
+    public String find(ArrayList<Task> commands, String... keywords) {
         String response;
         try {
             ArrayList<Task> matchingTasks = new ArrayList<>();
             boolean matchFound = false;
-            for (Task command : commands) {
-                String description = command.description.trim();
-                String[] words = description.split(" ");
-                for (String word : words) {
-                    if (word.equalsIgnoreCase(keyword)) {
-                        matchingTasks.add(command);
-                        matchFound = true;
+            for (String s : keywords) {
+                for (Task command : commands) {
+                    String description = command.description.trim();
+                    String[] words = description.split(" ");
+                    for (String word : words) {
+                        if (word.equalsIgnoreCase(s)) {
+                            matchingTasks.add(command);
+                            matchFound = true;
+                        }
                     }
                 }
             }
