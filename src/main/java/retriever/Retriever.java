@@ -28,10 +28,45 @@ public class Retriever {
     }
 
     /**
+     * Initializes various Objects, and assumes the default file path to
+     * read the tasks present in that file.
+     */
+    public Retriever() {
+        // In case the user doesn't specify the file path, the default path is taken.
+        String filePath = "tasksList.txt";
+        taskStorage = new Storage(filePath);
+        taskList = new TaskList(taskStorage);
+        parser = new Parser(taskList);
+        ui = new Ui();
+    }
+
+    /**
+     * Returns a String, that is shown on the GUI.
+     */
+    public String getResponse(String input) {
+        String retrieverResponse = "";
+
+        try {
+            parser.parseUserInput(input);
+            retrieverResponse = ui.getRetrieverResponse();
+        } catch (RetrieverException e) {
+            // Catching various exceptions and alerting the user.
+            retrieverResponse = e.getMessage();
+        }
+
+        if (parser.isExit()) {
+            retrieverResponse = "Sad To See You Go!";
+        }
+
+        return retrieverResponse;
+    }
+
+    /**
      * Runs the Chatbot engine.
      * Main body of the Retriever Chatbot.
      */
     public void run() {
+        Dial
         // To show the welcome message
         ui.printWelcomeMessage();
 

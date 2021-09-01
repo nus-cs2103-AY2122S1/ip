@@ -24,6 +24,7 @@ public class Ui {
             + "(_(_/-(_/\n";
 
     private Scanner scanner;
+    private static String retrieverResponse;
 
     /**
      * Sets up the scanner to take in user input.
@@ -38,6 +39,7 @@ public class Ui {
      * @param message The message user would like to print.
      */
     public void printMessage(String message) {
+        retrieverResponse = message;
         System.out.println(message);
     }
 
@@ -49,6 +51,8 @@ public class Ui {
         System.out.println(welcomeMessage);
         System.out.println(logo);
         System.out.println(dashedLine);
+
+        retrieverResponse = welcomeMessage;
     }
 
     /**
@@ -60,6 +64,8 @@ public class Ui {
 
         System.out.println(goodByeMessage);
         System.out.println(dashedLine);
+
+        retrieverResponse = goodBoyMessage;
     }
 
     /**
@@ -69,6 +75,7 @@ public class Ui {
      */
     public void printErrorMessage(String errorMessage) {
         System.out.println(errorMessage);
+        retrieverResponse = errorMessage;
     }
 
     /**
@@ -87,6 +94,9 @@ public class Ui {
     public void printTaskAdded(Task task, int taskListLength) {
         System.out.println("-> Where's My Treat? I Added:\n\t" + task);
         System.out.println("\nYou Owe Me " + taskListLength + " Treat(s), Master!");
+
+        retrieverResponse = "Where's My Treat? I Added:\n"
+                + task + "\nYou Owe Me " + taskListLength + " Treat(s), Master!";
     }
 
     /**
@@ -100,6 +110,11 @@ public class Ui {
                 + "Task Deleted!\n"
                 + "\t" + task
                 + "\nYou Owe Me " + taskListLength + " Treat(s), Master!");
+
+        retrieverResponse = badBoyMessage + "\n"
+                + "Task Deleted!\n"
+                + task
+                + "\nYou Owe Me " + taskListLength + " Treat(s), Master!";
     }
 
     /**
@@ -111,6 +126,10 @@ public class Ui {
         System.out.println(goodBoyMessage + "\n"
                 + "Task Done!\n"
                 + "\t" + task);
+
+        retrieverResponse = goodBoyMessage + "\n"
+                + "Task Done!\n"
+                + task;
     }
 
     /**
@@ -121,16 +140,45 @@ public class Ui {
     public void printTaskFoundByKeyword(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
             System.out.println("Sorry Master, I Couldn't Smell And Find WHat You Asked For!");
+            retrieverResponse = "Sorry Master, I Couldn't Smell And Find WHat You Asked For!"
+                    + "\n (Task With the Given Keyword Does Not Exist)\n";
             return;
         }
 
+        retrieverResponse = "Woof! Look What I Found: /n";
         System.out.println("Woof! Look What I Found: ");
 
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println("\t" + (i + 1) + ". " + taskList.get(i));
+            retrieverResponse += (i + 1) + ". " + taskList.get(i) + "\n";
         }
 
         System.out.println("You Owe Me " + taskList.size() + " Treat(s), Master!");
+        retrieverResponse += "You Owe Me " + taskList.size() + " Treat(s), Master!";
+    }
+
+    public void printTaskList(ArrayList<Task> taskList) {
+        // If the list is empty
+        if (taskList.size() == 0) {
+            System.out.println("My Memory Is Empty, Please Feed Items!");
+            retrieverResponse = "My Memory Is Empty, Please Feed Items!";
+        } else {
+            retrieverResponse = "Your Tasks, My Master:\n";
+            System.out.println("-> Your Tasks, My Master:");
+            for (int i = 0; i < taskList.size(); i++) {
+                retrieverResponse += ((i + 1) + ". " + taskList.get(i)) + "\n";
+                System.out.println("\t" + ((i + 1) + ". " + taskList.get(i)));
+            }
+        }
+    }
+
+    /**
+     * Returns the output that the command generated.
+     *
+     * @return The response to the command entered.
+     */
+    public String getRetrieverResponse() {
+        return retrieverResponse;
     }
 
     /**
