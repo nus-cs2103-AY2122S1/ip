@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +34,20 @@ public class Storage {
             ui.displayError("File could not be found");
         }
         return taskList;
+    }
+
+    public void save(UserInterface ui, TaskList taskList) {
+        try {
+            PrintWriter dukeWriter = new PrintWriter(file);
+            for (Task task : taskList.getTasks()) {
+                dukeWriter.println(task.toCsvRow());
+            }
+            dukeWriter.close();
+            ui.print("File successfully saved to " + file.getPath());
+        } catch (FileNotFoundException e) {
+            System.err.println("Error: Could not save file");
+        } finally {
+            ui.displayFarewell();
+        }
     }
 }
