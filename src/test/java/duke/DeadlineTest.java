@@ -1,7 +1,7 @@
-package Duke;
+package duke;
 
-import Duke.Exceptions.WrongInputException;
-import Duke.Tasks.Deadline;
+import duke.Exceptions.WrongInputException;
+import duke.Tasks.Deadline;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

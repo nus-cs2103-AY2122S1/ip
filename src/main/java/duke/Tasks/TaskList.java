@@ -1,6 +1,6 @@
-package Duke.Tasks;
+package duke.Tasks;
 
-import Duke.Exceptions.IndexNotInListException;
+import duke.Exceptions.IndexNotInListException;
 
 import java.util.ArrayList;
 

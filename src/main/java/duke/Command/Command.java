@@ -1,17 +1,17 @@
-package Duke.Command;
+package duke.Command;
 
-import Duke.Exceptions.DukeException;
-import Duke.Exceptions.IndexNotInListException;
-import Duke.Exceptions.NoDescriptionException;
-import Duke.Exceptions.WrongInputException;
+import duke.Exceptions.DukeException;
+import duke.Exceptions.IndexNotInListException;
+import duke.Exceptions.NoDescriptionException;
+import duke.Exceptions.WrongInputException;
 
-import Duke.Storage.Storage;
-import Duke.Tasks.Task;
-import Duke.Tasks.TaskList;
-import Duke.Tasks.Todo;
-import Duke.Tasks.Deadline;
-import Duke.Tasks.Event;
-import Duke.Ui.Ui;
+import duke.Storage.Storage;
+import duke.Tasks.Task;
+import duke.Tasks.TaskList;
+import duke.Tasks.Todo;
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
+import duke.Ui.Ui;
 import java.util.ArrayList;
 
 /**
