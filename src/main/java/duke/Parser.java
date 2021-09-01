@@ -1,7 +1,7 @@
 package duke;
 
-import java.util.regex.Pattern;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Parser {
     /** Regex for a Done command. */

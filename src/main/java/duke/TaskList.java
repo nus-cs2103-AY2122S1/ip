@@ -1,14 +1,14 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.util.ArrayList;
 
 public class TaskList {
     /** The list of tasks. */

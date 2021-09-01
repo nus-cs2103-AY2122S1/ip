@@ -1,11 +1,10 @@
 package duke;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.Files;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.stream.Stream;
 
 public class Storage {
@@ -63,8 +62,7 @@ public class Storage {
     public void rewriteData(String dataStr) throws DukeException {
         try {
             Files.writeString(dataPath, dataStr, StandardCharsets.ISO_8859_1);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new DukeException(e.getMessage());
         }
     }
