@@ -72,7 +72,7 @@ public abstract class Task {
             return false;
         }
         Task other = (Task) obj;
-        return description.equals(other.description) &&
-                isDone == other.isDone;
+        return description.equals(other.description)
+                && isDone == other.isDone;
     }
 }

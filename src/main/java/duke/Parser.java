@@ -34,8 +34,8 @@ public class Parser {
                 task = new Event(splitDescriptionAndDate[0].trim(), splitDescriptionAndDate[1].trim());
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Oops!!! Deadlines or events should contain a description, followed by " +
-                    "a /by or /at respectively, followed by a date.");
+            throw new DukeException("Oops!!! Deadlines or events should contain a description, followed by "
+                    + "a /by or /at respectively, followed by a date.");
         }
 
         return task;
