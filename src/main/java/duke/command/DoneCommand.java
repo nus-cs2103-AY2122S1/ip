@@ -35,9 +35,9 @@ public class DoneCommand extends Command{
      * @param storage the place where the list of tasks will be stored
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task currTask = tasks.get(index);
         currTask.markAsDone();
-        ui.doneTask(currTask);
+        return ui.doneTask(currTask);
     }
 }

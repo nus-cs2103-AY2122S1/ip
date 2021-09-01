@@ -28,8 +28,8 @@ public class ByeCommand extends Command{
      * @param storage the place where the list of tasks will be stored
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.updateFile(tasks);
-        ui.stopMethod();
+        return ui.stopMethod();
     }
 }
