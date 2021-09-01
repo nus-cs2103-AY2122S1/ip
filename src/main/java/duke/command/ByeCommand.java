@@ -10,8 +10,8 @@ import duke.general.Ui;
 public class ByeCommand extends Command {
 
     @Override
-    public void execute(Tasklist tasks, Storage storage, Ui ui) {
-        ui.byeResponse();
+    public String execute(Tasklist tasks, Storage storage, Ui ui) {
         ui.setLoop();
+        return ui.byeResponse();
     }
 }

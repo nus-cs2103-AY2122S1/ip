@@ -25,9 +25,9 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
+    public String execute(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
         Task t = tasks.addTask(this.type, this.input);
         storage.appendSave(t);
-        ui.addResponse(t, tasks.size());
+        return ui.addResponse(t, tasks.size());
     }
 }

@@ -17,11 +17,12 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
+    public String execute(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
         Task t = tasks.doneTask(input);
         if (t != null) {
             storage.modifySave(tasks.getList());
-            ui.doneResponse(t);
+            return ui.doneResponse(t);
         }
+        return "What do i done again???";
     }
 }

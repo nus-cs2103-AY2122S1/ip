@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.error.DukeException;
 import duke.general.Storage;
 import duke.general.Tasklist;
 import duke.general.Ui;
@@ -16,11 +17,12 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(Tasklist tasks, Storage storage, Ui ui) {
+    public String execute(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
         Task t = tasks.deleteTask(this.input);
         if (t != null) {
             storage.modifySave(tasks.getList());
-            ui.deleteResponse(t, tasks);
+            return ui.deleteResponse(t, tasks);
         }
+        return "";
     }
 }

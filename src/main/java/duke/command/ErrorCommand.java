@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.error.DukeException;
 import duke.general.Storage;
 import duke.general.Tasklist;
 import duke.general.Ui;
@@ -9,7 +10,8 @@ import duke.general.Ui;
  */
 public class ErrorCommand extends Command {
     @Override
-    public void execute(Tasklist tasks, Storage storage, Ui ui) {
+    public String execute(Tasklist tasks, Storage storage, Ui ui) throws DukeException {
         System.out.println("Command inputted is not a valid command!");
+        return "Command inputted is not a valid command!";
     }
 }
