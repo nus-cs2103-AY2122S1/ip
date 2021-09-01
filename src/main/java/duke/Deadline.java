@@ -8,11 +8,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDateTime dateTimeBy;
-    protected String by;
+    private LocalDateTime dateTimeBy;
+    private String by;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-    
     /**
      * Creates a Deadline object from user command using the description and date and time.
      *
@@ -26,7 +25,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates a Deadline object from a disk task string using the description, number representing done status and date and time.
+     * Creates a Deadline object from a disk task string using the description,
+     * number representing done status and date and time.
      *
      * @param num number retrieved from the drive that determines if the task is done or not.
      * @param description describes the nature of the task.

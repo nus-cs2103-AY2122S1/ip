@@ -5,11 +5,11 @@ package duke;
  */
 public class Duke {
 
+    private static final String FILEPATH = "data/duke.txt";
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    private static String FILE_PATH = "data/duke.txt";
 
     /**
      * Creates Ui and Storage instances.
@@ -17,10 +17,10 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage(FILE_PATH);
+        storage = new Storage(FILEPATH);
         tasks = new TaskList(storage.load());
     }
-    
+
     public static void main(String[] args) {
         new Duke();
     }
@@ -69,5 +69,6 @@ public class Duke {
 
     }
 }
+
 
 

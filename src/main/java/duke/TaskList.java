@@ -32,11 +32,13 @@ public class TaskList {
      * @param searchTerm user wants to find all tasks that have descriptions matching user's search term.
      * @param ui handles interactions with user by printing the appropriate messages.
      * @return all tasks that match user's search term
-     * @throws DukeException if search term is not given alongside the find command in the following format: find searchterm.
+     * @throws DukeException if search term is not given alongside the find command
+     * in the following format: find searchterm.
      */
     public String find(String searchTerm, Ui ui) throws DukeException {
         if (searchTerm.isEmpty()) {
-            throw new DukeException("Please provide a search term after the find command in the following format: find searchterm");
+            throw new DukeException("Please provide a search term after the find command in the following format:"
+                    + " find searchterm");
         }
         try {
             List<Task> matchingTaskList = this.taskList.stream()
@@ -44,7 +46,8 @@ public class TaskList {
                     .collect(Collectors.toList());
             return ui.showMatchingTasks(new ArrayList<Task>(matchingTaskList));
         } catch (StringIndexOutOfBoundsException e) {
-            throw new DukeException("Please provide a search term after the find command in the following format: find searchterm");
+            throw new DukeException("Please provide a search term after the find command in the following format:"
+                    + " find searchterm");
         }
     }
 
@@ -56,7 +59,8 @@ public class TaskList {
      * @param storage handles updating the specified task from the disk as done.
      * @param ui handles interactions with user by printing the appropriate messages.
      * @return task that was marked done
-     * @throws DukeException if number given is not within the total number of tasks or done command does not follow the format: done number.
+     * @throws DukeException if number given is not within the total number of tasks or done command does not follow
+     * the format: done number.
      */
     public String done(String num, Storage storage, Ui ui) throws DukeException {
 
@@ -67,7 +71,8 @@ public class TaskList {
             storage.replaceFileLine(doneTask.getFileString(), listNum - 1);
             return ui.showDoneMessage(doneTask);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Please provide a number after the done command that is within the total number of tasks: "
+            throw new DukeException("Please provide a number after the done command that is within"
+                    + " the total number of tasks: "
                     + this.taskList.size());
         } catch (NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! The done command needs a number after it in the following format:"
@@ -91,9 +96,11 @@ public class TaskList {
             int listNum = Integer.parseInt(num);
             Task deletedTask = this.taskList.remove(listNum - 1);
             storage.deleteFileLine(listNum - 1);
-            return String.format("%s %s", ui.showDeletedMessage(deletedTask), ui.showTaskListSize(this.taskList.size()));
+            return String.format("%s %s", ui.showDeletedMessage(deletedTask),
+                    ui.showTaskListSize(this.taskList.size()));
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Please provide a number after the delete command that is within the total number of tasks: "
+            throw new DukeException("Please provide a number after the delete command that is within"
+                    + " the total number of tasks: "
                     + this.taskList.size());
         } catch (NumberFormatException e) {
             throw new DukeException("☹ OOPS!!! The delete command needs a number after it in the following format:"
@@ -196,7 +203,10 @@ public class TaskList {
             case "E":
                 tasks.add(new Event(tsData[1], tsData[2], tsData[3]));
                 break;
+            default:
+                break;
             }
+
         }
 
         return tasks;

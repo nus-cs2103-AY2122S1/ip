@@ -33,7 +33,7 @@ public class Ui {
      * @return message acknowledging the task is marked as done
      */
     public String showDoneMessage(Task doneTask) {
-        return String.format("Nice! I've marked this task as done: %s", doneTask);
+        return String.format("Nice! I've marked this task as done: %n%s", doneTask);
     }
 
     /**
@@ -43,7 +43,7 @@ public class Ui {
      * @return message acknowledging the task as deleted
      */
     public String showDeletedMessage(Task deletedTask) {
-        return String.format("Noted. I've removed this task: %s", deletedTask);
+        return String.format("Noted. I've removed this task: %n%s", deletedTask);
     }
 
     /**
@@ -53,7 +53,7 @@ public class Ui {
      * @return message acknowledging the task as added
      */
     public String showAddMessage(Task addedTask) {
-        return String.format("Got it. I've added this task: %s", addedTask);
+        return String.format("Got it. I've added this task: %n%s", addedTask);
     }
 
     /**
@@ -64,7 +64,7 @@ public class Ui {
      */
     public String showTaskListSize(int size) {
         if (size == 1) {
-            return "Now you have 1 task in the list." ;
+            return "Now you have 1 task in the list.";
         } else {
             return String.format("Now you have %d tasks in the list.", size);
         }

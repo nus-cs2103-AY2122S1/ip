@@ -18,7 +18,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private final String FILEPATH;
+    private String filePath;
 
     /**
      * Initialises Storage object with file path.
@@ -26,7 +26,7 @@ public class Storage {
      * @param filePath represents absolute file path of where user's tasks are stored.
      */
     public Storage(String filePath) {
-        this.FILEPATH = filePath;
+        this.filePath = filePath;
     }
 
     /**
@@ -36,7 +36,7 @@ public class Storage {
      */
     public ArrayList<String> load() {
         ArrayList<String> taskStrings = new ArrayList<>();
-        File file = new File(FILEPATH);
+        File file = new File(filePath);
         try {
             if (!file.exists()) {
                 if (!file.getParentFile().exists()) {
@@ -64,7 +64,7 @@ public class Storage {
      */
     public void appendToFile(String textToAdd) {
         try {
-            FileWriter fw = new FileWriter(FILEPATH, true);
+            FileWriter fw = new FileWriter(filePath, true);
             fw.write(textToAdd);
             fw.write("\n");
             fw.close();
@@ -81,7 +81,7 @@ public class Storage {
      */
     public void replaceFileLine(String textToReplaceWith, int lineNumber) {
         try {
-            Path path = Paths.get(FILEPATH);
+            Path path = Paths.get(filePath);
             List<String> lines = Files.readAllLines(path);
             lines.set(lineNumber, textToReplaceWith);
             Files.write(path, lines, StandardCharsets.UTF_8);
@@ -98,7 +98,7 @@ public class Storage {
      */
     public void deleteFileLine(int lineNumber) {
         try {
-            Path path = Paths.get(FILEPATH);
+            Path path = Paths.get(filePath);
             List<String> lines = Files.readAllLines(path);
             lines.remove(lineNumber);
             Files.write(path, lines, StandardCharsets.UTF_8);

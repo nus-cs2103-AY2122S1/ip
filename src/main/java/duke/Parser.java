@@ -20,9 +20,9 @@ public class Parser {
         } else if (command.equals("bye")) {
             return CommandType.BYE;
         } else if (command.startsWith("find")) {
-            if(command.equals("find")) {
-                throw new DukeException("☹ OOPS!!! The find command needs a search term after it in the following format: "
-                        + "find searchterm");
+            if (command.equals("find")) {
+                throw new DukeException("☹ OOPS!!! The find command needs a search term after it "
+                        + "in the following format: find searchterm");
             }
             return CommandType.FIND;
         } else if (command.startsWith("delete")) {

@@ -8,10 +8,10 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDateTime dateTimeAt;
-    protected String at;
+    private LocalDateTime dateTimeAt;
+    private String at;
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
     /**
      * Creates an Event object from user command using the description and date and time.
@@ -26,7 +26,8 @@ public class Event extends Task {
     }
 
     /**
-     * Creates an Event object from a disk task string using the description, number representing done status and date and time.
+     * Creates an Event object from a disk task string using the description, number
+     * representing done status and date and time.
      *
      * @param num number retrieved from the drive that determines if the task is done or not.
      * @param description describes the nature of the task.
@@ -66,5 +67,5 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + getFormattedAt() + ")";
     }
-
 }
+
