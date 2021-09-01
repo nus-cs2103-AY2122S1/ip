@@ -10,15 +10,21 @@ public class DoneCommand extends Command {
     DoneCommand(int index) {
         this.index = index;
     }
-
+    
     @Override
-    public void execute(TaskList tasks) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index >= tasks.size() || index < 0) {
             throw new DukeException("Invalid value!");
         } else {
             Task taskRef = tasks.get(index);
             taskRef.setDone();
-            System.out.println("Nice! I've marked this task as done:\n" + taskRef);
+            String toReturn = ui.printDoneTask(taskRef);
+            return toReturn;
         }
+    }
+
+    @Override
+    public boolean isClosed() {
+        return false;
     }
 }

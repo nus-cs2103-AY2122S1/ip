@@ -12,7 +12,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String returnMessage = "";
         for (int i = 0; i < tasks.size(); i++) {
             Task taskInstance = tasks.get(i);
@@ -22,9 +22,14 @@ public class FindCommand extends Command {
             }
         }
         if (returnMessage.equals("")) {
-            System.out.println("There were no tasks found with keyword: " + keyword);
+            return ui.printNoKeyword(keyword);
         } else {
-            System.out.println("Here are the tasks in your list that match the keyword:\n" + returnMessage);
+            return ui.printFoundKeyword(returnMessage);
         }
+    }
+
+    @Override
+    public boolean isClosed() {
+        return false;
     }
 }

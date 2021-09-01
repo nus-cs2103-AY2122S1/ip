@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 
 /**
  * Represents a Duke object. It is the object used to kickstart the Duke application.
@@ -27,42 +25,26 @@ public class Duke {
     }
 
     /**
-     * Runs the application.
+     * Empty constructor
      */
-    public void run() {
-        ui.showWelcome();
-        String command = ui.readCommand();
+    public Duke() {
 
-
-        while (!command.equals("bye")) {
-            try {
-                Command c = parser.parse(command, tasks);
-                c.execute(tasks);
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            } finally {
-                command = ui.readCommand();
-            }
-        }
-        try {
-            storage.writeToFile(tasks);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        ui.goodbye();
     }
 
     /**
-     * Main method to run program
-     *
-     * @param args
+     * Returns a response based on the given user input.
      */
-    public static void main(String[] args) {
-
-        Duke duke = new Duke("./data/duke.txt");
-        duke.run();
+    String getResponse(String input) throws DukeException {
+        String command = input;
+        Command c = parser.parse(command, tasks);
+        return c.execute(tasks, ui, storage);
 
     }
+    
+    String greetingMessage() {
+        return ui.showWelcome();
+    }
+
 
 
 }

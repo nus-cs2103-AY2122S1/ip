@@ -12,9 +12,15 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(task);
-        System.out.println(task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
+        String toReturn = ui.printTask(task);
+        toReturn += ui.listTaskNumber(tasks);
+        return toReturn;
+    }
+
+    @Override
+    public boolean isClosed() {
+        return false;
     }
 }

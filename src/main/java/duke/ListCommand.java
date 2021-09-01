@@ -9,11 +9,13 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks) {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            int j = i + 1;
-            System.out.println(j + ". " + tasks.get(i));
-        }
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.listTasks(tasks);
     }
+
+    @Override
+    public boolean isClosed() {
+        return false;
+    }
+    
 }
