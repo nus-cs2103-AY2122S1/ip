@@ -10,7 +10,7 @@ Duke is an application that allows you to manage your tasks more efficiently!!! 
 
 ## Features
 
-- [ ] Add tasks such as todos, deadlines or events
+- [X] Add tasks such as todos, deadlines or events
 - [ ] Mark them as done
 - [ ] Find tasks using specific key words
 - [ ] Delete tasks
@@ -20,7 +20,7 @@ Duke is an application that allows you to manage your tasks more efficiently!!! 
 
 Prerequisites: JDK 11, update Intellij to the most recent version.
 
-1. Click https://github.com/mukundrs/ip/releases/tag/A-Jar [here] and download the jar file.
+1. Click [here](https://github.com/mukundrs/ip/releases/tag/A-Jar) and download the jar file.
 2. Run java -jar ip.jar in command prompt. Yoou should see this output: 
    ```
    _______________________________________________
@@ -34,6 +34,8 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    I'm Duke! How can I help you?
    _______________________________________________
    ```
+
+
 
 If you Java programmer, you can use it to practice Java too. Here's the `main` method:
 ```java
