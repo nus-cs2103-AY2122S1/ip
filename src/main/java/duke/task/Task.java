@@ -32,12 +32,12 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
-
+    
     /**
      * Abstract method which denotes the string representation of the task list that is stored on duke.txt.
      */
-    public abstract String taskListOnDisk();
-
+    public abstract String getTaskListOnDisk();
+    
     /**
      * Returns the string representation of the task stored in the list variable.
      *

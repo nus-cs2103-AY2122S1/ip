@@ -13,12 +13,13 @@ public class Todo extends Task {
         super(description);
     }
 
+
     /**
      * Returns the string representation of the todo task stored on duke.txt.
      *
      * @return String representation of the todo task stored on duke.txt.
      */
-    public String taskListOnDisk() {
+    public String getTaskListOnDisk() {
         return "duke.task.Todo |" + super.getStatusIcon() + "| " + description;
     }
 

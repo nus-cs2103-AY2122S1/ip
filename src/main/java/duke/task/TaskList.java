@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.Ui;
+
 import java.util.ArrayList;
 
 /**
@@ -37,7 +38,7 @@ public class TaskList {
      *
      * @return Number of items in the task list.
      */
-    public int size() {
+    public int getSize() {
         return userList.size();
     }
 

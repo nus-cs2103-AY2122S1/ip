@@ -1,13 +1,17 @@
 package duke.command;
 
-import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Event;
-import duke.Ui;
+
+import duke.Storage;
+
 import duke.exception.DukeException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidDateTimeException;
+
+import duke.Ui;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -58,8 +62,8 @@ public class eventCommand extends Command {
                 Ui.taskResponse(task);
                 storage.writeToFile("./duke.txt", taskList);
             } catch (DateTimeParseException e) {
-                DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be event/at " +
-                        "<yyyy-mm-dd HHmm>");
+                DukeException exp = new InvalidDateTimeException("The format of your command is incorrect! It should be event/at " 
+                        + "<yyyy-mm-dd HHmm>");
                 System.out.println(exp);
             }
         }

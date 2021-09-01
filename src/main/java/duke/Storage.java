@@ -1,13 +1,20 @@
 package duke;
 
-import duke.task.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import java.util.Scanner;
+
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.Event;
+import duke.task.Deadline;
+import duke.task.Todo;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -51,13 +58,13 @@ public class Storage {
                     System.out.println(str);
                     String[] parts = str.split("\\|", 4);
                     String subStr = parts[0].substring(3).trim();
-                    if (subStr.equals("duke.task.Todo") || subStr.equals("duke.task.Todo")) {
+                    if (subStr.equals("duke.task.Todo")) {
                         Task task = new Todo(parts[2].trim());
                         if (parts[1].trim().equals("X")) {
                             task.markAsDone();
                         }
                         taskList.addTask(task);
-                    } else if (subStr.equals("duke.task.Deadline") || subStr.equals("duke.task.Deadline")) {
+                    } else if (subStr.equals("duke.task.Deadline")) {
                         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MMM d yyyy, h a");
                         LocalDateTime dateTime = LocalDateTime.parse(parts[3].substring(5).trim(), dtf);
                         Task task = new Deadline(parts[2].trim(), dateTime);
@@ -81,19 +88,19 @@ public class Storage {
             System.out.println("File not found!");
         }
     }
-
+    
     /**
      * Writes the task data to the duke.txt file whenever the list variable is updated.
      *
      * @param filePath Filepath of the file (duke.txt) where the task data is stored.
-     * @param tl TaskList where the tasks are stored.
+     * @param taskList TaskList where the tasks are stored.
      */
-    public void writeToFile(String filePath, TaskList tl) {
+    public void writeToFile(String filePath, TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(filePath);
-            for (int i = 0; i < tl.size(); i++) {
+            for (int i = 0; i < taskList.getSize(); i++) {
                 int num = i + 1;
-                fw.write(num + ". " + tl.getTask(i).taskListOnDisk() + "\n");
+                fw.write(num + ". " + taskList.getTask(i).getTaskListOnDisk() + "\n");
             }
             fw.close();
         } catch (IOException e) {

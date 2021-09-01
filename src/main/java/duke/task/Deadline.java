@@ -29,7 +29,7 @@ public class Deadline extends Task {
      *
      * @return String representation of the deadline task stored on duke.txt.
      */
-    public String taskListOnDisk() {
+    public String getTaskListOnDisk() {
         return "duke.task.Deadline |" + super.getStatusIcon() + "| " + description + " | by: " + formattedDtf;
     }
 

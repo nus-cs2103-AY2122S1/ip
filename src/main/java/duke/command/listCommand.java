@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.Storage;
 import duke.task.TaskList;
+
+import duke.Storage;
 
 /**
  * Represents the user command when the user wants to view the task list.

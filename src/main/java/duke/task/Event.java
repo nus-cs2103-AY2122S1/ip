@@ -23,13 +23,13 @@ public class Event extends Task {
         String formattedDtf = this.at.format(dtf);
         this.formattedDtf = formattedDtf;
     }
-
+    
     /**
      * Returns the string representation of the event task stored on duke.txt.
      *
      * @return String representation of the event task stored on duke.txt.
      */
-    public String taskListOnDisk() {
+    public String getTaskListOnDisk() {
         return "duke.task.Event |" + super.getStatusIcon() + "| " + description + " | by: " + formattedDtf;
     }
 
