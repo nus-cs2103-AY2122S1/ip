@@ -22,6 +22,7 @@ public class CreateNewToDoCommand extends Command {
      * @param taskList the current list of tasks
      * @param ui the user interface object
      * @param storage the storage object
+     * @return acknowledgement that Deadline has been created
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {

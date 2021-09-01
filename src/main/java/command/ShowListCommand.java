@@ -23,7 +23,7 @@ public class ShowListCommand extends Command {
         if (taskList.toString().equals("")) {
             return "Your todo list is empty!";
         } else {
-            return "Checking your todo list..." + taskList;
+            return "Checking your todo list...\n" + taskList;
         }
     }
 }

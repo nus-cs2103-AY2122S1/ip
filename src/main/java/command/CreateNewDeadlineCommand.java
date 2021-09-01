@@ -22,12 +22,15 @@ public class CreateNewDeadlineCommand extends Command {
      * @param taskList the current list of tasks
      * @param ui the user interface object
      * @param storage the storage object
+     * @return acknowledgement that Deadline has been created
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         String[] messageAndEndTime = super.getExtraInput().split("/by ");
         taskList.add(new Deadline(messageAndEndTime[0], messageAndEndTime[1]));
-        return "";
+        return "Alright, I've added the following task:\n"
+                + "      " + taskList.get(taskList.size() - 1) + "\n      Now you have " + taskList.size()
+                + " tasks in the list.\n";
     }
 
     /**
