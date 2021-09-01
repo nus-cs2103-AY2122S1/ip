@@ -13,7 +13,7 @@ public abstract class Command {
      * @param ui The Ui of Duke.
      * @param storage The Storage of Duke.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Returns if the current command is an exit command.
@@ -46,19 +46,19 @@ public abstract class Command {
 
         /**
          * Adds the corresponding task into Duke.
-         *
-         * @param taskList The TaskList that is saved in Duke.
+         *  @param taskList The TaskList that is saved in Duke.
          * @param ui The Ui of Duke.
          * @param storage The Storage of Duke.
+         * @return
          */
         @Override
-        public void execute(TaskList taskList, Ui ui, Storage storage) {
+        public String execute(TaskList taskList, Ui ui, Storage storage) {
             try {
                 TaskList.Task task = taskList.add(input, taskType);
 
-                ui.displayAddUi(taskList, task);
+                return ui.displayAddUi(taskList, task);
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                return ui.displayDukeExceptionMessage(e);
             }
         }
     }
@@ -87,11 +87,11 @@ public abstract class Command {
          * @param storage The Storage of Duke.
          */
         @Override
-        public void execute(TaskList taskList, Ui ui, Storage storage) {
+        public String execute(TaskList taskList, Ui ui, Storage storage) {
             try {
-                ui.displayDoneUi(taskList.done(taskNumber));
+                return ui.displayDoneUi(taskList.done(taskNumber));
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                return ui.displayDukeExceptionMessage(e);
             }
         }
     }
@@ -120,11 +120,11 @@ public abstract class Command {
          * @param storage The Storage of Duke.
          */
         @Override
-        public void execute(TaskList taskList, Ui ui, Storage storage) {
+        public String execute(TaskList taskList, Ui ui, Storage storage) {
             try {
-                ui.displayDeleteUi(taskList, taskList.delete(taskNumber));
+                return ui.displayDeleteUi(taskList, taskList.delete(taskNumber));
             } catch (DukeException e) {
-                System.out.println(e.getMessage());
+                return ui.displayDukeExceptionMessage(e);
             }
         }
     }
@@ -146,8 +146,8 @@ public abstract class Command {
          * @param storage The Storage of Duke.
          */
         @Override
-        public void execute(TaskList taskList, Ui ui, Storage storage) {
-            ui.displayListUi(taskList);
+        public String execute(TaskList taskList, Ui ui, Storage storage) {
+            return ui.displayListUi(taskList);
         }
     }
 
@@ -169,10 +169,10 @@ public abstract class Command {
          * @param storage The Storage of Duke.
          */
         @Override
-        public void execute(TaskList taskList, Ui ui, Storage storage) {
+        public String execute(TaskList taskList, Ui ui, Storage storage) {
             storage.write(taskList);
 
-            ui.displayExitUi();
+            return ui.displayExitUi();
         }
 
         /**
@@ -204,8 +204,8 @@ public abstract class Command {
          * @param storage The Storage of Duke.
          */
         @Override
-        public void execute(TaskList taskList, Ui ui, Storage storage) {
-            ui.displayUnknownUi();
+        public String execute(TaskList taskList, Ui ui, Storage storage) {
+            return ui.displayUnknownUi();
         }
 
         @Override
@@ -249,9 +249,9 @@ public abstract class Command {
          * @param storage The Storage of Duke.
          */
         @Override
-        public void execute(TaskList taskList, Ui ui, Storage storage) {
+        public String execute(TaskList taskList, Ui ui, Storage storage) {
             taskList.find(relatedList, keyword);
-            ui.displayFindUi(relatedList);
+            return ui.displayFindUi(relatedList);
         }
     }
 }

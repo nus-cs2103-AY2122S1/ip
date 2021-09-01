@@ -1,5 +1,6 @@
 package duke;
 
+import javafx.application.Application;
 /**
  * This is Duke, a program that serves as a ToDo-List.
  */
@@ -19,40 +20,45 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             taskList = new TaskList(storage.load());
-
-            ui.greet2();
-            ui.displayListUi(taskList);
-            ui.showLine();
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
             taskList = new TaskList();
         }
+    }
+
+    /**
+     * Returns the start-up message.
+     * If there is saved tasks, display the tasks. Otherwise, start a new ToDo List.
+     *
+     * @return the start-up message.
+     */
+    public String startUp() {
+        if (taskList.isEmpty()) {
+            return "No previous data found.\nLet's start a new To-Do List!";
+        } else {
+            String str = ui.greetExistingUser();
+            str += ui.displayListUi(taskList);
+            return str;
+        }
+    }
+
+    public String getResponse(String input) {
+        return run(input);
     }
 
     /**
      * Runs the program.
      * Will keep running until an exit command is given.
      */
-    public void run() {
-        ui.greet1();
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public String run(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return ui.displayDukeExceptionMessage(e);
         }
     }
 
     public static void main(String[] args) {
-        new Duke("src/data/Duke.txt").run();
+        Application.launch(Main.class, args);
     }
 }
