@@ -7,10 +7,7 @@ import duke.commands.Command;
 import duke.exceptions.AuguryException;
 import duke.exceptions.FileIoException;
 import duke.exceptions.InvalidActionException;
-<<<<<<< HEAD
-=======
 import duke.exceptions.InvalidTaskCreationException;
->>>>>>> branch-Level-10
 import duke.exceptions.UnknownCommandException;
 import duke.io.Parser;
 import duke.storage.Storage;
