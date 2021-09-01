@@ -35,7 +35,7 @@ public class Storage {
         if (!f.isFile()) {
             createNewDataFile();
         }
-        Scanner s = new Scanner(f); 
+        Scanner s = new Scanner(f);
         List<Task> tasks = new ArrayList<Task>();
         int totalTasks = 0;
 
