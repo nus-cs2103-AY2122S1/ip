@@ -7,7 +7,7 @@ package duke.data;
  * that is used when printing error messages.
  *
  * @author: Jason Ng
- * @version: Duke Level-8
+ * @version: Duke Level-10
  */
 public class DukeException extends Exception {
     /** Header for the exception message */

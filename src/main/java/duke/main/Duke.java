@@ -13,6 +13,14 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Encapsulates the entire Duke program.
+ * Duke class contains the storage, ui, tasklist, parser and finder objects,
+ * to help run the program.
+ *
+ * @author: Jason Ng
+ * @version: Duke Level-10
+ */
 public class Duke {
     /** Storage component for Duke */
     private Storage storage;
@@ -26,7 +34,7 @@ public class Duke {
     private Find finder;
 
     /**
-     * Constructor for a duke.main.Duke class.
+     * Constructor for a Duke object.
      */
     public Duke() {
         this.storage = new Storage();
@@ -37,13 +45,16 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the corresponding response from Duke after parsing the user input.
+     * Makes use of the parser class to make sense of the user input.
+     *
+     * @param input The user input.
+     * @return The corresponding response in String from Duke.
      */
     public String getResponse(String input) {
         String response;
 
-       if (!this.parser.isBye(input)) {
+        if (!this.parser.isBye(input)) {
             String[] splitInput = parser.splitType(input);
             if (this.parser.isDone(splitInput[0])) {
                 int index = parser.getIndex(splitInput);
@@ -109,9 +120,9 @@ public class Duke {
                     response = ui.formatMessage(e.getMessage());
                 }
             }
-            storage.Save(taskList);
+            storage.save(taskList);
         } else {
-           response = ui.formatMessage("Bye. Hope to see you again soon!");
+            response = ui.formatMessage("Bye. Hope to see you again soon!");
         }
         return response;
     }

@@ -1,11 +1,5 @@
 package duke.storage;
 
-import duke.commands.Deadline;
-import duke.commands.Event;
-import duke.commands.Task;
-import duke.commands.Todo;
-import duke.data.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -16,13 +10,19 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import duke.commands.Deadline;
+import duke.commands.Event;
+import duke.commands.Task;
+import duke.commands.Todo;
+import duke.data.TaskList;
+
 /**
  * Encapsulates a storage to store the tasks of the user.
  * This class helps with operations concerning the
  * saving of new tasks and loading of old tasks from the hard disk.
  *
  * @author: Jason Ng
- * @version: Duke Level-8
+ * @version: Duke Level-10
  */
 public class Storage {
     /** Filename of the taskList */
@@ -35,7 +35,7 @@ public class Storage {
      *
      * @param taskList The taskList to be saved.
      */
-    public void Save(TaskList taskList) {
+    public void save(TaskList taskList) {
         try {
             ArrayList<Task> arr = taskList.getEntire();
             PrintWriter printWriter = new PrintWriter(FileName);

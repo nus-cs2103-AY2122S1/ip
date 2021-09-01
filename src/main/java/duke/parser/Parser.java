@@ -1,10 +1,10 @@
 package duke.parser;
 
-import duke.data.DukeException;
-import duke.data.TaskList;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.data.DukeException;
+import duke.data.TaskList;
 
 /**
  * Encapsulates a parser to help make sense of user input.
@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  * for further usage by other classes.
  *
  * @author: Jason Ng
- * @version: Duke Level-9
+ * @version: Duke Level-10
  */
 public class Parser {
     /** Special names that are the commands for Duke */
@@ -93,8 +93,8 @@ public class Parser {
      */
     public void checkFurtherDesc(String[] furtherInput, String type) throws DukeException {
         if (furtherInput.length < 2 || furtherInput[0].equals("")) {
-            throw new DukeException("The description of a " + type + " cannot be empty.\n" +
-                    "Don't forget to use /by to indicate the deadline.");
+            throw new DukeException("The description of a " + type + " cannot be empty.\n"
+                    + "Don't forget to use /by to indicate the deadline.");
         } else if (furtherInput[1].equals("") || furtherInput[1].equals(" ")) {
             throw new DukeException("Must come with a input date/time for the " + type + " .");
         }

@@ -1,15 +1,14 @@
 package duke.commands;
 
-import duke.data.TaskList;
-
 import java.util.ArrayList;
 
+import duke.data.TaskList;
 /**
  * Encapsulates a Find command.
  * This class handles the searching of tasks based on user's input.
  *
  * @author: Jason Ng
- * @version: Duke Level-9
+ * @version: Duke Level-10
  */
 public class Find {
     /**
@@ -17,7 +16,7 @@ public class Find {
      *
      * @param input The input string.
      * @param description The description of a task to be checked against.
-     * @return
+     * @return The boolean result of whether input matches a task description.
      */
     public boolean isMatch(String input, String description) {
         return description.contains(input);

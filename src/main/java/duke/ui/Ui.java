@@ -8,7 +8,7 @@ import duke.data.TaskList;
  * This class deals with interactions with the user.
  *
  * @author: Jason Ng
- * @version: Duke Level-9
+ * @version: Duke Level-10
  */
 public class Ui {
     /** The border to be printed for messages */
@@ -24,6 +24,8 @@ public class Ui {
 
     /**
      * Returns the introductory message for Duke
+     *
+     * @return The formatted introduction message.
      */
     public static String intro() {
         return INTRO;
@@ -34,6 +36,7 @@ public class Ui {
      * Message is lined with the borders stored in the attribute of the class.
      *
      * @param message The message to be printed.
+     * @return The formatted message.
      */
     public String formatMessage(String message) {
         return BORDER + '\n' + message + '\n' + BORDER;
@@ -43,6 +46,7 @@ public class Ui {
      * Returns the entire formatted taskList.
      *
      * @param taskList The taskList to be printed.
+     * @return The formatted message after a delete command.
      */
     public String formatList(TaskList taskList) {
         String formattedList = "Here are the tasks in your list:" + '\n';
@@ -60,6 +64,7 @@ public class Ui {
      * Returns the formatted message after special tasks are added to the taskList.
      *
      * @param taskList The taskList which the tasks are added to.
+     * @return The formatted message after a special command.
      */
     public String formatSpecialTasks(TaskList taskList) {
         String message = taskList.get(taskList.size() - 1).toString();
@@ -77,6 +82,7 @@ public class Ui {
      *
      * @param deleted The deleted task.
      * @param taskList The taskList the task was deleted from.
+     * @return The formatted message after a delete command.
      */
     public String formatDelete(Task deleted, TaskList taskList) {
         String message = deleted.toString();
@@ -91,6 +97,7 @@ public class Ui {
      * Returns the message after a find of tasks.
      *
      * @param matchedTasks The list of matched tasks.
+     * @return The formatted message after a find command.
      */
     public String formatFind(TaskList matchedTasks) {
         String toReturn = BORDER + '\n';

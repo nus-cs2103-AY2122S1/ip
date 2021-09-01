@@ -12,21 +12,32 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Encapsulates a MainWindow for Duke's GUI.
+ * Provides the layout for the other controls.
+ *
+ * @author: Jason Ng
+ * @version: Duke Level-10
  */
 public class MainWindow extends AnchorPane {
+    /** The scrollpane for the main window */
     @FXML
     private ScrollPane scrollPane;
+    /** The container for the dialog */
     @FXML
     private VBox dialogContainer;
+    /** The text field for user input */
     @FXML
     private TextField userInput;
+    /** The button for user to send in input */
     @FXML
     private Button sendButton;
+    /** The font to use for all texts in the GUI */
     private Font defaultFont;
+    /** The instance of the Duke application */
     private Duke duke;
-
+    /** The image of the user to be displayed in the GUI */
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DSC_0352.png"));
+    /** The image of Duke to be displayed in the GUI */
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Timetable.png"));
 
     /**
@@ -43,6 +54,11 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Sets the instance of Duke for the main window to be tied to.
+     *
+     * @param d The instance of Duke to be tied to the main window.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

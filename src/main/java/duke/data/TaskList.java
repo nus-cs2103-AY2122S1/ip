@@ -1,8 +1,8 @@
 package duke.data;
 
-import duke.commands.Task;
-
 import java.util.ArrayList;
+
+import duke.commands.Task;
 
 /**
  * Encapsulates a list of tasks.
@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * related to the operations on the list of tasks.
  *
  * @author: Jason Ng
- * @version: Duke Level-8
+ * @version: Duke Level-10
  */
 public class TaskList {
     /** List of tasks */

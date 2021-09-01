@@ -10,7 +10,7 @@ import java.util.Locale;
  * but also contains the deadline for the task.
  *
  * @author: Jason Ng
- * @version: Duke Level-8
+ * @version: Duke Level-10
  */
 public class Deadline extends Task {
     /** Deadline of the task */

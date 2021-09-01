@@ -10,7 +10,7 @@ import java.util.Locale;
  * but also contains the date/time for the event.
  *
  * @author: Jason Ng
- * @version: Duke Level-9
+ * @version: Duke Level-10
  */
 public class Event extends Task {
     /** Event time of the task */
