@@ -36,9 +36,10 @@ public class AddCommand extends Command {
      * @param storage the storage utility for the program
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.addTask(this.task);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = tasks.addTask(this.task);
         storage.writeToFile(tasks);
+        return output;
     }
 
     /**

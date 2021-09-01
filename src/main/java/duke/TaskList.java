@@ -38,19 +38,34 @@ public class TaskList {
 
     /**
      * The method to print all tasks to console
+     * @param tasks
      */
-    public void listAllTasks() {
+    public String showAllTasks(TaskList tasks) {
         if (listOfTasks.isEmpty()) {
-            System.out.println("You currently have no tasks! Add one now ☻");
+            return "You currently have no tasks! Add one now ☻";
         } else {
-            System.out.println("Here are the tasks in your list:");
-            int size = listOfTasks.size();
-            for (int i = 0; i < size; i++) {
-                Task t = listOfTasks.get(i);
-                System.out.println((i + 1) + "." + t.toString());
-            }
+            return "Here are the tasks in your list:\n" + showTasks(tasks);
         }
     }
+
+    public String showMatchingTasks(TaskList listOfTasks) {
+        if (listOfTasks.isEmpty()) {
+            return "No matching tasks found! ☹";
+        } else {
+            return "Here are the tasks that match this keyword:\n" + showTasks(listOfTasks);
+        }
+    }
+
+    public String showTasks(TaskList listOfTasks) {
+        String output = "";
+        int size = listOfTasks.size();
+        for (int i = 0; i < size; i++) {
+            Task t = listOfTasks.get(i);
+            output = output + (i + 1) + "." + t.toString() + "\n";
+        }
+        return output;
+    }
+
 
     /**
      * Method to determine if the list of tasks is empty
@@ -84,10 +99,10 @@ public class TaskList {
      *
      * @param t the Task to be added
      */
-    public void addTask(Task t) {
+    public String addTask(Task t) {
         listOfTasks.add(t);
-        System.out.println("Okay! Task added:\n  " + t.toString());
-        System.out.println("You now have " + listOfTasks.size() + " task(s) in the list.");
+        return "Okay! Task added:\n  " + t.toString() + "\n" +
+            "You now have " + listOfTasks.size() + " task(s) in the list.";
     }
 
     /**
@@ -95,17 +110,17 @@ public class TaskList {
      *
      * @param index the index of the Task to be deleted
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         int numOfTasks = listOfTasks.size();
         if (index >= numOfTasks) {
-            System.out.println("No task of this number. Add new task or input a different number.");
+            return "No task of this number. Add new task or input a different number.";
         } else if (index < 0) {
-            System.out.println("Input a task number from 1 - " + numOfTasks);
+            return "Input a task number from 1 - " + numOfTasks;
         } else {
             Task t = listOfTasks.get(index);
             listOfTasks.remove(index);
-            System.out.println("Ok! I've deleted this task:\n  " + t.toString());
-            System.out.println("You now have " + (numOfTasks - 1) + " task(s) in the list.");
+            return "Ok! I've deleted this task:\n  " + t.toString() + "\n" +
+                "You now have " + (numOfTasks - 1) + " task(s) in the list.";
         }
     }
 
@@ -114,16 +129,16 @@ public class TaskList {
      *
      * @param index the index of the Task to be marked as done
      */
-    public void markTaskAsDone(int index) {
+    public String markTaskAsDone(int index) {
         int numOfTasks = listOfTasks.size();
         if (index >= numOfTasks) {
-            System.out.println("No task of this number. Add new task or input a different number.");
+            return "No task of this number. Add new task or input a different number.";
         } else if (index < 0) {
-            System.out.println("Input a task number from 1 - " + numOfTasks);
+            return "Input a task number from 1 - " + numOfTasks;
         } else {
             Task t = listOfTasks.get(index);
             t.markAsDone();
-            System.out.println("Nice! I've marked this task as done:\n  " + t.toString());
+            return "Nice! I've marked this task as done:\n  " + t.toString();
         }
     }
 

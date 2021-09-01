@@ -35,9 +35,10 @@ public class DoneCommand extends Command {
      * @param storage the storage utility for the program
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.markTaskAsDone(this.index);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String output = tasks.markTaskAsDone(this.index);
         storage.writeToFile(tasks);
+        return output;
     }
 
     /**
