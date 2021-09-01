@@ -10,6 +10,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DoneCommandTest {
     private TaskList myTasks;
+
+    DoneCommandTest() {
+        this.start();
+    }
     private void start() {
         this.myTasks = new TaskList();
         try {
@@ -29,8 +33,8 @@ public class DoneCommandTest {
      */
     @Test
     public void markTask_differentType_asDone() {
-        start();
-        assertEquals("[E][X] watch TV (at: AUGUST 20 2021 16:00)", printDone("done 2", 1));
+        String result = printExpect(1);
+        assertEquals(result, printDone("done 2", 1));
     }
 
     /**
@@ -38,8 +42,8 @@ public class DoneCommandTest {
      */
     @Test
     public void markTask_differentType_asDone2() {
-        start();
-        assertEquals("[T][X] watch TV", printDone("done 1", 0));
+        String result = printExpect(0);
+        assertEquals(result, printDone("done 1", 0));
     }
 
     /**
@@ -47,8 +51,8 @@ public class DoneCommandTest {
      */
     @Test
     public void markTask_differentType_asDone3() {
-        start();
-        assertEquals("[T][X] watch TV again", printDone("done 3", 2));
+        String result = printExpect(2);
+        assertEquals(result, printDone("done 3", 2));
     }
 
     /**
@@ -56,14 +60,29 @@ public class DoneCommandTest {
      */
     @Test
     public void markTask_differentType_asDone4() {
-        start();
-        assertEquals("[D][X] watch friend's TV (by: SEPTEMBER 14 2021 15:00)", printDone("done 4", 3));
+        String result = printExpect(3);
+        assertEquals(result, printDone("done 4", 3));
     }
 
     private String printDone(String s, int pos) {
         DoneCommand c = new DoneCommand(myTasks, s);
         c.execute();
         return myTasks.getTask(pos).toString();
+    }
+
+    private String printExpect(int pos) {
+        String[] s = this.myTasks.getTask(pos).toString().split(" ");
+        String result ="";
+        for (int i = 0; i < s.length; i++) {
+            if (i == 1) {
+                result += "X" + s[i];
+            } else if (i != 0){
+                result += " " + s[i];
+            } else {
+                result += s[i];
+            }
+        }
+        return result;
     }
 
 }
