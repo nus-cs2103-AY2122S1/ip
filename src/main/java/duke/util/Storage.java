@@ -49,8 +49,7 @@ public class Storage {
             file.getParentFile().mkdirs();
             file.createNewFile();
 
-            FileWriter fileWrite = new FileWriter(file);
-            BufferedWriter bufferedWriter = new BufferedWriter(fileWrite);
+            BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             taskList.stream()
                     .forEach(task -> {
                         try {

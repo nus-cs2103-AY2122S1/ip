@@ -9,6 +9,7 @@ public class Message {
 
     /**
      * Constructor for Message.
+     *
      * @param s Message returned by the command.
      */
     Message(String... s) {

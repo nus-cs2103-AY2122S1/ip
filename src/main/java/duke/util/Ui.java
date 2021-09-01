@@ -129,12 +129,13 @@ public class Ui {
     }
 
     /**
-     * Prints out a message if this is the first time the user is using duke.Duke.
+     * Abstract the message to be printed when the commands recognised are to be printed
      *
-     * @return message to be used by either the graphic UI or command line UI.
+     * @param description
+     * @return
      */
-    public Message importTaskErrorMessage() {
-        return new Message("This are the commands that I recognised:",
+    private Message commandsRecognisedMessage(String description) {
+        return new Message(description,
                 "bye - Ends the chat session.",
                 "todo <description> - Adds a new todo to the task list.",
                 "deadline <description> /by <date/time> - Adds a new deadline to the task list",
@@ -143,6 +144,16 @@ public class Ui {
                 "done <number> - Sets the task to be done",
                 "find <search field> - Find task containing search field",
                 "delete <number> - Delete the task");
+
+    }
+
+    /**
+     * Prints out a message if this is the first time the user is using duke.Duke.
+     *
+     * @return message to be used by either the graphic UI or command line UI.
+     */
+    public Message importTaskErrorMessage() {
+        return commandsRecognisedMessage("This are the commands that I recognised:");
     }
 
     /**
@@ -180,15 +191,7 @@ public class Ui {
      * @return message to be used by either the graphic UI or command line UI.
      */
     public Message chatErrorMessage() {
-        return new Message("Ugh! Only the following commands are recognised.",
-                "bye - Ends the chat session.",
-                "todo <description> - Adds a new todo to the task list.",
-                "deadline <description> /by <date/time> - Adds a new deadline to the task list",
-                "event <description> /at <date/time> - Adds a new event to the task list",
-                "list - return a list of all the task",
-                "done <number> - Sets the task to be done",
-                "find <search field> - Find task containing search field",
-                "delete <number> - Delete the task");
+        return commandsRecognisedMessage("Ugh! Only the following commands are recognised.");
     }
 
     /**

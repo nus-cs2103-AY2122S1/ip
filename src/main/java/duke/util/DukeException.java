@@ -2,6 +2,8 @@ package duke.util;
 
 /**
  * Exception class for duke.Duke.
+ * Used only if the error is not thrown by a standard java exception.
+ * This is used in parser to throw exception if commands are not recognised.
  *
  * @author marcuspeh
  * @version A-MoreOOP

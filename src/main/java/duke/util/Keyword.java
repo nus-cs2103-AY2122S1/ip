@@ -39,8 +39,8 @@ public enum Keyword {
      */
     Keyword(String keyword) {
         this.keyword = keyword;
-        this.separator = "";
-        this.saveWord = "";
+        separator = "";
+        saveWord = "";
     }
 
     /**

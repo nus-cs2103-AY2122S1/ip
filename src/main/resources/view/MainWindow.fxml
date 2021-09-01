@@ -19,7 +19,7 @@
       <Circle fill="LIME" layoutX="11.0" layoutY="19.0" radius="4.0" stroke="TRANSPARENT" strokeType="INSIDE" />
         <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="42.0" prefWidth="362.0" AnchorPane.bottomAnchor="1.0">
          <font>
-            <Font size="18.0" />
+            <Font size="14.0" />
          </font></TextField>
         <Button fx:id="sendButton" layoutX="362.0" layoutY="556.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="42.0" prefWidth="38.0" style="-fx-font-weight: bold;" text="&gt;">
          <font>
