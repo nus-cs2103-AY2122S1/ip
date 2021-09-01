@@ -11,12 +11,12 @@ public class Task {
     protected TASK_TYPE type;
 
     // overloaded constructors for separate task types
-    public Task(String description, String var, TASK_TYPE type) {
+    public Task(String description, String r, TASK_TYPE type) {
         this(description,type);
         if (type.equals(TASK_TYPE.D)) {
-            by = LocalDate.parse(var);
+            by = LocalDate.parse(r);
         } else {
-            at = var;
+            at = r;
         }
         isDone = false;
     }
