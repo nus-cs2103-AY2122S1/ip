@@ -5,18 +5,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileDB {
-    public static String DEFAULT_SAVE = "ip/src/main/resources/storage.txt";
+    private static String DEFAULT_SAVE = "ip/src/main/resources/storage.txt";
     private File fileDB;
-    private boolean alreadyExists;
+    private boolean isFileExists;
     private Parser parser;
 
     public FileDB() throws DukeIOException{
         this.fileDB = new File(DEFAULT_SAVE);
         this.parser = new Parser();
-        this.alreadyExists = false;
+        this.isFileExists = false;
         try {
-            this.alreadyExists = this.fileDB.createNewFile();
-            if (!this.alreadyExists) {
+            this.isFileExists = this.fileDB.createNewFile();
+            if (!this.isFileExists) {
                 System.out.println("You have a record!");
             } else {
                 System.out.println("I've created a record for you!");
@@ -29,9 +29,9 @@ public class FileDB {
     public FileDB(String location) throws DukeIOException{
         this.fileDB = new File(location);
         this.parser = new Parser();
-        this.alreadyExists = false;
+        this.isFileExists = false;
         try {
-            this.alreadyExists = this.fileDB.createNewFile();
+            this.isFileExists = this.fileDB.createNewFile();
         } catch (IOException e) {
             throw new DukeIOException();
         }

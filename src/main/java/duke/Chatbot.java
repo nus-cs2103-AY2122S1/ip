@@ -1,11 +1,11 @@
 package duke;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Chatbot {
     private enum ChatCommands {
-        BYE("bye"),
-        LIST("list");
+        CHAT_COMMAND_BYE("bye"),
+        CHAT_COMMAND_LIST("list");
 
         private final String command;
 
@@ -24,11 +24,11 @@ public class Chatbot {
     }
 
     enum TaskCommands {
-        DONE("done"),
-        DELETE("delete"),
-        TODO("todo"),
-        DEADLINE("deadline"),
-        EVENT("event");
+        TASK_COMMAND_DONE("done"),
+        TASK_COMMAND_DELETE("delete"),
+        TASK_COMMAND_TODO("todo"),
+        TASK_COMMAND_DEADLINE("deadline"),
+        TASK_COMMAND_EVENT("event");
 
         private final String command;
 
@@ -48,8 +48,8 @@ public class Chatbot {
     }
 
     enum ChatContinue {
-        CONTINUE,
-        END,
+        CHAT_CONTINUE,
+        CHAT_END,
     }
 
     private Scanner scanner;
@@ -71,11 +71,11 @@ public class Chatbot {
     }
 
     public void chat() {
-        boolean keepChatting = true;
-        while (keepChatting) {
+        boolean isChatting = true;
+        while (isChatting) {
             ui.showChatting();
             try {
-                keepChatting = interpret() == ChatContinue.CONTINUE;
+                isChatting = interpret() == ChatContinue.CHAT_CONTINUE;
             } catch (DukeArgumentException e) {
                 System.out.println(e.getMessage());
             } catch (DukeTaskException e) {
@@ -109,18 +109,18 @@ public class Chatbot {
 
     private ChatContinue builtInCommands(ChatCommands command) {
         switch (command) {
-            case BYE:
-                return this.farewell();
-            case LIST:
-                return this.taskList.list(this.ui);
-            default:
-                this.ui.showNotSupported();
-                return ChatContinue.END;
+        case CHAT_COMMAND_BYE:
+            return this.farewell();
+        case CHAT_COMMAND_LIST:
+            return this.taskList.list(this.ui);
+        default:
+            this.ui.showNotSupported();
+            return ChatContinue.CHAT_END;
         }
     }
 
     private ChatContinue farewell() {
         this.ui.showFarewell();
-        return ChatContinue.END;
+        return ChatContinue.CHAT_END;
     }
 }
