@@ -13,8 +13,8 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        deleteTask(this.getUserInput(), taskList, ui, storage);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return deleteTask(this.getUserInput(), taskList, ui, storage);
     }
 
     @Override
@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
         return false;
     }
 
-    private void deleteTask(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private String deleteTask(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] inputArray = userInput.split(" ");
         Task removedTask = taskList.deleteTask(Integer.parseInt(inputArray[1]) - 1);
         storage.saveData(taskList);
@@ -30,6 +30,6 @@ public class DeleteCommand extends Command {
                 .format("Noted. I've removed this duke.task: \n%s\nNow you have %d tasks in the list.",
                         removedTask, taskList.size());
 
-        ui.printMessage(deleteMessage);
+        return ui.printMessage(deleteMessage);
     }
 }

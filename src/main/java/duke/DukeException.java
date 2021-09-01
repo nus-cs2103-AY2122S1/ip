@@ -10,11 +10,11 @@ public class DukeException extends Exception {
      */
     public DukeException(String errorCommand) {
         if (errorCommand.equals("todo")) {
-            this.dukeError = "☹ OOPS!!! The description of a todo cannot be empty.";
+            this.dukeError = "OOPS!!! The description of a todo cannot be empty.";
         }
 
         if (errorCommand.equals("unknown duke command")) {
-            this.dukeError = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+            this.dukeError = "OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
 
         if (errorCommand.equals("invalid data")) {

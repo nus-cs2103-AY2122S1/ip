@@ -13,8 +13,8 @@ public class PrintListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        printList(taskList, ui);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return printList(taskList, ui);
 
     }
 
@@ -23,7 +23,7 @@ public class PrintListCommand extends Command {
         return false;
     }
 
-    private void printList(TaskList taskList, Ui ui) {
+    private String printList(TaskList taskList, Ui ui) {
         StringBuilder outputList = new StringBuilder();
 
         for (int i = 0; i < taskList.size(); i++) {
@@ -31,6 +31,6 @@ public class PrintListCommand extends Command {
             outputList.append(String.format("%d.%s\n", i + 1, currentTask));
         }
 
-        ui.printMessage(outputList.toString());
+        return ui.printMessage(outputList.toString());
     }
 }

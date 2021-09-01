@@ -38,22 +38,23 @@ public class AddCommand extends Command {
      * @param ui User interface for the chat bot
      * @param storage Storage object that handles saving and loading of data
      * @throws DukeException when an error occurs during saving data
+     * @returns Outputs string describing command executed
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
         if (taskType.equals("deadline")) {
-            addDeadline(this.getUserInput(), taskList, ui, storage);
+            return addDeadline(this.getUserInput(), taskList, ui, storage);
         }
 
         if (taskType.equals("event")) {
-            addEvent(this.getUserInput(), taskList, ui, storage);
+            return addEvent(this.getUserInput(), taskList, ui, storage);
         }
 
         if (taskType.equals(("todo"))) {
-            addTodo(this.getUserInput(), taskList, ui, storage);
+            return addTodo(this.getUserInput(), taskList, ui, storage);
         }
-
+            return "";
     }
 
     @Override
@@ -61,14 +62,14 @@ public class AddCommand extends Command {
         return false;
     }
 
-    private void displayAddedTask(Task currentTask, TaskList taskList, Ui ui) {
+    private String displayAddedTask(Task currentTask, TaskList taskList, Ui ui) {
         String displayTask = String
                 .format("Got it. I've added this duke.task: \n%s\nNow you have %d tasks in the list.",
                         currentTask, taskList.size());
-        ui.printMessage(displayTask);
+        return ui.printMessage(displayTask);
     }
 
-    private void addDeadline(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private String addDeadline(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         List<String> inputArray = Arrays.asList(userInput.split(" /by "));
         String by = inputArray.get(1);
         ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
@@ -77,11 +78,11 @@ public class AddCommand extends Command {
         Deadline newDeadline = new Deadline(description, by);
         taskList.addTask(newDeadline);
         storage.saveData(taskList);
-        displayAddedTask(newDeadline, taskList, ui);
+        return displayAddedTask(newDeadline, taskList, ui);
 
     }
 
-    private void addEvent(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private String addEvent(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         List<String> inputArray = Arrays.asList(userInput.split(" /at "));
         String timeFrame = inputArray.get(1);
         ArrayList<String> descriptionArray = new ArrayList<String>(Arrays.asList(inputArray.get(0).split(" ")));
@@ -90,11 +91,11 @@ public class AddCommand extends Command {
         Event newEvent = new Event(description, timeFrame);
         taskList.addTask(newEvent);
         storage.saveData(taskList);
-        displayAddedTask(newEvent, taskList, ui);
+        return displayAddedTask(newEvent, taskList, ui);
 
     }
 
-    private void addTodo(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    private String addTodo(String userInput, TaskList taskList, Ui ui, Storage storage) throws DukeException {
         List<String> inputArray = Arrays.asList(userInput.split(" "));
 
         if (inputArray.size() <= 1) {
@@ -107,7 +108,7 @@ public class AddCommand extends Command {
         Todo newTodo = new Todo(description);
         taskList.addTask(newTodo);
         storage.saveData(taskList);
-        displayAddedTask(newTodo, taskList, ui);
+        return displayAddedTask(newTodo, taskList, ui);
     }
 
 }
