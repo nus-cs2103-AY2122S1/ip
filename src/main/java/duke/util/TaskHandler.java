@@ -44,9 +44,9 @@ public class TaskHandler {
      *
      * @param task The task given to Duke.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         taskList.add(task);
-        Ui.prettify(String.format(TASK_ADDED_MESSAGE, task.toString(), getTotalTasksCount()));
+        return String.format(TASK_ADDED_MESSAGE, task.toString(), getTotalTasksCount());
     }
 
     /**
@@ -79,7 +79,7 @@ public class TaskHandler {
      * @param taskNumber The index of the task to be mark as done
      * @throws DukeException For invalid task indexes given by the user.
      */
-    public void markTaskAsDone(int taskNumber) throws DukeException {
+    public String markTaskAsDone(int taskNumber) throws DukeException {
         if (taskNumber < 1) {
             throw new DukeInvalidIndexException();
         } else if (taskList.size() == 0) {
@@ -90,7 +90,8 @@ public class TaskHandler {
         int index = taskNumber - 1;
         Task t = taskList.get(index);
         t.markAsDone();
-        Ui.prettify(String.format(TASK_DONE_MESSAGE, t, getUndoneTasksCount()));
+        updateData();
+        return String.format(TASK_DONE_MESSAGE, t, getUndoneTasksCount());
     }
 
     /**
@@ -99,7 +100,7 @@ public class TaskHandler {
      * @param taskNumber The index of the task to be deleted.
      * @throws DukeException For invalid task indexes given by the user.
      */
-    public void deleteTask(int taskNumber) throws DukeException {
+    public String deleteTask(int taskNumber) throws DukeException {
         if (taskNumber < 1) {
             throw new DukeInvalidIndexException();
         } else if (taskList.size() == 0) {
@@ -109,7 +110,8 @@ public class TaskHandler {
         }
         int index = taskNumber - 1;
         Task t = taskList.remove(index);
-        Ui.prettify(String.format(TASK_DELETED_MESSAGE, t, getTotalTasksCount()));
+        updateData();
+        return String.format(TASK_DELETED_MESSAGE, t, getTotalTasksCount());
     }
 
     /**
@@ -117,22 +119,22 @@ public class TaskHandler {
      *
      * @throws DukeIoException If unable to update task list.
      */
-    public void updateData() throws DukeIoException {
+    private void updateData() throws DukeIoException {
         Storage.updateData(taskList);
     }
 
     /** Prints the task list in a pretty format **/
-    public void printTasks() {
+    public String printTasks() {
         StringBuilder allTasks = new StringBuilder(TASK_LIST);
         if (taskList.size() == 0) {
-            Ui.prettify(NO_TASKS_FOUND);
+            return NO_TASKS_FOUND;
         } else {
             for (int i = 0; i < taskList.size(); i++) {
                 int taskIndex = i + 1;
                 String task = taskList.get(i).toString();
                 allTasks.append(String.format("\t%d. %s\n\t", taskIndex, task));
             }
-            Ui.prettify(allTasks.toString());
+            return allTasks.toString();
         }
     }
 
@@ -141,10 +143,10 @@ public class TaskHandler {
      *
      * @param keyword Keyword to filter task list with.
      */
-    public void filterListByKeyword(String keyword) {
+    public String filterListByKeyword(String keyword) {
         StringBuilder matchingTasks = new StringBuilder(MATCHING_TASK_LIST);
         if (taskList.size() == 0) {
-            Ui.prettify((NO_TASKS_FOUND));
+            return NO_TASKS_FOUND;
         } else {
             int index = 1;
             for (Task t : taskList) {
@@ -154,9 +156,9 @@ public class TaskHandler {
                 }
             }
             if (index == 1) {
-                Ui.prettify(NO_MATCHING_TASKS);
+                return NO_MATCHING_TASKS;
             } else {
-                Ui.prettify(matchingTasks.toString());
+                return matchingTasks.toString();
             }
         }
     }

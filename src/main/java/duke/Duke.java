@@ -1,14 +1,13 @@
 package duke;
 
-import duke.util.Parser;
-import duke.util.Storage;
-import duke.util.Ui;
-import duke.util.TaskHandler;
+import java.util.ArrayList;
+
 import duke.command.Command;
 import duke.exception.DukeException;
-
-import java.util.ArrayList;
-import java.util.Scanner;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.TaskHandler;
+import duke.util.Ui;
 
 /**
  * This class encapsulates a CLI bot named Duke.
@@ -22,6 +21,7 @@ public class Duke {
     private final Ui ui;
     private final Parser parser;
 
+    /** Instantiates Duke **/
     public Duke() {
         ui = new Ui();
         try {
@@ -35,27 +35,35 @@ public class Duke {
         }
     }
 
-    public static void main (String[] args) {
-        Duke duke = new Duke();
-        duke.start();
-    }
+//    public static void main (String[] args) {
+//        Duke duke = new Duke();
+//        duke.start();
+//    }
 
     /** Runs Duke **/
-    public void start() {
-        ui.printIntroMessage();
-        Scanner sc = new Scanner(System.in);
-        storage = new Storage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                ui.prompt();
-                String input = sc.nextLine();
-                Command c = parser.parseRawInput(input);
-                c.execute(taskHandler, storage, ui);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.prettify(e.getMessage());
-            }
+//    public void start() {
+//        ui.printIntroMessage();
+//        Scanner sc = new Scanner(System.in);
+//        storage = new Storage();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                ui.prompt();
+//                String input = sc.nextLine();
+//                Command c = parser.parseRawInput(input);
+//                c.execute(taskHandler, storage, ui);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.prettify(e.getMessage());
+//            }
+//        }
+//    }
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parseRawInput(input);
+            return c.execute(taskHandler, storage, ui);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

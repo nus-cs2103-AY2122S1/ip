@@ -33,9 +33,9 @@ public class AddTaskCommand extends Command {
      * @throws DukeException If there is error adding the task or saving data.
      */
     @Override
-    public void execute(TaskHandler taskHandler, Storage storage, Ui ui) throws DukeException {
-        taskHandler.addTask(task);
+    public String execute(TaskHandler taskHandler, Storage storage, Ui ui) throws DukeException {
         storage.writeToFile(task);
+        return taskHandler.addTask(task);
     }
 
     /**

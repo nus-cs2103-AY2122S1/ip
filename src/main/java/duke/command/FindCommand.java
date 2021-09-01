@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskHandler taskHandler, Storage storage, Ui ui) {
-        taskHandler.filterListByKeyword(keyword);
+    public String execute(TaskHandler taskHandler, Storage storage, Ui ui) {
+        return taskHandler.filterListByKeyword(keyword);
     }
 }

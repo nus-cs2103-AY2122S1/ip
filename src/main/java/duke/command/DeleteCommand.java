@@ -32,8 +32,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException If there is error deleting the task or updating data.
      */
     @Override
-    public void execute(TaskHandler taskHandler, Storage storage, Ui ui) throws DukeException {
-        taskHandler.deleteTask(taskId);
-        taskHandler.updateData();
+    public String execute(TaskHandler taskHandler, Storage storage, Ui ui) throws DukeException {
+        return taskHandler.deleteTask(taskId);
     }
 }
