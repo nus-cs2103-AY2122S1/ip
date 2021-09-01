@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * Represents a command to add an event
@@ -23,8 +24,16 @@ public class AddEventCommand extends Command {
      * @param storage <code>Storage</code> responsible for saving tasks to drive
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(this.event);
-        ui.showAddedMessage(this.event, tasks);
+        return returnAddedMessage(this.event, tasks);
+    }
+
+    private String returnAddedMessage(Task task, TaskList taskList) {
+        List<Task> savedTasks = taskList.getTasks();
+        String message = "";
+        message += "I've added this task:\n" + task;
+        message += "\nNow you have " + savedTasks.size() + " tasks in the list!";
+        return message;
     }
 }

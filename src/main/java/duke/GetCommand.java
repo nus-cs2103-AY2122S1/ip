@@ -24,25 +24,27 @@ public class GetCommand extends Command {
      * @param storage <code>Storage</code> responsible for saving tasks to drive
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> savedTasks = tasks.getTasks();
         int counter = 0;
+        String message = "Here are the matching tasks in your list:\n";
         for (Task i : savedTasks) {
             if (i instanceof Event) {
                 if (((Event) i).getDate().equals(this.date)) {
-                    System.out.println(i);
+                    message += i + "\n";
                     counter++;
                 }
             }
             if (i instanceof Deadline) {
                 if (((Deadline) i).getDeadline().equals(this.date)) {
-                    System.out.println(i);
+                    message += i + "\n";
                     counter++;
                 }
             }
         }
         if (counter == 0) {
-            System.out.println("No tasks found!");
+            return "No tasks found!";
         }
+        return message;
     }
 }
