@@ -18,7 +18,7 @@ public class TaskFactory {
      * This method signature is called when creating tasks from the save file.
      *
      * @param newTaskDetails {@code String} containing details of the task.
-     *                                     Example: {@code [E] event (at: 6 Sep 2021, Tue, 21:00)}
+     *                       Example: {@code [E] event (at: 6 Sep 2021, Tue, 21:00)}
      */
     public Task createTask(String newTaskDetails) {
         // this method is used when reading from duke.tasks.txt file
@@ -57,8 +57,8 @@ public class TaskFactory {
      *
      * @param newTaskType {@code String}, one of: 'todo', 'event', 'deadline'.
      * @param newTaskDetails {@code String} representing full user input.
-     *                                     Example: {@code event shopping /at 2021-08-08 2300}
-     * @throws InvalidTaskCreationException If user input has missing paramenters or malformed date.
+     *                       Example: {@code event shopping /at 2021-08-08 2300}
+     * @throws InvalidTaskCreationException If user input has missing parameters or malformed date.
      */
     public Task createTask(String newTaskType, String newTaskDetails) throws AuguryException {
         if (newTaskType == null) {
