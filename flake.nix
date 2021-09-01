@@ -11,12 +11,12 @@
         jdt-language-server = with pkgs;
           stdenv.mkDerivation rec {
             pname = "jdt-language-server";
-            version = "0.67.0";
-            timestamp = "202012170459";
+            version = "1.3.0";
+            timestamp = "202108171748";
 
             src = fetchurl {
               url = "https://download.eclipse.org/jdtls/milestones/${version}/jdt-language-server-${version}-${timestamp}.tar.gz";
-              sha256 = "11qzwf2l737hdv1g7bfcrmdxcrl7g9z2k9nhy9lknlabmhq4mcdl";
+              sha256 = "sha256-hWOnpB8/dU/+AjHYy9oDj0ih34Vo1Bnk34gwaUOS1uU=";
             };
 
             sourceRoot = ".";
