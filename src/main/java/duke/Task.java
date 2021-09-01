@@ -1,5 +1,9 @@
 package duke;
-public class Task {
+
+/**
+ * Abstract class inherited by the ToDo, DeadLine and Event classes.
+ */
+abstract public class Task {
     private final String description;
     private boolean isDone;
     protected char type;
@@ -15,6 +19,13 @@ public class Task {
         return "[" + this.type + "]" + (this.isDone ? "[x] " : "[ ] ") + this.description;
     }
 
+    /**
+     * Marks this task as done if not already so. Return value currently unused, was intended to
+     * be used for the purposes of tracking if this task was previously marked as done, and this
+     * will be implemented via exception tracking in the future.
+     *
+     * @return False if this task was previously marked as done, true otherwise.
+     */
     public boolean markDone() {
         if (this.isDone) {
             return false;

@@ -6,6 +6,12 @@ import java.io.IOException;
 
 
 public class Duke {
+
+    /**
+     * Contains all the driver code currently, will be refactored in the future.
+     *
+     * @param args The array of command line arguments received. Currently unused.
+     */
     public static void main(String[] args) {
 
         // Source : https://patorjk.com/software/taag/#p=display&f=Standard&t=Dude
@@ -46,6 +52,12 @@ public class Duke {
         return sc.nextLine();
     }
 
+    /**
+     * Contains all the input parsing code currently, will be refactored in the future.
+     *
+     * @param str The line of input entered by the user via stdin
+     * @param taskList The instance of Tasklist used to store the current tasks
+     */
     static boolean processInput(String str, TaskList taskList){
         if (str.equals("bye")) {
             System.out.println("Bye. Hope to see you again soon!");
