@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeParseException;
 import java.util.regex.Pattern;
 
 /**
@@ -46,42 +44,9 @@ public class Task {
         case TODO:
             return new TodoTask(inputString);
         case EVENT:
-            args = inputString.split(" /at ");
-            if (args.length != 2) {
-                throw new InvalidTaskException("Expected '{title} /at {date}' for event tasks");
-            }
-            LocalDateTime startDate;
-            LocalDateTime endDate;
-            try {
-                String[] arr = args[1].split(" - ");
-                if (arr.length != 2) {
-                    DateParser.parseDateTimeInput(""); // throws error
-                }
-                startDate = DateParser.parseDateTimeInput(arr[0]);
-                endDate = DateParser.parseDateTimeInput(arr[1]);
-            } catch (DateTimeParseException e) {
-                throw new InvalidTaskException(
-                    "The two dates for deadline creation could not be parsed. Expected:\n"
-                        + "2 dates separated by ' - '. Dates come in the forms: "
-                        + "'YYYY-MM-DD' or 'YYYY-MM-DD HHMM' (Time in 24hr format)."
-                );
-            }
-            return new EventTask(args[0].trim(), startDate, endDate);
+            return EventTask.of(inputString);
         case DEADLINE:
-            args = inputString.split(" /by ");
-            if (args.length != 2) {
-                throw new InvalidTaskException("Expected '{title} /by {dates}' for deadline tasks");
-            }
-            LocalDateTime date;
-            try {
-                date = DateParser.parseDateTimeInput(args[1].trim());
-            } catch (DateTimeParseException e) {
-                throw new InvalidTaskException(
-                    "Date for event creation could not be parsed. Expected:\n"
-                        + "'YYYY-MM-DD' or 'YYYY-MM-DD HHMM' (Time in 24hr format)."
-                );
-            }
-            return new DeadlineTask(args[0].trim(), date);
+            return DeadlineTask.of(inputString);
         default:
             throw new InvalidTaskException("Task type not expected.");
         }
@@ -96,29 +61,37 @@ public class Task {
      */
     public static Task stringToTask(String stringifiedTask) {
         // {TYPE}|{DESCRIPTION}|{DATE or DATES or BLANK}
-        String[] taskAttr = stringifiedTask.split(Pattern.quote(DELIMITER));
-        if (taskAttr.length < 3 || taskAttr.length > 4) {
+        String[] taskAttributes = stringifiedTask.split(Pattern.quote(DELIMITER));
+        if (taskAttributes.length < 3 || taskAttributes.length > 4) {
             throw new IllegalArgumentException(
                 "This task is not correctly stringified. - " + stringifiedTask
             );
         }
 
-        boolean isComplete = Boolean.parseBoolean(taskAttr[0]);
-        String type = taskAttr[1];
-        String descr = taskAttr[2];
-        String date = taskAttr.length == 3 ? "" : taskAttr[3];
+        boolean isComplete = Boolean.parseBoolean(taskAttributes[0]);
+        String type = taskAttributes[1];
+        String description = taskAttributes[2];
+        String date = taskAttributes.length == 3 ? "" : taskAttributes[3];
 
         Task task;
 
         switch (type) {
         case "T":
-            task = Task.createTask(descr, Task.Type.TODO);
+            task = Task.createTask(description, Task.Type.TODO);
             break;
         case "E":
-            task = Task.createTask(String.format("%s /at %s", descr, date), Task.Type.EVENT);
+            task =
+                Task.createTask(
+                    String.format("%s /at %s", description, date),
+                    Task.Type.EVENT
+                );
             break;
         case "D":
-            task = Task.createTask(String.format("%s /by %s", descr, date), Task.Type.DEADLINE);
+            task =
+                Task.createTask(
+                    String.format("%s /by %s", description, date),
+                    Task.Type.DEADLINE
+                );
             break;
         default:
             throw new IllegalArgumentException(
@@ -148,7 +121,9 @@ public class Task {
             type = "T";
             break;
         default:
-            throw new IllegalArgumentException("Task type enums inconsistently applied");
+            throw new IllegalArgumentException(
+                "Task type enums inconsistently applied"
+            );
         }
         return String.format(
             "%b%s%s%s%s%s",

@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.function.Consumer;
 import java.util.stream.Stream;
 
 import duke.tasks.Task;
@@ -34,18 +35,10 @@ public class Storage {
         ArrayList<String> failedParses = new ArrayList<>();
 
         ArrayList<Task> taskArr = new ArrayList<>();
+        Stream<String> databaseToString;
         try {
-            Stream<String> databaseToString = Files.lines(filePath);
-            databaseToString.forEach(
-                taskString -> {
-                    try {
-                        Task task = Task.stringToTask(taskString);
-                        taskArr.add(task);
-                    } catch (IllegalArgumentException e) {
-                        failedParses.add(taskString);
-                    }
-                }
-            );
+            databaseToString = Files.lines(filePath);
+            databaseToString.forEach(convertToTaskAndAppendTo(taskArr, failedParses));
             databaseToString.close();
         } catch (IOException e) {
             System.out.println("Save file could not be read. It will be wiped on the next save.");
@@ -95,5 +88,16 @@ public class Storage {
             // Potentially add why it failed (e.g. no write permissions in folder)
             System.out.println("File could not be saved. - " + e.getMessage());
         }
+    }
+
+    private static Consumer<String> convertToTaskAndAppendTo(ArrayList<Task> taskArr, ArrayList<String> failedParses) {
+        return taskString -> {
+            try {
+                Task task = Task.stringToTask(taskString);
+                taskArr.add(task);
+            } catch (IllegalArgumentException e) {
+                failedParses.add(taskString);
+            }
+        };
     }
 }

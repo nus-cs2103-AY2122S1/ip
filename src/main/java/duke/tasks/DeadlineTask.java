@@ -1,16 +1,17 @@
 package duke.tasks;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Handles tasks that have a single date.
  */
 public class DeadlineTask extends Task {
 
-    private LocalDateTime date;
+    private final LocalDateTime date;
 
     /**
-     * Creata new Deadline task.
+     * Create new Deadline task.
      *
      * @param title description of the task
      * @param date date the task is to be completed by.
@@ -18,6 +19,29 @@ public class DeadlineTask extends Task {
     public DeadlineTask(String title, LocalDateTime date) {
         super(title, Type.DEADLINE);
         this.date = date;
+    }
+
+    /**
+     * Create a task with userInput by parsing to title and dates.
+     *
+     * @param inputString complete String input sent in by user.
+     * @throws InvalidTaskException when the input cannot be parsed.
+     */
+    public static DeadlineTask of(String inputString) throws InvalidTaskException {
+        String[] args = inputString.split(" /by ");
+        if (args.length != 2) {
+            throw new InvalidTaskException("Expected '{title} /by {dates}' for deadline tasks");
+        }
+        LocalDateTime date;
+        try {
+            date = DateParser.parseDateTimeInput(args[1].trim());
+        } catch (DateTimeParseException e) {
+            throw new InvalidTaskException(
+                "Date for event creation could not be parsed. Expected:\n"
+                    + "'YYYY-MM-DD' or 'YYYY-MM-DD HHMM' (Time in 24hr format)."
+            );
+        }
+        return new DeadlineTask(args[0].trim(), date);
     }
 
     @Override
