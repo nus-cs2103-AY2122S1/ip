@@ -52,4 +52,4 @@ jar {
     }
 }
 
-mainClassName = 'pilcrow.Pilcrow'
+mainClassName = 'pilcrow.Launcher'

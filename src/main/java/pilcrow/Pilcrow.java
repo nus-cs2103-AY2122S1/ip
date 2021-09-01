@@ -12,7 +12,10 @@ public class Pilcrow {
 
     private static final String PILCROW_FILE_PATH = "data/pilcrow.txt";
 
-    private Pilcrow() {
+    /**
+     * Constructor for Pilcrow object.
+     * */
+    public Pilcrow() {
         this.ui = new Ui();
         this.storage = new Storage(Pilcrow.PILCROW_FILE_PATH);
         this.taskList = new TaskList(this.storage.load());
@@ -36,9 +39,9 @@ public class Pilcrow {
 
         while (!isExit) {
             try {
-                Parser parser = new Parser(scanner.nextLine());
-                Pilcrow.runCommand(parser.getCommandWord(), parser.getRestOfCommand(),
-                        this.ui, this.storage, this.taskList, parser);
+                String fullCommand = scanner.nextLine();
+                Parser parser = new Parser(fullCommand);
+                this.respondToInput(fullCommand);
 
                 isExit = (parser.getCommandWord().equals("bye"));
                 if (isExit) {
@@ -50,8 +53,20 @@ public class Pilcrow {
         scanner.close();
     }
 
-    private static void runCommand(String commandWord, String restOfCommand, Ui ui,
+    /**
+     * Responds appropriately given a text input.
+     * @param input Text of the input.
+     * @return Text of Pilcrow's response.
+     */
+    public String respondToInput(String input) {
+        Parser parser = new Parser(input);
+        return Pilcrow.runCommand(parser.getCommandWord(), parser.getRestOfCommand(),
+                this.ui, this.storage, this.taskList, parser);
+    }
+
+    private static String runCommand(String commandWord, String restOfCommand, Ui ui,
             Storage storage, TaskList taskList, Parser parser) {
+        String text;
         switch (commandWord) {
         // To fix indentation
         case "todo":
@@ -59,36 +74,40 @@ public class Pilcrow {
         case "deadline":
             // Fallthrough
         case "event":
+            if (restOfCommand.length() == 0) {
+                throw new InvalidInputException("Must specify task name.");
+            }
             Task task = Task.createTask(commandWord, restOfCommand, false);
             taskList.addTask(task);
             storage.save(taskList);
-            ui.printTaskAddedMessage(task, taskList);
+            text = ui.printTaskAddedMessage(task, taskList);
             break;
         case "list":
-            ui.printTaskList(taskList);
+            text = ui.printTaskList(taskList);
             break;
         case "done":
             int index = parser.getIndex();
             taskList.setTaskIsDone(index, true);
             storage.save(taskList);
-            ui.printSetTaskIsDoneMessage(taskList.getTask(index), taskList);
+            text = ui.printSetTaskIsDoneMessage(taskList.getTask(index), taskList);
             break;
         case "search":
             String searchString = parser.getRestOfCommand();
-            ui.printTaskList(taskList.filteredTaskList(searchString));
+            text = ui.printTaskList(taskList.filteredTaskList(searchString));
             break;
         case "delete":
             index = parser.getIndex();
             taskList.deleteTask(index);
             storage.save(taskList);
-            ui.printDeleteTaskMessage(index);
+            text = ui.printDeleteTaskMessage(index);
             break;
         case "bye":
-            ui.printGoodbyeMessage();
+            text = ui.printGoodbyeMessage();
             break;
         default:
-            ui.printUnacceptedCommandMessage();
+            text = ui.printUnacceptedCommandMessage();
             break;
         }
+        return text;
     }
 }
