@@ -56,7 +56,7 @@ public class DeadlineCommand extends Command {
             String[] splitCommand = userCommand.split("/by");
 
             if (userCommand.length() <= COMMAND_LENGTH || splitCommand[0].strip().length() <= COMMAND_LENGTH
-                    || splitCommand.length < 2 ) {
+                    || splitCommand.length < 2) {
                 throw new IllegalArgumentException("Please add a description and/or deadline!");
             } else {
                 LocalDateTime date = LocalDateTime.parse(splitCommand[1].strip(), Command.INPUT_FORMATTER);

@@ -24,8 +24,8 @@ public class DeleteCommand extends Command {
     /**
      * Guide on how to use the command word.
      */
-    public static final String MESSAGE_USAGE =
-            COMMAND_WORD + " <number> - delete the specified task <number>\n" + "    📍 Example: " + COMMAND_WORD + " 1";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " <number> - delete the specified task <number>\n"
+                    + "    📍 Example: " + COMMAND_WORD + " 1";
 
     private String userCommand;
 

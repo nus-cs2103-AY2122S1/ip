@@ -1,12 +1,13 @@
 package duke.commands;
 
+import java.io.IOException;
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.tasks.Event;
-import java.io.IOException;
-import java.time.DateTimeException;
-import java.time.LocalDateTime;
 
 /**
  * Adds an event to the task list.
@@ -55,7 +56,7 @@ public class EventCommand extends Command {
             String[] splitCommand = userCommand.split("/at");
 
             if (userCommand.length() <= COMMAND_LENGTH || splitCommand[0].strip().length() <= COMMAND_LENGTH
-                    || splitCommand.length < 2 ) {
+                    || splitCommand.length < 2) {
                 throw new IllegalArgumentException("Please add a description and/or date for your event!");
             } else {
                 LocalDateTime date = LocalDateTime.parse(splitCommand[1].strip(), Command.INPUT_FORMATTER);
