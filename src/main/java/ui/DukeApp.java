@@ -29,7 +29,6 @@ public final class DukeApp extends Application {
     private Ui ui;
     private Parser parser;
     private Storage storage;
-    private long startTime;
 
     /**
      * Constructs a DukeApp object.
