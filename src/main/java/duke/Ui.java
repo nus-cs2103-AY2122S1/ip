@@ -5,19 +5,8 @@ import java.util.Scanner;
 /**
  * Class that handles user interactions.
  */
-public class Ui {
-    private static final String WELCOME_MESSAGE = "\n\tHi! I'm Herbert, you can call me Herb  ٩(˘◡˘)۶\n"
-            + "\tHow can I help you?\n\n"
-            + "\tYou can type:\n"
-            + "\t\t `list` to get a list of tasks\n"
-            + "\t\t `todo ${item}` to add a todo\n"
-            + "\t\t `deadline ${item} /by ${time}` to add a deadline\n"
-            + "\t\t `event ${item} /at ${time}` to add an event\n"
-            + "\t\t `done ${i}` to mark task i as completed\n"
-            + "\t\t `delete ${i}` to delete task i\n"
-            + "\t\t `find ${keyword}` to find tasks by keyword\n"
-            + "\t\t `bye` to end this chat\n";
-    private static final String END_MESSAGE = "\n\tSad to see you go :(\n\t...shutting down...";
+public class Ui implements UiInterface {
+    
     private final Scanner sc;
 
     /**
@@ -38,15 +27,15 @@ public class Ui {
     /**
      * Shows welcome message.
      */
-    public void showWelcome() {
-        System.out.println(wrapOutput(WELCOME_MESSAGE));
+    public void showWelcome(String welcomeMessage) {
+        System.out.println(wrapOutput(welcomeMessage));
     }
 
     /**
      * Shows end message.
      */
-    public void sayBye() {
-        System.out.println(END_MESSAGE);
+    public void sayBye(String endMessage) {
+        System.out.println(endMessage);
     }
 
     /**
@@ -79,4 +68,7 @@ public class Ui {
         System.out.print("--> ");
         return this.sc.nextLine();
     }
+    
 }
+
+

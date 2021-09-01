@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.UiInterface;
 import duke.exception.DukeException;
 import duke.exception.InvalidFormatException;
 
@@ -18,7 +18,7 @@ public class Find extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, UiInterface ui, Storage storage) throws DukeException {
         if (this.words.length != 2) {
             throw new InvalidFormatException("`find ${keyword}`");
         } else {

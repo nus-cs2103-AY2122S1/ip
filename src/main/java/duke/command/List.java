@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.UiInterface;
 
 /**
  * Class that handles the List command
@@ -10,7 +10,7 @@ import duke.Ui;
 public class List extends Command {
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public void execute(TaskList taskList, UiInterface ui, Storage storage) {
         ui.print(taskList.stringifyTasksForList());
     }
 
