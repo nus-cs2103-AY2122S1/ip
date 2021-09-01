@@ -26,13 +26,13 @@ public class Duke {
     Parser parser;
 
     public Duke() {
-        UserInterface ui = new UserInterface();
-        DateTimeFormatter dtformatter = DateTimeFormatter.ISO_DATE;
+        ui = new UserInterface();
+        dtformatter = DateTimeFormatter.ISO_DATE;
         String home = System.getProperty("user.home");
         Path dukePath = Paths.get(home, "Documents", "duke", "data.csv");
-        Storage storage = new Storage(dukePath);
-        TaskList taskList = storage.load(ui);
-        Parser parser = new Parser(this);
+        storage = new Storage(dukePath);
+        taskList = storage.load(ui);
+        parser = new Parser(this);
     }
 
     public void run() {
