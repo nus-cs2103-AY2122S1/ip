@@ -23,7 +23,7 @@ public class Deadline extends Task {
         if (description.isEmpty() || description == "" || description == " ") {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         } else {
-            this.description = description.substring(1);
+            this.description = description;
         }
 
         if (deadline.isEmpty() || deadline == "" || deadline == " ") {

@@ -13,7 +13,7 @@ public class DeadlineCommand extends Command {
 
     public DeadlineCommand(String input) {
         this.input = input;
-        this.taskDesc = input.replaceFirst("^deadline", "").split(" /")[0];
+        this.taskDesc = input.replaceFirst("^deadline ", "").split(" /")[0];
         if (input.contains("/by")) {
             this.deadline = input.substring(input.indexOf("/by") + 4);
         }

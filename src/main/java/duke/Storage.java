@@ -35,12 +35,12 @@ public class Storage {
             String desc = task.getDesc();
             String addOns = task.addOns();
             if (type == "todo") {
-                writer.println("T" + (task.checkIfDone() ? " | 1 | " : " | 0 | ") + desc);
+                writer.println("T" + (task.isDone() ? " | 1 | " : " | 0 | ") + desc);
             } else if (type == "deadline") {
-                writer.println("D" + (ls.getTask(i).checkIfDone() ? " | 1 | " : " | 0 | ")
+                writer.println("D" + (ls.getTask(i).isDone() ? " | 1 | " : " | 0 | ")
                         + desc + " | " + addOns);
             } else if (type == "event") {
-                writer.println("E" + (task.checkIfDone() ? " | 1 | " : " | 0 | ")
+                writer.println("E" + (task.isDone() ? " | 1 | " : " | 0 | ")
                         + desc + " | " + addOns);
             }
         }

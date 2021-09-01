@@ -27,7 +27,7 @@ abstract public class Task {
         System.out.println("Nice! I've marked this task as done: \n" + this.toString());
     }
 
-    public boolean checkIfDone() {
+    public boolean isDone() {
         return this.isDone;
     }
 

@@ -12,7 +12,7 @@ public class EventCommand extends Command {
 
     public EventCommand(String input) {
         this.input = input;
-        this.taskDesc = input.replaceFirst("^event", "").split(" /")[0];
+        this.taskDesc = input.replaceFirst("^event ", "").split(" /")[0];
         if (input.contains("/at")) {
             this.eventDate = input.substring(input.indexOf("/at") + 4);
         }
