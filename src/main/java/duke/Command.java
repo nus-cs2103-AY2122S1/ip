@@ -25,7 +25,7 @@ abstract class Command {
      * @param storage the storage object used to read/write to files.
      * @throws DukeException any exception thrown when interacting with Duke.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * getter for the Action.
@@ -46,26 +46,27 @@ abstract class Command {
     }
 
     /**
+     * unused at the moment.
+     *
      * @return the true if the action is BYE;
      */
     public boolean isExit() {
-        return action.equals(Action.BYE);
+        return action.equals(Action.SAVE);
     }
 }
 
-class ExitCommand extends Command {
-    public ExitCommand() {
-        super(Action.BYE, "");
+class SaveCommand extends Command {
+    public SaveCommand() {
+        super(Action.SAVE, "");
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             tasks.save(storage);
-            Ui.showMessage("Bye! Hope to see you again soon!");
+            return "Tasks saved successfully!";
         } catch (IOException e) {
-            Ui.showError(e.getMessage());
-            Ui.showError("error while saving the tasks!");
+            return e.getMessage() + "\nerror while saving the tasks!";
         }
     }
 }
@@ -79,9 +80,9 @@ class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            tasks.remove(this.index - 1);
+            return tasks.remove(this.index - 1);
         } catch (NumberFormatException e) {
             throw new WrongFormatException("delete <index for the task>");
         } catch (IndexOutOfBoundsException e) {
@@ -96,8 +97,8 @@ class ListCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Ui.showMessage(tasks.toString());
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.toString();
     }
 }
 
@@ -110,9 +111,9 @@ class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            tasks.setDone(index - 1);
+            return tasks.setDone(index - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new ListIndexException();
         }
@@ -128,8 +129,8 @@ class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.add(task);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.add(task);
     }
 }
 
@@ -139,7 +140,7 @@ class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.filter(super.getArgument());
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return tasks.filter(super.getArgument());
     }
 }
