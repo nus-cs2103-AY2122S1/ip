@@ -19,7 +19,7 @@ public class Ui {
     /**
      * Initialises a Ui object.
      */
-    public Ui(){
+    public Ui() {
         this.in = new Scanner(System.in);
         this.out = new PrintStream(System.out);
     }
@@ -30,7 +30,7 @@ public class Ui {
     public void showWelcomeMessage() {
         out.println("Hello from\n" + logo);
         out.println(dash);
-        out.println("Howdy! I'm Duke" + '\n'+ "How may I assist you?");
+        out.println("Howdy! I'm Duke" + '\n' + "How may I assist you?");
         out.println(dash);
     }
 

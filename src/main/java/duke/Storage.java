@@ -7,16 +7,16 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.Storage;
-import duke.Task;
-import duke.TaskList;
+//import duke.Storage;
+//import duke.Task;
+//import duke.TaskList;
 
 public class Storage {
 
+    static String dash = "__________________________________";
     protected String filepath;
     protected TaskList taskList;
     private int counter = 0;
-    static String dash = "__________________________________";
 
     /**
      * Creates a Storage object that takes in filepath and a TaskList object.
