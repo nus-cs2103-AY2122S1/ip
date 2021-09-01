@@ -2,11 +2,9 @@ package duke;
 
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Task;
 import duke.task.ToDo;
 
 import java.io.FileNotFoundException;
-import java.util.Scanner;
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -15,8 +13,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class Duke extends Application {
@@ -32,6 +32,16 @@ public class Duke extends Application {
 
     private static final int ERROR_OUTOFBOUNDS = 4;
     private static final int ERROR_UNKNOWN = 5;
+
+    private static final int TEXT_FONTSIZE = 20;
+
+    private static final String INSTRUCTIONS = "To add a todo task  --  todo <task>\n"
+            + "To add a deadline  --  deadline <task> /by MMM dd yyyy HH:mm\n"
+            + "To add an event  --  event <task> /at MMM dd yyyy HH:mm\n"
+            + "To mark tasks as done  --  done <idx from list>\n"
+            + "To delete tasks  --  delete <idx from list>\n"
+            + "To search for task  --  find <keyword>\n"
+            + "To see all contents of list  --  list";
 
     public Duke() {}
 
@@ -56,24 +66,37 @@ public class Duke extends Application {
     public void start(Stage stage) {
 
         TextField cmdInput = new TextField();
-        Button button = new Button("Enter");
-        Text text = new Text("Hi, I'm Duke!");
 
-        VBox layout = new VBox(20);
+        Button enterButton = new Button("Enter");
+        Button instructionsButton = new Button("Instructions");
+
+        Image dukeImage = new Image("https://bernardmarr.com/img/What%20Is%20The%20Importance%20Of%20Artificial%20Intelligence%20(AI).png");
+        ImageView imageView = new ImageView(dukeImage);
+        imageView.setFitHeight(300);
+        imageView.setFitWidth(400);
+
+        Label labelForImgAndText = new Label("Hi, I'm Duke! How can i help you?", imageView);
+        labelForImgAndText.setMinSize(1200.0, 800.0);
+        labelForImgAndText.setFont(new Font(TEXT_FONTSIZE));
+
+        VBox layout = new VBox(30);
         layout.setPadding(new Insets(20, 20, 20, 20));
 
         try {
             Duke duke = new Duke("data/duketest.txt");
-            button.setOnAction(e -> {
-                text.setText(duke.run(cmdInput.getText()));
+            enterButton.setOnAction(e -> {
+                labelForImgAndText.setText(duke.run(cmdInput.getText()));
                 cmdInput.clear();
             });
+            instructionsButton.setOnAction(e -> {
+                labelForImgAndText.setText(INSTRUCTIONS);
+            });
         } catch (FileNotFoundException e){
-            text.setText(ui.fileNotFoundMsg());
+            labelForImgAndText.setText(ui.fileNotFoundMsg());
         }
 
-        layout.getChildren().addAll(cmdInput, button, text);
-        Scene scene = new Scene(layout, 600, 500);
+        layout.getChildren().addAll(labelForImgAndText, cmdInput, enterButton, instructionsButton);
+        Scene scene = new Scene(layout, 1200, 1000);
         stage.setScene(scene); // Setting the stage to show our screen
         stage.show(); // Render the stage.
     }
@@ -89,6 +112,8 @@ public class Duke extends Application {
         try {
             if (parser.isDoneCmd(input)) {
                 marking(input);
+                storage.save(SL);
+                return ui.taskDoneConfirmation();
 
             } else if (parser.isValidTodo(input)) {
                 if(input.length() == 4) {
@@ -96,6 +121,7 @@ public class Duke extends Application {
                 }
                 ToDo todo = new ToDo(parser.getTodoDescription(input));
                 SL.addTask(todo);
+                storage.save(SL);
                 return ui.taskAddedMsg(todo.toString(), SL.size());
 
 
@@ -106,6 +132,7 @@ public class Duke extends Application {
                 String by = parser.getDeadlineTime(input);
                 Deadline dl = new Deadline(parser.getDeadlineDescription(input), by);
                 SL.addTask(dl);
+                storage.save(SL);
                 return ui.taskAddedMsg(dl.toString(), SL.size());
 
             } else if (parser.isValidEvent(input)) {
@@ -115,6 +142,7 @@ public class Duke extends Application {
                 String at = parser.getEventTime(input);
                 Event event = new Event(parser.getEventDescription(input), at);
                 SL.addTask(event);
+                storage.save(SL);
                 return ui.taskAddedMsg(event.toString(), SL.size());
 
             } else if (parser.isDeleteCmd(input)) {
@@ -124,17 +152,19 @@ public class Duke extends Application {
                 int idx = parser.getDeleteIdx(input);
                 String desc = SL.get(idx).getDescription();
                 SL.delete(idx);
+                storage.save(SL);
                 return ui.taskDeleteMsg(desc, SL.size());
+
             } else if (parser.isFindCmd(input)) {
                 if (input.length() == 4) {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
                 String keyword = input.substring(5);
+                storage.save(SL);
                 return SL.findAndReturn(keyword);
+
             } else {
-                Task task = new Task(input);
-                String desc = task.getDescription();
-                switch (desc) {
+                switch (input) {
                 case "bye":
                     ui.bye();
                     return ui.bye();
@@ -144,15 +174,12 @@ public class Duke extends Application {
                     throw new DukeException(ui.taskErrorMsg(ERROR_UNKNOWN));
                 }
             }
-            storage.save(SL);
-            return "";
+
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
+        } catch (IOException e) {
+            return ui.ioErrorMsg();
         }
-        catch (IOException e) {
-            System.out.println(ui.ioErrorMsg());
-        }
-        return ui.taskErrorMsg(5);
     }
 
 

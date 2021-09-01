@@ -90,7 +90,7 @@ public class Ui {
      * @return Message stating that a task has been marked as done.
      */
     public String taskDoneConfirmation() {
-        return "    Nice! I've marked this task as done:";
+        return "    Nice! I've marked this task as done";
     }
 
     /**
