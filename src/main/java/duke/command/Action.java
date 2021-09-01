@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.UiInterface;
 import duke.exception.DukeException;
 import duke.exception.InvalidFormatException;
 import duke.exception.InvalidIntegerException;
@@ -43,7 +43,7 @@ public class Action extends Command {
      * @throws DukeException if an error is encountered
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, UiInterface ui, Storage storage) throws DukeException {
         if (this.words.length != 2) {
             throw new InvalidFormatException("`" + this.type.toString().toLowerCase() + " ${i}`");
         } else {

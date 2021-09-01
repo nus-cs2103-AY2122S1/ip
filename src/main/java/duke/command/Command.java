@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.UiInterface;
 import duke.exception.DukeException;
 
 /**
@@ -18,7 +18,7 @@ public abstract class Command {
      * @param storage Storage that allows loading/saving
      * @throws DukeException if an error is encountered
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList taskList, UiInterface ui, Storage storage) throws DukeException;
 
     /**
      * Returns if the command is an exit.
