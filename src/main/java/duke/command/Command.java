@@ -38,7 +38,8 @@ public class Command {
      * @throws IOException   if the filepath has any issues
      * @throws DukeException to handle any other input/format error
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+        return "";
     }
 }
 

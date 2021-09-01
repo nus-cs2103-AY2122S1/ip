@@ -21,7 +21,7 @@ public class ListCommand extends Command { //ListCommand to handle the showing o
      * @param storage  The current storage class to handle the txt file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Ui.printList(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return Ui.printList(taskList);
     }
 }

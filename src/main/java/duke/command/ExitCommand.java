@@ -25,7 +25,7 @@ public class ExitCommand extends Command { //ExitCommand to handle the shutting 
      * @param storage  The current storage class to handle the txt file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showGoodBye();
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.showGoodBye();
     }
 }

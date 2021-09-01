@@ -115,29 +115,34 @@ public class TaskList { //TaskList class used to store the tasks and will be upd
      * Searches the list for any task with the given string
      * @param string Input string pattern to find
      */
-    public void searchList(String string) {
+    public String searchList(String string) {
         int newCount = 0;
+        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < count; i++) {
             if (listArray.get(i).getName().contains(string)) {
-                System.out.println(++newCount + ". " + listArray.get(i));
+                sb.append(++newCount + ". " + listArray.get(i) + "\n");
             }
         }
         if (newCount == 0) {
-            System.out.println("Oh no! Seems like there was no match for your search");
+            return "Oh no! Seems like there was no match for your search";
+        } else {
+            return sb.toString();
         }
     }
 
     /**
      * Returns the list of task for the user
      */
-    public void printList() {
+    public String printList() {
         if (count == 0) {
             //When the list is empty
-            System.out.println("The list is empty!");
+            return "The list is empty!";
         } else {
+            StringBuilder sb = new StringBuilder();
             for (int i = 0; i < count; i++) {
-                System.out.println(i + 1 + ". " + listArray.get(i));
+                sb.append(i + 1 + ". " + listArray.get(i) + "\n");
             }
+            return sb.toString();
         }
     }
 }

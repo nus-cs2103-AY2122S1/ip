@@ -33,7 +33,7 @@ public class FindCommand extends Command {
      * @param storage  The current storage class to handle the txt file
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        Ui.searchList(taskList, this.string);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return Ui.searchList(taskList, this.string);
     }
 }

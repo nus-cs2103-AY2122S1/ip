@@ -40,13 +40,13 @@ public class DeleteCommand extends Command {
      * @throws DukeException if there are any other format/input issues
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         if (index > taskList.getCount() || index <= 0) {
             //Catches if the number is > than the number of task or if its negative
             throw new DukeException("☹ OOPS!!! The number is not in within the number of tasks!");
         } else {
-            Ui.deleteMessage(taskList.delete(index - 1), taskList.getCount());
             Storage.updateText(taskList);
+            return Ui.deleteMessage(taskList.delete(index - 1), taskList.getCount());
         }
     }
 }

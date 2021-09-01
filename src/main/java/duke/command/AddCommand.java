@@ -69,9 +69,9 @@ public class AddCommand extends Command {
      */
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
         taskList.add(this.inputTask);
-        ui.showAddedMessage(taskList);
         Storage.updateText(taskList);
+        return ui.showAddedMessage(taskList);
     }
 }

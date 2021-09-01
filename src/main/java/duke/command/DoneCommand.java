@@ -40,7 +40,7 @@ public class DoneCommand extends Command { //DoneCommand to handle the updating 
      * @throws DukeException catches if the input/format is wrong
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws IOException, DukeException {
         if (index > taskList.getCount() || index <= 0) {
             //Catches if the number is > than the number of task or if its negative
             throw new DukeException("☹ OOPS!!! The number is not in within the number of tasks!");
@@ -48,8 +48,8 @@ public class DoneCommand extends Command { //DoneCommand to handle the updating 
             if (taskList.get(index - 1).isDone()) {
                 throw new DukeException("☹ OOPS!!! That task has already been completed!");
             }
-            Ui.doneMessage(taskList.get(index - 1).done());
             Storage.updateText(taskList);
+            return Ui.doneMessage(taskList.get(index - 1).done());
         }
     }
 }
