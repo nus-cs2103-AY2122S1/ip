@@ -27,10 +27,8 @@ public class Ui {
      * Handles the greet event.
      */
     public String greet() {
-        return (HORIZONTAL_LINE
-                + "    Hello! I'm LebronChatBot\n"
-                + "    What can I do for you?\n"
-                + HORIZONTAL_LINE);
+        return ("    Hello! I'm LebronChatBot\n"
+                + "    What can I do for you?\n");
     }
 
     /**
@@ -40,18 +38,15 @@ public class Ui {
      */
     public String replyAdd(ArrayList<Task> lst, Task task) {
         String num = String.valueOf(lst.size());
-        return (HORIZONTAL_LINE + "    Got it. I've added this task: \n" + "    "
-                + task.toString() + "\n" + "    Now you have " + num + " tasks in the list\n"
-                + HORIZONTAL_LINE);
+        return ("    Got it. I've added this task: \n" + "    "
+                + task.toString() + "\n" + "    Now you have " + num + " tasks in the list\n");
     }
 
     /**
      * Responds to the exit event when the user says bye.
      */
     public String exit() {
-        return (HORIZONTAL_LINE
-                + "    Bye. Hope to see you again soon!\n"
-                + HORIZONTAL_LINE);
+        return ("    Bye. Hope to see you again soon!\n");
     }
 
     /**
@@ -60,13 +55,12 @@ public class Ui {
      * @param lst The TaskList to be displayed.
      */
     public String replyDisplay(TaskList lst) {
-        String reply = HORIZONTAL_LINE + "    Here are the tasks in your list:\n";
+        String reply = "    Here are the tasks in your list:\n";
         this.count = 1;
         for (int i = 0; i < lst.getSize(); i++) {
             reply += ("    " + count + ". " + lst.getItem(i).toString()) + "\n";
             count++;
         }
-        reply += HORIZONTAL_LINE;
         return reply;
     }
 
@@ -76,9 +70,9 @@ public class Ui {
      * @param task The task that is marked done.
      */
     public String replyMarkDone(Task task) {
-        return HORIZONTAL_LINE + "    Nice! I've marked this task as done:\n"
+        return "    Nice! I've marked this task as done:\n"
                 + "    " + task.toString()
-                + "\n" + HORIZONTAL_LINE;
+                + "\n";
     }
 
     /**
@@ -89,10 +83,9 @@ public class Ui {
      */
     public String replyDelete(Task task, int size) {
         String num = String.valueOf(size);
-        return HORIZONTAL_LINE + "    Noted. I've removed this task:\n"
+        return "    Noted. I've removed this task:\n"
                 + "    " + task.toString()
-                + "\n" + "    Now you have " + num + " tasks in the list\n"
-                + HORIZONTAL_LINE;
+                + "\n" + "    Now you have " + num + " tasks in the list\n";
     }
 
     /**
@@ -103,14 +96,13 @@ public class Ui {
      */
     public String replyFind(TaskList lst, String keyword) {
         this.count = 1;
-        String reply = HORIZONTAL_LINE + "    Here are the matching tasks in your list:\n";
+        String reply = "    Here are the matching tasks in your list:\n";
         for (int i = 0; i < lst.getSize(); i++) {
             if (lst.getItem(i).getName().contains(keyword)) {
                 reply += "    " + count + ". " + lst.getItem(i).toString() + "\n";
                 count++;
             }
-        }
-        reply += HORIZONTAL_LINE;
+        };
         return reply;
     }
 
