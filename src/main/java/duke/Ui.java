@@ -28,13 +28,13 @@ public class Ui {
     /**
      * Prints logo of DUKE and short introduction.
      */
-    public void printIntro() {
-        String logo = " ____        _        \n"
+    public static String[] printIntro() {
+        String logo = "____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello FROM\n" + logo);
+        return display("HELLO FROM", logo);
     }
 
     /**
@@ -49,10 +49,8 @@ public class Ui {
     /**
      * Prints simple farewell message to user.
      */
-    public void end() {
-        System.out.println("    ______________________________________");
-        System.out.println("     Bye. Hope to see you again soon!");
-        System.out.println("    ______________________________________");
+    public String[] end() {
+        return display("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -73,11 +71,6 @@ public class Ui {
      * @param size Size of current list including current Task being added.
      */
     public String[] printTaskAdded(Task task, int size) {
-        System.out.println("    ______________________________________");
-        System.out.println("     Got it. I've added this task: ");
-        System.out.printf("       %s\n", task);
-        System.out.printf("     Now you have %d tasks in the list\n", size);
-        System.out.println("    ______________________________________");
         return display("Got it. I've added this task: ",
                 task.toString(), "Now you have " + size + " tasks in the list");
     }
@@ -87,11 +80,13 @@ public class Ui {
      *
      * @param task Task that user has indicated as completed.
      */
-    public void printTaskCompleted(Task task) {
+    public String[] printTaskCompleted(Task task) {
         System.out.println("    ______________________________________");
         System.out.println("     Nice! I've marked this task as done:");
         System.out.printf("       %s\n", task);
         System.out.println("    ______________________________________");
+        return display("Nice! I've marked this task as done:",
+                task.toString());
     }
 
     /**
@@ -100,12 +95,14 @@ public class Ui {
      * @param task Task that the user wants deleted.
      * @param size Size of list with remaining tasks.
      */
-    public void printDeleteTask(Task task, int size) {
+    public String[] printDeleteTask(Task task, int size) {
         System.out.println("    ______________________________________");
         System.out.println("     Noted. I've removed this task:");
         System.out.printf("       %s\n", task);
         System.out.printf("     Now you have %d tasks in the list.\n", size);
         System.out.println("    ______________________________________");
+        return display("Noted. I've removed this task:",
+                task.toString(), "Now you have " + size + " tasks in the list.");
     }
 
     /**
@@ -113,31 +110,19 @@ public class Ui {
      *
      * @param result Result of tasks that pass the search.
      */
-    public void printFindTask(Task[] result) {
+    public String[] printFindTask(Task[] result) {
         if (result[0] == null) {
-            System.out.println("    ______________________________________");
-            System.out.println("     There are no matching tasks in your list!");
-            System.out.println("    ______________________________________");
+            return display("There are no matching tasks in your list!");
         } else {
-            System.out.println("    ______________________________________");
-            System.out.println("     Here are the matching tasks in your list:");
-            printFindTaskHelper(result);
-            System.out.println("    ______________________________________");
-        }
-
-    }
-
-    /**
-     * Helps printFindTask function.
-     *
-     * @param result Result of tasks that pass the search.
-     */
-    public void printFindTaskHelper(Task[] result) {
-        for (int i = 0; i < result.length; i++) {
-            if (result[i] == null) {
-                break;
+            String[] output = new String[result.length + 1];
+            output[0] = "Here are the matching tasks in your list:";
+            for (int i = 0; i < result.length; i++) {
+                if (result[i] == null) {
+                    break;
+                }
+                output[i + 1] = (i + 1) + ". " + result[i].toString();
             }
-            System.out.printf("     %d. %s\n", i + 1, result[i]);
+            return output;
         }
     }
 }

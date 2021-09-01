@@ -94,7 +94,7 @@ public class Duke {
      * @param command Command entered by the user.
      * @throws DukeException Upon invalid command format.
      */
-    public void addDeadline(String command, boolean printOutput) throws DukeException {
+    public String[] addDeadline(String command, boolean printOutput) throws DukeException {
         String[] words = command.split(" ");
         if (words.length <= 3) {
             throw new DukeException("invalidDeadline");
@@ -110,14 +110,15 @@ public class Duke {
                 tasks.add(task);
                 if (printOutput) {
                     storage.appendToFile(fileAddress, "D - 0 - " + name + "- " + date);
-                    ui.printTaskAdded(task, tasks.size());
+                    return ui.printTaskAdded(task, tasks.size());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (DateTimeParseException e) {
-                System.out.println("Enter valid date format!");
+                return new String[] {("Enter valid date format!")};
             }
         }
+        return new String[0];
     }
 
     /**
@@ -126,7 +127,7 @@ public class Duke {
      * @param command Command entered by the user.
      * @throws DukeException Upon invalid command format.
      */
-    public void addEvent(String command, boolean printOutput) throws DukeException {
+    public String[] addEvent(String command, boolean printOutput) throws DukeException {
         String[] words = command.split(" ");
         if (words.length <= 3) {
             throw new DukeException("invalidEvent");
@@ -142,14 +143,15 @@ public class Duke {
                 tasks.add(task);
                 if (printOutput) {
                     storage.appendToFile(fileAddress, "E - 0 - " + name + "- " + date);
-                    ui.printTaskAdded(task, tasks.size());
+                    return ui.printTaskAdded(task, tasks.size());
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (DateTimeParseException e) {
-                System.out.println("Enter valid date format!");
+                return new String[]{("Enter valid date format!")};
             }
         }
+        return new String[0];
     }
 
     /**
@@ -158,7 +160,7 @@ public class Duke {
      * @param command Command entered by the user.
      * @throws DukeException Upon incorrect command format.
      */
-    public void markCompleted(String command, boolean printOutput) throws DukeException {
+    public String[] markCompleted(String command, boolean printOutput) throws DukeException {
         boolean numeric;
         String restOfCommand = "";
         try {
@@ -177,7 +179,7 @@ public class Duke {
                 currTask.setCompleted();
                 if (printOutput) {
                     storage.editFileContentsForCompletion(taskNum + 1);
-                    ui.printTaskCompleted(currTask);
+                    return ui.printTaskCompleted(currTask);
                 }
             } else {
                 throw new DukeException("invalidTaskNumber");
@@ -185,6 +187,7 @@ public class Duke {
         } else {
             throw new DukeException("invalidNumberFormat");
         }
+        return new String[0];
     }
 
     /**
@@ -192,8 +195,9 @@ public class Duke {
      *
      * @param command Command entered by the user.
      * @throws DukeException Upon incorrect command format.
+     * @return
      */
-    private void deleteTask(String command) throws DukeException {
+    private String[] deleteTask(String command) throws DukeException {
         String restOfCommand = command.substring(7);
         boolean numeric;
         try {
@@ -208,7 +212,7 @@ public class Duke {
                 storage.editFileContentsForDeletion(taskNum + 1);
                 Task currTask = tasks.get(taskNum);
                 tasks.remove(taskNum);
-                ui.printDeleteTask(currTask, tasks.size());
+                return ui.printDeleteTask(currTask, tasks.size());
             } else {
                 throw new DukeException("invalidTaskNumber");
             }
@@ -226,15 +230,22 @@ public class Duke {
         String parsed = Parser.process(command);
         try {
             switch (parsed) {
+            case ("bye"):
+                return ui.end();
             case ("list"):
                 return tasks.printList(command);
             case ("todo"):
                 return addToDo(command, true);
             case ("deadline"):
+                return addDeadline(command, true);
             case ("event"):
+                return addEvent(command, true);
             case ("done"):
+                return markCompleted(command, true);
             case ("delete"):
+                return deleteTask(command);
             case ("find"):
+                return findTasks(command);
             default:
                 return new String[] {"invalid command"};
             }
@@ -243,7 +254,7 @@ public class Duke {
         }
     }
 
-    private void findTasks(String command) {
+    private String[] findTasks(String command) {
         Task[] result = new Task[tasks.size()];
         String[] words = command.split(" ");
         int count = 0;
@@ -259,7 +270,7 @@ public class Duke {
                 }
             }
         }
-        ui.printFindTask(result);
+        return ui.printFindTask(result);
     }
 }
 
