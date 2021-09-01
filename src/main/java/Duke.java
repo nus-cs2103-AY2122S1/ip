@@ -33,12 +33,21 @@ public class Duke {
         tasks = new TaskList(storage.loadData());
     }
 
+    /**
+     * Constructor for Duke.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(LOCATION);
         tasks = new TaskList(storage.loadData());
     }
 
+    /**
+     * Responds to user input.
+     *
+     * @param input Message input by the user.
+     * @return String of the response.
+     */
     public String getResponse(String input) {
         parser = new Parser(tasks, storage);
         String response = parser.parseCommand(input);

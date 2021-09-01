@@ -22,42 +22,35 @@ public class Ui {
     /**
      * Prints the logo, together with a greeting.
      */
-    public void intro() {
+    public static String intro() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-
-    /**
-     * Outputs a linebreak for easier formatting.
-     */
-    public static void printLineBreak() {
-        System.out.println(lineBreak);
+        return "Hello from\n" + logo;
     }
 
     /**
      * Greets the user.
      */
-    public static void greet() {
-        System.out.println("Hello! I'm Duke" + '\n' + "What can I do for you?");
+    public static String greet() {
+        return "Hello! I'm Duke" + '\n' + "What can I do for you?";
     }
 
     /**
      * Says goodbye to the user.
      */
-    public static void exit() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints the messages.
+     * Prints the message.
      *
      * @param message Message to be printed.
      */
-    public static void printMessage(String message) {
-        System.out.println(message);
+    public static String printMessage(String message) {
+        return message;
     }
 }

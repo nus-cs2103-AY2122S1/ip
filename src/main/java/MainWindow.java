@@ -1,3 +1,4 @@
+import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,8 +6,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ *
+ * @author James Kua
+ * @version Duke-Level-10
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -23,11 +28,21 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/faker.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/faker-art.png"));
 
+    /**
+     * Initialises the MainWindow controller.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Ui.greet(), dukeImage));
     }
 
+    /**
+     * Set Duke for MainWindow.
+     *
+     * @param d Duke instance
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
