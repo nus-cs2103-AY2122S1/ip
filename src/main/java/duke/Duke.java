@@ -1,6 +1,14 @@
 package duke;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.GetDayCommand;
+import duke.command.ListCommand;
+import duke.command.SearchCommand;
+
 /**
  * This class is the Duke class to start the whole program
  */
@@ -57,6 +65,8 @@ public class Duke {
                 executeNext = new AddCommand(myTasks, next);
                 executeNext.execute();
                 break;
+            default:
+                break;
             }
         }
     }
@@ -75,7 +85,7 @@ public class Duke {
     private static void greeting() {
         String g = "Hello! I'm duke.Duke";
         String g2 = "What can I do for you?";
-        Ui.myPrint(g + "\n" + ind2+ g2 );
+        Ui.myPrint(g + "\n" + ind2 + g2);
     }
 
     /**

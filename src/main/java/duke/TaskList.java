@@ -1,9 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,6 +9,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 
 /**
  * This class stores all duke.TaskList of the user.
@@ -34,68 +36,68 @@ public class TaskList {
      * @param t input from the user
      * @throws DukeException if the input is invalid
      */
-    public void addTask(String t) throws DukeException{
+    public void addTask(String t) throws DukeException {
         String[] ss = t.split(" ");
         switch (ss[0]) {
-            case("todo"):
-                String i = "";
-                for (int q = 1; q < ss.length;q++) {
-                    i += ss[q];
-                    if (q != ss.length - 1) {
-                        i += " ";
-                    }
+        case ("todo"):
+            String i = "";
+            for (int q = 1; q < ss.length; q++) {
+                i += ss[q];
+                if (q != ss.length - 1) {
+                    i += " ";
                 }
-                if (i != "") {
-                    Todo todo = new Todo(i);
-                    this.taskList.add(todo);
-                    noteAdded(todo);
+            }
+            if (i != "") {
+                Todo todo = new Todo(i);
+                this.taskList.add(todo);
+                noteAdded(todo);
+            } else {
+                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            }
+            break;
+        case ("deadline"):
+            int j = findTime("/by", ss);
+            String[] info = getInfo(j, ss);
+            if (info[0] != "" && info[1] != "") {
+                Deadline ddl;
+                if (info[1].length() == 10) {
+                    LocalDate date = getDate(info[1]);
+                    ddl = new Deadline(info[0], date);
+                } else if (info[1].length() == 16) {
+                    LocalDateTime time = getTime(info[1]);
+                    ddl = new Deadline(info[0], time);
                 } else {
-                    throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException("Please enter time in the form of dd/MM/yyyy HH:mm or dd/MM/yyyy.");
                 }
-                break;
-            case("deadline"):
-                int j = findTime("/by", ss);
-                String[] info = getInfo(j, ss);
-                if (info[0] != "" && info[1] != "") {
-                    Deadline ddl;
-                    if (info[1].length() == 10) {
-                        LocalDate date = getDate(info[1]);
-                        ddl = new Deadline(info[0], date);
-                    } else if (info[1].length() == 16) {
-                        LocalDateTime time = getTime(info[1]);
-                        ddl = new Deadline(info[0], time);
-                    } else {
-                        throw new DukeException("Please enter time in the form of dd/MM/yyyy HH:mm or dd/MM/yyyy.");
+                this.taskList.add(ddl);
+                noteAdded(ddl);
+            } else {
+                throw new DukeException("☹ OOPS!!! The description and time of a deadline cannot be empty.");
+            }
+            break;
+        case ("event"):
+            int k = findTime("/at", ss);
+            String[] info2 = getInfo(k, ss);
+            if (info2[0] != "" && info2[1] != "") {
+                Event e;
+                if (info2[1].length() >= 10) {
+                    LocalDate date = getDate(info2[1].substring(0, 10));
+                    String time = "";
+                    if (info2[1].length() >= 11) {
+                        time = info2[1].substring(11);
                     }
-                    this.taskList.add(ddl);
-                    noteAdded(ddl);
+                    e = new Event(info2[0], date, time);
                 } else {
-                    throw new DukeException("☹ OOPS!!! The description and time of a deadline cannot be empty.");
+                    throw new DukeException("Please enter time in the form of dd/MM/yyyy time.");
                 }
-                break;
-            case("event"):
-                int k = findTime("/at", ss);
-                String[] info2 = getInfo(k, ss);
-                if (info2[0] != "" && info2[1] != "") {
-                    Event e;
-                    if (info2[1].length() >= 10) {
-                        LocalDate date = getDate(info2[1].substring(0, 10));
-                        String time="";
-                        if (info2[1].length()>=11) {
-                            time = info2[1].substring(11);
-                        }
-                        e = new Event(info2[0], date, time);
-                    } else {
-                        throw new DukeException("Please enter time in the form of dd/MM/yyyy time.");
-                    }
-                    this.taskList.add(e);
-                    noteAdded(e);
-                } else {
-                    throw new DukeException("☹ OOPS!!! The description and time of an event cannot be empty.");
-                }
-                break;
-            default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                this.taskList.add(e);
+                noteAdded(e);
+            } else {
+                throw new DukeException("☹ OOPS!!! The description and time of an event cannot be empty.");
+            }
+            break;
+        default:
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 
@@ -128,8 +130,8 @@ public class TaskList {
      * @throws DukeException if the position is invalid throws exceptions
      */
     public void complete(int pos) throws DukeException {
-        if (this.taskList.size()>pos-1 && pos > 0) {
-            String p = this.taskList.get(pos-1).finished();
+        if (this.taskList.size() > pos - 1 && pos > 0) {
+            String p = this.taskList.get(pos - 1).finished();
             Duke.saveFile();
             Ui.sayDone(p);
         } else {
@@ -144,8 +146,8 @@ public class TaskList {
      * @throws DukeException if the position is invalid throws exceptions
      */
     public void delete(int pos) throws DukeException {
-        if (this.taskList.size()>pos-1 && pos > 0) {
-            Task deleted = this.taskList.get(pos-1);
+        if (this.taskList.size() > pos - 1 && pos > 0) {
+            Task deleted = this.taskList.get(pos - 1);
             this.taskList.remove(deleted);
             int total = taskList.size();
             String sOrNot = "";
@@ -162,7 +164,7 @@ public class TaskList {
     }
 
     private static int findTime(String s, String[] arr) {
-        for (int i = 0; i < arr.length;i++) {
+        for (int i = 0; i < arr.length; i++) {
             if (arr[i].equals(s)) {
                 return i;
             }
@@ -184,17 +186,17 @@ public class TaskList {
                 counter++;
             }
             counter++;
-            while(counter < ss.length) {
+            while (counter < ss.length) {
                 time += ss[counter];
                 if (counter != ss.length - 1) {
                     time += " ";
                 }
-                counter ++;
+                counter++;
             }
         }
-            result[0] = name;
-            result[1] = time;
-            return result;
+        result[0] = name;
+        result[1] = time;
+        return result;
     }
 
     /**
@@ -208,44 +210,44 @@ public class TaskList {
             String next = s.nextLine();
             String[] n = next.split(" \\| ");
             switch (n[0]) {
-                case("T"):
-                    Todo t = new Todo(n[2]);
-                    int completed = Integer.parseInt(n[1]);
-                    if (completed == 1) {
-                        t.setFinish();
-                    }
-                    taskList.add(t);
-                    break;
-                case("E"):
-                    DateTimeFormatter ff = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    String time = "";
-                    if (n.length> 4) {
-                        time = n[4];
-                    }
-                    Event e = new Event(n[2], LocalDate.parse(n[3], ff), time);
-                    int c = Integer.parseInt(n[1]);
-                    if (c == 1) {
-                        e.setFinish();
-                    }
-                    taskList.add(e);
-                    break;
-                case("D"):
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    Deadline d;
-                    if (n[3].length() == 10) {
-                        d = new Deadline(n[2], LocalDate.parse(n[3], formatter2));
-                    } else {
-                        d = new Deadline(n[2], LocalDateTime.parse(n[3], formatter));
-                    }
-                    int cd = Integer.parseInt(n[1]);
-                    if (cd == 1) {
-                        d.setFinish();
-                    }
-                    taskList.add(d);
-                    break;
-                default:
-                    break;
+            case ("T"):
+                Todo t = new Todo(n[2]);
+                int completed = Integer.parseInt(n[1]);
+                if (completed == 1) {
+                    t.setFinish();
+                }
+                taskList.add(t);
+                break;
+            case ("E"):
+                DateTimeFormatter ff = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                String time = "";
+                if (n.length > 4) {
+                    time = n[4];
+                }
+                Event e = new Event(n[2], LocalDate.parse(n[3], ff), time);
+                int c = Integer.parseInt(n[1]);
+                if (c == 1) {
+                    e.setFinish();
+                }
+                taskList.add(e);
+                break;
+            case ("D"):
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                Deadline d;
+                if (n[3].length() == 10) {
+                    d = new Deadline(n[2], LocalDate.parse(n[3], formatter2));
+                } else {
+                    d = new Deadline(n[2], LocalDateTime.parse(n[3], formatter));
+                }
+                int cd = Integer.parseInt(n[1]);
+                if (cd == 1) {
+                    d.setFinish();
+                }
+                taskList.add(d);
+                break;
+            default:
+                break;
             }
         }
     }
@@ -257,7 +259,7 @@ public class TaskList {
         return taskList;
     }
 
-    private LocalDateTime getTime(String t) throws DukeException{
+    private LocalDateTime getTime(String t) throws DukeException {
         LocalDateTime dateTime;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
@@ -269,7 +271,7 @@ public class TaskList {
         return dateTime;
     }
 
-    private LocalDate getDate(String t) throws DukeException{
+    private LocalDate getDate(String t) throws DukeException {
         LocalDate date;
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -287,7 +289,7 @@ public class TaskList {
      * @return an arraylist of all relevant duke.TaskList
      * @throws DukeException if the date format is incorrect
      */
-    public static ArrayList<Task> getOnADay(String s) throws DukeException{
+    public static ArrayList<Task> getOnADay(String s) throws DukeException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate target;
         try {
@@ -296,7 +298,7 @@ public class TaskList {
             throw new DukeException("Please enter date in the form of dd/MM/yyyy.");
         }
         ArrayList<Task> result = new ArrayList<>();
-        for (Task t: taskList) {
+        for (Task t : taskList) {
             if (target.equals(t.getDate())) {
                 result.add(t);
             }
@@ -359,14 +361,16 @@ public class TaskList {
 
     /**
      * Returns last Task in the list
+     *
      * @return an instance of Task
      */
     public Task getLast() {
-        return taskList.get(taskList.size()-1);
+        return taskList.get(taskList.size() - 1);
     }
 
     /**
      * Returns a Task in the list in a certain position
+     *
      * @return an instance of Task
      */
     public Task getTask(int pos) {
@@ -380,7 +384,7 @@ public class TaskList {
      */
     public static void search(String n) {
         ArrayList<Task> result = new ArrayList<>();
-        for (Task t: taskList) {
+        for (Task t : taskList) {
             if (!n.isEmpty()) {
                 if (t.getDescription().toLowerCase().contains(n.toLowerCase())) {
                     result.add(t);

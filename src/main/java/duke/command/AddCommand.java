@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * This class deals with the add task command.
  */
-public class AddCommand extends Command{
+public class AddCommand extends Command {
     private TaskList myTasks;
     private String next;
 

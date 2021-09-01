@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
  * @author Deng Huaiyu(G12)
  * @version CS2103T AY21/22 Semester 1
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDateTime ddl;
     protected LocalDate date;
     private int whichOne;
@@ -62,7 +62,8 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + (this.whichOne == 0 ? Task.toTimeFormat(ddl) : Task.toDateFormat(date)) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + (this.whichOne == 0 ? Task.toTimeFormat(ddl) : Task.toDateFormat(date)) + ")";
     }
 
     /**
@@ -78,6 +79,6 @@ public class Deadline extends Task{
      */
     @Override
     public String getTime() {
-        return (this.whichOne == 0 ? ddl.toLocalDate()+" "+ddl.toLocalTime() : date.toString());
+        return (this.whichOne == 0 ? ddl.toLocalDate() + " " + ddl.toLocalTime() : date.toString());
     }
 }

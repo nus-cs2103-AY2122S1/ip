@@ -6,7 +6,7 @@ import duke.Ui;
 /**
  * This class deals with the finish task command.
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
     private TaskList myTasks;
     private String next;
 

@@ -6,7 +6,7 @@ package duke;
  * @author Deng Huaiyu(G12)
  * @version CS2103T AY21/22 Semester 1
  */
-public class DukeException extends Exception{
+public class DukeException extends Exception {
     private static String ind = "    ";
     //for sentences
     private static String ind2 = "     ";

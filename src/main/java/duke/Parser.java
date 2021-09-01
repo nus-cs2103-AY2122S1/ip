@@ -44,7 +44,7 @@ public class Parser {
         } else if (next.length() > 3 && next.substring(0, 4).equals(KeyWord.SEARCH.getK())) {
             return 6;
         } else {
-           return 5;
+            return 5;
         }
     }
 }

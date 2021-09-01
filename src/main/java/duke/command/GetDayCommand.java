@@ -7,7 +7,7 @@ import duke.Ui;
 /**
  * This class deals with the show task on a specific day command.
  */
-public class GetDayCommand extends Command{
+public class GetDayCommand extends Command {
     private String next;
 
     /**

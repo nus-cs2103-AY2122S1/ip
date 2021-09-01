@@ -6,7 +6,7 @@ import duke.Ui;
 /**
  * This class deals with the deleting task command.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private TaskList myTasks;
     private String next;
 

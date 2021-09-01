@@ -1,12 +1,12 @@
-package CommandTest;
+package commandtest;
 
-import duke.Duke;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 import duke.TaskList;
 import duke.command.DoneCommand;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DoneCommandTest {
     private TaskList myTasks;
@@ -14,6 +14,7 @@ public class DoneCommandTest {
     DoneCommandTest() {
         this.start();
     }
+
     private void start() {
         this.myTasks = new TaskList();
         try {
@@ -72,11 +73,11 @@ public class DoneCommandTest {
 
     private String printExpect(int pos) {
         String[] s = this.myTasks.getTask(pos).toString().split(" ");
-        String result ="";
+        String result = "";
         for (int i = 0; i < s.length; i++) {
             if (i == 1) {
                 result += "X" + s[i];
-            } else if (i != 0){
+            } else if (i != 0) {
                 result += " " + s[i];
             } else {
                 result += s[i];

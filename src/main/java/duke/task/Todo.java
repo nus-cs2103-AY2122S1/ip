@@ -6,7 +6,7 @@ package duke.task;
  * @author Deng Huaiyu(G12)
  * @version CS2103T AY21/22 Semester 1
  */
-public class Todo extends Task{
+public class Todo extends Task {
 
     /**
      * Constructs a todo.

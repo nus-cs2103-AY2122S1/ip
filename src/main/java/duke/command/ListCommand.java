@@ -5,7 +5,7 @@ import duke.TaskList;
 /**
  * This class deals with the show all tasks command.
  */
-public class ListCommand extends Command{
+public class ListCommand extends Command {
     private TaskList myTasks;
 
     /**

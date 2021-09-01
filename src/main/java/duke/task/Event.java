@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * @author Deng Huaiyu(G12)
  * @version CS2103T AY21/22 Semester 1
  */
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDate date;
     private String time;
 
