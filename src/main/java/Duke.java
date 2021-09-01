@@ -15,7 +15,7 @@ public class Duke {
     // Line Separator
     private final String SEP_LINE = "____________________________________________________________";
     // Standard boot response
-    private final String bootMessage =
+    private final String welcomeMessage =
             SEP_LINE
             .concat(
             " \n____        _        \n"
@@ -47,7 +47,7 @@ public class Duke {
 
     // Level-1: Greets user when Duke is initialised
     public void greet() {
-        System.out.println(bootMessage);
+        System.out.println(welcomeMessage);
     }
 
     // Level-1: echos user message back to user

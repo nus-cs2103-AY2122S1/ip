@@ -1,8 +1,11 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 // Level 3 -> A-Classes: Task class that represents all Tasks
 public class Task {
 
     protected String description;
-    protected String by = null;
+    protected LocalDate by = null;
     protected String at = null;
     protected boolean isDone;
     protected TASK_TYPE type;
@@ -11,7 +14,7 @@ public class Task {
     public Task(String description, String var, TASK_TYPE type) {
         this(description,type);
         if (type.equals(TASK_TYPE.D)) {
-            by = var;
+            by = LocalDate.parse(var);
         } else {
             at = var;
         }

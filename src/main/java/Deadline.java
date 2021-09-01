@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 //Level-4 -> A-Inheritance: Deadline Task Class
 public class Deadline extends Task {
 
@@ -7,7 +10,9 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString().concat(" (by: ".concat(this.by).concat(")"));
+        DateTimeFormatter df = DateTimeFormatter.ofPattern("MMM d yyyy");
+        String data = this.by.format(df);
+        return super.toString().concat(" (by: ".concat(data).concat(")"));
     }
 }
 

@@ -67,7 +67,7 @@ public class Storage {
                 .concat(t.description)
             );
             if (t.by != null) {
-                writer.write(" | ".concat(t.by));
+                writer.write(" | ".concat(t.by.toString()));
             }
             if (t.at != null) {
                 writer.write(" | ".concat(t.at));
