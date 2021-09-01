@@ -28,7 +28,7 @@ public class ListCommand extends Command {
      * @return String describing each task in a formatted string.
      */
     private String getTasks(TaskList tasks, Ui ui) {
-        String success = ui.getListSuccess();
+        String success = ui.getListSuccessMessage();
 
         StringBuilder output = new StringBuilder();
 

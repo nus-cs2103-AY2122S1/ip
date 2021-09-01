@@ -64,7 +64,7 @@ public class DateCommand extends Command {
         String formattedDateString = Parser.parseLocalDate(localDate);
 
         // String to notify users of the date they are searching for.
-        String notification = ui.getDateListSuccess(formattedDateString);
+        String notification = ui.getDateListSuccessMessage(formattedDateString);
 
         // Print Deadlines and Events with LocalDate that matches date input from user.
         for (Task task : tasks.getTasks()) {
@@ -88,7 +88,7 @@ public class DateCommand extends Command {
         }
 
         // String describing a summary of matching tasks to the user.
-        String summary = ui.getDateListSummary(formattedDateString, counter, deadlines, events);
+        String summary = ui.getDateListSummaryMessage(formattedDateString, counter, deadlines, events);
 
         return notification + "\n" + summary;
     }

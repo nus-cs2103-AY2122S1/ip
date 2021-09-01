@@ -95,7 +95,7 @@ public class AddCommand extends Command {
         }
 
         // Returns response to user after successfully adding task to tasks.
-        return ui.getAddSuccess(tasks.get(tasks.size() - 1), tasks.size());
+        return ui.getAddSuccessMessage(tasks.get(tasks.size() - 1), tasks.size());
     }
 
     /**

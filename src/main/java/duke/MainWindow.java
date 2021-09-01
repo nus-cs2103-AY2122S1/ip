@@ -52,6 +52,11 @@ public class MainWindow extends Stage {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Duke object to be used by the application.
+     *
+     * @param d Duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
@@ -67,7 +72,7 @@ public class MainWindow extends Stage {
         String response = duke.getResponse(input);
 
         // Allow Duke to say goodbye to the user before closing application.
-        if (response.equals(duke.getUi().getGoodbye())) {
+        if (response.equals(duke.getUi().getGoodbyeMessage())) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();

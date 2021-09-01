@@ -101,14 +101,14 @@ public class Storage implements Storable {
      */
     private static Task parseSaveFormat(String save) throws DukeException {
         // Split save string by the save separator.
-        String[] saveSplit = save.split(SAVE_SEPARATOR);
+        String[] splitSaveString = save.split(SAVE_SEPARATOR);
 
         try {
             // Get the task type, done status, description of task from saveSplit.
-            String taskType = saveSplit[0];
+            String taskType = splitSaveString[0];
             // Save would be corrupt if done status cannot be parsed to int.
-            int isDone = Integer.parseInt(saveSplit[1]);
-            String description = saveSplit[2];
+            int isDone = Integer.parseInt(splitSaveString[1]);
+            String description = splitSaveString[2];
 
             // Create corresponding duke.task.Task object.
             // Save would be corrupt if duke.task.Deadline and duke.task.Event tasks do not have time.
@@ -118,11 +118,11 @@ public class Storage implements Storable {
                 task = new Todo(description);
                 break;
             case "D":
-                LocalDate by = Parser.toLocalDate(saveSplit[3]);
+                LocalDate by = Parser.toLocalDate(splitSaveString[3]);
                 task = new Deadline(description, by);
                 break;
             case "E":
-                LocalDate at = Parser.toLocalDate(saveSplit[3]);
+                LocalDate at = Parser.toLocalDate(splitSaveString[3]);
                 task = new Event(description, at);
                 break;
             default:

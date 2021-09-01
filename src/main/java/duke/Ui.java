@@ -68,7 +68,7 @@ public class Ui {
      *
      * @return Standard welcome response.
      */
-    public String getWelcome() {
+    public String getWelcomeMessage() {
         return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
@@ -77,7 +77,7 @@ public class Ui {
      *
      * @return Standard goodbye response.
      */
-    public String getGoodbye() {
+    public String getGoodbyeMessage() {
         return "Bye. Hope to see you again soon!";
     }
 
@@ -87,7 +87,7 @@ public class Ui {
      * @param task Task marked as done.
      * @return Standard response for mark success and the marked task.
      */
-    public String getMarkSuccess(Task task) {
+    public String getMarkSuccessMessage(Task task) {
         return "Nice! I've marked this task as done:" + "\n" + task.toString();
     }
 
@@ -99,7 +99,7 @@ public class Ui {
      * @param size The new total count of tasks.
      * @return Standard response for delete success, followed by the deleted task and the new total count of tasks.
      */
-    public String getDeleteSuccess(Task task, int size) {
+    public String getDeleteSuccessMessage(Task task, int size) {
         return "Noted. I've removed this task:" + "\n" + task.toString() + "\n"
                 + "Now you have " + size + " tasks in the list.";
     }
@@ -112,7 +112,7 @@ public class Ui {
      * @param size The new total count of tasks.
      * @return standard response for add success, followed by the task added and the new total count of tasks.
      */
-    public String getAddSuccess(Task task, int size) {
+    public String getAddSuccessMessage(Task task, int size) {
         return "Got it. I have added this task:" + "\n" + task.toString() + "\n"
                 + "Now you have " + size + " tasks in the list.";
     }
@@ -122,7 +122,7 @@ public class Ui {
      *
      * @return Standard response for listing tasks.
      */
-    public String getListSuccess() {
+    public String getListSuccessMessage() {
         return "Here are the tasks in your list:";
     }
 
@@ -132,7 +132,7 @@ public class Ui {
      * @param formattedDateString Date being searched for.
      * @return Standard response for finding tasks by date.
      */
-    public String getDateListSuccess(String formattedDateString) {
+    public String getDateListSuccessMessage(String formattedDateString) {
         return "Here are the Deadlines or Events that fall on " + formattedDateString + ":";
     }
 
@@ -145,7 +145,7 @@ public class Ui {
      * @param events Total count of Events found to fall on date being searched for.
      * @return Standard response for success in finding tasks by date.
      */
-    public String getDateListSummary(String formattedDateString, int counter, int deadlines, int events) {
+    public String getDateListSummaryMessage(String formattedDateString, int counter, int deadlines, int events) {
         return "A total of " + counter + " events (" + deadlines + " deadlines and "
                 + events + " events) fall on " + formattedDateString;
     }
@@ -155,7 +155,7 @@ public class Ui {
      *
      * @return Standard response for beginning search for tasks matching a keyword.
      */
-    public String getFindBegin() {
+    public String getFindBeginMessage() {
         return "Here are the matching tasks in your list:";
     }
 
@@ -166,7 +166,7 @@ public class Ui {
      * @param keyword Search keyword being searched for.
      * @return Standard response for success in finding tasks that match a search keyword..
      */
-    public String getFindSuccess(int counter, String keyword) {
+    public String getFindSuccessMessage(int counter, String keyword) {
         return "A total of " + counter
                 + " tasks in your list match your search keyword, " + keyword + ".";
     }

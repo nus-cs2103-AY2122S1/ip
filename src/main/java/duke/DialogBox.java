@@ -20,11 +20,20 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
+    private static final Ui ui = new Ui();
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor for DialogBox.
+     *
+     * @param text Text String to be displayed in DialogBox.
+     * @param img Image to be displayed alongside text in DialogBox.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,24 +58,54 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox.
+     * The returned DialogBox will be anchored to the right of its container.
+     *
+     * @param text Text String to be displayed in DialogBox.
+     * @param img Image to be displayed alongside text in DialogBox.
+     * @return DialogBox containing specified text and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a flipped DialogBox.
+     * The returned DialogBox will be anchored to the left of its container.
+     *
+     * @param text Text String to be displayed in DialogBox.
+     * @param img Image to be displayed alongside text in DialogBox.
+     * @return Flipped DialogBox containing specified text and image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();
         return db;
     }
 
+    /**
+     * Returns a DialogBox for greeting user.
+     * The returned DialogBox contains the standard welcome message.
+     *
+     * @param img Image to be displayed alongside welcome message in DialogBox.
+     * @return DialogBox containing welcome message and specified image.
+     */
     public static DialogBox getDukeWelcome(Image img) {
-        DialogBox db = new DialogBox("Duke: Hello! I'm Duke\nWhat can I do for you?", img);
+        DialogBox db = new DialogBox(ui.getWelcomeMessage(), img);
         db.flip();
         return db;
     }
 
+    /**
+     * Returns a DialogBox for saying goodbye to the user.
+     * The returned DialogBox contains the standard goodbye message.
+     *
+     * @param img Image to be displayed alongside goodbye message in DialogBox.
+     * @return DialogBox containing goodbye message and specified image.
+     */
     public static DialogBox getDukeBye(Image img) {
-        DialogBox db = new DialogBox("Duke: Bye. Hope to see you again soon!", img);
+        DialogBox db = new DialogBox(ui.getGoodbyeMessage(), img);
         db.flip();
         return db;
     }

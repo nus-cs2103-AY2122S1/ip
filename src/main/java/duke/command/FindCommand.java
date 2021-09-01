@@ -46,7 +46,7 @@ public class FindCommand extends Command {
         String keyword = this.userInput.substring(Commands.FIND.getLength() + 1);
 
         // String standard response for search begin.
-        String begin = ui.getFindBegin();
+        String begin = ui.getFindBeginMessage();
 
         StringBuilder foundTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
@@ -63,7 +63,7 @@ public class FindCommand extends Command {
         }
 
         // String standard response for search success.
-        String success = ui.getFindSuccess(counter, keyword);
+        String success = ui.getFindSuccessMessage(counter, keyword);
 
         return begin + "\n" + foundTasks + success;
     }

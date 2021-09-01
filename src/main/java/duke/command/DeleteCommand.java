@@ -59,7 +59,7 @@ public class DeleteCommand extends Command {
         Task deletedTask = tasks.remove(idx);
 
         // Returns response to user after successfully deleting task at index.
-        return ui.getDeleteSuccess(deletedTask, tasks.size());
+        return ui.getDeleteSuccessMessage(deletedTask, tasks.size());
     }
 
     /**

@@ -58,7 +58,7 @@ public class MarkCommand extends Command {
         tasks.get(idx).markAsDone();
 
         // Returns response to user after successfully marking task at index as done.
-        return ui.getMarkSuccess(tasks.get(idx));
+        return ui.getMarkSuccessMessage(tasks.get(idx));
 
     }
 

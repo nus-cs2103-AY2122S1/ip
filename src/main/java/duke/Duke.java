@@ -58,7 +58,7 @@ public class Duke {
         }
 
         // If input is "bye" return standard goodbye response.
-        return this.ui.getGoodbye();
+        return this.ui.getGoodbyeMessage();
     }
 
     /**

@@ -27,25 +27,18 @@ public class Parser {
      * @return Command that can be executed to perform a set of actions.
      */
     public static Command parse(String userInput) {
-        // Only exactly "list" will be accepted for ListCommand.
         if (userInput.equals(Commands.LIST.getCommand())) {
-            // Print tasks
             return new ListCommand(userInput);
         } else {
             if (userInput.startsWith(Commands.DONE.getCommand())) {
-                // Mark task as done.
                 return new MarkCommand(userInput);
             } else if (userInput.startsWith(Commands.DELETE.getCommand())) {
-                // Delete a task.
                 return new DeleteCommand(userInput);
             } else if (userInput.startsWith(Commands.DATE.getCommand())) {
-                // Print tasks that fall on given date.
                 return new DateCommand(userInput);
             } else if (userInput.startsWith(Commands.FIND.getCommand())) {
-                // Print tasks with descriptions that contain search input.
                 return new FindCommand(userInput);
             } else {
-                // Add a task to tasks.
                 return new AddCommand(userInput);
             }
         }
@@ -167,12 +160,10 @@ public class Parser {
      * @throws DukeException If user input for index cannot be parsed into Integer.
      */
     public static int parseUserNumInput(String userInput, Commands command) throws DukeException {
-        // Parses integer in user input. Invalid user input could throw NumberFormatException.
         try {
             // Add 1 as user's number input is separated from command by 1 space.
             return Integer.parseInt(userInput.substring(command.getLength() + 1));
         } catch (NumberFormatException nfe) {
-            // Invalid user input cannot be parsed into Integer.
             throw new DukeException(Ui.exceptionInvalidNumberInput(command));
         }
     }
