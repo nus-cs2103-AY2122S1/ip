@@ -88,6 +88,17 @@ public class Duke extends Application {
         stage.show(); // Render the stage.
     }
 
+    public String getResponse(String input) {
+        Command command;
+        try {
+            command = Parser.parse(input);
+            command.execute(this.tasks, this.storage);
+            return command.toString();
+        } catch (DukeException dukeException) {
+            return dukeException.toString();
+        }
+    }
+
     public String getGreetingMessage() {
         return this.ui.getGreetingMessage();
     }
