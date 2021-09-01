@@ -22,7 +22,7 @@ public class FileDB {
         try {
             this.isFileExists = this.fileDB.createNewFile();
             if (!this.isFileExists) {
-                System.out.println("You have a record!");
+                System.out.println("Welcome back!");
             } else {
                 System.out.println("I've created a record for you!");
             }
@@ -66,4 +66,6 @@ public class FileDB {
             System.out.println(e.getMessage());
         }
     }
+
+    
 }

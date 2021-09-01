@@ -9,8 +9,8 @@ public class Ui {
         System.out.println("I'm a bot build by SpdPnd98, let me know how I can help you!");
         System.out.println("Here are some things I can do now:");
         System.out.println("1. Bye");
-        System.out.println("I'll learn what you're saying and " +
-                "repeat it to you next time you say it if it's something new!");
+        System.out.println("2. List");
+        System.out.println("3. Find <search term>");
     }
 
     protected void showLoadingFile() {

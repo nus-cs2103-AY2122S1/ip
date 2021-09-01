@@ -45,8 +45,18 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         // initialize chatbot
+        // get initial stream
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream old = System.out;
+        PrintStream ps = new PrintStream(baos);
+        System.setOut(ps);
+
         this.chatbot = new Chatbot();
         this.isChatting = false;
+
+        // reset stream
+        System.out.flush();
+        System.setOut(old);
 
         // The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
@@ -103,6 +113,9 @@ public class Duke extends Application {
 
         // when need to scroll, shows the latest comments
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        // Chatbot's welcome message
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(baos.toString()), new ImageView((duke))));
     }
 
     /**
