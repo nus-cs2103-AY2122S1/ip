@@ -6,17 +6,38 @@ import duke.exceptions.*;
 
 import java.util.ArrayList;
 
+/**
+ * Manages all the operations on list of tasks. Central class to manage tasks
+ */
 public class TaskManager {
     public ArrayList<Task> tasks = new ArrayList<>();
 
+    /**
+     * Prints the current status of the task
+     *
+     * @param line  - the message to be displayed
+     * @param index - the index of the task in the taskList
+     * @return - the message to be displayed in the String form along with the index of the task
+     */
     public String getAcknowledgement(String line, int index) {
         return line + "\n " + tasks.get(index).showTask();
     }
 
+    /**
+     * To get the number of the tasks in the taskList
+     *
+     * @return - it returns the number of tasks in String form
+     */
     public String getNumOfTask() {
         return "Now you have " + tasks.size() + " tasks in the list";
     }
-    // Print list of task
+
+    /**
+     * Gives the list of tasks
+     *
+     * @return - list of tasks in the String form
+     * @throws EmptyListException - when the size of the taskList is zero
+     */
     public String getList() throws EmptyListException {
         if (tasks.size() == 0) {
             throw new EmptyListException();
@@ -26,30 +47,40 @@ public class TaskManager {
         // Add each item to listLines
         for (int i = 1; i <= tasks.size(); ++i) {
             fullList.append("\n").append(i).append(". ").append(tasks.get(i - 1).showTask());
-//            fullList = fullList + "\n" +  i + ". " + tasks.get(i - 1).showTask();
-
         }
 
         return fullList.toString();
     }
 
-    // Adding a duke.tasks.Todo to list of tasks
+    /**
+     * Adds the Todo task to the taskList
+     *
+     * @param userInput - the user input for the todo task
+     * @return - the message of acknowledgement in String form
+     * @throws TodoException - if the description is empty
+     */
     public String addTodo(String userInput) throws TodoException {
 
-        if (userInput.equals("todo") || userInput.equals("")){
+        if (userInput.equals("todo") || userInput.equals("")) {
             throw new TodoException();
         }
         // Create new duke.tasks.Todo instance an add it to end taskList
         tasks.add(new Todo(userInput));
 
-        return getAcknowledgement(PrintType.TASK_DELETED_LINE.getPrintType(), tasks.size()-1)
+        return getAcknowledgement(PrintType.TASK_DELETED_LINE.getPrintType(), tasks.size() - 1)
                 + "\n" + getNumOfTask();
     }
 
-    // Adding a duke.tasks.Deadline to list of tasks
+    /**
+     * Adds the Deadline task to the list of tasks
+     *
+     * @param userInput - the user input for the deadline task
+     * @return - the message of acknowledgement in String form
+     * @throws DeadlineException - if the format is incorrect
+     */
     public String addDeadline(String userInput) throws DeadlineException {
         // Check if line follows the format "<description> /by <time/date>"
-        if (!userInput.matches(RegexType.DEADLINE_REGEX.getRegexType())){
+        if (!userInput.matches(RegexType.DEADLINE_REGEX.getRegexType())) {
             throw new DeadlineException();
         }
 
@@ -60,14 +91,20 @@ public class TaskManager {
         // Create new duke.tasks.Deadline instance an add it to end taskList
         tasks.add(new Deadline(description, by));
 
-        return getAcknowledgement(RegexType.TASK_ADDED_LINE.getRegexType(), tasks.size()-1)
+        return getAcknowledgement(RegexType.TASK_ADDED_LINE.getRegexType(), tasks.size() - 1)
                 + "\n" + getNumOfTask();
     }
 
-    // Adding an duke.tasks.Event to list of tasks
+    /**
+     * Adds the Event task to the list of tasks
+     *
+     * @param userInput - the user input of the Event task
+     * @return - the message of acknowledgement in String form
+     * @throws EventException - if the format is incorrect
+     */
     public String addEvent(String userInput) throws EventException {
         // Check if userInput follows the format "<description> /at <time/date>"
-        if (!userInput.matches(RegexType.EVENT_REGEX.getRegexType())){
+        if (!userInput.matches(RegexType.EVENT_REGEX.getRegexType())) {
             throw new EventException();
         }
 
@@ -79,15 +116,22 @@ public class TaskManager {
         // Create new duke.tasks.Event instance an add it to end taskList
         tasks.add(new Event(description, at));
 
-        return getAcknowledgement(PrintType.TASK_ADDED_LINE.getPrintType(), tasks.size()-1)
+        return getAcknowledgement(PrintType.TASK_ADDED_LINE.getPrintType(), tasks.size() - 1)
                 + "\n" + getNumOfTask();
     }
 
-    // Delete task
+    /**
+     * Deletes the task from the list of tasks
+     *
+     * @param userInput - the user input to delete which task
+     * @return - the message of acknowledgement in String form
+     * @throws DeleteFormatException - the format of delete command is incorrect
+     * @throws DeleteRangeException  - the index is incorrect
+     */
     public String deleteTask(String userInput)
             throws DeleteFormatException, DeleteRangeException {
 
-        if (!userInput.matches(RegexType.DIGITS_REGEX.getRegexType())){
+        if (!userInput.matches(RegexType.DIGITS_REGEX.getRegexType())) {
             throw new DeleteFormatException();
         }
 
@@ -106,23 +150,30 @@ public class TaskManager {
     }
 
 
-
-    // Mark the task at the given index as done
+    /**
+     * Changes the status of the task from incomplete to completed
+     *
+     * @param userInput - the user input of the task that has to be added in the list
+     * @return - the message of about the status of the task in the String format
+     * @throws DoneFormatException  - the format is incorrect
+     * @throws DoneAlreadyException - the task has already been completed
+     * @throws DoneRangeException   - the index is incorrect
+     */
     public String markAsDone(String userInput)
             throws DoneFormatException, DoneAlreadyException, DoneRangeException {
 
         // Check if the command is done and is followed by a number
         // and if the index is within the range of number of tasks
-        if (!userInput.matches(RegexType.DIGITS_REGEX.getRegexType())){
+        if (!userInput.matches(RegexType.DIGITS_REGEX.getRegexType())) {
             throw new DoneFormatException();
         }
 
         int index = Integer.parseInt(userInput) - 1;
-        if (index >= tasks.size()){
+        if (index >= tasks.size()) {
             throw new DoneRangeException();
         }
         // Check if task is already done
-        if (tasks.get(index).isDone()){
+        if (tasks.get(index).isDone()) {
             throw new DoneAlreadyException();
         }
 
@@ -134,13 +185,12 @@ public class TaskManager {
 
     }
 
-    public void clearList(){
+    /**
+     * Clear the list of all the tasks
+     */
+    public void clearList() {
         tasks.clear();
     }
-
-
-
-
 
 
 }
