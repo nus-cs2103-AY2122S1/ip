@@ -39,6 +39,9 @@ public class Ui {
         System.out.println("Noted! I've removed this task:\n  " + text);
     }
 
+    /**
+     * Prints number of tasks in TaskList.
+     */
     public void showListCountMsg() {
         int len = tasks.getLength();
         if (len == 1) {
