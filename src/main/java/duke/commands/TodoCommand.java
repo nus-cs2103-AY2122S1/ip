@@ -19,8 +19,8 @@ public class TodoCommand extends Command {
     /**
      * Guide on how to use this command word.
      */
-    public static final String MESSAGE_USAGE =
-            COMMAND_WORD + " <description> - add a todo item\n" + "   Example: " + COMMAND_WORD + " read book";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " <description> - add a todo item\n"
+            + "    📍 Example: " + COMMAND_WORD + " read book";
 
     private String userCommand;
 
@@ -40,20 +40,21 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (userCommand.length() < 5) {
                 throw new IllegalArgumentException("Please add a description for your todo!");
+            } else {
+                Todo newTodo = new Todo(userCommand.substring(5));
+                tasks.addTask(newTodo);
+                storage.save(tasks.getItems());
+
+                return ui.printTaskAdded(newTodo, tasks.getSize());
+
             }
 
-            Todo newTodo = new Todo(userCommand.substring(5));
-            tasks.addTask(newTodo);
-            storage.save(tasks.getItems());
-
-            ui.printTaskAdded(newTodo, tasks.getSize());
         } catch (IOException | IllegalArgumentException e) {
-            ui.printError(e.getMessage());
+            return ui.printError(e.getMessage());
         }
-
     }
 }

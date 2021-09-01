@@ -24,18 +24,28 @@ public class HelpCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printHorizontalLine();
-        System.out.println("Available commands:\n"
-                + TodoCommand.MESSAGE_USAGE + "\n"
-                + DeadlineCommand.MESSAGE_USAGE + "\n"
-                + EventCommand.MESSAGE_USAGE + "\n"
-                + DoneCommand.MESSAGE_USAGE + "\n"
-                + DeleteCommand.MESSAGE_USAGE + "\n"
-                + FindCommand.MESSAGE_USAGE + "\n"
-                + ListCommand.MESSAGE_USAGE + "\n"
-                + HelpCommand.MESSAGE_USAGE + "\n"
-                + ExitCommand.MESSAGE_USAGE);
-        ui.printHorizontalLine();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        // ui.printHorizontalLine();
+//        System.out.println("Available commands:\n"
+//                + TodoCommand.MESSAGE_USAGE + "\n"
+//                + DeadlineCommand.MESSAGE_USAGE + "\n"
+//                + EventCommand.MESSAGE_USAGE + "\n"
+//                + DoneCommand.MESSAGE_USAGE + "\n"
+//                + DeleteCommand.MESSAGE_USAGE + "\n"
+//                + FindCommand.MESSAGE_USAGE + "\n"
+//                + ListCommand.MESSAGE_USAGE + "\n"
+//                + HelpCommand.MESSAGE_USAGE + "\n"
+//                + ExitCommand.MESSAGE_USAGE);
+        // ui.printHorizontalLine();
+        return "Available commands:\n👉"
+                + TodoCommand.MESSAGE_USAGE + "\n👉"
+                + DeadlineCommand.MESSAGE_USAGE + "\n👉"
+                + EventCommand.MESSAGE_USAGE + "\n👉"
+                + DoneCommand.MESSAGE_USAGE + "\n👉"
+                + DeleteCommand.MESSAGE_USAGE + "\n👉"
+                + FindCommand.MESSAGE_USAGE + "\n👉"
+                + ListCommand.MESSAGE_USAGE + "\n👉"
+                + HelpCommand.MESSAGE_USAGE + "\n👉"
+                + ExitCommand.MESSAGE_USAGE;
     }
 }

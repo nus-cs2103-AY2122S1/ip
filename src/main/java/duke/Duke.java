@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.commands.Command;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -44,7 +45,19 @@ public class Duke { // extends Application {
         }
     }
 
-    public Duke() { }
+    /**
+     * Instantiates a Duke instance with default file path "data/tasks".
+     */
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("data/tasks");
+
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (IOException e) {
+            ui.printError(e.getMessage());
+        }
+    }
 
     /**
      * Executes the Duke program.
@@ -109,7 +122,22 @@ public class Duke { // extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        // ArrayList<String> output = new ArrayList<>();
+        // output.add(ui.printWelcomeMessage());
+
+        try {
+            Command c = Parser.parse(input);
+            boolean isExit = c.isExit();
+            // System.out.println(c.execute(tasks, ui, storage));
+            if (isExit) {
+                Platform.exit();
+            }
+            return c.execute(tasks, ui, storage);
+
+        } catch (DukeException e) {
+            return ui.printError(e.toString());
+        }
+        // return input;
     }
 
 

@@ -79,8 +79,9 @@ public class TaskList {
      * Finds a task with the given description.
      *
      * @param desc Description of the task that the user wants to find.
+     * @return The task with the specified description.
      */
-    public void findTask(String desc) {
+    public String findTask(String desc) {
         if (items.size() > 0) {
             List<Task> foundItems = new ArrayList<>();
 
@@ -95,30 +96,42 @@ public class TaskList {
             }
 
             if (foundItems.size() > 0) {
-                System.out.println("Here are the matching tasks in your list:");
+                // System.out.println("Here are the matching tasks in your list:");
+                StringBuilder temp = new StringBuilder("Here are the matching tasks in your list:\n");
                 for (int i = 0; i < foundItems.size(); i++) {
-                    System.out.printf("%d. " + foundItems.get(i) + "\n", i + 1);
+                    // System.out.printf("%d. " + foundItems.get(i) + "\n", i + 1);
+                    temp.append(i + 1).append(". ").append(foundItems.get(i)).append("\n");
                 }
+                return temp.toString();
             } else {
-                System.out.println("There is no task with the specified description!");
+                // System.out.println("There is no task with the specified description!");
+                return "There is no task with the specified description!";
             }
         } else {
-            System.out.println("You have no tasks in your list to find a matching task.");
+            // System.out.println("You have no tasks in your list to find a matching task.");
+            return "You have no tasks in your list to find a matching task.";
         }
     }
 
     /**
      * Prints the list of tasks the user has currently.
+     *
+     * @return The list of tasks the user has.
      */
-    public void printList() {
+    public String printList() {
         if (items.size() > 0) {
-            System.out.println("Here are the tasks in your list:");
+            // System.out.println("Here are the tasks in your list:");
+            StringBuilder temp = new StringBuilder("Here are the tasks in your list:\n");
 
             for (int i = 0; i < items.size(); i++) {
-                System.out.printf("%d. " + items.get(i) + "\n", i + 1);
+                // System.out.printf("%d. " + items.get(i) + "\n", i + 1);
+                temp.append(i + 1).append(". ").append(items.get(i)).append("\n");
             }
+            // System.out.println(temp.toString());
+            return temp.toString();
         } else {
-            System.out.println("You have no tasks in your list.");
+            // System.out.println("You have no tasks in your list.");
+            return "You have no tasks in your list.";
         }
     }
 }

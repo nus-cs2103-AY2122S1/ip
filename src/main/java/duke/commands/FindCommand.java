@@ -13,9 +13,8 @@ public class FindCommand extends Command {
     /**
      * Guide on how to use this command word.
      */
-    public static final String MESSAGE_USAGE =
-            COMMAND_WORD + " <description> - displays all task with <description>\n" + "   Example: " + COMMAND_WORD
-                    + " book";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " <description> - displays all task with <description>\n"
+            + "    📍 Example: " + COMMAND_WORD + " book";
 
     private String userCommand;
 
@@ -46,19 +45,19 @@ public class FindCommand extends Command {
      * @param storage Storage instance that reads and writes the task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (userCommand.length() < 5) {
                 throw new IllegalArgumentException("Please add a description for the task you want to find!");
+            } else {
+                String desc = userCommand.substring(5);
+                // ui.printHorizontalLine();
+                return tasks.findTask(desc);
+                // ui.printHorizontalLine();
             }
 
-            String desc = userCommand.substring(5);
-            ui.printHorizontalLine();
-            tasks.findTask(desc);
-            ui.printHorizontalLine();
         } catch (IllegalArgumentException e) {
-            ui.printError(e.getMessage());
+            return ui.printError(e.getMessage());
         }
-
     }
 }
