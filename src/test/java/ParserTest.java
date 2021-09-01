@@ -1,4 +1,9 @@
-import bobbybot.*;
+
+import bobbybot.InvalidArgumentException;
+import bobbybot.Parser;
+import bobbybot.TaskList;
+import bobbybot.TooManyArgumentsException;
+import bobbybot.Ui;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -13,20 +18,19 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
 
-    Parser parser = new Parser();
-    TaskList tasks = new TaskList(new ArrayList<>());
-    Ui ui = new Ui();
+    private final Parser parser = new Parser();
+    private final TaskList tasks = new TaskList(new ArrayList<>());
+    private final Ui ui = new Ui();
 
+    //testing print statements
+    private final PrintStream standardOut = System.out;
+    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     @Test
     public void parse_bye_exitsProgram() throws InvalidArgumentException, TooManyArgumentsException {
         parser.parseCommand("bye", tasks, ui);
         //program should not leave here
         fail();
     }
-
-    //testing print statements
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
     @BeforeEach
     public void setUp() {
@@ -43,18 +47,18 @@ public class ParserTest {
         tasks.createToDo("description");
         tasks.createToDo("test find ");
         parser.parseCommand("find test", tasks, ui);
-        String expectedString = "Got it. I've added this task:\n" +
-                "  [T][ ] test description\n" +
-                "Now you have 1 tasks in the list.\n" +
-                "Got it. I've added this task:\n" +
-                "  [T][ ] description\n" +
-                "Now you have 2 tasks in the list.\n" +
-                "Got it. I've added this task:\n" +
-                "  [T][ ] test find \n" +
-                "Now you have 3 tasks in the list.\n" +
-                "Here are the tasks you're looking for sir!\n" +
-                "1.[T][ ] test description\n" +
-                "2.[T][ ] test find";
+        String expectedString = "Got it. I've added this task:\n"
+                + "  [T][ ] test description\n"
+                + "Now you have 1 tasks in the list.\n"
+                + "Got it. I've added this task:\n"
+                + "  [T][ ] description\n"
+                + "Now you have 2 tasks in the list.\n"
+                + "Got it. I've added this task:\n"
+                + "  [T][ ] test find \n"
+                + "Now you have 3 tasks in the list.\n"
+                + "Here are the tasks you're looking for sir!\n"
+                + "1.[T][ ] test description\n"
+                + "2.[T][ ] test find";
         assertEquals(expectedString, outputStreamCaptor.toString().trim());
     }
 }
