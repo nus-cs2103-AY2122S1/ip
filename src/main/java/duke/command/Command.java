@@ -10,15 +10,6 @@ import duke.util.Ui;
  *
  */
 public abstract class Command {
-//    BYE,
-//    LIST,
-//    DONE,
-//    FIND,
-//    DELETE,
-//    DEADLINE,
-//    EVENT,
-//    TODO;
-
     private static final String INCOHERENT_INPUT_MESSAGE = "I'm sorry, but I don't know what that means :-(";
 
     /**
@@ -29,26 +20,26 @@ public abstract class Command {
      * @throws DukeException An exception thrown according to the message given
      */
     public static Command initialiseCommand(String commandString, String remainingText) throws DukeException {
-            switch (commandString) {
-            case TodoCommand.COMMAND:
-                return new TodoCommand(remainingText);
-            case ListCommand.COMMAND:
-                return new ListCommand(remainingText);
-            case FindCommand.COMMAND:
-                return new FindCommand(remainingText);
-            case EventCommand.COMMAND:
-                return new EventCommand(remainingText);
-            case DoneCommand.COMMAND:
-                return new DoneCommand(remainingText);
-            case DeleteCommand.COMMAND:
-                return new DeleteCommand(remainingText);
-            case DeadlineCommand.COMMAND:
-                return new DeadlineCommand(remainingText);
-            case ByeCommand.COMMAND:
-                return new ByeCommand();
-            default:
-                throw new DukeException(INCOHERENT_INPUT_MESSAGE);
-            }
+        switch (commandString) {
+        case TodoCommand.COMMAND:
+            return new TodoCommand(remainingText);
+        case ListCommand.COMMAND:
+            return new ListCommand(remainingText);
+        case FindCommand.COMMAND:
+            return new FindCommand(remainingText);
+        case EventCommand.COMMAND:
+            return new EventCommand(remainingText);
+        case DoneCommand.COMMAND:
+            return new DoneCommand(remainingText);
+        case DeleteCommand.COMMAND:
+            return new DeleteCommand(remainingText);
+        case DeadlineCommand.COMMAND:
+            return new DeadlineCommand(remainingText);
+        case ByeCommand.COMMAND:
+            return new ByeCommand();
+        default:
+            throw new DukeException(INCOHERENT_INPUT_MESSAGE);
+        }
     }
 
     /**

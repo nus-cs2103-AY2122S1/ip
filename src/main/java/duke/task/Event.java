@@ -1,25 +1,28 @@
 package duke.task;
 
+import java.time.format.DateTimeParseException;
+
 import duke.util.DateTime;
 import duke.util.DukeException;
-
-import java.time.format.DateTimeParseException;
 
 /**
  * Event is created by 'event eat breakfast /at 0800'.
  * Events are a type of Task.
  */
-public class Event extends Task{
-    private final DateTime eventDatetime;
-
-    private static final String EVENT_DELIMITER = "/at";
+public class Event extends Task {
     public static final char SYMBOL = 'E';
 
+    private static final String EVENT_DELIMITER = "/at";
+
     // Messages
-    private static final String INVALID_EVENT_MESSAGE = "Invalid use of event command. Use 'event <text> /at <datetime>'";
-    private static final String INVALID_EVENT_FORMAT_MESSAGE = "Invalid DateTime format for event. DateTime must be in the format of yyyy-MM-dd HHmm (2019-02-01 1800)";
+    private static final String INVALID_EVENT_MESSAGE = "Invalid use of event command."
+            + " Use 'event <text> /at <datetime>'";
+    private static final String INVALID_EVENT_FORMAT_MESSAGE = "Invalid DateTime format for event. "
+            + "DateTime must be in the format of yyyy-MM-dd HHmm (2019-02-01 1800)";
     private static final String MISSING_EVENT_MESSAGE = "Some arguments are missing. Use 'event <text> /at <datetime>'";
     private static final String INVALID_SAVE_MESSAGE = "Event save is given in the wrong format";
+
+    private final DateTime eventDatetime;
 
     /**
      * Constructor for the event object.
@@ -38,7 +41,7 @@ public class Event extends Task{
     }
 
     /**
-     * Factory method for creating a event object.
+     * Factory method for creating an event object.
      * @param input The remaining input after the initial 'event' string
      * @param isDone Whether the Event is finished
      * @return An Event object
@@ -59,7 +62,7 @@ public class Event extends Task{
     }
 
     /**
-     * Factory method for creating a event object from taskList.txt.
+     * Factory method for creating an event object from taskList.txt.
      * @param input The remaining string after the 'E |' string.
      * @return A Event object
      * @throws DukeException An exception thrown according to the message given
@@ -80,8 +83,9 @@ public class Event extends Task{
      * @return The String format of the Event in taskList.txt
      */
     public String getSaveFormat() {
-        return String.format("%c | %d | %s | %s", SYMBOL, super.getDoneInt(), this.getText(), this.eventDatetime.getSaveFormat());
-    };
+        return String.format("%c | %d | %s | %s", SYMBOL, super.getDoneInt(), this.getText(),
+                this.eventDatetime.getSaveFormat());
+    }
 
     /**
      * The format of the event in console.

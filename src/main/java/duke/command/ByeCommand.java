@@ -1,10 +1,11 @@
 package duke.command;
 
+import static duke.util.Ui.EXIT_MESSAGE;
+
 import duke.task.TaskList;
 import duke.util.Storage;
 import duke.util.Ui;
 
-import static duke.util.Ui.EXIT_MESSAGE;
 
 public class ByeCommand extends Command {
     protected static final String COMMAND = "bye";

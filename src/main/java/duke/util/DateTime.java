@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Represents a date and a time
+ * Represents a date and a time.
  */
 public class DateTime {
 
@@ -15,15 +15,16 @@ public class DateTime {
     private final LocalDateTime dateTime;
 
     /**
-     * Constructor for DateTime object
-     * @param input the String with a date and time
+     * Constructor for DateTime object.
+     *
+     * @param input the String with a date and time.
      */
     public DateTime(String input) throws DateTimeParseException {
         dateTime = LocalDateTime.parse(input, DateTimeFormatter.ofPattern(COMMAND_LINE_FORMAT));
     }
 
     /**
-     * Gets the string format for taskList.txt
+     * Gets the string format for taskList.txt.
      *
      * @return The string format for taskList.txt.
      */
@@ -32,9 +33,9 @@ public class DateTime {
     }
 
     /**
-     * Outputs the DateTime in the following format
+     * Outputs the DateTime in the following format.
      *
-     * @return The DateTime in the following format
+     * @return The DateTime in the following format.
      */
     @Override
     public String toString() {

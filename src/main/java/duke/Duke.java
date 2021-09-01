@@ -1,18 +1,18 @@
 package duke;
 
-import duke.command.Command;
-import duke.task.TaskList;
-import duke.util.DukeException;
-import duke.util.Ui;
-import duke.util.Parser;
-import duke.util.Storage;
+import static duke.util.Ui.EXIT_MESSAGE;
+import static duke.util.Ui.REWELCOME_MESSAGE;
+import static duke.util.Ui.WELCOME_MESSAGE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import static duke.util.Ui.EXIT_MESSAGE;
-import static duke.util.Ui.REWELCOME_MESSAGE;
-import static duke.util.Ui.WELCOME_MESSAGE;
+import duke.command.Command;
+import duke.task.TaskList;
+import duke.util.DukeException;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Ui;
 
 /**
  * The Duke program. The input loop is abstracted here.
@@ -26,6 +26,22 @@ public class Duke {
     private final Storage myStorage;
     private TaskList taskList;
     private final Ui ui;
+
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath The path used to store the tasks.
+     */
+    public Duke(Path filePath) {
+        ui = new Ui();
+        myStorage = new Storage(filePath);
+        try {
+            taskList = new TaskList(myStorage.load());
+        } catch (DukeException err) {
+            Ui.displayMessage(err.getMessage());
+            taskList = new TaskList();
+        }
+    }
 
     /**
      * The input loop. Handles user input, creates tasks and outputs messages accordingly.
@@ -45,21 +61,6 @@ public class Duke {
         }
     }
 
-    /**
-     * Constructor for Duke.
-     *
-     * @param filePath The path used to store the tasks.
-     */
-    public Duke(Path filePath) {
-        ui = new Ui();
-        myStorage = new Storage(filePath);
-        try {
-            taskList = new TaskList(myStorage.load());
-        } catch (DukeException err) {
-            Ui.displayMessage(err.getMessage());
-            taskList = new TaskList();
-        }
-    }
 
     /**
      * Runs Duke.

@@ -3,15 +3,15 @@ package duke.util;
 import duke.command.Command;
 
 /**
- * Parser to take care of parsing input given by the user
+ * Parser to take care of parsing input given by the user.
  */
 public class Parser {
     /**
-     * Returns the string following the first word
+     * Returns the string following the first word.
      *
-     * @param firstWord The word you want to exclude
-     * @param input The string including the first word
-     * @return The remaining string
+     * @param firstWord The word you want to exclude.
+     * @param input The string including the first word.
+     * @return The remaining string.
      */
     public static String getRemainingText(String firstWord, String input) {
         String remainingText = "";
@@ -24,9 +24,9 @@ public class Parser {
     /**
      * Parses the input given and returns the appropriate Command.
      *
-     * @param input User input given
-     * @return A command based on the input given
-     * @throws DukeException An exception thrown when initialising the command
+     * @param input User input given.
+     * @return A command based on the input given.
+     * @throws DukeException An exception thrown when initialising the command.
      */
     public static Command parse(String input) throws DukeException {
         String[] inputArr = input.split(" ");
