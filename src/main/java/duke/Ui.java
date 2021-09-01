@@ -12,7 +12,7 @@ public class Ui {
      */
     public String printWelcome() {
         return (
-                "Hello! I'm Amped :) \n"
+                "Hello! I'm Duke :) \n"
                         + "Type: \n"
                         + "1. A task (todo/deadline/event) followed by description to add tasks \n"
                         + "   e.g \"deadline submit homework /by Sunday 12 pm\" \n"
