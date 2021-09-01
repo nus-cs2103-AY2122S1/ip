@@ -25,12 +25,14 @@ public class DoneCommand extends Command {
      * @param tasks task list
      * @param storage storage
      * @param ui ui
+     * @return output for this command.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
-        tasks.finishTask(index);
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
+        String output = tasks.finishTask(index);
         String saveFileString = tasks.save();
         storage.save(saveFileString);
+        return output;
     }
 
     /**

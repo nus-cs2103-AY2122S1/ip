@@ -9,9 +9,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.time.format.DateTimeParseException;
+
 import java.util.Objects;
 import java.util.Scanner;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -19,9 +20,9 @@ import java.time.format.DateTimeFormatter;
  * This class takes in a saved file and loads whatever tasks were saved in it.
  */
 public class Storage {
-    String filePath;
-    Scanner saveFile;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    private String filePath;
+    private Scanner saveFile;
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
      * Constructor for Storage taking in a Scanner file

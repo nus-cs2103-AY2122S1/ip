@@ -31,14 +31,17 @@ public class DeadlineCommand extends Command {
      * @param tasks task list
      * @param storage storage
      * @param ui ui
+     * @return output for this command.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
         Deadline deadline = new Deadline(task, time);
-        tasks.add(deadline, true);
+        String output = tasks.add(deadline, true);
         String saveFileString = tasks.save();
         storage.save(saveFileString);
+        return output;
     }
+
 
     /**
      * Returns false as the program should not terminate.

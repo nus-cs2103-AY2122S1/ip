@@ -8,7 +8,7 @@ import duke.task.TaskList;
  * This class represents the command when a user inputs "find".
  */
 public class FindCommand extends Command {
-    String keyword;
+    private String keyword;
 
     /**
      * Constructor for find, which takes in the keyword to be found.
@@ -25,10 +25,11 @@ public class FindCommand extends Command {
      * @param tasks task list.
      * @param storage storage.
      * @param ui ui.
+     * @return output for this command.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
-        tasks.searchTask(keyword);
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
+        return tasks.searchTask(keyword);
     }
 
     /**

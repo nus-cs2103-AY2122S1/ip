@@ -21,33 +21,36 @@ public class TaskList {
 
     /**
      * Adds a task to the task list.
-     *
-     * @param task task to be added.
+     *  @param task task to be added.
      * @param shouldPrint true if should print, false if should not print
+     * @return
      */
-    public void add(Task task, boolean shouldPrint) {
+    public String add(Task task, boolean shouldPrint) {
+        String str = null;
         this.tasks.add(task);
         if (shouldPrint) {
-            Ui.addTask(task);
-            Ui.numberOfTasks(tasks);
+            str = Ui.addTask(task);
+            str += Ui.numberOfTasks(tasks);
         }
+        return str;
     }
 
     /**
      * Finishes a task at a given index.
      *
      * @param index index from 1 (i.e lowest index is 1, so subtract 1 to get real index)
+     * @return
      */
-    public void finishTask(int index) {
+    public String finishTask(int index) {
         Task task = this.tasks.get(index - 1);
-        task.doneTask(true);
+        return task.doneTask(true);
     }
 
     /**
      * Lists out the current items in the TaskList.
      */
-    public void listOut() {
-        Ui.listTasks(tasks);
+    public String listOut() {
+        return Ui.listTasks(tasks);
     }
 
     /**
@@ -67,24 +70,27 @@ public class TaskList {
      * Deletes a task at a certain index
      *
      * @param index index from 1 (i.e lowest index is 1, so subtract 1 to get real index)
+     * @return
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         Task item = this.tasks.remove(index - 1);
-        Ui.deleteTask(item);
-        Ui.remainingTasks(tasks);
+        String str = Ui.deleteTask(item);
+        str += Ui.remainingTasks(tasks);
+        return str;
     }
 
     /**
      * Searches for a task given a keyword.
      */
-    public void searchTask(String keyword) {
+    public String searchTask(String keyword) {
         TaskList matches = new TaskList();
         for (Task t : tasks) {
             if (t.doesNameContain(keyword)) {
                 matches.add(t, false);
             }
         }
-        matches.displaySearchResults();
+        String output = Ui.listTasksSearchResults(matches.tasks);
+        return output;
     }
 
     /**
@@ -94,12 +100,5 @@ public class TaskList {
      */
     private int numTasks() {
         return tasks.size();
-    }
-
-    /**
-     * Displays search results.
-     */
-    public void displaySearchResults() {
-        Ui.listTasksSearchResults(tasks);
     }
 }

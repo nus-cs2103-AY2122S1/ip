@@ -17,7 +17,7 @@ public abstract class Command {
      * @param storage storage
      * @param ui ui
      */
-    public abstract void execute(TaskList tasks, Storage storage, Ui ui);
+    public abstract String execute(TaskList tasks, Storage storage, Ui ui);
 
     /**
      * This method determines if the scanner should keep scanning inputs.

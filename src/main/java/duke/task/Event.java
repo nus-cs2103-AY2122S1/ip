@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * This class represents an Event, which is a Task with a timing.
  */
 public class Event extends Task {
-    LocalDateTime time;
+    private LocalDateTime time;
 
     /**
      * Constructor for Event, which takes in a task name and a time for the event.
@@ -37,7 +37,8 @@ public class Event extends Task {
      */
     @Override
     public String getSaveInfo() {
-        return super.getSaveInfo() + "| " + this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return super.getSaveInfo() + "| "
+                + this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     /**
@@ -47,6 +48,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
+        return "[E]" + super.toString() + "(at: "
+                + this.time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + ")";
     }
 }

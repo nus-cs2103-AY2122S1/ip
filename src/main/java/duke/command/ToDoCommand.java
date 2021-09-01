@@ -8,8 +8,8 @@ import duke.task.ToDo;
 /**
  * This class represents the command when the user types "todo" validly.
  */
-public class ToDoCommand extends Command{
-    String task;
+public class ToDoCommand extends Command {
+    private String task;
 
     /**
      * Constructor for ToDoCommand which takes in the task details.
@@ -26,13 +26,15 @@ public class ToDoCommand extends Command{
      * @param tasks task list
      * @param storage storage
      * @param ui ui
+     * @return output for this command.
      */
     @Override
-    public void execute(TaskList tasks, Storage storage, Ui ui) {
+    public String execute(TaskList tasks, Storage storage, Ui ui) {
         ToDo item = new ToDo(this.task);
-        tasks.add(item, true);
+        String output = tasks.add(item, true);
         String saveFileString = tasks.save();
         storage.save(saveFileString);
+        return output;
     }
 
     /**
