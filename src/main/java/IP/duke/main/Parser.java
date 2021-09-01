@@ -5,6 +5,7 @@ import IP.duke.command.Command;
 import IP.duke.command.DeleteCommand;
 import IP.duke.command.ExitCommand;
 import IP.duke.command.FilterCommand;
+import IP.duke.command.FindCommand;
 import IP.duke.command.ListCommand;
 import IP.duke.command.MarkDoneCommand;
 
@@ -40,6 +41,8 @@ public class Parser {
                     return new DeleteCommand(Integer.parseInt(commandDescription[1]));
             case "filter":
                     return new FilterCommand(commandDescription[1]);
+            case "find":
+                    return new FindCommand(command);
             case "bye":
                     return new ExitCommand();
             default:
@@ -48,6 +51,8 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(e);
         } catch (NumberFormatException e) {
+            throw new DukeException(e);
+        } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException(e);
         }
     }

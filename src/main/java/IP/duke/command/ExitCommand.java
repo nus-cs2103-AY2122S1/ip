@@ -33,7 +33,7 @@ public class ExitCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            storage.store(tasks.getTasks());
+            storage.store(tasks);
             ui.showFarewell();
         } catch (IOException e) {
             throw new DukeException(e);

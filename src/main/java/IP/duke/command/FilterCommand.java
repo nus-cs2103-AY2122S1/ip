@@ -34,7 +34,8 @@ public class FilterCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ArrayList<Task> tasksMatchingDate = tasks.findTasksMatchingDate(date);
-        ui.showFilteredTasks(tasksMatchingDate, date);
+        TaskList matchingTasks = tasks.findMatchingTasks(date.toString());
+        String message = String.format("On %s, you have:", date.toString());
+        ui.showMatchingTasks(matchingTasks, date.toString(), message);
     }
 }

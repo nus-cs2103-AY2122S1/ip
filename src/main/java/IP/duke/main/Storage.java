@@ -98,16 +98,16 @@ public class Storage {
     /**
      * Stores all the tasks from the tasks array into the storage file.
      * 
-     * @param tasks an arraylist of tasks.
+     * @param tasks an taskList of tasks.
      * @throws IOException
      */
-    public void store(ArrayList<Task> tasks) throws IOException{
+    public void store(TaskList tasks) throws IOException{
         file.delete();
         file.createNewFile();
         fileWriter = new FileWriter(file, false);
         String data = "";
-        for (Task t : tasks) {
-            data += t.formatToStore() + "\n";
+        for (int i = 0; i < tasks.getNumTasks(); i++) {
+            data += tasks.getTask(i).formatToStore() + "\n";
         }
         fileWriter.write(data);
         fileWriter.close();

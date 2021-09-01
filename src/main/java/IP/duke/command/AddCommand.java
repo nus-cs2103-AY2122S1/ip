@@ -50,7 +50,7 @@ public class AddCommand extends Command {
                 task = new Todo(addCommand);
             }
             tasks.add(task);
-            ui.showTaskAdded(task, tasks.getTasks());
+            ui.showTaskAdded(task, tasks.getNumTasks());
         } catch (StringIndexOutOfBoundsException e) {
             throw new DukeException(e);
         } catch (DateTimeParseException e) {

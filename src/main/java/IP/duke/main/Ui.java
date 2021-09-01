@@ -103,15 +103,15 @@ public class Ui {
      * Displays the task deleted.
      * 
      * @param task the deleted task.
-     * @param taskArrayList an arraylist of task after deleting the task.
+     * @param numTasksRemaining number of tasks remaining after deletion.
      */
-    public void showTaskDeleted(Task task, ArrayList<Task> taskArrayList) {
+    public void showTaskDeleted(Task task, int numTasksRemaining) {
         String deletionMessage = "Alrighty, I've removed this task:";
         System.out.println(deletionMessage);
         String deletedTask = String.format("~~%s~~", task.toString());
         System.out.println(deletedTask);
-        String tasksRemaining = String.format("Now, you have %s %s remaining", taskArrayList.size(),
-                (taskArrayList.size() > 1 ? "tasks" : "task"));
+        String tasksRemaining = String.format("Now, you have %s %s remaining", numTasksRemaining,
+                (numTasksRemaining > 1 ? "tasks" : "task"));
         System.out.println(tasksRemaining);
     }
 
@@ -119,42 +119,43 @@ public class Ui {
      * Displays the task added.
      * 
      * @param task the task added.
-     * @param taskArrayList arraylist of tasks after adding the new task.
+     * @param newNumTasks number of tasks after adding the new task.
      */
-    public void showTaskAdded(Task task, ArrayList<Task> taskArrayList) {
+    public void showTaskAdded(Task task, int newNumTasks) {
         String additionMessage = "Got it. I've added this task:";
         System.out.println(additionMessage);
         String addedTask = String.format("~~%S~~", task.toString());
         System.out.println(addedTask);
-        String newTally = String.format("Now you have %s %s in the list.", taskArrayList.size(), 
-                                    (taskArrayList.size() > 1 ? "tasks" : "task"));
+        String newTally = String.format("Now you have %s %s in the list.", newNumTasks,
+                                    (newNumTasks > 1 ? "tasks" : "task"));
         System.out.println(newTally);
     }
 
     /**
      * Lists out all the tasks Duke.Duke is keeping track of.
      * 
-     * @param taskArrayList current arraylist of tasks.
+     * @param tasks current list of tasks.
      */
-    public void showListOfTasks(ArrayList<Task> taskArrayList) {
+    public void showListOfTasks(TaskList tasks) {
         String header = "Here are the tasks in your list:";
-        iterate(header, taskArrayList);
+        iterate(header, tasks);
     }
 
     /**
      * Lists out all the tasks that falls on a specified date.
-     * 
-     * @param taskArrayList arraylist of task that fall on the specified date.
+     *
+     * @param tasks list of task that fall on the specified date.
+     * @param searchPhrase used to filterout tasks.
+     * @param message the header message.
      */
-    public void showFilteredTasks(ArrayList<Task> taskArrayList, Date date) {
-        String header = String.format("On %s, you have: ", date.toString());
-        iterate(header, taskArrayList);
+    public void showMatchingTasks(TaskList tasks, String searchPhrase, String message) {
+        iterate(message, tasks);
     }
     
-    private void iterate(String headerMessage, ArrayList<Task> tasks) {
+    private void iterate(String headerMessage, TaskList tasks) {
         System.out.println(headerMessage);
-        for(int i = 0; i < tasks.size(); i++) {
-            System.out.println(String.format("%s.%s", i + 1, tasks.get(i).toString()));
+        for(int i = 0; i < tasks.getNumTasks(); i++) {
+            System.out.println(String.format("%s.%s", i + 1, tasks.getTask(i).toString()));
         }
     }
 }
