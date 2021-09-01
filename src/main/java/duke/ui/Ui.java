@@ -11,27 +11,27 @@ public class Ui {
     /**
      * Method to generate greet string when Duke is first run
      */
-    public void greet() {
+    public String greet() {
         String logo = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+        return "Hello from Duke\n";
     }
 
     /**
      * Method to generate string corresponding to Command.EXIT
      */
-    public void exit() {
-        System.out.println("\tBye. Hope to see you again soon!");
+    public String exit() {
+        return "\tBye. Hope to see you again soon!";
     }
 
     /**
      * Method to generate string corresponding to Command.UNKNOWN
      */
-    public void unknownCommand() {
-        System.out.println("\tSorry, I do not know this command!");
+    public String unknownCommand() {
+        return "\tSorry, I do not know this command!";
     }
 
     /**
@@ -41,10 +41,12 @@ public class Ui {
      *
      * @param tasks TaskList object containing the tasks
      */
-    public void list(TaskList tasks) {
+    public String list(TaskList tasks) {
+        String list = "";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("\t" + (i + 1) + ". " + tasks.get(i).toString());
+            list += "\t" + (i + 1) + ". " + tasks.get(i).toString() + "\n";
         }
+        return list;
     }
 
     /**
@@ -53,11 +55,12 @@ public class Ui {
      *
      * @param tasks ArrayList of Task objects to loop through
      */
-    public void list(ArrayList<Task> tasks) {
-        System.out.println("Here are the matching tasksn your list");
+    public String list(ArrayList<Task> tasks) {
+        String toReturn = "Here are the matching tasks your list\n";
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println("\t" + (i + 1) + ". " + tasks.get(i).toString());
+            toReturn += "\t" + (i + 1) + ". " + tasks.get(i).toString() +"\n";
         }
+        return toReturn;
     }
 
     
@@ -68,15 +71,17 @@ public class Ui {
      * @param task task operated on
      * @param taskArray String[] of the user input split once by " "
      */
-    public void indexCommand(int size, Task task, String[] taskArray) {
+    public String indexCommand(int size, Task task, String[] taskArray) {
+        String toReturn = "";
         if (taskArray[0].equals("done")) {
-            System.out.println("\tNice! I\'ve marked this task as done:");
-            System.out.println(" \t" + task.toString());       
+            toReturn += "\tNice! I\'ve marked this task as done:\n";
+            toReturn += " \t" + task.toString() + "\n";       
         } else {
-            System.out.println("\tNoted. I've removed this task: ");
-            System.out.println("\t" + task.toString());
-            System.out.println("\tNow you have " + size + " tasks in the list");
+            toReturn += "\tNoted. I've removed this task: \n";
+            toReturn += "\t" + task.toString() + "\n";
+            toReturn += "\tNow you have " + size + " tasks in the list";
         }
+        return toReturn;
     }
 
     /**
@@ -85,10 +90,11 @@ public class Ui {
      * @param task Task added
      * @param size length of tasklist
      */
-    public void addTask(Task task, int size) {
-        System.out.println("\tGot it. I\'ve added this task:");
-        System.out.println("\t  " + task.toString());
-        System.out.println("\tNow you have " + size +
-                           " tasks in the list.");
+    public String addTask(Task task, int size) {
+        String toReturn = "\tGot it. I\'ve added this task:\n";
+        toReturn += "\t  " + task.toString();
+        toReturn += "\tNow you have " + size +
+                           " tasks in the list.";
+        return toReturn;
     }
 }
