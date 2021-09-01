@@ -1,21 +1,14 @@
 package duke;
 
+import java.lang.reflect.Proxy;
+
 import duke.command.Command;
 import duke.exception.DukeException;
-
-import java.lang.reflect.Proxy;
 
 /**
  * A terminal based chat bot to track tasks.
  */
 public class Duke {
-
-    private final Storage storage;
-    private final UiInterface uiInterface;
-    private final DynamicInvocationHandler interceptor;
-    private final Ui ui;
-    private TaskList taskList;
-    private boolean isExit = false;
 
     private static final String WELCOME_MESSAGE = "\n\tHi! I'm Herbert, you can call me Herb  ٩(˘◡˘)۶\n"
             + "\tHow can I help you?\n\n"
@@ -28,6 +21,13 @@ public class Duke {
             + "\t\t `delete ${i}` to delete task i\n"
             + "\t\t `find ${keyword}` to find tasks by keyword\n"
             + "\t\t `bye` to end this chat\n";
+
+    private final Storage storage;
+    private final UiInterface uiInterface;
+    private final DynamicInvocationHandler interceptor;
+    private final Ui ui;
+    private TaskList taskList;
+    private boolean isExit = false;
 
     /**
      * Duke constructor.
@@ -67,23 +67,39 @@ public class Duke {
             }
         }
     }
-    
+
+    /**
+     * Returns Herb's response based on a given input.
+     *
+     * @param input user input
+     * @return response
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
             c.execute(taskList, uiInterface, storage);
             this.isExit = c.isExit();
             storage.save(taskList);
-        } catch (DukeException e) { 
+        } catch (DukeException e) {
             uiInterface.showError(e.getMessage());
-        }    
+        }
         return this.interceptor.getLatestResponse();
     }
-    
+
+    /**
+     * Returns true if the latest command was for exit.
+     *
+     * @return boolean indicating if to exit or not
+     */
     public boolean isExit() {
         return this.isExit;
     }
 
+    /**
+     * Returns welcome message.
+     *
+     * @return welcome message
+     */
     public String getWelcomeMessage() {
         return WELCOME_MESSAGE;
     }

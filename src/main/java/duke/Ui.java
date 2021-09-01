@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Class that handles user interactions.
  */
 public class Ui implements UiInterface {
-    
+
     private final Scanner sc;
 
     /**
@@ -68,7 +68,7 @@ public class Ui implements UiInterface {
         System.out.print("--> ");
         return this.sc.nextLine();
     }
-    
+
 }
 
 

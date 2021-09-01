@@ -1,4 +1,6 @@
-import duke.Duke;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,8 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
+import duke.Duke;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -47,13 +48,13 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-        
+
         if (duke.isExit()) {
             // Adapted from https://stackoverflow.com/questions/58707689/is-it-possible-to-schedule-a-completablefuture
             CompletableFuture.delayedExecutor(2L, TimeUnit.SECONDS).execute(Platform::exit);
