@@ -1,5 +1,10 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -8,11 +13,6 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * A class to process and make sense of the command
@@ -121,6 +121,8 @@ public class Parser {
                     } catch (DateTimeParseException e) {
                         throw new DukeException(ui.dateTimeError());
                     }
+                    break;
+                default:
                     break;
                 }
             } else {
