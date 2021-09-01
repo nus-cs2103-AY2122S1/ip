@@ -30,24 +30,6 @@ import java.util.Scanner;
  */
 public class Duke {
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    protected String getResponse(String input) {
-        try {
-            Command command = parser.parseString(input);
-            String response = parser.executeTasks(command);
-            return response;
-        } catch (DukeException e) {
-            return e.getMessage();
-        }
-    }
-
-    protected boolean getExit() {
-        return isExit;
-    }
-
-    /**
      * Represents a parser for interpreting user inputs.
      * A <code>Parser</code> object takes in user inputs and
      * interprets it to Duke to execute relevant tasks.
@@ -224,6 +206,24 @@ public class Duke {
      */
     protected String getGreeting() {
         return "Hello! I'm Duke\nWhat can I do for you?";
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    protected String getResponse(String input) {
+        try {
+            Command command = parser.parseString(input);
+            String response = parser.executeTasks(command);
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    protected boolean getExit() {
+        return isExit;
     }
 
     /**

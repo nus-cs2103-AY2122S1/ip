@@ -53,7 +53,7 @@ public class EventCommand extends Command {
      * Adds the Event task to the task list.
      */
     @Override
-    public String  execute() {
+    public String execute() {
         taskList = taskList.add(task);
         storage.addTaskToFile(task);
 

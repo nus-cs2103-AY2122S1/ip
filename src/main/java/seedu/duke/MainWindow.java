@@ -8,12 +8,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for seedu.duke.MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends Stage {
+public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -54,7 +56,13 @@ public class MainWindow extends Stage {
         userInput.clear();
 
         if (duke.getExit()) {
-            Platform.exit();
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            }, 1000);
         }
     }
 
