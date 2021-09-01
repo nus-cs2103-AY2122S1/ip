@@ -1,7 +1,6 @@
 package catobot.command;
 
 import catobot.Storage;
-import catobot.Ui;
 import catobot.exception.BotException;
 import catobot.item.TaskList;
 
@@ -17,9 +16,9 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TaskList tasks, Storage storage) throws BotException {
         String keyword = content.substring(CommandType.FIND.getValue().length()).trim();
-        Ui.respond(tasks.search(keyword));
+        return tasks.search(keyword);
     }
 
 }

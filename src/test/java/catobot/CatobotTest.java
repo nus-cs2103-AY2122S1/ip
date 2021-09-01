@@ -54,7 +54,7 @@ public class CatobotTest {
         String actual = "";
         try {
             Command c = Parser.parse("deadline");
-            c.execute(new TaskList(), new Ui(), new Storage(filePath));
+            c.execute(new TaskList(), new Storage(filePath));
         } catch (BotException e) {
             actual = e.getMessage();
         }
@@ -67,7 +67,7 @@ public class CatobotTest {
         String actual = "";
         try {
             Command c = Parser.parse("delete 1");
-            c.execute(new TaskList(), new Ui(), new Storage(filePath));
+            c.execute(new TaskList(), new Storage(filePath));
         } catch (BotException e) {
             actual = e.getMessage();
         }
@@ -82,7 +82,7 @@ public class CatobotTest {
             ArrayList<Task> tasks = new ArrayList<>();
             tasks.add(Todo.of("demo"));
             Command c = Parser.parse("done 2");
-            c.execute(new TaskList(tasks), new Ui(), new Storage(filePath));
+            c.execute(new TaskList(tasks), new Storage(filePath));
         } catch (BotException e) {
             actual = e.getMessage();
         }
