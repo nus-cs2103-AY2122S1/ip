@@ -1,8 +1,9 @@
-import duke.Duke;
+package duke;
+
 import javafx.application.Application;
 
 
-public class Main {
+public class Launcher {
 
     /**
      * Entry point of Duke project.

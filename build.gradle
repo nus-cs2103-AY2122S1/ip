@@ -52,7 +52,7 @@ compileTestJava {
 }
 
 application {
-    mainClassName = "Main"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {

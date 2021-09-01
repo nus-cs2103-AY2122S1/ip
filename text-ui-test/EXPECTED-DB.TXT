@@ -1,4 +1,0 @@
-D|1|return book|2021-01-01
-T|1|read book
-D|0|return book|2021-03-03
-T|0|new thing
