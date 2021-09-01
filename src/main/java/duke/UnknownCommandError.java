@@ -1,4 +1,5 @@
 package duke;
+
 /**
  * This class extends InvalidCommandException. It handles cases when users do not
  * give a command that is understood by Duke.

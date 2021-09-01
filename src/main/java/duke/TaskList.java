@@ -56,7 +56,6 @@ public class TaskList {
      * @return The String form that will be passed to Ui to be shown to the user.
      */
     public String list() {
-        // list out all tasks
         int count = 1;
         StringBuilder result = new StringBuilder("     Here are the tasks in your list:\n");
         for (Task task : tasks) {
@@ -71,13 +70,14 @@ public class TaskList {
      *
      * @return The size of the current taskList.
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 
     public String find(String keyword) {
         int count = 1;
-        StringBuilder result = new StringBuilder("     Here are the matching tasks in your list:\n");
+        StringBuilder result =
+                new StringBuilder("     Here are the matching tasks in your list:\n");
         for (Task task : tasks) {
             if (task.description.contains(keyword)) {
                 result.append(String.format("     %d.%s\n", count, task));
