@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import duke.DukeException;
 
 /**
  * Represents the storage of tasks to the hard disk.
@@ -15,10 +15,11 @@ public class Storage {
     /**
      * The file path where the data file is.
      */
-    private java.nio.file.Path filePath;
+    private final java.nio.file.Path filePath;
 
     /**
      * Constructs a storage at the given path.
+     *
      * @param path The file path where the data file is.
      * @throws DukeException
      */
@@ -60,6 +61,7 @@ public class Storage {
 
     /**
      * Loads data file contents into a list of tasks.
+     *
      * @return A list of Tasks stored in data.
      * @throws DukeException
      */

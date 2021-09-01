@@ -13,16 +13,16 @@ public class AddCommand extends Command {
     /**
      * The type of task to add to the task list.
      */
-    TaskList.TaskType taskType;
+    private final TaskList.TaskType taskType;
     /**
      * The description of the task to add to the task list.
      */
-    String taskDescription;
+    private final String taskDescription;
 
     /**
      * Constructs an add command with type of task and task description.
      *
-     * @param taskType The type of task to add to the task list.
+     * @param taskType    The type of task to add to the task list.
      * @param description The description of the task to add to the task list.
      */
     public AddCommand(TaskList.TaskType taskType, String description) {
@@ -33,8 +33,8 @@ public class AddCommand extends Command {
     /**
      * Executes the add task command.
      *
-     * @param tasks The task list to execute the command on.
-     * @param ui The user interface.
+     * @param tasks   The task list to execute the command on.
+     * @param ui      The user interface.
      * @param storage The storage for the tasks.
      * @throws DukeException
      */

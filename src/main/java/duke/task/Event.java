@@ -13,8 +13,9 @@ public class Event extends Task {
 
     /**
      * Constructs an Event task with task description and time of event.
+     *
      * @param description The description of this event.
-     * @param at The time of this event.
+     * @param at          The time of this event.
      * @throws DukeException
      */
     public Event(String description, String at) throws DukeException {
@@ -30,6 +31,7 @@ public class Event extends Task {
 
     /**
      * Returns a string representation of this task to be displayed.
+     *
      * @return The string representation of this task.
      */
     @Override

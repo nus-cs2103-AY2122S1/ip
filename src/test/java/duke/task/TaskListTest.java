@@ -1,12 +1,13 @@
 package duke.task;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class TaskListTest {
 
@@ -28,7 +29,7 @@ public class TaskListTest {
             TaskList tasks = new TaskList();
 
             assertEquals(new Deadline("task", "25-08-2021 14:30").toString(),
-                    tasks.addTask(TaskList.TaskType.DEADLINE, "task /by 25-08-2021 14:30").toString());
+                tasks.addTask(TaskList.TaskType.DEADLINE, "task /by 25-08-2021 14:30").toString());
             assertEquals(1, tasks.getListSize());
         } catch (DukeException e) {
             fail();
@@ -41,7 +42,7 @@ public class TaskListTest {
             TaskList tasks = new TaskList();
 
             assertEquals(new Event("task", "1pm-2pm").toString(),
-                    tasks.addTask(TaskList.TaskType.EVENT, "task /at 1pm-2pm").toString());
+                tasks.addTask(TaskList.TaskType.EVENT, "task /at 1pm-2pm").toString());
             assertEquals(1, tasks.getListSize());
         } catch (DukeException e) {
             fail();

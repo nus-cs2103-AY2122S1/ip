@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
-import duke.Ui;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import duke.DukeException;
+import duke.Ui;
 
 /**
  * Represents a list of tasks to do.
@@ -15,16 +15,7 @@ public class TaskList {
     /**
      * The todo list that stores tasks.
      */
-    private ArrayList<Task> todoList;
-
-    /**
-     * The types of tasks that this list contains.
-     */
-    public enum TaskType {
-        TODO,
-        DEADLINE,
-        EVENT
-    }
+    private final ArrayList<Task> todoList;
 
     /**
      * Constructs a task list with no tasks in it.
@@ -35,6 +26,7 @@ public class TaskList {
 
     /**
      * Constructs a task list with the tasks given.
+     *
      * @param tasks An array of tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -57,7 +49,7 @@ public class TaskList {
      * Add a task to this todo list.
      *
      * @param taskType The type of task to be added.
-     * @param details The details of the task.
+     * @param details  The details of the task.
      * @return The task added into the list.
      * @throws DukeException
      */
@@ -67,7 +59,8 @@ public class TaskList {
             task = new ToDo(details);
         } else if (taskType.equals(TaskType.DEADLINE)) {
             int position = details.indexOf("/by");
-            String description, by;
+            String description;
+            String by;
             if (position >= 0) {
                 description = details.substring(0, position);
                 by = details.substring(position + 3);
@@ -77,7 +70,8 @@ public class TaskList {
             task = new Deadline(description.trim(), by.trim());
         } else if (taskType.equals(TaskType.EVENT)) {
             int position = details.indexOf("/at");
-            String description, at;
+            String description;
+            String at;
             if (position >= 0) {
                 description = details.substring(0, position);
                 at = details.substring(position + 3);
@@ -123,6 +117,7 @@ public class TaskList {
 
     /**
      * Finds tasks in the task list that matches a given keyword.
+     *
      * @param keyword The keyword that the user wants to search for.
      * @return A list of tasks that match the keyword.
      * @throws DukeException
@@ -157,5 +152,12 @@ public class TaskList {
      */
     public Integer getListSize() {
         return todoList.size();
+    }
+
+    /**
+     * The types of tasks that this list contains.
+     */
+    public enum TaskType {
+        TODO, DEADLINE, EVENT
     }
 }

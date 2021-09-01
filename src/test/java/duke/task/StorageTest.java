@@ -1,7 +1,9 @@
 package duke.task;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,22 +11,21 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class StorageTest {
-    private final String STORAGE_PATH_STRING = "data/tasks.txt";
-    private final Path STORAGE_PATH = Paths.get("data/tasks.txt");
+    private final String storagePathString = "data/tasks.txt";
+    private final Path storagePath = Paths.get("data/tasks.txt");
 
     @Test
     public void init_createDataFile_success() {
         try {
-            Files.deleteIfExists(STORAGE_PATH);
-            new Storage(STORAGE_PATH_STRING);
+            Files.deleteIfExists(storagePath);
+            new Storage(storagePathString);
 
-            assertTrue(Files.exists(STORAGE_PATH));
+            assertTrue(Files.exists(storagePath));
         } catch (DukeException | java.io.IOException e) {
             fail();
         }
@@ -33,8 +34,8 @@ public class StorageTest {
     @Test
     public void save_success() {
         try {
-            Files.deleteIfExists(STORAGE_PATH);
-            Storage storage = new Storage(STORAGE_PATH_STRING);
+            Files.deleteIfExists(storagePath);
+            Storage storage = new Storage(storagePathString);
 
             ToDo todo = new ToDo("task");
             List<String> dataStrings = List.of(todo.toDataString("|"));
@@ -48,11 +49,11 @@ public class StorageTest {
     @Test
     public void load_success() {
         try {
-            Files.deleteIfExists(STORAGE_PATH);
-            Storage storage = new Storage(STORAGE_PATH_STRING);
+            Files.deleteIfExists(storagePath);
+            Storage storage = new Storage(storagePathString);
 
             ToDo todo = new ToDo("task");
-            Files.write(STORAGE_PATH, List.of(todo.toDataString("|")));
+            Files.write(storagePath, List.of(todo.toDataString("|")));
 
             ArrayList<Task> tasks = storage.load();
             assertEquals(1, tasks.size());

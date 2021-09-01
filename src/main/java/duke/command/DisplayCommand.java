@@ -12,8 +12,8 @@ public class DisplayCommand extends Command {
     /**
      * Executes the display list command.
      *
-     * @param tasks The task list to execute the command on.
-     * @param ui The user interface.
+     * @param tasks   The task list to execute the command on.
+     * @param ui      The user interface.
      * @param storage The storage for the tasks.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {

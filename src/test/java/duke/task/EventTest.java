@@ -1,10 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class EventTest {
     @Test
@@ -13,7 +14,8 @@ public class EventTest {
             new Event("", "2pm");
             fail();
         } catch (DukeException e) {
-            assertEquals("∑(O_O;) Oh no!! Looks like you forgot to include a description of the event.", e.toString());
+            assertEquals("∑(O_O;) Oh no!! Looks like you forgot to include a description of the event.",
+                e.toString());
         }
     }
 

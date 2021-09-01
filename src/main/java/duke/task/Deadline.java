@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 /**
  * Represents a Task need to be done before a specific date/time.
@@ -14,22 +14,23 @@ public class Deadline extends Task {
     /**
      * The accepted format of date and time for the deadline
      */
-    private final String INPUT_PATTERN = "dd-MM-yyyy HH:mm";
+    private final String inputPattern = "dd-MM-yyyy HH:mm";
 
     /**
      * The accepted format of date and time for the deadline
      */
-    private final String OUTPUT_PATTERN = "MMM dd yyyy, hh:mm a";
+    private final String outputPattern = "MMM dd yyyy, hh:mm a";
 
     /**
      * The deadline date and time of this task.
      */
-    protected LocalDateTime by;
+    private LocalDateTime by;
 
     /**
      * Constructs a Deadline task with task description and deadline.
+     *
      * @param description The description of this deadline.
-     * @param by The deadline of this task.
+     * @param by          The deadline of this task.
      * @throws DukeException
      */
     public Deadline(String description, String by) throws DukeException {
@@ -41,10 +42,10 @@ public class Deadline extends Task {
             throw new DukeException("Looks like you forgot to include a deadline for the task.");
         }
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(INPUT_PATTERN);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(inputPattern);
             this.by = LocalDateTime.parse(by, formatter);
         } catch (DateTimeParseException e) {
-            throw new DukeException("The deadline date is invalid. Please follow this format: " + INPUT_PATTERN);
+            throw new DukeException("The deadline date is invalid. Please follow this format: " + inputPattern);
         }
     }
 
@@ -54,11 +55,12 @@ public class Deadline extends Task {
      * @return String representation of the DateTime.
      */
     private String getDateString() {
-        return by.format(DateTimeFormatter.ofPattern(OUTPUT_PATTERN)).replace("AM", "am").replace("PM", "pm");
+        return by.format(DateTimeFormatter.ofPattern(outputPattern)).replace("AM", "am").replace("PM", "pm");
     }
 
     /**
      * Returns a string representation of this task to be displayed.
+     *
      * @return The string representation of this task.
      */
     @Override
@@ -77,6 +79,6 @@ public class Deadline extends Task {
         String tag = "D";
         String done = super.isDone ? "1" : "0";
         return String.join(delimiter, tag, done, super.description,
-                by.format(DateTimeFormatter.ofPattern(INPUT_PATTERN)));
+            by.format(DateTimeFormatter.ofPattern(inputPattern)));
     }
 }

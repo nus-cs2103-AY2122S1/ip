@@ -17,7 +17,7 @@ public class Parser {
      * Parses the user's input command.
      *
      * @param fullCommand The user's input command.
-     * @param tasks The user's task list.
+     * @param tasks       The user's task list.
      * @return A Command corresponding to the user's input.
      * @throws DukeException
      */

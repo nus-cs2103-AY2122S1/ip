@@ -13,10 +13,11 @@ public class DeleteCommand extends Command {
     /**
      * The task number to be deleted.
      */
-    private Integer taskNum;
+    private final Integer taskNum;
 
     /**
      * Constructs a delete command with a task number.
+     *
      * @param taskNum The task number to be deleted.
      */
     public DeleteCommand(Integer taskNum) {
@@ -26,8 +27,8 @@ public class DeleteCommand extends Command {
     /**
      * Executes the delete task command.
      *
-     * @param tasks The task list to execute the command on.
-     * @param ui The user interface.
+     * @param tasks   The task list to execute the command on.
+     * @param ui      The user interface.
      * @param storage The storage for the tasks.
      * @throws DukeException
      */

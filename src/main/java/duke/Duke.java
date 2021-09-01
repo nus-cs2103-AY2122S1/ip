@@ -9,12 +9,13 @@ import duke.task.TaskList;
  */
 public class Duke {
 
-    private Ui ui;
+    private final Ui ui;
     private Storage storage;
     private TaskList tasks;
 
     /**
      * Constructs a Duke Chatbot with a data storage file.
+     *
      * @param filePath The path of the data file.
      */
     public Duke(String filePath) {
@@ -30,6 +31,7 @@ public class Duke {
 
     /**
      * The main program.
+     *
      * @param args
      */
     public static void main(String[] args) {

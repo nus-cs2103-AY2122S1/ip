@@ -1,10 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class DeadlineTest {
     @Test
@@ -14,7 +15,7 @@ public class DeadlineTest {
             fail();
         } catch (DukeException e) {
             assertEquals("∑(O_O;) Oh no!! Looks like you forgot to include a description of the deadline.",
-                    e.toString());
+                e.toString());
         }
     }
 
@@ -35,7 +36,7 @@ public class DeadlineTest {
             fail();
         } catch (DukeException e) {
             assertEquals("∑(O_O;) Oh no!! The deadline date is invalid. Please follow this format: dd-MM-yyyy HH:mm",
-                    e.toString());
+                e.toString());
         }
     }
 

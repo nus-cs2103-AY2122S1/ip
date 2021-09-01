@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Represents a User Interface that handles interactions with the user.
  */
 public class Ui {
-    private Scanner sc;
+    private final Scanner sc;
 
     /**
      * Constructs a User Interface.
