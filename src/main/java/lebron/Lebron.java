@@ -31,7 +31,7 @@ import javafx.scene.image.ImageView;
  * @author Nigel Tan
  */
 
-public class Lebron extends Application {
+public class Lebron {
 
     final String HORIZONTAL_LINE = "    ____________________________________________________________\n";
     public static final String FILE_PATH = "./data/duke.txt";
@@ -47,6 +47,7 @@ public class Lebron extends Application {
 
     private Image lebron = new Image(this.getClass().getResourceAsStream("/images/lebron.jpg"));
     private Image user = new Image(this.getClass().getResourceAsStream("/images/blank.png"));
+
     /**
      * Available commands that the bot can understand.
      */
@@ -127,9 +128,7 @@ public class Lebron extends Application {
                     reply = taskList.add(new ToDo(splitWords[1]));
                     storage.saveToFile(taskList.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println(HORIZONTAL_LINE
-                            + "    :( OOPS! The description of a todo cannot be empty.\n"
-                            + HORIZONTAL_LINE);
+                    System.err.println("    :( OOPS! The description of a todo cannot be empty.\n");
                 }
                 break;
             case DEADLINE:
@@ -138,9 +137,7 @@ public class Lebron extends Application {
                     reply = taskList.add(new Deadline(splitBy[0], splitBy[1]));
                     storage.saveToFile(taskList.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println(HORIZONTAL_LINE
-                            + "    :( OOPS! The description or a time of a deadline cannot be empty.\n"
-                            + HORIZONTAL_LINE);
+                    System.err.println("    :( OOPS! The description or a time of a deadline cannot be empty.\n");
                 }
                 break;
             case EVENT:
@@ -149,9 +146,7 @@ public class Lebron extends Application {
                     reply = taskList.add(new Events(splitAt[0], splitAt[1]));
                     storage.saveToFile(taskList.getLst());
                 } catch (ArrayIndexOutOfBoundsException e) {
-                    System.err.println(HORIZONTAL_LINE
-                            + "    :( OOPS! The description or a time of an event cannot be empty.\n"
-                            + HORIZONTAL_LINE);
+                    System.err.println("    :( OOPS! The description or a time of an event cannot be empty.\n");
                 }
                 break;
             case DELETE:
@@ -164,9 +159,7 @@ public class Lebron extends Application {
                 reply = ui.replyFind(taskList, keyword);
                 break;
             case OTHER:
-                reply = HORIZONTAL_LINE
-                        + "    :( OOPS! I'm sorry, but I don't know what that means.\n"
-                        + HORIZONTAL_LINE;
+                reply = "    :( OOPS! I'm sorry, but I don't know what that means.\n";
                 break;
             default:
                 break;
@@ -177,102 +170,4 @@ public class Lebron extends Application {
         }
         return reply;
     }
-
-    @Override
-    public void start(Stage stage) {
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-        Label greeting = new Label(ui.greet());
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-        stage.setTitle("Lebron");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(greeting, new ImageView(lebron))
-        );
-
-        sendButton.setOnMouseClicked((event) -> {
-            try {
-                handleUserInput();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        userInput.setOnAction((event) -> {
-            try {
-                handleUserInput();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-    }
-
-    private Node getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
-    private void handleUserInput() throws IOException {
-        Label userText = new Label(userInput.getText());
-        Label lebronText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(lebronText, new ImageView(lebron))
-        );
-        userInput.clear();
-    }
-
-    private String getResponse(String input) throws IOException {
-        return run(input);
-    }
-
-
 }
