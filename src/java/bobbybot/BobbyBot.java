@@ -4,6 +4,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Represents the chatbot
+ */
 public class BobbyBot {
     private final String DBPATH = "data/database.txt";
     private final Storage storage;
@@ -13,7 +16,7 @@ public class BobbyBot {
     /**
      * Constructor to initialise classes
      */
-    public BobbyBot()  {
+    public BobbyBot() {
         ui = new Ui();
         ui.showWelcome();
         storage = new Storage(DBPATH);

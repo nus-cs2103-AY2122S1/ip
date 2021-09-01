@@ -1,5 +1,8 @@
 package bobbybot;
 
+/**
+ * Encapsulates all user-facing interactions
+ */
 public class Ui {
     public void showLoadingError() {
         System.out.println("Error encountered when loading data");

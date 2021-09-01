@@ -1,7 +1,6 @@
 package bobbybot;
 
 /** Represents a bobbybot.Task that should be completed at a specified time period
- *  @author mokdarren
  */
 public class Event extends Task {
     protected String at;

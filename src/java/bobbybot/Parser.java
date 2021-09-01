@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Class helps to handle parsing of user commands
+ */
 public class Parser {
 
     /**

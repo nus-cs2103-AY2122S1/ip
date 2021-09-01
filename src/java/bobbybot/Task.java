@@ -1,7 +1,7 @@
 package bobbybot;
 
-/** Represents a task that can be completed
- * @author mokdarren
+/**
+ * Represents a task that can be completed
  */
 public class Task {
     protected String description;

@@ -1,7 +1,7 @@
 package bobbybot;
 
-/** Represents a task without any time restrictions
- *  @author mokdarren
+/**
+ * Represents a task without any time restrictions
  */
 public class ToDo extends Task{
 
