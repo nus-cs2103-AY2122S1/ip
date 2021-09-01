@@ -1,5 +1,7 @@
 package IP.duke.command;
 
+import IP.duke.main.Duke;
+import IP.duke.main.DukeException;
 import IP.duke.task.Task;
 import IP.duke.main.Storage;
 import IP.duke.main.TaskList;
@@ -27,11 +29,15 @@ public class MarkDoneCommand extends Command {
 
     /**
      * Executes the command to mark a task as done.
+     * @throws DukeException exception handled by DukeException class
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = tasks.markDone(taskNumber - 1);
-        ui.showMarkTaskDone(task);
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        try {
+            Task task = tasks.markDone(taskNumber - 1);
+            ui.showMarkTaskDone(task);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(e);
+        }
     }
-    
 }

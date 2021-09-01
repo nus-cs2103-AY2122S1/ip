@@ -18,6 +18,7 @@ public class Todo extends Task {
      * Class constructor.
      * 
      * @param description the task description.
+     * @throws DukeException cause by exception handled in DukeException class.
      */
     public Todo(String description) throws DukeException {
         try {

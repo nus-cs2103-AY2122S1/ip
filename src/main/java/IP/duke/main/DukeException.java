@@ -30,11 +30,12 @@ public class DukeException extends Exception{
      */
     @Override
     public String getMessage() {
-        if (exception instanceof NumberFormatException) {
-            message = "☹ OH NO!!! The task does not exist.>:(\n";
-        } else if (exception instanceof StringIndexOutOfBoundsException || 
-                    exception instanceof ArrayIndexOutOfBoundsException) {
+        if (exception instanceof StringIndexOutOfBoundsException ||
+                exception instanceof ArrayIndexOutOfBoundsException) {
             message = "☹ The task description or command is incomplete.:$\n";
+        } else if (
+        exception instanceof IndexOutOfBoundsException) {
+            message = "☹ OH NO!!! The task does not exist.>:(\n";
         } else if (exception instanceof IOException) {
             message = "☹ OH NO!!! I cannot find the file.\n";
         } else if (exception instanceof DateTimeParseException) {

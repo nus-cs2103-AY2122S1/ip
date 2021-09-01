@@ -4,8 +4,10 @@ import IP.duke.main.DukeException;
 import IP.duke.main.Storage;
 import IP.duke.main.TaskList;
 import IP.duke.main.Ui;
+import IP.duke.task.Task;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Represents a command to exit the chatbot.
@@ -29,7 +31,7 @@ public class ExitCommand extends Command {
      * @param tasks lists of tasks
      * @param ui the user interface.
      * @param storage the storage file.
-     * @throws DukeException
+     * @throws DukeException exception handled by DukeException class
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {

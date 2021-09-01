@@ -38,6 +38,7 @@ public class Deadline extends Task {
      * 
      * @param deadlineDescription description of deadline task.
      * @param dateOfTask date of the deadline task.
+     * @throws ParseException due to improper date format.
      */
     public Deadline(String deadlineDescription, String dateOfTask) throws ParseException {
         taskDescription = deadlineDescription;
