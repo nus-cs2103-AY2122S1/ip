@@ -10,6 +10,8 @@ import retriever.task.Task;
  * user and the chatbot.
  */
 public class Ui {
+    private static String retrieverResponse;
+
     // Predetermined strings.
     private String dashedLine = "_______________________________________________";
     private String welcomeMessage = "Hello, I am Retriever\nHow Can I Help You Today?";
@@ -24,7 +26,6 @@ public class Ui {
             + "(_(_/-(_/\n";
 
     private Scanner scanner;
-    private static String retrieverResponse;
 
     /**
      * Sets up the scanner to take in user input.
@@ -157,6 +158,11 @@ public class Ui {
         retrieverResponse += "You Owe Me " + taskList.size() + " Treat(s), Master!";
     }
 
+    /**
+     * Prints the tasks stored in the list.
+     *
+     * @param taskList The ArrayList containing the tasks to be printed.
+     */
     public void printTaskList(ArrayList<Task> taskList) {
         // If the list is empty
         if (taskList.size() == 0) {

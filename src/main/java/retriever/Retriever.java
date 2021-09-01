@@ -66,7 +66,6 @@ public class Retriever {
      * Main body of the Retriever Chatbot.
      */
     public void run() {
-        Dial
         // To show the welcome message
         ui.printWelcomeMessage();
 
