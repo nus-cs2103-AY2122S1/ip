@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Locale;
 
 
 /**
@@ -62,7 +61,8 @@ public class Parser {
 
         case DEADLINE:
             if (inputs.length < 2) {
-                throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString() + " (example: 'deadline watch Borat /by 2021-08-21 18:00')");
+                throw new DukeException(DukeException.Errors.MISSING_DESCRIPTION.toString()
+                        + " (example: 'deadline watch Borat /by 2021-08-21 18:00')");
             }
             String argument = combineStringArray(inputs, 1, inputs.length);
             String[] arguments = argument.split(" /by ");
@@ -226,19 +226,15 @@ public class Parser {
         }
         if (splitTime.length == 2) {
             // in the form of [hh, mm]
-            if (
-                    (splitTime[0].length() == 2 || splitTime[0].length() == 1) &&
-                            (splitTime[1].length() == 2)
-            ) {
+            if ((splitTime[0].length() == 2 || splitTime[0].length() == 1)
+                    && (splitTime[1].length() == 2)) {
                 String hh = String.format("%02d", Integer.parseInt(splitTime[0]));
                 String mm = String.format("%02d", Integer.parseInt(splitTime[1]));
                 return hh + ":" + mm;
             }
         } else {
             // in the form of [hhmm]
-            if (
-                    (splitTime[0].length() == 3 || splitTime[0].length() == 4)
-            ) {
+            if (splitTime[0].length() == 3 || splitTime[0].length() == 4) {
                 String hh = splitTime[0].length() == 3 ? splitTime[0].substring(0, 1) : splitTime[0].substring(0, 2);
                 String mm = splitTime[0].length() == 3 ? splitTime[0].substring(1, 3) : splitTime[0].substring(2, 4);
                 hh = String.format("%02d", Integer.parseInt(hh));
@@ -255,7 +251,7 @@ public class Parser {
      * @return Null if invalid, else a string representation of the date -> yyyy-mm-dd.
      * @throws DukeException An invalid date will produce this
      */
-    private String stringToDate(String[] date) throws DukeException{
+    private String stringToDate(String[] date) throws DukeException {
         // can be [yyyy, mm, dd] or [dd, mm, yyyy]
         try {
             // Check if all the string are numbers:
@@ -266,20 +262,17 @@ public class Parser {
             throw new DukeException(DukeException.Errors.INVALID_DATE.toString() + " Date is not a number.");
         }
 
-        if (
-                date[0].length() == 4 &&
-                        (date[1].length() == 1 || date[1].length() == 2) &&
-                        (date[2].length() == 1 || date[2].length() == 2)
-        ) {
+        if (date[0].length() == 4
+                && (date[1].length() == 1 || date[1].length() == 2)
+                && (date[2].length() == 1 || date[2].length() == 2)) {
             // In the form of [yyyy, mm, dd]
             String year = date[0];
             String month = String.format("%02d", Integer.parseInt(date[1]));
             String day = String.format("%02d", Integer.parseInt(date[2]));
             return year + "-" + month + "-" + day;
-        } else if (
-                (date[0].length() == 1 || date[0].length() == 2) &&
-                        (date[1].length() == 1 || date[1].length() == 2) &&
-                        (date[2].length() == 4)
+        } else if ((date[0].length() == 1 || date[0].length() == 2)
+                && (date[1].length() == 1 || date[1].length() == 2)
+                && (date[2].length() == 4)
         ) {
             // In the form of [dd, mm, yyyy]
             String year = date[2];

@@ -16,13 +16,13 @@ import java.util.Scanner;
 public class Storage {
 
     /** The relative path to the directory */
-    private final String DIRECTORY;
+    private String directory;
 
     /** The file name */
-    private final String FILE;
+    private String file;
 
     /** The contents of the file as a List of Strings */
-    private final List<String> FILE_CONTENTS;
+    private List<String> fileContents;
 
     /**
      * Constructor for Storage.
@@ -30,9 +30,9 @@ public class Storage {
      * @param file The file name.
      */
     public Storage(String directory, String file) {
-        DIRECTORY = directory;
-        FILE = file;
-        FILE_CONTENTS = new ArrayList<>();
+        this.directory = directory;
+        this.file = file;
+        fileContents = new ArrayList<>();
     }
 
     /**
@@ -40,11 +40,11 @@ public class Storage {
      * @return an ArrayList of Task from the saved data.
      * @throws DukeException upon load error.
      */
-    public ArrayList<Task> load() throws DukeException{
+    public ArrayList<Task> load() throws DukeException {
         // Make directory and/or file if they don't exist.
-        File dataDir = new File(DIRECTORY);
+        File dataDir = new File(directory);
         dataDir.mkdirs();
-        File dataFile = new File(DIRECTORY + "/" + FILE);
+        File dataFile = new File(directory + "/" + file);
         try {
             dataFile.createNewFile();
         } catch (IOException e) {
@@ -58,7 +58,7 @@ public class Storage {
             Scanner fileReader = new Scanner(dataFile);
             while (fileReader.hasNextLine()) {
                 String rawData = fileReader.nextLine();
-                FILE_CONTENTS.add(rawData);
+                fileContents.add(rawData);
                 String[] datas = rawData.split(" \\| ");
                 String taskType = datas[0];
                 boolean isDone = datas[1].equals("1");
@@ -77,6 +77,10 @@ public class Storage {
                 case "E":
                     // Add an event task.
                     task = new Event(datas[2], datas[3]);
+
+                    break;
+                default:
+                    throw new DukeException(DukeException.Errors.INVALID_COMMAND.toString());
                 }
                 if (task != null) {
                     if (isDone) {
@@ -99,7 +103,7 @@ public class Storage {
      */
     public String getFileLine(int id) throws DukeException {
         try {
-            return FILE_CONTENTS.get(id);
+            return fileContents.get(id);
         } catch (Exception e) {
             throw new DukeException(DukeException.Errors.TASK_NOT_FOUND.toString());
         }
@@ -111,7 +115,7 @@ public class Storage {
      * @throws DukeException When saving the file fails.
      */
     public void addToFile(String task) throws DukeException {
-        FILE_CONTENTS.add(task);
+        fileContents.add(task);
         commitChanges();
     }
 
@@ -121,7 +125,7 @@ public class Storage {
      * @throws DukeException When saving the file fails.
      */
     public void removeFromFile(int id) throws DukeException {
-        FILE_CONTENTS.remove(id);
+        fileContents.remove(id);
         commitChanges();
     }
 
@@ -132,7 +136,7 @@ public class Storage {
      * @throws DukeException When saving the file fails.
      */
     public void updateLineFile(int id, String task) throws DukeException {
-        FILE_CONTENTS.set(id, task);
+        fileContents.set(id, task);
         commitChanges();
     }
 
@@ -142,7 +146,7 @@ public class Storage {
      */
     private void commitChanges() throws DukeException {
         try {
-            Files.write(Paths.get(DIRECTORY + "/" + FILE), FILE_CONTENTS, StandardCharsets.UTF_8);
+            Files.write(Paths.get(directory + "/" + file), fileContents, StandardCharsets.UTF_8);
         } catch (IOException e) {
             throw new DukeException(DukeException.Errors.SAVE_FAIL.toString());
         }

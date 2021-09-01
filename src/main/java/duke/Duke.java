@@ -133,6 +133,10 @@ public class Duke {
                 case FIND:
                     // Gets the task matching the queried keyword.
                     output = list.find(inputs[1]);
+
+                    break;
+                default:
+                    ui.showMessage("Invalid Message");
                 }
 
                 // Displays the output message.

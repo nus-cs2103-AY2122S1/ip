@@ -41,6 +41,6 @@ public class Task {
      * @return The description of the task.
      */
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " +  this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
