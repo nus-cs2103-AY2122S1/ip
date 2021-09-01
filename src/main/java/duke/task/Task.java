@@ -13,13 +13,13 @@ public abstract class Task {
         this.description = description;
     }
 
-//    public boolean checkCompletion() {
-//        return this.isCompleted;
-//    }
+    public boolean checkCompletion() {
+        return this.isCompleted;
+    }
 
-//    public void complete() {
-//        this.isCompleted = true;
-//    }
+    public void complete() {
+        this.isCompleted = true;
+    }
 
     public abstract String toString();
 
