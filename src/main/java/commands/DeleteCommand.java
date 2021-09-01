@@ -22,7 +22,7 @@ public class DeleteCommand extends Command{
 
         ui.printResponse(message);
 
-        return true;
+        return false;
     }
     
 }

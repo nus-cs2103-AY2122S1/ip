@@ -29,13 +29,13 @@ public class Duke {
     public void run() {
         ui.printWelcomeMessage();
 
-        boolean notExitCommand = true;
+        boolean isExitCommand = false;
 
-        while(notExitCommand) {
+        while(!isExitCommand) {
             try {
                 String userCommand = ui.readCommand();
                 Command command = Parser.parse(userCommand);
-                notExitCommand = command.execute(this.taskList, this.ui, this.storage);
+                isExitCommand = command.execute(this.taskList, this.ui, this.storage);
                 this.storage.save(this.taskList.getFormattedData());
 
             } catch (InvalidInputException e) {

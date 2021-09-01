@@ -13,6 +13,6 @@ public class ListCommand extends Command{
 
         ui.printResponse(message);
 
-        return true;
+        return false;
     }
 }
