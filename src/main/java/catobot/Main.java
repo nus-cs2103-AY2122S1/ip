@@ -9,12 +9,17 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Catobot using FXML.
  */
 public class Main extends Application {
 
     private Catobot catobot = new Catobot("./data/Catobot.txt");
 
+    /**
+     * Starts the scene.
+     *
+     * @param stage The stage that has this scene.
+     */
     @Override
     public void start(Stage stage) {
         try {

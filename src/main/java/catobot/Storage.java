@@ -31,6 +31,7 @@ public class Storage {
      * Constructor for Storage.
      *
      * @param filePath The path to the local memory.
+     * @throws LoadingException If the file cannot be loaded properly.
      */
     public Storage(String filePath) throws LoadingException {
         this.filePath = filePath;
@@ -62,6 +63,7 @@ public class Storage {
 
                 String[] input = rawTask.split(" \\| ", 4);
                 String type = input[0];
+
                 int isDone = Integer.parseInt(input[1]);
                 String description = input[2];
 
@@ -70,24 +72,15 @@ public class Storage {
                 switch (type) {
                 case "D":
                     Deadline deadline = Deadline.of(description, LocalDateTime.parse(input[3], formatter));
-                    if (isDone == 1) {
-                        deadline.markAsDone();
-                    }
-                    taskList.add(deadline);
+                    addToList(deadline, taskList, isDone);
                     break;
                 case "E":
                     Event event = Event.of(description, LocalDateTime.parse(input[3], formatter));
-                    if (isDone == 1) {
-                        event.markAsDone();
-                    }
-                    taskList.add(event);
+                    addToList(event, taskList, isDone);
                     break;
                 case "T":
                     Todo todo = Todo.of(description);
-                    if (isDone == 1) {
-                        todo.markAsDone();
-                    }
-                    taskList.add(todo);
+                    addToList(todo, taskList, isDone);
                     break;
                 default:
                     break;
@@ -97,6 +90,13 @@ public class Storage {
             throw new LoadingException();
         }
         return taskList;
+    }
+
+    private void addToList(Task task, ArrayList<Task> list, int isDone) {
+        if (isDone == 1) {
+            task.markAsDone();
+        }
+        list.add(task);
     }
 
     /**

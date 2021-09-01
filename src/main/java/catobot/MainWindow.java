@@ -1,7 +1,6 @@
 package catobot;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -18,19 +17,20 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    // @FXML
-    // private Button sendButton;
 
     private Catobot catobot;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/image/kuma-1.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/image/neko-1.png"));
 
+    /**
+     * Initializes the displaying window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(catobot.WELCOME, dukeImage)
+                DialogBox.getBotDialog(Catobot.WELCOME, dukeImage)
         );
     }
 
@@ -44,15 +44,17 @@ public class MainWindow extends AnchorPane {
         String response = catobot.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getBotDialog(response, dukeImage)
         );
         userInput.clear();
     }
 
+    /**
+     * Sets the Catobot.
+     *
+     * @param c The instance of Catobot.
+     */
     public void setCatobot(Catobot c) {
         catobot = c;
     }
-
-
-
 }

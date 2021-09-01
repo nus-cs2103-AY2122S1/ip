@@ -32,7 +32,8 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws BotException {
-        String description = content.substring("todo".length()).trim();
+        int startIndex = CommandType.TODO.getValue().length();
+        String description = content.substring(startIndex).trim();
         return tasks.add(Todo.of(description));
     }
 

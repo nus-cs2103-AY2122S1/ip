@@ -36,7 +36,12 @@ public class Catobot {
         }
     }
 
-
+    /**
+     * Gets the responses for user input.
+     *
+     * @param input The input from the user.
+     * @return The text to display in the window.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

@@ -12,6 +12,7 @@ public class Parser {
      * Parses the input into corresponding commands.
      *
      * @param content The full content from a line of input.
+     * @return The corresponding command of the input.
      * @throws BotException If the request is invalid.
      */
     public static Command parse(String content) throws BotException {

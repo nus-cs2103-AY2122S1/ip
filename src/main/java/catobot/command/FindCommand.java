@@ -11,14 +11,31 @@ public class FindCommand extends Command {
 
     private final String content;
 
+    /**
+     * Constructor for find command.
+     *
+     * @param content The content of the command.
+     */
     protected FindCommand(String content) {
         this.content = content;
     }
 
+    /**
+     * Finds tasks.
+     *
+     * @param tasks The list of tasks to be worked on.
+     * @param storage The storage of the tasks.
+     * @return The result of the search.
+     * @throws BotException If the command is not valid.
+     */
     @Override
     public String execute(TaskList tasks, Storage storage) throws BotException {
-        String keyword = content.substring(CommandType.FIND.getValue().length()).trim();
-        return tasks.search(keyword);
+        int startIndex = CommandType.FIND.getValue().length();
+
+        String keyword = content.substring(startIndex).trim();
+        String result = tasks.search(keyword);
+
+        return result;
     }
 
 }

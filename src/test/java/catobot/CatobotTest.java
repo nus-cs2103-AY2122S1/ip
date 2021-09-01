@@ -45,7 +45,6 @@ public class CatobotTest {
             actual = e.getMessage();
         }
         assertEquals(expected, actual);
-        assertEquals(expected, actual);
     }
 
     @Test

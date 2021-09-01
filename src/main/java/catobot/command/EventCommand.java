@@ -40,18 +40,29 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws BotException {
+        // If the command is empty
         if (content.split(" ").length == 1) {
             throw new EmptyCommandException("event");
         }
-        if (!content.contains("/at") || content.split("/at").length < 2) {
+        String rawInputs = content.split("event")[1].trim();
+
+        // If the command does not have "/at"
+        if (!rawInputs.contains("/at")) {
+            throw new InvalidEventException();
+        }
+        String[] details = rawInputs.split("/at");
+
+        // if there is no description or date
+        if (details.length < 2) {
             throw new InvalidEventException();
         }
 
-        String[] inputs = content.split("event")[1].trim().split(" /at ");
-        String description = inputs[0].trim();
+        String description = details[0].trim();
+        String rawDate = details[1].trim();
+
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime date = LocalDateTime.parse(inputs[1], formatter);
+            LocalDateTime date = LocalDateTime.parse(rawDate, formatter);
             return tasks.add(Event.of(description, date));
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();

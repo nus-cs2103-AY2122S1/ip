@@ -38,18 +38,29 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws BotException {
+        // If the command is empty
         if (content.split(" ").length == 1) {
             throw new EmptyCommandException("deadline");
         }
-        if (!content.contains("/by") || content.split("/by").length < 2) {
+        String rawInputs = content.split("deadline")[1].trim();
+
+        // If the command does not have "/by"
+        if (!rawInputs.contains("/by")) {
+            throw new InvalidDeadlineException();
+        }
+        String[] details = rawInputs.split("/by");
+
+        // if there is no description or date
+        if (details.length < 2) {
             throw new InvalidDeadlineException();
         }
 
-        String[] inputs = content.split("deadline")[1].trim().split(" /by ");
-        String description = inputs[0].trim();
+        String description = details[0].trim();
+        String rawDate = details[1].trim();
+
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            LocalDateTime date = LocalDateTime.parse(inputs[1], formatter);
+            LocalDateTime date = LocalDateTime.parse(rawDate, formatter);
             return tasks.add(Deadline.of(description, date));
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeException();

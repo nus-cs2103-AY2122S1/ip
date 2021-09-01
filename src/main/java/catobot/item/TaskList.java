@@ -1,6 +1,7 @@
 package catobot.item;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import catobot.exception.EmptyTaskListException;
@@ -30,6 +31,16 @@ public class TaskList {
     }
 
     /**
+     * Constructor for TaskList.
+     *
+     * @param tasks Various number of tasks.
+     */
+    public TaskList(Task ...tasks) {
+        this.taskList = new ArrayList<>();
+        taskList.addAll(Arrays.asList(tasks));
+    }
+
+    /**
      * Adds a task into the TaskList.
      *
      * @param item The task to be added.
@@ -51,7 +62,6 @@ public class TaskList {
         if (taskList.isEmpty()) {
             return "Meow currently no tasks!";
         }
-
         return String.format("Here are the tasks in your list:%s", this);
     }
 
