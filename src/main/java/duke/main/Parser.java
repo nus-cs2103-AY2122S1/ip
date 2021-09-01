@@ -33,26 +33,26 @@ public class Parser {
         String type = components[0].toLowerCase().trim();
         String description = (components.length < 2) ? "" : components[1].trim();
         switch (type) {
-            case "help":
-                return new HelpCommand();
-            case "list":
-                return new ListCommand(taskList);
-            case "done":
-                return new DoneCommand(description, taskList);
-            case "todo":
-                return new TaskCommand(description, taskList, Task.Type.TODO);
-            case "deadline":
-                return new TaskCommand(description, taskList, Task.Type.DEADLINE);
-            case "event":
-                return new TaskCommand(description, taskList, Task.Type.EVENT);
-            case "delete":
-                return new DeleteCommand(description, taskList);
-            case "find":
-                return new FindCommand(description, taskList);
-            case "date-of":
-                return new DateOfCommand(description, taskList);
-            default:
-                throw new DukeSyntaxErrorException(type);
+        case "help":
+            return new HelpCommand();
+        case "list":
+            return new ListCommand(taskList);
+        case "done":
+            return new DoneCommand(description, taskList);
+        case "todo":
+            return new TaskCommand(description, taskList, Task.Type.TODO);
+        case "deadline":
+            return new TaskCommand(description, taskList, Task.Type.DEADLINE);
+        case "event":
+            return new TaskCommand(description, taskList, Task.Type.EVENT);
+        case "delete":
+            return new DeleteCommand(description, taskList);
+        case "find":
+            return new FindCommand(description, taskList);
+        case "date-of":
+            return new DateOfCommand(description, taskList);
+        default:
+            throw new DukeSyntaxErrorException(type);
         }
     }
 

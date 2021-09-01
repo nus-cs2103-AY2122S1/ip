@@ -1,3 +1,6 @@
 [T][X] walk 10000 steps today
 [D][ ] cs2100 tutorial (by 2021-08-31)
 [D][X] IP project (by 2021-09-02)
+[D][ ] GEQ1000 quiz (by 2021-09-03)
+[D][ ] CS2101 reflection (by 2021-09-03)
+[D][ ] plagiarism quiz (by 2021-09-03)

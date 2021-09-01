@@ -20,6 +20,7 @@ public abstract class Task {
         this.status = false;
     }
 
+
     /**
      * Mark a task status as completed
      */
