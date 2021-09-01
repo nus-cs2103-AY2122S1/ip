@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  */
 public class ParserTest {
     /**
-     * Test the parse method when a list command is given with an empty TaskList.
+     * Tests the parse method when a list command is given with an empty TaskList.
      */
     @Test
     public void parse_list_exceptionThrown() {
@@ -22,7 +22,7 @@ public class ParserTest {
     }
 
     /**
-     * Test the parse method when a new Deadline is added.
+     * Tests the parse method when a new Deadline is added.
      *
      * @throws DukeException A Duke-specific exception that may occur when adding a new Deadline.
      */

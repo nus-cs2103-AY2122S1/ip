@@ -28,6 +28,13 @@ public class Parser {
         this.isFind = false;
     }
 
+    /**
+     * Lists the tasks in the given TaskList as a string.
+     *
+     * @param tasks TaskList containing the tasks to list.
+     * @return A string representation of the given tasks.
+     * @throws DukeException A Duke-specific exception that may occur when listing tasks.
+     */
     private String list(TaskList tasks) throws DukeException {
         if (tasks.size() == 0) {
             throw new DukeException("There are currently no tasks in your list.");
@@ -44,14 +51,21 @@ public class Parser {
                 tasksBuilder.append("\n");
             }
         }
-       return tasksBuilder.toString();
+        return tasksBuilder.toString();
     }
 
-    private String done(int counter) throws DukeException {
-        if (counter <= 0 || counter > tasks.size()) {
-            throw new DukeException("Sorry, no such task of index " + counter + ".");
+    /**
+     * Marks the task of the given index as done.
+     *
+     * @param taskIndex The index of the task to mark as done.
+     * @return A string containing a success message for marking the task as done.
+     * @throws DukeException A Duke-specific exception that may occur when marking tasks as done.
+     */
+    private String done(int taskIndex) throws DukeException {
+        if (taskIndex <= 0 || taskIndex > tasks.size()) {
+            throw new DukeException("Sorry, no such task of index " + taskIndex + ".");
         }
-        Task doneTask = tasks.get(counter - 1);
+        Task doneTask = tasks.get(taskIndex - 1);
         doneTask.markAsDone();
         return "Nice! I've marked this task as done:\n  " + doneTask;
     }
@@ -165,9 +179,8 @@ public class Parser {
                     }
                 }
                 return list(matchingTasks);
-            } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
+            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

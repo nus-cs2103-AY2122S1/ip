@@ -9,10 +9,10 @@ import javafx.stage.Stage;
  * @author Kleon Ang
  */
 public class Duke extends Application {
+    private static final String DATA_FILENAME = "duke.txt";
     private static Parser parser;
     private static Storage storage;
     private static TaskList tasks;
-    private final String DATA_FILENAME = "duke.txt";
     private Ui ui;
 
     /**

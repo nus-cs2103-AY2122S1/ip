@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
  */
 public class TaskListTest {
     /**
-     * Test the printReply method for a valid given input.
+     * Tests the addTask method for a valid given input.
      */
     @Test
     public void addTask_validInput_addSuccess() {
@@ -25,7 +25,7 @@ public class TaskListTest {
     }
 
     /**
-     * Test the showLoadingError method for a given fileName.
+     * Tests the deleteTask method for a given invalid index.
      */
     @Test
     public void deleteTask_invalidIndex_printsErrorMessage() {

@@ -87,10 +87,10 @@ public class Ui {
             userInput.clear();
         });
 
-        // Scroll down to the end every time dialogContainer's height changes.
+        // Scroll down to the end every time dialogContainer's height changes
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-        // Add functionality to handle user input.
+        // Add functionality to handle user input
         sendButton.setOnMouseClicked((event) -> handleUserInput());
         userInput.setOnAction((event) -> handleUserInput());
     }
