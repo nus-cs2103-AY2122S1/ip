@@ -10,7 +10,7 @@ public class AddCommand extends Command{
     private static final String NEW_TASK_MSG = "New task added:";
 
     private Task task;
-    
+
     public AddCommand(Task task) {
         this.task = task;
     }
@@ -22,6 +22,6 @@ public class AddCommand extends Command{
 
         ui.printResponse(message);
 
-        return true;
+        return false;
     }
 }
