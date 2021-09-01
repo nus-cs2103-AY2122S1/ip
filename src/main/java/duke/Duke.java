@@ -40,9 +40,11 @@ public class Duke extends Application {
     public TaskList getTasks() {
         return this.tasks;
     }
+
     public Storage getStorage() {
         return this.storage;
     }
+
     public Ui getUi() {
         return this.ui;
     }
@@ -52,13 +54,15 @@ public class Duke extends Application {
      */
     private void run() {
         System.out.println(ui.showWelcomeMessage1());
-        System.out.println(ui.LOGO);
+        System.out.println(Ui.LOGO);
         System.out.println(ui.showWelcomeMessage2());
+        //noinspection finally
         try {
             System.out.println(storage.loadFileToList());
         } catch (FileNotFoundException e) {
             System.out.println(ui.showLoadingError());
         } finally {
+            //noinspection InfiniteLoopStatement
             while (true) {
                 String command = ui.getUserCommand();
                 Parser parser = new Parser(this);

@@ -18,7 +18,7 @@ public class Ui {
         + "|_|   |_|   |_|\\____ |_|  |_|______|       \n";
 
     private final Scanner sc;
-    private Duke duke;
+    private final Duke duke;
 
     /**
      * Returns a Ui object.
@@ -34,7 +34,7 @@ public class Ui {
      * Prints on user interface the output for Welcome Message 1.
      */
     public String showWelcomeMessage1() {
-        return "Hi there! Start chatting with your new \n" + "\n";
+        return "Hi there! Start chatting with your new \n\n";
     }
 
     /**
@@ -68,7 +68,7 @@ public class Ui {
     /**
      * Prints on user interface the output for loaded list from .txt file.
      */
-    public String showListLoad() {
+    public String showListUponLoad() {
         return FRIENDGREETING + "These are your existing tasks!\n"
             + duke.getTasks().printList();
     }
@@ -154,7 +154,7 @@ public class Ui {
      * @return String which is input from user.
      */
     public String getUserCommand() {
-        String message = "e";
+        String message;
         message = sc.nextLine();
         return message;
     }
