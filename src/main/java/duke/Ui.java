@@ -24,7 +24,7 @@ public class Ui {
         return scanner.nextLine();
     }
 
-    public void showln(String s) {
+    public void showLine(String s) {
         System.out.println(s);
     }
 
