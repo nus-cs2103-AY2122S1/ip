@@ -24,7 +24,7 @@ public class Todo extends Task {
      *
      * @return String representing this event in database format.
      */
-    public String toDB() {
+    public String toDatabaseFormat() {
         return String.format("T | %d | %s ", super.done ? 1 : 0, super.desc);
     }
 

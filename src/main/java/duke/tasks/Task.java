@@ -56,7 +56,7 @@ public abstract class Task {
         return desc.contains(word) || details.contains(word);
     }
 
-    public abstract String toDB();
+    public abstract String toDatabaseFormat();
 
     @Override
     public boolean equals(Object obj) {

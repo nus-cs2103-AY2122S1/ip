@@ -14,8 +14,8 @@ import java.util.Scanner;
 
 public class Parser {
 
-    private final TaskList db;
-    private final HashMap<String, CheckedFunction<String, Record>> cmds = new HashMap<>();
+    private final TaskList database;
+    private final HashMap<String, CheckedFunction<String, Record>> commandList = new HashMap<>();
 
     /**
      * Creates a Parser which initializes a TaskList.
@@ -30,22 +30,22 @@ public class Parser {
     /**
      * Creates a Parser with TaskList db and with the recognized commands.
      *
-     * @param db TaskList to be added.
+     * @param database TaskList to be added.
      * @throws DukeException
      */
-    public Parser(TaskList db) throws DukeException {
-        this.db = db;
-        cmds.put("greet", this::greet);
-        cmds.put("bye", this::bye);
-        cmds.put("list", this::list);
-        cmds.put("done", this::done);
-        cmds.put("delete", this::delete);
-        cmds.put("todo", this::todo);
-        cmds.put("deadline", this::deadline);
-        cmds.put("event", this::event);
-        cmds.put("help", this::help);
-        cmds.put("clear", this::clear);
-        cmds.put("find", this::find);
+    public Parser(TaskList database) throws DukeException {
+        this.database = database;
+        commandList.put("greet", this::greet);
+        commandList.put("bye", this::bye);
+        commandList.put("list", this::list);
+        commandList.put("done", this::done);
+        commandList.put("delete", this::delete);
+        commandList.put("todo", this::todo);
+        commandList.put("deadline", this::deadline);
+        commandList.put("event", this::event);
+        commandList.put("help", this::help);
+        commandList.put("clear", this::clear);
+        commandList.put("find", this::find);
     }
 
     /**
@@ -60,8 +60,8 @@ public class Parser {
             Scanner sc = new Scanner(input);
             String cmd = sc.next();
             String raw = sc.hasNext() ? sc.nextLine().substring(1) : "";
-            if (cmds.containsKey(cmd)) {
-                return cmds.get(cmd).apply(raw);
+            if (commandList.containsKey(cmd)) {
+                return commandList.get(cmd).apply(raw);
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
@@ -70,8 +70,8 @@ public class Parser {
         }
     }
 
-    private String sizeMsg() {
-        return "\n\t Now you have " + db.size() + String.format(" task%sin the list.", db.size() != 1 ? "s " : " ");
+    private String getSizeMsg() {
+        return "\n\t Now you have " + database.size() + String.format(" task%sin the list.", database.size() != 1 ? "s " : " ");
     }
 
     private Record greet(String args) {
@@ -90,38 +90,38 @@ public class Parser {
     }
 
     private Record bye(String args) throws DukeException {
-        db.close();
+        database.close();
         return new Record("Bye. Hope to see you again soon!", true);
     }
 
     private Record list(String args) {
-        if (db.size() == 0) {
+        if (database.size() == 0) {
             return new Record("You have no tasks!");
         }
-        return new Record("Here are the tasks in your list:\n " + db.toString());
+        return new Record("Here are the tasks in your list:\n " + database.toString());
     }
 
     private Record done(String args) throws DukeException {
-        if (db.size() == 0) {
+        if (database.size() == 0) {
             throw new DukeException("You have no tasks.");
         }
         try {
-            Task t = db.markAsDone(Integer.parseInt(args) - 1);
+            Task t = database.markAsDone(Integer.parseInt(args) - 1);
             return new Record("Nice! I've marked this task as done:\n\t   " + t);
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException(String.format("Enter a valid index (from 1 to %d).", db.size()));
+            throw new DukeException(String.format("Enter a valid index (from 1 to %d).", database.size()));
         }
     }
 
     private Record delete(String args) throws DukeException {
         try {
-            Task t = db.delete(Integer.parseInt(args) - 1);
-            return new Record("Noted. I've removed this task:\n\t   " + t + sizeMsg());
+            Task t = database.delete(Integer.parseInt(args) - 1);
+            return new Record("Noted. I've removed this task:\n\t   " + t + getSizeMsg());
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            if (db.size() == 0) {
+            if (database.size() == 0) {
                 throw new DukeException("You have no tasks.");
             }
-            throw new DukeException(String.format("Enter a valid index (from 1 to %d).", db.size()));
+            throw new DukeException(String.format("Enter a valid index (from 1 to %d).", database.size()));
         }
     }
 
@@ -130,8 +130,8 @@ public class Parser {
             throw new DukeException("The description of a todo cannot be empty.");
         }
         Task t = new Todo(args);
-        db.add(t);
-        return new Record("Got it. I've added this task:\n\t   " + t + sizeMsg());
+        database.add(t);
+        return new Record("Got it. I've added this task:\n\t   " + t + getSizeMsg());
     }
 
     private Record deadline(String raw) throws DukeException {
@@ -143,11 +143,11 @@ public class Parser {
         if (args.length == 2) {
             t.addDesc(args[0]);
             t.addTime(args[1]);
-            db.add(t);
+            database.add(t);
         } else if (args.length == 1) {
             throw Task.FORMAT_EXCEPTION;
         }
-        return new Record("Got it. I've added this task:\n\t   " + t + sizeMsg());
+        return new Record("Got it. I've added this task:\n\t   " + t + getSizeMsg());
     }
 
     private Record event(String raw) throws DukeException {
@@ -159,11 +159,11 @@ public class Parser {
         if (args.length == 2) {
             t.addDesc(args[0]);
             t.addTime(args[1]);
-            db.add(t);
+            database.add(t);
         } else if (args.length == 1) {
             throw Task.FORMAT_EXCEPTION;
         }
-        return new Record("Got it. I've added this task:\n\t   " + t + sizeMsg());
+        return new Record("Got it. I've added this task:\n\t   " + t + getSizeMsg());
     }
 
     private Record help(String raw) throws DukeException {
@@ -171,7 +171,7 @@ public class Parser {
     }
 
     private Record clear(String raw) throws DukeException {
-        db.clear();
+        database.clear();
         return new Record("Task list was cleared.");
         /*
         if (verify()) {
@@ -183,7 +183,7 @@ public class Parser {
     }
 
     private Record find(String raw) throws DukeException {
-        TaskList filtered = db.find(raw);
+        TaskList filtered = database.find(raw);
         if (filtered.size() == 0) {
             return new Record("No matching tasks found.");
         }

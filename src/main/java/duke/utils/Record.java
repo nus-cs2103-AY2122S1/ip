@@ -7,8 +7,8 @@ public class Record {
     /**
      * Creates a new record.
      *
-     * @param message
-     * @param terminate
+     * @param message Message Duke returns.
+     * @param terminate Is Duke supposed to terminate after this?
      */
     public Record(String message, boolean terminate) {
         this.message = message;
@@ -18,7 +18,7 @@ public class Record {
     /**
      * Creates a non-terminating record.
      *
-     * @param message
+     * @param message Message Duke returns.
      */
     public Record(String message) {
         this(message, false);
@@ -36,7 +36,7 @@ public class Record {
     /**
      * Getter for terminate.
      *
-     * @return
+     * @return Is Duke supposed to terminate after this?
      */
     public boolean bye() {
         return terminate;

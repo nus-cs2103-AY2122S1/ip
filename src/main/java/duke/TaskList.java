@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class TaskList {
     private final static DukeException ERROR_DB = new DukeException("Error loading database.");
-    private List<Task> db = new ArrayList<>();
+    private List<Task> database = new ArrayList<>();
     private Storage storage;
 
     /**
@@ -32,7 +32,7 @@ public class TaskList {
      * @throws DukeException
      */
     public void add(Task task) throws DukeException {
-        db.add(task);
+        database.add(task);
         if (storage != null) {
             storage.update(task);
         }
@@ -45,7 +45,7 @@ public class TaskList {
      * @throws DukeException
      */
     public Task markAsDone(int index) throws DukeException {
-        Task t = db.get(index);
+        Task t = database.get(index);
         t.markComplete();
         if (storage != null) {
             storage.update(this);
@@ -61,8 +61,8 @@ public class TaskList {
      * @throws DukeException
      */
     public Task delete(int index) throws DukeException {
-        Task t = db.get(index);
-        db.remove(index);
+        Task t = database.get(index);
+        database.remove(index);
         if (storage != null) {
             storage.update(this);
         }
@@ -76,7 +76,7 @@ public class TaskList {
      * @return if task list contains task.
      */
     public boolean contains(Task task) {
-        return db.contains(task);
+        return database.contains(task);
     }
 
     /**
@@ -85,7 +85,7 @@ public class TaskList {
      * @return number of tasks.
      */
     public int size() {
-        return db.size();
+        return database.size();
     }
 
     public void close() throws DukeException {
@@ -98,7 +98,7 @@ public class TaskList {
      * @throws DukeException
      */
     public void clear() throws DukeException {
-        db = new ArrayList<>();
+        database = new ArrayList<>();
         storage.purge();
     }
 
@@ -108,24 +108,24 @@ public class TaskList {
      * @return The raw task list.
      */
     public List<Task> getList() {
-        return db;
+        return database;
     }
 
     public TaskList find(String word) throws DukeException {
         TaskList filtered = new TaskList(false);
-        filtered.db = db.stream().filter(x -> x.matchWord(word)).collect(Collectors.toList());
+        filtered.database = database.stream().filter(x -> x.matchWord(word)).collect(Collectors.toList());
         return filtered;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        if (db.size() == 0) {
+        if (database.size() == 0) {
             return "You have no tasks!";
         }
-        for (int i = 1; i <= db.size(); i++) {
+        for (int i = 1; i <= database.size(); i++) {
             sb.append("\n\t ");
-            sb.append(i + "." + db.get(i - 1));
+            sb.append(i + "." + database.get(i - 1));
         }
         sb.deleteCharAt(0);
         return sb.toString();

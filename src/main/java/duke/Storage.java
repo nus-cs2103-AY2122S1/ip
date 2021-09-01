@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
+    public final static char TASK = 'T';
+    public final static char DEADLINE = 'D';
+    public final static char EVENT = 'E';
     public final static DukeException ERROR_DB = new DukeException("Error loading database.");
     private final RandomAccessFile raf;
     private final File txt;
@@ -62,7 +65,7 @@ public class Storage {
             raf.setLength(0);
             List<Task> dbList = db.getList();
             for (Task a : dbList) {
-                raf.writeBytes(a.toDB());
+                raf.writeBytes(a.toDatabaseFormat());
                 raf.writeBytes(System.lineSeparator());
             }
         } catch (IOException e) {
@@ -72,7 +75,7 @@ public class Storage {
 
     public void update(Task task) throws DukeException {
         try {
-            raf.writeBytes(task.toDB());
+            raf.writeBytes(task.toDatabaseFormat());
             raf.writeBytes(System.lineSeparator());
         } catch (IOException e) {
             throw ERROR_DB;
