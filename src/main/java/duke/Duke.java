@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Handles receiving input from user and starting/stopping the program.
  */
@@ -11,70 +9,58 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    private static String FILE_PATH = "data/duke.txt";
+
     /**
      * Creates Ui and Storage instances.
      * Loads data from fisk into TaskList object to create list of tasks user currently has.
-     *
-     * @param filePath denotes the relative file path of where the tasks will be saved in the disk.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         tasks = new TaskList(storage.load());
     }
     
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke();
     }
 
     /**
-     * Waits continuously for input from user and executes the appropriate commands
-     * based on command type.
+     * Retrieves the response that should be displayed to user based on user's input.
      */
-    public void run() {
-        ui.printGreeting();
+    public String getResponse(String input) {
+        return run(input);
+    }
 
-        Scanner scanner = new Scanner(System.in);
-        boolean isExit = false;
+    public String run(String userInput) {
+        try {
+            String fullCommand = userInput.trim();
+            CommandType commandType = Parser.parse(fullCommand);
 
-        while (!isExit && scanner.hasNextLine()) {
-            try {
-                String fullCommand = scanner.nextLine().trim();
-                CommandType commandType = Parser.parse(fullCommand);
-
-                switch (commandType) {
-                case LIST:
-                    ui.showTasks(tasks.getTaskList());
-                    break;
-                case BYE:
-                    ui.printGoodbye();
-                    isExit = true;
-                    break;
-                case FIND:
-                    tasks.find(fullCommand.substring(5), ui);
-                    break;
-                case DELETE:
-                    tasks.delete(fullCommand.substring(7), storage, ui);
-                    break;
-                case DONE:
-                    tasks.done(fullCommand.substring(5), storage, ui);
-                    break;
-                case TODO:
-                    tasks.createTodo(fullCommand.substring(5), storage, ui);
-                    break;
-                case DEADLINE:
-                    tasks.createDeadline(fullCommand.substring(9), storage, ui);
-                    break;
-                case EVENT:
-                    tasks.createEvent(fullCommand.substring(6), storage, ui);
-                    break;
-                }
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
+            switch (commandType) {
+            case LIST:
+                return ui.showTasks(tasks.getTaskList());
+            case BYE:
+                return ui.printGoodbye();
+            case FIND:
+                return tasks.find(fullCommand.substring(5), ui);
+            case DELETE:
+                return tasks.delete(fullCommand.substring(7), storage, ui);
+            case DONE:
+                return tasks.done(fullCommand.substring(5), storage, ui);
+            case TODO:
+                return tasks.createTodo(fullCommand.substring(5), storage, ui);
+            case DEADLINE:
+                return tasks.createDeadline(fullCommand.substring(9), storage, ui);
+            case EVENT:
+                return tasks.createEvent(fullCommand.substring(6), storage, ui);
+            default:
+                throw new DukeException("Invalid command");
             }
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
         }
 
-        scanner.close();
     }
 }
 

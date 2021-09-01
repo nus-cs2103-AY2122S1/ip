@@ -6,102 +6,104 @@ import java.util.ArrayList;
  * Handles interactions with user through message outputs.
  */
 public class Ui {
-    
+
     /**
-     * Prints error message.
      *
-     * @param error message that is returned by an exception.
+     * @param error
+     * @return
      */
-    public void showError(String error) {
-        System.out.println(error);
+    public String showError(String error) {
+        return error;
     }
 
     /**
-     * Prints greeting to user when program starts.
-     */
-    public void printGreeting() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
-    }
-
-    /**
-     * Prints the task that has been marked done.
      *
-     * @param doneTask task that has been marked done.
+     * @return
      */
-    public void printDoneMessage(Task doneTask) {
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(doneTask);
+    public String printGreeting() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
-     * Prints the task that has been deleted from the task list.
      *
-     * @param deletedTask task that has been deleted from the task list.
+     * @param doneTask
+     * @return
      */
-    public void printDeleteMessage(Task deletedTask) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(deletedTask);
-    }
-
-    public void printAddMessage(Task addedTask) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(addedTask);
+    public String printDoneMessage(Task doneTask) {
+        return String.format("Nice! I've marked this task as done: %s", doneTask);
     }
 
     /**
-     * Prints the number of tasks in the task list.
      *
-     * @param size number of tasks in the task list.
+     * @param deletedTask
+     * @return
      */
-    public void printTaskListSize(int size) {
+    public String printDeleteMessage(Task deletedTask) {
+        return String.format("Noted. I've removed this task: %s", deletedTask);
+    }
+
+    public String printAddMessage(Task addedTask) {
+        return String.format("Got it. I've added this task: %s", addedTask);
+    }
+
+    /**
+     *
+     * @param size
+     * @return
+     */
+    public String printTaskListSize(int size) {
         if (size == 1) {
-            System.out.println("Now you have 1 task in the list.");
+            return "Now you have 1 task in the list." ;
         } else {
-            System.out.printf("Now you have %d tasks in the list.%n", size);
+            return String.format("Now you have %d tasks in the list.", size);
         }
     }
 
     /**
-     * Prints goodbye message to user when 'bye' command is entered.
+     *
+     * @return
      */
-    public void printGoodbye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String printGoodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints out all the tasks matching user's search term.
      *
-     * @param matchingTaskList ArrayList of tasks that matches user's search term.
+     * @param matchingTaskList
+     * @return
      */
-    public void showMatchingTasks(ArrayList<Task> matchingTaskList) {
+    public String showMatchingTasks(ArrayList<Task> matchingTaskList) {
         if (matchingTaskList.size() == 0) {
-            System.out.println("There are no tasks containing that term in your list!");
+            return "There are no tasks containing that term in your list!";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are the matching tasks in your list:\n");
             int num = 1;
             for (Task task : matchingTaskList) {
-                System.out.printf("%d.%s%n", num, task);
+                sb.append(String.format("%d.%s%n", num, task));
                 num++;
             }
+            return sb.toString();
         }
     }
 
     /**
-     * Prints out all the tasks present in the task list.
      *
-     * @param taskList ArrayList of tasks user has.
+     * @param taskList
+     * @return
      */
-    public void showTasks(ArrayList<Task> taskList) {
+    public String showTasks(ArrayList<Task> taskList) {
         if (taskList.size() == 0) {
-            System.out.println("There are no tasks in your list!");
+            return "There are no tasks in your list!";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            StringBuilder sb = new StringBuilder();
+            sb.append("Here are tasks in your list:\n");
             int num = 1;
             for (Task task : taskList) {
-                System.out.printf("%d.%s%n", num, task);
+                sb.append(String.format("%d.%s%n", num, task));
                 num++;
             }
+            return sb.toString();
         }
     }
-
 }
