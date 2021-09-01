@@ -39,11 +39,7 @@ public class Parser {
      * @return the label
      */
     public static String displayLabel(String information) {
-        String label =
-                "    ____________________________________________________________\n" +
-                "     " +
-                information + "\n    " +
-                "____________________________________________________________\n";
+        String label = information;
         return label;
     }
 
@@ -55,7 +51,7 @@ public class Parser {
      * @return the label.
      * @throws DukeException if the input was invalid.
      */
-    public String  useInput(TaskList tasks) throws DukeException {
+    public String parseInput(TaskList tasks) throws DukeException {
         exceptionCommand(tasks);
         if (input.equals("list")) {
             return listCommand(tasks);
@@ -113,8 +109,8 @@ public class Parser {
             tasks.addTask(new Task(input));
         }
         return displayLabel("Got it. I've added this task:  \n" +
-                "       " + tasks.getTask(tasks.size() - 1).toString() + "\n     " +
-                "Now you have " + Integer.toString(tasks.size()) + " tasks in the list.");
+                "       " + tasks.getTask(tasks.getSize() - 1).toString() + "\n     " +
+                "Now you have " + Integer.toString(tasks.getSize()) + " tasks in the list.");
     }
 
     /**
@@ -135,8 +131,8 @@ public class Parser {
             tasks.addTask(getDateAndTime(info, input, "event"));
         }
         return displayLabel("Got it. I've added this task:  \n" +
-                "       " + tasks.getTask(tasks.size() - 1).toString() + "\n     Now you have "
-                + Integer.toString(tasks.size()) + " tasks in the list.");
+                "       " + tasks.getTask(tasks.getSize() - 1).toString() + "\n     Now you have "
+                + Integer.toString(tasks.getSize()) + " tasks in the list.");
     }
 
     /**
@@ -171,7 +167,7 @@ public class Parser {
         tasks.removeTask(removedTask);
         return displayLabel("Noted. I've removed this task:  \n" +
                 "       " + removedTask.toString() + "\n     Now you have "
-                + Integer.toString(tasks.size()) + " tasks in the list.");
+                + Integer.toString(tasks.getSize()) + " tasks in the list.");
     }
 
     /**
@@ -185,7 +181,7 @@ public class Parser {
         TaskList newTasks = new TaskList(new ArrayList<>());
         if (input.contains("find")) {
             String item = input.split(" ")[1];
-            for (int i = 0; i < tasks.size(); i++) {
+            for (int i = 0; i < tasks.getSize(); i++) {
                 if (tasks.getTask(i).getDescription().contains(item)) {
                     newTasks.addTask(tasks.getTask(i));
                 }
@@ -205,13 +201,13 @@ public class Parser {
      */
     public String getItems(TaskList tasks) {
         String collection = "";
-        for (int index = 0; index < tasks.size(); index++) {
+        for (int index = 0; index < tasks.getSize(); index++) {
             if (index != 0) {
                 collection += "     ";
             }
             String info = tasks.getTask(index).toString();
             collection += Integer.toString(index + 1) + "." + info;
-            if (index != tasks.size() - 1) {
+            if (index != tasks.getSize() - 1) {
                 collection += "\n";
             }
         }
@@ -263,11 +259,12 @@ public class Parser {
      * @return the date.
      */
     public String parseDates(String date) {
-        String[] sep = date.split("/");
-        if (Integer.parseInt(sep[0]) < 10) {
-            sep[0] = "0" + sep[0];
+        String[] sepIntoYearMonthDate = date.split("/");
+        if (Integer.parseInt(sepIntoYearMonthDate[0]) < 10) {
+            sepIntoYearMonthDate[0] = "0" + sepIntoYearMonthDate[0];
         }
-        return sep[2] + "-" + sep[1] + "-" + sep[0];
+        return sepIntoYearMonthDate[2] + "-" +
+                sepIntoYearMonthDate[1] + "-" + sepIntoYearMonthDate[0];
     }
 
     /**

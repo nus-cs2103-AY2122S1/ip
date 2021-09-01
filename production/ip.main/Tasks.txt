@@ -1,3 +1,4 @@
-Yes ~ eat cheese
 T ~ Yes ~ shower
-No ~ cheese
+T ~ No ~ eat food
+T ~ Yes ~ cook food
+T ~ No ~ nap

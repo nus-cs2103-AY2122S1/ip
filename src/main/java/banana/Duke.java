@@ -1,22 +1,27 @@
 package banana;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
+import javafx.application.Platform;
+
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
+import javafx.stage.Stage;
+
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 
 /**
  * The Duke class is the program's
@@ -27,21 +32,26 @@ import java.time.format.DateTimeFormatter;
 
 public class Duke extends Application {
 
-    private static final String WELCOME_LABEL = "Hello! I'm Banana \n" + "     What can I do for you?";
-    private static final String BYE_LABEL = "Bye. Hope to see you again soon!";
+    private Image user;
+    private Image bot;
 
-    private Storage store;
+    private Label hello;
+    private Storage storage;
     private TaskList tasks;
-    private Ui ui;
-
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
 
-    public Duke() {
-
+    public Duke(){
+        hello = new Label("Hello I'm Hange! \n How can I help you?");
+        try {
+            user = new Image(new FileInputStream("levi.jpg"));
+            bot = new Image(new FileInputStream("hange.jpg"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -51,10 +61,15 @@ public class Duke extends Application {
      * @param filePath the file to be accessed.
      */
     public void init(String filePath) {
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
+        userInput = new TextField();
+        sendButton = new Button("Send");
         try {
-            store = new Storage(filePath);
-            tasks = store.load(
-                    new File(store.getFilePath()));
+            storage = new Storage(filePath);
+            tasks = storage.load(
+                    new File(storage.getFilePath()));
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -67,11 +82,7 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) {
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-        userInput = new TextField();
-        sendButton = new Button("Send");
+        init("/Users/ravi57004/ip/src/main/java/Tasks.txt");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -82,8 +93,17 @@ public class Duke extends Application {
         stage.setResizable(false);
         stage.setMinHeight(700.0);
         stage.setMinWidth(500.0);
-
         mainLayout.setPrefSize(500.0, 700.0);
+
+        setLayout();
+        loadInformation();
+
+    }
+
+    /**
+     * Sets the program layout.
+     */
+    public void setLayout() {
         scrollPane.setPrefSize(500, 635);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
@@ -92,61 +112,54 @@ public class Duke extends Application {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         userInput.setPrefWidth(440.0);
         sendButton.setPrefWidth(55.0);
-
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        init("/Users/ravi57004/ip/src/main/java/Tasks.txt");
-        dialogContainer.getChildren().add(getDialogLabel(Parser.displayLabel(WELCOME_LABEL)));
-        sendButton.setOnMouseClicked((event) -> {
-            addToScreen(dialogContainer, userInput, tasks);
-        });
-
-        userInput.setOnAction((event) -> {
-            addToScreen(dialogContainer, userInput, tasks);
-        });
     }
 
     /**
-     * The tasks to be printed
-     * on the screen.
-     *
-     * @param dc the dialogContainer.
-     * @param ui the Textfield
-     * @param tasks the list of tasks.
+     * Loads welcome information
+     * and handles user input.
      */
-    public void addToScreen(VBox dc, TextField ui, TaskList tasks) {
+    public void loadInformation() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(hello, new ImageView(bot)));
+
+        sendButton.setOnMouseClicked((event) -> {
+            addToScreen();
+        });
+        userInput.setOnAction((event) -> {
+            addToScreen();
+        });
+    }
+
+
+    /**
+     * Adds user input/corresponding
+     * output to screen,
+     */
+    public void addToScreen() {
         try {
-            Parser p = new Parser(ui.getText());
-            if (!ui.getText().equals("bye")) {
-                String output = p.useInput(tasks);
-                dc.getChildren().add(getDialogLabel(output));
-                writeToFile(ui.getText(), tasks);
+            Label userText = new Label(userInput.getText());
+            Parser p = new Parser(userInput.getText());
+            if (!userInput.getText().equals("bye")) {
+                String output = p.parseInput(tasks);
+                Label dukeText = new Label(output);
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(userText, new ImageView(user)),
+                        DialogBox.getDukeDialog(dukeText, new ImageView(bot))
+                );
+                writeToFile(userInput.getText(), tasks);
             } else {
-                dc.getChildren().add(getDialogLabel(Parser.displayLabel(BYE_LABEL)));
+                Platform.exit();
             }
-            ui.clear();
+            userInput.clear();
         } catch (DukeException | IOException e) {
             System.out.println(e.getMessage());
         }
     }
-
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
 
     public static void main(String[] args) {
     }
@@ -164,7 +177,7 @@ public class Duke extends Application {
         FileWriter fw = new FileWriter(
                 "/Users/ravi57004/ip/src/main/java/Tasks.txt", false);
         if (!input.equals("bye")) {
-            for (int i = 0; i < tasks.size(); i++) {
+            for (int i = 0; i < tasks.getSize(); i++) {
                 String doneStr = "No";
                 if (tasks.getTask(i).getIsDone().equals("[X]")) {
                     doneStr = "Yes";
@@ -200,15 +213,15 @@ public class Duke extends Application {
  **/
 class DukeException extends Exception {
 
-    private String text;
+    private String errorMessage;
 
     /**
      * Constructor for DukeException.
      *
-     * @param text user input.
+     * @param errorMessage user input.
      */
-    public DukeException(String text) {
-        this.text = text;
+    public DukeException(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     /**
@@ -218,210 +231,17 @@ class DukeException extends Exception {
      */
     @Override
     public String getMessage() {
-        return text;
+        return errorMessage;
     }
 
 }
 
-/**
- * The Task class handles tasks.
- *
- * @author: Ravi Ananya
- **/
-class Task {
 
-    protected String description;
-    protected boolean isDone;
 
-    /**
-     * Constructor for Task.
-     *
-     * @param description user input.
-     */
-    public Task(String description) {
-        this.description = description;
-    }
 
-    /**
-     * Gets the string notation of done
-     * or not done.
-     *
-     * @return x for done or empty for not done.
-     */
-    public String getIsDone() {
-        return isDone ? "[X]" : "[ ]";
-    }
 
-    /**
-     * Gets the user input.
-     *
-     * @return the user input.
-     */
-    public String getDescription() {
-        return description;
-    }
 
-    /**
-     * Sets the task as done.
-     */
-    public void setIsDone() {
-        isDone = true;
-    }
 
-    @Override
-    public String toString() {
-        return getIsDone() + " " + description;
-    }
-
-}
-
-/**
- * This class handles to-do
- * types of tasks.
- *
- * @author: Ravi Ananya
- **/
-
-class ToDo extends Task {
-
-    /**
-     * Constructor for ToDo.
-     *
-     * @param description user input.
-     */
-    public ToDo(String description) {
-        super(description);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
-    }
-
-}
-
-/**
- * This class handles deadline
- * types of tasks.
- *
- * @author: Ravi Ananya
- **/
-
-class Deadline extends Task {
-
-    protected String deadLine;
-    protected LocalDate date;
-
-    /**
-     * Constructor for Deadline.
-     *
-     * @param description user input.
-     * @param deadLine    date, day and/or time.
-     */
-    public Deadline(String description, String deadLine) {
-        super(description);
-        this.deadLine = deadLine;
-    }
-
-    /**
-     * Constructor for Deadline.
-     *
-     * @param description user input.
-     * @param date        for official dates
-     * @param deadLine    date, day and/or time.
-     */
-    public Deadline(String description, LocalDate date, String deadLine) {
-        super(description);
-        this.date = date;
-        this.deadLine = deadLine;
-    }
-
-    /**
-     * Gets the deadline.
-     *
-     * @return the deadline
-     */
-    public String getDeadLine() {
-        if (date != null) {
-            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + deadLine;
-        } else {
-            return deadLine;
-        }
-    }
-
-    @Override
-    public String toString() {
-        if (date == null) {
-            return "[D]" + super.toString() + " (by: " + deadLine + ")";
-        } else {
-            return "[D]" + super.toString() + " (by: " +
-                    date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + deadLine + ")";
-        }
-
-    }
-
-}
-
-/**
- * This class handles event
- * types of tasks.
- *
- * @author: Ravi Ananya
- **/
-
-class Event extends Task {
-
-    protected LocalDate date;
-    protected String timing;
-
-    /**
-     * Constructor for Event.
-     *
-     * @param description user input.
-     * @param timing      date, day and/or time.
-     */
-    public Event(String description, String timing) {
-        super(description);
-        this.timing = timing;
-    }
-
-    /**
-     * Constructor for Event.
-     *
-     * @param description user input.
-     * @param date        for official dates
-     * @param timing      date, day and/or time.
-     */
-    public Event(String description, LocalDate date, String timing) {
-        super(description);
-        this.date = date;
-        this.timing = timing;
-    }
-
-    /**
-     * Gets the event.
-     *
-     * @return the event.
-     */
-    public String getEvent() {
-        if (date != null) {
-            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + timing;
-        } else {
-            return timing;
-        }
-    }
-
-    @Override
-    public String toString() {
-        if (date == null) {
-            return "[E]" + super.toString() + " (at: " + timing + ")";
-        } else {
-            return "[E]" + super.toString() + " (at: " +
-                    date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + timing + ")";
-        }
-    }
-
-}
 
 
 

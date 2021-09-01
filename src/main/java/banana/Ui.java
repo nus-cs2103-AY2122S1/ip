@@ -11,13 +11,13 @@ import java.util.Scanner;
 
 public class Ui {
 
-    protected Scanner userInput;
+    protected Scanner scanVar;
 
     /**
      * Constructor for the Ui class.
      */
     public Ui() {
-        userInput = new Scanner(System.in);
+        scanVar = new Scanner(System.in);
     }
 
     /**
@@ -26,8 +26,8 @@ public class Ui {
      * @return the user input.
      */
     public String getInput() {
-        if (userInput.hasNextLine()) {
-            return userInput.nextLine();
+        if (scanVar.hasNextLine()) {
+            return scanVar.nextLine();
         }
         return "";
     }
