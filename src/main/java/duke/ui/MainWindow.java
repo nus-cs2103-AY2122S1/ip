@@ -1,13 +1,13 @@
 package duke.ui;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -48,6 +48,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            exit();
+        }
     }
 
     public void greetTheUser() {
@@ -55,5 +58,15 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(greetingMessage, dukeImage)
         );
+    }
+
+    public void exit() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Exit");
+        alert.setHeaderText(null);
+        alert.setContentText("Bye. Hope to see you again soon!");
+        alert.getButtonTypes().setAll(new ButtonType("See ya!"));
+        alert.showAndWait();
+        Platform.exit();
     }
 }
