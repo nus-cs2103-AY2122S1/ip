@@ -17,7 +17,7 @@ public class ExecutionUnitTest {
     @Test
     public void correctStorageInit() {
         assertDoesNotThrow(() -> {
-            ExecutionUnit executor = new ExecutionUnit("resource/taskList1.txt");
+            ExecutionUnit executor = new ExecutionUnit("src/test/resource/taskList1.txt");
             executor.initStorage();
         });
     }
@@ -25,7 +25,7 @@ public class ExecutionUnitTest {
     @Test
     public void incorrectFile_fileDoesNotExists_exceptionThrown() {
         assertThrows(IOException.class, () -> {
-            ExecutionUnit executor = new ExecutionUnit("resource/taskList.txt");
+            ExecutionUnit executor = new ExecutionUnit("src/test/resource/taskList.txt");
             executor.initStorage();
         });
     }
@@ -38,7 +38,7 @@ public class ExecutionUnitTest {
                                             "Now you have 1 tasks in the list"};
 
         assertDoesNotThrow(() -> {
-            ExecutionUnit executor = new ExecutionUnit("resource/taskList1.txt");
+            ExecutionUnit executor = new ExecutionUnit("src/test/resource/taskList1.txt");
             executor.initStorage();
             String[] todoActual = executor.executeCommand(todoQuery);
             todoExpected[2] = todoActual[2]; // Hack to avoid dependency on actual content of taskList1.txt
@@ -53,13 +53,14 @@ public class ExecutionUnitTest {
         String todoQuery = "todo eat breakfast";
 
         assertDoesNotThrow(() -> {
-            ExecutionUnit executor = new ExecutionUnit("resource/taskList2.txt");
+            String storagePath= "src/test/resource/taskList2.txt";
+            ExecutionUnit executor = new ExecutionUnit(storagePath);
             executor.initStorage();
             executor.executeCommand(todoQuery);
             executor.executeCommand(eventQuery);
             executor.executeCommand(deadlineQuery);
 
-            Path path = Paths.get("resource/taskList2.txt");
+            Path path = Paths.get(storagePath);
             List<String> read = Files.readAllLines(path);
             int n = read.size();
 
