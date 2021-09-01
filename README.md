@@ -7,7 +7,7 @@ As Kanye West said:
 DukePro is
 * text-based
 * easy to learn
-*  ~~FAST~~ SUPER FAST to use
+*  ~~FAST~~ _SUPER FAST_ to use
 
 All you need to do is:
 1. download it from [here](http://github.com)
