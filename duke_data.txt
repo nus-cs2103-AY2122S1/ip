@@ -1,14 +1,5 @@
-<<<<<<< HEAD
-1. [T][ ] abc
-2. [D][ ] def (by: 123)
-3. [E][ ] ghi (at: 456)
-4. [T][ ] 123
-5. [T][ ] xyz
-=======
 1. [T][x] abc
 2. [D][x] def (by: 123)
 3. [E][x] ghi (at: 456)
 4. [D][x] d (by: tmr)
-5. [T][ ] t
-6. [D][ ] y (by: today)
->>>>>>> branch-A-CodingStandard
+5. [D][ ] y (by: today)
