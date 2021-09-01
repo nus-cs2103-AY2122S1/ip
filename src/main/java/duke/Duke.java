@@ -6,6 +6,7 @@ import java.util.Scanner;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
+
 /**
  * The class for the chat bot, Duke
  */
@@ -21,11 +22,10 @@ public class Duke {
     /**
      * Constructor for Duke class.
      *
-     * @param filePath The specified filepath to save and load the data file.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("data/duke.txt");
         tasks = storage.load();
     }
 
@@ -35,28 +35,47 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(tasks);
-        boolean end = false;
+        boolean didUserEnd = false;
 
-        //Main functionality of duke.Duke
-        while (!end) {
+        //Main functionality of Duke
+        while (!didUserEnd) {
             String command = "";
             if (sc.hasNextLine()) {
                 command = sc.nextLine().trim();
             }
+            if (command.equalsIgnoreCase("bye")) {
+                didUserEnd = true;
+                ui.printGoodbyeMessage();
+                storage.save(tasks);
+            }
             try {
-                if (parser.parse(command) == 1) {
-                    end = true;
-                    ui.printGoodbyeMessage();
-                    storage.save(tasks);
-                }
+                String message = parser.parse(command);
+                ui.printMessage(message);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
             }
+
         }
         sc.close();
     }
 
+
+    public String getResponse(String command) {
+        Parser parser = new Parser(tasks);
+
+        if (command.equalsIgnoreCase("bye")) {
+            return "Bye. Hope to see you again soon!";
+        }
+        String message;
+        try {
+            message = parser.parse(command);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        return message;
+    }
+
     public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+        new Duke().run();
     }
 }

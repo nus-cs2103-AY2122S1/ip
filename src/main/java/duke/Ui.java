@@ -15,6 +15,17 @@ public class Ui {
     }
 
     /**
+     * Prints a given message enclosed with horizontal lines.
+     *
+     * @param message The given message.
+     */
+    public void printMessage(String message) {
+        printLine();
+        System.out.println(message);
+        printLine();
+    }
+
+    /**
      * Prints the welcome message when Duke is ran.
      */
     public void printWelcomeMessage() {

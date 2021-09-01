@@ -36,7 +36,7 @@ public class Parser {
      * @throws DukeException If the user enters an invalid input command, a DukeException
      * will be thrown.
      */
-    public int parse(String command) throws DukeException {
+    public String parse(String command) throws DukeException {
         String[] commandSplit = command.split(" ", 2);
         String commandWord = commandSplit[0].toLowerCase();
         String commandDesc = "";
@@ -52,7 +52,7 @@ public class Parser {
             }
             try {
                 int taskNumber = Integer.parseInt(commandDesc);
-                this.tasks.markDone(taskNumber - 1);
+                tasks.markDone(taskNumber - 1);
             } catch (NumberFormatException e) {
                 System.out.println("\tOOPS!!! Please input a task number instead.");
             }
@@ -66,7 +66,7 @@ public class Parser {
             if (commandDesc.equals("")) {
                 throw new DukeException("\tOOPS!!! The description of a todo cannot be empty.");
             }
-            this.tasks.addTask(new ToDo(commandDesc));
+            tasks.addTask(new ToDo(commandDesc));
 
             break;
         case "deadline":
@@ -79,7 +79,7 @@ public class Parser {
                 String[] dateAndTimeSplit = dateAndTime.split(" ");
                 String date = dateAndTimeSplit[0];
                 String time = dateAndTimeSplit[1];
-                this.tasks.addTask(new Deadline(commandDescSplit[0].trim(), date, time));
+                tasks.addTask(new Deadline(commandDescSplit[0].trim(), date, time));
             } catch (DateTimeParseException e) {
                 throw new DukeException("You've entered a date or time in an invalid format! "
                         + "\nIt should be in the form: yyyy-mm-dd hrs:mins");
@@ -90,7 +90,7 @@ public class Parser {
                 throw new DukeException("\tOOPS!!! The description of a event cannot be empty.");
             }
             String[] commandDescSplit = commandDesc.split("/at");
-            this.tasks.addTask(new Event(commandDescSplit[0].trim(), commandDescSplit[1].trim()));
+            tasks.addTask(new Event(commandDescSplit[0].trim(), commandDescSplit[1].trim()));
 
             break;
         case "delete":
@@ -100,7 +100,7 @@ public class Parser {
             }
             try {
                 int taskNumber = Integer.parseInt(commandDesc);
-                this.tasks.deleteTask(taskNumber - 1);
+                tasks.deleteTask(taskNumber - 1);
             } catch (NumberFormatException e) {
                 System.out.println("\tOOPS!!! Please input a task number instead.");
             }
@@ -109,13 +109,11 @@ public class Parser {
             if (commandDesc.equals("")) {
                 throw new DukeException("\tOOPS!!! The description of a event cannot be empty.");
             }
-            this.tasks.findTask(commandDesc.toLowerCase());
+            tasks.findTask(commandDesc.toLowerCase());
             break;
-        case "bye":
-            return 1;
         default:
             throw new DukeException("\tOOPS!!! You have entered an invalid command, please try again!");
         }
-        return 0;
+        return "";
     }
 }
