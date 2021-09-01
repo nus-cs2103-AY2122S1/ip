@@ -92,7 +92,8 @@ public class Duke {
             } else if (parser.isFind(splitInput[0])) {
                 try {
                     parser.parseFind(splitInput);
-                    TaskList matched = finder.findMatch(splitInput[1], taskList);
+                    String[] splitSearchWords = splitInput[1].split(" ");
+                    TaskList matched = finder.findMatch(taskList, splitSearchWords);
                     response = ui.formatFind(matched);
                 } catch (DukeException e) {
                     response = ui.formatMessage(e.getMessage());

@@ -30,11 +30,13 @@ public class Find {
      * @param taskList The taskList to check against.
      * @return The new taskList with the matched tasks.
      */
-    public TaskList findMatch(String input, TaskList taskList) {
+    public TaskList findMatch(TaskList taskList, String... input) {
         TaskList newList = new TaskList(new ArrayList<>());
         for (Task task : taskList.getEntire()) {
-            if (isMatch(input, task.getDescription())) {
-                newList.add(task);
+            for (String word : input) {
+                if (isMatch(word, task.getDescription())) {
+                    newList.add(task);
+                }
             }
         }
         return newList;
