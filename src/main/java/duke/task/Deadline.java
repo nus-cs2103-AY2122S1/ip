@@ -7,21 +7,31 @@ import java.time.format.DateTimeFormatter;
  * Represents the "Deadline" task type. It encapsulates the Deadline's name, type and deadline.
  */
 public class Deadline extends Task {
-    private String taskName, by, type = "D";
+    private String taskName;
+    private String by;
+    private String type = "D";
     private LocalDate date;
-    private int time, day, month, year;
+    private int time;
+    private int day;
+    private int month;
+    private int year;
 
+    /**
+     * Constructor for a Deadline task.
+     *
+     * @param taskName a short description of the task
+     */
     public Deadline(String taskName) {
-        String[] TaskBySplit = taskName.split("/", 2);
+        String[] taskBySplit = taskName.split("/", 2);
 
         if (taskName.contains("|")) {
-            TaskBySplit = taskName.split("\\|", 2);
+            taskBySplit = taskName.split("\\|", 2);
         } else if (taskName.contains("/by")) {
-            TaskBySplit = taskName.split("/by", 2);
+            taskBySplit = taskName.split("/by", 2);
         }
 
-        this.taskName = TaskBySplit[0].trim();
-        this.by = TaskBySplit[1].trim();
+        this.taskName = taskBySplit[0].trim();
+        this.by = taskBySplit[1].trim();
         String[] dateTimeSplit = this.by.split(" ", 2);
         this.time = Integer.parseInt(dateTimeSplit[1]);
 
@@ -79,13 +89,17 @@ public class Deadline extends Task {
      *
      * @return date of the Deadline task
      */
-    public LocalDate showDate() { return this.date; }
+    public LocalDate showDate() {
+        return this.date;
+    }
 
     /**
      * Returns ths time of the Deadline task in 24-hour format
      *
      * @return time of the Deadline task
      */
-    public int showTime() { return this.time; }
+    public int showTime() {
+        return this.time;
+    }
 
 }

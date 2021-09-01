@@ -75,11 +75,11 @@ public class TaskList {
     public String showList() {
         String fullList = "     " + "Here are the tasks in your list:";
         for (int i = 0; i < list.size(); i++) {
-                String taskItem = "\n" + "     " + (i + 1) + "." + "["
-                        + list.get(i).showType() + "]"
-                        + list.get(i).checkDone() + " "
-                        + list.get(i).showTask();
-                fullList += taskItem;
+            String taskItem = "\n" + "     " + (i + 1) + "." + "["
+                    + list.get(i).showType() + "]"
+                    + list.get(i).checkDone() + " "
+                    + list.get(i).showTask();
+            fullList += taskItem;
         }
         return fullList;
     }
@@ -97,7 +97,7 @@ public class TaskList {
                 refreshList += list.get(j).showType() + " | "
                         + (list.get(j).checkDone().equals("[X]") ? "1" : "0") + " | "
                         + list.get(j).showTaskOnly() + " | "
-                        + list.get(j).showWhen()+ "\n";
+                        + list.get(j).showWhen() + "\n";
             } else {
                 refreshList += list.get(j).showType() + " | "
                         + (list.get(j).checkDone().equals("[X]") ? "1" : "0") + " | "

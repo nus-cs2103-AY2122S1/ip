@@ -1,14 +1,18 @@
 package duke.io;
 
-import duke.exception.DukeException;
-import duke.task.*;
-
 import java.io.File;
-import java.io.FileWriter;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.ToDo;
 
 /**
  * Storage class encapsulates a I/O system that reads and writes to an
@@ -39,7 +43,7 @@ public class Storage {
         ArrayList<Task> loadedList = new ArrayList<>();
         Scanner listScan;
 
-        try{
+        try {
             listScan = new Scanner(new File(HOME + dukeText));
         } catch (FileNotFoundException f) {
             throw new DukeException("Unable to retrieve file. Creating a new list!");
@@ -78,6 +82,8 @@ public class Storage {
                 }
                 loadedList.add(event);
                 break;
+            default:
+                break;
             }
         }
 
@@ -95,14 +101,13 @@ public class Storage {
      * @throws DukeException
      */
     public void save(String textToAppend, boolean appendStatus) throws DukeException {
-        try{
+        try {
             FileWriter writeToFile = new FileWriter(HOME + dukeText, appendStatus);
             writeToFile.write(textToAppend);
             writeToFile.close();
         } catch (IOException i) {
             throw new DukeException("The file that you requested cannot be found.");
         }
-
     }
 
     /**
@@ -111,7 +116,7 @@ public class Storage {
      * @param taskList new taskList to re-write to the text file
      * @throws DukeException
      */
-    public void rewrite(TaskList taskList) throws DukeException{
+    public void rewrite(TaskList taskList) throws DukeException {
         try {
             FileWriter rewriteFile = new FileWriter(HOME + dukeText);
             rewriteFile.write(taskList.refreshList());
@@ -119,6 +124,5 @@ public class Storage {
         } catch (IOException i) {
             throw new DukeException("The file that you requested cannot be found.");
         }
-
     }
 }
