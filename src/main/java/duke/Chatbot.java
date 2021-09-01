@@ -13,7 +13,7 @@ public class Chatbot {
      */
     private enum ChatCommands {
         CHAT_COMMAND_BYE("bye"),
-        CHAT_COMMAND_LIST("list");
+        CHAT_COMMAND_LIST("list"),
         CHAT_COMMAND_FIND("find");
 
         private final String command;
@@ -64,7 +64,7 @@ public class Chatbot {
     /**
      * @ChatContinue are enumerations to indicate if a chat should continue or terminate.
      */
-    protected enum ChatContinue {
+    public enum ChatContinue {
         CHAT_CONTINUE,
         CHAT_END,
     }
@@ -121,6 +121,18 @@ public class Chatbot {
      */
     private ChatContinue interpret() throws DukeIOException, DukeDateParseException, DukeArgumentException {
         String input = scanner.nextLine();
+        return guiInterpret(input);
+    }
+
+    /**
+     * @guiInterpret contains the logic to understand user inputs.
+     *
+     * @return ChatContinue enum to indicate if the chat should continue or terminate.
+     * @throws DukeIOException thrown by TaskList.addTask method, if fails to store in FileDB.
+     * @throws DukeDateParseException thrown by TaskList.addTask method, if fails to parse the date.
+     * @throws DukeArgumentException if not enough arguments are given to TaskCommand methods.
+     */
+    public ChatContinue guiInterpret(String input) throws DukeIOException, DukeDateParseException, DukeArgumentException {
         String[] parseInput = input.split(" ", 2);
         ChatCommands command = ChatCommands.toEnum(parseInput[0]);
         if (command != null) {
@@ -143,7 +155,7 @@ public class Chatbot {
      * @param command the user's input.
      * @return ChatContinue enums to indicate if a chat should continue or terminnate.
      */
-    private ChatContinue builtInCommands(ChatCommands command) {
+    private ChatContinue builtInCommands(ChatCommands command, String argument) {
         switch (command) {
         case CHAT_COMMAND_BYE:
             return this.farewell();
@@ -151,9 +163,8 @@ public class Chatbot {
             return this.taskList.list(this.ui);
         case CHAT_COMMAND_FIND:
                 TaskList findTaskList = this.taskList.findTasks(argument);
-                System.out.println(findTaskList.tasks.size());
                 System.out.println(findTaskList.list(this.ui));
-                return ChatContinue.CONTINUE;
+                return ChatContinue.CHAT_CONTINUE;
         default:
             this.ui.showNotSupported();
             return ChatContinue.CHAT_END;

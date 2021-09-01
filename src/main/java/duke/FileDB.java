@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 public class FileDB {
     /** Defines a default saved file location. */
-    private static String DEFAULT_SAVE = "ip/src/main/resources/storage.txt";
+    private static String DEFAULT_SAVE = "storage.txt";
     private File fileDB;
     private boolean isFileExists;
     private Parser parser;
