@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks) {
 
 
         // Check if user is attempting to mark a task as done.
@@ -38,8 +38,6 @@ public class DeleteCommand extends Command {
         // Remove the task from the store.
         Task task = tasks.delete(taskPosition - 1);
 
-        ui.notifyDelete(task, tasks.size());
-
-        return false;
+        return Ui.notifyDelete(task, tasks.size());
     }
 }

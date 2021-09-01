@@ -20,7 +20,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks) {
 
         // Check if user is attempting to find a task
         Matcher matcher =  PATTERN_FIND.matcher(input);
@@ -32,8 +32,6 @@ public class FindCommand extends Command {
 
         List<TaskList.FindResult> results = tasks.find(prompt);
 
-        ui.notifyFindResults(results);
-
-        return false;
+        return Ui.notifyFindResults(results);
     }
 }

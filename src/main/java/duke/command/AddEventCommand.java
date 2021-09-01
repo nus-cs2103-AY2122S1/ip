@@ -23,7 +23,7 @@ public class AddEventCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks) {
         Matcher matcher = PATTERN_EVENT.matcher(input);
         if (!matcher.find()) {
             throw new DukeException("Tell me an event like this: event <task> /at YYYY-MM-DD");
@@ -37,7 +37,6 @@ public class AddEventCommand extends Command {
         tasks.add(event);
 
         // Inform user
-        ui.notifyAdd(event, tasks.size());
-        return false;
+        return Ui.notifyAdd(event, tasks.size());
     }
 }

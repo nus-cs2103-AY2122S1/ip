@@ -23,7 +23,7 @@ public class AddTodoCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks) {
         Matcher matcher = PATTERN_TODO.matcher(input);
         if (!matcher.find()) {
             throw new DukeException("Give me a description of the todo to add it as a task");
@@ -36,8 +36,6 @@ public class AddTodoCommand extends Command {
         tasks.add(todo);
 
         // Inform user
-        ui.notifyAdd(todo, tasks.size());
-
-        return false;
+        return Ui.notifyAdd(todo, tasks.size());
     }
 }
