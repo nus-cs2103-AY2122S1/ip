@@ -12,14 +12,14 @@ import java.nio.file.Paths;
 import java.util.Scanner;
 
 /**
- * Class that encapsulates all the methods relevant to storing of the tasks in a hard drive
+ * Class that encapsulates all the methods relevant to storing of the tasks in a hard drive.
  */
 public class Storage {
 
     private final File file;
 
     /**
-     * Pubic constructor for storage class that takes in a file to write data to
+     * Pubic constructor for storage class that takes in a file to write data to.
      *
      * @param file
      */
@@ -29,7 +29,7 @@ public class Storage {
 
     /**
      * Method that loads the file, by creating it if it does not exist and adds the format
-     * of the file to the top and clears all previous data before starting
+     * of the file to the top and clears all previous data before starting.
      *
      * @return Printwriter instance to write data into file
      * @throws IOException
@@ -51,7 +51,7 @@ public class Storage {
     }
 
     /**
-     * Method that writes data into the file
+     * Method that writes data into the file.
      * @param writer
      * @param task
      */
@@ -62,7 +62,7 @@ public class Storage {
 
 
     /**
-     * Method that edits tasks in the file and marks them as deleted
+     * Method that edits tasks in the file and marks them as deleted.
      *
      * @param file
      * @param task
@@ -93,7 +93,7 @@ public class Storage {
     }
 
     /**
-     * Method that edits tasks in file and marks them as completed
+     * Method that edits tasks in file and marks them as completed.
      *
      * @param file
      * @param task

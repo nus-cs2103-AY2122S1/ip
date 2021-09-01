@@ -44,14 +44,14 @@ public class Ui {
     }
 
     /**
-     * Method to show welcome message to user
+     * Method to show welcome message to user.
      */
     public static void showWelcomeMessage() {
         showToUser(LOGO, WELCOME_MESSAGE, LINE, HELP_MESSAGE, LINE);
     }
 
     /**
-     * Method to show message to warn user that task number is missing
+     * Method to show message to warn user that task number is missing.
      */
     public static void showWarningMissingNumber() {
         String message = "OOPS!!! To delete a task, the task number must be stated.";
@@ -59,7 +59,7 @@ public class Ui {
     }
 
     /**
-     * Method to show message to warn user that keyword is missing
+     * Method to show message to warn user that keyword is missing.
      */
     public static void showWarningMissingKeyword() {
         String message = "OOPS!!! To find a task, a keyword must be stated.";
@@ -88,7 +88,7 @@ public class Ui {
     }
 
     /**
-     * Method to show goodbye message when user exits programme with command bye
+     * Method to show goodbye message when user exits programme with command bye.
      */
     public static void showGoodbyeMessage() {
         String message = "     Bye. Hope to see you again soon!";
@@ -96,7 +96,7 @@ public class Ui {
     }
 
     /**
-     * Method to show message prompting user that command is invalid or wrong
+     * Method to show message prompting user that command is invalid or wrong.
      */
     public static void showInvalidInputMessage() {
         String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
@@ -104,7 +104,7 @@ public class Ui {
     }
 
     /**
-     * Method to show message after successfully marking task as complete
+     * Method to show message after successfully marking task as complete.
      */
     public static void showCompletedMessage() {
         String message = "Nice! I've marked this task as done:";
@@ -112,14 +112,14 @@ public class Ui {
     }
 
     /**
-     * Method to show line divider
+     * Method to show line divider.
      */
     public static void showLine() {
         System.out.println(LINE);
     }
 
     /**
-     * Method to show added task, along with uodated number of tasks in list
+     * Method to show added task, along with uodated number of tasks in list.
      * @param taskName
      * @param numTasks
      */
@@ -130,7 +130,7 @@ public class Ui {
     }
 
     /**
-     * Shows list of all the tasks that have not been deleted
+     * Shows list of all the tasks that have not been deleted.
      */
     public static void showList() {
         String message = "Here are the tasks in your list:";
@@ -138,7 +138,7 @@ public class Ui {
     }
 
     /**
-     * Shows message if number does not correspond to any task
+     * Shows message if number does not correspond to any task.
      */
     public static void showNoTask() {
         String message = "No such task exists.";
@@ -146,7 +146,7 @@ public class Ui {
     }
 
     /**
-     * Show message upon successfully deleting a task
+     * Show message upon successfully deleting a task.
      */
     public static void showSuccessfulDelete() {
         String successfulMessage = "Noted I've removed this task:";
@@ -154,7 +154,7 @@ public class Ui {
     }
 
     /**
-     * Shows updated number of tasks in the list
+     * Shows updated number of tasks in the list.
      * @param numTasks
      */
     public static void showUpdatedNumber(int numTasks) {
@@ -163,7 +163,7 @@ public class Ui {
     }
 
     /**
-     * Shows message that warns user that due date of a deadline cannot be empty
+     * Shows message that warns user that due date of a deadline cannot be empty.
      */
     public static void showMissingDeadline() {
         System.out.println("---------------------------------------------");
@@ -173,7 +173,7 @@ public class Ui {
     }
 
     /**
-     * Shows message that warns user that details of an event cannot be empty
+     * Shows message that warns user that details of an event cannot be empty.
      */
     public static void showMissingEventDetails() {
         System.out.println("---------------------------------------------");
@@ -183,7 +183,7 @@ public class Ui {
     }
 
     /**
-     * Shows message upon successful search of keyword
+     * Shows message upon successful search of keyword.
      */
     public static void showSuccessfulFind() {
         String message = "Here are the matching tasks in your list:";
@@ -191,21 +191,21 @@ public class Ui {
     }
 
     /**
-     * Shows message upon unsuccessful search of keyword
+     * Shows message upon unsuccessful search of keyword.
      */
     public static void showUnsuccessfulFind() {
         showToUser("There are no tasks with this keyword.");
     }
 
     /**
-     * Shows all tasks with keyword
+     * Shows all tasks with keyword.
      */
     public static void showResults(int count, String description) {
         System.out.println(count + ". " + description);
     }
 
     /**
-     * method that takes in mutliple strings to form a message shown to the user
+     * Method that takes in mutliple strings to form a message shown to the user.
      * @param message
      */
     public static void showToUser(String... message) {

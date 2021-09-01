@@ -5,14 +5,14 @@ import duke.Ui;
 import duke.exceptions.MissingEventDetailsException;
 
 /**
- * Class that extends from task and represents an event task
+ * Class that extends from task and represents an event task.
  */
 public class Event extends Task {
     protected String details;
     protected String taskType;
 
     /**
-     * Public constructor of the event class
+     * Public constructor of the event class.
      *
      * @param description
      * @param details
@@ -24,7 +24,7 @@ public class Event extends Task {
     }
 
     /**
-     * Gets the task type of an event instance
+     * Gets the task type of an event instance.
      *
      * @return E meaning event
      */
@@ -34,7 +34,7 @@ public class Event extends Task {
     }
 
     /**
-     * Marks the event as done
+     * Marks the event as done.
      */
     @Override
     public void markAsDone() {
@@ -43,10 +43,10 @@ public class Event extends Task {
     }
 
     /**
-     * Gets the description of an event task after the 'event' keyword
+     * Gets the description of an event task after the 'event' keyword.
      *
      * @param input
-     * @return Description of an event task after the 'event' keyword
+     * @return Description of an event task after the 'event' keyword.
      * @throws MissingEventDetailsException
      */
     public static String getEventDescription(String input) throws MissingEventDetailsException {
@@ -61,7 +61,7 @@ public class Event extends Task {
     }
 
     /**
-     * Gets the event details such as date and time
+     * Gets the event details such as date and time.
      *
      * @param input
      * @return Date and/or time of event
@@ -72,9 +72,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the string representation of an event
+     * Returns the string representation of an event.
      *
-     * @return String representation of an event
+     * @return String representation of an event.
      */
     @Override
     public String toString() {

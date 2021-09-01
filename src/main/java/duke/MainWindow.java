@@ -51,10 +51,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() throws IOException {
-//        Files.createDirectories(Paths.get("data/"));
-//        File dukeFile = new File("data/duke.txt");
-//        duke = new Duke(dukeFile);
-
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(

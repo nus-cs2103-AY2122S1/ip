@@ -32,7 +32,7 @@ public class TaskList {
     }
 
     /**
-     * Add task to list and shows message to user
+     * Add task to list and shows message to user.
      *
      * @param newTask
      */
@@ -74,7 +74,7 @@ public class TaskList {
     }
 
     /**
-     * Getter to get the arraylist of tasks
+     * Getter to get the arraylist of tasks.
      *
      * @return Arraylist of tasks
      */
@@ -83,7 +83,7 @@ public class TaskList {
     }
 
     /**
-     * Getter to get individual tasks from arraylist
+     * Getter to get individual tasks from arraylist.
      * @param id
      * @return Individual tasks
      */
@@ -102,30 +102,10 @@ public class TaskList {
 
     /**
      * Allows users to find a task by searching for a keyword
-     * and using command 'find'
+     * and using command 'find'.
      *
      * @param keyword
      */
-//    public void findTasks(String keyword) {
-//        int count = 0;
-//        Ui.showSuccessfulFind();
-//        for (int i = 0; i < this.tasks.size(); i++) {
-//            String taskDescription = this.getIndividualTask(i).toString();
-//
-//            int index = taskDescription.indexOf(keyword);
-//
-//            if (index != -1) {
-//                count += 1;
-//                Ui.showResults(count, taskDescription);
-//            }
-//        }
-//
-//        if (count == 0) {
-//            Ui.showUnsuccessfulFind();
-//        }
-//
-//        Ui.showLine();
-//    }
     public String findTasks(String keyword) {
         int count = 0;
         Ui.showSuccessfulFind();

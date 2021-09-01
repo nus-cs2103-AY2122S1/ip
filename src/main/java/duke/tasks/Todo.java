@@ -1,13 +1,13 @@
 package duke.tasks;
 
 /**
- * Class that extends from task and represents an todo task
+ * Class that extends from task and represents an todo task.
  */
 public class Todo extends Task {
     protected String taskType;
 
     /**
-     * Public constructor of event class
+     * Public constructor of event class.
      * @param description
      */
     public Todo(String description) {
@@ -16,7 +16,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Gets task type of the todo instance
+     * Gets task type of the todo instance.
      *
      * @return "T" meaning todo
      */
@@ -26,7 +26,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Marks task as completed
+     * Marks task as completed.
      */
     @Override
     public void markAsDone() {
@@ -35,7 +35,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Gives string representation of the todo task
+     * Gives string representation of the todo task.
      *
      * @return String representation of the todo task
      */

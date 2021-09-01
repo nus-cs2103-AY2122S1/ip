@@ -4,14 +4,14 @@ import duke.tasks.Task;
 
 public class Response {
     /**
-     * Method to show message to warn user that task number is missing
+     * Method to show message to warn user that task number is missing.
      */
     public static String showWarningMissingNumber() {
         return "OOPS!!! To delete a task, the task number must be stated.";
     }
 
     /**
-     * Method to show message to warn user that keyword is missing
+     * Method to show message to warn user that keyword is missing.
      */
     public static String showWarningMissingKeyword() {
         return "OOPS!!! To find a task, a keyword must be stated.";
@@ -35,21 +35,21 @@ public class Response {
     }
 
     /**
-     * Method to show goodbye message when user exits programme with command bye
+     * Method to show goodbye message when user exits programme with command bye.
      */
     public static String showGoodbyeMessage() {
         return "     Bye. Hope to see you again soon!";
     }
 
     /**
-     * Method to show message prompting user that command is invalid or wrong
+     * Method to show message prompting user that command is invalid or wrong.
      */
     public static String showInvalidInputMessage() {
         return "OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     /**
-     * Method to show message after successfully marking task as complete
+     * Method to show message after successfully marking task as complete.
      */
     public static String showCompletedMessage(Task task) {
         String message = "Nice! I've marked this task as done:\n";
@@ -57,7 +57,7 @@ public class Response {
     }
 
     /**
-     * Method to show added task, along with uodated number of tasks in list
+     * Method to show added task, along with updated number of tasks in list.
      * @param task
      * @param numTasks
      */
@@ -68,7 +68,7 @@ public class Response {
     }
 
     /**
-     * Shows list of all the tasks that have not been deleted
+     * Shows list of all the tasks that have not been deleted.
      */
     public static String showList(TaskList tasklist) {
         String output = "Here are the tasks in your list:\n";
@@ -80,14 +80,14 @@ public class Response {
     }
 
     /**
-     * Shows message if number does not correspond to any task
+     * Shows message if number does not correspond to any task.
      */
     public static String showNoTask() {
         return "No such task exists.";
     }
 
     /**
-     * Show message upon successfully deleting a task
+     * Show message upon successfully deleting a task.
      */
     public static String showSuccessfulDelete(Task task, int num) {
         return "Noted I've removed this task:\n"
@@ -96,7 +96,7 @@ public class Response {
     }
 
     /**
-     * Shows message that warns user that due date of a deadline cannot be empty
+     * Shows message that warns user that due date of a deadline cannot be empty.
      */
     public static String showMissingDeadline() {
         return "OOPS!!! The due date of a deadline cannot be empty.\n" +
@@ -104,7 +104,7 @@ public class Response {
     }
 
     /**
-     * Shows message that warns user that details of an event cannot be empty
+     * Shows message that warns user that details of an event cannot be empty.
      */
     public static String showMissingEventDetails() {
         return "OOPS!!! The details of an event cannot be empty.\n " +
@@ -112,21 +112,21 @@ public class Response {
     }
 
     /**
-     * Shows message upon successful search of keyword
+     * Shows message upon successful search of keyword.
      */
     public static String showSuccessfulFind() {
         return "Here are the matching tasks in your list:";
     }
 
     /**
-     * Shows message upon unsuccessful search of keyword
+     * Shows message upon unsuccessful search of keyword.
      */
     public static String showUnsuccessfulFind() {
         return "There are no tasks with this keyword.";
     }
 
     /**
-     * Shows all tasks with keyword
+     * Shows all tasks with keyword.
      */
     public static String showResults(String output, int count, String description) {
         return output + count + ". " + description + "\n";

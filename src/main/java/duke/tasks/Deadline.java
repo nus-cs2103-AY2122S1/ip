@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Class that extends from task and has additional class variables
- * toCompleteBy which is the due date, the task type and time it is due by
+ * toCompleteBy which is the due date, the task type and time it is due by.
  */
 public class Deadline extends Task {
     protected LocalDate toCompleteBy;
@@ -18,7 +18,7 @@ public class Deadline extends Task {
 
     /**
      * Public constructor of the class that takes in description,
-     * due date and time it is due by
+     * due date and time it is due by.
      *
      * @param description
      * @param toCompleteBy
@@ -32,7 +32,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the task type of an instance
+     * Gets the task type of an instance.
      *
      * @return D meaning Deadline
      */
@@ -42,7 +42,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Marks Deadline as done, overrides the method in Task class
+     * Marks Deadline as done, overrides the method in Task class.
      */
     @Override
     public void markAsDone() {
@@ -51,7 +51,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the description of the deadline task that comes after the keyword deadline
+     * Gets the description of the deadline task that comes after the keyword deadline.
+     *
      * @param input
      * @return Description of the deadline task that comes after the keyword deadline
      * @throws MissingDueDateDescriptionException
@@ -68,7 +69,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the due date and time from the users input
+     * Gets the due date and time from the users input.
      *
      * @param input
      * @return Due date and time from the users input
@@ -79,9 +80,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the date the deadline is due by
+     * Gets the date the deadline is due by.
+     *
      * @param input
-     * @return Date the deadline is due by
+     * @return Date the deadline is due by.
      */
     public static LocalDate getDate(String input) {
         String[] strArr = input.split("/by ", 2); // {desc, yyyy-mm-dd time}
@@ -90,9 +92,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the time the deadline is due by
+     * Gets the time the deadline is due by.
+     *
      * @param input
-     * @return Time the deadline is due by
+     * @return Time the deadline is due by.
      */
     public static String getTime(String input) {
         String[] strArr = input.split("/by ", 2); // {desc, yyyy-mm-dd time}
@@ -101,8 +104,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Converts the task into a string in the right format
-     * @return String of the task in the right format
+     * Converts the task into a string in the right format.
+     *
+     * @return String of the task in the right format.
      */
     @Override
     public String toString() {

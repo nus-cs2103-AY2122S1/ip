@@ -11,7 +11,7 @@ public class Task {
     protected String taskType;
 
     /**
-     * Public constructor of task class
+     * Public constructor of task class.
      *
      * @param description
      */
@@ -22,7 +22,7 @@ public class Task {
     }
 
     /**
-     * Gets the status icon of the task, if its done, the status icon is X, else it is " "
+     * Gets the status icon of the task, if its done, the status icon is X, else it is " ".
      *
      * @return Status icon of task
      */
@@ -31,7 +31,7 @@ public class Task {
     }
 
     /**
-     * Marks task as done and changes the status of the task
+     * Marks task as done and changes the status of the task.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -40,18 +40,18 @@ public class Task {
     }
 
     /**
-     * Gets the task type of the instance
+     * Gets the task type of the instance.
      *
-     * @return Task type of the instance
+     * @return Task type of the instance.
      */
     public String getTaskType() {
         return this.taskType;
     }
 
     /**
-     * String representation of a task instance
+     * String representation of a task instance.
      *
-     * @return String representation of a task instance
+     * @return String representation of a task instance.
      */
     @Override
     public String toString() {

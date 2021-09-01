@@ -46,7 +46,7 @@ public class Parser {
     }
 
     /**
-     * Takes in user input and returns the keyword after 'find' command
+     * Takes in user input and returns the keyword after 'find' command.
      *
      * @param input
      * @return Keyword after 'find' command
@@ -64,7 +64,7 @@ public class Parser {
     }
 
     /**
-     * Gets the description of the task after the command word from user's input
+     * Gets the description of the task after the command word from user's input.
      *
      * @param input
      * @return description of the task
@@ -83,7 +83,7 @@ public class Parser {
 
     /**
      * Identifies the type of task and creates an instance of the subclasses of Task
-     * such as Todo, Deadline and Event
+     * such as Todo, Deadline and Event.
      *
      * @param input
      * @return New instance of subclass of task
@@ -111,7 +111,7 @@ public class Parser {
 
     /**
      * Parses the string input of the user to get the command keyword in order to
-     * carry out the action such as add, delete, complete and exit
+     * carry out the action such as add, delete, complete and exit.
      *
      * @param taskList
      * @param file

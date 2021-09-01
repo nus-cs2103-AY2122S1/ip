@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- *  Duke class that contains run and main method to run the program
+ *  Duke class that contains run and main method to run the program.
  *
  * @author Chua Sue-Ann
  */
