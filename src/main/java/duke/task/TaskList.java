@@ -1,14 +1,19 @@
 package duke.task;
 
-import duke.util.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
+
 import duke.util.Parser;
+import duke.util.Ui;
+
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.text.ParseException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import java.util.ArrayList;
 
 /**
@@ -56,29 +61,30 @@ public class TaskList {
     }
 
     /**
-     * Prints all the tasks in list.
+     * Returns string of tasks in list.
+     *
+     * @return String representation of list
      */
-    public void printTasksInList() {
-        System.out.println("Here are the tasks in your list:");
-        for (int i = 0; i < tasks.size(); i++) {
-            ui.showTask(tasks.get(i), i + 1);
-        }
+    public String printTasksInList() {
+        return ui.getTasks(tasks);
     }
 
     /**
-     * Prints tasks in list that match keyword.
+     * Returns tasks in list that match keyword.
      *
      * @param keyword Keyword to match in task list
+     * @return String representation of matching tasks
      */
-    public void findMatchingTasks(String keyword) {
+    public String findMatchingTasks(String keyword) {
+        ArrayList<Task> matchingTasks = new ArrayList<Task>();
         System.out.println("Here are the matching tasks in your list:");
-        int i = 1;
         for (Task task : tasks) {
             if (task.hasKeyword(keyword)) {
-                ui.showTask(task, i);
-                i++;
+                matchingTasks.add(task);
             }
         }
+        TaskList matchingList = new TaskList(matchingTasks);
+        return matchingList.printTasksInList();
     }
 
     /**
@@ -164,18 +170,6 @@ public class TaskList {
         for (Task tasks : tasks) {
             writer.write(tasks.saveTaskFormat() + System.lineSeparator());
         }
-    }
-
-    /**
-     * Returns string of tasks in list.
-     * @return String representation of tasks in list
-     */
-    public String getTasks() {
-        String list = "Here are the tasks in your list:\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            list += String.format("\t%s.%s\n", i + 1, tasks.get(i).toString());
-        }
-        return list;
     }
 
 }

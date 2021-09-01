@@ -27,21 +27,21 @@ public class ParserTest {
 
         Parser.parse("todo clean", taskList, ui, storage);
         assertEquals("Here are the tasks in your list:\n" + "\t1.[T][ ] clean\n",
-                taskList.getTasks());
+                taskList.printTasksInList());
 
         Parser.parse("deadline test /by 10 Oct 2021", taskList, ui, storage);
         assertEquals("Here are the tasks in your list:\n" + "\t1.[T][ ] clean\n"
-                + "\t2.[D][ ] test (by: 2021-10-10)\n", taskList.getTasks());
+                + "\t2.[D][ ] test (by: 2021-10-10)\n", taskList.printTasksInList());
 
         Parser.parse("deadline     test 2    /by 09 Jun 2021", taskList, ui, storage);
         assertEquals("Here are the tasks in your list:\n" + "\t1.[T][ ] clean\n"
                 + "\t2.[D][ ] test (by: 2021-10-10)\n" + "\t3.[D][ ] test 2 (by: 2021-06-09)\n",
-                taskList.getTasks());
+                taskList.printTasksInList());
 
         Parser.parse("event test 3 /at 10 Jun 2021", taskList, ui, storage);
         assertEquals("Here are the tasks in your list:\n" + "\t1.[T][ ] clean\n"
                 + "\t2.[D][ ] test (by: 2021-10-10)\n" + "\t3.[D][ ] test 2 (by: 2021-06-09)\n"
-                + "\t4.[E][ ] test 3 (at: 2021-06-10)\n", taskList.getTasks());
+                + "\t4.[E][ ] test 3 (at: 2021-06-10)\n", taskList.printTasksInList());
     }
 
 
@@ -92,14 +92,14 @@ public class ParserTest {
         TaskList taskList = new TaskList(list);
 
         String[] input = "done 1".split(" ");
-        Parser.hasParsedDone(taskList, input);
+        Parser.parseDone(taskList, input);
         assertEquals("Here are the tasks in your list:\n" + "\t1.[T][X] run\n"
-                + "\t2.[D][ ] paint (by: 2020-10-10)\n", taskList.getTasks());
+                + "\t2.[D][ ] paint (by: 2020-10-10)\n", taskList.printTasksInList());
 
         String[] nextInput = "done 2".split(" ");
-        Parser.hasParsedDone(taskList, nextInput);
+        Parser.parseDone(taskList, nextInput);
         assertEquals("Here are the tasks in your list:\n"
-                + "\t1.[T][X] run\n" + "\t2.[D][X] paint (by: 2020-10-10)\n", taskList.getTasks());
+                + "\t1.[T][X] run\n" + "\t2.[D][X] paint (by: 2020-10-10)\n", taskList.printTasksInList());
     }
 
     @Test
@@ -111,18 +111,18 @@ public class ParserTest {
 
         String[] input1 = "done".split(" ");
         Throwable exception = assertThrows(DukeException.class,
-                () -> Parser.hasParsedDone(taskList, input1));
+                () -> Parser.parseDone(taskList, input1));
         assertEquals("No task number entered!", exception.getMessage());
 
         String[] input2 = "done 3".split(" ");
         exception = assertThrows(InvalidTaskDoneException.class,
-                () -> Parser.hasParsedDone(taskList, input2));
+                () -> Parser.parseDone(taskList, input2));
         assertEquals("OOPS! You are setting a non-existent task as done!",
                 exception.getMessage());
 
         String[] input3 = "done 0".split(" ");
         exception = assertThrows(InvalidTaskDoneException.class,
-                () -> Parser.hasParsedDone(taskList, input3));
+                () -> Parser.parseDone(taskList, input3));
         assertEquals("OOPS! You are setting a non-existent task as done!",
                 exception.getMessage());
     }
@@ -136,14 +136,14 @@ public class ParserTest {
         TaskList taskList = new TaskList(list);
 
         String[] input = "delete 1".split(" ");
-        Parser.hasParsedDelete(taskList, input);
+        Parser.parseDelete(taskList, input);
         assertEquals("Here are the tasks in your list:\n" + "\t1.[D][ ] paint (by: 2020-10-10)\n"
-                + "\t2.[E][ ] funfair (at: 2021-09-08)\n", taskList.getTasks());
+                + "\t2.[E][ ] funfair (at: 2021-09-08)\n", taskList.printTasksInList());
 
         String[] nextInput = "delete 2".split(" ");
-        Parser.hasParsedDelete(taskList, nextInput);
+        Parser.parseDelete(taskList, nextInput);
         assertEquals("Here are the tasks in your list:\n"
-                + "\t1.[D][ ] paint (by: 2020-10-10)\n", taskList.getTasks());
+                + "\t1.[D][ ] paint (by: 2020-10-10)\n", taskList.printTasksInList());
     }
 
     @Test
@@ -155,18 +155,18 @@ public class ParserTest {
 
         String[] input1 = "delete".split(" ");
         Throwable exception = assertThrows(DukeException.class,
-                () -> Parser.hasParsedDelete(taskList, input1));
+                () -> Parser.parseDelete(taskList, input1));
         assertEquals("No task number entered!", exception.getMessage());
 
         String[] input2 = "delete 3".split(" ");
         exception = assertThrows(InvalidTaskDeletionException.class,
-                () -> Parser.hasParsedDelete(taskList, input2));
+                () -> Parser.parseDelete(taskList, input2));
         assertEquals("OOPS! You are trying to delete a non-existent task!",
                 exception.getMessage());
 
         String[] input3 = "delete 0".split(" ");
         exception = assertThrows(InvalidTaskDeletionException.class,
-                () -> Parser.hasParsedDelete(taskList, input3));
+                () -> Parser.parseDelete(taskList, input3));
         assertEquals("OOPS! You are trying to delete a non-existent task!",
                 exception.getMessage());
     }

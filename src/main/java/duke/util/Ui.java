@@ -1,6 +1,8 @@
 package duke.util;
 
 import duke.task.Task;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -8,40 +10,22 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner scanner = new Scanner(System.in);
-    private static final String HORIZONTAL_LINE = "----------------------------------------------------";
     private static final String WELCOME_MESSAGE= "Hello! I'm Duke " +
-            "What can I do for you?\n\n" + HORIZONTAL_LINE + "-----------------------------\n" +
-            "|\tPlease enter one of the following commands:                                  |\n" +
-            "|\t1. todo <description> (eg. todo paint)                                       |\n" +
-            "|\t2. deadline <description> /by <date> (e.g deadline submit hw /by 2020-01-01) |\n" +
-            "|\t3. event <description> /at <date> (e.g event party /at 2020-01-01)           |\n" +
-            "|\t4. list - see list of tasks added                                            |\n" +
-            "|\t5. delete <task number> (e.g delete 1) - delete a task from list             |\n" +
-            "|\t6. done <task number> (e.g done 1) - mark a task in list as done             |\n" +
-            "|\t7. bye - exit duke                                                           |\n" +
-            HORIZONTAL_LINE + "-----------------------------\n";
+            "What can I do for you?\n\n" +
+            "Please enter one of the following commands:\n" +
+            "- todo <description> \n" +
+            "- deadline <description> /by <date> \n  of format dd MMM yyyy\n" +
+            "- event <description> /at <date>\n  of format dd MMM yyyy\n" +
+            "- list: see task list\n" +
+            "- delete <task no.>\n" +
+            "- done <task no.>\n" +
+            "- bye: exit duke\n";
 
     /**
-     * Prints welcome message.
+     * Returns welcome message.
      */
-    public void showWelcome() {
-        System.out.println(WELCOME_MESSAGE);
-    }
-
-    /**
-     * Returns string of user command entered.
-     *
-     * @return String representation of user input
-     */
-    public String readCommand() {
-        return scanner.nextLine().trim();
-    }
-
-    /**
-     * Prints horizontal line.
-     */
-    public void showLine() {
-        System.out.println(HORIZONTAL_LINE);
+    public String showWelcome() {
+        return WELCOME_MESSAGE;
     }
 
     /**
@@ -54,7 +38,6 @@ public class Ui {
     public String showTaskAdded(Task task, int listLength) {
         String output = String.format("added: " + task.toString()
                 + "\nNow you have %s tasks in your list" , listLength);
-        System.out.println(output);
         return output;
     }
 
@@ -68,7 +51,6 @@ public class Ui {
     public String showTaskDeleted(Task task, int listLength) {
         String output = String.format("Noted. I've removed this task:\n" + task.toString()
                 + "\nNow you have %s tasks in your list\n" , listLength);
-        System.out.println(output);
         return output;
     }
 
@@ -81,25 +63,31 @@ public class Ui {
     public String showTaskDone(Task task) {
         String output = "Nice! I've marked this task as done:\n"
                 + task.toString();
-        System.out.println(output);
         return output;
     }
 
     /**
-     * Prints task number in list and task details.
+     * Returns string message for bye.
      *
-     * @param task Task to be printed
-     * @param listPosition Index of task in list
+     * @return String representation for bye
      */
-    public void showTask(Task task, int listPosition) {
-        System.out.printf("\t%s." + task.toString() + "%n", listPosition);
+    public String showBye() {
+        String str = "Bye! Hope to see you again soon!";
+        System.out.println("Bye! Hope to see you again soon!");
+        return str;
     }
 
     /**
-     * Prints bye message.
+     * Returns string of tasks in list.
+     *
+     * @return String representation of tasks in list
      */
-    public void showBye() {
-        System.out.println("Bye! Hope to see you again soon!");
+    public String getTasks(ArrayList<Task> tasks) {
+        String list = "Here are the tasks in your list:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            list += String.format("\t%s.%s\n", i + 1, tasks.get(i).toString());
+        }
+        return list;
     }
 
 
@@ -109,8 +97,9 @@ public class Ui {
      * @param message Error message
      * @return String representation of error
      */
-    public void showError(String message) {
+    public String showError(String message) {
         System.out.println(message);
+        return message;
     }
 
 }
