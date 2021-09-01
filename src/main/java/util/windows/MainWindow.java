@@ -1,29 +1,27 @@
 package util.windows;
 
+import java.io.IOException;
+
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
-
-
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import util.controller.Duke;
 import util.tasks.Task;
 
-import java.io.IOException;
-import java.util.concurrent.CompletableFuture;
+
+
 
 
 /**
@@ -52,6 +50,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+
+    /**
+     *Method called after the fields have been initialized in fxml.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -59,7 +61,6 @@ public class MainWindow extends AnchorPane {
         //To bind the width of the scroll pane to the dialog container
         scrollPane.fitToWidthProperty().bind(dialogContainer.fillWidthProperty());
         listOfTasks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        
     }
 
     /**
