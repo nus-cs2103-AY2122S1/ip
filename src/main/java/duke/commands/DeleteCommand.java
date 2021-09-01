@@ -35,7 +35,7 @@ public class DeleteCommand extends Command {
      * @throws DukeException If the file that act as storage can not be found.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index <= 0 || index > tasks.size()) {
             throw new DukeException("Looks like there is no such task to be deleted");
         }
@@ -46,6 +46,6 @@ public class DeleteCommand extends Command {
                 task.toString(),
                 len,
                 len <= 1 ? "task" : "tasks");
-        ui.reply(message);
+        return message;
     }
 }
