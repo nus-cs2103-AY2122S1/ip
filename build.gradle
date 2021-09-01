@@ -43,11 +43,12 @@ test {
 }
 
 application {
-    mainClassName = "Bot"
+    mainClassName = "java.Main"
 }
 
 shadowJar {
     archiveBaseName = "Bot"
+    archiveVersion = "1.0"
     archiveClassifier = null
 }
 

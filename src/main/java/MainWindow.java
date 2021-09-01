@@ -5,6 +5,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -19,17 +21,19 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Bot bot;
+    private Stage stage;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Brian_Griffin.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Peter_Griffin.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setBot(Bot b) {
-        bot = b;
+    public void setBot(Bot b, Stage stage) {
+        this.bot = b;
+        this.stage = stage;
     }
 
     /**
