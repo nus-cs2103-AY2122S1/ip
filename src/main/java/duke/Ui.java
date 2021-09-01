@@ -8,19 +8,17 @@ import duke.task.Task;
  * A class in charge of the interaction to {@code Duke} users.
  */
 public class Ui {
-    private static final String HORIZONTAL_LINE = "____________________________________________________________";
+    private static final String LOGO = "____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final String LOGO = "\t____        _        \n"
-            + "\t|  _ \\ _   _| | _____ \n"
-            + "\t| | | | | | | |/ / _ \\\n"
-            + "\t| |_| | |_| |   <  __/\n"
-            + "\t|____/ \\__,_|_|\\_\\___|\n";
-
-    private static final String GREETING_TEXT = "\tHello from \n"
+    private static final String GREETING_TEXT = "Hello from \n"
             + LOGO
-            + "\tHow can I help you?";
+            + "How can I help you?";
 
-    private static final String FAREWELL_TEXT = "\t☹☹☹ Why do you choose to leave me!";
+    private static final String FAREWELL_TEXT = "☹☹☹ Why do you choose to leave me!";
 
     /**
      * Read the input from the user.
@@ -31,26 +29,17 @@ public class Ui {
     }
 
     /**
-     * Print the message between two horizontal line.
-     *
-     * @param message The message to be printed.
-     */
-    public static void printMessage(String message) {
-        System.out.println("\t" + HORIZONTAL_LINE + "\n" + message + "\n\t" + HORIZONTAL_LINE);
-    }
-
-    /**
      * Greet the users by printing the greeting text.
      */
-    public static void greet() {
-        printMessage(GREETING_TEXT);
+    public static String greet() {
+        return GREETING_TEXT;
     }
 
     /**
      * Farewell the users by printing the farewell message.
      */
-    public static void farewell() {
-        printMessage(FAREWELL_TEXT);
+    public static String farewell() {
+        return FAREWELL_TEXT;
     }
 
     /**
@@ -60,11 +49,11 @@ public class Ui {
      * @param task  The task added to the list.
      */
     public static void addTaskMessage(TaskList tasks, Task task) {
-        String message = "\tGot it. I've added this task:\n\t\t"
+        String message = "Got it. I've added this task:\n\t"
                 + task
-                + "\n\tTask(s) remaining in the list: "
+                + "\nTask(s) remaining in the list: "
                 + tasks.size();
-        printMessage(message);
+        //        getMessage(message);
     }
 
     /**
@@ -75,11 +64,11 @@ public class Ui {
      */
     public static void removeTaskMessage(TaskList tasks, Task task) {
         int tasksSize = tasks.size();
-        String message = "\tNoted. I've removed this task:\n\t\t"
+        String message = "Noted. I've removed this task:\n\t"
                 + task
-                + "\n\tTask(s) remaining in the list: "
+                + "\nTask(s) remaining in the list: "
                 + tasksSize;
-        printMessage(message);
+        // getMessage(message);
     }
 
     /**
@@ -88,8 +77,8 @@ public class Ui {
      * @param task The task list to be marked done.
      */
     public static void taskDoneMessage(Task task) {
-        String message = "\tNice! I've marked this task as done:\n\t\t" + task;
-        printMessage(message);
+        String message = "Nice! I've marked this task as done:\n\t" + task;
+        // getMessage(message);
     }
 
     /**
@@ -98,7 +87,7 @@ public class Ui {
      * @param error The error message.
      */
     public static void reportError(String error) {
-        printMessage("\t" + error);
+        // getMessage("\t" + error);
     }
 
     /**
@@ -107,6 +96,6 @@ public class Ui {
      * @param e The exception.
      */
     public static void reportError(Exception e) {
-        printMessage("\t" + e.getMessage());
+        // getMessage("\t" + e.getMessage());
     }
 }

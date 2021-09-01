@@ -37,19 +37,19 @@ public class QueryCommand extends Command {
     public void execute(TaskList taskList, Storage storage) throws DukeException {
         switch (this.commandType) {
         case LIST: {
-            Ui.printMessage(taskList.printList());
+            // Ui.getMessage(taskList.printList());
             break;
         }
         case QUERY: {
             try {
-                Ui.printMessage(taskList.printList(LocalDate.parse(this.commandBody)));
+                // Ui.getMessage(taskList.printList(LocalDate.parse(this.commandBody)));
             } catch (DateTimeParseException e) {
                 throw new InvalidCommandException();
             }
             break;
         }
         case FIND: {
-            Ui.printMessage(taskList.printList(this.commandBody));
+            // Ui.getMessage(taskList.printList(this.commandBody));
             break;
         }
         default:

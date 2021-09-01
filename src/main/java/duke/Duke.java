@@ -18,26 +18,15 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * Constructs a Duke bot that stores the incoming tasks into a txt file with specified name.
-     *
-     * @param fileName The file name you want to store your tasks in.
+     * Constructs a Duke bot that save its tasks in the {@code tasks.txt} file.
      */
-    public Duke(String fileName) {
-        this.storage = new Storage(fileName);
+    public Duke() {
+        this.storage = new Storage("tasks.txt");
         try {
             this.tasks = this.storage.parseToTaskList();
         } catch (DukeException e) {
             Ui.reportError(e);
         }
-    }
-
-    /**
-     * Invokes the Duke bot.
-     *
-     * @param args The command line arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
     }
 
     /**
@@ -57,5 +46,13 @@ public class Duke {
                 Ui.reportError(e);
             }
         }
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return Ui.greet();
     }
 }
