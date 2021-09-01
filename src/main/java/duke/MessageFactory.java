@@ -8,11 +8,7 @@ import duke.AddTaskMessage;
 public class MessageFactory {
     public static DukeMessage createMessage(String userStr) {
         try {
-            if (userStr == null) {
-                return new GreetMessage();
-            } else if (userStr.equals("bye")) {
-                return new ExitMessage();
-            } else if (userStr.equals("list")) {
+            if (userStr.equals("list")) {
                 return new GetTasksMessage();
             } else if (userStr.length() >= 4 && userStr.substring(0,4).equals("done")) {
                 int len = userStr.length();

@@ -1,6 +1,6 @@
 package duke;
 
-import GUItest.DialogBox;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,8 +13,12 @@ import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.application.Platform;
+
+import java.util.concurrent.TimeUnit;
 
 public class Duke extends Application {
+    public static boolean conversationState;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -88,35 +92,44 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
+        //greeting
+        greetUser();
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     *
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
+    private void greetUser() {
+        Label greet = new Label("Namaste chacha!\nKaise yaad kiye humko?");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(greet, new ImageView(duke))
+        );
+    }
 
-        return textToAdd;
+    private void exitHandler() {
+        Label goodbye = new Label("Ram Ram!");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(goodbye, new ImageView(duke))
+        );
+        userInput.clear();
+        Platform.exit();
     }
 
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                GUItest.DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
+        String userMsg = userInput.getText();
+        if(userMsg.equals("bye")) {
+            exitHandler();
+        } else {
+            Label userText = new Label(userMsg);
+            Label dukeText = new Label(getResponse(userMsg));
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(user)),
+                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            );
+            userInput.clear();
+        }
     }
 
     private String getResponse(String input) {
         DukeMessage msg = MessageFactory.createMessage(input);
-        return "Duke heard: " + input;
+        return msg.display();
     }
 }

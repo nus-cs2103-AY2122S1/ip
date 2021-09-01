@@ -1,6 +1,6 @@
 package duke;
 
-import GUItest.Duke;
+
 import javafx.application.Application;
 
 /**
