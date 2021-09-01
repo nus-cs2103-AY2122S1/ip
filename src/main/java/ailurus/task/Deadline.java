@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
     private LocalDate by;
@@ -25,7 +26,11 @@ public class Deadline extends Task {
         } else if (arr[1].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYBY);
         } else {
-            this.by = LocalDate.parse(arr[1].trim());
+            try {
+                this.by = LocalDate.parse(arr[1].trim());
+            } catch (DateTimeParseException e) {
+                throw new AilurusException(AilurusException.Error.DATEPARSE);
+            }
         }
     }
 

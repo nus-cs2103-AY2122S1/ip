@@ -14,6 +14,7 @@ public class Ailurus {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    public static boolean isExit = false;
 
     /**
      * Constructor for Ailurus Chatbot
@@ -37,54 +38,32 @@ public class Ailurus {
      */
     public void run() {
         ui.showWelcome();
-        boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = this.ui.readCommand();
                 String command = Parser.parse(fullCommand);
-                switch (command) {
-                case "bye":
-                    this.storage.unload(this.tasks);
-                    this.ui.sayBye();
-                    isExit = true;
-                    break;
-                case "list":
-                    this.ui.sayList(this.tasks);
-                    break;
-                case "done":
-                    String str = Parser.parseMessage(fullCommand);
-                    this.ui.sayDone(this.tasks.done(str));
-                    break;
-                case "todo":
-                    String todoMessage = Parser.parseMessage(fullCommand);
-                    this.ui.sayAdd(this.tasks.addTask(new Todo(todoMessage)), this.tasks.length());
-                    break;
-                case "deadline":
-                    String deadlineMessage = Parser.parseMessage(fullCommand);
-                    this.ui.sayAdd(this.tasks.addTask(new Deadline(deadlineMessage)), this.tasks.length());
-                    break;
-                case "event":
-                    String eventMessage = Parser.parseMessage(fullCommand);
-                    this.ui.sayAdd(this.tasks.addTask(new Event(eventMessage)), this.tasks.length());
-                    break;
-                case "delete":
-                    String deleteMessage = Parser.parseMessage(fullCommand);
-                    this.ui.sayDelete(this.tasks.deleteTask(deleteMessage), this.tasks.length());
-                    break;
-                case "find":
-                    String match = Parser.parseMessage(fullCommand);
-                    this.ui.sayFind(Parser.parseFind(match, this.tasks));
-                    break;
-                default:
-                    this.ui.sayInvalidCommand();
-                }
+                Parser.parseCommand(command, fullCommand, ui, storage, tasks);
             } catch (AilurusException e) {
                 this.ui.showError(e.getMessage());
             }
         }
     }
 
+    public static void exit() {
+        isExit = true;
+    }
+
+    public String getResponse(String message) {
+        try {
+            String command = Parser.parse(message);
+            return Parser.parseCommand(command, message, ui, storage, tasks);
+        } catch (AilurusException e) {
+            return this.ui.showError(e.getMessage());
+        }
+    }
+
     public static void main(String[] args) {
         new Ailurus("./data/", "tasks.txt").run();
     }
+
 }

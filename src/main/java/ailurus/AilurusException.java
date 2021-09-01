@@ -8,7 +8,7 @@ public class AilurusException extends IllegalArgumentException {
      */
     public enum Error {
         EMPTYLIST, EMPTYTODO, EMPTYEVENT, EMPTYDEADLINE,
-        EMPTYBY, EMPTYAT, BY, AT, NUMBER, NAN, LOAD, FIND,
+        EMPTYBY, EMPTYAT, BY, AT, NUMBER, NAN, LOAD, FIND, DATEPARSE
     }
 
     /**
@@ -29,29 +29,31 @@ public class AilurusException extends IllegalArgumentException {
     public String getMessage() {
         switch (this.error) {
         case EMPTYLIST:
-            return "☹ OOPS!!! No items in list!";
+            return "(!) OOPS!!! No items in list!";
         case EMPTYTODO:
-            return "☹ OOPS!!! The description of a todo cannot be empty.";
+            return "(!) OOPS!!! The description of a todo cannot be empty.";
         case EMPTYDEADLINE:
-            return "☹ OOPS!!! The description of a deadline cannot be empty.";
+            return "(!) OOPS!!! The description of a deadline cannot be empty.";
         case EMPTYEVENT:
-            return "☹ OOPS!!! The description of an event cannot be empty.";
+            return "(!) OOPS!!! The description of an event cannot be empty.";
         case EMPTYBY:
-            return "☹ OOPS!!! The description of /by cannot be empty.";
+            return "(!) OOPS!!! The description of /by cannot be empty.";
         case EMPTYAT:
-            return "☹ OOPS!!! The description of /at cannot be empty.";
+            return "(!) OOPS!!! The description of /at cannot be empty.";
         case BY:
-            return "☹ OOPS!!! A deadline must have a /by <specific date or time>.";
+            return "(!) OOPS!!! A deadline must have a /by <specific date or time>.";
         case AT:
-            return "☹ OOPS!!! An event must have a /at <specific date or time period>.";
+            return "(!) OOPS!!! An event must have a /at <specific date or time period>.";
         case NUMBER:
-            return "☹ OOPS!!! Invalid number used.";
+            return "(!) OOPS!!! Invalid number used.";
         case NAN:
-            return "☹ OOPS!!! Not a number.";
+            return "(!) OOPS!!! Not a number.";
         case LOAD:
-            return "☹ OOPS!!! Unable to load tasks...";
+            return "(!) OOPS!!! Unable to load tasks...";
         case FIND:
-            return "☹ OOPS!!! Sorry, no matching tasks in your list...";
+            return "(!) OOPS!!! Sorry, no matching tasks in your list...";
+        case DATEPARSE:
+            return "(!) OOPS!!! Please enter date in format yyyy-mm-dd";
         default:
             return getMessage();
         }

@@ -2,6 +2,9 @@ package ailurus;
 
 import ailurus.task.Task;
 import ailurus.task.TaskList;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 import java.util.Scanner;
 
@@ -10,11 +13,14 @@ public class Ui {
     private final String YOU = "You";
     private Scanner scanner = new Scanner(System.in);
 
+    private Image ailurus = new Image(this.getClass().getResourceAsStream("/images/Ailurus.jpg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/Pixel.png"));
+
     /**
      * Welcomes user to use the chatbot
      */
-    public void showWelcome() {
-        this.say(String.format("Hello! I'm %s. What can I do for you?", this.CHATBOT));
+    public String showWelcome() {
+        return this.say(String.format("Hello! I'm %s. What can I do for you?", this.CHATBOT));
     }
 
     /**
@@ -32,8 +38,8 @@ public class Ui {
      *
      * @param errorMessage Error message to be shown to user
      */
-    public void showError(String errorMessage) {
-        this.say(errorMessage);
+    public String showError(String errorMessage) {
+        return this.say(errorMessage);
     }
 
     /**
@@ -41,23 +47,29 @@ public class Ui {
      *
      * @param message display message to be printed
      */
-    public void say(String message) {
+    public String say(String message) {
         System.out.println(String.format("%s: %s", this.CHATBOT, message));
+        return message;
     }
+
 
     /**
      * Printing out of the list of tasks
      *
      * @param list TaskList to be said by chatbot
      */
-    public void sayList(TaskList list) {
+    public String sayList(TaskList list) {
         if (list.length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYLIST);
         }
         this.say("");
+        String message = "";
         for(int i = 0; i < list.length(); i++) {
-            System.out.println(String.format("%d.%s", i + 1, list.getIndexString(i)));
+            message += String.format("%d.%s\n", i + 1, list.getIndexString(i));
+
         }
+        System.out.println(message);
+        return message;
     }
 
     /**
@@ -65,17 +77,18 @@ public class Ui {
      *
      * @param task task that is marked as done
      */
-    public void sayDone(Task task) {
-        this.say(String.format("Nice! I've marked this task as done:\n\t%s", task));
+    public String sayDone(Task task) {
+        return this.say(String.format("Nice! I've marked this task as done:\n\t%s", task));
     }
 
     /**
      * Tell the user that the task is added
      *
      * @param task task that is added
+     * @param size size of task list
      */
-    public void sayAdd(Task task, int size) {
-        this.say(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
+    public String sayAdd(Task task, int size) {
+        return this.say(String.format("Got it. I've added this task:\n\t%s\nNow you have %d tasks in the list.",
                 task.toString(), size));
     }
 
@@ -83,9 +96,10 @@ public class Ui {
      * Tell the user that the task is deleted
      *
      * @param task task that is deleted
+     * @param size size of task list
      */
-    public void sayDelete(Task task, int size) {
-        this.say(String.format("Noted. I've removed this task:\n\t%s\nNow you have %d tasks in the list.",
+    public String sayDelete(Task task, int size) {
+        return this.say(String.format("Noted. I've removed this task:\n\t%s\nNow you have %d tasks in the list.",
                 task, size));
     }
 
@@ -94,23 +108,24 @@ public class Ui {
      *
      * @param tasks list of tasks that are matching
      */
-    public void sayFind(TaskList tasks) {
-        this.say("Here are the matching tasks in your list:");
-        this.sayList(tasks);
+    public String sayFind(TaskList tasks) {
+        String header = this.say("Here are the matching tasks in your list:");
+        String list = this.sayList(tasks);
+        return header + "\n" + list;
     }
 
     /**
      * Tell the user that the command given was invalid
      */
-    public void sayInvalidCommand() {
-        this.say("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+    public String sayInvalidCommand() {
+        return this.say("(!) OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**
      * Tell the user that it is the end of chatting
      */
-    public void sayBye() {
-        this.say("Bye. Hope to see you again soon!");
+    public String sayBye() {
+        return this.say("Bye. Hope to see you again soon!");
     }
 
 }

@@ -1,10 +1,12 @@
 import ailurus.Parser;
 import ailurus.Storage;
-import ailurus.task.*;
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import ailurus.task.Deadline;
+import ailurus.task.Event;
+import ailurus.task.TaskList;
+import ailurus.task.Todo;
+import ailurus.task.Task;
+import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 public class AilurusTest {
     @Test

@@ -18,6 +18,37 @@ public class Parser {
         return message.split(" ")[0];
     }
 
+    public static String parseCommand(String command, String fullCommand, Ui ui, Storage storage, TaskList tasks) {
+        switch (command) {
+            case "bye":
+                storage.unload(tasks);
+                Ailurus.exit();
+                return ui.sayBye();
+            case "list":
+                return ui.sayList(tasks);
+            case "done":
+                String str = Parser.parseMessage(fullCommand);
+                return ui.sayDone(tasks.done(str));
+            case "todo":
+                String todoMessage = Parser.parseMessage(fullCommand);
+                return ui.sayAdd(tasks.addTask(new Todo(todoMessage)), tasks.length());
+            case "deadline":
+                String deadlineMessage = Parser.parseMessage(fullCommand);
+                return ui.sayAdd(tasks.addTask(new Deadline(deadlineMessage)), tasks.length());
+            case "event":
+                String eventMessage = Parser.parseMessage(fullCommand);
+                return ui.sayAdd(tasks.addTask(new Event(eventMessage)), tasks.length());
+            case "delete":
+                String deleteMessage = Parser.parseMessage(fullCommand);
+                return ui.sayDelete(tasks.deleteTask(deleteMessage), tasks.length());
+            case "find":
+                String match = Parser.parseMessage(fullCommand);
+                return ui.sayFind(Parser.parseFind(match, tasks));
+            default:
+                return ui.sayInvalidCommand();
+        }
+    }
+
     /**
      * Parse message and return string after command
      *
@@ -78,6 +109,7 @@ public class Parser {
      * Parse matching string and return Tasklist of matching string
      *
      * @param match matching string
+     * @param tasks list of tasks to find from
      * @return TaskList matching string
      */
     public static TaskList parseFind(String match, TaskList tasks) throws AilurusException {

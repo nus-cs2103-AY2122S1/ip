@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
     private LocalDate at;
@@ -25,7 +26,11 @@ public class Event extends Task {
         } else if (arr[1].length() == 0) {
             throw new AilurusException(AilurusException.Error.EMPTYAT);
         } else {
-            this.at = LocalDate.parse(arr[1].trim());
+            try {
+                this.at = LocalDate.parse(arr[1].trim());
+            } catch (DateTimeParseException e) {
+                throw new AilurusException(AilurusException.Error.DATEPARSE);
+            }
         }
     }
 
