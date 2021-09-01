@@ -1,10 +1,10 @@
 package duke.logic;
 
 import duke.DukeException;
-import duke.ui.TextCliUi;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TasksEnum;
+import duke.ui.Ui;
 
 /**
  * The logic for parsing commands typed by the user.
@@ -17,6 +17,7 @@ public class LCommandParser {
     private static final String FULL_TASKLIST_MESSAGE = "Unable to add task. List is full. Consider deleting" +
         " some tasks";
     private static final String INVALID_NUMBER_MESSAGE = "Please input a valid task number after the command.";
+    private final String output;
     private boolean willExit;
 
     /**
@@ -26,7 +27,7 @@ public class LCommandParser {
      * @param storage  The storage logic that allows the command parser to write the task list data to it.
      * @param taskList The list of tasks.
      */
-    public LCommandParser(String input, TaskList taskList, LStorage storage, TextCliUi ui) {
+    public LCommandParser(String input, TaskList taskList, LStorage storage, Ui ui) {
         if (input == null || input.equals("")) {
             throw new DukeException(EMPTY_INPUT_MESSAGE);
         }
@@ -40,18 +41,19 @@ public class LCommandParser {
         this.willExit = false;
         switch (commandEnum) {
         case BYE:
-            ui.sayGoodBye();
+            output = ui.goodByeMessage();
             willExit = true;
             break;
         case LIST:
-            ui.printAllTasks(taskList.getAllTasks(), taskList.size());
+            output = ui.allTasksMessage(taskList.getAllTasks(), taskList.size());
             break;
         case UPCOMING:
-            ui.printUpcomingTasks(taskList.getUpcomingTasks(), taskList.size());
+            output = ui.upcomingTasksMessage(taskList.getUpcomingTasks(), taskList.size());
             break;
         case HELP:
             try {
-                ui.displayHelp(inputArr.length == 1 ? null : LCommandsEnum.valueOf(inputArr[1].toUpperCase()));
+                output = ui.displayHelpMessage(
+                    inputArr.length == 1 ? null : LCommandsEnum.valueOf(inputArr[1].toUpperCase()));
             } catch (IllegalArgumentException e) {
                 throw new DukeException(INVALID_COMMAND);
             }
@@ -62,13 +64,13 @@ public class LCommandParser {
             }
             switch (commandEnum) {
             case FIND:
-                ui.printTasksContaining(inputArr[1],
+                output = ui.tasksContainingMessage(inputArr[1],
                     taskList.getTasksContaining(inputArr[1]), taskList.size());
                 break;
             case TODO: // fallthrough intended
             case EVENT: // fallthrough intended
             case DEADLINE:
-                ui.addTaskMessage(addTask(commandEnum.name(), inputArr[1], taskList), taskList.size());
+                output = ui.addTaskMessage(addTask(commandEnum.name(), inputArr[1], taskList), taskList.size());
                 break;
             default:
                 int taskNumber;
@@ -83,17 +85,16 @@ public class LCommandParser {
                         throw new DukeException("You have already marked this task (%s) as done",
                             taskList.getTask(taskNumber));
                     }
-                    ui.markAsDoneMessage(taskList.getTask(taskNumber));
+                    output = ui.markAsDoneMessage(taskList.getTask(taskNumber));
                     break;
                 case DELETE:
-                    ui.removeTaskMessage(taskList.removeTask(taskNumber), taskList.size());
+                    output = ui.removeTaskMessage(taskList.removeTask(taskNumber), taskList.size());
                     break;
                 default:
                     throw new DukeException(INVALID_COMMAND);
                 }
             }
             storage.updateDukeTextFile();
-
         }
     }
 
@@ -112,6 +113,15 @@ public class LCommandParser {
             throw new DukeException(FULL_TASKLIST_MESSAGE);
         }
         return result;
+    }
+
+    /**
+     * Gets the output after parsing the command.
+     *
+     * @return the output string
+     */
+    public String getOutput() {
+        return output;
     }
 
     /**

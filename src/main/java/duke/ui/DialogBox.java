@@ -21,7 +21,8 @@ public class DialogBox extends HBox {
 
     /**
      * Creates a new dialog box ui that contains the message in l and the profile picture in iv.
-     * @param l the message to be displayed
+     *
+     * @param l  the message to be displayed
      * @param iv the profile picture to be displayed
      */
     public DialogBox(Label l, Image iv) {
@@ -38,16 +39,6 @@ public class DialogBox extends HBox {
         this.getChildren().addAll(text, imgCircle);
     }
 
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
-    }
-
     public static DialogBox getUserDialog(Label l, Image i) {
         return new DialogBox(l, i);
     }
@@ -56,5 +47,15 @@ public class DialogBox extends HBox {
         var db = new DialogBox(l, i);
         db.flip();
         return db;
+    }
+
+    /**
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     */
+    private void flip() {
+        this.setAlignment(Pos.TOP_LEFT);
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        FXCollections.reverse(tmp);
+        this.getChildren().setAll(tmp);
     }
 }

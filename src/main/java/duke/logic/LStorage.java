@@ -14,6 +14,7 @@ import duke.task.TaskList;
 public class LStorage {
     private final String filePath;
     private final TaskList taskList;
+    private final File textFile;
 
     /**
      * Creates a new instance of a storage object that deals with saving the task list in Duke.
@@ -21,9 +22,13 @@ public class LStorage {
      * @param filePath The string representing the path of the file that the data will be saved into.
      * @param taskList The list of task that will be saved into the file.
      */
-    public LStorage(String filePath, TaskList taskList) {
+    public LStorage(String filePath, TaskList taskList) throws IOException {
         this.filePath = filePath;
         this.taskList = taskList;
+        this.textFile = new File(filePath);
+        if (!this.textFile.canWrite()) {
+            throw new IOException("This file cannot be written by duke!");
+        }
     }
 
     /**
@@ -33,7 +38,6 @@ public class LStorage {
      * A more efficient method should be implemented.</p>
      */
     public void updateDukeTextFile() {
-        File textFile = new File(filePath);
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(textFile));
             writer.write(""); // Overwrites everything
