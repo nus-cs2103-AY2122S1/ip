@@ -32,17 +32,16 @@ public class Storage {
      *
      * @param filePath The path to the local memory.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath) throws LoadingException {
         this.filePath = filePath;
         this.storage = new File(filePath);
-
         try {
             if (!storage.exists()) {
                 storage.getParentFile().mkdirs();
                 storage.createNewFile();
             }
         } catch (IOException e) {
-            Ui.showLoadingError();
+            throw new LoadingException();
         }
     }
 

@@ -1,7 +1,6 @@
 package catobot.command;
 
 import catobot.Storage;
-import catobot.Ui;
 import catobot.exception.BotException;
 import catobot.item.TaskList;
 import catobot.item.Todo;
@@ -27,14 +26,14 @@ public class TodoCommand extends Command {
      * Adds a todo to a list of tasks.
      *
      * @param tasks The list of tasks to be worked on.
-     * @param ui The ui that responds to the user.
      * @param storage The storage of the tasks.
+     * @return The text to display.
      * @throws BotException If the description is invalid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TaskList tasks, Storage storage) throws BotException {
         String description = content.substring("todo".length()).trim();
-        Ui.respond(tasks.add(Todo.of(description)));
+        return tasks.add(Todo.of(description));
     }
 
 }

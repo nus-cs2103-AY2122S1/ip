@@ -2,8 +2,8 @@ package catobot.command;
 
 import java.io.IOException;
 
+import catobot.Catobot;
 import catobot.Storage;
-import catobot.Ui;
 import catobot.exception.BotException;
 import catobot.item.TaskList;
 
@@ -11,32 +11,22 @@ import catobot.item.TaskList;
  * Represents the command to exit from Ui.
  */
 public class ExitCommand extends Command {
-
+    private static final String ERROR = "Meow! There is an error occured when trying to save the tasks >.<";
     /**
      * Marks a task as done.
      *
      * @param tasks The list of tasks to be worked on.
-     * @param ui The ui that responds to the user.
      * @param storage The storage of the tasks.
+     * @return The text to display.
      * @throws BotException If the command is not valid.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws BotException {
+    public String execute(TaskList tasks, Storage storage) throws BotException {
         try {
             storage.write(tasks.toStringInDoc());
-            ui.exit();
+            return Catobot.BYE;
         } catch (IOException e) {
-            ui.showError("Meow! There is an error occured when trying to save the tasks >.<");
+            return ERROR;
         }
-    }
-
-    /**
-     * Checks if the command is to exit.
-     *
-     * @return True if the command is to exit, false otherwise.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
     }
 }

@@ -1,7 +1,6 @@
 package catobot.command;
 
 import catobot.Storage;
-import catobot.Ui;
 import catobot.exception.BotException;
 import catobot.item.TaskList;
 
@@ -14,9 +13,9 @@ public interface Executable {
      * Executes the command.
      *
      * @param tasks The list of tasks to be worked on.
-     * @param ui The ui that responds to the user.
      * @param storage The storage of the tasks.
+     * @return The text to display.
      * @throws BotException If the command is invalid.
      */
-    void execute(TaskList tasks, Ui ui, Storage storage) throws BotException;
+    String execute(TaskList tasks, Storage storage) throws BotException;
 }

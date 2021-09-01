@@ -11,54 +11,39 @@ import catobot.item.TaskList;
  */
 public class Catobot {
     public static final String NAME = "Catobot";
+    public static final String WELCOME =
+            String.format("Hello I am %s (>^^<)\nWhat can I do for you meow?", Catobot.NAME);
+    public static final String BYE =
+            "Bye meow! I will always wait here meow(>^^<)";
 
     /** Storage of the tasks. */
-    private final Storage storage;
+    private Storage storage;
 
     /** List of tasks for the Catobot. */
     private TaskList tasks;
-
-    /** User interface of the Catobot. */
-    private final Ui ui;
 
     /**
      * Constructor for Catobot.
      *
      * @param filePath Location of the local memory.
      */
-    private Catobot(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-
+    Catobot(String filePath) {
         try {
+            storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
         } catch (LoadingException e) {
-            Ui.showLoadingError();
             tasks = new TaskList();
         }
     }
 
-    /**
-     * Runs the Catobot.
-     */
-    private void run() {
-        ui.showWelcome();
 
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (BotException e) {
-                ui.showError(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage);
+        } catch (BotException e) {
+            return e.getMessage();
         }
-    }
-
-    public static void main(String[] args) {
-        new Catobot("./data/Catobot.txt").run();
     }
 
 }
