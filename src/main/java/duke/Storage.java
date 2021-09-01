@@ -11,7 +11,6 @@ import java.util.List;
  * Manages the writing and creation of files duke.txt
  */
 public class Storage {
-    String filepath = "src/main/data/duke.txt";
 
     public Storage() {
     }
@@ -44,11 +43,11 @@ public class Storage {
     public void save(List<Task> listOfText2) {
         String temp = "";
         for (int i = 0; i < listOfText2.size(); i++) {
-            temp = temp + listOfText2.get(i) + "\n";
+            temp = temp + listOfText2.get(i).saveWithFormat() + "\n";
         }
 
         try {
-            writeToFile(filepath, temp);
+            writeToFile("src/main/data/duke.txt", temp);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

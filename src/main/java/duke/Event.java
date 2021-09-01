@@ -28,6 +28,10 @@ public class Event extends Task {
         return deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    public String saveWithFormat () {
+        return logo() + isDone + "_" + super.description + "_" + deadline;
+    }
+
     @Override
     public String toString() {
         return "[E]" + super.getStatusIcon() + " " + super.description + " (at: " + dateFormat() + " " + ")";
