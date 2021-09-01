@@ -29,12 +29,15 @@ public class AddCommand extends Command {
         String[] split;
         switch (taskType) {
         case "todo":
+            if (details == null) {
+                throw new PikaException("Pika pi!! The description of a todo task cannot be empty.");
+            }
             this.inputTask = new Todo(details);
             break;
 
         case "deadline":
             if (details == null) {
-                throw new PikaException("Pika pi!! The description of a deadline cannot be empty.");
+                throw new PikaException("Pika pi!! The description of a deadline task cannot be empty.");
             }
             split = details.split(" /by ");
             if (split.length <= 1) {
@@ -45,7 +48,7 @@ public class AddCommand extends Command {
 
         case "event":
             if (details == null) {
-                throw new PikaException("Pika pi!!  The description of an event cannot be empty.");
+                throw new PikaException("Pika pi!!  The description of an event task cannot be empty.");
             }
             split = details.split(" /at ");
             if (split.length <= 1) {

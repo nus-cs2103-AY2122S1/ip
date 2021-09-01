@@ -26,7 +26,7 @@ public class MainWindow extends AnchorPane {
 
     private Pika pika;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ditto.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/ash.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pika.png"));
 
     /**
@@ -35,6 +35,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        sendButton.setStyle("-fx-background-color: #ffa500");
+        dialogContainer.setStyle("-fx-background-color: #add8e6");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Hello from\n"
                         + "Pika Pi!\n"

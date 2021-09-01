@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
     @FXML
@@ -30,6 +31,7 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        displayPicture.setClip(new Circle(40, 38, 38));
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -45,11 +47,14 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: #ffefd5");
+        return db;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.setStyle("-fx-background-color: #ffd700");
         db.flip();
         return db;
     }

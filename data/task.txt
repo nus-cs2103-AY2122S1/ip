@@ -1,0 +1,7 @@
+T | 1 | find a life
+T | 0 | do 3244
+T | 0 | 3102
+E | 0 | Exam | Sep 09 2021
+D | 1 | 244 Assignment | Sep 05 2021
+T | 0 | null
+T | 0 | abc

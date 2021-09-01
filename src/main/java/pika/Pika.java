@@ -83,9 +83,9 @@ public class Pika extends Application {
             } catch (PikaException e) {
                 System.out.println(e.getMessage());
             } catch (IOException e2) {
-                System.out.println("☹ OOPS!!! It seems like your file is corrupted!");
+                System.out.println("Pika pi!!! It seems like your file is corrupted!");
             } catch (DateTimeParseException e3) {
-                System.out.println("☹ OOPS!!! It seems like your date/time input is wrong!");
+                System.out.println("Pika pi!! It seems like your date/time input is wrong!");
             }
         } while (isRunning);
     }
