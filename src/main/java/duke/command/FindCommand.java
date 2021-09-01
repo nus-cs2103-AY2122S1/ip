@@ -40,7 +40,7 @@ public class FindCommand implements Command {
                 filtered.add(tasks.get(i));
             }
         }
-        ui.printAll(filtered, "Here are the matching tasks in your list:");
+        ui.printAll(filtered, "Here are the matching tasks in your list");
     }
 
     /**

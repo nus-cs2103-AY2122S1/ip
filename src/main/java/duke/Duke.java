@@ -3,8 +3,10 @@ package duke;
 import java.util.ArrayList;
 
 import duke.command.Command;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-public class Duke {
+public class Duke extends Application {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
@@ -13,7 +15,7 @@ public class Duke {
      * Method to initialise Duke.
      */
     public Duke() {
-        ui = new Ui();
+        ui = new Ui(this);
         storage = new Storage();
         try {
             taskList = new TaskList(storage.load());
@@ -23,23 +25,19 @@ public class Duke {
         }
     }
 
-    private void run() {
-        ui.greet();
-        boolean isExit = false;
+    @Override
+    public void start(Stage primaryStage) {
+        ui.start();
+    }
 
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
+    protected void run(String fullCommand) {
+        try {
+            Command c = Parser.parse(fullCommand);
+            c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            ui.showError(e);
         }
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
-    }
+    public static void main(String[] args) { }
 }
