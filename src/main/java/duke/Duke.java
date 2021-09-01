@@ -27,6 +27,11 @@ public class Duke {
     }
 
     /**
+     * Empty class constructor.
+     */
+    public Duke() { }
+
+    /**
      * To run the program.
      */
     public void run() {
@@ -54,5 +59,13 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke("src/main/data/duke.txt").run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
