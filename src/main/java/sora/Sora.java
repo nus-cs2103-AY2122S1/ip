@@ -39,6 +39,15 @@ public class Sora {
     }
 
     /**
+     * Initialize and start the program in CLI interface.
+     *
+     * @param args not used
+     */
+    public static void main(String[] args) {
+        new Sora(true).run();
+    }
+
+    /**
      * Run the program.
      */
     public void run() {
@@ -94,14 +103,5 @@ public class Sora {
         }
 
         return message;
-    }
-
-    /**
-     * Initialize and start the program in CLI interface.
-     *
-     * @param args not used
-     */
-    public static void main(String[] args) {
-        new Sora(true).run();
     }
 }
