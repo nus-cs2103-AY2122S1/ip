@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
-import data.DukeException;
-import data.Storage;
-import data.TaskList;
-import data.Ui;
+import duke.data.DukeException;
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.data.Ui;
 
 /**
  * Command that deletes a Task from Tasklist when executed.
@@ -28,7 +28,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (taskNumber > tasks.getSize() || taskNumber <= 0) {
-            throw new DukeException("Please insert a valid task.Task Number!");
+            throw new DukeException("Please insert a valid Task Number!");
         } else {
             tasks.deleteTask(taskNumber);
             storage.save(tasks);

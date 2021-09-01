@@ -1,8 +1,8 @@
-package command;
+package duke.command;
 
-import data.Storage;
-import data.TaskList;
-import data.Ui;
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.data.Ui;
 
 /**
  * An abstract command that contains an execute and isExit method.

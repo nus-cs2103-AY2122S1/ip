@@ -1,4 +1,4 @@
-package data;
+package duke.data;
 
 /**
  * Class that contains errors that are specific to Duke.

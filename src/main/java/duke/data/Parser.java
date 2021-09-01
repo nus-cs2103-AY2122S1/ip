@@ -1,9 +1,16 @@
-package data;
+package duke.data;
 
-import command.*;
-import task.Deadline;
-import task.Event;
-import task.ToDo;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.ToDo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -103,7 +110,8 @@ public class Parser {
      * @param specialPhrase The string to split the task description(if any)
      * @return An AddCommand
      */
-    private static Command prepareAddCommand(String keyword, String userInput, String[] userInputArray, String specialPhrase) {
+    private static Command prepareAddCommand(String keyword,
+            String userInput, String[] userInputArray, String specialPhrase) {
         switch (keyword) {
         case "todo":
             //checks if description is empty

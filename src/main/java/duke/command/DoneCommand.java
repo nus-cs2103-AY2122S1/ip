@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
-import data.DukeException;
-import data.Storage;
-import data.TaskList;
-import data.Ui;
+import duke.data.DukeException;
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.data.Ui;
 
 /**
  * Command that marks a task as done when executed.

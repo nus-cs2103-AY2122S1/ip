@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
-import data.Storage;
-import data.TaskList;
-import data.Ui;
-import task.Task;
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.data.Ui;
+import duke.task.Task;
 
 /**
  * Command that adds a new Task to Tasklist when executed.

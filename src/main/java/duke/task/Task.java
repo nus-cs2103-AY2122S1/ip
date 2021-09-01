@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 /**
  * Class that stores a user's task description and whether the task is done or not.

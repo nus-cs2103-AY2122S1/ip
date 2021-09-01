@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Test;
-import task.Deadline;
+import duke.task.Deadline;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -30,14 +30,16 @@ public class DeadlineTest {
 
     @Test
     public void testDateTimeInput() {
-        Deadline test = new Deadline("something", LocalDateTime.parse("11-10-2019 1800", DateTimeFormatter.ofPattern("d-M-y HHmm")));
+        Deadline test = new Deadline("something",
+                LocalDateTime.parse("11-10-2019 1800", DateTimeFormatter.ofPattern("d-M-y HHmm")));
         test.markAsDone();
         assertEquals("[D][X] something (by: Oct 11 2019 1800)", test.toString());
     }
 
     @Test
     public void testYearMonthInput() {
-        Deadline test = new Deadline("something", YearMonth.parse("11/19", DateTimeFormatter.ofPattern("M/y")));
+        Deadline test = new Deadline("something",
+                YearMonth.parse("11/19", DateTimeFormatter.ofPattern("M/y")));
         test.markAsDone();
         assertEquals("[D][X] something (by: Nov 0019)", test.toString());
     }

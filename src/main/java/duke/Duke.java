@@ -1,5 +1,12 @@
-import command.Command;
-import data.*;
+package duke;
+
+import duke.command.Command;
+
+import duke.data.DukeException;
+import duke.data.Parser;
+import duke.data.Storage;
+import duke.data.TaskList;
+import duke.data.Ui;
 
 /**
  * The Duke iP Program.
