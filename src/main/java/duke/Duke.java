@@ -12,6 +12,11 @@ public class Duke {
     private Ui ui;
 
     /**
+     * Empty constructor for Duke
+     */
+    public Duke() {};
+
+    /**
      * Constructs Duke object
      *
      * @param filepath file location
@@ -35,6 +40,10 @@ public class Duke {
         ui.welcome();
         Parser parser = new Parser(this.taskList, this.ui, this.storage);
         parser.parse();
+    }
+
+    public String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 
     public static void main(String[] args) {
