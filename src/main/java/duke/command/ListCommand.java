@@ -25,16 +25,17 @@ public class ListCommand extends Command {
      * @param tasks list of tasks within chat bot.
      * @param ui user interface of chat bot.
      * @param storage file directory manager.
+     * @return chat bot response message.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showList(tasks.list());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.showList(tasks.list());
     }
 
     /**
      * Returns if command exits program.
      *
-     * @return if command exists program.
+     * @return true if command exists program.
      */
     @Override
     public boolean isExit() {

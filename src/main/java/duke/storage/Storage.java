@@ -2,11 +2,9 @@ package duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.List;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
-import duke.tasklist.Task;
 
 /**
  * Represents a file directory manager.
@@ -41,10 +39,10 @@ public class Storage {
     /**
      * Saves list of task into a text file.
      *
-     * @param lib library / list of task to be stored.
+     * @param tasks text of library / list of task to be stored.
      * @throws DukeException If unable to create save file.
      */
-    public void save(List<Task> lib) throws DukeException {
+    public void save(String ... tasks) throws DukeException {
         String location = "data/duke.txt";
 
         try {
@@ -60,8 +58,8 @@ public class Storage {
             }
 
             FileWriter fw = new FileWriter(location);
-            for (Task tsk: lib) {
-                fw.write(tsk.save() + System.lineSeparator());
+            for (String tsk: tasks) {
+                fw.write(tsk + System.lineSeparator());
             }
             fw.close();
         } catch (Exception e) {

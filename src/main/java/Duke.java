@@ -16,6 +16,21 @@ public class Duke {
 
     /**
      * Constructs Duke Object.
+     */
+    public Duke() {
+        String filePath = "data/tasks.txt";
+        ui = new Ui();
+        storage = new Storage(filePath);
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+
+    /**
+     * Constructs Duke Object.
      *
      * @param filePath a relative or absolute file path of text file.
      */
@@ -57,9 +72,27 @@ public class Duke {
     /**
      * Reads pre-written and user input commands.
      * Executes the stored commands and displays respective outputs.
+     *
      * @param args command prompt / line arguments
      **/
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    /**
+     * Retrieves chat bot's response based on user's command
+     *
+     * @param fullCommand user input.
+     * @return Duke's chat bot message.
+     * @throws DukeException if errors occur within list.
+     */
+    protected String getResponse(String fullCommand) {
+        try {
+            Command c = Parser.parse(fullCommand);
+            String output = c.execute(tasks, ui, storage);
+            return output;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
