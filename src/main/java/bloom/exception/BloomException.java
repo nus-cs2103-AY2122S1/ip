@@ -6,13 +6,13 @@ package bloom.exception;
 
 public class BloomException extends Exception {
 
-	/**
-	 * Constructor for a BloomException.
-	 * 
-	 * @param errorMessage the error message
-	 */
-	
-	public BloomException(String errorMessage) {
-		super(errorMessage);
-	}
+    /**
+     * Constructor for a BloomException.
+     *
+     * @param errorMessage the error message
+     */
+
+    public BloomException(String errorMessage) {
+        super(errorMessage);
+    }
 }

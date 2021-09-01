@@ -10,13 +10,13 @@ import bloom.constant.Message;
 
 public class ExitCommand extends Command {
 
-	/**
-	 * Stops the bot and says goodbye to users.
-	 */
-	
-	@Override
-	public void run() {
-		new Ui().stop();
-		System.out.println(Message.COMMAND_EXIT.getMessage());
-	}
+    /**
+     * Stops the bot and says goodbye to users.
+     */
+
+    @Override
+    public void run() {
+        new Ui().stop();
+        System.out.println(Message.COMMAND_EXIT.getMessage());
+    }
 }

@@ -6,9 +6,9 @@ package bloom.command;
 
 public abstract class Command {
 
-  /**
-   * Executes a command.
-   */
-  
-  public abstract void run();
+    /**
+     * Executes a command.
+     */
+
+    public abstract void run();
 }

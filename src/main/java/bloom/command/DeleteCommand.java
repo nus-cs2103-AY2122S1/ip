@@ -11,28 +11,28 @@ import bloom.task.Task;
  */
 
 public class DeleteCommand extends Command {
-	
-	/** The index of the task to be deleted. */
-	private final int index;
 
-	/**
-	 * Constructor for a DeleteCommand.
-	 * 
-	 * @param index the index of the task to be deleted.
-	 */
-	
-	public DeleteCommand(int index) {
-		this.index = index;
-	}
+    /** The index of the task to be deleted. */
+    private final int index;
 
-	/**
-	 * Deletes the task as requested.
-	 */
-	
-	@Override
-	public void run() {
-		Task task =TaskList.delete(this.index);
-		System.out.println(Message.COMMAND_DELETE.getMessage());
-		System.out.println("\t   " + task + "\n");
-	} 
+    /**
+     * Constructor for a DeleteCommand.
+     *
+     * @param index the index of the task to be deleted.
+     */
+
+    public DeleteCommand(int index) {
+        this.index = index;
+    }
+
+    /**
+     * Deletes the task as requested.
+     */
+
+    @Override
+    public void run() {
+        Task task = TaskList.delete(this.index);
+        System.out.println(Message.COMMAND_DELETE.getMessage());
+        System.out.println("\t   " + task + "\n");
+    }
 }

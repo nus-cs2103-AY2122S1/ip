@@ -10,29 +10,29 @@ import bloom.task.ToDo;
  */
 
 public class ToDoCommand extends Command {
-	
-	/** The description of the to-do. */
-	private final String description;
 
-	/**
-	 * Constructor for a ToDoCommand.
-	 * 
-	 * @param description the description of the to-do
-	 */
-	
-	public ToDoCommand(String description) {
-		this.description = description;
-	}
+    /** The description of the to-do. */
+    private final String description;
 
-	/**
-	 * Creates a to-do task.
-	 */
-	
-	@Override
-	public void run() {
-		ToDo todo = new ToDo(this.description);
-		TaskList.add(todo);
-		System.out.println(Message.COMMAND_ADD.getMessage());
-		System.out.println("\t   " + todo + "\n");
-	}
+    /**
+     * Constructor for a ToDoCommand.
+     *
+     * @param description the description of the to-do
+     */
+
+    public ToDoCommand(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Creates a to-do task.
+     */
+
+    @Override
+    public void run() {
+        ToDo todo = new ToDo(this.description);
+        TaskList.add(todo);
+        System.out.println(Message.COMMAND_ADD.getMessage());
+        System.out.println("\t   " + todo + "\n");
+    }
 }

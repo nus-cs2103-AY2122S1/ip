@@ -10,29 +10,29 @@ import bloom.task.Task;
  */
 
 public class MarkCommand extends Command {
-	
-	/** The index of the task to be marked as done. */
-	private final int index;
 
-	/**
-	 * Constructor for a MarkCommand.
-	 * 
-	 * @param index the index of the task to be marked as done
-	 */
-	
-	public MarkCommand(int index) {
-		this.index = index;
-	}
+    /** The index of the task to be marked as done. */
+    private final int index;
 
-	/**
-	 * Marks the specified task as done.
-	 */
-	
-	@Override
-	public void run() {
-		Task task = TaskList.get(this.index);
-		task.markAsDone();
-		System.out.println(Message.COMMAND_MARK.getMessage());
-		System.out.println("\t   " + task);
-	}
+    /**
+     * Constructor for a MarkCommand.
+     *
+     * @param index the index of the task to be marked as done
+     */
+
+    public MarkCommand(int index) {
+        this.index = index;
+    }
+
+    /**
+     * Marks the specified task as done.
+     */
+
+    @Override
+    public void run() {
+        Task task = TaskList.get(this.index);
+        task.markAsDone();
+        System.out.println(Message.COMMAND_MARK.getMessage());
+        System.out.println("\t   " + task);
+    }
 }

@@ -8,13 +8,13 @@ import bloom.exception.BloomException;
 
 public class BloomUnknownCommandException extends BloomException {
 
-	/**
-	 * Constructor for a BloomUnknownCommandException.
-	 * 
-	 * @param errorMessage the error message
-	 */
-	
-	public BloomUnknownCommandException(String errorMessage) {
-		super(errorMessage);
-	}
+    /**
+     * Constructor for a BloomUnknownCommandException.
+     *
+     * @param errorMessage the error message
+     */
+
+    public BloomUnknownCommandException(String errorMessage) {
+        super(errorMessage);
+    }
 }

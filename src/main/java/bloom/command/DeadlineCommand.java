@@ -1,10 +1,10 @@
 package bloom.command;
 
+import java.time.LocalDateTime;
+
 import bloom.app.TaskList;
 import bloom.constant.Message;
 import bloom.task.Deadline;
-
-import java.time.LocalDateTime;
 
 /**
  * Represents a deadline command which
@@ -13,34 +13,34 @@ import java.time.LocalDateTime;
  */
 
 public class DeadlineCommand extends Command {
-	
-	/** The description of the deadline. */
-	private final String description;
-	
-	/** The date and time of the deadline. */
-	private final LocalDateTime by;
 
-	/**
-	 * Constructor for a DeadlineCommand.
-	 * 
-	 * @param description the description of the deadline
-	 * @param by          the date and time of the deadline
-	 */
-	
-	public DeadlineCommand(String description, LocalDateTime by) {
-		this.description = description;
-		this.by = by;
-	}
-	
-	/**
-	 * Creates a deadline task.
-	 */
-	
-	@Override
-	public void run() {
-		Deadline deadline = new Deadline(this.description, this.by);
-		TaskList.add(deadline);
-		System.out.println(Message.COMMAND_ADD.getMessage());
-		System.out.println("\t   " + deadline + "\n");
-	}
+    /** The description of the deadline. */
+    private final String description;
+
+    /** The date and time of the deadline. */
+    private final LocalDateTime by;
+
+    /**
+     * Constructor for a DeadlineCommand.
+     *
+     * @param description the description of the deadline
+     * @param by          the date and time of the deadline
+     */
+
+    public DeadlineCommand(String description, LocalDateTime by) {
+        this.description = description;
+        this.by = by;
+    }
+
+    /**
+     * Creates a deadline task.
+     */
+
+    @Override
+    public void run() {
+        Deadline deadline = new Deadline(this.description, this.by);
+        TaskList.add(deadline);
+        System.out.println(Message.COMMAND_ADD.getMessage());
+        System.out.println("\t   " + deadline + "\n");
+    }
 }
