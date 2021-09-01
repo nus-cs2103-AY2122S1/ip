@@ -7,8 +7,7 @@ public class ErrorMessage extends DukeMessage{
         this.errMsg = errMsg;
     }
 
-    public void display() {
-        System.out.println(errMsg);
-        Duke.conversationState = true;
+    public String display() {
+        return errMsg;
     }
 }

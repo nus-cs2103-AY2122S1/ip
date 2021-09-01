@@ -12,11 +12,13 @@ public class CompleteTaskMessage extends DukeMessage{
         this.taskIndex = index;
     }
 
-    public void display() {
-        System.out.println("Theek hai... ye task khatam!");
+    public String display() {
         ArrayList<Task> taskList = (ArrayList<Task>) TaskList.getTaskList().getTasks();
         Task completedTask = taskList.get(taskIndex);
         completedTask.markAsDone();
-        System.out.println(completedTask.getTaskString());
+        String reply = "Theek hai... ye task khatam!\n" +
+                completedTask.getTaskString() +
+                "\n";
+        return reply;
     }
 }

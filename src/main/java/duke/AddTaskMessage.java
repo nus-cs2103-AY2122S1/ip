@@ -12,11 +12,11 @@ public class AddTaskMessage extends DukeMessage {
         TaskList.getTaskList().addTask(createdTask);
     }
 
-    public void display() {
-        System.out.println("Theek h bhai... ye task bhi list mein daal diya");
-        System.out.println(createdTask.getTaskString());
-        System.out.println("Ab " + TaskList.getTaskList().getSize() + " tasks hain list mein.");
-        Duke.conversationState = true;
+    public String display() {
+        String reply = "Theek h bhai... ye task bhi list mein daal diya\n" +
+                createdTask.getTaskString() +
+                "\nAb " + TaskList.getTaskList().getSize() + " tasks hain list mein.\n";
+        return reply;
     }
 }
 

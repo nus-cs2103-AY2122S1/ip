@@ -11,10 +11,10 @@ public class DeleteTaskMessage extends DukeMessage{
         this.taskIndex = index;
         this.deletedTask = TaskList.getTaskList().getTasks().remove(taskIndex);
     }
-    public void display() {
-        System.out.println("Theek h bhai... ye task hata diya");
-        System.out.println(deletedTask.getTaskString());
-        System.out.println("Ab " + TaskList.getTaskList().getSize() + " tasks bache list mein.");
-        Duke.conversationState = true;
+    public String display() {
+        String reply = "Theek h bhai... ye task hata diya\n" +
+                deletedTask.getTaskString() +
+                "\nAb \" + TaskList.getTaskList().getSize() + \" tasks bache list mein.\n";
+        return reply;
     }
 }
