@@ -20,30 +20,30 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes the find command with the given input.
+     * Returns the proper response according to the given input.
      *
      * @param list The list of tasks to be modified by the command.
      * @param ui The UI of Duke to be invoked by the command.
+     * @return A response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
-    public void execute(TaskList list, UserInterface ui) throws DukeException {
+    public String execute(TaskList list, UserInterface ui) throws DukeException {
 
         String key = input.substring(5);
         if (key.length() == 0) {
             throw new DukeException("You have not provided an input to search your list with. Please try again!");
         } else {
-            System.out.println("-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~\nHere are the matching tasks in your list:\n");
-            int index = 1;
+            String tasks = "";
             for (int i = 0; i < list.getSize(); i++) {
                 Task currentTask = list.getTask(i);
                 if (currentTask.getTask().contains(key)) {
-                    System.out.println(index
+                    tasks += (i + 1)
                             + ". "
                             + currentTask.getTaskState()
-                            + "\n");
+                            + "\n";
                 }
             }
-            System.out.println("Hope you found what you were looking for!\n-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~");
+            return ui.showTaskFound(tasks);
         }
     }
 }

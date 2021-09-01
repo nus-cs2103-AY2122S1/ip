@@ -27,53 +27,55 @@ public class UserInterface {
     }
 
     /**
-     * Returns the String scanned from the user input.
-     *
-     * Takes no parameters.
-     *
-     * @return A String corresponding to the latest user input.
-     */
-    public String readCommand() {
-        return reader.nextLine();
-    }
-
-    /**
      * Shows the error message given to the user.
      *
      * @param error The error message to be shown to the user.
      */
-    public void showError(String error) {
-        System.out.println(divider + error + divider);
+    public String showError(String error) {
+        return error;
     }
 
     /**
      * Shows the error message to the user, specifically when local data is not found.
      */
-    public void showLoadingError() {
-        System.out.println(divider + "Creating a new storage for the user..." + divider);
+    public String showStorageLoadingError() {
+        return "Creating a new storage for you...";
     }
 
     /**
      * Shows the welcome message to the user.
      */
-    public void showWelcomeMessage() {
-        System.out.println(divider
-                + "Hello! My name is Duke!\n\n"
+    public String showWelcomeMessage() {
+        return "Hello! My name is Duke!\n\n"
                 + " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n\n"
-                + "What can I do for you today?\n"
-                + divider);
+                + "What can I do for you today?\n";
     }
 
     /**
      * Shows the exit message to the user.
      */
-    public void showExitMessage() {
-        System.out.println(divider + "Bye... Hope to see you again soon!\n" + divider);
-        Bot.stop();
+    public String showExitMessage() {
+        return "Bye... Hope to see you again soon!";
+    }
+
+    public String showTaskDone(String task) {
+        return "Great! I've marked the following task as done:\n" + task;
+    }
+
+    public String showTaskFound(String foundTasks) {
+        return "Here are the matching tasks in your list:\n\n" + foundTasks + "\nHope you found what you were looking for!";
+    }
+
+    public String showTaskDeleted(String deletedTask) {
+        return "Noted. I've removed the following task:\n\n" + deletedTask;
+    }
+
+    public String showTaskList(String tasks) {
+        return tasks;
     }
 
     /**
@@ -84,7 +86,7 @@ public class UserInterface {
      * @param length The current length of the list.
      * @param time   The information regarding the task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
      */
-    public static void showTaskAdded(String input, int type, int length, String time) {
+    public String showTaskAdded(String input, int type, int length, String time) {
 
         // Determine the string that displays the type of task
         String taskType;
@@ -118,10 +120,9 @@ public class UserInterface {
                     : "";
 
         // Return the message accordingly
-        System.out.println(divider
-                + taskDescription
+        return taskDescription
                 + taskTime
                 + "\n\n" + "You now have " + (length + 1) + (length == 0 ? " task" : " tasks")
-                + " in the list.\n" + divider);
+                + " in the list.\n";
     }
 }

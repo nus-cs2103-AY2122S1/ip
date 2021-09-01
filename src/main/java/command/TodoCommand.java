@@ -21,13 +21,14 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Executes the todo command with the given input.
+     * Returns the proper response according to the given input.
      *
      * @param list The list of tasks to be modified by the command.
      * @param ui The UI of Duke to be invoked by the command.
+     * @return A response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
-    public void execute(TaskList list, UserInterface ui) throws DukeException {
+    public String execute(TaskList list, UserInterface ui) throws DukeException {
 
         String newTask = input.substring(5);
         if (newTask.length() == 0) {
@@ -35,7 +36,7 @@ public class TodoCommand extends Command {
         } else {
             list.addTask(new TodoTask(newTask));
             Storage.save(list);
-            UserInterface.showTaskAdded(newTask, 1, list.getSize() - 1, "");
+            return ui.showTaskAdded(newTask, 1, list.getSize() - 1, "");
         }
     }
 }

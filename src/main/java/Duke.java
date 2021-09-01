@@ -1,3 +1,5 @@
+import javafx.application.Application;
+
 import bot.Bot;
 
 /**
@@ -12,7 +14,6 @@ public class Duke {
      * @param args The list of arguments given to the main method.
      */
     public static void main(String[] args) {
-        Bot bot = new Bot();
-        bot.start();
+        Application.launch(Bot.class, args);
     }
 }
