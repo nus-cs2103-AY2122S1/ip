@@ -1,3 +1,5 @@
+package duke;
+
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;

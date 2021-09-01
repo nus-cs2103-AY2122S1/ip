@@ -1,3 +1,5 @@
+package duke;
+
 import duke.ui.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
