@@ -13,6 +13,7 @@ public abstract class Command {
      * @param tasks Task List that store all current task.
      * @param ui Ui object to interact with user.
      * @param storage Storage that store tasks in hard-drive.
+     * @return Expected message to be sent to user.
      * @throws DukeException If arguments enters has error.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;

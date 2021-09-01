@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Task store information that user wants to do.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

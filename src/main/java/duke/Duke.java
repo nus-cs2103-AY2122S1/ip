@@ -7,6 +7,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Duke is message bot to help user to keep track of task.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -29,10 +32,11 @@ public class Duke {
         }
     }
 
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns Duke's response from user's input.
+     *
+     * @param input User's input.
+     * @return Duke's response.
      */
     public String getResponse(String input) {
         try {

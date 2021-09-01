@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * DukeException is exception when command face error.
+ */
 public class DukeException extends Exception {
 
     /**

@@ -9,6 +9,9 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
+/**
+ * AddCommand add task to task list.
+ */
 public class AddCommand extends Command {
     private Task task;
 
@@ -56,11 +59,12 @@ public class AddCommand extends Command {
 
     /**
      * Adds and store new task in the list and storage.
-     * Sends added message to user.
+     * Returns added message to be sent to user.
      *
      * @param tasks Task List that store all current task.
      * @param ui Ui object to interact with user.
      * @param storage Storage that store tasks in hard-drive.
+     * @return Add message to be sent to user.
      * @throws DukeException If arguments enters has error.
      */
     @Override

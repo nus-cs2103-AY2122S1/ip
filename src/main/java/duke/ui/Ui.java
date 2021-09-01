@@ -6,12 +6,15 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
-
+/**
+ * Ui create messages that are being display to user.
+ */
 public class Ui {
 
-
     /**
-     * Shows exit message when user exit the programs
+     * Returns exit message when user exit the programs.
+     *
+     * @return Exit message when user exit the programs.
      */
     public String showExit() {
         String bye = "Bye. Hope to see you again soon!";
@@ -19,10 +22,11 @@ public class Ui {
     }
 
     /**
-     * Shows task added to the list.
+     * Returns task added to the list.
      *
      * @param task Task that is added.
      * @param taskList The list of tasks.
+     * @return Task added to the list.
      */
     public String showAddTask(Task task, TaskList taskList) {
         String addTask = String.format("Got it. I've added this task:\n%s\nNow you have %d task(s) in the list.",
@@ -31,10 +35,11 @@ public class Ui {
     }
 
     /**
-     * Shows task that is deleted from the list.
+     * Returns task that is deleted from the list.
      *
      * @param task Task that is deleted.
      * @param taskList The list of tasks.
+     * @return Task that is deleted from the list.
      */
     public String showDeleteTask(Task task, TaskList taskList) {
         String deleteTask = String.format("Noted. I've removed this task:\n%s\nNow you have %d task(s) in the list.",
@@ -43,9 +48,10 @@ public class Ui {
     }
 
     /**
-     * Shows task that is marked as done.
+     * Returns task that is marked as done.
      *
      * @param task Task that is marked as done.
+     * @return Task that is marked as done.
      */
     public String showDone(Task task) {
         String done = String.format("Nice! I've marked this task as done:\n%s", task.toString());
@@ -53,9 +59,10 @@ public class Ui {
     }
 
     /**
-     * Shows list of tasks that are stored.
+     * Returns list of tasks that are stored.
      *
      * @param taskList The list of tasks that are stored.
+     * @return List of tasks that are stored.
      * @throws DukeException If task list has error.
      */
     public String showList(TaskList taskList) throws DukeException {
@@ -78,6 +85,8 @@ public class Ui {
 
     /**
      * Tells user that Duke can't understand the input.
+     *
+     * @return Lost message that tells user that Duke can't understand the input.
      */
     public String showLost() {
         String lost = "OOPS!!! I'm sorry, but I don't know what that means :-(";
@@ -85,16 +94,9 @@ public class Ui {
     }
 
     /**
-     * Tells user the error that Duke faced
-     *
-     * @param errorMessage Error message to be shown to the user.
-     */
-    public String showError(String errorMessage) {
-        return errorMessage;
-    }
-
-    /**
      * Tells user that there is an error loading the file.
+     *
+     * @return Loading error message.
      */
     public String showLoadingError() {
         return "OOPS!!! There is a loading error.";
@@ -104,6 +106,7 @@ public class Ui {
      * Show user a list of tasks matching the key word.
      *
      * @param tasks List of tasks that match the key word.
+     * @return List of tasks matching the key word.
      */
     public String showFindTask(ArrayList<Task> tasks) {
         if (tasks.size() == 0) {

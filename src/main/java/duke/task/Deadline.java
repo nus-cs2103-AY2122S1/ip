@@ -6,6 +6,9 @@ import java.time.format.DateTimeParseException;
 
 import duke.exception.DukeException;
 
+/**
+ * Deadline is a task that has a deadline
+ */
 public class Deadline extends Task {
     protected LocalDate by;
 

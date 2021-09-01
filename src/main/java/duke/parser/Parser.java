@@ -10,7 +10,9 @@ import duke.command.ListCommand;
 import duke.command.LostCommand;
 import duke.exception.DukeException;
 
-
+/**
+ * Parser parse user input and create command based on the input.
+ */
 public class Parser {
 
     /**

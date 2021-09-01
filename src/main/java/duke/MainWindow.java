@@ -25,6 +25,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Start duke bot and sent hello message.
+     */
     @FXML
     public void initialize() {
         String welcomeMessage = "Hello, I am Duke\nHow can I help you?";
@@ -50,4 +53,5 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
 }

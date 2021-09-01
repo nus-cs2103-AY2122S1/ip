@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * Todo is a task that store information of the task.
+ */
 public class Todo extends Task {
 
     /**

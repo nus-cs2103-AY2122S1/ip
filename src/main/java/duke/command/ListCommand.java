@@ -5,14 +5,18 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * ListCommand return the list of task stored.
+ */
 public class ListCommand extends Command {
 
     /**
-     * Shows the list of tasks stored.
+     * Returns the list of tasks stored.
      *
      * @param tasks Task List that store all current task.
      * @param ui Ui object to interact with user.
      * @param storage Storage that store tasks in hard-drive.
+     * @return List of tasks stored.
      * @throws DukeException If arguments enters has error.
      */
     @Override

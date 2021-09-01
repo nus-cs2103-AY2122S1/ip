@@ -8,6 +8,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * FindCommand finds keyword present in the task list.
+ */
 public class FindCommand extends Command {
     private String keyWord;
 
@@ -27,6 +30,7 @@ public class FindCommand extends Command {
      * @param tasks Task List that store all current task.
      * @param ui Ui object to interact with user.
      * @param storage Storage that store tasks in hard-drive.
+     * @return Task in string format.
      * @throws DukeException If arguments enters has error.
      */
     @Override

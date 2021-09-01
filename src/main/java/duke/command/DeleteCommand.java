@@ -6,6 +6,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Delete command delete task from task list.
+ */
 public class DeleteCommand extends Command {
     private int taskNumber;
 
@@ -20,11 +23,12 @@ public class DeleteCommand extends Command {
 
     /**
      * Deletes task in Task List and Storage.
-     * Send deleted message to the user.
+     * Returns deleted message to be sent to the user.
      *
      * @param tasks Task List that store all current task.
      * @param ui Ui object to interact with user.
      * @param storage Storage that store tasks in hard-drive.
+     * @return Delete message to be sent to user.
      * @throws DukeException If arguments enters has error.
      */
     @Override

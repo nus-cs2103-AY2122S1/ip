@@ -14,6 +14,9 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
+/**
+ * Storage read and store task in the list in the file.
+ */
 public class Storage {
     private File file;
     private String fileName;
