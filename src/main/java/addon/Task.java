@@ -49,7 +49,6 @@ public class Task {
      * Child class of Task, adds deadline field.
      */
     public static class Deadline extends Task {
-
         protected LocalDate date;
 
         /**

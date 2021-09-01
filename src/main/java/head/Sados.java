@@ -38,11 +38,7 @@ public class Sados extends Application {
 
         stage.setTitle("SaDOS");
 
-        BorderPane topPanel = new BorderPane(); //Top panel
-        Label nowDate = new Label();
-        nowDate.setText("Hello! Today's date is: " + Ui.printDate(LocalDate.now()));
-
-        HBox saveLoad = new HBox();
+        HBox saveLoad = new HBox(); //top left
         Button save = new Button("Save");
         save.setOnAction(a -> {
             ArrayList<Task> list = new ArrayList<>(tasks);
@@ -62,12 +58,17 @@ public class Sados extends Application {
         saveLoad.getChildren().addAll(save, load);
         saveLoad.setSpacing(10);
 
-        HBox deleteDone = new HBox();
+        Label nowDate = new Label(); //top center
+        nowDate.setText("Hello! Today's date is: " + Ui.printDate(LocalDate.now()));
+
+        HBox deleteDone = new HBox(); //top right
         Button delete = new Button("Delete");
         delete.setOnAction(e -> {
             Task selected = listView.getSelectionModel().getSelectedItem();
-            tasks.remove(selected);
-
+            boolean isConfirm = Popup.confirmationPopup(selected.toString());
+            if (isConfirm) {
+                tasks.remove(selected);
+            }
         });
         Button done = new Button("Done");
         done.setOnAction(e -> {
@@ -75,18 +76,14 @@ public class Sados extends Application {
             selected.markDone();
             listView.refresh();
         });
-
         deleteDone.getChildren().addAll(delete, done);
         deleteDone.setSpacing(10);
 
+        BorderPane topPanel = new BorderPane(); //full top row
         topPanel.setPadding(new Insets(10, 10, 10, 10));
         topPanel.setLeft(saveLoad);
         topPanel.setCenter(nowDate);
         topPanel.setRight(deleteDone);
-
-        HBox bottomPanel = new HBox();
-        bottomPanel.setPadding(new Insets(10, 10, 10, 10));
-        bottomPanel.setSpacing(10);
 
         TextField nameInput = new TextField();
         nameInput.setPromptText("Task Name");
@@ -97,7 +94,7 @@ public class Sados extends Application {
         actions.getItems().addAll("Todo", "Event", "Deadline", "Search");
         actions.getSelectionModel().select(0);
 
-        Button go = new Button("Go!");
+        Button go = new Button("Go!"); //parsing information from inputs
         go.setOnAction(e -> {
             String option = actions.getValue();
             if (option.equals("Todo")) {
@@ -160,6 +157,9 @@ public class Sados extends Application {
             }
         });
 
+        HBox bottomPanel = new HBox(); //full bottom row
+        bottomPanel.setPadding(new Insets(10, 10, 10, 10));
+        bottomPanel.setSpacing(10);
         bottomPanel.getChildren().addAll(nameInput, dateInput, actions, go);
         HBox.setHgrow(nameInput, Priority.ALWAYS);
         HBox.setHgrow(dateInput, Priority.ALWAYS);
@@ -168,7 +168,7 @@ public class Sados extends Application {
 
         listView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-        BorderPane borders = new BorderPane();
+        BorderPane borders = new BorderPane(); //full window
         borders.setTop(topPanel);
         borders.setCenter(listView);
         borders.setBottom(bottomPanel);
@@ -186,17 +186,19 @@ public class Sados extends Application {
      * @param date LocalDate object if type 2 or 3.
      */
     private void filter(int type, String name, LocalDate date) {
+
         ObservableList<String> list = FXCollections.observableArrayList();
         String dateString = Ui.printDate(date);
         String filterString;
-        if (type == 1) {
+
+        if (type == 1) { //name only
             for (Task i : tasks) {
                 if (i.nameContains(name)) {
                     list.add(i.toString());
                 }
             }
             filterString = name;
-        } else if (type == 2) {
+        } else if (type == 2) { //date only
             for (Task i : tasks) {
                 if (i instanceof Event) {
                     Event e = (Event) i;
@@ -211,7 +213,7 @@ public class Sados extends Application {
                 }
             }
             filterString = dateString;
-        } else {
+        } else { //name and date
             for (Task i : tasks) {
                 if (i.nameContains(name)) {
                     if (i instanceof Event) {
