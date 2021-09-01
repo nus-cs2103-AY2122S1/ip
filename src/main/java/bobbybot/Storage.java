@@ -22,14 +22,20 @@ public class Storage {
     }
 
     /**
-     * Load files from .txt file
+     * Loads files from .txt file
      * @return List of tasks
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException Exception if file is not found
      */
     public List<Task> load() throws FileNotFoundException {
-        System.out.println("loading from db....");
         File f = new File(filePath);
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        File dir = new File("data");
+        if (!dir.isDirectory()) {
+            dir.mkdir();
+        }
+        if (!f.isFile()) {
+            createNewDataFile();
+        }
+        Scanner s = new Scanner(f); 
         List<Task> tasks = new ArrayList<Task>();
         int totalTasks = 0;
 
@@ -55,13 +61,11 @@ public class Storage {
             }
             totalTasks += 1;
         }
-        System.out.println("load completed");
-
         return tasks;
     }
 
     /**
-     * Saves all tasks in bobbybot.BobbyBot to hardcoded text file
+     * Saves all tasks in .txt file
      */
     public void save(TaskList tasks) throws IOException {
         // save task to .txt file
@@ -71,6 +75,19 @@ public class Storage {
             fw.write(saveRow);
         }
         fw.close();
+    }
+
+    /**
+     * Creates new .txt file to store tasks at filepath
+     */
+    public void createNewDataFile() {
+        File file = new File(filePath);
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            System.out.println("Could not create new text file");
+            System.exit(0);
+        }
     }
 }
 

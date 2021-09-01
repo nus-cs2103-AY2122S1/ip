@@ -12,12 +12,22 @@ public class StorageTest {
     @Test
     public void load_loadTestDB_success() throws FileNotFoundException {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        Storage storage = new Storage("src/test/java/testDatabase.txt");
+        Storage storage = new Storage("testDatabase.txt");
         List<Task> tasks = storage.load();
         System.out.println(tasks);
         String actualString = "[[T][X] to this as well, [T][X] and this,"
                 + " [D][X] this assignment  (by: Jan 01 2021 10:22), "
                 + "[T][ ] show this in db, [T][ ] this, [E][ ] that (at: sunday)]";
         assertEquals(tasks.toString(), actualString);
+    }
+
+    @Test
+    public void load_loadInvalidFileDb_exceptionThrown() {
+        try {
+            Storage storage = new Storage("invalidfile.txt");
+            List<Task> tasks = storage.load();
+        } catch (FileNotFoundException e) {
+            assertEquals(1, 1);
+        }
     }
 }

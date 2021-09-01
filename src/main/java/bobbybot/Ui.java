@@ -5,7 +5,7 @@ package bobbybot;
  */
 public class Ui {
     public void showLoadingError() {
-        System.out.println("Error encountered when loading data");
+        System.out.println("Could not load data from past memory");
     }
 
     public void showLine() {
@@ -17,7 +17,7 @@ public class Ui {
      */
     public void showWelcome() {
         showLine();
-        System.out.println("Hello! I'm Bobby\nWhat can I do for you?\n");
+        System.out.println("Hello! I'm Bobby\nWhat can I do for you?");
         showLine();
     }
 
