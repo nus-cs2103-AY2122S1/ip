@@ -63,25 +63,35 @@ public class Storage {
                 String command = lineSplitter.next().trim();
                 try {
                     if (command.equals("todo")) {
+                        assert lineSplitter.hasNext() : "Data file is corrupted";
                         String description = lineSplitter.nextLine();
+                        assert !description.equals("") : "Data file is corrupted!";
                         taskList.add(new ToDo(description.trim()));
 
                     } else if (command.equals("deadline")) {
+                        assert lineSplitter.hasNext() : "Data file is corrupted";
                         String description = lineSplitter.nextLine();
+                        assert !description.equals("") : "Data file is corrupted!";
                         String[] parts = description.split("/by");
                         taskList.add(new Deadline(parts[0].trim(), parts[1].trim()));
 
                     } else if (command.equals("event")) {
+                        assert lineSplitter.hasNext() : "Data file is corrupted";
                         String description = lineSplitter.nextLine();
+                        assert !description.equals("") : "Data file is corrupted!";
                         String[] parts = description.split("/at");
                         taskList.add(new Event(parts[0].trim(), parts[1].trim()));
 
                     } else if (command.equals("done")) {
+                        assert lineSplitter.hasNext() : "Data file is corrupted";
                         int indexToMark = lineSplitter.nextInt();
+                        assert indexToMark < taskList.size() : "Date file is corrupted";
                         taskList.get(indexToMark - 1).markAsDone();
 
                     } else if (command.equals("delete")) {
+                        assert lineSplitter.hasNext() : "Data file is corrupted";
                         int indexToDelete = lineSplitter.nextInt();
+                        assert indexToDelete < taskList.size() : "Data file is corrupted";
                         taskList.remove(indexToDelete - 1);
 
                     }
