@@ -9,8 +9,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDate date;
-    protected LocalDateTime dateTime;
+    private LocalDate date;
+    private LocalDateTime dateTime;
 
     /**
      * This constructor creates a Deadline type task object.

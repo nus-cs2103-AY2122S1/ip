@@ -9,9 +9,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalTime startTime;
-    protected LocalTime endTime;
-    protected LocalDate date;
+    private LocalTime startTime;
+    private LocalTime endTime;
+    private LocalDate date;
 
     /**
      * This constructor creates an Event task type object.
