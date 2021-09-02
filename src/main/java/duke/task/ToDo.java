@@ -23,19 +23,22 @@ public class ToDo extends Task {
      * Constructs a ToDo task from an existing task description and completion status.
      * Used when loading from a save file.
      *
-     * @param completed String indicating the status of completion: 1 if done, 0 if not.
+     * @param completedStatus String indicating the status of completion: 1 if done, 0 if not.
      * @param description String of the task description.
      */
-    public ToDo(String completed, String description) {
+    public ToDo(String completedStatus, String description) {
         super(description);
 
-        if (completed.equals("1")) {
+        if (completedStatus.equals("1")) {
             super.markTaskAsDone();
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String saveAsString() {
+    public String convertToString() {
         return super.formatString("T");
     }
 

@@ -22,6 +22,11 @@ public class DoneCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * This executes the mark as done command.
+     */
     @Override
     public String execute() {
         return this.tasks.markTaskAsDone(this.index);

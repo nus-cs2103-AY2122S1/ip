@@ -13,6 +13,11 @@ public class ExitCommand extends Command {
         return true;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * This executes the exit command.
+     */
     @Override
     public String execute() {
         return "Hmph! It's not like I want to see you again or anything!";

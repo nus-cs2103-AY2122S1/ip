@@ -16,8 +16,8 @@ public class Storage {
     private static final String DIRECTORY_PATH = "./data";
     private static final String FILE_PATH = DIRECTORY_PATH + "/duke.txt";
 
-    private boolean doesDirectoryExists;
-    private boolean doesFileExists;
+    private boolean isDirectoryCreated;
+    private boolean isFileCreated;
 
     /**
      * Constructor for Storage.
@@ -27,8 +27,8 @@ public class Storage {
         File directory = new File(DIRECTORY_PATH);
         File file = new File(FILE_PATH);
 
-        this.doesDirectoryExists = directory.exists();
-        this.doesFileExists = file.exists();
+        this.isDirectoryCreated = directory.exists();
+        this.isFileCreated = file.exists();
     }
 
     /**
@@ -37,7 +37,7 @@ public class Storage {
      * @return Tasks from the saved file in an ArrayList of String
      */
     public ArrayList<String> retrieveData() {
-        if (doesFileExists) {
+        if (isFileCreated) {
             try {
                 File f = new File(FILE_PATH);
                 Scanner sc = new Scanner(f);
@@ -65,19 +65,19 @@ public class Storage {
      */
     public void writeToFile(String tasks) {
         // Checks if directory exists, creates if it doesn't
-        if (!this.doesDirectoryExists) {
+        if (!this.isDirectoryCreated) {
             File directory = new File(DIRECTORY_PATH);
             directory.mkdir();
-            this.doesDirectoryExists = directory.exists();
+            this.isDirectoryCreated = directory.exists();
         }
 
         // Checks if file exists, creates if it doesn't
-        if (!this.doesFileExists) {
+        if (!this.isFileCreated) {
             File file = new File(FILE_PATH);
             boolean result;
             try {
                 result = file.createNewFile();
-                this.doesFileExists = result;
+                this.isFileCreated = result;
             } catch (IOException e) {
                 System.out.println("Something went wrong:  " + e.getMessage());
             }

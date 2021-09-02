@@ -29,7 +29,7 @@ public abstract class Task {
      *
      * @return String of the formatted Task.
      */
-    public abstract String saveAsString();
+    public abstract String convertToString();
 
     /**
      * Returns the status of whether the task has been completed.

@@ -14,7 +14,7 @@ public class ToDoTest {
     @Test
     public void testSaveAsString() {
         ToDo task = new ToDo("1", "read book");
-        assertEquals("T | 1 | read book", task.saveAsString());
+        assertEquals("T | 1 | read book", task.convertToString());
     }
 
     @Test

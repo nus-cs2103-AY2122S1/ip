@@ -65,7 +65,7 @@ public class TaskList {
     private String convertListToString() {
         String tasksString = "";
         for (Task task : this.tasks) {
-            tasksString = tasksString + task.saveAsString() + "\n";
+            tasksString = tasksString + String.format("%s\n", task.convertToString());
         }
         return tasksString;
     }
@@ -167,8 +167,8 @@ public class TaskList {
             if (indexes[0] <= 0 || indexes[0] > tasks.size()) {
                 throw new InvalidIndexException(tasks.size());
             }
-            message = "You completed a task! Maybe you aren't so incompetent after all.\n"
-                + tasks.get(indexes[0] - 1).markTaskAsDone() + "\n";
+            message = String.format("You completed a task! Maybe you aren't so incompetent after all.\n%s\n",
+                tasks.get(indexes[0] - 1).markTaskAsDone());
         } else {
             message = "You completed some tasks! Maybe you aren't so incompetent after all.\n";
 
@@ -177,7 +177,7 @@ public class TaskList {
                     throw new InvalidIndexException(tasks.size());
                 }
 
-                message = message + tasks.get(index - 1).markTaskAsDone() + "\n";
+                message = message + String.format("%s\n", tasks.get(index - 1).markTaskAsDone());
             }
         }
 

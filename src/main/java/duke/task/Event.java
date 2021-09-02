@@ -45,11 +45,11 @@ public class Event extends Task {
      * Constructs a new Eveent task from the given description, eventTime and completion status.
      * Used when loading from a save file.
      *
-     * @param completed String indicating the status of completion: 1 if done, 0 if not.
+     * @param completedStatus String indicating the status of completion: 1 if done, 0 if not.
      * @param description String of the task description.
      * @param eventTime String of the given event date, startTime and endTime.
      */
-    public Event(String completed, String description, String eventTime) {
+    public Event(String completedStatus, String description, String eventTime) {
         super(description);
         String[] dateInfo = eventTime.split(" ", 3);
         if (dateInfo.length < 3) {
@@ -59,7 +59,7 @@ public class Event extends Task {
         this.startTime = Parser.parseTime(dateInfo[1]);
         this.endTime = Parser.parseTime(dateInfo[2]);
 
-        if (completed.equals("1")) {
+        if (completedStatus.equals("1")) {
             super.markTaskAsDone();
         }
     }
@@ -73,13 +73,19 @@ public class Event extends Task {
         return eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isOnDate(String date) {
         return this.eventDate.equals(Parser.parseDate(date));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String saveAsString() {
+    public String convertToString() {
         return super.formatString("E", String.format("%s %s %s", this.eventDate, this.startTime, this.endTime));
     }
 

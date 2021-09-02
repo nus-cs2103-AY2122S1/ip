@@ -25,7 +25,12 @@ public class ParserTest {
 
     @Test
     public void testParseTaskIndex() {
-        assertEquals(4, Parser.filterTaskIndex("done 4"));
+        assertEquals(4, Parser.getTaskIndex("done 4"));
+    }
+
+    @Test
+    public void testParseMultipleTaskIndex() {
+        assertArrayEquals(new int[] {4, 5}, Parser.getAllTaskIndexes("done 4 5"));
     }
 
     @Test

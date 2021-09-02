@@ -22,6 +22,11 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * This executes the delete command.
+     */
     @Override
     public String execute() {
         return this.tasks.deleteTask(this.index);

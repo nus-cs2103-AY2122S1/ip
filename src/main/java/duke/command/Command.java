@@ -17,6 +17,8 @@ public abstract class Command {
 
     /**
      * Executes the command and runs any methods that is related to the command.
+     *
+     * @return the String result of the execution of the command.
      */
     public abstract String execute();
 }

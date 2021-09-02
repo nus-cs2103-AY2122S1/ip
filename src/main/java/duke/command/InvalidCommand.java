@@ -14,6 +14,11 @@ public class InvalidCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * This throws an invalid command exception.
+     */
     @Override
     public String execute() {
         throw new InvalidCommandException(this.input);

@@ -43,11 +43,11 @@ public class Deadline extends Task {
      * Constructs a Deadline task from an existing task description, dueDate and completion status.
      * Used when loading from a save file.
      *
-     * @param completed String indicating the status of completion: 1 if done, 0 if not.
+     * @param completedStatus String indicating the status of completion: 1 if done, 0 if not.
      * @param description String of the task description.
      * @param dueDate String of the given due date and time.
      */
-    public Deadline(String completed, String description, String dueDate) {
+    public Deadline(String completedStatus, String description, String dueDate) {
         super(description);
 
         String[] dateInfo = dueDate.split(" ", 2);
@@ -57,7 +57,7 @@ public class Deadline extends Task {
         this.dueDate = Parser.parseDate(dateInfo[0]);
         this.dueTime = Parser.parseTime(dateInfo[1]);
 
-        if (completed.equals("1")) {
+        if (completedStatus.equals("1")) {
             super.markTaskAsDone();
         }
     }
@@ -71,13 +71,19 @@ public class Deadline extends Task {
         return dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isOnDate(String date) {
         return this.dueDate.equals(Parser.parseDate(date));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public String saveAsString() {
+    public String convertToString() {
         return super.formatString("D", String.format("%s %s", this.dueDate, this.dueTime));
     }
 

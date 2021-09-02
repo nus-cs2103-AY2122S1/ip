@@ -25,6 +25,11 @@ public class AddCommand extends Command {
         this.taskType = taskType;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * This executes the add task command.
+     */
     @Override
     public String execute() {
         return this.tasks.addToList(this.task, this.taskType);

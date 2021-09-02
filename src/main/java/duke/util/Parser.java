@@ -50,7 +50,7 @@ public class Parser {
         case "find":
             return new ListCommand(this.tasks, "keyword", filterTaskDescription(input));
         case "done":
-            return new DoneCommand(this.tasks, filterMultipleTaskIndexes(input));
+            return new DoneCommand(this.tasks, getAllTaskIndexes(input));
         case "todo":
             return new AddCommand(this.tasks, filterTaskDescription(input), "ToDo");
         case "deadline":
@@ -58,7 +58,7 @@ public class Parser {
         case "event":
             return new AddCommand(this.tasks, filterTaskDescription(input), "Event");
         case "delete":
-            return new DeleteCommand(this.tasks, filterTaskIndex(input));
+            return new DeleteCommand(this.tasks, getTaskIndex(input));
         default:
             return new InvalidCommand(input);
         }
@@ -94,7 +94,7 @@ public class Parser {
      * @return the filtered and parsed int that refers to the index of the task.
      * @throws MissingIndexException when index is missing (including if it contains only white space).
      */
-    public static int filterTaskIndex(String command) throws MissingIndexException {
+    public static int getTaskIndex(String command) throws MissingIndexException {
         String[] commandItems = command.split(" ", 2);
         if (commandItems.length == 1) {
             throw new MissingIndexException();
@@ -116,7 +116,7 @@ public class Parser {
      * @return the filtered and parsed int that refers to the index of the task.
      * @throws MissingIndexException when index is missing (including if it contains only white space).
      */
-    public static int[] filterMultipleTaskIndexes(String command) throws MissingIndexException {
+    public static int[] getAllTaskIndexes(String command) throws MissingIndexException {
         ArrayList<Integer> indexes = new ArrayList<>();
 
         // Do checks

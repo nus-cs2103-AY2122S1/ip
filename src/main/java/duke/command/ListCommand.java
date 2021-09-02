@@ -25,6 +25,11 @@ public class ListCommand extends Command {
         this.filterCondition = filterCondition;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * This executes the list tasks command.
+     */
     @Override
     public String execute() {
         return tasks.listTasks(this.filterType, this.filterCondition);
