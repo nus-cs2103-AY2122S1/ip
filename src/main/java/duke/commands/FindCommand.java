@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.Ui;
 import duke.exceptions.NoSuchTaskException;
+import duke.gui.Ui;
 import duke.tasks.TaskList;
 
 /**

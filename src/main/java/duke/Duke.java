@@ -5,6 +5,7 @@ import java.io.IOException;
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.exceptions.NoSuchTaskException;
+import duke.gui.Ui;
 import duke.tasks.TaskList;
 
 
@@ -42,17 +43,15 @@ public class Duke {
         try {
             String exitTag = "bye";
             if (input.equalsIgnoreCase(exitTag)) {
-                new Thread() {
-                    public void run() {
-                        try {
-                            Thread.sleep(1250);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        } finally {
-                            System.exit(0);
-                        }
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(1250);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        System.exit(0);
                     }
-                }.start();
+                }).start();
 
                 return Ui.exit();
             } else {
