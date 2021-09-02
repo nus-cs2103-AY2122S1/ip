@@ -108,9 +108,9 @@ public class Duke extends Application {
 
         // Action event
         inputField.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ENTER ) {
+            if (event.getCode() == KeyCode.ENTER) {
                 output.setText(parseGui(inputField.getText()));
-            } else if (event.getCode() == KeyCode.ESCAPE ) {
+            } else if (event.getCode() == KeyCode.ESCAPE) {
                 output.setText("Output cleared.\nPlease enter a new command");
                 inputField.setText("");
             }
@@ -137,7 +137,7 @@ public class Duke extends Application {
 
         // Arranging all the nodes in the grid
         gridPane.add(welcome1, 1, 0);
-        gridPane.add(logo, 1,1);
+        gridPane.add(logo, 1, 1);
         gridPane.add(welcome2, 1, 2);
         gridPane.add(label, 1, 4);
         gridPane.add(inputField, 1, 5);

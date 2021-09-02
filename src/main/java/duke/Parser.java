@@ -1,12 +1,12 @@
 package duke;
 
-import duke.Task.Category;
-
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+
+import duke.Task.Category;
 
 /**
  * Represents a parser that process the user's input and handles with appropriate action.
