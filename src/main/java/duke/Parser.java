@@ -5,6 +5,7 @@ import duke.command.ExitCommand;
 import duke.command.ListCommand;
 import duke.command.DoneCommand;
 import duke.command.DeleteCommand;
+import duke.command.FindCommand;
 import duke.command.TodoCommand;
 import duke.command.DeadlineCommand;
 import duke.command.EventCommand;
@@ -31,6 +32,8 @@ public class Parser {
             return new DoneCommand(input);
         } else if (input.startsWith("delete")) {
             return new DeleteCommand(input);
+        } else if (input.startsWith("find")) {
+            return new FindCommand(input);
         } else if (input.startsWith("todo")) {
             return new TodoCommand(input);
         } else if (input.startsWith("deadline")) {

@@ -1,3 +1,10 @@
+<<<<<<< HEAD
 T | 0 | sleep
 D | 0 | wake up | Jun 08 2030
 E | 0 | school | Sep 07 2020
+=======
+T | 1 | hi
+T | 0 | sleep
+T | 0 | sleep
+T | 0 | yo
+>>>>>>> branch-Level-9

@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.Find;
 
 import java.util.Scanner;
 
@@ -77,6 +78,37 @@ public class Ui {
                 System.out.println((i + 1) + "." + taskList.getTask(i).toString());
             }
         }
+    }
+
+    /**
+     * Searches for the keyword among current Tasks.
+     *
+     * @param ls Current TaskList.
+     * @param word Keyword.
+     * @param find Current Find object.
+     * @return String representation of the Tasks that include the keyword.
+     */
+    public String printListWithKeyword(TaskList ls, String word, Find find) {
+        String result = "";
+        int count = 1;
+        for (int i = 0; i < ls.getSize(); i++) {
+            Task task = ls.getTask(i);
+            if (task.getDesc().toLowerCase().contains(word.toLowerCase())) {
+                find.setFound();
+                result += count + "." + ls.getTask(i).toString() + "\n";
+                count++;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * Prints a message when all current Tasks do not contain the keyword provided.
+     *
+     * @param word Keyword.
+     */
+    public void noResultsFound(String word) {
+        System.out.println("There were no tasks that included your keyword: " + word + ".");
     }
 
     /**
