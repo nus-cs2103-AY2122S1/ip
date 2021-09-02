@@ -91,6 +91,7 @@ public class Parser {
      * @throws InvalidCommandException If the following input is not valid.
      */
     public String parseDone(String[] arr) throws InvalidCommandException {
+        assert arr.length == 2 : "Please enter [done] [number]";
         if (arr.length == 1) {
             throw new InvalidCommandException("Please specify a number");
         } else if (!isNumeric(arr[1])) {
@@ -117,6 +118,7 @@ public class Parser {
      */
     public String parseDelete(String[] arr) throws InvalidCommandException,
             InvalidValueException {
+        assert arr.length == 2 : "Please enter [delete] [number]";
         if (arr.length == 1) {
             throw new InvalidCommandException("Please specify a number");
         } else if (!isNumeric(arr[1])) {
