@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Task Event that happens at a date and time.
+ */
 public class Event extends Task {
     //date of event in format LocalDate
     protected LocalDate atDate;
@@ -13,7 +16,7 @@ public class Event extends Task {
     protected String atTime;
 
     /**
-     * Constructor for Event Task.
+     * Constructs a Event Task with date and time of when it is happening.
      *
      * @param description Description of Event Task.
      * @param at Date and time when Event takes place, String format dd/mm/yyyy HHmm.

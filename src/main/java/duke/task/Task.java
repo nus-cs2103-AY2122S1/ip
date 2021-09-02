@@ -2,6 +2,9 @@ package duke.task;
 
 import java.io.Serializable;
 
+/**
+ * Represents a Task to be done.
+ */
 public class Task implements Serializable {
     //Description of Task
     protected String description;
@@ -9,7 +12,7 @@ public class Task implements Serializable {
     protected boolean isDone;
 
     /**
-     * Constructor for Task.
+     * Constructs a Task with a String description.
      *
      * @param description String description of Task.
      */
@@ -19,20 +22,19 @@ public class Task implements Serializable {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done duke.task with X
+        return (isDone ? "X" : " ");
     }
 
     public String getDescription() {
         return this.description;
     }
 
-
     public void setDone() {
         this.isDone = true;
     }
 
     /**
-     * toString method for Task, showing the status of completion and description.
+     * Converts Task to String, showing the status of completion and description.
      *
      * @return Status of completion and description of Task.
      */

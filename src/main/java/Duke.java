@@ -26,15 +26,16 @@ public class Duke extends Application{
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Stage stage;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Constructor of Duke.
      */
-    public Duke() {
+    public Duke(String fileName) {
         this.ui = new Ui();
-        this.list = new TaskList();
+        this.list = new TaskList(fileName);
         this.parser = new Parser(this.list);
     }
 
@@ -56,6 +57,7 @@ public class Duke extends Application{
         scene = new Scene(mainLayout);
 
         stage.setScene(scene);
+        this.stage = stage;
         stage.show();
 
         //Step 2. Formatting the window to look as expected
@@ -128,7 +130,7 @@ public class Duke extends Application{
 
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke("list.ser").run();
     }
 
     /**

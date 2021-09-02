@@ -1,5 +1,8 @@
 package duke.util;
 
+/**
+ * Represents the User Interface.
+ */
 public class Ui {
     //Duke logo
     private static final String logo = " ____        _        \n"

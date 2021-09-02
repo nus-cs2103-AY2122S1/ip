@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Represents a Task with a Deadline(Date and Time).
+ */
 public class Deadline extends Task {
     //date of deadline in format LocalDate
     protected LocalDate byDate;
@@ -13,7 +16,7 @@ public class Deadline extends Task {
     protected String byTime;
 
     /**
-     * Constructor for Deadline Task.
+     * Constructs a Task with a Deadline .
      *
      * @param description String input of description of Deadline Task.
      * @param by String for Deadline due format dd/mm/yyyy HHmm.

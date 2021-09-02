@@ -4,6 +4,9 @@ import duke.exception.DukeException;
 
 import java.util.Scanner;
 
+/**
+ * Represents an object to parse user's input and execute it.
+ */
 public class Parser {
     private TaskList list;
 

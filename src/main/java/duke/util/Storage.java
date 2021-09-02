@@ -10,12 +10,15 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
+/**
+ * Represents an object to load and store serializable into files.
+ */
 public class Storage {
     //File name of file to be used to write and load list of task.
     private final String fileName;
 
     /**
-     * Constructor of Storage.
+     * Constructs Storage object at fileName.
      *
      * @param fileName File name of file to write to or load from.
      */
@@ -24,7 +27,7 @@ public class Storage {
     }
 
     /**
-     * Write the inputted list onto the specified file.
+     * Writes the inputted list onto the specified file.
      *
      * @param list ArrayList to be written onto the file.
      */
@@ -43,7 +46,7 @@ public class Storage {
     }
 
     /**
-     * Return an ArrayList that is loaded from the file.
+     * Loads an ArrayList from the file.
      *
      * @return ArrayList from file, if nothing is written on file, return new ArrayList list.
      */
@@ -51,6 +54,7 @@ public class Storage {
         try {
             FileInputStream readData = new FileInputStream(fileName);
             ObjectInputStream readStream = new ObjectInputStream(readData);
+            @SuppressWarnings("unchecked")
             ArrayList<Task> list2 = (ArrayList<Task>) readStream.readObject();
             readStream.close();
             return list2;

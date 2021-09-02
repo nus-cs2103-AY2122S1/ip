@@ -9,6 +9,9 @@ import duke.task.ToDo;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+/**
+ * Represents an ArrayList of Task.
+ */
 public class TaskList {
     //List that holds all the Tasks.
     private final ArrayList<Task> list;
@@ -16,10 +19,12 @@ public class TaskList {
     private final Storage store;
 
     /**
-     * Constructs List.
+     * Constructs List that contains Tasks.
+     *
+     * @param fileName File to save and load existing TaskList from.
      */
-    public TaskList() {
-        this.store = new Storage("list.ser");
+    public TaskList(String fileName) {
+        this.store = new Storage(fileName);
         this.list = store.loadFromFile();
     }
 
@@ -77,7 +82,7 @@ public class TaskList {
     }
 
     /**
-     * Sets Task to be done at list index.
+     * Sets Task at list index to done .
      *
      * @param index Position of Task to be set to done.
      * @return

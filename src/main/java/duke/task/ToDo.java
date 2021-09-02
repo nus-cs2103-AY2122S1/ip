@@ -1,9 +1,13 @@
 package duke.task;
 
+/**
+ * Represents a Task that is to be done,
+ * no date and time cutoff.
+ */
 public class ToDo extends Task {
 
     /**
-     * Constructor for ToDo Task.
+     * Constructs a ToDo Task.
      *
      * @param description String description of ToDo task.
      */
@@ -11,11 +15,6 @@ public class ToDo extends Task {
         super(description);
     }
 
-    /**
-     * toString method for ToDo task, overrides Task toString.
-     *
-     * @return String representation of Todo Task.
-     */
     @Override
     public String toString() {
         return "[T]" + super.toString() + " \n";
