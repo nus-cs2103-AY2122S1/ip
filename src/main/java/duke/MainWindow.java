@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import java.util.Objects;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -27,8 +29,8 @@ public class MainWindow extends AnchorPane {
 
     private Command command = new Command();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png")));
+    private Image dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png")));
 
     @FXML
     public void initialize() {
