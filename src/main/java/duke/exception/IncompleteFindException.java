@@ -1,7 +1,5 @@
 package duke.exception;
 
-import static duke.Ui.LINE;
-
 /**
  * Representation for incomplete keyword for FindCommand exception.
  */

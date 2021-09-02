@@ -75,14 +75,6 @@ public class Parser {
      * @return true if input is a done command.
      */
     public static boolean isDone(String input) {
-        //        String[] splited = phrase.split(" ");
-        ////        System.out.println(splited);
-        //        if (splited.length != 2) {
-        //            return false;
-        //        } else {
-        //            return splited[0].equals("done") && splited[1]
-        //                  .matches("\\d+") && Integer.valueOf(splited[1]) <= listLength;
-        //        }
         return input.startsWith("done ");
     }
 
@@ -185,7 +177,7 @@ public class Parser {
 
             if (splited.length < 2 || !splited[1].matches("\\d+")
                     || Integer.valueOf(splited[1]) > tasks.getSize()) {
-                throw new DukeException(ui.buildMessage("Please key in valid number to mark as done."));
+                throw new DukeException("Please key in valid number to mark as done.");
             } else {
                 int index = Integer.valueOf(splited[1]) - 1;
                 return new DoneCommand(index);
@@ -194,7 +186,7 @@ public class Parser {
             String[] str = userInput.split(" ");
 
             if (str.length < 2 || !str[1].matches("\\d+") || Integer.valueOf(str[1]) > tasks.getSize()) {
-                throw new DukeException(ui.buildMessage("Please key in valid number to remove."));
+                throw new DukeException("Please key in valid number to remove.");
             } else {
                 return new RemoveCommand(Integer.valueOf(str[1]) - 1);
             }

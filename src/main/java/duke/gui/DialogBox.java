@@ -77,7 +77,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        db.setPictureDimensions(42,35,30);
+        db.setPictureDimensions(42, 35, 30);
         db.setStyle("-fx-background-color: #FFFFFF;");
         return db;
     }
@@ -92,7 +92,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.setPictureDimensions(57,30,30);
+        db.setPictureDimensions(57, 30, 30);
         return db;
     }
 }
