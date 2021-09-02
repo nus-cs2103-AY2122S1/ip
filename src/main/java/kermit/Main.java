@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private KermitGui kermit = new KermitGui();
+    private Kermit kermit = new Kermit("data/tasks.txt");
 
     @Override
     public void start(Stage stage) {

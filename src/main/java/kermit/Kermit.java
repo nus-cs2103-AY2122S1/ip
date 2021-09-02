@@ -52,4 +52,8 @@ public class Kermit {
     public static void main(String[] args) {
         new Kermit("data/tasks.txt").run();
     }
+
+    public String getResponse(String input) {
+        return "Kermit heard: " + input;
+    }
 }

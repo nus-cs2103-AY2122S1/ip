@@ -21,7 +21,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private KermitGui kermit;
+    private Kermit kermit;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cookiemonster.png"));
     private Image kermitImage = new Image(this.getClass().getResourceAsStream("/images/kermit.png"));
@@ -31,7 +31,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setKermit(KermitGui k) {
+    public void setKermit(Kermit k) {
         kermit = k;
     }
 
