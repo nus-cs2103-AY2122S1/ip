@@ -2,6 +2,7 @@ package duke;
 
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.Find;
 
 import java.util.Scanner;
 
@@ -49,6 +50,24 @@ public class Ui {
                 System.out.println((i + 1) + "." + taskList.getTask(i).toString());
             }
         }
+    }
+
+    public String printListWithKeyword(TaskList ls, String word, Find find) {
+        String result = "";
+        int count = 1;
+        for (int i = 0; i < ls.getSize(); i++) {
+            Task task = ls.getTask(i);
+            if (task.getDesc().toLowerCase().contains(word.toLowerCase())) {
+                find.setFound();
+                result += count + "." + ls.getTask(i).toString() + "\n";
+                count++;
+            }
+        }
+        return result;
+    }
+
+    public void noResultsFound(String word) {
+        System.out.println("There were no tasks that included your keyword: " + word + ".");
     }
 
     public String readCommand() {
