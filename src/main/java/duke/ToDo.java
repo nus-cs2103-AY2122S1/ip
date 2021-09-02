@@ -4,21 +4,21 @@ package duke;
  * This class simulates a unique type of Task which only has description
  * but no designated deadline.
  */
-public class ToDos extends Task {
+public class ToDo extends Task {
 
     /**
-     * Constructor for ToDos.
+     * Constructor for ToDo.
      *
-     * @param description Description of the ToDos object.
+     * @param description Description of the ToDo object.
      */
-    public ToDos(String description) {
+    public ToDo(String description) {
         super(description);
     }
 
     /**
-     * Returns description of the current ToDos object.
+     * Returns description of the current ToDo object.
      *
-     * @return Description of the current ToDos object.
+     * @return Description of the current ToDo object.
      */
     @Override
     public String getDescription() {
@@ -26,7 +26,7 @@ public class ToDos extends Task {
     }
 
     /**
-     * Marks the current ToDos object as done.
+     * Marks the current ToDo object as done.
      */
     @Override
     public void markDone() {
@@ -34,9 +34,9 @@ public class ToDos extends Task {
     }
 
     /**
-     * Returns the status icon of the current ToDos object.
+     * Returns the status icon of the current ToDo object.
      *
-     * @return Status icon of the current ToDos object.
+     * @return Status icon of the current ToDo object.
      */
     @Override
     public String getStatusIcon() {
@@ -44,9 +44,9 @@ public class ToDos extends Task {
     }
 
     /**
-     * Returns the current ToDos's description and completion status.
+     * Returns the current ToDo's description and completion status.
      *
-     * @return Current ToDos's description and completion status.
+     * @return Current ToDo's description and completion status.
      */
     @Override
     public String printTask() {

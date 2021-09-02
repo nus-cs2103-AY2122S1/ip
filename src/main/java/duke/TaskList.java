@@ -36,7 +36,7 @@ public class TaskList {
             } else if (userInput.startsWith("event") && userInput.contains("at")) {
                 newTask = new Event(userInput);
             } else {
-                newTask = new ToDos(userInput);
+                newTask = new ToDo(userInput);
             }
             contents.add(newTask);
             Ui.addTaskMessage(newTask, contents.size());

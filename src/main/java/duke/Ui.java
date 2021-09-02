@@ -174,7 +174,7 @@ public class Ui {
     }
 
     /**
-     * The goodbye message displayed after user exits Duke (i.e. bye).
+     * Displays a goodbye message after user exits Duke (i.e. bye).
      */
     public static void goodbyeMessage() {
         System.out.println("\nGoodbye! Have a nice day. :)");
