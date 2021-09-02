@@ -18,7 +18,7 @@ public class AddCommand extends Command {
     private TaskType type;
     private String[] parameters;
 
-    public enum TaskType {TODO, DEADLINE, EVENT}
+    public enum TaskType { TODO, DEADLINE, EVENT }
 
     /**
      * Constructs the AddCommand object.
@@ -40,7 +40,7 @@ public class AddCommand extends Command {
             taskList.addTask(deadline);
             storage.saveList(taskList.getTasks());
             return messageHeader + deadline + taskList.getListStatus();
-            case EVENT:
+        case EVENT:
             Event event = new Event(parameters[0], LocalDate.parse(parameters[1]));
             taskList.addTask(event);
             storage.saveList(taskList.getTasks());
@@ -50,7 +50,8 @@ public class AddCommand extends Command {
             taskList.addTask(toDo);
             storage.saveList(taskList.getTasks());
             return messageHeader + toDo + taskList.getListStatus();
+        default:
+            return "Error";
         }
-        return "Error";
     }
 }

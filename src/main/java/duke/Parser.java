@@ -1,8 +1,13 @@
 package duke;
 
-import duke.command.*;
-
 import java.time.LocalDate;
+
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.EditCommand;
+import duke.command.ExitCommand;
+import duke.command.ListCommand;
+import duke.command.OnCommand;
 
 /**
  * Parser class deals with making sense of the user command.

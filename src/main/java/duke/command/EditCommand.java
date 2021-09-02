@@ -14,7 +14,7 @@ public class EditCommand extends Command {
     private EditType type;
     private int taskNumber;
 
-    public enum EditType {DELETE, DONE}
+    public enum EditType { DELETE, DONE }
 
     /**
      * Constructs the EditCommand object.
@@ -38,17 +38,14 @@ public class EditCommand extends Command {
                 completedTask.markAsDone();
                 storage.saveList(taskList.getTasks());
                 return "Good work! Task is now marked as done:\n" + completedTask + "\n";
-//                ui.printMessage(completeMessage);
-//                break;
             case DELETE:
                 Task deletedTask = taskList.removeTask(taskNumber - 1);
                 storage.saveList(taskList.getTasks());
                 return "Alright! I've deleted this task:\n" + deletedTask + taskList.getListStatus();
-//                ui.printMessage(deleteMessage);
-//                break;
+            default:
+                return "Error";
             }
         }
-        return "Error";
     }
 
 

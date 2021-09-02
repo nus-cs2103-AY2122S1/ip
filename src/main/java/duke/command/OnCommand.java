@@ -1,14 +1,14 @@
 package duke.command;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * OnCommand class handles the 'on' command to list the tasks on a date.
