@@ -28,6 +28,11 @@ test {
     }
 }
 
+checkstyle {
+    toolVersion = '8.29'
+}
+
+
 application {
     mainClassName = "seedu.duke.Duke"
 }
@@ -35,10 +40,6 @@ application {
 shadowJar {
     archiveBaseName = "duke"
     archiveClassifier = null
-}
-
-checkstyle {
-    toolVersion = '8.29'
 }
 
 run{
