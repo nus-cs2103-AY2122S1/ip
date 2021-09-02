@@ -13,9 +13,8 @@ import java.util.Scanner;
 
 public class Storage {
 
-    static String dash = "__________________________________";
     protected String filepath;
-    protected TaskList taskList;
+    public TaskList taskList;
     private int counter = 0;
 
     /**
@@ -35,11 +34,9 @@ public class Storage {
      *
      * @throws FileNotFoundException Raise Exception if text file does not exist.
      */
-    public void printFileContents() throws FileNotFoundException {
+    public String printFileContents(TaskList tasks) throws FileNotFoundException {
 
-        // System.out.println(filePath);
         File f = new File(filepath); // create a File for the given file path
-        // System.out.println(f.exists());
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
 
         while (s.hasNext()) {
@@ -47,36 +44,46 @@ public class Storage {
 
             if (toAdd.charAt(1) == 'T') {
                 String task = toAdd.substring(7);
-                taskList.addTodo(task);
+
+                tasks.addTodo(task);
                 counter += 1;
+                System.out.println(counter);
 
             } else if (toAdd.charAt(1) == 'E') {
                 String task = toAdd.substring(7);
                 String name = task.substring(0, task.indexOf("(") - 1);
                 String when = task.substring(task.indexOf(":") + 2, task.indexOf(")"));
 
-                taskList.addEvent(name + " /at " + when);
+                tasks.addEvent(name + " /at " + when);
                 counter += 1;
+                System.out.println(counter);
 
             } else if (toAdd.charAt(1) == 'D') {
                 String task = toAdd.substring(7);
                 String name = task.substring(0, task.indexOf("(") - 1);
                 String when = task.substring(task.indexOf(":") + 2, task.indexOf(")"));
 
-                taskList.addDeadline(name + " /by " + when);
+                tasks.addDeadline(name + " /by " + when);
                 counter += 1;
+                System.out.println(counter);
             }
 
             if (toAdd.charAt(4) == 'X') {
-                taskList.addDone(counter);
+                tasks.addDone(counter);
+                System.out.println(counter);
             }
         }
 
+        String result = "Here are the tasks saved: \n";
         for (int i = 0; i < counter; i++) {
-            Task currTask = taskList.tasks.get(i);
-            System.out.println(i + 1 + "." + currTask.toString());
+
+            Task currTask = tasks.tasks.get(i);
+            result += String.format("%d. %s", i + 1, currTask.toString());
+            System.out.println(currTask.toString());
+            result += "\n";
         }
-        System.out.println(dash);
+        return result;
+
     }
 
     /**
