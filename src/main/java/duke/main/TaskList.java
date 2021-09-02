@@ -52,6 +52,11 @@ public class TaskList {
         }
     }
 
+    public void done(int...indices) {
+        for (int i : indices) {
+            done(i);
+        }
+    }
     /**
      * Indicate that all tasks are completed
      * @return confirmation that all tasks are completed
@@ -73,6 +78,12 @@ public class TaskList {
         } else {
             index--;
             return taskList.remove(index);
+        }
+    }
+
+    public void delete(int...indices) {
+        for (int i : indices) {
+            delete(i);
         }
     }
 
