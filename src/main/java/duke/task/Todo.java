@@ -2,10 +2,21 @@ package duke.task;
 
 public class Todo extends Task {
 
+    /**
+     * Constructs a new Todo object with the given description.
+     *
+     * @param description Description of the Todo object.
+     */
     public Todo(String description) {
         super(description);
     }
-    
+
+    /**
+     * Constructs a new Todo object with the given description and done status.
+     *
+     * @param description Description of the Todo object.
+     * @param isDone Done status of the Todo object.
+     */
     public Todo(String description, boolean isDone) {
         super(description);
         this.isDone = isDone;
@@ -13,11 +24,11 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + (this.isDone ? "[X] " : "[ ] ") + this.description;
+        return "[T]" + (isDone ? "[X] " : "[ ] ") + description;
     }
 
     @Override
     public String toStorage() {
-        return ("T%" + this.isDone + "%" + this.description + "\n");
+        return "T%" + isDone + "%" + description + "\n";
     }
 }

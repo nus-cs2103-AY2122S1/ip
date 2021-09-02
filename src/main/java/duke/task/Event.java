@@ -6,34 +6,49 @@ import java.time.format.FormatStyle;
 
 public class Event extends Task {
 
-    private LocalDateTime from;
-    private LocalDateTime to;
+    private LocalDateTime fromDateTime;
+    private LocalDateTime toDateTime;
 
-    public Event(String description, LocalDateTime from, LocalDateTime to) {
+    /**
+     * Constructs a new Event using the given description, from time and to time.
+     *
+     * @param description Description of the Event.
+     * @param fromDateTime From time of the Event.
+     * @param toDateTime To time of the Event.
+     */
+    public Event(String description, LocalDateTime fromDateTime, LocalDateTime toDateTime) {
         super(description);
-        this.from = from;
-        this.to = to;
+        this.fromDateTime = fromDateTime;
+        this.toDateTime = toDateTime;
     }
-    
-    public Event(String description, boolean isDone, LocalDateTime from, LocalDateTime to) {
+
+    /**
+     * Constructs a new Event using the given description, done status, from time and to time.
+     *
+     * @param description Description of the new Event.
+     * @param isDone Done status of the new Event.
+     * @param fromDateTime From time of the new Event.
+     * @param toDateTime To time of the new Event.
+     */
+    public Event(String description, boolean isDone, LocalDateTime fromDateTime, LocalDateTime toDateTime) {
         super(description);
         this.isDone = isDone;
-        this.from = from;
-        this.to = to;
+        this.fromDateTime = fromDateTime;
+        this.toDateTime = toDateTime;
     }
 
     @Override
     public String toString() {
-        return "[E]" + (this.isDone ? "[X] " : "[ ] ") + this.description 
-                + " (from: " 
-                + this.from.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM,FormatStyle.SHORT)) 
+        return "[E]" + (isDone ? "[X] " : "[ ] ") + description
+                + " (from: "
+                + fromDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT))
                 + " to "
-                + this.to.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM,FormatStyle.SHORT))
+                + toDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT))
                 + ")";
     }
 
     @Override
     public String toStorage() {
-        return ("E%" + this.isDone + "%" + this.description + "%" + this.from + "%" + this.to + "\n");
+        return ("E%" + isDone + "%" + description + "%" + fromDateTime + "%" + toDateTime + "\n");
     }
 }
