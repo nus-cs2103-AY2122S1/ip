@@ -177,7 +177,7 @@ public class BotCommandResponderUnit {
      * @throws TaskOutOfRangeException if index entered is out of the range of the task list
      * @throws InvalidTaskIndexException if the command input's index entered cannot be converted to Integer
      */
-    public void markTaskAsDone(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
+    public String markTaskAsDone(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
 
         // verify the command entered
         checkTaskListModificationCommand(input);
@@ -192,7 +192,7 @@ public class BotCommandResponderUnit {
                 completedTask,
                 botStaticMemoryUnit.MESSAGE_CHEERING);
 
-        botPrinter.print(output);
+        return output;
     }
 
     /**
@@ -202,7 +202,7 @@ public class BotCommandResponderUnit {
      * @throws TaskOutOfRangeException if index entered is out of the range of the task list
      * @throws InvalidTaskIndexException if the command input's index entered cannot be converted to Integer
      */
-    public void deleteTaskFromList(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
+    public String deleteTaskFromList(String input) throws TaskOutOfRangeException, InvalidTaskIndexException {
 
         // verify the command entered
         checkTaskListModificationCommand(input);
@@ -218,7 +218,7 @@ public class BotCommandResponderUnit {
 
         taskTracker.remove(removedTask);
 
-        botPrinter.print(output);
+        return output;
     }
 
     // input: find fun
@@ -236,7 +236,7 @@ public class BotCommandResponderUnit {
      * @param input keyword in a continuous string format
      * @throws InvalidCommandFormatException if checkFindTaskFormat() fails
      */
-    public void findTaskFromList(String input) throws InvalidCommandFormatException {
+    public String findTaskFromList(String input) throws InvalidCommandFormatException {
 
         checkFindTaskFormat(input);
         // fun joy happy
@@ -263,7 +263,8 @@ public class BotCommandResponderUnit {
 
         if (searchResultList.isEmpty()) {
 
-            botPrinter.print(botStaticMemoryUnit.MESSAGE_KEYWORD_NO_FOUND + keywordOutput);
+            //botPrinter.print(botStaticMemoryUnit.MESSAGE_KEYWORD_NO_FOUND + keywordOutput);
+            return botStaticMemoryUnit.MESSAGE_KEYWORD_NO_FOUND + keywordOutput;
 
         } else {
             String taskFoundOutput = "";
@@ -271,11 +272,18 @@ public class BotCommandResponderUnit {
                 taskFoundOutput += searchResult;
             }
 
+            /*
             botPrinter.print(String.format(
                     botStaticMemoryUnit.MESSAGE_TASK_FOUND,
                     keywordOutput,
                     taskFoundOutput
                     )
+            );
+            */
+            return String.format(
+                    botStaticMemoryUnit.MESSAGE_TASK_FOUND,
+                    keywordOutput,
+                    taskFoundOutput
             );
         }
 

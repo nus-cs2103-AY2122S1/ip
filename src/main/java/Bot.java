@@ -17,6 +17,6 @@ public class Bot {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return botBrain.interact(input);
     }
 }

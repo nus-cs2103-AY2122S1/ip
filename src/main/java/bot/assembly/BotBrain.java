@@ -34,30 +34,31 @@ public class BotBrain {
      * @param input
      * @throws Exception
      */
-    private void reactToCommand(String input) throws Exception {
+    private String reactToCommand(String input) throws Exception {
 
         CommandInput commandInitial = botCommandResponderUnit.identifyCommand(input);
 
         switch (commandInitial) {
         case BYE:
-            botPrinter.print(botStaticMemoryUnit.MESSAGE_GOODBYE);
             isTerminated = true;
-            return;
+            //botPrinter.print(botStaticMemoryUnit.MESSAGE_GOODBYE);
+            return botStaticMemoryUnit.MESSAGE_GOODBYE;
         case LIST:
-            botTaskGeneratorUnit.generateTaskTrackerReport();
-            break;
+            //botTaskGeneratorUnit.generateTaskTrackerReport();
+            return botTaskGeneratorUnit.generateTaskTrackerReport();
         case DONE:
-            botCommandResponderUnit.markTaskAsDone(input);
-            break;
+            //botCommandResponderUnit.markTaskAsDone(input);
+            return botCommandResponderUnit.markTaskAsDone(input);
         case DELETE:
-            botCommandResponderUnit.deleteTaskFromList(input);
-            break;
+            //botCommandResponderUnit.deleteTaskFromList(input);
+            return botCommandResponderUnit.deleteTaskFromList(input);
         case FIND:
-            botCommandResponderUnit.findTaskFromList(input);
-            break;
+            //botCommandResponderUnit.findTaskFromList(input);
+            return botCommandResponderUnit.findTaskFromList(input);
         default:
             botCommandResponderUnit.addTask(input);
-            botTaskGeneratorUnit.generateAddTaskFeedback();
+            // botTaskGeneratorUnit.generateAddTaskFeedback();
+            return botTaskGeneratorUnit.generateAddTaskFeedback();
         }
     }
 
@@ -78,28 +79,31 @@ public class BotBrain {
     /**
      * A method that initiate reaction of Bot to user
      */
-    private void interact() {
+    public String interact(String input) {
 
-        Scanner sc = new Scanner(System.in);
+        input.trim();
+        //Scanner sc = new Scanner(System.in);
 
         while (!isTerminated) {
             try {
-                String input = sc.nextLine().trim();
-                reactToCommand(input);
+                //String input = sc.nextLine().trim();
+                String output = reactToCommand(input);
                 botDynamicMemoryUnit.saveToHardDisk();
+                return output;
             } catch (Exception error) {
-                botPrinter.print(botStaticMemoryUnit.ERROR_MESSAGE_PROMPT + error.getMessage());
+                //botPrinter.print(botStaticMemoryUnit.ERROR_MESSAGE_PROMPT + error.getMessage());
+                return botStaticMemoryUnit.ERROR_MESSAGE_PROMPT + error.getMessage();
             }
         }
-    }
 
-    /**
-     * A method to initiate the bot and print LOGO
-     */
+        return "BUG";
+    }
+    /*
     public void initiate() {
         System.out.println("\t" + botStaticMemoryUnit.LOGO.replaceAll("\n", "\n\t"));
         botPrinter.print(botStaticMemoryUnit.MESSAGE_GREETING);
         this.wakeUpMemory();
         this.interact();
     }
+    */
 }
