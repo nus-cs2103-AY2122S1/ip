@@ -99,7 +99,7 @@ public class TaskList {
     public String[] printTasks() {
         return IntStream.range(0, tasks.size())
                 .mapToObj(i -> (i + 1) + ". " + tasks.get(i).toString())
-                .collect(Collectors.toList()).toArray(String[]::new);
+                        .collect(Collectors.toList()).toArray(String[]::new);
     }
 
     /**
@@ -157,7 +157,7 @@ public class TaskList {
     public void saveTasksToFile() throws DukeIoException {
         List<String> formattedTasks = tasks.stream()
                 .map(task -> String.join(" | ", task.formatTask()))
-                .collect(Collectors.toList());
+                        .collect(Collectors.toList());
         boolean isSaved = FileUtils.isFileSaved(DIR_NAME, FILE_NAME, formattedTasks);
         if (!isSaved) {
             throw new DukeIoException("☹ OOPS!!! Save tasks to file error.");
@@ -172,9 +172,9 @@ public class TaskList {
     public String[] findTasks(String keyword) {
         List<Task> filteredTasks = tasks.stream()
                 .filter(task -> task.getName().contains(keyword))
-                .collect(Collectors.toList());
+                        .collect(Collectors.toList());
         return IntStream.range(0, filteredTasks.size())
                 .mapToObj(i -> (i + 1) + ". " + filteredTasks.get(i).toString())
-                .collect(Collectors.toList()).toArray(String[]::new);
+                        .collect(Collectors.toList()).toArray(String[]::new);
     }
 }

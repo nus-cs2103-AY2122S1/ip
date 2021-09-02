@@ -56,20 +56,20 @@ public class DukeController extends AnchorPane implements Message {
             // will be returned only after it is added by the dialogContainer.
             DukeDialogController preDukeDialogController = new DukeDialogController(content);
             preDukeDialogController.heightProperty()
-                .addListener(observable -> {
-                    try {
-                        DukeDialogController dukeDialogController = new DukeDialogController(
-                                content, preDukeDialogController.getHeight());
-                        dialogContainer.getChildren().add(dukeDialogController);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } finally {
-                        dialogContainer.getChildren().remove(preDukeDialogController);
-                    }
-                });
+                    .addListener(observable -> {
+                        try {
+                            DukeDialogController dukeDialogController = new DukeDialogController(
+                                    content, preDukeDialogController.getHeight());
+                            dialogContainer.getChildren().add(dukeDialogController);
+                        } catch (IOException e) {
+                            System.out.println("Duke dialog fxml file not found: " + e.getMessage());
+                        } finally {
+                            dialogContainer.getChildren().remove(preDukeDialogController);
+                        }
+                    });
             dialogContainer.getChildren().add(preDukeDialogController);
         } catch (IOException e) {
-            e.fillInStackTrace();
+            System.out.println("Duke dialog fxml file not found: " + e.getMessage());
         }
     }
 
@@ -88,20 +88,20 @@ public class DukeController extends AnchorPane implements Message {
             UserDialogController preUserDialogController = new UserDialogController(
                     content);
             preUserDialogController.heightProperty()
-                .addListener(observable -> {
-                    try {
-                        UserDialogController userDialogController = new UserDialogController(
-                                content, preUserDialogController.getHeight());
-                        dialogContainer.getChildren().add(userDialogController);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } finally {
-                        dialogContainer.getChildren().remove(preUserDialogController);
-                    }
-                });
+                    .addListener(observable -> {
+                        try {
+                            UserDialogController userDialogController = new UserDialogController(
+                                    content, preUserDialogController.getHeight());
+                            dialogContainer.getChildren().add(userDialogController);
+                        } catch (IOException e) {
+                            System.out.println("User dialog fxml file not found: " + e.getMessage());
+                        } finally {
+                            dialogContainer.getChildren().remove(preUserDialogController);
+                        }
+                    });
             dialogContainer.getChildren().add(preUserDialogController);
         } catch (IOException e) {
-            e.fillInStackTrace();
+            System.out.println("User dialog fxml file not found: " + e.getMessage());
         }
     }
 
@@ -111,7 +111,7 @@ public class DukeController extends AnchorPane implements Message {
     @FXML
     public void initialize() {
         dialogContainer.heightProperty()
-            .addListener(observable -> chatPane.setVvalue(chatPane.getVmax()));
+                .addListener(observable -> chatPane.setVvalue(chatPane.getVmax()));
         ivSend.setPickOnBounds(true);
         ivSend.setOnMouseClicked((MouseEvent e) -> {
             handleInput();

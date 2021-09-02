@@ -132,7 +132,7 @@ public class Parser {
                     "☹ OOPS!!! The task details cannot be extracted properly.");
         }
         if (Arrays.stream(details).filter(detail -> detail.equals(""))
-            .toArray(String[]::new).length > 0) {
+                .toArray(String[]::new).length > 0) {
             throw new DukeExtractCommandException(
                     "☹ OOPS!!! The task details cannot be empty.");
         }

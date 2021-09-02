@@ -22,6 +22,18 @@ import duke.util.Parser;
  * The is the Storage class for task operations.
  */
 public class Storage {
+    private static final String TASK_ADDED_MESSAGE = "Got it. I've added this task:";
+    private static final String TASK_MARKED_MESSAGE = "Nice! I've marked this task as done:";
+    private static final String TASK_REMOVED_MESSAGE = "Noted. I've removed this task:";
+    private static final String TASK_CLEARED_MESSAGE = "All tasks are cleared.";
+    private static final String TASK_LISTED_MESSAGE = "Here are the tasks in your list:";
+    private static final String MATCHING_TASK_LISTED_MESSAGE
+            = "Here are the matching tasks in your list:";
+
+    private static final String REGEX_AT = " /at ";
+    private static final String REGEX_BY = " /by ";
+    private static final String REGEX_SPACE = " ";
+
     private final TaskList taskList;
     private final Message onMessage;
 
@@ -71,16 +83,6 @@ public class Storage {
         return number;
     }
 
-    private String getKeyword(String command) {
-        String keyword = "";
-        try {
-            keyword = Parser.extractKeyword(command);
-        } catch (DukeExtractCommandException e) {
-            onMessage.show(e.getMessage());
-        }
-        return keyword;
-    }
-
     private String getTaskDescription(String command) {
         String description = "";
         try {
@@ -107,48 +109,61 @@ public class Storage {
         }
         switch (operation) {
         case TODO:
-            Todo todo = new Todo(description);
-            taskList.addTask(todo);
-            onMessage.show("Got it. I've added this task:",
-                    "  " + todo.toString(),
-                    "Now you have " + taskList.size()
-                            + " " + (taskList.size() <= 1 ? "task" : "tasks")
-                                    + " in the list.");
+            addTodoTask(description);
             break;
         case DEADLINE:
-            try {
-                String[] taskDetails = Parser.extractTaskDetails(description, " /by ");
-                String taskName = taskDetails[0];
-                LocalDateTime byDateTime = Parser.extractDeadlineDateTime(taskDetails[1]);
-                Deadline deadline = new Deadline(taskName, byDateTime);
-                taskList.addTask(deadline);
-                onMessage.show("Got it. I've added this task:",
-                        "  " + deadline.toString(),
-                        "Now you have " + taskList.size()
-                                + " " + (taskList.size() <= 1 ? "task" : "tasks")
-                                        + " in the list.");
-            } catch (DukeExtractCommandException e) {
-                onMessage.show(e.getMessage());
-            }
+            addDeadlineTask(description);
             break;
         case EVENT:
-            try {
-                String[] taskDetails = Parser.extractTaskDetails(description, " /at ");
-                String taskName = taskDetails[0];
-                EventDateTime eventDateTime = Parser
-                        .extractEventDatetime(taskDetails[1], " ");
-                Event event = new Event(taskName, eventDateTime);
-                taskList.addTask(event);
-                onMessage.show("Got it. I've added this task:",
-                        "  " + event.toString(),
-                        "Now you have " + taskList.size() + " "
-                                + (taskList.size() <= 1 ? "task" : "tasks") + " in the list.");
-            } catch (DukeExtractCommandException e) {
-                onMessage.show(e.getMessage());
-            }
+            addEventTask(description);
             break;
         default:
             break;
+        }
+    }
+
+    private void addTodoTask(String description) {
+        Todo todo = new Todo(description);
+        taskList.addTask(todo);
+        onMessage.show(TASK_ADDED_MESSAGE,
+                "  " + todo.toString(),
+                "Now you have " + taskList.size()
+                        + " " + (taskList.size() <= 1 ? "task" : "tasks")
+                        + " in the list.");
+    }
+
+    private void addDeadlineTask(String description) {
+        try {
+            String[] taskDetails = Parser.extractTaskDetails(description, REGEX_BY);
+            String taskName = taskDetails[0];
+            LocalDateTime byDateTime = Parser.extractDeadlineDateTime(taskDetails[1]);
+            Deadline deadline = new Deadline(taskName, byDateTime);
+            taskList.addTask(deadline);
+            onMessage.show(TASK_ADDED_MESSAGE,
+                    "  " + deadline.toString(),
+                    "Now you have " + taskList.size()
+                            + " " + (taskList.size() <= 1 ? "task" : "tasks")
+                            + " in the list.");
+        } catch (DukeExtractCommandException e) {
+            onMessage.show(e.getMessage());
+        }
+    }
+
+    private void addEventTask(String description) {
+        try {
+            String[] taskDetails = Parser.extractTaskDetails(description, REGEX_AT);
+            String taskName = taskDetails[0];
+            EventDateTime eventDateTime = Parser
+                .extractEventDatetime(taskDetails[1], REGEX_SPACE);
+            Event event = new Event(taskName, eventDateTime);
+            taskList.addTask(event);
+            onMessage.show(TASK_ADDED_MESSAGE,
+                    "  " + event.toString(),
+                    "Now you have " + taskList.size() + " "
+                            + (taskList.size() <= 1 ? "task" : "tasks")
+                            + " in the list.");
+        } catch (DukeExtractCommandException e) {
+            onMessage.show(e.getMessage());
         }
     }
 
@@ -168,7 +183,7 @@ public class Storage {
         }
         try {
             taskList.completeTask(number);
-            onMessage.show("Nice! I've marked this task as done:",
+            onMessage.show(TASK_MARKED_MESSAGE,
                     "  " + taskList.findTaskByNumber(number).toString()
             );
         } catch (DukeTaskNumberOutOfBoundsException e) {
@@ -192,11 +207,11 @@ public class Storage {
         }
         try {
             Task task = taskList.deleteTask(number);
-            onMessage.show("Noted. I've removed this task:",
+            onMessage.show(TASK_REMOVED_MESSAGE,
                     "  " + task.toString(),
                     "Now you have " + taskList.size()
                             + " " + (taskList.size() <= 1 ? "task" : "tasks")
-                                    + " in the list."
+                            + " in the list."
             );
         } catch (DukeTaskNumberOutOfBoundsException e) {
             onMessage.show(e.getMessage());
@@ -208,7 +223,7 @@ public class Storage {
      */
     public void clearTasks() {
         taskList.clearTasks();
-        onMessage.show("All tasks are cleared.");
+        onMessage.show(TASK_CLEARED_MESSAGE);
     }
 
     /**
@@ -216,7 +231,7 @@ public class Storage {
      */
     public void listTasks() {
         onMessage.show(Stream.concat(
-            Arrays.stream(new String[] {"Here are the tasks in your list:"}),
+            Arrays.stream(new String[] {TASK_LISTED_MESSAGE}),
             Arrays.stream(taskList.printTasks())
         ).toArray(String[]::new));
     }
@@ -245,7 +260,7 @@ public class Storage {
         try {
             String keyword = Parser.extractKeyword(command);
             onMessage.show(Stream.concat(
-                    Arrays.stream(new String[]{"Here are the matching tasks in your list:"}),
+                    Arrays.stream(new String[]{MATCHING_TASK_LISTED_MESSAGE}),
                     Arrays.stream(taskList.findTasks(keyword))
             ).toArray(String[]::new));
         } catch (DukeExtractCommandException e) {
