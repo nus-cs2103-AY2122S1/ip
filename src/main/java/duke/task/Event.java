@@ -27,6 +27,8 @@ public class Event extends Task {
      */
     public Event(String description, String at) throws CommandParamException {
         super(description);
+        assert !at.equals("") : "Event \"at\" field cannot be empty!";
+        assert !description.equals("") : "Event \"description\" field cannot be empty!";
         String[] dateTime = at.trim().split(" ");
         //index 0 is date, 1 is time
         //date should be yyyy-mm-dd, time should be 2359 format
