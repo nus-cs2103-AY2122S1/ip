@@ -8,6 +8,7 @@ import duke.util.Parser;
 import duke.util.Ui;
 
 import java.util.Map;
+import java.util.Optional;
 
 public class DeleteCommand implements DukeActions {
 
@@ -24,16 +25,14 @@ public class DeleteCommand implements DukeActions {
      * @throws DukeException When erroneous inputs are given.
      */
     @Override
-    public boolean runAndCanContinue(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config, Ui ui)
+    public Optional<String> run(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config, Ui ui)
             throws DukeException {
-        list.toRemove(Parser.parseInt(map.get("delete"))
+        return Optional.of(list.toRemove(Parser.parseInt(map.get("delete"))
                 .orElseThrow(() -> new DukeException("The delete command is either missing the positional argument 'index' or it " + "is invalid.")) - 1)
                 .map(x -> {
-                    ui.removeTaskUpdate(x, list.getSize());
-                    return x;
+                    return ui.removeTaskUpdate(x, list.getSize());
                 })
-                .orElseThrow(() -> new DukeException("Failed to remove task from the tasklist."));
-        return true;
+                .orElseThrow(() -> new DukeException("Failed to remove task from the tasklist.")));
 
     }
 }

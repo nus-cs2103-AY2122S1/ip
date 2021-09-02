@@ -7,6 +7,7 @@ import duke.util.DukeTaskList;
 import duke.util.Ui;
 
 import java.util.Map;
+import java.util.Optional;
 
 
 /**
@@ -27,6 +28,6 @@ public interface DukeActions {
      * @throws DukeException When erroneous inputs are given.
      */
 
-    public boolean runAndCanContinue(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config,
-                                     Ui ui) throws DukeException;
+    public Optional<String> run(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config,
+                                Ui ui) throws DukeException;
 }

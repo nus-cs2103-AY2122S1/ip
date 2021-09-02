@@ -11,6 +11,7 @@ import duke.util.Ui;
 
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Optional;
 
 
 /**
@@ -30,7 +31,7 @@ public class DeadlineCommand implements DukeActions {
      * @throws DukeException When erroneous inputs are given.
      */
     @Override
-    public boolean runAndCanContinue(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config,
+    public Optional<String> run(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config,
                                      Ui ui) throws DukeException {
         if (!map.containsKey("/by")) {
             throw new DukeException("Missing positional argument " + "'/by'.");
@@ -44,9 +45,8 @@ public class DeadlineCommand implements DukeActions {
                     by);
             list.addTask(event)
                     .orElseThrow(() -> new DukeException("Failed to add the task to the list"));
-            ui.addTaskUpdate(event,
-                    list.getSize());
+            return Optional.of(ui.addTaskUpdate(event,
+                    list.getSize()));
         }
-        return true;
     }
 }

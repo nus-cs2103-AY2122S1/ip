@@ -8,6 +8,7 @@ import duke.util.Parser;
 import duke.util.Ui;
 
 import java.util.Map;
+import java.util.Optional;
 
 
 /**
@@ -28,17 +29,15 @@ public class DoneCommand implements DukeActions {
      * @throws DukeException When erroneous inputs are given.
      */
     @Override
-    public boolean runAndCanContinue(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config, Ui ui)
+    public Optional<String> run(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config, Ui ui)
             throws DukeException {
 
-        list.setDone(Parser.parseInt(map.get("done"))
+        return Optional.of(list.setDone(Parser.parseInt(map.get("done"))
                 .orElseThrow(() -> new DukeException("Positional argument 'index' is not valid.")) - 1)
                 .map(x -> {
-                    ui.completeTaskUpdate(x,
+                    return ui.completeTaskUpdate(x,
                             list.getSize());
-                    return x;
                 })
-                .orElseThrow(() -> new DukeException("The provided index is out of bounds."));
-        return true;
+                .orElseThrow(() -> new DukeException("The provided index is out of bounds.")));
     }
 }
