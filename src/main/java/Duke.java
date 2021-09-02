@@ -1,5 +1,7 @@
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Duke {
 
@@ -30,9 +32,14 @@ public class Duke {
                     if (input.charAt(8) != ' ') throw new IllegalArgumentException();
                     if (!input.contains("/by")) throw new DukeException(" ☹ OOPS!!! Please specify a date.");
                     String item = input.substring(9, input.indexOf("/by ") - 1);
-                    String date = input.substring(input.indexOf("/by ") + 4);
-                    list.add(new Deadline(item, date));
-                    msgTemplate(" Got it. I've added this task:\n" + "  " + list.get(list.size() - 1) + System.lineSeparator() + " Now you have " + list.size() + " tasks in the list.");
+                    String dString = input.substring(input.indexOf("/by ") + 4);
+                    try {
+                        LocalDate date = LocalDate.parse(dString);
+                        list.add(new Deadline(item, date));
+                        msgTemplate(" Got it. I've added this task:\n" + "  " + list.get(list.size() - 1) + System.lineSeparator() + " Now you have " + list.size() + " tasks in the list.");
+                    } catch (DateTimeParseException e){
+                        msgTemplate(" ☹ OOPS!!! Please use the specified date format (YYYY-MM-DD)!");
+                    }
                 } catch (StringIndexOutOfBoundsException e) {
                     msgTemplate(" ☹ OOPS!!! The description of a deadline cannot be empty.");
                 } catch (IllegalArgumentException e) {
@@ -45,9 +52,14 @@ public class Duke {
                     if (input.charAt(5) != ' ') throw new IllegalArgumentException();
                     if (!input.contains("/at")) throw new DukeException(" ☹ OOPS!!! Please specify a date.");
                     String item = input.substring(6, input.indexOf("/at ") - 1);
-                    String date = input.substring(input.indexOf("/at ") + 4);
-                    list.add(new Event(item, date));
-                    msgTemplate(" Got it. I've added this task:\n" + "  " + list.get(list.size() - 1) + System.lineSeparator() + " Now you have " + list.size() + " tasks in the list.");
+                    String dString = input.substring(input.indexOf("/at ") + 4);
+                    try {
+                        LocalDate date = LocalDate.parse(dString);
+                        list.add(new Event(item, date));
+                        msgTemplate(" Got it. I've added this task:\n" + "  " + list.get(list.size() - 1) + System.lineSeparator() + " Now you have " + list.size() + " tasks in the list.");
+                    } catch (DateTimeParseException e){
+                        msgTemplate(" ☹ OOPS!!! Please use the specified date format (YYYY-MM-DD)!");
+                    }
                 } catch (StringIndexOutOfBoundsException e) {
                     msgTemplate(" ☹ OOPS!!! The description of a event cannot be empty.");
                 } catch (IllegalArgumentException e) {
