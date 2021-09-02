@@ -2,10 +2,7 @@ package duke.main;
 
 import duke.exception.DukeException;
 import duke.exception.NoDescriptionException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.task.*;
 
 /**
  * Encapsulates methods that handle and interpret user input.
@@ -14,6 +11,8 @@ public class Parser {
 
     /** The TaskList that will be altered based on user input */
     private TaskList taskList;
+    /** Storage that is responsible for saving and loading information from your hard disk into a TaskList */
+    private Storage storage;
 
     /**
      * Enum that holds information about acting on a task, not including actions that changes the size of the TaskList.
@@ -51,21 +50,18 @@ public class Parser {
      *
      * @param taskList TaskList that the Parser will alter or act on.
      */
-    public Parser(TaskList taskList) {
+    public Parser(TaskList taskList, Storage storage) {
         this.taskList = taskList;
+        this.storage = storage;
     }
 
     /**
      * Takes user input to interpret and acts on the TaskList appropriately.
      *
      * @param input Input string from the user.
-     * @return False if user inputs "bye" to end the program, true otherwise.
      */
-    public boolean handleInput(String input) {
-        Ui.printSingleDivider();
+    public void handleInput(String input) {
         if (input.equals("bye")) {
-
-            return false;
 
         } else if (input.equals("list")) {
 
@@ -91,8 +87,7 @@ public class Parser {
             vetoTask(input);
         }
 
-        Ui.printDoubleDivider();
-        return true;
+        storage.writeToFile();
     }
 
     /**
@@ -134,7 +129,7 @@ public class Parser {
                 taskToBeAltered = taskList.markDoneInTaskList(index);
             }
 
-            System.out.println("Output:\n\nThis task is successfully " + action.successMessage + ":\n\n"
+            System.out.println("Output: This task is successfully " + action.successMessage + "!\n\n"
                     + "    " + taskToBeAltered);
             return true;
 
@@ -194,7 +189,7 @@ public class Parser {
         // If there was no error, then add task.
         if (newTask != null) {
             taskList.addTask(newTask);
-            System.out.println("Output:\n\nYou have successfully added the following task:\n\n"
+            System.out.println("Output:You have successfully added the following task!\n\n"
                     + "    " + newTask);
             taskList.printNumberOfTasks();
         }

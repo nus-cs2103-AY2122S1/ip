@@ -66,7 +66,7 @@ public class TaskList implements Iterable<Task> {
      */
     public void printList() {
         for (int i = 0; i < this.taskList.size(); i++) {
-            System.out.println(i + 1 + ". " + this.taskList.get(i));
+            System.out.println("    " + (i + 1) + ". " + this.taskList.get(i));
         }
     }
 
@@ -89,7 +89,7 @@ public class TaskList implements Iterable<Task> {
             String description = taskList.get(i).getDescription();
             if (description.contains(match)) {
                 taskFound = true;
-                System.out.println("Task " + (i + 1) + ". " + this.taskList.get(i));
+                System.out.println("    Task " + (i + 1) + ". " + this.taskList.get(i));
             }
         }
 
