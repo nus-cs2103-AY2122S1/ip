@@ -23,14 +23,14 @@ public class DeadlineUI extends SaberCommandUI {
     private String successMessage;
 
     /**
-     * A constructor for DeadlineUI which will initialize the success message to an empty string
+     * Constructs DeadlineUI which will initialize the success message to an empty string
      */
     public DeadlineUI() {
         this.successMessage = "";
     }
 
     /**
-     * Set the success message for the UI
+     * Sets the success message for the UI
      * @param deadline the deadline task to be added
      * @param totalTask the total task available in the TaskList
      */
@@ -46,28 +46,63 @@ public class DeadlineUI extends SaberCommandUI {
     }
 
     /**
-     * Print out the success message
+     * Gets success message
+     *
+     * @return success message
+     */
+    public String getSuccessMessage() {
+        return successMessage;
+    }
+
+    /**
+     * Gets missing description error
+     * @return missing description error
+     */
+    public String getMissingDescriptionError() {
+        return missingDescriptionError;
+    }
+
+    /**
+     * Gets missing time error
+     *
+     * @return missing time error
+     */
+    public String getMissingTimeError() {
+        return missingTimeError;
+    }
+
+    /**
+     * Gets parsing time error
+     *
+     * @return parsing time error
+     */
+    public String getParsingTimeError() {
+        return parsingTimeError;
+    }
+
+    /**
+     * Prints out the success message
      */
     public void showSuccess() {
         System.out.println(successMessage);
     }
 
     /**
-     * Print out the missing description error when there is no description supplied to the deadline command
+     * Prints out the missing description error when there is no description supplied to the deadline command
      */
     public void showMissingDescriptionError() {
         System.out.println(missingDescriptionError);
     }
 
     /**
-     * Print out the missing time error when there is no time supplied to the deadline command
+     * Prints out the missing time error when there is no time supplied to the deadline command
      */
     public void showMissingTimeError() {
         System.out.println(missingTimeError);
     }
 
     /**
-     * Print the parsing time error when the time supplied to the deadline command is invalid
+     * Prints the parsing time error when the time supplied to the deadline command is invalid
      */
     public void showParsingTimeError() {
         System.out.println(parsingTimeError);

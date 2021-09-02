@@ -40,10 +40,15 @@ public class AddCommand extends SaberCommand {
     }
 
     /**
-     * A function to determine whether the current command is a terminating command (a ByeCommand)
-     * @return false
+     * {@inheritdoc}
      */
-    public boolean isExit() {
-        return false;
+    public String getResponse(TaskList taskList) {
+        if (isMissingDescription) {
+            return addUI.getMissingDescriptionError();
+        }
+        taskList.add(task);
+        int totalTask = taskList.size();
+        addUI.setSuccessMessage(task);
+        return addUI.getSuccessMessage();
     }
 }

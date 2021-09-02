@@ -32,6 +32,15 @@ public class ListUI extends SaberCommandUI {
     }
 
     /**
+     * Gets success message
+     *
+     * @return success message
+     */
+    public String getSuccessMessage() {
+        return successMessage;
+    }
+
+    /**
      * Print out the success message
      */
     public void showSuccess() {

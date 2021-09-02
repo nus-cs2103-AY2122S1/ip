@@ -19,7 +19,7 @@ public class AddUI extends SaberCommandUI {
     }
 
     /**
-     * Set the success message for the UI
+     * Sets the success message for the UI
      * @param task the task to be added
      */
     public void setSuccessMessage(Task task) {
@@ -27,14 +27,32 @@ public class AddUI extends SaberCommandUI {
     }
 
     /**
-     * Print out the success message
+     * Gets success message
+     *
+     * @return success message
+     */
+    public String getSuccessMessage() {
+        return successMessage;
+    }
+
+    /**
+     * Gets missing description error
+     *
+     * @return missing description error
+     */
+    public String getMissingDescriptionError() {
+        return missingDescriptionError;
+    }
+
+    /**
+     * Prints out the success message
      */
     public void showSuccess() {
         System.out.println(successMessage);
     }
 
     /**
-     * Print out the missing description error when there is no description supplied to the add command
+     * Prints out the missing description error when there is no description supplied to the add command
      */
     public void showMissingDescriptionError() {
         System.out.println(missingDescriptionError);

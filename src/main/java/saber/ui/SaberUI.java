@@ -85,12 +85,57 @@ public class SaberUI {
     }
 
     /**
+     * Gets command not found error
+     *
+     * @return command not found error
+     */
+    public String getCommandNotFoundError() {
+        return commandNotFound;
+    }
+
+    /**
      * Print out the storage storing error if any error occurs during storing of tasks to the hard disk
      */
     public void showStorageStoringError() {
         showLineBreak();
         System.out.println(storageStoringError);
         showLineBreak();
+    }
+
+    /**
+     * Gets storage storing error
+     *
+     * @return storage storing error
+     */
+    public String getStorageStoringError() {
+        return storageStoringError;
+    }
+
+    /**
+     * Gets storage loading error
+     *
+     * @return storage loading error
+     */
+    public String getStorageLoadingError() {
+        return storageLoadingError;
+    }
+
+    /**
+     * Gets generic error
+     *
+     * @return generic error
+     */
+    public String getGenericError() {
+        return genericError;
+    }
+
+    /**
+     * Gets greeting
+     *
+     * @return greeting
+     */
+    public String getGreeting() {
+        return greeting;
     }
 
     /**

@@ -50,6 +50,24 @@ public class FindUI extends SaberCommandUI {
     }
 
     /**
+     * Gets success message
+     *
+     * @return success message
+     */
+    public String getSuccessMessage() {
+        return successMessage;
+    }
+
+    /**
+     * Gets missing find string error
+     *
+     * @return missing find string error
+     */
+    public String getMissingFindStringError() {
+        return missingFindStringError;
+    }
+
+    /**
      * Print out the success message
      */
     public void showSuccess() {

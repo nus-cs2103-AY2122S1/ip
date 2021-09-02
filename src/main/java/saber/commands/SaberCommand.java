@@ -14,8 +14,18 @@ public abstract class SaberCommand {
     public abstract void execute(TaskList taskList);
 
     /**
+     * Gets response for the command
+     *
+     * @param taskList the TaskList which will be used to execute the method of various commands
+     * @return response for the command given
+     */
+    public abstract String getResponse(TaskList taskList);
+
+    /**
      * A function to determine whether the current command is a terminating command (a ByeCommand)
      * @return boolean isExit
      */
-    public abstract boolean isExit();
+    public boolean isExit() {
+        return this instanceof ByeCommand;
+    };
 }

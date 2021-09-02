@@ -123,6 +123,20 @@ public class Saber {
         storeExistingTaskList();
     }
 
+    public String getResponse(String input) {
+        SaberParser saberParser = new SaberParser(input);
+        try {
+            SaberCommand command = saberParser.parse();
+            String response = command.getResponse(taskList);
+            storeExistingTaskList();
+            return response;
+        } catch (SaberCommandNotFoundException e) {
+            return saberGeneralUI.getCommandNotFoundError();
+        } catch (NullPointerException e) {
+            return saberGeneralUI.getGenericError();
+        }
+    }
+
     /***
      * The main function
      * @param args the arguments of the main function when running the program
