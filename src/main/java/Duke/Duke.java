@@ -81,4 +81,17 @@ public class Duke {
     public TaskList getTaskList() {
         return this.taskList;
     }
+
+    /**
+     * Main entrypoint to the Duke program.
+     *
+     * @param args Command line arguments.
+     */
+    public static void main(String[] args) {
+        try {
+            new Duke().run();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
