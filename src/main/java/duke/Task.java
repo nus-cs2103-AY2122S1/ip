@@ -43,6 +43,15 @@ public class Task {
     }
 
     /**
+     * Creates the string representation to be saved in external txt file.
+     *
+     * @return String representation to be saved in external txt file.
+     * */
+    public String toStringRecord() {
+        return this.toString();
+    }
+
+    /**
      * Two task objects are equal iff they have the same task title and same isDone value.
      * */
     @Override

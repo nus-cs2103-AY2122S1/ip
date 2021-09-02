@@ -16,10 +16,7 @@ import java.util.Scanner;
  * directory by using the save/load command.
  */
 public class Storage {
-    private enum Month {
-        JANUARY, FEBRUARY, MARCH, APRIL, MAY, JUNE, JULY,
-        AUGUST, SEPTEMBER, OCTOBER, NOVEMBER, DECEMBER
-    }
+
     private ArrayList<Task> userInputRecords;
 
     /**
@@ -88,7 +85,6 @@ public class Storage {
      * @return the response on whether a file is successfully loaded.
      */
     public String load(String filePath) {
-        int indexAfterSquareBoxes = 7;
         try {
             filePath = filePath.replace("load ", "");
             Scanner scanner = new Scanner(Paths.get(filePath));
@@ -116,7 +112,7 @@ public class Storage {
             Files.createFile(Path.of(filePath));
             FileWriter writer = new FileWriter(filePath);
             for (Task task : userInputRecords) {
-                writer.write(task.toString());
+                writer.write(task.toStringRecord());
                 writer.write(System.getProperty("line.separator"));
             }
             writer.close();
@@ -127,24 +123,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Converts time from String format to LocalDate.
-     *
-     * @param time the time keyed in by user.
-     * @return LocalDate represented by the time String.
-     * */
-    private LocalDate convertToLocalTime(String time) {
-        String copy = time;
-        String month = copy.substring(0, time.indexOf(" "));
-        int monthValue = Month.valueOf(month).ordinal() + 1;
-        copy = copy.replace(month + " ", "");
-        String day = copy.substring(0, copy.indexOf(" ")).trim();
-        int dayValue = Integer.parseInt(day);
-        copy = copy.replace(day + " ", "");
-        int yearValue = Integer.parseInt(copy);
-        return LocalDate.of(yearValue, monthValue, dayValue);
-    }
-
     private void addTask(String taskRecord) {
         int indexForDescriptionStart = 7;
         int indexForTimeStart = 5;
@@ -153,17 +131,17 @@ public class Storage {
             task = new ToDo(taskRecord.substring(indexForDescriptionStart));
         } else if (taskRecord.startsWith("[D]")) {
             task = new Deadline(taskRecord.substring(indexForDescriptionStart, taskRecord.indexOf("(by")),
-                    convertToLocalTime(taskRecord.substring(taskRecord.indexOf("(by") + indexForTimeStart,
+                    LocalDate.parse(taskRecord.substring(taskRecord.indexOf("(by") + indexForTimeStart,
                             taskRecord.length() - 1)));
         } else if (taskRecord.startsWith("[E]")) {
             task = new Event(taskRecord.substring(indexForDescriptionStart, taskRecord.indexOf("(at")),
-                    convertToLocalTime(taskRecord.substring(taskRecord.indexOf("(at") + indexForTimeStart,
+                    LocalDate.parse(taskRecord.substring(taskRecord.indexOf("(at") + indexForTimeStart,
                             taskRecord.length() - 1)));
         } else {
             //Should not reach here unless the file is corrupted; skip the line that is not properly formatted.
             return;
         }
-        setDone(taskRecord,task);
+        setDone(taskRecord, task);
         userInputRecords.add(task);
     }
 

@@ -31,6 +31,15 @@ public class Deadline extends Task {
                 + deadline.getDayOfMonth() + " " + deadline.getYear() + ")";
     }
 
+    /**
+     * Creates the string representation to be saved in external txt file.
+     *
+     * @return String representation to be saved in external txt file.
+     * */
+    @Override
+    public String toStringRecord() {
+        return "[D]" + super.toString() + "(by: " + deadline.toString() + ")";
+    }
 
     /**
      * Two deadline objects are equal iff they are equal tasks and they have the same ddl.

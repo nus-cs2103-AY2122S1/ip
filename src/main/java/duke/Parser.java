@@ -18,14 +18,6 @@ public class Parser {
 
     /**
      * This method checks if a String starting with delete is a delete command.
-     * A delete command is a string with the keyword delete followed by numbers and spaces only.
-     * Examples of valid user inputs:
-     * -> delete 3
-     * -> delete   4(spaces trimmed)
-     * -> delete 1 4(spaces trimmed and interpret as done 14)
-     * Examples of invalid user inputs:
-     * -> delete task
-     * -> delete 2 task
      *
      * @param userInput input from the user.
      * @return whether the user input can be taken as a delete command.
@@ -38,8 +30,7 @@ public class Parser {
     }
 
     /**
-     * Similar to isDeleteCommand This method checks if a String starting with done is a done command.
-     * A done command is a string with the keyword done followed by numbers and spaces only.
+     *  This method checks if a String starting with done is a done command.
      *
      * @param userInput input from the user.
      * @return whether the user input can be taken as a done command.
@@ -75,8 +66,8 @@ public class Parser {
             return tasks.search(userInput, tasks.getStorage().getUserInputRecords());
         } else if (userInput.equals("help")) {
             return printHelpMessage();
-        } else if (userInput.startsWith("todo ") || userInput.startsWith("deadline ")
-                || userInput.startsWith("event ")) {
+        } else if (userInput.startsWith("todo") || userInput.startsWith("deadline")
+                || userInput.startsWith("event")) {
             return tasks.add(userInput, tasks.getStorage().getUserInputRecords());
         } else {
             return "OOPS!!! I'm sorry, but I don't know what that means :-(\n";
@@ -86,8 +77,8 @@ public class Parser {
     private String printHelpMessage() {
         StringBuilder builder = new StringBuilder();
         builder.append("todo <description>\n");
-        builder.append("deadline <description> /by <time in format yyyy-mm-dd>\n");
-        builder.append("event <description> /at <time in format yyyy-mm-dd>\n");
+        builder.append("deadline <description>/by <time in format yyyy-mm-dd>\n");
+        builder.append("event <description>/at <time in format yyyy-mm-dd>\n");
         builder.append("save <directory>\n");
         builder.append("load <directory>\n");
         builder.append("done <number>\n");

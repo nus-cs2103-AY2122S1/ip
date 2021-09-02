@@ -112,12 +112,12 @@ public class TaskList {
      */
     public String markAsDone(String userInput, ArrayList<Task> userInputRecords) {
         try {
-            int itemToComplete = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
-            Task taskDone = userInputRecords.get(itemToComplete);
+            int itemIndex = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
+            Task taskDone = userInputRecords.get(itemIndex);
             taskDone.setDone(true);
-            userInputRecords.set(itemToComplete, taskDone);
+            userInputRecords.set(itemIndex, taskDone);
             storage.autoSave();
-            return "Nice! I've marked this task as done:\n" + userInputRecords.get(itemToComplete) + "\n";
+            return "Nice! I've marked this task as done:\n" + userInputRecords.get(itemIndex) + "\n";
         } catch (IndexOutOfBoundsException e) {
             return "Oops, the ID of the task does not exist!\n";
         } catch (NumberFormatException e) {
@@ -134,21 +134,21 @@ public class TaskList {
      */
     public String search(String userInput, ArrayList<Task> userInputRecords) {
         String keyword = userInput.replace("find", "").trim();
-        ArrayList<Task> searchResult = new ArrayList<>();
+        ArrayList<Task> searchResults = new ArrayList<>();
         for (Task userInputRecord : userInputRecords) {
             String taskTitle = userInputRecord.getTaskTitle();
             if (taskTitle.contains(keyword)) {
-                searchResult.add(userInputRecord);
+                searchResults.add(userInputRecord);
             }
         }
 
-        if (searchResult.isEmpty()) {
+        if (searchResults.isEmpty()) {
             return "Oops,there is no record for the keyword " + keyword + "\n";
         } else {
             StringBuilder builder = new StringBuilder();
             builder.append("Here are the matching tasks in your list:");
-            for (int i = 0; i < searchResult.size(); i++) {
-                builder.append("     " + (i + 1) + "." + searchResult.get(i));
+            for (int i = 0; i < searchResults.size(); i++) {
+                builder.append("     " + (i + 1) + "." + searchResults.get(i));
             }
             return builder.toString();
         }

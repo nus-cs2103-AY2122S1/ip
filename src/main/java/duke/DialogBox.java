@@ -1,7 +1,7 @@
-import java.awt.*;
+package duke;
+
 import java.io.IOException;
 import java.util.Collections;
-import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,11 +13,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
-
-// This class is taken from JavaFX tutorial 4 by Jeffry Lum https://se-education.org/guides/tutorials/javaFxPart4.html
 
 /**
  * An example of a custom control using FXML.
@@ -57,14 +58,16 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var box = new DialogBox(text, img);
-        Background background = new Background(new BackgroundFill(Paint.valueOf("#00bfff"),new CornerRadii(5.0), Insets.EMPTY));
+        Background background = new Background(new BackgroundFill(Paint.valueOf("#00bfff"),
+                new CornerRadii(5.0), Insets.EMPTY));
         box.setBackground(background);
         return box;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var box = new DialogBox(text, img);
-        Background background = new Background(new BackgroundFill(Paint.valueOf("#7fffd4"),new CornerRadii(5.0), Insets.EMPTY));
+        Background background = new Background(new BackgroundFill(Paint.valueOf("#7fffd4"),
+                new CornerRadii(5.0), Insets.EMPTY));
         box.setBackground(background);
         box.flip();
         return box;

@@ -1,6 +1,6 @@
-import javafx.application.Application;
+package duke;
 
-// This class is taken from JavaFX tutorial 4 by Jeffry Lum https://se-education.org/guides/tutorials/javaFxPart4.html
+import javafx.application.Application;
 
 /**
  * A launcher class to workaround classpath issues.

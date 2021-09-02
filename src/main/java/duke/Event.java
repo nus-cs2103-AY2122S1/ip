@@ -32,6 +32,16 @@ public class Event extends Task {
     }
 
     /**
+     * Creates the string representation to be saved in external txt file.
+     *
+     * @return String representation to be saved in external txt file.
+     * */
+    @Override
+    public String toStringRecord() {
+        return "[E]" + super.toString() + "(at: " + date.toString() + ")";
+    }
+
+    /**
      * Two event objects are equal iff they are equal tasks and they have the same date.
      * */
     @Override

@@ -1,15 +1,13 @@
-import duke.Duke;
+package duke;
+
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Paint;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 
-
-// This class is taken from JavaFX tutorial 4 by Jeffry Lum https://se-education.org/guides/tutorials/javaFxPart4.html
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
