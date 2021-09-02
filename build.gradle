@@ -29,7 +29,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "duke.Duke"
 }
 
 shadowJar {
@@ -39,6 +39,7 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.29'
+    configFile = file("config/checkstyle/checkstyle.xml")
 }
 
 run{
