@@ -8,7 +8,7 @@ import duke.util.TaskList;
 /** Represents the "done" command. */
 public class DoneCommand extends Command {
     /** The index of the Task to be marked as done. */
-    private int index;
+    private final int index;
 
     /**
      * DoneCommand constructor.
@@ -39,12 +39,13 @@ public class DoneCommand extends Command {
      *
      * @param tasks The list of tasks in the program.
      * @param storage The storage utility.
+     * @return The response of the command.
      * @throws NoSuchTaskException If the task does not exist at the specified index.
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws NoSuchTaskException {
         return formatOutput("Nice and spicy, I've marked this task as done:",
-                tasks.getTask(index).markTaskAsDone().toString());
+                tasks.getTask(index).setDone().toString());
     }
 
     /**

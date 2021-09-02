@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.exception.FileNotFoundException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
@@ -14,11 +15,12 @@ public class Duke {
     private static final String FILEPATH = "./data/tasks.json";
 
     /** The storage utility. */
-    private Storage storage;
+    private final Storage storage;
 
     /** The list of tasks. */
     private TaskList tasks;
 
+    /** The last command entered by the user. */
     private boolean isExit;
 
     /** Default Duke constructor. */
@@ -26,7 +28,7 @@ public class Duke {
         storage = new Storage(FILEPATH);
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
+        } catch (FileNotFoundException e) {
             tasks = new TaskList();
         }
     }

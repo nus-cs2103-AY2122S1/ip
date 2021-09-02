@@ -67,7 +67,7 @@ public class Storage {
      *
      * @param tasks The TaskList created from the instance of the Duke program.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") // Type warning due to JSON simple library. Type safety guaranteed. Just use it.
     public void write(TaskList tasks) {
         JSONArray arr = new JSONArray();
         tasks.forEach((task) -> arr.add(task.toJsonObject()));
@@ -93,7 +93,7 @@ public class Storage {
      * @param filePath The file path to read and write from.
      * @return An ArrayList of Tasks.
      */
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") // Typecast warning due to JSON simple library. Type safety guaranteed. Just use it.
     public ArrayList<Task> parseFromJson(String filePath) {
         ArrayList<Task> tasks = new ArrayList<>();
         jsonParser = new JSONParser();

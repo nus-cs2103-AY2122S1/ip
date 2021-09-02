@@ -54,7 +54,7 @@ public class Deadline extends DatedTask {
      *
      * @param description The Deadline's description.
      * @param by The date to complete the Task by.
-     * @param isDone The done status of the Task
+     * @param isDone The done status of the Task.
      * @return A new Deadline object.
      */
     public static Deadline of(String description, Date by, boolean isDone) {
@@ -110,7 +110,7 @@ public class Deadline extends DatedTask {
      * @return A JSON representation of the Deadline object.
      */
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") // Type warning due to JSON simple library. Type safety guaranteed. Just use it.
     public JSONObject toJsonObject() {
         JSONObject obj = new JSONObject();
         obj.put("type", "deadline");

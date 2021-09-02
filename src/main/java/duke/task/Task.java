@@ -43,7 +43,7 @@ public abstract class Task {
     }
 
     /** Marks the task's status as done */
-    public Task markTaskAsDone() {
+    public Task setDone() {
         isDone = true;
         return this;
     }
@@ -73,7 +73,7 @@ public abstract class Task {
             task = Deadline.of(description, Date.of((String) obj.get("date")), isDone);
             break;
         case EVENT:
-            task = Event.of(description, Date.of((String) obj.get("date")), isDone);
+            task = Event.of(description, Date.of((String) obj.get("from")), Date.of((String) obj.get("until")), isDone);
             break;
         case TODO:
             task = Todo.of(description, isDone);

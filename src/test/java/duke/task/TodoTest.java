@@ -12,7 +12,7 @@ public class TodoTest {
     }
 
     @Test
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") // Type warning due to JSON simple library. Type safety guaranteed. Just use it.
     public void testJsonConversion() {
         JSONObject object = new JSONObject();
         object.put("type", "todo");

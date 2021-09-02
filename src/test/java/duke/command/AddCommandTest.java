@@ -14,7 +14,7 @@ import duke.exception.UnknownTaskTypeException;
 public class AddCommandTest {
     @Test
     public void testInvalidDate() {
-        assertThrows(InvalidDateException.class, () -> AddCommand.of("event event 1 /at 10-10-2020"));
+        assertThrows(InvalidDateException.class, () -> AddCommand.of("event event 1 /at 10-10-2020 /to 11-10-2020"));
     }
 
     @Test
@@ -38,6 +38,6 @@ public class AddCommandTest {
             BadInputFormatException,
             EmptyDescriptionException,
             InvalidDateException {
-        assertFalse(AddCommand.of("event event 1 /at 2020-10-10").isExit());
+        assertFalse(AddCommand.of("event event 1 /at 2020-10-10 /to 2020-10-11").isExit());
     }
 }

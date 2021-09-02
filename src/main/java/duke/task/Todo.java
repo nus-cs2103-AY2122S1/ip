@@ -60,7 +60,7 @@ public class Todo extends Task {
      * @return A JSON representation of the Todo object.
      */
     @Override
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked") // Type warning due to JSON simple library. Type safety guaranteed. Just use it.
     public JSONObject toJsonObject() {
         JSONObject obj = new JSONObject();
         obj.put("type", "todo");

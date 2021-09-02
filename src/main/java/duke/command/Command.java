@@ -13,6 +13,7 @@ public abstract class Command {
      *
      * @param tasks The list of tasks in the program.
      * @param storage The storage utility.
+     * @return The response of the command.
      * @throws IOException If there is an IO exception.
      * @throws NoSuchTaskException If no tasks are found.
      */
