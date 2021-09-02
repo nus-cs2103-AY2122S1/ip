@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.time.LocalDate;
 
 /**
@@ -10,19 +11,19 @@ import java.time.LocalDate;
 public class TaskCreator {
 
     /**
-     * Creates a Task as specified by the parameters.
+     * Creates a Task as specified by the parameters, then returns a response to the user depending on the outcome.
      *
      * @param taskType The type of task to be created.
      * @param array The array of strings used to create the task.
      * @param storage The instance of Storage that will save the task in the file.
      * @param taskList The instance of TaskList that will store the task.
+     * @return A string depending on the outcome of the task creation.
      */
-    public static void createTask(Task.Tasks taskType, String[] array, Storage storage, TaskList taskList) {
+    public static String createTask(Task.Tasks taskType, String[] array, Storage storage, TaskList taskList) {
         //preliminary check if more than 1 string was entered
         if (array.length < 2) {
             //case if no name is entered for the task
-            Ui.printBadInputError();
-            return;
+            return Ui.getBadInputError();
         }
 
         StringBuilder str = new StringBuilder();
@@ -57,8 +58,8 @@ public class TaskCreator {
             }
             //check if a time was entered
             if (!hasEnded) {
-                Ui.printBadDateFormatError();
-                return;
+                return Ui.getBadDateFormatError();
+
             }
 
             //check if a valid time was entered
@@ -66,8 +67,7 @@ public class TaskCreator {
                 LocalDate date = Parser.parseDate(time);
                 tempTask = new Deadlines(str.toString(), date);
             } catch (IllegalArgumentException exception) {
-                Ui.printBadDateFormatError();
-                return;
+                return Ui.getBadDateFormatError();
             }
             break;
 
@@ -90,8 +90,7 @@ public class TaskCreator {
             }
             //check if a duration was entered
             if (!hasTerminated) {
-                Ui.printBadDateFormatError();
-                return;
+                return Ui.getBadDateFormatError();
             }
 
             //check if a valid time was entered
@@ -99,17 +98,24 @@ public class TaskCreator {
                 LocalDate date = Parser.parseDate(eventTime);
                 tempTask = new Events(str.toString(), date);
             } catch (IllegalArgumentException exception) {
-                Ui.printBadDateFormatError();
-                return;
+                return Ui.getBadDateFormatError();
             }
             break;
         }
         taskList.addTask(tempTask);
+        try {
+            storage.saveData();
+        } catch (IOException e) {
+            return Ui.getFileError();
+        }
 
-        Ui.printAddTaskCompletionMessage();
-        System.out.println(tempTask.toString());
-        Ui.printTaskNumberReminder(taskList.getTotalTasks());
-        storage.saveData();
+        //generate a result string:
+        StringBuilder endString = new StringBuilder();
+        endString.append(Ui.getAddTaskCompletionMessage());
+        endString.append(tempTask.toString() + "\n");
+        endString.append(Ui.getTaskNumberReminder(taskList.getTotalTasks()) + "\n");
+
+        return endString.toString();
 
     }
 

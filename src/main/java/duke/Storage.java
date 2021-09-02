@@ -37,8 +37,10 @@ public class Storage {
 
     /**
      * Checks for the file, then loads the data into the taskList.
+     *
+     * @throws IOException Thrown when there is an issue loading data.
      */
-    public void start() {
+    public void start() throws IOException {
         //set up the file
         dataFile = new File(filePath);
         //file does not exist: attempt to create a new file.
@@ -46,51 +48,44 @@ public class Storage {
             try {
                 new File(directoryPath).mkdir();
             } catch (NullPointerException exception) {
-                Ui.printUnknownError();
+                System.out.println(Ui.getUnknownError());
                 return;
             }
         }
-
         loadData();
     }
 
     /**
      * Loads data from the file into the taskList.
+     *
+     * @throws IOException Thrown when data is unable to be loaded from the file.
      */
-    private void loadData() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(dataFile));
-            String nextLine;
+    private void loadData() throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(dataFile));
+        String nextLine;
 
-            //repeatedly add tasks from the file into the ArrayList
-            while ((nextLine = reader.readLine()) != null) {
-                taskList.addTask((Parser.parseData(nextLine)));
-            }
-
-        } catch (IOException exception) {
-            Ui.printReadFileError();
-
+        //repeatedly add tasks from the file into the ArrayList
+        while ((nextLine = reader.readLine()) != null) {
+            taskList.addTask((Parser.parseData(nextLine)));
         }
     }
 
     /**
      * Saves the Tasks in taskList into the file.
+     *
+     * @throws IOException Thrown when data is unable to be saved into the file.
      */
-    public void saveData() {
-        try {
-            FileWriter writer = new FileWriter(dataFile);
-            StringBuilder string = new StringBuilder();
-            //repeatedly append the task strings until all tasks have been saved
-            for (int i = 0; i < taskList.getTotalTasks(); i++) {
-                Task task = taskList.getTask(i);
-                string.append(task.toDataString()).append("\n");
-            }
-            //save the string into the file
-            writer.write(string.toString());
-            writer.close();
-        } catch (IOException e) {
-            Ui.printFileError();
+    public void saveData() throws IOException {
+        FileWriter writer = new FileWriter(dataFile);
+        StringBuilder string = new StringBuilder();
+        //repeatedly append the task strings until all tasks have been saved
+        for (int i = 0; i < taskList.getTotalTasks(); i++) {
+            Task task = taskList.getTask(i);
+            string.append(task.toDataString()).append("\n");
         }
+        //save the string into the file
+        writer.write(string.toString());
+        writer.close();
     }
 
 }

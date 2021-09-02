@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * A class containing methods that print messages in response
+ * A class containing methods that return messages in response
  * to user inputs and errors.
  *
  * @author Toh Wang Bin
@@ -14,143 +14,172 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private static final String NUMBER_ERROR = "Enter a valid number! Or do you not know basic math?";
+    private static final String NUMBER_ERROR = "Enter a valid number! Or do you not know basic math?\n";
 
-    private static final String EMPTY_INPUT_ERROR = "...why so quiet? Come on, say something to me!";
+    private static final String EMPTY_INPUT_ERROR = "...why so quiet? Come on, say something to me!\n";
 
     private static final String NO_TASK_ERROR = "There are currently no tasks! Stop being so lazy "
-            + "and start adding your tasks!";
+            + "and start adding your tasks!\n";
 
-    private static final String TASK_ERROR = "That task does not exist! Don't try to trick me!";
+    private static final String TASK_ERROR = "That task does not exist! Don't try to trick me!\n";
 
-    private static final String TASK_COMPLETED = "Ok, very nice. I have set the following task as completed.";
+    private static final String TASK_COMPLETED = "Ok, very nice. I have set the following task as completed.\n";
 
     private static final String BAD_INPUT_ERROR = "I could not understand your input. Please stop speaking gibberish"
-            + " to me!";
+            + " to me!\n";
 
-    private static final String END_MESSAGE = "kthxbye";
+    private static final String END_MESSAGE = "kthxbye\nRemember to click on the `X` at the top right before leaving.";
 
-    private static final String BAD_DATE_FORMAT_ERROR = "Enter a valid date format! (yyyy-mm-dd)";
+    private static final String BAD_DATE_FORMAT_ERROR = "Enter a valid date format! (yyyy-mm-dd)\n";
 
-    private static final String ADD_TASK_COMPLETION_MESSAGE = "Ok can, sure. I have added this task as you wanted.";
+    private static final String ADD_TASK_COMPLETION_MESSAGE = "Ok can, sure. I have added this task as you wanted.\n";
 
-    private static final String FILE_ERROR = "An error occurred while processing your data file.";
+    private static final String FILE_ERROR = "An error occurred while processing your data file.\n";
 
-    private static final String READ_FILE_ERROR = "No save file detected. Creating one for you...";
+    private static final String READ_FILE_ERROR = "There was an error while loading your save file.\n";
 
-    private static final String UNKNOWN_ERROR = "An unknown error has occurred. Try restarting me!";
+    private static final String UNKNOWN_ERROR = "An unknown error has occurred. Try restarting me!\n";
 
-    private static final String NO_MATCHES = "Looks like none of your tasks match with what you are searching for.";
+    private static final String NO_MATCHES = "Looks like none of your tasks match with what you are searching for.\n";
 
-    private static final String YES_MATCHES = "Lucky for you, the following Tasks seem to match your search term.";
+    private static final String YES_MATCHES = "Lucky for you, the following Tasks seem to match your search term.\n";
 
     /**
-     * Prints a message about an error with a number.
+     * Returns a message about an error with a number.
+     *
+     * @return The specified string.
      */
-    public static void printNumberError() {
-        System.out.println(NUMBER_ERROR);
+    public static String getNumberError() {
+        return NUMBER_ERROR;
     }
 
     /**
-     * Prints a welcome message to the user.
+     * Returns a welcome message to the user.
+     *
+     * @return The specified string.
      */
-    public static void printWelcomeMessage() {
-        System.out.println("Hello from\n" + LOGO + "\nWhat can I do for you today?");
+    public static String getWelcomeMessage() {
+        return "Hello from\n" + LOGO + "\nWhat can I do for you today?";
     }
 
     /**
-     * Prints a message about empty input.
+     * Returns a message about empty input.
+     *
+     * @return The specified string.
      */
-    public static void printEmptyInputError() {
-        System.out.println(EMPTY_INPUT_ERROR);
+    public static String getEmptyInputError() {
+        return EMPTY_INPUT_ERROR;
     }
 
     /**
-     * Prints a message about an error due to no Tasks.
+     * Returns a message about an error due to no Tasks.
+     *
+     * @return The specified string.
      */
-    public static void printNoTaskError() {
-        System.out.println(NO_TASK_ERROR);
+    public static String getNoTaskError() {
+        return NO_TASK_ERROR;
     }
 
     /**
-     * Prints a message about an error with a Task.
+     * Returns a message about an error with a Task.
+     *
+     * @return The specified string.
      */
-    public static void printTaskError() {
-        System.out.println(TASK_ERROR);
+    public static String getTaskError() {
+        return TASK_ERROR;
     }
 
     /**
-     * Prints a message confirming that Task is completed.
+     * Returns a message confirming that Task is completed.
+     *
+     * @return The specified string.
      */
-    public static void printTaskCompleted(Task task) {
-        System.out.println(TASK_COMPLETED);
-        System.out.println(task.toString());
+    public static String getTaskCompleted(Task task) {
+        return TASK_COMPLETED + task.toString();
     }
 
     /**
-     * Prints a message reminding the user about the number of Tasks registered.
+     * Returns a message reminding the user about the number of Tasks registered.
+     *
+     * @return The specified string.
      */
-    public static void printTaskNumberReminder(int number) {
-        System.out.println("Now you have " + number + " tasks remaining. Get to work!");
+    public static String getTaskNumberReminder(int number) {
+        return "Now you have " + number + " tasks remaining. Get to work!";
     }
 
     /**
-     * Prints a message about an error due to bad input.
+     * Returns a message about an error due to bad input.
+     *
+     * @return The specified string.
      */
-    public static void printBadInputError() {
-        System.out.println(BAD_INPUT_ERROR);
+    public static String getBadInputError() {
+        return BAD_INPUT_ERROR;
     }
 
     /**
-     * Prints a message when the program ends.
+     * Returns a message when the program ends.
+     *
+     * @return The specified string.
      */
-    public static void printEndMessage() {
-        System.out.println(END_MESSAGE);
+    public static String getEndMessage() {
+        return END_MESSAGE;
     }
 
     /**
-     * Prints a message about an error due to a bad date format.
+     * Returns a message about an error due to a bad date format.
+     *
+     * @return The specified string.
      */
-    public static void printBadDateFormatError() {
-        System.out.println(BAD_DATE_FORMAT_ERROR);
+    public static String getBadDateFormatError() {
+        return BAD_DATE_FORMAT_ERROR;
     }
 
     /**
-     * Prints a message informing the user that a Task was successfully added.
+     * Returns a message informing the user that a Task was successfully added.
+     *
+     * @return The specified string.
      */
-    public static void printAddTaskCompletionMessage() {
-        System.out.println(ADD_TASK_COMPLETION_MESSAGE);
+    public static String getAddTaskCompletionMessage() {
+        return ADD_TASK_COMPLETION_MESSAGE;
     }
 
     /**
-     * Prints a message about an error with a file.
+     * Returns a message about an error with a file.
+     *
+     * @return The specified string.
      */
-    public static void printFileError() {
-        System.out.println(FILE_ERROR);
+    public static String getFileError() {
+        return FILE_ERROR;
     }
 
-    public static void printReadFileError() {
-        System.out.println(READ_FILE_ERROR);
-    }
-
-    /**
-     * Prints a message about an unknown error.
-     */
-    public static void printUnknownError() {
-        System.out.println(UNKNOWN_ERROR);
+    public static String getReadFileError() {
+        return READ_FILE_ERROR;
     }
 
     /**
-     * Prints a message about no matches found.
+     * Returns a message about an unknown error.
+     *
+     * @return The specified string.
      */
-    public static void printNoMatch() {
-        System.out.println(NO_MATCHES);
+    public static String getUnknownError() {
+        return UNKNOWN_ERROR;
     }
 
     /**
-     * Prints a message that a match has been found.
+     * Returns a message about no matches found.
+     *
+     * @return The specified string.
      */
-    public static void printMatch() {
-        System.out.println(YES_MATCHES);
+    public static String getNoMatch() {
+        return NO_MATCHES;
+    }
+
+    /**
+     * Returns a message that a match has been found.
+     *
+     * @return The specified string.
+     */
+    public static String getMatch() {
+        return YES_MATCHES;
     }
 }
