@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.data.TaskList;
 import duke.data.exception.DukeException;
-import duke.ui.Ui;
 import duke.data.task.Event;
+import duke.ui.Ui;
 
 /**
  * Class that encapsulates the "Event" Command.
@@ -19,7 +19,7 @@ public class EventCommand extends Command {
      * @param tasklist Task Handler that handles the operation.
      * @param input command string to be executed.
      */
-    public EventCommand(TaskList tasklist, String input){
+    public EventCommand(TaskList tasklist, String input) {
         super(tasklist);
         this.input = input;
     }
@@ -27,7 +27,7 @@ public class EventCommand extends Command {
     /**
      * Executes the "Event" Command.
      */
-    public void execute(){
+    public void execute() {
         if (input.length() == 5) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("event"));
         }

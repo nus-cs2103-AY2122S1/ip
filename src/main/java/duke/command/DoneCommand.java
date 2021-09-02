@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
      * @param tasklist Task Handler that handles the operation.
      * @param input command string to be executed.
      */
-    public DoneCommand(TaskList tasklist, String input){
+    public DoneCommand(TaskList tasklist, String input) {
         super(tasklist);
         this.input = input;
     }
@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
     /**
      * Executes the "Done" Command.
      */
-    public void execute(){
+    public void execute() {
         if (input.length() == 4) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("done"));
         }

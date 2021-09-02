@@ -1,13 +1,21 @@
 package duke.parser;
 
-import duke.data.TaskList;
-import duke.storage.Storage;
-import duke.data.task.Task;
-import duke.data.exception.DukeException;
-import duke.ui.Ui;
-import duke.command.*;
-
 import java.util.ArrayList;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
+import duke.data.TaskList;
+import duke.data.exception.DukeException;
+import duke.data.task.Task;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * Class that makes sense of the user commands to Duke.

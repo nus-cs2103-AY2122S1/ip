@@ -3,17 +3,30 @@ package duke.command;
 import duke.data.TaskList;
 import duke.data.exception.DukeException;
 import duke.ui.Ui;
-import duke.data.task.Event;
 
+/**
+ * Class that encapsulates the "Find" Command.
+ *
+ * @author Wang Hong Yong
+ */
 public class FindCommand extends Command {
     private String input;
 
-    public FindCommand(TaskList tasklist, String input){
+    /**
+     * Constructor for FindCommand.
+     *
+     * @param tasklist Task Handler that handles the operation.
+     * @param input command string to be executed.
+     */
+    public FindCommand(TaskList tasklist, String input) {
         super(tasklist);
         this.input = input;
     }
 
-    public void execute(){
+    /**
+     * Executes the "Event" Command.
+     */
+    public void execute() {
         if (input.length() == 4) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("find"));
         }

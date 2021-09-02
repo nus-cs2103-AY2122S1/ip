@@ -14,7 +14,12 @@ public class Ui {
     private static final String LS = System.lineSeparator();
 
 
-    public static void prettify(String message){
+    /**
+     * Formats the message to prettier and more readable.
+     *
+     * @param message String to be printed.
+     */
+    public static void prettify(String message) {
         System.out.println(TAB + DIVIDER);
         System.out.println(message);
         System.out.println(TAB + DIVIDER);
@@ -24,7 +29,7 @@ public class Ui {
      * Welcomes the user.
      */
     public static void printWelcomeMsg() {
-        String message =  TAB + TAB + Messages.MESSAGE_WELCOME_1 + LS + TAB + TAB + Messages.MESSAGE_WELCOME_2;
+        String message = TAB + TAB + Messages.MESSAGE_WELCOME_1 + LS + TAB + TAB + Messages.MESSAGE_WELCOME_2;
         prettify(message);
     }
 
@@ -62,6 +67,8 @@ public class Ui {
         case "find":
             errorMsg += Messages.MESSAGE_EMPTY_FIND;
             break;
+        default:
+            break;
         }
         return errorMsg;
     }
@@ -85,7 +92,7 @@ public class Ui {
      * Informs the user that they have encountered IOException.
      * @return The error IOException message to the user.
      */
-    public static String getIoMsg(){
+    public static String getIoMsg() {
         return Messages.MESSAGE_IO_ERR;
     }
 
@@ -96,24 +103,27 @@ public class Ui {
      * @param num Integer representing number of tasks left
      */
     public static void printAddMsg(String task, Integer num) {
-        String msg = Messages.MESSAGE_ADD + LS + TAB + TAB + TAB + task + LS +
-                String.format(Messages.MESSAGE_TASKS_LEFT, num);
+        String msg = Messages.MESSAGE_ADD + LS + TAB + TAB + TAB + task + LS
+                + String.format(Messages.MESSAGE_TASKS_LEFT, num);
         prettify(msg);
     }
 
     /**
      * Informs the user that task has been removed.
-     *
-     * @param task String representing task
-     * @param num Integer representing number of tasks left
      */
     public static void printNoSuchTaskMsg() {
         prettify(Messages.MESSAGE_NO_TASKS_FOUND);
     }
 
+    /**
+     * Prints the message after item is removed.
+     *
+     * @param task String representing task
+     * @param num Integer representing number of tasks left
+     */
     public static void printRemoveMsg(String task, Integer num) {
-        String msg = Messages.MESSAGE_REMOVE + LS + TAB + TAB + TAB + task + LS +
-                String.format(Messages.MESSAGE_TASKS_LEFT, num);
+        String msg = Messages.MESSAGE_REMOVE + LS + TAB + TAB + TAB + task + LS
+                + String.format(Messages.MESSAGE_TASKS_LEFT, num);
         prettify(msg);
     }
 

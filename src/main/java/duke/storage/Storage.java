@@ -1,15 +1,20 @@
 package duke.storage;
 
-import duke.ui.Ui;
-import duke.data.task.*;
-import duke.data.exception.DukeException;
-
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.data.exception.DukeException;
+import duke.data.task.Deadline;
+import duke.data.task.Event;
+import duke.data.task.Task;
+import duke.data.task.Todo;
+import duke.ui.Ui;
+
+
 
 /**
  * Class that deals with loading tasks from the file and updating tasks in the file.

@@ -5,7 +5,7 @@ package duke.data.exception;
  *
  * @author Wang Hong Yong
  */
-public class DukeException extends RuntimeException{
+public class DukeException extends RuntimeException {
 
     /**
      * Constructor for DukeException.

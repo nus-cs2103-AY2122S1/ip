@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
      * @param tasklist Task Handler that handles the operation.
      * @param input command string to be executed.
      */
-    public DeleteCommand(TaskList tasklist, String input){
+    public DeleteCommand(TaskList tasklist, String input) {
         super(tasklist);
         this.input = input;
     }
@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
     /**
      * Executes the "Delete" Command.
      */
-    public void execute(){
+    public void execute() {
         if (input.length() == 6) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("delete"));
         }

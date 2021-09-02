@@ -1,10 +1,12 @@
+
 package duke;
+
+import java.util.Scanner;
 
 import duke.data.exception.DukeException;
 import duke.parser.Parser;
 import duke.ui.Ui;
 
-import java.util.Scanner;  // Import the Scanner class
 
 /**
  * Entry point of Duke Chatbot.
@@ -36,10 +38,10 @@ public class Duke {
     /**
      * Runs duke until termination.
      */
-    public void run(){
+    public void run() {
         Ui.printWelcomeMsg();
         Parser parser = new Parser();
-        String command = myObj.nextLine();  // Read user input
+        String command = myObj.nextLine();
         while (!command.toLowerCase().equals("bye")) {
             try {
                 parser.parse(command);

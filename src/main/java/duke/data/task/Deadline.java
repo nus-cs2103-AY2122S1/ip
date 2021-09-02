@@ -1,13 +1,11 @@
 package duke.data.task;
 
-import duke.data.task.Task;
-import duke.ui.Ui;
-
-import java.time.LocalDateTime;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.lang.Exception;
+
+import duke.ui.Ui;
 
 /**
  * Class that represents a Deadline task.
@@ -54,7 +52,7 @@ public class Deadline extends Task {
      * @param dateTime Input date format.
      * @return A string representing the date in the desirable format.
      */
-    public String parseStringToDate(String dateTime){
+    public String parseStringToDate(String dateTime) {
         DateTimeFormatter sourceFormat;
         DateTimeFormatter targetFormat;
         String convertedTime;

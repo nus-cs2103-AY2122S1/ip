@@ -1,6 +1,5 @@
 package duke.data.task;
 
-import duke.data.task.Task;
 
 /**
  * Class that represents a To Do task.

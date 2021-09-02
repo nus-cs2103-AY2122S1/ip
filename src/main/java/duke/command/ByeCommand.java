@@ -15,7 +15,7 @@ public class ByeCommand extends Command {
      *
      * @param tasklist Task handler that handles the operation.
      */
-    public ByeCommand(TaskList tasklist){
+    public ByeCommand(TaskList tasklist) {
         super(tasklist);
     }
 
@@ -23,7 +23,7 @@ public class ByeCommand extends Command {
      * Executes the "Bye" Command.
      */
     @Override
-    public void execute(){
+    public void execute() {
         Ui.printGoodbyeMsg();
     }
 }

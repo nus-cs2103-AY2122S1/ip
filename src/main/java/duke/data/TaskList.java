@@ -1,11 +1,12 @@
 package duke.data;
 
+import java.util.ArrayList;
+
+import duke.data.exception.DukeException;
+import duke.data.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
-import duke.data.task.Task;
-import duke.data.exception.DukeException;
 
-import java.util.ArrayList;
 
 /**
  * Class that contains the tasklist and handles all tasklist operations.
@@ -101,6 +102,11 @@ public class TaskList {
         return list.size();
     }
 
+    /**
+     * Prints the task searched with keyword
+     *
+     * @param wordToFind is a String that represents the keyword to be searched.
+     */
     public void findTask(String wordToFind) {
         ArrayList<String> tasks = new ArrayList<>();
         int index = 1;
@@ -124,7 +130,9 @@ public class TaskList {
 
 
 
-
+    /**
+     * list the total of all the tasks.
+     */
     public void listTasks() throws DukeException {
         String msg = "    Here are the tasks in your list:" + System.lineSeparator();
         for (int i = 0; i < list.size(); i++) {

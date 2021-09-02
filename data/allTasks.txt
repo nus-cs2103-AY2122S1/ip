@@ -1,0 +1,2 @@
+T | 0 | buy book
+T | 1 | open book

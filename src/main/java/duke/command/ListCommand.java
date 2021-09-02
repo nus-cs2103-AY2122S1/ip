@@ -14,14 +14,14 @@ public class ListCommand extends Command {
      *
      * @param tasklist Task Handler that handles the operation.
      */
-    public ListCommand(TaskList tasklist){
+    public ListCommand(TaskList tasklist) {
         super(tasklist);
     }
 
     /**
      * Executes the "List" Command.
      */
-    public void execute(){
+    public void execute() {
         super.taskList.listTasks();
     }
 }
