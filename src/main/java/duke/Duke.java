@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 public class Duke {
 
     private Ui ui;
@@ -10,6 +8,14 @@ public class Duke {
 
     /**
      * Class constructor.
+     * Sets save file path to "./data/duke.txt" by default.
+     */
+    public Duke() {
+        this("data/duke.txt");
+    }
+
+    /**
+     * Class constructor specifying the save file's path.
      *
      * @param filepath The file path to the save file for Duke.
      */
@@ -29,33 +35,42 @@ public class Duke {
     }
 
     /**
-     * Starts the operation of Duke task manager.
+     * Returns the message informing that Duke has started up.
+     *
+     * @return A String object containing the start-up message.
      */
-    public void run() {
-        ui.printStartInteractionsMessage();
-
-        Scanner scanner = new Scanner(System.in);
-        String userInput;
-
-        do {
-            ui.printWaitingUserInput();
-            userInput = scanner.nextLine();
-
-            try {
-                executeCommand(userInput);
-            } catch (DukeException e) {
-                ui.printErrorMessage(e.getMessage());
-            }
-        // Duke will keep accepting user input until user inputs "bye",
-        // which will lead to executeCommand() exiting the program.
-        } while (true);
+    public String getStartUpMessage() {
+        return ui.printStartInteractionsMessage();
     }
 
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
+    /**
+     * Returns a printout of loaded tasks from the save file, if any.
+     *
+     * @return A String object containing a printout of the loaded tasks
+     *           or an empty String object if no tasks were loaded.
+     */
+    public String getTasksLoadedMessage() {
+        if (tasks.getSize() > 0) {
+            return ui.printLoadTasks(tasks);
+        } else {
+            return "";
+        }
     }
 
-    private void executeCommand(String userInput) throws DukeException {
+    /**
+     * Gets the response from Duke to the command inputted by the user.
+     *
+     * @return A String object containing Duke's response.
+     */
+    public String getResponse(String userInput) {
+        try {
+            return executeCommand(userInput);
+        } catch (DukeException e) {
+            return ui.printErrorMessage(e.getMessage());
+        }
+    }
+
+    private String executeCommand(String userInput) throws DukeException {
         // First, extract the command type inputted by the user.
         // parseCommandType() will throw an UnsupportedOperationException if
         // no valid command types was inputted by the user.
@@ -66,48 +81,43 @@ public class Duke {
         // if no valid further input is entered by the user.
         switch (commandType) {
         case EXIT:
-            ui.printExitMessage();
             System.exit(0);
             break;
         case LIST:
-            ui.printTaskList(tasks);
-            break;
+            return ui.printTaskList(tasks);
         case ADD_TASK:
-            addNewTask(Parser.parseNewTask(userInput));
-            break;
+            return addNewTask(Parser.parseNewTask(userInput));
         case COMPLETE_TASK:
-            completeTask(Parser.parseTaskNum(userInput));
-            break;
+            return completeTask(Parser.parseTaskNum(userInput));
         case DELETE_TASK:
-            deleteTask(Parser.parseTaskNum(userInput));
-            break;
+            return deleteTask(Parser.parseTaskNum(userInput));
         case FIND_TASK:
-            findTask(Parser.parseSearchSubject(userInput));
-            break;
+            return findTask(Parser.parseSearchSubject(userInput));
         default:
             throw new UnsupportedOperationException(); // Error
         }
+        return "";
     }
 
-    private void addNewTask(Task newTask) {
+    private String addNewTask(Task newTask) {
         tasks.addTask(newTask);
         storage.saveTasks(tasks);
-        ui.printAddTask(tasks, newTask);
+        return ui.printAddTask(tasks, newTask);
     }
 
-    private void completeTask(int taskNum) {
+    private String completeTask(int taskNum) {
         tasks.completeTask(taskNum);
         storage.saveTasks(tasks);
-        ui.printCompleteTask(tasks.getTask(taskNum));
+        return ui.printCompleteTask(tasks.getTask(taskNum));
     }
 
-    private void deleteTask(int taskNum) {
+    private String deleteTask(int taskNum) {
         Task deletedTask = tasks.deleteTask(taskNum);
         storage.saveTasks(tasks);
-        ui.printDeleteTask(tasks, deletedTask);
+        return ui.printDeleteTask(tasks, deletedTask);
     }
 
-    private void findTask(String subject) {
-        ui.printTasksWithSubject(tasks, subject);
+    private String findTask(String subject) {
+        return ui.printTasksWithSubject(tasks, subject);
     }
 }
