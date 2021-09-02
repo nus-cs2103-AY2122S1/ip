@@ -2,21 +2,20 @@ package me.yukun99.ip.commands;
 
 import me.yukun99.ip.core.DateTimePair;
 import me.yukun99.ip.core.TaskList;
-import me.yukun99.ip.core.Ui;
 import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
+import me.yukun99.ip.ui.Message;
 
 public class ListCommand extends Command {
-    public ListCommand(String[] args, TaskList taskList, Ui ui) {
-        super(args, taskList, ui);
+    public ListCommand(String[] args, TaskList taskList) {
+        super(args, taskList);
     }
 
     @Override
-    public void run() throws HelpBotDateTimeFormatException {
+    public String getResponse() throws HelpBotDateTimeFormatException {
         if (args == null) {
-            ui.list();
-            return;
+            return Message.getListMessage(taskList);
         }
         DateTimePair date = DateTimePair.parse(args[0]);
-        ui.listByDate(date);
+        return Message.getListByDateMessage(date, taskList);
     }
 }

@@ -1,24 +1,23 @@
-package me.yukun99.ip.core;
+package me.yukun99.ip.ui;
 
-import java.io.IOException;
-import java.util.Objects;
-
+import me.yukun99.ip.core.DateTimePair;
+import me.yukun99.ip.core.TaskFinder;
+import me.yukun99.ip.core.TaskList;
 import me.yukun99.ip.tasks.Task;
 
-/**
- * Class used to handle message the Ui and responses from the HelpBot.
- */
-public class Ui {
+public class Message {
     // Field placeholders.
     private static final String NAME_PLACEHOLDER = "%name%";
     private static final String TASKNUM_PLACEHOLDER = "%tasks%";
 
-    // Reply header/footer.
-    private static final String REPLY_HEADER = "===================To Your Royal Highness===================";
-    private static final String REPLY_FOOTER = "============================================================";
-
     // Line separator.
     private static final String NEW_LINE = System.lineSeparator();
+
+    // Reply header/footer.
+    private static final String REPLY_HEADER =
+            "===================To Your Royal Highness===================" + NEW_LINE;
+    private static final String REPLY_FOOTER =
+            NEW_LINE + "======================================================";
 
     // Command help prefix.
     private static final String CMD_PREFIX = "  > ";
@@ -36,10 +35,9 @@ public class Ui {
     private static final String HELP_EXIT = "(please for the love of God) let me rest! :)";
 
     // Message sent to user when bot starts.
-    private static final String ENABLE = "Beep... You've reached the voicemail of HelpBot inc."
+    private static final String ENABLE = "Beep... You've reached the voicemail of HelpBot inc. "
             + "Please speak after the dial tone."
-            + NEW_LINE + "Still here? Sigh... thought that would work. My name is"
-            + NEW_LINE + NAME_PLACEHOLDER
+            + NEW_LINE + "Still here? Sigh... thought that would work. My name is " + NAME_PLACEHOLDER + "."
             + NEW_LINE + "Here is the myriad of ways you can inconvenience me:"
             + NEW_LINE + "  [] denotes optional arguments, () denotes REQUIRED arguments."
             + NEW_LINE + CMD_PREFIX + "'list [date]' - " + HELP_LIST
@@ -93,182 +91,142 @@ public class Ui {
     // Message sent to user when user updates a task's timing.
     private static final String UPDATE = "Dude, make up your mind! I'll update it, but just this once, okay?";
 
-    // Name of the HelpBot.
-    private final String name;
-    // List of tasks to be completed.
-    private final TaskList taskList;
-    // Storage instance from the current HelpBot.
-    private final Storage storage;
-    // TaskFinder instance from the current HelpBot.
-    private final TaskFinder taskFinder;
-
     /**
-     * Constructor for a Ui instance.
+     * Gets message sent when user starts up the bot.
      *
-     * @param name Name of the HelpBot.
+     * @return Message sent when user asks the bot for help.
      */
-    public Ui(String name, TaskList taskList, Storage storage, TaskFinder taskFinder) {
-        this.name = name.replace("\n", NEW_LINE);
-        this.taskList = taskList;
-        this.storage = storage;
-        this.taskFinder = taskFinder;
+    public static String getEnableMessage(String name) {
+        return formatMessage(ENABLE.replace(NAME_PLACEHOLDER, name));
     }
 
     /**
-     * Sends user instructions and bot information on startup.
-     */
-    public void start() {
-        sendMessage(ENABLE.replace(NAME_PLACEHOLDER, name));
-    }
-
-    /**
-     * Sends user instructions when requested.
-     */
-    public void help() {
-        sendMessage(HELP);
-    }
-
-    /**
-     * Sends user a list of all tasks.
-     */
-    public void list() {
-        sendMessage(LIST + taskList.toString().replace("\n", NEW_LINE));
-    }
-
-    /**
-     * Sends user a list of all tasks happening at the specified date in the DateTimePair.
+     * Gets message sent when user asks the bot for help.
      *
-     * @param pair Date/time pair to send tasks to user for.
+     * @return Message sent when user asks the bot for help.
      */
-    public void listByDate(DateTimePair pair) {
-        sendMessage(LIST_DATE + taskList.listByDate(pair).replace("\n", NEW_LINE));
+    public static String getHelpMessage() {
+        return formatMessage(HELP);
     }
 
     /**
-     * Sends user a list of all tasks containing the specified word.
+     * Gets message sent when user asks the bot to list out their task list.
      *
-     * @param word Word that has to be in all returned tasks.
+     * @param taskList User's task list.
+     * @return Message sent when user asks the bot to list out their task list.
      */
-    public void findByWord(String word) {
-        sendMessage(FIND + taskFinder.findTasksByWord(word).replace("\n", NEW_LINE));
+    public static String getListMessage(TaskList taskList) {
+        return formatMessage(LIST + taskList.toString().replace("\n", NEW_LINE));
     }
 
     /**
-     * Sends user a message telling them task has been added.
+     * Gets message sent when user asks the bot to list out tasks on specified date.
+     * Date does not require a time to be specified.
      *
-     * @param task Task that has been added.
+     * @param date Date/Time pair specified by the user.
+     * @param taskList User's task list.
+     * @return Message sent when user asks the bot to list out tasks on specified date.
      */
-    public void add(Task task) {
-        sendMessage(ADD
-                + NEW_LINE + task
-                + NEW_LINE + remaining());
+    public static String getListByDateMessage(DateTimePair date, TaskList taskList) {
+        return formatMessage(LIST_DATE + taskList.listByDate(date).replace("\n", NEW_LINE));
     }
 
     /**
-     * Sends user a message telling them task is already done.
+     * Gets message sent when user asks the bot to list out tasks containing specified word.
      *
-     * @param task Task that has already been done.
+     * @param word Word specified by the user.
+     * @param taskFinder TaskFinder instance used to find tasks containing specified word.
+     * @return Message sent when user asks the bot to list out tasks containing specified word.
      */
-    public void alreadyDone(Task task) {
-        sendMessage(DONE_COMPLETED
-                + NEW_LINE + task);
+    public static String getFindMessage(String word, TaskFinder taskFinder) {
+        return formatMessage(FIND + taskFinder.findTasksByWord(word).replace("\n", NEW_LINE));
     }
 
     /**
-     * Sends user a message telling them a task has been marked as done.
+     * Gets message sent when user adds a task to the bot.
      *
-     * @param task Task that has been marked as done.
+     * @param task Task added by the user.
+     * @param taskList TaskList that user adds the task to.
+     * @return Message sent when user adds a task to the bot.
      */
-    public void done(Task task) {
-        sendMessage(DONE_UNCOMPLETED
-                + NEW_LINE + task);
+    public static String getAddMessage(Task task, TaskList taskList) {
+        return formatMessage(ADD + NEW_LINE + task + NEW_LINE + getRemainingMessage(taskList));
     }
 
     /**
-     * Gets message containing information on number of tasks in the list.
+     * Gets message sent when user marks a task as done.
      *
-     * @return Message containing information on number of tasks in the list.
+     * @param task Task marked as done by the user.
+     * @param done Whether task is already done.
+     * @return Message sent when user marks a task as done.
      */
-    private String remaining() {
-        return REMAINING.replace(TASKNUM_PLACEHOLDER, taskList.getRemaining() + "");
+    public static String getDoneMessage(Task task, boolean done) {
+        if (done) {
+            return formatMessage(DONE_COMPLETED + NEW_LINE + task);
+        } else {
+            return formatMessage(DONE_UNCOMPLETED + NEW_LINE + task);
+        }
     }
 
     /**
-     * Sends user a message telling them a task has been updated.
+     * Gets message sent when user updates a task's date.
      *
-     * @param task Task that has been updated.
+     * @param task Task updated by the user.
+     * @return Message sent when user updates a task's date.
      */
-    public void update(Task task) {
-        sendMessage(UPDATE + NEW_LINE + task);
+    public static String getUpdateMessage(Task task) {
+        return formatMessage(UPDATE + NEW_LINE + task);
     }
 
     /**
-     * Sends user a message telling them a task has been deleted.
+     * Gets message sent when user deletes a task.
      *
-     * @param task Task that has been deleted.
-     * @param done Whether deleted task has been done.
+     * @param task Task deleted by the user.
+     * @param done Whether task is already done.
+     * @param taskList TaskList that user deleted the task from.
+     * @return Message sent when user deletes a task.
      */
-    public void delete(Task task, boolean done) {
+    public static String getDeleteMesage(Task task, boolean done, TaskList taskList) {
         String reply;
         if (done) {
             reply = DELETE_DONE;
         } else {
             reply = DELETE_UNDONE;
         }
-        reply += NEW_LINE + task
-                + NEW_LINE + remaining();
-        sendMessage(reply);
+        reply += NEW_LINE + task + NEW_LINE + getRemainingMessage(taskList);
+        return formatMessage(reply);
     }
 
     /**
-     * Sends user exit message.
-     */
-    public void exit() {
-        sendMessage(EXIT);
-    }
-
-    /**
-     * Sends user error message.
+     * Gets message sent when user exits the bot.
      *
-     * @param e Error to be included in the message.
+     * @return message sent when user exits the bot.
      */
-    public void error(Exception e) {
-        sendMessage(e.toString());
+    public static String getExitMessage() {
+        return formatMessage(EXIT);
     }
 
     /**
-     * Sends formatted messages to the user.
+     * Gets message sent when user command throws an exception.
      *
-     * @param message Message to be formatted.
+     * @param e Exception thrown by erroneous command.
+     * @return message sent when user command throws an exception.
      */
-    private void sendMessage(String message) {
-        String reply = REPLY_HEADER
-                + NEW_LINE + message
-                + NEW_LINE + REPLY_FOOTER
-                + NEW_LINE;
-        System.out.print(reply);
-        try {
-            storage.saveMessage(reply);
-        } catch (IOException ignored) {
-            //ignored
-        }
+    public static String getErrorMessage(Exception e) {
+        return formatMessage(e.toString());
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        Ui ui = (Ui) o;
-        return name.equals(ui.name) && taskList.equals(ui.taskList) && storage.equals(ui.storage)
-                && taskFinder.equals(ui.taskFinder);
+
+    /**
+     * Gets message containing information on number of tasks in the list.
+     *
+     * @return Message containing information on number of tasks in the list.
+     */
+    private static String getRemainingMessage(TaskList taskList) {
+        return REMAINING.replace(TASKNUM_PLACEHOLDER, taskList.getRemaining() + "");
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, taskList, storage, taskFinder);
+    private static String formatMessage(String message) {
+        return REPLY_HEADER + message + REPLY_FOOTER;
     }
 }

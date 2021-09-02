@@ -2,8 +2,6 @@ package me.yukun99.ip.core;
 
 import static me.yukun99.ip.tasks.Task.Type;
 
-import java.util.Scanner;
-
 import me.yukun99.ip.HelpBot;
 import me.yukun99.ip.commands.AddCommand;
 import me.yukun99.ip.commands.Command;
@@ -23,70 +21,62 @@ import me.yukun99.ip.exceptions.HelpBotInvalidCommandException;
 public class Parser {
     // Current instance of HelpBot.
     private final HelpBot helpBot;
-    // Scanner used to scan for user inputs.
-    private final Scanner scanner;
     // TaskList instance from the current instance of HelpBot.
     private final TaskList taskList;
-    // Ui instance from the current instance of HelpBot.
-    private final Ui ui;
     // Storage instance from the current instance of HelpBot.
     private final Storage storage;
+    // TaskFinder instance from the current instance of HelpBot.
+    private final TaskFinder taskFinder;
 
     /**
      * Constructor for a Parser instance.
      *
      * @param helpBot HelpBot instance that this instance of Parser belongs to.
-     * @param scanner Scanner used for user input scanning.
      * @param taskList TaskList instance from the current instance of HelpBot.
-     * @param ui Ui instance from the current instance of HelpBot.
      * @param storage Storage instance from the current instance of HelpBot.
+     * @param taskFinder TaskFinder instance from the current instance of HelpBot.
      */
-    public Parser(HelpBot helpBot, Scanner scanner, TaskList taskList, Ui ui, Storage storage) {
+    public Parser(HelpBot helpBot, TaskList taskList, Storage storage, TaskFinder taskFinder) {
         this.helpBot = helpBot;
-        this.scanner = scanner;
         this.taskList = taskList;
-        this.ui = ui;
         this.storage = storage;
+        this.taskFinder = taskFinder;
     }
 
     /**
-     * Parses the next command sent by the user.
+     * Parses message sent by the user.
      *
-     * @return Next command sent to the HelpBot.
+     * @param message Message sent by the user.
+     * @return Command from message sent to the HelpBot.
      * @throws HelpBotIllegalArgumentException If arguments provided for the commands are missing or wrong.
      * @throws HelpBotInvalidCommandException If command sent by the user is invalid.
      */
-    public final Command parseCommand() throws HelpBotIllegalArgumentException, HelpBotInvalidCommandException {
-        String message = scanner.nextLine();
-        return parseCommand(message);
-    }
-
-    private Command parseCommand(String message)
+    public Command parseCommand(String message)
             throws HelpBotInvalidCommandException, HelpBotIllegalArgumentException {
         Command command = null;
         if (message.equals("list")) {
-            command = new ListCommand(null, taskList, ui);
+            command = new ListCommand(null, taskList);
         }
         if (message.startsWith("list ")) {
             String date = message.replace("list ", "");
             String[] args = {date};
-            command = new ListCommand(args, taskList, ui);
+            command = new ListCommand(args, taskList);
         }
         if (message.startsWith("find ")) {
             String word = message.replaceFirst("find ", "");
             String[] args = word.split(" ");
-            command = new FindCommand(args, taskList, ui);
+            command = new FindCommand(args, taskList, taskFinder);
         }
         if (message.startsWith("todo ")) {
             String name = message.replaceFirst("todo ", "");
             String[] args = {name};
-            command = new AddCommand(args, taskList, ui, Type.TODO, storage);
+            command = new AddCommand(args, taskList, Type.TODO, storage);
         }
         if (message.startsWith("deadline ")) {
             String args = message.replaceFirst("deadline ", "");
             if (args.contains(" /by ")) {
                 String[] argsSplit = args.split(" /by ");
-                command = new AddCommand(argsSplit, taskList, ui, Type.DEADLINE, storage);
+                command = new AddCommand(argsSplit, taskList, Type.DEADLINE, storage);
             } else {
                 throw new HelpBotIllegalArgumentException(args);
             }
@@ -95,7 +85,7 @@ public class Parser {
             String args = message.replaceFirst("event ", "");
             if (args.contains(" /at ")) {
                 String[] argsSplit = args.split(" /at ");
-                command = new AddCommand(argsSplit, taskList, ui, Type.EVENT, storage);
+                command = new AddCommand(argsSplit, taskList, Type.EVENT, storage);
             } else {
                 throw new HelpBotIllegalArgumentException(args);
             }
@@ -104,7 +94,7 @@ public class Parser {
             String args = message.replaceFirst("update ", "");
             if (args.contains(" /to ")) {
                 String[] argsSplit = args.split(" /to ");
-                command = new UpdateCommand(argsSplit, taskList, ui, storage);
+                command = new UpdateCommand(argsSplit, taskList, storage);
             } else {
                 throw new HelpBotIllegalArgumentException(args);
             }
@@ -112,18 +102,18 @@ public class Parser {
         if (message.startsWith("delete ")) {
             String strIndex = message.replaceFirst("delete ", "");
             String[] args = {strIndex};
-            command = new DeleteCommand(args, taskList, ui, storage);
+            command = new DeleteCommand(args, taskList, storage);
         }
         if (message.startsWith("done ")) {
             String strIndex = message.replaceFirst("done ", "");
             String[] args = {strIndex};
-            command = new DoneCommand(args, taskList, ui);
+            command = new DoneCommand(args, taskList);
         }
         if (message.equals("help")) {
-            command = new HelpCommand(null, null, ui);
+            command = new HelpCommand(null, null);
         }
         if (message.equals("bye")) {
-            command = new ExitCommand(null, null, ui, helpBot);
+            command = new ExitCommand(null, null, helpBot);
         }
         if (command == null) {
             throw new HelpBotInvalidCommandException(message);

@@ -53,11 +53,10 @@ public class TaskList {
      * @param strIndex String representing the index of the task in the TaskList.
      * @throws HelpBotInvalidTaskException If strIndex is not an Integer.
      */
-    public void doneTask(String strIndex, Ui ui) throws HelpBotInvalidTaskException {
+    public Task doneTask(String strIndex) throws HelpBotInvalidTaskException {
         try {
             int index = Integer.parseInt(strIndex) - 1;
-            Task task = taskList.get(index);
-            task.setDone(ui);
+            return taskList.get(index);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
             throw new HelpBotInvalidTaskException(e, "done", strIndex + "");
         }

@@ -20,7 +20,6 @@ public class Storage {
     private final String outpath;
     private final String filepath;
     private final TaskList taskList;
-    private Scanner scanner;
 
     /**
      * Constructor for a Storage instance.
@@ -32,27 +31,12 @@ public class Storage {
     public Storage(String filepath, TaskList taskList) throws IOException {
         this.taskList = taskList;
         this.filepath = filepath.replace("\\", "/");
-        File input = new File(this.filepath + "/input.txt");
         this.outpath = filepath + "/ACTUAL.txt";
         File previous = new File(this.filepath + "/ACTUAL.txt");
         if (previous.exists()) {
             previous.delete();
         }
         previous.createNewFile();
-        try {
-            this.scanner = new Scanner(input);
-        } catch (FileNotFoundException e) {
-            this.scanner = new Scanner(System.in);
-        }
-    }
-
-    /**
-     * Gets commands from input.txt.
-     *
-     * @return Scanner containing commands from input.txt.
-     */
-    public Scanner getInputs() {
-        return scanner;
     }
 
     /**
