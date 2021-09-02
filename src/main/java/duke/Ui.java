@@ -40,8 +40,9 @@ public class Ui {
     /**
      * Prints the greeting message.
      */
-    public String greetUser() {
-        return "    Hello! I'm Duke/n" + INDENT_1 + "What can I do for you?";
+    public static String greetUser() {
+        return INDENT_1 + "Hello! I'm Duke :)\n"
+                + INDENT_1 + "What can I do for you?";
 
     }
 

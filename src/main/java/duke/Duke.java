@@ -68,7 +68,7 @@ public class Duke extends Application {
      */
 
     public void run() {
-        ui.greetUser();
+        //ui.greetUser();
         boolean isBye = false;
         while (!isBye) {
             try {
@@ -90,8 +90,7 @@ public class Duke extends Application {
      * @param text String containing text to add
     * @return a label with the specified text that has word wrap enabled.
     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
+    public Label getDialogLabel(String text) {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -102,7 +101,6 @@ public class Duke extends Application {
     public String getResponse(String input) {
         try {
             String fullCommand = input;
-            //ui.showLine();
             Command c = parser.parse(fullCommand);
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
@@ -110,6 +108,9 @@ public class Duke extends Application {
         }
     }
 
+    public Ui getUi() {
+        return ui;
+    }
     @Override
     public void start(Stage stage) {
 

@@ -8,10 +8,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+import duke.Ui;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -29,10 +32,22 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String greeting = Ui.greetUser();
+        dialogContainer.getChildren().add(
+                DialogBox.greetUser(greeting, dukeImage));
+        sendButton.setStyle("-fx-background-color: Yellow");
+        dialogContainer.setStyle("-fx-background-color: Orange");
     }
 
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    @FXML
+    public void greetUser() {
+        String greeting = duke.getUi().greetUser();
+        dialogContainer.getChildren().add(
+                DialogBox.greetUser(greeting, dukeImage));
     }
 
     /**
