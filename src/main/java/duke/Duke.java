@@ -8,13 +8,13 @@ import duke.utils.Storage;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 import javafx.application.Application;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -25,6 +25,7 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    private boolean isExit = false;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -55,7 +56,7 @@ public class Duke extends Application {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage("data/duke.txt");
+        this.storage = new Storage("./data/duke.txt");
         try {
             this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -82,6 +83,8 @@ public class Duke extends Application {
             }
         }
         while (!isExited);
+
+
     }
 
     /**
@@ -103,10 +106,10 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput(Stage stage) {
         String input = userInput.getText();
         Label userText = new Label(input);
-        Label dukeText = new Label(getResponse(input));
+        Label dukeText = new Label(getResponse(input, stage));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -118,16 +121,22 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    private String getResponse(String input, Stage stage) {
         Command command;
         String response;
         try {
             command = Parser.parseNext(input);
             response = command.execute(taskList, ui, storage);
+            isExit = command.hasExited();
         } catch (Exception e) {
             System.out.println(e.toString());
             response = e.getMessage();
         }
+
+        if (isExit) {
+            stage.close();
+        }
+
         return response;
     }
 
@@ -201,11 +210,11 @@ public class Duke extends Application {
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            handleUserInput(stage);
         });
     }
 
@@ -215,7 +224,7 @@ public class Duke extends Application {
      * @param args Placeholder argument.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("data/duke.txt");
+        Duke duke = new Duke("./data/duke.txt");
         duke.run();
     }
 }
