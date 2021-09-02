@@ -2,6 +2,7 @@ package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,9 +21,18 @@ public class Storage {
      *
      * @param filePath
      */
+    //Solution for creating file when one does not exist is inspired by the code of Hong Ai Ling
     public Storage(String filePath, Duke duke) {
         this.filePath = filePath;
         this.file = new File(filePath);
+        if (!file.isFile()) {
+            file.getParentFile().mkdir();
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                System.out.println("Unable to create file :<");
+            }
+        }
         this.duke = duke;
     }
 
