@@ -26,6 +26,10 @@ public class Kermit {
         }
     }
 
+    public String getIntroMessage() {
+        return ui.getIntroMessage();
+    }
+
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
