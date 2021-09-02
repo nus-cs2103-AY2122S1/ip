@@ -3,7 +3,6 @@ package duke;
 import java.util.Scanner;
 
 class Parser {
-    //     Scanner input = new Scanner(System.in);
     Ui ui;
     Storage storage;
     TaskList tasklist;
@@ -36,28 +35,29 @@ class Parser {
      *
      * @param input String passed by user
      */
-    public void parse(String input) {
+    public String parse(String input) {
+        String output = "";
         if (input.equals("bye")) {
-            ui.byeResponse();
+            output += ui.byeResponse();
             storage.saveTasks(tasklist);
             breakOutLoop();
         } else if (input.contains("list")) {
-            ui.listResponse();
+            output += ui.listResponse();
         } else if (input.contains("done")) {
-            ui.doneResponse(input);
+            output += ui.doneResponse(input);
         } else if (input.contains("delete")) {
-            ui.deleteResponse(input);
+            output += ui.deleteResponse(input);
         } else if (input.contains("find")) {
-            ui.findResponse(input);
+            output += ui.findResponse(input);
         } else if (input.contains("todo")) {
-            ui.todoResponse(input);
+            output += ui.todoResponse(input);
         } else if (input.contains("deadline")) {
-            ui.deadlineResponse(input);
+            output += ui.deadlineResponse(input);
         } else if (input.contains("event")) {
-            ui.eventResponse(input);
+            output += ui.eventResponse(input);
         } else {
-            ui.invalidInput();
+            output += ui.invalidInput();
         }
-
+        return output;
     }
 }

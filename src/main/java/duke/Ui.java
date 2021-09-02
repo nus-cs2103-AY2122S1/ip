@@ -5,10 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class Ui {
-    String line = "-----------------------------------------";
+    String line = "---------------------------------------------";
 
-    //    Scanner textInput = new Scanner(System.in);
-//    private boolean loop = true;
+    //    private boolean loop = true;
     TaskList taskList;
 
     Ui(TaskList list) {
@@ -39,7 +38,8 @@ public class Ui {
      *
      * @param item User input to complete item from list
      */
-    public void doneResponse(String item) {
+    public String doneResponse(String item) {
+        String output = "";
         try {
             item = item.replaceAll("\\D+", "");//Extracts number from input
             int completedItem = Integer.parseInt(item);
@@ -48,6 +48,7 @@ public class Ui {
             System.out.println("     " + "Nice! I've marked this task as done:");
             System.out.println("     " + taskList.get(completedItem - 1));
             System.out.println(line);
+            output += line + "\n     Nice! I've marked this task as done:\n" + "     " + taskList.get(completedItem - 1) + '\n' + line;
 //            continue;
         } catch (IndexOutOfBoundsException e) {
             System.out.println(line);
@@ -55,6 +56,7 @@ public class Ui {
             System.out.println(line);
 //            continue;
         }
+        return output;
     }
 
     /**
@@ -62,56 +64,70 @@ public class Ui {
      *
      * @param item User input to delete item from list
      */
-    public void deleteResponse(String item) {
+    public String deleteResponse(String item) {
+        String output = "";
         item = item.replaceAll("\\D+", "");//Extracts number from input
         int removeItem = Integer.parseInt(item);
 
-//                toDo.get(completedItem-1).markAsDone();//Set the task to done
+//      toDo.get(completedItem-1).markAsDone();
         System.out.println(line);
         System.out.println("     " + "Noted. I've removed this task:");
         System.out.println("     " + taskList.get(removeItem - 1));
-        taskList.removeTask(removeItem - 1);//Removes item at the corresponding index
         System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
         System.out.println(line);
 //        continue;
+        output += line + "\n     " + "Noted. I've removed this task:" + "     \n" +
+                taskList.get(removeItem - 1) + "\n     Now you have " + countTasks() + " task to be done on your list!\n"
+                + line;
+        taskList.removeTask(removeItem - 1);//Removes item at the corresponding index
+        return output;
     }
 
-    public void byeResponse() {
+    public String byeResponse() {
+        String output = "";
         System.out.println(line);
         System.out.println("     " + "Bye. Hope to see you again soon!");
         System.out.println(line);
-//        myObj.close();
-//        saveTasks(taskList);
-//        break;
+        output += line + "\n     " + "Bye. Hope to see you again soon!\n" + line;
+        return output;
     }
 
-    public void listResponse() {
+    public String listResponse() {
+        String output = "";
         System.out.println(line);
+        output += line + '\n';
         for (int i = 0; i < taskList.size(); i++) {
             System.out.println("     " + String.valueOf(i + 1) + ". " + taskList.get(i).toString());
+            output += "     " + String.valueOf(i + 1) + ". " + taskList.get(i).toString() + '\n';
         }
         System.out.println(line);
-//        continue;
+        output += line;
+        return output;
     }
 
-    public void todoResponse(String input) {
+    public String todoResponse(String input) {
         System.out.println(line);
+        String output = "";
+        output += line;
         try {
             String description = input.substring(5, input.length());
             System.out.println("     added: " + new ToDo(input));//Added item
             taskList.addTask(new ToDo(description));//Added new task to arraylist
             System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
             System.out.println(line);
+            output += "\n     added: " + new ToDo(input) + '\n' + "     Now you have " + countTasks() + " task to be done on your list!\n" + line;
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("     " + "Please tell us the todo task :)");
+            output += "\n" + "Please tell us the todo task :)\n" + line;
             System.out.println(line);
         } catch (Exception e) {
             System.out.println(e);
         }
-//                continue;
+        return output;
     }
 
-    public void deadlineResponse(String input) {
+    public String deadlineResponse(String input) {
+        String output = "";
         try {
             String by = input.substring(input.lastIndexOf("/") + 1);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -122,6 +138,9 @@ public class Ui {
             taskList.addTask(new Deadline(description, localTimeObj.toString()));//Added new task to arraylist
             System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
             System.out.println(line);
+            output += line + "\n" + "     added: " + new Deadline(description, localTimeObj.toString())
+                    + "\n" + "     Now you have " + countTasks() + " task to be done on your list!\n" +
+                    line;
 //          continue;
         } catch (Exception e) {
             String by = input.substring(input.lastIndexOf("/") + 1);
@@ -131,11 +150,16 @@ public class Ui {
             taskList.addTask(new Deadline(description, by));//Added new task to arraylist
             System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
             System.out.println(line);
+            output += line + "\n" + "     added: " + new Deadline(description, by)
+                    + "\n" + "     Now you have " + countTasks() + " task to be done on your list!\n" +
+                    line;
 //                    continue;
         }
+        return output;
     }
 
-    public void eventResponse(String input) {
+    public String eventResponse(String input) {
+        String output = "";
         try {
             String by = input.substring(input.lastIndexOf("/") + 1);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -146,6 +170,9 @@ public class Ui {
             taskList.addTask(new Event(description, localTimeObj.toString()));//Added new task to arraylist
             System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
             System.out.println(line);
+            output += line + "\n     added: " + new Event(description, localTimeObj.toString()) + "\n" +
+                    "     Now you have " + countTasks() + " task to be done on your list!\n"
+                    + line;
         } catch (Exception e) {
             String by = input.substring(input.lastIndexOf("/") + 1);
             String description = input.substring(6, input.lastIndexOf("/"));
@@ -154,22 +181,32 @@ public class Ui {
             taskList.addTask(new Event(description, by));//Added new task to arraylist
             System.out.println("     Now you have " + countTasks() + " task to be done on your list!");
             System.out.println(line);
+            output += line + "\n     added: " + new Event(description, by) + "\n" +
+                    "     Now you have " + countTasks() + " task to be done on your list!\n"
+                    + line;
         }
+        return output;
     }
 
-    public void findResponse(String input) {
+    public String findResponse(String input) {
+        String output = "";
         String keyWord = input.substring(input.lastIndexOf("find") + 5);
         TaskList results = taskList.findTask(keyWord);
         for (int i = 0; i < results.size(); i++) {
             Task result = results.get(i);
             System.out.println(result + "\n");
+            output += result + "\n";
         }
+        return output;
     }
 
-    void invalidInput() {
+    public String invalidInput() {
+        String output = "";
         System.out.println(line);
         System.out.println("     " + "OOPS You have entered an invalid input :)");
         System.out.println(line);
+        output += line + "     \n" + "OOPS You have entered an invalid input :)\n" + line;
+        return output;
     }
 
 }
