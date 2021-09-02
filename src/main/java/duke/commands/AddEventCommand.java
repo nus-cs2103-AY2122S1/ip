@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.Event;
 import duke.task.Task;
@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Creates an AddDeadlineCommand to add deadlines to the task list.
+ */
 public class AddEventCommand extends Command {
     private String command;
 
@@ -18,6 +21,13 @@ public class AddEventCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Executes the Command accordingly.
+     *
+     * @param storage Storage to store changes in text file.
+     * @param tasks Tasks compiled in a TaskList.
+     * @return A String array containing output.
+     */
     public String[] execute(Storage storage, TaskList tasks) {
         String[] words = command.split(" ");
         if (words.length <= 3) {

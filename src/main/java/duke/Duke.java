@@ -2,7 +2,10 @@ package duke;
 
 import duke.commands.Command;
 import duke.exception.DukeException;
+import duke.parser.Parser;
+import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Allows users to add 3 different types of tasks, mark them as done, and delete tasks.
@@ -22,21 +25,17 @@ import duke.task.TaskList;
 
 public class Duke {
     private static final String fileAddress = "data/duke.txt";
-
     private static Storage storage;
     private static TaskList tasks;
-    private Ui ui;
 
     /**
      * Creates a Duke object.
      */
     public Duke() {
-        this.ui = new Ui();
         this.storage = new Storage(fileAddress);
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            //ui.showLoadingError();
             this.tasks = new TaskList();
         }
     }
@@ -45,7 +44,7 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String[] getResponse(String input) {
+    public String[] getResponse(String input) {
         return commands(input);
     }
 
@@ -55,8 +54,13 @@ public class Duke {
      * @throws DukeException If command is not recognised or improperly formatted.
      */
     private String[] commands(String command) throws DukeException {
-        Command c = Parser.process(command);
-        return c.execute(storage, tasks);
+        try {
+            Command c = Parser.process(command);
+            return c.execute(storage, tasks);
+        } catch (DukeException e) {
+            return Ui.display(e.toString());
+        }
+
     }
 }
 

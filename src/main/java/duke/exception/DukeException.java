@@ -6,8 +6,8 @@ package duke.exception;
 public class DukeException extends RuntimeException {
     private final String INVALID_TODO = "Enter a valid todo in this format 'todo <task here>'";
     private final String NO_TASKS_EXCEPTION = "There are no tasks in the list yet!";
-    private final String INVALID_DEADLINE = "Enter a valid deadline in this format 'deadline <task> /by <date or day>'";
-    private final String INVALID_EVENT = "Enter a valid event in this format 'event <task> /at <date or day>'";
+    private final String INVALID_DEADLINE = "Enter a valid deadline in this format 'deadline <task> /by <YYYY-MM-DD>'";
+    private final String INVALID_EVENT = "Enter a valid event in this format 'event <task> /at <YYYY-MM-DD>'";
     private final String INVALID_TASK_NUMBER = "Current task number does not exist. Enter <list> to see all tasks";
     private final String INVALID_NUMBER_FORMAT = "Enter a valid number in this format 'done <number>'";
     private final String INVALID_COMMAND = "Enter a valid command!";

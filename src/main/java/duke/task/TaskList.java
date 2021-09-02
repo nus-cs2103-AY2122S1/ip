@@ -2,7 +2,6 @@ package duke.task;
 
 import java.util.ArrayList;
 
-import duke.Ui;
 import duke.exception.DukeException;
 
 /**
@@ -116,7 +115,13 @@ public class TaskList {
         store.remove(taskNumber);
     }
 
-    public static String[] printList(String command) throws DukeException {
+    /**
+     * Creates String array containing contents of tasks in list.
+     *
+     * @param command Command given by user.
+     * @return String Array of output.
+     */
+    public static String[] printList(String command) {
         String[] words = command.split(" ");
         if (words.length > 1) {
             throw new DukeException("invalidCommand");

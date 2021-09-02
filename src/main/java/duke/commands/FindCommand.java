@@ -1,11 +1,14 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Creates an AddDeadlineCommand to add deadlines to the task list.
+ */
 public class FindCommand extends Command {
     private String command;
 
@@ -13,6 +16,13 @@ public class FindCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Executes the Command accordingly.
+     *
+     * @param storage Storage to store changes in text file.
+     * @param tasks Tasks compiled in a TaskList.
+     * @return A String array containing output.
+     */
     public String[] execute(Storage storage, TaskList tasks) {
         Task[] result = new Task[tasks.size()];
         String[] words = command.split(" ");

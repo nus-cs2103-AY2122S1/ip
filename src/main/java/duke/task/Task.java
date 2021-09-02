@@ -49,6 +49,11 @@ public abstract class Task {
         return "[" + this.getStatusIcon() + "] " + this.name;
     }
 
+    /**
+     * Gets the name of the task.
+     *
+     * @return Name of task.
+     */
     public String getName() {
         return this.name;
     }

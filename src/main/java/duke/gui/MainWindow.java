@@ -1,5 +1,7 @@
-package duke;
+package duke.gui;
 
+import duke.Duke;
+import duke.ui.Ui;
 import duke.task.TaskList;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

@@ -1,7 +1,7 @@
 package duke.commands;
 
-import duke.Storage;
-import duke.Ui;
+import duke.storage.Storage;
+import duke.ui.Ui;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Task;
@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Creates an AddDeadlineCommand to add deadlines to the task list.
+ */
 public class AddDeadlineCommand extends Command {
     private String command;
 
@@ -18,6 +21,13 @@ public class AddDeadlineCommand extends Command {
         this.command = command;
     }
 
+    /**
+     * Executes the Command accordingly.
+     *
+     * @param storage Storage to store changes in text file.
+     * @param tasks Tasks compiled in a TaskList.
+     * @return A String array containing output.
+     */
     public String[] execute(Storage storage, TaskList tasks) {
         String[] words = command.split(" ");
         if (words.length <= 3) {
@@ -38,6 +48,8 @@ public class AddDeadlineCommand extends Command {
                 return new String[]{e.toString()};
             } catch (DateTimeParseException e) {
                 return new String[]{("Enter valid date format!")};
+            } catch (DukeException e) {
+                return new String[]{e.toString()};
             }
         }
     }

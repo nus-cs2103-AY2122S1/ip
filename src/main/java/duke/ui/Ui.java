@@ -1,4 +1,4 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
 
@@ -17,12 +17,24 @@ public class Ui {
         printIntro();
     }
 
+    /**
+     * Compiles messages in an array for Duke output.
+     *
+     * @param messages Messages to be output by Duke.
+     * @return String Array of messages to be output.
+     */
     public static String[] display(String... messages) {
         return messages;
     }
 
-    public static String[] display(String msg) {
-        return new String[] { msg };
+    /**
+     * Compiles message in an array for Duke output.
+     *
+     * @param message Message to be output by Duke.
+     * @return String Array of messages to be output.
+     */
+    public static String[] display(String message) {
+        return new String[] { message };
     }
 
     /**
@@ -37,31 +49,14 @@ public class Ui {
         return display("HELLO FROM", logo);
     }
 
-    /**
-     * Prints cue for user to start user input.
-     */
-    public void start() {
-        System.out.println("Hello! I'm Duke\n");
-        System.out.println("What can I do for you?");
-        System.out.println("__________________________________________");
-    }
 
     /**
      * Prints simple farewell message to user.
+     *
+     * @return String Array of output.
      */
     public static String[] end() {
         return display("Bye. Hope to see you again soon!");
-    }
-
-    /**
-     * Prints error message accordingly based on what error is thrown.
-     *
-     * @param err DukeException that is being thrown.
-     */
-    public void printError(DukeException err) {
-        System.out.println("    ______________________________________");
-        System.out.printf("     %s\n", err);
-        System.out.println("    ______________________________________");
     }
 
     /**
@@ -69,6 +64,7 @@ public class Ui {
      *
      * @param task Task that is currently being added into the list.
      * @param size Size of current list including current Task being added.
+     * @return String Array of output.
      */
     public static String[] printTaskAdded(Task task, int size) {
         return display("Got it. I've added this task: ",
@@ -79,6 +75,7 @@ public class Ui {
      * Prints simple message to indicate that a certain task has been marked as completed.
      *
      * @param task Task that user has indicated as completed.
+     * @return String Array of output.
      */
     public static String[] printTaskCompleted(Task task) {
         System.out.println("    ______________________________________");
@@ -94,6 +91,7 @@ public class Ui {
      *
      * @param task Task that the user wants deleted.
      * @param size Size of list with remaining tasks.
+     * @return String Array of output.
      */
     public static String[] printDeleteTask(Task task, int size) {
         System.out.println("    ______________________________________");
@@ -109,6 +107,7 @@ public class Ui {
      * Prints results of finding tasks.
      *
      * @param result Result of tasks that pass the search.
+     * @return String Array of output.
      */
     public static String[] printFindTask(Task[] result) {
         if (result[0] == null) {

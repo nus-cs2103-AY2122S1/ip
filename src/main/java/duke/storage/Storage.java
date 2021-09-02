@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 

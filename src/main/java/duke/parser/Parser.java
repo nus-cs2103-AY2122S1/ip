@@ -1,4 +1,4 @@
-package duke;
+package duke.parser;
 
 import duke.commands.*;
 import duke.exception.DukeException;
@@ -17,7 +17,7 @@ public class Parser {
      * Reads the command and processes the first word to determine what the command type is.
      *
      * @param command Command that is passed into the parser.
-     * @return Type of command in String format.
+     * @return Type of Command to be executed.
      */
     public static Command process(String command) {
         String[] words = command.split(" ");
