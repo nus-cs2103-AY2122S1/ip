@@ -6,10 +6,7 @@ import java.time.format.DateTimeParseException;
 
 import duke.command.Storage;
 import duke.command.Ui;
-import duke.exception.InvalidCommandException;
-import duke.exception.InvalidTaskException;
-import duke.exception.MissingTaskException;
-import duke.exception.MissingTimeException;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
@@ -56,16 +53,10 @@ public class Duke {
             storage.saveTasksToFile(tasks.getTasks());
             return tasks.performCommand(command, input);
 
-        } catch (InvalidCommandException e) {
-            return ui.printException("InvalidCommand");
+        } catch (DukeException e) {
+            return e.getMessage();
         } catch (IOException e) {
             return ui.printException("IOException");
-        } catch (InvalidTaskException e) {
-            return ui.printException("InvalidTask");
-        } catch (MissingTaskException e) {
-            return ui.printException("MissingTask");
-        } catch (MissingTimeException e) {
-            return ui.printException("MissingTime");
         } catch (DateTimeParseException e) {
             return ui.printException("DateTimeParse");
         }

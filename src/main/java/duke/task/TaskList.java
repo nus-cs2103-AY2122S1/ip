@@ -55,7 +55,8 @@ public class TaskList {
         case "find":
             return findTask(input);
         default:
-            throw new InvalidCommandException("Command not found.");
+            throw new InvalidCommandException("I don't quite understand what that means.\n"
+                    + "Could you please rephrase that?\n");
         }
     }
 
@@ -89,7 +90,8 @@ public class TaskList {
      */
     public String markTaskAsDone(int taskToMark) throws InvalidTaskException {
         if (taskToMark <= 0 || taskToMark > taskList.size()) {
-            throw new InvalidTaskException("Task is not found");
+            throw new InvalidTaskException("You might have mistyped the task number.\n"
+                    + "Please recheck your task number and enter again.\n");
         }
 
         taskList.get(taskToMark - 1).markAsDone();
@@ -109,7 +111,8 @@ public class TaskList {
      */
     public String deleteTask(int taskToDelete) throws InvalidTaskException {
         if (taskToDelete <= 0 || taskToDelete > taskList.size()) {
-            throw new InvalidTaskException("Task is not found");
+            throw new InvalidTaskException("You might have mistyped the task number.\n"
+                    + "Please recheck your task number and enter again.\n");
         }
 
         String output = String.format("Done!\n"
@@ -134,7 +137,8 @@ public class TaskList {
      */
     public String addToDo(String input) throws MissingTaskException {
         if (input.length() < 6) {
-            throw new MissingTaskException("Task not found.");
+            throw new MissingTaskException("You might have missed out on the task.\n"
+                    + "Could you please enter it again?\n");
         }
 
         String taskName = input.substring(5);
@@ -157,17 +161,20 @@ public class TaskList {
         int separation = input.indexOf(" /by ");
 
         if (separation == -1) {
-            throw new MissingTimeException("Time not found");
+            throw new MissingTimeException("You might have missed out on the time.\n"
+                    + "Could you please enter it again?\n");
         }
 
         if (separation < 11) {
-            throw new MissingTaskException("Task not found");
+            throw new MissingTaskException("You might have missed out on the task.\n"
+                    + "Could you please enter it again?\n");
         }
 
         String taskName = input.substring(9, separation);
 
         if (input.substring(separation + 6).length() < 1) {
-            throw new MissingTimeException("Time not found");
+            throw new MissingTimeException("Your date might not be in the correct format.\n"
+                    + "Please ensure it is in the YYYY-MM-DD format.\n");
         }
 
         String timeFull = input.substring(separation + 5);
@@ -199,16 +206,19 @@ public class TaskList {
         int separation = input.indexOf(" /at ");
 
         if (separation == -1) {
-            throw new MissingTimeException("Time not found");
+            throw new MissingTimeException("You might have missed out on the time.\n"
+                    + "Could you please enter it again?\n");
         }
 
         if (separation < 8) {
-            throw new MissingTaskException("Task not found");
+            throw new MissingTaskException("You might have missed out on the task.\n"
+                    + "Could you please enter it again?\n");
         }
         String taskName = input.substring(6, separation);
 
         if (input.substring(separation + 6).length() < 1) {
-            throw new MissingTimeException("Time not found");
+            throw new MissingTimeException("Your date might not be in the correct format.\n"
+                    + "Please ensure it is in the YYYY-MM-DD format.\n");
         }
 
         String timeFull = input.substring(separation + 5);
@@ -253,7 +263,8 @@ public class TaskList {
         StringBuilder output;
 
         if (input.length() < 6) {
-            throw new MissingTaskException("Task not found.");
+            throw new MissingTaskException("You might have missed out on the task.\n"
+                    + "Could you please enter it again?\n");
         }
 
         String taskName = input.substring(5);

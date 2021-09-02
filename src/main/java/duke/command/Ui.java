@@ -52,21 +52,9 @@ public class Ui {
      */
     public String printException(String type) {
         switch (type) {
-        case "InvalidCommand":
-            return "I don't quite understand what that means.\n"
-                    + "Could you please rephrase that?\n";
         case "IOException":
             return "There is a problem with saving the list to the file.\n"
                     + "Please ensure a duke.txt file is present in /data.\n";
-        case "InvalidTask":
-            return "You might have mistyped the task number.\n"
-                    + "Please recheck your task number and enter again.\n";
-        case "MissingTask":
-            return "You might have missed out on the task.\n"
-                    + "Could you please enter it again?\n";
-        case "MissingTime":
-            return "You might have missed out on the time.\n"
-                    + "Could you please enter it again?\n";
         case "DateTimeParse":
             return "Your date might not be in the correct format.\n"
                     + "Please ensure it is in the YYYY-MM-DD format.\n";
