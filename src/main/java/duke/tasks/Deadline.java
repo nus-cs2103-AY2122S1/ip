@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import duke.tasks.Task;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -9,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * This class represents a Deadline Task.
  */
 public class Deadline extends Task {
-    private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-M-uuuu H:mm");
-    private static DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("d MMM uuuu hh:mm a");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-M-uuuu H:mm");
+    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("d MMM uuuu hh:mm a");
     protected LocalDateTime date;
 
     /**
@@ -26,7 +24,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a Deadline Task which can be marked as done.
-     * 
+     *
      * @param description Description of deadline task.
      * @param by Date that task has to be completed by.
      * @param isDone Whether the task is done.
@@ -40,7 +38,7 @@ public class Deadline extends Task {
         // TODO: need to catch exception
         return LocalDateTime.parse(at, FORMATTER);
     }
-    
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DISPLAY_FORMATTER) + ")";
@@ -55,7 +53,7 @@ public class Deadline extends Task {
     public boolean equals(Object obj) {
         if (obj instanceof Deadline) {
             Deadline other = (Deadline) obj;
-            return super.equals(obj)  && date.equals(other.date);
+            return super.equals(obj) && date.equals(other.date);
         }
         return false;
     }

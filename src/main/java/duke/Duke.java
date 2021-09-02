@@ -12,7 +12,7 @@ public class Duke {
 
     /**
      * Constructs a Duke object.
-     * 
+     *
      * @param filePath Path of file where list of tasks is stored.
      */
     public Duke(String filePath) {
@@ -25,7 +25,12 @@ public class Duke {
             tasks = new TaskList();
         }
     }
-    
+
+    /**
+     * Starts the Duke application.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         Duke duke = new Duke("./data/duke.txt");
         duke.run();

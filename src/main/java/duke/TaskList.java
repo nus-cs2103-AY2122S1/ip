@@ -1,18 +1,18 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 /**
  * This class represents a list of Tasks.
  */
 public class TaskList {
-    ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * Constructs a TaskList that contains all the tasks in the given param.
-     * 
+     *
      * @param tasks ArrayList of Tasks that will be stored in the TaskList.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -40,6 +40,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints the tasks in the TaskList with different display messages depending on if user is finding tasks.
+     *
+     * @param isFindCommand True if user is finding tasks. False if user is printing entire task list.
+     */
     public void printTaskList(boolean isFindCommand) {
         if (tasks.size() == 0) {
             System.out.println("There are no matching tasks in the list.");
@@ -50,14 +55,14 @@ public class TaskList {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }
     }
-    
+
     protected int getLength() {
         return tasks.size();
     }
 
     /**
      * Adds a Task to the TaskList.
-     * 
+     *
      * @param task Task to be added to the TaskList.
      */
     public void addNewTask(Task task) {
@@ -66,7 +71,7 @@ public class TaskList {
 
     /**
      * Marks a Task with the given taskIndex as done and returns the Task.
-     * 
+     *
      * @param taskIndex Index of the Task to be marked as done.
      * @return Task that was marked as done.
      * @throws DukeException
@@ -80,7 +85,7 @@ public class TaskList {
 
     /**
      * Deletes a Task and returns it.
-     * 
+     *
      * @param taskIndex Index of Task to be deleted.
      * @return Task that was deleted.
      * @throws DukeException
@@ -94,7 +99,7 @@ public class TaskList {
 
     /**
      * Returns the String representations of all Tasks in an ArrayList in the format to be stored in a file.
-     * 
+     *
      * @return ArrayList of String representations of all Tasks in TaskList in the format to be stored in a file.
      */
     public ArrayList<String> getTaskStrings() {
@@ -104,7 +109,13 @@ public class TaskList {
         }
         return taskStrings;
     }
-    
+
+    /**
+     * Returns a TaskList containing the Tasks that have the keyword searched for by the user in their descriptions.
+     *
+     * @param keyword Keyword searched for by users.
+     * @return TaskList containing the Tasks that have keyword in their descriptions.
+     */
     public TaskList findTasksWithKeyword(String keyword) {
         ArrayList<Task> arrListTasks = new ArrayList<>();
         for (Task task : tasks) {
@@ -114,8 +125,8 @@ public class TaskList {
         }
         return new TaskList(arrListTasks);
     }
-    
-    private void validateTaskIndex(int taskIndex) throws DukeException { 
+
+    private void validateTaskIndex(int taskIndex) throws DukeException {
         int taskCount = tasks.size();
         if (taskCount == 0) {
             throw new DukeException("There are no tasks in the list.");
@@ -126,7 +137,7 @@ public class TaskList {
 
     /**
      * Returns true if object being compared is a TaskList that contains the same Tasks.
-     * 
+     *
      * @param obj Object to be compared to TaskList.
      * @return true if object is equal to TaskList.
      */

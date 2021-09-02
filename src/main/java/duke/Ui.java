@@ -1,16 +1,16 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.Scanner;
+
+import duke.tasks.Task;
 
 /**
  * This class represents a User Interface.
  * It deals with user interactions like reading user input and displaying messages to the user.
  */
 public class Ui {
+    private static final String DIVIDER_LINE = "_______________________________________________";
     private final Scanner scanner;
-    private final String DIVIDER_LINE = "_______________________________________________";
 
     /**
      * Constructs a Ui object with a Scanner.
@@ -42,7 +42,7 @@ public class Ui {
 
     /**
      * Returns parsed user input.
-     * 
+     *
      * @return Parsed user input as String.
      */
     public String readCommand() {
@@ -58,7 +58,7 @@ public class Ui {
 
     /**
      * Shows error message when DukeException is thrown.
-     * 
+     *
      * @param message Error message to be shown.
      */
     public void showError(String message) {
@@ -67,7 +67,7 @@ public class Ui {
 
     /**
      * Shows message to user when task is marked as done.
-     * 
+     *
      * @param task Task that is marked as done.
      */
     public void showMarkDone(Task task) {
@@ -77,7 +77,7 @@ public class Ui {
 
     /**
      * Shows message to user when task is deleted.
-     * 
+     *
      * @param task Task that was deleted.
      * @param tasks Updated TaskList that does not contain deleted task.
      */
@@ -88,7 +88,7 @@ public class Ui {
 
     /**
      * Prints message showing number of tasks in TaskList.
-     * 
+     *
      * @param tasks TaskList of tasks whose number of tasks is to be displayed.
      */
     void printTasksCount(TaskList tasks) {
@@ -97,11 +97,11 @@ public class Ui {
 
     /**
      * Show message to user when a task is added to a TaskList.
-     * 
+     *
      * @param tasks Updated TaskList of tasks containing added task.
      * @param task Task that was added to the TaskList.
      */
-    public void showAddTask(TaskList tasks, Task task) { 
+    public void showAddTask(TaskList tasks, Task task) {
         System.out.println("Got it. I've added this task:\n\t" + task);
         printTasksCount(tasks);
     }

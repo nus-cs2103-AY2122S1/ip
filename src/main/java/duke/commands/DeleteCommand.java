@@ -10,11 +10,11 @@ import duke.tasks.Task;
  * Represents Command to delete a Task from a TaskList.
  */
 public class DeleteCommand extends Command {
-    public int taskIndex;
+    private int taskIndex;
 
     /**
      * Constructs a DeleteCommand with the given taskIndex
-     * 
+     *
      * @param taskIndex Index of Task in TaskList to be deleted.
      */
     public DeleteCommand(int taskIndex) {

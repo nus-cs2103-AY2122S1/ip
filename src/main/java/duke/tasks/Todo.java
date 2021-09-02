@@ -7,7 +7,7 @@ public class Todo extends Task {
 
     /**
      * Constructs a Todo Task with the given description that is not marked as done.
-     * 
+     *
      * @param description Description of the Todo Task.
      */
     public Todo(String description) {
@@ -16,7 +16,7 @@ public class Todo extends Task {
 
     /**
      * Constructs a Todo Task with the given description that can be marked as done.
-     * 
+     *
      * @param description Description of the Todo Task.
      * @param isDone Whether task is done.
      */

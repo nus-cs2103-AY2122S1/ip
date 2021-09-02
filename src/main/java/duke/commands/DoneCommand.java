@@ -11,7 +11,7 @@ import duke.tasks.Task;
  */
 public class DoneCommand extends Command {
     private final int taskIndex;
-    
+
     public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }

@@ -1,19 +1,18 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
 
 import duke.commands.AddTaskCommand;
 import duke.commands.ByeCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ListCommand;
-
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
     @Test
@@ -32,7 +31,7 @@ public class ParserTest {
             assertEquals("Task details cannot be empty", e.getMessage());
         }
     }
-    
+
     @Test
     public void testParseAddTaskDeadline_noBy_exceptionThrown() {
         try {
@@ -42,7 +41,7 @@ public class ParserTest {
             assertEquals("Deadline descriptions must contain /by [dd-mm-yyyy hh:mm]", e.getMessage());
         }
     }
-    
+
     @Test
     public void testParseAddTaskEvent() throws DukeException {
         Event event = new Event("test description 123", "20-01-2021 02:13");
@@ -69,13 +68,13 @@ public class ParserTest {
             assertEquals("Event descriptions must contain /at [dd-mm-yyyy hh:mm]", e.getMessage());
         }
     }
-    
+
     @Test
     public void testParseAddTaskTodo() throws DukeException {
         Todo todo = new Todo("test description 123");
         assertEquals(new AddTaskCommand(todo), Parser.parse("todo test description 123"));
     }
-    
+
     @Test
     public void testParseAddTaskTodo_noDescription_exceptionThrown() {
         try {
@@ -95,7 +94,7 @@ public class ParserTest {
     public void testParseList() throws DukeException {
         assertEquals(new ListCommand(), Parser.parse("list"));
     }
-    
+
     @Test
     public void testParseDelete() throws DukeException {
         assertEquals(new DeleteCommand(0), Parser.parse("delete 1"));
@@ -117,11 +116,11 @@ public class ParserTest {
             Parser.parse("delete abc");
             fail();
         } catch (DukeException e) {
-            assertEquals("Invalid task number. Sample input with correct format: " 
-                            + "[command] [taskNo] eg. 'done 2'", e.getMessage());
+            assertEquals("Invalid task number. Sample input with correct format: "
+                    + "[command] [taskNo] eg. 'done 2'", e.getMessage());
         }
     }
-    
+
     @Test
     public void testParseDone() throws DukeException {
         assertEquals(new DoneCommand(0), Parser.parse("done 1"));

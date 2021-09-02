@@ -7,9 +7,8 @@ import java.time.format.DateTimeFormatter;
  * This class represents an Event Task.
  */
 public class Event extends Task {
-
-    private static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-M-uuuu H:mm");
-    private static DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("d MMM uuuu hh:mm a");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d-M-uuuu H:mm");
+    private static final DateTimeFormatter DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("d MMM uuuu hh:mm a");
     protected LocalDateTime date;
 
     /**
@@ -24,7 +23,7 @@ public class Event extends Task {
     }
 
     /**
-     * 
+     *
      * @param description Description of event task.
      * @param at Date that event is occurring.
      * @param isDone Whether task is done.
@@ -33,7 +32,7 @@ public class Event extends Task {
         super(description, isDone);
         this.date = parseDateTime(at);
     }
-    
+
     private LocalDateTime parseDateTime(String at) {
         // TODO: need to catch exception
         return LocalDateTime.parse(at, FORMATTER);

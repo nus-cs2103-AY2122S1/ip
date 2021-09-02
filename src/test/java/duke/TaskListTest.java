@@ -1,12 +1,13 @@
 package duke;
 
-import duke.tasks.Task;
-import duke.tasks.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 public class TaskListTest {
     @Test
@@ -40,7 +41,7 @@ public class TaskListTest {
         tasks.deleteTask(0);
         assertEquals(new TaskList(), tasks);
     }
-    
+
     @Test
     public void testGetTaskStrings() throws DukeException {
         ArrayList<Task> taskArr = new ArrayList<>();

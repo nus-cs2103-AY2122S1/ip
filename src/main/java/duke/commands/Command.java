@@ -11,7 +11,7 @@ import duke.Ui;
 public abstract class Command {
     /**
      * Executes a Command.
-     * 
+     *
      * @param tasks TaskList containing tasks on which Command can be executed.
      * @param ui Ui to show messages to user when Command is executed.
      * @param storage Storage where tasks should be stored.
@@ -21,10 +21,10 @@ public abstract class Command {
 
     /**
      * Represents if Duke program should be exited. Should be overridden by Command that exits program.
-     * 
+     *
      * @return False.
      */
-    public boolean isExit() { 
-        return false; 
+    public boolean isExit() {
+        return false;
     }
 }

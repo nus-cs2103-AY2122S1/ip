@@ -1,17 +1,17 @@
 package duke;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 
 /**
  * This class represents a Storage that is used to save and load Tasks from a file.
@@ -21,13 +21,13 @@ public class Storage {
 
     /**
      * Constructs a Storage that saves and loads tasks from the file specified by filePath/
-     * 
+     *
      * @param filePath Path to file where tasks are saved and loaded.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
-    
+
     private File getStoreFile() throws IOException {
         File store = new File(this.filePath);
         String dirPath = store.getParent();
@@ -41,7 +41,7 @@ public class Storage {
 
     /**
      * Loads tasks from file specified by filePath into an ArrayList of Tasks.
-     * 
+     *
      * @return ArrayList of Tasks loaded from the filePath.
      * @throws DukeException
      */
@@ -67,7 +67,7 @@ public class Storage {
 
     /**
      * Saves tasks in the file specified by filePath.
-     * 
+     *
      * @param tasks TaskList containing Tasks that should be saved.
      */
     public void saveTasks(TaskList tasks) {
@@ -93,16 +93,16 @@ public class Storage {
             boolean isDone = (isDoneInt == 1);
             String description = parts[2];
             switch(taskType) {
-                case "T":
-                    return new Todo(description, isDone);
-                case "D":
-                    String date = parts[3];
-                    return new Deadline(description, date, isDone);
-                case "E":
-                    date = parts[3];
-                    return new Event(description, date, isDone);
-                default:
-                    throw new DukeException("Could not parse task type on file line " + lineNo);
+            case "T":
+                return new Todo(description, isDone);
+            case "D":
+                String date = parts[3];
+                return new Deadline(description, date, isDone);
+            case "E":
+                date = parts[3];
+                return new Event(description, date, isDone);
+            default:
+                throw new DukeException("Could not parse task type on file line " + lineNo);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException("Task details are missing on file line " + lineNo);

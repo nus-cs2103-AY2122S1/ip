@@ -9,7 +9,7 @@ public class Task {
 
     /**
      * Constructs a Task object.
-     * 
+     *
      * @param description Description of task.
      * @param isDone Whether the task is done.
      */
@@ -21,7 +21,7 @@ public class Task {
     /**
      * Returns an icon representing the status of the task.
      * If the task is done, "X" is returned; else a space " " is returned.
-     * 
+     *
      * @return Icon representing status.
      */
     public String getStatusIcon() {
@@ -49,7 +49,7 @@ public class Task {
     public boolean containsKeyword(String keyword) {
         return description.contains(keyword);
     }
-    
+
     /**
      * Returns a string representation of a task to be shown to the user.
      *
@@ -63,8 +63,7 @@ public class Task {
     /**
      * Checks if an object is equal to this task.
      * The object is equal if it is a task and its description and done status are equal to this task's.
-     * 
-     * 
+     *
      * @param obj Object to compare to this task.
      * @return Whether object is equal to this task.
      */

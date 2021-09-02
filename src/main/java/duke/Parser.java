@@ -7,7 +7,6 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindTasksCommand;
 import duke.commands.ListCommand;
-
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
@@ -18,10 +17,10 @@ import duke.tasks.Todo;
 public class Parser {
     /**
      * Parses user input into a Command that should be executed by the Duke chatbot.
-     * 
+     *
      * @param answer User input parsed into a String.
      * @return Command that is to be executed by Duke based on user input.
-     * @throws DukeException
+     * @throws DukeException If user input is not in the correct format or not a recognised command.
      */
     public static Command parse(String answer) throws DukeException {
         String[] parts = answer.split(" ");
@@ -31,30 +30,30 @@ public class Parser {
             taskDetails = answer.substring(answer.indexOf(" ") + 1);
         }
         switch (command) {
-            case "done":
-                int taskIndex = getTaskIndex(answer);
-                return new DoneCommand(taskIndex);
-            case "delete":
-                taskIndex = getTaskIndex(answer);
-                return new DeleteCommand(taskIndex);
-            case "list":
-                return new ListCommand();
-            case "todo":
-                Todo todo = parseTodo(taskDetails);
-                return new AddTaskCommand(todo);
-            case "event":
-                Event event = parseEvent(taskDetails);
-                return new AddTaskCommand(event);
-            case "deadline":
-                Deadline deadline = parseDeadline(taskDetails);
-                return new AddTaskCommand(deadline);
-            case "find":
-                String keyword = parseKeyword(taskDetails);
-                return new FindTasksCommand(keyword);
-            case "bye":
-                return new ByeCommand();
-            default:
-                throw new DukeException("Unknown command.");
+        case "done":
+            int taskIndex = getTaskIndex(answer);
+            return new DoneCommand(taskIndex);
+        case "delete":
+            taskIndex = getTaskIndex(answer);
+            return new DeleteCommand(taskIndex);
+        case "list":
+            return new ListCommand();
+        case "todo":
+            Todo todo = parseTodo(taskDetails);
+            return new AddTaskCommand(todo);
+        case "event":
+            Event event = parseEvent(taskDetails);
+            return new AddTaskCommand(event);
+        case "deadline":
+            Deadline deadline = parseDeadline(taskDetails);
+            return new AddTaskCommand(deadline);
+        case "find":
+            String keyword = parseKeyword(taskDetails);
+            return new FindTasksCommand(keyword);
+        case "bye":
+            return new ByeCommand();
+        default:
+            throw new DukeException("Unknown command.");
         }
     }
 
@@ -70,7 +69,7 @@ public class Parser {
             throw new DukeException("Task details cannot be empty");
         }
     }
-    
+
     private static Todo parseTodo(String taskDetails) throws DukeException {
         checkEmptyTaskDetails(taskDetails);
         return new Todo(taskDetails);
