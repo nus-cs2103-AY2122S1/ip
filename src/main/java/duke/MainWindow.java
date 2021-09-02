@@ -31,8 +31,8 @@ public class MainWindow extends Stage {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/GigaChad.jpg"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/SadCat.jpg"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/gigachad.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/sadcat.jpg"));
 
     MainWindow () {
         try {
