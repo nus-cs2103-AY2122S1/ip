@@ -16,11 +16,8 @@ public class UnknownCommand extends Command {
      * @param storage The storage system of the bot involved with this command.
      * @param ui The ui of the bot involved with this command.
      */
-    public void execute(Storage storage, Ui ui) {
-        ui.unknownCommandMessage();
+    public String execute(Storage storage, Ui ui) {
+        return ui.unknownCommandMessage();
     }
 
-    public boolean isExit() {
-        return false;
-    }
 }

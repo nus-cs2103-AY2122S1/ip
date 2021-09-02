@@ -5,6 +5,11 @@ public class TodoStub extends Todo {
     private final String taskName;
     private boolean isDone;
 
+    /**
+     * Returns a todo task stub.
+     *
+     * @param taskName The name of the task stub.
+     */
     public TodoStub(String taskName) {
         super("");
         this.taskName = "sleep";

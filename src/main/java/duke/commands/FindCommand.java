@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      * @param storage The storage system of the bot involved with this command.
      * @param ui The ui of the bot involved with this command.
      */
-    public void execute(Storage storage, Ui ui) {
+    public String execute(Storage storage, Ui ui) {
         TaskList taskList = storage.getTaskList();
         List<Task> listOfMatches = new ArrayList<Task>();
         for (int i = 0; i < taskList.taskListLen(); i++) {
@@ -33,14 +33,11 @@ public class FindCommand extends Command {
                 listOfMatches.add(curr);
             }
         }
-        ui.printMatchingTasksMessage(listOfMatches);
+        return ui.printMatchingTasksMessage(listOfMatches);
     }
 
     private boolean searchKeyword(String keyword, Task task) {
         return task.taskName().contains(keyword);
     }
 
-    public boolean isExit() {
-        return false;
-    }
 }

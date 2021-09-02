@@ -11,6 +11,11 @@ public class Datetime {
     private LocalDate datetime;
     private String datetimeString;
 
+    /**
+     * Returns a Datetime wrapper object that encapsulates a specified date/time.
+     *
+     * @param datetimeString The string form of the date/time that is to be parsed.
+     */
     public Datetime(String datetimeString) {
         this.datetimeString = datetimeString;
         this.datetime = LocalDate.parse(datetimeString);

@@ -16,12 +16,9 @@ public class ListCommand extends Command {
      * @param storage The storage system of the bot involved with this command.
      * @param ui The ui of the bot involved with this command.
      */
-    public void execute(Storage storage, Ui ui) {
+    public String execute(Storage storage, Ui ui) {
         String printedTaskList = storage.printTaskList();
-        ui.printTaskListMessage(printedTaskList);
+        return ui.printTaskListMessage(printedTaskList);
     }
 
-    public boolean isExit() {
-        return false;
-    }
 }

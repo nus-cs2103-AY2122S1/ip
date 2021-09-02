@@ -7,11 +7,22 @@ public abstract class Task {
     private final String taskName;
     private boolean isDone;
 
+    /**
+     * Returns a new Task with specified name.
+     *
+     * @param taskName The name of the task.
+     */
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
     }
 
+    /**
+     * Returns a new Task with specified name and completion status.
+     *
+     * @param taskName The name of the task.
+     * @param isDone Completion status of the task.
+     */
     public Task (String taskName, boolean isDone) {
         this.taskName = taskName;
         this.isDone = isDone;

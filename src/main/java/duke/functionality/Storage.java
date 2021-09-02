@@ -22,6 +22,11 @@ public class Storage {
     private File f;
     private TaskList taskList;
 
+    /**
+     * Returns a storage system that is loaded with pre-saved tasks, if any, and allows for the storage of more tasks.
+     *
+     * @param filePath The filepath in which to place the file containing saved tasks.
+     */
     public Storage(String filePath) {
         try {
             this.taskList = new TaskList();
@@ -40,7 +45,7 @@ public class Storage {
             f.createNewFile();
 
         } catch (IOException e) {
-            Ui.showErrorMessage("Error in storage creation!");
+            System.err.println("Error in storage creation!");
         }
     }
 
