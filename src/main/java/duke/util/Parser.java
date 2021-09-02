@@ -96,7 +96,7 @@ public class Parser {
      * @param desc Command description to be processed.
      * @return Deadline information.
      */
-    public static String getDlInfo(String desc) {
+    public static String getDeadlineInfo(String desc) {
         String[] a = desc.split(" /by ", 2);
         return a[0];
     }
@@ -107,7 +107,7 @@ public class Parser {
      * @param desc Command description to be processed.
      * @return Deadline due date.
      */
-    public static String getDlDue(String desc) {
+    public static String getDeadlineDue(String desc) {
         String[] a = desc.split(" /by ", 2);
         return a[1];
     }
@@ -118,7 +118,7 @@ public class Parser {
      * @param desc Command description to be processed.
      * @return Event information.
      */
-    public static String getEvInfo(String desc) {
+    public static String getEventInfo(String desc) {
         String[] a = desc.split(" /at ", 2);
         return a[0];
     }
@@ -129,7 +129,7 @@ public class Parser {
      * @param desc Command description to be processed.
      * @return Event due date.
      */
-    public static String getEvDue(String desc) {
+    public static String getEventDue(String desc) {
         String[] a = desc.split(" /at ", 2);
         return a[1];
     }

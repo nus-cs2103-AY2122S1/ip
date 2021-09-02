@@ -1,16 +1,16 @@
 package duke.command;
 
-// import duke packages
-import duke.DukeException;
-import duke.task.Task;
-
 // import java packages
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+// import duke packages
+import duke.DukeException;
+import duke.task.Task;
 
 /**
  * Represents a task that has to be completed by a due date.

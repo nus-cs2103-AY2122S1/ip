@@ -1,12 +1,12 @@
 package duke.util;
 
+// import java packages
+import java.util.ArrayList;
+
 // import duke packages
 import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
-
-// import java packages
-import java.util.ArrayList;
 
 /**
  * Deals with interactions with the user

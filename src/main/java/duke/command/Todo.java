@@ -1,7 +1,6 @@
 package duke.command;
 
 // import duke packages
-import duke.DukeException;
 import duke.task.Task;
 
 /**

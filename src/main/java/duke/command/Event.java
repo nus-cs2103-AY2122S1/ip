@@ -1,9 +1,5 @@
 package duke.command;
 
-// import duke packages
-import duke.DukeException;
-import duke.task.Task;
-
 // import java packages
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +7,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
+
+// import duke packages
+import duke.DukeException;
+import duke.task.Task;
 
 /**
  * Represents a task that is about to happen on an upcoming date.
@@ -85,6 +85,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getCat() + "]" + super.toString() + " (at: " + dateToString() +  " " + timeToString() + ")";
+        return "[" + this.getCat() + "]" + super.toString() + " (at: " + dateToString() + " " + timeToString() + ")";
     }
 }

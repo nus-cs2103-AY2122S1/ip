@@ -1,5 +1,9 @@
 package duke;
 
+// import java packages
+import java.util.ArrayList;
+import java.util.Scanner;
+
 // import duke packages
 import duke.command.Deadline;
 import duke.command.Event;
@@ -10,16 +14,12 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
-// import java packages
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /**
  * A chatbot that stores tasks given by a user.
  */
 public class Duke {
     private Storage storage;
-    private TaskList cmdList;
+    private TaskList commandList;
     private Ui ui;
 
     /**
@@ -31,10 +31,10 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            cmdList = new TaskList(storage.loadTasks());
+            commandList = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
             ui.showLoadingError();
-            cmdList = new TaskList();
+            commandList = new TaskList();
         }
     }
 
@@ -43,7 +43,7 @@ public class Duke {
      */
     public void run() {
         ui.sayHello();
-        int count = 0 + cmdList.getLength();
+        int count = 0 + commandList.getLength();
 
         // Create a scanner to read from standard input.
         Scanner sc = new Scanner(System.in);
@@ -51,44 +51,52 @@ public class Duke {
 
         while (Parser.isNotBye(cmd)) {
             try {
-                if (Parser.isList(cmd)) {       // when command given is "list"
-                    ui.printList(cmdList);
-                } else if (Parser.isDone(cmd)) {      // when command given is "done"
+                // when command given is "list"
+                if (Parser.isList(cmd)) {
+                    ui.printList(commandList);
+                } else if (Parser.isDone(cmd)) {
+                    // when command given is "done"
+
                     int itemNo = Parser.parseDoneCmd(cmd);
 
                     // Make sure itemNo is within limit
                     if ((itemNo <= count) && (itemNo > 0)) {
-                        cmdList.markDone(itemNo - 1);
-                        storage.saveTasks(cmdList.getTasks());
-                    } else {        // throw exception when itemNo not within limit
+                        commandList.markDone(itemNo - 1);
+                        storage.saveTasks(commandList.getTasks());
+                    } else {
+                        // throw exception when itemNo not within limit
                         throw new DukeException("i cant seem to find the task you're looking for");
                     }
-                    ui.printTaskDone(cmdList, itemNo - 1);
+                    ui.printTaskDone(commandList, itemNo - 1);
                 } else if (Parser.isValidTask(cmd)) {
                     String task = Parser.getTaskName(cmd);
                     String desc = Parser.getDesc(cmd);
-                    if (Parser.isMissingArg(cmd)) {       // make sure desc is not empty
+                    if (Parser.isMissingArg(cmd)) {
+                        // when desc is not empty
                         // case when only a whitespace follows a command
                         throw new DukeException("the description of a " + task + " cannot be empty");
                     } else {
                         // Separate into cases
                         switch (task) {
                         case "todo":
-                            cmdList.add(new Todo(desc));
+                            commandList.add(new Todo(desc));
                             break;
                         case "deadline":
-                            String DlInfo = Parser.getDlInfo(desc);
-                            String DlDue = Parser.getDlDue(desc);
-                            cmdList.add(new Deadline(DlInfo, DlDue));
+                            String deadlineInfo = Parser.getDeadlineInfo(desc);
+                            String deadlineDue = Parser.getDeadlineDue(desc);
+                            commandList.add(new Deadline(deadlineInfo, deadlineDue));
                             break;
                         case "event":
-                            String EvInfo = Parser.getEvInfo(desc);
-                            String EvDue = Parser.getEvDue(desc);
-                            cmdList.add(new Event(EvInfo, EvDue));
+                            String eventInfo = Parser.getEventInfo(desc);
+                            String eventDue = Parser.getEventDue(desc);
+                            commandList.add(new Event(eventInfo, eventDue));
                             break;
+                        default:
+                            // should not happen
+                            throw new DukeException("the name of task is not valid");
                         }
-                        storage.saveTasks(cmdList.getTasks());
-                        ui.printTaskAdded(cmdList, count);
+                        storage.saveTasks(commandList.getTasks());
+                        ui.printTaskAdded(commandList, count);
                         count++;
                     }
                 } else if (Parser.isDelete(cmd)) {
@@ -97,26 +105,29 @@ public class Duke {
                     // Make sure itemNo is within limit
                     if ((itemNo <= count) && (itemNo > 0)) {
                         // Remove item from lists
-                        ui.printTaskDeleted(cmdList, itemNo - 1);
-                        cmdList.remove(itemNo - 1);
-                        storage.saveTasks(cmdList.getTasks());
+                        ui.printTaskDeleted(commandList, itemNo - 1);
+                        commandList.remove(itemNo - 1);
+                        storage.saveTasks(commandList.getTasks());
                         count--;
-                    } else {    // throw exception when itemNo not within limit
+                    } else {
+                        // throw exception when itemNo not within limit
                         throw new DukeException("i cant seem to find the task you're looking for");
                     }
                 } else if (Parser.isFind(cmd)) {
                     String desc = Parser.getDesc(cmd);
-                    if (Parser.isMissingArg(cmd)) {       // make sure desc is not empty
+                    if (Parser.isMissingArg(cmd)) {
+                        // when desc is not empty
                         // case when only a whitespace follows a command
                         throw new DukeException("the description of a find cannot be empty");
                     }
-                    ArrayList<Task> matchingTasks = cmdList.find(desc);
+                    ArrayList<Task> matchingTasks = commandList.find(desc);
                     if (matchingTasks.isEmpty()) {
                         ui.showNoMatch();
                     } else {
                         ui.showMatchingTasks(matchingTasks);
                     }
-                } else {         // throw exception when command not found
+                } else {
+                    // throw exception when command not found
                     // Error handling for todo, deadline & event
                     if (Parser.isEmptyTask(cmd)) {
                         throw new DukeException("the description of a " + Parser.getTaskName(cmd) + " cannot be empty");
