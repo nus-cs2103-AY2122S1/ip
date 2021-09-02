@@ -3,13 +3,15 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * Duke class to store a list of tasks, which you can add upon.
  * The 3 different tasks include event, todo, and deadline.
  * Duke supports functions such as done, delete, find, and list too.
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList tasks;
@@ -23,6 +25,17 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        try {
+            tasks = storage.load();
+        } catch (FileNotFoundException e) {
+            ui.showLoadingErrorMessage();
+            tasks = new TaskList();
+        }
+    }
+
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage("data/tasks.txt");
         try {
             tasks = storage.load();
         } catch (FileNotFoundException e) {
@@ -51,5 +64,14 @@ public class Duke {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    /**
+     * Starts the Gui.
+     * @param stage The stage to initialise Gui.
+     */
+    @Override
+    public void start(Stage stage) {
+        ui.initialiseGui(stage);
     }
 }
