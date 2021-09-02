@@ -38,25 +38,25 @@ public class Duke {
         return response;
     }
 
-//    /**
-//     * Starts up the bot for CLI text-based UI.
-//     */
-//    public void run() {
-//        this.ui.welcomeMessage();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String inputCommand = ui.readCommand();
-//                Command c = Parser.parseInput(inputCommand);
-//                c.execute(storage, ui);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                Ui.showErrorMessage(e.getMessage());
-//            }
-//        }
-//    }
-//
-//    public static void main(String[] args) {
-//        new Duke(FILE_PATH).run();
-//    }
+    //    /**
+    //     * Starts up the bot for CLI text-based UI.
+    //     */
+    //    public void run() {
+    //        this.ui.welcomeMessage();
+    //        boolean isExit = false;
+    //        while (!isExit) {
+    //            try {
+    //                String inputCommand = ui.readCommand();
+    //                Command c = Parser.parseInput(inputCommand);
+    //                c.execute(storage, ui);
+    //                isExit = c.isExit();
+    //            } catch (DukeException e) {
+    //                Ui.showErrorMessage(e.getMessage());
+    //            }
+    //        }
+    //    }
+    //
+    //    public static void main(String[] args) {
+    //        new Duke(FILE_PATH).run();
+    //    }
 }

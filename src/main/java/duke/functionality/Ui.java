@@ -1,15 +1,11 @@
 package duke.functionality;
 
-import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.List;
-import java.util.Scanner;
 
 import duke.tasks.Task;
 
-
 /**
- * Creates an Ui system that is responsible for interacting with the user.
+ * Creates an Ui system that is responsible for creation of responses to be output to user.
  */
 public class Ui {
     private static final String BORDER = "________________________________________________________";
@@ -22,7 +18,7 @@ public class Ui {
     private static final String DELETED_TASK = "Noted. I've removed this task:";
     private static final String MISSING_TASK = "There is no task at the specified index.";
     private static final String NO_MATCHING_TASKS = "There are no matching tasks found.";
-    private static final String UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String UNKNOWN_COMMAND = "OOPS!!! I'm sorry, but I don't know what that means :(";
     private static final String GOODBYE_MSG = "It has been a pleasure, goodbye!";
 
 
@@ -31,14 +27,14 @@ public class Ui {
 
     private String prettyPrint(String msg) {
         String indentedMsg = msg.replaceAll("(?m)^", "    ");
-        return String.format("%s\n%s\n%s%n", BORDER, indentedMsg, BORDER);
+        return String.format("%s\n%s\n%s\n", BORDER, indentedMsg, BORDER);
     }
 
     /**
      * Sends a welcome message to the user.
      */
     public String welcomeMessage() {
-        String welcome = "Duke is gone. Hello, this is Duchess.\nHow can I help you?";
+        String welcome = "Helwoof, this is WoofBot.\nHow can I help you?";
         return String.format("%s\n%s\n%s%n", BORDER, welcome, BORDER);
     }
 

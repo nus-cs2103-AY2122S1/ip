@@ -50,7 +50,7 @@ public class Parser {
             String args = inputSplit[1];
             String[] argsSplit = args.split(" /by ", 2);
             if (checkInputLength(argsSplit)) {
-                throw new DukeException("☹ OOPS!!! Please indicate when the deadline for the task is.");
+                throw new DukeException("OOPS!!! Please indicate when the deadline for the task is.");
             }
             timeFormatChecker(argsSplit[1]);
             return new AddCommand(Deadline.taskTag(), argsSplit[0], argsSplit[1]);
@@ -62,21 +62,21 @@ public class Parser {
             String args = inputSplit[1];
             String[] argsSplit = args.split(" /at ", 2);
             if (checkInputLength(argsSplit)) {
-                throw new DukeException("☹ OOPS!!! Please indicate the start and end time of the event.");
+                throw new DukeException("OOPS!!! Please indicate the start and end time of the event.");
             }
             timeFormatChecker(argsSplit[1]);
             return new AddCommand(Event.taskTag(), argsSplit[0], argsSplit[1]);
 
         } else if (command.equals("done")) {
             if (checkInputLength(inputSplit)) {
-                throw new DukeException("☹ OOPS!!! Please indicate which task you want to delete.");
+                throw new DukeException("OOPS!!! Please indicate which task you want to delete.");
             }
             String strTaskNum = inputSplit[1].split(" ")[0];
             int taskNum = Integer.parseInt(strTaskNum) - 1;
             return new DoneCommand(taskNum);
         } else if (command.equals("delete")) {
             if (checkInputLength(inputSplit)) {
-                throw new DukeException("☹ OOPS!!! Please indicate which task you want to delete.");
+                throw new DukeException("OOPS!!! Please indicate which task you want to delete.");
             }
             String strTaskNum = inputSplit[1].split(" ")[0];
             int taskNum = Integer.parseInt(strTaskNum) - 1;
@@ -99,7 +99,7 @@ public class Parser {
 
     private static void timeFormatChecker(String inputString) throws DukeException {
         if (!inputString.matches("\\d{4}-\\d{2}-\\d{2}")) {
-            throw new DukeException("☹ OOPS!!! Please enter a valid format for the date/time of your task.");
+            throw new DukeException("OOPS!!! Please enter a valid format for the date/time of your task.");
         }
     }
 }
