@@ -20,14 +20,16 @@ public class Parser {
      * @param taskType The type of task
      * @return A task of class taskType based on the command given
      */
-    public static Task parseStringIntoTask(String taskName, String taskType, boolean isDone) {
+    public static Task parseStringIntoTask(String taskName, String taskType, boolean isDone, LogMessage returnMsg) {
         String split = "";
         try {
             if (taskName.equals("")) {
                 String errorMsg = String.format("Oops!!! %s cannot be empty", taskType.toUpperCase());
+
                 throw new DukeException.InsufficientArgumentsException(errorMsg);
             }
         } catch (DukeException e) {
+            returnMsg.add(e.getMessage());
             System.out.println(e.getMessage());
             Ui.printBreakline();
             return null;
@@ -70,6 +72,7 @@ public class Parser {
             return task;
         } catch (DukeException e) {
             System.out.println(e.getMessage());
+            returnMsg.add(e.getMessage());
             Ui.printBreakline();
             return null;
         }

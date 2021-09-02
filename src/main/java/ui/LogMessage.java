@@ -10,6 +10,7 @@ public class LogMessage {
         this.messages = messages;
     }
 
+
     public void add(String msg) {
         this.messages.add(msg);
     }

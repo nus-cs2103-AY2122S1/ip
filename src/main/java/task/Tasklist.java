@@ -3,6 +3,7 @@ package task;
 import java.util.ArrayList;
 
 import duke.DukeException;
+import ui.LogMessage;
 import ui.Ui;
 
 /**
@@ -24,6 +25,31 @@ public class Tasklist {
      * Adds task to list and notifies the user if task has not been added properly
      * @param task Task to be added
      */
+    public void add(Task task, LogMessage msg) {
+        try {
+            if (task == null) {
+                throw new DukeException.TaskNotAddedException("Task has not been added successfully.");
+            }
+        } catch (DukeException e) {
+            msg.add(e.getMessage());
+            System.out.println(e.getMessage());
+            Ui.printBreakline();
+            return;
+        }
+
+        this.taskList.add(task);
+        String addMsg = String.format("Got it. I've added this task:\n%s", task);
+        String counterMsg = String.format("Now you have %d tasks in the list.", taskList.size());
+        msg.add(addMsg);
+        msg.add(counterMsg);
+        msg.printAllMessages();
+        Ui.printBreakline();
+    }
+
+    /**
+     * Add task without outputting messages
+     * @param task
+     */
     public void add(Task task) {
         try {
             if (task == null) {
@@ -31,17 +57,9 @@ public class Tasklist {
             }
         } catch (DukeException e) {
             System.out.println(e.getMessage());
-            Ui.printBreakline();
             return;
         }
-
         this.taskList.add(task);
-        System.out.println("Got it. I've added this task:");
-        String addMsg = String.format("%s", task);
-        String counterMsg = String.format("Now you have %d tasks in the list.", taskList.size());
-        System.out.println(addMsg);
-        System.out.println(counterMsg);
-        Ui.printBreakline();
     }
 
     /**
@@ -49,23 +67,28 @@ public class Tasklist {
      * Checks for the scenario where list is empty.
      * @return
      */
-    public void list() {
+    public LogMessage list() {
+        LogMessage returnMsg = new LogMessage();
         try {
             if (this.taskList.size() == 0) {
-                throw new DukeException.EmptyListException("List is empty :(");
+                String emptyListErrMsg = String.format("List is empty :(");
+                throw new DukeException.EmptyListException(emptyListErrMsg);
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            returnMsg.add(e.getMessage());
             Ui.printBreakline();
-            return;
+            return returnMsg;
         }
 
-        System.out.println("Here are the tasks in your list:");
+        String listTaskMsg = "Here are the tasks in your list:";
+        returnMsg.add(listTaskMsg);
         for (int i = 0; i < taskList.size(); i++) {
-            System.out.printf("%d. %s\n", i + 1, this.taskList.get(i).toString());
+            String taskMsg = String.format("%d. %s", i + 1, this.taskList.get(i).toString());
+            returnMsg.add(taskMsg);
         }
+        returnMsg.printAllMessages();
         Ui.printBreakline();
-
+        return returnMsg;
     }
 
     /**
@@ -73,26 +96,32 @@ public class Tasklist {
      * Accounts for situations where task could not be found.
      * @param idx Ranking of task to be deleted
      */
-    public void delete(int idx) {
+    public LogMessage delete(int idx) {
+        LogMessage msg = new LogMessage();
         Task removedTask;
         try {
             removedTask = this.taskList.remove(idx - 1);
         } catch (IndexOutOfBoundsException e) {
-            System.out.printf("Task number %d not found.\n", idx);
+            String taskNotFoundMsg = String.format("Task number %d not found.", idx);
+            msg.add(taskNotFoundMsg);
+            msg.printAllMessages();
             Ui.printBreakline();
-            return;
+            return msg;
         }
-        String removeMsg = String.format("Noted. I've removed this task:\n%s", removedTask.toString());
-        System.out.println(removeMsg);
-        System.out.printf("Now you have %d task(s) in the list.\n", taskList.size());
+        String removeMsg = String.format("Noted. I've removed this task: %s", removedTask.toString());
+        String tasksLeftMsg = String.format("Now you have %d task(s) in the list.", taskList.size());
+        msg.add(removeMsg);
+        msg.add(tasksLeftMsg);
+        msg.printAllMessages();
         Ui.printBreakline();
+        return msg;
     }
 
     /**
      * Check if string is found in tasklist
      * @param item key to search for
      */
-    public void findString(String item) {
+    public LogMessage findString(String item) {
         Tasklist filteredList = new Tasklist(new ArrayList<>());
         for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
@@ -100,7 +129,8 @@ public class Tasklist {
                 filteredList.add(task);
             }
         }
-        filteredList.list();
+        LogMessage msg = filteredList.list();
+        return msg;
     }
 
     /**
@@ -124,14 +154,19 @@ public class Tasklist {
      *
      * @param idx Index of task set to compeleted
      */
-    public void setToCompleted(int idx) {
+    public LogMessage setToCompleted(int idx) {
+        LogMessage returnMsg = new LogMessage();
         try {
             Task task = this.getTask(idx);
+            String addTaskMsg = String.format("Nice! I've marked this task as done:\n + %s", task);
+            returnMsg.add(addTaskMsg);
             task.setToCompleted();
         } catch (DukeException.TaskNotFoundException e) {
+            returnMsg.add(e.getMessage());
             System.out.println(e.getMessage());
             Ui.printBreakline();
         }
+        return returnMsg;
     }
 
     /**

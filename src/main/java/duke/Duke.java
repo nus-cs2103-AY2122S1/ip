@@ -1,6 +1,7 @@
 package duke;
 
 import task.Tasklist;
+import ui.LogMessage;
 import ui.Ui;
 
 /**
@@ -14,6 +15,7 @@ public class Duke {
     private Storage storage;
     private Tasklist tasklist;
     private String exitCmd = "bye";
+    private LogMessage logMessage = new LogMessage();
 
     /**
      * Constructs Duke Object that stores information in filepath
@@ -21,7 +23,7 @@ public class Duke {
      */
     public Duke(String filepath) {
         this.storage = new Storage(filepath);
-        this.tasklist = storage.load();
+        this.tasklist = storage.load(logMessage);
     }
 
     /**
@@ -29,7 +31,7 @@ public class Duke {
      */
     public Duke() {
         this.storage = new Storage(DEFAULT_ADDRESS);
-        this.tasklist = storage.load();
+        this.tasklist = storage.load(logMessage);
     }
 
     /**

@@ -35,7 +35,7 @@ public class Storage {
      * Loads data from filepath
      * @return a tasklist from specified filepath
      */
-    public Tasklist load() {
+    public Tasklist load(LogMessage returnMsg) {
         Ui.printBreakline();
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -56,7 +56,7 @@ public class Storage {
                 }
 
                 String input = taskName + " " + remarks;
-                Task task = Parser.parseStringIntoTask(input, type, Boolean.parseBoolean(isDone));
+                Task task = Parser.parseStringIntoTask(input, type, Boolean.parseBoolean(isDone), returnMsg);
                 tasks.add(task);
 
             }
@@ -88,7 +88,7 @@ public class Storage {
             currDir += fileDirectories[i];
             File currFile = new File(currDir);
             if (currFile.mkdir()) {
-                String addDirectoryMsg = String.format("Added directory %s\n", currDir);
+                String addDirectoryMsg = String.format("Added directory %s.", currDir);
                 logMessages.add(addDirectoryMsg);
             }
             currDir += "/";
@@ -97,15 +97,15 @@ public class Storage {
         //Creates file
         try {
             if (file.createNewFile()) {
-                String saveFileMsg = String.format("Saved file at %s\n", filepath);
-                logMessages.add(saveFileMsg);
+                String createFileMsg = String.format("Created file at %.", filepath);
+                logMessages.add(createFileMsg);
             } else {
-                String fileExistMsg = String.format("File already exists at %s\n", filepath);
+                String fileExistMsg = String.format("File already exists at %s.", filepath);
                 logMessages.add(fileExistMsg);
             }
 
         } catch (IOException e) {
-            String fileCreationErrorMsg = String.format("An error occurred during creation of file.\n");
+            String fileCreationErrorMsg = String.format("An error occurred during creation of file.");
             logMessages.add(fileCreationErrorMsg);
         }
 
@@ -120,10 +120,15 @@ public class Storage {
                 fileWriter.append(listEntry);
             }
             fileWriter.close();
-            System.out.println("Successfully wrote to the file.");
+
+            String successfulFileWriting = String.format("Successfully wrote to the file.");
+            logMessages.add(successfulFileWriting);
         } catch (IOException e) {
-            System.out.println("An error occurred while writing to file.");
+            String failedFileWriting = String.format("An error occurred while writing to file.");
+            logMessages.add(failedFileWriting);
         }
+        logMessages.printAllMessages();
+        return logMessages;
     }
 
 }

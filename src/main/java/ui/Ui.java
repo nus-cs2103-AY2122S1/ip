@@ -55,6 +55,7 @@ public class Ui {
         Scanner scanner = new Scanner(System.in);
         String cmd = scanner.next();
         String input = scanner.nextLine();
+        LogMessage msg = new LogMessage();
         Task task;
 
         switch (cmd) {
@@ -72,15 +73,15 @@ public class Ui {
         case "todo":
         case "deadline":
         case "event":
-            task = Parser.parseStringIntoTask(input, cmd, false);
-            tasklist.add(task);
+            task = Parser.parseStringIntoTask(input, cmd, false, msg);
+            tasklist.add(task, msg);
             break;
         case "delete":
             int removedIdx = Integer.parseInt(input.trim());
-            tasklist.delete(removedIdx);
+            msg = tasklist.delete(removedIdx);
             break;
         case "find":
-            tasklist.findString(input.trim());
+            msg = tasklist.findString(input.trim());
             break;
         default:
             try {
@@ -101,25 +102,27 @@ public class Ui {
     public String readCommand(String input) {
         Scanner scanner = new Scanner(System.in);
         String cmd = scanner.next();
+        LogMessage msg = new LogMessage();
         Task task;
 
         switch (cmd) {
         case "bye":
-            storage.save();
+            msg = storage.save();
             Ui.exit();
             return "bye";
         case "list":
-            tasklist.list();
+            msg = tasklist.list();
             break;
         case "done":
             int idx = Integer.parseInt(input.trim()) - 1;
-            tasklist.setToCompleted(idx);
+            msg = tasklist.setToCompleted(idx);
             break;
         case "todo":
         case "deadline":
         case "event":
-            task = Parser.parseStringIntoTask(input, cmd, false);
-            tasklist.add(task);
+            msg = new LogMessage();
+            task = Parser.parseStringIntoTask(input, cmd, false, msg);
+            tasklist.add(task, msg);
             break;
         case "delete":
             int removedIdx = Integer.parseInt(input.trim());
