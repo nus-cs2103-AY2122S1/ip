@@ -51,5 +51,5 @@ public abstract class Task implements Comparable<Task> {
     }
 
     @Override
-    abstract public boolean equals(Object o);
+    public abstract boolean equals(Object o);
 }

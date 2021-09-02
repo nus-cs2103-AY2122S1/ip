@@ -33,7 +33,7 @@ public class ToDos extends Task {
 
         ToDos todo = (ToDos) o;
 
-        return this.getName().equals(todo.getName()) &&
-                this.isCompleted() == todo.isCompleted();
+        return this.getName().equals(todo.getName())
+                && this.isCompleted() == todo.isCompleted();
     }
 }

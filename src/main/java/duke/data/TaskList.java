@@ -26,8 +26,8 @@ public class TaskList {
      */
     public String addToList(Task t) {
         this.lst.add(t);
-        return String.format("Got it. I've added this task:\n    %s\n" +
-                "You now have %d tasks in the list.", t, this.lst.size());
+        return String.format("Got it. I've added this task:\n    %s\n"
+                + "You now have %d tasks in the list.", t, this.lst.size());
     }
 
     /**
@@ -40,8 +40,8 @@ public class TaskList {
             throw new DukeException("There is no task " + n);
         } else {
             Task removed = this.lst.remove(n - 1);
-            return String.format("Noted. I've removed this task:\n    %s\n" +
-                    "Now you have %d tasks in the list.", removed.toString(), this.lst.size());
+            return String.format("Noted. I've removed this task:\n    %s\n"
+                    + "Now you have %d tasks in the list.", removed.toString(), this.lst.size());
         }
     }
 
@@ -78,8 +78,8 @@ public class TaskList {
         if (n < 1 || n > this.lst.size()) {
             throw new DukeException("There is no task " + n);
         } else {
-            return "Nice! I've marked this task as done:\n" +
-                    this.lst.get(n - 1).completeTask();
+            return "Nice! I've marked this task as done:\n"
+                    + this.lst.get(n - 1).completeTask();
         }
     }
 }
