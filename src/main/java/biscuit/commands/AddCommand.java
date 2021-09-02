@@ -58,7 +58,7 @@ public class AddCommand extends biscuit.commands.Command {
             return "Got it. I've added this task:\n\t" + task
                     + "\nNow you have " + taskList.size() + " tasks in the list.";
         } else {
-            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The description of "
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The description of "
                     + userInputs[0] + " cannot be empty.");
         }
     }
@@ -79,7 +79,7 @@ public class AddCommand extends biscuit.commands.Command {
                 throw new BiscuitException("Woof! Please use the date format of dd-MM-yyy (eg. 02-22-2021).");
             }
         } else {
-            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for deadline cannot be empty.\n"
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The date/time for deadline cannot be empty.\n"
                     + "Please use the format: deadline <name> /by dd-MM-yyy");
         }
     }
@@ -101,7 +101,7 @@ public class AddCommand extends biscuit.commands.Command {
                         + "dd-MM-yyy HH:mm (eg. 02-22-2021 22:02).");
             }
         } else {
-            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The date/time for event cannot be empty.\n"
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The date/time for event cannot be empty.\n"
                     + "Please use the format: event <name> /at dd-MM-yyy HH:mm");
         }
     }
