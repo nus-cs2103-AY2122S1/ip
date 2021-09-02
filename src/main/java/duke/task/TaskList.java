@@ -13,10 +13,10 @@ import duke.exception.MissingTimeException;
  * This class handles commands dealing with the user's task list.
  */
 public class TaskList {
-    private static ArrayList<Task> taskList;
+    private final ArrayList<Task> taskList;
 
     public TaskList() {
-        this.taskList = new ArrayList<Task>();
+        this.taskList = new ArrayList<>();
     }
 
     public TaskList(ArrayList<Task> taskList) {
@@ -24,128 +24,135 @@ public class TaskList {
     }
 
     /**
-     * Performs action on tasklist based on the user's inputs.
+     * Performs action on task list based on the user's inputs.
      *
      * @param command The command to perform.
      * @param input The input from the user.
+     * @return The String to return based on the action taken.
+     * @throws InvalidCommandException If user command is unrecognised.
      * @throws InvalidTaskException If task cannot be found in user's list.
      * @throws MissingTaskException If task is unspecified after command.
      * @throws MissingTimeException If time is unspecified after command.
      * */
-    public static void performCommand(String command, String input)
-            throws InvalidTaskException, MissingTaskException, MissingTimeException, InvalidCommandException {
+    public String performCommand(String command, String input)
+            throws InvalidCommandException, InvalidTaskException, MissingTaskException, MissingTimeException {
+
         switch (command) {
         case "list":
-            printList();
-            break;
+            return printList();
         case "mark":
-            int toMark = Integer.parseInt(input.substring(5));
-            markTaskAsDone(toMark);
-            break;
+            int taskToMark = Integer.parseInt(input.substring(5));
+            return markTaskAsDone(taskToMark);
         case "delete":
-            int toDelete = Integer.parseInt(input.substring(7));
-            deleteTask(toDelete);
-            break;
+            int taskToDelete = Integer.parseInt(input.substring(7));
+            return deleteTask(taskToDelete);
         case "todo":
-            addToDo(input);
-            break;
+            return addToDo(input);
         case "deadline":
-            addDeadline(input);
-            break;
+            return addDeadline(input);
         case "event":
-            addEvent(input);
-            break;
+            return addEvent(input);
         case "find":
-            findTask(input);
-            break;
+            return findTask(input);
         default:
             throw new InvalidCommandException("Command not found.");
         }
     }
 
     /**
-     * Prints out every task in the list.
+     * Returns every task in the list.
+     *
+     * @return The String representing the tasks in the list.
      */
-    public static void printList() {
+    public String printList() {
+        StringBuilder output;
         if (taskList.size() == 0) {
-            System.out.printf("There are no tasks to be done! Hooray!\n");
+            output = new StringBuilder("There are no tasks to be done! Hooray!\n");
         } else {
-            System.out.println("Here is your list of tasks:");
+            output = new StringBuilder("Here is your list of tasks:\n");
 
             for (int i = 0; i < taskList.size(); i++) {
                 String taskName = taskList.get(i).toString();
-                System.out.printf("%d.%s\n", i + 1, taskName);
+                output.append(i + 1).append(".").append(taskName).append("\n");
             }
         }
+
+        return output.toString();
     }
 
     /**
-     * Marks the corresponding task as done and prints confirmation.
+     * Marks the corresponding task as done and returns confirmation.
      *
-     * @param toMark The index of the task to be marked.
+     * @param taskToMark The index of the task to be marked.
+     * @return The String representing the confirmation message.
      * @throws InvalidTaskException If task cannot be found in user's list.
      */
-    public static void markTaskAsDone(int toMark) throws InvalidTaskException {
-        if (toMark <= 0 || toMark > taskList.size()) {
+    public String markTaskAsDone(int taskToMark) throws InvalidTaskException {
+        if (taskToMark <= 0 || taskToMark > taskList.size()) {
             throw new InvalidTaskException("Task is not found");
         }
 
-        taskList.get(toMark - 1).markAsDone();
+        taskList.get(taskToMark - 1).markAsDone();
 
-        System.out.printf("Great job!\n"
+        return String.format("Great job!\n"
                 + "The following task is marked as done:\n"
                 + "\t%s\n",
-                taskList.get(toMark - 1).toString());
+                taskList.get(taskToMark - 1).toString());
     }
 
     /**
-     * Deletes the corresponding task as done and prints confirmation.
+     * Deletes the corresponding task as done and returns confirmation.
      *
-     * @param toDelete The index of the task to be deleted.
+     * @param taskToDelete The index of the task to be deleted.
+     * @return The String representing the confirmation.
      * @throws InvalidTaskException If task cannot be found in list.
      */
-    public static void deleteTask(int toDelete) throws InvalidTaskException {
-        if (toDelete <= 0 || toDelete > taskList.size()) {
+    public String deleteTask(int taskToDelete) throws InvalidTaskException {
+        if (taskToDelete <= 0 || taskToDelete > taskList.size()) {
             throw new InvalidTaskException("Task is not found");
         }
 
-        System.out.printf("Done!\n"
+        String output = String.format("Done!\n"
                 + "The following task has been removed:\n"
                 + "\t%s\n"
                 + "You now have %d "
                 + (taskList.size() - 1 == 1 ? "task" : "tasks")
                 + " left in your list!\n",
-                taskList.get(toDelete - 1).toString(), taskList.size() - 1);
+                taskList.get(taskToDelete - 1).toString(), taskList.size() - 1);
 
-        taskList.remove(toDelete - 1);
+        taskList.remove(taskToDelete - 1);
+
+        return output;
     }
 
     /**
-     * Adds the to do entered by the user to the list and prints it.
+     * Adds the to do entered by the user to the list and returns it.
      *
      * @param input The to do inputted by the user.
+     * @return The String representing the added to do.
      * @throws MissingTaskException If task is unspecified after command.
      */
-    public static void addToDo(String input) throws MissingTaskException {
+    public String addToDo(String input) throws MissingTaskException {
         if (input.length() < 6) {
             throw new MissingTaskException("Task not found.");
         }
 
         String taskName = input.substring(5);
         taskList.add(new ToDo(taskName));
-        printTaskAdded(taskName);
+        return printTaskAdded(taskName);
     }
 
 
     /**
-     * Adds the deadline entered by the user to the list and prints it.
+     * Adds the deadline entered by the user to the list and returns it.
      *
      * @param input The deadline inputted by the user.
+     * @return The String representing the added deadline.
      * @throws MissingTaskException If task is unspecified after command.
      * @throws MissingTimeException If time is unspecified after command.
      * @throws DateTimeParseException If date entered is of the wrong format.
      */
-    public static void addDeadline(String input)
+    public String addDeadline(String input)
             throws MissingTaskException, MissingTimeException, DateTimeParseException {
         int separation = input.indexOf(" /by ");
 
@@ -175,18 +182,19 @@ public class TaskList {
             taskList.add(new Deadline(taskName, date));
         }
 
-        printTaskAdded(taskName);
+        return printTaskAdded(taskName);
     }
 
     /**
-     * Adds the event entered by the user to the list and prints it.
+     * Adds the event entered by the user to the list and returns it.
      *
      * @param input The event inputted by the user.
+     * @return The String representing the added event.
      * @throws MissingTaskException If task is unspecified after command.
      * @throws MissingTimeException If time is unspecified after command.
      * @throws DateTimeParseException If date entered is of the wrong format.
      */
-    public static void addEvent(String input)
+    public String addEvent(String input)
             throws MissingTaskException, MissingTimeException, DateTimeParseException {
         int separation = input.indexOf(" /at ");
 
@@ -215,16 +223,17 @@ public class TaskList {
             taskList.add(new Event(taskName, date));
         }
 
-        printTaskAdded(taskName);
+        return printTaskAdded(taskName);
     }
 
     /**
-     * Prints the confirmation of the addition of the last task.
+     * Returns the confirmation of the addition of the last task.
      *
      * @param taskName The name of the task just added.
+     * @return The String representing the added task.
      */
-    public static void printTaskAdded(String taskName) {
-        System.out.printf("Gotcha! The following task has been added:\n"
+    public String printTaskAdded(String taskName) {
+        return String.format("Gotcha! The following task has been added:\n"
                 + "\t%s\n"
                 + "You now have %d "
                 + (taskList.size() == 1 ? "task" : "tasks")
@@ -233,14 +242,15 @@ public class TaskList {
     }
 
     /**
-     * Finds the tasks requested by the user and prints them.
+     * Finds the tasks requested by the user and returns them.
      *
      * @param input The event inputted by the user.
+     * @return The String representing the found tasks.
      * @throws MissingTaskException If task is unspecified after command.
-     * @throws MissingTimeException If time is unspecified after command.
      */
-    public static void findTask(String input) throws MissingTaskException {
+    public String findTask(String input) throws MissingTaskException {
         ArrayList<Task> toPrint = new ArrayList<>();
+        StringBuilder output;
 
         if (input.length() < 6) {
             throw new MissingTaskException("Task not found.");
@@ -248,24 +258,28 @@ public class TaskList {
 
         String taskName = input.substring(5);
 
-        for (int i = 0; i < taskList.size(); i++) {
-            String currentTask = taskList.get(i).toString();
-            if (currentTask.indexOf(taskName) != -1) {
-                toPrint.add(taskList.get(i));
+        for (Task task : taskList) {
+            String currentTask = task.toString();
+            if (currentTask.contains(taskName)) {
+                toPrint.add(task);
             }
         }
 
         if (toPrint.size() == 0) {
-            System.out.printf("It seems like there are no tasks matching your search.\n");
-            return;
+            output = new StringBuilder("It seems like there are no tasks matching your search.\n");
+        } else {
+            output = new StringBuilder("The matching "
+                    + (toPrint.size() == 1
+                    ? "task in your list is:"
+                    : "tasks in your list are:")
+                    + "\n");
+
+            for (int i = 0; i < toPrint.size(); i++) {
+                output.append(String.format("%d.%s\n", i + 1, toPrint.get(i)));
+            }
         }
 
-        System.out.println("The matching "
-                + (toPrint.size() == 1 ? "task in your list is:" : "tasks in your list are:"));
-
-        for (int i = 0; i < toPrint.size(); i++) {
-            System.out.printf("%d.%s\n", i + 1, toPrint.get(i));
-        }
+        return output.toString();
     }
 
     /**

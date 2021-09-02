@@ -13,76 +13,98 @@ import duke.exception.MissingTimeException;
 import duke.task.TaskList;
 
 /**
- * This class runs a personal assistant chatbot that helps a person keep track of various tasks.
+ * This class runs a personal assistant chat bot that helps a person keep track of various tasks.
  * Commands for the bot are: list, mark, find, delete, bye, event, deadline, and todo.
  * Unrecognised commands will be met with a prompt to enter a recognised one instead.
  */
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
+    private boolean isExit;
 
     /**
-     * Initiates the chatbot by loading the given file.
-     *
-     * @param filepath The location of the file to load.
+     * Initiates the chat bot by loading the given file.
      */
-    public Duke(String filepath) {
-        ui = new Ui("Elsa");
-        storage = new Storage(filepath);
+    public Duke() {
+        ui = new Ui("Pingu");
+        storage = new Storage("data/duke_list_data.txt");
+        isExit = false;
 
         try {
             tasks = new TaskList(storage.loadListData());
         } catch (FileNotFoundException e) {
-            ui.printLoadingError();
             tasks = new TaskList();
         }
     }
 
     /**
-     * Starts the chatbot's interactions with the user.
+     * Accepts the user's inputs and acts accordingly.
+     *
+     * @param input The input entered by the user.
      */
-    public void run() {
-        ui.printWelcomeMessage();
+    private String handleUserInput(String input) {
+        try {
+            String command = ui.receiveUserCommand(input);
 
-        while (true) {
-            try {
-                String input = ui.getInput();
-                String command = ui.receiveUserCommand(input);
-
-                if (command.equals("bye")) {
-                    break;
-                }
-
-                ui.printSeparator();
-                tasks.performCommand(command, input);
-                ui.printSeparator();
-
-                storage.saveTasksToFile(tasks.getTasks());
-
-            } catch (InvalidCommandException e) {
-                ui.printException("InvalidCommand");
-            } catch (IOException e) {
-                ui.printException("IOException");
-            } catch (InvalidTaskException e) {
-                ui.printException("InvalidTask");
-            } catch (MissingTaskException e) {
-                ui.printException("MissingTask");
-            } catch (MissingTimeException e) {
-                ui.printException("MissingTime");
-            } catch (DateTimeParseException e) {
-                ui.printException("DateTimeParse");
+            if (command.equals("bye")) {
+                isExit = true;
+                return ui.printBye();
             }
-        }
 
-        ui.printBye();
+            storage.saveTasksToFile(tasks.getTasks());
+            return tasks.performCommand(command, input);
+
+        } catch (InvalidCommandException e) {
+            return ui.printException("InvalidCommand");
+        } catch (IOException e) {
+            return ui.printException("IOException");
+        } catch (InvalidTaskException e) {
+            return ui.printException("InvalidTask");
+        } catch (MissingTaskException e) {
+            return ui.printException("MissingTask");
+        } catch (MissingTimeException e) {
+            return ui.printException("MissingTime");
+        } catch (DateTimeParseException e) {
+            return ui.printException("DateTimeParse");
+        }
     }
 
     /**
-     * Initializes the chatbot.
+     * Returns a generated response based on the user's input.
+     *
+     * @param input The input entered by the user.
+     * @return The String representing the response.
      */
-    public static void main(String[] args) {
-        new Duke("data/duke_list_data.txt").run();
+    public String getResponse(String input) {
+        return handleUserInput(input.trim());
+    }
+
+    /**
+     * Returns the String representing Duke's welcome message.
+     *
+     * @return Duke's welcome message.
+     */
+    public String getWelcomeMessage() {
+        return ui.getWelcome();
+    }
+
+    /**
+     * Returns initial list of tasks.
+     *
+     * @return The String representing the tasks.
+     */
+    public String initialGetTasks() {
+        return tasks.printList();
+    }
+
+    /**
+     * Checks if the user has requested to exit Duke.
+     *
+     * @return true if user has requested to exit; false otherwise.
+     */
+    public boolean isExit() {
+        return this.isExit;
     }
 }
