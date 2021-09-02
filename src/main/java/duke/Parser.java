@@ -18,7 +18,10 @@ import duke.tasks.Event;
 import duke.tasks.Todo;
 
 
-
+/**
+ * Encapsulates the information for a Parser objects that helps to check an input and return a command for
+ * the chat bot to execute accordingly.
+ */
 public class Parser {
     private final boolean DEFAULT_STATUS = false;
 
@@ -115,8 +118,8 @@ public class Parser {
 
         if (startPosition < 0 || startPosition >= input.length()
                 || endPosition < 0 || endPosition >= input.length()) {
-            throw new IllegalFormatException("Please follow the format: type description /xx yyyy-mm-dd\n\t "
-                    + "Use /by for deadline, /at for event.");
+            throw new IllegalFormatException("Please follow the format:\n type description /xx yyyy-mm-dd\n"
+                    + " Use /by for deadline, /at for event.");
         }
 
         return input.substring(startPosition, endPosition).trim();
@@ -133,13 +136,13 @@ public class Parser {
         String[] details = input.split("/by ");
 
         if (details.length != 2) {
-            throw new IllegalFormatException("Please follow the format: type description /by yyyy-mm-dd.");
+            throw new IllegalFormatException("Please follow the format:\n type description /by yyyy-mm-dd.");
         }
 
         try {
             return LocalDate.parse(details[1]);
         } catch (DateTimeParseException e) {
-            throw new IllegalFormatException("Please follow the format: type description /by yyyy-mm-dd.");
+            throw new IllegalFormatException("Please follow the format:\n type description /by yyyy-mm-dd.");
         }
     }
 
@@ -154,13 +157,13 @@ public class Parser {
         String[] details = input.split("/at ");
 
         if (details.length != 2) {
-            throw new IllegalFormatException("Please follow the format: type description /at yyyy-mm-dd.");
+            throw new IllegalFormatException("Please follow the format:\n type description /at yyyy-mm-dd.");
         }
 
         try {
             return LocalDate.parse(details[1]);
         } catch (DateTimeParseException e) {
-            throw new IllegalFormatException("Please follow the format: type description /at yyyy-mm-dd.");
+            throw new IllegalFormatException("Please follow the format:\n type description /at yyyy-mm-dd.");
         }
     }
 
@@ -175,13 +178,27 @@ public class Parser {
         String[] details = input.split(" ");
 
         if (details.length != 2) {
-            throw new IllegalFormatException("Please follow the format: command 0.");
+            throw new IllegalFormatException("Please follow the format:\n command 0.");
         }
-
-        try {
-            return Integer.parseInt(details[1]) - 1;
-        } catch (NumberFormatException e) {
+        if (!isInteger(details[1])) {
             throw new IllegalFormatException("Please enter a valid id.");
+        }
+        return Integer.parseInt(details[1]) - 1;
+    }
+
+    /**
+     * Returns true is the input is an integer.
+     * Otherwise, returns false.
+     *
+     * @param input The string to be checked.
+     * @return A boolean indicating if the input is an integer.
+     */
+    private boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 
@@ -196,7 +213,7 @@ public class Parser {
         String[] details = input.split("find ");
 
         if (details.length < 2) {
-            throw new IllegalFormatException("Please follow the format: find keyword.");
+            throw new IllegalFormatException("Please follow the format:\n find keyword.");
         }
 
         return details[1];

@@ -2,29 +2,61 @@ package duke.tasks;
 
 import java.util.ArrayList;
 
+/**
+ * Encapsulates the information of a TaskList object which contains an ArrayList of Task objects.
+ */
 public class TaskList {
     private ArrayList<Task> items;
 
+    /**
+     * Constructor that creates a TaskList object with the items properly initialised.
+     */
     public TaskList() {
         this.items = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to the TaskList.
+     *
+     * @param task The task to be added
+     */
     public void addTask(Task task) {
         this.items.add(task);
     }
 
+    /**
+     * Removes a task from the TaskList.
+     *
+     * @param id The index of the task to be removed in the TaskList
+     */
     public void deleteTask(int id) {
         this.items.remove(id);
     }
 
+    /**
+     * Marks a task as completed
+     *
+     * @param id The index of the task to be marked as completed in the TaskList
+     */
     public void markTaskAsComplete(int id) {
         this.items.get(id).markAsComplete();
     }
 
+    /**
+     * Returns the number of tasks in the TaskList.
+     *
+     * @return An int representing the number of tasks in the TaskList
+     */
     public int getTaskCount() {
         return this.items.size();
     }
 
+    /**
+     * Returns the Task requested.
+     *
+     * @param id The index of the task to be retrived from the TaskList
+     * @return A Task.
+     */
     public Task getTask(int id) {
         return this.items.get(id);
     }
