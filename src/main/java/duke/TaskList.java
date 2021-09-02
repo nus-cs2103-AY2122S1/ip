@@ -14,6 +14,7 @@ public class TaskList {
      * Adds the task into the list.
      *
      * @param task task provided to add to the list.
+     * @return the resulting string to display.
      */
     public String add(Task task) {
         String result;
@@ -59,6 +60,7 @@ public class TaskList {
      * Prints out a visual representation of the current task list
      * in a legible manner.
      *
+     * @return the resulting string to display.
      */
     public String display() {
         StringBuilder result = new StringBuilder("Your List:\n");
@@ -74,6 +76,7 @@ public class TaskList {
      * Deletes a task entry from the list.
      *
      * @param pos index of the task the user wants to delete.
+     * @return the resulting string to display.
      * @throws DukeException when no task is found at the index.
      */
     public String delete(int pos) throws DukeException {
@@ -92,6 +95,7 @@ public class TaskList {
      * Finds entries in the list with the provided keyword
      *
      * @param string keyword to search the list with.
+     * @return the resulting string to display.
      * @throws DukeException when no input is detected.
      */
     public String find(String string) throws DukeException {

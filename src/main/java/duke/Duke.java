@@ -28,9 +28,8 @@ public class Duke {
     }
 
     /**
-     * The main program. Keeps on looping until the user inputs "bye",
-     * which will result in the bot saving the current task list into the file
-     * provided before shutting down.
+     * The main program. Takes in user input and returns the relevant
+     * response from the bot.
      */
     public String getResponse(String string) {
         if (Objects.equals(string, "save")) {
