@@ -8,19 +8,13 @@ import java.util.ArrayList;
  */
 public class Logic {
 
-    private static Duke duke;
-
-    public static void setDuke(Duke duke) {
-        duke = duke;
-    }
-
     /**
      * This is to check if any special command or empty command is given
      *
      * @param command refers to the parsed string. See presentation for parsing
      * @throws InvalidCommandException is throwed when there is an invalid command in the form of a string
      */
-    public static void checkIfSpecialComand(String command) throws InvalidCommandException {
+    public static String checkIfSpecialComand(String command) throws InvalidCommandException {
         //duke.Logic to check each individual commands, checks for special commands first, then checks for other input
         //Use duke.Parser to package command into a packaged command
         Command packagedCommand = Parser.parse(command);
@@ -29,7 +23,7 @@ public class Logic {
         if (command.equals("")) {
             throw new EmptyCommandException();
         } else if (command.equals("bye")) {
-            duke.stop();
+            Duke.stop();
             DataHandlerLayer.updateHistory();
             DataHandlerLayer.stopWriting();
         } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
@@ -57,6 +51,7 @@ public class Logic {
         } else {
             processTask(packagedCommand, true);
         }
+        return DataHandlerLayer.getLogAsString();
     }
 
     /**

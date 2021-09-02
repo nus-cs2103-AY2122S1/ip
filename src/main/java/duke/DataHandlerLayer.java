@@ -145,4 +145,13 @@ public class DataHandlerLayer {
             }
         }
     }
+
+    public static String getLogAsString() {
+        String acc = "";
+        for (Task currTask: log) {
+            acc += currTask.toString();
+            acc += "\n";
+        }
+        return acc;
+    }
 }

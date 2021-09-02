@@ -1,6 +1,6 @@
 package duke.controllers;
 
-import duke.Duke;
+import duke.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -42,7 +42,18 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = Duke.getResponse(input);
+        String response = null;
+        try {
+            String temp = Logic.checkIfSpecialComand(input);
+            if (temp == null) {
+                response = "There are no task my dear summoner <3";
+            } else {
+                response = temp;
+            }
+        } catch (InvalidCommandException e) {
+            e.printStackTrace();
+        }
+        System.out.println(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
