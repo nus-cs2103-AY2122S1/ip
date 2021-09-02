@@ -5,9 +5,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.util.DukeDB;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.testng.AssertJUnit.fail;
 
 class DukeDBTest {
 

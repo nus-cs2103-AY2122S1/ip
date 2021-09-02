@@ -5,11 +5,12 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.util.TaskList;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.fail;
 
 class TaskListTest {
 
