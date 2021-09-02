@@ -70,7 +70,7 @@ public class Duke extends Application {
         Button enterButton = new Button("Enter");
         Button instructionsButton = new Button("Instructions");
 
-        Image dukeImage = new Image("https://bernardmarr.com/img/What%20Is%20The%20Importance%20Of%20Artificial%20Intelligence%20(AI).png");
+        Image dukeImage = new Image("https://tinyurl.com/p6yft4bu");
         ImageView imageView = new ImageView(dukeImage);
         imageView.setFitHeight(300);
         imageView.setFitWidth(400);
