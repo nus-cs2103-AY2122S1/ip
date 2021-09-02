@@ -33,8 +33,12 @@ public class Parser {
         this.list = duke.getTasks().getList();
     }
 
-    private void initialiseCurrentInput(String message) {
-        this.message = message;
+    private void initialiseCurrentInput(String input) {
+        this.message = input;
+    }
+
+    private void resetResponse() {
+        this.response = "";
     }
 
     private void appendResponse(String add) {
@@ -133,6 +137,7 @@ public class Parser {
     public String handleInput(String input) {
 
         initialiseCurrentInput(input);
+        resetResponse(); // Reinitialise response for next command
 
         if (isBasicCommand("bye")) {
             appendResponse(duke.getUi().showGoodbyeMessage());
@@ -161,10 +166,7 @@ public class Parser {
             appendResponse(duke.getUi().showDukeError(error));
         }
 
-        String providedResponse = response; // Store response to return through UI
-        response = ""; // Reinitialise response for next command
-
-        return providedResponse;
+        return response.trim();
     }
 
     private void handleDone() throws DukeException {

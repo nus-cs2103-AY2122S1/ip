@@ -1,9 +1,3 @@
 T | 0 | CS2100 Assignment
-E | 0 | CS2103t tutorial | today 12pm
 D | 0 | CS2103T quiz | tomorrow 4pm
-D | 1 | CS2103t level 9 | today
-T | 0 | eat breakfast
 D | 1 | project | Sep 3 2021
-E | 1 | meeting | Feb 2 2020
-D | 1 | submission | today
-T | 0 | say hi

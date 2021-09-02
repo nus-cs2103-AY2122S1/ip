@@ -133,7 +133,7 @@ public class Ui {
             .range(0, resultsArray.size())
             .mapToObj(index -> {
                 Task currTask = resultsArray.get(index);
-                return index + "." + currTask;
+                return (index + 1) + "." + currTask;
             })
             .collect(Collectors.joining("\n"));
 
