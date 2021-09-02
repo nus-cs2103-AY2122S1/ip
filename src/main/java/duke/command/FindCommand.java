@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
+import duke.ui.Gui;
 
 /**
  * A FindCommand class that extends from the Command class.
@@ -18,7 +18,7 @@ public class FindCommand extends Command{
 
     /**
      * A constructor to initialize a find command.
-     * @param parameter the parameter of the find command, keyword for searching task
+     * @param parameter the parameter of the find command, keyword for searching task.
      */
     public FindCommand(String parameter) {
         this.parameter = parameter;
@@ -27,12 +27,14 @@ public class FindCommand extends Command{
     /**
      * Execute a find command.
      * find matching tasks from the task list.
-     * @param taskList The task list to search
-     * @param ui The user interface to display the reply
-     * @param storage The place to store the session
+     * @param taskList The task list to search.
+     * @param gui The user interface to display the reply.
+     * @param storage The place to store the session.
+     * @throws DukeException no matching task found.
      */
+
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
         TaskList searchList = new TaskList();
         for (Task t:taskList.getTaskList()) {
             if (t.getDescription().contains(parameter)) {
@@ -47,12 +49,13 @@ public class FindCommand extends Command{
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the matching tasks in your list:\n");
         sb.append(searchList.toString());
-        ui.printStringInBox(sb.toString());
+        gui.showResponse(sb.toString());
+
     }
 
     /**
      * A boolean to notate if this is an exit command.
-     * @return false
+     * @return false.
      */
     @Override
     public boolean isExit() {

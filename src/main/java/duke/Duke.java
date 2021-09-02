@@ -4,56 +4,68 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.ui.Ui;
 import duke.task.TaskList;
+import duke.ui.Gui;
+import javafx.application.Application;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * A chatbot based on Project Duke
  *
  * @author KelvinSoo
- * @version A-MoreOOP
+ * @version Level-10
  */
-public class Duke {
+public class Duke extends Application{
 
     private final Storage storage;
     private TaskList taskList;
-    private final Ui ui;
+    private final Gui gui;
 
     /**
-     * A constructor to initialize a new chatbot.
-     *
-     * @param filePath Filepath of a saved chatbot or to save a chatbot
+     * A constructor to initialize a chatbot.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Duke() {
+        gui = new Gui();
+        storage = new Storage("./data/duke.txt");
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.printStringInErrorBox(e.getMessage());
+            gui.showResponse(e.getMessage());
             taskList = new TaskList();
         }
     }
 
     /**
-     * Start a new chatbot session
+     * Start a new chatbot session.
+     * @param stage the stage.
      */
-    private void run() {
-        ui.greetUser();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.getCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printStringInErrorBox(e.getMessage());
-            }
+    @Override
+    public void start(Stage stage) {
+        gui.start(stage);
+        Button sendButton = gui.getButton();
+        TextField userTextField = gui.getUserTextField();
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleOnClickEvent();
+        });
+
+        userTextField.setOnAction((event) -> {
+            handleOnClickEvent();
+        });
+    }
+
+    private void handleOnClickEvent() {
+        try {
+            String fullCommand = gui.getCommand();
+            Command c = Parser.parse(fullCommand);
+            c.execute(taskList, gui, storage);
+        } catch (DukeException e) {
+            gui.showResponse(e.getMessage());
         }
     }
 
     public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
     }
 }

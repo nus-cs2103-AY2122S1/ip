@@ -19,9 +19,10 @@ import duke.exception.DukeException;
 public class Parser {
 
     /**
-     * Process a given user input
-     *
-     * @param userCommand The user input
+     * Process a given user input.
+     * @param userCommand The user input.
+     * @return a user command.
+     * @throws DukeException unknown command syntax.
      */
     public static Command parse(String userCommand) throws DukeException{
 
