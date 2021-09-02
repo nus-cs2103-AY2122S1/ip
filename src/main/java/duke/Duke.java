@@ -37,6 +37,7 @@ public class Duke {
         } else {
             Ui parseInput = new Feature(input);
             String inputResult = parseInput.getCommandResult();
+            assert !inputResult.equals("") : "the response from Duke should not be empty";
             return inputResult;
         }
     }

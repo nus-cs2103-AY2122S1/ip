@@ -16,7 +16,6 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private String path;
     private static String commandResult = "";
 
     public Storage(String path) {
@@ -28,8 +27,6 @@ public class Storage {
             }
         } catch (FileNotFoundException fileNotFoundException) {
             createFileAndDirectory();
-        } finally {
-            this.path = path;
         }
     }
 
@@ -113,6 +110,10 @@ public class Storage {
             String at = task.getTime();
             toSave += description + " | " + at;
         }
+
+        assert type.matches("T|D|E") : "only T, D and E is valid for task type";
+        assert isDone.matches("1|0") : "only 1, 0 is valid for isDone";
+        assert !toSave.equals("") : "toSave cannot be empty";
 
         String directoryName = "data";
         String fileName = "duke.txt";

@@ -41,6 +41,7 @@ public class TaskList {
         if (results.size() == 0) {
             return "No matches found!";
         } else {
+            assert results.size() > 0 : "The results list should not be empty";
             int counter = 1;
             for (Task resultFound : results) {
                 String printResult = counter + "." + resultFound + "\n";
@@ -67,6 +68,7 @@ public class TaskList {
             result += count + ". " + item + "\n";
             count++;
         }
+        assert taskList.size() > 0 : "The task list should not be empty";
         return result;
     }
 
@@ -102,8 +104,8 @@ public class TaskList {
             throw new DukeException("Delete Task:", 2);
         } else {
             if (taskNumber <= taskList.size()) {
+                assert taskList.size() > 0: "Task list should at least contain something to delete";
                 String result = "Noted. I've removed this task: \n";
-
                 Task taskToDelete = taskList.get(taskNumber - 1);
                 taskList.remove(taskNumber - 1);
 
