@@ -40,9 +40,11 @@ public class Duke extends Application {
     public TaskList getTasks() {
         return this.tasks;
     }
+
     public Storage getStorage() {
         return this.storage;
     }
+
     public Ui getUi() {
         return this.ui;
     }
@@ -52,7 +54,7 @@ public class Duke extends Application {
      */
     private void run() {
         System.out.println(ui.showWelcomeMessage1());
-        System.out.println(ui.LOGO);
+        System.out.println(Ui.LOGO);
         System.out.println(ui.showWelcomeMessage2());
         try {
             System.out.println(storage.loadFileToList());
@@ -63,6 +65,7 @@ public class Duke extends Application {
                 String command = ui.getUserCommand();
                 Parser parser = new Parser(this);
                 String response = parser.handleInput(command);
+                assert !response.equals("") : "there should be a response to the command";
                 System.out.println(response);
             }
         }
@@ -83,6 +86,7 @@ public class Duke extends Application {
     private String parseGui(String command) {
         Parser parser = new Parser(this);
         String response = parser.handleInput(command);
+        assert !response.equals("") : "there should be a response to the command";
         return response;
     }
 
