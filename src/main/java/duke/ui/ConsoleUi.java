@@ -1,14 +1,11 @@
-package duke;
+package duke.ui;
 
 import java.util.Scanner;
 
-public class Ui {
-    private static final String WELCOME_TEXT = "Hey there I'm Duke!\nHow can I help you today?";
-    private static final String BYE_TEXT = "Bye! Hope to see you again!";
-
+public class ConsoleUi extends Ui {
     private Scanner in;
 
-    public Ui(Scanner in) {
+    public ConsoleUi(Scanner in) {
         this.in = in;
     }
 
@@ -18,14 +15,6 @@ public class Ui {
     public String readCommand() {
         System.out.print("> ");
         return in.nextLine().trim();
-    }
-
-    public void printGreeting() {
-        printMessage(WELCOME_TEXT);
-    }
-
-    public void printGoodbye() {
-        printMessage(BYE_TEXT);
     }
 
     /**

@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Event;
 import duke.task.Task;
+import duke.ui.Ui;
 
 public class AddEventCommand extends Command {
     private String arguments;

@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Task;
+import duke.ui.Ui;
 
 public class FilterTasksCommand extends Command {
     private String searchInput;
