@@ -20,7 +20,7 @@ public class DeadLine extends Task {
      *
      * @param description Task description.
      * @param type Task type: Deadline.
-     * @param by Deadline due date.
+     * @param by Deadline due date, format: yyyy-mm-dd.
      */
     public DeadLine(String description, Type type, String by) {
         super(description, type);
