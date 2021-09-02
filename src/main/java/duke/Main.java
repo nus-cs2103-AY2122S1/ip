@@ -1,11 +1,9 @@
 package duke;
 
 import java.io.IOException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -21,8 +19,6 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
-            ap.getChildren().add(DialogBox.getDukeDialog(duke.getResponse("hello"),
-                    new Image(this.getClass().getResourceAsStream("/images/DaDuke.JPG"))));
             Scene scene = new Scene(ap);
 
             scene.getRoot().setStyle("-fx-font-family: 'Open Sans'");
