@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDateTime deadline;
-    DateTimeFormatter fmt = new DateTimeFormatterBuilder()
+    private DateTimeFormatter fmt = new DateTimeFormatterBuilder()
             .appendPattern("dd MMM yyyy")
             .optionalStart()
             .appendPattern(" HH:mm")
@@ -32,8 +32,8 @@ public class Deadline extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[D]" + "[" + this.getStatusIcon() + "]" + " "
-                + this.description + " (" + deadline.format(fmt) + ")";
+                + this.description + " (by: " + deadline.format(fmt) + ")";
     }
 }

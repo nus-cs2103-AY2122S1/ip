@@ -5,9 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoField;
 
-public class Event extends Task{
+public class Event extends Task {
     protected LocalDateTime duration;
-    DateTimeFormatter fmt = new DateTimeFormatterBuilder()
+    private DateTimeFormatter fmt = new DateTimeFormatterBuilder()
             .appendPattern("dd MMM yyyy")
             .optionalStart()
             .appendPattern(" HH:mm")
@@ -30,8 +30,8 @@ public class Event extends Task{
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return "[E]" + "[" + this.getStatusIcon() + "]"
-                + " " + this.description + " (" + duration.format(fmt) + ")";
+                + " " + this.description + " (at: " + duration.format(fmt) + ")";
     }
 }
