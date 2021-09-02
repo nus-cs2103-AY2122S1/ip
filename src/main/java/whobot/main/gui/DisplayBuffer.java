@@ -24,17 +24,19 @@ public class DisplayBuffer {
     /***
      * Adds given text to the print buffer
      *
-     * @param text String to add to buffer
+     * @param texts Variable Number of strings to add to buffer
      */
-    public static void addToBuffer(String text) {
-        text = text.replaceAll("[\t]", " ");
-        text = text.replace(UI.COLOR_BLUE, "");
-        text = text.replace(UI.COLOR_PURPLE, "");
-        text = text.replace(UI.COLOR_RESET, "");
-        text = text.replace(UI.COLOR_CYAN, "");
-        text = text.replace(UI.COLOR_RED, "");
-        charCount += text.length();
-        buffer.addAll(Arrays.asList(text.split("\n")));
+    public static void addToBuffer(String... texts) {
+        for (String text: texts) {
+            text = text.replaceAll("[\t]", " ");
+            text = text.replace(UI.COLOR_BLUE, "");
+            text = text.replace(UI.COLOR_PURPLE, "");
+            text = text.replace(UI.COLOR_RESET, "");
+            text = text.replace(UI.COLOR_CYAN, "");
+            text = text.replace(UI.COLOR_RED, "");
+            charCount += text.length();
+            buffer.addAll(Arrays.asList(text.split("\n")));
+        }
     }
 
     /***
