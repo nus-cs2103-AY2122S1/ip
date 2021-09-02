@@ -12,12 +12,14 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 public class Duke extends Application {
 
@@ -33,15 +35,22 @@ public class Duke extends Application {
     private static final int ERROR_OUTOFBOUNDS = 4;
     private static final int ERROR_UNKNOWN = 5;
 
-    private static final int TEXT_FONTSIZE = 20;
+//    private static final String INSTRUCTIONS = "To add a todo task  --  todo <task>\n"
+//            + "To add a deadline  --  deadline <task> /by MMM dd yyyy HH:mm\n"
+//            + "To add an event  --  event <task> /at MMM dd yyyy HH:mm\n"
+//            + "To mark tasks as done  --  done <idx from list>\n"
+//            + "To delete tasks  --  delete <idx from list>\n"
+//            + "To search for task  --  find <keyword>\n"
+//            + "To see all contents of list  --  list";
 
-    private static final String INSTRUCTIONS = "To add a todo task  --  todo <task>\n"
-            + "To add a deadline  --  deadline <task> /by MMM dd yyyy HH:mm\n"
-            + "To add an event  --  event <task> /at MMM dd yyyy HH:mm\n"
-            + "To mark tasks as done  --  done <idx from list>\n"
-            + "To delete tasks  --  delete <idx from list>\n"
-            + "To search for task  --  find <keyword>\n"
-            + "To see all contents of list  --  list";
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
+
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/spongebob.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
 
     public Duke() {}
 
@@ -65,40 +74,82 @@ public class Duke extends Application {
     @Override
     public void start(Stage stage) {
 
-        TextField cmdInput = new TextField();
+        scrollPane = new ScrollPane();
+        dialogContainer = new VBox();
+        scrollPane.setContent(dialogContainer);
 
-        Button enterButton = new Button("Enter");
-        Button instructionsButton = new Button("Instructions");
+        dialogContainer.setPadding(new Insets(20, 20, 20, 20));
+        dialogContainer.setSpacing(10);
 
-        Image dukeImage = new Image("https://bernardmarr.com/img/What%20Is%20The%20Importance%20Of%20Artificial%20Intelligence%20(AI).png");
-        ImageView imageView = new ImageView(dukeImage);
-        imageView.setFitHeight(300);
-        imageView.setFitWidth(400);
+        userInput = new TextField();
+        sendButton = new Button("Send");
 
-        Label labelForImgAndText = new Label("Hi, I'm Duke! How can i help you?", imageView);
-        labelForImgAndText.setMinSize(1200.0, 800.0);
-        labelForImgAndText.setFont(new Font(TEXT_FONTSIZE));
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
-        VBox layout = new VBox(30);
-        layout.setPadding(new Insets(20, 20, 20, 20));
+        scene = new Scene(mainLayout);
 
+        stage.setScene(scene);
+        stage.show();
+
+        stage.setTitle("Duke");
+        stage.setResizable(false);
+        stage.setMinHeight(600.0);
+        stage.setMinWidth(800.0);
+
+        mainLayout.setPrefSize(800.0, 600.0);
+
+        scrollPane.setPrefSize(785, 535);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+
+        scrollPane.setVvalue(1.0);
+        scrollPane.setFitToWidth(true);
+
+        // You will need to import `javafx.scene.layout.Region` for this.
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
+        userInput.setPrefWidth(725.0);
+
+        sendButton.setPrefWidth(55.0);
+
+        AnchorPane.setTopAnchor(scrollPane, 1.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+
+        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setBottomAnchor(userInput, 1.0);
+
+        sendButton.setOnMouseClicked((event) -> {
+            handleUserInput();
+        });
+
+        userInput.setOnAction((event) -> {
+            handleUserInput();
+        });
+
+        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+    }
+
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    String getResponse(String input) {
         try {
-            Duke duke = new Duke("data/duketest.txt");
-            enterButton.setOnAction(e -> {
-                labelForImgAndText.setText(duke.run(cmdInput.getText()));
-                cmdInput.clear();
-            });
-            instructionsButton.setOnAction(e -> {
-                labelForImgAndText.setText(INSTRUCTIONS);
-            });
-        } catch (FileNotFoundException e){
-            labelForImgAndText.setText(ui.fileNotFoundMsg());
+            return new Duke("data/duketest.txt").run(input);
+        } catch (FileNotFoundException e) {
+            return ui.fileNotFoundMsg();
         }
 
-        layout.getChildren().addAll(labelForImgAndText, cmdInput, enterButton, instructionsButton);
-        Scene scene = new Scene(layout, 1200, 1000);
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
     }
 
     /**
