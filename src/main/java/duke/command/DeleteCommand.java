@@ -7,10 +7,15 @@ import duke.main.TaskList;
 
 public class DeleteCommand extends Command {
 
-    private String description;
-    private TaskList taskList;
+    private final String description;
+    private final TaskList taskList;
+
+    /**
+     * Constructor for the Delete Command class
+     * @param description description of what to delete
+     * @param taskList task list to be modified
+     */
     public DeleteCommand(String description, TaskList taskList) {
-        super(description, taskList);
         this.description = description;
         this.taskList = taskList;
     }
@@ -29,8 +34,8 @@ public class DeleteCommand extends Command {
                 if (index > taskList.size() || index <= 0) {
                     throw new DukeOutOfBoundException();
                 }
-                return "Noted! I've deleted the following task: \n" +
-                        taskList.delete(index);
+                return "Noted! I've deleted the following task: \n"
+                        + taskList.delete(index);
             }
         } catch (NumberFormatException e) {
             throw new DukeSyntaxErrorException(description);

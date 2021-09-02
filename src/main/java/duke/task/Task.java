@@ -5,7 +5,7 @@ public abstract class Task {
     private boolean status;
 
     /**
-     * Types of Task availble
+     * Types of Task available
      */
     public enum Type {
         TODO, DEADLINE, EVENT

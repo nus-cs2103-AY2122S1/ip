@@ -1,11 +1,18 @@
 package duke.main;
 
-import duke.command.*;
-import duke.exceptions.DukeSyntaxErrorException;
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.command.Command;
+import duke.command.DateOfCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.TaskCommand;
+import duke.exceptions.DukeSyntaxErrorException;
+import duke.task.Task;
 
 public class Parser {
 
@@ -28,6 +35,13 @@ public class Parser {
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
+    /**
+     * Parse and analyze user input, handling proper respond by redirecting
+     * Duke to the appropriate Command object
+     * @param command command being parsed
+     * @param taskList task list to be modified
+     * @return appropriate command to be shown to users
+     */
     public static Command parse(String command, TaskList taskList) {
         String[] components = command.split(" ", 2);
         String type = components[0].toLowerCase().trim();

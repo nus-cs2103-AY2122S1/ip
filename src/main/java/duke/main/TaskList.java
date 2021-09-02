@@ -1,10 +1,14 @@
 package duke.main;
 
-import duke.exceptions.DukeOutOfBoundException;
-import duke.task.*;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exceptions.DukeOutOfBoundException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 
 public class TaskList {
 
@@ -52,6 +56,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Mark multiple tasks inside a task list as completed
+     * @param indices all tasks to be marked
+     */
     public void done(int...indices) {
         for (int i : indices) {
             done(i);
@@ -59,7 +67,6 @@ public class TaskList {
     }
     /**
      * Indicate that all tasks are completed
-     * @return confirmation that all tasks are completed
      */
     public void doneAll() {
         for (Task task : taskList) {
@@ -81,6 +88,10 @@ public class TaskList {
         }
     }
 
+    /**
+     * Delete a number of tasks on the list
+     * @param indices all tasks to be deleted
+     */
     public void delete(int...indices) {
         for (int i : indices) {
             delete(i);
@@ -98,7 +109,6 @@ public class TaskList {
 
     /**
      * Delete all tasks and reset the Task List to empty
-     * @return Confirmation that the Task List is reset to empty
      */
     public void deleteAll() {
         taskList.clear();

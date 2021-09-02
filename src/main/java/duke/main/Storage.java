@@ -1,10 +1,16 @@
 package duke.main;
 
-import duke.exceptions.DukeException;
-import duke.task.*;
-
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 public class Storage {
 
@@ -52,9 +58,9 @@ public class Storage {
                     taskList.addTask(curr);
                     break;
                 case 'D':
-                    taskDescription = taskDescription.trim().
-                            replaceAll("\\(", "/").
-                            replaceAll("\\)", "");
+                    taskDescription = taskDescription.trim()
+                            .replaceAll("\\(", "/")
+                            .replaceAll("\\)", "");
                     curr = new Deadline(taskDescription);
                     if (status == 'X') {
                         curr.markAsCompleted();
@@ -62,9 +68,9 @@ public class Storage {
                     taskList.addTask(curr);
                     break;
                 case 'E':
-                    taskDescription = taskDescription.
-                            replaceAll("\\(", "/").
-                            replaceAll("\\)", "");
+                    taskDescription = taskDescription
+                            .replaceAll("\\(", "/")
+                            .replaceAll("\\)", "");
                     curr = new Event(taskDescription);
                     if (status == 'X') {
                         curr.markAsCompleted();

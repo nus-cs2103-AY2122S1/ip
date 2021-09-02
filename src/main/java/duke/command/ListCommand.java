@@ -4,9 +4,8 @@ import duke.main.TaskList;
 
 public class ListCommand extends Command {
 
-    private TaskList taskList;
+    private final TaskList taskList;
     public ListCommand(TaskList taskList) {
-        super("list", taskList);
         this.taskList = taskList;
     }
 

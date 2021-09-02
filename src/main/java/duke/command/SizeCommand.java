@@ -4,9 +4,8 @@ import duke.main.TaskList;
 
 public class SizeCommand extends Command {
 
-    private TaskList taskList;
+    private final TaskList taskList;
     public SizeCommand(TaskList taskList) {
-        super("size", taskList);
         this.taskList = taskList;
     }
 

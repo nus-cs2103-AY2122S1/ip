@@ -7,18 +7,23 @@ import duke.task.Task;
 
 public class FindCommand extends Command {
 
-    private String description;
-    private List<Task> taskList;
+    private final String description;
+    private final List<Task> taskList;
+
+    /**
+     * Constructor for the Find Command class
+     * @param description description of what to find
+     * @param taskList task list to be modified
+     */
     public FindCommand(String description, TaskList taskList) {
-        super(description, taskList);
         this.description = description;
         this.taskList = taskList.getTaskList();
     }
 
     @Override
     public String reply() {
-        StringBuilder output = new StringBuilder("The following task(s) matches query '" +
-                description + "':\n");
+        StringBuilder output = new StringBuilder("The following task(s) matches query '"
+                + description + "':\n");
         int count = 0;
         for (Task currentTask : taskList) {
             if (currentTask.getTaskName().contains(description)) {

@@ -9,10 +9,15 @@ import duke.task.Task;
 
 public class DateOfCommand extends Command {
 
-    private String description;
-    private TaskList taskList;
+    private final String description;
+    private final TaskList taskList;
+
+    /**
+     * Constructor for the DateOfCommand class
+     * @param description description of command
+     * @param taskList task list to be modified
+     */
     public DateOfCommand(String description, TaskList taskList) {
-        super(description, taskList);
         this.description = description;
         this.taskList = taskList;
     }
@@ -25,13 +30,13 @@ public class DateOfCommand extends Command {
         try {
             int index = Integer.parseInt(description);
             Task task = taskList.get(index);
-            String type = (task instanceof Deadline) ? "Deadline" :
-                    (task instanceof Event) ? "Event" : "Todo";
+            String type = (task instanceof Deadline) ? "Deadline"
+                        : (task instanceof Event) ? "Event" : "Todo";
             if (type.equals("Todo")) {
                 return task.getDate() + index;
             } else {
-                return "The " + type + " time of task " +
-                        index + " is " + task.getDate();
+                return "The " + type + " time of task "
+                        + index + " is " + task.getDate();
             }
         } catch (NumberFormatException e) {
             throw new DukeSyntaxErrorException(description);

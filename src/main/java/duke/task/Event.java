@@ -1,16 +1,15 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.exceptions.DukeInvalidFormatException;
 import duke.exceptions.DukeWrongCommandException;
 import duke.main.Parser;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 public class Event extends Task {
 
-    private String taskDescription;
-    private String date;
+    private final String date;
 
     /**
      * Constructor of an Event Task
@@ -27,7 +26,6 @@ public class Event extends Task {
             }
         }
         String[] divide = taskName.split("/at");
-        this.taskDescription = divide[0];
         String taskTime = divide[1].trim();
         try {
             this.date = Parser.convert(LocalDate.parse(taskTime));

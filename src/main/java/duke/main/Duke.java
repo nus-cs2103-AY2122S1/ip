@@ -18,7 +18,12 @@ public class Duke {
         Storage.loadData(file, taskList);
     }
 
-    public String reply(String input) {
+    /**
+     * Construct a respond for any user input coming in
+     * @param input user input on Duke
+     * @return response and action being done
+     */
+    public String respondWith(String input) {
         String response;
         try {
             response = Parser.parse(input, taskList).reply();

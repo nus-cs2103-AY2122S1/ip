@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class HelpCommand extends Command {
 
     public HelpCommand() {
-        super("help", null);
     }
 
     @Override

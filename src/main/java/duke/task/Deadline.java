@@ -1,16 +1,16 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import duke.exceptions.DukeInvalidFormatException;
 import duke.exceptions.DukeWrongCommandException;
 import duke.main.Parser;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 public class Deadline extends Task {
 
-    private String taskDescription;
-    private String date;
+    private final String date;
 
     /**
      * Constructor for a Deadline Task
@@ -27,7 +27,6 @@ public class Deadline extends Task {
             }
         }
         String[] divide = taskName.split("/by");
-        this.taskDescription = divide[0].trim();
         String taskTime = divide[1].trim();
         try {
             this.date = Parser.convert(LocalDate.parse(taskTime));

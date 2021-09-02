@@ -2,6 +2,7 @@ package duke.ui;
 
 import java.io.IOException;
 
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,6 +14,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
+import javafx.util.Duration;
 
 
 public class DialogBox extends HBox {
@@ -22,7 +24,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Pls
+     * Dialog Box for Duke, in customization
      * @param text txt
      * @param image txt
      */
@@ -56,8 +58,10 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String text, Image image) {
+        PauseTransition pause = new PauseTransition(Duration.seconds(1));
         DialogBox db = new DialogBox(text, image);
         db.flip();
+        pause.play();
         return db;
     }
 }
