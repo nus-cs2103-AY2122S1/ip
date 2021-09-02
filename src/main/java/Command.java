@@ -11,6 +11,6 @@ public abstract class Command {
     }
 
     public boolean shouldExecuteNext() {
-        return false;
+        return hasMoreCommands;
     }
 }
