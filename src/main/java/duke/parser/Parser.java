@@ -1,14 +1,22 @@
 package duke.parser;
 
-import duke.command.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.ToDoCommand;
 import duke.data.exception.DukeException;
 import duke.data.task.Deadline;
 import duke.data.task.Event;
 import duke.data.task.ToDo;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * This class abstracts the parsing of user input.
@@ -62,7 +70,6 @@ public class Parser {
             throw new DukeException("OOPS!!! Please type what you want to find");
         }
     }
-    
     /**
      * Adds a To-do task to the taskList.
      *

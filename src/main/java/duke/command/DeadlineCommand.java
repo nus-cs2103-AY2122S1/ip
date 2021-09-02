@@ -16,7 +16,7 @@ public class DeadlineCommand extends Command {
      *
      * @param newTask The Deadline task to be generated.
      */
-    public DeadlineCommand(Deadline newTask){
+    public DeadlineCommand(Deadline newTask) {
         this.newTask = newTask;
     }
 

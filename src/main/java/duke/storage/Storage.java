@@ -1,11 +1,5 @@
 package duke.storage;
 
-import duke.data.TaskList;
-import duke.data.task.Deadline;
-import duke.data.task.Event;
-import duke.data.task.Task;
-import duke.data.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,15 +10,22 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.data.TaskList;
+import duke.data.task.Deadline;
+import duke.data.task.Event;
+import duke.data.task.Task;
+import duke.data.task.ToDo;
+
 /**
  * This class handles the loading and saving of the TaskList into the hard drive.
  *
  * @author Chesterwongz
  */
 public class Storage {
-    private final String FILEPATH;
     private static final ArrayList<Task> storageList = new ArrayList<>();
     private static final String DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm";
+    @SuppressWarnings("checkstyle:MemberName")
+    private final String FILEPATH;
 
     public Storage(String filePath) {
         FILEPATH = filePath;
@@ -82,7 +83,6 @@ public class Storage {
             // Invalid data, do nothing.
         }
     }
-    
     private void readDeadline(String data) {
         try {
             String[] splitDeadline = data.split("\\|", 4);

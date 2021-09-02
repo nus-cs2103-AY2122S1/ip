@@ -16,7 +16,7 @@ public class EventCommand extends Command {
      *
      * @param newTask The Event task to be generated.
      */
-    public EventCommand(Event newTask){
+    public EventCommand(Event newTask) {
         this.newTask = newTask;
     }
 

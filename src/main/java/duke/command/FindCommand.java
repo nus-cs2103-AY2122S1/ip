@@ -28,7 +28,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        String str ="Here are the matching tasks in your list:";
+        String str = "Here are the matching tasks in your list:";
         StringBuilder stringBuilder = new StringBuilder(str);
         int index = 1;
         for (Task task : tasks.getAllTasks()) {

@@ -1,8 +1,8 @@
 package duke.data;
 
-import duke.data.task.Task;
-
 import java.util.ArrayList;
+
+import duke.data.task.Task;
 
 /**
  * This class abstracts the task list of Duke.
