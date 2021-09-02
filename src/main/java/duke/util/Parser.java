@@ -50,7 +50,7 @@ public class Parser {
      * @throws IllegalFormatException if user gives invalid command
      */
     private static void checkCommandFormat(String typeOfCommand, String command)
-            throws IllegalFormatException {
+            throws IllegalFormatException, UnknownCommandException {
         String toDoRegexToMatch = "^todo .*";
         String toDoCorrectFormat = "todo <todo description>";
         String eventRegexToMatch = "^event .* /at \\d{2}/\\d{2}/\\d{2} \\d{4}-\\d{4}";
@@ -83,6 +83,8 @@ public class Parser {
         case "findTask":
             checkCommandFormat(command, findTaskRegexToMatch, findTaskCorrectFormat);
             break;
+        default:
+            throw new UnknownCommandException();
         }
     }
 

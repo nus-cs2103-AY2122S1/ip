@@ -19,7 +19,7 @@ public class ParserTest {
         try {
             Parser.parse(command).execute(tasks);
         } catch (UnknownCommandException e) {
-            assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means.",
+            assertEquals("OOPS!!! I'm sorry, but I don't know what that means.",
                     e.getMessage());
         }
     }
