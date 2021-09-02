@@ -35,11 +35,11 @@ public class DeleteCommand extends Command {
         Task removedTask = tasks.deleteTask(taskId);
 
         // Displays a message indicating the task has been successfully deleted from the list
-        String message = "Got it! I've removed this task:\n" + "  " + removedTask + "\n";
+        String message = "Got it! I've removed this task:\n" + "  " + removedTask + "\nNow you have ";
         if (tasks.getNumberOfTasks() <= 1) {
-            message += "Now you have " + tasks.getNumberOfTasks() + " task in the list.";
+            message += tasks.getNumberOfTasks() + " task in the list.";
         } else {
-            message += "Now you have " + tasks.getNumberOfTasks() + " tasks in the list.";
+            message += tasks.getNumberOfTasks() + " tasks in the list.";
         }
 
         // Saves the current task list to the hard drive

@@ -9,17 +9,17 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDate by;
+    protected LocalDate timeBy;
 
     /**
      * Constructor for a Deadline instance that takes in a description and deadline.
      *
      * @param description The given task description.
-     * @param by The deadline of the given task.
+     * @param timeBy The deadline of the given task.
      */
-    public Deadline(String description, LocalDate by) {
+    public Deadline(String description, LocalDate timeBy) {
         super(description);
-        this.by = by;
+        this.timeBy = timeBy;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Deadline extends Task {
      * @return A LocalDate instance representing the deadline.
      */
     public LocalDate getDate() {
-        return this.by;
+        return this.timeBy;
     }
 
     /**
@@ -38,6 +38,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + timeBy.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

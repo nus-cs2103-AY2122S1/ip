@@ -9,17 +9,17 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    protected LocalDate at;
+    protected LocalDate timeAt;
 
     /**
      * Constructor for an Event instance that takes in a description and date.
      *
      * @param description The given task description.
-     * @param at The date on which the event is held.
+     * @param timeAt The date on which the event is held.
      */
-    public Event(String description, LocalDate at) {
+    public Event(String description, LocalDate timeAt) {
         super(description);
-        this.at = at;
+        this.timeAt = timeAt;
     }
 
     /**
@@ -28,7 +28,7 @@ public class Event extends Task {
      * @return A LocalDate instance representing the event date.
      */
     public LocalDate getDate() {
-        return this.at;
+        return this.timeAt;
     }
 
     /**
@@ -38,6 +38,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]" + super.toString() + " (at: " + timeAt.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }
