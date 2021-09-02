@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
      * @param storage The Storage object.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.taskDone(taskNo);
+        tasks.markTaskDone(taskNo);
     }
 
     /**

@@ -27,12 +27,12 @@ public class Event extends Task {
     public Event(String eventName, boolean isDone) {
         super(eventName.substring(0, eventName.indexOf("(at:")), isDone);
         int start = eventName.indexOf("(at:") + 5;
-        this.eventDate = LocalDate.parse(eventName.substring(start, start + 11),
+        eventDate = LocalDate.parse(eventName.substring(start, start + 11),
                 DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     public LocalDate getEventDate() {
-        return this.eventDate;
+        return eventDate;
     }
 
     /**
@@ -44,7 +44,7 @@ public class Event extends Task {
         return "[E]"
                 + super.toString()
                 + "(at: "
-                + this.eventDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + getEventDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ")";
     }
 }

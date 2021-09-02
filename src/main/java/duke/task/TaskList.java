@@ -18,7 +18,7 @@ public class TaskList {
      * Returns a new empty TaskList object.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -34,11 +34,11 @@ public class TaskList {
      * @return The size of the task list.
      */
     public int getSize() {
-        return this.tasks.size();
+        return tasks.size();
     }
 
     public List<Task> getTasks() {
-        return this.tasks;
+        return tasks;
     }
 
     /**
@@ -47,7 +47,7 @@ public class TaskList {
      * @return The task at the specified index.
      */
     public Task getTask(int taskNo) {
-        return this.tasks.get(taskNo - 1);
+        return tasks.get(taskNo - 1);
     }
 
     /**
@@ -56,8 +56,8 @@ public class TaskList {
      */
     public String saveList() {
         StringBuilder lst = new StringBuilder();
-        for (int i = 1; i <= this.getSize(); i++) {
-            lst.append(i).append(". ").append(this.getTask(i).toString()).append("\n");
+        for (int i = 1; i <= getSize(); i++) {
+            lst.append(i).append(". ").append(getTask(i).toString()).append("\n");
         }
         return lst.toString();
     }
@@ -66,8 +66,8 @@ public class TaskList {
      * Marks a specified task as done.
      * @param taskNo The number of the task to be marked as done.
      */
-    public void taskDone(int taskNo) {
-        Task task = this.getTask(taskNo);
+    public void markTaskDone(int taskNo) {
+        Task task = getTask(taskNo);
         task.setDone();
         ui.showTaskDone(task);
     }
@@ -77,7 +77,7 @@ public class TaskList {
      * @param task The task to be added.
      */
     public void addTaskSuffix(Task task) {
-        int taskNo = this.getSize();
+        int taskNo = getSize();
         String t = taskNo == 1 ? " task " : " tasks ";
         ui.showAddTask(task, taskNo, t);
     }
@@ -109,8 +109,8 @@ public class TaskList {
      * @param taskNo The number of the task to be deleted.
      */
     public void deleteTask(int taskNo) {
-        Task removedTask = this.getTasks().remove(taskNo - 1);
-        int tasksLeft = this.getSize();
+        Task removedTask = getTasks().remove(taskNo - 1);
+        int tasksLeft = getSize();
         String t = tasksLeft == 1 ? " task " : " tasks ";
         ui.showDeleteTask(removedTask, tasksLeft, t);
     }
@@ -121,7 +121,7 @@ public class TaskList {
      */
     public void findTasksOnDate(LocalDate date) {
         List<Task> foundTasks = new ArrayList<>();
-        for (Task task : this.getTasks()) {
+        for (Task task : getTasks()) {
             if (task instanceof Deadline) {
                 Deadline d = (Deadline) task;
                 if (d.getDueDate().isEqual(date)) {

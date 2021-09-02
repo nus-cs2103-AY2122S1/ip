@@ -16,7 +16,7 @@ public class Deadline extends Task {
     public Deadline(String deadlineName) {
         super(deadlineName.substring(9, deadlineName.indexOf("/by ")));
         int start = deadlineName.indexOf("/by ");
-        this.dueDate = LocalDate.parse(deadlineName.substring(start + 4));
+        dueDate = LocalDate.parse(deadlineName.substring(start + 4));
     }
 
     /**
@@ -27,12 +27,12 @@ public class Deadline extends Task {
     public Deadline(String deadlineName, boolean isDone) {
         super(deadlineName.substring(0, deadlineName.indexOf("(by:")), isDone);
         int start = deadlineName.indexOf("(by:") + 5;
-        this.dueDate = LocalDate.parse(deadlineName.substring(start, start + 11),
+        dueDate = LocalDate.parse(deadlineName.substring(start, start + 11),
                 DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     public LocalDate getDueDate() {
-        return this.dueDate;
+        return dueDate;
     }
 
     /**
@@ -44,7 +44,7 @@ public class Deadline extends Task {
         return "[D]"
                 + super.toString()
                 + "(by: "
-                + this.dueDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + getDueDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + ")";
     }
 }
