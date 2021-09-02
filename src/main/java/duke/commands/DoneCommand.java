@@ -20,18 +20,15 @@ public class DoneCommand extends Command {
      * @param storage The storage system of the bot involved with this command.
      * @param ui The ui of the bot involved with this command.
      */
-    public void execute(Storage storage, Ui ui) {
+    public String execute(Storage storage, Ui ui) {
         try {
             Task taskToMark = storage.getTask(taskNum);
             taskToMark.markDone();
             storage.saveToFile();
-            ui.markedDoneMessage(taskToMark);
+            return ui.markedDoneMessage(taskToMark);
         } catch (IndexOutOfBoundsException e) {
-            Ui.showErrorMessage("Please enter a valid index!");
+            return Ui.showErrorMessage("Please enter a valid index!");
         }
     }
 
-    public boolean isExit() {
-        return false;
-    }
 }

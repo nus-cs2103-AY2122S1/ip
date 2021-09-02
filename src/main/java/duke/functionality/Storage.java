@@ -40,7 +40,7 @@ public class Storage {
             f.createNewFile();
 
         } catch (IOException e) {
-            Ui.showErrorMessage("Error in storage creation!");
+            System.err.println("Error in storage creation!");
         }
     }
 

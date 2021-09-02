@@ -15,14 +15,9 @@ public class ExitCommand extends Command {
      * @param storage The storage system of the bot involved with this command.
      * @param ui The ui of the bot involved with this command.
      */
-    public void execute(Storage storage, Ui ui) {
-        ui.closeReader();
+    public String execute(Storage storage, Ui ui) {
         storage.saveToFile();
-        ui.goodbyeMessage();
-    }
-
-    public boolean isExit() {
-        return true;
+        return ui.goodbyeMessage();
     }
 
 }

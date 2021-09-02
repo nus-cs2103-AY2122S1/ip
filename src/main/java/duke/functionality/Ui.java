@@ -12,7 +12,7 @@ import duke.tasks.Task;
  * Creates an Ui system that is responsible for interacting with the user.
  */
 public class Ui {
-    private static final String BORDER = "____________________________________________________________";
+    private static final String BORDER = "________________________________________________________";
     private static final String NEW_LINE = System.lineSeparator();
     private static final String PLACEHOLDER = "%text%";
     private static final String DONE_TASK = "Nice! I've marked this task as done:";
@@ -23,45 +23,30 @@ public class Ui {
     private static final String MISSING_TASK = "There is no task at the specified index.";
     private static final String NO_MATCHING_TASKS = "There are no matching tasks found.";
     private static final String UNKNOWN_COMMAND = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String GOODBYE_MSG = "It has been a pleasure, goodbye!";
 
-
-    private final Scanner sc;
-    private final PrintStream out;
 
     public Ui() {
-        this(System.in, System.out);
     }
 
-    private Ui(InputStream in, PrintStream out) {
-        this.sc = new Scanner(in);
-        this.out = out;
-    }
-
-    public String readCommand() {
-        return this.sc.nextLine().trim();
-    }
-
-    public void closeReader() {
-        this.sc.close();
-    }
-
-    private void prettyPrintToUser(String msg) {
+    private String prettyPrint(String msg) {
         String indentedMsg = msg.replaceAll("(?m)^", "    ");
-        out.printf("%s\n%s\n%s%n", BORDER, indentedMsg, BORDER);
+        return String.format("%s\n%s\n%s%n", BORDER, indentedMsg, BORDER);
     }
 
     /**
      * Sends a welcome message to the user.
      */
-    public void welcomeMessage() {
-        out.printf("Duke is gone. Hello, this is Duchess.\nHow can I help you?\n%s%n", BORDER);
+    public String welcomeMessage() {
+        String welcome = "Duke is gone. Hello, this is Duchess.\nHow can I help you?";
+        return String.format("%s\n%s\n%s%n", BORDER, welcome, BORDER);
     }
 
     /**
      * Sends a goodbye message to the user.
      */
-    public void goodbyeMessage() {
-        prettyPrintToUser("It has been a pleasure, goodbye!");
+    public String goodbyeMessage() {
+        return prettyPrint(GOODBYE_MSG);
     }
 
     /**
@@ -70,10 +55,10 @@ public class Ui {
      * @param addedTask The task that has been added.
      * @param taskLeftNum The number of tasks present in the current list of tasks.
      */
-    public void taskAddedMessage(Task addedTask, int taskLeftNum) {
+    public String taskAddedMessage(Task addedTask, int taskLeftNum) {
         String tasksLeft = REMAINING_TASK_NUM.replace(PLACEHOLDER, String.valueOf(taskLeftNum));
         String msg = String.format("%s\n  %s\n%s", ADDED_TASK, addedTask.toString(), tasksLeft);
-        prettyPrintToUser(msg);
+        return prettyPrint(msg);
     }
 
     /**
@@ -82,10 +67,10 @@ public class Ui {
      * @param removedTask The task that has been deleted.
      * @param taskLeftNum The number of remaining tasks present in the current list of tasks.
      */
-    public void taskDeletedMessage(Task removedTask, int taskLeftNum) {
+    public String taskDeletedMessage(Task removedTask, int taskLeftNum) {
         String tasksLeft = REMAINING_TASK_NUM.replace(PLACEHOLDER, String.valueOf(taskLeftNum));
         String msg = String.format("%s\n  %s\n%s", DELETED_TASK, removedTask.toString(), tasksLeft);
-        prettyPrintToUser(msg);
+        return prettyPrint(msg);
     }
 
     /**
@@ -93,9 +78,9 @@ public class Ui {
      *
      * @param task The task that has been marked as done.
      */
-    public void markedDoneMessage(Task task) {
+    public String markedDoneMessage(Task task) {
         String msg = String.format("%s\n  %s", DONE_TASK, task.toString());
-        prettyPrintToUser(msg);
+        return prettyPrint(msg);
     }
 
     /**
@@ -103,8 +88,8 @@ public class Ui {
      *
      * @param stringifyTaskLast String representation of current list of tasks.
      */
-    public void printTaskListMessage(String stringifyTaskLast) {
-        prettyPrintToUser(stringifyTaskLast);
+    public String printTaskListMessage(String stringifyTaskLast) {
+        return prettyPrint(stringifyTaskLast);
     }
 
     /**
@@ -112,25 +97,25 @@ public class Ui {
      *
      * @param listOfMatches List of all tasks that match the user's keyword.
      */
-    public void printMatchingTasksMessage(List<Task> listOfMatches) {
+    public String printMatchingTasksMessage(List<Task> listOfMatches) {
         int len = listOfMatches.size();
         if (len == 0) {
-            prettyPrintToUser(NO_MATCHING_TASKS);
+            return prettyPrint(NO_MATCHING_TASKS);
         } else {
             StringBuilder msg = new StringBuilder("Here are the matching tasks in your list:");
             for (int i = 0; i < len; i++) {
                 int currTaskNum = i + 1;
                 msg.append("\n").append(currTaskNum).append(". ").append(listOfMatches.get(i).toString());
             }
-            prettyPrintToUser(msg.toString());
+            return prettyPrint(msg.toString());
         }
     }
 
     /**
      * Sends a message to the user when an unknown command has been input by them.
      */
-    public void unknownCommandMessage() {
-        prettyPrintToUser(UNKNOWN_COMMAND);
+    public String unknownCommandMessage() {
+        return prettyPrint(UNKNOWN_COMMAND);
     }
 
     /**
@@ -138,22 +123,27 @@ public class Ui {
      *
      * @param errorMsg The error message.
      */
-    public static void showErrorMessage(String errorMsg) {
-        System.err.println(errorMsg);
+    public static String showErrorMessage(String errorMsg) {
+        return errorMsg;
+    }
+
+    public static String checkExitMessage() {
+        Ui temp = new Ui();
+        return temp.goodbyeMessage();
     }
 
     /**
      * Sends a message to the user when the task indicated by them cannot be found.
      */
-    public void missingTaskMessage() {
-        prettyPrintToUser(MISSING_TASK);
+    public String missingTaskMessage() {
+        return prettyPrint(MISSING_TASK);
     }
 
     /**
      * Sends a message to the user when no more tasks can be added to the task list.
      */
-    public void maxTaskReachedMessage() {
-        prettyPrintToUser(MAX_TASK);
+    public String maxTaskReachedMessage() {
+        return prettyPrint(MAX_TASK);
     }
 
 }

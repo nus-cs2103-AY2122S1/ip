@@ -26,7 +26,7 @@ public class AddCommand extends Command {
      * @param storage The storage system of the bot involved with this command.
      * @param ui The ui of the bot involved with this command.
      */
-    public void execute(Storage storage, Ui ui) {
+    public String execute(Storage storage, Ui ui) {
         if (this.taskType.equals(Todo.taskTag())) {
             int taskListLen = storage.taskListLen();
             if (taskListLen < TaskList.MAX_TASKS) {
@@ -34,9 +34,9 @@ public class AddCommand extends Command {
                 storage.addTask(newTodo);
                 taskListLen += 1;
                 storage.saveToFile();
-                ui.taskAddedMessage(newTodo, taskListLen);
+                return ui.taskAddedMessage(newTodo, taskListLen);
             } else {
-                ui.maxTaskReachedMessage();
+                return ui.maxTaskReachedMessage();
             }
         } else if (this.taskType.equals(Deadline.taskTag())) {
             int taskListLen = storage.taskListLen();
@@ -45,9 +45,9 @@ public class AddCommand extends Command {
                 storage.addTask(newDeadline);
                 taskListLen += 1;
                 storage.saveToFile();
-                ui.taskAddedMessage(newDeadline, taskListLen);
+                return ui.taskAddedMessage(newDeadline, taskListLen);
             } else {
-                ui.maxTaskReachedMessage();
+                return ui.maxTaskReachedMessage();
             }
         } else if (this.taskType.equals(Event.taskTag())) {
             int taskListLen = storage.taskListLen();
@@ -56,15 +56,14 @@ public class AddCommand extends Command {
                 storage.addTask(newEvent);
                 taskListLen += 1;
                 storage.saveToFile();
-                ui.taskAddedMessage(newEvent, taskListLen);
+                return ui.taskAddedMessage(newEvent, taskListLen);
             } else {
-                ui.maxTaskReachedMessage();
+                return ui.maxTaskReachedMessage();
             }
+        } else {
+            //Will never reach this state.
+            return "Impossible task.";
         }
-    }
-
-    public boolean isExit() {
-        return false;
     }
 
 }

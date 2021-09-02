@@ -20,23 +20,19 @@ public class DeleteCommand extends Command {
      * @param storage The storage system of the bot involved with this command.
      * @param ui The ui of the bot involved with this command.
      */
-    public void execute(Storage storage, Ui ui) {
+    public String execute(Storage storage, Ui ui) {
         try {
             int taskListLen = storage.taskListLen();
             if (taskNum + 1 <= taskListLen) {
                 Task removedTask = storage.deleteTask(taskNum);
                 taskListLen -= 1;
                 storage.saveToFile();
-                ui.taskDeletedMessage(removedTask, taskListLen);
+                return ui.taskDeletedMessage(removedTask, taskListLen);
             } else {
-                ui.missingTaskMessage();
+                return ui.missingTaskMessage();
             }
         } catch (IndexOutOfBoundsException e) {
-            Ui.showErrorMessage("Please enter a valid index!");
+            return Ui.showErrorMessage("Please enter a valid index!");
         }
-    }
-
-    public boolean isExit() {
-        return false;
     }
 }
