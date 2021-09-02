@@ -1,12 +1,11 @@
 package duke.task;
 
-import duke.util.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-
 import java.time.format.DateTimeFormatter;
+
+import duke.util.DukeException;
 
 /**
  * A class that represents a task that occurs on a certain date, from a start to end time.

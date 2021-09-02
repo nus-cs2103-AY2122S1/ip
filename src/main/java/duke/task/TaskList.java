@@ -1,18 +1,15 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
+
 import duke.util.DukeException;
 import duke.util.Parser;
 import duke.util.Ui;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import java.util.function.Consumer;
-
-import java.util.stream.Collectors;
 
 /**
  * A class that contains the base functionality for a task list,
@@ -247,7 +244,6 @@ public class TaskList {
                 .collect(Collectors.toList());
         return new TaskList(onDateTasks);
     }
-    
     /**
      * Converts the TaskList data into a string format.
      * The tasks are listed in a numerical order. (1, 2, 3...)

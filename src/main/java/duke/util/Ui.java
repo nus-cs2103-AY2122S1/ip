@@ -7,10 +7,10 @@ import java.util.Scanner;
  * as well as reading inputs.
  */
 public class Ui {
-    private final static String FORMAT = "\t%s\n";
-    private final static String INDENTED_FORMAT = "\t\t%s\n";
-    private final static String LINE = "______________________________________________________";
-    private final static String LOGO =
+    private static final String FORMAT = "\t%s\n";
+    private static final String INDENTED_FORMAT = "\t\t%s\n";
+    private static final String LINE = "______________________________________________________";
+    private static final String LOGO =
             "\t ____        _        \n"
                     + "\t|  _ \\ _   _| | _____ \n"
                     + "\t| | | | | | | |/ / _ \\\n"

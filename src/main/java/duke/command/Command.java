@@ -1,11 +1,10 @@
 package duke.command;
 
-import duke.task.TaskList;
-
-import duke.util.Ui;
-import duke.util.Storage;
-
 import java.io.IOException;
+
+import duke.task.TaskList;
+import duke.util.Storage;
+import duke.util.Ui;
 
 /**
  * A class that represents a valid command that can be executed according to the user's input.

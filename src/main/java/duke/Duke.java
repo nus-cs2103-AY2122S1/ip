@@ -1,18 +1,15 @@
 package duke;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import duke.command.Command;
-
 import duke.task.TaskList;
-
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * The driver class for the Duke chat bot.
@@ -77,6 +74,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts the whole program.
+     * @param args Some input arguments. (Unused)
+     */
     public static void main(String[] args) {
         Path filePath = Paths.get(System.getProperty("user.dir"), "data", "tasks.txt");
         new Duke(filePath).run();
