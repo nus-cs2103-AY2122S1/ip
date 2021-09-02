@@ -1,5 +1,6 @@
-package duke.exception;
+package duke;
 
+import duke.exception.InvalidCommandException;
 import org.junit.Test;
 import org.junit.Assert;
 

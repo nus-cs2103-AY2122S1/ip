@@ -1,5 +1,7 @@
-package duke.task;
+package duke;
 
+import duke.task.TaskList;
+import duke.task.Todo;
 import org.junit.Test;
 import org.junit.Assert;
 
