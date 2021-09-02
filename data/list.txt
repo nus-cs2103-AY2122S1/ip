@@ -1,0 +1,5 @@
+T | 0 | eat breakfast
+D | 1 | project | Sep 3 2021
+E | 1 | meeting | Feb 2 2020
+D | 1 | submission | today
+T | 0 | say hi
