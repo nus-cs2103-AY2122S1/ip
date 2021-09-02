@@ -71,14 +71,14 @@ public class TaskFactory {
             checkDetailsNonEmpty(newTaskType, newTaskDetails);
             checkTaskIncludesTime(newTaskType, newTaskDetails);
             String description = newTaskDetails.split("/at ")[0].trim();
-            String timeString = newTaskDetails.split("/at ")[1].trim();
+            String timeString = newTaskDetails.split("/at ")[1].trim().toLowerCase();
             LocalDateTime time = StringCleaner.toLocalDateTime(timeString);
             return new EventTask(description, time);
         } else if (newTaskType.equalsIgnoreCase(TaskTypes.DEADLINE.toString())) {
             checkDetailsNonEmpty(newTaskType, newTaskDetails);
             checkTaskIncludesTime(newTaskType, newTaskDetails);
             String description = newTaskDetails.split("/by ")[0].trim();
-            String timeString = newTaskDetails.split("/by ")[1].trim();
+            String timeString = newTaskDetails.split("/by ")[1].trim().toLowerCase();
             LocalDateTime time = StringCleaner.toLocalDateTime(timeString);
             return new DeadlineTask(description, time);
         } else {
@@ -103,6 +103,8 @@ public class TaskFactory {
             if (details.split("/by ").length < 2 || details.split("/by ")[1].length() <= 1) {
                 throw new InvalidTaskCreationException("Deadline task must include time! (use /by YYYY-MM-DD HHMM)");
             }
+        } else {
+            throw new InvalidTaskCreationException("Wrong event type used!");
         }
     }
 }
