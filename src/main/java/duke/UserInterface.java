@@ -13,50 +13,56 @@ public class UserInterface {
         this.taskList = taskList;
     }
 
-    public void greet() {
+    public String greet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What can I do for you?");
+        String s = "";
+        s += "Hello from\n" + logo + "\n" + "What can I do for you?";
+        return s;
     }
 
-    public void showLoadingError() {
-        System.out.println("Problem loading ");
+    public String showLoadingError() {
+        return "Problem loading";
     }
 
-    public void showList() {
-        System.out.println("Here are the tasks in your list: ");
+    public String showList() {
+        String s = "Here are the tasks in your list:\n";
         for (int i = 1; i <= taskList.getSize(); i++) {
             Task t = taskList.getTask(i - 1);
-            System.out.println(i + "." + t.toString());
+            s += i + "." + t.toString() + "\n";
         }
+        return s;
     }
 
-    public void showCompletedTask(Task t) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(t.toString());
+    public String showCompletedTask(Task t) {
+        String s = "Nice! I've marked this task as done:\n" + t.toString();
+        return s;
     }
 
-    public void showAddedTask(Task t) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println(t.toString());
-        System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
+    public String showAddedTask(Task t) {
+        String s = "Got it. I've added this task:" + "\n" + t.toString()
+                + "\nNow you have " + taskList.getSize() + " tasks in the list.";
+
+        return s;
     }
 
-    public void showDeletedTask(Task t) {
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(t.toString());
-        System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
+    public String showDeletedTask(Task t) {
+        String s = "Noted. I've removed this task:\n" + t.toString() + "\nNow you have " + taskList.getSize()
+                + " tasks in the list.";
+
+        return s;
     }
 
-    public void showResults(List<Task> results) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String showResults(List<Task> results) {
+        String s = "Here are the matching tasks in your list:\n";
         for (int i = 1; i <= results.size(); i++) {
             Task t = results.get(i - 1);
-            System.out.println(i + "." + t.toString());
+            s += i + "." + t.toString() + "\n";
         }
+
+        return s;
     }
 }
