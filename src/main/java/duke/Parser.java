@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -80,7 +81,8 @@ public class Parser {
     private String listTasks() {
         int taskCount = 1;
         StringBuilder result = new StringBuilder();
-        for (Task task : this.tasks.stream().collect(Collectors.toList())) {
+        List<Task> taskList = this.tasks.stream().sorted(Task::chronologicalComparator).collect(Collectors.toList());
+        for (Task task : taskList) {
             result.append(String.format("%2d. %s\n", taskCount++, task));
         }
         return result.toString();

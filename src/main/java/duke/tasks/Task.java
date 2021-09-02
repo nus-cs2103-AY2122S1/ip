@@ -5,7 +5,11 @@ import java.util.regex.Pattern;
 /**
  * Task class that encapsulate task behaviour and data.
  */
-public class Task {
+abstract public class Task {
+
+    public static int chronologicalComparator(Task task, Task task1) {
+        return (int) (task.getUrgency() - task1.getUrgency());
+    }
 
     /**
      * Category of task.
@@ -135,6 +139,13 @@ public class Task {
             DELIMITER
         );
     }
+
+    /**
+     * Get a long number representing the urgency (date) of a task.
+     *
+     * @return numeric value to be used to compare tasks.
+     */
+    abstract protected long getUrgency();
 
     /**
      * Set a task to be completed.

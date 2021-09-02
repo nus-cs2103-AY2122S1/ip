@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -47,6 +48,16 @@ public class DeadlineTask extends Task {
     @Override
     public String taskToString() {
         return super.taskToString() + DateParser.toDatabaseFormat(this.date);
+    }
+
+    /**
+     * Get a long number representing the urgency (date) of a task.
+     *
+     * @return numeric value to be used to compare tasks.
+     */
+    @Override
+    protected long getUrgency() {
+        return this.date.toEpochSecond(ZoneOffset.UTC);
     }
 
     @Override

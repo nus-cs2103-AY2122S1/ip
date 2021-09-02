@@ -9,6 +9,16 @@ public class TodoTask extends Task {
         super(title, Type.TODO);
     }
 
+    /**
+     * Get a long number representing the urgency (date) of a task.
+     *
+     * @return numeric value to be used to compare tasks.
+     */
+    @Override
+    protected long getUrgency() {
+        return Long.MAX_VALUE;
+    }
+
     @Override
     public String toString() {
         return "[T] " + super.toString();
