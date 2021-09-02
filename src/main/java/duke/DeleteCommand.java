@@ -35,18 +35,19 @@ public class DeleteCommand extends Command {
      * @param list TaskList before deletion of task.
      * @param ui Ui object to log the execution of the command.
      * @param storage Storage object that references the path to store the updated list of tasks.
+     * @reurn The string to be printed.
      * @throws DukeException If index provided is invalid.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         Task removed = list.deleteAtIndex(this.index);
         if (removed != null) {
             String message =
                     "Noted.I've removed this task:\n"
                     + "  " + removed + "\n"
                     + String.format("Now you have %d tasks in the list.", list.size());
-            ui.printMessage(message);
             storage.save(list.convertToStorageString());
+            return ui.printMessage(message);
         } else {
             throw new InvalidIndexException();
         }

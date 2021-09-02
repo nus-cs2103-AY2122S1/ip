@@ -36,17 +36,18 @@ public class MarkDoneCommand extends Command {
      * @param list TaskList before execution of the command.
      * @param ui Ui object to log the execution of the command.
      * @param storage Storage object that references the path to store the updated list of tasks.
+     * @return The string to be printed.
      * @throws DukeException If index provided is invalid.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         boolean markedDone = list.markDoneAtIndex(index);
         if (markedDone) {
             String message =
                     "Nice! I've marked this task as done:\n"
                     + list.get(index);
-            ui.printMessage(message);
             storage.save(list.convertToStorageString());
+            return ui.printMessage(message);
         } else {
             throw new InvalidIndexException();
         }

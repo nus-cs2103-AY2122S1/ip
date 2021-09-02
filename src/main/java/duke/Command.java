@@ -20,7 +20,8 @@ public abstract class Command {
      * @param list TaskList before execution of the command.
      * @param ui Ui object to log the execution of the command.
      * @param storage Storage object that references the path to store the updated list of tasks.
+     * @return The message to be printed.
      * @throws DukeException If problem encountered during execution of command.
      */
-    public abstract void execute(TaskList list, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList list, Ui ui, Storage storage) throws DukeException;
 }

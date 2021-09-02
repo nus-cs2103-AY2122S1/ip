@@ -30,7 +30,6 @@ public class Duke {
      */
     public void start() {
         this.ui.printGreetings();
-
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -44,6 +43,15 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(this.list, this.ui, this.storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+    
     /**
      * Initializes a Duke object and runs the program.
      *

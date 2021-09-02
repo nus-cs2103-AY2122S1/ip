@@ -34,10 +34,11 @@ public class FindCommand extends Command {
      * @param list TaskList before execution of the command.
      * @param ui Ui object to log the execution of the command.
      * @param storage Storage object that references the path to store the updated list of tasks.
+     * @return The string to be printed.
      * @throws DukeException If problem encountered during execution of command.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         int size = list.size();
         TaskList newList = new TaskList();
         for (int i = 0; i < size; i++) {
@@ -55,6 +56,6 @@ public class FindCommand extends Command {
             Task content = newList.get(i);
             message.append("\n").append(index).append(".").append(content);
         }
-        ui.printMessage(message.toString());
+        return ui.printMessage(message.toString());
     }
 }
