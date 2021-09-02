@@ -10,9 +10,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -27,7 +28,7 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private TextArea dialog;
     @FXML
     private ImageView displayPicture;
     private Circle circle;
@@ -43,6 +44,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        displayPicture.setClip(new Circle(50,50,50));
         displayPicture.setImage(img);
     }
 
@@ -59,7 +61,7 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         var box = new DialogBox(text, img);
         Background background = new Background(new BackgroundFill(Paint.valueOf("#00bfff"),
-                new CornerRadii(5.0), Insets.EMPTY));
+                new CornerRadii(30.0), Insets.EMPTY));
         box.setBackground(background);
         return box;
     }
@@ -67,7 +69,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var box = new DialogBox(text, img);
         Background background = new Background(new BackgroundFill(Paint.valueOf("#7fffd4"),
-                new CornerRadii(5.0), Insets.EMPTY));
+                new CornerRadii(30.0), Insets.EMPTY));
         box.setBackground(background);
         box.flip();
         return box;
