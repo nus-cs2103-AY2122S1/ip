@@ -36,7 +36,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         list.add(task);
-        storage.save(this);
+        storage.saveToFile(this);
     }
 
 
@@ -47,7 +47,7 @@ public class TaskList {
      */
     public void markTask(int position) {
         list.get(position - 1).setComplete();
-        storage.save(this);
+        storage.saveToFile(this);
     }
     
     /**
@@ -58,7 +58,7 @@ public class TaskList {
      */
     public void deleteTask(int position) {
         list.remove(position - 1);
-        storage.save(this);
+        storage.saveToFile(this);
     }
 
     /**
@@ -78,11 +78,11 @@ public class TaskList {
     }
 
     /**
-     * A method that returns converts the list into save format.
+     * A method that returns converts the list into saveToFile format.
      * 
-     * @return A string of the list in save format.
+     * @return A string of the list in saveToFile format.
      */
-    public String listDataFormatter() {
+    public String listSaveDataFormatter() {
         StringBuilder result = new StringBuilder();
         for (Task task : this.list) {
             result.append(task.saveFormat()).append("\n");
