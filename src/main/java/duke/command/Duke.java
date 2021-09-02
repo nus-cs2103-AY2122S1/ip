@@ -2,7 +2,6 @@ package duke.command;
 
 import java.io.IOException;
 import java.util.Calendar;
-import java.util.Scanner;
 
 import duke.task.*;
 
