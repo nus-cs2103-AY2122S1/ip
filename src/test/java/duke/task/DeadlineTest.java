@@ -26,7 +26,7 @@ public class DeadlineTest {
     }
 
     @Test
-    public void getBy_dateOfDeadline_DeadlineDateReturned() throws InvalidParamException {
+    public void getBy_dateOfDeadline_deadlineDateReturned() throws InvalidParamException {
         assertEquals("2021-12-25",
                 new Deadline("Finish math homework", "2021-12-25").getBy());
     }

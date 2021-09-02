@@ -28,6 +28,20 @@ public class Duke {
     }
 
     /**
+     * Returns the logo of Gary.
+     *
+     * @return String representing the logo of Gary.
+     */
+    public String getLogo() {
+        String logo = "  _______              __               _____      __             __    _\n"
+                + "|      ____|          /  ^  \\         |      _    \\   \\  \\        /  /  |  |\n"
+                + "|    |  ___          /  /_\\  \\      |    |_|    |   \\  \\  /  /     |  |\n"
+                + "|    ||_    |      /      __     \\    |    __    <        \\      /        |_|\n"
+                + "|    |__| |    /      /    \\     \\  |    |  \\    \\        |   |            _  \n"
+                + "|______|  /__/        \\__\\|_ |       \\_\\     |_|         |_|\n";
+        return logo;
+    }
+    /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */

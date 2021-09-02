@@ -1,5 +1,6 @@
 package duke.gui;
 
+import duke.main.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -7,8 +8,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import duke.main.Duke;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -35,16 +34,18 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Adds a DialogBox to the VBox containg the logo.
+     */
     public void showLogo() {
-        String logo = "  _______              ___            _____      __             __    _\n"
-                + "|      ____|          /  ^  \\         |      _    \\   \\  \\        /  /  |  |\n"
-                + "|    |  ___          /  /_\\  \\      |    |_|    |   \\  \\  /  /     |  |\n"
-                + "|    ||_    |      /      __     \\    |    __    <        \\      /        |_|\n"
-                + "|    |__| |    /      /    \\     \\  |    |  \\    \\        |   |            _  \n"
-                + "|______|  /__/        \\__\\|_ |       \\_\\     |_|         |_|\n";
-        dialogContainer.getChildren().add(DialogBox.getGaryDialog(logo, garyImage));
+        dialogContainer.getChildren().add(DialogBox.getGaryDialog(duke.getLogo(), garyImage));
     }
 
+    /**
+     * Obtains an instance of Duke for this class.
+     *
+     * @param d The Duke that is to be used in this class.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

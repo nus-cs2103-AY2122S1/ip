@@ -53,10 +53,24 @@ public class DialogBox extends HBox {
         dialog.setTranslateX(10);
     }
 
+    /**
+     * Returns a DialogBox (for the user) with the given String and Image.
+     *
+     * @param text String that the dialog will contain.
+     * @param img Image of the user for the user dialog.
+     * @return DialogBox for the user containing the given String and Image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox (for Gary) with the given String and Image.
+     *
+     * @param text String that the dialog will contain.
+     * @param img Image of Gary for the dialog.
+     * @return DialogBox for Gary containing the given String and Image.
+     */
     public static DialogBox getGaryDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

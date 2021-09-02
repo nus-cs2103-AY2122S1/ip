@@ -2,7 +2,11 @@ package duke.main;
 
 import duke.exception.DukeException;
 import duke.exception.NoDescriptionException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Storage;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Encapsulates methods that handle and interpret user input.

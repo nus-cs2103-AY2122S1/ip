@@ -19,7 +19,7 @@ public class TaskTest {
     }
 
     @Test
-    public void getIsDone_undoneTask_falseReturned()  {
+    public void getIsDone_undoneTask_falseReturned() {
         assertFalse(new TaskStub("Return Book").getIsDone());
     }
 
