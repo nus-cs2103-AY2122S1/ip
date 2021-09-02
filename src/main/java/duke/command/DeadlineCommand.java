@@ -34,7 +34,7 @@ public class DeadlineCommand extends Command {
      * @param ui The Ui Duke utilises to interact with the user.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws IOException, DukeException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException, DukeException {
         try {
             if (fullCommand.equals("deadline")) {
                 throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -49,10 +49,12 @@ public class DeadlineCommand extends Command {
             Deadline deadline = new Deadline(description, byDate);
             taskList.storeTask(deadline);
             storage.saveFile(taskList.getAllTasks());
-            ui.showTaskAdded(deadline, taskList);
+            String output = ui.showTaskAdded(deadline, taskList);
+            return output;
 
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            String output = ui.showError(e.getMessage());
+            return output;
         }
     }
 }

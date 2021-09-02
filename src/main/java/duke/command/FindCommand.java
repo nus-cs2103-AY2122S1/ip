@@ -29,7 +29,8 @@ public class FindCommand extends Command {
      * @param ui The Ui Duke utilises to interact with the user.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) {
-        ui.showFind(taskList, keyword);
+    public String execute(Storage storage, TaskList taskList, Ui ui) {
+        String output = ui.showFind(taskList, keyword);
+        return output;
     }
 }

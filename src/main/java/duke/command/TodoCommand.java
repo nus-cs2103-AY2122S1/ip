@@ -33,7 +33,7 @@ public class TodoCommand extends Command {
      * @param ui The Ui Duke utilises to interact with the user.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws IOException, DukeException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException, DukeException {
         try {
             if (fullCommand.equals("todo")) {
                 throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -43,10 +43,12 @@ public class TodoCommand extends Command {
             Todo todo = new Todo(todoDescription);
             taskList.storeTask(todo);
             storage.saveFile(taskList.getAllTasks());
-            ui.showTaskAdded(todo, taskList);
+            String output = ui.showTaskAdded(todo, taskList);
+            return output;
 
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            String output = ui.showError(e.getMessage());
+            return output;
         }
     }
 }

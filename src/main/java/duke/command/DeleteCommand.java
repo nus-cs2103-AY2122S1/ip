@@ -32,11 +32,12 @@ public class DeleteCommand extends Command {
      * @param ui The Ui Duke utilises to interact with the user.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
         Integer taskNo = Integer.parseInt(deleteDescription);
         Task deletedTask = taskList.getSpecificTask(taskNo);
         taskList.deleteTask(taskNo);
         storage.saveFile(taskList.getAllTasks());
-        ui.showTaskDeleted(deletedTask, taskList);
+        String output = ui.showTaskDeleted(deletedTask, taskList);
+        return output;
     }
 }
