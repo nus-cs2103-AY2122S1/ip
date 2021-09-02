@@ -1,9 +1,9 @@
 package duke.io;
 
-import duke.data.TaskList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import duke.data.TaskList;
 
 /**
  * UI class that handles all output to the console for the program (No input).

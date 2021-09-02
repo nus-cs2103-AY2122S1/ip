@@ -3,7 +3,7 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Deadline extends Task{
+public class Deadline extends Task {
     protected LocalDate deadline;
 
     /**
@@ -68,7 +68,10 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + this.description + " (by: " + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D][" + getStatusIcon() + "] "
+                + this.description + " (by: "
+                + this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ")";
     }
 
     /**
@@ -88,7 +91,9 @@ public class Deadline extends Task{
                 return false;
             } else if (!this.description.equals(otherDeadline.description)) {
                 return false;
-            } else return this.deadline.equals(otherDeadline.deadline);
+            } else {
+                return this.deadline.equals(otherDeadline.deadline);
+            }
         }
     }
 }

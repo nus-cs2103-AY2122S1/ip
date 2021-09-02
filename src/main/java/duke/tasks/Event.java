@@ -3,7 +3,10 @@ package duke.tasks;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class Event extends Task{
+/**
+ * A Task that describes an Event, having a description and date of event
+ */
+public class Event extends Task {
     protected LocalDate dateTime;
 
     /**
@@ -67,7 +70,10 @@ public class Event extends Task{
      */
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + this.description + " (at: " + this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E][" + getStatusIcon() + "] "
+                + this.description + " (at: "
+                + this.dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ")";
     }
 
     /**
@@ -87,7 +93,9 @@ public class Event extends Task{
                 return false;
             } else if (!this.description.equals(otherEvent.description)) {
                 return false;
-            } else return this.dateTime.equals(otherEvent.dateTime);
+            } else {
+                return this.dateTime.equals(otherEvent.dateTime);
+            }
         }
     }
 }

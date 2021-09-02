@@ -10,7 +10,7 @@ public abstract class Task {
     protected boolean isDone;
 
     /**
-     * Constructor accepting only description, isDone is false by default.
+     * Constructs a Task using only description, isDone is false by default.
      *
      * @param description A description of the task to be done
      */
@@ -116,8 +116,9 @@ public abstract class Task {
 
             if (this.isDone != otherTask.isDone) {
                 return false;
-            } else
+            } else {
                 return this.description.equals(otherTask.description);
+            }
         }
     }
 }

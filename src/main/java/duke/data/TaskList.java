@@ -1,18 +1,17 @@
 package duke.data;
 
-import duke.io.Command;
-import duke.tasks.Task;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.tasks.Task;
+
 /**
  * An encapsulation of a list of tasks handled by our program.
  */
 public class TaskList {
-    List<Task> taskData;
+    protected List<Task> taskData;
 
     /**
      * Initialises the tasklist with an empty arraylist.
@@ -88,7 +87,7 @@ public class TaskList {
     }
 
     /**
-     * Contains a new TaskList containing Tasks whose description contains the given keyword/String
+     * Returns a new TaskList containing Tasks whose description contains the given keyword/String
      *
      * @param keyword A String to be used to filter Tasks with descriptions
      * @return A new TaskList of smaller/equal size

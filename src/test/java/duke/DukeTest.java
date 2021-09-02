@@ -1,17 +1,18 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.Test;
+
 import duke.data.TaskList;
 import duke.io.Command;
 import duke.io.Parser;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Todo;
-import org.junit.jupiter.api.Test;
-
-import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class DukeTest {
     @Test
@@ -27,7 +28,8 @@ public class DukeTest {
                     Parser.parse("deadline description /by 2021-08-28"));
             assertEquals(new Command(Command.CommandName.EVENT, new String[]{"description", "2021-08-28"}),
                     Parser.parse("event description /at 2021-08-28"));
-            assertEquals(new Command(Command.CommandName.DATE, new String[]{"2021-08-28"}), Parser.parse("date 2021-08-28"));
+            assertEquals(new Command(Command.CommandName.DATE, new String[]{"2021-08-28"}),
+                    Parser.parse("date 2021-08-28"));
         } catch (DukeException e) {
             throw new AssertionError("Test case failed, unintended error in parsing");
         }

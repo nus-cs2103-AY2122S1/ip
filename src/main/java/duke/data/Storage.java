@@ -11,10 +11,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.Todo;
 
 /**
  * Encapsulates the saving and loading of task data from a save file.
@@ -58,7 +59,7 @@ public class Storage {
      * @return The TaskList representing the tasks retrieved from the save file
      * @throws IOException Thrown when there is an exception while creating the save file (if it doesn't already exist)
      */
-    public TaskList loadTaskData() throws IOException {
+    public TaskList loadTaskData() throws IOException, DukeException {
         this.taskFile.getParentFile().mkdirs();
         if (!this.taskFile.createNewFile()) {
             // Save file exists, so load it
@@ -67,19 +68,23 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String task = sc.nextLine();
 
+                // Index 0 should contain the identifier for the type of task being loaded
+                // The rest of the indices are arguments that provide more information (E.g. description, deadline, etc)
                 String[] taskDetails = task.split("\\|");
                 boolean taskDone = Objects.equals(taskDetails[1], "1");
 
                 switch (taskDetails[0]) {
-                    case "T":
-                        taskData.add(new Todo(taskDetails[2], taskDone));
-                        break;
-                    case "D":
-                        taskData.add(new Deadline(taskDetails[2], LocalDate.parse(taskDetails[3]), taskDone));
-                        break;
-                    case "E":
-                        taskData.add(new Event(taskDetails[2], LocalDate.parse(taskDetails[3]), taskDone));
-                        break;
+                case "T":
+                    taskData.add(new Todo(taskDetails[2], taskDone));
+                    break;
+                case "D":
+                    taskData.add(new Deadline(taskDetails[2], LocalDate.parse(taskDetails[3]), taskDone));
+                    break;
+                case "E":
+                    taskData.add(new Event(taskDetails[2], LocalDate.parse(taskDetails[3]), taskDone));
+                    break;
+                default:
+                    throw new DukeException("Error loading Task. Unrecognised Task identifier");
                 }
             }
 
