@@ -12,19 +12,17 @@ import java.util.Scanner;
  * Represents the storage of the Duke application that deals with loading from and updating the tasks in the data file.
  */
 public class Storage {
-    private final String DATA_FOLDER_PATH;
-    private final String DATA_FILE_PATH;
+    private String dataFolderPath;
+    private String dataFilePath;
 
     /**
      * Constructor for Storage.
      * Sets the data folder and file path.
      *
-     * @param data_folder_path Path to the data folder.
-     * @param data_file_path Path to the data file.
+     * @param dataFilePath Path to the data file.
      */
-    public Storage(String data_folder_path, String data_file_path) {
-        this.DATA_FOLDER_PATH = data_folder_path;
-        this.DATA_FILE_PATH = data_file_path;
+    public Storage(String dataFilePath) {
+        this.dataFilePath = dataFilePath;
     }
 
     /**
@@ -34,15 +32,13 @@ public class Storage {
      * @throws DukeException If IOException is thrown while creating a new datafile, data file is not found
      * or there exists an invalid file type in the data file.
      */
-    public ArrayList<Task> load() throws DukeException{
-        File directory = new File(DATA_FOLDER_PATH);
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
+    public ArrayList<Task> load() throws DukeException {
         File f;
         try {
-            f = new File(DATA_FILE_PATH);
+            f = new File(dataFilePath);
             if (!f.exists()) {
+                File directory = new File(f.getParent());
+                directory.mkdir();
                 f.createNewFile();
             }
         } catch (IOException e) {
@@ -51,28 +47,28 @@ public class Storage {
 
         Scanner s;
         try {
-           s = new Scanner(f); // create a Scanner using the File as the source
+            s = new Scanner(f); // create a Scanner using the File as the source
         } catch (FileNotFoundException e) {
             throw new DukeException(e.getMessage());
         }
         ArrayList<Task> tasks = new ArrayList<>();
         while (s.hasNext()) {
             String l = s.nextLine();
-            String[] TaskEntry = l.split("\\|");
-            switch(TaskEntry[0]) {
-                case "T":
-                    tasks.add(new Todo(TaskEntry[2]));
-                    break;
-                case "D":
-                    tasks.add(new Deadline(TaskEntry[2], LocalDate.parse(TaskEntry[3])));
-                    break;
-                case "E":
-                    tasks.add(new Event(TaskEntry[2], LocalDate.parse(TaskEntry[3])));
-                    break;
-                default:
-                    throw new DukeException("Invalid duke.Task Type stored in Data File");
+            String[] taskEntry = l.split("\\|");
+            switch(taskEntry[0]) {
+            case "T":
+                tasks.add(new Todo(taskEntry[2]));
+                break;
+            case "D":
+                tasks.add(new Deadline(taskEntry[2], LocalDate.parse(taskEntry[3])));
+                break;
+            case "E":
+                tasks.add(new Event(taskEntry[2], LocalDate.parse(taskEntry[3])));
+                break;
+            default:
+                throw new DukeException("Invalid duke.Task Type stored in Data File");
             }
-            if (TaskEntry[1].equals("X")) {
+            if (taskEntry[1].equals("X")) {
                 tasks.get(tasks.size() - 1).markAsDone();
             }
         }
@@ -85,9 +81,9 @@ public class Storage {
      * @param tasks Updated task list.
      * @throws DukeException If there is an IOException while writing to the data file.
      */
-    public void updateTasks(TaskList tasks) throws DukeException{
+    public void updateTasks(TaskList tasks) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(DATA_FILE_PATH);
+            FileWriter fw = new FileWriter(dataFilePath);
             for (int i = 0; i < tasks.getLength(); i++) {
                 fw.write(tasks.getTask(i).toStringData() + "\n");
             }

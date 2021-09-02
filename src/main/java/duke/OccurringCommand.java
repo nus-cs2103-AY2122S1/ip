@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Represents occurring command that shows all tasks that occurs on a given date.
  */
 public class OccurringCommand extends Command {
-    LocalDate queryDate;
+    private LocalDate queryDate;
 
     /**
      * Constructor for OccurringCommand.

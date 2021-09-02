@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 
 /**
  * Represents a command to add tasks to the task list.
@@ -40,17 +39,17 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         Task newTask;
         switch (taskType) {
-            case "todo":
-                newTask = new Todo(description);
-                break;
-            case "deadline":
-                newTask = new Deadline(description, date);
-                break;
-            case "event":
-                newTask = new Event(description, date);
-                break;
-            default:
-                throw new DukeException("Invalid task type provided!");
+        case "todo":
+            newTask = new Todo(description);
+            break;
+        case "deadline":
+            newTask = new Deadline(description, date);
+            break;
+        case "event":
+            newTask = new Event(description, date);
+            break;
+        default:
+            throw new DukeException("Invalid task type provided!");
         }
         tasks.addTask(newTask);
         storage.updateTasks(tasks);

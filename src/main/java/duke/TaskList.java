@@ -1,15 +1,13 @@
 package duke;
 
-import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
-    
     public TaskList() {
         tasks = new ArrayList<Task>();
     }
-    
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -30,7 +28,7 @@ public class TaskList {
         ArrayList<Task> relevantTasks = new ArrayList<Task>();
         for (Task task: tasks) {
             if ((task instanceof Deadline && ((Deadline) task).by.equals(date))
-                    || (task instanceof Event  && ((Event) task).at.equals(date))) {
+                    || (task instanceof Event && ((Event) task).at.equals(date))) {
                 relevantTasks.add(task);
             }
         }

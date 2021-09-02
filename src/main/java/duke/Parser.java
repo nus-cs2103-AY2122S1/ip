@@ -37,7 +37,7 @@ public class Parser {
                 return new SetDoneCommand(Integer.parseInt(inputList[1]) - 1);
             case "todo":
                 return new AddCommand("todo",
-                        input.replaceFirst(Pattern.quote("todo"),"").trim(),
+                        input.replaceFirst(Pattern.quote("todo"), "").trim(),
                         null);
             case "deadline":
                 String[] deadlineInfo = input.replaceFirst(Pattern.quote("deadline"),

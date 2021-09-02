@@ -1,6 +1,6 @@
 package duke;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
     private String query;
 
     public FindCommand(String query) throws DukeException {

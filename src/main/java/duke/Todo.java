@@ -1,7 +1,5 @@
 package duke;
 
-import java.time.format.DateTimeFormatter;
-
 public class Todo extends Task {
 
     public Todo(String description) {
