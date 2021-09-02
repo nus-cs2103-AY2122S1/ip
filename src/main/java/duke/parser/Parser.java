@@ -1,5 +1,9 @@
 package duke.parser;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+
 import duke.command.Add;
 import duke.command.Delete;
 import duke.command.Done;
@@ -20,10 +24,6 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
 import duke.ui.Ui;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 /**
  * Encapsulates the processing of user inputs to duke.
@@ -103,7 +103,8 @@ public class Parser {
         }
     }
 
-    private Task processTaskDescriptions(TaskTypes t, String userInput) throws InvalidDateTimeException, NoTaskDescriptionException, NoDateTimeException {
+    private Task processTaskDescriptions(TaskTypes t, String userInput) throws InvalidDateTimeException,
+            NoTaskDescriptionException, NoDateTimeException {
         int spaceIndex = userInput.indexOf(" ");
         String taskDescription = userInput.substring(spaceIndex + 1);
         if (taskDescription.isBlank() || spaceIndex == -1) {

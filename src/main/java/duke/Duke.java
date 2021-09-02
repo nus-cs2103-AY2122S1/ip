@@ -1,13 +1,13 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.command.DukeCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.util.Scanner;
 
 /**
  * Encapsulate a bot which helps user to keep track of a list of task.
@@ -52,6 +52,11 @@ public class Duke {
         sc.close();
     }
 
+    /**
+     * Starts the program.
+     *
+     * @param args Arguments needed to start to program
+     */
     public static void main(String[] args) {
         Duke duke = new Duke();
         duke.start();
