@@ -32,6 +32,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Duke chat-bot for this GUI program.
+     *
+     * @param duke Duke instance to start the GUI program.
+     */
     public void setDuke(Duke duke) {
         this.duke = duke;
     }
