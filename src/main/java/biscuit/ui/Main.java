@@ -1,6 +1,7 @@
 package biscuit.ui;
 
 import java.io.IOException;
+import java.util.List;
 
 import biscuit.Biscuit;
 import javafx.application.Application;
@@ -10,15 +11,21 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Biscuit using FXML.
  */
 public class Main extends Application {
 
-    private Biscuit biscuit = new Biscuit("data/biscuit.csv");
+    private String defaultPath = "data/biscuit.csv";
 
     @Override
     public void start(Stage stage) {
         try {
+            // Get command-line argument for file path of save file
+            List<String> params = getParameters().getRaw();
+            if (params.size() == 1) {
+                defaultPath = params.get(0);
+            }
+            Biscuit biscuit = new Biscuit(defaultPath);
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);

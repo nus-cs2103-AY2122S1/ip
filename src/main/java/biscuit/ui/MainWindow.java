@@ -28,11 +28,21 @@ public class MainWindow extends AnchorPane {
     private Biscuit biscuit;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaBiscuit.jpg"));
+    private Image biscuitImage = new Image(this.getClass().getResourceAsStream("/images/DaBiscuit.jpg"));
 
+    /**
+     * Initialises MainWindow and outputs welcome message
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String logo = "\n  \u2588\u2584\u2584\u2003\u2588\u2003\u2588\u2580\u2003\u2588\u2580"
+                + "\u2580\u2003\u2588\u2591\u2588\u2003\u2588\u2003\u2580\u2588\u2580\n"
+                + "  \u2588\u2584\u2588\u2003\u2588\u2003\u2584\u2588\u2003\u2588\u2584\u2584"
+                + "\u2003\u2588\u2584\u2588\u2003\u2588\u2003\u2591\u2588\u2591\n\n";
+        dialogContainer.getChildren().addAll(
+                DialogBox.getBiscuitDialog(logo + "Woof! I'm Biscuit.\nWhat can I do for you?", biscuitImage)
+        );
     }
 
     public void setBiscuit(Biscuit b) {
@@ -40,8 +50,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Biscuit's reply and then appends them
+     * to the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
@@ -58,7 +68,7 @@ public class MainWindow extends AnchorPane {
         } finally {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
+                    DialogBox.getBiscuitDialog(response, biscuitImage)
             );
             userInput.clear();
         }

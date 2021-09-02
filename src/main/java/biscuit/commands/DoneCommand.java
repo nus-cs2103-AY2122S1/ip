@@ -38,11 +38,11 @@ public class DoneCommand extends Command {
                 storage.save();
                 return "Nice! I've marked this task as done, woof!\n\t" + current;
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! Please enter a valid number"
+                throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter a valid number"
                         + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
             }
         } else {
-            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The done task number cannot be empty.");
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The done task number cannot be empty.");
         }
     }
 }

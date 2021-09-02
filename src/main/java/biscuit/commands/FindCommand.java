@@ -45,7 +45,7 @@ public class FindCommand extends Command {
                 message = new StringBuilder("No matching tasks found.");
             }
         } else {
-            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The search keyword cannot be empty.");
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The search keyword cannot be empty.");
         }
         return message.toString();
     }

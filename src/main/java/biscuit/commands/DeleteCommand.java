@@ -40,11 +40,11 @@ public class DeleteCommand extends Command {
                 return "Noted. I've removed the following task:\n\t" + toDelete
                     + "\nNow you have " + taskList.size() + " tasks in the list.";
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
-                throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! Please enter a valid number"
+                throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! Please enter a valid number"
                         + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");
             }
         } else {
-            throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The delete task number cannot be empty.");
+            throw new BiscuitException("\u0ED2(\u25C9\u1D25\u25C9)\u096D OOPS!!! The delete task number cannot be empty.");
         }
     }
 }
