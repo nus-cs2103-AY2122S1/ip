@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -25,14 +24,14 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         String[] inputs = this.userInput.split(" ");
         int ind = Integer.valueOf(inputs[1]) - 1;
 
         String result = "Noted. I've removed this task:\n  " + tasks.get(ind).toString() + "\n";
         tasks.delete(ind);
         result += "Now you have " + tasks.size() + " tasks in the list.";
-        System.out.println(Ui.tabAndFormat(result));
+        return result;
     }
 
 }

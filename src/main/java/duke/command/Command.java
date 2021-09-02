@@ -6,7 +6,7 @@ package duke.command;
 public abstract class Command {
 
     /** Method to execute the specific command. */
-    public abstract void execute();
+    public abstract String execute();
 
     /**
      * Method to check if we are exiting the program.

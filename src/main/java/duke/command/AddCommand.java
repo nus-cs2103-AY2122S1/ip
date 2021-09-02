@@ -2,7 +2,6 @@ package duke.command;
 
 import java.time.format.DateTimeParseException;
 
-import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -36,7 +35,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         Task newTask = null;
         String[] inputs = this.userInput.split(" ", 2);
         try {
@@ -69,19 +68,15 @@ public class AddCommand extends Command {
                 break;
             }
         } catch (DateTimeParseException e) {
-            System.out.println(
-                    Ui.tabAndFormat(
-                            "☹ OOPS!!! Please enter an appropriate date (and optionally, 24-hour time)\n"
-                                + "Format: YYYY-MM-DD HH:MM"
-                    )
-            );
-            return;
+            return "☹ OOPS!!! Please enter an appropriate date (and optionally, 24-hour time)\n"
+                                + "Format: YYYY-MM-DD HH:MM";
+
         }
         this.tasks.add(newTask);
         String returnString = "Got it. I've added this task:\n  "
                 + newTask.toString() + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.";
-        System.out.println(Ui.tabAndFormat(returnString));
+        return returnString;
     }
 
 
