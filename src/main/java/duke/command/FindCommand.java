@@ -3,7 +3,6 @@ package duke.command;
 import java.util.ArrayList;
 
 import duke.DukeException;
-import duke.Ui;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -30,23 +29,23 @@ public class FindCommand extends Command {
      * Executes the Find command.
      *
      * @param tasks   The task list to execute the command on.
-     * @param ui      The user interface.
      * @param storage The storage for the tasks.
+     * @return a string output.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         ArrayList<Task> matchingTasks = tasks.findTask(keyword);
 
         if (matchingTasks.size() == 0) {
-            ui.showMessage("No matching tasks found for '" + keyword + "'. Try another keyword.");
-            return;
+            return "No matching tasks found for '" + keyword + "'. Try another keyword.";
         }
-        ui.showMessage("I found these matching tasks in your list for '" + keyword + "':");
+        ArrayList<String> taskStrings = new ArrayList<>();
         for (int i = 0; i < matchingTasks.size(); i++) {
             Task task = matchingTasks.get(i);
             int num = i + 1;
-            ui.showMessage((num + "." + task.toString()));
+            taskStrings.add(num + "." + task.toString());
         }
+        return formatOutput("I found these matching tasks in your list for '" + keyword + "':",formatOutput(taskStrings));
     }
 
     /**

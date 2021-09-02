@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Ui;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -34,18 +33,16 @@ public class AddCommand extends Command {
      * Executes the add task command.
      *
      * @param tasks   The task list to execute the command on.
-     * @param ui      The user interface.
      * @param storage The storage for the tasks.
      * @throws DukeException
+     * @return a string output.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task task = tasks.addTask(taskType, taskDescription);
-
-        ui.showMessage("I've added this task:");
-        ui.showMessage(task.toString());
-        ui.showMessage("Now you have " + tasks.getListSize() + " tasks in the list.");
-
+        
         storage.save(tasks.getListData());
+        
+        return formatOutput("I've added this task:", task.toString(), "Now you have " + tasks.getListSize() + " tasks in the list.");
     }
 
     /**

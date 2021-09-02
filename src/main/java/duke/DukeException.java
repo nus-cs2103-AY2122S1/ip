@@ -27,6 +27,6 @@ public class DukeException extends Exception {
      */
     @Override
     public String toString() {
-        return "∑(O_O;) Oh no!! " + getMessage();
+        return "(O_O;) Oh no!! " + getMessage();
     }
 }
