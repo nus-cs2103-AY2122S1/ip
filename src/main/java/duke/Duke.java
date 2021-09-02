@@ -6,8 +6,8 @@ import duke.commands.Command;
 import duke.data.TaskList;
 import duke.data.exception.DukeException;
 import duke.parser.Parser;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * Entry point of the Duke application.
@@ -19,6 +19,10 @@ public class Duke {
     private final TaskList tasks;
     private final Parser parser;
 
+    /**
+     * Constructor for Duke instance.
+     * @param filePath The path where the data file is to be stored
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(new File(filePath));

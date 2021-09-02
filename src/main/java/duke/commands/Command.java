@@ -1,8 +1,8 @@
 package duke.commands;
 
 import duke.data.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * Represents an executable command.
@@ -16,7 +16,7 @@ public abstract class Command {
      * @param ui User interface class
      * @param storage Storage class
      */
-    abstract public void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Returns if the command was to exit the application.

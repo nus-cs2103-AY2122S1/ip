@@ -1,10 +1,10 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.data.TaskList;
 import duke.storage.Storage;
 import duke.ui.Ui;
-
-import java.util.ArrayList;
 
 /**
  * Finds and lists events with the keywords provided by the user.

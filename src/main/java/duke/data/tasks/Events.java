@@ -52,8 +52,8 @@ public class Events extends Task {
 
         Events event = (Events) o;
 
-        return this.getName().equals(event.getName()) &&
-                this.isCompleted() == event.isCompleted() &&
-                this.date.equals(event.getDate());
+        return this.getName().equals(event.getName())
+                && this.isCompleted() == event.isCompleted()
+                && this.date.equals(event.getDate());
     }
 }

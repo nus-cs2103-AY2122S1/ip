@@ -1,8 +1,8 @@
 package duke.commands;
 
 import duke.data.TaskList;
-import duke.ui.Ui;
 import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * Marks a task as complete.

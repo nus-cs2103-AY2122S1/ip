@@ -19,6 +19,10 @@ import duke.data.tasks.ToDos;
 public class Storage {
     private final File filePath;
 
+    /**
+     * Constructor for Storage instance.
+     * @param filePath The path where the data file is to be stored
+     */
     public Storage(File filePath) {
         this.filePath = filePath;
 
@@ -43,29 +47,31 @@ public class Storage {
                     String type = s.next();
 
                     switch (type) {
-                        case "T":
-                            loadedTasks.add(
-                                    new ToDos(
-                                            s.next().equals("1"),
-                                            s.next()
-                                    ));
-                            break;
-                        case "D":
-                            loadedTasks.add(
-                                    new Deadlines(
-                                            s.next().equals("1"),
-                                            s.next(),
-                                            s.next()
-                                    ));
-                            break;
-                        case "E":
-                            loadedTasks.add(
-                                    new Events(
-                                            s.next().equals("1"),
-                                            s.next(),
-                                            s.next()
-                                    ));
-                            break;
+                    case "T":
+                        loadedTasks.add(
+                                new ToDos(
+                                        s.next().equals("1"),
+                                        s.next()
+                                ));
+                        break;
+                    case "D":
+                        loadedTasks.add(
+                                new Deadlines(
+                                        s.next().equals("1"),
+                                        s.next(),
+                                        s.next()
+                                ));
+                        break;
+                    case "E":
+                        loadedTasks.add(
+                                new Events(
+                                        s.next().equals("1"),
+                                        s.next(),
+                                        s.next()
+                                ));
+                        break;
+                    default:
+                        break;
                     }
                 }
                 s.close();
