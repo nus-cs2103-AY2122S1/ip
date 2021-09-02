@@ -10,9 +10,8 @@ public class ToDo extends Task {
      *
      * @param description description of ToDo
      * @param isDone indicates if ToDo has been completed
-     * @param hasNotif indicates if a notif needs to be sent to user for the creation of this ToDo.
      */
-    public ToDo(String description, boolean isDone, boolean hasNotif) {
+    public ToDo(String description, boolean isDone) {
         super(description, isDone);
         this.category = Category.TODO;
     }

@@ -56,11 +56,13 @@ public class Duke extends Application {
         System.out.println(ui.showWelcomeMessage1());
         System.out.println(Ui.LOGO);
         System.out.println(ui.showWelcomeMessage2());
+        //noinspection finally
         try {
             System.out.println(storage.loadFileToList());
         } catch (FileNotFoundException e) {
             System.out.println(ui.showLoadingError());
         } finally {
+            //noinspection InfiniteLoopStatement
             while (true) {
                 String command = ui.getUserCommand();
                 Parser parser = new Parser(this);
