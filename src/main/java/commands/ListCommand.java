@@ -9,7 +9,6 @@ import viper.Ui;
  * Lists everything in the taskList.
  */
 public class ListCommand extends Command {
-    
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getSize() > 0) {

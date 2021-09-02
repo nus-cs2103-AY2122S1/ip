@@ -1,19 +1,24 @@
 package commands;
 
+import java.io.IOException;
+
 import tasks.Task;
 import viper.Storage;
 import viper.TaskList;
 import viper.Ui;
 
-import java.io.IOException;
-
 /**
  * Marks task specified by user as done, using index.
  */
 public class DoneCommand extends Command {
-    String cmdLine;
-    int index;
-    
+    protected String cmdLine;
+    protected int index;
+
+    /**
+     * Marks task as done based on user input.
+     *
+     * @param cmdLine User input.
+     */
     public DoneCommand(String cmdLine) {
         this.cmdLine = cmdLine;
         String[] splitLine = cmdLine.split(" ", 2);

@@ -8,7 +8,6 @@ import viper.Ui;
  * Exits Viper and shows a bye message.
  */
 public class ByeCommand extends Command {
-    
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.showBye();

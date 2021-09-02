@@ -9,7 +9,13 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected Instruction type;
-    
+
+    /**
+     * Initialises a task with description and its type.
+     *
+     * @param description Description of given task.
+     * @param type Type of task, can be either Todo, event or deadline.
+     */
     public Task(String description, Instruction type) {
         this.description = description;
         this.isDone = false;

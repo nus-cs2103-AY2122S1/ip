@@ -1,7 +1,12 @@
 package viper;
 
-import commands.*;
-
+import commands.AddCommand;
+import commands.ByeCommand;
+import commands.Command;
+import commands.DeleteCommand;
+import commands.DoneCommand;
+import commands.FindCommand;
+import commands.ListCommand;
 import exceptions.DukeException;
 
 /**
@@ -11,6 +16,7 @@ public class Parser {
 
     /**
      * Returns a command based on user input.
+     *
      * @param str User input.
      * @return Command class.
      * @throws DukeException If user input is invalid.
@@ -24,9 +30,9 @@ public class Parser {
                 return new DoneCommand(str);
             } else if (splitStr[0].equalsIgnoreCase("delete")) {
                 return new DeleteCommand(str);
-            } else if (splitStr[0].equalsIgnoreCase("todo") || 
-                    splitStr[0].equalsIgnoreCase("deadline") ||
-                    splitStr[0].equalsIgnoreCase("event")) {
+            } else if (splitStr[0].equalsIgnoreCase("todo")
+                    || splitStr[0].equalsIgnoreCase("deadline")
+                    || splitStr[0].equalsIgnoreCase("event")) {
                 return new AddCommand(str);
             } else if (splitStr[0].equalsIgnoreCase("find")) {
                 return new FindCommand(splitStr[1]);
