@@ -45,7 +45,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list of Tasks with a confirmation message printed out after.
-     * @param task The duke.tasks.Task to be added to the list of Tasks
+     * @param task The duke.tasks.Task to be added to the list of Tasks.
      */
     public String addToList(Task task) {
         taskList.add(task);
@@ -60,7 +60,6 @@ public class TaskList {
      *
      * @throws EmptyListException if the list of Tasks is empty and there is nothing to be printed.
      */
-
     public String displayList() throws EmptyListException {
         if (taskList.size() == 0) {
             throw new EmptyListException();
@@ -75,18 +74,16 @@ public class TaskList {
      * @throws EmptyListException If the list of Tasks is empty and there is nothing to be marked as Done.
      * @throws InvalidIndexException If the index of the Task provided is out of range of the current list of Tasks.
      */
-
-    public String markDone(String taskIndex) throws EmptyListException, InvalidIndexException {
-        int intTaskIndex = Integer.parseInt(taskIndex) - 1; // -1 because user inputs start from 1 not 0
+    public String markDone(int taskIndex) throws EmptyListException, InvalidIndexException {
         int taskListSize = taskList.size();
 
         if (taskListSize == 0) {
             throw new EmptyListException();
-        } else if (intTaskIndex < 0 || intTaskIndex >= taskListSize) {
-            throw new InvalidIndexException(1, taskListSize, intTaskIndex + 1);
+        } else if (taskIndex < 0 || taskIndex >= taskListSize) {
+            throw new InvalidIndexException(1, taskListSize, taskIndex + 1);
         }
 
-        Task task = taskList.get(intTaskIndex);
+        Task task = taskList.get(taskIndex);
         if (task.isDone()) {
             return task + " has already been marked as done!";
         }
@@ -101,9 +98,9 @@ public class TaskList {
      * @param deadline The Deadline to be added to the list of Tasks which is the whole input barring the command.
      * @throws IncorrectFormatException If the deadline command is used but a "/by" is not present in the message.
      */
-
     public String addDeadline(String deadline) throws IncorrectFormatException,
             InvalidDateTimeException, MessageEmptyException {
+
         String[] result = deadline.split("/by");
 
         if (result.length == 0) {
@@ -111,6 +108,8 @@ public class TaskList {
         } else if (result.length == 1) {
             // throws an error if "/by" is not present in the message
             throw new IncorrectFormatException("deadline", "/by");
+        } else if (result[0].trim().equals("")) {
+            throw new MessageEmptyException();
         }
 
         String description = result[0].trim(); // trims the additional spaces to the left and right of "by"
@@ -134,7 +133,6 @@ public class TaskList {
      *
      * @param todo Todo to be added to the list of Tasks.
      */
-
     public String addTodo(String todo) {
         Todo tempTask = new Todo(todo);
         return addToList(tempTask);
@@ -145,7 +143,6 @@ public class TaskList {
      * @param event The Event to be added to the list of Tasks, which is the entire user input barring the command.
      * @throws IncorrectFormatException If the event command is used but a "/at" is not present in the message.
      */
-
     public String addEvent(String event) throws IncorrectFormatException, MessageEmptyException,
             InvalidDateTimeException, InvalidDurationException {
         String[] result = event.split("/at");
@@ -155,6 +152,8 @@ public class TaskList {
         } else if (result.length == 1) {
             // throws an error if "/at" is not present in the message
             throw new IncorrectFormatException("event", "/at");
+        } else if (result[0].trim().equals("")) {
+            throw new MessageEmptyException();
         }
         String description = result[0].trim(); // trims the additional spaces to the left and right of "at"
         String at = result[1].trim(); // trims the additional spaces to the left and right of "at"
@@ -201,18 +200,16 @@ public class TaskList {
      * @throws EmptyListException If the list of Tasks is empty and there is nothing to be deleted.
      * @throws InvalidIndexException If the index of the Task provided is out of range of the current list of Tasks.
      */
-
-    public String deleteTask(String taskIndex) throws EmptyListException, InvalidIndexException {
-        int intTaskIndex = Integer.parseInt(taskIndex) - 1; // -1 because user inputs start from 1 not 0
+    public String deleteTask(int taskIndex) throws EmptyListException, InvalidIndexException {
         int taskListSize = taskList.size();
 
         if (taskListSize == 0) {
             throw new EmptyListException();
-        } else if (intTaskIndex < 0 || intTaskIndex >= taskListSize) {
-            throw new InvalidIndexException(1, taskListSize, intTaskIndex + 1);
+        } else if (taskIndex < 0 || taskIndex >= taskListSize) {
+            throw new InvalidIndexException(1, taskListSize, taskIndex + 1);
         }
 
-        Task task = taskList.remove(intTaskIndex);
+        Task task = taskList.remove(taskIndex);
 
         String message = "Noted. I've removed this task:\n" + task;
 

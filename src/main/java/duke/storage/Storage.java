@@ -61,7 +61,7 @@ public class Storage {
      *
      * @return an arraylist of tasks which contains any task read from the data file.
      * @throws IOException  if the named file exists but is a directory rather than a regular file,
-     * does not exist but cannot be created, or cannot be opened for any other reason.
+     *        does not exist but cannot be created, or cannot be opened for any other reason.
      * @throws DataFileChangedException if the data file was changed and any entry contains a wrong format.
      */
     public ArrayList<Task> load() throws IOException, DataFileChangedException {

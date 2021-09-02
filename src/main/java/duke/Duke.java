@@ -35,7 +35,6 @@ public class Duke {
      * Constructor for the Duke chatbot.
      * Loads any pre-existing data from the provided filePath.
      */
-
     public Duke() {
         ui = new Ui();
         storage = new Storage(LOCATION_OF_FILE);
@@ -53,12 +52,11 @@ public class Duke {
     /**
      * Runs the command line version of the Duke chat bot.
      */
-
     private void run() {
 
         String input;
 
-        ui.printMessage(Ui.greet());
+        ui.cliGreet();
 
         /* user input trimmed to remove unwanted spaces at the front and back of user input
         allows for greater margin of error when typing in commands */
@@ -74,7 +72,7 @@ public class Duke {
             ui.printMessage(e.getMessage());
         }
 
-        ui.printMessage(ui.exit());
+        ui.cliExit();
     }
 
     /**

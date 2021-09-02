@@ -6,9 +6,7 @@ import java.util.Arrays;
 
 import duke.exception.DukeException;
 import duke.exception.EmptyCommandException;
-import duke.exception.IncorrectFormatException;
 import duke.exception.InvalidCommandException;
-import duke.exception.InvalidDateTimeException;
 import duke.exception.MessageEmptyException;
 import duke.exception.TaskNotFoundException;
 import duke.storage.Storage;
@@ -20,7 +18,6 @@ import duke.ui.Ui;
 /**
  * Handles and interprets user commands for Duke.
  */
-
 public class Parser {
 
     /** List of tasks. */
@@ -44,12 +41,26 @@ public class Parser {
     }
 
     /**
+     * Parses a string task list index to an integer.
+     *
+     * @param index string index from input.
+     * @return index as an integer.
+     * @throws NumberFormatException if the string cannot be converted into an integer.
+     */
+    private int parseIndex(String index) throws NumberFormatException {
+        try {
+            return Integer.parseInt(index) - 1;
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException();
+        }
+    }
+
+    /**
      * Logic for handling different commands and executing the appropriate methods for the inputted command.
      * Throws appropriate exceptions for its respective error.
      *
      * @param input The entire user input.
      */
-
     public String handleCommands(String input) {
         // isolates the command word
         String[] words = input.split(" ");
@@ -63,46 +74,20 @@ public class Parser {
             case "list":
                 return tasks.displayList();
             case "done":
-                if (words.length == 1) {
-                    // throws an error if there is no message input after the command word
-                    throw new MessageEmptyException();
-                }
-                // extracts index of task to mark as done
-                String doneTaskIndex = words[words.length - 1];
-                return tasks.markDone(doneTaskIndex);
+                String doneTaskIndex = words[1];
+                return tasks.markDone(parseIndex(doneTaskIndex));
             case "deadline":
-                if (words.length == 1) {
-                    // throws an error if there is no message input after the command word
-                    throw new MessageEmptyException();
-                }
-                try {
-                    // excludes command "deadline " from the string
-                    return tasks.addDeadline(input.substring(9));
-                } catch (InvalidDateTimeException | MessageEmptyException | IncorrectFormatException e) {
-                    return e.getMessage();
-                }
+                return tasks.addDeadline(input.substring(9).trim());
             case "todo":
-                if (words.length == 1) {
-                    // throws an error if there is no message input after the command word
-                    throw new MessageEmptyException();
-                }
                 // excludes command "todo" from the string
-                return tasks.addTodo(input.substring(5));
+                return tasks.addTodo(input.substring(5).trim());
             case "event":
-                if (words.length == 1) {
-                    // throws an error if there is no message input after the command word
-                    throw new MessageEmptyException();
-                }
                 // excludes command "event" from the string
-                return tasks.addEvent(input.substring(6));
+                return tasks.addEvent(input.substring(6).trim());
             case "delete":
-                if (words.length == 1) {
-                    // throws an error if there is no message input after the command word
-                    throw new MessageEmptyException();
-                }
                 // extracts index of task to delete
-                String deleteTaskIndex = words[words.length - 1];
-                return tasks.deleteTask(deleteTaskIndex);
+                String deleteTaskIndex = words[1];
+                return tasks.deleteTask(parseIndex(deleteTaskIndex));
             case "find":
                 ArrayList<Task> matchedTasks = findCommand(words);
                 return Ui.printList(matchedTasks);
@@ -113,6 +98,11 @@ public class Parser {
             }
         } catch (DukeException | IOException e) {
             return e.getMessage();
+        } catch (ArrayIndexOutOfBoundsException | StringIndexOutOfBoundsException e) {
+            // throws an error if there is no message input after the command word
+            return new MessageEmptyException().getMessage();
+        } catch (NumberFormatException e) {
+            return new TaskNotFoundException().getMessage();
         }
     }
 

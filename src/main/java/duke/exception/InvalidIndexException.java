@@ -7,6 +7,7 @@ public class InvalidIndexException extends DukeException {
 
     /**
      * Constructor of InvalidIndexException.
+     *
      * @param start starting index of task list.
      * @param end ending index of task list.
      * @param actual index user inputted.

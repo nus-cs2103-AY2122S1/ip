@@ -24,10 +24,29 @@ public class Ui {
     }
 
     /**
+     * Prints out a greeting for the user when the bot is first ran in command line.
+     */
+    public void cliGreet() {
+        System.out.println("__________________________________");
+        System.out.println("Hello! I'm Duke.\nWhat can I do for you?");
+        System.out.println("__________________________________");
+    }
+
+    /**
      * Prints out a greeting for the user when the bot is first ran.
      */
     public static String greet() {
         return "Hello! I'm Duke.\nWhat can I do for you?";
+    }
+
+    /**
+     * Prints out a goodbye message when the bot is exited.
+     */
+    public void cliExit() {
+        sc.close();
+        System.out.println("__________________________________");
+        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println("__________________________________");
     }
 
     /**

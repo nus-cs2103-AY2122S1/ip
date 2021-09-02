@@ -7,6 +7,7 @@ public class IncorrectFormatException extends DukeException {
 
     /**
      * Constructor of IncorrectFormatException.
+     *
      * @param command event or deadline depending on what user called.
      * @param missingWord "/at" or "/by" depending on if user called event or deadline.
      */

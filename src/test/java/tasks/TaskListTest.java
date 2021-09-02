@@ -37,7 +37,7 @@ public class TaskListTest {
         taskList.addToList(task2);
 
         try {
-            taskList.deleteTask("1");
+            taskList.deleteTask(0);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -67,7 +67,7 @@ public class TaskListTest {
         taskList.addToList(todo2);
 
         try {
-            taskList.deleteTask("1");
+            taskList.deleteTask(0);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -109,7 +109,7 @@ public class TaskListTest {
         taskList.addToList(event2);
 
         try {
-            taskList.deleteTask("1");
+            taskList.deleteTask(0);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
@@ -147,7 +147,7 @@ public class TaskListTest {
         taskList.addToList(deadline2);
 
         try {
-            taskList.deleteTask("1");
+            taskList.deleteTask(0);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }
