@@ -39,6 +39,7 @@ shadowJar {
 
 checkstyle {
     toolVersion = '8.29'
+    ignoreFailures = true
     configFile = file("config/checkstyle/checkstyle.xml")
 }
 
