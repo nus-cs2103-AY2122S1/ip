@@ -111,6 +111,10 @@ public class Storage {
             toSave += description + " | " + at;
         }
 
+        assert type.matches("T|D|E") : "only T, D and E is valid for task type";
+        assert isDone.matches("1|0") : "only 1, 0 is valid for isDone";
+        assert !toSave.equals("") : "toSave cannot be empty";
+
         String directoryName = "data";
         String fileName = "duke.txt";
 

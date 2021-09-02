@@ -53,10 +53,12 @@ public class Parser {
      * @return returns Task number.
      */
     public int getTaskNumber() {
+        assert taskNumber > 0 : "Task number should always be greater than 0";
         return taskNumber;
     }
 
     public String getQuery() {
+        assert !query.equals("") : "Query should never be empty!";
         return query;
     }
 

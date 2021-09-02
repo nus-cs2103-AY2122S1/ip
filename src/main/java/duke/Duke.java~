@@ -36,9 +36,14 @@ public class Duke {
             return farewell.printFarewell() + "\n" + " ";
         } else {
             Ui parseInput = new Feature(input);
-            String inputResult = parseInput.getInputResult();
+<<<<<<< HEAD
+            String parsedInputResult = parseInput.getInputResult();
+            return parsedInputResult;
+=======
+            String inputResult = parseInput.getCommandResult();
             assert !inputResult.equals("") : "the response from Duke should not be empty";
             return inputResult;
+>>>>>>> master
         }
     }
 }
