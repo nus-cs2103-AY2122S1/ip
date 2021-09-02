@@ -47,7 +47,7 @@ public class Parser {
      * @param cmd String from user's input.
      * @throws DukeException
      */
-    public void parse(String cmd) throws DukeException {
+    public String parse(String cmd) throws DukeException {
         String[] tokens = cmd.split(" ");
         Keyword command = validateCommand(tokens);
 
