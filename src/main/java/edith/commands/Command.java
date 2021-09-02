@@ -1,10 +1,10 @@
-package viper.commands;
+package edith.commands;
+
+import edith.storage.Storage;
+import edith.tasks.TaskList;
+import edith.ui.Ui;
 
 import java.io.IOException;
-
-import viper.storage.Storage;
-import viper.tasks.TaskList;
-import viper.ui.Ui;
 
 /**
  * Represents user input
@@ -18,7 +18,7 @@ public abstract class Command {
      * @param storage Stores created command into the txt file
      * @throws IOException If is no user input
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
 
     /**
      * Represents the end of program

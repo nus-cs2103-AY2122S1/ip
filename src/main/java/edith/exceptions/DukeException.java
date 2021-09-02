@@ -1,4 +1,4 @@
-package viper.exceptions;
+package edith.exceptions;
 
 /**
  * Exception thrown when user input is unknown.
@@ -6,5 +6,10 @@ package viper.exceptions;
 public class DukeException extends Exception {
     public DukeException (String str) {
         super(str);
+    }
+    
+    @Override
+    public String toString() {
+        return this.getMessage();
     }
 }

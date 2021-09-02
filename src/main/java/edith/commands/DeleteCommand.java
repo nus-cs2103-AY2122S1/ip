@@ -1,11 +1,11 @@
-package viper.commands;
+package edith.commands;
+
+import edith.storage.Storage;
+import edith.tasks.Task;
+import edith.tasks.TaskList;
+import edith.ui.Ui;
 
 import java.io.IOException;
-
-import viper.storage.Storage;
-import viper.tasks.Task;
-import viper.tasks.TaskList;
-import viper.ui.Ui;
 
 /**
  * Deletes command specified by user based on index
@@ -34,16 +34,16 @@ public class DeleteCommand extends Command {
      * @throws IOException if task to be deleted is null.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         if (index < tasks.getSize() + 1) {
             Task deleteTask = tasks.getTask(index - 1);
             tasks.deleteTask(index - 1);
             storage.deleteTask(deleteTask);
             String[] msg = {"OK!! I have removed the following task from your list: " + deleteTask,
                     "Now you have " + tasks.getSize() + " task(s) left~ Yay!!!!!"};
-            ui.showMessage(msg);
+            return ui.printDeleteCommand(deleteTask, tasks);
         } else {
-            ui.showInvalidIndexError();
+           return ui.printInvalidIndexError();
         }
     }
 

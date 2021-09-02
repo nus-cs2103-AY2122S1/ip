@@ -1,11 +1,11 @@
-package viper.tasks;
+package edith.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import viper.commands.Instruction;
-import viper.exceptions.DukeException;
+import edith.commands.Instruction;
+import edith.exceptions.DukeException;
 
 /**
  * Represents an event task that takes in date and time.

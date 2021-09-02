@@ -1,4 +1,4 @@
-package viper.commands;
+package edith.commands;
 
 /**
  * Stores the types of Instruction a command can have.

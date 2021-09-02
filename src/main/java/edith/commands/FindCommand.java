@@ -1,8 +1,8 @@
-package viper.commands;
+package edith.commands;
 
-import viper.storage.Storage;
-import viper.tasks.TaskList;
-import viper.ui.Ui;
+import edith.storage.Storage;
+import edith.tasks.TaskList;
+import edith.ui.Ui;
 
 /**
  * Command that search through task list and returns a new task list with items that match the keyword
@@ -15,9 +15,9 @@ public class FindCommand extends Command {
     }
     
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList findResult = tasks.findTask(keyword);
-        ui.showList(findResult, keyword);
+        return ui.printFindResults(findResult, keyword);
     }
 
     @Override

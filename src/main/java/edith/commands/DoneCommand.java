@@ -1,11 +1,11 @@
-package viper.commands;
+package edith.commands;
+
+import edith.storage.Storage;
+import edith.tasks.Task;
+import edith.tasks.TaskList;
+import edith.ui.Ui;
 
 import java.io.IOException;
-
-import viper.storage.Storage;
-import viper.tasks.Task;
-import viper.tasks.TaskList;
-import viper.ui.Ui;
 
 /**
  * Marks task specified by user as done, using index.
@@ -26,15 +26,14 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         if (index < tasks.getSize() + 1) {
             Task curr = tasks.getTask(index - 1);
             storage.doneTask(curr);
             tasks.doneTask(index - 1);
-            String[] msg = {"Good job on completing your task!!!", "I've marked this task as done:", curr.toString()};
-            ui.showMessage(msg);
+            return ui.printDoneCommand(curr, tasks);
         } else {
-            ui.showInvalidIndexError();
+            return ui.printInvalidIndexError();
         }
     }
 

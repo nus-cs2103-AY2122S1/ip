@@ -1,4 +1,10 @@
-package viper.storage;
+package edith.storage;
+
+import edith.exceptions.DukeException;
+import edith.tasks.Deadlines;
+import edith.tasks.Events;
+import edith.tasks.Task;
+import edith.tasks.Todos;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -10,12 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
-import viper.exceptions.DukeException;
-import viper.tasks.Deadlines;
-import viper.tasks.Events;
-import viper.tasks.Task;
-import viper.tasks.Todos;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file

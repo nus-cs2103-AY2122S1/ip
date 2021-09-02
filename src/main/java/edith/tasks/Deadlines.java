@@ -1,9 +1,9 @@
-package viper.tasks;
+package edith.tasks;
+
+import edith.commands.Instruction;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-import viper.commands.Instruction;
 
 /**
  * Represents a Deadline task that takes in date.

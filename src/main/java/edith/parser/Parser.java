@@ -1,13 +1,13 @@
-package viper.parser;
+package edith.parser;
 
-import viper.commands.AddCommand;
-import viper.commands.ByeCommand;
-import viper.commands.Command;
-import viper.commands.DeleteCommand;
-import viper.commands.DoneCommand;
-import viper.commands.FindCommand;
-import viper.commands.ListCommand;
-import viper.exceptions.DukeException;
+import edith.commands.AddCommand;
+import edith.commands.ByeCommand;
+import edith.commands.Command;
+import edith.commands.DeleteCommand;
+import edith.commands.DoneCommand;
+import edith.commands.FindCommand;
+import edith.commands.ListCommand;
+import edith.exceptions.DukeException;
 
 /**
  * deals with making sense of the user command.
