@@ -24,6 +24,13 @@ class Parser {
         }
     }
 
+    /**
+     * Parses the input
+     * @param input
+     * @param taskList
+     * @param ui
+     * @return
+     */
     static String parseInput(String input, TaskList taskList, Ui ui) {
         String[] infos = input.split(" ", 2);
         String type = infos[0];
