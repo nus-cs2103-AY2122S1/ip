@@ -15,6 +15,8 @@ public class Parser {
                 return new CommandShowList();
             } else if (tokens[0].equals("delete")) {
                 return new CommandDelete(tokens[1]);
+            } else if (tokens[0].equals("done")) {
+                return new CommandDone(tokens[1]);
             } else if (tokens[0].equals("exit")) {
                 return new CommandExit();
             } else {
