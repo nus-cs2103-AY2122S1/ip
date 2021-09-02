@@ -72,9 +72,10 @@ public class TaskList {
     }
 
     /**
-     * Searches for a input string among stored Tasks, and prints results.
+     * Searches for a input string among stored Tasks, and returns a string indicating the results.
      *
      * @param string The input string to search for matches.
+     * @return A string representing the result.
      */
     public String find(String string) {
         List<Task> list = new ArrayList<>();

@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,8 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 
 /**
  * A class encapsulating a chat bot.
@@ -30,8 +30,7 @@ public class Duke extends Application {
     private static boolean isInitialised = false;
 
     private static TaskList taskList = new TaskList();
-    private static Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH, taskList);;
-
+    private static Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH, taskList);
 
     //Fields associated with the GUI
     private ScrollPane scrollPane;
@@ -55,30 +54,12 @@ public class Duke extends Application {
             isInitialised = true;
         }
 
-        //no longer need to process user input, handled by frontend of GUI
-        //Scanner scan = new Scanner(System.in);
-        //Ui.printWelcomeMessage();
-
         //start reading user input
         String[] inputArray = input.split("\\s");
         String firstString = inputArray[0];
         return Parser.parseInput(taskList, storage, firstString, inputArray);
-
-        //exit from the program
-        //scan.close();
-
-        //no longer need a case for exiting the program.
-        //Ui.printEndMessage();
     }
 
-    /**
-     * Starts the main process, activating the chatbot.
-     *
-     * @param args The default parameter for the main function.
-     */
-    public static void main(String[] args) {
-
-    }
 
     @Override
     public void start(Stage stage) {

@@ -1,13 +1,19 @@
 package duke;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 
 public class StorageTest {
     @Test
-    public void testStorage() {
+    public void testStorage() throws IOException {
         TaskList taskList = new TaskList();
         Storage storage = new Storage("data/test.txt", "data", taskList);
-        storage.start();
+        try {
+            storage.start();
+        } catch (IOException e) {
+            System.out.println("Error caught.\n" + e);
+        }
         Duke duke = new Duke();
 
         String[] test1 = new String[] {"todo", "dsauihdisad"};

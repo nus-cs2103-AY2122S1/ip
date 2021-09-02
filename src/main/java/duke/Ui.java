@@ -28,7 +28,7 @@ public class Ui {
     private static final String BAD_INPUT_ERROR = "I could not understand your input. Please stop speaking gibberish"
             + " to me!\n";
 
-    private static final String END_MESSAGE = "kthxbye\n";
+    private static final String END_MESSAGE = "kthxbye\nRemember to click on the `X` at the top right before leaving.";
 
     private static final String BAD_DATE_FORMAT_ERROR = "Enter a valid date format! (yyyy-mm-dd)\n";
 
@@ -45,84 +45,108 @@ public class Ui {
     private static final String YES_MATCHES = "Lucky for you, the following Tasks seem to match your search term.\n";
 
     /**
-     * returns a message about an error with a number.
+     * Returns a message about an error with a number.
+     *
+     * @return The specified string.
      */
     public static String getNumberError() {
         return NUMBER_ERROR;
     }
 
     /**
-     * returns a welcome message to the user.
+     * Returns a welcome message to the user.
+     *
+     * @return The specified string.
      */
     public static String getWelcomeMessage() {
         return "Hello from\n" + LOGO + "\nWhat can I do for you today?";
     }
 
     /**
-     * returns a message about empty input.
+     * Returns a message about empty input.
+     *
+     * @return The specified string.
      */
     public static String getEmptyInputError() {
         return EMPTY_INPUT_ERROR;
     }
 
     /**
-     * returns a message about an error due to no Tasks.
+     * Returns a message about an error due to no Tasks.
+     *
+     * @return The specified string.
      */
     public static String getNoTaskError() {
         return NO_TASK_ERROR;
     }
 
     /**
-     * returns a message about an error with a Task.
+     * Returns a message about an error with a Task.
+     *
+     * @return The specified string.
      */
     public static String getTaskError() {
         return TASK_ERROR;
     }
 
     /**
-     * returns a message confirming that Task is completed.
+     * Returns a message confirming that Task is completed.
+     *
+     * @return The specified string.
      */
     public static String getTaskCompleted(Task task) {
         return TASK_COMPLETED + task.toString();
     }
 
     /**
-     * returns a message reminding the user about the number of Tasks registered.
+     * Returns a message reminding the user about the number of Tasks registered.
+     *
+     * @return The specified string.
      */
     public static String getTaskNumberReminder(int number) {
         return "Now you have " + number + " tasks remaining. Get to work!";
     }
 
     /**
-     * returns a message about an error due to bad input.
+     * Returns a message about an error due to bad input.
+     *
+     * @return The specified string.
      */
     public static String getBadInputError() {
         return BAD_INPUT_ERROR;
     }
 
     /**
-     * returns a message when the program ends.
+     * Returns a message when the program ends.
+     *
+     * @return The specified string.
      */
     public static String getEndMessage() {
         return END_MESSAGE;
     }
 
     /**
-     * returns a message about an error due to a bad date format.
+     * Returns a message about an error due to a bad date format.
+     *
+     * @return The specified string.
      */
     public static String getBadDateFormatError() {
         return BAD_DATE_FORMAT_ERROR;
     }
 
     /**
-     * returns a message informing the user that a Task was successfully added.
+     * Returns a message informing the user that a Task was successfully added.
+     *
+     * @return The specified string.
      */
     public static String getAddTaskCompletionMessage() {
         return ADD_TASK_COMPLETION_MESSAGE;
     }
 
     /**
-     * returns a message about an error with a file.
+     * Returns a message about an error with a file.
+     *
+     * @return The specified string.
      */
     public static String getFileError() {
         return FILE_ERROR;
@@ -133,21 +157,27 @@ public class Ui {
     }
 
     /**
-     * returns a message about an unknown error.
+     * Returns a message about an unknown error.
+     *
+     * @return The specified string.
      */
     public static String getUnknownError() {
         return UNKNOWN_ERROR;
     }
 
     /**
-     * returns a message about no matches found.
+     * Returns a message about no matches found.
+     *
+     * @return The specified string.
      */
     public static String getNoMatch() {
         return NO_MATCHES;
     }
 
     /**
-     * returns a message that a match has been found.
+     * Returns a message that a match has been found.
+     *
+     * @return The specified string.
      */
     public static String getMatch() {
         return YES_MATCHES;

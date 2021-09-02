@@ -37,6 +37,8 @@ public class Storage {
 
     /**
      * Checks for the file, then loads the data into the taskList.
+     *
+     * @throws IOException Thrown when there is an issue loading data.
      */
     public void start() throws IOException {
         //set up the file
@@ -55,6 +57,8 @@ public class Storage {
 
     /**
      * Loads data from the file into the taskList.
+     *
+     * @throws IOException Thrown when data is unable to be loaded from the file.
      */
     private void loadData() throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader(dataFile));
@@ -68,6 +72,8 @@ public class Storage {
 
     /**
      * Saves the Tasks in taskList into the file.
+     *
+     * @throws IOException Thrown when data is unable to be saved into the file.
      */
     public void saveData() throws IOException {
         FileWriter writer = new FileWriter(dataFile);

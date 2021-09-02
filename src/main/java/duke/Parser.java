@@ -70,6 +70,7 @@ public class Parser {
      * @param storage The Storage instance containing the TaskList and files.
      * @param firstString The first String entered by the user
      * @param inputArray The array containing all strings input by the user.
+     *
      * @return A string indicating the response to the user.
      */
     public static String parseInput(TaskList taskList, Storage storage, String firstString, String[] inputArray) {
@@ -77,13 +78,10 @@ public class Parser {
         if (firstString.equals("")) {
             return Ui.getEmptyInputError();
         }
-
-        /*
-        case if user wants to exit the program, no longer needed
+        //case if user wants to exit
         if (firstString.equals("bye")) {
-
+            return Ui.getEndMessage();
         }
-        */
 
         //below are cases for specified keywords:
         //case if user wants to view the list
@@ -140,7 +138,6 @@ public class Parser {
                 //case if string entered was not a number
                 return Ui.getNumberError();
             }
-
         }
 
         //cases for the 3 task types
@@ -170,6 +167,6 @@ public class Parser {
 
         //case if first string input is not a keyword
         return Ui.getBadInputError();
-
     }
+
 }
