@@ -35,7 +35,7 @@ public abstract class Command {
      * @param ui      An object that handles all UI related functionality. (e.g. printing)
      * @param storage An object that handles all save/load related functionality.
      * @return A task list that may or may not be modified from the input task list, depending on
-     * the command called.
+     * the command called, along with a new output message.
      * @throws IOException If an error occurs during a save/load operation.
      */
     public abstract TaskList execute(TaskList taskList, Ui ui, Storage storage) throws IOException;

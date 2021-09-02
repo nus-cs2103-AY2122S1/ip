@@ -25,12 +25,13 @@ public class DueCommand extends Command {
      * @param taskList   The current list of tasks from the user.
      * @param ui      An object that handles all UI related functionality. (e.g. printing)
      * @param storage An object that handles all save/load related functionality.
-     * @return The input task list, unmodified.
+     * @return The input task list with an output message.
      */
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showMessage("Here are the tasks occurring within this time period:");
-        ui.showIndentedMessage(taskList.getDueTasks(input).toString());
-        return taskList;
+        String message = "";
+        message += ui.showMessage("Here are the tasks occurring within this time period:");
+        message += ui.showMessage(taskList.getDueTasks(input).toString());
+        return new TaskList(taskList, message);
     }
 }

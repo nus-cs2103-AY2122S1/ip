@@ -11,6 +11,7 @@ import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
+
 /**
  * The driver class for the Duke chat bot.
  */
@@ -27,6 +28,8 @@ public class Duke {
      * Object to represent the user's task list (e.g. add/delete/mark as done)
      */
     private TaskList taskList;
+    private String initMessage;
+    private boolean isTerminated = false;
 
     /**
      * Creates a Duke chat bot instance, using a file path for loading/saving.
@@ -36,50 +39,64 @@ public class Duke {
     public Duke(Path filePath) {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
+        initMessage = "";
         try {
             taskList = new TaskList(storage.loadTasksFromFile());
         } catch (FileNotFoundException e) {
-            ui.showFileNotFoundError();
+            initMessage = ui.showFileNotFoundError();
             taskList = new TaskList();
         } catch (Exception e) {
-            ui.showLoadingError(e.getMessage());
+            initMessage = ui.showLoadingError(e.getMessage());
             taskList = new TaskList();
         }
+        initMessage += ui.showIntroduction();
     }
 
     /**
-     * Runs the actual chat bot program.
+     * Creates a Duke chat bot instance, using a default file path for loading/saving.
      */
-    public void run() {
-        ui.showIntroduction();
-        boolean isTerminated = false;
-        while (!isTerminated) {
-            try {
-                String input = ui.readInput();
-                ui.showLine();
-                Command command = Parser.parseCommandFromInput(input);
-                taskList = command.execute(taskList, ui, storage);
-                isTerminated = command.isTerminated();
-            } catch (IOException e) {
-                ui.showError("The data failed to save to the save file with error:"
-                        + e.getMessage());
-            } catch (IllegalArgumentException e) {
-                // When invalid command is given, it is unable to be parsed into the enum
-                ui.showError("You have entered an invalid command.");
-            } catch (Exception e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+    public Duke() {
+        this(Paths.get(System.getProperty("user.dir"), "data", "tasks.txt"));
+    }
+
+    /**
+     * Returns the messages generated on the initialization of Duke.
+     *
+     * @return A string message to be used by the JavaFX GUI.
+     */
+    public String getInitMessage() {
+        return initMessage;
+    }
+
+    /**
+     * Gives a user input to the Duke chat bot, and returns the appropriate response.
+     *
+     * @param input The user input from the GUI.
+     * @return A string message to be used by the JavaFX GUI.
+     */
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parseCommandFromInput(input);
+            taskList = command.execute(taskList, ui, storage);
+            isTerminated = command.isTerminated();
+            return taskList.getRecentMessage();
+        } catch (IOException e) {
+            return ui.showError("The data failed to save to the save file with error:"
+                    + e.getMessage());
+        } catch (IllegalArgumentException e) {
+            // When invalid command is given, it is unable to be parsed into the enum
+            return ui.showError("You have entered an invalid command.");
+        } catch (Exception e) {
+            return ui.showError(e.getMessage());
         }
     }
 
     /**
-     * Starts the whole program.
-     * @param args Some input arguments. (Unused)
+     * Returns a boolean representing whether or not the program should continue running.
+     *
+     * @return True if a bye/terminating command has been inputted, false otherwise.
      */
-    public static void main(String[] args) {
-        Path filePath = Paths.get(System.getProperty("user.dir"), "data", "tasks.txt");
-        new Duke(filePath).run();
+    public boolean getIsTerminated() {
+        return isTerminated;
     }
 }
