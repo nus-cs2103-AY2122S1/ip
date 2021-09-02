@@ -1,3 +1,5 @@
+import tasks.*;
+import exceptions.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -42,7 +44,7 @@ public class Duke {
                     throw new DukeException("Unacceptable input");
                 }
                 if(input.substring(0,4).equals("todo")){
-                    Task newTask = new Task(input.substring(5), "T");
+                    TodoTask newTask = new TodoTask(input.substring(5));
                     tasks.add(newTask);
                     taskCounter++;
                     System.out.println("Got it. I've added this task: ");
@@ -50,7 +52,7 @@ public class Duke {
 
                 } else if(input.substring(0,5).equals("event")){
                     String at = input.split("/")[1].substring(3);
-                    Event newEvent = new Event(input.substring(6).split("/")[0], at);
+                    EventTask newEvent = new EventTask(input.substring(6).split("/")[0], at);
                     tasks.add(newEvent);
                     taskCounter++;
                     System.out.println("Got it. I've added this task: ");
@@ -71,7 +73,7 @@ public class Duke {
                 else if(input.substring(0,8).equals("deadline")){
                     // deadline
                     String by = input.split("/")[1].substring(3);
-                    Deadline newDeadline = new Deadline(input.substring(9).split("/")[0], by);
+                    DeadlineTask newDeadline = new DeadlineTask(input.substring(9).split("/")[0], by);
                     tasks.add(newDeadline);
                     taskCounter++;
                     System.out.println("Got it. I've added this task: ");
@@ -92,60 +94,3 @@ public class Duke {
     }
 }
 
-class Task {
-    String name;
-    //String taskNumber;
-    boolean done = false;
-    String type;
-
-    Task(String name, String type) {
-        this.name = name;
-        this.type = type;
-    }
-    void makeDone(){
-        done = true;
-    }
-
-    @Override
-    public String toString(){
-        String doneSymbol = done? "X" : " ";
-        String result = "[" + type + "] " + "[" + doneSymbol + "] " + name;
-        return result;
-    }
-}
-
-class Deadline extends Task{
-    String by;
-    Deadline(String description, String by) {
-        super(description, "D");
-        this.by = by;
-    }
-
-    @Override
-    public String toString(){
-        String doneSymbol = done? "X" : " ";
-        String result = "[" + type + "] " + "[" + doneSymbol + "] " + name + "(by: " + by + ")";
-        return result;
-    }
-}
-
-class Event extends Task{
-    String at;
-    Event(String description, String at) {
-        super(description, "E");
-        this.at = at;
-    }
-
-    @Override
-    public String toString(){
-        String doneSymbol = done? "X" : " ";
-        String result = "[" + type + "] " + "[" + doneSymbol + "] " + name + "(at: " + at + ")";
-        return result;
-    }
-}
-
-class DukeException extends Exception {
-    DukeException(String message){
-        super(message);
-    }
-}
