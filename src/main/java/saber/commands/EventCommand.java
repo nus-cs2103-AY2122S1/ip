@@ -60,10 +60,21 @@ public class EventCommand extends SaberCommand {
     }
 
     /**
-     * A function to determine whether the current command is a terminating command (a ByeCommand)
-     * @return false
+     * {@inheritdoc}
      */
-    public boolean isExit() {
-        return false;
+    public String getResponse(TaskList taskList) {
+        if (isMissingDescription) {
+            return eventUI.getMissingDescriptionError();
+        }
+        if (isMissingTime) {
+            return eventUI.getMissingTimeError();
+        }
+        if (isParsingTimeError) {
+            return eventUI.getParsingTimeError();
+        }
+        taskList.add(event);
+        int totalTask = taskList.size();
+        eventUI.setSuccessMessage(event, totalTask);
+        return eventUI.getSuccessMessage();
     }
 }

@@ -42,6 +42,24 @@ public class TodoUI extends SaberCommandUI {
     }
 
     /**
+     * Gets success message
+     *
+     * @return success message
+     */
+    public String getSuccessMessage() {
+        return successMessage;
+    }
+
+    /**
+     * Gets missing description error
+     *
+     * @return missing description error
+     */
+    public String getMissingDescriptionError() {
+        return missingDescriptionError;
+    }
+
+    /**
      * Print out the missing description error when there is no description supplied to the todo command
      */
     public void showMissingDescriptionError() {

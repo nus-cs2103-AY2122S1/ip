@@ -18,10 +18,9 @@ public class ByeCommand extends SaberCommand {
     }
 
     /**
-     * A function to determine whether the current command is a terminating command (a ByeCommand)
-     * @return true
+     * {@inheritdoc}
      */
-    public boolean isExit() {
-        return true;
+    public String getResponse(TaskList taskList) {
+        return byeUI.getSuccessMessage();
     }
 }

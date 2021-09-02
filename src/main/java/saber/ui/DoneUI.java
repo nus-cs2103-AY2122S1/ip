@@ -33,6 +33,33 @@ public class DoneUI extends SaberCommandUI {
     }
 
     /**
+     * Gets success message
+     *
+     * @return success message
+     */
+    public String getSuccessMessage() {
+        return successMessage;
+    }
+
+    /**
+     * Gets unable to find task error
+     *
+     * @return unable to find task error
+     */
+    public String getUnableToFindTaskError() {
+        return unableToFindTaskError;
+    }
+
+    /**
+     * Gets argument error
+     *
+     * @return argument error
+     */
+    public String getArgumentError() {
+        return argumentError;
+    }
+
+    /**
      * Print out the success message
      */
     public void showSuccess() {

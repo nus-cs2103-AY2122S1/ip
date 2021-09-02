@@ -45,10 +45,19 @@ public class DeleteCommand extends SaberCommand {
     }
 
     /**
-     * A function to determine whether the current command is a terminating command (a ByeCommand)
-     * @return false
+     * {@inheritdoc}
      */
-    public boolean isExit() {
-        return false;
+    public String getResponse(TaskList taskList) {
+        if (isBadArgument) {
+            return deleteUI.getArgumentError();
+        }
+        if (taskIndex >= taskList.size() || taskIndex < 0) {
+            return deleteUI.getUnableToFindTaskError();
+        }
+        Task task = taskList.get(taskIndex);
+        taskList.delete(taskIndex);
+        int totalTask = taskList.size();
+        deleteUI.setSuccessMessage(task, totalTask);
+        return deleteUI.getSuccessMessage();
     }
 }

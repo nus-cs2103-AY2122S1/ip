@@ -60,10 +60,21 @@ public class DeadlineCommand extends SaberCommand {
     }
 
     /**
-     * A function to determine whether the current command is a terminating command (a ByeCommand)
-     * @return false
+     * {@inheritdoc}
      */
-    public boolean isExit() {
-        return false;
+    public String getResponse(TaskList taskList) {
+        if (isMissingDescription) {
+            return deadlineUI.getMissingDescriptionError();
+        }
+        if (isMissingTime) {
+            return deadlineUI.getMissingTimeError();
+        }
+        if (isParsingTimeError) {
+            return deadlineUI.getParsingTimeError();
+        }
+        taskList.add(deadline);
+        int totalTask = taskList.size();
+        deadlineUI.setSuccessMessage(deadline, totalTask);
+        return deadlineUI.getSuccessMessage();
     }
 }

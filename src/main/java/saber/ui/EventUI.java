@@ -45,6 +45,41 @@ public class EventUI extends SaberCommandUI {
     }
 
     /**
+     * Gets success message
+     *
+     * @return success message
+     */
+    public String getSuccessMessage() {
+        return successMessage;
+    }
+
+    /**
+     * Gets missing description error
+     * @return missing description error
+     */
+    public String getMissingDescriptionError() {
+        return missingDescriptionError;
+    }
+
+    /**
+     * Gets missing time error
+     *
+     * @return missing time error
+     */
+    public String getMissingTimeError() {
+        return missingTimeError;
+    }
+
+    /**
+     * Gets parsing time error
+     *
+     * @return parsing time error
+     */
+    public String getParsingTimeError() {
+        return parsingTimeError;
+    }
+
+    /**
      * Print out the success message
      */
     public void showSuccess() {

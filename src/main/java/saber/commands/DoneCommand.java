@@ -45,10 +45,19 @@ public class DoneCommand extends SaberCommand {
     }
 
     /**
-     * A function to determine whether the current command is a terminating command (a ByeCommand)
-     * @return false
+     * {@inheritdoc}
      */
-    public boolean isExit() {
-        return false;
+    public String getResponse(TaskList taskList) {
+        int totalTask = taskList.size();
+        if (isBadArgument) {
+            return doneUI.getArgumentError();
+        }
+        if (taskIndex >= totalTask || taskIndex < 0) {
+            return doneUI.getUnableToFindTaskError();
+        }
+        Task task = taskList.get(taskIndex);
+        task.markAsDone();
+        doneUI.setSuccessMessage(task);
+        return doneUI.getSuccessMessage();
     }
 }

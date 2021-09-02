@@ -40,10 +40,15 @@ public class TodoCommand extends SaberCommand {
     }
 
     /**
-     * A function to determine whether the current command is a terminating command (a ByeCommand)
-     * @return false
+     * {@inheritdoc}
      */
-    public boolean isExit() {
-        return false;
+    public String getResponse(TaskList taskList) {
+        if (isMissingDescription) {
+            return todoUI.getMissingDescriptionError();
+        }
+        taskList.add(todo);
+        int totalTask = taskList.size();
+        todoUI.setSuccessMessage(todo, totalTask);
+        return todoUI.getSuccessMessage();
     }
 }

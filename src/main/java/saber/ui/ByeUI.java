@@ -13,4 +13,13 @@ public class ByeUI extends SaberCommandUI {
     public void showSuccess() {
         System.out.println(successMessage);
     }
+
+    /**
+     * Gets success message
+     *
+     * @return success message
+     */
+    public String getSuccessMessage() {
+        return successMessage;
+    }
 }
