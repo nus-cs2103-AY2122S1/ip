@@ -6,9 +6,7 @@ Tiger is a personal assistant that helps you manage the tasks you're too lazy to
 
 ![Screenshot](./images/TigerIntro.png)
 
-Tasks are classified into 3 types of catergories: Todos, Events or Deadlines. Events and deadlines are tasks associated with a specific time, and hence the user is required to enter in the time parameter. For events, the user is required to enter in when the event is **at**, while for deadlines, the user is required to enter when the deadline is **by**. All 3 tasks can be either marked as completed, or not completed.
-
-Tasks are classified into 3 priorities, low, medium and high. 
+Tasks are classified into 3 types of catergories: Todos, Events or Deadlines. Events and deadlines are tasks associated with a date/time, and hence the user is required to enter in the date/time parameter. Tasks can be either marked as completed, or not completed and are classified into 3 priorities, low, medium and high. 
 
 Commands include a keyword, some mandatory arguments, and some optional arguments. The general usage is that the keyword comes first, then the mandatory arguments, then the optional arguments, ie. `[keyword] [mandatory arguments] [optional arguments]`.
 
@@ -37,7 +35,7 @@ Tiger can help you keep track of 3 types of tasks: Todos, Events and Deadlines. 
 ```
 [T|E|D] [H|M|L|X] [task description] [task date]
 ```
-`T, E, D` represents if the task is a Todo, event or Deadline respectively, and `H, M, L` represents if the tasks is of high, medium or low priority respectively. `X` is used for completed tasks.
+`T, E, D` denotes a Todo, Event or Deadline respectively, and `H, M, L` denotes a tasks of high, medium or low priority respectively. `X` marks completed tasks.
 _________
 
 To add a new Todo, the usage is: `todo [task description] /priority [H|M|L]`. The `/priority` command is optional.
@@ -49,7 +47,7 @@ Expected outcome:
 Excellent! I've added this task:
 [T] [M] Homework
 ```
-Note that `[M]` indicates the tasks is of medium priority. **By default, if the priority is not assigned, the task is classified as medium priority.** To change the tasks' priority, use the priority flag.
+**By default, if the priority is not assigned, the task is classified as medium priority.** To change the tasks' priority, use the priority flag.
 
 Example: `todo homework /priority H` - adds a new Todo that is named "Homework" that is of high priority.
 
@@ -58,7 +56,7 @@ Expected outcome:
 Excellent! I've added this task:
 [T] [H] Homework
 ```
-You might notice Tiger autocapitalises the first letter of `homework` for the user. This is because Tiger has noticed that users tend to input all tasks in lower case, making the tasks look ugly. There is no way to disable this; free will is a lie.
+Tiger autocapitalises the first letter of `homework` for the user. This is because Tiger has noticed that users tend to input all tasks in lower case, making the tasks look ugly. There is no way to disable this; free will is a lie.
 
 ______
 To add a new Event, the usage is: `event [event description] /at [event time] /priority [H|M|L]`. The `/priority` command is optional. Accepted date formats are `HH:mm` or `YYYY-MM-DD HH:mm`. The year input string should be **exactly** 4 characters, and their other date parameters should be **exactly** 2 characters. The year cannot be 0000. 
@@ -110,7 +108,7 @@ Excellent! I've added this event:
 ```
 > Substitutable keywords: `dateline`.
 
-**Due to the way data is stored, Tiger bans you from inputting semicolons (;).**
+**Due to the way data is stored, Tiger bans users from inputting semicolons (;).**
 __________
 ### Deleting a task
 Deletes the task at the specified index. Use `list` to get the list of tasks and indicies. The usage is `delete [task index]`.
@@ -127,7 +125,7 @@ _________
 ### Marking a task as done
 Marks the task at a specified index as done. `list` to get the list of tasks and indicies. The usage is `done [task index]`.
 
-Example: `delete 1` - deletes the task at index 1.
+Example: `done 1` - marks the task at index 1 as done.
 
 Expected outcome: 
 ```
@@ -137,9 +135,10 @@ Nice! I've marked this tasks as done:
 ________
 
 ### Finding a task
-Tiger can also help you find tasks based on a specific keyword. It is not case sensitive, ie. `search woodlands` and `search Woodlands` should return the same list. The usage is `search [substring]`. 
+Tiger can also help find tasks based on a specific keyword. The search is not case sensitive, ie. `search woodlands` and `search Woodlands` should return the same list. The usage is `search [substring]`. 
 
 Example: `search Woodlands` - searches for tasks with task description containing the string "Woodlands".
+
 Expected outcome: 
 ```
 [T] [M] Buy earphones at Woodlands
@@ -147,7 +146,7 @@ Expected outcome:
 > Substitutable keywords: `find`. 
 ___________
 ### Clearing all tasks
-If for some reason your list of tasks is too full, or you're too lazy, you can clear all the tasks at one go. The usage is `clear`.
+If for some reason the list of tasks is too full, or the user is too lazy, the user can clear all the tasks at one go. The usage is `clear`.
 
 Example: `clear` -- clears all tasks.
 
@@ -157,7 +156,7 @@ I've cleared all your tasks!
 ```
 __________
 ### Listing all tasks
-Tiger can help you list all tasks. (After all, that's the whole point of a Todo app right?) The usage is `list`.
+Tiger can help list tasks. (After all, that's the whole point of a Todo app right?) The usage is `list`.
 
 Example: `list` - lists all tasks.
 
@@ -170,7 +169,7 @@ Expected outcome:
 > Substitutable keywords: `ls`. 
 ________
 ### Exiting the app
-If you're bored of Tiger, you can leave the app. The usage is `bye`. 
+To quit the app, the usage is `bye`. 
 
 Example: `bye` - quits the app.
 
@@ -178,14 +177,14 @@ Expected outcome:
 ```
 Bye! Hope to see you again!
 ```
-Note that the window waits for a second to close.
+Note that the window waits a second to close.
 
 > Substitutable keywords: `exit`, `quit`.
 
 ## Advanced features
 
 ### Substitutable keywords
-Tiger understands that some users are just bad at reading user manuals, so some commands can be substituted in place for regular commands and Tiger will act as if the regular command was keyed instead. This is indicated by the "Substitutable keywords" at the bottom of each section on command usage. 
+Tiger understands that some users are just bad at reading user manuals, so some commands can be substituted in place of regular commands and Tiger will act as if the regular command was keyed instead. This is indicated by the "Substitutable keywords" at the bottom of each section on command usage. 
 
 For instance, `find` performs the same action as `search`. 
 
@@ -266,7 +265,7 @@ Expected outcome:
 ```
 Hello, I'm Tiger, your personal assistant. I've recovered 0 tasks from my memory.
 ```
-If the user keys in any other input, the user is clearly incapable of reading. Tiger will prompt the user to input `Y` or `N` until either one of them is keyed in.
+If the user keys in any other input, he/she is clearly incapable of reading. Tiger will prompt the user to input `Y` or `N` until either one of them is keyed in.
 
 Example: `g`
 
@@ -274,6 +273,6 @@ Expected outcome:
 ```
 Please enter Y or N only
 ```
-At this point, the user has tried to alter Tiger's data files and is not following simple instructions. Tiger is clearly pissed and does not bother put in a full-stop at the end of his sentences anymore.
+At this point, the user has tried to alter Tiger's data files and is not following simple instructions. Tiger is clearly pissed and does not bother put in a full-stop at the end of its sentences anymore.
 
-**And that's all! Tiger is ready for you to enter in the *wrong* commands!**
+### **And that's all! Tiger is ready for the user to enter in all the *wrong* commands!**
