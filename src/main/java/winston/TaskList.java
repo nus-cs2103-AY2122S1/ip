@@ -11,9 +11,9 @@ public class TaskList {
     }
 
     /**
-     * Number of tasks left to be completed
+     * Number of tasks left to be completed.
      *
-     * @return the number of tasks left in the list that are not completed
+     * @return the number of tasks left in the list that are not completed.
      */
     public int numberOfIncompleteTasks() {
         int counter = 0;
@@ -30,9 +30,9 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the arraylist
+     * Adds a task to the arraylist.
      *
-     * @param task An Object of type Task to be added to the Arraylist
+     * @param task An Object of type Task to be added to the Arraylist.
      */
     public void addTask(Task task) {
         list.add(task);
@@ -41,9 +41,9 @@ public class TaskList {
 
 
     /**
-     * Marks the Task of given (position - 1) as completed
+     * Marks the Task of given (position - 1) as completed.
      *
-     * @param position An integer corresponding to the task you wish to complete
+     * @param position An integer corresponding to the task you wish to complete.
      */
     public void markTask(int position) {
         list.get(position - 1).setComplete();
@@ -51,10 +51,10 @@ public class TaskList {
     }
     
     /**
-     * Removing a Task from the arraylist based on position
+     * Removing a Task from the arraylist based on position.
      *
      * @param position the position of the Task to be removed from the arraylist
-     *                 Note: position will be (index of item in array list + 1)
+     *                 (Note: position will be index of item in array list + 1).
      */
     public void deleteTask(int position) {
         list.remove(position - 1);
@@ -62,9 +62,9 @@ public class TaskList {
     }
 
     /**
-     * Transforms the arraylist of tasks into a string for visualisation
+     * Transforms the arraylist of tasks into a string for visualisation.
      *
-     * @return A string of the arraylist of tasks
+     * @return A string of the arraylist of tasks.
      */
     public String getList() {
         int counter = 1;
@@ -78,8 +78,9 @@ public class TaskList {
     }
 
     /**
-     * A method that returns converts the list into save format
-     * @return A string of the list in save format
+     * A method that returns converts the list into save format.
+     * 
+     * @return A string of the list in save format.
      */
     public String listDataFormatter() {
         StringBuilder result = new StringBuilder();
@@ -90,9 +91,10 @@ public class TaskList {
     }
 
     /**
-     *  A method that searches through the TaskList for a given string
-     * @param str The string to look for
-     * @return another TaskList with all Tasks that has a description that matches the given string
+     *  A method that searches through the TaskList for a given string.
+     *  
+     * @param str The string to look for.
+     * @return another TaskList with all Tasks that has a description that matches the given string.
      */
     public TaskList findString(String str) {
         ArrayList<Task> arrList = new ArrayList<>();

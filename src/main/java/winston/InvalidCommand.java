@@ -1,7 +1,7 @@
 package winston;
 
 /**
- *  Represents an invalid command from the parent abstract class Command.
+ * Represents an invalid command from the parent abstract class Command.
  */
 public class InvalidCommand extends Command {
     public InvalidCommand(TaskList taskList) {
@@ -9,7 +9,7 @@ public class InvalidCommand extends Command {
     }
 
     /**
-     * Prints a message to let user's know that the command given was invalid
+     * Prints a message to let user's know that the command given was invalid.
      */
     public String run() {
         return Ui.invalidTask();

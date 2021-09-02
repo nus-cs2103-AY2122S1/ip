@@ -12,6 +12,7 @@ public class Parser {
 
     /**
      * Constructor for class Parser.
+     * 
      * @param taskList the TaskList that will be modified based on commands.
      */
     public Parser(TaskList taskList) {
@@ -20,6 +21,7 @@ public class Parser {
 
     /**
      * Method that parses the given user input.
+     * 
      * @param str user input.
      * @return A command depending on the user input.
      */

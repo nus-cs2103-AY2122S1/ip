@@ -1,7 +1,5 @@
 package winston;
 
-import javax.print.DocFlavor;
-
 /**
  * A class that manages all lines that handles user experience and lines that are commonly used.
  */
@@ -33,8 +31,8 @@ public class Ui {
     }
     
     public static String welcomeMessage() {
-        return "Hi there! Winston reporting.\nWhat can I do for you?\n" +
-                "Available Commands: done, list, todo, deadline, event, bye, delete, findString";
+        return "Hi there! Winston reporting.\nWhat can I do for you?\n" 
+                + "Available Commands: done, list, todo, deadline, event, bye, delete, findString";
     }
     
     public static String terminationMessage() {
