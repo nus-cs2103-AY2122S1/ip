@@ -1,51 +1,61 @@
 package duke;
 
 import duke.exceptions.DukeException;
+import duke.exceptions.DukeExitException;
+import duke.gui.Main;
 import duke.storage.Storage;
+import javafx.application.Application;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Scanner;
 
 /**
  * Main class for Duke.
  */
 public class Duke {
     static String border = "--------------------------------------------------";
-
+    private Parser parser;
+    private UI ui;
+    private TaskArrayList taskList;
+    private Path storagePath;
     /**
      * Main entry point for Duke project.
      *
      * @param args unused.
      */
     public static void main(String[] args) {
-        UI ui = new UI();
+        Application.launch(Main.class, args);
+    }
 
-        Path storagePath = Paths.get(".", "data", "duke.txt");
-        TaskArrayList taskList;
+    public Duke(){
+        storagePath = Paths.get(".", "data", "duke.txt");
         try {
-            taskList = Storage.load(storagePath);
+            this.taskList = Storage.load(storagePath);
         } catch (DukeException | IOException e) {
-            taskList = new TaskArrayList();
-            ui.showLoadingError();
+            this.taskList = new TaskArrayList();
         }
-        ui.displayLogo();
-        ui.displayWelcome();
+        this.ui = new UI();
+        this.parser = new Parser(ui, taskList, storagePath);
+    }
 
-        Scanner userScanner = new Scanner(System.in);
-        Parser parser = new Parser(ui, taskList, storagePath);
-
-        boolean isExit = false;
-        while (!isExit) {
-            String userInput = userScanner.nextLine();
-            try {
-                isExit = parser.run(userInput);
-            } catch (DukeException e) {
-                ui.displayException(e);
-            } finally {
-                Storage.dump(taskList, storagePath);
-            }
+    /**
+     * Get the response for a given user command input
+     *
+     * @param userInput command typed by user
+     * @return Message to print on screen for user
+     * @throws DukeExitException when response is an exit signal, caught by caller to prepare teardown
+     */
+    public String getResponse(String userInput) throws DukeExitException{
+        try {
+            return parser.run(userInput);
+        }catch (DukeExitException e){
+            throw e;
+        } catch (DukeException e) {
+            return e.getMessage();
+        } finally {
+            Storage.dump(taskList, storagePath);
         }
     }
+
 }
