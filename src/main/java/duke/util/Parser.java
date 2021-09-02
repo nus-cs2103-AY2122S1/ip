@@ -5,95 +5,80 @@ import duke.exception.DukeException;
 import java.util.Scanner;
 
 public class Parser {
-    private final Scanner sc;
-    private final List list;
+    private TaskList list;
 
-    public Parser(List list) {
-        this.sc = new Scanner(System.in);
+    public Parser(TaskList list) {
         this.list = list;
     }
 
-    // extract int from done and delete prompts
-    public static int extractInt(String input) throws DukeException {
+    /**
+     * Extracts an integer from a string input of format "string integer".
+     *
+     * @param input String containing an integer at 2nd position.
+     * @return Integer at second position of String.
+     * @throws DukeException If String does not have more than one word.
+     */
+    public int extractInt(String input) throws DukeException {
         String[] parts = input.split(" ");//split along the whitespace to get the integer
-        if (parts.length <= 1) {// checking for incomplete prompts
+        if (parts.length != 2) {// checking for wrong format
             throw new DukeException();
         }
         String numStr = parts[1];
-        return Integer.valueOf(numStr);
+        return Integer.parseInt(numStr);
     }
 
-    public void execute() {
-        String input = sc.nextLine(); // scan the line for the user's input
-
-        boolean shouldContinue = true;
-        while (shouldContinue) {//create loop for the chat
-            try {
-                if (input.startsWith("find ")) {
-                    String desc = input.replaceFirst("find ", "");//remove find from input
-                    if (desc.isBlank()) {//check for incomplete input
-                        throw new DukeException();
-                    }
-                    list.find(desc);
-                    input = sc.nextLine();
-                    continue;
-                } else if (input.startsWith("done ")) {
-                    int numInt = extractInt(input);
-                    list.setIndexDone(numInt);
-                    input = sc.nextLine();
-                    continue;
-                } else if (input.startsWith("delete ")) {
-                    int numInt = extractInt(input);
-                    list.deleteTask(numInt);
-                    input = sc.nextLine();
-                    continue;
-                } else if (input.startsWith("todo ")) {
-                    String task = input.replaceFirst("todo ", "");//remove to-do from input
-                    if (task.isBlank()) {//check for incomplete input
-                        throw new DukeException();
-                    }
-                    list.addToDo(task);
-                    input = sc.nextLine();
-                    continue;
-                } else if (input.startsWith("deadline ")) {
-                    String task = input.replaceFirst("deadline ", "");//remove deadline from input
-                    if (task.isBlank()) {//checking incomplete input
-                        throw new DukeException();
-                    }
-                    String[] parts = task.split("/by ");//split string along keyword /by
-                    list.addDeadline(parts[0], parts[1]);
-                    input = sc.nextLine();
-                    continue;
-                } else if (input.startsWith("event ")) {
-                    String task = input.replaceFirst("event ", "");//remove event from input
-                    if (task.isBlank()) {//checking incomplete input
-                        throw new DukeException();
-                    }
-                    String[] parts = task.split("/at");//split string along keyword /at
-                    list.addEvent(parts[0], parts[1]);
-                    input = sc.nextLine();
-                    continue;
+    /**
+     * Parses the input and then executes the instructions.
+     *
+     * @param input String of instructions.
+     * @return The response from Duke.
+     */
+    public String parseAndExecute(String input) {
+        try {
+            if (input.startsWith("find ")) {
+                String desc = input.replaceFirst("find ", "");//remove find from input
+                if (desc.isBlank()) {//check for incomplete input
+                    throw new DukeException();
                 }
-
-                switch (input) {
+                return list.find(desc);
+            } else if (input.startsWith("done ")) {
+                int numInt = extractInt(input);
+                return list.setIndexDone(numInt);
+            } else if (input.startsWith("delete ")) {
+                int numInt = extractInt(input);
+                return list.deleteTask(numInt);
+            } else if (input.startsWith("todo ")) {
+                String task = input.replaceFirst("todo ", "");//remove to-do from input
+                if (task.isBlank()) {//check for incomplete input
+                    throw new DukeException();
+                }
+                return list.addToDo(task);
+            } else if (input.startsWith("deadline ")) {
+                String task = input.replaceFirst("deadline ", "");//remove deadline from input
+                if (task.isBlank()) {//checking incomplete input
+                    throw new DukeException();
+                }
+                String[] parts = task.split("/by ");//split string along keyword /by
+                return list.addDeadline(parts[0], parts[1]);
+            } else if (input.startsWith("event ")) {
+                String task = input.replaceFirst("event ", "");//remove event from input
+                if (task.isBlank()) {//checking incomplete input
+                    throw new DukeException();
+                }
+                String[] parts = task.split("/at");//split string along keyword /at
+                return list.addEvent(parts[0], parts[1]);
+            } else {
+                switch (input.toLowerCase()) {
                 case "bye":
-                case "Bye":
-                case "BYE":
-                    System.out.println("Bye. Hope to see you again soon!");
-                    shouldContinue = false;
-                    break;
+                    return "Bye. Hope to see you again soon!";
                 case "list":
-                    list.show();
-                    input = sc.nextLine();
-                    break;
+                    return list.show();
                 default:
                     throw new DukeException();
                 }
-            } catch (DukeException e) {
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                input = sc.nextLine();
             }
+        } catch (DukeException e) {
+            return "OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
-        sc.close();
     }
 }
