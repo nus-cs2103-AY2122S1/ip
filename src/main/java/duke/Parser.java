@@ -2,12 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.EditCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.OnCommand;
+import duke.command.*;
 
 /**
  * Parser class deals with making sense of the user command.
@@ -31,83 +26,69 @@ public class Parser {
             return new ListCommand();
         case "done": {
             int taskNumber = getTaskNumber(message[1]);
-            return new EditCommand(EditCommand.EditType.DONE, taskNumber);
+            return new DoneCommand(taskNumber);
         }
         case "todo":
-            return new AddCommand(AddCommand.TaskType.TODO, new String[] {checkToDoDescription(message[1])});
+            return new AddCommand(AddCommand.TaskType.TODO,
+                    new String[] {checkDescriptionAvailable(message[1], command)});
         case "deadline": {
-            String description = checkDeadlineDescription(message[1]);
-            String[] parameters = description.split(" /by ");
+            String description = checkDescriptionAvailable(message[1], command);
+            String[] parameters = getParameters(description, command, " /by ");
             return new AddCommand(AddCommand.TaskType.DEADLINE, parameters);
         }
         case "event": {
-            String description = checkEventDescription(message[1]);
-            String[] parameters = description.split(" /at ");
+            String description = checkDescriptionAvailable(message[1], command);
+            String[] parameters = getParameters(description, command, " /at ");
             return new AddCommand(AddCommand.TaskType.EVENT, parameters);
         }
         case "delete": {
             int taskNumber = getTaskNumber(message[1]);
-            return new EditCommand(EditCommand.EditType.DELETE, taskNumber);
+            return new DeleteCommand(taskNumber);
         }
         case "on": {
-            String dateString = message[1]; // need to check string
+            String dateString = checkDescriptionAvailable(message[1], command);
             LocalDate date = LocalDate.parse(dateString.trim());
             return new OnCommand(date);
         }
+        case "find":
+            String query = checkDescriptionAvailable(message[1], command);
+            return new FindCommand(query);
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(\n");
         }
     }
 
     /**
-     * Checks that the Deadline description is valid.
+     * Checks that the description is available.
      *
      * @param des User's command message excluding the command word.
-     * @return Deadline description string.
-     * @throws DukeException If description is empty or does not contain a date.
-     */
-    public static String checkDeadlineDescription(String des) throws DukeException {
-        String description = des.trim();
-        if (description.isEmpty()) {
-            throw new DukeException("The description of a deadline cannot be empty!\n");
-        } else if (!description.contains(" /by ")) {
-            throw new DukeException("The new deadline is missing a date!\n");
-        } else {
-            return description;
-        }
-    }
-
-    /**
-     * Checks that the Event description is valid.
-     *
-     * @param des User's command message excluding the command word.
-     * @return Event description string.
-     * @throws DukeException If description is empty or does not contain a date.
-     */
-    public static String checkEventDescription(String des) throws DukeException {
-        String description = des.trim();
-        if (description.isEmpty()) {
-            throw new DukeException("The description of an event cannot be empty!\n");
-        } else if (!description.contains(" /at ")) {
-            throw new DukeException("The new event is missing a date!\n");
-        } else {
-            return description;
-        }
-    }
-
-    /**
-     * Checks that the ToDo description is valid.
-     *
-     * @param des User's command message excluding the command word.
-     * @return ToDo description string.
+     * @param command Type of command.
+     * @return Description string.
      * @throws DukeException If description is empty.
      */
-    public static String checkToDoDescription(String des) throws DukeException {
+    private static String checkDescriptionAvailable(String des, String command) throws DukeException {
         String description = des.trim();
         if (description.isEmpty()) {
-            throw new DukeException("The description of a todo task cannot be empty!\n");
+            throw new DukeException(String.format("The description of a %s cannot be empty!\n", command));
         } else {
-            return description;
+            return des;
+        }
+    }
+
+    /**
+     * Checks that the description contains parameters required for command.
+     *
+     * @param des User's command message excluding the command word.
+     * @param command Type of command.
+     * @param regex Regex string to split description.
+     * @return String array of parameters.
+     * @throws DukeException If description does not contain a date.
+     */
+    private static String[] getParameters(String des, String command, String regex) throws DukeException {
+        if (!des.contains(regex)) {
+            throw new DukeException(String.format("The new %s is missing a date!\n", command));
+        } else {
+            return des.split(regex);
         }
     }
 
@@ -118,13 +99,12 @@ public class Parser {
      * @return Task number of task to be edited.
      * @throws DukeException If no task number is provided.
      */
-    public static int getTaskNumber(String des) throws DukeException {
+    private static int getTaskNumber(String des) throws DukeException {
         String description = des.trim();
         if (description.isEmpty()) {
             throw new DukeException("I do not know which task to change!\n");
         } else {
-            int taskNumber = Integer.parseInt(description);
-            return taskNumber;
+            return Integer.parseInt(description);
         }
     }
 }

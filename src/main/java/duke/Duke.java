@@ -42,7 +42,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            return c.execute(taskList, ui, storage);
+            return c.execute(taskList, storage);
         } catch (DukeException e) {
             return e.getMessage();
         }

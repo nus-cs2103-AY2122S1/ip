@@ -22,8 +22,14 @@ public class Deadline extends Task {
         this.by = by;
     }
 
-    public LocalDate getBy() {
-        return by;
+    /**
+     * Checks whether by is the same date.
+     *
+     * @param date Date to check for.
+     * @return Whether date and by are the same dates.
+     */
+    public boolean isSameBy(LocalDate date) {
+        return by.isEqual(date);
     }
 
     @Override
@@ -32,7 +38,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toFileFormat() {
-        return "D / " + super.toFileFormat() + " / " + by;
+    public String convertToFileFormat() {
+        return "D / " + super.convertToFileFormat() + " / " + by;
     }
 }

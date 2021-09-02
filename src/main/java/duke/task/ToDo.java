@@ -20,7 +20,7 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String toFileFormat() {
-        return "T / " + super.toFileFormat();
+    public String convertToFileFormat() {
+        return "T / " + super.convertToFileFormat();
     }
 }

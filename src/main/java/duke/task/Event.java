@@ -22,8 +22,14 @@ public class Event extends Task {
         this.time = time;
     }
 
-    public LocalDate getTime() {
-        return time;
+    /**
+     * Checks whether time is the same date.
+     *
+     * @param date Date to check for.
+     * @return Whether date and time are the same dates.
+     */
+    public boolean isSameTime(LocalDate date) {
+        return time.equals(date);
     }
 
     @Override
@@ -32,7 +38,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String toFileFormat() {
-        return "E / " + super.toFileFormat() + " / " + time;
+    public String convertToFileFormat() {
+        return "E / " + super.convertToFileFormat() + " / " + time;
     }
 }

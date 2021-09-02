@@ -43,8 +43,15 @@ public class Task {
         isDone = done == 1;
     }
 
-    public String getDescription() {
-        return description;
+
+    /**
+     * Checks whether description contains query string.
+     *
+     * @param query Query string to check for in description.
+     * @return Whether description contains query string.
+     */
+    public boolean containsQuery(String query) {
+        return description.contains(query);
     }
 
     @Override
@@ -58,7 +65,7 @@ public class Task {
      *
      * @return String representation of task in file format.
      */
-    public String toFileFormat() {
+    public String convertToFileFormat() {
         return String.format("%d / %s", isDone ? 1 : 0, description);
     }
 }

@@ -1,12 +1,10 @@
 package duke.task;
 
-import duke.task.Deadline;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
 
@@ -26,13 +24,13 @@ public class DeadlineTest {
     @Test
     public void testFileFormatConversion() {
         Deadline deadline = new Deadline("project", LocalDate.of(2021, 9, 1));
-        assertEquals("D / 0 / project / 2021-09-01", deadline.toFileFormat());
+        assertEquals("D / 0 / project / 2021-09-01", deadline.convertToFileFormat());
     }
 
     @Test
     public void fileFormatConversion_doneTask_indicated() {
         Deadline deadline = new Deadline("project", LocalDate.of(2021, 9, 1));
         deadline.markAsDone();
-        assertEquals("D / 1 / project / 2021-09-01", deadline.toFileFormat());
+        assertEquals("D / 1 / project / 2021-09-01", deadline.convertToFileFormat());
     }
 }

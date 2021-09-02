@@ -78,14 +78,10 @@ public class Storage {
     /**
      * Saves tasks to the storage file.
      *
-     * @param taskList User's list of tasks.
+     * @param content User's list of tasks in file format.
      * @throws DukeException  If error occurred while saving.
      */
-    public void saveList(ArrayList<Task> taskList) throws DukeException {
-        StringBuilder content = new StringBuilder();
-        for (Task task : taskList) {
-            content.append(task.toFileFormat()).append("\n");
-        }
+    public void saveList(String content) throws DukeException {
         try {
             FileWriter myWriter = new FileWriter(filePath);
             myWriter.write(content.toString());
