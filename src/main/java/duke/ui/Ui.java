@@ -113,7 +113,14 @@ public class Ui {
         if (result[0] == null) {
             return display("There are no matching tasks in your list!");
         } else {
-            String[] output = new String[result.length + 1];
+            int count = 0;
+            for (int i = 0; i < result.length; i++) {
+                if (result[i] == null) {
+                    break;
+                }
+                count++;
+            }
+            String[] output = new String[count + 1];
             output[0] = "Here are the matching tasks in your list:";
             for (int i = 0; i < result.length; i++) {
                 if (result[i] == null) {
