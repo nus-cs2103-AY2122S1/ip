@@ -1,15 +1,19 @@
 package duke;
 
-import duke.command.Command;
+import java.util.Scanner;
+
 import duke.ui.ConsoleUi;
 import javafx.application.Application;
-
-import java.util.Scanner;
 
 /**
  * A launcher class to workaround classpath issues.
  */
 public class Launcher {
+    /**
+     * Launches Duke either in GUI mode or console mode.
+     *
+     * @param args Arguments to the launcher.
+     */
     public static void main(String[] args) {
         if (args.length == 1 && args[0].equals("--console")) {
             runConsole();

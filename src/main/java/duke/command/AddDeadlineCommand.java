@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Task;
+import duke.ui.Ui;
 
 public class AddDeadlineCommand extends Command {
     private String arguments;

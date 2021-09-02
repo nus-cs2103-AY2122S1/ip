@@ -8,6 +8,12 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Initializes an instance of Duke.
+     *
+     * @param filePath The storage location for Duke's tasklist.
+     * @throws Exception
+     */
     public Duke(String filePath) throws Exception {
         super();
         this.storage = new Storage(filePath);
@@ -19,6 +25,12 @@ public class Duke {
         this.ui = ui;
     }
 
+    /**
+     * Executes the given command.
+     *
+     * @param fullCommand The full string of the command to execute.
+     * @return A boolean representing whether this instance of Duke should exit.
+     */
     public boolean executeCommand(String fullCommand) {
         try {
             Command command = Parser.parse(fullCommand);

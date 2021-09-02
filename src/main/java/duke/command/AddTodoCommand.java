@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.Ui;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.ui.Ui;
 
 public class AddTodoCommand extends Command {
     private String arguments;

@@ -2,7 +2,6 @@ package duke;
 
 import duke.ui.GraphicalUi;
 import duke.ui.Ui;
-
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -65,7 +64,8 @@ public class MainWindow extends AnchorPane {
                 Window window = scene.getWindow();
 
                 if (window instanceof Stage) {
-                    ((Stage) window).close();
+                    Stage stage = (Stage) window;
+                    stage.close();
                 }
             }
         }
