@@ -61,6 +61,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates the initialization of Duke and runs the programme.
+     *
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
 
         // Creates an initialisation of Duke and runs it

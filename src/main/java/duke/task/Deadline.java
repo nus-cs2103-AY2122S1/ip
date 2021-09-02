@@ -1,7 +1,7 @@
 package duke.task;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * The Deadline class encapsulates a deadline task.
