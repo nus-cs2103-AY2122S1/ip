@@ -41,6 +41,7 @@ public class TaskList {
             .range(0, list.size())
             .mapToObj(index -> {
                 Task currTask = list.get(index);
+                assert currTask != null : "listItem should be present";
                 return index + "." + currTask;
             })
             .collect(Collectors.joining("\n"));

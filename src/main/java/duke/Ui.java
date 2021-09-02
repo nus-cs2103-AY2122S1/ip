@@ -161,7 +161,7 @@ public class Ui {
      * @return String which is input from user.
      */
     public String getUserCommand() {
-        String message = "e";
+        String message;
         message = sc.nextLine();
         return message;
     }
