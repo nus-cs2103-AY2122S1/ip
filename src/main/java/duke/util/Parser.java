@@ -74,6 +74,9 @@ public class Parser {
             case "find":
                 return new FindCommand(storage, taskList, parsedInput[1]);
                 // collection of commands to be executed when "find" is detected
+            case "help":
+                return new HelpCommand(storage, taskList);
+                // collection of commands to be executed when "help" is detected
             default:
                 throw new IllegalArgumentException();
             }

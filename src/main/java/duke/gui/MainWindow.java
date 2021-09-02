@@ -60,6 +60,20 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    @FXML
+    private void handleGetList()  {
+        String getList = "list";
+        String response = duke.guiProcess(getList);
+        this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
+    }
+
+    @FXML
+    private void handleGetHelp() {
+        String getList = "help";
+        String response = duke.guiProcess(getList);
+        this.dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
+    }
+
 
 
 }
