@@ -9,6 +9,7 @@ import duke.util.DukeTaskList;
 import duke.util.Ui;
 
 import java.util.Map;
+import java.util.Optional;
 
 
 /**
@@ -28,7 +29,7 @@ public class TodoCommand implements DukeActions {
      * @throws DukeException When erroneous inputs are given.
      */
     @Override
-    public boolean runAndCanContinue(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config,
+    public Optional<String> run(Map<String, String> map, DukeTaskList list, DukeDB database, DukeConfig config,
                                      Ui ui) throws DukeException {
         if (map.get("todo") == null) {
             throw new DukeException("duke.task.Todo body cannot be empty.");
@@ -36,10 +37,8 @@ public class TodoCommand implements DukeActions {
             Task event = new Todo(map.get("todo"));
             list.addTask(event)
                     .orElseThrow(() -> new DukeException("Failed to add the task to the list"));
-            ui.addTaskUpdate(event,
-                    list.getSize());
+            return Optional.of(ui.addTaskUpdate(event,
+                    list.getSize()));
         }
-        return true;
-
     }
 }

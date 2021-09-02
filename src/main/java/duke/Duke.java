@@ -4,6 +4,7 @@ import duke.command.DukeCommand;
 import duke.util.DukeConfig;
 import duke.util.DukeDB;
 import duke.util.DukeException;
+import duke.util.DukeExitException;
 import duke.util.DukeTaskList;
 import duke.util.Parser;
 import duke.util.Ui;
@@ -16,7 +17,9 @@ import java.util.Scanner;
  * Class for Duke. Holds all the class variables and methods.
  */
 public class Duke {
-    /** Simple string array to store inputs **/
+    /**
+     * Simple string array to store inputs
+     **/
     private final DukeTaskList list;
     private final DukeDB database;
     private final DukeConfig config;
@@ -26,6 +29,7 @@ public class Duke {
      * Basic constructor to initialise the list
      **/
     public Duke(DukeDB database, DukeConfig config) {
+        super();
         this.ui = new Ui();
         this.database = database;
         this.list = new DukeTaskList(database.load()
@@ -35,8 +39,17 @@ public class Duke {
 
 
     public Duke(DukeDB database) {
+        super();
         this.ui = new Ui();
         this.database = database;
+        this.list = new DukeTaskList(database.load()
+                .orElse(new ArrayList<>()));
+        this.config = new DukeConfig();
+    }
+
+    public Duke() {
+        this.ui = new Ui();
+        this.database = new DukeDB(null);
         this.list = new DukeTaskList(database.load()
                 .orElse(new ArrayList<>()));
         this.config = new DukeConfig();
@@ -48,28 +61,27 @@ public class Duke {
      *
      * @param text The text to be printed.
      */
-    public static void printMsg(String text) {
+    public static String printMsg(String text) {
         String bar = "===============================================";
-        System.out.printf("%s\n%s\n%s\n",
+        String output = String.format("%s\n%s\n%s\n",
                 bar,
                 text,
                 bar);
+        System.out.println(output);
+        return output;
     }
 
-    /**
-     * Method that listens and scans for user input.
-     * Program will exit when the command "bye" is given to the scanner.
-     */
+    @Deprecated
     public void listen() {
         Scanner scanner = new Scanner(System.in);
         this.ui.greet(this.list.getSize());
         boolean shouldTerminate = true;
-        while (shouldTerminate && scanner.hasNextLine()) {
+        while (scanner.hasNextLine()) {
             String scannedLine = scanner.nextLine();
             Optional<DukeCommand> prefix = DukeCommand.getCommand(scannedLine.split(" ")[0]);
             DukeCommand command = prefix.orElseGet(() -> DukeCommand.INVALID);
             try {
-                shouldTerminate = command.action.runAndCanContinue(Parser.parseCommand(scannedLine),
+                command.action.run(Parser.parseCommand(scannedLine),
                         this.list,
                         this.database,
                         this.config,
@@ -81,5 +93,21 @@ public class Duke {
         }
     }
 
-
+    public Optional<String> takeInput(String input) {
+        Optional<DukeCommand> prefix = DukeCommand.getCommand(input.split(" ")[0]);
+        DukeCommand command = prefix.orElseGet(() -> DukeCommand.INVALID);
+        try {
+            Optional<String> output = command.action.run(Parser.parseCommand(input),
+                    this.list,
+                    this.database,
+                    this.config,
+                    this.ui);
+            this.database.save(this.list.getList());
+            return output;
+        } catch (DukeExitException exitException){
+            return Optional.empty();
+        } catch(DukeException e){
+            return Optional.of(e.toString());
+        }
+    }
 }
