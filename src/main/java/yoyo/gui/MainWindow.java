@@ -1,12 +1,16 @@
 package yoyo.gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import yoyo.Yoyo;
+
+import java.io.IOException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -22,6 +26,22 @@ public class MainWindow extends AnchorPane {
     private Yoyo yoyo;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
     private Image yoyoImage = new Image(this.getClass().getResourceAsStream("/images/Yoyo.jpeg"));
+
+    /**
+     * Constructor class for MainWindow component.
+     */
+    public MainWindow(Yoyo yoyo) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.yoyo = yoyo;
+    }
+
 
     /**
      * Actions to be executed when starting up GUI.
@@ -56,6 +76,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getYoyoDialog(response, yoyoImage)
         );
         userInput.clear();
+        if (response.equals("bye")) {
+            Platform.exit();
+        }
     }
 
 
