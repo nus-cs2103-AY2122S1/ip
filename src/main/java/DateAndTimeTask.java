@@ -20,6 +20,19 @@ public class DateAndTimeTask extends Task {
         }
     }
 
+    public DateAndTimeTask(String description, String details, boolean isDone) throws DukeException {
+        this(description, details);
+        if (isDone) {
+            this.setDone();
+        }
+    }
+
+    @Override
+    public String getSave() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+        return super.getSave() + "|" + dateTime.format(formatter);
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d LLL yyyy h.mma");

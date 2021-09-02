@@ -14,6 +14,7 @@ import java.util.Scanner;
 public class Duke {
     private static final String MSG_ERROR_DEFAULT = "im sorry I is no understand.";
     private static final String MSG_ERROR_BLANK_DESCRIPTION = "is no leave description blank;";
+    private static final String MSG_ERROR_BLANK_DATEANDTIME = "is no leave date and time blank!";
     private static final String MSG_ERROR_CORRUPT_TASK = "save file corrupt. is delete task.";
     private static final String MSG_ERROR_CORRUPT_SAVE = "save file corrupt. is no exit program until message stops.";
     private static final String MSG_ERROR_INVALID_TASK_NUMBER = "what kind of number is (||❛︵❛.)";
@@ -166,7 +167,7 @@ public class Duke {
         } else {
             int i = description.indexOf(" /by ");
             if (i < 0) {
-                addTask(new Deadline(description.substring(1)));
+                throw new DukeException(MSG_ERROR_BLANK_DATEANDTIME);
             } else if (i <= 1) {
                 throw new DukeException(MSG_ERROR_BLANK_DESCRIPTION);
             } else {
@@ -193,7 +194,7 @@ public class Duke {
         } else {
             int i = description.indexOf(" /at ");
             if (i < 0) {
-                addTask(new Event(description.substring(1)));
+                throw new DukeException(MSG_ERROR_BLANK_DATEANDTIME);
             } else if (i <= 1) {
                 throw new DukeException(MSG_ERROR_BLANK_DESCRIPTION);
             } else {

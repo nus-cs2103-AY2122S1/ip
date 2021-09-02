@@ -35,7 +35,9 @@ public abstract class Task {
         return this.description;
     }
 
-    public abstract String getSave();
+    public String getSave() {
+        return (this.isDone() ? "1" : "0") + "|" + this.getDescription();
+    }
 
     @Override
     public String toString() {

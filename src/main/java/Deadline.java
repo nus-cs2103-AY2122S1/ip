@@ -6,6 +6,7 @@ public class Deadline extends DateAndTimeTask {
     private String deadline;
 
     /**
+     * Deprecated.
      * @param description The description of the Task.
      */
     public Deadline(String description) {
@@ -20,17 +21,13 @@ public class Deadline extends DateAndTimeTask {
         super(description, details);
     }
 
-    public Deadline(String description, String deadline, boolean isDone) {
-        super(description, isDone);
-        this.deadline = deadline;
+    public Deadline(String description, String details, boolean isDone) throws DukeException {
+        super(description, details, isDone);
     }
 
         @Override
     public String getSave() {
-        return "D" +
-                (this.isDone() ? "1" : "0") + "|" +
-                this.getDescription() + "|" +
-                this.deadline;
+        return "D" + super.getSave();
     }
 
     @Override
