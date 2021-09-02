@@ -1,12 +1,7 @@
 package duke;
 
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.IOException;
 
 /**
  * Parses the inputs
@@ -16,21 +11,16 @@ public class Parser {
     /** Input string by the user. */
     private String inp;
 
-    /**
-     * Constructor to initialise the input.
-     * @param inp input
-     */
     public Parser(String inp) {
         this.inp = inp;
     }
-
 
     /**
      * Parses the input task to extract the task content.
      * @return The actual task content.
      */
     public String parseTask() {
-        String desc = ((inp.split("\\s",2)[1]).split("/"))[0];
+        String desc = inp.split("/")[0];
         return desc;
     }
 
@@ -45,5 +35,31 @@ public class Parser {
         return d1.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    /**
+     * Parses the user input to return the appropriate command.
+     * @param inpCommand command entered by the user
+     * @return Command matching the input.
+     */
+    public static Command parseCommand(String inpCommand) {
+        String input = inpCommand.toLowerCase();
+        if (input.contains("done")) {
+            int ind = Integer.parseInt((input.split("\\s", 2))[1]) - 1;
+            return new Done(ind);
+        } else if (input.contains("delete")) {
+            int ind = Integer.parseInt((input.split("\\s", 2))[1]) - 1;
+            return new Delete(ind);
+        } else if (input.contains("find")) {
+            String trimmedFind = input.split("\\s", 2)[1];
+            return new Find(trimmedFind);
+        } else if (input.contains("list")) {
+            return new List();
+        } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")) {
+            return new Add(input);
+        } else if (input.contains("bye")) {
+            return new Bye();
+        } else {
+            return new Invalid();
+        }
+    }
 }
 

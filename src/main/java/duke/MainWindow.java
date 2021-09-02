@@ -2,7 +2,6 @@ package duke;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.application.Platform;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -28,7 +27,6 @@ public class MainWindow extends AnchorPane {
 
     private static final String INTRO = "Yo! I As you might know, I'm Michael Scott. The name of my bot version is Duke, " +
             "cause my position is pretty much like the Duke - ME A BOSS! At least THAT'S WHAT SHE SAID";
-    private static final String EXIT = "Bye. Hope to see you again soon! Just a little reminder : YOU ARE AWESOME DUDE - THAT'S WHAT SHE SAID :))";
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -56,9 +54,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        if (input.trim().equals("bye")) {
-            exit();
-        }
         userInput.clear();
     }
 
@@ -67,10 +62,4 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(INTRO, dukeImage));
     }
 
-    @FXML
-    private void exit() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(EXIT, dukeImage));
-        Platform.exit();
-        System.exit(0);
-    }
 }

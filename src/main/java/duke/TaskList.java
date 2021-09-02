@@ -3,18 +3,15 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * Represents the tasks in the list.
+ * Represents the TaskList.
  */
 public class TaskList {
-
-    private Storage storage;
 
     /** The array list representing the tasks */
     private ArrayList<Task> arr;
 
-    public TaskList(Storage storage) {
-        this.storage=storage;
-        this.arr=storage.load("data/duke.txt");
+    public TaskList(ArrayList<Task> arr) {
+        this.arr = arr;
     }
 
     /**
@@ -50,12 +47,15 @@ public class TaskList {
         arr.remove(i);
     }
 
+    /**
+     * Converts whole TaskList to String.
+     * @return string version of the TaskList.
+     */
     public String stringifyWholeList() {
-        String res="";
+        String res = "";
         for (int j = 0; j < arr.size(); j++) {
             if (!arr.get(j).getPreExisting()) {
                 res = res + arr.get(j).toString() + "\n";
-
             } else {
                 res = res + arr.get(j).getDescription() + "\n";
             }
@@ -63,34 +63,11 @@ public class TaskList {
         return res;
     }
 
+    /**
+     * Returns the whole TaskList.
+     * @return the whole TaskList.
+     */
     public ArrayList<Task> getTaskList() {
         return arr;
     }
-
-    public String findTaskFromTaskList(TaskList ob, String inputFind) {
-        String trimmedFind = inputFind.split("\\s", 2)[1];
-        String res="";
-        boolean flag = true;
-        int i=1;
-        for (int j = 0; j < ob.numberOfTasks(); j++) {
-            if(!ob.getTaskFromList(j).getPreExisting()) {
-                if(ob.getTaskFromList(j).toString().contains(trimmedFind)){
-                    flag = false;
-                    res = res + "    " + (i++) + ". " + ob.getTaskFromList(j).toString() + "\n";
-                }
-            } else {
-                if(ob.getTaskFromList(j).getDescription().contains(trimmedFind)) {
-                    flag = false;
-                    res = res + "    " + (i++) + ". " + ob.getTaskFromList(j).getDescription() + "\n";
-                }
-            }
-        }
-        if(flag) {
-            return "oops! sorry you do not have any matching tasks";
-        }
-        else{
-            return res;
-        }
-    }
-
 }
