@@ -14,7 +14,7 @@ public class FindCommand extends Command {
         this.query = query;
     }
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         StringBuilder message = new StringBuilder("Here are the matching tasks in your list:\n");
         int n = 1;
         for (int i = 0; i < taskList.getSize(); i++) {
@@ -24,6 +24,6 @@ public class FindCommand extends Command {
                 n++;
             }
         }
-        ui.printMessage(message.toString());
+        return message.toString();
     }
 }

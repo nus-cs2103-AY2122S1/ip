@@ -11,7 +11,7 @@ public class Ui {
     private Scanner sc;
 
     /**
-     * Constructs the Deadline object.
+     * Constructs the Ui object.
      */
     public Ui() {
         sc = new Scanner(System.in);

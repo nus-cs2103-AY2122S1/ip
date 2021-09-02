@@ -32,28 +32,25 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String messageHeader = "Alright! New task added:\n";
         switch (type) {
         case DEADLINE:
             Deadline deadline = new Deadline(parameters[0].trim(), LocalDate.parse(parameters[1]));
             taskList.addTask(deadline);
-            String deadlineMessage = messageHeader + deadline + taskList.getListStatus();
-            ui.printMessage(deadlineMessage);
-            break;
-        case EVENT:
+            storage.saveList(taskList.getTasks());
+            return messageHeader + deadline + taskList.getListStatus();
+            case EVENT:
             Event event = new Event(parameters[0], LocalDate.parse(parameters[1]));
             taskList.addTask(event);
-            String eventMessage = messageHeader + event + taskList.getListStatus();
-            ui.printMessage(eventMessage);
-            break;
+            storage.saveList(taskList.getTasks());
+            return messageHeader + event + taskList.getListStatus();
         case TODO:
             ToDo toDo = new ToDo(parameters[0]);
             taskList.addTask(toDo);
-            String toDoMessage = messageHeader + toDo + taskList.getListStatus();
-            ui.printMessage(toDoMessage);
-            break;
+            storage.saveList(taskList.getTasks());
+            return messageHeader + toDo + taskList.getListStatus();
         }
-        storage.saveList(taskList.getTasks());
+        return "Error";
     }
 }

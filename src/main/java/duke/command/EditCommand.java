@@ -28,7 +28,7 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskNumber < 1 || taskNumber > taskList.getSize()) {
             throw new DukeException("I cannot find this task number!\n");
         } else {
@@ -36,18 +36,19 @@ public class EditCommand extends Command {
             case DONE:
                 Task completedTask = taskList.getTask(taskNumber - 1);
                 completedTask.markAsDone();
-                String completeMessage = "Good work! duke.task.Task is now marked as done:\n" + completedTask + "\n";
-                ui.printMessage(completeMessage);
                 storage.saveList(taskList.getTasks());
-                break;
+                return "Good work! Task is now marked as done:\n" + completedTask + "\n";
+//                ui.printMessage(completeMessage);
+//                break;
             case DELETE:
                 Task deletedTask = taskList.removeTask(taskNumber - 1);
-                String deleteMessage = "Alright! I've deleted this task:\n" + deletedTask + taskList.getListStatus();
-                ui.printMessage(deleteMessage);
                 storage.saveList(taskList.getTasks());
-                break;
+                return "Alright! I've deleted this task:\n" + deletedTask + taskList.getListStatus();
+//                ui.printMessage(deleteMessage);
+//                break;
             }
         }
+        return "Error";
     }
 
 

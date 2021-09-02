@@ -27,7 +27,7 @@ public class OnCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
         StringBuilder message = new StringBuilder("The tasks that you have on " + date.format(formatter) + " are:\n");
         for (int i = 0; i < taskList.getSize(); i++) {
@@ -44,6 +44,6 @@ public class OnCommand extends Command {
                 }
             }
         }
-        ui.printMessage(message.toString());
+        return message.toString();
     }
 }
