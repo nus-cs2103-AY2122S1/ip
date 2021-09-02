@@ -49,7 +49,7 @@ public class Ui {
     /**
      * Prints simple farewell message to user.
      */
-    public String[] end() {
+    public static String[] end() {
         return display("Bye. Hope to see you again soon!");
     }
 
@@ -70,7 +70,7 @@ public class Ui {
      * @param task Task that is currently being added into the list.
      * @param size Size of current list including current Task being added.
      */
-    public String[] printTaskAdded(Task task, int size) {
+    public static String[] printTaskAdded(Task task, int size) {
         return display("Got it. I've added this task: ",
                 task.toString(), "Now you have " + size + " tasks in the list");
     }
@@ -80,7 +80,7 @@ public class Ui {
      *
      * @param task Task that user has indicated as completed.
      */
-    public String[] printTaskCompleted(Task task) {
+    public static String[] printTaskCompleted(Task task) {
         System.out.println("    ______________________________________");
         System.out.println("     Nice! I've marked this task as done:");
         System.out.printf("       %s\n", task);
@@ -95,7 +95,7 @@ public class Ui {
      * @param task Task that the user wants deleted.
      * @param size Size of list with remaining tasks.
      */
-    public String[] printDeleteTask(Task task, int size) {
+    public static String[] printDeleteTask(Task task, int size) {
         System.out.println("    ______________________________________");
         System.out.println("     Noted. I've removed this task:");
         System.out.printf("       %s\n", task);
@@ -110,7 +110,7 @@ public class Ui {
      *
      * @param result Result of tasks that pass the search.
      */
-    public String[] printFindTask(Task[] result) {
+    public static String[] printFindTask(Task[] result) {
         if (result[0] == null) {
             return display("There are no matching tasks in your list!");
         } else {

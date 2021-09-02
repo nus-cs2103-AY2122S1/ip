@@ -9,7 +9,7 @@ import duke.exception.DukeException;
  * Creates an ArrayList to store tasks and provides functionality to manipulate the tasks inside the ArrayList.
  */
 public class TaskList {
-    private ArrayList<Task> store;
+    private static ArrayList<Task> store;
     private String[] input;
 
     /**
@@ -84,7 +84,7 @@ public class TaskList {
      *
      * @param task Task that is to be added.
      */
-    public void add(Task task) {
+    public static void add(Task task) {
         store.add(task);
     }
 
@@ -116,7 +116,7 @@ public class TaskList {
         store.remove(taskNumber);
     }
 
-    public String[] printList(String command) throws DukeException {
+    public static String[] printList(String command) throws DukeException {
         String[] words = command.split(" ");
         if (words.length > 1) {
             throw new DukeException("invalidCommand");
