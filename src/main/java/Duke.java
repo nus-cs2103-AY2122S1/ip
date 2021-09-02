@@ -15,6 +15,9 @@ import duke.task.Todo;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Class to handle all duke logic.
+ */
 public class Duke {
 
     private static final String DATA_FOLDER = "./data";
@@ -48,7 +51,8 @@ public class Duke {
     }
 
     /**
-     * entry point of the due chatbot.
+     * Entry point of the due chatbot.
+     *
      * @throws DukeException in case any unexpected input is passed
      * @throws IOException in case of file issues
      */
@@ -58,7 +62,8 @@ public class Duke {
     }
 
     /**
-     * interacts with the user
+     * Interacts with the user
+     *
      * @throws DukeException if input is wrong
      * @throws IOException thrown if file handling fails
      */
@@ -73,7 +78,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
-        while(flag) {
+        while (flag) {
             input = Ui.getInput(sc).split("\\s+");
             String command = input[0];
             String str;
@@ -83,48 +88,48 @@ public class Duke {
                 switch (command) {
                 case "list":
                     output = items.printList();
-
                     break;
+
                 case "done":
                     int idx = Integer.parseInt(input[1]);
                     output = items.markDone(idx);
                     str = storage.getFileLine(idx);
                     str = str.substring(0, 4) + "1" + str.substring(5);
                     storage.updateListTask(idx, str);
-
                     break;
+
                 case "bye":
                     flag = false;
-
                     break;
+
                 case "todo":
                     output = items.addItem(new Todo(task[0]));
                     str = "T | 0 | " + task[0];
                     storage.addToFile(str);
-
                     break;
+
                 case "event":
                     output = items.addItem(new Event(task[0], task[1]));
                     str = "E | 0 | " + task[0] + " | "+ task[1];
                     storage.addToFile(str);
-
                     break;
+
                 case "deadline":
                     output = items.addItem(new Deadline(task[0], task[1]));
                     str = "D | 0 | " + task[0] + " | "+ task[1];
                     storage.addToFile(str);
-
                     break;
+
                 case "delete":
                     int id = Integer.parseInt(input[1]);
                     output = items.deleteItem(id);
                     storage.deleteFromFile(id);
-
                     break;
+
                 case "find":
                     output = items.findTask(task[0]);
-
                     break;
+
                 default:
                     output = "I don't recognise this command\n"
                             + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find' or 'bye'";
@@ -145,7 +150,8 @@ public class Duke {
     }
 
     /**
-     * The main function of Bhutu
+     * The main function of Bhutu.
+     *
      * @param args The command line arguments
      */
     public static void main(String[] args) throws IOException, DukeException {
