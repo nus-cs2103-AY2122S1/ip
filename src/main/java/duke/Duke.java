@@ -10,8 +10,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Duke {
 
@@ -26,34 +27,18 @@ public class Duke {
         this.ui = new Ui();
     }
 
-	/*
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-		*/
-
-    private void run() {
-        this.ui.greet();
-        Scanner sc = new Scanner(System.in);
-        Boolean run = true;
-        while (run && sc.hasNextLine()) {
-            String input = sc.nextLine();
-            System.out.println(Ui.DIVIDER_LINE);
-            input = input.strip();
-            this.runInstruction(input);
-            System.out.println(Ui.DIVIDER_LINE);
-            this.storage.saveTasks(this.tasks.getTasks());
-        }
-        sc.close();
-    }
-
     private String runInstruction(String input) {
         String[] splitInput = input.split(" ", 2);
             Command command = Parser.parse(splitInput);
             try {
                 switch (command) {
                 case EXIT:
+                    new Timer().schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                System.exit(0);
+                            }
+                        }, 300L); // 300 is the delay in millis
                     return this.ui.exit();
                 case LIST:
                     return this.ui.list(this.tasks);
@@ -71,6 +56,8 @@ public class Duke {
                 }
             } catch (DukeTaskDetailsException | DukeIndexInputException e) {
                 return "\t" + e.toString();
+            } finally {
+                this.storage.saveTasks(this.tasks.getTasks());
             }
     }
 

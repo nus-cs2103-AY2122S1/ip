@@ -12,11 +12,6 @@ public class Ui {
      * Method to generate greet string when Duke is first run
      */
     public String greet() {
-        String logo = " ____        _\n"
-            + "|  _ \\ _   _| | _____\n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
         return "Hello from Duke\n";
     }
 
@@ -24,14 +19,14 @@ public class Ui {
      * Method to generate string corresponding to Command.EXIT
      */
     public String exit() {
-        return "\tBye. Hope to see you again soon!";
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Method to generate string corresponding to Command.UNKNOWN
      */
     public String unknownCommand() {
-        return "\tSorry, I do not know this command!";
+        return "Sorry, I do not know this command!";
     }
 
     /**
@@ -44,7 +39,7 @@ public class Ui {
     public String list(TaskList tasks) {
         String list = "";
         for (int i = 0; i < tasks.size(); i++) {
-            list += "\t" + (i + 1) + ". " + tasks.get(i).toString() + "\n";
+            list += (i + 1) + ". " + tasks.get(i).toString() + "\n";
         }
         return list;
     }
@@ -58,7 +53,7 @@ public class Ui {
     public String list(ArrayList<Task> tasks) {
         String toReturn = "Here are the matching tasks your list\n";
         for (int i = 0; i < tasks.size(); i++) {
-            toReturn += "\t" + (i + 1) + ". " + tasks.get(i).toString() +"\n";
+            toReturn += (i + 1) + ". " + tasks.get(i).toString() +"\n";
         }
         return toReturn;
     }
@@ -74,12 +69,12 @@ public class Ui {
     public String indexCommand(int size, Task task, String[] taskArray) {
         String toReturn = "";
         if (taskArray[0].equals("done")) {
-            toReturn += "\tNice! I\'ve marked this task as done:\n";
-            toReturn += " \t" + task.toString() + "\n";       
+            toReturn += "Nice! I\'ve marked this task as done:\n";
+            toReturn +=  "\t" + task.toString() + "\n";
         } else {
-            toReturn += "\tNoted. I've removed this task: \n";
+            toReturn += "Noted. I've removed this task: \n";
             toReturn += "\t" + task.toString() + "\n";
-            toReturn += "\tNow you have " + size + " tasks in the list";
+            toReturn += "Now you have " + size + " tasks in the list";
         }
         return toReturn;
     }
@@ -91,9 +86,9 @@ public class Ui {
      * @param size length of tasklist
      */
     public String addTask(Task task, int size) {
-        String toReturn = "\tGot it. I\'ve added this task:\n";
-        toReturn += "\t  " + task.toString();
-        toReturn += "\tNow you have " + size +
+        String toReturn = "Got it. I\'ve added this task:\n";
+        toReturn += "\t" + task.toString() + "\n";
+        toReturn += "Now you have " + size +
                            " tasks in the list.";
         return toReturn;
     }
