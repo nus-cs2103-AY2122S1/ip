@@ -27,8 +27,12 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input){
+        return ui.getMessage(this.storage, this.tasklist, input);
+    }
+
     public void run() throws DukeException {
-        Ui.run(this.storage, this.tasklist);
+
     }
 
     public static void main(String[] args) throws DukeException {
