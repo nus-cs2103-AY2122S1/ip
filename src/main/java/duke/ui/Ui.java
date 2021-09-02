@@ -3,9 +3,6 @@ package duke.ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.io.PrintStream;
-import java.util.Scanner;
-
 /** A class that manages the UI */
 public class Ui {
     public static final String LOGO = " ____        _        \n"
@@ -30,24 +27,13 @@ public class Ui {
     public static final String MESSAGE_LOADING_FAIL = "Failed to load data";
     public static final String MESSAGE_GOODBYE = "Good bye!";
 
-    private Scanner in;
-    private PrintStream out;
+    private MainWindow mainWindow;
 
     /**
      * Constructs UI that takes input from stdin and prints to stdout.
      */
-    public Ui() {
-        this.in = new Scanner(System.in);
-        this.out = System.out;
-    }
-
-    /**
-     * Returns the user command.
-     *
-     * @return The user command.
-     */
-    public String getUserCommand() {
-        return in.nextLine();
+    public Ui(MainWindow mw) {
+        this.mainWindow = mw;
     }
 
     public void sayGreet() {
@@ -92,20 +78,22 @@ public class Ui {
 
     /** Prints what Duke says */
     public void say(String... s) {
-        this.out.print("Duke: ");
+        String msg = "Duke: ";
 
         for (String line : s) {
-            this.out.println(line);
+            msg += line + "\n";
         }
+
+        this.mainWindow.showDukeMessage(msg);
     }
 
     /** Prints error messages */
     public void sayError(String s) {
-        this.out.println("ERROR: " + s);
+        this.mainWindow.showDukeMessage("ERROR: " + s);
     }
 
     /** Prints info messages */
     public void sayInfo(String s) {
-        this.out.println(s);
+        this.mainWindow.showDukeMessage("INFO: " + s);
     }
 }
