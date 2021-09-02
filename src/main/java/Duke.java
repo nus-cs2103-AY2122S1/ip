@@ -1,19 +1,18 @@
-/**
- * The Bhutu chatbot app
- */
-
 import java.io.IOException;
-import duke.DukeException;
-import duke.Ui;
-import duke.Storage;
-import duke.Parser;
-import duke.Items;
-import duke.task.Task;
-import duke.task.Event;
-import duke.task.Deadline;
-import duke.task.Todo;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.DukeException;
+import duke.Items;
+import duke.Parser;
+import duke.Storage;
+import duke.Ui;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
+
 
 /**
  * Class to handle all duke logic.
@@ -22,7 +21,7 @@ public class Duke {
 
     private static final String DATA_FOLDER = "./data";
     private static final String DATA_FILE = "duke.txt";
-    
+
     // All UI functionality
     private final Ui ui;
 
@@ -78,7 +77,7 @@ public class Duke {
 
         Scanner sc = new Scanner(System.in);
         boolean flag = true;
-        while(flag) {
+        while (flag) {
             inputWords = Ui.getInput(sc).split("\\s+");
             String command = inputWords[0];
             String str;
@@ -106,12 +105,12 @@ public class Duke {
                     break;
                 case "event":
                     output = items.addItem(new Event(task[0], task[1]));
-                    str = "E | 0 | " + task[0] + " | "+ task[1];
+                    str = "E | 0 | " + task[0] + " | " + task[1];
                     storage.addToFile(str);
                     break;
                 case "deadline":
                     output = items.addItem(new Deadline(task[0], task[1]));
-                    str = "D | 0 | " + task[0] + " | "+ task[1];
+                    str = "D | 0 | " + task[0] + " | " + task[1];
                     storage.addToFile(str);
                     break;
                 case "delete":
