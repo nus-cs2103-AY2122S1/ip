@@ -9,16 +9,24 @@ import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.Main;
+import duke.ui.MainWindow;
 import duke.ui.Ui;
+import javafx.application.Application;
 
 /** A class for Duke program. */
 public class Duke {
     private Ui ui;
     private TaskList taskList;
     private Storage storage;
+    private boolean isExit;
 
-    public Duke(String filePath) {
-        ui = new Ui();
+    public Duke(MainWindow mw) {
+        this("data/duke.txt", mw);
+    }
+
+    public Duke(String filePath, MainWindow mw) {
+        ui = new Ui(mw);
         storage = new Storage(filePath);
 
         try {
@@ -30,32 +38,30 @@ public class Duke {
         }
     }
 
-    public void run() {
+    public boolean isExit() {
+        return this.isExit;
+    }
+
+    public void process(String response) {
+        try {
+            Command c = Parser.parse(response);
+            c.execute(taskList, ui, storage);
+            this.isExit = c.isExit();
+        } catch (IOException | DukeException e) {
+            ui.sayError(e.getMessage());
+        }
+    }
+
+    public void boot() {
         ui.sayGreet();
         ui.sayHelp();
+    }
 
-        String response = "";
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                response = ui.getUserCommand();
-                Command c = Parser.parse(response);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (IOException | DukeException e) {
-                ui.sayError(e.getMessage());
-            }
-        }
-
+    public void shutDown() {
         ui.sayGoodBye();
     }
 
     public static void main(String[] args) {
-        String filePath = args.length == 0 ? "data/duke.txt" : args[0];
-
-        Duke duke = new Duke(filePath);
-
-        duke.run();
+        Application.launch(Main.class, args);
     }
 }
