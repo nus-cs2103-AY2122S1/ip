@@ -6,5 +6,6 @@ public enum CommandType {
     Delete,
     Display,
     Done,
+    Find,
     List
 }

@@ -3,9 +3,9 @@ package duke;
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
-import duke.command.CommandType;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
+import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 public class Parser {
@@ -30,6 +30,12 @@ public class Parser {
                         "delete in the following format: \n\t delete [task number]");
             }
             return new DeleteCommand(Integer.parseInt(params[1]) - 1);
+        case ("find"):
+            if (params.length == 1) {
+                throw new DukeException("☹ OOPS!!! Please enter the keyword you'd like to " +
+                        "search for.");
+            }
+            return new FindCommand(params[1]);
         case ("todo"):
         case ("event"):
         case ("deadline"):
