@@ -34,25 +34,20 @@ public class Duke extends Application {
         }
     }
 
-    /**
-     * Runs Duke chatbot and allows it to continuously receive inputs from the user.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
+
+    public String getResponse(String input) {
+        try {
+            Command c = parser.parse(input);
+            String response = c.execute(taskList, ui, storage);
+            if (c.isExit()) {
+                System.exit(0);
             }
+            return response;
+
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
         }
+        return "";
     }
 
     @Override
@@ -70,7 +65,6 @@ public class Duke extends Application {
      * @param args
      */
     public static void main(String[] args) {
-        //new Duke("data/tasks.txt").run();
         Application.launch(Main.class, args);
     }
 }

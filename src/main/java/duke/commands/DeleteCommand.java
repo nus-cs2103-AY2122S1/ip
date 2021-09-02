@@ -35,14 +35,14 @@ public class DeleteCommand extends Command {
      * @param storage The current Storage being used.
      * @throws DukeException
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskIdx >= taskList.size()) {
             throw new DukeException("Invalid task number entered.");
         }
         Task task = taskList.getTask(taskIdx);
         taskList.removeTask(taskIdx);
         storage.write(taskList);
-        ui.showTaskDeleted(task, taskList);
+        return ui.showTaskDeleted(task, taskList);
     }
 
 }

@@ -17,7 +17,7 @@ public abstract class Command {
      * @param storage The current Storage being used.
      * @throws DukeException If there is invalid command entered.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     public boolean isExit() {
         return false;

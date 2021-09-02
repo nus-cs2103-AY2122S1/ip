@@ -44,11 +44,11 @@ public class DeadlineCommand extends Command {
      * @param ui The current Ui being used.
      * @param storage The current Storage being used.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task deadline = new Deadline(description, by);
         taskList.addTask(deadline);
         storage.write(taskList);
-        ui.showTaskAdded(deadline, taskList);
+        return ui.showTaskAdded(deadline, taskList);
     }
 
 }

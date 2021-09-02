@@ -32,8 +32,8 @@ public class FindCommand extends Command {
      * @param ui The current Ui being used.
      * @param storage The current Storage being used.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.showMatchingTasks(taskList.findMatchingTasks(keyword));
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return ui.showMatchingTasks(taskList.findMatchingTasks(keyword));
     }
 
 }

@@ -25,8 +25,8 @@ public class Ui {
     /**
      * Displays the goodbye message.
      */
-    public void showGoodbye() {
-        System.out.println("Exiting the program, goodbye!");
+    public String showGoodbye() {
+        return "Exiting the program, goodbye!";
     }
 
     /**
@@ -41,9 +41,9 @@ public class Ui {
      * @param task The task added to the TaskList.
      * @param taskList The TaskList with the Task added.
      */
-    public void showTaskAdded(Task task, TaskList taskList) {
-        System.out.println("Got it. I have added this task:\n  " + task + "\n Now you have "
-                + taskList.size() + " tasks in the list.\n");
+    public String showTaskAdded(Task task, TaskList taskList) {
+        return "Got it. I have added this task:\n  " + task + "\n Now you have "
+                + taskList.size() + " tasks in the list.\n";
     }
 
     /**
@@ -51,9 +51,9 @@ public class Ui {
      * @param task The task deleted from the TaskList.
      * @param taskList The TaskList the Task is deleted from.
      */
-    public void showTaskDeleted(Task task, TaskList taskList) {
-        System.out.println("Noted. I have removed this task:\n  " + task + "\n Now you have "
-                + taskList.size() + " tasks in the list.\n");
+    public String showTaskDeleted(Task task, TaskList taskList) {
+        return "Noted. I have removed this task:\n  " + task + "\n Now you have "
+                + taskList.size() + " tasks in the list.\n";
     }
 
     /**
@@ -61,8 +61,8 @@ public class Ui {
      *
      * @param task The Task which is marked as done.
      */
-    public void showTaskDone(Task task) {
-        System.out.println("Great! I've marked this task as done:\n" + task + "\n");
+    public String showTaskDone(Task task) {
+        return "Great! I've marked this task as done:\n" + task + "\n";
     }
 
     /**
@@ -95,16 +95,16 @@ public class Ui {
      *
      * @param taskList The TaskList whose contents are to be displayed.
      */
-    public void showList(TaskList taskList) {
-        System.out.println("Here are the tasks in your list: " + taskList);
+    public String showList(TaskList taskList) {
+        return "Here are the tasks in your list: " + taskList;
     }
 
     /**
      * Displays the matching tasks in the list.
      * @param taskList List of matching tasks.
      */
-    public void showMatchingTasks(TaskList taskList) {
-        System.out.println("Here are the matching tasks in your list: " + taskList);
+    public String showMatchingTasks(TaskList taskList) {
+        return "Here are the matching tasks in your list: " + taskList;
     }
 
 }

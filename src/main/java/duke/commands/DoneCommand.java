@@ -34,14 +34,14 @@ public class DoneCommand extends Command {
      * @param storage The current Storage being used.
      * @throws DukeException
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskIdx >= taskList.size()) {
             throw new DukeException("Invalid task number entered.");
         }
         Task task = taskList.getTask(taskIdx);
         task.markAsDone();
         storage.write(taskList);
-        ui.showTaskDone(task);
+        return ui.showTaskDone(task);
     }
 
 }

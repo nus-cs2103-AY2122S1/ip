@@ -41,11 +41,11 @@ public class EventCommand extends Command {
      * @param ui The current Ui being used.
      * @param storage The current Storage being used.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         Task event = new Event(description, at);
         taskList.addTask(event);
         storage.write(taskList);
-        ui.showTaskAdded(event, taskList);
+        return ui.showTaskAdded(event, taskList);
     }
 
 }
