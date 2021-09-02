@@ -121,7 +121,7 @@ public class Parser {
                     throw new NoTaskDescriptionException();
                 }
                 try {
-                    LocalDateTime by = LocalDateTime.parse(taskDescription.substring(deadlineDescription.indexOf("by") + 3),
+                    LocalDateTime by = LocalDateTime.parse(taskDescription.substring(taskDescription.indexOf("by") + 3),
                             DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
                     return new Deadline(deadlineDescription, false, by);
                 } catch (DateTimeParseException e) {
@@ -143,7 +143,7 @@ public class Parser {
                     throw new NoTaskDescriptionException();
                 }
                 try {
-                    LocalDateTime at = LocalDateTime.parse(taskDescription.substring(eventDescription.indexOf("at") + 3),
+                    LocalDateTime at = LocalDateTime.parse(taskDescription.substring(taskDescription.indexOf("at") + 3),
                             DateTimeFormatter.ofPattern("yyyy-M-d H:m"));
                     return new Event(eventDescription, false, at);
                 } catch (DateTimeParseException e) {
