@@ -63,7 +63,7 @@ public class Main extends Application {
      */
     public static void exit() {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

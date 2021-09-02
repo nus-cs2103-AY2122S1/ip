@@ -97,11 +97,11 @@ public class Ui {
      * When the user enters an invalid input.
      *
      * @param e The InvalidInputException.
-     * @param extra Extra details about the exception to be mentioned.
+     * @param extra Extra details about the exception.
      * @return An invalid input message.
      */
     public String invalidInput(InvalidInputException e, String extra) {
-        return e.toString() + extra;
+        return e.toString() + " " + extra;
     }
 
     /**
@@ -109,10 +109,11 @@ public class Ui {
      * When the user enters an invalid instruction.
      *
      * @param e The InvalidInputException.
+     * @param extra Extra details about the exception.
      * @return An invalid instruction message.
      */
-    public String invalidInstruction(InvalidInstructionException e) {
-        return e.toString();
+    public String invalidInstruction(InvalidInstructionException e, String extra) {
+        return e.toString() + " " + extra;
     }
 
     /**
@@ -120,9 +121,10 @@ public class Ui {
      * When an exception that is not a Duke exception is thrown.
      *
      * @param e The non-Duke Exception.
+     * @param extra Extra details about the exception.
      * @return An exception message.
      */
-    public String printException(Exception e) {
-        return e.toString();
+    public String printException(Exception e, String extra) {
+        return e.toString() + " " + extra;
     }
 }

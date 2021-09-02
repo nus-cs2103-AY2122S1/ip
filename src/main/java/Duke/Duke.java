@@ -46,7 +46,11 @@ public class Duke {
             ArrayList<String> savedTasks = storage.getStorageContents();
             taskList = new TaskList(savedTasks);
         } catch (FileNotFoundException e) {
-            new File(filePath);
+            try {
+                new File(filePath).createNewFile();
+            } catch (IOException ex) {
+                ui.printException(ex, "File " + filePath + " does not exist and cannot be created.");
+            }
             taskList = new TaskList();
         } catch (InvalidInputException e) {
             ui.invalidInput(e, "Please check data in " + filePath);
@@ -167,15 +171,15 @@ public class Duke {
             try {
                 saveTasks();
             } catch (IOException ie) {
-                return new Pair<>(ui.printException(ie), getTasks());
+                return new Pair<>(ui.printException(ie, "Tasks could not be saved."), getTasks());
             }
-            return new Pair<>(ui.printException(e), getTasks());
+            return new Pair<>(ui.printException(e, ""), getTasks());
         } catch (InvalidInputException e) {
-            return new Pair<>(ui.printException(e), getTasks());
+            return new Pair<>(ui.invalidInput(e, ""), getTasks());
         } catch (IOException e) {
-            return new Pair<>(ui.printException(e), getTasks());
+            return new Pair<>(ui.printException(e, ""), getTasks());
         } catch (InvalidInstructionException e) {
-            return new Pair<>(ui.printException(e), getTasks());
+            return new Pair<>(ui.invalidInstruction(e, ""), getTasks());
         }
     }
 
