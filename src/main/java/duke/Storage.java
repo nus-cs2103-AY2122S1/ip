@@ -13,7 +13,6 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private static String DASH = "__________________________________";
     protected String filepath;
     public TaskList taskList;
     private int counter = 0;
@@ -37,9 +36,7 @@ public class Storage {
      */
     public String printFileContents(TaskList tasks) throws FileNotFoundException {
 
-        // System.out.println(filePath);
         File f = new File(filepath); // create a File for the given file path
-        // System.out.println(f.exists());
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
 
         while (s.hasNext()) {

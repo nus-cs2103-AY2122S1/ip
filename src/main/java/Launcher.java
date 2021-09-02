@@ -7,7 +7,8 @@ public class Launcher {
 
     /**
      * Launches Duke.
-     * @param args Nil
+     *
+     * @param args Left blank.
      */
     public static void main(String[] args) {
         Application.launch(Main.class, args);

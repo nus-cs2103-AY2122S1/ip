@@ -26,12 +26,16 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("man.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("male.png"));
 
+    /**
+     * Initialises GUI and displays Welcome Message.
+     */
     @FXML
     public void initialize() {
         Duke duke = new Duke();
         setDuke(duke);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Welcome to Duke!\n How may I assist you today?", dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(
+                "Welcome to Duke!\n How may I assist you today?", dukeImage));
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getTasks(), dukeImage));
     }
 

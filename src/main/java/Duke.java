@@ -22,8 +22,10 @@ public class Duke {
 
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates response based on user input.
+     *
+     * @param input User input.
+     * @return Duke's response.
      */
     public String getResponse(String input) {
 
@@ -45,6 +47,11 @@ public class Duke {
         return "Duke heard: " + input;
     }
 
+    /**
+     * Retrieves tasks saved in txt file.
+     *
+     * @return List of previously saved tasks.
+     */
     public String getTasks() {
         try {
             return storage.printFileContents(taskList);
