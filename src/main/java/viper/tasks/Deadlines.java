@@ -1,9 +1,9 @@
-package tasks;
+package viper.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import viper.Instruction;
+import viper.commands.Instruction;
 
 /**
  * Represents a Deadline task that takes in date.

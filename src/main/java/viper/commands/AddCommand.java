@@ -1,15 +1,14 @@
-package commands;
+package viper.commands;
 
 import java.io.IOException;
 
-import exceptions.DukeException;
-import tasks.Deadlines;
-import tasks.Events;
-import tasks.Todos;
-import viper.Instruction;
-import viper.Storage;
-import viper.TaskList;
-import viper.Ui;
+import viper.exceptions.DukeException;
+import viper.storage.Storage;
+import viper.tasks.Deadlines;
+import viper.tasks.Events;
+import viper.tasks.TaskList;
+import viper.tasks.Todos;
+import viper.ui.Ui;
 
 /**
  * Adds todo, deadline and event command to tasklist and storage.
@@ -60,7 +59,7 @@ public class AddCommand extends Command {
                 ui.showInvalidTypeError();
                 break;
             }
-        } catch (DukeException | IOException e) {
+        } catch (IOException | DukeException e) {
             e.printStackTrace();
         }
     }

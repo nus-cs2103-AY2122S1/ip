@@ -1,4 +1,4 @@
-package viper;
+package viper.commands;
 
 /**
  * Stores the types of Instruction a command can have.
@@ -12,7 +12,7 @@ public enum Instruction {
     DELETE("delete"),
     BYE("bye"),
     INVALID("invalid"),
-    FIND("find"),;
+    FIND("find");
 
     private final String s;
     Instruction(String s) {

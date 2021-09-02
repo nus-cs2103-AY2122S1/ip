@@ -4,8 +4,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
 
-import commands.Command;
-import exceptions.DukeException;
+import viper.commands.Command;
+import viper.exceptions.DukeException;
+import viper.parser.Parser;
+import viper.storage.Storage;
+import viper.tasks.TaskList;
+import viper.ui.Ui;
 
 /**
  * A chatbot that manages user input tasks.

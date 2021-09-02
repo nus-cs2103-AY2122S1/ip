@@ -1,10 +1,10 @@
-import commands.AddCommand;
-import commands.ByeCommand;
-import commands.Command;
-import commands.ListCommand;
-import exceptions.DukeException;
 import org.junit.jupiter.api.Test;
-import viper.Parser;
+import viper.commands.AddCommand;
+import viper.commands.ByeCommand;
+import viper.commands.Command;
+import viper.commands.ListCommand;
+import viper.exceptions.DukeException;
+import viper.parser.Parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

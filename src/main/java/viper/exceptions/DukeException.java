@@ -1,4 +1,4 @@
-package exceptions;
+package viper.exceptions;
 
 /**
  * Exception thrown when user input is unknown.

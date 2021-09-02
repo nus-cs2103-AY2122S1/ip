@@ -1,4 +1,4 @@
-package viper;
+package viper.storage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -11,11 +11,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
-import exceptions.DukeException;
-import tasks.Deadlines;
-import tasks.Events;
-import tasks.Task;
-import tasks.Todos;
+import viper.exceptions.DukeException;
+import viper.tasks.Deadlines;
+import viper.tasks.Events;
+import viper.tasks.Task;
+import viper.tasks.Todos;
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file

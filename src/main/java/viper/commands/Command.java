@@ -1,10 +1,10 @@
-package commands;
+package viper.commands;
 
 import java.io.IOException;
 
-import viper.Storage;
-import viper.TaskList;
-import viper.Ui;
+import viper.storage.Storage;
+import viper.tasks.TaskList;
+import viper.ui.Ui;
 
 /**
  * Represents user input

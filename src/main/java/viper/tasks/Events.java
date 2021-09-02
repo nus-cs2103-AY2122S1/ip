@@ -1,11 +1,11 @@
-package tasks;
+package viper.tasks;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import exceptions.DukeException;
-import viper.Instruction;
+import viper.commands.Instruction;
+import viper.exceptions.DukeException;
 
 /**
  * Represents an event task that takes in date and time.

@@ -1,8 +1,9 @@
-package viper;
+package viper.ui;
 
 import java.util.Scanner;
 
-import tasks.Task;
+import viper.tasks.Task;
+import viper.tasks.TaskList;
 
 /**
  * deals with interactions with the user.

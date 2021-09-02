@@ -1,13 +1,13 @@
-package viper;
+package viper.parser;
 
-import commands.AddCommand;
-import commands.ByeCommand;
-import commands.Command;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.FindCommand;
-import commands.ListCommand;
-import exceptions.DukeException;
+import viper.commands.AddCommand;
+import viper.commands.ByeCommand;
+import viper.commands.Command;
+import viper.commands.DeleteCommand;
+import viper.commands.DoneCommand;
+import viper.commands.FindCommand;
+import viper.commands.ListCommand;
+import viper.exceptions.DukeException;
 
 /**
  * deals with making sense of the user command.

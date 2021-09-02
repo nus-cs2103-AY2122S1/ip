@@ -1,6 +1,6 @@
-package tasks;
+package viper.tasks;
 
-import viper.Instruction;
+import viper.commands.Instruction;
 
 /**
  * Represents a todo task.

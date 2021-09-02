@@ -1,8 +1,8 @@
-package commands;
+package viper.commands;
 
-import viper.Storage;
-import viper.TaskList;
-import viper.Ui;
+import viper.storage.Storage;
+import viper.tasks.TaskList;
+import viper.ui.Ui;
 
 /**
  * Command that search through task list and returns a new task list with items that match the keyword

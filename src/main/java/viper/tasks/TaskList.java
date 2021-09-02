@@ -1,9 +1,7 @@
-package viper;
+package viper.tasks;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
-import tasks.Task;
 
 /**
  * Contains the list of tasks and methods for the list.

@@ -1,8 +1,8 @@
-import exceptions.DukeException;
+import viper.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
-import tasks.Deadlines;
-import tasks.Events;
-import tasks.Todos;
+import viper.tasks.Deadlines;
+import viper.tasks.Events;
+import viper.tasks.Todos;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

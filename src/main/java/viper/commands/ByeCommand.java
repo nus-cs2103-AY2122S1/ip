@@ -1,8 +1,8 @@
-package commands;
+package viper.commands;
 
-import viper.Storage;
-import viper.TaskList;
-import viper.Ui;
+import viper.storage.Storage;
+import viper.tasks.TaskList;
+import viper.ui.Ui;
 
 /**
  * Exits Viper and shows a bye message.
