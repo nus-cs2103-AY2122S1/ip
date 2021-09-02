@@ -57,6 +57,14 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses relevant information from deadline.
+     *
+     * @param deadline user inputted deadline.
+     * @return ArrayList of relevant information extracted from user input.
+     * @throws MessageEmptyException if the user does not include the "/by" keyword.
+     * @throws IncorrectFormatException if the user input contains an incorrect duration format.
+     */
     private ArrayList<String> parseAddDeadline(String deadline) throws MessageEmptyException,
             IncorrectFormatException {
         ArrayList<String> parsedDeadline = new ArrayList<>();
@@ -84,7 +92,7 @@ public class Parser {
      * @param event user inputted event.
      * @return ArrayList of relevant information extracted from user input.
      * @throws MessageEmptyException if the user input is lacking a message.
-     * @throws IncorrectFormatException if the user input does not include the "/by" keyword.
+     * @throws IncorrectFormatException if the user input does not include the "/at" keyword.
      * @throws InvalidDurationException if the user input contains an incorrect duration format.
      */
     private ArrayList<String> parseAddEvent(String event) throws MessageEmptyException, IncorrectFormatException,
