@@ -48,9 +48,9 @@ abstract public class Task {
     }
 
     /**
-     * Marks tasks as done by setting the isDone boolean to true.
+     * Sets tasks as done by setting the isDone boolean to true.
      */
-    public void markAsDone() {
+    public void setDone() {
         this.isDone = true;
         System.out.println("Nice! I've marked this task as done: \n" + this.toString());
     }

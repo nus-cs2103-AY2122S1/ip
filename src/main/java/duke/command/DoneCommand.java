@@ -42,7 +42,7 @@ public class DoneCommand extends Command {
             throw new DukeException("Item does not exist in the list.");
         }
         Task task = ls.getTask(taskNumber);
-        task.markAsDone();
+        task.setDone();
         storage.rewriteFile(ls);
     }
 

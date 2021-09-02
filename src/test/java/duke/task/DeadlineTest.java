@@ -30,7 +30,7 @@ public class DeadlineTest {
     @Test
     public void testMarkAsDone() throws DukeException {
         Task dTask = new Deadline("read book", "2001-07-07");
-        dTask.markAsDone();
+        dTask.setDone();
         assertEquals(true, dTask.isDone());
     }
 }

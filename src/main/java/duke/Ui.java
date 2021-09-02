@@ -59,8 +59,7 @@ public class Ui {
      */
     public void removeTaskFromList(Task task, int size) {
         String taskToString = task.toString();
-        System.out.println("Noted. I've removed this task: \n" +
-                taskToString
+        System.out.println("Noted. I've removed this task: \n" + taskToString
                 + "\nNow you have " + size + " tasks in the list.");
     }
 
@@ -112,7 +111,7 @@ public class Ui {
      * @return String representation of Task status, "X" for done and " " for undone.
      */
     public String taskStatusIcon(boolean status) {
-        return (status ? "X" : " "); // mark done task with X
+        return (status ? "X" : " ");
     }
 
 }
