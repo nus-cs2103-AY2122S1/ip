@@ -1,6 +1,6 @@
 package duke.commands;
 
-import duke.Ui;
+import duke.gui.Ui;
 import duke.storage.Storage;
 import duke.tasks.ToDo;
 
@@ -27,12 +27,11 @@ public class ToDoCommand extends Command {
      * @return A boolean of false to indicate the main while loop should not be broken
      */
     @Override
-    public boolean execute(Ui ui, Storage storage) {
+    public String execute(Ui ui, Storage storage) {
         storage.addToList(toDo);
-        ui.print("Got it! I've added this task to the list: \n"
+        storage.save();
+        return ui.print("Got it! I've added this task to the list: \n"
                 + "  " + toDo.toString() + '\n'
                 + String.format("Now you have %d tasks in the list", storage.getSize()));
-        storage.save();
-        return false;
     }
 }

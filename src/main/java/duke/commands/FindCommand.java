@@ -1,6 +1,6 @@
 package duke.commands;
 
-import duke.Ui;
+import duke.gui.Ui;
 import duke.storage.Storage;
 
 /**
@@ -26,8 +26,7 @@ public class FindCommand extends Command {
      * @return A boolean of false to indicate the main while loop should not be broken
      */
     @Override
-    public boolean execute(Ui ui, Storage storage) {
-        ui.print(storage.find(keyword));
-        return false;
+    public String execute(Ui ui, Storage storage) {
+        return ui.print(storage.find(keyword));
     }
 }

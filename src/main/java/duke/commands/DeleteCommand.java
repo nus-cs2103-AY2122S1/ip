@@ -1,7 +1,8 @@
 package duke.commands;
 
-import duke.Ui;
+import duke.gui.Ui;
 import duke.storage.Storage;
+import duke.tasks.Task;
 
 
 /**
@@ -29,14 +30,15 @@ public class DeleteCommand extends Command {
      * @return A boolean of false to indicate the main while loop should not be broken
      */
     @Override
-    public boolean execute(Ui ui, Storage storage) {
+    public String execute(Ui ui, Storage storage) {
         try {
-            ui.print("Okay! I have deleted this task from your list: \n" + storage.getTask(index));
+            Task deletedTask = storage.getTask(index);
             storage.deleteFromList(index);
             storage.save();
+            return ui.print("Okay! I have deleted this task from your list: \n"
+                    + deletedTask.toString());
         } catch (IndexOutOfBoundsException e) {
-            ui.print("Oops, the list is not that big!");
+            return ui.print("Oops, the list is not that big!");
         }
-        return false;
     }
 }

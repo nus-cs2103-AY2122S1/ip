@@ -81,12 +81,12 @@ public class Parser {
         case "event":
             try {
                 if (splitUserInput.length == 1 || splitUserInput[1].equals("")) {
-                    throw new DukeExceptions("Oops,"
+                    throw new DukeExceptions("Oops, "
                             + "you need to tell me the description and the time of the event");
                 }
                 String[] splitBody = splitUserInput[1].split("/at", 2);
                 if (splitBody[0].equals("")) {
-                    throw new DukeExceptions("Oops,"
+                    throw new DukeExceptions("Oops, "
                             + "you need to tell me the description and the time of the event");
 
                 } else if (splitBody.length == 1 || splitBody[1].strip().equals("")) {

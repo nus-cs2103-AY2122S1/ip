@@ -1,7 +1,7 @@
 package duke.commands;
 
 import duke.DukeExceptions;
-import duke.Ui;
+import duke.gui.Ui;
 import duke.storage.Storage;
 
 /**
@@ -29,16 +29,16 @@ public class DoneCommand extends Command {
      * @return A boolean of false to indicate the main while loop should not be broken
      */
     @Override
-    public boolean execute(Ui ui, Storage storage) {
+    public String execute(Ui ui, Storage storage) {
         try {
             storage.markAsFinished(index);
-            ui.print("Well done! I have marked the following as finished: \n" + storage.getTask(index));
             storage.save();
+            return ui.print("Well done! I have marked the following as finished: \n"
+                    + storage.getTask(index));
         } catch (IndexOutOfBoundsException e) {
-            ui.print("Oops, the list is not that big!");
+            return ui.print("Oops, the list is not that big!");
         } catch (DukeExceptions e) {
-            ui.printException(e);
+            return ui.printException(e);
         }
-        return false;
     }
 }

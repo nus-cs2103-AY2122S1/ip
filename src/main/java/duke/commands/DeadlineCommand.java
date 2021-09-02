@@ -1,6 +1,6 @@
 package duke.commands;
 
-import duke.Ui;
+import duke.gui.Ui;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 
@@ -27,13 +27,13 @@ public class DeadlineCommand extends Command {
      * @return A boolean of false to indicate the main while loop should not be broken
      */
     @Override
-    public boolean execute(Ui ui, Storage storage) {
+    public String execute(Ui ui, Storage storage) {
         storage.addToList(deadline);
-        ui.print("Got it! I've added this deadline to the list: \n"
-                + "  " + deadline.toString() + '\n'
-                + String.format("Now you have %d tasks in the list", storage.getSize()));
         storage.save();
-        return false;
+        return ui.print(String.format("Got it! I've added this deadline to the list: \n"
+                + "%s \n Now you have %d tasks in the list",
+                deadline.toString(), storage.getSize())
+        );
     }
 
 }
