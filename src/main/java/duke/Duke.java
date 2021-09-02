@@ -1,5 +1,6 @@
 package duke;
 
+import duke.data.exception.DukeException;
 import duke.parser.Parser;
 
 /**
@@ -9,16 +10,13 @@ import duke.parser.Parser;
  * @author Won Ye Ji
  */
 public class Duke {
-
+    private Parser parser;
     /**
      * Runs the program until termination.
-     *
-     * @param args arguments supplied by the user at program launch.
      */
-    public static void main(String[] args) {
-        Parser parser = new Parser();
+    public Duke() {
+        parser = new Parser();
         parser.initialiseDuke();
-        parser.runDuke();
     }
 
     /**
@@ -26,6 +24,10 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            return parser.runDuke(input);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

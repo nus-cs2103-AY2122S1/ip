@@ -10,8 +10,8 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     protected String at;
-    private final DateTimeFormatter input = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
-    private final DateTimeFormatter output = DateTimeFormatter.ofPattern("MMM dd h:mm a");
+    private final DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+    private final DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM dd h:mm a");
 
     /**
      * Constructor for Event class.
@@ -31,8 +31,8 @@ public class Event extends Task {
      * @return A string representing the date in the desirable format.
      */
     public String dateFormatter(String at) {
-        LocalDateTime date = LocalDateTime.parse(at, input);
-        return date.format(output);
+        LocalDateTime date = LocalDateTime.parse(at, inputFormatter);
+        return date.format(outputFormatter);
     }
 
     /**

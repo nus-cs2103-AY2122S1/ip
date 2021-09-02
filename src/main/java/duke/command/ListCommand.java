@@ -29,7 +29,7 @@ public class ListCommand extends Command {
      * @param cmd Command string to be executed.
      */
     @Override
-    public void execute(String cmd) {
-        taskHandler.printList();
+    public String execute(String cmd) {
+        return taskHandler.printList();
     }
 }

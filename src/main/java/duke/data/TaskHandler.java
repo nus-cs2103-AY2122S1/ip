@@ -32,22 +32,23 @@ public class TaskHandler {
     /**
      * Prints the tasklist.
      */
-    public void printList() {
+    public String printList() {
         if (list.size() != 0) {
-            Ui.printList();
+            String toPrint = Ui.printList();
             for (int i = 0; i < list.size(); i++) {
-                System.out.println(Ui.indentation() + (i + 1) + ". " + list.get(i).toString());
+                toPrint = toPrint.concat(Ui.indentation() + (i + 1) + ". " + list.get(i).toString() + "\n");
             }
+            return toPrint;
         } else {
-            Ui.printEmptyList();
+            return Ui.printEmptyList();
         }
     }
 
     /**
      * Prints the number of tasks in the tasklist.
      */
-    public void printNoOfTasks() {
-        Ui.printNoOfTasks(list.size());
+    public String printNoOfTasks() {
+        return Ui.printNoOfTasks(list.size());
     }
 
     /**
@@ -55,11 +56,12 @@ public class TaskHandler {
      *
      * @param taskNo Task index of the task.
      */
-    public void markTaskAsDone(int taskNo) {
-        Ui.markAsDone();
+    public String markTaskAsDone(int taskNo) {
+        String toPrint = Ui.markAsDone();
         Task task = list.get(taskNo - 1);
         task.markAsDone();
-        System.out.println(Ui.indentation() + task);
+        toPrint = toPrint.concat(Ui.indentation() + task + "\n");
+        return toPrint;
     }
 
     /**
@@ -67,11 +69,12 @@ public class TaskHandler {
      *
      * @param taskNo Task index of the task.
      */
-    public void deleteTask(int taskNo) {
-        Ui.deleteTask();
+    public String deleteTask(int taskNo) {
+        String toPrint = Ui.deleteTask();
         Task task = list.get(taskNo - 1);
         list.remove(taskNo - 1);
-        System.out.println(Ui.indentation() + task);
+        toPrint = toPrint.concat(Ui.indentation() + task + "\n");
+        return toPrint;
     }
 
     /**
@@ -79,10 +82,11 @@ public class TaskHandler {
      *
      * @param todo ToDo task to be added.
      */
-    public void addToDo(ToDo todo) {
+    public String addToDo(ToDo todo) {
         list.add(todo);
-        Ui.addTask();
-        System.out.println(Ui.indentation() + Ui.indentation() + todo);
+        String toPrint = Ui.addTask();
+        toPrint = toPrint.concat(Ui.indentation() + Ui.indentation() + todo+ "\n");
+        return toPrint;
     }
 
     /**
@@ -90,10 +94,11 @@ public class TaskHandler {
      *
      * @param deadline Deadline task to be added.
      */
-    public void addDeadline(Deadline deadline) {
+    public String addDeadline(Deadline deadline) {
         list.add(deadline);
-        Ui.addTask();
-        System.out.println(Ui.indentation() + Ui.indentation() + deadline);
+        String toPrint = Ui.addTask();
+        toPrint = toPrint.concat(Ui.indentation() + Ui.indentation() + deadline+ "\n");
+        return toPrint;
     }
 
     /**
@@ -101,10 +106,11 @@ public class TaskHandler {
      *
      * @param event Event task to be added.
      */
-    public void addEvent(Event event) {
+    public String addEvent(Event event) {
         list.add(event);
-        Ui.addTask();
-        System.out.println(Ui.indentation() + Ui.indentation() + event);
+        String toPrint = Ui.addTask();
+        toPrint = toPrint.concat(Ui.indentation() + Ui.indentation() + event + "\n");
+        return toPrint;
     }
 
     /**
@@ -112,22 +118,23 @@ public class TaskHandler {
      *
      * @param keyword Keyword user wants to find.
      */
-    public void findTasks(String keyword) {
+    public String findTasks(String keyword) {
         ArrayList<String> tasks = new ArrayList<>();
         int j = 1;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).toString().contains(keyword)) {
-                tasks.add(Ui.indentation() + j + ". " + list.get(i).toString());
+                tasks.add(Ui.indentation() + j + ". " + list.get(i).toString() + "\n");
                 j++;
             }
         }
         if (tasks.size() == 0) {
-            Ui.noSuchTasksFound();
+            return Ui.noSuchTasksFound();
         } else {
-            Ui.printFoundTasks();
+            String toPrint = Ui.printFoundTasks();
             for (int k = 0; k < tasks.size(); k++) {
-                System.out.println(tasks.get(k));
+                toPrint = toPrint.concat(tasks.get(k));
             }
+            return toPrint;
         }
     }
 

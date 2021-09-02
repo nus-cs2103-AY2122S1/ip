@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.data.TaskHandler;
+import duke.data.exception.DukeException;
 import duke.storage.Storage;
 
 /**
@@ -27,6 +28,7 @@ public abstract class Command {
      * Executes the Command.
      *
      * @param cmd Command string to be executed.
+     * @return Duke's response to the user.
      */
-    public abstract void execute(String cmd);
+    public abstract String execute(String cmd) throws DukeException;
 }

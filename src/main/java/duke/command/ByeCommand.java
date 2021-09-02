@@ -12,7 +12,7 @@ import duke.ui.Ui;
 public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "BYE";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "Terminates Duke";
+            + "terminates Duke";
 
     /**
      * Constructor for ByeCommand.
@@ -28,10 +28,10 @@ public class ByeCommand extends Command {
      * Executes the "Bye" Command.
      *
      * @param cmd Command string to be executed.
+     * @return Duke's response to the user.
      */
     @Override
-    public void execute(String cmd) {
-        Ui.bye();
-        System.exit(0);
+    public String execute(String cmd) {
+        return Ui.bye();
     }
 }

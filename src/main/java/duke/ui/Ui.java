@@ -12,15 +12,15 @@ public class Ui {
     /**
      * Greets the user.
      */
-    public static void greet() {
-        System.out.println(Messages.WELCOME_MESSAGE);
+    public static String greet() {
+        return Messages.WELCOME_MESSAGE;
     }
 
     /**
      * Farewell message to the user.
      */
-    public static void bye() {
-        System.out.println(Messages.INDENTATION + Messages.BYE_MESSAGE);
+    public static String bye() {
+        return Messages.INDENTATION + Messages.BYE_MESSAGE;
     }
 
     /**
@@ -71,8 +71,8 @@ public class Ui {
     /**
      * Informs the user that list has been printed.
      */
-    public static void printList() {
-        System.out.println(Messages.INDENTATION + Messages.PRINT_LIST_MESSAGE);
+    public static String printList() {
+        return Messages.INDENTATION + Messages.PRINT_LIST_MESSAGE;
     }
 
     /**
@@ -80,50 +80,50 @@ public class Ui {
      *
      * @param i Number of tasks.
      */
-    public static void printNoOfTasks(int i) {
-        System.out.printf(Messages.INDENTATION + Messages.NUMBER_OF_TASKS_MESSAGE, i);
+    public static String printNoOfTasks(int i) {
+        return Messages.INDENTATION + String.format(Messages.NUMBER_OF_TASKS_MESSAGE, i);
     }
 
     /**
      * Informs the user that the task has been marked as done.
      */
-    public static void markAsDone() {
-        System.out.println(Messages.INDENTATION + Messages.MARK_TASK_AS_DONE_MESSAGE);
+    public static String markAsDone() {
+        return Messages.INDENTATION + Messages.MARK_TASK_AS_DONE_MESSAGE;
     }
 
     /**
      * Informs the user that the task has been added.
      */
-    public static void addTask() {
-        System.out.println(Messages.INDENTATION + Messages.ADD_TASK);
+    public static String addTask() {
+        return Messages.INDENTATION + Messages.ADD_TASK;
     }
 
     /**
      * Informs the user that the task has been deleted.
      */
-    public static void deleteTask() {
-        System.out.println(Messages.INDENTATION + Messages.DELETE_TASK);
+    public static String deleteTask() {
+        return Messages.INDENTATION + Messages.DELETE_TASK;
     }
 
     /**
      * Prints an empty list message.
      */
-    public static void printEmptyList() {
-        System.out.println(Messages.INDENTATION + Messages.EMPTY_LIST);
+    public static String printEmptyList() {
+        return Messages.INDENTATION + Messages.EMPTY_LIST;
     }
 
     /**
      * Prints tasks found message.
      */
-    public static void printFoundTasks() {
-        System.out.println(Messages.INDENTATION + Messages.MATCHING_TASK_FOUND);
+    public static String printFoundTasks() {
+        return Messages.INDENTATION + Messages.MATCHING_TASK_FOUND;
     }
 
     /**
      * Prints no tasks found message.
      */
-    public static void noSuchTasksFound() {
-        System.out.println(Messages.INDENTATION + Messages.NO_MATCHING_TASK_FOUND);
+    public static String noSuchTasksFound() {
+        return Messages.INDENTATION + Messages.NO_MATCHING_TASK_FOUND;
     }
 
     /**

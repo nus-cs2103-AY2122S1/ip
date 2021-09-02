@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Duke;
 import duke.data.TaskHandler;
 import duke.data.exception.DukeException;
 import duke.storage.Storage;
@@ -32,16 +33,12 @@ public class FindCommand extends Command {
      * @param cmd Command string to be executed.
      */
     @Override
-    public void execute(String cmd) {
-        try {
-            if (cmd.length() < 6) {
-                throw new DukeException(Ui.emptyDescription("find"));
-            } else {
-                String keyword = cmd.substring(6);
-                taskHandler.findTasks(keyword);
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+    public String execute(String cmd) throws DukeException {
+        if (cmd.length() < 6) {
+            throw new DukeException(Ui.emptyDescription("find"));
+        } else {
+            String keyword = cmd.substring(6);
+            return taskHandler.findTasks(keyword);
         }
     }
 }

@@ -30,19 +30,16 @@ public class DeleteCommand extends Command {
      * @param cmd Command string to be executed.
      */
     @Override
-    public void execute(String cmd) {
-        try {
-            Integer index = Integer.parseInt(cmd.substring(7));
-            int size = taskHandler.getList().size();
-            if (index >= 1 && index <= size) {
-                taskHandler.deleteTask(index);
-                taskHandler.printNoOfTasks();
-                storage.updateFile(taskHandler.formatTasksToSave());
-            } else {
-                throw new DukeException("Please enter a value from 1 to " + size);
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+    public String execute(String cmd) throws DukeException {
+        Integer index = Integer.parseInt(cmd.substring(7));
+        int size = taskHandler.getList().size();
+        if (index >= 1 && index <= size) {
+            String toPrint = taskHandler.deleteTask(index);
+            toPrint = toPrint.concat(taskHandler.printNoOfTasks());
+            storage.updateFile(taskHandler.formatTasksToSave());
+            return toPrint;
+        } else {
+            throw new DukeException("Please enter a value from 1 to " + size);
         }
     }
 }

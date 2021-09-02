@@ -30,18 +30,14 @@ public class DoneCommand extends Command {
      * @param cmd Command string to be executed.
      */
     @Override
-    public void execute(String cmd) {
-        try {
-            Integer index = Integer.parseInt(cmd.substring(5));
-            int size = taskHandler.getList().size();
-            if (index >= 1 && index <= size) {
-                taskHandler.markTaskAsDone(index);
-                storage.updateFile(taskHandler.formatTasksToSave());
-            } else {
-                throw new DukeException("Please enter a value from 1 to " + size);
-            }
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+    public String execute(String cmd) throws DukeException {
+        Integer index = Integer.parseInt(cmd.substring(5));
+        int size = taskHandler.getList().size();
+        if (index >= 1 && index <= size) {
+            storage.updateFile(taskHandler.formatTasksToSave());
+            return taskHandler.markTaskAsDone(index);
+        } else {
+            throw new DukeException("Please enter a value from 1 to " + size);
         }
     }
 }
