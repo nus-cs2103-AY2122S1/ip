@@ -19,10 +19,8 @@ import java.util.Scanner;
  * Writes and Loads file
  */
 public class Storage {
-    private File filepath;
 
-    public Storage(File filepath) {
-        this.filepath = filepath;
+    public Storage() {
     }
 
     /**
@@ -110,27 +108,21 @@ public class Storage {
      * @param list ArrayList<Task> list of tasks
      * @param done_check ArrayList<String> to keep track of completion of tasks
      */
-    public void writingToFile(ArrayList<Task> list, ArrayList<String> done_check) {
+    public static void writingToFile(ArrayList<Task> list, ArrayList<String> done_check) {
         try {
             String task = "Do these soon!!" + "\n";
             for (int i = 0; i < list.size(); i++) {
-                task = task
-                        + "["
-                            + list.get(i).getType()
-                                + "]["
-                                    + done_check.get(i)
-                                        + "] "
-                                            + list.get(i).getTask()
-                                                + "\n";
+                task = task + "[" + list.get(i).getType()
+                        + "][" + done_check.get(i)
+                        + "] " + list.get(i).getTask() + "\n";
             }
-            this.writeToFile("./data/Duke.txt", task);
+            Storage.writeToFile("./data/Duke.txt", task);
         } catch (IOException e) {
-            System.out.println("Something went wrong: "
-                    + e.getMessage());
+            System.out.println("Something went wrong: " + e.getMessage());
         }
     }
 
-    private void writeToFile(String filePath, String textToWrite) throws IOException{
+    private static void writeToFile(String filePath, String textToWrite) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToWrite);
         fw.close();

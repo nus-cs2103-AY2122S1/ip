@@ -16,11 +16,6 @@ public class Ui {
         this.scan = new Scanner(System.in);
     }
 
-    public void greetings() {
-        String greetings = "Hello! I'm Grace" + "\n" + "How can I help you?";
-        System.out.println(greetings);
-    }
-
     public String scanNextLine() {
         String nextLine = this.scan.nextLine();
         return nextLine;
@@ -33,24 +28,16 @@ public class Ui {
      *
      * @param nextLine String input to be checked
      */
-    public void emptyDescriptionException(String nextLine) {
-        int caught = 0;
+    public String emptyDescriptionException(String nextLine) {
+        String returned = "";
 
-        while (true) {
-            try {
-                this.catchError(nextLine);
-            } catch (DukeException e) {
-                System.out.println(e.output_error());
-                caught = 1;
-            } finally {
-                if (caught == 1) {
-                    nextLine = scan.nextLine();
-                    caught = 0;
-                } else {
-                    break;
-                }
-            }
+        try {
+            this.catchError(nextLine);
+        } catch (DukeException e) {
+            returned = e.output_error() + "\n";
+        } finally {
         }
+        return returned;
     }
 
     public void catchError(String nextLine) throws DukeException {
@@ -73,16 +60,18 @@ public class Ui {
      *
      * @param nextLine String input to be checked
      */
-    public void randomDescriptionException(String nextLine) {
+    public String randomDescriptionException(String nextLine) {
+        String returned = "";
         while (true) {
             try {
                 this.randomError(nextLine);
             } catch (DukeException e) {
-                System.out.println(e.output_error());
+                returned = e.output_error() + "\n";
             } finally {
                 break;
             }
         }
+        return returned;
     }
 
     public void randomError(String nextLine) throws DukeException {

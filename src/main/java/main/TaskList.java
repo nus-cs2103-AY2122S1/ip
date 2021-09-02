@@ -29,82 +29,92 @@ public class TaskList {
     /**
      * output the current task list when user calls "list"
      */
-    public void outputList() {
+    public String outputList() {
         int count = 1;
-        System.out.println("Do these soon:" + "\n");
+        String returned = null;
+        returned = "Do these soon:" + "\n";
         for (int i = 0; i < this.list.size(); i++) {
-            System.out.println(count
+            returned = returned + count
                     + ". ["
                         + this.list.get(i).getType()
                             + "]["
                                 + doneCheck.get(i)
                                     + "]"
-                                        + list.get(i).getTask());
+                                        + list.get(i).getTask() + "\n";
             count = count + 1;
         }
+        return returned;
     }
 
-    public void markTaskAsDone(String next_line) {
-        System.out.println("Yay! you have finished this task!");
+    public String markTaskAsDone(String next_line) {
+        String returned = "";
+        returned = returned + "Yay! you have finished this task!" + "\n";
         taskNumber = Integer.valueOf(next_line.substring(5)) - 1;
         this.doneCheck.set(taskNumber, "X");
-        System.out.println("["
+        returned = returned + "["
                 + this.list.get(taskNumber).getType()
                     + "][" + doneCheck.get(taskNumber)
                         + "]"
-                            + list.get(taskNumber).getTask());
+                            + list.get(taskNumber).getTask();
+        return returned;
     }
 
-    public void deleteTask(String next_line) {
+    public String deleteTask(String next_line) {
+        String returned = "";
         taskNumber = Integer.valueOf(next_line.substring(7));
-        System.out.println("Congrats! You have completed this task!");
-        System.out.println("["
+        returned = returned + "Congrats! You have completed this task!" + "\n";
+        returned = returned + "["
                 + this.list.get(taskNumber - 1).getType()
                     + "][] "
-                        + list.get(taskNumber - 1).getTask());
+                        + list.get(taskNumber - 1).getTask() + "\n";
         this.doneCheck.remove(taskNumber - 1);
         this.list.remove(taskNumber - 1);
-        System.out.println(this.list.size()
-                + " more to go!! Press on!!");
+        returned = returned + this.list.size()
+                + " more to go!! Press on!!";
+        return returned;
     }
 
-    public void addTodo(String next_line, Task todo) {
+    public String addTodo(String next_line, Task todo) {
+        String returned = "";
         this.list.add(todo);
         doneCheck.add(" ");
-        System.out.println("Added the task! :)");
-        System.out.println("["
+        returned = returned + "Added the task! :)" + "\n";
+        returned = returned + "["
                 + todo.getType()
                     + "][ ]"
-                        + todo.getTask());
-        System.out.println("Jiayou! you have "
+                        + todo.getTask() + "\n";
+        returned = returned + "Jiayou! you have "
                 + list.size()
-                    + " tasks in the list.");
+                    + " tasks in the list." + "\n";
+        return returned;
     }
 
-    public void addDeadline(String next_line, Task deadline) {
+    public String addDeadline(String next_line, Task deadline) {
         this.list.add(deadline);
         doneCheck.add(" ");
-        System.out.println("Added the task! :)");
-        System.out.println("["
+        String returned = "Added the task! :)" + "\n";
+        returned = returned + "["
                 + deadline.getType()
                     + "][ ]"
-                        + deadline.getTask());
-        System.out.println("Jiayou! you have "
+                        + deadline.getTask() + "\n";
+        returned = returned + "Jiayou! you have "
                 + this.list.size()
-                    + " tasks in the list.");
+                    + " tasks in the list.";
+        return returned;
     }
 
-    public void addEvent(String next_line, Task event) {
+    public String addEvent(String next_line, Task event) {
         this.list.add(event);
         doneCheck.add(" ");
-        System.out.println("Added the task! :)");
-        System.out.println("["
+        String returned = "Added the task! :)" + "\n";
+        returned = returned + "["
                 + event.getType()
                     + "][ ]"
-                        + event.getTask());
-        System.out.println("Jiayou! you have "
+                        + event.getTask() + "\n";
+        returned = returned + "Jiayou! you have "
                 + this.list.size()
-                    + " tasks in the list.");
+                    + " tasks in the list.";
+        return returned;
     }
 
 
