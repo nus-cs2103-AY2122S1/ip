@@ -16,7 +16,6 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private String path;
     private static String commandResult = "";
 
     public Storage(String path) {
@@ -28,8 +27,6 @@ public class Storage {
             }
         } catch (FileNotFoundException fileNotFoundException) {
             createFileAndDirectory();
-        } finally {
-            this.path = path;
         }
     }
 

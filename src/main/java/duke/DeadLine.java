@@ -13,7 +13,6 @@ import java.time.format.DateTimeParseException;
 public class DeadLine extends Task {
 
     private String by;
-    private LocalDate date;
 
     /**
      * This constructor handles the creation af a new Deadline Task.
@@ -26,7 +25,6 @@ public class DeadLine extends Task {
         super(description, type);
         try {
             LocalDate d1 = LocalDate.parse(by);
-            this.date = d1;
             this.by = d1.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException dateTimeParseException) {
             this.by = by;

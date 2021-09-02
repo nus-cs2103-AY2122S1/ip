@@ -7,17 +7,15 @@ package duke;
  * @author Ryan Tian Jun.
  */
 public class Parser {
-    private String currentCommand;
     private int taskNumber;
     private String query;
-    private Command commandType;
+    private final Command commandType;
 
     protected enum Command {
         TODO, EVENT, DEADLINE, DELETE, DONE, LIST, FIND, OTHER
     }
 
     public Parser(String command) throws DukeException {
-        this.currentCommand = command;
         if (isList(command)) {
             this.commandType = Command.LIST;
         } else if (isDone(command)) {

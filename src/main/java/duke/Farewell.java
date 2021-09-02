@@ -7,7 +7,7 @@ package duke;
  * @author Ryan Tian Jun.
  */
 public class Farewell {
-    private String farewell = "Bye. Thank You for using Duke!";
+    private final String farewellMessage = "Bye. Thank You for using Duke!";
 
     public Farewell() {
 
@@ -19,6 +19,6 @@ public class Farewell {
      * @return farewell message.
      */
     public String printFarewell() {
-        return farewell;
+        return farewellMessage;
     }
 }

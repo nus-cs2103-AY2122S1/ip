@@ -10,6 +10,5 @@ public class Feature extends Ui {
 
     public Feature (String command) {
         super(command);
-
     }
 }

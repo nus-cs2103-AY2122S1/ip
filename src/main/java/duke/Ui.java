@@ -7,55 +7,55 @@ package duke;
  */
 public class Ui {
     private static TaskList commands = new TaskList();
-    private String currentCommand;
-    private Parser parsedCommand;
-    private String commandResult;
+    private String userInput;
+    private Parser parsedUserInput;
+    private String inputResult;
 
     public Ui(String command) {
         try {
             Parser parser = new Parser(command);
-            this.parsedCommand = parser;
-            this.currentCommand = command;
+            this.parsedUserInput = parser;
+            this.userInput = command;
             Parser.Command commandType = parser.getCommandType();
             executeCommand(commandType);
         } catch (DukeException dukeException) {
-            this.commandResult = dukeException + "\n";
+            this.inputResult = dukeException + "\n";
         }
     }
 
     private void executeCommand(Parser.Command commandType) {
         try {
             if (commandType == Parser.Command.LIST) {
-                this.commandResult = TaskList.listCommand();
+                this.inputResult = TaskList.listCommand();
             } else if (commandType == Parser.Command.DONE) {
-                int taskNumberDone = parsedCommand.getTaskNumber();
-                this.commandResult = commands.markDone(taskNumberDone);
+                int taskNumberDone = parsedUserInput.getTaskNumber();
+                this.inputResult = commands.markDone(taskNumberDone);
             } else if (commandType == Parser.Command.TODO) {
-                Task taskTodo = new ToDo(currentCommand.substring(5).trim(), Task.Type.T);
+                Task taskTodo = new ToDo(userInput.substring(5).trim(), Task.Type.T);
                 Ui.commands.add(taskTodo);
-                this.commandResult = printTask(taskTodo);
+                this.inputResult = printTask(taskTodo);
             } else if (commandType == Parser.Command.DEADLINE) {
-                Task taskDeadline = new DeadLine(currentCommand.substring(9).trim(),
-                        Task.Type.D, returnDeadline(currentCommand).trim());
+                Task taskDeadline = new DeadLine(userInput.substring(9).trim(),
+                        Task.Type.D, returnDeadline(userInput).trim());
                 Ui.commands.add(taskDeadline);
-                this.commandResult = printTask(taskDeadline);
+                this.inputResult = printTask(taskDeadline);
             } else if (commandType == Parser.Command.EVENT) {
-                Task taskEvent = new Event(currentCommand.substring(6).trim(),
-                        Task.Type.E, returnTimeline(currentCommand).trim());
+                Task taskEvent = new Event(userInput.substring(6).trim(),
+                        Task.Type.E, returnTimeline(userInput).trim());
                 Ui.commands.add(taskEvent);
-                this.commandResult = printTask(taskEvent);
+                this.inputResult = printTask(taskEvent);
             } else if (commandType == Parser.Command.DELETE) {
-                int taskNumberDelete = parsedCommand.getTaskNumber();
-                this.commandResult = commands.deleteTask(taskNumberDelete);
+                int taskNumberDelete = parsedUserInput.getTaskNumber();
+                this.inputResult = commands.deleteTask(taskNumberDelete);
             } else if (commandType == Parser.Command.FIND) {
-                String query = parsedCommand.getQuery();
-                this.commandResult = commands.search(query);
+                String query = parsedUserInput.getQuery();
+                this.inputResult = commands.search(query);
             } else {
                 // Unknown Command, throw error
                 throw new DukeException("Error, Invalid Command" + "\n ");
             }
         } catch (DukeException dukeException) {
-            this.commandResult = dukeException + "\n";
+            this.inputResult = dukeException + "\n";
         }
     }
 
@@ -64,8 +64,8 @@ public class Ui {
      *
      * @return command result.
      */
-    public String getCommandResult() {
-        return this.commandResult;
+    public String getInputResult() {
+        return this.inputResult;
     }
 
     /**
@@ -82,9 +82,9 @@ public class Ui {
      * @return returns an echo of the users commands.
      */
     private String echoCommand() {
-        System.out.println(currentCommand);
+        System.out.println(userInput);
         newLine();
-        return currentCommand;
+        return userInput;
     }
 
     /**
@@ -94,9 +94,9 @@ public class Ui {
      * @return Notifies the user that their command has been added.
      */
     private String addCommand() {
-        System.out.println("added: " + currentCommand);
+        System.out.println("added: " + userInput);
         newLine();
-        return "added: " + currentCommand;
+        return "added: " + userInput;
     }
 
     // Simply creates a new line in the terminal

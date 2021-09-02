@@ -8,7 +8,7 @@ package duke;
  */
 public class Duke {
     private Storage storage;
-    private Farewell farewell;
+    private final Farewell farewell;
 
     public Duke() {
         this.farewell = new Farewell();
@@ -36,8 +36,8 @@ public class Duke {
             return farewell.printFarewell() + "\n" + " ";
         } else {
             Ui parseInput = new Feature(input);
-            String inputResult = parseInput.getCommandResult();
-            return inputResult;
+            String parsedInputResult = parseInput.getInputResult();
+            return parsedInputResult;
         }
     }
 }

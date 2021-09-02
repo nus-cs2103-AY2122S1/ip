@@ -127,11 +127,6 @@ public class TaskList {
         }
     }
 
-    // Simply creates a new line in the terminal
-    private static String newLine() {
-        System.out.println("\n");
-        return "\n";
-    }
 
     /**
      * Returns the size of the List.

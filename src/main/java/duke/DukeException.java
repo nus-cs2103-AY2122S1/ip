@@ -8,14 +8,14 @@ package duke;
  */
 
 public class DukeException extends Exception {
-    private String message;
+    private final String errorMessage;
 
     // -1 default, 0: WhiteSpace, 1: Empty description, 2: Delete/ mark as done range errors
     private int type = -1;
 
     public DukeException(String errorMessage) {
         super(errorMessage);
-        this.message = errorMessage;
+        this.errorMessage = errorMessage;
     }
 
     /**
@@ -27,7 +27,7 @@ public class DukeException extends Exception {
      */
     public DukeException(String errorMessage, int type) {
         super(errorMessage);
-        this.message = errorMessage;
+        this.errorMessage = errorMessage;
         this.type = type;
     }
 
@@ -41,12 +41,12 @@ public class DukeException extends Exception {
     @Override
     public String toString() {
         if (type == 0) {
-            return "The " + message + " Command and Description must be separated by whitespace!";
+            return "The " + errorMessage + " Command and Description must be separated by whitespace!";
         } else if (type == 1) {
-            return "The description of " + message + " cannot be empty!";
+            return "The description of " + errorMessage + " cannot be empty!";
         } else if (type == 2) {
-            return message + " Invalid Number, only numbers greater than 0 are accepted";
+            return errorMessage + " Invalid Number, only numbers greater than 0 are accepted";
         }
-        return message;
+        return errorMessage;
     }
 }
