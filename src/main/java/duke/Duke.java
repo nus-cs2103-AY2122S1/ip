@@ -14,10 +14,12 @@ public class Duke {
     private Storage storage;
     private TaskList tasklist;
     private Ui ui;
+    private boolean continueDuke;
 
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        continueDuke = true;
         try {
             tasklist = storage.loadData();
             System.out.println("Loadiwng file for you. . . Loaded!\n");
@@ -27,12 +29,22 @@ public class Duke {
         }
     }
 
-    public void run() throws DukeException {
-        Ui.run(this.storage, this.tasklist);
+    public String getResponse(String input){
+        if (input.equalsIgnoreCase("bye")) {
+            continueDuke = false;
+        }
+        return ui.getMessage(this.storage, this.tasklist, input);
     }
 
-    public static void main(String[] args) throws DukeException {
-        new Duke("data/tasks.txt").run();
+    public boolean isExit() {
+        return !continueDuke;
     }
+
+//    public void run() throws DukeException {
+//    }
+//
+//    public static void main(String[] args) throws DukeException {
+//    }
+
 
 }

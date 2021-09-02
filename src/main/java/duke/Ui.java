@@ -12,209 +12,169 @@ import java.util.Scanner;
  * @author Ruth Poh
  */
 public class Ui {
+    private final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    private final String LINEBREAK_START = "~~*********___\\(owo)/___\\(owo)/___*********~~\n";
+    private final String LINEBREAK_END = "\n\n~~*********___\\(owo)/___\\(owo)/___*********~~";
+    private Parser parser;
+
     Ui() {
+        parser = new Parser();
     }
 
-    public static void run(Storage storage, TaskList tasklist) throws DukeException {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String linebreakstart = "~~*********___\\(owo)/___\\(owo)/___*********~~\n";
-        String linebreakend = "~~*********___\\(owo)/___\\(owo)/___*********~~";
+    public String getErrorMessage(DukeException e) {
+        return e.getMessage();
+    }
 
-        System.out.println(linebreakstart
-                + "\nHewwo!! From:\n"
-                + logo
-                + "How mayw Iw hewlp youw, Mastwer? Pwease type 'help' for a list of commandws uwu\n");
+    public String getMessage(Storage storage, TaskList tasklist, String str) {
+        try {
+            String[] strparse = str.split(" ");
+            // splits input to parse for keywords.
 
-        Scanner in = new Scanner(System.in);
-        Parser parser = new Parser();
-
-        System.out.println(linebreakend);
-
-        boolean continueLoop = true;
-        // for checking loop
-
-        while (continueLoop) {
-            // initiates loop.
-            try {
-                String str = in.nextLine();
-                String[] strparse = str.split(" ");
-                // splits input to parse for keywords.
-
-                switch (parser.parseCommand(strparse[0])) {
-                case "bye":
-                    // breaks loop, closes chatbot.
-                    try {
-                        if (strparse.length > 1) {
-                            throw new IncorrectInputException("bye", "'bye'");
-                        }
-                        continueLoop = false;
-                    } catch (DukeException e) {
-                        System.out.println(linebreakstart);
-                        System.out.println(e.getMessage());
-                        System.out.println(linebreakend);
+            switch (this.parser.parseCommand(strparse[0])) {
+            case "bye":
+                // breaks loop, closes chatbot.
+                try {
+                    if (strparse.length > 1) {
+                        throw new IncorrectInputException("bye", "'bye'");
                     }
-                    break;
-                case "help":
-                    // lists command list
-                    try {
-                        if (strparse.length > 1) {
-                            throw new IncorrectInputException("help", "'help'");
-                        }
-                        System.out.println(linebreakstart);
-                        System.out.println("Commandws supported:\n");
-                        System.out.println("- bye\n- help\n- list\n- todo\n- event\n- deadline\n");
-                        System.out.println(linebreakend);
-                    } catch (DukeException e) {
-                        System.out.println(linebreakstart);
-                        System.out.println(e.getMessage());
-                        System.out.println(linebreakend);
-                    }
-                    break;
-                case "list":
-                    // lists history of current tasks.
-                    try {
-                        if (strparse.length > 1) {
-                            throw new IncorrectInputException("list", "'list'");
-                        }
-                        System.out.println(linebreakstart);
-                        System.out.println("Uwu! Herw arw yourw taskws:\n");
-
-                        if (tasklist.getTaskCounter() == 0) {
-                            System.out.println("Itw seewsm like youw wist is emptwy! Congwats!\n");
-                        } else {
-                            System.out.println(tasklist.displayList());
-                        }
-                        System.out.println(linebreakend);
-                    } catch (DukeException e) {
-                        System.out.println(linebreakstart);
-                        System.out.println(e.getMessage());
-                        System.out.println(linebreakend);
-                    }
-                    break;
-                case "todo":
-                    // adds a todo task to the list.
-                    try {
-                        tasklist.addTodo(parser.parseTodo(strparse));
-                        storage.saveData(tasklist);
-
-                        System.out.println(linebreakstart);
-                        System.out.println("Uwu! Addewd yourw taskws:\n");
-                        System.out.println(tasklist.lastAddedTask() + '\n');
-                        System.out.println("Youw noww havew "
-                                + (tasklist.getTaskCounter())
-                                + " taskw(s) inw thew wist! uwu\n");
-                        System.out.println(linebreakend);
-                    } catch (DukeException e) {
-                        System.out.println(linebreakstart);
-                        System.out.println(e.getMessage());
-                        System.out.println(linebreakend);
-                    }
-                    break;
-                case "deadline":
-                    // adds a deadline task to the list.
-                    try {
-                        tasklist.addDeadline(parser.parseDeadline(strparse));
-                        storage.saveData(tasklist);
-
-                        System.out.println(linebreakstart);
-                        System.out.println("Uwu! Addewd yourw taskws:\n");
-                        System.out.println(tasklist.lastAddedTask() + '\n');
-                        System.out.println("Youw noww havew "
-                                + (tasklist.getTaskCounter())
-                                + " taskw(s) inw thew wist! uwu\n");
-                        System.out.println(linebreakend);
-                    } catch (DukeException e) {
-                        System.out.println(linebreakstart);
-                        System.out.println(e.getMessage());
-                        System.out.println(linebreakend);
-                    }
-                    break;
-                case "event":
-                    // adds an event to the list. pretty much like deadline.
-                    try {
-                        tasklist.addEvent(parser.parseEvent(strparse));
-                        storage.saveData(tasklist);
-
-                        System.out.println(linebreakstart);
-                        System.out.println("Uwu! Addewd yourw taskws:\n");
-                        System.out.println(tasklist.lastAddedTask() + '\n');
-                        System.out.println("Youw noww havew "
-                                + (tasklist.getTaskCounter())
-                                + " taskw(s) inw thew wist! uwu\n");
-                        System.out.println(linebreakend);
-                    } catch (DukeException e) {
-                        System.out.println(linebreakstart);
-                        System.out.println(e.getMessage());
-                        System.out.println(linebreakend);
-                    }
-                    break;
-                case "done":
-                    // marks a task as done.
-                    try {
-                        int i = tasklist.markDone(strparse);
-                        storage.saveData(tasklist);
-
-                        System.out.println(linebreakstart);
-                        System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n");
-                        System.out.println(tasklist.getTaskDescr(i) + '\n');
-                        System.out.println(linebreakend);
-
-                    } catch (DukeException e) {
-                        System.out.println(linebreakstart);
-                        System.out.println(e.getMessage());
-                        System.out.println(linebreakend);
-                    }
-                    break;
-                case "delete":
-                    // deletes corresponding task on list.
-                    try {
-                        Task t = tasklist.delete(strparse);
-                        storage.saveData(tasklist);
-
-                        System.out.println(linebreakstart);
-                        System.out.println("Thanwk youw forw youwr serwwice! Thwis taskw hasw beenw deweted:\n");
-                        System.out.println(t.toString() + '\n');
-                        System.out.println("Youw noww havew "
-                                + (tasklist.getTaskCounter())
-                                + " taskw(s) inw thew wist! uwu\n");
-                        System.out.println(linebreakend);
-                    } catch (DukeException e) {
-                        System.out.println(linebreakstart);
-                        System.out.println(e.getMessage());
-                        System.out.println(linebreakend);
-                    }
-                    break;
-                case "find":
-                    try {
-                        String temp = tasklist.find(parser.parseFind(strparse));
-
-                        System.out.println(linebreakstart);
-                        System.out.println("Foundw! Here are the matching tasks:\n");
-                        System.out.println(temp + '\n');
-                        System.out.println(linebreakend);
-                    } catch (DukeException e) {
-                        System.out.println(linebreakstart);
-                        System.out.println(e.getMessage());
-                        System.out.println(linebreakend);
-                    }
-                    break;
-                default:
-                    throw new InvalidInputException();
+                    return "Goodbywe, Mastwer! Seew youw soown!\n\n";
+                } catch (DukeException e) {
+                    return this.getErrorMessage(e);
                 }
-            } catch (DukeException e) {
-                System.out.println(linebreakstart);
-                System.out.println(e.getMessage());
-                System.out.println(linebreakend);
-            }
-        }
-        System.out.println(linebreakstart
-                + "\nGoodbywe, Mastwer! Seew youw soown!\n\n"
-                + linebreakend);
-        // closing lines
-    }
+                //Fallthrough
+            case "help":
+                // lists command list
+                try {
+                    if (strparse.length > 1) {
+                        throw new IncorrectInputException("help", "'help'");
+                    }
+                    return "Commandws supported:\n\n"
+                            + "- bye\n- help\n- list\n- todo\n- event\n- deadline\n";
+                } catch (DukeException e) {
+                    return this.getErrorMessage(e);
+                }
+                //Fallthrough
+            case "list":
+                // lists history of current tasks.
+                try {
+                    if (strparse.length > 1) {
+                        throw new IncorrectInputException("list", "'list'");
+                    }
+                    StringBuilder strb = new StringBuilder();
+                    strb.append("Uwu! Herw arw yourw taskws:\n");
 
+                    if (tasklist.getTaskCounter() == 0) {
+                        strb.append("Itw seewsm like youw wist is emptwy! Congwats!\n");
+                    } else {
+                        strb.append(tasklist.displayList());
+                    }
+                    return strb.toString();
+                } catch (DukeException e) {
+                    return this.getErrorMessage(e);
+                }
+                //Fallthrough
+            case "todo":
+                // adds a todo task to the list.
+                try {
+                    tasklist.addTodo(parser.parseTodo(strparse));
+                    storage.saveData(tasklist);
+
+                    StringBuilder strb = new StringBuilder();
+                    strb.append("Uwu! Addewd yourw taskws:\n").append(tasklist.lastAddedTask() + '\n');
+                    strb.append("Youw noww havew " + (tasklist.getTaskCounter())
+                            + " taskw(s) inw thew wist! uwu\n");
+
+                    return strb.toString();
+                } catch (DukeException e) {
+                    return this.getErrorMessage(e);
+                }
+                //Fallthrough
+            case "deadline":
+                // adds a deadline task to the list.
+                try {
+                    tasklist.addDeadline(parser.parseDeadline(strparse));
+                    storage.saveData(tasklist);
+
+                    StringBuilder strb = new StringBuilder();
+                    strb.append("Uwu! Addewd yourw taskws:\n").append(tasklist.lastAddedTask() + '\n');
+                    strb.append("Youw noww havew " + (tasklist.getTaskCounter())
+                            + " taskw(s) inw thew wist! uwu\n");
+                    return strb.toString();
+                } catch (DukeException e) {
+                    return getErrorMessage(e);
+                }
+                //Fallthrough
+            case "event":
+                // adds an event to the list. pretty much like deadline.
+                try {
+                    tasklist.addEvent(parser.parseEvent(strparse));
+                    storage.saveData(tasklist);
+
+                    StringBuilder strb = new StringBuilder();
+                    strb.append("Uwu! Addewd yourw taskws:\n").append(tasklist.lastAddedTask() + '\n');
+                    strb.append("Youw noww havew " + (tasklist.getTaskCounter())
+                            + " taskw(s) inw thew wist! uwu\n");
+
+                    return strb.toString();
+                } catch (DukeException e) {
+                    return this.getErrorMessage(e);
+                }
+                //Fallthrough
+            case "done":
+                // marks a task as done.
+                try {
+                    int i = tasklist.markDone(strparse);
+                    storage.saveData(tasklist);
+
+                    StringBuilder strb = new StringBuilder();
+                    strb.append("Thanwk youw forw youwr serwwice! Thwis taskw isw downe:\n")
+                            .append(tasklist.getTaskDescr(i) + '\n');
+
+                    return strb.toString();
+                } catch (DukeException e) {
+                    return this.getErrorMessage(e);
+                }
+                //Fallthrough
+            case "delete":
+                // deletes corresponding task on list.
+                try {
+                    Task t = tasklist.delete(strparse);
+                    storage.saveData(tasklist);
+
+                    StringBuilder strb = new StringBuilder();
+                    strb.append("Thanwk youw forw youwr serwwice! Thwis taskw hasw beenw deweted:\n")
+                            .append(t.toString() + '\n');
+                    strb.append("Youw noww havew "
+                            + (tasklist.getTaskCounter())
+                            + " taskw(s) inw thew wist! uwu\n");
+
+                    return strb.toString();
+                } catch (DukeException e) {
+                    return this.getErrorMessage(e);
+                }
+                //Fallthrough
+            case "find":
+                try {
+                    String temp = tasklist.find(parser.parseFind(strparse));
+
+                    StringBuilder strb = new StringBuilder();
+                    strb.append("Foundw! Here are the matching tasks:\n")
+                            .append(temp + '\n');
+
+                    return strb.toString();
+                } catch (DukeException e) {
+                    return this.getErrorMessage(e);
+                }
+                //Fallthrough
+            default:
+                throw new InvalidInputException();
+            }
+        } catch (DukeException e) {
+            return this.getErrorMessage(e);
+        }
+    }
 }
