@@ -2,6 +2,8 @@ package duke;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.Task.Category;
 
@@ -33,14 +35,17 @@ public class TaskList {
      * @return String of the current <code>TaskList</code> that has been formatted properly.
      */
     public String printList() {
-        String listString = "";
-        for (int i = 0; i < list.size(); i++) {
-            int index = i + 1;
-            Task listItem = list.get(i);
-            assert listItem != null : "listItem should be present";
-            listString = listString + index + "." + listItem + "\n";
-        }
-        return listString;
+
+        String listToString = IntStream
+            .range(0, list.size())
+            .mapToObj(index -> {
+                Task currTask = list.get(index);
+                assert currTask != null : "listItem should be present";
+                return index + "." + currTask;
+            })
+            .collect(Collectors.joining("\n"));
+
+        return listToString;
     }
 
     /**

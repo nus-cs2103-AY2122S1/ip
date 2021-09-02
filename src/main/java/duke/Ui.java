@@ -2,6 +2,9 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Represents the interface that interacts with the user, receiving commands from the user and
@@ -124,14 +127,18 @@ public class Ui {
      * @param resultsArray ArrayList of <code>Task</code> results from search.
      */
     public String showSearchResults(ArrayList<Task> resultsArray) {
+
         String result = FRIENDGREETING + "Here are the matching tasks in your list:\n";
-        int listSize = resultsArray.size();
-        for (int i = 0; i < listSize; i++) {
-            Task currTask = resultsArray.get(i);
-            int index = i + 1;
-            result = result + index + "." + currTask.toString() + "\n";
-        }
-        return result;
+
+        String content = IntStream
+            .range(0, resultsArray.size())
+            .mapToObj(index -> {
+                Task currTask = resultsArray.get(index);
+                return index + "." + currTask;
+            })
+            .collect(Collectors.joining("\n"));
+
+        return result + content;
     }
 
     /**
