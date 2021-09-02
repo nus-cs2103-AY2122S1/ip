@@ -7,7 +7,7 @@ public class Todo extends Task {
 
     /**
      * A constructor for the todo task.
-     * 
+     *
      * @param description The description of the task.
      */
     public Todo(String description) {
@@ -16,7 +16,7 @@ public class Todo extends Task {
 
     /**
      * A constructor for the todo task.
-     * 
+     *
      * @param isDone The status of the task.
      * @param description The description of the task.
      */

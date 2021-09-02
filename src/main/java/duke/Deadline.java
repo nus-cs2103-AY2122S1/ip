@@ -13,7 +13,7 @@ public class Deadline extends Task {
 
     /**
      * A constructor for the deadline task.
-     * 
+     *
      * @param description The description of the task.
      * @param by The note represented by a string.
      */
@@ -25,7 +25,7 @@ public class Deadline extends Task {
 
     /**
      * A constructor for the deadline task which is mainly used for restoring from duke.txt.
-     * 
+     *
      * @param isDone The status of the task.
      * @param description The description of the task.
      * @param by A note represented by a string.
@@ -39,7 +39,7 @@ public class Deadline extends Task {
 
     /**
      * A constructor for the deadline task.
-     * 
+     *
      * @param description The description of the task.
      * @param byDate The date of the deadline for the task.
      */
@@ -56,8 +56,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format(
-                "[D]%s (by: %s)", 
-                super.toString(), 
+                "[D]%s (by: %s)",
+                super.toString(),
                 byDate != null ? byDate.format(DATE_TIME_FORMAT) : by
         );
     }
@@ -68,7 +68,7 @@ public class Deadline extends Task {
     @Override
     public String toBackupFormat() {
         return String.format(
-                "D | %s | %s | %s | ", 
+                "D | %s | %s | %s | ",
                 super.toBackupFormat(),
                 by == null ? "" : by,
                 byDate == null ? "" : byDate.format(DATE_TIME_FORMAT)

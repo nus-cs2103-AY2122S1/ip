@@ -9,7 +9,7 @@ public class Task {
 
     /**
      * A constructor for a task.
-     * 
+     *
      * @param description The description of the task.
      */
     public Task(String description) {
@@ -19,7 +19,7 @@ public class Task {
 
     /**
      * A constructor for a task.
-     * 
+     *
      * @param isDone The status of the task.
      * @param description The description of the task.
      */
@@ -27,7 +27,7 @@ public class Task {
         this.description = description;
         this.isDone = isDone;
     }
-    
+
     protected String getStatusIcon() {
         return (isDone ? "X" : " ");
     }
@@ -41,7 +41,7 @@ public class Task {
 
     /**
      * Returns the description of the task.
-     * 
+     *
      * @return The description of the task.
      */
     public String getDescription() {
@@ -50,7 +50,7 @@ public class Task {
 
     /**
      * Returns the string representation of the task.
-     * 
+     *
      * @return The string representation of the task.
      */
     public String toString() {
@@ -59,7 +59,7 @@ public class Task {
 
     /**
      * Returns the backup format of the task.
-     * 
+     *
      * @return The backup format of the task.
      */
     public String toBackupFormat() {

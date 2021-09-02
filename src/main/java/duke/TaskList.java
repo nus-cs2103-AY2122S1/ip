@@ -24,7 +24,7 @@ public class TaskList {
 
     /**
      * Adds a task to the current list.
-     * 
+     *
      * @param newTask The task to be added.
      * @return The task added.
      */
@@ -35,7 +35,7 @@ public class TaskList {
 
     /**
      * Gets the task numbered <code>index</code>.
-     * 
+     *
      * @param index The number of which the task should be retrieved from.
      * @return The task numbered <code>index</code>.
      */
@@ -45,7 +45,7 @@ public class TaskList {
 
     /**
      * Removes the task numbered <code>index</code>.
-     * 
+     *
      * @param index The number of which the task should be removed.
      * @return The task removed.
      */
@@ -55,7 +55,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the list.
-     * 
+     *
      * @return The number of tasks in the list.
      */
     public int getTaskCount() {
@@ -64,7 +64,7 @@ public class TaskList {
 
     /**
      * Returns the string representation of the task list.
-     * 
+     *
      * @return The string representation of the task list.
      */
     @Override
@@ -78,7 +78,7 @@ public class TaskList {
 
     /**
      * Returns the backup of format of the task list.
-     * 
+     *
      * @return The backup of format of the task list.
      */
     public ArrayList<String> toBackupFormat() {
@@ -88,7 +88,14 @@ public class TaskList {
         }
         return backupData;
     }
-    
+
+    /**
+     * Find task(s) with a particular keyword in the task list.
+     *
+     * @param s Keyword to look for
+     * @return A tasklist containing all matching tasks
+     */
+
     public TaskList findTask(String s) {
         ArrayList<Task> res = new ArrayList<>();
         for (Task task : tasks) {
