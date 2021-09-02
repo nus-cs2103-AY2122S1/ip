@@ -1,9 +1,7 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
 
 public class InvalidCommand extends Command {
 
@@ -11,11 +9,7 @@ public class InvalidCommand extends Command {
         super(userCommand, userArgument);
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        throw new DukeException("Sorry I do not understand this directive.");
-    }
-
-    public boolean isExit() {
-        return false;
+    public String execute(TaskList tasks, Storage storage) {
+        return "Sorry I do not understand this directive.";
     }
 }

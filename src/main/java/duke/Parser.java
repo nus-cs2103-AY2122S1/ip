@@ -4,15 +4,13 @@ import duke.command.*;
 
 public class Parser {
 
-    public Parser() { }
-
     /**
      * Gets the command entered by the user.
      *
      * @param userInput The string keyed in by the user
      * @return The first word keyed in by the user
      */
-    public String getUserCommand(String userInput) {
+    public static String getUserCommand(String userInput) {
         if (userInput.indexOf(' ') <= 0) {
             return userInput;
         }
@@ -25,7 +23,7 @@ public class Parser {
      * @param userInput The string keyed in by the user
      * @return The arguments entered by the user (all words after the first word)
      */
-    public String getUserArgument(String userInput) {
+    public static String getUserArgument(String userInput) {
         if (userInput.indexOf(' ') <= 0) {
             return "";
         }
@@ -36,7 +34,7 @@ public class Parser {
         }
     }
 
-    public Command parse(String userInput) {
+    public static Command parse(String userInput) {
         String userCommand = getUserCommand(userInput);
         String userArgument = getUserArgument(userInput);
 

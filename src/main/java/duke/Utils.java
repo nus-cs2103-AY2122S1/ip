@@ -44,5 +44,13 @@ public class Utils {
         }
     }
 
+    public static String showTasks(TaskList tasks) {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < tasks.numberOfTasks(); i++) {
+            res.append(String.format("%d. %s%n\n", i + 1, tasks.getTask(i)));
+        }
+        return res.toString();
+    }
+
 
 }

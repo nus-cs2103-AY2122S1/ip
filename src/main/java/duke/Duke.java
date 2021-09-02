@@ -3,37 +3,27 @@ package duke;
 import duke.command.Command;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Duke {
 
-    public static void main(String[] args) {
+    private Storage storage;
+    private TaskList tasks;
 
-        Parser parser = new Parser();
-        UI ui = new UI(new Scanner(System.in));
-        Storage storage = new Storage("./data/tasks.txt");
-        TaskList tasks;
-
+    public Duke(String filepath) {
         try {
+            storage = new Storage(filepath);
             tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
-            ui.showException(e);
             tasks = new TaskList(new ArrayList<>());
         }
+    }
 
-        ui.showWelcome();
-
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String userInput = ui.getUserInput();
-                Command c = parser.parse(userInput);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showException(e);
-            }
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

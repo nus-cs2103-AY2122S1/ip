@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
 
 public class ByeCommand extends Command {
 
@@ -10,12 +9,7 @@ public class ByeCommand extends Command {
         super(userCommand, userArgument);
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) {
-        ui.goodBye();
+    public String execute(TaskList tasks, Storage storage) {
+        return "Bye";
     }
-
-    public boolean isExit() {
-        return true;
-    }
-
 }

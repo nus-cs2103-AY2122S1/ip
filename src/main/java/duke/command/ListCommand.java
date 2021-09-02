@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
+import duke.Utils;
 
 public class ListCommand extends Command {
 
@@ -10,15 +10,10 @@ public class ListCommand extends Command {
         super(userCommand, userArgument);
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         if (tasks.isEmpty()) {
-            ui.showMessage("Currently no tasks!");
+            return "Currently no tasks!";
         }
-        ui.showTasks(tasks);
+        return "Here are your tasks:\n" + Utils.showTasks(tasks);
     }
-
-    public boolean isExit() {
-        return false;
-    }
-
 }

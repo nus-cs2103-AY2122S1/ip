@@ -3,7 +3,6 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
 import duke.Utils;
 import duke.task.Task;
 
@@ -13,7 +12,7 @@ public class DoneCommand extends Command {
         super(userCommand, userArgument);
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         int done = Utils.getInputNumber(userArgument);
 
         if (done >= tasks.numberOfTasks() || done < 0) {
@@ -24,11 +23,8 @@ public class DoneCommand extends Command {
         doneTask.markAsDone();
         storage.editTaskFromFile(done, tasks);
 
-        ui.showMessage(String.format("I've marked this task as done:\n" +
-                "%s\n", doneTask.toString()));
+        return String.format("I've marked this task as done:\n" +
+                "%s\n", doneTask.toString());
     }
 
-    public boolean isExit() {
-        return false;
-    }
 }

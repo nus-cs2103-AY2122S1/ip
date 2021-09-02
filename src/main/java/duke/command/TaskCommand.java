@@ -3,7 +3,6 @@ package duke.command;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -17,7 +16,7 @@ public class TaskCommand extends Command {
         super(userCommand, userArgument);
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (userArgument.equals("")) {
             throw new DukeException("The description of a duke.task.Task cannot be empty.");
         }
@@ -31,17 +30,14 @@ public class TaskCommand extends Command {
             String[] eventInfo = splitBetween(userArgument, "/at");
             tasks.addTask(new Event(eventInfo[0], eventInfo[1], false));
         }
-        addTask(tasks.getTask(tasks.numberOfTasks() - 1), storage, tasks, ui);
+        return addTask(tasks.getTask(tasks.numberOfTasks() - 1), storage, tasks);
     }
 
-    public boolean isExit() {
-        return false;
-    }
-
-    private static void addTask(Task newTask, Storage storage, TaskList tasks, UI ui) {
+    private static String addTask(Task newTask, Storage storage, TaskList tasks) {
         storage.saveTaskToFile(newTask);
-        ui.showMessage(String.format("Got it, I've added this task:\n %s\n", newTask.toString()));
-        ui.showMessage(String.format("Now you have %d tasks in your list.\n", tasks.numberOfTasks()));
+        String addedTask = String.format("Got it, I've added this task:\n %s\n", newTask.toString());
+        String numberOfTasks = String.format("Now you have %d tasks in your list.\n", tasks.numberOfTasks());
+        return addedTask + numberOfTasks;
     }
 
     private static String[] splitBetween(String str, String separator) throws DukeException {

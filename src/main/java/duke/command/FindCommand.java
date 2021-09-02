@@ -1,11 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.UI;
 import duke.Utils;
-import duke.task.Task;
 
 public class FindCommand extends Command {
 
@@ -13,17 +10,12 @@ public class FindCommand extends Command {
         super(userCommand, userArgument);
     }
 
-    public void execute(TaskList tasks, UI ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         TaskList searchedTasks = tasks.searchTasks(userArgument);
         if (searchedTasks.isEmpty()) {
-            ui.showMessage("No matching tasks.");
-            return;
+            return "No matching tasks.";
         }
-        ui.showMessage("Here are the matching tasks.");
-        ui.showTasks(searchedTasks);
+        return "Here are the matching tasks.\n" + Utils.showTasks(searchedTasks);
     }
 
-    public boolean isExit() {
-        return false;
-    }
 }
