@@ -77,35 +77,36 @@ public class Storage {
 
         Scanner sc = new Scanner(file);
 
-        while (sc.hasNext()) {
-            String nextCommand = sc.nextLine();
-            Task task;
+        try {
+            while (sc.hasNext()) {
+                String nextCommand = sc.nextLine();
+                Task task;
 
-            switch (nextCommand.charAt(1)) {
-            case 'D':
-                task = extractDeadline(nextCommand.substring(7)); // [D][X] something by time
-                break;
-            case 'E':
-                task = extractEvent(nextCommand.substring(7)); // [D][X] something at time
-                break;
-            case 'T': // todos
-                task = new Todo(nextCommand.substring(7)); // disregards [T][X]
-                break;
-            default:
-                throw new DataFileChangedException();
+                switch (nextCommand.charAt(1)) {
+                case 'D':
+                    task = extractDeadline(nextCommand.substring(7)); // [D][X] something by time
+                    break;
+                case 'E':
+                    task = extractEvent(nextCommand.substring(7)); // [D][X] something at time
+                    break;
+                case 'T': // todos
+                    task = new Todo(nextCommand.substring(7)); // disregards [T][X]
+                    break;
+                default:
+                    throw new DataFileChangedException();
+                }
+
+                // check if marked as done
+                if (nextCommand.charAt(4) == 'X') {
+                    task.markAsDone();
+                }
+                taskList.add(task);
             }
-
-            // check if marked as done
-            if (nextCommand.charAt(4) == 'X') {
-                task.markAsDone();
-            }
-
-            taskList.add(task);
+            sc.close();
+            return taskList;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DataFileChangedException();
         }
-
-        sc.close();
-
-        return taskList;
     }
 
     /**
