@@ -12,6 +12,9 @@ import bot.tasks.ToDo;
  * Represents a parser that can read and understand what to do with an input String.
  */
 public class Parser {
+    private static final String TASK_FORMAT = "\n\t Got it. I've added this task:\n\t\t%s\n\t ";
+    private static final String DELETE_FORMAT = "\n\t Noted. I've removed this task:\n\t\t%s";
+    private static final String INFORM_FORMAT = "Now you have %d tasks in the list.";
     protected byte flag = 1;
     private String input;
 
@@ -71,29 +74,25 @@ public class Parser {
             case "todo":
                 ToDo newTask = new ToDo(words[1]);
                 tasks.add(newTask);
-                log.append("\n\t Got it. I've added this task:\n\t\t").append(newTask).append("\n\t Now you have ")
-                        .append(tasks.size()).append(" tasks in the list.");
+                log.append(String.format(TASK_FORMAT, newTask)).append(String.format(INFORM_FORMAT, tasks.size()));
                 break;
             case "deadline":
                 String[] details = words[1].split(" /by ", 2);
                 Deadline deadline = new Deadline(details[0], details[1]);
                 tasks.add(deadline);
-                log.append("\n\t Got it. I've added this task:\n\t\t").append(deadline)
-                        .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                log.append(String.format(TASK_FORMAT, deadline)).append(String.format(INFORM_FORMAT, tasks.size()));
                 break;
             case "event":
                 details = words[1].split(" /at ", 2);
                 Event event = new Event(details[0], details[1]);
                 tasks.add(event);
-                log.append("\n\t Got it. I've added this task:\n\t\t").append(event)
-                        .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                log.append(String.format(TASK_FORMAT, event)).append(String.format(INFORM_FORMAT, tasks.size()));
                 break;
             case "delete":
                 idx = Integer.parseInt(words[1]);
                 task = tasks.get(idx - 1);
                 tasks.remove(idx - 1);
-                log.append("\n\t Noted. I've removed this task:\n\t\t").append(task)
-                        .append("\n\t Now you have ").append(tasks.size()).append(" tasks in the list.");
+                log.append(String.format(DELETE_FORMAT, task)).append(String.format(INFORM_FORMAT, tasks.size()));
                 break;
             default:
                 throw new DukeException(

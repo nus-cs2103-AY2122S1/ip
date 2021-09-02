@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -57,7 +58,10 @@ public class DialogBox extends HBox {
      * @return A DialogBox containing a message given by the user input and an image to represent the user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userBox = new DialogBox(text, img);
+        userBox.setPadding(new Insets(10));
+        userBox.setStyle("-fx-background-color: #08DFF7;");
+        return userBox;
     }
 
     /**
@@ -68,7 +72,9 @@ public class DialogBox extends HBox {
      * @return A DialogBox containing a message given by Duke and an image to represent Duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.setPadding(new Insets(10));
+        db.setStyle("-fx-background-color: #18E7C6;");
         db.flip();
         return db;
     }

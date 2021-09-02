@@ -25,7 +25,7 @@ public class Duke extends Application {
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaUser.png"))
     );
     private final Image duke = new Image(
-            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DaDuke.png"))
+            Objects.requireNonNull(this.getClass().getResourceAsStream("/images/brain.png"))
     );
     private Parser parser;
     private Logger logger;
@@ -44,7 +44,7 @@ public class Duke extends Application {
         logger = new Logger("tasks.txt");
         parser = new Parser();
         ui = new Ui();
-        ui.greet();
+        ui.greetConsole();
         tasks = new TaskList(logger.loadList());
     }
 
@@ -121,11 +121,13 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.greet(), duke));
     }
 
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */

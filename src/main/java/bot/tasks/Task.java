@@ -4,6 +4,12 @@ package bot.tasks;
  * Represents a task.
  */
 public class Task {
+    protected static final String YMD_DATE_FORMAT = "yyyy/MM/dd";
+    protected static final String DMY_DATE_FORMAT = "dd/MM/yyyy";
+    protected static final String YMD_REGEX = "([0-9]{4})/([1-9]|[0][1-9]|[1][0-2])/"
+            + "([1-9]|[0][1-9]|[1][0-9]|[2][0-9]|[3][0-1])";
+    protected static final String DMY_REGEX = "([1-9]|[0][1-9]|[1][0-9]|[2][0-9]|[3][0-1])"
+            + "/([1-9]|[0][1-9]|[1][0-2])/([0-9]{4})";
     protected final String description;
     protected boolean isDone;
 
