@@ -11,7 +11,7 @@ public class DeadlineTest {
 
     @Test
     public void testDeadlineToString() {
-        Deadline deadline = new Deadline("description", "tomorrow", false, false);
+        Deadline deadline = new Deadline("description", "tomorrow", false);
         assertEquals("[D][ ] description (by: tomorrow)", deadline.toString());
     }
 }
