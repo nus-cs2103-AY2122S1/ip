@@ -14,7 +14,7 @@ import duke.ui.Ui;
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "FIND";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "Finds tasks with matching keyword.";
+            + ": finds tasks with matching keyword.";
 
     /**
      * Constructor for FindCommand.

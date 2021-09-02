@@ -33,13 +33,17 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(String cmd) throws DukeException {
-        Integer index = Integer.parseInt(cmd.substring(5));
-        int size = taskHandler.getList().size();
-        if (index >= 1 && index <= size) {
-            storage.updateFile(taskHandler.formatTasksToSave());
-            return taskHandler.markTaskAsDone(index);
+        if (cmd.length() >= 8) {
+            Integer index = Integer.parseInt(cmd.substring(5));
+            int size = taskHandler.getList().size();
+            if (index >= 1 && index <= size) {
+                storage.updateFile(taskHandler.formatTasksToSave());
+                return taskHandler.markTaskAsDone(index);
+            } else {
+                throw new DukeException("Please enter a value from 1 to " + size);
+            }
         } else {
-            throw new DukeException("Please enter a value from 1 to " + size);
+            throw new DukeException("Please choose a task to mark as done!");
         }
     }
 }

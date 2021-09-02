@@ -15,7 +15,7 @@ import duke.ui.Ui;
 public class EventCommand extends Command {
     public static final String COMMAND_WORD = "EVENT";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "Adds an event task to the list";
+            + ": adds an event task to the list";
 
     /**
      * Constructor for EventCommand.

@@ -1,4 +1,5 @@
-[D][ ] return book  (by: 21/09/21 1745)
-[E][ ] fishing  (at: 12/06/21 1300)
-[D][ ] hpb shit  (by: 21/03/21 1745)
+[D][X] hpb shit  (by: 21/03/21 1745)
 [T][ ] ejk
+[T][ ] wash dishes
+[D][ ] hjs  (by: 12/02/21 1222)
+[T][ ] eat

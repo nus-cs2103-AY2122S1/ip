@@ -12,7 +12,7 @@ import duke.ui.Ui;
 public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "BYE";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "terminates Duke";
+            + ": terminates Duke";
 
     /**
      * Constructor for ByeCommand.

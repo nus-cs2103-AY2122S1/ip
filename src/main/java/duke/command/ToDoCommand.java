@@ -14,7 +14,7 @@ import duke.ui.Ui;
 public class ToDoCommand extends Command {
     public static final String COMMAND_WORD = "TODO";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "Adds a todo task to the list";
+            + ": adds a todo task to the list";
 
     /**
      * Constructor for ToDoCommand.

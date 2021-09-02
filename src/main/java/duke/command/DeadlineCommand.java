@@ -14,7 +14,7 @@ import duke.ui.Ui;
 public class DeadlineCommand extends Command {
     public static final String COMMAND_WORD = "DEADLINE";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "Adds a deadline task to the list";
+            + ": adds a deadline task to the list";
 
     /**
      * Constructor for DeadlineCommand.

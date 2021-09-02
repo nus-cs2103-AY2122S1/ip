@@ -12,7 +12,7 @@ import duke.storage.Storage;
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "DELETE";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + "Deletes selected task from list.";
+            + ": deletes selected task from list.";
 
     /**
      * Constructor for DeleteCommand.
@@ -33,15 +33,19 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(String cmd) throws DukeException {
-        Integer index = Integer.parseInt(cmd.substring(7));
-        int size = taskHandler.getList().size();
-        if (index >= 1 && index <= size) {
-            String toPrint = taskHandler.deleteTask(index);
-            toPrint = toPrint.concat(taskHandler.printNoOfTasks());
-            storage.updateFile(taskHandler.formatTasksToSave());
-            return toPrint;
+        if (cmd.length() >= 8) {
+            Integer index = Integer.parseInt(cmd.substring(7));
+            int size = taskHandler.getList().size();
+            if (index >= 1 && index <= size) {
+                String toPrint = taskHandler.deleteTask(index);
+                toPrint = toPrint.concat(taskHandler.printNoOfTasks());
+                storage.updateFile(taskHandler.formatTasksToSave());
+                return toPrint;
+            } else {
+                throw new DukeException("Please enter a value from 1 to " + size);
+            }
         } else {
-            throw new DukeException("Please enter a value from 1 to " + size);
+            throw new DukeException("Please choose a task to delete!");
         }
     }
 }

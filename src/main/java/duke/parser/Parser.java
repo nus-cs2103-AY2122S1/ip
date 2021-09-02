@@ -10,6 +10,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+import duke.command.HelpCommand;
 import duke.data.TaskHandler;
 import duke.data.exception.DukeException;
 import duke.data.task.Task;
@@ -70,6 +71,9 @@ public class Parser {
         case FindCommand.COMMAND_WORD:
             FindCommand fc = new FindCommand(taskHandler, storage);
             return fc.execute(cmd);
+        case HelpCommand.COMMAND_WORD:
+            HelpCommand hc = new HelpCommand(taskHandler, storage);
+            return hc.execute(cmd);
         case ByeCommand.COMMAND_WORD:
             isTerminated = true;
             ByeCommand bc = new ByeCommand(taskHandler, storage);
