@@ -14,7 +14,6 @@ import java.util.Scanner;
  * This is the Driver class for Duke application.
  */
 public class Duke {
-
 	public static void main(String[] args) {
 		Ui.showWelcomeMessage();
 
