@@ -1,14 +1,13 @@
 plugins {
     id 'java'
     id 'checkstyle'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
-checkstyle {
-    toolVersion = '8.29'
-}
-
-group 'me.yukun'
+group 'me.yukun.ip'
 version '1.8'
+mainClassName = 'me/yukun99/ip/Main'
 
 repositories {
     mavenCentral()
@@ -22,4 +21,13 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+javafx {
+    version = "11"
+    modules = ['javafx.controls', 'javafx.fxml']
+}
+
+checkstyle {
+    toolVersion = '8.29'
 }

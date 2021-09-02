@@ -4,9 +4,10 @@ import java.util.Objects;
 
 import me.yukun99.ip.core.DateTimePair;
 import me.yukun99.ip.core.TaskFinder;
-import me.yukun99.ip.core.Ui;
+import me.yukun99.ip.core.TaskList;
 import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
+import me.yukun99.ip.ui.Message;
 
 /**
  * Tasks stored in our task list.
@@ -39,18 +40,6 @@ public abstract class Task {
     /**
      * Marks a task as done.
      */
-    public void setDone(Ui ui) {
-        if (isDone) {
-            ui.alreadyDone(this);
-            return;
-        }
-        isDone = true;
-        ui.done(this);
-    }
-
-    /**
-     * Marks a task as done without sending a message to the user.
-     */
     public void setDone() {
         isDone = true;
     }
@@ -72,6 +61,25 @@ public abstract class Task {
      * @throws HelpBotInvalidTaskTypeException If task does not contain a date.
      */
     public abstract DateTimePair getDate() throws HelpBotInvalidTaskTypeException;
+
+    /**
+     * Gets message sent when user deletes a task.
+     *
+     * @param taskList TaskList that task is being deleted from.
+     * @return Message sent when user deletes a task.
+     */
+    public String getDeleteMessage(TaskList taskList) {
+        return Message.getDeleteMesage(this, isDone, taskList);
+    }
+
+    /**
+     * Gets message sent when user marks a task as done.
+     *
+     * @return Message sent when user marks a task as done.
+     */
+    public String getDoneMessage() {
+        return Message.getDoneMessage(this, isDone);
+    }
 
     /**
      * Checks whether another Task object is equal to the current instance.
@@ -106,15 +114,6 @@ public abstract class Task {
         } else {
             taskFinder.deleteTask(this, name);
         }
-    }
-
-    /**
-     * Sends the task deletion message via the Ui class.
-     *
-     * @param ui Ui instance to send the deletion message from.
-     */
-    public void deleteMessage(Ui ui) {
-        ui.delete(this, isDone);
     }
 
     /**

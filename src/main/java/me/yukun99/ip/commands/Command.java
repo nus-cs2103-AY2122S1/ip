@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import me.yukun99.ip.core.TaskList;
-import me.yukun99.ip.core.Ui;
 import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotIllegalArgumentException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
@@ -17,20 +16,16 @@ public abstract class Command {
     protected final String[] args;
     // TaskList instance from the current HelpBot instance.
     protected final TaskList taskList;
-    // Ui instance from the current HelpBot instance.
-    protected final Ui ui;
 
     /**
      * Constructor for a Command instance.
      *
      * @param args Arguments of the command sent by the user.
      * @param taskList TaskList instance from the current HelpBot instance.
-     * @param ui Ui instance from the current HelpBot instance.
      */
-    public Command(String[] args, TaskList taskList, Ui ui) {
+    public Command(String[] args, TaskList taskList) {
         this.args = args;
         this.taskList = taskList;
-        this.ui = ui;
     }
 
     @Override
@@ -42,23 +37,22 @@ public abstract class Command {
             return false;
         }
         Command command = (Command) o;
-        return Arrays.equals(args, command.args) && Objects.equals(taskList, command.taskList)
-                && ui.equals(command.ui);
+        return Arrays.equals(args, command.args) && Objects.equals(taskList, command.taskList);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(taskList, ui);
+        int result = Objects.hash(taskList);
         result = 31 * result + Arrays.hashCode(args);
         return result;
     }
 
     /**
-     * Runs the command.
+     * Runs the command, and returns the response.
      *
      * @throws HelpBotInvalidTaskTypeException If user tries to edit the time of a ToDo task.
      * @throws HelpBotIllegalArgumentException If user specified arguments are invalid or missing.
      */
-    public abstract void run()
+    public abstract String getResponse()
             throws HelpBotInvalidTaskTypeException, HelpBotIllegalArgumentException, HelpBotDateTimeFormatException;
 }
