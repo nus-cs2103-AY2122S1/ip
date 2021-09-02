@@ -1,15 +1,15 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class DukeTest {
     @Test
     public void dukeTest() {
         //sample test
-        String FILE_PATH = System.getProperty("user.dir");
-        Duke duke = new Duke(FILE_PATH);
+        String filePath = System.getProperty("user.dir");
+        Duke duke = new Duke(filePath);
         assertEquals(2, 2);
     }
 }

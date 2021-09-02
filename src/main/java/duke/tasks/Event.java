@@ -9,11 +9,24 @@ public class Event extends Task {
     private static final String TASK_TAG = "event";
     private final Datetime eventDatetime;
 
+    /**
+     * Returns a new Event task with specified name and due date.
+     *
+     * @param taskName The name of the task.
+     * @param eventDatetime The date on which the event is occuring.
+     */
     public Event(String taskName, String eventDatetime) {
         super(taskName);
         this.eventDatetime = new Datetime(eventDatetime);
     }
 
+    /**
+     * Returns a new Event task with specified name, due date, and completion status.
+     *
+     * @param taskName The name of the task.
+     * @param eventDatetime The date on which the event is occurring.
+     * @param isDone Completion status of the task.
+     */
     public Event(String taskName, String eventDatetime, boolean isDone) {
         super(taskName, isDone);
         this.eventDatetime = new Datetime(eventDatetime);

@@ -53,7 +53,7 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (response.equals(Ui.checkExitMessage())) {
+        if (Ui.checkExitMessage(response)) {
             userInput.setDisable(true);
             sendButton.setDisable(true);
             Platform.exit();

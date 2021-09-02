@@ -9,11 +9,24 @@ public class Deadline extends Task {
     private static final String TASK_TAG = "deadline";
     private final Datetime dueDate;
 
+    /**
+     * Returns a new Deadline task with specified name and due date.
+     *
+     * @param taskName The name of the task.
+     * @param dueDate The date by which the task is due.
+     */
     public Deadline(String taskName, String dueDate) {
         super(taskName);
         this.dueDate = new Datetime(dueDate);
     }
 
+    /**
+     * Returns a new Deadline task with specified name, due date, and completion status.
+     *
+     * @param taskName The name of the task.
+     * @param dueDate The date by which the task is due.
+     * @param isDone Completion status of the task.
+     */
     public Deadline(String taskName, String dueDate, boolean isDone) {
         super(taskName, isDone);
         this.dueDate = new Datetime(dueDate);

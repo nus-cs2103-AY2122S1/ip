@@ -14,6 +14,13 @@ public class AddCommand extends Command {
     private String taskName;
     private String datetime;
 
+    /**
+     * Returns a Command representing an addition of a new task.
+     *
+     * @param taskType The type of task to be added.
+     * @param taskName The name of the task to be added.
+     * @param datetime The date/time of the task to be added, if any.
+     */
     public AddCommand(String taskType, String taskName, String datetime) {
         this.taskType = taskType;
         this.taskName = taskName;

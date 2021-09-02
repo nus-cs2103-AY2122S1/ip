@@ -14,6 +14,11 @@ public class Duke {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Returns a Duke object with storage set to a specified filepath.
+     *
+     * @param filepath The filepath for the creation of the storage system.
+     */
     public Duke(String filepath) {
         this.storage = new Storage(filepath);
         this.ui = new Ui();
@@ -23,10 +28,19 @@ public class Duke {
         this(FILE_PATH);
     }
 
+    /**
+     * Returns a welcome message in String representation.
+     */
     public String greet() {
         return this.ui.welcomeMessage();
     }
 
+    /**
+     * Returns a welcome message in String representation.
+     *
+     * @param input The input entered by the user.
+     * @return The response to be output by the bot in String representation.
+     */
     public String getResponse(String input) {
         String response;
         try {
@@ -38,25 +52,4 @@ public class Duke {
         return response;
     }
 
-    //    /**
-    //     * Starts up the bot for CLI text-based UI.
-    //     */
-    //    public void run() {
-    //        this.ui.welcomeMessage();
-    //        boolean isExit = false;
-    //        while (!isExit) {
-    //            try {
-    //                String inputCommand = ui.readCommand();
-    //                Command c = Parser.parseInput(inputCommand);
-    //                c.execute(storage, ui);
-    //                isExit = c.isExit();
-    //            } catch (DukeException e) {
-    //                Ui.showErrorMessage(e.getMessage());
-    //            }
-    //        }
-    //    }
-    //
-    //    public static void main(String[] args) {
-    //        new Duke(FILE_PATH).run();
-    //    }
 }

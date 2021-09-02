@@ -21,7 +21,9 @@ public class Ui {
     private static final String UNKNOWN_COMMAND = "OOPS!!! I'm sorry, but I don't know what that means :(";
     private static final String GOODBYE_MSG = "It has been a pleasure, goodbye!";
 
-
+    /**
+     * Returns an Ui object that is responsible for the creation of responses to be output to the user.
+     */
     public Ui() {
     }
 
@@ -123,9 +125,15 @@ public class Ui {
         return errorMsg;
     }
 
-    public static String checkExitMessage() {
+    /**
+     * Checks if the given string is equivalent to the exit message.
+     *
+     * @param inputString The string to be compared.
+     * @return True if they are equivalent, false otherwise.
+     */
+    public static Boolean checkExitMessage(String inputString) {
         Ui temp = new Ui();
-        return temp.goodbyeMessage();
+        return inputString.equals(temp.goodbyeMessage());
     }
 
     /**
