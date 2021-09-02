@@ -75,6 +75,7 @@ public class BotStaticMemoryUnit {
     public final String MESSAGE_REMOVE_TASK = "YEAH! You have removed one task from your list!";
     public final String MESSAGE_KEYWORD_NO_FOUND = "OPS! I just checked your task list, you dont have anything related to:\n";
     public final String MESSAGE_TASK_FOUND = "HEY! We found your task using the following keywords:\n%s\n\tThese are the results:\n%s";
+    public final String MESSAGE_LOAD_SUCCESS_FROM_HARD_DISK = "Nice! Data successfully loaded from hard disk!";
     public final String ERROR_MESSAGE_PROMPT = "ERROR: ";
     public final String ERROR_MESSAGE_INVALID_COMMAND = "OPS! I am not even sure whether I can accept this command!";
     public final String ERROR_MESSAGE_INVALID_COMMAND_FORMAT = "OPS! Your command format is wrong! Enter in the right format please!";
