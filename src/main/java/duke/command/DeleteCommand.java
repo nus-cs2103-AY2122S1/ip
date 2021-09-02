@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.data.TaskList;
 import duke.data.exception.DukeException;
+import duke.data.task.Task;
 import duke.storage.Storage;
-import duke.ui.Ui;
 
 /**
  * This class abstracts the delete command that the user wants to execute.
@@ -25,20 +25,19 @@ public class DeleteCommand extends Command {
      * Execute the command to delete the task from the given TaskList.
      *
      * @param tasks   The TaskList of the Duke instance.
-     * @param ui      The UI handler of the Duke instance.
      * @param storage The storage handler of the Duke instance.
      * @throws DukeException The checked exception to be thrown when execution fails.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (0 <= taskNum && taskNum < tasks.size()) {
-            tasks.get(taskNum).markAsDone();
-            ui.showFramedMsg("Got it. I've removed this task:\n  "
-                    + tasks.remove(taskNum)
-                    + "\nNow you have " + tasks.size() + " tasks in the list.");
+            Task removedTask = tasks.remove(taskNum);
             storage.update(tasks);
+            return "Got it. I've removed this task:\n  "
+                    + removedTask
+                    + "\nNow you have " + tasks.size() + " tasks in the list.";
         } else {
-            throw new DukeException("OOPS!!! Please enter a valid task number ☹");
+            throw new DukeException("OOPS!!! Please enter a valid task number");
         }
     }
 }

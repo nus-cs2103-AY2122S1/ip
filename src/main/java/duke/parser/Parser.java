@@ -16,7 +16,7 @@ import java.time.format.DateTimeParseException;
  * @author Chesterwongz
  */
 public class Parser {
-    private static final String DATE_TIME_FORMAT = "dd-MM-yyy HH:mm";
+    private static final String DATE_TIME_FORMAT = "dd-MM-yyyy HH:mm";
 
     /**
      * Parses the user's input.
@@ -27,7 +27,7 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         if (input.contains("|")) {
-            throw new DukeException("OOPS!!! Your input must not contain \"|\" ☹");
+            throw new DukeException("OOPS!!! Your input must not contain \"|\"");
         }
         switch (input) {
         case ExitCommand.COMMAND_WORD:
@@ -50,7 +50,7 @@ public class Parser {
             case DeleteCommand.COMMAND_WORD:
                 return deleteTask(split);
             default:
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means ☹ ");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");
             }
         }
     }
@@ -59,7 +59,7 @@ public class Parser {
         if (input.length > 1) {
             return new FindCommand(input[1]);
         } else {
-            throw new DukeException("OOPS!!! Please type what you want to find ☹");
+            throw new DukeException("OOPS!!! Please type what you want to find");
         }
     }
     
@@ -74,7 +74,7 @@ public class Parser {
         if (input.length > 1) {
             return new ToDoCommand(new ToDo(input[1]));
         } else {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty ☹");
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty");
         }
     }
 
@@ -140,13 +140,13 @@ public class Parser {
      */
     private static DoneCommand doTask(String[] input) throws DukeException {
         if (input.length < 2) {
-            throw new DukeException("OOPS!!! Please input the task number to be marked as done ☹");
+            throw new DukeException("OOPS!!! Please input the task number to be marked as done");
         }
         try {
             int taskID = Integer.parseInt(input[1]) - 1;
             return new DoneCommand(taskID);
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please enter a valid task number ☹");
+            throw new DukeException("OOPS!!! Please enter a valid task number");
         }
     }
 
@@ -158,13 +158,13 @@ public class Parser {
      */
     private static DeleteCommand deleteTask(String[] input) throws DukeException {
         if (input.length < 2) {
-            throw new DukeException("OOPS!!! Please input the task number to be removed ☹");
+            throw new DukeException("OOPS!!! Please input the task number to be removed");
         }
         try {
             int index = Integer.parseInt(input[1]) - 1;
             return new DeleteCommand(index);
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please enter a valid task number ☹");
+            throw new DukeException("OOPS!!! Please enter a valid task number");
         }
     }
 }

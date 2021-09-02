@@ -3,7 +3,6 @@ package duke.command;
 import duke.data.TaskList;
 import duke.data.task.ToDo;
 import duke.storage.Storage;
-import duke.ui.Ui;
 
 /**
  * This class abstracts the ToDo command that the user wants to execute.
@@ -25,15 +24,14 @@ public class ToDoCommand extends Command {
      * Execute the command to add a task to the given TaskList.
      *
      * @param tasks   The TaskList of the Duke instance.
-     * @param ui      The UI handler of the Duke instance.
      * @param storage The storage handler of the Duke instance.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         tasks.add(newTask);
         storage.update(tasks);
-        ui.showFramedMsg("Got it. I've added this task:\n  "
+        return "Got it. I've added this task:\n  "
                 + newTask
-                + "\nNow you have " + tasks.size() + " tasks in the list.");
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }

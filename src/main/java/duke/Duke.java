@@ -5,7 +5,8 @@ import duke.data.TaskList;
 import duke.data.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
-import duke.ui.Ui;
+
+import java.util.Objects;
 
 /**
  * The Duke class encapsulates the Duke project's chat-bot for CS2103T individual project 1.
@@ -13,32 +14,32 @@ import duke.ui.Ui;
  * @author Chesterwongz
  */
 public class Duke {
+
     private final Storage storage;
     private final TaskList tasks;
-    private final Ui ui;
+    private final String DEFAULT_FILEPATH = "tasks.txt";
 
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }
 
-    private void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String userInput = ui.readCommand();
-                Command c = Parser.parse(userInput);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
+    public Duke() {
+        storage = new Storage(DEFAULT_FILEPATH);
+        tasks = new TaskList(storage.load());
     }
 
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+    /**
+     * Get Duke's response to the user's command.
+     *
+     * @return Duke's response string to the given user command
+     */
+    String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

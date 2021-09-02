@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.EventCommand;
 import duke.data.TaskList;
 import duke.data.task.Event;

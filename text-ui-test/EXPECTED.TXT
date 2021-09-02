@@ -13,7 +13,7 @@ What can I do for you?
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! The description of a todo cannot be empty ☹
+OOPS!!! The description of a todo cannot be empty
 __________________________________________________________
 
 __________________________________________________________
@@ -23,15 +23,15 @@ Now you have 1 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! The description of a deadline cannot be empty ☹
+OOPS!!! The description of a deadline cannot be empty
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please add the deadline with the right format ☹
+OOPS!!! Please add the deadline with the right format
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please add the deadline with the right format ☹
+OOPS!!! Please add the deadline with the right format
 __________________________________________________________
 
 __________________________________________________________
@@ -41,11 +41,11 @@ Now you have 2 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please add the event with the right format ☹
+OOPS!!! Please add the event with the right format
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please add the event with the right format ☹
+OOPS!!! Please add the event with the right format
 __________________________________________________________
 
 __________________________________________________________
@@ -55,19 +55,19 @@ Now you have 3 tasks in the list.
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please input the task number to be marked as done ☹
+OOPS!!! Please input the task number to be marked as done
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please enter a valid task number ☹
+OOPS!!! Please enter a valid task number
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please enter a valid task number ☹
+OOPS!!! Please enter a valid task number
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please enter a valid task number ☹
+OOPS!!! Please enter a valid task number
 __________________________________________________________
 
 __________________________________________________________
@@ -83,19 +83,19 @@ Here are the tasks in your list:
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please input the task number to be removed ☹
+OOPS!!! Please input the task number to be removed
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please enter a valid task number ☹
+OOPS!!! Please enter a valid task number
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please enter a valid task number ☹
+OOPS!!! Please enter a valid task number
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! Please enter a valid task number ☹
+OOPS!!! Please enter a valid task number
 __________________________________________________________
 
 __________________________________________________________
@@ -111,7 +111,7 @@ Here are the tasks in your list:
 __________________________________________________________
 
 __________________________________________________________
-OOPS!!! I'm sorry, but I don't know what that means ☹ 
+OOPS!!! I'm sorry, but I don't know what that means
 __________________________________________________________
 
 __________________________________________________________

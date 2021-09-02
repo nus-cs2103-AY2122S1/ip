@@ -1,3 +1,5 @@
+package duke;
+
 import duke.command.DeadlineCommand;
 import duke.data.TaskList;
 import duke.data.task.Deadline;

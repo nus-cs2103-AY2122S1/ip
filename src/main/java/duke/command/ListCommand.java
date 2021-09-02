@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.data.TaskList;
+import duke.data.task.Task;
 import duke.storage.Storage;
-import duke.ui.Ui;
 
 /**
  * This class abstracts the list command that the user wants to execute.
@@ -14,11 +14,17 @@ public class ListCommand extends Command {
      * Execute the command to show the list to the user.
      *
      * @param tasks   The TaskList of the Duke instance.
-     * @param ui      The UI handler of the Duke instance.
      * @param storage The storage handler of the Duke instance.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showList(tasks);
+    public String execute(TaskList tasks, Storage storage) {
+        String str = "Here are the tasks in your list:";
+        StringBuilder stringBuilder = new StringBuilder(str);
+        int index = 1;
+        for (Task task : tasks.getAllTasks()) {
+            stringBuilder.append("\n").append(index++).append(".").append(task);
+        }
+        return stringBuilder.toString();
+
     }
 }

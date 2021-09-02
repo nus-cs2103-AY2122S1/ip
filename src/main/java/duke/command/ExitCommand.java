@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.data.TaskList;
 import duke.storage.Storage;
-import duke.ui.Ui;
 
 /**
  * This class abstracts the exit command that the user wants to execute.
@@ -14,12 +13,12 @@ public class ExitCommand extends Command {
      * Execute the command to exit Duke.
      *
      * @param tasks   The TaskList of the Duke instance.
-     * @param ui      The UI handler of the Duke instance.
      * @param storage The storage handler of the Duke instance.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showGoodBye();
+    public String execute(TaskList tasks, Storage storage) {
+        System.exit(0);
+        return "Bye! Hope to see you again soon!";
     }
 
     /**
