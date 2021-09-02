@@ -7,11 +7,17 @@ import java.time.format.DateTimeParseException;
 /**
  * Represents a deadline task. A deadline task has to be completed by a certain date and time.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     private String deadlineStr;
     private LocalDateTime deadline;
 
+    /**
+     * Constructor.
+     *
+     * @param details Details of the deadline task.
+     * @param deadline Deadline of the deadline task.
+     */
     public Deadline(String details, String deadline) {
         super(details);
         try {

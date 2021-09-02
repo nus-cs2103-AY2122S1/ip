@@ -1,23 +1,5 @@
 package duke;
 
-import duke.exception.InvalidInputException;
-import duke.exception.InvalidInstructionException;
-
-import duke.gui.Main;
-import duke.parser.Parser;
-
-import duke.storage.Storage;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
-import duke.tasklist.TaskList;
-
-import duke.ui.Ui;
-import javafx.application.Application;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -28,6 +10,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
+
+import duke.exception.InvalidInputException;
+import duke.exception.InvalidInstructionException;
+import duke.gui.Main;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
+import javafx.application.Application;
 
 /**
  * Represents a chat-bot named Duke.
@@ -46,14 +41,16 @@ public class Duke {
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
+        ui = new Ui();
         try {
             ArrayList<String> savedTasks = storage.getStorageContents();
             taskList = new TaskList(savedTasks);
-        } catch(FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             new File(filePath);
-            taskList = new TaskList(new ArrayList<>());
+            taskList = new TaskList();
+        } catch (InvalidInputException e) {
+            ui.invalidInput(e, "Please check data in " + filePath);
         }
-        ui = new Ui();
         parser = new Parser();
     }
 
@@ -76,27 +73,27 @@ public class Duke {
                 String type = "T";
                 contents += type + ' ' + done + ' ' + details;
             } else if (task.getClass() == Deadline.class) {
-                    String type = "D";
-                    LocalDateTime deadline = ((Deadline) task).getDeadline();
-                    if (deadline == null) {
-                        contents += type + ' ' + done + ' ' + details + ' '
-                                + ((Deadline) task).getDeadlineStr();
-                    } else {
-                        contents += type + ' ' + done + ' ' + details + ' '
-                                + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-                    }
+                String type = "D";
+                LocalDateTime deadline = ((Deadline) task).getDeadline();
+                if (deadline == null) {
+                    contents += type + ' ' + done + ' ' + details + ' '
+                            + ((Deadline) task).getDeadlineStr();
+                } else {
+                    contents += type + ' ' + done + ' ' + details + ' '
+                            + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                }
             } else if (task.getClass() == Event.class) {
-                    String type = "E";
-                    LocalDateTime timing = ((Event) task).getTiming();
-                    if (timing == null) {
-                        contents += type + ' ' + done + ' ' + details + ' '
-                                + ((Event) task).getTimingStr();
-                    } else {
-                        LocalTime endTime = ((Event) task).getEndTime();
-                        contents += type + ' ' + done + ' ' + details + ' '
-                                + timing.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + '-'
-                                + endTime.format(DateTimeFormatter.ofPattern("HHmm"));
-                    }
+                String type = "E";
+                LocalDateTime timing = ((Event) task).getTiming();
+                if (timing == null) {
+                    contents += type + ' ' + done + ' ' + details + ' '
+                            + ((Event) task).getTimingStr();
+                } else {
+                    LocalTime endTime = ((Event) task).getEndTime();
+                    contents += type + ' ' + done + ' ' + details + ' '
+                            + timing.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + '-'
+                            + endTime.format(DateTimeFormatter.ofPattern("HHmm"));
+                }
             }
             contents += System.lineSeparator();
 
@@ -163,6 +160,8 @@ public class Duke {
                 String keyword = (String) input.get("keyword");
                 return new Pair<>(this.ui.matchingKeyword(keyword),
                         getTasks(keyword));
+            default:
+                throw new InvalidInstructionException((String) input.get("cmd"));
             }
         } catch (IllegalStateException | NoSuchElementException e) {
             try {
@@ -178,8 +177,6 @@ public class Duke {
         } catch (InvalidInstructionException e) {
             return new Pair<>(ui.printException(e), getTasks());
         }
-
-        return new Pair<>("I have no response.", getTasks());
     }
 
     /**

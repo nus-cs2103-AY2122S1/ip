@@ -5,11 +5,16 @@ import java.time.LocalDateTime;
 /**
  * Represents a task.
  */
-abstract public class Task {
+public abstract class Task {
 
     private String details;
     private boolean completed;
 
+    /**
+     * Constructor.
+     *
+     * @param details Details of the task.
+     */
     public Task(String details) {
         this.details = details;
         completed = false;
@@ -45,7 +50,7 @@ abstract public class Task {
      *
      * @return Task date.
      */
-    abstract public LocalDateTime getDate();
+    public abstract LocalDateTime getDate();
 
     /**
      * Returns a String representation of the task.
