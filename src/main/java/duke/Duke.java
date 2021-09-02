@@ -10,9 +10,9 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 import java.nio.file.Paths;
-import java.util.Scanner;
 import java.util.ArrayList;
-
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Duke {
 
@@ -20,59 +20,48 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    Duke() {
+    public Duke() {
         this.storage = new Storage(Paths.get(".", "data"),
                                    Paths.get(".", "data", "tasks.txt"));
         this.tasks = new TaskList(this.storage.getTasks());
         this.ui = new Ui();
     }
 
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
-    }
-
-    private void run() {
-        this.ui.greet();
-        Scanner sc = new Scanner(System.in);
-        Boolean run = true;
-        while (run && sc.hasNextLine()) {
-            String input = sc.nextLine();
-            System.out.println(Ui.DIVIDER_LINE);
-            input = input.strip();
-            String[] splitInput = input.split(" ", 2);
+    private String runInstruction(String input) {
+        String[] splitInput = input.split(" ", 2);
             Command command = Parser.parse(splitInput);
             try {
                 switch (command) {
                 case EXIT:
-                    this.ui.exit();
-                    run = false;
-                    break;
+                    new Timer().schedule(new TimerTask() {
+                            @Override
+                            public void run() {
+                                System.exit(0);
+                            }
+                        }, 300L); // 300 is the delay in millis
+                    return this.ui.exit();
                 case LIST:
-                    this.ui.list(this.tasks);
-                    break;
+                    return this.ui.list(this.tasks);
                 case INDEXCOMMAND:
                     Task task = this.tasks.indexCommand(splitInput);
-                    this.ui.indexCommand(this.tasks.size(), task, splitInput);
-                    break;
+                    return this.ui.indexCommand(this.tasks.size(), task, splitInput);
                 case ADDCOMMAND:
                     Task addedTask = this.tasks.addTask(splitInput);
-                    this.ui.addTask(addedTask, this.tasks.size());
-                    break;
+                    return this.ui.addTask(addedTask, this.tasks.size());
                 case FIND:
                     ArrayList<Task> list = this.tasks.find(splitInput[1]);
-                    this.ui.list(list);
-                    break;
+                    return this.ui.list(list);
                 default:
-                    this.ui.unknownCommand();
+                    return this.ui.unknownCommand();
                 }
             } catch (DukeTaskDetailsException | DukeIndexInputException e) {
-                System.out.println("\t" + e.toString());
+                return "\t" + e.toString();
+            } finally {
+                this.storage.saveTasks(this.tasks.getTasks());
             }
-            System.out.println(Ui.DIVIDER_LINE);
-            this.storage.saveTasks(this.tasks.getTasks());
-        }
-        sc.close();
     }
 
+    public String getResponse(String input) {
+        return this.runInstruction(input.strip());
+    }
 }
