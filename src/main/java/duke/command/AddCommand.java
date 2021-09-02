@@ -1,15 +1,13 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.taskTypes.Task;
-
 import duke.util.Storage;
 import duke.util.TaskList;
 
 
 /**
- * Command that contains details when adding a task
+ * Command that adds task into tasklist
  */
 public class AddCommand extends Command {
 
@@ -61,8 +59,9 @@ public class AddCommand extends Command {
     private String taskAdded(Task task) {
         String msg = task.toString();
         int task_left = taskList.taskLeft();
-        String dukeAddedTask = "Got it. I've added this task:\n " + msg +  "\nNow you have " + task_left +
-                " tasks in the list.";
+        String dukeAddedTask = "Got it. I've added this task:\n " + msg +  "\nNow you have "
+                + task_left + " tasks in the list.";
+
         return dukeAddedTask;
     }
 }

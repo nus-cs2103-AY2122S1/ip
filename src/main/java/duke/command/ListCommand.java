@@ -1,12 +1,13 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.util.Storage;
 import duke.util.TaskList;
 
 
-
+/**
+ * Command that list out all the task based on input order
+ */
 public class ListCommand  extends Command{
 
     /**
@@ -14,7 +15,6 @@ public class ListCommand  extends Command{
      *
      * @param storage Storage object to save
      * @param taskList Tasklist to add task to
-     * @param ui Ui to display msg
      */
     public ListCommand(Storage storage, TaskList taskList){
         super(storage, taskList, false);

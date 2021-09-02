@@ -13,6 +13,9 @@ import javafx.scene.layout.VBox;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Main Window
+ */
 public class MainWindow extends AnchorPane {
 
     @FXML
@@ -29,15 +32,25 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
 
-
+    /**
+     * Settiing the Duke within main window
+     *
+     * @param d Duke
+     */
     public void setDuke(Duke d) {
         this.duke = d;
     }
 
+    /**
+     * Set the auto scroll functionality
+     */
     public void setScrollPane () {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Startup message
+     */
     @FXML
     public void initialize() {
         String welcomeMessage = "Hello! I am Duke.\nWhat can I do for you?";
@@ -46,6 +59,11 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Handles when user either press enter or enter bay
+     *
+     * @throws InterruptedException
+     */
     @FXML
     private void handleUserInput() throws InterruptedException {
         String input = this.userInput.getText();
@@ -60,6 +78,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Handles when tasklist optioj
+     */
     @FXML
     private void handleGetList()  {
         String getList = "list";

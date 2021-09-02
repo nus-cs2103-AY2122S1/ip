@@ -1,13 +1,12 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.util.Storage;
 import duke.util.TaskList;
 
 
 /**
- * Command that contains details when user inputs Bye
+ * Command that duke executes to end the the program
  */
 public class ByeCommand extends Command{
     /**

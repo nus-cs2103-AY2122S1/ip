@@ -9,6 +9,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Main Stage
+ */
 public class Main extends Application {
     private final Duke duke = new Duke();
 

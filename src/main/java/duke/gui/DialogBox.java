@@ -17,7 +17,9 @@ import javafx.scene.shape.Rectangle;
 import java.io.IOException;
 import java.util.Collections;
 
-
+/**
+ * Controller for dialogBox
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
@@ -62,10 +64,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Static method that returns a user style message
+     *
+     * @param text
+     * @param img
+     * @return
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img, false);
     }
 
+    /**
+     * Static method that returns a duke style message
+     *
+     * @param text
+     * @param img
+     * @return
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img, true);
         db.flip();

@@ -7,7 +7,9 @@ import duke.taskTypes.Task;
 import duke.util.Storage;
 import duke.util.TaskList;
 
-
+/**
+ * Command that sets the task as done
+ */
 public class DoneCommand extends Command {
 
     private final String taskChosen;
@@ -37,6 +39,12 @@ public class DoneCommand extends Command {
         return doneMsg(doneTask);
     }
 
+    /**
+     * Formats the done success message
+     *
+     * @param task
+     * @return
+     */
     private String doneMsg(Task task) {
         String msg = task.toString();
         String dukeAdded = "Nice! I've marked this task as done:" + msg;
