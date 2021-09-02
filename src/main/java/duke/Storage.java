@@ -9,15 +9,28 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Scanner;
 
+/**
+ * Storage class for saving the tasks to the hard disk.
+ */
 public class Storage {
     String filePath;
     PrintWriter writer;
     TaskList ls;
 
+    /**
+     * Constructor for Storage.
+     *
+     * @param filePath Path for the .txt file that the tasks are stored in.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Rewrites the .txt file according to the updated TaskList.
+     *
+     * @param ls The current TaskList.
+     */
     public void rewriteFile(TaskList ls) {
         this.ls = ls;
         try {
@@ -31,15 +44,15 @@ public class Storage {
 
         for (int i = 0; i < ls.getSize(); i++) {
             Task task = ls.getTask(i);
-            String type = task.getType();
+            String taskString = task.toString();
             String desc = task.getDesc();
-            String addOns = task.addOns();
-            if (type == "todo") {
+            String addOns = task.additionalDates();
+            if (taskString.startsWith("\t[T]")) {
                 writer.println("T" + (task.isDone() ? " | 1 | " : " | 0 | ") + desc);
-            } else if (type == "deadline") {
+            } else if (taskString.startsWith("\t[D]")) {
                 writer.println("D" + (ls.getTask(i).isDone() ? " | 1 | " : " | 0 | ")
                         + desc + " | " + addOns);
-            } else if (type == "event") {
+            } else if (taskString.startsWith("\t[E]")) {
                 writer.println("E" + (task.isDone() ? " | 1 | " : " | 0 | ")
                         + desc + " | " + addOns);
             }
@@ -47,6 +60,13 @@ public class Storage {
         writer.close();
     }
 
+    /**
+     * Loads the saved tasks in the hard disk into a TaskList object.
+     *
+     * @return A TaskList object representative of the current tasks.
+     * @throws IOException If there are issues with reading the file in the hard disk.
+     * @throws DukeException If the user input is invalid.
+     */
     public TaskList load() throws IOException, DukeException {
         TaskList ls = new TaskList();
         File directory = new File("duke.txt");
@@ -62,6 +82,13 @@ public class Storage {
         return ls;
     }
 
+    /**
+     * Parses the String representation of the tasks and returns their Task representation.
+     *
+     * @param input String representation of the task.
+     * @return Task representation of the task.
+     * @throws DukeException If the user input is invalid.
+     */
     public Task parseTask(String input) throws DukeException {
         if (input.startsWith("T")) {
             String taskDesc = input.substring(7);
@@ -80,6 +107,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Gets the date of the tasks for Deadlines and Events.
+     *
+     * @param input String representation of the task.
+     * @return String representation of the date of the task.
+     */
     public String getDate(String input) {
         int endIndex = 0;
         int count = 0;

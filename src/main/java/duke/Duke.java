@@ -5,12 +5,20 @@ import duke.task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Main Duke class.
+ */
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke.
+     *
+     * @param filePath Path of the .txt file the tasks are stored in.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -25,6 +33,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke program.
+     */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -43,6 +54,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Main argument for Duke.
+     *
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
         new Duke("duke.txt").run();
     }

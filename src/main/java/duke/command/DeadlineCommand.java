@@ -5,20 +5,33 @@ import duke.DukeException;
 import duke.task.TaskList;
 import duke.task.Deadline;
 
+/**
+ * Command to create Deadline tasks.
+ */
 public class DeadlineCommand extends Command {
-
-    private String input;
     private String taskDesc;
     private String deadline;
 
+    /**
+     * Constructor for DeadlineCommand.
+     *
+     * @param input User's input.
+     */
     public DeadlineCommand(String input) {
-        this.input = input;
         this.taskDesc = input.replaceFirst("^deadline ", "").split(" /")[0];
         if (input.contains("/by")) {
             this.deadline = input.substring(input.indexOf("/by") + 4);
         }
     }
 
+    /**
+     * Creates a new Deadline object and adds it to the current list.
+     *
+     * @param ls Current list.
+     * @param ui Current Ui.
+     * @param storage Current version of the saved tasks in the hard disk.
+     * @throws DukeException If Deadline object is invalid due to invalid input.
+     */
     @Override
     public void execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
         Deadline dTask = new Deadline(taskDesc, deadline);
@@ -26,6 +39,11 @@ public class DeadlineCommand extends Command {
         storage.rewriteFile(ls);
     }
 
+    /**
+     * Signals to the system that the command is not an exit command.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;

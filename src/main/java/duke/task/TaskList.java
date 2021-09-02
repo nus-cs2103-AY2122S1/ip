@@ -2,29 +2,56 @@ package duke.task;
 import duke.Ui;
 import java.util.ArrayList;
 
+/**
+ * Class that encapsulates Tasklists.
+ */
 public class TaskList {
     private ArrayList<Task> tasklist;
     private Ui ui;
 
+    /**
+     * Constructor for TaskList.
+     */
     public TaskList() {
         this.ui = new Ui();
         this.tasklist = new ArrayList<Task>();
     }
 
+    /**
+     * Adds task to current TaskList.
+     *
+     * @param task Task to be added to current TaskList.
+     */
     public void addTask(Task task) {
         ui.addTaskToList(task, tasklist.size()+1);
         this.tasklist.add(task);
     }
 
+    /**
+     * Removes task from current TaskList.
+     *
+     * @param index Index of the task to be removed from current TaskList.
+     */
     public void removeTask(int index) {
         ui.removeTaskFromList(tasklist.get(index), tasklist.size()-1);
         this.tasklist.remove(index);
     }
 
+    /**
+     * Retrieves task from current TaskList by their index.
+     *
+     * @param index Index of the task to be retrieved.
+     * @return Task at the index.
+     */
     public Task getTask(int index) {
         return this.tasklist.get(index);
     }
 
+    /**
+     * Returns the number of items in the current TaskList.
+     *
+     * @return Number of items in the current TaskList.
+     */
     public int getSize() {
         return this.tasklist.size();
     }

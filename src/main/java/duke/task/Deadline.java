@@ -5,11 +5,21 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Class that encapsulates Deadline tasks.
+ */
 public class Deadline extends Task {
 
     protected String deadline;
     protected String date = "";
 
+    /**
+     * Constructor for Deadline.
+     *
+     * @param description Task description.
+     * @param deadline Date of deadline.
+     * @throws DukeException If user input is not valid.
+     */
     public Deadline(String description, String deadline) throws DukeException {
         super(description);
 
@@ -33,18 +43,23 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Returns a String representation of the Deadline task.
+     *
+     * @return String representation of the Deadline task.
+     */
     @Override
     public String toString() {
         return "\t[D]" + super.toString() + " (by: " + deadline + ")";
     }
 
+    /**
+     * Returns a String representation of the date of the deadline.
+     *
+     * @return A String representation of the date of the deadline.
+     */
     @Override
-    public String getType() {
-        return "deadline";
-    }
-
-    @Override
-    public String addOns() {
+    public String additionalDates() {
         return this.deadline;
     }
 }

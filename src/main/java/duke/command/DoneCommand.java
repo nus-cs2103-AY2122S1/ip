@@ -5,12 +5,19 @@ import duke.DukeException;
 import duke.task.TaskList;
 import duke.task.Task;
 
+/**
+ * Command to mark tasks as done.
+ */
 public class DoneCommand extends Command {
-    private String input;
     private int taskNumber;
 
+    /**
+     * Constructor for DoneCommand.
+     *
+     * @param input User input.
+     * @throws DukeException If input is invalid.
+     */
     public DoneCommand(String input) throws DukeException {
-        this.input = input;
         try {
             if (input.equals("done") || input.equals("done ")) {
                 throw new DukeException("A number must follow after the command word 'done'.");
@@ -21,6 +28,14 @@ public class DoneCommand extends Command {
         }
     }
 
+    /**
+     * Marks item as done.
+     *
+     * @param ls Current list.
+     * @param ui Current Ui.
+     * @param storage Current version of the saved tasks in the hard disk.
+     * @throws DukeException If input is invalid.
+     */
     @Override
     public void execute(TaskList ls, Ui ui, Storage storage) throws DukeException {
         if (taskNumber < 0 || taskNumber >= ls.getSize()) {
@@ -31,6 +46,11 @@ public class DoneCommand extends Command {
         storage.rewriteFile(ls);
     }
 
+    /**
+     * Signals to the system that the command is not an exit command.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;

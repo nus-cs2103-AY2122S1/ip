@@ -2,7 +2,18 @@ package duke;
 
 import duke.command.*;
 
+/**
+ * Class for parsing the user commands.
+ */
 public class Parser {
+
+    /**
+     * Returns commands according to the uder input.
+     *
+     * @param input The user input.
+     * @return The respective commands.
+     * @throws DukeException If the user input is invalid.
+     */
     public static Command parse(String input) throws DukeException {
         if (input.equals("bye")) {
             return new ExitCommand();
