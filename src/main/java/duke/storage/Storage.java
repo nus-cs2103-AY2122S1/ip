@@ -32,7 +32,8 @@ public class Storage {
     /**
      * Load task method.
      * Load the task list at the given file path.
-     * @return The task list from the file
+     * @return The task list from the file.
+     * @throws DukeException file/folder not found.
      */
     public List<Task> load() throws DukeException {
         String[] folders = filePath.split("/");
@@ -75,7 +76,8 @@ public class Storage {
     /**
      * Save task method.
      * Save the task list at the given file path.
-     * @param taskList The task list to save
+     * @param taskList The task list to save.
+     * @throws DukeException invalid location to save.
      */
     public void save(TaskList taskList) throws DukeException {
 

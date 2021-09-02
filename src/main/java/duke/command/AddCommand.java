@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.ui.Ui;
+import duke.ui.Gui;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -25,8 +25,8 @@ public class AddCommand extends Command{
 
     /**
      * A constructor to initialize an add command.
-     * @param command The type of add command eg. todo, deadline, event
-     * @param description the description of the command
+     * @param command The type of add command eg. todo, deadline, event.
+     * @param description the description of the command.
      */
     public AddCommand(String command, String description) {
         this.command = command;
@@ -34,13 +34,15 @@ public class AddCommand extends Command{
     }
 
     /**
-     * a method to execute a command.
-     * @param taskList The task list to execute the command on
-     * @param ui The user interface to display the reply
-     * @param storage The place to store the session
+     * A method to execute a command.
+     * @param taskList The task list to execute the command on.
+     * @param gui The user interface to display the reply.
+     * @param storage The place to store the session.
+     * @throws DukeException error when adding a task.
      */
+
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList taskList, Gui gui, Storage storage) throws DukeException {
         String[] parameter;
         LocalDateTime ldt;
         Task task;
@@ -77,15 +79,14 @@ public class AddCommand extends Command{
         }
         taskList.addTask(task);
         storage.save(taskList);
-        ui.printStringInBox(
+        gui.showResponse(
                 String.format("Got it. I've added this task:\n  %s %s\nNow you have %d tasks in the list.",
                         task.getStatusIcon(), task.getDescription(), taskList.size()));
-
     }
 
     /**
      * A boolean to notate if this is an exit command.
-     * @return false
+     * @return false.
      */
     @Override
     public boolean isExit() {
