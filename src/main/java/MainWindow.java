@@ -1,3 +1,7 @@
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -5,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 import duke.Duke;
 
 /**
@@ -47,5 +52,8 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (duke.isExit()) {
+            CompletableFuture.delayedExecutor(2L, TimeUnit.SECONDS).execute(Platform::exit);
+        }
     }
 }
