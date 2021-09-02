@@ -26,7 +26,7 @@ public class DoneCommand extends Command {
      * @param taskList   The current list of tasks from the user.
      * @param ui      An object that handles all UI related functionality. (e.g. printing)
      * @param storage An object that handles all save/load related functionality.
-     * @return A task list with the specified task marked as done.
+     * @return A task list with the specified task marked as done and an output message.
      * @throws IOException If an error occurs during the save operation.
      */
     @Override

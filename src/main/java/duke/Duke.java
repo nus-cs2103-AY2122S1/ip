@@ -29,6 +29,7 @@ public class Duke {
      */
     private TaskList taskList;
     private String initMessage;
+    private boolean isTerminated = false;
 
     /**
      * Creates a Duke chat bot instance, using a file path for loading/saving.
@@ -77,7 +78,8 @@ public class Duke {
         try {
             Command command = Parser.parseCommandFromInput(input);
             taskList = command.execute(taskList, ui, storage);
-            return "command"
+            isTerminated = command.isTerminated();
+            return taskList.getRecentMessage();
         } catch (IOException e) {
             return ui.showError("The data failed to save to the save file with error:"
                     + e.getMessage());
@@ -87,5 +89,14 @@ public class Duke {
         } catch (Exception e) {
             return ui.showError(e.getMessage());
         }
+    }
+
+    /**
+     * Returns a boolean representing whether or not the program should continue running.
+     *
+     * @return True if a bye/terminating command has been inputted, false otherwise.
+     */
+    public boolean getIsTerminated() {
+        return isTerminated;
     }
 }

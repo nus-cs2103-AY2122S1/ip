@@ -17,21 +17,46 @@ import duke.util.Ui;
  */
 public class TaskList {
     private final List<Task> tasks;
+    private final String recentMessage;
 
     /**
      * Creates a task list with no tasks.
      */
     public TaskList() {
         tasks = new ArrayList<>();
+        recentMessage = "";
     }
 
     /**
-     * Creates a task list with a given list of tasks.
+     * Creates a task list with a given list of tasks and a message.
      *
      * @param tasks A list of tasks.
      */
     public TaskList(List<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
+        this.recentMessage = "";
+    }
+
+    /**
+     * Creates a task list with a given list of tasks and a message.
+     *
+     * @param tasks         A list of tasks.
+     * @param recentMessage A string generated from running a command.
+     */
+    public TaskList(List<Task> tasks, String recentMessage) {
+        this.tasks = new ArrayList<>(tasks);
+        this.recentMessage = recentMessage;
+    }
+
+    /**
+     * Creates a task list with a given TaskList and a message.
+     *
+     * @param otherTaskList A TaskList object representing a list of tasks.
+     * @param recentMessage A string generated from running a command.
+     */
+    public TaskList(TaskList otherTaskList, String recentMessage) {
+        this.tasks = new ArrayList<>(otherTaskList.tasks);
+        this.recentMessage = recentMessage;
     }
 
     /**
@@ -49,11 +74,12 @@ public class TaskList {
      *
      * @param input String containing user input.
      * @param ui    Object that handles user interface functionality. (e.g. printing)
-     * @return A new TaskList instance containing the new task.
+     * @return A new TaskList instance containing the new task and an output message.
      * @throws DukeException If input contains |, or is in an invalid format.
      */
     public TaskList addTask(String input, Ui ui) throws DukeException {
-        List<Task> newTaskList = new ArrayList<>(tasks);
+        List<Task> newTasks = new ArrayList<>(tasks);
+        String message = "";
         if (input.contains("|")) {
             throw new DukeException("Input contains |, which is an invalid character.");
         }
@@ -100,12 +126,12 @@ public class TaskList {
         }
 
         // Common functionality: add task to list, print task and list size, save tasks to file
-        newTaskList.add(task);
-        ui.showMessage("Got it. The following task has been added: ");
-        ui.showIndentedMessage(task.toString());
-        ui.showMessage(String.format("Now you have %d task%s in the list.",
-                newTaskList.size(), newTaskList.size() == 1 ? "" : "s"));
-        return new TaskList(newTaskList);
+        newTasks.add(task);
+        message += ui.showMessage("Got it. The following task has been added: ");
+        message += ui.showIndentedMessage(task.toString());
+        message += ui.showMessage(String.format("Now you have %d task%s in the list.",
+                newTasks.size(), newTasks.size() == 1 ? "" : "s"));
+        return new TaskList(newTasks, message);
     }
 
     /**
@@ -114,11 +140,12 @@ public class TaskList {
      *
      * @param input String containing user input.
      * @param ui    Object that handles user interface functionality. (e.g. printing)
-     * @return A new TaskList instance with the selected task removed.
+     * @return A new TaskList instance with the selected task removed and an output message.
      * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
      */
     public TaskList deleteTask(String input, Ui ui) {
-        List<Task> newTaskList = new ArrayList<>(tasks);
+        List<Task> newTasks = new ArrayList<>(tasks);
+        String message = "";
         if (input.length() <= 7) {
             throw new DukeException("Please type in a task number to delete.");
         }
@@ -127,16 +154,16 @@ public class TaskList {
                 && (Integer.parseInt(taskNumberString) - 1 < tasks.size()
                 && Integer.parseInt(taskNumberString) - 1 >= 0)) {
             int taskIndex = Integer.parseInt(taskNumberString) - 1;
-            Task removedTask = newTaskList.remove(taskIndex);
-            ui.showMessage("Got it. The following task has been removed:");
-            ui.showIndentedMessage(removedTask.toString());
-            ui.showMessage(String.format("Now you have %d task%s in the list.",
-                    newTaskList.size(), newTaskList.size() == 1 ? "" : "s"));
+            Task removedTask = newTasks.remove(taskIndex);
+            message += ui.showMessage("Got it. The following task has been removed:");
+            message += ui.showIndentedMessage(removedTask.toString());
+            message += ui.showMessage(String.format("Now you have %d task%s in the list.",
+                    newTasks.size(), newTasks.size() == 1 ? "" : "s"));
         } else {
             // Invalid input (not a number or invalid number)
             throw new DukeException("Please type in a valid task number to delete.");
         }
-        return new TaskList(newTaskList);
+        return new TaskList(newTasks, message);
     }
 
     /**
@@ -149,7 +176,8 @@ public class TaskList {
      * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
      */
     public TaskList markTask(String input, Ui ui) {
-        List<Task> newTaskList = new ArrayList<>(tasks);
+        List<Task> newTasks = new ArrayList<>(tasks);
+        String message = "";
         if (input.length() <= 5) {
             throw new DukeException("Please type in a task number to mark as done.");
         }
@@ -158,15 +186,15 @@ public class TaskList {
                 && (Integer.parseInt(taskNumberString) - 1 < tasks.size()
                 && Integer.parseInt(taskNumberString) - 1 >= 0)) {
             int taskIndex = Integer.parseInt(taskNumberString) - 1;
-            Task doneTask = newTaskList.get(taskIndex);
-            ui.showMessage("Good work! This task is now marked as done:");
-            ui.showIndentedMessage(doneTask.toString());
-            newTaskList.set(taskIndex, doneTask.markAsDone());
+            Task doneTask = newTasks.get(taskIndex);
+            message += ui.showMessage("Good work! This task is now marked as done:");
+            message += ui.showIndentedMessage(doneTask.toString());
+            newTasks.set(taskIndex, doneTask.markAsDone());
         } else {
             // Invalid input (not a number or invalid number)
             throw new DukeException("Please type in a valid task number to mark as done.");
         }
-        return new TaskList(newTaskList);
+        return new TaskList(newTasks, message);
     }
 
     /**
@@ -244,6 +272,16 @@ public class TaskList {
                 .collect(Collectors.toList());
         return new TaskList(onDateTasks);
     }
+
+    /**
+     * Gets the string message generated after running a command.
+     *
+     * @return A string generated after running a command.
+     */
+    public String getRecentMessage() {
+        return recentMessage;
+    }
+
     /**
      * Converts the TaskList data into a string format.
      * The tasks are listed in a numerical order. (1, 2, 3...)
@@ -258,9 +296,9 @@ public class TaskList {
         StringBuilder listString = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             if (i == tasks.size() - 1) {
-                listString.append(String.format("\t\t%d.%s", i + 1, tasks.get(i)));
+                listString.append(String.format("%d. %s", i + 1, tasks.get(i)));
             } else {
-                listString.append(String.format("\t\t%d.%s\n", i + 1, tasks.get(i)));
+                listString.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
             }
         }
         return listString.toString().trim();

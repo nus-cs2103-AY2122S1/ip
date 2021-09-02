@@ -15,12 +15,11 @@ public class ByeCommand extends Command {
      * @param taskList   The current list of tasks from the user.
      * @param ui      An object that handles all UI related functionality. (e.g. printing)
      * @param storage An object that handles all save/load related functionality.
-     * @return The input task list, unmodified.
+     * @return The input task list with an output message.
      */
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showMessage("Goodbye. Have a nice day!");
-        return taskList;
+        return new TaskList(taskList, ui.showMessage("Goodbye. Have a nice day!"));
     }
 
     /**
