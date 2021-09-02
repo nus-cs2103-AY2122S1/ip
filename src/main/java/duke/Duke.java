@@ -31,12 +31,10 @@ public class Duke {
         return ui.getMessage(this.storage, this.tasklist, input);
     }
 
-    public void run() throws DukeException {
-
-    }
-
-    public static void main(String[] args) throws DukeException {
-        new Duke("data/tasks.txt").run();
-    }
+//    public void run() throws DukeException {
+//    }
+//
+//    public static void main(String[] args) throws DukeException {
+//    }
 
 }
