@@ -1,11 +1,16 @@
 package duke;
 
 import duke.commands.Command;
+import duke.gui.Main;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * The main class which runs the Duke chatbot.
  */
-public class Duke {
+public class Duke extends Application {
 
     private Storage storage;
     private TaskList taskList;
@@ -14,13 +19,11 @@ public class Duke {
 
     /**
      * Constructs a Duke object.
-     *
-     * @param filePath File path of where the TaskList is stored.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
         parser = new Parser();
-        storage = new Storage(filePath);
+        storage = new Storage("data/tasks.txt");
         try {
             taskList = storage.load();
         } catch (Exception e) {
@@ -52,7 +55,22 @@ public class Duke {
         }
     }
 
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+
+    /**
+     * Main function of the program.
+     *
+     * @param args
+     */
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        //new Duke("data/tasks.txt").run();
+        Application.launch(Main.class, args);
     }
 }
