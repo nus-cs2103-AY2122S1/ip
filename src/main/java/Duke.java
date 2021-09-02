@@ -9,6 +9,11 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
+    /**
+     * Initialises a Duke program to start chatting with the user.
+     *
+     * @param filePath The file to store the data that users input.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

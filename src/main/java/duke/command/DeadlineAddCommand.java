@@ -13,6 +13,12 @@ public class DeadlineAddCommand extends AddCommand {
     private String description;
     private String time;
 
+    /**
+     * Stores a description and time of the task to be dealt with later.
+     *
+     * @param description Description of the task.
+     * @param time The time of the task.
+     */
     public DeadlineAddCommand(String description, String time) {
         this.description = description;
         this.time = time;

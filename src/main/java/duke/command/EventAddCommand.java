@@ -13,6 +13,12 @@ public class EventAddCommand extends AddCommand {
     private String description;
     private String time;
 
+    /**
+     * Adding a description and a time to the Command to be used in the future.
+     *
+     * @param description The description of the task.
+     * @param time The time of the task.
+     */
     public EventAddCommand(String description, String time) {
         this.description = description;
         this.time = time;

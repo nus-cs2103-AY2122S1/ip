@@ -1,6 +1,16 @@
 package duke;
 
-import duke.command.*;
+import duke.command.Command;
+import duke.command.DeadlineAddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.EventAddCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.TodoAddCommand;
+
 
 /**
  * An interpreter that evaluates the user input and produces a Command based on
@@ -25,7 +35,8 @@ public class Parser {
             return new DoneCommand(doneNumber);
         } else if (str.split("\\s+")[0].equals("deadline")) {
             if (!str.contains("/")) {
-                throw new DukeException("    Sorry please indicate your deadline time with a '/by' after your deadline title!");
+                throw new DukeException("    Sorry please indicate your deadline time with a '/by' after your "
+                        + "deadline title!");
             }
             int endDescription = str.indexOf("/");
             if (endDescription <= 9) {
@@ -39,7 +50,8 @@ public class Parser {
             return new DeadlineAddCommand(description, endTime);
         } else if (str.split("\\s+")[0].equals("event")) {
             if (!str.contains("/")) {
-                throw new DukeException("    Sorry please indicate a time your event begins with a '/on' after your event title!");
+                throw new DukeException("    Sorry please indicate a time your event begins with a '/on' after"
+                        + " your event title!");
             }
             int endDescription = str.indexOf("/");
             if (endDescription < 6) {

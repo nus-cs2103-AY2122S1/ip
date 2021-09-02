@@ -1,15 +1,15 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Storage deals with the file that stores the items in the user's local memory so that
@@ -26,6 +26,15 @@ public class Storage {
         return file;
     }
 
+    /**
+     * Changes a single task in the tasklist to be in a 'done' status.
+     *
+     * @param description Description of the item to be found in the taskList.
+     * @param cl Class of the item that will be found in the taskList.
+     * @param dukeData The file that is to be deleted so this new file will be written.
+     * @return The new file that has taken the place of the old file.
+     * @throws IOException To handle the exception where file is not read.
+     */
     public File doneChanger(String description, String cl, File dukeData) throws IOException {
         Scanner sc = new Scanner(dukeData);
         int count = 0;
@@ -92,6 +101,15 @@ public class Storage {
         }
     }
 
+    /**
+     * Deletes a line of the task that needs to be deleted from the taskList.
+     *
+     * @param description Description of the task to be found in the taskList.
+     * @param cl Class of the task to be found (Deadline, Event or To do).
+     * @param dukeData The original file that needs to be deleted so this new file will take it's place.
+     * @return The new file in the same directory.
+     * @throws IOException Exception thrown when the file is invalid.
+     */
     public File deleteLine(String description, String cl, File dukeData) throws IOException {
         Scanner sc = new Scanner(dukeData);
         boolean deleted = false;
@@ -102,7 +120,7 @@ public class Storage {
         while (sc.hasNextLine()) {
             String nextLine = sc.nextLine();
             if (!nextLine.equals("")) {
-                String parts[] = nextLine.split("\\|", 10);
+                String[] parts = nextLine.split("\\|", 10);
                 if (parts[2].equals(description) && parts[0].equals(cl) && !deleted) {
                     deleted = true;
                     continue;

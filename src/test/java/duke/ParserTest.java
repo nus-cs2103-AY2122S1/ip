@@ -1,9 +1,10 @@
 package duke;
 
-import duke.command.ExitCommand;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.command.ExitCommand;
 
 class ParserTest {
 

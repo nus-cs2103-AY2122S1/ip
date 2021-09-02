@@ -1,10 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -13,6 +8,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 
 /**
  * A list that is created when the program starts running. The list is generated
@@ -23,6 +24,12 @@ public class TaskList {
 
     private ArrayList<Task> xs = new ArrayList<>();
 
+    /**
+     * Initialising new file, if file cannot be found throws an error.
+     *
+     * @param file The file that is to be copied into the list xs.
+     * @throws DukeException If file is not found.
+     */
     public TaskList(File file) throws DukeException {
         try {
             fileCopy(file);
@@ -31,6 +38,9 @@ public class TaskList {
         }
     }
 
+    /**
+     * To initialise a new data/duke.txt since the user does not have one.
+     */
     public TaskList() {
         File data = new File("data/duke.txt");
         File directory = new File("data");
@@ -50,6 +60,12 @@ public class TaskList {
         this.xs = xs;
     }
 
+    /**
+     * Formats the date and time to match what the program requires.
+     *
+     * @param stringDate The date input by the user.
+     * @return A LocalDateTime object that was created from the formatted date.
+     */
     public LocalDateTime dateFormatting(String stringDate) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
         LocalDateTime localDate = LocalDateTime.parse(stringDate, dateTimeFormatter);
@@ -70,7 +86,7 @@ public class TaskList {
             if (s.equals("") || s.equals((" "))) {
                 continue;
             }
-            String parts[] = s.split("\\|", 5);
+            String[] parts = s.split("\\|", 5);
             if (parts[0].equals("D")) {
                 Deadline dl = new Deadline(parts[2], dateFormatting(parts[3]));
                 if (parts[1].equals("1")) {
@@ -181,6 +197,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Finds tasks that contains such a keyword typed in by the user.
+     *
+     * @param keyWords The user input that will be searched for to obtain tasks that have such words.
+     */
     public void findSimilarTasks(String keyWords) {
         System.out.println("    Here are the matching tasks in your list:");
         int count = 0;
