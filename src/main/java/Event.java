@@ -2,8 +2,7 @@
  * A Task with a date and time.
  * @author Thomas Hogben
  */
-public class Event extends Task {
-    private String eventDate;
+public class Event extends DateAndTimeTask {
 
     /**
      * @param description The description of the Event.
@@ -14,11 +13,10 @@ public class Event extends Task {
 
     /**
      * @param description The description of the Event.
-     * @param eventDate The date and time of the Event.
+     * @param details The date and time of the Event.
      */
-    public Event(String description, String eventDate) {
-        super(description);
-        this.eventDate = eventDate;
+    public Event(String description, String details) throws DukeException {
+        super(description, details);
     }
 
     public Event(String description, String eventDate, boolean isDone) {
@@ -36,10 +34,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String result = "[E]" + super.toString();
-        if (eventDate != null) {
-            result += " (at: " + this.eventDate + ")";
-        }
-        return result;
+        return "[E]" + super.toString();
     }
 }
