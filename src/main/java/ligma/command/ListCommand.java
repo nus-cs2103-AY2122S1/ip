@@ -2,7 +2,7 @@ package ligma.command;
 
 import ligma.Storage;
 import ligma.TaskList;
-import ligma.Ui;
+import ligma.ui.Ui;
 
 /**
  * This class represents a command to list all the tasks.
@@ -15,8 +15,8 @@ public class ListCommand implements Command {
      * @param storage   storage of current Ligma program
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
-        Ui.printTaskList(tasks);
+    public String execute(TaskList tasks, Storage storage) {
+        return Ui.getStringTaskList(tasks);
     }
 
     /**

@@ -2,7 +2,7 @@ package ligma.command;
 
 import ligma.Storage;
 import ligma.TaskList;
-import ligma.Ui;
+import ligma.ui.Ui;
 import ligma.task.Task;
 
 /**
@@ -23,9 +23,9 @@ public class FindCommand implements Command {
      * @param storage   storage of current Ligma program
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Task[] results = tasks.find(target);
-        Ui.printFoundTasks(results);
+        return Ui.getMatches(results);
     }
 
     /**

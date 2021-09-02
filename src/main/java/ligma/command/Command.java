@@ -7,7 +7,7 @@ import ligma.TaskList;
  * This interface represents a command specific to the Ligma program.
  */
 public interface Command {
-    void execute(TaskList tasks, Storage storage);
+    String execute(TaskList tasks, Storage storage);
 
     /**
      * Returns true if command is an exit command.

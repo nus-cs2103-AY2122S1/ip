@@ -1,41 +1,24 @@
-package ligma;
+package ligma.ui;
 
+import ligma.TaskList;
 import ligma.task.Task;
 
 public class Ui {
     private static final String PARTITION = "______________________";
-
-    private static void printFormattedReply(String line) {
-        System.out.println(PARTITION + "\n "
-                + line + "\n" + PARTITION);
-    }
-
-    /**
-     * Prints the lines given in proper format with partitioning.
-     *
-     * @param lines strings to be printed line by line
-     */
-    public static void printFormattedReply(String[] lines) {
-        String reply = PARTITION;
-        for (int i = 0; i < lines.length; i++) {
-            reply += "\n " + lines[i];
-        }
-        reply += "\n" + PARTITION;
-        System.out.println(reply);
-    }
 
     /**
      * Prints all tasks from the tasklist given.
      *
      * @param tasks tasklist whose tasks are to be printed
      */
-    public static void printTaskList(TaskList tasks) {
+    public static String getStringTaskList(TaskList tasks) {
         String[] tasksText = tasks.getStringArr();
         int len = tasksText.length;
+        String reply = "";
         for (int i = 0; i < len; i++) {
-            tasksText[i] = (i + 1) + ". " + tasksText[i];
+            reply += String.format("\n%d." + tasksText[i], i + 1);
         }
-        Ui.printFormattedReply(tasksText);
+        return reply;
     }
 
     /**
@@ -43,42 +26,32 @@ public class Ui {
      *
      * @param tasks tasks that match the target string
      */
-    public static void printFoundTasks(Task[] tasks) {
+    public static String getMatches(Task[] tasks) {
         int len = tasks.length;
-        String reply = PARTITION + "\n Found " + len + " matches:";
+        String reply = "Found " + len + " matches:";
         for (int i = 0; i < len; i++) {
-            reply += String.format("\n %d." + tasks[i], i + 1);
+            reply += String.format("\n%d." + tasks[i], i + 1);
         }
-        reply += "\n" + PARTITION;
-        System.out.println(reply);
+        return reply;
     }
 
     /**
      * Prints Ligma's introduction.
      */
-    public static void introduceSelf() {
-        String[] intro = {"Hello! I'm Ligma, Ligma Balls.", "What can I do for you?"};
-        printFormattedReply(intro);
+    public static String getIntroduction() {
+        return "Hello! I'm Ligma, Ligma Balls.\nWhat can I do for you?";
     }
 
     /**
      * Prints Ligma's exit message.
      */
-    public static void sayGoodbye() {
-        String line1 = "Bye. I love Imagine Dragons...\n\n\n";
-        String line2 = "Imagine Dragon Deez Nuts Cross Your Face.";
-        String[] bye = {line1, line2};
-        printFormattedReply(bye);
+    public static String getFarewell() {
+        return "Bye. I love Imagine Dragons...\n\n\n" +
+                "Imagine Dragon Deez Nuts Cross Your Face.";
     }
 
-    public static void printErrorMessage(Exception e) {
-        printFormattedReply(e.getMessage());
-    }
-    public static void printErrorMessage(String errMsg) {
-        printFormattedReply(errMsg);
+    public static String getSuccessMessage(String commandDesc) {
+        return "Successfully " + commandDesc;
     }
 
-    public static void printSuccessMessage(String commandDesc) {
-        printFormattedReply("Successfully " + commandDesc);
-    }
 }

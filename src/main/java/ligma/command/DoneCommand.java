@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import ligma.Storage;
 import ligma.TaskList;
-import ligma.Ui;
+import ligma.ui.Ui;
 import ligma.task.Task;
 
 /**
@@ -25,14 +25,14 @@ public class DoneCommand implements Command {
      * @param storage   storage of current Ligma program
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Task t = tasks.markAsDone(index);
 
         try {
             storage.markDone(t);
-            Ui.printSuccessMessage("marked as done:\n " + t);
+            return Ui.getSuccessMessage("marked as done:\n " + t);
         } catch (IOException e) {
-            Ui.printErrorMessage("Failed to update task in storage: \n" + t);
+            return "Failed to update task in storage: \n" + t;
         }
     }
 

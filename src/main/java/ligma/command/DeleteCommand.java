@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import ligma.Storage;
 import ligma.TaskList;
-import ligma.Ui;
+import ligma.ui.Ui;
 import ligma.task.Task;
 
 /**
@@ -24,15 +24,15 @@ public class DeleteCommand implements Command {
      * @param storage   storage of current Ligma program
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         Task t = tasks.deleteTask(index);
 
         try {
             storage.deleteTask(t);
-            Ui.printSuccessMessage("deleted:\n " + t
+            return Ui.getSuccessMessage("deleted:\n " + t
                     + String.format("\n You now have %d task(s).", tasks.getTaskAmt()));
         } catch (IOException e) {
-            Ui.printErrorMessage("Failed to delete task from storage: \n" + t);
+            return "Failed to delete task from storage: \n" + t;
         }
     }
 
