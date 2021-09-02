@@ -1,8 +1,12 @@
 package duke.ui;
 
+import java.io.IOException;
+import java.util.Objects;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -16,8 +20,15 @@ import javafx.scene.shape.Circle;
  */
 public class DialogBox extends HBox {
 
-    private Label text;
-    private Image displayPicture;
+    @FXML
+    private Label dialog;
+    @FXML
+    private Circle circleDisplayPicture;
+
+    public static DialogBox initialDialog() {
+        return DialogBox.getDukeDialog("Hi, I am Duke, what is your name?",
+            new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/images/gigachad.jpg"))));
+    }
 
     /**
      * Creates a new dialog box ui that contains the message in l and the profile picture in iv.
@@ -25,25 +36,28 @@ public class DialogBox extends HBox {
      * @param l  the message to be displayed
      * @param iv the profile picture to be displayed
      */
-    public DialogBox(Label l, Image iv) {
-        text = l;
-        displayPicture = iv;
+    public DialogBox(String l, Image iv) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        text.setWrapText(true);
-        Circle imgCircle = new Circle(30);
-        imgCircle.setFill(new ImagePattern(iv));
-        this.setSpacing(20);
-        this.setStyle("-fx-background-color: linear-gradient(to right, silver, thistle);");
-        this.setPadding(new Insets(10));
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, imgCircle);
+        dialog.setText(l);
+
+        dialog.setWrapText(true);
+        circleDisplayPicture.setRadius(30);
+        circleDisplayPicture.setFill(new ImagePattern(iv));
     }
 
-    public static DialogBox getUserDialog(Label l, Image i) {
+    public static DialogBox getUserDialog(String l, Image i) {
         return new DialogBox(l, i);
     }
 
-    public static DialogBox getDukeDialog(Label l, Image i) {
+    public static DialogBox getDukeDialog(String l, Image i) {
         var db = new DialogBox(l, i);
         db.flip();
         return db;

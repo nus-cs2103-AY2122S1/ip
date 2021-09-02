@@ -94,8 +94,8 @@ public class LCommandParser {
                     throw new DukeException(INVALID_COMMAND);
                 }
             }
-            storage.updateDukeTextFile();
         }
+        storage.updateDukeTextFile();
     }
 
     /**

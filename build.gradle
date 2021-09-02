@@ -18,8 +18,11 @@ dependencies {
 jar {
     manifest {
         attributes(
-                'Main-Class': 'duke.Duke'
+                'Main-Class': 'duke.Launcher'
         )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
@@ -38,7 +41,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {

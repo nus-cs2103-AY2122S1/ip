@@ -5,7 +5,6 @@ import java.io.IOException;
 import duke.logic.LStorage;
 import duke.task.TaskList;
 import duke.ui.TextCliUi;
-import duke.ui.Ui;
 
 /**
  * Duke is a personal assistant that allows users to keep track of events, deadlines and things to do.
@@ -41,7 +40,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         try {
-            new Duke("./dukedata.txt", 100).run();
+            new Duke().run();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,15 +62,5 @@ public class Duke {
         while (!ui.willExit()) {
             ui.checkInput(taskList, lStorage);
         }
-    }
-
-    /**
-     * Runs the duke chat-bot in a GUI.
-     */
-    public void runWithGui() {
-        Ui ui = new Ui("John");
-//        while (!ui.willExit()) {
-////            ui.checkInput(taskList, lStorage);
-//        }
     }
 }

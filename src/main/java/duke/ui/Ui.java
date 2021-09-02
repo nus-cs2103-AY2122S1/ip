@@ -16,7 +16,7 @@ import duke.task.TaskList;
  */
 public class Ui {
     private final String name;
-    private boolean willExit;
+    private boolean willExit = false;
 
     /**
      * Creates a new instance of a user interface by creating a new scanner and querying for the user's name.
@@ -39,12 +39,14 @@ public class Ui {
      */
     public String checkInput(String userInput, TaskList taskList, LStorage storage) {
         String output = "";
+        LCommandParser cmdParser;
         try {
-            LCommandParser cmdParser = new LCommandParser(userInput, taskList, storage, this);
+            cmdParser = new LCommandParser(userInput, taskList, storage, this);
             willExit = cmdParser.willExit();
             output += cmdParser.getOutput() + "\n";
         } catch (DukeException e) {
             output += e.getMessage() + "\n";
+            return output;
         }
         return output;
     }
@@ -170,7 +172,7 @@ public class Ui {
     private String getSingleTaskMessage(Task task, int number, int max) {
         String leadingSpace = " ".repeat((int) Math.log10(max) - (int) Math.log10(number));
         // For better formatting if numbers exceed 9
-        return String.format("%s%d: %s\n", leadingSpace, number, task);
+        return String.format("%s%d: %s", leadingSpace, number, task);
     }
 
     private String displayTaskMessage(Task task) {

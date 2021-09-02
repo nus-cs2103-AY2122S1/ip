@@ -39,7 +39,7 @@ public class TextCliUi {
     }
 
     public boolean willExit() {
-        return ui.willExit();
+        return willExit;
     }
 
     /**
