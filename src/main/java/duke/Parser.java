@@ -23,11 +23,11 @@ public class Parser {
         } else if (Pattern.compile("(?i)delete\\s+\\d+\\s*").matcher(newCommand).matches()) {
             return new String[]{"delete", newCommand.substring(6).trim()};
         } else if (Pattern.compile("(?i)todo.*").matcher(newCommand).matches()) {
-            return todoParser(newCommand);
+            return parseTodo(newCommand);
         } else if (Pattern.compile("(?i)deadline.*").matcher(newCommand).matches()) {
-            return deadlineParser(newCommand);
+            return parseDeadline(newCommand);
         } else if (Pattern.compile("(?i)event.*").matcher(newCommand).matches()) {
-            return eventParser(newCommand);
+            return parseEvent(newCommand);
         } else if (Pattern.compile("(?i)find.*").matcher(newCommand).matches()) {
             return parseFind(newCommand);
         } else {
@@ -44,7 +44,7 @@ public class Parser {
     public static LocalDateTime parseDateTime(String dateTime) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd HHmm");
         LocalDateTime deadlineDT;
-        
+
         try {
             deadlineDT = LocalDateTime.parse(dateTime, formatter);
             return deadlineDT;
@@ -61,12 +61,12 @@ public class Parser {
      * @return integer version of the given number.
      */
     public static int parseIndex(String intString) {
-        return Integer.parseInt(intString.trim());    
+        return Integer.parseInt(intString.trim());
     }
-    
-    private static String[] todoParser(String newCommand) {
+
+    private static String[] parseTodo(String newCommand) {
         String[] strArr = Pattern.compile("(?i)todo\\s+").split(newCommand, 2);
-        
+
         if (strArr.length == 2 && strArr[1].length() > 0) {
             return new String[]{"add", "todo", strArr[1]};
         } else if (strArr.length == 2 || strArr[0].length() == 4) {
@@ -79,8 +79,9 @@ public class Parser {
         }
     }
 
-    private static String[] deadlineParser(String newCommand) {
-        if (Pattern.compile("(?i)(deadline ).*\\S+.*( /by )\\d{4}\\s\\d{2}\\s\\d{2}\\s\\d{4}").matcher(newCommand).matches()) {
+    private static String[] parseDeadline(String newCommand) {
+        if (Pattern.compile("(?i)(deadline ).*\\S+.*( /by )\\d{4}\\s\\d{2}\\s\\d{2}\\s\\d{4}")
+                .matcher(newCommand).matches()) {
             String[] strArr = newCommand.substring(8).split(" /by ", 2);
             return new String[]{"add", "deadline", strArr[0].trim(), strArr[1].trim()};
         } else {
@@ -91,7 +92,7 @@ public class Parser {
         }
     }
 
-    private static String[] eventParser(String newCommand) {
+    private static String[] parseEvent(String newCommand) {
         if (Pattern.compile("(?i)(event ).*\\S+.*( /from )\\d{4}\\s\\d{2}\\s\\d{2}\\s\\d{4}"
                 + "( to )\\d{4}\\s\\d{2}\\s\\d{2}\\s\\d{4}").matcher(newCommand).matches()) {
             String[] strArr = newCommand.substring(5).split(" /from ", 2);

@@ -1,12 +1,12 @@
 package duke;
 
+import java.io.IOException;
+import java.time.LocalDateTime;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.io.IOException;
-import java.time.LocalDateTime;
 
 public class Duke {
 
@@ -25,7 +25,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         try {
-            storage = new Storage(); 
+            storage = new Storage();
             taskList = new TaskList(storage.load());
         } catch (DukeException ex) {
             ui.showStorageError();
@@ -41,7 +41,7 @@ public class Duke {
         ui.showWelcome();
         ui.beginListen();
         boolean isExit = false;
-        
+
         while (!isExit) {
             try {
                 String newCommand = ui.readCommand();
@@ -76,7 +76,7 @@ public class Duke {
                 ui.showError(ex.getMessage());
             }
         }
-        
+
         ui.stopListen();
     }
 
@@ -104,16 +104,16 @@ public class Duke {
             ui.showMessage(message);
         }
     }
-    
+
     private void markTaskDone(String[] parsedCommand) throws IOException {
         int taskIndex = Parser.parseIndex(parsedCommand[1]);
         if (taskList.isIndexValid(taskIndex)) {
-            String message = taskList.markDone(taskIndex);
+            String message = taskList.markTaskDone(taskIndex);
             ui.showMessage(message);
             String taskStorage = taskList.getTaskStorage(taskIndex);
             storage.storeDone(taskIndex, taskStorage);
         } else {
-            ui.showError("That task doesn't exist.\nPlease Try again.");   
+            ui.showError("That task doesn't exist.\nPlease Try again.");
         }
     }
 
@@ -127,7 +127,7 @@ public class Duke {
             ui.showError("That task doesn't exist.\nPlease Try again.");
         }
     }
-    
+
     public static void main(String[] args) {
         new Duke().run();
     }

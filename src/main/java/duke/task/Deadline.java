@@ -6,28 +6,41 @@ import java.time.format.FormatStyle;
 
 public class Deadline extends Task {
 
-    private LocalDateTime by;
+    private LocalDateTime byDateTime;
 
-    public Deadline(String description, LocalDateTime by) {
+    /**
+     * Constructs a new Deadline using the given description, done status and by time.
+     *
+     * @param description Description of the new Deadline.
+     * @param byDateTime By time of the new Deadline.
+     */
+    public Deadline(String description, LocalDateTime byDateTime) {
         super(description);
-        this.by = by;
+        this.byDateTime = byDateTime;
     }
 
-    public Deadline(String description, boolean isDone, LocalDateTime by) {
+    /**
+     * Constructs a new Deadline using the given description, done status and by time.
+     *
+     * @param description Description of the new Deadline.
+     * @param isDone Done status of the new Deadline.
+     * @param byDateTime By time of the new Deadline.
+     */
+    public Deadline(String description, boolean isDone, LocalDateTime byDateTime) {
         super(description);
         this.isDone = isDone;
-        this.by = by;
+        this.byDateTime = byDateTime;
     }
 
     @Override
     public String toString() {
-        return "[D]" + (this.isDone ? "[X] " : "[ ] ") + this.description + " (by: " 
-                + this.by.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM,FormatStyle.SHORT)) 
+        return "[D]" + (isDone ? "[X] " : "[ ] ") + description + " (by: "
+                + byDateTime.format(DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM, FormatStyle.SHORT))
                 + ")";
     }
 
     @Override
     public String toStorage() {
-        return ("D%" + this.isDone + "%" + this.description + "%" + this.by + "\n");
+        return ("D%" + isDone + "%" + description + "%" + byDateTime + "\n");
     }
 }

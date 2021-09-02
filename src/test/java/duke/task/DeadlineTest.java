@@ -1,14 +1,15 @@
 package duke.task;
 
-import duke.Parser;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.Parser;
 
 public class DeadlineTest {
-    
+
     @Test
     public void toString_deadlineObject_stringRep() {
         LocalDateTime deadlineDT = Parser.parseDateTime("2021 08 30 2359");

@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 public class Ui {
 
@@ -17,7 +17,7 @@ public class Ui {
      * Constructs a Ui object.
      */
     public Ui() {
-        
+
     }
 
     /**
@@ -35,7 +35,10 @@ public class Ui {
                 + H_LINE;
         System.out.print(logo + helloMsg);
     }
-    
+
+    /**
+     * Begins listening to the user input from the command line.
+     */
     public void beginListen() {
         commandInput = new Scanner(System.in);
     }
@@ -67,6 +70,11 @@ public class Ui {
         System.out.print(H_LINE);
     }
 
+    /**
+     * Prints out the string representation of the list of tasks that are a result from the findTasks operation.
+     *
+     * @param tasks ArrayList containing all the tasks.
+     */
     public void showFindList(ArrayList<Task> tasks) {
         System.out.print(H_LINE);
         if (tasks.size() > 0) {
@@ -79,30 +87,49 @@ public class Ui {
         }
         System.out.print(H_LINE);
     }
-    
+
     /**
      * Prints a message indicating that a user command has failed to be understood by the bot.
      */
     public void showCommandFail() {
         System.out.print(H_LINE + "I didn't get that. Please try again.\n" + H_LINE);
     }
-    
+
+    /**
+     * Prints a message indicating an error in Duke's operations.
+     *
+     * @param message Error message to be printed.
+     */
     public void showError(String message) {
         System.out.print(H_LINE + "Oops... Something's wrong.\n" + message + "\n" + H_LINE);
     }
-    
+
+    /**
+     * Prints a custom general message resulting from Duke's operations.
+     *
+     * @param message Message to be printed.
+     */
     public void showMessage(String message) {
         System.out.print(H_LINE + message + "\n" + H_LINE);
     }
-    
+
+    /**
+     * Prints a message indicating an error related to storage operations.
+     */
     public void showStorageError() {
-        showError("File");
+        showError("File for storage of tasks could not be accessed or written.");
     }
-    
+
+    /**
+     * Stops listening to the user input from the command line.
+     */
     public void stopListen() {
         commandInput.close();
     }
-    
+
+    /**
+     * Prints a goodbye message from Duke.
+     */
     public void showGoodbye() {
         System.out.print(H_LINE + "Bye. Hope to see you again soon!\n" + H_LINE);
     }
