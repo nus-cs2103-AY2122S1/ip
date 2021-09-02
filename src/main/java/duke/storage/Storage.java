@@ -83,19 +83,11 @@ public class Storage {
 
             switch (nextCommand.charAt(1)) {
             case 'D':
-                try {
-                    task = extractDeadline(nextCommand.substring(7)); // [D][X] something by time
-                    break;
-                } catch (DataFileChangedException e) {
-                    throw new DataFileChangedException();
-                }
+                task = extractDeadline(nextCommand.substring(7)); // [D][X] something by time
+                break;
             case 'E':
-                try {
-                    task = extractEvent(nextCommand.substring(7)); // [D][X] something at time
-                    break;
-                } catch (DataFileChangedException e) {
-                    throw new DataFileChangedException();
-                }
+                task = extractEvent(nextCommand.substring(7)); // [D][X] something at time
+                break;
             case 'T': // todos
                 task = new Todo(nextCommand.substring(7)); // disregards [T][X]
                 break;
@@ -149,31 +141,14 @@ public class Storage {
      * @throws DataFileChangedException if the data file was changed and any entry contains a wrong format.
      */
     private Event extractEvent(String text) throws DataFileChangedException {
-        int lastOccurrenceOfAt = text.lastIndexOf(" (at: ");
-        String description = text.substring(0, lastOccurrenceOfAt);
-
-        // disregards "( at: " and trailing ")"
-        String at = text.substring(lastOccurrenceOfAt + 6, text.length() - 1);
-
-        // prepare variables
-        String atWithoutWhiteSpace = at.replaceAll("\\s", "");
-        int lengthOfAtNoSpace = atWithoutWhiteSpace.length();
-
-        // throws error if it doesn't even contain sufficient number of characters for correct format
-        if (lengthOfAtNoSpace < 22 || lengthOfAtNoSpace > 25) { // MMM d yyyy, HH:mm - HH:mm
+        ArrayList<String> parsedInfo = parseEventInfo(text);
+        if (parsedInfo.isEmpty()) {
             throw new DataFileChangedException();
         }
 
-        // find start and end times
-        int indexOfComma = at.indexOf(',');
-        String date = at.substring(0, indexOfComma).trim(); // at this point, date contains 10 chars YYYY/MM/DD
-        String eventDuration = at.substring(indexOfComma + 1).trim();
-        String[] eventTimes = eventDuration.split("-");
-
-        // if no "-" present
-        if (eventTimes.length != 2) {
-            throw new DataFileChangedException();
-        }
+        String description = parsedInfo.get(0);
+        String date = parsedInfo.get(1);
+        String[] eventTimes = {parsedInfo.get(2), parsedInfo.get(3)};
 
         String startTime = eventTimes[0].trim();
         String endTime = eventTimes[1].trim();
@@ -192,5 +167,47 @@ public class Storage {
         }
 
         return new Event(description, finalDate, finalStartTime, finalEndTime);
+    }
+
+    /**
+     * Method to parse information of the event.
+     *
+     * @param text data saved in file.
+     * @return ArrayList of description, date, and times of event.
+     * @throws DataFileChangedException if the contents of the event in data file is incorrect.
+     */
+    private ArrayList<String> parseEventInfo(String text) throws DataFileChangedException {
+        int lastOccurrenceOfAt = text.lastIndexOf(" (at: ");
+        String description = text.substring(0, lastOccurrenceOfAt);
+        ArrayList<String> parsedInfo = new ArrayList<>();
+
+        // disregards "( at: " and trailing ")"
+        String at = text.substring(lastOccurrenceOfAt + 6, text.length() - 1);
+
+        // prepare variables
+        String atWithoutWhiteSpace = at.replaceAll("\\s", "");
+        int lengthOfAtNoSpace = atWithoutWhiteSpace.length();
+
+        // throws error if it doesn't even contain sufficient number of characters for correct format
+        if (lengthOfAtNoSpace < 22 || lengthOfAtNoSpace > 25) { // MMM d yyyy, HH:mm - HH:mm
+            return parsedInfo;
+        }
+
+        // find start and end times
+        int indexOfComma = at.indexOf(',');
+        String date = at.substring(0, indexOfComma).trim(); // at this point, date contains 10 chars YYYY/MM/DD
+        String eventDuration = at.substring(indexOfComma + 1).trim();
+        String[] eventTimes = eventDuration.split("-");
+
+        // if no "-" present
+        if (eventTimes.length != 2) {
+            throw new DataFileChangedException();
+        }
+
+        parsedInfo.add(description);
+        parsedInfo.add(date);
+        parsedInfo.add(eventTimes[0]);
+        parsedInfo.add(eventTimes[1]);
+        return parsedInfo;
     }
 }
