@@ -17,7 +17,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * generates the string representation of deadline
+     * Generates the string representation of deadline.
      * @return String representation of event
      */
     @Override
