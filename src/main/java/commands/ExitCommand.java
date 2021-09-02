@@ -5,8 +5,9 @@ import utils.Storage;
 import utils.Ui;
 
 public class ExitCommand extends Command {
+    private static final String EXIT_MSG = "Goodbye Courier!";
 
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
-        return true;
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return EXIT_MSG;
     }
 }

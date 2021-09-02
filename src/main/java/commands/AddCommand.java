@@ -15,13 +15,13 @@ public class AddCommand extends Command {
         this.task = task;
     }
 
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(this.task);
 
         String message = NEW_TASK_MSG + "\n" + this.task.toString() + "\n" + tasks.getTaskCountString();
 
         ui.printResponse(message);
 
-        return false;
+        return message;
     }
 }

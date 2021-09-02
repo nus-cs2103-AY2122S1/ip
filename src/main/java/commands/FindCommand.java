@@ -15,11 +15,11 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String message = FIND_MESSAGE + "\n" + tasks.find(this.keyword);
 
         ui.printResponse(message);
 
-        return false;
+        return message;
     }
 }

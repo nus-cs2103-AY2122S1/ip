@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
         this.index = index;
     }
 
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.get(this.index);
 
         task.markAsDone();
@@ -24,6 +24,6 @@ public class DoneCommand extends Command {
 
         ui.printResponse(message);
 
-        return false;
+        return message;
     }
 }

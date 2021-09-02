@@ -36,7 +36,7 @@ public class UiTest {
     }
 
     @Test
-    public void printResponseTest_singleLineString_formattedMessagePrinted() {
+    public void printResponse_singleLineString_formattedMessagePrinted() {
         System.setOut(new PrintStream(outputStreamCaptor));
 
         ui.printResponse("Added new Task");
