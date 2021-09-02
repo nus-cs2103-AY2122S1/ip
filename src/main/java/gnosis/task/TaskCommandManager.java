@@ -1,17 +1,18 @@
 package gnosis.task;
 
-import gnosis.util.GnosisConstants;
-import gnosis.util.GnosisException;
-import gnosis.model.Deadline;
-import gnosis.model.Event;
-import gnosis.model.Task;
-import gnosis.model.Todo;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import gnosis.model.Deadline;
+import gnosis.model.Event;
+import gnosis.model.Task;
+import gnosis.model.Todo;
+import gnosis.util.GnosisConstants;
+import gnosis.util.GnosisException;
+
 
 public class TaskCommandManager {
 
@@ -21,6 +22,13 @@ public class TaskCommandManager {
         this.tasks = tasks;
     }
 
+
+    /**
+     * Adds a t0do tasks and returns the t0do.
+     *
+     * @param todo The t0do input to save
+     * @throws GnosisException If input is empty
+     */
     public Todo addTodo(String todo) throws GnosisException {
         if (todo.trim().equalsIgnoreCase("")) {
             // t0do empty exception
@@ -44,7 +52,7 @@ public class TaskCommandManager {
         String taskName = splitTaskInput[0];
         String taskSchedule = splitTaskInput[1];
 
-        Event et = new Event(taskName,StringToDate(taskSchedule));
+        Event et = new Event(taskName, stringToDate(taskSchedule));
         tasks.add(et);
 
         return et;
@@ -61,7 +69,7 @@ public class TaskCommandManager {
         String taskName = splitTaskInput[0];
         String taskDeadline = splitTaskInput[1];
 
-        Deadline dl = new Deadline(taskName, StringToDate(taskDeadline));
+        Deadline dl = new Deadline(taskName, stringToDate(taskDeadline));
         tasks.add(dl);
 
         return dl;
@@ -88,7 +96,7 @@ public class TaskCommandManager {
         return t;
     }
 
-    public List<Task> findMatchingTasks(String taskKeyword){
+    public List<Task> findMatchingTasks(String taskKeyword) {
         return this.tasks.stream()
                 .filter(task -> task.getTaskName().toLowerCase().contains(taskKeyword.toLowerCase()))
                 .collect(Collectors.toList());
@@ -103,12 +111,12 @@ public class TaskCommandManager {
     }
 
     // helper function
-    public static LocalDateTime StringToDate(String dateString) throws GnosisException {
+    public static LocalDateTime stringToDate(String dateString) throws GnosisException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
 
         LocalDateTime ldt;
         try {
-            ldt = LocalDateTime.parse(dateString.stripLeading(),formatter);
+            ldt = LocalDateTime.parse(dateString.stripLeading(), formatter);
         } catch (DateTimeParseException e) {
             throw new GnosisException(GnosisConstants.DATETIME_FORMAT_EXCEPT_MESSAGE);
         }

@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
  * @author Pawandeep Singh
  *
  * */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
 
     /**

@@ -34,7 +34,7 @@ public class Task {
         this.taskName = taskName;
         this.TASK_TYPE = TaskType.getTask(type);
         isDone = false;
-        dateTime =  LocalDateTime.now();
+        dateTime = LocalDateTime.now();
     }
 
     /**
@@ -129,7 +129,7 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getTaskType() + "]"
-                + "["+ this.isTaskDone()  + "]"
+                + "[" + this.isTaskDone() + "]"
                 + " " + this.taskName;
     }
 }

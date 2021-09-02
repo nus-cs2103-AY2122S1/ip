@@ -1,7 +1,6 @@
 package gnosis.main;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import gnosis.controller.GnosisController;
 import gnosis.ui.GnosisUI;
@@ -31,15 +30,13 @@ import javafx.stage.Stage;
  * */
 public class Gnosis extends Application {
 
-    /** Handles Gnosis View */
-    private GnosisUI gnosisView;
-
-    /** Handles Gnosis Logic */
-    private GnosisController gnosisController;
-
-
+    /**
+     * Starts creating the Gnosis UI.
+     *
+     * @param stage Stage to set for GnosisUI.
+     */
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(GnosisUI.class.getResource("/gnosis/ui/GnosisMainWindow.fxml"));
@@ -48,8 +45,8 @@ public class Gnosis extends Application {
             stage.setScene(scene);
 
             // Set up connection between Gnosis UI and Gnosis Logic Controller
-            gnosisView = fxmlLoader.getController();
-            this.gnosisController = new GnosisController(gnosisView);
+            GnosisUI gnosisView = fxmlLoader.getController();
+            GnosisController gnosisController = new GnosisController(gnosisView);
             gnosisView.setUpGnosis(gnosisController);
 
 

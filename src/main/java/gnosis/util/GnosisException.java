@@ -6,6 +6,7 @@ package gnosis.util;
  * @author Pawandeep Singh
  * */
 public class GnosisException extends Exception {
+
     private final String ERROR_MESSAGE;
 
     /**

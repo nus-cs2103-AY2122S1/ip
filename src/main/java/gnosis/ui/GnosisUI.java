@@ -1,5 +1,8 @@
 package gnosis.ui;
 
+import java.util.List;
+import java.util.Scanner;
+
 import gnosis.controller.GnosisController;
 import gnosis.model.Task;
 import gnosis.util.GnosisConstants;
@@ -11,9 +14,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * The GnosisUI handles the user interaction with user.
