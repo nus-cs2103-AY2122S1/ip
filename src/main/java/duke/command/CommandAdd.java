@@ -17,9 +17,9 @@ public class CommandAdd extends Command {
     /**
      * Instantiates an object with given task to be added when
      * called to execute.
+     *
      * @param taskToAdd
      */
-
     public CommandAdd(Task taskToAdd) {
         super();
         this.taskToAdd = taskToAdd;
@@ -28,11 +28,11 @@ public class CommandAdd extends Command {
 
     /**
      * Execute the add action and auto-saves to the file when called.
-     * @param tasks The taskList to add new task in.
-     * @param ui The Ui object to print messages after action.
+     *
+     * @param tasks   The taskList to add new task in.
+     * @param ui      The Ui object to print messages after action.
      * @param storage The Storage object that auto-saves after modification.
      */
-
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
@@ -48,11 +48,12 @@ public class CommandAdd extends Command {
     /**
      * String representation of CommandAdd.
      * Shows the command type and task to add.
+     *
      * @return String representation of the CommandAdd.
      */
 
     @Override
     public String toString() {
-        return String.format("CommandAdd taskToAdd: %s",taskToAdd);
+        return String.format("CommandAdd taskToAdd: %s", taskToAdd);
     }
 }

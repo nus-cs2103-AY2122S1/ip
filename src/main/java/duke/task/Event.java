@@ -12,8 +12,9 @@ public class Event extends Task {
 
     /**
      * Constructor.
-     * Instantiates a Deadline object with given description and
+     * Instantiates an Event object with given description and
      * event start dateTime and end dateTime.
+     *
      * @param description
      * @param startDateTime
      * @param endDateTime
@@ -28,6 +29,7 @@ public class Event extends Task {
      * Constructor.
      * Instantiates a Deadline object with given description, isDone status and
      * event start dateTime and end dateTime.
+     *
      * @param description
      * @param isDone
      * @param startDateTime
@@ -42,6 +44,7 @@ public class Event extends Task {
     /**
      * Encode Event in format
      * "taskType isDone description startDateTime endDateTime"
+     *
      * @return encoded event string
      */
     public String encode() {
@@ -52,11 +55,12 @@ public class Event extends Task {
                         .format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm")),
                 endDateTime
                         .format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm"))
-                );
+        );
     }
 
     /**
      * String representation of Events.
+     *
      * @return String representation of the event.
      */
     public String toString() {
@@ -67,7 +71,7 @@ public class Event extends Task {
                         .format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm"))
                         + " - "
                         + endDateTime.format(
-                                DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")));
+                        DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")));
     }
 }
 

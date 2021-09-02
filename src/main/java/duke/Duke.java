@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
  * It is the main body of this task tracking software
  * that drives the main logic.
  */
+
 public class Duke {
     private static final String DEFAULT_PATH = "./data/duke.txt";
     private Ui ui;
@@ -26,22 +27,24 @@ public class Duke {
         duke.run();
     }
 
+
     /**
-     * Main logic of Duke,
+     * Starts the main logic of Duke,
      * it starts the conversation loop and continuously reads input from
      * user and execute corresponding functions until exit instructions are given.
      */
+
     public void run() {
         ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
+        boolean hasExited = false;
+        while (!hasExited) {
             // conversation loop
             try {
                 String input = ui.readLine();
                 ui.printHorizLine();
                 Command cmd = Parser.parseCommand(input);
                 cmd.execute(tasks, ui, storage);
-                isExit = cmd.exeResult();
+                hasExited = cmd.getExecutionResult();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
@@ -50,22 +53,27 @@ public class Duke {
         }
     }
 
+
     /**
      * Constructor of Duke.
      * It instantiates an empty which save and load its contents
      * to the default file (./data/duke.txt).
      */
+
     public Duke() {
         this(new Ui(), new Storage(DEFAULT_PATH), new TaskList());
     }
+
 
     /**
      * Constructor of Duke.
      * It instantiates a Duke with initial contents from
      * the file given by the filePath,
      * and associates the Duke's save and load function to that file.
+     *
      * @param filePath Path of the file containing initial content of Duke.
      */
+
     public Duke(String filePath) {
         try {
             ui = new Ui();
@@ -77,23 +85,27 @@ public class Duke {
         }
     }
 
+
+    /**
+     * Get response messages from Duke according input.
+     *
+     * @param input The input string to be parsed.
+     * @return Execution message of the input or error messages.
+     * @throws DukeException when something goes wrong.
+     */
+
+    public String getResponse(String input) throws DukeException {
+        Command cmd = Parser.parseCommand(input);
+
+        return cmd.execute(tasks, ui, storage);
+    }
+
+
     private Duke(Ui ui, Storage storage, TaskList taskList) {
         this.ui = ui;
         this.storage = storage;
         this.tasks = taskList;
     }
 
-    /**
-     * Get response messages from Duke according input.
-     * @param input The input string to be parsed.
-     * @return      Execution message of the input or error messages.
-     * @throws DukeException when something goes wrong.
-     */
 
-    public String getResponse(String input) throws DukeException {
-        Command cmd = Parser.parseCommand(input);
-        String executeMsg = cmd.execute(tasks, ui, storage);
-
-        return executeMsg;
-    }
 }

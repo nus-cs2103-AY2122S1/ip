@@ -16,16 +16,19 @@ public class CommandDone extends Command {
     /**
      * Instantiates an object with given index to mark the task as done when
      * called to execute.
+     *
      * @param index The index where the task should be deleted.
      */
     public CommandDone(int index) {
         this.index = index;
     }
 
+
     /**
      * Execute the mark as done action and auto-saves to the file when called.
-     * @param tasks The taskList to mark the task done.
-     * @param ui The Ui object to print messages after action.
+     *
+     * @param tasks   The taskList to mark the task done.
+     * @param ui      The Ui object to print messages after action.
      * @param storage The Storage object that auto-saves after modification.
      */
     @Override

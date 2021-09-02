@@ -11,8 +11,9 @@ public class CommandBye extends Command {
 
     /**
      * Call the Ui object to say bye to user and instructs to exit the main loop.
-     * @param tasks The taskList to add new task in.
-     * @param ui The Ui object to print messages after action.
+     *
+     * @param tasks   The taskList to add new task in.
+     * @param ui      The Ui object to print messages after action.
      * @param storage The Storage object that auto-saves after modification.
      */
     @Override

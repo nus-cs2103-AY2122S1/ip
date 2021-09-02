@@ -11,8 +11,9 @@ public class CommandList extends Command {
 
     /**
      * Execute list action by printing string representation of the taskList.
-     * @param tasks The taskList to be printed.
-     * @param ui The Ui object to print messages.
+     *
+     * @param tasks   The taskList to be printed.
+     * @param ui      The Ui object to print messages.
      * @param storage The Storage object that auto-saves after modification.
      */
     @Override

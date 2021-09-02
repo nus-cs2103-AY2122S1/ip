@@ -14,20 +14,22 @@ public class CommandFind extends Command {
         this.keyword = keyword;
     }
 
+
     /**
      * Execute find action and then print result message.
-     * @param tasks The taskList to search keywork in.
-     * @param ui The Ui object to print messages.
+     *
+     * @param tasks   The taskList to search keywork in.
+     * @param ui      The Ui object to print messages.
      * @param storage The Storage object that auto-saves after modification.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList matched = tasks.find(keyword);
-        if(matched.isEmpty()) {
+        TaskList matchedTasks = tasks.find(keyword);
+        if (matchedTasks.isEmpty()) {
             return "There are no matching tasks in your list.";
         } else {
             return "Here are the matching tasks in your list:" + "\n"
-                    + matched.toString();
+                    + matchedTasks.toString();
         }
     }
 }

@@ -13,6 +13,7 @@ public class Deadline extends Task {
      * Constructor.
      * Instantiates a Deadline object with given description
      * deadline dateTime.
+     *
      * @param description
      * @param dateTime
      */
@@ -25,6 +26,7 @@ public class Deadline extends Task {
      * Constructor.
      * Instantiates a Deadline object with given description, idDone status and
      * deadline dateTime.
+     *
      * @param description
      * @param dateTime
      */
@@ -36,6 +38,7 @@ public class Deadline extends Task {
     /**
      * Encode Deadline in format
      * "taskType isDone description dateTime"
+     *
      * @return encoded event string
      */
     public String encode() {
@@ -48,12 +51,13 @@ public class Deadline extends Task {
 
     /**
      * String representation of Dealines.
+     *
      * @return String representation of the deadline.
      */
     public String toString() {
         return String.format("[D] [%s] %s (by: %s)",
-                isDone ? "X" : " ", 
-                content, 
+                isDone ? "X" : " ",
+                content,
                 dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")));
     }
 }

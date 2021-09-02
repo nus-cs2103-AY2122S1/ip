@@ -16,6 +16,7 @@ public class CommandDelete extends Command {
     /**
      * Instantiates an object with given index to delete the task when
      * called to execute.
+     *
      * @param index The index where the task should be deleted.
      */
     public CommandDelete(int index) {
@@ -23,10 +24,12 @@ public class CommandDelete extends Command {
         this.index = index;
     }
 
+
     /**
      * Execute the delete action and auto-saves to the file when called.
-     * @param tasks The taskList to delete the task.
-     * @param ui The Ui object to print messages after action.
+     *
+     * @param tasks   The taskList to delete the task.
+     * @param ui      The Ui object to print messages after action.
      * @param storage The Storage object that auto-saves after modification.
      */
     @Override
