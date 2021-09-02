@@ -25,7 +25,6 @@ public class Main extends Application {
             e.printStackTrace();
         }
         stage.setTitle("Duke");
-        stage.setResizable(false);
         stage.setMinWidth(500);
         stage.setMinHeight(600);
     }

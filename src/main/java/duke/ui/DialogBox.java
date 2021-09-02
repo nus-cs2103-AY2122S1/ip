@@ -1,7 +1,6 @@
 package duke.ui;
 
 import java.io.IOException;
-import java.util.Objects;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,15 +45,6 @@ public class DialogBox extends HBox {
         dialog.setWrapText(true);
         circleDisplayPicture.setRadius(30);
         circleDisplayPicture.setFill(new ImagePattern(iv));
-    }
-
-    /**
-     * Creates the initial dialog box from duke.
-     * @return the initial dialog box
-     */
-    public static DialogBox initialDialog() {
-        return DialogBox.getDukeDialog("Hi, I am Duke, what is your name?",
-            new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/images/gigachad.jpg"))));
     }
 
     public static DialogBox getUserDialog(String l, Image i) {
