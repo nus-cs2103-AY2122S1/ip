@@ -3,117 +3,123 @@ package duke;
 import duke.task.Task;
 
 /**
- * Represents messages that are printed out by Duke
+ * Represents messages made by Duke
  * in response to various user inputs.
  *
  * @author botr99
  */
 public class Message {
-    private static final String HORIZONTAL_LINE =
-            "____________________________________________________________";
-
-    private static String formatDukeResponse(String response) {
-        return HORIZONTAL_LINE + "\n" + response + "\n" + HORIZONTAL_LINE + "\n";
-    }
 
     /**
-     * Prints the welcome message when Duke is started,
+     * Gets the welcome message when Duke is started,
      * just before user inputs his/her first command.
+     *
+     * @return A string containing the message.
      */
-    public static void printWelcomeMessage() {
+    public static String getWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String welcomeMessage = logo + "Hello! I'm Duke.\n" + "What can I do for you?";
-        System.out.println(formatDukeResponse(welcomeMessage));
+
+        return logo + "Hello! I'm Duke.\n" + "What can I do for you?";
     }
 
     /**
-     * Prints the exit message when user inputs "bye".
+     * Gets the exit message when user inputs "bye".
+     *
+     * @return A string containing the message.
      */
-    public static void printExitMessage() {
-        String exitMessage = "Bye. Hope to see you again soon!";
-        System.out.println(formatDukeResponse(exitMessage));
+    public static String getExitMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
-     * Prints the task that was added and the updated number of tasks in the task list.
+     * Gets the task that was added and the updated number of tasks in the task list.
      *
      * @param task The task that was added.
      * @param taskCount The updated number of tasks in the task list.
+     * @return A string containing the message.
      */
-    public static void printAddTaskMessage(Task task, int taskCount) {
-        System.out.println(formatDukeResponse("Got it. I've added this task:\n" + task
+    public static String getAddTaskMessage(Task task, int taskCount) {
+        return "Got it. I've added this task:\n" + task
                 + "\nNow you have " + taskCount
-                + (taskCount == 1 ? " task " : " tasks ") + "in the list."));
+                + (taskCount == 1 ? " task " : " tasks ") + "in the list.";
     }
 
     /**
-     * Prints the user's task list.
+     * Gets the user's task list.
      *
      * @param tasks The user's task list.
+     * @return A string containing the message.
      */
-    public static void printTasksMessage(TaskList tasks) {
-        System.out.println(formatDukeResponse("Here are the tasks in your list:\n"
-                + tasks.toString()));
+    public static String getTasksMessage(TaskList tasks) {
+        return "Here are the tasks in your list:\n"
+                + tasks.toString();
     }
 
     /**
-     * Prints the task that was marked as done.
+     * Gets the task that was marked as done.
      *
      * @param task The task that was marked as done.
+     * @return A string containing the message.
      */
-    public static void printMarkTaskDoneMessage(Task task) {
-        System.out.println(formatDukeResponse("Nice! I've marked this task as done:\n" + task));
+    public static String getMarkTaskDoneMessage(Task task) {
+        return "Nice! I've marked this task as done:\n" + task;
     }
 
     /**
-     * Prints the task that was deleted and the updated number of tasks in the task list.
+     * Gets the task that was deleted and the updated number of tasks in the task list.
      *
      * @param task The task that was deleted.
      * @param taskCount The updated number of tasks in the task list.
+     * @return A string containing the message.
      */
-    public static void printDeleteTaskMessage(Task task, int taskCount) {
-        System.out.println(formatDukeResponse("Noted. I've removed this task:\n" + task
+    public static String getDeleteTaskMessage(Task task, int taskCount) {
+        return "Noted. I've removed this task:\n" + task
                 + "\nNow you have " + taskCount
-                + (taskCount == 1 ? " task " : " tasks ") + "in the list."));
+                + (taskCount == 1 ? " task " : " tasks ") + "in the list.";
     }
 
     /**
-     * Prints the matching tasks in the user's list after the user has made a query
+     * Gets the matching tasks in the user's list after the user has made a query
      * to find tasks.
      *
-     * @param filteredTasksString Tasks that have been filtered out and are stored as a
-     *                            number list representation in a string.
+     * @param tasks Tasks that have been filtered out.
+     * @return A string containing the message.
      */
-    public static void printFindTasksMessage(String filteredTasksString) {
-        System.out.println(formatDukeResponse("Here are the matching tasks in your list:\n"
-                + filteredTasksString));
+    public static String getFindTasksMessage(TaskList tasks) {
+        return "Here are the matching tasks in your list:\n"
+                + tasks.toString();
     }
 
     /**
-     * Prints an invalid command message when the user inputs an invalid command.
+     * Gets an invalid command message when the user inputs an invalid command.
+     *
+     * @return A string containing the message.
      */
-    public static void printInvalidCommandMessage() {
-        System.out.println(formatDukeResponse("Oops!!! I'm sorry, but I don't know what that means."));
+    public static String getInvalidCommandMessage() {
+        return "Oops!!! I'm sorry, but I don't know what that means.";
     }
 
     /**
-     * Prints the message of the DukeException.
+     * Gets the message of the DukeException.
      *
      * @param e The DukeException thrown when Duke is being run.
+     * @return A string containing the message.
      */
-    public static void printDukeExceptionMessage(DukeException e) {
-        System.out.println(formatDukeResponse(e.getMessage()));
+    public static String getDukeExceptionMessage(DukeException e) {
+        return e.getMessage();
     }
 
     /**
-     * Prints the try again message when there is an IOException thrown.
+     * Gets the try again message when there is an IOException thrown.
+     *
+     * @return A string containing the message.
      */
-    public static void printTryAgainMessage() {
-        System.out.println(formatDukeResponse("Please try again or restart the application."));
+    public static String getTryAgainMessage() {
+        return "Please try again or restart the application.";
     }
 
 }

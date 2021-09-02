@@ -11,24 +11,32 @@ public class Duke {
     private static final String STORAGE_LOCATION = "data/duke.txt";
     private TaskStorage taskStorage;
     private TaskList tasks;
+    private Ui ui;
 
     /**
      * Constructs a Duke that reads in tasks from the user's hard disk.
      *
      * @param fileLocation The string of the file path to access the tasks.
+     * @param isGui False if Duke is run with the command line; true otherwise.
      * @throws IOException When an error occurs when reading or writing to the file.
      * @throws FileParseException When the file is not of the right format.
      */
-    public Duke(String fileLocation) throws IOException, FileParseException {
+    public Duke(String fileLocation, boolean isGui) throws IOException, FileParseException {
         taskStorage = new TaskStorage(fileLocation);
         tasks = new TaskList(taskStorage.loadTasks());
+        ui = isGui ? new Gui(taskStorage, tasks) : new Cli(taskStorage, tasks);
     }
 
     /**
      * Starts the Duke application.
      */
     public void run() {
-        new Ui(taskStorage, tasks).start();
+        ui.start();
+    }
+
+    public String getResponse(String input) {
+        ui.handleUserInput(input);
+        return ui.getCurrMessage();
     }
 
     /**
@@ -39,7 +47,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         try {
-            new Duke(STORAGE_LOCATION).run();
+            new Duke(STORAGE_LOCATION, false).run();
         } catch (IOException e) {
             System.out.println("Something went wrong with accessing " + STORAGE_LOCATION);
         } catch (FileParseException e) {

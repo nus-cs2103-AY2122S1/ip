@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import duke.task.Task;
 import duke.task.Todo;
@@ -11,21 +10,19 @@ import duke.task.Todo;
  *
  * @author botr99
  */
-public class Ui {
-    private Scanner scanner;
+public abstract class Ui {
     private TaskStorage taskStorage;
     private TaskList tasks;
     private boolean isRunning;
+    private String currMessage;
 
     /**
-     * Constructs an ui with the user's storage and tasks,
-     * initialising a scanner to deal with user input.
+     * Constructs an ui with the user's storage and tasks.
      *
      * @param taskStorage The user's storage of tasks in the hard disk.
      * @param tasks The user's list of tasks.
      */
     public Ui(TaskStorage taskStorage, TaskList tasks) {
-        scanner = new Scanner(System.in);
         this.taskStorage = taskStorage;
         this.tasks = tasks;
         isRunning = true;
@@ -40,13 +37,13 @@ public class Ui {
      * @throws IOException When there is an error in writing to the file
      *                     that stores the user's task list.
      */
-    private void handleAddTask(String description) throws DukeException, IOException {
+    public void handleAddTask(String description) throws DukeException, IOException {
         if (description == null || description.equals("")) {
             throw new DukeException("Oops!!! The description of a todo cannot be empty.");
         }
         Task task = tasks.addTask(new Todo(description));
         taskStorage.addTaskToStorage(task);
-        Message.printAddTaskMessage(task, tasks.getSize());
+        setCurrMessage(Message.getAddTaskMessage(task, tasks.getSize()));
     }
 
     /**
@@ -61,15 +58,15 @@ public class Ui {
      * @throws IOException When there is an error in writing to the file
      *                     that stores the user's task list.
      */
-    private void handleAddDateTask(String descriptionAndDate, String command) throws DukeException, IOException {
+    public void handleAddDateTask(String descriptionAndDate, String command) throws DukeException, IOException {
         Task task = Parser.parseDateTask(descriptionAndDate, command);
         if (task == null) {
-            Message.printInvalidCommandMessage();
+            setCurrMessage(Message.getInvalidCommandMessage());
             return;
         }
         tasks.addTask(task);
         taskStorage.addTaskToStorage(task);
-        Message.printAddTaskMessage(task, tasks.getSize());
+        setCurrMessage(Message.getAddTaskMessage(task, tasks.getSize()));
     }
 
     /**
@@ -80,11 +77,11 @@ public class Ui {
      * @throws IOException When there is an error in writing to the file
      *                     that stores the user's task list.
      */
-    private void handleMarkTask(String taskNumberString) throws DukeException, IOException {
+    public void handleMarkTask(String taskNumberString) throws DukeException, IOException {
         int taskNumber = retrieveTaskNumber(taskNumberString);
         Task markedTask = tasks.markTask(taskNumber);
         taskStorage.editTaskFromStorage(taskNumber, markedTask);
-        Message.printMarkTaskDoneMessage(markedTask);
+        setCurrMessage(Message.getMarkTaskDoneMessage(markedTask));
     }
 
     /**
@@ -95,11 +92,11 @@ public class Ui {
      * @throws IOException When there is an error in writing to the file
      *                     that stores the user's task list.
      */
-    private void handleDeleteTask(String taskNumberString) throws DukeException, IOException {
+    public void handleDeleteTask(String taskNumberString) throws DukeException, IOException {
         int taskNumber = retrieveTaskNumber(taskNumberString);
         Task removedTask = tasks.deleteTask(taskNumber);
         taskStorage.removeTaskFromStorage(taskNumber);
-        Message.printDeleteTaskMessage(removedTask, tasks.getSize());
+        setCurrMessage(Message.getDeleteTaskMessage(removedTask, tasks.getSize()));
     }
 
     /**
@@ -108,9 +105,9 @@ public class Ui {
      *
      * @param query The keyword(s) to find the tasks in the task list.
      */
-    private void handleFindTask(String query) {
+    public void handleFindTask(String query) {
         TaskList filteredTasks = tasks.getFilteredTasks(query);
-        Message.printTasksMessage(filteredTasks);
+        setCurrMessage(Message.getFindTasksMessage(filteredTasks));
     }
 
     /**
@@ -123,7 +120,7 @@ public class Ui {
      *                       when the task number integer parsed is out of range
      *                       of the size of the task lists.
      */
-    private int retrieveTaskNumber(String taskNumberString) throws DukeException {
+    public int retrieveTaskNumber(String taskNumberString) throws DukeException {
         int taskNumber;
         try {
             taskNumber = Integer.parseInt(taskNumberString);
@@ -137,71 +134,78 @@ public class Ui {
         return taskNumber;
     }
 
+    public boolean getIsRunning() {
+        return isRunning;
+    }
+
     /**
      * Sets the running state of the ui.
      *
      * @param isRunning A boolean value indicating whether ui
      *                  should continue to run.
      */
-    private void setIsRunning(boolean isRunning) {
+    public void setIsRunning(boolean isRunning) {
         this.isRunning = isRunning;
     }
 
     /**
-     * Scans user input and delegates the various cases of handling
-     * user input to the respective functions.
+     * Delegates the various cases of possible user input to the
+     * respective handler functions.
+     *
+     * @param userInput A string the user has inputted.
      */
-    private void scanUserInput() {
-        while (isRunning) {
-            String[] userInput = scanner.nextLine().trim().split(" ", 2);
-            String command = userInput[0];
-            String action = userInput.length == 2 ? userInput[1].trim() : "";
+    public void handleUserInput(String userInput) {
+        String[] userInputSplit = userInput.trim().split(" ", 2);
+        String command = userInputSplit[0];
+        String action = userInputSplit.length == 2 ? userInputSplit[1].trim() : "";
 
-            try {
-                switch (command) {
-                case "bye":
-                    setIsRunning(false);
-                    break;
-                case "list":
-                    Message.printTasksMessage(tasks);
-                    break;
-                case "done":
-                    handleMarkTask(action);
-                    break;
-                case "delete":
-                    handleDeleteTask(action);
-                    break;
-                case "todo":
-                    handleAddTask(action);
-                    break;
-                case "deadline":
-                case "event":
-                    handleAddDateTask(action, command);
-                    break;
-                case "find":
-                    handleFindTask(action);
-                    break;
-                default:
-                    Message.printInvalidCommandMessage();
-                    break;
-                }
-            } catch (DukeException e) {
-                Message.printDukeExceptionMessage(e);
-            } catch (IOException e) {
-                Message.printTryAgainMessage();
+        try {
+            switch (command) {
+            case "bye":
+                setIsRunning(false);
+                setCurrMessage(Message.getExitMessage());
+                break;
+            case "list":
+                setCurrMessage(Message.getTasksMessage(tasks));
+                break;
+            case "done":
+                handleMarkTask(action);
+                break;
+            case "delete":
+                handleDeleteTask(action);
+                break;
+            case "todo":
+                handleAddTask(action);
+                break;
+            case "deadline":
+            case "event":
+                handleAddDateTask(action, command);
+                break;
+            case "find":
+                handleFindTask(action);
+                break;
+            default:
+                setCurrMessage(Message.getInvalidCommandMessage());
+                break;
             }
+        } catch (DukeException e) {
+            setCurrMessage(Message.getDukeExceptionMessage(e));
+        } catch (IOException e) {
+            setCurrMessage(Message.getTryAgainMessage());
         }
-        scanner.close();
+    }
+
+    public String getCurrMessage() {
+        return currMessage;
+    }
+
+    public void setCurrMessage(String message) {
+        currMessage = message;
     }
 
     /**
-     * Starts the ui and prints an exit message
-     * when the scanner is closed.
+     * Starts the ui.
      */
-    public void start() {
-        Message.printWelcomeMessage();
-        scanUserInput();
-        Message.printExitMessage();
-    }
+    public abstract void start();
 
 }
