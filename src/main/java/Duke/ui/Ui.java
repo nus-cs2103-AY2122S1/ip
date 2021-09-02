@@ -1,11 +1,11 @@
 package duke.ui;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidInstructionException;
 import duke.task.Task;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Represents the user interface of Duke. Deals with Duke's interaction with the user.
@@ -97,10 +97,11 @@ public class Ui {
      * When the user enters an invalid input.
      *
      * @param e The InvalidInputException.
+     * @param extra Extra details about the exception to be mentioned.
      * @return An invalid input message.
      */
-    public String invalidInput(InvalidInputException e) {
-        return e.toString();
+    public String invalidInput(InvalidInputException e, String extra) {
+        return e.toString() + extra;
     }
 
     /**

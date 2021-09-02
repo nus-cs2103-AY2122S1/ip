@@ -7,6 +7,11 @@ public class InvalidInstructionException extends DukeException {
 
     private String instruction;
 
+    /**
+     * Constructor.
+     *
+     * @param str The invalid instruction.
+     */
     public InvalidInstructionException(String str) {
         super(str);
         instruction = str;

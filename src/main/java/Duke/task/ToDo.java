@@ -7,6 +7,11 @@ import java.time.LocalDateTime;
  */
 public class ToDo extends Task {
 
+    /**
+     * Constructor.
+     *
+     * @param details Details of the todo task.
+     */
     public ToDo(String details) {
         super(details);
     }

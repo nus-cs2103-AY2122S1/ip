@@ -1,8 +1,5 @@
 package duke.parser;
 
-import duke.exception.InvalidInputException;
-import duke.exception.InvalidInstructionException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -10,6 +7,9 @@ import java.util.HashMap;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Scanner;
+
+import duke.exception.InvalidInputException;
+import duke.exception.InvalidInstructionException;
 
 /**
  * Represents the parser of user inputs for Duke. Parses user input for Duke to respond to.
@@ -77,6 +77,9 @@ public class Parser {
             case "event":
                 center = "/at";
                 break;
+            default:
+                // Outer switch statement confirms there to be only the above 3 cases.
+                break;
             }
 
             int centerIndex = input.indexOf(center);
@@ -110,6 +113,9 @@ public class Parser {
                 data.put("details", details);
                 data.put("timing", dateTime);
                 return data;
+            default:
+                // Outer switch statement confirms there to be only the above 3 cases.
+                break;
             }
             break;
 

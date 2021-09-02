@@ -7,6 +7,11 @@ public class InvalidInputException extends DukeException {
 
     private String err;
 
+    /**
+     * Constructor.
+     *
+     * @param str The invalid input.
+     */
     public InvalidInputException(String str) {
         super(str);
         this.err = str;

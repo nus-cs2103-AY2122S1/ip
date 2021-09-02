@@ -14,6 +14,12 @@ public class Event extends Task {
     private LocalDateTime timing;
     private LocalTime endTime;
 
+    /**
+     * Constructor.
+     *
+     * @param details Details of the event task.
+     * @param timing Timing of the event task.
+     */
     public Event(String details, String timing) {
         super(details);
         if (timing.length() == 20) {

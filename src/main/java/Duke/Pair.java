@@ -10,6 +10,12 @@ public class Pair<S, T> {
     private final S first;
     private final T second;
 
+    /**
+     * Constructor.
+     *
+     * @param first Value of the first variable in the Pair.
+     * @param second Value of the second variable in the Pair.
+     */
     public Pair(S first, T second) {
         this.first = first;
         this.second = second;

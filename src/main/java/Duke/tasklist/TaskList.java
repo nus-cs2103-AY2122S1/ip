@@ -1,10 +1,5 @@
 package duke.tasklist;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
+
+import duke.exception.InvalidInputException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 
 /**
  * Represents a list of tasks.
@@ -21,12 +23,12 @@ public class TaskList {
     private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
-     * Constructor.
+     * Constructor for when there are previously saved tasks.
      * Initializes the task list with previously saved tasks.
      *
      * @param initial The list of previously saved tasks in String form.
      */
-    public TaskList(List<String> initial) {
+    public TaskList(List<String> initial) throws InvalidInputException {
         Scanner scanner;
         for (int i = 0; i < initial.size(); i++) {
             scanner = new Scanner(initial.get(i));
@@ -49,11 +51,20 @@ public class TaskList {
                 String timing = scanner.nextLine().trim();
                 taskList.add(new Event(details, timing));
                 break;
+            default:
+                throw new InvalidInputException("Task " + task + " is unrecognized by Duke.");
             }
             if (Objects.equals(done, "done")) {
                 taskList.get(taskList.size() - 1).complete();
             }
         }
+    }
+
+    /**
+     * Constructor for when there are no previously saved tasks.
+     */
+    public TaskList() {
+        taskList = new ArrayList<>();
     }
 
     /**
@@ -73,8 +84,7 @@ public class TaskList {
     public String getList() {
         if (taskList.isEmpty()) {
             return "There are no items in the task list.";
-        }
-        else {
+        } else {
             String list = "Tasks in task list:\n";
             for (int i = 0; i < taskList.size(); i++) {
                 list += "\t" + (i + 1) + ". " + taskList.get(i).toString();
