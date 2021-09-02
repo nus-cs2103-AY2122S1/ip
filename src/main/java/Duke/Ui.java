@@ -1,3 +1,7 @@
+package Duke;
+
+import Duke.Keyword;
+
 public class Ui {
     /**
      * Returns formatted output string for bot message.
@@ -37,7 +41,7 @@ public class Ui {
     /**
      * Prints message for missing date in proper format.
      *
-     * @param keyword Keyword to show which message to print.
+     * @param keyword Duke.Keyword to show which message to print.
      */
     public static void missingDate(Keyword keyword) {
         if (keyword.equals(Keyword.EVENT)) {

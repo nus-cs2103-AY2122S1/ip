@@ -1,5 +1,7 @@
+package Duke;
+
 /**
- * DukeException class represents exceptions specific to Duke and provides
+ * Duke.DukeException class represents exceptions specific to Duke.Duke and provides
  * understandable error message.
  */
 public class DukeException extends Exception {

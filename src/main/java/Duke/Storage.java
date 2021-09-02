@@ -1,3 +1,7 @@
+package Duke;
+
+import Duke.task.*;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -63,7 +67,7 @@ public class Storage {
     /**
      * Update tasks record in fixed file.
      *
-     * @param tasks TaskList of existing tasks.
+     * @param tasks Duke.Duke.task.TaskList of existing tasks.
      * @throws IOException
      */
     public void writeToFile(TaskList tasks) throws IOException {

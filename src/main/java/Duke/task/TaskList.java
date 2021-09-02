@@ -1,5 +1,6 @@
+package Duke.task;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -15,47 +16,47 @@ public class TaskList {
 
     //add
     /**
-     * Returns message for adding a to-do task.
+     * Returns message for adding a to-do Duke.Duke.task.
      *
-     * @param description description of to-do task.
-     * @return added message for to-do task.
+     * @param description description of to-do Duke.Duke.task.
+     * @return added message for to-do Duke.Duke.task.
      */
     public String addTodo(String description) {
         Todo toAdd = new Todo(description);
         records.add(toAdd);
-        return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
+        return String.format("Got it. I've added this Duke.Duke.task:\n\t %1$s \n\t" +
                 "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
     }
 
     /**
-     * Returns message for adding an event task.
+     * Returns message for adding an event Duke.Duke.task.
      *
-     * @param description description of event task.
+     * @param description description of event Duke.Duke.task.
      * @param at string of event date/time.
      * @return added message for command event.
      */
     public String addEvent(String description, LocalDate at) {
         Event toAdd = new Event(description, at);
         records.add(toAdd);
-        return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
+        return String.format("Got it. I've added this Duke.Duke.task:\n\t %1$s \n\t" +
                 "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
     }
 
     /**
-     * Returns message for adding deadline task.
+     * Returns message for adding deadline Duke.Duke.task.
      *
-     * @param description description of deadline task.
+     * @param description description of deadline Duke.Duke.task.
      * @param by string of deadline date/time.
-     * @return added message for adding deadline task.
+     * @return added message for adding deadline Duke.Duke.task.
      */
     public String addDeadline(String description, LocalDate by) {
 //        else if (by.isEmpty()) {
-//            throw new DukeException("OOPS!!! No date for deadline! Use format of deadline description /by YYYY-MM-DD");
+//            throw new Duke.DukeException("OOPS!!! No date for deadline! Use format of deadline description /by YYYY-MM-DD");
 //        }
 
         Deadline toAdd = new Deadline(description, by);
         records.add(toAdd);
-        return String.format("Got it. I've added this task:\n\t %1$s \n\t" +
+        return String.format("Got it. I've added this Duke.Duke.task:\n\t %1$s \n\t" +
                 "Now you have %2$d tasks in the list.\n\t", toAdd.toString(), records.size());
     }
 
@@ -63,12 +64,12 @@ public class TaskList {
     /**
      * Returns delete message for bot.
      *
-     * @param index index of task to be deleted.
+     * @param index index of Duke.Duke.task to be deleted.
      * @return delete message for bot.
      */
     public String delete(int index) {
         Task removed = records.remove(index);
-        return String.format("Noted! I've removed this task:\n\t %1$s\n\t" +
+        return String.format("Noted! I've removed this Duke.Duke.task:\n\t %1$s\n\t" +
                 "Now you have %2$d tasks in the list.\n\t", removed.toString(), records.size());
     }
 
@@ -87,9 +88,9 @@ public class TaskList {
     }
 
     /**
-     * Returns matches in task list for keyword.
+     * Returns matches in Duke.Duke.task list for keyword.
      * @param keyword String
-     * @return Returns matches in task list for keyword.
+     * @return Returns matches in Duke.Duke.task list for keyword.
      */
     public String find(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
@@ -108,9 +109,9 @@ public class TaskList {
     }
 
     /**
-     * Returns task at given index.
+     * Returns Duke.Duke.task at given index.
      * @param index int
-     * @return task at given index.
+     * @return Duke.Duke.task at given index.
      */
     public Task getTask(int index) {
         return records.get(index);
