@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import ligma.Storage;
 import ligma.TaskList;
-import ligma.Ui;
+import ligma.ui.Ui;
 import ligma.task.Deadline;
 import ligma.task.Event;
 import ligma.task.Task;
@@ -40,14 +40,13 @@ public class AddCommand implements Command {
      * @param storage   storage of current Ligma program
      */
     @Override
-    public void execute(TaskList tasks, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         try {
             tasks.addTask(task);
             storage.saveTask(task);
-            Ui.printSuccessMessage("added:\n " + task
-                    + String.format("\n You now have %d task(s).", tasks.getTaskAmt()));
+            return Ui.getSuccessMessage(task.toString());
         } catch (IOException e) {
-            Ui.printErrorMessage("Failed to save task to storage: \n" + task);
+            return "Failed to save task to storage: \n" + task;
         }
     }
 

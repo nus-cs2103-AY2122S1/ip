@@ -6,6 +6,8 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import ligma.command.Command;
+import ligma.ui.Ui;
+
 /**
  * This class represents a Ligma program that keeps track of your to-do list.
  * Storage object corresponds to the persistent storage
@@ -21,38 +23,20 @@ public class Ligma {
      *
      * @param filePath Location of file to store data
      */
-    public Ligma(String filePath) {
+    public Ligma(String filePath) throws IOException {
         this.storage = new Storage(filePath);
+        this.tasks = new TaskList(storage.load());
+    }
+
+    public String getResponse(String input) {
         try {
-            this.tasks = new TaskList(storage.load());
-        } catch (IOException e) {
-            Ui.printErrorMessage("Failed to load in tasks.");
+            Command c = Parser.parseCommand(input);
+            return c.execute(tasks, storage);
+        } catch (InputMismatchException | NoSuchMethodException e1) {
+            return e1.getMessage();
+        } catch (DateTimeParseException e2) {
+            return "Time must be in yyyy-mm-dd format.";
         }
-    }
-
-    /**
-     * Executes Ligma program.
-     */
-    public void run() {
-        Ui.introduceSelf();
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNextLine()) {
-            try {
-                Command c = Parser.parseCommand(sc.nextLine());
-                c.execute(tasks, storage);
-                if (c.isExit()) {
-                    break;
-                }
-            } catch (InputMismatchException | NoSuchMethodException e1) {
-                Ui.printErrorMessage(e1);
-            } catch (DateTimeParseException e2) {
-                Ui.printErrorMessage("Time must be in yyyy-mm-dd format.");
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Ligma("data/ligma.txt").run();
     }
 
 }
