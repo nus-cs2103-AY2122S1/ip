@@ -2,7 +2,6 @@ package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,15 +13,17 @@ public class Storage {
 
     private String filePath;
     private File file;
+    private Duke duke;
 
     /**
      * Constructor for the Storage object
      *
      * @param filePath
      */
-    public Storage(String filePath) {
+    public Storage(String filePath, Duke duke) {
         this.filePath = filePath;
         this.file = new File(filePath);
+        this.duke = duke;
     }
 
     /**
@@ -61,7 +62,7 @@ public class Storage {
                     result.add(task);
                 }
             }
-            Duke.index = result.size();
+            duke.setIndex(result.size());
             return result;
         } catch (FileNotFoundException e) {
             System.out.println("File not found when trying to load tasks");

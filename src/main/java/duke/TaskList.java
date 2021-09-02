@@ -1,7 +1,8 @@
 package duke;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Represents a list of tasks which is used by Duke

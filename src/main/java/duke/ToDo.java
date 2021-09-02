@@ -13,6 +13,10 @@ public class ToDo extends Task {
 
     private String description;
 
+    /**
+     * Constructor for the ToDo task
+     * @param description
+     */
     public ToDo(String description) {
         super(description);
         this.description = description;

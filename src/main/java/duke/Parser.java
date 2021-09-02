@@ -11,6 +11,7 @@ public class Parser {
     private TaskList tasks;
     private String userInput;
     private int index;
+    private Duke duke;
 
     /**
      * Constructor for the Parser object
@@ -19,10 +20,11 @@ public class Parser {
      * @param userInput
      * @param index
      */
-    public Parser(TaskList tasks, String userInput, int index) {
+    public Parser(TaskList tasks, String userInput, int index, Duke duke) {
         this.tasks = tasks;
         this.userInput = userInput;
         this.index = index;
+        this.duke = duke;
     }
 
     /**
@@ -45,7 +47,7 @@ public class Parser {
                 + "    " + "Here are the tasks in your list:\n";
         int i = 0;
         while (i < tasks.getNumberOfTasks()) {
-            message += "    " + (i+1) + ". " + tasks.get(i).toString() + "\n";
+            message += "    " + (i + 1) + ". " + tasks.get(i).toString() + "\n";
             i++;
         }
         message += "    ----------------------------";
@@ -59,13 +61,13 @@ public class Parser {
     public void done_execute() {
         String userIndex = userInput.substring(5);
         int i = Integer.valueOf(userIndex);
-        if (tasks.get(i-1) == null) {
+        if (tasks.get(i - 1) == null) {
             System.out.println("no task found!");
         } else {
-            tasks.get(i-1).markAsDone();
+            tasks.get(i - 1).markAsDone();
             String message = "    ----------------------------\n"
                     + "Nice! I have marked this task as done:\n"
-                    + "[X] " + tasks.get(i-1).getDescription() + "\n" + "    ----------------------------";
+                    + "[X] " + tasks.get(i - 1).getDescription() + "\n" + "    ----------------------------";
             System.out.println(message);
         }
     }
@@ -76,13 +78,13 @@ public class Parser {
      */
     public void todo_execute() {
         try {
-            Task A = new ToDo(userInput.substring(5));
-            tasks.addTask(A);
-            Duke.index++;
+            Task tempTask = new ToDo(userInput.substring(5));
+            tasks.addTask(tempTask);
+            duke.setIndex(duke.getIndex() + 1);
             String message = "    ----------------------------\n"
                     + "Got it, I've added this task: \n"
-                    + A.toString() + "\n"
-                    + "Now you have " + Duke.index + " tasks in the list\n"
+                    + tempTask.toString() + "\n"
+                    + "Now you have " + duke.getIndex() + " tasks in the list\n"
                     + "    ----------------------------";
             System.out.println(message);
         } catch (IndexOutOfBoundsException e) {
@@ -97,18 +99,18 @@ public class Parser {
     public void event_execute() {
         try {
             int i = userInput.indexOf("/");
-            String description = userInput.substring(6,i-1);
+            String description = userInput.substring(6 , i - 1);
             String[] split = userInput.split("at");
             String date = split[1].substring(1);
             LocalDate d = LocalDate.parse(date);
             String formattedTime = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            Task A = new Event(description, formattedTime);
-            tasks.addTask(A);
-            Duke.index++;
+            Task tempTask = new Event(description, formattedTime);
+            tasks.addTask(tempTask);
+            duke.setIndex(duke.getIndex() + 1);
             String message = "    ----------------------------\n"
                     + "Got it, I've added this task: \n"
-                    + A.toString() + "\n"
-                    + "Now you have " + Duke.index + " tasks in the list\n"
+                    + tempTask.toString() + "\n"
+                    + "Now you have " + duke.getIndex() + " tasks in the list\n"
                     + "    ----------------------------";
             System.out.println(message);
         } catch (IndexOutOfBoundsException e) {
@@ -123,19 +125,19 @@ public class Parser {
     public void deadline_execute() {
         try {
             int i = userInput.indexOf("/");
-            String description = userInput.substring(9,i-1);
+            String description = userInput.substring(9 , i - 1);
             //String time = userInput.substring(i+1);
             String[] split = userInput.split("by");
             String date = split[1].substring(1);
             LocalDate d = LocalDate.parse(date);
             String formattedTime = d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            Task A = new Deadlines(description, formattedTime);
-            tasks.addTask(A);
-            Duke.index++;
+            Task tempTask = new Deadlines(description, formattedTime);
+            tasks.addTask(tempTask);
+            duke.setIndex(duke.getIndex() + 1);
             String message = "    ----------------------------\n"
                     + "Got it, I've added this task: \n"
-                    + A.toString() + "\n"
-                    + "Now you have " + Duke.index + " tasks in the list\n"
+                    + tempTask.toString() + "\n"
+                    + "Now you have " + duke.getIndex() + " tasks in the list\n"
                     + "    ----------------------------";
             System.out.println(message);
         } catch (IndexOutOfBoundsException e) {
@@ -150,17 +152,17 @@ public class Parser {
     public void delete_execute() {
         String userIndex = userInput.substring(7);
         int i = Integer.valueOf(userIndex);
-        if (tasks.get(i-1) == null) {
+        if (tasks.get(i - 1) == null) {
             System.out.println("no task found!");
         } else {
-            Duke.index--;
+            duke.setIndex(duke.getIndex() - 1);
             String message = "    ----------------------------\n"
                     + "Got it, I've removed this task: \n"
-                    + tasks.get(i-1).toString() + "\n"
-                    + "Now you have " + Duke.index + " tasks in the list\n"
+                    + tasks.get(i - 1).toString() + "\n"
+                    + "Now you have " + duke.getIndex() + " tasks in the list\n"
                     + "    ----------------------------";
             System.out.println(message);
-            tasks.removeTask(i-1);
+            tasks.removeTask(i - 1);
         }
     }
 

@@ -1,15 +1,15 @@
-import duke.Duke;
-import duke.Event;
-import duke.ToDo;
-import duke.Deadlines;
-import duke.TaskList;
-import duke.Parser;
-
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.Deadlines;
+import duke.Duke;
+import duke.Event;
+import duke.Parser;
+import duke.TaskList;
+import duke.ToDo;
 
 public class DukeTest {
     @Test
@@ -40,7 +40,7 @@ public class DukeTest {
         tasks.addTask(e);
         tasks.addTask(d);
         tasks.addTask(t);
-        Parser p = new Parser(tasks, "doesn't matter", 1);
+        Parser p = new Parser(tasks, "doesn't matter", 1, new Duke("data/Duke.txt"));
         String expected = e.toString() + "\n" + d.toString() + "\n" + t.toString() + "\n";
         assertEquals(expected, p.generateTasks());
     }

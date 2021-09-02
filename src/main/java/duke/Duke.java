@@ -1,9 +1,9 @@
 package duke;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
-import java.io.IOException;
-import java.io.FileWriter;
 
 /**
  * Duke is an application to help store and track tasks.
@@ -11,9 +11,10 @@ import java.io.FileWriter;
  * Duke can also list the existing tasks and mark tasks as done.
  */
 
+@SuppressWarnings("checkstyle:Regexp")
 public class Duke {
 
-    static int index = 0; //will figure out a way to make this private :<
+    private int index = 0; //will figure out a way to make this private :<
     private final String filePath;
     private final TaskList tasks;
     private Ui ui;
@@ -26,9 +27,17 @@ public class Duke {
 
     public Duke(String filePath) {
         this.filePath = filePath;
-        Storage store = new Storage(filePath);
+        Storage store = new Storage(filePath, this);
         tasks = new TaskList(store.loadTasks());
         this.ui = new Ui();
+    }
+
+    public int getIndex() {
+        return this.index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
     }
 
     /**
@@ -44,9 +53,9 @@ public class Duke {
 
         bot.ui.printGreeting();
 
-        while(true) {
+        while (true) {
             String userInput = scanObj.nextLine().trim();
-            Parser c = new Parser(bot.tasks, userInput, index);
+            Parser c = new Parser(bot.tasks, userInput, bot.getIndex(), bot);
             String[] splitInput = userInput.split(" ");
             try {
                 if (userInput.equals("bye")) {

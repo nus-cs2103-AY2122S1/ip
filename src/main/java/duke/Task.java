@@ -7,6 +7,9 @@ public class Task {
     private boolean isDone;
     private String description;
 
+    /**
+     * Default constructor for the task object
+     */
     public Task() {
         this.description = null;
         this.isDone = false;
