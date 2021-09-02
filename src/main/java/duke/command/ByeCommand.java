@@ -6,16 +6,17 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * This class executes the exit command
+ * Class to execute the exit command.
  */
 public class ByeCommand implements Command {
 
     /**
+     * Execute command.
      *
-     * @param taskList Manages all current tasks
-     * @param ui Used to print messages
-     * @param storage Loads and saves the tasks to a txt file
-     * @throws DukeException thrown if there are input/parsing errors
+     * @param taskList TaskList that manages all current tasks.
+     * @param ui Ui used to print messages.
+     * @param storage Loads and saves the tasks to a txt file.
+     * @throws DukeException Thrown if there are input/parsing errors.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
@@ -24,9 +25,9 @@ public class ByeCommand implements Command {
     }
 
     /**
-     * Method to determine if Duke should stop running.
+     * Returns a boolean to determine if Duke should stop running.
      *
-     * @return true as this is an exit command
+     * @return A boolean true as this is an exit command.
      */
     @Override
     public boolean isExit() {

@@ -17,7 +17,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * This class prints messages for the user
+ * Class that interacts with the user.
  */
 public class Ui {
     private static final String BYE_OUTPUT = "Bye. Hope to see you again soon!";
@@ -35,33 +35,38 @@ public class Ui {
     private Image admin = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     /**
-     * Constructor for duke's UI
+     * Constructor for duke's UI.
      */
     public Ui(Duke duke) {
         this.duke = duke;
     }
     public Ui() {}
 
+    /**
+     * Shows appropriate error messages to user.
+     *
+     * @param e Error to be shown.
+     */
     public void showError(DukeException e) {
         echo(e.toString());
     }
 
     /**
-     * Method to close Duke's interface
+     * Closes duke's UI.
      */
     public void exit() {
         echo(BYE_OUTPUT);
         Platform.exit();
     }
-
-    public void greet() {
+    private void greet() {
         echo(GREET_OUTPUT);
     }
 
     /**
-     * Method to print tasks.
-     * @param tasks the list of tasks to be printed
-     * @param heading The heading to precede the list of tasks
+     * Prints a list of tasks.
+     *
+     * @param tasks List of tasks to be printed.
+     * @param heading The heading to precede the list of tasks.
      */
     public void printAll(ArrayList<Task> tasks, String heading) {
         String s = "";
@@ -73,7 +78,7 @@ public class Ui {
     }
 
     /**
-     * Method to start duke's ui
+     * Starts duke's ui.
      */
     public void start() {
         scrollPane = new ScrollPane();
@@ -126,11 +131,6 @@ public class Ui {
             }
         });
     }
-
-    /**
-     * Method to run appropriate commands based on user input
-     * @param fullCommand User's input
-     */
     private void handleUserInput(String fullCommand) {
         ImageView v = new ImageView(user);
         dialogContainer.getChildren().add(DialogBox.getUserDialog(INDENT + fullCommand + INDENT, v, 0));
@@ -139,8 +139,9 @@ public class Ui {
     }
 
     /**
-     * Duke's response to user
-     * @param input
+     * Prints duke's response to the user.
+     *
+     * @param input Duke's response as a String.
      */
     public void echo(String input) {
         ImageView v = new ImageView(admin);

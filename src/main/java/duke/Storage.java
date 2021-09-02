@@ -15,20 +15,23 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 /**
- * This class loads and saves a user's tasks
+ * Class that loads and saves a user's tasks.
  */
 public class Storage {
-
     private String filePath = "data/list.txt";
     private Ui ui;
 
+    /**
+     * Constructor to initialize Storage.
+     */
     public Storage() {
         this.ui = new Ui();
     }
 
     /**
+     * Saves user's current list of tasks to disk.
      *
-     * @param tasks List of tasks to be saved to disk
+     * @param tasks List of tasks to be saved to disk.
      */
     public void save(ArrayList<Task> tasks) {
         FileWriter w;
@@ -67,9 +70,10 @@ public class Storage {
     }
 
     /**
+     * Returns a list of tasks loaded from disk.
      *
-     * @return List of tasks loaded from disk
-     * @throws DukeException thrown if there are errors with loading / creating a file
+     * @return List of tasks loaded from disk.
+     * @throws DukeException Thrown if there are errors with loading / creating a file.
      */
     public ArrayList<Task> load() throws DukeException {
         File f = new File(filePath);

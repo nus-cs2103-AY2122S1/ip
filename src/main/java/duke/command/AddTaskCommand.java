@@ -14,7 +14,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 /**
- * This class adds different types of tasks
+ * Class to add different types of tasks.
  */
 public class AddTaskCommand implements Command {
     private String type;
@@ -22,8 +22,9 @@ public class AddTaskCommand implements Command {
     private Task task;
 
     /**
+     * Constructor to initialize AddTaskCommand.
      *
-     * @param arr of length 2 which contains the task type and description
+     * @param arr of length 2 which contains the task type and description.
      */
     public AddTaskCommand(String... arr) {
         this.type = arr[0];
@@ -31,11 +32,12 @@ public class AddTaskCommand implements Command {
     }
 
     /**
+     * Execute command.
      *
-     * @param taskList Manages all current tasks
-     * @param ui Used to print messages
-     * @param storage Loads and saves the tasks to a txt file
-     * @throws DukeException thrown if there are input/parsing errors
+     * @param taskList TaskList that manages all current tasks.
+     * @param ui Ui used to print messages.
+     * @param storage Loads and saves the tasks to a txt file.
+     * @throws DukeException Thrown if there are input/parsing errors.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
@@ -79,9 +81,9 @@ public class AddTaskCommand implements Command {
     }
 
     /**
-     * Method to determine if Duke should stop running.
+     * Returns a boolean to determine if Duke should stop running.
      *
-     * @return false as this is not an exit command
+     * @return A boolean false as this is not an exit command.
      */
     @Override
     public boolean isExit() {

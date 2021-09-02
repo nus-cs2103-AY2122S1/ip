@@ -6,13 +6,16 @@ import duke.command.Command;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Class used to start ChatBot.
+ */
 public class Duke extends Application {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
 
     /**
-     * Method to initialise Duke.
+     * Constructor to initialize Duke.
      */
     public Duke() {
         ui = new Ui(this);

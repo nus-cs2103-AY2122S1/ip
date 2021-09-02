@@ -9,15 +9,16 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 
 /**
- * This class converts user inputs to Commands
+ * Class to convert user inputs to Commands.
  */
 public class Parser {
 
     /**
+     * Returns appropriate Command based on user input.
      *
-     * @param cmd User input
-     * @return A Command to be executed
-     * @throws DukeException thrown if user input is invalid
+     * @param cmd User input.
+     * @return A Command to be executed.
+     * @throws DukeException Thrown if user input is invalid.
      */
     public static Command parse(String cmd) throws DukeException {
         String[] arr = cmd.split(" ", 2);

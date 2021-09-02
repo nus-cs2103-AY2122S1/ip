@@ -9,7 +9,7 @@ import duke.Ui;
 import duke.task.Task;
 
 /**
- * This class finds tasks using a search keyword
+ * Class to find tasks using a search keyword.
  */
 public class FindCommand implements Command {
 
@@ -17,8 +17,9 @@ public class FindCommand implements Command {
     private ArrayList<Task> filtered;
 
     /**
-     * Method to initialize Find Command
-     * @param keyword to search for tasks that match the keyword
+     * Method to initialize Find Command.
+     *
+     * @param keyword Keyword to search for relevant tasks.
      */
     public FindCommand(String keyword) {
         this.keyword = keyword.toLowerCase();
@@ -26,11 +27,12 @@ public class FindCommand implements Command {
     }
 
     /**
+     * Method to execute command.
      *
-     * @param taskList Manages all current tasks
-     * @param ui Used to print messages
-     * @param storage Loads and saves tasks to a txt file
-     * @throws DukeException thrown if there are input/parsing errors
+     * @param taskList TaskList that manages all current tasks.
+     * @param ui Ui used to print messages.
+     * @param storage Loads and saves the tasks to a txt file.
+     * @throws DukeException Thrown if there are input/parsing errors.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
@@ -44,9 +46,9 @@ public class FindCommand implements Command {
     }
 
     /**
-     * Method to determine if Duke should stop running.
+     * Returns a boolean to determine if Duke should stop running.
      *
-     * @return false as this is not an exit command
+     * @return A boolean false as this is not an exit command.
      */
     @Override
     public boolean isExit() {

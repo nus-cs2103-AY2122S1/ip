@@ -10,19 +10,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
 
 /**
- * Class to create dialog box with user photo and message
+ * Class to create dialog box with user photo and message.
  */
 public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
     /**
-     * Method to init Dialog box
-     * @param l
-     * @param iv
+     * Method to initialize DialogBox.
+     *
+     * @param label Label to hold message.
+     * @param iv Imageview to hold photo
      */
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
+    public DialogBox(Label label, ImageView iv) {
+        text = label;
         displayPicture = iv;
 
         text.setWrapText(true);
@@ -41,18 +42,19 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Method that returns a dialog box with appropriate message and photo
-     * @param fullCommand Message
-     * @param iv Image of user/duke
-     * @param i To determine layout of Dialog box
-     * @return dialog box with appropriate message and photo
+     * Returns a dialog box with appropriate message and photo.
+     *
+     * @param fullCommand Message of user/duke.
+     * @param iv Image of user/duke.
+     * @param i Integer to determine position of Imageview.
+     * @return DialogBox with appropriate message and photo.
      */
     public static DialogBox getUserDialog(String fullCommand, ImageView iv, int i) {
-        Label l = new Label(fullCommand);
-        l.setWrapText(true);
-        l.setFont(new Font("Arial", 12));
-        l.setMaxSize(650, 800);
-        DialogBox db = new DialogBox(l, iv);
+        Label label = new Label(fullCommand);
+        label.setWrapText(true);
+        label.setFont(new Font("Arial", 12));
+        label.setMaxSize(650, 800);
+        DialogBox db = new DialogBox(label, iv);
         if (i == 1) {
             db.flip();
         }
