@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 
 import duke.data.TaskList;
@@ -10,7 +12,7 @@ import duke.ui.Ui;
  * Encapsulates a bot that manages tasks for users.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public class Duke {
     private Storage storage;
@@ -19,7 +21,7 @@ public class Duke {
     private Parser parser;
 
     /**
-     * Constructor for Duke.
+     * Constructor for duke.Duke.
      *
      * @param filepath Path for data to be stored.
      */
@@ -52,4 +54,22 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String cmd) {
+        String response;
+        if (cmd.equals("bye")) {
+            return ui.showFarewellMsg();
+        }
+
+        try {
+            response = parser.parse(cmd);
+            storage.save();
+        } catch (DukeException e) {
+            response = e.getMessage();
+        }
+        return response;
+    }
 }

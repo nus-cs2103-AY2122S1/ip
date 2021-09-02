@@ -20,7 +20,7 @@ import duke.data.TaskList;
  * Encapsulates a Storage object that handles loading and saving of Tasks.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public class Storage {
     private String path;

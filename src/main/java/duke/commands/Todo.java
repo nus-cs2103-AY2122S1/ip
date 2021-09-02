@@ -4,7 +4,7 @@ package duke.commands;
  * Encapsulates a Todo object that implements a Task.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public class Todo extends Task {
     /**

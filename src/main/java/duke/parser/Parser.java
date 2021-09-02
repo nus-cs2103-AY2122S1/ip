@@ -17,7 +17,7 @@ import duke.ui.Ui;
  * Encapsulates a Parser object that reads in and executes commands based on user's input.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public class Parser {
     private TaskList tasks;
@@ -34,7 +34,7 @@ public class Parser {
      * Public constructor for Parser.
      *
      * @param tasks A list of tasks.
-     * @param ui Ui for Duke.
+     * @param ui Ui for duke.Duke.
      */
     public Parser(TaskList tasks, Ui ui) {
         this.tasks = tasks;
@@ -47,7 +47,7 @@ public class Parser {
      * @param cmd String from user's input.
      * @throws DukeException
      */
-    public void parse(String cmd) throws DukeException {
+    public String parse(String cmd) throws DukeException {
         String[] tokens = cmd.split(" ");
         Keyword command = validateCommand(tokens);
 
@@ -60,14 +60,16 @@ public class Parser {
         Task task;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+        StringBuilder message = new StringBuilder();
+
         switch (command) {
         case LIST:
-            this.tasks.printTaskList();
+            message.append(this.tasks.printTaskList());
             break;
         case TODO:
             task = new Todo(cmd.substring(5));
             this.tasks.add(task);
-            ui.showAddTaskMsg(task);
+            message.append(ui.showAddTaskMsg(task));
             break;
         case DEADLINE:
             middle = Arrays.asList(tokens).indexOf("/by");
@@ -80,9 +82,9 @@ public class Parser {
                 by = LocalDateTime.parse(dateString, format);
                 task = new Deadline(description, by);
                 this.tasks.add(task);
-                ui.showAddTaskMsg(task);
+                message.append(ui.showAddTaskMsg(task));
             } catch (DateTimeParseException e) {
-                System.out.println("Please enter a date in the following format: dd/MM/yyyy HHmm");
+                throw new DukeException("Please enter a date in the following format: dd/MM/yyyy HHmm");
             }
             break;
         case EVENT:
@@ -96,31 +98,32 @@ public class Parser {
                 at = LocalDateTime.parse(dateString, format);
                 task = new Event(description, at);
                 this.tasks.add(task);
-                ui.showAddTaskMsg(task);
+                message.append(ui.showAddTaskMsg(task));
             } catch (DateTimeParseException e) {
-                System.out.println("Please enter a date in the following format: dd/MM/yyyy HHmm");
+                throw new DukeException("Please enter a date in the following format: dd/MM/yyyy HHmm");
             }
             break;
         case DONE:
             index = Integer.parseInt(tokens[1]) - 1;
             task = this.tasks.get(index);
             this.tasks.complete(index);
-            ui.showCompleteTaskMsg(task);
+            message.append(ui.showCompleteTaskMsg(task));
             break;
         case DELETE:
             index = Integer.parseInt(tokens[1]) - 1;
             task = this.tasks.get(index);
             this.tasks.delete(index);
-            ui.showDeleteTaskMsg(task);
-            ui.showListCountMsg();
+            message.append(ui.showDeleteTaskMsg(task));
+            message.append(ui.showListCountMsg());
             break;
         case FIND:
             String keyword = cmd.substring(5);
-            tasks.printMatchingTasks(keyword);
+            message.append(tasks.printMatchingTasks(keyword));
             break;
         default:
             throw new DukeException("Unknown command passed.");
         }
+        return message.toString();
     }
 
     private static Keyword validateCommand(String[] cmd) throws DukeException {
@@ -136,7 +139,7 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! Missing arguments.");
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("Brother! What are you saying?");
         }
         return keyword;
     }

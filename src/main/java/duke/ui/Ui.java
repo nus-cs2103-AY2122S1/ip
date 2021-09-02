@@ -4,10 +4,10 @@ import duke.commands.Task;
 import duke.data.TaskList;
 
 /**
- * Encapsulates the Ui component of Duke.
+ * Encapsulates the Ui component of duke.Duke.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public class Ui {
     private TaskList tasks;
@@ -20,34 +20,42 @@ public class Ui {
     public Ui(TaskList tasks) {
         this.tasks = tasks;
     }
-    public void showGreeting() {
-        System.out.println("Aloha! I'm Sophia.\nWhat can I do for you?");
-    }
-    public void showFarewellMsg() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public static String showGreeting() {
+        String message = "MY BEST FRIEND! \nWhat can I do for you?";
+        return message;
     }
 
-    public void showAddTaskMsg(Task text) {
-        System.out.println("Sure thing! I've added this task:\n  " + text);
+    public static String showFarewellMsg() {
+        String message = "GoodBye Brother!";
+        return message;
     }
 
-    public void showCompleteTaskMsg(Task text) {
-        System.out.println("Nice! I've marked this task as done:\n  " + text);
+    public String showAddTaskMsg(Task text) {
+        String message = "Sure thing! I've added this task:\n  " + text + "\n";
+        return message;
     }
 
-    public void showDeleteTaskMsg(Task text) {
-        System.out.println("Noted! I've removed this task:\n  " + text);
+    public String showCompleteTaskMsg(Task text) {
+        String message = "Nice! I've marked this task as done:\n  " + text + "\n";
+        return message;
+    }
+
+    public String showDeleteTaskMsg(Task text) {
+        String message = "Noted! I've removed this task:\n  " + text + "\n";
+        return message;
     }
 
     /**
      * Prints number of tasks in TaskList.
      */
-    public void showListCountMsg() {
+    public String showListCountMsg() {
+        String message;
         int len = tasks.getLength();
         if (len == 1) {
-            System.out.println(String.format("Now you have %d task in the list.", len));
+            message = String.format("Now you have %d task in the list.", len);
         } else {
-            System.out.println(String.format("Now you have %d tasks in the list.", len));
+            message = String.format("Now you have %d tasks in the list.", len);
         }
+        return message;
     }
 }
