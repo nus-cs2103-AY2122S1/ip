@@ -59,6 +59,7 @@ public class Parser {
      * Takes user input to interpret and acts on the TaskList appropriately.
      *
      * @param input Input string from the user.
+     * @return False if user inputs "bye" to end the program, true otherwise.
      */
     public boolean handleInput(String input) {
         Ui.printSingleDivider();
@@ -94,11 +95,17 @@ public class Parser {
         return true;
     }
 
+    /**
+     * Finds and prints the tasks that match the user input.
+     *
+     * @param input Input string from the user.
+     */
     private void findTask(String input) {
+        final int FIND_SUBSTRING_INDEX = 5;
         try {
             System.out.println("Output: These tasks have descriptions that contain the phrase '"
-                    + input.substring(5) + "'!\n");
-            taskList.printAllContains(input.substring(5));
+                    + input.substring(FIND_SUBSTRING_INDEX) + "'!\n");
+            taskList.printAllContains(input.substring(FIND_SUBSTRING_INDEX));
         } catch (StringIndexOutOfBoundsException e) {
             System.out.println("Output: Please include a search term after the word 'find'.\n"
                     + "i.e. Find meeting");
@@ -158,28 +165,27 @@ public class Parser {
         try {
             if (!input.startsWith("todo") && !input.startsWith("deadline") && !input.startsWith("event")) {
                 throw new duke.exception.InvalidInputException();
-            } else {
-                // If it passes the if block, means it is a task-setting command
+            }
+            // If it passes the if block, means it is a task-setting command
 
-                // Check if a task description is present
-                checkDescription(input);
+            // Check if a task description is present
+            checkDescription(input);
 
-                if (input.startsWith("todo")) {
+            if (input.startsWith("todo")) {
 
-                    // Set the to-do
-                    newTask = Todo.setTodo(input.substring(5));
+                // Set the to-do
+                newTask = Todo.setTodo(input.substring(5));
 
-                } else if (input.startsWith("deadline")) {
+            } else if (input.startsWith("deadline")) {
 
-                    // Set the deadline
-                    newTask = Deadline.setDeadline(input.substring(9));
+                // Set the deadline
+                newTask = Deadline.setDeadline(input.substring(9));
 
-                } else if (input.startsWith("event")) {
+            } else if (input.startsWith("event")) {
 
-                    // Set the event
-                    newTask = Event.setEvent(input.substring(6));
+                // Set the event
+                newTask = Event.setEvent(input.substring(6));
 
-                }
             }
         } catch (DukeException e1) {
             System.out.println("Output: " + e1.getMessage());
