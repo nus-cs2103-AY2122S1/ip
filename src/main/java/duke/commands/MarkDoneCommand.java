@@ -20,10 +20,11 @@ public class MarkDoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskNumberException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskNumberException {
         String[] messages = tasks.markDone(taskNumber);
         ui.printOut(messages);
         storage.save(tasks);
+        return String.join("\n", messages);
     }
 
     @Override
