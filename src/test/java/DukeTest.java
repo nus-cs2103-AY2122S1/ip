@@ -17,7 +17,7 @@ public class DukeTest {
 
     @Test
     public void storageTest() {
-        assertEquals(4, new Storage("C:\\Users\\Rickie\\Documents\\University\\Year 2\\Semester 1\\CS2103T\\ip\\Data\\taskList.txt").load().size());
+        assertEquals(3, new Storage("C:\\Users\\Rickie\\Documents\\University\\Year 2\\Semester 1\\CS2103T\\ip\\Data\\taskList.txt").load().size());
     }
 
     @Test
