@@ -20,27 +20,28 @@ public class Ui {
     public Ui(TaskList tasks) {
         this.tasks = tasks;
     }
-    public String showGreeting() {
-        String message = "Aloha! I'm Sophia.\nWhat can I do for you?";
+    public static String showGreeting() {
+        String message = "MY BEST FRIEND! \nWhat can I do for you?";
         return message;
     }
-    public String showFarewellMsg() {
-        String message = "Bye. Hope to see you again soon!";
+
+    public static String showFarewellMsg() {
+        String message = "GoodBye Brother!";
         return message;
     }
 
     public String showAddTaskMsg(Task text) {
-        String message = "Sure thing! I've added this task:\n  " + text;
+        String message = "Sure thing! I've added this task:\n  " + text + "\n";
         return message;
     }
 
     public String showCompleteTaskMsg(Task text) {
-        String message = "Nice! I've marked this task as done:\n  " + text;
+        String message = "Nice! I've marked this task as done:\n  " + text + "\n";
         return message;
     }
 
     public String showDeleteTaskMsg(Task text) {
-        String message = "Noted! I've removed this task:\n  " + text;
+        String message = "Noted! I've removed this task:\n  " + text + "\n";
         return message;
     }
 

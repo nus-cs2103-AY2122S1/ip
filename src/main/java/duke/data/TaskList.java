@@ -25,16 +25,18 @@ public class TaskList {
     /**
      * Prints all items in a TaskList.
      */
-    public void printTaskList() {
-        System.out.println("Here are the tasks in your list:");
+    public String printTaskList() {
+        StringBuilder str = new StringBuilder();
+        str.append("Here are the tasks in your list:\n");
         if (lst.size() == 0) {
-            System.out.println("---- No Tasks currently ----");
+            str.append("---- No Tasks currently ----\n");
         }
         int i = 1;
         for (Task s : lst) {
-            System.out.println(i + "." + s);
+            str.append(i + "." + s + "\n");
             i++;
         }
+        return str.toString();
     }
 
     /**
@@ -99,18 +101,20 @@ public class TaskList {
      *
      * @param keyword Keyword to be contained in the Task's description.
      */
-    public void printMatchingTasks(String keyword) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String printMatchingTasks(String keyword) {
+        StringBuilder str = new StringBuilder();
+        str.append("Here are the matching tasks in your list:\n");
         int i = 1;
         for (Task task : lst) {
             if (task.containsKeyword(keyword)) {
-                System.out.println(i + "." + task);
+                str.append(i + "." + task + "\n");
                 i++;
             }
         }
 
         if (i == 1) {
-            System.out.println("---- No related tasks found ----");
+            str.append("---- No related tasks found ----\n");
         }
+        return str.toString();
     }
 }

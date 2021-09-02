@@ -60,14 +60,16 @@ public class Parser {
         Task task;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
+        StringBuilder message = new StringBuilder();
+
         switch (command) {
         case LIST:
-            this.tasks.printTaskList();
+            message.append(this.tasks.printTaskList());
             break;
         case TODO:
             task = new Todo(cmd.substring(5));
             this.tasks.add(task);
-            ui.showAddTaskMsg(task);
+            message.append(ui.showAddTaskMsg(task));
             break;
         case DEADLINE:
             middle = Arrays.asList(tokens).indexOf("/by");
@@ -80,9 +82,9 @@ public class Parser {
                 by = LocalDateTime.parse(dateString, format);
                 task = new Deadline(description, by);
                 this.tasks.add(task);
-                ui.showAddTaskMsg(task);
+                message.append(ui.showAddTaskMsg(task));
             } catch (DateTimeParseException e) {
-                System.out.println("Please enter a date in the following format: dd/MM/yyyy HHmm");
+                throw new DukeException("Please enter a date in the following format: dd/MM/yyyy HHmm");
             }
             break;
         case EVENT:
@@ -96,31 +98,32 @@ public class Parser {
                 at = LocalDateTime.parse(dateString, format);
                 task = new Event(description, at);
                 this.tasks.add(task);
-                ui.showAddTaskMsg(task);
+                message.append(ui.showAddTaskMsg(task));
             } catch (DateTimeParseException e) {
-                System.out.println("Please enter a date in the following format: dd/MM/yyyy HHmm");
+                throw new DukeException("Please enter a date in the following format: dd/MM/yyyy HHmm");
             }
             break;
         case DONE:
             index = Integer.parseInt(tokens[1]) - 1;
             task = this.tasks.get(index);
             this.tasks.complete(index);
-            ui.showCompleteTaskMsg(task);
+            message.append(ui.showCompleteTaskMsg(task));
             break;
         case DELETE:
             index = Integer.parseInt(tokens[1]) - 1;
             task = this.tasks.get(index);
             this.tasks.delete(index);
-            ui.showDeleteTaskMsg(task);
-            ui.showListCountMsg();
+            message.append(ui.showDeleteTaskMsg(task));
+            message.append(ui.showListCountMsg());
             break;
         case FIND:
             String keyword = cmd.substring(5);
-            tasks.printMatchingTasks(keyword);
+            message.append(tasks.printMatchingTasks(keyword));
             break;
         default:
             throw new DukeException("Unknown command passed.");
         }
+        return message.toString();
     }
 
     private static Keyword validateCommand(String[] cmd) throws DukeException {
@@ -136,7 +139,7 @@ public class Parser {
                 throw new DukeException("☹ OOPS!!! Missing arguments.");
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("Brother! What are you saying?");
         }
         return keyword;
     }

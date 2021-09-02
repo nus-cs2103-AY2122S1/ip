@@ -58,7 +58,18 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getResponse(String cmd) {
+        String response;
+        if (cmd.equals("bye")) {
+            return ui.showFarewellMsg();
+        }
+
+        try {
+            response = parser.parse(cmd);
+            storage.save();
+        } catch (DukeException e) {
+            response = e.getMessage();
+        }
+        return response;
     }
 }
