@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String idx) throws DukeException {
         try {
-            taskIdx = Integer.valueOf(idx.trim()) - 1;
+            taskIdx = Integer.parseInt(idx.trim()) - 1;
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid Command. 'delete' must be followed by a task number");
         }
@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
      * @param taskList The current TaskList being used.
      * @param ui The current Ui being used.
      * @param storage The current Storage being used.
-     * @throws DukeException
+     * @throws DukeException if invalid task number entered.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskIdx >= taskList.size()) {

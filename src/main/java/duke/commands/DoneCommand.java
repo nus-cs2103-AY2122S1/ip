@@ -16,11 +16,11 @@ public class DoneCommand extends Command {
     /**
      * Constructs a DoneCommand Object with the given index.
      * @param idx Index of task to be marked as done.
-     * @throws DukeException
+     * @throws DukeException if invalid command entered.
      */
     public DoneCommand(String idx) throws DukeException {
         try {
-            taskIdx = Integer.valueOf(idx.trim()) - 1;
+            taskIdx = Integer.parseInt(idx.trim()) - 1;
         } catch (NumberFormatException e) {
             throw new DukeException("Invalid Command. 'done' must be followed by a task number");
         }
@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
      * @param taskList The current TaskList being used.
      * @param ui The current Ui being used.
      * @param storage The current Storage being used.
-     * @throws DukeException
+     * @throws DukeException if invalid task number entered.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskIdx >= taskList.size()) {

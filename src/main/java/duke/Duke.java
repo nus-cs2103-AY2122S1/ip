@@ -27,7 +27,7 @@ public class Duke extends Application {
         try {
             taskList = storage.load();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
             ui.showLoadingError();
             storage.createNewFile();
             taskList = new TaskList();
@@ -59,11 +59,6 @@ public class Duke extends Application {
         stage.show(); // Render the stage.
     }
 
-    /**
-     * Main function of the program.
-     *
-     * @param args
-     */
     public static void main(String[] args) {
         Application.launch(Main.class, args);
     }

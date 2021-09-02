@@ -1,26 +1,11 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.tasks.Task;
 
 /**
  * Handles all functionality related to displaying of the user interface.
  */
 public class Ui {
-    private static final String DIVIDER = "───────────────────────────────────────────────────────────────────────\n";
-    private static final String DOUBLE_DIVIDER = "═══════════════════════════════════════"
-            + "════════════════════════════════\n";
-    private final Scanner scanner = new Scanner(System.in);
-
-    /**
-     * Displays the welcome message.
-     */
-    public void showWelcome() {
-        System.out.println(DOUBLE_DIVIDER + "Welcome to Duke!\n" + DOUBLE_DIVIDER);
-        System.out.println("Please enter the tasks (todo/event/deadline) to be added to the list.\n"
-                + "(Enter 'list' to view the list, or 'bye' to exit.)\n" + DIVIDER);
-    }
 
     /**
      * Displays the goodbye message.
@@ -33,7 +18,7 @@ public class Ui {
      * Displays the loading error message.
      */
     public void showLoadingError() {
-        System.out.println(DIVIDER + "No taskfile found, creating a new taskfile...\n" + DIVIDER);
+        System.out.println("No taskfile found, creating a new taskfile...\n");
     }
 
     /**
@@ -72,22 +57,6 @@ public class Ui {
      */
     public void showError(String error) {
         System.out.println("ERROR: " + error);
-    }
-
-    /**
-     * Prints a horizontal dividing line.
-     */
-    public void showLine() {
-        System.out.println(DIVIDER);
-    }
-
-    /**
-     * Reads the command entered by the user.
-     *
-     * @return The command entered by the user.
-     */
-    public String readCommand() {
-        return scanner.nextLine();
     }
 
     /**
