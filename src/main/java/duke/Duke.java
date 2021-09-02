@@ -7,6 +7,9 @@ import duke.Storage.Storage;
 import duke.Tasks.TaskList;
 import duke.Ui.Ui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 public class Duke {
     private final Storage storage;
     private final Ui ui;
@@ -48,6 +51,38 @@ public class Duke {
         }
     }
 
+    public String getResponse(String input) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(stream);
+        PrintStream old = System.out;
+        System.setOut(ps);
+
+        try {
+            Command c = Parser.parse(input);
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
+
+        System.out.flush();
+        System.setOut(old);
+
+        return "Uncle says:\n" + stream.toString();
+    }
+
+    public String introduceDuke() {
+
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(stream);
+        PrintStream old = System.out;
+        System.setOut(ps);
+        ui.introduceDuke();
+        System.out.flush();
+        System.setOut(old);
+
+        return "Uncle says:\n" + stream.toString();
+    }
+
     /**
      * This is the main file for this java programme.
      *
@@ -56,5 +91,4 @@ public class Duke {
     public static void main(String[] args) {
         new Duke("./tasks.txt").run();
     }
-
 }
