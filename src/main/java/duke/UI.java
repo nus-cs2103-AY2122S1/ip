@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Class responsible for interactions with the user
+ * Class responsible for displaying replies to the user
  */
 public class UI {
     /**
@@ -10,13 +10,6 @@ public class UI {
      * @return Welcome message
      */
     public static String welcome() {
-        /*
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-         */
         return "Stay on track with Duke!\nHow can I help you?";
     }
 
@@ -29,7 +22,10 @@ public class UI {
         return "¡Adiós! See you soon!";
     }
 
-    /** Returns a message for when there is an unknown DukeException **/
+    /** Returns a message for when there is an unknown DukeException
+     *
+     * @return Exception message
+     */
     public static String dukeException() {
         return "There seems to be an error with Duke. Please try again!";
     }

@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDate;
-import java.util.Locale;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidCommandException;
@@ -29,7 +28,7 @@ public class Parser {
     private static String[] words;
 
     /**
-     * Handles / parses user input, and allowing interactions with tasks
+     * Handles user input, and allowing interactions with tasks
      *
      * @param userString String that users enter
      * @param taskList TaskList object used by Duke
@@ -70,8 +69,8 @@ public class Parser {
     }
 
     /**
-     * Triggered when the done command is identified
      * Marks the given task as done
+     * Triggered when the done command is identified
      *
      * @throws DukeException If there is no task number or wrong task number
      */
@@ -89,8 +88,8 @@ public class Parser {
     }
 
     /**
-     * Triggered when the todo command is identified
      * Adds a new Todo object to the TaskList
+     * Triggered when the todo command is identified
      *
      * @throws DukeException If no name is provided
      */
@@ -105,8 +104,8 @@ public class Parser {
 
 
     /**
-     * Triggered when the deadline command is identified
      * Adds a new Deadline object to the TaskList
+     * Triggered when the deadline command is identified
      *
      * @throws DukeException If no name or no deadline is provided
      */
@@ -126,8 +125,8 @@ public class Parser {
     }
 
     /**
-     * Triggered when event command is identified
      * Adds a new Event object to the TaskList
+     * Triggered when event command is identified
      *
      * @throws DukeException If no task name or event date is provided
      */
@@ -169,6 +168,7 @@ public class Parser {
     /**
      * Prints tasks that match the user string
      * Triggered when find command is identified
+     *
      * @throws MissingTaskNameException If no task name provided
      */
     public static String handleFind() throws MissingTaskNameException {

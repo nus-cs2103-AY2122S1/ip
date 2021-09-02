@@ -18,10 +18,10 @@ import duke.task.ToDo;
  */
 public class TaskList {
     /** ArrayList containing all tasks **/
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     /** Storage instance for interaction with files **/
-    private Storage storage;
+    private final Storage storage;
 
     /**
      * Initializes a new TaskList with the given file path
@@ -134,6 +134,7 @@ public class TaskList {
 
     /**
      * Finds and prints a list of tasks with matching task name
+     *
      * @param taskName Name of task entered by user
      */
     public String find(String taskName) {

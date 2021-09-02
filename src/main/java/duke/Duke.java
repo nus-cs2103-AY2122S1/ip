@@ -11,20 +11,21 @@ import duke.exceptions.MissingTaskNameException;
 import duke.exceptions.MissingTaskNumberException;
 
 /**
- * Duke is a Personal Assistant Chatbot that keeps track of various tasks.
+ * Duke is a Personal Assistant Chatbot that keeps track of various tasks
  *
  * @author Adam Oh Zhi Hong
  */
 public class Duke {
     /** A class to keep track of all tasks of the Duke instance **/
-    private TaskList taskList = new TaskList("data/duke.txt");
+    private final TaskList taskList = new TaskList("data/duke.txt");
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets a response from Duke
+     *
+     * @return String response from Duke
      */
     public String getResponse(String input) {
-        String dukeResponse = "";
+        String dukeResponse;
         try {
             dukeResponse = Parser.handle(input, taskList);
         } catch (InvalidCommandException e) {

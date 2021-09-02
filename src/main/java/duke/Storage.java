@@ -9,12 +9,12 @@ import java.io.IOException;
  */
 public class Storage {
     /** Path to storage file **/
-    private String filePath;
+    private final String filePath;
 
     /**
      * Initializes a new storage container
      *
-     * @param filePath
+     * @param filePath Path to storage file
      */
     public Storage(String filePath) {
         this.filePath = filePath;
