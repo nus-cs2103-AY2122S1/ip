@@ -24,14 +24,16 @@ public class DoneCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.done(doneIndex);
 
         Task task = tasks.get(doneIndex);
         String response = respond(task);
-        ui.showResponse(response);
+        String result = ui.showResponse(response);
         // storage
         storage.save(tasks);
+
+        return result;
     }
 
     /**

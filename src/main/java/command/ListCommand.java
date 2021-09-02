@@ -17,9 +17,11 @@ public class ListCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String message = tasks.list();
-        ui.showResponse(message);
+        String result = ui.showResponse(message);
+
+        return result;
     }
 
     /**

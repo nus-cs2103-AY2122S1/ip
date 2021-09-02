@@ -12,12 +12,14 @@ public class ExitCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         // perform saving of taskList to disk here
         storage.save(tasks);
 
         String response = respond();
-        ui.showResponse(response);
+        String result = ui.showResponse(response);
+
+        return result;
     }
 
     /**

@@ -24,15 +24,17 @@ public class DeleteCommand extends Command {
      * @param storage Storage object.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.get(deleteIndex);
         tasks.delete(deleteIndex);
         int numOfTasks = tasks.size();
 
         String response = respond(task, numOfTasks);
-        ui.showResponse(response);
+        String result = ui.showResponse(response);
         // storage
         storage.save(tasks);
+
+        return result;
     }
 
     /**

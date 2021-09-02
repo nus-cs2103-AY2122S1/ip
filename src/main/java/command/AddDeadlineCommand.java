@@ -16,14 +16,16 @@ public class AddDeadlineCommand extends AddCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         // tasks
         Deadline newDeadline = new Deadline(desc, by);
         tasks.add(newDeadline);
         // ui
         String response = respond(newDeadline, tasks.size());
-        ui.showResponse(response);
+        String result = ui.showResponse(response);
         // storage
         storage.save(tasks);
+
+        return result;
     }
 }
