@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -25,12 +24,12 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         String[] inputs = this.userInput.split(" ");
         int ind = Integer.valueOf(inputs[1]) - 1;
         tasks.markDone(ind);
         String result = "Nice! I've marked this task as done:\n  "
                 + tasks.get(ind).toString();
-        System.out.println(Ui.tabAndFormat(result));
+        return result;
     }
 }

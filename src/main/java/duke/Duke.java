@@ -3,71 +3,65 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.javafx.MainWindow;
 import duke.task.TaskList;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
  * The type Duke that is the main of the program.
  */
-public class Duke {
+public class Duke extends Application {
 
     /** storage to handle save file (loading and saving) */
     private final Storage storage;
     /** storage to store tasks */
     private final TaskList tasks;
-    /** handles basic interaction with the user and string formatting */
-    private final Ui ui;
 
     /**
      * Instantiates a new Duke.
-     *
-     * @param filePath the file path
      */
-    public Duke(String filePath) {
+    public Duke() {
         this.tasks = new TaskList();
-        this.ui = new Ui();
         // Initialise Storage with the tasks storage and the filepath to the save file
-        this.storage = new Storage(this.tasks, filePath);
+        this.storage = new Storage(this.tasks, "./duke.txt");
         // Loading save file from the filepath
         try {
             storage.load();
         } catch (IOException e) {
-            System.out.println(
-                    Ui.tabAndFormat(
-                            "☹ OOPS!!! Please enter a proper file path! e.g.:\n'./duke.txt'"
-                    )
-            );
+            e.printStackTrace();
         }
     }
 
-    /**
-     * The entry point of application.
-     *
-     * @param args the input arguments
-     */
-    public static void main(String[] args) {
-        new Duke("./duke.txt").run();
+    @Override
+    public void start(Stage stage) throws Exception {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Duke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            Duke duke = new Duke();
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    /**
-     * Runs Duke.
-     */
-    public void run() {
-        // Starting with a welcome message
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            String input = ui.readCommand();
-
-            try {
-                Command userCommand = new Parser(input, tasks).checkOperation();
-                userCommand.execute();
-                isExit = userCommand.isExit();
-                storage.save();
-            } catch (DukeException | IllegalArgumentException e) {
-                System.out.println(Ui.tabAndFormat(e.getMessage()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public String getResponse(String input) {
+        String output = "";
+        try {
+            Command userCommand = new Parser(input, tasks).checkOperation();
+            output = userCommand.execute();
+            storage.save();
+        } catch (DukeException | IllegalArgumentException e) {
+            return e.getMessage();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        return output;
     }
 }

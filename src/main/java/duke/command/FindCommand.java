@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.task.TaskList;
 
 /**
@@ -25,13 +24,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute() {
+    public String execute() {
         String result = "Here are the matching tasks in your list:";
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(this.substring)) {
                 result += "\n" + i + "." + tasks.get(i).toString();
             }
         }
-        System.out.println(Ui.tabAndFormat(result));
+        return result;
     }
 }
