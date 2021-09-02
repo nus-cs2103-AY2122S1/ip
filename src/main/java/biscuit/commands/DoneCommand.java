@@ -26,16 +26,17 @@ public class DoneCommand extends Command {
      * @param taskList Task list.
      * @param ui       Ui to display.
      * @param storage  Storage to save to.
+     * @return Response to user input.
      * @throws BiscuitException Invalid input by user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
         if (userInputs.length == 2) {
             try {
                 Task current = taskList.getTask(Integer.parseInt(userInputs[1]) - 1);
                 current.setDone(true);
                 storage.save();
-                ui.showMessage("Nice! I've marked this task as done, woof!\n\t" + current);
+                return "Nice! I've marked this task as done, woof!\n\t" + current;
             } catch (NumberFormatException | IndexOutOfBoundsException e) {
                 throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! Please enter a valid number"
                         + (taskList.size() == 1 ? " of 1" : " from 1 to " + taskList.size()) + ".");

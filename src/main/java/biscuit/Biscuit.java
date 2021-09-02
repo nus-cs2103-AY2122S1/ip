@@ -2,14 +2,10 @@ package biscuit;
 
 import java.util.ArrayList;
 
-import biscuit.commands.Command;
 import biscuit.exceptions.BiscuitException;
-import biscuit.parser.Parser;
 import biscuit.storage.Storage;
 import biscuit.task.TaskList;
 import biscuit.ui.Ui;
-
-
 
 /**
  * Biscuit is a Personal Assistant Chatbot that helps a person to keep track of various things.
@@ -35,36 +31,16 @@ public class Biscuit {
         }
     }
 
-    /**
-     * Executes main method.
-     *
-     * @param args Arguments passed when run.
-     */
-    public static void main(String[] args) {
-        new Biscuit("data/biscuit.csv").run();
+    public Storage getStorage() {
+        return storage;
     }
 
-    /**
-     * Runs Biscuit.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String userInput = ui.readCommand();
-                ui.showLine();
-                Command command = Parser.parse(userInput);
-                command.execute(taskList, ui, storage);
-                isExit = command.isExit();
-            } catch (BiscuitException be) {
-                ui.showError(be.getMessage());
-            } catch (Exception e) {
-                ui.showError("Woof! Looks like something went wrong, please try again.");
-            } finally {
-                ui.showLine();
-            }
-        }
+    public Ui getUi() {
+        return ui;
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
     }
 
 }

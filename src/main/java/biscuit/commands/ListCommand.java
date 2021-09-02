@@ -24,15 +24,18 @@ public class ListCommand extends Command {
      * @param taskList Task list to add.
      * @param ui       Ui to display.
      * @param storage  Storage to save to.
+     * @return Response to user input.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        StringBuilder message = new StringBuilder();
         if (taskList.isEmpty()) {
-            ui.showMessage("List is currently empty.");
+            message = new StringBuilder("List is currently empty.");
         } else {
             for (int i = 0; i < taskList.size(); i++) {
-                ui.showMessage(i + 1 + ". " + taskList.getTask(i));
+                message.append(i).append(". ").append(taskList.getTask(i)).append("\n");
             }
         }
+        return message.toString();
     }
 }

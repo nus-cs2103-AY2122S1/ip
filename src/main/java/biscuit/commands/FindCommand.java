@@ -26,24 +26,27 @@ public class FindCommand extends Command {
      * @param taskList Task list.
      * @param ui       Ui to display.
      * @param storage  Storage to save to.
+     * @return Response to user input.
      * @throws BiscuitException Invalid input by user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
+        StringBuilder message = new StringBuilder();
         if (userInputs.length == 2) {
             int count = 1;
             for (int i = 0; i < taskList.size(); i++) {
                 Task current = taskList.getTask(i);
                 if (current.getDescription().contains(userInputs[1])) {
-                    ui.showMessage(count + ". " + taskList.getTask(i));
+                    message.append(count).append(". ").append(taskList.getTask(i));
                     count++;
                 }
             }
             if (count == 1) {
-                ui.showMessage("No matching tasks found.");
+                message = new StringBuilder("No matching tasks found.");
             }
         } else {
             throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The search keyword cannot be empty.");
         }
+        return message.toString();
     }
 }

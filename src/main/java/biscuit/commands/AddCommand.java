@@ -35,10 +35,11 @@ public class AddCommand extends biscuit.commands.Command {
      * @param taskList Task list.
      * @param ui       Ui to display.
      * @param storage  Storage to save to.
+     * @return Response to user input.
      * @throws BiscuitException Invalid input by user.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException {
         if (userInputs.length == 2) {
             Task task;
             switch (userInputs[0]) {
@@ -54,8 +55,8 @@ public class AddCommand extends biscuit.commands.Command {
             }
             taskList.addTask(task);
             storage.save();
-            ui.showMessage("Got it. I've added this task:\n\t" + task
-                    + "\nNow you have " + taskList.size() + " tasks in the list.");
+            return "Got it. I've added this task:\n\t" + task
+                    + "\nNow you have " + taskList.size() + " tasks in the list.";
         } else {
             throw new BiscuitException("໒(◉ᴥ◉)७ OOPS!!! The description of "
                     + userInputs[0] + " cannot be empty.");
