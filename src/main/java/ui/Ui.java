@@ -78,10 +78,10 @@ public class Ui {
             break;
         case "delete":
             int removedIdx = Integer.parseInt(input.trim());
-            msg = tasklist.delete(removedIdx);
+            tasklist.delete(removedIdx);
             break;
         case "find":
-            msg = tasklist.findString(input.trim());
+            tasklist.findString(input.trim());
             break;
         default:
             try {
@@ -96,12 +96,17 @@ public class Ui {
 
     /**
      * Overloaded method to manually input command
-     * @param input Command inputted
+     * @param rawInput Command inputted
      * @return String of command
      */
-    public String readCommand(String input) {
-        Scanner scanner = new Scanner(System.in);
-        String cmd = scanner.next();
+    public LogMessage readCommand(String rawInput) {
+        String[] cmdAndInput = rawInput.split(" ", 2);
+        String cmd = cmdAndInput[0];
+        String input = "";
+        if(cmdAndInput.length > 1) {
+            input = cmdAndInput[1];
+        }
+
         LogMessage msg = new LogMessage();
         Task task;
 
@@ -109,7 +114,6 @@ public class Ui {
         case "bye":
             msg = storage.save();
             Ui.exit();
-            return "bye";
         case "list":
             msg = tasklist.list();
             break;
@@ -126,7 +130,10 @@ public class Ui {
             break;
         case "delete":
             int removedIdx = Integer.parseInt(input.trim());
-            tasklist.delete(removedIdx);
+            msg = tasklist.delete(removedIdx);
+            break;
+        case "find":
+            msg = tasklist.findString(input.trim());
             break;
         default:
             try {
@@ -136,6 +143,6 @@ public class Ui {
                 System.out.println(Ui.breakline);
             }
         }
-        return input;
+        return msg;
     }
 }

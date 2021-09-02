@@ -21,4 +21,14 @@ public class LogMessage {
         }
     }
 
+    @Override
+    public String toString() {
+        String result = "";
+        for(int i = 0; i < messages.size(); i++) {
+            result += messages.get(i);
+            result += "\n";
+        }
+        return result;
+    }
+
 }

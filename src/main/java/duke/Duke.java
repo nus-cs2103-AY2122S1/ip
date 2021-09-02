@@ -17,6 +17,7 @@ public class Duke {
     private Tasklist tasklist;
     private String exitCmd = "bye";
     private LogMessage logMessage = new LogMessage();
+    private Ui ui;
 
     /**
      * Constructs Duke Object that stores information in filepath
@@ -25,6 +26,7 @@ public class Duke {
     public Duke(String filepath) {
         this.storage = new Storage(filepath);
         this.tasklist = storage.load(logMessage);
+        this.ui = new Ui(storage, tasklist);
     }
 
     /**
@@ -33,11 +35,8 @@ public class Duke {
     public Duke() {
         this.storage = new Storage(DEFAULT_ADDRESS);
         this.tasklist = storage.load(logMessage);
+        this.ui = new Ui(storage, tasklist);
     }
-
-
-
-
 
     /**
      * Run main program
@@ -45,12 +44,15 @@ public class Duke {
     public void run() {
         Ui.start();
         boolean isExit = false;
-        Ui user = new Ui(storage, tasklist);
         while (!isExit) {
-            if (user.readCommand().equals(exitCmd)) {
+            if (this.ui.readCommand().equals(exitCmd)) {
                 break;
             }
         }
+    }
+
+    public Ui getUi() {
+        return ui;
     }
 
     /**

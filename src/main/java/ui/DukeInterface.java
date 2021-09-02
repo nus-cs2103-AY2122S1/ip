@@ -21,6 +21,9 @@ public class DukeInterface extends Application {
     private Button sendButton;
     private Scene scene;
 
+    private Duke duke = new Duke();
+    private Ui ui = duke.getUi();
+
     private Image userImg = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImg = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -83,13 +86,6 @@ public class DukeInterface extends Application {
         stage.show();
     }
 
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
@@ -101,9 +97,7 @@ public class DukeInterface extends Application {
     }
 
     public String getResponse(String input) {
-        Duke duke = new Duke();
-        Ui ui = new Ui();
-
-        return "Duke: " + "ono";
+        LogMessage response = ui.readCommand(input);
+        return "Duke: " + response.toString();
     }
 }
