@@ -8,9 +8,14 @@ import java.util.Scanner;
 
 public class Storage {
 
-    protected String filePath;
     protected static File taskList;
+    protected String filePath;
 
+    /**
+     * Constructor for storage.
+     *
+     * @param filePath the file path to the text file that stores the user's tasks.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
         this.taskList = new File(filePath);
@@ -18,7 +23,7 @@ public class Storage {
 
     /**
      * Returns user's list of tasks
-     * 
+     *
      * @return Task List
      */
     public static ArrayList<Task> load() {
@@ -58,13 +63,18 @@ public class Storage {
         return list;
     }
 
-    public static void save(ArrayList<Task> list, String filePath) {
-        File taskList = new File(filePath);
+    /**
+     * Saves the users tasks to a text file.
+     *
+     * @param list the user's list of tasks.
+     */
+    public void save(ArrayList<Task> list) {
+        File taskList = new File(this.filePath);
         taskList.delete();
         try {
-            FileWriter writer = new FileWriter(filePath);
+            FileWriter writer = new FileWriter(this.filePath);
             for (int i = 0; i < list.size(); i++) {
-                File tasks = new File(filePath);
+                File tasks = new File(this.filePath);
                 Task t = list.get(i);
                 String isDone = t.isDone ? "1" : "0";
                 if (t instanceof Todo) {

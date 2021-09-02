@@ -6,6 +6,12 @@ public class Event extends Task {
     protected String at;
     protected LocalDate date;
 
+    /**
+     * Constructor for an event.
+     *
+     * @param description a description of the event.
+     * @param at the date the event is happening.
+     */
     public Event(String description, String at) {
         super(description);
         this.at = at;
@@ -15,10 +21,14 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         if (this.date != null) {
-            return "[E]" + super.toString() + " (at: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+            return "[E]" + super.toString() + " (at: "
+                    + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } else {
             return "[E]" + super.toString() + " (at: " + this.at + ")";
         }
