@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        this.startScreen();
+        dialogContainer.getChildren().add(DialogBox.getStartScreen(dukeImage));
     }
 
     public void setDuke(Duke d) {
@@ -55,17 +55,17 @@ public class MainWindow extends AnchorPane {
             DialogBox.getUserDialog(input, userImage),
             DialogBox.getDukeDialog(response, dukeImage)
         );
+        this.displayList();
         userInput.clear();
     }
 
+    /**
+     * Refreshes the current task list to show the updated one.
+     */
     @FXML
     private void displayList() {
         taskList.getItems().clear();
         String list = duke.displayList();
         taskList.getItems().addAll(list);
-    }
-
-    private void startScreen() {
-        dialogContainer.getChildren().add(DialogBox.getStartScreen(dukeImage));
     }
 }
