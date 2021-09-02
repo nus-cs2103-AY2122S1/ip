@@ -123,28 +123,29 @@ public class Parser {
     }
 
     private static Command parseDeadline(String input) throws DukeException {
-        if (input.contains("/by")) {
-            String description = input.split("/by", 2)[0].trim();
-            String dateAndTime = input.split("/by", 2)[1].trim();
 
-            if (description.isEmpty()) {
-                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-            } else if (dateAndTime.isEmpty()) {
-                throw new DukeException("OOPS!!! The deadline of a... deadline cannot be empty.");
-            }
-
-            if (isDateTime(dateAndTime)) {
-                LocalDateTime dateTimeObj = LocalDateTime.parse(dateAndTime,
-                        DateTimeFormatter.ofPattern(detectedFormat));
-                return new AddCommand(description, dateTimeObj, "deadline");
-            } else if (isDate(dateAndTime)) {
-                LocalDate dateObj = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern(detectedFormat));
-                return new AddCommand(description, dateObj, "deadline");
-            } else {
-                throw new DukeException("OOPS!!! Please enter a valid deadline!");
-            }
-        } else {
+        if (!input.contains("/by")) {
             throw new DukeException("OOPS!!! The deadline of a... deadline cannot be empty.");
+        }
+
+        String description = input.split("/by", 2)[0].trim();
+        String dateAndTime = input.split("/by", 2)[1].trim();
+
+        if (description.isEmpty()) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        } else if (dateAndTime.isEmpty()) {
+            throw new DukeException("OOPS!!! The deadline of a... deadline cannot be empty.");
+        }
+
+        if (isDateTime(dateAndTime)) {
+            LocalDateTime dateTimeObj = LocalDateTime.parse(dateAndTime,
+                DateTimeFormatter.ofPattern(detectedFormat));
+            return new AddCommand(description, dateTimeObj, "deadline");
+        } else if (isDate(dateAndTime)) {
+            LocalDate dateObj = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern(detectedFormat));
+            return new AddCommand(description, dateObj, "deadline");
+        } else {
+            throw new DukeException("OOPS!!! Please enter a valid deadline!");
         }
     }
 
@@ -171,40 +172,36 @@ public class Parser {
     }
 
     private static Command parseEvent(String input) throws DukeException {
-        if (input.contains("/at")) {
-            String description = input.split("/at", 2)[0].trim();
-            String dateAndTimeDuration = input.split("/at", 2)[1].trim();
 
-            if (description.isEmpty()) {
-                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-            } else if (dateAndTimeDuration.isEmpty()) {
-                throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
-            }
-
-            if (dateAndTimeDuration.contains(" ")) {
-                String date = dateAndTimeDuration.split(" ", 2)[0];
-                String timeDuration = dateAndTimeDuration.split(" ", 2)[1];
-
-                if (isDate(date)) {
-                    LocalDate eventDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(detectedFormat));
-
-                    if (isDuration(timeDuration)) {
-                        return new AddCommand(description, eventDate, startTime, endTime, "event");
-                    } else {
-                        throw new DukeException("OOPS!!! Please enter a valid time duration!"
-                            + " Valid formats are (HHmm-HHmm or hh:mm a-hh:mm a)");
-                    }
-                } else {
-                    throw new DukeException("OOPS!!! Please enter a valid date in duration!");
-                }
-            } else {
-                throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
-            }
-        } else {
+        if (!input.contains("/at")) {
             throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
         }
-    }
 
+        String description = input.split("/at", 2)[0].trim();
+        String dateAndTimeDuration = input.split("/at", 2)[1].trim();
+
+        if (description.isEmpty()) {
+            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+        }
+
+        if (!dateAndTimeDuration.contains(" ")) {
+            throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
+        }
+        String date = dateAndTimeDuration.split(" ", 2)[0];
+        String timeDuration = dateAndTimeDuration.split(" ", 2)[1];
+
+        if (!isDate(date)) {
+            throw new DukeException("OOPS!!! Please enter a valid date in duration!");
+        }
+
+        LocalDate eventDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(detectedFormat));
+        if (isDuration(timeDuration)) {
+            return new AddCommand(description, eventDate, startTime, endTime, "event");
+        } else {
+            throw new DukeException("OOPS!!! Please enter a valid time duration!"
+                + " Valid formats are (HHmm-HHmm or hh:mm a-hh:mm a)");
+        }
+    }
     /**
      * This method reads the stored String of text file in the Hard Disk which corresponds to a
      * Event type task and transforms it into an Event task object.
