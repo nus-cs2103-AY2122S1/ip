@@ -14,14 +14,14 @@ public class MarkDoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = tasks.getTask(this.taskNo - 1);
         if (task.getCompletionStatus()) {
-            ui.showTaskDone(task);
+            return ui.showTaskDone(task);
         } else {
             tasks.taskDone(this.taskNo);
             storage.rewriteTaskRecord(tasks);
-            ui.showMarkedDone(task);
+            return ui.showMarkedDone(task);
         }
     }
 }

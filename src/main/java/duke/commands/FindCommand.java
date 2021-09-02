@@ -1,13 +1,12 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 
 public class FindCommand extends Command {
     private String searchDescription;
@@ -17,8 +16,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         ArrayList<Task> results = tasks.findTask(this.searchDescription);
-        ui.showFindResults(results);
+        return ui.showFindResults(results);
     }
 }

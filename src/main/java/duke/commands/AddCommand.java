@@ -1,6 +1,5 @@
 package duke.commands;
 
-import duke.Duke;
 import duke.Storage;
 import duke.TaskList;
 import duke.TaskType;
@@ -21,7 +20,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
         switch (this.taskType) {
         case TODO:
@@ -38,6 +37,6 @@ public class AddCommand extends Command {
         }
         tasks.addTask(task);
         storage.appendTask(task);
-        ui.showAdded(task, tasks.getLength());
+        return ui.showAdded(task, tasks.getLength());
     }
 }

@@ -15,34 +15,20 @@ public class Duke {
         storage = new Storage("data/duke.txt", "data/");
         tasks = new TaskList(storage.load());
     }
-
-    public void run() {
-        ui.showGreeting();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = ui.getIsExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } catch (DateTimeParseException e) {
-                System.out.println("OOPS! Please input date in this format: yyyy-mm-dd");
-            }
-        }
-    }
     
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
-    public static void main(String[] args) {
-        new Duke().run();
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        } catch (DateTimeParseException e) {
+            return "OOPS! Please input date in this format: yyyy-mm-dd";
+        }
     }
 }
 

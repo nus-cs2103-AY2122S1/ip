@@ -1,9 +1,8 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
-import java.util.Scanner;
+
+import duke.tasks.Task;
 
 /**
  * Deals with Interactions with the user.
@@ -11,47 +10,28 @@ import java.util.Scanner;
  */
 public class Ui {
     private boolean isExit;
-    private static final String GREETING = "Hello! I'm Duck \n"
-            + "*quack*  >(.)__\n"
-            + "          (___/ \n"
+    static final String GREETING = "Hello! I'm Duck! *quack*\n"
             + "What can I do for you?\n";
     private static final String BYE = "Bye. Hope to see you again soon!\n"
-            + "   __(.)>   *quack*\n"
-            + "~~ \\___)\n";
-
-    private Scanner scanner;
-
-    /**
-     * Constructor for Ui object.
-     */
+            + "*quack*\n";
+    
+    /** Constructor for Ui object.*/
     public Ui() {
-        this.scanner = new Scanner(System.in);
         this.isExit = false;
-    }
-
-    /**
-     * Reads each line of command that user inputs.
-     *
-     * @return String containing command and task description.
-     */
-    public String readCommand() {
-        return scanner.nextLine();
     }
 
     /**
      * Prints greeting to users upon running.
      */
-    public void showGreeting() {
-        System.out.println(GREETING);
+    public String showGreeting() {
+        return GREETING;
     }
 
     /**
      * Prints farewell greeting after user uses 'bye' command.
      */
-    public void showBye() {
-        this.scanner.close();
-        this.isExit = true;
-        System.out.println(BYE);
+    public String showBye() {
+        return BYE;
     }
 
     /**
@@ -59,8 +39,8 @@ public class Ui {
      *
      * @param errorMessage message from errors caught.
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
@@ -82,24 +62,20 @@ public class Ui {
      * @param task     task that was added.
      * @param numTasks number of tasks in the user's tasklist.
      */
-    public void showAdded(Task task, int numTasks) {
-        System.out.println("Got it. I've added this task:\n"
-                + task.toString());
-        System.out.printf("Now you have %d tasks in your list.\n",
-                numTasks);
+    public String showAdded(Task task, int numTasks) {
+        return String.format("Got it. I've added this task: %s\nNow you have %d tasks in your list.\n",
+                 task.toString(), numTasks);
     }
 
     /**
      * Inform user that task has been deleted.
      *
      * @param deletedTask task that was deleted.
-     * @param numTask     number of remaining tasks in the user's tasklist.
+     * @param numTasks    number of remaining tasks in the user's tasklist.
      */
-    public void showDeleted(Task deletedTask, int numTask) {
-        System.out.println("Noted. I've removed this task: \n"
-                + deletedTask.toString());
-        System.out.printf("Now you have %d tasks in your list.\n",
-                numTask);
+    public String showDeleted(Task deletedTask, int numTasks) {
+        return String.format("Noted. I've removed this task: %s\nNow you have %d tasks in your list.\n",
+                deletedTask.toString(), numTasks);
     }
 
     /**
@@ -107,9 +83,9 @@ public class Ui {
      *
      * @param task task that was already done.
      */
-    public void showTaskDone(Task task) {
-        System.out.println("This task has already been completed!\n"
-                + task.toString());
+    public String showTaskDone(Task task) {
+        return "This task has already been completed!\n"
+                + task.toString();
     }
 
     /**
@@ -117,9 +93,9 @@ public class Ui {
      *
      * @param task task that was marked as done.
      */
-    public void showMarkedDone(Task task) {
-        System.out.println("Nice! I've marked this task as done: \n"
-                + task.toString());
+    public String showMarkedDone(Task task) {
+        return "Nice! I've marked this task as done: \n"
+                + task.toString();
     }
 
     /**
@@ -127,33 +103,40 @@ public class Ui {
      *
      * @param tasks user's TaskList.
      */
-    public void showList(TaskList tasks) {
+    public String showList(TaskList tasks) {
         if (tasks.taskList.isEmpty()) {
-            System.out.println("There are no duke.tasks on your list. *quack*");
+            return "There are no duke.tasks on your list. *quack*";
         } else if (tasks.getLength() == 1) {
-            System.out.println("There is one task on your list:");
-            System.out.println("1. " + tasks.getTask(0).toString());
-            System.out.println("*quack*");
+            return String.format("There is one task on your list:\n1. %s\n*quack*", 
+                    tasks.getTask(0).toString());
         } else {
-            System.out.println("Here are the duke.tasks on your list:");
+            String taskStrings = "Here are the duke.tasks on your list:\n";
             int i = 1;
             for (Task task : tasks.taskList) {
-                System.out.println(i + ". " + task.toString());
+                taskStrings += String.format("%d. %s\n", i, task.toString());
                 i++;
             }
-            System.out.println("*quack*\n");
+            taskStrings += "*quack*\n";
+            return taskStrings;
         }
     }
 
-    public void showFindResults(ArrayList<Task> results) {
+    /**
+     * Returns string of search results from user's 'find' command.
+     * @param results ArrayList of tasks that match the search term.
+     * @return String of search results.
+     */
+    public String showFindResults(ArrayList<Task> results) {
         if (results.isEmpty()) {
-            System.out.println("Sorry, I did not find any task that matches your search *sad quack*\n");
+            return "Sorry, I did not find any task that matches your search *sad quack*\n";
         } else {
-            System.out.println("Here are the tasks I found:");
+            String searchResults = "Here are the tasks I found:";
+            System.out.println();
             for (Task task : results) {
-                System.out.println(task.toString());
+                searchResults += String.format("%s\n", task.toString());
             }
-            System.out.println("*quack*\n");
+            searchResults += "*quack*\n";
+            return searchResults;
         }
     }
 }

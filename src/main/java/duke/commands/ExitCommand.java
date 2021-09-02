@@ -8,7 +8,7 @@ import duke.exceptions.DukeException;
 public class ExitCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showBye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return ui.showBye();
     }
 }
