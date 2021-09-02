@@ -23,6 +23,7 @@ public class AddCommand implements Command {
 
     /**
      * Constructor which takes in task description and a letter as task type.
+     *
      * @param description String that is the name of task.
      * @param taskType String that is a letter to describe task type.
      */
@@ -34,6 +35,7 @@ public class AddCommand implements Command {
     /**
      * Constructor which takes in task description, a letter as task type
      * and Object which is either localDate or localDateTime
+     *
      * @param description String that is the name of task.
      * @param dateObj Object that is either localDate or localDateTime.
      * @param taskType String that is a letter to describe task type.
@@ -48,6 +50,7 @@ public class AddCommand implements Command {
     /**
      * Constructor which takes in task description, a letter for task type,
      * two LocalTimes and a LocalDate.
+     *
      * @param description String that is the name of task.
      * @param localDate LocalDate type to represent due date.
      * @param startTime LocalTime to represent starting time of event.

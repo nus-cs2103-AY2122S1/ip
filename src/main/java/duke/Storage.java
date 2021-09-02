@@ -19,6 +19,7 @@ public class Storage {
     /**
      * This is a constructor for Storage which creates a text file to use as a Hard Disk
      * storage based on the file path provided.
+     *
      * @param filePath file path for creation of text file.
      */
     public Storage(String filePath) {
@@ -36,6 +37,7 @@ public class Storage {
 
     /**
      * This method takes the input String and rewrites the entire text file.
+     *
      * @param content String that is written onto the text file.
      */
     public void writeToStorage(String content) {
@@ -49,10 +51,8 @@ public class Storage {
     }
 
     /**
-     * This method makes sense of the String in the Hard Disk text file by reading every
-     * line of the file, detecting the information regarding each task stored, creating
-     * new task objects using this information and adding them into the List of Task objects
-     * that Duke bot is currently using for storage.
+     * This method makes sense of the String in the Hard Disk text file and adds stored tasks.
+     *
      * @return an ArrayList of Task objects.
      */
     public List<Task> readFromStorage() {

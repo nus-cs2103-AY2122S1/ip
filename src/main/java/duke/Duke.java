@@ -16,6 +16,7 @@ public class Duke {
     /**
      * This is a constructor for Duke bot which is necessary to run Duke
      * after putting in file path to store tasks into Hard Disk.
+     *
      * @param filePath Duke stores a text file of tasks input and loads them at the given file path.
      */
     public Duke(String filePath) {
@@ -25,6 +26,7 @@ public class Duke {
 
     /**
      * This method takes in the user input as a String and returns Duke output.
+     *
      * @param input String taken from user input.
      * @return String which Duke shows the user.
      */
@@ -41,6 +43,7 @@ public class Duke {
 
     /**
      * This is the main method to run Duke.
+     *
      * @param args Main method arguments.
      */
     public static void main(String[] args) {

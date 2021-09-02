@@ -10,6 +10,7 @@ public class DoneCommand implements Command {
 
     /**
      * Constructor which takes in index of task in TaskList to mark as done.
+     *
      * @param index
      */
     public DoneCommand(int index) {

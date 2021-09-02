@@ -15,6 +15,7 @@ public class Event extends Task {
 
     /**
      * This constructor creates an Event task type object.
+     *
      * @param input text description of Event task.
      * @param date date of occurrence of Event.
      * @param startTime start time of Event.
@@ -29,7 +30,8 @@ public class Event extends Task {
 
     /**
      * This method formats task description and duration in a user-friendly way,
-     * additionally marking the Event task type with [E]
+     * additionally marking the Event task type with [E].
+     *
      * @return String of formatted task description and deadline.
      */
     @Override

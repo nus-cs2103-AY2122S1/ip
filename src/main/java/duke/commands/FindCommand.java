@@ -11,6 +11,7 @@ public class FindCommand implements Command {
 
     /**
      * Constructor which takes in a substring to search for in descriptions of tasks.
+     *
      * @param searchString String that is the search term.
      */
     public FindCommand(String searchString) {

@@ -14,6 +14,7 @@ public class TaskList {
     /**
      * This constructor creates the initial list of tasks for Duke bot by
      * firstly loading all the tasks stored in the given Storage.
+     *
      * @param storage where all the tasks are stored on initial load.
      */
     public TaskList(Storage storage) {
@@ -22,9 +23,8 @@ public class TaskList {
     }
 
     /**
-     * This method adds the given task into the list of tasks and
-     * returns a String which is provided to the user interface to inform
-     * user that the task has been successfully added.
+     * This method adds the given task into the list of tasks.
+     *
      * @param newTask Task object provided to be put into list.
      * @return String to inform user the command is successful.
      */
@@ -37,8 +37,8 @@ public class TaskList {
 
     /**
      * This method deletes the task from the list of tasks at the given
-     * index and returns a String which is provided to the user interface to
-     * inform user that the task has been successfully deleted.
+     * index.
+     *
      * @param index the int that tells which task on the list to delete
      * @return String to inform user the command is successful.
      */
@@ -52,8 +52,8 @@ public class TaskList {
 
     /**
      * This method marks the task on the list of tasks as done at the
-     * given index and returns a String which is provided to the user interface
-     * to inform user that the task has been successfully marked as done.
+     * given index.
+     *
      * @param index the int that tells which task on the list to mark as done.
      * @return String to inform user the command is successful.
      */
@@ -68,6 +68,7 @@ public class TaskList {
     /**
      * This method searches the input string inside the list of tasks and returns
      * all the tasks containing the searchString as a list of String.
+     *
      * @param searchString String input to search.
      * @return List of String of tasks that match the search term.
      */
@@ -94,6 +95,7 @@ public class TaskList {
 
     /**
      * This method tells how many tasks are there in the task list.
+     *
      * @return number of task remaining.
      */
     public int taskCount() {
@@ -103,6 +105,7 @@ public class TaskList {
     /**
      * This method transforms the list of task into a String that lists out all
      * the tasks neatly in a numbered order in a user-friendly way.
+     *
      * @return String that lists out the tasks.
      */
     public String getList() {

@@ -10,6 +10,7 @@ public class DeleteCommand implements Command {
 
     /**
      * Constructor which takes in index of the task in TaskList to delete.
+     *
      * @param index int to represent index of task.
      */
     public DeleteCommand(int index) {

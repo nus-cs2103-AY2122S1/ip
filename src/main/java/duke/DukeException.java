@@ -7,6 +7,7 @@ public class DukeException extends IllegalArgumentException {
 
     /**
      * Constructor for DukeException.
+     *
      * @param message String to print out when Exception is thrown.
      */
     public DukeException(String message) {

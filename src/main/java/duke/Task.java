@@ -10,6 +10,7 @@ public class Task {
     /**
      * This constructor creates a Task object which contains the description of task.
      * The task can either be considered done or not according to user command.
+     *
      * @param description text description of a general task.
      */
     public Task(String description) {
@@ -27,6 +28,7 @@ public class Task {
     /**
      * This method formats task description by marking tasks that are done with a 'X' and
      * leaving it blank if the task is not considered done.
+     *
      * @return String of formatted task description and if task is marked done.
      */
     public String getDescription() {

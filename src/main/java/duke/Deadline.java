@@ -14,6 +14,7 @@ public class Deadline extends Task {
 
     /**
      * This constructor creates a Deadline type task object.
+     *
      * @param description text description of Deadline task.
      * @param dateTime due date of Deadline task.
      */
@@ -29,7 +30,8 @@ public class Deadline extends Task {
 
     /**
      * This method formats task description and date in a user-friendly way,
-     * additionally marking the Deadline task type with [D]
+     * additionally marking the Deadline task type with [D].
+     *
      * @return String of formatted task description and deadline.
      */
     @Override
