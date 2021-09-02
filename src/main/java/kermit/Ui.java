@@ -1,7 +1,5 @@
 package kermit;
 
-import java.util.Scanner;
-
 import kermit.tasks.Task;
 
 /**
@@ -16,55 +14,47 @@ public class Ui {
     private static final String goodbyeText = "Bye. Hope to see you again soon!";
     private static final String errorText = "Burp burp! Something went wrong!";
     private static final String loadingErrorText = "Could not read this file Nuuuuuuu!";
-    private Scanner sc;
 
     /**
      * Constructor for Ui.
      */
     public Ui() {
-        sc = new Scanner(System.in);
     }
+
     /**
-     * Adds a top and bottom horizontal line to text.
+     * Return message to welcome user.
      *
-     * @param text Text to be formatted.
-     * @return Formatted version of text.
-     */
-    private static String formatText(String text) {
-        String horizontalDivider = "____________________________________________________________________________";
-        return horizontalDivider + "\n" + text + "\n" + horizontalDivider;
-    }
-
-    private void formatAndPrintText(String text) {
-        System.out.println(formatText(text));
-    }
-
-    /**
-     * Pretty format and print welcome message.
+     * @return String to welcome user.
      */
     public String getIntroMessage() {
         return introductionText;
     }
 
     /**
-     * Pretty format and print exit message.
+     * Return message to exit chat.
+     *
+     * @return String to exit chat.
      */
     public String getGoodbyeMessage() {
         return goodbyeText;
     }
 
     /**
-     * Pretty format and print list items.
+     * Return message of list of items in task list.
+     * Message includes their statuses, completion status and additional information.
+     *
+     * @return Items in task list.
      */
     public String getListItems(TaskList list) {
         return listText + "\n" + list.toString();
     }
 
     /**
-     * Pretty format text when task is added.
+     * Return message when task is added.
      *
      * @param task Task that is added to list.
      * @param list List that task was added to.
+     * @return Message to send user when task is added.
      */
     public String getAddTaskMessage(Task task, TaskList list) {
         return "Got it. I've added this task:\n"
@@ -72,10 +62,11 @@ public class Ui {
     }
 
     /**
-     * Pretty format text when task is deleted.
+     * Returns message when task is deleted.
      *
      * @param task Task that is deleted from list.
      * @param list List that task was deleted from.
+     * @return Message to send user when task is deleted.
      */
     public String getDeleteTaskMessage(Task task, TaskList list) {
         return "Noted. I've removed this task:\n"
@@ -83,43 +74,40 @@ public class Ui {
     }
 
     /**
-     * Pretty format text when task is completed.
+     * Returns message when task is completed.
      *
      * @param task Task that is completed.
+     * @return Message to send user when task is added.
      */
     public String getCompleteTaskMessage(Task task) {
         return completeTaskText + "\n" + task;
     }
 
     /**
-     * Pretty format text error.
+     * Returns error message.
      *
      * @param e Error message.
+     * @return Error message.
      */
     public String getErrorMessage(String e) {
         return errorText + "\n" + e;
     }
 
     /**
-     * Pretty format text error when loading file.
+     * Return error message when loading save file.
+     *
+     * @return Error message.
      */
     public String getLoadingError() {
         return loadingErrorText;
     }
 
     /**
-     * Pretty format tasks that match filter.
+     * Return message for tasks that match filter.
+     *
+     * @return String of tasks that match filter
      */
     public String getFilteredTasks(TaskList filteredTasks) {
         return filteredTaskText + "\n" + filteredTasks;
-    }
-
-    /**
-     * Reads user input.
-     *
-     * @return user input.
-     */
-    public String readCommand() {
-        return sc.nextLine();
     }
 }
