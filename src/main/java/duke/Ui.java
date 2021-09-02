@@ -1,141 +1,119 @@
 package duke;
 
 /**
- * Ui is the class that deals with all output to the user.
+ * Ui is the class that deals with all output messages to the user.
  */
 public class Ui {
-    private static final String LOGO = " ____        _        \n"
-                              + "|  _ \\ _   _| | _____ \n"
-                              + "| | | | | | | |/ / _ \\\n"
-                              + "| |_| | |_| |   <  __/\n"
-                              + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String DUKE_HEADER = "\nDuke:";
-    private static final String USER_HEADER = "\nUser:";
 
     /**
-     * Class constructor.
+     * Returns the message when the program is ready to accept user commands.
+     *
+     * @return A String object containing the start-up message.
      */
-    public Ui() {
-        printStartUpMessage();
+    public String printStartInteractionsMessage() {
+        return "Hello, I'm Duke. What may I do for you?";
     }
 
     /**
-     * Prints the message when starting up the program.
-     */
-    public void printStartUpMessage() {
-        System.out.println("Hello from\n" + LOGO);
-    }
-
-    /**
-     * Prints the message when the program is ready to accept user commands.
-     */
-    public void printStartInteractionsMessage() {
-        System.out.println(DUKE_HEADER + "Hi, what do you want from me?");
-    }
-
-    /**
-     * Prints the message when waiting for the user's next command.
-     */
-    public void printWaitingUserInput() {
-        System.out.print(USER_HEADER);
-    }
-
-    /**
-     * Prints the current list of tasks.
+     * Returns a printout the current list of tasks.
      *
      * @param tasks The TaskList containing all the current tasks.
+     * @return A String object containing the text printout of the TaskList.
      */
-    public void printTaskList(TaskList tasks) {
+    public String printTaskList(TaskList tasks) {
+        StringBuilder taskListSummary = new StringBuilder();
+        taskListSummary.append("Current list of tasks:\n");
         for (int i = 1; i <= tasks.getSize(); i++) {
-            System.out.printf("\t\t%d.%s\n", i, tasks.getTask(i));
+            taskListSummary.append(String.format("\t%d.%s\n", i, tasks.getTask(i)));
         }
-        System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
+        taskListSummary.append("Now you have " + tasks.getSize() + " tasks in the list.");
+        return taskListSummary.toString();
     }
 
     /**
-     * Prints the message when the program has added a task to the list.
+     * Returns the message when the program has added a task to the list.
      *
      * @param tasks The TaskList containing all the current tasks.
      * @param newTask The task that was added to the list.
+     * @return A String object containing the message.
      */
-    public void printAddTask(TaskList tasks, Task newTask) {
-        System.out.println(DUKE_HEADER + "\n\tAdded:\n\t\t" + newTask);
-        System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
+    public String printAddTask(TaskList tasks, Task newTask) {
+        return "Added:\n\t" + newTask + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
-     * Prints the message when the program has marked a task as completed.
+     * Returns the message when the program has marked a task as completed.
      *
      * @param completedTask The task that was marked as completed.
+     * @return A String object containing the message.
      */
-    public void printCompleteTask(Task completedTask) {
-        System.out.println(DUKE_HEADER + "\n\tMarking task as completed:");
-        System.out.printf("\t\t%s\n", completedTask);
+    public String printCompleteTask(Task completedTask) {
+        return "Marking task as completed:\n"
+                + "\t" + completedTask;
     }
 
     /**
-     * Prints the message when the program has deleted a task from the list.
+     * Returns the message when the program has deleted a task from the list.
      *
      * @param tasks The TaskList containing all the current tasks.
      * @param deletedTask The task that was deleted from the list.
+     * @return A String object containing the message.
      */
-    public void printDeleteTask(TaskList tasks, Task deletedTask) {
-        System.out.println(DUKE_HEADER + "\n\tRemoving task:");
-        System.out.printf("\t\t%s\n", deletedTask);
-        System.out.println("\tNow you have " + tasks.getSize() + " tasks in the list.");
+    public String printDeleteTask(TaskList tasks, Task deletedTask) {
+        return "Removing task:\n"
+                + "\t" + deletedTask + "\n"
+                + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
-     * Prints a list of tasks whose names contain the subject.
+     * Returns a printout of the list of tasks whose names contain the subject.
      *
      * @param tasks The TaskList containing all the current tasks.
      * @param subject The keyword that is being searched for.
+     * @return A String object containing the printout of the search results.
      */
-    public void printTasksWithSubject(TaskList tasks, String subject) {
+    public String printTasksWithSubject(TaskList tasks, String subject) {
+        StringBuilder searchResults = new StringBuilder();
         int numOfResults = 0;
-        System.out.println("\tTasks with \"" + subject + "\":");
+        searchResults.append("Tasks with \"" + subject + "\":\n");
         for (int i = 1; i <= tasks.getSize(); i++) {
             if (tasks.getTask(i).getTaskName().contains(subject)) {
                 numOfResults++;
-                System.out.printf("\t\t%d.%s\n", i, tasks.getTask(i));
+                searchResults.append(String.format("\t%d.%s\n", i, tasks.getTask(i)));
             }
         }
 
         if (numOfResults == 0) {
-            System.out.println("\n\tNo results found.");
+            searchResults.append("\nNo results found.");
         } else if (numOfResults == 1) {
-            System.out.println("\tTotal of 1 result found.");
+            searchResults.append("Total of 1 result found.");
         } else {
-            System.out.println("\tTotal of " + numOfResults + " results found.");
+            searchResults.append("Total of " + numOfResults + " results found.");
         }
+        return searchResults.toString();
     }
 
     /**
-     * Prints the message when the program has loaded the list of tasks
+     * Returns the message when the program has loaded the list of tasks
      * from a previous save file.
      *
      * @param tasks The TaskList containing all the current tasks
      *             that was loaded.
+     * @return A String object containing the message.
      */
-    public void printLoadTasks(TaskList tasks) {
-        System.out.println(DUKE_HEADER + "I have loaded your past tasks list!");
-        printTaskList(tasks);
+    public String printLoadTasks(TaskList tasks) {
+        return "I have loaded your past tasks list!\n"
+                + printTaskList(tasks);
     }
 
     /**
-     * Prints the error message when the program encountered an error.
+     * Returns the error message when the program encountered an error.
      *
      * @param message The error message from the exception.
+     * @return A String object containing the error message.
      */
-    public void printErrorMessage(String message) {
-        System.out.println(DUKE_HEADER);
-        System.out.println("\tError: " + message + ".");
-    }
-
-    /**
-     * Prints the message when the program is being exited.
-     */
-    public void printExitMessage() {
-        System.out.println(DUKE_HEADER + "Bye. Have a nice day.");
+    public String printErrorMessage(String message) {
+        return "Error: " + message + ".";
     }
 }
