@@ -48,7 +48,7 @@ public class Event extends Task {
         this.at = at;
         this.atDate = atDate;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -67,8 +67,8 @@ public class Event extends Task {
     @Override
     public String toBackupFormat() {
         return String.format(
-                "E | %s | %s | %s | ", 
-                super.toBackupFormat(), 
+                "E | %s | %s | %s | ",
+                super.toBackupFormat(),
                 at == null ? "" : at,
                 atDate == null ? "" : atDate.format(DATE_TIME_FORMAT)
         );

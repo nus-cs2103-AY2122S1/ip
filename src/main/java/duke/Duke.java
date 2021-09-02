@@ -20,15 +20,14 @@ public class Duke {
                                                         + "Now you have %d %s in the list.\n";
     private static final String MARK_DONE_MSG_TEMPLATE = "Nice! I've marked this task as done: \n  %s\n";
     private static final String UNEXPECTED_ERROR_MSG = "Something went wrong";
+
     private static final DateTimeParser dateTimeParser = new DateTimeParser(
-            new String[] {"yyyy-MM-dd", "d/M/yyyy"});
-    
+        new String[] {"yyyy-MM-dd", "d/M/yyyy"});
     private final Scanner scanner;
     private final Storage taskStorage;
     private final TaskList tasks;
     private final Ui ui;
     private final CommandParser commandParser;
-    
     private Duke(String path) throws IOException {
         scanner = new Scanner(System.in);
         taskStorage = new Storage(path);
@@ -36,7 +35,6 @@ public class Duke {
         ui = new Ui();
         commandParser = new CommandParser();
     }
-    
     private void greet() {
         ui.show(GREETING_MSG);
     }
@@ -49,8 +47,8 @@ public class Duke {
     private void addTodo(Todo taskToAdd) throws IOException {
         ui.showf(
                 ADD_TASK_MSG_TEMPLATE,
-                tasks.addTask(taskToAdd), 
-                tasks.getTaskCount(), 
+                tasks.addTask(taskToAdd),
+                tasks.getTaskCount(),
                 tasks.getTaskCount() <= 1 ? "task" : "tasks"
         );
         taskStorage.backup(tasks);
@@ -96,7 +94,7 @@ public class Duke {
         );
         taskStorage.backup(tasks);
     }
-    
+
     private void findTask(String s) {
         ui.show(FIND_TASK_MSG);
         ui.showf(tasks.findTask(s).toString());
@@ -136,13 +134,15 @@ public class Duke {
         case "find":
             findTask(cmd[1]);
             break;
+        default:
+            break;
         }
     }
 
 
     /**
      * Starts the duke application.
-     * 
+     *
      * @param args Ignored arguments.
      */
     public static void main(String[] args) {
