@@ -10,7 +10,7 @@ abstract public class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " ");
     }
 
     @Override
@@ -22,7 +22,7 @@ abstract public class Task {
         return this.description;
     }
 
-    public void markAsDone() {
+    public void setDone() {
         this.isDone = true;
         System.out.println("Nice! I've marked this task as done: \n" + this.toString());
     }

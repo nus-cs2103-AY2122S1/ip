@@ -35,8 +35,7 @@ public class Ui {
 
     public void removeTaskFromList(Task task, int size) {
         String taskToString = task.toString();
-        System.out.println("Noted. I've removed this task: \n" +
-                taskToString
+        System.out.println("Noted. I've removed this task: \n" + taskToString
                 + "\nNow you have " + size + " tasks in the list.");
     }
 

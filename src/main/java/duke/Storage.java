@@ -1,6 +1,10 @@
 package duke;
 
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,7 +43,7 @@ public class Storage {
             } else if (type == "deadline") {
                 writer.println("D" + (ls.getTask(i).isDone() ? " | 1 | " : " | 0 | ")
                         + desc + " | " + addOns);
-            } else if (type == "event") {
+            } else {
                 writer.println("E" + (task.isDone() ? " | 1 | " : " | 0 | ")
                         + desc + " | " + addOns);
             }
