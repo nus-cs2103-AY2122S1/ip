@@ -72,13 +72,13 @@ public class Deadline extends Task {
      * @return A string representation of a deadline for saving to files.
      */
     @Override
-    public String saveToFile() {
+    public String toFileStringFormat() {
         String[] dateTime = this.by.split(" ");
         if (dateTime.length == 1 && dateTime[0].length() == 5) {
             //user only entered time. so save task date (default)
-            return "D " + super.saveToFile() + " | " + this.date.toString() + " " + this.by;
+            return "D " + super.toFileStringFormat() + " | " + this.date.toString() + " " + this.by;
         } else {
-            return "D " + super.saveToFile() + " | " + this.by;
+            return "D " + super.toFileStringFormat() + " | " + this.by;
         }
     }
 

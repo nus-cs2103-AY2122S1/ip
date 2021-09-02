@@ -36,9 +36,9 @@ class TaskTest {
     @Test
     void testSaveToFile() {
         Task task = new Task("testSaveToFile");
-        assertEquals("| 0 | testSaveToFile", task.saveToFile());
+        assertEquals("| 0 | testSaveToFile", task.toFileStringFormat());
 
         task.setIsDone(true);
-        assertEquals("| 1 | testSaveToFile", task.saveToFile());
+        assertEquals("| 1 | testSaveToFile", task.toFileStringFormat());
     }
 }

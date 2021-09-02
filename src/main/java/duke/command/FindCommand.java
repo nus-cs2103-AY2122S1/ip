@@ -37,7 +37,7 @@ public class FindCommand extends Command {
             return ui.showError("Error! Please search for a keyword.");
         } else {
             String keyword = command.substring(inputValues[0].length() + 1).strip();
-            return taskList.searchAndDisplay(keyword);
+            return taskList.search(keyword);
         }
     }
 }

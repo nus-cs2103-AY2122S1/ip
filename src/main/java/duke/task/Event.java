@@ -72,13 +72,13 @@ public class Event extends Task {
      * @return A string representation of an event for saving to files.
      */
     @Override
-    public String saveToFile() {
+    public String toFileStringFormat() {
         String[] dateTime = this.at.split(" ");
         if (dateTime.length == 1 && dateTime[0].length() == 5) {
             //user only entered time. so save task date (default)
-            return "E " + super.saveToFile() + " | " + this.date.toString() + " " + this.at;
+            return "E " + super.toFileStringFormat() + " | " + this.date.toString() + " " + this.at;
         } else {
-            return "E " + super.saveToFile() + " | " + this.at;
+            return "E " + super.toFileStringFormat() + " | " + this.at;
         }
     }
 

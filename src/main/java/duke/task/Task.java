@@ -64,7 +64,7 @@ public class Task {
      *
      * @return A string representation of a task for saving to files.
      */
-    public String saveToFile() {
+    public String toFileStringFormat() {
         return "| " + (getIsDone() ? "1" : "0") + " | " + description;
     }
 

@@ -50,7 +50,7 @@ public class Storage {
         FileWriter fileWriter = new FileWriter(this.file);
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
-            String str = taskList.get(i).saveToFile() + "\n";
+            String str = taskList.get(i).toFileStringFormat() + "\n";
             sb.append(str);
         }
         fileWriter.write(sb.toString());

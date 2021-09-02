@@ -38,7 +38,7 @@ public class ToDo extends Task {
      * @return A string representation of a to-do to be displayed to users.
      */
     @Override
-    public String saveToFile() {
-        return "T " + super.saveToFile();
+    public String toFileStringFormat() {
+        return "T " + super.toFileStringFormat();
     }
 }

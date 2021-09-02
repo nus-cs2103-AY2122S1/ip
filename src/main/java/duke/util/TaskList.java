@@ -96,7 +96,7 @@ public class TaskList {
      * @param keyword The keyword to search for.
      * @return A string representing all tasks that match the keyword.
      */
-    public String searchAndDisplay(String keyword) {
+    public String search(String keyword) {
         ArrayList<Task> temp = new ArrayList<>();
         for (int i = 0; i < size(); i++) {
             if (get(i).getDescription().contains(keyword)) {
@@ -133,7 +133,7 @@ public class TaskList {
      *
      * @return A string representing all tasks in the task list.
      */
-    public String showList() {
+    public String getList() {
         if (size() == 0) {
             return "There are no tasks in your list currently!";
         } else {
