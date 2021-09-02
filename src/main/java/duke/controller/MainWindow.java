@@ -7,13 +7,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import duke.Duke;
+
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
-public class MainWindow extends AnchorPane {
+public class MainWindow extends Stage {
+    @FXML
+    private AnchorPane anchorPane;
     @FXML
     private ScrollPane scrollPane;
     @FXML
