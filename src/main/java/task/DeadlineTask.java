@@ -39,7 +39,7 @@ public class DeadlineTask extends Task {
      *
      * Takes no parameters.
      *
-     * @return A String enumerating this Task object.
+     * @return A String enumerating this DeadlineTask object.
      */
     @Override
     public String getTaskState() {
@@ -50,6 +50,8 @@ public class DeadlineTask extends Task {
      * Returns the storage format of this DeadlineTask object.
      *
      * Takes no parameters.
+     *
+     * @return A String representation of the DeadlineTask object, formatted for storage inside local hard disk.
      */
     @Override
     public String convertToStorageFormat() {

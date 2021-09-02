@@ -41,11 +41,11 @@ public class Parser {
 
             return new TodoCommand(input);
 
-        } else if (input.startsWith("deadline ") && input.contains("/by ")) {
+        } else if (input.startsWith("deadline ") && input.contains(" /by ")) {
 
             return new DeadlineCommand(input);
 
-        } else if (input.startsWith("event ") && input.contains("/at ")) {
+        } else if (input.startsWith("event ") && input.contains(" /at ")) {
 
             return new EventCommand(input);
 

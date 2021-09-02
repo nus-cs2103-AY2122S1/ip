@@ -28,13 +28,13 @@ public class EventCommand extends Command {
      *
      * @param list The list of tasks to be modified by the command.
      * @param ui The UI of Duke to be invoked by the command.
-     * @return A response according to the input given by the user.
+     * @return A String representation of Duke's response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
     public String execute(TaskList list, UserInterface ui) throws DukeException {
 
         int position = input.indexOf("/at");
-        String newTask = input.substring(6, position);
+        String newTask = input.substring(6, position - 1);
         String newTime = input.substring(position + 4);
         if (newTask.length() == 0) {
             throw new DukeException("The description of an event cannot be empty. Please try again!");

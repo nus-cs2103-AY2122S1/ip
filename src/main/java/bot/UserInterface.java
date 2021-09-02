@@ -27,23 +27,28 @@ public class UserInterface {
     }
 
     /**
-     * Shows the error message given to the user.
+     * Returns the formatted error message to be displayed to the user.
      *
      * @param error The error message to be shown to the user.
+     * @return A String representation of the error.
      */
     public String showError(String error) {
         return error;
     }
 
     /**
-     * Shows the error message to the user, specifically when local data is not found.
+     * Returns the formatted error message to be displayed to the user, specifically when local data is not found.
+     *
+     * @return A String representation of the error.
      */
     public String showStorageLoadingError() {
         return "Creating a new storage for you...";
     }
 
     /**
-     * Shows the welcome message to the user.
+     * Returns the welcome message to be displayed to the user.
+     *
+     * @return A String representation of the Welcome message.
      */
     public String showWelcomeMessage() {
         return "Hello! My name is Duke!\n\n"
@@ -56,24 +61,57 @@ public class UserInterface {
     }
 
     /**
-     * Shows the exit message to the user.
+     * Returns the exit message to be displayed to the user.
+     *
+     * @return A String representation of the Exit message.
      */
     public String showExitMessage() {
         return "Bye... Hope to see you again soon!";
     }
 
-    public String showTaskDone(String task) {
-        return "Great! I've marked the following task as done:\n" + task;
+    /**
+     * Returns the message to be displayed to the user when a task is marked as done.
+     *
+     * @param task The task marked as done, and to be displayed to the user.
+     * @param index The index of the task inside the task list.
+     * @return A String representation of the message.
+     */
+    public String showTaskDone(String task, int index) {
+        return "Great! I've marked the following task as done:\n" + index + ". " + task;
     }
 
+    /**
+     * Returns the message to be displayed to the user when a list of tasks that matches the user's query is found.
+     *
+     * @param foundTasks A String representation of the list of tasks found that match the user's query.
+     * @return A String representation of the message.
+     */
     public String showTaskFound(String foundTasks) {
-        return "Here are the matching tasks in your list:\n\n" + foundTasks + "\nHope you found what you were looking for!";
+        if (foundTasks.equals("")) {
+            return "It looks like there are no tasks matching that...";
+        } else {
+            return "Here are the matching tasks in your list:\n\n"
+                    + foundTasks
+                    + "\nHope you found what you were looking for!";
+        }
     }
 
+    /**
+     * Returns the message to be displayed to the user when a task is deleted.
+     *
+     * @param deletedTask The task deleted, and to be displayed to the user.
+     * @return A String representation of the message.
+     */
     public String showTaskDeleted(String deletedTask) {
         return "Noted. I've removed the following task:\n\n" + deletedTask;
     }
 
+    /**
+     * Returns the message to be displayed to the user when a task is deleted.
+     *
+     * @param tasks A String representation of the list of tasks stored by Duke.
+     * @return A String representation of the message.
+     */
     public String showTaskList(String tasks) {
         return tasks;
     }
@@ -85,6 +123,7 @@ public class UserInterface {
      * @param type   The type id. Todo: 1, Deadline: 2, Event: 3.
      * @param length The current length of the list.
      * @param time   The information regarding the task (In the format of "(By: ...)" or "(At: ...)", or "" for Todos)
+     * @return A String representation of the message.
      */
     public String showTaskAdded(String input, int type, int length, String time) {
 
@@ -114,9 +153,9 @@ public class UserInterface {
 
         String taskTime =
             type == 2
-                ? "(By: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
+                ? " (By: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
                 : type == 3
-                    ? "(At: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
+                    ? " (At: " + LocalDateTime.parse(time, inputFormatter).format(outputFormatter) + ")"
                     : "";
 
         // Return the message accordingly

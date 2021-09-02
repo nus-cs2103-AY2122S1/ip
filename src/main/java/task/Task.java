@@ -90,6 +90,8 @@ public class Task {
      * Returns the storage format of this Task object.
      *
      * Takes no parameters.
+     *
+     * @return A String representation of the Task object, formatted for storage inside local hard disk.
      */
     public String convertToStorageFormat() {
         return "";

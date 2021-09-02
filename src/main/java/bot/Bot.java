@@ -77,13 +77,13 @@ public class Bot extends Application {
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
+        stage.setResizable(true);
+        stage.setMinHeight(960.0);
+        stage.setMinWidth(640.0);
 
-        mainLayout.setPrefSize(400.0, 600.0);
+        mainLayout.setPrefSize(640.0, 960.0);
 
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(625.0, 895.0);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
@@ -93,7 +93,7 @@ public class Bot extends Application {
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
-        userInput.setPrefWidth(325.0);
+        userInput.setPrefWidth(565.0);
 
         sendButton.setPrefWidth(55.0);
 
@@ -120,8 +120,9 @@ public class Bot extends Application {
 
     /**
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
+     * @return A Label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
         // You will need to import `javafx.scene.control.Label`.
@@ -132,9 +133,11 @@ public class Bot extends Application {
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply.
+     * Appends them afterwards to the dialog container.
+     * Clears the user input after processing.
+     *
+     * Takes no parameters.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
@@ -147,8 +150,10 @@ public class Bot extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the response from Duke.
+     *
+     * @param input The user input given to Duke.
+     * @return A String representation of Duke's response to the input given.
      */
     public String getResponse(String input) {
         try {

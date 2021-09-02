@@ -25,18 +25,21 @@ public class DoneCommand extends Command {
      *
      * @param list The list of tasks to be modified by the command.
      * @param ui The UI of Duke to be invoked by the command.
-     * @return A response according to the input given by the user.
+     * @return A String representation of Duke's response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
     public String execute(TaskList list, UserInterface ui) throws DukeException {
         try {
 
             int index = Integer.parseInt(input.substring(5)) - 1;
+            if (index > list.getSize() || index <= 0) {
+                throw new DukeException("That task doesn't exist. Please try again!");
+            }
             Task newTask = list.getTask(index);
             newTask.markAsDone();
             list.setTask(index, newTask);
             Storage.save(list);
-            return ui.showTaskDone(list.getTask(index).getTaskState());
+            return ui.showTaskDone(list.getTask(index).getTaskState(), index);
 
         } catch (NumberFormatException e) {
             throw new DukeException(

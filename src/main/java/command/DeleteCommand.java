@@ -25,13 +25,16 @@ public class DeleteCommand extends Command {
      *
      * @param list The list of tasks to be modified by the command.
      * @param ui The UI of Duke to be invoked by the command.
-     * @return A response according to the input given by the user.
+     * @return A String representation of Duke's response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
     public String execute(TaskList list, UserInterface ui) throws DukeException {
         try {
 
             int index = Integer.parseInt(input.substring(7)) - 1;
+            if (index > list.getSize() || index <= 0) {
+                throw new DukeException("That task doesn't exist. Please try again!");
+            }
             Task removedTask = list.getTask(index);
             list.removeTask(index);
             Storage.save(list);

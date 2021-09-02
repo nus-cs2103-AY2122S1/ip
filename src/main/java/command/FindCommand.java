@@ -24,7 +24,7 @@ public class FindCommand extends Command {
      *
      * @param list The list of tasks to be modified by the command.
      * @param ui The UI of Duke to be invoked by the command.
-     * @return A response according to the input given by the user.
+     * @return A String representation of Duke's response according to the input given by the user.
      * @throws DukeException if the input given is not of the correct format.
      */
     public String execute(TaskList list, UserInterface ui) throws DukeException {
@@ -43,6 +43,7 @@ public class FindCommand extends Command {
                             + "\n";
                 }
             }
+
             return ui.showTaskFound(tasks);
         }
     }

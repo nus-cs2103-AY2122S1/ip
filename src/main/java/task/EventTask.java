@@ -39,7 +39,7 @@ public class EventTask extends Task {
      *
      * Takes no parameters.
      *
-     * @return A String enumerating this Task object.
+     * @return A String enumerating this EventTask object.
      */
     @Override
     public String getTaskState() {
@@ -50,6 +50,8 @@ public class EventTask extends Task {
      * Returns the storage format of this EventTask object.
      *
      * Takes no parameters.
+     *
+     * @return A String representation of the EventTask object, formatted for storage inside local hard disk.
      */
     @Override
     public String convertToStorageFormat() {
