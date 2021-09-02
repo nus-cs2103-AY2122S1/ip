@@ -110,6 +110,9 @@ public class TaskList {
         try {
             formattedTasks.forEach(formattedTask -> {
                 String[] contents = formattedTask.split(" \\| ", 4);
+                // Asserts that the task can be split to 3 or 4 parts by | symbol.
+                assert contents.length >= 3 && contents.length <= 4
+                        : "☹ OOPS!!! Task cannot be split to 3 or 4 parts by | symbol.";
                 String taskID = contents[0];
                 String isDone = contents[1];
                 String name = contents[2];
@@ -119,6 +122,9 @@ public class TaskList {
                     addTask(todo);
                     break;
                 case Deadline.ID:
+                    // Asserts that the task can be split to 4 parts by | symbol.
+                    assert contents.length == 4
+                            : "☹ OOPS!!! Task cannot be split to 4 parts by | symbol.";
                     String byTime = contents[3];
                     Deadline deadline = new Deadline(
                             name,
@@ -128,9 +134,20 @@ public class TaskList {
                     addTask(deadline);
                     break;
                 case Event.ID:
+                    // Asserts that the task can be split to 4 parts by | symbol.
+                    assert contents.length == 4
+                            : "☹ OOPS!!! Task cannot be split to 4 parts by | symbol.";
                     String atTime = contents[3];
                     String[] dateTimes = atTime.split(" ", 2);
                     String[] times = dateTimes[1].split("-", 2);
+                    // Asserts that the dateTimes can be split to 2 parts by space.
+                    // The first part is date, the second part is times.
+                    assert dateTimes.length == 2
+                            : "☹ OOPS!!! DateTimes cannot be split to 2 parts by space.";
+                    // Asserts that the times can be split to 2 parts by - symbol.
+                    // The first part is startTime, the second part is endTime.
+                    assert times.length == 2
+                            : "☹ OOPS!!! Times cannot be split to 2 parts by - symbol.";
                     String atDate = dateTimes[0];
                     String startTime = times[0];
                     String endTime = times[1];

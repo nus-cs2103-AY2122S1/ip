@@ -118,6 +118,8 @@ public class Storage {
         case DEADLINE:
             try {
                 String[] taskDetails = Parser.extractTaskDetails(description, " /by ");
+                assert taskDetails.length == 2
+                        : "☹ OOPS!!! TaskDetails cannot be split to 2 parts.";
                 String taskName = taskDetails[0];
                 LocalDateTime byDateTime = Parser.extractDeadlineDateTime(taskDetails[1]);
                 Deadline deadline = new Deadline(taskName, byDateTime);
@@ -134,6 +136,8 @@ public class Storage {
         case EVENT:
             try {
                 String[] taskDetails = Parser.extractTaskDetails(description, " /at ");
+                assert taskDetails.length == 2
+                        : "☹ OOPS!!! TaskDetails cannot be split to 2 parts.";
                 String taskName = taskDetails[0];
                 EventDateTime eventDateTime = Parser
                         .extractEventDatetime(taskDetails[1], " ");
