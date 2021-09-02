@@ -22,7 +22,7 @@ public class TaskTest {
         Task event = Task.createTask("Find magic potion", Task.Type.TODO);
         Assertions.assertEquals(
             "false--|--T--|--Find magic potion--|--",
-            event.taskToString()
+            event.convertToDatabaseFormat()
         );
     }
 

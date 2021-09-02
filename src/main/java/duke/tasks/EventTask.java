@@ -55,13 +55,13 @@ public class EventTask extends Task {
     }
 
     @Override
-    public String taskToString() {
+    public String convertToDatabaseFormat() {
         String dates = String.format(
                 "%s - %s",
                 DateParser.toDatabaseFormat(this.startDateTime),
                 DateParser.toDatabaseFormat(this.startDateTime)
         );
-        return super.taskToString() + dates;
+        return super.convertToDatabaseFormat() + dates;
     }
 
     @Override

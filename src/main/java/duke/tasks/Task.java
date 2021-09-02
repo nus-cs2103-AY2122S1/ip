@@ -55,15 +55,15 @@ public class Task {
      * Converts string (as stored in database) to a task.
      * Throws an error if there is an issue parsing the string.
      *
-     * @param stringifiedTask task in string form read from last save.
+     * @param taskInDatabaseForm task in string form read from last save.
      * @return Task object
      */
-    public static Task stringToTask(String stringifiedTask) {
+    public static Task parseTaskFromDatabase(String taskInDatabaseForm) {
         // {isComplete}|{type}|{description}|{date or dates or blank}
-        String[] taskAttributes = stringifiedTask.split(Pattern.quote(DELIMITER));
+        String[] taskAttributes = taskInDatabaseForm.split(Pattern.quote(DELIMITER));
         if (taskAttributes.length < 3 || taskAttributes.length > 4) {
             throw new IllegalArgumentException(
-                "This task is not correctly stringified. - " + stringifiedTask
+                "This string could not be parsed into a task. - " + taskInDatabaseForm
             );
         }
 
@@ -94,7 +94,7 @@ public class Task {
             break;
         default:
             throw new IllegalArgumentException(
-                "This task is not correctly stringified. - " + stringifiedTask
+                "This string could not be parsed into a task. - " + taskInDatabaseForm
             );
         }
 
@@ -107,7 +107,7 @@ public class Task {
      *
      * @return String representation of the task to be saved in database.
      */
-    public String taskToString() {
+    public String convertToDatabaseFormat() {
         String type;
         switch (this.type) {
         case EVENT:
