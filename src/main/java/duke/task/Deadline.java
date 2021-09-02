@@ -27,6 +27,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) throws CommandParamException {
         super(description);
+        assert !by.equals("") : "Deadline \"by\" field cannot be empty!";
+        assert !description.equals("") : "Deadline \"description\" field cannot be empty!";
         String[] dateTime = by.trim().split(" ");
         //index 0 is date, 1 is time
         //date should be yyyy-mm-dd, time should be 2359...
