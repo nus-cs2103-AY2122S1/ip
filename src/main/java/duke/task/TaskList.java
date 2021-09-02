@@ -1,9 +1,5 @@
 package duke.task;
 
-// import duke packages
-import duke.DukeException;
-import duke.util.Parser;
-
 // import java packages
 import java.util.ArrayList;
 

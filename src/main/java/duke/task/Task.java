@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.DukeException;
-
 /**
  * Outlines a general task.
  */

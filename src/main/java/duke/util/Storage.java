@@ -1,12 +1,5 @@
 package duke.util;
 
-// import duke packages
-import duke.DukeException;
-import duke.command.Deadline;
-import duke.command.Event;
-import duke.command.Todo;
-import duke.task.Task;
-
 // import java packages
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,13 +8,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+// import duke packages
+import duke.DukeException;
+import duke.command.Deadline;
+import duke.command.Event;
+import duke.command.Todo;
+import duke.task.Task;
+
 /**
  * Stores the tasks in an external file.
  * Allows for saving and loading tasks.
  */
 public class Storage {
-    protected String filePath = "data/duke.txt";
     protected static File f;
+    protected String filePath = "data/duke.txt";
 
     /**
      * Creates a Storage for Duke chatbot.
@@ -63,8 +63,8 @@ public class Storage {
     /**
      * Load tasks from storage.
      *
-     * @throws DukeException If unable to create a file for saving.
      * @return ArrayList of tasks saved in file.
+     * @throws DukeException If unable to create a file for saving.
      */
     public ArrayList<Task> loadTasks() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -102,7 +102,7 @@ public class Storage {
             try {
                 // create new file if not found
                 f.createNewFile();
-            } catch (IOException g){
+            } catch (IOException g) {
                 // throws error if file cannot be created
                 throw new DukeException(g.getMessage());
             }
