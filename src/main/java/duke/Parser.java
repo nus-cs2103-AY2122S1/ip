@@ -67,6 +67,7 @@ public class Parser {
      * @param dateStr date in String
      * @return true if String is valid date.
      */
+
     public boolean isValidLocalDate(String dateStr) {
         try {
             LocalDate.parse(dateStr, ACCEPTDATEFORMAT);

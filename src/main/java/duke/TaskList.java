@@ -36,7 +36,9 @@ public class TaskList {
         String listString = "";
         for (int i = 0; i < list.size(); i++) {
             int index = i + 1;
-            listString = listString + index + "." + list.get(i).toString() + "\n";
+            Task listItem = list.get(i);
+            assert listItem != null : "listItem should be present";
+            listString = listString + index + "." + listItem + "\n";
         }
         return listString;
     }

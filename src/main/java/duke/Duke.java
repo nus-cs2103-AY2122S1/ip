@@ -67,6 +67,7 @@ public class Duke extends Application {
                 String command = ui.getUserCommand();
                 Parser parser = new Parser(this);
                 String response = parser.handleInput(command);
+                assert !response.equals("") : "there should be a response to the command";
                 System.out.println(response);
             }
         }
@@ -87,6 +88,7 @@ public class Duke extends Application {
     private String parseGui(String command) {
         Parser parser = new Parser(this);
         String response = parser.handleInput(command);
+        assert !response.equals("") : "there should be a response to the command";
         return response;
     }
 
