@@ -19,8 +19,7 @@ public class ListCommand extends Command {
         String message = "";
         if (savedTasks.size() == 0) {
             return "No tasks in your list! Add one using todo, deadline or event!";
-        }
-        else {
+        } else {
             message += "Here are the tasks in your list:\n";
             for (int i = 0; i < savedTasks.size(); i++) {
                 Task currTask = savedTasks.get(i);

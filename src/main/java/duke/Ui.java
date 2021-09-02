@@ -7,7 +7,7 @@ import java.util.Scanner;
  * Represents user interface
  */
 public class Ui {
-    Scanner sc;
+    private final Scanner sc;
 
     /**
      * Constructs an instance of <code>Ui</code>

@@ -31,8 +31,8 @@ public class DeleteCommand extends Command {
             System.out.println(exception);
             return exception.getMessage();
         } else {
-            Task removedTask = savedTasks.get(this.index-1);
-            tasks.deleteTask(this.index-1);
+            Task removedTask = savedTasks.get(this.index - 1);
+            tasks.deleteTask(this.index - 1);
             message += "Alright! I've removed this task:\n" + removedTask;
             message += String.format("\nNow you have %d tasks left in the list!", savedTasks.size());
             return message;

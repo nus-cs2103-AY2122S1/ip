@@ -31,9 +31,9 @@ public class DoneCommand extends Command {
             System.out.println(exception);
             return exception.getMessage();
         } else {
-            Task oldTask = savedTasks.get(this.index-1);
+            Task oldTask = savedTasks.get(this.index - 1);
             Task newTask = oldTask.setDone();
-            tasks.replaceTask(this.index-1, newTask);
+            tasks.replaceTask(this.index - 1, newTask);
             message += "Nice! I've marked this task as done:\n" + newTask;
             return message;
         }

@@ -12,17 +12,16 @@ public class Parser {
      * @return <code>Command</code> object
      * @throws DukeException
      */
-    public static Command parse(String input) throws DukeException{
+    public static Command parse(String input) throws DukeException {
         String[] inputArr = input.split(" ");
         String body = "";
-        String date = inputArr[inputArr.length-1];
+        String date = inputArr[inputArr.length - 1];
         boolean hasDate = false;
         for (int i = 1; i < inputArr.length; i++) {
             if (inputArr[i].equals("/by") || inputArr[i].equals("/at")) {
                 hasDate = true;
                 break;
-            }
-            else {
+            } else {
                 body += " " + inputArr[i];
             }
         }
