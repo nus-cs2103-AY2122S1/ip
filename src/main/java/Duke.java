@@ -10,9 +10,10 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * Initialises a Duke program to start chatting with the user.
+     * Initialises a Duke program to start chatting with the user. ALl inputs go through this method.
      *
-     * @param filePath The file to store the data that users input.
+     * @param filePath The file to store the data that users input will be initialised if it does not exist, else will
+     *                 be overwritten.
      */
     public Duke(String filePath) {
         ui = new Ui();
