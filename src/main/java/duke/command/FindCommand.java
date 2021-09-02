@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.*;
+import duke.exception.DukeException;
 
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -15,13 +16,13 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Pattern pattern = Pattern.compile("^find (.+)$");
         Matcher m = pattern.matcher(input);
 
         if (m.find()) {
             ArrayList<Task> matchList = taskList.findMatches(m.group(1));
-            ui.showFindMessage(matchList);
+            return ui.getFindMessage(matchList);
         } else {
             throw new DukeException();
         }

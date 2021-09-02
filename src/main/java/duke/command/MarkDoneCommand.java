@@ -1,8 +1,7 @@
 package duke.command;
 
-import duke.Storage;
-import duke.TaskList;
-import duke.Ui;
+import duke.*;
+import duke.exception.DukeException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,14 +15,15 @@ public class MarkDoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Pattern pattern = Pattern.compile("^done (\\d+) *?$");
         Matcher m = pattern.matcher(input);
 
         if (m.find()) {
-            taskList.markAsDone(Integer.parseInt(m.group(1)));
+            Task toMark = taskList.markAsDone(Integer.parseInt(m.group(1)));
+            return ui.getDoneMessage(toMark);
         } else {
-            System.out.println("Please indicate a task to mark as done");
+            throw new DukeException();
         }
     }
 }

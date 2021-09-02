@@ -1,4 +1,6 @@
-package duke;
+package duke.exception;
+
+import duke.Task;
 
 /**
  * A class that represents exceptions unique to duke.Duke.

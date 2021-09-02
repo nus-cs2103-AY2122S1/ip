@@ -1,11 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Ui {
-
-    private static final String divider = "____________________________________________________________";
 
     private static final String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -13,31 +10,19 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    private final Scanner scanner = new Scanner(System.in);
-
     /**
      * Displays a greeting message.
      */
-    public void greet() {
-        System.out.println("Hello from\n" + logo +"\n");
-        System.out.println("What can I do for you?");
-        showLine();
+    public String greet() {
+        return "Hello from\n" + logo +"\n"
+                + "What can I do for you?";
     }
 
     /**
      * Displays a goodbye message.
      */
-    public void goodBye() {
-        scanner.close();
-        System.out.println("Bye. Hope to see you again soon!");
-        showLine();
-    }
-
-    /**
-     * Prints a divider.
-     */
-    public void showLine() {
-        System.out.println(divider);
+    public String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -46,28 +31,21 @@ public class Ui {
      * @param task The task created.
      * @param taskList The current TaskList.
      */
-    public void taskCreatedMessage(Task task, TaskList taskList) {
-        System.out.println("Got it. I've added this task:");
-        System.out.println("  " + task);
-        System.out.println("Now you have " + taskList.getSize() + " tasks in the list.");
+    public String getAddMessage(Task task, TaskList taskList) {
+        return "Got it. I've added this task:\n"
+                + " " + task + "\n"
+                + "Now you have " + taskList.getSize() + " tasks in the list.";
     }
 
-    /**
-     * Reads the given input from the user.
-     *
-     * @return The String input from the user.
-     */
-    public String readCommand() {
-        return scanner.nextLine();
+    public String getDeleteMessage(Task task, TaskList taskList) {
+        return "Noted. I've removed this task:\n"
+                + "  " + task + "\n"
+                + "Now you have " + taskList.getSize() + " tasks in the list.";
     }
 
-    /**
-     * Displays an error message.
-     *
-     * @param message The message to be displayed.
-     */
-    public void showError(String message) {
-        System.out.println(message);
+    public String getDoneMessage(Task task) {
+        return "Nice! I've marked this task as done:\n"
+                + "  " + task;
     }
 
     /**
@@ -75,16 +53,16 @@ public class Ui {
      *
      * @param matchList The resultant list of tasks from calling find.
      */
-    public void showFindMessage(ArrayList<Task> matchList) {
+    public String getFindMessage(ArrayList<Task> matchList) {
         if (matchList == null || matchList.isEmpty()) {
-            System.out.println("Oh no, Duke cannot find any matches!");
-            return;
-        }
+            return "Oh no, Duke cannot find any matches!";
+        } else {
+            StringBuilder result = new StringBuilder("Here are the matching tasks in your list:\n");
 
-        System.out.println("Here are the matching tasks in your list:");
-
-        for (int i = 0; i < matchList.size(); i++) {
-            System.out.println((i + 1) + ".  " + matchList.get(i));
+            for (int i = 0; i < matchList.size(); i++) {
+                result.append(i + 1).append(".  ").append(matchList.get(i));
+            }
+            return result.toString();
         }
     }
 }

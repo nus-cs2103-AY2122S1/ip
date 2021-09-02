@@ -27,30 +27,31 @@ public class TaskList {
      *
      * @param index The index of the element to be removed.
      */
-    public void removeFromList(int index) {
+    public Task deleteFromList(int index) {
         if (index <= 0 || index > taskList.size()) {
             // number given is out of bounds of the taskList
             System.out.println("Invalid Argument: Index " + index + " is out of bounds!");
+            return null;
         } else {
             // no problems with the input, a task is added
             Task toDelete = taskList.get(index - 1);
             taskList.remove(index - 1);
-            System.out.println("Noted. I've removed this task:");
-            System.out.println("  " + toDelete);
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            return toDelete;
         }
     }
 
     /**
      * Prints all the elements in the TaskList.
      */
-    public void printList() {
+    public String printList() {
         if (taskList == null || taskList.isEmpty()) {
-            System.out.println("You currently have no tasks!");
+            return "You currently have no tasks!";
         } else {
+            StringBuilder result = new StringBuilder();
             for (int i = 0; i < taskList.size(); i++) {
-                System.out.println((i + 1) + ". " + taskList.get(i));
+                result.append(i + 1).append(". ").append(taskList.get(i)).append("\n");
             }
+            return result.toString();
         }
     }
 
@@ -59,13 +60,16 @@ public class TaskList {
      *
      * @param index The index of the task to be marked as done.
      */
-    public void markAsDone(int index) {
+    public Task markAsDone(int index) {
         if (index <= 0 || index > taskList.size()) {
             // number given is out of bounds of the taskList
             System.out.println("Invalid Argument: Index " + index + " is out of bounds!");
+            return null;
         } else {
             // no problems with the input, a task is added
+            Task toMark = taskList.get(index - 1);
             taskList.get(index - 1).markAsDone();
+            return toMark;
         }
     }
 
@@ -77,7 +81,7 @@ public class TaskList {
      */
     public ArrayList<Task> findMatches(String str) {
         ArrayList<Task> result = new ArrayList<>();
-        for (Task task : getTaskList()) {
+        for (Task task : this.taskList) {
             if (task.toString().contains(str)) {
                 result.add(task);
             }

@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -15,10 +17,10 @@ public class Task {
     private static final String DONE_STATUS_ICON = "X";
     private static final String NOT_DONE_STATUS_ICON = " ";
 
-    private static final DateTimeFormatter dateInputFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 
     /** An enum describing the type of task. */
-    enum Type {
+    public enum Type {
         TODO("T"), DEADLINE("D"), EVENT("E");
 
         private final String symbol;
@@ -103,7 +105,7 @@ public class Task {
         public Deadline(String description, String time) throws DukeException {
             super(description);
             try {
-                this.time = LocalDate.parse(time, dateInputFormatter);
+                this.time = LocalDate.parse(time, DATE_TIME_FORMATTER);
             } catch (DateTimeParseException e) {
                 throw new DukeException.DateInputInvalidException();
             }
@@ -112,7 +114,7 @@ public class Task {
         public Deadline(String description, boolean isDone, String time) throws DukeException {
             super(description, isDone);
             try {
-                this.time = LocalDate.parse(time, dateInputFormatter);
+                this.time = LocalDate.parse(time, DATE_TIME_FORMATTER);
             } catch (DateTimeParseException e) {
                 throw new DukeException.DateInputInvalidException();
             }
@@ -121,7 +123,7 @@ public class Task {
         @Override
         public String toString() {
             return "[" + Type.DEADLINE.getSymbol() + "]" + super.toString()
-                    + " (by: " + dateInputFormatter.format(time) + ")";
+                    + " (by: " + DATE_TIME_FORMATTER.format(time) + ")";
         }
     }
 
@@ -132,7 +134,7 @@ public class Task {
         public Event(String description, String time) throws DukeException {
             super(description);
             try {
-                this.time = LocalDate.parse(time, dateInputFormatter);
+                this.time = LocalDate.parse(time, DATE_TIME_FORMATTER);
             } catch (DateTimeParseException e) {
                 throw new DukeException.DateInputInvalidException();
             }
@@ -141,7 +143,7 @@ public class Task {
         public Event(String description, boolean isDone, String time) throws DukeException {
             super(description, isDone);
             try {
-                this.time = LocalDate.parse(time, dateInputFormatter);
+                this.time = LocalDate.parse(time, DATE_TIME_FORMATTER);
             } catch (DateTimeParseException e) {
                 throw new DukeException.DateInputInvalidException();
             }
@@ -150,7 +152,7 @@ public class Task {
         @Override
         public String toString() {
             return "[" + Type.EVENT.getSymbol() + "]" + super.toString()
-                    + " (at: " + dateInputFormatter.format(time) + ")";
+                    + " (at: " + DATE_TIME_FORMATTER.format(time) + ")";
         }
     }
 
@@ -305,8 +307,6 @@ public class Task {
     /** Marks the current task as done. */
     public void markAsDone() {
         this.isDone = true;
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println("  " + this);
     }
 
     @Override
