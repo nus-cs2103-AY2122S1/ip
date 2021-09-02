@@ -2,7 +2,11 @@ package duke.utils;
 
 import duke.exceptions.InvalidTaskIdException;
 import duke.tasks.Task;
+import duke.utils.Storage;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -11,10 +15,21 @@ import java.util.Locale;
  * The TaskList class encapsulates a list of user's tasks.
  */
 public class TaskList {
-    private List<Task> taskList;
+    private List<Task> taskList = new ArrayList<>();
 
-    public TaskList() {
-        this.taskList = new ArrayList<Task>();
+    String home = System.getProperty("user.home");
+    Path filePath = Paths.get(home, "tasks.txt");
+    private Storage storage = new Storage(filePath);
+
+    /**
+     * Loads the saved tasks from the user's disk. If not available, will
+     * return an empty TaskList.
+     *
+     * @return The TaskList object containing the saved tasks (if applicable).
+     * @throws IOException If there is an error loading from the specified file.
+     */
+    public void loadFromDisk() throws IOException {
+        this.taskList = this.storage.loadData().taskList;
     }
 
     /**
@@ -24,6 +39,12 @@ public class TaskList {
      */
     public void add(Task t) {
         this.taskList.add(t);
+        try {
+            this.storage.saveData(this);
+        } catch(IOException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     /**
@@ -35,6 +56,11 @@ public class TaskList {
     public void delete(int index) throws InvalidTaskIdException {
         if (index >= 0 && index < this.taskList.size()) {
             this.taskList.remove(index);
+            try {
+                this.storage.saveData(this);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+            }
         } else {
             throw new InvalidTaskIdException();
         }
@@ -64,6 +90,12 @@ public class TaskList {
     public void markAsCompleted(int index) throws InvalidTaskIdException {
         if (index >= 0 && index < this.taskList.size()) {
             this.taskList.get(index).markAsCompleted();
+            try {
+                this.storage.saveData(this);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
         } else {
             throw new InvalidTaskIdException();
         }
@@ -78,15 +110,14 @@ public class TaskList {
         return this.taskList.size();
     }
 
-    public void search(String query) {
-        Ui ui = new Ui();
+    public TaskList search(String query) {
         TaskList result = new TaskList();
         for (Task task : taskList) {
             if (task.getTaskName().toUpperCase().contains(query.toUpperCase())) {
                 result.add(task);
             }
         }
-        ui.printTasks(result);
+        return result;
     }
 
     @Override
