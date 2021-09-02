@@ -1,7 +1,5 @@
 1. [T][x] abc
 2. [D][x] def (by: 123)
 3. [E][x] ghi (at: 456)
-4. [D][x] d (by: tmr)
-5. [D][ ] y (by: today)
-6. [E][ ] defend (at: today)
-7. [T][ ] defg
+4. [D][ ] b (by: 1)
+5. [E][ ] e (at: 3)

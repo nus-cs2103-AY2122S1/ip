@@ -22,12 +22,16 @@ public class TaskList {
     public String add(Task task) {
         this.arrayList.add(task);
         String type = "";
-        if (task instanceof ToDo) {
-            type = "ToDo";
-        } else if (task instanceof Deadline) {
-            type = "DeadLine";
-        } else if (task instanceof Event) {
-            type = "Event";
+        switch (task.getType()) {
+            case TODO:
+                type = "ToDo";
+                break;
+            case DEADLINE:
+                type = "DeadLine";
+                break;
+            case EVENT:
+                type = "Event";
+                break;
         }
         return "Added this " + type + " task:\n" + task.toString();
     }

@@ -8,4 +8,9 @@ public class ToDo extends Task{
         }
         this.type = 'T';
     }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.TODO;
+    }
 }

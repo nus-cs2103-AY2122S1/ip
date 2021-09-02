@@ -23,4 +23,9 @@ public class Event extends Task{
 
         return super.toString() + " (at: " + this.time.toString() + ")";
     }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.EVENT;
+    }
 }

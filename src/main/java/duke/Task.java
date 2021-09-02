@@ -39,4 +39,8 @@ abstract public class Task {
         }
     }
 
+    public TaskType getType() {
+        return null;
+    }
+
 }

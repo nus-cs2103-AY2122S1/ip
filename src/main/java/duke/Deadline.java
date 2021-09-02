@@ -23,4 +23,9 @@ public class Deadline extends Task{
         return super.toString() + " (by: " + this.dateLine.toString() + ")";
     }
 
+    @Override
+    public TaskType getType() {
+        return TaskType.DEADLINE;
+    }
+
 }
