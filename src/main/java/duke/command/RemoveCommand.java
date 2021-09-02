@@ -43,4 +43,11 @@ public class RemoveCommand extends Command {
                 + tasks.getSize() + " tasks in the list";
         ui.print(message);
     }
+
+    @Override
+    public String getExecutedString(TaskList tasks, Ui ui, Storage storage) {
+        Task toRemove = tasks.remove(this.indexToRemove);
+        return "Noted. I've removed this task:\n" + toRemove + "\nNow you have "
+                + tasks.getSize() + " tasks in the list";
+    }
 }
