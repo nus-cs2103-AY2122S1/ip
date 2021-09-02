@@ -8,7 +8,6 @@ import viper.Ui;
  * Command that search through task list and returns a new task list with items that match the keyword
  */
 public class FindCommand extends Command {
-    
     protected String keyword;
     
     public FindCommand(String keyword) {

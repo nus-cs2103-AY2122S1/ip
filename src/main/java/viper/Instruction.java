@@ -12,8 +12,7 @@ public enum Instruction {
     DELETE("delete"),
     BYE("bye"),
     INVALID("invalid"),
-    FIND("find"),
-    ;
+    FIND("find"),;
 
     private final String s;
     Instruction(String s) {
@@ -31,7 +30,6 @@ public enum Instruction {
                 return i;
             }
         }
-        
         return INVALID;
     }
 }

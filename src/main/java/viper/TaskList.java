@@ -1,13 +1,13 @@
 package viper;
 
-import tasks.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
+import tasks.Task;
+
 /**
  * Contains the list of tasks and methods for the list.
- * Methods includes adding tasks and deleting tasks.
+ * Methods include adding tasks and deleting tasks.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
@@ -15,7 +15,7 @@ public class TaskList {
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
-
+    
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
@@ -26,6 +26,7 @@ public class TaskList {
 
     /**
      * Gets the task using the index specified.
+     *
      * @param index Index of task in task list.
      * @return Task with specified index.
      */
@@ -35,6 +36,7 @@ public class TaskList {
 
     /**
      * Gets the size of a task list.
+     *
      * @return Size of task list.
      */
     public int getSize() {
@@ -42,8 +44,9 @@ public class TaskList {
     }
 
     /**
-     * Removes task using the index specified
-     * @param index Index of task in task list
+     * Removes task using the index specified.
+     *
+     * @param index Index of task in task list.
      */
     public void deleteTask(int index) {
         if (index < tasks.size()) {
@@ -52,7 +55,8 @@ public class TaskList {
     }
 
     /**
-     * Marks task using the index specified as done
+     * Marks task using the index specified as done.
+     *
      * @param index Index of task in task list
      */
     public void doneTask(int index) {
@@ -60,7 +64,13 @@ public class TaskList {
             tasks.get(index).setDone();
         }
     }
-    
+
+    /**
+     * Finds tasks from taskList using keyword.
+     *
+     * @param keyword User input to search for.
+     * @return TaskList only containing items with specified keyword.
+     */
     public TaskList findTask(String keyword) {
         ArrayList<Task> resultTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {

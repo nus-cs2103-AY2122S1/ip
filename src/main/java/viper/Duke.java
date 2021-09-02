@@ -1,25 +1,25 @@
 package viper;
 
-import commands.Command;
-import exceptions.DukeException;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.ParseException;
+
+import commands.Command;
+import exceptions.DukeException;
 
 /**
  * A chatbot that manages user input tasks.
  */
 public class Duke {
-    
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
     /**
-     * Creates a Duke, initialise Ui, Storage and TaskList
-     * @param filePath
-     * @throws IOException
+     * Creates a Duke, initialise Ui, Storage and TaskList.
+     *
+     * @param filePath File path of storage.
+     * @throws IOException If file cannot be loaded.
      */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
