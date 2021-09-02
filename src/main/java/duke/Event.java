@@ -20,16 +20,16 @@ public class Event extends Task {
      *
      * @param description Task description.
      * @param type Task type: Event.
-     * @param by Event timeline.
+     * @param at Event timeline.
      */
-    public Event(String description, Type type, String by) {
+    public Event(String description, Type type, String at) {
         super(description, type);
         try {
-            LocalDate d1 = LocalDate.parse(by);
+            LocalDate d1 = LocalDate.parse(at);
             this.date = d1;
             this.at = d1.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         } catch (DateTimeParseException dateTimeParseException) {
-            this.at = by;
+            this.at = at;
         }
     }
 

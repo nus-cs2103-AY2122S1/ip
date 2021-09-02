@@ -56,7 +56,7 @@ public class TaskList {
      *
      * @return returns a printout of all the past user commands.
      */
-    public static String userCommands() {
+    public static String listCommand() {
         int count = 1;
         String result = "";
 

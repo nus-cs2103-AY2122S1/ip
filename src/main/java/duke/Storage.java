@@ -112,8 +112,6 @@ public class Storage {
             String description = task.getDescription();
             String at = task.getTime();
             toSave += description + " | " + at;
-        } else {
-
         }
 
         String directoryName = "data";

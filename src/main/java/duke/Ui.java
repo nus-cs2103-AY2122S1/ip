@@ -26,7 +26,7 @@ public class Ui {
     private void executeCommand(Parser.Command commandType) {
         try {
             if (commandType == Parser.Command.LIST) {
-                this.commandResult = TaskList.userCommands();
+                this.commandResult = TaskList.listCommand();
             } else if (commandType == Parser.Command.DONE) {
                 int taskNumberDone = parsedCommand.getTaskNumber();
                 this.commandResult = commands.markDone(taskNumberDone);
