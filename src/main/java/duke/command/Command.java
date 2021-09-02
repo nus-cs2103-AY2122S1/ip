@@ -1,8 +1,10 @@
 package duke.command;
 
-import duke.TaskList;
+import duke.exception.DukeException;
+import duke.exception.IndexOutOfBoundException;
+import duke.exception.InvalidTaskException;
 import duke.task.Task;
-
+import duke.TaskList;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,42 +80,48 @@ public class Command {
             case BYE:
                 return goodByeToUser();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (DukeException e) {
+            return new StringBuilder(e.getMessage());
         }
-        return new StringBuilder("Cannot understand");
+        return new StringBuilder("Sorry, I don't understand what do you want me to do.");
     }
 
-    private StringBuilder addNewTodo(String task) throws Exception {
-        Task todoTask = Parser.isValidTodoTask(task);
+    private StringBuilder addNewTodo(String task) throws InvalidTaskException {
+        Task todoTask = Parser.testTodoValidity(task);
         taskList.add(todoTask);
         storage.saveNewTask(todoTask);
         return response.getAddNewTaskMessage();
     }
 
-    private StringBuilder addNewDeadline(String task) throws Exception {
-        Task deadlineTask = Parser.isValidDeadlineTask(task);
+    private StringBuilder addNewDeadline(String task) throws InvalidTaskException {
+        Task deadlineTask = Parser.testDeadlineValidity(task);
         taskList.add(deadlineTask);
         storage.saveNewTask(deadlineTask);
         return response.getAddNewTaskMessage();
     }
 
-    private StringBuilder addNewEvent(String task) throws Exception {
-        Task eventTask = Parser.isValidEventTask(task);
+    private StringBuilder addNewEvent(String task) throws InvalidTaskException {
+        Task eventTask = Parser.testEventValidity(task);
         taskList.add(eventTask);
         storage.saveNewTask(eventTask);
         return response.getAddNewTaskMessage();
     }
 
-    private StringBuilder setTaskDone(String task) throws Exception {
+    private StringBuilder setTaskDone(String task) throws DukeException {
         int itemDone = Parser.findFinishedItem(task);
+        if (itemDone > taskList.size()) {
+            throw new IndexOutOfBoundException("mark item done", taskList.size());
+        }
         taskList.get(itemDone - 1).setToDone();
         storage.modifyTasks();
         return response.getMarkTaskDoneMessage(itemDone);
     }
 
-    private StringBuilder deleteTask(String task) throws Exception {
+    private StringBuilder deleteTask(String task) throws DukeException {
         int itemDeleted = Parser.findDeleteItem(task);
+        if (itemDeleted > taskList.size()) {
+            throw new IndexOutOfBoundException("delete item", taskList.size());
+        }
         Task deletedTask = taskList.remove(itemDeleted - 1);
         storage.modifyTasks();
         return response.getDeleteMessage(deletedTask);

@@ -25,7 +25,7 @@ public class ParserTest {
         String input2 = "deadline task2 /by 2010-12-08 20:00";
         Task expectedTask1 = new Deadline("task1", "2020-12-08 09:00");
         Task expectedTask2 = new Deadline("task2", "2010-12-08 20:00");
-        assertEquals(expectedTask1.toString(), Parser.isValidDeadlineTask(input1).toString());
-        assertEquals(expectedTask2.toString(), Parser.isValidDeadlineTask(input2).toString());
+        assertEquals(expectedTask1.toString(), Parser.testDeadlineValidity(input1).toString());
+        assertEquals(expectedTask2.toString(), Parser.testDeadlineValidity(input2).toString());
     }
 }

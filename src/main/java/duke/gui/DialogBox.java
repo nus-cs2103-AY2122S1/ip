@@ -15,7 +15,9 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+
 import java.io.IOException;
+
 
 /**
  * The dialogBox containing the dialog and photo of user of Duke. A customized HBox.

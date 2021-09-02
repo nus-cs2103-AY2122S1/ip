@@ -1,9 +1,12 @@
 package duke.command;
 
+import duke.exception.InvalidInputException;
+import duke.exception.InvalidTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Todo;
 import duke.task.Task;
+import duke.task.Todo;
+
 
 
 /**
@@ -59,11 +62,11 @@ public class Parser {
      *
      * @param task The input of user.
      * @return The corresponding Todo task.
-     * @throws Exception if the task does not have the correct Todo format.
+     * @throws InvalidTaskException if the task does not have the correct Todo format.
      */
-    public static Task isValidTodoTask(String task) throws Exception {
+    public static Task testTodoValidity(String task) throws InvalidTaskException {
         if (!task.contains("todo") || task.length() <= 5) {
-            throw new Exception("This is not a valid Todo task.");
+            throw new InvalidTaskException("Todo");
         }
         String taskName = task.substring(5);
         return new Todo(taskName);
@@ -75,11 +78,11 @@ public class Parser {
      *
      * @param task The input of user.
      * @return The corresponding Deadline task.
-     * @throws Exception if the task does not have the correct Deadline format.
+     * @throws InvalidTaskException if the task does not have the correct Deadline format.
      */
-    public static Task isValidDeadlineTask(String task) throws Exception {
+    public static Task testDeadlineValidity(String task) throws InvalidTaskException {
         if (!task.contains("deadline") || !task.contains("/by")) {
-            throw new Exception("This is not a valid Deadline task.");
+            throw new InvalidTaskException("Deadline");
         }
         int position = task.indexOf('/');
         String taskName = task.substring(9, position - 1);
@@ -93,11 +96,11 @@ public class Parser {
      *
      * @param task The input of user.
      * @return The corresponding Event task.
-     * @throws Exception if the task does not have the correct Event format.
+     * @throws InvalidTaskException if the task does not have the correct Event format.
      */
-    public static Task isValidEventTask(String task) throws Exception {
+    public static Task testEventValidity(String task) throws InvalidTaskException {
         if (!task.contains("event") || !task.contains("/at")) {
-            throw new Exception("This is not a valid Event task.");
+            throw new InvalidTaskException("Event");
         }
         int position = task.indexOf('/');
         String taskName = task.substring(6, position - 1);
@@ -111,11 +114,11 @@ public class Parser {
      *
      * @param task The input of user.
      * @return The corresponding number of the item user want to delete.
-     * @throws Exception if the format of the input is not valid.
+     * @throws InvalidInputException if the format of the input is not valid.
      */
-    public static int findDeleteItem(String task) throws Exception {
+    public static int findDeleteItem(String task) throws InvalidInputException {
         if (task.length() <= MIN_DELETE_ITEM_LENGTH) {
-            throw new Exception("Sorry I don't know which item you want to delete.");
+            throw new InvalidInputException("delete the item.");
         }
         return Integer.parseInt(task.substring(MIN_DELETE_ITEM_LENGTH));
     }
@@ -126,11 +129,11 @@ public class Parser {
      *
      * @param task The input of user.
      * @return The corresponding number of the item user want to mark as done.
-     * @throws Exception if the format of the input is not valid.
+     * @throws InvalidInputException if the format of the input is not valid.
      */
-    public static int findFinishedItem(String task) throws Exception {
+    public static int findFinishedItem(String task) throws InvalidInputException {
         if (task.length() <= MIN_DONE_ITEM_LENGTH) {
-            throw new Exception("Sorry I don't know which item you want to mark as done.");
+            throw new InvalidInputException("mark item as done.");
         }
         return Integer.parseInt(task.substring(MIN_DONE_ITEM_LENGTH));
     }

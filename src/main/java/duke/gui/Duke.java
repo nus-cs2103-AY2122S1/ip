@@ -12,12 +12,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+
+
 /**
  * A GUI for Duke using FXML.
  */
 public class Duke extends Application {
     public static Command command;
-
 
     @Override
     public void start(Stage stage) {
