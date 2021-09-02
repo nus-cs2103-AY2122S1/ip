@@ -10,11 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -53,14 +49,16 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        setBackground(new Background(new BackgroundFill(Color.valueOf("71C9CE"), CornerRadii.EMPTY, Insets.EMPTY)));
+        dialog.setTranslateX(5);
+        dialog.setPadding(new Insets(5, 10, 5, 10));
+        dialog.setStyle("-fx-background-color: #444444; -fx-background-radius: 20");
     }
 
     /**
      * Sets certain properties on  box to distinguish it from the flipped box.
      */
     private void normal() {
-        setBackground(new Background(new BackgroundFill(Color.valueOf("CBF1F5"), CornerRadii.EMPTY, Insets.EMPTY)));
+        dialog.setPadding(new Insets(5, 10, 5, 10));
     }
 
     /**
