@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -72,8 +74,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (at: " +
+        return String.format("%s (at: %s)", super.toString(),
                 eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy ")) +
-                eventTime.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
+                eventTime.format(DateTimeFormatter.ofPattern("h:mm a")));
+
     }
 }

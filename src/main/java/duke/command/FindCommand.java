@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.Task;
+import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
 
@@ -16,7 +16,7 @@ public class FindCommand implements Command {
         System.out.println("Here are the matching tasks in your list:");
         boolean hasMatch = false;
         int matchCount = 0;
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 0; i < tasks.getSize(); i++) {
             Task t = tasks.get(i);
             if (t.containsKeyword(this.keyword)) {
                 matchCount++;

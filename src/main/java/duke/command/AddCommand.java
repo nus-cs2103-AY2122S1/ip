@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.Deadline;
+import duke.task.Deadline;
 import duke.DukeException;
-import duke.Event;
-import duke.Task;
+import duke.task.Event;
+import duke.task.Task;
 import duke.TaskList;
-import duke.ToDo;
+import duke.task.ToDo;
 import duke.Ui;
 
 /**
@@ -64,7 +64,7 @@ public class AddCommand implements Command {
         }
         tasks.add(t);
         System.out.println(Ui.format("Got it. I've added this task: \n\t" + t +
-                "\nNow you have " + ui.formatNumTasks(tasks.size()) + " in the list."));
+                "\nNow you have " + ui.formatNumTasks(tasks.getSize()) + " in the list."));
     }
 
     /**

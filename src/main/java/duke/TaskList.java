@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public class TaskList {
         this.tasks = (existingTasks == null ? new ArrayList<>() : existingTasks);
     }
 
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 
