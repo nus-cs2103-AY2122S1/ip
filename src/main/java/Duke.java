@@ -19,11 +19,11 @@ public class Duke {
         duke.run();
     }
 
-    UserInterface ui;
-    DateTimeFormatter dtformatter;
-    Storage storage;
-    TaskList taskList;
-    Parser parser;
+    private UserInterface ui;
+    private DateTimeFormatter dtformatter;
+    private Storage storage;
+    private TaskList taskList;
+    private Parser parser;
 
     public Duke() {
         ui = new UserInterface();
@@ -37,7 +37,7 @@ public class Duke {
 
     public void run() {
         ui.displayGreeting();
-        while (true){
+        do {
             String command = ui.getResponse();
             if ("bye".equals(command)){
                 storage.save(ui, taskList);
@@ -152,6 +152,7 @@ public class Duke {
                     System.out.println("Oops! I'm sorry, but I don't know what that means :(");
                 }
             }
-        }
+        } while(command.shouldExecuteNext());
+        storage.save(ui, taskList);
     }
 }
