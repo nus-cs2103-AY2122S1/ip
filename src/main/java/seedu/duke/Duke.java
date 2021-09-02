@@ -36,71 +36,63 @@ public class Duke {
      */
     private class Parser {
         private String[] listOfWords = new String[0];
-        private String userInput = "";
         private DateTimeManager manager = new DateTimeManager(
                 DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         private int taskIndex = -1;
         private LocalDate date = LocalDate.now();
 
         private Command parseString(String userInput) throws DukeException {
-            this.userInput = userInput;
-
-            if (userInput.equals("bye")) {
-                return new ExitCommand(ui, taskList);
-            } else if (userInput.equals("list")) {
-                return new ListCommand(ui, taskList);
-            } else if (userInput.equals("help")) {
-                return new HelpCommand(ui, taskList);
-            }
-
             // Separate them with space
             String[] arrOfCommandWords = userInput.split(" ");
+            this.listOfWords = arrOfCommandWords;
+            String commandWord = arrOfCommandWords[0];
+
             if (arrOfCommandWords.length <= 1) {
-                handleInvalidInputs(userInput);
+                return parseOneWordCommand(commandWord);
             }
 
-            this.listOfWords = arrOfCommandWords;
-            // Check the command word
-            String commandWord = arrOfCommandWords[0];
             switch (commandWord) {
-            case "todo":
-                return new ToDoCommand(ui, taskList,
-                        arrOfCommandWords[1], storage);
-            case "deadline":
-                parseDescription(userInput, "/by ");
-                return new DeadlineCommand(ui, taskList, listOfWords[1],
-                        date, storage);
+            case "todo": // Fallthrough
+            case "deadline": // Fallthrough
             case "event":
-                parseDescription(userInput, "/at ");
-                return new EventCommand(ui, taskList, listOfWords[1],
-                        date, storage);
+                return parseTaskType(commandWord, userInput);
+            case "delete": // Fallthrough
             case "done":
-                try {
-                    int index = Integer.parseInt(arrOfCommandWords[1]) - 1;
-                    this.taskIndex = index;
-                } catch (NumberFormatException e) {
-                    throw new DukeException("Invalid task number");
-                }
-                return new DoneCommand(ui, taskList, taskIndex, storage);
+                // arrOfCommandWords = {"done", "taskNumber"}
+                return parseTaskModification(commandWord, arrOfCommandWords[1]);
             case "find":
-                return new FindCommand(ui, taskList, listOfWords[1]);
+                // arrOfCommandWords = {"find", "taskNumber"}
+                return new FindCommand(ui, taskList, arrOfCommandWords[1]);
             case "get":
-                try {
-                    LocalDate tasksDate = manager.parseDateTime(arrOfCommandWords[1]);
-                    return new GetCommand(ui, taskList, tasksDate, dateTasks);
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Invalid date format.");
-                }
-            case "delete":
-                try {
-                    int index = Integer.parseInt(arrOfCommandWords[1]) - 1;
-                    this.taskIndex = index;
-                } catch (NumberFormatException e) {
-                    throw new DukeException("Invalid task number");
-                }
-                return new DeleteCommand(ui, taskList, taskIndex, storage);
+                // arrOfCommandWords = {"get", "dateString"}
+                parseGetTasksOnDate(arrOfCommandWords[1]);
             default:
                 throw new DukeException("Sorry, I don't know what that means.");
+            }
+        }
+
+        private Command parseOneWordCommand(String commandWord) throws DukeException {
+            switch (commandWord) {
+            case "bye":
+                return new ExitCommand(ui, taskList);
+            case "list":
+                return new ListCommand(ui, taskList);
+            case "help":
+                return new HelpCommand(ui, taskList);
+            default:
+                handleInvalidInputs(commandWord);
+                // Will not reach here since handleInvalidInputs(commandWord)
+                // will throw an error
+                return null;
+            }
+        }
+
+        private Command parseGetTasksOnDate(String dateString) throws DukeException {
+            try {
+                LocalDate tasksDate = manager.parseDateTime(dateString);
+                return new GetCommand(ui, taskList, tasksDate, dateTasks);
+            } catch (DateTimeParseException | DukeException e) {
+                throw new DukeException("Invalid date format.");
             }
         }
 
@@ -120,6 +112,46 @@ public class Duke {
                 this.date = date;
             } catch (DateTimeParseException | DukeException e) {
                 System.out.println(e.getMessage());
+            }
+        }
+
+        private Command parseTaskModification(String commandWord, String numberInput)
+                throws DukeException {
+            try {
+                int index = Integer.parseInt(numberInput) - 1;
+                this.taskIndex = index;
+                switch (commandWord) {
+                case "done":
+                    return new DoneCommand(ui, taskList, taskIndex, storage);
+                case "delete":
+                    return new DeleteCommand(ui, taskList, taskIndex, storage);
+                default:
+                    throw new DukeException("Unable to update task.");
+                }
+            } catch (NumberFormatException e) {
+                throw new DukeException("Invalid task number");
+            }
+        }
+
+        private Command parseTaskType(String type, String userInput) throws DukeException {
+            switch (type) {
+            case "todo":
+                int startOfDescription = userInput.indexOf(" ") + 1;
+                String description = userInput.substring(startOfDescription);
+                return new ToDoCommand(ui, taskList,
+                        description, storage);
+            case "deadline":
+                parseDescription(userInput, "/by ");
+                // listOfWords = {"commandType", "date"}
+                return new DeadlineCommand(ui, taskList, listOfWords[1],
+                        date, storage);
+            case "event":
+                parseDescription(userInput, "/at ");
+                // listOfWords = {"commandType", "date"}
+                return new EventCommand(ui, taskList, listOfWords[1],
+                        date, storage);
+            default:
+                throw new DukeException("Type of task is invalid.");
             }
         }
 
