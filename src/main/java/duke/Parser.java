@@ -16,6 +16,7 @@ public class Parser {
 
     /**
      * Parses user input and responds with corresponding commands.
+     *
      * @param userInput input by user
      * @return corresponding command of the input
      * @throws DukeException

@@ -16,6 +16,7 @@ public class ListCommand extends Command {
 
     /**
      * Executes the list command.
+     *
      * @param tasks given list of tasks
      * @param gui given gui object
      * @param storage given storage object

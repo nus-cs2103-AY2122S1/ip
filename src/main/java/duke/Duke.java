@@ -11,6 +11,7 @@ public class Duke {
 
     /**
      * Constructs a new Duke object with the given file path.
+     *
      * @param filePath file path for creating the text file of interactions
      */
     public Duke(String filePath) {
@@ -45,8 +46,4 @@ public class Duke {
             }
         }
     }
-
-//    public static void main(String[] args) {
-//        new Duke("src/main/data/tasks.txt").run();
-//    }
 }

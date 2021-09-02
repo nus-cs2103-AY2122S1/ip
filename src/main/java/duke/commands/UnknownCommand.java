@@ -14,6 +14,7 @@ public class UnknownCommand extends Command {
 
     /**
      * Executes the unknown command.
+     *
      * @param tasks given list of tasks
      * @param gui given gui object
      * @param storage given storage object

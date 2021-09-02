@@ -12,6 +12,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructs a new mark task as done command with the given index.
+     *
      * @param taskNum the given task index
      */
     public DoneCommand(int taskNum) {
@@ -20,6 +21,7 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the mark as done command.
+     *
      * @param tasks given list of tasks
      * @param gui given gui object
      * @param storage given storage object
@@ -43,6 +45,7 @@ public class DoneCommand extends Command {
 
     /**
      * Mark a task's statis as done and print out the result.
+     *
      * @param task the task to be marked as done
      */
     public String completeTask(Task task) {

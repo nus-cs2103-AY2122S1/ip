@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Converts a line from text file to a task
+     *
      * @param s a line from text file
      * @return a task from the string
      */
@@ -51,6 +52,7 @@ public class Storage {
 
     /**
      * Loads stored tasks from text file
+     *
      * @return the list of tasks stored in file
      * @throws DukeException
      * @throws IOException
@@ -75,6 +77,7 @@ public class Storage {
 
     /**
      * Writes a task to the text file
+     *
      * @param taskString content of the task
      * @throws IOException
      */
@@ -110,6 +113,7 @@ public class Storage {
     }
     /**
      * Marks a task as done in the list in the text file.
+     *
      * @param num the index of the task in the list
      * @param scanner scanner for the file
      * @param tasks the given tasks list

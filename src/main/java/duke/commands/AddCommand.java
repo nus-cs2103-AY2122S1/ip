@@ -12,6 +12,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructs a new add task command with the given task.
+     *
      * @param task the given task
      */
     public AddCommand(Task task) {
@@ -20,6 +21,7 @@ public class AddCommand extends Command {
 
     /**
      * Executes the add task command.
+     *
      * @param tasks given list of tasks
      * @param gui given gui object
      * @param storage given storage object
@@ -44,6 +46,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds the task to the taskslist.
+     *
      * @param task the task to be added
      */
     private String addTask(Task task, TaskList tasks) {

@@ -15,6 +15,7 @@ public class OnDateCommand extends Command {
 
     /**
      * Constructs a new find tasks on a date command with the given date.
+     *
      * @param dateString the string of the date
      */
     public OnDateCommand(String dateString) {
@@ -23,6 +24,7 @@ public class OnDateCommand extends Command {
 
     /**
      * Executes the find tasks on a date command.
+     *
      * @param tasks given list of tasks
      * @param gui given gui object
      * @param storage given storage object

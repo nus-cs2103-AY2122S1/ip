@@ -6,6 +6,7 @@ import main.java.duke.*;
 public abstract class Command {
     /**
      * Executes the command.
+     *
      * @param tasks given list of tasks
      * @param gui given main window object
      * @param storage given storage object

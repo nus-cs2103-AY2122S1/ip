@@ -12,6 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a new deadline task.
+     *
      * @param name name of the task
      * @param date date of the task
      */
@@ -41,6 +42,7 @@ public class Deadline extends Task {
 
     /**
      * Converts a date string to local date format
+     *
      * @param dateString
      * @return a local date of the string
      */
@@ -50,6 +52,7 @@ public class Deadline extends Task {
 
     /**
      * Shows the prefix of the deadline
+     *
      * @return the prefix
      */
     @Override
@@ -63,7 +66,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * print out the relevant info of the deadline task
+     * Prints out the relevant info of the deadline task
      */
     @Override
     public void showThisTask() {
@@ -76,7 +79,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * mark a deadline task as done and print out relevant information.
+     * Marks a deadline task as done and print out relevant information.
      */
     @Override
     public void markAsDone() {
