@@ -28,8 +28,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/userProfilePic.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dukePRofilePic.png"));
 
     @FXML
     public void initialize() {
@@ -49,20 +49,26 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         try {
             String response = duke.getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
+            makeDialogBox(input,response);
         } catch (DukeExitException e){
-            String exitMessage = "Bye bye!";
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(exitMessage, dukeImage)
-            );
+            String response = "Bye bye!";
+            makeDialogBox(input,response);
             //TODO: Add a delay here so this message is visible
             System.exit(1);
         }
 
         userInput.clear();
+    }
+
+    /**
+     * Format user dialog and dike response
+     *
+     * @param input user input String
+     * @param response duke response String
+     */
+    private void makeDialogBox(String input,String response) {
+        DialogBox userBox = DialogBox.getUserDialog("User", input, userImage);
+        DialogBox dukeBox = DialogBox.getDukeDialog("Duke", response, dukeImage);
+        dialogContainer.getChildren().addAll(userBox, dukeBox);
     }
 }

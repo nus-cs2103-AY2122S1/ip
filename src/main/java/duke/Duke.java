@@ -39,7 +39,13 @@ public class Duke {
         this.parser = new Parser(ui, taskList, storagePath);
     }
 
-
+    /**
+     * Get the response for a given user command input
+     *
+     * @param userInput command typed by user
+     * @return Message to print on screen for user
+     * @throws DukeExitException when response is an exit signal, caught by caller to prepare teardown
+     */
     public String getResponse(String userInput) throws DukeExitException{
         try {
             return parser.run(userInput);
@@ -50,7 +56,6 @@ public class Duke {
         } finally {
             Storage.dump(taskList, storagePath);
         }
-//        return userInput;
     }
 
 }
