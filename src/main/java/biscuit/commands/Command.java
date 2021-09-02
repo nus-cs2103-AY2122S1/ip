@@ -40,9 +40,10 @@ public abstract class Command {
      * @param taskList Task list.
      * @param ui       Ui to display.
      * @param storage  Storage to save to.
+     * @return Response to user input.
      * @throws BiscuitException Invalid input by user.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws BiscuitException;
 
     /**
      * Checks if command type is EXIT.

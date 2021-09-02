@@ -24,9 +24,10 @@ public class ExitCommand extends Command {
      * @param taskList Task list.
      * @param ui       Ui to display.
      * @param storage  Storage to save to.
+     * @return Response to user input.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.showMessage("Bye! Hope to see you again soon! 8==8");
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return "Bye! Hope to see you again soon! 8==8";
     }
 }
