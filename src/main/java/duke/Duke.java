@@ -1,5 +1,9 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+;
+
 /**
  * Main file for the duke bot. The duke bot keeps track of all your task and allows you to mark as complete.
  * Call list to see the list of task. Each task can be completed. When a task is completed, it will still appear
@@ -32,6 +36,26 @@ public class Duke {
         }
     }
 
+//    @Override
+//    public void start(Stage primaryStage) throws Exception {
+//        this.isRunning = true;
+//        Logic.preload();
+//        while (true) {
+//            String command = UI.scan();
+//            try {
+//                Logic.checkIfSpecialComand(command);
+//            } catch (InvalidCommandException exception) {
+//                System.out.println(exception.getMessage());
+//            }
+//
+//            //Check if the logic has made any changes to quit the programme or continue running
+//            if (!isRunning) {
+//                System.out.println("See ya");
+//                break;
+//            }
+//        }
+//    }
+
     /**
      * Stop the running of the bot
      */
@@ -39,6 +63,15 @@ public class Duke {
         isRunning = false;
     }
 
+    public static String getResponse(String args) {
+        String packagedCommand = "";
+        try {
+            packagedCommand = Parser.parse(args).toString();
+        } catch (InvalidCommandException e) {
+            e.printStackTrace();
+        }
+        return packagedCommand;
+    }
 
     /**
      * Starting point of the dukeBot
@@ -52,4 +85,5 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "\nWhat can I do for you today?");
         start();
     }
+
 }

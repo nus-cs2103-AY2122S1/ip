@@ -8,6 +8,12 @@ import java.util.ArrayList;
  */
 public class Logic {
 
+    private static Duke duke;
+
+    public static void setDuke(Duke duke) {
+        duke = duke;
+    }
+
     /**
      * This is to check if any special command or empty command is given
      *
@@ -23,7 +29,7 @@ public class Logic {
         if (command.equals("")) {
             throw new EmptyCommandException();
         } else if (command.equals("bye")) {
-            Duke.stop();
+            duke.stop();
             DataHandlerLayer.updateHistory();
             DataHandlerLayer.stopWriting();
         } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
