@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 import yoyo.Yoyo;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -76,7 +77,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getYoyoDialog(response, yoyoImage)
         );
         userInput.clear();
-        if (response.equals("bye")) {
+        if (input.equals("bye")) {
             Platform.exit();
         }
     }

@@ -21,6 +21,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         Scene scene = new Scene(new MainWindow(yoyo));
         stage.setScene(scene);
+        stage.setTitle("Yoyo");
         stage.show();
     }
 }
