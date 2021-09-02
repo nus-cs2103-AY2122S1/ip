@@ -1,9 +1,7 @@
 package duke;
 
 import java.io.File;
-import java.util.InputMismatchException;
 import java.util.Objects;
-import java.util.Scanner;
 
 /**
  * Duke is the main class of the bot.
@@ -26,7 +24,7 @@ public class Duke {
     public Duke(File file) {
         this.storage = new Storage(file);
         this.list = new TaskList();
-
+        storage.read(list);
     }
 
     /**
@@ -34,132 +32,84 @@ public class Duke {
      * which will result in the bot saving the current task list into the file
      * provided before shutting down.
      */
-    public void run() {
-        Scanner scanner = new Scanner(System.in);
+    public String getResponse(String string) {
+        if (Objects.equals(string, "save")) {
+            storage.write(list);
+            return "List saved!";
+        } else if (string.indexOf(' ') != -1) {
+            String task = string.substring(0, string.indexOf(' '));
+            String description = string.substring(string.indexOf(' ') + 1);
+            String result;
 
-        Ui.logo();
-        storage.read(list);
-        Ui.welcomeMessage();
-
-        String input = scanner.next();
-
-        while (!Objects.equals(input, "bye")) {
-            switch (input) {
-            case "list":
-                Ui.border();
-                list.display();
-                Ui.border();
-                input = scanner.next();
-                break;
-
+            switch (task) {
             case "done":
                 try {
-                    int temp = scanner.nextInt();
+                    int pointer = Integer.parseInt(description);
 
-                    Task cur = list.get(temp - 1);
+                    Task cur = list.get(pointer - 1);
                     cur.done();
-                    Ui.border();
-                    System.out.println("Nice! I've marked this task as done:");
-                    System.out.println(cur);
-                    Ui.border();
-                    input = scanner.next();
-                    break;
-                } catch (InputMismatchException | DukeException e) {
-                    System.out.println(e.getMessage());
-                    Ui.border();
-                    input = scanner.next();
-                    break;
+                    result = "Nice! I've marked this task as done:\n" + cur;
+                    return result;
+
+                } catch (DukeException | NumberFormatException e) {
+                    return e.getMessage();
                 }
 
             case "todo":
-                String tdLabel = scanner.nextLine();
-                Ui.border();
                 try {
-                    Todo todo = new Todo(tdLabel);
-                    list.add(todo);
-                    Ui.border();
-                    input = scanner.next();
-                    break;
+                    Todo todo = new Todo(description);
+
+                    return list.add(todo);
+
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                    Ui.border();
-                    input = scanner.next();
-                    break;
+                    return e.getMessage();
                 }
 
             case "deadline":
                 try {
-                    String dlLabel = scanner.nextLine();
-                    Ui.border();
-                    Task deadline = Parser.check(dlLabel, "/by ");
-                    list.add(deadline);
-                    Ui.border();
-                    input = scanner.next();
-                    break;
+                    Task deadline = Parser.check(description, "/by ");
+                    return list.add(deadline);
+
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                    Ui.border();
-                    input = scanner.next();
-                    break;
+                    return e.getMessage();
                 }
 
             case "event":
                 try {
-                    String eLabel = scanner.nextLine();
-                    Ui.border();
-                    Task event = Parser.check(eLabel, "/at ");
-                    list.add(event);
-                    Ui.border();
-                    input = scanner.next();
-                    break;
+                    Task event = Parser.check(description, "/at ");
+                    return list.add(event);
+
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                    Ui.border();
-                    input = scanner.next();
-                    break;
+                    return e.getMessage();
                 }
 
             case "delete":
                 try {
-                    Ui.border();
-                    int temp = scanner.nextInt();
-                    list.delete(temp);
-                    Ui.border();
-                    input = scanner.next();
-                    break;
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                    Ui.border();
-                    input = scanner.next();
-                    break;
+                    int pointer = Integer.parseInt(description);
+                    return list.delete(pointer);
+
+                } catch (DukeException | NumberFormatException e) {
+                    return e.getMessage();
                 }
 
             case "find":
                 try {
-                    String find = scanner.nextLine();
-                    Ui.border();
-                    list.find(find);
-                    Ui.border();
-                    input = scanner.next();
-                    break;
+                    return list.find(description);
 
                 } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                    Ui.border();
-                    input = scanner.next();
-                    break;
+                    return e.getMessage();
                 }
 
             default:
-                scanner.nextLine();
-                Ui.unknownCommand();
-                input = scanner.next();
-                break;
-            }
-        }
+                return Ui.unknownCommand();
 
-        Ui.border();
-        storage.write(list);
-        Ui.goodbye();
+            }
+        } else {
+            return Ui.unknownCommand();
+        }
+    }
+
+    public String displayList() {
+        return list.display();
     }
 }

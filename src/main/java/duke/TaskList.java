@@ -15,10 +15,12 @@ public class TaskList {
      *
      * @param task task provided to add to the list.
      */
-    public void add(Task task) {
+    public String add(Task task) {
+        String result;
         list.add(task);
-        System.out.println("added: " + task);
-        System.out.println("Now you have " + list.size() + " tasks in the list");
+        result = "added: " + task + "\n";
+        result += "Now you have " + list.size() + " tasks in the list";
+        return result;
     }
 
     /**
@@ -58,12 +60,14 @@ public class TaskList {
      * in a legible manner.
      *
      */
-    public void display() {
+    public String display() {
+        StringBuilder result = new StringBuilder("Your List:\n");
         for (int i = 0; i < list.size(); i++) {
             String cur = list.get(i).toString();
             int label = i + 1;
-            System.out.println(label + ". " + cur);
+            result.append(label).append(". ").append(cur).append("\n");
         }
+        return result.toString();
     }
 
     /**
@@ -72,15 +76,16 @@ public class TaskList {
      * @param pos index of the task the user wants to delete.
      * @throws DukeException when no task is found at the index.
      */
-    public void delete(int pos) throws DukeException {
+    public String delete(int pos) throws DukeException {
+        String result;
         if (pos - 1 < 0 || pos > list.size()) {
             throw new DukeException("☹ OOPS!!! No such task found!");
         }
         Task temp = list.get(pos - 1);
         list.remove(pos - 1);
-        System.out.println("Noted, I have removed this task:");
-        System.out.println(temp.toString());
-        System.out.println("Now you have " + list.size() + " tasks in the list");
+        result = "Noted, I have removed this task:\n" + temp.toString() + "\n";
+        result += "Now you have " + list.size() + " tasks in the list";
+        return result;
     }
 
     /**
@@ -89,22 +94,24 @@ public class TaskList {
      * @param string keyword to search the list with.
      * @throws DukeException when no input is detected.
      */
-    public void find(String string) throws DukeException {
+    public String find(String string) throws DukeException {
         if (string.isEmpty()) {
             throw new DukeException("☹ OOPS!!! No input was detected!");
         }
         int counter = 0;
-        System.out.println("Here are the matching tasks in your list:");
+        StringBuilder result = new StringBuilder("Here are the matching tasks in your list:\n");
         for (Task task : list) {
             String cur = task.toString();
             if (cur.contains(string)) {
                 int label = counter + 1;
-                System.out.println(label + ". " + cur);
+                result.append(label).append(". ").append(cur).append("\n");
                 counter++;
             }
         }
         if (counter == 0) {
-            System.out.println("☹ OOPS!!! No items found!");
+            return "☹ OOPS!!! No items found!";
+        } else {
+            return result.toString();
         }
     }
 

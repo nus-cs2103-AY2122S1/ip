@@ -12,7 +12,6 @@ public class Ui {
      *
      */
     public static void logo() {
-        Ui.border();
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -25,9 +24,10 @@ public class Ui {
      * Prints out the standard border between each print statement of the bot.
      *
      */
-    public static void border() {
-        System.out.println("──────────────────────────────────────────");
+    public static String border() {
+        return "──────────────────────────────────────────\n";
     }
+
 
     /**
      * Prints out the welcome message upon startup of the bot.
@@ -35,17 +35,14 @@ public class Ui {
      */
     public static void welcomeMessage() {
         System.out.println("What can i do for you?");
-        Ui.border();
     }
 
     /**
      * Prints out an error message when an unknown command is entered by user.
      *
      */
-    public static void unknownCommand() {
-        Ui.border();
-        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-        Ui.border();
+    public static String unknownCommand() {
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     /**
