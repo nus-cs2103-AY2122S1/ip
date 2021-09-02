@@ -1,11 +1,8 @@
-package IP.duke.task;
-
-import javax.xml.stream.FactoryConfigurationError;
-import java.time.LocalDate;
+package duke.task;
 
 /**
- * Represents a task which can be marked done.
- * 
+ * Represents a duke.task which can be marked done.
+ *
  * @author Gordon Yit
  * @version CS2103T, Semester 2
  */
@@ -15,34 +12,33 @@ public class Task {
 
     /**
      * Class constructor for Duke.Task class.
-     * Sets isDone to false, meaning task is not done.
-     *
+     * Sets isDone to false, meaning duke.task is not done.
      */
     public Task() {
         this.isDone = false;
     }
-    
+
     /**
-     * Returns the status icon of the task.
-     * 
-     * @return "X" if task is done, else returns " ".
+     * Returns the status icon of the duke.task.
+     *
+     * @return "X" if duke.task is done, else returns " ".
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        return (isDone ? "X" : " "); // mark done duke.task with X
     }
 
     /**
-     * Marks task as done.
+     * Marks duke.task as done.
      */
     public void markAsDone() {
         isDone = true;
     }
 
     /**
-     * Prints out the task.
-     * 
-     * @return string format of the task, 
-     * consisting of the status icon and task description.
+     * Prints out the duke.task.
+     *
+     * @return string format of the duke.task,
+     * consisting of the status icon and duke.task description.
      */
     @Override
     public String toString() {
@@ -50,26 +46,26 @@ public class Task {
     }
 
     /**
-     * Formats the task in to the storage format.
-     * 
-     * @return storage format of the task.
+     * Formats the duke.task in to the storage format.
+     *
+     * @return storage format of the duke.task.
      */
     public String formatToStore() {
         return String.format("%s |", getStatusIcon() == " " ? 1 : 0);
     }
-    
+
     /**
-     * Returns task marker. 
+     * Returns duke.task marker.
      *
-     * @return a one character string that is a marker for this task.
+     * @return a one character string that is a marker for this duke.task.
      */
     public String getTaskMarker() {
         return "";
     }
 
     /**
-     * Checks if given datetime matches the deadline of the task.
-     * 
+     * Checks if given datetime matches the deadline of the duke.task.
+     *
      * @param dateString date in string form to to compare with.
      * @return false.
      */

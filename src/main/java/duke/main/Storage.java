@@ -1,9 +1,4 @@
-package IP.duke.main;
-
-import IP.duke.task.Deadline;
-import IP.duke.task.Event;
-import IP.duke.task.Task;
-import IP.duke.task.Todo;
+package duke.main;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -12,9 +7,14 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 /**
  * Represents a file to store data, operations to write on the file.
- * 
+ *
  * @author Gordon
  * @version CS2103T, Semester 2
  */
@@ -23,10 +23,10 @@ public class Storage {
     private String fileName;
     private File file;
     private FileWriter fileWriter;
-    
+
     /**
      * Class constructor.
-     * 
+     *
      * @param filePath the path from the project directory to the storage file.
      * @param fileName the name of the file.
      */
@@ -37,15 +37,16 @@ public class Storage {
 
     /**
      * Loads all the tasks saved in the storage folder into a tasks arraylist.
-     * 
+     *
      * @return an arraylist of tasks.
      * @throws DukeException exception handled by DukeException class.
      */
+    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             File fileDirectory = new File(filePath);
-            if(!fileDirectory.exists()) {
+            if (!fileDirectory.exists()) {
                 fileDirectory.mkdir();
             }
             file = new File(filePath + "/" + fileName);
@@ -57,10 +58,8 @@ public class Storage {
                 String line;
                 while (sc.hasNext()) {
                     line = sc.nextLine();
-                    int START = 8;
                     Task t;
                     String divider = " | ";
-                    int taskAndTimeDivider = line.indexOf(divider);
                     int startingIndex = line.indexOf(divider) + divider.length() + 4;
                     if (line.contains("D |")) {
                         String taskDescriptionAndTime = line.substring(startingIndex);
@@ -101,13 +100,13 @@ public class Storage {
      * @param tasks an arraylist of tasks.
      * @throws IOException exception caused in creating new file.
      */
-    public void store(TaskList tasks) throws IOException{
+    public void store(TaskList tasks) throws IOException {
         file.delete();
         file.createNewFile();
         fileWriter = new FileWriter(file, false);
         String data = "";
         for (int i = 0; i < tasks.getNumTasks(); i++) {
-            data += tasks.getTask(i).formatToStore() + "\n";
+            data = data.concat(tasks.getTask(i).formatToStore() + "\n");
         }
         fileWriter.write(data);
         fileWriter.close();
