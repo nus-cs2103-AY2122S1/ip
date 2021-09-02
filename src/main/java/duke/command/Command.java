@@ -18,15 +18,6 @@ public class Command {
     }
 
     /**
-     * Method to determine whether programme stops after the current comment.
-     *
-     * @return False if programme should stop.
-     */
-    public boolean isExist() {
-        return true;
-    }
-
-    /**
      * Method to execute command.
      *
      * @param tasks The list of tasks in the current programme.

@@ -44,6 +44,7 @@ public class AddCommand extends Command {
      * @param ui The user interface.
      * @param storage Handles interaction with the file.
      * @throws DukeException All exceptions related to Duke.
+     * @return
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {

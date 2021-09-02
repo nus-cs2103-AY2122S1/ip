@@ -1,37 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.paint.Color?>
-<?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" depthTest="ENABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" contentDisplay="CENTER" text="label" textOverrun="CLIP" wrapText="true">
+        <Label fx:id="dialog" text="Label" wrapText="true">
          <HBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </HBox.margin>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <cursor>
-            <Cursor fx:constant="DEFAULT" />
-         </cursor>
-         <font>
-            <Font size="14.0" />
-         </font></Label>
-        <ImageView fx:id="displayPicture" blendMode="MULTIPLY" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true" translateY="10.0">
-         <HBox.margin>
-            <Insets bottom="10.0" left="10.0" right="10.0" />
-         </HBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </HBox.margin></Label>
+        <ImageView fx:id="displayPicture" fitHeight="60.0" fitWidth="60.0" pickOnBounds="true" preserveRatio="true">
          <effect>
-            <DropShadow height="40.27" radius="16.67" spread="0.38" width="28.41">
+            <DropShadow spread="0.59">
                <color>
-                  <Color red="0.8486841917037964" green="0.5166758298873901" blue="0.6328787207603455" opacity="0.8100000023841858" />
+                  <Color red="0.7894737124443054" green="0.4532163739204407" blue="0.4532163739204407" />
                </color>
             </DropShadow>
          </effect></ImageView>

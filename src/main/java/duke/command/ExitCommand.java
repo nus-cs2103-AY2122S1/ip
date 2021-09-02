@@ -16,15 +16,6 @@ public class ExitCommand extends Command {
     public ExitCommand() {
     }
 
-    /**
-     * Used for the main to know that the programme should stop.
-     *
-     * @return False.
-     */
-    @Override
-    public boolean isExist() {
-        return false;
-    }
 
     /**
      * Method to execute command.
