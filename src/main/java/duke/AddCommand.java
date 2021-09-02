@@ -35,12 +35,13 @@ public class AddCommand extends Command {
      * @param list TaskList before addition of the task.
      * @param ui Ui object to log the execution of the command.
      * @param storage Storage object that references the path to store the updated list of tasks.
+     * @return The String to be printed.
      * @throws DukeException If problem encountered during saving.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         list.add(this.task);
-        ui.printAddedTaskMessage(task, list);
         storage.save(list.convertToStorageString());
+        return ui.printAddedTaskMessage(task, list);
     }
 }

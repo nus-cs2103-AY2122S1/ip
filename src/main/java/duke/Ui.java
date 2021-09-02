@@ -26,14 +26,17 @@ public class Ui {
 
     /**
      * Prints the greeting message of the Chatbot.
+     *
+     * @return The formatted string of the message.
      */
-    public void printGreetings() {
+    public String printGreetings() {
         String message = "Hello! I'm Duke\nWhat can I do for you?";
-        printMessage(message);
+        return printMessage(message);
     }
 
     /**
      * Returns the input keyed in by the user.
+     * 
      * @return The string that is entered by the user.
      */
     public String getInput() {
@@ -41,10 +44,12 @@ public class Ui {
     }
     /**
      * Prints the formatted list of content in Task List.
+     *
+     * @return The formatted string of the message.
      */
-    public void printList(TaskList list) {
+    public String printList(TaskList list) {
         String message = list.generateMessage();
-        printMessage(message);
+        return printMessage(message);
     }
 
     /**
@@ -52,25 +57,28 @@ public class Ui {
      *
      * @param task The task object to be printed.
      * @param list The task list object that the task is being added to.
+     * @return The formatted string of the message.
      */
-    public void printAddedTaskMessage(Task task, TaskList list) {
+    public String printAddedTaskMessage(Task task, TaskList list) {
         String message =
                 "Got it. I've added this task:\n"
-                        + "  " + task + "\n"
-                        + String.format("Now you have %d tasks in the list.", list.size());
-        printMessage(message);
+                + "  " + task + "\n"
+                + String.format("Now you have %d tasks in the list.", list.size());
+        return printMessage(message);
     }
 
     /**
      * Prints the input content to console with formatting.
      *
      * @param content The content to be printed, wrapped between horizontal lines.
+     * @return The printed message.
      */
-    public void printMessage(String content) {
+    public String printMessage(String content) {
         String format =
                 "        ____________________________________________________________\n"
                 + "        %s\n"
                 + "        ____________________________________________________________\n";
         System.out.printf(format, content.replaceAll("\n", "\n        "));
+        return format.format(content.replaceAll("\n", "\n        "));
     }
 }

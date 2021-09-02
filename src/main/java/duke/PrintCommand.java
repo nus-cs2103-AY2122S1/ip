@@ -29,9 +29,10 @@ public class PrintCommand extends Command {
      * @param list TaskList before execution of the command.
      * @param ui Ui object to log the execution of the command.
      * @param storage Storage object that references the path to store the updated list of tasks.
+     * @return The string to be returned.
      */
     @Override
-    public void execute(TaskList list, Ui ui, Storage storage) {
-        ui.printList(list);
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        return ui.printList(list);
     }
 }
