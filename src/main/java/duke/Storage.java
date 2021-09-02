@@ -1,16 +1,16 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 /**
  * Storage class deals with loading tasks from the file and saving tasks in the file.
@@ -61,6 +61,8 @@ public class Storage {
                         Event event = new Event(parameters[2], LocalDate.parse(parameters[3]));
                         event.setDone(Integer.parseInt(parameters[1]));
                         taskList.add(event);
+                        break;
+                    default:
                         break;
                     }
                 }

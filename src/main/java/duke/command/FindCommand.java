@@ -10,7 +10,7 @@ public class FindCommand extends Command {
 
     private String query;
 
-    public  FindCommand(String query) {
+    public FindCommand (String query) {
         this.query = query;
     }
     @Override

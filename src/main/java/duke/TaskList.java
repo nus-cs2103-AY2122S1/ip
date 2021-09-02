@@ -1,12 +1,12 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 
 /**
  * TaskList class handles the task list of Duke.
  */
-import java.util.ArrayList;
-
 public class TaskList {
 
     private ArrayList<Task> tasks;
