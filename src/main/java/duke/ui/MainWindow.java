@@ -1,6 +1,9 @@
 package duke.ui;
 
-import duke.Duke;
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,9 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
+import duke.Duke;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -65,9 +66,7 @@ public class MainWindow extends AnchorPane {
                 public void run() {
                     System.exit(0);
                 }
-            }, 1500);
-            Platform.exit();
-            System.exit(0);
+            }, 2000);
         }
     }
 
