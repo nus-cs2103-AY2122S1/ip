@@ -11,18 +11,18 @@ import duke.task.DukeList;
 public class Ui {
 
     /** Duke's logo. */
-    private static final String DUKE_LOGO = " ____        _        \n"
+    public static final String DUKE_LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     /** Duke's greeting. */
-    private static final String DUKE_GREETING = "\nHello I'm Duke!\n"
+    public static final String DUKE_GREETING = "\nHello I'm Duke!\n"
             + "What can I do for you?\n";
 
     /** Duke's farewells. */
-    private static final String DUKE_EXIT = "Bye. Hope to see you again soon!";
+    public static final String DUKE_EXIT = "Bye. Hope to see you again soon!";
 
     /** Parser of user input. */
     private final Parser parser;
