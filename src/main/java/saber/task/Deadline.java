@@ -1,7 +1,7 @@
 package saber.task;
 
-import saber.time.SaberTime;
 import saber.exceptions.SaberTimeParserException;
+import saber.time.SaberTime;
 
 /**
  * A class to encapsulate a deadline type task

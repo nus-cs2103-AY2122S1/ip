@@ -1,8 +1,8 @@
 package saber.tasklist;
 
-import saber.task.Task;
-
 import java.util.ArrayList;
+
+import saber.task.Task;
 
 /**
  * A class to represent the TaskList used to store tasks when Saber application is still running

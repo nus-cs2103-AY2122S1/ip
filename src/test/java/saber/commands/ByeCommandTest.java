@@ -1,13 +1,13 @@
 package saber.commands;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 public class ByeCommandTest {
     private static final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -24,7 +24,7 @@ public class ByeCommandTest {
     }
 
     @Test
-    public void isExitTest(){
+    public void isExitTest() {
         SaberCommand command = new ByeCommand();
         boolean isExit = command.isExit();
         assertEquals(true, isExit);
@@ -32,8 +32,8 @@ public class ByeCommandTest {
 
     @Test
     public void showSuccessTest() {
-        String successMessage = "      Am I ... no longer needed, Master?\n" +
-                "      I understand. I shall excuse myself.\n";
+        String successMessage = "      Am I ... no longer needed, Master?\n"
+                + "      I understand. I shall excuse myself.\n";
         System.out.println(successMessage);
         assertEquals(successMessage + "\n", outContent.toString());
     }

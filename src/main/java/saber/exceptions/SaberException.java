@@ -6,7 +6,8 @@ package saber.exceptions;
 public class SaberException extends RuntimeException {
 
     /**
-     * A constructor for SaberException
+     * Constructs SaberException
+     *
      * @param message the error message
      */
     public SaberException(String message) {

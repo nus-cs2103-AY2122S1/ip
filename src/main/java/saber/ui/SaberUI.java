@@ -6,26 +6,24 @@ import java.util.Scanner;
  * A class to encapsulate Saber responses
  */
 public class SaberUI {
-    private Scanner input = new Scanner(System.in);
+    protected static final String LOGO = "\n                            __,    _,  _ __  ______ _ __\n"
+            + "              />           (      / | ( /  )(  /   ( /  )\n"
+            + "             /<             `.   /--|  /--<   /--   /--<\n"
+            + "            /<            (___)_/   |_/___/ (/____//   \\_\n"
+            + "           /<\n"
+            + " |\\_______{o}----------------------------------------------------------_\n"
+            + "[\\\\\\\\\\\\\\\\\\\\\\{*}:::<=============================================-       >\n"
+            + " |/~~~~~~~{o}----------------------------------------------------------~\n"
+            + "           \\<\n"
+            + "            \\<\n"
+            + "             \\>\n";
 
-    protected static final String logo = "\n                            __,    _,  _ __  ______ _ __\n" +
-            "              />           (      / | ( /  )(  /   ( /  )\n" +
-            "             /<             `.   /--|  /--<   /--   /--<\n" +
-            "            /<            (___)_/   |_/___/ (/____//   \\_\n" +
-            "           /<\n" +
-            " |\\_______{o}----------------------------------------------------------_\n" +
-            "[\\\\\\\\\\\\\\\\\\\\\\{*}:::<=============================================-       >\n" +
-            " |/~~~~~~~{o}----------------------------------------------------------~\n" +
-            "           \\<\n" +
-            "            \\<\n" +
-            "             \\>\n";
+    protected static final String LINE_BREAK = "      |                                     |\n"
+            + "{o)xxx|===============- * -===============|xxx(o}\n"
+            + "      |                                     |\n";
 
-    protected static final String lineBreak = "      |                                     |\n" +
-            "{o)xxx|===============- * -===============|xxx(o}\n" +
-            "      |                                     |\n";
-
-    protected final String greeting = "      I hear your command, Master.\n" +
-            "      What can I do for you?\n";
+    protected final String greeting = "      I hear your command, Master.\n"
+            + "      What can I do for you?\n";
 
     protected final String commandNotFound = "      I'm sorry, Master.\n"
             + "      I don't ... understand your command.\n";
@@ -34,16 +32,18 @@ public class SaberUI {
             + "      What you want from me is beyond my capability.\n";
 
     protected final String storageLoadingError = "      I'm sorry, Master. I can't ...\n"
-            +  "      seem to remember what\n"
-            +  "      you have previously told me\n";
+            + "      seem to remember what\n"
+            + "      you have previously told me\n";
 
     protected final String storageStoringError = "      I'm really sorry, Master. I can't ...\n"
-            +  "      the next time you talk to me ...\n"
-            +  "      I won't be the saber.Saber that you\n"
-            +  "      know...I won't remember our\n"
-            +  "      interaction either. A new\n"
-            +  "      saber.Saber will serve you instead.\n\n"
-            +  "      Have I...done well, Master?\n";
+            + "      the next time you talk to me ...\n"
+            + "      I won't be the saber.Saber that you\n"
+            + "      know...I won't remember our\n"
+            + "      interaction either. A new\n"
+            + "      saber.Saber will serve you instead.\n\n"
+            + "      Have I...done well, Master?\n";
+
+    private Scanner input = new Scanner(System.in);
 
     /**
      * A function to read input from the user
@@ -58,7 +58,7 @@ public class SaberUI {
      * Print out the Saber line break
      */
     public void showLineBreak() {
-        System.out.println(lineBreak);
+        System.out.println(LINE_BREAK);
     }
 
     /**
@@ -74,7 +74,7 @@ public class SaberUI {
      * Print out the Saber logo
      */
     public void showLogo() {
-        System.out.println(logo);
+        System.out.println(LOGO);
     }
 
     /**

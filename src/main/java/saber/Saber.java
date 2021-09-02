@@ -1,21 +1,18 @@
 package saber;
 
-import saber.commands.SaberCommand;
+import java.util.ArrayList;
 
+import saber.commands.SaberCommand;
 import saber.exceptions.SaberCommandNotFoundException;
 import saber.exceptions.SaberStorageLoadException;
 import saber.exceptions.SaberStorageStoreException;
-
 import saber.parser.SaberParser;
 import saber.storage.TaskStorage;
 import saber.task.Deadline;
 import saber.task.Event;
 import saber.task.Todo;
-
 import saber.tasklist.TaskList;
 import saber.ui.SaberUI;
-
-import java.util.ArrayList;
 
 /***
  *  A class that represents the Saber application

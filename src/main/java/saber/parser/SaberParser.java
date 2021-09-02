@@ -1,9 +1,16 @@
 package saber.parser;
 
-/** Import all saber commands as the parse function require all of them */
 import saber.Saber;
-import saber.commands.*;
-
+import saber.commands.AddCommand;
+import saber.commands.ByeCommand;
+import saber.commands.DeadlineCommand;
+import saber.commands.DeleteCommand;
+import saber.commands.DoneCommand;
+import saber.commands.EventCommand;
+import saber.commands.FindCommand;
+import saber.commands.ListCommand;
+import saber.commands.SaberCommand;
+import saber.commands.TodoCommand;
 import saber.exceptions.MissingArgumentException;
 import saber.exceptions.MissingTimeException;
 import saber.exceptions.SaberCommandNotFoundException;
@@ -57,9 +64,8 @@ public class SaberParser {
         Saber.InputCommand commandType;
 
         try {
-            commandType =  Saber.InputCommand.valueOf(this.parsedCommand[0]);
-        }
-        catch (IllegalArgumentException e) {
+            commandType = Saber.InputCommand.valueOf(this.parsedCommand[0]);
+        } catch (IllegalArgumentException e) {
             throw new SaberCommandNotFoundException("Invalid Command");
         }
         return commandType;
@@ -84,7 +90,7 @@ public class SaberParser {
      */
     public String getArgument() throws MissingArgumentException {
         if (parsedCommand.length == 1) {
-           throw new MissingArgumentException("Argument not found");
+            throw new MissingArgumentException("Argument not found");
         }
         return this.parsedCommand[1];
     }

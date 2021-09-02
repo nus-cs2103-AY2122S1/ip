@@ -5,9 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.InvalidPathException;
-
 import java.util.ArrayList;
 
 import org.json.simple.JSONArray;
@@ -16,15 +14,14 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import saber.Saber;
-import saber.tasklist.TaskList;
 import saber.exceptions.SaberStorageLoadException;
 import saber.exceptions.SaberStorageStoreException;
 import saber.exceptions.SaberTaskTypeNotFoundException;
-
 import saber.task.Deadline;
 import saber.task.Event;
 import saber.task.Task;
 import saber.task.Todo;
+import saber.tasklist.TaskList;
 
 /**
  * A class to handle all loading and saving of tasks to the hard disk
@@ -64,7 +61,7 @@ public class TaskStorage {
             JSONArray taskJsonList = (JSONArray) obj;
 
             // Parse each Json Object as task and store it in the arraylist
-            taskJsonList.forEach( task -> taskList.add(parseTaskObject( (JSONObject) task )));
+            taskJsonList.forEach(task -> taskList.add(parseTaskObject((JSONObject) task)));
 
         } catch (FileNotFoundException e) {
             // Return an empty arraylist if the file is not found
@@ -81,8 +78,7 @@ public class TaskStorage {
      * @param task the JSON Object to be parsed
      * @return the task as a Task object
      */
-    private static Task parseTaskObject(JSONObject task)
-    {
+    private static Task parseTaskObject(JSONObject task) {
         JSONObject taskObject = (JSONObject) task.get("task");
 
         String description = (String) taskObject.get("description");
@@ -92,9 +88,8 @@ public class TaskStorage {
 
         Saber.TaskType taskType;
         try {
-            taskType =  Saber.TaskType.valueOf(type);
-        }
-        catch (IllegalArgumentException e) {
+            taskType = Saber.TaskType.valueOf(type);
+        } catch (IllegalArgumentException e) {
             throw new SaberTaskTypeNotFoundException("Invalid saber.task.Task Type");
         }
 
@@ -113,7 +108,7 @@ public class TaskStorage {
         default :
             parsedTask = new Task(description, isDone);
             break;
-        };
+        }
 
         return parsedTask;
     }
@@ -131,7 +126,7 @@ public class TaskStorage {
     // This method will still be type safe as only tasks are stored in the file
     public void store(TaskList taskList, Saber.TaskType[] taskType) throws SaberStorageStoreException {
         JSONArray jsonTaskList = new JSONArray();
-        for (int i = 0; i < taskList.size(); i ++) {
+        for (int i = 0; i < taskList.size(); i++) {
             Task task = taskList.get(i);
 
             JSONObject taskDetails = new JSONObject();
@@ -180,7 +175,7 @@ public class TaskStorage {
             writer.write(jsonTaskList.toJSONString());
             writer.flush();
         } catch (IOException | InvalidPathException | SecurityException e) {
-           throw new SaberStorageStoreException("Fail to save tasks");
+            throw new SaberStorageStoreException("Fail to save tasks");
         }
     }
 }

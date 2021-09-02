@@ -1,8 +1,8 @@
 package saber.commands;
 
-import saber.ui.DeleteUI;
 import saber.task.Task;
 import saber.tasklist.TaskList;
+import saber.ui.DeleteUI;
 
 /**
  * A class to encapsulate a DeleteCommand

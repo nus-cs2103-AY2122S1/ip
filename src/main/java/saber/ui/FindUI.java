@@ -1,17 +1,17 @@
 package saber.ui;
 
-import saber.tasklist.TaskList;
 import saber.task.Task;
+import saber.tasklist.TaskList;
 
 /**
  * A class to encapsulate the UI corresponding to FindCommand
  */
 public class FindUI extends SaberCommandUI {
-    private String successMessage;
-
     protected final String missingFindStringError = "      I'm really sorry, Master.\n"
             + "      I don't quite know what task you want me\n"
             + "      to find ...\n";
+
+    private String successMessage;
 
     /**
      * A constructor for FindUI which will initialize the success message to an empty string
@@ -28,9 +28,9 @@ public class FindUI extends SaberCommandUI {
     public void setSuccessMessage(String findString, TaskList taskList) {
         int totalTask = taskList.size();
         boolean hasFoundAtLeastOneTask = false;
-        StringBuilder successTemp = new StringBuilder("      Right away, Master. Please give me a\n" +
-                "      moment to recollect everything ...\n" + "\n" +
-                "      I'll list them for you, Master.\n");
+        StringBuilder successTemp = new StringBuilder("      Right away, Master. Please give me a\n"
+                + "      moment to recollect everything ...\n" + "\n"
+                + "      I'll list them for you, Master.\n");
 
         for (int i = 0; i < totalTask; i++) {
             Task task = taskList.get(i);

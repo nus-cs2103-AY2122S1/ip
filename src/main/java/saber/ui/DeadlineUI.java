@@ -6,8 +6,6 @@ import saber.task.Task;
  * A class to encapsulates the UI corresponding to DeadlineCommand
  */
 public class DeadlineUI extends SaberCommandUI {
-    private String successMessage;
-
     protected final String missingDescriptionError = "      I'm really sorry, Master.\n"
             + "      I'm ... not sure what task you want me\n"
             + "      to add ...\n";
@@ -21,6 +19,8 @@ public class DeadlineUI extends SaberCommandUI {
             + "      to understand the date you\n"
             + "      just told me. Maybe..., Master\n"
             + "      can try to use other format?\n";
+
+    private String successMessage;
 
     /**
      * A constructor for DeadlineUI which will initialize the success message to an empty string

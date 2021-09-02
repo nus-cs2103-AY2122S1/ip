@@ -12,7 +12,7 @@ public class DoneUI extends SaberCommandUI {
             + "      I'm ... not sure which task you want me\n"
             + "      to mark as done...\n";
 
-    protected final String argumentError =  "      I'm really sorry, Master.\n"
+    protected final String argumentError = "      I'm really sorry, Master.\n"
             + "      I'm unable to find the task that\n"
             + "      you specified...\n";
 
@@ -27,7 +27,7 @@ public class DoneUI extends SaberCommandUI {
      * Set the success message for the UI
      * @param task the task to be set as done
      */
-    public void setSuccessMessage(Task task){
+    public void setSuccessMessage(Task task) {
         this.successMessage = "      Understand, Master.\n" + "      I'll mark this done right away.\n"
                 + "\n        " + task + "\n";
     }

@@ -1,15 +1,16 @@
 package saber.tasklist;
 
-import org.junit.jupiter.api.Test;
-import saber.task.Task;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import saber.task.Task;
 
 public class TaskListTest {
     @Test
-    public void addTest(){
+    public void addTest() {
         TaskList taskList = new TaskList(new ArrayList<>());
         Task item = new Task("item", false);
         taskList.add(item);
@@ -26,7 +27,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void sizeTest(){
+    public void sizeTest() {
         TaskList taskList = new TaskList(new ArrayList<>());
         Task item = new Task("item", false);
         Task item2 = new Task("item2", false);
@@ -36,7 +37,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void deleteTest(){
+    public void deleteTest() {
         TaskList taskList = new TaskList(new ArrayList<>());
         Task item = new Task("item", false);
         taskList.add(item);

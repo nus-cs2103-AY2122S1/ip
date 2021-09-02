@@ -16,9 +16,9 @@ public class ListUI extends SaberCommandUI {
      */
     public ListUI(TaskList taskList) {
         int totalTask = taskList.size();
-        StringBuilder successTemp = new StringBuilder("      Would you like to know what you\n" +
-                "      told me to remember?\n" + "\n" +
-                "      I'll list them for you, Master.\n");
+        StringBuilder successTemp = new StringBuilder("      Would you like to know what you\n"
+                + "      told me to remember?\n" + "\n"
+                + "      I'll list them for you, Master.\n");
 
         for (int i = 0; i < totalTask; i++) {
             Task task = taskList.get(i);

@@ -22,8 +22,8 @@ public class AddUI extends SaberCommandUI {
      * Set the success message for the UI
      * @param task the task to be added
      */
-    public void setSuccessMessage(Task task){
-        this.successMessage = "      I have added: "  + task + "\n";
+    public void setSuccessMessage(Task task) {
+        this.successMessage = "      I have added: " + task + "\n";
     }
 
     /**

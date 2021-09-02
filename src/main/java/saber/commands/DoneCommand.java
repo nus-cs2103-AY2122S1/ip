@@ -35,8 +35,8 @@ public class DoneCommand extends SaberCommand {
             return;
         }
         if (taskIndex >= totalTask || taskIndex < 0) {
-           doneUI.showUnableToFindTaskError();
-           return;
+            doneUI.showUnableToFindTaskError();
+            return;
         }
         Task task = taskList.get(taskIndex);
         task.markAsDone();
