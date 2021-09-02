@@ -3,7 +3,6 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
-import duke.control.DialogBox;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -25,7 +24,7 @@ import javafx.stage.Stage;
 /**
  * The Duke class encapsulates the action of the Duke chatbot.
  */
-public class Duke extends Application {
+public class Duke {
 
     /** The path name to be converted to create a new File instance. */
     private static final String PATH_NAME = "./data/tasklist.txt";
@@ -118,21 +117,21 @@ public class Duke extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+    /*private void handleUserInput() {
+        String userText = new String(userInput.getText());
+        String dukeText = new String(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
-    }
+    }*/
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         ui.greetWelcome();
         try {
             Command c = new Parser().parse(input);
@@ -158,7 +157,7 @@ public class Duke extends Application {
 
     }
 
-    @Override
+    /*@Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
 
@@ -219,5 +218,5 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
+    }*/
 }
