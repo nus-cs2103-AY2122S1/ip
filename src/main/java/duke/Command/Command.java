@@ -1,18 +1,18 @@
 package duke.Command;
 
+import java.util.ArrayList;
+
 import duke.Exceptions.DukeException;
 import duke.Exceptions.IndexNotInListException;
 import duke.Exceptions.NoDescriptionException;
 import duke.Exceptions.WrongInputException;
-
 import duke.Storage.Storage;
+import duke.Tasks.Deadline;
+import duke.Tasks.Event;
 import duke.Tasks.Task;
 import duke.Tasks.TaskList;
 import duke.Tasks.Todo;
-import duke.Tasks.Deadline;
-import duke.Tasks.Event;
 import duke.Ui.Ui;
-import java.util.ArrayList;
 
 /**
  * The Command class is responsible for directing the user's interaction with Duke.
@@ -57,7 +57,7 @@ public abstract class Command {
     }
 
     public static class FindCommand extends Command {
-        String input;
+        private final String input;
 
         public FindCommand(String input) {
             this.input = input;
@@ -77,7 +77,7 @@ public abstract class Command {
     }
 
     public static class DoneCommand extends Command {
-        String input;
+        private final String input;
 
         public DoneCommand(String input) {
             this.input = input;
@@ -99,7 +99,7 @@ public abstract class Command {
             } else {
                 try {
                     int index = Integer.parseInt(input.split(" ")[1].trim());
-                    Task task = tasklist.complete(index-1);
+                    Task task = tasklist.complete(index - 1);
                     ui.showTaskCompleted(task, tasklist);
                     storage.updateTxtFile(tasklist);
                 } catch (NumberFormatException e) {
@@ -110,7 +110,7 @@ public abstract class Command {
     }
 
     public static class TodoCommand extends Command {
-        String input;
+        private final String input;
 
         public TodoCommand(String input) {
             this.input = input;
@@ -124,7 +124,7 @@ public abstract class Command {
          * @param storage Takes in an instance of the storage to update and renew the txt files.
          */
         @Override
-        public void execute(TaskList tasklist, Ui ui, Storage storage) throws NoDescriptionException{
+        public void execute(TaskList tasklist, Ui ui, Storage storage) throws NoDescriptionException {
             if (input.trim().toLowerCase().equals("todo")) {
                 String message = "Oi, description of your todo cannot be empty lah!";
                 throw new NoDescriptionException(message);
@@ -139,8 +139,8 @@ public abstract class Command {
         }
     }
 
-    public static class DeadlineCommand extends Command{
-        String input;
+    public static class DeadlineCommand extends Command {
+        private final String input;
 
         public DeadlineCommand(String input) {
             this.input = input;
@@ -154,7 +154,8 @@ public abstract class Command {
          * @param storage Takes in an instance of the storage to update and renew the txt files.
          */
         @Override
-        public void execute(TaskList tasklist, Ui ui, Storage storage) throws NoDescriptionException, WrongInputException {
+        public void execute(TaskList tasklist, Ui ui, Storage storage) throws NoDescriptionException,
+                WrongInputException {
             if (input.trim().toLowerCase().equals("deadline")) {
                 String message = "Oi, description of your deadline cannot be empty lah!";
                 throw new NoDescriptionException(message);
@@ -177,8 +178,8 @@ public abstract class Command {
         }
     }
 
-    public static class EventCommand extends Command{
-        String input;
+    public static class EventCommand extends Command {
+        private final String input;
 
         public EventCommand(String input) {
             this.input = input;
@@ -192,7 +193,8 @@ public abstract class Command {
          * @param storage Takes in an instance of the storage to update and renew the txt files.
          */
         @Override
-        public void execute(TaskList tasklist, Ui ui, Storage storage) throws NoDescriptionException, WrongInputException {
+        public void execute(TaskList tasklist, Ui ui, Storage storage) throws NoDescriptionException,
+                WrongInputException {
             if (input.trim().toLowerCase().equals("event")) {
                 String message = "Oi, description of your event cannot be empty lah!";
                 throw new NoDescriptionException(message);
@@ -214,8 +216,8 @@ public abstract class Command {
         }
     }
 
-    public static class DeleteCommand extends Command{
-        String input;
+    public static class DeleteCommand extends Command {
+        private final String input;
 
         public DeleteCommand(String input) {
             this.input = input;
@@ -237,7 +239,7 @@ public abstract class Command {
             } else {
                 try {
                     int index = Integer.parseInt(input.split(" ")[1].trim());
-                    Task task = tasklist.delete(index-1);
+                    Task task = tasklist.delete(index - 1);
                     ui.showTaskDeleted(task, tasklist);
                     storage.updateTxtFile(tasklist);
                 } catch (NumberFormatException e) {
@@ -248,7 +250,7 @@ public abstract class Command {
     }
 
     public static class NonsenseCommand extends Command {
-        String input;
+        private final String input;
 
         public NonsenseCommand(String input) {
             this.input = input;

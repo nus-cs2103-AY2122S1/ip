@@ -1,20 +1,21 @@
 package duke.Storage;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.Exceptions.DukeException;
 import duke.Exceptions.NoPreviousFileException;
 import duke.Tasks.Deadline;
 import duke.Tasks.Event;
 import duke.Tasks.Task;
-import duke.Tasks.Todo;
 import duke.Tasks.TaskList;
+import duke.Tasks.Todo;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Storage allows the creation and update of txt files to maintain past tasks.
@@ -30,7 +31,7 @@ public class Storage {
      * Returns a list of Tasks that were stored in the tasks.txt file.
      *
      * @return a list of Tasks
-     * @throws DukeException If there is an error writing to the files or when there is no previous file detected.
+     * @throws DukeException If error writing to the files or no file detected.
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
@@ -51,7 +52,8 @@ public class Storage {
             } catch (IOException e2) {
                 System.out.println("Error creating txt file");
             }
-            throw new NoPreviousFileException("No previous file detected, creating new one.");
+            throw new NoPreviousFileException("No previous file "
+                     + "detected, creating new one.");
         }
 
         return list;
@@ -72,7 +74,7 @@ public class Storage {
                 String date = taskAndDate.split(" \\(by: ")[1];
 
                 // Chop of last ")"
-                date = date.substring(0, date.length()-1);
+                date = date.substring(0, date.length() - 1);
                 task = new Deadline(name, " " + date);
             } else {
                 task = new Deadline(taskAndDate, "");
@@ -84,7 +86,7 @@ public class Storage {
                 String date = taskAndDate.split(" \\(at: ")[1];
 
                 // Chop of last ")"
-                date = date.substring(0, date.length()-1);
+                date = date.substring(0, date.length() - 1);
                 task = new Event(name, " " + date);
             } else {
                 task = new Event(taskAndDate, "");
@@ -98,7 +100,7 @@ public class Storage {
     }
 
     /**
-     * Updates the txt file that is used to store and remember the tasks entered.
+     * Updates the txt file to store and remember the tasks entered.
      *
      * @param tasklist This is taken in so that the txt file can be updated.
      */

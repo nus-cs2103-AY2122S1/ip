@@ -1,14 +1,16 @@
 package duke;
 
-import duke.Exceptions.WrongInputException;
-import duke.Tasks.Deadline;
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import duke.Exceptions.WrongInputException;
+import duke.Tasks.Deadline;
+
 
 public class DeadlineTest {
     @Test
-    public void  testDeadlineTaskCreated_success() throws WrongInputException {
+    public void testDeadlineTaskCreated_success() throws WrongInputException {
         Deadline deadline1 = Deadline.createDeadline("Do Homework", "02/08/2021 1800");
         assertEquals("[D][ ] Do Homework (by: 02 Aug 2021, 18.00 PM)", deadline1.toString());
 

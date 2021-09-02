@@ -7,14 +7,28 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+
+
 public class Event extends Task {
     protected String at;
 
+    /**
+     * Constructor for Event
+     * @param name this is the description of the event
+     * @param at this is the timing for the event
+     */
     public Event(String name, String at) {
         super(name.trim());
         this.at = at;
     }
 
+    /**
+     * Returns an event based on given description and time
+     * @param name description of task
+     * @param at time to task
+     * @return an Event task
+     * @throws WrongInputException when input format is not correct
+     */
     public static Event createEvent(String name, String at) throws WrongInputException {
         if (at.equals("")) {
             return new Event(name, at);
