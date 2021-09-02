@@ -16,24 +16,32 @@ public class Parser {
      */
     public Command parse(String command, TaskList taskArr) throws DukeException {
         String[] commandArr = command.split(" ");
+        int commandArrLength = commandArr.length;
         if (command.equals("bye")) {
             return new ByeCommand();
         } else if (command.equals("list")) {
             return new ListCommand();
         } else if (commandArr[0].equals("done")) {
-            int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
-            return new DoneCommand(taskArrRef);
+            if (commandArrLength <= 1) {
+                return new ErrorCommand("Please enter the task number after \"done\"");
+            } else {
+                int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
+                return new DoneCommand(taskArrRef);
+            }
         } else if (commandArr[0].equals("delete")) {
-            int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
-            return new DeleteCommand(taskArrRef);
+            if (commandArrLength <= 1) {
+                return new ErrorCommand("Please enter the task number after \"delete\"");
+            } else {
+                int taskArrRef = Integer.parseInt(commandArr[1]) - 1;
+                return new DeleteCommand(taskArrRef);
+            }
         } else if (commandArr[0].equals("find")) {
-            try {
+            if (commandArrLength <= 1) {
+                return new ErrorCommand("Please enter the task number after \"find\"");
+            } else {
                 String keyword = commandArr[1];
                 return new FindCommand(keyword);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return new ErrorCommand("Please insert a word after \"done\"");
             }
-
         } else {
             boolean wrongArrayLength = commandArr.length <= 1;
             String taskAdded = "Got it. I've added this task: ";
