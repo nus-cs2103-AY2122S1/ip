@@ -2,6 +2,9 @@ package ui;
 
 import java.util.ArrayList;
 
+/**
+ * Obtains log message for duke interface to output
+ */
 public class LogMessage {
 
     private ArrayList<String> messages = new ArrayList<>();
