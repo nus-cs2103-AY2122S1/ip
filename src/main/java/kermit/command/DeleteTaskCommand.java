@@ -38,11 +38,11 @@ public class DeleteTaskCommand extends Command {
      * @throws KermitException if error deleting task or saving task list.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
         try {
             Task deletedTask = taskList.deleteTask(taskNum);
-            ui.showDeleteTaskMessage(deletedTask, taskList);
             storage.save(taskList);
+            return ui.getDeleteTaskMessage(deletedTask, taskList);
         } catch (IndexOutOfBoundsException e) {
             throw new KermitException("That is an invalid task!");
         }

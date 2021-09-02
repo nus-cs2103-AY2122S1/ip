@@ -21,39 +21,25 @@ public class Kermit {
         try {
             taskList = new TaskList(storage.load());
         } catch (KermitException e) {
-            ui.showLoadingError();
+            ui.getLoadingError();
             taskList = new TaskList();
         }
     }
 
-    /**
-     * Driver function to start Kermit.
-     */
-    public void run() {
-        ui.showIntroMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = Parser.parse(fullCommand);
-                command.execute(taskList, ui, storage);
-                isExit = command.isExit();
-            } catch (KermitException e) {
-                ui.showErrorMessage(e.getMessage());
-            }
-        }
-    }
-
-    /**
-     * Starts Kermit and saves data in data/tasks.txt.
-     *
-     * @param args  The commandline arguments.
-     */
-    public static void main(String[] args) {
-        new Kermit("data/tasks.txt").run();
-    }
+//    /**
+//     * Driver function to start Kermit.
+//     */
+//    public void run() {
+//        ui.showIntroMessage();
+//        boolean isExit = false;
+//    }
 
     public String getResponse(String input) {
-        return "Kermit heard: " + input;
+        try {
+            Command command = Parser.parse(input);
+            return command.execute(taskList, ui, storage);
+        } catch (KermitException e) {
+            return ui.getErrorMessage(e.getMessage());
+        }
     }
 }

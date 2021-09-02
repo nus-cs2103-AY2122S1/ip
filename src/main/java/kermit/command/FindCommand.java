@@ -19,9 +19,9 @@ public class FindCommand extends Command {
      * @param storage Instance of storage class used.
      * @throws KermitException if there are any errors while performing action.
      */
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList filteredTasks = taskList.filter(filterText);
-        ui.showFilteredTasks(filteredTasks);
+        return ui.getFilteredTasks(filteredTasks);
     }
 
     /**

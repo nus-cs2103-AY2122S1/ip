@@ -18,7 +18,7 @@ public abstract class Command {
      * @param storage Instance of storage class used.
      * @throws KermitException if there are any errors while performing action.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws KermitException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws KermitException;
 
     /**
      * If command is exit command

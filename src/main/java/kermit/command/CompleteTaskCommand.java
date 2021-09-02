@@ -38,11 +38,11 @@ public class CompleteTaskCommand extends Command {
      * @throws KermitException if error completing task or saving task list.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
         try {
             Task task = taskList.markTaskAsComplete(taskNum);
-            ui.showCompleteTaskMessage(task);
             storage.save(taskList);
+            return ui.getCompleteTaskMessage(task);
         } catch (IndexOutOfBoundsException e) {
             throw new KermitException("That is an invalid task!");
         }

@@ -25,9 +25,9 @@ public class ExitCommand extends Command {
      * @throws KermitException if there is an error saving the file.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
-        ui.showGoodbyeMessage();
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
         storage.save(taskList);
+        return ui.getGoodbyeMessage();
     }
 
     /**

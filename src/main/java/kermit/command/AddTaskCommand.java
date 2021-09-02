@@ -83,10 +83,10 @@ public class AddTaskCommand extends Command {
      * @throws KermitException if task could not be saved.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws KermitException {
         taskList.add(task);
-        ui.showAddTaskMessage(task, taskList);
         storage.save(taskList);
+        return ui.getAddTaskMessage(task, taskList);
     }
 
     /**

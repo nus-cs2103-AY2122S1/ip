@@ -42,22 +42,22 @@ public class Ui {
     /**
      * Pretty format and print welcome message.
      */
-    public void showIntroMessage() {
-        formatAndPrintText(introductionText);
+    public String getIntroMessage() {
+        return introductionText;
     }
 
     /**
      * Pretty format and print exit message.
      */
-    public void showGoodbyeMessage() {
-        formatAndPrintText(goodbyeText);
+    public String getGoodbyeMessage() {
+        return goodbyeText;
     }
 
     /**
      * Pretty format and print list items.
      */
-    public void showListItems(TaskList list) {
-        formatAndPrintText(listText + "\n" + list);
+    public String getListItems(TaskList list) {
+        return listText + "\n" + list.toString();
     }
 
     /**
@@ -66,9 +66,9 @@ public class Ui {
      * @param task Task that is added to list.
      * @param list List that task was added to.
      */
-    public void showAddTaskMessage(Task task, TaskList list) {
-        formatAndPrintText("Got it. I've added this task:\n"
-                + task + "\nNow you have " + list.size() + " tasks in the list.");
+    public String getAddTaskMessage(Task task, TaskList list) {
+        return "Got it. I've added this task:\n"
+                + task + "\nNow you have " + list.size() + " tasks in the list.";
     }
 
     /**
@@ -77,9 +77,9 @@ public class Ui {
      * @param task Task that is deleted from list.
      * @param list List that task was deleted from.
      */
-    public void showDeleteTaskMessage(Task task, TaskList list) {
-        formatAndPrintText("Noted. I've removed this task:\n"
-                + task + "\nNow you have " + list.size() + " tasks in the list.");
+    public String getDeleteTaskMessage(Task task, TaskList list) {
+        return "Noted. I've removed this task:\n"
+                + task + "\nNow you have " + list.size() + " tasks in the list.";
     }
 
     /**
@@ -87,8 +87,8 @@ public class Ui {
      *
      * @param task Task that is completed.
      */
-    public void showCompleteTaskMessage(Task task) {
-        formatAndPrintText(completeTaskText + "\n" + task);
+    public String getCompleteTaskMessage(Task task) {
+        return completeTaskText + "\n" + task;
     }
 
     /**
@@ -96,22 +96,22 @@ public class Ui {
      *
      * @param e Error message.
      */
-    public void showErrorMessage(String e) {
-        formatAndPrintText(errorText + "\n" + e);
+    public String getErrorMessage(String e) {
+        return errorText + "\n" + e;
     }
 
     /**
      * Pretty format text error when loading file.
      */
-    public void showLoadingError() {
-        formatAndPrintText(loadingErrorText);
+    public String getLoadingError() {
+        return loadingErrorText;
     }
 
     /**
      * Pretty format tasks that match filter.
      */
-    public void showFilteredTasks(TaskList filteredTasks) {
-        formatAndPrintText(filteredTaskText + "\n" + filteredTasks);
+    public String getFilteredTasks(TaskList filteredTasks) {
+        return filteredTaskText + "\n" + filteredTasks;
     }
 
     /**
