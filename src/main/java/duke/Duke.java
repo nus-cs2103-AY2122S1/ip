@@ -4,6 +4,9 @@ import duke.command.Command;
 
 import java.io.IOException;
 
+/**
+ * Encapsulates the Duke chatbot.
+ */
 public class Duke {
     private Storage storage;
     private TaskList taskList;
@@ -20,6 +23,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Launches Duke.
+     */
     void run() {
         ui.showWelcome();
         boolean isExit = false;

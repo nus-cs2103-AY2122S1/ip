@@ -9,6 +9,14 @@ import duke.command.DoneCommand;
 import duke.command.ListCommand;
 
 public class Parser {
+
+    /**
+     * Parses user's input and returns the corresponding command object.
+     *
+     * @param fullCommand String representation of input by user.
+     * @return The corresponding command object.
+     * @throws DukeException If the input is invalid.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String[] params = fullCommand.split(" ", 2);
         String keyword = params[0];
@@ -30,6 +38,7 @@ public class Parser {
                         "delete in the following format: \n\t delete [task number]");
             }
             return new DeleteCommand(Integer.parseInt(params[1]) - 1);
+        //Fallthrough
         case ("todo"):
         case ("event"):
         case ("deadline"):

@@ -3,13 +3,24 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Encapsulates the task list object.
+ */
 public class TaskList {
     List<Task> tasks;
 
+    /**
+     * Creates new TaskList instance.
+     */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
+    /**
+     * Creates new TaskList instance when tasks are loaded from storage.
+     *
+     * @param existingTasks Previously saved tasks.
+     */
     public TaskList(List<Task> existingTasks) {
         this.tasks = (existingTasks == null ? new ArrayList<>() : existingTasks);
     }
