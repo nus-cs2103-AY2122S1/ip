@@ -68,7 +68,7 @@ public class Parser {
                 if (task.isBlank()) {//checking incomplete input
                     throw new DukeException();
                 }
-                String[] parts = task.split("/at");//split string along keyword /at
+                String[] parts = task.split("/at ");//split string along keyword /at
                 return list.addEvent(parts[0], parts[1]);
             } else {
                 switch (input.toLowerCase()) {
