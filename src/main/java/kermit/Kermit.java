@@ -26,14 +26,6 @@ public class Kermit {
         }
     }
 
-//    /**
-//     * Driver function to start Kermit.
-//     */
-//    public void run() {
-//        ui.showIntroMessage();
-//        boolean isExit = false;
-//    }
-
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
