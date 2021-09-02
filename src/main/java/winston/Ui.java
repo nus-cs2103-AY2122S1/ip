@@ -7,8 +7,8 @@ public class Ui {
     public Ui() {
     }
     
-    public static String invalidTask() {
-        return "Invalid command. Returning to Main Menu\n";
+    public static String invalidTask(String errorMessage) {
+        return "Error: " + errorMessage + "\n";
     }
     
     public static String printTasksLeft(int tasksLeft) {
@@ -25,9 +25,6 @@ public class Ui {
     
     public static String printMatchingTasks() {
         return "Here are the matching tasks in your list:\n";
-    }
-    public static String invalidDateFormat() {
-        return "Invalid date format. Please give a valid date format. E.g 2021-12-12";
     }
     
     public static String welcomeMessage() {
