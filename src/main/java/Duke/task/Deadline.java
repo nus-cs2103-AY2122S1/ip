@@ -1,8 +1,10 @@
+package Duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Deadline class extends Task class and encapsulate a deadline task
+ * The Duke.Duke.task.Deadline class extends Duke.Duke.task.Task class and encapsulate a deadline Duke.Duke.task
  * that need to be done before a specific date/time.
  */
 public class Deadline extends Task {
@@ -20,9 +22,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns string for saving deadline task to data file.
+     * Returns string for saving deadline Duke.Duke.task to data file.
      *
-     * @return string for saving deadline task to data file.
+     * @return string for saving deadline Duke.Duke.task to data file.
      */
     @Override
     public String toFileEntry() {

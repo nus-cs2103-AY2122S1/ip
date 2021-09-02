@@ -1,15 +1,17 @@
+package Duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * The Event class extends Task class and encapsulate an event task
+ * The Duke.Duke.task.Event class extends Duke.Duke.task.Task class and encapsulate an event Duke.Duke.task
  * that start at a specific time and ends at a specific time.
  */
 public class Event extends Task {
     protected LocalDate at;
 
     /**
-     * Constructor for an event task.
+     * Constructor for an event Duke.Duke.task.
      *
      * @param description String description of event.
      * @param at LocalDate of event time.
@@ -20,9 +22,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns string for saving event task to data file.
+     * Returns string for saving event Duke.Duke.task to data file.
      *
-     * @return string for saving event task to data file.
+     * @return string for saving event Duke.Duke.task to data file.
      */
     @Override
     public String toFileEntry() {

@@ -1,9 +1,14 @@
+package Duke;
+
+import Duke.DukeException;
+import Duke.Keyword;
+
 public class Parser {
     /**
      * Checks if command is valid keyword.
      *
      * @param input command
-     * @return Keyword
+     * @return Duke.Keyword
      * @throws DukeException if command is invalid keyword.
      */
     public static Keyword parse(String input) throws DukeException {

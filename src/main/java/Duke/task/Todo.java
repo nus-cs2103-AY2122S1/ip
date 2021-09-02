@@ -1,22 +1,24 @@
+package Duke.task;
+
 /**
- * The To-do class extends Task class and encapsulates a to-do task
+ * The To-do class extends Duke.Duke.task.Task class and encapsulates a to-do Duke.Duke.task
  * with no time attached. 
  */
 public class Todo extends Task {
 
     /**
-     * Constructor for an to-do task.
+     * Constructor for an to-do Duke.Duke.task.
      *
-     * @param description String description of to-do task.
+     * @param description String description of to-do Duke.Duke.task.
      */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * Returns string for saving to-do task to data file.
+     * Returns string for saving to-do Duke.Duke.task to data file.
      *
-     * @return string for saving to-do task to data file.
+     * @return string for saving to-do Duke.Duke.task to data file.
      */
     @Override
     public String toFileEntry() {

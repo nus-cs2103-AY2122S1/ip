@@ -1,3 +1,5 @@
+package Duke;
+
 public enum Keyword {
     LIST ("list"),
     DONE ("done"),
