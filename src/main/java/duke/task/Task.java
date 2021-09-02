@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * the task in the list
+ * The task in the list.
  */
 public class Task {
     /**
@@ -16,6 +16,7 @@ public class Task {
 
     /**
      * Creates a new Task object (Constructor)
+     *
      * @param description The new task description
      */
     public Task(String description) {
@@ -24,7 +25,8 @@ public class Task {
     }
 
     /**
-     * Gets the task status icon
+     * Gets the task status icon.
+     *
      * @return "X" if the test is done, else " "
      */
     public String getStatusIcon() {
@@ -32,7 +34,7 @@ public class Task {
     }
 
     /**
-     * Marks the task as done
+     * Marks the task as done.
      */
     public String doneTask() {
         this.isDone = true;
@@ -41,7 +43,8 @@ public class Task {
     }
 
     /**
-     * generates the string representation of task
+     * Generates the task string representation.
+     *
      * @return The description of the task
      */
     public String toString() {

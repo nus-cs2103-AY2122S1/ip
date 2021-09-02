@@ -4,8 +4,8 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * The items in the bot
- * responsible for adding things to the list of items
+ * The items in the bot.
+ * Responsible for adding things to the list of items.
  */
 
 public class Items {
@@ -16,14 +16,15 @@ public class Items {
     private ArrayList<Task> tasks;
 
     /**
-     * Constructor for Items
+     * Instantiates an Items object.
      */
     public Items() {
         tasks = new ArrayList<>();
     }
 
     /**
-     * Constructor for Items
+     * Constructor for Items.
+     *
      * @param tasks An ArrayList of Tasks
      */
     public  Items(ArrayList<Task> tasks) {
@@ -32,6 +33,7 @@ public class Items {
 
     /**
      * Adds an item to the list.
+     *
      * @param task A task to represent the item added
      * @return A status message to be displayed
      */
@@ -47,7 +49,8 @@ public class Items {
     }
 
     /**
-     * marks the specified task as done
+     * Marks the specified task as done.
+     *
      * @param index the index at which the task is.
      * @return error message if index is greater than the length of list, else completion message.
      */
@@ -66,7 +69,8 @@ public class Items {
     }
 
     /**
-     * deletes the item at the specified index
+     * Deletes the item at the specified index.
+     *
      * @param index index at which item is to be deleted
      * @return output message stating item has been deleted
      * @throws DukeException thrown in case of a wrong input
@@ -89,7 +93,8 @@ public class Items {
     }
 
     /**
-     * generates the String representation of the items object.
+     * Generates the String representation of the items object.
+     *
      * @return The String representation of the items object.
      */
     public String printList() throws DukeException {
@@ -109,10 +114,11 @@ public class Items {
     }
 
     /**
-     * finds the task containing the given keyword
-     * @param keyword word in task
-     * @return string containing all the tasks with the keyword
-     * @throws DukeException if there is no task that matches the given keyword
+     * Finds the tasks with the given keyword.
+     *
+     * @param keyword the word to be searched for in the list.
+     * @return string containing all tasks with the keyword.
+     * @throws DukeException thrown if the task list is empty.
      */
     public String findTask(String keyword) throws DukeException {
         StringBuilder output = new StringBuilder();

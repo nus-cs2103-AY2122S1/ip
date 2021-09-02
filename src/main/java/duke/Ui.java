@@ -2,14 +2,16 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Handles all the interaction with the user.
+ */
 public class Ui {
 
     /**
      * Global variables
      */
-    private static final String SPACE = "    ";
-    private static final String LINE = SPACE + "______________________________________________________________________";
-    private static final String END_LINE = SPACE + "======================================================================\n";
+    private static final String LINE = "\t______________________________________________________________________";
+    private static final String END_LINE = "\t======================================================================\n";
     private static final String LOGO = "\n" +
             "███████████████████████████████\n" +
             "█▄─▄─▀█─█─█▄─██─▄█─▄─▄─█▄─██─▄█\n" +
@@ -17,12 +19,15 @@ public class Ui {
             "▀▄▄▄▄▀▀▄▀▄▀▀▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▄▄▀▀";
     private Items items;
 
+    /**
+     * Instantiates a new ui object.
+     */
     public Ui() {
         items = new Items();
     }
 
     /**
-     * returns a greeting to the user
+     * Greets the user.
      */
     public void greet() {
         System.out.println(LOGO);
@@ -30,7 +35,8 @@ public class Ui {
     }
 
     /**
-     * Gets the user input
+     * Gets the user input.
+     *
      * @param sc The scanner to get the input
      * @return The string representation of the user input
      */
@@ -39,11 +45,12 @@ public class Ui {
     }
 
     /**
-     * prints all bot messages in a specific format.
+     * Prints all bot messages in a specific format.
+     *
      * @param message message from the bot.
      */
     public static void printMessage(String message) {
-        message = SPACE + message.replace("\n", "\n" + SPACE);
+        message = "\t" + message.replace("\n", "\n\t");
         System.out.println(LINE);
         System.out.println(message);
         System.out.println(END_LINE);

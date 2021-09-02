@@ -1,15 +1,16 @@
 package duke.task;
 
 /**
- * A task of type deadline
+ * A task of type deadline.
  */
 public class Deadline extends Task {
 
     protected String by;
 
     /**
-     * constructor of the class
-     * @param description description of the task
+     * Instantiates a new object of the deadline class.
+     *
+     * @param description description of the task.
      */
     public Deadline(String description, String by) {
         super(description);
@@ -17,8 +18,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Generates the string representation of deadline.
-     * @return String representation of event
+     * Generates the string representation of event.
+     *
+     * @return String representation of event.
      */
     @Override
     public String toString() {

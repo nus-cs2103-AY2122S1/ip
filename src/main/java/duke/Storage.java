@@ -13,6 +13,9 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Reads and writes valid user inputs into the task list to be saved to the hard disk.
+ */
 public class Storage {
 
     // The relative path to the directory
@@ -25,9 +28,10 @@ public class Storage {
     private ArrayList<String> fileTasks;
 
     /**
-     * Constructor
-     * @param fileDir The path to the directory
-     * @param file The file name
+     * Instantiates a storage object.
+     *
+     * @param fileDir The path to the directory.
+     * @param file The file name.
      */
     public Storage(String fileDir, String file) {
         this.directory = fileDir;
@@ -36,7 +40,8 @@ public class Storage {
     }
 
     /**
-     * reads file. If file does not exist, create file
+     * Reads file. If file does not exist, creates a file.
+     *
      * @return List containing all tasks in file originally
      */
     public ArrayList<Task> loadData() throws DukeException {
@@ -64,20 +69,18 @@ public class Storage {
                 boolean isDone = data[1].equals("1");
                 Task task = null;
                 switch (taskType) {
-                    case "T":
-                        // Add a todo task.
-                        task = new Todo(data[2]);
-
-                        break;
-                    case "D":
-                        // Add a deadline task.
-                        task = new Deadline(data[2], data[3]);
-
-                        break;
-                    case "E":
-                        // Add an event task.
-                        task = new Event(data[2], data[3]);
-                        break;
+                case "T":
+                    // Add a todo task.
+                    task = new Todo(data[2]);
+                    break;
+                case "D":
+                    // Add a deadline task.
+                    task = new Deadline(data[2], data[3]);
+                    break;
+                case "E":
+                    // Add an event task.
+                    task = new Event(data[2], data[3]);
+                    break;
                 }
                 if (task != null) {
                     if (isDone) {
@@ -93,9 +96,10 @@ public class Storage {
     }
 
     /**
-     * Adds a task to the saved file
-     * @param task The task as a String
-     * @throws DukeException When saving the file fails
+     * Adds a task to the saved file.
+     *
+     * @param task The task as a String.
+     * @throws DukeException When saving the file fails.
      */
     public void addToFile(String task) throws DukeException, IOException {
         fileTasks.add(task);
@@ -103,9 +107,10 @@ public class Storage {
     }
 
     /**
-     * Removes a task from the saved file
-     * @param id The line to be removed
-     * @throws DukeException When saving the file fails
+     * Removes a task from the saved file.
+     *
+     * @param id The line to be removed.
+     * @throws DukeException When saving the file fails.
      */
     public void deleteFromFile(int id) throws DukeException, IOException {
         fileTasks.remove(id - 1);
@@ -113,10 +118,11 @@ public class Storage {
     }
 
     /**
-     * updates a line in the file at the given index
-     * @param id index at which task is to be updated
-     * @param task new task to be updated
-     * @throws DukeException when saving file fails
+     * Updates a line in the file at the given index.
+     *
+     * @param id index at which task is to be updated.
+     * @param task new task to be updated.
+     * @throws DukeException when saving file fails.
      */
     public void updateListTask(int id, String task) throws DukeException, IOException {
         fileTasks.set(id - 1, task);
@@ -124,23 +130,29 @@ public class Storage {
     }
 
     /**
-     * Returns the String of the queried line
+     * Returns the String of the queried line.
+     *
      * @param index The line number
      * @return The String of the queried line
      * @throws DukeException When the line is not found
      */
-    public String getFileLine(int index) throws DukeException{
+    public String getFileLine(int index) throws DukeException {
         try {
             return fileTasks.get(index - 1);
         } catch (Exception e) {
-            throw new DukeException("Task doesn't exist" +
-                    "\nAre you sure you have entered the correct index?");
+            throw new DukeException("Task doesn't exist"
+                    + "\nAre you sure you have entered the correct index?");
         }
     }
 
 
     /**
+<<<<<<< HEAD
      * Saves the file content to the hard drive
+=======
+     * Saves the file content to the hard drive.
+     *
+>>>>>>> branch-A-Gradle
      * @throws DukeException when saving the file fails
      */
     private void saveToFile() throws DukeException {

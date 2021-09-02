@@ -4,9 +4,13 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Reads and converts user input to bhutu-understandable inputs.
+ */
 public class Parser {
     /**
-     * combines an array of strings into a space seperated sentence.
+     * Combines an array of strings into a space seperated sentence.
+     *
      * @param input the string array.
      * @return the sentence.
      */
@@ -24,6 +28,7 @@ public class Parser {
 
     /**
      * Converts the user input string into meaningful commands.
+     *
      * @param input the user input string.
      * @return the meaningful commands.
      */
@@ -64,7 +69,6 @@ public class Parser {
             } catch (Exception e) {
                 throw new DukeException("'done' command requires an integer as number. (eg. done 12)");
             }
-
             return new String[] {input[1]};
         case "list":
             if (input.length != 1) {
@@ -89,7 +93,6 @@ public class Parser {
             } catch (Exception e) {
                 throw new DukeException("'delete' command requires an integer as number. (eg. done 12)");
             }
-
             return new String[] {input[1]};
         case "find":
             return new String[] {input[1]};
@@ -101,9 +104,10 @@ public class Parser {
 
     /**
      * Parses a raw date string as input into a valid date and time string.
-     * @param input The raw date string
-     * @return A string valid as a date
-     * @throws DukeException Thrown if the input is an invalid date
+     *
+     * @param input The raw date string.
+     * @return A string valid as a date.
+     * @throws DukeException Thrown if the input is an invalid date.
      */
     private String parseDate(String input) throws DukeException {
         try {
