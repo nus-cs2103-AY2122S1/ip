@@ -53,8 +53,8 @@ public class Duke {
     /**
      * Entry point of the due chatbot.
      *
-     * @throws DukeException in case any unexpected input is passed
-     * @throws IOException in case of file issues
+     * @throws DukeException in case any unexpected input is passed.
+     * @throws IOException in case of file issues.
      */
     public void run() throws DukeException, IOException {
         ui.greet();
@@ -64,8 +64,8 @@ public class Duke {
     /**
      * Interacts with the user
      *
-     * @throws DukeException if input is wrong
-     * @throws IOException thrown if file handling fails
+     * @throws DukeException if input is wrong.
+     * @throws IOException thrown if file handling fails.
      */
     public void interact() throws DukeException, IOException {
         String[] input;
@@ -89,7 +89,6 @@ public class Duke {
                 case "list":
                     output = items.printList();
                     break;
-
                 case "done":
                     int idx = Integer.parseInt(input[1]);
                     output = items.markDone(idx);
@@ -97,43 +96,35 @@ public class Duke {
                     str = str.substring(0, 4) + "1" + str.substring(5);
                     storage.updateListTask(idx, str);
                     break;
-
                 case "bye":
                     flag = false;
                     break;
-
                 case "todo":
                     output = items.addItem(new Todo(task[0]));
                     str = "T | 0 | " + task[0];
                     storage.addToFile(str);
                     break;
-
                 case "event":
                     output = items.addItem(new Event(task[0], task[1]));
                     str = "E | 0 | " + task[0] + " | "+ task[1];
                     storage.addToFile(str);
                     break;
-
                 case "deadline":
                     output = items.addItem(new Deadline(task[0], task[1]));
                     str = "D | 0 | " + task[0] + " | "+ task[1];
                     storage.addToFile(str);
                     break;
-
                 case "delete":
                     int id = Integer.parseInt(input[1]);
                     output = items.deleteItem(id);
                     storage.deleteFromFile(id);
                     break;
-
                 case "find":
                     output = items.findTask(task[0]);
                     break;
-
                 default:
                     output = "I don't recognise this command\n"
                             + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find' or 'bye'";
-
                     break;
                 }
             } catch (DukeException dukeException) {

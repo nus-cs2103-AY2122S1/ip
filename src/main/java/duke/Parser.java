@@ -44,7 +44,6 @@ public class Parser {
             }
             date = parseDate(output[1]);
             return new String[] {output[0], date};
-
         case "event":
             String[] output1 = result.toString().split(" /at ");
             if (output1.length < 2) {
@@ -53,14 +52,12 @@ public class Parser {
                         + "(eg. event fix hair /at 1pm)");
             }
             return new String[] {output1[0], output1[1]};
-
         case "todo":
             if (input.length < 2) {
                 throw new DukeException("Please specify the task you want to do");
             } else {
                 return new String[] {result.toString()};
             }
-
         case "done":
             if (input.length < 2) {
                 throw new DukeException("Please specify which task you have done");
@@ -73,21 +70,18 @@ public class Parser {
                 throw new DukeException("'done' command requires an integer as number. (eg. done 12)");
             }
             return new String[] {input[1]};
-
         case "list":
             if (input.length != 1) {
                 throw new DukeException("'list' command doesn't require any arguments.");
             } else {
                 return new String[] {input[0]};
             }
-
         case "bye":
             if (input.length != 1) {
                 throw new DukeException("'bye' command doesn't require any arguments.");
             } else {
                 return new String[] {input[0]};
             }
-
         case "delete":
             if (input.length < 2) {
                 throw new DukeException("Please specify which task you want to delete");
@@ -100,10 +94,8 @@ public class Parser {
                 throw new DukeException("'delete' command requires an integer as number. (eg. done 12)");
             }
             return new String[] {input[1]};
-
         case "find":
             return new String[] {input[1]};
-
         default:
             throw new DukeException("I don't recognise this command\n"
                     + "Try 'list', 'todo', 'event', 'deadline', 'done' or 'bye'");

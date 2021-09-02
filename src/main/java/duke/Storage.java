@@ -73,12 +73,10 @@ public class Storage {
                     // Add a todo task.
                     task = new Todo(data[2]);
                     break;
-
                 case "D":
                     // Add a deadline task.
                     task = new Deadline(data[2], data[3]);
                     break;
-
                 case "E":
                     // Add an event task.
                     task = new Event(data[2], data[3]);
