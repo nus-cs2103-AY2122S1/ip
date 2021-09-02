@@ -12,6 +12,6 @@ public class IncompleteToDoException extends DukeException {
      * Constructor for IncompleteToDoException.
      */
     public IncompleteToDoException() {
-        super(LINE + "\n" + MESSAGE + "\n" + LINE);
+        super(MESSAGE);
     }
 }

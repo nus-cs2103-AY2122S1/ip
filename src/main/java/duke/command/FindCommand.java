@@ -42,4 +42,10 @@ public class FindCommand extends Command {
         TaskList keywordTasks = tasks.findTasksWithKeyword(this.keyword);
         ui.printKeywordTasks(keywordTasks, this.keyword);
     }
+
+    @Override
+    public String getExecutedString(TaskList tasks, Ui ui, Storage storage) {
+        TaskList keywordTasks = tasks.findTasksWithKeyword(this.keyword);
+        return ui.getPrintKeywordTasksString(keywordTasks, this.keyword);
+    }
 }

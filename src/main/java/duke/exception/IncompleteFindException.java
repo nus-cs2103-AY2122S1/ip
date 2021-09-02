@@ -12,6 +12,6 @@ public class IncompleteFindException extends DukeException {
      * Constructor for IncompleteFindException.
      */
     public IncompleteFindException() {
-        super(LINE + "\n" + message + "\n" + LINE);
+        super(message);
     }
 }

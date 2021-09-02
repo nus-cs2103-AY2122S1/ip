@@ -12,7 +12,7 @@ public class IncompleteDeadlineException extends DukeException {
      * Constructor for IncompleteDeadlineException.
      */
     public IncompleteDeadlineException() {
-        super(LINE + "\n" + MESSAGE + "\n" + LINE);
+        super(MESSAGE);
     }
 }
 

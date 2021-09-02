@@ -30,4 +30,9 @@ public class ListCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.print(tasks);
     }
+
+    @Override
+    public String getExecutedString(TaskList tasks, Ui ui, Storage storage) {
+        return ui.getPrintString(tasks);
+    }
 }

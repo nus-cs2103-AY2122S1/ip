@@ -31,4 +31,10 @@ public class ExitCommand extends Command {
         storage.saveFile(tasks);
         ui.exit();
     }
+
+    @Override
+    public String getExecutedString(TaskList tasks, Ui ui, Storage storage) {
+        storage.saveFile(tasks);
+        return ui.getExitString();
+    }
 }

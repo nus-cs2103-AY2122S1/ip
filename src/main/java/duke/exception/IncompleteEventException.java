@@ -12,6 +12,6 @@ public class IncompleteEventException extends DukeException {
      * Constructor for IncompleteEventException.
      */
     public IncompleteEventException() {
-        super(LINE + "\n" + MESSAGE + "\n" + LINE);
+        super(MESSAGE);
     }
 }

@@ -10,4 +10,5 @@ import duke.Ui;
 public abstract class Command {
     public abstract void execute(TaskList tasks, Ui ui, Storage storage);
     public abstract boolean isExit();
+    public abstract String getExecutedString(TaskList tasks, Ui ui, Storage storage);
 }

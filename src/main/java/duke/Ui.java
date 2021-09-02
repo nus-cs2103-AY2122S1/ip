@@ -46,6 +46,15 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    public String getPrintString(TaskList tasks) {
+        String output = "Here are the tasks in your list:";
+
+        for (int i = 0; i < tasks.getSize(); i++) {
+            output += "\n" + (i + 1) + "." + tasks.taskToString(i);
+        }
+        return output;
+    }
+
     /**
      * Prints add message in same style as other outputs of Duke whenever
      * a new Task has been added.
@@ -58,6 +67,11 @@ public class Ui {
                 + "\nNow you have " + size + " tasks in the list.";
 
         print(message);
+    }
+
+    public String getPrintAddString(Task toAdd, int size) {
+        return "Got it. I've added this task:\n" + "  " + toAdd
+                + "\nNow you have " + size + " tasks in the list.";
     }
 
     /**
@@ -112,6 +126,18 @@ public class Ui {
         }
     }
 
+    public String getPrintKeywordTasksString(TaskList tasksWithKeyword, String keyword) {
+        if (tasksWithKeyword.getSize() > 0) {
+            String output = "Here are the matching tasks in your list:";
+            for (int i = 0; i < tasksWithKeyword.getSize(); i++) {
+                output += "\n" + (i + 1) + "." + tasksWithKeyword.taskToString(i);
+            }
+            return output;
+        } else {
+            return "You do not have any tasks with keyword: " + keyword + ".";
+        }
+    }
+
     /**
      * Says bye to user and closes scanner.
      */
@@ -119,6 +145,10 @@ public class Ui {
         print("Bye. Hope to see you again soon!");
 
         sc.close();
+    }
+
+    public String getExitString() {
+        return "Bye. Hope to see you again soon!";
     }
 
 }

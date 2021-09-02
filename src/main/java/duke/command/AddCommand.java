@@ -42,4 +42,10 @@ public class AddCommand extends Command {
         tasks.add(this.toAdd);
         ui.printAdd(this.toAdd, tasks.getSize());
     }
+
+    @Override
+    public String getExecutedString(TaskList tasks, Ui ui, Storage storage) {
+        tasks.add(this.toAdd);
+        return ui.getPrintAddString(this.toAdd, tasks.getSize());
+    }
 }
