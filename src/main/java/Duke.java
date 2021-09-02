@@ -1,5 +1,6 @@
 import duke.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,7 +14,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
 import java.io.PrintStream;
 
 public class Duke extends Application {
@@ -52,7 +52,7 @@ public class Duke extends Application {
         System.setOut(ps);
 
         this.chatbot = new Chatbot();
-        this.isChatting = false;
+        this.isChatting = true;
 
         // reset stream
         System.out.flush();
@@ -130,6 +130,11 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+
+        // closes app when user decides to leave
+        if (!isChatting) {
+            Platform.exit();
+        }
     }
 
     /**

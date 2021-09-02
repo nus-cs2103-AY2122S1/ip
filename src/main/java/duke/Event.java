@@ -37,6 +37,15 @@ public class Event extends Task{
         }
     }
 
+    protected Event(String description, String date) throws DukeDateParseException {
+        super(description);
+        try {
+            this.date = (new SimpleDateFormat("")).parse(date);
+        }catch (ParseException e) {
+            throw new DukeDateParseException(e);
+        }
+    }
+
     @Override
     protected String getTaskType() {
         return EVENT_LABEL;

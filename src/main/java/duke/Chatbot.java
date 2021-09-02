@@ -83,9 +83,11 @@ public class Chatbot {
         this.taskList = new TaskList();
         try {
             this.ui.showLoadingFile();
-            this.fileDB = new FileDB();
+            this.fileDB = new FileDB(this.taskList);
         } catch (DukeIOException e) {
             // File already exists
+            System.out.println(e.getMessage());
+        } catch (DukeDateParseException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -155,7 +157,7 @@ public class Chatbot {
      * @param command the user's input.
      * @return ChatContinue enums to indicate if a chat should continue or terminnate.
      */
-    private ChatContinue builtInCommands(ChatCommands command, String argument) {
+    private ChatContinue builtInCommands(ChatCommands command, String argument) throws DukeIOException{
         switch (command) {
         case CHAT_COMMAND_BYE:
             return this.farewell();
@@ -176,8 +178,9 @@ public class Chatbot {
      *
      * @return ChatContinue enums to indicate if a chat should continue or terminnate.
      */
-    private ChatContinue farewell() {
+    private ChatContinue farewell() throws DukeIOException{
         this.ui.showFarewell();
+        this.taskList.saveAll(this.fileDB);
         return ChatContinue.CHAT_END;
     }
 }
