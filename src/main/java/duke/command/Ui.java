@@ -7,11 +7,9 @@ import duke.exception.InvalidCommandException;
  * This class handles the interactions with the user.
  */
 public class Ui {
-    private static final String LINE_HORIZONTAL =
-            "___________________________________________________________";
     private static Scanner sc;
-    private String botName;
-    private Parser parser;
+    private final String botName;
+    private final Parser parser;
 
     /**
      * Constructor to create a new UI.
@@ -25,37 +23,21 @@ public class Ui {
     }
 
     /**
-     * Prints initial message as prompt.
-     */
-    public void printWelcomeMessage() {
-        System.out.printf("Greetings! This is %s.\n"
-                + "What can I do for you?\n",
-                this.botName);
-    }
-
-    /**
-     * Prints loading error message.
-     */
-    public void printLoadingError() {
-        System.out.printf("%s\nIt seems there was an error reading the saved list.\n"
-                + "Please ensure a duke.txt file is present in /data.\n"
-                + "%s\n",
-                LINE_HORIZONTAL, LINE_HORIZONTAL);
-    }
-
-    /**
-     * Takes in user input and returns it.
+     * Returns initial start up message.
      *
-     * @return The trimmed input.
+     * @return The String representing the welcome message.
      */
-    public String getInput() {
-        return sc.nextLine().trim();
+    public String getWelcome() {
+        return String.format("Greetings! This is %s!\n"
+                + "Attempting to fetch your tasks...\n",
+                this.botName);
     }
 
     /**
      * Takes in user input and performs an action accordingly.
      *
      * @param input The user's input.
+     * @return The String representing the command interpreted from user input.
      * @throws InvalidCommandException If the command is unrecognised.
      */
     public String receiveUserCommand(String input) throws InvalidCommandException {
@@ -63,62 +45,43 @@ public class Ui {
     }
 
     /**
-     * Prints the message for various types of exceptions.
+     * Returns the message for various types of exceptions.
      *
      * @param type The type of exception.
+     * @return A string representing the exception.
      */
-    public void printException(String type) {
+    public String printException(String type) {
         switch (type) {
         case "InvalidCommand":
-            System.out.printf("I don't quite understand what that means.\n"
-                    + "Could you please rephrase that?\n"
-                    + "%s\n", LINE_HORIZONTAL);
-            break;
+            return "I don't quite understand what that means.\n"
+                    + "Could you please rephrase that?\n";
         case "IOException":
-            System.out.printf("There is a problem with saving the list to the file.\n"
-                    + "Please ensure a duke.txt file is present in /data.\n"
-                    + "%s\n", LINE_HORIZONTAL);
-            break;
+            return "There is a problem with saving the list to the file.\n"
+                    + "Please ensure a duke.txt file is present in /data.\n";
         case "InvalidTask":
-            System.out.printf("You might have mistyped the task number.\n"
-                    + "Please recheck your task number and enter again.\n"
-                    + "%s\n", LINE_HORIZONTAL);
-            break;
+            return "You might have mistyped the task number.\n"
+                    + "Please recheck your task number and enter again.\n";
         case "MissingTask":
-            System.out.printf("You might have missed out on the task.\n"
-                    + "Could you please enter it again?\n"
-                    + "%s\n", LINE_HORIZONTAL);
-            break;
+            return "You might have missed out on the task.\n"
+                    + "Could you please enter it again?\n";
         case "MissingTime":
-            System.out.printf("You might have missed out on the time.\n"
-                    + "Could you please enter it again?\n"
-                    + "%s\n", LINE_HORIZONTAL);
-            break;
+            return "You might have missed out on the time.\n"
+                    + "Could you please enter it again?\n";
         case "DateTimeParse":
-            System.out.printf("Your date might not be in the correct format.\n"
-                    + "Please ensure it is in the YYYY-MM-DD format.\n"
-                    + "%s\n", LINE_HORIZONTAL);
-            break;
+            return "Your date might not be in the correct format.\n"
+                    + "Please ensure it is in the YYYY-MM-DD format.\n";
         default:
-            System.out.println("ERROR! ERROR!");
+            return "ERROR! ERROR!";
         }
     }
 
     /**
-     * Prints the line separator.
+     * Returns the farewell message for the user.
+     *
+     * @return The String representing the farewell message.
      */
-    public void printSeparator() {
-        System.out.println(LINE_HORIZONTAL);
-    }
-
-    /**
-     * Prints the farewell message for the user.
-     */
-    public static void printBye() {
-        System.out.printf("%s\n"
-                + "Goodbye. Hope to see you again soon!\n",
-                LINE_HORIZONTAL);
-
+    public static String printBye() {
         sc.close();
+        return "Goodbye. Hope to see you again soon!\n";
     }
 }

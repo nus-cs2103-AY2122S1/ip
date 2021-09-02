@@ -18,7 +18,7 @@ import duke.task.ToDo;
  */
 public class Storage {
     // The location of the file to load.
-    private String filepath;
+    private final String filepath;
 
     /**
      * Constructor for a Storage instance.
@@ -32,6 +32,7 @@ public class Storage {
     /**
      * Imports the data from the hard disk to the user's list.
      *
+     * @return The array of tasks saved in the user's data.
      * @throws FileNotFoundException If there are problems with reading the file.
      */
     public ArrayList<Task> loadListData() throws FileNotFoundException {
@@ -110,17 +111,18 @@ public class Storage {
     /**
      * Saves the last element in the user's list to the .txt file.
      *
+     * @param tasks The array of tasks to save in user's data.
      * @throws IOException If there are problems with writing into the file.
      */
     public void saveTasksToFile(ArrayList<Task> tasks) throws IOException {
         // Writes the data into the file.
         FileWriter fw = new FileWriter(this.filepath);
-        String textToAdd = "";
+        StringBuilder textToAdd = new StringBuilder();
         for (Task task : tasks) {
             String taskName = task.toString();
-            textToAdd += taskName + "\n";
+            textToAdd.append(taskName).append("\n");
         }
-        fw.write(textToAdd);
+        fw.write(textToAdd.toString());
         fw.close();
     }
 }
