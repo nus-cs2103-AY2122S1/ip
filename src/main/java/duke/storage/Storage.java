@@ -1,15 +1,15 @@
 package duke.storage;
 
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.ui.Ui;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
 /**
  * Encapsulate the handling of loading and storing files on local directory for duke.
@@ -65,7 +65,8 @@ public class Storage {
         File file = new File(String.format("%s/%s", FOLDER_NAME, FILE_NAME));
         try {
             Scanner sc = new Scanner(file);
-            Ui.printMessageWithFormat("I have found past data in your local storage, type 'list' to view the previous tasks.");
+            Ui.printMessageWithFormat("I have found past data in your local storage, "
+                    + "type 'list' to view the previous tasks.");
             while (sc.hasNextLine()) {
                 String curr = sc.nextLine();
                 Task task = TaskList.stringToTask(curr);

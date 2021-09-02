@@ -1,10 +1,9 @@
 package duke.task;
 
-import duke.exception.NoSuchTaskException;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import duke.exception.NoSuchTaskException;
 
 /**
  * Encapsulates the operations related to managing task.

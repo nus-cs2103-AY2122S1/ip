@@ -34,7 +34,7 @@ public class Done extends DukeCommand {
      * @throws NoSuchTaskException When the task number is invalid.s
      */
     @Override
-    public void execute() throws NoSuchTaskException{
+    public void execute() throws NoSuchTaskException {
         ui.markDoneMessage(list.mark(taskNumber));
         storage.save(list.getList());
     }
