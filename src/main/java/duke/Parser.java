@@ -55,6 +55,7 @@ public class Parser {
             return addTask(getArgs(input, "event "), Task.Type.EVENT);
         } else if (matches("reset", input)) {
             tasks.clear();
+            assert tasks.size() == 0 : "Tasks were not cleared";
             return "Cleared";
         } else {
             return "I did not understand, sorry!";
