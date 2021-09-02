@@ -26,14 +26,14 @@ public class Deadline extends Task{
         String key;
 
         if (results.size() == 0){
-            throw new InvalidFormatException("Missing description and timestamp");
+            throw new InvalidFormatException("\nMissing description and timestamp");
         } else if (results.size() == 1){
-            throw new EmptyTimeException("Invalid timestamp format");
+            throw new EmptyTimeException("\nInvalid timestamp format");
         }
 
         key = results.get(0);
         if (key.equals("")){
-            throw new EmptyDescriptionException("Missing description");
+            throw new EmptyDescriptionException("\nMissing description");
         }
         super.setEventType("D");
         super.setDescription(key);

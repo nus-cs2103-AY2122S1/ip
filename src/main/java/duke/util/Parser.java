@@ -14,19 +14,17 @@ public class Parser {
 
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
+
 
     /**
      * Basic constructor for Parser
      *
      * @param storage storage object
      * @param taskList tasklist object
-     * @param ui Ui object
      */
-    public Parser(Storage storage, TaskList taskList, Ui ui) {
+    public Parser(Storage storage, TaskList taskList) {
         this.storage = storage;
         this.taskList = taskList;
-        this.ui = ui;
     }
 
     /**
@@ -37,7 +35,7 @@ public class Parser {
             List<String> prevState = storage.loadSaved();
             taskList.insertPast(prevState);
         } catch (DukeException e) {
-            ui.error(e.toString());
+            System.out.println(e.toString() + "\nPlease try again" );
         }
     }
 
@@ -53,36 +51,39 @@ public class Parser {
         try {
             switch (parsedInput[0]) {
             case "bye":
-                return new ByeCommand(storage, taskList, ui);
+                return new ByeCommand(storage, taskList);
                 // collection of commands to be executed when "bye" is detected
             case "list":
-                return new ListCommand(storage, taskList, ui);
+                return new ListCommand(storage, taskList);
                 // collection of commands to be executed when "list" is detected
             case "done":
-                return new DoneCommand(storage, taskList, ui, parsedInput[1]);
+                return new DoneCommand(storage, taskList, parsedInput[1]);
                 // collection of commands to be executed when "done" is detected
             case "deadline":
-                return new AddCommand(storage, taskList, ui, parsedInput[1], "deadline");
+                return new AddCommand(storage, taskList, parsedInput[1], "deadline");
                 // collection of commands to be executed when "deadline" is detected
             case "todo":
-                return new AddCommand(storage, taskList, ui, parsedInput[1], "todo");
+                return new AddCommand(storage, taskList, parsedInput[1], "todo");
                 // collection of commands to be executed
             case "event":
-                return new AddCommand(storage, taskList, ui, parsedInput[1], "event");
+                return new AddCommand(storage, taskList, parsedInput[1], "event");
                 // collection of commands to be executed when "event" is detected
             case "delete":
-                return new DeleteCommand(storage, taskList, ui, parsedInput[1]);
+                return new DeleteCommand(storage, taskList, parsedInput[1]);
                 // collection of commands to be executed when "delete" is detected
             case "find":
-                return new FindCommand(storage, taskList, ui, parsedInput[1]);
+                return new FindCommand(storage, taskList, parsedInput[1]);
                 // collection of commands to be executed when "find" is detected
+            case "help":
+                return new HelpCommand(storage, taskList);
+                // collection of commands to be executed when "help" is detected
             default:
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            throw new DukeException("User input an invalid action.");
+            throw new DukeException("\nUser input an invalid action.");
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Missing info after action");
+            throw new DukeException("\nMissing info after action");
         }
     }
 }

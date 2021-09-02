@@ -25,13 +25,13 @@ public class Event extends Task{
         List<String> results = Pattern.compile("/at").splitAsStream(input).map(x->x.trim()).collect(Collectors.toList());
 
         if (results.size() == 0) {
-            throw new InvalidFormatException("Missing description and empty");
+            throw new InvalidFormatException("\nMissing description and empty");
         } else if (results.size() == 1) {
-            throw new EmptyTimeException("Invalid timestamp format");
+            throw new EmptyTimeException("\nInvalid timestamp format");
         }
         String key = results.get(0);
         if (key.equals("")) {
-            throw new EmptyDescriptionException(" Missing description");
+            throw new EmptyDescriptionException("\nMissing description");
         }
         super.setEventType("E");
         super.setDescription(key);

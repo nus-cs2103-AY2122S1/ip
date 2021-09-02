@@ -26,12 +26,16 @@ public class Storage {
      * @param filePath File location that contains text file containing previous state
      * @throws DukeException Thrown when file does not exist
      */
-    public Storage(String filePath) throws DukeException {
+    public Storage(String filePath) {
         File dir = new File(filePath);
         dir.mkdirs();
         File savedOutput = new File(filePath + "/savedOutput.txt");
         if (!savedOutput.exists()) {
-            throw new FileNotFoundException("Invalid FilePath");
+            try{
+                savedOutput.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         this.savedOutput = savedOutput;
     }
@@ -50,7 +54,7 @@ public class Storage {
                 pastCommand.add(scan.nextLine());
             }
         } catch (IOException e) {
-            throw new FileNotFoundException("Invalid FilePath");
+            throw new FileNotFoundException("\nInvalid FilePath");
         }
         return pastCommand;
     }

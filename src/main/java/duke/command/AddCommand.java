@@ -6,7 +6,7 @@ import duke.taskTypes.Task;
 
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+
 
 /**
  * Command that contains details when adding a task
@@ -22,12 +22,11 @@ public class AddCommand extends Command {
      *
      * @param storage Storage object to save
      * @param taskList Tasklist to add task to
-     * @param ui Ui to display msg
      * @param taskDetails User input
      * @param addType
      */
-    public AddCommand(Storage storage, TaskList taskList, Ui ui, String taskDetails, String addType){
-        super(storage, taskList, ui);
+    public AddCommand(Storage storage, TaskList taskList, String taskDetails, String addType){
+        super(storage, taskList, false);
         this.taskDetails = taskDetails;
         this.addType = addType;
     }
@@ -38,24 +37,32 @@ public class AddCommand extends Command {
      * @return boolean To relay whether to continue the project
      * @throws DukeException
      */
-    public boolean exec() throws DukeException {
+    public String exec() throws DukeException {
         switch (addType) {
         case "deadline":
             Task deadline = taskList.deadline(taskDetails);
-            ui.taskAdded(deadline, taskList);
             storage.saveAdded(deadline);
-            break;
+            return taskAdded(deadline);
+            // returns success message after adding deadline
         case "todo":
             Task todo = taskList.todo(taskDetails);
-            ui.taskAdded(todo, taskList);
             storage.saveAdded(todo);
-            break;
+            return taskAdded(todo);
+            // returns success message after adding task
         case "event":
             Task event = taskList.event(taskDetails);
-            ui.taskAdded(event, taskList);
             storage.saveAdded(event);
-            break;
+            return taskAdded(event);
+            // returns success message after adding event
         }
-        return true;
+        return "";
+    }
+
+    private String taskAdded(Task task) {
+        String msg = task.toString();
+        int task_left = taskList.taskLeft();
+        String dukeAddedTask = "Got it. I've added this task:\n " + msg +  "\nNow you have " + task_left +
+                " tasks in the list.";
+        return dukeAddedTask;
     }
 }
