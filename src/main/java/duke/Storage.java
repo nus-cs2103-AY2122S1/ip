@@ -1,9 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -12,6 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Reads and writes valid user inputs into the task list to be saved to the hard disk.
@@ -81,6 +82,7 @@ public class Storage {
                     // Add an event task.
                     task = new Event(data[2], data[3]);
                     break;
+                default: break;
                 }
                 if (task != null) {
                     if (isDone) {

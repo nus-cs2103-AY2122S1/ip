@@ -1,7 +1,8 @@
 package duke;
 
-import duke.task.Task;
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * The items in the bot.
@@ -27,7 +28,7 @@ public class Items {
      *
      * @param tasks An ArrayList of Tasks
      */
-    public  Items(ArrayList<Task> tasks) {
+    public Items(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
