@@ -69,8 +69,8 @@ public class Storage {
      */
     private Task createTask(String line) throws IOException {
         char taskType = line.charAt(0);
-        String[] lineData = line.split(",");
         boolean isCompleted;
+        String[] lineData = line.split(",");
         isCompleted = lineData[1].equals("1");
         if (taskType == 'T') {
             return new ToDoTask(lineData[2], isCompleted);
@@ -92,7 +92,8 @@ public class Storage {
         try {
             Files.deleteIfExists(this.path);
             PrintWriter out = new PrintWriter("data/winston.txt");
-            out.println(tList.listSaveDataFormatter());
+            String dataToSave = tList.listSaveDataFormatter();
+            out.println(dataToSave);
             out.close();
         } catch (IOException e) {
             System.out.println("Error overwriting file");
