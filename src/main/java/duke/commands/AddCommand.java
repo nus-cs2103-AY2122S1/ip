@@ -45,11 +45,13 @@ public class AddCommand extends Command {
                     throw new EmptyDescriptionException("deadline");
                 }
                 if (description.contains("/by")) {
-                    String[] parts = description.split("/by");
-                    if (parts.length < 2 || parts[0].trim().equals("") || parts[1].trim().equals("")) {
+                    String[] deadlineDateTimeParts = description.split("/by");
+                    String deadlineDescription = deadlineDateTimeParts[0].trim();
+                    String deadlineBy = deadlineDateTimeParts[1].trim();
+                    if (deadlineDateTimeParts.length < 2 || deadlineDescription.equals("") || deadlineBy.equals("")) {
                         throw new CommandParamException("deadline");
                     }
-                    task = new Deadline(parts[0].trim(), parts[1].trim());
+                    task = new Deadline(deadlineDescription, deadlineBy);
                 } else {
                     throw new CommandParamException("deadline");
                 }
@@ -59,11 +61,13 @@ public class AddCommand extends Command {
                     throw new EmptyDescriptionException("event");
                 }
                 if (description.contains("/at")) {
-                    String[] parts = description.split("/at");
-                    if (parts.length < 2 || parts[0].trim().equals("") || parts[1].trim().equals("")) {
+                    String[] eventDateTimeParts = description.split("/at");
+                    String eventDescription = eventDateTimeParts[0].trim();
+                    String eventAt = eventDateTimeParts[1].trim();
+                    if (eventDateTimeParts.length < 2 || eventDescription.equals("") || eventAt.equals("")) {
                         throw new CommandParamException("event");
                     }
-                    task = new Event(parts[0].trim(), parts[1].trim());
+                    task = new Event(eventDescription, eventAt);
                 } else {
                     throw new CommandParamException("event");
                 }
