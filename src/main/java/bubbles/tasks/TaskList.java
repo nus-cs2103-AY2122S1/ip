@@ -1,5 +1,6 @@
 package bubbles.tasks;
 
+import bubbles.util.Message;
 import bubbles.exceptions.EmptyTaskException;
 import bubbles.exceptions.IndexOutOfBoundsException;
 import bubbles.exceptions.InvalidCommandException;
@@ -11,8 +12,7 @@ import java.util.ArrayList;
  * user has entered (including previous entries read from the hard dusk file).
  */
 public class TaskList {
-    private final String SEPARATOR = "-----------------------------------------------------------------";
-    private enum taskType {
+    public enum taskType {
         ToDo,
         Deadline,
         Event
@@ -37,40 +37,33 @@ public class TaskList {
      *
      * @param input A String input by the user
      */
-    public void taskListener(String input) {
+    public String taskListener(String input) {
         try {
             String[] arr = input.split(" ", 2);
             String command = arr[0];
 
             switch (command) {
             case "todo":
-                addTask(taskType.ToDo, input);
-                break;
+                return addTask(taskType.ToDo, input);
             case "deadline":
-                addTask(taskType.Deadline, input);
-                break;
+                return addTask(taskType.Deadline, input);
             case "event":
-                addTask(taskType.Event, input);
-                break;
+                return addTask(taskType.Event, input);
             case "list":
-                listTasks();
-                break;
+                return listTasks();
             case "done":
-                markAsDone(input);
-                break;
+                return markAsDone(input);
             case "delete":
-                deleteTask(input);
-                break;
+                return deleteTask(input);
             case "find":
-                findTask(input);
-                break;
+                return findTask(input);
             default:
                 throw new InvalidCommandException(input);
             }
         } catch (InvalidCommandException e) {
-            System.out.println(SEPARATOR + "\n"
+            return (Message.FORMAT_LINE + "\n"
                     + e
-                    + SEPARATOR);
+                    + Message.FORMAT_LINE);
         }
     }
 
@@ -78,19 +71,22 @@ public class TaskList {
      * List out the tasks in the TaskList by printing it out, after
      * the user's "list" command.
      */
-    public void listTasks() {
+    public String listTasks() {
         int n = 0;
 
-        System.out.println(SEPARATOR);
-        System.out.println("Below are some of the tasks in your list!");
+        StringBuilder message = new StringBuilder(Message.FORMAT_LINE + "\n");
+
+        message.append("Below are some of the tasks in your list!\n");
 
         for (Task t : this.tasks) {
-            System.out.println((n + 1) + ". " + t);
+            message.append((n + 1) + ". " + t + "\n");
 
             n++;
         }
 
-        System.out.println(SEPARATOR);
+        message.append(Message.FORMAT_LINE);
+
+        return message.toString();
     }
 
     /**
@@ -101,7 +97,7 @@ public class TaskList {
      * @param t The type of Task
      * @param input The description of the Task (including date for Deadline/Event)
      */
-    public void addTask(taskType t, String input) {
+    public String addTask(taskType t, String input) {
         String[] arr = input.split(" ", 2);
 
         try {
@@ -129,16 +125,16 @@ public class TaskList {
             this.count++;
 
             String taskCount = "Now you have " + count + " task(s) in the list!";
-            System.out.println(SEPARATOR + "\n"
+            return (Message.FORMAT_LINE + "\n"
                     + "Received order! I've added this task:\n"
                     + "     " + recentlyAdded + "\n"
                     + taskCount + "\n"
-                    + SEPARATOR);
+                    + Message.FORMAT_LINE);
 
         } catch (EmptyTaskException e) {
-            System.out.println(SEPARATOR + "\n"
+            return (Message.FORMAT_LINE + "\n"
                     + e
-                    + SEPARATOR);
+                    + Message.FORMAT_LINE);
         }
     }
 
@@ -170,9 +166,9 @@ public class TaskList {
         try {
             this.tasks.add(ToDo.addToDo(input, isDone));
         } catch (EmptyTaskException e) {
-            System.out.println(SEPARATOR + "\n"
+            System.out.println(Message.FORMAT_LINE + "\n"
                     + e
-                    + SEPARATOR);
+                    + Message.FORMAT_LINE);
         }
         this.count++;
     }
@@ -206,7 +202,7 @@ public class TaskList {
      * @param input The user input that includes the "done" command and number
      *              of task that user wants to mark as done/completed
      */
-    public void markAsDone(String input) {
+    public String markAsDone(String input) {
         try {
             String[] arr = input.split(" ");
             int index = Integer.parseInt(arr[1]) - 1;
@@ -218,17 +214,17 @@ public class TaskList {
                 t.setAsDone();
 
                 String encouragement = "Good job! I've marked this task as done:";
-                String reward = "Bubbles will reward you with a piece of candy.";
-                System.out.println(SEPARATOR + "\n"
+                String reward = "Bubbles will reward you with a piece of candy!";
+                return (Message.FORMAT_LINE + "\n"
                         + encouragement + "\n"
                         + "     " + t + "\n"
                         + reward + "\n"
-                        + SEPARATOR);
+                        + Message.FORMAT_LINE);
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(SEPARATOR + "\n"
+            return (Message.FORMAT_LINE + "\n"
                     + e
-                    + SEPARATOR);
+                    + Message.FORMAT_LINE);
         }
     }
 
@@ -238,7 +234,7 @@ public class TaskList {
      * @param input The user input that includes the "delete" command and number
      *              of task that user wants to delete permanently
      */
-    public void deleteTask(String input) {
+    public String deleteTask(String input) {
         try {
             String[] arr = input.split(" ");
             int index = Integer.parseInt(arr[1]) - 1;
@@ -250,16 +246,16 @@ public class TaskList {
                 count--;
 
                 String taskCount = "Now you have " + count + " task(s) in the list!";
-                System.out.println(SEPARATOR + "\n"
+                return (Message.FORMAT_LINE + "\n"
                         + "Noted! I've removed this task:\n"
                         + "     " + removed + "\n"
                         + taskCount + "\n"
-                        + SEPARATOR);
+                        + Message.FORMAT_LINE);
             }
         } catch (IndexOutOfBoundsException e) {
-            System.out.println(SEPARATOR + "\n"
+            return (Message.FORMAT_LINE + "\n"
                     + e
-                    + SEPARATOR);
+                    + Message.FORMAT_LINE);
         }
     }
 
@@ -269,7 +265,7 @@ public class TaskList {
      * @param input The user input that includes the "find" command and keyword(s) that the user
      *              wants to search for within the tasks in TaskList
      */
-    public void findTask(String input) {
+    public String findTask(String input) {
         ArrayList<Task> filtered = new ArrayList<>();
 
         String[] arr = input.split(" ", 2);
@@ -280,22 +276,24 @@ public class TaskList {
             }
         }
 
-        System.out.println(SEPARATOR);
+        StringBuilder message = new StringBuilder(Message.FORMAT_LINE.toString() + "\n");
 
         if (filtered.size() == 0) {
-            System.out.println("There are no matching tasks in your list. ☹");
+            message.append("There are no matching tasks in your list. ☹\n");
         } else {
-            System.out.println("Here are the matching tasks in your list!");
+            message.append("Here are the matching tasks in your list!\n");
 
             int n = 1;
             for (Task t : filtered) {
-                System.out.println((n) + ". " + t);
+                message.append((n) + ". " + t + "\n");
 
                 n++;
             }
         }
 
-        System.out.println(SEPARATOR);
+        message.append(Message.FORMAT_LINE);
+
+        return message.toString();
     }
 
     /**

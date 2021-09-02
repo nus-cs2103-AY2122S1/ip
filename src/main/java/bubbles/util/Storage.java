@@ -1,7 +1,8 @@
-package bubbles;
+package bubbles.util;
 
 import bubbles.tasks.Task;
 import bubbles.tasks.TaskList;
+import bubbles.util.Parser;
 
 import java.io.File;
 import java.io.FileNotFoundException;

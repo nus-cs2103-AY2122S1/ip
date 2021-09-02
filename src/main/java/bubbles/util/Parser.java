@@ -1,10 +1,14 @@
-package bubbles;
+package bubbles.util;
+
+import bubbles.exceptions.InvalidCommandException;
+import bubbles.tasks.TaskList;
 
 /**
  * A class that deals with making sense of the
  * user command.
  */
 public class Parser {
+
     /**
      * Breaks down the line of input read from the file saved on the local hard disk.
      * Creates and returns an array that contains the necessary information for the
