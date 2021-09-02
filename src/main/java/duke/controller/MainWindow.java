@@ -41,6 +41,9 @@ public class MainWindow extends Stage {
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(duke.getInitMessage(), dukeImage)
+        );
     }
 
     /**
