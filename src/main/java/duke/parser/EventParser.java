@@ -4,12 +4,16 @@ import duke.exception.DukeException;
 import duke.task.Event;
 import duke.util.DukeDateTime;
 
+/**
+ * Parses events.
+ */
 public class EventParser {
     /**
      * Parses an <code>Event</code> from its text representation.
-     * @param text the text representation found
-     * @return the corresponding <code>Event</code> object
-     * @throws DukeException if the text representation cannot be parsed accurately
+     *
+     * @param text The text representation found.
+     * @return The corresponding <code>Event</code> object.
+     * @throws DukeException If the text representation cannot be parsed accurately.
      */
     protected static Event parse(String text) throws DukeException {
         String[] eventDetails = text.split(" \\| ", 4);

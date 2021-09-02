@@ -5,6 +5,9 @@ import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
 
+/**
+ * Represents a command for finding tasks using search strings.
+ */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
     public static final String USAGE_MESSAGE = "To find a task with matching names, "

@@ -7,9 +7,7 @@ import duke.util.DukeDateTime;
  */
 public interface Timestampable {
     /**
-     * Returns whether the caller's <code>DukeDateTime</code> field represents the same date.
-     * @param date the date to be matched
-     * @return true if the dates are equal
+     * Returns whether the caller's <code>DukeDateTime</code> field represents the same date as the specified date.
      */
     public boolean onSameDayAs(DukeDateTime date);
 }

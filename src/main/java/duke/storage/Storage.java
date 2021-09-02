@@ -12,6 +12,7 @@ import duke.exception.DukeException;
 import duke.parser.TaskParser;
 import duke.task.Task;
 import duke.task.TaskManager;
+
 /**
  * Represents the file used to store the user's task data.
  */
@@ -21,7 +22,8 @@ public class Storage {
 
     /**
      * Constructor for a Storage object.
-     * @param filePath path to the stored file
+     *
+     * @param filePath Path to the stored file.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -39,8 +41,9 @@ public class Storage {
 
     /**
      * Loads the user's tasks from file.
-     * @return the list of tasks that were successfully loaded
-     * @throws DukeException if an <code>IOException</code> occurred while trying to read the file
+     *
+     * @return The list of tasks that were successfully loaded.
+     * @throws DukeException If an <code>IOException</code> occurred while trying to read the file.
      */
     public List<Task> loadTasks() throws DukeException {
         List<Task> taskList = new ArrayList<>();
@@ -67,7 +70,8 @@ public class Storage {
 
     /**
      * Saves the tasks into the file.
-     * @param tasks tasks to be saved into the file
+     *
+     * @param tasks Tasks to be saved into the file.
      */
     public void saveTasks(TaskManager tasks) {
         try {

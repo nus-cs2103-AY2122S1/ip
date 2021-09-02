@@ -9,7 +9,7 @@ import duke.task.TaskManager;
  * Represents a command for displaying help information and usage of the different commands.
  */
 public class HelpCommand extends Command {
-    private static final String[] ALL_USAGES = new String[]{
+    private static final String[] ALL_USAGES = {
         AddToDoCommand.USAGE_MESSAGE,
         AddDeadlineCommand.USAGE_MESSAGE,
         AddEventCommand.USAGE_MESSAGE,

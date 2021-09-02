@@ -28,9 +28,10 @@ public class DukeDateTime {
 
     /**
      * Parses datetime string entered by the user.
-     * @param str the string entered by the user
-     * @return the corresponding <code>DukeDateTime</code> object
-     * @throws DukeException if the datetime cannot be parsed with the given format
+     *
+     * @param str The string entered by the user.
+     * @return The corresponding <code>DukeDateTime</code> object.
+     * @throws DukeException If the datetime cannot be parsed with the given format.
      */
     public static DukeDateTime parseUserInputDateTime(String str) throws DukeException {
         LocalDateTime dt;
@@ -45,9 +46,10 @@ public class DukeDateTime {
 
     /**
      * Parses date string entered by the user.
-     * @param str the string entered by the user
-     * @return the corresponding <code>DukeDateTime</code> object
-     * @throws DukeException if the date cannot be parsed with the given format
+     *
+     * @param str The string entered by the user.
+     * @return The corresponding <code>DukeDateTime</code> object.
+     * @throws DukeException If the date cannot be parsed with the given format.
      */
     public static DukeDateTime parseUserInputDate(String str) throws DukeException {
         LocalDate dt;
@@ -62,9 +64,10 @@ public class DukeDateTime {
 
     /**
      * Parses a datetime string in ISO format.
-     * @param str the datetime string
-     * @return the corresponding <code>DukeDateTime</code> object
-     * @throws DukeException if the date cannot be parsed with the ISO format
+     *
+     * @param str The datetime string
+     * @return The corresponding <code>DukeDateTime</code> object.
+     * @throws DukeException If the date cannot be parsed with the ISO format.
      */
     public static DukeDateTime parseIso(String str) throws DukeException {
         LocalDateTime dt;

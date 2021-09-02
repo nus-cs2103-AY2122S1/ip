@@ -3,12 +3,16 @@ package duke.parser;
 import duke.exception.DukeException;
 import duke.task.Task;
 
+/**
+ * Parses tasks.
+ */
 public class TaskParser {
     /**
      * Parses a <code>Task</code> from its text representation.
-     * @param text the text representation found
-     * @return the corresponding <code>Task</code> object
-     * @throws DukeException if the text does not start with a character corresponding to a valid <code>Task</code>
+     *
+     * @param text The text representation found.
+     * @return The corresponding <code>Task</code> object.
+     * @throws DukeException If the text does not start with a character corresponding to a valid <code>Task</code>.
      */
     public static Task parse(String text) throws DukeException {
         char taskType = text.charAt(0);

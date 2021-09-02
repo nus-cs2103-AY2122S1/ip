@@ -31,7 +31,7 @@ public abstract class Task {
     /**
      * Returns whether the task is marked as completed.
      */
-    public boolean checkTaskDone() {
+    public boolean isDone() {
         return isDone;
     }
 

@@ -45,7 +45,7 @@ public class TaskManager {
     private int getUndoneTaskCount() {
         int count = 0;
         for (Task t : taskList) {
-            if (!t.checkTaskDone()) {
+            if (!t.isDone()) {
                 count++;
             }
         }
@@ -54,8 +54,9 @@ public class TaskManager {
 
     /**
      * Adds a <code>Task</code> into the list of tasks.
-     * @param task the task to be added
-     * @return a message containing the task just added and the updated number of tasks
+     *
+     * @param task The task to be added.
+     * @return A message containing the task just added and the updated number of tasks.
      */
     public String addTask(Task task) {
         taskList.add(task);

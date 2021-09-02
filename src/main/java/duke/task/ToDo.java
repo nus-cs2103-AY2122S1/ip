@@ -14,7 +14,7 @@ public class ToDo extends Task {
 
     @Override
     public String toText() {
-        String[] props = new String[]{"T", super.getStatusIcon(), super.getName()};
+        String[] props = {"T", super.getStatusIcon(), super.getName()};
         return String.join(" | ", props);
     }
 

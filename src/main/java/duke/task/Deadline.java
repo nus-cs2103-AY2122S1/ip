@@ -26,7 +26,7 @@ public class Deadline extends Task implements Timestampable {
 
     @Override
     public String toText() {
-        String[] props = new String[]{"D", super.getStatusIcon(), super.getName(), dueDate.toIso()};
+        String[] props = {"D", super.getStatusIcon(), super.getName(), dueDate.toIso()};
         return String.join(" | ", props);
     }
 

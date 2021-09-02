@@ -26,7 +26,7 @@ public class Event extends Task implements Timestampable {
 
     @Override
     public String toText() {
-        String[] props = new String[]{"E", super.getStatusIcon(), super.getName(), timestamp.toIso()};
+        String[] props = {"E", super.getStatusIcon(), super.getName(), timestamp.toIso()};
         return String.join(" | ", props);
     }
 

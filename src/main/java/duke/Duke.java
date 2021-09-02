@@ -20,7 +20,8 @@ public class Duke {
 
     /**
      * Constructor for a Duke object.
-     * @param filePath the path to the file where tasks should be stored.
+     *
+     * @param filePath The path to the file where tasks should be stored.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -63,8 +64,9 @@ public class Duke {
 
     /**
      * Returns the appropriate response according to the user input.
-     * @param input the user input
-     * @return the corresponding <code>DukeResponse</code>. If a <code>DukeException</code> was thrown, it is wrapped
+     *
+     * @param input The user input.
+     * @return The corresponding <code>DukeResponse</code>. If a <code>DukeException</code> was thrown, it is wrapped
      * in a <code>DukeBadResponse</code>.
      */
     public DukeResponse getResponse(String input) {
@@ -79,7 +81,8 @@ public class Duke {
 
     /**
      * Main entrypoint for the Duke application.
-     * @param args arguments that allow user to start the CLI version
+     *
+     * @param args Arguments that allow user to start the CLI version.
      */
     public static void main(String[] args) {
         if (args.length > 0 && args[0].equals("-c")) {
