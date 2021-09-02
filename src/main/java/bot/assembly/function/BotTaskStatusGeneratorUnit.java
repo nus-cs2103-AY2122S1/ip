@@ -12,7 +12,7 @@ import bot.assembly.task.Task;
  */
 public class BotTaskStatusGeneratorUnit {
 
-    private BotPrinter botPrinter = new BotPrinter();
+    //private BotPrinter botPrinter = new BotPrinter();
     private BotStaticMemoryUnit botStaticMemoryUnit = new BotStaticMemoryUnit();
     private BotDynamicMemoryUnit botDynamicMemoryUnit = BotDynamicMemoryUnit.getInstance();
     private List<Task> taskTracker = botDynamicMemoryUnit.getTaskTacker();
@@ -25,7 +25,7 @@ public class BotTaskStatusGeneratorUnit {
     /**
      * A method that generates a feedback message to the user when a task is added
      */
-    public void generateAddTaskFeedback() {
+    public String generateAddTaskFeedback() {
 
         String output = String.format(
                 "%s\n\t\t%s\n\t",
@@ -38,14 +38,14 @@ public class BotTaskStatusGeneratorUnit {
                 taskTracker.size()
         );
 
-        botPrinter.print(output);
+        return output;
     }
 
     /**
      * A method that generates a summary report of all task in task list to the user
      * @throws EmptyTaskListException if the task list is empty
      */
-    public void generateTaskTrackerReport() throws EmptyTaskListException {
+    public String generateTaskTrackerReport() throws EmptyTaskListException {
 
         // throw empty list exception if task list is empty
         if (taskTracker.size() == 0) {
@@ -60,7 +60,7 @@ public class BotTaskStatusGeneratorUnit {
 
         formattedTask.append("(end)");
 
-        botPrinter.print(formattedTask.toString());
+        return formattedTask.toString();
     }
 
 
