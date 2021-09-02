@@ -75,7 +75,8 @@ public class Ui {
      * Displays a response.
      * @param message The message to be displayed.
      */
-    public void showResponse(String message) {
+    public String showResponse(String message) {
         System.out.println(message);
+        return message;
     }
 }

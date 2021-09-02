@@ -11,14 +11,16 @@ public class AddTodoCommand extends AddCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         // tasks
         Todo newTodo = new Todo(desc);
         tasks.add(newTodo);
         // ui
         String response = respond(newTodo, tasks.size());
-        ui.showResponse(response);
+        String result = ui.showResponse(response);
         // storage
         storage.save(tasks);
+
+        return result;
     }
 }

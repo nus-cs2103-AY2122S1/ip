@@ -16,14 +16,16 @@ public class AddEventCommand extends AddCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         // tasks
         Event newEvent = new Event(desc, at);
         tasks.add(newEvent);
         // ui
         String response = respond(newEvent, tasks.size());
-        ui.showResponse(response);
+        String result = ui.showResponse(response);
         // storage
         storage.save(tasks);
+
+        return result;
     }
 }
