@@ -34,25 +34,29 @@ public class Parser {
     /**
      * Checks if a given string is present at the front of another string.
      * @param input The string to be checked against.
-     * @throws DuchessException  Exception thrown when the prefix is preceded by an empty string.
      * @return The prefix enum present at the front of the string.
+     * @throws DuchessException  Exception thrown when the prefix is preceded by an empty string.
      */
     public Command checkPrefix(String input) throws DuchessException {
         String[] parts = input.split(" ", 2);
         String front = parts[0];
         // Check if the prefix matches any command recognised by Duchess
         for (CommandNames c : CommandNames.values()) {
-            if (front.equals(c.commandName))
+            if (front.equals(c.commandName)) {
                 try {
-                    if (front.equals("bye") || front.equals("list"))
+                    if (front.equals("bye") || front.equals("list")) {
                         return Command.of(front); // No need second argument
+                    }
                     String back = parts[1]; // May throw ArrayIndexOutOfBoundsException
-                    if (back.isBlank()) // Second argument is only whitespaces
+                    if (back.isBlank()) {
                         throw new DuchessException("The description of " + front + " cannot be empty.");
+                        // Second argument is only whitespaces
+                    }
                     return Command.of(front, back);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new DuchessException("The description of " + front + " cannot be empty.");
                 }
+            }
         }
         // No command recognised
         return new InvalidCommand();

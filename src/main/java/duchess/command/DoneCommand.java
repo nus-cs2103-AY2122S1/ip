@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public String handleLogic(Duchess duchess)  {
+    public String handleLogic(Duchess duchess) {
         String index = getName();
         String reply;
         // Parsing a non-numeric string will throw a NumberFormatException
@@ -35,8 +35,9 @@ public class DoneCommand extends Command {
             if (duchess.getDuchessList().checkWithinRange(Integer.parseInt(index))) {
                 // Valid done task
                 Task task = duchess.getDuchessList().getTask(Integer.parseInt(index));
-                if (task.isDone())
+                if (task.getDone()) {
                     throw new DuchessException("Oops... This task is already done.");
+                }
                 task.setDone(true);
                 reply = "Brilliant! I've marked this task as done:   \n  " + task;
                 DuchessFileHandler.writeToFile(duchess.getDuchessList());
@@ -44,12 +45,13 @@ public class DoneCommand extends Command {
                 // "done" followed by an integer outside of range of the list
                 throw new DuchessException("Apologies, that task does not exist and cannot be marked as done.");
             }
-        } catch (NumberFormatException|DuchessException e) {
+        } catch (NumberFormatException | DuchessException e) {
             // "done" followed by an invalid non-integer string input
-            if (e instanceof NumberFormatException)
+            if (e instanceof NumberFormatException) {
                 reply = "The command \"done\" should be followed by an integer.";
-            else
+            } else {
                 reply = ((DuchessException) e).getMessage();
+            }
         }
         return reply;
     }

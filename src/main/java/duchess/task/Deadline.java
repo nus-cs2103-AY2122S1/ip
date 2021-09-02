@@ -1,10 +1,10 @@
 package duchess.task;
 
-import duchess.main.DuchessException;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duchess.main.DuchessException;
 
 /**
  * This class implements a Deadline task.
@@ -13,11 +13,7 @@ import java.time.format.DateTimeFormatter;
  * @version CS2103T AY21/22 Semester 1
  */
 
-public class Deadline extends Task{
-
-    /** The date and time of the deadline task.*/
-    protected LocalDateTime by;
-
+public class Deadline extends Task {
     /** The DateTimeFormatter used when printing the Event.*/
     private static final DateTimeFormatter PRINT_DATE_FORMATTER = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
 
@@ -27,6 +23,8 @@ public class Deadline extends Task{
     /** The DateTimeFormatter when converting time with minutes from string.*/
     private static final DateTimeFormatter DATE_MINUTES_FORMATTER = DateTimeFormatter.ofPattern("d/M/yyyy h:mma");
 
+    /** The date and time of the deadline task.*/
+    protected LocalDateTime by;
 
     /**
      * Constructs a Deadline.
@@ -54,7 +52,7 @@ public class Deadline extends Task{
      */
     public static LocalDateTime convertStringToDate (String by) throws DuchessException {
         try {
-            String replacement = by.replace("am", "AM").replace("pm","PM");
+            String replacement = by.replace("am", "AM").replace("pm", "PM");
             System.out.println(replacement);
             return LocalDateTime.parse(replacement,
                     replacement.contains(":") ? DATE_MINUTES_FORMATTER : DATE_FORMATTER);
@@ -69,11 +67,11 @@ public class Deadline extends Task{
      * @return The LocalDateTime representation.
      * @throws DuchessException Exception thrown when an incorrect format is used for Deadline.
      */
-    public static LocalDateTime convertTextToDate (String by)  {
+    public static LocalDateTime convertTextToDate (String by) {
         return LocalDateTime.parse(by, PRINT_DATE_FORMATTER);
     }
 
-    public LocalDateTime getDateTime(){
+    public LocalDateTime getDateTime() {
         return this.by;
     }
 
@@ -82,8 +80,8 @@ public class Deadline extends Task{
      * Returns a string representation of the Deadline, with an [X] marked for done and [ ] as undone.
      * @return the string representation of the Deadline.
     */
-     @Override
+    @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + PRINT_DATE_FORMATTER.format(by)+ ")";
+        return "[D]" + super.toString() + " (by: " + PRINT_DATE_FORMATTER.format(by) + ")";
     }
 }

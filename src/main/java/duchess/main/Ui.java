@@ -16,16 +16,14 @@ public class Ui {
      * Prints fancily including horizontal bars on top and bottom.
      * @param input String to be printed fancily.
      */
-    public void prettyPrint(String input)
-    {
+    public void prettyPrint(String input) {
         System.out.println(HORIZONTAL_BARS + input + HORIZONTAL_BARS);
     }
 
     /**
      * Prints a message given for invalid inputs.
      */
-    public void printError()
-    {
+    public void printError() {
         prettyPrint("Apologies, I didn't catch that.");
     }
 }

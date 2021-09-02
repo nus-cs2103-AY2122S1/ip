@@ -19,8 +19,7 @@ public abstract class Task {
      * Constructs a task.
      * @param name The name of the task.
      */
-    public Task(String name)
-    {
+    public Task(String name) {
         this.name = name;
         setDone(false);
     }
@@ -29,8 +28,7 @@ public abstract class Task {
      * Setter method to set a task as done or undone.
      * @param doneOrNot The boolean to set the task as.
      */
-    public void setDone(boolean doneOrNot)
-    {
+    public void setDone(boolean doneOrNot) {
         isDone = doneOrNot;
     }
 
@@ -50,7 +48,7 @@ public abstract class Task {
         return name.contains(keyword);
     }
 
-    public boolean isDone() {
+    public boolean getDone() {
         return isDone;
     }
 
@@ -61,8 +59,7 @@ public abstract class Task {
      * @return the string representation of the task.
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         return String.format("[" + (isDone ? "X" : " ") + "] " + name);
     }
 

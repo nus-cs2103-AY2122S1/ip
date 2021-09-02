@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duchess.getResponse(input);
         if (response.equals("I bid thee farewell")) {
-            Stage stage = (Stage)sendButton.getScene().getWindow();
+            Stage stage = (Stage) sendButton.getScene().getWindow();
             stage.close();
         }
         dialogContainer.getChildren().addAll(

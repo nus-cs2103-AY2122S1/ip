@@ -1,10 +1,11 @@
 package duchess.command;
 
+import java.time.LocalDateTime;
+
 import duchess.main.Duchess;
 import duchess.main.DuchessException;
 import duchess.main.DuchessFileHandler;
 import duchess.task.Event;
-import java.time.LocalDateTime;
 
 /**
  * This class contains the logic to handle the event command.
@@ -28,24 +29,27 @@ public class EventCommand extends Command {
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public String handleLogic(Duchess duchess)  {
-        String invalidMessage = "The command \"event\" should be followed by " +
-                "a task and a date and time, e.g (meeting /at 2/10/2019 2pm-4pm).";
+    public String handleLogic(Duchess duchess) {
+        String invalidMessage = "The command \"event\" should be followed by "
+                + "a task and a date and time, e.g (meeting /at 2/10/2019 2pm-4pm).";
         String reply;
         String taskAndDuration = getName();
         try {
-            if (!taskAndDuration.contains(" /at "))
+            if (!taskAndDuration.contains(" /at ")) {
                 throw new DuchessException(invalidMessage);
+            }
             String[] taskParts = taskAndDuration.split(" /at ", 2);
             String task = taskParts[0];
             String time = taskParts[1];
-            if (!time.contains(" "))
+            if (!time.contains(" ")) {
                 throw new DuchessException(invalidMessage);
+            }
             String[] timeParts = time.split(" ", 2);
             String day = timeParts[0];
             String duration = timeParts[1];
-            if (!duration.contains("-"))
+            if (!duration.contains("-")) {
                 throw new DuchessException(invalidMessage);
+            }
             // Valid input
             LocalDateTime[] events = Event.convertStringToDate(day, duration);
             Event event = new Event(task, events[0], events[1]);

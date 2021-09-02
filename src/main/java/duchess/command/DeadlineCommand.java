@@ -27,19 +27,21 @@ public class DeadlineCommand extends Command {
      * @param duchess The Duchess to return the output to.
      * @return Whether to continue scanning for user input afterwards.
      */
-    public String handleLogic(Duchess duchess)  {
-        String invalidMessage = "The command \"deadline\" should be followed by " +
-                "a task and a date and time, e.g (read book /by 11/10/2019 4pm).";
+    public String handleLogic(Duchess duchess) {
+        String invalidMessage = "The command \"deadline\" should be followed by "
+                + "a task and a date and time, e.g (read book /by 11/10/2019 4pm).";
         String taskAndBy = getName();
         String reply = "";
         try {
-            if (!taskAndBy.contains(" /by "))
+            if (!taskAndBy.contains(" /by ")) {
                 throw new DuchessException(invalidMessage);
+            }
             String[] taskParts = taskAndBy.split(" /by ", 2);
             String checkTask = taskParts[0];
             String checkBy = taskParts[1];
-            if (checkBy.equals(""))
+            if (checkBy.equals("")) {
                 throw new DuchessException(invalidMessage);
+            }
             // Valid input
             Deadline deadline = new Deadline(checkTask, Deadline.convertStringToDate(checkBy));
             duchess.getDuchessList().add(deadline);

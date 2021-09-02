@@ -23,9 +23,9 @@ public abstract class Command {
             return new ByeCommand();
         case "list":
             return new ListCommand();
+        default:
+            return null;
         }
-        // Should not reach here
-        return null;
     }
     /** Constructs one of the other commands.*/
     public static Command of(String name, String description) {
@@ -44,9 +44,9 @@ public abstract class Command {
             return new TasksCommand(description);
         case "find":
             return new FindCommand(description);
+        default:
+            return null;
         }
-        // Should not reach here
-        return null;
     }
 
     public String getName() {

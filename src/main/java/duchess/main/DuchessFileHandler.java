@@ -1,14 +1,14 @@
 package duchess.main;
 
-import duchess.task.Deadline;
-import duchess.task.Event;
-import duchess.task.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import duchess.task.Deadline;
+import duchess.task.Event;
+import duchess.task.ToDo;
 
 /**
  * This class implements a file handler to be used in reading and writing files.
@@ -18,12 +18,12 @@ import java.util.Scanner;
  */
 public class DuchessFileHandler {
 
-    /** The save file of the tasks from Duchess. */
-    public static File savedDuchess;
     /** The home of the user to search for existing Duchess.*/
     private static final String DATA_FOLDER = "data";
     /** The file name of the existing Duchess.*/
     private static final String FILE_LOCATION = "data/duchess.txt";
+    /** The save file of the tasks from Duchess. */
+    private static File savedDuchess;
 
     /**
      * Extracts the DuchessList from the save file.
@@ -116,8 +116,7 @@ public class DuchessFileHandler {
             if (savedDuchess.createNewFile()) {
                 System.out.println("File created: " + savedDuchess.getName());
                 return new DuchessList();
-            }
-            else {
+            } else {
                 System.out.println("Found saved duchess file!");
                 return DuchessFileHandler.extractListFromFile(savedDuchess);
             }
@@ -125,14 +124,18 @@ public class DuchessFileHandler {
             // Directory does not exist
             System.out.println("Directory does not exist, creating one now.");
             File dir = new File(DATA_FOLDER);
-            if (!dir.exists())
+            if (!dir.exists()) {
                 dir.mkdir();
+            }
             DuchessFileHandler.savedDuchess = new File(FILE_LOCATION);
             return new DuchessList();
         }
     }
 
-    public static void clear() {
+    /**
+     * Clears saved data.
+     */
+    public static void clearData() {
         File savedDuchess = new File(FILE_LOCATION);
         savedDuchess.delete();
     }

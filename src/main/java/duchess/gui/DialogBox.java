@@ -26,7 +26,7 @@ import javafx.scene.shape.Circle;
 public class DialogBox extends HBox {
 
     /** A circle used to clip images to a circle its size.*/
-    final Circle circleClip = new Circle(50,50, 50);
+    final Circle circleClip = new Circle(50, 50, 50);
 
     /** The user's text or Duchess' reply.*/
     @FXML
