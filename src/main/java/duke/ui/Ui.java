@@ -11,13 +11,17 @@ public class Ui {
 
     /**
      * Greets the user.
+     *
+     * @return Welcome message to the user.
      */
     public static String greet() {
         return Messages.WELCOME_MESSAGE;
     }
 
     /**
-     * Farewell message to the user.
+     * Returns farewell message to the user.
+     *
+     * @return Farewell message to the user.
      */
     public static String bye() {
         return Messages.INDENTATION + Messages.BYE_MESSAGE;
@@ -70,6 +74,8 @@ public class Ui {
 
     /**
      * Informs the user that list has been printed.
+     *
+     * @return List printed message.
      */
     public static String printList() {
         return Messages.INDENTATION + Messages.PRINT_LIST_MESSAGE;
@@ -79,6 +85,7 @@ public class Ui {
      * Informs the user the number of tasks on their list.
      *
      * @param i Number of tasks.
+     * @return Number of tasks message.
      */
     public static String printNoOfTasks(int i) {
         return Messages.INDENTATION + String.format(Messages.NUMBER_OF_TASKS_MESSAGE, i);
@@ -86,6 +93,8 @@ public class Ui {
 
     /**
      * Informs the user that the task has been marked as done.
+     *
+     * @return Marked as done message.
      */
     public static String markAsDone() {
         return Messages.INDENTATION + Messages.MARK_TASK_AS_DONE_MESSAGE;
@@ -93,6 +102,8 @@ public class Ui {
 
     /**
      * Informs the user that the task has been added.
+     *
+     * @return Task added message.
      */
     public static String addTask() {
         return Messages.INDENTATION + Messages.ADD_TASK;
@@ -100,6 +111,8 @@ public class Ui {
 
     /**
      * Informs the user that the task has been deleted.
+     *
+     * @return Task deleted message.
      */
     public static String deleteTask() {
         return Messages.INDENTATION + Messages.DELETE_TASK;
@@ -107,6 +120,8 @@ public class Ui {
 
     /**
      * Prints an empty list message.
+     *
+     * @return Empty list message,
      */
     public static String printEmptyList() {
         return Messages.INDENTATION + Messages.EMPTY_LIST;
@@ -114,6 +129,8 @@ public class Ui {
 
     /**
      * Prints tasks found message.
+     *
+     * @return Tasks found message.
      */
     public static String printFoundTasks() {
         return Messages.INDENTATION + Messages.MATCHING_TASK_FOUND;
@@ -121,6 +138,8 @@ public class Ui {
 
     /**
      * Prints no tasks found message.
+     *
+     * @return No such tasks found message.
      */
     public static String noSuchTasksFound() {
         return Messages.INDENTATION + Messages.NO_MATCHING_TASK_FOUND;

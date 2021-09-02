@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Duke;
 import duke.data.TaskHandler;
 import duke.data.exception.DukeException;
 import duke.storage.Storage;
@@ -31,6 +30,8 @@ public class FindCommand extends Command {
      * Executes the "Find" Command.
      *
      * @param cmd Command string to be executed.
+     * @return Duke's response to the user.
+     * @throws DukeException if task faces an error during execution.
      */
     @Override
     public String execute(String cmd) throws DukeException {

@@ -27,6 +27,7 @@ public class ListCommand extends Command {
      * Executes the "List" Command.
      *
      * @param cmd Command string to be executed.
+     * @return Duke's response to the user.
      */
     @Override
     public String execute(String cmd) {

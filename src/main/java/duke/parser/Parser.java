@@ -42,6 +42,9 @@ public class Parser {
 
     /**
      * Runs Duke.
+     *
+     * @param cmd User input.
+     * @return Duke's response to the user.
      */
     public String runDuke(String cmd) throws DukeException {
         String commandWord = cmd.split(" ")[0].toUpperCase();

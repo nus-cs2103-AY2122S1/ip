@@ -13,7 +13,6 @@ import duke.data.task.Event;
 import duke.data.task.Task;
 import duke.data.task.ToDo;
 
-
 /**
  * Class that deals with loading tasks from the file and saving tasks in the file.
  *

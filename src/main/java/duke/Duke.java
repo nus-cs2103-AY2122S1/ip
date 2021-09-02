@@ -11,6 +11,7 @@ import duke.parser.Parser;
  */
 public class Duke {
     private Parser parser;
+
     /**
      * Runs the program until termination.
      */
@@ -19,10 +20,6 @@ public class Duke {
         parser.initialiseDuke();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
         try {
             return parser.runDuke(input);

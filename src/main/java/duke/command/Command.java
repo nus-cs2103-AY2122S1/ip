@@ -29,6 +29,7 @@ public abstract class Command {
      *
      * @param cmd Command string to be executed.
      * @return Duke's response to the user.
+     * @throws DukeException if task faces an error during execution.
      */
     public abstract String execute(String cmd) throws DukeException;
 }
