@@ -19,7 +19,7 @@ public abstract class Command {
      * @param taskList The list of tasks Duke needs to execute on.
      * @param ui The Ui Duke utilises to interact with the user.
      */
-    public abstract void execute(Storage storage, TaskList taskList, Ui ui) throws IOException, DukeException;
+    public abstract String execute(Storage storage, TaskList taskList, Ui ui) throws IOException, DukeException;
 
     /**
      * Indicates whether the user is still going to use Duke.

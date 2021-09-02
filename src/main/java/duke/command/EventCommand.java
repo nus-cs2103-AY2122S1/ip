@@ -34,7 +34,7 @@ public class EventCommand extends Command {
      * @param ui The Ui Duke utilises to interact with the user.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws IOException, DukeException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException, DukeException {
         try {
             if (fullCommand.equals("event")) {
                 throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
@@ -49,10 +49,12 @@ public class EventCommand extends Command {
             Event event = new Event(description, atDateTime);
             taskList.storeTask(event);
             storage.saveFile(taskList.getAllTasks());
-            ui.showTaskAdded(event, taskList);
+            String output = ui.showTaskAdded(event, taskList);
+            return output;
 
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            String output = ui.showError(e.getMessage());
+            return output;
         }
     }
 }

@@ -32,11 +32,12 @@ public class DoneCommand extends Command {
      * @param ui The Ui Duke utilises to interact with the user.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
+    public String execute(Storage storage, TaskList taskList, Ui ui) throws IOException {
         Integer taskNo = Integer.parseInt(doneDescription);
         Task doneTask = taskList.getSpecificTask(taskNo);
         taskList.doneTask(taskNo);
         storage.saveFile(taskList.getAllTasks());
-        ui.showTaskDone(doneTask);
+        String output = ui.showTaskDone(doneTask);
+        return output;
     }
 }

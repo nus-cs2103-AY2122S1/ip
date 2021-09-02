@@ -60,17 +60,18 @@ public class Ui {
     /**
      * Prints the full welcome message when Duke starts.
      */
-    public void greetWelcome() {
-        System.out.println(LINE_BREAK);
-        System.out.println(WELCOME_MESSAGE);
-        System.out.println(LINE_BREAK);
+    public String greetWelcome() {
+        String output = LINE_BREAK + "\n" + WELCOME_MESSAGE + "\n" + LINE_BREAK + "\n";
+        System.out.println(output);
+        return output;
     }
 
     /**
      * Prints the full goodbye message when Duke closes.
      */
-    public void greetGoodbye() {
+    public String greetGoodbye() {
         System.out.println(GOODBYE_MESSAGE);
+        return GOODBYE_MESSAGE;
     }
 
     /**
@@ -86,9 +87,11 @@ public class Ui {
      * @param task The added task.
      * @param taskList The tasklist the task is added to.
      */
-    public void showTaskAdded(Task task, TaskList taskList) {
-        System.out.println(ADD_MESSAGE);
-        System.out.println("  " + task + "\n" + taskList.toString());
+    public String showTaskAdded(Task task, TaskList taskList) {
+        String output = ADD_MESSAGE + "\n";
+        output += "  " + task + "\n" + taskList.toString() + "\n";
+        System.out.println(output);
+        return output;
     }
 
     /**
@@ -97,10 +100,12 @@ public class Ui {
      * @param task The deleted task.
      * @param taskList The tasklist the task is deleted from.
      */
-    public void showTaskDeleted(Task task, TaskList taskList) {
-        System.out.println(DELETE_MESSAGE);
-        System.out.println("  " + task.toString());
-        System.out.println(taskList.toString());
+    public String showTaskDeleted(Task task, TaskList taskList) {
+        String output = DELETE_MESSAGE + "\n";
+        output += "  " + task.toString() + "\n";
+        output += taskList.toString() + "\n";
+        System.out.println(output);
+        return output;
     }
 
     /**
@@ -108,9 +113,11 @@ public class Ui {
      *
      * @param task The done task.
      */
-    public void showTaskDone(Task task) {
-        System.out.println(DONE_MESSAGE);
-        System.out.println("  " + task.toString());
+    public String showTaskDone(Task task) {
+        String output = DONE_MESSAGE + "\n";
+        output += "  " + task.toString() + "\n";
+        System.out.println(output);
+        return output;
     }
 
     /**
@@ -118,14 +125,16 @@ public class Ui {
      *
      * @param taskList The tasklist to be printed.
      */
-    public void showList(TaskList taskList) {
-        System.out.println(LIST_MESSAGE);
+    public String showList(TaskList taskList) {
+        String output = LIST_MESSAGE + "\n";
         int currPosition = taskList.getNextSpaceToStore();
         ArrayList<Task> allTasks = taskList.getAllTasks();
         for (int i = 0; i < currPosition; i++) {
             int currTask = i + 1;
-            System.out.println(currTask + "." + allTasks.get(i).toString());
+            output += currTask + "." + allTasks.get(i).toString() + "\n";
         }
+        System.out.println(output);
+        return output;
     }
 
     /**
@@ -134,24 +143,27 @@ public class Ui {
      * @param taskList The tasklist to be searched in.
      * @param description The keyword to be searched.
      */
-    public void showFind(TaskList taskList, String description) {
+    public String showFind(TaskList taskList, String description) {
         int findPosition = 1;
         int currPosition = taskList.getNextSpaceToStore();
-        System.out.println(FIND_MESSAGE);
+        String output = FIND_MESSAGE + "\n";
         for (int i = 0; i < currPosition; i++) {
             String foundTask = taskList.getAllTasks().get(i).toString();
             if (foundTask.contains(description)) {
-                System.out.println(findPosition + "." + foundTask);
+                output += findPosition + "." + foundTask + "\n";
                 findPosition++;
             }
         }
+        System.out.println(output);
+        return output;
     }
 
     /**
      * Prints the full unrecognised input message.
      */
-    public void showUnrecognised() {
+    public String showUnrecognised() {
         System.out.println(UNRECOGNISED_MESSAGE);
+        return UNRECOGNISED_MESSAGE;
     }
 
     /**
@@ -159,7 +171,8 @@ public class Ui {
      *
      * @param errorMessage
      */
-    public void showError(String errorMessage) {
+    public String showError(String errorMessage) {
         System.out.println(errorMessage);
+        return errorMessage;
     }
 }

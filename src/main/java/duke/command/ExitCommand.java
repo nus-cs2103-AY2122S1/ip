@@ -17,8 +17,9 @@ public class ExitCommand extends Command {
      * @param ui The Ui Duke utilises to interact with the user.
      */
     @Override
-    public void execute(Storage storage, TaskList taskList, Ui ui) {
-        ui.greetGoodbye();
+    public String execute(Storage storage, TaskList taskList, Ui ui) {
+        String output = ui.greetGoodbye();
+        return output;
     }
 
     /**
