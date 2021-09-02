@@ -13,7 +13,7 @@ import duke.exceptions.CommandParamException;
 public class Event extends Task {
 
     /**
-     * These are class field of Event.
+     * These are class fields of Event.
      */
     protected LocalDate date;
     protected LocalTime time;
@@ -28,15 +28,15 @@ public class Event extends Task {
     public Event(String description, String at) throws CommandParamException {
         super(description);
         String[] dateTime = at.trim().split(" ");
-        //index 0 is date, 1 is time
-        //date should be yyyy-mm-dd, time should be 2359 format
-        if (dateTime.length <= 1 || dateTime.length > 2) {
+        // index 0 is date, 1 is time
+        // date should be yyyy-mm-dd, time should be 2359 format
+        if (dateTime.length <= 1 || dateTime.length > 2) { // guard clause to ensure proper dateTime format
+            throw new CommandParamException("event");
+        }
+        if (dateTime[1].length() < 4) { // guard clause to ensure proper time format
             throw new CommandParamException("event");
         }
         try {
-            if (dateTime[1].length() < 4) {
-                throw new CommandParamException("event");
-            }
             String timeReformatted = dateTime[1].substring(0, 2) + ":" + dateTime[1].substring(2, 4);
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             LocalTime time = LocalTime.parse(timeReformatted);

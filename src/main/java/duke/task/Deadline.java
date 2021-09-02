@@ -13,7 +13,7 @@ import duke.exceptions.CommandParamException;
 public class Deadline extends Task {
 
     /**
-     * These are class field of Deadline.
+     * These are class fields of Deadline.
      */
     protected LocalDate date;
     protected LocalTime time;
@@ -28,15 +28,15 @@ public class Deadline extends Task {
     public Deadline(String description, String by) throws CommandParamException {
         super(description);
         String[] dateTime = by.trim().split(" ");
-        //index 0 is date, 1 is time
-        //date should be yyyy-mm-dd, time should be 2359...
-        if (dateTime.length <= 1 || dateTime.length > 2) {
+        // index 0 is date, 1 is time
+        // date should be yyyy-mm-dd, time should be 2359 format
+        if (dateTime.length <= 1 || dateTime.length > 2) { // guard clause to ensure proper dateTime format
+            throw new CommandParamException("deadline");
+        }
+        if (dateTime[1].length() < 4) { // guard clause to ensure proper time format
             throw new CommandParamException("deadline");
         }
         try {
-            if (dateTime[1].length() < 4) {
-                throw new CommandParamException("deadline");
-            }
             String timeReformatted = dateTime[1].substring(0, 2) + ":" + dateTime[1].substring(2, 4);
             LocalDate date = LocalDate.parse(dateTime[0].trim());
             LocalTime time = LocalTime.parse(timeReformatted);
