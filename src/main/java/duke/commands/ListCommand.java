@@ -8,8 +8,9 @@ import duke.utils.Ui;
 public class ListCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.showList(ui);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String[] messages = tasks.showList(ui);
+        return String.join("\n", messages);
     }
 
     @Override

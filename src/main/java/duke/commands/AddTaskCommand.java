@@ -20,7 +20,7 @@ public abstract class AddTaskCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         String[] messages = new String[] {
             "Got it. I've added this task:",
@@ -29,6 +29,7 @@ public abstract class AddTaskCommand extends Command {
         };
         ui.printOut(messages);
         storage.save(tasks);
+        return String.join("\n", messages);
     }
 
     @Override

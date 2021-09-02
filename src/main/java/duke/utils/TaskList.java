@@ -90,7 +90,7 @@ public class TaskList {
      *
      * @param ui Ui object.
      */
-    public void find(HashSet<String> keywords, Ui ui) {
+    public String find(HashSet<String> keywords, Ui ui) {
         TaskList filteredTasks = new TaskList();
         for (Task task : tasks) {
             if (task.containsKeywords(keywords)) {
@@ -99,13 +99,21 @@ public class TaskList {
         }
         if (filteredTasks.getSize() == 0) {
             ui.printOut("No matching tasks found!");
+            return "No matching tasks found!";
         } else {
-            filteredTasks.showList(ui);
+            return String.join("\n", filteredTasks.showList(ui));
         }
     }
 
-    public void showList(Ui ui) {
+    /**
+     * Returns array containing lines to be printed.
+     *
+     * @param ui Ui object.
+     * @return String array containing lines to be printed.
+     */
+    public String[] showList(Ui ui) {
         ui.printOut(toStrings());
+        return toStrings();
     }
 
     private String[] toStrings() {

@@ -16,13 +16,15 @@ public class FindCommand extends Command {
      * @param keywords Keywords to search for within task list.
      */
     public FindCommand(String[] keywords) {
-        for (String keyword : keywords) {
+        String[] keyWordsSplit = keywords[0].split(" ");
+        for (String keyword : keyWordsSplit) {
             this.keywords.add(keyword);
         }
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.find(keywords, ui);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        // TODO: Make tasks.find return a String
+        return tasks.find(keywords, ui);
     }
 }

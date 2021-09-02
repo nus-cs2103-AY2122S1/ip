@@ -10,8 +10,9 @@ public class ByeCommand extends Command {
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printOut(BYE_MESSAGE);
+        return BYE_MESSAGE;
     }
 
     /**
