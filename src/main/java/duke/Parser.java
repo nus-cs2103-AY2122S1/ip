@@ -25,7 +25,7 @@ public class Parser {
      * @param fullCommand User inputted String.
      * @return Whether or not the program continues or ends.
      */
-    public boolean parse(String fullCommand) {
+    public String parse(String fullCommand) {
         String[] temp = fullCommand.split("\\s+", 2);
         Command cmd = Command.fromString(temp[0]);
         String remainder = temp.length > 1 ? temp[1] : "";
@@ -33,49 +33,39 @@ public class Parser {
         switch (cmd) {
         case LIST:
             //display tasklist
-            tasks.displayList();
-            return true;
+            return tasks.displayList();
         case FIND:
             //find keyword
-            tasks.findTask(remainder);
-            return true;
+            return tasks.findTask(remainder);
         case DONE:
             //mark task as done
             int finishedTaskIndex = Integer.parseInt(remainder);
-            tasks.doneTask(finishedTaskIndex - 1);
-            return true;
+            return tasks.doneTask(finishedTaskIndex - 1);
         case DELETE:
             //delete task
             int deletedTaskIndex = Integer.parseInt(remainder);
-            tasks.deleteTask(deletedTaskIndex - 1);
-            return true;
+            return tasks.deleteTask(deletedTaskIndex - 1);
         case CLEAR:
             //clear all tasks
-            tasks.clearTasks();
-            return true;
+            return tasks.clearTasks();
         case TODO:
             //add Todo task
-            tasks.addTodo(remainder.trim());
-            return true;
+            return tasks.addTodo(remainder.trim());
         case DEADLINE:
             //add Deadline task
             String[] ds = remainder.split("/by");
-            tasks.addDeadline(ds);
-            return true;
+            return tasks.addDeadline(ds);
         case EVENT:
             //add Event task
             String[] es = remainder.split("/at");
-            tasks.addEvent(es);
-            return true;
+            return tasks.addEvent(es);
         case INVALID:
             //invalid user input
-            ui.toScreen("I'm sorry, I don't understand. Please try again.");
-            return true;
+            return "I'm sorry, I don't understand. Please try again.";
         case BYE:
             //end program
-            ui.toScreen("Bye. Hope to see you again soon!");
-            return false;
+            return "Bye. Hope to see you again soon!";
         }
-        return true;
+        return "I'm sorry, I don't understand. Please try again.";
     }
 }
