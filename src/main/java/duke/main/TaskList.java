@@ -78,6 +78,11 @@ public class TaskList implements Iterable<Task> {
                 + (this.taskList.size() == 1 ? " task " : " tasks ") + "in your list!");
     }
 
+    /**
+     * Prints all tasks that have descriptions that contains a given String.
+     *
+     * @param match Given string to check the task descriptions against.
+     */
     public void printAllContains(String match) {
         boolean taskFound = false;
         for (int i = 0; i < this.taskList.size(); i++) {

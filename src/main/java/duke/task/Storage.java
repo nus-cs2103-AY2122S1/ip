@@ -70,6 +70,8 @@ public class Storage {
                     Event event = (Event) task;
                     toBeWritten.append(SEPARATOR).append(event.getAt());
                     break;
+                default:
+                    break;
                 }
 
                 toBeWritten.append("\n");
@@ -103,6 +105,8 @@ public class Storage {
                     break;
                 case 'E':
                     newTask = Event.setEvent(inputArray[2] + Event.getSeparator() + inputArray[3]);
+                    break;
+                default:
                     break;
                 }
 
