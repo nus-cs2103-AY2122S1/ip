@@ -20,10 +20,10 @@ public class Todo extends Task {
      * Constructor for Todo that does specify whether task is done
      *
      * @param title name of todo
-     * @param done whether task is done or not
+     * @param isDone whether task is done or not
      */
-    public Todo(String title, Boolean done) {
-        super(title, done);
+    public Todo(String title, Boolean isDone) {
+        super(title, isDone);
     }
 
     /**
@@ -33,7 +33,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return "[T][X] " + this.title;
         } else {
             return "[T][ ] " + this.title;
@@ -47,7 +47,7 @@ public class Todo extends Task {
      */
     @Override
     public String saveString() {
-        if (this.done) {
+        if (this.isDone) {
             return "T : 1 : " + this.title;
         } else {
             return "T : 0 : " + this.title;

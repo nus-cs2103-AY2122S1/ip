@@ -16,6 +16,7 @@ public class Deadline extends Task {
     /**
      * Constructor for task that does not specify whether task is done
      * Sets done to false by default
+     *
      * @param title name of the task
      * @param deadline deadline of the task
      */
@@ -29,11 +30,11 @@ public class Deadline extends Task {
      * Used when tasks are loaded from storage
      *
      * @param title name of task
-     * @param done whether task is done or not
+     * @param isDone whether task is done or not
      * @param deadline deadline of task
      */
-    public Deadline(String title, Boolean done, String deadline) {
-        super(title, done);
+    public Deadline(String title, Boolean isDone, String deadline) {
+        super(title, isDone);
         this.parseDate(deadline);
     }
 
@@ -104,7 +105,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return this.deadlineDate != null
                 ? "[D][X] " + this.title + "(by: " + this.dateTimeString() + ")"
                 : "[D][X] " + this.title + "(by: " + this.deadline + ")";
@@ -122,7 +123,7 @@ public class Deadline extends Task {
      */
     @Override
     public String saveString() {
-        if (this.done) {
+        if (this.isDone) {
             return this.deadlineDate != null
                 ? "D : 1 : " + this.title + " : " + this.deadlineDate.toString() + (this.deadlineTime == null ? "" : " " + this.deadlineTime.toString())
                 : "D : 1 : " + this.title + " : " + this.deadline;

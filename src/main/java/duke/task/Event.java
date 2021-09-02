@@ -15,7 +15,7 @@ public class Event extends Task {
 
     /**
      * Constructor for event that does not specify whether task is done
-     * Sets done to false by default
+     * Sets isDone to false by default
      *
      * @param title name of event
      * @param eventDate date and time of event
@@ -30,11 +30,11 @@ public class Event extends Task {
      * Used when loading task from storage
      *
      * @param title name of event
-     * @param done whether task is done
+     * @param isDone whether task is done
      * @param eventDate date and time of event
      */
-    public Event(String title, Boolean done, String eventDate) {
-        super(title, done);
+    public Event(String title, Boolean isDone, String eventDate) {
+        super(title, isDone);
         this.parseDate(eventDate);
     }
 
@@ -105,7 +105,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return this.eventDate != null
                 ? "[E][X] " + this.title + "(at: " + this.dateTimeString() + ")"
                 : "[E][X] " + this.title + "(at: " + this.eventString + ")";
@@ -123,7 +123,7 @@ public class Event extends Task {
      */
     @Override
     public String saveString() {
-        if (this.done) {
+        if (this.isDone) {
             return this.eventDate != null
                 ? "E : 1 : " + this.title + " : " + this.eventDate.toString() + (this.eventTime == null ? "" : " " + this.eventTime.toString())
                 : "E : 1 : " + this.title + " : " + this.eventString;

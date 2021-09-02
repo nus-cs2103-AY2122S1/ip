@@ -7,21 +7,21 @@ package duke.task;
 public class Task {
 
     protected String title;
-    protected Boolean done;
+    protected Boolean isDone;
 
     Task(String title) {
         this.title = title;
-        this.done = false;
+        this.isDone = false;
     }
 
-    Task(String title, Boolean done) {
+    Task(String title, Boolean isDone) {
         this.title = title;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /** function to mark this task as done */
     public void markAsDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -31,7 +31,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (this.done) {
+        if (this.isDone) {
             return "[X] " + this.title;
         } else {
             return "[ ] " + this.title;
@@ -44,7 +44,7 @@ public class Task {
      * @return string representation of the task for saving
      */
     public String saveString() {
-        if (this.done) {
+        if (this.isDone) {
             return "Task : 1 : " + this.title;
         } else {
             return "Task : 0 : " + this.title;

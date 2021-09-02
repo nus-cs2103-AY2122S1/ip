@@ -60,7 +60,7 @@ public class Ui {
 
     
     /**
-     * Method for generate the string corresponging to Command.INDEXCOMMAND
+     * Method for generating the string corresponding to Command.INDEXCOMMAND
      *
      * @param size length of the tasklist
      * @param task task operated on
