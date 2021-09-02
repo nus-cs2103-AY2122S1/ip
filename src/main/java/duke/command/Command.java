@@ -1,7 +1,8 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
-import duke.Ui;
 import duke.task.Storage;
 import duke.task.TaskList;
 
@@ -14,11 +15,11 @@ public abstract class Command {
      * Executes the action for this command.
      *
      * @param tasks   The task list to execute the command on.
-     * @param ui      The user interface.
      * @param storage The storage for the tasks.
+     * @return a string output.
      * @throws DukeException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 
     /**
      * Returns true if the command causes program to exit.
@@ -26,4 +27,14 @@ public abstract class Command {
      * @return true if command is exit command.
      */
     public abstract boolean isExit();
+    
+    /** Append multiple strings into one string separated by newline character. */
+    protected String formatOutput(String... outputs) {
+        return String.join("\n", outputs);
+    }
+
+    /** Append multiple strings in an array into one string separated by newline character. */
+    protected String formatOutput(ArrayList<String> outputs) {
+        return String.join("\n", outputs);
+    }
 }

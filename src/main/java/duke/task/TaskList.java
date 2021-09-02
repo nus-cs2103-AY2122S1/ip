@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import duke.DukeException;
-import duke.Ui;
 
 /**
  * Represents a list of tasks to do.
@@ -36,13 +35,15 @@ public class TaskList {
     /**
      * Prints this todo list in order.
      */
-    public void displayList(Ui ui) {
-        ui.showMessage("Your task list:");
+    public ArrayList<String> getTaskStrings() {
+        ArrayList<String> taskStrings = new ArrayList<>();
         for (int i = 0; i < todoList.size(); i++) {
             Task task = todoList.get(i);
             int num = i + 1;
-            ui.showMessage((num + "." + task.toString()));
+            taskStrings.add(num + "." + task.toString());
         }
+        
+        return taskStrings;
     }
 
     /**

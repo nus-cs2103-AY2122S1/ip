@@ -1,5 +1,6 @@
 package duke;
 
+
 import duke.command.Command;
 import duke.task.Storage;
 import duke.task.TaskList;
@@ -9,54 +10,49 @@ import duke.task.TaskList;
  */
 public class Duke {
 
-    private final Ui ui;
     private Storage storage;
     private TaskList tasks;
 
+    private boolean hasExit;
+    
     /**
      * Constructs a Duke Chatbot with a data storage file.
      *
-     * @param filePath The path of the data file.
      */
-    public Duke(String filePath) {
-        ui = new Ui();
+    public Duke() {
         try {
-            storage = new Storage(filePath);
+            storage = new Storage("data/tasks.txt");
             tasks = new TaskList(storage.load());
+            System.out.println(tasks.getListSize());
         } catch (DukeException e) {
-            ui.showStartUpError(e);
             tasks = new TaskList();
         }
     }
 
     /**
-     * The main program.
-     *
-     * @param args
+     * Returns Duke's response to user input.
+     * @param input User's input.
+     * @return Duke's response.
      */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public String getResponse(String input) {
+        String res = "";
+        try {
+            Command c = Parser.parse(input, tasks);
+            res = c.execute(tasks, storage);
+            hasExit = c.isExit();
+        } catch (DukeException e) {
+            res = e.toString();
+        }
+        return res;
     }
 
     /**
-     * Runs the Chatbot program.
+     * Checks if the user has given an exit command.
+     *
+     * @return True if an exit command was give, false otherwise.
      */
-    public void run() {
-        ui.showWelcome();
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand, tasks);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showMessage(e.toString());
-            } finally {
-                ui.showLine();
-            }
-        }
+    public boolean hasExit() {
+        return hasExit;
     }
+    
 }

@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.task.Storage;
 import duke.task.TaskList;
 
@@ -13,11 +12,15 @@ public class DisplayCommand extends Command {
      * Executes the display list command.
      *
      * @param tasks   The task list to execute the command on.
-     * @param ui      The user interface.
      * @param storage The storage for the tasks.
+     * @return a string output.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.displayList(ui);
+    public String execute(TaskList tasks, Storage storage) {
+        if (tasks.getListSize() == 0) {
+            return "No tasks in your list.";
+        }
+        
+        return formatOutput("Your task list:", formatOutput(tasks.getTaskStrings()));
     }
 
     /**

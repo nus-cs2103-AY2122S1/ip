@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.Ui;
 import duke.task.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -28,17 +27,15 @@ public class DoneCommand extends Command {
      * Executes the task done command.
      *
      * @param tasks   The task list to execute the command on.
-     * @param ui      The user interface.
      * @param storage The storage for the tasks.
+     * @return a string output.
      * @throws DukeException
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         Task task = tasks.markTaskDone(taskNum);
-
-        ui.showMessage("Good work! I've marked this task as done:");
-        ui.showMessage(task.toString());
-
+        
         storage.save(tasks.getListData());
+        return formatOutput("Good work! I've marked this task as done:", task.toString());
     }
 
     /**

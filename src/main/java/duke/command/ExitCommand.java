@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Ui;
 import duke.task.Storage;
 import duke.task.TaskList;
 
@@ -12,11 +11,11 @@ public class ExitCommand extends Command {
      * Executes the program exit command.
      *
      * @param tasks   The task list to execute the command on.
-     * @param ui      The user interface.
      * @param storage The storage for the tasks.
+     * @return a string output.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showMessage("Bye bye! See you again soon!");
+    public String execute(TaskList tasks, Storage storage) {
+        return "Bye bye! See you again soon!";
     }
 
     /**
