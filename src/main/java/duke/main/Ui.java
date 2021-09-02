@@ -50,7 +50,7 @@ public class Ui {
      * @return String The successfully added message.
      */
     public String displayAddedMessage(Task t, TaskList tasks) {
-        String s = "I have added to the list: \n\t \t" + t.toString()
+        String s = "I have added to the list: \n\t \t " + t.toString()
                 + "There are " + tasks.getSize() + " items in the list";
         return s;
     }
