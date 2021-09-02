@@ -8,11 +8,8 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.exception.EmptyListException;
-import duke.exception.IncorrectFormatException;
 import duke.exception.InvalidDateTimeException;
-import duke.exception.InvalidDurationException;
 import duke.exception.InvalidIndexException;
-import duke.exception.MessageEmptyException;
 import duke.ui.Ui;
 
 /**
@@ -45,6 +42,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list of Tasks with a confirmation message printed out after.
+     *
      * @param task The duke.tasks.Task to be added to the list of Tasks.
      */
     public String addToList(Task task) {
@@ -96,24 +94,11 @@ public class TaskList {
      * Adds a Deadline to the list of Tasks.
      *
      * @param deadline The Deadline to be added to the list of Tasks which is the whole input barring the command.
-     * @throws IncorrectFormatException If the deadline command is used but a "/by" is not present in the message.
+     * @throws InvalidDateTimeException If the date/time format in deadline command is incorrect.
      */
-    public String addDeadline(String deadline) throws IncorrectFormatException,
-            InvalidDateTimeException, MessageEmptyException {
-
-        String[] result = deadline.split("/by");
-
-        if (result.length == 0) {
-            throw new MessageEmptyException();
-        } else if (result.length == 1) {
-            // throws an error if "/by" is not present in the message
-            throw new IncorrectFormatException("deadline", "/by");
-        } else if (result[0].trim().equals("")) {
-            throw new MessageEmptyException();
-        }
-
-        String description = result[0].trim(); // trims the additional spaces to the left and right of "by"
-        String by = result[1].trim(); // trims the additional spaces to the left and right of "by"
+    public String addDeadline(ArrayList<String> deadline) throws InvalidDateTimeException {
+        String description = deadline.get(0);
+        String by = deadline.get(1);
 
         LocalDateTime finalBy;
 
@@ -140,40 +125,15 @@ public class TaskList {
 
     /**
      * Adds an Event to the list of Tasks.
+     *
      * @param event The Event to be added to the list of Tasks, which is the entire user input barring the command.
-     * @throws IncorrectFormatException If the event command is used but a "/at" is not present in the message.
+     * @throws InvalidDateTimeException If the date/time format in the event command is incorrect.
      */
-    public String addEvent(String event) throws IncorrectFormatException, MessageEmptyException,
-            InvalidDateTimeException, InvalidDurationException {
-        String[] result = event.split("/at");
-
-        if (result.length == 0) {
-            throw new MessageEmptyException();
-        } else if (result.length == 1) {
-            // throws an error if "/at" is not present in the message
-            throw new IncorrectFormatException("event", "/at");
-        } else if (result[0].trim().equals("")) {
-            throw new MessageEmptyException();
-        }
-        String description = result[0].trim(); // trims the additional spaces to the left and right of "at"
-        String at = result[1].trim(); // trims the additional spaces to the left and right of "at"
-
-        // throws error if it doesn't even contain sufficient number of characters for correct format
-        if (at.replaceAll("\\s", "").length() < 19) { // YYYY/MM/DD HHMM - HHMM
-            throw new InvalidDurationException();
-        }
-
-        String date = at.substring(0, 10).trim(); // at this point, date contains 10 chars YYYY/MM/DD
-        String eventDuration = at.substring(11).trim();
-        String[] eventTimes = eventDuration.split("-");
-
-        // if no "-" present
-        if (eventTimes.length != 2) {
-            throw new InvalidDurationException();
-        }
-
-        String startTime = eventTimes[0].trim();
-        String endTime = eventTimes[1].trim();
+    public String addEvent(ArrayList<String> event) throws InvalidDateTimeException {
+        String description = event.get(0);
+        String date = event.get(1);
+        String startTime = event.get(2).trim();
+        String endTime = event.get(3).trim();
 
         LocalDate finalDate;
         LocalTime finalStartTime;

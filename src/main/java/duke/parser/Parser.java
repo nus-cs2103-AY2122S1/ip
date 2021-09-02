@@ -6,7 +6,9 @@ import java.util.Arrays;
 
 import duke.exception.DukeException;
 import duke.exception.EmptyCommandException;
+import duke.exception.IncorrectFormatException;
 import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDurationException;
 import duke.exception.MessageEmptyException;
 import duke.exception.TaskNotFoundException;
 import duke.storage.Storage;
@@ -43,9 +45,9 @@ public class Parser {
     /**
      * Parses a string task list index to an integer.
      *
-     * @param index string index from input.
-     * @return index as an integer.
-     * @throws NumberFormatException if the string cannot be converted into an integer.
+     * @param index String index from input.
+     * @return Index as an integer.
+     * @throws NumberFormatException If the string cannot be converted into an integer.
      */
     private int parseIndex(String index) throws NumberFormatException {
         try {
@@ -53,6 +55,71 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new NumberFormatException();
         }
+    }
+
+    private ArrayList<String> parseAddDeadline(String deadline) throws MessageEmptyException,
+            IncorrectFormatException {
+        ArrayList<String> parsedDeadline = new ArrayList<>();
+        String[] result = deadline.split("/by");
+
+        if (result.length == 0) {
+            throw new MessageEmptyException();
+        } else if (result.length == 1) {
+            // throws an error if "/by" is not present in the message
+            throw new IncorrectFormatException("deadline", "/by");
+        } else if (result[0].trim().equals("")) {
+            throw new MessageEmptyException();
+        }
+
+        String description = result[0].trim(); // trims the additional spaces to the left and right of "by"
+        String by = result[1].trim(); // trims the additional spaces to the left and right of "by"
+        parsedDeadline.add(description);
+        parsedDeadline.add(by);
+        return parsedDeadline;
+    }
+
+    /**
+     * Parses relevant information from event.
+     *
+     * @param event user inputted event.
+     * @return ArrayList of relevant information extracted from user input.
+     * @throws MessageEmptyException if the user input is lacking a message.
+     * @throws IncorrectFormatException if the user input does not include the "/by" keyword.
+     * @throws InvalidDurationException if the user input contains an incorrect duration format.
+     */
+    private ArrayList<String> parseAddEvent(String event) throws MessageEmptyException, IncorrectFormatException,
+            InvalidDurationException {
+        ArrayList<String> parsedEvent = new ArrayList<>();
+        String[] result = event.split("/at");
+        if (result.length == 0) {
+            throw new MessageEmptyException();
+        } else if (result.length == 1) {
+            // throws an error if "/at" is not present in the message
+            throw new IncorrectFormatException("event", "/at");
+        } else if (result[0].trim().equals("")) {
+            throw new MessageEmptyException();
+        }
+        String description = result[0].trim(); // trims the additional spaces to the left and right of "at"
+        String at = result[1].trim(); // trims the additional spaces to the left and right of "at"
+
+        // throws error if it doesn't even contain sufficient number of characters for correct format
+        if (at.replaceAll("\\s", "").length() < 19) { // YYYY/MM/DD HHMM - HHMM
+            throw new InvalidDurationException();
+        }
+
+        String date = at.substring(0, 10).trim(); // at this point, date contains 10 chars YYYY/MM/DD
+        String eventDuration = at.substring(11).trim();
+        String[] eventTimes = eventDuration.split("-");
+
+        // if no "-" present
+        if (eventTimes.length != 2) {
+            throw new InvalidDurationException();
+        }
+        parsedEvent.add(description);
+        parsedEvent.add(date);
+        parsedEvent.add(eventTimes[0]);
+        parsedEvent.add(eventTimes[1]);
+        return parsedEvent;
     }
 
     /**
@@ -77,13 +144,13 @@ public class Parser {
                 String doneTaskIndex = words[1];
                 return tasks.markDone(parseIndex(doneTaskIndex));
             case "deadline":
-                return tasks.addDeadline(input.substring(9).trim());
+                return tasks.addDeadline(parseAddDeadline(input.substring(9).trim()));
             case "todo":
                 // excludes command "todo" from the string
                 return tasks.addTodo(input.substring(5).trim());
             case "event":
                 // excludes command "event" from the string
-                return tasks.addEvent(input.substring(6).trim());
+                return tasks.addEvent(parseAddEvent(input.substring(6).trim()));
             case "delete":
                 // extracts index of task to delete
                 String deleteTaskIndex = words[1];
