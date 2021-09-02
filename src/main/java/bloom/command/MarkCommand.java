@@ -35,4 +35,10 @@ public class MarkCommand extends Command {
         System.out.println(Message.COMMAND_MARK.getMessage());
         System.out.println("\t   " + task);
     }
+
+    public void run(int ... indexes) {
+        for (int i : indexes){
+            new MarkCommand(i).run();
+        }
+    }
 }
