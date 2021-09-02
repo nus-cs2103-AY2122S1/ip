@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.data.exceptions.DukeException;
-import duke.data.exceptions.InvalidInputException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -38,6 +37,6 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         TaskList listWithMatchingTasks = findMatchingTasks(getSearchTerm(), taskList);
-        ui.showTasksWithSearchTerm(listWithMatchingTasks);
+        ui.showMatchingTasksMessage(listWithMatchingTasks);
     }
 }

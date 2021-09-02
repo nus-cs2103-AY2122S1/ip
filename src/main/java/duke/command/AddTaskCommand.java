@@ -3,6 +3,7 @@ package duke.command;
 import duke.data.exceptions.DukeException;
 import duke.data.exceptions.InvalidInputException;
 import duke.storage.Storage;
+import duke.ui.Message;
 import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -11,25 +12,29 @@ import duke.task.TaskList;
 import duke.task.Todo;
 
 public class AddTaskCommand extends Command {
-    private static final String TODO = "todo";
-    private static final String DEADLINE = "deadline";
-    private static final String EVENT = "event";
-
-    private String taskType;
+    private CommandTypes taskType;
     private String taskName;
     private String dateAndTime;
 
-    public AddTaskCommand(String taskType, String taskName) {
+    public AddTaskCommand(CommandTypes taskType, String taskName) {
         this.taskType = taskType;
         this.taskName = taskName;
     }
 
-    public AddTaskCommand(String taskType, String taskName, String dateAndTime) {
+    public AddTaskCommand(CommandTypes taskType, String taskName, String dateAndTime) {
         this.taskType = taskType;
         this.taskName = taskName;
         this.dateAndTime = dateAndTime;
     }
 
+    /**
+     * Returns the task to be added according to the user command and adds the task to the task list.
+     * Throws an InvalidInputException when the tasked added is not of type Todo, Deadline or Event.
+     *
+     * @param tasks the task list whereby tasks are added to
+     * @return the added task
+     * @throws InvalidInputException when the task is not a Todo, Deadline or Event
+     */
     private Task addTask(TaskList tasks) throws InvalidInputException {
         switch (taskType) {
         case TODO:
@@ -45,15 +50,23 @@ public class AddTaskCommand extends Command {
             tasks.addTask(event);
             return event;
         default:
-            throw new InvalidInputException("error");
+            throw new InvalidInputException(Message.MESSAGE_ERROR_OCCURRED);
         }
     }
 
+    /**
+     * Executes the AddTaskCommand object.
+     *
+     * @param taskList the current task list
+     * @param ui the ui object used
+     * @param storage the current storage
+     * @return a message string of the task added
+     * @throws InvalidInputException when task fails to add
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws InvalidInputException {
         Task addedTask = addTask(taskList);
         storage.update(taskList);
-        ui.showAddTaskMessage(addedTask, taskList);
-
+        return ui.showAddTaskMessage(addedTask, taskList);
     }
 }

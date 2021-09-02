@@ -6,36 +6,33 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 /**
- * Represents the user interface which includes methods that print information to the user.
+ * Represents the user interface which includes methods that returns information to the user.
  */
 public class Ui {
 
     public Ui() {}
 
-    //todo show loading error need?
-
     /**
      * Returns the welcome message of the programme.
      */
-    public static String showWelcome() {
-        //        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
+    public static String showWelcomeMessage() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
 
-        String message = "Hello! I'm Duke\n"
+        String welcomeMessage = logo + "Hello! I'm Duke :)\n"
                 + "What can I do for you?";
-        return message;
+        return welcomeMessage;
     }
 
     /**
      * Returns the exit message of the programme.
      */
-    public static String showExit() {
-        String message = "Bye. Hope to see you again soon!";
-        return message;
+    public static String showExitMessage() {
+        String exitMessage = "Bye. Hope to see you again soon!";
+        return exitMessage;
     }
 
     /**
@@ -43,7 +40,7 @@ public class Ui {
      *
      * @param error the error occurred in Duke
      */
-    public String showError(String error) {
+    public String showErrorMessage(String error) {
         return error;
     }
 
@@ -53,90 +50,95 @@ public class Ui {
      * @param removedTask the task removed
      * @param tasks the TaskList
      */
-    public String showDeleteTask(Task removedTask, TaskList tasks) {
+    public String showDeleteTaskMessage(Task removedTask, TaskList tasks) {
         String displayedMessage = "Noted. I've removed this task:\n"
                 + "  " + removedTask.toString() + "\n"
-                + getTotalTaskString(tasks);
+                + showTotalTaskNumber(tasks);
         return displayedMessage;
     }
 
     /**
-     * Returns the command from the user.
+     * Returns a message when a Task is successfully added.
      *
-     * @param sc the scanner to receive user inputs
-     * @return a string representing the command provided
+     * @param task the task added
+     * @param tasks the current task list
      */
-    public String readCommand(Scanner sc) {
-        String command = "";
-        //if (sc.hasNextLine()) {
-            command = sc.nextLine();
-        //}
-        return  command.trim();
-    }
-
-    /**
-     * Prints a message when a Task is successfully added.
-     *
-     * @param task
-     * @param tasks
-     */
-    public void showAddTaskMessage(Task task, TaskList tasks) {
+    public String showAddTaskMessage(Task task, TaskList tasks) {
         String successMessage = "Got it. I've added this task:";
         String taskString = task.toString();
         String result = successMessage + "\n"
                 + "  " + taskString + "\n"
-                + getTotalTaskString(tasks);
-        System.out.println(result);
+                + showTotalTaskNumber(tasks);
+        return result;
     }
 
     /**
-     * Prints a message when a Task is marked as complete.
+     * Returns a message when a Task is marked as complete.
      *
-     * @param task
+     * @param task the marked task
      */
-    public void showMarkTaskMessage(Task task) {
+    public String showMarkTaskMessage(Task task) {
         String displayedMessage = "Nice! I've marked this task as done:\n"
-                + "  "
-                + task.toString();
-        System.out.println(displayedMessage);
+                + "  " + task.toString();
+        return displayedMessage;
     }
 
-    public void showTasksWithSearchTerm(TaskList tasks) {
+    /**
+     * Returns a message when matching tasks are found or not.
+     *
+     * @param tasks the current task list
+     */
+    public String showMatchingTasksMessage(TaskList tasks) {
         if (tasks.isEmpty()) {
-            String emptyTaskList = "  " + "No task matched the search term!";
-            System.out.println(emptyTaskList);
+            String noMatchingTaskMessage = "  " + "No task matched the search term!";
+            return noMatchingTaskMessage;
         } else {
-            String message = "Here are the matching tasks in your list:";
-            System.out.println(message);
+            String matchingTasksPresentMessage = "Here are the matching tasks in your list:\n";
             for (int i = 1; i <= tasks.size(); i++) {
-                Task currentTask = tasks.getTask(i - 1);
-                String displayedTask = i + "." + currentTask.toString();
-                System.out.println(displayedTask);
+                Task currentMatchingTask = tasks.getTask(i - 1);
+                String matchingTaskDisplayed = i + ". " + currentMatchingTask.toString() + "\n";
+                matchingTasksPresentMessage += matchingTaskDisplayed;
             }
+            return matchingTasksPresentMessage;
         }
     }
 
-    public void showAllTasks(TaskList tasks) {
+    /**
+     * Returns a message that shows all tasks present in the task list.
+     *
+     * @param tasks the current task list
+     */
+    public String showAllTasks(TaskList tasks) {
         if (tasks.isEmpty()) {
-            String emptyTaskList = "There are currently no tasks yet!";
-            System.out.println(emptyTaskList);
+            String noTaskMessage = "There are currently no tasks yet!";
+            return noTaskMessage;
         } else {
-            String message = "Here are the tasks in your list:";
-            System.out.println(message);
+            boolean isPlural = tasks.size() > 1;
+            String message;
+            if (isPlural) {
+                message = "Here are the tasks in your list:\n";
+            } else {
+                message = "Here is the task in your list:\n";
+            }
             for (int i = 1; i <= tasks.size(); i++) {
                 Task currentTask = tasks.getTask(i - 1);
-                String displayedTask = i + "." + currentTask.toString();
-                System.out.println(displayedTask);
+                String displayedTask = i + ". " + currentTask.toString() + "\n";
+                message += displayedTask;
             }
+            return message;
         }
     }
 
-    private int getTotalTaskNumber(TaskList tasks) {
-        return tasks.size();
-    }
-
-    private String getTotalTaskString(TaskList tasks) {
-        return String.format("Now you have %d tasks in the list.", getTotalTaskNumber(tasks));
+    /**
+     * Returns a string message that shows the number of tasks currently.
+     *
+     * @param tasks the current task list
+     * @return a string message with the total task number
+     */
+    private String showTotalTaskNumber(TaskList tasks) {
+        boolean isPlural = tasks.size() > 1;
+        String sCharacter = isPlural ? "s" : "";
+        return String.format("Now you have %d task%s in the list.", tasks.size(), sCharacter);
     }
 
 
