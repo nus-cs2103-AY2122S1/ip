@@ -17,8 +17,8 @@ public class UnknownCommand extends Command {
      * @throws DukeException As the command is unrecognised.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-( " +
-                "Type \"help\" for a list of commands I understand.");
+        throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-( "
+                + "Type \"help\" for a list of commands I understand.");
     }
 
     /**

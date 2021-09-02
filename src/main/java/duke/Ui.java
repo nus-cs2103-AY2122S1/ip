@@ -1,12 +1,12 @@
 package duke;
 
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * Class that encapsulates user interaction.
@@ -128,8 +128,8 @@ public class Ui {
      * @param tasks List of the tasks.
      */
     public void printList(TaskList tasks) {
-        System.out.print("Here are the tasks in your list:\n" +
-                tasks.saveList());
+        System.out.print("Here are the tasks in your list:\n"
+                + tasks.saveList());
     }
 
     /**
@@ -137,8 +137,8 @@ public class Ui {
      * @param tasks The list of matching tasks.
      */
     public void showMatchingTasks(TaskList tasks) {
-        System.out.print("Here are the matching tasks in your list:\n" +
-                tasks.saveList());
+        System.out.print("Here are the matching tasks in your list:\n"
+                + tasks.saveList());
     }
 
     /**

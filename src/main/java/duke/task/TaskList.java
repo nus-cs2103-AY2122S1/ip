@@ -1,11 +1,11 @@
 package duke.task;
 
-import duke.DukeException;
-import duke.Ui;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.DukeException;
+import duke.Ui;
 
 /**
  * Class that encapsulates a list of tasks.
