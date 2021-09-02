@@ -59,9 +59,9 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
+                Command command = Parser.parse(fullCommand);
+                command.execute(tasks, ui, storage);
+                isExit = command.isExit();
 
             } catch (DukeException e) {
                 ui.printError(e.toString());
@@ -87,14 +87,14 @@ public class Duke {
      */
     String getResponse(String input) {
         try {
-            Command c = Parser.parse(input);
-            boolean isExit = c.isExit();
+            Command command = Parser.parse(input);
+            boolean isExit = command.isExit();
 
             if (isExit) {
                 Platform.exit();
             }
 
-            return c.execute(tasks, ui, storage);
+            return command.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.printError(e.toString());
         }
