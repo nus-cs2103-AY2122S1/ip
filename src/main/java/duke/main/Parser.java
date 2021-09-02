@@ -209,6 +209,8 @@ public class Parser {
      */
     private void checkDescription(String input) throws NoDescriptionException {
         String[] inputArray = input.split(" ");
-        if (inputArray.length == 1) throw new NoDescriptionException(inputArray[0]);
+        if (inputArray.length == 1) {
+            throw new NoDescriptionException(inputArray[0]);
+        }
     }
 }

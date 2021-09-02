@@ -9,7 +9,7 @@ import duke.exception.InvalidParamException;
 /**
  * Represents a Deadline type Task.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     /** String that Deadline uses to distinguish the description from the deadline date in the input String */
     private static final String SEPARATOR = " /by ";
