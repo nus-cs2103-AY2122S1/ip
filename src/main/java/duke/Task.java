@@ -11,7 +11,7 @@ public class Task {
      * Constructor of <code>Task</code>
      * @param body Body message
      */
-    Task(String body){
+    Task(String body) {
         this.body = body;
         this.isDone = false;
     }
@@ -38,7 +38,6 @@ public class Task {
      * Returns status of task
      * @return Status of task
      */
-    
     boolean isDone() {
         return this.isDone;
     }

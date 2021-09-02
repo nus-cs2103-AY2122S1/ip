@@ -1,13 +1,5 @@
 package duke;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-
 /**
  * Represents the main driver of <code>Duke</code>
  */
@@ -17,6 +9,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs an instance of <code>Duke</code>
+     */
     public Duke() {
         this.storage = new Storage("data/duke.txt");
         this.ui = new Ui();
@@ -51,7 +46,7 @@ public class Duke {
         } catch (Exception e) {
             return e.toString();
         }
-        return "Duke heard: " + input +"\n" + message;
+        return "Duke heard: " + input + "\n" + message;
     }
 
     /**

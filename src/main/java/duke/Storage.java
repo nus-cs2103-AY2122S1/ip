@@ -1,12 +1,12 @@
 package duke;
 
-import java.util.ArrayList;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -53,13 +53,11 @@ public class Storage {
                 if (splitLine.length == 3) {
                     if (splitLine[1].equals("0")) {
                         savedTasks.add(new Todo(splitLine[2], false));
-                    }
-                    else {
+                    } else {
                         savedTasks.add(new Todo(splitLine[2], true));
                     }
 
-                }
-                else if (splitLine.length == 4){
+                } else if (splitLine.length == 4) {
                     String[] dateParameters = splitLine[3].split("-");
                     int day = Integer.parseInt(dateParameters[2]);
                     int month = Integer.parseInt(dateParameters[1]);
@@ -70,20 +68,17 @@ public class Storage {
                             savedTasks.add(new Deadline(splitLine[2],
                                     false,
                                     localDate));
-                        }
-                        else {
+                        } else {
                             savedTasks.add(new Deadline(splitLine[2],
                                     true,
                                     localDate));
                         }
-                    }
-                    else {
+                    } else {
                         if (splitLine[1].equals("0")) {
                             savedTasks.add(new Event(splitLine[2],
                                     false,
                                     localDate));
-                        }
-                        else {
+                        } else {
                             savedTasks.add(new Event(splitLine[2],
                                     true,
                                     localDate));
