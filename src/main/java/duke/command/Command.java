@@ -39,7 +39,7 @@ public abstract class Command {
     }
 
     /**
-     * Asks Duke to execute a specific command.
+     * Returns Duke's response as a string after executing a specific command.
      * The method body must be implemented by its subclasses.
      *
      * @param tasks The taskList where all tasks are stored.

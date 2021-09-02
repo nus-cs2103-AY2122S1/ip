@@ -26,7 +26,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Executes a "todo" command.
+     * Returns a string representing Duke's response to a "todo" command.
      *
      * @param taskList The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.

@@ -12,7 +12,7 @@ import duke.util.Ui;
  */
 public class InvalidCommand extends Command {
     /**
-     * Executes an invalid command.
+     * Returns a string representing Duke's response to invalid commands.
      *
      * @param taskList The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.

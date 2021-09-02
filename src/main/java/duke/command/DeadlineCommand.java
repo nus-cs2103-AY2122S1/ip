@@ -27,7 +27,7 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Executes a "deadline" command.
+     * Returns a string representing Duke's response to a "deadline" command.
      *
      * @param taskList The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.

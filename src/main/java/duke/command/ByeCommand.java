@@ -6,7 +6,7 @@ import duke.util.Ui;
 
 public class ByeCommand extends Command {
     /**
-     * Executes a "bye" command.
+     * Returns a string representing Duke's response to a "bye" command.
      *
      * @param tasks The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.

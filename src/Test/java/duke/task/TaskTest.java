@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class TaskTest {
 
     @Test
-    void getStatusIcon() {
+    void testGetStatusIcon() {
         Task task = new Task("Do homework");
         assertEquals(" ", task.getStatusIcon());
 

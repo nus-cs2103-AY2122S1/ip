@@ -28,7 +28,7 @@ class DeadlineTest {
     }
 
     @Test
-    void saveToFile_exceptionThrow() throws EmptyFieldException, InvalidCommandException {
+    void saveToFile_exceptionThrown() throws EmptyFieldException, InvalidCommandException {
         try {
             //empty description and by
             new Deadline("", "").saveToFile();

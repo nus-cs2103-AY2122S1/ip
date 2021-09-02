@@ -27,7 +27,7 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Executes an "event" command.
+     * Returns a string representing Duke's response to a "event" command.
      *
      * @param taskList The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.

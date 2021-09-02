@@ -21,7 +21,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Executes a "find" command.
+     * Returns a string representing Duke's response to a "find" command.
      *
      * @param taskList The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.

@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Executes a "delete" command.
+     * Returns a string representing Duke's response to a "delete" command.
      *
      * @param taskList The taskList where all tasks are stored.
      * @param ui An instance of the Ui class that is responsible for Duke's user interactions.
