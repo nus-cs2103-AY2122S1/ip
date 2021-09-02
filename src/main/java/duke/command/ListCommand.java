@@ -19,6 +19,7 @@ public class ListCommand implements Command {
 
     /**
      * Indicates if the command is an exit command.
+     *
      * @return If the command is an exit command.
      */
     public boolean isExit() {

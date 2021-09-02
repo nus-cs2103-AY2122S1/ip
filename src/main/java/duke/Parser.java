@@ -36,6 +36,7 @@ public class Parser {
                         "search for.");
             }
             return new FindCommand(params[1]);
+        //fallthrough
         case ("todo"):
         case ("event"):
         case ("deadline"):
