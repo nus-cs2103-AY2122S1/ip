@@ -1,5 +1,6 @@
 package saber.javafx;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import saber.Saber;
+import saber.ui.ByeUI;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -37,11 +39,12 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Saber's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    private void handleUserInput() throws InterruptedException {
+        ByeUI byeUI = new ByeUI();
         String input = userInput.getText();
         String response = saber.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -49,5 +52,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getSaberDialog(response, saberImage)
         );
         userInput.clear();
+
+        if (response == byeUI.getSuccessMessage()) {
+            Platform.exit();
+        }
     }
 }
