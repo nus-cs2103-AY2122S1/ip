@@ -6,24 +6,30 @@ import java.util.Scanner;
  * The Bhutu chatbot app
  */
 public class Duke {
-    public static void main(String[] args) throws DukeException {
-        Ui.greet();
+    TaskList taskList;
+    Storage storage;
 
-        Scanner scanner = new Scanner(System.in);
-        TaskList taskList = new TaskList();
-        boolean exit = false;
+    public Duke() {
+        try {
+            this.taskList = new TaskList();
+            this.storage = Storage.initStorage("data/", "data/duke.txt");
+            storage.readFile(taskList);
+        }
+        catch(DukeException e) {
+            Ui.showError(e.getMessage());
+        }
 
-        Storage storage = Storage.initStorage("data/", "data/duke/txt");
-        storage.readFile(taskList);
+    }
 
-        //Echo
-        while (!exit) {
-            String input = scanner.nextLine();
-
-            Ui.divider();
-            exit = Parser.parser(input, taskList);
+    public String getResponse(String input) {
+        try {
+            //Echo
+            String response = Parser.parser(input, taskList);
             storage.saveToFile(taskList);
-            Ui.divider();
+            return response;
+        }
+        catch (DukeException e) {
+            return Ui.showError(e.getMessage());
         }
     }
 
