@@ -11,7 +11,7 @@ public abstract class Command {
      * @param ui      User interaction class.
      * @param storage Class that store tasks.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage);
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * indicates whether the command is to exit duke bot.

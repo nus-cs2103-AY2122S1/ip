@@ -11,6 +11,7 @@ public class Duke {
     private Ui ui;
 
     /**
+     * Constructor for Duke bot
      *
      * @param filePath Path to duke file.
      */
@@ -19,32 +20,26 @@ public class Duke {
         ui = new Ui();
     }
 
+    public Duke() {
+
+    }
+
     /**
-     * Runs the duke bot.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    public void run() {
+    public String getResponse(String input) {
         try {
             tasks = storage.convertFileToTaskList();
         } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
+            return e.getMessage();
         }
-        ui.greet();
-        boolean isExit = false;
         Parser parser = new Parser(" ");
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+        try {
+            Command c = parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return ui.showError(e.getMessage());
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("dukeData/tasks.txt").run();
     }
 }

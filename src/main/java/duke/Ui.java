@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Class that is in charge of interacting with user.
  */
@@ -17,8 +15,8 @@ public class Ui {
     /**
      * Says GoodBye to the user when they leave.
      */
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String bye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -26,18 +24,8 @@ public class Ui {
      *
      * @param errorMessage ErrorMessage throws by Duke.
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
-    }
-
-    /**
-     * Reads in command lines from the user.
-     *
-     * @return Command typed in by the user.
-     */
-    public String readCommand() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
@@ -45,10 +33,12 @@ public class Ui {
      *
      * @param tasks TaskList that is going to be printed.
      */
-    public void listAllTasks(TaskList tasks) {
+    public String listAllTasks(TaskList tasks) {
+        String result = new String();
         for (int i = 0; i < tasks.size(); i++) {
-            System.out.println((i + 1) + "." + tasks.get(i).toString());
+            result += (i + 1) + "." + tasks.get(i).toString() + "\n";
         }
+        return result;
     }
 
     /**
@@ -56,9 +46,9 @@ public class Ui {
      *
      * @param task The task that's going to be marked as done.
      */
-    public void markAsDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n"
-                + task.toString());
+    public String markAsDone(Task task) {
+        return "Nice! I've marked this task as done:\n"
+                + task.toString();
     }
 
     /**
@@ -67,11 +57,11 @@ public class Ui {
      * @param task         Task that has been added.
      * @param taskListSize Size of the updated taskList.
      */
-    public void addTask(Task task, int taskListSize) {
-        System.out.println("Got it. I've added this task:\n"
+    public String addTask(Task task, int taskListSize) {
+        return "Got it. I've added this task:\n"
                 + task.toString()
                 + "\nNow you have "
-                + taskListSize + " tasks in the list.");
+                + taskListSize + " tasks in the list.";
     }
 
     /**
@@ -80,9 +70,9 @@ public class Ui {
      * @param task         Task that has been deleted.
      * @param taskListSize Size of the updated taskList.
      */
-    public void deleteTask(Task task, int taskListSize) {
-        System.out.println("Successfully deleted task"
+    public String deleteTask(Task task, int taskListSize) {
+        return "Successfully deleted task"
                 + task.toString()
-                + "\nNow you have" + taskListSize + " tasks in the list.");
+                + "\nNow you have" + taskListSize + " tasks in the list.";
     }
 }

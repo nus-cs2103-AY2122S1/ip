@@ -11,10 +11,10 @@ public class MarkAsDoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.get(doneListIndex).done();
         storage.convertTaskListToFile(tasks);
-        ui.markAsDone(tasks.get(doneListIndex));
+        return ui.markAsDone(tasks.get(doneListIndex));
     }
 
     @Override
@@ -27,9 +27,7 @@ public class MarkAsDoneCommand extends Command {
         if (obj instanceof MarkAsDoneCommand) {
             @SuppressWarnings("have checked obj is MarkAsDoneCommand, can safely parse")
             MarkAsDoneCommand temp = (MarkAsDoneCommand) obj;
-            return temp.doneListIndex == this.doneListIndex
-                    ? true
-                    : false;
+            return temp.doneListIndex == this.doneListIndex;
         } else {
             return false;
         }
