@@ -2,7 +2,7 @@
  * A Task with a deadline.
  * @author Thomas Hogben
  */
-public class Deadline extends Task {
+public class Deadline extends DateAndTimeTask {
     private String deadline;
 
     /**
@@ -14,19 +14,14 @@ public class Deadline extends Task {
 
     /**
      * @param description The description of the Task.
-     * @param deadline The deadline of the Task.
+     * @param details The deadline of the Task.
      */
-    public Deadline(String description, String deadline) {
-        super(description);
-        this.deadline = deadline;
+    public Deadline(String description, String details) throws DukeException {
+        super(description, details);
     }
 
     @Override
     public String toString() {
-        String result = "[D]" + super.toString();
-        if (deadline != null) {
-            result += " (by: " + this.deadline + ")";
-        }
-        return result;
+        return "[D]" + super.toString();
     }
 }
