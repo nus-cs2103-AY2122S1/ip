@@ -1,5 +1,6 @@
 package duke;
 
+
 import task.Tasklist;
 import ui.LogMessage;
 import ui.Ui;
@@ -33,6 +34,10 @@ public class Duke {
         this.storage = new Storage(DEFAULT_ADDRESS);
         this.tasklist = storage.load(logMessage);
     }
+
+
+
+
 
     /**
      * Run main program
