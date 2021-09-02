@@ -4,57 +4,53 @@ import java.io.IOException;
 import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 public class Duke {
 
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private Parser parser;
 
     /**
      * Initialises Duke program.
-     *
-     * @param filepath Filepath of text file to read and write data.
      */
-    public Duke(String filepath) {
-        this.ui = new Ui();
+    public Duke() {
         this.taskList = new TaskList();
-        this.storage = new Storage(filepath, taskList);
+        this.storage = new Storage("data/tasks.txt", taskList);
+        this.parser = new Parser(taskList);
     }
 
-    /**
-     * Runs the program until termination.
-     */
-    public void run() {
-        ui.showWelcomeMessage();
 
-        System.out.println("You've saved the following tasks last time we met:");
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+
+        if (input.matches("bye")) {
+            try {
+                storage.writeToFile(taskList.tasks);
+                return "Bye! Hope to see you again! :D";
+            } catch (IOException e) {
+                System.out.println("No tasks saved.");
+            }
+        } else {
+            String result = parser.parseCommand(input);
+            return result;
+        }
+
+        if (input.matches("bye")) {
+            return "Thanks for using this! :)";
+        }
+        return "Duke heard: " + input;
+    }
+
+    public String getTasks() {
         try {
-            storage.printFileContents();
+            return storage.printFileContents(taskList);
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         }
-
-        while (true) {
-            String command = ui.getUserCommand();
-
-            if (command.matches("bye")) {
-                try {
-                    storage.writeToFile(taskList.tasks);
-                    ui.showFarewellMessage();
-                } catch (IOException e) {
-                    System.out.println("No tasks saved.");
-                }
-            } else {
-                Parser parser = new Parser(taskList);
-                parser.parseCommand(command);
-            }
-        }
+        return "You don't have any saved tasks";
     }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
 }
