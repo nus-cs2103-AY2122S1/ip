@@ -43,10 +43,10 @@ public class Parser {
             } else if (tokens[0].equals("list")) {
                 return new CommandShowList();
             } else if (tokens[0].equals("delete")) {
-                String taskName = String.join(" ", Arrays.copyOfRange(tokens, 1, atIdx));
+                String taskName = String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length));
                 return new CommandDelete(taskName);
             } else if (tokens[0].equals("done")) {
-                String taskName = String.join(" ", Arrays.copyOfRange(tokens, 1, atIdx));
+                String taskName = String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length));
                 return new CommandDone(taskName);
             } else if (tokens[0].equals("exit")) {
                 return new CommandExit();
