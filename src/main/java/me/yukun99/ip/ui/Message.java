@@ -1,5 +1,7 @@
 package me.yukun99.ip.ui;
 
+import java.util.List;
+
 import me.yukun99.ip.core.DateTimePair;
 import me.yukun99.ip.core.TaskFinder;
 import me.yukun99.ip.core.TaskList;
@@ -31,7 +33,7 @@ public class Message {
     private static final String HELP_DATE = "     - date format: yyyy-mm-dd";
     private static final String HELP_TIME = "     - time format: hh:mm:ss";
     private static final String HELP_UPDATE = "modify the date/time of task at specified index";
-    private static final String HELP_DELETE = "delete a task (LIFT MY BURDEN!)";
+    private static final String HELP_DELETE = "delete multiple tasks (LIFT MY BURDEN!)";
     private static final String HELP_EXIT = "(please for the love of God) let me rest! :)";
 
     // Message sent to user when bot starts.
@@ -48,7 +50,7 @@ public class Message {
             + NEW_LINE + CMD_PREFIX + "'update (task index) /to (date) (time)' - " + HELP_UPDATE
             + NEW_LINE + HELP_DATE
             + NEW_LINE + HELP_TIME
-            + NEW_LINE + CMD_PREFIX + "'delete (task index)' - " + HELP_DELETE
+            + NEW_LINE + CMD_PREFIX + "'delete (task index) (task index 2) ...' - " + HELP_DELETE
             + NEW_LINE + CMD_PREFIX + "'bye' - " + HELP_EXIT;
 
     // Message sent to user when user requests for help.
@@ -62,7 +64,7 @@ public class Message {
             + NEW_LINE + CMD_PREFIX + "'update (task index) (date/time)' - " + HELP_UPDATE
             + NEW_LINE + HELP_DATE
             + NEW_LINE + HELP_TIME
-            + NEW_LINE + CMD_PREFIX + "'delete (task index)' - " + HELP_DELETE
+            + NEW_LINE + CMD_PREFIX + "'delete (task index) (task index 2) ...' - " + HELP_DELETE
             + NEW_LINE + CMD_PREFIX + "'bye' - " + HELP_EXIT;
 
     // Message sent to user when user lists all tasks.
@@ -78,18 +80,23 @@ public class Message {
             "Can't you just keep track of this yourself? Fine, removed this for " + "you:";
     // Message sent to user when user deletes unfinished task.
     private static final String DELETE_UNDONE = "Oh, procrastinating now are we? Sure, removed this:";
-    // Message sent to user when user exits HelpBot.
-    private static final String EXIT = "Good riddance.";
+    // Message sent to user when user deletes multiple tasks at once.
+    private static final String DELETE_MULTIPLE_SMALL = "Oh good, they're actually bundled up. Deleted these:";
+    // Message sent to user when user deletes multiple tasks at once.
+    private static final String DELETE_MULTIPLE_LARGE =
+            "HOW LONG HAVE YOU BEEN LETTING THESE PILE UP? DAMN IT, DELETED THESE:";
     // Message sent to user when user marks an undone task as done.
     private static final String DONE_UNCOMPLETED =
             "About time you did your work, you lazy bum! I GUESS I'll mark it as done for you:";
     // Message sent to user when user marks a completed task as done.
     private static final String DONE_COMPLETED =
             "You've already done this idiot! I'm watching Twitch, stop bothering me!";
-    // Message sent to user to tell user how many tasks are left in the TaskList.
-    private static final String REMAINING = "You now have " + TASKNUM_PLACEHOLDER + " tasks to do.";
     // Message sent to user when user updates a task's timing.
     private static final String UPDATE = "Dude, make up your mind! I'll update it, but just this once, okay?";
+    // Message sent to user when user exits HelpBot.
+    private static final String EXIT = "Good riddance.";
+    // Message sent to user to tell user how many tasks are left in the TaskList.
+    private static final String REMAINING = "You now have " + TASKNUM_PLACEHOLDER + " tasks to do.";
 
     /**
      * Gets message sent when user starts up the bot.
@@ -195,6 +202,27 @@ public class Message {
         }
         reply += NEW_LINE + task + NEW_LINE + getRemainingMessage(taskList);
         return formatMessage(reply);
+    }
+
+    /**
+     * Gets message sent when user deletes multiple tasks at once.
+     *
+     * @param tasks List of deleted tasks.
+     * @param taskList TaskList that user deleted the tasks from.
+     * @return Message sent whenuser deletes multiple tasks at once.
+     */
+    public static String getDeleteMultipleMessage(List<Task> tasks, TaskList taskList) {
+        StringBuilder reply;
+        if (tasks.size() < 5) {
+            reply = new StringBuilder(DELETE_MULTIPLE_SMALL);
+        } else {
+            reply = new StringBuilder(DELETE_MULTIPLE_LARGE);
+        }
+        for (Task task : tasks) {
+            reply.append(NEW_LINE).append(task.toString());
+        }
+        reply.append(NEW_LINE).append(getRemainingMessage(taskList));
+        return reply.toString();
     }
 
     /**

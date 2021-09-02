@@ -152,8 +152,32 @@ public class TaskList {
             deleted.updateFinder(taskFinder, true);
             return deleted;
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
-            throw new HelpBotInvalidTaskException(e, "delete", strIndex + "");
+            throw new HelpBotInvalidTaskException(e, "delete", strIndex);
         }
+    }
+
+    /**
+     * Deletes multiple tasks from the TaskList.
+     *
+     * @param args Arguments specified by the user.
+     * @return List containing all deleted tasks.
+     * @throws HelpBotInvalidTaskException If specified Task index does not exist.
+     */
+    public List<Task> deleteTasks(String... args) throws HelpBotInvalidTaskException {
+        List<Task> deletedTasks = new ArrayList<>();
+        for (String strIndex : args) {
+            try {
+                int index = Integer.parseInt(strIndex) - 1;
+                deletedTasks.add(taskList.get(index));
+            } catch (IndexOutOfBoundsException | NumberFormatException e) {
+                throw new HelpBotInvalidTaskException(e, "delete", strIndex);
+            }
+        }
+        for (Task task : deletedTasks) {
+            taskList.remove(task);
+            task.updateFinder(taskFinder, true);
+        }
+        return deletedTasks;
     }
 
     /**

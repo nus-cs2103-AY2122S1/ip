@@ -101,7 +101,7 @@ public class Parser {
         }
         if (message.startsWith("delete ")) {
             String strIndex = message.replaceFirst("delete ", "");
-            String[] args = {strIndex};
+            String[] args = strIndex.split(" ");
             command = new DeleteCommand(args, taskList, storage);
         }
         if (message.startsWith("done ")) {

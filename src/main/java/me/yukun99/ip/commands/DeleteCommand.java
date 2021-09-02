@@ -1,9 +1,13 @@
 package me.yukun99.ip.commands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import me.yukun99.ip.core.Storage;
 import me.yukun99.ip.core.TaskList;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskException;
 import me.yukun99.ip.tasks.Task;
+import me.yukun99.ip.ui.Message;
 
 public class DeleteCommand extends Command {
     private final Storage storage;
@@ -22,8 +26,16 @@ public class DeleteCommand extends Command {
 
     @Override
     public String getResponse() throws HelpBotInvalidTaskException {
-        Task deleted = taskList.deleteTask(args[0]);
+        List<Task> deletedTasks = new ArrayList<>();
+        if (args.length > 1) {
+            deletedTasks = taskList.deleteTasks(args);
+        } else {
+            deletedTasks.add(taskList.deleteTask(args[0]));
+        }
         storage.updateTasks();
-        return deleted.getDeleteMessage(taskList);
+        if (deletedTasks.size() > 1) {
+            return Message.getDeleteMultipleMessage(deletedTasks, taskList);
+        }
+        return deletedTasks.get(0).getDeleteMessage(taskList);
     }
 }

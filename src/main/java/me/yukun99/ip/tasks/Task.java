@@ -1,7 +1,5 @@
 package me.yukun99.ip.tasks;
 
-import java.util.Objects;
-
 import me.yukun99.ip.core.DateTimePair;
 import me.yukun99.ip.core.TaskFinder;
 import me.yukun99.ip.core.TaskList;
@@ -82,27 +80,6 @@ public abstract class Task {
     }
 
     /**
-     * Checks whether another Task object is equal to the current instance.
-     *
-     * @param o Task object to check against.
-     * @return Whether the other Object is equal to the current instance.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null) {
-            return false;
-        }
-        if (!(o instanceof Task)) {
-            return false;
-        }
-        Task task = (Task) o;
-        return name.equals(task.name);
-    }
-
-    /**
      * Updates TaskFinder instance when task is added or deleted.
      *
      * @param taskFinder TaskFinder instance to be updated.
@@ -123,11 +100,6 @@ public abstract class Task {
      */
     public String saveString() {
         return System.lineSeparator();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, isDone);
     }
 
     /**

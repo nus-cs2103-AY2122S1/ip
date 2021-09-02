@@ -48,11 +48,13 @@ public class AddCommand extends Command {
         default:
             throw new HelpBotIllegalArgumentException(args[0]);
         }
+        DateTimePair dateTimePair = null;
         try {
-            DateTimePair dateTimePair = task.getDate();
+            dateTimePair = task.getDate();
+        } catch (HelpBotInvalidTaskTypeException ignored) {
+            // ignored
+        } finally {
             taskList.addTask(task, dateTimePair);
-        } catch (HelpBotInvalidTaskTypeException e) {
-            taskList.addTask(task, null);
         }
         storage.saveTask(task);
         return Message.getAddMessage(task, taskList);

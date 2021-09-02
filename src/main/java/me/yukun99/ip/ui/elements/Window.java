@@ -66,9 +66,10 @@ public class Window extends AnchorPane {
         }
         try {
             Command command = parser.parseCommand(input.getText());
-            dialogContainer.getChildren().add(DialogBox.getBotDialog(command.getResponse()));
+            String response = command.getResponse();
+            dialogContainer.getChildren().add(DialogBox.getBotDialog(response));
             try {
-                storage.saveMessage(command.getResponse());
+                storage.saveMessage(response);
             } catch (IOException ignored) {
                 // ignored
             }
