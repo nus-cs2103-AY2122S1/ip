@@ -12,11 +12,11 @@ public class DeleteCommand implements Command {
     }
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
-        if (idx >= tasks.size()) {
+        if (idx >= tasks.getSize()) {
             throw new DukeException("☹ OOPS!!! That task doesn't exist.");
         }
-        System.out.println(Ui.format("Noted. I've removed this task: \n\t" + tasks.get(idx) +
-                "\nNow you have " + ui.formatNumTasks(tasks.size() - 1) + " in the list."));
+        System.out.println(Ui.format("Noted. I've removed this task: \n\t" + tasks.get(idx)
+                + "\nNow you have " + ui.formatNumTasks(tasks.getSize() - 1) + " in the list."));
         tasks.remove(idx);
     }
 

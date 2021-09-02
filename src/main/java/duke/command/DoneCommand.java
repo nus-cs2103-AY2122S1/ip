@@ -15,7 +15,7 @@ public class DoneCommand implements Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
-        if (idx >= tasks.size()) {
+        if (idx >= tasks.getSize()) {
             throw new DukeException("☹ OOPS!!! That task doesn't exist.");
         }
         Task t = tasks.get(idx);

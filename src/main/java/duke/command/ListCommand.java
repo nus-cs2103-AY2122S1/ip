@@ -7,12 +7,12 @@ public class ListCommand implements Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui) {
-        if (tasks.size() == 0) {
+        if (tasks.getSize() == 0) {
             System.out.println("There are no tasks in your list yet.");
             return;
         }
         System.out.println("Here are the tasks in your list:");
-        for (int i = 1; i < tasks.size() + 1; i++) {
+        for (int i = 1; i < tasks.getSize() + 1; i++) {
             System.out.println(i + "." + tasks.get(i - 1));
         }
     }

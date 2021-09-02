@@ -14,7 +14,7 @@ public class TaskList {
         this.tasks = (existingTasks == null ? new ArrayList<>() : existingTasks);
     }
 
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 
