@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class TaskList {
     //List that holds all the Tasks.
     private final ArrayList<Task> list;
-    //Storage to load the list and write to list,
+    //Storage to load the list and write to list.
     private final Storage store;
 
     /**
@@ -120,7 +120,7 @@ public class TaskList {
      *
      * @param input Keyword to search Tasks with.
      */
-    public String find(String input) {
+    public String findTask(String input) {
         int length = list.size();
         ArrayList<Integer> listOfHits = new ArrayList<>();
         for (int i = 0; i < length; i++) {// finding the index of task with keyword input

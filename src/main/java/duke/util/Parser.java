@@ -43,7 +43,7 @@ public class Parser {
                 if (desc.isBlank()) {//check for incomplete input
                     throw new DukeException();
                 }
-                return list.find(desc);
+                return list.findTask(desc);
             } else if (input.startsWith("done ")) {
                 int numInt = extractInt(input);
                 return list.setIndexDone(numInt);

@@ -120,23 +120,24 @@ public class Duke extends Application{
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response from Duke with the input being the prompt.
+     *
+     * @param input Prompt for Duke, Users input.
+     * @return Duke's reponse as a String.
      */
     @FXML
     public String getResponse(String input) {
         return parser.parseAndExecute(input);
     }
 
-
-    public static void main(String[] args) {
-        new Duke("list.ser").run();
-    }
-
     /**
-     * Run the Duke program, prints out welcome statement and starts accepting input.
+     * Runs the Duke program, prints out welcome statement and starts accepting input.
      */
     public void run() {
         ui.welcome();
+    }
+
+    public static void main(String[] args) {
+        new Duke("list.ser").run();
     }
 }
