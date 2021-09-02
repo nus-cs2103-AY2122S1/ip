@@ -2,6 +2,7 @@ package duke;
 
 import duke.commands.Command;
 import duke.exceptions.DukeException;
+import duke.gui.DialogBox;
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
@@ -53,7 +54,14 @@ public class Duke extends Application {
      * Duke constructor.
      */
     public Duke() {
-        // do nothing
+        this.ui = new Ui();
+        this.storage = new Storage("data/duke.txt");
+        try {
+            this.taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            this.ui.showLoadingError();
+            this.taskList = new TaskList();
+        }
     }
 
     /**
@@ -96,8 +104,9 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        String input = userInput.getText();
+        Label userText = new Label(input);
+        Label dukeText = new Label(getResponse(input));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -110,7 +119,16 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        Command command;
+        String response;
+        try {
+            command = Parser.parseNext(input);
+            response = command.execute(taskList, ui, storage);
+        } catch (Exception e) {
+            System.out.println(e.toString());
+            response = e.getMessage();
+        }
+        return response;
     }
 
     @Override

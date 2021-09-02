@@ -1,4 +1,4 @@
-package duke;
+package duke.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,9 +13,15 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    /**
+     * DialogBox constructor.
+     *
+     * @param label Label for created dialogBox.
+     * @param imageView ImageView for created dialogBox.
+     */
+    public DialogBox(Label label, ImageView imageView) {
+        text = label;
+        displayPicture = imageView;
 
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);
