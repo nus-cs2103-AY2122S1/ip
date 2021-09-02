@@ -9,9 +9,10 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import duke.command.Command;
+import duke.ui.ConsoleUi;
 
 public class Duke extends Application {
-    private Ui ui;
+    private ConsoleUi ui;
     private TaskList taskList;
     private Storage storage;
 
@@ -20,7 +21,7 @@ public class Duke extends Application {
 
     public Duke(Scanner in, String filePath) throws Exception {
         super();
-        this.ui = new Ui(in);
+        this.ui = new ConsoleUi(in);
         this.storage = new Storage(filePath);
         // TODO: throw error if unable to create file?
         this.taskList = new TaskList(storage.loadTasks());
