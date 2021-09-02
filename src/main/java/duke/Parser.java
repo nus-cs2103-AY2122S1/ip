@@ -1,5 +1,6 @@
 package duke;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -63,111 +64,112 @@ public class Parser {
     }
 
     /**
-     * Parses the given user input. Returns true only when user input is to exit the program, returns false otherwise.
+     * Parses the given user input and returns a response.
      *
      * @param taskList The TaskList storing the Tasks.
      * @param storage The Storage instance containing the TaskList and files.
      * @param firstString The first String entered by the user
      * @param inputArray The array containing all strings input by the user.
-     * @return A boolean indicating if the user wants to quit the program.
+     * @return A string indicating the response to the user.
      */
-    public static boolean parseInput(TaskList taskList, Storage storage, String firstString, String[] inputArray) {
+    public static String parseInput(TaskList taskList, Storage storage, String firstString, String[] inputArray) {
         //case if nothing is entered
         if (firstString.equals("")) {
-            Ui.printEmptyInputError();
-            return false;
+            return Ui.getEmptyInputError();
         }
 
-        //case if user wants to exit the program
+        /*
+        case if user wants to exit the program, no longer needed
         if (firstString.equals("bye")) {
-            return true;
+
         }
+        */
 
         //below are cases for specified keywords:
         //case if user wants to view the list
         if (firstString.equals("list")) {
             //if list is empty
             if (taskList.getTotalTasks() == 0) {
-                Ui.printNoTaskError();
-                return false;
+                return Ui.getNoTaskError();
             }
-            //repeatedly print tasks in the list
+            //repeatedly append tasks then return them
+            StringBuilder str = new StringBuilder();
             for (int i = 0; i < taskList.getTotalTasks(); i++) {
                 int listNumber = i + 1;
-                System.out.println(listNumber + ". " + taskList.getTask(i).toString());
+                String taskString = listNumber + ". " + taskList.getTask(i).toString() + "\n";
+                str.append(taskString);
             }
-            return false;
+            return str.toString();
         }
 
         //case if user wants to delete a task or mark a task as done
         if (firstString.equals("done") || firstString.equals("delete")) {
             //case if no number is entered
             if (inputArray.length < 2) {
-                Ui.printNumberError();
-                return false;
+                return Ui.getNumberError();
             }
 
             try {
+                StringBuilder str = new StringBuilder();
                 int index = Integer.parseInt(inputArray[1]);
                 int arrayIndex = index - 1;
                 //case if entered index does not correspond to a task
                 if (index > taskList.getTotalTasks() || index < 1) {
-                    Ui.printTaskError();
+                    return Ui.getTaskError();
                 }
                 //retrieve the task
                 Task currentTask = taskList.getTask(arrayIndex);
                 if (firstString.equals("done")) {
                     //case to complete a task
                     currentTask.setCompleted();
-                    Ui.printTaskCompleted(currentTask);
+                    str.append(Ui.getTaskCompleted(currentTask));
                 } else {
                     //remaining case is to delete the task.
                     taskList.deleteTask(currentTask);
-                    Ui.printTaskCompleted(currentTask);
+                    str.append(Ui.getTaskCompleted(currentTask));
                 }
-                Ui.printTaskNumberReminder(taskList.getTotalTasks());
-                storage.saveData();
+                str.append(Ui.getTaskNumberReminder(taskList.getTotalTasks()));
+                try {
+                    storage.saveData();
+                } catch (IOException e) {
+                    return Ui.getFileError();
+                }
+                return str.toString();
 
             } catch (NumberFormatException exception) {
                 //case if string entered was not a number
-                Ui.printNumberError();
+                return Ui.getNumberError();
             }
-            return false;
 
         }
 
         //cases for the 3 task types
         if (firstString.equals("todo")) {
-            TaskCreator.createTask(Task.Tasks.TODO, inputArray, storage, taskList);
-            return false;
+            return TaskCreator.createTask(Task.Tasks.TODO, inputArray, storage, taskList);
         }
 
         if (firstString.equals("deadline")) {
-            TaskCreator.createTask(Task.Tasks.DEADLINE, inputArray, storage, taskList);
-            return false;
+            return TaskCreator.createTask(Task.Tasks.DEADLINE, inputArray, storage, taskList);
         }
 
         if (firstString.equals("event")) {
-            TaskCreator.createTask(Task.Tasks.EVENT, inputArray, storage, taskList);
-            return false;
+            return TaskCreator.createTask(Task.Tasks.EVENT, inputArray, storage, taskList);
         }
 
         if (firstString.equals("find")) {
             if (inputArray.length < 2) {
                 //case if no number is entered
-                Ui.printNumberError();
-                return false;
+                return Ui.getNumberError();
             }
             StringBuilder str = new StringBuilder();
             for (int i = 1; i < inputArray.length; i++) {
                 str.append(inputArray[i]).append(" ");
             }
-            taskList.find(str.toString());
-            return false;
+            return taskList.find(str.toString());
         }
 
         //case if first string input is not a keyword
-        Ui.printBadInputError();
-        return false;
+        return Ui.getBadInputError();
+
     }
 }

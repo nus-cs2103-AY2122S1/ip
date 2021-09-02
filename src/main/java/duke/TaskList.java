@@ -76,7 +76,7 @@ public class TaskList {
      *
      * @param string The input string to search for matches.
      */
-    public void find(String string) {
+    public String find(String string) {
         List<Task> list = new ArrayList<>();
         for (Task task: taskList) {
             if (task.getName().contains(string)) {
@@ -84,14 +84,17 @@ public class TaskList {
             }
         }
         if (list.isEmpty()) {
-            Ui.printNoMatch();
+            return Ui.getNoMatch();
         } else {
-            Ui.printMatch();
+            StringBuilder str = new StringBuilder();
+            str.append(Ui.getMatch());
+
             int index = 1;
             for (Task task: list) {
-                System.out.println(index + "." + task.toString());
+                str.append(index + "." + task.toString() + "\n");
                 index += 1;
             }
+            return str.toString();
         }
 
     }

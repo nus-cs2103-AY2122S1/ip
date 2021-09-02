@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,6 +13,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 /**
  * A class encapsulating a chat bot.
  *
@@ -26,8 +26,14 @@ public class Duke extends Application {
     private static final String FILE_PATH = "data/test.txt";
     //path of folder containing data file
     private static final String DIRECTORY_PATH = "data";
+    //boolean to check if duke has already been initialised
+    private static boolean isInitialised = false;
 
-    //FIelds associated with the GUI
+    private static TaskList taskList = new TaskList();
+    private static Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH, taskList);;
+
+
+    //Fields associated with the GUI
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -36,30 +42,33 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-    private void run() {
+    private static String run(String input) {
         //initialise required classes
-        TaskList taskList = new TaskList();
-        Storage storage = new Storage(FILE_PATH, DIRECTORY_PATH, taskList);
+        //check if initialised:
+        if (!isInitialised) {
+            //activate storage
+            try {
+                storage.start();
+            } catch (IOException e) {
+                return Ui.getReadFileError();
+            }
+            isInitialised = true;
+        }
 
-        //activate storage and start reading user input
-        storage.start();
-        Scanner scan = new Scanner(System.in);
-        Ui.printWelcomeMessage();
+        //no longer need to process user input, handled by frontend of GUI
+        //Scanner scan = new Scanner(System.in);
+        //Ui.printWelcomeMessage();
 
         //start reading user input
-        while (true) {
-            String input = scan.nextLine();
-            //split input into strings by whitespaces
-            String[] inputArray = input.split("\\s");
-            String firstString = inputArray[0];
-            if (Parser.parseInput(taskList, storage, firstString, inputArray)) {
-                //The function will only return true if user wants to quit
-                break;
-            }
-        }
+        String[] inputArray = input.split("\\s");
+        String firstString = inputArray[0];
+        return Parser.parseInput(taskList, storage, firstString, inputArray);
+
         //exit from the program
-        scan.close();
-        Ui.printEndMessage();
+        //scan.close();
+
+        //no longer need a case for exiting the program.
+        //Ui.printEndMessage();
     }
 
     /**
@@ -68,8 +77,7 @@ public class Duke extends Application {
      * @param args The default parameter for the main function.
      */
     public static void main(String[] args) {
-        Duke dukeInstance = new Duke();
-        dukeInstance.run();
+
     }
 
     @Override
@@ -180,7 +188,7 @@ public class Duke extends Application {
      * @return The response.
      */
     private String getResponse(String input) {
-        return "Duke heard: " + input;
+        return Duke.run(input);
     }
 
 }
