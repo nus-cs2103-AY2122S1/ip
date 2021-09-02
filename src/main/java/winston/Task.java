@@ -11,7 +11,7 @@ public class Task {
      * Private constructor for Task.
      *
      * @param description is the string of the description of the given task.
-     * @param isCompleted is a boolean of whether the task is completed or not.
+     * @param isCompleted whether the task is completed or not.
      */
     public Task(String description, boolean isCompleted) {
         this.description = description;
@@ -56,7 +56,7 @@ public class Task {
      * @return a boolean on whether a given string is a substring of the description.
      */
     public boolean isSubString(String str) {
-        return this.description.toLowerCase().indexOf(str.toLowerCase()) >= 0;
+        return this.description.toLowerCase().contains(str.toLowerCase());
     }
     
     /**

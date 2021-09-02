@@ -22,6 +22,12 @@ public class DeadLine extends Task {
         type = "D";
     }
 
+    /**
+     * Constructor for DeadLine
+     *
+     * @param description is the string of the description of the given task.
+     * @param dueDate is the due date of the task in String format.
+     */
     public DeadLine(String description, String dueDate) {
         super(description, false);
         type = "D";
