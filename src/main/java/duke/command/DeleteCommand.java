@@ -1,10 +1,11 @@
 package duke.command;
 
-import duke.TaskList;
+import java.io.IOException;
+
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 
-import java.io.IOException;
 
 public class DeleteCommand extends Command {
     public static final String COMMAND = "delete";
@@ -17,7 +18,7 @@ public class DeleteCommand extends Command {
      *
      */
     public DeleteCommand(int taskNo) {
-          this.taskNo = taskNo;
+        this.taskNo = taskNo;
     }
 
     /**
@@ -32,7 +33,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        try{
+        try {
             if (taskNo == -1 || taskNo + 1 > taskList.getList().size()) {
                 throw new ArrayIndexOutOfBoundsException();
             }

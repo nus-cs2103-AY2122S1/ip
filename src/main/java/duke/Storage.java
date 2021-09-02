@@ -1,9 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,12 +7,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Todo;
+
 /**
  * Storage class that stores all previous chat history and list in data/duke.txt
  */
 public class Storage {
-    private File f;
     private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
+    private File f;
     private TaskList taskList;
 
     /**
@@ -60,6 +60,8 @@ public class Storage {
                 LocalDateTime by = LocalDateTime.parse(parsed[3], formatter);
                 Deadline newDeadline = new Deadline(parsed[2], parsed[1], by);
                 taskList.add(newDeadline);
+                break;
+            default:
                 break;
             }
         }

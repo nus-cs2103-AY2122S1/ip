@@ -1,10 +1,11 @@
 package duke.command;
 
-import duke.TaskList;
+import java.io.IOException;
+
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
 
-import java.io.IOException;
 
 /**
  * Abstract command class that all commands inherits from
@@ -13,7 +14,15 @@ public abstract class Command {
     /**
      * to denote when to exit the loop
      */
-    public boolean isExit = false;
+    protected boolean isExit = false;
+
+    /**
+     * get the exit check
+     * @return exit boolean
+     */
+    public boolean getExit() {
+        return this.isExit;
+    }
 
     /**
      * Executes commands

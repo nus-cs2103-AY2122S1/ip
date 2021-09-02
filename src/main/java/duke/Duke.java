@@ -1,15 +1,14 @@
 package duke;
 
-import duke.command.Command;
-
 import java.io.IOException;
+
+import duke.command.Command;
 
 public class Duke {
     private static final String PATHNAME = "data/duke.txt";
-
+    private static TaskList taskList = new TaskList();
     private Ui ui;
     private Storage storage;
-    private static TaskList taskList = new TaskList();
 
     /**
      * Constructor for Duke object
@@ -40,7 +39,7 @@ public class Duke {
                 String input = ui.readInput();
                 Command c = Parser.parseCommands(input);
                 c.execute(this.taskList, this.ui, this.storage);
-                isExit = c.isExit;
+                isExit = c.getExit();
             } catch (IOException e) {
                 ui.printFileError(e);
             }

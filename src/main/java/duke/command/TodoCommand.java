@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.TaskList;
-import duke.Storage;
-import duke.task.Todo;
-import duke.Ui;
-
 import java.io.IOException;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Todo;
 
 public class TodoCommand extends Command {
     public static final String COMMAND = "todo";

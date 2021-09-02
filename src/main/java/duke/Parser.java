@@ -1,10 +1,19 @@
 package duke;
 
-import duke.command.*;
-
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ErrorCommand;
+import duke.command.EventCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.TodoCommand;
 
 /**
  * Parser object that parses all the input from user to commands understood by Duke
@@ -105,7 +114,7 @@ public class Parser {
         } catch (DukeException e) {
             return new ErrorCommand(e.getMessage());
         } catch (IllegalArgumentException | StringIndexOutOfBoundsException e) {
-            return new ErrorCommand("Don't leave it empty!!" ,"(・`ω´・)");
+            return new ErrorCommand("Don't leave it empty!!", "(・`ω´・)");
         } catch (ArrayIndexOutOfBoundsException e) {
             return new ErrorCommand("You forgot the date...", "(-_-)");
         } catch (DateTimeException e) {

@@ -1,16 +1,28 @@
 package duke;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.Task;
+
 
 /**
  * User Interface that user directly interacts with
  * e.g. displaying messages, scanning inputs
  */
 public class Ui {
+    private static final String LOGO = " ____        _        \n"
+            + "|  _ \\ _   _| | _____ \n"
+            + "| | | | | | | |/ / _ \\\n"
+            + "| |_| | |_| |   <  __/\n"
+            + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String END =
+            "    ---------------------------------------------------------------------------------";
+
+    private static final String INDENTATION = "     ";
+
+
     private Scanner sc;
 
     /**
@@ -21,15 +33,6 @@ public class Ui {
     public Ui() {
         this.sc = new Scanner(System.in);
     }
-
-    private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String END = "    ---------------------------------------------------------------------------------";
-
-    private static final String INDENTATION = "     ";
 
     /**
      * scan the next line
@@ -100,7 +103,7 @@ public class Ui {
      * @param completedTask the description field of the task that has been completed
      *
      */
-    public void printDone(String completedTask){
+    public void printDone(String completedTask) {
         printBreak();
         System.out.println(INDENTATION + "(´• ω •`) What a rarity! This task has been marked as done:");
         System.out.println(INDENTATION + completedTask);
@@ -118,13 +121,7 @@ public class Ui {
         printBreak();
         System.out.println(INDENTATION + "(￢_￢) Ok... This task has been deleted:");
         System.out.println(INDENTATION + "deleted: " + deletedTask);
-        System.out.println("\n" + INDENTATION + "You have " +listLength + " task(s) to go! (]＞＜)]");
-        printBreak();
-    }
-
-    public void printFileCreated() {
-        printBreak();
-        System.out.println(INDENTATION + "╰(▔∀▔)╯ File created!");
+        System.out.println("\n" + INDENTATION + "You have " + listLength + " task(s) to go! (]＞＜)]");
         printBreak();
     }
 
@@ -164,6 +161,11 @@ public class Ui {
         printBreak();
     }
 
+    /**
+     * print tasks related to keywords
+     *
+     * @param foundTasks list of tasks that matches
+     */
     public void printFound(ArrayList<Task> foundTasks) {
         printBreak();
         if (foundTasks.size() == 0) {

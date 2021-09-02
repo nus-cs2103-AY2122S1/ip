@@ -4,7 +4,6 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-import java.io.IOException;
 
 public class FindCommand extends Command {
     public static final String COMMAND = "find";

@@ -8,11 +8,24 @@ public class Event extends Task {
     private DateTimeFormatter displayFormatter = DateTimeFormatter.ofPattern("dd MMM uuuu HHmm");
     private DateTimeFormatter saveFormatter = DateTimeFormatter.ofPattern("dd/MM/uuuu HHmm");
 
+    /**
+     * Constructor
+     *
+     * @param description task description
+     * @param at starts at
+     */
     public Event(String description, LocalDateTime at) {
         super(description, false);
         this.at = at;
     }
 
+    /**
+     * Constructor for when reading file from storage
+     *
+     * @param description task description
+     * @param isDone check complete status
+     * @param at starts at
+     */
     public Event(String description, String isDone, LocalDateTime at) {
         super(description, isDone == "1");
         this.at = at;
@@ -20,7 +33,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(displayFormatter) + ")" ;
+        return "[E]" + super.toString() + " (at: " + at.format(displayFormatter) + ")";
     }
 
     @Override

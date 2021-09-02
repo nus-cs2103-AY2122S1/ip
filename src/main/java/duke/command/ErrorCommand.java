@@ -1,10 +1,8 @@
 package duke.command;
 
-import duke.TaskList;
 import duke.Storage;
+import duke.TaskList;
 import duke.Ui;
-
-import java.io.IOException;
 
 public class ErrorCommand extends Command {
     private String error;

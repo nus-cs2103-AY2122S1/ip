@@ -1,11 +1,12 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 
+import duke.task.Task;
+
+
 public class TaskList {
-    ArrayList<Task> tasks = new ArrayList<>(100);
+    private ArrayList<Task> tasks = new ArrayList<>(100);
 
     /**
      * Constructor for TaskList
@@ -71,7 +72,6 @@ public class TaskList {
      *
      * @param keyword keyword
      * @return the collection of task that contains the keyword
-     * 
      */
     public ArrayList<Task> findKeyword(String keyword) {
         ArrayList<Task> matched = new ArrayList<>();
