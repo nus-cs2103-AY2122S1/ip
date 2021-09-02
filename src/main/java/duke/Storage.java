@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Encapsulates the storage class.
+ */
 public class Storage {
     private final String filePath;
     private final File file;
@@ -33,6 +36,12 @@ public class Storage {
         return t;
     }
 
+    /**
+     * Loads user's saved data from file.
+     *
+     * @return A TaskList object representing user's tasks.
+     * @throws IOException If there is error reading from the file.
+     */
     public TaskList loadTasksFromFile() throws IOException {
             FileReader fileReader = new FileReader(filePath);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
@@ -45,6 +54,11 @@ public class Storage {
             return new TaskList(tasks);
     }
 
+    /**
+     * Writes new data to file on exit.
+     *
+     * @param tasks List of tasks to be saved.
+     */
     public void writeTasksToFile(List<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);

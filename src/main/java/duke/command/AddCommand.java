@@ -8,15 +8,30 @@ import duke.TaskList;
 import duke.ToDo;
 import duke.Ui;
 
+/**
+ * Encapsulates the add task command.
+ */
 public class AddCommand implements Command {
     private String[] params;
 
+    /**
+     * Constructor for an AddCommand instance.
+     *
+     * @param params String array containing user input split by whitespace.
+     */
     public AddCommand(String[] params) {
         this.params = params;
     }
 
+    /**
+     * Creates a new task from user's input and adds task to the given tasklist.
+     *
+     * @param tasks TaskList instance which the new task is to be added to.
+     * @param ui Duke's UI.
+     * @throws DukeException For invalid inputs.
+     */
     @Override
-    public void execute(TaskList taskList, Ui ui) throws DukeException {
+    public void execute(TaskList tasks, Ui ui) throws DukeException {
         if (params.length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
         }
@@ -47,11 +62,15 @@ public class AddCommand implements Command {
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-        taskList.add(t);
+        tasks.add(t);
         System.out.println(Ui.format("Got it. I've added this task: \n\t" + t +
-                "\nNow you have " + ui.formatNumTasks(taskList.size()) + " in the list."));
+                "\nNow you have " + ui.formatNumTasks(tasks.size()) + " in the list."));
     }
 
+    /**
+     * Indicates if the command is an exit command.
+     * @return If the command is an exit command.
+     */
    public boolean isExit() {
         return false;
     }
