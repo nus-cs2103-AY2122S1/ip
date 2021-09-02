@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Encapsulates an Event object that implements a Task and has an event time.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public class Event extends Task {
     protected LocalDateTime at;

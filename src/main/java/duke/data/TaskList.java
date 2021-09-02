@@ -9,7 +9,7 @@ import duke.exceptions.DukeException;
  * Encapsulates a TodoList that contains Tasks.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public class TaskList {
     /** A list of tasks */

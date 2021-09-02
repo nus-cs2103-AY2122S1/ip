@@ -5,7 +5,7 @@ package duke.commands;
  * To be implemented by Deadline, Event and Todo.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public abstract class Task {
     protected String description;

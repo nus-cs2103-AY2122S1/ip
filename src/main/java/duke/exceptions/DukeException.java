@@ -1,10 +1,10 @@
 package duke.exceptions;
 
 /**
- * Encapsulates error handling for Duke.
+ * Encapsulates error handling for duke.Duke.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public class DukeException extends Exception {
     /**

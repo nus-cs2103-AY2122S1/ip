@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
  * Encapsulates a Deadline object that implements a Task and has a deadline.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public class Deadline extends Task {
     protected LocalDateTime by;

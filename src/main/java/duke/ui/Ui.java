@@ -4,10 +4,10 @@ import duke.commands.Task;
 import duke.data.TaskList;
 
 /**
- * Encapsulates the Ui component of Duke.
+ * Encapsulates the Ui component of duke.Duke.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public class Ui {
     private TaskList tasks;

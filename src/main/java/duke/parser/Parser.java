@@ -17,7 +17,7 @@ import duke.ui.Ui;
  * Encapsulates a Parser object that reads in and executes commands based on user's input.
  *
  * @author Owen Tan
- * @version Duke Level-9
+ * @version duke.Duke Level-9
  */
 public class Parser {
     private TaskList tasks;
@@ -34,7 +34,7 @@ public class Parser {
      * Public constructor for Parser.
      *
      * @param tasks A list of tasks.
-     * @param ui Ui for Duke.
+     * @param ui Ui for duke.Duke.
      */
     public Parser(TaskList tasks, Ui ui) {
         this.tasks = tasks;
