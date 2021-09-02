@@ -27,7 +27,7 @@ public class DoneCommand extends Command {
             throws DukeFileException, CompletedTaskException, TaskNotFoundException {
         if (taskList.getSize() - 1 >= this.index && this.index >= 0) {
             Task taskDone = taskList.markTask(this.index, store);
-            return ui.printMarkTaskDone(taskDone);
+            return ui.showMarkTaskAsDoneMessage(taskDone);
         } else {
             throw new TaskNotFoundException(this.index + 1);
         }

@@ -50,7 +50,7 @@ public class TaskList {
         if (this.tasks.size() <= 0) {
             throw new EmptyListException();
         }
-        return ui.printList(this.tasks);
+        return ui.showList(this.tasks);
     }
 
 
@@ -75,7 +75,7 @@ public class TaskList {
         if (listOfTaskWithKeyword.size() == 0) {
             throw new TaskNotFoundException();
         }
-        return ui.printFindTask(listOfTaskWithKeyword);
+        return ui.showTasksWithKeyword(listOfTaskWithKeyword);
     }
 
     /**

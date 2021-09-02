@@ -15,8 +15,8 @@ public class Ui {
      * @return A String of message printed out in CLI.
      */
     public String showWelcomeMessage() {
-        String message = "Hello I'm FullOfBugs. What can I do for you?";
-        return message;
+        String welcomeMessage = "Hello I'm FullOfBugs. What can I do for you?";
+        return welcomeMessage;
     }
 
     /**
@@ -26,10 +26,12 @@ public class Ui {
      * @param newSize An int representing the new size of the Task list.
      * @return A String of message printed out in CLI.
      */
-    public String printAddTask(Task task, int newSize) {
-        String message = "Got it. I've added this task:\n" + String.format("%s\n", task)
-                + String.format("Now you have %d ", newSize) + (newSize <= 1 ? "task" : "tasks") + " in the list.";
-        return message;
+    public String showAddTaskMessage(Task task, int newSize) {
+        String addTaskMessage = "Got it. I've added this task:\n"
+                + String.format("%s\n", task)
+                + String.format("Now you have %d ", newSize)
+                + (newSize <= 1 ? "task" : "tasks") + " in the list.";
+        return addTaskMessage;
     }
 
     /**
@@ -39,11 +41,12 @@ public class Ui {
      * @param remainingSize An int representing the newly updated size of task list.
      * @return A String of message printed out in CLI.
      */
-    public String printRemoveTask(Task task, int remainingSize) {
-        String message = "Noted. I've removed this task:\n"
+    public String showRemoveTaskMessage(Task task, int remainingSize) {
+        String removeTaskMessage = "Noted. I've removed this task:\n"
                 + String.format("%s\nNow you have %d ", task, remainingSize)
-                + (remainingSize <= 1 ? "task" : "tasks") + " in the list.";
-        return message;
+                + (remainingSize <= 1 ? "task" : "tasks")
+                + " in the list.";
+        return removeTaskMessage;
     }
 
     /**
@@ -52,9 +55,9 @@ public class Ui {
      * @param task A Task instance that contains details of the task marked as done.
      * @return A String of message printed out in CLI.
      */
-    public String printMarkTaskDone(Task task) {
-        String message = "Nice! I've marked this task as done:\n" + String.format("%s\n", task);
-        return message;
+    public String showMarkTaskAsDoneMessage(Task task) {
+        String markTaskAsDoneMessage = "Nice! I've marked this task as done:\n" + String.format("%s\n", task);
+        return markTaskAsDoneMessage;
     }
 
     /**
@@ -63,7 +66,7 @@ public class Ui {
      * @param tasks A TaskList instance containing a list of task.
      * @return A String of message printed out in CLI.
      */
-    public String printList(ArrayList<Task> tasks) {
+    public String showList(ArrayList<Task> tasks) {
         String message = "Your current tasks are:\n";
         for (int i = 0; i < tasks.size(); i++) {
             message += String.format("%d. %s\n", i + 1, tasks.get(i));
@@ -78,7 +81,7 @@ public class Ui {
      * @param tasks  An ArrayList of task that contains the keyword in its description.
      * @return A String of message printed out in CLI.
      */
-    public String printFindTask(ArrayList<Task> tasks) {
+    public String showTasksWithKeyword(ArrayList<Task> tasks) {
         String message = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < tasks.size(); i++) {
             message += String.format("%d. %s\n", i + 1, tasks.get(i));

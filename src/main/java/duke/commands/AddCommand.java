@@ -74,7 +74,7 @@ public class AddCommand extends Command {
 
             taskList.addToList(task);
             store.appendCommand(task.fullCommand());
-            return ui.printAddTask(task, taskList.getSize());
+            return ui.showAddTaskMessage(task, taskList.getSize());
 
         } catch (IOException e) {
             throw new DukeFileException();
