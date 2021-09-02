@@ -1,7 +1,7 @@
 D|1|do homework|2021-08-25|08:00
 D|1|submit project|2021-08-27|23:59
 E|0|team meeting|2021-08-25|13:00|15:00
-T|0|borrow book
+T|1|borrow book
 T|0|go library
 D|0|submit report|2021-08-26|23:59
 E|0|project meeting|2021-08-26|15:00|16:00

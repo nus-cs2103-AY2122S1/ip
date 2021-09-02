@@ -24,7 +24,7 @@ public class DukeTaskList {
     }
 
     /**
-     * Method to read data from the save file, and load them
+     * Read data from the save file, and load them
      * into the list in a current run of Duke.
      *
      * @param type  type of task stored in save file.
@@ -61,7 +61,7 @@ public class DukeTaskList {
     }
 
     /**
-     * Method to send tasks in the list to the save file.
+     * Send tasks in the list to the save file.
      *
      * @return a string that represents all tasks in list for storing in the save file.
      */
@@ -74,52 +74,61 @@ public class DukeTaskList {
     }
 
     /**
-     * Method to send the entire list for printing.
+     * Returns task list in string.
      *
-     * @return the list in DukeTaskList.
+     * @return task list.
      */
-    public List<Task> sendListForPrint() {
-        return taskList;
+    public String displayList() {
+        StringBuilder strBuilder = new StringBuilder("Here are the tasks in your list:\n");
+        for (int i = 0; i < taskList.size(); i++) {
+            Task currTask = taskList.get(i);
+            strBuilder.append(i + 1).append(".").append(currTask.toString()).append("\n");
+        }
+        return strBuilder.toString();
     }
 
     /**
-     * Method to mark a task as done in the list.
+     * Mark a task as done in the list.
      *
      * @param doneTaskNo the task number to be marked as done.
      * @throws DukeException if task number entered out of range.
+     * @return done task response.
      */
-    public void doneTask(int doneTaskNo) throws DukeException {
+    public String doneTask(int doneTaskNo) throws DukeException {
         if (doneTaskNo < 1 || doneTaskNo > taskList.size()) {
             // Task No entered out of range
             throw new DukeException("Task number entered out of range!\n");
         }
         Task doneTask = taskList.get(doneTaskNo - 1);
         doneTask.markAsDone();
-        Ui.printDoneTask(doneTask.toString());
+        return "Nice! I've marked this task as done:\n" + doneTask.toString();
     }
 
     /**
-     * Method to delete a task from the list.
+     * Delete a task from the list.
      *
      * @param deleteTaskNo the task number to be deleted.
      * @throws DukeException if task number entered out of range.
+     * @return delete task response.
      */
-    public void deleteTask(int deleteTaskNo) throws DukeException {
+    public String deleteTask(int deleteTaskNo) throws DukeException {
         if (deleteTaskNo < 1 || deleteTaskNo > taskList.size()) {
             // Task No entered out of range
             throw new DukeException("Task number entered out of range!\n");
         }
         Task deleteTask = taskList.get(deleteTaskNo - 1);
         taskList.remove(deleteTaskNo - 1);
-        Ui.printDeleteTask(deleteTask.toString(), taskList.size());
+        return "Noted. I've removed this task:\n" + deleteTask.toString() + "\n"
+                + String.format("Now you have %d tasks in the list.\n", taskList.size());
     }
 
     /**
      * Search for tasks in the list by a keyword.
      *
      * @param keyword keyword to be searched.
+     * @return matching tasks in string.
      */
-    public void searchTask(String keyword) {
+    public String searchTask(String keyword) {
         List<Task> matchingTaskList = new ArrayList<>();
         for (Task task : taskList) {
             String[] taskDescriptionWords = task.getDescription().split(" ");
@@ -130,37 +139,49 @@ public class DukeTaskList {
                 }
             }
         }
-        Ui.printFindTask(matchingTaskList);
+
+        StringBuilder strBuilder = new StringBuilder("Here are the matching tasks in your list:\n");
+        for (int i = 0; i < matchingTaskList.size(); i++) {
+            Task currTask = matchingTaskList.get(i);
+            strBuilder.append(i + 1).append(".").append(currTask.toString()).append("\n");
+        }
+
+        return strBuilder.toString();
     }
 
     /**
-     * Method to add a todos task to the list.
+     * Add a todos task to the list.
      *
-     * @param toDoText description of the todos task
+     * @param toDoText description of the todos task.
+     * @return add Todos response.
      */
-    public void addToDo(String toDoText) {
+    public String addToDo(String toDoText) {
         Task currTask = new ToDos(toDoText); // description trimmed of trailing white space behind
         taskList.add(currTask);
-        Ui.printAddTask(currTask.toString(), taskList.size());
+        return "Got it. I've added this task:\n" + currTask.toString() + "\n" +
+                String.format("Now you have %d tasks in the list.\n", taskList.size());
     }
 
     /**
-     * Method to add a deadline task to the list. Input format for deadline:
+     * Add a deadline task to the list. Input format for deadline:
      * /by yyyy-mm-dd hh:mm (ISO_LOCAL_DATE, space, ISO_LOCAL_TIME)
      *
      * @param ddlText description of the deadline task
      * @param ddlDate date when deadline is due.
      *                Must be in the format yyyy-mm-dd.
      * @param ddlTime time point when deadline is due.
+     *
+     * @return add deadline response.
      */
-    public void addDeadline(String ddlText, LocalDate ddlDate, LocalTime ddlTime) {
+    public String addDeadline(String ddlText, LocalDate ddlDate, LocalTime ddlTime) {
         Task currTask = new Deadlines(ddlText, ddlDate, ddlTime);
         taskList.add(currTask);
-        Ui.printAddTask(currTask.toString(), taskList.size());
+        return "Got it. I've added this task:\n" + currTask.toString() + "\n" +
+                String.format("Now you have %d tasks in the list.\n", taskList.size());
     }
 
     /**
-     * Method to add a event task to the list. Input format for event:
+     * Add an event task to the list. Input format for event:
      * /at yyyy-mm-dd hh:mm-hh:mm
      * (ISO_LOCAL_DATE, space, ISO_LOCAL_TIME, dash, ISO_LOCAL_TIME)
      *
@@ -171,10 +192,12 @@ public class DukeTaskList {
      *                       Must be in the format hh:mm in 24-hours time.
      * @param eventEndTime   time point when the event ends.
      *                       Must be in the format hh:mm in 24-hours time.
+     * @return add event response.
      */
-    public void addEvent(String eventText, LocalDate eventDate, LocalTime eventStartTime, LocalTime eventEndTime) {
+    public String addEvent(String eventText, LocalDate eventDate, LocalTime eventStartTime, LocalTime eventEndTime) {
         Task currTask = new Events(eventText, eventDate, eventStartTime, eventEndTime);
         taskList.add(currTask);
-        Ui.printAddTask(currTask.toString(), taskList.size());
+        return "Got it. I've added this task:\n" + currTask.toString() + "\n" +
+                String.format("Now you have %d tasks in the list.\n", taskList.size());
     }
 }

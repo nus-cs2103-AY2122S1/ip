@@ -8,30 +8,24 @@ import java.time.format.DateTimeParseException;
  * Represents a parser to parse user inputs, and invoke corresponding functions
  */
 public class Parser {
-    private static boolean isRunning = true;
-
-    public static boolean isRunning() {
-        return isRunning;
-    }
-
     /**
      * Static parse method of the class.
      *
-     * @param userInput    user inputs.
+     * @param userInput user inputs.
      * @param dukeTaskList a dukeTaskList object of the current run of Duke.
-     * @throws NumberFormatException if user doesn't enter valid integers when entering task numbers.
+     * @return duke's response in string.
      */
-    public static void parse(String userInput, DukeTaskList dukeTaskList) {
+    public static String parse(String userInput, DukeTaskList dukeTaskList, Storage storage) {
+        String response;
         String[] slashSplitInput = userInput.split("/", 2);
-        // Everything before the slash, split again by space
         String[] spaceSplitInput = slashSplitInput[0].split(" ", 2);
+        // Everything before the slash, split again by space
 
         try {
             if (userInput.equals("bye")) { // Exit
-                Ui.printFarewell();
-                isRunning = false;
+                response = "Bye. Hope to see you again soon!\n";
             } else if (userInput.equals("list")) {
-                Ui.printList(dukeTaskList.sendListForPrint());
+                response = dukeTaskList.displayList();
             } else if (spaceSplitInput[0].equals("done")) {
                 if (spaceSplitInput.length < 2) {
                     // No task number entered
@@ -40,7 +34,8 @@ public class Parser {
                 // Throws NumberFormatException if string cannot be parsed into valid int
                 int doneTaskNo = Integer.parseInt(spaceSplitInput[1]);
 
-                dukeTaskList.doneTask(doneTaskNo);
+                response = dukeTaskList.doneTask(doneTaskNo);
+                storage.saveToDataFile();
             } else if (spaceSplitInput[0].equals("delete")) {
                 if (spaceSplitInput.length < 2) {
                     // No task number entered
@@ -49,7 +44,8 @@ public class Parser {
                 // Throws NumberFormatException if string cannot be parsed into valid int
                 int deleteTaskNo = Integer.parseInt(spaceSplitInput[1]);
 
-                dukeTaskList.deleteTask(deleteTaskNo);
+                response = dukeTaskList.deleteTask(deleteTaskNo);
+                storage.saveToDataFile();
             } else if (spaceSplitInput[0].equals("find")) {
                 if (spaceSplitInput.length < 2) {
                     // No find keyword entered
@@ -57,14 +53,16 @@ public class Parser {
                 }
                 String keyword = spaceSplitInput[1];
 
-                dukeTaskList.searchTask(keyword);
+                response = dukeTaskList.searchTask(keyword);
             } else if (spaceSplitInput[0].equals("todo")) {
                 if (spaceSplitInput.length < 2) {
                     // Tudo has no description. If has, spaceSplitInput has length 2.
                     throw new DukeException("Todo description cannot be empty!\n");
                 }
                 String toDoText = spaceSplitInput[1].trim();
-                dukeTaskList.addToDo(toDoText);
+
+                response = dukeTaskList.addToDo(toDoText);
+                storage.saveToDataFile();
             } else if (spaceSplitInput[0].equals("deadline")) {
                 if (spaceSplitInput.length < 2) {
                     // Deadline has no description
@@ -85,7 +83,8 @@ public class Parser {
                 LocalTime ddlTime = LocalTime.parse(ddlDateTimeArr[2]);
                 String ddlText = spaceSplitInput[1].trim();
 
-                dukeTaskList.addDeadline(ddlText, ddlDate, ddlTime);
+                response = dukeTaskList.addDeadline(ddlText, ddlDate, ddlTime);
+                storage.saveToDataFile();
             } else if (spaceSplitInput[0].equals("event")) {
                 if (spaceSplitInput.length < 2) {
                     // Event has no description
@@ -113,17 +112,35 @@ public class Parser {
                 LocalTime eventEndTime = LocalTime.parse(eventTimes[1]);
                 String eventText = spaceSplitInput[1].trim();
 
-                dukeTaskList.addEvent(eventText, eventDate, eventStartTime, eventEndTime);
+                response = dukeTaskList.addEvent(eventText, eventDate, eventStartTime, eventEndTime);
+                storage.saveToDataFile();
             } else {
                 // User inputs unrecognized commands
                 throw new DukeException("My intelligence has not evolved to understand this command :(\n");
             }
+
+            return response;
         } catch (DukeException e) {
-            Ui.printError(e.getMessage());
+            return e.getMessage();
         } catch (NumberFormatException e) {
-            Ui.printError("Please enter a valid integer for task number!\n");
+            return "Please enter a valid integer for task number!\n";
         } catch (DateTimeParseException e) {
-            Ui.printError("Please enter date in the valid format: yyyy-mm-dd hh:mm\n");
+            return "Please enter date in the valid format: yyyy-mm-dd hh:mm\n";
         }
+    }
+
+    /**
+     * Print welcome message.
+     */
+    public static void printWelcome() {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+        System.out.println("Hello from\n" + logo);
+
+        String greeting = "Hello! I'm Duke. What can I do for you?\n";
+        System.out.println(greeting);
     }
 }
