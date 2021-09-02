@@ -42,7 +42,7 @@ public class Storage {
     /**
      * Loads the user's tasks from file.
      *
-     * @return The list of tasks that were successfully loaded.
+     * @return List of tasks that were successfully loaded.
      * @throws DukeException If an <code>IOException</code> occurred while trying to read the file.
      */
     public List<Task> loadTasks() throws DukeException {

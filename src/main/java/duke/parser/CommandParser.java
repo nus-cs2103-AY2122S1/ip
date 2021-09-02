@@ -18,8 +18,8 @@ public class CommandParser {
     /**
      * Parses the command as well as any arguments entered by the user.
      *
-     * @param fullCommand The full command entered by the user.
-     * @return The corresponding <code>Command</code>, or the <code>HelpCommand</code> if the command is not recognised.
+     * @param fullCommand Full command entered by the user.
+     * @return Corresponding <code>Command</code>, or the <code>HelpCommand</code> if the command is not recognised.
      */
     public static Command parse(String fullCommand) {
         final String trimmedCommand = fullCommand.trim();

@@ -11,8 +11,8 @@ public class EventParser {
     /**
      * Parses an <code>Event</code> from its text representation.
      *
-     * @param text The text representation found.
-     * @return The corresponding <code>Event</code> object.
+     * @param text Text representation found.
+     * @return Corresponding <code>Event</code> object.
      * @throws DukeException If the text representation cannot be parsed accurately.
      */
     protected static Event parse(String text) throws DukeException {

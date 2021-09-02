@@ -12,8 +12,8 @@ public abstract class Command {
     /**
      * Executes the command.
      *
-     * @param taskManager The <code>TaskManager</code> responsible for keeping track of the existing tasks.
-     * @param storage The <code>Storage</code> used to save updated task data.
+     * @param taskManager <code>TaskManager</code> responsible for keeping track of the existing tasks.
+     * @param storage <code>Storage</code> used to save updated task data.
      * @throws DukeException If any errors occur during execution.
      */
     public abstract DukeResponse execute(TaskManager taskManager, Storage storage) throws DukeException;

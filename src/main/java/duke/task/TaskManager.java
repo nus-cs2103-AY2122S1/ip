@@ -55,8 +55,8 @@ public class TaskManager {
     /**
      * Adds a <code>Task</code> into the list of tasks.
      *
-     * @param task The task to be added.
-     * @return A message containing the task just added and the updated number of tasks.
+     * @param task Task to be added.
+     * @return Message containing the task just added and the updated number of tasks.
      */
     public String addTask(Task task) {
         taskList.add(task);
@@ -67,9 +67,10 @@ public class TaskManager {
 
     /**
      * Marks a <code>Task</code> as completed.
-     * @param taskNumber the number of the task to be marked as completed
-     * @return a message containing the task just marked as completed and the updated number of incomplete tasks
-     * @throws DukeException if a task with that number cannot be found
+     *
+     * @param taskNumber Number of the task to be marked as completed.
+     * @return Message containing the task just marked as completed and the updated number of incomplete tasks.
+     * @throws DukeException If a task with that number cannot be found.
      */
     public String markTaskAsDone(int taskNumber) throws DukeException {
         try {
@@ -87,9 +88,10 @@ public class TaskManager {
 
     /**
      * Deletes a <code>Task</code> from the list.
-     * @param taskNumber the number of the task to be deleted
-     * @return a message containing the task just deleted and the updated number of tasks
-     * @throws DukeException if a task with that number cannot be found
+     *
+     * @param taskNumber Number of the task to be deleted.
+     * @return Message containing the task just deleted and the updated number of tasks.
+     * @throws DukeException If a task with that number cannot be found.
      */
     public String deleteTask(int taskNumber) throws DukeException {
         try {
@@ -120,8 +122,9 @@ public class TaskManager {
 
     /**
      * Displays the user's tasks that fall on a specific date.
-     * @param dateTime the date to filter by
-     * @return the string representation of the filtered tasks
+     *
+     * @param dateTime Date to filter by.
+     * @return String representation of the filtered tasks.
      */
     public String list(DukeDateTime dateTime) {
         List<Task> filteredTasks = filterByDate(dateTime);
@@ -136,8 +139,9 @@ public class TaskManager {
 
     /**
      * Displays the user's tasks which have names that contain any of the specified search strings.
-     * @param searchStrings the target search strings
-     * @return the string representation of the filtered tasks
+     *
+     * @param searchStrings Target search strings.
+     * @return String representation of the filtered tasks.
      */
     public String list(String... searchStrings) {
         List<Task> filteredTasks = filterByName(searchStrings);
@@ -152,8 +156,9 @@ public class TaskManager {
 
     /**
      * Returns a list of tasks that occur on the specified date.
-     * @param dateTime the date to filter by
-     * @return the filtered list
+     *
+     * @param dateTime Date to filter by.
+     * @return Filtered list.
      */
     private List<Task> filterByDate(DukeDateTime dateTime) {
         List<Task> tasks = new ArrayList<>();
@@ -171,8 +176,9 @@ public class TaskManager {
 
     /**
      * Returns a list of tasks that have names that include any of the specified search strings.
-     * @param searchStrings the strings to filter by
-     * @return the filtered list
+     *
+     * @param searchStrings Strings to filter by.
+     * @return Filtered list.
      */
     private List<Task> filterByName(String... searchStrings) {
         List<Task> tasks = new ArrayList<>();

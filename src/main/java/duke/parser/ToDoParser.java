@@ -10,8 +10,8 @@ public class ToDoParser {
     /**
      * Parses a <code>ToDo</code> from its text representation.
      *
-     * @param text The text representation found.
-     * @return The corresponding <code>ToDo</code> object.
+     * @param text Text representation found.
+     * @return Corresponding <code>ToDo</code> object.
      * @throws DukeException If the text representation cannot be parsed accurately.
      */
     protected static ToDo parse(String text) throws DukeException {

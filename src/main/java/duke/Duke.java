@@ -21,7 +21,7 @@ public class Duke {
     /**
      * Constructor for a Duke object.
      *
-     * @param filePath The path to the file where tasks should be stored.
+     * @param filePath Path to the file where tasks should be stored.
      */
     public Duke(String filePath) {
         ui = new Ui();
@@ -65,8 +65,8 @@ public class Duke {
     /**
      * Returns the appropriate response according to the user input.
      *
-     * @param input The user input.
-     * @return The corresponding <code>DukeResponse</code>. If a <code>DukeException</code> was thrown, it is wrapped
+     * @param input User input.
+     * @return Corresponding <code>DukeResponse</code>. If a <code>DukeException</code> was thrown, it is wrapped
      * in a <code>DukeBadResponse</code>.
      */
     public DukeResponse getResponse(String input) {
