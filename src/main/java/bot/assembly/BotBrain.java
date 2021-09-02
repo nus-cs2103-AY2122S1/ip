@@ -1,6 +1,6 @@
 package bot.assembly;
 
-import java.util.Scanner;
+//import java.util.Scanner;
 
 import bot.assembly.function.BotCommandResponderUnit;
 import bot.assembly.function.BotPrinter;
@@ -65,13 +65,13 @@ public class BotBrain {
     /**
      * A method that attempts to initiate the loading process of data from HARD_DISK
      */
-    private void wakeUpMemory() {
+    public String wakeUpMemory() {
 
         try {
             botDynamicMemoryUnit.loadFromHardDisk();
-            botTaskGeneratorUnit.generateTaskTrackerReport();
+            return botTaskGeneratorUnit.generateTaskTrackerReport();
         } catch (Exception error) {
-            botPrinter.print(botStaticMemoryUnit.ERROR_MESSAGE_PROMPT + error.getMessage());
+            return botStaticMemoryUnit.ERROR_MESSAGE_PROMPT + error.getMessage();
         }
 
     }
@@ -106,4 +106,13 @@ public class BotBrain {
         this.interact();
     }
     */
+
+    /**
+     *
+     * @return
+     */
+    public String startMem() {
+        String output = botStaticMemoryUnit.MESSAGE_GREETING;
+        return output;
+    }
 }

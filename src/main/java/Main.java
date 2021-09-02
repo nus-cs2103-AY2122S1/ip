@@ -18,7 +18,7 @@ public class Main extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
-            fxmlLoader.<MainWindow>getController().setBot(bot, stage);
+            fxmlLoader.<MainWindow>getController().setBot(bot);
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("PETER GRIFFIN MBBPH");

@@ -20,20 +20,28 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Bot bot;
+    private Bot bot = new Bot();
     private Stage stage;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Brian_Griffin.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Peter_Griffin.png"));
 
+    public void setBot(Bot b) {
+        this.bot = b;
+    }
+
+    /**
+     * s
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    public void setBot(Bot b, Stage stage) {
-        this.bot = b;
-        this.stage = stage;
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(this.bot.startBrain(),
+                        new Image(this.getClass().getResourceAsStream("/images/Peter_Greet.png"))));
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(this.bot.checkMem(),
+                        new Image(this.getClass().getResourceAsStream("/images/Peter_Griffin.png"))));
     }
 
     /**

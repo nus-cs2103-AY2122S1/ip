@@ -19,4 +19,16 @@ public class Bot {
     public String getResponse(String input) {
         return botBrain.interact(input);
     }
+
+    /**
+     *
+     * @return
+     */
+    public String startBrain() {
+        return botBrain.startMem();
+    }
+
+    public String checkMem() {
+        return botBrain.wakeUpMemory();
+    }
 }
