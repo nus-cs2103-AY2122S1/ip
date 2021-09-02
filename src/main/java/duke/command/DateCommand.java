@@ -66,14 +66,15 @@ public class DateCommand extends Command {
         // String to notify users of the date they are searching for.
         String notification = ui.getDateListSuccessMessage(formattedDateString);
 
-        // Print Deadlines and Events with LocalDate that matches date input from user.
+        StringBuilder datesBuilder = new StringBuilder();
+        // finds Deadlines and Events with LocalDate that matches date input from user.
         for (Task task : tasks.getTasks()) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 if (localDate.equals(deadline.getTime())) {
                     counter++;
                     deadlines++;
-                    System.out.println(counter + "." + deadline);
+                    datesBuilder.append(counter).append(".").append(deadline).append("\n");
                 }
             }
 
@@ -82,7 +83,7 @@ public class DateCommand extends Command {
                 if (localDate.equals(event.getTime())) {
                     counter++;
                     events++;
-                    System.out.println(counter + "." + event);
+                    datesBuilder.append(counter).append(".").append(event).append("\n");
                 }
             }
         }
@@ -90,7 +91,7 @@ public class DateCommand extends Command {
         // String describing a summary of matching tasks to the user.
         String summary = ui.getDateListSummaryMessage(formattedDateString, counter, deadlines, events);
 
-        return notification + "\n" + summary;
+        return notification + "\n" + datesBuilder + summary;
     }
 
     /**

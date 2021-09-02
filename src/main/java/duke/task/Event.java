@@ -20,6 +20,9 @@ public class Event extends Task {
      */
     public Event(String description, LocalDate at) {
         super(description);
+
+        // Assertion to ensure Event will not be created without a valid LocalDate.
+        assert at != null : "localDate 'at' parameter cannot be null";
         this.at = at;
     }
 

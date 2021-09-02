@@ -35,6 +35,10 @@ public class DialogBox extends HBox {
      * @param img Image to be displayed alongside text in DialogBox.
      */
     private DialogBox(String text, Image img) {
+        // Assertions to ensure dialogs will not be created with missing text or img.
+        assert img != null : "Image should not be null";
+        assert !text.isBlank() : "text string should not be whitespace(s) or null";
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
