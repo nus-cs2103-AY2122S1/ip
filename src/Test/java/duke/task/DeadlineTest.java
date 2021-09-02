@@ -24,7 +24,7 @@ class DeadlineTest {
         assertEquals("D | 0 | read book | 2021-09-18", deadlineWithDate.saveToFile());
 
         Deadline deadlineWithTime = new Deadline("read book", "23:45");
-        assertEquals("D | 0 | read book | 2021-08-30 23:45", deadlineWithTime.saveToFile());
+        assertEquals("D | 0 | read book | 2021-09-02 23:45", deadlineWithTime.saveToFile());
     }
 
     @Test
@@ -33,16 +33,16 @@ class DeadlineTest {
             //empty description and by
             new Deadline("", "").saveToFile();
         } catch (EmptyFieldException exception) {
-            assertEquals("     Error! Description or date and time is empty!", exception.getMessage());
+            assertEquals("Error! Description or date and time is empty!", exception.getMessage());
         }
 
         try {
             //more than 1 date and time in by
             new Deadline("read book", "2021-12-08 18:00 18:00").saveToFile();
         } catch (InvalidCommandException exception) {
-            assertEquals("     Error! You can only enter one date and time, Eg: \"2021-09-12 18:00\",\n"
-                            + "     one date, Eg: \"2021-09-12\" (This will enter time as 23:59 by default),\n"
-                            + "     or one time, Eg: \"18:00\" (This will enter today's date by default)",
+            assertEquals("Error! You can only enter one date and time, Eg: \"2021-09-12 18:00\",\n"
+                            + "one date, Eg: \"2021-09-12\" (This will enter time as 23:59 by default),\n"
+                            + "or one time, Eg: \"18:00\" (This will enter today's date by default)",
                     exception.getMessage());
         }
 
@@ -76,7 +76,7 @@ class DeadlineTest {
         assertEquals("[D][ ] read book (by: September 18 2021, 11:59 PM)", deadlineWithDate.toString());
 
         Deadline deadlineWithTime = new Deadline("read book", "23:45");
-        assertEquals("[D][ ] read book (by: August 30 2021, 11:45 PM)", deadlineWithTime.toString());
+        assertEquals("[D][ ] read book (by: September 2 2021, 11:45 PM)", deadlineWithTime.toString());
     }
 
     @Test
@@ -85,16 +85,16 @@ class DeadlineTest {
             //empty description and by
             new Deadline("", "").toString();
         } catch (EmptyFieldException exception) {
-            assertEquals("     Error! Description or date and time is empty!", exception.getMessage());
+            assertEquals("Error! Description or date and time is empty!", exception.getMessage());
         }
 
         try {
             //more than 1 date and time in by
             new Deadline("read book", "2021-12-08 18:00 18:00").toString();
         } catch (InvalidCommandException exception) {
-            assertEquals("     Error! You can only enter one date and time, Eg: \"2021-09-12 18:00\",\n"
-                            + "     one date, Eg: \"2021-09-12\" (This will enter time as 23:59 by default),\n"
-                            + "     or one time, Eg: \"18:00\" (This will enter today's date by default)",
+            assertEquals("Error! You can only enter one date and time, Eg: \"2021-09-12 18:00\",\n"
+                            + "one date, Eg: \"2021-09-12\" (This will enter time as 23:59 by default),\n"
+                            + "or one time, Eg: \"18:00\" (This will enter today's date by default)",
                     exception.getMessage());
         }
 
