@@ -40,47 +40,47 @@ public class TaskList {
     /**
      * Marks a task as done.
      *
-     * @param ind index of the task to be marked as done.
+     * @param idx index of the task to be marked as done.
      */
-    public void markDone(int ind) {
-        if (ind < 0 || ind >= tasks.size()) {
+    public void markDone(int idx) {
+        if (idx < 0 || idx >= tasks.size()) {
             throw new IllegalArgumentException(
                     "☹ OOPS!!! Index entered is not valid. "
                     + "Please use 'list' and check for the appropriate index for task(s)."
             );
         }
-        tasks.get(ind).markDone();
+        tasks.get(idx).markDone();
     }
 
     /**
      * Gets a task from the storage.
      *
-     * @param ind index of the task to get from storage.
+     * @param idx index of the task to get from storage.
      * @return the task.
      */
-    public Task get(int ind) {
-        if (ind < 0 || ind >= tasks.size()) {
+    public Task get(int idx) {
+        if (idx < 0 || idx >= tasks.size()) {
             throw new IllegalArgumentException(
                 "☹ OOPS!!! Index entered is not valid. "
                 + "Please use 'list' and check for the appropriate index for task(s)."
             );
         }
-        return tasks.get(ind);
+        return tasks.get(idx);
     }
 
     /**
      * Deletes a task from storage.
      *
-     * @param ind index of the task to delete from storage.
+     * @param idx index of the task to delete from storage.
      */
-    public void delete(int ind) {
-        if (ind < 0 || ind >= tasks.size()) {
+    public void delete(int idx) {
+        if (idx < 0 || idx >= tasks.size()) {
             throw new IllegalArgumentException(
                 "☹ OOPS!!! Index entered is not valid. "
                 + "Please use 'list' and check for the appropriate index for task(s)."
             );
         }
-        tasks.remove(ind);
+        tasks.remove(idx);
     }
 
     @Override

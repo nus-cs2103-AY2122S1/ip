@@ -63,5 +63,5 @@ public abstract class Task {
      *
      * @return string with delimiters for saving and loading.
      */
-    public abstract String databaseString();
+    public abstract String toDatabaseString();
 }

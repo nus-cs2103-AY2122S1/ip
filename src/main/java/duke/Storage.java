@@ -92,7 +92,7 @@ public class Storage {
     public void save() throws IOException {
         FileWriter writer = new FileWriter(filePath, false);
         for (int i = 0; i < tasks.size(); i++) {
-            writer.write(tasks.get(i).databaseString() + "\n");
+            writer.write(tasks.get(i).toDatabaseString() + "\n");
         }
         writer.close();
     }

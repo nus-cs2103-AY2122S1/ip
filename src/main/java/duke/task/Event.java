@@ -65,7 +65,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String databaseString() {
+    public String toDatabaseString() {
         String result = identifier + "|";
         result += getStatus() ? "1|" : "0|";
         result += getDescription() + "|";

@@ -42,21 +42,21 @@ public class Parser {
      */
     public final Command checkOperation() throws DukeException {
         // if it is "bye", we return false to indicate operation stoppage
-        if (checkBye()) {
+        if (isBye()) {
             return new ExitCommand();
-        } else if (checkList()) {
+        } else if (isList()) {
             return new ListCommand(this.tasks);
-        } else if (checkDone()) {
+        } else if (isDone()) {
             return new DoneCommand(userInput, tasks);
-        } else if (checkDelete()) {
+        } else if (isDelete()) {
             return new DeleteCommand(userInput, tasks);
-        } else if (checkFind()) {
+        } else if (isFind()) {
             return new FindCommand(userInput, tasks);
-        } else if (checkTodo()) {
+        } else if (isTodo()) {
             return new AddCommand(AddCommandType.todo, userInput, tasks);
-        } else if (checkEvent()) {
+        } else if (isEvent()) {
             return new AddCommand(AddCommandType.event, userInput, tasks);
-        } else if (checkDeadline()) {
+        } else if (isDeadline()) {
             return new AddCommand(AddCommandType.deadline, userInput, tasks);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
@@ -69,7 +69,7 @@ public class Parser {
      *
      * @return boolean.
      */
-    private boolean checkBye() {
+    private boolean isBye() {
         return this.userInput.equals("bye");
     }
 
@@ -78,7 +78,7 @@ public class Parser {
      *
      * @return boolean.
      */
-    private boolean checkList() {
+    private boolean isList() {
         return this.userInput.equals("list");
     }
 
@@ -87,7 +87,7 @@ public class Parser {
      *
      * @return boolean.
      */
-    private boolean checkDone() {
+    private boolean isDone() {
         Pattern donePattern = Pattern.compile("^done\\h\\d+$");
         Matcher doneMatcher = donePattern.matcher(this.userInput);
         return doneMatcher.find();
@@ -98,7 +98,7 @@ public class Parser {
      *
      * @return boolean.
      */
-    private boolean checkDelete() {
+    private boolean isDelete() {
         Pattern deletePattern = Pattern.compile("^delete\\h\\d+$");
         Matcher deleteMatcher = deletePattern.matcher(this.userInput);
         return deleteMatcher.find();
@@ -109,7 +109,7 @@ public class Parser {
      *
      * @return boolean.
      */
-    private boolean checkTodo() {
+    private boolean isTodo() {
         Pattern todoPattern = Pattern.compile("^todo\\h\\w.*");
         Matcher todoMatcher = todoPattern.matcher(this.userInput);
         return todoMatcher.find();
@@ -120,7 +120,7 @@ public class Parser {
      *
      * @return boolean.
      */
-    private boolean checkEvent() {
+    private boolean isEvent() {
         Pattern eventPattern = Pattern.compile("^event\\h\\w.*/at\\h\\w.*");
         Matcher eventMatcher = eventPattern.matcher(this.userInput);
         return eventMatcher.find();
@@ -131,7 +131,7 @@ public class Parser {
      *
      * @return boolean.
      */
-    private boolean checkDeadline() {
+    private boolean isDeadline() {
         Pattern deadlinePattern = Pattern.compile("^deadline\\h\\w.*/by\\h\\w.*");
         Matcher deadlineMatcher = deadlinePattern.matcher(this.userInput);
         return deadlineMatcher.find();
@@ -142,7 +142,7 @@ public class Parser {
      *
      * @return boolean.
      */
-    private boolean checkFind() {
+    private boolean isFind() {
         Pattern findPattern = Pattern.compile("^find\\h\\w.*");
         Matcher findMatcher = findPattern.matcher(this.userInput);
         return findMatcher.find();
