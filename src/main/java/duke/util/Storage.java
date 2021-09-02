@@ -72,14 +72,14 @@ public class Storage {
     /**
      * Saves tasks to the file path given at instantiation. Called when list is modified.
      *
-     * @param tasks The list of tasks to be saved.
+     * @param taskList The list of tasks to be saved.
      * @throws IOException If the saving process fails.
      */
-    public void saveTasksToFile(TaskList tasks) throws IOException {
+    public void saveTasksToFile(TaskList taskList) throws IOException {
         Files.createDirectories(filePath.getParent()); // Create directories if they do not exist
         FileWriter fw = new FileWriter(filePath.toAbsolutePath().toString());
         StringBuilder saveData = new StringBuilder();
-        tasks.forEach((task) -> saveData.append(task.toSaveData()).append(System.lineSeparator()));
+        taskList.forEach((task) -> saveData.append(task.toSaveData()).append(System.lineSeparator()));
         fw.write(saveData.toString());
         fw.close();
     }

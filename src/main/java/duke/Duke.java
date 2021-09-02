@@ -29,7 +29,7 @@ public class Duke {
     /**
      * Object to represent the user's task list (e.g. add/delete/mark as done)
      */
-    private TaskList tasks;
+    private TaskList taskList;
 
     /**
      * Creates a Duke chat bot instance, using a file path for loading/saving.
@@ -40,13 +40,13 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.loadTasksFromFile());
+            taskList = new TaskList(storage.loadTasksFromFile());
         } catch (FileNotFoundException e) {
             ui.showFileNotFoundError();
-            tasks = new TaskList();
+            taskList = new TaskList();
         } catch (Exception e) {
             ui.showLoadingError(e.getMessage());
-            tasks = new TaskList();
+            taskList = new TaskList();
         }
     }
 
@@ -61,7 +61,7 @@ public class Duke {
                 String input = ui.readInput();
                 ui.showLine();
                 Command command = Parser.parseCommandFromInput(input);
-                tasks = command.execute(tasks, ui, storage);
+                taskList = command.execute(taskList, ui, storage);
                 isTerminated = command.isTerminated();
             } catch (IOException e) {
                 ui.showError("The data failed to save to the save file with error:"

@@ -32,14 +32,14 @@ public abstract class Command {
     /**
      * Executes the function associated with the command.
      *
-     * @param tasks   The current list of tasks from the user.
+     * @param taskList   The current list of tasks from the user.
      * @param ui      An object that handles all UI related functionality. (e.g. printing)
      * @param storage An object that handles all save/load related functionality.
      * @return A task list that may or may not be modified from the input task list, depending on
      * the command called.
      * @throws IOException If an error occurs during a save/load operation.
      */
-    public abstract TaskList execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
+    public abstract TaskList execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
 
     /**
      * Returns true if the command terminates Duke, false otherwise.

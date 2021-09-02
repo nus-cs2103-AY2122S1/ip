@@ -22,15 +22,15 @@ public class OnDateCommand extends Command {
     /**
      * Displays all tasks due on a specific date.
      *
-     * @param tasks   The current list of tasks from the user.
+     * @param taskList   The current list of tasks from the user.
      * @param ui      An object that handles all UI related functionality. (e.g. printing)
      * @param storage An object that handles all save/load related functionality.
      * @return The input task list, unmodified.
      */
     @Override
-    public TaskList execute(TaskList tasks, Ui ui, Storage storage) {
+    public TaskList execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showMessage("Here are the tasks occurring on this date:");
-        ui.showIndentedMessage(tasks.getOnDateTasks(input).toString());
-        return tasks;
+        ui.showIndentedMessage(taskList.getOnDateTasks(input).toString());
+        return taskList;
     }
 }

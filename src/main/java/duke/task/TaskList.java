@@ -56,7 +56,7 @@ public class TaskList {
      * @throws DukeException If input contains |, or is in an invalid format.
      */
     public TaskList addTask(String input, Ui ui) throws DukeException {
-        List<Task> newTasks = new ArrayList<>(tasks);
+        List<Task> newTaskList = new ArrayList<>(tasks);
         if (input.contains("|")) {
             throw new DukeException("Input contains |, which is an invalid character.");
         }
@@ -74,41 +74,41 @@ public class TaskList {
             // Add Deadline task
             String errorMessage = "Command must be in the format: [taskName] /by "
                     + "[date(YYYY-MM-DD)] [time(HH:MM)].";
-            String[] splitInput = Parser.splitWith(input, 9, " /by ", errorMessage);
-            String taskName = splitInput[0];
+            String[] splitInputs = Parser.splitWith(input, 9, " /by ", errorMessage);
+            String taskName = splitInputs[0];
             errorMessage = "Date and time must be in the format: YYYY-MM-DD HH:MM.";
-            String[] dateTime = Parser.splitWith(splitInput[1], 0, " ", errorMessage);
-            String date = dateTime[0];
-            String time = dateTime[1];
+            String[] dateTimeInputs = Parser.splitWith(splitInputs[1], 0, " ", errorMessage);
+            String date = dateTimeInputs[0];
+            String time = dateTimeInputs[1];
             task = new Deadline(taskName, Parser.parseDateFromInput(date), Parser.parseTimeFromInput(time));
             break;
         default: // default is guaranteed to be event task due to use of enum + outer control flow
             // Add Event task
             errorMessage = "Command must be in the format: [taskName] /at "
                     + "[date(YYYY-MM-DD)] [start time(HH:MM)] [end time(HH:MM)].";
-            splitInput = Parser.splitWith(input, 6, " /at ", errorMessage);
-            taskName = splitInput[0];
+            splitInputs = Parser.splitWith(input, 6, " /at ", errorMessage);
+            taskName = splitInputs[0];
             errorMessage = "Date and times must be in the format: YYYY-MM-DD HH:MM HH:MM.";
-            dateTime = Parser.splitWith(splitInput[1], 0, " ", errorMessage);
+            dateTimeInputs = Parser.splitWith(splitInputs[1], 0, " ", errorMessage);
             // If user only input in one time
-            if (dateTime.length < 3) {
+            if (dateTimeInputs.length < 3) {
                 throw new DukeException(errorMessage);
             }
-            date = dateTime[0];
-            String startTime = dateTime[1];
-            String endTime = dateTime[2];
+            date = dateTimeInputs[0];
+            String startTime = dateTimeInputs[1];
+            String endTime = dateTimeInputs[2];
             task = new Event(taskName, Parser.parseDateFromInput(date),
                     Parser.parseTimeFromInput(startTime), Parser.parseTimeFromInput(endTime));
             break;
         }
 
         // Common functionality: add task to list, print task and list size, save tasks to file
-        newTasks.add(task);
+        newTaskList.add(task);
         ui.showMessage("Got it. The following task has been added: ");
         ui.showIndentedMessage(task.toString());
         ui.showMessage(String.format("Now you have %d task%s in the list.",
-                newTasks.size(), newTasks.size() == 1 ? "" : "s"));
-        return new TaskList(newTasks);
+                newTaskList.size(), newTaskList.size() == 1 ? "" : "s"));
+        return new TaskList(newTaskList);
     }
 
     /**
@@ -121,7 +121,7 @@ public class TaskList {
      * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
      */
     public TaskList deleteTask(String input, Ui ui) {
-        List<Task> newTasks = new ArrayList<>(tasks);
+        List<Task> newTaskList = new ArrayList<>(tasks);
         if (input.length() <= 7) {
             throw new DukeException("Please type in a task number to delete.");
         }
@@ -130,16 +130,16 @@ public class TaskList {
                 && (Integer.parseInt(taskNumberString) - 1 < tasks.size()
                 && Integer.parseInt(taskNumberString) - 1 >= 0)) {
             int taskIndex = Integer.parseInt(taskNumberString) - 1;
-            Task removedTask = newTasks.remove(taskIndex);
+            Task removedTask = newTaskList.remove(taskIndex);
             ui.showMessage("Got it. The following task has been removed:");
             ui.showIndentedMessage(removedTask.toString());
             ui.showMessage(String.format("Now you have %d task%s in the list.",
-                    newTasks.size(), newTasks.size() == 1 ? "" : "s"));
+                    newTaskList.size(), newTaskList.size() == 1 ? "" : "s"));
         } else {
             // Invalid input (not a number or invalid number)
             throw new DukeException("Please type in a valid task number to delete.");
         }
-        return new TaskList(newTasks);
+        return new TaskList(newTaskList);
     }
 
     /**
@@ -152,7 +152,7 @@ public class TaskList {
      * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
      */
     public TaskList markTask(String input, Ui ui) {
-        List<Task> newTasks = new ArrayList<>(tasks);
+        List<Task> newTaskList = new ArrayList<>(tasks);
         if (input.length() <= 5) {
             throw new DukeException("Please type in a task number to mark as done.");
         }
@@ -161,15 +161,15 @@ public class TaskList {
                 && (Integer.parseInt(taskNumberString) - 1 < tasks.size()
                 && Integer.parseInt(taskNumberString) - 1 >= 0)) {
             int taskIndex = Integer.parseInt(taskNumberString) - 1;
-            Task doneTask = newTasks.get(taskIndex);
+            Task doneTask = newTaskList.get(taskIndex);
             ui.showMessage("Good work! This task is now marked as done:");
             ui.showIndentedMessage(doneTask.toString());
-            newTasks.set(taskIndex, doneTask.markAsDone());
+            newTaskList.set(taskIndex, doneTask.markAsDone());
         } else {
             // Invalid input (not a number or invalid number)
             throw new DukeException("Please type in a valid task number to mark as done.");
         }
-        return new TaskList(newTasks);
+        return new TaskList(newTaskList);
     }
 
     /**

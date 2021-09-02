@@ -21,15 +21,15 @@ public class FindCommand extends Command {
     /**
      * Displays all tasks that contain a phrase given by the user.
      *
-     * @param tasks   The current list of tasks from the user.
+     * @param taskList   The current list of tasks from the user.
      * @param ui      An object that handles all UI related functionality. (e.g. printing)
      * @param storage An object that handles all save/load related functionality.
      * @return The input task list, unmodified.
      */
     @Override
-    public TaskList execute(TaskList tasks, Ui ui, Storage storage) {
+    public TaskList execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showMessage("Here are the matching tasks in your list:");
-        ui.showIndentedMessage(tasks.findTasks(input).toString());
-        return tasks;
+        ui.showIndentedMessage(taskList.findTasks(input).toString());
+        return taskList;
     }
 }

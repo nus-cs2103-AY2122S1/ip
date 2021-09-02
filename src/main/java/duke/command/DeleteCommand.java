@@ -24,16 +24,16 @@ public class DeleteCommand extends Command {
     /**
      * Deletes a task from the task list and saves the new task list to the save file.
      *
-     * @param tasks   The current list of tasks from the user.
+     * @param taskList   The current list of tasks from the user.
      * @param ui      An object that handles all UI related functionality. (e.g. printing)
      * @param storage An object that handles all save/load related functionality.
      * @return A task list with the specified task removed.
      * @throws IOException If an error occurs during the save operation.
      */
     @Override
-    public TaskList execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        TaskList newTasks = tasks.deleteTask(input, ui);
-        storage.saveTasksToFile(newTasks);
-        return newTasks;
+    public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+        TaskList newTaskList = taskList.deleteTask(input, ui);
+        storage.saveTasksToFile(newTaskList);
+        return newTaskList;
     }
 }
