@@ -19,3 +19,4 @@ public class Task {
         return "[" + getStatusIcon() + "] " + description;
     }
 }
+
