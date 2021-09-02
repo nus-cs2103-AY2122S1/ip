@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -33,10 +34,12 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
     private Ui ui; // For getting output messages
-    // 0 -> 1 (with name) -> 2 (with file location) -> 3 (with task list size)
+    // 0 -> 1 (with name) -> 2 (with file location)
     private int sequence = 0; // Checks to see if the user inputs their name, file location, and task list size.
-    private String filePath; // To temporarily store the file path to create duke.
 
+    /**
+     * Initializes the main window by setting some properties to scroll pane and the dialog container.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -58,28 +61,23 @@ public class MainWindow extends AnchorPane {
         case 0: // start
             ui = new Ui(userInput.getText());
             sequence++;
-            dukeText = 
+            dukeText =
                 String.format("Hi, %s! That is a nice name. Now, where would you want to store your duke data files?",
                     userInput.getText());
             break;
         case 1: // get file location
-            filePath = userInput.getText();
-            sequence++; // We can't create duke here yet! We need the max size
-            dukeText = "Ok, so what should the maximum size of the list be?";
+            // To temporarily store the file path to create duke.
+            String filePath = userInput.getText();
+            try {
+                duke = new Duke(filePath);
+            } catch (IOException | DukeException e) {
+                dukeText = e.getMessage() + " Please try entering your file name again!";
+                break;
+            }
+            sequence++;
+            dukeText = "Great! You are all set! How can I help you today?";
             break;
         case 2:
-            try {
-                duke = new Duke(filePath, Integer.parseInt(userInput.getText()));
-                dukeText = "Great! You are all set! How can I help you today?";
-                sequence++;
-            } catch (NumberFormatException e) {
-                dukeText = "This is not a whole number. Please enter something sensible!";
-            } catch (IOException e) {
-                dukeText = e.getMessage();
-                sequence--; // Go back one step
-            }
-            break;
-        case 3:
             try {
                 dukeText = getResponse(userInput.getText());
             } catch (DukeException e) {

@@ -19,8 +19,8 @@ public enum TasksEnum {
         @Override
         public Task getTask(String input) {
             if (input == null || !input.contains(" /at ")) {
-                throw new DukeException("There should be a description followed by \"/at\" and" +
-                    " then the date and time of the event.");
+                throw new DukeException("There should be a description followed by \"/at\" and"
+                    + " then the date and time of the event.");
             }
             String[] splitOtherInput = input.split(" /at ", 2);
             return new Event(splitOtherInput[0], splitOtherInput[1]);
@@ -30,8 +30,8 @@ public enum TasksEnum {
         @Override
         public Task getTask(String input) {
             if (input == null || !input.contains(" /by ")) {
-                throw new DukeException("There should be a description followed by \"/by\" and" +
-                    " then the date and time of the deadline.");
+                throw new DukeException("There should be a description followed by \"/by\" and"
+                    + " then the date and time of the deadline.");
             }
             String[] splitOtherInput = input.split(" /by ", 2);
             return new Deadline(splitOtherInput[0], splitOtherInput[1]);

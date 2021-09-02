@@ -1,5 +1,7 @@
 package duke.logic;
 
+import java.io.IOException;
+
 import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -9,13 +11,13 @@ import duke.ui.Ui;
 /**
  * The logic for parsing commands typed by the user.
  */
-public class LCommandParser {
+public class CommandParser {
     private static final String INVALID_COMMAND = "Invalid input. Type \"help\" for more information.";
     private static final String EMPTY_INPUT_MESSAGE = "Input is empty. Type \"help\" for more information.";
-    private static final String TOO_LITTLE_ARGUMENTS_MESSAGE = "Too little arguments. Type \"help\" " +
-        "followed by the command for more information.";
-    private static final String FULL_TASKLIST_MESSAGE = "Unable to add task. List is full. Consider deleting" +
-        " some tasks";
+    private static final String TOO_LITTLE_ARGUMENTS_MESSAGE = "Too little arguments. Type \"help\" "
+        + "followed by the command for more information.";
+    private static final String FULL_TASKLIST_MESSAGE = "Unable to add task. List is full. Consider deleting"
+        + " some tasks";
     private static final String INVALID_NUMBER_MESSAGE = "Please input a valid task number after the command.";
     private final String output;
     private boolean willExit;
@@ -27,14 +29,14 @@ public class LCommandParser {
      * @param storage  The storage logic that allows the command parser to write the task list data to it.
      * @param taskList The list of tasks.
      */
-    public LCommandParser(String input, TaskList taskList, LStorage storage, Ui ui) {
+    public CommandParser(String input, TaskList taskList, Storage storage, Ui ui) {
         if (input == null || input.equals("")) {
             throw new DukeException(EMPTY_INPUT_MESSAGE);
         }
         String[] inputArr = input.split(" ", 2);
-        LCommandsEnum commandEnum;
+        CommandsEnum commandEnum;
         try {
-            commandEnum = LCommandsEnum.valueOf(inputArr[0].toUpperCase());
+            commandEnum = CommandsEnum.valueOf(inputArr[0].toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new DukeException(INVALID_COMMAND);
         }
@@ -43,21 +45,21 @@ public class LCommandParser {
         case BYE:
             output = ui.goodByeMessage();
             willExit = true;
-            break;
+            return;
         case LIST:
             output = ui.allTasksMessage(taskList.getAllTasks(), taskList.size());
-            break;
+            return;
         case UPCOMING:
             output = ui.upcomingTasksMessage(taskList.getUpcomingTasks(), taskList.size());
-            break;
+            return;
         case HELP:
             try {
                 output = ui.displayHelpMessage(
-                    inputArr.length == 1 ? null : LCommandsEnum.valueOf(inputArr[1].toUpperCase()));
+                    inputArr.length == 1 ? null : CommandsEnum.valueOf(inputArr[1].toUpperCase()));
             } catch (IllegalArgumentException e) {
                 throw new DukeException(INVALID_COMMAND);
             }
-            break;
+            return;
         default:
             if (inputArr.length < 2) {
                 throw new DukeException(TOO_LITTLE_ARGUMENTS_MESSAGE);
@@ -66,8 +68,8 @@ public class LCommandParser {
             case FIND:
                 output = ui.tasksContainingMessage(inputArr[1],
                     taskList.getTasksContaining(inputArr[1]), taskList.size());
-                break;
-            case TODO: // fallthrough intended
+                return;
+            case TODO: // fallthrough intended // From here on, there will be updates to the storage.
             case EVENT: // fallthrough intended
             case DEADLINE:
                 output = ui.addTaskMessage(addTask(commandEnum.name(), inputArr[1], taskList), taskList.size());
@@ -95,7 +97,11 @@ public class LCommandParser {
                 }
             }
         }
-        storage.updateDukeTextFile();
+        try {
+            storage.updateDukeTextFile();
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 
     /**

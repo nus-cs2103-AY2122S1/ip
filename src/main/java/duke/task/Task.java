@@ -4,10 +4,11 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * Task is a general class for any task that is to be saved by {@link} .
+ * Task is a general class for any task that is to be saved by {@link duke.logic.Storage}.
  */
 public abstract class Task {
-    private final String description, taskType;
+    private final String description;
+    private final String taskType;
     private boolean isDone;
 
     /**
@@ -28,8 +29,8 @@ public abstract class Task {
      * @return the associated string
      */
     public String getStatus() {
-        return (isDone ? String.format("[%s][X]", taskType) :
-            String.format("[%s][ ]", taskType)); // mark done task with X
+        return (isDone ? String.format("[%s][X]", taskType)
+            : String.format("[%s][ ]", taskType)); // mark done task with X
     }
 
     public boolean isDone() {

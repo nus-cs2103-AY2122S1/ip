@@ -1,13 +1,14 @@
 package duke.ui;
 
-import java.util.AbstractMap;
+import static java.util.AbstractMap.SimpleImmutableEntry;
+
 import java.util.List;
 
 import duke.Duke;
 import duke.DukeException;
-import duke.logic.LCommandParser;
-import duke.logic.LCommandsEnum;
-import duke.logic.LStorage;
+import duke.logic.CommandParser;
+import duke.logic.CommandsEnum;
+import duke.logic.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -37,11 +38,11 @@ public class Ui {
      * @param storage  the storage that the user wants the data to be stored into
      * @return the output string
      */
-    public String checkInput(String userInput, TaskList taskList, LStorage storage) {
+    public String checkInput(String userInput, TaskList taskList, Storage storage) {
         String output = "";
-        LCommandParser cmdParser;
+        CommandParser cmdParser;
         try {
-            cmdParser = new LCommandParser(userInput, taskList, storage, this);
+            cmdParser = new CommandParser(userInput, taskList, storage, this);
             willExit = cmdParser.willExit();
             output += cmdParser.getOutput() + "\n";
         } catch (DukeException e) {
@@ -52,7 +53,7 @@ public class Ui {
     }
 
     public String checkInput(String userInput, Duke duke) {
-        return checkInput(userInput, duke.getTaskList(), duke.getlStorage());
+        return checkInput(userInput, duke.getTaskList(), duke.getStorage());
     }
 
     /**
@@ -105,10 +106,10 @@ public class Ui {
      *
      * @return the output string
      */
-    public String displayHelpMessage(LCommandsEnum input) {
+    public String displayHelpMessage(CommandsEnum input) {
         StringBuilder result = new StringBuilder();
         if (input == null) {
-            for (LCommandsEnum command : LCommandsEnum.values()) {
+            for (CommandsEnum command : CommandsEnum.values()) {
                 result.append(command.helpMessage()).append("\n");
             }
         } else {
@@ -124,7 +125,7 @@ public class Ui {
      * @param maxTaskNumber        the size of the task list. This will ensure proper padding of numbers.
      * @return the output string
      */
-    public String allTasksMessage(List<AbstractMap.SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
+    public String allTasksMessage(List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
                                   int maxTaskNumber) {
         return (String.format("Ok, %s. I am getting all your tasks:\n%s", name,
             getMultipleTasksMessage(tasksWithTaskNumbers, maxTaskNumber)));
@@ -138,7 +139,7 @@ public class Ui {
      * @return the output string
      */
     public String upcomingTasksMessage(
-        List<AbstractMap.SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
+        List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
         int maxTaskNumber) {
         return String.format("Ok, %s. I am getting all your upcoming tasks:\n%s", name,
             getMultipleTasksMessage(tasksWithTaskNumbers, maxTaskNumber));
@@ -153,17 +154,17 @@ public class Ui {
      * @return the output string
      */
     public String tasksContainingMessage(String pattern,
-                                         List<AbstractMap.SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
+                                         List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
                                          int maxTaskNumber) {
         return (String.format("Ok, %s. I am getting all tasks containing %s:\n%s", name, pattern,
             getMultipleTasksMessage(tasksWithTaskNumbers, maxTaskNumber)));
     }
 
     private String getMultipleTasksMessage(
-        List<AbstractMap.SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
+        List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
         int maxTaskNumber) {
         StringBuilder result = new StringBuilder();
-        for (AbstractMap.SimpleImmutableEntry<? extends Task, Integer> task : tasksWithTaskNumbers) {
+        for (SimpleImmutableEntry<? extends Task, Integer> task : tasksWithTaskNumbers) {
             result.append(getSingleTaskMessage(task.getKey(), task.getValue(), maxTaskNumber)).append("\n");
         }
         return result.toString().trim();

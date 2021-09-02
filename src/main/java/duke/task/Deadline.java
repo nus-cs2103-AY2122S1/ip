@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import duke.logic.LDateTimeParser;
+import duke.logic.DateTimeParser;
 
 /**
  * A deadline is a task that has a specific deadline.
@@ -17,13 +17,25 @@ public class Deadline extends Task {
      * Creates a new deadline object that has the given description and due on the given date.
      *
      * @param description          The description of the deadline
-     * @param stringDateOfDeadline The due date/time of the task
+     * @param stringDateOfDeadline The due date/time string of the task
      */
     public Deadline(String description, String stringDateOfDeadline) {
         super(description, "D");
-        LDateTimeParser logicDateTimeParser = new LDateTimeParser(stringDateOfDeadline);
+        DateTimeParser logicDateTimeParser = new DateTimeParser(stringDateOfDeadline);
         timeOfDeadline = logicDateTimeParser.getTime();
         dateOfDeadline = logicDateTimeParser.getDate();
+    }
+
+    /**
+     * Creates a new deadline object that has the given description and due on the given date.
+     *
+     * @param description The description of the deadline
+     * @param dateTime    The due date/time of the task
+     */
+    public Deadline(String description, LocalDateTime dateTime) {
+        super(description, "D");
+        dateOfDeadline = dateTime.toLocalDate();
+        timeOfDeadline = dateTime.toLocalTime();
     }
 
     @Override

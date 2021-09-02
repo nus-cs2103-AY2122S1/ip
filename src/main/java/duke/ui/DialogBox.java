@@ -25,11 +25,6 @@ public class DialogBox extends HBox {
     @FXML
     private Circle circleDisplayPicture;
 
-    public static DialogBox initialDialog() {
-        return DialogBox.getDukeDialog("Hi, I am Duke, what is your name?",
-            new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/images/gigachad.jpg"))));
-    }
-
     /**
      * Creates a new dialog box ui that contains the message in l and the profile picture in iv.
      *
@@ -51,6 +46,15 @@ public class DialogBox extends HBox {
         dialog.setWrapText(true);
         circleDisplayPicture.setRadius(30);
         circleDisplayPicture.setFill(new ImagePattern(iv));
+    }
+
+    /**
+     * Creates the initial dialog box from duke.
+     * @return the initial dialog box
+     */
+    public static DialogBox initialDialog() {
+        return DialogBox.getDukeDialog("Hi, I am Duke, what is your name?",
+            new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/images/gigachad.jpg"))));
     }
 
     public static DialogBox getUserDialog(String l, Image i) {

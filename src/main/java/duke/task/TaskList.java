@@ -30,6 +30,13 @@ public class TaskList {
     }
 
     /**
+     * Creates the task list with maximum limit of {@code Integer.MAX_VALUE}.
+     */
+    public TaskList() {
+        this(Integer.MAX_VALUE);
+    }
+
+    /**
      * Adds the task into the list.
      *
      * @param task The task to be added

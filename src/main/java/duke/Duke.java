@@ -2,7 +2,7 @@ package duke;
 
 import java.io.IOException;
 
-import duke.logic.LStorage;
+import duke.logic.Storage;
 import duke.task.TaskList;
 import duke.ui.TextCliUi;
 
@@ -12,17 +12,16 @@ import duke.ui.TextCliUi;
  */
 public class Duke {
     private final TaskList taskList;
-    private final LStorage lStorage;
+    private final Storage storage;
 
     /**
      * Creates a new instance of a duke chat-bot.
      *
      * @param filePath  the path where the data of the tasks will be saved
-     * @param listLimit the maximum size of the task list
      */
-    public Duke(String filePath, int listLimit) throws IOException {
-        taskList = new TaskList(listLimit);
-        lStorage = new LStorage(filePath, taskList);
+    public Duke(String filePath) throws IOException {
+        taskList = new TaskList();
+        storage = new Storage(filePath, taskList);
     }
 
     /**
@@ -30,7 +29,7 @@ public class Duke {
      */
     public Duke() throws IOException {
         taskList = new TaskList(100);
-        lStorage = new LStorage("./dukedata.txt", taskList);
+        storage = new Storage("./dukedata.txt", taskList);
     }
 
     /**
@@ -50,8 +49,8 @@ public class Duke {
         return taskList;
     }
 
-    public LStorage getlStorage() {
-        return lStorage;
+    public Storage getStorage() {
+        return storage;
     }
 
     /**
@@ -60,7 +59,7 @@ public class Duke {
     public void run() {
         TextCliUi ui = new TextCliUi();
         while (!ui.willExit()) {
-            ui.checkInput(taskList, lStorage);
+            ui.checkInput(taskList, storage);
         }
     }
 }

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import duke.logic.LDateTimeParser;
+import duke.logic.DateTimeParser;
 
 /**
  * An event is a task that has a date attached.
@@ -21,9 +21,21 @@ public class Event extends Task {
      */
     public Event(String description, String eventDate) {
         super(description, "E");
-        LDateTimeParser logicDateTimeParser = new LDateTimeParser(eventDate);
+        DateTimeParser logicDateTimeParser = new DateTimeParser(eventDate);
         timeOfEvent = logicDateTimeParser.getTime();
         dateOfEvent = logicDateTimeParser.getDate();
+    }
+
+    /**
+     * Creates a new event object that has the given description and due on the given date.
+     *
+     * @param description The description of the event
+     * @param dateTime    The due date/time of the task
+     */
+    public Event(String description, LocalDateTime dateTime) {
+        super(description, "E");
+        dateOfEvent = dateTime.toLocalDate();
+        timeOfEvent = dateTime.toLocalTime();
     }
 
     @Override

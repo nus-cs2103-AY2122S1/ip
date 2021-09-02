@@ -3,8 +3,8 @@ package duke.ui;
 import java.util.Scanner;
 
 import duke.DukeException;
-import duke.logic.LCommandParser;
-import duke.logic.LStorage;
+import duke.logic.CommandParser;
+import duke.logic.Storage;
 import duke.task.TaskList;
 
 /**
@@ -48,10 +48,10 @@ public class TextCliUi {
      * @param taskList the task list that the user is using
      * @param storage  the storage that the user wants the data to be stored into
      */
-    public void checkInput(TaskList taskList, LStorage storage) {
+    public void checkInput(TaskList taskList, Storage storage) {
         String userInput = sc.nextLine();
         try {
-            LCommandParser cmdParser = new LCommandParser(userInput, taskList, storage, ui);
+            CommandParser cmdParser = new CommandParser(userInput, taskList, storage, ui);
             willExit = cmdParser.willExit();
             System.out.println(cmdParser.getOutput());
         } catch (DukeException e) {
