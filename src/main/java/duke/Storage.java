@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import task.Task;
 import task.Tasklist;
+import ui.LogMessage;
 import ui.Parser;
 import ui.Ui;
 
@@ -73,8 +74,10 @@ public class Storage {
     /**
      * Saves the tasklist to the specified filepath
      */
-    public void save() {
+    public LogMessage save() {
         File file = new File(filepath);
+
+        LogMessage logMessages = new LogMessage();
 
         // Creates all the file directories
         String[] fileDirectories = filepath.split("/");
@@ -85,7 +88,8 @@ public class Storage {
             currDir += fileDirectories[i];
             File currFile = new File(currDir);
             if (currFile.mkdir()) {
-                System.out.printf("Added directory %s\n", currDir);
+                String addDirectoryMsg = String.format("Added directory %s\n", currDir);
+                logMessages.add(addDirectoryMsg);
             }
             currDir += "/";
         }
@@ -93,13 +97,16 @@ public class Storage {
         //Creates file
         try {
             if (file.createNewFile()) {
-                System.out.printf("Saved file at %s\n", filepath);
+                String saveFileMsg = String.format("Saved file at %s\n", filepath);
+                logMessages.add(saveFileMsg);
             } else {
-                System.out.printf("File already exists at %s\n", filepath);
+                String fileExistMsg = String.format("File already exists at %s\n", filepath);
+                logMessages.add(fileExistMsg);
             }
 
         } catch (IOException e) {
-            System.out.println("An error occurred during creation of file.");
+            String fileCreationErrorMsg = String.format("An error occurred during creation of file.\n");
+            logMessages.add(fileCreationErrorMsg);
         }
 
         try {
