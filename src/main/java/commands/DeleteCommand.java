@@ -15,13 +15,13 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
-    public boolean execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.delete(this.index);
 
         String message = DELETE_MSG + "\n" + task.toString() + "\n" + tasks.getTaskCountString();
 
         ui.printResponse(message);
 
-        return false;
+        return message;
     }
 }
