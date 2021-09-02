@@ -1,5 +1,7 @@
 package Duke;
 
+import java.io.IOException;
+
 import Duke.Commands.Command;
 import Duke.Storage.FileFormatException;
 import Duke.Storage.Storage;
@@ -9,89 +11,57 @@ import Duke.Task.TaskList;
 import Duke.Ui.Parser;
 import Duke.Ui.Ui;
 import Duke.Ui.UserInput;
-
-import java.io.IOException;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 /**
  * The Duke class encapsulates the main logic and data for running the chat-bot.
  *
  * @author cai
  */
-public class Duke {
+public class Duke extends Application {
     /** Default path for storing tasks */
     private static final String DEFAULT_TASK_STORAGE_PATH = "data/duke.txt";
 
-    /** Boolean indicating whether the program has been stopped */
-    private boolean isStopped = false;
-
     /** List of tasks as added by the user */
-    private final TaskList taskList;
+    private TaskList taskList;
 
-    /**
-     * Constructs an instance of the Duke chat-bot with the specified task storage path.
-     *
-     * @param todoStoragePath Path for storing tasks.
-     * @throws IOException If IOException is thrown when creating and/or loading the tasks from the path.
-     */
-    public Duke(String todoStoragePath) throws IOException {
-        Storage<Task> taskStorage = new TaskStorage(todoStoragePath);
+    /** User interface */
+    private Ui ui;
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        ui = new Ui(stage, this);
+        say(Ui.GREETING_MESSAGE);
+
+        Storage<Task> taskStorage = new TaskStorage(DEFAULT_TASK_STORAGE_PATH);
         try {
             this.taskList = new TaskList(taskStorage);
         } catch (FileFormatException e) {
-            Ui.print(Ui.FILE_FORMAT_ERROR_MESSAGE);
+            System.out.println(Ui.FILE_FORMAT_ERROR_MESSAGE);
             throw e;
         }
     }
 
+    public void say(String message) {
+        ui.addDukeMessage(message);
+    }
+
     /**
-     * Constructs an instance of the Duke chat-bot with the default task storage path.
+     * Parses the given input as a command and runs it.
      *
-     * @throws IOException If IOException is thrown when creating and/or loading the tasks from the path.
+     * @param inputString Raw user input.
      */
-    public Duke() throws IOException {
-        this(DEFAULT_TASK_STORAGE_PATH);
-    }
-
-    /**
-     * Runs the Duke chat-bot.
-     * The program interacts with the user through a read-eval-print loop. The user is prompted for a command,
-     * which is parsed by the bot and executed. The program then loops back and asks for a prompt again.
-     */
-    public void run() {
-        Ui.print(Ui.GREETING_MESSAGE);
-        while (!this.isStopped) {
-            UserInput input = Parser.parse(Ui.read());
-            try {
-                Command.matching(input).run(this, input);
-            } catch (DukeException e) {
-                Ui.print(String.format(Ui.ERROR_MESSAGE, e.getMessage()));
-            }
+    public void parseAndRun(String inputString) {
+        UserInput input = Parser.parse(inputString);
+        try {
+            Command.matching(input).run(this, input);
+        } catch (DukeException e) {
+            say(String.format(Ui.ERROR_MESSAGE, e.getMessage()));
         }
-        Ui.print(Ui.EXIT_MESSAGE);
-    }
-
-    /**
-     * Stops the Duke chat-bot.
-     * Exits the program gracefully with an exit message on the next iteration of the read-eval-print loop.
-     */
-    public void stop() {
-        this.isStopped = true;
     }
 
     public TaskList getTaskList() {
         return this.taskList;
-    }
-
-    /**
-     * Main entrypoint to the Duke program.
-     *
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        try {
-            new Duke().run();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 }

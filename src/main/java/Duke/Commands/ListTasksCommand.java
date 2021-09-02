@@ -1,7 +1,6 @@
 package Duke.Commands;
 
 import Duke.Duke;
-import Duke.Ui.Ui;
 import Duke.Ui.UserInput;
 
 import java.util.HashSet;
@@ -14,7 +13,7 @@ class ListTasksCommand extends Command {
 
     @Override
     public void run(Duke duke, UserInput input) {
-        Ui.print(String.format(HELP_MESSAGE, duke.getTaskList().toString()));
+        duke.say(String.format(HELP_MESSAGE, duke.getTaskList().toString()));
     }
 
     @Override

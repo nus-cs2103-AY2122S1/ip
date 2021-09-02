@@ -1,11 +1,16 @@
 package Duke.Ui;
 
-import java.util.Scanner;
+import java.io.IOException;
+
+import Duke.Duke;
+import Duke.Ui.Controllers.MainWindow;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 /**
- * The Ui class deals with how Duke interacts with the user.
- *
- * @author cai
+ * Graphical User Interface for Duke.
  */
 public class Ui {
     public static final String GREETING_MESSAGE = "Hello I'm Duke!";
@@ -13,30 +18,25 @@ public class Ui {
     public static final String ERROR_MESSAGE = "Oops! An error occurred: %s";
     public static final String FILE_FORMAT_ERROR_MESSAGE = "The file storing your tasks is in an unrecognized format. "
             + "Please fix or remove it.";
-    private static final String RULER = "\n````````````````````````````````````````````````````````\n";
-    private static final String INPUT_PROMPT = "> ";
 
-    /** System input scanner used for reading the input from the user */
-    private static final Scanner scanner = new Scanner(System.in);
+    private MainWindow mainController;
 
     /**
-     * Prints the given message after formatting and indentation.
+     * Constructs a new instance of the GUI associated with the specified Duke and Stage.
      *
-     * @param message The message to be printed.
+     * @throws IOException If an error occurs when loading the fxml.
      */
-    public static void print(String message) {
-        message = RULER + message + RULER;
-        String indentedMessage = String.join("\n\t", message.split("\n"));
-        System.out.println(indentedMessage);
+    public Ui(Stage stage, Duke duke) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/MainWindow.fxml"));
+        AnchorPane ap = fxmlLoader.load();
+        Scene scene = new Scene(ap);
+        stage.setScene(scene);
+        mainController = fxmlLoader.getController();
+        mainController.setDuke(duke);
+        stage.show();
     }
 
-    /**
-     * Reads the input from the user through the standard input stream.
-     *
-     * @return The input string.
-     */
-    public static String read() {
-        System.out.print(INPUT_PROMPT);
-        return scanner.nextLine();
+    public void addDukeMessage(String message) {
+        mainController.addDukeMessage(message);
     }
 }

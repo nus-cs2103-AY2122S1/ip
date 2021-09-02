@@ -4,7 +4,6 @@ import Duke.Duke;
 import Duke.Task.InvalidTaskException;
 import Duke.Task.Task;
 import Duke.Task.TaskList;
-import Duke.Ui.Ui;
 import Duke.Ui.UserInput;
 
 import java.util.HashSet;
@@ -21,7 +20,7 @@ class RemoveTaskCommand extends Command {
         int taskIndex = parseTaskNumber(input);
         TaskList taskList = duke.getTaskList();
         Task task = taskList.remove(taskIndex);
-        Ui.print(String.format(REMOVE_TASK_SUCCESS_MESSAGE, task, taskList.size()));
+        duke.say(String.format(REMOVE_TASK_SUCCESS_MESSAGE, task, taskList.size()));
     }
 
     @Override

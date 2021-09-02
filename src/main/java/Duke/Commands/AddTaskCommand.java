@@ -7,7 +7,6 @@ import Duke.Task.InvalidTaskException;
 import Duke.Task.Task;
 import Duke.Task.TaskList;
 import Duke.Task.Todo;
-import Duke.Ui.Ui;
 import Duke.Ui.UserInput;
 
 import java.time.LocalDate;
@@ -48,7 +47,7 @@ class AddTaskCommand extends Command {
         Task newTask = createTask(input);
         TaskList taskList = duke.getTaskList();
         taskList.add(newTask);
-        Ui.print(String.format(ADD_TASK_SUCCESS_MESSAGE, newTask, taskList.size()));
+        duke.say(String.format(ADD_TASK_SUCCESS_MESSAGE, newTask, taskList.size()));
     }
 
     /**

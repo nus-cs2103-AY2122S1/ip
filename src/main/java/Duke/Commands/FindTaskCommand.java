@@ -2,7 +2,6 @@ package Duke.Commands;
 
 import Duke.Duke;
 import Duke.Task.Task;
-import Duke.Ui.Ui;
 import Duke.Ui.UserInput;
 
 import java.util.HashSet;
@@ -20,7 +19,7 @@ class FindTaskCommand extends Command {
         List<Task> results = duke.getTaskList().findByKeyword(keyword);
 
         if (results.size() == 0) {
-            Ui.print(String.format(NO_RESULTS_MESSAGE, keyword));
+            duke.say(String.format(NO_RESULTS_MESSAGE, keyword));
             return;
         }
 
@@ -28,7 +27,7 @@ class FindTaskCommand extends Command {
         for (int i = 0; i < results.size(); i++) {
             resultString.append(String.format("%d. %s\n", i + 1, results.get(i).toString()));
         }
-        Ui.print(String.format(HELP_MESSAGE, resultString));
+        duke.say(String.format(HELP_MESSAGE, resultString));
     }
 
     @Override
