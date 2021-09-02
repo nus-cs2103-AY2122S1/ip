@@ -1,4 +1,7 @@
-package duke;
+package duke.tools;
+
+import duke.Duke;
+import duke.dukeException.DukeException;
 
 import java.io.IOException;
 
@@ -16,30 +19,28 @@ public class Parser {
      * @throws DukeException Handles Duke Exception
      * @throws IOException Handles file errors
      */
-    public static boolean parse(String command) throws DukeException, IOException {
+    public static String parse(String command) throws DukeException, IOException {
         if (command.contains("bye")) {
-            return true;
+            return "Bye. Hope to see you again soon!\n";
         }
         if (command.startsWith("list")) {
-            Duke.getTaskList();
+            return Duke.getTaskList();
         } else if (command.startsWith("done")) {
             int i = Integer.valueOf(command.substring(5));
-            Duke.markDone(i);
+            return Duke.markDone(i);
         } else if (command.contains("delete")) {
             int i = Integer.valueOf(command.substring(7));
-            System.out.println(i);
-            Duke.deleteTask(i);
+            return Duke.deleteTask(i);
         } else if (command.startsWith("todo")) {
-            Duke.toDo(command);
+            return Duke.toDo(command);
         } else if (command.startsWith("deadline")) {
-            Duke.deadline(command);
+            return Duke.deadline(command);
         } else if (command.startsWith("event")) {
-            Duke.event(command);
+            return Duke.event(command);
         } else if (command.startsWith("find")) {
-            Duke.findTask(command);
+            return Duke.findTask(command);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-( \n");
         }
-        return false;
     }
 }

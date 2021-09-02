@@ -1,6 +1,6 @@
-import duke.DukeException;
-import duke.Ui;
-import duke.Parser;
+import duke.dukeException.DukeException;
+import duke.tools.Ui;
+import duke.tools.Parser;
 
 import org.junit.jupiter.api.Test;
 

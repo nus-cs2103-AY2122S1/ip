@@ -1,5 +1,13 @@
 package duke;
 
+import duke.dukeException.DukeException;
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.ToDo;
+import duke.tools.Parser;
+import duke.tools.Storage;
+import duke.tools.Ui;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -22,10 +30,25 @@ public class Duke {
      * @param filePath Takes in a filepath
      * @throws FileNotFoundException Throws an error when file not found
      */
-    public Duke(String filePath) throws FileNotFoundException {
+    public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.load());
+        try {
+            storage = new Storage(filePath);
+            tasks = new TaskList(storage.load());
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    String getResponse(String input) {
+        String response;
+        try {
+            response = Parser.parse(input);
+            return "Duke heard: " + response;
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -33,19 +56,18 @@ public class Duke {
      */
     public void run() {
         ui.showWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
+        while (true) {
             try {
                 ui.readCommand();
                 Scanner s = new Scanner(System.in);
                 String command = s.nextLine();
-                isExit = Parser.parse(command);
-                //Command c = duke.Parser.parse(fullCommand);
-                //c.execute(tasks, ui, storage);
-            //} catch (duke.DukeException e) {
-            //    ui.showError(e.getMessage());
+                String response = Parser.parse(command);
+                ui.printMessage(response);
+                if (response.contains("Bye")) {
+                    break;
+                }
             } catch (DukeException | IOException e) {
-                e.printStackTrace();
+                Ui.printMessage(e.getMessage());
             } finally {
                 ui.showDivider();
             }
@@ -57,24 +79,28 @@ public class Duke {
      * Method to mark a task done by index.
      * @param i the index for task to remove
      * @throws DukeException throw error
+     * @return result
      */
-    public static void markDone(int i) throws DukeException {
-        System.out.println("Nice! I've marked this task as done: ");
+    public static String markDone(int i) throws DukeException {
+        String start = "Nice! I've marked this task as done: \n";
         tasks.getTask(i - 1).markAsDone();
         TaskList.updateMemory(storage.getPath(), tasks);
         String res = tasks.getTask(i-1).toString();
-        System.out.println(res + "\n");
+        String end = res + "\n";
+        return start + end;
     }
 
     /**
      * Method to get the Duke TaskList
      */
-    public static void getTaskList() {
-        System.out.println("Here are the tasks in your list:");
+    public static String getTaskList() {
+        String start = "Here are the tasks in your list: \n";
+        String res = "";
         for (int i = 0; i < tasks.getSize(); i++) {
-            String res = (i + 1) + ". " + tasks.getTask(i);
-            System.out.println(res);
+            res += (i + 1) + ". " + tasks.getTask(i) + "\n";
+            //System.out.println(res);
         }
+        return start + res;
     }
 
     /**
@@ -82,7 +108,7 @@ public class Duke {
      * @param input takes in a command by the user
      * @throws DukeException throws an error
      */
-    public static void toDo(String input) throws DukeException {
+    public static String toDo(String input) throws DukeException {
         if (input.equals("todo")) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.\n");
         }
@@ -90,8 +116,8 @@ public class Duke {
         ToDo td = new ToDo(t);
         tasks.addNewTask(td);
         TaskList.updateMemory(storage.getPath(), tasks);
-        System.out.println("Got it. I've added this task: \n " + td +
-                           "\n" + "Now you have " + tasks.getSize() + " tasks in the list.");
+        return "Got it. I've added this task: \n " + td +
+                "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
@@ -99,13 +125,13 @@ public class Duke {
      * @param input takes in a command by the user
      * @throws DukeException throws an error
      */
-    public static void deadline(String input) throws DukeException {
+    public static String  deadline(String input) throws DukeException {
         String t = input.split("deadline ")[1];
         Deadline dl = new Deadline(t);
         tasks.addNewTask(dl);
         TaskList.updateMemory(storage.getPath(), tasks);
-        System.out.println("Got it. I've added this task: \n " + dl
-               + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.");
+        return "Got it. I've added this task: \n " + dl
+                + "\n" + "Now you have " + tasks.getSize() + " tasks in the list.";
     }
 
     /**
@@ -113,53 +139,55 @@ public class Duke {
      * @param input takes in a command by the user
      * @throws DukeException throws an error
      */
-    public static void event(String input) throws DukeException {
+    public static String event(String input) throws DukeException {
         String t = input.split("event ")[1];
         Event e = new Event(t);
         tasks.addNewTask(e);
         TaskList.updateMemory(storage.getPath(), tasks);
-        System.out.println("Got it. I've added this task: \n " + e
-                            + "/n"  + "Now you have " + tasks.getSize()  + " tasks in the list.");
+        return "Got it. I've added this task: \n " + e
+                + "/n"  + "Now you have " + tasks.getSize()  + " tasks in the list.";
     }
 
     /**
      * Method to handle delete tasks.
-     * @param input takes in a command by the user
+     * @param i takes in a command by the user
      * @throws DukeException throws an error
      */
-    public static void deleteTask(int i) throws DukeException {
-        System.out.println("Noted. I've removed this task: ");
+    public static String deleteTask(int i) throws DukeException {
+        String start = "Noted. I've removed this task: ";
         String deleted = tasks.getTask(i-1).toString();
         tasks.deleteGivenTask(i - 1);
         TaskList.updateMemory(storage.getPath(), tasks);
-        System.out.println(" " + deleted);
-        System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
+        String mid = " " + deleted;
+        String end = "Now you have " + tasks.getSize() + " tasks in the list.";
+        return start + mid + end;
     }
 
     /**
      * Method to find task using a search key.
      * @param input search key
      */
-    public static void findTask(String input) {
+    public static String findTask(String input) {
         String searchKey = input.split("find ")[1];
-        System.out.println("Here are the matching tasks in your list:");
+        String start = "Here are the matching tasks in your list: \n";
+        String res = "";
         int currIndex = 1;
         for (int i = 0; i < tasks.getSize(); i++) {
             String currTask = tasks.getTask(i).getTaskInfo();
             if (currTask.contains(searchKey)) {
-                String foundTask = currIndex + ". " + tasks.getTask(i);
-                System.out.println(foundTask);
+                String foundTask = currIndex + ". " + tasks.getTask(i) + "\n";
+                res += foundTask;
                 currIndex++;
             }
         }
+        return start + res;
     }
 
     /**
      * Main method to run the bot.
      * @param args Takes in user input
-     * @throws FileNotFoundException Throw errors
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         new Duke("data/duke.txt").run();
     }
 }

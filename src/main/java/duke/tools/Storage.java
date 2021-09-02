@@ -1,4 +1,4 @@
-package duke;
+package duke.tools;
 
 import java.io.IOException;
 
@@ -7,7 +7,7 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 
 /**
- * Deals with loading tasks from the file and saving tasks in the file.
+ * Deals with loading duke.tasks from the file and saving duke.tasks in the file.
  *
  * @author Erwin Quek
  * @version CS2103 AY21/22 Sem 1

@@ -1,4 +1,4 @@
-package duke;
+package duke.tasks;
 
 /**
  * A ToDo task that extends from Task.

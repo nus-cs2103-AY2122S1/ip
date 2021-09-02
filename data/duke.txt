@@ -5,7 +5,4 @@ T|1|join sports club
 T|0|borrow book
 D|0|return book|2021-08-24T23:59
 E|0|project meeting|2021-08-24T23:59
-T|0|sleep
-T|0|sleep
-T|0|slap allard
-T|0|slap allard 3 times
+T|0|eat now
