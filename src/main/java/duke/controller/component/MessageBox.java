@@ -12,6 +12,11 @@ import javafx.scene.text.Font;
  * MessageBox component.
  */
 public class MessageBox extends Label {
+    private static final int PADDING = 10;
+    private static final int PREF_WIDTH = 200;
+    private static final int MIN_HEIGHT = 65;
+    private static final int FONT_SIZE = 15;
+    private static final boolean IS_WRAP_TEXT = true;
 
     /**
      * Constructs a MessageBox object.
@@ -44,13 +49,13 @@ public class MessageBox extends Label {
     private void init(double layoutX, double layoutY) {
         setLayoutX(layoutX);
         setLayoutY(layoutY);
-        setPadding(new Insets(10, 10, 10, 10));
+        setPadding(new Insets(PADDING));
         setBackground(
                 new Background(
                         new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-        setPrefWidth(200);
-        setMinHeight(65);
-        setFont(new Font(15));
-        setWrapText(true);
+        setPrefWidth(PREF_WIDTH);
+        setMinHeight(MIN_HEIGHT);
+        setFont(new Font(FONT_SIZE));
+        setWrapText(IS_WRAP_TEXT);
     }
 }

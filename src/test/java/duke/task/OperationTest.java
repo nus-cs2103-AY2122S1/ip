@@ -23,6 +23,7 @@ class OperationTest {
             Operation.DELETE,
             Operation.CLEAR,
             Operation.FIND,
+            Operation.COMING,
             Operation.BYE
         };
         assertArrayEquals(operations, Operation.values());

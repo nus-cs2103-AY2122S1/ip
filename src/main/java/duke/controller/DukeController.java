@@ -2,13 +2,18 @@ package duke.controller;
 
 import java.io.IOException;
 
+import duke.command.Command;
+import duke.constant.Constants;
 import duke.controller.dialog.DukeDialogController;
 import duke.controller.dialog.UserDialogController;
 import duke.listener.Message;
 import duke.storage.Storage;
-import duke.task.Operation;
+import duke.task.TaskList;
+import duke.thread.CustomThreadPool;
+import duke.util.Parser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -17,15 +22,23 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controller for DukeUi. Provides the layout for the other controls.
  */
 public class DukeController extends AnchorPane implements Message {
-    public static final String GREET = "Hello! I'm Duke.\nWhat can I do for you?";
+    private static final String GREET = "Hello! I'm Duke.\nWhat can I do for you?";
+    private static final int ONE_SECOND = 1000;
+
+    private static final CustomThreadPool customThreadPool = new CustomThreadPool(
+            Thread.NORM_PRIORITY
+    );
 
     @FXML
     private ScrollPane chatPane;
+    @FXML
+    private Label comingTasks;
     @FXML
     private VBox dialogContainer;
     @FXML
@@ -33,13 +46,29 @@ public class DukeController extends AnchorPane implements Message {
     @FXML
     private ImageView ivSend;
 
+    private final TaskList taskList;
     private final Storage storage;
 
     /**
      * Constructs a DukeController object.
      */
     public DukeController() {
+        taskList = new TaskList();
         storage = new Storage(this);
+    }
+
+    /**
+     * Passes Stage object to DukeController.
+     *
+     * @param stage Stage is created after FXMLLoader is loaded.
+     */
+    public void setStageListener(Stage stage) {
+        if (stage == null) {
+            return;
+        }
+        stage.setOnCloseRequest(event -> {
+            exit();
+        });
     }
 
     /**
@@ -56,20 +85,23 @@ public class DukeController extends AnchorPane implements Message {
             // will be returned only after it is added by the dialogContainer.
             DukeDialogController preDukeDialogController = new DukeDialogController(content);
             preDukeDialogController.heightProperty()
-                .addListener(observable -> {
-                    try {
-                        DukeDialogController dukeDialogController = new DukeDialogController(
-                                content, preDukeDialogController.getHeight());
-                        dialogContainer.getChildren().add(dukeDialogController);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } finally {
-                        dialogContainer.getChildren().remove(preDukeDialogController);
-                    }
-                });
+                    .addListener(observable -> replaceDukeDialog(content, preDukeDialogController));
             dialogContainer.getChildren().add(preDukeDialogController);
         } catch (IOException e) {
-            e.fillInStackTrace();
+            System.out.println("Duke dialog fxml file not found: " + e.getMessage());
+        }
+    }
+
+    private void replaceDukeDialog(String content, DukeDialogController preDukeDialogController) {
+        try {
+            DukeDialogController dukeDialogController = new DukeDialogController(
+                    content, preDukeDialogController.getHeight());
+            dialogContainer.getChildren().add(dukeDialogController);
+        } catch (IOException e) {
+            System.out.println("Duke dialog fxml file not found: "
+                    + e.getMessage());
+        } finally {
+            dialogContainer.getChildren().remove(preDukeDialogController);
         }
     }
 
@@ -88,20 +120,26 @@ public class DukeController extends AnchorPane implements Message {
             UserDialogController preUserDialogController = new UserDialogController(
                     content);
             preUserDialogController.heightProperty()
-                .addListener(observable -> {
-                    try {
-                        UserDialogController userDialogController = new UserDialogController(
-                                content, preUserDialogController.getHeight());
-                        dialogContainer.getChildren().add(userDialogController);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } finally {
-                        dialogContainer.getChildren().remove(preUserDialogController);
-                    }
-                });
+                    .addListener(observable -> replaceUserDialog(content, preUserDialogController));
             dialogContainer.getChildren().add(preUserDialogController);
         } catch (IOException e) {
-            e.fillInStackTrace();
+            System.out.println("User dialog fxml file not found: " + e.getMessage());
+        }
+    }
+
+    private void replaceUserDialog(String content, UserDialogController preUserDialogController) {
+        if (dialogContainer == null || preUserDialogController == null) {
+            return;
+        }
+        try {
+            UserDialogController userDialogController = new UserDialogController(
+                    content, preUserDialogController.getHeight());
+            dialogContainer.getChildren().add(userDialogController);
+        } catch (IOException e) {
+            System.out.println("User dialog fxml file not found: "
+                    + e.getMessage());
+        } finally {
+            dialogContainer.getChildren().remove(preUserDialogController);
         }
     }
 
@@ -111,7 +149,7 @@ public class DukeController extends AnchorPane implements Message {
     @FXML
     public void initialize() {
         dialogContainer.heightProperty()
-            .addListener(observable -> chatPane.setVvalue(chatPane.getVmax()));
+                .addListener(observable -> chatPane.setVvalue(chatPane.getVmax()));
         ivSend.setPickOnBounds(true);
         ivSend.setOnMouseClicked((MouseEvent e) -> {
             handleInput();
@@ -125,37 +163,48 @@ public class DukeController extends AnchorPane implements Message {
     }
 
     private void init() {
-        storage.loadTasks();
+        storage.loadTasks(taskList);
         addDukeDialog(GREET);
         tfInput.setDisable(false);
+        customThreadPool.execute(() -> {
+            while (true) {
+                handleComingTasks();
+                try {
+                    Thread.sleep(ONE_SECOND);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void handleComingTasks() {
+        Platform.runLater(() -> {
+                int tasks = taskList.findComingTasks(Constants.COMING_TASK_HOUR_RANGE).length;
+                comingTasks.setText(tasks + " coming "
+                        + (taskList.getSize() <= 1 ? "task" : "tasks") + " in "
+                        + Constants.COMING_TASK_HOUR_RANGE + " hours!");
+            }
+        );
     }
 
     private void handleInput() {
         String input = tfInput.getText();
-        addUserDialog(input);
-        Operation operation = storage.getOperation(input);
-        if (operation == Operation.BYE) {
-            exit();
-        } else if (operation == Operation.LIST) {
-            storage.listTasks();
-        } else if (operation == Operation.DONE) {
-            storage.completeTask(input);
-        } else if (operation == Operation.DELETE) {
-            storage.deleteTask(input);
-        } else if (operation == Operation.CLEAR) {
-            storage.clearTasks();
-        } else if (operation == Operation.FIND) {
-            storage.findTasks(input);
-        } else if (operation == Operation.TODO
-            || operation == Operation.DEADLINE
-            || operation == Operation.EVENT) {
-            storage.addTask(input);
-        }
-        storage.saveTasksToFile();
         tfInput.clear();
+        addUserDialog(input);
+        Command c = Parser.parse(input, this);
+        if (c == null) {
+            return;
+        }
+        c.execute(taskList);
+        if (c.isExit()) {
+            exit();
+        }
+        storage.saveTasksToFile(taskList);
     }
 
     private void exit() {
+        customThreadPool.release();
         Platform.exit();
         System.exit(0);
     }

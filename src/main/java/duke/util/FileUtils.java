@@ -43,7 +43,7 @@ public class FileUtils {
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("File not found: " + e.getMessage());
         }
         return contents;
     }

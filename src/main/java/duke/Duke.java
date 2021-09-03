@@ -1,9 +1,11 @@
 package duke;
 
+import duke.command.Command;
 import duke.listener.Message;
 import duke.storage.Storage;
-import duke.task.Operation;
+import duke.task.TaskList;
 import duke.ui.Ui;
+import duke.util.Parser;
 
 /**
  * The project aims to build a product named Duke,
@@ -15,6 +17,7 @@ import duke.ui.Ui;
  */
 public class Duke implements Message {
     private final Ui ui;
+    private final TaskList taskList;
     private final Storage storage;
 
     /**
@@ -22,6 +25,7 @@ public class Duke implements Message {
      */
     public Duke() {
         ui = new Ui();
+        taskList = new TaskList();
         storage = new Storage(this);
     }
 
@@ -29,33 +33,19 @@ public class Duke implements Message {
      * Runs Duke program.
      */
     public void run() {
-        storage.loadTasks();
+        storage.loadTasks(taskList);
         ui.logo();
         ui.greet();
-        String command = ui.readCommand();
-        Operation operation = storage.getOperation(command);
-        while (true) {
-            if (operation == Operation.BYE) {
-                ui.bye();
-                break;
-            } else if (operation == Operation.LIST) {
-                storage.listTasks();
-            } else if (operation == Operation.DONE) {
-                storage.completeTask(command);
-            } else if (operation == Operation.DELETE) {
-                storage.deleteTask(command);
-            } else if (operation == Operation.CLEAR) {
-                storage.clearTasks();
-            } else if (operation == Operation.FIND) {
-                storage.findTasks(command);
-            } else if (operation == Operation.TODO
-                || operation == Operation.DEADLINE
-                || operation == Operation.EVENT) {
-                storage.addTask(command);
+        boolean isExit = false;
+        while (!isExit) {
+            String command = ui.readCommand();
+            Command c = Parser.parse(command, this);
+            if (c == null) {
+                continue;
             }
-            storage.saveTasksToFile();
-            command = ui.readCommand();
-            operation = storage.getOperation(command);
+            c.execute(taskList);
+            storage.saveTasksToFile(taskList);
+            isExit = c.isExit();
         }
     }
 
