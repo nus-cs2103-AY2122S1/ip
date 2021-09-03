@@ -1,7 +1,6 @@
 package duke;
 
 import duke.ui.Ui;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -63,7 +62,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         if (response.equals("Bye!")) {
             new Timer().schedule(new TimerTask() {
-                public void run () { Platform.exit(); }
+                public void run () { System.exit(0); }
             }, 2000);
         }
 
