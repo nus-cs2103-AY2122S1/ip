@@ -21,18 +21,13 @@ import bot.tasks.ToDo;
  * Represents a logger that can read logs and act according to logs provided.
  */
 public class Logger {
-    private BufferedReader bufferedReader;
-
-    /**
-     * Creates a Logger with a specified filepath.
-     *
-     * @param filepath The specified filepath that the logger uses.
-     */
-    public Logger(String filepath) {
-        Path path = Paths.get(filepath);
+    private static BufferedReader bufferedReader;
+    private Logger(String filepath) {}
+    protected static void initialize() {
+        Path path = Paths.get("tasks.txt");
         try {
             if (!Files.exists(path)) {
-                File file = new File(filepath);
+                File file = new File("tasks.txt");
                 file.createNewFile();
             }
             bufferedReader = Files.newBufferedReader(path);
@@ -46,7 +41,7 @@ public class Logger {
      *
      * @param tasks The list of tasks that are due for writing.
      */
-    public void write(List<Task> tasks) {
+    public static void write(List<Task> tasks) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("tasks.txt"));
             StringBuilder builder = new StringBuilder();
@@ -90,7 +85,7 @@ public class Logger {
      *
      * @return A list of Tasks.
      */
-    public List<Task> loadList() {
+    public static List<Task> loadList() {
         List<Task> list = new ArrayList<>();
         try {
             bufferedReader = new BufferedReader(new FileReader("tasks.txt"));

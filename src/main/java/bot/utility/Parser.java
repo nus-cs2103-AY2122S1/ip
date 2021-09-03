@@ -1,109 +1,50 @@
 package bot.utility;
 
-import java.util.List;
-
+import bot.commands.AddCommand;
+import bot.commands.Command;
+import bot.commands.DeleteCommand;
+import bot.commands.DoneCommand;
+import bot.commands.EndCommand;
+import bot.commands.ErrorCommand;
+import bot.commands.FindCommand;
+import bot.commands.ListCommand;
 import bot.error.DukeException;
-import bot.tasks.Deadline;
-import bot.tasks.Event;
-import bot.tasks.Task;
-import bot.tasks.ToDo;
 
 /**
  * Represents a parser that can read and understand what to do with an input String.
  */
 public class Parser {
-    private static final String TASK_FORMAT = "\n\t Got it. I've added this task:\n\t\t%s\n\t ";
-    private static final String DELETE_FORMAT = "\n\t Noted. I've removed this task:\n\t\t%s";
-    private static final String INFORM_FORMAT = "Now you have %d tasks in the list.";
-    protected byte flag = 1;
-    private String input;
-
     /**
-     * Takes an input that parser parses.
-     *
-     * @param input The String that is handled by the parser.
+     * Returns a Command.
      */
-    public void takeInput(String input) {
-        this.input = input;
-    }
-
-    /**
-     * Allows the parser to interact with the ui, logger and the list of tasks when needed.
-     *
-     * @param ui The Ui interacting with the user.
-     * @param logger The logger that keeps track of the logs.
-     * @param list A list of Tasks.
-     * @return A message to user.
-     */
-    public String interactWith(Ui ui, Logger logger, TaskList list) {
-        StringBuilder log = new StringBuilder();
-        String[] words = this.input.trim().split(" ", 2);
-        List<Task> tasks = list.showTasks();
+    public Command parse(String input) {
+        String[] words = input.trim().split(" ", 2);
         try {
             checkInput(words);
             switch (words[0]) {
             case "bye":
-                logger.write(tasks);
-                flag = 0;
-                log.append("\n\t Peace out!");
-                break;
+                return new EndCommand();
             case "list":
-                log.append("\n\t Here are the tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    log.append("\n\t ").append(i + 1).append(". ").append(tasks.get(i));
-                }
-                break;
+                return new ListCommand();
             case "done":
-                int idx = Integer.parseInt(words[1]);
-                Task task = tasks.get(idx - 1);
-                if (task.getStatusIcon().equals("X")) {
-                    log.append("\t This task has been marked as done");
-                } else {
-                    task.markAsDone();
-                    log.append("\n\t Nice! I've marked this task as done:\n\t\t").append(task);
-                }
-                break;
-            case "find":
-                log.append("\n\t Here are the matching tasks in your list:");
-                for (int i = 0; i < tasks.size(); i++) {
-                    if (tasks.get(i).toString().contains(words[1])) {
-                        log.append("\n\t ").append(i + 1).append(". ").append(tasks.get(i));
-                    }
-                }
-                break;
-            case "todo":
-                ToDo newTask = new ToDo(words[1]);
-                tasks.add(newTask);
-                log.append(String.format(TASK_FORMAT, newTask)).append(String.format(INFORM_FORMAT, tasks.size()));
-                break;
-            case "deadline":
-                String[] details = words[1].split(" /by ", 2);
-                Deadline deadline = new Deadline(details[0], details[1]);
-                tasks.add(deadline);
-                log.append(String.format(TASK_FORMAT, deadline)).append(String.format(INFORM_FORMAT, tasks.size()));
-                break;
-            case "event":
-                details = words[1].split(" /at ", 2);
-                Event event = new Event(details[0], details[1]);
-                tasks.add(event);
-                log.append(String.format(TASK_FORMAT, event)).append(String.format(INFORM_FORMAT, tasks.size()));
-                break;
+                return new DoneCommand(words[1]);
             case "delete":
-                idx = Integer.parseInt(words[1]);
-                task = tasks.get(idx - 1);
-                tasks.remove(idx - 1);
-                log.append(String.format(DELETE_FORMAT, task)).append(String.format(INFORM_FORMAT, tasks.size()));
-                break;
+                return new DeleteCommand(words[1]);
+            case "find":
+                return new FindCommand(words[1]);
+            case "todo":
+                return new AddCommand("todo", words[1]);
+            case "deadline":
+                return new AddCommand("deadline", words[1]);
+            case "event":
+                return new AddCommand("event", words[1]);
             default:
-                throw new DukeException(
-                        "\n\t My dictionary does not contain this sophisticated language.\n\t Maybe someday :)");
+                return new ErrorCommand();
             }
         } catch (DukeException e) {
-            log.append(e.getMessage());
+            return new ErrorCommand(e.getMessage());
         }
-        return ui.showToUser(log.toString());
     }
-
     /**
      * Handles DukeExceptions for the chatBot
      * @param log The separate words in a given line
