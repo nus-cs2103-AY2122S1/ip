@@ -30,11 +30,13 @@ public class Add extends DukeCommand {
     /**
      * Executes the Add command. Adds task to the task list and
      * prints a message after adding, and update the local data file.
+     * @return
      */
     @Override
-    public void execute() {
+    public String execute() {
         list.add(task);
-        ui.addTaskMessage(list.size(), task);
+//        ui.addTaskMessage(list.size(), task);
         storage.save(list.getList());
+        return ui.addTaskGUI(list.size(), task);
     }
 }

@@ -32,10 +32,12 @@ public class Done extends DukeCommand {
      * prints a message after marking, and update the local data file.
      *
      * @throws NoSuchTaskException When the task number is invalid.s
+     * @return
      */
     @Override
-    public void execute() throws NoSuchTaskException {
-        ui.markDoneMessage(list.mark(taskNumber));
+    public String execute() throws NoSuchTaskException {
+//        ui.markDoneMessage(list.mark(taskNumber));
         storage.save(list.getList());
+        return ui.markDoneGUI(list.mark(taskNumber));
     }
 }

@@ -18,11 +18,13 @@ public abstract class DukeException extends Exception {
      * @return The formatted error message.
      */
     protected String formatMessage(String msg) {
-        String line = "____________________________________________________________";
+//        String line = "____________________________________________________________";
+//        String indentation = "    ";
+//        String finalMsg = indentation + line + "\n";
+//        finalMsg += indentation + "OI!!! " + msg + "\n";
+//        finalMsg += indentation + line;
+//        return finalMsg;
         String indentation = "    ";
-        String finalMsg = indentation + line + "\n";
-        finalMsg += indentation + "☹ OI!!! " + msg + "\n";
-        finalMsg += indentation + line;
-        return finalMsg;
+        return String.format("%s%s", indentation, msg);
     }
 }

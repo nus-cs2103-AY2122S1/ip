@@ -26,11 +26,13 @@ public class Exit extends DukeCommand {
     /**
      * Executes the exit command. Prints farewellMessage
      * and save the task list onto the local directory.
+     * @return
      */
     @Override
-    public void execute() {
-        ui.farewellMessage();
+    public String execute() {
+//        ui.farewellMessage();
         storage.save(list.getList());
+        return ui.farewellGUI();
     }
 
     /**

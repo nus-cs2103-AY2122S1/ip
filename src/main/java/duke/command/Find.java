@@ -30,9 +30,11 @@ public class Find extends DukeCommand {
      * Executes the Find command. The command tries to find tasks
      * that have descriptions related to the keyword, and add those
      * tasks to a list, then prints the list of related task.
+     * @return
      */
     @Override
-    public void execute() {
-        ui.printRelatedTasks(list.findRelatedTask(keyword));
+    public String execute() {
+//        ui.printRelatedTasks(list.findRelatedTask(keyword));
+        return ui.getRelatedTasks(list.findRelatedTask(keyword));
     }
 }

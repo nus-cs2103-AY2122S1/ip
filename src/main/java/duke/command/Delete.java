@@ -33,11 +33,13 @@ public class Delete extends DukeCommand {
      * prints a message after deleting, and update the local data file.
      *
      * @throws NoSuchTaskException When the task number is invalid.
+     * @return
      */
     @Override
-    public void execute() throws NoSuchTaskException {
+    public String execute() throws NoSuchTaskException {
         Task t = list.delete(taskNumber);
-        ui.deleteTaskMessage(list.size(), t);
+//        ui.deleteTaskMessage(list.size(), t);
         storage.save(list.getList());
+        return ui.deleteTaskGUI(list.size(), t);
     }
 }

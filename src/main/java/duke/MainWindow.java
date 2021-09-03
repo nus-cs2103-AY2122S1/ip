@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,6 +30,8 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Timer timer;
+    private TimerTask task;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -34,6 +39,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(new Label("Welcome to duke you little shit"), new ImageView(dukeImage))
+        );
     }
 
     public void setDuke(Duke d) {
@@ -48,10 +56,14 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(new Label(input), new ImageView(userImage)),
-                DialogBox.getDukeDialog(new Label(response), new ImageView(dukeImage))
-        );
+        if (!response.equals("")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(new Label(input), new ImageView(userImage)),
+                    DialogBox.getDukeDialog(new Label(response), new ImageView(dukeImage))
+            );
+        } else {
+            dialogContainer.getChildren().add(DialogBox.getUserDialog(new Label(input), new ImageView(userImage)));
+        }
         userInput.clear();
     }
 }

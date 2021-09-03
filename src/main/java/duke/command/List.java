@@ -26,9 +26,11 @@ public class List extends DukeCommand {
     /**
      * Executes the List command. Prints the list of
      * tasks currently stored in the program.
+     * @return
      */
     @Override
-    public void execute() {
-        ui.listTasks(list.getList());
+    public String execute() {
+//        ui.listTasks(list.getList());
+        return ui.listTasksGUI(list.getList());
     }
 }
