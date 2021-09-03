@@ -1,6 +1,9 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.tasks.Task;
 
@@ -14,6 +17,11 @@ public class TaskList {
     private enum Format {
         LIST,
         SAVE
+    }
+    
+    @FunctionalInterface
+    interface CheckFormat<S, T> {
+        String apply(S f, T t);
     }
 
     /**
@@ -54,13 +62,16 @@ public class TaskList {
         if (this.tasks.size() == 0) {
             return "No tasks added yet!";
         }
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < this.tasks.size(); i++) {
-            Task t = this.tasks.get(i);
-            res.append(i + 1).append(". ").append(
-                    format == Format.LIST ? t.toString() : t.toSaveString()
-            ).append("\n");
-        }
+        
+        CheckFormat<Format, Task> check = (type, task) -> type == Format.LIST 
+                                                            ? task.toString() 
+                                                            : task.toSaveString();
+
+        String res = IntStream
+                .range(0, this.tasks.size())
+                .mapToObj(i -> (i + 1) + ". " + check.apply(format, this.tasks.get(i)) + "\n")
+                .reduce("", (x, y) -> x + y);       
+        
         return res.substring(0, res.length() - 1);
     }
 
@@ -73,18 +84,14 @@ public class TaskList {
         if (this.tasks.size() == 0) {
             return "No tasks added yet!";
         }
+        
+        String res = IntStream
+                .range(0, this.tasks.size())
+                .filter(i -> this.tasks.get(i).getDescription().toLowerCase().contains(keyword.toLowerCase()))
+                .mapToObj(i -> (i + 1) + ". " + this.tasks.get(i).toString() + "\n")
+                .reduce("", (x, y) -> x + y);
 
-        boolean found = false;
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < this.tasks.size(); i++) {
-            Task t = this.tasks.get(i);
-            if (t.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
-                found = true;
-                res.append(i + 1).append(". ").append(t.toString()).append("\n");
-            }
-        }
-
-        if (!found) {
+        if (res.equals("")) {
             return "No tasks match that keyword :(";
         } else {
             return res.substring(0, res.length() - 1);
