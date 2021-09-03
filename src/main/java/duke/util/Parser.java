@@ -8,6 +8,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
+import duke.exceptions.CommandParamException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.UnknownCommandException;
 
@@ -25,7 +26,7 @@ public class Parser {
      * @throws UnknownCommandException  An exception thrown when the command is not recognizable.
      */
     public static Command decipher(String command)
-            throws EmptyDescriptionException, UnknownCommandException {
+            throws CommandParamException, EmptyDescriptionException, UnknownCommandException {
         Scanner s = new Scanner(command);
         String commandType = s.next();
 
@@ -58,12 +59,18 @@ public class Parser {
             if (!s.hasNext()) {
                 throw new EmptyDescriptionException("delete");
             }
+            if (!s.hasNextInt()) {
+                throw new CommandParamException("delete");
+            }
             int indexToDelete = s.nextInt() - 1;
             return new DeleteCommand(indexToDelete);
 
         case "done":
             if (!s.hasNext()) {
                 throw new EmptyDescriptionException("done");
+            }
+            if (!s.hasNextInt()) {
+                throw new CommandParamException("done");
             }
             int indexToMark = s.nextInt() - 1;
             return new DoneCommand(indexToMark);

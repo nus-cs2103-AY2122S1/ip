@@ -3,6 +3,7 @@ package duke;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.exceptions.CommandParamException;
 import org.junit.jupiter.api.Test;
 
 import duke.commands.AddCommand;
@@ -18,7 +19,7 @@ public class ParserTest {
 
     @Test
     public void addCommandTest_todo_sameResult()
-            throws EmptyDescriptionException, UnknownCommandException {
+            throws CommandParamException, EmptyDescriptionException, UnknownCommandException {
         assertEquals(new AddCommand("todo", "go jogging"),
                 Parser.decipher("todo go jogging"));
 
@@ -36,7 +37,7 @@ public class ParserTest {
 
     @Test
     public void addCommandTest_deadline_sameResult()
-            throws EmptyDescriptionException, UnknownCommandException {
+            throws CommandParamException, EmptyDescriptionException, UnknownCommandException {
         assertEquals(new AddCommand("deadline", "go jogging /by 2021-08-21 2359"),
                 Parser.decipher("deadline go jogging /by 2021-08-21 2359"));
     }
@@ -53,7 +54,7 @@ public class ParserTest {
 
     @Test
     public void addCommandTest_event_sameResult()
-            throws EmptyDescriptionException, UnknownCommandException {
+            throws CommandParamException, EmptyDescriptionException, UnknownCommandException {
         assertEquals(new AddCommand("event", "go jogging /at 2021-08-21 2359"),
                 Parser.decipher("event go jogging /at 2021-08-21 2359"));
     }
@@ -70,7 +71,7 @@ public class ParserTest {
 
     @Test
     public void deleteCommandTest_sameResult()
-            throws EmptyDescriptionException, UnknownCommandException {
+            throws CommandParamException, EmptyDescriptionException, UnknownCommandException {
         assertEquals(new DeleteCommand(0), Parser.decipher("delete 1"));
         assertEquals(new DeleteCommand(1), Parser.decipher("delete 2"));
         assertEquals(new DeleteCommand(2), Parser.decipher("delete 3"));
@@ -88,7 +89,7 @@ public class ParserTest {
 
     @Test
     public void doneCommandTest_sameResult()
-            throws EmptyDescriptionException, UnknownCommandException {
+            throws CommandParamException, EmptyDescriptionException, UnknownCommandException {
         assertEquals(new DoneCommand(0), Parser.decipher("done 1"));
         assertEquals(new DoneCommand(1), Parser.decipher("done 2"));
         assertEquals(new DoneCommand(2), Parser.decipher("done 3"));
@@ -106,7 +107,7 @@ public class ParserTest {
 
     @Test
     public void listCommandTest_sameResult()
-            throws EmptyDescriptionException, UnknownCommandException {
+            throws CommandParamException, EmptyDescriptionException, UnknownCommandException {
         assertEquals(new ListCommand(), Parser.decipher("list"));
     }
 
