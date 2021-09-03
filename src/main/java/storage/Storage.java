@@ -54,7 +54,7 @@ public class Storage {
      *
      * @throws DialogException dialog cannot have the same id while the app is running
      */
-    public Storage() throws DialogException {
+    public Storage() throws IOException {
         this(DEFAULT_FILE_NAME);
     }
 
@@ -64,18 +64,11 @@ public class Storage {
      * @param fileName the name of the file without file type suffix
      * @throws DialogException dialog cannot have the same id while the app is running
      */
-    public Storage(String fileName) throws DialogException {
-        try {
-            if (!haveSaveLocation()) {
-                createSaveLocation();
-            }
-            // the save file to be used as simple text file in this update
-            this.filePath = DIRECTORY_PATH + DATA_PATH + "/" + fileName + ".txt";
-            WRITER = new BufferedWriter(new FileWriter(filePath, true));
-            READER = new BufferedReader(new FileReader(filePath));
-        } catch (Exception e) {
-            Ui.printError(e);
-        }
+    public Storage(String fileName) throws IOException {
+        // the save file to be used as simple text file in this update
+        this.filePath = DIRECTORY_PATH + DATA_PATH + "/" + fileName + ".txt";
+        WRITER = new BufferedWriter(new FileWriter(filePath, true));
+        READER = new BufferedReader(new FileReader(filePath));
     }
 
     /**

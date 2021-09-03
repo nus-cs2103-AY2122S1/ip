@@ -130,7 +130,7 @@ public class Parser {
      */
     public static String taskToSaveFormat(Task task) {
         TaskList.TaskType type = classNameToTaskType(task.getClass().getName());
-        String s = taskTypeToString(type) + " | " + (task.isDone() ? 1 : 0) + " | " + task.description();
+        String s = taskTypeToString(type) + " | " + (task.isDone() ? 1 : 0) + " | " + task.getDescription();
         switch (type) {
         case EVENT:
             Event ev = (Event) task;

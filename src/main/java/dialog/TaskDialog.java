@@ -6,6 +6,7 @@ import parser.Parser;
 import task.Task;
 import task.TimeTask;
 import task.TaskList;
+import ui.ChatPage;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,12 +25,29 @@ import java.util.stream.Collectors;
  */
 public class TaskDialog extends Dialog {
     // This class is a child of dialog class which allow the user to interact with the task
+    private ChatPage chatPage;
     private TaskList taskList;
 
+
     /** private constructor only to be used within the class */
+    private TaskDialog(ChatPage chatPage, ArrayList<String> sentences, TaskList taskList) {
+        super(sentences);
+        this.chatPage = chatPage;
+        this.taskList = taskList;
+    }
+
     private TaskDialog(ArrayList<String> sentences, TaskList taskList) {
         super(sentences);
+        this.chatPage = chatPage;
         this.taskList = taskList;
+    }
+
+    public ChatPage getChatPage() {
+        return this.chatPage;
+    }
+
+    public void setChatPage(ChatPage chatPage) {
+        this.chatPage = chatPage;
     }
 
     /**
@@ -80,7 +98,7 @@ public class TaskDialog extends Dialog {
         addDialog.add("Got it. I've added this task:");
         addDialog.add("  " + task);
         addDialog.add("Now you have " + this.taskList.length() + " tasks in the list.");
-        System.out.println(addDialog);
+        chatPage.printAlicely(addDialog.toString());
     }
 
     /**
@@ -90,7 +108,7 @@ public class TaskDialog extends Dialog {
      * @return TaskDialog with new TaskList stored in it
      * @throws InvalidTimeFormatException time of illegal format (not yyyy-MM-dd)
      */
-    public TaskDialog by(String deadline) throws InvalidTimeFormatException {
+    public TaskDialog getFromDeadline(String deadline) throws InvalidTimeFormatException {
         LocalDate dlDate = Parser.parseTimeString(deadline);
         return new TaskDialog(new ArrayList<>(List.of("task.Deadline: "
                 + dlDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")))),
@@ -111,10 +129,10 @@ public class TaskDialog extends Dialog {
      * @param keyword the keyword to search description
      * @return TaskDialog with TaskList with tasks matching the keyword
      */
-    public TaskDialog with(String keyword) {
+    public TaskDialog getFromKeyword(String keyword) {
         return new TaskDialog(new ArrayList<>(List.of("Find: " + keyword)),
                 new TaskList(new ArrayList<>(this.taskList.getTasks().stream().filter(
-                        (task) -> task.description().contains(keyword)).collect(Collectors.toList()))));
+                        (task) -> task.getDescription().contains(keyword)).collect(Collectors.toList()))));
     }
 
     /**
@@ -143,7 +161,8 @@ public class TaskDialog extends Dialog {
             Dialog markAsDoneDialog = Dialog.generate(id);
             markAsDoneDialog.add("Nice! I've marked this task as done:");
             markAsDoneDialog.add("  " + task);
-            System.out.println(markAsDoneDialog);
+            chatPage.printAlicely(markAsDoneDialog.toString());
+
             // allow duplicates later
             Dialog.archive.remove(id);
         }
@@ -167,7 +186,7 @@ public class TaskDialog extends Dialog {
             removeDialog.add("Noted. I've removed this task:");
             removeDialog.add("  " + task);
             removeDialog.add("Now you have " + this.taskList.length() + " tasks in the list.");
-            System.out.println(removeDialog);
+            chatPage.printAlicely(removeDialog.toString());
             Dialog.archive.remove(id);
             Dialog.archive.remove(task.toString());
         }
@@ -182,12 +201,8 @@ public class TaskDialog extends Dialog {
      */
     @Override
     public String toString() {
-        String dialogs = this.sentences.stream().reduce("    ", (s1, s2) -> s1 + s2 + "\n    ");
+        String dialogs = this.sentences.stream().reduce("", (s1, s2) -> s1 + s2 + "\n");
 
-        return "    ____________________________________________________________\n"
-                + dialogs
-                + "Here are the tasks in your list:\n"
-                + taskList
-                + "    ____________________________________________________________";
+        return dialogs + "Here are the tasks in your list:\n" + taskList;
     }
 }

@@ -51,7 +51,7 @@ public abstract class Task {
      *
      * @return description of the task
      */
-    public String description() {
+    public String getDescription() {
         return this.description;
     }
 

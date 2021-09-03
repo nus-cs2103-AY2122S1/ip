@@ -13,9 +13,14 @@ import task.Event;
 import task.Todo;
 
 
+import ui.ChatPage;
 import ui.Ui;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Command class responsible for executing different command
@@ -67,10 +72,11 @@ public class Command {
      * @throws DialogException dialog cannot have the same id while the app is running
      * @throws IOException     if there is any error dealing with the system IO
      */
-    public void execute(TaskDialog taskDialog, Storage storage) throws DialogException, IOException {
+    public void execute(TaskDialog taskDialog, Storage storage) {
+        ChatPage chatPage = taskDialog.getChatPage();
         switch (commandType) {
         case LIST:
-            System.out.println(taskDialog);
+            chatPage.showCurrentList();
             break;
         case DATE:
             try {
@@ -78,9 +84,9 @@ public class Command {
                     throw new EmptyDescriptionException("The date of deadline cannot be empty.");
                 }
                 String dlString = fullCommand.substring(("date ").length());
-                System.out.println(taskDialog.by(dlString));
+                chatPage.printAlicely(taskDialog.getFromDeadline(dlString).toString());
             } catch (EmptyDescriptionException | EmptyTaggerException | InvalidTimeFormatException e) {
-                Ui.printError(e);
+                chatPage.printError(e);
             }
             break;
         case FIND:
@@ -90,24 +96,25 @@ public class Command {
                             "'list' if you want to see the full list");
                 }
                 String kwString = fullCommand.substring(("find ").length());
-                System.out.println(taskDialog.with(kwString));
+
+                chatPage.printAlicely(taskDialog.getFromKeyword(kwString).toString());
             } catch (EmptyDescriptionException | EmptyTaggerException | InvalidTimeFormatException e) {
-                Ui.printError(e);
+                chatPage.printError(e);
             }
             break;
 
-        case TODO: {
+        case TODO:
             try {
                 if (fullCommand.split(" ").length == 1) {
                     throw new EmptyDescriptionException("The description of a todo cannot be empty.");
                 }
                 taskDialog.addTask(new Todo(fullCommand.substring(("todo ").length())));
             } catch (DialogException | EmptyDescriptionException e) {
-                Ui.printError(e);
+                chatPage.printError(e);
             }
             break;
-        }
-        case DEADLINE: {
+
+        case DEADLINE:
             try {
                 if (fullCommand.split(" ").length == 1) {
                     throw new EmptyDescriptionException("The description of a deadline cannot be empty.");
@@ -119,11 +126,11 @@ public class Command {
                 taskDialog.addTask(new Deadline(dDescription, by));
             } catch (DialogException | EmptyDescriptionException
                     | EmptyTaggerException | InvalidTimeFormatException e) {
-                Ui.printError(e);
+                chatPage.printError(e);
             }
             break;
-        }
-        case EVENT: {
+
+        case EVENT:
             try {
                 if (fullCommand.split(" ").length == 1) {
                     throw new EmptyDescriptionException("The description of an event cannot be empty.");
@@ -135,11 +142,11 @@ public class Command {
                 taskDialog.addTask(new Event(eDescription, at));
             } catch (DialogException | EmptyDescriptionException
                     | EmptyTaggerException | InvalidTimeFormatException e) {
-                Ui.printError(e);
+                chatPage.printError(e);
             }
             break;
-        }
-        case DONE: {
+
+        case DONE:
             try {
                 if (fullCommand.split(" ").length == 1) {
                     throw new EmptyIndexException("The index of done cannot be empty.");
@@ -155,12 +162,11 @@ public class Command {
                     throw new InvalidArgumentException("The number of arguments seems to exceed for command done.");
                 }
                 taskDialog.markTaskAsDone(Integer.parseInt(fullCommand.substring(("done ").length())) - 1);
-            } catch (EmptyIndexException | InvalidArgumentException | InvalidIndexException e) {
-                Ui.printError(e);
+            } catch (EmptyIndexException | InvalidArgumentException | DialogException | InvalidIndexException e) {
+                chatPage.printError(e);
             }
             break;
-        }
-        case DELETE: {
+        case DELETE:
             try {
                 if (fullCommand.split(" ").length == 1) {
                     throw new EmptyIndexException("The index of delete cannot be empty.");
@@ -176,17 +182,24 @@ public class Command {
                     throw new InvalidArgumentException("The number of arguments seems to exceed for command delete.");
                 }
                 taskDialog.deleteTaskByIndex(Integer.parseInt(fullCommand.substring(("delete ").length())) - 1);
-            } catch (EmptyIndexException | InvalidArgumentException | InvalidIndexException e) {
-                Ui.printError(e);
+            } catch (EmptyIndexException | InvalidArgumentException | DialogException | InvalidIndexException e) {
+                chatPage.printError(e);
             }
             break;
-        }
         case COMMANDS:
-            Ui.showCommandList();
+            try {
+                chatPage.printAlicely(Ui.getCommandListText());
+            } catch (DialogException e) {
+                chatPage.printError(e);
+            }
             break;
         case BYE:
-            storage.save(taskDialog.getTaskList());
-            Ui.showGoodBye();
+            try {
+                storage.save(taskDialog.getTaskList());
+                chatPage.exit();
+            } catch (IOException e) {
+                chatPage.printError(e);
+            }
         default:
             // UNREACHABLE: already checked via StringToCommand
             break;
