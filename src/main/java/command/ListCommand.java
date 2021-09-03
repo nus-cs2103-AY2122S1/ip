@@ -33,6 +33,8 @@ public class ListCommand extends Command {
      * @return `Message`.
      */
     public Message getOutputMessage() {
+        assert list != null : "task list should not be null";
+
         String prefix = "Here are the tasks in your list:";
         String kaomoji = "ヽ(°〇°)ﾉ";
 
