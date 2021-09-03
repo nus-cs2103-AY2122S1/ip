@@ -104,6 +104,7 @@ public class TaskList {
     public Task markTask(int index, Storage store)
             throws TaskIsCompleteException, DukeFileException {
         try {
+            assert index < tasks.size() : "Index of Task Out of Bounds!";
             Task taskDone = tasks.get(index);
             if (taskDone.isDone()) {
                 throw new TaskIsCompleteException(index + 1);
@@ -129,6 +130,7 @@ public class TaskList {
     public Task deleteTask(int index, Storage store)
             throws DukeFileException {
         try {
+            assert index < tasks.size() : "Index of Task Out of Bounds!";
             Task deletedTask = tasks.get(index);
             int indexOnList = index + 1;
             store.appendCommand("delete " + indexOnList);

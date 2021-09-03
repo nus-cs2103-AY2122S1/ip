@@ -63,25 +63,32 @@ public class Storage {
                 String command = lineSplitter.next().trim();
                 try {
                     if (command.equals("todo")) {
-                        String description = lineSplitter.nextLine();
-                        taskList.add(new ToDo(description.trim()));
+                        String description = lineSplitter.nextLine().trim();
+                        assert !description.equals("") : "Data file is corrupted! No description after todo.";
+                        taskList.add(new ToDo(description));
 
                     } else if (command.equals("deadline")) {
-                        String description = lineSplitter.nextLine();
+                        String description = lineSplitter.nextLine().trim();
+                        assert !description.equals("") : "Data file is corrupted! No description after deadline.";
                         String[] parts = description.split("/by");
                         taskList.add(new Deadline(parts[0].trim(), parts[1].trim()));
 
                     } else if (command.equals("event")) {
-                        String description = lineSplitter.nextLine();
+                        String description = lineSplitter.nextLine().trim();
+                        assert !description.equals("") : "Data file is corrupted! No description after event";
                         String[] parts = description.split("/at");
                         taskList.add(new Event(parts[0].trim(), parts[1].trim()));
 
                     } else if (command.equals("done")) {
+                        assert lineSplitter.hasNextInt() : "Data file is corrupted! No index after done.";
                         int indexToMark = lineSplitter.nextInt();
+                        assert indexToMark <= taskList.size() : "Data file is corrupted! Index Out of Bounds";
                         taskList.get(indexToMark - 1).markAsDone();
 
                     } else if (command.equals("delete")) {
+                        assert lineSplitter.hasNext() : "Data file is corrupted";
                         int indexToDelete = lineSplitter.nextInt();
+                        assert indexToDelete <= taskList.size() : "Data file is corrupted! Index Out of Bounds";
                         taskList.remove(indexToDelete - 1);
 
                     }
