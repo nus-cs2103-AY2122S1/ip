@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+/**
+ *  Runs an application that manages tasks.
+ *  Tasks can be added, deleted or marked as done.
+ */
 
 public class Duke {
     private TaskList tasks;

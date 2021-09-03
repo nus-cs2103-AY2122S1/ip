@@ -16,6 +16,13 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * Reads data from tasks' database and loads them
+     * into an ArrayList to be parsed.
+     *
+     * @return arraylist of string representation of saved tasks
+     * @throws IOException
+     */
     public ArrayList<String> load() throws IOException {
         File directory = new File("data");
         if (!directory.exists()) {
@@ -31,6 +38,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Writes all the tasks in TaskList into the database.
+     *
+     * @param list of tasks
+     * @throws IOException
+     */
     public void saveTask(TaskList list) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         for (Task t : list.getList()) {
