@@ -39,7 +39,7 @@ public class Task {
     }
 
     public String toSaveString() {
-        return isDone ? "1" : "0" + "|" + this.description;
+        return (isDone ? "1" : "0") + "|" + this.description;
     }
 
     /**

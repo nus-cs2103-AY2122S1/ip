@@ -27,7 +27,7 @@ public class Event extends Task {
      * @param at starts at
      */
     public Event(String description, String isDone, LocalDateTime at) {
-        super(description, isDone == "1");
+        super(description, isDone.equals("1"));
         this.at = at;
     }
 

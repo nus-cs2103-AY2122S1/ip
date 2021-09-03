@@ -7,7 +7,7 @@ public class Todo extends Task {
     }
 
     public Todo(String task, String isDone) {
-        super(task, isDone == "1");
+        super(task, isDone.equals("1"));
     }
 
     @Override

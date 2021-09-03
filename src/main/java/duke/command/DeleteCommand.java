@@ -2,6 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -30,6 +31,7 @@ public class DeleteCommand extends Command {
      * @param storage current storage
      * @throws IOException if writeToFile has a file error
      *
+     * @return
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
@@ -42,6 +44,20 @@ public class DeleteCommand extends Command {
             ui.printDelete(display, taskList.getList().size());
         } catch (ArrayIndexOutOfBoundsException e) {
             ui.printError("Eh... No such task found. Cannot delete.", "(＃￣ω￣)");
+        }
+    }
+
+    @Override
+    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
+        try {
+            if (taskNo == -1 || taskNo + 1 > taskList.getList().size()) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
+            String display = taskList.delete(this.taskNo);
+            storage.writeToFile(taskList);
+            return rf.formatDelete(display, taskList.getList().size());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return rf.formatError("Eh... No such task found. Cannot delete.", "(＃￣ω￣)");
         }
     }
 }

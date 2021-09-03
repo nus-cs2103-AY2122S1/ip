@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -32,11 +33,11 @@ public class ErrorCommand extends Command {
 
     /**
      * Executes Error Command to print error response
-     *
-     * @param taskList current list
+     *  @param taskList current list
      * @param ui current ui to access print responses
      * @param storage current storage
      *
+     * @return
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
@@ -44,6 +45,24 @@ public class ErrorCommand extends Command {
             ui.printError(this.error, this.emoticon);
         } else {
             ui.printError(this.error);
+        }
+    }
+
+    /**
+     * Executes Error Command to returns error response
+     *
+     *  @param taskList current list
+     * @param rf Response Formatter
+     * @param storage current storage
+     *
+     * @return
+     */
+    @Override
+    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage) {
+        if (this.emoticon != null) {
+            return rf.formatError(this.error, this.emoticon);
+        } else {
+            return  rf.formatError(this.error);
         }
     }
 }

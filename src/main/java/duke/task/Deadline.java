@@ -27,7 +27,7 @@ public class Deadline extends Task {
      * @param by due date
      */
     public Deadline(String description, String isDone, LocalDateTime by) {
-        super(description, isDone == "1");
+        super(description, isDone.equals("1"));
         this.by = by;
     }
 

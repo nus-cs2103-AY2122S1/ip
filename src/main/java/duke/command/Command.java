@@ -2,6 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -31,6 +32,8 @@ public abstract class Command {
      * @param ui current ui to access print responses
      * @param storage current storage
      * @throws IOException for commands that needs to write to storage file
+     * @return
      */
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws IOException;
+    public abstract String execute(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException;
 }
