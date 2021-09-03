@@ -45,7 +45,7 @@ public class Storage {
             assert !line.equals("") : "line should not be an empty string";
             String[] segments = line.split(" \\| ");
             Task t;
-            switch(segments[0]) {
+            switch (segments[0]) {
                 case "T":
                     t = new Todo("todo " + segments[2]);
                     break;
@@ -54,6 +54,9 @@ public class Storage {
                     break;
                 case "E":
                     t = new Event(segments[2], LocalDate.parse(segments[3]));
+                    break;
+                case "F":
+                    t = new FixedTask(segments[2], segments[3]);
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + segments[0]);
@@ -83,6 +86,9 @@ public class Storage {
             } else if (t instanceof Deadline) {
                 line += String.format("D | %d | %s | %s\n",
                         t.isDone ? 1 : 0, t.description, ((Deadline)t).by);
+            } else if (t instanceof FixedTask) {
+                line += String.format("F | %d | %s | %s\n",
+                        t.isDone ? 1 : 0, t.description, ((FixedTask)t).fixedDuration);
             }
             fw.write(line);
         }
