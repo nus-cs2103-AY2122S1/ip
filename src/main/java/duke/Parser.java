@@ -46,8 +46,8 @@ class Parser {
     }
 
     private String[] finishTask(String input) {
-        int ind = Integer.parseInt(input.split(" ", 2)[1]);
-        Task task = tasks.get(ind - 1);
+        int index = Integer.parseInt(input.split(" ", 2)[1]);
+        Task task = tasks.get(index - 1);
         task.setDone();
         return new String[]{"Nice! I've marked this task as done:", "  " + task};
     }
