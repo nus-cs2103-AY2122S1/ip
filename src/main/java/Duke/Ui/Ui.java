@@ -16,6 +16,7 @@ public class Ui {
 
     /**
      * The showWelcome method after showLogo
+     * @return String Welcome message
      */
     public String showWelcome(){
         return "Hello! I'm Duke \n" +
@@ -24,13 +25,15 @@ public class Ui {
 
     /**
      * The method of exit
+     * @return String
      */
-    public static String exit() {
+    public String exit() {
         return "Bye. Hope to see you again soon!";
     }
 
     /**
      * The method of showLoadingError
+     * @return String of showLoadingError
      */
     public String showLoadingError() {
         return "Loading error! please try again";

@@ -33,11 +33,18 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * The metod of setDuke, start with Duke Greeting
+     * @param d
+     */
     public void setDuke(Duke d) {
         duke = d;
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(duke.getUi().showWelcome(), dukeImage));
     }
-    
+
+    /**
+     * The Method of handleUserInput
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();

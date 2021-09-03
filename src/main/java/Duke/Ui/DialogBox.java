@@ -58,10 +58,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * The method for getUserDialog
+     * @param text
+     * @param img
+     * @return DialogBix for User Dialog
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * The method of geyDukeDialog
+     * @param text
+     * @param img
+     * @return DialogBox of Duke
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
