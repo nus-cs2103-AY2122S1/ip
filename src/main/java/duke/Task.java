@@ -43,9 +43,9 @@ public abstract class Task {
     }
 
     /**
-     * Gets the task type.
+     * Gets the character representing the task type.
      *
-     * @return Task type.
+     * @return The character representing the task type.
      */
     public abstract char getTaskType();
 
@@ -79,7 +79,7 @@ public abstract class Task {
      * Checks if two tasks are equal based on their description and completion status.
      *
      * @param o
-     * @return
+     * @return A boolean indicating whether the object being compared to is equal to the task.
      */
     @Override
     public boolean equals(Object o) {

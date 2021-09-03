@@ -2,47 +2,35 @@ package duke;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Locale;
 
 public class Parser {
-    private TaskList taskList;
-    private UserInterface userInterface;
-    private Storage storage;
-
-    /**
-     * Creates a Parser Object.
-     *
-     * @param taskList
-     * @param userInterface
-     * @param storage
-     */
-    public Parser(TaskList taskList, UserInterface userInterface, Storage storage) {
-        this.storage = storage;
-        this.taskList = taskList;
-        this.userInterface = userInterface;
-    }
-
     /**
      * Parses user input and executes the appropriate commands.
      *
-     * @param input
+     * @param input The input entered by the user.
      * @throws InvalidCommandException
      * @throws MissingToDoDescriptionException
      * @throws MissingDeadlineDescriptionException
      * @throws MissingEventDescriptionException
      */
-    public void parse(String input) throws InvalidCommandException,
-            MissingToDoDescriptionException, MissingDeadlineDescriptionException,
+    public String parse(String input, TaskList taskList, UserInterface userInterface, Storage storage)
+            throws InvalidCommandException,
+            MissingToDoDescriptionException,
+            MissingDeadlineDescriptionException,
             MissingEventDescriptionException {
         try {
+            input = input.trim().toLowerCase();
+
             if (input.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
+                return "Bye. Hope to see you again soon!";
             } else if (input.equals("list")){
-                userInterface.showList();
+                return userInterface.showList(taskList);
             } else if (input.contains("done")) {
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
                 taskList.markAsDone(index);
-                userInterface.showCompletedTask(taskList.getTask(index));
                 storage.write();
+                return userInterface.showCompletedTask(taskList.getTask(index));
             } else if (input.contains("todo") || input.contains("deadline") || input.contains("event")){
                 if (input.contains("todo") && input.length() == 4) {
                     throw new MissingToDoDescriptionException();
@@ -52,23 +40,23 @@ public class Parser {
                     throw new MissingEventDescriptionException();
                 } else {
                     Task t = taskList.addItem(input);
-                    userInterface.showAddedTask(t);
                     storage.write();
+                    return userInterface.showAddedTask(t, taskList);
                 }
             } else if (input.contains("delete")) {
                 int index = Integer.parseInt(input.split(" " )[1]) - 1;
                 Task t = taskList.deleteItem(index);
-                userInterface.showDeletedTask(t);
                 storage.write();
+                return userInterface.showDeletedTask(t, taskList);
             } else if (input.contains("find")) {
                 String keyword = input.split(" ")[1];
                 List<Task> results = taskList.find(keyword);
-                userInterface.showResults(results);
+                return userInterface.showResults(results);
             } else {
                 throw new InvalidCommandException();
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
     }
 }

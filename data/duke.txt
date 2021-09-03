@@ -1,8 +1,5 @@
-E|1|project meeting|2021-12-08
-D|1|return book|2021-11-07
-T|1|eat breakfast
-E|1|project work|2021-10-05
-T|1|cook an egg
-D|0|return book|2021-11-07
-E|1|sleep|2021-10-03
-E|0|sleep more|2021-10-09
+T|1|eat bfast
+T|1|eat
+T|0|eat again
+T|1|eat until sleep
+D|0|eat|2021-01-01

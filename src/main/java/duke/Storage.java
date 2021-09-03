@@ -16,7 +16,7 @@ public class Storage {
     /**
      * Creates a Storage Object with the associated file path.
      *
-     * @param filePath
+     * @param filePath The file path to the text file containing the stored tasks.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
