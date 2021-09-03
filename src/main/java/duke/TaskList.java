@@ -112,12 +112,4 @@ public class TaskList {
     public int getNumTask() {
         return numTask;
     }
-//    private void writeToFile(String text) throws IOException {
-//
-//        fw.write(text);
-//        fw.close();
-//    }
-
-
-
 }

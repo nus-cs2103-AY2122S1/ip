@@ -14,10 +14,10 @@ public class Task {
 
     @Override
     public String toString() {
-        return "[" + getStatus() + "] " + name;
+        return "[" + isDone() + "] " + name;
     }
 
-    public String getStatus() {
+    public String isDone() {
         return (isDone ? "X" : " ");
     }
 
@@ -25,7 +25,7 @@ public class Task {
         this.isDone = true;
     }
 
-    public String getSavedAs() {
+    public String toSavedAs() {
         return (this.type + "|" + this.isDone + "|" + this.name);
     }
 }

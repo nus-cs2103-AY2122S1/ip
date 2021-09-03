@@ -50,7 +50,7 @@ public class Event extends Task {
      * @return string representation of saved Event
      */
     @Override
-    public String getSavedAs() {
-        return (super.getSavedAs() + "|" + this.at);
+    public String toSavedAs() {
+        return (super.toSavedAs() + "|" + this.at);
     }
 }
