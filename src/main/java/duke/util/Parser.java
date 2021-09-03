@@ -8,6 +8,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
+import duke.commands.SortCommand;
 import duke.exceptions.CommandParamException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.UnknownCommandException;
@@ -31,6 +32,9 @@ public class Parser {
         String commandType = s.next();
 
         switch (commandType) {
+        case "sort":
+            return new SortCommand();
+
         case "list":
             return new ListCommand();
 
