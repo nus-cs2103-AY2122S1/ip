@@ -11,10 +11,10 @@ import duke.task.Task;
 public class Ui {
 
     /** The indentation for 4 spaces */
-    public final static String INDENT_1 = "    ";
+    public final static String INDENT_MAIN = "    ";
 
     /** The indentation for 6 spaces */
-    public final static String INDENT_2 = "      ";
+    public final static String INDENT_SUB = "      ";
 
     /** The divider line */
     private final static String DIVIDER = "  ---------------------------------------------";
@@ -41,8 +41,8 @@ public class Ui {
      * Prints the greeting message.
      */
     public static String greetUser() {
-        return INDENT_1 + "Hello! I'm Duke :)\n"
-                + INDENT_1 + "What can I do for you?";
+        return INDENT_MAIN + "Hello! I'm Duke :)\n"
+                + INDENT_MAIN + "What can I do for you?";
 
     }
 
@@ -51,7 +51,7 @@ public class Ui {
      */
     public String sayBye() {
         scanner.close();
-        return INDENT_1 + "Bye! Hope to see you again soon :)";
+        return INDENT_MAIN + "Bye! Hope to see you again soon :)";
     }
 
     /**
@@ -62,14 +62,14 @@ public class Ui {
      */
     public String listNumber(int num, Task temp) {
 
-        return INDENT_2 + (num + 1) + ". " + temp.toString() + System.lineSeparator();
+        return INDENT_SUB + (num + 1) + ". " + temp.toString() + System.lineSeparator();
     }
 
     /**
      * Prints the message for listing tasks.
      */
     public String showList() {
-        return INDENT_1 + "Here are the tasks in your list:";
+        return INDENT_MAIN + "Here are the tasks in your list:";
     }
 
     /**
@@ -78,8 +78,8 @@ public class Ui {
      * @param temp The task which is done.
      */
     public String doneTask(Task temp) {
-        return INDENT_1 + "YAY good job for completing the task :)\n"
-                + INDENT_1 + "I've marked it as done:\n" + INDENT_2
+        return INDENT_MAIN + "YAY good job for completing the task :)\n"
+                + INDENT_MAIN + "I've marked it as done:\n" + INDENT_SUB
                         + temp.toString();
     }
 
@@ -89,8 +89,8 @@ public class Ui {
      * @param task The task to be removed.
      */
     public String removeTask(Task task) {
-        return INDENT_1 + "Sure! I've removed this task:\n"
-                + INDENT_2 + task.toString();
+        return INDENT_MAIN + "Sure! I've removed this task:\n"
+                + INDENT_SUB + task.toString();
     }
 
     /**
@@ -98,14 +98,14 @@ public class Ui {
      */
     public String findTask() {
 
-        return INDENT_1 + "I have found these matching tasks!!";
+        return INDENT_MAIN + "I have found these matching tasks!!";
     }
 
     /**
      * Prints message for failure of finding any matching tasks.
      */
     public String noSuchTask() {
-        return INDENT_1 + "I cannot find any matching tasks :(";
+        return INDENT_MAIN + "I cannot find any matching tasks :(";
     }
 
     /**
@@ -114,8 +114,8 @@ public class Ui {
      * @param task The task to be added.
      */
     public String addTask(Task task) {
-        return INDENT_1 + "Sure! I've added this task:\n"
-                + INDENT_2 + task.toString();
+        return INDENT_MAIN + "Sure! I've added this task:\n"
+                + INDENT_SUB + task.toString();
     }
 
     /**
@@ -124,7 +124,7 @@ public class Ui {
      * @param taskList The list of tasks.
      */
     public String numberOfTasks(TaskList taskList) {
-        String numberOfTasks = INDENT_1 + "Now you have " + taskList.size()
+        String numberOfTasks = INDENT_MAIN + "Now you have " + taskList.size()
                 + (taskList.size() == 1 ? " task" : " tasks")
                         + " in the list.";
         return numberOfTasks;
@@ -149,7 +149,7 @@ public class Ui {
      * @return The string containing error message.
      */
     public String commandError() {
-        return INDENT_1 + "☹ OH NO I'm sorry, but I don't "
+        return INDENT_MAIN + "OH NO I'm sorry, but I don't "
                 + "know what that means :-(";
     }
 
@@ -159,9 +159,9 @@ public class Ui {
      * @return The string containing the error message.
      */
     public String dateError() {
-        return INDENT_1 + "OH NO :( I can't seem to understand "
+        return INDENT_MAIN + "OH NO :( I can't seem to understand "
                 + "the date you have entered.\n"
-                        + INDENT_1 + "I can only understand if it "
+                        + INDENT_MAIN + "I can only understand if it "
                                 + "is in  the yyyy-mm-dd format..";
     }
 
@@ -171,9 +171,9 @@ public class Ui {
      * @return The string containing the error message.
      */
     public String dateTimeError() {
-        return INDENT_1 + "OH NO :( I can't seem "
+        return INDENT_MAIN + "OH NO :( I can't seem "
                 + "to understand the date and time you have entered.\n"
-                        + INDENT_1 + "I can only understand if it is in "
+                        + INDENT_MAIN + "I can only understand if it is in "
                                 + "yyyy-MM-dd HH:mm format..";
     }
 
@@ -186,7 +186,7 @@ public class Ui {
      * @return The string containing the error message.
      */
     public String incorrectAtOrBy(String taskType) {
-        return INDENT_1 + "☹ OOPS!!! The "
+        return INDENT_MAIN + "OOPS!!! The "
                 + (taskType.equals("event")
                         ? "period which the event occurs"
                         : "deadline") + " is not inputted correctly. Use "
@@ -201,7 +201,7 @@ public class Ui {
      * @return The string containing the error message.
      */
     public String noDescription(String taskType) {
-        return INDENT_1 + "☹ OOPS!!! The description of "
+        return INDENT_MAIN + "OOPS!!! The description of "
                 + (taskType.equals("event") ? "an " : "a ")
                         + taskType + " cannot be empty.";
     }
@@ -213,7 +213,7 @@ public class Ui {
      * @return The string containing the error message.
      */
     public String deleteInvalidError() {
-        return INDENT_1 + "☹ OOPS!!! There is no "
+        return INDENT_MAIN + "OOPS!!! There is no "
                 + "corresponding task to be deleted.";
     }
 
@@ -224,7 +224,7 @@ public class Ui {
      * @return The string containing the error message.
      */
     public String deleteNoNumError() {
-        return INDENT_1 + "☹ OOPS!!! The task to be deleted"
+        return INDENT_MAIN + "OOPS!!! The task to be deleted"
                 + "is not indicated!!";
     }
 
@@ -244,7 +244,7 @@ public class Ui {
      * @return The string containing the error message.
      */
     public String doneError() {
-        return INDENT_1 + "☹ OOPS!!! There is no corresponding task to be "
+        return INDENT_MAIN + "OOPS!!! There is no corresponding task to be "
                 + "marked done.";
     }
 
@@ -256,7 +256,7 @@ public class Ui {
      */
     public String doneNoNumError() {
 
-        return INDENT_1 + "☹ OOPS!!! The task to be marked done is not indicated!!";
+        return INDENT_MAIN + "OOPS!!! The task to be marked done is not indicated!!";
     }
 
     /**

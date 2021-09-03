@@ -48,10 +48,9 @@ public class Parser {
     public Command parse(String command) throws DukeException {
         String[] splitInput = command.trim().split(" +");
         switch (splitInput[0]) {
-
+        //fall through
         case "bye":
             return new ExitCommand(command);
-
 
         case "list":
             if (splitInput.length > 1) {

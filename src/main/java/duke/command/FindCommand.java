@@ -34,7 +34,7 @@ public class FindCommand extends Command {
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).toString().contains(keyWord)) {
                 count++;
-                matchingTasks += Ui.INDENT_2 + count + ". " + tasks.get(i)
+                matchingTasks += Ui.INDENT_SUB + count + ". " + tasks.get(i)
                         + System.lineSeparator();
             }
         }

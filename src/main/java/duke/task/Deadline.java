@@ -34,7 +34,6 @@ public class Deadline extends Task {
      * @return The string representing the date.
      */
     public String changeDateFormat() {
-
         return by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
@@ -45,13 +44,11 @@ public class Deadline extends Task {
      */
     @Override
     public String taskIndicator() {
-
         return "D";
     }
 
 
     public String getBy() {
-
         return this.by.toString();
     }
 
