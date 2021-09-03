@@ -12,7 +12,7 @@ import duke.task.Task;
 /** A wrapper class that holds the list of Tasks. */
 public class TaskList {
     /** The actual list holding the Tasks. */
-    private ArrayList<Task> list;
+    private final ArrayList<Task> list;
 
     /** Default TaskList constructor. */
     public TaskList() {
@@ -33,7 +33,7 @@ public class TaskList {
      *
      * @param task The Task object.
      */
-    public void add(Task task) {
+    public void addTask(Task task) {
         list.add(task);
     }
 
@@ -42,7 +42,7 @@ public class TaskList {
      *
      * @return Size of the list.
      */
-    public int size() {
+    public int getSize() {
         return list.size();
     }
 
@@ -84,7 +84,7 @@ public class TaskList {
      */
     public String[] toStringArray() {
         String[] copy = list.stream().map(Object::toString).toArray(String[]::new);
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < getSize(); i++) {
             copy[i] = (i + 1) + "." + copy[i];
         }
         return copy;
@@ -110,7 +110,7 @@ public class TaskList {
      * @param consumer The action to be performed on the Task objects in the list.
      */
     public void forEach(Consumer<Task> consumer) {
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < getSize(); i++) {
             consumer.accept(list.get(i));
         }
     }
@@ -123,7 +123,7 @@ public class TaskList {
      */
     public TaskList filter(Function<Task, Boolean> predicate) {
         ArrayList<Task> res = new ArrayList<>();
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < getSize(); i++) {
             if (predicate.apply(list.get(i))) {
                 res.add(list.get(i));
             }

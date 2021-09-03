@@ -87,7 +87,7 @@ public class Event extends DatedTask {
      */
     private static String parseToDates(String description) throws BadInputFormatException {
         String[] tokens = description.split(" /at ");
-        if (tokens.length < 2) {
+        if (tokens.length < 2) { // Guard clause
             throw new BadInputFormatException();
         }
         return tokens[1];
@@ -134,7 +134,7 @@ public class Event extends DatedTask {
      */
     private static String parseToDescription(String description) throws BadInputFormatException {
         String[] tokens = description.split(" /at ");
-        if (tokens.length < 2) {
+        if (tokens.length < 2) { // Guard clause
             throw new BadInputFormatException();
         }
         return tokens[0];

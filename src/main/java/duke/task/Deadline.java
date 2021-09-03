@@ -72,7 +72,7 @@ public class Deadline extends DatedTask {
      */
     private static Date parseToDate(String description) throws BadInputFormatException, InvalidDateException {
         String[] tokens = description.split(" /by ");
-        if (tokens.length < 2) {
+        if (tokens.length < 2) { // Guard clause
             throw new BadInputFormatException();
         }
         return Date.of(tokens[1]);
@@ -88,7 +88,7 @@ public class Deadline extends DatedTask {
      */
     private static String parseToDescription(String description) throws BadInputFormatException {
         String[] tokens = description.split(" /by ");
-        if (tokens.length < 2) {
+        if (tokens.length < 2) { // Guard clause
             throw new BadInputFormatException();
         }
         return tokens[0];

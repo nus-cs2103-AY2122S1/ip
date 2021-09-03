@@ -21,11 +21,8 @@ public class Storage {
     /** The FileWriter object. */
     private static FileWriter fileWriter;
 
-    /** The JSONParser object. */
-    private static JSONParser jsonParser;
-
     /** The file path to read and write from. */
-    private String filePath;
+    private final String filePath;
 
     /** Default Storage constructor. Use for JUnit tests ONLY.*/
     protected Storage() {
@@ -96,7 +93,7 @@ public class Storage {
     @SuppressWarnings("unchecked") // Typecast warning due to JSON simple library. Type safety guaranteed. Just use it.
     public ArrayList<Task> parseFromJson(String filePath) {
         ArrayList<Task> tasks = new ArrayList<>();
-        jsonParser = new JSONParser();
+        JSONParser jsonParser = new JSONParser();
         try (FileReader reader = new FileReader(filePath)) {
             JSONArray arr = (JSONArray) jsonParser.parse(reader);
             arr.forEach((task) -> {
