@@ -13,7 +13,7 @@ public class End extends Command {
 
     @Override
     public void execute(TaskList taskList, UiInterface ui, Storage storage) {
-        ui.sayBye(END_MESSAGE);
+        ui.showBye(END_MESSAGE);
     }
 
     @Override
