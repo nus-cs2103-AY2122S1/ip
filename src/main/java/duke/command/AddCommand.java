@@ -70,31 +70,25 @@ public class AddCommand extends Command {
 
         // Parses description and adds the corresponding task to tasks.
         if (userCommand.equals(Commands.TODO.getCommand())) {
-            // Adds to-do task to tasks.
             tasks.add(new Todo(description));
         } else if (userCommand.equals(Commands.DEADLINE.getCommand())) {
             // Parses description into task description and time.
             String[] descriptions =
                     Parser.parseUserDescriptionInput(description, Descriptors.BY, separator, Commands.DEADLINE);
 
-            // Convert time to LocalDate.
             LocalDate localDate = Parser.toLocalDate(descriptions[1]);
 
-            // Adds duke.task.Deadline task to tasks.
             tasks.add(new Deadline(descriptions[0], localDate));
         } else {
             // Parses description into task description and time.
             String[] descriptions =
                     Parser.parseUserDescriptionInput(description, Descriptors.AT, separator, Commands.EVENT);
 
-            // Convert time to LocalDate.
             LocalDate localDate = Parser.toLocalDate(descriptions[1]);
 
-            // Adds duke.task.Event task to tasks.
             tasks.add(new Event(descriptions[0], localDate));
         }
 
-        // Returns response to user after successfully adding task to tasks.
         return ui.getAddSuccessMessage(tasks.get(tasks.size() - 1), tasks.size());
     }
 
@@ -113,12 +107,8 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
-            // Add task according to user specifications.
             String output = this.addTask(tasks, ui, '/');
-
-            // Saves edited duke.TaskList to save file.
             storage.saveTasksToData(tasks);
-
             return output;
         } catch (DukeException dukeException) {
             return dukeException.toString();

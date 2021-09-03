@@ -63,7 +63,6 @@ public class DateCommand extends Command {
         LocalDate localDate = Parser.toLocalDate(dateString);
         String formattedDateString = Parser.parseLocalDate(localDate);
 
-        // String to notify users of the date they are searching for.
         String notification = ui.getDateListSuccessMessage(formattedDateString);
 
         // Print Deadlines and Events with LocalDate that matches date input from user.

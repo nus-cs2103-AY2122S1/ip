@@ -86,7 +86,9 @@ public class Parser {
     private static String padZeros(String original, int expected) throws DukeException {
         String output = original;
         if (original.length() < expected) {
-            for (int i = 0; i < (expected - original.length()); i++) {
+            // Number of chars needed to meet desired length of output string.
+            int missingCount = expected - original.length();
+            for (int i = 0; i < missingCount; i++) {
                 output = "0" + original;
             }
         } else if (original.length() > expected) {
@@ -130,10 +132,10 @@ public class Parser {
             throw new DukeException(Ui.exceptionInvalidDateTimeFormat());
         }
 
+        // Convert user date input into dd-mm-yyyy format
         String date = padZeros(split[0], 2);
         String month = padZeros(split[1], 2);
         String year = padZeros(split[2], 4);
-
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(year).append("-");
         stringBuilder.append(month).append("-");

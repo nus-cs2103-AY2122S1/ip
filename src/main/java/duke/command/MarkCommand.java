@@ -54,10 +54,8 @@ public class MarkCommand extends Command {
             throw new DukeException(Ui.exceptionInvalidIndexForMarking());
         }
 
-        // Marks task at index as done.
         tasks.get(idx).markAsDone();
 
-        // Returns response to user after successfully marking task at index as done.
         return ui.getMarkSuccessMessage(tasks.get(idx));
 
     }
@@ -76,12 +74,8 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
-            // Marks duke.task.Task at user specified index in duke.TaskList.
             String output = this.markTask(tasks, ui);
-
-            // Saves edited duke.TaskList to save file.
             storage.saveTasksToData(tasks);
-
             return output;
         } catch (DukeException dukeException) {
             return dukeException.toString();

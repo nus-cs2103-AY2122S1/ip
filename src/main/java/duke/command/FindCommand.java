@@ -45,13 +45,9 @@ public class FindCommand extends Command {
         // Extract search keyword from 1 space after "find" command in user input.
         String keyword = this.userInput.substring(Commands.FIND.getLength() + 1);
 
-        // String standard response for search begin.
-        String begin = ui.getFindBeginMessage();
-
         StringBuilder foundTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-
             // contains() performs case-sensitive search for keyword in task description.
             if (task.getDescription().contains(keyword)) {
                 // Add 1 as display index is 1-based while TaskList index is 0-based.
@@ -62,7 +58,8 @@ public class FindCommand extends Command {
             }
         }
 
-        // String standard response for search success.
+        // Obtain standard responses from ui object.
+        String begin = ui.getFindBeginMessage();
         String success = ui.getFindSuccessMessage(counter, keyword);
 
         return begin + "\n" + foundTasks + success;

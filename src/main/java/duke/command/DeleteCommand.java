@@ -55,10 +55,8 @@ public class DeleteCommand extends Command {
             throw new DukeException(Ui.exceptionInvalidIndexForDelete());
         }
 
-        // Deletes task at index and obtain the deleted task
         Task deletedTask = tasks.remove(idx);
 
-        // Returns response to user after successfully deleting task at index.
         return ui.getDeleteSuccessMessage(deletedTask, tasks.size());
     }
 
@@ -76,12 +74,8 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
-            // Deletes task at user specified index.
             String output = this.deleteTask(tasks, ui);
-
-            // Saves edited duke.TaskList to save file.
             storage.saveTasksToData(tasks);
-
             return output;
         } catch (DukeException dukeException) {
             return dukeException.toString();
