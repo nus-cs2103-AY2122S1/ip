@@ -3,7 +3,7 @@ package command;
 import exception.MissingCommandDescriptionException;
 import message.Message;
 import tasklist.TaskList;
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates a done command after it is parsed from user input.
@@ -25,7 +25,7 @@ public class FindCommand extends Command {
      */
     public static FindCommand createCommand(String keyword) throws MissingCommandDescriptionException {
         // Validate before creating the command
-        Command.validateDescriptionNotEmpty(DukeCommandTypeEnum.FIND, keyword);
+        Command.validateDescriptionNotEmpty(CommandTypeEnum.FIND, keyword);
 
         return new FindCommand(keyword);
     }
@@ -45,6 +45,11 @@ public class FindCommand extends Command {
      * @return `Message`.
      */
     public Message getOutputMessage() {
-        return new Message("Here are the matching tasks in your list:", this.list.toString(), "ヽ(°〇°)ﾉ");
+        assert list != null : "task list should not be null";
+
+        String prefix = "Here are the matching tasks in your list:";
+        String kaomoji = "ヽ(°〇°)ﾉ";
+
+        return new Message(prefix, this.list.toString(), kaomoji);
     }
 }

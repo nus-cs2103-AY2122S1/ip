@@ -1,13 +1,13 @@
 package command;
 
-import exception.ErrorAccessingFile;
+import exception.ErrorAccessingFileException;
 import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
 import exception.NonExistentTaskNumberException;
 import message.Message;
 import tasklist.Task;
 import tasklist.TaskList;
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates a done command after it is parsed from the user input.
@@ -30,8 +30,8 @@ public class DoneCommand extends Command {
      */
     public static DoneCommand createCommand(String description)
             throws InvalidTaskNumberException, MissingCommandDescriptionException {
-        // Validate before creating the action
-        Command.validateDescriptionNotEmpty(DukeCommandTypeEnum.DONE, description);
+        // Validate before creating the command
+        Command.validateDescriptionNotEmpty(CommandTypeEnum.DONE, description);
 
         return new DoneCommand(Command.getTaskNumberFromMessage(description));
     }
@@ -41,9 +41,9 @@ public class DoneCommand extends Command {
      *
      * @param list `TaskList` containing all tasks.
      * @throws NonExistentTaskNumberException If the task number does not exist in the list.
-     * @throws ErrorAccessingFile If there is an error accessing the storage file.
+     * @throws ErrorAccessingFileException If there is an error accessing the storage file.
      */
-    public void execute(TaskList list) throws NonExistentTaskNumberException, ErrorAccessingFile {
+    public void execute(TaskList list) throws NonExistentTaskNumberException, ErrorAccessingFileException {
         this.task = list.markTaskAsDone(taskNumber);
     }
 
@@ -53,7 +53,11 @@ public class DoneCommand extends Command {
      * @return `Message`.
      */
     public Message getOutputMessage() {
+        assert task != null : "task should not be null";
+
         String prefix = "Nice! I've marked this task as done:";
-        return new Message(prefix, task.toString(), "≧(´▽｀)≦");
+        String kaomoji = "≧(´▽｀)≦";
+
+        return new Message(prefix, task.toString(), kaomoji);
     }
 }

@@ -1,6 +1,6 @@
 package exception;
 
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates an exception when a user inputs an invalid task.
@@ -11,7 +11,7 @@ public class InvalidTaskTypeException extends DukeException {
      *
      * @param commandType Command type that is incorrectly used as a task.
      */
-    public InvalidTaskTypeException(DukeCommandTypeEnum commandType) {
+    public InvalidTaskTypeException(CommandTypeEnum commandType) {
         super(String.format(
                 "'%s' is not a valid task type. "
                         + "Tasks should begin with one of the following: todo, deadline, event",

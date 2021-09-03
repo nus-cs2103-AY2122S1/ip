@@ -1,6 +1,6 @@
 package command;
 
-import exception.ErrorAccessingFile;
+import exception.ErrorAccessingFileException;
 import exception.InvalidDateTimeException;
 import exception.InvalidTaskTimeFormatException;
 import exception.InvalidTaskTypeException;
@@ -8,18 +8,18 @@ import exception.MissingCommandDescriptionException;
 import message.Message;
 import tasklist.Task;
 import tasklist.TaskList;
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates an add command after it is parsed from the user input.
  */
 public class AddCommand extends Command {
     private String description;
-    private DukeCommandTypeEnum commandType;
+    private CommandTypeEnum commandType;
     private Task task;
     private TaskList list;
 
-    private AddCommand(String description, DukeCommandTypeEnum commandType) {
+    private AddCommand(String description, CommandTypeEnum commandType) {
         this.description = description;
         this.commandType = commandType;
     }
@@ -32,9 +32,9 @@ public class AddCommand extends Command {
      * @return `AddCommand`.
      * @throws MissingCommandDescriptionException If description is empty.
      */
-    public static AddCommand createCommand(String description, DukeCommandTypeEnum commandType)
+    public static AddCommand createCommand(String description, CommandTypeEnum commandType)
             throws MissingCommandDescriptionException {
-        // Validate before creating the action
+        // Validate before creating the command
         Command.validateDescriptionNotEmpty(commandType, description);
 
         return new AddCommand(description, commandType);
@@ -46,13 +46,13 @@ public class AddCommand extends Command {
      * @param list `TaskList` containing all tasks.
      * @throws InvalidTaskTypeException If the task type is not valid.
      * @throws InvalidTaskTimeFormatException If a task meant to contain time information is not formatted properly.
-     * @throws ErrorAccessingFile If there is an error accessing the storage file.
+     * @throws ErrorAccessingFileException If there is an error accessing the storage file.
      * @throws InvalidDateTimeException If a task meant to contain time information has an invalid datetime format.
      */
     public void execute(TaskList list) throws
             InvalidTaskTypeException,
             InvalidTaskTimeFormatException,
-            ErrorAccessingFile,
+            ErrorAccessingFileException,
             InvalidDateTimeException {
         Task task = Task.createTask(this.description, this.commandType);
         list.addTaskToList(task);
@@ -66,10 +66,17 @@ public class AddCommand extends Command {
      * @return `Message`.
      */
     public Message getOutputMessage() {
+        assert list != null : "task list should not be null";
+        assert task != null : "task should not be null";
+
         String prefix = "Got it. I've added this task:";
+
         int numOfTasks = list.getNumberOfTasks();
         String taskWord = numOfTasks == 1 ? "task" : "tasks";
         String suffix = String.format("Now you have %d %s in the list", list.getNumberOfTasks(), taskWord);
-        return new Message(prefix, task.toString(), suffix, "(＾＾)b");
+
+        String kaomoji = "(＾＾)b";
+
+        return new Message(prefix, task.toString(), suffix, kaomoji);
     }
 }
