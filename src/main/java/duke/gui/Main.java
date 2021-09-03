@@ -1,6 +1,5 @@
 package duke.gui;
 
-import duke.gui.DialogBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -102,7 +101,6 @@ public class Main extends Application {
     }
 
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 

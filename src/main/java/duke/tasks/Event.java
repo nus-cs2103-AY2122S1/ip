@@ -10,8 +10,8 @@ public class Event extends Task {
     /** Event time stored as a LocalDate object */
     private LocalDate timePeriod;
 
-    public Event(String taskname, String timePeriod) {
-        super(taskname);
+    public Event(String taskName, String timePeriod) {
+        super(taskName);
         this.timePeriod = LocalDate.parse(timePeriod);
     }
 

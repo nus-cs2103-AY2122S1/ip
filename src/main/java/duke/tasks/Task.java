@@ -5,13 +5,13 @@ package duke.tasks;
  */
 public abstract class Task {
     /** Name of the task */
-    private String taskname;
+    private String taskName;
 
     /** Whether the task is completed or not */
     private boolean isCompleted;
 
-    public Task(String taskname) {
-        this.taskname = taskname;
+    public Task(String taskName) {
+        this.taskName = taskName;
         this.isCompleted = false;
     }
 
@@ -37,11 +37,11 @@ public abstract class Task {
      * @return A string of the name of the task.
      */
     public String getTaskName() {
-        return this.taskname;
+        return this.taskName;
     }
 
     @Override
     public String toString() {
-        return this.taskname + " " + (this.isCompleted ? "[X]" : "[ ]");
+        return this.taskName + " " + (this.isCompleted ? "[X]" : "[ ]");
     }
 }

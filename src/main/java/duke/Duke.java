@@ -2,13 +2,9 @@ package duke;
 
 import duke.exceptions.DukeException;
 import duke.utils.Parser;
-import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Ui;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class Duke {
     private static TaskList taskList = new TaskList();
@@ -35,9 +31,6 @@ public class Duke {
             } catch (DukeException e) {
                 return e.getMessage();
             }
-
         }
-
     }
-
 }

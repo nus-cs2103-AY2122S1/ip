@@ -10,8 +10,8 @@ public class Deadline extends Task {
     /** Deadline stored as a LocalDate object */
     private LocalDate deadline;
 
-    public Deadline(String taskname, String deadline) {
-        super(taskname);
+    public Deadline(String taskName, String deadline) {
+        super(taskName);
         this.deadline = LocalDate.parse(deadline);
     }
 
