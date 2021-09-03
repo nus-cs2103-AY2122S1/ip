@@ -43,16 +43,6 @@ public class Duke {
         isRunning = false;
     }
 
-    public static String getResponse(String args) {
-        String packagedCommand = "";
-        try {
-            packagedCommand = Parser.parse(args).toString();
-        } catch (InvalidCommandException e) {
-            e.printStackTrace();
-        }
-        return packagedCommand;
-    }
-
     /**
      * Starting point of the dukeBot
      */
