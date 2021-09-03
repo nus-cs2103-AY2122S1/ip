@@ -226,7 +226,7 @@ public class CommandHandlerTest {
             Storage storage = new Storage("test.json");
             TaskList taskList = new TaskList(new ArrayList<Task>());
             Ui ui = new Ui();
-            Command.DONE.getExecute().apply("delete abc", storage, taskList, ui);
+            Command.DELETE.getExecute().apply("delete abc", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
             assertEquals("Index is not an integer! Please use delete <number>", e.getMessage());
@@ -241,7 +241,7 @@ public class CommandHandlerTest {
         tasks.add(todo);
         TaskList taskList = new TaskList(tasks);
         Ui ui = new Ui();
-        Command.DELETE.getExecute().apply("done 1", storage, taskList, ui);
+        Command.DELETE.getExecute().apply("delete 1", storage, taskList, ui);
         assertTrue(taskList.getSize() == 0);
     }
 
