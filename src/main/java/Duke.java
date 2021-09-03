@@ -1,6 +1,10 @@
 import java.util.Scanner;
 import java.util.ArrayList;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.FileWriter;
+
 public class Duke {
     //Task and Subclasses
     public static class Task{
@@ -66,7 +70,38 @@ public class Duke {
                     + " (at: " + this.timeRange + ")";
         }
     }
+    public static void writeToFile(ArrayList<Task> tasks){
+        File myObj;
+
+        //Make a new duke.txt file if needed.
+        try {
+            myObj = new File("./duke.txt"); //Will be in the root directory.
+            if (myObj.createNewFile()) {
+                System.out.println("File created: " + myObj.getName());
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
+        //write all tasks to the file. Separated by new lines
+        try {
+            FileWriter myWriter = new FileWriter("./duke.txt");
+            for (int i = 1; i < tasks.size()+1; i++) {
+                myWriter.write(i + ". " + tasks.get(i-1).toString());
+                myWriter.write("\n");
+            }
+            myWriter.close();
+            System.out.println("File Updated!");
+        } catch (IOException e){
+            System.out.println("Oops! An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
+        //START OF PROGRAM
+
         Scanner reader = new Scanner(System.in);
         String logo = "                                        _       \n"
                 + "  _ __  _ _   _ __  ___ ___ ___ ___ ___| |__ ___\n"
@@ -104,10 +139,10 @@ public class Duke {
                     System.out.println(i + ". " + tasks.get(i-1));
                 }
             } else if (input.equals("done")){
+                //mark an item of index i as done.
                 if (currentIndex == 0){
                     System.out.println("Oops! There are no tasks yet!");
                 } else{
-                //mark an item of index i as done.
                     while (true) {
                         System.out.println("Which task number should I mark as done?");
                         System.out.println("From 1 to " + currentIndex);
@@ -137,6 +172,7 @@ public class Duke {
                         } else{
                             System.out.println("Ok! I've marked the task below as done!");
                             tasks.get(taskNumber-1).setDone();
+                            writeToFile(tasks);
                             break;
                         }
 
@@ -145,13 +181,12 @@ public class Duke {
 
 
             } else if (input.equals("todo") || input.equals("deadline") || input.equals("event")){
-
+                //Create a new task
                 if (currentIndex == 99) {
                     //limit of 100 items
                     System.out.println("Oops! My task list is full. No new items can be added");
                 } else {
                     System.out.println("Ok! A " + input + " task");
-
                     String taskName;
 
                     while (true) {
@@ -163,48 +198,50 @@ public class Duke {
                             break;
                         }
                     }
+
                     Task newTask;
                     String time;
-                        if (input.equals("todo")){
-                            newTask = new ToDo(taskName);
-                        } else if (input.equals("deadline")){
-                            while(true){
-                                System.out.println("Enter the deadline for the task");
-                                time = reader.nextLine();
-                                if (time.equals("")){ //time cannot be null
-                                    System.out.println("Oops! Please enter a time");
-                                } else{
-                                    break;
-                                }
+                    if (input.equals("todo")){
+                        newTask = new ToDo(taskName);
+                    } else if (input.equals("deadline")){
+                        while(true){
+                            System.out.println("Enter the deadline for the task");
+                            time = reader.nextLine();
+                            if (time.equals("")){ //time cannot be null
+                                System.out.println("Oops! Please enter a time");
+                            } else{
+                                break;
                             }
-
-                            newTask = new Deadline(taskName, time);
-                        } else{ //Event
-                            while(true){
-                                System.out.println("Enter the time range for the task");
-                                time = reader.nextLine();
-                                if (time.equals("")){ //time cannot be null
-                                    System.out.println("Oops! Please enter a time");
-                                } else{
-                                    break;
-                                }
-                            }
-                            newTask = new Event(taskName, time);
                         }
+
+                        newTask = new Deadline(taskName, time);
+                    } else{ //Event
+                        while(true){
+                            System.out.println("Enter the time range for the task");
+                            time = reader.nextLine();
+                            if (time.equals("")){ //time cannot be null
+                                System.out.println("Oops! Please enter a time");
+                            } else{
+                                break;
+                            }
+                        }
+                        newTask = new Event(taskName, time);
+                    }
                     //add item to the end of the array.
                     tasks.add(newTask);
                     System.out.println("Ok! I've added the task below");
                     System.out.println(newTask);
                     currentIndex++;
                     System.out.println("There are now " + currentIndex + " tasks");
+                    writeToFile(tasks);
                 }
 
 
             } else if (input.equals("delete")){
+                //delete item of index i, removing it from the list
                 if (currentIndex == 0){
                     System.out.println("Oops! There are no tasks to delete right now");
                 } else{
-                    //delete item of index i as done.
                     System.out.println("Which task number should I delete?");
                     System.out.println("From 1 to " + currentIndex);
                     System.out.println("Type 0 to cancel");
@@ -234,11 +271,12 @@ public class Duke {
                             System.out.println("Oops! Please enter a valid task number.");
                             System.out.println("From 1 to " + currentIndex);
                         } else{
-                            System.out.println("Ok! I've marked the task below as done!");
+                            System.out.println("Ok! Boom! The task is now gone!");
                             System.out.println(tasks.get(taskNumber-1));
                             tasks.remove(taskNumber-1);
                             currentIndex--;
                             System.out.println("There are now " + currentIndex + " tasks.");
+                            writeToFile(tasks);
                             break;
                         }
 
