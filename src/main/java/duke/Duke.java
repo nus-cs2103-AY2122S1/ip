@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -45,7 +46,7 @@ public class Duke {
             tasks = new TaskList();
             ui.printMessage(e.getMessage());
         } finally {
-            parser = new Parser(tasks, ui, storage);
+            parser = new Parser();
         }
     }
 
@@ -54,16 +55,22 @@ public class Duke {
      */
     private void run() {
 
-        String input;
-
         ui.cliGreet();
-
+        boolean isExit = false;
         /* user input trimmed to remove unwanted spaces at the front and back of user input
         allows for greater margin of error when typing in commands */
-        while (!(input = ui.getNextLine()).equals("bye")) {
+        while (!isExit) {
             // continuously runs the bot as long as the "bye" command is not issued
-            String response = parser.handleCommands(input);
-            ui.printMessage(response);
+            String input = ui.getNextLine();
+
+            try {
+                Command cmd = parser.handleCommands(input);
+                String response = cmd.execute(tasks, ui, storage);
+                isExit = cmd.isExit();
+                ui.printMessage(response);
+            } catch (DukeException e) {
+                ui.printMessage(e.getMessage());
+            }
         }
 
         try {
@@ -89,6 +96,10 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return parser.handleCommands(input);
+        try {
+            return parser.handleCommands(input).execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
