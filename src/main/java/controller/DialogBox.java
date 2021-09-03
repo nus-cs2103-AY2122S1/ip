@@ -15,6 +15,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Ellipse;
 
+/**
+ * Encapsulates a controller used to control the dialog box user interface.
+ * Includes an `ImageView` and `Label`.
+ */
 public class DialogBox extends HBox {
     private String userDialogStyle =
             "-fx-background-color: #74D9CA; -fx-padding: 8 16 8 16; -fx-background-radius: 5;";
@@ -30,7 +34,7 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/views/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -44,7 +48,6 @@ public class DialogBox extends HBox {
 
     @FXML
     private void initialize() {
-        dialog.setStyle(userDialogStyle);
         displayPicture.setClip(displayPictureClip);
     }
 
@@ -55,12 +58,28 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets a dialog box styled for the user.
+     *
+     * @param text Text from user.
+     * @param img Image of user.
+     * @return `DialogBox`.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.dialog.setStyle(db.userDialogStyle);
+        return db;
     }
 
+    /**
+     * Gets a dialog box styled for duke.
+     *
+     * @param text Text from duke.
+     * @param img Image of duke.
+     * @return `DialogBox`.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
         db.flip();
         db.dialog.setStyle(db.dukeDialogStyle);
         return db;
