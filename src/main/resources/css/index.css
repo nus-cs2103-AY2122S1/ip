@@ -1,9 +1,6 @@
 .chat-window {
     -fx-background-color: #bfa5ff;
-}
-
-.profile-pic {
-
+    -fx-padding: 2px;
 }
 
 .send-btn {
@@ -23,7 +20,7 @@
 
 .duke-dialog-box {
     -fx-text-fill: #FFFFFF;
-    -fx-background-color: #564875;
+    -fx-background-color: #8795ff;
     -fx-background-radius: 10px;
     -fx-padding: 10px;
     -fx-start-margin: 10px;
@@ -34,8 +31,9 @@
 
 .send-btn {
     -fx-background-color: #917bbd;
+    -fx-border-radius: 90px;
 }
 
-.input-field {
-    -fx-background-color: #5c5270;
+.user-input {
+    -fx-background-color: #c7b3f5;
 }
