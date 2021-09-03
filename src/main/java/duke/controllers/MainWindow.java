@@ -37,6 +37,10 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Set duke bot to use
+     * @param d
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
