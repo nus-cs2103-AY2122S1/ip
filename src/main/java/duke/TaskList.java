@@ -56,8 +56,8 @@ public class TaskList {
                 newTaskArray.add(new Todo(description, done));
                 break;
             }
-            default: {
-                Printer.print(ERROR_UNKNOWN_FILE_COMMAND);
+            default: { // TODO: Refactor this with exceptions
+                System.out.println(ERROR_UNKNOWN_FILE_COMMAND);
             }
             }
         }
@@ -68,13 +68,12 @@ public class TaskList {
      * Lists the array of tasks.
      *
      */
-    public void handleList() {
+    public String handleList() {
         if (taskArray.isEmpty()) {
-            Printer.print(MESSAGE_LIST_EMPTY);
-            return;
+            return Formatter.getResponseString(MESSAGE_LIST_EMPTY);
         }
 
-        Printer.printNumberedList(MESSAGE_LIST, taskArray);
+        return Formatter.getNumberedListResponse(MESSAGE_LIST, taskArray);
     }
 
     /**
@@ -82,9 +81,11 @@ public class TaskList {
      *
      * @param newTask
      */
-    public void handleAddHelper(Task newTask) {
+    public String handleAddHelper(Task newTask) {
         taskArray.add(newTask);
-        Printer.print(Printer.addTaskString(newTask.toString(), Integer.toString(taskArray.size())));
+        return Formatter.getResponseString(
+            Formatter.addTaskString(newTask.toString(), Integer.toString(taskArray.size()))
+        );
     }
 
     /**
@@ -92,14 +93,13 @@ public class TaskList {
      *
      * @param command
      */
-    public void handleAddToDo(String[] command) {
-        String newTaskDescription = Printer.getTaskName(command);
+    public String handleAddToDo(String[] command) {
+        String newTaskDescription = Formatter.getTaskName(command);
         if (newTaskDescription.equals("")) {
-            Printer.print(ERROR_TODO_MISSING_DESCRIPTION);
-            return;
+            return Formatter.getResponseString(ERROR_TODO_MISSING_DESCRIPTION);
         }
         Todo newTask = new Todo(newTaskDescription);
-        handleAddHelper(newTask);
+        return handleAddHelper(newTask);
     }
 
     /**
@@ -107,11 +107,11 @@ public class TaskList {
      *
      * @param command
      */
-    public void handleAddDeadline(String[] command) {
-        String newTaskDescription = Printer.getTaskName(command);
-        String newTaskDate = Printer.getTaskDate(command);
+    public String handleAddDeadline(String[] command) {
+        String newTaskDescription = Formatter.getTaskName(command);
+        String newTaskDate = Formatter.getTaskDate(command);
         Deadline newTask = new Deadline(newTaskDescription, newTaskDate);
-        handleAddHelper(newTask);
+        return handleAddHelper(newTask);
     }
 
     /**
@@ -119,11 +119,11 @@ public class TaskList {
      *
      * @param command
      */
-    public void handleAddEvent(String[] command) {
-        String newTaskDescription = Printer.getTaskName(command);
-        String newTaskDate = Printer.getTaskDate(command);
+    public String handleAddEvent(String[] command) {
+        String newTaskDescription = Formatter.getTaskName(command);
+        String newTaskDate = Formatter.getTaskDate(command);
         Event newTask = new Event(newTaskDescription, newTaskDate);
-        handleAddHelper(newTask);
+        return handleAddHelper(newTask);
     }
 
     /**
@@ -131,10 +131,10 @@ public class TaskList {
      *
      * @param taskIndex
      */
-    public void handleDone(int taskIndex) {
+    public String handleDone(int taskIndex) {
         Task indexedTask = this.taskArray.get(taskIndex - 1);
         String output = indexedTask.setTaskAsDone();
-        Printer.print(output);
+        return Formatter.getResponseString(output);
     }
 
     /**
@@ -143,12 +143,14 @@ public class TaskList {
      *
      * @param taskIndex
      */
-    public void handleDelete(int taskIndex) {
+    public String handleDelete(int taskIndex) {
         if (taskIndex < -1 || taskIndex >= taskArray.size()) {
-            Printer.print(ERROR_DELETE_INVALID_INDEX);
+            return Formatter.getResponseString(ERROR_DELETE_INVALID_INDEX);
         }
         Task deletedTask = taskArray.remove(taskIndex - 1);
-        Printer.print(Printer.deleteTaskString(deletedTask.toString(), Integer.toString(taskArray.size())));
+        return Formatter.getResponseString(
+            Formatter.deleteTaskString(deletedTask.toString(), Integer.toString(taskArray.size()))
+        );
     }
 
     /**
@@ -156,16 +158,16 @@ public class TaskList {
      *
      * @param storage
      */
-    public void handleSave(Storage storage) {
+    public String handleSave(Storage storage) {
         try {
             String fileContents = storage.writeToFile(taskArray);
             List<String> fileContentStrings = Arrays.asList(fileContents.split("\n"));
             List<String> output = new ArrayList<>();
             output.add(MESSAGE_SAVE);
             output.addAll(fileContentStrings);
-            Printer.print(output);
+            return Formatter.getResponseString(output);
         } catch (IOException e) {
-            Printer.print(ERROR_SAVE);
+            return Formatter.getResponseString(ERROR_SAVE);
         }
     }
 
@@ -173,10 +175,9 @@ public class TaskList {
      * Prints tasks with similar description based on regex with description.
      * @param description
      */
-    public void handleFind(String description) {
+    public String handleFind(String description) {
         if (taskArray.isEmpty()) {
-            Printer.print(MESSAGE_FIND_LIST_EMPTY);
-            return;
+            return Formatter.getResponseString(MESSAGE_FIND_LIST_EMPTY);
         }
 
         Pattern pattern = Pattern.compile(description, Pattern.CASE_INSENSITIVE);
@@ -191,18 +192,17 @@ public class TaskList {
             .collect(Collectors.toList());
 
         if (tasksFound.isEmpty()) {
-            Printer.print(MESSAGE_FIND_EMPTY);
-            return;
+            return Formatter.getResponseString(MESSAGE_FIND_EMPTY);
         }
 
-        Printer.printNumberedList(MESSAGE_FIND, tasksFound);
+        return Formatter.getNumberedListResponse(MESSAGE_FIND, tasksFound);
     }
 
     /**
      * Resets the arrayList of chatbot.
      */
-    public void handleReset() {
+    public String handleReset() {
         taskArray = new ArrayList<>();
-        Printer.print(MESSAGE_RESET);
+        return Formatter.getResponseString(MESSAGE_RESET);
     }
 }

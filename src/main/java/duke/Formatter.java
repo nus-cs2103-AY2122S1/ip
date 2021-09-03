@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-abstract class Printer {
+abstract class Formatter {
 
     private static final String INDENTATION_1 = " ";
     private static final String INDENTATION_4 = "    ";
     private static final String INDENTATION_5 = "     ";
     private static final String BREAK_LINE = "____________________________________________________________";
 
-    private Printer() {
+    private Formatter() {
         System.out.println("Don't try to initialize this utility class! :(");
     }
 
@@ -104,12 +104,12 @@ abstract class Printer {
         return output;
     }
 
-    public static void print(String inputText) {
-        System.out.println(formatOutput(inputText));
+    public static String getResponseString(String inputText) {
+        return formatOutput(inputText);
     }
 
-    public static void print(List<String> inputText) {
-        System.out.println(formatOutput(inputText));
+    public static String getResponseString(List<String> inputText) {
+        return formatOutput(inputText);
     }
 
     public static List<String> formatNumberedListOutput(String header, List<Task> taskArray) {
@@ -121,8 +121,8 @@ abstract class Printer {
         return outputList;
     }
 
-    public static void printNumberedList(String header, List<Task> taskArray) {
+    public static String getNumberedListResponse(String header, List<Task> taskArray) {
         List<String> outputList = formatNumberedListOutput(header, taskArray);
-        print(outputList);
+        return getResponseString(outputList);
     }
 }
