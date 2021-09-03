@@ -31,23 +31,4 @@ public class Pix {
             taskList = new TaskList();
         }
     }
-
-    /**
-     * Reads the text file Pix.Pix.txt and loads the tasks in the Pix.task.Task List from it.
-     */
-    private void run() {
-        ui.displayWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String line = ui.nextCommand();
-                Command command = Parser.parse(line);
-                String message = command.trigger(this.storage, this.taskList, this.ui);
-                ui.displayMessage(message);
-                isExit = command.isExit();
-            } catch (PixException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-    }
 }
