@@ -18,9 +18,11 @@ public class Ui {
     }
 
     /**
-     * Shows the welcome message
+     * Returns the welcome message.
+     *
+     * @return The string containing the welcome message.
      */
-    public void showWelcome() {
+    public String showWelcome() {
         String LOGO = "----------------------------------------\n"
                 + " ____        _        \n"
                 + "|  _ \\  ___ | | _____ \n"
@@ -29,97 +31,101 @@ public class Ui {
                 + "|____/ \\___/|_|\\_\\___|\n"
                 + "Hello! I'm Doke\nWhat do you want??\n"
                 + "----------------------------------------";
-        System.out.println(LOGO);
-    }
-
-    /**
-     * Reads input from user.
-     *
-     * @return The input from the user
-     */
-    public String readInput() {
-        String input = SCANNER.nextLine();
-        return input;
+        return LOGO;
     }
 
     /**
      * Shows the exit message.
+     *
+     * @return The output string.
      */
-    public void showGoodBye() {
-        writeOutput("    Bye. Hope to see you again!");
+    public String showGoodBye() {
+        return writeOutput("    Bye. Hope to see you again!");
     }
 
     /**
      * Lists the items in the list in the order added, along with a counter.
+     *
+     * @param taskList The list of task.
+     * @return The output string.
      */
-    public void showList(ArrayList<String> taskList) {
-        System.out.println(separator);
+    public String showList(ArrayList<String> taskList) {
+        String list = "";
+
         int count = 1;
         for (String s : taskList) {
-            System.out.println(count + ". " + s);
+            list += count + ". " + s + "\n";
             count++;
         }
-        System.out.println(separator);
+
+        return writeOutput(list);
     }
 
     /**
      * Writes the message to output with a line divider around it.
      *
      * @param message The message to be displayed.
+     * @return The output string.
      */
-    public void writeOutput(String message) {
-        System.out.println(separator);
-        System.out.println(message);
-        System.out.println(separator);
+    public String writeOutput(String message) {
+        String output = separator + "\n";
+        output += message + "\n";
+        output += separator + "\n";
+        return output;
     }
 
     /**
      * Displays the error message based on the given command.
      *
      * @param command Determines which error message to display.
+     * @return The output string.
      */
-    public void showInputError(String command) {
+    public String showInputError(String command) {
+        String output = "";
         switch(command){
         case("done"):
-            writeOutput("Enter an integer after done...");
+            output = writeOutput("Enter an integer after done...");
             break;
         case("delete"):
-            writeOutput("Enter an integer after delete...");
+            output = writeOutput("Enter an integer after delete...");
             break;
         case("todo"):
-            writeOutput("The description of ToDo cannot be empty!\n Please try again :-(");
+            output = writeOutput("The description of ToDo cannot be empty!\n Please try again :-(");
             break;
         case("deadline"):
-            writeOutput("Follow the format: \ndeadline %description% /by %date%");
+            output = writeOutput("Follow the format: \ndeadline %description% /by %date%");
             break;
         case("event"):
-            writeOutput("Follow the format: \nevent %description% /at %date/time%");
+            output = writeOutput("Follow the format: \nevent %description% /at %date/time%");
             break;
         case("dateformat"):
-            writeOutput("Date format is wrong.\nPlease follow the format YYYY-MM-DD");
+            output = writeOutput("Date format is wrong.\nPlease follow the format YYYY-MM-DD");
             break;
         case("invalid"):
-            writeOutput("Command not recognised!\n" + menu());
+            output = writeOutput("Command not recognised!\n" + menu());
             break;
         case("index"):
-            writeOutput("You forgot to indicate which task!!!");
+            output = writeOutput("You forgot to indicate which task!!!");
             break;
         case("find"):
-            writeOutput("Please enter a keyword/phrase to search for!");
+            output = writeOutput("Please enter a keyword/phrase to search for!");
             break;
         default:
-            writeOutput("Oops, something went wrong!");
+            output = writeOutput("Oops, something went wrong!");
             break;
         }
+
+        return output;
     }
 
     /**
      * Displays the error message given by DukeException.
      *
      * @param e DukeException instance.
+     * @return The output string.
      */
-    public void showDukeException(DukeException e) {
-        writeOutput(e.getMessage());
+    public String showDukeException(DukeException e) {
+        return writeOutput(e.getMessage());
     }
 
     /**

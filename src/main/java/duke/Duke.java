@@ -1,7 +1,9 @@
 package duke;
 
+import gui.DukeGui;
+import javafx.application.Application;
+
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Main class of Duke chatbot. Contains the main method that initialises Duke
@@ -30,20 +32,16 @@ public class Duke {
     }
 
     /**
-     * Runs the program.
+     * Reads the input from the GUI and returns the output.
+     *
+     * @param input The user input.
+     * @return The response string.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean end = false;
-        while (!end) {
-            String input = ui.readInput();
-            end = parser.process(input);
-
-        }
+    public String readInput(String input) {
+        return parser.process(input);
     }
 
     public static void main(String[] args) {
-        Path filePath = Paths.get("src", "main", "data", "duke.txt");
-        new Duke(filePath).run();
+        Application.launch(DukeGui.class,  args);
     }
 }

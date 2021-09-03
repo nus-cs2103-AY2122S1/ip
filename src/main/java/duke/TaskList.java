@@ -57,12 +57,12 @@ public class TaskList {
      * Adds a task the list and saves to the file.
      *
      * @param description The description of the task.
+     * @return The task added.
      */
-    public String addTask(String description) {
+    public Task addTask(String description) {
         Task task = new ToDo(description);
         this.list.add(task);
-        ui.writeOutput("Task added successfully: \n" + task + "\nNumber of tasks in list: " + list.size());
-        return task.saveString();
+        return task;
     }
 
     /**
@@ -83,8 +83,9 @@ public class TaskList {
      * @param description The description of the task.
      * @param date The date/time attached to the task.
      * @param type Indicates if the task is a Deadline or Event.
+     * @return The task added.
      */
-    public String addTask(String description, LocalDate date, String type) {
+    public Task addTask(String description, LocalDate date, String type) {
         Task task;
         if (type.equals("deadline")) {
             task = new Deadline(description, date);
@@ -92,8 +93,7 @@ public class TaskList {
             task = new Event(description, date);
         }
         this.list.add(task);
-        ui.writeOutput("Task added successfully: \n" + task + "\nNumber of tasks in list: " + list.size());
-        return task.saveString();
+        return task;
     }
 
     /**
