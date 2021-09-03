@@ -32,6 +32,8 @@ public class Event extends Task {
      */
     public Event(String description, String eventTime) {
         super(description);
+        assert description.trim().isEmpty() : "Event was created with empty description";
+
         String[] dateInfo = eventTime.split(" ", 3);
         if (dateInfo.length < 3) {
             throw new MissingArgumentException("Date or Time", "Event");
@@ -51,6 +53,9 @@ public class Event extends Task {
      */
     public Event(String completedStatus, String description, String eventTime) {
         super(description);
+        assert description.trim().isEmpty() : "Event was created with empty description";
+        assert completedStatus.matches("1|0") : String.format("Incorrect completedStatus %s", completedStatus);
+
         String[] dateInfo = eventTime.split(" ", 3);
         if (dateInfo.length < 3) {
             throw new MissingArgumentException("Date or Time", "Event");
