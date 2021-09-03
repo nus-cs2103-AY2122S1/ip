@@ -27,7 +27,7 @@ public abstract class DukeException extends Exception {
     }
 
     @Override
-    public String toString() {
+    public String getMessage() {
         return "DukeError " + this.getErrorCode() + ": " + this.getErrorDescription();
     }
 }

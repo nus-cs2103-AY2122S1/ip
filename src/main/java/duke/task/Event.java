@@ -16,7 +16,7 @@ public class Event extends Task {
     public Event(String description, LocalDate date) {
         super(description);
         this.date = date;
-        this.taskType = TaskType.E;
+        this.taskType = "E";
     }
 
     @Override
@@ -28,8 +28,8 @@ public class Event extends Task {
 
     @Override
     public String getDataString() {
-        return String.format("%s_~_%s_~_%s_~_%s", this.taskType,
-            this.getStatusInt(), this.description, this.date.format(DateTimeFormatter.ofPattern("d/MM/yyyy")));
+        String str = super.getDataString();
+        return String.format("%s_~_%s", str, this.date.format(DateTimeFormatter.ofPattern("d/MM/yyyy")));
     }
 
     @Override
