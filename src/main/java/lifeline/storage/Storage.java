@@ -1,5 +1,8 @@
 package lifeline.storage;
 
+import static lifeline.util.ErrorString.ERROR_UNABLE_TO_FIND_SAVED_TASKS;
+import static lifeline.util.ErrorString.ERROR_UNABLE_TO_SAVE_TASK;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -60,7 +63,7 @@ public class Storage {
             fileWriter.write(gson.toJson(tasks.getTaskList(), ArrayList.class));
             fileWriter.close();
         } catch (IOException e) {
-            throw new LifelineException("Unable to save tasks at the moment");
+            throw new LifelineException(ERROR_UNABLE_TO_SAVE_TASK);
         }
     }
 
@@ -88,7 +91,7 @@ public class Storage {
             fileReader.close();
             return savedTasks;
         } catch (IOException e) {
-            throw new LifelineException("Unable to find your saved tasks!\n");
+            throw new LifelineException(ERROR_UNABLE_TO_FIND_SAVED_TASKS);
         }
     }
 

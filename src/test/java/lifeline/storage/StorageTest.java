@@ -1,5 +1,6 @@
 package lifeline.storage;
 
+import static lifeline.util.ErrorString.ERROR_UNABLE_TO_FIND_SAVED_TASKS;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -23,7 +24,7 @@ public class StorageTest {
             storage.load();
             fail();
         } catch (LifelineException e) {
-            assertEquals("Unable to find your saved tasks!\n", e.getMessage());
+            assertEquals(ERROR_UNABLE_TO_FIND_SAVED_TASKS, e.getMessage());
         }
     }
 
@@ -42,10 +43,6 @@ public class StorageTest {
     @AfterEach
     public void deleteTestFiles() {
         File testFile = new File("test.json");
-        if (testFile.delete()) {
-            System.out.println("deleted in storage");
-        } else {
-            System.out.println("File not deleted in storage");
-        }
+        testFile.delete();
     }
 }
