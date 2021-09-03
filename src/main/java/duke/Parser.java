@@ -114,7 +114,8 @@ public class Parser {
             LocalDate date = LocalDate.parse(input);
             return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         } catch (DateTimeParseException error) {
-            throw new DukeException("Please enter a valid date in this format 'YYYY-MM-dd'");
+            throw new DukeException("Please enter a valid date in this format 'YYYY-MM-dd' "
+                    + "(eg. 2021-10-07)");
         }
     }
 }

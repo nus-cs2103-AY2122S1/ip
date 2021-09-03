@@ -3,7 +3,7 @@ package duke.task;
 /**
  * The task in the list.
  */
-public class Task {
+public abstract class Task {
     /**
      * description of the task
      */
