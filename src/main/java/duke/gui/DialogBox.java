@@ -6,10 +6,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -21,13 +21,17 @@ import java.util.Collections;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
-    @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    /**
+     * Constructor for DialogBox.
+     *
+     * @param fxmlResourceDir The location of the FXML file.
+     * @param img The Image file to display.
+     */
+    protected DialogBox(String fxmlResourceDir, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(fxmlResourceDir));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
@@ -35,27 +39,22 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setText(text);
         displayPicture.setImage(img);
+        this.cropToCircle();
     }
 
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
+    protected void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
-    }
-
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
+    private void cropToCircle() {
+        Circle circle = new Circle(displayPicture.getFitWidth() / 2, displayPicture.getFitHeight() / 2, 20);
+        displayPicture.setClip(circle);
     }
 }

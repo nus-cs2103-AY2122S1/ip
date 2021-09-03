@@ -1,13 +1,13 @@
 package duke.command;
 
-import static duke.util.Ui.DONE_MESSAGE;
-import static duke.util.Ui.INVALID_NUMBER;
-import static duke.util.Ui.MISSING_DONE_NUMBER_MESSAGE;
-
 import duke.task.TaskList;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.Ui;
+
+import static duke.util.Ui.DONE_MESSAGE;
+import static duke.util.Ui.INVALID_NUMBER;
+import static duke.util.Ui.MISSING_DONE_NUMBER_MESSAGE;
 
 
 public class DoneCommand extends Command {
@@ -19,13 +19,13 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (remainingText.isEmpty()) {
             throw new DukeException(MISSING_DONE_NUMBER_MESSAGE);
         }
         try {
             int taskIndex = Integer.parseInt(remainingText);
-            Ui.displayMessage(String.format(DONE_MESSAGE, taskList.markTaskAsDone(taskIndex)));
+            return String.format(DONE_MESSAGE, taskList.markTaskAsDone(taskIndex));
         } catch (NumberFormatException err) {
             throw new DukeException(INVALID_NUMBER);
         }

@@ -45,11 +45,12 @@ public abstract class Command {
     /**
      * Executes the command.
      *
-     * @param taskList The taskList keeping track of the tasks
-     * @param ui The Ui used for the user interface
-     * @param storage The storage object taking care of writing and reading the text file
+     * @param taskList The taskList keeping track of the tasks.
+     * @param ui The Ui used for the user interface.
+     * @param storage The storage object taking care of writing and reading the text file.
+     * @throws DukeException The exception to be thrown.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Returns a boolean on whether to exit the inputLoop or not.
