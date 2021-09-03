@@ -19,7 +19,7 @@ public class DoneCommand extends Command {
 
     @Override
     public String getResponse(String input) {
-        int index = 0;
+        int index;
         try {
             index = Parser.extractIndex(input);
             String response = list.markTaskAsDone(index);

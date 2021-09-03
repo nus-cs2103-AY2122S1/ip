@@ -22,6 +22,8 @@ public class AddCommand extends Command {
     public AddCommand(ToDoList list, DataManager dataManager, String taskType) {
         this.list = list;
         this.dataManager = dataManager;
+
+        assert taskType.matches("todo|event|deadline"); // pre-condition
         this.taskType = taskType;
     }
 
@@ -53,8 +55,11 @@ public class AddCommand extends Command {
             return "Todo command has to be followed by a task description!";
         }
 
+        // Handles multiple todos in one command.
         if (input.split(", ").length >= 2) {
             String[] inputTasks = extracted[1].split(", ");
+            assert inputTasks.length >= 2 : "There should at least be 2 tasks entered by the user.";
+
             Task[] tasks = new Task[inputTasks.length];
             try {
                 for (int i = 0, inputTasksLength = inputTasks.length; i < inputTasksLength; i++) {
