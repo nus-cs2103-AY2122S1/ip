@@ -1,10 +1,12 @@
-package duke;
+package duke.storage;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.task.TaskList;
 
 /**
  * Deals with loading tasks from file and saving tasks in file.

@@ -5,6 +5,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
+import duke.command.CommandUnknown;
+import duke.exception.DukeException;
+import duke.parse.Parser;
+
 public class ParserTest {
     @Test
     public void parse_incompleteStringInput_dukeExceptionThrown() {
@@ -20,7 +24,7 @@ public class ParserTest {
     @Test
     public void parse_unknownCommand_success() {
         try {
-            assertEquals(new Command.UnknownCommand(), Parser.parse("blah"));
+            assertEquals(new CommandUnknown(), Parser.parse("blah"));
         } catch (DukeException e) {
             fail();
         }

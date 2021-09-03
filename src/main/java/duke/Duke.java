@@ -1,6 +1,14 @@
 package duke;
 
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.parse.Parser;
+import duke.storage.Storage;
+import duke.task.TaskList;
+import duke.ui.Gui;
+import duke.ui.Ui;
 import javafx.application.Application;
+
 /**
  * This is Duke, a program that serves as a ToDo-List.
  */
@@ -46,8 +54,9 @@ public class Duke {
     }
 
     /**
-     * Runs the program.
-     * Will keep running until an exit command is given.
+     * Runs the command given by the user.
+     *
+     * @return String representation of the program's respond to the given command.
      */
     public String run(String input) {
         try {
@@ -59,6 +68,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        Application.launch(Main.class, args);
+        Application.launch(Gui.class, args);
     }
 }
