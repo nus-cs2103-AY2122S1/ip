@@ -22,25 +22,38 @@ public class Parser {
     public Command parse(String input) throws AuguryException {
         assert input.equals(input.toLowerCase());
 
-        if (input.equals("bye") || input.equals("exit") || input.equals("quit")) {
-            return Command.of(CommandTypes.QUIT);
-        } else if (input.equals("list") || input.equals("ls")) {
-            return Command.of(CommandTypes.LIST);
-        } else if (input.startsWith("done")) {
-            String indexes = input.substring(4).trim();
-            checkIndexesAreValid(indexes);
-            return Command.of(CommandTypes.MARKDONE, indexes);
-        } else if (input.startsWith("delete")) {
-            String indexes = input.substring(6).trim();
-            checkIndexesAreValid(indexes);
-            return Command.of(CommandTypes.DELETE, indexes);
-        } else if (input.startsWith("find")) {
-            String queries = input.replace("find ", "");
-            return Command.of(CommandTypes.FIND, queries);
-        } else if (input.startsWith("event") || input.startsWith("deadline") || input.startsWith("todo")) {
-            return Command.of(CommandTypes.MAKE, input);
+        // search through valid CommandTypes and their aliases
+        // gleaned from https://stackoverflow.com/questions/4197988/java-enum-valueof-with-multiple-values/4198066#4198066
+        for (CommandTypes commandType : CommandTypes.values()) {
+            for (String alias : commandType.getAliases()) {
+                if (input.startsWith(alias)) {
+                    String args = cleanCommandArguments(input, alias, commandType);
+                    if (args != null && args.equals("")) {
+                        throw new UnknownCommandException("Please enter an argument!");
+                    }
+                    return Command.of(commandType, args);
+                }
+            }
+        }
+        throw new UnknownCommandException("Unknown command entered");
+    }
+
+    private String cleanCommandArguments(String input, String alias, CommandTypes commandType) throws InvalidActionException {
+        if (commandType == CommandTypes.QUIT
+                || commandType == CommandTypes.LIST) {
+            return null;
+        } else if (commandType == CommandTypes.DELETE
+                || commandType == CommandTypes.MARKDONE) {
+            String userInput = input.replace(alias, "").trim();
+            checkIndexesAreValid(userInput);
+            return userInput;
+        } else if (commandType == CommandTypes.FIND) {
+            String userInput = input.replace(alias, "").trim();
+            return userInput;
+        } else if (commandType == CommandTypes.MAKE) {
+            return input;
         } else {
-            throw new UnknownCommandException("Unknown command entered.");
+            return input;
         }
     }
 
@@ -64,5 +77,4 @@ public class Parser {
             return false;
         }
     }
-
 }

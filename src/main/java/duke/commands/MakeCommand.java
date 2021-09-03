@@ -39,23 +39,23 @@ public class MakeCommand extends Command {
         String args = this.args[0];
 
         // type will be in the first word
-        String type = args.split(" ")[0];
+        String taskType = args.split(" ")[0];
 
-        String description;
-        if (args.length() == type.length()) {
-            description = ""; // no description provided
+        String taskDescription;
+        if (args.length() == taskType.length()) {
+            taskDescription = ""; // no description provided
         } else {
-            description = args.replace(type + " ", "");
+            taskDescription = args.replace(taskType + " ", "");
         }
 
         try {
             TaskFactory tf = new TaskFactory();
-            Task newTask = tf.createTask(type, description);
+            Task newTask = tf.createTask(taskType, taskDescription);
 
             if (newTask == null) {
                 throw new UnknownCommandException("Invalid command entered when creating task.");
             }
-            String result = tasks.addTaskAndAnnounce(type, newTask);
+            String result = tasks.addTaskAndAnnounce(taskType, newTask);
             storage.saveTaskListToStorage(tasks);
             return result;
         } catch (AuguryException e) {
