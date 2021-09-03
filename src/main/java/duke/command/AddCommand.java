@@ -70,7 +70,9 @@ public class AddCommand extends Command {
         tasks.addTask(task);
         return formatOutput("Hehe buoi, I've added this task:",
                 task.toString(),
-                String.format("Now you have %d %s in the list.", tasks.getSize(), tasks.getSize() == 1 ? "task" : "tasks"));
+                String.format("Now you have %d %s in the list.",
+                        tasks.getSize(),
+                        tasks.getSize() == 1 ? "task" : "tasks"));
     }
 
     /**
