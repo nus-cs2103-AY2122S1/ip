@@ -1,9 +1,9 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.main.Ui;
 import duke.main.Storage;
 import duke.main.TaskList;
+import duke.main.Ui;
 
 /**
  * Represents command to list all tasks
@@ -20,9 +20,9 @@ public class ListCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         //Ui
-        ui.showTaskList(taskList);
+        return ui.showTaskList(taskList);
     }
 
     /**

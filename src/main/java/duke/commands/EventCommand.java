@@ -3,11 +3,12 @@ package duke.commands;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.EmptyTimeException;
-import duke.main.Ui;
 import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
 import duke.tasks.Event;
 import duke.tasks.Task;
-import duke.main.TaskList;
+
 
 /**
  * Represents command to create event
@@ -31,7 +32,7 @@ public class EventCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         //TaskList
         Task task = new Event(this.description, this.time);
         taskList.addTask(task);
@@ -40,8 +41,10 @@ public class EventCommand extends Command {
         storage.save(taskList);
 
         //Ui
-        ui.showAddTask(task);
-        ui.showNumTask(taskList.getNumTask());
+        String output = "";
+        output += ui.showAddTask(task) + "\n";
+        output += ui.showNumTask(taskList.getNumTask());
+        return output;
     }
 
     /**

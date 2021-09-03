@@ -30,13 +30,14 @@ public abstract class Command {
      * @param taskList The object that holds a list of Task
      * @param ui The object responsible for updating Ui response
      * @param storage The object responsible to save/load list of task to/from hard disk
+     * @return String to be printed out by this command
      */
-    abstract public void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage);
 
     /**
      * Returns if a command is terminal command that will exit the program
      *
      * @return True if it is exit command, False otherwise
      */
-    abstract public boolean isExit();
+    public abstract boolean isExit();
 }

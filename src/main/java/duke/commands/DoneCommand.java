@@ -1,10 +1,10 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.main.Ui;
 import duke.main.Storage;
-import duke.tasks.Task;
 import duke.main.TaskList;
+import duke.main.Ui;
+import duke.tasks.Task;
 
 /**
  * Represents command to mark task as done
@@ -24,7 +24,7 @@ public class DoneCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         //TaskList
         Task doneTask = taskList.markAsDone(index);
 
@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
         storage.save(taskList);
 
         //Ui
-        ui.showDoneTask(doneTask);
+        return ui.showDoneTask(doneTask);
     }
 
     /**

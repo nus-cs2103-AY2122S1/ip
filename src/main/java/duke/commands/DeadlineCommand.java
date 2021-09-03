@@ -3,11 +3,11 @@ package duke.commands;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.EmptyTimeException;
-import duke.main.Ui;
 import duke.main.Storage;
+import duke.main.TaskList;
+import duke.main.Ui;
 import duke.tasks.Deadline;
 import duke.tasks.Task;
-import duke.main.TaskList;
 
 /**
  * Represents command to create deadline
@@ -31,7 +31,7 @@ public class DeadlineCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         //TaskList
         Task newTask = new Deadline(this.description, this.time);
         taskList.addTask(newTask);
@@ -40,8 +40,10 @@ public class DeadlineCommand extends Command {
         storage.save(taskList);
 
         //Ui
-        ui.showAddTask(newTask);
-        ui.showNumTask(taskList.getNumTask());
+        String output = "";
+        output += ui.showAddTask(newTask) + "\n";
+        output += ui.showNumTask(taskList.getNumTask());
+        return output;
     }
 
     /**
