@@ -38,97 +38,62 @@ public class Ui {
 
 
     /**
-     * Prints formatted message when duke start.
+     * Returns farewell message when the user exits duke.
+     *
+     * @return A farewell message
      */
-    public void greet() {
-        printMessageWithFormat(INTRO);
-    }
-
-    public String greetForGUI(){
-        return INTRO;
-    }
-
-    /**
-     * Prints formatted message when the user exits duke.
-     */
-    public void farewellMessage() {
-        printMessageWithFormat("Bye bye, i go sleep already. See you again.");
-    }
-
-    public String farewellGUI() {
+    public String farewellMessage() {
         return "Bye bye, i go sleep already. See you again.";
     }
 
     /**
-     * Prints formatted message when a task is added from the task list.
+     * Returns a formatted message when a task is added from the task list.
      * Message includes the descriptions of the task and number of task in the task list.
      *
      * @param taskLeft Number of task in the task list after adding the task.
-     * @param task     The task to be added.
+     * @param t     The task to be added.
+     * @return A formatted message to show that task has been added.
      */
-    public void addTaskMessage(int taskLeft, Task task) {
-        String s = "Got it. I've added this task:\n" + INDENTATION + "  " + task.checkStatus();
-        s += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskLeft);
-        printMessageWithFormat(s);
-    }
-
-    public String addTaskGUI(int taskLeft, Task t) {
+    public String addTaskMessage(int taskLeft, Task t) {
         String s = "Got it. I've added this task:\n" + INDENTATION + "  " + t.checkStatus();
         s += String.format("\nNow you have %d tasks in the list.", taskLeft);
         return s;
     }
 
     /**
-     * Prints formatted message when a task is deleted from the task list.
+     * Returns a formatted message when a task is deleted from the task list.
      * Message includes the descriptions of the task and number of task in the task list.
      *
      * @param taskLeft Number of task in the task list after deleting the task.
-     * @param task     The task to be deleted.
+     * @param t     The task to be deleted.
+     * @return A formatted message to show that task has been deleted.
      */
-    public void deleteTaskMessage(int taskLeft, Task task) {
-        String s = "Noted. I've removed this task:\n" + INDENTATION + "  " + task.checkStatus();
-        s += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskLeft);
-        printMessageWithFormat(s);
-    }
-
-    public String deleteTaskGUI(int taskLeft, Task t) {
+    public String deleteTaskMessage(int taskLeft, Task t) {
         String s = "Noted. I've removed this task:\n" + INDENTATION + "  " + t.checkStatus();
         s += String.format("\nNow you have %d tasks in the list.", taskLeft);
         return s;
     }
 
     /**
-     * Prints formatted message when a task is mark as done.
+     * Returns a formatted message when a task is mark as done.
      * Message includes the descriptions of the task and number of task in the task list.
      *
-     * @param task The task to be marked.
+     * @param t The task to be marked.
+     * @return A formatted message to show that task has been mark as done
      */
-    public void markDoneMessage(Task task) {
-        String s = "Nice! I've marked this task as done:\n   ";
-        s += INDENTATION + task.checkStatus();
-        printMessageWithFormat(s);
-    }
-
-    public String markDoneGUI(Task t) {
+    public String markDoneMessage(Task t) {
         String s = "Nice! I've marked this task as done:\n   ";
         s += INDENTATION + t.checkStatus();
         return s;
     }
 
     /**
-     * Prints formatted message showing the list of task, including the description of the task.
+     * Returns a formatted message showing the list of task, including the description of the task.
      *
      * @param taskList The task list to be printed.
+     * @return The string containing the list of tasks
      */
-    public void listTasks(ArrayList<Task> taskList) {
-        StringBuilder s = new StringBuilder("Here are the tasks in your list:");
-        for (int i = 1; i <= taskList.size(); i++) {
-            s.append(String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i - 1).checkStatus()));
-        }
-        printMessageWithFormat(s.toString());
-    }
-
-    public String listTasksGUI(ArrayList<Task> taskList) {
+    public String listTasks(ArrayList<Task> taskList) {
         if (taskList.size() > 0) {
             StringBuilder s = new StringBuilder("Here are the tasks in your list:");
             for (int i = 1; i <= taskList.size(); i++) {

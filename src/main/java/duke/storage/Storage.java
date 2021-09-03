@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.ui.Ui;
 
 /**
  * Encapsulate the handling of loading and storing files on local directory for duke.

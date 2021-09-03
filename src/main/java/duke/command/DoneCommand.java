@@ -36,8 +36,7 @@ public class DoneCommand extends DukeCommand {
      */
     @Override
     public String execute() throws NoSuchTaskException {
-//        ui.markDoneMessage(list.mark(taskNumber));
         storage.save(list.getList());
-        return ui.markDoneGUI(list.mark(taskNumber));
+        return ui.markDoneMessage(list.mark(taskNumber));
     }
 }

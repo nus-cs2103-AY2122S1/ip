@@ -32,8 +32,8 @@ public abstract class DukeCommand {
     /**
      * Executes the command.
      *
-     * @throws DukeException When an error occurred.
      * @return A message to be displayed on the GUI.
+     * @throws DukeException When an error occurred.
      */
     public abstract String execute() throws DukeException;
 

@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  * @author Zhi Bin
  * @version  Duke Level 10
  */
-public class Main extends Application{
+public class Main extends Application {
     private Duke duke;
 
     /**
@@ -35,8 +35,8 @@ public class Main extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         duke = new Duke();
-        try{
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml" ));
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             primaryStage.setTitle("Duke Bot");

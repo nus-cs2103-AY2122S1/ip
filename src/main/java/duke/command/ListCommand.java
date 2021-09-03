@@ -30,7 +30,6 @@ public class ListCommand extends DukeCommand {
      */
     @Override
     public String execute() {
-//        ui.listTasks(list.getList());
-        return ui.listTasksGUI(list.getList());
+        return ui.listTasks(list.getList());
     }
 }

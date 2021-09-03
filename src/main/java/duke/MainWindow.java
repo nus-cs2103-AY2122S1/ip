@@ -30,6 +30,10 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/shrek.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pepe.jpg"));
 
+    /**
+     * The function to invoke once the Main has loaded. This shows
+     * the greeting message and sets some property.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -52,12 +56,12 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        if (!response.equals("")){
+        if (!response.equals("")) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
             );
-            if (response.equals("Bye bye, i go sleep already. See you again.")){
+            if (response.equals("Bye bye, i go sleep already. See you again.")) {
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {

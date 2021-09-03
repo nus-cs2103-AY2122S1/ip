@@ -35,8 +35,7 @@ public class AddCommand extends DukeCommand {
     @Override
     public String execute() {
         list.add(task);
-//        ui.addTaskMessage(list.size(), task);
         storage.save(list.getList());
-        return ui.addTaskGUI(list.size(), task);
+        return ui.addTaskMessage(list.size(), task);
     }
 }

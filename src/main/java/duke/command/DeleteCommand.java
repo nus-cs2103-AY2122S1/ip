@@ -38,8 +38,7 @@ public class DeleteCommand extends DukeCommand {
     @Override
     public String execute() throws NoSuchTaskException {
         Task t = list.delete(taskNumber);
-//        ui.deleteTaskMessage(list.size(), t);
         storage.save(list.getList());
-        return ui.deleteTaskGUI(list.size(), t);
+        return ui.deleteTaskMessage(list.size(), t);
     }
 }

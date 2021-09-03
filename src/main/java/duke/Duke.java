@@ -1,10 +1,7 @@
 package duke;
 
-import java.util.Scanner;
-
-import duke.command.ExitCommand;
-
 import duke.command.DukeCommand;
+import duke.command.ExitCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -17,7 +14,7 @@ import duke.ui.Ui;
  * @author Zhi Bin
  * @version Duke Level 10
  */
-public class Duke{
+public class Duke {
     private final Storage storage;
     private final TaskList taskList;
     private final Ui ui;
