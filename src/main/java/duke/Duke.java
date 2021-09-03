@@ -12,6 +12,7 @@ import duke.misc.TaskList;
 public class Duke {
     private final TaskList tl;
     private final Parser p;
+    private boolean isExited;
 
     /**
      * Constructor for Duke class.
@@ -22,6 +23,11 @@ public class Duke {
         tl = new TaskList();
         tl.initialise();
         p = new Parser();
+        isExited = false;
+    }
+
+    public boolean getIsExited() {
+        return isExited;
     }
 
     /**
@@ -32,6 +38,9 @@ public class Duke {
      * @return A text that duke should reply with.
      */
     public String getResponse(String input) {
+        if (input.equals("bye")) {
+            isExited = true;
+        }
         try {
             return p.executeCommand(input, tl);
         } catch (DukeException | IOException e) {
