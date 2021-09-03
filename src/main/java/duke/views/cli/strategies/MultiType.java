@@ -120,7 +120,8 @@ public class MultiType extends RespondWith {
         assert query != null;
         try {
             int index = Integer.parseInt(query.substring(done.length()).strip()) - 1;
-            if (index >= userTasks.size() || index < 0) {
+            boolean isWithinBounds = index >= userTasks.size() || index < 0;
+            if (!isWithinBounds) {
                 throw DukeException.createIndexOutOfBoundsException(userTasks.size(), index + 1);
             }
             Task task = userTasks.get(index);

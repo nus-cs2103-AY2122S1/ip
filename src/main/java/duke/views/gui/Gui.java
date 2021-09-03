@@ -3,12 +3,12 @@ package duke.views.gui;
 import duke.views.InteractionLayer;
 import duke.views.cli.Greeter;
 import duke.views.cli.Loader;
-import duke.views.cli.strategies.RespondWith;
+import duke.views.cli.strategies.RespondWithDelegated;
 
 public class Gui implements InteractionLayer {
     protected Loader loader;
     protected Greeter greeter;
-    protected RespondWith responder;
+    protected RespondWithDelegated responder;
 
     /**
      * Creates an instance equipped with a responder.
@@ -16,7 +16,7 @@ public class Gui implements InteractionLayer {
      * @param responder A parser of user input and generates a suitable response
      *                  when fed input.
      */
-    public Gui(RespondWith responder) {
+    public Gui(RespondWithDelegated responder) {
         loader = new Loader();
         greeter = new Greeter();
         this.responder = responder;
@@ -33,7 +33,7 @@ public class Gui implements InteractionLayer {
     }
 
     @Override
-    public RespondWith getResponder() {
+    public RespondWithDelegated getResponder() {
         return responder;
     }
 

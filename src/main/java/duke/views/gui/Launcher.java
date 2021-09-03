@@ -2,7 +2,7 @@ package duke.views.gui;
 
 import java.io.IOException;
 
-import duke.views.cli.strategies.MultiType;
+import duke.views.cli.strategies.MultiTypeDelegated;
 import duke.views.gui.controllers.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +16,7 @@ public class Launcher extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            this.gui = new Gui(new MultiType());
+            this.gui = new Gui(new MultiTypeDelegated());
             this.gui.initCallbacks();
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
