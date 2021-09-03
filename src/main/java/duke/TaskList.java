@@ -1,6 +1,5 @@
 package duke;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +11,6 @@ public class TaskList {
 
     /** Initialising an empty array into which tasks can be added/manipulated/deleted */
     private List<Task> tasks = new ArrayList<>();
-    private Boolean firstRun;
 
     /**
      * This method provides a string that is the visual representation of the tasks seen by the user.
@@ -59,82 +57,6 @@ public class TaskList {
     }
 
     /**
-     * Assesses the input and activates the necessary response.
-     * @param input The string of input command.
-     * @throws DukeException Exceptions specific to this chatbot.
-     */
-    public String interpretInput(String input) throws DukeException {
-        String task;
-        Type type;
-        LocalDateTime localDateTime;
-        String response = "";
-
-        // Use Java Assertions to check for unacceptable commands
-        Boolean valid = true;
-        if (input.equals("bye")) {
-            System.out.println(byeString());
-            response = byeString();
-        } else if (input.equals("list")) {
-            System.out.println(taskListString(tasks));
-            response = taskListString(tasks);
-        } else if (input.equals("hello")) {
-            System.out.println("Hello! I'm duke.Duke\n"
-                    + "What can I do for you?");
-            response = "Hello! I'm duke.Duke\n"
-                    + "What can I do for you?";
-        } else if (input.startsWith("done ")) {
-            response = Command.doneTask(Integer.parseInt(input.substring(5)), tasks);
-        } else if (input.startsWith("todo ")) {
-            // Remove all whitespaces to test if it is empty
-            String testInput = input.replaceAll("\\s+", "");
-            if (testInput.equals("todo")) {
-                throw new EmptyTodoException();
-            }
-            task = input.substring(5);
-            type = Type.TODO;
-            localDateTime = null;
-            response = Command.addTask(task, type, localDateTime, tasks);
-        } else if (input.startsWith("deadline ")) {
-            String testInput = input.replaceAll("\\s+", "");
-            if (testInput.equals("deadline")) {
-                throw new EmptyDeadlineException();
-            }
-            task = input.substring(9);
-            type = Type.DEADLINE;
-            String[] tokens = task.split(" /by ");
-            localDateTime = Parser.parseDate(tokens[1]);
-            task = tokens[0];
-            response = Command.addTask(task, type, localDateTime, tasks);
-        } else if (input.startsWith("event ")) {
-            task = input.substring(6);
-            type = Type.EVENT;
-            String[] tokens = task.split(" /at ");
-            localDateTime = Parser.parseDate(tokens[1]);
-            task = tokens[0];
-            response = Command.addTask(task, type, localDateTime, tasks);
-        } else if (input.startsWith("delete ")) {
-            response = Command.deleteTask(Integer.parseInt(input.substring(7)), tasks);
-        } else if (input.startsWith("find ")) {
-            List<Task> filteredTasks = Command.findTasks(input.substring(5), tasks);
-            response = taskListString(filteredTasks);
-        } else if (input.startsWith("sort events and deadlines")
-                || input.startsWith("sort deadlines and events")) {
-            response = taskListString(Command.sortTasks(tasks));
-        } else {
-            valid = false;
-        }
-
-        assert valid : "COMMAND NOT FOUND";
-
-        try {
-            Storage.writeToFile(tasks);
-        } catch (IOException err) {
-            System.out.println(err);
-        }
-        return response;
-    }
-
-    /**
      * Method call to activate the chatbot.
      * If command bye is given, the chatbot terminates.
      * @param scanner Scanner that takes in the input.
@@ -150,7 +72,7 @@ public class TaskList {
         if (scanner.hasNext()) {
             String input = scanner.nextLine();
             try {
-                interpretInput(input);
+                Parser.interpretInput(input, this.tasks);
             } catch (DukeException dukeException) {
                 System.out.println(dukeException.getMessage());
                 run(scanner);
@@ -176,7 +98,7 @@ public class TaskList {
 
         String response = "";
         try {
-            response = interpretInput(input);
+            response = Parser.interpretInput(input, this.tasks);
         } catch (Exception err) {
             System.out.println(err.getMessage() + "THIS IS THE ERROR");
         }

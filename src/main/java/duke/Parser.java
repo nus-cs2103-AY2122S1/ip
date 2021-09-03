@@ -1,11 +1,16 @@
 package duke;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.Storage.Storage;
+
 public class Parser {
+
+    public static final String BYE_STRING = "Bye. Hope to see you again soon!";
 
     /**
      * Loads task once files contents are read raw.
@@ -68,5 +73,81 @@ public class Parser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         LocalDateTime localDateTime = LocalDateTime.parse(datetime, formatter);
         return localDateTime;
+    }
+
+    /**
+     * Assesses the input and activates the necessary response.
+     * @param input The string of input command.
+     * @throws DukeException Exceptions specific to this chatbot.
+     */
+    public static String interpretInput(String input, List<Task> tasks) throws DukeException {
+        String task;
+        Type type;
+        LocalDateTime localDateTime;
+        String response = "";
+
+        // Use Java Assertions to check for unacceptable commands
+        Boolean valid = true;
+        if (input.equals("bye")) {
+            System.out.println(BYE_STRING);
+            response = BYE_STRING;
+        } else if (input.equals("list")) {
+            System.out.println(duke.TaskList.taskListString(tasks));
+            response = duke.TaskList.taskListString(tasks);
+        } else if (input.equals("hello")) {
+            System.out.println("Hello! I'm duke.Duke\n"
+                    + "What can I do for you?");
+            response = "Hello! I'm duke.Duke\n"
+                    + "What can I do for you?";
+        } else if (input.startsWith("done ")) {
+            response = Command.doneTask(Integer.parseInt(input.substring(5)), tasks);
+        } else if (input.startsWith("todo ")) {
+            // Remove all whitespaces to test if it is empty
+            String testInput = input.replaceAll("\\s+", "");
+            if (testInput.equals("todo")) {
+                throw new EmptyTodoException();
+            }
+            task = input.substring(5);
+            type = Type.TODO;
+            localDateTime = null;
+            response = Command.addTask(task, type, localDateTime, tasks);
+        } else if (input.startsWith("deadline ")) {
+            String testInput = input.replaceAll("\\s+", "");
+            if (testInput.equals("deadline")) {
+                throw new EmptyDeadlineException();
+            }
+            task = input.substring(9);
+            type = Type.DEADLINE;
+            String[] tokens = task.split(" /by ");
+            localDateTime = Parser.parseDate(tokens[1]);
+            task = tokens[0];
+            response = Command.addTask(task, type, localDateTime, tasks);
+        } else if (input.startsWith("event ")) {
+            task = input.substring(6);
+            type = Type.EVENT;
+            String[] tokens = task.split(" /at ");
+            localDateTime = Parser.parseDate(tokens[1]);
+            task = tokens[0];
+            response = Command.addTask(task, type, localDateTime, tasks);
+        } else if (input.startsWith("delete ")) {
+            response = Command.deleteTask(Integer.parseInt(input.substring(7)), tasks);
+        } else if (input.startsWith("find ")) {
+            List<Task> filteredTasks = Command.findTasks(input.substring(5), tasks);
+            response = duke.TaskList.taskListString(filteredTasks);
+        } else if (input.startsWith("sort events and deadlines")
+                || input.startsWith("sort deadlines and events")) {
+            response = duke.TaskList.taskListString(Command.sortTasks(tasks));
+        } else {
+            valid = false;
+        }
+
+        assert valid : "COMMAND NOT FOUND";
+
+        try {
+            Storage.writeToFile(tasks);
+        } catch (IOException err) {
+            System.out.println(err);
+        }
+        return response;
     }
 }
