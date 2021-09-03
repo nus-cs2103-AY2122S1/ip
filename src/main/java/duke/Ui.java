@@ -20,24 +20,6 @@ public class Ui {
     }
 
     /**
-     * Returns a String as a welcome message.
-     *
-     * @return the String message.
-     */
-    public String getWelcomeMessage() {
-        return "Hello! I'm duke.Duke\n" + "     What can I do for you?";
-    }
-
-    /**
-     * Returns a String as a goodbye message.
-     *
-     * @return the String message.
-     */
-    public String getGoodByeMessage() {
-        return "Bye. Hope to see you again soon!";
-    }
-
-    /**
      * Returns a String as a response to an unrecognised command.
      *
      * @return the String response.

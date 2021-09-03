@@ -67,6 +67,7 @@ public class Storage {
                     );
                     t.addToList(e);
                     break;
+                default:
                 }
             }
         } catch (Exception e) {
