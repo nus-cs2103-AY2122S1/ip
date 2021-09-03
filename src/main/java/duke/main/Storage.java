@@ -16,10 +16,11 @@ import java.util.Scanner;
  * Represents as class that handles saving/loading tasks to/from hard disk
  */
 public class Storage {
-    private String filePath;
+    private static final String DONE = "1";
+    private static final String NOT_DONE = "0";
     private static String delimiter = " | ";
     private static String delimiter_regex = " \\| ";
-
+    private String filePath;
     /**
      * Creates Storage class based on file path
      *
@@ -47,7 +48,7 @@ public class Storage {
     private String storageElementToFileLine(StorageElement storageElement) {
         List<String> stringList = new ArrayList<>();
         stringList.add(storageElement.getTaskIcon());
-        stringList.add(storageElement.getDone() ? "1" : "0");
+        stringList.add(storageElement.getDone() ? DONE : NOT_DONE);
         stringList.add(storageElement.getDescription());
 
         if (storageElement.getTime() != null) {
