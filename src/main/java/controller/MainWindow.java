@@ -58,8 +58,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         // Greet user
-        Message greetingMessage = new Message("Hello! I'm Duke, what shall we do today?", "٩(｡•́‿•̀｡)۶");
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingMessage.toString(), dukeImage));
+        String greetingText = this.duke.greet();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingText, dukeImage));
     }
 
     /**
