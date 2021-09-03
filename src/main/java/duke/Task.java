@@ -26,7 +26,7 @@ public abstract class Task {
         this.task = task;
         this.done = false;
         this.type = type;
-        this.datetime = LocalDateTime.now();
+        this.datetime = null;
     }
 
     /**
@@ -39,7 +39,7 @@ public abstract class Task {
         this.task = task;
         this.done = done;
         this.type = type;
-        this.datetime = LocalDateTime.now();
+        this.datetime = null;
     }
 
     /**
@@ -53,7 +53,7 @@ public abstract class Task {
         this.task = task;
         this.done = done;
         this.type = type;
-        this.datetime = datetime;
+        this.datetime = null;
     }
 
     /**
@@ -63,7 +63,7 @@ public abstract class Task {
         this.task = "";
         this.done = false;
         this.type = Type.TODO;
-        this.datetime = LocalDateTime.now();
+        this.datetime = null;
     }
 
     /**
