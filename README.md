@@ -1,5 +1,5 @@
 
-# CS2103 Duke Project  
+# CS2103/T Duke Project  
 
 <img height="100" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Duke_%28Java_mascot%29_waving.svg/226px-Duke_%28Java_mascot%29_waving.svg.png"/>
 
