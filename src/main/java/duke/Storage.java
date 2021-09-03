@@ -84,8 +84,6 @@ public class Storage {
         int len = fileDirectories.length;
         String currDir = "";
 
-        String returnMsg = "";
-
         for (int i = 0; i < len - 1; i++) {
             currDir += fileDirectories[i];
             File currFile = new File(currDir);

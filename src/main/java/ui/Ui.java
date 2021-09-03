@@ -137,8 +137,10 @@ public class Ui {
             break;
         default:
             try {
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means");
+                String unknownCmdMsg = String.format("OOPS!!! I'm sorry, but I don't know what that means");
+                throw new DukeException(unknownCmdMsg);
             } catch (DukeException e) {
+                msg.add(e.getMessage());
                 System.out.println(e.getMessage());
                 System.out.println(Ui.breakline);
             }
