@@ -1,9 +1,9 @@
 package duke;
 
+import java.util.Scanner;
+
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Deals with interactions with the user.
@@ -11,7 +11,7 @@ import java.util.Scanner;
  * @author Adam Ho
  */
 public class Ui {
-    private final String DIVIDER = "\t____________________________________________________________";
+    private static final String DIVIDER = "\t____________________________________________________________";
     private Scanner sc = new Scanner(System.in);
 
     public String readCommand() {
@@ -30,13 +30,22 @@ public class Ui {
         System.out.println("\tGoodbye! Please visit me again soon :(");
     }
 
+    /**
+     * Shows to user that a task was added to the task list successfully.
+
+     */
     public void showAddTask(TaskList tasks, Task task) {
-        System.out.println("\tGot it. I've added this task: \n      " + task);
+        System.out.println("\tGot it. I've added this task:\n\t  " + task);
         System.out.println("\tNow you have " + tasks.getListSize() + " in the list.");
     }
 
+    /**
+     * Shows to user that a task was deleted from the task list successfully.
+     * @param tasks The task list containing the user's tasks.
+     * @param task The task to add into the task list.
+     */
     public void showDeleteTask(TaskList tasks, Task task) {
-        System.out.println("\tNoted. I've removed this task: \n      " + task);
+        System.out.println("\tNoted. I've removed this task:\n\t  " + task);
         System.out.println("\tNow you have " + tasks.getListSize() + " in the list.");
     }
 
@@ -44,6 +53,10 @@ public class Ui {
         System.out.println("\tWe couldn't load your data file ><");
     }
 
+    /**
+     * Shows to user the current list of tasks.
+     * @param tasks The task list containing the user's tasks.
+     */
     public void showTaskList(TaskList tasks) {
         System.out.println("\tHere are the tasks in your list:");
         int id = 1;
@@ -53,7 +66,7 @@ public class Ui {
     }
 
     public void showTaskDone(Task task) {
-        System.out.println("\tNice! I've marked this task as done:  \n\t" + task);
+        System.out.println("\tNice! I've marked this task as done:\n\t  " + task);
     }
 
     public void showError(String errorMessage) {
