@@ -26,12 +26,13 @@ public class Duke {
         while (!shouldExit) {
             String input = Ui.readInput();
             Command command = Parser.parse(input, taskList);
-            command.execute(taskList, storage);
+            String output = command.execute(taskList, storage);
+            Ui.formatAndPrint(output);
             shouldExit = command.shouldExit();
         }
     }
 
     public static void main(String[] args) {
-        new Duke("data/Duke.txt").run();
+        new Duke("data/duke.txt").run();
     }
 }
