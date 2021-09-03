@@ -19,6 +19,12 @@ import duke.command.DukeException;
 public class TaskList {
     /** Formatter to change String to a Date */
     protected static SimpleDateFormat formatter = new SimpleDateFormat("MMM dd yyyy hh:mm aaa");
+
+    private static final int STATUS_ICON_INDEX = 4;
+    private static final int TASK_DESCRIPTION_INDEX = 7;
+    private static final int BY_INDEX_JUMP = 5;
+    private static final int AT_INDEX_JUMP = 5;
+
     private List<Task> toDoList;
 
     /**
@@ -33,43 +39,48 @@ public class TaskList {
             char type = s.charAt(1);
             switch (type) {
             case 'T':
-                Todo t = new Todo(s.substring(7));
-                if (s.charAt(4) == 'x') {
+                Todo t = new Todo(s.substring(TASK_DESCRIPTION_INDEX));
+                if (s.charAt(STATUS_ICON_INDEX) == 'x') {
                     t.markAsDone();
                 }
                 toDoList.add(t);
                 break;
             case 'D':
-                int deadlineIndex = s.indexOf("(by:");
                 Calendar deadlineCal = Calendar.getInstance();
 
+                int deadlineIndex = s.indexOf("(by:");
+
                 try {
-                    deadlineCal.setTime(formatter.parse(s.substring(deadlineIndex + 5, s.length() - 1)));
+                    deadlineCal.setTime(formatter.parse(s.substring(deadlineIndex + BY_INDEX_JUMP, s.length() - 1)));
                 } catch (ParseException e) {
                     System.out.println(e);
                 }
 
-                Deadline d = new Deadline(s.substring(7, deadlineIndex), deadlineCal);
-                if (s.charAt(4) == 'x') {
+                Deadline d = new Deadline(s.substring(TASK_DESCRIPTION_INDEX, deadlineIndex), deadlineCal);
+
+                if (s.charAt(STATUS_ICON_INDEX) == 'x') {
                     d.markAsDone();
                 }
+
                 toDoList.add(d);
                 break;
             case 'E':
-                int eventIndex = s.indexOf("(at:");
-
                 Calendar eventCal = Calendar.getInstance();
 
+                int eventIndex = s.indexOf("(at:");
+
                 try {
-                    eventCal.setTime(formatter.parse(s.substring(eventIndex + 5, s.length() - 1)));
+                    eventCal.setTime(formatter.parse(s.substring(eventIndex + AT_INDEX_JUMP, s.length() - 1)));
                 } catch (ParseException e) {
                     System.out.println(e);
                 }
 
-                Event event = new Event(s.substring(7, eventIndex), eventCal);
-                if (s.charAt(4) == 'x') {
+                Event event = new Event(s.substring(TASK_DESCRIPTION_INDEX, eventIndex), eventCal);
+
+                if (s.charAt(STATUS_ICON_INDEX) == 'x') {
                     event.markAsDone();
                 }
+
                 toDoList.add(event);
                 break;
             default:

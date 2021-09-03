@@ -13,8 +13,10 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends AnchorPane {
     private static final String DOTTED_LINES = "-".repeat(80);
+
     private static final String LOADING_ERROR = DOTTED_LINES + "\nFile cannot be created\n" + DOTTED_LINES;
     private static final String SAVING_ERROR = DOTTED_LINES + "\nFile cannot be saved\n" + DOTTED_LINES;
+
     private static final String WELCOME_MESSAGE = DOTTED_LINES +
             "\nHello I'm LOTTERY-A\n" +
             "Also known as the List Of Tasks That Eventually Require Your Attention\n" +
@@ -97,7 +99,11 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(BYE_MESSAGE, dukeImage));
     }
 
-    /** Shows that task has been added. */
+    /** Shows that task has been added.
+     *
+     * @param taskDesc String representing task that has been added to taskList
+     * @param size Size of taskList after task has been added
+     */
     public void showAddTaskMessage(String taskDesc, int size) {
         String addTaskMessage = DOTTED_LINES +
                 "\nGot it. I've added this task:\n" +
@@ -107,7 +113,11 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(addTaskMessage, dukeImage));
     }
 
-    /** Shows that task has been deleted. */
+    /** Shows that task has been deleted.
+     *
+     * @param taskDesc String representing task that has been deleted from taskList
+     * @param size Size of taskList after task has been deleted
+     */
     public void showDeleteTaskMessage(String taskDesc, int size) {
         String deleteTaskMessage = DOTTED_LINES +
                 "\nNoted. I've removed this task:\n" +
@@ -117,7 +127,10 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(deleteTaskMessage, dukeImage));
     }
 
-    /** Shows that task has been marked as done. */
+    /** Shows that task has been marked as done.
+     *
+     * @param taskDesc String representing task that has been marked as done
+     */
     public void showMarkAsDoneMessage(String taskDesc) {
         String markAsDoneMessage = DOTTED_LINES +
                 "\nNice! I've marked this task as done:\n" +
@@ -126,6 +139,10 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(markAsDoneMessage, dukeImage));
     }
 
+    /** Shows list of tasks.
+     *
+     * @param taskList String representing list of tasks
+     */
     public void showListOfTasks(String taskList) {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(taskList, dukeImage));
     }
