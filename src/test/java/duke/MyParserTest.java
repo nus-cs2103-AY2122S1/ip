@@ -130,7 +130,7 @@ public class MyParserTest {
             parser.parse("hi", "", d);
             fail();
         } catch (DukeException e) {
-            assertEquals("OOPS!!! I'm Sorry, but I don't know what that means", e.getMessage());
+            assertEquals("OOPS!!! I'm Sorry, but I don't know what 'hi' means", e.getMessage());
         }
     }
 
