@@ -1,9 +1,8 @@
 package duke.task;
 
-import duke.Storage;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import duke.Storage;
 
 /**
  * TaskList class encapsulates a list of tasks.

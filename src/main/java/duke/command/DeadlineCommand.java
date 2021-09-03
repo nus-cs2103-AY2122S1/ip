@@ -26,14 +26,14 @@ public class DeadlineCommand extends AddCommand {
         String[] line = description.split(" /by ");
         if (line.length != 2) {
             throw new DukeIllegalFormatException(
-                    "☹ OOPS!!! Seems like you have entered a wrong format for a deadline task. " +
-                            "Try this instead: deadline <description> /by <date>"
+                "☹ OOPS!!! Seems like you have entered a wrong format for a deadline task. " +
+                    "Try this instead: deadline <description> /by <date>"
             );
         }
         Task task = new Deadline(line[0], line[1]);
         tasks.add(task, storage);
         System.out.println("Got it. I've added this task:\n  " +
-                task +
-                "\nNow you have " + tasks.toArray().length + " task(s) in the list.");
+            task +
+            "\nNow you have " + tasks.toArray().length + " task(s) in the list.");
     }
 }

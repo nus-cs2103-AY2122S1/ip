@@ -1,24 +1,23 @@
 package duke.task;
 
-import duke.exception.DukeException;
-import duke.exception.DukeIllegalFormatException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import duke.exception.DukeException;
+import duke.exception.DukeIllegalFormatException;
 
 /**
  * Deadline class encapsulates a deadline task.
  */
 public class Deadline extends Task {
     /**
-     * Deadline
-     */
-    protected LocalDate by;
-    /**
      * Deadline Label ie. "D"
      */
     private static final String LABEL = "D";
+    /**
+     * Deadline
+     */
+    protected LocalDate by;
 
     /**
      * Constructs a Deadline with the specified description and deadline.
@@ -36,15 +35,16 @@ public class Deadline extends Task {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             throw new DukeIllegalFormatException(
-                    "☹ OOPS!!! Seems like you have entered a wrong date format. " +
-                            "Try this instead: YYYY-MM-DD"
+                "☹ OOPS!!! Seems like you have entered a wrong date format. " +
+                    "Try this instead: YYYY-MM-DD"
             );
         }
     }
 
     @Override
     public String toString() {
-        return "[" + LABEL + "]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[" + LABEL + "]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
+            ")";
     }
 
     @Override

@@ -1,10 +1,10 @@
 package duke;
 
+import java.io.IOException;
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
-import java.io.IOException;
 
 /**
  * Duke is a educational software project designed to take you through
@@ -32,6 +32,10 @@ public class Duke {
         }
     }
 
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
+    }
+
     /**
      * Runs the Duke instance.
      */
@@ -51,9 +55,5 @@ public class Duke {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 }

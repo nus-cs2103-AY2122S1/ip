@@ -28,9 +28,9 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIndexOutOfRangeException {
         if (index < 1 || index > tasks.toArray().length) {
             throw new DukeIndexOutOfRangeException(tasks.toArray().length > 0
-                    ? "OOPS!!! I'm sorry, index is out of range! " +
-                    "Please try with a number from 1 to " + tasks.toArray().length
-                    : "OOPS!!! I'm sorry, there is nothing in the list yet.");
+                ? "OOPS!!! I'm sorry, index is out of range! " +
+                "Please try with a number from 1 to " + tasks.toArray().length
+                : "OOPS!!! I'm sorry, there is nothing in the list yet.");
         } else {
             Task task = tasks.get(index - 1);
             tasks.markAsDone(task, storage);

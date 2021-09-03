@@ -7,10 +7,10 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
+        + "|  _ \\ _   _| | _____ \n"
+        + "| | | | | | | |/ / _ \\\n"
+        + "| |_| | |_| |   <  __/\n"
+        + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
      * Prompts user input and returns it.
@@ -29,7 +29,7 @@ public class Ui {
      */
     public void showLoadingError() {
         System.err.println("☹ OOPS!!! Seems like your data is corrupted. " +
-                "Please make sure you data file has the correct format.");
+            "Please make sure you data file has the correct format.");
     }
 
     /**

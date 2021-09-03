@@ -25,7 +25,7 @@ public class TodoCommand extends AddCommand {
         Task task = new Todo(description);
         tasks.add(task, storage);
         System.out.println("Got it. I've added this task:\n  " +
-                task +
-                "\nNow you have " + tasks.toArray().length + " task(s) in the list.");
+            task +
+            "\nNow you have " + tasks.toArray().length + " task(s) in the list.");
     }
 }
