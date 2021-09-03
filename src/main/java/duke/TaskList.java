@@ -48,13 +48,13 @@ public class TaskList {
      * @param ui The Ui object.
      * @throws DukeException Thrown in the event the Task cannot be accessed.
      */
-    public void handleDone(String input, Storage storage, Ui ui) throws DukeException {
+    public String handleDone(String input, Storage storage, Ui ui) throws DukeException {
         try {
             int taskNumber = Integer.parseInt(input.substring(5));
             Task currTask = tasks.get(taskNumber - 1);
             currTask.markAsDone();
-            ui.done(currTask);
             storage.saveTask(tasks);
+            return ui.done(currTask);
         } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("can type properly? liddis: 'done taskNumber'");
         } catch (NumberFormatException err) {
@@ -64,10 +64,10 @@ public class TaskList {
         }
     }
 
-    private void add(Task task, Storage storage, Ui ui) {
+    private String add(Task task, Storage storage, Ui ui) {
         tasks.add(task);
         storage.saveTask(tasks);
-        ui.add(task, tasks.size());
+        return ui.add(task, tasks.size());
     }
 
     /**
@@ -77,10 +77,10 @@ public class TaskList {
      * @param ui The Ui object.
      * @throws DukeException Thrown in the event the user input is wrong.
      */
-    public void handleTodo(String input, Storage storage, Ui ui) throws DukeException {
+    public String handleTodo(String input, Storage storage, Ui ui) throws DukeException {
         try {
             Todo todo = new Todo(input.substring(5));
-            add(todo, storage, ui);
+            return add(todo, storage, ui);
         } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("u never say what to do?");
         }
@@ -94,11 +94,11 @@ public class TaskList {
      * @param ui The Ui object.
      * @throws DukeException Thrown in the event the user input is wrong.
      */
-    public void handleDeadline(String input, Storage storage, Ui ui) throws DukeException {
+    public String handleDeadline(String input, Storage storage, Ui ui) throws DukeException {
         try {
             int split = input.indexOf("/");
             Deadline deadline = new Deadline(input.substring(9, split - 1), input.substring(split + 4));
-            add(deadline, storage, ui);
+            return add(deadline, storage, ui);
         } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("this one by when ah? can do it liddis or not: 'deadline task /by when'");
         }
@@ -112,11 +112,11 @@ public class TaskList {
      * @param ui The Ui object.
      * @throws DukeException Thrown in the event the user input is wrong.
      */
-    public void handleEvent(String input, Storage storage, Ui ui) throws DukeException {
+    public String handleEvent(String input, Storage storage, Ui ui) throws DukeException {
         try {
             int split = input.indexOf("/");
             Event event = new Event(input.substring(6, split - 1), input.substring(split + 4));
-            add(event, storage, ui);
+            return add(event, storage, ui);
         } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("this one when ah? can do it liddis or not: 'event task /at when'");
         }
@@ -130,12 +130,13 @@ public class TaskList {
      * @param ui The Ui object.
      * @throws DukeException Thrown in the event the Task cannot be accessed.
      */
-    public void handleDelete(String input, Storage storage, Ui ui) throws DukeException {
+    public String handleDelete(String input, Storage storage, Ui ui) throws DukeException {
         try {
             int taskNumber = Integer.parseInt(input.substring(7)) - 1;
-            ui.delete(tasks.get(taskNumber), tasks.size() - 1);
+            Task deletedTask = tasks.get(taskNumber);
             tasks.remove(taskNumber);
             storage.saveTask(tasks);
+            return ui.delete(deletedTask, tasks.size());
         } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("what u wan delete?");
         } catch (NumberFormatException err) {
@@ -150,7 +151,7 @@ public class TaskList {
      * @param input The user input.
      * @param ui The Ui object.
      */
-    public void handleFind(String input, Ui ui) {
+    public String handleFind(String input, Ui ui) {
         String keyword = input.substring(5);
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
@@ -158,6 +159,6 @@ public class TaskList {
                 matchingTasks.add(task);
             }
         }
-        ui.displayMatchingList(new TaskList(matchingTasks));
+        return ui.displayMatchingList(new TaskList(matchingTasks));
     }
 }

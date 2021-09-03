@@ -35,9 +35,11 @@ public class Ui {
 
     /**
      * Displays a welcome message when Duke is loaded.
+     * @return String A welcome message.
      */
-    public void welcome() {
+    public String welcome() {
         reply("Hello i is Duke\nWhat u want?");
+        return "Perry the platypus?!\nWhat do you want?";
     }
 
     /**
@@ -51,35 +53,42 @@ public class Ui {
     /**
      * Prints the exit message.
      */
-    public void exit() {
+    public String exit() {
         System.out.println("i zao first");
+        return "i zao first";
     }
 
     /**
      * Displays the current task list.
      * @param tasks The TaskList object.
      */
-    public void displayList(TaskList tasks) {
+    public String displayList(TaskList tasks) {
+        String list = "";
         for (int i = 0; i < tasks.length(); i++) {
             Task task = tasks.get(i);
-            System.out.println((i + 1) + "." + task.toString());
+            String taskString = (i + 1) + "." + task.toString();
+            System.out.println(taskString);
+            list = list + taskString + "\n";
         }
+        return list;
     }
 
     /**
      * Prints the task completed message.
      * @param completedTask The completed Task.
      */
-    public void done(Task completedTask) {
+    public String done(Task completedTask) {
         System.out.println("noice this thing done:\n" + completedTask);
+        return "noice this thing done:\n" + completedTask;
     }
 
     /**
      * Prints the error message.
      * @param e The DukeException object.
      */
-    public void showLoadingError(DukeException e) {
+    public String showLoadingError(DukeException e) {
         System.out.println(e.getMessage());
+        return e.getMessage();
     }
 
     /**
@@ -87,8 +96,10 @@ public class Ui {
      * @param task The added Task.
      * @param length The number of Tasks in the TaskList.
      */
-    public void add(Task task, int length) {
-        System.out.println("one more thing: " + task.toString() + "\nNow you got " + length + " thing(s). sian");
+    public String add(Task task, int length) {
+        String taskAdded = "one more thing: " + task.toString() + "\nNow you got " + length + " thing(s). sian";
+        System.out.println(taskAdded);
+        return taskAdded;
     }
 
     /**
@@ -96,20 +107,26 @@ public class Ui {
      * @param task The deleted Task.
      * @param length The number of Tasks in the TaskList.
      */
-    public void delete(Task task, int length) {
-        System.out.println("this one no more liao ah :\n" + task.toString()
-                + "\nNow you got " + length + " thing(s). sian");
+    public String delete(Task task, int length) {
+        String deleteMessage = "this one no more liao ah :\n" + task.toString()
+                + "\nNow you got " + length + " thing(s). sian";
+        System.out.println(deleteMessage);
+        return deleteMessage;
     }
 
     /**
      * Prints the list of matching Tasks.
      * @param tasks The list of matching Tasks.
      */
-    public void displayMatchingList(TaskList tasks) {
+    public String displayMatchingList(TaskList tasks) {
         System.out.println("all these similar one:");
+        String matchingList = "all these similar one:\n";
         for (int i = 0; i < tasks.length(); i++) {
             Task task = tasks.get(i);
-            System.out.println((i + 1) + "." + task.toString());
+            String matchingTask = (i + 1) + "." + task.toString();
+            System.out.println(matchingTask);
+            matchingList = matchingList + matchingTask + "\n";
         }
+        return matchingList;
     }
 }
