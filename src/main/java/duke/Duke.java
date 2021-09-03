@@ -18,16 +18,11 @@ import javafx.stage.Stage;
  */
 public class Duke extends Application {
 
-    private Storage storage;
+    private final Storage storage;
     private Ui ui;
     private final TaskList tasks;
     private ScrollPane scrollPane;
-    private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-
-
 
     /**
      * Empty constructor for javafx.
@@ -91,12 +86,12 @@ public class Duke extends Application {
     public void start(Stage primaryStage) {
         // GUI components initialization
         scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
+        VBox dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
         AnchorPane mainLayout = new AnchorPane();
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
 
         // Initialize ui
         ui = new Ui(dialogContainer);
@@ -144,6 +139,8 @@ public class Duke extends Application {
      * @param stringInput String supplied by user.
      */
     private void processInput(String stringInput) {
+        assert stringInput != null : "processInput requires non empty input string";
+
         ui.echoUser(stringInput);
         try {
             Command parsedCommand = Parser.parse(stringInput);

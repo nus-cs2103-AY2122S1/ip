@@ -29,6 +29,9 @@ public class AddCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        assert ui != null : "AddCommand must execute with a Ui";
+        assert tasks != null : "AddCommand must execute with a TaskList";
+
         tasks.add(task);
         ui.showMessage(this.message(tasks));
     }

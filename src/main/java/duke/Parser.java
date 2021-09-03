@@ -30,6 +30,8 @@ public class Parser {
      * @throws DukeException Invalid inputs recieved.
      */
     protected static Command parse(String input) throws DukeException {
+        assert input != null;
+
         String[] inputArray = input.split(" ");
         String[] params;
         int selectedTask;

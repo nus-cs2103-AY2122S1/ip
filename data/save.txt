@@ -1,2 +1,2 @@
-E|0|asd regex|2019-06-01
+E|1|asd regex|2019-06-01
 T|0|something else
