@@ -1,8 +1,8 @@
 package duke;
 
-import duke.command.Command;
-
 import java.io.IOException;
+
+import duke.command.Command;
 
 /**
  * Encapsulates the Duke chatbot.
@@ -40,7 +40,7 @@ public class Duke {
             }
         }
         //exit
-        storage.writeTasksToFile(taskList.tasks);
+        storage.writeTasksToFile(taskList.getTasks());
     }
 
     public static void main(String[] args) {

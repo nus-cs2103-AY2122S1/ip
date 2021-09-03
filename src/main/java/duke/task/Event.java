@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.task.Task;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -40,7 +38,7 @@ public class Event extends Task {
     private void setDateTime(String at) {
         this.at = at;
         String[] dateTime = at.split(" ");
-        this.eventDate =  LocalDate.parse(dateTime[0].trim());
+        this.eventDate = LocalDate.parse(dateTime[0].trim());
         this.eventTime = LocalTime.parse(dateTime[1].trim());
     }
 
@@ -75,8 +73,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("%s (at: %s)", super.toString(),
-                eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy ")) +
-                eventTime.format(DateTimeFormatter.ofPattern("h:mm a")));
-
+                eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy "))
+                + eventTime.format(DateTimeFormatter.ofPattern("h:mm a")));
     }
 }

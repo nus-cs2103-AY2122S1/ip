@@ -1,15 +1,15 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Encapsulates the task list object.
  */
 public class TaskList {
-    List<Task> tasks;
+    private List<Task> tasks;
 
     /**
      * Creates new TaskList instance.
@@ -41,5 +41,9 @@ public class TaskList {
 
     public void remove(int i) {
         this.tasks.remove(i);
+    }
+
+    public List<Task> getTasks() {
+        return this.tasks;
     }
 }

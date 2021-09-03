@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
 
 public class FindCommand implements Command {
     private String keyword;

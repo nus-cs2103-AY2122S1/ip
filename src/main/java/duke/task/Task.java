@@ -7,10 +7,6 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    public abstract String getTypeIndicator();
-
-    public abstract String toFileRecord();
-
     /**
      * Constructor for new task objects as input by user.
      *
@@ -31,6 +27,10 @@ public abstract class Task {
         this.description = description;
         this.isDone = isDone;
     }
+
+    public abstract String getTypeIndicator();
+
+    public abstract String toFileRecord();
 
     /**
      * Gets the completion status of the task.

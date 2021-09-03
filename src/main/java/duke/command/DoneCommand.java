@@ -1,9 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
+
 
 /**
  * Encapsulates the done command.

@@ -1,12 +1,12 @@
 package duke.command;
 
-import duke.task.Deadline;
 import duke.DukeException;
+import duke.TaskList;
+import duke.Ui;
+import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import duke.TaskList;
 import duke.task.ToDo;
-import duke.Ui;
 
 /**
  * Encapsulates the add task command.
@@ -24,7 +24,7 @@ public class AddCommand implements Command {
     }
 
     /**
-     * Creates a new task from user's input and adds task to the given tasklist.
+     * Creates a new task from user's input and adds task to the given task list.
      *
      * @param tasks TaskList instance which the new task is to be added to.
      * @param ui Duke's UI.
@@ -43,16 +43,16 @@ public class AddCommand implements Command {
         case "event":
             String[] eventInfo = taskInfo.split(" /at ");
             if (eventInfo.length == 1) {
-                throw new DukeException("☹ OOPS!!! Please enter event information in the following " +
-                        "format:\nevent [event name] /at [yyyy-mm-dd HH:MM]");
+                throw new DukeException("☹ OOPS!!! Please enter event information in the following "
+                        + "format:\nevent [event name] /at [yyyy-mm-dd HH:MM]");
             }
             t = new Event(eventInfo[0], eventInfo[1]);
             break;
         case "deadline":
             String[] deadlineInfo = taskInfo.split(" /by ");
             if (deadlineInfo.length == 1) {
-                throw new DukeException("☹ OOPS!!! Please enter deadline information in the following " +
-                        "format:\ndeadline [deadline name] /by [yyyy-mm-dd]");
+                throw new DukeException("☹ OOPS!!! Please enter deadline information in the following "
+                        + "format:\ndeadline [deadline name] /by [yyyy-mm-dd]");
             }
             t = new Deadline(deadlineInfo[0], deadlineInfo[1]);
             break;
@@ -63,8 +63,8 @@ public class AddCommand implements Command {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(t);
-        System.out.println(Ui.format("Got it. I've added this task: \n\t" + t +
-                "\nNow you have " + ui.formatNumTasks(tasks.getSize()) + " in the list."));
+        System.out.println(Ui.format("Got it. I've added this task: \n\t" + t
+                + "\nNow you have " + ui.formatNumTasks(tasks.getSize()) + " in the list."));
     }
 
     /**
@@ -72,7 +72,7 @@ public class AddCommand implements Command {
      *
      * @return If the command is an exit command.
      */
-   public boolean isExit() {
+    public boolean isExit() {
         return false;
     }
 }
