@@ -19,8 +19,8 @@ public class ExitCommand extends Command {
      * @param storage  The storage that may be modified of referenced by the command.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        Ui.farewell();
+    public String execute(TaskList taskList, Storage storage) {
+        return Ui.farewell();
     }
 
     /**

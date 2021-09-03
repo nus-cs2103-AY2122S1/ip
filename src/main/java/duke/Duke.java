@@ -2,6 +2,9 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.javafx.Main;
+import javafx.application.Application;
+import javafx.application.Platform;
 
 /**
  * A class that encapsulates Duke, a task management bot.
@@ -18,44 +21,34 @@ public class Duke {
     private TaskList tasks;
 
     /**
-     * Constructs a Duke bot that stores the incoming tasks into a txt file with specified name.
-     *
-     * @param fileName The file name you want to store your tasks in.
+     * Constructs a Duke bot that save its tasks in the {@code tasks.txt} file.
      */
-    public Duke(String fileName) {
-        this.storage = new Storage(fileName);
+    public Duke() {
+        this.storage = new Storage("tasks.txt");
         try {
             this.tasks = this.storage.parseToTaskList();
         } catch (DukeException e) {
-            Ui.reportError(e);
+            this.getResponse(e.getMessage());
         }
     }
 
-    /**
-     * Invokes the Duke bot.
-     *
-     * @param args The command line arguments.
-     */
     public static void main(String[] args) {
-        new Duke("tasks.txt").run();
+        Application.launch(Main.class, args);
     }
 
     /**
-     * Runs the Duke bot. Users may deal with tasks by entering command.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    private void run() {
-        boolean isExit = false;
-        Ui.greet();
-
-        while (!isExit) {
-            try {
-                String input = Ui.readCommand();
-                Command command = Parser.parseCommand(input);
-                command.execute(this.tasks, this.storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                Ui.reportError(e);
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parseCommand(input);
+            if (command.isExit()) {
+                Platform.exit();
             }
+            return command.execute(this.tasks, this.storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

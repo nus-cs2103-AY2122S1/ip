@@ -8,6 +8,6 @@ public class IndexOutOfBoundException extends DukeException {
      * Constructs an {@code IndexOutOfBoundException}.
      */
     public IndexOutOfBoundException() {
-        super("☹ OOPS!!! The item index you filled in is out of bound!");
+        super("OOPS!!! The item index you filled in is out of bound!");
     }
 }
