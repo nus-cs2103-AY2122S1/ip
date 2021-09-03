@@ -79,7 +79,7 @@ public class Ui {
     public String markDone(int taskNumber) {
         String response = "Nice! I've marked this task as done:\n";
         tasks.getTask(taskNumber).markAsDone();
-        storage.write(tasks.getTaskList(), storage.getFilePath()); ///////////////////////////
+        storage.write(tasks.getTaskList(), storage.getFilePath());
         response += "\t[" + tasks.getTask(taskNumber).getStatusIcon() + "] "
                 + tasks.getTask(taskNumber).getDescription() + "\n";
         return response;
@@ -94,7 +94,7 @@ public class Ui {
         String response = "Noted. I've removed this task:\n";
         response += "\t" + tasks.getTask(taskNumber) + "\n";
         tasks.deleteTask(taskNumber);
-        storage.write(tasks.getTaskList(), storage.getFilePath()); ////////////////////////////
+        storage.write(tasks.getTaskList(), storage.getFilePath());
         response += "Now you have " + tasks.length() + " in the list.\n";
         return response;
     }
@@ -106,7 +106,7 @@ public class Ui {
      */
     public String add(Task task) {
         tasks.addTask(task);
-        storage.write(tasks.getTaskList(), storage.getFilePath()); /////////////////////////////
+        storage.write(tasks.getTaskList(), storage.getFilePath());
         String response = "Got it. I've added this task:\n";
         response += "\t" + task + "\n";
         response += "Now you have " + tasks.length() + " tasks in the list.\n";
