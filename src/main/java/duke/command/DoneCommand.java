@@ -1,6 +1,12 @@
 package duke.command;
 
-import duke.*;
+
+import duke.IncompleteCommandException;
+import duke.Parser;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+
 
 public class DoneCommand extends Command {
 

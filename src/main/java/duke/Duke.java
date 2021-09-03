@@ -14,6 +14,11 @@ public class Duke {
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Duke constructor that requires the file path.
+     *
+     * @param filePath String of the filepath.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);

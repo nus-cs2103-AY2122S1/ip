@@ -1,14 +1,5 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -19,16 +10,26 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 /**
  * Handles all interaction between the program and the files.
  */
 public class Storage {
 
-    String folderName;
-    String fileName;
-    String dirPath;
-    String filePath;
-    Ui ui = new Ui();
+    private String folderName;
+    private String fileName;
+    private String dirPath;
+    private String filePath;
+    private Ui ui = new Ui();
 
     /**
      * Initialise the path for the files.
@@ -78,7 +79,6 @@ public class Storage {
      */
     @SuppressWarnings("unchecked")
     public void saveData(TaskList taskList) {
-//        String dirPath = System.getProperty("user.dir") + "\\src\\main\\data\\dukeData.json";
         File savedData = new File(filePath);
 
         //Add employees to list
@@ -86,15 +86,15 @@ public class Storage {
 
         for (int i = 0; i < taskList.getTotalNumberOfTask(); i++) {
             Task currTask = taskList.getTaskById(i);
-            JSONObject TaskDetails = new JSONObject();
+            JSONObject taskDetails = new JSONObject();
             String type = currTask.getType().toString();
-            TaskDetails.put("type", type);
-            TaskDetails.put("value", currTask.getValue());
-            TaskDetails.put("time", currTask.getTime() == null ? "" : currTask.getTime().toString());
-            TaskDetails.put("done", currTask.isDone());
+            taskDetails.put("type", type);
+            taskDetails.put("value", currTask.getValue());
+            taskDetails.put("time", currTask.getTime() == null ? "" : currTask.getTime().toString());
+            taskDetails.put("done", currTask.isDone());
 
             JSONObject taskObj = new JSONObject();
-            taskObj.put("task", TaskDetails);
+            taskObj.put("task", taskDetails);
             jsonTaskList.add(taskObj);
         }
 
