@@ -66,6 +66,9 @@ public class AddCommand extends Command {
      * @return `Message`.
      */
     public Message getOutputMessage() {
+        assert list != null : "task list should not be null";
+        assert task != null : "task should not be null";
+
         String prefix = "Got it. I've added this task:";
         int numOfTasks = list.getNumberOfTasks();
         String taskWord = numOfTasks == 1 ? "task" : "tasks";
