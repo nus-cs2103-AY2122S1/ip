@@ -1,5 +1,17 @@
 package lifeline.command;
 
+import static lifeline.util.ErrorString.ERROR_DEADLINE_INCORRECT_FORMAT;
+import static lifeline.util.ErrorString.ERROR_DEADLINE_MISSING_DETAILS;
+import static lifeline.util.ErrorString.ERROR_DELETE_MISSING_INDEX;
+import static lifeline.util.ErrorString.ERROR_DONE_MISSING_INDEX;
+import static lifeline.util.ErrorString.ERROR_EVENT_INCORRECT_FORMAT;
+import static lifeline.util.ErrorString.ERROR_EVENT_MISSING_DETAILS;
+import static lifeline.util.ErrorString.ERROR_FIND_MISSING_KEYWORD;
+import static lifeline.util.ErrorString.ERROR_INDEX_OUT_OF_BOUNDS;
+import static lifeline.util.ErrorString.ERROR_INVALID_COMMAND;
+import static lifeline.util.ErrorString.ERROR_NON_INTEGER_INDEX;
+import static lifeline.util.ErrorString.ERROR_TODO_MISSING_DETAILS;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -48,6 +60,14 @@ public class CommandHandler {
         return ui.exit();
     }
 
+    /**
+     * Displays help message to inform users on available commands and its usage.
+     * @param command User input.
+     * @param storage Storage to save or load tasks.
+     * @param taskList List of tasks.
+     * @param ui Ui to display information to user.
+     * @return Help message to inform users on available commands and its usage.
+     */
     public static String handleHelp(String command, Storage storage, TaskList taskList, Ui ui) {
         assert command.equals("help");
         return ui.showHelpMessage();
@@ -71,8 +91,7 @@ public class CommandHandler {
         // Get Deadline name and details
         String[] description = commands[1].split("/by", 2);
         if (description.length != 2) {
-            throw new LifelineException("Deadline is not of the correct format! Please use deadline <name> /by "
-                    + "<dd/MM/yy HHmm>");
+            throw new LifelineException(ERROR_DEADLINE_INCORRECT_FORMAT);
         }
         try {
             // Parse date from user input
@@ -85,8 +104,7 @@ public class CommandHandler {
             storage.save(taskList);
             return ui.showAddedTask(newTask);
         } catch (DateTimeParseException e) {
-            throw new LifelineException("Deadline is not of the correct format! Please use deadline <name> /by "
-                    + "<dd/MM/yy HHmm>");
+            throw new LifelineException(ERROR_DEADLINE_INCORRECT_FORMAT);
         }
     }
 
@@ -103,22 +121,20 @@ public class CommandHandler {
      */
     public static String handleEvent(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
-        String errorMessage = "Event date/time not in proper format! Please use event <name> /at "
-                + "<dd/MM/yy> <HHmm>-<HHmm>";
         String[] commands = getCommands(command);
         assert Command.EVENT.hasCommand(commands[0]);
 
         // Get event name and details
         String[] descriptions = commands[1].trim().split("/at", 2);
         if (descriptions.length != 2) {
-            throw new LifelineException(errorMessage);
+            throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
         }
         String eventName = descriptions[0].trim();
 
         // Get event date and duration
         String[] eventDateAndDuration = descriptions[1].trim().split("\\s", 2);
         if (eventDateAndDuration.length != 2) {
-            throw new LifelineException(errorMessage);
+            throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
         }
         String eventDate = eventDateAndDuration[0];
         String eventDuration = eventDateAndDuration[1];
@@ -133,7 +149,7 @@ public class CommandHandler {
             // Get start time and endtime of event
             String[] duration = eventDuration.split("-", 2);
             if (duration.length != 2) {
-                throw new LifelineException(errorMessage);
+                throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
             }
 
             // Create time pattern
@@ -149,7 +165,7 @@ public class CommandHandler {
             storage.save(taskList);
             return ui.showAddedTask(newTask);
         } catch (DateTimeParseException e) {
-            throw new LifelineException(errorMessage);
+            throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
         }
     }
 
@@ -246,19 +262,19 @@ public class CommandHandler {
     private static void handleIncompleteCommand(String command) throws LifelineException {
         switch (command) {
         case "done":
-            throw new LifelineException("You did not specify an integer! Please use done <number>");
+            throw new LifelineException(ERROR_DONE_MISSING_INDEX);
         case "delete":
-            throw new LifelineException("You did not specify an integer! Please use delete <number>");
+            throw new LifelineException(ERROR_DELETE_MISSING_INDEX);
         case "todo":
-            throw new LifelineException("Details of todo cannot be blank!");
+            throw new LifelineException(ERROR_TODO_MISSING_DETAILS);
         case "deadline":
-            throw new LifelineException("Details of deadline cannot be blank!");
+            throw new LifelineException(ERROR_DEADLINE_MISSING_DETAILS);
         case "event":
-            throw new LifelineException("Details of event cannot be blank!");
+            throw new LifelineException(ERROR_EVENT_MISSING_DETAILS);
         case "find":
-            throw new LifelineException("Keyword was not provided! Please use find <keyword>");
+            throw new LifelineException(ERROR_FIND_MISSING_KEYWORD);
         default:
-            throw new LifelineException("I am sorry! I don't know what that means! \u2639");
+            throw new LifelineException(ERROR_INVALID_COMMAND);
         }
 
     }
@@ -267,11 +283,11 @@ public class CommandHandler {
         try {
             int taskIndex = Integer.parseInt(index) - 1;
             if (taskIndex >= taskList.getSize() || taskIndex < 0) {
-                throw new LifelineException("Index is out of bounds!");
+                throw new LifelineException(ERROR_INDEX_OUT_OF_BOUNDS);
             }
             return taskIndex;
         } catch (NumberFormatException e) {
-            throw new LifelineException("Index is not an integer! Please use " + command + " <number>");
+            throw new LifelineException(ERROR_NON_INTEGER_INDEX);
         }
     }
 }

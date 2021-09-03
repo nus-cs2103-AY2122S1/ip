@@ -49,8 +49,8 @@ public class Ui {
                     uncompletedTask++;
                 }
             }
-            stringBuilder.append("You have " + uncompletedTask + " uncompleted " +
-                    (uncompletedTask > 1 ? "tasks" : "task") + ".\n");
+            stringBuilder.append("You have " + uncompletedTask + " uncompleted "
+                    + (uncompletedTask > 1 ? "tasks" : "task") + ".\n");
         }
         return stringBuilder.toString();
     }

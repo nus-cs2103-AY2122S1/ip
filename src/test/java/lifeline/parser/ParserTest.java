@@ -1,5 +1,6 @@
 package lifeline.parser;
 
+import static lifeline.util.ErrorString.ERROR_INVALID_COMMAND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -58,7 +59,7 @@ public class ParserTest {
             Command c = Parser.parse("blah");
             fail();
         } catch (LifelineException e) {
-            assertEquals("I am sorry! I don't know what that means!", e.getMessage());
+            assertEquals(ERROR_INVALID_COMMAND, e.getMessage());
         }
     }
 }
