@@ -9,6 +9,9 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Represents a TaskList object.
@@ -196,18 +199,20 @@ public class TaskList {
                 + " in the list.";
     }
 
-
     public String printTasksWithKeyword(String keyword) {
-        TaskList listWithKeyword = new TaskList();
-        for (Task task : tasks) {
-            if (task.toString().contains(keyword)) {
-                listWithKeyword.add(task);
-            }
-        }
-        if (listWithKeyword.size() < 1) {
+        String[] tasksFiltered = tasks.stream()
+                .map(Task::toString)
+                .filter(x -> x.contains(keyword))
+                .toArray(String[]::new);
+
+        if (tasksFiltered.length < 1) {
             return "There are no tasks that matches this keyword!";
         } else {
-            return TaskList.printTaskList(listWithKeyword);
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < tasksFiltered.length; i++) {
+                sb.append(i + 1).append(".").append(tasksFiltered[i]).append('\n');
+            }
+            return sb.toString();
         }
     }
 
