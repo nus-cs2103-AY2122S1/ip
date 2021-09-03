@@ -64,13 +64,18 @@ public class Ui {
      * @param exception the exception with its message to be printed to the user
      * @throws DialogException the dialog cannot have the same id while the app is running
      */
-    public static void printError(Exception exception) throws DialogException {
+    public static String getErrorText(Exception exception) {
         if (Dialog.containsId(exception.toString())) {
-            System.out.println(Dialog.get(exception.toString()));
+            return Dialog.get(exception.toString()).toString();
         } else {
-            Dialog errorMessage = Dialog.generate(exception.toString());
+            Dialog errorMessage = null;
+            try {
+                errorMessage = Dialog.generate(exception.toString());
+            } catch (DialogException e) {
+                e.printStackTrace();
+            }
             errorMessage.add("☹ OOPS!!! " + exception.getMessage());
-            System.out.println(errorMessage);
+            return errorMessage.toString();
         }
     }
 
@@ -80,10 +85,10 @@ public class Ui {
      * @throws DialogException the dialog cannot have the same id while the app is running
      * @throws IOException     if there is any error dealing with the system IO
      */
-    public static void printSelectSaveFile() throws DialogException, IOException {
+    public static String getSelectSaveFileText() throws DialogException, IOException {
         String dialogId = "selectSaveFile";
         if (Dialog.containsId(dialogId)) {
-            System.out.println(Dialog.get(dialogId));
+            return Dialog.get(dialogId).toString();
         } else {
             Dialog selectSaveFile = Dialog.generate("selectSaveFile");
             selectSaveFile.add("Select your save file:\n");
@@ -102,7 +107,7 @@ public class Ui {
                 }
             }
             selectSaveFile.add("(input <new_file_name> to create new save file)");
-            System.out.println(selectSaveFile);
+            return selectSaveFile.toString();
         }
     }
 
@@ -111,20 +116,15 @@ public class Ui {
      *
      * @throws DialogException the dialog cannot have the same id while the app is running
      */
-    public static void showWelcome() throws DialogException {
-        Dialog greeting = Dialog.generate("greeting");
-
-        String logo = "     ___       __       __    ______  _______\n"
-                + "        /   \\     |  |     |  |  /      ||   ____|\n"
-                + "       /  ^  \\    |  |     |  | |  ,----'|  |__\n"
-                + "      /  /_\\  \\   |  |     |  | |  |     |   __|\n"
-                + "     /  _____  \\  |  `----.|  | |  `----.|  |____\n"
-                + "    /__/     \\__\\ |_______||__|  \\______||_______|\n";
-
-        greeting.add(logo);
-        greeting.add("Hello! I'm Alice, your personal assistant");
-        greeting.add("What can I do for you?");
-        System.out.println(greeting);
+    public static String getWelcomeText() throws DialogException {
+        String dialogId = "greeting";
+        if (Dialog.containsId(dialogId)) {
+            return Dialog.get(dialogId).toString();
+        } else {
+            Dialog greeting = Dialog.generate("greeting");
+            greeting.add("Hello! I'm alice.Alice, your personal assistant, what can I do for you?");
+            return greeting.toString();
+        }
     }
 
     /**
@@ -133,14 +133,14 @@ public class Ui {
      * @param fileName the filename to be printed along with the confirmation message
      * @throws DialogException the dialog cannot have the same id while the app is running
      */
-    public static void showConfirmCreateNewFile(String fileName) throws DialogException {
+    public static String getConfirmCreateNewFileText(String fileName) throws DialogException {
         String dialogId = "confirmCreateNewFile" + fileName;
         if (Dialog.containsId(dialogId)) {
-            System.out.println(Dialog.get(dialogId));
+            return Dialog.get(dialogId).toString();
         } else {
             Dialog confirmCreate = Dialog.generate(dialogId);
             confirmCreate.add("Are you sure you want to create new file " + fileName + " [y/N]?");
-            System.out.println(confirmCreate);
+            return confirmCreate.toString();
         }
     }
 
@@ -149,10 +149,10 @@ public class Ui {
      *
      * @throws DialogException the dialog cannot have the same id while the app is running
      */
-    public static void showCommandList() throws DialogException {
+    public static String getCommandListText() throws DialogException {
         String dialogId = "commands";
         if (Dialog.containsId(dialogId)) {
-            System.out.println(Dialog.get(dialogId));
+            return Dialog.get(dialogId).toString();
         } else {
             Dialog commandsList = Dialog.generate(dialogId);
             commandsList.add("This is the following commands, I can perform:\n");
@@ -169,13 +169,13 @@ public class Ui {
             commandsList.add("8. 'delete <task index>' - delete that task from the list");
             commandsList.add("9. 'commands' - show this current command window");
             commandsList.add("10.'bye' - end session and save your task list");
-            System.out.println(commandsList);
+            return commandsList.toString();
         }
     }
 
     /** Print to the user the taskList stored in the Ui in a taskDialog format */
-    public void showCurrentList() {
-        System.out.println(taskDialog);
+    public String getCurrentList() {
+        return taskDialog.toString();
     }
 
     /**
@@ -183,11 +183,11 @@ public class Ui {
      *
      * @throws DialogException the dialog cannot have the same id while the app is running
      */
-    public static void showGoodBye() throws DialogException {
+    public static String getGoodByeText() throws DialogException {
         // a good bye will always be shown only once in this update
         Dialog bye = Dialog.generate("bye");
         bye.add("Bye. Hope to see you again soon!");
-        System.out.println(bye);
+        return bye.toString();
     }
 
     /**
