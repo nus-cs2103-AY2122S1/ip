@@ -3,12 +3,8 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
-    protected TaskType taskType;
-    enum TaskType {
-        D,
-        E,
-        T
-    }
+    protected String taskType;
+
 
     protected Task() {
         this.description = "NONE";

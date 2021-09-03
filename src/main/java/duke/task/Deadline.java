@@ -15,7 +15,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate date) {
         super(description);
-        this.taskType = TaskType.D;
+        this.taskType = "D";
         this.date = date;
     }
 
@@ -28,8 +28,8 @@ public class Deadline extends Task {
 
     @Override
     public String getDataString() {
-        return String.format("%s_~_%s_~_%s_~_%s", this.taskType,
-            this.getStatusInt(), this.description, this.date.format(DateTimeFormatter.ofPattern("d/MM/yyyy")));
+        String str = super.getDataString();
+        return String.format("%s_~_%s", str, this.date.format(DateTimeFormatter.ofPattern("d/MM/yyyy")));
     }
     @Override
     public boolean equals(Object object) {

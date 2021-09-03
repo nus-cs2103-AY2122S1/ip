@@ -19,7 +19,7 @@ public class Response {
     }
 
     public String showError(DukeException e) {
-        return e.toString();
+        return e.getMessage();
     }
 
     /**
