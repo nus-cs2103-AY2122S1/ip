@@ -35,7 +35,7 @@ public class Deadline extends Task {
     }
 
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.getFormattedTime() +")";
+        return "[" + this.taskIcon + "]" + super.toString() + " (by: " + this.getFormattedTime() + ")";
     }
 
     /**

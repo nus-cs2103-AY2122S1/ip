@@ -23,7 +23,7 @@ public class Event extends Task {
     }
 
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.getFormattedTime() +")";
+        return "[" + this.taskIcon + "]" + super.toString() + " (at: " + this.getFormattedTime() +")";
     }
 
     @Override
