@@ -1,6 +1,6 @@
 # InferiorDuke
 
-Welcome, ***stalker***, to my personal rendition of Duke aka InferiorDuke, where I try to follow requirements for my iP in hopes of passing this module!
+Welcome, ***stalker***, to my *personal* rendition of ~~Duke~~ aka InferiorDuke, where I try to follow requirements for my iP in hopes of passing this module!
 
 > "If it ain't broke, don't fix it" - Thomas Bertram Lance ([Source](https://digital.hagley.org/Nationbiz_197705#page/30/mode/2up))
 
@@ -23,7 +23,7 @@ As this is a work in progress, most of the features currently available are stil
 
 ## Additional Optionals
 
-- [ ] Add JavaDocs to all public methods
+- [X] Add JavaDocs to all public methods
 - [ ] All code 100% CheckStyle
 - [ ] Make cute logo for InferiorDuke
 
