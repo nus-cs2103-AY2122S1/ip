@@ -5,8 +5,12 @@ import duke.task.TaskList;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
-
 import java.io.File;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 
 public class Duke {
