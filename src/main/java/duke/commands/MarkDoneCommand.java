@@ -39,8 +39,9 @@ public class MarkDoneCommand extends Command {
         String args = this.args[0];
         ArrayList<Integer> listOfTasks = StringCleaner.toArrayListInteger(args);
 
+        int taskListSize = tasks.size();
         for (Integer i : listOfTasks) {
-            if (i > tasks.size()) {
+            if (i > taskListSize || i <= 0) {
                 throw new InvalidActionException("Task " + i + " does not exist.");
             }
         }

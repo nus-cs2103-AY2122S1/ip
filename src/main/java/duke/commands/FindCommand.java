@@ -33,10 +33,6 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws InvalidActionException {
         String query = this.args[0];
-        if (query.equals("find")) {
-            // bug: for (valid) command `find find`, this exception is thrown.
-            throw new InvalidActionException("Please enter the search string you want to find.");
-        }
         return tasks.findAndAnnounce(query);
     }
 }

@@ -26,7 +26,7 @@ import duke.ui.Ui;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    private final String VER     = "v1.0.0"; // Level-10 GUI
+    private final String VER     = "v1.1.0"; // C-Friendlier-Syntax
     private final String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
