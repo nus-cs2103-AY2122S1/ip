@@ -40,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Prints out the contents of all the tasks in the ArrayList of task.
+     * Returns a String representing the contents of all the tasks in the ArrayList of task.
      *
      * @param ui An Ui instance.
      * @return A String representing all the task in the list.
@@ -55,7 +55,7 @@ public class TaskList {
 
 
     /**
-     * Searches the ArrayList of Task for tasks with the specified keyword and uses an Ui to print it out.
+     * Searches the ArrayList of Task for tasks with the specified keyword and returns a String from Ui.
      *
      * @param ui An Ui instance that prints the list of task containing the keyword.
      * @param keyword A String representing the keyword.
