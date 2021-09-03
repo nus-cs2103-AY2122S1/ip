@@ -13,10 +13,11 @@ public class ByeCommand implements Command {
      *
      * @param tasks User's list of tasks.
      * @param ui Duke's UI.
+     * @return The String representation of Duke's response.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        ui.displayGoodbyeMsg();
+    public String execute(TaskList tasks, Ui ui) {
+        return ui.getGoodbyeMsg();
     }
 
     /**

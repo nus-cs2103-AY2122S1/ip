@@ -6,15 +6,15 @@ import duke.Ui;
 public class ListCommand implements Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
+    public String execute(TaskList tasks, Ui ui) {
         if (tasks.getSize() == 0) {
-            System.out.println("There are no tasks in your list yet.");
-            return;
+            return "There are no tasks in your list yet.";
         }
-        System.out.println("Here are the tasks in your list:");
+        StringBuilder response = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 1; i < tasks.getSize() + 1; i++) {
-            System.out.println(i + "." + tasks.get(i - 1));
+            response.append("\t" + i + ". " + tasks.get(i - 1) + "\n");
         }
+        return response.toString();
     }
 
     /**

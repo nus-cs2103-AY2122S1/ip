@@ -24,16 +24,18 @@ public class DeleteCommand implements Command {
      *
      * @param tasks User's list of tasks.
      * @param ui Duke's UI.
+     * @return The String representation of Duke's response.
      * @throws DukeException For invalid inputs.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
         if (idx >= tasks.getSize()) {
-            throw new DukeException("☹ OOPS!!! That task doesn't exist.");
+            throw new DukeException("OOPS!!! That task doesn't exist.");
         }
-        System.out.println(Ui.format("Noted. I've removed this task: \n\t" + tasks.get(idx)
-                + "\nNow you have " + ui.formatNumTasks(tasks.getSize() - 1) + " in the list."));
+        String response = "Noted. I've removed this task: \n\t" + tasks.get(idx)
+                + "\nNow you have " + ui.formatNumTasks(tasks.getSize() - 1) + " in the list.";
         tasks.remove(idx);
+        return response;
     }
 
     /**

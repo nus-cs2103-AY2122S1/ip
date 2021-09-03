@@ -12,21 +12,22 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String execute(TaskList tasks, Ui ui) {
+        StringBuilder response = new StringBuilder("Here are the matching tasks in your list:\n");
         boolean hasMatch = false;
         int matchCount = 0;
         for (int i = 0; i < tasks.getSize(); i++) {
             Task t = tasks.get(i);
             if (t.containsKeyword(this.keyword)) {
                 matchCount++;
-                System.out.println(String.format("%d. %s", matchCount, t));
+                response.append(String.format("%d. %s\n", matchCount, t));
                 hasMatch = true;
             }
         }
         if (!hasMatch) {
-            System.out.println("No matches so far.");
+            return "No matches so far.";
         }
+        return response.toString();
     }
 
     public boolean isExit() {

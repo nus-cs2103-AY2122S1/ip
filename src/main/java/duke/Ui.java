@@ -5,6 +5,8 @@ import java.util.Scanner;
 public class Ui {
     private static String line =
             "*･゜ﾟ･*･゜ﾟ･*:.｡..｡.:*･'(*ﾟ▽ﾟ*)'･*:.｡. .｡.:*･゜ﾟ･*゜ﾟ･*";
+    private static String welcomeMsg = "Hello! I'm Duke\nWhat can I do for you?";
+    private static String goodbyeMsg = "See you next time!";
     private static Scanner sc = new Scanner(System.in);
 
     public static String format(String msg) {
@@ -16,16 +18,16 @@ public class Ui {
     }
 
 
-    public void showWelcome() {
-        System.out.println(format("Hello! I'm Duke\nWhat can I do for you?"));
+    public String getWelcomeMsg() {
+        return welcomeMsg;
     }
 
-    public void displayGoodbyeMsg() {
-        System.out.println(format("See you next time!"));
+    public String getErrorMsg(DukeException e) {
+        return e + "\nWhat else can I do for you?";
     }
 
-    public void displayErrorMsg(DukeException e) {
-        System.out.println(format(e + "\n\nWhat else can I do for you?"));
+    public String getGoodbyeMsg() {
+        return goodbyeMsg;
     }
 
     /**

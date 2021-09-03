@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.Ui;
 
 public interface Command {
-    void execute(TaskList taskList, Ui ui) throws DukeException;
+    String execute(TaskList taskList, Ui ui) throws DukeException;
     boolean isExit();
 }
 

@@ -25,15 +25,15 @@ public class AddCommand implements Command {
 
     /**
      * Creates a new task from user's input and adds task to the given task list.
-     *
      * @param tasks TaskList instance which the new task is to be added to.
      * @param ui Duke's UI.
+     * @return The String representation of Duke's response.
      * @throws DukeException For invalid inputs.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
         if (params.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a task cannot be empty.");
+            throw new DukeException("OOPS!!! The description of a task cannot be empty.");
         }
         Task t;
         String taskType = params[0];
@@ -43,7 +43,7 @@ public class AddCommand implements Command {
         case "event":
             String[] eventInfo = taskInfo.split(" /at ");
             if (eventInfo.length == 1) {
-                throw new DukeException("☹ OOPS!!! Please enter event information in the following "
+                throw new DukeException("OOPS!!! Please enter event information in the following "
                         + "format:\nevent [event name] /at [yyyy-mm-dd HH:MM]");
             }
             t = new Event(eventInfo[0], eventInfo[1]);
@@ -51,7 +51,7 @@ public class AddCommand implements Command {
         case "deadline":
             String[] deadlineInfo = taskInfo.split(" /by ");
             if (deadlineInfo.length == 1) {
-                throw new DukeException("☹ OOPS!!! Please enter deadline information in the following "
+                throw new DukeException("OOPS!!! Please enter deadline information in the following "
                         + "format:\ndeadline [deadline name] /by [yyyy-mm-dd]");
             }
             t = new Deadline(deadlineInfo[0], deadlineInfo[1]);
@@ -60,11 +60,11 @@ public class AddCommand implements Command {
             t = new ToDo(taskInfo);
             break;
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         tasks.add(t);
-        System.out.println(Ui.format("Got it. I've added this task: \n\t" + t
-                + "\nNow you have " + ui.formatNumTasks(tasks.getSize()) + " in the list."));
+        return "Got it. I've added this task: \n\t" + t
+                + "\nNow you have " + ui.formatNumTasks(tasks.getSize()) + " in the list.";
     }
 
     /**

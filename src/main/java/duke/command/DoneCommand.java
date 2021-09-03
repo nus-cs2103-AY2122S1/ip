@@ -27,16 +27,17 @@ public class DoneCommand implements Command {
      *
      * @param tasks User's list of tasks.
      * @param ui Duke's UI.
+     * @return The String representation of Duke's response.
      * @throws DukeException For invalid inputs.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Ui ui) throws DukeException {
         if (idx >= tasks.getSize()) {
-            throw new DukeException("☹ OOPS!!! That task doesn't exist.");
+            throw new DukeException("OOPS!!! That task doesn't exist.");
         }
         Task t = tasks.get(idx);
         t.markAsDone();
-        System.out.println(("Nice! I've marked this task as done: \n\t" + t));
+        return "Nice! I've marked this task as done: \n\t" + t;
     }
 
     /**
