@@ -15,7 +15,7 @@ import bot.error.DukeException;
  */
 public class Parser {
     /**
-     * Returns a Command.
+     * Returns a Command containing information according to the isntruction by the user.
      */
     public Command parse(String input) {
         String[] words = input.trim().split(" ", 2);

@@ -8,17 +8,28 @@ import bot.tasks.Task;
 import bot.tasks.ToDo;
 import bot.utility.TaskList;
 
+/**
+ * Represents a command to add tasks to the TaskList;
+ */
 public class AddCommand extends Command {
     protected static final String TASK_FORMAT = "\n\t Got it. I've added this task:\n\t\t%s\n\t ";
     private final String keyWord;
     private final String info;
     /**
-     * Returns a AddCommand.
+     * Returns a AddCommand with the specified keyWord and info.
+     *
+     * @param keyWord The key word to distinguish between different commands that add tasks to the TaskList;
+     * @param info The necessary information about the tasks to be added.
      */
     public AddCommand(String keyWord, String info) {
         this.keyWord = keyWord;
         this.info = info;
     }
+    /**
+     * Executes the Command and returns a String.
+     *
+     * @return A String to show to the user after execution of the Command.
+     */
     @Override
     public String execute() {
         List<Task> tasks = TaskList.showTasks();

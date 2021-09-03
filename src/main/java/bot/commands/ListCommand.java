@@ -5,7 +5,15 @@ import java.util.List;
 import bot.tasks.Task;
 import bot.utility.TaskList;
 
+/**
+ * Represents a command to show the list of tasks.
+ */
 public class ListCommand extends Command {
+    /**
+     * Executes the Command and returns a String.
+     *
+     * @return A String to show to the user after execution of the Command.
+     */
     @Override
     public String execute() {
         message = new StringBuilder();

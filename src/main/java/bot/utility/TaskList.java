@@ -14,6 +14,11 @@ public class TaskList {
         tasks = Logger.loadList();
     }
 
+    /**
+     * Returns the List of Tasks currently stored in the hard drive.
+     *
+     * @return A List of Tasks
+     */
     public static List<Task> showTasks() {
         return tasks;
     }
