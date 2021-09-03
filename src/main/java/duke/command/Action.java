@@ -48,18 +48,18 @@ public class Action extends Command {
         if (this.words.length != 2) { // Guard Clause
             throw new InvalidFormatException("`" + this.type.toString().toLowerCase() + " ${i}`");
         }
-        
+
         int index;
         try {
             index = Integer.parseInt(this.words[1]);
         } catch (NumberFormatException ex) {
             throw new InvalidIntegerException();
         }
-        
+
         if (index < 1 || index > taskList.getSize()) {
             throw new InvalidTaskNumberException();
         }
-        
+
         if (this.type == Type.DONE) {
             Task t = taskList.getTask(index - 1);
             t.markAsDone();

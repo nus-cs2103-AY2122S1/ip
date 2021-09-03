@@ -1,8 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import duke.tasks.Task;
@@ -18,7 +16,7 @@ public class TaskList {
         LIST,
         SAVE
     }
-    
+
     @FunctionalInterface
     interface CheckFormat<S, T> {
         String apply(S f, T t);
@@ -62,16 +60,16 @@ public class TaskList {
         if (this.tasks.size() == 0) {
             return "No tasks added yet!";
         }
-        
-        CheckFormat<Format, Task> check = (type, task) -> type == Format.LIST 
-                                                            ? task.toString() 
+
+        CheckFormat<Format, Task> check = (type, task) -> type == Format.LIST
+                                                            ? task.toString()
                                                             : task.toSaveString();
 
         String res = IntStream
                 .range(0, this.tasks.size())
                 .mapToObj(i -> (i + 1) + ". " + check.apply(format, this.tasks.get(i)) + "\n")
-                .reduce("", (x, y) -> x + y);       
-        
+                .reduce("", (x, y) -> x + y);   
+
         return res.substring(0, res.length() - 1);
     }
 
@@ -84,7 +82,7 @@ public class TaskList {
         if (this.tasks.size() == 0) {
             return "No tasks added yet!";
         }
-        
+
         String res = IntStream
                 .range(0, this.tasks.size())
                 .filter(i -> this.tasks.get(i).getDescription().toLowerCase().contains(keyword.toLowerCase()))

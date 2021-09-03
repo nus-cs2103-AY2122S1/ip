@@ -27,7 +27,7 @@ public class Storage {
         EVENT,
         DEADLINE
     }
-    
+
     private final String filepath;
 
     /**
@@ -60,11 +60,11 @@ public class Storage {
             for (String line: lines) {
                 String[] data = line.split(Pattern.quote(" | "));
                 Task t;
-                
+
                 if (data.length < 2) { // Guard Clause
                     continue;
                 }
-                
+
                 switch (data[1]) {
                 case "T":
                     t = new ToDo(data[3]);
@@ -83,7 +83,7 @@ public class Storage {
                 if (data[2].equals("1")) {
                     t.markAsDone();
                 }
-                
+
                 tasks.add(t);
             }
             return tasks;
@@ -91,7 +91,7 @@ public class Storage {
             throw new LoadingError("Couldn't load file :(");
         }
     }
-    
+
     private static Task parseDateTime(String[] data, Type type) {
         LocalDate date = LocalDate.parse(data[4]);
         if (data.length == 5) {
