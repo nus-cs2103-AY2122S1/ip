@@ -74,12 +74,12 @@ public class TaskList {
      * @return the collection of task that contains the keyword
      */
     public ArrayList<Task> findKeyword(String keyword) {
-        ArrayList<Task> matched = new ArrayList<>();
+        ArrayList<Task> matchedTasks = new ArrayList<>();
         for (Task task : tasks) {
             if (task.findKeyword(keyword)) {
-                matched.add(task);
+                matchedTasks.add(task);
             }
         }
-        return matched;
+        return matchedTasks;
     }
 }

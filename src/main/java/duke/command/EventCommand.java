@@ -3,6 +3,7 @@ package duke.command;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
+import duke.ResponseFormatter;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -34,6 +35,7 @@ public class EventCommand extends Command {
      * @param ui current ui to access print responses
      * @param storage current storage
      * @throws IOException when there is file save error
+     * @return
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
@@ -41,5 +43,23 @@ public class EventCommand extends Command {
         taskList.add(newEvent);
         storage.writeToFile(taskList);
         ui.printAdd(newEvent, taskList.getList().size());
+    }
+
+    /**
+     * Executes Events Command, adds an event task to the list, returns response
+     * and stores updated list in file
+     *
+     * @param taskList current list
+     * @param rf Response Formatter
+     * @param storage current storage
+     * @throws IOException when there is file save error
+     * @return
+     */
+    @Override
+    public String execute(TaskList taskList, ResponseFormatter rf, Storage storage) throws IOException {
+        Event newEvent = new Event(this.desc, this.at);
+        taskList.add(newEvent);
+        storage.writeToFile(taskList);
+        return rf.formatAdd(newEvent, taskList.getList().size());
     }
 }

@@ -3,12 +3,14 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
+import javafx.application.Platform;
 
 public class Duke {
     private static final String PATHNAME = "data/duke.txt";
     private static TaskList taskList = new TaskList();
     private Ui ui;
     private Storage storage;
+    private ResponseFormatter responseFormatter;
 
     /**
      * Constructor for Duke object
@@ -17,6 +19,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         ui = new Ui();
+        responseFormatter = new ResponseFormatter();
         storage = new Storage(filePath);
         try {
             TaskList temp = storage.readFile();
@@ -54,5 +57,20 @@ public class Duke {
      */
     public static void main(String[] args) {
         new Duke(PATHNAME).run();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parseCommands(input);
+            boolean isExit = command.getExit();
+
+            if (isExit) {
+                Platform.exit();
+            }
+
+            return command.execute(taskList, responseFormatter, storage);
+        } catch (IOException e) {
+            return responseFormatter.formatFileError(e);
+        }
     }
 }
