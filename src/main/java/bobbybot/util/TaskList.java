@@ -1,20 +1,14 @@
 package bobbybot.util;
 
-import bobbybot.tasks.Deadline;
-import bobbybot.tasks.Event;
 import bobbybot.tasks.Task;
-import bobbybot.tasks.ToDo;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
+
 import java.util.List;
 
 /**
  * Represents a task list
  */
 public class TaskList {
-    private static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-uuuu HH:mm");
     private final List<Task> tasks;
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
@@ -29,6 +23,13 @@ public class TaskList {
         return tasks.get(i);
     }
 
+    /**
+     * Adds a task to task list
+     * @param task
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
     /**
      * Getter for List of tasks
      * @return List of task
@@ -62,47 +63,6 @@ public class TaskList {
         System.out.println("  " + taskToDelete);
         tasks.remove(taskToDelete);
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-    }
-
-    /**
-     * Creates a too task
-     * @param description description of task
-     */
-    public void createToDo(String description) {
-        Task newToDo = new ToDo(description);
-        tasks.add(newToDo);
-        System.out.println("Got it. I've added this task:\n  " + newToDo + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.");
-    }
-
-    /**
-     * Creates an event task
-     * @param description description of task
-     * @param at time period of bobbybot.tasks.Event (start-end)
-     */
-    public void createEvent(String description, String at) {
-        Task newEvent = new Event(description, at);
-        tasks.add(newEvent);
-        System.out.println("Got it. I've added this task:\n  " + newEvent + "\n"
-                + "Now you have " + tasks.size() + " tasks in the list.");
-    }
-
-    /**
-     * Creates a deadline task
-     * @param description description of task
-     * @param by date and time that the task should be completed by
-     */
-    public void createDeadline(String description, String by) {
-        // convert string by to LocalDate
-        try {
-            LocalDateTime dateBy = LocalDateTime.parse(by, DT_FORMATTER);
-            Task newDeadline = new Deadline(description, dateBy);
-            tasks.add(newDeadline);
-            System.out.println("Got it. I've added this task:\n  " + newDeadline + "\n"
-                    + "Now you have " + tasks.size() + " tasks in the list.");
-        } catch (DateTimeParseException e) {
-            System.out.println("Please input deadline date in the following format: [dd-mm-yyyy hh:mm]");
-        }
     }
 
     /**

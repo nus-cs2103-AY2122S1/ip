@@ -1,10 +1,8 @@
 package bobbybot.util;
 
-import bobbybot.exceptions.InvalidArgumentException;
-import bobbybot.exceptions.TooManyArgumentsException;
+import bobbybot.commands.Command;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -35,21 +33,18 @@ public class BobbyBot {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        Parser parser = new Parser();
+        Parser parser = new Parser(tasks, ui, storage);
+
         while (true) {
             String userInput = sc.nextLine();
             ui.showLine();
             try {
-                parser.parseCommand(userInput, tasks , ui);
-                storage.save(tasks);
+                Command c = parser.parseCommand(userInput);
+                String response = c.getResponse(tasks, ui, storage);
+                System.out.println(response);
+                //storage.save(tasks);
             } catch (IllegalArgumentException e) {
                 System.out.println("OOPS!!! I'm sorry but I don't know what that mean :-(");
-            } catch (InvalidArgumentException e) {
-                System.out.println("You did not specify the correct details for this command");
-            } catch (TooManyArgumentsException e) {
-                System.out.println("You gave me too many details for this command!");
-            } catch (IOException e) {
-                System.out.println("Could not save tasks to database!\n");
             } finally {
                 ui.showLine();
             }

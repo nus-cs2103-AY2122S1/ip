@@ -1,10 +1,9 @@
-
 import bobbybot.exceptions.InvalidArgumentException;
-import bobbybot.util.Parser;
-import bobbybot.util.TaskList;
 import bobbybot.exceptions.TooManyArgumentsException;
+import bobbybot.util.Parser;
+import bobbybot.util.Storage;
+import bobbybot.util.TaskList;
 import bobbybot.util.Ui;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,10 +17,11 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class ParserTest {
 
-    private final Parser parser = new Parser();
+
     private final TaskList tasks = new TaskList(new ArrayList<>());
     private final Ui ui = new Ui();
-
+    private final Storage storage = new Storage("test.txt");
+    private final Parser parser = new Parser(tasks, ui, storage);
     //testing print statements
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();

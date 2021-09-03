@@ -1,24 +1,96 @@
 package bobbybot.util;
 
+import bobbybot.commands.AddCommand;
+import bobbybot.commands.Command;
 import bobbybot.enums.BotCommand;
 import bobbybot.exceptions.InvalidArgumentException;
 import bobbybot.exceptions.TooManyArgumentsException;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Class helps to handle parsing of user commands
  */
 public class Parser {
 
+    public static final Pattern KEYWORDS_ARGS_FORMAT =
+            Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
+
+    public static final Pattern DATA_ARGS_FORMAT =
+            Pattern.compile("(?<type>[^/]+)(?:/by|/at)(?<time>[^/]+)");
+
+    /**
+     * Used for initial separation of command word and args.
+     */
+    public static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private final TaskList tasks;
+    private final Ui ui;
+    private final Storage storage;
+
+
+    /**
+     * Initialises Parser object with TaskList and Ui
+     * @param tasks taskList of tasks currently loaded
+     * @param ui Ui
+     */
+    public Parser(TaskList tasks, Ui ui, Storage storage) {
+        this.tasks = tasks;
+        this.ui = ui;
+        this.storage = storage;
+    }
+
+
+    /**
+     * Parses user input and creates commands
+     * @param userInput
+     */
+    public Command parseCommand(String userInput) {
+        final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
+        if (!matcher.matches()) {
+            //return new IncorrectCommand();
+        }
+
+        final String command = matcher.group("commandWord").toUpperCase();
+        BotCommand enumCommand = BotCommand.valueOf(command);
+        final String arguments = matcher.group("arguments");
+
+        switch (enumCommand) {
+        case TODO:
+            //Fallthrough
+        case EVENT:
+            //Fallthrough
+        case DEADLINE:
+            return prepareAdd(arguments);
+        default:
+            System.out.println("Invalid command");
+            return null;
+        }
+    }
+
+    private Command prepareAdd(String args) {
+        final Matcher matcher = DATA_ARGS_FORMAT.matcher(args.trim());
+        // Check arg string format
+        if (!matcher.matches()) { // Add todo
+            return new AddCommand(args);
+        }
+        // Add event or deadline
+        if (args.contains("/by")) {
+            return new AddCommand(matcher.group("type").trim(), matcher.group("time").trim(), "deadline");
+        } else if (args.contains("/at")) {
+            return new AddCommand(matcher.group("type").trim(), matcher.group("time").trim(), "event");
+        } else {
+            System.out.println("Failed to add event/deadline");
+            return null;
+        }
+    }
     /**
      * Performs command based on String user input
      * @param userInput string command for chatbot
      * @throws InvalidArgumentException Invalid or no arguments given
      * @throws TooManyArgumentsException Too many /by or /at connectors
      */
+    /*
     public void parseCommand(String userInput, TaskList tasks, Ui ui) throws InvalidArgumentException,
             TooManyArgumentsException {
         List<String> userInputList = new LinkedList<>(Arrays.asList(userInput.split(" ")));
@@ -90,7 +162,7 @@ public class Parser {
             System.out.println("Invalid keyword");
         }
     }
-
+    */
     /**
      * Helper function to check if string is numeric
      * @param str string to test if numeric
