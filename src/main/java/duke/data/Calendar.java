@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import duke.task.DateTimeTask;
+import duke.task.Deadline;
 import duke.task.Event;
 
 class Calendar {
@@ -33,24 +34,20 @@ class Calendar {
      * @param dtTask Timed task to be added to Calendar.
      */
     public void add(DateTimeTask dtTask) {
-        if (!calendar.containsKey(dtTask.getDateTime())) {
-            calendar.put(dtTask.getDateTime(), new ArrayList<>());
-        }
-        assert calendar.containsKey(dtTask.getDateTime()) == true : "Calendar should contain the key";
-        calendar.get(dtTask.getDateTime()).add(dtTask);
         if (dtTask instanceof Event) {
-            if (!calendarEvents.containsKey(dtTask.getDateTime())) {
-                calendarEvents.put(dtTask.getDateTime(), new ArrayList<>());
-            }
-            assert calendarEvents.containsKey(dtTask.getDateTime()) == true : "Event calendar should contain the key";
-            calendarEvents.get(dtTask.getDateTime()).add(dtTask);
-        } else {
-            if (!calendarDeadlines.containsKey(dtTask.getDateTime())) {
-                calendarDeadlines.put(dtTask.getDateTime(), new ArrayList<>());
-            }
-            assert calendarDeadlines.containsKey(dtTask.getDateTime()) == true : "Deadline calendar should contain key";
-            calendarDeadlines.get(dtTask.getDateTime()).add(dtTask);
+            addEntry(dtTask, calendarEvents);
+        } else if (dtTask instanceof Deadline) {
+            addEntry(dtTask, calendarDeadlines);
         }
+        addEntry(dtTask, calendar);
+    }
+
+    private void addEntry(DateTimeTask dtTask, TreeMap<LocalDateTime, ArrayList<DateTimeTask>> map) {
+        LocalDateTime dateTime = dtTask.getDateTime();
+        if (!map.containsKey(dateTime)) {
+            map.put(dateTime, new ArrayList<>());
+        }
+        map.get(dateTime).add(dtTask);
     }
 
     /**

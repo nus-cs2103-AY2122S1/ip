@@ -110,43 +110,71 @@ public class Command {
         assert this.type != null : "Type should not be null";
         switch (this.type) {
         case SINGLE_INPUT:
-            if (this.command.equals(Commands.BYE)) {
-                Main.exit();
-            }
-            return ui.displayCommand(this.command, tasks);
+            return executeSingleInputCommand(tasks, ui);
         case INT_INPUT:
-            Task t;
-            if (this.command.equals(Commands.DONE)) {
-                t = tasks.markDone(this.index, storage);
-            } else {
-                t = tasks.removeTask(this.index, storage);
-            }
-            storage.save();
-            return ui.displayCommand(this.command, this.index, t, tasks);
+            return executeIntInputCommand(tasks, ui, storage);
         case STR_INPUT:
-            assert this.description != null : "Description should not be null";
-            if (this.command.equals(Commands.TODO)) {
-                tasks.addItem(new Todo(this.description), storage);
-                storage.save();
-                return ui.displayCommand(this.command, tasks);
-            }
-            return ui.displayCommand(this.command, this.description, tasks);
+            return executeStrInputCommand(tasks, ui, storage);
         case STR_ARR_INPUT:
-            assert this.subInputs != null : "subInputs should not be null";
-            Task task;
-            if (this.command.equals(Commands.DEADLINE)) {
-                task = new Deadline(subInputs);
-            } else {
-                task = new Event(subInputs);
-            }
-            tasks.addItem(task, storage);
-            storage.save();
-            return ui.displayCommand(this.command, tasks);
+            return executeStrArrInputCommand(tasks, ui, storage);
         case DATETIME_INPUT:
-            assert this.dateTime != null : "dateTime should not be null";
-            return ui.displayCommand(this.command, tasks, this.dateTime);
+            return executeDateTimeInputCommand(tasks, ui);
         default:
-            return "Oops there is an error";
+            throw new DukeException(DukeException.Type.EXECUTE);
         }
+    }
+
+    private String executeDateTimeInputCommand(TaskList tasks, Ui ui) {
+        assert this.dateTime != null : "dateTime should not be null";
+        return ui.displayDateTimeFilteredCommand(this.command, tasks, this.dateTime);
+    }
+
+    private String executeStrArrInputCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        assert this.subInputs != null : "subInputs should not be null";
+        Task task;
+        if (this.command.equals(Commands.DEADLINE)) {
+            task = new Deadline(subInputs);
+        } else if (this.command.equals(Commands.EVENT)) {
+            task = new Event(subInputs);
+        } else {
+            throw new DukeException(DukeException.Type.EXECUTE);
+        }
+        tasks.addItem(task, storage);
+        storage.save();
+        return ui.displayAddOrSingleInputCommand(this.command, tasks);
+    }
+
+    private String executeStrInputCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        assert this.description != null : "Description should not be null";
+        if (this.command.equals(Commands.TODO)) {
+            tasks.addItem(new Todo(this.description), storage);
+            storage.save();
+            return ui.displayAddOrSingleInputCommand(this.command, tasks);
+        } else if (this.command.equals(Commands.FIND)) {
+            return ui.displayFindTaskCommand(this.command, this.description, tasks);
+        }
+        throw new DukeException(DukeException.Type.EXECUTE);
+    }
+
+    private String executeIntInputCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        Task t;
+        if (this.command.equals(Commands.DONE)) {
+            t = tasks.markDone(this.index, storage);
+        } else if (this.command.equals(Commands.DELETE)) {
+            t = tasks.removeTask(this.index, storage);
+        } else {
+            throw new DukeException(DukeException.Type.EXECUTE);
+        }
+        storage.save();
+        return ui.displayTaskModificationCommand(this.command, t, tasks);
+    }
+
+    private String executeSingleInputCommand(TaskList tasks, Ui ui) throws DukeException {
+        if (this.command.equals(Commands.BYE)) {
+            Main.exit();
+        } else if (this.command.equals(Commands.LIST) || this.command.equals(Commands.HELP)) {
+            return ui.displayAddOrSingleInputCommand(this.command, tasks);
+        }
+        throw new DukeException(DukeException.Type.EXECUTE);
     }
 }
