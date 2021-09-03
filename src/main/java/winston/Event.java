@@ -33,6 +33,7 @@ public class Event extends Task {
      */
     @Override
     public String saveFormat() {
+        assert(type == "E");
         return this.type + "," + super.saveFormat() + "," + this.dateAndTime;
     }
 

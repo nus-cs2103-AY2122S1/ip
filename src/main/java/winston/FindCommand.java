@@ -18,6 +18,8 @@ public class FindCommand extends Command {
     @Override
     public String run() {
         TaskList tList = taskList.findString(this.str);
-        return Ui.printMatchingTasks() + Ui.printList(tList);
+        String result = Ui.printMatchingTasks() + Ui.printList(tList);
+        assert(!result.equals(""));
+        return result;
     }
 }

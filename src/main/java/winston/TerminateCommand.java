@@ -15,6 +15,8 @@ public class TerminateCommand extends Command {
      * @return A string of the termination message
      */
     public String run() {
-        return Ui.terminationMessage();
+        String result = Ui.terminationMessage();
+        assert(!result.equals(""));
+        return result;
     }
 }

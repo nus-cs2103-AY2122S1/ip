@@ -28,6 +28,7 @@ public class ToDoTask extends winston.Task {
      */
     @Override
     public String saveFormat() {
+        assert (type == "T");
         return this.type + "," + super.saveFormat();
     }
 
