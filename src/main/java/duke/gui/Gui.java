@@ -32,7 +32,6 @@ public class Gui {
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
-    private Scene scene;
     private Image dukeImage = new Image(this.getClass().getResourceAsStream(DUKE_IMAGE_FILE_PATH));
     private Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE_FILE_PATH));
 
@@ -48,6 +47,11 @@ public class Gui {
         return textToAdd;
     }
 
+    /**
+     * Gets the text that the user has typed into the textfield.
+     *
+     * @return Text that user has has typed into the textfield.
+     */
     public String getUserInput() {
         return userInput.getText();
     }
@@ -119,6 +123,11 @@ public class Gui {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Sets up the Gui.
+     *
+     * @param stage Default stage of a javafx application.
+     */
     public void setup(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -128,12 +137,12 @@ public class Gui {
         sendButton = new Button("Send");
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+        Scene scene = new Scene(mainLayout);
+        stage.setScene(scene);
+        stage.show();
         mainLayout.setPrefSize(ANCHOR_WIDTH, ANCHOR_HEIGHT);
 
         formatWindow(stage);
         setupFunctionality();
-        scene = new Scene(mainLayout);
-        stage.setScene(scene);
-        stage.show();
     }
 }
