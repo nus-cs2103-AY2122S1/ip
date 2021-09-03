@@ -10,6 +10,7 @@ public class Event {
     public Event(String input) {
         //create dates from strings
         this.eventDate = LocalDate.parse(input);
-        this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));        
+        this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+
     }
 }
