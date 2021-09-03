@@ -86,7 +86,7 @@ public class Ui {
      * @param list Current TaskList used.
      * @return String that shows the outcome of a the command the user inputted.
      */
-    public String displayCommand(Command.Commands c, TaskList list) {
+    public String displayAddOrSingleInputCommand(Command.Commands c, TaskList list) {
         switch (c) {
         case HELP:
             return format("bye : Closes the programme\n",
@@ -123,7 +123,7 @@ public class Ui {
      * @param dt Date and Time used by the command.
      * @return String that shows the outcome of a the command the user inputted.
      */
-    public String displayCommand(Command.Commands c, TaskList list, LocalDateTime dt) {
+    public String displayDateTimeFilteredCommand(Command.Commands c, TaskList list, LocalDateTime dt) {
         switch (c) {
         case AT:
             return format(list.getEventsAt(dt));
@@ -141,12 +141,11 @@ public class Ui {
      * Used for commands involving modification of tasks.
      *
      * @param c Type of command the user has inputted.
-     * @param index Index of task modified by the command.
      * @param t Task modified by the command.
      * @param list Current TaskList used.
      * @return String that shows the outcome of a the command the user inputted.
      */
-    public String displayCommand(Command.Commands c, int index, Task t, TaskList list) {
+    public String displayTaskModificationCommand(Command.Commands c, Task t, TaskList list) {
         switch (c) {
         case DONE:
             return format("Nice! I've marked this task as done:", t.toString());
@@ -166,7 +165,7 @@ public class Ui {
      * @param list Current TaskList used.
      * @return String that shows the outcome of a the command the user inputted.
      */
-    public String displayCommand(Command.Commands c, String toFind, TaskList list) {
+    public String displayFindTaskCommand(Command.Commands c, String toFind, TaskList list) {
         return format(list.returnFoundItem(toFind));
     }
 }

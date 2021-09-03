@@ -35,8 +35,8 @@ public class Event extends DateTimeTask {
      */
     @Override
     public String toString() {
-        return "[" + code + "]" + super.toString() + " (at: "
-                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a")) + ")";
+        String dateTime = at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
+        return "[" + code + "]" + super.toString() + " (at: " + dateTime + ")";
     }
 
     /**

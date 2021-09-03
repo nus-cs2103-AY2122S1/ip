@@ -19,6 +19,9 @@ public class TaskList {
     private ArrayList<Task> items;
     /** Calendar object to store dates and times of timed tasks */
     private Calendar calendar;
+    private enum TaskType {
+        T, E, D
+    }
 
     /**
      * Returns a new TaskList object when there is no previously saved data.
@@ -41,29 +44,41 @@ public class TaskList {
         this.items = new ArrayList<>();
         this.calendar = new Calendar();
         for (String[] taskElements : taskArrayList) {
-            Task t = null;
-            switch (taskElements[0]) {
-            case "T":
-                t = new Todo(taskElements[2]);
-                break;
-            case "E":
-                t = new Event(Arrays.copyOfRange(taskElements, 2, taskElements.length));
-                calendar.add((DateTimeTask) t);
-                break;
-            case "D":
-                t = new Deadline(Arrays.copyOfRange(taskElements, 2, taskElements.length));
-                calendar.add((DateTimeTask) t);
-                break;
-            default:
-                break;
-            }
-            if (t != null) {
-                if (taskElements[1].equals("X")) {
-                    t.markDone();
-                }
-                this.items.add(t);
+            Task task = convertSavedDataToTask(taskElements);
+            if (task != null) {
+                items.add(task);
             }
         }
+    }
+
+
+    private Task convertSavedDataToTask(String[] taskElements) throws DukeException {
+        TaskType taskType = TaskType.valueOf(taskElements[0]);
+        Task task;
+        switch (taskType) {
+        case T:
+            String description = taskElements[2];
+            task = new Todo(description);
+            break;
+        case E:
+            String[] eventParameters = Arrays.copyOfRange(taskElements, 2, taskElements.length);
+            task = new Event(eventParameters);
+            calendar.add((DateTimeTask) task);
+            break;
+        case D:
+            String[] deadlineParameters = Arrays.copyOfRange(taskElements, 2, taskElements.length);
+            task = new Deadline(deadlineParameters);
+            calendar.add((DateTimeTask) task);
+            break;
+        default:
+            task = null;
+            break;
+        }
+        boolean isTaskDone = taskElements[1].equals("X");
+        if (task != null && isTaskDone) {
+            task.markDone();
+        }
+        return task;
     }
 
     /**
@@ -78,9 +93,9 @@ public class TaskList {
         if (task instanceof DateTimeTask) {
             DateTimeTask dt = (DateTimeTask) task;
             calendar.add(dt);
-            storage.saveTask(task.getCode(), task.getStatus(), task.getDescription(), dt.getDateTime());
+            storage.saveTimedTask(task.getCode(), task.getStatus(), task.getDescription(), dt.getDateTime());
         } else {
-            storage.saveTask(task.getCode(), task.getStatus(), task.getDescription());
+            storage.saveUntimedTask(task.getCode(), task.getStatus(), task.getDescription());
         }
     }
 
@@ -90,10 +105,13 @@ public class TaskList {
      * @return String array containing a header as the first element and enumerated tasks for subsequent elements.
      */
     public String[] returnItems() {
-        String[] itemList = new String[this.items.size() + 1];
+        int returnArraySize = this.items.size() + 1;
+        String[] itemList = new String[returnArraySize];
         itemList[0] = "Here are the tasks in your list:";
-        for (int i = 0; i < this.items.size(); i++) {
-            itemList[i + 1] = (i + 1) + "." + this.items.get(i);
+        for (int i = 0; i < returnArraySize - 1; i++) {
+            int indexNum = i + 1;
+            Task currentTask = this.items.get(i);
+            itemList[indexNum] = indexNum + "." + currentTask;
         }
         return itemList;
     }
@@ -105,7 +123,8 @@ public class TaskList {
      * @return String array containing a header as the first element and enumerated tasks for subsequent elements.
      */
     public String returnItemCount(int offset) {
-        return "Now you have " + (this.items.size() - offset) + " tasks in the list.";
+        int numberOfItems = this.items.size() - offset;
+        return "Now you have " + numberOfItems + " tasks in the list.";
     }
 
     /**
@@ -117,13 +136,23 @@ public class TaskList {
      * @throws DukeException If index is invalid.
      */
     public Task markDone(int index, Storage storage) throws DukeException {
-        if (index > this.items.size() || index < 1) {
+        if (!isValidIndex(index)) {
             throw new DukeException(DukeException.Type.INDEX);
         }
-        Task t = this.items.get(index - 1);
-        t.markDone();
+        int storedIndex = index - 1;
+        Task task = this.items.get(storedIndex);
+        task.markDone();
         storage.saveTaskDone(index);
-        return t;
+        return task;
+    }
+
+    private boolean isValidIndex(int index) {
+        boolean isWithinSize = index <= this.items.size();
+        boolean isValidIndex = index >= 1;
+        if (isValidIndex && isWithinSize) {
+            return true;
+        }
+        return false;
     }
 
     /**
@@ -133,7 +162,8 @@ public class TaskList {
      * @return String representation of a task at index.
      */
     public String returnTask(int index) {
-        return this.items.get(index - 1).toString();
+        int storedIndex = index - 1;
+        return this.items.get(storedIndex).toString();
     }
 
     /**
@@ -142,7 +172,8 @@ public class TaskList {
      * @return String representation of the last task added.
      */
     public String returnLastTask() {
-        return this.returnTask(items.size());
+        int lastTaskIndex = items.size();
+        return this.returnTask(lastTaskIndex);
     }
 
     /**
@@ -154,11 +185,12 @@ public class TaskList {
      * @throws DukeException If index is invalid.
      */
     public Task removeTask(int index, Storage storage) throws DukeException {
-        if (index > this.items.size() || index < 1) {
+        if (!isValidIndex(index)) {
             throw new DukeException(DukeException.Type.INDEX);
         }
-        storage.removeTask(index - 1);
-        return items.remove(index - 1);
+        int storedIndex = index - 1;
+        storage.removeTask(storedIndex);
+        return items.remove(storedIndex);
     }
 
     /**
