@@ -12,6 +12,9 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class DukeApp extends Application {
+    private static final String DUKE_UI_FXML_PATH = "/view/DukeUi.fxml";
+    private static final String TITLE = "Duke";
+    private static final boolean IS_RESIZABLE = false;
 
     /**
      * Initializes Stage and starts GUI.
@@ -21,15 +24,15 @@ public class DukeApp extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(DukeApp.class.getResource("/view/DukeUi.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(DukeApp.class.getResource(DUKE_UI_FXML_PATH));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke");
-            stage.setResizable(false);
+            stage.setTitle(TITLE);
+            stage.setResizable(IS_RESIZABLE);
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Duke UI fxml file not found: " + e.getMessage());
         }
     }
 }

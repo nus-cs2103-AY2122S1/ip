@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 public class DukeDialogController extends DialogController {
     private static final double LAYOUT_X = 75;
     private static final double LAYOUT_Y = 8;
+    private static final String DUKE_DIALOG_FXML_PATH = "/view/DukeDialog.fxml";
 
     @FXML
     private Pane dialog;
@@ -23,7 +24,7 @@ public class DukeDialogController extends DialogController {
      */
     public DukeDialogController(String text)
             throws IOException {
-        super("/view/DukeDialog.fxml");
+        super(DUKE_DIALOG_FXML_PATH);
         addMessageBox(dialog, text, LAYOUT_X, LAYOUT_Y);
     }
 
@@ -36,7 +37,7 @@ public class DukeDialogController extends DialogController {
      */
     public DukeDialogController(String text, double height)
             throws IOException {
-        super("/view/DukeDialog.fxml", height);
+        super(DUKE_DIALOG_FXML_PATH, height);
         addMessageBox(dialog, text, LAYOUT_X, LAYOUT_Y);
     }
 }

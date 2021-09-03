@@ -54,12 +54,12 @@ public class DialogController extends HBox {
         // will be returned only after it is added by the dialog.
         MessageBox preMessageBox = new MessageBox(text, layoutX, layoutY);
         preMessageBox.heightProperty()
-            .addListener(observable -> {
-                MessageBox messageBox = new MessageBox(
-                    text, layoutX, layoutY, preMessageBox.getHeight());
-                dialog.getChildren().add(messageBox);
-                dialog.getChildren().remove(preMessageBox);
-            });
+                .addListener(observable -> {
+                    MessageBox messageBox = new MessageBox(
+                            text, layoutX, layoutY, preMessageBox.getHeight());
+                    dialog.getChildren().add(messageBox);
+                    dialog.getChildren().remove(preMessageBox);
+                });
         dialog.getChildren().add(preMessageBox);
     }
 }
