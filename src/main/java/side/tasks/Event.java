@@ -95,7 +95,7 @@ public class Event extends Task {
             deadlineLine.append("[E][ ] ");
         }
         String deadlineDetails = this.description.replaceFirst("event", "")
-                + "(at: " + this.startDatetime + " to " + this.endDatetime + ")";
+                + "(at: " + this.startDatetime.toString() + " to " + this.endDatetime.toString() + ")";
         deadlineLine.append(deadlineDetails);
         return deadlineLine.toString();
     }

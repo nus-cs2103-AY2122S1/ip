@@ -75,7 +75,7 @@ public class Deadline extends Task {
             deadlineLine.append("[D][ ] ");
         }
         String deadlineDetails = this.description.replaceFirst("deadline", "")
-                + "(by: " + this.datetime + ")";
+                + "(by: " + this.datetime.toString() + ")";
         deadlineLine.append(deadlineDetails);
         return deadlineLine.toString();
     }
