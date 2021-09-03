@@ -13,13 +13,15 @@ public class EventTest {
 
     @Test
     public void testSaveAsString() {
-        Event task = new Event("1", "project meeting", "23/08/2021 2000 2200");
+        Event task = new Event(CompletionStatus.COMPLETED, "project meeting",
+            "23/08/2021 2000 2200");
         assertEquals("E | 1 | project meeting | 2021-08-23 20:00 22:00", task.convertToString());
     }
 
     @Test
     public void testGetStatusIcon() {
-        Event task = new Event("1", "project meeting", "23/08/2021 2000 2200");
+        Event task = new Event(CompletionStatus.COMPLETED, "project meeting",
+            "23/08/2021 2000 2200");
         assertEquals("X", task.getStatusIcon());
     }
 

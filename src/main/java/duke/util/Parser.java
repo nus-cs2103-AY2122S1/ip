@@ -188,7 +188,6 @@ public class Parser {
                 //in the form hh:mm
                 return LocalTime.parse(timeString);
             } else {
-                // Maybe throw exception
                 throw new InvalidTimeInputException(timeString);
             }
         } catch (DateTimeException e) {

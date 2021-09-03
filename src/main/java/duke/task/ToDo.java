@@ -10,6 +10,7 @@ package duke.task;
  * @author Benedict Chua
  */
 public class ToDo extends Task {
+    private static final String TODO_IDENTIFIER = "T";
     /**
      * Constructs a new ToDo task from the given description.
      *
@@ -25,15 +26,14 @@ public class ToDo extends Task {
      * Constructs a ToDo task from an existing task description and completion status.
      * Used when loading from a save file.
      *
-     * @param completedStatus String indicating the status of completion: 1 if done, 0 if not.
+     * @param completionStatus String indicating the status of completion: 1 if done, 0 if not.
      * @param description String of the task description.
      */
-    public ToDo(String completedStatus, String description) {
+    public ToDo(CompletionStatus completionStatus, String description) {
         super(description);
         assert description.trim().isEmpty() : "ToDo was created with empty description";
-        assert completedStatus.matches("1|0") : String.format("Incorrect completedStatus %s", completedStatus);
 
-        if (completedStatus.equals("1")) {
+        if (completionStatus.equals(CompletionStatus.COMPLETED)) {
             super.markTaskAsDone();
         }
     }
@@ -43,11 +43,11 @@ public class ToDo extends Task {
      */
     @Override
     public String convertToString() {
-        return super.formatString("T");
+        return super.formatString(TODO_IDENTIFIER);
     }
 
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%s]%s", TODO_IDENTIFIER, super.toString());
     }
 }

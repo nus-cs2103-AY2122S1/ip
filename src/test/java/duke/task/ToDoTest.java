@@ -13,19 +13,19 @@ public class ToDoTest {
 
     @Test
     public void testSaveAsString() {
-        ToDo task = new ToDo("1", "read book");
+        ToDo task = new ToDo(CompletionStatus.COMPLETED, "read book");
         assertEquals("T | 1 | read book", task.convertToString());
     }
 
     @Test
     public void testGetStatusIcon() {
-        ToDo task = new ToDo("1", "read book");
+        ToDo task = new ToDo(CompletionStatus.COMPLETED, "read book");
         assertEquals("X", task.getStatusIcon());
     }
 
     @Test
     public void testMarkAsDone() {
-        ToDo task = new ToDo("1", "read book");
+        ToDo task = new ToDo(CompletionStatus.COMPLETED, "read book");
         task.markTaskAsDone();
         assertEquals("[T][X] read book", task.toString());
     }
