@@ -20,11 +20,11 @@ public class DoneCommand extends Command {
      * @param ui the Ui used during execution.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
         try {
             String doneString = taskList.markAsDone(index);
             storage.rewrite(taskList);
-            ui.showDoneMessage(doneString);
+            return ui.getDoneMessage(doneString);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number!");
         }

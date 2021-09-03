@@ -14,8 +14,8 @@ public class ExitCommand extends Command {
      * @param ui the Ui used during execution.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
-        // Do nothing
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
+        return null;
     };
 
     /**

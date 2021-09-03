@@ -12,9 +12,9 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
         String foundTasks = taskList.searchTask(searchWord);
-        ui.showFindMessage(foundTasks);
+        return ui.getFindMessage(foundTasks);
     }
 
     @Override

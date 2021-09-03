@@ -7,37 +7,42 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("./Duke.txt");
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            System.out.println(e.getMessage());
             taskList = new TaskList();
         }
     }
-
-    /**
-     * Runs the chat-bot
-     */
-    public void run() {
-        ui.showWelcomeMessage();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readNextLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(taskList, storage, ui);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
+//
+//    /**
+//     * Runs the chat-bot
+//     */
+//    public void run() {
+//        ui.showWelcomeMessage();
+//        boolean isExit = false;
+//        while (!isExit) {
+//            try {
+//                String fullCommand = ui.readNextLine();
+//                Command c = Parser.parse(fullCommand);
+//                c.execute(taskList, storage, ui);
+//                isExit = c.isExit();
+//            } catch (DukeException e) {
+//                ui.showError(e.getMessage());
+//            }
+//        }
+//        ui.showEndMessage();
+//    }
+//
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(taskList, storage, ui);
+        } catch (DukeException e) {
+            return ui.getError(e.getMessage());
         }
-        ui.showEndMessage();
-    }
-
-    public static void main(String[] args) {
-        new Duke("./Duke.txt").run();
     }
 }
