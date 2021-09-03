@@ -8,17 +8,11 @@ import duke.data.TaskList;
 /**
  * UI class that handles all output to the console for the program (No input).
  */
-public class Ui {
+public class OutputFormatter {
+    private OutputFormatter() {}
 
-    /**
-     * Initialises the UI object to handle output/printing of messages while printing a welcome message.
-     */
-    public Ui() {
-        final String welcomeMessage = "Hello! I'm duke.\nWhat can I do for you?";
-
-        System.out.println("    ____________________________________________________________\n    "
-                + welcomeMessage.replace("\n", "\n    ")
-                + "\n    ____________________________________________________________");
+    public static String getWelcomeMessage() {
+        return "Hello! I'm duke.\nWhat can I do for you?";
     }
 
     /**
@@ -26,17 +20,17 @@ public class Ui {
      *
      * @param message The message to be sent to the user
      */
-    public void printMessage(String message) {
-        System.out.println("    ____________________________________________________________\n    "
+    public static String formatMessage(String message) {
+        return "    ____________________________________________________________\n    "
                 + message.replace("\n", "\n    ")
-                + "\n    ____________________________________________________________");
+                + "\n    ____________________________________________________________";
     }
 
     /**
      * Sends a specialised message for in the case of an error in loading.
      */
-    public void showLoadingError() {
-        printMessage("Error! Cannot load tasks from save file!");
+    public static String getLoadingErrorMessage() {
+        return "Error! Cannot load tasks from save file!";
     }
 
     /**
@@ -44,7 +38,7 @@ public class Ui {
      *
      * @param taskList An object containing a list of tasks to be formatted and displayed to the user
      */
-    public void printTaskList(TaskList taskList) {
+    public static String formatTaskList(TaskList taskList) {
         // Construct the string containing the list of items that have been stored in
         // preparation to send to user
         StringBuilder listMessage = new StringBuilder("Here are the tasks in your list:");
@@ -54,7 +48,7 @@ public class Ui {
             listMessage.append("\n").append(i + 1).append(". ").append(taskList.get(i));
         }
 
-        printMessage(listMessage.toString());
+        return listMessage.toString();
     }
 
     /**
@@ -63,7 +57,7 @@ public class Ui {
      * @param taskList An object containing a list of tasks to be formatted and displayed to the user.
      * @param date The date and time of the tasks we want to retrieve
      */
-    public void printTaskList(TaskList taskList, LocalDate date) {
+    public static String formatTaskList(TaskList taskList, LocalDate date) {
         // Construct the string containing the list of items that have been stored in
         // preparation to send to user
         StringBuilder listMessage = new StringBuilder("Here are the tasks in your list that are due on ")
@@ -74,6 +68,6 @@ public class Ui {
             listMessage.append("\n").append(i + 1).append(". ").append(taskList.get(i));
         }
 
-        printMessage(listMessage.toString());
+        return listMessage.toString();
     }
 }

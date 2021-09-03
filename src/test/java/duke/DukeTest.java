@@ -37,27 +37,13 @@ public class DukeTest {
 
     @Test
     public void parserInvalidInputTest() {
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("todo");
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("deadline");
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("listtodo");
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("list todo");
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("event /at 2021-06-12");
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("event desc /at");
-        });
-        assertThrows(DukeException.class, () -> {
-            Parser.parse("deadline desc /by");
-        });
+        assertThrows(DukeException.class, () -> Parser.parse("todo"));
+        assertThrows(DukeException.class, () -> Parser.parse("deadline"));
+        assertThrows(DukeException.class, () -> Parser.parse("listtodo"));
+        assertThrows(DukeException.class, () -> Parser.parse("list todo"));
+        assertThrows(DukeException.class, () -> Parser.parse("event /at 2021-06-12"));
+        assertThrows(DukeException.class, () -> Parser.parse("event desc /at"));
+        assertThrows(DukeException.class, () -> Parser.parse("deadline desc /by"));
     }
 
     @Test
