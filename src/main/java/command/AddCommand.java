@@ -34,7 +34,7 @@ public class AddCommand extends Command {
      */
     public static AddCommand createCommand(String description, DukeCommandTypeEnum commandType)
             throws MissingCommandDescriptionException {
-        // Validate before creating the action
+        // Validate before creating the command
         Command.validateDescriptionNotEmpty(commandType, description);
 
         return new AddCommand(description, commandType);
@@ -67,9 +67,13 @@ public class AddCommand extends Command {
      */
     public Message getOutputMessage() {
         String prefix = "Got it. I've added this task:";
+
         int numOfTasks = list.getNumberOfTasks();
         String taskWord = numOfTasks == 1 ? "task" : "tasks";
         String suffix = String.format("Now you have %d %s in the list", list.getNumberOfTasks(), taskWord);
-        return new Message(prefix, task.toString(), suffix, "(＾＾)b");
+
+        String kaomoji = "(＾＾)b";
+
+        return new Message(prefix, task.toString(), suffix, kaomoji);
     }
 }

@@ -30,7 +30,7 @@ public class DoneCommand extends Command {
      */
     public static DoneCommand createCommand(String description)
             throws InvalidTaskNumberException, MissingCommandDescriptionException {
-        // Validate before creating the action
+        // Validate before creating the command
         Command.validateDescriptionNotEmpty(DukeCommandTypeEnum.DONE, description);
 
         return new DoneCommand(Command.getTaskNumberFromMessage(description));
@@ -54,6 +54,8 @@ public class DoneCommand extends Command {
      */
     public Message getOutputMessage() {
         String prefix = "Nice! I've marked this task as done:";
-        return new Message(prefix, task.toString(), "≧(´▽｀)≦");
+        String kaomoji = "≧(´▽｀)≦";
+
+        return new Message(prefix, task.toString(), kaomoji);
     }
 }

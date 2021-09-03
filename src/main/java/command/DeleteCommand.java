@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
     public static DeleteCommand createCommand(String description) throws
             InvalidTaskNumberException,
             MissingCommandDescriptionException {
-        // Validate before creating the action
+        // Validate before creating the command
         Command.validateDescriptionNotEmpty(DukeCommandTypeEnum.DELETE, description);
 
         return new DeleteCommand(Command.getTaskNumberFromMessage(description));
@@ -57,9 +57,13 @@ public class DeleteCommand extends Command {
      */
     public Message getOutputMessage() {
         String prefix = "Noted. I've removed this task:";
+
         int numOfTasks = list.getNumberOfTasks();
         String taskWord = numOfTasks == 1 ? "task" : "tasks";
         String suffix = String.format("Now you have %d %s in the list", list.getNumberOfTasks(), taskWord);
-        return new Message(prefix, task.toString(), suffix, "(＾＾)b");
+
+        String kaomoji = "(＾＾)b";
+
+        return new Message(prefix, task.toString(), suffix, kaomoji);
     }
 }

@@ -33,6 +33,9 @@ public class ListCommand extends Command {
      * @return `Message`.
      */
     public Message getOutputMessage() {
-        return new Message("Here are the tasks in your list:", this.list.toString(), "ヽ(°〇°)ﾉ");
+        String prefix = "Here are the tasks in your list:";
+        String kaomoji = "ヽ(°〇°)ﾉ";
+
+        return new Message(prefix, this.list.toString(), kaomoji);
     }
 }
