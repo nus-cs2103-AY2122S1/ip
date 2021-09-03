@@ -2,6 +2,7 @@ package duke.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.exceptions.CompletedTaskException;
 import duke.exceptions.DukeFileException;
@@ -148,6 +149,13 @@ public class TaskList {
      */
     public int getSize() {
         return tasks.size();
+    }
+
+    /**
+     * Sorts the ArrayList of Tasks.
+     */
+    public void sortList() {
+        Collections.sort(this.tasks);
     }
 
 }
