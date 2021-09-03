@@ -10,6 +10,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import saber.Saber;
 import saber.ui.ByeUI;
+import saber.ui.SaberUI;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -35,6 +36,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        SaberUI saberGeneralUI = new SaberUI();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getSaberDialog(saberGeneralUI.getGreeting(), saberImage)
+        );
     }
 
     public void setSaber(Saber d) {
@@ -57,6 +62,14 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         if (response.equals(byeUI.getSuccessMessage())) {
+            // Set text field to exiting
+            userInput.setText("Exiting...");
+            // Disable text field
+            userInput.setEditable(false);
+            // Disable enter on text field
+            userInput.onActionProperty().set(event->{});
+            // Disable send button
+            sendButton.setDisable(true);
             new Timer().schedule(new TimerTask() {
                 public void run () {
                     Platform.exit();
