@@ -12,6 +12,6 @@ public class DukeException extends Exception {
      */
     @Override
     public String toString() {
-        return "☹ OOPS!!!";
+        return "\uD83D\uDE41 OOPS!!!";
     }
 }
