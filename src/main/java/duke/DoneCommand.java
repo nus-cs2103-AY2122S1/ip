@@ -23,12 +23,13 @@ public class DoneCommand implements Command {
      * @param storage custodian of reading and writing save files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (doneIndex < 0 || doneIndex >= tasks.size()) {
             throw new DukeException("Task with that task number does not exist.");
         }
-        ui.announceTaskCompletion(tasks.completeTask(doneIndex));
+        Task completedTask = tasks.completeTask(doneIndex);
         storage.save(tasks);
+        return "Nice! I've marked this task as done:" + completedTask;
     }
 
     /**

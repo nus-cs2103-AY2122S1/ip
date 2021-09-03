@@ -13,8 +13,12 @@ public class ListCommand implements Command {
      * @param storage custodian of reading and writing save files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printList(tasks);
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String response = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            response += (i + 1) + "." + tasks.get(i) + "\n";
+        }
+        return response;
     }
 
     /**

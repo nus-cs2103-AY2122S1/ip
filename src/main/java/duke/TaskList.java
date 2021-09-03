@@ -32,6 +32,12 @@ public class TaskList {
         list.forEach(action);
     }
 
+    /**
+     * Marks the task at a specific index as complete.
+     *
+     * @param index the position of the task to be marked as complete.
+     * @return the completed task.
+     */
     public Task completeTask(int index) {
         list.get(index).complete();
         return list.get(index);

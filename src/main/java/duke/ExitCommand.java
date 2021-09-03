@@ -13,8 +13,8 @@ public class ExitCommand implements Command {
      * @param storage custodian of reading and writing save files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.displayFarewell();
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return "Bye. Hope to see you again soon!\n";
     }
 
     /**

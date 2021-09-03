@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 /**
  * Encapsulates a command to find tasks that match a given string.
@@ -25,9 +26,14 @@ public class FindCommand implements Command {
      * @param storage custodian of reading and writing save files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         ArrayList<Task> filteredTasks = tasks.findMatches(queryString);
-        ui.displayMatches(filteredTasks);
+        String response = "Here are the matching tasks in your list:\n";
+        for (int i = 0; i < tasks.size(); i++) {
+            response += (i + 1) + "." + tasks.get(i) + "\n";
+        }
+        return response;
+
     }
 
     /**

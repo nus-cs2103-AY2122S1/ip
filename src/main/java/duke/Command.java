@@ -12,7 +12,7 @@ public interface Command {
      * @param ui user interface interacts with the user.
      * @param storage custodian of reading and writing save files.
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage);
+    public String execute(TaskList tasks, Ui ui, Storage storage);
 
     /**
      * Identifies if this command is an exit command.

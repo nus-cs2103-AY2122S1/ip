@@ -23,13 +23,15 @@ public class DeleteCommand implements Command {
      * @param storage custodian of reading and writing save files.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (deleteIndex < 0 || deleteIndex >= tasks.size()) {
             throw new DukeException("Task with that task number does not exist.");
         }
         Task deletedTask = tasks.delete(deleteIndex);
-        ui.announceTaskDeletion(deletedTask, tasks.size());
         storage.save(tasks);
+        return "Noted. I've removed this task:\n" +
+                deletedTask +
+                "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
     /**

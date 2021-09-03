@@ -8,8 +8,8 @@ import java.time.format.DateTimeParseException;
  * Encapsulates a deadline in the task list.
  */
 public class Deadline extends Task {
-    private LocalDate deadline;
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private LocalDate deadline;
 
     /**
      * Creates the deadline.

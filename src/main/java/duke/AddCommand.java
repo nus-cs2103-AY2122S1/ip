@@ -24,10 +24,10 @@ public class AddCommand implements Command {
      * @param storage object that writes the new list of tasks to save file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.add(pendingTask);
-        ui.announceNewTask(pendingTask);
         storage.save(tasks);
+        return "added: " + pendingTask;
     }
 
     /**

@@ -9,6 +9,11 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Creates the Duke application
+     *
+     * @param filePath the path to the save file.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -41,6 +46,15 @@ public class Duke {
         }
 
         ui.closeScanner();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
