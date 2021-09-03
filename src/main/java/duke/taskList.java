@@ -99,13 +99,15 @@ public class taskList {
      * in the List object.
      */
 
-    public void printList() {
+    public String printList() {
         int numb = 1;
-        System.out.println("Here are the tasks in your list:");
+        String output = "Here are the tasks in your list:";
         for(Task task: taskList) {
-            System.out.println(numb + ". " + task.printName());
+            output += "\n" + numb + ". " + task.printName();
             numb++;
         }
+        System.out.println(output);
+        return output;
     }
 
     /**
@@ -114,18 +116,23 @@ public class taskList {
      * @param userInput the rank of the task in a list
      */
 
-    public void updateTaskStatus(int userInput, boolean isInput) {
-        if (userInput > taskList.size()) {
-            System.out.println("please enter a number that's between 1 and " + taskList.size());
-        }
-        Task task = taskList.get(userInput - 1);
+    public String updateTaskStatus(int userInput, boolean isInput) {
+        String output = "";
 
+        if (userInput > taskList.size()) {
+            output ="please enter a number that's between 1 and " + taskList.size();
+            System.out.println(output);
+            return output;
+        }
+
+        Task task = taskList.get(userInput - 1);
         String lineToRemove = task.printName();
         task.toggleComplete();
 
         if (isInput) {
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(task.printName());
+
+            output += "Nice! I've marked this task as done:\n" + task.printName();
+            System.out.println(output);
 
             try {
                 File updated = new File("data/updated.txt");
@@ -152,8 +159,7 @@ public class taskList {
                 e.printStackTrace();
             }
         }
-
-
+        return output;
     }
 
     /**
@@ -162,17 +168,18 @@ public class taskList {
      * @param userInput the name of the todo task
      */
 
-    public void addTodo(String userInput, boolean isInput) {
+    public String addTodo(String userInput, boolean isInput) {
         Task task = new Todos(userInput);
         taskList.add(task);
 
         if (isInput) {
-            System.out.println("Got it. I've added this task:");
-            System.out.println(task.printName());
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            String output = "Got it. I've added this task:" + "\n" + task.printName() +
+                    "\nNow you have " + taskList.size() + " tasks in the list.";
+            System.out.println(output);
             this.memory.addTaskToMemory(task.printName());
+            return output;
         } else {
-
+            return "";
         }
 
     }
@@ -182,14 +189,17 @@ public class taskList {
      * @param name the name of the event
      * @param timeline the period that the event is taking place
      */
-    public void addEvent(String name, String timeline, boolean isInput) {
+    public String addEvent(String name, String timeline, boolean isInput) {
         Task task = new Event(name, timeline);
         taskList.add(task);
         if (isInput) {
-            System.out.println("Got it. I've added this task:");
-            System.out.println(task.printName());
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            String output = "Got it. I've added this task:" + "\n" + task.printName() +
+                    "\nNow you have " + taskList.size() + " tasks in the list.";
             this.memory.addTaskToMemory(task.printName());
+            System.out.println(output);
+            return output;
+        } else {
+            return "";
         }
 
     }
@@ -199,15 +209,18 @@ public class taskList {
      * @param name the name of the deadline
      * @param deadline the deadline of the deadline task
      */
-    public void addDeadline(String name, String deadline, boolean isInput) {
+    public String addDeadline(String name, String deadline, boolean isInput) {
         Task task = new Deadlines(name, deadline, isInput);
         taskList.add(task);
 
         if (isInput) {
-            System.out.println("Got it. I've added this task:");
-            System.out.println(task.printName());
-            System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+            String output = "Got it. I've added this task:" + "\n" + task.printName() +
+                    "\nNow you have " + taskList.size() + " tasks in the list.";
             this.memory.addTaskToMemory(task.printName());
+            System.out.println(output);
+            return output;
+        } else {
+            return "";
         }
     }
     /**
@@ -215,12 +228,14 @@ public class taskList {
      *
      * @param userInput the rank of the task in a list
      */
-    public void removeTask(int userInput) {
+    public String removeTask(int userInput) {
         Task task = taskList.get(userInput);
-        System.out.println("Noted. I've removed the task:");
-        System.out.println(task.printName());
+        String taskName = task.printName();
+
         taskList.remove(userInput);
-        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
+        String output = "Noted. I've removed the task:\n" + taskName +
+                "\nNow you have " + taskList.size() + " tasks in the list.";
+        System.out.println(output);
 
         String lineToRemove = task.printName();
 
@@ -247,6 +262,8 @@ public class taskList {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return output;
     }
 
     /**
@@ -254,14 +271,16 @@ public class taskList {
      *
      */
 
-    public void findWord(String keyWord) {
-        System.out.println("Here are the matching tasks in your list:");
+    public String findWord(String keyWord) {
+        String output = "Here are the matching tasks in your list:";
         int numb = 1;
         for(Task task: taskList) {
             if (task.getName().contains(keyWord)) {
-                System.out.println(numb + ". " + task.printName());
+                output += "\n" + numb + ". " + task.printName();
                 numb++;
             }
         }
+        System.out.println(output);
+        return output;
     }
 }

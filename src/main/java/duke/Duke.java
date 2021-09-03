@@ -1,137 +1,116 @@
-package duke;//package duke;
-
-///**
-// * Duke is a chatbot that takes in tasks, which includes todos, deadlines and events, and compiles them
-// * in a list. Tasks can be removed from the list and be marked as completed.
-// *
-// * @author Dominic Siew Zhen Yu
-// *
-// */
+//package duke;
 //
-//import java.io.*;
-//import java.util.Scanner;
-//
-//public class Duke {
-//
-//    public enum Tasks {
-//        DEADLINE,
-//        EVENT,
-//        TODO
-//    }
-//
-//    public static void main(String[] args) throws IOException {
-//        String logo = " ____        _\n"
-//                + "|  _ \\ _   _| | _____\n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//        System.out.println("Hello from\n" + logo);
-//        System.out.println("____________________________________________________________\nHello! I'm Duke\nWhat can I do for you?\n____________________________________________________________");
-//
-//        boolean isEnded = false;
-//        taskList taskList = null;
-//        taskList = new taskList();
-//
-//        File file = new File("src/main/memory.txt");
-//
-//        if (!(file.exists())){
-//            System.out.println("processing!");
-//            try {
-//                PrintWriter writer = new PrintWriter("src/main/memory.txt");
-//                writer.print("");
-//                writer.close();
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//        } else {
-//
-//            File updated = new File("src/main/updated.txt");
-//            BufferedReader reader = new BufferedReader(new FileReader("src/main/memory.txt"));
-//            BufferedWriter writer = new BufferedWriter(new FileWriter(updated));
-//            String currentLine = "";
-//            int numberAdded = 1;
+//import javafx.application.Application;
+//import javafx.scene.Scene;
+//import javafx.scene.control.Button;
+//import javafx.scene.control.Label;
+//import javafx.scene.control.ScrollPane;
+//import javafx.scene.control.TextField;
+//import javafx.scene.image.Image;
+//import javafx.scene.image.ImageView;
+//import javafx.scene.layout.AnchorPane;
+//import javafx.scene.layout.Region;
+//import javafx.scene.layout.VBox;
+//import javafx.stage.Stage;
 //
 //
+//public class Duke extends Application {
 //
-//            while ((currentLine = reader.readLine()) != null) {
-//                String[] seperate1 = currentLine.toString().split(" ", 2);
-//                String taskTypeText = seperate1[0];
-//                String taskType;
+//    private ScrollPane scrollPane;
+//    private VBox dialogContainer;
+//    private TextField userInput;
+//    private Button sendButton;
+//    private Scene scene;
+//    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+//    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 //
-//                String[] seperate2 = seperate1[1].toString().split(" ", 2);
-//                boolean isCompleted = (seperate2[0].equals("[✓]"))? true: false;
-//                String eventInfo = seperate2[1];
-//
-//                switch(taskTypeText) {
-//                    case "[T]":
-//                        String eventname = eventInfo;
-//                        taskList.addTodo(eventname, false);
-//                        break;
-//                    case "[D]":
-//                        String[] seperateAgain = seperate2[1].split(" \\(by: ", 2);
-//                        String eventName = seperateAgain[0];
-//                        String deadline = seperateAgain[1].split(" ", 2)[0];
-//                        taskList.addDeadline(eventName, deadline, false);
-//                        break;
-//                    case "[E]":
-//                        String[] seperateAgaining = seperate2[1].split(" \\(at: ", 2);
-//                        String event = seperateAgaining[0];
-//                        String timeline = seperateAgaining[1].split(" ", 2)[0];
-//                        taskList.addEvent(event, timeline, false);
-//                        break;
-//                }
-//
-//                if (isCompleted){
-//                    taskList.updateTaskStatus(numberAdded, false);
-//                }
-//                numberAdded++;
-//            }
-//
-//        }
-//
-//
-//
-//
-//        Scanner sc= new Scanner(System.in);
-//
-//        while(!isEnded) {
-//            String userInput = sc.nextLine();
-//            System.out.println("____________________________________________________________");
-//            String[] parsedInput = userInput.split(" ", 2);
-//
-//
-//            if (parsedInput[0].equals("todo")) {
-//                if (parsedInput.length == 1 ) {
-//                    throw new DukeException("empty");
-//                }
-//                taskList.addTodo(parsedInput[1], true);
-//
-//            } else if (parsedInput[0].equals("deadline")) {
-//                String[] furtherParsed = parsedInput[1].split(" /by ", 2);
-//                taskList.addDeadline(furtherParsed[0], furtherParsed[1], true);
-//            } else if (parsedInput[0].equals("event")){
-//                String[] furtherParsed = parsedInput[1].split(" /at ",2);
-//                taskList.addEvent(furtherParsed[0],furtherParsed[1], true);
-//            } else if(userInput.equals("bye")){
-//                System.out.println("Bye. Hope to see you again soon!");
-//                isEnded = true;
-//            } else if (userInput.equals("list")){
-//                taskList.printList();
-//            } else if (parsedInput[0].equals("done")) {
-//                int itemRank = Integer.parseInt(parsedInput[1]);
-//                taskList.updateTaskStatus(itemRank, true);
-//
-//            } else if (parsedInput[0].equals("remove")){
-//                int itemRank = Integer.parseInt(parsedInput[1]);
-//                taskList.removeTask(itemRank - 1 );
-//            } else {
-//                System.out.println("Please give an appropriate response.");
-//                throw new DukeException("generic");
-//            }
-//            System.out.println("____________________________________________________________");
-//        }
-//
+//    public static void main(String[] args) {
 //
 //    }
+//
+//
+//    @Override
+//    public void start(Stage stage) {
+//        scrollPane = new ScrollPane();
+//        dialogContainer = new VBox();
+//        scrollPane.setContent(dialogContainer);
+//
+//        userInput = new TextField();
+//        sendButton = new Button("Send");
+//
+//        AnchorPane mainLayout = new AnchorPane();
+//        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
+//
+//        scene = new Scene(mainLayout);
+//
+//        stage.setScene(scene);
+//        stage.show();
+//
+//        stage.setTitle("Duke");
+//        stage.setResizable(false);
+//        stage.setMinHeight(600.0);
+//        stage.setMinWidth(400.0);
+//
+//        mainLayout.setPrefSize(400.0, 600.0);
+//
+//        scrollPane.setPrefSize(400, 540);
+//        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+//        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+//
+//        scrollPane.setVvalue(1.0);
+//        scrollPane.setFitToWidth(true);
+//
+//        // You will need to import `javafx.scene.layout.Region` for this.
+//        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+//
+//        userInput.setPrefWidth(340.0);
+//
+//        sendButton.setPrefWidth(55.0);
+//
+//        AnchorPane.setTopAnchor(scrollPane, 1.0);
+//
+//        AnchorPane.setBottomAnchor(sendButton, 1.0);
+//        AnchorPane.setRightAnchor(sendButton, 1.0);
+//
+//        AnchorPane.setLeftAnchor(userInput , 1.0);
+//        AnchorPane.setBottomAnchor(userInput, 1.0);
+//
+//        sendButton.setOnMouseClicked((event) -> {
+//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//            userInput.clear();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
+//            userInput.clear();
+//        });
+//
+//        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+//
+//        sendButton.setOnMouseClicked((event) -> {
+//            handleUserInput();
+//        });
+//
+//        userInput.setOnAction((event) -> {
+//            handleUserInput();
+//        });
+//    }
+//
+//    private Label getDialogLabel(String text) {
+//        // You will need to import `javafx.scene.control.Label`.
+//        Label textToAdd = new Label(text);
+//        textToAdd.setWrapText(true);
+//
+//        return textToAdd;
+//    }
+//
+//
+//    /**
+//     * You should have your own function to generate a response to user input.
+//     * Replace this stub with your completed method.
+//     */
+//    public String getResponse(String input) {
+//        return "Duke heard: " + input;
+//    }
+//
 //}
