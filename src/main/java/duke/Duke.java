@@ -45,7 +45,7 @@ public class Duke {
      * Contains all the input parsing code currently, will be refactored in the future.
      *
      * @param str The line of input entered by the user via stdin
-     * @param taskList The instance of Tasklist used to store the current tasks
+     * @param taskList The instance of TaskList used to store the current tasks
      */
     static boolean processInput(String str, TaskList taskList) {
 
