@@ -11,6 +11,9 @@ import javafx.scene.layout.VBox;
 import saber.Saber;
 import saber.ui.ByeUI;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -53,8 +56,13 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        if (response == byeUI.getSuccessMessage()) {
-            Platform.exit();
+        if (response.equals(byeUI.getSuccessMessage())) {
+            new Timer().schedule(new TimerTask() {
+                public void run () {
+                    Platform.exit();
+                    System.exit(0);
+                }
+            }, 3000);
         }
     }
 }
