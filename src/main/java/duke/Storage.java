@@ -23,6 +23,11 @@ import duke.tasks.ToDo;
  */
 public class Storage {
 
+    private enum Type {
+        EVENT,
+        DEADLINE
+    }
+    
     private final String filepath;
 
     /**
@@ -45,58 +50,65 @@ public class Storage {
         Path path = Paths.get(home, this.filepath);
         boolean isDirectoryFound = Files.exists(path);
 
-        if (isDirectoryFound) {
-            try {
-                List<String> lines = Files.readAllLines(path);
-                ArrayList<Task> tasks = new ArrayList<>();
-                for (String x: lines) {
-                    String[] data = x.split(Pattern.quote(" | "));
-                    Task t;
-                    if (data.length < 2) {
-                        continue;
-                    }
-                    switch (data[1]) {
-                    case "T":
-                        t = new ToDo(data[3]);
-                        break;
-                    case "E":
-                        LocalDate eventDate = LocalDate.parse(data[4]);
-                        if (data.length == 5) {
-                            t = new Event(data[3], eventDate);
-                        } else {
-                            String hour = data[5].replace(":", "").substring(0, 2);
-                            String minute = data[5].replace(":", "").substring(2, 4);
-                            LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
-                            t = new Event(data[3], eventDate, time);
-                        }
-                        break;
-                    case "D":
-                        LocalDate deadlineDate = LocalDate.parse(data[4]);
-                        if (data.length == 5) {
-                            t = new Deadline(data[3], deadlineDate);
-                        } else {
-                            String hour = data[5].replace(":", "").substring(0, 2);
-                            String minute = data[5].replace(":", "").substring(2, 4);
-                            LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
-                            t = new Deadline(data[3], deadlineDate, time);
-                        }
-                        break;
-                    default:
-                        // Invalid task found when loading, skipped!
-                        continue;
-                    }
+        if (!isDirectoryFound) { // Guard clause
+            throw new LoadingError("File not found :(");
+        }
 
-                    if (data[2].equals("1")) {
-                        t.markAsDone();
-                    }
-                    tasks.add(t);
+        try {
+            List<String> lines = Files.readAllLines(path);
+            ArrayList<Task> tasks = new ArrayList<>();
+            for (String line: lines) {
+                String[] data = line.split(Pattern.quote(" | "));
+                Task t;
+                
+                if (data.length < 2) { // Guard Clause
+                    continue;
                 }
-                return tasks;
-            } catch (IOException e) {
-                throw new LoadingError("Couldn't load file :(");
+                
+                switch (data[1]) {
+                case "T":
+                    t = new ToDo(data[3]);
+                    break;
+                case "E":
+                    t = parseDateTime(data, Type.EVENT);
+                    break;
+                case "D":
+                    t = parseDateTime(data, Type.DEADLINE);
+                    break;
+                default:
+                    // Invalid task found when loading, skipped!
+                    continue;
+                }
+
+                if (data[2].equals("1")) {
+                    t.markAsDone();
+                }
+                
+                tasks.add(t);
+            }
+            return tasks;
+        } catch (IOException e) {
+            throw new LoadingError("Couldn't load file :(");
+        }
+    }
+    
+    private static Task parseDateTime(String[] data, Type type) {
+        LocalDate date = LocalDate.parse(data[4]);
+        if (data.length == 5) {
+            if (type == Type.EVENT) {
+                return new Event(data[3], date);
+            } else {
+                return new Deadline(data[3], date);
             }
         } else {
-            throw new LoadingError("File not found :(");
+            String hour = data[5].replace(":", "").substring(0, 2);
+            String minute = data[5].replace(":", "").substring(2, 4);
+            LocalTime time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
+            if (type == Type.EVENT) {
+                return new Event(data[3], date, time);
+            } else {
+                return new Deadline(data[3], date, time);
+            }
         }
     }
 

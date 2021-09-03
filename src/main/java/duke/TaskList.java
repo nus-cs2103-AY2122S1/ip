@@ -106,7 +106,7 @@ public class TaskList {
      * @param x int index
      * @return Task at index x
      */
-    public Task get(int x) {
+    public Task getTask(int x) {
         return this.tasks.get(x);
     }
 
@@ -116,7 +116,7 @@ public class TaskList {
      * @param x int index
      * @return Removed task
      */
-    public Task remove(int x) {
+    public Task removeTask(int x) {
         return this.tasks.remove(x);
     }
 
@@ -126,7 +126,7 @@ public class TaskList {
      * @param t Task to add
      * @return boolean indicating if the operation was a success
      */
-    public boolean add(Task t) {
+    public boolean addTask(Task t) {
         return this.tasks.add(t);
     }
 }

@@ -34,7 +34,7 @@ public class Ui implements UiInterface {
     /**
      * Shows end message.
      */
-    public void sayBye(String endMessage) {
+    public void showBye(String endMessage) {
         System.out.println(endMessage);
     }
 

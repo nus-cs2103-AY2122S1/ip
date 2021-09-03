@@ -24,8 +24,9 @@ public class Duke {
 
     private final Storage storage;
     private final UiInterface uiInterface;
+    // Invocation handler that acts as a wrapper around methods in the Ui class
+    // so that Ui messages can be sent to the GUI prior to display.
     private final DynamicInvocationHandler interceptor;
-    private final Ui ui;
     private TaskList taskList;
     private boolean isExit = false;
 
@@ -35,7 +36,7 @@ public class Duke {
      * @param filePath The filepath of the task list from the project root
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        Ui ui = new Ui();
         interceptor = new DynamicInvocationHandler(ui);
         uiInterface = (UiInterface) Proxy.newProxyInstance(
                 UiInterface.class.getClassLoader(),
