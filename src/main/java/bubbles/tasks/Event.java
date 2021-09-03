@@ -16,11 +16,11 @@ public class Event extends Task {
     }
 
     /**
-     * Act as a public constructor of an Event Object.
+     * Acts as a public constructor of an Event Object.
      *
-     * @param input The description of the Event, including the Event date
-     * @param isDone Whether the Event is done/completed
-     * @return The created Event Object
+     * @param input The description of the Event, including the Event date.
+     * @param isDone Whether the Event is done/completed.
+     * @return The created Event Object.
      */
     public static Event addEvent(String input, boolean isDone) {
         String[] arr = input.split(" /at ");
@@ -31,10 +31,10 @@ public class Event extends Task {
     }
 
     /**
-     * Format the Event Object to store in the hard disk File.
+     * Formats the Event Object to store in the hard disk File.
      *
      * @return String representing the Event Object (different from the String representation
-     *          of the Event Task)
+     *          of the Event Task).
      */
     @Override
     public String format() {
@@ -54,7 +54,7 @@ public class Event extends Task {
     }
 
     /**
-     * Return the String representation of the Event.
+     * Returns the String representation of the Event.
      *
      * @return The String representation of the Event.
      */

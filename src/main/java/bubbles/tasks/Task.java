@@ -12,11 +12,11 @@ public class Task {
 
     /**
      * A public constructor for a Task Object, initializing the
-     * fields description (of the task), and whether the task has
+     * field description (of the task), and whether the task has
      * been completed yet.
      *
-     * @param description The description of the task
-     * @param isDone Whether the task has been completed
+     * @param description The description of the task.
+     * @param isDone Whether the task has been completed.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -28,9 +28,9 @@ public class Task {
     }
 
     /**
-     * Retrieve the status of the task, whether is has been
+     * Retrieves the status of the task, whether is has been
      * completed.
-     * @return "X" if completed, " " if not yet
+     * @return "X" if completed, " " if not yet.
      */
     public String getStatus() {
         return (isDone ? "X" : " "); // mark done task with X
@@ -40,18 +40,18 @@ public class Task {
      * Parent method for format() of a basic Task Object, simply
      * returns the String representation of the Task.
      *
-     * @return The String representation of the task
+     * @return The String representation of the task.
      */
     public String format() {
         return this.toString();
     }
 
     /**
-     * To format the date input from the user (in the form of yyyy-mm-dd),
+     * Formats the date input from the user (in the form of yyyy-mm-dd),
      * and store the date in the form of a LocalDate object.
      *
-     * @param dateInput Date input form the user, formatted in yyyy-mm-dd
-     * @return LocalDate Object representing the input date
+     * @param dateInput Date input form the user, formatted in yyyy-mm-dd.
+     * @return LocalDate Object representing the input date.
      */
     public static LocalDate formatDate(String dateInput) {
         // assume that the acceptable format for dates related to deadline and event are in the form of
@@ -62,7 +62,7 @@ public class Task {
     }
 
     /**
-     * Return the String representation of the Task.
+     * Returns the String representation of the Task.
      *
      * @return The String representation of the Task.
      */

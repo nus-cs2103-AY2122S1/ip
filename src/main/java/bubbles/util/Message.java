@@ -27,9 +27,9 @@ public enum Message {
     }
 
     /**
-     * Returns a string representation of the message
+     * Returns a string representation of the message.
      *
-     * @return A string representation of the message
+     * @return A string representation of the message.
      */
     @Override
     public String toString() {

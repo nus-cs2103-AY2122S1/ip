@@ -1,8 +1,10 @@
 package bubbles.controller;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import bubbles.Bubbles;
 import bubbles.util.Message;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,9 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -32,6 +31,9 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Blossom.png"));
     private final Image bubblesImage = new Image(this.getClass().getResourceAsStream("/images/Bubbles.png"));
 
+    /**
+     * Initializes the components of the Main Window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

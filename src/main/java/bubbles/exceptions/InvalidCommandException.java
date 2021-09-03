@@ -1,12 +1,12 @@
 package bubbles.exceptions;
 
 /**
- * A class that represents the exception when the Bubbles bot receives
+ * A class that represents the exception when Bubbles receives
  * an invalid command/command the bot does not understand.
  */
 public class InvalidCommandException extends Exception {
     /**
-     * A public constrcutor for the InvalidCommandException.
+     * A public constructor for the InvalidCommandException.
      * @param message The message containing details of the InvalidCommandException.
      */
     public InvalidCommandException(String message) {
@@ -14,7 +14,7 @@ public class InvalidCommandException extends Exception {
     }
 
     /**
-     * Return the String representation of the Exception.
+     * Returns the String representation of the Exception.
      *
      * @return The String representation of the Exception.
      */

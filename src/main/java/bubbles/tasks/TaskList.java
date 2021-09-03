@@ -1,24 +1,24 @@
 package bubbles.tasks;
 
-import bubbles.util.Message;
+import java.util.ArrayList;
+
 import bubbles.exceptions.EmptyTaskException;
 import bubbles.exceptions.IndexOutOfBoundsException;
 import bubbles.exceptions.InvalidCommandException;
-
-import java.util.ArrayList;
+import bubbles.util.Message;
 
 /**
  * A list of Task objects, that contains and tracks the Tasks the Bubbles bot
  * user has entered (including previous entries read from the hard dusk file).
  */
 public class TaskList {
-    public enum taskType {
-        ToDo,
-        Deadline,
-        Event
-    }
-    private final ArrayList<Task> tasks;
     private int count;
+    private final ArrayList<Task> tasks;
+    public enum TaskType {
+        DEADLINE,
+        EVENT,
+        TODO
+    }
 
     /**
      * A public constructor for a TaskList Object,
@@ -35,7 +35,7 @@ public class TaskList {
      * handles the input by calling other methods/throwing an exception to indicate
      * that such command does not exist.
      *
-     * @param input A String input by the user
+     * @param input A String input by the user.
      */
     public String taskListener(String input) {
         try {
@@ -44,11 +44,11 @@ public class TaskList {
 
             switch (command) {
             case "todo":
-                return addTask(taskType.ToDo, input);
+                return addTask(TaskType.TODO, input);
             case "deadline":
-                return addTask(taskType.Deadline, input);
+                return addTask(TaskType.DEADLINE, input);
             case "event":
-                return addTask(taskType.Event, input);
+                return addTask(TaskType.EVENT, input);
             case "list":
                 return listTasks();
             case "done":
@@ -68,7 +68,7 @@ public class TaskList {
     }
 
     /**
-     * List out the tasks in the TaskList by printing it out, after
+     * Lists out the tasks in the TaskList by printing it out, after
      * the user's "list" command.
      */
     public String listTasks() {
@@ -90,31 +90,31 @@ public class TaskList {
     }
 
     /**
-     * Add a Task of the specific task type (ToDo, Deadline or Event)
+     * Adds a Task of the specific task type (ToDo, Deadline or Event)
      * into the TaskList. Prints the total number of tasks in the list
      * after.
      *
-     * @param t The type of Task
-     * @param input The description of the Task (including date for Deadline/Event)
+     * @param t The type of Task.
+     * @param input The description of the Task (including date for Deadline/Event).
      */
-    public String addTask(taskType t, String input) {
+    public String addTask(TaskType t, String input) {
         String[] arr = input.split(" ", 2);
 
         try {
             Task recentlyAdded = null;
 
             switch (t) {
-            case ToDo:
+            case TODO:
                 if (arr.length == 1) {
                     recentlyAdded = ToDo.addToDo("", false);
                 }
 
                 recentlyAdded = ToDo.addToDo(arr[1], false);
                 break;
-            case Deadline:
+            case DEADLINE:
                 recentlyAdded = Deadline.addDeadline(arr[1], false);
                 break;
-            case Event:
+            case EVENT:
                 recentlyAdded = Event.addEvent(arr[1], false);
                 break;
             default:
@@ -139,12 +139,12 @@ public class TaskList {
     }
 
     /**
-     * Add a Task of the specific task type (ToDo, Deadline or Event)
+     * Adds a Task of the specific task type (ToDo, Deadline or Event)
      * into the TaskList. Does not print the total number of tasks in the list after.
      *
-     * @param taskType The type of Task
-     * @param input The description of the Task (including date for Deadline/Event)
-     * @param isDone Whether the Task is done/completed
+     * @param taskType The type of Task.
+     * @param input The description of the Task (including date for Deadline/Event).
+     * @param isDone Whether the Task is done/completed.
      */
     public void addTask(String taskType, String input, boolean isDone) {
         if (taskType.equals("T")) {
@@ -157,10 +157,10 @@ public class TaskList {
     }
 
     /**
-     * Add a ToDo (Task) to the TaskList.
+     * Adds a ToDo (Task) to the TaskList.
      *
-     * @param input The description of the ToDo
-     * @param isDone Whether the ToDo is done/completed
+     * @param input The description of the ToDo.
+     * @param isDone Whether the ToDo is done/completed.
      */
     public void addToDo(String input, boolean isDone) {
         try {
@@ -174,10 +174,10 @@ public class TaskList {
     }
 
     /**
-     * Add a Deadline (Task) to the TaskList.
+     * Adds a Deadline (Task) to the TaskList.
      *
-     * @param input The description of the Deadline (including the due date)
-     * @param isDone Whether the Deadline is done/completed
+     * @param input The description of the Deadline (including the due date).
+     * @param isDone Whether the Deadline is done/completed.
      */
     public void addDeadline(String input, boolean isDone) {
         this.tasks.add(Deadline.addDeadline(input, isDone));
@@ -185,10 +185,10 @@ public class TaskList {
     }
 
     /**
-     * Add an Event (Task) to the TaskList.
+     * Adds an Event (Task) to the TaskList.
      *
-     * @param input The description of the Event (including the event date)
-     * @param isDone Whether the Event is done/completed
+     * @param input The description of the Event (including the event date).
+     * @param isDone Whether the Event is done/completed.
      */
     public void addEvent(String input, boolean isDone) {
         this.tasks.add(Event.addEvent(input, isDone));
@@ -196,11 +196,11 @@ public class TaskList {
     }
 
     /**
-     * Mark the indicated task (of the corresponding task number in the
+     * Marks the indicated task (of the corresponding task number in the
      * input) as done.
      *
      * @param input The user input that includes the "done" command and number
-     *              of task that user wants to mark as done/completed
+     *              of task that user wants to mark as done/completed.
      */
     public String markAsDone(String input) {
         try {
@@ -229,10 +229,10 @@ public class TaskList {
     }
 
     /**
-     * Delete a Task from the TaskList.
+     * Deletes a Task from the TaskList.
      *
      * @param input The user input that includes the "delete" command and number
-     *              of task that user wants to delete permanently
+     *              of task that user wants to delete permanently.
      */
     public String deleteTask(String input) {
         try {
@@ -260,10 +260,10 @@ public class TaskList {
     }
 
     /**
-     * Find tasks with the corresponding keywords in the TaskList.
+     * Finds tasks with the corresponding keywords in the TaskList.
      *
      * @param input The user input that includes the "find" command and keyword(s) that the user
-     *              wants to search for within the tasks in TaskList
+     *              wants to search for within the tasks in TaskList.
      */
     public String findTask(String input) {
         ArrayList<Task> filtered = new ArrayList<>();

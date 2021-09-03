@@ -1,7 +1,7 @@
 package bubbles.tasks;
 
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * A child class of Task, representing the tasks that need to be
@@ -16,11 +16,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Act as a public constructor of a Deadline Object.
+     * Acts as a public constructor of a Deadline Object.
      *
-     * @param input The description of the Deadline, including the due date
-     * @param isDone Whether the Deadline is done/completed
-     * @return The created Deadline Object
+     * @param input The description of the Deadline, including the due date.
+     * @param isDone Whether the Deadline is done/completed.
+     * @return The created Deadline Object.
      */
     public static Deadline addDeadline(String input, boolean isDone) {
         String[] arr = input.split(" /by ");
@@ -31,10 +31,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Format the Deadline Object to store in the hard disk File.
+     * Formats the Deadline Object to store in the hard disk File.
      *
      * @return String representing the Deadline Object (different from the String representation
-     *          of the Deadline Task)
+     *          of the Deadline Task).
      */
     @Override
     public String format() {
@@ -54,7 +54,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return the String representation of the Deadline.
+     * Returns the String representation of the Deadline.
      *
      * @return The String representation of the Deadline.
      */

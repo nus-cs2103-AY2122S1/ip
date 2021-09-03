@@ -7,7 +7,7 @@ package bubbles.exceptions;
  */
 public class IndexOutOfBoundsException extends Exception {
     /**
-     * A public constrcutor for the IndexOutOfBoundsException.
+     * A public constructor for the IndexOutOfBoundsException.
      * @param message The message containing details of the IndexOutOfBoundsException.
      */
     public IndexOutOfBoundsException(String message) {
@@ -15,7 +15,7 @@ public class IndexOutOfBoundsException extends Exception {
     }
 
     /**
-     * Return the String representation of the Exception.
+     * Returns the String representation of the Exception.
      *
      * @return The String representation of the Exception.
      */

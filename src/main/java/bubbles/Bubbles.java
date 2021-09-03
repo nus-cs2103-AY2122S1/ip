@@ -11,7 +11,7 @@ import bubbles.util.Ui;
  * namely ToDos, Deadlines and Events.
  */
 public class Bubbles {
-    private String FILEPATH = "data/bubbles.txt";
+    private String filePath = "data/bubbles.txt";
     private Storage storage;
     private Ui ui;
 
@@ -22,7 +22,7 @@ public class Bubbles {
      */
     public Bubbles() {
         storage = new Storage();
-        storage.loadFile(FILEPATH);
+        storage.loadFile(filePath);
 
         taskList = storage.getTaskList();
 
@@ -33,7 +33,7 @@ public class Bubbles {
      * Main method for the Bubbles bot.
      * Creates a new Bubbles object and gets the bot running.
      *
-     * @param args The command line arguments
+     * @param args The command line arguments.
      */
     public static void main(String[] args) {
         new Bubbles().run();

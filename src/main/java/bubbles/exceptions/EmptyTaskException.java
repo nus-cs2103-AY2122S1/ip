@@ -8,8 +8,8 @@ public class EmptyTaskException extends Exception {
     private String taskType;
 
     /**
-     * A public constrcutor for the EmptyTaskException.
-     * @param taskType The type of Task (ToDo, Deadline or Event)
+     * A public constructor for the EmptyTaskException.
+     * @param taskType The type of Task (ToDo, Deadline or Event).
      */
     public EmptyTaskException(String taskType) {
         super(taskType);
@@ -17,7 +17,7 @@ public class EmptyTaskException extends Exception {
     }
 
     /**
-     * Return the String representation of the Exception.
+     * Returns the String representation of the Exception.
      *
      * @return The String representation of the Exception.
      */

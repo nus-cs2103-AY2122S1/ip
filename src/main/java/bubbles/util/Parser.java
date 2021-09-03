@@ -1,8 +1,5 @@
 package bubbles.util;
 
-import bubbles.exceptions.InvalidCommandException;
-import bubbles.tasks.TaskList;
-
 /**
  * A class that deals with making sense of the
  * user command.
@@ -15,11 +12,11 @@ public class Parser {
      * Bubbles bot to easily update its task list with what is being read from
      * the file.
      *
-     * @param task A line of input read from the file saved on the local hard disk
+     * @param task A line of input read from the file saved on the local hard disk.
      * @return Object array which the first argument refers to the task category (ToDo,
      *          Deadline, Event), the second argument refers to the task description
      *          (and date), and the last argument refers to whether the task had been
-     *          completed
+     *          completed.
      */
     public Object[] formatTask(String task) {
         String input = "";

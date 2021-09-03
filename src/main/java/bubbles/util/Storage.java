@@ -1,15 +1,14 @@
 package bubbles.util;
 
-import bubbles.tasks.Task;
-import bubbles.tasks.TaskList;
-import bubbles.util.Parser;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import bubbles.tasks.Task;
+import bubbles.tasks.TaskList;
 
 /**
  * A class that deals with loading bubbles.tasks from the file
@@ -35,7 +34,7 @@ public class Storage {
      * argument provided.
      *
      * @param filePath The path to the designated file with respect to the root working
-     *                 directory
+     *                 directory.
      */
     public void loadFile(String filePath) {
         bubbles = new File(filePath);
@@ -102,7 +101,7 @@ public class Storage {
     /**
      * Getter for the taskList of this Storage Object.
      *
-     * @return The taskList of this Storage Object
+     * @return The taskList of this Storage Object.
      */
     public TaskList getTaskList() {
         return this.taskList;

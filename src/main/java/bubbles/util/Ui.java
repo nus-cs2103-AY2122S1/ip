@@ -1,8 +1,5 @@
 package bubbles.util;
 
-import bubbles.util.Message;
-import bubbles.util.Storage;
-
 import java.util.Scanner;
 
 /**
@@ -55,6 +52,12 @@ public class Ui {
         return sc.nextLine().trim();
     }
 
+    /**
+     * Closes the scanner, write the tasks into the local storage
+     * and prints the Exit message.
+     *
+     * @return String representing the Exit message.
+     */
     public String exit() {
         sc.close();
 

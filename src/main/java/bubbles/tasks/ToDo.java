@@ -12,13 +12,13 @@ public class ToDo extends Task {
     }
 
     /**
-     * Act as a public constructor of a ToDo Object, throw an EmptyTaskException
+     * Acts as a public constructor of a ToDo Object, throw an EmptyTaskException
      * if the input from the user is empty (after the "todo" command).
      *
-     * @param input The description of the ToDo
-     * @param isDone Whether the ToDo is done/completed
-     * @return The created ToDo Object
-     * @throws EmptyTaskException Exception thrown when the ToDo description is empty
+     * @param input The description of the ToDo.
+     * @param isDone Whether the ToDo is done/completed.
+     * @return The created ToDo Object.
+     * @throws EmptyTaskException Exception thrown when the ToDo description is empty.
      */
     public static ToDo addToDo(String input, boolean isDone) throws EmptyTaskException {
         if (input.equals("")) {
@@ -31,10 +31,10 @@ public class ToDo extends Task {
     }
 
     /**
-     * Format the ToDo Object to store in the hard disk File.
+     * Formats the ToDo Object to store in the hard disk File.
      *
      * @return String representing the ToDo Object (different from the String representation
-     *          of the ToDo Task)
+     *          of the ToDo Task).
      */
     @Override
     public String format() {
@@ -52,7 +52,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Return the String representation of the ToDo.
+     * Returns the String representation of the ToDo.
      *
      * @return The String representation of the ToDo.
      */

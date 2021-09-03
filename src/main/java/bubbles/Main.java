@@ -1,13 +1,13 @@
 package bubbles;
 
+import java.io.IOException;
+
+import bubbles.controller.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import bubbles.controller.MainWindow;
-
-import java.io.IOException;
 
 /** A GUI for Bubbles using FXML. */
 public class Main extends Application {
