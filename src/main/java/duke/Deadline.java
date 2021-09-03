@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.Temporal;
 import java.util.Locale;
 
 
@@ -28,27 +29,21 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor when date and time of deadline are given.
+     * Constructor of Deadline instance.
      *
      * @param description Deadline description
      * @param by          When it is due
      */
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, Temporal by) {
         super(description);
-        date = by.toLocalDate();
-        time = by.toLocalTime();
-    }
-
-    /**
-     * Constructor when only date of deadline is given.
-     *
-     * @param description Deadline description
-     * @param by          When it is due
-     */
-    public Deadline(String description, LocalDate by) {
-        super(description);
-        date = by;
-        time = null;
+        if (by instanceof LocalDateTime) {
+            LocalDateTime b = (LocalDateTime) by;
+            date = b.toLocalDate();
+            time = b.toLocalTime();
+        } else if (by instanceof LocalDate) {
+            date = (LocalDate) by;
+            time = null;
+        }
     }
 
     /**

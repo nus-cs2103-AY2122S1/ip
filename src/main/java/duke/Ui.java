@@ -64,6 +64,10 @@ public class Ui {
                 + task + "\n" + "Now you have " + size + " tasks in the list.");
     }
 
+    String showLoadedMessage() {
+        return print("Meow. Your tasks have been loaded.");
+    }
+
     String showExitMessage() {
         return print(EXIT);
     }

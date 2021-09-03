@@ -12,6 +12,12 @@ public class TaskList {
     private final ArrayList<Task> taskList = new ArrayList<>();
 
     /**
+     * Empty constructor for fresh start.
+     */
+    public TaskList() {
+    }
+
+    /**
      * Mark task in tasklist as done via task description.
      *
      * @param description Task description

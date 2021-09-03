@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.Temporal;
 import java.util.Locale;
 
 /**
@@ -27,28 +28,24 @@ public class Event extends Task {
     }
 
     /**
-     * Constructor when date and time of event are given.
+     * Constructor of Event instance.
      *
      * @param description Event description
      * @param at          When event occurs
      */
-    public Event(String description, LocalDateTime at) {
+    public Event(String description, Temporal at) {
         super(description);
-        date = at.toLocalDate();
-        time = at.toLocalTime();
+        if (at instanceof LocalDateTime) {
+            LocalDateTime a = (LocalDateTime) at;
+            date = a.toLocalDate();
+            time = a.toLocalTime();
+        } else if (at instanceof LocalDate) {
+            date = (LocalDate) at;
+            time = null;
+        }
+
     }
 
-    /**
-     * Constructor when only date of event is given.
-     *
-     * @param description Event description
-     * @param at          When event occurs
-     */
-    public Event(String description, LocalDate at) {
-        super(description);
-        date = at;
-        time = null;
-    }
 
     /**
      * Convert event into savable format.

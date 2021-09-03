@@ -101,3 +101,10 @@ class DateTimeFormatException extends DukeException {
                 + "\n   Please input time in 2300 or 11pm or 11.00pm format."));
     }
 }
+
+class LoadFileCorrupted extends DukeException {
+
+    LoadFileCorrupted() {
+        super("Meow? File could not be loaded as file was corrupted.");
+    }
+}

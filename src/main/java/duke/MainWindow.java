@@ -27,8 +27,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/otaku.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mafu.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/otaku.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mafu.png"));
 
     @FXML
     public void initialize() {
@@ -59,7 +59,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
 
         // https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
-        if (duke.hasQuit) {
+        if (duke.isQuit()) {
             PauseTransition pauseThenExit = new PauseTransition(Duration.seconds(0.5));
             pauseThenExit.setOnFinished(event -> Platform.exit());
             pauseThenExit.play();
