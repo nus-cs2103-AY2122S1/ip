@@ -61,6 +61,8 @@ public class Storage {
                             tasks.get(tasks.size() - 1).markAsDone();
                         }
                     } else {
+                        // Task at this point should be prefixed with E
+                        assert arr[0].equals("E");
                         tasks.add(new Event(arr[2], LocalDate.parse(arr[3].substring(0, 10)),
                                 LocalTime.parse(arr[3].substring(11))));
                         // if task is done, mark as done
@@ -167,6 +169,8 @@ public class Storage {
                 dataWriter.write("D,0," + taskName + "," + time + "\n");
                 dataWriter.close();
             } else {
+                // Type at this point should be EVENT
+                assert type == Duke.Type.EVENT;
                 dataWriter.write("E,0," + taskName + "," + time + "\n");
                 dataWriter.close();
             }
