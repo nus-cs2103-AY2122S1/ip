@@ -18,7 +18,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return "\tBye. Have a nice day!";
+        return "Bye. Have a nice day!";
     }
 
     /**

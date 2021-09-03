@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
         storage.save(tasks);
 
         return String.format("%s%s",
-                "Noted. I've deleted this task:\n\t "
+                "Noted. I've deleted this task:\n "
                 + task,
                 "\nNow you have "
                 + tasks.getTaskNum()

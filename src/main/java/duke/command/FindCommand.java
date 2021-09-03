@@ -37,7 +37,7 @@ public class FindCommand extends Command {
             String taskString = task.toString();
 
             if (taskString.contains(keyword)) {
-                String matchedResult = String.format("\t %d.%s\n", index++, taskString);
+                String matchedResult = String.format(" %d.%s\n", index++, taskString);
                 response.append(matchedResult);
             }
         }

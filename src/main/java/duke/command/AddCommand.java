@@ -104,7 +104,7 @@ public class AddCommand extends Command{
             storage.save(tasks);
 
             return String.format("%s%s",
-                    "Got it. I've added this task:\n\t "
+                    "Got it. I've added this task:\n "
                     + task,
                     "\nNow you have "
                     + tasks.getTaskNum()

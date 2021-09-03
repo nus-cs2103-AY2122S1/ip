@@ -28,15 +28,15 @@ public class Ui {
      * Prints the string divider to the screen.
      */
     public void showLine() {
-        System.out.println("\t" + Ui.divider);
+        System.out.println( Ui.divider);
     }
 
     /**
      * Prints loading error to the screen.
      */
     public void showLoadingError() {
-        System.out.println("\tNo record found.");
-        System.out.println("\tInitializing...");
+        System.out.println("No record found.");
+        System.out.println("Initializing...");
     }
 
     /**
@@ -44,9 +44,9 @@ public class Ui {
      */
     public void showWelcome() {
         showLine();
-        System.out.println("\tWelcome to");
+        System.out.println("Welcome to");
         System.out.println(Ui.logo);
-        System.out.println("\tI'm Desmond, how may I serve you? :)");
+        System.out.println("I'm Desmond, how may I serve you? :)");
         showLine();
     }
 
@@ -71,6 +71,6 @@ public class Ui {
      * @param errorMessage The error message based on the exception caught/.
      */
     public String showError(String errorMessage) {
-        return "\tSomething went wrong: \t" + errorMessage;
+        return "Something went wrong:\n " + errorMessage;
     }
 }

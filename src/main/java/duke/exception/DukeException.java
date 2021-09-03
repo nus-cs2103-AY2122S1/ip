@@ -23,6 +23,6 @@ public class DukeException extends IOException {
      */
     @Override
     public String toString() {
-        return String.format("☹ OOPS!!! %s", super.getMessage());
+        return String.format("OOPS!!! %s", super.getMessage());
     }
 }
