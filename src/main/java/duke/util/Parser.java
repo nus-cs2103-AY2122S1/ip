@@ -14,11 +14,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
-import duke.exception.EmptyDescriptionException;
-import duke.exception.InvalidDateInputException;
-import duke.exception.InvalidTimeInputException;
-import duke.exception.MissingArgumentException;
-import duke.exception.MissingIndexException;
+import duke.exception.*;
 
 /**
  * Class to deal with making sense of the user's inputted command.
@@ -92,9 +88,10 @@ public class Parser {
      *
      * @param command the original command inputted by the user.
      * @return the filtered and parsed int that refers to the index of the task.
+     * @throws InvalidArgumentException when index given (in String) is invalid.
      * @throws MissingIndexException when index is missing (including if it contains only white space).
      */
-    public static int getTaskIndex(String command) throws MissingIndexException {
+    public static int getTaskIndex(String command) throws InvalidArgumentException, MissingIndexException {
         String[] commandItems = command.split(" ", 2);
         if (commandItems.length == 1) {
             throw new MissingIndexException();
@@ -105,7 +102,11 @@ public class Parser {
             throw new MissingIndexException();
         }
 
-        return parseInt(indexString);
+        try {
+            return parseInt(indexString);
+        } catch (NumberFormatException e) {
+            throw new InvalidArgumentException(indexString);
+        }
     }
 
     /**
@@ -114,9 +115,10 @@ public class Parser {
      *
      * @param command the original command inputted by the user.
      * @return the filtered and parsed int that refers to the index of the task.
+     * @throws InvalidArgumentException when index given (in String) is invalid.
      * @throws MissingIndexException when index is missing (including if it contains only white space).
      */
-    public static int[] getAllTaskIndexes(String command) throws MissingIndexException {
+    public static int[] getAllTaskIndexes(String command) throws InvalidArgumentException, MissingIndexException {
         ArrayList<Integer> indexes = new ArrayList<>();
 
         // Do checks
@@ -134,7 +136,11 @@ public class Parser {
 
         for (int i = 1; i < stringIndexes.length; i++) {
             if (!stringIndexes[i].isEmpty()) {
-                indexes.add(parseInt(stringIndexes[i]));
+                try {
+                    indexes.add(parseInt(stringIndexes[i]));
+                } catch (NumberFormatException e) {
+                    throw new InvalidArgumentException(stringIndexes[i]);
+                }
             }
         }
 
