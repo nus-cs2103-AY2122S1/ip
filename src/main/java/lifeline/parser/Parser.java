@@ -1,5 +1,7 @@
 package lifeline.parser;
 
+import static lifeline.util.ErrorString.ERROR_INVALID_COMMAND;
+
 import lifeline.command.Command;
 import lifeline.exception.LifelineException;
 
@@ -22,6 +24,6 @@ public class Parser {
                 return c;
             }
         }
-        throw new LifelineException("I am sorry! I don't know what that means!");
+        throw new LifelineException(ERROR_INVALID_COMMAND);
     }
 }

@@ -1,5 +1,8 @@
 package lifeline.task;
 
+import static lifeline.util.ErrorString.ERROR_NO_TASKS_FOUND;
+import static lifeline.util.ErrorString.ERROR_TASK_ALREADY_DONE;
+
 import java.util.ArrayList;
 
 import lifeline.exception.LifelineException;
@@ -73,7 +76,7 @@ public class TaskList {
         assert index >= 0 && index < taskList.size();
         Task taskToMarkAsComplete = taskList.get(index);
         if (taskToMarkAsComplete.isDone()) {
-            throw new LifelineException("Task is already done!");
+            throw new LifelineException(ERROR_TASK_ALREADY_DONE);
         }
         taskToMarkAsComplete.setDone(true);
         return taskToMarkAsComplete;
@@ -95,7 +98,7 @@ public class TaskList {
             }
         }
         if (foundTasks.getSize() == 0) {
-            throw new LifelineException("No tasks found with the given keyword " + keyword);
+            throw new LifelineException(ERROR_NO_TASKS_FOUND);
         }
         return foundTasks;
     }

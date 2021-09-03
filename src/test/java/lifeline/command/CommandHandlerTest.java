@@ -1,5 +1,17 @@
 package lifeline.command;
 
+import static lifeline.util.ErrorString.ERROR_DEADLINE_INCORRECT_FORMAT;
+import static lifeline.util.ErrorString.ERROR_EVENT_INCORRECT_FORMAT;
+import static lifeline.util.ErrorString.ERROR_DONE_MISSING_INDEX;
+import static lifeline.util.ErrorString.ERROR_DELETE_MISSING_INDEX;
+import static lifeline.util.ErrorString.ERROR_TODO_MISSING_DETAILS;
+import static lifeline.util.ErrorString.ERROR_DEADLINE_MISSING_DETAILS;
+import static lifeline.util.ErrorString.ERROR_EVENT_MISSING_DETAILS;
+import static lifeline.util.ErrorString.ERROR_FIND_MISSING_KEYWORD;
+import static lifeline.util.ErrorString.ERROR_INDEX_OUT_OF_BOUNDS;
+import static lifeline.util.ErrorString.ERROR_NON_INTEGER_INDEX;
+import static lifeline.util.ErrorString.ERROR_NO_TASKS_FOUND;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -28,7 +40,7 @@ public class CommandHandlerTest {
             Command.TODO.getExecute().apply("todo", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Details of todo cannot be blank!", e.getMessage());
+            assertEquals(ERROR_TODO_MISSING_DETAILS, e.getMessage());
         }
     }
 
@@ -50,7 +62,7 @@ public class CommandHandlerTest {
             Command.EVENT.getExecute().apply("event", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Details of event cannot be blank!", e.getMessage());
+            assertEquals(ERROR_EVENT_MISSING_DETAILS, e.getMessage());
         }
     }
 
@@ -63,8 +75,7 @@ public class CommandHandlerTest {
             Command.EVENT.getExecute().apply("event wedding /at", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Event date/time not in proper format! Please use event <name> /at "
-                    + "<dd/MM/yy> <HHmm>-<HHmm>", e.getMessage());
+            assertEquals(ERROR_EVENT_INCORRECT_FORMAT, e.getMessage());
         }
     }
 
@@ -77,8 +88,7 @@ public class CommandHandlerTest {
             Command.EVENT.getExecute().apply("event wedding /at 04/03/21", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Event date/time not in proper format! Please use event <name> /at "
-                    + "<dd/MM/yy> <HHmm>-<HHmm>", e.getMessage());
+            assertEquals(ERROR_EVENT_INCORRECT_FORMAT, e.getMessage());
         }
     }
 
@@ -101,7 +111,7 @@ public class CommandHandlerTest {
             Command.DEADLINE.getExecute().apply("deadline", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Details of deadline cannot be blank!", e.getMessage());
+            assertEquals(ERROR_DEADLINE_MISSING_DETAILS, e.getMessage());
         }
     }
 
@@ -114,8 +124,7 @@ public class CommandHandlerTest {
             Command.DEADLINE.getExecute().apply("deadline project /by", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Deadline is not of the correct format! Please use deadline <name> /by "
-                    + "<dd/MM/yy HHmm>", e.getMessage());
+            assertEquals(ERROR_DEADLINE_INCORRECT_FORMAT, e.getMessage());
         }
     }
 
@@ -128,8 +137,7 @@ public class CommandHandlerTest {
             Command.DEADLINE.getExecute().apply("deadline project /by 04/03/21", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Deadline is not of the correct format! Please use deadline <name> /by "
-                    + "<dd/MM/yy HHmm>", e.getMessage());
+            assertEquals(ERROR_DEADLINE_INCORRECT_FORMAT, e.getMessage());
         }
     }
 
@@ -151,7 +159,7 @@ public class CommandHandlerTest {
             Command.DONE.getExecute().apply("done", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("You did not specify an integer! Please use done <number>", e.getMessage());
+            assertEquals(ERROR_DONE_MISSING_INDEX, e.getMessage());
         }
     }
 
@@ -164,7 +172,7 @@ public class CommandHandlerTest {
             Command.DONE.getExecute().apply("done 2", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Index is out of bounds!", e.getMessage());
+            assertEquals(ERROR_INDEX_OUT_OF_BOUNDS, e.getMessage());
         }
     }
 
@@ -177,7 +185,7 @@ public class CommandHandlerTest {
             Command.DONE.getExecute().apply("done abc", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Index is not an integer!", e.getMessage());
+            assertEquals(ERROR_NON_INTEGER_INDEX, e.getMessage());
         }
     }
 
@@ -203,7 +211,7 @@ public class CommandHandlerTest {
             Command.DELETE.getExecute().apply("delete", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("You did not specify an integer! Please use delete <number>", e.getMessage());
+            assertEquals(ERROR_DELETE_MISSING_INDEX, e.getMessage());
         }
     }
 
@@ -216,7 +224,7 @@ public class CommandHandlerTest {
             Command.DELETE.getExecute().apply("delete 2", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Index is out of bounds!", e.getMessage());
+            assertEquals(ERROR_INDEX_OUT_OF_BOUNDS, e.getMessage());
         }
     }
 
@@ -229,7 +237,7 @@ public class CommandHandlerTest {
             Command.DELETE.getExecute().apply("delete abc", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Index is not an integer!", e.getMessage());
+            assertEquals(ERROR_NON_INTEGER_INDEX, e.getMessage());
         }
     }
 
@@ -277,7 +285,7 @@ public class CommandHandlerTest {
             Ui ui = new Ui();
             Command.FIND.getExecute().apply("find", storage, taskList, ui);
         } catch (LifelineException e) {
-            assertEquals("Keyword was not provided! Please use find <keyword>", e.getMessage());
+            assertEquals(ERROR_FIND_MISSING_KEYWORD, e.getMessage());
         }
     }
 
@@ -292,7 +300,7 @@ public class CommandHandlerTest {
             Ui ui = new Ui();
             Command.FIND.getExecute().apply("find abc", storage, taskList, ui);
         } catch (LifelineException e) {
-            assertEquals("No tasks found with the given keyword abc", e.getMessage());
+            assertEquals(ERROR_NO_TASKS_FOUND, e.getMessage());
         }
     }
 
@@ -311,10 +319,6 @@ public class CommandHandlerTest {
     @AfterEach
     public void deleteTestFiles() {
         File testFile = new File("test.json");
-        if (testFile.delete()) {
-            System.out.println("deleted in command");
-        } else {
-            System.out.println("File not deleted in command");
-        }
+        testFile.delete();
     }
 }
