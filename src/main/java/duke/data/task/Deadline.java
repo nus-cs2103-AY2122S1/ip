@@ -17,17 +17,22 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline
+     * 
      * @param input the input array consisting of description and date/time
      * @throws EmptyTimeException if time is empty 
      * @throws InvalidTimeException if time is not in correct format
      */
     public Deadline(String[] input) throws DukeException {
         super(input[0]);
-        if (input.length < 2) {
+        
+        boolean isEmptyTimeInput = input.length < 2;
+        if (isEmptyTimeInput) {
             throw new EmptyTimeException();
         }
+        
+        String timeInput = input[1];
         try {
-            this.by = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+            this.by = LocalDateTime.parse(timeInput, DateTimeFormatter.ofPattern(INPUT_DATE_TIME_FORMAT_PATTERN));
         } catch (DateTimeParseException e) {
             throw new InvalidTimeException();
         }
@@ -35,6 +40,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for Deadline specifying isDone
+     * 
      * @param input the input array consisting of description and date/time from saved data
      * @param isDone deadline's status from saved data
      */
@@ -51,11 +57,13 @@ public class Deadline extends Task {
 
     /**
      * Returns string representation of this deadline
+     * 
      * @return string representation of this deadline
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " 
-                + this.by.format(DateTimeFormatter.ofPattern("d MMM yyyy h:mma")) + ")";
+        String IDENTIFIER = "[D]";
+        return IDENTIFIER + super.toString() + " (by: " 
+                + this.by.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_TIME_FORMAT_PATTERN)) + ")";
     }
 }

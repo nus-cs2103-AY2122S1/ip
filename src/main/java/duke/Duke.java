@@ -19,6 +19,7 @@ public class Duke {
 
     /**
      * Constructor for Duke
+     * 
      * @param filePath the path for the file where data is stored
      */
     public Duke(Path filePath) {
@@ -33,6 +34,7 @@ public class Duke {
 
     /**
      * Returns Duke's response to a given input
+     * 
      * @param input the input given by user
      * @return Duke's response
      */

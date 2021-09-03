@@ -9,6 +9,7 @@ import duke.data.task.Todo;
 public class TodoCommand extends AddCommand {
     /**
      * Constructor for TodoCommand
+     * 
      * @param rest the user input after the command
      * @throws DukeException if user input invalid or empty
      */
