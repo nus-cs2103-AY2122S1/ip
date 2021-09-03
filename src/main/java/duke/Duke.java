@@ -46,7 +46,7 @@ public class Duke extends Application{
     }
 
     @Override
-    public void start(Stage stage) {
+    public void start(Stage stage) throws DukeException{
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -109,11 +109,19 @@ public class Duke extends Application{
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            }
         });
     }
 
@@ -135,7 +143,7 @@ public class Duke extends Application{
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput() throws DukeException{
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -148,8 +156,20 @@ public class Duke extends Application{
     /**
      * Returns response from duke
      */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
+    private String getResponse(String input) throws DukeException {
+        String[] splitInput = input.split(" ", 2);
+        String command = splitInput[0];
+        String description = "";
+        if(splitInput.length > 1) {
+            description = " " + splitInput[1];
+        }
+        if(!command.equals("bye")) {
+            String response = ui.executeCommand(command, description, 1);
+            return response;
+        } else {
+            return ui.showByeMessage();
+        }
+
     }
 
 

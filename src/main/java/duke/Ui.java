@@ -13,8 +13,10 @@ import java.util.ArrayList;
 
 public class Ui {
 
+    private final String LINES = "-------------------------------------------";
+
     void printLines() {
-        System.out.println("------------------------------------------------------------------");
+        System.out.println(LINES);
     }
 
     /**
@@ -35,10 +37,112 @@ public class Ui {
         printLines();
     }
 
+    String showByeMessage() {
+        StringBuilder str = new StringBuilder();
+        str.append(LINES+"\n");
+        str.append("Bye. Hope to see you again soon!\n");
+        str.append(LINES+"\n");
+        return str.toString();
+    }
+
     void displayCommand(String description) {
         printLines();
         System.out.println(description);
         printLines();
+    }
+
+
+    String executeCommand(String command, String description, int i) throws DukeException {
+        try {
+            if (command.equals("list")) {
+               return showDukeList();
+            } else if (command.equals("done")) {
+                int taskIndex = Integer.parseInt(description.substring(1)) - 1;
+                Task toBeCompleted = Tasklist.dukeList.get(taskIndex);
+                toBeCompleted.completeTask();
+                return showTaskCompletion(toBeCompleted);
+            } else {
+                StringBuilder str = new StringBuilder();
+                if (command.equals("deadline")) {
+                    String[] description_and_time = Parser.splitDescriptionAndTime(description);
+                    String deadlineDescription = Parser.getDescription(description_and_time);
+                    String time = Parser.getTime(description_and_time);
+                    Deadline newDeadline = new Deadline(deadlineDescription, time);
+                    Tasklist.dukeList.add(newDeadline);
+                    str.append(LINES+"\n");
+                    str.append("Got it. I've added this task:\n");
+                    str.append(newDeadline+"\n");
+                } else if (command.equals("event")) {
+                    String[] event_and_time = Parser.splitDescriptionAndTime(description);
+                    String eventDescription = Parser.getDescription(event_and_time);
+                    String time = Parser.getTime(event_and_time);
+                    Event newEvent = new Event(eventDescription, time);
+                    Tasklist.dukeList.add(newEvent);
+                    str.append(LINES+"\n");
+                    str.append("Got it. I've added this task:\n");
+                    str.append(newEvent+"\n");
+                } else if (command.equals("todo")) {
+                    if (description.trim().equals("")) {
+                        throw new DukeEmptyTodoDescriptionException();
+                    }
+                    str.append(LINES+"\n");
+                    str.append("Got it. I've added this task:\n");
+                    ToDo newTodo = new ToDo(description.substring(1));
+                    Tasklist.add(newTodo);
+                    str.append(newTodo+"\n");
+                } else if (command.equals("delete")) {
+                    int taskIndex = Integer.parseInt(description.substring(1)) - 1;
+                    str.append(LINES+"\n");
+                    str.append("Noted. I've removed this task:\n");
+                    Task taskToBeDeleted = Tasklist.dukeList.get(taskIndex);
+                    str.append(taskToBeDeleted+"\n");
+                    deleteTask(taskIndex);
+                } else if (command.equals("find")) {
+                    String keyword = description.substring(1);
+                    ArrayList<Task> foundTasks = Tasklist.find(keyword);
+                    return showFoundDukeList(foundTasks);
+                } else {
+                    throw new DukeUnknownCommandException();
+                }
+
+                if (!command.equals("find")) {
+                    str.append("Now you have " + Tasklist.dukeList.size() + " tasks in the list.\n");
+                    str.append(LINES+"\n");
+                }
+                return str.toString();
+            }
+        } catch ( DukeEmptyTodoDescriptionException | DukeUnknownCommandException e) {
+            StringBuilder str=  new StringBuilder();
+            str.append(LINES+"\n");
+            str.append(e.getMessage() + "\n");
+            str.append(LINES+"\n");
+            return str.toString();
+        }
+    }
+
+    /**
+     * Show the completion message for the Task marked done
+     * @param toBeCompleted the Task which is to be marked done
+     */
+    String showTaskCompletion(Task toBeCompleted) {
+        StringBuilder str = new StringBuilder();
+        str.append(LINES+"\n");
+        str.append("Nice! I've marked this task as done:\n");
+        str.append(toBeCompleted+"\n");
+        str.append(LINES+"\n");
+
+        return str.toString();
+    }
+
+    String showDukeList() {
+        StringBuilder str = new StringBuilder();
+        str.append(LINES+"\n");
+        for (int i = 0;i < Tasklist.dukeList.size(); i++) {
+            str.append((i+1) + ". " + Tasklist.dukeList.get(i)+"\n");
+        }
+        str.append(LINES+"\n");
+
+        return str.toString();
     }
 
     /**
@@ -140,6 +244,18 @@ public class Ui {
             System.out.println((i+1) + ". " + Tasklist.dukeList.get(i));
         }
         printLines();
+    }
+
+    String showFoundDukeList(ArrayList<Task> foundTasks) {
+        StringBuilder str = new StringBuilder();
+        str.append(LINES+"\n");
+        str.append("Here are the matching tasks in your list:\n");
+        for (int i = 0;i < foundTasks.size(); i++) {
+            str.append((i+1) + ". " + foundTasks.get(i) + "\n");
+        }
+        str.append(LINES+"\n");
+
+        return str.toString();
     }
 
     void displayFoundDukeList(ArrayList<Task> foundTasks) {
