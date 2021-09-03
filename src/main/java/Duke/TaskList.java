@@ -76,7 +76,7 @@ public class TaskList {
      * @return string representation of all tasks whose names contain the given query.
      */
     public String getMatches(String query) {
-        return String.join("\n", tasks.stream().filter(task -> task.getName().contains(query))
+        return String.join("\n", tasks.stream().filter(task -> task.contains(query))
                 .map(Task::toString).toArray(String[]::new));
     }
 }

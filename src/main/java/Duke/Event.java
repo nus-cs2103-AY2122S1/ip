@@ -17,6 +17,12 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean contains(String query) {
+        return Utility.containsIgnoreCase(Utility.dateToString(startDate), query)
+                || super.contains(query);
+    }
+
+    @Override
     public String toFile() {
         return String.format("E | %s | %s", super.toFile(), Utility.dateToFile(startDate));
     }

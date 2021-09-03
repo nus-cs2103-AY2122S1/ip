@@ -4,10 +4,21 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-
 public class Utility {
     private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
     private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy, HH:mm");
+
+    /**
+     * Does a case-insensitive search for string query in string src and returns true if
+     * query is found in src.
+     *
+     * @param src source string.
+     * @param query query string to check in src.
+     * @return true if src contains query else false, ignoring case.
+     */
+    public static boolean containsIgnoreCase(String src, String query) {
+        return src.toLowerCase().contains(query.toLowerCase());
+    }
 
     /**
      * Parses given input string of format 'dd/MM/yyyy HHmm' and converts it
