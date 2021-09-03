@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import duke.task.Task;
@@ -46,12 +47,12 @@ public class FilterCommand extends Command {
         }
     }
 
-    private String formatFilteredList(ArrayList<Task> extractedTask) {
+    private String formatFilteredList(List<Task> extractedTask) {
         String output = String.format("Here are your tasks for this day:%s", Ui.LINE_SEPARATOR);
 
         int count = 1;
         for (Task t : extractedTask) {
-            output = output.concat(String.format("[%d]. %s", count++, t + Ui.LINE_SEPARATOR));
+            output = output.concat(String.format("%d. %s", count++, t + Ui.LINE_SEPARATOR));
         }
 
         return output;

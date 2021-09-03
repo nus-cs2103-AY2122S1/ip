@@ -72,7 +72,7 @@ public class Event extends Task {
      */
     @Override
     public String convertToTxt() {
-        return String.format(EVENT_IDENTIFIER + " | %s | %s", super.convertToTxt(), dateTimeToString());
+        return String.format(EVENT_IDENTIFIER + " | %s | %s", super.convertToTxt(), dateTimeString);
     }
 
     /**
