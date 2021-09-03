@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.command.DukeException;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -21,6 +23,11 @@ public class Event extends Task {
     public Event(String description, Calendar atCalendar) {
         super(description);
         this.atCalendar = atCalendar;
+    }
+
+    @Override
+    protected void editTime(Calendar cal) {
+        atCalendar = cal;
     }
 
     /**

@@ -1,5 +1,9 @@
 package duke.task;
 
+import duke.command.DukeException;
+
+import java.util.Calendar;
+
 /**
  * This class implements a Task with a description and completion status
  *
@@ -8,7 +12,7 @@ package duke.task;
  *
  * @author Kishendran Vendar Kon (Group G05)
  */
-public class Task {
+public abstract class Task {
     /** Description of Task. */
     protected String description;
 
@@ -26,14 +30,20 @@ public class Task {
      *
      * @return Status icon 'x' for done ' ' for not done
      */
-    public String getStatusIcon() {
+    protected String getStatusIcon() {
         return isDone ? "x" : " ";
     }
 
     /** Marks task as done. */
-    public void markAsDone() {
+    protected void markAsDone() {
         isDone = true;
     }
+
+    protected void editDescription (String newDescription) {
+        description = newDescription;
+    }
+
+    protected abstract void editTime(Calendar cal) throws DukeException;
 
     /**
      * Returns the string representation of Task

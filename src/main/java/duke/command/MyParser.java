@@ -14,7 +14,7 @@ import java.util.Date;
  * @author Kishendran Vendar Kon (Group G05)
  */
 public class MyParser {
-
+    private final SimpleDateFormat DEADLINE_TIME_FORMAT = new SimpleDateFormat("d/MM/yyyy HHmm");
     /**
      * Deals with making sense of user commands.
      *
@@ -50,6 +50,9 @@ public class MyParser {
             break;
         case "find":
             parseFindCommand(userDescription, duke);
+            break;
+        case "edit":
+            parseEditCommand(userDescription, duke);
             break;
         default:
             parseUnknownCommand(command);
@@ -110,10 +113,9 @@ public class MyParser {
         String dueBy = userDescription.substring(dueByIndex + 4);
 
         Calendar deadlineCal = Calendar.getInstance();
-        SimpleDateFormat deadlineTimeFormat = new SimpleDateFormat("d/MM/yyyy HHmm");
         Date d;
         try {
-            d = deadlineTimeFormat.parse(dueBy);
+            d = DEADLINE_TIME_FORMAT.parse(dueBy);
             deadlineCal.setTime(d);
         } catch (ParseException e) {
             throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yyyy 0000");
@@ -135,10 +137,9 @@ public class MyParser {
         String at = userDescription.substring(atIndex + 4);
 
         Calendar eventCal = Calendar.getInstance();
-        SimpleDateFormat eventTimeFormat = new SimpleDateFormat("d/MM/yyyy HHmm");
 
         try {
-            eventCal.setTime(eventTimeFormat.parse(at));
+            eventCal.setTime(DEADLINE_TIME_FORMAT.parse(at));
         } catch (ParseException e) {
             throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yyyy 0000");
         }
@@ -151,6 +152,66 @@ public class MyParser {
         }
 
         duke.dukeFind(userDescription);
+    }
+
+    private void parseEditCommand(String userDescription, Duke duke) throws DukeException {
+        int editDescIndex = userDescription.indexOf("/desc ");
+        int editTimeIndex = userDescription.indexOf("/time ");
+
+        if (userDescription.isBlank() || (editDescIndex == 0  && editTimeIndex == 0)) {
+            throw new DukeException("OOPS!!! The index of edit cannot be empty");
+        }
+
+        if (editDescIndex == -1 && editTimeIndex == -1) {
+            throw new DukeException("OOPS!!! No field is being edited. Use /desc or /time followed by new info");
+        }
+
+        if (editDescIndex > 0) {
+            parseEditDescriptionCommand(userDescription, editDescIndex, duke);
+        } else if (editTimeIndex > 0) {
+            parseEditTimeCommand(userDescription, editTimeIndex, duke);
+        }
+    }
+
+    private void parseEditDescriptionCommand(String userDescription, int infoIndex, Duke duke) throws DukeException {
+        String editIndex = userDescription.substring(0, infoIndex);
+        editIndex = editIndex.trim();
+        String info = userDescription.substring(infoIndex + 6);
+
+        String regex = "[0-9]+";
+
+        if (!editIndex.matches(regex)) {
+            throw new DukeException("OOPS!!! An integer must follow after an edit command");
+        }
+
+        int targetTask = Integer.parseInt(editIndex);
+
+        duke.dukeEditDescription(info, targetTask);
+    }
+
+    private void parseEditTimeCommand(String userDescription, int infoIndex, Duke duke) throws DukeException {
+        String editIndex = userDescription.substring(0, infoIndex);
+        editIndex = editIndex.trim();
+        String info = userDescription.substring(infoIndex + 6);
+
+        String regex = "[0-9]+";
+
+        if (!editIndex.matches(regex)) {
+            throw new DukeException("OOPS!!! An integer must follow after an edit command");
+        }
+
+        int targetTask = Integer.parseInt(editIndex);
+
+        Calendar editCal = Calendar.getInstance();
+        Date d;
+        try {
+            d = DEADLINE_TIME_FORMAT.parse(info);
+            editCal.setTime(d);
+        } catch (ParseException e) {
+            throw new DukeException("OOPS!!! The date is not formatted as dd/mm/yyyy 0000");
+        }
+
+        duke.dukeEditTime(editCal, targetTask);
     }
 
     private void parseUnknownCommand(String command) throws DukeException {

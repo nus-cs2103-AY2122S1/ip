@@ -120,4 +120,12 @@ public class Duke {
         mainWindow.showListOfTasks(tasks.find(desc));
     }
 
+    protected void dukeEditDescription(String desc, int i) throws DukeException{
+        tasks.editDescription(desc, i);
+    }
+
+    protected void dukeEditTime(Calendar cal, int i) throws DukeException {
+        tasks.editTime(cal, i);
+    }
+
 }

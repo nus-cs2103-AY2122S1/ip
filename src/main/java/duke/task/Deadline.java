@@ -23,6 +23,11 @@ public class Deadline extends Task {
         this.dueByCalendar = dueByCalendar;
     }
 
+    @Override
+    protected void editTime(Calendar cal) {
+        dueByCalendar = cal;
+    }
+
     /**
      * Returns the string representation of Deadline
      *
