@@ -65,6 +65,12 @@ public class TaskList implements Iterable<Task> {
      * Prints all the Tasks in the TaskList line by line.
      */
     public void printList() {
+        if (taskList.size() == 0) {
+            System.out.println("You have no tasks! GOOD JOB!");
+            return;
+        }
+
+        System.out.println("This is your current list!\n");
         for (int i = 0; i < this.taskList.size(); i++) {
             System.out.println("    " + (i + 1) + ". " + this.taskList.get(i));
         }
