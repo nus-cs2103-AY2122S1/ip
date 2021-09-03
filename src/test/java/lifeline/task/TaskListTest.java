@@ -1,7 +1,6 @@
 package lifeline.task;
 
 import static lifeline.util.ErrorString.ERROR_TASK_ALREADY_DONE;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

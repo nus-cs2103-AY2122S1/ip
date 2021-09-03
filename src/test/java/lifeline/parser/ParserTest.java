@@ -1,9 +1,8 @@
 package lifeline.parser;
 
+import static lifeline.util.ErrorString.ERROR_INVALID_COMMAND;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import static lifeline.util.ErrorString.ERROR_INVALID_COMMAND;
 
 import org.junit.jupiter.api.Test;
 
