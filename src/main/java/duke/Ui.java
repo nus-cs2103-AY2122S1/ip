@@ -103,6 +103,13 @@ public class Ui {
     }
 
     /**
+     * Prints on user interface the output for Tag Added.
+     */
+    public String showAddTag(String tag, int taskIndex) {
+        return FRIENDGREETING + "added tag #" + tag + " to task number " + (taskIndex + 1) + "!";
+    }
+
+    /**
      * Prints on user interface the output for Task Done.
      *
      * @param description String description of done task.

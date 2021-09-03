@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -48,6 +49,16 @@ public class TaskList {
         return listToString;
     }
 
+    public String handleAddNotif() {
+        String result = "\n" + duke.getUi().showAddTask();
+        try {
+            result = result + "\n" + duke.getStorage().saveListToFile();
+        } catch (IOException e) {
+            result = result + "\n" + duke.getUi().showLoadingError();
+        }
+        return result;
+    }
+
     /**
      * Adds a <code>Task</code> to the <code>TaskList</code>.
      *
@@ -58,28 +69,37 @@ public class TaskList {
      * @param hasNotif    boolean indicating if <code>Task</code> addition should be printed to <code>Ui</code>.
      * @return String of the UI response.
      */
-    public String createTask(String description, Object time, Category category, boolean isDone, boolean hasNotif) {
+    public String createTask(String description, Object time, Category category,
+            boolean isDone, boolean hasNotif, String tags) {
         String response = "";
+        Task task = null;
         switch (category) {
         case TODO:
-            list.add(new ToDo(description, isDone));
+            task = new ToDo(description, isDone);
             break;
         case DEADLINE:
-            list.add(new Deadline(description, time, isDone));
+            task = new Deadline(description, time, isDone);
             break;
         case EVENT:
-            list.add(new Event(description, time, isDone));
+            task = new Event(description, time, isDone);
             break;
         default:
         }
-        if (hasNotif) {
-            response = response + "\n" + duke.getUi().showAddTask();
-            try {
-                response = response + "\n" + duke.getStorage().saveListToFile();
-            } catch (IOException e) {
-                response = response + "\n" + duke.getUi().showLoadingError();
+
+        String tagsCleaned = tags.substring(1, tags.length() - 1);
+        if (!tagsCleaned.equals("")) {
+            ArrayList<String> tagsList = new ArrayList<>(Arrays.asList(tagsCleaned.split(", ")));;
+            for (String tag : tagsList) {
+                task.addTag(tag);
             }
         }
-        return response;
+
+        list.add(task);
+
+        if (hasNotif) {
+            return response + handleAddNotif();
+        } else {
+            return response;
+        }
     }
 }
