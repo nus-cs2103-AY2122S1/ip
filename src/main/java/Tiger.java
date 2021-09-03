@@ -6,7 +6,6 @@ public class Tiger {
     // TODO: implement flags for delete done combination, invalid todo combination
     // features: fallthrough commands
     // priority
-    // delete done, invalid todo combination
 
     private Ui ui;
 
