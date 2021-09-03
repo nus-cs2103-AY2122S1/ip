@@ -31,12 +31,12 @@ public class Storage {
         try {
             created = file.createNewFile();
         } catch (IOException e) {
-            Ui.showMessageGUI("Something went wrong: " + e.getMessage());
+            System.out.println("Something went wrong: " + e.getMessage());
         } finally {
             if (created) {
-                Ui.showMessageGUI("New data file has been created.");
+                System.out.println("New data file has been created.");
             } else {
-                Ui.showMessageGUI("Data file already exist.");
+                System.out.println("Data file already exist.");
             }
         }
     }
@@ -49,7 +49,7 @@ public class Storage {
         File folder = new File(FOLDER_NAME);
         boolean created = folder.mkdir();
         if (!created) {
-            Ui.showMessageGUI("Folder could not be created.");
+            System.out.println("Folder could not be created.");
         }
     }
 
@@ -65,7 +65,7 @@ public class Storage {
         File file = new File(String.format("%s/%s", FOLDER_NAME, FILE_NAME));
         try {
             Scanner sc = new Scanner(file);
-            Ui.showMessageGUI("I have found past data in your local storage, "
+            System.out.println("I have found past data in your local storage, "
                     + "type 'list' to view the previous tasks.");
             while (sc.hasNextLine()) {
                 String curr = sc.nextLine();
@@ -74,7 +74,7 @@ public class Storage {
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            Ui.showMessageGUI("No past data found in your local storage, initializing from blank state.");
+            System.out.println("No past data found in your local storage, initializing from blank state.");
             createFolder();
             createFile();
         }

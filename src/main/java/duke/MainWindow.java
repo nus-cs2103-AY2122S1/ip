@@ -2,14 +2,12 @@ package duke;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -46,20 +44,32 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and
-     * then appends them to the dialog container. Clears the user input after processing.
+     * then appends them to the dialog container. Clears the user input after processing. If the
+     * response is empty string, it means that user has entered bye command. The platform will
+     * close after 5 seconds.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        if (!response.equals("")) {
+        if (!response.equals("")){
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
             );
+            if (response.equals("Bye bye, i go sleep already. See you again.")){
+                new Timer().schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        Platform.exit();
+                    }
+                }, 3000);
+
+            }
         } else {
             dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         }
+
         userInput.clear();
     }
 }

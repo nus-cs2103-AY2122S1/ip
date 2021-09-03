@@ -51,7 +51,7 @@ public class Duke{
                 }
                 return c.execute();
             } catch (DukeException e) {
-                return Ui.showMessageGUI(e.getMessage());
+                return e.getMessage();
             }
         }
         return "";

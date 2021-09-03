@@ -129,30 +129,22 @@ public class Ui {
     }
 
     public String listTasksGUI(ArrayList<Task> taskList) {
-        StringBuilder s = new StringBuilder("Here are the tasks in your list:");
-        for (int i = 1; i <= taskList.size(); i++) {
-            s.append(String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i - 1).checkStatus()));
+        if (taskList.size() > 0) {
+            StringBuilder s = new StringBuilder("Here are the tasks in your list:");
+            for (int i = 1; i <= taskList.size(); i++) {
+                s.append(String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i - 1).checkStatus()));
+            }
+            return s.toString();
         }
-        return s.toString();
+        return "There are no task in your list currently, please add some.";
     }
 
     /**
-     * Prints the list of task containing the tasks related to the keyword provided by user.
+     * Shows the list of task containing the tasks related to the keyword provided by user.
      *
      * @param list The list of related tasks.
+     * @return A string showing the list of related tasks.
      */
-    public void printRelatedTasks(ArrayList<Task> list) {
-        if (list.size() > 0) {
-            StringBuilder s = new StringBuilder("Here are the matching tasks in your list:");
-            for (int i = 1; i <= list.size(); i++) {
-                s.append(String.format("\n%s%d. %s,", INDENTATION, i, list.get(i - 1).checkStatus()));
-            }
-            printMessageWithFormat(s.toString());
-        } else {
-            printMessageWithFormat("There are no matching task in your list.");
-        }
-    }
-
     public String getRelatedTasks(ArrayList<Task> list) {
         StringBuilder s = new StringBuilder("");
 
@@ -165,9 +157,5 @@ public class Ui {
             s.append("There are no matching task in your list.");
         }
         return s.toString();
-    }
-
-    public static String showMessageGUI(String s){
-        return s;
     }
 }
