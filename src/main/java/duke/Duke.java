@@ -47,7 +47,7 @@ public class Duke {
     /**
      * Sets the dialogContainer field in Duke.
      *
-     * @param dialogContainer
+     * @param dialogContainer A VBox instance of GUI.
      */
     public void setDialogContainer(VBox dialogContainer) {
         this.dialogContainer = dialogContainer;
