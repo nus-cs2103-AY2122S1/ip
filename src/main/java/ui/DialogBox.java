@@ -55,17 +55,17 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: #00FFFF");
-        db.setAlignment(Pos.CENTER_RIGHT);
-        return db;
+        DialogBox userDialog = new DialogBox(text, img);
+        userDialog.setStyle("-fx-background-color: #00FFFF");
+        userDialog.setAlignment(Pos.CENTER_RIGHT);
+        return userDialog;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img);
-        db.flip();
-        db.setStyle("-fx-background-color: #7FFFD4");
-        db.setAlignment(Pos.CENTER_LEFT);
-        return db;
+        DialogBox dukeDialog = new DialogBox(text, img);
+        dukeDialog.flip();
+        dukeDialog.setStyle("-fx-background-color: #7FFFD4");
+        dukeDialog.setAlignment(Pos.CENTER_LEFT);
+        return dukeDialog;
     }
 }
