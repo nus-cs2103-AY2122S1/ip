@@ -41,6 +41,7 @@ public class Duke {
      * @return String to be used as Duke output that corresponds to a user input command.
      */
     public String getResponse(String input) {
+        assert storage != null : "Storage should not be null";
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);

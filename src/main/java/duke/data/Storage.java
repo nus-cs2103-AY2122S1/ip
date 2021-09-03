@@ -96,6 +96,7 @@ public class Storage {
      * @param index Index of task to be modified.
      */
     public void saveTaskDone(int index) {
+        assert taskListString.size() >= index : "Index should be in range";
         int storedIndex = index - 1;
         String oldData = taskListString.get(storedIndex);
         String newData = oldData.substring(0, 2) + 'X' + oldData.substring(3);
@@ -108,6 +109,7 @@ public class Storage {
      * @param index Index of task to be removed.
      */
     public void removeTask(int index) {
+        assert taskListString.size() >= index : "Index should be in range";
         taskListString.remove(index);
     }
 }

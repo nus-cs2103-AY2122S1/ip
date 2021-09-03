@@ -30,7 +30,6 @@ public class Command {
     private int index;
     private String[] subInputs;
     private String description;
-    private boolean isExit = false;
 
     /**
      * Returns a new Command.
@@ -107,6 +106,8 @@ public class Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException,
             DateTimeParseException, NumberFormatException {
+        assert this.command != null : "Command should not be null";
+        assert this.type != null : "Type should not be null";
         switch (this.type) {
         case SINGLE_INPUT:
             return executeSingleInputCommand(tasks, ui);
@@ -124,10 +125,12 @@ public class Command {
     }
 
     private String executeDateTimeInputCommand(TaskList tasks, Ui ui) {
+        assert this.dateTime != null : "dateTime should not be null";
         return ui.displayDateTimeFilteredCommand(this.command, tasks, this.dateTime);
     }
 
     private String executeStrArrInputCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        assert this.subInputs != null : "subInputs should not be null";
         Task task;
         if (this.command.equals(Commands.DEADLINE)) {
             task = new Deadline(subInputs);
@@ -142,6 +145,7 @@ public class Command {
     }
 
     private String executeStrInputCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+        assert this.description != null : "Description should not be null";
         if (this.command.equals(Commands.TODO)) {
             tasks.addItem(new Todo(this.description), storage);
             storage.save();

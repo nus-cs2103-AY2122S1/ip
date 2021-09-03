@@ -35,8 +35,10 @@ public class Event extends DateTimeTask {
      */
     @Override
     public String toString() {
+        assert this.at != null : "Event time should not be null";
         String dateTime = at.format(DateTimeFormatter.ofPattern("MMM d yyyy hh:mm a"));
         return "[" + code + "]" + super.toString() + " (at: " + dateTime + ")";
+
     }
 
     /**

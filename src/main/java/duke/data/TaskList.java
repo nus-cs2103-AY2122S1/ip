@@ -162,6 +162,7 @@ public class TaskList {
      * @return String representation of a task at index.
      */
     public String returnTask(int index) {
+        assert items.size() >= index : "Index should be in range";
         int storedIndex = index - 1;
         return this.items.get(storedIndex).toString();
     }
