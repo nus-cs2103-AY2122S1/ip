@@ -37,20 +37,21 @@ public class Storage {
     /**
      * Saves data from list provided into file in PATH.
      */
-    public void save() {
+    public void save() throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.path + "\\data\\data.txt");
             fileWriter.write(list.toString());
             fileWriter.close();
         } catch (IOException e) {
-            System.out.println(e.toString());
+            throw new DukeException("☹ OOPS!!! Duke does not have permission"
+                    + " to save data");
         }
     }
 
     /**
      * Loads data from file in PATH to list provided.
      */
-    public void load() {
+    public void load() throws DukeException {
         try {
             Path folderPath = Paths.get(this.path + "\\data");
             Path filePath = Paths.get(this.path + "\\data\\data.txt");
@@ -89,9 +90,8 @@ public class Storage {
                 data = bufferedReader.readLine();
             }
         } catch (IOException e) {
-            System.out.println(e.toString());
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            throw new DukeException("☹ OOPS!!! Duke does not have permission"
+                    + " to save or load data");
         }
     }
 }

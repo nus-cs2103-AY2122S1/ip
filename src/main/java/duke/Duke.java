@@ -23,7 +23,6 @@ public class Duke {
         this.storage = new Storage(System.getProperty("user.dir"), list);
         this.ui = new Ui(list, this.storage);
         this.parser = new Parser(list, this.storage);
-        this.storage.load();
     }
 
     /**
@@ -42,7 +41,6 @@ public class Duke {
     public String getResponse(String input) {
         return this.parser.parse(input);
     }
-
 
     /**
      * Runs Duke.

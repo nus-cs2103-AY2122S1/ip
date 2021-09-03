@@ -14,7 +14,6 @@ public class DukeList {
     /** The list in which Duke stores Tasks. */
     private final ArrayList<Task> tasks = new ArrayList<>();
 
-
     /**
      * Constructs a DukeList.
      */
@@ -143,12 +142,15 @@ public class DukeList {
      * @return The list of tasks in the list.
      */
     public String list() {
-        String str = "Here are the tasks in your list:\n";
+        StringBuilder str = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
-            str += (i + 1) + "." + tasks.get(i).toString() + "\n";
+            str.append(i + 1)
+                    .append(".")
+                    .append(tasks.get(i).toString())
+                    .append("\n");
         }
 
-        return str;
+        return str.toString();
     }
 
     /**
@@ -188,7 +190,7 @@ public class DukeList {
      */
     public String find(String input) {
         String trimmedInput = input.trim();
-        String str = "";
+        StringBuilder str = new StringBuilder();
         String msg;
 
         int count = 0;
@@ -200,7 +202,7 @@ public class DukeList {
             doesContain = msg.contains(trimmedInput);
 
             if (doesContain) {
-                str += (i + 1 + "." + msg + "\n");
+                str.append(i + 1).append(".").append(msg).append("\n");
                 count++;
             }
         }
@@ -212,7 +214,6 @@ public class DukeList {
         }
     }
 
-
     /**
      * Returns the string form of the DukeList object.
      *
@@ -220,13 +221,13 @@ public class DukeList {
      */
     @Override
     public String toString() {
-        String str = "";
+        StringBuilder str = new StringBuilder();
 
         for (int i = 0; i < tasks.size(); i++) {
-            str += tasks.get(i).saveData() + "\n";
+            str.append(tasks.get(i).saveData()).append("\n");
         }
 
-        return str;
+        return str.toString();
     }
 
 

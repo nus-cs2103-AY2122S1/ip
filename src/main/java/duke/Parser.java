@@ -13,6 +13,9 @@ public class Parser {
     /** Storage of duke. */
     private final Storage storage;
 
+    /** State of whether duke's storage has been loaded. */
+    private boolean isStorageLoaded;
+
 
     /**
      * Constructs a Parser object.
@@ -23,6 +26,7 @@ public class Parser {
     public Parser(DukeList list, Storage storage) {
         this.list = list;
         this.storage = storage;
+        this.isStorageLoaded = false;
     }
 
     /**
@@ -37,6 +41,12 @@ public class Parser {
         String response;
 
         try {
+
+            if (!isStorageLoaded) {
+                this.storage.load();
+                isStorageLoaded = true;
+            }
+
             if (input.equals("list")) {
                 response = list.list();
             } else if (segment[0].equals("done") && segment.length == 2) {
