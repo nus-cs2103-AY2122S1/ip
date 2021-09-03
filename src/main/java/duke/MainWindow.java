@@ -48,7 +48,7 @@ public class MainWindow extends Stage {
     }
 
     /**
-     * initiatises the
+     * Initialises the window in the application.
      */
     @FXML
     public void initialize() {
