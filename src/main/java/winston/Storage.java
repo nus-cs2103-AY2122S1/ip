@@ -83,16 +83,20 @@ public class Storage {
 
     /**
      * A method to save the data on the TaskList to the given file
+     * 
      * @param tList The TaskList to be saved
+     * @return A boolean on whether save was successful
      */
-    public void save(TaskList tList) {
+    public boolean save(TaskList tList) {
         try {
             Files.deleteIfExists(this.path);
             PrintWriter out = new PrintWriter("data/winston.txt");
             out.println(tList.listDataFormatter());
             out.close();
+            return true;
         } catch (IOException e) {
             System.out.println("Error overwriting file");
+            return false;
         }
     }
 

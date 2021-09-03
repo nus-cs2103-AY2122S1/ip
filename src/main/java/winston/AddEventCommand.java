@@ -19,6 +19,8 @@ public class AddEventCommand extends Command {
     @Override
     public String run() {
         super.taskList.addTask(new Event(this.description, this.dateAndTime));
-        return Ui.printTasksLeft(taskList.numberOfIncompleteTasks());
+        String result = Ui.printTasksLeft(taskList.numberOfIncompleteTasks());
+        assert(!result.equals(""));
+        return result;
     }
 }

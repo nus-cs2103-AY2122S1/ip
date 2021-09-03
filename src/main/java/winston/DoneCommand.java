@@ -19,6 +19,8 @@ public class DoneCommand extends Command {
     @Override
     public String run() {
         super.taskList.markTask(this.index);
-        return Ui.printDontWorry() + Ui.printTasksLeft(super.taskList.numberOfIncompleteTasks());
+        String result = Ui.printDontWorry() + Ui.printTasksLeft(super.taskList.numberOfIncompleteTasks());
+        assert(!result.equals(""));
+        return result;
     }
 }

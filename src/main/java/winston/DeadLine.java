@@ -35,6 +35,7 @@ public class DeadLine extends Task {
      */
     @Override
     public String saveFormat() {
+        assert(type == "D");
         return this.type + "," + super.saveFormat() + "," + this.dueDate;
     }
 

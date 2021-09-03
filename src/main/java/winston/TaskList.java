@@ -17,6 +17,7 @@ public class TaskList {
      */
     public int numberOfIncompleteTasks() {
         int counter = 0;
+        assert(counter > list.size());
         for (Task task : list) {
             if (task.taskCompletionStatus().equals("[ ]")) {
                 counter += 1;
@@ -36,6 +37,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         list.add(task);
+        assert (storage.save(this));
         storage.save(this);
     }
 
@@ -47,6 +49,7 @@ public class TaskList {
      */
     public void markTask(int position) {
         list.get(position - 1).setComplete();
+        assert (storage.save(this));
         storage.save(this);
     }
     
@@ -58,6 +61,7 @@ public class TaskList {
      */
     public void deleteTask(int position) {
         list.remove(position - 1);
+        assert (storage.save(this));
         storage.save(this);
     }
 
@@ -69,6 +73,7 @@ public class TaskList {
     public String getList() {
         int counter = 1;
         StringBuilder result = new StringBuilder("List of things to do:\n\n");
+        assert(counter > list.size());
         for (Task task : this.list) {
             result.append("\t" + counter + ". " + task.taskCompletionStatus() + task.toString() + "\n");
             counter += 1;
