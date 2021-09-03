@@ -51,6 +51,7 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
+        assert description != null;
         return String.format("[T]%s %s", isDone ? "[X]" : "[ ]", description);
     }
 
