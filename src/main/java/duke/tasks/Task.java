@@ -4,8 +4,8 @@ package duke.tasks;
  * Abstract base task created by Duke.
  */
 abstract public class Task {
-    String name;
-    boolean isTaskDone = false;
+    protected String name;
+    protected boolean isTaskDone = false;
 
     /**
      * Default constructor for a new task.
@@ -60,6 +60,7 @@ abstract public class Task {
     public abstract String serialize();
     // newline is the only? reliable way to divide data without escape characters
 
+    @Override
     public String toString() {
         return (this.isTaskDone ? "[X] " : "[ ] ")
                 + this.name;
