@@ -23,7 +23,7 @@ public class Parser {
         assert input.equals(input.toLowerCase());
 
         // search through valid CommandTypes and their aliases
-        // gleaned from https://stackoverflow.com/questions/4197988/java-enum-valueof-with-multiple-values/4198066#4198066
+        // gleaned from https://stackoverflow.com/questions/4197988/java-enum-valueof-with-multiple-values/4198066
         for (CommandTypes commandType : CommandTypes.values()) {
             for (String alias : commandType.getAliases()) {
                 if (input.startsWith(alias)) {
@@ -38,7 +38,9 @@ public class Parser {
         throw new UnknownCommandException("Unknown command entered");
     }
 
-    private String cleanCommandArguments(String input, String alias, CommandTypes commandType) throws InvalidActionException {
+    private String cleanCommandArguments(String input,
+                                         String alias,
+                                         CommandTypes commandType) throws InvalidActionException {
         if (commandType == CommandTypes.QUIT
                 || commandType == CommandTypes.LIST) {
             return null;

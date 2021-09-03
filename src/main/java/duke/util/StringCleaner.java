@@ -37,7 +37,7 @@ public class StringCleaner {
     /**
      * Returns an {@code LocalDateTime} from a {@code String}.
      *
-     * @param input User provided String (should be lowercase).
+     * @param dateInput User provided String (should be lowercase).
      * @return A {@code LocalDateTime} object.
      * @throws InvalidTaskCreationException If input String does not match format.
      */

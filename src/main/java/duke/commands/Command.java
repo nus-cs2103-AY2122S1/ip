@@ -13,7 +13,7 @@ public abstract class Command {
     /**
      * Static factory method to create {@code Command}s.
      *
-     * @param type enum representing type of {@code Command} to be created.
+     * @param commandType enum representing type of {@code Command} to be created.
      * @param arguments optional parameter of user-supplied arguments.
      * @return {@code Command} object.
      * @throws UnknownCommandException if {@code Command} is not one of the accepted commands

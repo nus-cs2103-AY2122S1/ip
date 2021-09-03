@@ -24,17 +24,17 @@ import duke.ui.Ui;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    private final String VER     = "v1.1.0"; // C-Friendlier-Syntax
-    private final String WELCOME =
-            "\t+-------------------------------+\n" +
-            "\t| *                 *         * |\n" +
-            "\t|   (`<       augury     *      |\n" +
-            "\t| __/_)_______________________  |\n" +
-            "\t|   ||                      *   |\n" +
-            "\t|   ||   a task manager         |\n" +
-            "\t|      *             *          |\n" +
-            "\t|             *         "+VER+"  |\n" +
-            "\t+-------------------------------+";
+    private static final String VER = "v1.1.0"; // C-Friendlier-Syntax
+    private static final String WELCOME =
+            "\t+-------------------------------+\n"
+          + "\t| *                 *         * |\n"
+          + "\t|   (`<       augury     *      |\n"
+          + "\t| __/_)_______________________  |\n"
+          + "\t|   ||                      *   |\n"
+          + "\t|   ||   a task manager         |\n"
+          + "\t|      *             *          |\n"
+          + "\t|             *         " + VER + "  |\n"
+          + "\t+-------------------------------+";
     private final TaskList taskList = new TaskList();
     private final Storage storage;
     private final Ui ui;
