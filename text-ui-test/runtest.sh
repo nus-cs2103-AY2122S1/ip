@@ -3,8 +3,6 @@
 # change to script directory
 cd "${0%/*}"
 cd ..
-./gradlew clean test
-./gradlew clean shadowJar -PchooseMain=Launcher
 ./gradlew clean shadowJar -PchooseMain=Tiger
 
 cd text-ui-test
@@ -16,10 +14,10 @@ dos2unix EXPECTED-UNIX.TXT ACTUAL.TXT
 diff EXPECTED-UNIX.TXT ACTUAL.TXT
 if [ $? -eq 0 ]
 then
-    echo "Test passed!"
+    echo "Text UI test passed!"
     exit 0
 else
-    echo "Test failed!"
+    echo "Text UI test failed!"
     exit 1
 fi
 
