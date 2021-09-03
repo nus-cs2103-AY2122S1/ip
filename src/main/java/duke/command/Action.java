@@ -29,6 +29,7 @@ public class Action extends Command {
      * @param words User input split by whitespace
      */
     public Action(int type, String[] words) {
+        assert type == 0 || type == 1;
         this.type = type == 0 ? Type.DONE : Type.DELETE;
         this.words = words;
     }
