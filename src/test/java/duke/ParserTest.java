@@ -3,13 +3,13 @@ package duke;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import duke.exceptions.CommandParamException;
 import org.junit.jupiter.api.Test;
 
 import duke.commands.AddCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.ListCommand;
+import duke.exceptions.CommandParamException;
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.UnknownCommandException;
