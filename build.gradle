@@ -42,7 +42,7 @@ test {
 }
 
 application {
-    mainClassName = "Launcher"
+    mainClassName = project.findProperty("chooseMain").toString()
 }
 
 shadowJar {
@@ -57,4 +57,11 @@ checkstyle {
 run{
     standardInput = System.in
     enableAssertions = true
+    mainClassName = "Launcher"
+}
+
+run{
+    standardInput = System.in
+    enableAssertions = true
+    mainClassName = "Tiger"
 }
