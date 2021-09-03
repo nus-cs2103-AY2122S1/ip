@@ -77,6 +77,14 @@ public class Parser {
                 } catch (IndexOutOfBoundsException e) {
                     return new EmptyDescriptionError("event").getMessage();
                 }
+            case "fixed":
+                try {
+                    Task t = new FixedTask(input);
+                    tasks.add(t);
+                    return add(t, tasks.getSize());
+                } catch (IndexOutOfBoundsException e) {
+                    return new EmptyDescriptionError("fixed task").getMessage();
+                }
             case "list":
                 return tasks.list();
             case "done":
