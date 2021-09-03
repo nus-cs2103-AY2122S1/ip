@@ -2,7 +2,7 @@ package Duke.Tasks;
 
 import Duke.Tool.Storage;
 import Duke.Tool.TaskList;
-import Duke.Ui;
+import Duke.Ui.Ui;
 
 /**
  * Represents List task class
@@ -23,7 +23,7 @@ public class List extends Task {
      * @param storage
      */
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) {
-        ui.showListDetails(task);
+    public String execute(TaskList task, Ui ui, Storage storage) {
+        return ui.showListDetails(task);
     }
 }

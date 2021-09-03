@@ -4,9 +4,14 @@ import Duke.Tasks.Task;
 import Duke.Tool.Parser;
 import Duke.Tool.Storage;
 import Duke.Tool.TaskList;
+import Duke.Ui.Ui;
 
 import java.io.IOException;
 import java.lang.String;
+
+import javafx.scene.image.Image;
+
+
 
 /**
  * @author  Zhang Zhiyao
@@ -23,6 +28,9 @@ public class Duke {
     private TaskList task;
     private Ui ui;
 
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/User.jpeg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Duke.jpeg"));
+
     /**
      * The constructor of Duke
      * @param filePath
@@ -38,34 +46,32 @@ public class Duke {
         }
     }
 
-    /**
-     * The method of run
-     */
-    public void run() {
-        ui.showLogo();
-        ui.showWelcome();
-        boolean isProcess = true;
-        while (isProcess) {
-            try {
-                String cmd = ui.getCommand();
-                Task comingCmdTask = Parser.parse(cmd, task);
-                comingCmdTask.execute(task, ui, storage);
-                isProcess = !comingCmdTask.isExit;
-            } catch (NullPointerException e) {
-                continue;
-            }
 
-        }
-        ui.exit();
+    /**
+     * The Contructor for Duke Class
+     */
+    public Duke() {
+        this("data/tasks.txt");
     }
 
     /**
-     * the main method
-     * @param args
+     * The method of getResponse
+     * @param input
+     * @return String the value of getResponse for run layncher
      */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+    public String getResponse(String input) {
+        Task comingCmdTask = Parser.parse(input, task);
+        return comingCmdTask.execute(task, ui, storage);
     }
+
+    /**
+     * The method of getUi
+     * @return Ui
+     */
+    public Ui getUi() {
+        return ui;
+    }
+
 
 }
 

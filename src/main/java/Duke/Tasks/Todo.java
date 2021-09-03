@@ -2,7 +2,7 @@ package Duke.Tasks;
 
 import Duke.Tool.Storage;
 import Duke.Tool.TaskList;
-import Duke.Ui;
+import Duke.Ui.Ui;
 
 
 /**
@@ -46,10 +46,10 @@ public class Todo extends Task {
      * @param storage
      */
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage)  {
+    public String execute(TaskList task, Ui ui, Storage storage)  {
         task.add(this);
-        ui.showAddOnTask(task, (task.size() - 1));
         storage.writeData(task.getTasks());
+        return ui.showAddOnTask(task, (task.size() - 1));
     }
 
     /**

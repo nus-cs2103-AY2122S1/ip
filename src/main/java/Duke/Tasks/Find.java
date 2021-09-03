@@ -2,7 +2,7 @@ package Duke.Tasks;
 
 import Duke.Tool.Storage;
 import Duke.Tool.TaskList;
-import Duke.Ui;
+import Duke.Ui.Ui;
 
 /**
  * Represents the Find class
@@ -25,8 +25,8 @@ public class Find extends Task {
      * @param storage
      */
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) {
-        ui.showFindDetails(task, this.description);
+    public String execute(TaskList task, Ui ui, Storage storage) {
+        return ui.showFindDetails(task, this.description);
     }
 
 }

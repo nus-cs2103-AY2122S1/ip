@@ -2,7 +2,7 @@ package Duke.Tasks;
 
 import Duke.Tool.Storage;
 import Duke.Tool.TaskList;
-import Duke.Ui;
+import Duke.Ui.Ui;
 
 
 /**
@@ -74,9 +74,10 @@ public class Task {
      * @param task
      * @param ui
      * @param storage
+     * @return
      */
-    public void execute(TaskList task, Ui ui, Storage storage) {
-
+    public String execute(TaskList task, Ui ui, Storage storage) {
+        return null;
     };
 
 }
