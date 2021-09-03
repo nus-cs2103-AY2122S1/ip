@@ -1,6 +1,6 @@
 package duke.command;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import duke.exception.DukeException;
 import duke.task.Task;
@@ -28,7 +28,7 @@ public class FindCommand extends Command {
         } catch (DukeException e) {
             return e.getMessage();
         }
-        ArrayList<Task> matchingTasks = list.searchList(keyword);
+        List<Task> matchingTasks = list.searchList(keyword);
         String output = "Here are the matching tasks in your list:" + System.lineSeparator();
 
         for (int i = 1; i <= matchingTasks.size(); i++) {

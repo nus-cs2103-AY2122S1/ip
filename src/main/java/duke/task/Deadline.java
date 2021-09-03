@@ -57,7 +57,7 @@ public class Deadline extends Task {
      */
     @Override
     public String convertToTxt() {
-        return String.format("D | %s | %s", super.convertToTxt(), deadlineToString());
+        return String.format("D | %s | %s", super.convertToTxt(), deadlineString);
     }
 
     /**
@@ -67,6 +67,10 @@ public class Deadline extends Task {
      * @return true if deadline of task is the same as date and time of user input.
      */
     public boolean isSameDateTime(String dateTime) {
+        if (this.deadline == null) {
+            return false;
+        }
+
         return this.deadline.equals(Parser.parseDateTime(dateTime));
     }
 

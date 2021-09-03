@@ -1,6 +1,8 @@
 package duke.util;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.exception.DukeException;
 import duke.exception.DukeIoException;
@@ -104,14 +106,8 @@ public class ToDoList {
      * @param dateTime the date and time to filter the tasks with.
      * @return ArrayList containing task that matches the date and time specified.
      */
-    public ArrayList<Task> filterList(String dateTime) {
-        ArrayList<Task> filteredList = new ArrayList<>();
-        for (Task t : list) {
-            if (t.isSameDateTime(dateTime)) {
-                filteredList.add(t);
-            }
-        }
-        return filteredList;
+    public List<Task> filterList(String dateTime) {
+        return list.stream().filter(task -> task.isSameDateTime(dateTime)).collect(Collectors.toList());
     }
 
     /**
@@ -121,15 +117,8 @@ public class ToDoList {
      * @param keyword Keyword to search the list with.
      * @return ArrayList of tasks containing the keyword.
      */
-    public ArrayList<Task> searchList(String keyword) {
-        ArrayList<Task> matchingTasks = new ArrayList<>();
-
-        for (Task t : list) {
-            if (t.toString().contains(keyword)) {
-                matchingTasks.add(t);
-            }
-        }
-
-        return matchingTasks;
+    public List<Task> searchList(String keyword) {
+        // @@author {chrisgzf}-reused
+        return list.stream().filter(task -> task.toString().contains(keyword)).collect(Collectors.toList());
     }
 }
