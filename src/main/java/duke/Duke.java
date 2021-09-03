@@ -9,6 +9,7 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 /**
  * Duke class that initialises the duke.Duke chat bot.
@@ -93,7 +94,12 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            return parser.handleCommands(input).execute(tasks, ui, storage);
+            Command cmd = parser.handleCommands(input);
+            boolean isExit = cmd.isExit();
+            if (isExit) {
+                Platform.exit();
+            }
+            return cmd.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
         } catch (IOException e) {
