@@ -50,6 +50,8 @@ public class CommandUtils {
                 return Operation.CLEAR;
             } else if (operation.equals(Operation.FIND.getValue())) {
                 return Operation.FIND;
+            } else if (operation.equals(Operation.COMING.getValue())) {
+                return Operation.COMING;
             } else if (operation.equals(Operation.BYE.getValue())) {
                 return Operation.BYE;
             } else {
