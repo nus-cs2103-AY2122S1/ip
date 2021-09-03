@@ -1,5 +1,7 @@
-package duke.main;
+package duke;
 
+import duke.main.StorageElement;
+import duke.main.TaskList;
 import duke.tasks.Task;
 import org.junit.jupiter.api.Test;
 
