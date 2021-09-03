@@ -11,6 +11,5 @@ public class Event {
         //create dates from strings
         this.eventDate = LocalDate.parse(input);
         this.eventDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-
     }
 }
