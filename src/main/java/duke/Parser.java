@@ -61,7 +61,7 @@ public class Parser {
         String trimmedCommand = fullCommand.trim();
         // Check if it's empty string
         if (trimmedCommand.length() == 0) {
-            throw new DukeException("OOPS!!! Please enter a command.");
+            throw new DukeException("empty command");
         }
         // Check if it's at least two words or not
         if (!trimmedCommand.contains(" ")) {
@@ -71,7 +71,7 @@ public class Parser {
             case "list":
                 return new ListCommand();
             default:
-                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("invalid input");
             }
         }
         // Everything here on has user input of two words or more
@@ -84,11 +84,7 @@ public class Parser {
         case "delete":
             return parseDelete(commandDescription, taskList);
         case "find":
-            if (commandDescription.isEmpty()) {
-                throw new DukeException("OOPS!!! Please enter the term you want to search.");
-            } else {
-                return new FindCommand(commandDescription);
-            }
+            return parseFind(commandDescription);
         case "todo":
             return parseToDo(commandDescription);
         case "deadline":
@@ -96,7 +92,7 @@ public class Parser {
         case "event":
             return parseEvent(commandDescription);
         default:
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("invalid input");
         }
     }
     private static Command parseDone(String input, TaskList taskList) throws DukeException {
@@ -104,34 +100,47 @@ public class Parser {
 
         try {
             int index = Integer.parseInt(input);
+            boolean isIndexAboveLowerBound = index > 0;
+            boolean isIndexBelowUpperBound = index < taskList.taskCount() + 1;
+            boolean isIndexInRange = isIndexAboveLowerBound && isIndexBelowUpperBound;
 
-            if (index > 0 && index < taskList.taskCount() + 1) {
+            if (isIndexInRange) {
                 return new DoneCommand(index);
             } else {
-                throw new DukeException("OOPS!!! Please enter a valid task index.");
+                throw new DukeException("invalid task index");
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please enter an integer.");
+            throw new DukeException("non-integer input");
         }
     }
     private static Command parseDelete(String input, TaskList taskList) throws DukeException {
         assert !input.isEmpty() : "Empty delete event input";
         try {
             int index = Integer.parseInt(input);
+            boolean isIndexAboveLowerBound = index > 0;
+            boolean isIndexBelowUpperBound = index < taskList.taskCount() + 1;
+            boolean isIndexInRange = isIndexAboveLowerBound && isIndexBelowUpperBound;
 
-            if (index > 0 && index < taskList.taskCount() + 1) {
+            if (isIndexInRange) {
                 return new DeleteCommand(index);
             } else {
-                throw new DukeException("OOPS!!! Please enter a valid task index.");
+                throw new DukeException("invalid task index");
             }
         } catch (NumberFormatException e) {
-            throw new DukeException("OOPS!!! Please enter an integer.");
+            throw new DukeException("non-integer input");
+        }
+    }
+    private static Command parseFind(String input) throws DukeException {
+        if (input.isEmpty()) {
+            throw new DukeException("empty search term");
+        } else {
+            return new FindCommand(input);
         }
     }
     private static Command parseToDo(String input) throws DukeException {
         assert !input.isEmpty() : "Empty toDo event input";
         if (input.trim().isEmpty()) {
-            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException("empty todo description");
         } else {
             return new AddCommand(input.trim(), "todo");
         }
@@ -140,24 +149,25 @@ public class Parser {
     private static Command parseDeadline(String input) throws DukeException {
         assert !input.isEmpty() : "Empty deadline event input";
         if (!input.contains("/by")) {
-            throw new DukeException("OOPS!!! The deadline of a... deadline cannot be empty.");
+            throw new DukeException("empty deadline deadline");
         }
         String description = input.split("/by", 2)[0].trim();
         String dateAndTime = input.split("/by", 2)[1].trim();
         if (description.isEmpty()) {
-            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException("empty deadline description");
         } else if (dateAndTime.isEmpty()) {
-            throw new DukeException("OOPS!!! The deadline of a... deadline cannot be empty.");
+            throw new DukeException("empty deadline deadline");
         }
         if (isDateTime(dateAndTime)) {
-            LocalDateTime dateTimeObj = LocalDateTime.parse(dateAndTime,
-                DateTimeFormatter.ofPattern(detectedFormat));
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(detectedFormat);
+            LocalDateTime dateTimeObj = LocalDateTime.parse(dateAndTime, format);
             return new AddCommand(description, dateTimeObj, "deadline");
         } else if (isDate(dateAndTime)) {
-            LocalDate dateObj = LocalDate.parse(dateAndTime, DateTimeFormatter.ofPattern(detectedFormat));
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(detectedFormat);
+            LocalDate dateObj = LocalDate.parse(dateAndTime, format);
             return new AddCommand(description, dateObj, "deadline");
         } else {
-            throw new DukeException("OOPS!!! Please enter a valid deadline!");
+            throw new DukeException("invalid deadline");
         }
     }
 
@@ -173,12 +183,13 @@ public class Parser {
         String returnDate = input.substring(input.indexOf(":") + 2, input.indexOf(")"));
 
         if (isDateTime(returnDate)) {
-            LocalDateTime dateTimeObj = LocalDateTime.parse(returnDate,
-                    DateTimeFormatter.ofPattern(detectedFormat));
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(detectedFormat);
+            LocalDateTime dateTimeObj = LocalDateTime.parse(returnDate, format);
             return new Deadline(description, dateTimeObj);
         } else {
             isDate(returnDate);
-            LocalDate dateObj = LocalDate.parse(returnDate, DateTimeFormatter.ofPattern(detectedFormat));
+            DateTimeFormatter format = DateTimeFormatter.ofPattern(detectedFormat);
+            LocalDate dateObj = LocalDate.parse(returnDate, format);
             return new Deadline(description, dateObj);
         }
     }
@@ -186,27 +197,26 @@ public class Parser {
     private static Command parseEvent(String input) throws DukeException {
         assert !input.isEmpty() : "Empty event event input";
         if (!input.contains("/at")) {
-            throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
+            throw new DukeException("empty event duration");
         }
         String description = input.split("/at", 2)[0].trim();
         String dateAndTimeDuration = input.split("/at", 2)[1].trim();
         if (description.isEmpty()) {
-            throw new DukeException("OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException("empty event description");
         }
         if (!dateAndTimeDuration.contains(" ")) {
-            throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
+            throw new DukeException("empty event duration");
         }
         String date = dateAndTimeDuration.split(" ", 2)[0];
         String timeDuration = dateAndTimeDuration.split(" ", 2)[1];
         if (!isDate(date)) {
-            throw new DukeException("OOPS!!! Please enter a valid date in duration!");
+            throw new DukeException("invalid event date");
         }
         LocalDate eventDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(detectedFormat));
         if (isDuration(timeDuration)) {
             return new AddCommand(description, eventDate, startTime, endTime, "event");
         } else {
-            throw new DukeException("OOPS!!! Please enter a valid time duration!"
-                + " Valid formats are (HHmm-HHmm or hh:mm a-hh:mm a)");
+            throw new DukeException("invalid event time");
         }
     }
     /**
@@ -265,12 +275,12 @@ public class Parser {
         if (duration.contains("-")) {
             String start = duration.split("-", 2)[0];
             String end = duration.split("-", 2)[1];
-            boolean startIsTime = false;
-            boolean endIsTime = false;
+            boolean isStartATime = false;
+            boolean isEndATime = false;
             for (String i : timeFormats) {
                 try {
                     startTime = LocalTime.parse(start, DateTimeFormatter.ofPattern(i));
-                    startIsTime = true;
+                    isStartATime = true;
                 } catch (Exception e) {
                     String exception = e.getMessage();
                 }
@@ -279,13 +289,13 @@ public class Parser {
             for (String i : timeFormats) {
                 try {
                     endTime = LocalTime.parse(end, DateTimeFormatter.ofPattern(i));
-                    endIsTime = true;
+                    isEndATime = true;
                 } catch (Exception e) {
                     String exception = e.getMessage();
                 }
             }
 
-            return startIsTime && endIsTime;
+            return isStartATime && isEndATime;
         } else {
             return false;
         }
