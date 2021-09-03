@@ -36,44 +36,44 @@ public class Parser {
     /**
      * Returns a relevant Command object {`End`, `List`, `Action`, `Add`} after parsing.
      *
-     * @param command Full user input
+     * @param input Full user input
      * @return Corresponding Command instance
      * @throws DukeException that indicates what the issue was in parsing
      */
-    public static Command parse(String command) throws DukeException {
-        Command c;
+    public static Command parse(String input) throws DukeException {
+        Command command;
 
-        if (command.equals("bye")) {
-            c = new End();
-        } else if (command.equals("list")) {
-            c = new List();
+        if (input.equals("bye")) {
+            command = new End();
+        } else if (input.equals("list")) {
+            command = new List();
         } else {
-            String[] words = command.split(" ");
+            String[] words = input.split(" ");
             String mainCommand = words[0];
 
             switch (mainCommand) {
             case "done":
-                c = new Action(0, words);
+                command = new Action(0, words);
                 break;
             case "delete":
-                c = new Action(1, words);
+                command = new Action(1, words);
                 break;
             case "find":
-                c = new Find(words);
+                command = new Find(words);
                 break;
             case "todo":
-                String[] split = command.split(" ");
+                String[] split = input.split(" ");
                 if (split.length < 2) {
                     throw new MissingDescriptionException();
                 }
-                c = new Add(new ToDo(command.substring(5).trim()));
+                command = new Add(new ToDo(input.substring(5).trim()));
                 break;
             case "deadline":
-                c = new Add(handleFormat(command.split("/by"),
+                command = new Add(handleFormat(input.split("/by"),
                         "`deadline ${item} /by ${time}`", Type.DEADLINE));
                 break;
             case "event":
-                c = new Add(handleFormat(command.split("/at "),
+                command = new Add(handleFormat(input.split("/at "),
                         "`event ${item} /at ${time}`", Type.EVENT));
                 break;
             default:
@@ -81,12 +81,12 @@ public class Parser {
             }
         }
 
-        return c;
+        return command;
     }
 
     private static Task handleFormat(String[] split, String message, Type type) throws DukeException {
         Task t;
-        if (split.length < 2) {
+        if (split.length < 2) { // Guard clause
             throw new InvalidFormatException(message);
         }
         String[] datetimes = split[1].trim().split(" ");

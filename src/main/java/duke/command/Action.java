@@ -45,36 +45,37 @@ public class Action extends Command {
      */
     @Override
     public void execute(TaskList taskList, UiInterface ui, Storage storage) throws DukeException {
-        if (this.words.length != 2) {
+        if (this.words.length != 2) { // Guard Clause
             throw new InvalidFormatException("`" + this.type.toString().toLowerCase() + " ${i}`");
-        } else {
-            int index;
-            try {
-                index = Integer.parseInt(this.words[1]);
-            } catch (NumberFormatException ex) {
-                throw new InvalidIntegerException();
-            }
-            if (index < 1 || index > taskList.getSize()) {
-                throw new InvalidTaskNumberException();
-            } else {
-                if (this.type == Type.DONE) {
-                    Task t = taskList.get(index - 1);
-                    t.markAsDone();
-                    ui.print("Nice, I've marked this task as done!\n   "
-                            + t.toString());
-                } else if (this.type == Type.DELETE) {
-                    Task t = taskList.remove(index - 1);
+        }
+        
+        int index;
+        try {
+            index = Integer.parseInt(this.words[1]);
+        } catch (NumberFormatException ex) {
+            throw new InvalidIntegerException();
+        }
+        
+        if (index < 1 || index > taskList.getSize()) {
+            throw new InvalidTaskNumberException();
+        }
+        
+        if (this.type == Type.DONE) {
+            Task t = taskList.getTask(index - 1);
+            t.markAsDone();
+            ui.print("Nice, I've marked this task as done!\n   "
+                    + t.toString());
+        } else if (this.type == Type.DELETE) {
+            Task t = taskList.removeTask(index - 1);
 
-                    String plurality = " task";
-                    if (taskList.getSize() != 1) {
-                        plurality += "s";
-                    }
-
-                    ui.print("Noted, I've removed this task:\n   "
-                            + t.toString() + "\nNow you have " + taskList.getSize()
-                            + plurality + " in the list.");
-                }
+            String plurality = " task";
+            if (taskList.getSize() != 1) {
+                plurality += "s";
             }
+
+            ui.print("Noted, I've removed this task:\n   "
+                    + t.toString() + "\nNow you have " + taskList.getSize()
+                    + plurality + " in the list.");
         }
     }
 

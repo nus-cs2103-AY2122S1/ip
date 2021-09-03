@@ -16,7 +16,7 @@ public class Add extends Command {
 
     @Override
     public void execute(TaskList taskList, UiInterface ui, Storage storage) throws DukeException {
-        taskList.add(t);
+        taskList.addTask(t);
         String plurality = " task";
         if (taskList.getSize() != 1) {
             plurality += "s";
