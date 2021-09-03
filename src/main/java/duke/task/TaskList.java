@@ -4,6 +4,9 @@ import duke.storage.Storage;
 import duke.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Represents a TaskList object.
@@ -133,6 +136,23 @@ public class TaskList {
     public String printTaskNumber(TaskList tasks) {
         return "Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks")
                 + " in the list.";
+    }
+
+    public String printTasksWithKeyword(String keyword) {
+        String[] tasksFiltered = tasks.stream()
+                .map(Task::toString)
+                .filter(x -> x.contains(keyword))
+                .toArray(String[]::new);
+
+        if (tasksFiltered.length < 1) {
+            return "There are no tasks that matches this keyword!";
+        } else {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < tasksFiltered.length; i++) {
+                sb.append(i + 1).append(".").append(tasksFiltered[i]).append('\n');
+            }
+            return sb.toString();
+        }
     }
 
 }

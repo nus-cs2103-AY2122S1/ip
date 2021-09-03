@@ -120,19 +120,6 @@ public class Parser {
         }
     }
 
-    private String printTasksWithKeyword(String keyword) {
-        TaskList listWithKeyword = new TaskList();
-        for (Task task : tasks.getTaskList()) {
-            if (task.toString().contains(keyword)) {
-                listWithKeyword.add(task);
-            }
-        }
-        if (listWithKeyword.size() < 1) {
-            return "There are no tasks that matches this keyword!";
-        } else {
-            return TaskList.printItemList(listWithKeyword);
-        }
-    }
 
     /**
      * Parses the command based on the user's input to execute the corresponding action.
@@ -183,7 +170,7 @@ public class Parser {
                     throw new InvalidDescriptionException("☹ OOPS!!! Please enter a suitable keyword to find!");
                 }
                 String findKeyword = getSecondWord(input);
-                return printTasksWithKeyword(findKeyword);
+                return tasks.printTasksWithKeyword(findKeyword);
             default:
                 return null;
             }
