@@ -25,6 +25,7 @@ public class DynamicInvocationHandler implements InvocationHandler {
     public Object invoke(Object proxy, Method method, Object[] args)
             throws Throwable {
         this.latestResponse = ((args == null) || (args.length == 0)) ? "" : args[0].toString();
+        assert target != null;
         return method.invoke(target, args);
     }
 

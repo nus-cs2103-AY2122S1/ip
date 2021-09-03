@@ -83,6 +83,8 @@ public class Duke {
         } catch (DukeException e) {
             uiInterface.showError(e.getMessage());
         }
+        // Assert that the latest response has been updated at this stage
+        assert this.interceptor.getLatestResponse() != null;
         return this.interceptor.getLatestResponse();
     }
 
