@@ -17,7 +17,7 @@ public class Duke {
     /**
      * Function starts the process of the dukebot, closes when the "Bye command is issued"
      */
-    private static void start() {
+    public static void start() {
         isRunning = true;
         Logic.preload();
         while (true) {
@@ -35,26 +35,6 @@ public class Duke {
             }
         }
     }
-
-//    @Override
-//    public void start(Stage primaryStage) throws Exception {
-//        this.isRunning = true;
-//        Logic.preload();
-//        while (true) {
-//            String command = UI.scan();
-//            try {
-//                Logic.checkIfSpecialComand(command);
-//            } catch (InvalidCommandException exception) {
-//                System.out.println(exception.getMessage());
-//            }
-//
-//            //Check if the logic has made any changes to quit the programme or continue running
-//            if (!isRunning) {
-//                System.out.println("See ya");
-//                break;
-//            }
-//        }
-//    }
 
     /**
      * Stop the running of the bot

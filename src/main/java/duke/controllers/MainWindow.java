@@ -25,10 +25,16 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Kobold.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Croc.png"));
+    private static String startUpText = "Oh my..... Looks like u have an old scroll..";
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        Logic.preload();
+        String text = startUpText + "\n" + DataHandlerLayer.getLogAsString();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(text, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
