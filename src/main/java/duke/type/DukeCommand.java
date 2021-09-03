@@ -1,4 +1,4 @@
-package duke;
+package duke.type;
 
 /**
  * A enum of the various Duke commands that are handled by Duke.

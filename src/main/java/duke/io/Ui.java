@@ -1,4 +1,4 @@
-package duke;
+package duke.io;
 
 import duke.exception.InvalidDukeCommandException;
 

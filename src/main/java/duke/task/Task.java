@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * A class represents a task that is created by a user through Duke. It contains information about the details of the

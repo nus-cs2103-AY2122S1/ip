@@ -1,4 +1,4 @@
-package duke;
+package duke.io;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import duke.exception.DukeFileSystemException;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * A class that handles anything related to the storing and loading of information from memory for Duke.

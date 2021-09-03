@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * A class that extends Task, that represents a task that has no dates associated with it.
