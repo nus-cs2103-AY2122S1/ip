@@ -6,7 +6,7 @@ public class DukeException extends Exception {
     private String errorMessage;
     /** Types of exceptions */
     public enum Type {
-        DESCRIPTION, INDEX, COMMAND, DEADLINE, EVENT
+        DESCRIPTION, INDEX, COMMAND, DEADLINE, EVENT, EXECUTE
     }
 
     /**
@@ -31,6 +31,9 @@ public class DukeException extends Exception {
             break;
         case EVENT:
             this.errorMessage = "Usage of event does not match 'description' /at 'timeframe'";
+            break;
+        case EXECUTE:
+            this.errorMessage = "There is a problem executing this command";
             break;
         default:
             break;

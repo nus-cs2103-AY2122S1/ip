@@ -12,9 +12,9 @@ import java.util.Scanner;
 public class Storage {
 
     /** File to read and write saved data */
-    private File f;
+    private File file;
     /** Scanner to read saved data from file */
-    private Scanner s;
+    private Scanner scanner;
     /** Intermediate data structure to modify saved data */
     private ArrayList<String> taskListString;
 
@@ -24,7 +24,7 @@ public class Storage {
      * @param filePath Path to the file containing storage data.
      */
     public Storage (String filePath) {
-        this.f = new File(filePath);
+        this.file = new File(filePath);
         this.taskListString = new ArrayList<>();
     }
 
@@ -36,11 +36,12 @@ public class Storage {
      */
     public ArrayList<String[]> load() throws FileNotFoundException {
         ArrayList<String[]> taskList = new ArrayList<>();
-        s = new Scanner(f);
-        while (s.hasNext()) {
-            String line = s.nextLine();
+        scanner = new Scanner(file);
+        while (scanner.hasNext()) {
+            String line = scanner.nextLine();
             taskListString.add(line);
-            taskList.add(line.split("[|]"));
+            String[] parsedSavedEntry = line.split("[|]");
+            taskList.add(parsedSavedEntry);
         }
         return taskList;
     }
@@ -51,12 +52,18 @@ public class Storage {
      * @throws IOException  If file specified in filePath cannot be written to.
      */
     public void save() throws IOException {
-        FileWriter fw = new FileWriter(f);
-        for (int i = 0; i < this.taskListString.size() - 1; i++) {
-            fw.write(this.taskListString.get(i) + "\n");
+        FileWriter fileWriter = new FileWriter(file);
+        int lastIndex = this.taskListString.size() - 1;
+        boolean hasMoreThanOneEntry = lastIndex >= 0;
+        if (hasMoreThanOneEntry) {
+            for (int i = 0; i < lastIndex; i++) {
+                String saveFileEntry = this.taskListString.get(i);
+                fileWriter.write(saveFileEntry + "\n");
+            }
+            String finalSaveEntry = this.taskListString.get(lastIndex);
+            fileWriter.write(finalSaveEntry);
         }
-        fw.write(this.taskListString.get(taskListString.size() - 1));
-        fw.close();
+        fileWriter.close();
     }
 
     /**
@@ -66,7 +73,7 @@ public class Storage {
      * @param status Status of task to be saved.
      * @param description Description of task to be saved.
      */
-    public void saveTask(String type, String status, String description) {
+    public void saveUntimedTask(String type, String status, String description) {
         taskListString.add(type + "|" + status + "|" + description);
     }
 
@@ -78,9 +85,9 @@ public class Storage {
      * @param description Description of task to be saved.
      * @param timeframe Time limit of task to be saved
      */
-    public void saveTask(String type, String status, String description, LocalDateTime timeframe) {
-        taskListString.add(type + "|" + status + "|" + description + "|"
-                + timeframe.format(DateTimeFormatter.ISO_DATE_TIME));
+    public void saveTimedTask(String type, String status, String description, LocalDateTime timeframe) {
+        String dateTime = timeframe.format(DateTimeFormatter.ISO_DATE_TIME);
+        taskListString.add(type + "|" + status + "|" + description + "|" + dateTime);
     }
 
     /**
@@ -89,8 +96,10 @@ public class Storage {
      * @param index Index of task to be modified.
      */
     public void saveTaskDone(int index) {
-        String data = taskListString.get(index - 1);
-        taskListString.set(index - 1, data.substring(0, 2) + 'X' + data.substring(3));
+        int storedIndex = index - 1;
+        String oldData = taskListString.get(storedIndex);
+        String newData = oldData.substring(0, 2) + 'X' + oldData.substring(3);
+        taskListString.set(storedIndex, newData);
     }
 
     /**

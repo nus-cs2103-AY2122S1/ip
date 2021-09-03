@@ -11,46 +11,48 @@ public class Parser {
     /**
      * Returns a Command object based on user input.
      *
-     * @param entry String inputted by the user.
+     * @param userRawInput String inputted by the user.
      * @return Command object.
      * @throws NumberFormatException If an int is expected to be inputted but the user fails to do so.
      * @throws DateTimeParseException If the user enters the date and time in a wrong format.
      * @throws DukeException If the user enters the command in a wrong format.
      */
-    public static Command parse(String entry) throws NumberFormatException, DateTimeParseException, DukeException {
-        String main;
-        String aux = "";
-        if (entry.indexOf(' ') > 0) {
-            main = entry.substring(0, entry.indexOf(' '));
-            aux = entry.substring(entry.indexOf(' ') + 1);
-        } else {
-            main = entry;
+    public static Command parse(String userRawInput) throws NumberFormatException, DateTimeParseException,
+            DukeException {
+        String userCommandInput = "";
+        String auxiliaryInputs = "";
+        int indexOfWhitespace = userRawInput.indexOf(' ');
+        if (indexOfWhitespace > 0) {
+            userCommandInput = userRawInput.substring(0, indexOfWhitespace);
+            auxiliaryInputs = userRawInput.substring(indexOfWhitespace + 1);
+        } else if (indexOfWhitespace == -1) {
+            userCommandInput = userRawInput;
         }
-        switch (main) {
+        switch (userCommandInput) {
         case "bye":
             return new Command(Command.Commands.BYE);
         case "find":
-            return new Command(Command.Commands.FIND, aux);
+            return new Command(Command.Commands.FIND, auxiliaryInputs);
         case "list":
             return new Command(Command.Commands.LIST);
         case "help":
             return new Command(Command.Commands.HELP);
         case "done":
-            return new Command(Command.Commands.DONE, Integer.parseInt(aux));
+            return new Command(Command.Commands.DONE, Integer.parseInt(auxiliaryInputs));
         case "delete":
-            return new Command(Command.Commands.DELETE, Integer.parseInt(aux));
+            return new Command(Command.Commands.DELETE, Integer.parseInt(auxiliaryInputs));
         case "todo":
-            return new Command(Command.Commands.TODO, aux);
+            return new Command(Command.Commands.TODO, auxiliaryInputs);
         case "deadline":
-            return new Command(Command.Commands.DEADLINE, aux.split(" /by "));
+            return new Command(Command.Commands.DEADLINE, auxiliaryInputs.split(" /by "));
         case "event":
-            return new Command(Command.Commands.EVENT, aux.split(" /at "));
+            return new Command(Command.Commands.EVENT, auxiliaryInputs.split(" /at "));
         case "by":
-            return new Command(Command.Commands.BY, LocalDateTime.parse(aux));
+            return new Command(Command.Commands.BY, LocalDateTime.parse(auxiliaryInputs));
         case "at":
-            return new Command(Command.Commands.AT, LocalDateTime.parse(aux));
+            return new Command(Command.Commands.AT, LocalDateTime.parse(auxiliaryInputs));
         case "all":
-            return new Command(Command.Commands.ALL, LocalDateTime.parse(aux));
+            return new Command(Command.Commands.ALL, LocalDateTime.parse(auxiliaryInputs));
         default:
             throw new DukeException(DukeException.Type.COMMAND);
         }
