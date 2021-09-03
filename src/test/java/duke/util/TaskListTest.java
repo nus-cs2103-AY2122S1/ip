@@ -162,4 +162,16 @@ public class TaskListTest {
             tasks.listTasks("keyword", "re")
         );
     }
+
+    @Test
+    public void testConvertListToString() {
+        tasks.addToList("read book", "ToDo");
+        tasks.addToList("return book /by 23/08/2021 0000", "Deadline");
+        tasks.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
+
+        assertEquals("T | 0 | read book\n"
+            + "D | 0 | return book | 2021-08-23 00:00\n"
+            + "E | 0 | project meeting | 2021-08-23 14:00 16:00\n",
+            tasks.convertListToString());
+    }
 }
