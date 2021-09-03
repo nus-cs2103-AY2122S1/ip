@@ -14,7 +14,7 @@ public class Parser {
      * @param input the string array.
      * @return the sentence.
      */
-    private StringBuilder combineInputArray(String[] input) {
+    private StringBuilder combineInputArray(String... input) {
         StringBuilder result = new StringBuilder();
         for (int i = 1; i < input.length; i++) {
             if (i < input.length - 1) {
@@ -32,7 +32,7 @@ public class Parser {
      * @param input the user input string.
      * @return the meaningful commands.
      */
-    public String[] compileInput(String[] input) throws DukeException {
+    public String[] compileInput(String... input) throws DukeException {
         StringBuilder result = combineInputArray(input);
         String date;
         switch (input[0]) {
