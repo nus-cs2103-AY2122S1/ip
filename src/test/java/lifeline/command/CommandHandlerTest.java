@@ -177,7 +177,7 @@ public class CommandHandlerTest {
             Command.DONE.getExecute().apply("done abc", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Index is not an integer! Please use done <number>", e.getMessage());
+            assertEquals("Index is not an integer!", e.getMessage());
         }
     }
 
@@ -229,7 +229,7 @@ public class CommandHandlerTest {
             Command.DELETE.getExecute().apply("delete abc", storage, taskList, ui);
             fail();
         } catch (LifelineException e) {
-            assertEquals("Index is not an integer! Please use delete <number>", e.getMessage());
+            assertEquals("Index is not an integer!", e.getMessage());
         }
     }
 
@@ -254,8 +254,7 @@ public class CommandHandlerTest {
         TaskList taskList = new TaskList(tasks);
         Ui ui = new Ui();
         assertEquals("Here is your task:\n" + "1. [T][ ] read book\n" + "You have 1 uncompleted task.\n",
-                Command.LIST.getExecute().apply("list",
-                storage, taskList, ui));
+                Command.LIST.getExecute().apply("list", storage, taskList, ui));
     }
 
     @Test
