@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 /**
  * Represents a Ui interface to deal with user interactions.
  *
@@ -65,6 +63,12 @@ public class Ui {
         return message;
     }
 
+    /**
+     * Formats the String from varargs, separated by a newline.
+     *
+     * @param messages Messages to format.
+     * @return String of combined messages.
+     */
     public static String formatMessage(String... messages) {
         StringBuilder sb = new StringBuilder();
         for (String message: messages) {

@@ -9,9 +9,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * Represents a TaskList object.
@@ -41,16 +38,30 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    private static Integer getTaskNumber(String input) {
+    private Integer getTaskNumber(String input) {
         String[] arr = input.split(" ", 2);
         Integer taskNumber = Integer.parseInt(arr[1]);
         return taskNumber;
     }
 
+    /**
+     * Adds a Todo task.
+     *
+     * @param description Description of the Todo.
+     * @return String of response after an Event.
+     */
     public String addToDo(String description) {
         return addComplete(new Todo(description));
     }
 
+    /**
+     * Parses and adds a Event task.
+     *
+     * @param description Description of Event.
+     * @param time Time of the event.
+     * @return String of response after adding an Event.
+     * @throws InvalidInputException if date/time is entered in the wrong format.
+     */
     public String addEvent(String description, String time) throws InvalidInputException {
         String[] split = time.split(" ", 2);
         LocalDate date;
@@ -74,6 +85,14 @@ public class TaskList {
         }
     }
 
+    /**
+     * Parses and adds a Deadline task.
+     *
+     * @param description Description of Deadline.
+     * @param time Time to do the task by.
+     * @return String of response after adding a Deadline.
+     * @throws InvalidInputException if date/time is entered in the wrong format.
+     */
     public String addDeadline(String description, String time) throws InvalidInputException {
         String[] split = time.split(" ", 2);
         LocalDate date;
@@ -82,7 +101,7 @@ public class TaskList {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
             date = LocalDate.parse(split[0], formatter);
         } catch (DateTimeParseException e) {
-            return "Format should be in yyyy-mm-dd!";
+            throw new InvalidInputException("Format should be in yyyy-mm-dd!");
         }
         if (split.length == 1) {
             return addComplete(new Deadline(description, date));
@@ -199,6 +218,12 @@ public class TaskList {
                 + " in the list.";
     }
 
+    /**
+     * Prints out tasks with given keyword.
+     *
+     * @param keyword Keyword to search for.
+     * @return String of response of 'find' command.
+     */
     public String printTasksWithKeyword(String keyword) {
         String[] tasksFiltered = tasks.stream()
                 .map(Task::toString)
@@ -215,5 +240,4 @@ public class TaskList {
             return sb.toString();
         }
     }
-
 }
