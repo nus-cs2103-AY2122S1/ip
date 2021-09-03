@@ -87,7 +87,7 @@ public class AddCommand implements Command {
                     taskList.addToList(event), taskList.taskCount());
             break;
         default:
-            break;
+            assert false : taskType;
         }
 
         return output;

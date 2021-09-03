@@ -100,6 +100,8 @@ public class Parser {
         }
     }
     private static Command parseDone(String input, TaskList taskList) throws DukeException {
+        assert !input.isEmpty() : "Empty done event input";
+
         try {
             int index = Integer.parseInt(input);
 
@@ -113,6 +115,7 @@ public class Parser {
         }
     }
     private static Command parseDelete(String input, TaskList taskList) throws DukeException {
+        assert !input.isEmpty() : "Empty delete event input";
         try {
             int index = Integer.parseInt(input);
 
@@ -126,6 +129,7 @@ public class Parser {
         }
     }
     private static Command parseToDo(String input) throws DukeException {
+        assert !input.isEmpty() : "Empty toDo event input";
         if (input.trim().isEmpty()) {
             throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
         } else {
@@ -134,6 +138,7 @@ public class Parser {
     }
 
     private static Command parseDeadline(String input) throws DukeException {
+        assert !input.isEmpty() : "Empty deadline event input";
         if (!input.contains("/by")) {
             throw new DukeException("OOPS!!! The deadline of a... deadline cannot be empty.");
         }
@@ -179,6 +184,7 @@ public class Parser {
     }
 
     private static Command parseEvent(String input) throws DukeException {
+        assert !input.isEmpty() : "Empty event event input";
         if (!input.contains("/at")) {
             throw new DukeException("OOPS!!! The duration of an event cannot be empty.");
         }
@@ -224,6 +230,7 @@ public class Parser {
 
     private static boolean isDateTime(String dateTimeString) {
         boolean isDateAndTime = false;
+        assert !dateTimeString.isEmpty() : "Empty dateTime input";
 
         for (String i : dateTimeFormats) {
             try {
@@ -239,6 +246,7 @@ public class Parser {
 
     private static boolean isDate(String dateString) {
         boolean isDate = false;
+        assert !dateString.isEmpty() : "Empty dateString input";
 
         for (String i : dateFormats) {
             try {
@@ -253,6 +261,7 @@ public class Parser {
     }
 
     private static boolean isDuration (String duration) {
+        assert !duration.isEmpty() : "Empty duration input";
         if (duration.contains("-")) {
             String start = duration.split("-", 2)[0];
             String end = duration.split("-", 2)[1];
@@ -282,4 +291,3 @@ public class Parser {
         }
     }
 }
-
