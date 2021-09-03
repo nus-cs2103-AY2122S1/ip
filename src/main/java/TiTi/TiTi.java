@@ -1,3 +1,5 @@
+package TiTi;
+
 import TiTi.util.SavedHistory;
 import TiTi.util.TaskList;
 import TiTi.util.Ui;
