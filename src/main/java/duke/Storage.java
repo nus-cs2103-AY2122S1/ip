@@ -64,7 +64,7 @@ public class Storage {
         try {
             FileWriter writer = new FileWriter(Paths.get("data", "record").toString());
             for (Task task : userInputRecords) {
-                writer.write(task.toString());
+                writer.write(task.toStringRecord());
                 writer.write(System.getProperty("line.separator"));
             }
             writer.close();
