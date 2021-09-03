@@ -6,6 +6,7 @@ import duke.ui.Ui;
 import duke.Parser.Parser;
 import duke.exception.DukeException;
 import duke.operation.Command;
+import javafx.scene.control.Label;
 
 import java.util.Scanner;
 
@@ -55,5 +56,9 @@ public class Duke {
 			storage.updateFile(taskList);
 		}
 		in.close();
+	}
+
+	public String getResponse(String input) {
+		return "got it: " + input;
 	}
 }
