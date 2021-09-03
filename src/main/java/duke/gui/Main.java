@@ -1,6 +1,9 @@
 package duke.gui;
 
+import duke.core.Duke;
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -13,6 +16,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Main extends Application {
     private ScrollPane scrollPane;
@@ -20,13 +24,14 @@ public class Main extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private Duke duke;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @Override
     public void start(Stage stage) {
-        stage.show();
+        duke = new Duke("data/duke.txt");
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
@@ -45,7 +50,8 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
-//        Step 2. Formatting the window to look as expected
+
+        // Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -84,7 +90,7 @@ public class Main extends Application {
             handleUserInput();
         });
 
-        //Scroll down to the end every time dialogContainer's height changes.
+        // Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
     }
@@ -110,22 +116,35 @@ public class Main extends Application {
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label dukeEcho = new Label(echo(userInput.getText()));
+
+        String[] dukeResponseAndExitStatus = duke.getResponseAndExitStatus(userInput.getText());
+        String dukeResponseInString = dukeResponseAndExitStatus[0];
+        boolean dukeShouldExit = dukeResponseAndExitStatus[1] == "1" ? true : false;
+        Label dukeResponse = new Label(dukeResponseInString);
+
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(userImage)),
+                DialogBox.getDukeDialog(dukeEcho, new ImageView(dukeImage)),
+                DialogBox.getDukeDialog(dukeResponse, new ImageView(dukeImage))
         );
         userInput.clear();
+
+        if (dukeShouldExit) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(e -> Platform.exit());
+            delay.play();
+        }
+
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a message that echos the input.
+     *
+     * @return A message that echos the input.
      */
-    private String getResponse(String input) {
+    private String echo(String input) {
         return "Duke heard: " + input;
     }
-
-
 
 }
