@@ -30,7 +30,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String getSavedAs() {
-        return (super.getSavedAs() + "|" + this.at);
+    public String toSavedAs() {
+        return (super.toSavedAs() + "|" + this.at);
     }
 }

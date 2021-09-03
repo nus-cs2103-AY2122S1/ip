@@ -29,7 +29,7 @@ public class Deadline extends Task {
 
     }
     @Override
-    public String getSavedAs() {
-        return (super.getSavedAs() + "|" + this.by);
+    public String toSavedAs() {
+        return (super.toSavedAs() + "|" + this.by);
     }
 }
