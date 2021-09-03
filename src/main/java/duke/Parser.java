@@ -28,7 +28,7 @@ class Parser {
      * @throws DukeException If command is not valid.
      */
     String[] parse(String input) throws DukeException {
-        if (input.equals("list")) {
+        if (input.equals("list") || input.equals("l")) {
             return list();
         } else if (input.startsWith("done")) {
             return finishTask(input);
@@ -64,16 +64,19 @@ class Parser {
         String[] parts = input.split(" ", 2);
         String type = parts[0];
         switch (type) {
-        case "todo":
+        case "todo": // Fallthrough
+        case "t":
             if (parts.length == 1) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             return new Todo(parts[1]);
-        case "deadline": {
+        case "deadline": // Fallthrough
+        case "d": {
             String[] subparts = parts[1].split(" /by ", 2);
             return new Deadline(subparts[0], LocalDateTime.parse(subparts[1], formatter));
         }
-        case "event": {
+        case "event": // Fallthrough
+        case "e": {
             String[] subparts = parts[1].split(" /at ", 2);
             return new Event(subparts[0], LocalDateTime.parse(subparts[1], formatter));
         }
