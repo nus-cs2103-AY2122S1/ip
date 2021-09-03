@@ -39,8 +39,8 @@ public class DeleteCommand extends Command {
             Task task = taskList.deleteTask(number);
             getMessage().show(TASK_REMOVED_MESSAGE,
                     "  " + task.toString(),
-                    "Now you have " + taskList.size()
-                            + " " + (taskList.size() <= 1 ? "task" : "tasks")
+                    "Now you have " + taskList.getSize()
+                            + " " + (taskList.getSize() <= 1 ? "task" : "tasks")
                             + " in the list."
             );
         } catch (DukeTaskNumberOutOfBoundsException e) {

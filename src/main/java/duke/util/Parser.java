@@ -24,7 +24,7 @@ public class Parser {
      *
      * @param command User's command input.
      * @param message Message interface.
-     * @return Respective Command object.
+     * @return Respective Command object if exists, else return empty.
      */
     public static Command parse(String command, Message message) {
         try {

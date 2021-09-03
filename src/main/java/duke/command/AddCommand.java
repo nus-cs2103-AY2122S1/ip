@@ -52,8 +52,8 @@ public class AddCommand extends Command {
         taskList.addTask(todo);
         getMessage().show(TASK_ADDED_MESSAGE,
                 "  " + todo.toString(),
-                "Now you have " + taskList.size()
-                        + " " + (taskList.size() <= 1 ? "task" : "tasks")
+                "Now you have " + taskList.getSize()
+                        + " " + (taskList.getSize() <= 1 ? "task" : "tasks")
                         + " in the list.");
     }
 
@@ -66,8 +66,8 @@ public class AddCommand extends Command {
             taskList.addTask(deadline);
             getMessage().show(TASK_ADDED_MESSAGE,
                     "  " + deadline.toString(),
-                    "Now you have " + taskList.size()
-                            + " " + (taskList.size() <= 1 ? "task" : "tasks")
+                    "Now you have " + taskList.getSize()
+                            + " " + (taskList.getSize() <= 1 ? "task" : "tasks")
                             + " in the list.");
         } catch (DukeExtractCommandException e) {
             getMessage().show(e.getMessage());
@@ -84,8 +84,8 @@ public class AddCommand extends Command {
             taskList.addTask(event);
             getMessage().show(TASK_ADDED_MESSAGE,
                     "  " + event.toString(),
-                    "Now you have " + taskList.size() + " "
-                            + (taskList.size() <= 1 ? "task" : "tasks")
+                    "Now you have " + taskList.getSize() + " "
+                            + (taskList.getSize() <= 1 ? "task" : "tasks")
                             + " in the list.");
         } catch (DukeExtractCommandException e) {
             getMessage().show(e.getMessage());
