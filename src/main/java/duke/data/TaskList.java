@@ -17,6 +17,7 @@ public class TaskList {
 
     /**
      * Constructor for TaskList
+     * 
      * @param tasks the list of tasks
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -26,6 +27,7 @@ public class TaskList {
 
     /**
      * Adds the given task into task list
+     * 
      * @param t the task to add
      * @return the updated list of tasks
      */
@@ -37,12 +39,13 @@ public class TaskList {
 
     /**
      * Deletes the task at given index from the task list
+     * 
      * @param index the index of the task
      * @return the updated list of tasks
      * @throws InvalidIndexException if given index is out of bounds
      */
     public ArrayList<Task> delete(int index) throws InvalidIndexException {
-        if (index >= this.count || index < 0) {
+        if (isOutOfBounds(index)) {
             throw new InvalidIndexException();
         }
         this.tasks.remove(index);
@@ -52,12 +55,13 @@ public class TaskList {
 
     /**
      * Retrieves the task in the given index
+     * 
      * @param index the index of the task to get
      * @return the task at the index
      * @throws InvalidIndexException if given index is out of bounds
      */
     public Task get(int index) throws InvalidIndexException {
-        if (index >= this.count || index < 0) {
+        if (isOutOfBounds(index)) {
             throw new InvalidIndexException();
         }
         return this.tasks.get(index);
@@ -65,6 +69,7 @@ public class TaskList {
 
     /**
      * Outputs the list of items in numbered format
+     * 
      * @return string representation of all the tasks in the list
      */
     public String printList () {
@@ -79,12 +84,13 @@ public class TaskList {
 
     /**
      * Marks task at given index as done
+     * 
      * @param index index of task to be marked done
      * @return the updated list of tasks
      * @throws InvalidIndexException if given index is out of bounds
      */
     public ArrayList<Task> markDone(int index) throws InvalidIndexException {
-        if (index >= this.count || index < 0) {
+        if (isOutOfBounds(index)) {
             throw new InvalidIndexException();
         }
         this.tasks.get(index).setDone();
@@ -93,6 +99,7 @@ public class TaskList {
 
     /**
      * Returns a list of tasks that satisfy the given predicate
+     * 
      * @param predicate the predicate 
      * @return ArrayList<Task> that satisfy given predicate
      */
@@ -102,8 +109,19 @@ public class TaskList {
         copy.removeIf(predicate.negate());
         return new TaskList(copy);
     }
+
+    /**
+     * Checks if given index is out of bounds of this task list
+     * 
+     * @param index the index to access in the list
+     * @return true if index falls out of bounds of this task list, false otherwise
+     */
+    private boolean isOutOfBounds(int index) {
+        return index >= this.count || index < 0;
+    }
     
     public int getCount() {
         return this.count;
     }
+    
 }

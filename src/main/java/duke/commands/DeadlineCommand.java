@@ -9,6 +9,7 @@ import duke.data.task.Deadline;
 public class DeadlineCommand extends AddCommand {
     /**
      * Constructor for DeadlineCommand
+     * 
      * @param rest the user input after command
      * @throws DukeException if user input is empty or invalid
      */

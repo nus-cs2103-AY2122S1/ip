@@ -24,6 +24,7 @@ public class Storage {
 
     /**
      * Constructor for Storage
+     * 
      * @param filePath the path where data is to be stored
      */
     public Storage(Path filePath) {
@@ -35,6 +36,7 @@ public class Storage {
 
     /**
      * Creates file from given path
+     * 
      * @param filePath the path to create file at
      */
     private void createFile(Path filePath) {
@@ -50,12 +52,14 @@ public class Storage {
 
     /**
      * Fetches saved tasks and loads them into ArrayList
+     * 
      * @return list of saved tasks
      */
     public ArrayList<Task> loadData() {
         try {
             ArrayList<Task> lst = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader(this.filePath.toFile()));
+            
             for (String line = br.readLine(); line != null; line = br.readLine()) {
                 String[] txt = line.split("/");
                 boolean isDone = txt[1].equals("1");
@@ -73,6 +77,7 @@ public class Storage {
                     throw new IOException("Data file incorrectly formatted");
                 }
             }
+            
             return lst;
         } catch (IOException e) {
             System.out.println("Can't load data");
@@ -82,6 +87,7 @@ public class Storage {
 
     /**
      * Saves the given list into data folder
+     * 
      * @param lst the list of tasks to save
      */
     public void saveData(ArrayList<Task> lst) {

@@ -16,6 +16,7 @@ public class DoneCommand extends Command {
 
     /**
      * Constructor for DoneCommand
+     * 
      * @param rest the user input after the command
      */
     public DoneCommand(String rest) throws InvalidIndexFormatException {
@@ -28,8 +29,9 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
-        Task t = tasks.get(index - 1);
-        storage.saveData(tasks.markDone(index - 1));
+        int taskIndex = index - 1; //User input indexed from 1
+        Task t = tasks.get(taskIndex);
+        storage.saveData(tasks.markDone(taskIndex));
         return ui.print(String.format("Nice! I've marked this task as done:\n %s", t.toString()));
     }
 }
