@@ -50,6 +50,7 @@ public class Duke {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert !output.equals("");
         return output;
     }
 

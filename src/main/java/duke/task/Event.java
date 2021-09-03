@@ -147,6 +147,7 @@ public class Event extends DatedTask {
      */
     @Override
     public String toString() {
+        assert description != null;
         return String.format("[E]%s %s (at: %s to %s)", isDone ? "[X]" : "[ ]", description, date, until);
     }
 
