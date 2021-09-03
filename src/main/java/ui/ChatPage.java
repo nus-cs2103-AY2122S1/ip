@@ -18,6 +18,14 @@ import storage.Storage;
 
 import java.io.IOException;
 
+/**
+ * Page for interacting with Alice
+ *
+ * @author Kan Jitpakdi
+ * @author GitHub: kanjitp
+ * @version 0.02
+ * @since 0.01
+ */
 public class ChatPage extends Page {
 
     private Alice alice;
@@ -33,7 +41,15 @@ public class ChatPage extends Page {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.jpeg"));
     private final Image aliceImage = new Image(this.getClass().getResourceAsStream("/images/alice.png"));
 
-
+    /**
+     * Constructor for the chat page.
+     *
+     * @param fileName the filename that the user has chosen
+     * @param stage    the stage passed from the Start Page to navigate back
+     * @throws IOException     if there is anything wrong with the IO
+     * @throws DialogException Dialog with the sameId cannot exist at the same time while
+     *                         the app is running
+     */
     ChatPage(String fileName, Stage stage) throws IOException, DialogException {
         this.fileName = fileName;
         this.stage = stage;
@@ -41,10 +57,20 @@ public class ChatPage extends Page {
         alice.getUi().getTaskDialog().setChatPage(this);
     }
 
+    /**
+     * Return Alice currently embedded in this chat page
+     *
+     * @return alice, the virtual assistant
+     */
     public Alice getAlice() {
         return this.alice;
     }
 
+    /**
+     * Return the layout of the chat page for interacting with Alice as Scene
+     *
+     * @return the layout of the chat page for interacting with Alice
+     */
     @Override
     public Scene layout() {
         AnchorPane mainLayout = new AnchorPane();
@@ -107,8 +133,7 @@ public class ChatPage extends Page {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
+     * Create label from String
      *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
@@ -121,6 +146,7 @@ public class ChatPage extends Page {
         return textToAdd;
     }
 
+    /** for executing the command */
     private void handleUserInput() {
         Label userText = getDialogLabel(userInput.getText());
         dialogContainer.getChildren().add(
@@ -130,21 +156,37 @@ public class ChatPage extends Page {
         userInput.clear();
     }
 
+    /**
+     * Print the list of tasks in this chat page
+     */
     public void showCurrentList() {
         Label currentList = getDialogLabel(alice.getUi().getCurrentList());
         dialogContainer.getChildren().add(DialogBox.getAliceDialog(currentList, new ImageView(aliceImage)));
     }
 
+    /**
+     * Print error to this chat page
+     *
+     * @param e exception to be print
+     */
     public void printError(Exception e) {
         Label errorText = getDialogLabel(Ui.getErrorText(e));
         dialogContainer.getChildren().add(new DialogBox(errorText, new ImageView(aliceImage)));
     }
 
+    /**
+     * Explicitly ask Alice to print something into this chat page
+     *
+     * @param input string input to be printed
+     */
     public void printAlicely(String input) {
         Label textToPrint = getDialogLabel(input);
         dialogContainer.getChildren().add(DialogBox.getAliceDialog(textToPrint, new ImageView(aliceImage)));
     }
 
+    /**
+     * Exit the chat page and go back to the start page
+     */
     public void exit() {
         stage.setTitle("Alice");
         // Add the scene to the stage

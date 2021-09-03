@@ -24,8 +24,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Page for selecting a save file to navigate to and instantiate Alice
+ *
+ * @author Kan Jitpakdi
+ * @author GitHub: kanjitp
+ * @version 0.02
+ * @since 0.01
+ */
 public class StartPage extends Page {
-
+    /**
+     * Return layout of the start page as Scene
+     *
+     * @return layout of the starting page
+     */
     @Override
     public Scene layout() {
         // This starting page was partly inspired by Marcus

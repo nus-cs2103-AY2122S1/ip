@@ -9,8 +9,8 @@ import java.util.HashMap;
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.01
- * @since 0.00
+ * @version 0.02
+ * @since 0.01
  */
 public class Dialog {
 

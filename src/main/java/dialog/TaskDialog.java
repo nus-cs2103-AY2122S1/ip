@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.01
- * @since 0.00
+ * @version 0.02
+ * @since 0.01
  */
 public class TaskDialog extends Dialog {
     // This class is a child of dialog class which allow the user to interact with the task

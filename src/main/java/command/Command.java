@@ -17,18 +17,14 @@ import ui.ChatPage;
 import ui.Ui;
 
 import java.io.IOException;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Command class responsible for executing different command
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.01
- * @since 0.00
+ * @version 0.02
+ * @since 0.01
  */
 public class Command {
     /**

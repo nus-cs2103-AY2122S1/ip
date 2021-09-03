@@ -22,10 +22,10 @@ import javafx.stage.Stage;
  *
  * @author Kan Jitpakdi
  * @author GitHub: kanjitp
- * @version 0.01
- * @since 0.00
+ * @version 0.02
+ * @since 0.01
  */
-public class Alice extends Application{
+public class Alice extends Application {
     /** storage for alice.Alice */
     private final Storage storage;
     /** taskDialog dealing with the task that the bot wants to communicate back to the user */
@@ -55,10 +55,20 @@ public class Alice extends Application{
         taskDialog = ui.getTaskDialog();
     }
 
+    /**
+     * Getter for the storage of Alice
+     *
+     * @return storage
+     */
     public Storage getStorage() {
         return this.storage;
     }
 
+    /**
+     * Getter for Ui of Alice
+     *
+     * @return Alice
+     */
     public Ui getUi() {
         return this.ui;
     }
@@ -82,13 +92,24 @@ public class Alice extends Application{
         }
     }
 
+    /**
+     * Execute the fullCommand
+     *
+     * @param fullCommand the command as string including taggers and date
+     */
     public void execute(String fullCommand) {
         Command c = Parser.parse(fullCommand);
         c.execute(taskDialog, storage);
     }
 
+    /**
+     * Start method overridden from the Application of JavaFX
+     *
+     * @param stage stage for the app to distribute its system
+     * @throws IOException if the application fail to create a save file location
+     */
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws IOException {
         stage.setTitle("Alice");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
