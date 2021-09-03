@@ -1,22 +1,23 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.stage.Stage;
+
 /**
  * The Duke Application.
  */
-public class Duke {
+public class Duke extends Application {
+    private final String dataFilePath = "./data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    /**
-     * Constructor for the Duke class.
-     * Initialises the UI, Storage and loads tasks from data file into Task List.
-     *
-     * @param dataFolderPath Path to data folder.
-     * @param dataFilePath Path to data file.
-     */
-    public Duke(String dataFolderPath, String dataFilePath) {
-        ui = new Ui();
+    public Duke() {}
+
+    @Override
+    public void start(Stage stage) {
+        ui = new Ui(stage);
         storage = new Storage(dataFilePath);
         try {
             tasks = new TaskList(storage.load());
@@ -24,35 +25,27 @@ public class Duke {
             ui.showLoadingError();
             tasks = new TaskList();
         }
-    }
 
-    /**
-     * Starts the Duke application.
-     */
-    public void run() {
         ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, storage, ui);
-                isExit = c instanceof ExitCommand;
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
+        ui.getSendButton().setOnMouseClicked((event) -> {
+            handleUserInput(ui.readCommand());
+        });
+        ui.getUserInput().setOnAction((event) -> {
+            handleUserInput(ui.readCommand());
+        });
     }
 
-    /**
-     * Main function.
-     *
-     * @param args Program input arguments.
-     */
-    public static void main(String[] args) {
-        new Duke("./data", "./data/tasks.txt").run();
+    private void handleUserInput(String fullCommand) {
+        try {
+            ui.showFullCommand(fullCommand);
+            ui.clearInput();
+            Command c = Parser.parse(fullCommand);
+            c.execute(tasks, storage, ui);
+            if (c instanceof ExitCommand) {
+                Platform.exit();
+            }
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        }
     }
 }

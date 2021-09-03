@@ -1,5 +1,8 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,13 +13,9 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.fail;
-
 public class StorageTest {
-    private final static String TEST_DATA_FOLDER_PATH = "./dataTest";
-    private final static String TEST_DATA_FILE_PATH = "./dataTest/dataTest.txt";
+    private static final String TEST_DATA_FOLDER_PATH = "./dataTest";
+    private static final String TEST_DATA_FILE_PATH = "./dataTest/dataTest.txt";
 
     @Test
     public void load() {
@@ -39,7 +38,7 @@ public class StorageTest {
             fail("Error creating test data file");
         }
 
-        Storage storage = new Storage(TEST_DATA_FOLDER_PATH, TEST_DATA_FILE_PATH);
+        Storage storage = new Storage(TEST_DATA_FILE_PATH);
         ArrayList<Task> actualTasks = storage.load();
         assertEquals(3, actualTasks.size());
         assert(actualTasks.get(0) instanceof Todo);
@@ -58,7 +57,7 @@ public class StorageTest {
     }
 
     @AfterAll
-    public static void cleanUpDataFile(){
+    public static void cleanUpDataFile() {
         File f = new File(TEST_DATA_FILE_PATH);
         if (f.exists()) {
             f.delete();
