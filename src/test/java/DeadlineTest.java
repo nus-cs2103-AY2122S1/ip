@@ -43,4 +43,5 @@ public class DeadlineTest {
         test.markAsDone();
         assertEquals("[D][X] something (by: Nov 0019)", test.toString());
     }
+
 }
