@@ -34,7 +34,7 @@ public class DukeException extends Exception {
          * Creates an exception with the following error message.
          */
         public InvalidInputException() {
-            super("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            super("OOPS!!! Please type a command that I can understand!");
         }
     }
 
@@ -47,6 +47,12 @@ public class DukeException extends Exception {
          */
         public MissingTaskException() {
             super("Huh? You don't have that task option!");
+        }
+    }
+
+    public static class InvalidTaskIndexException extends DukeException {
+        public InvalidTaskIndexException() {
+            super("Are you sure you've typed in a valid task index...?");
         }
     }
 }
