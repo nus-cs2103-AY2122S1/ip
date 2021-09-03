@@ -35,4 +35,8 @@ public class Ui {
     public static String terminationMessage() {
         return "See ya later!";
     }
+    
+    public static String updateMessage(int messageNumber) {
+        return "Task " + messageNumber + "updated";
+    }
 }

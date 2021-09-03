@@ -40,6 +40,12 @@ public class TaskList {
         assert (storage.saveToFile(this));
         storage.saveToFile(this);
     }
+    
+    public void setTask(Task task, int index) {
+        list.set(index, task);
+        assert (storage.saveToFile(this));
+        storage.saveToFile(this);
+    }
 
 
     /**

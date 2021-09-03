@@ -27,7 +27,7 @@ public class Parser {
      */
     public Command parse(String str) {
         String[] splitBySpace = str.split(" ");
-        String cmd = splitBySpace[0];
+        String cmd = splitBySpace[0].toLowerCase();
         final String invalidDateMessage = "Invalid date format. Please give a valid date format. E.g 2021-12-12";
         if (cmd.equals("bye")) {
             return new TerminateCommand(this.taskList);
@@ -76,7 +76,7 @@ public class Parser {
             } catch (InputMismatchException | IndexOutOfBoundsException e) {
                 return new InvalidCommand(taskList);
             }
-        } else if (cmd.equals("findString")) {
+        } else if (cmd.equals("findstring")) {
             try {
                 int index = str.indexOf(" ");
                 String keyword = str.substring(index + 1);
@@ -84,6 +84,8 @@ public class Parser {
             } catch (InputMismatchException | IndexOutOfBoundsException e) {
                 return new InvalidCommand(taskList);
             }
+        } else if (cmd.equals("update")) {
+            return new UpdateCommand(taskList, splitBySpace, str);
         } else {
             return new InvalidCommand(taskList);
         }
