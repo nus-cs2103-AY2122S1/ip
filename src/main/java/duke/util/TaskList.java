@@ -3,6 +3,9 @@ package duke.util;
 import static java.lang.Integer.parseInt;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import duke.exception.InvalidIndexException;
 import duke.exception.MissingArgumentException;
@@ -76,12 +79,8 @@ public class TaskList {
      *
      * @return Formatted TaskList in the form of a String.
      */
-    private String convertListToString() {
-        String tasksString = "";
-        for (Task task : this.tasks) {
-            tasksString = tasksString + String.format("%s\n", task.convertToString());
-        }
-        return tasksString;
+    protected String convertListToString() {
+        return tasks.stream().map(task -> String.format("%s\n", task.convertToString())).collect(Collectors.joining());
     }
 
     /**
