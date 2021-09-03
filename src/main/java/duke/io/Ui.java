@@ -89,7 +89,8 @@ public class Ui {
     public String displayCommand(Command.Commands c, TaskList list) {
         switch (c) {
         case HELP:
-            return format("list : Returns all tasks added\n",
+            return format("bye : Closes the programme\n",
+                    "list : Returns all tasks added\n",
                     "todo <description> : Adds a todo task\n",
                     "find <description> : Returns all tasks with <description> in their description\n",
                     "event <description> /at <time: YYYY-MM-DDThh:mm> : Adds an event at time <time>\n",

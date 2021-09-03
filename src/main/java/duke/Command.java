@@ -16,7 +16,7 @@ public class Command {
 
     /** Enumeration of valid commands */
     public enum Commands {
-        LIST, DONE, DELETE, TODO, DEADLINE, EVENT, BY, AT, ALL, HELP, FIND
+        BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, BY, AT, ALL, HELP, FIND
     }
 
     /** Types of commands */
@@ -118,6 +118,9 @@ public class Command {
             DateTimeParseException, NumberFormatException {
         switch (this.type) {
         case SINGLE_INPUT:
+            if (this.command.equals(Commands.BYE)) {
+                Main.exit();
+            }
             return ui.displayCommand(this.command, tasks);
         case INT_INPUT:
             Task t;
