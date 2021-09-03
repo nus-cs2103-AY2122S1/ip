@@ -23,7 +23,8 @@ public class Duke {
         Scanner f = new Scanner(dataFile);
 
         while (f.hasNext()) {
-            String[] task = f.nextLine().split("|");
+            String[] task = f.nextLine().split("/");
+
             String taskType = task[0];
             boolean isDone = (Integer.parseInt(task[1]) == 1);
             String description = task[2];
@@ -48,13 +49,13 @@ public class Duke {
             String description = t.description;
             String isDone = t.isDone ? "1" : "0";
 
-            String line = type + "|" + isDone + "|" + description;
+            String line = type + "/" + isDone + "/" + description;
             if (t.type.equals("D")) {
                 DeadlineTask dt = (DeadlineTask) t;
-                line += "|" + dt.time;
+                line += "/" + dt.time;
             } else if (t.type.equals("E")) {
                 EventTask et = (EventTask) t;
-                line += "|" + et.time;
+                line += "/" + et.time;
             }
             line += "\n";
             fw.write(line);
@@ -77,7 +78,6 @@ public class Duke {
         System.out.println(line + "Hello I'm Duke\nWhat can I do for you?\n" + line);
 
         ArrayList<Task> tasks = new ArrayList<>(100);
-        int ctr = 0;
 
         try {
             loadTasksFromFile(tasks);
@@ -97,11 +97,16 @@ public class Duke {
                         throw new DukeException("OOPS!! done needs the index of the task.");
                     }
                     int idx = Integer.parseInt(command.split(" ")[1]) - 1;
+
+                    if (idx >= tasks.size()) {
+                        throw new DukeException("OOPS!! task index is invalid");
+                    }
+
                     tasks.get(idx).updateStatus();
                     System.out.printf("%sNice! I've marked this task as done:\n%s\n%s\n", line, tasks.get(idx), line);
                 } else if (command.equals("list")) {
                     System.out.println(line + "Here are the tasks in your list:");
-                    for (int i = 0; i < ctr; i++) {
+                    for (int i = 0; i < tasks.size(); i++) {
                         System.out.printf("%d.%s\n", i + 1, tasks.get(i));
                     }
                     System.out.println(line);
@@ -111,8 +116,7 @@ public class Duke {
                     }
                     int idx = Integer.parseInt(command.split(" ")[1]) - 1;
                     Task t = tasks.remove(idx);
-                    System.out.printf("%sNoted. I've removed this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, t, ctr - 1, line);
-                    ctr--;
+                    System.out.printf("%sNoted. I've removed this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, t, tasks.size(), line);
                 } else if (command.contains("todo")) {
                     if (command.indexOf(" ") == -1) {
                         throw new DukeException("OOPS!! The description of a todo cannot be empty.");
@@ -120,8 +124,7 @@ public class Duke {
                     int taskIdxStart = command.indexOf(" ") + 1;
                     String task = command.substring(taskIdxStart);
                     tasks.add(new TodoTask(task));
-                    System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks.get(ctr), ctr + 1, line);
-                    ctr++;
+                    System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks.get(tasks.size() - 1), tasks.size(), line);
                 } else if (command.contains("deadline")) {
                     if (command.indexOf(" ") == -1) {
                         throw new DukeException("OOPS!! The description of a deadline cannot be empty.");
@@ -131,8 +134,7 @@ public class Duke {
                     String task = command.substring(taskIdxStart, timeIdxStart - 1);
                     String time = command.substring(timeIdxStart + 4);
                     tasks.add(new DeadlineTask(task, time));
-                    System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks.get(ctr), ctr + 1, line);
-                    ctr++;
+                    System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks.get(tasks.size() - 1), tasks.size(), line);
                 } else if (command.contains("event")) {
                     if (command.indexOf(" ") == -1) {
                         throw new DukeException("OOPS!! The description of an event cannot be empty.");
@@ -142,14 +144,31 @@ public class Duke {
                     String task = command.substring(taskIdxStart, timeIdxStart - 1);
                     String time = command.substring(timeIdxStart + 4);
                     tasks.add(new EventTask(task, time));
-                    System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks.get(ctr), ctr + 1, line);
-                    ctr++;
+                    System.out.printf("%sGot it. I've added this task:\n%s\nNow you have %d tasks in the list\n%s\n", line, tasks.get(tasks.size()), tasks.size(), line);
+                } else if (command.contains("find")) {
+                    int taskIdxStart = command.indexOf(" ") + 1;
+                    String keyword = command.substring(taskIdxStart);
+                    System.out.println(line + "Here are the matching tasks in your list:");
+                    for (int i = 0; i < tasks.size(); i++) {
+                        if (tasks.get(i).description.contains(keyword)) {
+                            System.out.printf("%d.%s\n", i + 1, tasks.get(i));
+                        }
+                    }
+                    System.out.println(line);
                 } else {
                     throw new DukeException("OOPS!! I'm sorry, but I don't know what that means :-(");
                 }
             } catch (DukeException e) {
                 System.out.println(line + e.getMessage() + "\n"+ line);
             }
+
+            try {
+                saveTasksToFile(tasks);
+            } catch (IOException e) {
+                System.out.println("Something went wrong while trying to save tasks: " + e.getMessage());
+                System.exit(0);
+            }
+
             command = sc.nextLine();
         }
 
