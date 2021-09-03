@@ -53,6 +53,15 @@ public abstract class Task implements Comparable<Task> {
      */
     public abstract String fullCommand();
 
+    /**
+     * Returns a String representing the task description.
+     *
+     * @return A String representing the task description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), description);

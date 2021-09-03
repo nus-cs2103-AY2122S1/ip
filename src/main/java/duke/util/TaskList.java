@@ -69,7 +69,7 @@ public class TaskList {
         }
         ArrayList<Task> listOfTaskWithKeyword = new ArrayList<>();
         for (int i = 0; i < this.tasks.size(); i++) {
-            if (this.tasks.get(i).toString().contains(keyword)) {
+            if (this.tasks.get(i).getDescription().contains(keyword)) {
                 listOfTaskWithKeyword.add(this.tasks.get(i));
             }
         }
