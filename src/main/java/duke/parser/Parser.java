@@ -4,14 +4,8 @@ import duke.exception.InvalidDescriptionException;
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidTimeException;
 import duke.storage.Storage;
-import duke.task.*;
+import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
  * Represents a Parser object that deals with making sense of the user commands.
@@ -64,62 +58,17 @@ public class Parser {
         return keyword;
     }
 
-    private String addComplete(Task t) {
-        tasks.add(t);
-        storage.saveData(tasks);
-        return "Got it. I've added this task: " + t.toString() + '\n' + tasks.printTaskNumber(tasks);
-    }
+    private String[] getDetails(String input) throws InvalidTimeException {
+        String[] result = new String[2];
+        String[] split = input.split("\\(");
 
-    private String addToDo(String description) {
-        return addComplete(new Todo(description));
+        if (getSecondWord(split[1]).length() < 1) {
+            throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable timing!");
+        }
+        result[0] = getSecondWord(split[0]);
+        result[1] = getSecondWord(split[1]).substring(0, getSecondWord(split[1]).length() - 1);
+        return result;
     }
-
-    private String addDeadline(String description, String time) throws InvalidInputException {
-        String[] split = time.split(" ", 2);
-        LocalDate date;
-        LocalTime timing;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
-            date = LocalDate.parse(split[0], formatter);
-        } catch (DateTimeParseException e) {
-            return "Format should be in yyyy-mm-dd!";
-        }
-        if (split.length == 1) {
-            return addComplete(new Deadline(description, date));
-        } else {
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-                timing = LocalTime.parse(split[1], formatter);
-            } catch (DateTimeParseException e) {
-                return "Format should be in HH:mm";
-            }
-            return addComplete(new Deadline(description, date, timing));
-        }
-    }
-
-    private String addEvent(String description, String time) throws InvalidInputException {
-        String[] split = time.split(" ", 2);
-        LocalDate date;
-        LocalTime timing;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
-            date = LocalDate.parse(split[0], formatter);
-        } catch (DateTimeParseException e) {
-            throw new InvalidInputException("Format should be in yyyy-mm-dd!");
-        }
-        if (split.length == 1) {
-            return addComplete(new Event(description, date));
-        } else {
-            try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-                timing = LocalTime.parse(split[1], formatter);
-            } catch (DateTimeParseException e) {
-                return "Format should be in HH:mm";
-            }
-            return addComplete(new Event(description, date, timing));
-        }
-    }
-
 
     /**
      * Parses the command based on the user's input to execute the corresponding action.
@@ -138,7 +87,7 @@ public class Parser {
             case BYE:
                 return "Bye!";
             case LIST:
-                return tasks.printItemList(tasks);
+                return tasks.printTaskList(tasks);
             case DONE:
                 return tasks.markTaskDone(input);
             case DELETE:
@@ -147,24 +96,13 @@ public class Parser {
                 if (input.substring(5).length() < 1) {
                     throw new InvalidDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.");
                 }
-                return addToDo(input.substring(5));
+                return tasks.addToDo(input.substring(5));
             case DEADLINE:
-                String[] arr = input.split("\\(");
-                if (getSecondWord(arr[1]).length() < 1 || !getFirstWord(arr[1]).equals("by:")) {
-                    throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable deadline!");
-                }
-                String description = getSecondWord(arr[0]);
-                String timing = getSecondWord(arr[1]).substring(0, getSecondWord(arr[1]).length() - 1);
-                return addDeadline(description, timing);
+                String[] deadlineDetails = getDetails(input);
+                return tasks.addDeadline(deadlineDetails[0], deadlineDetails[1]);
             case EVENT:
-                String[] arr_event = input.split("\\(");
-                if (getSecondWord(arr_event[1]).length() < 1 || !getFirstWord(arr_event[1]).equals("at:")) {
-                    throw new InvalidTimeException("☹ OOPS!!! Please enter a suitable event timing!");
-                }
-                String eventDescription = getSecondWord(arr_event[0]);
-                String eventTiming = getSecondWord(arr_event[1]).substring(0, getSecondWord(
-                        arr_event[1]).length() - 1);
-                return addEvent(eventDescription, eventTiming);
+                String[] eventDetails = getDetails(input);
+                return tasks.addEvent(eventDetails[0], eventDetails[1]);
             case FIND:
                 if (getSecondWord(input).length() < 1) {
                     throw new InvalidDescriptionException("☹ OOPS!!! Please enter a suitable keyword to find!");
