@@ -1,12 +1,14 @@
 package duke.storage;
 
+import java.util.Scanner;
+
 import duke.exceptions.DukeReadSaveException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
-import java.util.Scanner;
+
 
 /**
  * Parser class to create Task objects from string commands.
@@ -15,7 +17,7 @@ public class SaveParser {
     private static final DukeReadSaveException MISSING_ARG_EXCEPTION =
             new DukeReadSaveException("missing argument in save");
 
-    Scanner scanner;
+    private Scanner scanner;
 
     /**
      * Constructs a Save parser.
@@ -83,6 +85,8 @@ public class SaveParser {
                 isDone = Boolean.parseBoolean(key_value[1]);
                 argsFound[1] = true;
                 break;
+            default:
+                // invalid line
             }
         }
         if (argsFound[0] && argsFound[1]) {
@@ -121,6 +125,8 @@ public class SaveParser {
                 by = key_value[1];
                 argsFound[2] = true;
                 break;
+            default:
+                // invalid line
             }
         }
         if (argsFound[0] && argsFound[1] && argsFound[2]) {
@@ -160,6 +166,8 @@ public class SaveParser {
                 at = key_value[1];
                 argsFound[2] = true;
                 break;
+            default:
+                // invalid line
             }
         }
         if (argsFound[0] && argsFound[1] && argsFound[2]) {

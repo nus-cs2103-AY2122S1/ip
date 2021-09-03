@@ -10,8 +10,8 @@ import java.time.temporal.ChronoUnit;
 public class Deadline extends Task {
     public static final String USAGE_TEXT = "Usage: deadline <task name> /by <deadline> ";
 
-    String by;
-    LocalDate byDate;
+    private String by;
+    private LocalDate byDate;
 
     /**
      * Default constructor for a new task.
@@ -42,10 +42,10 @@ public class Deadline extends Task {
 
     @Override
     public String serialize() {
-        return "Task:deadline\n" +
-                String.format("\tName:%s\n", this.name) +
-                String.format("\tDone:%s\n", this.isTaskDone) +
-                String.format("\tBy:%s\n", this.by);
+        return "Task:deadline\n"
+                + String.format("\tName:%s\n", this.name)
+                + String.format("\tDone:%s\n", this.isTaskDone)
+                + String.format("\tBy:%s\n", this.by);
     }
 
     @Override

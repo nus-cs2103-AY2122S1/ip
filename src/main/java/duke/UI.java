@@ -7,8 +7,18 @@ import java.util.function.Function;
  */
 public class UI {
 
-    Function<String, String> preprocessor;
+    private static Function<String, String> DEFAULT_PREPROCESSOR = (String source) -> {
+        String border = "--------------------------------------------------";
+        StringBuilder out = new StringBuilder();
+        for (String line : source.split("\n")) {
+            out.append("\t" + line + "\n");
+        }
+        return border + "\n"
+                + out.toString()
+                + border;
+    };
 
+    private Function<String, String> preprocessor;
     /**
      * Constructor for  UI with a custom preprocessor.
      *
@@ -22,30 +32,19 @@ public class UI {
      * Constructor for UI using default preprocessor.
      */
     UI() {
-        this(
-                (String source) -> {
-                    String border = "--------------------------------------------------";
-                    StringBuilder out = new StringBuilder();
-                    for (String line : source.split("\n")) {
-                        out.append("\t" + line + "\n");
-                    }
-                    return border + "\n"
-                            + out.toString()
-                            + border;
-                });
+        this(UI.DEFAULT_PREPROCESSOR);
     }
 
     /**
      * Displays the ascii startup logo.
      */
     public void displayLogo() {
-        String logo =
-                "  _____          _   _    ___   ___   ___   ___  \n" +
-                " |  __ \\   /\\   | \\ | |  / _ \\ / _ \\ / _ \\ / _ \\ \n" +
-                " | |  | | /  \\  |  \\| | | (_) | | | | | | | | | |\n" +
-                " | |  | |/ /\\ \\ | . ` |  \\__, | | | | | | | | | |\n" +
-                " | |__| / ____ \\| |\\  |    / /| |_| | |_| | |_| |\n" +
-                " |_____/_/    \\_\\_| \\_|   /_/  \\___/ \\___/ \\___/ \n";
+        String logo = "  _____          _   _    ___   ___   ___   ___  \n"
+                + " |  __ \\   /\\   | \\ | |  / _ \\ / _ \\ / _ \\ / _ \\ \n"
+                + " | |  | | /  \\  |  \\| | | (_) | | | | | | | | | |\n"
+                + " | |  | |/ /\\ \\ | . ` |  \\__, | | | | | | | | | |\n"
+                + " | |__| / ____ \\| |\\  |    / /| |_| | |_| | |_| |\n"
+                + " |_____/_/    \\_\\_| \\_|   /_/  \\___/ \\___/ \\___/ \n";
         System.out.println(logo);
     }
 

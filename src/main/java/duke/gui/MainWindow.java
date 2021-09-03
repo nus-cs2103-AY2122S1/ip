@@ -1,6 +1,8 @@
 package duke.gui;
 
+import duke.Duke;
 import duke.exceptions.DukeExitException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,9 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import duke.Duke;
 
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -49,10 +49,10 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         try {
             String response = duke.getResponse(input);
-            makeDialogBox(input,response);
-        } catch (DukeExitException e){
+            makeDialogBox(input, response);
+        } catch (DukeExitException e) {
             String response = "Bye bye!";
-            makeDialogBox(input,response);
+            makeDialogBox(input, response);
             //TODO: Add a delay here so this message is visible
             System.exit(1);
         }
@@ -66,7 +66,7 @@ public class MainWindow extends AnchorPane {
      * @param input user input String
      * @param response duke response String
      */
-    private void makeDialogBox(String input,String response) {
+    private void makeDialogBox(String input, String response) {
         DialogBox userBox = DialogBox.getUserDialog("User", input, userImage);
         DialogBox dukeBox = DialogBox.getDukeDialog("Duke", response, dukeImage);
         dialogContainer.getChildren().addAll(userBox, dukeBox);

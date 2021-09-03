@@ -1,17 +1,17 @@
 package duke;
 
+import java.util.ArrayList;
+
 import duke.exceptions.DukeException;
 import duke.tasks.Task;
-
-import java.util.ArrayList;
 
 /**
  * Array List of Task objects.
  */
 public class TaskArrayList extends ArrayList<Task> {
-    public final static String DELETE_USAGE_TEXT = "Usage: delete <integer task number>";
-    public final static String DONE_USAGE_TEXT = "Usage: done <integer task number>";
-    public final static String FIND_USAGE_TEXT = "Usage: find <search String>";
+    public static final String DELETE_USAGE_TEXT = "Usage: delete <integer task number>";
+    public static final String DONE_USAGE_TEXT = "Usage: done <integer task number>";
+    public static final String FIND_USAGE_TEXT = "Usage: find <search String>";
 
     public TaskArrayList() {
         super();
@@ -83,7 +83,7 @@ public class TaskArrayList extends ArrayList<Task> {
             if (task.toString().contains(searchTerm)) {
                 out += String.format("%d. ", num + 1) + task.toString() + "\n";
             }
-            num ++;
+            num++;
         }
         return out;
     }
@@ -100,7 +100,7 @@ public class TaskArrayList extends ArrayList<Task> {
             throw new DukeException(String.format("task %d not found", index));
         }
         this.get(index - 1).markDone();
-        return "Nice! I've marked this task as done:\n" +
-                this.get(index - 1).toString();
+        return "Nice! I've marked this task as done:\n"
+                + this.get(index - 1).toString();
     }
 }

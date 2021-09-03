@@ -5,7 +5,7 @@ package duke.tasks;
  */
 public class Event extends Task {
     public static final String USAGE_TEXT = "Usage: event <task name> /at <deadline> ";
-    String at;
+    private String at;
 
     /**
      * Default constructor for a new task.
@@ -31,10 +31,10 @@ public class Event extends Task {
 
     @Override
     public String serialize() {
-        return "Task:event\n" +
-                String.format("\tName:%s\n", this.name) +
-                String.format("\tDone:%s\n", this.isTaskDone) +
-                String.format("\tAt:%s\n", this.at);
+        return "Task:event\n"
+                + String.format("\tName:%s\n", this.name)
+                + String.format("\tDone:%s\n", this.isTaskDone)
+                + String.format("\tAt:%s\n", this.at);
     }
 
     @Override
