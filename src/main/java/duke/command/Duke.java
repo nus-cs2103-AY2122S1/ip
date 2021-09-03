@@ -83,7 +83,9 @@ public class Duke {
     protected void dukeTodo(String desc) {
         Todo todo = new Todo(desc);
         tasks.add(todo);
-        mainWindow.showAddTaskMessage(todo.toString(), tasks.size());
+        int currentListSize = tasks.size();
+        assert currentListSize > 0 : "tasks should never be empty after adding task";
+        mainWindow.showAddTaskMessage(todo.toString(), currentListSize);
     }
 
     /**
@@ -95,7 +97,9 @@ public class Duke {
     protected void dukeDeadline(String desc, Calendar cal) {
         Deadline deadline = new Deadline(desc, cal);
         tasks.add(deadline);
-        mainWindow.showAddTaskMessage(deadline.toString(), tasks.size());
+        int currentListSize = tasks.size();
+        assert currentListSize > 0 : "tasks should never be empty after adding task";
+        mainWindow.showAddTaskMessage(deadline.toString(), currentListSize);
     }
 
     /**
@@ -107,7 +111,9 @@ public class Duke {
     protected void dukeEvent(String desc, Calendar cal) {
         Event event = new Event(desc, cal);
         tasks.add(event);
-        mainWindow.showAddTaskMessage(event.toString(), tasks.size());
+        int currentListSize = tasks.size();
+        assert currentListSize > 0 : "tasks should never be empty after adding task";
+        mainWindow.showAddTaskMessage(event.toString(), currentListSize);
     }
 
     protected void dukeFind(String desc) {
