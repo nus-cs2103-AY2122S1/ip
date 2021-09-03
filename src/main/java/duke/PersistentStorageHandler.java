@@ -125,7 +125,10 @@ public class PersistentStorageHandler {
         }
     }
 
-
+    /**
+     * Return all lines
+     * @return
+     */
     public ArrayList<String> getAllLines() {
         return this.allLines;
     }
