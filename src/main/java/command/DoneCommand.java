@@ -1,6 +1,6 @@
 package command;
 
-import exception.ErrorAccessingFile;
+import exception.ErrorAccessingFileException;
 import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
 import exception.NonExistentTaskNumberException;
@@ -41,9 +41,9 @@ public class DoneCommand extends Command {
      *
      * @param list `TaskList` containing all tasks.
      * @throws NonExistentTaskNumberException If the task number does not exist in the list.
-     * @throws ErrorAccessingFile If there is an error accessing the storage file.
+     * @throws ErrorAccessingFileException If there is an error accessing the storage file.
      */
-    public void execute(TaskList list) throws NonExistentTaskNumberException, ErrorAccessingFile {
+    public void execute(TaskList list) throws NonExistentTaskNumberException, ErrorAccessingFileException {
         this.task = list.markTaskAsDone(taskNumber);
     }
 

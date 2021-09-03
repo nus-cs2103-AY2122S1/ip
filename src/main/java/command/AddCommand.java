@@ -1,6 +1,6 @@
 package command;
 
-import exception.ErrorAccessingFile;
+import exception.ErrorAccessingFileException;
 import exception.InvalidDateTimeException;
 import exception.InvalidTaskTimeFormatException;
 import exception.InvalidTaskTypeException;
@@ -46,13 +46,13 @@ public class AddCommand extends Command {
      * @param list `TaskList` containing all tasks.
      * @throws InvalidTaskTypeException If the task type is not valid.
      * @throws InvalidTaskTimeFormatException If a task meant to contain time information is not formatted properly.
-     * @throws ErrorAccessingFile If there is an error accessing the storage file.
+     * @throws ErrorAccessingFileException If there is an error accessing the storage file.
      * @throws InvalidDateTimeException If a task meant to contain time information has an invalid datetime format.
      */
     public void execute(TaskList list) throws
             InvalidTaskTypeException,
             InvalidTaskTimeFormatException,
-            ErrorAccessingFile,
+            ErrorAccessingFileException,
             InvalidDateTimeException {
         Task task = Task.createTask(this.description, this.commandType);
         list.addTaskToList(task);
