@@ -22,16 +22,19 @@ public class Duke {
      * Instantiates a `Duke` chat bot.
      */
     public Duke() {
-        // Load data
         StorageFile storageFile = Storage.loadListFile();
-
-        // Scan data to a list
         TaskList list = Storage.scanListFileDataToList(storageFile);
-        this.list = list;
 
+        this.list = list;
         this.parser = new Parser();
     }
 
+    /**
+     * Gets response when user sends a message.
+     *
+     * @param input Input by user.
+     * @return String response from Duke.
+     */
     public String getResponse(String input) {
         try {
             if (this.parser.detectExitCommand(input)) {
