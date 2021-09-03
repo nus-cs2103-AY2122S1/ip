@@ -4,7 +4,9 @@ import duke.data.exception.InvalidIndexException;
 import duke.data.task.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Encapsulates the task list and its operations
@@ -68,13 +70,9 @@ public class TaskList {
      * @return string representation of all the tasks in the list
      */
     public String printList () {
-        Task[] lst = this.tasks.toArray(new Task[0]);
-        StringBuilder output = new StringBuilder();
-        int index = 1;
-        for (Task t : lst) {
-            output.append(String.format("\n%d.%s", index++, t.toString()));
-        }
-        return output.toString();
+        return this.tasks.stream()
+                .map(task -> String.format("\n%d. %s", tasks.indexOf(task) + 1, task.toString()))
+                .reduce("", String::concat);
     }
 
     /**
@@ -97,10 +95,8 @@ public class TaskList {
      * @return ArrayList<Task> that satisfy given predicate
      */
     public TaskList filter(Predicate<? super Task> predicate) {
-        ArrayList<Task> copy = new ArrayList<>();
-        copy.addAll(this.tasks);
-        copy.removeIf(predicate.negate());
-        return new TaskList(copy);
+        List<Task> filteredList = this.tasks.stream().filter(predicate).collect(Collectors.toList());
+        return new TaskList(new ArrayList<>(filteredList));
     }
     
     public int getCount() {
