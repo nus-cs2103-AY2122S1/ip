@@ -23,6 +23,7 @@ public class TaskList {
      * @param index 1-based index of the task to mark as complete.
      */
     public void markComplete(int index) {
+        assert index >= 0 && index < tasks.size();
         tasks.get(index - 1).markComplete();
         storage.saveToFile(tasks);
     }
@@ -53,6 +54,7 @@ public class TaskList {
      * @return the task at the specified position in this list.
      */
     public Task get(int index) {
+        assert index >= 0 && index < tasks.size();
         return tasks.get(index);
     }
 
@@ -62,6 +64,7 @@ public class TaskList {
      * @param index index of the task to remove.
      */
     public void remove(int index) {
+        assert index >= 0 && index < tasks.size();
         tasks.remove(index);
         storage.saveToFile(tasks);
     }
