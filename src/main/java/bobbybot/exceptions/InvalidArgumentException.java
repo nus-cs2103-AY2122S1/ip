@@ -1,4 +1,4 @@
-package bobbybot;
+package bobbybot.exceptions;
 
 /**
  * Exception for when an invalid argument given to a command

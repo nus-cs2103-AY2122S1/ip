@@ -1,4 +1,4 @@
-package bobbybot;
+package bobbybot.enums;
 
 /**
  * Enum for all valid Commands

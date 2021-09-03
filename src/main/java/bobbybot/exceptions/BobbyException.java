@@ -1,4 +1,4 @@
-package bobbybot;
+package bobbybot.exceptions;
 
 /**
  * Represents exception for BobbyBot

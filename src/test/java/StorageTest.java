@@ -1,5 +1,5 @@
-import bobbybot.Storage;
-import bobbybot.Task;
+import bobbybot.util.Storage;
+import bobbybot.tasks.Task;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;

@@ -1,9 +1,10 @@
-package bobbybot;
+package bobbybot.util;
 
 /**
  * Encapsulates all user-facing interactions
  */
 public class Ui {
+
     public void showLoadingError() {
         System.out.println("Could not load data from past memory");
     }
