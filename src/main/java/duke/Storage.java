@@ -76,6 +76,7 @@ public class Storage {
     private static Task createTask(char taskType, char taskDone, String taskDescription) {
         Task createdTask = new Task("Created");
         boolean isDone = (taskDone == 'X');
+        assert !taskDescription.isEmpty() : "task description is empty";
 
         switch (taskType) {
         case 'T':
@@ -100,7 +101,7 @@ public class Storage {
             createdTask = taskEvent;
             break;
         default:
-            break;
+            assert false : taskType;
         }
 
         return createdTask;

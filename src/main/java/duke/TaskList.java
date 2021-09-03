@@ -78,6 +78,7 @@ public class TaskList {
         taskFound = false;
 
         for (int i = 0; i < tasks.size(); i++) {
+            assert tasks.get(i) != null : "tasklist has no tasks";
             Task curr = tasks.get(i);
             if (curr.getDescription().contains(searchString)) {
                 result = result + counter + "." + curr + "\n";
@@ -113,6 +114,7 @@ public class TaskList {
         String result = "";
 
         for (int i = 0; i < tasks.size(); i++) {
+            assert tasks.get(i) != null : "tasklist has no tasks";
             result = result + counter + "." + tasks.get(i) + "\n";
             counter++;
         }
