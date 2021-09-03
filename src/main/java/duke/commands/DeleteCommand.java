@@ -39,9 +39,9 @@ public class DeleteCommand extends Command {
         String args = this.args[0];
         ArrayList<Integer> listOfTasks = StringCleaner.toArrayListInteger(args);
 
-        int taskListSize = tasks.size();
+        int taskListSize = tasks.getSize();
         for (Integer i : listOfTasks) {
-            if (i > taskListSize || i <= 0) {
+            if (i > taskListSize) {
                 throw new InvalidActionException("Task " + i + " does not exist.");
             }
         }

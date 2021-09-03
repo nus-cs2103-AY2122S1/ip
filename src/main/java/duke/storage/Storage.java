@@ -22,7 +22,7 @@ public class Storage {
     /**
      * Initializes a {@code Storage} instance to have a {@code String path}.
      *
-     * @param path {@code String} representing path to work on.
+     * @param path {@code String} representing the filepath to work on.
      */
     public Storage(String path) {
         this.path = path;
@@ -32,31 +32,33 @@ public class Storage {
      * Initializes a {@code TaskList t} using data from the save file.
      * If save file does not exist, {@code Storage} will attempt to create the directory and file.
      *
-     * @param t {@code TaskList} to write data to.
+     * @param tasks {@code TaskList} to write data to.
      * @throws IOException If file cannot be found or written to
      */
-    public void initializeTaskList(TaskList t) throws IOException, AuguryException {
+    public void initializeTaskList(TaskList tasks) throws IOException {
         String directory = "data";
         File dir = new File(directory);
         if (!dir.exists()) {
-            dir.mkdir();
+            boolean dirCreated = dir.mkdir();
+            assert dirCreated;
         }
         File f = new File(path);
-        f.createNewFile();
+        boolean fileCreated = f.createNewFile();
+        assert fileCreated;
 
-        loadTaskListFromStorage(t);
+        loadTaskListFromStorage(tasks);
     }
 
     /**
-     * Saves the given {@code TaskList t} into the save file.
+     * Saves the given {@code TaskList tasks} into the save file.
      *
-     * @param t {@code TaskList} to read data from.
+     * @param tasks {@code TaskList} to read data from.
      * @throws FileIoException If file cannot be found or written to
      */
-    public void saveTaskListToStorage(TaskList t) throws AuguryException {
+    public void saveTaskListToStorage(TaskList tasks) throws AuguryException {
         try {
             File f = new File(path);
-            String s = convertTaskListToString(t);
+            String s = convertTaskListToString(tasks);
             writeStringToStorage(s);
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,7 +67,7 @@ public class Storage {
     }
 
     private String convertTaskListToString(TaskList xs) {
-        ArrayList<Task> tasks = xs.tasks();
+        ArrayList<Task> tasks = xs.getTasks();
         ArrayList<String> tasksString = new ArrayList<>();
 
         for (Task t : tasks) {
@@ -73,12 +75,12 @@ public class Storage {
         }
 
         String res = String.join("\n", tasksString);
-        return res.toString();
+        return res;
     }
 
-    private void loadTaskListFromStorage(TaskList t) throws IOException, AuguryException {
+    private void loadTaskListFromStorage(TaskList t) throws IOException {
         // read tasks.txt
-        Scanner s = new Scanner(new File(path)); // create a Scanner using the File as the source
+        Scanner s = new Scanner(new File(path));
         ArrayList<String> tasks = new ArrayList<>();
         while (s.hasNext()) {
             tasks.add(s.nextLine());

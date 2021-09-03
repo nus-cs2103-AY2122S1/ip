@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import duke.commands.Command;
+import duke.commands.ExitCommand;
 import duke.exceptions.AuguryException;
 import duke.exceptions.FileIoException;
-import duke.exceptions.InvalidActionException;
-import duke.exceptions.InvalidTaskCreationException;
-import duke.exceptions.UnknownCommandException;
 import duke.io.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
@@ -76,13 +74,9 @@ public class Augury {
     }
 
     /**
-     * Runs main loop of {@code Augury}. Parses and execute commands in a loop.
-     *
-     * @throws InvalidActionException If action commands were malformed.
-     * @throws InvalidTaskCreationException If invalid parameters were provided in task creation.
-     * @throws UnknownCommandException If an unrecognized command was provided.
+     * Runs main loop of {@code Augury}. Parses and execute commands it receives.
      */
-    public void loop() throws AuguryException {
+    public void loop() {
         Scanner scan = new Scanner(System.in);
         ui.speak("Hello! How may I help you?");
 
@@ -93,27 +87,31 @@ public class Augury {
             try {
                 Command command = parser.parse(input);
                 String result = command.execute(taskList, storage);
-                if (result.equals("ExitCommand")) {
-                    ui.speak("The readiness is all.");
+                ui.speak(result);
+
+                if (command instanceof ExitCommand) {
                     isRunning = false;
-                } else {
-                    ui.speak(result);
+                    break;
                 }
+
+                ui.speak(result);
             } catch (AuguryException e) {
                 ui.speak(e.getMessage() + "\n\t Please try again.");
             }
         }
     }
 
+    /**
+     * Runs the supplied user input on {@code Augury}. Used in GUI mode of Augury.
+     *
+     * @param input User supplied input
+     * @return {@code String} containing result of execution of command.
+     */
     public String getResponse(String input) {
         try {
             Command command = parser.parse(input);
             String result = command.execute(taskList, storage);
-            if (result.equals("ExitCommand")) {
-                return "The readiness is all.";
-            } else {
-                return result;
-            }
+            return result;
         } catch (AuguryException e) {
             return e.getMessage() + "\n\t Please try again.";
         }

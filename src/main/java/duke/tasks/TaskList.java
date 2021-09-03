@@ -23,7 +23,7 @@ public class TaskList {
      *
      * @return {@code ArrayList} containing all tasks in this {@code TaskList}.
      */
-    public ArrayList<Task> tasks() {
+    public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
@@ -32,7 +32,7 @@ public class TaskList {
      *
      * @return {@code int} - the number of tasks in this {@code TaskList}.
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 
@@ -75,7 +75,6 @@ public class TaskList {
             // have to decrement by one since duke.tasks ArrayList is 0-indexed,
             // but the user-provided arguments uses a 1-indexed list
             int index = listOfTasks.get(i) - 1;
-
             tasks.get(index).markAsDone();
             res.append(tasks.get(index));
             if (i != listOfTasks.size() - 1) {
@@ -139,7 +138,6 @@ public class TaskList {
             }
         }
         return res.toString();
-
     }
 
     /**
