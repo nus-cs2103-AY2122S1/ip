@@ -39,4 +39,8 @@ public class Duke {
     public String getResponse(String input) {
         return this.run(input);
     }
+
+    public String getWelcomeMsg() {
+        return "Hi! How can I help you today?";
+    }
 }

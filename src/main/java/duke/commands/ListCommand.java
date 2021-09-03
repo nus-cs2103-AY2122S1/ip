@@ -39,7 +39,11 @@ public class ListCommand extends Command {
         } else {
             for (int i = 0; i < tasks.size(); i++) {
                 Task task = tasks.get(i);
-                replyBuilder.append((i + 1) + ". " + " " + task.toString() + "\n");
+                if (i < 9) {
+                    replyBuilder.append((i + 1) + ". " + "   " + task.toString() + "\n");
+                } else {
+                    replyBuilder.append((i + 1) + ". " + " " + task.toString() + "\n");
+                }
             }
         }
         return replyBuilder.toString();

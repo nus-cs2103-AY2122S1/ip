@@ -22,7 +22,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/popcatfix.gif"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     @FXML
@@ -32,6 +32,11 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    public void displayWelcome() {
+        String welcome = duke.getWelcomeMsg();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, dukeImage));
     }
 
     /**

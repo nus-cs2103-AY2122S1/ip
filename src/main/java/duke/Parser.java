@@ -92,14 +92,8 @@ public class Parser {
             return new AddEventCommand(desc, eventDate);
 
         case "find":
-            StringBuilder keywordBuilder = new StringBuilder();
-            for (int i = 1; i < fullCommand.length; i++) {
-                if (i != 1) {
-                    keywordBuilder.append(" ");
-                }
-                keywordBuilder.append(fullCommand[i]);
-            }
-            return new FindCommand("find", keywordBuilder.toString());
+            desc = commandLine.replace("find", "").trim();
+            return new FindCommand("find", desc);
 
         default:
             throw new DukeException("I do not understand that command");
@@ -133,8 +127,9 @@ public class Parser {
         try {
             return LocalDateTime.parse(date, dtf);
         } catch (DateTimeParseException err) {
-            throw new DukeException("Invalid date format\nPlease format date as the following:\nd/M/yyyy H:mm OR\n"
-                    + "d-M-yyyy H:mm \nin 24-hour format");
+            throw new DukeException("Invalid date format\nPlease format date as the following:\n"
+                    + "Day/Month/Year H:mm OR\n"
+                    + "Day-Month-Year H:mm, in 24-hour format");
         }
     }
 }
