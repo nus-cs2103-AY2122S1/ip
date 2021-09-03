@@ -16,6 +16,9 @@ public abstract class DukeException extends Exception{
 
     /**
      * Prints error message
+     * @return
      */
     public abstract void printError();
+
+    public abstract String getError();
 }
