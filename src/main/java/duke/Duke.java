@@ -16,10 +16,10 @@ import javafx.stage.Stage;
 public class Duke {
     private final Parser PARSER;
     private final Ui UI;
+    public static final String STORAGE_FILEPATH = "data" + File.separatorChar + "duke-storage.txt";
 
     public static void main(String[] args) {
-        String filePath = "data" + File.separatorChar + "duke-storage.txt";
-        new Duke(filePath).run();
+        new Duke(Duke.STORAGE_FILEPATH).run();
     }
 
     public Duke(String filePathToStorage) {
@@ -49,6 +49,10 @@ public class Duke {
                 e.printStackTrace();
             }
         }
+    }
+
+    public String getResponse(String userInput) {
+        return "Test response";
     }
 }
 
