@@ -26,6 +26,8 @@ public class CustomDateFormatter {
 
     /** The array of common patterns without time. */
     private final String[] patternsWithoutTime = new String[] {
+        "dd/MM/yyyy",
+        "dd/mm/yyyy",
         "dd MMM yyyy",
         "dd-mm-yyyy",
         "dd-mm-yy",
@@ -34,8 +36,6 @@ public class CustomDateFormatter {
         "dd mm yyyy",
         "dd MM yyyy",
         "dd/mm/yy",
-        "dd/mm/yyyy",
-        "dd/MM/yyyy",
         "dd.mm.yy",
         "dd.mm.yyyy",
         "dd.MM.yyyy",
