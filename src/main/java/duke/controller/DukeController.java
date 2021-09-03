@@ -3,14 +3,17 @@ package duke.controller;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.constant.Constants;
 import duke.controller.dialog.DukeDialogController;
 import duke.controller.dialog.UserDialogController;
 import duke.listener.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.thread.CustomThreadPool;
 import duke.util.Parser;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -19,15 +22,23 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 /**
  * Controller for DukeUi. Provides the layout for the other controls.
  */
 public class DukeController extends AnchorPane implements Message {
-    public static final String GREET = "Hello! I'm Duke.\nWhat can I do for you?";
+    private static final String GREET = "Hello! I'm Duke.\nWhat can I do for you?";
+    private static final int ONE_SECOND = 1000;
+
+    private static final CustomThreadPool customThreadPool = new CustomThreadPool(
+            Thread.NORM_PRIORITY
+    );
 
     @FXML
     private ScrollPane chatPane;
+    @FXML
+    private Label comingTasks;
     @FXML
     private VBox dialogContainer;
     @FXML
@@ -44,6 +55,20 @@ public class DukeController extends AnchorPane implements Message {
     public DukeController() {
         taskList = new TaskList();
         storage = new Storage(this);
+    }
+
+    /**
+     * Passes Stage object to DukeController.
+     *
+     * @param stage Stage is created after FXMLLoader is loaded.
+     */
+    public void setStageListener(Stage stage) {
+        if (stage == null) {
+            return;
+        }
+        stage.setOnCloseRequest(event -> {
+            exit();
+        });
     }
 
     /**
@@ -141,6 +166,26 @@ public class DukeController extends AnchorPane implements Message {
         storage.loadTasks(taskList);
         addDukeDialog(GREET);
         tfInput.setDisable(false);
+        customThreadPool.execute(() -> {
+            while (true) {
+                handleComingTasks();
+                try {
+                    Thread.sleep(ONE_SECOND);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void handleComingTasks() {
+        Platform.runLater(() -> {
+                int tasks = taskList.findComingTasks(Constants.COMING_TASK_HOUR_RANGE).length;
+                comingTasks.setText(tasks + " coming "
+                        + (taskList.getSize() <= 1 ? "task" : "tasks") + " in "
+                        + Constants.COMING_TASK_HOUR_RANGE + " hours!");
+            }
+        );
     }
 
     private void handleInput() {
@@ -159,6 +204,7 @@ public class DukeController extends AnchorPane implements Message {
     }
 
     private void exit() {
+        customThreadPool.release();
         Platform.exit();
         System.exit(0);
     }

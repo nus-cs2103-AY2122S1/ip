@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.controller.DukeController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -26,6 +27,8 @@ public class DukeApp extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(DukeApp.class.getResource(DUKE_UI_FXML_PATH));
             AnchorPane ap = fxmlLoader.load();
+            DukeController controller = fxmlLoader.getController();
+            controller.setStageListener(stage);
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle(TITLE);

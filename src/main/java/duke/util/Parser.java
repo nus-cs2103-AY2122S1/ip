@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.command.AddCommand;
 import duke.command.ClearCommand;
+import duke.command.ComingCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -41,6 +42,8 @@ public class Parser {
                 return new ClearCommand(message);
             } else if (operation == Operation.FIND) {
                 return new FindCommand(command, message);
+            } else if (operation == Operation.COMING) {
+                return new ComingCommand(message);
             } else if (operation == Operation.TODO
                 || operation == Operation.DEADLINE
                 || operation == Operation.EVENT) {

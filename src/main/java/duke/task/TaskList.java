@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +19,8 @@ import duke.util.FileUtils;
 public class TaskList {
     private static final String DIR_NAME = "data";
     private static final String FILE_NAME = "duke.txt";
+    private static final int MILLIS_TO_HOUR_UNIT_CONVERSION = 1000 * 60 * 60;
+
     private final List<Task> tasks;
 
     /**
@@ -197,6 +201,7 @@ public class TaskList {
      * Prints tasks which contains keyword from TaskList.
      *
      * @param keyword Keyword of task name.
+     * @return String array of filtered tasks.
      */
     public String[] findTasks(String keyword) {
         List<Task> filteredTasks = tasks.stream()
@@ -205,5 +210,38 @@ public class TaskList {
         return IntStream.range(0, filteredTasks.size())
                 .mapToObj(i -> (i + 1) + ". " + filteredTasks.get(i).toString())
                         .collect(Collectors.toList()).toArray(String[]::new);
+    }
+
+    /**
+     * Prints tasks which is coming in hours.
+     *
+     * @param hour Hour range (current + hour) of coming tasks.
+     * @return String array of coming tasks.
+     */
+    public String[] findComingTasks(int hour) {
+        List<Task> filteredTasks = tasks.stream()
+            .filter(task -> {
+                if (task instanceof Deadline) {
+                    Deadline deadline = (Deadline) task;
+                    long deadlineTimeMillis = deadline.getByDateTime()
+                            .atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+                    long millisDifference = deadlineTimeMillis - System.currentTimeMillis();
+                    long hourDifference = millisDifference / MILLIS_TO_HOUR_UNIT_CONVERSION;
+                    return millisDifference >= 0 && hourDifference < hour;
+                } else if (task instanceof Event) {
+                    Event event = (Event) task;
+                    long eventTimeMillis = LocalDateTime.of(
+                            event.getAtDateTime().getAtDate(),
+                            event.getAtDateTime().getStartTime()
+                    ).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli();
+                    long millisDifference = eventTimeMillis - System.currentTimeMillis();
+                    long hourDifference = millisDifference / MILLIS_TO_HOUR_UNIT_CONVERSION;
+                    return millisDifference >= 0 && hourDifference < hour;
+                }
+                return false;
+            }).collect(Collectors.toList());
+        return IntStream.range(0, filteredTasks.size())
+            .mapToObj(i -> (i + 1) + ". " + filteredTasks.get(i).toString())
+            .collect(Collectors.toList()).toArray(String[]::new);
     }
 }
