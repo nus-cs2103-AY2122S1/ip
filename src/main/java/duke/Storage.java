@@ -10,9 +10,6 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private static final String READ_SUCCESS = "A saved file has been found! It will now be loaded :)";
-    private static final String READ_FAILURE = "No saved file has been found :(";
-
     private String filepath;
 
     public Storage(String filePath) {
@@ -26,17 +23,17 @@ public class Storage {
      */
     public List<String> load() {
         List<String> taskArrayAsString = new ArrayList<>();
+        File myFile = new File(this.filepath);
+
         try {
-            File myObj = new File(this.filepath);
-            Scanner myStorage = new Scanner(myObj);
-            Printer.print(READ_SUCCESS);
-            while (myStorage.hasNextLine()) {
-                String data = myStorage.nextLine();
+            Scanner scanner = new Scanner(myFile);
+            while (scanner.hasNextLine()) {
+                String data = scanner.nextLine();
                 taskArrayAsString.add(data);
             }
-            myStorage.close();
+            scanner.close();
         } catch (FileNotFoundException e) {
-            Printer.print(READ_FAILURE);
+            return taskArrayAsString;
         }
         return taskArrayAsString;
     }
