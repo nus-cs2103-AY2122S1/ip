@@ -1,86 +1,100 @@
 package duke;
 
 import duke.task.Task;
+import javafx.scene.text.Text;
+
 
 public class Ui {
 
     public Ui() {}
 
     /**
-     * Prints out farewell message.
+     * Returns a farewell message.
+     *
+     * @return Farewell message
      */
-    public void bye() {
-        System.out.println("    Bye. Hope to see you again soon!");
+    public String bye() {
+        return "    Bye. Hope to see you again soon!";
+    }
+
+//    /**
+//     * Returns a greeting message.
+//     *
+//     * @return Greeting message
+//     */
+//    public String greeting() {
+//        String logo = " ____        _        \n"
+//                + "|  _ \\ _   _| | _____ \n"
+//                + "| | | | | | | |/ / _ \\\n"
+//                + "| |_| | |_| |   <  __/\n"
+//                + "|____/ \\__,_|_|\\_\\___|\n";
+//        return "Hello I am\n" + logo;
+//    }
+
+    /**
+     * Returns a confirmation message.
+     *
+     * @return Confirmation message
+     */
+    public String fileConfirmation() {
+        return "I have received your file! Added tasks!\n";
     }
 
     /**
-     * Prints out greeting message.
+     * Returns a message stating that the file is not found.
+     *
+     * @return Message telling users file is not found
      */
-    public void greeting() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello I am\n" + logo);
-    }
-
-    /**
-     * Prints a message to confirm that Duke has read the given file.
-     */
-    public void fileConfirmation() {
-        System.out.println("I have received your file! Added tasks!\n");
-    }
-
-    /**
-     * Prints a message to warn users that Duke cannot find the given file.
-     */
-    public void fileNotFoundMsg() {
-        System.out.println("I am unable to find your file. "
+    public String fileNotFoundMsg() {
+        return "I am unable to find your file. "
                 + "Check that your 'duketest' file exists,"
-                + " or that your 'data' folder exists.");
+                + " or that your 'data' folder exists.";
     }
 
     /**
-     * Prints a message to warn users of an unknown error.
+     * Returns a message stating that there is an IO error.
+     *
+     * @return Message stating that there is an IO error.
      */
-    public void ioErrorMsg() {
-        System.out.println("Something went wrong!");
+    public String ioErrorMsg() {
+        return "Something went wrong!";
     }
 
     /**
-     * Prints a message to confirm that a task has been added to the list.
+     * Returns a message confirming a task has been added to the list.
      *
      * @param desc The description of the task.
      * @param size The size of the list.
+     * @return Message confirming a task has been added to the list.
      */
-    public void taskAddedMsg(String desc, int size) {
-        System.out.println("    Got it. I've added this task:");
-        System.out.println("        " + desc);
-        System.out.println("    Now you have " + size + " tasks in the list.");
+    public String taskAddedMsg(String desc, int size) {
+        return "    Got it. I've added this task:\n" + "        " + desc +
+                "\n    Now you have " + size + " tasks in the list.";
     }
 
     /**
-     * Prints a message to confirm that a task has been deleted from the list.
+     * Returns a message confirming a task has been deleted to the list.
      *
      * @param desc The description of the task.
      * @param size The size of the list.
+     * @return Message confirming a task has been deleted to the list.
      */
-    public void taskDeleteMsg(String desc, int size) {
-        System.out.println("    Noted. I've removed this task:");
-        System.out.println("        " + desc);
-        System.out.println("    Now you have " + size + " tasks in the list.");
+    public String taskDeleteMsg(String desc, int size) {
+        return "    Got it. I've deleted this task:\n" + "        " + desc +
+                "\n    Now you have " + size + " tasks in the list.";
     }
 
     /**
-     * Prints a message to confirm that a task has been marked as done.
+     * Returns a message stating that a task has been marked as done.
+     *
+     * @return Message stating that a task has been marked as done.
      */
-    public void taskDoneConfirmation() {
-        System.out.println("    Nice! I've marked this task as done:");
+    public String taskDoneConfirmation() {
+        return "    Nice! I've marked this task as done";
     }
 
     /**
-     * Prints various error messages for various error events.
+     * Returns various error messages for various error events.
      *
      * @param caseNumber The case number.
      * @return The error message relevant to the problem.
@@ -101,17 +115,19 @@ public class Ui {
     }
 
     /**
-     * Prints out all the tasks in the list.
+     * Returns all the tasks in the list.
      *
      * @param storageList The list storing all the tasks.
+     * @return The contents in the list.
      */
-    public void displayListContents(StorageList storageList) {
-        System.out.println("    Here are the tasks in your list:");
+    public String displayListContents(StorageList storageList) {
+        String output = "    Here are the tasks in your list:";
 
         for (int i = 0; i < storageList.size(); i++) {
             int num = i + 1;
             Task task = storageList.get(i);
-            System.out.println("        " + num + "." + task.toString());
+            output += "\n        " + num + "." + task.toString();
         }
+        return output;
     }
 }
