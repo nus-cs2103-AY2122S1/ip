@@ -160,6 +160,14 @@ public class TaskList {
     private void addEventTask(String isDone, String name, String atTime) {
         String[] dateTimes = atTime.split(" ", 2);
         String[] times = dateTimes[1].split("-", 2);
+        // Asserts that the dateTimes can be split to 2 parts by space.
+        // The first part is date, the second part is times.
+        assert dateTimes.length == 2
+                : "☹ OOPS!!! DateTimes cannot be split to 2 parts by space.";
+        // Asserts that the times can be split to 2 parts by - symbol.
+        // The first part is startTime, the second part is endTime.
+        assert times.length == 2
+                : "☹ OOPS!!! Times cannot be split to 2 parts by - symbol.";
         String atDate = dateTimes[0];
         String startTime = times[0];
         String endTime = times[1];
