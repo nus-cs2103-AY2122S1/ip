@@ -15,7 +15,7 @@ public class Duke {
 
     /**
      * Constructor for Duke
-     * @param filePath
+     * @param filePath path to storage file
      */
     public Duke(String filePath) {
         ui = new Ui();

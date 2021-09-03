@@ -67,7 +67,7 @@ public class Parser {
         } else if (command == ValidCommand.BYE) {
             return new ByeCommand();
         } else if (command == ValidCommand.FIND) {
-        return new FindCommand(userInput);
+            return new FindCommand(userInput);
         }
         return null;
     }

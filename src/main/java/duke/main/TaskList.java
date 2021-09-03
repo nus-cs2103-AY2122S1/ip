@@ -1,8 +1,9 @@
 package duke.main;
-import duke.tasks.Task;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.tasks.Task;
 
 /**
  * Represents a class to hold all tasks
@@ -15,6 +16,7 @@ public class TaskList {
     }
 
     public TaskList(List<StorageElement> storageList) {
+        assert storageList.size() > 0 : "StorageList length should not be 0";
         taskList = new ArrayList<>();
         for (StorageElement storageElement : storageList) {
             this.addTask(Task.of(storageElement));
@@ -53,6 +55,7 @@ public class TaskList {
      * @return Deleted task
      */
     public Task deleteTask(int index) {
+        assert index < this.taskList.size() : "Index to be deleted is out of range of list of task";
         return this.taskList.remove(index);
     }
 
