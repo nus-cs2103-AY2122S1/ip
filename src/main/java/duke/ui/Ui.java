@@ -4,15 +4,23 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
+
 /**
  * Text UI of the application.
  */
 public class Ui {
     private static final String SEPARATOR =
             "-------------------------------------------------------";
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private final Scanner in;
     private final PrintStream out;
+    private final VBox dialogContainer;
 
     public Ui() {
         this(System.in, System.out);
@@ -21,6 +29,17 @@ public class Ui {
     public Ui(InputStream in, PrintStream out) {
         this.in = new Scanner(in);
         this.out = out;
+        this.dialogContainer = null;
+    }
+
+    public Ui(VBox dialogContainer) {
+        this(System.in, System.out, dialogContainer);
+    }
+
+    public Ui(InputStream in, PrintStream out, VBox dialogContainer) {
+        this.in = new Scanner(in);
+        this.out = out;
+        this.dialogContainer = dialogContainer;
     }
 
     /**
@@ -36,6 +55,24 @@ public class Ui {
         input = input.replaceAll("~", "");
 
         return input;
+    }
+
+    private Label makeLabel(String message) {
+        Label temp = new Label(message);
+        temp.setWrapText(true);
+        return temp;
+    }
+
+    private void showDukeUiMessage(String message) {
+        dialogContainer.getChildren().add(
+                DialogBox.getDukeDialog(makeLabel(message), new ImageView(duke))
+        );
+    }
+
+    public void showUserUiMessage(String message) {
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(makeLabel(message), new ImageView(user))
+        );
     }
 
     public void showWelcomeMessage() {
@@ -60,5 +97,13 @@ public class Ui {
             out.println(msg);
         }
         out.println(SEPARATOR);
+
+        if (dialogContainer != null) {
+            StringBuilder toDisplay = new StringBuilder();
+            for (String msg:msgs) {
+                toDisplay.append(String.format("%s\n", msg));
+            }
+            showDukeUiMessage(toDisplay.toString());
+        }
     }
 }
