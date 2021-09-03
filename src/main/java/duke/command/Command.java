@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
@@ -29,5 +31,5 @@ public abstract class Command {
      * @param storage handles reading and writing of data file.
      * @return response for successful execution.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
 }

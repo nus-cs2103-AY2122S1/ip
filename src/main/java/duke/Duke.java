@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.command.Command;
+import duke.exception.DataFileChangedException;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -70,15 +71,10 @@ public class Duke {
                 ui.printMessage(response);
             } catch (DukeException e) {
                 ui.printMessage(e.getMessage());
+            } catch (IOException e) {
+                ui.printMessage(new DataFileChangedException().getMessage());
             }
         }
-
-        try {
-            storage.save(tasks.getTaskList());
-        } catch (IOException e) {
-            ui.printMessage(e.getMessage());
-        }
-
         ui.cliExit();
     }
 
@@ -100,6 +96,8 @@ public class Duke {
             return parser.handleCommands(input).execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();
+        } catch (IOException e) {
+            return new DataFileChangedException().getMessage();
         }
     }
 }

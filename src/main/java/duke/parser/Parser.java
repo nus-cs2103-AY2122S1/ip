@@ -144,7 +144,9 @@ public class Parser {
      * Logic for handling different commands and executing the appropriate methods for the inputted command.
      * Throws appropriate exceptions for its respective error.
      *
-     * @param input The entire user input.
+     * @param input user input.
+     * @return respective Command according to command word in user input.
+     * @throws DukeException if any violations of commands in user input occurs.
      */
     public Command handleCommands(String input) throws DukeException {
         // isolates the command word

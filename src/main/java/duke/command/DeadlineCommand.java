@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import duke.exception.InvalidDateTimeException;
@@ -34,7 +35,9 @@ public class DeadlineCommand extends Command {
      * @throws InvalidDateTimeException if the format of the date or time entered is incorrect.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeException {
-        return tasks.addDeadline(parsedDeadline);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeException, IOException {
+        String message = tasks.addDeadline(parsedDeadline);
+        storage.save(tasks);
+        return message;
     }
 }

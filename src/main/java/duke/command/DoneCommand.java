@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.EmptyListException;
 import duke.exception.InvalidIndexException;
 import duke.storage.Storage;
@@ -34,7 +36,10 @@ public class DoneCommand extends Command {
      * @throws EmptyListException if the task list is empty.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException, EmptyListException {
-        return tasks.markDone(task);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException,
+            EmptyListException, IOException {
+        String message = tasks.markDone(task);
+        storage.save(tasks);
+        return message;
     }
 }

@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import duke.exception.InvalidDateTimeException;
@@ -33,7 +34,9 @@ public class EventCommand extends Command {
      * @return appropriate message for adding an event.
      * @throws InvalidDateTimeException if the format of date or time entered is incorrect.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeException {
-        return tasks.addEvent(event);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateTimeException, IOException {
+        String message = tasks.addEvent(event);
+        storage.save(tasks);
+        return message;
     }
 }

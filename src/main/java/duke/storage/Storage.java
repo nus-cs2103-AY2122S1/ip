@@ -15,6 +15,7 @@ import duke.exception.DataFileChangedException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
+import duke.tasks.TaskList;
 import duke.tasks.Todo;
 
 /**
@@ -38,17 +39,18 @@ public class Storage {
      * Saves and writes the current tasks to the data file.
      * If the file does not exist, it will create a new file.
      *
-     * @param taskList contains all current tasks.
+     * @param tasks contains all current tasks.
      * @throws IOException if the named file exists but is a directory
      * rather than a regular file, does not exist but cannot be created,
      * or cannot be opened for any other reason.
      */
 
-    public void save(ArrayList<Task> taskList) throws IOException {
+    public void save(TaskList tasks) throws IOException {
+        ArrayList<Task> taskList = tasks.getTaskList();
         FileWriter fw = new FileWriter(filePath);
 
         for (Task task : taskList) {
-            fw.write(task.toString() + "\n");
+            fw.write(task.toString() + System.lineSeparator());
         }
 
         fw.flush();

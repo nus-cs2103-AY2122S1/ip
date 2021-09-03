@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.storage.Storage;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
@@ -30,7 +32,9 @@ public class TodoCommand extends Command {
      * @return the appropriate message for adding a todo.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return tasks.addTodo(todo);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        String message = tasks.addTodo(todo);
+        storage.save(tasks);
+        return message;
     }
 }

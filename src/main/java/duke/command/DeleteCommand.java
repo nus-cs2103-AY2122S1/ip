@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.exception.EmptyListException;
 import duke.exception.InvalidIndexException;
 import duke.storage.Storage;
@@ -34,7 +36,10 @@ public class DeleteCommand extends Command {
      * @throws InvalidIndexException if index is out of range of task list.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyListException, InvalidIndexException {
-        return tasks.deleteTask(index);
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws EmptyListException,
+            InvalidIndexException, IOException {
+        String message = tasks.deleteTask(index);
+        storage.save(tasks);
+        return message;
     }
 }

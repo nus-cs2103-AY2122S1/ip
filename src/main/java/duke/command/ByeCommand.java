@@ -27,12 +27,8 @@ public class ByeCommand extends Command {
      * @return the appropriate farewell message.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        try {
-            storage.save(tasks.getTaskList());
-            return ui.exit();
-        } catch (IOException e) {
-            return e.getMessage();
-        }
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        storage.save(tasks);
+        return ui.exit();
     }
 }
