@@ -23,7 +23,7 @@ public class List extends Task {
      * @param storage
      */
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) {
-        ui.showListDetails(task);
+    public String execute(TaskList task, Ui ui, Storage storage) {
+        return ui.showListDetails(task);
     }
 }

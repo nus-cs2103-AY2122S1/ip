@@ -71,11 +71,11 @@ public class Duke {
 
     public String getResponse(String input) {
         Task comingCmdTask = Parser.parse(input, task);
-        return "good";//comingCmdTask.execute(task, ui, storage);
+        return comingCmdTask.execute(task, ui, storage);
     }
 
     public Ui getUi() {
-        return this.ui;
+        return ui;
     }
 
     /**

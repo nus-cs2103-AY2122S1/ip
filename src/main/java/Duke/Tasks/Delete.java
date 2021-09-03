@@ -27,13 +27,12 @@ public class Delete extends Task {
      * @param task
      * @param ui
      * @param storage
-     * @throws IOException
+     * @return String
      */
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) {
+    public String execute(TaskList task, Ui ui, Storage storage) {
         Task taskDeleted = task.remove(num);
-        ui.showDeletedMessage(task, taskDeleted);
         storage.writeData(task.getTasks());
-
+        return ui.showDeletedMessage(task, taskDeleted);
     }
 }

@@ -25,8 +25,8 @@ public class Find extends Task {
      * @param storage
      */
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) {
-        ui.showFindDetails(task, this.description);
+    public String execute(TaskList task, Ui ui, Storage storage) {
+        return ui.showFindDetails(task, this.description);
     }
 
 }

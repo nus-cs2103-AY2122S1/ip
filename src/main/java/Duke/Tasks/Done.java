@@ -26,12 +26,12 @@ public class Done extends Task {
      * @param task
      * @param ui
      * @param storage
+     * @return
      */
     @Override
-    public void execute(TaskList task, Ui ui, Storage storage) {
+    public String execute(TaskList task, Ui ui, Storage storage) {
         task.markDone(num);
-        ui.showDoneMessage(task, num);
         storage.writeData(task.getTasks());
-
+        return ui.showDoneMessage(task, num);
     }
 }

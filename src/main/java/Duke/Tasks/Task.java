@@ -74,9 +74,10 @@ public class Task {
      * @param task
      * @param ui
      * @param storage
+     * @return
      */
-    public void execute(TaskList task, Ui ui, Storage storage) {
-
+    public String execute(TaskList task, Ui ui, Storage storage) {
+        return null;
     };
 
 }

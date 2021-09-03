@@ -5,54 +5,35 @@ import Duke.Tool.TaskList;
 
 import java.util.Scanner;
 import java.lang.String;
+import java.lang.StringBuilder;
 
 /**
  * Represents Ui class: deals with interactions with the user
  */
 public class Ui {
 
-    private final static String UNDERLINE = "_________________________________";
     private final static String INDENTATION ="  ";
-
-    /**
-     * The method of showLogo at start
-     *
-     */
-    public String showLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return logo;
-    }
 
     /**
      * The showWelcome method after showLogo
      */
-    public static void showWelcome(){
-        System.out.println(INDENTATION + UNDERLINE);
-        System.out.println(INDENTATION + "Hello! I'm Duke \n" +
-                INDENTATION + "What can I do for you?");
-        System.out.println(INDENTATION + UNDERLINE);
-
+    public String showWelcome(){
+        return "Hello! I'm Duke \n" +
+                "What can I do for you?";
     }
 
     /**
      * The method of exit
      */
-    public static void exit() {
-        System.out.println(INDENTATION + UNDERLINE);
-        System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
-        System.out.println(INDENTATION + UNDERLINE);
-
+    public static String exit() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * The method of showLoadingError
      */
-    public void showLoadingError() {
-        System.out.println("Loading error! please try again");
+    public String showLoadingError() {
+        return "Loading error! please try again";
     }
 
     /**
@@ -70,10 +51,8 @@ public class Ui {
      * @param numRemoved
      */
     public String showDoneMessage(TaskList task, int numRemoved) {
-        return INDENTATION + UNDERLINE + INDENTATION + "Nice! I've marked this task as done:\n"
-        System.out.println(INDENTATION + " " + task.get(numRemoved));
-        System.out.println(INDENTATION + UNDERLINE);
-
+        return "Nice! I've marked this task as done:\n" +
+                INDENTATION+ task.get(numRemoved);
     }
 
     /**
@@ -81,13 +60,10 @@ public class Ui {
      * @param task
      * @param taskDeleted
      */
-    public void showDeletedMessage(TaskList task, Task taskDeleted) {
-        System.out.println(INDENTATION + UNDERLINE);
-        System.out.println(INDENTATION + "Noted. I've removed this task:");
-        System.out.println(INDENTATION + " " + taskDeleted);
-        System.out.println(INDENTATION + "Now you have " + task.size()  + " tasks in the list.");
-        System.out.println(INDENTATION + UNDERLINE);
-
+    public String showDeletedMessage(TaskList task, Task taskDeleted) {
+        return "Noted. I've removed this task:\n" +
+                INDENTATION + taskDeleted +
+                "Now you have " + task.size()  + " tasks in the list.";
     }
 
     /**
@@ -95,25 +71,22 @@ public class Ui {
      * @param task
      * @param numAdded
      */
-    public void showAddOnTask(TaskList task, int numAdded) {
-        System.out.println(INDENTATION + UNDERLINE);
-        System.out.println(INDENTATION + "Got it. I've added this task:");
-        System.out.println(INDENTATION + INDENTATION + task.get(numAdded)); //toString in Deadline or Event
-        System.out.println(INDENTATION + "Now you have " + (numAdded + 1) + " tasks in the list.");
-        System.out.println(INDENTATION + UNDERLINE);
+    public String showAddOnTask(TaskList task, int numAdded) {
+        return "Got it. I've added this task:\n" +
+                INDENTATION + task.get(numAdded) + //toString in Deadline or Event
+                "Now you have " + (numAdded + 1) + " tasks in the list.";
     }
 
     /**
      * The method of showListDetails
      * @param task
      */
-    public void showListDetails(TaskList task) {
-        System.out.println(INDENTATION + UNDERLINE);
-        System.out.println(INDENTATION + "Here are the tasks in your list:");
+    public String showListDetails(TaskList task) {
+        StringBuilder showListDetailsString = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < task.size(); i ++) {
-            System.out.println(INDENTATION + (i + 1) + "." + INDENTATION + task.get(i));
+            showListDetailsString.append((i + 1) + "." + INDENTATION + task.get(i) + "\n");
         }
-        System.out.println(INDENTATION + UNDERLINE);
+        return showListDetailsString.toString();
     }
 
     /**
@@ -121,15 +94,15 @@ public class Ui {
      * @param task
      * @param findTarget
      */
-    public void showFindDetails(TaskList task, String findTarget) {
-        System.out.println(INDENTATION + UNDERLINE);
-        System.out.println(INDENTATION + "Here are the matching tasks in your list:");
+    public String showFindDetails(TaskList task, String findTarget) {
+
+        StringBuilder showFindDetailsString = new StringBuilder("Here are the matching tasks in your list:");
         for (int i = 0; i < task.size(); i++) {
             if(task.getTasks().get(i).getDescription().contains(findTarget)) {
-                System.out.println(INDENTATION + (i + 1) + "." + INDENTATION + task.get(i));
+                showFindDetailsString.append(INDENTATION + (i + 1) + "." + INDENTATION + task.get(i));
             }
         }
-        System.out.println(INDENTATION + UNDERLINE);
+       return showFindDetailsString.toString();
     }
 
 }
