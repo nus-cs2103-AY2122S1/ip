@@ -39,6 +39,7 @@ public class Storage {
      * @return An arraylist which represents the task list.
      */
     public ArrayList<Task> load() throws PixException {
+        assert file.exists() : "Pix.txt does not exist!";
         ArrayList<Task> taskList = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(file);
@@ -82,6 +83,7 @@ public class Storage {
      * @param taskList Task list to write the data from.
      */
     public void writeToFile(ArrayList<Task> taskList) throws IOException, PixIoException {
+        assert file.exists() : "Pix.txt does not exist!";
         try {
             //Clear the Pix.task list in the file and rewrite all tasks inside
             FileWriter pixFileWriter = new FileWriter(file);

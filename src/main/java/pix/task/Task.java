@@ -1,5 +1,7 @@
 package pix.task;
 
+import java.util.Objects;
+
 /**
  * Abstract class that all tasks inherit from.
  */
@@ -23,6 +25,7 @@ public abstract class Task {
      * @param name Name of the task.
      */
     public Task(String name, boolean isDone) {
+        assert !Objects.equals(name, "") : "The task does not have a name!";
         this.name = name;
         this.isDone = isDone;
     }
