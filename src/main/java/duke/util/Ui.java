@@ -12,7 +12,7 @@ public class Ui {
     /**
      * Returns the String for the standard welcome message user sees when initiating duke.
      *
-     * @return A String of message printed out in CLI.
+     * @return A String of message to be shown in GUI.
      */
     public String showWelcomeMessage() {
         String welcomeMessage = "Hello I'm FullOfBugs. What can I do for you?";
@@ -24,7 +24,7 @@ public class Ui {
      *
      * @param task  A Task instance that contains details of the newly added task and to be printed.
      * @param newSize An int representing the new size of the Task list.
-     * @return A String of message printed out in CLI.
+     * @return A String of message to be shown in GUI.
      */
     public String showAddTaskMessage(Task task, int newSize) {
         String addTaskMessage = "Got it. I've added this task:\n"
@@ -39,7 +39,7 @@ public class Ui {
      *
      * @param task  A Task instance that contains the details of the removed task.
      * @param remainingSize An int representing the newly updated size of task list.
-     * @return A String of message printed out in CLI.
+     * @return A String of message to be shown in GUI.
      */
     public String showRemoveTaskMessage(Task task, int remainingSize) {
         String removeTaskMessage = "Noted. I've removed this task:\n"
@@ -53,7 +53,7 @@ public class Ui {
      * Returns the String for the message when a task is marked as done.
      *
      * @param task A Task instance that contains details of the task marked as done.
-     * @return A String of message printed out in CLI.
+     * @return A String of message to be shown in GUI.
      */
     public String showMarkTaskAsDoneMessage(Task task) {
         String markTaskAsDoneMessage = "Nice! I've marked this task as done:\n" + String.format("%s\n", task);
@@ -64,7 +64,7 @@ public class Ui {
      * Returns the String for the list of all the task currently in the list.
      *
      * @param tasks A TaskList instance containing a list of task.
-     * @return A String of message printed out in CLI.
+     * @return A String of message to be shown in GUI.
      */
     public String showList(ArrayList<Task> tasks) {
         String message = "Your current tasks are:\n";
@@ -79,7 +79,7 @@ public class Ui {
      * Returns the String for the list of task that contains a specified keyword.
      *
      * @param tasks  An ArrayList of task that contains the keyword in its description.
-     * @return A String of message printed out in CLI.
+     * @return A String of message to be shown in GUI.
      */
     public String showTasksWithKeyword(ArrayList<Task> tasks) {
         String message = "Here are the matching tasks in your list:\n";
