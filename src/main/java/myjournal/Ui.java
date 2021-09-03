@@ -10,7 +10,8 @@ import myjournal.task.Task;
 public class Ui {
     /**
      * Prints the welcome message.
-     * @return
+     *
+     * @return The welcome message.
      */
     public static String welcomeMessage() {
         return "Hello!\n"
@@ -28,6 +29,7 @@ public class Ui {
      * Prints out the statement after a task is added.
      *
      * @param taskList The list of all tasks.
+     * @return The task added.
      */
     public String taskAddPrint(TaskList taskList) {
         return "Okay!! I've added the following task:\n"
@@ -39,6 +41,7 @@ public class Ui {
      * Prints the task that has been deleted.
      *
      * @param task The task that has been deleted.
+     * @return The task removed.
      */
     public String removeTaskPrint(Task task) {
         return "Okay!! I have removed the following task:\n"
@@ -49,6 +52,7 @@ public class Ui {
      * Prints the task with the keyword.
      *
      * @param tasks The list of the tasks with the keyword.
+     * @return The tasks found.
      */
     public String findTaskPrint(TaskList tasks) {
         if (tasks.getSize() == 0) {
@@ -66,6 +70,7 @@ public class Ui {
      * Prints the task that has been marked as done.
      *
      * @param task The task that has been marked as done.
+     * @return The task marked as done.
      */
     public String doneTaskPrint(Task task) {
         return "Okay!! I have marked this task as done:\n" + task;
@@ -73,6 +78,8 @@ public class Ui {
 
     /**
      * Prints the goodbye message.
+     *
+     * @return The goodbye message.
      */
     public static String goodByeMessage() {
         return "Bye. Hope to see you again soon!:)";

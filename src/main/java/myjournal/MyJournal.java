@@ -194,17 +194,17 @@ public class MyJournal extends Application {
         return "MyJournal: " + parsedInput;
     }
 
-    /**
-     * The main method of the MyJournal class.
-     *
-     * @param args An input of an array of strings.
-     */
-    public static void main(String[] args) {
-        try {
-            new MyJournal().run();
-            //new MyJournal("./tasks.txt").run();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    //    /**
+    //     * The main method of the MyJournal class.
+    //     *
+    //     * @param args An input of an array of strings.
+    //     */
+    //    public static void main(String[] args) {
+    //        try {
+    //            new MyJournal().run();
+    //            //new MyJournal("./tasks.txt").run();
+    //        } catch (IOException e) {
+    //            e.printStackTrace();
+    //        }
+    //    }
 }

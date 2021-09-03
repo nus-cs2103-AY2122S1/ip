@@ -6,3 +6,4 @@ E|1| watch | 2021/03/40
 E|1| watch | 2021/01/02
 D|0| do hw | THURSDAY, 16 Sep 2021 04:00am
 T|0| read 
+E|0| go party | SUNDAY, 5 Sep 2021 07:00pm
