@@ -34,23 +34,18 @@ public class Task {
      * @throws InvalidTaskTypeException when the type of task is not recognised
      * @throws InvalidTaskTimeFormatException when a task does not have valid time inputs
      */
-    public static Task createTask(String description, DukeCommandTypeEnum actionType)
+    public static Task createTask(String description, DukeCommandTypeEnum commandType)
             throws InvalidTaskTypeException, InvalidTaskTimeFormatException, InvalidDateTimeException {
-        // A valid task is either a to-do, deadline or event
-
-        if (actionType.equals(DukeCommandTypeEnum.TODO)) {
+        switch (commandType) {
+        case TODO:
             return TodoTask.createTask(description);
-        }
-
-        if (actionType.equals(DukeCommandTypeEnum.DEADLINE)) {
+        case DEADLINE:
             return DeadlineTask.createTask(description);
-        }
-
-        if (actionType.equals(DukeCommandTypeEnum.EVENT)) {
+        case EVENT:
             return EventTask.createTask(description);
+        default:
+            throw new InvalidTaskTypeException(commandType);
         }
-
-        throw new InvalidTaskTypeException(actionType);
     }
 
     /**
@@ -76,10 +71,6 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
-    }
-
-    private String getStatusIcon() {
-        return (this.isDone ? STATUS_ICON_DONE : STATUS_ICON_NOT_DONE);
     }
 
     /**
@@ -123,5 +114,9 @@ public class Task {
      */
     protected boolean contains(String keyword) {
         return this.description.contains(keyword);
+    }
+
+    private String getStatusIcon() {
+        return (this.isDone ? STATUS_ICON_DONE : STATUS_ICON_NOT_DONE);
     }
 }

@@ -31,7 +31,7 @@ public class Duke {
             StorageFile storageFile = storage.loadListFile();
             TaskList list = storageFile.scanFileDataToNewTaskList();
             this.list = list;
-        } catch(ErrorAccessingFileException e) {
+        } catch (ErrorAccessingFileException e) {
             this.loadErrorMessage = e.getOutputMessage();
         }
 

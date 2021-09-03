@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 
 import exception.InvalidDateTimeException;
 import exception.InvalidTaskTimeFormatException;
+import type.DatetimeTypeEnum;
 import type.DukeCommandTypeEnum;
 
 /**
@@ -15,8 +16,6 @@ import type.DukeCommandTypeEnum;
 public class DeadlineTask extends Task {
     private static final String TIME_SPLITTER_INPUT = "/by";
     private static final String TIME_SPLITTER_DATA = "\\(by:";
-    private static final String DEADLINE_INPUT_FORMAT = "dd-MM-yyyy HHmm";
-    private static final String DEADLINE_OUTPUT_FORMAT = "MMM d yyyy HHmm";
     private final LocalDateTime deadline;
 
     private DeadlineTask(String description, boolean isDone, LocalDateTime deadline) {
@@ -47,14 +46,14 @@ public class DeadlineTask extends Task {
         }
 
         String actionDescription = splitPartsUsingBy[0];
-        String dateTimeDescription = splitPartsUsingBy[1];
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DEADLINE_INPUT_FORMAT);
+        String datetimeDescription = splitPartsUsingBy[1];
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DatetimeTypeEnum.INPUT.toString());
 
         try {
-            LocalDateTime deadline = LocalDateTime.from(dateTimeFormatter.parse(dateTimeDescription));
+            LocalDateTime deadline = LocalDateTime.from(dateTimeFormatter.parse(datetimeDescription));
             return new DeadlineTask(actionDescription, false, deadline);
         } catch (DateTimeParseException e) {
-            throw new InvalidDateTimeException(DEADLINE_INPUT_FORMAT);
+            throw new InvalidDateTimeException(DatetimeTypeEnum.INPUT.toString());
         }
     }
 
@@ -65,7 +64,7 @@ public class DeadlineTask extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DEADLINE_OUTPUT_FORMAT);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DatetimeTypeEnum.OUTPUT.toString());
         String formattedDeadline = this.deadline.format(dateTimeFormatter);
         return String.format("[D]%s (by: %s)", super.toString(), formattedDeadline);
     }
@@ -91,7 +90,7 @@ public class DeadlineTask extends Task {
         String actionDescription = splitPartsUsingBy[0];
         String deadlineWithClosingBracket = splitPartsUsingBy[1];
         String deadlineString = deadlineWithClosingBracket.substring(0, deadlineWithClosingBracket.length() - 1);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DEADLINE_OUTPUT_FORMAT);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(DatetimeTypeEnum.OUTPUT.toString());
         LocalDateTime deadline = LocalDateTime.from(dateTimeFormatter.parse(deadlineString));
 
         return new DeadlineTask(actionDescription, isDone, deadline);
