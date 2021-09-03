@@ -2,9 +2,7 @@ package duke;
 
 import java.io.IOException;
 import java.util.Collections;
-import java.util.concurrent.TimeUnit;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,6 +26,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     private DialogBox(String text, Image img) {
+        assert img != null : " No Image Provided";
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);

@@ -55,6 +55,4 @@ public class Task {
     public String toHistory() {
         return " | " + getStatusIcon() + " | " + this.description;
     }
-
-
 }

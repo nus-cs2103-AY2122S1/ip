@@ -12,9 +12,10 @@ public class Parser {
      *
      * @param instruction user's instruction
      * @throws NoDescriptionError If user inputs nothing after a task command.
-     * @throws UnknownCommandError If user inputs a command that is outside the scope of the chatbot
+     * @throws UnknownCommandError If user inputs a command that is outside the scope of the chat bot
      */
-    public static String parse(String instruction, Ui ui, TaskList tasks) throws NoDescriptionError, UnknownCommandError {
+    public static String parse(String instruction, Ui ui, TaskList tasks)
+            throws NoDescriptionError, UnknownCommandError {
         String[] splitInstructions = instruction.split(" ", 2);
         String operative = splitInstructions[0];
         Commands command;
