@@ -47,7 +47,7 @@ public class UI {
     public void showWelcome() {
         System.out.println("\n");
         String buffer = "     ";
-        String logo =   buffer + " ____        _\n"
+        String logo = buffer + " ____        _\n"
                 + buffer + "|  _ \\ _   _| | _____\n"
                 + buffer + "| | | | | | | |/ / _ \\\n"
                 + buffer + "| |_| | |_| |   <  __/\n"
@@ -64,8 +64,8 @@ public class UI {
      * Method to print the Line in the console
      */
     public void showLine() {
-        System.out.println("____________________________________________________________________________________" +
-                "____________________________________");
+        System.out.println("____________________________________________________________________________________"
+                + "____________________________________");
     }
 
     /**

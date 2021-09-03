@@ -1,36 +1,40 @@
 package duke;
-import duke.task.ToDoTask;
-import org.junit.Test;
-import org.junit.Assert;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import duke.task.ToDoTask;
 
 public class TaskListTest {
     @Test
     public void addTaskTest() {
         TaskList temp = new TaskList(new ArrayList<>());
         temp.addTask(new ToDoTask("read a book"));
-        Assert.assertEquals(new ToDoTask("read a book").toString() , temp.getTask(0).toString());
+        assertEquals(new ToDoTask("read a book").toString() , temp.getTask(0).toString());
     }
 
     @Test
     public void deleteTaskAtIndexTest() {
         TaskList temp = new TaskList(new ArrayList<>());
         temp.addTask(new ToDoTask("read a book"));
-        Assert.assertEquals(temp.getTask(0).toString(), temp.deleteTaskAtIndex(0).toString());
+        assertEquals(temp.getTask(0).toString(), temp.deleteTaskAtIndex(0).toString());
     }
 
     @Test
     public void getTaskTest() {
         TaskList temp = new TaskList(new ArrayList<>());
         temp.addTask(new ToDoTask("read a book"));
-        Assert.assertEquals(new ToDoTask("read a book").toString(), temp.getTask(0).toString());
+        assertEquals(new ToDoTask("read a book").toString(), temp.getTask(0).toString());
     }
 
     @Test
     public void getTaskListLengthTest() {
         TaskList temp = new TaskList(new ArrayList<>());
         temp.addTask(new ToDoTask("read a book"));
-        Assert.assertEquals(1, temp.getTaskListLength());
+        assertEquals(1, temp.getTaskListLength());
     }
 
     @Test
@@ -38,6 +42,6 @@ public class TaskListTest {
         TaskList temp = new TaskList(new ArrayList<>());
         temp.addTask(new ToDoTask("read a book"));
         temp.getTask(0).markAsCompleted();
-        Assert.assertEquals("[T][X] read a book", temp.getTask(0).toString());
+        assertEquals("[T][X] read a book", temp.getTask(0).toString());
     }
 }

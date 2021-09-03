@@ -7,17 +7,18 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import duke.task.ToDoTask;
-import duke.task.Task;
-import duke.task.EventTask;
+
 import duke.task.DeadlineTask;
+import duke.task.EventTask;
+import duke.task.Task;
+import duke.task.ToDoTask;
 
 /**
  * Class to abstract the storing of commands
  */
 public class Storage {
 
-    File storageFile;
+    private File storageFile;
 
     /**
      * Constructor for the Storage Class
@@ -39,12 +40,15 @@ public class Storage {
         UI ui = new UI();
         try {
             File dir = new File("data");
-            boolean isDeleted = false, isCreated = false, isDirectory = dir.mkdirs();
+            boolean isDeleted = false;
+            boolean isCreated = false;
+            boolean isDirectory = dir.mkdirs();
+
             File data = new File(dir, "duke.txt");
             if (isDirectory && data.exists()) {
                 isDeleted = data.delete();
             }
-            if(isDeleted) {
+            if (isDeleted) {
                 isCreated = data.createNewFile();
             }
             if (isCreated) {
@@ -71,7 +75,9 @@ public class Storage {
             }
         } catch (IOException e) {
             File deletedFile = new File("data/duke.txt");
-            boolean isDeleted = deletedFile.delete(), shouldShow = false;
+            boolean isDeleted = deletedFile.delete();
+            boolean shouldShow = false;
+
             if (isDeleted) {
                 shouldShow = deletedFile.exists();
             }
@@ -147,10 +153,11 @@ public class Storage {
                         }
                         break;
                     case UNKNOWN:
+                    default:
                         isDataCorrupted = true;
                     }
                 } catch (DateTimeParseException ignored) {
-
+                    ignored.getMessage();
                 }
             }
 
@@ -161,7 +168,7 @@ public class Storage {
                 ui.showLine();
             }
         } catch (FileNotFoundException ignored) {
-
+            ignored.getMessage();
         }
         return taskList;
     }

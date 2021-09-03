@@ -40,7 +40,8 @@ public class Parser {
         if (taskDescription == null || taskDescription.equals("")) {
             return new Command(Command.Commands.UNKNOWN, "");
         } else {
-            String taskObjective, taskDetails;
+            String taskObjective;
+            String taskDetails;
             String[] task = taskDescription.split(" ", 2);
             taskObjective = task[0];
             taskDetails = task.length > 1 ? task[1].trim() : "";

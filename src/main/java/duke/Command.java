@@ -1,8 +1,10 @@
 package duke;
+
+import java.time.format.DateTimeParseException;
+
 import duke.task.DeadlineTask;
 import duke.task.EventTask;
 import duke.task.ToDoTask;
-import java.time.format.DateTimeParseException;
 
 /**
  * Class to abstract the type and execution of a command
@@ -79,7 +81,7 @@ public class Command {
         if ((taskDetails != null) && (taskDetails.equals(""))) {
             ui.display("Bye. Hope to see you again soon! \\_(\"v\")_/");
         } else {
-           throw new DukeException("OOPS! I'm sorry, but I don't know that command");
+            throw new DukeException("OOPS! I'm sorry, but I don't know that command");
         }
     }
 
@@ -93,8 +95,8 @@ public class Command {
      */
     private void addDeadline(String taskDetails, UI ui, TaskList tasks) throws DukeException {
         if ((taskDetails == null) || !(taskDetails.contains(" /by "))) {
-            throw new DukeException("Incorrect Format of the Deadline Command!!, Correct Format --> " +
-                    "deadline <Description> /by <dd/MM/yyyy HHmm>");
+            throw new DukeException("Incorrect Format of the Deadline Command!!, Correct Format --> "
+                    + "deadline <Description> /by <dd/MM/yyyy HHmm>");
         } else {
             String[] values = taskDetails.split(" /by ", 2);
             try {
@@ -104,8 +106,8 @@ public class Command {
                 ui.display("  " + deadline);
                 ui.display("Now you have " + tasks.getTaskListLength() + " tasks in the list.");
             } catch (DateTimeParseException e) {
-                throw new DukeException("Incorrect Format of the Deadline Command!!, Correct Format --> " +
-                        "deadline <Description> /by <dd/MM/yyyy HHmm>");
+                throw new DukeException("Incorrect Format of the Deadline Command!!, Correct Format --> "
+                        + "deadline <Description> /by <dd/MM/yyyy HHmm>");
             }
         }
     }
@@ -175,8 +177,8 @@ public class Command {
      */
     private void addEvent(String taskDetails, UI ui, TaskList tasks) throws DukeException {
         if ((taskDetails == null) || !(taskDetails.contains(" /at "))) {
-            throw new DukeException("Incorrect Format of the Event Command!!, " +
-                    "Correct Format --> event <Description> /at <dd/MM/yyyy HHmm>");
+            throw new DukeException("Incorrect Format of the Event Command!!, "
+                    + "Correct Format --> event <Description> /at <dd/MM/yyyy HHmm>");
         } else {
             String[] values = taskDetails.split(" /at ", 2);
             try {
@@ -186,8 +188,8 @@ public class Command {
                 ui.display("  " + event);
                 ui.display("Now you have " + tasks.getTaskListLength() + " tasks in the list.");
             } catch (DateTimeParseException e) {
-                throw new DukeException("Incorrect Format of the Event Command!!, " +
-                        "Correct Format --> event <Description> /at <dd/MM/yyyy HHmm>");
+                throw new DukeException("Incorrect Format of the Event Command!!, "
+                        + "Correct Format --> event <Description> /at <dd/MM/yyyy HHmm>");
             }
         }
     }
@@ -280,6 +282,7 @@ public class Command {
             addTodo(taskDetails, ui, tasks);
             break;
         case UNKNOWN:
+        default:
             throw new DukeException("OOPS! I'm sorry, but I don't know that command");
         }
     }
