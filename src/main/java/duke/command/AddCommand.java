@@ -60,6 +60,8 @@ public class AddCommand extends Command {
     private void addDeadlineTask(TaskList taskList, String description) {
         try {
             String[] taskDetails = CommandUtils.extractTaskDetails(description, REGEX_BY);
+            assert taskDetails.length == 2
+                    : "☹ OOPS!!! TaskDetails cannot be split to 2 parts.";
             String taskName = taskDetails[0];
             LocalDateTime byDateTime = CommandUtils.extractDeadlineDateTime(taskDetails[1]);
             Deadline deadline = new Deadline(taskName, byDateTime);
@@ -77,6 +79,8 @@ public class AddCommand extends Command {
     private void addEventTask(TaskList taskList, String description) {
         try {
             String[] taskDetails = CommandUtils.extractTaskDetails(description, REGEX_AT);
+            assert taskDetails.length == 2
+                    : "☹ OOPS!!! TaskDetails cannot be split to 2 parts.";
             String taskName = taskDetails[0];
             EventDateTime eventDateTime = CommandUtils
                 .extractEventDatetime(taskDetails[1], REGEX_SPACE);
