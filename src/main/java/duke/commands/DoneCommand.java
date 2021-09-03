@@ -32,7 +32,9 @@ public class DoneCommand extends Command {
         storage.save(taskList);
 
         //Ui
-        return ui.showDoneTask(doneTask);
+        String output = ui.showDoneTask(doneTask) + "\n";
+        output += "You have done " + taskList.getNumTaskDone() + " tasks so far. Good job!!!";
+        return output;
     }
 
     /**

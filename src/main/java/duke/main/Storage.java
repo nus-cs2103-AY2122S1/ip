@@ -18,9 +18,11 @@ import java.util.Scanner;
 public class Storage {
     private static final String DONE = "1";
     private static final String NOT_DONE = "0";
-    private static String delimiter = " | ";
-    private static String delimiter_regex = " \\| ";
+    private static String DELIMITER = " | ";
+    private static String DELIMITER_REGEX = " \\| ";
+    private static String NUM_TASK_DONE = "Number of tasks done";
     private String filePath;
+    private int numTaskDone;
     /**
      * Creates Storage class based on file path
      *
@@ -31,7 +33,7 @@ public class Storage {
     }
 
     private StorageElement fileLineToStorageElement(String fileLine) {
-        String[] dataList = fileLine.split(Storage.delimiter_regex);
+        String[] dataList = fileLine.split(Storage.DELIMITER_REGEX);
         String taskIcon = dataList[0];
         Boolean isDone = Integer.parseInt(dataList[1]) == 1;
         String description = dataList[2];
@@ -55,7 +57,7 @@ public class Storage {
             stringList.add(storageElement.getTime().toString());
         }
 
-        return String.join(Storage.delimiter, stringList);
+        return String.join(Storage.DELIMITER, stringList);
     }
 
     private static void writeToFile(String filePath, String textToAdd) {
@@ -80,8 +82,13 @@ public class Storage {
         try {
             Scanner s = new Scanner(f); // create a Scanner using the File as the source
             while (s.hasNext()) {
-                StorageElement storageElement = this.fileLineToStorageElement(s.nextLine());
-                storageList.add(storageElement);
+                String fileLine = s.nextLine();
+                if (fileLine.startsWith(NUM_TASK_DONE)) {
+                    this.numTaskDone = Integer.parseInt(fileLine.split(DELIMITER_REGEX)[1]);
+                } else {
+                    StorageElement storageElement = this.fileLineToStorageElement(fileLine);
+                    storageList.add(storageElement);
+                }
             }
             return storageList;
         } catch (FileNotFoundException e) {
@@ -105,10 +112,17 @@ public class Storage {
 
         String fileContent = "";
 
+        // Saving the number of task done
+        fileContent += NUM_TASK_DONE + DELIMITER + taskList.getNumTaskDone() + System.lineSeparator();
+
         for (StorageElement storageElement : storageList) {
             fileContent += this.storageElementToFileLine(storageElement) + System.lineSeparator();
         }
 
         this.writeToFile(this.filePath, fileContent);
+    }
+
+    public int getNumTaskDone() {
+        return this.numTaskDone;
     }
 }

@@ -10,6 +10,7 @@ import duke.tasks.Task;
  */
 public class TaskList {
     protected ArrayList<Task> taskList;
+    private int numTaskDone;
 
     public TaskList() {
         taskList = new ArrayList<>();
@@ -21,6 +22,14 @@ public class TaskList {
         for (StorageElement storageElement : storageList) {
             this.addTask(Task.of(storageElement));
         }
+    }
+
+    public void setNumTaskDone(int numTaskDone) {
+        this.numTaskDone = numTaskDone;
+    }
+
+    public int getNumTaskDone() {
+        return numTaskDone;
     }
 
     /**
@@ -37,6 +46,11 @@ public class TaskList {
      * @return Done task
      */
     public Task markAsDone(int index) {
+        // Only update the count if the task is not done before
+        if (!this.taskList.get(index).isDone()) {
+            this.numTaskDone += 1;
+        }
+
         this.taskList.get(index).markAsDone();
         return this.taskList.get(index);
     }
