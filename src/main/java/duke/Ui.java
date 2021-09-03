@@ -18,6 +18,7 @@ public class Ui {
             + "██─▄─▀█─▄─██─██─████─████─██─██\n"
             + "▀▄▄▄▄▀▀▄▀▄▀▀▄▄▄▄▀▀▀▄▄▄▀▀▀▄▄▄▄▀▀";
     private Items items;
+    private Scanner sc = new Scanner(System.in);
 
     /**
      * Instantiates a new ui object.
@@ -37,11 +38,14 @@ public class Ui {
     /**
      * Gets the user input.
      *
-     * @param sc The scanner to get the input
      * @return The string representation of the user input
      */
-    public static String getInput(Scanner sc) {
+    public String getInput() {
         return sc.nextLine();
+    }
+
+    public void printGoodBye() {
+        printMessage("Going so soon? Hope to see you again!");
     }
 
     /**
