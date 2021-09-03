@@ -7,7 +7,7 @@ import duke.DukeException;
  *
  * @author Wong Yun Rui Chris
  */
-public class Task {
+public abstract class Task {
     /**
      *
      * Enum for the different type of task
@@ -27,7 +27,7 @@ public class Task {
          * Returns the corresponding regex/split needed to split the string input
          * received to get correct output.
          *
-         * @return
+         * @return The regex used to split the input String for these task type
          */
         public String getSplit() {
             return this.split;

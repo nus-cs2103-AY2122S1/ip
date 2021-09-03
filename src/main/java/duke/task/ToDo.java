@@ -5,7 +5,7 @@ package duke.task;
  *
  * @author Wong Yun Rui Chris
  */
-public class Todo extends Task{
+public class ToDo extends Task{
 
     /**
      * A public constructor to initialise a Todos task.
@@ -13,16 +13,16 @@ public class Todo extends Task{
      * @param description The String description/name of the task
      * @param isDone The Boolean of if the task is done
      */
-    public Todo(String description, Boolean isDone) {
+    public ToDo(String description, Boolean isDone) {
         super(description, isDone);
     }
 
     /**
-     * Returns the string representation of this Todo task that is to be displayed
-     * by Duke. It comprises the tag for Todo, description of this Todo and the
-     * Todo of this task.
+     * Returns the string representation of this ToDo task that is to be displayed
+     * by Duke. It comprises the tag for ToDo, description of this ToDo and the
+     * ToDo of this task.
      *
-     * @return The string representation of this Todo task
+     * @return The string representation of this ToDo task
      */
     @Override
     public String toString() {
@@ -30,10 +30,10 @@ public class Todo extends Task{
     }
 
     /**
-     * Returns the data representation for this Todo task that is to be saved
+     * Returns the data representation for this ToDo task that is to be saved
      * and used on initial execution of Duke.
      *
-     * @return The String representation of the data of this Todo task
+     * @return The String representation of the data of this ToDo task
      */
     @Override
     public String toData() {

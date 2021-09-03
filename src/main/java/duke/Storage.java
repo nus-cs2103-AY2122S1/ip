@@ -11,17 +11,17 @@ import java.util.Scanner;
  * A class that encapsulates the saving/reading data for Duke.
  */
 public class Storage {
-    private String filepath;
+    private final String filePath;
 
     /**
      * Constructor for the Storage object initialised with the filepath
      * to save/read the data to/from.
      *
-     * @param filepath The String representation of the filepath to the text file
+     * @param filePath The String representation of the filepath to the text file
      *                 containing the saved data
      */
-    public Storage(String filepath) {
-        this.filepath = filepath;
+    public Storage(String filePath) {
+        this.filePath = filePath;
     }
 
     /**
@@ -32,10 +32,10 @@ public class Storage {
     public void saveData(TaskList list) {
         try {
             // get file directory string
-            String[] dir = this.filepath.split("/");
-            StringBuilder dirString = new StringBuilder("");
+            String[] dir = this.filePath.split("/");
+            StringBuilder dirString = new StringBuilder();
             for (int i = 0; i < dir.length - 1; i++) {
-                dirString.append("/" + dir[i]);
+                dirString.append("/").append(dir[i]);
             }
 
             String path = new File("").getAbsoluteFile() + dirString.toString();
@@ -55,7 +55,7 @@ public class Storage {
                     e.printStackTrace();
                 }
                 return null;
-            }); ;
+            });
 
             fw.close();
         } catch (IOException e) {
@@ -70,7 +70,7 @@ public class Storage {
         try {
             // set-up to check if file exists
             TaskList list = new TaskList();
-            String path = new File("").getAbsoluteFile() + this.filepath;
+            String path = new File("").getAbsoluteFile() + this.filePath;
             File file = new File(path);
 
             if (!file.isFile()) {

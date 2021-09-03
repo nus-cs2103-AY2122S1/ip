@@ -3,7 +3,7 @@ package duke;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import duke.task.Todo;
+import duke.task.ToDo;
 
 import java.util.ArrayList;
 import java.util.function.Function;
@@ -33,7 +33,7 @@ public class TaskList {
 
         switch (type) {
         case TODO:
-            task = new Todo(input, isDone);
+            task = new ToDo(input, isDone);
             break;
 
         case EVENT:
