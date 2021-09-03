@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -45,9 +46,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        System.out.println(input);
         String response = duke.getResponse(input);
         // @@author CheyanneSim-reused
-        if (response.contains("Bye bye!")) {
+        if (response.contains("Bye. Hope to see you again soon!")) {
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
             pause.setOnFinished(event -> {
                 Platform.exit();

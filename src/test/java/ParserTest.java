@@ -21,7 +21,7 @@ public class ParserTest {
     private final TaskList tasks = new TaskList(new ArrayList<>());
     private final Ui ui = new Ui();
     private final Storage storage = new Storage("test.txt");
-    private final Parser parser = new Parser(tasks, ui, storage);
+    private final Parser parser = new Parser();
     //testing print statements
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
