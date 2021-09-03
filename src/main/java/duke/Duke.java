@@ -56,6 +56,7 @@ public class Duke {
         if (response == null) {
             return "I cannot understand what you are saying!";
         } else {
+            assert !response.equals("");
             return response;
         }
     }
