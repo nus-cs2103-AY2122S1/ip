@@ -4,6 +4,7 @@ import bobbybot.commands.AddCommand;
 import bobbybot.commands.Command;
 import bobbybot.commands.DoneCommand;
 import bobbybot.commands.ExitCommand;
+import bobbybot.commands.FindCommand;
 import bobbybot.commands.ListCommand;
 import bobbybot.enums.BotCommand;
 import bobbybot.exceptions.InvalidArgumentException;
@@ -72,6 +73,8 @@ public class Parser {
             return new ExitCommand();
         case DONE:
             return prepareDone(arguments);
+        case FIND:
+            return new FindCommand(arguments);
         default:
             System.out.println("Invalid command");
             return null;

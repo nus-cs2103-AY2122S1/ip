@@ -63,31 +63,5 @@ public class TaskList {
         System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
 
-    /**
-     * Finds all tasks with a keyword
-     * @param keyword keyword to search for
-     */
-    public void findMatchingTasks(String keyword) {
-        int i = 1;
-        System.out.println("Here are the tasks you're looking for sir!");
-        for (Task task : tasks) {
-            String sentence = task.toString();
-            if (sentence.toLowerCase().contains(keyword.toLowerCase())) {
-                System.out.println(i + "." + sentence);
-                i++;
-            }
-        }
-    }
-    /**
-     * Prints all task in TaskList
-     */
-    public void printList() {
-        int i = 1;
-        System.out.println("Here are the tasks in your list:");
-        for (Task task: tasks) {
-            System.out.print(i + ". ");
-            System.out.println(task);
-            i++;
-        }
-    }
+
 }
