@@ -96,11 +96,9 @@ public class TaskList {
      */
     public TaskList findString(String str) {
         ArrayList<Task> arrList = new ArrayList<>();
-        for (Task task : this.list) {
-            if (task.isSubString(str)) {
-                arrList.add(task);
-            }
-        }
+        this.list.stream()
+                .takeWhile(x -> x.isSubString(str))
+                .forEach(y -> arrList.add(y));
         return new TaskList(arrList);
     }
 }
