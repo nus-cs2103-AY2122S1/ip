@@ -1,5 +1,9 @@
 package kermit;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+// todo close application properly
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -47,6 +52,19 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getKermitDialog(response, kermitImage)
         );
+
+        // @@author endriu_ - reused
+        //Reused from https://stackoverflow.com/a/21996863/9078664
+        if (response == "Bye. Hope to see you again soon!") {
+            new Timer().schedule(new TimerTask() {
+                public void run () {
+                    Platform.exit();
+                }
+            }, 3000);
+        }
+
         userInput.clear();
+
+
     }
 }
