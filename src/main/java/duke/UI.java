@@ -20,4 +20,16 @@ public class UI {
         }
         return command;
     }
+
+
+    /**
+     * Seperate inputs
+     *
+     * @param output is the string to be surrounded by the lines
+     */
+    public void renderOutput(String output) {
+        System.out.println("________________________________________________________");
+        output.lines().map(x -> "     " + x).forEach(System.out::println);
+        System.out.println("________________________________________________________");
+    }
 }

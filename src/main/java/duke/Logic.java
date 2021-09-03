@@ -14,7 +14,7 @@ public class Logic {
      * @param command refers to the parsed string. See presentation for parsing
      * @throws InvalidCommandException is throwed when there is an invalid command in the form of a string
      */
-    public static void checkIfSpecialComand(String command) throws InvalidCommandException {
+    public static String checkIfSpecialComand(String command) throws InvalidCommandException {
         //duke.Logic to check each individual commands, checks for special commands first, then checks for other input
         //Use duke.Parser to package command into a packaged command
         Command packagedCommand = Parser.parse(command);
@@ -26,8 +26,9 @@ public class Logic {
             Duke.stop();
             DataHandlerLayer.updateHistory();
             DataHandlerLayer.stopWriting();
+            return "See ya";
         } else if (listOfCommandInputs.size() == 1 && listOfCommandInputs.get(0).equals("list")) {
-            DataHandlerLayer.printLog();
+            return DataHandlerLayer.getLogAsString();
         } else if (listOfCommandInputs.contains("delete")) {
             int position = Integer.parseInt(listOfCommandInputs.get(listOfCommandInputs.indexOf("delete") + 1));
             try {
@@ -36,6 +37,7 @@ public class Logic {
                 throw new InvalidCommandException();
             }
             DataHandlerLayer.updateHistory();
+            return "Cancel culture is real, even in this world";
         } else if (listOfCommandInputs.contains("done")) {
             int pos = Integer.parseInt(listOfCommandInputs.get(1));
             if (pos > Task.getNumberOfTask()) {
@@ -44,26 +46,29 @@ public class Logic {
             Task currentTask = DataHandlerLayer.getTask(pos - 1);
             currentTask.completeTask();
             DataHandlerLayer.updateHistory();
-            System.out.println("Ohhhh myyyy. I have been waiting for this quest to complete for ages.");
+            return "Ohhhh myyyy. I have been waiting for this quest to complete for ages.";
         } else if (listOfCommandInputs.contains("find")) {
             String temp = listOfCommandInputs.get(listOfCommandInputs.indexOf("find") + 1);
             DataHandlerLayer.filterLog(temp);
         } else {
             processTask(packagedCommand, true);
+            return loggedCommand;
         }
+        return "Acknowledged task";
     }
 
     /**
      * Loads in all the text history from previous times of running the bot
      */
     public static void preload() {
+        System.out.println("Preload called");
         try {
             ArrayList<Command> commandArrayList = DataHandlerLayer.loadPreset();
             for (Command command : commandArrayList) {
                 processTask(command, false);
-                System.out.println("preload");
-                System.out.println(command.getTaskType());
             }
+            System.out.println("Preloadd");
+            System.out.println(DataHandlerLayer.getLogAsString());
         } catch (InvalidCommandException e) {
             e.printStackTrace();
         }
@@ -124,7 +129,9 @@ public class Logic {
             }
             break;
         case NOTAPPLICABLE:
+
             //For echoing commands
+            break;
         default:
             System.out.println("Should never reach here");
         }

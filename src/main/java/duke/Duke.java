@@ -1,5 +1,9 @@
 package duke;
 
+import javafx.application.Application;
+import javafx.stage.Stage;
+;
+
 /**
  * Main file for the duke bot. The duke bot keeps track of all your task and allows you to mark as complete.
  * Call list to see the list of task. Each task can be completed. When a task is completed, it will still appear
@@ -13,7 +17,7 @@ public class Duke {
     /**
      * Function starts the process of the dukebot, closes when the "Bye command is issued"
      */
-    private static void start() {
+    public static void start() {
         isRunning = true;
         Logic.preload();
         while (true) {
@@ -39,7 +43,6 @@ public class Duke {
         isRunning = false;
     }
 
-
     /**
      * Starting point of the dukeBot
      */
@@ -52,4 +55,5 @@ public class Duke {
         System.out.println("Hello from\n" + logo + "\nWhat can I do for you today?");
         start();
     }
+
 }
