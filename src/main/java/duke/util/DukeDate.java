@@ -75,14 +75,19 @@ public class DukeDate {
 
     @Override
     public String toString() {
-        return this.startTime.format(OFFICIAL_FORMAT) + " to " + this.endTime.format(OFFICIAL_FORMAT);
+        String startTimeString = this.startTime.format(OFFICIAL_FORMAT);
+        String endTimeString = this.endTime.format(OFFICIAL_FORMAT);
+        String finalString = startTimeString + " to " + endTimeString;
+        return finalString;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof DukeDate) {
             DukeDate temp = (DukeDate) obj;
-            return temp.getStartTime().isEqual(this.startTime) && temp.getEndTime().isEqual(this.endTime);
+            boolean startTimeVerification = temp.getStartTime().isEqual(this.startTime);
+            boolean endTimeVerification = temp.getEndTime().isEqual(this.endTime);
+            return startTimeVerification && endTimeVerification;
         } else {
             return false;
         }

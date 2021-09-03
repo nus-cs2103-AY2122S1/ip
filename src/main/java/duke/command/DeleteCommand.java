@@ -37,7 +37,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        return this.list.deleteTask(toDelete);
+
+        String successMessage = this.list.deleteTask(toDelete);
+        return successMessage;
 
     }
 }
