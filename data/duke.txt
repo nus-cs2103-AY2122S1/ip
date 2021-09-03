@@ -1,5 +1,5 @@
 E | 1 | team meeting | 2021-09-21
 T | 1 | read book
-D | 0 | assignment 1 | 2021-09-21
-E | 1 | party | 2021-07-04
+D | 1 | assignment 1 | 2021-09-21
 T | 0 | read weekly readings
+E | 0 | cs2103t tut | 2021-09-02

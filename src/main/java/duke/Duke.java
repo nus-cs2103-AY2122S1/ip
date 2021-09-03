@@ -76,10 +76,12 @@ public class Duke {
         String eventTime;
         try {
             eventTime = args.split(" /at ")[1];
+            taskList.appendTask(new Event(taskDescription, eventTime));
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Incorrect description format. Description should follow this pattern: *description* /at *time*";
+        } catch (InvalidDukeCommandException e) {
+            return "Invalid time format. Time should follow pattern: yyyy-mm-dd.";
         }
-        taskList.appendTask(new Event(taskDescription, eventTime));
         return String.format("Got it. I've added this task:\n%s\nNow you have %d task%s in the list.",
                 taskDescription, taskList.size(), taskList.size() > 1 ? "s" : "");
     }
@@ -92,10 +94,13 @@ public class Duke {
         String finishDate;
         try {
             finishDate = args.split(" /by ")[1];
+            taskList.appendTask(new Deadline(taskDescription, finishDate));
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Incorrect description format. Description should follow this pattern: *description* /by *time*";
+        } catch (InvalidDukeCommandException e) {
+            return "Invalid time format. Time should follow pattern: yyyy-mm-dd.";
         }
-        taskList.appendTask(new Deadline(taskDescription, finishDate));
+
         return String.format("Got it. I've added this task:\n%s\nNow you have %d task%s in the list.",
                 taskDescription, taskList.size(), taskList.size() > 1 ? "s" : "");
     }
@@ -210,10 +215,9 @@ public class Duke {
         String introduction = "Hello! I'm Duke\nWhat can I do for you?";
         ui.dukePrint(introduction);
 
-        String userInput;
         Scanner reader = new Scanner(System.in);
         while (true) {
-            userInput = reader.nextLine();
+            String userInput = reader.nextLine();
             DukeCommand command = parser.getCommandType(userInput);
             String argsLiteral = parser.getArgsLiteral(userInput);
             handleInput(command, argsLiteral);
