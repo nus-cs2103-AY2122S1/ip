@@ -47,7 +47,7 @@ public class Ui {
      * @param tasks TaskList to be added to.
      * @return String representing response.
      */
-    public static String echo(String input, TaskList tasks) {
+    public static String formatMessage(String input, TaskList tasks) {
         String taskQuantifier = tasks.length() == 1 ? "task..." : "tasks...";
         return "Fine, I'll add: " + input + "\nYou now have " + tasks.length() + " " + taskQuantifier;
     }
@@ -67,7 +67,7 @@ public class Ui {
             String datetime = this.parser.findDeadlineDatetime(input);
             String description = this.parser.findDescription(input);
             taskList.addDeadline(description, datetime);
-            return Ui.echo(new Deadline(description, datetime).toString(), taskList);
+            return Ui.formatMessage(new Deadline(description, datetime).toString(), taskList);
         } else {
             throw new WrongFormatException("deadline [task name] /by [YYYY-MM-DD], [HHMM]\n"
                     + "deadline [task name] /by [YYYY-MM-DD]");
@@ -94,7 +94,7 @@ public class Ui {
             }
             if (datetimeArr != null && datetimeArr[0] != null && datetimeArr[1] != null) {
                 taskList.addEvent(description, datetimeArr[0], datetimeArr[1]);
-                return Ui.echo(new Event(description, datetimeArr[0], datetimeArr[1]).toString(), taskList);
+                return Ui.formatMessage(new Event(description, datetimeArr[0], datetimeArr[1]).toString(), taskList);
             }
         } else {
             throw new WrongFormatException("event [task name] /at [YYYY-MM-DD], [HHMM] /to [YYYY-MM-DD], [HHMM]\n"
@@ -116,7 +116,7 @@ public class Ui {
 
         if (input.replace("todo", "").replaceAll(" ", "").length() > 0) {
             taskList.addTask(input);
-            return Ui.echo(new Task(input).toString(), taskList);
+            return Ui.formatMessage(new Task(input).toString(), taskList);
         } else {
             throw new WrongFormatException("todo [task name]");
         }
