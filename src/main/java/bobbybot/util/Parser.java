@@ -2,6 +2,7 @@ package bobbybot.util;
 
 import bobbybot.commands.AddCommand;
 import bobbybot.commands.Command;
+import bobbybot.commands.DoneCommand;
 import bobbybot.commands.ExitCommand;
 import bobbybot.commands.ListCommand;
 import bobbybot.enums.BotCommand;
@@ -22,6 +23,8 @@ public class Parser {
     public static final Pattern DATA_ARGS_FORMAT =
             Pattern.compile("(?<type>[^/]+)(?:/by|/at)(?<time>[^/]+)");
 
+    public static final Pattern NUMBER_ARGS_FORMAT =
+            Pattern.compile("\\d+");
     /**
      * Used for initial separation of command word and args.
      */
@@ -29,7 +32,6 @@ public class Parser {
     private final TaskList tasks;
     private final Ui ui;
     private final Storage storage;
-
 
     /**
      * Initialises Parser object with TaskList and Ui
@@ -68,6 +70,8 @@ public class Parser {
             return new ListCommand();
         case BYE:
             return new ExitCommand();
+        case DONE:
+            return prepareDone(arguments);
         default:
             System.out.println("Invalid command");
             return null;
@@ -89,6 +93,15 @@ public class Parser {
             System.out.println("Failed to add event/deadline");
             return null;
         }
+    }
+
+    private Command prepareDone(String args) {
+        final Matcher matcher = NUMBER_ARGS_FORMAT.matcher(args.trim());
+        // Check if arg is parsable as integer
+        if (!matcher.matches()) {
+            //return new IncorrectCommand();
+        }
+        return new DoneCommand(Integer.parseInt(args.trim()));
     }
 
     /**
@@ -170,12 +183,5 @@ public class Parser {
         }
     }
     */
-    /**
-     * Helper function to check if string is numeric
-     * @param str string to test if numeric
-     * @return boolean
-     */
-    private static boolean isNumeric(String str) {
-        return str.matches("-?\\d+(\\.\\d+)?");
-    }
+
 }

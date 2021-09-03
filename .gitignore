@@ -13,6 +13,9 @@ src/main/resources/docs/
 *.iml
 bin/
 
+# database files
+*database.txt
+
 # .class files
 *.class
 /text-ui-test/ACTUAL.txt
