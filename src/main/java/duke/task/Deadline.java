@@ -57,8 +57,8 @@ public class Deadline extends Task {
      * @return Formatted string of task meant for persisted storage.
      */
     @Override
-    public String convertToTxt() {
-        return String.format(DEADLINE_IDENTIFIER + " | %s | %s", super.convertToTxt(), deadlineString);
+    public String convertToText() {
+        return String.format(DEADLINE_IDENTIFIER + " | %s | %s", super.convertToText(), deadlineString);
     }
 
     /**

@@ -71,8 +71,8 @@ public class Event extends Task {
      * @return Formatted string of task meant for persisted storage.
      */
     @Override
-    public String convertToTxt() {
-        return String.format(EVENT_IDENTIFIER + " | %s | %s", super.convertToTxt(), dateTimeString);
+    public String convertToText() {
+        return String.format(EVENT_IDENTIFIER + " | %s | %s", super.convertToText(), dateTimeString);
     }
 
     /**

@@ -8,7 +8,7 @@ public class DeadlineTest {
     @Test
     public void convertToTxtTest() {
         Deadline task = new Deadline("Test convertToTxt()", "2021-08-22 1000");
-        assertEquals("D | 0 | Test convertToTxt() | Aug 22 2021 10.00 AM", task.convertToTxt());
+        assertEquals("D | 0 | Test convertToTxt() | 2021-08-22 1000", task.convertToText());
     }
 
     @Test

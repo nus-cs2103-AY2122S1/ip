@@ -43,16 +43,8 @@ public class UiTest {
     }
 
     @Test
-    public void printExitMessageTest() {
-        Ui.printExitMessage();
-        assertEquals(
-                "\t-------------------------------------------------------------------------"
-                        + Ui.LINE_SEPARATOR
-                        + "\tBye bye! See you again soon!"
-                        + Ui.LINE_SEPARATOR
-                        + "\t-------------------------------------------------------------------------"
-                        + Ui.LINE_SEPARATOR,
-                outContent.toString());
+    public void getExitMessageTest() {
+        assertEquals(Ui.getExitMessage(), "Bye bye! See you again soon!");
     }
 
     @Test

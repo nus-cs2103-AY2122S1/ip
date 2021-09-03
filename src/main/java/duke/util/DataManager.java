@@ -66,7 +66,7 @@ public class DataManager {
 
         try {
             FileWriter fw = new FileWriter(filePath, true);
-            fw.write(task.convertToTxt() + System.lineSeparator());
+            fw.write(task.convertToText() + System.lineSeparator());
             fw.close();
         } catch (IOException e) {
             throw new DukeIoException();
@@ -84,7 +84,7 @@ public class DataManager {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task t : tasks) {
-                fw.write(t.convertToTxt() + System.lineSeparator());
+                fw.write(t.convertToText() + System.lineSeparator());
             }
             fw.close();
         } catch (IOException e) {

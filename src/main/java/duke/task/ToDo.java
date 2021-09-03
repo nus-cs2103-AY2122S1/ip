@@ -25,8 +25,8 @@ public class ToDo extends Task {
      * @return Formatted string of task meant for persisted storage.
      */
     @Override
-    public String convertToTxt() {
-        return String.format(TODO_IDENTIFIER + " | %s", super.convertToTxt());
+    public String convertToText() {
+        return String.format(TODO_IDENTIFIER + " | %s", super.convertToText());
     }
 
     /**

@@ -42,56 +42,33 @@ public class ToDoListTest {
 
     @Test
     public void addToListTest_toDo_success() {
-        tdlist.addToList(new ToDo("read book"));
         assertEquals(
-                "\t-------------------------------------------------------------------------"
+                "Got it. I've added this task:"
                         + ls
-                        + "\tGot it. I've added this task:"
+                        + "  [T][ ] read book"
                         + ls
-                        + "\t\t"
-                        + "[T][ ] read book"
-                        + ls
-                        + "\tNow you have 1 tasks in the list."
-                        + ls
-                        + "\t-------------------------------------------------------------------------"
-                        + ls,
-                outContent.toString());
+                        + "Now you have 1 tasks in the list.",
+                tdlist.addToList(new ToDo("read book")));
     }
 
     @Test
     public void addToListTest_eventDateTime_success() {
-        tdlist.addToList(new Event("read book", "2021-08-09 1900"));
-        assertEquals(
-                "\t-------------------------------------------------------------------------"
+        assertEquals("Got it. I've added this task:"
                         + ls
-                        + "\tGot it. I've added this task:"
+                        + "  [E][ ] read book (at: Aug 09 2021 7.00 PM)"
                         + ls
-                        + "\t\t"
-                        + "[E][ ] read book (at: Aug 09 2021 7.00 PM)"
-                        + ls
-                        + "\tNow you have 1 tasks in the list."
-                        + ls
-                        + "\t-------------------------------------------------------------------------"
-                        + ls,
-                outContent.toString());
+                        + "Now you have 1 tasks in the list.",
+                tdlist.addToList(new Event("read book", "2021-08-09 1900")));
     }
 
     @Test
     public void addToListTest_deadlineDateTime_success() {
-        tdlist.addToList(new Deadline("read book", "2021-08-09 1900"));
-        assertEquals(
-                "\t-------------------------------------------------------------------------"
+        assertEquals("Got it. I've added this task:"
                         + ls
-                        + "\tGot it. I've added this task:"
+                        + "  [D][ ] read book (by: Aug 09 2021 7.00 PM)"
                         + ls
-                        + "\t\t"
-                        + "[D][ ] read book (by: Aug 09 2021 7.00 PM)"
-                        + ls
-                        + "\tNow you have 1 tasks in the list."
-                        + ls
-                        + "\t-------------------------------------------------------------------------"
-                        + ls,
-                outContent.toString());
+                        + "Now you have 1 tasks in the list.",
+                tdlist.addToList(new Deadline("read book", "2021-08-09 1900")));
     }
 
     @Test
@@ -99,18 +76,10 @@ public class ToDoListTest {
         tdlist.addToList(new Event("read book", "2021-08-09 1900"));
         outContent.reset();
         try {
-            tdlist.markTaskAsDone(1);
-            assertEquals(
-                    "\t-------------------------------------------------------------------------"
-                            + ls
-                            + "\tGood job on completing this task!"
-                            + ls
-                            + "\t\t"
-                            + "[E][X] read book (at: Aug 09 2021 7.00 PM)"
-                            + ls
-                            + "\t-------------------------------------------------------------------------"
-                            + ls,
-                    outContent.toString());
+            assertEquals("Good job on completing this task!"
+                            + "\n"
+                            + "  [E][X] read book (at: Aug 09 2021 7.00 PM)",
+                    tdlist.markTaskAsDone(1));
         } catch (DukeException e) {
             fail();
         }
@@ -132,20 +101,12 @@ public class ToDoListTest {
         tdlist.addToList(new Event("read book", "2021-08-09 1900"));
         outContent.reset();
         try {
-            tdlist.removeFromList(1);
             assertEquals(
-                    "\t-------------------------------------------------------------------------"
+                    "Noted. I've removed this task:\n"
+                            + "  [E][ ] read book (at: Aug 09 2021 7.00 PM)"
                             + ls
-                            + "\tNoted. I've removed this task:"
-                            + ls
-                            + "\t\t"
-                            + "[E][ ] read book (at: Aug 09 2021 7.00 PM)"
-                            + ls
-                            + "\tNow you have 0 tasks in the list."
-                            + ls
-                            + "\t-------------------------------------------------------------------------"
-                            + ls,
-                    outContent.toString());
+                            + "Now you have 0 tasks in the list.",
+                    tdlist.removeFromList(1));
         } catch (DukeException e) {
             fail();
         }
@@ -162,7 +123,7 @@ public class ToDoListTest {
     }
 
     @Test
-    public void removeFromListTest_DukeNegativeIndexException() {
+    public void removeFromListTest_dukeNegativeIndexException() {
         tdlist.addToList(new Event("read book", "2021-08-09 1900"));
         try {
             tdlist.removeFromList(-1);

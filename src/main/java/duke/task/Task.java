@@ -42,7 +42,7 @@ public abstract class Task {
      *
      * @return Formatted string of task meant for persisted storage.
      */
-    public String convertToTxt() {
+    public String convertToText() {
         return String.format("%d | %s", isDone ? 1 : 0, this.description);
     }
 

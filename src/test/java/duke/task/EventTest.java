@@ -8,7 +8,7 @@ public class EventTest {
     @Test
     public void convertToTxtTest() {
         Event task = new Event("Test convertToTxt()", "2021-08-22 1000");
-        assertEquals("E | 0 | Test convertToTxt() | Aug 22 2021 10.00 AM", task.convertToTxt());
+        assertEquals("E | 0 | Test convertToTxt() | 2021-08-22 1000", task.convertToText());
     }
 
     @Test

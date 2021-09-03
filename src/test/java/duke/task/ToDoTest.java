@@ -8,7 +8,7 @@ public class ToDoTest {
     @Test
     public void convertToTxtTest() {
         ToDo task = new ToDo("Test convertToTxt()");
-        assertEquals("T | 0 | Test convertToTxt()", task.convertToTxt());
+        assertEquals("T | 0 | Test convertToTxt()", task.convertToText());
     }
 
     @Test
