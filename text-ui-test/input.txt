@@ -16,4 +16,8 @@ deadline return book /by 20/8/2021 1234
 list
 find book
 find aaa
+deadline return box /by 20/8/2021 1212
+event another project meeting /at 22/8/2021 1200
+t do work
+l
 bye
