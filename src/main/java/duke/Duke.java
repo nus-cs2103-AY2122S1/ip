@@ -14,6 +14,7 @@ class Duke {
         try {
             storage = new Storage("duke.txt");
             for (String command : storage.readAllLines()) {
+                assert !command.equals("bye") : "Input file contains exit command";
                 parser.parse(command);
             }
         } catch (IOException | DukeException e) {
@@ -46,6 +47,7 @@ class Duke {
      * @return Array of outputs to be shown to user, returns null if command is exit.
      */
     public String[] handleInput(String command) {
+        assert storage != null : "Storage must be initialised before handling input";
         try {
             if (parser.isExit(command)) {
                 storage.close();
