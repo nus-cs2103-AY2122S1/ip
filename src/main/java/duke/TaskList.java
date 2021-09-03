@@ -68,7 +68,7 @@ public class TaskList {
         String res = IntStream
                 .range(0, this.tasks.size())
                 .mapToObj(i -> (i + 1) + ". " + check.apply(format, this.tasks.get(i)) + "\n")
-                .reduce("", (x, y) -> x + y);   
+                .reduce("", (x, y) -> x + y);
 
         return res.substring(0, res.length() - 1);
     }
