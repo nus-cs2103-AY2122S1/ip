@@ -8,8 +8,7 @@ if exist ACTUAL.TXT del ACTUAL.TXT
 if exist data\tasks.txt del data\tasks.txt
 
 REM compile the code into the bin folder
-dir /s /B ../src/main/java/*/*.java > sources.txt
-javac -cp ..\src\main\java -Xlint:none -d ..\bin @sources.txt
+javac -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\duke\*.java
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
