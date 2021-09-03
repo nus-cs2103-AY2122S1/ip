@@ -35,16 +35,15 @@ public class Deadline extends Task {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
             throw new DukeIllegalFormatException(
-                "☹ OOPS!!! Seems like you have entered a wrong date format. " +
-                    "Try this instead: YYYY-MM-DD"
+                "☹ OOPS!!! Seems like you have entered a wrong date format. " + "Try this instead: YYYY-MM-DD"
             );
         }
     }
 
     @Override
     public String toString() {
-        return "[" + LABEL + "]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) +
-            ")";
+        return "[" + LABEL + "]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+            + ")";
     }
 
     @Override

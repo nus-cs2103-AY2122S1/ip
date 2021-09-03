@@ -28,8 +28,8 @@ public class Ui {
      * Prints loading error.
      */
     public void showLoadingError() {
-        System.err.println("☹ OOPS!!! Seems like your data is corrupted. " +
-            "Please make sure you data file has the correct format.");
+        System.err.println(
+            "☹ OOPS!!! Seems like your data is corrupted. " + "Please make sure you data file has the correct format.");
     }
 
     /**

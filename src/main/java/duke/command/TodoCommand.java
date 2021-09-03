@@ -24,8 +24,7 @@ public class TodoCommand extends AddCommand {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task = new Todo(description);
         tasks.add(task, storage);
-        System.out.println("Got it. I've added this task:\n  " +
-            task +
-            "\nNow you have " + tasks.toArray().length + " task(s) in the list.");
+        System.out.println("Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.toArray().length
+            + " task(s) in the list.");
     }
 }
