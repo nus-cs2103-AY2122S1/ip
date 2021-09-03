@@ -8,14 +8,15 @@ import duke.core.TaskList;
  */
 public class ListCommand extends Command {
     /**
-     * Displays the tasks present in the task list.
+     * Displays the tasks present in the task list and returns the output to be displayed by Duke.
      *
      * @param taskList The TaskList object storing all the tasks.
      * @param storage The Storage object which was instantiated with the appropriate storage filepath.
+     * @return The output to be displayed by Duke.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        taskList.listTasks();
+    public String execute(TaskList taskList, Storage storage) {
+        return taskList.toString();
     }
 
     /**

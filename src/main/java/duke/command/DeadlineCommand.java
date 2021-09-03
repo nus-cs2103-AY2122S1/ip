@@ -4,6 +4,8 @@ import duke.core.Storage;
 import duke.core.TaskList;
 import duke.task.Deadline;
 
+import java.io.IOException;
+
 /**
  * Encapsulates a command that handles the addition of deadline tasks into the task list.
  */
@@ -21,15 +23,22 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Adds the deadline task into the task list and storage file.
+     * Adds the deadline task into the task list and storage file and returns the output to be displayed by Duke.
      *
      * @param taskList The TaskList object storing all the tasks.
      * @param storage The Storage object which was instantiated with the appropriate storage filepath.
+     * @return The output to be displayed by Duke.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        taskList.addTask(deadlineTask);
-        storage.saveTasksToFile(taskList);
+    public String execute(TaskList taskList, Storage storage) {
+        String output = taskList.addTask(deadlineTask);
+        try {
+            storage.saveTasksToFile(taskList);
+        } catch (IOException e) {
+            output = String.format("%s\n%s", output, e.getMessage());
+        }
+
+        return output;
     }
 
     /**

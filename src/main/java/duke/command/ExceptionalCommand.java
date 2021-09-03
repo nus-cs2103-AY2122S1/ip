@@ -20,15 +20,15 @@ public class ExceptionalCommand extends Command {
     }
 
     /**
-     * Prints the detailed message from the exception encountered.
+     * Returns the detailed message from the exception encountered.
      *
      * @param taskList The TaskList object storing all the tasks.
      * @param storage The Storage object which was instantiated with the appropriate storage filepath.
+     * @return The detailed message from the exception encountered.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        String message = e.getMessage();
-        Ui.formatAndPrint(message);
+    public String execute(TaskList taskList, Storage storage) {
+        return e.getMessage();
     }
 
     /**

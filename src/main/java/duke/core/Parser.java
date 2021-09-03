@@ -49,7 +49,7 @@ public class Parser {
                 return validEventHandler(input);
             default:
                 // This is for any other erroneous input we did not catch from checkValidity
-                DukeException e = new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                DukeException e = new DukeException(":( OOPS!!! I'm sorry, but I don't know what that means :-(");
                 return new ExceptionalCommand(e);
             }
         } catch (DukeException e) {
@@ -61,7 +61,7 @@ public class Parser {
     private static boolean checkValiditiy(String input, TaskList taskList) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (input.length() == 0) {
-            throw new DukeException("☹ OOPS!!! The input cannot be empty.");
+            throw new DukeException(":( OOPS!!! The input cannot be empty.");
         }
 
         switch (splittedInput[0]) {
@@ -87,36 +87,36 @@ public class Parser {
     private static void checkValidityTodo(String input) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (splittedInput.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new DukeException(":( OOPS!!! The description of a todo cannot be empty.");
         }
     }
 
     private static void checkValidityDeadline(String input) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (splittedInput.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DukeException(":( OOPS!!! The description of a deadline cannot be empty.");
         }
     }
 
     private static void checkValidityEvent(String input) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (splittedInput.length == 1) {
-            throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+            throw new DukeException(":( OOPS!!! The description of an event cannot be empty.");
         }
     }
 
     private static void checkValidityDone(String input, TaskList taskList) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (splittedInput.length == 1) {
-            throw new DukeException("☹ OOPS!!! You must specify an index");
+            throw new DukeException(":( OOPS!!! You must specify an index");
         } else {
             if (HelpfulFunctions.isInteger(splittedInput[1])) {
                 int index = Integer.parseInt(splittedInput[1]);
                 if (index < 1 || index > taskList.getSize()) {
-                    throw new DukeException("☹ OOPS!!! Your index is out of range");
+                    throw new DukeException(":( OOPS!!! Your index is out of range");
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! Your second argument must be an integer");
+                throw new DukeException(":( OOPS!!! Your second argument must be an integer");
             }
         }
     }
@@ -124,15 +124,15 @@ public class Parser {
     private static void checkValidityDelete(String input, TaskList taskList) throws DukeException {
         String[] splittedInput = input.split(" ");
         if (splittedInput.length == 1) {
-            throw new DukeException("☹ OOPS!!! You must specify an index");
+            throw new DukeException(":( OOPS!!! You must specify an index");
         } else {
             if (HelpfulFunctions.isInteger(splittedInput[1])) {
                 int index = Integer.parseInt(splittedInput[1]);
                 if (index < 1 || index > taskList.getSize()) {
-                    throw new DukeException("☹ OOPS!!! Your index is out of range");
+                    throw new DukeException(":( OOPS!!! Your index is out of range");
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! Your second argument must be an integer");
+                throw new DukeException(":( OOPS!!! Your second argument must be an integer");
             }
         }
     }

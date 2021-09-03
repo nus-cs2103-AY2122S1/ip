@@ -8,6 +8,7 @@ import duke.task.Todo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -27,7 +28,7 @@ public class Storage {
      * @param filePath The relative filepath of the storage file.
      */
     public Storage(String filePath) {
-        file = new File("data/duke.txt");
+        file = new File(filePath);
         // Create folder for the file if it does not exist
         if (!file.getParentFile().exists()) {
             file.getParentFile().mkdirs();
@@ -38,8 +39,10 @@ public class Storage {
      * Saves the tasks within the task list into the storage file.
      *
      * @param taskList The TaskList object storing all the tasks.
+     * @throws IOException If the storage filepath exists but is a directory rather than a regular file,
+     *  does not exist but cannot be created, or cannot be opened for any other reason.
      */
-    public void saveTasksToFile(TaskList taskList) {
+    public void saveTasksToFile(TaskList taskList) throws IOException {
         taskList.saveContents(file);
     }
 

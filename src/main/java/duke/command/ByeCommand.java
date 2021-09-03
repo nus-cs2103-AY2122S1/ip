@@ -13,14 +13,15 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Prints out a farewell message
+     * Returns a farewell message
      *
      * @param taskList The TaskList object storing all the tasks.
      * @param storage The Storage object which was instantiated with the appropriate storage filepath.
+     * @return The farewell message.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        Ui.sayBye();
+    public String execute(TaskList taskList, Storage storage) {
+        return Ui.farewellMessage();
     }
 
     /**
