@@ -31,12 +31,11 @@ class Duke {
         Ui.show("Hello! I'm Duke", "What can I do for you?");
         while (true) {
             String[] result = duke.handleInput(Ui.nextLine());
-            if (result != null) {
-                Ui.show(result);
-            } else {
+            if (result == null) {
                 Ui.show("Bye. Hope to see you again soon!");
                 return;
             }
+            Ui.show(result);
         }
     }
 
