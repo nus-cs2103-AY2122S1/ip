@@ -1,6 +1,6 @@
 package duke.operation;
 
-import duke.Parser.Parser;
+import duke.parser.Parser;
 import duke.exception.DukeException;
 
 import java.util.ArrayList;
@@ -30,9 +30,10 @@ public class TaskList {
 	 * @param inputLine input string
 	 * @throws DukeException
 	 */
-	public void addTask(Command command, String inputLine) throws DukeException {
+	public String addTask(Command command, String inputLine) throws DukeException {
 		String message;
 		Task task;
+		String guiOutput = "";
 		switch (command) {
 		case TODO: {
 			Parser.checkIfFirstWordValid(inputLine, "todo");
@@ -46,7 +47,7 @@ public class TaskList {
 			}
 			task = new ToDo(inputLine.substring(5));
 			this.taskList.add(task);
-			printAddTask(taskList.size(), task);
+			guiOutput = printAddTask(taskList.size(), task);
 			break;
 		}
 		case DEADLINE: {
@@ -61,7 +62,7 @@ public class TaskList {
 			}
 			task = Deadline.splitDeadline(inputLine);
 			taskList.add(task);
-			printAddTask(taskList.size(), task);
+			guiOutput = printAddTask(taskList.size(), task);
 			break;
 		}
 		case EVENT: {
@@ -76,17 +77,17 @@ public class TaskList {
 			}
 			task = Event.splitEvent(inputLine);
 			taskList.add(task);
-			printAddTask(taskList.size(), task);
+			guiOutput = printAddTask(taskList.size(), task);
 			break;
 		}
 		default: {
-			System.out.println("TaskList");
 			message = "____________________________________________________________\n"
 					+ "OOPS!!! I'm sorry, but I don't know what that means :-(\n"
 					+ "____________________________________________________________\n";
 			throw new DukeException(message);
 		}
 		}
+		return guiOutput;
 	}
 
 
@@ -95,12 +96,12 @@ public class TaskList {
 	 *
 	 * @param nextLine input string
 	 */
-	public void finishTask(String nextLine) {
+	public String finishTask(String nextLine) {
 		int intValue = Integer.parseInt(nextLine.replaceAll("[^0-9]", ""));
 		Task doneTask = this.taskList.get(intValue - 1);
 		doneTask.doneTask();
 		this.taskList.set(intValue - 1, doneTask);
-		printDoneTask(doneTask);
+		return printDoneTask(doneTask);
 	}
 
 	/**
@@ -120,6 +121,22 @@ public class TaskList {
 	}
 
 	/**
+	 * Returns task list as String.
+	 */
+	public String getTaskListAsString() {
+		String message = "Here are the tasks in your list:\n";
+		int counter = 1;
+		for (Task taskForLoop : taskList) {
+			message += counter
+					+ "."
+					+ taskForLoop
+					+ "\n";
+			counter++;
+		}
+		return message;
+	}
+
+	/**
 	 * Prints filtered task list after FIND command.
 	 */
 	public void printFilteredList() {
@@ -136,26 +153,44 @@ public class TaskList {
 	}
 
 	/**
+	 * Returns filtered task list.
+	 */
+	public String getFilteredTaskListAsString() {
+		String output = "Here are the tasks found by your keyword in your list:\n";
+		int counter = 1;
+		for (Task taskForLoop : taskList) {
+			output += counter
+					+ "."
+					+ taskForLoop
+					+ "\n";
+			counter++;
+		}
+		return output;
+	}
+
+	/**
 	 * Deletes a task from the storeroom.
 	 *
 	 * @param nextLine input string
 	 */
-	public void deleteTask(String nextLine) {
+	public String deleteTask(String nextLine) {
 		int intValue = Integer.parseInt(nextLine.replaceAll("[^0-9]", ""));
 		Task taskToDelete = taskList.get(intValue - 1);
 		taskList.remove(intValue - 1);
-		printDeleteTask(taskList.size(), taskToDelete);
+		return printDeleteTask(taskList.size(), taskToDelete);
 	}
 
 	/**
 	 * Prints the task that is marked done.
 	 */
-	public void printDoneTask(Task doneTask) {
+	public String printDoneTask(Task doneTask) {
+		String message = "Nice! I've marked this task as done:\n  "
+				+ doneTask;
 		System.out.println("____________________________________________________________\n"
-				+ "Nice! I've marked this task as done:\n  "
-				+ doneTask
+				+ message
 				+ "\n"
 				+ "____________________________________________________________\n");
+		return message;
 	}
 
 	/**
@@ -163,16 +198,18 @@ public class TaskList {
 	 *
 	 * @param size current size of the storeroom
 	 */
-	public void printAddTask(int size, Task task) {
-		System.out.println("____________________________________________________________\n"
-				+ "Got it. I've added this task:\n  "
+	public String printAddTask(int size, Task task) {
+		String message = "Got it. I've added this task:\n  "
 				+ task
 				+ "\n"
 				+ "Now you have "
 				+ size
-				+ " tasks in the list."
+				+ " tasks in the list.";
+		System.out.println("____________________________________________________________\n"
+				+ message
 				+ "\n"
 				+ "____________________________________________________________\n");
+		return message;
 	}
 
 	/**
@@ -180,16 +217,19 @@ public class TaskList {
 	 *
 	 * @param size current size of the storeroom
 	 */
-	public void printDeleteTask(int size, Task task) {
-		System.out.println("____________________________________________________________\n"
-				+ "Noted. I've removed this task:\n  "
+	public String printDeleteTask(int size, Task task) {
+		String message = "Noted. I've removed this task:\n  "
 				+ task
 				+ "\n"
 				+ "Now you have "
 				+ size
-				+ " tasks in the list."
+				+ " tasks in the list.";
+		System.out.println("____________________________________________________________\n"
+				+ message
 				+ "\n"
 				+ "____________________________________________________________\n");
+		return message;
+
 	}
 
 	/**
@@ -197,7 +237,7 @@ public class TaskList {
 	 *
 	 * @param nextLine input String
 	 */
-	public void findTask(String nextLine) throws DukeException {
+	public TaskList findTask(String nextLine) throws DukeException {
 		ArrayList<Task> filteredArrayList = new ArrayList<>();
 		String keyword = nextLine.substring(5);
 		if (taskList.size() == 0) {
@@ -209,6 +249,6 @@ public class TaskList {
 			}
 		}
 		TaskList filteredTaskList = new TaskList(filteredArrayList);
-		filteredTaskList.printFilteredList();
+		return filteredTaskList;
 	}
 }
