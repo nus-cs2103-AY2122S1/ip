@@ -39,22 +39,24 @@ public class Storage {
         if (!f.createNewFile()) {
             Scanner s = new Scanner(f);
             while (s.hasNextLine()) {
-                String[] line = s.nextLine().split(" \\| ");
+                String line = s.nextLine();
+                assert !line.equals("") : "line should not be an empty string";
+                String[] segments = line.split(" \\| ");
                 Task t;
-                switch(line[0]) {
+                switch(segments[0]) {
                     case "T":
-                        t = new Todo("todo " + line[2]);
+                        t = new Todo("todo " + segments[2]);
                         break;
                     case "D":
-                        t = new Deadline(line[2], LocalDate.parse(line[3]));
+                        t = new Deadline(segments[2], LocalDate.parse(segments[3]));
                         break;
                     case "E":
-                        t = new Event(line[2], LocalDate.parse(line[3]));
+                        t = new Event(segments[2], LocalDate.parse(segments[3]));
                         break;
                     default:
-                        throw new IllegalStateException("Unexpected value: " + line[0]);
+                        throw new IllegalStateException("Unexpected value: " + segments[0]);
                 }
-                if (line[1].equals("1")) {
+                if (segments[1].equals("1")) {
                     t.markAsDone();
                 }
                 result.add(t);
