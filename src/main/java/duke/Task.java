@@ -1,5 +1,9 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.stream.Collectors;
+
 /**
  * Represents an element in the <code>TaskList</code>.
  * Split into 3 types: <code>Todo, Deadline, Event</code>.
@@ -9,6 +13,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected Category category;
+    protected ArrayList<String> tags;
 
     public enum Category {
         TODO, DEADLINE, EVENT
@@ -18,11 +23,12 @@ public class Task {
      * Returns a Task object.
      *
      * @param description description of Task
-     * @param isDone indicates if Task has been completed
+     * @param isDone      indicates if Task has been completed
      */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+        this.tags = new ArrayList<>();
     }
 
     public String getStatusIcon() {
@@ -33,8 +39,33 @@ public class Task {
         this.isDone = true;
     }
 
+    public ArrayList<String> getTags() {
+        return this.tags;
+    }
+
+    public String printTags() {
+        if (this.tags.isEmpty()) {
+            return "";
+        }
+
+        String tagsList = this.tags
+            .stream()
+            .map(tag -> "#" + tag)
+            .collect(Collectors.joining(" "));
+        return tagsList;
+    }
+
+    public void addTag(String newTag) {
+        String tagToAdd = newTag.toLowerCase();
+
+        if (!this.tags.contains(tagToAdd)) {
+            this.tags.add(tagToAdd);
+            Collections.sort(this.tags);
+        }
+    }
+
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description + " " + this.printTags();
     }
 }

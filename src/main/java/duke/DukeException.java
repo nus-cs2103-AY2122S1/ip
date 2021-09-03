@@ -77,4 +77,11 @@ public class DukeException extends Exception {
             return "Oops :( Please key in a valid search to proceed!";
         }
     }
+
+    static class DukeInvalidTagException extends DukeException {
+        @Override
+        public String toString() {
+            return "Oops :( For adding tags, please follow the format 'tag [task index] [your tag]'.";
+        }
+    }
 }

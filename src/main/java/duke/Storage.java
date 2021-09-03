@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -41,27 +42,28 @@ public class Storage {
             assert taskData.length >= 3 : "there should be a category, binary and description minimally";
 
             String category = taskData[0].trim();
-            assert category.matches("T|D|E") : "only 0 or 1 valid";
+            assert category.matches("T|D|E") : "only T, D or E valid";
 
             String isDoneChar = taskData[1].trim();
             assert isDoneChar.matches("1|0") : "only 0 or 1 valid";
             boolean isDone = isDoneChar.equals("1");
             String description = taskData[2].trim();
+            String tags = taskData[3].trim();
 
             if (category.equals("T")) {
-                duke.getTasks().createTask(description, "", Task.Category.TODO, isDone, false);
+                duke.getTasks().createTask(description, "", Task.Category.TODO, isDone, false, tags);
                 continue;
             }
 
-            assert taskData.length == 4 : "there should be category, binary, description and date";
-            String time = taskData[3].trim();
+            assert taskData.length == 5 : "there should be category, binary, description, tags and date";
+            String time = taskData[4].trim();
 
             if (category.equals("D")) {
-                duke.getTasks().createTask(description, time, Task.Category.DEADLINE, isDone, false);
+                duke.getTasks().createTask(description, time, Task.Category.DEADLINE, isDone, false, tags);
                 continue;
             }
             if (category.equals("E")) {
-                duke.getTasks().createTask(description, time, Task.Category.EVENT, isDone, false);
+                duke.getTasks().createTask(description, time, Task.Category.EVENT, isDone, false, tags);
             }
         }
 
@@ -84,18 +86,19 @@ public class Storage {
 
             int done = task.isDone ? 1 : 0;
             String description = task.description;
+            ArrayList<String> tags = task.tags;
 
             switch (task.category) {
             case TODO:
-                newInput = newInput + ("T | " + done + " | " + description + "\n");
+                newInput = newInput + ("T | " + done + " | " + description + " | " + tags + "\n");
                 break;
             case DEADLINE:
                 Deadline deadline = (Deadline) task;
-                newInput = newInput + ("D | " + done + " | " + description + " | " + deadline.by + "\n");
+                newInput = newInput + ("D | " + done + " | " + description + " | " + tags + " | " + deadline.by + "\n");
                 break;
             case EVENT:
                 Event event = (Event) task;
-                newInput = newInput + ("E | " + done + " | " + description + " | " + event.at + "\n");
+                newInput = newInput + ("E | " + done + " | " + description + " | " + tags + " | " + event.at + "\n");
                 break;
             default:
             }

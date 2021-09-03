@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import duke.DukeException.DukeTaskNotFoundException;
 import duke.Task.Category;
 
 /**
@@ -53,6 +54,10 @@ public class Parser {
         return Integer.parseInt(message.substring(index + 1).trim()) - 1;
     }
 
+    private int getTagIndex(String[] splitTag) {
+        return Integer.parseInt(splitTag[1]) - 1;
+    }
+
     private boolean isBasicCommand(String command) {
         return message.trim().equals(command);
     }
@@ -86,8 +91,40 @@ public class Parser {
             && message.substring(index + 1).trim().chars().allMatch(Character::isDigit);
     }
 
-    private boolean isValidFindTodo(String message) {
+    private boolean isValidFindToDo(String message) {
         return message.length() > 5 && !message.substring(5).isBlank();
+    }
+
+    private boolean containsTag(Task task, String search) {
+        return task.tags.contains(search.substring(1));
+    }
+
+    private boolean containsSearchWord(Task task, String search) {
+        return task.description.toLowerCase().contains(search);
+    }
+
+    private ArrayList<Task> isFoundSearch(String search) {
+        ArrayList<Task> resultsArray = new ArrayList<>();
+
+        if (search.startsWith("#")) {
+            for (Task task : list) {
+                if (containsTag(task, search)) {
+                    resultsArray.add(task);
+                }
+            }
+        } else {
+            for (Task task : list) {
+                if (containsSearchWord(task, search)) {
+                    resultsArray.add(task);
+                }
+            }
+        }
+
+        return resultsArray;
+    }
+
+    private String[] splitTagCommand() {
+        return message.trim().split("\\s* \\s*");
     }
 
     private boolean timeGivenAfter(String keyword) {
@@ -109,6 +146,19 @@ public class Parser {
         default:
         }
         return "";
+    }
+
+    private boolean isValidTag(String[] splitTag) {
+
+        boolean isTagCommand = splitTag[0].equals("tag");
+        boolean isCorrectLength = splitTag.length == 3;
+
+        if (isTagCommand && isCorrectLength) {
+            boolean isIntTagIndex = splitTag[1].chars().allMatch(Character::isDigit);
+            return isIntTagIndex;
+        }
+
+        return false;
     }
 
     private boolean hasProperSyntaxOf(String keyword) {
@@ -140,8 +190,7 @@ public class Parser {
         resetResponse(); // Reinitialise response for next command
 
         if (isBasicCommand("bye")) {
-            appendResponse(duke.getUi().showGoodbyeMessage());
-            System.exit(0);
+            handleBye();
         }
 
         try {
@@ -151,6 +200,8 @@ public class Parser {
                 handleDelete();
             } else if (isMarkingCommand("done")) { // Mark tasks as done
                 handleDone();
+            } else if (isMarkingCommand("tag")) { // Add tag to task
+                handleTag();
             } else if (isAddingCommand("find")) { // Find tasks
                 handleFind();
             } else if (isAddingCommand("todo")) { // ToDo
@@ -167,6 +218,34 @@ public class Parser {
         }
 
         return response.trim();
+    }
+
+    private void handleBye() {
+        appendResponse(duke.getUi().showGoodbyeMessage());
+        System.exit(0);
+    }
+
+    private void handleTag() throws DukeException {
+
+        String[] splitTag = splitTagCommand();
+
+        if (!isValidTag(splitTag)) {
+            throw new DukeException.DukeInvalidTagException();
+        } else if (!indexInList(getTagIndex(splitTag))) {
+            throw new DukeTaskNotFoundException();
+        } else {
+            int taskIndex = getTagIndex(splitTag);
+            String tag = splitTag[2];
+            Task task = list.get(taskIndex);
+            task.addTag(tag);
+
+            try {
+                appendResponse(duke.getStorage().saveListToFile());
+            } catch (IOException e) {
+                appendResponse(duke.getUi().showLoadingError());
+            }
+            appendResponse(duke.getUi().showAddTag(tag, taskIndex));
+        }
     }
 
     private void handleDone() throws DukeException {
@@ -223,20 +302,13 @@ public class Parser {
     }
 
     private void handleFind() throws DukeException {
-        if (isValidFindTodo(message)) {
+        if (isValidFindToDo(message)) {
             String search = message.substring(5).trim();
-            ArrayList<Task> resultsArray = new ArrayList<>();
-            boolean isFound = false;
 
-            for (Task task : list) {
-                if (task.description.contains(search)) {
-                    isFound = true;
-                    resultsArray.add(task);
-                }
-            }
+            ArrayList<Task> searchResults = isFoundSearch(search);
 
-            if (isFound) {
-                appendResponse(duke.getUi().showSearchResults(resultsArray));
+            if (!searchResults.isEmpty()) {
+                appendResponse(duke.getUi().showSearchResults(searchResults));
             } else {
                 appendResponse(duke.getUi().showNoSearchResults());
             }
@@ -246,7 +318,7 @@ public class Parser {
     }
 
     private void handleToDo() throws DukeException {
-        if (isValidFindTodo(message)) {
+        if (isValidFindToDo(message)) {
             String description = message.substring(5).trim();
             handleNewTask(description, "", Category.TODO);
         } else {
@@ -320,7 +392,7 @@ public class Parser {
     }
 
     private void handleNewTask(String description, Object d1, Category category) {
-        appendResponse(duke.getTasks().createTask(description, d1, category, false, true));
+        appendResponse(duke.getTasks().createTask(description, d1, category, false, true, ""));
     }
 
 }
