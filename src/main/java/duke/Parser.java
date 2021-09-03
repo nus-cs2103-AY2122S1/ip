@@ -1,11 +1,19 @@
 package duke;
 
-import duke.command.*;
+import static duke.Commands.INVALID;
+
+import duke.DukeException.InvalidTaskIndexException;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
-import duke.DukeException.InvalidTaskIndexException;
-import static duke.Commands.INVALID;
 
 /**
  * Represents a parser to make sense of user input.
@@ -16,9 +24,9 @@ public class Parser {
 
     /**
      * Makes sense of the user input.
-     * @param fullCommand
-     * @return
-     * @throws DukeException
+     * @param fullCommand The input from user.
+     * @return A Command representation of the user's input.
+     * @throws DukeException Throws a DukeException if the user's input does not comply with current features.
      */
     public static Command parse(String fullCommand) throws DukeException {
         if (fullCommand.isBlank()) {
@@ -71,6 +79,12 @@ public class Parser {
         return INVALID;
     }
 
+    /**
+     * Converts the String representation of a number to an Integer representation.
+     * @param userDescription The task index input by the user.
+     * @return An Integer representation of the task index.
+     * @throws InvalidTaskIndexException Throws an InvalidTaskException if the user does not input a valid number.
+     */
     public static Integer toTaskIndex(String userDescription) throws InvalidTaskIndexException {
         try {
             return Integer.parseInt(userDescription);

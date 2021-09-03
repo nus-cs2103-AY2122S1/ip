@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.DukeException.InvalidInputException;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
-import duke.DukeException.InvalidInputException;
 
 public class InvalidCommand extends Command {
 

@@ -1,7 +1,5 @@
 package duke;
 
-import duke.task.*;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -9,13 +7,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 /**
  * Deals with loading tasks from the file and saving tasks in the file
  *
  * @author Adam Ho
  */
 public class Storage {
-    private final String BAR = " | ";
+    private static final String BAR = " | ";
     private String filePath;
 
     public Storage(String filePath) {
