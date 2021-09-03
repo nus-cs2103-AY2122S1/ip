@@ -1,8 +1,13 @@
 package duke.task;
 
+import duke.exception.InvalidInputException;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -39,6 +44,62 @@ public class TaskList {
         return taskNumber;
     }
 
+    public String addToDo(String description) {
+        return addComplete(new Todo(description));
+    }
+
+    public String addEvent(String description, String time) throws InvalidInputException {
+        String[] split = time.split(" ", 2);
+        LocalDate date;
+        LocalTime timing;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+            date = LocalDate.parse(split[0], formatter);
+        } catch (DateTimeParseException e) {
+            throw new InvalidInputException("Format should be in yyyy-mm-dd!");
+        }
+        if (split.length == 1) {
+            return addComplete(new Event(description, date));
+        } else {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                timing = LocalTime.parse(split[1], formatter);
+            } catch (DateTimeParseException e) {
+                return "Format should be in HH:mm";
+            }
+            return addComplete(new Event(description, date, timing));
+        }
+    }
+
+    public String addDeadline(String description, String time) throws InvalidInputException {
+        String[] split = time.split(" ", 2);
+        LocalDate date;
+        LocalTime timing;
+        try {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-M-d");
+            date = LocalDate.parse(split[0], formatter);
+        } catch (DateTimeParseException e) {
+            return "Format should be in yyyy-mm-dd!";
+        }
+        if (split.length == 1) {
+            return addComplete(new Deadline(description, date));
+        } else {
+            try {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+                timing = LocalTime.parse(split[1], formatter);
+            } catch (DateTimeParseException e) {
+                return "Format should be in HH:mm";
+            }
+            return addComplete(new Deadline(description, date, timing));
+        }
+    }
+
+    private String addComplete(Task t) {
+        tasks.add(t);
+        Storage.saveData(this);
+        return Ui.formatMessage("Got it. I've added this task: ", t.toString(), printTaskNumber(this));
+    }
+
     /**
      * Parses input from the user and marks task as done.
      *
@@ -50,7 +111,7 @@ public class TaskList {
             Task taskDone = tasks.get(taskDoneNum - 1);
             taskDone.markAsDone();
             Storage.saveData(this);
-            return "Nice! I've marked this task as done:" + '\n' + taskDone.toString();
+            return Ui.formatMessage("Nice, I've marked this task as done:", taskDone.toString());
         } catch (IndexOutOfBoundsException e) {
             return "☹ OOPS!!! No such task can be marked as done!";
         }
@@ -68,7 +129,7 @@ public class TaskList {
             taskToDelete.markUndone();
             tasks.remove(taskDeleteNum - 1);
             Storage.saveData(this);
-            return "Noted. I've removed this task: " + taskToDelete.toString() + '\n' + printTaskNumber(this);
+            return Ui.formatMessage("Noted, I've removed this task:" + taskToDelete, printTaskNumber(this));
         } catch (IndexOutOfBoundsException e) {
             return "☹ OOPS!!! No such task can be deleted!";
         }
@@ -116,7 +177,7 @@ public class TaskList {
      *
      * @param tasks a Tasklist object containing the tasks.
      */
-    public static String printItemList(TaskList tasks) {
+    public static String printTaskList(TaskList tasks) {
         StringBuilder sb = new StringBuilder();
         sb.append("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
@@ -133,6 +194,21 @@ public class TaskList {
     public String printTaskNumber(TaskList tasks) {
         return "Now you have " + tasks.size() + (tasks.size() == 1 ? " task" : " tasks")
                 + " in the list.";
+    }
+
+
+    public String printTasksWithKeyword(String keyword) {
+        TaskList listWithKeyword = new TaskList();
+        for (Task task : tasks) {
+            if (task.toString().contains(keyword)) {
+                listWithKeyword.add(task);
+            }
+        }
+        if (listWithKeyword.size() < 1) {
+            return "There are no tasks that matches this keyword!";
+        } else {
+            return TaskList.printTaskList(listWithKeyword);
+        }
     }
 
 }

@@ -9,15 +9,6 @@ import java.util.Scanner;
  * @version: Duke-Level-8
  */
 public class Ui {
-    private final static String lineBreak = "========================================================================";
-    private Scanner sc;
-
-    /**
-     * Constructor for a Storage object.
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
 
     /**
      * Prints the logo, together with a greeting.
@@ -74,7 +65,7 @@ public class Ui {
         return message;
     }
 
-    private String formatMessage(String... messages) {
+    public static String formatMessage(String... messages) {
         StringBuilder sb = new StringBuilder();
         for (String message: messages) {
             sb.append(message);
