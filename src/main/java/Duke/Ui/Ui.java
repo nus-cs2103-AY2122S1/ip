@@ -1,4 +1,4 @@
-package Duke;
+package Duke.Ui;
 
 import Duke.Tasks.Task;
 import Duke.Tool.TaskList;
@@ -16,14 +16,15 @@ public class Ui {
 
     /**
      * The method of showLogo at start
+     *
      */
-    public void showLogo() {
+    public String showLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
+        return logo;
     }
 
     /**
@@ -31,7 +32,7 @@ public class Ui {
      */
     public static void showWelcome(){
         System.out.println(INDENTATION + UNDERLINE);
-        System.out.println(INDENTATION + "Hello! I'm Duke.Duke\n" +
+        System.out.println(INDENTATION + "Hello! I'm Duke \n" +
                 INDENTATION + "What can I do for you?");
         System.out.println(INDENTATION + UNDERLINE);
 
@@ -68,9 +69,8 @@ public class Ui {
      * @param task
      * @param numRemoved
      */
-    public void showDoneMessage(TaskList task, int numRemoved) {
-        System.out.println(INDENTATION + UNDERLINE);
-        System.out.println(INDENTATION + "Nice! I've marked this task as done:");
+    public String showDoneMessage(TaskList task, int numRemoved) {
+        return INDENTATION + UNDERLINE + INDENTATION + "Nice! I've marked this task as done:\n"
         System.out.println(INDENTATION + " " + task.get(numRemoved));
         System.out.println(INDENTATION + UNDERLINE);
 

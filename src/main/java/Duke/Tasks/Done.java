@@ -2,7 +2,7 @@ package Duke.Tasks;
 
 import Duke.Tool.Storage;
 import Duke.Tool.TaskList;
-import Duke.Ui;
+import Duke.Ui.Ui;
 
 /**
  * Represents the Done task class
