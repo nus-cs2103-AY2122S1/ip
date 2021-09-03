@@ -1,13 +1,18 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 public class DeadlineTask extends Task {
     protected LocalDate time;
 
-    public DeadlineTask(String description, String time) {
+    public DeadlineTask(String description, String time) throws DukeException {
         super(description);
         this.type = "D";
-        this.time = LocalDate.parse(time);
+        try {
+            this.time = LocalDate.parse(time);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("OOPS!! wrong date format.\nthe format should be:\n\tyyyy-mm-dd");
+        }
     }
 
     public DeadlineTask(String description, boolean isDone, String time) {
