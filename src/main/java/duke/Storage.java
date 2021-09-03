@@ -100,9 +100,6 @@ public class Storage implements Storable {
      * @throws DukeException if string does not have sufficient parts for the task it represents.
      */
     private static Task parseSaveFormat(String save) throws DukeException {
-        // Assert that save is not null
-        assert save != null : "save argument must not be null.";
-
         // Split save string by the save separator.
         String[] splitSaveString = save.split(SAVE_SEPARATOR);
 

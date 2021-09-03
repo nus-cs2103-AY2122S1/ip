@@ -20,9 +20,6 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate by) {
         super(description);
-
-        // Assertion to ensure Deadline will not be created without a valid LocalDate.
-        assert by != null : "localDate 'by' parameter cannot be null";
         this.by = by;
     }
 

@@ -16,10 +16,6 @@ public class Task {
      * @param description Description of the task.
      */
     public Task(String description) {
-        // Asserts that task is not being created with empty string or null as description parameter.
-        assert description != null : "description string cannot be null.";
-        assert !description.equals("") : "description string cannot be empty";
-
         this.description = description;
         this.isDone = false;
     }
