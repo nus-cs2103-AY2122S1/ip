@@ -1,13 +1,15 @@
 package duke.io;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.Test;
+
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.ListCommand;
 import duke.exceptions.AuguryException;
 import duke.exceptions.InvalidActionException;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
 
