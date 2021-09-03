@@ -1,5 +1,7 @@
 package duke;
 
+import duke.command.Command;
+
 public class Duke {
     private Storage storage;
     private TaskList taskList;
@@ -11,7 +13,7 @@ public class Duke {
         try {
             taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            System.out.println(e.getMessage());
             taskList = new TaskList();
         }
     }
@@ -36,6 +38,11 @@ public class Duke {
 //    }
 //
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(taskList, storage, ui);
+        } catch (DukeException e) {
+            return ui.getError(e.getMessage());
+        }
     }
 }

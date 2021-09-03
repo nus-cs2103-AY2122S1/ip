@@ -20,10 +20,10 @@ public class AddCommand extends Command {
      * @param ui the Ui used during execution.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
         taskList.addTask(task);
         storage.add(task);
-        ui.showAddMessage(task.toString(), taskList);
+        return ui.getAddMessage(task.toString(), taskList);
     }
 
     /**

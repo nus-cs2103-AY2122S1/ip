@@ -25,11 +25,11 @@ public class Ui {
      * @param taskString String representation of the added task.
      * @param taskList TaskList the new task was added to.
      */
-    public void showAddMessage(String taskString, TaskList taskList) {
-        System.out.println("Got it. I've added this task:\n"
+    public String getAddMessage(String taskString, TaskList taskList) {
+        return "Got it. I've added this task:\n"
                 + "  " + taskString + "\n"
                 + "Now you have " + taskList.getSize()
-                + " task" + (taskList.getSize() > 1 ? "s" : "") + " in the list.");
+                + " task" + (taskList.getSize() > 1 ? "s" : "") + " in the list.";
     }
 
     /**
@@ -38,12 +38,12 @@ public class Ui {
      * @param taskString String representation of the deleted task.
      * @param taskList TaskList the task was deleted from.
      */
-    public void showDeleteMessage(String taskString, TaskList taskList) {
-        System.out.println("Noted. I've removed this task:\n"
+    public String getDeleteMessage(String taskString, TaskList taskList) {
+        return "Noted. I've removed this task:\n"
                 + "  "
                 + taskString + "\n"
                 + "Now you have " + taskList.getSize()
-                + " task" + (taskList.getSize() > 1 ? "s" : "") + " in the list.");
+                + " task" + (taskList.getSize() > 1 ? "s" : "") + " in the list.";
     }
 
     /**
@@ -51,10 +51,10 @@ public class Ui {
      *
      * @param taskString String representation of the task marked as done.
      */
-    public void showDoneMessage(String taskString) {
-        System.out.println("Nice! I've marked this task as done:\n"
+    public String getDoneMessage(String taskString) {
+        return "Nice! I've marked this task as done:\n"
                 + "  "
-                + taskString);
+                + taskString;
     }
 
     /**
@@ -62,14 +62,14 @@ public class Ui {
      *
      * @param taskList TaskList containing the list of tasks.
      */
-    public void showListMessage(TaskList taskList) {
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(taskList.toString());
+    public String getListMessage(TaskList taskList) {
+        return "Here are the tasks in your list:\n"
+                + taskList.toString();
     }
 
-    public void showFindMessage(String foundTasks) {
-        System.out.println("Here are the matching tasks in your list:");
-        System.out.println(foundTasks);
+    public String getFindMessage(String foundTasks) {
+        return "Here are the matching tasks in your list:\n"
+                + foundTasks;
     }
 
     /**
@@ -77,23 +77,22 @@ public class Ui {
      *
      * @param errorMessage Error message to show to the user.
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String getError(String errorMessage) {
+        return errorMessage;
     }
 
     /**
      * Shows the welcome message when the user starts the program.
      */
-    public void showWelcomeMessage() {
+    public String getWelcomeMessage() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        System.out.println("Hello! I'm Nukem\n"
-                + "What can I do for you?");
+        return "Hello from\n" + logo + "\n"
+                + "Hello! I'm Nukem\n"
+                + "What can I do for you?";
     }
 
     /**

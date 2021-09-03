@@ -13,8 +13,8 @@ public class ListCommand extends Command {
      * @param ui the Ui used during execution.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
-        ui.showListMessage(taskList);
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
+        return ui.getListMessage(taskList);
     }
 
     /**

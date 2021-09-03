@@ -20,11 +20,11 @@ public class DeleteCommand extends Command {
      * @param ui the Ui used during execution.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage, Ui ui) {
+    public String execute(TaskList taskList, Storage storage, Ui ui) {
         try {
             String taskString = taskList.deleteTask(index);
             storage.rewrite(taskList);
-            ui.showDeleteMessage(taskString, taskList);
+            return ui.getDeleteMessage(taskString, taskList);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Invalid task number!");
         }

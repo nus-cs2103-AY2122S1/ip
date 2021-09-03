@@ -12,7 +12,7 @@ public abstract class Command {
      * @param storage the Storage used during execution.
      * @param ui the Ui used during execution.
      */
-    public abstract void execute(TaskList taskList, Storage storage, Ui ui);
+    public abstract String execute(TaskList taskList, Storage storage, Ui ui);
 
     /**
      * Checks whether the command is the exit command.
