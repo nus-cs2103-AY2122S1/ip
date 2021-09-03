@@ -1,2 +1,2 @@
-T | 0 | Buy pen
-T | 1 | submit lab2
+T | 0 | 1
+T | 0 | 2
