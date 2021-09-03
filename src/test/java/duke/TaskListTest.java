@@ -17,9 +17,10 @@ public class TaskListTest {
     @Test
     public void deleteTaskTest(){
         TaskList tl = new TaskList();
-        tl.addTodo("greet the users!");
+        tl.addTodo("todo greet the users!");
+        tl.addDeadline("deadline sleep /by 2021-11-25 1800");
         tl.deleteTask(1);
         int ans = tl.size();
-        assertEquals(0, ans);
+        assertEquals(1, ans);
     }
 }

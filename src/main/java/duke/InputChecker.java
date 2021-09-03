@@ -1,4 +1,6 @@
 package duke;
+
+
 public class InputChecker {
     public String input;
 

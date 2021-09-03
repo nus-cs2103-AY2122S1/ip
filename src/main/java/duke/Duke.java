@@ -44,7 +44,6 @@ public class Duke{
         ui.listenForInputs(); // scan for user's keyed input and interact accordingly
         fileUpdater.updateListFile();
         ui.goodbye();
-
     }
 
 

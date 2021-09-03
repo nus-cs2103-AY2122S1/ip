@@ -30,7 +30,7 @@ public class GUI{
         System.out.println("Hello from\n" + logo);
         System.out.println("What can I do for you? :)");
 
-        return "Hello from\n" + logo + "\nWhat can I do for you? :)";
+        return "Hello from\n" + "DUKE!" + "\nWhat can I do for you? :)";
     }
 
     /**
