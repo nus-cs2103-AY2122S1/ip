@@ -6,19 +6,25 @@ import java.time.format.DateTimeFormatter;
 import duke.data.TaskList;
 
 /**
- * UI class that handles all output to the console for the program (No input).
+ * OutputFormatter class that cotains and formats strings for output to the user
  */
 public class OutputFormatter {
     private OutputFormatter() {}
 
+    /**
+     * Returns a pre-defined welcome message
+     *
+     * @return A fixed pre-defined welcome message
+     */
     public static String getWelcomeMessage() {
         return "Hello! I'm duke.\nWhat can I do for you?";
     }
 
     /**
-     * Sends a message to the user in the specified format.
+     * Returns a message to the user in a specified format (Deprecated).
      *
      * @param message The message to be sent to the user
+     * @return A formatted string containing the message to be sent to the user
      */
     public static String formatMessage(String message) {
         return "    ____________________________________________________________\n    "
@@ -27,16 +33,19 @@ public class OutputFormatter {
     }
 
     /**
-     * Sends a specialised message for in the case of an error in loading.
+     * Returns a string containing a message for in the case of an error in loading.
+     *
+     * @return A string containing an error message for unable to load tasks from save file
      */
     public static String getLoadingErrorMessage() {
         return "Error! Cannot load tasks from save file!";
     }
 
     /**
-     * Prints a given list of tasks.
+     * Returns a string containing the given list of tasks.
      *
      * @param taskList An object containing a list of tasks to be formatted and displayed to the user
+     * @return A string containing the list of given tasks
      */
     public static String formatTaskList(TaskList taskList) {
         // Construct the string containing the list of items that have been stored in
@@ -52,10 +61,11 @@ public class OutputFormatter {
     }
 
     /**
-     * Prints a given list of tasks that are due on the given date.
+     * Returns a string containing the given list of tasks.
      *
-     * @param taskList An object containing a list of tasks to be formatted and displayed to the user.
-     * @param date The date and time of the tasks we want to retrieve
+     * @param taskList An object containing a list of tasks to be formatted and displayed to the user
+     * @param date The date of the tasks we want to display to the user
+     * @return A string containing the list of given tasks
      */
     public static String formatTaskList(TaskList taskList, LocalDate date) {
         // Construct the string containing the list of items that have been stored in
