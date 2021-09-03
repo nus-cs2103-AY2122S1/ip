@@ -5,7 +5,7 @@ import java.util.Scanner;
 import duke.exceptions.DukeException;
 
 /** Class to handle all printing of messages */
-public class Ui {
+public class CliUi {
     private static final String SEPARATOR = "_".repeat(60);
     private static final String[] WELCOME_MESSAGE = {"Hello! I'm Duke", "What can I do for you?"};
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";

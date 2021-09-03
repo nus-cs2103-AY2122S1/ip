@@ -3,10 +3,10 @@ package duke;
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.gui.Gui;
+import duke.utils.CliUi;
 import duke.utils.Parser;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Ui;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +18,7 @@ public class Duke extends Application {
     private static final String DATA_FILE_PATH = "./data/duke.txt";
     private Storage storage;
     private TaskList taskList;
-    private Ui ui;
+    private CliUi cliUi;
     private boolean isExit = false;
 
     /**
@@ -27,12 +27,12 @@ public class Duke extends Application {
      * @param filePath File path of where the saved task list is.
      */
     public Duke(String filePath) {
-        this.ui = new Ui();
+        this.cliUi = new CliUi();
         this.storage = new Storage(filePath);
         try {
             this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            this.ui.showLoadingError();
+            this.cliUi.showLoadingError();
             this.taskList = new TaskList();
         }
     }
@@ -41,12 +41,12 @@ public class Duke extends Application {
      * Duke constructor. Loads stored tasks from default filepath.
      */
     public Duke() {
-        this.ui = new Ui();
+        this.cliUi = new CliUi();
         this.storage = new Storage(DATA_FILE_PATH);
         try {
             this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
-            this.ui.showLoadingError();
+            this.cliUi.showLoadingError();
             this.taskList = new TaskList();
         }
     }
@@ -55,17 +55,17 @@ public class Duke extends Application {
      * Method to initialize commandline version of Duke.
      */
     public void run() {
-        ui.showWelcome();
+        cliUi.showWelcome();
         Command command;
         boolean isExited = false;
         do {
             try {
-                String input = ui.readCommand();
+                String input = cliUi.readCommand();
                 command = Parser.parseNext(input);
-                command.execute(taskList, ui, storage);
+                command.execute(taskList, cliUi, storage);
                 isExited = command.hasExited();
             } catch (DukeException e) {
-                ui.printOut(e.getMessage());
+                cliUi.printOut(e.getMessage());
             }
         }
         while (!isExited);
@@ -82,7 +82,7 @@ public class Duke extends Application {
         String response;
         try {
             command = Parser.parseNext(input);
-            response = command.execute(taskList, ui, storage);
+            response = command.execute(taskList, cliUi, storage);
             isExit = command.hasExited();
         } catch (Exception e) {
             System.out.println(e.toString());

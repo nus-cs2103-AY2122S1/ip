@@ -3,7 +3,7 @@ package duke.commands;
 import duke.tasks.Task;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Ui;
+import duke.utils.CliUi;
 
 /** Abstract class to represent command when we add something to the taskList */
 public abstract class AddTaskCommand extends Command {
@@ -20,14 +20,14 @@ public abstract class AddTaskCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, CliUi cliUi, Storage storage) {
         tasks.addTask(task);
         String[] messages = new String[] {
             "Got it. I've added this task:",
             "    " + task.toString(),
             String.format("Now you have %d tasks in the list.", tasks.getSize())
         };
-        ui.printOut(messages);
+        cliUi.printOut(messages);
         storage.save(tasks);
         return String.join("\n", messages);
     }

@@ -1,15 +1,15 @@
 package duke.commands;
 
+import duke.utils.CliUi;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Ui;
 
 /** Represents command to list all values in the current taskList */
 public class ListCommand extends Command {
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String[] messages = tasks.showList(ui);
+    public String execute(TaskList tasks, CliUi cliUi, Storage storage) {
+        String[] messages = tasks.showList(cliUi);
         return String.join("\n", messages);
     }
 

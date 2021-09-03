@@ -8,11 +8,11 @@ public class DukeException extends Exception {
      * @param errorMessage Message to be shown to user when this exception occurs.
      */
     public DukeException(String errorMessage) {
-        super("☹ OOPS!!! " + errorMessage);
+        super("OOPS!!! " + errorMessage);
     }
 
     @Override
     public String toString() {
-        return String.format("☹ OOPS!!! %s", super.getMessage());
+        return String.format("OOPS!!! %s", super.getMessage());
     }
 }
