@@ -11,8 +11,8 @@ import duke.util.DateTimeUtils;
 import duke.util.FileUtils;
 
 /**
- * The is the TaskList class that that
- * contains a list of task.
+ * The is the TaskList class that contains a list of tasks
+ * and the operations of the tasks.
  */
 public class TaskList {
     private static final String DIR_NAME = "data";
@@ -40,7 +40,7 @@ public class TaskList {
      *
      * @return Tasks size.
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 
@@ -99,7 +99,7 @@ public class TaskList {
     public String[] printTasks() {
         return IntStream.range(0, tasks.size())
                 .mapToObj(i -> (i + 1) + ". " + tasks.get(i).toString())
-                .collect(Collectors.toList()).toArray(String[]::new);
+                        .collect(Collectors.toList()).toArray(String[]::new);
     }
 
     /**
@@ -115,32 +115,15 @@ public class TaskList {
                 String name = contents[2];
                 switch (taskID) {
                 case Todo.ID:
-                    Todo todo = new Todo(name, isDone.equals("0"));
-                    addTask(todo);
+                    addTodoTask(isDone, name);
                     break;
                 case Deadline.ID:
                     String byTime = contents[3];
-                    Deadline deadline = new Deadline(
-                            name,
-                            DateTimeUtils.parseDateTime(byTime),
-                            isDone.equals("0")
-                    );
-                    addTask(deadline);
+                    addDeadlineTask(isDone, name, byTime);
                     break;
                 case Event.ID:
                     String atTime = contents[3];
-                    String[] dateTimes = atTime.split(" ", 2);
-                    String[] times = dateTimes[1].split("-", 2);
-                    String atDate = dateTimes[0];
-                    String startTime = times[0];
-                    String endTime = times[1];
-                    EventDateTime eventDateTime = new EventDateTime(
-                            DateTimeUtils.parseDate(atDate),
-                            DateTimeUtils.parseTime(startTime),
-                            DateTimeUtils.parseTime(endTime)
-                    );
-                    Event event = new Event(name, eventDateTime, isDone.equals("0"));
-                    addTask(event);
+                    addEventTask(isDone, name, atTime);
                     break;
                 default:
                     break;
@@ -151,13 +134,42 @@ public class TaskList {
         }
     }
 
+    private void addTodoTask(String isDone, String name) {
+        Todo todo = new Todo(name, isDone.equals("0"));
+        addTask(todo);
+    }
+
+    private void addDeadlineTask(String isDone, String name, String byTime) {
+        Deadline deadline = new Deadline(
+                name,
+                DateTimeUtils.parseDateTime(byTime),
+                isDone.equals("0")
+        );
+        addTask(deadline);
+    }
+
+    private void addEventTask(String isDone, String name, String atTime) {
+        String[] dateTimes = atTime.split(" ", 2);
+        String[] times = dateTimes[1].split("-", 2);
+        String atDate = dateTimes[0];
+        String startTime = times[0];
+        String endTime = times[1];
+        EventDateTime eventDateTime = new EventDateTime(
+                DateTimeUtils.parseDate(atDate),
+                DateTimeUtils.parseTime(startTime),
+                DateTimeUtils.parseTime(endTime)
+        );
+        Event event = new Event(name, eventDateTime, isDone.equals("0"));
+        addTask(event);
+    }
+
     /**
      * Saves tasks to file with path: src/data/duke.txt.
      */
     public void saveTasksToFile() throws DukeIoException {
         List<String> formattedTasks = tasks.stream()
                 .map(task -> String.join(" | ", task.formatTask()))
-                .collect(Collectors.toList());
+                        .collect(Collectors.toList());
         boolean isSaved = FileUtils.isFileSaved(DIR_NAME, FILE_NAME, formattedTasks);
         if (!isSaved) {
             throw new DukeIoException("☹ OOPS!!! Save tasks to file error.");
@@ -172,9 +184,9 @@ public class TaskList {
     public String[] findTasks(String keyword) {
         List<Task> filteredTasks = tasks.stream()
                 .filter(task -> task.getName().contains(keyword))
-                .collect(Collectors.toList());
+                        .collect(Collectors.toList());
         return IntStream.range(0, filteredTasks.size())
                 .mapToObj(i -> (i + 1) + ". " + filteredTasks.get(i).toString())
-                .collect(Collectors.toList()).toArray(String[]::new);
+                        .collect(Collectors.toList()).toArray(String[]::new);
     }
 }

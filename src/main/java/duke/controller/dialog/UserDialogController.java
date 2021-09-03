@@ -11,6 +11,7 @@ import javafx.scene.layout.Pane;
 public class UserDialogController extends DialogController {
     private static final double LAYOUT_X = 115;
     private static final double LAYOUT_Y = 8;
+    private static final String USER_DIALOG_FXML_PATH = "/view/UserDialog.fxml";
 
     @FXML
     private Pane dialog;
@@ -23,7 +24,7 @@ public class UserDialogController extends DialogController {
      */
     public UserDialogController(String text)
             throws IOException {
-        super("/view/UserDialog.fxml");
+        super(USER_DIALOG_FXML_PATH);
         addMessageBox(dialog, text, LAYOUT_X, LAYOUT_Y);
     }
 
@@ -36,7 +37,7 @@ public class UserDialogController extends DialogController {
      */
     public UserDialogController(String text, double height)
             throws IOException {
-        super("/view/UserDialog.fxml", height);
+        super(USER_DIALOG_FXML_PATH, height);
         addMessageBox(dialog, text, LAYOUT_X, LAYOUT_Y);
     }
 }

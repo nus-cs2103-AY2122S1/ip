@@ -7,8 +7,8 @@ import java.util.Scanner;
  * The is the Ui class for UI display.
  */
 public class Ui {
-    private static final String HORIZONTAL_LINE =
-            "    ____________________________________________________________";
+    private static final String HORIZONTAL_LINE
+            = "    ____________________________________________________________";
     private static final String INDENTATION = "     ";
     private final Scanner scanner;
 
