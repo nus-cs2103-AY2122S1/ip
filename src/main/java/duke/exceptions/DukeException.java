@@ -12,6 +12,7 @@ public class DukeException extends RuntimeException {
      */
     public DukeException(String message) {
         super(message);
+        assert message != null : "DukeException message should not be null.";
         this.message = message;
     }
 

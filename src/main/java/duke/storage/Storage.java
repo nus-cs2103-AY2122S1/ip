@@ -46,6 +46,7 @@ public class Storage {
             Scanner sc = new Scanner(f); // create a Scanner using the File as the source
             while (sc.hasNext()) {
                 String input = sc.nextLine();
+                assert !input.equals("") : "User's input should not be empty.";
                 String[] splitStr = input.split("\\|");
                 Task t;
                 if (splitStr[0].trim().equals("T")) {

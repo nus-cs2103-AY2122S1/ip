@@ -47,6 +47,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
+        assert d != null : "Duke should not be null";
         duke = d;
     }
 
@@ -58,6 +59,8 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        assert input != null : "User input should not be null.";
+        assert response != null : "Duke response should not be null.";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

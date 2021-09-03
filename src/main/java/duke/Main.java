@@ -14,13 +14,15 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data.txt");
+    private final Duke duke = new Duke("data.txt");
 
     @Override
     public void start(Stage stage) {
+        assert stage != null : "Stage should not be null.";
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            assert ap != null : "AnchorPane should not be null.";
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);

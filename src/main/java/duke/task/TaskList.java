@@ -33,13 +33,14 @@ public class TaskList {
      */
     public String addTask(Task t, Ui ui) {
         String str = ui.addTaskMessage(t);
+        assert t != null : "Task to be added should not be null.";
         tasks.add(t);
         return str + ui.printTaskLength(this);
     }
 
     /** Prints all tasks in the variable tasks */
     public String printAllTasks() {
-        StringBuilder str = new StringBuilder("");
+        StringBuilder str = new StringBuilder();
         for (int i = 0; i < this.numberOfTasks(); i++) {
             str.append(i + 1).append(".").append(this.taskNumber(i)).append("\n");
         }

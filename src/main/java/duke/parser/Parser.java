@@ -22,7 +22,7 @@ public class Parser {
     private final String input;
     private boolean isByeCommand;
 
-    /** A list of all valid commands recognised */
+    /** A list of all valid commands recognised. */
     enum Commands {
         BYE, LIST, DONE, DELETE, TODO, DEADLINE, EVENT, FIND
     }
@@ -75,12 +75,13 @@ public class Parser {
     }
 
     /**
-     * Executes a command given by the user.
+     * Executes a command given by the user and returns a String that contains all the corresponding
+     * texts associated with the command.
      *
      * @param tasks The current list of tasks.
      * @param ui The current user interface.
      * @param storage The storage to store/load data from.
-     * @return
+     * @return A String that contains the corresponding texts associated with the command.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String str;
@@ -90,7 +91,7 @@ public class Parser {
         }
         Task t;
         if (input.equals(Commands.LIST.toString().toLowerCase())) {
-            str = taskCommand(tasks, ui);
+            str = listCommand(tasks, ui);
         } else if (input.startsWith(Commands.DONE.toString().toLowerCase())) {
             str = doneCommand(tasks, ui);
         } else if (input.startsWith(Commands.DELETE.toString().toLowerCase())) {
@@ -107,6 +108,7 @@ public class Parser {
             } else {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
+            assert t != null : "Task to be added should not be null.";
             str = tasks.addTask(t, ui);
         }
         try {
@@ -114,14 +116,18 @@ public class Parser {
         } catch (IOException e) {
             str = ui.printError(e);
         }
+        assert str != null : "String to be printed out by execute() should not be null.";
+        assert !str.isEmpty() : "String to be printed out by execute() should not be empty.";
         return str;
     }
 
     /**
-     * Finds all related tasks which contains input as a keyword.
+     * Finds all related tasks which contains input as a keyword and returns a String that contains texts
+     * to be printed out by "find" command.
      *
      * @param tasks The current list of tasks by the user.
      * @param ui The current user interface by the user.
+     * @return A string that contains texts to be printed out by "find" command.
      */
     public String findCommand(TaskList tasks, Ui ui) {
         ArrayList<Task> list = new ArrayList<>();
@@ -129,6 +135,7 @@ public class Parser {
         String str = ui.matchTaskMessage();
         for (int i = 0; i < tasks.numberOfTasks(); i++) {
             if (tasks.taskNumber(i).getDescription().contains(description)) {
+                assert tasks.taskNumber(i) != null : "Task to be added should not be null.";
                 list.add(tasks.taskNumber(i));
             }
         }
@@ -136,20 +143,40 @@ public class Parser {
         return str + matchingTasks.printAllTasks();
     }
 
-    /** Prints out all user's tasks in numerical order. */
-    public String taskCommand(TaskList tasks, Ui ui) {
+    /**
+     * List all user's tasks and returns a String that contains texts to be printed out by "list" command.
+     *
+     * @param tasks A TaskList object containing all user's tasks.
+     * @param ui The current user interface by the user.
+     * @return A String that contains texts to be printed out by "list" command.
+     */
+    public String listCommand(TaskList tasks, Ui ui) {
         return ui.taskListMessage() + "\n" + tasks.printAllTasks();
     }
 
-    /** Marks a task as done. */
+    /**
+     * Marks a task as done and returns a String that contains texts to be printed out by "done" command.
+     *
+     * @param tasks A TaskList object containing all user's tasks.
+     * @param ui The current user interface by the user.
+     * @return A String that contains texts to be printed out by "done" command.
+     */
     public String doneCommand(TaskList tasks, Ui ui) {
+        // format is "done x", for any positive integer x
         String[] splitStr = input.split("\\s+");
         tasks.taskNumber(Integer.parseInt(splitStr[1]) - 1).markTaskDone();
         return ui.taskDone(tasks.taskNumber(Integer.parseInt(splitStr[1]) - 1));
     }
 
-    /** Deletes a task from the list. */
+    /**
+     * Deletes a task from the list.
+     *
+     * @param tasks A TaskList object containing all user's tasks.
+     * @param ui The current user interface by the user.
+     * @return A String that contains texts to be printed out by "delete" command.
+     */
     public String deleteCommand(TaskList tasks, Ui ui) {
+        // format is "delete x", for any positive integer x
         String[] splitStr = input.split("\\s+");
         String str = ui.deleteTask(tasks.taskNumber(Integer.parseInt(splitStr[1]) - 1));
         tasks.removeTask(Integer.parseInt(splitStr[1]) - 1);
