@@ -1,10 +1,13 @@
 package tiger.components;
 
-import java.util.ArrayList;
-import java.util.Locale;
-
+import tiger.constants.Priority;
 import tiger.exceptions.actions.TigerIndexOutOfBoundsException;
 import tiger.exceptions.storage.TigerStorageLoadException;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 
 /**
@@ -31,6 +34,47 @@ public class TaskList {
 
     private TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
+    }
+
+    /**
+     * Given a String loaded from storage, interpret it and return its corresponding {@code TaskList}.
+     *
+     * @param s String loaded from storage.
+     * @return the corresponding {@code TaskList} object.
+     * @throws TigerStorageLoadException if the loaded string is corrupted, or if there is so {@code IOException}.
+     */
+
+    public static TaskList getTaskListFromStringRepresentation(String s) throws TigerStorageLoadException {
+        String[] stringArray = s.split("\n");
+        ArrayList<Task> newTaskList = new ArrayList<>();
+        for (String line : stringArray) {
+            if (line.length() != 0) {
+                newTaskList.add(Task.getTaskFromStringRepresentation(line));
+            }
+        }
+        return new TaskList(newTaskList);
+    }
+
+    /**
+     * Given a String loaded from storage, do a partial load and return its corresponding {@code TaskList}.
+     *
+     * @param s String loaded from storage.
+     * @return the corresponding {@code TaskList} object.
+     */
+
+    public static TaskList getPartialTaskListFromStringRepresentation(String s) {
+        String[] stringArray = s.split("\n");
+        ArrayList<Task> newTaskList = new ArrayList<>();
+        for (String line : stringArray) {
+            if (line.length() != 0) {
+                try {
+                    newTaskList.add(Task.getTaskFromStringRepresentation(line));
+                } catch (TigerStorageLoadException e) {
+                    continue;
+                }
+            }
+        }
+        return new TaskList(newTaskList);
     }
 
     /**
@@ -86,17 +130,33 @@ public class TaskList {
      */
 
     public TaskList findRelevantTasks(String searchString) {
-        TaskList taskList = new TaskList();
-        for (Task t: this.taskList) {
-            if (t.getTaskDescription().toLowerCase(Locale.ENGLISH).contains(searchString.toLowerCase(Locale.ENGLISH))) {
-                taskList.addTask(t);
-            }
-        }
+        List<Task> newTasks = this.taskList.stream()
+                .filter(t -> t.getTaskDescription().toLowerCase(Locale.ENGLISH).contains(searchString.toLowerCase(Locale.ENGLISH)))
+                .collect(Collectors.toList());
+
+        TaskList taskList = new TaskList(new ArrayList<>(newTasks));
+        return taskList;
+    }
+
+    /**
+     * Returns another {@code TaskList}, with task descriptions matching the search priority
+     *
+     * @param priority the of tasks to search for.
+     * @return a new {@code TaskList}.
+     */
+
+    public TaskList findTasksByPriority(Priority priority) {
+        List<Task> newTasks = this.taskList.stream()
+                .filter(t -> t.getPriority().equals(priority))
+                .collect(Collectors.toList());
+
+        TaskList taskList = new TaskList(new ArrayList<>(newTasks));
         return taskList;
     }
 
     /**
      * Returns the size of the {@code TaskList}.
+     *
      * @return the size of the {@code TaskList}.
      */
 
@@ -154,51 +214,10 @@ public class TaskList {
 
     public String getStorageRepresentation() {
         String returnString = "";
-        for (Task t: this.taskList) {
+        for (Task t : this.taskList) {
             returnString += t.getStorageRepresentation();
             returnString += "\n";
         }
         return returnString;
-    }
-
-    /**
-     * Given a String loaded from storage, interpret it and return its corresponding {@code TaskList}.
-     *
-     * @param s String loaded from storage.
-     * @return the corresponding {@code TaskList} object.
-     * @throws TigerStorageLoadException if the loaded string is corrupted, or if there is so {@code IOException}.
-     */
-
-    public static TaskList getTaskListFromStringRepresentation(String s) throws TigerStorageLoadException {
-        String[] stringArray = s.split("\n");
-        ArrayList<Task> newTaskList = new ArrayList<>();
-        for (String line: stringArray) {
-            if (line.length() != 0) {
-                newTaskList.add(Task.getTaskFromStringRepresentation(line));
-            }
-        }
-        return new TaskList(newTaskList);
-    }
-
-    /**
-     * Given a String loaded from storage, do a partial load and return its corresponding {@code TaskList}.
-     *
-     * @param s String loaded from storage.
-     * @return the corresponding {@code TaskList} object.
-     */
-
-    public static TaskList getPartialTaskListFromStringRepresentation(String s) {
-        String[] stringArray = s.split("\n");
-        ArrayList<Task> newTaskList = new ArrayList<>();
-        for (String line: stringArray) {
-            if (line.length() != 0) {
-                try {
-                    newTaskList.add(Task.getTaskFromStringRepresentation(line));
-                } catch (TigerStorageLoadException e) {
-                    continue;
-                }
-            }
-        }
-        return new TaskList(newTaskList);
     }
 }
