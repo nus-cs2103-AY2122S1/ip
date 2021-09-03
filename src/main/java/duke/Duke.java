@@ -1,7 +1,7 @@
 package duke;
 
 import duke.views.cli.Cli;
-import duke.views.cli.strategies.MultiType;
+import duke.views.cli.strategies.MultiTypeDelegated;
 import duke.views.gui.Launcher;
 import javafx.application.Application;
 
@@ -19,7 +19,7 @@ public class Duke {
      * Runs the CLI application.
      */
     public static void runCli() {
-        Cli chatbot = new Cli(new MultiType());
+        Cli chatbot = new Cli(new MultiTypeDelegated());
         chatbot.main();
     }
 
