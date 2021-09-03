@@ -10,7 +10,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-/** A class that contains the task list and deals with add/delete operation on the list. */
+/**
+ * A class that contains the task list and deals with add/delete operation on the list.
+ */
 public class TaskList {
 
     private enum TaskType {
@@ -21,25 +23,24 @@ public class TaskList {
     private int taskNum;
 
     /**
-     * A constructor for class TaskList.
+     * Constructs a TaskList instance that contains the task list and deals with add/delete operation on the list.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
-     * A constructor for class TaskList.
+     * Constructs a TaskList instance that contains the task list and deals with add/delete operation on the list.
      *
      * @param storageLoad The list containing all the user's tasks.
      * @throws DukeException The exception that handles the possible exceptions thrown when the program runs.
      */
     public TaskList(List<String> storageLoad) throws DukeException {
-
         if (storageLoad == null) {
             throw new DukeException("Loading failed!");
         }
 
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
 
         for (String taskString : storageLoad) {
             // Extract task details into three parts
@@ -84,7 +85,7 @@ public class TaskList {
     }
 
     /**
-     * Add task to the task list.
+     * Adds task to the task list.
      *
      * @param task The task to be added.
      */
@@ -94,7 +95,7 @@ public class TaskList {
     }
 
     /**
-     * Delete task from the task list.
+     * Deletes task from the task list.
      *
      * @param taskNum The task to be deleted.
      */

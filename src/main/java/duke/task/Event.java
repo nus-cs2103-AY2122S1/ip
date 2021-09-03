@@ -9,7 +9,7 @@ public class Event extends Task {
     protected LocalDate at;
 
     /**
-     * A constructor for class Event.
+     * Constructs an Event instance which is one of the task's type.
      *
      * @param description The task description.
      * @param at The date of the task being carried out.
@@ -20,22 +20,26 @@ public class Event extends Task {
     }
 
     /**
-     * Return a string representation in the format to be written in tasks.txt file.
+     * Returns a string representation in the format to be written in tasks.txt file.
      *
      * @return The string representation in the format to be written in tasks.txt file.
      */
     @Override
     public String toDataString() {
-        return String.format("EVENT %s | %s", super.toDataString(), this.at);
+        return String.format("EVENT %s | %s", super.toDataString(), at);
     }
 
     /**
-     * Return a string representation of this task.
+     * Returns a string representation of this task.
      *
      * @return The string representation of this task.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[E]"
+                + super.toString()
+                + " (at: "
+                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                + ")";
     }
 }

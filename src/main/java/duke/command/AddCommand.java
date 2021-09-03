@@ -2,12 +2,10 @@ package duke.command;
 
 import duke.exception.IncompleteDescriptionException;
 import duke.exception.InvalidDateFormatException;
-
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -15,7 +13,9 @@ import duke.util.Ui;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-/** A class that handles task-addition command. */
+/**
+ * A class that handles task-addition command.
+ */
 public class AddCommand extends Command{
 
     private enum TaskType {
@@ -26,43 +26,49 @@ public class AddCommand extends Command{
     private final String taskDescriptions;
 
     /**
-     * A constructor for class AddCommand.
+     * Constructs an AddCommand instance that handles the logic of task-addition.
      *
      * @param taskType The type of the to-be-added task.
      * @param taskDescriptions The description of the to-be-added task.
      */
     public AddCommand(String taskType, String taskDescriptions) {
-
         this.taskType = taskType;
         this.taskDescriptions = taskDescriptions;
     }
 
-    private String[] validateCommand()
-            throws IncompleteDescriptionException,
-            InvalidDateFormatException {
+    private String[] validateCommand() throws IncompleteDescriptionException, InvalidDateFormatException {
+        // The descriptions of the task splits into two components.
+        String[] descriptionComponents = taskDescriptions.split(" /by | /at ", 2);
 
-        String[] descriptionComponents = this.taskDescriptions.split(" /by | /at ", 2);
+        // The messages used to alert the user for unexpected situations.
         String descriptionMessage = "The description of a %s is incomplete.";
         String dateMessage = "Please specify the date in yyyy-mm-dd format!";
 
-        if (this.taskType.equals("TODO")) {
+        if (taskType.equals("TODO")) {
             return descriptionComponents;
         }
 
-        if (descriptionComponents.length < 2 || descriptionComponents[1].trim().isEmpty()) {
-            throw new IncompleteDescriptionException(String.format(descriptionMessage, this.taskType.toLowerCase()));
+        // Checks whether the command consists of 2 parts and if the date is specified in the command.
+        boolean isShortDescription = descriptionComponents.length < 2;
+        boolean isIncompleteDescription = isShortDescription || descriptionComponents[1].trim().isEmpty();
+
+        if (isIncompleteDescription) {
+            throw new IncompleteDescriptionException(String.format(descriptionMessage, taskType.toLowerCase()));
         }
 
-        if (!descriptionComponents[1].matches("\\d{4}-\\d{2}-\\d{2}")) {
+        // Checks if the date specified match the format.
+        boolean matchDateFormat = descriptionComponents[1].matches("\\d{4}-\\d{2}-\\d{2}");
+
+        if (matchDateFormat) {
+            return descriptionComponents;
+        } else {
             throw new InvalidDateFormatException(dateMessage);
         }
 
-        return descriptionComponents;
     }
 
     private Task createTask(String description, LocalDate date) {
-
-        switch (TaskType.valueOf(this.taskType)) {
+        switch (TaskType.valueOf(taskType)) {
         case TODO:
             return new Todo(description);
         case EVENT:
@@ -75,7 +81,7 @@ public class AddCommand extends Command{
     }
 
     /**
-     * Execute the task-addition command.
+     * Returns the response after executing the task-addition command.
      *
      * @param tasks The list that stores all the tasks to be added/deleted.
      * @param ui The ui that deals with interactions with the user.
@@ -84,32 +90,34 @@ public class AddCommand extends Command{
      * @throws InvalidDateFormatException The exception for handling command with invalid date format.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage)
-            throws IncompleteDescriptionException,
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IncompleteDescriptionException,
             InvalidDateFormatException {
         try {
+            // The components of the command that specifies the task's details.
             String[] taskComponents = validateCommand();
             String description = taskComponents[0];
-            LocalDate date = this.taskType.equals("TODO") ? null : LocalDate.parse(taskComponents[1]);
+            LocalDate date = taskType.equals("TODO") ? null : LocalDate.parse(taskComponents[1]);
 
+            // Create task, then add to the list and save it.
             Task task = createTask(description, date);
             tasks.add(task);
             storage.save(tasks);
 
-            return String.format("%s%s%s",
-                    "Got it. I've added this task:\n",
-                    "\t " + task,
-                    "\nNow you have " + tasks.getTaskNum() + " tasks in the list.");
-
+            return String.format("%s%s",
+                    "Got it. I've added this task:\n\t "
+                    + task,
+                    "\nNow you have "
+                    + tasks.getTaskNum()
+                    + " tasks in the list.");
         } catch (DateTimeParseException e) {
             return new Ui().showError(e.getMessage());
         }
     }
 
     /**
-     * Return a boolean value of whether it is a command that exit the program.
+     * Returns the boolean false since it is not a command that exits the program.
      *
-     * @return The boolean value of whether it is a command that exit the program.
+     * @return The boolean false.
      */
     @Override
     public boolean isExit() {

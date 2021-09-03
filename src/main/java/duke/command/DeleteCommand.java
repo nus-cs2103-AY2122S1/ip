@@ -5,13 +5,15 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-/** A class that handles task-deletion command. */
+/**
+ * A class that handles task-deletion command.
+ */
 public class DeleteCommand extends Command {
 
     private final int taskNum;
 
     /**
-     * A constructor for class DeleteCommand.
+     * Construcyts a DeleteCommand object that handles task-deletion command.
      *
      * @param taskNum The number of the to-be-deleted task.
      */
@@ -20,7 +22,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Execute the task-deletion command.
+     * Returns the response after executing the task-deletion command.
      *
      * @param tasks The list that stores all the tasks to be added/deleted.
      * @param ui The ui that deals with interactions with the user.
@@ -28,22 +30,23 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        Task task = tasks.getTasks().get(this.taskNum - 1);
-        tasks.delete(this.taskNum - 1);
+        // Get the task at specified index, delete it, and save the change.
+        Task task = tasks.getTasks().get(taskNum - 1);
+        tasks.delete(taskNum - 1);
         storage.save(tasks);
 
-        String response = String.format("%s%s%s",
-                "Noted. I've deleted this task:\n",
-                "\t " + task,
-                "\nNow you have " + tasks.getTaskNum() + " tasks in the list.");
-
-        return response;
+        return String.format("%s%s",
+                "Noted. I've deleted this task:\n\t "
+                + task,
+                "\nNow you have "
+                + tasks.getTaskNum()
+                + " tasks in the list.");
     }
 
     /**
-     * Return a boolean value of whether it is a command that exit the program.
+     * Returns the boolean false since it is not a command that exits the program.
      *
-     * @return The boolean value of whether it is a command that exit the program.
+     * @return The boolean false.
      */
     @Override
     public boolean isExit() {

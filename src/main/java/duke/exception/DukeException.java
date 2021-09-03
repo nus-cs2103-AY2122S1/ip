@@ -2,11 +2,13 @@ package duke.exception;
 
 import java.io.IOException;
 
-/** An exception that handles the possible exceptions thrown when the program runs. */
+/**
+ * An exception that handles the possible exceptions thrown when the program runs.
+ */
 public class DukeException extends IOException {
 
     /**
-     * A constructor for class DukeException.
+     * Constructs a DukeException instance that handles the possible exceptions thrown when the program runs.
      *
      * @param message The message to be displayed when this exception is caught.
      */
@@ -15,7 +17,7 @@ public class DukeException extends IOException {
     }
 
     /**
-     * Return a string representation of this exception.
+     * Returns a string representation of this exception.
      *
      * @return The string representation of this exception.
      */

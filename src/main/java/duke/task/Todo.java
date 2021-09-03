@@ -1,10 +1,12 @@
 package duke.task;
 
-/** A task class which falls under todo category. */
+/**
+ * A task class which falls under todo category.
+ */
 public class Todo extends Task {
 
     /**
-     * A constructor for class Todo.
+     * Constructs a Todo instance which is one of the task's type.
      *
      * @param description The task description.
      */
@@ -13,7 +15,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Return a string representation in the format to be written in tasks.txt file.
+     * Returns a string representation in the format to be written in tasks.txt file.
      *
      * @return The string representation in the format to be written in tasks.txt file.
      */
@@ -23,7 +25,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Return a string representation of this task.
+     * Returns a string representation of this task.
      *
      * @return The string representation of this task.
      */

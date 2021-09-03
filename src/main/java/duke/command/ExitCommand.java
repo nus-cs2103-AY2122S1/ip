@@ -4,11 +4,13 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-/** A class that handles exit-program command. */
+/**
+ * A class that handles exit-program command.
+ */
 public class ExitCommand extends Command {
 
     /**
-     * Execute the exit-program command.
+     * Returns the response after executing the exit-program command.
      *
      * @param tasks The list that stores all the tasks to be added/deleted.
      * @param ui The ui that deals with interactions with the user.
@@ -20,9 +22,9 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Return a boolean value of whether it is a command that exit the program.
+     * Returns the boolean true since it is a command that exits the program.
      *
-     * @return The boolean value of whether it is a command that exit the program.
+     * @return The boolean true.
      */
     @Override
     public boolean isExit() {

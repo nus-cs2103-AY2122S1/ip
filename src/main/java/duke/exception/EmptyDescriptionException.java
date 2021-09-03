@@ -1,14 +1,15 @@
 package duke.exception;
 
-/** An exception that handles command with empty description. */
+/**
+ * An exception that handles command with empty description.
+ */
 public class EmptyDescriptionException extends DukeException {
-
     /**
-     * A constructor for class EmptyDescriptionException.
+     * Constructs an EmptyDescriptionException instance that handles command with empty description.
      *
-     * @param messgae The message to be displayed when this exception is caught.
+     * @param message The message to be displayed when this exception is caught.
      */
-    public EmptyDescriptionException(String messgae) {
-        super(messgae);
+    public EmptyDescriptionException(String message) {
+        super(message);
     }
 }

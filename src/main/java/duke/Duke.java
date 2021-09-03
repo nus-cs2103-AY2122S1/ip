@@ -1,17 +1,15 @@
 package duke;
 
 import duke.command.Command;
-
-import duke.control.DialogBox;
-
 import duke.exception.DukeException;
-
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-/** A chatbot that handles todo-list operations. */
+/**
+ * A chat-bot that handles todo-list operations.
+ */
 public class Duke {
 
     private Storage storage;
@@ -19,21 +17,14 @@ public class Duke {
     private Ui ui;
 
     /**
-     * An empty constructor only for initializing Duke GUI.
-     *
-     */
-    public Duke() {
-
-    }
-
-    /**
-     * A constructor for the class Duke.
+     * Constructs a duke chat-bot.
      *
      * @param filePath The relative path of the file that stores the user's task list.
      */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -43,11 +34,13 @@ public class Duke {
     }
 
     /**
-     * Execute the chatbot functions based on user's command.
+     * Executes the duke chat-bot functions based on user's command.
      */
     public void run() {
         ui.showWelcome();
+
         boolean isExit = false;
+
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
@@ -64,7 +57,7 @@ public class Duke {
     }
 
     /**
-     * Initiate the Duke chatbot.
+     * Initiates the Duke chat-bot.
      *
      * @param args The argument attached to this method.
      */
@@ -73,7 +66,7 @@ public class Duke {
     }
 
     /**
-     * Generate a response to user input.
+     * Generates a response to user input.
      *
      * @param input The user input.
      */
