@@ -20,7 +20,7 @@ import side.util.Ui;
  *   - 'list' -> displays current list of tasks
  *   - 'done x' -> marks Task x as done
  *   - 'delete x' -> deletes Task x from the task list
- *   - 'find x' -> returns tasks with description matching x
+ *   - 'find x' -> returns tasks with description or a substring of description matching x
  *   - 'bye' -> exits the program
  *   - Other input patterns throw exceptions
  *
