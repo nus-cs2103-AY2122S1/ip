@@ -27,6 +27,16 @@ public abstract class Task {
     }
 
     /**
+     * Checks if given query is found in Task description, doing a case-insensitive search.
+     *
+     * @param query string to find in Task description.
+     * @return true if Task description contains query else false, ignoring case.
+     */
+    public boolean contains(String query) {
+        return Utility.containsIgnoreCase(name, query);
+    }
+
+    /**
      * Returns a Task that is represented by the input string s.
      *
      * @param s input string that represents task.

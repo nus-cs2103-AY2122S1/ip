@@ -17,6 +17,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean contains(String query) {
+        return Utility.containsIgnoreCase(Utility.dateToString(dueDate), query)
+                || super.contains(query);
+    }
+
+    @Override
     public String toFile() {
         return String.format("D | %s | %s", super.toFile(), Utility.dateToFile(dueDate));
     }
