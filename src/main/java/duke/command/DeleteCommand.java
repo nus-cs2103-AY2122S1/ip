@@ -16,7 +16,7 @@ import duke.util.Tasklist;
 public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
     private Tasklist list;
-    private final int toDelete;
+    private int toDelete;
 
     /**
      * Constructor for DeleteCommand.

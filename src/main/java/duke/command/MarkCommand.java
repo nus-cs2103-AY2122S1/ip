@@ -16,7 +16,7 @@ import duke.util.Tasklist;
 public class MarkCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
-    private final int toMark;
+    private int toMark;
     private Tasklist list;
 
     /**

@@ -16,7 +16,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class DukeDate {
 
-    private final DateTimeFormatter officialFormat = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
+    private static final DateTimeFormatter OFFICIAL_FORMAT = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
     private LocalDateTime startTime;
     private LocalDateTime endTime;
 
@@ -69,13 +69,13 @@ public class DukeDate {
      */
     public String getEndTimeString() {
 
-        return this.endTime.format(officialFormat);
+        return this.endTime.format(OFFICIAL_FORMAT);
 
     }
 
     @Override
     public String toString() {
-        return this.startTime.format(this.officialFormat) + " to " + this.endTime.format(this.officialFormat);
+        return this.startTime.format(OFFICIAL_FORMAT) + " to " + this.endTime.format(OFFICIAL_FORMAT);
     }
 
     @Override

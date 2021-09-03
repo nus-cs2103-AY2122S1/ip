@@ -15,7 +15,7 @@ import duke.util.Tasklist;
  */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD = "add";
-    private final String searchTerm;
+    private String searchTerm;
     private Tasklist list;
 
     /**
