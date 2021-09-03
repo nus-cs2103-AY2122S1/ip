@@ -4,19 +4,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Event extends Task {
-    protected String at;
+    protected String timeAt;
     private LocalDate eventDate;
 
     /**
      * Creates an Event Object.
      *
-     * @param description
-     * @param at
+     * @param description The description of the event.
+     * @param timeAt The time the event will be held at.
      */
-    public Event(String description, String at) {
+    public Event(String description, String timeAt) {
         super(description);
-        this.eventDate = LocalDate.parse(at);
-        this.at = at;
+        this.eventDate = LocalDate.parse(timeAt);
+        this.timeAt = timeAt;
     }
 
     /**
@@ -34,7 +34,7 @@ public class Event extends Task {
      */
     @Override
     public String getTime() {
-        return this.at;
+        return this.timeAt;
     }
 
     /**

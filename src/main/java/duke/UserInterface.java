@@ -3,24 +3,8 @@ package duke;
 import java.util.*;
 
 public class UserInterface {
-    TaskList taskList;
-
-    public UserInterface() {
-        this.taskList = new TaskList();
-    }
-
-    public UserInterface(TaskList taskList) {
-        this.taskList = taskList;
-    }
-
     public String greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String s = "";
-        s += "Hello from\n" + logo + "\n" + "What can I do for you?";
+        String s = "Hello from Duke" + "\n" + "What can I do for you?";
         return s;
     }
 
@@ -28,7 +12,7 @@ public class UserInterface {
         return "Problem loading";
     }
 
-    public String showList() {
+    public String showList(TaskList taskList) {
         String s = "Here are the tasks in your list:\n";
         for (int i = 1; i <= taskList.getSize(); i++) {
             Task t = taskList.getTask(i - 1);
@@ -38,22 +22,17 @@ public class UserInterface {
     }
 
     public String showCompletedTask(Task t) {
-        String s = "Nice! I've marked this task as done:\n" + t.toString();
-        return s;
+        return "Nice! I've marked this task as done:\n" + t.toString();
     }
 
-    public String showAddedTask(Task t) {
-        String s = "Got it. I've added this task:" + "\n" + t.toString()
+    public String showAddedTask(Task t, TaskList taskList) {
+        return "Got it. I've added this task:" + "\n" + t.toString()
                 + "\nNow you have " + taskList.getSize() + " tasks in the list.";
-
-        return s;
     }
 
-    public String showDeletedTask(Task t) {
-        String s = "Noted. I've removed this task:\n" + t.toString() + "\nNow you have " + taskList.getSize()
+    public String showDeletedTask(Task t, TaskList taskList) {
+        return "Noted. I've removed this task:\n" + t.toString() + "\nNow you have " + taskList.getSize()
                 + " tasks in the list.";
-
-        return s;
     }
 
     public String showResults(List<Task> results) {

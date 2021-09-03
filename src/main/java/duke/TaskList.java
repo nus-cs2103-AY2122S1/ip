@@ -6,6 +6,7 @@ public class TaskList {
     List<Task> taskList;
 
     /**
+     * Creates a TaskList Object with no tasks.
      *
      */
     public TaskList() {
@@ -13,17 +14,19 @@ public class TaskList {
     }
 
     /**
+     * Creates a TaskList Object with tasks.
      *
-     * @param tasks
+     * @param tasks The tasks the user has.
      */
     public TaskList(List<Task> tasks) {
         this.taskList = tasks;
     }
 
     /**
+     * Adds an item to the task list.
      *
-     * @param input
-     * @return
+     * @param input The input entered by the user.
+     * @return The new task generated based on the user's input.
      */
     public Task addItem(String input) {
         Task t;
@@ -47,9 +50,10 @@ public class TaskList {
     }
 
     /**
+     * Deletes an item from the task list.
      *
-     * @param index
-     * @return
+     * @param index The index of the item to be deleted.
+     * @return The task that was just deleted.
      */
     public Task deleteItem(int index) {
         Task t = getTask(index);
@@ -59,9 +63,10 @@ public class TaskList {
     }
 
     /**
+     * Gets an item from the task list based on the index of the item.
      *
-     * @param index
-     * @return
+     * @param index The index of the item.
+     * @return The item at the specified index.
      */
     public Task getTask(int index) {
         return taskList.get(index);
@@ -70,9 +75,10 @@ public class TaskList {
     public int getSize() { return taskList.size(); }
 
     /**
+     * Finds matching tasks from the task list based on the keyword provided.
      *
-     * @param keyword
-     * @return
+     * @param keyword The keyword provided by the user.
+     * @return A list of tasks containing the keyword.
      */
     public List<Task> find (String keyword) {
         List<Task> results = new ArrayList<>();
@@ -87,8 +93,9 @@ public class TaskList {
     }
 
     /**
+     * Marks a task as done.
      *
-     * @param index
+     * @param index The index of the task to be marked done.
      */
     public void markAsDone(int index) {
         Task t = getTask(index);

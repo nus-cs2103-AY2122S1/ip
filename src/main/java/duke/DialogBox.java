@@ -12,7 +12,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -22,7 +21,6 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
@@ -42,8 +40,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(0, 253, 199),
-                new CornerRadii(3), new Insets(-3, -10, -3, -10))));
+        dialog.setBackground(new Background(new BackgroundFill(Color.rgb(0, 173, 253),
+                new CornerRadii(5), new Insets(-3, -6, -3, -6))));
         dialog.setText(text);
         displayPicture.setFill(new ImagePattern(img));
     }

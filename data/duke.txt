@@ -1,9 +1,5 @@
-E|1|project work|2021-10-05
 T|1|eat bfast
-T|1|east
-T|0|eat
+T|1|eat
 T|0|eat again
-T|0|eat more
-T|0|eat even more
-T|0|eat even even more
-T|0|eat even more
+T|1|eat until sleep
+D|0|eat|2021-01-01

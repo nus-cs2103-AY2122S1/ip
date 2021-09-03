@@ -1,65 +1,28 @@
 package duke;
 
 import java.io.IOException;
-import java.util.*;
 
 public class Duke {
-    private TaskList taskList;
-    private UserInterface userInterface;
-    private Storage storage;
-    public Parser parser;
+    TaskList taskList;
+    UserInterface userInterface;
+    Storage storage;
+    Parser parser;
 
     /**
+     * Creates a Duke object.
      *
-     * @param filePath
+     * @param filePath The file path to the text file containing the stored tasks.
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws IOException {
         userInterface = new UserInterface();
         storage = new Storage(filePath);
+        parser = new Parser();
 
         try {
             taskList = new TaskList(storage.load());
-            userInterface = new UserInterface(taskList);
-            parser = new Parser(taskList, userInterface, storage);
         } catch (IOException e) {
             taskList = new TaskList();
-            userInterface.showLoadingError();
-            userInterface = new UserInterface(taskList);
-            parser = new Parser(taskList, userInterface, storage);
+            throw e;
         }
     }
-
-//    public Duke() {
-//
-//    }
-
-//    /**
-//     *
-//     */
-//    public void run() {
-//        userInterface.greet();
-//
-//        Scanner sc = new Scanner(System.in);
-//
-//        while (sc.hasNextLine()) {
-//            String input = sc.nextLine().trim();
-//            try {
-//                parser.parse(input);
-//            } catch (InvalidCommandException | MissingToDoDescriptionException |
-//                    MissingDeadlineDescriptionException | MissingEventDescriptionException e) {
-//                System.out.println(e.getMessage());
-//            }
-//
-//            if (input.equals("bye")) break;
-//        }
-//    }
-
-//    /**
-//     *
-//     * @param args
-//     */
-//    public static void main(String[] args) {
-//        String s = System.getProperty("user.dir");
-//        new Duke(s+ "/data/duke.txt").run();
-//    }
 }

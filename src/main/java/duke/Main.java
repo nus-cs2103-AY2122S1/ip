@@ -12,8 +12,7 @@ import javafx.stage.Stage;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    String s = System.getProperty("user.dir");
-    private Duke duke = new Duke(s + "/data/duke.txt");
+    private final String PARENT_DIR = System.getProperty("user.dir");
 
     @Override
     public void start(Stage stage) {
@@ -22,6 +21,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            Duke duke = new Duke(PARENT_DIR + "/data/duke.txt");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
