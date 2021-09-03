@@ -2,6 +2,7 @@ package duke.task;
 
 import java.io.IOException;
 import java.util.ArrayList;
+
 import duke.Storage;
 
 /**
@@ -12,7 +13,6 @@ public class TaskList extends ArrayList<Task> {
      * Constructs a empty TaskList.
      */
     public TaskList() {
-        super();
     }
 
     /**

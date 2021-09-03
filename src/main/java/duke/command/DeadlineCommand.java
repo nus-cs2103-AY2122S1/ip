@@ -22,18 +22,23 @@ public class DeadlineCommand extends AddCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, boolean shouldPrintMessage) throws DukeException {
         String[] line = description.split(" /by ");
         if (line.length != 2) {
             throw new DukeIllegalFormatException(
-                "☹ OOPS!!! Seems like you have entered a wrong format for a deadline task. " +
-                    "Try this instead: deadline <description> /by <date>"
+                "☹ OOPS!!! Seems like you have entered a wrong format for a deadline task. "
+                    + "Try this instead: deadline <description> /by <date>"
             );
         }
         Task task = new Deadline(line[0], line[1]);
         tasks.add(task, storage);
-        System.out.println("Got it. I've added this task:\n  " +
-            task +
-            "\nNow you have " + tasks.toArray().length + " task(s) in the list.");
+
+        String message = "Got it. I've added this task:\n  "
+            + task
+            + "\nNow you have " + tasks.toArray().length + " task(s) in the list.";
+        if (shouldPrintMessage) {
+            ui.showMessage(message);
+        }
+        return message;
     }
 }

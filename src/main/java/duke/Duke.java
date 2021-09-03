@@ -1,10 +1,10 @@
 package duke;
 
 import java.io.IOException;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.TaskList;
-
 
 /**
  * Duke is a educational software project designed to take you through
@@ -12,9 +12,13 @@ import duke.task.TaskList;
  * as many Java and SE techniques as possible along the way.
  */
 public class Duke {
+
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+    public Duke() {
+    }
 
     /**
      * Constructs a Duke with the specified filePath.
@@ -36,6 +40,7 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+
     /**
      * Runs the Duke instance.
      */
@@ -47,13 +52,22 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(tasks, ui, storage, true);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage, false);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }
