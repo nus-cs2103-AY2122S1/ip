@@ -3,7 +3,7 @@ package duke.task;
 import duke.date.Date;
 
 /** Represents an abstract Task that has a Date attribute */
-public abstract class DatedTask extends Task {
+public abstract class DatedTask extends Task implements Comparable<DatedTask> {
     /** The Date of the Task. */
     protected Date date;
 
@@ -37,5 +37,10 @@ public abstract class DatedTask extends Task {
      */
     public Date getDate() {
         return date;
+    }
+
+    @Override
+    public int compareTo(DatedTask otherTask) {
+        return date.compareTo(otherTask.date);
     }
 }

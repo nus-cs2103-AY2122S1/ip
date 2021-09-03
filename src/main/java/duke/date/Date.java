@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import duke.exception.InvalidDateException;
 
 /** A Date wrapper class. */
-public class Date {
+public class Date implements Comparable<Date> {
     /** The LocalDate. */
     private final LocalDate date;
 
@@ -65,5 +65,10 @@ public class Date {
             return another.toString().equals(this.toString());
         }
         return false;
+    }
+
+    @Override
+    public int compareTo(Date otherDate) {
+        return date.compareTo(otherDate.date);
     }
 }

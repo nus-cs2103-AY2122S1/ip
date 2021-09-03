@@ -130,4 +130,12 @@ public class TaskList {
         }
         return new TaskList(res);
     }
+
+    /**
+     *
+     * @return
+     */
+    public TaskList sort() {
+        return filter((task) -> task instanceof DatedTask);
+    }
 }

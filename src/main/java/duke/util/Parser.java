@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.enums.Commands;
 import duke.exception.DukeException;
 import duke.exception.EmptyCommandException;
@@ -65,24 +66,28 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         checkBlankCommand(fullCommand); // Guard clause
         Command command;
+        String content = contentParser(fullCommand);
         switch (commandParser(fullCommand)) {
         case EXIT:
-            command = ExitCommand.of(contentParser(fullCommand));
+            command = ExitCommand.of(content);
             break;
         case LIST:
-            command = ListCommand.of(contentParser(fullCommand));
+            command = ListCommand.of(content);
             break;
         case ADD:
-            command = AddCommand.of(contentParser(fullCommand));
+            command = AddCommand.of(content);
             break;
         case DONE:
-            command = DoneCommand.of(contentParser(fullCommand));
+            command = DoneCommand.of(content);
             break;
         case DELETE:
-            command = DeleteCommand.of(contentParser(fullCommand));
+            command = DeleteCommand.of(content);
             break;
         case FIND:
-            command = FindCommand.of(contentParser(fullCommand));
+            command = FindCommand.of(content);
+            break;
+        case SORT:
+            command = SortCommand.of(content);
             break;
         default:
             throw new UnknownCommandException(fullCommand);
