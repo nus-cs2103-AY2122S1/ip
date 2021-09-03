@@ -30,6 +30,7 @@ public class CommandHandler {
      * @return String to represent all tasks.
      */
     public static String handleList(String command, Storage storage, TaskList taskList, Ui ui) {
+        assert Command.LIST.hasCommand(command);
         return ui.showTaskList(taskList);
     }
 
@@ -43,10 +44,12 @@ public class CommandHandler {
      * @return Goodbye message.
      */
     public static String handleBye(String command, Storage storage, TaskList taskList, Ui ui) {
+        assert Command.BYE.hasCommand(command);
         return ui.exit();
     }
 
     public static String handleHelp(String command, Storage storage, TaskList taskList, Ui ui) {
+        assert command.equals("help");
         return ui.showHelpMessage();
     }
 
@@ -64,7 +67,7 @@ public class CommandHandler {
     public static String handleDeadline(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
-
+        assert Command.DEADLINE.hasCommand(commands[0]);
         // Get Deadline name and details
         String[] description = commands[1].split("/by", 2);
         if (description.length != 2) {
@@ -103,6 +106,7 @@ public class CommandHandler {
         String errorMessage = "Event date/time not in proper format! Please use event <name> /at "
                 + "<dd/MM/yy> <HHmm>-<HHmm>";
         String[] commands = getCommands(command);
+        assert Command.EVENT.hasCommand(commands[0]);
 
         // Get event name and details
         String[] descriptions = commands[1].trim().split("/at", 2);
@@ -162,6 +166,7 @@ public class CommandHandler {
     public static String handleFind(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
+        assert Command.FIND.hasCommand(commands[0]);
         TaskList foundTasks = taskList.findTasks(commands[1].toLowerCase());
         return ui.showFoundTasks(foundTasks, commands[1]);
     }
@@ -180,6 +185,7 @@ public class CommandHandler {
     public static String handleToDo(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
+        assert Command.TODO.hasCommand(commands[0]);
         Task newTask = new ToDo(commands[1].trim());
         taskList.add(newTask);
         storage.save(taskList);
@@ -200,6 +206,7 @@ public class CommandHandler {
     public static String handleDone(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
+        assert Command.DONE.hasCommand(commands[0]);
         int taskIndex = convertIndexToInt(commands[0], commands[1], taskList);
         taskList.completeTask(taskIndex);
         storage.save(taskList);
@@ -220,6 +227,7 @@ public class CommandHandler {
     public static String handleDelete(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         String[] commands = getCommands(command);
+        assert Command.DELETE.hasCommand(commands[0]);
         int taskIndex = convertIndexToInt(commands[0], commands[1], taskList);
         Task taskToDelete = taskList.getTask(taskIndex);
         taskList.deleteTask(taskIndex);
