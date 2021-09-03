@@ -1,7 +1,11 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import duke.exception.DukeException;
 import duke.util.DukeDateTime;
@@ -143,17 +147,10 @@ public class TaskManager {
      * @return Filtered list.
      */
     private List<Task> filterByDate(DukeDateTime dateTime) {
-        List<Task> tasks = new ArrayList<>();
-        for (Task t : taskList) {
-            if (!(t instanceof Timestampable)) {
-                continue;
-            }
-            Timestampable timestampableTask = (Timestampable) t;
-            if (timestampableTask.onSameDayAs(dateTime)) {
-                tasks.add(t);
-            }
-        }
-        return tasks;
+        Predicate<Task> isSameDate = task ->
+                task instanceof Timestampable && ((Timestampable) task).onSameDayAs(dateTime);
+        Stream<Task> filteredTasks = taskList.stream().filter(isSameDate);
+        return filteredTasks.collect(Collectors.toList());
     }
 
     /**
@@ -163,16 +160,11 @@ public class TaskManager {
      * @return Filtered list.
      */
     private List<Task> filterByName(String... searchStrings) {
-        List<Task> tasks = new ArrayList<>();
-        for (Task t : taskList) {
-            for (String s : searchStrings) {
-                if (t.getName().toLowerCase().contains(s.toLowerCase())) {
-                    tasks.add(t);
-                    break;
-                }
-            }
-        }
-        return tasks;
+        Predicate<Task> hasMatchingString = task ->
+                Arrays.stream(searchStrings).anyMatch(searchString ->
+                        task.getName().toLowerCase().contains(searchString.toLowerCase()));
+        Stream<Task> filteredTasks = taskList.stream().filter(hasMatchingString);
+        return filteredTasks.collect(Collectors.toList());
     }
 
     private static String prependNumberToTask(int taskNumber, Task task) {
