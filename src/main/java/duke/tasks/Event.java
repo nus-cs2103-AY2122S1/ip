@@ -19,7 +19,7 @@ public class Event extends Task {
      * @param description details of task
      * @param when deadline of task
      * @param done Boolean value that indicates completeness of task.
-     * @throws UserInputError
+     * @throws UserInputError Throws error with bad user input.
      */
     public Event(String description, String when, boolean done) throws UserInputError {
         super(description, Task.Type.EVENT, done);

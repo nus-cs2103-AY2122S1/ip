@@ -1,6 +1,7 @@
 package ui;
 
 import duke.Duke;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +9,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Controller for ui.MainWindow. Provides the layout for the other controls.
@@ -53,7 +57,7 @@ public class MainWindow extends AnchorPane {
     }
 
     @FXML
-    public void farewell() {
+    private void farewell() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(FAREWELL, dukeImage));
     }
 
@@ -67,23 +71,26 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        try {
-            String input = userInput.getText();
-            String response = duke.getResponse(input);
-            if (input.trim().equals("bye")) {
-                farewell();
-                Thread.sleep(5);
-                System.exit(0);
-            }
+        String input = userInput.getText();
+        String response = duke.getResponse(input);
+        if (input.trim().equals("bye")) {
+            dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+            farewell();
+            userInput.clear();
+            userInput.setEditable(false);
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    Platform.exit();
+                    System.exit(0);
+                }
+                }, 800);
+        } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
+                    DialogBox.getDukeDialog(response, dukeImage));
             userInput.clear();
-        } catch (InterruptedException e) {
-            System.out.println("Error during delayed exit");
-            System.exit(0);
         }
-
     }
 }

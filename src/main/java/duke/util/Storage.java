@@ -46,15 +46,15 @@ public class Storage {
     /**
      * Write current ist of tasks into the database.
      *
-     * @param tasklist Tasklist of current tasks.
+     * @param taskList TaskList of current tasks.
      */
-    public static void writeDatabase(TaskList tasklist) {
+    public static void writeDatabase(TaskList taskList) {
         Path filePath = Paths.get(System.getProperty("user.dir"), "database", "database.txt");
         Path dirPath = Paths.get(System.getProperty("user.dir"), "database");
 
         try {
             StringBuilder db = new StringBuilder();
-            tasklist.toArrayList().forEach(x -> db.append(x.taskToString()).append(System.lineSeparator()));
+            taskList.toArrayList().forEach(x -> db.append(x.taskToString()).append(System.lineSeparator()));
             byte[] dbByte = db.toString().getBytes();
 
             if (!Files.isDirectory(dirPath)) {

@@ -3,8 +3,8 @@ package duke.tasks;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-import duke.Duke;
 import duke.exceptions.UserInputError;
+import duke.util.Ui;
 
 /**
  * The abstract Task class representing a task.
@@ -44,7 +44,7 @@ public abstract class Task {
      * @param input String containing task details.
      * @param type The enum type of the task.
      * @return A Task object.
-     * @throws UserInputError
+     * @throws UserInputError Throws error with bad user input.
      */
     public static Task createTask(String input, Type type) throws UserInputError {
         String[] details;
@@ -86,14 +86,14 @@ public abstract class Task {
             try {
                 newTask = new Deadline(desc, date, isDone);
             } catch (UserInputError e) {
-                Duke.renderOutput(e.getMessage());
+                Ui.formatOutput(e.getMessage());
             }
             break;
         case "E":
             try {
                 newTask = new Event(desc, date, isDone);
             } catch (UserInputError e) {
-                Duke.renderOutput(e.getMessage());
+                Ui.formatOutput(e.getMessage());
             }
             break;
         default:
@@ -109,7 +109,7 @@ public abstract class Task {
      * @param str String of details.
      * @param key Delimiter.
      * @return Array of description and datetime.
-     * @throws UserInputError
+     * @throws UserInputError Throws error with bad user input.
      */
     private static String[] separateDetails(String str, String key) throws UserInputError {
         if (str.split(key).length <= 1) {

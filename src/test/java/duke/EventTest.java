@@ -22,15 +22,14 @@ public class EventTest {
 
     @Test
     public void testInvalidDate1() {
-        assertThrows(UserInputError.class,
-                () -> new Event("merge branch", "2021-90-09", false));
+        assertThrows(UserInputError.class, () ->
+                new Event("merge branch", "2021-90-09", false));
     }
 
     @Test
     public void testInvalidDate2() {
-        assertThrows(UserInputError.class,
-                () -> new Event("merge branch", "tmr", false));
-        ;
+        assertThrows(UserInputError.class, () ->
+                new Event("merge branch", "tmr", false));
     }
 
     @Test

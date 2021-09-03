@@ -22,14 +22,14 @@ public class DeadlineTest {
 
     @Test
     public void testInvalidDate1() {
-        assertThrows(UserInputError.class,
-                () -> new Deadline("merge branch", "2021-90-09", false));
+        assertThrows(UserInputError.class, () ->
+                new Deadline("merge branch", "2021-90-09", false));
     }
 
     @Test
-    public void testInvalidDate2(){
-        assertThrows(UserInputError.class,
-                () -> new Deadline("merge branch", "tmr", false));;
+    public void testInvalidDate2() {
+        assertThrows(UserInputError.class, () ->
+                new Deadline("merge branch", "tmr", false));
     }
 
     @Test

@@ -35,10 +35,10 @@ public class Parser {
      * Duke.
      *
      * @return Command type according to input.
-     * @throws UserInputError
+     * @throws UserInputError Throws error with bad user input.
      */
     public Command parse() throws UserInputError {
-        Command cmd = null;
+        Command cmd;
         int index;
 
         if (input.indexOf(' ') > -1) {
@@ -105,7 +105,7 @@ public class Parser {
      * Check that input index is valid.
      *
      * @param index Input index proposed by user.
-     * @throws UserInputError
+     * @throws UserInputError Throws error with bad user input.
      */
     private void checkIndexRange(int index) throws UserInputError {
         if (index < 0) {
@@ -136,7 +136,7 @@ public class Parser {
     /**
      * Check user input contains needed description.
      *
-     * @throws UserInputError
+     * @throws UserInputError Throws error with bad user input.
      */
     private void checkDescExist() throws UserInputError {
         if (input.split(" ").length == 1) {

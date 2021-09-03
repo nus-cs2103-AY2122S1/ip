@@ -14,12 +14,12 @@ public class Deadline extends Task {
     protected LocalDate when;
 
     /**
-     * Constructor to create a Dedline task.
+     * Constructor to create a Deadline task.
      *
      * @param description details of task
      * @param when deadline of task
      * @param done Boolean value that indicates completeness of task.
-     * @throws UserInputError
+     * @throws UserInputError Throws error with bad user input.
      */
     public Deadline(String description, String when, boolean done) throws UserInputError {
         super(description, Task.Type.DEADLINE, done);

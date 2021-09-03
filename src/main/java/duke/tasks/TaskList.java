@@ -20,7 +20,7 @@ public class TaskList {
     /**
      * Find the number of Tasks.
      *
-     * @return
+     * @return Number of Tasks.
      */
     public int length() {
         return taskList.size();
