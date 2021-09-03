@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.IOException;
-
 /**
  * Command to close the application.
  */

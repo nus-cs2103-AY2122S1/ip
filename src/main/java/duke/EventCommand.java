@@ -14,7 +14,8 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.add(task);
-        String toReturn = ui.printTask(task);
+        String toReturn = ui.addedTaskMessage();
+        toReturn += ui.printTask(task);
         toReturn += ui.listTaskNumber(tasks);
         return toReturn;
 

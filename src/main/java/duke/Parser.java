@@ -5,9 +5,6 @@ package duke;
  * It takes in user inputs and filters it to its respective command.
  */
 public class Parser {
-    public Parser() {
-
-    }
 
     /**
      * @param command Command is the user input.
@@ -37,19 +34,17 @@ public class Parser {
             }
         } else if (commandArr[0].equals("find")) {
             if (commandArrLength <= 1) {
-                return new ErrorCommand("Please enter the task number after \"find\"");
+                return new ErrorCommand("Please enter a keyword after \"find\"");
             } else {
                 String keyword = commandArr[1];
                 return new FindCommand(keyword);
             }
         } else {
             boolean wrongArrayLength = commandArr.length <= 1;
-            String taskAdded = "Got it. I've added this task: ";
             if (commandArr[0].equals("todo")) {
                 if (wrongArrayLength) {
-                    throw new DukeException("The description of a todo cannot be empty!");
+                    return new ErrorCommand("The description of a todo cannot be empty!");
                 } else {
-                    System.out.println(taskAdded);
                     int spaceIndex = command.indexOf(" ");
                     Task task = new Todo(command.substring(spaceIndex + 1));
                     return new TodoCommand(task);
@@ -61,7 +56,6 @@ public class Parser {
                 } else if (!command.contains("/by ")) {
                     return new ErrorCommand("Remember to type input in this format:\"[deadline] [task] /by [date]\"");
                 } else {
-                    System.out.println(taskAdded);
                     int spaceIndex = command.indexOf(" ");
                     int slashIndex = command.indexOf("/by ");
                     Task task = new Deadline(command.substring(spaceIndex + 1, slashIndex - 1),
@@ -76,7 +70,6 @@ public class Parser {
                 } else if (!command.contains("/at ")) {
                     return new ErrorCommand("Remember to enter event in this format:\"[event] [task] /at [date]\"");
                 } else {
-                    System.out.println(taskAdded);
                     int spaceIndex = command.indexOf(" ");
                     int slashIndex = command.indexOf("/at ");
                     Task task = new Event(command.substring(spaceIndex + 1, slashIndex - 1),

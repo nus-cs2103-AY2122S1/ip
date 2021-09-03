@@ -10,11 +10,11 @@ public class DoneCommand extends Command {
     DoneCommand(int index) {
         this.index = index;
     }
-    
+
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (index >= tasks.size() || index < 0) {
-            throw new DukeException("Invalid value!");
+            return "Invalid value!";
         } else {
             Task taskRef = tasks.get(index);
             taskRef.setDone();

@@ -7,10 +7,6 @@ import java.io.IOException;
  */
 public class ByeCommand extends Command {
 
-    
-    ByeCommand() {
-    }
-
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
@@ -18,7 +14,6 @@ public class ByeCommand extends Command {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
         return ui.goodbye();
     }
 
