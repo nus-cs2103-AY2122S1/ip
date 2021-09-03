@@ -51,6 +51,7 @@ public class Storage {
                     break;
                 case 'D':
                     descriptionParts = parts[2].split(" \\(by: ");
+                    assert descriptionParts.length == 2 : "Descriptor for deadline task should have 2 parts";
                     Deadline d = new Deadline(
                             descriptionParts[0],
                             isCompleted,
@@ -60,6 +61,7 @@ public class Storage {
                     break;
                 case 'E':
                     descriptionParts = parts[2].split(" \\(at: ");
+                    assert descriptionParts.length == 2 : "Descriptor for event task should have 2 parts";
                     Event e = new Event(
                             descriptionParts[0],
                             isCompleted,

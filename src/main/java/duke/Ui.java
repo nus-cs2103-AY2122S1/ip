@@ -12,6 +12,7 @@ public class Ui {
      * @return The new String that is formatted.
      */
     public String formatMessage(String[] messages) {
+        assert messages.length > 0 : "Messages array should not be empty";
         StringBuilder res = new StringBuilder();
         for (String s : messages) {
             res.append(s).append("\n");
