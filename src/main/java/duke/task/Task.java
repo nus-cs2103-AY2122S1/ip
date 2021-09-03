@@ -36,7 +36,6 @@ public class Task {
 
     /**
      * Formats task's data into a string for storage in hard disk
-     * and returns it.
      *
      * @return String containing task's data.
      */

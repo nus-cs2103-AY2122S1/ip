@@ -26,8 +26,8 @@ public class Storage {
     /**
      * Reads data from duke.txt file.
      *
-     * @return ArrayList of tasks.
-     * @throws IOException In case directory is invalid or file does not exist.
+     * @return ArrayList of saved tasks.
+     * @throws IOException Throws IOException if directory is invalid.
      */
     public ArrayList<Task> readData() throws IOException {
         ArrayList<Task> al = new ArrayList<>();
@@ -65,7 +65,7 @@ public class Storage {
      * Writes data into duke.txt file.
      *
      * @param al The ArrayList to write from.
-     * @throws IOException In case directory is invalid or file does not exist.
+     * @throws IOException Throws IOException if directory is invalid.
      */
     public void writeData(ArrayList<Task> al) throws IOException {
         if (!fileDirExists) {
@@ -74,8 +74,7 @@ public class Storage {
             parentDir.mkdir();
         }
         FileWriter fw = new FileWriter(filePath.toFile());
-        for (int i = 1; i <= al.size(); i++) {
-            Task task = al.get(i - 1);
+        for (Task task : al) {
             String taskData = task.getData() + "\n";
             fw.write(taskData);
         }

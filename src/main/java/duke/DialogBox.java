@@ -59,6 +59,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Creates a DialogBox object and modifies its CSS style attributes.
+     *
+     * @param text Text to be contained in DialogBox.
+     * @param img Image to be contained in DialogBox.
+     * @return DialogBox to display on GUI.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setStyle("-fx-background-color: black");
@@ -68,6 +75,14 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Creates a DialogBox object and modifies its CSS style attributes.
+     * DialogBox's nodes are reversed in positioning.
+     *
+     * @param text Text to be contained in DialogBox.
+     * @param img Image to be contained in DialogBox.
+     * @return DialogBox to display on GUI.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setStyle("-fx-background-color: black");

@@ -38,8 +38,11 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        // Display Welcome Message.
         dialogContainer.getChildren().add(DialogBox.getDukeDialog
                 (Ui.WELCOME_MSG, dukeImage));
+
         dialogContainer.setMinHeight(scrollPane.getPrefHeight());
     }
 
@@ -65,6 +68,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
         if (duke.getIsExited()) {
             PauseTransition delay = new PauseTransition(Duration.seconds(3));
             delay.setOnFinished(event -> Platform.exit());

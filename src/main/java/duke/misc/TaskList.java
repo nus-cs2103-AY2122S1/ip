@@ -25,7 +25,7 @@ public class TaskList {
     /**
      * Initialises the TaskList using the stored data.
      *
-     * @throws IOException In case of Invalid directory.
+     * @throws IOException Throws IOException if directory is Invalid.
      */
     public void initialise() throws IOException {
         storage = new Storage();
@@ -49,8 +49,8 @@ public class TaskList {
     /**
      * Adds a task to current TaskList.
      *
-     * @param task The task to be added.
-     * @return The String output by toString method of task to be added.
+     * @param task The Task object to be added.
+     * @return The String output by toString method of task.
      */
     public String addTask(Task task) {
         tasks.add(task);
@@ -62,7 +62,7 @@ public class TaskList {
      *
      * @param idx Index of task to be deleted.
      * @return The String output by toString method of task to be added.
-     * @throws DukeException In case the index of task is out of bounds.
+     * @throws DukeException Throws DukeException if index of task is out of bounds.
      */
     public String deleteTask(int idx) throws DukeException {
         if (idx <= 0 || idx > tasks.size()) {
@@ -74,11 +74,11 @@ public class TaskList {
     }
 
     /**
-     * Completes specified task from current TaskList.
+     * Marks specified task from current TaskList as done.
      *
      * @param idx Index of task to be completed.
      * @return The String output by toString method of task to be added.
-     * @throws DukeException In case index of task is out of bounds.
+     * @throws DukeException Throws DukeException if index of task is out of bounds.
      */
     public String completeTask(int idx) throws DukeException {
         if (idx <= 0 || idx > tasks.size()) {
@@ -91,7 +91,7 @@ public class TaskList {
     /**
      * Saves all tasks into specified directory.
      *
-     * @throws IOException In case directory is invalid.
+     * @throws IOException Throws IOException if directory is invalid.
      */
     public void saveData() throws IOException {
         storage.writeData(tasks);
@@ -108,7 +108,7 @@ public class TaskList {
         int idx = 0;
         for (Task task: tasks) {
             if (task.getDescription().contains(key)) {
-                sb.append(String.format("%d.%s\n", ++idx, task.toString()));
+                sb.append(String.format("%d.%s\n", ++idx, task));
             }
         }
         return sb.toString();

@@ -22,7 +22,7 @@ public class Parser {
      *
      * @param input User's command input.
      * @return Respective Task object.
-     * @throws DukeException In case of errors.
+     * @throws DukeException Throws DukeException if input is invalid.
      */
     public Task makeTask(String input) throws DukeException {
         int idx = input.indexOf(' ');
@@ -65,10 +65,10 @@ public class Parser {
      * Executes the appropriate action according to user command.
      *
      * @param input User's command input.
-     * @param tl TaskList which action is executed on.
+     * @param tl TaskList object which action is executed on.
      * @return Message according to what action is executed.
-     * @throws DukeException In case of errors.
-     * @throws IOException In case of Invalid directory.
+     * @throws DukeException Throws DukeException if the input is invalid.
+     * @throws IOException Throws IOException the directory to save data in is non-existent.
      */
     public String executeCommand(String input, TaskList tl) throws DukeException, IOException {
         String prefix = input;

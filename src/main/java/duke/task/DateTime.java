@@ -46,11 +46,10 @@ public class DateTime {
     }
 
     /**
-     * Checks if date has invalid format. Returns true if yes and false
-     * otherwise.
+     * Checks if date has an invalid format.
      *
-     * @param date The date.
-     * @return The boolean value.
+     * @param date The date to be checked.
+     * @return Boolean true if invalid and boolean false otherwise.
      */
     public static boolean isInvalidDate(String date) {
         try {
@@ -62,11 +61,10 @@ public class DateTime {
     }
 
     /**
-     * Checks if time has invalid format. Returns true if yes and false
-     * otherwise.
+     * Checks if time has an invalid format.
      *
-     * @param time The time.
-     * @return The boolean value.
+     * @param time The time to be checked
+     * @return Boolean true if invalid and boolean false otherwise.
      */
     public static boolean isInvalidTime(String time) {
         try {
