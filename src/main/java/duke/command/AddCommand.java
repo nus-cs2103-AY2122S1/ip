@@ -35,6 +35,8 @@ public class AddCommand extends Command {
     public AddCommand(ToDoList list, DataManager dataManager, String taskType) {
         this.list = list;
         this.dataManager = dataManager;
+
+        assert taskType.matches("todo|event|deadline"); // pre-condition
         this.taskType = taskType;
     }
 
@@ -66,6 +68,7 @@ public class AddCommand extends Command {
             return ERROR_TODO_EMPTY_DESCRIPTION;
         }
 
+        // Handles multiple todos in one command.
         if (input.split(", ").length >= 2) {
             return handleMultipleTodos(extracted[1]);
         }

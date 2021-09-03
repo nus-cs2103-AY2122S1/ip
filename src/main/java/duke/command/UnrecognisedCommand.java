@@ -13,6 +13,7 @@ public class UnrecognisedCommand extends Command {
 
     @Override
     public String getResponse(String input) {
+        assert !input.matches("todo|event|deadline|list|exit|find|filter|done|delete");
         return INVALID_COMMAND_MESSAGE;
     }
 }
