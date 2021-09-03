@@ -18,7 +18,7 @@ public class Parser {
      * @throws LifelineException if command is invalid.
      */
     public static Command parse(String command) throws LifelineException {
-        String cleanAndLowerString = command.split("\\s", 2)[0].toLowerCase();
+        String cleanAndLowerString = command.trim().split("\\s", 2)[0].toLowerCase();
         for (Command c : Command.values()) {
             if (c.hasCommand(cleanAndLowerString)) {
                 return c;
