@@ -1,6 +1,7 @@
 package bobbybot.util;
 
 import bobbybot.commands.Command;
+import bobbybot.exceptions.BobbyException;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -34,17 +35,18 @@ public class BobbyBot {
     public void run() {
         Scanner sc = new Scanner(System.in);
         Parser parser = new Parser(tasks, ui, storage);
-
-        while (true) {
+        boolean isExit = false;
+        while (!isExit) {
             String userInput = sc.nextLine();
             ui.showLine();
             try {
                 Command c = parser.parseCommand(userInput);
                 String response = c.getResponse(tasks, ui, storage);
                 System.out.println(response);
+                isExit = c.isExit();
                 //storage.save(tasks);
-            } catch (IllegalArgumentException e) {
-                System.out.println("OOPS!!! I'm sorry but I don't know what that mean :-(");
+            } catch (BobbyException e) {
+                System.out.println(e.getMessage());
             } finally {
                 ui.showLine();
             }

@@ -2,6 +2,7 @@ package bobbybot.util;
 
 import bobbybot.commands.AddCommand;
 import bobbybot.commands.Command;
+import bobbybot.commands.ExitCommand;
 import bobbybot.enums.BotCommand;
 import bobbybot.exceptions.InvalidArgumentException;
 import bobbybot.exceptions.TooManyArgumentsException;
@@ -45,7 +46,7 @@ public class Parser {
      * Parses user input and creates commands
      * @param userInput
      */
-    public Command parseCommand(String userInput) {
+    public Command parseCommand(String userInput) throws InvalidArgumentException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             //return new IncorrectCommand();
@@ -62,13 +63,17 @@ public class Parser {
             //Fallthrough
         case DEADLINE:
             return prepareAdd(arguments);
+        case LIST:
+                return ListCommand();
+        case BYE:
+            return new ExitCommand();
         default:
             System.out.println("Invalid command");
             return null;
         }
     }
 
-    private Command prepareAdd(String args) {
+    private Command prepareAdd(String args) throws InvalidArgumentException {
         final Matcher matcher = DATA_ARGS_FORMAT.matcher(args.trim());
         // Check arg string format
         if (!matcher.matches()) { // Add todo

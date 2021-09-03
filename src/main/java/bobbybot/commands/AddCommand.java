@@ -1,5 +1,6 @@
 package bobbybot.commands;
 
+import bobbybot.exceptions.InvalidArgumentException;
 import bobbybot.tasks.Deadline;
 import bobbybot.tasks.Event;
 import bobbybot.tasks.Task;
@@ -32,7 +33,7 @@ public class AddCommand extends Command {
      * @param timeArg time argument string
      * @param type event or deadline
      */
-    public AddCommand(String description, String timeArg, String type) {
+    public AddCommand(String description, String timeArg, String type) throws InvalidArgumentException {
         type = type.toLowerCase();
         switch(type) {
         case "todo":
@@ -51,7 +52,7 @@ public class AddCommand extends Command {
             }
             break;
         default:
-            throw new IllegalStateException("Unexpected value: " + type);
+            throw new InvalidArgumentException("Unexpected value: " + type);
         }
     }
 

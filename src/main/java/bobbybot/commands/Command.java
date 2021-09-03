@@ -8,8 +8,7 @@ import bobbybot.util.Ui;
  * Base class for commands
  */
 public abstract class Command {
-    //@author Tenebrius1 --reuse
-
+    //@author Tenebrius1 --reus
     /**
      * Executes command and get response
      * @param tasks task list
