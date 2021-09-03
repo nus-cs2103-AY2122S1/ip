@@ -3,6 +3,7 @@ package duke.command;
 import java.io.IOException;
 
 import duke.task.TaskList;
+import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
 
@@ -31,7 +32,9 @@ public class AddCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        TaskList newTaskList = taskList.addTask(input, ui);
+        String[] inputs = Parser.splitWith(input, 0, " ",
+                "The description of a todo/deadline/event task cannot be empty.");
+        TaskList newTaskList = taskList.addTask(ui, inputs);
         storage.saveTasksToFile(newTaskList);
         return newTaskList;
     }
