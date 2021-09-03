@@ -20,10 +20,12 @@ public class StringCleaner {
      */
     public static ArrayList<Integer> toArrayListInteger(String commaSeparatedString) {
         String[] strings = commaSeparatedString.split(",");
+
+        // clean input
         for (int i = 0; i < strings.length; i++) {
-            // trim whitespace on each item
             strings[i] = strings[i].trim();
         }
+
         // convert String[] to ArrayList<Integer>
         ArrayList<Integer> integers = new ArrayList<>();
         for (String s : strings) {
@@ -39,10 +41,10 @@ public class StringCleaner {
      * @return A {@code LocalDateTime} object.
      * @throws InvalidTaskCreationException If input String does not match format.
      */
-    public static LocalDateTime toLocalDateTime(String input) throws AuguryException {
+    public static LocalDateTime toLocalDateTime(String dateInput) throws AuguryException {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
-            return LocalDateTime.parse(input, formatter);
+            return LocalDateTime.parse(dateInput, formatter);
         } catch (Exception e) {
             throw new InvalidTaskCreationException("Please use the YYYY-MM-DD HHMM format to specify time!");
         }
