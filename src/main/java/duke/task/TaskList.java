@@ -162,6 +162,7 @@ public class TaskList {
      * @param s Inputted String.
      */
     public String find(String s) {
+        assert !s.isBlank() : "String s should never be blank";
         String taskList = "";
         int k = 1;
         for (int i = 0; i < toDoList.size(); i++) {

@@ -25,6 +25,7 @@ public class MyParser {
      */
     public void parse(String command, String description, Duke duke) throws DukeException {
         String userDescription = description.trim();
+        assert userDescription != null : "description field should never be null";
         switch (command) {
         case "bye":
             duke.dukeBye();
