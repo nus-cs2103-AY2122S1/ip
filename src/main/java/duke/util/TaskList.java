@@ -47,9 +47,8 @@ public class TaskList {
                     tasks.add(new Event(taskDetails[1], taskDetails[2], taskDetails[3]));
                     break;
                 default:
-                    // Unrecognised string -> do something next time?
-                    // Ignore for now.
-                    break;
+                    // Assertion for control-flow invariant
+                    throw new AssertionError(String.format("Letter representing task is invalid: %s", taskDetails[0]));
                 }
             }
         } else {
@@ -91,9 +90,8 @@ public class TaskList {
             tasks.add(new Event(eventDetails[0], eventDetails[1]));
             break;
         default:
-            // will NOT execute as Duke calls this function to add a task and it only calls them based on
-            // the same switch cases above.
-            break;
+            // Assertion for control-flow invariant
+            throw new AssertionError(String.format("Type of task is invalid: %s", typeOfTask));
         }
 
         storage.writeToFile(convertListToString());
@@ -144,9 +142,8 @@ public class TaskList {
             }
             break;
         default:
-            // will NOT execute as Duke calls this function to list the task list and it only calls them based on
-            // the same switch cases above.
-            break;
+            // Assertion for control-flow invariant
+            throw new AssertionError(String.format("Filter type is invalid: %s", filterType));
         }
 
         return tasksString.equals("")
@@ -170,6 +167,9 @@ public class TaskList {
             message = String.format("You completed a task! Maybe you aren't so incompetent after all.\n%s\n",
                 tasks.get(indexes[0] - 1).markTaskAsDone());
         } else {
+            // Assertion for internal invariant
+            assert indexes.length > 0 : "No indexes have been specified";
+
             message = "You completed some tasks! Maybe you aren't so incompetent after all.\n";
 
             for (int index : indexes) {

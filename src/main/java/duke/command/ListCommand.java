@@ -20,6 +20,8 @@ public class ListCommand extends Command {
      * @param filterCondition Condition to filter tasks before listing.
      */
     public ListCommand(TaskList tasks, String filterType, String filterCondition) {
+        assert filterType.matches("all|date|keyword") : "Invalid filterType";
+
         this.tasks = tasks;
         this.filterType = filterType;
         this.filterCondition = filterCondition;
