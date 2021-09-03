@@ -1,5 +1,7 @@
 package message;
 
+import java.util.Arrays;
+
 /**
  * Encapsulates the base output message that Duke replies to the user.
  * It includes methods to format the output message.
@@ -21,10 +23,10 @@ public class Message {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < texts.length; i++) {
-            stringBuilder.append(texts[i]);
+        Arrays.stream(this.texts).forEach((text) -> {
+            stringBuilder.append(text);
             stringBuilder.append("\n");
-        }
+        });
 
         return stringBuilder.toString().trim();
     }
