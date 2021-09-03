@@ -21,20 +21,23 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
+    private final int FONT_SIZE = 14;
+    private final int MILISECONDS_TO_SLEEP_BEFORE_QUITTING = 1000;
+
     private Tiger tiger = new Tiger();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image USER_IMAGE_LOCATION = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image BOT_IMAGE_LOCATION = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog(this.tiger.start(), dukeImage)
+            DialogBox.getDukeDialog(this.tiger.start(), BOT_IMAGE_LOCATION)
         );
         Font font = Font.loadFont(MainWindow.class.getResource("/fonts/VictorMono-Medium.ttf").toExternalForm(),
-                14);
+                FONT_SIZE);
         sendButton.setFont(font);
         userInput.setFont(font);
 
@@ -54,8 +57,8 @@ public class MainWindow extends AnchorPane {
         System.out.println(input);
         String response = this.tiger.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, USER_IMAGE_LOCATION),
+                DialogBox.getDukeDialog(response, BOT_IMAGE_LOCATION)
         );
         userInput.clear();
     }
@@ -67,7 +70,7 @@ public class MainWindow extends AnchorPane {
                     // exit once the user types bye.
                     if (this.tiger.isExited()) {
                         try {
-                            Thread.sleep(1000);
+                            Thread.sleep(MILISECONDS_TO_SLEEP_BEFORE_QUITTING);
                         } catch (InterruptedException e) {
                             System.out.println(e.getStackTrace());
                         }

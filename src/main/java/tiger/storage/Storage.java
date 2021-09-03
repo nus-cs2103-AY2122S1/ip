@@ -33,7 +33,7 @@ public class Storage {
                 file.createNewFile();
             } catch (IOException e) {
                 // hopefully it will never reach this line
-                throw new TigerStorageInitException(e.toString());
+                throw new TigerStorageInitException();
             }
         }
     }
@@ -45,7 +45,7 @@ public class Storage {
             fw.write(textToAdd);
             fw.close();
         } catch (IOException e) {
-            throw new TigerStorageSaveException(e.toString());
+            throw new TigerStorageSaveException();
         }
     }
 
@@ -74,7 +74,7 @@ public class Storage {
             String textToParse = Files.readString(Paths.get(FILE_PATH), StandardCharsets.US_ASCII);
             return TaskList.getTaskListFromStringRepresentation(textToParse);
         } catch (IOException e) {
-            throw new TigerStorageLoadException(e.toString());
+            throw new TigerStorageLoadException();
         }
     }
 
@@ -89,7 +89,7 @@ public class Storage {
             String textToParse = Files.readString(Paths.get(FILE_PATH), StandardCharsets.US_ASCII);
             return TaskList.getPartialTaskListFromStringRepresentation(textToParse);
         } catch (IOException e) {
-            throw new TigerStorageLoadException(e.toString());
+            throw new TigerStorageLoadException();
         }
     }
 

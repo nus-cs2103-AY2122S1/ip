@@ -9,12 +9,12 @@ public class ToDo extends Task {
      * Constructor for the {@code ToDo} class.
      *
      * @param taskDescription Description of the users task.
-     * @param done Whether the task has been completed or not.
+     * @param isDone Whether the task has been completed or not.
      * @param priority The priority of the task, specified by the user (if any).
      */
 
-    public ToDo(String taskDescription, boolean done, Priority priority) {
-        super(taskDescription, done, priority);
+    public ToDo(String taskDescription, boolean isDone, Priority priority) {
+        super(taskDescription, isDone, priority);
     }
 
 
@@ -24,7 +24,7 @@ public class ToDo extends Task {
 
     @Override
     public ToDo markDone() {
-        return new ToDo(this.taskDescription, true, this.priority);
+        return new ToDo(this.getTaskDescription(), true, this.getPriority());
     }
 
     /**
@@ -35,10 +35,10 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        if (this.done) {
-            return String.format("[T] [X] %s", this.taskDescription);
+        if (this.taskIsDone()) {
+            return String.format("[T] [X] %s", this.getTaskDescription());
         } else {
-            return String.format("[T] [%s] %s", this.getPriority().getLetter(), this.taskDescription);
+            return String.format("[T] [%s] %s", this.getPriority().getLetter(), this.getTaskDescription());
         }
     }
 
@@ -50,7 +50,7 @@ public class ToDo extends Task {
      */
 
     protected String getStorageRepresentation() {
-        return String.format("T;%s;%s;%s", this.done, this.taskDescription, this.getPriority().getLetter());
+        return String.format("T;%s;%s;%s", this.taskIsDone(), this.getTaskDescription(), this.getPriority().getLetter());
     }
 
     /**
@@ -75,7 +75,7 @@ public class ToDo extends Task {
             Priority p = Priority.getPriorityFromLetter(stringArray[3]);
             if (p.equals(Priority.INVALID)) {
                 // this is not needed if we compile with assertions
-                throw new TigerStorageLoadException("");
+                throw new TigerStorageLoadException();
             }
             if (stringArray[1].equals("true")) {
                 return new ToDo(stringArray[2], true, p); // task description, done, priority
@@ -83,7 +83,7 @@ public class ToDo extends Task {
                 return new ToDo(stringArray[2], false, p); // task description, done, priority
             }
         } catch (AssertionError e) {
-            throw new TigerStorageLoadException(e.toString());
+            throw new TigerStorageLoadException();
         }
     }
 }
