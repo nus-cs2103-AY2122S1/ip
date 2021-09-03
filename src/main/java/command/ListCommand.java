@@ -35,6 +35,9 @@ public class ListCommand extends Command {
     public Message getOutputMessage() {
         assert list != null : "task list should not be null";
 
-        return new Message("Here are the tasks in your list:", this.list.toString(), "ヽ(°〇°)ﾉ");
+        String prefix = "Here are the tasks in your list:";
+        String kaomoji = "ヽ(°〇°)ﾉ";
+
+        return new Message(prefix, this.list.toString(), kaomoji);
     }
 }

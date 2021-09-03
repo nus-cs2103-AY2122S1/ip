@@ -1,7 +1,7 @@
 package tasklist;
 
 import exception.InvalidTaskTimeFormatException;
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates a task with that will occur at a specified time period.
@@ -34,7 +34,7 @@ public class EventTask extends Task {
             return new EventTask(splitPartsUsingAt[0], false, splitPartsUsingAt[1]);
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidTaskTimeFormatException(
-                    DukeCommandTypeEnum.EVENT.toString(),
+                    CommandTypeEnum.EVENT.toString(),
                     EventTask.TIME_SPLITTER_INPUT
             );
         }

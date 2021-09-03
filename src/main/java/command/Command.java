@@ -5,7 +5,7 @@ import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
 import message.Message;
 import tasklist.TaskList;
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates a command after it is parsed from the user input.
@@ -34,7 +34,7 @@ public abstract class Command {
      * @param description Description from the command excluding the command type.
      * @throws MissingCommandDescriptionException If description is empty.
      */
-    public static void validateDescriptionNotEmpty(DukeCommandTypeEnum commandType, String description)
+    public static void validateDescriptionNotEmpty(CommandTypeEnum commandType, String description)
             throws MissingCommandDescriptionException {
         if (description.isEmpty()) {
             throw new MissingCommandDescriptionException(commandType.toString());

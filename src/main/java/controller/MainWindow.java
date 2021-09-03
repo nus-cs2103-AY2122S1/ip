@@ -11,8 +11,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import message.Message;
 
+/**
+ * Encapsulates a controller used to control the main window user interface.
+ * Includes the dialog container, the user input, the send button and the scroll bar.
+ */
 public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane scrollPane;
@@ -37,7 +40,7 @@ public class MainWindow extends AnchorPane {
         try {
             this.duke = duke;
 
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/views/MainWindow.fxml"));
             fxmlLoader.setRoot(this);
             fxmlLoader.setController(this);
             fxmlLoader.load();
@@ -50,12 +53,12 @@ public class MainWindow extends AnchorPane {
      * Initializes the main window after variables are set.
      */
     @FXML
-    public void initialize() {
+    private void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         // Greet user
-        Message greetingMessage = new Message("Hello! I'm Duke, what shall we do today?", "٩(｡•́‿•̀｡)۶");
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingMessage.toString(), dukeImage));
+        String greetingText = this.duke.greet();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(greetingText, dukeImage));
     }
 
     /**

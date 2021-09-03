@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import exception.ErrorAccessingFileException;
 import tasklist.Task;
 import tasklist.TaskList;
 
@@ -40,17 +41,26 @@ public class StorageFile {
     }
 
     /**
-     * Scans the file data to a given list.
+     * Scans file data to a new task list.
      *
-     * @param list App representation of a list.
-     * @throws FileNotFoundException If the file cannot be found in the hard disk.
+     * @return `TaskList`.
+     * @throws ErrorAccessingFileException If there is an error scanning the file.
      */
-    public void scanFileDataToList(TaskList list) throws FileNotFoundException {
-        Scanner s = new Scanner(this.file);
-        while (s.hasNext()) {
-            String lineData = s.nextLine();
-            list.scanExistingTaskToList(Task.createTaskFromStoredString(lineData));
+    public TaskList scanFileDataToNewTaskList() throws ErrorAccessingFileException {
+        TaskList list = new TaskList(this);
+
+        try {
+            Scanner s = new Scanner(this.file);
+            while (s.hasNext()) {
+                String lineData = s.nextLine();
+                Task task = Task.createTaskFromStoredString(lineData);
+                list.scanExistingTaskToList(task);
+            }
+        } catch (FileNotFoundException e) {
+            throw new ErrorAccessingFileException("scan file data to task list");
         }
+
+        return list;
     }
 
     /**
