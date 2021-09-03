@@ -12,6 +12,8 @@ import storage.StorageFile;
  */
 public class TaskList {
     private ArrayList<Task> list = new ArrayList<>();
+    // An active list is the latest list that the user is viewing, it could be filtered by keywords
+    private ArrayList<Task> activeList = this.list;
     private StorageFile listFile;
 
     public TaskList(StorageFile listFile) {
@@ -51,7 +53,7 @@ public class TaskList {
             validateTaskNumberExists(taskNumber);
 
             Task task = this.getTaskByTaskNumber(taskNumber);
-            this.list.remove(taskNumber - 1);
+            this.list.remove(task);
             this.listFile.rewriteFile(this.list);
 
             return task;
@@ -90,10 +92,19 @@ public class TaskList {
      * @return `TaskList`.
      */
     public TaskList getListContainingKeyword(String keyword) {
-        TaskList resultList = new TaskList(this.listFile);
-        resultList.list = new ArrayList<>(this.list);
-        resultList.list.removeIf(task -> !task.contains(keyword));
-        return resultList;
+        this.activeList = new ArrayList<>(this.list);
+        this.activeList.removeIf(task -> !task.contains(keyword));
+        return this;
+    }
+
+    /**
+     * Gets the full list of tasks.
+     *
+     * @return `TaskList`.
+     */
+    public TaskList getFullList() {
+        this.activeList = this.list;
+        return this;
     }
 
     /**
@@ -105,8 +116,8 @@ public class TaskList {
     public String toString() {
         StringBuilder stringBuilderList = new StringBuilder();
 
-        for (int i = 0; i < this.list.size(); i++) {
-            Task task = this.list.get(i);
+        for (int i = 0; i < this.activeList.size(); i++) {
+            Task task = this.activeList.get(i);
             String listItem = String.format("%d. %s\n", i + 1, task.toString());
             stringBuilderList.append(listItem);
         }
@@ -115,11 +126,11 @@ public class TaskList {
     }
 
     private boolean contains(int taskNumber) {
-        return taskNumber > 0 && taskNumber <= this.list.size();
+        return taskNumber > 0 && taskNumber <= this.activeList.size();
     }
 
     private Task getTaskByTaskNumber(int taskNumber) {
-        return this.list.get(taskNumber - 1);
+        return this.activeList.get(taskNumber - 1);
     }
 
     /**

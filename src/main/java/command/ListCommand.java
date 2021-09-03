@@ -24,7 +24,7 @@ public class ListCommand extends Command {
      * @param list `TaskList` containing all tasks.
      */
     public void execute(TaskList list) {
-        this.list = list;
+        this.list = list.getFullList();
     }
 
     /**
