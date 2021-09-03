@@ -10,28 +10,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * A class that manages storage for the bot
+ * A class that manages storage for the bot.
  */
 public class Storage {
     private final java.nio.file.Path path;
 
     /**
-     * Constructor for class Storage
+     * Constructor for class Storage.
      */
     public Storage() {
         String pathToThisFile = System.getProperty("user.dir");
         Path dataDir = Paths.get(pathToThisFile, "data");
-        this.path = java.nio.file.Paths.get(pathToThisFile, "data", "winston.txt");
+        final boolean isDirectoryExist = Files.exists(dataDir);
+        path = java.nio.file.Paths.get(pathToThisFile, "data", "winston.txt");
         try {
-            if (Files.exists(dataDir)) {
-                if (Files.exists(this.path)) {
-                    read();
+            if (isDirectoryExist) {
+                if (Files.exists(path)) {
+                    readFromFile();
                 } else {
-                    Files.createFile(this.path);
+                    Files.createFile(path);
                 }
             } else {
                 Files.createDirectory(java.nio.file.Paths.get(pathToThisFile, "data"));
-                Files.createFile(this.path);
+                Files.createFile(path);
             }
         } catch (FileAlreadyExistsException e) {
             System.out.println("Something went wrong!");
@@ -41,11 +42,12 @@ public class Storage {
     }
 
     /**
-     * Method used to read the file if it exists
+     * Method used to readFromFile the file if it exists.
+     * 
      * @return an ArrayList<Task> of the information stores in the file. If the file doesn't exist, it returns
-     * an empty ArrayList<Task>
+     * an empty ArrayList<Task>.
      */
-    public ArrayList<Task> read() {
+    public ArrayList<Task> readFromFile() {
         ArrayList<Task> list = new ArrayList<>();
         try {
             List<String> lines = Files.readAllLines(this.path);
@@ -60,15 +62,15 @@ public class Storage {
 
 
     /**
-     * A method that assist the read method to create tasks based on the data stored on the file
-     * @param line the lines found in the file
-     * @return A task based on the information on the given line
-     * @throws IOException
+     * A method that assist the readFromFile method to create tasks based on the data stored on the file.
+     * 
+     * @param line the lines found in the file.
+     * @return A task based on the information on the given line.
      */
     private Task createTask(String line) throws IOException {
         char taskType = line.charAt(0);
-        String[] lineData = line.split(",");
         boolean isCompleted;
+        String[] lineData = line.split(",");
         isCompleted = lineData[1].equals("1");
         if (taskType == 'T') {
             return new ToDoTask(lineData[2], isCompleted);
@@ -82,14 +84,16 @@ public class Storage {
     }
 
     /**
-     * A method to save the data on the TaskList to the given file
-     * @param tList The TaskList to be saved
+     * A method to saveToFile the data on the TaskList to the given file.
+     * 
+     * @param tList The TaskList to be saved.
      */
-    public void save(TaskList tList) {
+    public void saveToFile(TaskList tList) {
         try {
             Files.deleteIfExists(this.path);
             PrintWriter out = new PrintWriter("data/winston.txt");
-            out.println(tList.listDataFormatter());
+            String dataToSave = tList.listSaveDataFormatter();
+            out.println(dataToSave);
             out.close();
         } catch (IOException e) {
             System.out.println("Error overwriting file");

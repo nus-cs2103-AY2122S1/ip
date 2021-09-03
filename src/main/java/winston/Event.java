@@ -3,7 +3,7 @@ package winston;
 import java.time.LocalDate;
 
 /**
- * A class extension of Task representing a deadline task
+ * A class extension of Task representing a deadline task.
  */
 public class Event extends Task {
     private final String type;
@@ -12,7 +12,7 @@ public class Event extends Task {
     /**
      * Constructor for Event
      *
-     * @param description is the string of the description of the given task
+     * @param description is the string of the description of the given task.
      */
     public Event(String description, String dateAndTime, boolean isCompleted) {
         super(description, isCompleted);
@@ -27,20 +27,19 @@ public class Event extends Task {
     }
 
     /**
-     * Method to convert information from object instance into a different format to be saved
+     * Method to convert information from object instance into a different format to be saved.
      *
-     * @return a string with the type, completion status, task description and due date
+     * @return a string with the type, completion status, task description and due date.
      */
     @Override
     public String saveFormat() {
         return this.type + "," + super.saveFormat() + "," + this.dateAndTime;
-
     }
 
     /**
-     *  Method to convert information from object instance into a more readable format
+     *  Method to convert information from object instance into a more readable format.
      *
-     * @return a string with the type, completion status, task description and due date
+     * @return a string with the type, completion status, task description and due date.
      */
     @Override
     public String toString() {

@@ -1,35 +1,36 @@
 package winston;
 
 /**
- * Represents the tasks that the user input
+ * Represents the tasks that the user input.
  */
 public class Task {
     private final String description;
-    private boolean done;
+    private boolean isDone;
 
     /**
-     * Private constructor for Task
+     * Private constructor for Task.
      *
-     * @param description is the string of the description of the given task
+     * @param description is the string of the description of the given task.
+     * @param isCompleted whether the task is completed or not.
      */
     public Task(String description, boolean isCompleted) {
         this.description = description;
-        this.done = isCompleted;
+        this.isDone = isCompleted;
     }
 
     /**
-     * Mark a task as complete
+     * Mark a task as complete.
      */
     public void setComplete() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
-     * Check the completion of the task
-     * @return "[X]" if task is completed and "[ ]" if the task isn't
+     * Check the completion of the task.
+     * @return "[X]" if task is completed and "[ ]" if the task isn't.
      */
     public String taskCompletionStatus() {
-        if (done) {
+        if (isDone) {
             return "[X]";
         } else {
             return "[ ]";
@@ -37,12 +38,12 @@ public class Task {
     }
 
     /**
-     * Method to convert information from object instance into a different format to be saved
+     * Method to convert information from object instance into a different format to be saved.
      *
-     * @return a string with completion status, task description
+     * @return a string with completion status, task description.
      */
     protected String saveFormat() {
-        if (done) {
+        if (isDone) {
             return 1 + "," + this.description;
         } else {
             return 0 + "," + this.description;
@@ -50,18 +51,18 @@ public class Task {
     }
 
     /**
-     * A method that determines if a string can be found in this task's description
-     * @param str given string
-     * @return a boolean on whether a given string is a substring of the description
+     * A method that determines if a string can be found in this task's description.
+     * @param str given string.
+     * @return a boolean on whether a given string is a substring of the description.
      */
     public boolean isSubString(String str) {
-        return this.description.toLowerCase().indexOf(str.toLowerCase()) >= 0;
+        return this.description.toLowerCase().contains(str.toLowerCase());
     }
     
     /**
-     *  Method to convert information from object instance into a more readable format
+     *  Method to convert information from object instance into a more readable format.
      *
-     * @return a string with the task description
+     * @return a string with the task description.
      */
     @Override
     public String toString() {

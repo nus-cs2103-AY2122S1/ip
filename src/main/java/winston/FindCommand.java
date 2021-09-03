@@ -4,7 +4,7 @@ public class FindCommand extends Command {
     private String str;
 
     /**
-     *  Represents an findString command from the parent abstract class Command.
+     * Represents an findString command from the parent abstract class Command.
      */
     public FindCommand(TaskList taskList, String str) {
         super(taskList);

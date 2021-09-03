@@ -1,7 +1,7 @@
 package winston;
 
 /**
- *  Represents the event command from the parent abstract class Command.
+ * Represents the event command from the parent abstract class Command.
  */
 public class AddTodoCommand extends Command {
     private final String description;
@@ -12,7 +12,7 @@ public class AddTodoCommand extends Command {
     }
 
     /**
-     * Adds a 'todoTask' to the TaskList and prints the number of uncompleted tasks remaining
+     * Adds a 'toDoTask' to the TaskList and prints the number of uncompleted tasks remaining
      */
     @Override
     public String run() {

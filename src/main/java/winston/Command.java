@@ -1,7 +1,7 @@
 package winston;
 
 /**
- *  Represents the commands that will be used during the usage of winston
+ * Represents the commands that will be used during the usage of winston
  */
 public abstract class Command {
     protected TaskList taskList;

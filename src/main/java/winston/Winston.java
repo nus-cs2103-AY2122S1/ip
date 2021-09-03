@@ -4,17 +4,15 @@ package winston;
  * A class that creates your personal assistant Winston
  */
 public class Winston {
-    private Storage storage;
-    private TaskList taskList;
-    private Parser parser;
+    private final Parser parser;
 
     /**
      * Constructor for class Winston
      */
     public Winston() {
-        this.storage = new Storage();
-        this.taskList = new TaskList(storage.read());
-        taskList.setStorage(this.storage);
+        Storage storage = new Storage();
+        TaskList taskList = new TaskList(storage.readFromFile());
+        taskList.setStorage(storage);
         this.parser = new Parser(taskList);
     }
 
