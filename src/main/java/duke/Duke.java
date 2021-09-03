@@ -41,7 +41,7 @@ public class Duke {
                 Platform.exit();
             }
 
-            Command command = this.parser.makeCommand(input);
+            Command command = this.parser.createCommand(input);
             command.execute(this.list);
             return command.getOutputMessage().toString();
         } catch (DukeException e) {

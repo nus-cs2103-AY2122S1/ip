@@ -1,13 +1,14 @@
 package type;
 
 public enum DukeCommandTypeEnum {
-    LIST("list"),
-    FIND("find"),
-    DONE("done"),
-    DELETE("delete"),
-    TODO("todo"),
+    BYE("bye"),
     DEADLINE("deadline"),
-    EVENT("event");
+    DELETE("delete"),
+    DONE("done"),
+    EVENT("event"),
+    FIND("find"),
+    LIST("list"),
+    TODO("todo");
 
     private final String value;
 
