@@ -11,9 +11,9 @@
 
 <fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog" minHeight="-Infinity" maxHeight="Infinity" prefWidth="260" text="Label" textFill="#141313" textOverrun="WORD_ELLIPSIS" wrapText="true">
+        <Label fx:id="dialog" minHeight="-Infinity" maxHeight="Infinity" text="Label" textFill="#141313" lineSpacing="2.0" textOverrun="WORD_ELLIPSIS" wrapText="true">
          <font>
-            <Font name="Fira Code Regular" size="11.0" />
+            <Font name="Fira Code Regular" size="11.5" />
          </font>
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
