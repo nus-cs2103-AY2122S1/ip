@@ -30,6 +30,14 @@ jobs:
           java-version: '11'
           java-package: jdk+fx
 
+      - name: Install dos2unix (*NIX)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install dos2unix
+
+      - name: Install dos2unix (MacOS)
+        if: always() && runner.os == 'macOS'
+        run: brew install dos2unix
+
       - name: Build and check with Gradle
         run: ./gradlew check
 
