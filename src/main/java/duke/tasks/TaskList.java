@@ -23,7 +23,7 @@ public class TaskList {
      *
      * @return {@code ArrayList} containing all tasks in this {@code TaskList}.
      */
-    public ArrayList<Task> tasks() {
+    public ArrayList<Task> getTasks() {
         return this.tasks;
     }
 
@@ -32,7 +32,7 @@ public class TaskList {
      *
      * @return {@code int} - the number of tasks in this {@code TaskList}.
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 
