@@ -6,6 +6,7 @@ import duke.Task;
 
 import java.util.ArrayList;
 import java.time.LocalDateTime;
+import java.lang.StringBuilder;
 
 /**
  * Contains a task list and manages the tasks in it.
@@ -48,10 +49,10 @@ public class TaskList {
      *
      * @param t task to be added
      */
-    public void addTask(Task t) {
+    public String addTask(Task t) {
         list.add(t);
         numTask++;
-        System.out.println("I have added this task: \n" + t);
+        return ("I have added this task: \n" + t);
     }
 
     /**
@@ -70,20 +71,23 @@ public class TaskList {
      *
      * @param i index of the deleted task
      */
-    public void deleteTask(int i) {
+    public String deleteTask(int i) {
         numTask--;
-        System.out.println("Noted. I have removed this task: \n" + list.remove(i));
+        return ("Noted. I have removed this task: \n" + list.remove(i));
     }
 
     /**
      * Prints out all the tasks in the arraylist
      */
-    public void printList() {
-        System.out.println("Here are the tasks in your list: \n");
+    public String printList() {
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list: \n");
+
         for(int i = 0; i < list.size(); i++) {
             int index = i + 1;
-            System.out.println( index + ". " + list.get(i));
+            sb.append( index + ". " + list.get(i));
+            sb.append("\n");
         }
+        return (sb.toString());
     }
 
     /**
@@ -92,9 +96,9 @@ public class TaskList {
      *
      * @param i index of the completed task
      */
-    public void setDone(int i) {
+    public String setDone(int i) {
         this.list.get(i).setDone();
-        System.out.println("I've marked this task as done: \n" + list.get(i));
+        return ("I've marked this task as done: \n" + list.get(i));
     }
 
     /**
