@@ -35,7 +35,7 @@ public class Duke {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        String[] commandAndParameter = Parser.inputParser(input);
+        String[] commandAndParameter = Parser.parseInput(input);
         Command currentCommand = Parser.commandParser(commandAndParameter[0]);
         String currentParameter = commandAndParameter[1];
 
