@@ -3,6 +3,8 @@ package duke;
 import java.io.IOException;
 
 import duke.misc.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -35,8 +38,12 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        // Display Welcome Message.
         dialogContainer.getChildren().add(DialogBox.getDukeDialog
                 (Ui.WELCOME_MSG, dukeImage));
+
+        dialogContainer.setMinHeight(scrollPane.getPrefHeight());
     }
 
     public void setDuke() {
@@ -56,15 +63,15 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        if (input.equals("bye")) {
-            dialogContainer.getChildren().add(DialogBox.getDukeDialog(
-                    response, userImage));
-            System.exit(0);
-        }
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        if (input.equals("bye")) {
+            PauseTransition delay = new PauseTransition(Duration.seconds(3));
+            delay.setOnFinished(event -> Platform.exit());
+            delay.play();
+        }
     }
 }

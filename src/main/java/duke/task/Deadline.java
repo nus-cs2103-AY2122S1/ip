@@ -4,7 +4,7 @@ package duke.task;
  * Deadline class which Encapsulates task's deadline.
  */
 public class Deadline extends Task {
-    private DateTime by;
+    private DateTime byDate;
 
     /**
      * Constructor for Deadline class.
@@ -14,32 +14,31 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = new DateTime(by);
+        this.byDate = new DateTime(by);
     }
 
     /**
      * Constructor for Deadline class.
      *
-     * @param description Description of deadlined task.
+     * @param description Description of deadline task.
      * @param by Date/time of task deadline.
      * @param isDone Completion status of task.
      */
     public Deadline(String description, String by, Boolean isDone) {
         super(description);
         super.isDone = isDone;
-        this.by = new DateTime(by);
+        this.byDate = new DateTime(by);
     }
 
     /**
-     * Formats task's data into a string for storage in hard disk
-     * and returns it.
+     * Formats task's data into a string for storage in hard disk.
      *
      * @return String containing task's data.
      */
     @Override
     public String getData() {
         return "Deadline // " + (super.getIsDone() ? 1 : 0) + " // " + super.getDescription()
-                + " // " + by.getDate();
+                + " // " + byDate.getDate();
     }
 
     /**
@@ -49,6 +48,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.toString() + ")\n";
+        return "[D]" + super.toString() + " (by: " + byDate.toString() + ")\n";
     }
 }
