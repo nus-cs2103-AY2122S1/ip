@@ -35,5 +35,4 @@ public class ParserTest {
     public void allSpaceCommandTest() {
         assertThrows(EmptyDescriptionException.class, () -> Parser.parse("      "));
     }
-
 }
