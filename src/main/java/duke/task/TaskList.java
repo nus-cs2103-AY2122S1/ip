@@ -1,7 +1,6 @@
 package duke.task;
 
 import duke.exception.TaskNotFoundException;
-import duke.task.Task;
 
 import java.util.ArrayList;
 
@@ -32,10 +31,10 @@ public class TaskList {
      *
      * @param task new input task
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         tasks.add(task);
-        System.out.println("Got it. I've added this task:\n "+ task.displayTask()
-                + "\n Now you have " + tasks.size() +  " tasks in the list.");
+        return "Got it. I've added this task:\n "+ task.displayTask()
+                + "\n Now you have " + tasks.size() +  " tasks in the list.";
     }
 
     /**
@@ -44,14 +43,14 @@ public class TaskList {
      * @param item the list index of the task to be deleted
      * @throws TaskNotFoundException if the input index is not valid
      */
-    public void deleteTask(int item) throws TaskNotFoundException {
+    public String deleteTask(int item) throws TaskNotFoundException {
         if (item > tasks.size() || item <= 0) {
             throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
         } else {
             Task deletedTask = tasks.get(item - 1);
             tasks.remove(item);
             String display = "Noted. I've removed this task:\n  " + deletedTask.displayTask();
-            System.out.println(display + "\n Now you have " + tasks.size() + " tasks in the list.");
+            return display + "\n Now you have " + tasks.size() + " tasks in the list.";
         }
     }
 
@@ -60,24 +59,24 @@ public class TaskList {
      *
      * @param keyword the input String to search for
      */
-    public void findTask(String keyword) {
+    public String findTask(String keyword) {
         int order = 1;
         int numOfMatchingTasks = 0;
-        String tasksToPrint = "Here are the matching tasks in your list: \n";
+        StringBuilder tasksToPrint = new StringBuilder("Here are the matching tasks in your list: \n");
         if (tasks.size() == 0) {
-            System.out.println("No tasks in your list.");
+            return "No tasks in your list.";
         } else {
             for (Task t : tasks) {
                 if (t.getTaskName().contains(keyword)) {
                     String matchingTask = order++ +"." + t.displayTask() + "\n";
-                    tasksToPrint = tasksToPrint + matchingTask;
+                    tasksToPrint.append(matchingTask);
                     numOfMatchingTasks++;
                 }
             }
             if (numOfMatchingTasks == 0) {
-                System.out.println("No matching tasks found.");
+                return "No matching tasks found.";
             } else {
-                System.out.print(tasksToPrint);
+                return tasksToPrint.toString();
             }
         }
     }
@@ -113,14 +112,13 @@ public class TaskList {
      * @param item the list index of the task to be mark as done
      * @throws TaskNotFoundException if the list index is not valid
      */
-    public void markAsCheckedTask(int item) throws TaskNotFoundException {
+    public String markAsCheckedTask(int item) throws TaskNotFoundException {
         if (item > tasks.size()) {
             throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
         } else {
             Task t = tasks.get(item -1);
             t.checkOffTask();
-            String display = "Nice! I've marked this task as done:\n  " + t.displayTask();
-            System.out.println(display);
+            return "Nice! I've marked this task as done:\n  " + t.displayTask();
         }
     }
 
@@ -152,16 +150,16 @@ public class TaskList {
     /**
      * Prints all the tasks that are in the ArrayList
      */
-    public void listTasks() {
+    public String listTasks() {
         if (this.tasks.size() == 0) {
-            System.out.println("You have no tasks.");
+            return "You have no tasks.";
         } else {
             int order = 1;
-
-            System.out.println("Here are the tasks in your list:");
+            StringBuilder listOfTasks = new StringBuilder("Here are the tasks in your list:\n");
             for (Task s : tasks) {
-                System.out.println(order++ +"." + s.displayTask());
+                listOfTasks.append(order++).append(".").append(s.displayTask()).append("\n");
             }
+            return listOfTasks.toString();
         }
     }
 }

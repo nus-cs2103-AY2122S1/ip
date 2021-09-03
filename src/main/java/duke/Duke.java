@@ -1,6 +1,9 @@
 package duke;
 
 import duke.task.TaskList;
+import duke.util.Parser;
+import duke.util.Storage;
+import duke.util.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,27 +28,14 @@ public class Duke {
         }
     }
 
-    //for GUI
-    String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
-
-    /**
-     * Runs program
-     */
-    public void run() {
-        ui.startBot();
-        Parser p = new Parser(tasks, storage);
-        p.parse();
-        ui.endBot();
-    }
-
-    /**
-     * Initialise and start program
-     *
-     * @param args arguments passed by the command line
-     */
-    public static void main(String[] args) {
-        new Duke().run();
+    public String getResponse(String input) {
+        if (input.equals("start")) {
+            return Ui.startBot();
+        }
+        if (input.equals("bye")) {
+            return ui.endBot();
+        }
+        Parser p = new Parser(tasks, storage, ui);
+        return p.parse(input);
     }
 }

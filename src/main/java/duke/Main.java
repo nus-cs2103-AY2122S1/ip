@@ -1,5 +1,6 @@
 package duke;
 
+import duke.controller.MainWindow;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
