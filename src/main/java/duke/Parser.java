@@ -57,7 +57,7 @@ public class Parser {
                 try {
                     Task t = new Todo(input);
                     tasks.add(t);
-                    return add(t, tasks.size());
+                    return add(t, tasks.getSize());
                 } catch (IndexOutOfBoundsException e) {
                     return new EmptyDescriptionError("todo").getMessage();
                 }
@@ -65,7 +65,7 @@ public class Parser {
                 try {
                     Task t = new Event(input);
                     tasks.add(t);
-                    return add(t, tasks.size());
+                    return add(t, tasks.getSize());
                 } catch (IndexOutOfBoundsException e) {
                     return new EmptyDescriptionError("event").getMessage();
                 }
@@ -73,7 +73,7 @@ public class Parser {
                 try {
                     Task t = new Deadline(input);
                     tasks.add(t);
-                    return add(t, tasks.size());
+                    return add(t, tasks.getSize());
                 } catch (IndexOutOfBoundsException e) {
                     return new EmptyDescriptionError("event").getMessage();
                 }
@@ -84,7 +84,7 @@ public class Parser {
                 return done(t);
             case "delete":
                 t = tasks.delete(Integer.parseInt(input.substring(7)) - 1);
-                return delete(t, tasks.size());
+                return delete(t, tasks.getSize());
             case "find":
                 String keyword = input.substring(5);
                 return tasks.find(keyword);

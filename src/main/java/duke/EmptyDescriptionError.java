@@ -1,4 +1,5 @@
 package duke;
+
 /**
  * This class extends InvalidCommandException. It handles cases when users do not
  * specify activity description of the task they wish to add.

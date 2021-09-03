@@ -2,15 +2,15 @@ import duke.Ui;
 import javafx.application.Application;
 
 /**
- * Duke class is run as a program via main() method
+ * Duke class is run as a program via main() method.
  *
  * @author Lee Jae Ho
- * @since 0.1
+ * @since 0.2
  */
 public class Duke {
 
     /**
-     * Our main method. This xecutes the Duke program.
+     * Our main method. This executes the Duke program.
      *
      * @param args The command line arguments.
      */

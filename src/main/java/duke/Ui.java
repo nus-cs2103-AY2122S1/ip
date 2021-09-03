@@ -21,7 +21,8 @@ public class Ui extends Application {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String DIVIDER = "    ____________________________________________________________";
+    private static final String DIVIDER =
+            "    ____________________________________________________________";
     private static final String GREETING = "     Hello! I'm Duke\n"
             + "     What can I do for you?\n";
 
@@ -65,7 +66,7 @@ public class Ui extends Application {
         Parser parser = new Parser("./data/duke.txt");
         // print out welcome message
         chatRecords.getChildren().add(new Label(LOGO + wrapReply(GREETING)));
-        //event listener for text entered
+        //event listener for the text being entered
         textField.setOnAction((event) -> {
             String input = textField.getText();
             chatRecords.getChildren().add(sendToDuke(input));
