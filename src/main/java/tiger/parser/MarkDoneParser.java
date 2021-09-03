@@ -35,7 +35,7 @@ public class MarkDoneParser extends Parser {
             this.index = Integer.valueOf(array[1].replaceAll(" ", ""));
             assert (this.index > 0);
             if (array.length > 2) {
-                throw new TigerTooManyInputsException("");
+                throw new TigerTooManyInputsException();
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new TigerEmptyStringException("Done index");

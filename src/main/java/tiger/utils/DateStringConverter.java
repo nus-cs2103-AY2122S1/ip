@@ -52,9 +52,9 @@ public class DateStringConverter {
                 return new CustomDate(date, time, true);
             }
         } catch (DateTimeParseException e) {
-            throw new TigerDateParsingException(e.toString());
+            throw new TigerDateParsingException();
         } catch (AssertionError e) {
-            throw new TigerDateParsingException(e.toString());
+            throw new TigerDateParsingException();
         }
     }
 

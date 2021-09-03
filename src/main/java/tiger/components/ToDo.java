@@ -75,7 +75,7 @@ public class ToDo extends Task {
             Priority p = Priority.getPriorityFromLetter(stringArray[3]);
             if (p.equals(Priority.INVALID)) {
                 // this is not needed if we compile with assertions
-                throw new TigerStorageLoadException("");
+                throw new TigerStorageLoadException();
             }
             if (stringArray[1].equals("true")) {
                 return new ToDo(stringArray[2], true, p); // task description, done, priority
@@ -83,7 +83,7 @@ public class ToDo extends Task {
                 return new ToDo(stringArray[2], false, p); // task description, done, priority
             }
         } catch (AssertionError e) {
-            throw new TigerStorageLoadException(e.toString());
+            throw new TigerStorageLoadException();
         }
     }
 }

@@ -43,7 +43,7 @@ public class Command {
     public static Action getActionFromCommand(String command, AppState applicationState) throws
             TigerInvalidInputException {
         if (!Parser.isValid(command)) {
-            throw new TigerSemiColonException("");
+            throw new TigerSemiColonException();
         }
         if (applicationState.checkFlag().equals(Flag.STORAGE_FAILED)) {
             AppState newApplicationState;

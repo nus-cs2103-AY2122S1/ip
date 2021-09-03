@@ -11,12 +11,14 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    private final String APP_TITLE = "Tiger Helper Bot";
+
     @Override
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
-            stage.setTitle("Tiger Helper Bot");
+            stage.setTitle(APP_TITLE);
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.show();

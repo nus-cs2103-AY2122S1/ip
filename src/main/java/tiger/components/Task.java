@@ -72,7 +72,7 @@ public abstract class Task {
         case "D":
             return DeadLine.getTaskFromStringRepresentation(s);
         default:
-            throw new TigerStorageLoadException("");
+            throw new TigerStorageLoadException();
         }
     }
 

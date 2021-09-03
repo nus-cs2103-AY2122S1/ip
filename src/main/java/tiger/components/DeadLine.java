@@ -90,7 +90,7 @@ public class DeadLine extends Task {
             Priority p = Priority.getPriorityFromLetter(stringArray[4]);
             if (p.equals(Priority.INVALID)) {
                 // this is not needed if we compile with assertions
-                throw new TigerStorageLoadException("");
+                throw new TigerStorageLoadException();
             }
             if (stringArray[1].equals("true")) {
                 return new DeadLine(stringArray[2], true, dateStringConverter.getDateFromString(stringArray[3]), p);
@@ -98,9 +98,9 @@ public class DeadLine extends Task {
                 return new DeadLine(stringArray[2], false, dateStringConverter.getDateFromString(stringArray[3]), p);
             }
         } catch (AssertionError e) {
-            throw new TigerStorageLoadException(e.toString());
+            throw new TigerStorageLoadException();
         } catch (TigerDateParsingException e) {
-            throw new TigerStorageLoadException(e.toString());
+            throw new TigerStorageLoadException();
         }
     }
 
