@@ -8,9 +8,9 @@ import bobbybot.util.Ui;
 import java.io.IOException;
 
 public class DoneCommand extends Command {
-    private int toMarkAsDone;
+    private int taskNumToMarkAsDone;
     public DoneCommand(int toMarkAsDone) {
-        this.toMarkAsDone = toMarkAsDone;
+        this.taskNumToMarkAsDone = toMarkAsDone;
     }
     /**
      * Executes command and get response
@@ -22,8 +22,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public String getResponse(TaskList tasks, Ui ui, Storage storage) {
-        Task taskCompleted = tasks.getTask(toMarkAsDone - 1);
-        tasks.markAsDone(toMarkAsDone);
+        Task taskCompleted = tasks.getTask(taskNumToMarkAsDone - 1);
+        tasks.markAsDone(taskNumToMarkAsDone);
         try {
             storage.save(tasks);
         } catch (IOException e) {

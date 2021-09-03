@@ -52,16 +52,9 @@ public class TaskList {
      * @param taskNo bobbybot.tasks.Task Number (starting from index 1)
      */
     public void deleteTask(int taskNo) {
-        if (taskNo > tasks.size() || taskNo < 1) {
-            System.out.println("Cannot find task! Use list command to see available tasks");
-            return;
-        }
         Task taskToDelete = tasks.get(taskNo - 1);
         System.out.println("Noted. I've removed this task:");
         System.out.println("  " + taskToDelete);
         tasks.remove(taskToDelete);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
     }
-
-
 }

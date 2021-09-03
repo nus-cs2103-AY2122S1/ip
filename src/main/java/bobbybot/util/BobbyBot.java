@@ -34,7 +34,7 @@ public class BobbyBot {
      */
     public void run() {
         Scanner sc = new Scanner(System.in);
-        Parser parser = new Parser(tasks, ui, storage);
+        Parser parser = new Parser();
         boolean isExit = false;
         while (!isExit) {
             String userInput = sc.nextLine();
@@ -44,7 +44,6 @@ public class BobbyBot {
                 String response = c.getResponse(tasks, ui, storage);
                 System.out.println(response);
                 isExit = c.isExit();
-                //storage.save(tasks);
             } catch (BobbyException e) {
                 System.out.println(e.getMessage());
             } finally {
