@@ -1,7 +1,7 @@
 package pix.exception;
 
 /**
- * Triggers when there is missing information in the Pix.command.
+ * Triggers when there is missing information in the command.
  */
 public class PixMissingInfoException extends PixException {
     private String command;

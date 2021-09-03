@@ -7,6 +7,9 @@ import pix.exception.PixIoException;
 import pix.exception.PixNoSuchTaskException;
 import pix.storage.Storage;
 
+/**
+ * Class to manage the task list.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
@@ -39,7 +42,6 @@ public class TaskList {
      * Adds a task to the taskList.
      *
      * @param task The task to be added
-     *
      * @return Returns the string representation of the task added.
      */
     public String addTask(Task task, Storage storage) {
@@ -77,7 +79,6 @@ public class TaskList {
      * Sets the selected task to be completed.
      *
      * @param n The number of the task to be completed.
-     *
      * @return Returns the string representation of the task completed.
      */
     public String completeTask(int n) throws PixNoSuchTaskException {
@@ -95,7 +96,6 @@ public class TaskList {
      * Deletes the selected task from the Pix.task.Task List.
      *
      * @param n The number of the task to be deleted.
-     *
      * @return Returns the string representation of the task deleted.
      */
     public String deleteTask(int n) throws PixNoSuchTaskException {
@@ -116,7 +116,6 @@ public class TaskList {
      * Finds all tasks in the task list that contain the keyword.
      *
      * @param keyword Keyword to search for.
-     *
      * @return Returns a list of all the tasks containing the keyword.
      */
     public String findTasks(String keyword) {

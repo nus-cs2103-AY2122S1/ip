@@ -17,11 +17,14 @@ import pix.task.Event;
 import pix.task.Task;
 import pix.task.Todo;
 
+/**
+ * Storage class to manage reading and writing to the text file.
+ */
 public class Storage {
     private File file;
 
     /**
-     * Constructor for the Pix.storage class.
+     * Constructor for the storage class.
      *
      * @param filePath Path to the file to read.
      */
@@ -31,9 +34,9 @@ public class Storage {
     }
 
     /**
-     * Loads the text from the file to the Pix.task list.
+     * Loads the text from the file to the task list.
      *
-     * @return An arraylist which represents the Pix.task list.
+     * @return An arraylist which represents the task list.
      */
     public ArrayList<Task> load() throws PixException {
         ArrayList<Task> taskList = new ArrayList<>();

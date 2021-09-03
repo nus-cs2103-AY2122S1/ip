@@ -1,7 +1,7 @@
 package pix.exception;
 
 /**
- * Triggers when there is no such Pix.task in the Pix.task list.
+ * Triggers when there is no such task in the task list.
  */
 public class PixNoSuchTaskException extends PixException {
     @Override

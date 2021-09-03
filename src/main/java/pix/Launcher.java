@@ -2,6 +2,9 @@ package pix;
 
 import javafx.application.Application;
 
+/**
+ * Class to launch the application.
+ */
 public class Launcher {
     /**
      * A Launcher class to workaround classpath issues.

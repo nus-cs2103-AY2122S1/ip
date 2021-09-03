@@ -1,7 +1,7 @@
 package pix.exception;
 
 /**
- * Triggers when the format of the specified Pix.task is wrong.
+ * Triggers when the format of the specified task is wrong.
  */
 public class PixInvalidTaskException extends PixException {
     @Override

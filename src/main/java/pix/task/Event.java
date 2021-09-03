@@ -3,6 +3,9 @@ package pix.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Event to be conducted at a certain date.
+ */
 public class Event extends Task {
     private LocalDate eventDate;
 
@@ -32,7 +35,7 @@ public class Event extends Task {
     /**
      * Retrieves the date of the event.
      *
-     * @return The date of the event.
+     * @return Returns the date of the event.
      */
     public String getDate() {
         return eventDate.toString();
@@ -41,11 +44,11 @@ public class Event extends Task {
     /**
      * Formats the Pix.task into the format to save it in a text file.
      *
-     * @return Returns the text representation of the Pix.task.
+     * @return Returns the text representation of the task.
      */
     @Override
     public String getSaveName() {
-        return done ? "E|1|" + name + "|" + eventDate.toString() : "E|0|" + name + "|" + eventDate.toString();
+        return isDone ? "E|1|" + name + "|" + eventDate.toString() : "E|0|" + name + "|" + eventDate.toString();
     }
 
     /**

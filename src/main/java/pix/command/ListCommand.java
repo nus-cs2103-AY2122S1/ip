@@ -4,6 +4,9 @@ import pix.storage.Storage;
 import pix.task.TaskList;
 import pix.ui.Ui;
 
+/**
+ * Command to list all tasks from the task list.
+ */
 public class ListCommand extends Command {
     /**
      * Constructor for the list command.

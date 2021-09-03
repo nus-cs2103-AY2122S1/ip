@@ -3,11 +3,14 @@ package pix.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A deadline task to be met.
+ */
 public class Deadline extends Task {
     private LocalDate finishByDate;
 
     /**
-     * Constructor for the deadline Pix.task.
+     * Constructor for the deadline task.
      *
      * @param name Name of the task.
      * @param finishByDate Date to finish the task by.
@@ -18,11 +21,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for the deadline Pix.task.
+     * Constructor for the deadline task.
      *
      * @param name Name of the task.
      * @param done States whether the task is done.
-     * @param finishByDate Date to finish the task.Task by.
+     * @param finishByDate Date to finish the task by.
      */
     public Deadline(String name, boolean done, LocalDate finishByDate) {
         super(name, done);
@@ -30,7 +33,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Retrieves the date of the deadline of the Pix.task.
+     * Retrieves the date of the deadline of the task.
      *
      * @return The deadline of the task.
      */
@@ -45,7 +48,7 @@ public class Deadline extends Task {
      */
     @Override
     public String getSaveName() {
-        return done ? "D|1|" + name + "|" + finishByDate.toString() : "D|0|" + name + "|" + finishByDate.toString();
+        return isDone ? "D|1|" + name + "|" + finishByDate.toString() : "D|0|" + name + "|" + finishByDate.toString();
     }
 
     /**

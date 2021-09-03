@@ -5,6 +5,9 @@ import pix.storage.Storage;
 import pix.task.TaskList;
 import pix.ui.Ui;
 
+/**
+ * Abstract class command for all other commands to inherit from.
+ */
 public abstract class Command {
     protected boolean isExit;
 

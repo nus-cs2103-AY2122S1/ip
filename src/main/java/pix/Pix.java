@@ -7,6 +7,9 @@ import pix.storage.Storage;
 import pix.task.TaskList;
 import pix.ui.Ui;
 
+/**
+ * Pix class to run Pix.
+ */
 public class Pix {
     private Storage storage;
     private TaskList taskList;

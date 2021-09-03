@@ -1,7 +1,7 @@
 package pix.exception;
 
 /**
- * Triggers when there is a number format Pix.exception.
+ * Triggers when there is a number format exception.
  */
 public class PixNumberFormatException extends PixException {
     @Override

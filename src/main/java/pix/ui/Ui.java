@@ -2,6 +2,9 @@ package pix.ui;
 
 import java.util.Scanner;
 
+/**
+ * Class that manages all messages displayed on the UI.
+ */
 public class Ui {
     private Scanner scanner;
 

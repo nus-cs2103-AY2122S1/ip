@@ -1,7 +1,7 @@
 package pix.exception;
 
 /**
- * Triggers when the user inputs an unknown Pix.command.
+ * Triggers when the user inputs an unknown command.
  */
 public class PixUnknownCommandException extends PixException {
     @Override

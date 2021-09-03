@@ -8,6 +8,9 @@ import pix.storage.Storage;
 import pix.task.TaskList;
 import pix.ui.Ui;
 
+/**
+ * Command to delete a task from the task list.
+ */
 public class DeleteCommand extends Command {
     private int taskNumber;
 
@@ -26,7 +29,7 @@ public class DeleteCommand extends Command {
      *
      * @param storage Storage class to store the data in.
      * @param taskList Task list class that has the task list to write from.
-     * @param ui Ui class to display the exit message
+     * @param ui Ui class to display the exit message.
      *
      * @return Returns the list of tasks to display.
      */

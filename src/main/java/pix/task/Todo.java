@@ -1,5 +1,8 @@
 package pix.task;
 
+/**
+ * Todo task to be completed.
+ */
 public class Todo extends Task {
     /**
      * Constructor for the todo task.
@@ -26,7 +29,7 @@ public class Todo extends Task {
      */
     @Override
     public String getSaveName() {
-        return done ? "T|1|" + name : "T|0|" + name;
+        return isDone ? "T|1|" + name : "T|0|" + name;
     }
 
     /**

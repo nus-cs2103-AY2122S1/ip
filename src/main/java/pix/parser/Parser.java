@@ -20,6 +20,9 @@ import pix.task.Deadline;
 import pix.task.Event;
 import pix.task.Todo;
 
+/**
+ * Parser to parse the user commands.
+ */
 public class Parser {
     /**
      * Parser that parses the user input.
@@ -59,9 +62,9 @@ public class Parser {
      *
      * @param splitCommand Command input from the user.
      *
-     * @return Returns the command for exiting Pix.Pix.
+     * @return Returns the command for exiting Pix.
      *
-     * @throws PixInvalidTaskException Throws this Pix.exception if the format is incorrect.
+     * @throws PixInvalidTaskException Throws this exception if the format is incorrect.
      */
     private static Command getExitCommand(String[] splitCommand) throws PixInvalidTaskException {
         if (splitCommand.length > 1) {
@@ -72,11 +75,11 @@ public class Parser {
     }
 
     /**
-     * Runs the add command with a todo Pix.task.
+     * Runs the add command with a todo task.
      *
      * @param splitCommand String input of the command.
      *
-     * @return Returns the add command with a todo Pix.task.
+     * @return Returns the add command with a todo task.
      *
      * @throws PixMissingInfoException Throws the exception when not enough information is provided.
      */
@@ -89,7 +92,7 @@ public class Parser {
     }
 
     /**
-     * Runs the add command with a deadline Pix.task.
+     * Runs the add command with a deadline task.
      *
      * @param splitCommand String input of the command.
      *

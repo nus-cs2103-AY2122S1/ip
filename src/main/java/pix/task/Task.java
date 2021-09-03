@@ -1,8 +1,11 @@
 package pix.task;
 
+/**
+ * Abstract class that all tasks inherit from.
+ */
 public abstract class Task {
     protected String name;
-    protected boolean done;
+    protected boolean isDone;
 
     /**
      * Constructor for the task and sets it to not done.
@@ -11,7 +14,7 @@ public abstract class Task {
      */
     public Task(String name) {
         this.name = name;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
@@ -19,16 +22,16 @@ public abstract class Task {
      *
      * @param name Name of the task.
      */
-    public Task(String name, boolean done) {
+    public Task(String name, boolean isDone) {
         this.name = name;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     /**
      * Sets the task to complete.
      */
     public void completeTask() {
-        done = true;
+        isDone = true;
     }
 
     /**
@@ -37,7 +40,7 @@ public abstract class Task {
      * @return Returns true if the task is complete and false otherwise.
      */
     public boolean isDone() {
-        return done;
+        return isDone;
     }
 
     /**
@@ -50,19 +53,20 @@ public abstract class Task {
     }
 
     /**
-     * Gets the formatted saving name for the Pix.task.
+     * Gets the formatted saving name for the task.
      *
-     * @return Returns the string to save for the Pix.task.
+     * @return Returns the string to save for the task.
      */
     public abstract String getSaveName();
 
     /**
      * Gives the string representation of the task.
+     *
      * @return Returns the string representation of the task.
      */
     @Override
     public String toString() {
-        if (done) {
+        if (isDone) {
             return "[X] " + name;
         } else {
             return "[ ] " + name;

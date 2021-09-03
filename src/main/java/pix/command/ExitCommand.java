@@ -7,6 +7,9 @@ import pix.storage.Storage;
 import pix.task.TaskList;
 import pix.ui.Ui;
 
+/**
+ * Command to exit Pix.
+ */
 public class ExitCommand extends Command {
     /**
      * Constructor for the Exit Command.
@@ -20,7 +23,7 @@ public class ExitCommand extends Command {
      *
      * @param storage Storage class to store the data in.
      * @param taskList Task list class that has the task list to write from.
-     * @param ui Ui class to display the exit message
+     * @param ui Ui class to display the exit message.
      *
      * @return Returns the message to display.
      */
