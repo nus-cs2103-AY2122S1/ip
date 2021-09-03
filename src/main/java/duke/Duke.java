@@ -94,12 +94,12 @@ public class Duke extends Application {
 
         stage.setTitle("Duke");
         stage.setResizable(false);
-        stage.setMinHeight(900.0);
+        stage.setMinHeight(700.0);
         stage.setMinWidth(800.0);
 
-        mainLayout.setPrefSize(800.0, 900.0);
+        mainLayout.setPrefSize(800.0, 700.0);
 
-        scrollPane.setPrefSize(785, 835);
+        scrollPane.setPrefSize(785, 635);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
