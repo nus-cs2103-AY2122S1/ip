@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.CommandList;
-
 import java.time.LocalDate;
+
+import duke.CommandList;
 
 public class Todo extends Task {
 

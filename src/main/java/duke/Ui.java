@@ -1,15 +1,15 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Handles all User Interface of the program.
  */
 public class Ui {
 
-    String logo = " ____        _        \n"
+    private String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"

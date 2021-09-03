@@ -1,12 +1,19 @@
 package duke;
+import java.time.LocalDate;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidCommand;
+import duke.command.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.time.LocalDate;
 
 public class Parser {
 
@@ -31,8 +38,8 @@ public class Parser {
                 String taskMessage = input.substring(5);
                 return new FindCommand(taskMessage.strip());
             } else {
-                throw new IncompleteCommandException("OOPS incomplete command! Your find command " +
-                        "should have a text after the find like: find book");
+                throw new IncompleteCommandException("OOPS incomplete command! Your find command "
+                        + "should have a text after the find like: find book");
             }
 
         } else {
