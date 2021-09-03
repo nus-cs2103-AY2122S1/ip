@@ -59,6 +59,7 @@ public class TaskManager {
      * @return Message containing the task just added and the updated number of tasks.
      */
     public String addTask(Task task) {
+        assert task != null : "Task should be initialised within xCommand::execute";
         taskList.add(task);
         int taskCount = getTaskCount();
         String pluralised = taskCount > 1 ? "tasks" : "task";
