@@ -33,7 +33,7 @@ public class Event extends Task {
      */
     public Event(String description, String eventTime) {
         super(description);
-        assert description.trim().isEmpty() : "Event was created with empty description";
+        assert !description.trim().isEmpty() : "Event was created with empty description";
 
         String[] dateInfo = eventTime.split(" ", 3);
         if (dateInfo.length < 3) {
@@ -54,7 +54,7 @@ public class Event extends Task {
      */
     public Event(CompletionStatus completionStatus, String description, String eventTime) {
         super(description);
-        assert description.trim().isEmpty() : "Event was created with empty description";
+        assert !description.trim().isEmpty() : "Event was created with empty description";
 
         String[] dateInfo = eventTime.split(" ", 3);
         if (dateInfo.length < 3) {

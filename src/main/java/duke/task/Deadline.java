@@ -31,7 +31,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String dueDate) {
         super(description);
-        assert description.trim().isEmpty() : "Event was created with empty description";
+        assert !description.trim().isEmpty() : "Event was created with empty description";
 
         String[] dateInfo = dueDate.split(" ", 2);
         if (dateInfo.length < 2) {
@@ -51,7 +51,7 @@ public class Deadline extends Task {
      */
     public Deadline(CompletionStatus completionStatus, String description, String dueDate) {
         super(description);
-        assert description.trim().isEmpty() : "Event was created with empty description";
+        assert !description.trim().isEmpty() : "Event was created with empty description";
 
         String[] dateInfo = dueDate.split(" ", 2);
         if (dateInfo.length < 2) {
