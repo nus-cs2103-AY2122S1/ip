@@ -43,6 +43,7 @@ public class Duke implements Message {
             if (c == null) {
                 continue;
             }
+            c.execute();
             c.execute(taskList);
             storage.saveTasksToFile(taskList);
             isExit = c.isExit();

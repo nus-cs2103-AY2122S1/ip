@@ -11,8 +11,8 @@ import duke.task.TaskList;
  * This is the ComingCommand class that lists tasks.
  */
 public class ComingCommand extends Command {
-    private static final String COMING_TASK_LISTED_MESSAGE
-            = "Here are the coming tasks in your list:";
+    private static final String COMING_TASK_LISTED_MESSAGE =
+            "Here are the coming tasks in your list:";
 
     /**
      * Constructs a ComingCommand object.
