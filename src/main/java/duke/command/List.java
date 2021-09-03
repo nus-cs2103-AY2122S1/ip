@@ -8,7 +8,7 @@ import duke.ui.Ui;
  * Encapsulates a List commands that deals with listing out all the task in the task list.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class List extends DukeCommand {
 

@@ -8,7 +8,7 @@ import duke.ui.Ui;
  * Encapsulates an Exit commands that deals with exiting the program.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class Exit extends DukeCommand {
 

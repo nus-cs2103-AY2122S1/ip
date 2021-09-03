@@ -15,7 +15,7 @@ import duke.ui.Ui;
  * Encapsulate the handling of loading and storing files on local directory for duke.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class Storage {
     private static final String FOLDER_NAME = "data";

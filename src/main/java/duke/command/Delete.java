@@ -10,7 +10,7 @@ import duke.ui.Ui;
  * Encapsulates a delete commands that deals with deleting a specific task from the task list.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class Delete extends DukeCommand {
     private final int taskNumber;

@@ -6,7 +6,7 @@ package duke.exception;
  * operation is not supported by the program.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class UnknownCommandException extends DukeException {
     public UnknownCommandException() {

@@ -58,10 +58,10 @@
         <module name="CustomImportOrder">
             <property name="customImportOrderRules"
                       value="STATIC###STANDARD_JAVA_PACKAGE###THIRD_PARTY_PACKAGE###SPECIAL_IMPORTS"/>
-            <property name="specialImportsRegExp" value="^org\."/>
-            <property name="thirdPartyPackageRegExp" value="^com\."/>
-            <property name="sortImportsInGroupAlphabetically" value="true"/>
             <property name="separateLineBetweenGroups" value="true"/>
+            <property name="sortImportsInGroupAlphabetically" value="true"/>
+            <property name="specialImportsRegExp" value="(^org\.)|(^duke\.)"/>
+            <property name="thirdPartyPackageRegExp" value="(^com\.)|(^javafx.)"/>
         </module>
 
         <!-- Checks for redundant import statements.

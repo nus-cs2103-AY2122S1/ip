@@ -5,7 +5,7 @@ package duke.exception;
  * an operation related to a task where it couldn't be found.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class NoSuchTaskException extends DukeException {
 

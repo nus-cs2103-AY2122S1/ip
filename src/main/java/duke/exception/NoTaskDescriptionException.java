@@ -4,7 +4,7 @@ package duke.exception;
  * Signals that an error has occurred due to empty description of a task.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class NoTaskDescriptionException extends DukeException {
     public NoTaskDescriptionException() {
