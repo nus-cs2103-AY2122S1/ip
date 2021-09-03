@@ -10,6 +10,6 @@ import duke.Ui;
  */
 public abstract class Command {
 
-    public abstract void runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException;
+    public abstract String runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException;
     public abstract boolean isExit();
 }

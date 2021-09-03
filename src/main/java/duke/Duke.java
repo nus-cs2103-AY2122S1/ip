@@ -29,7 +29,9 @@ public class Duke {
     /**
      * Empty class constructor.
      */
-    public Duke() { }
+    public Duke() {
+        this("src/main/data/dukeSave.txt");
+    }
 
     /**
      * To run the program.
@@ -66,6 +68,11 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            Command c = Parser.parseInput(input);
+            return c.runCommand(taskList, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

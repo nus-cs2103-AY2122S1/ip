@@ -19,9 +19,10 @@ public class ExitCommand extends Command {
      * @param storage A Storage object that loads and saves tasks in the file.
      */
     @Override
-    public void runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.showGoodbye();
+    public String runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+
         storage.save(taskList);
+        return ui.showGoodbye();
     }
 
     /**

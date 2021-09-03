@@ -67,10 +67,12 @@ public class AddCommand extends Command {
      * @param storage A Storage object that loads and saves tasks in the file.
      */
     @Override
-    public void runCommand(TaskList taskList, Ui ui, Storage storage) {
-        ui.taskAdded(task);
+    public String runCommand(TaskList taskList, Ui ui, Storage storage) {
+        String s = "";
+        s += ui.taskAdded(task);
         taskList.addTask(task);
-        ui.showTaskListSize(taskList);
+        s += ui.showTaskListSize(taskList);
+        return s;
     }
 
     /**

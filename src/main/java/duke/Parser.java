@@ -21,6 +21,7 @@ public class Parser {
      * @throws DukeException If input command is not recognized.
      */
     public static Command parseInput(String input) throws DukeException {
+
         if (input.equalsIgnoreCase("BYE")) {
             return new ExitCommand();
         } else if (input.equalsIgnoreCase("LIST")) {

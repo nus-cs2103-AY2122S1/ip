@@ -18,8 +18,8 @@ public class ListCommand extends Command {
      * @param storage A Storage object that loads and saves tasks in the file.
      */
     @Override
-    public void runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.printTasks(taskList);
+    public String runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        return ui.printTasks(taskList);
     }
 
     /**

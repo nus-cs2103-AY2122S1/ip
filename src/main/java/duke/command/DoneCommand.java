@@ -33,9 +33,9 @@ public class DoneCommand extends Command {
      * @param storage A Storage object that loads and saves tasks in the file.
      */
     @Override
-    public void runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.markTask(index - 1);
-        ui.taskMarked(taskList.getTask(index - 1));
+        return ui.taskMarked(taskList.getTask(index - 1));
     }
 
     /**

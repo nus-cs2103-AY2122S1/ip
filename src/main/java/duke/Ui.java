@@ -20,7 +20,7 @@ public class Ui {
     /**
      * Prints the greeting message and program usage at the start of the program.
      */
-    public void showStartup() {
+    public String showStartup() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -37,9 +37,8 @@ public class Ui {
                 + "done [Task Number]                           - mark task as done\n"
                 + "find [Description]                           - search for task with word\n"
                 + "bye                                          - say goodbye\n";
-        System.out.println(logo + greeting + "\n"
-                + usage);
-        showLine();
+        return logo + greeting + "\n"
+                + usage + showLine();
     }
 
     /**
@@ -54,15 +53,15 @@ public class Ui {
     /**
      * Prints a line.
      */
-    public void showLine() {
-        System.out.println("_______________________________________________________\n");
+    public String showLine() {
+        return "_______________________________________________________\n";
     }
 
     /**
      * Prints the loading error message.
      */
-    public void showLoadingError() {
-        System.out.println("I can't locate the file!\n");
+    public String showLoadingError() {
+        return "I can't locate the file!\n";
     }
 
     /**
@@ -70,19 +69,19 @@ public class Ui {
      *
      * @param errorMsg The error message.
      */
-    public void showError(String errorMsg) {
-        System.out.println(errorMsg);
+    public String showError(String errorMsg) {
+        return errorMsg;
     }
 
     /**
      * Prints all the current tasks in the TaskList.
      * @param taskList The TaskList object containing all tasks.
      */
-    public void printTasks(TaskList taskList) {
+    public String printTasks(TaskList taskList) {
         if (taskList.isEmpty()) {
-            System.out.println("You have no tasks!\n");
+            return "You have no tasks!\n";
         } else {
-            System.out.println("Here are your tasks!\n" + taskList.toString());
+            return "Here are your tasks!\n" + taskList.toString();
         }
     }
 
@@ -92,12 +91,12 @@ public class Ui {
      * @param filter The string to search for.
      * @param taskList The taskList to search in.
      */
-    public void showSearchResult(String filter, TaskList taskList) {
+    public String showSearchResult(String filter, TaskList taskList) {
         TaskList searchResult = taskList.findTasks(filter);
         if (searchResult.isEmpty()) {
-            System.out.println("Sorry, there are no tasks that match your search!");
+            return "Sorry, there are no tasks that match your search!";
         } else {
-            System.out.println("Here are the matching tasks in your list:\n"
+            return ("Here are the matching tasks in your list:\n"
                     + searchResult.toString());
         }
     }
@@ -107,8 +106,8 @@ public class Ui {
      *
      * @param task The task object that was added.
      */
-    public void taskAdded(Task task) {
-        System.out.println("Okay! I've added this task:\n    " + task.toString());
+    public String taskAdded(Task task) {
+        return ("Okay! I've added this task:\n    " + task.toString()) + "\n";
     }
 
     /**
@@ -116,8 +115,8 @@ public class Ui {
      *
      * @param taskList The TaskList object containing all tasks.
      */
-    public void showTaskListSize(TaskList taskList) {
-        System.out.printf("You have %d task(s) in the list.\n\n", taskList.getSize());
+    public String showTaskListSize(TaskList taskList) {
+        return String.format("You have %d task(s) in the list.\n\n", taskList.getSize());
     }
 
     /**
@@ -125,8 +124,8 @@ public class Ui {
      *
      * @param task The task object that was deleted.
      */
-    public void taskDeleted(Task task) {
-        System.out.println("Okay! I've removed this task:\n    " + task.toString());
+    public String taskDeleted(Task task) {
+        return ("Okay! I've removed this task:\n    " + task.toString());
     }
 
     /**
@@ -134,16 +133,15 @@ public class Ui {
      *
      * @param task The task object that was marked done.
      */
-    public void taskMarked(Task task) {
-        System.out.println("Okay! This task has been marked done:");
-        System.out.println("  " + task.toString() + "\n");
+    public String taskMarked(Task task) {
+        return ("Okay! This task has been marked done:\n  " + task.toString() + "\n");
     }
 
     /**
      * Prints the goodbye message.
      */
-    public void showGoodbye() {
-        System.out.println("Bye bye!\n");
+    public String showGoodbye() {
         scanner.close();
+        return "Bye bye!\n";
     }
 }

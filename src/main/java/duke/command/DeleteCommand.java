@@ -33,10 +33,12 @@ public class DeleteCommand extends Command {
      * @param storage A Storage object that loads and saves tasks in the file.
      */
     @Override
-    public void runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.taskDeleted(taskList.getTask(index - 1));
+    public String runCommand(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+        String s = "";
+        s += ui.taskDeleted(taskList.getTask(index - 1));
         taskList.deleteTask(index - 1);
-        ui.showTaskListSize(taskList);
+        s += ui.showTaskListSize(taskList);
+        return s;
     }
 
     /**
