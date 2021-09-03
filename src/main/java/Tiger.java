@@ -30,18 +30,18 @@ public class Tiger {
         return ui.isExited();
     }
 
-//    public static void main(String[] args) {
-//        Tiger tiger = new Tiger();
-//        Scanner scanner = new Scanner(System.in);
-//        String response;
-//        response = tiger.start();
-//        System.out.println(response);
-//        while (!tiger.isExited()) {
-//            String userInput = scanner.nextLine();
-//            response = tiger.getResponse(userInput);
-//            System.out.println(response);
-//
-//        }
-//    }
+    public static void main(String[] args) {
+        Tiger tiger = new Tiger();
+        Scanner scanner = new Scanner(System.in);
+        String response;
+        response = tiger.start();
+        System.out.println(response);
+        while (!tiger.isExited()) {
+            String userInput = scanner.nextLine();
+            response = tiger.getResponse(userInput);
+            System.out.println(response);
+
+        }
+    }
 
 }
