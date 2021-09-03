@@ -5,7 +5,6 @@ import java.time.format.DateTimeParseException;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 
@@ -34,23 +33,20 @@ public class QueryCommand extends Command {
      * @throws InvalidCommandException If the command body is invalid.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         switch (this.commandType) {
         case LIST: {
-            // Ui.getMessage(taskList.printList());
-            break;
+            return taskList.printList();
         }
         case QUERY: {
             try {
-                // Ui.getMessage(taskList.printList(LocalDate.parse(this.commandBody)));
+                return taskList.printList(LocalDate.parse(this.commandBody));
             } catch (DateTimeParseException e) {
                 throw new InvalidCommandException();
             }
-            break;
         }
         case FIND: {
-            // Ui.getMessage(taskList.printList(this.commandBody));
-            break;
+            return taskList.printList(this.commandBody);
         }
         default:
             // Should not reach here

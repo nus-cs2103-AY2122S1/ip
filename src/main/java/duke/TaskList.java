@@ -91,7 +91,7 @@ public class TaskList {
         }
         Task task = this.taskList.get(item - 1);
         if (task.isDone()) {
-            throw new DukeException("☹ OOPS!!! The task is already done!");
+            throw new DukeException("OOPS!!! The task is already done!");
         }
         task.setDone(true);
     }
@@ -109,7 +109,7 @@ public class TaskList {
         } else {
             int listSize = this.taskList.size();
             for (int i = 0; i < listSize; i++) {
-                builder.append("\t\t").append(i + 1).append(". ").append(this.taskList.get(i));
+                builder.append("    ").append(i + 1).append(". ").append(this.taskList.get(i));
                 if (i < listSize - 1) {
                     builder.append("\n");
                 }
@@ -123,8 +123,8 @@ public class TaskList {
      * @return A string of task descriptions.
      */
     public String printList() {
-        StringBuilder itemList = new StringBuilder("\tHere are the tasks in your list:\n");
-        this.buildList(itemList, "\tNothing here yet...");
+        StringBuilder itemList = new StringBuilder("Here are the tasks in your list:\n");
+        this.buildList(itemList, "Nothing here yet...");
 
         return itemList.toString();
     }
@@ -143,8 +143,8 @@ public class TaskList {
 
         TaskList targetList = new TaskList(targetTasks);
 
-        StringBuilder itemList = new StringBuilder("\tHere is the result:\n");
-        targetList.buildList(itemList, "\tNothing special will happen on this day");
+        StringBuilder itemList = new StringBuilder("Here is the result:\n");
+        targetList.buildList(itemList, "Nothing special will happen on this day");
 
         return itemList.toString();
     }
@@ -162,8 +162,8 @@ public class TaskList {
 
         TaskList targetList = new TaskList(targetTasks);
 
-        StringBuilder itemList = new StringBuilder("\tHere is the result:\n");
-        targetList.buildList(itemList, "\tWow! Nothing matches your keyword.");
+        StringBuilder itemList = new StringBuilder("Here is the result:\n");
+        targetList.buildList(itemList, "Wow! Nothing matches your keyword.");
 
         return itemList.toString();
     }

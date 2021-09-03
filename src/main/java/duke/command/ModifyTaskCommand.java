@@ -32,7 +32,7 @@ public class ModifyTaskCommand extends Command {
      * @throws IndexMismatchException If the command body cannot be parsed as a positive integer.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage) throws DukeException {
         if (!this.commandBody.matches("\\d+")) {
             throw new IndexMismatchException();
         }
@@ -43,14 +43,12 @@ public class ModifyTaskCommand extends Command {
         case DONE: {
             taskList.completeTask(item);
             storage.refreshTask(taskList);
-            Ui.taskDoneMessage(task);
-            break;
+            return Ui.taskDoneMessage(task);
         }
         case DELETE: {
             taskList.removeTask(item);
             storage.refreshTask(taskList);
-            Ui.removeTaskMessage(taskList, task);
-            break;
+            return Ui.removeTaskMessage(taskList, task);
         }
         default:
             // Should not reach here

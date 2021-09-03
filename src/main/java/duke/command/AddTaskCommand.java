@@ -30,10 +30,10 @@ public class AddTaskCommand extends Command {
      * @param storage  The storage in which a task will be added.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList taskList, Storage storage) {
         Task task = Parser.descriptionToTask(this.taskType, this.commandBody);
         taskList.addTask(task);
         storage.addTask(task);
-        Ui.addTaskMessage(taskList, task);
+        return Ui.addTaskMessage(taskList, task);
     }
 }

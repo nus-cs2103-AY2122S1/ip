@@ -8,6 +8,6 @@ public class IndexMismatchException extends DukeException {
      * Constructs an {@code IndexMismatchException}.
      */
     public IndexMismatchException() {
-        super("☹ OOPS!!! The item should be an positive integer.");
+        super("OOPS!!! The item should be an positive integer.");
     }
 }

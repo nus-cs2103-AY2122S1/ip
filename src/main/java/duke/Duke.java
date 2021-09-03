@@ -2,6 +2,9 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.javafx.Main;
+import javafx.application.Application;
+import javafx.application.Platform;
 
 /**
  * A class that encapsulates Duke, a task management bot.
@@ -25,27 +28,12 @@ public class Duke {
         try {
             this.tasks = this.storage.parseToTaskList();
         } catch (DukeException e) {
-            Ui.reportError(e);
+            this.getResponse(e.getMessage());
         }
     }
 
-    /**
-     * Runs the Duke bot. Users may deal with tasks by entering command.
-     */
-    private void run() {
-        boolean isExit = false;
-        Ui.greet();
-
-        while (!isExit) {
-            try {
-                String input = Ui.readCommand();
-                Command command = Parser.parseCommand(input);
-                command.execute(this.tasks, this.storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                Ui.reportError(e);
-            }
-        }
+    public static void main(String[] args) {
+        Application.launch(Main.class, args);
     }
 
     /**
@@ -53,6 +41,14 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return Ui.greet();
+        try {
+            Command command = Parser.parseCommand(input);
+            if (command.isExit()) {
+                Platform.exit();
+            }
+            return command.execute(this.tasks, this.storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

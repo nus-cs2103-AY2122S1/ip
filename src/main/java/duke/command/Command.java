@@ -22,12 +22,12 @@ public abstract class Command {
     }
 
     /**
-     * Executes the command.
+     * Executes the command and return the reply.
      *
      * @param taskList The task list that may be modified or referenced by the command.
      * @param storage  The storage that may be modified of referenced by the command.
      */
-    public abstract void execute(TaskList taskList, Storage storage);
+    public abstract String execute(TaskList taskList, Storage storage);
 
     /**
      * Indicates if the command is an exit command.

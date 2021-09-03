@@ -31,8 +31,9 @@ public class Storage {
      * necessary directory if they do not exist.
      *
      * @param fileName The file name.
+     * @throws DukeException If unable to find or create a file.
      */
-    public Storage(String fileName) {
+    public Storage(String fileName) throws DukeException {
         try {
             if (!Files.isDirectory(DEFAULT_DIR)) {
                 Files.createDirectories(DEFAULT_DIR);
@@ -44,7 +45,7 @@ public class Storage {
                 this.tasks = taskPath.toFile();
             }
         } catch (IOException e) {
-            Ui.reportError("☹ OOPS!!! Unable to find or create a file!");
+            throw new DukeException("OOPS!!! Unable to find or create a file!");
         }
     }
 
@@ -64,17 +65,16 @@ public class Storage {
      * TaskList} if anything wrong happens.
      *
      * @return A {@code TaskList} based on the file content.
+     * @throws DukeException If anything wrong happens.
      */
-    public TaskList parseToTaskList() {
+    public TaskList parseToTaskList() throws DukeException {
         ArrayList<Task> result = new ArrayList<>();
         try {
             List<String> data = Files.readAllLines(tasks.toPath());
             data.forEach(x -> result.add(lineToTask(x)));
-        } catch (IOException e) {
-            Ui.reportError("☹ OOPS!!! Something wrong happened when reading the file.");
-        } catch (DukeException e) {
+        } catch (IOException | DukeException e) {
             result.clear();
-            Ui.reportError(e);
+            throw new DukeException("OOPS!!! Something wrong happened when reading the file.");
         }
         return new TaskList(result);
     }
@@ -83,8 +83,9 @@ public class Storage {
      * Adds the given task into the file.
      *
      * @param task The given task.
+     * @throws DukeException If anything wrong happens.
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.tasks, true);
             String line = task.taskToLine();
@@ -95,7 +96,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            Ui.reportError("☹ OOPS!!! Something wrong happened when modifying the file.");
+            throw new DukeException("OOPS!!! Something wrong happened when modifying the file.");
         }
     }
 
@@ -103,8 +104,9 @@ public class Storage {
      * Reset the file to make it only contains tasks in the given {@code taskList}.
      *
      * @param taskList The {@code taskList} you want to overwrite the file data.
+     * @throws DukeException If anything wrong happens.
      */
-    public void refreshTask(TaskList taskList) {
+    public void refreshTask(TaskList taskList) throws DukeException {
         try {
             int numOfTask = taskList.size();
             if (numOfTask == 0) {
@@ -117,7 +119,7 @@ public class Storage {
             fileWriter.write(taskList.getTask(numOfTask).taskToLine());
             fileWriter.close();
         } catch (IOException e) {
-            Ui.reportError("☹ OOPS!!! Something wrong happened when modifying the file.");
+            throw new DukeException("OOPS!!! Something wrong happened when modifying the file.");
         }
     }
 }

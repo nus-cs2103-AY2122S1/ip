@@ -8,6 +8,6 @@ public class InvalidCommandException extends DukeException {
      * Constructs an {@code InvalidCommandException}.
      */
     public InvalidCommandException() {
-        super("☹ OOPS!!! I don't understand that!");
+        super("OOPS!!! I don't understand that!");
     }
 }
