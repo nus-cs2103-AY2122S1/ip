@@ -19,6 +19,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Separator;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -92,7 +93,6 @@ public class Gui implements Ui {
             if (newValue != null) {
                 datePicker.setValue(null);
             }
-
         });
         datePicker.valueProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
@@ -147,9 +147,16 @@ public class Gui implements Ui {
             }
         });
 
+        TableColumn<DukeTask, Button> actionsColumn = new TableColumn<>("Actions");
+        actionsColumn.setCellFactory(ActionButtonTableCell.forTableColumn("Delete", (task) -> {
+            deleteTask(task);
+            return task;
+        }));
+
         taskTableView.getColumns().add(isDoneColumn);
         taskTableView.getColumns().add(nameColumn);
         taskTableView.getColumns().add(dateColumn);
+        taskTableView.getColumns().add(actionsColumn);
 
         // Whenever the checkbox changes state, re-save the list
         taskList.getTasks().forEach((task) -> {
@@ -188,6 +195,13 @@ public class Gui implements Ui {
         storage.saveTaskList(taskList);
 
         taskTableView.getItems().add(task);
+    }
+
+    private void deleteTask(DukeTask task) {
+        taskList.removeTaskAt(taskTableView.getItems().indexOf(task));
+        storage.saveTaskList(taskList);
+
+        taskTableView.getItems().remove(task);
     }
 
     private void initializeUi() {
