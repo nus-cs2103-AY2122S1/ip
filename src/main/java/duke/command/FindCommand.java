@@ -8,9 +8,9 @@ import duke.ui.Ui;
  * Encapsulates a Find commands that deals with finding related tasks given a keyword.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
-public class Find extends DukeCommand {
+public class FindCommand extends DukeCommand {
     private final String keyword;
 
     /**
@@ -21,7 +21,7 @@ public class Find extends DukeCommand {
      * @param list    The TaskList handler that handles operation related to task.
      * @param keyword The keyword to find for related task in the task list.
      */
-    public Find(Ui ui, Storage storage, TaskList list, String keyword) {
+    public FindCommand(Ui ui, Storage storage, TaskList list, String keyword) {
         super(ui, storage, list);
         this.keyword = keyword;
     }
@@ -30,9 +30,11 @@ public class Find extends DukeCommand {
      * Executes the Find command. The command tries to find tasks
      * that have descriptions related to the keyword, and add those
      * tasks to a list, then prints the list of related task.
+     * @return
      */
     @Override
-    public void execute() {
-        ui.printRelatedTasks(list.findRelatedTask(keyword));
+    public String execute() {
+//        ui.printRelatedTasks(list.findRelatedTask(keyword));
+        return ui.getRelatedTasks(list.findRelatedTask(keyword));
     }
 }

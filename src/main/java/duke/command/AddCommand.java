@@ -9,9 +9,9 @@ import duke.ui.Ui;
  * Encapsulates an Add command that deals with adding task to the task list.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
-public class Add extends DukeCommand {
+public class AddCommand extends DukeCommand {
     private final Task task;
 
     /**
@@ -22,7 +22,7 @@ public class Add extends DukeCommand {
      * @param list    The TaskList handler that handles operation related to task.
      * @param task    The task to be added to the task list.
      */
-    public Add(Ui ui, Storage storage, TaskList list, Task task) {
+    public AddCommand(Ui ui, Storage storage, TaskList list, Task task) {
         super(ui, storage, list);
         this.task = task;
     }
@@ -30,11 +30,13 @@ public class Add extends DukeCommand {
     /**
      * Executes the Add command. Adds task to the task list and
      * prints a message after adding, and update the local data file.
+     * @return
      */
     @Override
-    public void execute() {
+    public String execute() {
         list.add(task);
-        ui.addTaskMessage(list.size(), task);
+//        ui.addTaskMessage(list.size(), task);
         storage.save(list.getList());
+        return ui.addTaskGUI(list.size(), task);
     }
 }

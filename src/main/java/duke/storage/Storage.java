@@ -15,7 +15,7 @@ import duke.ui.Ui;
  * Encapsulate the handling of loading and storing files on local directory for duke.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class Storage {
     private static final String FOLDER_NAME = "data";
@@ -34,7 +34,7 @@ public class Storage {
             System.out.println("Something went wrong: " + e.getMessage());
         } finally {
             if (created) {
-                System.out.println("    New data file has been created.");
+                System.out.println("New data file has been created.");
             } else {
                 System.out.println("Data file already exist.");
             }
@@ -65,7 +65,7 @@ public class Storage {
         File file = new File(String.format("%s/%s", FOLDER_NAME, FILE_NAME));
         try {
             Scanner sc = new Scanner(file);
-            Ui.printMessageWithFormat("I have found past data in your local storage, "
+            System.out.println("I have found past data in your local storage, "
                     + "type 'list' to view the previous tasks.");
             while (sc.hasNextLine()) {
                 String curr = sc.nextLine();
@@ -74,7 +74,7 @@ public class Storage {
             }
             sc.close();
         } catch (FileNotFoundException e) {
-            Ui.printMessageWithFormat("No past data found in your local storage, initializing from blank state.");
+            System.out.println("No past data found in your local storage, initializing from blank state.");
             createFolder();
             createFile();
         }

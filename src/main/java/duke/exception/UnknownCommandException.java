@@ -6,7 +6,7 @@ package duke.exception;
  * operation is not supported by the program.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class UnknownCommandException extends DukeException {
     public UnknownCommandException() {
@@ -22,6 +22,6 @@ public class UnknownCommandException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return super.formatMessage("I cannot understand what you want lah!!!");
+        return "I cannot understand what you want lah!!!";
     }
 }

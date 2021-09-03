@@ -9,7 +9,7 @@ import duke.ui.Ui;
  * Encapsulates commands that can be executed by the duke program.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public abstract class DukeCommand {
     protected final Ui ui;
@@ -33,8 +33,9 @@ public abstract class DukeCommand {
      * Executes the command.
      *
      * @throws DukeException When an error occurred.
+     * @return A message to be displayed on the GUI.
      */
-    public abstract void execute() throws DukeException;
+    public abstract String execute() throws DukeException;
 
     /**
      * Checks if the command is an Exit command.

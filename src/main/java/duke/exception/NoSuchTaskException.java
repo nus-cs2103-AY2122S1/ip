@@ -5,7 +5,7 @@ package duke.exception;
  * an operation related to a task where it couldn't be found.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class NoSuchTaskException extends DukeException {
 
@@ -18,6 +18,6 @@ public class NoSuchTaskException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return super.formatMessage("Hello??? You sure got this task or not???");
+        return "Hello??? You sure got this task or not???";
     }
 }

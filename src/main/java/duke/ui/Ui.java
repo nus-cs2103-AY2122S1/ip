@@ -8,7 +8,7 @@ import duke.task.Task;
  * Encapsulates the handling of user interactions of duke.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class Ui {
     private static final String INDENTATION = "    ";
@@ -19,7 +19,7 @@ public class Ui {
      */
     private static final String INTRO = "Hello from\n"
             + INDENTATION + " ____        _        \n"
-            + INDENTATION + "|  _ \\ _   _| | _____ \n"
+            + INDENTATION + "|  _  \\ _   _| | _____ \n"
             + INDENTATION + "| | | | | | | |/ / _ \\\n"
             + INDENTATION + "| |_| | |_| |   <  __/\n"
             + INDENTATION + "|____/ \\__,_|_|\\_\\___|\n"
@@ -36,6 +36,7 @@ public class Ui {
         System.out.println(INDENTATION + HORIZONTAL_LINE);
     }
 
+
     /**
      * Prints formatted message when duke start.
      */
@@ -43,11 +44,19 @@ public class Ui {
         printMessageWithFormat(INTRO);
     }
 
+    public String greetForGUI(){
+        return INTRO;
+    }
+
     /**
      * Prints formatted message when the user exits duke.
      */
     public void farewellMessage() {
         printMessageWithFormat("Bye bye, i go sleep already. See you again.");
+    }
+
+    public String farewellGUI() {
+        return "Bye bye, i go sleep already. See you again.";
     }
 
     /**
@@ -63,6 +72,12 @@ public class Ui {
         printMessageWithFormat(s);
     }
 
+    public String addTaskGUI(int taskLeft, Task t) {
+        String s = "Got it. I've added this task:\n" + INDENTATION + "  " + t.checkStatus();
+        s += String.format("\nNow you have %d tasks in the list.", taskLeft);
+        return s;
+    }
+
     /**
      * Prints formatted message when a task is deleted from the task list.
      * Message includes the descriptions of the task and number of task in the task list.
@@ -76,6 +91,12 @@ public class Ui {
         printMessageWithFormat(s);
     }
 
+    public String deleteTaskGUI(int taskLeft, Task t) {
+        String s = "Noted. I've removed this task:\n" + INDENTATION + "  " + t.checkStatus();
+        s += String.format("\nNow you have %d tasks in the list.", taskLeft);
+        return s;
+    }
+
     /**
      * Prints formatted message when a task is mark as done.
      * Message includes the descriptions of the task and number of task in the task list.
@@ -86,6 +107,12 @@ public class Ui {
         String s = "Nice! I've marked this task as done:\n   ";
         s += INDENTATION + task.checkStatus();
         printMessageWithFormat(s);
+    }
+
+    public String markDoneGUI(Task t) {
+        String s = "Nice! I've marked this task as done:\n   ";
+        s += INDENTATION + t.checkStatus();
+        return s;
     }
 
     /**
@@ -101,20 +128,34 @@ public class Ui {
         printMessageWithFormat(s.toString());
     }
 
+    public String listTasksGUI(ArrayList<Task> taskList) {
+        if (taskList.size() > 0) {
+            StringBuilder s = new StringBuilder("Here are the tasks in your list:");
+            for (int i = 1; i <= taskList.size(); i++) {
+                s.append(String.format("\n%s%d. %s", INDENTATION, i, taskList.get(i - 1).checkStatus()));
+            }
+            return s.toString();
+        }
+        return "There are no task in your list currently, please add some.";
+    }
+
     /**
-     * Prints the list of task containing the tasks related to the keyword provided by user.
+     * Shows the list of task containing the tasks related to the keyword provided by user.
      *
      * @param list The list of related tasks.
+     * @return A string showing the list of related tasks.
      */
-    public void printRelatedTasks(ArrayList<Task> list) {
+    public String getRelatedTasks(ArrayList<Task> list) {
+        StringBuilder s = new StringBuilder("");
+
         if (list.size() > 0) {
-            StringBuilder s = new StringBuilder("Here are the matching tasks in your list:");
+            s.append("Here are the matching tasks in your list:");
             for (int i = 1; i <= list.size(); i++) {
-                s.append(String.format("\n%s%d. %s,", INDENTATION, i, list.get(i - 1).checkStatus()));
+                s.append(String.format("\n%s%d. %s", INDENTATION, i, list.get(i - 1).checkStatus()));
             }
-            printMessageWithFormat(s.toString());
         } else {
-            printMessageWithFormat("There are no matching task in your list.");
+            s.append("There are no matching task in your list.");
         }
+        return s.toString();
     }
 }

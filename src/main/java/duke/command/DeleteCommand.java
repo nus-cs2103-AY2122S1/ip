@@ -10,9 +10,9 @@ import duke.ui.Ui;
  * Encapsulates a delete commands that deals with deleting a specific task from the task list.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
-public class Delete extends DukeCommand {
+public class DeleteCommand extends DukeCommand {
     private final int taskNumber;
 
     /**
@@ -23,7 +23,7 @@ public class Delete extends DukeCommand {
      * @param list       The TaskList handler that handles operation related to task.
      * @param taskNumber The task number that corresponds to the task that user want to delete.
      */
-    public Delete(Ui ui, Storage storage, TaskList list, int taskNumber) {
+    public DeleteCommand(Ui ui, Storage storage, TaskList list, int taskNumber) {
         super(ui, storage, list);
         this.taskNumber = taskNumber;
     }
@@ -33,11 +33,13 @@ public class Delete extends DukeCommand {
      * prints a message after deleting, and update the local data file.
      *
      * @throws NoSuchTaskException When the task number is invalid.
+     * @return
      */
     @Override
-    public void execute() throws NoSuchTaskException {
+    public String execute() throws NoSuchTaskException {
         Task t = list.delete(taskNumber);
-        ui.deleteTaskMessage(list.size(), t);
+//        ui.deleteTaskMessage(list.size(), t);
         storage.save(list.getList());
+        return ui.deleteTaskGUI(list.size(), t);
     }
 }

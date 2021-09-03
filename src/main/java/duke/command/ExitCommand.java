@@ -8,9 +8,9 @@ import duke.ui.Ui;
  * Encapsulates an Exit commands that deals with exiting the program.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
-public class Exit extends DukeCommand {
+public class ExitCommand extends DukeCommand {
 
     /**
      * Constructor for an Exit Command.
@@ -19,18 +19,20 @@ public class Exit extends DukeCommand {
      * @param storage The storage handler that handles saving or loading data to local directory.
      * @param list    The TaskList handler that handles operation related to task.
      */
-    public Exit(Ui ui, Storage storage, TaskList list) {
+    public ExitCommand(Ui ui, Storage storage, TaskList list) {
         super(ui, storage, list);
     }
 
     /**
      * Executes the exit command. Prints farewellMessage
      * and save the task list onto the local directory.
+     * @return
      */
     @Override
-    public void execute() {
-        ui.farewellMessage();
+    public String execute() {
+//        ui.farewellMessage();
         storage.save(list.getList());
+        return ui.farewellGUI();
     }
 
     /**

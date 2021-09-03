@@ -4,7 +4,7 @@ package duke.exception;
  * Signals that an error has occurred due to empty description of a task.
  *
  * @author Zhi Bin
- * @version Duke Level 9
+ * @version Duke Level 10
  */
 public class NoTaskDescriptionException extends DukeException {
     public NoTaskDescriptionException() {
@@ -19,6 +19,6 @@ public class NoTaskDescriptionException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return super.formatMessage("Hello??? Your task no description one ah???");
+        return "Hello??? Your task no description one ah???";
     }
 }
