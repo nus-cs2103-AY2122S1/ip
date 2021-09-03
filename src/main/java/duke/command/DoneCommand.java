@@ -3,6 +3,8 @@ package duke.command;
 import duke.core.Storage;
 import duke.core.TaskList;
 
+import java.io.IOException;
+
 /**
  * Encapsulates a command to mark a task as completed based on index.
  */
@@ -19,15 +21,21 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Mark the task as done in the task list and storage file.
+     * Marks the task as done in the task list and storage file and returns the output to be displayed by Duke.
      *
      * @param taskList The TaskList object storing all the tasks.
      * @param storage The Storage object which was instantiated with the appropriate storage filepath.
+     * @return The output to be displayed by Duke.
      */
     @Override
-    public void execute(TaskList taskList, Storage storage) {
-        taskList.markAsDone(indexOfCompleted);
-        storage.saveTasksToFile(taskList);
+    public String execute(TaskList taskList, Storage storage) {
+        String output = taskList.markAsDone(indexOfCompleted);
+        try {
+            storage.saveTasksToFile(taskList);
+        } catch (IOException e) {
+            output = String.format("%s\n%s", output, e.getMessage());
+        }
+        return output;
     }
 
     /**

@@ -31,30 +31,17 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the task list.
+     * Adds a task to the task list and returns the message to be displayed by Duke.
      *
      * @param task The task to be added.
+     * @return The message to be displayed by Duke.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         listOfTasks.add(task);
         String outputLine1 = String.format("Got it. I've added this task:\n%s\n", task);
         String outputLine2 = String.format("Now you have %s tasks in the list.", listOfTasks.size());
         String output = outputLine1 + outputLine2;
-        Ui.formatAndPrint(output);
-    }
-
-    /**
-     * Lists the tasks within the task list.
-     */
-    public void listTasks() {
-        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
-        int index = 1;
-        for (Task task : listOfTasks) {
-            sb.append(String.format("%s. %s\n", index, task));
-            index++;
-        }
-        // Removed the last \n for nicer output
-        Ui.formatAndPrint(sb.substring(0, sb.length() - 1));
+        return output;
     }
 
     public void findAndListTasks(String keyword) {
@@ -79,31 +66,34 @@ public class TaskList {
     }
 
     /**
-     * Marks a task within the task list as completed based on the index provided.
+     * Marks a task within the task list as completed based on the index provided and returns the message to be
+     * diplayed by Duke.
      *
      * @param index Index of the task to be marked as completed.
+     * @return The message to be displayed by Duke.
      */
-    public void markAsDone(int index) {
+    public String markAsDone(int index) {
         Task taskToMark = listOfTasks.get(index - 1);
         taskToMark.setCompleted();
         String outputLine1 = "Nice! I've marked this task as done:\n";
         String output = outputLine1 + taskToMark;
-        Ui.formatAndPrint(output);
+        return output;
     }
 
     /**
-     * Deletes a task within the task list based on the index provided.
+     * Deletes a task within the task list based on the index provided and returns the message to be displayed by Duke.
      *
      * @param index Index of the task to be deleted.
+     * @return The message to be displayed by Duke.
      */
-    public void delete(int index) {
+    public String delete(int index) {
         Task taskToRemove = listOfTasks.get(index - 1);
         listOfTasks.remove(index - 1);
         String outputLine1 = "Noted. I've removed this task: \n";
         String outputLine2 = taskToRemove.toString() + "\n";
         String outputLine3 = String.format("Now you have %s tasks in the list.", listOfTasks.size());
         String output = outputLine1 + outputLine2 + outputLine3;
-        Ui.formatAndPrint(output);
+        return output;
     }
 
     /**
@@ -119,16 +109,31 @@ public class TaskList {
      * Saves the tasks within the task list in the storage file.
      *
      * @param file A File object encapsulating the storage file.
+     * @throws IOException If the storage filepath exists but is a directory rather than a regular file,
+     *  does not exist but cannot be created, or cannot be opened for any other reason.
      */
-    public void saveContents(File file) {
-        try {
-            FileWriter fw = new FileWriter(file.getPath());
-            for (Task task : listOfTasks) {
-                fw.write(task.toStorageFormat() +"\n");
-            }
-            fw.close();
-        } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+    public void saveContents(File file) throws IOException {
+        FileWriter fw = new FileWriter(file.getPath());
+        for (Task task : listOfTasks) {
+            fw.write(task.toStorageFormat() +"\n");
         }
+        fw.close();
+    }
+
+    /**
+     * Returns a String representation of all the tasks within the task list.
+     *
+     * @return A String representation of all the tasks within the task list.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        int index = 1;
+        for (Task task : listOfTasks) {
+            sb.append(String.format("%s. %s\n", index, task));
+            index++;
+        }
+        // Removed the last \n for nicer output
+        return(sb.substring(0, sb.length() - 1));
     }
 }

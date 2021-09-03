@@ -17,12 +17,12 @@ public class Ui {
     }
 
     /**
-     * Bids farewell to the user.
+     * Returns a string that bids farewell to the user.
+     *
+     * @return The farewell message.
      */
-    public static void sayBye() {
-        displayLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        displayLine();
+    public static String farewellMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

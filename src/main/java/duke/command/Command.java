@@ -8,12 +8,14 @@ import duke.core.TaskList;
  */
 public abstract class Command {
     /**
-     * The appropriate action to take depending on run-time type of the Command object.
+     * Performs the appropriate action to take depending on run-time type of the Command object and returns the output
+     * to be displayed by Duke.
      *
      * @param taskList The TaskList object storing all the tasks.
      * @param storage The Storage object which was instantiated with the appropriate storage filepath.
+     * @return The output to be displayed by Duke.
      */
-    public abstract void execute(TaskList taskList, Storage storage);
+    public abstract String execute(TaskList taskList, Storage storage);
 
     /**
      * Returns a boolean specifying whether Duke should terminate.
