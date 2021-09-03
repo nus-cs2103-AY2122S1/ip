@@ -26,7 +26,9 @@ public abstract class Task {
      * @return Character that represents whether a task is done.
      */
     private String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        String doneIcon = "X";
+        String notDoneIcon = " ";
+        return (isDone ? doneIcon : notDoneIcon); // mark done task with X
     }
 
     /** Marks task as done. */

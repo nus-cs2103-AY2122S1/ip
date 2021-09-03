@@ -17,6 +17,7 @@ import duke.task.Task;
  * @version CS2103T AY21/22 Semester 1
  */
 public class ToDoList {
+    private static final String COMPLETE_TASK_MESSAGE = "Good job on completing this task!";
     private final ArrayList<Task> list;
     private final DataManager dataManager;
 
@@ -44,6 +45,7 @@ public class ToDoList {
                             + "  %sNow you have %s tasks in the list.",
                     tasks[0] + Ui.LINE_SEPARATOR, list.size());
         } else {
+            assert tasks.length >= 2 : "There should be at least 2 tasks entered by the user.";
             StringBuilder sb = new StringBuilder("Got it. I've added these tasks:\n");
             for (Task t : tasks) {
                 list.add(t);
@@ -62,13 +64,17 @@ public class ToDoList {
      * @throws InvalidIndexException if user inputs a number larger than number of tasks currently in list.
      */
     public String markTaskAsDone(int index) throws DukeException {
-        if (index > list.size()) {
+        if (index > list.size()) { // Guard Clause
             throw new InvalidIndexException(list.size());
-        } else {
-            Task task = list.get(index - 1);
-            task.markAsDone();
-            return String.format("Good job on completing this task!\n  %s", task);
         }
+
+        if (index < 0) { // Guard Clause
+            throw new DukeNegativeIndexException();
+        }
+
+        Task task = list.get(index - 1);
+        task.markAsDone();
+        return String.format(COMPLETE_TASK_MESSAGE + "\n  %s", task);
     }
 
     /**
@@ -79,16 +85,18 @@ public class ToDoList {
      * @throws DukeNegativeIndexException if user inputs a negative number.
      */
     public String removeFromList(int index) throws DukeException {
-        if (index > list.size()) {
+        if (index > list.size()) { // Guard Clause
             throw new InvalidIndexException(list.size());
-        } else if (index < 0) {
-            throw new DukeNegativeIndexException();
-        } else {
-            Task task = list.get(index - 1);
-            list.remove(index - 1);
-            return String.format("Noted. I've removed this task:\n  %sNow you have %s tasks in the list.",
-                            task + Ui.LINE_SEPARATOR, list.size());
         }
+
+        if (index < 0) { // Guard Clause
+            throw new DukeNegativeIndexException();
+        }
+
+        Task task = list.get(index - 1);
+        list.remove(index - 1);
+        return String.format("Noted. I've removed this task:\n  %sNow you have %s tasks in the list.",
+                        task + Ui.LINE_SEPARATOR, list.size());
     }
 
     /**

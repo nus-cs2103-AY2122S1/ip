@@ -13,6 +13,13 @@ import duke.util.Ui;
  * @version CS2103T AY21/22 Semester 1
  */
 public class FilterCommand extends Command {
+    private static final String ERROR_MISSING_DATE =
+            "Please include a date/time for me to search after the filter command!";
+    private static final String ERROR_MULTIPLE_DATES =
+            "Sorry, I can only search using one date/time.";
+    private static final String EMPTY_FILTERED_LIST =
+            "There are no tasks on this day.";
+
     private final ToDoList list;
 
     public FilterCommand(ToDoList list) {
@@ -21,26 +28,32 @@ public class FilterCommand extends Command {
 
     @Override
     public String getResponse(String input) {
-        if (input.split(" ").length < 2) {
-            return "Please include a date/time for me to search after the filter command!";
-        } else if (input.split(" ").length > 2) {
-            return "Sorry, I can only search using one date/time.";
+        if (input.split(" ").length < 2) { // Guard Clause
+            return ERROR_MISSING_DATE;
+        }
+
+        if (input.split(" ").length > 2) { // Guard Clause
+            return ERROR_MULTIPLE_DATES;
         }
 
         String[] extracted = input.split(" ", 2);
         List<Task> extractedTask = list.filterList(extracted[1]);
 
         if (extractedTask.size() == 0) {
-            return "There are no tasks on this day.";
+            return EMPTY_FILTERED_LIST;
         } else {
-            String output = String.format("Here are your tasks for this day:%s", Ui.LINE_SEPARATOR);
-
-            int count = 1;
-            for (Task t : extractedTask) {
-                output = output.concat(String.format("[%d]. %s", count++, t + Ui.LINE_SEPARATOR + "\t\t"));
-            }
-
-            return output;
+            return formatFilteredList(extractedTask);
         }
+    }
+
+    private String formatFilteredList(ArrayList<Task> extractedTask) {
+        String output = String.format("Here are your tasks for this day:%s", Ui.LINE_SEPARATOR);
+
+        int count = 1;
+        for (Task t : extractedTask) {
+            output = output.concat(String.format("[%d]. %s", count++, t + Ui.LINE_SEPARATOR));
+        }
+
+        return output;
     }
 }
