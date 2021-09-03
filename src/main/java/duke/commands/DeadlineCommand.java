@@ -1,11 +1,11 @@
 package duke.commands;
 
+import java.time.LocalDateTime;
+
+import duke.PersistentStorage;
 import duke.Tasklist;
 import duke.UI;
-import duke.PersistentStorage;
 import duke.tasks.Deadline;
-
-import java.time.LocalDateTime;
 
 /**
  * Class that encapsulates a "deadline" command from the user.

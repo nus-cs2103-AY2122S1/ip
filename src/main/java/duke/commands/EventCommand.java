@@ -1,12 +1,11 @@
 package duke.commands;
 
-import duke.DukeException;
+import java.time.LocalDateTime;
+
+import duke.PersistentStorage;
 import duke.Tasklist;
 import duke.UI;
-import duke.PersistentStorage;
 import duke.tasks.Event;
-
-import java.time.LocalDateTime;
 
 /**
  * Class encapsulating an "event" command from the user

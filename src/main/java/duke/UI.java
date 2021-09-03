@@ -1,8 +1,8 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.Scanner;
+
+import duke.tasks.Task;
 
 /**
  * Class that represents the UI of Duke.
@@ -21,7 +21,7 @@ public class UI {
         /**
          * A constructor for a Response object.
          *
-         * @param content A String containing the content of the Response
+         * @param content A String containing the content of the Response.
          */
         private Response(String content) {
             this.content = content;
@@ -45,13 +45,12 @@ public class UI {
          * @return A Response object detailing the addition of the Task.
          */
         public static Response added(Tasklist tasklist, Task task) {
-            String msg = "Got it. I've added this task:\n\t" 
+            String msg = "Got it. I've added this task:\n\t"
                 + task.toString()
                 + "\nNow you have "
                 + tasklist.getTotalTasks()
                 + (tasklist.getTotalTasks() == 1 ? " task " : " tasks ")
                 + "in the list.";
-    
             Response response = new Response(msg);
             System.out.println(response);
             return response;
@@ -64,10 +63,9 @@ public class UI {
          * @param task The Task that has been completed
          * @return A Response object detailing the completion of the Task
          */
-        public static Response completed(Task task) {
-            String msg = "Nice! I've marked this task as done:\n" 
+        public static Response completedTask(Task task) {
+            String msg = "Nice! I've marked this task as done:\n"
                 + task.toString();
-
             Response response = new Response(msg);
             System.out.println(response);
             return response;
@@ -82,13 +80,13 @@ public class UI {
          * @return A Response detailing the removal of the Task
          */
         public static Response removed(Tasklist tasklist, Task task) {
-            String msg = "Noted. I've removed this task:\n\t" 
-                + task.toString() 
-                + "\nNow you have " 
+            String msg = "Noted. I've removed this task:\n\t"
+                + task.toString()
+                + "\nNow you have "
                 + tasklist.getTotalTasks()
                 + (tasklist.getTotalTasks() == 1 ? " task" : " tasks")
                 + " in the list.";
-    
+
             Response response = new Response(msg);
             System.out.println(response);
             return response;
@@ -102,7 +100,7 @@ public class UI {
          * @return A Response detailing the list of all Tasks in the Tasklist
          */
         public static Response listAllItems(Tasklist tasklist) {
-            Response response = new Response("Here are the tasks in your list:\n" 
+            Response response = new Response("Here are the tasks in your list:\n"
                 + tasklist.toString());
 
             System.out.println(response);
@@ -121,8 +119,7 @@ public class UI {
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n\n";
-    
-            Response response = new Response(logo 
+            Response response = new Response(logo
                 + "Hello there, I'm Duke!\nWhat can I do for you?");
             System.out.println(response);
             return response;
@@ -185,14 +182,11 @@ public class UI {
         @Override
         public String toString() {
             String linebreak = "\t_______________________________________________\n";
-            
             String[] splitByLines = this.content.split("\n");
             String rawContent = "";
-    
             for (int i = 0; i < splitByLines.length; i++) {
-                rawContent += ("\t" + splitByLines[i] + "\n"); 
+                rawContent += ("\t" + splitByLines[i] + "\n");
             }
-            
             String result = (linebreak + rawContent + linebreak);
             return result;
         }
@@ -258,7 +252,7 @@ public class UI {
      * @param task The Task that was completed
      */
     public void showCompletedTask(Task task) {
-        Response.completed(task);
+        Response.completedTask(task);
     }
 
     /**

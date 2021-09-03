@@ -1,12 +1,8 @@
 package duke.commands;
 
-import duke.DukeException;
 import duke.PersistentStorage;
 import duke.Tasklist;
 import duke.UI;
-import duke.tasks.Task;
-
-import java.util.ArrayList;
 
 /**
  * Class encapsulating a "find" command by the user.

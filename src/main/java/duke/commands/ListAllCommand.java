@@ -1,8 +1,8 @@
 package duke.commands;
 
+import duke.PersistentStorage;
 import duke.Tasklist;
 import duke.UI;
-import duke.PersistentStorage;
 
 /**
  * Class encapsulating a "list" command by the user

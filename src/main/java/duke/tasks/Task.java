@@ -9,7 +9,7 @@ public class Task {
     private String description;
 
     /** A boolean representing if the task is complete */
-    private Boolean completed;
+    private Boolean isCompleted;
 
     /**
      * A constructor for a Task
@@ -18,7 +18,7 @@ public class Task {
      */
     public Task(String description) {
         this.description = description;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     // Constructor for a completed Task
@@ -32,14 +32,14 @@ public class Task {
      */
     public Task(String description, Boolean isComplete) {
         this.description = description;
-        this.completed = isComplete;
+        this.isCompleted = isComplete;
     }
 
     /**
      * Sets the calling Task object to complete.
      */
     public void completeTask() {
-        this.completed = true;
+        this.isCompleted = true;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Task {
      * @return True if the task is completed and false otherwise
      */
     public Boolean isCompleted() {
-        return this.completed;
+        return this.isCompleted;
     }
 
     /**
@@ -67,7 +67,7 @@ public class Task {
      * @return A String representing the Task in an easily parsable format.
      */
     public String getFileRepr() {
-        return " | " + (this.completed ? "1" : "0") + " | " + this.description;
+        return " | " + (this.isCompleted ? "1" : "0") + " | " + this.description;
     }
 
     /**
@@ -78,7 +78,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        if (this.completed) {
+        if (this.isCompleted) {
             return ("[X] " + this.description);
         } else {
             return ("[ ] " + this.description);
