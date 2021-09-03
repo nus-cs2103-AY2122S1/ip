@@ -8,6 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -23,7 +27,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
     private Gui gui = new Gui();
-
+    
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/nestor.png"));
 
@@ -44,15 +48,26 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        Timer timer = new Timer();
         String input = userInput.getText();
         String response = duke.getResponse(input);
         if (input.equals("bye")) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
+                    
             );
-            Platform.exit();
-            System.exit(0);
+            userInput.clear();
+            userInput.setEditable(false);
+            timer.schedule(new TimerTask() {
+                               @Override
+                               public void run() {
+                                   // Your database code here
+                                   Platform.exit();
+                                   System.exit(0);
+                               }
+                           },
+                    2*1000);
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),

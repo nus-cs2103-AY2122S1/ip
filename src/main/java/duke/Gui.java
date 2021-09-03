@@ -10,10 +10,10 @@ import javafx.scene.control.Label;
 public class Gui {
     /**
      * Bot greeting which shows up whenever the bot is instantiated.
-     * @return
+     * @return String that shows the user greeting
      */
     public String dukeGreeting() {
-        String name = "JARVIS";
+        String name = "Nestor";
         return "Hello I am " + name + ".\n"
                 + "Is there anything I can do for you Sir?\n";
     }
