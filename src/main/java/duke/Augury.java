@@ -93,8 +93,6 @@ public class Augury {
                     isRunning = false;
                     break;
                 }
-
-                ui.speak(result);
             } catch (AuguryException e) {
                 ui.speak(e.getMessage() + "\n\t Please try again.");
             }
