@@ -74,7 +74,7 @@ public class Ui {
         return message;
     }
 
-    private String formatMessage(String... messages) {
+    public String formatMessage(String... messages) {
         StringBuilder sb = new StringBuilder();
         for (String message: messages) {
             sb.append(message);
