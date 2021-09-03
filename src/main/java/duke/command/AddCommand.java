@@ -25,7 +25,8 @@ public class AddCommand extends Command {
      * the current task to the tasklist
      */
     public AddCommand(Tasklist list, String taskDetails, String taskType) {
-
+        assert taskType.equals("todo") || taskType.equals("deadline") || taskType.equals("event")
+            : "File writing is supposed to return true";
         this.list = list;
         this.taskDetails = taskDetails;
         this.taskType = taskType;

@@ -32,7 +32,7 @@ public class HelpCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        String helpString = "Here are the following commands Duke.util.Duke accepts:\n"
+        String helpString = "Here are the following commands Duke accepts:\n"
                 + "todo - adds a todo task, type 'todo' followed by a description\n"
                 + "event - adds a event task, type 'todo' followed by a description and event duration\n"
                 + "deadline - adds a deadline task, type 'deadline' followed by a description and event due date\n"

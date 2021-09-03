@@ -21,6 +21,7 @@ public class IndexOutOfRangeException extends DukeException {
     public IndexOutOfRangeException(int enteredIndex, int listSize) {
 
         super("Hi, " + enteredIndex + " is not a valid index. List has currently " + listSize + " items.");
+        assert enteredIndex > listSize : "File writing is supposed to return true";
 
     }
 
