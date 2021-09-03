@@ -33,7 +33,7 @@ public class DoneCommand extends Command {
 
         //Ui
         String output = ui.showDoneTask(doneTask) + "\n";
-        output += "You have done " + taskList.getNumTaskDone() + " so far";
+        output += "You have done " + taskList.getNumTaskDone() + " tasks so far. Good job!!!";
         return output;
     }
 

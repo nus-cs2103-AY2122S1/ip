@@ -46,8 +46,12 @@ public class TaskList {
      * @return Done task
      */
     public Task markAsDone(int index) {
+        // Only update the count if the task is not done before
+        if (!this.taskList.get(index).isDone()) {
+            this.numTaskDone += 1;
+        }
+
         this.taskList.get(index).markAsDone();
-        this.numTaskDone += 1;
         return this.taskList.get(index);
     }
 
