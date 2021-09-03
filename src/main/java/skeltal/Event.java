@@ -1,9 +1,5 @@
 package skeltal;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-
 /**
  * This class is a child of task that has the additional attribute of time,
  * to allow the storing of an Event timing.
@@ -13,30 +9,17 @@ public class Event extends Task {
 
     /**
      * A constructor that initialises a Event object.
-     * @param rawTime A semi-processed string from the parser which contains
+     * @param description A semi-processed string from the parser which contains
      *                The task and the time. e.g "Task /time".
      * @throws SkeltalException If the time description is not found.
      */
-    public Event(String rawTime) throws SkeltalException {
-        super(rawTime.split("/", 2)[0]);
-        String[] procTime = rawTime.split("/", 2);
-        String time;
-
-        if (procTime.length == 1) {
-            throw new SkeltalException("OOPS! The description of an event cannot be empty!");
-        }
-
-        try {
-            LocalDate date = LocalDate.parse(procTime[1], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            time = date.format(DateTimeFormatter.ofPattern("dd MMM yy"));
-        } catch (DateTimeParseException e) {
-            time = procTime[1];
-        }
-        this.time = time;
+    public Event(String description) throws SkeltalException {
+        super(description.split("/", 2)[0]);
+        this.time = Parser.parseDescription(description, "event");
     }
 
     private String formatTime() {
-        return "(" + this.time + ")";
+        return "(at: " + this.time + ")";
     }
 
     /**

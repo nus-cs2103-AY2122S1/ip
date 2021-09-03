@@ -22,7 +22,7 @@ public class Skeltal {
                 sc.close();
                 continue;
             } else {
-                Parser.response(userReply);
+                Parser.parse(userReply);
             }
         }
     }

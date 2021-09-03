@@ -13,29 +13,17 @@ public class Deadline extends Task {
 
     /**
      * A constructor that initialises a Deadline object.
-     * @param rawTime A semi-processed string from the parser which contains
+     * @param description A semi-processed string from the parser which contains
      *                The task and the time. e.g "Task /time".
      * @throws SkeltalException If the time description is not found.
      */
-    public Deadline(String rawTime) throws SkeltalException {
-        super(rawTime.split("/", 2)[0]);
-        String[] procTime = rawTime.split("/", 2);
-        if (procTime.length == 1) {
-            throw new SkeltalException("OOPS! The description of a deadline cannot be empty!");
-        }
-
-        String time;
-        try {
-            LocalDate date = LocalDate.parse(procTime[1], DateTimeFormatter.ofPattern("dd-MM-yyyy"));
-            time = date.format(DateTimeFormatter.ofPattern("dd MMM yy"));
-        } catch (DateTimeParseException e) {
-            time = procTime[1];
-        }
-        this.time = time;
+    public Deadline(String description) throws SkeltalException {
+        super(description.split("/", 2)[0]);
+        this.time = Parser.parseDescription(description, "deadline");
     }
 
     private String formatTime() {
-        return "(" + this.time + ")";
+        return "(by: " + this.time + ")";
     }
 
     /**

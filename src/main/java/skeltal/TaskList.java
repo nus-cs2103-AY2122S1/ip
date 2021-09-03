@@ -10,7 +10,7 @@ public class TaskList {
      * A method to add a Task object into the list.
      * @param assignment A task object.
      */
-    public static void addReply(Task assignment) {
+    public static void addTask (Task assignment) {
         tasks.add(assignment);
         System.out.println("Got it. I've added this task");
         System.out.println(assignment);

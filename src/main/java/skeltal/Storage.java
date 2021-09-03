@@ -1,6 +1,7 @@
 package skeltal;
 
 import java.io.File;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.FileWriter;
@@ -57,7 +58,6 @@ public class Storage {
             } catch (IOException ioException) {
                 System.out.println("List could not be created :(");
             }
-
         } catch (SkeltalException e) {
             System.out.println(e.getMessage());
         }
@@ -69,11 +69,15 @@ public class Storage {
      * Writes the current list of tasks to the txt file at the specified filepath.
      * @throws Exception If the file does not exist.
      */
-    public static void store() throws Exception {
-        FileWriter fw = new FileWriter("src/main/Data/skeltal.txt", false);
-        fw.write(TaskList.storeTasks());
-        System.out.println("wrote to skeltal.txt");
-        fw.close();
+    public static void store() throws SkeltalException {
+        try {
+            FileWriter fw = new FileWriter("src/main/Data/skeltal.txt", false);
+            fw.write(TaskList.storeTasks());
+            System.out.println("wrote to skeltal.txt");
+            fw.close();
+        } catch (Exception e) {
+            throw new SkeltalException(e.getMessage());
+        }
     }
 
 }
