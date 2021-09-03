@@ -2,9 +2,9 @@ package duke.commands;
 
 import java.util.HashSet;
 
+import duke.utils.CliUi;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Ui;
 
 public class FindCommand extends Command {
 
@@ -23,8 +23,8 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, CliUi cliUi, Storage storage) {
         // TODO: Make tasks.find return a String
-        return tasks.find(keywords, ui);
+        return tasks.find(keywords, cliUi);
     }
 }

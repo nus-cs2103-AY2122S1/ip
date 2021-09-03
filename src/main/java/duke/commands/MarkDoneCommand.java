@@ -1,9 +1,9 @@
 package duke.commands;
 
 import duke.exceptions.InvalidTaskNumberException;
+import duke.utils.CliUi;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Ui;
 
 /** Represents command to list all values in the current taskList */
 public class MarkDoneCommand extends Command {
@@ -20,9 +20,9 @@ public class MarkDoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskNumberException {
+    public String execute(TaskList tasks, CliUi cliUi, Storage storage) throws InvalidTaskNumberException {
         String[] messages = tasks.markDone(taskNumber);
-        ui.printOut(messages);
+        cliUi.printOut(messages);
         storage.save(tasks);
         return String.join("\n", messages);
     }

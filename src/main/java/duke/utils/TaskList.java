@@ -88,9 +88,9 @@ public class TaskList {
     /**
      * Prints the current contents of the list in a user-friendly manner.
      *
-     * @param ui Ui object.
+     * @param cliUi Ui object.
      */
-    public String find(HashSet<String> keywords, Ui ui) {
+    public String find(HashSet<String> keywords, CliUi cliUi) {
         TaskList filteredTasks = new TaskList();
         for (Task task : tasks) {
             if (task.containsKeywords(keywords)) {
@@ -98,21 +98,21 @@ public class TaskList {
             }
         }
         if (filteredTasks.getSize() == 0) {
-            ui.printOut("No matching tasks found!");
+            cliUi.printOut("No matching tasks found!");
             return "No matching tasks found!";
         } else {
-            return String.join("\n", filteredTasks.showList(ui));
+            return String.join("\n", filteredTasks.showList(cliUi));
         }
     }
 
     /**
      * Returns array containing lines to be printed.
      *
-     * @param ui Ui object.
+     * @param cliUi Ui object.
      * @return String array containing lines to be printed.
      */
-    public String[] showList(Ui ui) {
-        ui.printOut(toStrings());
+    public String[] showList(CliUi cliUi) {
+        cliUi.printOut(toStrings());
         return toStrings();
     }
 

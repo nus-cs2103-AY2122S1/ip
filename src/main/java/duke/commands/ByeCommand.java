@@ -1,8 +1,8 @@
 package duke.commands;
 
+import duke.utils.CliUi;
 import duke.utils.Storage;
 import duke.utils.TaskList;
-import duke.utils.Ui;
 
 /** Represents command to end Duke */
 public class ByeCommand extends Command {
@@ -10,8 +10,8 @@ public class ByeCommand extends Command {
     private static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printOut(BYE_MESSAGE);
+    public String execute(TaskList tasks, CliUi cliUi, Storage storage) {
+        cliUi.printOut(BYE_MESSAGE);
         return BYE_MESSAGE;
     }
 
