@@ -10,6 +10,7 @@ package duke.task;
  * @author Benedict Chua
  */
 public abstract class Task {
+    private static final String INDENTATION = "  ";
     private String description;
     private boolean isDone;
 
@@ -37,7 +38,9 @@ public abstract class Task {
      * @return "X" if is completed, " " if not completed
      */
     public String getStatusIcon() {
-        return (this.isDone ? "X" : " ");
+        String doneIcon = "X";
+        String incompleteIcon = " ";
+        return (this.isDone ? doneIcon : incompleteIcon);
     }
 
     /**
@@ -48,7 +51,7 @@ public abstract class Task {
     public String markTaskAsDone() {
         if (!this.isDone) {
             this.isDone = true;
-            return "  " + this.toString();
+            return Task.INDENTATION + this.toString();
         } else {
             return String.format("...Wait.  You've already completed this task: '%s' before you dummy!",
                 this.description

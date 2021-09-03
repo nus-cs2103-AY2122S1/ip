@@ -13,13 +13,13 @@ public class DeadlineTest {
 
     @Test
     public void testSaveAsString() {
-        Deadline task = new Deadline("1", "return book", "23/08/2021 2000");
+        Deadline task = new Deadline(CompletionStatus.COMPLETED, "return book", "23/08/2021 2000");
         assertEquals("D | 1 | return book | 2021-08-23 20:00", task.convertToString());
     }
 
     @Test
     public void testGetStatusIcon() {
-        Deadline task = new Deadline("1", "return book", "23/08/2021 2000");
+        Deadline task = new Deadline(CompletionStatus.COMPLETED, "return book", "23/08/2021 2000");
         assertEquals("X", task.getStatusIcon());
     }
 

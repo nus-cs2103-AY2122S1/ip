@@ -20,6 +20,7 @@ import duke.util.Parser;
  * @author Benedict Chua
  */
 public class Event extends Task {
+    private static final String EVENT_IDENTIFIER = "E";
     private LocalDate eventDate;
     private LocalTime startTime;
     private LocalTime endTime;
@@ -45,11 +46,11 @@ public class Event extends Task {
      * Constructs a new Eveent task from the given description, eventTime and completion status.
      * Used when loading from a save file.
      *
-     * @param completedStatus String indicating the status of completion: 1 if done, 0 if not.
+     * @param completionStatus String indicating the status of completion: 1 if done, 0 if not.
      * @param description String of the task description.
      * @param eventTime String of the given event date, startTime and endTime.
      */
-    public Event(String completedStatus, String description, String eventTime) {
+    public Event(CompletionStatus completionStatus, String description, String eventTime) {
         super(description);
         String[] dateInfo = eventTime.split(" ", 3);
         if (dateInfo.length < 3) {
@@ -59,7 +60,7 @@ public class Event extends Task {
         this.startTime = Parser.parseTime(dateInfo[1]);
         this.endTime = Parser.parseTime(dateInfo[2]);
 
-        if (completedStatus.equals("1")) {
+        if (completionStatus.equals(CompletionStatus.COMPLETED)) {
             super.markTaskAsDone();
         }
     }
@@ -86,11 +87,13 @@ public class Event extends Task {
      */
     @Override
     public String convertToString() {
-        return super.formatString("E", String.format("%s %s %s", this.eventDate, this.startTime, this.endTime));
+        return super.formatString(EVENT_IDENTIFIER, String.format("%s %s %s", this.eventDate, this.startTime,
+            this.endTime));
     }
 
     @Override
     public String toString() {
-        return String.format("[E]%s (by: %s %s-%s)", super.toString(), formatDate(), startTime, endTime);
+        return String.format("[%S]%s (by: %s %s-%s)", EVENT_IDENTIFIER, super.toString(), formatDate(), this.startTime,
+            this.endTime);
     }
 }

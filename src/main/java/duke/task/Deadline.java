@@ -19,6 +19,7 @@ import duke.util.Parser;
  * @author Benedict Chua
  */
 public class Deadline extends Task {
+    private static final String DEADLINE_IDENTIFIER = "D";
     private LocalDate dueDate;
     private LocalTime dueTime;
 
@@ -43,11 +44,11 @@ public class Deadline extends Task {
      * Constructs a Deadline task from an existing task description, dueDate and completion status.
      * Used when loading from a save file.
      *
-     * @param completedStatus String indicating the status of completion: 1 if done, 0 if not.
+     * @param completionStatus String indicating the status of completion: 1 if done, 0 if not.
      * @param description String of the task description.
      * @param dueDate String of the given due date and time.
      */
-    public Deadline(String completedStatus, String description, String dueDate) {
+    public Deadline(CompletionStatus completionStatus, String description, String dueDate) {
         super(description);
 
         String[] dateInfo = dueDate.split(" ", 2);
@@ -57,7 +58,7 @@ public class Deadline extends Task {
         this.dueDate = Parser.parseDate(dateInfo[0]);
         this.dueTime = Parser.parseTime(dateInfo[1]);
 
-        if (completedStatus.equals("1")) {
+        if (completionStatus.equals(CompletionStatus.COMPLETED)) {
             super.markTaskAsDone();
         }
     }
@@ -84,11 +85,11 @@ public class Deadline extends Task {
      */
     @Override
     public String convertToString() {
-        return super.formatString("D", String.format("%s %s", this.dueDate, this.dueTime));
+        return super.formatString(DEADLINE_IDENTIFIER, String.format("%s %s", this.dueDate, this.dueTime));
     }
 
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s %s)", super.toString(), formatDate(), dueTime);
+        return String.format("[%s]%s (by: %s %s)", DEADLINE_IDENTIFIER, super.toString(), formatDate(), dueTime);
     }
 }
