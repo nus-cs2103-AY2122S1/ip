@@ -3,7 +3,7 @@ package tasklist;
 import exception.InvalidDateTimeException;
 import exception.InvalidTaskTimeFormatException;
 import exception.InvalidTaskTypeException;
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates a task containing a description and status.
@@ -34,7 +34,7 @@ public class Task {
      * @throws InvalidTaskTypeException when the type of task is not recognised
      * @throws InvalidTaskTimeFormatException when a task does not have valid time inputs
      */
-    public static Task createTask(String description, DukeCommandTypeEnum commandType)
+    public static Task createTask(String description, CommandTypeEnum commandType)
             throws InvalidTaskTypeException, InvalidTaskTimeFormatException, InvalidDateTimeException {
         switch (commandType) {
         case TODO:

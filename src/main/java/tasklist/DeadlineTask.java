@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
 import exception.InvalidDateTimeException;
 import exception.InvalidTaskTimeFormatException;
 import type.DatetimeTypeEnum;
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates a task with a deadline.
@@ -40,7 +40,7 @@ public class DeadlineTask extends Task {
 
         if (splitPartsUsingBy.length != 2) {
             throw new InvalidTaskTimeFormatException(
-                    DukeCommandTypeEnum.DEADLINE.toString(),
+                    CommandTypeEnum.DEADLINE.toString(),
                     DeadlineTask.TIME_SPLITTER_INPUT
             );
         }

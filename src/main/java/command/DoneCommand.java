@@ -7,7 +7,7 @@ import exception.NonExistentTaskNumberException;
 import message.Message;
 import tasklist.Task;
 import tasklist.TaskList;
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates a done command after it is parsed from the user input.
@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
     public static DoneCommand createCommand(String description)
             throws InvalidTaskNumberException, MissingCommandDescriptionException {
         // Validate before creating the command
-        Command.validateDescriptionNotEmpty(DukeCommandTypeEnum.DONE, description);
+        Command.validateDescriptionNotEmpty(CommandTypeEnum.DONE, description);
 
         return new DoneCommand(Command.getTaskNumberFromMessage(description));
     }

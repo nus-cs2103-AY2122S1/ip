@@ -10,7 +10,7 @@ import exception.InvalidTaskNumberException;
 import exception.MissingCommandDescriptionException;
 import exception.NonExistentCommandTypeException;
 import exception.UnhandledCommandException;
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates a `Parser` that parses string inputs to commands or throws exceptions if they are invalid.
@@ -23,7 +23,7 @@ public class Parser {
      * @return True if it the input is the exit command, false otherwise.
      */
     public boolean detectExitCommand(String inputMessage) {
-        return inputMessage.trim().equals(DukeCommandTypeEnum.BYE.toString());
+        return inputMessage.trim().equals(CommandTypeEnum.BYE.toString());
     }
 
     /**
@@ -40,7 +40,7 @@ public class Parser {
             NonExistentCommandTypeException,
             MissingCommandDescriptionException,
             UnhandledCommandException {
-        DukeCommandTypeEnum commandType = getCommandType(message);
+        CommandTypeEnum commandType = getCommandType(message);
         String messageWithoutCommand = removeCommandTypePrefix(message, commandType);
         String trimmedMessageWithoutCommand = messageWithoutCommand.trim();
 
@@ -64,12 +64,12 @@ public class Parser {
         }
     }
 
-    private DukeCommandTypeEnum getCommandType(String message) throws NonExistentCommandTypeException {
+    private CommandTypeEnum getCommandType(String message) throws NonExistentCommandTypeException {
         String trimmedMessage = message.trim();
         String[] messagesSplitUsingSpace = trimmedMessage.split(" ");
         String commandWord = messagesSplitUsingSpace[0];
 
-        for (DukeCommandTypeEnum commandType : DukeCommandTypeEnum.values()) {
+        for (CommandTypeEnum commandType : CommandTypeEnum.values()) {
             if (commandWord.equals(commandType.toString())) {
                 return commandType;
             }
@@ -78,7 +78,7 @@ public class Parser {
         throw new NonExistentCommandTypeException(message);
     }
 
-    private String removeCommandTypePrefix(String message, DukeCommandTypeEnum commandType) {
+    private String removeCommandTypePrefix(String message, CommandTypeEnum commandType) {
         String commandTypeString = commandType.toString();
         return message.trim().substring(commandTypeString.length());
     }

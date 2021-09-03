@@ -1,6 +1,6 @@
 package type;
 
-public enum DukeCommandTypeEnum {
+public enum CommandTypeEnum {
     BYE("bye"),
     DEADLINE("deadline"),
     DELETE("delete"),
@@ -12,7 +12,7 @@ public enum DukeCommandTypeEnum {
 
     private final String value;
 
-    DukeCommandTypeEnum(String value) {
+    CommandTypeEnum(String value) {
         this.value = value;
     }
 

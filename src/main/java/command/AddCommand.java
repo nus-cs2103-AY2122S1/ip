@@ -8,18 +8,18 @@ import exception.MissingCommandDescriptionException;
 import message.Message;
 import tasklist.Task;
 import tasklist.TaskList;
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates an add command after it is parsed from the user input.
  */
 public class AddCommand extends Command {
     private String description;
-    private DukeCommandTypeEnum commandType;
+    private CommandTypeEnum commandType;
     private Task task;
     private TaskList list;
 
-    private AddCommand(String description, DukeCommandTypeEnum commandType) {
+    private AddCommand(String description, CommandTypeEnum commandType) {
         this.description = description;
         this.commandType = commandType;
     }
@@ -32,7 +32,7 @@ public class AddCommand extends Command {
      * @return `AddCommand`.
      * @throws MissingCommandDescriptionException If description is empty.
      */
-    public static AddCommand createCommand(String description, DukeCommandTypeEnum commandType)
+    public static AddCommand createCommand(String description, CommandTypeEnum commandType)
             throws MissingCommandDescriptionException {
         // Validate before creating the command
         Command.validateDescriptionNotEmpty(commandType, description);

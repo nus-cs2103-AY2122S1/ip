@@ -7,7 +7,7 @@ import exception.NonExistentTaskNumberException;
 import message.Message;
 import tasklist.Task;
 import tasklist.TaskList;
-import type.DukeCommandTypeEnum;
+import type.CommandTypeEnum;
 
 /**
  * Encapsulates a delete command after it is parsed from the user input.
@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
             InvalidTaskNumberException,
             MissingCommandDescriptionException {
         // Validate before creating the command
-        Command.validateDescriptionNotEmpty(DukeCommandTypeEnum.DELETE, description);
+        Command.validateDescriptionNotEmpty(CommandTypeEnum.DELETE, description);
 
         return new DeleteCommand(Command.getTaskNumberFromMessage(description));
     }
