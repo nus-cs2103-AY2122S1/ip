@@ -22,6 +22,7 @@ public class Ui {
                     + "   \\    /\\    /    |  |____ |  `----.|  `----.|  `--'  | |  |  |  | |  |____        |  |     |  `--'  |    |  '--'  ||  `--'  | |  .  \\  |  |____ |__| \r\n"
                     + "    \\__/  \\__/     |_______||_______| \\______| \\______/  |__|  |__| |_______|       |__|      \\______/     |_______/  \\______/  |__|\\__\\ |_______|(__) \r\n"
                     + "                                                                                                                                                       ";
+    private static final String EMPTY_LIST_MESSAGE = "You are all done for the day :-)";
 
     /**
      * Formats message passed in and prints it out to the screen.
@@ -80,7 +81,7 @@ public class Ui {
     public static String printList(ArrayList<Task> list) {
         // Custom message for when user types 'list' when nothing is added.
         if (list.size() == 0) {
-            return "You are all done for the day :-)";
+            return EMPTY_LIST_MESSAGE;
         }
 
         StringBuilder sb = new StringBuilder();

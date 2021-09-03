@@ -21,6 +21,8 @@ import duke.task.ToDo;
  * @version CS2103T AY21/22 Semester 1
  */
 public class DataManager {
+    private static final String IOEXCEPTION_UNABLE_TO_CREATE_DIRECTORY =
+            "IOException: Unable to create directory/file. Your data will not be saved!";
     // Storage file used for persisting task
     private final File data;
     // Relative path of file
@@ -125,7 +127,7 @@ public class DataManager {
             data.getParentFile().mkdirs();
             data.createNewFile();
         } catch (IOException e) {
-            System.err.println("IOException: Unable to create directory/file. Your data will not be saved!");
+            System.err.println(IOEXCEPTION_UNABLE_TO_CREATE_DIRECTORY);
         }
     }
 }

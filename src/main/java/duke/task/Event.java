@@ -13,6 +13,7 @@ import duke.util.Parser;
  * @version CS2103T AY21/22 Semester 1
  */
 public class Event extends Task {
+    private static final String EVENT_IDENTIFIER = "E";
     private final String dateTimeString;
     private final Date dateTime;
 
@@ -67,7 +68,7 @@ public class Event extends Task {
      */
     @Override
     public String convertToTxt() {
-        return String.format("E | %s | %s", super.convertToTxt(), dateTimeToString());
+        return String.format(EVENT_IDENTIFIER + " | %s | %s", super.convertToTxt(), dateTimeToString());
     }
 
     /**
@@ -77,6 +78,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[E]%s (at: %s)", super.toString(), this.dateTimeToString());
+        return String.format("[%s]%s (at: %s)", EVENT_IDENTIFIER, super.toString(), this.dateTimeToString());
     }
 }

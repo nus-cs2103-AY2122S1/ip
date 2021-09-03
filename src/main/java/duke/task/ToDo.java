@@ -7,6 +7,8 @@ package duke.task;
  * @version CS2103T AY21/22 Semester 1
  */
 public class ToDo extends Task {
+    private static final String TODO_IDENTIFIER = "T";
+
     /**
      * Instantiates a new To do.
      *
@@ -24,7 +26,7 @@ public class ToDo extends Task {
      */
     @Override
     public String convertToTxt() {
-        return String.format("T | %s", super.convertToTxt());
+        return String.format(TODO_IDENTIFIER + " | %s", super.convertToTxt());
     }
 
     /**
@@ -45,6 +47,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[T]%s", super.toString());
+        return String.format("[%s]%s", TODO_IDENTIFIER, super.toString());
     }
 }

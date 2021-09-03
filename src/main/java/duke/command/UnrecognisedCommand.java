@@ -7,8 +7,12 @@ package duke.command;
  * @version CS2103T AY21/22 Semester 1
  */
 public class UnrecognisedCommand extends Command {
+
+    private static final String INVALID_COMMAND_MESSAGE =
+            "Hmm.. I didn't catch that. Perhaps you made a typo in your command?";
+
     @Override
     public String getResponse(String input) {
-        return "Hmm.. I didn't catch that. Perhaps you made a typo in your command?";
+        return INVALID_COMMAND_MESSAGE;
     }
 }

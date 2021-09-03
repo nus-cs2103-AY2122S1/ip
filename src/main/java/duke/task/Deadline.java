@@ -13,6 +13,7 @@ import duke.util.Parser;
  * @version CS2103T AY21/22 Semester 1
  */
 public class Deadline extends Task {
+    private static final String DEADLINE_IDENTIFIER = "D";
     private final Date deadline;
     private final String deadlineString;
 
@@ -57,7 +58,7 @@ public class Deadline extends Task {
      */
     @Override
     public String convertToTxt() {
-        return String.format("D | %s | %s", super.convertToTxt(), deadlineToString());
+        return String.format(DEADLINE_IDENTIFIER + " | %s | %s", super.convertToTxt(), deadlineToString());
     }
 
     /**
@@ -77,6 +78,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("[D]%s (by: %s)", super.toString(), deadlineToString());
+        return String.format("[" + DEADLINE_IDENTIFIER + "]%s (by: %s)", super.toString(), deadlineToString());
     }
 }

@@ -15,6 +15,7 @@ import duke.task.Task;
  * @version CS2103T AY21/22 Semester 1
  */
 public class ToDoList {
+    private static final String COMPLETE_TASK_MESSAGE = "Good job on completing this task!";
     private final ArrayList<Task> list;
     private final DataManager dataManager;
 
@@ -70,7 +71,7 @@ public class ToDoList {
 
         Task task = list.get(index - 1);
         task.markAsDone();
-        return String.format("Good job on completing this task!\n  %s", task);
+        return String.format(COMPLETE_TASK_MESSAGE + "\n  %s", task);
     }
 
     /**
