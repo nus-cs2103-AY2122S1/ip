@@ -13,7 +13,6 @@ public class TaskList extends ArrayList<Task> {
      * Constructs a empty TaskList.
      */
     public TaskList() {
-        super();
     }
 
     /**

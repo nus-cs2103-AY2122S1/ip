@@ -8,7 +8,6 @@ public class DukeParseException extends DukeException {
      * Constructs a DukeException with no detailed message.
      */
     public DukeParseException() {
-        super();
     }
 
     /**
