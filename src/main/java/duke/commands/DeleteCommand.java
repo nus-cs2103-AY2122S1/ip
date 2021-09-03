@@ -16,6 +16,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand
+     * 
      * @param rest the user input after the command
      */
     public DeleteCommand(String rest) throws InvalidIndexFormatException{
@@ -28,8 +29,9 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
-        Task t = tasks.get(index - 1);
-        storage.saveData(tasks.delete(index - 1));
+        int taskIndex = index - 1; //User input indexed from 1
+        Task t = tasks.get(taskIndex);
+        storage.saveData(tasks.delete(taskIndex));
         return ui.print(String.format(
                 "Noted. I've removed this task:\n %s\nNow you have %d task(s) in the list",
                 t.toString(),

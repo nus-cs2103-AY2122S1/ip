@@ -17,6 +17,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event
+     * 
      * @param input the input array consisting of description and date/time
      * @throws EmptyDescriptionException if description is empty
      * @throws EmptyTimeException if time is empty
@@ -24,11 +25,15 @@ public class Event extends Task {
      */
     public Event(String[] input) throws EmptyDescriptionException, EmptyTimeException, InvalidTimeException {
         super(input[0]);
-        if (input.length < 2) {
+
+        boolean isEmptyTimeInput = input.length < 2;
+        if (isEmptyTimeInput) {
             throw new EmptyTimeException();
         }
+        
+        String time = input[1];
         try {
-            this.at = LocalDateTime.parse(input[1], DateTimeFormatter.ofPattern("d/MM/yyyy HHmm"));
+            this.at = LocalDateTime.parse(time, DateTimeFormatter.ofPattern(INPUT_DATE_TIME_FORMAT_PATTERN));
         } catch (DateTimeParseException e) {
             throw new InvalidTimeException();
         }
@@ -36,6 +41,7 @@ public class Event extends Task {
 
     /**
      * Constructor for Event specifying isDone
+     * 
      * @param input the input array consisting of description and date/time
      * @param isDone event's status from saved data
      */
@@ -55,8 +61,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " 
-                + this.at.format(DateTimeFormatter.ofPattern("d MMM yyyy h:mma")) + ")";
+        String IDENTIFIER = "[E]";
+        return IDENTIFIER + super.toString() + " (at: " 
+                + this.at.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_TIME_FORMAT_PATTERN)) + ")";
     }
 
 }

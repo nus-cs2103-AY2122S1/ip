@@ -9,6 +9,7 @@ import duke.data.task.Event;
 public class EventCommand extends AddCommand {
     /**
      * Constructor for EventCommand
+     * 
      * @param rest the user input after the command
      * @throws DukeException if user input empty or invalid
      */

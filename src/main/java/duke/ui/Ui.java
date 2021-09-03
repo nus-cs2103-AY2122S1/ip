@@ -14,6 +14,7 @@ public class Ui {
 
     /**
      * Returns greeting message
+     * 
      * @return greeting message
      */
     public String greet() {
@@ -22,6 +23,7 @@ public class Ui {
 
     /**
      * Returns goodbye message
+     * 
      * @return goodbye message
      */
     public String goodbye() {
@@ -30,6 +32,7 @@ public class Ui {
 
     /**
      * Returns error message
+     * 
      * @param e the exception to print
      * @return error message
      */
@@ -39,6 +42,7 @@ public class Ui {
 
     /**
      * Returns given message
+     * 
      * @param msg the message to print
      * @return given message
      */

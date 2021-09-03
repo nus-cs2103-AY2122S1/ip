@@ -9,11 +9,9 @@ import duke.ui.Ui;
  * Abstract class encapsulating all commands
  */
 public abstract class Command {
-    /** If program is to be exited after this command */
-    protected boolean isExit = false;
-
     /**
      * Executes the given command and returns reply
+     * 
      * @param tasks the list of tasks
      * @param ui the user interface
      * @param storage the location of saved data
@@ -21,8 +19,4 @@ public abstract class Command {
      * @throws DukeException
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-    
-    public boolean isExit() {
-        return this.isExit;
-    } 
 }

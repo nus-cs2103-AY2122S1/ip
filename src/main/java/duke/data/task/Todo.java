@@ -8,6 +8,7 @@ import duke.data.exception.EmptyDescriptionException;
 public class Todo extends Task {
     /**
      * Constructor for Todo
+     * 
      * @param description the description of the task
      * @throws EmptyDescriptionException if description is empty
      */
@@ -17,6 +18,7 @@ public class Todo extends Task {
 
     /**
      * Constructor for Todo specifying isDone
+     * 
      * @param description the description of the task
      * @param isDone the status of the task
      */
@@ -31,11 +33,13 @@ public class Todo extends Task {
 
     /**
      * Returns string representation of Todo
+     * 
      * @return string representation of Todo
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String IDENTIFIER = "[T]";
+        return IDENTIFIER + super.toString();
     }
 
 }
