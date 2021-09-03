@@ -21,6 +21,7 @@ public class AddDeadlineCommand extends Command {
      * @param tasks <code>TaskList</code> containing saved tasks
      * @param ui <code>Ui</code> responsible for user interactions
      * @param storage <code>Storage</code> responsible for saving tasks to drive
+     * @return corresponding message
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
@@ -28,6 +29,12 @@ public class AddDeadlineCommand extends Command {
         return returnAddedMessage(this.deadline, tasks);
     }
 
+    /**
+     * Returns a task added message with the corresponding task
+     * @param task <code>Task</code> added
+     * @param taskList the current tasks
+     * @return <code>Task</code> added message
+     */
     private String returnAddedMessage(Task task, TaskList taskList) {
         List<Task> savedTasks = taskList.getTasks();
         String message = "";

@@ -11,7 +11,7 @@ public class GetCommand extends Command {
 
     /**
      * Constructs an instance of <code>GetCommand</code>
-     * @param date
+     * @param date the date to match
      */
     public GetCommand(LocalDate date) {
         this.date = date;
@@ -22,6 +22,7 @@ public class GetCommand extends Command {
      * @param tasks <code>TaskList</code> containing saved tasks
      * @param ui <code>Ui</code> responsible for user interactions
      * @param storage <code>Storage</code> responsible for saving tasks to drive
+     * @return corresponding message including the matching tasks
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

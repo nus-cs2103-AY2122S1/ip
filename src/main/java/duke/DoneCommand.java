@@ -21,6 +21,7 @@ public class DoneCommand extends Command {
      * @param tasks <code>TaskList</code> containing saved tasks
      * @param ui <code>Ui</code> responsible for user interactions
      * @param storage <code>Storage</code> responsible for saving tasks to drive
+     * @return corresponding message
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
@@ -30,12 +31,11 @@ public class DoneCommand extends Command {
             DukeException exception = new DukeException("Number out of range!");
             System.out.println(exception);
             return exception.getMessage();
-        } else {
-            Task oldTask = savedTasks.get(this.index - 1);
-            Task newTask = oldTask.setDone();
-            tasks.replaceTask(this.index - 1, newTask);
-            message += "Nice! I've marked this task as done:\n" + newTask;
-            return message;
         }
+        Task oldTask = savedTasks.get(this.index - 1);
+        Task newTask = oldTask.setDone();
+        tasks.replaceTask(this.index - 1, newTask);
+        message += "Nice! I've marked this task as done:\n" + newTask;
+        return message;
     }
 }

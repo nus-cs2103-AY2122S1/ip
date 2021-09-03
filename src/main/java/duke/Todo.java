@@ -35,8 +35,7 @@ public class Todo extends Task {
     public String toString() {
         if (this.isDone()) {
             return "[T] [X]" + this.getBody();
-        } else {
-            return "[T] [ ]" + this.getBody();
         }
+        return "[T] [ ]" + this.getBody();
     }
 }

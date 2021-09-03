@@ -6,6 +6,9 @@ import java.time.LocalDate;
  * Represents <code>Parser</code> object to parse user input
  */
 public class Parser {
+
+    public static final String INVALID_DATE_ERROR = "Please enter a valid date (yyyy-mm-dd) :(";
+
     /**
      * Returns corresponding <code>Command</code> based on input supplied
      * @param input User input
@@ -18,104 +21,165 @@ public class Parser {
         String date = inputArr[inputArr.length - 1];
         boolean hasDate = false;
         for (int i = 1; i < inputArr.length; i++) {
-            if (inputArr[i].equals("/by") || inputArr[i].equals("/at")) {
+            boolean isByOrAt = inputArr[i].equals("/by") || inputArr[i].equals("/at");
+            if (isByOrAt) {
                 hasDate = true;
                 break;
-            } else {
-                body += " " + inputArr[i];
             }
+            body += " " + inputArr[i];
         }
         String lowerCaseInput = inputArr[0].toLowerCase();
-        if (lowerCaseInput.equals("bye")) {
+        switch (lowerCaseInput) {
+        case "bye":
             return new ByeCommand();
-        } else if (lowerCaseInput.equals("list")) {
+        case "list":
             return new ListCommand();
-        } else if (lowerCaseInput.equals("done")) {
-            if (inputArr.length < 2) {
-                DukeException exception = new DukeException("Please enter a number!");
-                throw exception;
-            }
-            int index = Integer.parseInt(inputArr[1]);
-            return new DoneCommand(index);
-        } else if (lowerCaseInput.equals("todo")) {
-            if (body.equals("")) {
-                DukeException exception = new DukeException("Description of todo cannot be empty :(");
-                throw exception;
-            }
-            Todo todo = new Todo(body);
-            return new AddTodoCommand(todo);
-        } else if (lowerCaseInput.equals("deadline")) {
-            if (!hasDate) {
-                DukeException exception = new DukeException("Deadline of deadline cannot be empty :(");
-                throw exception;
-            } else if (date.length() != 10) {
-                DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
-                throw exception;
-            } else {
-                String[] dateArr = date.split("-");
-                int year = Integer.parseInt(dateArr[0]);
-                int month = Integer.parseInt(dateArr[1]);
-                int day = Integer.parseInt(dateArr[2]);
-                if (month > 12 || day > 31) {
-                    DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
-                    throw exception;
-                }
-                LocalDate newDate = LocalDate.of(year, month, day);
-                Deadline deadline = new Deadline(body, newDate);
-                return new AddDeadlineCommand(deadline);
-            }
-        } else if (lowerCaseInput.equals("event")) {
-            if (!hasDate) {
-                DukeException exception = new DukeException("Date of event cannot be empty :(");
-                throw exception;
-            } else if (date.length() != 10) {
-                DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
-                throw exception;
-            } else {
-                String[] dateArr = date.split("-");
-                int year = Integer.parseInt(dateArr[0]);
-                int month = Integer.parseInt(dateArr[1]);
-                int day = Integer.parseInt(dateArr[2]);
-                if (month > 12 || day > 31) {
-                    DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
-                    throw exception;
-                }
-                LocalDate newDate = LocalDate.of(year, month, day);
-                Event event = new Event(body, newDate);
-                return new AddEventCommand(event);
-            }
-        } else if (lowerCaseInput.equals("delete")) {
-            if (inputArr.length < 2) {
-                DukeException exception = new DukeException("Please enter a number!");
-                throw exception;
-            }
-            int index = Integer.parseInt(inputArr[1]);
-            return new DeleteCommand(index);
-        } else if (lowerCaseInput.equals("get")) {
-            if (inputArr.length < 2) {
-                DukeException exception = new DukeException("Please enter a date!");
-                throw exception;
-            }
-            String[] dateArr = inputArr[1].split("-");
-            int year = Integer.parseInt(dateArr[0]);
-            int month = Integer.parseInt(dateArr[1]);
-            int day = Integer.parseInt(dateArr[2]);
-            if (month > 12 || day > 31) {
-                DukeException exception = new DukeException("Please enter a valid date (yyyy-mm-dd) :(");
-                throw exception;
-            }
-            LocalDate newDate = LocalDate.of(year, month, day);
-            return new GetCommand(newDate);
-        } else if (lowerCaseInput.equals("find")) {
-            if (inputArr.length < 2) {
-                DukeException exception = new DukeException("Please enter a description!");
-                throw exception;
-            }
-            String matchString = inputArr[1];
-            return new FindCommand(matchString);
-        } else {
-            DukeException exception = new DukeException("I'm sorry but I don't understand what that means :(");
-            throw exception;
+        case "done":
+            return getDoneCommand(inputArr);
+        case "todo":
+            return getAddTodoCommand(body);
+        case "deadline":
+            return getAddDeadlineCommand(body, date, hasDate);
+        case "event":
+            return getAddEventCommand(body, date, hasDate);
+        case "delete":
+            return getDeleteCommand(inputArr);
+        case "get":
+            return getGetCommand(inputArr);
+        case "find":
+            return getFindCommand(inputArr);
+        default:
+            throw new DukeException("I'm sorry but I don't understand what that means :(");
         }
+    }
+
+    /**
+     * Returns <code>FindCommand</code> if input is valid
+     * @param inputArr <code>String</code> array containing inputs
+     * @return <code>FindCommand</code> with the corresponding input
+     * @throws DukeException when input is not valid
+     */
+    private static FindCommand getFindCommand(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("Please enter a description!");
+        }
+        String matchString = inputArr[1];
+        return new FindCommand(matchString);
+    }
+
+    /**
+     * Returns <code>GetCommand</code> if input is valid
+     * @param inputArr <code>String</code> array containing inputs
+     * @return <code>GetCommand</code> with the corresponding input
+     * @throws DukeException when input is not valid
+     */
+    private static GetCommand getGetCommand(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("Please enter a date!");
+        }
+        String[] dateArr = inputArr[1].split("-");
+        int year = Integer.parseInt(dateArr[0]);
+        int month = Integer.parseInt(dateArr[1]);
+        int day = Integer.parseInt(dateArr[2]);
+        if (month > 12 || day > 31) {
+            throw new DukeException(INVALID_DATE_ERROR);
+        }
+        LocalDate newDate = LocalDate.of(year, month, day);
+        return new GetCommand(newDate);
+    }
+
+    /**
+     * Returns <code>DeleteCommand</code> if input is valid
+     * @param inputArr <code>String</code> array containing inputs
+     * @return <code>DeleteCommand</code> with the corresponding input
+     * @throws DukeException when input is not valid
+     */
+    private static DeleteCommand getDeleteCommand(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("Please enter a number!");
+        }
+        return new DeleteCommand(Integer.parseInt(inputArr[1]));
+    }
+
+    /**
+     * Returns <code>AddEventCommand</code> if input is valid
+     * @param body the message body of <code>Event</code>
+     * @param date the date of <code>Event</code>
+     * @param hasDate the presence of date
+     * @return <code>AddEventCommand</code> with the corresponding input
+     * @throws DukeException when input is not valid
+     */
+    private static AddEventCommand getAddEventCommand(String body, String date, boolean hasDate) throws DukeException {
+        if (!hasDate) {
+            throw new DukeException("Date of event cannot be empty :(");
+        }
+        if (date.length() != 10) {
+            throw new DukeException(INVALID_DATE_ERROR);
+        }
+        String[] dateArr = date.split("-");
+        int year = Integer.parseInt(dateArr[0]);
+        int month = Integer.parseInt(dateArr[1]);
+        int day = Integer.parseInt(dateArr[2]);
+        if (month > 12 || day > 31) {
+            throw new DukeException(INVALID_DATE_ERROR);
+        }
+        LocalDate newDate = LocalDate.of(year, month, day);
+        Event event = new Event(body, newDate);
+        return new AddEventCommand(event);
+    }
+
+    /**
+     * Returns <code>AddDeadlineCommand</code> if input is valid
+     * @param body the message body of <code>Deadline</code>
+     * @param date the date of <code>Deadline</code>
+     * @param hasDate the presence of date
+     * @return <code>AddDeadlineCommand</code> with the corresponding input
+     * @throws DukeException when input is not valid
+     */
+    private static AddDeadlineCommand getAddDeadlineCommand(String body, String date, boolean hasDate)
+            throws DukeException {
+        if (!hasDate) {
+            throw new DukeException("Deadline of deadline cannot be empty :(");
+        }
+        if (date.length() != 10) {
+            throw new DukeException(INVALID_DATE_ERROR);
+        }
+        String[] dateArr = date.split("-");
+        int year = Integer.parseInt(dateArr[0]);
+        int month = Integer.parseInt(dateArr[1]);
+        int day = Integer.parseInt(dateArr[2]);
+        if (month > 12 || day > 31) {
+            throw new DukeException(INVALID_DATE_ERROR);
+        }
+        LocalDate newDate = LocalDate.of(year, month, day);
+        Deadline deadline = new Deadline(body, newDate);
+        return new AddDeadlineCommand(deadline);
+    }
+
+    /**
+     * Returns <code>AddTodoCommand</code> if input is valid
+     * @param body the message body of <code>Todo</code>
+     * @return <code>AddTodoCommand</code> with the corresponding input
+     * @throws DukeException when input is not valid
+     */
+    private static AddTodoCommand getAddTodoCommand(String body) throws DukeException {
+        if (body.equals("")) {
+            throw new DukeException("Description of todo cannot be empty :(");
+        }
+        Todo todo = new Todo(body);
+        return new AddTodoCommand(todo);
+    }
+
+    /**
+     * Returns <code>DoneCommand</code> if input is valid
+     * @param inputArr <code>String</code> array containing inputs
+     * @return <code>DoneCommand</code> with the corresponding input
+     * @throws DukeException when input is not valid
+     */
+    private static DoneCommand getDoneCommand(String[] inputArr) throws DukeException {
+        if (inputArr.length < 2) {
+            throw new DukeException("Please enter a number!");
+        }
+        return new DoneCommand(Integer.parseInt(inputArr[1]));
     }
 }
