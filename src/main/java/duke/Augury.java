@@ -26,7 +26,7 @@ import duke.ui.Ui;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    private final String VER     = "v1.0.0"; // Level-10 GUI
+    private final String VER     = "v1.0.1"; // Level-10 GUI, A-Assertions
     private final String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -76,13 +76,9 @@ public class Augury {
     }
 
     /**
-     * Runs main loop of {@code Augury}. Parses and execute commands in a loop.
-     *
-     * @throws InvalidActionException If action commands were malformed.
-     * @throws InvalidTaskCreationException If invalid parameters were provided in task creation.
-     * @throws UnknownCommandException If an unrecognized command was provided.
+     * Runs main loop of {@code Augury}. Parses and execute commands it receives.
      */
-    public void loop() throws AuguryException {
+    public void loop() {
         Scanner scan = new Scanner(System.in);
         ui.speak("Hello! How may I help you?");
 
@@ -96,9 +92,10 @@ public class Augury {
                 if (result.equals("ExitCommand")) {
                     ui.speak("The readiness is all.");
                     isRunning = false;
-                } else {
-                    ui.speak(result);
+                    break;
                 }
+
+                ui.speak(result);
             } catch (AuguryException e) {
                 ui.speak(e.getMessage() + "\n\t Please try again.");
             }
