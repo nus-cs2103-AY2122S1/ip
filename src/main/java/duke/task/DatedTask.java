@@ -38,4 +38,18 @@ public abstract class DatedTask extends Task {
     public Date getDate() {
         return date;
     }
+
+    /**
+     * Comparator method.
+     *
+     * @param otherTask The other task to be compared to.
+     * @return A number greater than 0 if the date of the Task precedes the other Task's date, 0 if the dates are the
+     * same, a number smalled than 0 otherwise.
+     */
+    @Override
+    public int compareTo(Task otherTask) {
+        assert otherTask instanceof DatedTask : "CompareTo method only applicable for DatedTasks";
+        DatedTask datedTask = (DatedTask) otherTask;
+        return date.compareTo(datedTask.date);
+    }
 }

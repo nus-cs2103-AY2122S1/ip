@@ -11,6 +11,7 @@ public enum Commands {
     DONE("done"),
     EXIT("bye"),
     FIND("find"),
+    SORT("sort"),
     INVALID("");
 
     /** The register that holds key value pairing between label and enum. */

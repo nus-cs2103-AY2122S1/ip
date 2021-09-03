@@ -10,7 +10,7 @@ import duke.exception.InvalidDateException;
 import duke.exception.UnknownTaskTypeException;
 
 /** Represents a Task object. */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     /** The description of the task */
     protected String description;
 

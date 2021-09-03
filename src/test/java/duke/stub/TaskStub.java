@@ -9,4 +9,9 @@ public class TaskStub extends Task {
     public JSONObject toJsonObject() {
         return null;
     }
+
+    @Override
+    public int compareTo(Task o) {
+        return 0;
+    }
 }
