@@ -124,6 +124,7 @@ public class Ui {
      */
     public static void interact() {
         greet();
+        Scanner sc = new Scanner(System.in);
         scanInput();
         exit();
     }
