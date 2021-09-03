@@ -15,4 +15,6 @@ public class ErrorString {
     public final static String ERROR_INVALID_COMMAND = "I am sorry! I don't know what that means!";
     public final static String ERROR_INDEX_OUT_OF_BOUNDS = "Index is out of bounds!";
     public final static String ERROR_NON_INTEGER_INDEX = "Index is not an integer!";
+    public final static String ERROR_NO_TASKS_FOUND = "No tasks found with the given keyword";
+    public final static String ERROR_TASK_ALREADY_DONE = "Task is already done!";
 }
