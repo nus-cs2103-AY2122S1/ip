@@ -34,6 +34,9 @@ public class Ui {
      */
     protected Ui(VBox dialogContainer) {
         super();
+
+        assert dialogContainer != null;
+
         inputReader = new Scanner(System.in);
         this.dialogContainer = dialogContainer;
     }
@@ -53,9 +56,10 @@ public class Ui {
      * @param error Error message to be displayed.
      */
     protected void showLoadingError(String error) {
-        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        String loadingErrorMessage = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+        System.out.println(loadingErrorMessage);
         if (dialogContainer != null) {
-            printDialog("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            printDialog(loadingErrorMessage);
         }
     }
 
