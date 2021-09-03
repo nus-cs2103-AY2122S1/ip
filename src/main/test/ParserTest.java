@@ -1,9 +1,8 @@
-package duke;
-
 import static org.junit.Assert.assertEquals;
 
 import java.time.LocalDateTime;
 
+import duke.Parser;
 import org.junit.Test;
 
 public class ParserTest {
