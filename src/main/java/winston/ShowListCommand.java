@@ -1,7 +1,7 @@
 package winston;
 
 /**
- *  Represents the list command from the parent abstract class Command.
+ * Represents the list command from the parent abstract class Command.
  */
 public class ShowListCommand extends Command {
     public ShowListCommand(TaskList taskList) {
@@ -9,7 +9,7 @@ public class ShowListCommand extends Command {
     }
 
     /**
-     * Prints the all tasks on TaskList as well as the number of uncompleted tasks remaining
+     * Prints the all tasks on TaskList as well as the number of uncompleted tasks remaining.
      */
     @Override
     public String run() {

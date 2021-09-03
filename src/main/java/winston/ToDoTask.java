@@ -1,14 +1,15 @@
 package winston;
 
 /**
- * A class extension of Task representing a ToDoTask
+ * A class extension of Task representing a ToDoTask.
  */
 public class ToDoTask extends winston.Task {
     private final String type;
+    
     /**
-     * Constructor for ToDoTask
+     * Constructor for ToDoTask.
      *
-     * @param description is the string of the description of the given task
+     * @param description is the string of the description of the given task.
      */
     public ToDoTask(String description, boolean isCompleted) {
         super(description, isCompleted);
@@ -21,9 +22,9 @@ public class ToDoTask extends winston.Task {
     }
 
     /**
-     * Method to convert information from object instance into a different format to be saved
+     * Method to convert information from object instance into a different format to be saved.
      *
-     * @return a string with the type, completion status, task description
+     * @return a string with the type, completion status, task description.
      */
     @Override
     public String saveFormat() {
@@ -32,9 +33,9 @@ public class ToDoTask extends winston.Task {
     }
 
     /**
-     *  Method to convert information from object instance into a more readable format
+     *  Method to convert information from object instance into a more readable format.
      *
-     * @return a string with the type, completion status, task description and due date
+     * @return a string with the type, completion status, task description and due date.
      */
     @Override
     public String toString() {

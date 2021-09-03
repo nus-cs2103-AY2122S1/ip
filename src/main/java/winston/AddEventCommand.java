@@ -1,7 +1,7 @@
 package winston;
 
 /**
- *  Represents the event command from the parent abstract class Command.
+ * Represents the event command from the parent abstract class Command.
  */
 public class AddEventCommand extends Command {
     private final String dateAndTime;

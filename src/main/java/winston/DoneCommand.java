@@ -1,7 +1,7 @@
 package winston;
 
 /**
- *  Represents the done command from the parent abstract class Command.
+ * Represents the done command from the parent abstract class Command.
  */
 public class DoneCommand extends Command {
     private final int index;
@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
 
     /**
      * Marks a task from the TaskList based on the index provided as complete and prints number of uncompleted 
-     * tasks remaining
+     * tasks remaining.
      */
     @Override
     public String run() {

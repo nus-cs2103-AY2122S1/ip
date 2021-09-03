@@ -1,7 +1,7 @@
 package winston;
 
 /**
- *  Represents the delete command from the parent abstract class Command.
+ * Represents the delete command from the parent abstract class Command.
  */
 public class DeleteCommand extends Command {
     private final int index;
@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Deletes a task from the TaskList based on the index provided and prints number of uncompleted tasks remaining
+     * Deletes a task from the TaskList based on the index provided and prints number of uncompleted tasks remaining.
      */
     @Override
     public String run() {

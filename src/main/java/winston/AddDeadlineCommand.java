@@ -1,7 +1,7 @@
 package winston;
 
 /**
- *  Represents the deadline command from the parent abstract class Command.
+ * Represents the deadline command from the parent abstract class Command.
  */
 public class AddDeadlineCommand extends Command {
     private final String description;

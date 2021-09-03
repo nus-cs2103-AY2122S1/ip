@@ -12,6 +12,7 @@ public class Parser {
 
     /**
      * Constructor for class Parser.
+     * 
      * @param taskList the TaskList that will be modified based on commands.
      */
     public Parser(TaskList taskList) {
@@ -20,12 +21,14 @@ public class Parser {
 
     /**
      * Method that parses the given user input.
+     * 
      * @param str user input.
      * @return A command depending on the user input.
      */
     public Command parse(String str) {
         String[] splitBySpace = str.split(" ");
         String cmd = splitBySpace[0];
+        final String invalidDateMessage = "Invalid date format. Please give a valid date format. E.g 2021-12-12";
         if (cmd.equals("bye")) {
             return new TerminateCommand(this.taskList);
         } else if (cmd.equals("list")) {
@@ -56,8 +59,7 @@ public class Parser {
                 LocalDate.parse(date);
                 return new AddDeadlineCommand(this.taskList, task, date);
             } catch (DateTimeParseException e) {
-                Ui.invalidDateFormat();
-                return new InvalidCommand(taskList);
+                return new InvalidCommand(taskList, invalidDateMessage);
             } catch (InputMismatchException | IndexOutOfBoundsException e) {
                 return new InvalidCommand(taskList);
             }
@@ -70,8 +72,7 @@ public class Parser {
                 LocalDate.parse(date);
                 return new AddEventCommand(this.taskList, task, date);
             } catch (DateTimeParseException e) {
-                Ui.invalidDateFormat();
-                return new InvalidCommand(taskList);
+                return new InvalidCommand(taskList, invalidDateMessage);
             } catch (InputMismatchException | IndexOutOfBoundsException e) {
                 return new InvalidCommand(taskList);
             }
