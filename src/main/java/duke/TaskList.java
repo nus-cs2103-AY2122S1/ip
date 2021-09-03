@@ -1,12 +1,13 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.function.Function;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-import java.util.ArrayList;
-import java.util.function.Function;
 
 /**
  *  A class that encapsulates the list of task inputted by Duke
@@ -24,8 +25,8 @@ public class TaskList {
      * @param type The type of the task that will be added
      * @param input The corresponding description provided for the task
      * @param isDone The boolean if the task is done
-     * @throws DukeException Exceptions specific to Duke's input
      * @return The String of the reply after adding a task
+     * @throws DukeException Exceptions specific to Duke's input
      */
     public String addTask(Task.TaskName type, String input, Boolean isDone) throws DukeException {
         Task task;
@@ -41,11 +42,11 @@ public class TaskList {
         case DEADLINE:
             inputArray = input.split(type.getSplit());
             if (inputArray.length < 2) {
-                throw new DukeException("The format for " + type +" is wrong.");
-            } else if(inputArray[0].isBlank()) {
+                throw new DukeException("The format for " + type + " is wrong.");
+            } else if (inputArray[0].isBlank()) {
                 throw new DukeException("The description of " + type + " cannot be empty.");
-            } else if(inputArray[1].isBlank()) {
-                throw new DukeException("The date/time is missing from " + type +".");
+            } else if (inputArray[1].isBlank()) {
+                throw new DukeException("The date/time is missing from " + type + ".");
             }
             task = type == Task.TaskName.EVENT ? new Event(inputArray[0], inputArray[1], isDone)
                     : new Deadline(inputArray[0], inputArray[1], isDone);
@@ -65,8 +66,8 @@ public class TaskList {
      *
      * @param type The type of the task that will be added
      * @param input The corresponding description provided for the task
-     * @throws DukeException Exceptions specific to Duke's input
      * @return The String of the reply after adding a task
+     * @throws DukeException Exceptions specific to Duke's input
      */
     public String addTask(Task.TaskName type, String input) throws DukeException {
         return addTask(type, input, false);
@@ -92,8 +93,8 @@ public class TaskList {
      * Marks the Task at the index of the list to be done.
      *
      * @param input The index of the Task in the list that is to be mark as done
-     * @throws DukeException Exceptions specific to Duke's input
      * @return The corresponding String reply after marking a task done
+     * @throws DukeException Exceptions specific to Duke's input
      */
     public String markTask(String input) throws DukeException {
         int index;
@@ -114,8 +115,8 @@ public class TaskList {
      * Deletes the task at the specific index.
      *
      * @param input The index of the task in the list that is to be deleted
-     * @throws DukeException Exceptions specific to Duke's input
      * @return The corresponding String reply after deleting a task
+     * @throws DukeException Exceptions specific to Duke's input
      */
     public String deleteTask(String input) throws DukeException {
         int index;
@@ -165,7 +166,7 @@ public class TaskList {
      *
      * @param f the function to be applied on each task
      */
-    public void iterateList(Function<Task, Void> f){
+    public void iterateList(Function<Task, Void> f) {
         for (Task t: this.tasks) {
             f.apply(t);
         }
