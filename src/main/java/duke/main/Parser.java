@@ -1,10 +1,10 @@
 package duke.main;
 
 import duke.exception.DukeException;
+import duke.exception.InvalidInputException;
 import duke.exception.NoDescriptionException;
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.Storage;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -15,8 +15,6 @@ public class Parser {
 
     /** The TaskList that will be altered based on user input */
     private TaskList taskList;
-    /** Storage that is responsible for saving and loading information from your hard disk into a TaskList */
-    private Storage storage;
 
     /**
      * Enum that holds information about acting on a task, not including actions that changes the size of the TaskList.
@@ -28,10 +26,8 @@ public class Parser {
 
         /** Name of the task action */
         private String name;
-
         /** Index to substring the input so as to remove the first word (command word) */
         private int substringIndex;
-
         /** Message fragment when the action is successfully completed */
         private String successMessage;
 
@@ -54,9 +50,8 @@ public class Parser {
      *
      * @param taskList TaskList that the Parser will alter or act on.
      */
-    public Parser(TaskList taskList, Storage storage) {
+    public Parser(TaskList taskList) {
         this.taskList = taskList;
-        this.storage = storage;
     }
 
     /**
@@ -67,20 +62,21 @@ public class Parser {
     public void handleInput(String input) {
         if (input.equals("bye")) {
 
+            Duke.exit();
+
         } else if (input.equals("list")) {
 
-            System.out.println("Output: This is your current list!\n");
             taskList.printList();
 
-        } else if (input.startsWith("find")) {
+        } else if (input.startsWith("find ")) {
 
             findTask(input);
 
-        } else if (input.startsWith("done")) {
+        } else if (input.startsWith("done ")) {
 
             alterTask(input, Parser.TaskAction.DONE);
 
-        } else if (input.startsWith("delete")) {
+        } else if (input.startsWith("delete ")) {
 
             // If successfully deleted task, then print current number of tasks.
             if (alterTask(input, Parser.TaskAction.DELETE)) {
@@ -90,8 +86,6 @@ public class Parser {
         } else {
             vetoTask(input);
         }
-
-        storage.writeToFile();
     }
 
     /**
@@ -102,11 +96,11 @@ public class Parser {
     private void findTask(String input) {
         final int FIND_SUBSTRING_INDEX = 5;
         try {
-            System.out.println("Output: These tasks have descriptions that contain the phrase '"
+            System.out.println("These tasks have descriptions that contain the phrase '"
                     + input.substring(FIND_SUBSTRING_INDEX) + "'!\n");
             taskList.printAllContains(input.substring(FIND_SUBSTRING_INDEX));
         } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("Output: Please include a search term after the word 'find'.\n"
+            System.out.println("Please include a search term after the word 'find'.\n"
                     + "i.e. Find meeting");
         }
     }
@@ -133,20 +127,21 @@ public class Parser {
                 taskToBeAltered = taskList.markDoneInTaskList(index);
             }
 
-            System.out.println("Output: This task is successfully " + action.successMessage + "!\n\n"
+            assert taskToBeAltered != null : "taskToBeAltered should no be null";
+            System.out.println("This task is successfully " + action.successMessage + "!\n\n"
                     + "    " + taskToBeAltered);
             return true;
 
         } catch (StringIndexOutOfBoundsException | NumberFormatException e1) {
 
-            System.out.println("Output: Please specify which task you would like to have\n"
+            System.out.println("Please specify which task you would like to have\n"
                     + action.successMessage + " by adding a single number after '" + action.name + "'!\n"
                     + "i.e. " + action.name + " 1");
             return false;
 
         } catch (IndexOutOfBoundsException e2) {
 
-            System.out.println("Output: There is no task under that number!");
+            System.out.println("There is no task under that number!");
             return false;
 
         }
@@ -162,41 +157,39 @@ public class Parser {
         Task newTask = null;
 
         try {
-            if (!input.startsWith("todo") && !input.startsWith("deadline") && !input.startsWith("event")) {
-                throw new duke.exception.InvalidInputException();
+            if (!input.startsWith("todo ") && !input.startsWith("deadline ") && !input.startsWith("event ")) {
+                throw new InvalidInputException();
             }
             // If it passes the if block, means it is a task-setting command
 
             // Check if a task description is present
             checkDescription(input);
 
-            if (input.startsWith("todo")) {
+            if (input.startsWith("todo ")) {
 
                 // Set the to-do
                 newTask = Todo.setTodo(input.substring(5));
 
-            } else if (input.startsWith("deadline")) {
+            } else if (input.startsWith("deadline ")) {
 
                 // Set the deadline
                 newTask = Deadline.setDeadline(input.substring(9));
 
-            } else if (input.startsWith("event")) {
+            } else if (input.startsWith("event ")) {
 
                 // Set the event
                 newTask = Event.setEvent(input.substring(6));
 
             }
         } catch (DukeException e1) {
-            System.out.println("Output: " + e1.getMessage());
+            System.out.println(e1.getMessage());
         }
 
-        // If there was no error, then add task.
-        if (newTask != null) {
-            taskList.addTask(newTask);
-            System.out.println("Output:You have successfully added the following task!\n\n"
-                    + "    " + newTask);
-            taskList.printNumberOfTasks();
-        }
+        assert newTask != null : "newTask should not be null";
+        taskList.addTask(newTask);
+        System.out.println("You have successfully added the following task!\n\n"
+                + "    " + newTask);
+        taskList.printNumberOfTasks();
     }
 
     /**
