@@ -57,6 +57,10 @@ public class Event extends Task {
      * @return true if deadline of task is the same as date and time of user input.
      */
     public boolean isSameDateTime(String dateTime) {
+        if (this.dateTime == null) {
+            return false;
+        }
+
         return this.dateTime.equals(Parser.parseDateTime(dateTime));
     }
 

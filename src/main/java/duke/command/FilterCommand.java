@@ -1,6 +1,6 @@
 package duke.command;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import duke.task.Task;
 import duke.util.ToDoList;
@@ -37,7 +37,7 @@ public class FilterCommand extends Command {
         }
 
         String[] extracted = input.split(" ", 2);
-        ArrayList<Task> extractedTask = list.filterList(extracted[1]);
+        List<Task> extractedTask = list.filterList(extracted[1]);
 
         if (extractedTask.size() == 0) {
             return EMPTY_FILTERED_LIST;
