@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        TaskList newTaskList = taskList.markTask(input, ui);
+        TaskList newTaskList = taskList.markTask(ui, input);
         storage.saveTasksToFile(newTaskList);
         return newTaskList;
     }

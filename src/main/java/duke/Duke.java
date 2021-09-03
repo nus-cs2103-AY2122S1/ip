@@ -76,7 +76,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
-            Command command = Parser.parseCommandFromInput(input);
+            Command command = Parser.parseCommandFromInput(input.trim());
             taskList = command.execute(taskList, ui, storage);
             isTerminated = command.isTerminated();
             return taskList.getRecentMessage();

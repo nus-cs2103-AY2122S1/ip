@@ -72,54 +72,60 @@ public class TaskList {
      * Adds a task to the task list with a task name.
      * Task is either a todo, deadline or event task depending on the input.
      *
-     * @param input String containing user input.
      * @param ui    Object that handles user interface functionality. (e.g. printing)
+     * @param inputs A variable amount of strings representing the user input.
      * @return A new TaskList instance containing the new task and an output message.
      * @throws DukeException If input contains |, or is in an invalid format.
      */
-    public TaskList addTask(String input, Ui ui) throws DukeException {
+    public TaskList addTask(Ui ui, String ...inputs) throws DukeException {
         List<Task> newTasks = new ArrayList<>(tasks);
         String message = "";
-        if (input.contains("|")) {
-            throw new DukeException("Input contains |, which is an invalid character.");
+        for (String input: inputs) {
+            if (input.contains("|")) {
+                throw new DukeException("Input contains |, which is an invalid/reserved character.");
+            }
         }
         Task task;
-        String commandString = input.split(" ")[0].toUpperCase();
-        switch (commandString) {
+        switch (inputs[0].toUpperCase()) {
         case "TODO":
             // Add Todo task
-            if (input.length() <= 5) {
-                throw new DukeException("The description of a todo cannot be empty.");
-            }
-            task = new Todo(input.substring(5));
+            task = new Todo(Parser.parseTaskNameFromInput(inputs, 1, inputs.length));
             break;
         case "DEADLINE":
             // Add Deadline task
-            String errorMessage = "Command must be in the format: [taskName] /by "
-                    + "[date(YYYY-MM-DD)] [time(HH:MM)].";
-            String[] splitInputs = Parser.splitWith(input, 9, " /by ", errorMessage);
-            String taskName = splitInputs[0];
-            errorMessage = "Date and time must be in the format: YYYY-MM-DD HH:MM.";
-            String[] dateTimeInputs = Parser.splitWith(splitInputs[1], 0, " ", errorMessage);
-            String date = dateTimeInputs[0];
-            String time = dateTimeInputs[1];
+            int byIndex = -1;
+            for (int i = 0; i < inputs.length; i++) {
+                if (inputs[i].equals("/by")) {
+                    byIndex = i;
+                    break;
+                }
+            }
+            if (inputs.length < byIndex + 2 || byIndex == -1) {
+                throw new DukeException("Command must be in the format: deadline [taskName] /by "
+                        + "[date(YYYY-MM-DD)] [time(HH:MM)].");
+            }
+            String taskName = Parser.parseTaskNameFromInput(inputs, 1, byIndex);
+            String date = inputs[byIndex + 1];
+            String time = inputs[byIndex + 2];
             task = new Deadline(taskName, Parser.parseDateFromInput(date), Parser.parseTimeFromInput(time));
             break;
         default: // default is guaranteed to be event task due to use of enum + outer control flow
             // Add Event task
-            errorMessage = "Command must be in the format: [taskName] /at "
-                    + "[date(YYYY-MM-DD)] [start time(HH:MM)] [end time(HH:MM)].";
-            splitInputs = Parser.splitWith(input, 6, " /at ", errorMessage);
-            taskName = splitInputs[0];
-            errorMessage = "Date and times must be in the format: YYYY-MM-DD HH:MM HH:MM.";
-            dateTimeInputs = Parser.splitWith(splitInputs[1], 0, " ", errorMessage);
-            // If user only input in one time
-            if (dateTimeInputs.length < 3) {
-                throw new DukeException(errorMessage);
+            int atIndex = -1;
+            for (int i = 0; i < inputs.length; i++) {
+                if (inputs[i].equals("/at")) {
+                    atIndex = i;
+                    break;
+                }
             }
-            date = dateTimeInputs[0];
-            String startTime = dateTimeInputs[1];
-            String endTime = dateTimeInputs[2];
+            if (inputs.length < atIndex + 3 || atIndex == -1) {
+                throw new DukeException("Command must be in the format: event [taskName] /at "
+                        + "[date(YYYY-MM-DD)] [start time(HH:MM)] [end time(HH:MM)].");
+            }
+            taskName = Parser.parseTaskNameFromInput(inputs, 1, atIndex);
+            date = inputs[atIndex + 1];
+            String startTime = inputs[atIndex + 2];
+            String endTime = inputs[atIndex + 3];
             task = new Event(taskName, Parser.parseDateFromInput(date),
                     Parser.parseTimeFromInput(startTime), Parser.parseTimeFromInput(endTime));
             break;
@@ -128,7 +134,7 @@ public class TaskList {
         // Common functionality: add task to list, print task and list size, save tasks to file
         newTasks.add(task);
         message += ui.showMessage("Got it. The following task has been added: ");
-        message += ui.showIndentedMessage(task.toString());
+        message += ui.showMessage(task.toString());
         message += ui.showMessage(String.format("Now you have %d task%s in the list.",
                 newTasks.size(), newTasks.size() == 1 ? "" : "s"));
         return new TaskList(newTasks, message);
@@ -138,12 +144,12 @@ public class TaskList {
      * Deletes a task from the task list.
      * Index of deleted task depends on the input.
      *
-     * @param input String containing user input.
      * @param ui    Object that handles user interface functionality. (e.g. printing)
+     * @param input String containing user input.
      * @return A new TaskList instance with the selected task removed and an output message.
      * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
      */
-    public TaskList deleteTask(String input, Ui ui) {
+    public TaskList deleteTask(Ui ui, String input) {
         List<Task> newTasks = new ArrayList<>(tasks);
         String message = "";
         if (input.length() <= 7) {
@@ -156,7 +162,7 @@ public class TaskList {
             int taskIndex = Integer.parseInt(taskNumberString) - 1;
             Task removedTask = newTasks.remove(taskIndex);
             message += ui.showMessage("Got it. The following task has been removed:");
-            message += ui.showIndentedMessage(removedTask.toString());
+            message += ui.showMessage(removedTask.toString());
             message += ui.showMessage(String.format("Now you have %d task%s in the list.",
                     newTasks.size(), newTasks.size() == 1 ? "" : "s"));
         } else {
@@ -170,12 +176,12 @@ public class TaskList {
      * Marks a task as done on in the task list.
      * Index of marked task depends on the input.
      *
-     * @param input String containing user input.
      * @param ui    Object that handles user interface functionality. (e.g. printing)
+     * @param input String containing user input.
      * @return A new TaskList instance with the selected task marked as done.
      * @throws DukeException If input is in an invalid format, or specified index is out of bounds.
      */
-    public TaskList markTask(String input, Ui ui) {
+    public TaskList markTask(Ui ui, String input) {
         List<Task> newTasks = new ArrayList<>(tasks);
         String message = "";
         if (input.length() <= 5) {
@@ -187,9 +193,9 @@ public class TaskList {
                 && Integer.parseInt(taskNumberString) - 1 >= 0)) {
             int taskIndex = Integer.parseInt(taskNumberString) - 1;
             Task doneTask = newTasks.get(taskIndex);
-            message += ui.showMessage("Good work! This task is now marked as done:");
-            message += ui.showIndentedMessage(doneTask.toString());
             newTasks.set(taskIndex, doneTask.markAsDone());
+            message += ui.showMessage("Good work! This task is now marked as done:");
+            message += ui.showMessage(doneTask.markAsDone().toString());
         } else {
             // Invalid input (not a number or invalid number)
             throw new DukeException("Please type in a valid task number to mark as done.");

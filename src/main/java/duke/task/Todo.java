@@ -25,6 +25,16 @@ public class Todo extends Task {
     }
 
     /**
+     * Marks the current todo task as done. Returns a new instance of the task to maintain immutability.
+     *
+     * @return A task with the same task name but is marked as done.
+     */
+    @Override
+    public Task markAsDone() {
+        return new Todo(taskName, true);
+    }
+
+    /**
      * Converts the todo task data into its corresponding save file data format.
      *
      * @return A string to represent the data of the todo task in the save file.

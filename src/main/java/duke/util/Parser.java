@@ -100,4 +100,20 @@ public class Parser {
         }
         return input.substring(startIndex).split(regex);
     }
+
+    /**
+     * Combines a task name that has been split back into its original form.
+     *
+     * @param inputs     Input that contains the user's command.
+     * @param startIndex The index at which the task name input starts.
+     * @param endIndex The index after the last word of the task name.
+     * @return A String containing the task name.
+     */
+    public static String parseTaskNameFromInput(String[] inputs, int startIndex, int endIndex) {
+        StringBuilder taskName = new StringBuilder();
+        for (int i = startIndex; i < endIndex; i++) {
+            taskName.append(inputs[i]).append(" ");
+        }
+        return taskName.toString().trim();
+    }
 }

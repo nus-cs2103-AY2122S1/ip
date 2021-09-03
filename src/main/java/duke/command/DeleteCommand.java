@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public TaskList execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
-        TaskList newTaskList = taskList.deleteTask(input, ui);
+        TaskList newTaskList = taskList.deleteTask(ui, input);
         storage.saveTasksToFile(newTaskList);
         return newTaskList;
     }

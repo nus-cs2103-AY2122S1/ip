@@ -6,7 +6,6 @@ package duke.util;
  */
 public class Ui {
     private static final String FORMAT = "%s\n";
-    private static final String INDENTED_FORMAT = "\t%s\n";
 
     /**
      * Creates an instance of the Ui class.
@@ -31,17 +30,6 @@ public class Ui {
     public String showMessage(String message) {
         return String.format(FORMAT, message);
     }
-
-    /**
-     * Displays a formatted message, with an extra tab indent compared to showMessage.
-     *
-     * @param message String that is to be formatted and printed.
-     * @return A formatted string.
-     */
-    public String showIndentedMessage(String message) {
-        return String.format(INDENTED_FORMAT, message);
-    }
-
     /**
      * Returns a formatted error string.
      *
