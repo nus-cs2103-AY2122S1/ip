@@ -1,19 +1,19 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class DukeTest {
-    @Test
     /**
      * Runs Duke with the specified input in the input text file.
      */
+    @Test
     public void runTest() {
         File f = new File("./data/duke.txt");
         if (f.exists()) {
@@ -34,10 +34,10 @@ public class DukeTest {
         }
     }
 
-    @Test
     /**
      * Checks the output of running Duke to see if the data saved is the same.
      */
+    @Test
     public void checkOutput() {
         try {
             Scanner sc = new Scanner(new File("./data/duke.txt"));

@@ -10,11 +10,11 @@ public class Parser {
      * Handles all the text input to call the correct corresponding method.
      *
      * @param input The text input from the user to Duke
-     * @throws DukeException Exceptions specific to Duke's input
      * @return The corresponding String reply to the user's input
+     * @throws DukeException Exceptions specific to Duke's input
      */
     public String handleInput(TaskList list, String input) throws DukeException {
-        String[] inputArray = input.split(" ",2);
+        String[] inputArray = input.split(" ", 2);
         String reply = "";
 
         switch (inputArray[0]) {
