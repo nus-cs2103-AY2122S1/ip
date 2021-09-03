@@ -30,17 +30,15 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private Timer timer;
-    private TimerTask task;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/shrek.jpg"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pepe.jpg"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(new Label("Welcome to duke you little shit"), new ImageView(dukeImage))
+                DialogBox.getDukeDialog("Welcome to duke you little shit", dukeImage)
         );
     }
 
@@ -58,11 +56,11 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         if (!response.equals("")) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(new Label(input), new ImageView(userImage)),
-                    DialogBox.getDukeDialog(new Label(response), new ImageView(dukeImage))
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
             );
         } else {
-            dialogContainer.getChildren().add(DialogBox.getUserDialog(new Label(input), new ImageView(userImage)));
+            dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         }
         userInput.clear();
     }

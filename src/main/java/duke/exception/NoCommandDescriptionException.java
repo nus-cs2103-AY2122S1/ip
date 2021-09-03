@@ -19,6 +19,6 @@ public class NoCommandDescriptionException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return super.formatMessage("Hello??? Your command no description one ah???");
+        return "Hello??? Your command no description one ah???";
     }
 }

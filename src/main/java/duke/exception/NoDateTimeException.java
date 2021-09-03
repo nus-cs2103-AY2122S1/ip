@@ -21,6 +21,6 @@ public class NoDateTimeException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return super.formatMessage("Hello??? Your task no date and time one ah???");
+        return "Hello??? Your task no date and time one ah???";
     }
 }

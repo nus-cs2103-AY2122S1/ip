@@ -74,7 +74,7 @@ public class Ui {
 
     public String addTaskGUI(int taskLeft, Task t) {
         String s = "Got it. I've added this task:\n" + INDENTATION + "  " + t.checkStatus();
-        s += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskLeft);
+        s += String.format("\nNow you have %d tasks in the list.", taskLeft);
         return s;
     }
 
@@ -93,7 +93,7 @@ public class Ui {
 
     public String deleteTaskGUI(int taskLeft, Task t) {
         String s = "Noted. I've removed this task:\n" + INDENTATION + "  " + t.checkStatus();
-        s += String.format("\n%sNow you have %d tasks in the list.", INDENTATION, taskLeft);
+        s += String.format("\nNow you have %d tasks in the list.", taskLeft);
         return s;
     }
 
@@ -159,7 +159,7 @@ public class Ui {
         if (list.size() > 0) {
             s.append("Here are the matching tasks in your list:");
             for (int i = 1; i <= list.size(); i++) {
-                s.append(String.format("\n%s%d. %s,", INDENTATION, i, list.get(i - 1).checkStatus()));
+                s.append(String.format("\n%s%d. %s", INDENTATION, i, list.get(i - 1).checkStatus()));
             }
         } else {
             s.append("There are no matching task in your list.");

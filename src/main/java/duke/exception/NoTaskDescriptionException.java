@@ -19,6 +19,6 @@ public class NoTaskDescriptionException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return super.formatMessage("Hello??? Your task no description one ah???");
+        return "Hello??? Your task no description one ah???";
     }
 }

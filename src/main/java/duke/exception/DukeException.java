@@ -10,21 +10,4 @@ package duke.exception;
  */
 public abstract class DukeException extends Exception {
 
-    /**
-     * Returns a formatted message. Used by child
-     * class exception to format their error message.
-     *
-     * @param msg The message to be formatted.
-     * @return The formatted error message.
-     */
-    protected String formatMessage(String msg) {
-//        String line = "____________________________________________________________";
-//        String indentation = "    ";
-//        String finalMsg = indentation + line + "\n";
-//        finalMsg += indentation + "OI!!! " + msg + "\n";
-//        finalMsg += indentation + line;
-//        return finalMsg;
-        String indentation = "    ";
-        return String.format("%s%s", indentation, msg);
-    }
 }

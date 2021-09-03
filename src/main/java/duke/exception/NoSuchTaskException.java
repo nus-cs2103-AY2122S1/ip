@@ -18,6 +18,6 @@ public class NoSuchTaskException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return super.formatMessage("Hello??? You sure got this task or not???");
+        return "Hello??? You sure got this task or not???";
     }
 }

@@ -23,7 +23,7 @@ public class InvalidDateTimeException extends DukeException {
      */
     @Override
     public String getMessage() {
-        return super.formatMessage("Entered DateTime format not supported. "
-                + "Please enter Date and Time in YYYY-MM-DD HH:MM.");
+        return "Entered DateTime format not supported. "
+                + "Please enter Date and Time in YYYY-MM-DD HH:MM.";
     }
 }
