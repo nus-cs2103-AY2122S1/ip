@@ -1,16 +1,17 @@
 package duke.tasks;
 
-import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class EventTest {
     @Test
     public void testToString_date() {
-        assertEquals("[E][ ] event 1 (at: Aug 23 2021)", 
+        assertEquals("[E][ ] event 1 (at: Aug 23 2021)",
                 new Event("event 1", LocalDate.of(2021, 8, 23)).toString());
     }
 

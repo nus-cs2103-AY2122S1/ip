@@ -1,16 +1,17 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.Action;
-import duke.command.End;
-import duke.command.List;
-import duke.command.Add;
-import duke.exception.DukeException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.command.Action;
+import duke.command.Add;
+import duke.command.Command;
+import duke.command.End;
+import duke.command.List;
+import duke.exception.DukeException;
 
 public class ParserTest {
     @Test
@@ -20,7 +21,7 @@ public class ParserTest {
             assertTrue(c instanceof End);
         } catch (DukeException e) {
             fail();
-        }        
+        }
     }
 
     @Test
