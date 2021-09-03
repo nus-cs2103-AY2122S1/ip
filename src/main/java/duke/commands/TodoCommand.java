@@ -2,10 +2,10 @@ package duke.commands;
 
 import duke.exceptions.DukeException;
 import duke.exceptions.EmptyDescriptionException;
-import duke.main.Ui;
 import duke.main.Storage;
-import duke.tasks.Task;
 import duke.main.TaskList;
+import duke.main.Ui;
+import duke.tasks.Task;
 import duke.tasks.Todo;
 
 /**
@@ -26,7 +26,7 @@ public class TodoCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         //TaskList
         Task task = new Todo(this.description);
         taskList.addTask(task);
@@ -35,8 +35,10 @@ public class TodoCommand extends Command {
         storage.save(taskList);
 
         //Ui
-        ui.showAddTask(task);
-        ui.showNumTask(taskList.getNumTask());
+        String output = "";
+        output += ui.showAddTask(task) + "\n";
+        output += ui.showNumTask(taskList.getNumTask());
+        return output;
     }
 
     /**

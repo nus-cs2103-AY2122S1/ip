@@ -1,10 +1,10 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.main.Ui;
 import duke.main.Storage;
-import duke.tasks.Task;
 import duke.main.TaskList;
+import duke.main.Ui;
+import duke.tasks.Task;
 
 /**
  * Represents command to delete task
@@ -24,7 +24,7 @@ public class DeleteCommand extends Command {
      * {@inheritDoc}
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         //TaskList
         Task deletedTask = taskList.deleteTask(this.index);
 
@@ -32,8 +32,10 @@ public class DeleteCommand extends Command {
         storage.save(taskList);
 
         //Ui
-        ui.showDeleteTask(deletedTask);
-        ui.showNumTask(taskList.getNumTask());
+        String output = "";
+        output += ui.showDeleteTask(deletedTask) + "\n";
+        output += ui.showNumTask(taskList.getNumTask());
+        return output;
     }
 
     /**
