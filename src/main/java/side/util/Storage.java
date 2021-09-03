@@ -1,6 +1,5 @@
 package side.util;
 
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

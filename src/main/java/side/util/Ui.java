@@ -58,7 +58,7 @@ public class Ui {
      * @param input String representation of user input.
      * @param taskList TaskList to be added to.
      * @return String representing response.
-     * @throws WrongFormatException Catches incorrectly formatted input and returns error.
+     * @throws WrongFormatException Catches incorrectly formatted input.
      */
     public String addDeadline(String input, TaskList taskList) throws WrongFormatException {
         assert input.length() > 0;
@@ -80,7 +80,7 @@ public class Ui {
      * @param input String representation of user input.
      * @param taskList TaskList to be added to.
      * @return String representing response.
-     * @throws WrongFormatException Catches incorrectly formatted input and returns error.
+     * @throws WrongFormatException Catches incorrectly formatted input.
      */
     public String addEvent(String input, TaskList taskList) throws WrongFormatException {
         assert input.length() > 0;
@@ -109,7 +109,7 @@ public class Ui {
      * @param input String representation of user input.
      * @param taskList TaskList to be added to.
      * @return String representing response.
-     * @throws WrongFormatException Catches incorrectly formatted input and returns error.
+     * @throws WrongFormatException Catches incorrectly formatted input.
      */
     public String addTask(String input, TaskList taskList) throws WrongFormatException {
         assert input.length() > 0;
@@ -128,9 +128,9 @@ public class Ui {
      * @param input String representation of user input.
      * @param taskList TaskList in which task is to be marked.
      * @return String representing response.
-     * @throws TaskIndexException Catches out of bounds task indexes and returns error.
-     * @throws NoIndexException Catches no index input from user and returns error.
-     * @throws TooManyIndexesException Catches too many index input from user and returns error.
+     * @throws TaskIndexException Catches out of bounds task indexes.
+     * @throws NoIndexException Catches no index input from user.
+     * @throws TooManyIndexesException Catches too many index input from user.
      */
     public String handleDone(String input, TaskList taskList) throws TaskIndexException, NoIndexException,
             TooManyIndexesException {
@@ -156,9 +156,9 @@ public class Ui {
      * @param input String representation of user input.
      * @param taskList TaskList in which task is to be marked.
      * @return String representing response.
-     * @throws DeleteIndexException Catches out of bounds task indexes and returns error.
-     * @throws NoIndexException Catches no index input from user and returns error.
-     * @throws TooManyIndexesException Catches too many index input from user and returns error.
+     * @throws DeleteIndexException Catches out of bounds task indexes.
+     * @throws NoIndexException Catches no index input from user.
+     * @throws TooManyIndexesException Catches too many index input from user.
      */
     public String handleDelete(String input, TaskList taskList) throws DeleteIndexException, NoIndexException,
             TooManyIndexesException {
@@ -195,8 +195,9 @@ public class Ui {
      * @param input String representing user input.
      * @param taskList List to check against.
      * @return String representing response.
+     * @throws NoIndexException Catches no index input from user.
      */
-    public String handleFind(String input, TaskList taskList) {
+    public String handleFind(String input, TaskList taskList) throws NoIndexException {
         assert input.length() > 0;
 
         if (input.split("\\s+").length == 1) {
