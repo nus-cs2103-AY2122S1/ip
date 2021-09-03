@@ -38,6 +38,15 @@ public class TaskList {
     }
 
     /**
+     * Returns true if the task list is empty.
+     *
+     * @return true if the task list is empty.
+     */
+    public boolean isEmpty() {
+        return size() == 0;
+    }
+
+    /**
      * Gets the i-th task from the task list, using 1-based indexing.
      * This means that getTask(1) removes the first task in the list.
      *

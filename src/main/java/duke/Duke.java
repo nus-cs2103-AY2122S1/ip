@@ -2,14 +2,16 @@ package duke;
 
 import java.io.IOException;
 import java.util.Optional;
-import java.util.Scanner;
 
 import duke.exception.DukeFileSystemException;
 import duke.exception.InvalidDukeCommandException;
 import duke.io.DukeParser;
 import duke.io.Storage;
-import duke.io.Ui;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 import duke.type.DukeCommand;
 
 
@@ -18,51 +20,29 @@ import duke.type.DukeCommand;
  */
 public class Duke {
     // Constant declarations
-    private final Ui ui;
     private final DukeParser parser;
     private Optional<Storage> storage;
     private TaskList taskList;
 
-
+    /**
+     * Constructs a new instance of Duke, the task manager. If the file path ./data/duke.txt, which is used to store
+     * and load previously added tasks, is invalid, Duke will default to a new empty task list instead, and will not
+     * cache the tasks added or deleted for that particular session.
+     */
     public Duke() {
         String filePath = "data/duke.txt";
-        this.ui = new Ui();
         this.parser = new DukeParser();
         try {
             this.storage = Optional.of(new Storage(filePath));
             this.taskList = this.storage.map(value -> new TaskList(value.load())).orElseGet(TaskList::new);
         } catch (IOException e) {
-            ui.dukeShowError("The file path " + filePath + " is invalid. This session will not be stored.");
             this.storage = Optional.empty();
             this.taskList = new TaskList();
         } catch (DukeFileSystemException e) {
-            ui.dukePrint(e.getMessage());
             this.taskList = new TaskList();
         }
     }
 
-    /**
-     * Constructs a new instance of Duke, the task manager. If the file path specified, which is used to store and load
-     * previously added tasks, is invalid, Duke will default to a new empty task list instead, and executing Duke.run
-     * () will not cache the tasks added or deleted for that particular session.
-     *
-     * @param filePath the file path to store and load previously added tasks
-     */
-    public Duke(String filePath) {
-        this.ui = new Ui();
-        this.parser = new DukeParser();
-        try {
-            this.storage = Optional.of(new Storage(filePath));
-            this.taskList = this.storage.map(value -> new TaskList(value.load())).orElseGet(TaskList::new);
-        } catch (IOException e) {
-            ui.dukeShowError("The file path " + filePath + " is invalid. This session will not be stored.");
-            this.storage = Optional.empty();
-            this.taskList = new TaskList();
-        } catch (DukeFileSystemException e) {
-            ui.dukePrint(e.getMessage());
-            this.taskList = new TaskList();
-        }
-    }
 
     private String todoHandler(String args) {
         if (args.equals("")) {
@@ -111,7 +91,7 @@ public class Duke {
     }
 
     private String listHandler() {
-        return taskList.toString();
+        return taskList.isEmpty() ? "No tasks added so yet!" : taskList.toString();
     }
 
     private String doneHandler(String args) {
@@ -214,46 +194,27 @@ public class Duke {
     }
 
     /**
-     * Prompts users to input their commands to Duke
-     */
-    private void promptUserCommands() {
-        String introduction = "Hello! I'm Duke\nWhat can I do for you?";
-        ui.dukePrint(introduction);
-
-        Scanner reader = new Scanner(System.in);
-        while (true) {
-            String userInput = reader.nextLine();
-            DukeCommand command = parser.getCommandType(userInput);
-            String argsLiteral = parser.getArgsLiteral(userInput);
-            handleInput(command, argsLiteral);
-            if (command == DukeCommand.BYE) {
-                break;
-            }
-        }
-        reader.close();
-    }
-
-    /**
-     * Starts the execution of a new session of the Duke task manager CLI.
-     */
-    public void run() {
-        String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n" + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        promptUserCommands();
-    }
-
-    /**
      * Gets Duke's introductory statement.
+     *
      * @return a string representing Duke's introduction.
      */
     public String getIntroduction() {
+        String introduction = "";
+        if (taskList.isEmpty()) {
+            introduction += "Error while loading previous task list. A new task list will be created for this session" +
+                    ".\n";
+        }
+
+        if (storage.isEmpty()) {
+            introduction += "Data path to storage is inaccessible. This session will not be saved.\n";
+        }
         return "Hello! I'm Duke\nWhat can I do for you?";
 
     }
 
     /**
      * Gets Duke's response to a specified input.
+     *
      * @param input the input specified by the user.
      * @return a string of Duke's response
      */
@@ -263,9 +224,5 @@ public class Duke {
         System.out.println(command);
         System.out.println(argsLiteral);
         return handleInput(command, argsLiteral);
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/duke.txt").run();
     }
 }
