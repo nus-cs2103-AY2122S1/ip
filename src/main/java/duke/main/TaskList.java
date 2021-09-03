@@ -10,6 +10,7 @@ import duke.tasks.Task;
  */
 public class TaskList {
     protected ArrayList<Task> taskList;
+    private int numTaskDone;
 
     public TaskList() {
         taskList = new ArrayList<>();
@@ -21,6 +22,14 @@ public class TaskList {
         for (StorageElement storageElement : storageList) {
             this.addTask(Task.of(storageElement));
         }
+    }
+
+    public void setNumTaskDone(int numTaskDone) {
+        this.numTaskDone = numTaskDone;
+    }
+
+    public int getNumTaskDone() {
+        return numTaskDone;
     }
 
     /**
@@ -38,6 +47,7 @@ public class TaskList {
      */
     public Task markAsDone(int index) {
         this.taskList.get(index).markAsDone();
+        this.numTaskDone += 1;
         return this.taskList.get(index);
     }
 

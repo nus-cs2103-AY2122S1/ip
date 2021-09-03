@@ -22,9 +22,11 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            tasks.setNumTaskDone(storage.getNumTaskDone());
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
+            tasks.setNumTaskDone(0);
         }
     }
 
