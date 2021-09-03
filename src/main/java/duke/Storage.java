@@ -15,11 +15,11 @@ public class Storage {
         this.storage = new File(fileName);
     }
 
-    public TaskList load() {
+    public TaskList load() throws DukeException {
         try {
             this.storage.createNewFile();
         } catch (IOException error) {
-            System.out.println("Ensure you have created a folder named 'data' within the main project directory!");
+            throw new DukeException("ensure you have created a folder named 'data' within the main project directory!");
         }
         try {
             Scanner fileScanner = new Scanner(this.storage);
@@ -27,10 +27,27 @@ public class Storage {
 
             while (fileScanner.hasNext()) {
                 String fileData = fileScanner.nextLine();
+                Parser parser = new Parser(fileData);
 
+                if (parser.isDone()) {
+                    tasklist.done(parser.secondPartInInt());
+                } else if (parser.isToDo()) {
+                    ToDo task = new ToDo(parser.secondPart());
+                    tasklist.add(task);
+                } else if (parser.isDeadline()) {
+                    Deadline task = new Deadline(parser.deadline()[0], parser.deadline()[1]);
+                    tasklist.add(task);
+                } else if (parser.isEvent()) {
+                    Event task = new Event(parser.event()[0], parser.event()[1]);
+                    tasklist.add(task);
+                } else if (parser.isDelete()) {
+                    tasklist.delete(parser.secondPartInInt());
+                }
             }
+
+            return tasklist;
         } catch (FileNotFoundException e) {
-            System.out.println("Ensure you have created a folder named 'data' within the main project directory!");
+            throw new DukeException("ensure you have created a folder named 'data' within the main project directory!");
         }
 
         //load contents into TaskList
@@ -42,11 +59,11 @@ public class Storage {
         fw.close();
     }
 
-    public void save(String history) {
+    public void save(String history) throws DukeException{
         try {
             appendToFile(history + System.lineSeparator());
         } catch (IOException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
+            throw new DukeException(e.getMessage());
         }
     }
 }

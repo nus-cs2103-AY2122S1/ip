@@ -9,14 +9,113 @@ import java.util.ArrayList;
 
 public class Duke {
 
-    protected static final String LOCAL_FILE = "data/duke.txt";
+    private static final String LOCAL_FILE = "data/duke.txt";
 
-    public static void appendToFile(String filePath, String textToAppend) throws IOException {
-        FileWriter fw = new FileWriter(filePath, true); // create a FileWriter in append mode
-        fw.write(textToAppend);
-        fw.close();
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath) {
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        try {
+            this.tasks = storage.load();
+        } catch (DukeException e) {
+            ui.showError(e);
+        }
     }
 
+    public void run() {
+        this.ui.welcome();
+
+        Scanner sc = new Scanner(System.in);
+        Parser parser = new Parser(sc.nextLine());
+
+
+        while (!parser.isBye()) {
+            try {
+                if (parser.isList()) {
+                    ui.list(this.tasks);
+
+                    parser = new Parser(sc.nextLine());
+                } else if (parser.isDone()) {
+                    try {
+                        this.tasks.done(parser.secondPartInInt());
+                        this.storage.save(parser.getCommand());
+                        ui.done(this.tasks.getMostRecent());
+
+                        parser = new Parser(sc.nextLine());
+                    } catch (DukeException e) {
+                        ui.showError(e);
+
+                        parser = new Parser(sc.nextLine());
+                    }
+                } else if (parser.isToDo()) {
+                    ToDo task;
+                    try {
+                        task = new ToDo(parser.secondPart());
+                        this.tasks.add(task);
+                        this.storage.save(parser.getCommand());
+                        ui.addTask(this.tasks.getMostRecent(), this.tasks);
+
+                        parser = new Parser(sc.nextLine());
+                    } catch (DukeException e) {
+                        ui.showError(e);
+
+                        parser = new Parser(sc.nextLine());
+                    }
+                } else if (parser.isDeadline()) {
+                    Deadline task;
+                    try {
+                        task = new Deadline(parser.deadline()[0], parser.deadline()[1]);
+                        this.tasks.add(task);
+                        this.storage.save(parser.getCommand());
+                        ui.addTask(this.tasks.getMostRecent(), this.tasks);
+
+                        parser = new Parser(sc.nextLine());
+                    } catch (DukeException e) {
+                        ui.showError(e);
+
+                        parser = new Parser(sc.nextLine());
+                    }
+                } else if (parser.isEvent()) {
+                    Event task;
+                    try {
+                        task = new Event(parser.event()[0], parser.event()[1]);
+                        this.tasks.add(task);
+                        this.storage.save(parser.getCommand());
+                        ui.addTask(this.tasks.getMostRecent(), this.tasks);
+
+                        parser = new Parser(sc.nextLine());
+                    } catch (DukeException e) {
+                        ui.showError(e);
+
+                        parser = new Parser(sc.nextLine());
+                    }
+                } else if (parser.isDelete()) {
+                    try {
+                        this.tasks.delete(parser.secondPartInInt());
+                        ui.deleteTask(this.tasks.getMostRecent(), this.tasks);
+
+                        parser = new Parser(sc.nextLine());
+                    } catch (DukeException e) {
+                        ui.showError(e);
+
+                        parser = new Parser(sc.nextLine());
+                    }
+                } else {
+                    throw new DukeException("I do not know what you want to do!");
+                }
+            } catch (DukeException e) {
+                ui.showError(e);
+
+                parser = new Parser(sc.nextLine());
+            }
+        }
+
+        ui.bye();
+        sc.close();
+    }
 
     public static void main(String[] args) {
 
@@ -35,48 +134,6 @@ public class Duke {
         ArrayList<Task> history = new ArrayList<>();
 
         File importedFile = new File(LOCAL_FILE);
-
-        try {
-            importedFile.createNewFile();
-        } catch (IOException error) {
-            System.out.println("Ensure you have created a folder named 'data' within the main project directory!");
-        }
-
-        try {
-            Scanner fileScanner = new Scanner(importedFile);
-            while (fileScanner.hasNext()) {
-                String fileData = fileScanner.nextLine();
-                String[] details = fileData.split(" ", 2);
-
-                if (details[0].equals("done")) {
-                    int taskIndex = Integer.valueOf(details[1]);
-                    Task completedTask = history.get(taskIndex - 1);
-                    completedTask.Done();
-
-                } else if (details[0].equals("todo")) {
-                    ToDo task = new ToDo(details[1]);
-                    history.add(task);
-
-                } else if (details[0].equals("deadline")) {
-                    String[] c = details[1].split(" /by ", 2);
-                    Deadline task = new Deadline(c[0], c[1]);
-                    history.add(task);
-
-                } else if (details[0].equals("event")) {
-                    String[] c = details[1].split(" /at ", 2);
-                    Event task = new Event(c[0], c[1]);
-                    history.add(task);
-
-                } else if (details[0].equals("delete")) {
-                    int taskIndex = Integer.valueOf(details[1]);
-                    Task removed = history.get(taskIndex - 1);
-
-                    history.remove(taskIndex - 1);
-                }
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Something went wrong: " + e.getMessage());
-        }
 
 
             while (!a.equals("bye")) {

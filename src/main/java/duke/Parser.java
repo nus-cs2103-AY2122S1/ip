@@ -3,10 +3,43 @@ package duke;
 public class Parser {
     private String command;
     private String[] twoPart;
+    private String[] time;
 
     public Parser(String command) {
         this.command = command;
         this.twoPart = this.command.split(" ", 2);
+    }
+
+    public String getCommand() {
+        return this.command;
+    }
+
+    public String firstPart() {
+        return this.twoPart[0];
+    }
+
+    public int secondPartInInt() throws DukeException {
+        try {
+            return Integer.valueOf(this.twoPart[1]);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("which specific task from the list? Give a number!");
+        }
+    }
+
+    public String secondPart() throws DukeException {
+        try {
+            return this.twoPart[1];
+        } catch (ArrayIndexOutOfBoundsException error) {
+            throw new DukeException("do remember to add your description!");
+        }
+    }
+
+    public String[] deadline() {
+        return this.twoPart[1].split(" /by ", 2);
+    }
+
+    public String[] event() {
+        return this.twoPart[1].split(" /at ", 2);
     }
 
     public String[] parse() {
