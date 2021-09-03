@@ -37,13 +37,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String string = "[";
-        if (isDone) {
-            string += "X";
-        } else {
-            string += " ";
-        }
-        string += "] " + title;
-        return string;
+        String taskStatus = isDone ? "X" : " ";
+        return "[" + taskStatus + "] " + title;
     }
 }
