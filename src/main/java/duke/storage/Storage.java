@@ -70,7 +70,7 @@ public class Storage {
                     lst.add(new Deadline(Arrays.copyOfRange(txt, 2, 4), isDone));
                     break;
                 default:
-                    throw new IOException("Data file incorrectly formatted");
+                    assert false; //Stored data should be in the correct format
                 }
             }
             return lst;

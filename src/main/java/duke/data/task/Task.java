@@ -36,6 +36,7 @@ public abstract class Task {
      * @param isDone the status of the task
      */
     public Task(String description, boolean isDone) {
+        assert(!description.isEmpty());
         this.description = description;
         this.isDone = isDone;
     }

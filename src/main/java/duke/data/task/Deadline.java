@@ -40,6 +40,7 @@ public class Deadline extends Task {
      */
     public Deadline(String[] input, boolean isDone) {
         super(input[0], isDone);
+        assert(!input[1].isEmpty());
         this.by = LocalDateTime.parse(input[1]);
     }
     
