@@ -18,8 +18,8 @@ public abstract class Command {
      * @return {@code Command} object.
      * @throws UnknownCommandException if {@code Command} is not one of the accepted commands
      */
-    public static Command of (CommandTypes type, String... arguments) throws UnknownCommandException {
-        switch(type) {
+    public static Command of (CommandTypes commandType, String... arguments) throws UnknownCommandException {
+        switch(commandType) {
         case QUIT:
             return new ExitCommand();
         case LIST:

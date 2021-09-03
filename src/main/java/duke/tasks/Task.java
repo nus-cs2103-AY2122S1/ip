@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
  */
 public abstract class Task {
     protected static final DateTimeFormatter TIME_DISPLAY_FORMAT = DateTimeFormatter.ofPattern("d MMM y, E, kk:mm");
-    private static int numOfTasks = 0;
     protected String description;
     protected boolean isDone = false;
 

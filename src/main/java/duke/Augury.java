@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import duke.commands.Command;
+import duke.commands.ExitCommand;
 import duke.exceptions.AuguryException;
 import duke.exceptions.FileIoException;
-import duke.exceptions.InvalidActionException;
-import duke.exceptions.InvalidTaskCreationException;
-import duke.exceptions.UnknownCommandException;
 import duke.io.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
@@ -26,7 +24,7 @@ import duke.ui.Ui;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    private final String VER     = "v1.0.1"; // Level-10 GUI, A-Assertions
+    private final String VER     = "v1.0.2"; // Level-10 GUI, A-Assertions, A-CodeQuality
     private final String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -89,8 +87,9 @@ public class Augury {
             try {
                 Command command = parser.parse(input);
                 String result = command.execute(taskList, storage);
-                if (result.equals("ExitCommand")) {
-                    ui.speak("The readiness is all.");
+                ui.speak(result);
+
+                if (command instanceof ExitCommand) {
                     isRunning = false;
                     break;
                 }
@@ -102,15 +101,17 @@ public class Augury {
         }
     }
 
+    /**
+     * Runs the supplied user input on {@code Augury}. Used in GUI mode of Augury.
+     *
+     * @param input User supplied input
+     * @return {@code String} containing result of execution of command.
+     */
     public String getResponse(String input) {
         try {
             Command command = parser.parse(input);
             String result = command.execute(taskList, storage);
-            if (result.equals("ExitCommand")) {
-                return "The readiness is all.";
-            } else {
-                return result;
-            }
+            return result;
         } catch (AuguryException e) {
             return e.getMessage() + "\n\t Please try again.";
         }

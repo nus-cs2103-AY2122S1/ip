@@ -18,6 +18,6 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        return "ExitCommand";
+        return "The readiness is all.";
     }
 }
