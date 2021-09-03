@@ -15,13 +15,13 @@ public class DeadLine extends Task {
      * Constructor for the {@code Deadline} class.
      *
      * @param taskDescription Description of the users task.
-     * @param done Whether the task has been completed or not.
+     * @param isDone Whether the task has been completed or not.
      * @param date Date of the task.
      * @param priority The priority of the task, specified by the user (if any).
      */
 
-    public DeadLine(String taskDescription, boolean done, CustomDate date, Priority priority) {
-        super(taskDescription, done, priority);
+    public DeadLine(String taskDescription, boolean isDone, CustomDate date, Priority priority) {
+        super(taskDescription, isDone, priority);
         this.date = date;
     }
 
@@ -31,7 +31,7 @@ public class DeadLine extends Task {
 
     @Override
     public DeadLine markDone() {
-        return new DeadLine(this.taskDescription, true, this.date, this.priority);
+        return new DeadLine(this.getTaskDescription(), true, this.date, this.getPriority());
     }
 
     /**
@@ -43,11 +43,11 @@ public class DeadLine extends Task {
     @Override
     public String toString() {
         // TODO: make current day display as today
-        if (this.done) {
-            return String.format("[D] [X] %s \t(by %s)", this.taskDescription, this.date.toString());
+        if (this.taskIsDone()) {
+            return String.format("[D] [X] %s \t(by %s)", this.getTaskDescription(), this.date.toString());
         } else {
             return String.format("[D] [%s] %s \t(by %s)", this.getPriority().getLetter(),
-                    this.taskDescription,
+                    this.getTaskDescription(),
                     this.date.toString());
         }
     }
@@ -60,7 +60,7 @@ public class DeadLine extends Task {
      */
 
     protected String getStorageRepresentation() {
-        return String.format("D;%s;%s;%s;%s", this.done, this.taskDescription, this.date.toString(),
+        return String.format("D;%s;%s;%s;%s", this.taskIsDone(), this.getTaskDescription(), this.date.toString(),
                 this.getPriority().getLetter());
     }
 
@@ -72,7 +72,6 @@ public class DeadLine extends Task {
      */
 
     protected static DeadLine getTaskFromStringRepresentation(String s) throws TigerStorageLoadException {
-        /* s should be of the form T|true/false|taskDescription| */
         String[] stringArray = s.split(";", 5);
         DateStringConverter dateStringConverter = new DateStringConverter();
         int length = stringArray.length;

@@ -15,13 +15,13 @@ public class Event extends Task {
      * Constructor for the {@code Event} class.
      *
      * @param taskDescription Description of the users task.
-     * @param done Whether the task has been completed or not.
+     * @param isDone Whether the task has been completed or not.
      * @param date Date of the task.
      * @param priority The priority of the task, specified by the user (if any).
      */
 
-    public Event(String taskDescription, boolean done, CustomDate date, Priority priority) {
-        super(taskDescription, done, priority);
+    public Event(String taskDescription, boolean isDone, CustomDate date, Priority priority) {
+        super(taskDescription, isDone, priority);
         this.date = date;
     }
 
@@ -31,7 +31,7 @@ public class Event extends Task {
 
     @Override
     public Event markDone() {
-        return new Event(this.taskDescription, true, this.date, this.priority);
+        return new Event(this.getTaskDescription(), true, this.date, this.getPriority());
     }
 
     /**
@@ -41,11 +41,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        if (this.done) {
-            return String.format("[E] [X] %s \t(at %s)", this.taskDescription, this.date.toString());
+        if (this.taskIsDone()) {
+            return String.format("[E] [X] %s \t(at %s)", this.getTaskDescription(), this.date.toString());
         } else {
             return String.format("[E] [%s] %s \t(at %s)", this.getPriority().getLetter(),
-                    this.taskDescription,
+                    this.getTaskDescription(),
                     this.date.toString());
         }
     }
@@ -58,7 +58,7 @@ public class Event extends Task {
      */
 
     protected String getStorageRepresentation() {
-        return String.format("E;%s;%s;%s;%s", this.done, this.taskDescription, this.date.toString(),
+        return String.format("E;%s;%s;%s;%s", this.taskIsDone(), this.getTaskDescription(), this.date.toString(),
                 this.getPriority().getLetter());
     }
 

@@ -1,4 +1,7 @@
 import tiger.app.Ui;
+import tiger.exceptions.TigerException;
+
+import java.util.Scanner;
 
 
 public class Tiger {
@@ -19,7 +22,6 @@ public class Tiger {
     }
 
     public String getResponse(String input) {
-        System.out.println(input);
         ui.iterateOnce(input);
         return ui.getResponse();
     }
@@ -27,5 +29,19 @@ public class Tiger {
     public boolean isExited() {
         return ui.isExited();
     }
+
+//    public static void main(String[] args) {
+//        Tiger tiger = new Tiger();
+//        Scanner scanner = new Scanner(System.in);
+//        String response;
+//        response = tiger.start();
+//        System.out.println(response);
+//        while (!tiger.isExited()) {
+//            String userInput = scanner.nextLine();
+//            response = tiger.getResponse(userInput);
+//            System.out.println(response);
+//
+//        }
+//    }
 
 }

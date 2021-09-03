@@ -10,27 +10,31 @@ import tiger.exceptions.storage.TigerStorageLoadException;
 public abstract class Task {
 
     /** The description of the task */
-    protected String taskDescription;
+    private String taskDescription;
     /** Whether the task is done */
-    protected boolean done;
+    private boolean isDone;
     /** Priority of the task */
-    protected Priority priority;
+    private Priority priority;
 
     /**
      * Constructor for the {@code Task} class.
      *
      * @param taskDescription Description of the users task.
-     * @param done Whether the task has been completed or not.
+     * @param isDone Whether the task has been completed or not.
      * @param priority The priority of the task, specified by the user (if any).
      */
 
-    protected Task(String taskDescription, boolean done, Priority priority) {
+    protected Task(String taskDescription, boolean isDone, Priority priority) {
         this.taskDescription = taskDescription;
-        this.done = done;
+        this.isDone = isDone;
         this.priority = priority;
     }
 
     public abstract Task markDone();
+
+    public boolean taskIsDone() {
+        return this.isDone;
+    }
 
     public Priority getPriority() {
         return this.priority;
