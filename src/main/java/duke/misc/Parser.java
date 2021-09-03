@@ -45,6 +45,7 @@ public class Parser {
             if (DateTime.isInvalidDate(args[1])) {
                 throw new InvalidDateException();
             }
+            assert args.length == 2;
             return new Event(args[0], args[1]);
         case "deadline":
             if (!input.matches("deadline [\\s\\S]+/[\\s\\S]+")) {
@@ -53,6 +54,7 @@ public class Parser {
             if (DateTime.isInvalidDate(args[1])) {
                 throw new InvalidDateException();
             }
+            assert args.length == 2;
             return new Deadline(args[0], args[1]);
         default:
             throw new InvalidCommandException();
@@ -89,6 +91,7 @@ public class Parser {
             }
             return Ui.LIST_MSG + tl.displayList();
         case "done":
+            assert !suffix.equals("");
             try {
                 int taskIdx = Integer.parseInt(suffix);
                 return Ui.DONE_MSG + tl.completeTask(taskIdx);
@@ -96,6 +99,7 @@ public class Parser {
                 throw new InvalidIndexException();
             }
         case "delete":
+            assert !suffix.equals("");
             try {
                 int taskIdx = Integer.parseInt(suffix);
                 return Ui.DELETE_MSG + tl.deleteTask(taskIdx);
@@ -103,6 +107,7 @@ public class Parser {
                 throw new InvalidIndexException();
             }
         case "find":
+            assert !suffix.equals("");
             return Ui.FIND_MSG + tl.findTasks(suffix);
         default:
             Task task = makeTask(input);
