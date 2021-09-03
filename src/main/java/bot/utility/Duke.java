@@ -2,7 +2,10 @@ package bot.utility;
 
 import java.util.Objects;
 
+import bot.commands.Command;
+import bot.error.DukeException;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -28,36 +31,14 @@ public class Duke extends Application {
             Objects.requireNonNull(this.getClass().getResourceAsStream("/images/brain.png"))
     );
     private Parser parser;
-    private Logger logger;
-    private TaskList tasks;
     private Ui ui;
 
-    /**
-     * Runs the Duke chatBot
-     */
-    public void run() {
-        initialize();
-        analyzeLog();
-    }
-
     private void initialize() {
-        logger = new Logger("tasks.txt");
+        TaskList.initialize();
+        Logger.initialize();
         parser = new Parser();
         ui = new Ui();
         ui.greetConsole();
-        tasks = new TaskList(logger.loadList());
-    }
-
-    /**
-     * Primary response function of the chatBot
-     */
-    private void analyzeLog() {
-        do {
-            String input = ui.getUserInput();
-            parser.takeInput(input);
-            parser.interactWith(ui, logger, tasks);
-        } while (parser.flag == 1);
-        ui.close();
     }
 
     /**
@@ -156,7 +137,16 @@ public class Duke extends Application {
      * Generate a response to user input.
      */
     protected String getResponse(String input) {
-        parser.takeInput(input);
-        return parser.interactWith(ui, logger, tasks);
+        Command command = parser.parse(input);
+        if (command.canEnd()) {
+            Platform.exit();
+        }
+        String response;
+        try {
+            response = command.execute();
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        return response;
     }
 }
