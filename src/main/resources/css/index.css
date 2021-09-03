@@ -1,0 +1,39 @@
+.chat-window {
+    -fx-background-color: #bfa5ff;
+    -fx-padding: 2px;
+}
+
+.send-btn {
+    -fx-background-color: #bfa5ff;
+}
+
+.user-dialog-box {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #564875;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    -fx-start-margin: 10px;
+    -fx-effect: innershadow(three-pass-box, rgba(148, 128, 255, 0.8), 10, 0, 0, 0);
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.duke-dialog-box {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #8795ff;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    -fx-start-margin: 10px;
+    -fx-effect: innershadow(three-pass-box, rgba(148, 128, 255, 0.8), 10, 0, 0, 0);
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.send-btn {
+    -fx-background-color: #917bbd;
+    -fx-border-radius: 90px;
+}
+
+.user-input {
+    -fx-background-color: #c7b3f5;
+}

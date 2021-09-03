@@ -1,12 +1,12 @@
 package duke.command;
 
-import static duke.util.Ui.INVALID_NUMBER;
-import static duke.util.Ui.MISSING_DELETE_NUMBER_MESSAGE;
-
 import duke.task.TaskList;
 import duke.util.DukeException;
 import duke.util.Storage;
 import duke.util.Ui;
+
+import static duke.util.Ui.INVALID_NUMBER;
+import static duke.util.Ui.MISSING_DELETE_NUMBER_MESSAGE;
 
 
 public class DeleteCommand extends Command {
@@ -18,13 +18,13 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (remainingText.isEmpty()) {
             throw new DukeException(MISSING_DELETE_NUMBER_MESSAGE);
         }
         try {
             int taskIndex = Integer.parseInt(remainingText);
-            Ui.displayMessage(taskList.deleteTask(taskIndex));
+            return taskList.deleteTask(taskIndex);
         } catch (NumberFormatException err) {
             throw new DukeException(INVALID_NUMBER);
         }

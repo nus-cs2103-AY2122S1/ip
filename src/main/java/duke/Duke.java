@@ -1,26 +1,33 @@
 package duke;
 
-import static duke.util.Ui.EXIT_MESSAGE;
-import static duke.util.Ui.REWELCOME_MESSAGE;
-import static duke.util.Ui.WELCOME_MESSAGE;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
 import duke.command.Command;
 import duke.task.TaskList;
 import duke.util.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.Ui;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+
+import java.nio.file.Path;
 
 /**
  * The Duke program. The input loop is abstracted here.
  */
 public class Duke {
     /** Storage file path */
-    private static final String OUTER_DIR = "data";
-    private static final String FILE = "taskList.txt";
+    public static final String OUTER_DIR = "data";
+    public static final String FILE = "taskList.txt";
+
+    /** Gui Variables */
+    private ScrollPane scrollPane;
+    private VBox dialogContainer;
+    private TextField userInput;
+    private Button sendButton;
+    private Scene scene;
 
     /** Instance variables */
     private final Storage myStorage;
@@ -44,39 +51,19 @@ public class Duke {
     }
 
     /**
-     * The input loop. Handles user input, creates tasks and outputs messages accordingly.
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
      */
-    private void inputLoop() {
-        boolean canContinue = true;
-        while (canContinue) {
-            String input = ui.readCommand();
-            try {
-                Command command = Parser.parse(input);
-                command.execute(taskList, ui, myStorage);
-                myStorage.updateTaskListToFile(taskList);
-                canContinue = !command.isExit();
-            } catch (DukeException err) {
-                Ui.displayMessage(err.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            String reply = command.execute(taskList, ui, myStorage);
+            myStorage.updateTaskListToFile(taskList);
+            return reply;
+        } catch (DukeException err) {
+            return err.getMessage();
         }
+//        canContinue = !command.isExit();
     }
 
-
-    /**
-     * Runs Duke.
-     */
-    public void run() {
-        if (!myStorage.didTaskFileExist()) {
-            Ui.displayMessage(WELCOME_MESSAGE);
-        } else {
-            Ui.displayMessage(REWELCOME_MESSAGE);
-        }
-        inputLoop();
-        ui.closeScanner();
-        Ui.displayMessage(EXIT_MESSAGE);
-    }
-
-    public static void main(String[] args) {
-        new Duke(Paths.get(OUTER_DIR, FILE)).run();
-    }
 }
