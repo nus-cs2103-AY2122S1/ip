@@ -10,7 +10,7 @@ import duke.ui.Ui;
  * @author Zhi Bin
  * @version Duke Level 10
  */
-public class List extends DukeCommand {
+public class ListCommand extends DukeCommand {
 
     /**
      * Constructor for a List Command.
@@ -19,7 +19,7 @@ public class List extends DukeCommand {
      * @param storage The storage handler that handles saving or loading data to local directory.
      * @param list    The TaskList handler that handles operation related to task.
      */
-    public List(Ui ui, Storage storage, TaskList list) {
+    public ListCommand(Ui ui, Storage storage, TaskList list) {
         super(ui, storage, list);
     }
 

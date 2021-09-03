@@ -10,7 +10,7 @@ import duke.ui.Ui;
  * @author Zhi Bin
  * @version Duke Level 10
  */
-public class Find extends DukeCommand {
+public class FindCommand extends DukeCommand {
     private final String keyword;
 
     /**
@@ -21,7 +21,7 @@ public class Find extends DukeCommand {
      * @param list    The TaskList handler that handles operation related to task.
      * @param keyword The keyword to find for related task in the task list.
      */
-    public Find(Ui ui, Storage storage, TaskList list, String keyword) {
+    public FindCommand(Ui ui, Storage storage, TaskList list, String keyword) {
         super(ui, storage, list);
         this.keyword = keyword;
     }

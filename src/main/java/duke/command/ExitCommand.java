@@ -1,42 +1,48 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Encapsulates an Add command that deals with adding task to the task list.
+ * Encapsulates an Exit commands that deals with exiting the program.
  *
  * @author Zhi Bin
  * @version Duke Level 10
  */
-public class Add extends DukeCommand {
-    private final Task task;
+public class ExitCommand extends DukeCommand {
 
     /**
-     * Constructor for an Add command.
+     * Constructor for an Exit Command.
      *
      * @param ui      The Ui handler that handles the printing of message with respect to the command.
      * @param storage The storage handler that handles saving or loading data to local directory.
      * @param list    The TaskList handler that handles operation related to task.
-     * @param task    The task to be added to the task list.
      */
-    public Add(Ui ui, Storage storage, TaskList list, Task task) {
+    public ExitCommand(Ui ui, Storage storage, TaskList list) {
         super(ui, storage, list);
-        this.task = task;
     }
 
     /**
-     * Executes the Add command. Adds task to the task list and
-     * prints a message after adding, and update the local data file.
+     * Executes the exit command. Prints farewellMessage
+     * and save the task list onto the local directory.
      * @return
      */
     @Override
     public String execute() {
-        list.add(task);
-//        ui.addTaskMessage(list.size(), task);
+//        ui.farewellMessage();
         storage.save(list.getList());
-        return ui.addTaskGUI(list.size(), task);
+        return ui.farewellGUI();
+    }
+
+    /**
+     * Checks if the command is an Exit command.
+     * Returns true.
+     *
+     * @return true
+     */
+    @Override
+    public boolean isExit() {
+        return true;
     }
 }

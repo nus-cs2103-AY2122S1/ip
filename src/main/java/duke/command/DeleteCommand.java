@@ -12,7 +12,7 @@ import duke.ui.Ui;
  * @author Zhi Bin
  * @version Duke Level 10
  */
-public class Delete extends DukeCommand {
+public class DeleteCommand extends DukeCommand {
     private final int taskNumber;
 
     /**
@@ -23,7 +23,7 @@ public class Delete extends DukeCommand {
      * @param list       The TaskList handler that handles operation related to task.
      * @param taskNumber The task number that corresponds to the task that user want to delete.
      */
-    public Delete(Ui ui, Storage storage, TaskList list, int taskNumber) {
+    public DeleteCommand(Ui ui, Storage storage, TaskList list, int taskNumber) {
         super(ui, storage, list);
         this.taskNumber = taskNumber;
     }

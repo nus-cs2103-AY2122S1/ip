@@ -11,7 +11,7 @@ import duke.ui.Ui;
  * @author Zhi Bin
  * @version Duke Level 10
  */
-public class Done extends DukeCommand {
+public class DoneCommand extends DukeCommand {
     private final int taskNumber;
 
     /**
@@ -22,7 +22,7 @@ public class Done extends DukeCommand {
      * @param list       The TaskList handler that handles operation related to task.
      * @param taskNumber The task number that corresponds to the task that user want to mark as done.
      */
-    public Done(Ui ui, Storage storage, TaskList list, int taskNumber) {
+    public DoneCommand(Ui ui, Storage storage, TaskList list, int taskNumber) {
         super(ui, storage, list);
         this.taskNumber = taskNumber;
     }

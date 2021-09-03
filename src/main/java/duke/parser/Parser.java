@@ -4,13 +4,13 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.command.Add;
-import duke.command.Delete;
-import duke.command.Done;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
 import duke.command.DukeCommand;
-import duke.command.Exit;
-import duke.command.Find;
-import duke.command.List;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.NoCommandDescriptionException;
@@ -75,28 +75,28 @@ public class Parser {
 
         switch (commandType) {
         case "list":
-            return new List(ui, storage, list);
+            return new ListCommand(ui, storage, list);
 
         case "bye":
-            return new Exit(ui, storage, list);
+            return new ExitCommand(ui, storage, list);
 
         case "done":
-            return new Done(ui, storage, list, Integer.parseInt(userInput.split(" ")[1]));
+            return new DoneCommand(ui, storage, list, Integer.parseInt(userInput.split(" ")[1]));
 
         case "todo":
-            return new Add(ui, storage, list, processTaskDescriptions(TaskTypes.TODO, userInput));
+            return new AddCommand(ui, storage, list, processTaskDescriptions(TaskTypes.TODO, userInput));
 
         case "deadline":
-            return new Add(ui, storage, list, processTaskDescriptions(TaskTypes.DEADLINE, userInput));
+            return new AddCommand(ui, storage, list, processTaskDescriptions(TaskTypes.DEADLINE, userInput));
 
         case "event":
-            return new Add(ui, storage, list, processTaskDescriptions(TaskTypes.EVENT, userInput));
+            return new AddCommand(ui, storage, list, processTaskDescriptions(TaskTypes.EVENT, userInput));
 
         case "delete":
-            return new Delete(ui, storage, list, Integer.parseInt(userInput.split(" ")[1]));
+            return new DeleteCommand(ui, storage, list, Integer.parseInt(userInput.split(" ")[1]));
 
         case "find":
-            return new Find(ui, storage, list, userInput.substring(userInput.indexOf(" ") + 1));
+            return new FindCommand(ui, storage, list, userInput.substring(userInput.indexOf(" ") + 1));
 
         default:
             throw new UnknownCommandException();
