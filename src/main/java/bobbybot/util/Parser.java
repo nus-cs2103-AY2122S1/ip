@@ -3,6 +3,7 @@ package bobbybot.util;
 import bobbybot.commands.AddCommand;
 import bobbybot.commands.Command;
 import bobbybot.commands.ExitCommand;
+import bobbybot.commands.ListCommand;
 import bobbybot.enums.BotCommand;
 import bobbybot.exceptions.InvalidArgumentException;
 import bobbybot.exceptions.TooManyArgumentsException;
@@ -64,7 +65,7 @@ public class Parser {
         case DEADLINE:
             return prepareAdd(arguments);
         case LIST:
-                return ListCommand();
+            return new ListCommand();
         case BYE:
             return new ExitCommand();
         default:
@@ -77,7 +78,7 @@ public class Parser {
         final Matcher matcher = DATA_ARGS_FORMAT.matcher(args.trim());
         // Check arg string format
         if (!matcher.matches()) { // Add todo
-            return new AddCommand(args);
+            return new AddCommand(args.trim());
         }
         // Add event or deadline
         if (args.contains("/by")) {
@@ -89,6 +90,7 @@ public class Parser {
             return null;
         }
     }
+
     /**
      * Performs command based on String user input
      * @param userInput string command for chatbot
