@@ -6,17 +6,17 @@ import java.time.format.DateTimeFormatter;
 /**
  * Deadline class.
  */
-public class Deadlines extends Task {
+public class Deadline extends Task {
 
-    protected String by;
-    protected LocalDate date;
+    private String by;
+    private LocalDate date;
 
     /**
      * Constructor for Deadlines.
      * @param description
      * @param finishBy
      */
-    public Deadlines(String description, String finishBy) {
+    public Deadline(String description, String finishBy) {
         super(description, "D");
         this.by = finishBy;
     }
@@ -30,15 +30,13 @@ public class Deadlines extends Task {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
-
     /**
      * Returns in a format to save to file.
      */
     @Override
-    public String hardDiskSave() {
+    public String saveToHardDisk() {
         return "D/" + this.getBooleanStatus() + "/" + this.getDescription() + "/" + this.by;
     }
-
 
     /**
      * Returns string format.

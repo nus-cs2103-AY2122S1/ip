@@ -16,6 +16,7 @@ public class Duke {
 
     /**
      * Constructor for the class.
+     *
      * @param filePath filePath for the data file.
      */
     public Duke(String filePath) {
@@ -50,7 +51,8 @@ public class Duke {
 
     /**
      * Generates response for user's input.
-     * @param input
+     *
+     * @param input user's input typed in console.
      * @return
      */
     public String getResponse(String input) {
@@ -60,6 +62,7 @@ public class Duke {
 
     /**
      * Main method.
+     *
      * @param args
      */
     public static void main(String[] args) {

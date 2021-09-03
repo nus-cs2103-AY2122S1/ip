@@ -6,10 +6,10 @@ import duke.exceptions.DeadLineException;
 import duke.exceptions.DukeException;
 import duke.exceptions.EventException;
 import duke.exceptions.ToDoException;
-import duke.tasktypes.Deadlines;
-import duke.tasktypes.Events;
+import duke.tasktypes.Deadline;
+import duke.tasktypes.Event;
 import duke.tasktypes.TaskList;
-import duke.tasktypes.ToDos;
+import duke.tasktypes.ToDo;
 
 
 /**
@@ -36,7 +36,7 @@ public class AddCommand extends Command {
                 if (updatedTask.isBlank()) {
                     throw new ToDoException("please add a description to your todo task");
                 }
-                ToDos toDoTask = new ToDos(updatedTask);
+                ToDo toDoTask = new ToDo(updatedTask);
                 taskList.add(toDoTask);
                 storage.updateHardDisk(taskList);
                 return ui.displayAdd(toDoTask);
@@ -51,7 +51,7 @@ public class AddCommand extends Command {
                 String deadlineToAdd = updatedTask.split("/by ")[0].trim();
                 String finishBy = updatedTask.split("/by ")[1].trim();
 
-                Deadlines deadlineTask = new Deadlines(deadlineToAdd, finishBy);
+                Deadline deadlineTask = new Deadline(deadlineToAdd, finishBy);
                 taskList.add(deadlineTask);
                 storage.updateHardDisk(taskList);
                 return ui.displayAdd(deadlineTask);
@@ -64,7 +64,7 @@ public class AddCommand extends Command {
                 String eventToAdd = updatedTask.split("/at ")[0].trim();
                 String dateOfEvent = updatedTask.split("/at ")[1].trim();
 
-                Events eventTask = new Events(eventToAdd, dateOfEvent);
+                Event eventTask = new Event(eventToAdd, dateOfEvent);
                 taskList.add(eventTask);
                 storage.updateHardDisk(taskList);
                 return ui.displayAdd(eventTask);

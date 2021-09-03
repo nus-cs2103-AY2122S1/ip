@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Event class.
  */
-public class Events extends Task {
+public class Event extends Task {
 
     protected String date;
     protected LocalDate at;
@@ -16,7 +16,7 @@ public class Events extends Task {
      * @param description
      * @param eventDate
      */
-    public Events(String description, String eventDate) {
+    public Event(String description, String eventDate) {
         super(description, "E");
         this.date = eventDate;
     }
@@ -34,7 +34,7 @@ public class Events extends Task {
      * Returns in a format to save to file.
      */
     @Override
-    public String hardDiskSave() {
+    public String saveToHardDisk() {
         return "E/" + this.getBooleanStatus() + "/" + this.getDescription() + "/" + this.date;
     }
 

@@ -1,10 +1,10 @@
 package duke;
 
-import duke.tasktypes.Deadlines;
-import duke.tasktypes.Events;
+import duke.tasktypes.Deadline;
+import duke.tasktypes.Event;
 import duke.tasktypes.Task;
 import duke.tasktypes.TaskList;
-import duke.tasktypes.ToDos;
+import duke.tasktypes.ToDo;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,6 +21,11 @@ public class Storage {
 
     private String filePath;
 
+    /**
+     * Constructor for Storage class.
+     *
+     * @param filePath filepath of the txt file storing data.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -43,23 +48,23 @@ public class Storage {
                     for (int i = 0; i < data.size(); i++) {
                         String[] lineTask = data.get(i).split("/");
                         String taskType = lineTask[0];
-                        String isDone = lineTask[1];
+                        boolean isDone = lineTask[1].equals("true");
                         String taskDesc = lineTask[2];
 
-                        boolean doneOrNot = (isDone.equals("true"));
+
                         if (taskType.equals("T")) {
-                            ToDos toDo = new ToDos(taskDesc);
-                            toDo.changeStatus(doneOrNot);
+                            ToDo toDo = new ToDo(taskDesc);
+                            toDo.changeStatus(isDone);
                             dataForDory.add(toDo);
                         } else if (taskType.equals("D")) {
-                            String finishBy = lineTask[3];
-                            Deadlines deadline = new Deadlines(taskDesc, finishBy);
-                            deadline.changeStatus(doneOrNot);
+                            String date = lineTask[3];
+                            Deadline deadline = new Deadline(taskDesc, date);
+                            deadline.changeStatus(isDone);
                             dataForDory.add(deadline);
                         } else if (taskType.equals("E")) {
                             String dateOfEvent = lineTask[3];
-                            Events event = new Events(taskDesc, dateOfEvent);
-                            event.changeStatus(doneOrNot);
+                            Event event = new Event(taskDesc, dateOfEvent);
+                            event.changeStatus(isDone);
                             dataForDory.add(event);
                         }
                     }
@@ -98,7 +103,7 @@ public class Storage {
             BufferedWriter bw = Files.newBufferedWriter(dataFilePath);
             ArrayList<Task> taskArrayList = taskList.getTaskList();
             for (int i = 0; i < taskArrayList.size(); i++) {
-                String fullLine = taskList.get(i).hardDiskSave();
+                String fullLine = taskList.get(i).saveToHardDisk();
                 bw.write(fullLine);
                 bw.newLine();
             }

@@ -53,7 +53,7 @@ public class Ui {
 
     /**
      * Displays deleted task.
-     * @param removed Deleted Task.
+     * @param removed deleted task.
      * @param taskList TaskList containing remaining tasks.
      */
     public String displayDelete(Task removed, TaskList taskList) {
@@ -67,7 +67,7 @@ public class Ui {
 
     /**
      * Displays finished task.
-     * @param done Done Task.
+     * @param done done task.
      * @param taskList TaskList containing remaining tasks.
      */
     public String displayDone(Task done, TaskList taskList) {
@@ -111,7 +111,7 @@ public class Ui {
 
     /**
      * Displays taskList.
-     * @param taskList TaskList with all the tasks.
+     * @param taskList task list with all the tasks.
      */
     public String displayList(TaskList taskList) {
         if (taskList.getSize() == 0) {

@@ -66,7 +66,7 @@ public class Task {
     /**
      * Returns in a format to save to file.
      */
-    public String hardDiskSave() {
+    public String saveToHardDisk() {
         return "";
     }
 
