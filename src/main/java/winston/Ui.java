@@ -29,7 +29,7 @@ public class Ui {
     
     public static String welcomeMessage() {
         return "Hi there! Winston reporting.\nWhat can I do for you?\n" 
-                + "Available Commands: done, list, todo, deadline, event, bye, delete, findString";
+                + "Available Commands: done, list, todo, deadline, event, bye, delete, findstring, update";
     }
     
     public static String terminationMessage() {
