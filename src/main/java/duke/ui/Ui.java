@@ -167,7 +167,7 @@ public class Ui {
         return s.toString();
     }
 
-    public String showMessageGUI(String s){
+    public static String showMessageGUI(String s){
         return s;
     }
 }

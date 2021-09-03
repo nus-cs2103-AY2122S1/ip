@@ -31,39 +31,9 @@ public class Duke{
         ui = new Ui();
         storage = new Storage();
         taskList = new TaskList();
+        taskList.loadFromList(storage.load());
         parser = new Parser(taskList, storage, ui);
         isActive = true;
-    }
-
-    private void run() {
-        isActive = true;
-        taskList.loadFromList(storage.load());
-
-        ui.greet();
-
-        Scanner sc = new Scanner(System.in);
-
-        while (isActive) {
-            String input = sc.nextLine();
-            try {
-                DukeCommand command = parser.processInput(input);
-                command.execute();
-                isActive = !command.isExit();
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-        sc.close();
-    }
-
-    /**
-     * Starts the program.
-     *
-     * @param args Arguments needed to start to program
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 
     /**
@@ -81,7 +51,7 @@ public class Duke{
                 }
                 return c.execute();
             } catch (DukeException e) {
-                return ui.showMessageGUI(e.getMessage());
+                return Ui.showMessageGUI(e.getMessage());
             }
         }
         return "";

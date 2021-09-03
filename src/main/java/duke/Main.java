@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  * @version  Duke Level 10
  */
 public class Main extends Application{
-    private Duke duke = new Duke();
+    private Duke duke;
 
     /**
      * The main entry point for all JavaFX applications.
@@ -34,6 +34,7 @@ public class Main extends Application{
      */
     @Override
     public void start(Stage primaryStage) throws Exception {
+        duke = new Duke();
         try{
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml" ));
             AnchorPane ap = fxmlLoader.load();
