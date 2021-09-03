@@ -16,32 +16,28 @@ import duke.task.Todo;
  */
 public class Duke {
 
-    private static final String DATA_FOLDER = "./data";
-    private static final String DATA_FILE = "duke.txt";
-
     // All UI functionality
     private final Ui ui;
-
     // All saved data related functionality
     private final Storage storage;
-
     // All user input related functionality
     private final Parser parser;
-
     // the list of items
     private Items items;
+    // checking if user still wants to input
+    private boolean isRunning;
 
     /**
      * Duke Constructor
      */
-    public Duke() throws DukeException {
+    public Duke(String directory, String file) {
         ui = new Ui();
-        storage = new Storage(DATA_FOLDER, DATA_FILE);
+        storage = new Storage(directory, file);
         parser = new Parser();
+        isRunning = true;
         try {
             items = new Items(storage.loadData());
         } catch (DukeException e) {
-            Ui.printMessage("You have no previously saved items. Creating new list");
             items = new Items();
         }
     }
@@ -54,7 +50,10 @@ public class Duke {
      */
     public void run() throws DukeException, IOException {
         ui.greet();
-        interact();
+        while (isRunning) {
+            getResponse(ui.getInput());
+        }
+        ui.printGoodBye();
     }
 
     /**
@@ -63,77 +62,70 @@ public class Duke {
      * @throws DukeException if input is wrong.
      * @throws IOException thrown if file handling fails.
      */
-    public void interact() throws DukeException, IOException {
+    public String getResponse(String input) {
         String[] inputWords;
-        List<Task> fileContent = storage.loadData();
-
-        if (fileContent == null) {
-            System.out.println("File read error");
-            return;
-        }
 
         Scanner sc = new Scanner(System.in);
-        boolean flag = true;
-        while (flag) {
-            inputWords = Ui.getInput(sc).split("\\s+");
-            String command = inputWords[0];
-            String str;
-            String output = "";
-            try {
-                String[] task = parser.compileInput(inputWords);
-                switch (command) {
-                case "list":
-                    output = items.printList();
-                    break;
-                case "done":
-                    int idx = Integer.parseInt(inputWords[1]);
-                    output = items.markDone(idx);
-                    str = storage.getFileLine(idx);
-                    str = str.substring(0, 4) + "1" + str.substring(5);
-                    storage.updateListTask(idx, str);
-                    break;
-                case "bye":
-                    flag = false;
-                    break;
-                case "todo":
-                    output = items.addItem(new Todo(task[0]));
-                    str = "T | 0 | " + task[0];
-                    storage.addToFile(str);
-                    break;
-                case "event":
-                    output = items.addItem(new Event(task[0], task[1]));
-                    str = "E | 0 | " + task[0] + " | " + task[1];
-                    storage.addToFile(str);
-                    break;
-                case "deadline":
-                    output = items.addItem(new Deadline(task[0], task[1]));
-                    str = "D | 0 | " + task[0] + " | " + task[1];
-                    storage.addToFile(str);
-                    break;
-                case "delete":
-                    int id = Integer.parseInt(inputWords[1]);
-                    output = items.deleteItem(id);
-                    storage.deleteFromFile(id);
-                    break;
-                case "find":
-                    output = items.findTask(task[0]);
-                    break;
-                default:
-                    output = "I don't recognise this command\n"
-                            + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find' or 'bye'";
-                    break;
-                }
-            } catch (DukeException dukeException) {
-                output = dukeException.getMessage();
-            } catch (Exception e) {
-                Ui.printMessage(e.getMessage());
-                return;
+        String output = "";
+        inputWords = input.split("\\s+");
+        String command = inputWords[0];
+        String str;
+        try {
+            String[] task = parser.compileInput(inputWords);
+            switch (command) {
+            case "list":
+                output = items.printList();
+                break;
+            case "done":
+                int idx = Integer.parseInt(inputWords[1]);
+                output = items.markDone(idx);
+                str = storage.getFileLine(idx);
+                str = str.substring(0, 4) + "1" + str.substring(5);
+                storage.updateListTask(idx, str);
+                break;
+            case "bye":
+                isRunning = false;
+                break;
+            case "todo":
+                output = items.addItem(new Todo(task[0]));
+                str = "T | 0 | " + task[0];
+                storage.addToFile(str);
+                break;
+            case "event":
+                output = items.addItem(new Event(task[0], task[1]));
+                str = "E | 0 | " + task[0] + " | " + task[1];
+                storage.addToFile(str);
+                break;
+            case "deadline":
+                output = items.addItem(new Deadline(task[0], task[1]));
+                str = "D | 0 | " + task[0] + " | " + task[1];
+                storage.addToFile(str);
+                break;
+            case "delete":
+                int id = Integer.parseInt(inputWords[1]);
+                output = items.deleteItem(id);
+                storage.deleteFromFile(id);
+                break;
+            case "find":
+                output = items.findTask(task[0]);
+                break;
+            default:
+                output = "I don't recognise this command\n"
+                        + "Try 'list', 'todo', 'event', 'deadline', 'done', 'find' or 'bye'";
+                break;
             }
-            if (flag) {
-                Ui.printMessage(output);
-            }
+            return output;
+        } catch (Exception dukeException) {
+            return dukeException.getMessage();
         }
-        Ui.printMessage("Going so soon? Hope to see you again soon!");
+    }
+
+    /**
+     * Returns true when duke is awake and false otherwise.
+     * @return True when duke is awake and false otherwise.
+     */
+    public boolean isRunning() {
+        return isRunning;
     }
 
     /**
@@ -142,6 +134,6 @@ public class Duke {
      * @param args The command line arguments
      */
     public static void main(String[] args) throws IOException, DukeException {
-        new Duke().run();
+        new Duke("./data", "duke.txt").run();
     }
 }
