@@ -41,6 +41,8 @@ public static void main(String[] args) {
 
 One thing you might notice about my code is that I chose to create my errors as DukeErrors as seen below:
 
-    public enum DukeError
-    
-This is mainly because I did not want to interupt the flow of the conversation by throwing an exception. However, I will be considering extending the Exceptions class in the future if necessary.
+```java
+    public class DukeException extends Exception
+```
+
+I used to use DukeErrors as an enumeration but I decided that making it extend the Exception class would make the flow of logic cleaner.
