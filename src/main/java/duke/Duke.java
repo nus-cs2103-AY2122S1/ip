@@ -17,7 +17,6 @@ import javafx.application.Application;
  */
 public class Duke {
     private Parser parser;
-    private UI ui;
     private TaskArrayList taskList;
     private Path storagePath;
 
@@ -31,8 +30,7 @@ public class Duke {
         } catch (DukeException | IOException e) {
             this.taskList = new TaskArrayList();
         }
-        this.ui = new UI();
-        this.parser = new Parser(ui, taskList, storagePath);
+        this.parser = new Parser(taskList, storagePath);
     }
 
     /**

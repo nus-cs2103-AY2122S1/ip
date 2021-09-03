@@ -15,19 +15,16 @@ import duke.tasks.Todo;
  * Parser to parse user commands.
  */
 public class Parser {
-    private UI ui;
     private TaskArrayList taskList;
     private Path storagePath;
 
     /**
      * Constructor for Parser.
      *
-     * @param ui UI object to print to.
      * @param taskList TaskArrayList object to work with.
      * @param storagePath Path object representing path to savefile.
      */
-    Parser(UI ui, TaskArrayList taskList, Path storagePath) {
-        this.ui = ui;
+    Parser(TaskArrayList taskList, Path storagePath) {
         this.taskList = taskList;
         this.storagePath = storagePath;
     }
