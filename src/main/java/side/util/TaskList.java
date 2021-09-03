@@ -154,7 +154,7 @@ public class TaskList {
     }
 
     /**
-     * Helper method to match existing tasks with given description.
+     * Helper method to return existing tasks that contain {@code input} as substring.
      *
      * @param input String representing user input.
      * @return ArrayList of tasks matching given description.
@@ -163,6 +163,7 @@ public class TaskList {
         ArrayList<Task> matchedTaskList = new ArrayList<>();
 
         for (Task t : this.tasks) {
+            // Checks if input is a substring of task description
             if (t.getDescription().contains(input)) {
                 matchedTaskList.add(t);
             }
