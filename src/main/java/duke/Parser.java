@@ -56,6 +56,8 @@ public class Parser {
                 storage.save();
             } else if (segment[0].equals("find")) {
                 response = list.find(input.split("find", 2)[1]);
+            } else if (input.equals("bye")) {
+                response = Ui.DUKE_EXIT;
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry,"
                         + " but I don't know what that means :-(");
