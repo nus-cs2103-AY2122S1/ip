@@ -1,5 +1,5 @@
-import java.text.DateFormat;
-import java.time.LocalDate;
+package duke;
+
 import java.time.format.DateTimeFormatter;
 
 public class Event extends TimedTask {

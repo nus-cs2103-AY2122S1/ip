@@ -1,7 +1,9 @@
+package duke;
+
 public class CommandShowList extends Command {
 
     public CommandShowList () {
-
+        super();
     }
 
     @Override

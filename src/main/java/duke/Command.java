@@ -1,3 +1,5 @@
+package duke;
+
 public abstract class Command {
     private boolean hasMoreCommands;
     public abstract void execute(TaskList taskList, UserInterface ui);

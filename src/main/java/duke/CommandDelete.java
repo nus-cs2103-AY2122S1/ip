@@ -1,3 +1,5 @@
+package duke;
+
 public class CommandDelete extends Command{
     private String taskName;
 

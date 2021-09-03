@@ -1,16 +1,9 @@
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.List;
-import java.util.ArrayList;
+package duke;
 
-import java.io.File;
+import java.time.format.DateTimeFormatter;
+
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.Files;
 
 public class Duke {
 
@@ -38,6 +31,7 @@ public class Duke {
         Command command;
         do {
             command = Parser.parse(ui.getResponse());
+            command.execute(taskList, ui);
         } while(command.shouldExecuteNext());
         storage.save(ui, taskList);
     }

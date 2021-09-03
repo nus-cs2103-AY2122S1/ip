@@ -1,3 +1,5 @@
+package duke;
+
 public class CommandExit extends Command {
 
     public CommandExit() {

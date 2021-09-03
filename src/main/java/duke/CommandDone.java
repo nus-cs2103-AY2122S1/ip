@@ -1,3 +1,5 @@
+package duke;
+
 public class CommandDone extends Command {
     private String taskName;
     public CommandDone(String taskName) {
