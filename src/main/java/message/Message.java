@@ -18,11 +18,17 @@ public class Message {
         System.out.println(this.toString());
     }
 
+    /**
+     * Gets string representation of `Message`.
+     * Each chunk of text in a `Message` is separated by a new line.
+     *
+     * @return string representation of `Message`.
+     */
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < texts.length; i++) {
-            stringBuilder.append(texts[i]);
+        for (String text : this.texts) {
+            stringBuilder.append(text);
             stringBuilder.append("\n");
         }
 
