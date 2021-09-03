@@ -36,6 +36,7 @@ public class TaskList {
      * @return Task at specified index.
      */
     public Task getTask(int index) {
+        assert index >= 0 && index < taskList.size();
         return taskList.get(index);
     }
 
@@ -55,6 +56,7 @@ public class TaskList {
      * @return Deleted task.
      */
     public Task deleteTask(int index) {
+        assert index >= 0 && index < taskList.size();
         Task taskToDelete = taskList.get(index);
         taskList.remove(index);
         return taskToDelete;
@@ -68,6 +70,7 @@ public class TaskList {
      * @throws LifelineException If task is already completed.
      */
     public Task completeTask(int index) throws LifelineException {
+        assert index >= 0 && index < taskList.size();
         Task taskToMarkAsComplete = taskList.get(index);
         if (taskToMarkAsComplete.isDone()) {
             throw new LifelineException("Task is already done!");
