@@ -56,14 +56,16 @@ public class TaskList {
         return this.taskList.remove(index);
     }
 
-    public String findTaskByKeyWord(String keyWord) {
+    public String findTaskByKeyWord(String ... keyWords) {
         boolean canFind = false;
         String description = "";
-        for (int i = 0; i < this.taskList.size(); i += 1) {
-            String taskDescription = this.taskList.get(i).getDescription();
-            if (taskDescription.contains(keyWord)) {
-                description += (i + 1) + "." + this.taskList.get(i) + "\n";
-                canFind = true;
+        for (String keyWord : keyWords) {
+            for (int i = 0; i < this.taskList.size(); i += 1) {
+                String taskDescription = this.taskList.get(i).getDescription();
+                if (taskDescription.contains(keyWord)) {
+                    description += (i + 1) + "." + this.taskList.get(i) + "\n";
+                    canFind = true;
+                }
             }
         }
 

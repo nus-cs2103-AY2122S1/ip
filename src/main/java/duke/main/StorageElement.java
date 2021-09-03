@@ -5,10 +5,10 @@ import java.time.LocalDate;
  * Represents intermediary class to bridge between Storage and Task class
  */
 public class StorageElement {
-    String taskIcon;
-    Boolean isDone;
-    String description;
-    LocalDate time;  //In MM-DD-YY format
+    private String taskIcon;
+    private Boolean isDone;
+    private String description;
+    private LocalDate time; // In MM-DD-YY format
 
     public StorageElement(String taskIcon, Boolean isDone, String description) {
         this.taskIcon = taskIcon;
