@@ -59,6 +59,7 @@ public abstract class Task {
     public abstract String formatSave();
 
     public String toString() {
+        assert description != null;
         return "[" + getStatusIcon() + "] " + description;
     }
 }
