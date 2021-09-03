@@ -37,7 +37,6 @@ public class Parser {
      */
     private static boolean isNumeric(String str) {
 
-        // null or empty
         if (str == null || str.length() == 0) {
             return false;
         }

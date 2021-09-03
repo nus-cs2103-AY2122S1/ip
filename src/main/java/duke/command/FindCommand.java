@@ -37,7 +37,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        return this.list.filterTask(searchTerm);
+        String successMessage = this.list.filterTask(searchTerm);
+        return successMessage;
 
     }
 }

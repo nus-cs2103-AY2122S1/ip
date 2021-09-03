@@ -43,7 +43,8 @@ public class ExitCommand extends Command {
     @Override
     public String execute() throws DukeException {
 
-        return "Bye. Hope to see you again soon!";
+        String farewellMessage = "Bye. Hope to see you again soon!";
+        return farewellMessage;
 
     }
 }

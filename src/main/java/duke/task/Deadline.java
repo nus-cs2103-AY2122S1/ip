@@ -15,15 +15,15 @@ import duke.util.DukeDate;
  */
 public class Deadline extends Task {
 
-    private DukeDate dueBy;
+    private DukeDate dueDate;
 
     /**
      * Constructor for Deadline
      * Task that contains a deadline to accomplish the task by
      */
-    public Deadline(String description, DukeDate dueBy) {
+    public Deadline(String description, DukeDate dueDate) {
         super(description);
-        this.dueBy = dueBy;
+        this.dueDate = dueDate;
     }
 
     /**
@@ -34,14 +34,14 @@ public class Deadline extends Task {
      */
     public DukeDate getDeadline() {
 
-        return this.dueBy;
+        return this.dueDate;
 
     }
 
     @Override
     public String toString() {
         String taskStatus = this.isCompleted() ? "X" : " ";
-        String dateTime = this.dueBy.getEndTimeString();
+        String dateTime = this.dueDate.getEndTimeString();
         return "[" + "D" + "]"
                 + "[" + taskStatus + "]"
                 + " " + this.getDescription() + " "

@@ -41,7 +41,9 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute() throws DukeException {
-        return this.list.addTask(this.taskDetails, this.taskType);
+
+        String successMessage = this.list.addTask(this.taskDetails, this.taskType);
+        return successMessage;
 
     }
 }
