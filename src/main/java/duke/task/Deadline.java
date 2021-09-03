@@ -101,6 +101,7 @@ public class Deadline extends DatedTask {
      */
     @Override
     public String toString() {
+        assert description != null;
         return String.format("[D]%s %s (by: %s)", isDone ? "[X]" : "[ ]", description, date);
     }
 
