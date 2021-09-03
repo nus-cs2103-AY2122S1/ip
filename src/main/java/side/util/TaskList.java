@@ -17,6 +17,7 @@ import side.tasks.Task;
 
 public class TaskList {
 
+    private static final String FILEPATH = "./data";
     private ArrayList<Task> tasks;
     private int taskLabel;
     private Storage storage;
@@ -37,8 +38,7 @@ public class TaskList {
      */
     public String retrieve() {
         try {
-            String filepath = "./data";
-            this.tasks = this.storage.retrieve(filepath);
+            this.tasks = this.storage.retrieve(FILEPATH);
             this.taskLabel = this.tasks.size();
             return "Here's your history...\n" + this.listToString();
         } catch (FileNotFoundException e) {
@@ -51,8 +51,7 @@ public class TaskList {
      */
     public void save() {
         try {
-            String filepath = "./data";
-            this.storage.save(this.tasks, filepath);
+            this.storage.save(this.tasks, FILEPATH);
         } catch (IOException e) {
             System.out.println("Ran into problem reading file...");
         }
