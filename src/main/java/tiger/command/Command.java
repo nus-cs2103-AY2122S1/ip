@@ -10,6 +10,7 @@ import tiger.actions.FindAction;
 import tiger.actions.InvalidAction;
 import tiger.actions.ListAction;
 import tiger.actions.MarkDoneAction;
+import tiger.actions.PriorityAction;
 import tiger.actions.StorageLoadAction;
 import tiger.actions.ToDoAction;
 import tiger.app.AppState;
@@ -22,6 +23,7 @@ import tiger.parser.EventParser;
 import tiger.parser.FindParser;
 import tiger.parser.MarkDoneParser;
 import tiger.parser.Parser;
+import tiger.parser.PriorityParser;
 import tiger.parser.ToDoParser;
 
 /**
@@ -106,7 +108,11 @@ public class Command {
         case "find":
             FindParser findCommand = new FindParser(command);
             findCommand.parse();
-            return new FindAction(applicationState, findCommand.getToSearchFor());
+            return new FindAction(applicationState, findCommand.getStringToSearchFor());
+        case "priority":
+            PriorityParser priorityParser = new PriorityParser(command);
+            priorityParser.parse();
+            return new PriorityAction(applicationState, priorityParser.getPriorityToSearchFor());
         case "clear":
             return new ClearAction(applicationState);
         default:

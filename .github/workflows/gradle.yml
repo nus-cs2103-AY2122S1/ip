@@ -33,8 +33,11 @@ jobs:
       - name: Run JUnit Tests
         run: ./gradlew clean test
 
-      - name: Run Build Tests
+      - name: Run GUI Build Tests
         run: ./gradlew clean shadowJar -PchooseMain=Launcher
+
+      - name: Run CLI Build Tests
+        run: ./gradlew clean shadowJar -PchooseMain=Tiger
 
       - name: Perform IO redirection test (*NIX)
         if: runner.os == 'Linux'

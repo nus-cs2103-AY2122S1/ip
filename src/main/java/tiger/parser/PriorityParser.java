@@ -1,18 +1,23 @@
 package tiger.parser;
 
+import tiger.constants.Priority;
 import tiger.exceptions.inputs.TigerEmptyStringException;
+import tiger.exceptions.inputs.TigerInvalidArgumentException;
 import tiger.exceptions.inputs.TigerInvalidInputException;
 import tiger.utils.StringUtils;
+
+import java.util.Locale;
 
 /**
  * The {@code FindParser} parser takes in an input String and parses it, so that the {@code FindAction} class
  * can access the class fields and understand user input.
  */
 
-public class FindParser extends Parser {
+public class PriorityParser extends Parser {
 
-    private String toSearchFor = "";
+    private String letter = "";
     private String input;
+    private Priority priority;
 
     /**
      * Constructor for the {@code FindParser} class.
@@ -20,8 +25,9 @@ public class FindParser extends Parser {
      * @param input String to be parsed.
      */
 
-    public FindParser(String input) {
+    public PriorityParser(String input) {
         this.input = input;
+        this.priority = Priority.INVALID;
     }
 
     @Override
@@ -31,15 +37,19 @@ public class FindParser extends Parser {
             String[] array =
                     removeSpaces.removeBackAndFrontSpaces(input).split(" ");
             for (int i = 1; i < array.length; i++) {
-                this.toSearchFor += (array[i] + " ");
+                this.letter += (array[i] + " ");
             }
-            this.toSearchFor = removeSpaces.removeBackAndFrontSpaces(this.toSearchFor);
+            this.letter = removeSpaces.removeBackAndFrontSpaces(this.letter);
+            this.priority = Priority.getPriorityFromLetter(this.letter.toUpperCase());
+            if (this.priority.equals(Priority.INVALID)) {
+                throw new TigerInvalidArgumentException(this.letter, "Priority");
+            }
         } catch (StringIndexOutOfBoundsException e) {
-            throw new TigerEmptyStringException("Find description");
+            throw new TigerEmptyStringException("Priority letter");
         }
     }
 
-    public String getStringToSearchFor() {
-        return this.toSearchFor;
+    public Priority getPriorityToSearchFor() {
+        return this.priority;
     }
 }
