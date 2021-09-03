@@ -69,4 +69,15 @@ public class Todo extends Task {
         obj.put("isDone", isDone);
         return obj;
     }
+
+    /**
+     * Comparator method. DO NOT USE (yet)! Implemented to bypass abstract superclass implementing Comparable interface.
+     *
+     * @param otherTask The other task to be compared to.
+     * @return 0.
+     */
+    @Override
+    public int compareTo(Task otherTask) {
+        return 0;
+    }
 }

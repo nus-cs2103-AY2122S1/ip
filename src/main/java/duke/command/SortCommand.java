@@ -19,6 +19,13 @@ public class SortCommand extends Command {
         return new SortCommand();
     }
 
+    /**
+     * Prints a list of Tasks sorted by date.
+     *
+     * @param tasks The list of tasks in the program.
+     * @param storage The storage utility.
+     * @return The response of the command.
+     */
     @Override
     public String execute(TaskList tasks, Storage storage) {
         if (tasks.getSize() < 1) {
@@ -27,6 +34,11 @@ public class SortCommand extends Command {
         return formatOutput("Here are your tasks ordered by date:", tasks.sort().toStringArray());
     }
 
+    /**
+     * Tests if a command is exit.
+     *
+     * @return False.
+     */
     @Override
     public boolean isExit() {
         return false;

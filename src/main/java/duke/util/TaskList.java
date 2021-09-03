@@ -1,6 +1,7 @@
 package duke.util;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -132,10 +133,14 @@ public class TaskList {
     }
 
     /**
+     * Returns a TaskList containing Dated Tasks, sorted by chronological Date. By definition the TaskList returned will
+     * not contain Todos, as the Todo task does not have a Date attribute.
      *
-     * @return
+     * @return A TaskList sorted by date.
      */
     public TaskList sort() {
-        return filter((task) -> task instanceof DatedTask);
+        TaskList dated = filter((task) -> task instanceof DatedTask);
+        Collections.sort(dated.list);
+        return dated;
     }
 }
