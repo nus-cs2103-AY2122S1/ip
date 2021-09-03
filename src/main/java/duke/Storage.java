@@ -29,15 +29,20 @@ public class Storage {
      * @return Path of the file.
      * @throw IOException.
      */
-    public Path getFilePath() throws IOException {
-        if (!Files.exists(folderPath)) {
-            folderPath = Files.createDirectory(folderPath);
-            filePath = Files.createFile(filePath);
-            return filePath;
-        } else {
-            if (!Files.exists(filePath)) {
+    public Path getFilePath() {
+
+        try {
+            if (!Files.exists(folderPath)) {
+                folderPath = Files.createDirectory(folderPath);
                 filePath = Files.createFile(filePath);
+                return filePath;
+            } else {
+                if (!Files.exists(filePath)) {
+                    filePath = Files.createFile(filePath);
+                }
+                return filePath;
             }
+        } catch (IOException e) {
             return filePath;
         }
     }
@@ -48,35 +53,39 @@ public class Storage {
      * @return List of task.
      * @throw IOException.
      */
-    public List<Task> load() throws IOException {
+    public List<Task> load() {
         String currContent;
         String[] parts;
         ArrayList<Task> taskList = new ArrayList<>();
-        List<String> fileContents = Files.readAllLines(this.filePath);
-        for (int i = 0; i< fileContents.size(); i++) {
-            currContent = fileContents.get(i);
-            parts = currContent.split("\\|");
-            if (parts[0].equals("T")) {
-                Todo todo = new Todo(parts[2]);
-                if (parts[1].equals("1")) {
-                    todo.markAsDone();
+        try {
+            List<String> fileContents = Files.readAllLines(this.filePath);
+            for (int i = 0; i < fileContents.size(); i++) {
+                currContent = fileContents.get(i);
+                parts = currContent.split("\\|");
+                if (parts[0].equals("T")) {
+                    Todo todo = new Todo(parts[2]);
+                    if (parts[1].equals("1")) {
+                        todo.markAsDone();
+                    }
+                    taskList.add(todo);
+                } else if (parts[0].equals("D")) {
+                    Deadline deadline = new Deadline(parts[2], parts[3]);
+                    if (parts[1].equals("1")) {
+                        deadline.markAsDone();
+                    }
+                    taskList.add(deadline);
+                } else if (parts[0].equals("E")) {
+                    Event event = new Event(parts[2], parts[3]);
+                    if (parts[1].equals("1")) {
+                        event.markAsDone();
+                    }
+                    taskList.add(event);
                 }
-                taskList.add(todo);
-            } else if (parts[0].equals("D")) {
-                Deadline deadline = new Deadline(parts[2],parts[3]);
-                if (parts[1].equals("1")) {
-                    deadline.markAsDone();
-                }
-                taskList.add(deadline);
-            } else if (parts[0].equals("E")) {
-                Event event = new Event(parts[2],parts[3]);
-                if (parts[1].equals("1")) {
-                    event.markAsDone();
-                }
-                taskList.add(event);
             }
+            return taskList;
+        } catch (IOException e) {
+            return taskList;
         }
-        return taskList;
     }
 
     /**
@@ -86,33 +95,36 @@ public class Storage {
      * @param path Path of the file.
      * @throw IOException.
      */
-    public void write(List<Task> tasks, Path path) throws IOException {
+    public void write(List<Task> tasks, Path path) {
         String stringToInsert;
         Task t;
-
-        Files.write(path, "".getBytes());
-        for (int i = 0; i < tasks.size(); i++) {
-            t = tasks.get(i);
-            if (t.getTaskType() == "Todo") {
-                if (t.getIsDone()) {
-                    stringToInsert = "T|1|" + t.getDescription() + "\n";
+        try {
+            Files.write(path, "".getBytes());
+            for (int i = 0; i < tasks.size(); i++) {
+                t = tasks.get(i);
+                if (t.getTaskType() == "Todo") {
+                    if (t.getIsDone()) {
+                        stringToInsert = "T|1|" + t.getDescription() + "\n";
+                    } else {
+                        stringToInsert = "T|0|" + t.getDescription() + "\n";
+                    }
+                } else if (t.getTaskType() == "Deadline") {
+                    if (t.getIsDone()) {
+                        stringToInsert = "D|1|" + t.getDescription() + "|" + t.getBy() + "\n";
+                    } else {
+                        stringToInsert = "D|0|" + t.getDescription() + "|" + t.getBy() + "\n";
+                    }
                 } else {
-                    stringToInsert = "T|0|" + t.getDescription() + "\n";
+                    if (t.getIsDone()) {
+                        stringToInsert = "E|1|" + t.getDescription() + "|" + t.getBy() + "\n";
+                    } else {
+                        stringToInsert = "E|0|" + t.getDescription() + "|" + t.getBy() + "\n";
+                    }
                 }
-            } else if (t.getTaskType() == "Deadline") {
-                if (t.getIsDone()) {
-                    stringToInsert = "D|1|" + t.getDescription() + "|" + t.getBy() + "\n";
-                } else {
-                    stringToInsert = "D|0|" + t.getDescription() + "|" + t.getBy() + "\n";
-                }
-            } else {
-                if (t.getIsDone()) {
-                    stringToInsert = "E|1|" + t.getDescription() + "|" + t.getBy() + "\n";
-                } else {
-                    stringToInsert = "E|0|" + t.getDescription() + "|" + t.getBy() + "\n";
-                }
+                Files.write(path, stringToInsert.getBytes(), StandardOpenOption.APPEND);
             }
-            Files.write(path, stringToInsert.getBytes(), StandardOpenOption.APPEND);
+        } catch (IOException e) {
+
         }
     }
 }

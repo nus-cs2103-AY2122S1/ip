@@ -13,17 +13,10 @@ public class Parser {
     private static final String DEADLINE_COMMAND = "deadline";
     private static final String EXIT_COMMAND = "bye";
 
-    String input;
-    String command;
-
-
-    public Parser(String input) {
-        this.input = input;
-    }
-
-    public void parse() {
-        if (input.startsWith("bye")) {
+    public void parse(String input) {
+        if (input.startsWith(EXIT_COMMAND)) {
 
         }
+
     }
 }

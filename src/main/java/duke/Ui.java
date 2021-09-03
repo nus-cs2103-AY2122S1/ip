@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * Class deals with the Ui.
@@ -10,11 +11,13 @@ import java.io.IOException;
 public class Ui {
     String logo;
     Storage storage;
-    TaskList list;
+    TaskList tasks;
+    boolean isExit = false;
+    Scanner scanner = new Scanner(System.in);
 
     public Ui(Storage storage, TaskList taskList) {
         this.storage = storage;
-        this.list = taskList;
+        this.tasks = taskList;
         this.logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -30,6 +33,13 @@ public class Ui {
     }
 
     /**
+     * Get the input from user.
+     */
+    public String readLine() {
+        return scanner.nextLine();
+    }
+
+    /**
      * Greets the user.
      */
     public String greet() {
@@ -42,8 +52,8 @@ public class Ui {
     /**
      * Save the final list to the file and bid user farewell.
      */
-    public String goodbye() throws IOException {
-        storage.write(list.getTaskList(), storage.getFilePath());
+    public String goodbye() {
+        storage.write(tasks.getTaskList(), storage.getFilePath());
         String response = "Bye. Hope to see you again soon!";
         return response;
     }
@@ -54,8 +64,8 @@ public class Ui {
     public String listTasks() {
         String response;
         response = "Here are the tasks in your list: \n";
-        for (int i = 0; i < list.length(); i++) {
-            response += "\t" + (i + 1) + ". " + list.getTask(i).toString() + "\n";
+        for (int i = 0; i < tasks.length(); i++) {
+            response += "\t" + (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
         }
         System.out.println(response);
         return response;
@@ -68,9 +78,10 @@ public class Ui {
      */
     public String markDone(int taskNumber) {
         String response = "Nice! I've marked this task as done:\n";
-        list.getTask(taskNumber).markAsDone();
-        response += "\t[" + list.getTask(taskNumber).getStatusIcon() + "] "
-                + list.getTask(taskNumber).getDescription() + "\n";
+        tasks.getTask(taskNumber).markAsDone();
+        storage.write(tasks.getTaskList(), storage.getFilePath()); ///////////////////////////
+        response += "\t[" + tasks.getTask(taskNumber).getStatusIcon() + "] "
+                + tasks.getTask(taskNumber).getDescription() + "\n";
         return response;
     }
 
@@ -81,9 +92,10 @@ public class Ui {
      */
     public String delete(int taskNumber) {
         String response = "Noted. I've removed this task:\n";
-        response += "\t" + list.getTask(taskNumber) + "\n";
-        list.deleteTask(taskNumber);
-        response += "Now you have " + list.length() + " in the list.\n";
+        response += "\t" + tasks.getTask(taskNumber) + "\n";
+        tasks.deleteTask(taskNumber);
+        storage.write(tasks.getTaskList(), storage.getFilePath()); ////////////////////////////
+        response += "Now you have " + tasks.length() + " in the list.\n";
         return response;
     }
 
@@ -93,18 +105,19 @@ public class Ui {
      * @param task Task that you want to add.
      */
     public String add(Task task) {
-        list.addTask(task);
+        tasks.addTask(task);
+        storage.write(tasks.getTaskList(), storage.getFilePath()); /////////////////////////////
         String response = "Got it. I've added this task:\n";
         response += "\t" + task + "\n";
-        response += "Now you have " + list.length() + " tasks in the list.\n";
+        response += "Now you have " + tasks.length() + " tasks in the list.\n";
         return response;
     }
 
     public String findTasks(String s) {
         String response = "Here are the matching tasks in your list:\n";
-        for (int i = 0; i < list.length(); i++) {
-            if (list.getTask(i).getDescription().contains(s)) {
-                response += "\t" + (i + 1) + ". " + list.getTask(i).toString() + "\n";
+        for (int i = 0; i < tasks.length(); i++) {
+            if (tasks.getTask(i).getDescription().contains(s)) {
+                response += "\t" + (i + 1) + ". " + tasks.getTask(i).toString() + "\n";
             }
         }
         return response;

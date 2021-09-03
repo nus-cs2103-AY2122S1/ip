@@ -41,14 +41,18 @@ public class Duke extends Application { //extends Application
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-//    public Duke(String filePath) throws IOException {
+//    public Duke(String filePath) {
 //        this.storage = new Storage(filePath);
 //        this.tasks = new TaskList(storage.load());
 //        this.ui = new Ui(this.storage, this.tasks);
 //    }
 //
 //    public void run() {
-//        //...
+//        boolean isExit = false;
+//        System.out.println(ui.greet());
+//        while (!isExit) {
+//            String input = ui.readLine();
+//        }
 //    }
 //
 //    public static void main(String[] args) {
@@ -218,46 +222,38 @@ public class Duke extends Application { //extends Application
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-//        if (input.startsWith("bye")) {
-//            return ui.goodbye();
-//                } else if (input.equals("list")) {
-//            return ui.listTasks();
-//                } else if (input.startsWith("done")) {
-//                    if (input.length() == 4 || input.length() == 5) {
-//                        throw new DukeException("☹ OOPS!!! You did not put which task"
-//                                + "you want me to mark it complete.");
-//                    }
-//                    taskNumber = Integer.parseInt(input.substring(input.indexOf(" ") + 1)) - 1;
-//                    return ui.markDone(taskNumber);
-//                } else if (input.startsWith("todo")) {
-//                    if (input.length() == 4 || input.length() == 5) {
-//                        throw new DukeException("\t☹ OOPS!!! The description of a todo cannot be empty.");
-//                    }
-//                    Todo todo = new Todo(input.substring(input.indexOf(" ") + 1));
-//                    return ui.add(todo);
-//                } else if (input.startsWith("deadline")) {
-//                    Deadline deadline = new Deadline(input.substring(input.indexOf(" ") + 1, input.indexOf(" /by")),
-//                            input.substring(input.indexOf("/by") + 4));
-//                    return ui.add(deadline);
-//                } else if (input.startsWith("event")) {
-//                    Event event = new Event(input.substring(input.indexOf(" ") + 1, input.indexOf(" /at")),
-//                            input.substring(input.indexOf("/at") + 4));
-//                    return ui.add(event);
-//                } else if (input.startsWith("delete")) {
-//                    if (input.length() == 6 || input.length() == 7) {
-//                        throw new DukeException("\t☹ OOPS!!! You did not put which task you want me to delete.");
-//                    }
-//                    taskNumber = Integer.parseInt(input.substring(input.indexOf(" ") + 1)) - 1;
-//                    return ui.delete(taskNumber);
-//
-//                } else if (input.startsWith("find")) {
-//                    if (input.length() == 4 || input.length() == 5) {
-//                        throw new DukeException("\t☹ OOPS!!! You did not put which task you want me to find.");
-//                    }
-//                    System.out.println(ui.findTasks(input.substring(input.indexOf(" ") + 1)));
-//                } else {
-//                    throw new DukeException("\t☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-//                }
+        String s;
+        int taskNumber;
+
+        Storage storage = new Storage("data/duke.txt");
+        TaskList list = new TaskList(storage.load());
+        Ui ui = new Ui(storage, list);
+
+        if (input.startsWith("bye")) {
+            return ui.goodbye();
+                } else if (input.equals("list")) {
+            return ui.listTasks();
+                } else if (input.startsWith("done")) {
+                    taskNumber = Integer.parseInt(input.substring(input.indexOf(" ") + 1)) - 1;
+                    return ui.markDone(taskNumber);
+                } else if (input.startsWith("todo")) {
+                    Todo todo = new Todo(input.substring(input.indexOf(" ") + 1));
+                    return ui.add(todo);
+                } else if (input.startsWith("deadline")) {
+                    Deadline deadline = new Deadline(input.substring(input.indexOf(" ") + 1, input.indexOf(" /by")),
+                            input.substring(input.indexOf("/by") + 4));
+                    return ui.add(deadline);
+                } else if (input.startsWith("event")) {
+                    Event event = new Event(input.substring(input.indexOf(" ") + 1, input.indexOf(" /at")),
+                            input.substring(input.indexOf("/at") + 4));
+                    return ui.add(event);
+                } else if (input.startsWith("delete")) {
+                    taskNumber = Integer.parseInt(input.substring(input.indexOf(" ") + 1)) - 1;
+                    return ui.delete(taskNumber);
+
+                } else if (input.startsWith("find")) {
+                    System.out.println(ui.findTasks(input.substring(input.indexOf(" ") + 1)));
+                }
         return "Duke heard: " + input;
     }
 }
