@@ -3,9 +3,9 @@ package duke.util;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.exceptions.CompletedTaskException;
 import duke.exceptions.DukeFileException;
 import duke.exceptions.EmptyListException;
-import duke.exceptions.TaskIsCompleteException;
 import duke.exceptions.TaskNotFoundException;
 import duke.task.Task;
 
@@ -40,7 +40,7 @@ public class TaskList {
     }
 
     /**
-     * Prints out the contents of all the tasks in the ArrayList of task.
+     * Returns a String representing the contents of all the tasks in the ArrayList of task.
      *
      * @param ui An Ui instance.
      * @return A String representing all the task in the list.
@@ -50,12 +50,12 @@ public class TaskList {
         if (this.tasks.size() <= 0) {
             throw new EmptyListException();
         }
-        return ui.printList(this.tasks);
+        return ui.showList(this.tasks);
     }
 
 
     /**
-     * Searches the ArrayList of Task for tasks with the specified keyword and uses an Ui to print it out.
+     * Searches the ArrayList of Task for tasks with the specified keyword and returns a String from Ui.
      *
      * @param ui An Ui instance that prints the list of task containing the keyword.
      * @param keyword A String representing the keyword.
@@ -75,7 +75,7 @@ public class TaskList {
         if (listOfTaskWithKeyword.size() == 0) {
             throw new TaskNotFoundException();
         }
-        return ui.printFindTask(listOfTaskWithKeyword);
+        return ui.showTasksWithKeyword(listOfTaskWithKeyword);
     }
 
     /**
@@ -98,16 +98,16 @@ public class TaskList {
      * @param index  An int representing the index of task to be marked.
      * @param store  A Storage instance to save this action into the text file.
      * @return A Task instance that represents the task marked as done.
-     * @throws TaskIsCompleteException An exception thrown when the task to be mark is already done.
+     * @throws CompletedTaskException An exception thrown when the task to be mark is already done.
      * @throws DukeFileException    An exception thrown when the store gets an error from storing the action.
      */
     public Task markTask(int index, Storage store)
-            throws TaskIsCompleteException, DukeFileException {
+            throws CompletedTaskException, DukeFileException {
         try {
             assert index < tasks.size() : "Index of Task Out of Bounds!";
             Task taskDone = tasks.get(index);
             if (taskDone.isDone()) {
-                throw new TaskIsCompleteException(index + 1);
+                throw new CompletedTaskException(index + 1);
             } else {
                 int indexOnList = index + 1;
                 store.appendCommand("done " + indexOnList);

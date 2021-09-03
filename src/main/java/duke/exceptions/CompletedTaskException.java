@@ -1,23 +1,23 @@
 package duke.exceptions;
 
 /**
- * This is a TaskIsCompleteException that extends DukeException.
+ * This is a CompletedTaskException that extends DukeException.
  * This exception is thrown when the user attempts to mark an already complete task as done.
  */
-public class TaskIsCompleteException extends DukeException {
+public class CompletedTaskException extends DukeException {
 
     /**
-     * This is the class field of TaskIsCompleteException.
+     * This is the class field of CompletedTaskException.
      */
     private final int index;
 
 
     /**
-     * This is the TaskIsCompleteException constructor.
+     * This is the CompletedTaskException constructor.
      *
      * @param indexToMark An index representing the index of an already complete task.
      */
-    public TaskIsCompleteException(int indexToMark) {
+    public CompletedTaskException(int indexToMark) {
         super("");
         this.index = indexToMark;
     }

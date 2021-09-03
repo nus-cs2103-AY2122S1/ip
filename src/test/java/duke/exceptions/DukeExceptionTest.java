@@ -65,7 +65,7 @@ public class DukeExceptionTest {
 
     @Test
     public void taskIsCompleteException_sameMessage() {
-        TaskIsCompleteException e = new TaskIsCompleteException(123);
+        CompletedTaskException e = new CompletedTaskException(123);
         assertEquals("OOPS! I think you have already completed task 123 !", e.getMessage());
     }
 

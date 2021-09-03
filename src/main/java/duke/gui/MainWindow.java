@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke d) {
         this.duke = d;
-        dialogContainer.getChildren().addAll(d.welcomeUser());
+        this.duke.setDialogContainer(this.dialogContainer);
     }
 
     /**
@@ -50,7 +50,7 @@ public class MainWindow extends AnchorPane {
             duke.saveTask();
             Platform.exit();
         } else {
-            duke.getResponse(input, this.dialogContainer);
+            duke.getResponse(input);
             userInput.clear();
         }
     }

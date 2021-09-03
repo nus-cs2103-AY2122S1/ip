@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
             throws DukeFileException, TaskNotFoundException {
         if (taskList.getSize() - 1 >= this.index && this.index >= 0) {
             Task deletedTask = taskList.deleteTask(this.index, store);
-            return ui.printRemoveTask(deletedTask, taskList.getSize());
+            return ui.showRemoveTaskMessage(deletedTask, taskList.getSize());
         } else {
             throw new TaskNotFoundException(this.index + 1);
         }

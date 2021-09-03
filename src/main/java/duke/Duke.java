@@ -22,6 +22,7 @@ public class Duke {
     private final Storage store;
     private final Ui ui;
     private TaskList taskList;
+    private VBox dialogContainer;
     private final Image userAvatar = new Image(this.getClass().getResourceAsStream("/images/UserAvatar.png"));
     private final Image dukeAvatar = new Image(this.getClass().getResourceAsStream("/images/DukeAvatar.png"));
     private final Image dukeAvatarWhenException = new Image(this.getClass()
@@ -38,9 +39,19 @@ public class Duke {
         try {
             taskList = new TaskList(store.load());
         } catch (DukeFileException e) {
-            System.out.println(e.getMessage());
+            showDukeErrorMessage(e.getMessage());
             taskList = new TaskList();
         }
+    }
+
+    /**
+     * Sets the dialogContainer field in Duke.
+     *
+     * @param dialogContainer A VBox instance of GUI.
+     */
+    public void setDialogContainer(VBox dialogContainer) {
+        this.dialogContainer = dialogContainer;
+        this.dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.showWelcomeMessage(), dukeAvatar));
     }
 
     /**
@@ -50,7 +61,7 @@ public class Duke {
         try {
             this.taskList.safeTasks(store);
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            showDukeErrorMessage(e.getMessage());
         }
     }
 
@@ -59,34 +70,30 @@ public class Duke {
      * the dialog container.
      *
      * @param input A String representing the input of user in the text box.
-     * @param dialogContainer A VBox instance on main window.
      */
-    public void getResponse(String input, VBox dialogContainer) {
+    public void getResponse(String input) {
+        showUserInput(input);
         try {
             Command command = Parser.decipher(input);
-            String output = command.execute(this.taskList, this.store, this.ui);
-
-            String dukeText = "FullOfBugs:\n" + output;
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userAvatar),
-                    DialogBox.getDukeDialog(dukeText, dukeAvatar)
-            );
+            String dukeMessage = command.execute(this.taskList, this.store, this.ui);
+            showDukeResponse(dukeMessage);
         } catch (DukeException e) {
-            String dukeTextWhenException = "FullOfBugs:\n" + e.getMessage();
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userAvatar),
-                    DialogBox.getDukeDialog(dukeTextWhenException, dukeAvatarWhenException)
-            );
+            showDukeErrorMessage(e.getMessage());
         }
     }
 
-    /**
-     * Welcomes the user upon entering the GUI.
-     *
-     * @return A DialogBox instance with Welcome message.
-     */
-    public DialogBox welcomeUser() {
-        return DialogBox.getDukeDialog(ui.showWelcomeMessage(), dukeAvatar);
+    private void showDukeErrorMessage(String error) {
+        String dukeTextWhenException = "FullOfBugs:\n" + error;
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeTextWhenException, dukeAvatarWhenException));
+    }
+
+    private void showDukeResponse(String message) {
+        String dukeText = "FullOfBugs:\n" + message;
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(dukeText, dukeAvatar));
+    }
+
+    private void showUserInput(String userInput) {
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(userInput, userAvatar));
     }
 
 }

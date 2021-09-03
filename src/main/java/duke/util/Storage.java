@@ -45,11 +45,11 @@ public class Storage {
             java.nio.file.Path directoryPath = java.nio.file.Paths.get("src", "main", "java", "data");
             File f = new File(this.filePath);
             if (!Files.isDirectory(directoryPath)) {
-                //create directory
+                // create directory
                 Files.createDirectories(directoryPath);
             }
             if (!f.exists()) {
-                //create file if it does not exist
+                // create file if it does not exist
                 f.createNewFile();
             }
             Scanner s = new Scanner(f);
@@ -70,14 +70,18 @@ public class Storage {
                     } else if (command.equals("deadline")) {
                         String description = lineSplitter.nextLine().trim();
                         assert !description.equals("") : "Data file is corrupted! No description after deadline.";
-                        String[] parts = description.split("/by");
-                        taskList.add(new Deadline(parts[0].trim(), parts[1].trim()));
+                        String[] deadlineParts = description.split("/by");
+                        String deadlineDescription = deadlineParts[0].trim();
+                        String deadlineBy = deadlineParts[1].trim();
+                        taskList.add(new Deadline(deadlineDescription, deadlineBy));
 
                     } else if (command.equals("event")) {
                         String description = lineSplitter.nextLine().trim();
                         assert !description.equals("") : "Data file is corrupted! No description after event";
-                        String[] parts = description.split("/at");
-                        taskList.add(new Event(parts[0].trim(), parts[1].trim()));
+                        String[] eventParts = description.split("/at");
+                        String eventDescription = eventParts[0].trim();
+                        String eventAt = eventParts[1].trim();
+                        taskList.add(new Event(eventDescription, eventAt));
 
                     } else if (command.equals("done")) {
                         assert lineSplitter.hasNextInt() : "Data file is corrupted! No index after done.";
