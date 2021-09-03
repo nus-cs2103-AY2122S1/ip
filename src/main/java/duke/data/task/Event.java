@@ -47,6 +47,7 @@ public class Event extends Task {
      */
     public Event(String[] input, boolean isDone) {
         super(input[0], isDone);
+        assert(!input[1].isEmpty());
         this.at = LocalDateTime.parse(input[1]);
     }
     
