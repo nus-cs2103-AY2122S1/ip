@@ -55,7 +55,9 @@ public class Storage {
         for (int i = 0; i < this.taskListString.size() - 1; i++) {
             fw.write(this.taskListString.get(i) + "\n");
         }
-        fw.write(this.taskListString.get(taskListString.size() - 1));
+        if (this.taskListString.size() > 0) {
+            fw.write(this.taskListString.get(taskListString.size() - 1));
+        }
         fw.close();
     }
 
@@ -89,6 +91,7 @@ public class Storage {
      * @param index Index of task to be modified.
      */
     public void saveTaskDone(int index) {
+        assert taskListString.size() >= index : "Index should be in range";
         String data = taskListString.get(index - 1);
         taskListString.set(index - 1, data.substring(0, 2) + 'X' + data.substring(3));
     }
@@ -99,6 +102,7 @@ public class Storage {
      * @param index Index of task to be removed.
      */
     public void removeTask(int index) {
+        assert taskListString.size() >= index : "Index should be in range";
         taskListString.remove(index);
     }
 }

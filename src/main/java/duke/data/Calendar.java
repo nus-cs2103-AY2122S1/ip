@@ -36,16 +36,19 @@ class Calendar {
         if (!calendar.containsKey(dtTask.getDateTime())) {
             calendar.put(dtTask.getDateTime(), new ArrayList<>());
         }
+        assert calendar.containsKey(dtTask.getDateTime()) == true : "Calendar should contain the key";
         calendar.get(dtTask.getDateTime()).add(dtTask);
         if (dtTask instanceof Event) {
             if (!calendarEvents.containsKey(dtTask.getDateTime())) {
                 calendarEvents.put(dtTask.getDateTime(), new ArrayList<>());
             }
+            assert calendarEvents.containsKey(dtTask.getDateTime()) == true : "Event calendar should contain the key";
             calendarEvents.get(dtTask.getDateTime()).add(dtTask);
         } else {
             if (!calendarDeadlines.containsKey(dtTask.getDateTime())) {
                 calendarDeadlines.put(dtTask.getDateTime(), new ArrayList<>());
             }
+            assert calendarDeadlines.containsKey(dtTask.getDateTime()) == true : "Deadline calendar should contain key";
             calendarDeadlines.get(dtTask.getDateTime()).add(dtTask);
         }
     }

@@ -133,6 +133,7 @@ public class TaskList {
      * @return String representation of a task at index.
      */
     public String returnTask(int index) {
+        assert items.size() >= index : "Index should be in range";
         return this.items.get(index - 1).toString();
     }
 

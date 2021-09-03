@@ -30,7 +30,6 @@ public class Command {
     private int index;
     private String[] subInputs;
     private String description;
-    private boolean isExit = false;
 
     /**
      * Returns a new Command.
@@ -96,15 +95,6 @@ public class Command {
     }
 
     /**
-     * Returns whether the exit command has been executed
-     *
-     * @return true if the exit command is executed else returns false.
-     */
-    public boolean isExit() {
-        return this.isExit;
-    }
-
-    /**
      * Executes a command and returns a String that signifies proper execution.
      *
      * @param tasks Lists of tasks to be executed on.
@@ -116,6 +106,8 @@ public class Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException,
             DateTimeParseException, NumberFormatException {
+        assert this.command != null : "Command should not be null";
+        assert this.type != null : "Type should not be null";
         switch (this.type) {
         case SINGLE_INPUT:
             if (this.command.equals(Commands.BYE)) {
@@ -132,6 +124,7 @@ public class Command {
             storage.save();
             return ui.displayCommand(this.command, this.index, t, tasks);
         case STR_INPUT:
+            assert this.description != null : "Description should not be null";
             if (this.command.equals(Commands.TODO)) {
                 tasks.addItem(new Todo(this.description), storage);
                 storage.save();
@@ -139,6 +132,7 @@ public class Command {
             }
             return ui.displayCommand(this.command, this.description, tasks);
         case STR_ARR_INPUT:
+            assert this.subInputs != null : "subInputs should not be null";
             Task task;
             if (this.command.equals(Commands.DEADLINE)) {
                 task = new Deadline(subInputs);
@@ -149,6 +143,7 @@ public class Command {
             storage.save();
             return ui.displayCommand(this.command, tasks);
         case DATETIME_INPUT:
+            assert this.dateTime != null : "dateTime should not be null";
             return ui.displayCommand(this.command, tasks, this.dateTime);
         default:
             return "Oops there is an error";
