@@ -9,7 +9,7 @@ public class TaskList {
 
     private List<Task> tasks;
     private Storage storage;
-    private boolean taskFound = false;
+    private boolean isTaskFound = false;
 
     /**
      * This constructor creates the initial list of tasks for Duke bot by
@@ -75,14 +75,14 @@ public class TaskList {
     public String findTask(String searchString) {
         int counter = 1;
         String result = "";
-        taskFound = false;
+        isTaskFound = false;
 
         for (int i = 0; i < tasks.size(); i++) {
             Task curr = tasks.get(i);
             if (curr.getDescription().contains(searchString)) {
-                result = result + counter + "." + curr + "\n";
+                result += counter + "." + curr + "\n";
                 counter++;
-                taskFound = true;
+                isTaskFound = true;
             }
         }
 
@@ -90,7 +90,7 @@ public class TaskList {
     }
 
     public boolean isTaskFound() {
-        return taskFound;
+        return isTaskFound;
     }
 
     /**
@@ -113,7 +113,7 @@ public class TaskList {
         String result = "";
 
         for (int i = 0; i < tasks.size(); i++) {
-            result = result + counter + "." + tasks.get(i) + "\n";
+            result += counter + "." + tasks.get(i) + "\n";
             counter++;
         }
 
