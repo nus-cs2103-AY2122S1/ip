@@ -1,6 +1,9 @@
 package duke;
 
+import duke.exception.DukeException;
+
 import java.io.IOException;
+import java.util.Scanner;
 
 /**
  * A Personal Assistant Chat bot that helps to keep track of tasks
@@ -10,11 +13,7 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-
-    /**
-     * Empty constructor for Duke
-     */
-    public Duke() {};
+    private Parser parser;
 
     /**
      * Constructs Duke object
@@ -31,6 +30,15 @@ public class Duke {
             ui.showLoadingError();
             taskList = new TaskList();
         }
+        parser = new Parser(this.taskList, this.ui, this.storage);
+    }
+
+    public Ui getUi() {
+        return this.ui;
+    }
+
+    public TaskList getTaskList() {
+        return this.taskList;
     }
 
     /**
@@ -38,12 +46,23 @@ public class Duke {
      */
     public void run() {
         ui.welcome();
-        Parser parser = new Parser(this.taskList, this.ui, this.storage);
-        parser.parse();
+        Scanner sc = new Scanner(System.in);
+        while (sc.hasNextLine()) {
+            String s = sc.nextLine();
+            try {
+                parser.parse(s);
+            } catch (DukeException e) {
+                e.printError();
+            }
+        }
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try{
+            return parser.parse(input);
+        } catch (DukeException e) {
+            return e.getError();
+        }
     }
 
     public static void main(String[] args) {

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke = new Duke("data/duke.txt");
 
     public static void main(String[] args) {
         Application.launch(args);
@@ -18,10 +18,11 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         MainWindow mw = new MainWindow();
-        mw.setDuke(duke);
         Scene scene = new Scene(mw);
         stage.setScene(scene);
         stage.setTitle("Duke");
+        mw.setDuke(duke);
+        mw.start();
         stage.show();
     }
 }

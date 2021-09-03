@@ -1,21 +1,15 @@
 package duke;
 
+import duke.exception.*;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.task.Event;
 import duke.task.Deadline;
-import duke.exception.DukeException;
-import duke.exception.EmptyDescriptionException;
-import duke.exception.InvalidEntryException;
-import duke.exception.MissingPreException;
-import duke.exception.NoNumberException;
-import duke.exception.TaskNoDateTimeException;
-import duke.exception.TaskNoNameException;
-import duke.exception.TaskNotFoundException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
+import java.util.Date;
 
 /**
  * Deals with making sense of user command
@@ -43,90 +37,80 @@ public class Parser {
     /**
      * Deals with interpreting user commands
      */
-    public void parse() {
-           Scanner sc = new Scanner(System.in);
-           while (sc.hasNextLine()) {
-               String s = sc.nextLine();
-               if (s.equals("bye")) {
-                   ui.bye();
-                   break;
-               } else if (s.equals("list")) {
-                   ui.showTaskList(this.tasks, "list");
-               } else if (s.contains("done")) {
-                   int taskNum = getNum(s);
-                   if (taskNum != -1) {
-                       Task task = tasks.getTask(taskNum);
-                       task.markAsDone();
-                       ui.showTaskDone(task);
-                       storage.updateData(tasks);
-                   }
-               } else if (s.contains("todo")) {
-                   String name = getName(s);
+    public String parse(String input) throws DukeException {
+               if (input.equals("bye")) {
+                   return ui.bye();
+               } else if (input.equals("list")) {
+                   return ui.showTaskList(this.tasks, "list");
+               } else if (input.contains("done")) {
+                   int taskNum = getNum(input);
+                   Task task = tasks.getTask(taskNum);
+                   task.markAsDone();
+                   storage.updateData(tasks);
+                   return ui.showTaskDone(task);
+               } else if (input.contains("todo")) {
+                   String name = getName(input);
                    if (!name.equals("")) {
                        ToDo toDo = new ToDo(name);
                        tasks.addTask(toDo);
-                       ui.showTaskAdded(toDo, tasks.getSize());
                        storage.updateData(tasks);
+                       return ui.showTaskAdded(toDo, tasks.getSize());
                    }
-               } else if (s.contains("deadline")) {
-                   String description = getName(s);
+               } else if (input.contains("deadline")) {
+                   String description = getName(input);
                    if (!description.equals("")) {
                        if (descriptionIsValid(description, "/by", "deadline")) {
                            String[] parts = description.split("/by");
                            String name = parts[0];
                            LocalDateTime by = getDateTime(parts[1]);
-                           if (by != null) {
-                               Deadline deadline = new Deadline(name, by);
-                               ui.showTaskAdded(deadline, tasks.getSize());
-                               tasks.addTask(deadline);
-                               storage.updateData(tasks);
-                           }
+
+                           Deadline deadline = new Deadline(name, by);
+                           tasks.addTask(deadline);
+                           storage.updateData(tasks);
+                           return ui.showTaskAdded(deadline, tasks.getSize());
                        }
                    }
-               } else if (s.contains("event")) {
-                   String description = getName(s);
+               } else if (input.contains("event")) {
+                   String description = getName(input);
                    if (!description.equals("")) {
                        if (descriptionIsValid(description, "/at", "event")) {
                            String[] parts = description.split("/at");
                            String name = parts[0];
                            LocalDateTime at = getDateTime(parts[1]);
-                           if (at != null) {
-                               Event event = new Event(name, at);
-                               ui.showTaskAdded(event, tasks.getSize());
-                               tasks.addTask(event);
-                               storage.updateData(tasks);
-                           }
+
+                           Event event = new Event(name, at);
+                           tasks.addTask(event);
+                           storage.updateData(tasks);
+                           return ui.showTaskAdded(event, tasks.getSize());
                        }
                    }
-               } else if (s.contains("delete")) {
-                   int taskNum = getNum(s);
-                   if (taskNum != -1) {
-                       Task task = tasks.getTask(taskNum);
-                       tasks.deleteTask(task);
-                       ui.showTaskDeleted(task, tasks.getSize());
-                       storage.updateData(tasks);
-                   }
-               } else if (s.contains("find")) {
-                   String keyword = getName(s);
+               } else if (input.contains("delete")) {
+                   int taskNum = getNum(input);
+                   Task task = tasks.getTask(taskNum);
+                   tasks.deleteTask(task);
+                   storage.updateData(tasks);
+                   return ui.showTaskDeleted(task, tasks.getSize());
+               } else if (input.contains("find")) {
+                   String keyword = getName(input);
                    if (!keyword.equals("")) {
                        TaskList t = tasks.matchTasks(keyword);
-                       ui.showTaskList(t, "find");
+                       return ui.showTaskList(t, "find");
                    }
-               } else {
-                   invalidEntry();
                }
-           }
+               return invalidEntry();
     }
 
-    private void invalidEntry() {
-        try {
-            throw new InvalidEntryException("error");
-        } catch (DukeException e) {
-            e.printError();
-        }
+    private String invalidEntry() throws InvalidEntryException {
+//        try {
+//            throw new InvalidEntryException("error");
+//        } catch (DukeException e) {
+//            e.printError();
+//            return "( ⚆ _ ⚆ ) OOPS!!! I'm sorry, but I don't know what that means :-(";
+//        }
+        throw new InvalidEntryException("error");
     }
 
-    private int getNum(String s) {
+    private int getNum(String s) throws NoNumberException, TaskNotFoundException {
         try {
             if (!s.equals("done") && !s.equals("delete")) {
                 String[] parts = s.split(" ", 2);
@@ -138,67 +122,55 @@ public class Parser {
             } else {
                 throw new NoNumberException("error");
             }
-        } catch (NumberFormatException e) {
-            System.out.println("( ⚆ _ ⚆ ) OOPS!!! Please enter a number!");
-        } catch (DukeException e) {
-            e.printError();
+        } catch (NumberFormatException exception) {
+            throw new NoNumberException("error");
         }
-        return -1;
     }
 
-    private String getName(String s) {
-        try {
-            if (s.contains(" ")) {
-                String[] parts = s.split(" ", 2);
-                if (parts[0].equals("todo") || parts[0].equals("deadline")
-                        || parts[0].equals("event") || parts[0].equals("find")) {
-                    if (parts[1].equals("")) {
-                        throw new EmptyDescriptionException("error", parts[0]);
-                    }
-                    return parts[1];
+    private String getName(String s) throws EmptyDescriptionException  {
+        if (s.contains(" ")) {
+            String[] parts = s.split(" ", 2);
+            if (parts[0].equals("todo") || parts[0].equals("deadline")
+                    || parts[0].equals("event") || parts[0].equals("find")) {
+                if (parts[1].equals("")) {
+                    throw new EmptyDescriptionException("error", parts[0]);
                 }
-            } else {
-                throw new EmptyDescriptionException("error", s);
+                return parts[1];
             }
-        } catch (DukeException e) {
-            e.printError();
+        } else {
+            throw new EmptyDescriptionException("error", s);
         }
         return "";
     }
 
-    private LocalDateTime getDateTime(String s) {
+    private LocalDateTime getDateTime(String s) throws InvalidDateTimeException {
         try{
             String dt = s.replaceFirst(" ", "");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime dateTime = LocalDateTime.parse(dt, formatter);
             return dateTime;
         } catch (DateTimeParseException e) {
-            System.out.println("( ⚆ _ ⚆ ) OOPS!!! Please enter date & time in this format (yyyy-MM-dd HH:mm)");
+            throw new InvalidDateTimeException("error");
         }
-        return null;
     }
 
-    private boolean descriptionIsValid(String description, String pre, String task) {
-       try {
-           if (description.contains(pre)) {
-               if (!description.equals(pre)
-                       && !(description.startsWith(pre) && description.endsWith(" "))
-                       && !(description.startsWith(" ") && description.endsWith(pre))) {
-                   if(description.startsWith(pre)) {
-                       throw new TaskNoNameException("error", task);
-                   } else if (description.endsWith(pre)) {
-                       throw new TaskNoDateTimeException("error", task);
-                   }
-                   return true;
-               } else {
-                   throw new EmptyDescriptionException("error", task);
-               }
-           } else {
-               throw new MissingPreException("error", pre);
-           }
-       } catch (DukeException e) {
-           e.printError();
-       }
-       return false;
+    private boolean descriptionIsValid(String description, String pre, String task)
+            throws TaskNoDateTimeException, TaskNoNameException, EmptyDescriptionException, MissingPreException {
+        if (description.contains(pre)) {
+            if (!description.equals(pre)
+                    && !(description.startsWith(pre) && description.endsWith(" "))
+                    && !(description.startsWith(" ") && description.endsWith(pre))) {
+                if(description.startsWith(pre)) {
+                    throw new TaskNoNameException("error", task);
+                } else if (description.endsWith(pre)) {
+                    throw new TaskNoDateTimeException("error", task);
+                }
+                return true;
+            } else {
+                throw new EmptyDescriptionException("error", task);
+            }
+        } else {
+            throw new MissingPreException("error", pre);
+        }
     }
 }

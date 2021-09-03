@@ -2,6 +2,8 @@ package duke;
 
 import duke.task.Task;
 
+import java.io.File;
+
 /**
  * Deals with interactions with the user
  */
@@ -10,22 +12,22 @@ public class Ui {
     /**
      * Greets user when programme is run
      */
-    public void welcome() {
-        System.out.println("Hello! I'm Duke\n" + "What can I do for you?");
+    public String welcome() {
+        return "Hello! I'm Duke\n" + "What can I do for you?";
     }
 
     /**
      * Bids user goodbye when programme is exited
      */
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String bye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
      * Shows error message for issue with loading of data
      */
-    public void showLoadingError() {
-        System.out.println("idk man im sorry");
+    public String showLoadingError() {
+        return "Sorry! There was an error while trying to load past records :(";
     }
 
     /**
@@ -34,9 +36,10 @@ public class Ui {
      * @param task task to be added
      * @param size current number of tasks
      */
-    public void showTaskAdded(Task task, int size) {
+    public String showTaskAdded(Task task, int size) {
         String t = size == 1 ? "task" : "tasks";
-        System.out.printf("Got it. I've added this task:\n%s\nNow you have %d %s in the list.\n", task, size, t);
+        String s = String.format("Got it. I've added this task:\n%s\nNow you have %d %s in the list.\n", task, size, t);
+        return s;
     }
 
     /**
@@ -44,8 +47,9 @@ public class Ui {
      *
      * @param task completed task
      */
-    public void showTaskDone(Task task) {
-        System.out.println("Nice! I've marked this task as done:\n" + task);
+    public String showTaskDone(Task task) {
+        String s = String.format("Nice! I've marked this task as done:\n" + task);
+        return s;
     }
 
     /**
@@ -54,9 +58,10 @@ public class Ui {
      * @param task task to be deleted
      * @param size current number of tasks
      */
-    public void showTaskDeleted(Task task, int size) {
+    public String showTaskDeleted(Task task, int size) {
         String t = size == 1 ? "task" : "tasks";
-        System.out.printf("Noted.I've removed this task:\n%s\nNow you have %d %s in the list\n", task, size, t);
+        String s = String.format("Noted.I've removed this task:\n%s\nNow you have %d %s in the list\n", task, size, t);
+        return s;
     }
 
 
@@ -66,14 +71,26 @@ public class Ui {
      * @param list  list of tasks
      * @param cmd determine which message to be shown
      */
-    public void showTaskList(TaskList list, String cmd) {
-        String msg = cmd.equals("list")
-                ? "Here are the tasks in your list:"
-                : "Here are the matching tasks in your list:";
-        System.out.println(msg);
-        for (int i = 0; i < list.getSize(); i++) {
-            Task s = list.getTask(i);
-            System.out.printf("%d.%s%n", i + 1, s);
+    public String showTaskList(TaskList list, String cmd) {
+        if (!list.getList().isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            String msg = cmd.equals("list")
+                    ? "Here are the tasks in your list:"
+                    : cmd.equals("find")
+                    ? "Here are the matching tasks in your list:"
+                    : "Here are your past records!";
+            sb.append(msg).append("\n");
+            for (int i = 0; i < list.getSize(); i++) {
+                Task t = list.getTask(i);
+                String s = String.format("%d.%s%n", i + 1, t);
+                sb.append(s);
+            }
+            return sb.toString();
+        } else {
+            String msg = cmd.equals("past")
+                    ? "You have no past records!"
+                    : "You have no tasks!";
+            return msg;
         }
     }
 }
