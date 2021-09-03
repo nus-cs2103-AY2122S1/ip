@@ -53,6 +53,8 @@ public class DoneCommand extends Command {
      * @return `Message`.
      */
     public Message getOutputMessage() {
+        assert task != null : "task should not be null";
+
         String prefix = "Nice! I've marked this task as done:";
         return new Message(prefix, task.toString(), "≧(´▽｀)≦");
     }

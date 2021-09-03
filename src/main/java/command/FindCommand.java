@@ -45,6 +45,8 @@ public class FindCommand extends Command {
      * @return `Message`.
      */
     public Message getOutputMessage() {
+        assert list != null : "task list should not be null";
+
         return new Message("Here are the matching tasks in your list:", this.list.toString(), "ヽ(°〇°)ﾉ");
     }
 }

@@ -7,7 +7,14 @@ package message;
 public class Message {
     private final String[] texts;
 
+    /**
+     * Instantiates a Message holding texts to be output to the user.
+     *
+     * @param texts Texts are vararg of strings.
+     */
     public Message(String ...texts) {
+        assert texts.length > 0 : "A message should have least one string";
+
         this.texts = texts;
     }
 
