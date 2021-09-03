@@ -54,19 +54,7 @@ public class AddCommand extends Command {
         }
 
         if (input.split(", ").length >= 2) {
-            String[] inputTasks = extracted[1].split(", ");
-            Task[] tasks = new Task[inputTasks.length];
-            try {
-                for (int i = 0, inputTasksLength = inputTasks.length; i < inputTasksLength; i++) {
-                    String inputTask = inputTasks[i];
-                    ToDo task = new ToDo(inputTask);
-                    tasks[i] = task;
-                    dataManager.writeToFile(task);
-                }
-            } catch (DukeException e) {
-                return e.getMessage();
-            }
-            return list.addToList(tasks);
+            return handleMultipleTodos(extracted[1]);
         }
 
         ToDo task = new ToDo(extracted[1]);
@@ -76,6 +64,22 @@ public class AddCommand extends Command {
             return e.getMessage();
         }
         return list.addToList(task);
+    }
+
+    private String handleMultipleTodos(String s) {
+        String[] inputTasks = s.split(", ");
+        Task[] tasks = new Task[inputTasks.length];
+        try {
+            for (int i = 0, inputTasksLength = inputTasks.length; i < inputTasksLength; i++) {
+                String inputTask = inputTasks[i];
+                ToDo task = new ToDo(inputTask);
+                tasks[i] = task;
+                dataManager.writeToFile(task);
+            }
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        return list.addToList(tasks);
     }
 
     /**

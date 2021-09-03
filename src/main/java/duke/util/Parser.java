@@ -74,11 +74,13 @@ public class Parser {
         } else {
             inFormat = new SimpleDateFormat("yyyy-MM-dd");
         }
+
         try {
             date = inFormat.parse(dateTime);
         } catch (ParseException e) {
             return null;
         }
+
         return date;
     }
 
@@ -89,9 +91,11 @@ public class Parser {
      * @return the keyword user is searching for.
      */
     public static String extractKeyword(String input) throws DukeException {
-        if (input.split(" ").length < 2) {
+        if (input.split(" ").length < 2) { // Guard clause
             throw new MissingKeywordException();
-        } else if (input.split(" ").length > 2) {
+        }
+
+        if (input.split(" ").length > 2) { // Guard Clause
             throw new MultipleKeywordsException();
         }
 

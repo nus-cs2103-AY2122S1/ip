@@ -21,9 +21,11 @@ public class FilterCommand extends Command {
 
     @Override
     public String getResponse(String input) {
-        if (input.split(" ").length < 2) {
+        if (input.split(" ").length < 2) { // Guard Clause
             return "Please include a date/time for me to search after the filter command!";
-        } else if (input.split(" ").length > 2) {
+        }
+
+        if (input.split(" ").length > 2) { // Guard Clause
             return "Sorry, I can only search using one date/time.";
         }
 
@@ -33,14 +35,18 @@ public class FilterCommand extends Command {
         if (extractedTask.size() == 0) {
             return "There are no tasks on this day.";
         } else {
-            String output = String.format("Here are your tasks for this day:%s", Ui.LINE_SEPARATOR);
-
-            int count = 1;
-            for (Task t : extractedTask) {
-                output = output.concat(String.format("[%d]. %s", count++, t + Ui.LINE_SEPARATOR + "\t\t"));
-            }
-
-            return output;
+            return formatFilteredList(extractedTask);
         }
+    }
+
+    private String formatFilteredList(ArrayList<Task> extractedTask) {
+        String output = String.format("Here are your tasks for this day:%s", Ui.LINE_SEPARATOR);
+
+        int count = 1;
+        for (Task t : extractedTask) {
+            output = output.concat(String.format("[%d]. %s", count++, t + Ui.LINE_SEPARATOR));
+        }
+
+        return output;
     }
 }

@@ -60,13 +60,17 @@ public class ToDoList {
      * @throws InvalidIndexException if user inputs a number larger than number of tasks currently in list.
      */
     public String markTaskAsDone(int index) throws DukeException {
-        if (index > list.size()) {
+        if (index > list.size()) { // Guard Clause
             throw new InvalidIndexException(list.size());
-        } else {
-            Task task = list.get(index - 1);
-            task.markAsDone();
-            return String.format("Good job on completing this task!\n  %s", task);
         }
+
+        if (index < 0) { // Guard Clause
+            throw new DukeNegativeIndexException();
+        }
+
+        Task task = list.get(index - 1);
+        task.markAsDone();
+        return String.format("Good job on completing this task!\n  %s", task);
     }
 
     /**
@@ -77,16 +81,18 @@ public class ToDoList {
      * @throws DukeNegativeIndexException if user inputs a negative number.
      */
     public String removeFromList(int index) throws DukeException {
-        if (index > list.size()) {
+        if (index > list.size()) { // Guard Clause
             throw new InvalidIndexException(list.size());
-        } else if (index < 0) {
-            throw new DukeNegativeIndexException();
-        } else {
-            Task task = list.get(index - 1);
-            list.remove(index - 1);
-            return String.format("Noted. I've removed this task:\n  %sNow you have %s tasks in the list.",
-                            task + Ui.LINE_SEPARATOR, list.size());
         }
+
+        if (index < 0) { // Guard Clause
+            throw new DukeNegativeIndexException();
+        }
+
+        Task task = list.get(index - 1);
+        list.remove(index - 1);
+        return String.format("Noted. I've removed this task:\n  %sNow you have %s tasks in the list.",
+                        task + Ui.LINE_SEPARATOR, list.size());
     }
 
     /**
@@ -106,11 +112,13 @@ public class ToDoList {
      */
     public ArrayList<Task> filterList(String dateTime) {
         ArrayList<Task> filteredList = new ArrayList<>();
+
         for (Task t : list) {
             if (t.isSameDateTime(dateTime)) {
                 filteredList.add(t);
             }
         }
+
         return filteredList;
     }
 

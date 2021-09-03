@@ -81,14 +81,14 @@ public class Ui {
         // Custom message for when user types 'list' when nothing is added.
         if (list.size() == 0) {
             return "You are all done for the day :-)";
-        } else {
-            StringBuilder sb = new StringBuilder();
-            sb.append("Here are the tasks in your list:\n");
-            for (int i = 1; i <= list.size(); i++) {
-                sb.append(String.format("  %s. %s", i, list.get(i - 1) + LINE_SEPARATOR));
-            }
-            return sb.toString();
         }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
+        for (int i = 1; i <= list.size(); i++) {
+            sb.append(String.format("  %s. %s", i, list.get(i - 1) + LINE_SEPARATOR));
+        }
+        return sb.toString();
     }
 
     /**
