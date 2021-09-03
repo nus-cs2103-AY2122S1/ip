@@ -176,5 +176,18 @@ public class TaskList {
         return taskList;
     }
 
+    public void editDescription (String newDescription, int i) throws DukeException {
+        if (i > toDoList.size() || i < 1) {
+            throw new DukeException("OOPS!!! Invalid task number");
+        }
+        toDoList.get(i - 1).editDescription(newDescription);
+    }
+
+    public void editTime (Calendar cal, int i) throws DukeException {
+        if (i > toDoList.size() || i < 1) {
+            throw new DukeException("OOPS!!! Invalid task number");
+        }
+        toDoList.get(i - 1).editTime(cal);
+    }
 
 }

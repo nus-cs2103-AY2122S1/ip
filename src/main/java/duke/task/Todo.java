@@ -1,5 +1,9 @@
 package duke.task;
 
+import duke.command.DukeException;
+
+import java.util.Calendar;
+
 /**
  * This class implements a Todo object which inherits from Task.
  *
@@ -12,6 +16,11 @@ public class Todo extends Task {
     /** Default constructor. */
     public Todo(String description) {
         super(description);
+    }
+
+    @Override
+    protected void editTime(Calendar cal) throws DukeException {
+        throw new DukeException("OOPS!!! TODO does not have deadline or event time to be edited");
     }
 
     /**
