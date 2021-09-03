@@ -16,6 +16,8 @@ public class Parser {
     public enum COMMAND { TODO, DEADLINE, EVENT, LIST, DONE, DELETE, INVALID, FIND, BYE }
 
     private static String findDatetime(String input, String argument) {
+        assert input.length() > 0;
+
         int argumentIndex = input.lastIndexOf(argument);
         String output = input.substring(argumentIndex + argument.length());
 
@@ -33,6 +35,7 @@ public class Parser {
      * @return String of datetime.
      */
     public String findDeadlineDatetime(String input) {
+        assert input.length() > 0;
         return findDatetime(input, "/by");
     }
 
@@ -43,6 +46,8 @@ public class Parser {
      * @return String of datetime.
      */
     public String[] findEventDatetime(String input) {
+        assert input.length() > 0;
+
         String output = input;
 
         if (input.contains("/at")) {
@@ -67,6 +72,8 @@ public class Parser {
      * @return String of description.
      */
     public String findDescription(String input) {
+        assert input.length() > 0;
+
         String cmd = input.split("\\s+", 2)[1];
 
         if (cmd.contains("/by")) {
