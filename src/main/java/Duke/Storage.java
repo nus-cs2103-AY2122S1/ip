@@ -29,6 +29,7 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         try {
             File file = new File(filePath);
+            file.getParentFile().mkdirs();
             file.createNewFile();
             FileInputStream fstream = new FileInputStream(file);
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));

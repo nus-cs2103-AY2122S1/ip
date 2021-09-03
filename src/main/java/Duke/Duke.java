@@ -1,7 +1,7 @@
 package duke;
 
 public class Duke {
-    private static final String FILE_PATH = "duke.txt";
+    private static final String FILE_PATH = "data/duke.txt";
     private Parser parser;
     private TaskList tasks;
 
