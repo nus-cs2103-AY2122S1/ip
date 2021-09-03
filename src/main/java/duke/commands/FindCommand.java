@@ -12,9 +12,10 @@ public class FindCommand extends Command {
     }
 
     /**
-     * The execute() method in findCommand filters out the relevant tasks from the TaskList.
+     * Returns String object to describe the relevant tasks from the given TaskList.
+     *
      * @param des the user input into the Duke chat-box.
-     * @return String object to describe execution of FindCommand.
+     * @return String representation of FindCommand.
      * @throws DukeException if done command is not formatted properly
      *                       or if task has already been completed.
      */

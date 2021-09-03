@@ -7,12 +7,11 @@ package duke.parser;
  */
 public class Parser {
     /**
-     * The checkForKeyword() method in Parser checks user input for keywords and responds
-     * accordingly by calling the respective commands.
+     * Returns String type object that informs the run() method which command should be called.
+     * If no keyword is found, null is returned.
      *
      * @param des the user input into the Duke chat-box.
-     * @return String type object that informs the run() method which
-     * command should be called.
+     * @return keyword present in user input
      */
     public String checkForKeyword(String des) {
         if (des.equals("help")) {

@@ -25,7 +25,7 @@ public abstract class Task {
     }
 
     /**
-     * The getStatusIcon() method returns the string representation of whether the task isDone.
+     * Returns the string representation of whether the task isDone.
      *
      * @return String type object that displays an "[X]" if the task is done, else "[ ]" is displayed.
      */
@@ -34,7 +34,7 @@ public abstract class Task {
     }
 
     /**
-     * The markAsDone() method marks the task as done.
+     * Marks the task as done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -60,7 +60,7 @@ public abstract class Task {
     public abstract String formatString();
 
     /**
-     * Overriding toString method to display the relevant information.
+     * Returns String representation of specific tasks.
      *
      * @return String type object that includes the status icon and task description.
      */

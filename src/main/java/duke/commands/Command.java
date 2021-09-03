@@ -22,18 +22,20 @@ public abstract class Command {
     }
 
     /**
-     * Abstract execute() method in Command for specific commands to execute their responsibilities.
+     * Returns String representing specific commands executing their responsibilities.
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
+     * @return String representation of Command.
      * @throws DukeException on task-specific errors.
      */
     public abstract String execute(String des, TaskList tList) throws DukeException;
 
     /**
-     * The numberOfTasks() method informs the user of the total number of tasks.
+     * Returns string representing total number of tasks.
      *
      * @param tList the TaskList object used to keep track of all tasks.
+     * @return Total number of tasks.
      */
     public String numberOfTasks(TaskList tList) {
         ArrayList<Task> tasks = tList.getTaskList();
@@ -45,11 +47,10 @@ public abstract class Command {
     }
 
     /**
-     * The countSpaces method counts the number of blank spaces in a given String.
+     * Returns Integer type object that represents the number of blank spaces in the user input.
      *
      * @param des the user input into the Duke chat-box.
-     * @return Integer type object that represents the number of blank spaces in
-     * the user input.
+     * @return Number of blank spaces.
      */
     public int countSpaces(String des) {
         int count = 0;

@@ -13,7 +13,7 @@ public class TaskList {
     private final ArrayList<Task> taskList = new ArrayList<>();
 
     /**
-     * The add() method adds a task into the list of tasks.
+     * Adds a task into the list of tasks.
      *
      * @param t the Task object that is to be added.
      */
@@ -23,7 +23,7 @@ public class TaskList {
     }
 
     /**
-     * The remove() method removes a task from the list of tasks.
+     * Removes a task from the list of tasks.
      *
      * @param num the int object that represents index of the task in the taskList that is to be removed.
      */

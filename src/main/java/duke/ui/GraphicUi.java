@@ -23,8 +23,9 @@ import duke.tasks.TaskList;
 public class GraphicUi {
 
     /**
-     * Runs the Duke chat-bot for the GUI. Takes in a String of user input and outputs the corresponding
+     * Returns String representation of response from Duke. Runs the Duke chat-bot for the GUI. Takes in a String of user input and outputs the corresponding
      * Duke response.
+     *
      * @param des the user input into the Duke chat-box.
      * @return String object representing the corresponding response from Duke.
      */

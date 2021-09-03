@@ -17,7 +17,8 @@ public class Event extends Task {
     private final LocalTime end;
 
     /**
-     * Default constructor for Event.
+     * Creates new Event object.
+     *
      * @param description String object representing the task being input into Duke.
      * @param date LocalDate object representing the date the Event task is on.
      * @param start LocalTime object representing the start time of the Event task.
@@ -31,7 +32,8 @@ public class Event extends Task {
     }
 
     /**
-     * Overloaded constructor for Event.
+     * Creates new Event object (Overloaded constructor).
+     *
      * @param done String object representing whether the task is completed.
      * @param description String object representing the task being input into Duke.
      * @param date LocalDate object representing the date the Event task is on.
@@ -51,7 +53,7 @@ public class Event extends Task {
     }
 
     /**
-     * The formatString() method formats the String representation of an Event task to facilitate ease of reading.
+     * Returns formatted String representation of a Event task to facilitate ease of reading.
      *
      * @return String object to represent Event task in a more readable manner.
      */
@@ -63,10 +65,10 @@ public class Event extends Task {
     }
 
     /**
-     * Overriding toString method to display the relevant information
+     * Returns String representation of Event task.
      *
      * @return String type object that includes the task type, parent
-     * toString method(), and timeframe.
+     * toString method(), and start and end time.
      */
     @Override
     public String toString() {

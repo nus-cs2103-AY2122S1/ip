@@ -16,7 +16,8 @@ public class Deadline extends Task {
     private LocalTime time;
 
     /**
-     * Default constructor for Deadline.
+     * Creates new Deadline object.
+     *
      * @param description String object representing the task being input into Duke.
      * @param date LocalDate object representing the date the Deadline task is due by.
      * @param time LocalTime object representing the time that the Deadline task is due by.
@@ -28,7 +29,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overloaded constructor for Deadline.
+     * Creates new Deadline object (Overloaded constructor).
+     *
      * @param done String object representing whether the task is completed.
      * @param description String object representing the task being input into Duke.
      * @param date LocalDate object representing the date the Deadline task is due by.
@@ -46,7 +48,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * The formatString() method formats the String representation of a Deadline task to facilitate ease of reading.
+     * Returns formatted String representation of a Deadline task to facilitate ease of reading.
      *
      * @return String object to represent Deadline task in a more readable manner.
      */
@@ -56,7 +58,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Overriding toString method to display the relevant information
+     * Returns String representation of Deadline task.
      *
      * @return String type object that includes the task type, parent
      * toString method(), and due date.

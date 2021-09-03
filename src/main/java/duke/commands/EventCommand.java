@@ -20,11 +20,11 @@ public class EventCommand extends Command {
     }
 
     /**
-     * execute() method in EventCommand to add an Event task into the TaskList.
+     * Returns String object to describe execution of EventCommand.
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
-     * @return String object to describe execution of EventCommand.
+     * @return String representation of EventCommand.
      * @throws DukeException if input for Delete command is not properly formatted.
      */
     @Override

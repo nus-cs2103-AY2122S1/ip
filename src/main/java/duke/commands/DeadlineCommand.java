@@ -19,11 +19,11 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * execute() method in DeadlineCommand to add a Deadline task to the TaskList.
+     * Returns String object to describe execution of DeadlineCommand.
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
-     * @return String object to describe execution of DeadlineCommand.
+     * @return String representation of DeadlineCommand.
      * @throws DukeException if input for deadline command is not properly formatted.
      */
     @Override

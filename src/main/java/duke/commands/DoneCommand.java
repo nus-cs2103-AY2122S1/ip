@@ -18,11 +18,11 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * execute() method in DoneCommand to mark a task as done in the TaskList.
+     * Returns String object to describe a specific task being marked as done.
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
-     * @return String object to describe execution of DoneCommand.
+     * @return String representation of DoneCommand.
      * @throws DukeException if input for Delete command is not properly formatted.
      */
     public String execute(String des, TaskList tList) throws DukeException {

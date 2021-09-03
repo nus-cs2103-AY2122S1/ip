@@ -13,7 +13,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * execute() method in ByeCommand to print leaving message.
+     * Returns goodbye message.
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.

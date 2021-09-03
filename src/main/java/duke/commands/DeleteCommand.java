@@ -18,11 +18,11 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * execute() method in DeleteCommand to Delete a task from the TaskList.
+     * Returns String object to describe deletion of a task from the TaskList.
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
-     * @return String object to describe execution of DeleteCommand.
+     * @return String representation of DeleteCommand.
      * @throws DukeException if input for Delete command is not properly formatted.
      */
     @Override

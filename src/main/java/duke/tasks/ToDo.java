@@ -8,7 +8,8 @@ package duke.tasks;
  */
 public class ToDo extends Task {
     /**
-     * Default constructor for ToDo.
+     * Creates a new ToDo object.
+     *
      * @param description String object representing the task being input into ToDo.
      */
     public ToDo(String description) {
@@ -16,7 +17,8 @@ public class ToDo extends Task {
     }
 
     /**
-     * Default constructor for ToDo.
+     * Creates a new ToDo object. (Overloaded constructor)
+     *
      * @param done String object representing whether the task is completed.
      * @param description String object representing the task being input into ToDo.
      */
@@ -29,13 +31,18 @@ public class ToDo extends Task {
         }
     }
 
+    /**
+     * Returns formatted String representation of a ToDo task.
+     *
+     * @return String object to represent ToDo task.
+     */
     @Override
     public String formatString() {
         return toString();
     }
 
     /**
-     * Overriding toString method to display the relevant information.
+     * Returns String representation of ToDo task.
      *
      * @return String type object that includes the task type and parent toString() method.
      */

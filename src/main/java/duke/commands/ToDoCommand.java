@@ -16,11 +16,11 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * execute() method in ToDoCommand to add a ToDo task into the TaskList.
+     * Returns String object to describe execution of ToDoCommand.
      *
      * @param des   the user input into the Duke chat-box.
      * @param tList the TaskList object used to keep track of all tasks.
-     * @return String object to describe execution of ToDoCommand.
+     * @return String representation of ToDoCommand.
      * @throws DukeException if input for ToDo command is not properly formatted.
      */
     public String execute(String des, TaskList tList) throws DukeException {
