@@ -1,5 +1,8 @@
 package type;
 
+/**
+ * Encapsulates valid formats for datetime.
+ */
 public enum DatetimeTypeEnum {
     INPUT("dd-MM-yyyy HHmm"),
     OUTPUT("MMM d yyyy HHmm");
@@ -10,6 +13,11 @@ public enum DatetimeTypeEnum {
         this.format = format;
     }
 
+    /**
+     * Returns string representation of a datetime type enum.
+     *
+     * @return String representation of a datetime type enum
+     */
     @Override
     public String toString() {
         return this.format;
