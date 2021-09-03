@@ -5,6 +5,13 @@ import duke.util.Message;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Handles the command for finding event.
+ *
+ * @author marcuspeh
+ * @version A-JavaDoc
+ * @since 23 Aug 2021
+ */
 public class FindCommand implements Command {
     /** Stores the message entered by the user. */
     private String message;

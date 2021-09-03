@@ -107,8 +107,8 @@ public class TaskList {
      */
     public Message markDone(int n) {
         Task task = taskList.get(n - 1);
-        boolean success = task.markDone();
-        if (success) {
+        boolean isSuccess = task.markDone();
+        if (isSuccess) {
             saveTaskList();
             return ui.doneSuccessMessage(task);
         } else {

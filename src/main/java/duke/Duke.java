@@ -11,6 +11,10 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * Main logic class for duke.
+ * Run this class to run Duke without GUI.
+ */
 public class Duke {
     /** For the chatboard to read the user input. */
     private Scanner sc;
@@ -69,6 +73,12 @@ public class Duke {
         ui.exitMessage().printMessage();
     }
 
+    /**
+     * Used in Javafx to deal with the GUI aspect of Duke.
+     *
+     * @param message Message passed in by the user.
+     * @return Return the response of Duke
+     */
     public String getResponse(String message) {
         message = message.strip();
         try {

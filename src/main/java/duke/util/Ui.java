@@ -119,20 +119,10 @@ public class Ui {
     }
 
     /**
-     * Prints out a message when the task cannot be imported.
+     * Abstract the message to be printed when the commands recognised are to be printed.
      *
-     * @param description Description of task to be imported.
+     * @param description The sentence to be printed before the commands list is printed.
      * @return message to be used by either the graphic UI or command line UI.
-     */
-    public Message importTaskErrorMessage(String description) {
-        return new Message(String.format("Cant import %s", description));
-    }
-
-    /**
-     * Abstract the message to be printed when the commands recognised are to be printed
-     *
-     * @param description
-     * @return
      */
     private Message commandsRecognisedMessage(String description) {
         return new Message(description,
@@ -146,6 +136,17 @@ public class Ui {
                 "delete <number> - Delete the task");
 
     }
+
+    /**
+     * Prints out a message when the task cannot be imported.
+     *
+     * @param description Description of task to be imported.
+     * @return message to be used by either the graphic UI or command line UI.
+     */
+    public Message importTaskErrorMessage(String description) {
+        return new Message(String.format("Cant import %s", description));
+    }
+
 
     /**
      * Prints out a message if this is the first time the user is using duke.Duke.

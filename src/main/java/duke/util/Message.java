@@ -4,7 +4,7 @@ package duke.util;
  * Class to handle the message from duke.
  */
 public class Message {
-    /** Message to be printed */
+    /** Message to be printed. */
     private String[] message;
 
     /**
@@ -17,7 +17,7 @@ public class Message {
     }
 
     /**
-     * Prints out the message from the command
+     * Prints out the message from the command.
      */
     public void printMessage() {
         Ui.printMessage(message);
