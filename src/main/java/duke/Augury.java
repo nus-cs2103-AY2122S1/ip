@@ -7,9 +7,6 @@ import duke.commands.Command;
 import duke.commands.ExitCommand;
 import duke.exceptions.AuguryException;
 import duke.exceptions.FileIoException;
-import duke.exceptions.InvalidActionException;
-import duke.exceptions.InvalidTaskCreationException;
-import duke.exceptions.UnknownCommandException;
 import duke.io.Parser;
 import duke.storage.Storage;
 import duke.tasks.TaskList;
@@ -27,7 +24,7 @@ import duke.ui.Ui;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    private final String VER     = "v1.0.2"; // Level-10 GUI, A-CodeQuality
+    private final String VER     = "v1.0.2"; // Level-10 GUI, A-Assertions, A-CodeQuality
     private final String WELCOME =
             "\t+-------------------------------+\n" +
             "\t| *                 *         * |\n" +
@@ -77,13 +74,9 @@ public class Augury {
     }
 
     /**
-     * Runs main loop of {@code Augury}. Parses and execute commands in a loop.
-     *
-     * @throws InvalidActionException If action commands were malformed.
-     * @throws InvalidTaskCreationException If invalid parameters were provided in task creation.
-     * @throws UnknownCommandException If an unrecognized command was provided.
+     * Runs main loop of {@code Augury}. Parses and execute commands it receives.
      */
-    public void loop() throws AuguryException {
+    public void loop() {
         Scanner scan = new Scanner(System.in);
         ui.speak("Hello! How may I help you?");
 
@@ -98,7 +91,10 @@ public class Augury {
 
                 if (command instanceof ExitCommand) {
                     isRunning = false;
+                    break;
                 }
+
+                ui.speak(result);
             } catch (AuguryException e) {
                 ui.speak(e.getMessage() + "\n\t Please try again.");
             }

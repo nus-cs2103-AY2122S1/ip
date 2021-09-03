@@ -39,10 +39,12 @@ public class Storage {
         String directory = "data";
         File dir = new File(directory);
         if (!dir.exists()) {
-            dir.mkdir();
+            boolean dirCreated = dir.mkdir();
+            assert dirCreated;
         }
         File f = new File(path);
-        f.createNewFile();
+        boolean fileCreated = f.createNewFile();
+        assert fileCreated;
 
         loadTaskListFromStorage(tasks);
     }

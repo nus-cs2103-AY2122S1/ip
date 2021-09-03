@@ -37,11 +37,12 @@ public class StringCleaner {
     /**
      * Returns an {@code LocalDateTime} from a {@code String}.
      *
-     * @param dateInput User provided String.
+     * @param input User provided String (should be lowercase).
      * @return A {@code LocalDateTime} object.
      * @throws InvalidTaskCreationException If input String does not match format.
      */
     public static LocalDateTime toLocalDateTime(String dateInput) throws AuguryException {
+        assert dateInput.equals(dateInput.toLowerCase());
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             return LocalDateTime.parse(dateInput, formatter);
