@@ -1,12 +1,12 @@
 package duke;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 /**
  * Class that handles the storing of Tasks during the app's runtime
-  */
+ */
 public class Tasklist {
 
     /** Used to store each Task */
@@ -30,7 +30,7 @@ public class Tasklist {
      */
     public Task markAsDone(int index) {
         this.taskList.get(index - 1).completeTask();
-        return this.taskList.get(index - 1); 
+        return this.taskList.get(index - 1);
     }
 
     /**
@@ -85,8 +85,8 @@ public class Tasklist {
         String contents = "";
         for (int i = 0; i < this.lastItem; i++) {
             String index = String.valueOf(i + 1);
-            contents += (i != this.lastItem - 1) 
-                ? (index + ". " + this.taskList.get(i) + "\n") 
+            contents += (i != this.lastItem - 1)
+                ? (index + ". " + this.taskList.get(i) + "\n")
                 : (index + ". " + this.taskList.get(i));
         }
 
@@ -96,7 +96,7 @@ public class Tasklist {
     /**
      * Returns all Tasks whose descriptions contain any of the provided search terms.
      *
-     * @param searchTerms A String describing the search terms to check the Tasks against
+     * @param searchTerms A String describing the search terms to check the Tasks against.
      * @return An ArrayList of Tasks whose descriptions contain at least one of the search terms.
      */
     public Tasklist findAllTasksWith(String searchTerms) {

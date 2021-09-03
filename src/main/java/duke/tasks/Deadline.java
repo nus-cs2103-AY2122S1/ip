@@ -60,8 +60,8 @@ public class Deadline extends Task {
         return "[D]["
             + ((this.isCompleted()) ? "X] " : " ] ")
             + this.getDescription()
-            + " (by: " 
-            + this.dueDate.format(format) 
+            + " (by: "
+            + this.dueDate.format(format)
             + ")";
     }
 }

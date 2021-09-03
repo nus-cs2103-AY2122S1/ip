@@ -1,18 +1,19 @@
 package duke;
 
-import duke.tasks.Task;
-import duke.tasks.ToDo;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.tasks.Deadline;
+import duke.tasks.Event;
+import duke.tasks.Task;
+import duke.tasks.ToDo;
+
 
 /**
  * Class that deals with the saving and loading of persistent task data
@@ -27,7 +28,7 @@ public class PersistentStorage {
     private String filepath;
 
     /**
-     * Constructor for a PersistentStorage
+     * Constructor for a PersistentStorage.
      *
      * @param filepath The filepath to the text file used for
      *                 persistent storage
@@ -115,7 +116,6 @@ public class PersistentStorage {
      */
     public boolean saveTasks(Tasklist tasklist) throws DukeException {
         File file = new File(this.filepath);
-        
         try {
             if (!file.exists()) {
                 file.createNewFile();
@@ -126,7 +126,7 @@ public class PersistentStorage {
             ArrayList<Task> allTasks = tasklist.getAllTasks();
             for (int i = 0; i < tasklist.getTotalTasks(); i++) {
                 Task task = allTasks.get(i);
-                taskData += (i == tasklist.getTotalTasks() - 1 
+                taskData += (i == tasklist.getTotalTasks() - 1
                     ? task.getFileRepr()
                     : task.getFileRepr() + "\n");
             }

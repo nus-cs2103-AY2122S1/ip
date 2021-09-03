@@ -1,15 +1,15 @@
 package duke.commands;
 
-import duke.Tasklist;
 import duke.DukeException;
-import duke.UI;
 import duke.PersistentStorage;
+import duke.Tasklist;
+import duke.UI;
 import duke.tasks.Task;
 
 /**
  * Class encapsulating a "done" command from the user
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     /** The integer index of the target task to be completed (as in the UI) */
     private int target;
