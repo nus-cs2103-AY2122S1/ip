@@ -25,13 +25,15 @@ public class Parser {
      * Accepts only the specified following specific commands.
      */
     public enum Keyword {
-        TODO, EVENT, DEADLINE, LIST, DONE, DELETE, BYE, FIND
+        TODO, EVENT, DEADLINE, LIST, DONE, DELETE, BYE, FIND, HELP
     }
 
     /** TaskList object that stores tasks */
     private static TaskList tasks;
     /** Storage object that saves the TaskList. */
     private Storage storage;
+    /** Ui object that deals with user commands. */
+    private Ui ui;
 
     /**
      * Constructor for a Parser object.
@@ -42,6 +44,7 @@ public class Parser {
     public Parser(TaskList tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
+        this.ui = new Ui();
     }
 
     private String getFirstWord(String input) {
@@ -143,6 +146,8 @@ public class Parser {
             Keyword keyword = getKeyword(input);
 
             switch (keyword) {
+            case HELP:
+                return ui.showSupportedCommands();
             case BYE:
                 return "Bye!";
             case LIST:

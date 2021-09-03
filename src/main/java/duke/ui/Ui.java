@@ -35,14 +35,16 @@ public class Ui {
      * Greets the user.
      */
     public static String greet() {
-        return "Hello! I'm Faker!" + '\n' + "What can I do for you?";
+        String message = "Hello! I'm Faker!" + '\n' + "What can I do for you?";
+        return message;
     }
 
     /**
      * Says goodbye to the user.
      */
     public static String exit() {
-        return "Bye. Hope to see you again soon!";
+        String message = "Bye. Hope to see you again soon!";
+        return message;
     }
 
     /**
@@ -52,5 +54,32 @@ public class Ui {
      */
     public static String printMessage(String message) {
         return message;
+    }
+
+    /**
+     * Informs users of the supported commands and how to use them.
+     *
+     * @return String containing the available commands.
+     */
+    public String showSupportedCommands() {
+        String message = formatMessage(
+                "bye - ends current chat session"
+                , "deadline <description> (by: <date> <time>) - adds new Deadline"
+                , "event <description> (at: <date> <time>) - adds new Event"
+                , "list - shows your current task list"
+                , "done <task number> - marks task as done"
+                , "delete <task number> - deletes task from list"
+                , "find <keyword> - shows all tasks that contains keyword"
+        );
+        return message;
+    }
+
+    private String formatMessage(String... messages) {
+        StringBuilder sb = new StringBuilder();
+        for (String message: messages) {
+            sb.append(message);
+            sb.append(System.getProperty("line.separator"));
+        }
+        return sb.toString();
     }
 }
