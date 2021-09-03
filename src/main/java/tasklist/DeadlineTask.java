@@ -6,12 +6,12 @@ import java.time.format.DateTimeParseException;
 
 import exception.InvalidDateTimeException;
 import exception.InvalidTaskTimeFormatException;
-import type.DatetimeTypeEnum;
 import type.CommandTypeEnum;
+import type.DatetimeTypeEnum;
 
 /**
  * Encapsulates a task with a deadline.
- * It inherits from `entity.list.DukeTask`.
+ * It inherits from `DukeTask`.
  */
 public class DeadlineTask extends Task {
     private static final String TIME_SPLITTER_INPUT = "/by";
@@ -94,5 +94,21 @@ public class DeadlineTask extends Task {
         LocalDateTime deadline = LocalDateTime.from(dateTimeFormatter.parse(deadlineString));
 
         return new DeadlineTask(actionDescription, isDone, deadline);
+    }
+
+    @Override
+    protected boolean isDuplicateOf(Task task) {
+        // A different type of task is definitely not a duplicate
+        if (!(task instanceof DeadlineTask)) {
+            return false;
+        }
+
+        // A different description means the task is definitely not a duplicate
+        if (!this.isSameDescription(task)) {
+            return false;
+        }
+
+        DeadlineTask deadlineTask = (DeadlineTask) task;
+        return this.deadline.equals(deadlineTask.deadline);
     }
 }

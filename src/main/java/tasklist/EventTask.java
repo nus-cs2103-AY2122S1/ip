@@ -5,7 +5,7 @@ import type.CommandTypeEnum;
 
 /**
  * Encapsulates a task with that will occur at a specified time period.
- * It inherits from `entity.list.DukeTask`.
+ * It inherits from `DukeTask`.
  */
 public class EventTask extends Task {
     private static final String TIME_SPLITTER_INPUT = "/at";
@@ -73,5 +73,21 @@ public class EventTask extends Task {
         String time = timeWithClosingBracket.substring(0, timeWithClosingBracket.length() - 1);
 
         return new EventTask(actionDescription, isDone, time);
+    }
+
+    @Override
+    protected boolean isDuplicateOf(Task task) {
+        // A different type of task is definitely not a duplicate
+        if (!(task instanceof EventTask)) {
+            return false;
+        }
+
+        // A different description means the task is definitely not a duplicate
+        if (!this.isSameDescription(task)) {
+            return false;
+        }
+
+        EventTask eventTask = (EventTask) task;
+        return this.time.equals(eventTask.time);
     }
 }

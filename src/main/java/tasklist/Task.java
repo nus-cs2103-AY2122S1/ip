@@ -8,7 +8,7 @@ import type.CommandTypeEnum;
 /**
  * Encapsulates a task containing a description and status.
  */
-public class Task {
+public abstract class Task {
     protected static final String STATUS_ICON_DONE = "X";
     protected static final String STATUS_ICON_NOT_DONE = " ";
     private String description;
@@ -30,7 +30,7 @@ public class Task {
      * Supported types of tasks include todo, deadline and event.
      *
      * @param description the full user input that may or may not be a valid type of task
-     * @return A new `entity.list.DukeTask`
+     * @return `DukeTask`
      * @throws InvalidTaskTypeException when the type of task is not recognised
      * @throws InvalidTaskTimeFormatException when a task does not have valid time inputs
      */
@@ -115,6 +115,12 @@ public class Task {
     protected boolean contains(String keyword) {
         return this.description.contains(keyword);
     }
+
+    protected boolean isSameDescription(Task task) {
+        return this.description.equals(task.description);
+    }
+
+    protected abstract boolean isDuplicateOf(Task task);
 
     private String getStatusIcon() {
         return (this.isDone ? STATUS_ICON_DONE : STATUS_ICON_NOT_DONE);

@@ -1,5 +1,8 @@
 package tasklist;
 
+/**
+ * Encapsulates a task with only a description.
+ */
 public class TodoTask extends Task {
     private TodoTask(String description, boolean isDone) {
         super(description, isDone);
@@ -41,5 +44,15 @@ public class TodoTask extends Task {
         String actionDescription = description.substring(3).trim();
 
         return new TodoTask(actionDescription, isDone);
+    }
+
+    @Override
+    protected boolean isDuplicateOf(Task task) {
+        // A different type of task is definitely not a duplicate
+        if (!(task instanceof TodoTask)) {
+            return false;
+        }
+
+        return this.isSameDescription(task);
     }
 }

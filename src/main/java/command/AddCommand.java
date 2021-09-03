@@ -1,5 +1,6 @@
 package command;
 
+import exception.DuplicateTaskException;
 import exception.ErrorAccessingFileException;
 import exception.InvalidDateTimeException;
 import exception.InvalidTaskTimeFormatException;
@@ -53,9 +54,13 @@ public class AddCommand extends Command {
             InvalidTaskTypeException,
             InvalidTaskTimeFormatException,
             ErrorAccessingFileException,
-            InvalidDateTimeException {
+            InvalidDateTimeException,
+            DuplicateTaskException {
         Task task = Task.createTask(this.description, this.commandType);
+
+        list.validateTaskNotDuplicate(task);
         list.addTaskToList(task);
+
         this.task = task;
         this.list = list;
     }

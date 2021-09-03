@@ -3,6 +3,7 @@ package tasklist;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import exception.DuplicateTaskException;
 import exception.ErrorAccessingFileException;
 import exception.NonExistentTaskNumberException;
 import storage.StorageFile;
@@ -71,7 +72,7 @@ public class TaskList {
      * Marks task in the list as done, finding the task by its task number.
      *
      * @param taskNumber Task number of the task in the list, starting from 1.
-     * @return Task.
+     * @return `Task`.
      * @throws NonExistentTaskNumberException If the task number does not exist in the list.
      * @throws ErrorAccessingFileException If there is an error accessing the storage file.
      */
@@ -121,6 +122,18 @@ public class TaskList {
     }
 
     /**
+     * Validates that the task is not a duplicate of an existing task in the list.
+     *
+     * @param task Task to be checked.
+     * @throws DuplicateTaskException If the task is a duplicate of a task in the task.
+     */
+    public void validateTaskNotDuplicate(Task task) throws DuplicateTaskException {
+        if (this.contains(task)) {
+            throw new DuplicateTaskException(task);
+        }
+    }
+
+    /**
      * Formats tasks in a numbered list form, starting from 1.
      *
      * @return Numbered list.
@@ -144,6 +157,16 @@ public class TaskList {
 
     private boolean contains(int taskNumber) {
         return taskNumber > 0 && taskNumber <= this.activeList.size();
+    }
+
+    private boolean contains(Task task) {
+        for (Task existingTask : this.list) {
+            if (task.isDuplicateOf(existingTask)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void validateTaskNumberExists(int taskNumber) throws NonExistentTaskNumberException {
