@@ -25,14 +25,6 @@ public class Ui {
     }
 
     /**
-     * Reads the next command inputted by the user
-     *
-     */
-    public String readCommand() {
-        return commandScanner.nextLine();
-    }
-
-    /**
      * Prints out message according to desired format to user
      *
      * @param message message to bve printed

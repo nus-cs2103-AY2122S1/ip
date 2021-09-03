@@ -66,6 +66,7 @@ public class Parser {
         } else if (strArr[1].trim().isEmpty()) {
             throw new MissingArgumentException("description", event);
         } else {
+            assert strArr[1].trim().length() > 0 : "Description is not missing or just empty string";
             return strArr[1];
         }
 
@@ -82,6 +83,7 @@ public class Parser {
     private static String checkSearchTerm(String[] strArr, String event) throws MissingArgumentException,
             TooManyArgumentsException {
 
+        assert event.equals("filter") : "Error occurred in searching for term";
         if (strArr.length < 2) {
             throw new MissingArgumentException("search term", event);
         } else if (strArr.length > 2) {
@@ -89,6 +91,7 @@ public class Parser {
         } else if (strArr[1].trim().isEmpty()) {
             throw new MissingArgumentException("search term", event);
         } else {
+            assert strArr[1].trim().length() == 1 : "Search term is not missing, just empty string and only 1 word";
             return strArr[1];
         }
 
@@ -127,7 +130,6 @@ public class Parser {
      */
     public static Command parseCommandString(String command, Tasklist currentTaskList, Store storage)
         throws DukeException {
-
         Command currentCommand = new InvalidCommand();
         String[] checkCommand = command.split(" ", 2);
         switch(checkCommand[0]) {

@@ -11,7 +11,7 @@ import duke.util.Ui;
  * CS2103T Individual Project AY 21/22 Sem 1
  * Project Duke
  *
- * Current Progress: Level-10. Add a GUI to Duke
+ * Current Progress: A-Assertions. Use Assertions
  *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted text.
