@@ -111,14 +111,7 @@ public class TaskManager {
      * Displays the user's tasks.
      */
     public String list() {
-        String[] allTasks = new String[taskList.size()];
-        for (int i = 0; i < allTasks.length; i++) {
-            Task task = taskList.get(i);
-            // Display numbers are 1-indexed
-            int taskNumber = i + 1;
-            allTasks[i] = prependNumberToTask(taskNumber, task);
-        }
-        return String.join("\n", allTasks);
+        return formatTasksAsList(taskList);
     }
 
     /**
@@ -129,13 +122,7 @@ public class TaskManager {
      */
     public String list(DukeDateTime dateTime) {
         List<Task> filteredTasks = filterByDate(dateTime);
-        String[] filteredTasksStrings = new String[filteredTasks.size()];
-        for (int i = 0; i < filteredTasksStrings.length; i++) {
-            Task task = filteredTasks.get(i);
-            int taskNumber = i + 1;
-            filteredTasksStrings[i] = prependNumberToTask(taskNumber, task);
-        }
-        return String.join("\n", filteredTasksStrings);
+        return formatTasksAsList(filteredTasks);
     }
 
     /**
@@ -146,13 +133,7 @@ public class TaskManager {
      */
     public String list(String... searchStrings) {
         List<Task> filteredTasks = filterByName(searchStrings);
-        String[] filteredTasksStrings = new String[filteredTasks.size()];
-        for (int i = 0; i < filteredTasksStrings.length; i++) {
-            Task task = filteredTasks.get(i);
-            int taskNumber = i + 1;
-            filteredTasksStrings[i] = prependNumberToTask(taskNumber, task);
-        }
-        return String.join("\n", filteredTasksStrings);
+        return formatTasksAsList(filteredTasks);
     }
 
     /**
@@ -194,8 +175,18 @@ public class TaskManager {
         return tasks;
     }
 
-    private String prependNumberToTask(int taskNumber, Task task) {
+    private static String prependNumberToTask(int taskNumber, Task task) {
         return String.format("%d. %s", taskNumber, task.toString());
+    }
+
+    private static String formatTasksAsList(List<Task> tasks) {
+        String[] tasksStrings = new String[tasks.size()];
+        for (int i = 0; i < tasksStrings.length; i++) {
+            Task task = tasks.get(i);
+            int taskNumber = i + 1;
+            tasksStrings[i] = prependNumberToTask(taskNumber, task);
+        }
+        return String.join("\n", tasksStrings);
     }
 
     /**
