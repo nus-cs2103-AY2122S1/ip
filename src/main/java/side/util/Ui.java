@@ -61,6 +61,8 @@ public class Ui {
      * @throws WrongFormatException Catches incorrectly formatted input and returns error.
      */
     public String addDeadline(String input, TaskList taskList) throws WrongFormatException {
+        assert input.length() > 0;
+
         if (input.contains("/by") && (this.parser.findDeadlineDatetime(input) != null)) {
             String datetime = this.parser.findDeadlineDatetime(input);
             String description = this.parser.findDescription(input);
@@ -81,6 +83,8 @@ public class Ui {
      * @throws WrongFormatException Catches incorrectly formatted input and returns error.
      */
     public String addEvent(String input, TaskList taskList) throws WrongFormatException {
+        assert input.length() > 0;
+
         if (input.contains("/at") && (this.parser.findEventDatetime(input) != null)) {
             String[] datetimeArr = this.parser.findEventDatetime(input);
             String description = this.parser.findDescription(input);
@@ -108,6 +112,8 @@ public class Ui {
      * @throws WrongFormatException Catches incorrectly formatted input and returns error.
      */
     public String addTask(String input, TaskList taskList) throws WrongFormatException {
+        assert input.length() > 0;
+
         if (input.replace("todo", "").replaceAll(" ", "").length() > 0) {
             taskList.addTask(input);
             return Ui.echo(new Task(input).toString(), taskList);
@@ -128,6 +134,8 @@ public class Ui {
      */
     public String handleDone(String input, TaskList taskList) throws TaskIndexException, NoIndexException,
             TooManyIndexesException {
+        assert input.length() > 0;
+
         if (input.split("\\s+").length == 2) {
             int taskNum = this.parser.tryIntParsing(input.split("\\s+")[1]);
             if (taskNum > taskList.length() || taskNum <= 0) {
@@ -154,6 +162,8 @@ public class Ui {
      */
     public String handleDelete(String input, TaskList taskList) throws DeleteIndexException, NoIndexException,
             TooManyIndexesException {
+        assert input.length() > 0;
+
         if (input.split("\\s+").length == 2) {
             int taskNum = this.parser.tryIntParsing(input.split("\\s+")[1]);
             if (taskNum > taskList.length() || taskNum <= 0) {
@@ -187,6 +197,8 @@ public class Ui {
      * @return String representing response.
      */
     public String handleFind(String input, TaskList taskList) {
+        assert input.length() > 0;
+
         if (input.split("\\s+").length == 1) {
             throw new NoIndexException();
         } else {
