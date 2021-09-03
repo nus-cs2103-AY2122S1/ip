@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Ui class deals with loading tasks from the file and saving tasks in the file
+ * Ui class deals with interactions with the user.
  */
 public class Ui {
     private static final String LOGO = " ____        _        \n"
@@ -62,6 +62,15 @@ public class Ui {
      * @param message Error message to be printed.
      */
     public void showError(String message) {
+        System.out.println(message);
+    }
+
+    /**
+     * Prints the message specified.
+     *
+     * @param message Message to be printed.
+     */
+    public void showMessage(String message) {
         System.out.println(message);
     }
 }

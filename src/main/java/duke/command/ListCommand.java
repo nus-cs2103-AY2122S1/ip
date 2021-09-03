@@ -2,7 +2,6 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
-import duke.task.Task;
 import duke.task.TaskList;
 
 /**
@@ -10,11 +9,15 @@ import duke.task.TaskList;
  */
 public class ListCommand extends Command {
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        int index = 1;
-        for (Task task : tasks) {
-            System.out.println(index + ". " + task);
-            index++;
+    public String execute(TaskList tasks, Ui ui, Storage storage, boolean shouldPrintMessage) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append(i + 1 + ". " + tasks.get(i) + "\n");
         }
+        String message = sb.toString();
+        if (shouldPrintMessage) {
+            ui.showMessage(message);
+        }
+        return message;
     }
 }

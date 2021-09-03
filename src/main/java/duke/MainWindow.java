@@ -39,6 +39,7 @@ public class MainWindow extends AnchorPane {
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
+    // TODO: make UI class handle user interaction
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();

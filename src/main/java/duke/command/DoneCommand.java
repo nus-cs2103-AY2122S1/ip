@@ -25,7 +25,8 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeIndexOutOfRangeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, boolean shouldPrintMessage)
+        throws DukeIndexOutOfRangeException {
         if (index < 1 || index > tasks.toArray().length) {
             throw new DukeIndexOutOfRangeException(
                 tasks.toArray().length > 0 ? "OOPS!!! I'm sorry, index is out of range! "
@@ -34,7 +35,12 @@ public class DoneCommand extends Command {
         } else {
             Task task = tasks.get(index - 1);
             tasks.markAsDone(task, storage);
-            System.out.println("Nice! I've marked this task as done:\n  " + task);
+
+            String message = "Nice! I've marked this task as done:\n  " + task;
+            if (shouldPrintMessage) {
+                ui.showMessage(message);
+            }
+            return message;
         }
     }
 }

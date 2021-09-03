@@ -23,7 +23,7 @@ public class EventCommand extends AddCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, boolean shouldPrintMessage) throws DukeException {
         String[] line = description.split(" /at ");
         if (line.length != 2) {
             throw new DukeIllegalFormatException(
@@ -33,7 +33,12 @@ public class EventCommand extends AddCommand {
         }
         Task task = new Event(line[0], line[1]);
         tasks.add(task, storage);
-        System.out.println("Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.toArray().length
-            + " task(s) in the list.");
+
+        String message = "Got it. I've added this task:\n  " + task + "\nNow you have " + tasks.toArray().length
+            + " task(s) in the list.";
+        if (shouldPrintMessage) {
+            ui.showMessage(message);
+        }
+        return message;
     }
 }

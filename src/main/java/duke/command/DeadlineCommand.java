@@ -22,7 +22,7 @@ public class DeadlineCommand extends AddCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, boolean shouldPrintMessage) throws DukeException {
         String[] line = description.split(" /by ");
         if (line.length != 2) {
             throw new DukeIllegalFormatException(
@@ -32,8 +32,13 @@ public class DeadlineCommand extends AddCommand {
         }
         Task task = new Deadline(line[0], line[1]);
         tasks.add(task, storage);
-        System.out.println("Got it. I've added this task:\n  "
+
+        String message = "Got it. I've added this task:\n  "
             + task
-            + "\nNow you have " + tasks.toArray().length + " task(s) in the list.");
+            + "\nNow you have " + tasks.toArray().length + " task(s) in the list.";
+        if (shouldPrintMessage) {
+            ui.showMessage(message);
+        }
+        return message;
     }
 }
