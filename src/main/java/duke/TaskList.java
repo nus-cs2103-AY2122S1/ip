@@ -66,6 +66,10 @@ public class TaskList {
         String task;
         Type type;
         LocalDateTime localDateTime;
+
+        // Use Java Assertions to check for unacceptable commands
+        Boolean valid = true;
+
         if (input.equals("bye")) {
             System.out.println(byeString());
             return byeString();
@@ -90,6 +94,10 @@ public class TaskList {
             localDateTime = null;
             return Command.addTask(task, type, localDateTime, tasks);
         } else if (input.startsWith("deadline ")) {
+            String testInput = input.replaceAll("\\s+", "");
+            if (testInput.equals("deadline")) {
+                throw new EmptyDeadlineException();
+            }
             task = input.substring(9);
             type = Type.DEADLINE;
             String[] tokens = task.split(" /by ");
@@ -109,8 +117,12 @@ public class TaskList {
             List<Task> filteredTasks = Command.findTasks(input.substring(5), tasks);
             return filteredTasks.toString();
         } else {
-            throw new CommandNotFoundException();
+            valid = false;
         }
+
+        assert valid : "COMMAND NOT FOUND";
+        System.out.println(valid);
+
         try {
             Storage.writeToFile(tasks);
         } catch (IOException err) {

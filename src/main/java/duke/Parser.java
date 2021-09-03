@@ -19,7 +19,6 @@ public class Parser {
             String taskString = tasks.get(i);
             String[] tokens = taskString.split(",");
             if (tokens.length < 3) {
-                System.out.println("damn");
                 throw new FileParseErrorException();
             }
 
