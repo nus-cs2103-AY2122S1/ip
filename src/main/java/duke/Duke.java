@@ -168,17 +168,24 @@ public class Duke extends javafx.application.Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        ImageView userImage = new ImageView(user);
-        userImage.setFitHeight(100);
-        userImage.setFitWidth(100);
-        ImageView dukeImage = new ImageView(duke);
-        dukeImage.setFitHeight(100);
-        dukeImage.setFitWidth(100);
+//        Label userText = new Label(userInput.getText());
+//        Label dukeText = new Label(getResponse(userInput.getText()));
+//        ImageView userImage = new ImageView(user);
+//        userImage.setFitHeight(100);
+//        userImage.setFitWidth(100);
+//        ImageView dukeImage = new ImageView(duke);
+//        dukeImage.setFitHeight(100);
+//        dukeImage.setFitWidth(100);
+//        dialogContainer.getChildren().addAll(
+//                DialogBox.getUserDialog(userText, userImage),
+//                DialogBox.getDukeDialog(dukeText, dukeImage)
+//        );
+//        userInput.clear();
+        String userText = userInput.getText();
+        String dukeText = getResponse(userInput.getText());
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, userImage),
-                DialogBox.getDukeDialog(dukeText, dukeImage)
+                DialogBox.getUserDialog(userText, user),
+                DialogBox.getDukeDialog(dukeText, duke)
         );
         userInput.clear();
     }
@@ -187,7 +194,7 @@ public class Duke extends javafx.application.Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    public String getResponse(String input) {
         return "Duke heard: " + input;
     }
 
