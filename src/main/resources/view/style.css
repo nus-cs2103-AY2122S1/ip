@@ -1,0 +1,15 @@
+.send-button {
+    -fx-background-color: #61c1ed;
+}
+
+.user-input {
+    -fx-background-color: #fcfafa;
+}
+
+.dialog-container {
+    -fx-background-image: url("/images/faker-background.png");
+    -fx-background-size: 500 700;
+    -fx-background-repeat: stretch;
+    -fx-background-position: center top;
+}
+
