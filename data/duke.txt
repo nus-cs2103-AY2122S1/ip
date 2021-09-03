@@ -1,0 +1,4 @@
+D,1,pakkalam,2019-02-02 00:00
+E,0,something else,2022-02-01 08:00
+E,0,brudda,2022-02-01 07:00
+T,0,lolol

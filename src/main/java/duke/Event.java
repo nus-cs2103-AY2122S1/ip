@@ -13,6 +13,7 @@ public class Event extends Task {
      */
     public Event(String task, Type type, Boolean done, LocalDateTime datetime) {
         super(task, type, done, datetime);
+        this.setDatetime(datetime);
     }
 
     /**

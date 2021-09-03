@@ -13,6 +13,7 @@ public class Deadline extends Task {
      */
     public Deadline(String task, Type type, Boolean done, LocalDateTime datetime) {
         super(task, type, done, datetime);
+        this.setDatetime(datetime);
     }
 
     /**

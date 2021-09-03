@@ -12,6 +12,7 @@ public class TaskList {
 
     /** Initialising an empty array into which tasks can be added/manipulated/deleted */
     private List<Task> tasks = new ArrayList<>();
+    private Boolean firstRun;
 
     /**
      * This method provides a string that is the visual representation of the tasks seen by the user.
@@ -66,23 +67,23 @@ public class TaskList {
         String task;
         Type type;
         LocalDateTime localDateTime;
+        String response = "";
 
         // Use Java Assertions to check for unacceptable commands
         Boolean valid = true;
-
         if (input.equals("bye")) {
             System.out.println(byeString());
-            return byeString();
+            response = byeString();
         } else if (input.equals("list")) {
             System.out.println(taskListString(tasks));
-            return taskListString(tasks);
+            response = taskListString(tasks);
         } else if (input.equals("hello")) {
             System.out.println("Hello! I'm duke.Duke\n"
                     + "What can I do for you?");
-            return "Hello! I'm duke.Duke\n"
+            response = "Hello! I'm duke.Duke\n"
                     + "What can I do for you?";
         } else if (input.startsWith("done ")) {
-            return Command.doneTask(Integer.parseInt(input.substring(5)), tasks);
+            response = Command.doneTask(Integer.parseInt(input.substring(5)), tasks);
         } else if (input.startsWith("todo ")) {
             // Remove all whitespaces to test if it is empty
             String testInput = input.replaceAll("\\s+", "");
@@ -92,7 +93,7 @@ public class TaskList {
             task = input.substring(5);
             type = Type.TODO;
             localDateTime = null;
-            return Command.addTask(task, type, localDateTime, tasks);
+            response = Command.addTask(task, type, localDateTime, tasks);
         } else if (input.startsWith("deadline ")) {
             String testInput = input.replaceAll("\\s+", "");
             if (testInput.equals("deadline")) {
@@ -103,32 +104,34 @@ public class TaskList {
             String[] tokens = task.split(" /by ");
             localDateTime = Parser.parseDate(tokens[1]);
             task = tokens[0];
-            return Command.addTask(task, type, localDateTime, tasks);
+            response = Command.addTask(task, type, localDateTime, tasks);
         } else if (input.startsWith("event ")) {
             task = input.substring(6);
             type = Type.EVENT;
             String[] tokens = task.split(" /at ");
             localDateTime = Parser.parseDate(tokens[1]);
             task = tokens[0];
-            return Command.addTask(task, type, localDateTime, tasks);
+            response = Command.addTask(task, type, localDateTime, tasks);
         } else if (input.startsWith("delete ")) {
-            Command.deleteTask(Integer.parseInt(input.substring(7)), tasks);
+            response = Command.deleteTask(Integer.parseInt(input.substring(7)), tasks);
         } else if (input.startsWith("find ")) {
             List<Task> filteredTasks = Command.findTasks(input.substring(5), tasks);
-            return filteredTasks.toString();
+            response = taskListString(filteredTasks);
+        } else if (input.startsWith("sort events and deadlines")
+                || input.startsWith("sort deadlines and events")) {
+            response = taskListString(Command.sortTasks(tasks));
         } else {
             valid = false;
         }
 
         assert valid : "COMMAND NOT FOUND";
-        System.out.println(valid);
 
         try {
             Storage.writeToFile(tasks);
         } catch (IOException err) {
             System.out.println(err);
         }
-        return null;
+        return response;
     }
 
     /**
@@ -164,12 +167,18 @@ public class TaskList {
     * Method to run chatbot with javafx UI.
      */
     public String runWithGraphicUI(String input) {
-        String response = "";
+        List<String> tasks = Storage.readFile();
+        try {
+            this.tasks = Parser.loadTasks(tasks);
+        } catch (FileParseErrorException err) {
+            System.out.println(err);
+        }
 
+        String response = "";
         try {
             response = interpretInput(input);
         } catch (Exception err) {
-            System.out.println(err);
+            System.out.println(err.getMessage() + "THIS IS THE ERROR");
         }
 
         return response;
