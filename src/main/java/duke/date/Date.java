@@ -9,7 +9,7 @@ import duke.exception.InvalidDateException;
 /** A Date wrapper class. */
 public class Date {
     /** The LocalDate. */
-    private LocalDate date;
+    private final LocalDate date;
 
     /**
      * The Date constructor.
@@ -44,6 +44,9 @@ public class Date {
         return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
+    /**
+     * @return A string representation of the Date object.
+     */
     @Override
     public String toString() {
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

@@ -33,12 +33,12 @@ public class DialogBox extends HBox {
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
+            dialog.setText(text);
+            dialog.setMinHeight(Region.USE_PREF_SIZE);
+            displayPicture.setImage(img);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dialog.setText(text);
-        dialog.setMinHeight(Region.USE_PREF_SIZE);
-        displayPicture.setImage(img);
     }
 
     /** Flips the dialog box such that the ImageView is on the left and text on the right.*/

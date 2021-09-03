@@ -14,7 +14,7 @@ public class ExitCommand extends Command {
      * @throws BadInputFormatException If the user's input contains more than a singular "bye" keyword.
      */
     public static ExitCommand of(String content) throws BadInputFormatException {
-        if (content.trim().length() > 1) {
+        if (content.trim().length() > 1) { // Guard clause
             throw new BadInputFormatException();
         }
         return new ExitCommand();

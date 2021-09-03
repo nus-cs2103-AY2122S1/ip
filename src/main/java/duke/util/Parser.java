@@ -22,6 +22,7 @@ public class Parser {
      * @return Commands enum type.
      */
     private static Commands commandParser(String fullCommand) {
+        // Trims and extracts the first word of the full command by splitting using the space character.
         return Commands.valueOfLabel(fullCommand.trim().split(" ")[0]);
     }
 
@@ -34,10 +35,12 @@ public class Parser {
      */
     private static String contentParser(String fullCommand) {
         String[] token = fullCommand.trim().split(" ", 2);
-        if (token.length < 2) {
-            return "";
+        String content = "";
+        if (token.length < 2) { // Guard clause
+            return content;
         }
-        return token[1];
+        content = token[1];
+        return content;
     }
 
     /**
@@ -46,7 +49,7 @@ public class Parser {
      * @param fullCommand The full command input from the user.
      * @throws EmptyCommandException If the command is empty or consists of only whitespace.
      */
-    private static void blankCommandChecker(String fullCommand) throws EmptyCommandException {
+    private static void checkBlankCommand(String fullCommand) throws EmptyCommandException {
         if (fullCommand.trim().length() < 1) {
             throw new EmptyCommandException();
         }
@@ -60,7 +63,7 @@ public class Parser {
      * @throws DukeException If an exception is found.
      */
     public static Command parse(String fullCommand) throws DukeException {
-        blankCommandChecker(fullCommand);
+        checkBlankCommand(fullCommand); // Guard clause
         Command command;
         switch (commandParser(fullCommand)) {
         case EXIT:

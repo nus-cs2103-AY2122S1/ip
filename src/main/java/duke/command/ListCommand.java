@@ -49,7 +49,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
-        if (tasks.size() < 1) {
+        if (tasks.getSize() < 1) {
             return formatOutput("No tasks yet!");
         }
         if (date == null) {

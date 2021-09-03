@@ -46,7 +46,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws NoSuchTaskException {
         return formatOutput("Give your tasks a good ol' rub, I've removed this task:",
                 tasks.deleteTask(index).toString(),
-                String.format("Now you have %d %s in the list.", tasks.size(), tasks.size() == 1 ? "task" : "tasks"));
+                String.format("Now you have %d %s in the list.", tasks.getSize(), tasks.getSize() == 1 ? "task" : "tasks"));
     }
 
     /**
