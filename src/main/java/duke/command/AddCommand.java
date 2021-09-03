@@ -20,6 +20,8 @@ public class AddCommand extends Command {
      * @param taskType Type of Task to be added (ToDo, Deadline, Event).
      */
     public AddCommand(TaskList tasks, String task, String taskType) {
+        assert taskType.matches("ToDo|Deadline|Event") : "Invalid taskType";
+
         this.tasks = tasks;
         this.task = task;
         this.taskType = taskType;

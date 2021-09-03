@@ -10,8 +10,17 @@ import duke.exception.InvalidCommandException;
 public class InvalidCommand extends Command {
     private String input;
 
+    /**
+     * Constructor for InvalidCommand.
+     *
+     * @param input String of the command inputted by the user.
+     */
     public InvalidCommand(String input) {
         this.input = input;
+
+        String command = input.split(" ")[0];
+        assert !command.matches("bye|list|check|find|done|todo|deadline|event|delete")
+            : "Command is wrongly categorised as invalid";
     }
 
     /**

@@ -73,8 +73,7 @@ public abstract class Task {
             // returns additional date element
             return String.format("%s | %d | %s | %s", args[0], this.isDone ? 1 : 0, this.description, args[1]);
         default:
-            // should NOT reach default as this function is only called in corresponding children of Tasks
-            return null;
+            throw new AssertionError("Too many arguments for formatting String of Task");
         }
 
     }

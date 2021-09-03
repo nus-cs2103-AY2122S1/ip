@@ -64,9 +64,8 @@ public class TaskList {
                     tasks.add(new Event(completionStatus, taskDetails[2], taskDetails[3]));
                     break;
                 default:
-                    // Unrecognised string -> do something next time?
-                    // Ignore for now.
-                    break;
+                    // Assertion for control-flow invariant
+                    throw new AssertionError(String.format("Letter representing task is invalid: %s", taskDetails[0]));
                 }
             }
         }
@@ -126,9 +125,8 @@ public class TaskList {
             tasks.add(new Event(eventDetails[0], eventDetails[1]));
             break;
         default:
-            // will NOT execute as Duke calls this function to add a task and it only calls them based on
-            // the same switch cases above.
-            break;
+            // Assertion for control-flow invariant
+            throw new AssertionError(String.format("Type of task is invalid: %s", typeOfTask));
         }
 
         storage.writeToFile(convertListToString());
@@ -176,9 +174,8 @@ public class TaskList {
             }
             break;
         default:
-            // will NOT execute as Duke calls this function to list the task list and it only calls them based on
-            // the same switch cases above.
-            break;
+            // Assertion for control-flow invariant
+            throw new AssertionError(String.format("Filter type is invalid: %s", filterType));
         }
 
         return tasksString.isEmpty()
@@ -203,6 +200,8 @@ public class TaskList {
 
         } else {
             message = COMPLETE_MULTIPLE_MESSAGE;
+            // Assertion for internal invariant
+            assert indexes.length > 0 : "No indexes have been specified";
 
             for (int index : indexes) {
                 if (index <= 0 || index > tasks.size()) {

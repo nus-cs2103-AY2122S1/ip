@@ -18,6 +18,8 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
+
+        assert description.trim().isEmpty() : "ToDo was created with empty description";
     }
 
     /**
@@ -29,6 +31,7 @@ public class ToDo extends Task {
      */
     public ToDo(CompletionStatus completionStatus, String description) {
         super(description);
+        assert description.trim().isEmpty() : "ToDo was created with empty description";
 
         if (completionStatus.equals(CompletionStatus.COMPLETED)) {
             super.markTaskAsDone();
