@@ -1,0 +1,3 @@
+../src/main/java/duke/App.java
+../src/main/java/duke/Augury.java
+../src/main/java/duke/Launcher.java
