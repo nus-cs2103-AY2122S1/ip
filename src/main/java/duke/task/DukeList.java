@@ -210,7 +210,7 @@ public class DukeList {
         if (count == 0) {
             return "Sorry no tasks found that match your input.";
         } else {
-            return str + "Are these the tasks you're looking for?";
+            return str + "\nAre these the tasks you're looking for?";
         }
     }
 
