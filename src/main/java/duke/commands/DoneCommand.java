@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.data.TaskList;
 import duke.data.exception.InvalidIndexException;
+import duke.data.exception.InvalidIndexFormatException;
 import duke.data.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -17,8 +18,12 @@ public class DoneCommand extends Command {
      * Constructor for DoneCommand
      * @param rest the user input after the command
      */
-    public DoneCommand(String rest) {
-        this.index = Integer.parseInt(rest.strip());
+    public DoneCommand(String rest) throws InvalidIndexFormatException {
+        try {
+            this.index = Integer.parseInt(rest.strip());
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexFormatException();
+        }
     }
 
     @Override

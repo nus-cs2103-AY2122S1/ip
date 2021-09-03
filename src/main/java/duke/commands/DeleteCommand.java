@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.data.TaskList;
 import duke.data.exception.InvalidIndexException;
+import duke.data.exception.InvalidIndexFormatException;
 import duke.data.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -17,8 +18,12 @@ public class DeleteCommand extends Command {
      * Constructor for DeleteCommand
      * @param rest the user input after the command
      */
-    public DeleteCommand(String rest) {
-        this.index = Integer.parseInt(rest.strip());
+    public DeleteCommand(String rest) throws InvalidIndexFormatException{
+        try {
+            this.index = Integer.parseInt(rest.strip());
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexFormatException();
+        }
     }
 
     @Override
