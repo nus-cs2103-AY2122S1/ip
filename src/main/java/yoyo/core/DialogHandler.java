@@ -56,7 +56,7 @@ public class DialogHandler {
     /**
      * Prints a message indicating selected task has been marked as done.
      *
-     * @param tasks     TaskList of the program.
+     * @param tasks TaskList of the program.
      * @param taskIndex Index of the Task to be marked as done.
      */
     public String printMarkTaskMessage(TaskList tasks, int taskIndex) {
@@ -81,7 +81,7 @@ public class DialogHandler {
     }
 
     /**
-     * prints success message for adding task.
+     * Prints success message for adding task.
      *
      * @param newTask The task that has been created.
      * @param tasks   Task list.

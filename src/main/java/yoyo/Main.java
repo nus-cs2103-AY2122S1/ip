@@ -20,7 +20,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         Scene scene = new Scene(new MainWindow(yoyo));
+        scene.getStylesheets().add(getClass().getResource("/view/Application.css").toExternalForm());
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.setTitle("Yoyo");
         stage.show();
     }

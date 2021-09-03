@@ -77,10 +77,16 @@ public class Parser {
         String[] dateTimeArr = timeString.split(" ");
         Command.checkCompleteCommand(dateTimeArr);
         String[] dateArr = dateTimeArr[0].split(String.valueOf(separator));
+
+        /*
+        dateArr should have exactly 3 values for year, month and day
+        dateTimeArr[1] contains 'hhmm' and should not be less than 3 characters
+         */
         if (dateArr.length != 3 || dateTimeArr[1].length() < 3) {
             throw new YoyoException.YoyoInvalidFormatException("Invalid datetime format, "
                     + "use 'yyyy/MM/dd hhmm'");
         }
+
         int year = parseInt(dateArr[0]);
         int month = parseInt(dateArr[1]);
         int day = parseInt(dateArr[2]);

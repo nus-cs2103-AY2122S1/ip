@@ -7,28 +7,34 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0"
-         type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <VBox prefHeight="107.0" prefWidth="258.0">
             <children>
-                <Label fx:id="dialog" text="Label" wrapText="true">
+                <Label fx:id="dialog" minHeight="-Infinity" text="Label" wrapText="true">
                     <font>
-                        <Font size="14.0"/>
+                        <Font size="14.0" />
                     </font>
                     <opaqueInsets>
-                        <Insets/>
+                        <Insets />
                     </opaqueInsets>
                 </Label>
             </children>
+         <HBox.margin>
+            <Insets left="10.0" right="10.0" />
+         </HBox.margin>
         </VBox>
-        <ImageView fx:id="displayPicture" fitHeight="107.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="displayPicture" fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true">
             <effect>
-                <DropShadow/>
+                <DropShadow />
             </effect>
+         <HBox.margin>
+            <Insets left="5.0" right="10.0" />
+         </HBox.margin>
         </ImageView>
     </children>
     <padding>
-        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
+        <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />
     </padding>
 </fx:root>

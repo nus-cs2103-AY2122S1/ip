@@ -25,6 +25,12 @@ public class Yoyo {
         }
     }
 
+    /**
+     * Reads the user input, executes corresponding command and return message.
+     *
+     * @param input Input from user.
+     * @return Message to displayed.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
