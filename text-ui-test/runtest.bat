@@ -6,8 +6,15 @@ if not exist ..\bin mkdir ..\bin
 REM delete output from previous run
 if exist ACTUAL.TXT del ACTUAL.TXT
 
+REM exclude the files for GUI
+dir /s /B ..\src\main\*.java^
+ | findstr /v "DukeApp.java"^
+ | findstr /v "Main.java"^
+ | findstr /v "controller"^
+ > sources.txt
+
 REM compile the code into the bin folder
-javac  -cp ..\src\main\java -Xlint:none -d ..\bin ..\src\main\java\duke\*.java
+javac  -cp ..\src\main\java -Xlint:none -d ..\bin @sources.txt
 IF ERRORLEVEL 1 (
     echo ********** BUILD FAILURE **********
     exit /b 1
