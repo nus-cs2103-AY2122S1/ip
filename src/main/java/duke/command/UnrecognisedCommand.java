@@ -9,6 +9,7 @@ package duke.command;
 public class UnrecognisedCommand extends Command {
     @Override
     public String getResponse(String input) {
+        assert !input.matches("todo|event|deadline|list|exit|find|filter|done|delete");
         return "Hmm.. I didn't catch that. Perhaps you made a typo in your command?";
     }
 }

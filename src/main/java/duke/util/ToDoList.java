@@ -42,6 +42,7 @@ public class ToDoList {
                             + "  %sNow you have %s tasks in the list.",
                     tasks[0] + Ui.LINE_SEPARATOR, list.size());
         } else {
+            assert tasks.length >= 2 : "There should be at least 2 tasks entered by the user.";
             StringBuilder sb = new StringBuilder("Got it. I've added these tasks:\n");
             for (Task t : tasks) {
                 list.add(t);

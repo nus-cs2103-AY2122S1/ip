@@ -37,7 +37,7 @@ public class FilterCommand extends Command {
 
             int count = 1;
             for (Task t : extractedTask) {
-                output = output.concat(String.format("[%d]. %s", count++, t + Ui.LINE_SEPARATOR + "\t\t"));
+                output = output.concat(String.format("  [%d]. %s", count++, t + Ui.LINE_SEPARATOR));
             }
 
             return output;
