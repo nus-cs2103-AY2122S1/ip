@@ -2,9 +2,6 @@ package task;
 
 /**
  * The Todo class is a child class of Task.
- * @author  Hoon Darren
- * @version 1.0
- * @since   2021-08-21
  */
 public class Todo extends Task {
 

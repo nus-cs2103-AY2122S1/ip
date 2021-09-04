@@ -161,8 +161,6 @@ public class Ui {
      * @param taskList the list containing Task objects.
      */
     public void displayListTasks(List<Task> taskList) {
-
-        //shown when there are no tasks in the list
         if (taskList.isEmpty()) {
             this.listEmptyMessage();
             return;
@@ -186,8 +184,6 @@ public class Ui {
      * @return response showing all the tasks in the list.
      */
     public String displayListTasksGui(List<Task> taskList) {
-
-        //shown when there are no tasks in the list
         if (taskList.isEmpty()) {
             return this.listEmptyMessageGui();
         }
@@ -195,8 +191,6 @@ public class Ui {
         String message = "";
 
         for (int i = 0; i < taskList.size(); i++) {
-
-            //displays the current task's status
             String inputMessage = String.format("%d. %s\n", i + 1, taskList.get(i).toString());
             message += inputMessage;
         }
