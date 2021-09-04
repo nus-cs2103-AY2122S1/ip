@@ -2,11 +2,6 @@ package duke;
 
 import java.util.ArrayList;
 
-import duke.Tasks.BaseTask;
-import duke.Tasks.DeadlineTask;
-import duke.Tasks.EventTask;
-import duke.Tasks.ToDosTask;
-
 /**
  * This class encapsulates the list element that Duke uses to store tasks.
  */

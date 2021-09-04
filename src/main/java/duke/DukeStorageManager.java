@@ -23,11 +23,6 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-import duke.Tasks.BaseTask;
-import duke.Tasks.DeadlineTask;
-import duke.Tasks.EventTask;
-import duke.Tasks.ToDosTask;
-
 /**
  * This class encapsulates the local storage functions of Duke.
  */

@@ -1,4 +1,4 @@
-package duke.Tasks;
+package duke;
 
 /**
  *  This class encapsulates a Task element of ToDo type in Duke's TDList, and features

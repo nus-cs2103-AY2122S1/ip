@@ -5,8 +5,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
-import duke.Tasks.BaseTask;
-
 /**
  * This class contains the main Duke class that runs the chat bot.
  */

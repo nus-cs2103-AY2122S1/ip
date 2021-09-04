@@ -1,8 +1,6 @@
 
 package duke;
 
-import duke.Tasks.BaseTask;
-
 /**
  * This class encapsulates the command parser for Duke which process the commands
  * inputted into Duke by users.
