@@ -42,6 +42,7 @@ public class MainWindow extends AnchorPane {
      * @param primaryStage The stage that hosts this window.
      */
     public void setMainWindow(Ui dukeUi, Stage primaryStage) {
+        assert dukeUi != null : "Unable to start Duke";
         this.dukeUi = dukeUi;
         this.primaryStage = primaryStage;
         this.displayStartMessage();
@@ -64,11 +65,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void handleUserInput() {
         String input = userInput.getText();
-        this.dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input),
-                DialogBox.getDukeDialog(getResponse(input))
-        );
-        userInput.clear();
+        if (!input.trim().equals("")) {
+            this.dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input),
+                    DialogBox.getDukeDialog(getResponse(input))
+            );
+            userInput.clear();
+        }
 
         // Checks to see if the user input given is to close the chat bot.
         if (this.dukeUi.isExit()) {

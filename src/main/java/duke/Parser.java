@@ -42,6 +42,7 @@ class Parser {
      * @return The correct command for the user's input.
      */
     protected Command parseUserInput(String input) {
+        assert input != null : "Unable to parse user input";
         if (input.equalsIgnoreCase(KEYWORD_BYE)) {
             // Ends the chat
             return new ExitCommand();
