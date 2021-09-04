@@ -42,9 +42,8 @@ public class Duke {
     /**
      * Opens and starts the chatbot.
      */
-    public String openDukeChatBot() {
+    public void openDukeChatBot() {
         this.isOpen = true;
-        return GUI.printOpeningMessage();
     }
 
     /**
@@ -97,6 +96,7 @@ public class Duke {
      * @throws IOException if there is an error in writing the file.
      */
     public void saveTasks() throws IOException {
+        System.out.println("Saving tasks");
         this.storage.saveTasks(this.listOfTasks);
     }
 
@@ -157,7 +157,6 @@ public class Duke {
      * @throws DukeException if user input violates given rules.
      */
     public String getResponse(String input) throws DukeException {
-        this.openDukeChatBot();
         File output = new File(this.FILE_PATH);
 
         if (!output.isFile()) {
@@ -181,6 +180,14 @@ public class Duke {
             return "PROBLEM";
         }
 
+    }
+
+    /**
+     * Returns the greeting message for initialising Duke.
+     * @return greeting message.
+     */
+    public static String getGreeting() {
+        return GUI.printOpeningMessage();
     }
 }
 

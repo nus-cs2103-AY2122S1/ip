@@ -39,6 +39,7 @@ public class GUI {
                 "\t 'deadline': add a deadline task in your task list\n" +
                 "\t 'event': add an event task in your task list\n" +
                 "\t 'delete': delete a task from your task list\n" +
+                "\t 'find': find a task based on the given keyword\n" +
                 "\t 'bye': exit chat\n" +
                 "What can I do for you?\n"
 

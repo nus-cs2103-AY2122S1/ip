@@ -87,6 +87,15 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    public static DialogBox getOpeningMessage(String s, Image iv) {
+        DialogBox db = new DialogBox(s, iv);
+        db.flip();
+        db.message.setBackground(new Background(new BackgroundFill(color(0.9, 0.9, 0.9),
+                new CornerRadii(15),
+                null)));
+        return db;
+    }
+
     /**
      * Transform error messages from Duke into a brighter colour to get attention
      * of user.

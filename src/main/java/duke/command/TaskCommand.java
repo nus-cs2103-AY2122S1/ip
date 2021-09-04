@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Duke;
 import duke.exception.DukeException;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.GUI;
 
@@ -25,7 +26,8 @@ public class TaskCommand extends Command {
 
     @Override
     public String execute(TaskList taskList) throws IOException, DukeException {
+        Task taskAdded = this.duke.addTaskToList(DESCRIPTION);
         this.duke.saveTasks();
-        return GUI.printAddedTaskMessage(this.duke.addTaskToList(DESCRIPTION), taskList.getTotal());
+        return GUI.printAddedTaskMessage(taskAdded, taskList.getTotal());
     }
 }

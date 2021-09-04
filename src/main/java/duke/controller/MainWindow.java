@@ -34,6 +34,10 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        // Display greeting upon initialisation
+        dialogContainer.getChildren().add(
+                DialogBox.getOpeningMessage(displayGreeting(), dukeImage));
     }
 
     /**
@@ -42,6 +46,7 @@ public class MainWindow extends AnchorPane {
      */
     public void setDuke(Duke d) {
         duke = d;
+        d.openDukeChatBot();
     }
 
     /**
@@ -88,6 +93,13 @@ public class MainWindow extends AnchorPane {
         } finally {
             return toReturn;
         }
+    }
 
+    /**
+     * Displays the greeting message when app is initialised.
+     * @return opening message.
+     */
+    private String displayGreeting() {
+        return Duke.getGreeting();
     }
 }
