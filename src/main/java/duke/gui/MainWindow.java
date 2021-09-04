@@ -46,7 +46,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.split(" ")[0].equals("bye")) {
+        String commandType = input.split(" ")[0].trim();
+        boolean isExit = commandType.equals("bye") || commandType.equals("bb");
+        if (isExit) {
             duke.saveTask();
             Platform.exit();
         } else {
