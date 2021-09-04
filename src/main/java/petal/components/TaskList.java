@@ -109,6 +109,7 @@ public class TaskList {
             }
         }
         if (task.isTimeable()) {
+            assert task instanceof Timeable;
             calendar.addToCalendar((Timeable) task);
         }
         return addTask(task);

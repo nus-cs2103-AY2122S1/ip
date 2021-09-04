@@ -77,7 +77,8 @@ public class Parser {
      */
     public static LocalDate parseDate(String date) {
         String[] dayMonthYear = date.split("/");
-        if (dayMonthYear[0].length() == 1) { //if user types 2/12/2019 -> 02/12/2019
+        if (dayMonthYear[0].length() == 1) {
+            //This is done if the user inputs the day as 1 digit, rather than 2
             dayMonthYear[0] = "0" + dayMonthYear[0];
         }
         return LocalDate.parse(dayMonthYear[2] + "-" + dayMonthYear[1] + "-" + dayMonthYear[0]);
