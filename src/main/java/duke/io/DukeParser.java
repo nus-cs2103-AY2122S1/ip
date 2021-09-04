@@ -12,13 +12,6 @@ import duke.type.DukeCommand;
  */
 public class DukeParser {
     /**
-     * Constructs a new instance of the DukeParser. No arguments are expected.
-     */
-    public DukeParser() {
-
-    }
-
-    /**
      * Provides a task based on data read from line.
      *
      * @param line line that data is read from.

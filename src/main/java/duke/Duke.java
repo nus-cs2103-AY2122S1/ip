@@ -58,9 +58,8 @@ public class Duke {
             return "The description of an event cannot be empty.";
         }
         String taskDescription = args.split(" /at ")[0];
-        String eventTime;
         try {
-            eventTime = args.split(" /at ")[1];
+            String eventTime = args.split(" /at ")[1];
             taskList.appendTask(new Event(taskDescription, eventTime));
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Incorrect description format. Description should follow this pattern: *description* /at *time*";
@@ -76,9 +75,8 @@ public class Duke {
             return "The description of a deadline cannot be empty.";
         }
         String taskDescription = args.split(" /by ")[0];
-        String finishDate;
         try {
-            finishDate = args.split(" /by ")[1];
+            String finishDate = args.split(" /by ")[1];
             taskList.appendTask(new Deadline(taskDescription, finishDate));
         } catch (ArrayIndexOutOfBoundsException e) {
             return "Incorrect description format. Description should follow this pattern: *description* /by *time*";
