@@ -18,6 +18,7 @@ public class ToDo extends Task {
      * @return The Task with the corresponding name.
      */
     public static Task of(String s) {
+        assert s != null : "String for Todo creation is null";
         return new ToDo(s);
     }
 

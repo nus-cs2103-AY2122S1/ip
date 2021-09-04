@@ -42,5 +42,6 @@ public class Messages {
     public static final String DEADLINE_NO_INPUT_ERROR_MESSAGE =
             "☹ OOPS!!! The deadline deadline must be filled in prefixed by /by";
 
+    public static final String NO_DATE_SELECTED = "Please select a date.";
 
 }

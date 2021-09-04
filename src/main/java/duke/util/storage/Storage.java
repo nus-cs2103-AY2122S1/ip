@@ -41,7 +41,6 @@ public class Storage {
         this.dateTaskTable = dateTaskTable;
     }
 
-
     /**
      * Command to write the input list of tasks onto the
      * hard disk.
@@ -50,7 +49,7 @@ public class Storage {
      * @throws IOException When the writing has failed.
      */
     public void write(ArrayList<? extends Task> inputs) throws IOException {
-
+        assert inputs != null : "Cannot write from null array to file";
         File dir = new File("./data");
         if (!dir.exists()) {
             dir.mkdirs();
@@ -87,8 +86,6 @@ public class Storage {
             writer.write(inputs.get(i).encode());
             writer.write("\n");
         }
-
-
     }
 
     /**
@@ -117,6 +114,5 @@ public class Storage {
         }
         sc.close();
         return inputs;
-
     }
 }

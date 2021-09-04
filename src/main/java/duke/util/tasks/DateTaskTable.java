@@ -18,6 +18,7 @@ public class DateTaskTable extends HashMap<LocalDate, ArrayList<DatedTask>> {
      * @param task The DatedTask to add.
      */
     public void add(DatedTask task) {
+        assert task != null : "Task added is null";
         task.addTo(this);
 
     }
