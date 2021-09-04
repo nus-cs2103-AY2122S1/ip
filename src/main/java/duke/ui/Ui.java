@@ -3,7 +3,7 @@ package duke.ui;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String DIVIDER = "--------------------------------------------------------------------------";
+    public static final String DIVIDER = "--------------------------------------------------------------------------\n";
     private final Scanner in;
 
     public Ui() {

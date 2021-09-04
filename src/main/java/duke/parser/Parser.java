@@ -29,29 +29,27 @@ public class Parser {
      * @param input full raw user input line.
      * @return true if input is not equal to "bye".
      */
-    public boolean parseInput(String input) {
-        ui.printDivider();
+    public String parseInput(String input) {
+        String response = "";
         try {
             if (input.equals("bye")) {
-                ui.print("Goodbye human. See you soon!");
-                return false;
+                response += "Goodbye human. See you soon!\n";
             } else if (input.equals("list")) {
-                printItems();
+                response += taskList.printItems();
             } else if (input.contains("done")) {
-                markAsDone(input);
+                response += markAsDone(input);
             } else if (input.contains("delete")) {
-                deleteItem(input);
+                response += deleteItem(input);
             } else if (input.contains("find")) {
-                findItem(input);
+                response += findItem(input);
             } else {
-                addItem(input);
+                response += addItem(input);
             }
         } catch (DukeException e) {
             ui.print(e.getMessage());
         }
 
-        ui.printDivider();
-        return true;
+        return response;
     }
 
     /**
@@ -60,7 +58,7 @@ public class Parser {
      * @param input full raw user input line.
      * @throws DukeException if the user input is of an invalid format.
      */
-    private void addItem(String input) throws DukeException {
+    private String addItem(String input) throws DukeException {
         Task newItem = null;
         if (input.contains("todo")) {
             String[] parsedInput = input.split(" ", 2); // Splits input into array of [todo, ...]
@@ -100,7 +98,7 @@ public class Parser {
             throw new DukeException("I'm sorry, but I do not quite understand what that means :(");
         }
 
-        taskList.add(newItem);
+        return taskList.add(newItem);
     }
 
     /**
@@ -109,9 +107,9 @@ public class Parser {
      * @param input full raw user input line.
      * @throws DukeException if the user input is of an invalid format.
      */
-    private void markAsDone(String input) throws DukeException {
+    private String markAsDone(String input) throws DukeException {
         int index = getIndexFromInput(input);
-        taskList.markTaskAsDone(index);
+        return taskList.markTaskAsDone(index);
     }
 
     /**
@@ -120,19 +118,19 @@ public class Parser {
      * @param input full raw user input line.
      * @throws DukeException if the user input is of an invalid format.
      */
-    private void deleteItem(String input) throws DukeException {
+    private String deleteItem(String input) throws DukeException {
         int index = getIndexFromInput(input);
-        taskList.delete(index);
+        return taskList.delete(index);
     }
 
-    private void findItem(String input) throws DukeException {
+    private String findItem(String input) throws DukeException {
         String[] parsedInput = input.split(" ");
         if (isIncomplete(parsedInput)) {
             throw new DukeException("I'm sorry, but I do not quite understand what that means :(");
         }
 
         String keyword = parsedInput[1];
-        taskList.find(keyword);
+        return taskList.find(keyword);
     }
 
     /**
@@ -151,9 +149,5 @@ public class Parser {
 
     private boolean isIncomplete(String[] arr) {
         return arr.length <= 1;
-    }
-
-    private void printItems() {
-        taskList.printItems();
     }
 }
