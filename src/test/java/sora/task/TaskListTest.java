@@ -3,6 +3,9 @@ package sora.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -383,5 +386,66 @@ class TaskListTest {
         assertEquals("Here are the tasks in your list:\n"
                         + "1. [T][ ] todo 2",
                 taskList.findInList("find todo"));
+    }
+
+    @Test
+    void sort_wrongFormat_exceptionThrown() {
+        String[] invalidCommands = {
+                "",
+                "sot",
+                "sort1",
+                "sort r",
+                "sort -rev",
+        };
+
+        TaskList taskList = new TaskList();
+
+        for (String command : invalidCommands) {
+            IllegalFormatException exception = assertThrows(IllegalFormatException.class,
+                    () -> taskList.sort(command));
+
+            assertEquals("Please follow this format:\n"
+                            + "  sort [-r]",
+                    exception.getMessage());
+        }
+    }
+
+    @Test
+    void sort_emptyList_exceptionThrown() {
+        TaskList taskList = new TaskList();
+
+        EmptyListException exception = assertThrows(EmptyListException.class, () -> taskList.sort("sort"));
+        assertEquals("Your list is empty! Maybe add some tasks into it?", exception.getMessage());
+    }
+
+    @Test
+    void sort_success() throws EmptyListException, IllegalFormatException {
+        ArrayList<Task> list = new ArrayList<>();
+        list.add(new Todo("todo 1"));
+        list.add(new Todo("todo 2"));
+
+        LocalDateTime dateTime = LocalDateTime.of(2012, 5, 21, 3, 14);
+        list.add(new Deadline("deadline 3", dateTime));
+
+        LocalDate date = LocalDate.of(2021, 1, 1);
+        LocalTime startTime = LocalTime.of(4, 1);
+        LocalTime endTime = LocalTime.of(4, 3);
+        list.add(new Event("event 4", date, startTime, endTime));
+
+        TaskList taskList = new TaskList(list);
+
+        assertEquals("Here are the tasks in your list:\n"
+                        + "1. [D][ ] deadline 3 (by: May 21 2012, 3:14 AM)\n"
+                        + "2. [E][ ] event 4 (at: Jan 1 2021, 4:01 AM - 4:03 AM)\n"
+                        + "3. [T][ ] todo 1\n"
+                        + "4. [T][ ] todo 2",
+                taskList.sort("sort"));
+
+        assertEquals("Here are the tasks in your list:\n"
+                        + "1. [T][ ] todo 2\n"
+                        + "2. [T][ ] todo 1\n"
+                        + "3. [E][ ] event 4 (at: Jan 1 2021, 4:01 AM - 4:03 AM)\n"
+                        + "4. [D][ ] deadline 3 (by: May 21 2012, 3:14 AM)",
+                taskList.sort("sort -r"));
     }
 }

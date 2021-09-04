@@ -21,7 +21,7 @@ public enum Message {
     LIST("Here are the tasks in your list:"),
     HELP("Name: Sora\n"
             + "Version: The creator lost count...\n"
-            + "Supported Features: help, bye, list, todo, deadline, event, done, delete, find");
+            + "Supported Features: help, bye, list, todo, deadline, event, done, delete, find, sort");
 
     private String message;
 

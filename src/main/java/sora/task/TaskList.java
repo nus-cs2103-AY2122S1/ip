@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,6 +41,32 @@ public class TaskList {
 
     public ArrayList<Task> getTasks() {
         return tasks;
+    }
+
+    /**
+     * Sorts tasks in the list by date and time.
+     * Since todo does not have a time, it will always be behind.
+     * This method compares the date and time of deadline vs date and start time of event.
+     *
+     * @param command Command entered by user (sort [-r])
+     * @return String representation of the list of sorted tasks
+     * @throws EmptyListException If number of tasks in the list is 0
+     * @throws IllegalFormatException If user inputs an invalid command
+     */
+    public String sort(String command) throws EmptyListException, IllegalFormatException {
+        // Throw exception if command does not follow format
+        validateCommand(command, "^sort( -r)?", "sort [-r]");
+
+        // Sort the tasks by date
+        ArrayList<Task> sortedTasks = new ArrayList<>(tasks);
+        sortedTasks.sort(Task::compareTo);
+
+        // If user provides the -r flag, reverse the sorting
+        if (command.length() > 4) {
+            Collections.reverse(sortedTasks);
+        }
+
+        return printList(sortedTasks);
     }
 
     /**
