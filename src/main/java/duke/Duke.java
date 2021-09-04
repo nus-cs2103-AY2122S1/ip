@@ -17,13 +17,13 @@ import duke.tasklist.TaskListDuke;
 public class Duke {
     private StorageDuke storage;
     private TaskListDuke tasks;
-    private final String filepath = "data/tasks.txt";
+    private final String FILEPATH = "data/tasks.txt";
 
     /**
      * Constructor for Duke.
      */
     public Duke() {
-        this.storage = new StorageDuke(filepath);
+        this.storage = new StorageDuke(FILEPATH);
         try {
             tasks = new TaskListDuke(this.storage.load());
         } catch (IOException e) {

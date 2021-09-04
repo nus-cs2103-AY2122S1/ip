@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
-            int index = Integer.valueOf(description);
+            int index = Integer.valueOf(DESCRIPTION);
             if (index > tasks.count()) {
                 throw new IllegalArgumentException();
             }

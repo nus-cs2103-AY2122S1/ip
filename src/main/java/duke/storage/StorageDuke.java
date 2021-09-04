@@ -47,11 +47,11 @@ public class StorageDuke implements Storage {
         }
 
         //Check if the file is present, else, create it.
-        ArrayList<Task> tl = new ArrayList<>();
+        ArrayList<Task> tasklist = new ArrayList<>();
         File savedList = new File(this.filepath);
         if (!savedList.exists()) {
             savedList.createNewFile();
-            return tl;
+            return tasklist;
         }
         fileContent = new ArrayList<>(Files.readAllLines(Paths.get(this.filepath), StandardCharsets.UTF_8));
 
@@ -59,19 +59,19 @@ public class StorageDuke implements Storage {
             String[] command = str.split("\\|");
             switch (command[0]) {
             case "T":
-                tl.add(new ToDo(command[1].equals("1"), command[2]));
+                tasklist.add(new ToDo(command[1].equals("1"), command[2]));
                 break;
             case "E":
-                tl.add(new Event(command[1].equals("1"), command[2], command[3]));
+                tasklist.add(new Event(command[1].equals("1"), command[2], command[3]));
                 break;
             case "D":
-                tl.add(new Deadline(command[1].equals("1"), command[2], command[3]));
+                tasklist.add(new Deadline(command[1].equals("1"), command[2], command[3]));
                 break;
             default:
                 break;
             }
         });
-        return tl;
+        return tasklist;
     }
 
     /**

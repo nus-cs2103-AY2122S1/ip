@@ -38,7 +38,7 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
-            String[] eventPair = description.split("/at", 2);
+            String[] eventPair = DESCRIPTION.split("/at", 2);
             if (eventPair.length < 2 || eventPair[0].equals("") || eventPair[1].equals("")) {
                 throw new DukeException("Your add event command is incomplete.");
             }

@@ -35,10 +35,10 @@ public class ToDoCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         try {
-            if (description.replace(" ", "").equals("")) {
+            if (DESCRIPTION.replace(" ", "").equals("")) {
                 throw new DukeException("The description for the Todo task cannot be empty.");
             }
-            String desc = description.trim();
+            String desc = DESCRIPTION.trim();
             storage.add("T", desc, "");
             return tasks.addTask(new ToDo(false, desc));
         } catch (IOException e) {

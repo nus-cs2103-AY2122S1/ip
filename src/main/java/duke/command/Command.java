@@ -11,7 +11,7 @@ import duke.tasklist.TaskList;
  */
 public abstract class Command {
 
-    protected final String description;
+    protected final String DESCRIPTION;
 
     /**
      * Constructor.
@@ -19,7 +19,7 @@ public abstract class Command {
      * @param description it should contain more instructions for the command
      */
     public Command(String description) {
-        this.description = description;
+        this.DESCRIPTION = description;
     }
 
     /**

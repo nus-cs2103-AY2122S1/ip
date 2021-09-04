@@ -38,7 +38,7 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
-            String[] deadlinePair = description.split("/by", 2);
+            String[] deadlinePair = DESCRIPTION.split("/by", 2);
             if (deadlinePair.length < 2 || deadlinePair[0].equals("") || deadlinePair[1].equals("")) {
                 throw new DukeException("Your add deadline command is incomplete.");
             }

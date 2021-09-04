@@ -30,6 +30,7 @@ public class TaskListDuke implements TaskList {
      * Adds the task into the list.
      *
      * @param task the task to be added into the list
+     * @return the string representation of the task added
      */
     @Override
     public String addTask(Task task) {
@@ -47,6 +48,7 @@ public class TaskListDuke implements TaskList {
      * Changes the done status of the task.
      *
      * @param index the position of the task to be marked done
+     * @return the string representation of setting the task as done
      */
     @Override
     public String setDone(int index) {
@@ -59,6 +61,7 @@ public class TaskListDuke implements TaskList {
      * Deletes the task at a specified index.
      *
      * @param index the position of the task to be deleted
+     * @return the string representation of deleting the task
      */
     public String delete(int index) {
         Task task = this.list.get(index);
@@ -68,6 +71,8 @@ public class TaskListDuke implements TaskList {
 
     /**
      * Prints the list.
+     *
+     * @return the string representation of the list
      */
     public String printList() {
         StringBuilder str = new StringBuilder(LIST_INTRO);
@@ -85,6 +90,7 @@ public class TaskListDuke implements TaskList {
      * Prints Tasks on the specified date.
      *
      * @param date the specified date
+     * @return the string representation of the tasks whose date falls on the specified date
      */
     public String printListDate(String date) {
         LocalDate localDate = LocalDate.parse(date.replace(" ", ""), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -109,6 +115,8 @@ public class TaskListDuke implements TaskList {
      * Prints Tasks with containing the specific substring.
      *
      * @param searchStr the specified substring
+     * @return the string representation of the task whose description matches the
+     * specified substring
      */
     public String printListSearch(String searchStr) {
         StringBuilder str = new StringBuilder(LIST_INTRO);
@@ -131,7 +139,7 @@ public class TaskListDuke implements TaskList {
     /**
      * Return the number of items in the TaskList.
      *
-     * @return listCount
+     * @return the number of items in the tasklist
      */
     public int count() {
         return this.list.size();

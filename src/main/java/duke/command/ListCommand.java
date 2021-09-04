@@ -33,7 +33,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        String date = super.description.replace(" ", "");
+        String date = DESCRIPTION.replace(" ", "");
         try {
             if (date.equals("")) {
                 return tasks.printList();

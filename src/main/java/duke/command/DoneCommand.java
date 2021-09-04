@@ -34,7 +34,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         try {
-            int index = Integer.parseInt(description);
+            int index = Integer.parseInt(DESCRIPTION);
             if (index > tasks.count()) {
                 throw new IllegalArgumentException();
             }
