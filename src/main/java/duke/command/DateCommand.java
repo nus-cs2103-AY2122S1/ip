@@ -12,6 +12,7 @@ import duke.exception.MissingDateException;
 import duke.exception.MissingSpaceAfterCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Period;
 import duke.task.Task;
 
 /**
@@ -41,10 +42,11 @@ public class DateCommand extends Command {
      * @throws DukeException If underlying methods or checks fail.
      */
     private String getTaskAtDate(TaskList tasks, Ui ui) throws DukeException {
-        // Initialize counters to track number of tasks, events and deadlines.
+        // Initialize counters to track number of tasks, events, deadlines and periods.
         int counter = 0;
         int events = 0;
         int deadlines = 0;
+        int periods = 0;
 
         // Check if anything is provided 1 space after date command.
         if (this.userInput.length() <= (UserCommands.DATE.getLength() + 1)) {
@@ -62,7 +64,7 @@ public class DateCommand extends Command {
         // Parses user input into LocalDate. User input for date will follow "date" command.
         String dateString = this.userInput.substring(UserCommands.DATE.getLength() + 1);
 
-        LocalDate localDate = Parser.toLocalDate(dateString);
+        LocalDate localDate = Parser.dateToLocalDate(dateString);
         String formattedDateString = Parser.parseLocalDate(localDate);
 
         StringBuilder datesBuilder = new StringBuilder();
@@ -85,10 +87,24 @@ public class DateCommand extends Command {
                     datesBuilder.append(counter).append(".").append(event).append("\n");
                 }
             }
+
+            if (task instanceof Period) {
+                Period period = (Period) task;
+                LocalDate[] startEndDates = period.getPeriod();
+                LocalDate startDate = startEndDates[0];
+                LocalDate endDate = startEndDates[1];
+
+                boolean laterThanStartDate = localDate.compareTo(startDate) >= 0;
+                if (laterThanStartDate && localDate.compareTo(endDate) <= 0) {
+                    counter++;
+                    periods++;
+                    datesBuilder.append(counter).append(".").append(period).append("\n");
+                }
+            }
         }
 
         return ui.getDateListSuccessMessage(formattedDateString,
-                counter, deadlines, events, datesBuilder.toString());
+                counter, deadlines, events, periods, datesBuilder.toString());
     }
 
     /**
