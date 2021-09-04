@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -177,5 +178,19 @@ public class TaskList {
             }
         }
         return list;
+    }
+
+    /**
+     * Sorts the task list.
+     *
+     * @param reverse Reverse the order of the task list if true.
+     */
+    public void sort(boolean reverse) {
+        Comparator<Task> comparator = (Task t1, Task t2) -> {
+            return reverse
+                    ? (t1.compareTo(t2) * -1)
+                    : t1.compareTo(t2);
+        };
+        taskList.sort(comparator);
     }
 }

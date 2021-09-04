@@ -96,6 +96,18 @@ public class Ui {
     }
 
     /**
+     * Prints a sort message.
+     *
+     * @param reverse Indicates if the tasks are sorted in reverse order.
+     * @return A message informing the user that the tasks are sorted.
+     */
+    public String sortMessage(boolean reverse) {
+        return reverse
+                ? "Tasks are sorted by date in reverse order."
+                : "Tasks are sorted by date.";
+    }
+
+    /**
      * Prints an invalid input message.
      * When the user enters an invalid input.
      *
@@ -131,6 +143,16 @@ public class Ui {
         return e.toString() + " " + extra;
     }
 
+    /**
+     * Prints an invalid date time format message.
+     * When the user inputs an invalid date time format.
+     *
+     * @param error Details about the exception.
+     * @return An invalid date time format message.
+     */
+    public String invalidDateTimeFormat(String error) {
+        return error;
+    }
     /**
      * Prints an exception message.
      * When an exception that is not a Duke exception is thrown.

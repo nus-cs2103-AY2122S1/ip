@@ -143,6 +143,16 @@ public class Parser {
         case "find":
             data.put("keyword", input);
             break;
+        case "sort":
+            if (input.length() == 0) {
+                data.put("reverse", false);
+            } else if (input.equals("reverse")) {
+                data.put("reverse", true);
+            } else {
+                throw new InvalidInputException("Enter \"sort\" to sort the task list.\n"
+                        + "Enter \"sort reverse\" to sort the task list in reverse order.");
+            }
+            break;
         default:
             throw new InvalidInstructionException(cmd);
         }
