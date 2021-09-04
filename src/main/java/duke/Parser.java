@@ -33,24 +33,23 @@ public class Parser {
             return bot.handleList();
         case "done":
             // check if a number is specified
-            //todo make a method that checks if a string has length x.
-            if (inputs.length == 1) {
+            if (checkLength(inputs)) {
                 throw new DukeException("The task number cannot be empty you dum dum");
             }
             // check if the following string is a number
             int index = Integer.parseInt(inputs[1]);
             // check if the number is valid.
             //todo make a method that checks if the index is out of bounds or make split into parts with variable declaration
-            if (index <= 0 || index > bot.getTotalTasks()) {
+            if (isValidIndex(index, bot.getTotalTasks())) {
                 throw new DukeException("Please enter a valid number");
             }
             return bot.handleDone(index);
         case "deadline":
-            if (inputs.length == 1) {
+            if (checkLength(inputs)) {
                 throw new DukeException("Please specify the deadline description");
             }
             String[] info = inputs[1].split("/by", 0);
-            if (info.length == 1) {
+            if (checkLength(info)) {
                 throw new DukeException("Please specify the deadline time");
             }
             try {
@@ -60,16 +59,16 @@ public class Parser {
                 throw new DukeException("The format of date & time is wrong. Please use {dd/mm/yyyy hhmm}");
             }
         case "todo":
-            if (inputs.length == 1) {
+            if (checkLength(inputs)) {
                 throw new DukeException("Please specify the todo description");
             }
             return bot.handleTodo(inputs[1]);
         case "event":
-            if (inputs.length == 1) {
+            if (checkLength(inputs)) {
                 throw new DukeException("Please specify the event description");
             }
             info = inputs[1].split("/at");
-            if (info.length == 1) {
+            if (checkLength(info)) {
                 throw new DukeException("Please specify the time");
             }
             try {
@@ -79,23 +78,44 @@ public class Parser {
                 throw new DukeException("The format of date & time is wrong. Please use {dd/mm/yyyy hhmm}");
             }
         case "delete":
-            if (inputs.length == 1) {
+            if (checkLength(inputs)) {
                 throw new DukeException("The task number to delete cannot be empty you dum dum");
             }
             // check if the following string is a number
             index = Integer.parseInt(inputs[1]);
             // check if the number is valid.
-            if (index <= 0 || index > bot.getTotalTasks()) {
+            if (isValidIndex(index, bot.getTotalTasks())) {
                 throw new DukeException("Please enter a valid number");
             }
             return bot.handleDelete(index);
         case "find":
-            if (inputs.length == 1) {
+            if (checkLength(inputs)) {
                 throw new DukeException("The task to find cannot be empty!");
             }
             return bot.handleFind(inputs[1].trim());
         default:
             return bot.handleWrongCommand();
         }
+    }
+
+    /**
+     * Returns a boolean, true if the string array is of length 1 false if otherwise.
+     *
+     * @param inputs The string array
+     * @return If string array is of length 1.
+     */
+    public boolean checkLength(String[] inputs) {
+        return inputs.length == 1;
+    }
+
+    /**
+     * Checks if the index is less than equals to 0 or more than the total number of tasks.
+     *
+     * @param index Index to check
+     * @param totalTasks Total number of Tasks.
+     * @return If the index is valid.
+     */
+    public boolean isValidIndex(int index, int totalTasks) {
+        return index <= 0 || index > totalTasks;
     }
 }

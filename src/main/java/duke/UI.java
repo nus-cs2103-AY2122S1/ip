@@ -18,7 +18,7 @@ public class UI {
      * Returns the exiting message of Duke.
      */
     public String showExitMessage() {
-        return "bye! for now...\n";
+        return "Goodbye! for now...\n";
     }
 
     /**
