@@ -17,14 +17,6 @@ public class Duke {
     /** Parser that handles and interprets user input in order to perform appropriate actions */
     private static Parser parser;
 
-    /** The logo representing GARY */
-    private final String LOGO = "  _______              __               _____      __             __    _\n"
-            + "|      ____|          /  ^  \\         |      _    \\   \\  \\        /  /  |  |\n"
-            + "|    |  ___          /  /_\\  \\      |    |_|    |   \\  \\  /  /     |  |\n"
-            + "|    ||_    |      /      __     \\    |    __    <        \\      /        |_|\n"
-            + "|    |__| |    /      /    \\     \\  |    |  \\    \\        |   |            _  \n"
-            + "|______|  /__/        \\__\\|_ |       \\_\\     |_|         |_|\n";
-
     /**
      * Constructs a Duke instance to initialise fields required to drive the program.
      * At the same time, copies any previous saved file into the list upon initialisation.
@@ -44,7 +36,14 @@ public class Duke {
      * @return String representing the logo of Gary.
      */
     public String getLogo() {
-        return LOGO;
+        String greeting = "Meow! My name is \n";
+        String logo = "  _______              __               _____      __             __    _\n"
+                + "|      ____|          /  ^  \\         |      _    \\   \\  \\        /  /  |  |\n"
+                + "|    |  ___          /  /_\\  \\      |    |_|    |   \\  \\  /  /     |  |\n"
+                + "|    ||_    |      /      __     \\    |    __    <        \\      /        |_|\n"
+                + "|    |__| |    /      /    \\     \\  |    |  \\    \\        |   |            _  \n"
+                + "|______|  /__/        \\__\\|_ |       \\_\\     |_|         |_|\n";
+        return greeting + logo;
     }
 
     /**
@@ -68,7 +67,7 @@ public class Duke {
         // Tell Java to use your special stream
         System.setOut(printStream);
 
-        // Handle some output & write to storage: Printed output goes to your special stream
+        // Handle input: Any printed output goes to your special stream
         parser.handleInput(input);
         storage.writeToFile();
 
