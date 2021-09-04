@@ -107,6 +107,9 @@ public class Parser {
         final int IS_TASK_DONE = 1;
         final int TASK_INFO = 2;
         final int DATE_TIME = 3;
+        assert (taskString != null);
+        assert (!taskString.isEmpty());
+
         String[] taskInfo = taskString.split(" \\| ");
         String taskType = taskInfo[TASK_TYPE];
         boolean isDone = taskInfo[IS_TASK_DONE].equals("[X]");
