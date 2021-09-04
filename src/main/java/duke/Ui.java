@@ -41,7 +41,7 @@ public class Ui {
      * @return a String representing the done task
      */
     public String done(Task t) {
-        return line + "Nice! I've marked this task as done:\n" + t + line;
+        return line + "Nice! I've marked this task as done:\n" + t +"\n" + line;
     }
 
     /**
