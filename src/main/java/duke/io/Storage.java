@@ -92,6 +92,7 @@ public class Storage {
      * @throws DukeException exception when saving tasks.
      */
     public void save(TaskList taskList) throws DukeException {
+        assert taskList != null : "Task list cannot be null";
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write(taskList.toString());
