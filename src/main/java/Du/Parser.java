@@ -130,7 +130,6 @@ public class Parser {
             response = "Oh noes, the event item needs to have a time that it is occuring at, please input again";
             return response;
         }
-
         try {
             LocalDateTime date = LocalDateTime.parse(task_time[1], formatter);
         } catch (DateTimeParseException e) {
