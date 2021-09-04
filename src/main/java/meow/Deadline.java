@@ -21,6 +21,14 @@ public class Deadline extends Task {
         this.time = time;
     }
 
+    public String getDeadlineTime() {
+        return this.time;
+    }
+
+    public String getDeadlineDate() {
+        return this.date.toString();
+    }
+
     /**
      * Returns the string representation of the meow.Deadline object.
      *

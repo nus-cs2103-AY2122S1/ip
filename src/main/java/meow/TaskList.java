@@ -3,6 +3,7 @@ package meow;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -134,16 +135,49 @@ public class TaskList {
      * Filter the list of meow.Task objects based on the keyword provided by the user,
      * and returns a list of meow.Task objects.
      *
-     * @param keyword The search keywors input by the user.
+     * @param keywords The search keywords input by the user.
      * @return A list of filtered meow.Task objects.
      */
-    public List<Task> searchTask(String keyword) {
-        Stream<Task> taskStream = this.tasksList.stream();
-        List<Task> filteredTasks =
-                taskStream
-                        .filter(task -> task.getDescription()
-                                .contains(keyword)).collect(Collectors.toList());
+    public List<Task> searchTask(String ... keywords) {
+        boolean resultFound = false;
+        List<Task> filteredTasks = new ArrayList<>();
+        final String TODO = "todo";
+        final String EVENT = "event";
+        final String DEADLINE = "deadline";
+
+        for (int i = 0; i < this.tasksList.size(); i++) {
+            Task task = this.tasksList.get(i);
+            String description = task.getDescription();
+            String status = task.getStatusIcon();
+            String typeOfTask = "";
+            String time = "";
+            String date = "";
+
+            if (task instanceof Event) {
+                time = ((Event) task).getEventTime();
+                typeOfTask = EVENT;
+            } else if (task instanceof Deadline) {
+                time = ((Deadline) task).getDeadlineTime();
+                typeOfTask = DEADLINE;
+                date = ((Deadline) task).getDeadlineDate();
+                System.out.println(date);
+            } else {
+                typeOfTask = TODO;
+            }
+
+            for (int j = 0; j < keywords.length; j++) {
+                resultFound = resultFound || description.contains(keywords[j].toLowerCase(Locale.ROOT)) ||
+                        status.contains(keywords[j]) ||
+                        time.contains(keywords[j].toLowerCase(Locale.ROOT)) ||
+                        typeOfTask.contains(keywords[j].toLowerCase(Locale.ROOT)) ||
+                        date.contains(keywords[j].toLowerCase(Locale.ROOT));
+            }
+
+            if (resultFound) {
+                filteredTasks.add(this.tasksList.get(i));
+            }
+            resultFound = false;
+        }
         return filteredTasks;
     }
-
 }

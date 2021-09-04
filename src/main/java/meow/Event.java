@@ -16,6 +16,10 @@ public class Event extends Task {
         this.at = at;
     }
 
+    public String getEventTime() {
+        return this.at;
+    }
+
     /**
      * Returns the string representation of the meow.Event object.
      *
