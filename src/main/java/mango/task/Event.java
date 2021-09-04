@@ -1,7 +1,5 @@
 package mango.task;
 
-import mango.DukeException;
-
 /**
  * Represents a task that is an event. An <code>Event</code> object corresponds to a
  * <code>Task</code> that has a description, a completion status, and a date on which it happens.
@@ -37,23 +35,9 @@ public class Event extends Task {
      *
      * @return The string representation of the type of task.
      */
+    @Override
     public String getType() {
         return "E";
-    }
-
-    /**
-     * Checks if the input string array is valid.
-     *
-     * @param arr The input string array.
-     * @return True if the string array is valid, else false.
-     * @throws DukeException If the array length is 1.
-     */
-    public static boolean isValid(String[] arr) throws DukeException {
-        if (arr.length == 1) {
-            throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
-        }
-
-        return true;
     }
 
     /**
@@ -61,6 +45,7 @@ public class Event extends Task {
      *
      * @return The description of the event.
      */
+    @Override
     public String getDescription() {
         return String.format("%s (at: %s)", this.description, this.date);
     }
@@ -70,7 +55,8 @@ public class Event extends Task {
      *
      * @return The string representation of the event.
      */
-    public String save() {
+    @Override
+    public String getSaveFormatString() {
         return String.format("%s:%s:%s:%s\n", this.getType(), this.getStatus(), this.description, this.date);
     }
 }

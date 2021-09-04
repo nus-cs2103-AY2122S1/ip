@@ -31,6 +31,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the instance of Mango that will interact in the MainWindow.
+     * @param d The instance of Mango.
+     */
     public void setDuke(Duke d) {
         duke = d;
         DialogBox greet = DialogBox.getDukeDialog(duke.greet(), dukeImage);

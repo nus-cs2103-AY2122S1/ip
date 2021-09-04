@@ -15,15 +15,9 @@ public class Duke {
      * Constructor for a Duke chat-bot.
      */
     public Duke() {
-        ui = new Ui();
-        storage = new Storage("data/mango.txt");
-        try {
-            tasks = new TaskList(storage.load());
-        } catch (IOException e) {
-            ui.showLoadingError(new DukeException(e.getMessage()));
-            tasks = new TaskList();
-        }
+        this("data/mango.txt");
     }
+
     /**
      * Constructor for a Duke chat-bot.
      *

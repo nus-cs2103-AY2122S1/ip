@@ -1,6 +1,9 @@
 package mango;
 
-import mango.task.*;
+import mango.task.Deadline;
+import mango.task.Event;
+import mango.task.Task;
+import mango.task.Todo;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -34,38 +37,40 @@ public class Storage {
      * @return The ArrayList containing all the Tasks that correspond to the data in the file.
      */
     public ArrayList<Task> load() throws IOException {
-        ArrayList<Task> list = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         File f = new File(this.filePath);
+
         if (!f.exists()) {
             File directory = new File(f.getParent());
             if (!directory.exists()) {
                 directory.mkdirs();
             }
             f.createNewFile();
-        } else {
-            Scanner s = new Scanner(f); // create a Scanner using the File as the source
-            while (s.hasNext()) {
-                String[] task = s.nextLine().split(":", 4);
-                Task toAdd;
-                switch (task[0]) {
-                case "D":
-                    toAdd = new Deadline(task[2], task[3], task[1]);
-                    break;
-                case "E":
-                    toAdd = new Event(task[2], task[3], task[1]);
-                    break;
-                case "T":
-                    toAdd = new Todo(task[2], task[1]);
-                    break;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + task[0]);
-                }
-
-                list.add(toAdd);
-            }
         }
 
-        return list;
+        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        while (s.hasNext()) {
+            String[] task = s.nextLine().split(":", 4);
+            Task toAdd;
+
+            switch (task[0]) {
+            case "D":
+                toAdd = new Deadline(task[2], task[3], task[1]);
+                break;
+            case "E":
+                toAdd = new Event(task[2], task[3], task[1]);
+                break;
+            case "T":
+                toAdd = new Todo(task[2], task[1]);
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + task[0]);
+            }
+
+            tasks.add(toAdd);
+        }
+
+        return tasks;
     }
 
     /**
@@ -76,16 +81,17 @@ public class Storage {
      */
     public void save(TaskList list) throws IOException {
         String tempFilePath = "temp/mango.txt";
-        File f = new File(tempFilePath);
-        File directory = new File(f.getParent());
+        File tempFile = new File(tempFilePath);
+        File directory = new File(tempFile.getParent());
+
         if (!directory.exists()) {
             directory.mkdirs();
         }
-        f.createNewFile();
+        tempFile.createNewFile();
 
         FileWriter fw = new FileWriter(tempFilePath);
         for (Task t : list.getList()) {
-            fw.write(t.save());
+            fw.write(t.getSaveFormatString());
         }
         fw.close();
 

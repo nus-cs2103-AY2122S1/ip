@@ -11,28 +11,34 @@ public class Parser {
      * @param tasks The list of tasks to be manipulated.
      * @param input The user input to be parsed.
      * @param duke The instance of Mango to provide a farewell message.
+     * @return The confirmation message for the user command.
      */
     public static String parse(TaskList tasks, String input, Duke duke) {
-        String output = "";
-        if (!(input.equals("bye"))) {
-            try {
-                if (input.equals("list")) {
-                    output = tasks.printList();
-                } else if (input.contains("done")) {
-                    output = tasks.complete(Character.getNumericValue(input.charAt(5)));
-                } else if (input.contains("delete")) {
-                    output = tasks.delete(Character.getNumericValue(input.charAt(7)));
-                } else if (input.contains("find")){
-                    output = tasks.find(input.split(" ", 2)[1]);
-                } else {
-                    output = tasks.add(input);
-                }
-            } catch (DukeException e) {
-                System.out.println(e.getMessage());
-            }
-        } else {
-            output = duke.exit();
+        if (input.equals("bye")) {
+            return duke.exit();
         }
-        return output;
+        
+        String message = "";
+
+        try {
+            if (input.equals("list")) {
+                message = tasks.toString();
+            } else if (input.contains("done")) {
+                int indexOfCompletedTask = Character.getNumericValue(input.charAt(5));
+                message = tasks.completeTask(indexOfCompletedTask);
+            } else if (input.contains("delete")) {
+                int indexOfDeletedTask = Character.getNumericValue(input.charAt(7));
+                message = tasks.deleteTask(indexOfDeletedTask);
+            } else if (input.contains("find")) {
+                String searchTerms = input.split(" ", 2)[1];
+                message = tasks.findTasks(searchTerms);
+            } else {
+                message = tasks.addTask(input);
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        return message;
     }
 }
