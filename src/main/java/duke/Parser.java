@@ -37,13 +37,15 @@ public class Parser {
                 throw new DukeException("The task number cannot be empty you dum dum");
             }
             // check if the following string is a number
-            int index = Integer.parseInt(inputs[1]);
-            // check if the number is valid.
-            //todo make a method that checks if the index is out of bounds or make split into parts with variable declaration
-            if (isValidIndex(index, bot.getTotalTasks())) {
-                throw new DukeException("Please enter a valid number");
+            try {
+                int index = Integer.parseInt(inputs[1]);
+                if (checkIndex(index, bot.getTotalTasks())) {
+                    throw new DukeException("Please enter a valid number");
+                }
+                return bot.handleDone(index);
+            } catch (NumberFormatException e) {
+                throw new DukeException("Please use numbers for the task number");
             }
-            return bot.handleDone(index);
         case "deadline":
             if (checkLength(inputs)) {
                 throw new DukeException("Please specify the deadline description");
@@ -81,13 +83,15 @@ public class Parser {
             if (checkLength(inputs)) {
                 throw new DukeException("The task number to delete cannot be empty you dum dum");
             }
-            // check if the following string is a number
-            index = Integer.parseInt(inputs[1]);
-            // check if the number is valid.
-            if (isValidIndex(index, bot.getTotalTasks())) {
-                throw new DukeException("Please enter a valid number");
+            try {
+                int index = Integer.parseInt(inputs[1]);
+                if (checkIndex(index, bot.getTotalTasks())) {
+                    throw new DukeException("Please enter a valid number");
+                }
+                return bot.handleDelete(index);
+            } catch (NumberFormatException e) {
+                throw new DukeException("Please use numbers for the task number");
             }
-            return bot.handleDelete(index);
         case "find":
             if (checkLength(inputs)) {
                 throw new DukeException("The task to find cannot be empty!");
@@ -115,7 +119,7 @@ public class Parser {
      * @param totalTasks Total number of Tasks.
      * @return If the index is valid.
      */
-    public boolean isValidIndex(int index, int totalTasks) {
+    public boolean checkIndex(int index, int totalTasks) {
         return index <= 0 || index > totalTasks;
     }
 }
