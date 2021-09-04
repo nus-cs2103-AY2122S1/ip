@@ -69,7 +69,7 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
      */
     @Override
     public void start(Stage stage) {
-        setUpGuiComponents(stage);
+        setUpGui(stage);
 
         // Handles user input
         sendButton.setOnMouseClicked((event) -> {

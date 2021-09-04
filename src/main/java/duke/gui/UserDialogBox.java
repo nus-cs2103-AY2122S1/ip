@@ -10,6 +10,11 @@ public class UserDialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * A constructor for a dialog box that represents the User's input messages.
+     * @param l The Label component for the message
+     * @param iv The ImageView containing user's picture
+     */
     public UserDialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;

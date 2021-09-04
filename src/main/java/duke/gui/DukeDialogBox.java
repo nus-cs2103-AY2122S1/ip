@@ -10,6 +10,11 @@ public class DukeDialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * A constructor for a dialog box that represents Duke's output messages.
+     * @param l The Label component for the message
+     * @param iv The ImageView containing Duke's picture
+     */
     public DukeDialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
