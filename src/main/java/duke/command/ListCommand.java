@@ -35,7 +35,7 @@ public class ListCommand extends Command {
                 Task currTask = tasks.get(i);
                 startingString.append(i + 1).append(". ").append(currTask).append("\n");
             }
-            return String.valueOf(startingString);
+            return startingString.toString();
         }
     }
 
