@@ -3,7 +3,9 @@ package fan.cs2103t.duke.command;
 import static fan.cs2103t.duke.commons.Messages.MESSAGE_NOTHING_MATCHING_QUERY;
 import static fan.cs2103t.duke.commons.Messages.MESSAGE_SUCCESSFULLY_FOUND_FORMAT;
 
-import fan.cs2103t.duke.task.Task;
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import fan.cs2103t.duke.task.TaskList;
 import fan.cs2103t.duke.ui.Ui;
 
@@ -41,19 +43,21 @@ public class FindCommand extends Command {
     public String execute(TaskList taskList, Ui ui) {
         String output;
         StringBuilder result = new StringBuilder();
-        int count = 0;
-        boolean hasFound = false;
-        for (Task t : taskList.getTasks()) {
-            count++;
-            if (t.getDescription().contains(searchQuery)) {
-                hasFound = true;
-                result.append(count)
-                        .append(".")
-                        .append(t.getDescriptionWithStatus())
-                        .append("\n");
-            }
-        }
-        if (hasFound) {
+        ArrayList<Integer> count = new ArrayList<>();
+        count.add(0);
+        AtomicBoolean hasFound = new AtomicBoolean(false);
+        taskList.getTasks().stream()
+                .forEachOrdered(t -> {
+                    count.set(0, count.get(0) + 1);
+                    if (t.getDescription().contains(searchQuery)) {
+                        hasFound.set(true);
+                        result.append(count.get(0))
+                                .append(".")
+                                .append(t.getDescriptionWithStatus())
+                                .append("\n");
+                    }
+                }); // simply replace the original for loop with stream; for the purpose of using stream only
+        if (hasFound.get()) {
             result.setLength(result.length() - 1);
             output = String.format(MESSAGE_SUCCESSFULLY_FOUND_FORMAT, result);
         } else {
