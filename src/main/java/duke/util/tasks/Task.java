@@ -25,6 +25,7 @@ public abstract class Task {
      * @param s Name of the task.
      */
     protected Task(String s) {
+        assert s != null : "Nullpointer when creating task description";
         this.name = s;
         this.isDone = false;
     }

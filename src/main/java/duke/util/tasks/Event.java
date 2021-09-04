@@ -35,6 +35,8 @@ public class Event extends DatedTask {
      * @throws DukeException
      */
     public static Event of(String name, String date) throws DukeException {
+        assert name != null : "Event of method name is null";
+        assert date != null : "Event of method date is null";
         return new Event(name, date);
     }
 

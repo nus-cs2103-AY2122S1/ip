@@ -28,6 +28,7 @@ public class Deadline extends DatedTask {
      * @throws DukeException
      */
     public static Deadline of(String s) throws DukeException {
+        assert s != null : "Deadline of s is null";
         String[] ss = s.split(Deadline.DELIMITER, 2);
         enforceArguments(ss, Messages.DEADLINE_NO_INPUT_ERROR_MESSAGE);
         return new Deadline(ss[0], ss[1]);
@@ -45,6 +46,8 @@ public class Deadline extends DatedTask {
      * @throws DukeException
      */
     public static Deadline of(String name, String date) throws DukeException {
+        assert name != null : "Event of method name is null";
+        assert date != null : "Event of method date is null";
         return new Deadline(name, date);
     }
 

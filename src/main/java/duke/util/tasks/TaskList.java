@@ -24,6 +24,8 @@ public class TaskList extends ArrayList<Task> {
      * @return True if the task is in the arraylist and false otherwise.
      */
     public static boolean isAdded(Task t, ArrayList<? extends Task> arr) {
+        assert arr != null : "ArrayList added is null";
+        assert t != null : "Task to check is null";
         for (int i = 0; i < arr.size(); i++) {
             if (arr.get(i).equals(t)) {
                 return true;
