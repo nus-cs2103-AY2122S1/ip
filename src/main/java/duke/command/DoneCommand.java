@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.data.TaskList;
 import duke.data.exception.DukeException;
+import duke.data.task.Task;
 import duke.storage.Storage;
 
 /**
@@ -30,7 +31,9 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (0 <= taskNum && taskNum < tasks.size()) {
-            tasks.get(taskNum).markAsDone();
+            Task taskToBeDone = tasks.get(taskNum);
+            assert taskToBeDone != null;
+            taskToBeDone.markAsDone();
             storage.update(tasks);
             return "Nice! I've marked this task as done:\n  "
                     + tasks.get(taskNum).toString();

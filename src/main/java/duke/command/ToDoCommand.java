@@ -28,6 +28,7 @@ public class ToDoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
+        assert newTask != null;
         tasks.add(newTask);
         storage.update(tasks);
         return "Got it. I've added this task:\n  "

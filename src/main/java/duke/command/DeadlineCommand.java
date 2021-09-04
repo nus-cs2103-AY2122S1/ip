@@ -17,6 +17,7 @@ public class DeadlineCommand extends Command {
      * @param newTask The Deadline task to be generated.
      */
     public DeadlineCommand(Deadline newTask) {
+        assert newTask != null;
         this.newTask = newTask;
     }
 
@@ -28,6 +29,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
+        assert newTask != null;
         tasks.add(newTask);
         storage.update(tasks);
         return "Got it. I've added this task:\n  "
