@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+import duke.exception.CannotReadFileException;
+import duke.exception.CannotSaveFileException;
+import duke.exception.CorruptSaveFileException;
+import duke.exception.DukeException;
+import duke.exception.InvalidLocalDateException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -42,13 +47,13 @@ public class Storage implements Storable {
      *
      * @param localDate LocalDate to be converted.
      * @return Formatted String suitable for saving.
-     * @throws DukeException If localDate cannot be parsed into save format.
+     * @throws InvalidLocalDateException If localDate cannot be parsed into save format.
      */
-    private static String toSaveDateFormat(LocalDate localDate) throws DukeException {
+    private static String toSaveDateFormat(LocalDate localDate) throws InvalidLocalDateException {
         try {
             return localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         } catch (DateTimeException dateTimeException) {
-            throw new DukeException(Ui.exceptionInvalidLocalDate());
+            throw new InvalidLocalDateException();
         }
     }
 
@@ -57,9 +62,9 @@ public class Storage implements Storable {
      *
      * @param task Task to be converted.
      * @return Formatted String suitable for saving.
-     * @throws DukeException If date cannot be parsed to save format.
+     * @throws InvalidLocalDateException If date cannot be parsed to save format.
      */
-    private static String toSaveFormat(Task task) throws DukeException {
+    private static String toSaveFormat(Task task) throws InvalidLocalDateException {
         // Initialize StringBuilder.
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -96,9 +101,8 @@ public class Storage implements Storable {
      *
      * @param save The read string.
      * @return Task corresponding to the read string.
-     * @throws DukeException if string cannot be parsed to date.
-     * @throws DukeException if string cannot be parsed to integer.
-     * @throws DukeException if string does not have sufficient parts for the task it represents.
+     * @throws CorruptSaveFileException if string does not have sufficient parts for the task it represents.
+     * @throws DukeException if underlying methods fail.
      */
     private static Task parseSaveFormat(String save) throws DukeException {
         // Split save string by the save separator.
@@ -127,7 +131,7 @@ public class Storage implements Storable {
                 task = new Event(description, at);
                 break;
             default:
-                throw new DukeException(Ui.exceptionCorruptSaveFile());
+                throw new CorruptSaveFileException();
             }
 
             if (isDone == 1) {
@@ -136,7 +140,7 @@ public class Storage implements Storable {
 
             return task;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new DukeException(Ui.exceptionCorruptSaveFile());
+            throw new CorruptSaveFileException();
         }
     }
 
@@ -145,8 +149,8 @@ public class Storage implements Storable {
      * Doubles down as an initializer for the save file if the data directory and the save file are missing.
      *
      * @return TaskList containing retrieved tasks.
-     * @throws DukeException If there are errors reading the file.
-     * @throws DukeException If there tasks cannot be parsed.
+     * @throws CannotReadFileException If there are errors reading the file.
+     * @throws DukeException If underlying methods fail.
      */
     public TaskList readTasksFromData() throws DukeException {
         // Initialize an ArrayList for duke.task.Task objects.
@@ -176,8 +180,7 @@ public class Storage implements Storable {
                 tasks.add(task);
             }
         } catch (IOException ioException) {
-            // Failure to read from save file.
-            throw new DukeException(Ui.exceptionCannotReadFile());
+            throw new CannotReadFileException();
         }
 
         return new TaskList(tasks);
@@ -187,8 +190,8 @@ public class Storage implements Storable {
      * Saves tasks to specified file.
      *
      * @param taskList TaskList containing the tasks to be saved to specified file.
-     * @throws DukeException If tasks cannot be written to save file.
-     * @throws DukeException If tasks cannot be converted into their corresponding save formats.
+     * @throws CannotSaveFileException If tasks cannot be written to save file.
+     * @throws DukeException If underlying methods fail.
      */
     public void saveTasksToData(TaskList taskList) throws DukeException {
         // Extracts ArrayList from duke.TaskList object.
@@ -240,7 +243,7 @@ public class Storage implements Storable {
             byte[] textToSaveToBytes = textToSave.getBytes();
             Files.write(absolutePathToSaveFile, textToSaveToBytes);
         } catch (IOException ioException) {
-            throw new DukeException(Ui.exceptionCannotSaveFile());
+            throw new CannotSaveFileException();
         }
     }
 }

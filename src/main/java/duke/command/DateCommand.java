@@ -2,12 +2,14 @@ package duke.command;
 
 import java.time.LocalDate;
 
-import duke.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
-import duke.Ui.Commands;
+import duke.Ui.UserCommands;
+import duke.exception.DukeException;
+import duke.exception.MissingDateException;
+import duke.exception.MissingSpaceAfterCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -34,9 +36,9 @@ public class DateCommand extends Command {
      * @param tasks TaskList to search in.
      * @param ui Ui to get enums, response messages and exception messages from.
      * @return String describing tasks falling on user specified date.
-     * @throws DukeException If user input is missing time input.
-     * @throws DukeException If user input has missing spaces.
-     * @throws DukeException If user input for time is in invalid date format.
+     * @throws MissingDateException If user input is missing time input.
+     * @throws MissingSpaceAfterCommandException If user input has missing spaces.
+     * @throws DukeException If underlying methods or checks fail.
      */
     private String getTaskAtDate(TaskList tasks, Ui ui) throws DukeException {
         // Initialize counters to track number of tasks, events and deadlines.
@@ -45,26 +47,23 @@ public class DateCommand extends Command {
         int deadlines = 0;
 
         // Check if anything is provided 1 space after date command.
-        if (this.userInput.length() <= (Commands.DATE.getLength() + 1)) {
+        if (this.userInput.length() <= (UserCommands.DATE.getLength() + 1)) {
             // If nothing is provided, date to search for is not provided.
             // Unlike other commands, a single character following after command without space is an invalid date.
-            throw new DukeException(Ui.exceptionMissingDate());
+            throw new MissingDateException();
         }
 
         // Check for space after date command.
         // This prevents wrong date being read by reminding user to add space.
-        if (this.userInput.charAt(Commands.DATE.getLength()) != ' ') {
-            throw new DukeException(Ui.exceptionMissingSpaceAfterCommand(Commands.DATE.getCommand()));
+        if (this.userInput.charAt(UserCommands.DATE.getLength()) != ' ') {
+            throw new MissingSpaceAfterCommandException(UserCommands.DATE);
         }
 
         // Parses user input into LocalDate. User input for date will follow "date" command.
-        String dateString = this.userInput.substring(Commands.DATE.getLength() + 1);
+        String dateString = this.userInput.substring(UserCommands.DATE.getLength() + 1);
 
         LocalDate localDate = Parser.toLocalDate(dateString);
         String formattedDateString = Parser.parseLocalDate(localDate);
-
-        // String to notify users of the date they are searching for.
-        String notification = ui.getDateListSuccessMessage(formattedDateString);
 
         StringBuilder datesBuilder = new StringBuilder();
         // finds Deadlines and Events with LocalDate that matches date input from user.
@@ -88,10 +87,8 @@ public class DateCommand extends Command {
             }
         }
 
-        // String describing a summary of matching tasks to the user.
-        String summary = ui.getDateListSummaryMessage(formattedDateString, counter, deadlines, events);
-
-        return notification + "\n" + datesBuilder + summary;
+        return ui.getDateListSuccessMessage(formattedDateString,
+                counter, deadlines, events, datesBuilder.toString());
     }
 
     /**
@@ -105,7 +102,6 @@ public class DateCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
-            // Print tasks that fall on user specified date.
             return this.getTaskAtDate(tasks, ui);
         } catch (DukeException dukeException) {
             return dukeException.toString();

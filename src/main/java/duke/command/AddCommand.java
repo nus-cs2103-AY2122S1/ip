@@ -2,13 +2,16 @@ package duke.command;
 
 import java.time.LocalDate;
 
-import duke.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
-import duke.Ui.Commands;
 import duke.Ui.Descriptors;
+import duke.Ui.UserCommands;
+import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeFormatException;
+import duke.exception.InvalidUserCommandException;
+import duke.exception.MissingTaskDescriptionException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -41,60 +44,52 @@ public class AddCommand extends Command {
      * @param ui Ui to get enums, response messages and exception messages from.
      * @param separator char separator used to separate task description and time in Event and Deadline.
      * @return String describing task added and new total count of tasks.
-     * @throws DukeException If user command is invalid.
-     * @throws DukeException If user input does not provide task description.
-     * @throws DukeException If user input has missing spaces.
-     * @throws DukeException If user input for time is in invalid date format.
-     * @throws DukeException If user input does not contain descriptors by or at for Deadline and Event respectively.
-     * @throws DukeException If user input is missing time input for Deadline and Event.
+     * @throws MissingTaskDescriptionException If description is missing for task to be added.
+     * @throws DukeException If underlying methods or checks fail.
      */
     private String addTask(TaskList tasks, Ui ui, char separator) throws DukeException {
         // Checks for command given in user input.
-        String userCommand;
-        if (this.userInput.startsWith(Commands.TODO.getCommand())) {
-            userCommand = Commands.TODO.getCommand();
-        } else if (this.userInput.startsWith(Commands.DEADLINE.getCommand())) {
-            userCommand = Commands.DEADLINE.getCommand();
-        } else if (this.userInput.startsWith(Commands.EVENT.getCommand())) {
-            userCommand = Commands.EVENT.getCommand();
+        UserCommands userCommand;
+        if (this.userInput.startsWith(UserCommands.TODO.getCommand())) {
+            userCommand = UserCommands.TODO;
+        } else if (this.userInput.startsWith(UserCommands.DEADLINE.getCommand())) {
+            userCommand = UserCommands.DEADLINE;
+        } else if (this.userInput.startsWith(UserCommands.EVENT.getCommand())) {
+            userCommand = UserCommands.EVENT;
         } else {
-            throw new DukeException(Ui.exceptionInvalidUserCommand());
+            throw new InvalidUserCommandException(this.userInput);
         }
 
         // Preliminary check for any input following command.
         Parser.checkInputValidity(this.userInput, userCommand,
-                Ui.exceptionMissingTaskDescription(userCommand));
+                new MissingTaskDescriptionException(userCommand));
+
+        String userCommandString = userCommand.getCommand();
 
         // Extracts task description.
-        String description = this.userInput.substring(userCommand.length() + 1);
+        String description = this.userInput.substring(userCommandString.length() + 1);
 
         // Parses description and adds the corresponding task to tasks.
-        if (userCommand.equals(Commands.TODO.getCommand())) {
-            // Adds to-do task to tasks.
+        if (userCommandString.equals(UserCommands.TODO.getCommand())) {
             tasks.add(new Todo(description));
-        } else if (userCommand.equals(Commands.DEADLINE.getCommand())) {
+        } else if (userCommandString.equals(UserCommands.DEADLINE.getCommand())) {
             // Parses description into task description and time.
             String[] descriptions =
-                    Parser.parseUserDescriptionInput(description, Descriptors.BY, separator, Commands.DEADLINE);
+                    Parser.parseUserDescriptionInput(description, Descriptors.BY, separator, UserCommands.DEADLINE);
 
-            // Convert time to LocalDate.
             LocalDate localDate = Parser.toLocalDate(descriptions[1]);
 
-            // Adds duke.task.Deadline task to tasks.
             tasks.add(new Deadline(descriptions[0], localDate));
         } else {
             // Parses description into task description and time.
             String[] descriptions =
-                    Parser.parseUserDescriptionInput(description, Descriptors.AT, separator, Commands.EVENT);
+                    Parser.parseUserDescriptionInput(description, Descriptors.AT, separator, UserCommands.EVENT);
 
-            // Convert time to LocalDate.
             LocalDate localDate = Parser.toLocalDate(descriptions[1]);
 
-            // Adds duke.task.Event task to tasks.
             tasks.add(new Event(descriptions[0], localDate));
         }
 
-        // Returns response to user after successfully adding task to tasks.
         return ui.getAddSuccessMessage(tasks.get(tasks.size() - 1), tasks.size());
     }
 
@@ -113,12 +108,8 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
-            // Add task according to user specifications.
             String output = this.addTask(tasks, ui, '/');
-
-            // Saves edited duke.TaskList to save file.
             storage.saveTasksToData(tasks);
-
             return output;
         } catch (DukeException dukeException) {
             return dukeException.toString();

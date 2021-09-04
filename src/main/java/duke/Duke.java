@@ -1,7 +1,8 @@
 package duke;
 
-import duke.Ui.Commands;
+import duke.Ui.UserCommands;
 import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * Handles initialization of storage and tasks and running of Duke chatbot.
@@ -39,7 +40,7 @@ public class Duke {
         } catch (DukeException dukeException) {
             System.out.println(dukeException);
 
-            // If failed to read tasks from save, initialize a new duke.task.Task ArrayList.
+            // If failed to read tasks from save, initialize a new Task ArrayList.
             tasks = new TaskList();
         }
     }
@@ -51,13 +52,11 @@ public class Duke {
      * @return Duke's string output from executing input String.
      */
     public String getResponse(String input) {
-        // Check if input is "bye"
-        if (!input.equals(Commands.BYE.getCommand())) {
+        if (!input.equals(UserCommands.BYE.getCommand())) {
             Command command = Parser.parse(input);
             return command.execute(this.tasks, this.ui, this.storage);
         }
 
-        // If input is "bye" return standard goodbye response.
         return this.ui.getGoodbyeMessage();
     }
 
