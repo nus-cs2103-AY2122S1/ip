@@ -48,6 +48,18 @@ public class Ui {
     }
 
     /**
+     * Displays an error message for unknown commands
+     *
+     * @param error Error message to be displayed.
+     */
+    protected void showLoadingError(String error) {
+        System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        if (dialogContainer != null) {
+            printDialog("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    /**
      * Displays a text in the GUI, if applicable.
      *
      * @param text Message to be displayed.
