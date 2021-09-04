@@ -29,11 +29,11 @@ public class Parser {
             return new ListCommand();
 
         case "done":
-            return new DoneCommand(actionDescription[1]);
+            return new DoneCommand(getDescriptions(actionDescription));
 
         case "todo":
-            descriptions = actionDescription[1];
-            if (descriptions.equals("")) {
+            descriptions = getDescriptions(actionDescription);
+            if (isBlank(descriptions)) {
                 return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
             }
 
@@ -41,8 +41,8 @@ public class Parser {
             return new AddCommand(todos);
 
         case "deadline":
-            descriptions = actionDescription[1];
-            if (descriptions.equals("")) {
+            descriptions = getDescriptions(actionDescription);
+            if (isBlank(descriptions)) {
                 return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
             }
 
@@ -50,8 +50,8 @@ public class Parser {
             return new AddCommand(deadline);
 
         case "event":
-            descriptions = actionDescription[1];
-            if (descriptions.equals("")) {
+            descriptions = getDescriptions(actionDescription);
+            if (isBlank(descriptions)) {
                 return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
             }
 
@@ -59,10 +59,10 @@ public class Parser {
             return new AddCommand(event);
 
         case "delete":
-            return new DeleteCommand(actionDescription[1]);
+            return new DeleteCommand(getDescriptions(actionDescription));
 
         case "find":
-            return new FindCommand(actionDescription[1]);
+            return new FindCommand(getDescriptions(actionDescription));
 
         case "":
             return new EmptyCommand();
@@ -73,7 +73,6 @@ public class Parser {
     }
 
     private String dateTimeFormatter(String unformattedDate) {
-        // 2/12/2019 1800
         String stringDate = unformattedDate.split(" ")[0];
         String time = unformattedDate.split(" ")[1];
 
@@ -84,6 +83,10 @@ public class Parser {
                 Integer.parseInt(time.substring(2, 4)));
 
         return dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm"));
+    }
+
+    private String getDescriptions(String[] actionDescription) {
+        return actionDescription[1];
     }
 
     private String getOnlyDescription(String descriptions) {
@@ -98,5 +101,9 @@ public class Parser {
 
     private String getEventDateTime(String descriptions) {
         return descriptions.split(" /at ")[1];
+    }
+
+    private boolean isBlank(String descriptions) {
+        return descriptions.equals("");
     }
 }
