@@ -26,7 +26,7 @@ public class Storage {
      */
     public ArrayList<String> getStorageContents() throws FileNotFoundException {
         File f = new File(filePath);
-        Scanner s = new Scanner(f); // create a Scanner using the File as the source
+        Scanner s = new Scanner(f);
         ArrayList<String> contents = new ArrayList<>();
         while (s.hasNext()) {
             contents.add(s.nextLine());
