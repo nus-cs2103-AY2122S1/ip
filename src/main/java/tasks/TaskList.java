@@ -12,22 +12,23 @@ import java.util.ArrayList;
 public class TaskList {
 
     /** An arraylist that contains the tasks set by the user. */
-    private final ArrayList<Task> taskArrayList = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
     /** The number of uncompleted tasks in the task list */
-    private int uncompletedTasks = 0;
+    private int numOfUncompletedTasks = 0;
     /** The total number of tasks in the task list. */
-    private int totalTasks = 0;
+    private int totalNumOfTasks = 0;
 
     /**
-     * Adds a task to the task list. Prints a message to tell the user that the task has been added.
+     * Adds a task to the task list and return a message to tell the user that the task has been added.
      *
      * @param task The task to be added to the task list.
+     * @return The message telling the user that the task has been added.
      */
     public String addTask(Task task) {
         String message;
-        this.taskArrayList.add(task);
-        this.uncompletedTasks++;
-        totalTasks++;
+        this.tasks.add(task);
+        this.numOfUncompletedTasks++;
+        totalNumOfTasks++;
         message = "Got it! This task has been added:\n" + task + "\n" + this.getTaskListStatus();
         this.saveTaskList();
         return message;
@@ -41,11 +42,11 @@ public class TaskList {
      * @param task The previously saved task to add to the taskList.
      */
     public void addSavedTask(Task task) {
-        this.taskArrayList.add(task);
+        this.tasks.add(task);
         if (!task.isDone()) {
-            this.uncompletedTasks++;
+            this.numOfUncompletedTasks++;
         }
-        this.totalTasks++;
+        this.totalNumOfTasks++;
     }
 
     /**
@@ -57,16 +58,16 @@ public class TaskList {
      */
     public String removeTask(int index) {
         String message;
-        if (index > this.taskArrayList.size() || index <= 0) {
+        if (index > this.tasks.size() || index <= 0) {
             message = "A task could not be removed because it does not exist.\n";
             return message;
         }
-        Task task = this.taskArrayList.get(index - 1);
-        this.taskArrayList.remove(index - 1);
+        Task task = this.tasks.get(index - 1);
+        this.tasks.remove(index - 1);
         if (!task.isDone()) {
-            uncompletedTasks--;
+            numOfUncompletedTasks--;
         }
-        totalTasks--;
+        totalNumOfTasks--;
         message = "Understood. I've removed this task:\n" + task + "\n";
         this.saveTaskList();
         return message;
@@ -79,18 +80,18 @@ public class TaskList {
      *              So the index 1 represents the first task in the taskList ArrayList.
      * @return The message that should be shown to the user after a task has been marked as done.
      */
-    public String markTaskAsCompleted(int index) {
-        if (index > this.taskArrayList.size() || index <= 0) {
+    public String markTaskAsDone(int index) {
+        if (index > this.tasks.size() || index <= 0) {
             return "Index " + index + " does not exist.\n";
         }
-        if (this.taskArrayList.get(index - 1).isDone()) {
+        if (this.tasks.get(index - 1).isDone()) {
             return "This task at index " + index + " has already been completed.\n";
         }
         String message;
-        this.taskArrayList.get(index - 1).setAsFinished();
-        this.uncompletedTasks--;
+        this.tasks.get(index - 1).markAsDone();
+        this.numOfUncompletedTasks--;
         message = "congratulations! This task has been completed:\n"
-                + this.taskArrayList.get(index - 1) + "\n";
+                + this.tasks.get(index - 1) + "\n";
         this.saveTaskList();
         return message;
     }
@@ -103,14 +104,14 @@ public class TaskList {
      */
     public String listHistory() {
         StringBuilder message = new StringBuilder(Ui.DASHES);
-        if (this.taskArrayList.isEmpty()) {
+        if (this.tasks.isEmpty()) {
             message.append("There are no tasks in your task list.\n");
             message.append(Ui.DASHES);
             return message.toString();
         }
         message.append("Here are the tasks in your list:\n");
-        for (int i = 0; i < this.taskArrayList.size(); i++) {
-            message.append(i + 1).append(". ").append(this.taskArrayList.get(i)).append("\n");
+        for (int i = 0; i < this.tasks.size(); i++) {
+            message.append(i + 1).append(". ").append(this.tasks.get(i)).append("\n");
         }
         message.append(Ui.DASHES);
         return message.toString();
@@ -125,7 +126,7 @@ public class TaskList {
      */
     public ArrayList<Task> findTask(String searchKeyword) {
         ArrayList<Task> searchList = new ArrayList<>();
-        for (Task task : this.taskArrayList) {
+        for (Task task : this.tasks) {
             if (task.getTaskName().toLowerCase().contains(searchKeyword.toLowerCase())) {
                 searchList.add(task);
             }
@@ -137,7 +138,7 @@ public class TaskList {
      * Saves the current task list to local storage in a file called taskList.txt.
      */
     private void saveTaskList() {
-        if (!Storage.saveTaskList(this.taskArrayList)) {
+        if (!Storage.saveTaskList(this.tasks)) {
             System.out.println("Oops!! An error occurred while trying to save your new task.");
         }
     }
@@ -149,8 +150,8 @@ public class TaskList {
      * @return The String describing the taskList status.
      */
     public String getTaskListStatus() {
-        return "You currently have " + this.totalTasks + " tasks in your list with "
-                + this.uncompletedTasks + " uncompleted tasks remaining.\n";
+        return "You currently have " + this.totalNumOfTasks + " tasks in your list with "
+                + this.numOfUncompletedTasks + " uncompleted tasks remaining.\n";
     }
 
 }

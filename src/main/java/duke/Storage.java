@@ -106,7 +106,7 @@ public class Storage {
     private static void readTaskFromScanner(Scanner scanner, TaskList taskList) {
         int count = 0;
         while (scanner.hasNext()) {
-            Task task = Task.stringToTask(scanner.nextLine());
+            Task task = Task.storageStringToTask(scanner.nextLine());
             taskList.addSavedTask(task);
             count++;
         }

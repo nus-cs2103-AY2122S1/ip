@@ -25,6 +25,12 @@ public abstract class AddCommand extends Command {
         this.type = typeToAdd;
     }
 
+    /**
+     * Checks that the user input to add a task is valid.
+     *
+     * @param input The user input to add a task.
+     * @return True if the user input is valid.
+     */
     public abstract boolean verifyAddCommand(String input);
 
     @Override

@@ -56,19 +56,16 @@ public class Ui {
      * @return The start message as a String.
      */
     public static String getStartMessage() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return logo + "\n\n" + "Hello, I'm Duke\n" + "What can I help you with?";
+        return "Hello, I'm Duke\n" + "What can I help you with?";
     }
 
     /**
-     * Prints an error message when the user inputs the task but in the wrong message. The message
-     * tells the user that an error has occurred and how to correctly the input the respective task.
+     * Prints an error message when the user wishes to add a task but provides an invalid input. The message
+     * tells the user that an error has occurred and how to correctly the input in order to add
+     * the respective task.
      *
      * @param type The type of task inputted by the user.
+     * @return A message indicating the correct format to enter a task that is of type <code>type</code>.
      */
     public static String getErrorMessage(Task.Type type) {
         if (type == Task.Type.TODO) {

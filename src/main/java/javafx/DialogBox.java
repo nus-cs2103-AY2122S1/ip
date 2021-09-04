@@ -20,7 +20,7 @@ import java.util.Collections;
 
 public class DialogBox extends HBox {
 
-    private static final Color DUKE_COLOR = Color.rgb( 57, 255, 90, 0.7);
+    private static final Color DUKE_COLOR = Color.rgb(57, 255, 90, 0.7);
     private static final Color USER_COLOR = Color.rgb(236, 229, 221, 0.7);
 
     @FXML
@@ -61,8 +61,7 @@ public class DialogBox extends HBox {
      * @return The DialogBox containing the user input.
      */
     public static DialogBox getUserDialog(String text) {
-        var db = new DialogBox("You:\n" + text, true);
-        db.flip();
+        var db = new DialogBox(text + " ", true);
         return db;
     }
 
@@ -75,7 +74,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text) {
         // Remove blank lines at the end of the list.
         text = text.replaceAll("([\\n\\r]+\\s*)*$", "");
-        var db = new DialogBox("Duke:\n" + text + " ", false);
+        var db = new DialogBox(text + " ", false);
         db.flip();
         return db;
     }
@@ -96,7 +95,7 @@ public class DialogBox extends HBox {
         this.setBackground(new Background(new BackgroundFill(
                 color,
                 new CornerRadii(25),
-                new Insets(5,5,5,5)
+                new Insets(5, 5, 5, 5)
         )));
     }
 }

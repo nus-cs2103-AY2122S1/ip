@@ -24,7 +24,7 @@ public class DoneCommand extends TaskListIndexCommand {
     protected String executeOnTaskList(int... listOfIndex) {
         StringBuilder message = new StringBuilder();
         for (int ofIndex : listOfIndex) {
-            message.append(this.taskList.markTaskAsCompleted(ofIndex)).append("\n");
+            message.append(this.taskList.markTaskAsDone(ofIndex)).append("\n");
         }
         return message.append(this.taskList.getTaskListStatus()).toString();
     }

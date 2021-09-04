@@ -51,7 +51,7 @@ public abstract class Task {
     /**
      * Marks a task as completed.
      */
-    public void setAsFinished() {
+    public void markAsDone() {
         this.isDone = true;
     }
 
@@ -66,6 +66,7 @@ public abstract class Task {
         } else if (this.type.equals(Type.EVENT)) {
             return "[E]";
         } else {
+            // Deadline event
             return "[D]";
         }
     }
@@ -78,7 +79,7 @@ public abstract class Task {
      * @param saveString The String that represents the saved task.
      * @return The task converted from saveString.
      */
-    public static Task stringToTask(String saveString) {
+    public static Task storageStringToTask(String saveString) {
         String[] strComponents = saveString.split("\\|");
         String typeOfTask = strComponents[0].strip();
         boolean isDone = strComponents[1].strip().equals("1");
@@ -90,6 +91,7 @@ public abstract class Task {
         } else if (typeOfTask.equals("D")) {
             loadedTask = new Deadline(taskName, DukeDate.getDukeDateFromType(strComponents[4].strip(), dukeDateType));
         } else {
+            // Event task
             loadedTask = new Event(taskName, DukeDate.getDukeDateFromType(strComponents[4].strip(), dukeDateType));
         }
         loadedTask.isDone = isDone;
