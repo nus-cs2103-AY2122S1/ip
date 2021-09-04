@@ -47,7 +47,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        Task newTask;
+        Task newTask = null;
         switch (this.taskType) {
         case DEADLINE:
             newTask = new Deadline(this.taskDescription, this.date);
@@ -59,8 +59,9 @@ public class AddCommand extends Command {
             newTask = new ToDo(this.taskDescription);
             break;
         default:
-            throw new DukeException("Unknown command.");
+            assert false : this.taskType;
         }
+        assert newTask != null : "No new task created";
         taskList.add(newTask);
         storage.appendToSave(newTask);
         return ui.formatAddedTask(newTask, taskList.getNumberOfTasks());
