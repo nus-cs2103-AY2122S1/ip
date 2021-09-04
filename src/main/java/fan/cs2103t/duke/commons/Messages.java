@@ -5,8 +5,6 @@ package fan.cs2103t.duke.commons;
  */
 public class Messages {
 
-    public static final String MESSAGE_TASK_NOT_FOUND = "Oops, the task doesn't seem to exist.";
-    public static final String MESSAGE_TASK_ALREADY_DONE = "You have already done this task!";
     public static final String MESSAGE_NOTHING_MATCHING_QUERY = "It seems nothing in your list "
             + "matches the search query...";
     public static final String MESSAGE_EMPTY_TODO_DESCRIPTION = "OOPS!!! "
@@ -32,9 +30,11 @@ public class Messages {
 
     public static final String MESSAGE_SUCCESSFULLY_ADDED_FORMAT = "Got it. "
             + "I've added this task: \n  %s\nNow you have %d tasks in the list.";
-    public static final String MESSAGE_SUCCESSFULLY_DELETED_FORMAT = "Noted. "
-            + "I've removed this task: \n %s\nNow you have %d tasks in the list.";
-    public static final String MESSAGE_SUCCESSFULLY_DONE_FORMAT = "Nice! I've marked this task as done: \n %s";
+    public static final String MESSAGE_SUCCESSFULLY_DELETED_FORMAT = "Task %d: Noted. "
+            + "I've removed this task: \n %s\n";
+    public static final String MESSAGE_TASK_NOT_FOUND_FORMAT = "Task %d: Oops, the task doesn't seem to exist.\n";
+    public static final String MESSAGE_TASK_ALREADY_DONE_FORMAT = "Task %d: You have already done this task!\n";
+    public static final String MESSAGE_SUCCESSFULLY_DONE_FORMAT = "Task %d: Nice! I've marked this task as done: \n %s\n";
     public static final String MESSAGE_SUCCESSFULLY_FOUND_FORMAT = "Here are the matching tasks in your list: \n%s";
 
 }
