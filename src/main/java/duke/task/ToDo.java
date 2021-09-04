@@ -12,6 +12,7 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
+        assert !description.equals("") : "ToDo task description cannot be empty";
     }
 
     /**

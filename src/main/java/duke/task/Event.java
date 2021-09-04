@@ -27,6 +27,7 @@ public class Event extends Task {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+        assert !description.equals("") : "Event task description cannot be empty";
     }
 
     /**

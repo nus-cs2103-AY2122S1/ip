@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import duke.exceptions.EmptyDescriptionException;
 import duke.exceptions.EmptyListException;
 import duke.exceptions.IllegalFormatException;
 import duke.exceptions.TaskNotFoundException;
@@ -40,7 +41,13 @@ public class TaskList {
      * @param command user input command
      * @return message for successful addition of todo task
      */
-    public String addTodo(String command) {
+    public String addTodo(String command) throws EmptyDescriptionException {
+        String eventDescription = command.substring(5).trim();
+
+        if (eventDescription.equals("")) {
+            throw new EmptyDescriptionException();
+        }
+
         Task task = new ToDo(command.substring(5).trim());
         tasks.add(task);
 
@@ -54,10 +61,10 @@ public class TaskList {
      * @return message for successful addition of event task
      * @throws IllegalFormatException if user gives invalid command
      */
-    public String addEvent(String command) throws IllegalFormatException {
+    public String addEvent(String command) throws EmptyDescriptionException, IllegalFormatException {
         String correctFormat = "event <event description> /at <dd/MM/yy> <HHmm>-<HHmm>";
         String[] eventInfo = command.substring(6).split("/at ");
-        String eventDescription = eventInfo[0];
+        String eventDescription = eventInfo[0].trim();
         String dateString = eventInfo[1].substring(0, 8);
         String startTimeString = eventInfo[1].substring(9, 13);
         String endTimeString = eventInfo[1].substring(14, 18);
@@ -67,6 +74,10 @@ public class TaskList {
         LocalTime endTime;
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+
+        if (eventDescription.equals("")) {
+            throw new EmptyDescriptionException();
+        }
 
         try {
             date = LocalDate.parse(dateString, dateFormatter);
@@ -93,14 +104,18 @@ public class TaskList {
      * @return message for successful addition of deadline task
      * @throws IllegalFormatException if user gives invalid command
      */
-    public String addDeadline(String command) throws IllegalFormatException {
+    public String addDeadline(String command) throws EmptyDescriptionException, IllegalFormatException {
         String correctFormat = "deadline <deadline description> /by <dd/MM/yy> <HHmm>";
         String[] eventInfo = command.substring(9).split("/by ");
-        String eventDescription = eventInfo[0];
+        String eventDescription = eventInfo[0].trim();
         String dateTimeString = eventInfo[1].trim();
 
         LocalDateTime dateTime;
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
+
+        if (eventDescription.equals("")) {
+            throw new EmptyDescriptionException();
+        }
 
         try {
             dateTime = LocalDateTime.parse(dateTimeString, dateTimeFormatter);
@@ -161,6 +176,7 @@ public class TaskList {
         }
 
         Task task = tasks.remove(taskIndex);
+
 
         int size = tasks.size();
 
