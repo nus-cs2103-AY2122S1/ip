@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+
 import org.junit.jupiter.api.Test;
 
 class TaskTest {
@@ -39,5 +43,25 @@ class TaskTest {
         assertFalse(task.matchesKeyword("todo"));
         assertFalse(task.matchesKeyword("deadline"));
         assertTrue(task.matchesKeyword("event"));
+    }
+
+    @Test
+    public void compareTo_success() {
+        Task todo1 = new Todo("");
+        Task todo2 = new Todo("");
+
+        LocalDateTime dateTime = LocalDateTime.of(2012, 5, 21, 3, 14);
+        Task deadline = new Deadline("", dateTime);
+
+        LocalDate date = LocalDate.of(2021, 1, 1);
+        LocalTime startTime = LocalTime.of(4, 1);
+        Task event = new Event("", date, startTime, null);
+
+        assertEquals(0, todo1.compareTo(todo2));
+        assertEquals(1, todo1.compareTo(deadline));
+        assertEquals(-1, event.compareTo(todo2));
+
+        assertEquals(0, event.compareTo(event));
+        assertTrue(deadline.compareTo(event) < 0);
     }
 }
