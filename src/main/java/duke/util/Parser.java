@@ -14,6 +14,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
+import duke.command.RemindCommand;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidDateInputException;
@@ -47,17 +48,19 @@ public class Parser {
         case "list":
             return new ListCommand(this.tasks, "all", null);
         case "check":
-            return new ListCommand(this.tasks, "date", filterTaskDescription(input));
+            return new ListCommand(this.tasks, "date", getTaskDescription(input));
         case "find":
-            return new ListCommand(this.tasks, "keyword", filterTaskDescription(input));
+            return new ListCommand(this.tasks, "keyword", getTaskDescription(input));
+        case "remind":
+            return new RemindCommand(this.tasks, getRemindArgument(input));
         case "done":
             return new DoneCommand(this.tasks, getAllTaskIndexes(input));
         case "todo":
-            return new AddCommand(this.tasks, filterTaskDescription(input), "ToDo");
+            return new AddCommand(this.tasks, getTaskDescription(input), "ToDo");
         case "deadline":
-            return new AddCommand(this.tasks, filterTaskDescription(input), "Deadline");
+            return new AddCommand(this.tasks, getTaskDescription(input), "Deadline");
         case "event":
-            return new AddCommand(this.tasks, filterTaskDescription(input), "Event");
+            return new AddCommand(this.tasks, getTaskDescription(input), "Event");
         case "delete":
             return new DeleteCommand(this.tasks, getTaskIndex(input));
         default:
@@ -73,7 +76,7 @@ public class Parser {
      * @return the filtered String that contains only the description of the task.
      * @throws EmptyDescriptionException when description is missing (including if it contains only white space).
      */
-    public static String filterTaskDescription(String command) throws EmptyDescriptionException {
+    public static String getTaskDescription(String command) throws EmptyDescriptionException {
         String[] commandItems = command.split(" ", 2);
         if (commandItems.length == 1) {
             throw new EmptyDescriptionException();
@@ -85,6 +88,32 @@ public class Parser {
         }
 
         return filteredDescription.trim();
+    }
+
+    /**
+     * Takes in the original inputted command for a reminder and filters it for the command argument.
+     * The argument is the command string minus the first word which is the command itself.
+     *
+     * @param command the original command inputted by the user.
+     * @return the filtered String that contains the reminder argument.
+     * @throws InvalidArgumentException when description is missing (including if it contains only white space).
+     */
+    public static String getRemindArgument(String command) throws InvalidArgumentException {
+        String[] commandItems = command.split(" ", 2);
+        if (commandItems.length == 1) {
+            throw new InvalidArgumentException("empty");
+        }
+
+        String argument = commandItems[1].trim();
+        if (argument.isEmpty()) {
+            throw new InvalidArgumentException(argument);
+        }
+
+        if (!argument.matches("today|week|next")) {
+            throw new InvalidArgumentException(argument);
+        }
+
+        return argument;
     }
 
     /**

@@ -3,6 +3,7 @@ package duke.util;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -10,6 +11,7 @@ import java.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
 import duke.command.ExitCommand;
+import duke.exception.DukeException;
 
 public class ParserTest {
     @Test
@@ -20,7 +22,35 @@ public class ParserTest {
 
     @Test
     public void testParseTestDescription() {
-        assertEquals("return book", Parser.filterTaskDescription("todo return book"));
+        assertEquals("return book", Parser.getTaskDescription("todo return book"));
+    }
+
+    @Test
+    public void testParseRemindArguments_inputToday_returnsToday() {
+        assertEquals("today", Parser.getRemindArgument("remind today"));
+    }
+
+    @Test
+    public void testParseRemindArguments_inputWeek_returnsWeek() {
+        assertEquals("week", Parser.getRemindArgument("remind week"));
+    }
+
+    @Test
+    public void testParseRemindArguments_inputNext_returnsNext() {
+        assertEquals("next", Parser.getRemindArgument("remind next"));
+    }
+
+    @Test
+    public void testParseRemindArguments_invalidInput_throwsException() {
+        try {
+            assertEquals("tomorrow", Parser.getRemindArgument("remind tomorrow"));
+            fail();
+        } catch (DukeException e) {
+            assertEquals("BAKA! I don't understand this argument in your command!\n"
+                + "Argument: tomorrow\n" + "You might want to check for spelling and potential whitespaces!",
+                e.getMessage()
+            );
+        }
     }
 
     @Test

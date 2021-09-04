@@ -9,20 +9,22 @@ import duke.util.TaskList;
 /**
  * Duke is a chatbot that keeps track of your tasks for you.
  *
- * Current Progress: Level 10. GUI
- *
  * Description:
  * On running the program, Duke greets the user and awaits for inputted commands:
  *
  *   Add Tasks:
  *   - 'todo x' -> adds a ToDo task of x with no date/time attached
  *   - 'deadline x /by a b' -> adds a Deadline task of x that needs to be done by date a and time b (time is optional)
- *   - 'event x /at a b c' -> adds an Event task of x that is on date a and starts at time b and ends at time c
+ *   - 'event x /at a b c' -> adds an Event task of x that is on date a, starts at time b and ends at time c
  *
  *   Display Tasks
  *   - 'list' -> displays current list of tasks
  *   - 'check x' -> displays list of tasks due on date x
  *   - 'find x' -> displays list of tasks that contains the keyword x in their description
+ *   - 'remind x' -> displays list of undone tasks based on the argument x:
+ *      - today: lists all undone tasks due today + all undone todos
+ *      - week: lists all undone tasks due in the week (in 7 days) + all undone todos
+ *      - next: lists next task that is due
  *
  *   Complete Tasks
  *   - 'done x' -> marks Task x as done

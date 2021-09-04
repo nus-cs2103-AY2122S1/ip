@@ -2,6 +2,7 @@ package duke.util;
 
 import static java.lang.Integer.parseInt;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -29,6 +30,8 @@ public class TaskList {
     private static final String COMPLETE_MULTIPLE_MESSAGE = "You completed some tasks! "
         + "Maybe you aren't so incompetent after all.\n";
     private static final String DELETE_MESSAGE = "I've deleted this task so show me some gratitude!\n";
+    private static final String NO_DUE_TASK = "Great job! You don't have any remaining tasks.\n";
+    private static final String REMINDER_MESSAGE = "Reminder:\n";
 
     private ArrayList<Task> tasks;
     private Storage storage;
@@ -170,6 +173,21 @@ public class TaskList {
                 }
             }
             break;
+        case "reminder":
+            int reminderIndex = 1;
+            int numOfDays = parseInt(filterCondition);
+            LocalDate remindDate = LocalDate.now().plusDays(numOfDays);
+
+            for (int i = 0; i < tasks.size(); i++) {
+                Task currTask = tasks.get(i);
+                boolean isBeforeRemindDate = currTask.checkDueBeforeDate(remindDate);
+                boolean isNotDone = !currTask.checkIsCompleted();
+                if (isBeforeRemindDate && isNotDone) {
+                    tasksString = tasksString + String.format("%d:%s\n", reminderIndex, currTask);
+                    reminderIndex++;
+                }
+            }
+            break;
         default:
             // Assertion for control-flow invariant
             throw new AssertionError(String.format("Filter type is invalid: %s", filterType));
@@ -178,6 +196,28 @@ public class TaskList {
         return tasksString.isEmpty()
             ? "You have no tasks currently."
             : tasksString;
+    }
+
+    /**
+     * Gets the next most urgent task (that is not done) in the task list.
+     *
+     * @return String of the result containing the next most urgent task.
+     */
+    public String getNextDueTask() {
+        Task mostUrgentTask = tasks.get(0);
+
+        for (int i = 0; i < tasks.size(); i++) {
+            Task compareTask = tasks.get(i);
+            if (mostUrgentTask.compareTo(compareTask) > 0) {
+                mostUrgentTask = compareTask;
+            }
+        }
+
+        if (mostUrgentTask.checkIsCompleted()) {
+            return NO_DUE_TASK;
+        }
+
+        return REMINDER_MESSAGE + TASK_INDENT + mostUrgentTask.toString();
     }
 
     /**
