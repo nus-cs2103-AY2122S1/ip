@@ -21,28 +21,28 @@ public class Parser {
         String[] words = input.trim().split(" ", 2);
         try {
             checkInput(words);
-            switch (words[0]) {
-            case "bye":
-                return new EndCommand();
-            case "list":
-                return new ListCommand();
-            case "done":
-                return new DoneCommand(words[1]);
-            case "delete":
-                return new DeleteCommand(words[1]);
-            case "find":
-                return new FindCommand(words[1]);
-            case "todo":
-                return new AddCommand("todo", words[1]);
-            case "deadline":
-                return new AddCommand("deadline", words[1]);
-            case "event":
-                return new AddCommand("event", words[1]);
-            default:
-                return new ErrorCommand();
-            }
         } catch (DukeException e) {
             return new ErrorCommand(e.getMessage());
+        }
+        switch (words[0]) {
+        case "bye":
+            return new EndCommand();
+        case "list":
+            return new ListCommand();
+        case "done":
+            return new DoneCommand(words[1]);
+        case "delete":
+            return new DeleteCommand(words[1]);
+        case "find":
+            return new FindCommand(words[1]);
+        case "todo":
+            return new AddCommand("todo", words[1]);
+        case "deadline":
+            return new AddCommand("deadline", words[1]);
+        case "event":
+            return new AddCommand("event", words[1]);
+        default:
+            return new ErrorCommand();
         }
     }
     /**
