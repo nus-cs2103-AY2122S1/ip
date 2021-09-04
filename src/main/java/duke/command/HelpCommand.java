@@ -10,6 +10,7 @@ import duke.task.TaskManager;
  */
 public class HelpCommand extends Command {
     private static final String[] ALL_USAGES = {
+        LoadCommand.USAGE_MESSAGE,
         AddToDoCommand.USAGE_MESSAGE,
         AddDeadlineCommand.USAGE_MESSAGE,
         AddEventCommand.USAGE_MESSAGE,

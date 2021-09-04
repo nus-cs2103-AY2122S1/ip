@@ -26,7 +26,7 @@ public class TaskManager {
     private static final String TASK_NOT_FOUND_MESSAGE =
             "You don't have a task with that number.";
 
-    private final List<Task> taskList;
+    private List<Task> taskList;
 
     public TaskManager(List<Task> taskList) {
         this.taskList = taskList;
@@ -54,6 +54,13 @@ public class TaskManager {
             }
         }
         return count;
+    }
+
+    /**
+     * Overwrites the existing <code>taskList</code>.
+     */
+    public void setTaskList(List<Task> taskList) {
+        this.taskList = taskList;
     }
 
     /**
@@ -172,6 +179,10 @@ public class TaskManager {
     }
 
     private static String formatTasksAsList(List<Task> tasks) {
+        if (tasks.size() == 0) {
+            return "You do not have any tasks.";
+        }
+
         String[] tasksStrings = new String[tasks.size()];
         for (int i = 0; i < tasksStrings.length; i++) {
             Task task = tasks.get(i);

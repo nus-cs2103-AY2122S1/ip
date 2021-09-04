@@ -8,23 +8,25 @@ import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
+import duke.util.DukeProperties;
 import javafx.application.Application;
 
 /**
  * Represents the main Duke application.
  */
 public class Duke {
+    public static final String DEFAULT_STORAGE_FILE_PATH = "./data/tasks.txt";
+
     private final Storage storage;
     private TaskManager taskManager;
     private final Ui ui;
 
     /**
      * Constructor for a Duke object.
-     *
-     * @param filePath Path to the file where tasks should be stored.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
+        String filePath = DukeProperties.getPropertyOrDefault("storage", DEFAULT_STORAGE_FILE_PATH);
         storage = new Storage(filePath);
         try {
             taskManager = new TaskManager(storage.loadTasks());
@@ -38,10 +40,9 @@ public class Duke {
      * Returns a <code>DukeResponse</code> on startup.
      * Displays the saved tasks if the task manager was loaded from storage.
      */
-    public DukeResponse startUp() {
+    public DukeResponse greet() {
         if (taskManager.getTaskCount() > 0) {
-            return new DukeResponse("Welcome back! I'm Duke. These are the tasks I recall from your last visit.\n\n"
-                    + taskManager);
+            return new DukeResponse("Welcome back! I'm Duke. " + storage.getTasksLoadedMessage(taskManager));
         } else {
             return new DukeResponse("Hello! I'm Duke. What can I do for you?");
         }
@@ -51,8 +52,8 @@ public class Duke {
      * Runs the program until termination.
      */
     public void run() {
-        String startUpMessage = startUp().toString();
-        ui.print(startUpMessage);
+        DukeResponse startUpResponse = greet();
+        ui.print(startUpResponse.toString());
         boolean isExit = false;
         while (!isExit) {
             String input = ui.readCommand();
@@ -86,7 +87,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         if (args.length > 0 && args[0].equals("-c")) {
-            new Duke("./data/tasks.txt").run();
+            new Duke().run();
         } else {
             Application.launch(Gui.class, args);
         }
