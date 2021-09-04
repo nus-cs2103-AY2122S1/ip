@@ -4,8 +4,6 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * Represents a task list that stores the tasks
@@ -166,10 +164,14 @@ public class TaskList {
             }
 
             for (int j = 0; j < keywords.length; j++) {
-                resultFound = resultFound || description.contains(keywords[j].toLowerCase(Locale.ROOT)) ||
-                        status.contains(keywords[j]) ||
-                        time.contains(keywords[j].toLowerCase(Locale.ROOT)) ||
-                        typeOfTask.contains(keywords[j].toLowerCase(Locale.ROOT)) ||
+                resultFound = resultFound || description.contains(keywords[j].toLowerCase(Locale.ROOT))
+                        ||
+                        status.contains(keywords[j])
+                        ||
+                        time.contains(keywords[j].toLowerCase(Locale.ROOT))
+                        ||
+                        typeOfTask.contains(keywords[j].toLowerCase(Locale.ROOT))
+                        ||
                         date.contains(keywords[j].toLowerCase(Locale.ROOT));
             }
 
