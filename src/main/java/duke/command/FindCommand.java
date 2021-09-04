@@ -1,11 +1,12 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
-import duke.Ui.Commands;
+import duke.Ui.UserCommands;
+import duke.exception.MissingSearchInputException;
 import duke.task.Task;
 
 /**
@@ -32,26 +33,21 @@ public class FindCommand extends Command {
      * @param tasks TaskList to perform search on.
      * @param ui Ui to get enums, response messages and exception messages from.
      * @return String describing found tasks that contain the search keyword.
-     * @throws DukeException If user input has missing spaces.
-     * @throws DukeException If user input has no search keyword.
+     * @throws DukeException If underlying methods or checks fail.
      */
     private String getTaskMatchingSearch(TaskList tasks, Ui ui) throws DukeException {
         // Preliminary check for validity of user input.
-        Parser.checkInputValidity(this.userInput, Commands.FIND.getCommand(), Ui.exceptionMissingSearchInput());
+        Parser.checkInputValidity(this.userInput, UserCommands.FIND, new MissingSearchInputException());
 
         // Initalize counter to track number of matching tasks.
         int counter = 0;
 
         // Extract search keyword from 1 space after "find" command in user input.
-        String keyword = this.userInput.substring(Commands.FIND.getLength() + 1);
-
-        // String standard response for search begin.
-        String begin = ui.getFindBeginMessage();
+        String keyword = this.userInput.substring(UserCommands.FIND.getLength() + 1);
 
         StringBuilder foundTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-
             // contains() performs case-sensitive search for keyword in task description.
             if (task.getDescription().contains(keyword)) {
                 // Add 1 as display index is 1-based while TaskList index is 0-based.
@@ -62,10 +58,7 @@ public class FindCommand extends Command {
             }
         }
 
-        // String standard response for search success.
-        String success = ui.getFindSuccessMessage(counter, keyword);
-
-        return begin + "\n" + foundTasks + success;
+        return ui.getFindSuccessMessage(counter, keyword, foundTasks.toString());
     }
 
     /**

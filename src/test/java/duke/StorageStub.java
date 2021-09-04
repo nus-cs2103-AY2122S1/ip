@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.DukeException;
+
 public class StorageStub implements Storable {
 
     // Initial tasks.

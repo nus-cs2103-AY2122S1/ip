@@ -2,7 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Parser;
 
 /**

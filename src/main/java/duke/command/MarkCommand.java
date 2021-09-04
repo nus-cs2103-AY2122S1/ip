@@ -1,11 +1,13 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
-import duke.Ui.Commands;
+import duke.Ui.UserCommands;
+import duke.exception.DukeException;
+import duke.exception.InvalidIndexException;
+import duke.exception.MissingIndexException;
 
 /**
  * Represents a command that can be executed to mark a task as done, print the marked task,
@@ -33,31 +35,28 @@ public class MarkCommand extends Command {
      * @param tasks TaskList to mark a task in.
      * @param ui Ui to get enums, response messages and exception messages from.
      * @return String describing the marked task.
-     * @throws DukeException If user input is missing an index.
-     * @throws DukeException If user input for index is not an integer.
-     * @throws DukeException If user input for index is invalid.
+     * @throws MissingIndexException If user input is missing an index.
+     * @throws DukeException If underlying methods or checks fail.
      */
     private String markTask(TaskList tasks, Ui ui) throws DukeException {
 
         // Preliminary check for any input following command.
-        Parser.checkInputValidity(this.userInput, Commands.DONE.getCommand(),
-                Ui.exceptionMissingIndexForMarking());
+        Parser.checkInputValidity(this.userInput, UserCommands.DONE,
+                new MissingIndexException(UserCommands.DONE));
 
         // Parses integer in user input.
-        int userNumInput = Parser.parseUserNumInput(this.userInput, Commands.DONE);
+        int userNumInput = Parser.parseUserNumInput(this.userInput, UserCommands.DONE);
 
         // Decrement integer from user input to match indexing of tasks.
         int idx = userNumInput - 1;
 
         // Checks for invalid index.
         if (idx >= tasks.size() || idx < 0) {
-            throw new DukeException(Ui.exceptionInvalidIndexForMarking());
+            throw new InvalidIndexException(UserCommands.DONE);
         }
 
-        // Marks task at index as done.
         tasks.get(idx).markAsDone();
 
-        // Returns response to user after successfully marking task at index as done.
         return ui.getMarkSuccessMessage(tasks.get(idx));
 
     }
@@ -76,12 +75,8 @@ public class MarkCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
-            // Marks duke.task.Task at user specified index in duke.TaskList.
             String output = this.markTask(tasks, ui);
-
-            // Saves edited duke.TaskList to save file.
             storage.saveTasksToData(tasks);
-
             return output;
         } catch (DukeException dukeException) {
             return dukeException.toString();
