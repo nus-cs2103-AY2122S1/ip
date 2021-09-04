@@ -102,6 +102,8 @@ public class Storage {
      * @throws IOException On failed loading of file.
      */
     public void saveTasks(List<Task> tasks) throws IOException {
+        assert tasks != null : "The task list to be saved should not be null.";
+
         /* re-write the entire contents of the file */
         FileWriter fw = new FileWriter(this.filePath);
         String delim = "-";
