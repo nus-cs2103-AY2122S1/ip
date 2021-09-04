@@ -173,6 +173,7 @@ public class Parser {
             // For user, the list starts at 1. However, our list index starts at 0
             int taskIndex = Integer.parseInt(input.substring(action.substringIndex)) - 1;
 
+            assert taskToBeAltered != null : "taskToBeAltered should no be null";
             taskToBeAltered = action.actionOnTask.apply(this.taskList, taskIndex);
             System.out.println("This task is successfully " + action.successMessage + "!\n\n"
                     + "    " + taskToBeAltered);
@@ -247,6 +248,7 @@ public class Parser {
                 break;
             }
         }
+        assert newTask != null : "newTask should not be null";
         return newTask;
     }
 

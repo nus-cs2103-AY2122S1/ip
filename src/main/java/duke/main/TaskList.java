@@ -100,7 +100,7 @@ public class TaskList implements Iterable<Task> {
         }
 
         if (!taskFound) {
-            System.out.println("    -- NO MATCHING TASKS FOUND --");
+            System.out.println("                    -- NO MATCHING TASKS FOUND --");
         }
     }
 }

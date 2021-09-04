@@ -20,6 +20,12 @@ public class Storage {
     private final File SAVE_FILE = new File(FILEPATH);
     /** A distinct string separating pieces of information saved in the save text file */
     private final String SEPARATOR = "~SEPARATION_STRING~";
+    /** Initial letter of the To-do Task */
+    private final char TODO_INITIAL = 'T';
+    /** Initial letter of the Deadline Task */
+    private final char DEADLINE_INITIAL = 'D';
+    /** Initial letter of the Event Task */
+    private final char EVENT_INITIAL = 'E';
 
     /** TaskList that this Storage will copy to and from */
     private TaskList taskList;
@@ -61,18 +67,18 @@ public class Storage {
 
                 // Add any extra information if needed
                 switch (initialOfTask) {
-                case 'T':
+                case TODO_INITIAL:
                     break;
-                case 'D':
+                case DEADLINE_INITIAL:
                     Deadline deadline = (Deadline) task;
                     toBeWritten.append(SEPARATOR).append(deadline.getBy());
                     break;
-                case 'E':
+                case EVENT_INITIAL:
                     Event event = (Event) task;
                     toBeWritten.append(SEPARATOR).append(event.getAt());
                     break;
                 default:
-                    break;
+                    assert false : initialOfTask;
                 }
 
                 // Add new line for next task
@@ -97,19 +103,20 @@ public class Storage {
                 Task newTask = null;
                 String[] inputArray = sc.nextLine().split(SEPARATOR);
                 boolean isDone = inputArray[0].equals("1");
+                char initialOfTask = inputArray[1].charAt(0);
 
-                switch (inputArray[1].charAt(0)) {
-                case 'T':
+                switch (initialOfTask) {
+                case TODO_INITIAL:
                     newTask = Todo.setTodo(inputArray[2]);
                     break;
-                case 'D':
+                case DEADLINE_INITIAL:
                     newTask = Deadline.setDeadline(inputArray[2] + Deadline.getSeparator() + inputArray[3]);
                     break;
-                case 'E':
+                case EVENT_INITIAL:
                     newTask = Event.setEvent(inputArray[2] + Event.getSeparator() + inputArray[3]);
                     break;
                 default:
-                    break;
+                    assert false : initialOfTask;
                 }
 
                 if (isDone) {
@@ -121,8 +128,7 @@ public class Storage {
         } catch (IOException e1) {
             System.out.println(e1.getMessage());
         } catch (InvalidParamException e2) {
-            // SHOULD NEVER HAPPEN
-            System.out.println("THIS SHOULD NEVER HAPPEN, DEADLINE FORMAT WRONG");
+            assert false : e2.getMessage();
         }
     }
 }
