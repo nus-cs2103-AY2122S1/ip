@@ -23,6 +23,10 @@ public class TaskList {
     }
 
     public Task delete(int index) {
+        if (index < 0 || index >= this.tasks.size()) {
+            throw new DukeException("There is no task " + index);
+        }
+
         Task task = this.tasks.get(index);
         this.tasks.remove(index);
         this.saveToStorage();

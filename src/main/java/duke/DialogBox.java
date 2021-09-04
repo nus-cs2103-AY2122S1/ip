@@ -2,27 +2,46 @@ package duke;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Circle;
 
+import java.io.IOException;
+
+/**
+ * Controller for the DialogBox, which represents a message box.
+ */
 public class DialogBox extends HBox {
 
-    private Label text;
-    private ImageView displayPicture;
+    @FXML
+    private Label dialog;
 
-    public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
+    @FXML
+    private Circle profilePicture;
 
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+    public DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
+        dialog.setText(text);
+        profilePicture.setFill(new ImagePattern(img));
     }
 
     /**
@@ -35,13 +54,24 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(String text, Image img) {
+        DialogBox db = new DialogBox(text, img);
+        db.dialog.setBackground(new Background(
+                new BackgroundFill(
+                        Paint.valueOf("d9f0fa"),
+                        new CornerRadii(8, 0, 8, 8, false),
+                        Insets.EMPTY)));
+        return db;
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
         db.flip();
+        db.dialog.setBackground(new Background(
+                new BackgroundFill(
+                        Paint.valueOf("40aede"),
+                        new CornerRadii(0, 8, 8, 8, false),
+                        Insets.EMPTY)));
         return db;
     }
 }
