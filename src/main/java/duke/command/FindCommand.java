@@ -31,7 +31,7 @@ public class FindCommand extends Command{
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] parsedUserInput = this.getUserInput().split(" ", 2);
         if (parsedUserInput.length == 1) {
-            throw new DukeException("☹ OOPS!!! Please enter \"find\" followed by the name of the task you want to find");
+            throw new DukeException("OOPS!!! Please enter \"find\" followed by the name of the task you want to find");
         } else {
             String taskToFind = parsedUserInput[1];
             String toDoListToPrint = "";

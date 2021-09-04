@@ -11,7 +11,7 @@ Input:
 todo
 --------------------------------------------------------------------------------------------
 Output:
-☹ OOPS!!! The description of a todo cannot be empty.
+OOPS!!! The description of a todo cannot be empty.
 --------------------------------------------------------------------------------------------
 
 
@@ -29,7 +29,7 @@ Input:
 deadline
 --------------------------------------------------------------------------------------------
 Output:
-☹ OOPS!!! The description of a deadline cannot be empty.
+OOPS!!! The description of a deadline cannot be empty.
 --------------------------------------------------------------------------------------------
 
 
