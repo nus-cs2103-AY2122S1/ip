@@ -20,6 +20,7 @@ import java.util.Collections;
 
 public class DialogBox extends HBox {
 
+    /** RGB values for dialog box background color */
     private static final Color DUKE_COLOR = Color.rgb(57, 255, 90, 0.7);
     private static final Color USER_COLOR = Color.rgb(236, 229, 221, 0.7);
 
@@ -61,8 +62,7 @@ public class DialogBox extends HBox {
      * @return The DialogBox containing the user input.
      */
     public static DialogBox getUserDialog(String text) {
-        var db = new DialogBox(text + " ", true);
-        return db;
+        return new DialogBox(text + " ", true);
     }
 
     /**

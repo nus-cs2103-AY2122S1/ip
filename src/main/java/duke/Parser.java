@@ -42,7 +42,7 @@ class Parser {
      * @return The correct command for the user's input.
      */
     protected Command parseUserInput(String input) {
-        assert input != null : "Unable to parse user input";
+        assert input != null : "Unable to parse user input as user input is null";
         if (input.equalsIgnoreCase(KEYWORD_BYE)) {
             // Ends the chat
             return new ExitCommand();
@@ -65,6 +65,7 @@ class Parser {
             // Sets a task as done
             return new DeleteCommand(input, this.taskList);
         } else if (input.toLowerCase().startsWith(KEYWORD_FIND)) {
+            // Search for a task in the taskList
             return new FindCommand(input, this.taskList);
         }
         // Unrecognised input

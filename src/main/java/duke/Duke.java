@@ -27,7 +27,7 @@ public class Duke extends Application {
             primaryStage.setScene(scene);
             Ui dukeUi = new Ui();
             dukeUi.startDuke();
-            fxmlLoader.<MainWindow>getController().setMainWindow(dukeUi, primaryStage);
+            fxmlLoader.<MainWindow>getController().setMainWindow(dukeUi);
             primaryStage.show();
             primaryStage.setTitle("Duke");
         } catch (IOException e) {

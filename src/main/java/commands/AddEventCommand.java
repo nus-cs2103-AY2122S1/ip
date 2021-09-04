@@ -54,7 +54,9 @@ public class AddEventCommand extends AddCommand {
             this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return false;
         }
+
         String[] inputParts = input.split(" -at | /at ");
+
         if (inputParts.length != 2) {
             this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return false;

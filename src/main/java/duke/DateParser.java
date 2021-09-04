@@ -12,7 +12,8 @@ import java.time.format.DateTimeParseException;
  */
 class DateParser {
 
-    /** The date formatters used by duke to format a date to a string to display to the user or to store
+    /**
+     * The date formatters used by duke to format a date to a string to display to the user or to store
      * in the local file taskList.txt.
      * */
     protected static final DateTimeFormatter PRINT_DATE_FORMATTER =

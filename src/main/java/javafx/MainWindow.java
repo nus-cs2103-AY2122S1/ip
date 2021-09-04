@@ -7,7 +7,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -28,7 +27,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Ui dukeUi;
-    private Stage primaryStage;
 
     @FXML
     public void initialize() {
@@ -39,12 +37,10 @@ public class MainWindow extends AnchorPane {
      * Configures the main window when launching.
      *
      * @param dukeUi the dukeUi that power the chat bot.
-     * @param primaryStage The stage that hosts this window.
      */
-    public void setMainWindow(Ui dukeUi, Stage primaryStage) {
+    public void setMainWindow(Ui dukeUi) {
         assert dukeUi != null : "Unable to start Duke";
         this.dukeUi = dukeUi;
-        this.primaryStage = primaryStage;
         this.displayStartMessage();
     }
 

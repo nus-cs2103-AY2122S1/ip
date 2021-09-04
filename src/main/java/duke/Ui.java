@@ -68,6 +68,7 @@ public class Ui {
      * @return A message indicating the correct format to enter a task that is of type <code>type</code>.
      */
     public static String getErrorMessage(Task.Type type) {
+        assert type != null : "Task type is null";
         if (type == Task.Type.TODO) {
             return "Invalid format. Please enter the todo format as below:\n" + Ui.TODO_FORMAT + "\n";
         } else if (type == Task.Type.DEADLINE) {

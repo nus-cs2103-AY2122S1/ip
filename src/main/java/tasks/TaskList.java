@@ -13,8 +13,10 @@ public class TaskList {
 
     /** An arraylist that contains the tasks set by the user. */
     private final ArrayList<Task> tasks = new ArrayList<>();
+
     /** The number of uncompleted tasks in the task list */
     private int numOfUncompletedTasks = 0;
+
     /** The total number of tasks in the task list. */
     private int totalNumOfTasks = 0;
 
@@ -42,6 +44,7 @@ public class TaskList {
      * @param task The previously saved task to add to the taskList.
      */
     public void addSavedTaskFromStorage(Task task) {
+        assert task != null : "Error while loading tasks from storage";
         this.tasks.add(task);
         if (!task.isDone()) {
             this.numOfUncompletedTasks++;
@@ -60,12 +63,15 @@ public class TaskList {
         if (index > this.tasks.size() || index <= 0) {
             return "A task could not be removed because it does not exist.\n";
         }
+
         Task task = this.tasks.get(index - 1);
         assert task != null : "Attempting to remove a null task";
         this.tasks.remove(index - 1);
+
         if (!task.isDone()) {
             numOfUncompletedTasks--;
         }
+
         totalNumOfTasks--;
         String message = "Understood. I've removed this task:\n" + task + "\n";
         this.saveTaskList();
@@ -91,6 +97,7 @@ public class TaskList {
         assert task != null : "Attempting to edit a null task.";
         task.markAsDone();
         this.numOfUncompletedTasks--;
+
         String message = "congratulations! This task has been completed:\n"
                 + task + "\n";
         this.saveTaskList();
@@ -105,15 +112,19 @@ public class TaskList {
      */
     public String listHistory() {
         StringBuilder message = new StringBuilder(Ui.DASHES);
+
         if (this.tasks.isEmpty()) {
             message.append("There are no tasks in your task list.\n");
             message.append(Ui.DASHES);
             return message.toString();
         }
+
         message.append("Here are the tasks in your list:\n");
+
         for (int i = 0; i < this.tasks.size(); i++) {
             message.append(i + 1).append(". ").append(this.tasks.get(i)).append("\n");
         }
+
         message.append(Ui.DASHES);
         return message.toString();
     }
@@ -127,6 +138,7 @@ public class TaskList {
      */
     public ArrayList<Task> findTask(String searchKeyword) {
         ArrayList<Task> searchList = new ArrayList<>();
+        assert searchKeyword != null : "Search term is null";
         for (Task task : this.tasks) {
             if (task.getTaskName().toLowerCase().contains(searchKeyword.toLowerCase())) {
                 searchList.add(task);

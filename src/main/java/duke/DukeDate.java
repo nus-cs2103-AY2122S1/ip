@@ -58,15 +58,20 @@ public class DukeDate {
         if (!isDate) {
             return new DukeDate(input);
         }
+
+        assert input != null : "Date input for task is null";
         String[] strComponents = input.strip().split(" ");
+
         if (strComponents.length > 2) {
             return null;
         } else if (strComponents.length == 2) {
             LocalDateTime dateTime = DateParser.parseDateTime(input.strip());
             return new DukeDate(dateTime);
-        } else {
+        } else if (strComponents.length == 1) {
             LocalDate date = DateParser.parseDate(input.strip());
             return new DukeDate(date);
+        } else {
+            throw new DukeInvalidDateException();
         }
     }
 
@@ -88,7 +93,7 @@ public class DukeDate {
             return new DukeDate(dateString);
         } else if (type == DukeDate.HAS_DATE) {
             return new DukeDate(LocalDate.parse(dateString, DateParser.PRINT_DATE_FORMATTER));
-        } else if (type == DukeDate.HAS_DATE_TIME){
+        } else if (type == DukeDate.HAS_DATE_TIME) {
             return new DukeDate(LocalDateTime.parse(dateString, DateParser.PRINT_DATE_TIME_FORMATTER));
         } else {
             throw new DukeInvalidStorageTaskException();

@@ -32,9 +32,11 @@ public class Event extends Task {
         String[] inputArr = input.split("-at|/at");
         String name = inputArr[0].trim();
         String time = inputArr[1].trim();
+
         if (input.contains("-at")) {
             return new Event(name, DukeDate.of(time, false));
         } else {
+            assert input.contains("/at") : "An unexpected error occurred while adding the task";
             return new Event(name, DukeDate.of(time, true));
         }
     }

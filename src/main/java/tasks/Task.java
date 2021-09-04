@@ -87,6 +87,8 @@ public abstract class Task {
      * @throws exceptions.DukeInvalidStorageTaskException when unable to read the type of task.
      */
     public static Task storageStringToTask(String saveString) throws DukeInvalidStorageTaskException {
+
+        assert saveString != null : "Error while reading saved tasks";
         String[] strComponents = saveString.split("\\|");
         String typeOfTask = strComponents[0].strip();
         boolean isDone = strComponents[1].strip().equals("1");

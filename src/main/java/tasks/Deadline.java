@@ -32,9 +32,11 @@ public class Deadline extends Task {
         String[] inputArr = input.split("-by|/by");
         String taskName = inputArr[0].trim();
         String completedBy = inputArr[1].trim();
+
         if (input.contains("-by")) {
             return new Deadline(taskName, DukeDate.of(completedBy, false));
         } else {
+            assert input.contains("/by") : "An unexpected error occurred while adding the task";
             return new Deadline(taskName, DukeDate.of(completedBy, true));
         }
     }

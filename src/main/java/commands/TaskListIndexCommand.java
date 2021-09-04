@@ -23,6 +23,7 @@ public abstract class TaskListIndexCommand extends Command {
         try {
             // Checks if an argument is provided
             String arguments = this.input.split(" ", 2)[1].trim();
+
             int[] listOfIndexes = this.convertStringArrayToIntArray(this.getIndex(arguments));
             listOfIndexes = this.removeDuplicateIndex(listOfIndexes);
             this.setExecutionMessage(this.executeOnTaskList(listOfIndexes));
@@ -61,14 +62,18 @@ public abstract class TaskListIndexCommand extends Command {
      */
     private int[] removeDuplicateIndex(int[] indexArr) {
         Set<Integer> indexSet = new HashSet<>();
+
         for (int i : indexArr) {
             indexSet.add(i);
         }
+
         int[] result = new int[indexSet.size()];
+
         int i = 0;
         for (int j : indexSet) {
             result[i++] = j;
         }
+
         return result;
     }
 

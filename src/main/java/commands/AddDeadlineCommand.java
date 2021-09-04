@@ -54,7 +54,9 @@ public class AddDeadlineCommand extends AddCommand {
             this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return false;
         }
+
         String[] inputParts = input.split(" -by | /by ");
+
         if (inputParts.length != 2) {
             this.setExecutionMessage(this.getInvalidArgumentsMessage());
             return false;
