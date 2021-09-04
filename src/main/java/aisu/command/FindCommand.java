@@ -15,7 +15,10 @@ import aisu.ui.Ui;
 public class FindCommand extends Command {
     private final String input;
 
-    /** {@inheritDoc} */
+    /**
+     * Constructor to initialise the Find command.
+     * @param input The text to find the tasks by.
+     */
     public FindCommand(String input) {
         this.input = input.trim();
     }

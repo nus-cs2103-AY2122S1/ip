@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 
 /**
  * A GUI for Aisu using FXML.
+ *
+ * @author Liaw Xin Yan
  */
 public class MainApp extends Application {
 

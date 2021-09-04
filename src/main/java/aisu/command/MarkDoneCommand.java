@@ -14,7 +14,10 @@ import aisu.ui.Ui;
 public class MarkDoneCommand extends Command {
     private final int parseInt;
 
-    /** {@inheritDoc} */
+    /**
+     * Constructor to initialise the Mark Done command.
+     * @param parseInt The index of the task to be marked as done.
+     */
     public MarkDoneCommand(int parseInt) {
         this.parseInt = parseInt;
     }
