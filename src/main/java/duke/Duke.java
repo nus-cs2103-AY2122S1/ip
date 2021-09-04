@@ -15,6 +15,7 @@ public class Duke {
 
     /**
      * Initialises app.
+     *
      * @param args empty args.
      */
     public static void main(String[] args) {
