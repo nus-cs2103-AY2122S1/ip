@@ -99,7 +99,6 @@ public class Storage {
             String desc = details[2];
             String dueDate = details[3];
 
-
             if (type.equals(Todo.TAG)) {
                 Task t = new Todo(desc, isDone);
                 taskList.addTask(t);
