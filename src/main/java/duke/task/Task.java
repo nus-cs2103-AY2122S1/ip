@@ -3,7 +3,7 @@ package duke.task;
 /**
  * This is a Task Class that represent the Task user keys into Duke.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
 
     /**
      * These are class field of a Task.
@@ -52,6 +52,15 @@ public abstract class Task {
      * @return A String representing the command that created this task.
      */
     public abstract String fullCommand();
+
+    /**
+     * Returns a String representing the task description.
+     *
+     * @return A String representing the task description.
+     */
+    public String getDescription() {
+        return this.description;
+    }
 
     @Override
     public String toString() {

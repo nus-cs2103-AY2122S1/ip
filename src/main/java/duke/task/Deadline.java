@@ -10,13 +10,7 @@ import duke.exceptions.CommandParamException;
 /**
  * This is a Deadline class that extends Task.
  */
-public class Deadline extends Task {
-
-    /**
-     * These are class fields of Deadline.
-     */
-    protected LocalDate date;
-    protected LocalTime time;
+public class Deadline extends TaskWithDateTime {
 
     /**
      * This is a Deadline Constructor.

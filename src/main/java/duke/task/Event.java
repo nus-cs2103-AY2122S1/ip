@@ -10,13 +10,7 @@ import duke.exceptions.CommandParamException;
 /**
  * This is an Event class that extends Task.
  */
-public class Event extends Task {
-
-    /**
-     * These are class fields of Event.
-     */
-    protected LocalDate date;
-    protected LocalTime time;
+public class Event extends TaskWithDateTime {
 
     /**
      * This is a Event constructor.

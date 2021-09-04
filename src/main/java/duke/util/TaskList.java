@@ -2,6 +2,7 @@ package duke.util;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.exceptions.CompletedTaskException;
 import duke.exceptions.DukeFileException;
@@ -68,7 +69,7 @@ public class TaskList {
         }
         ArrayList<Task> listOfTaskWithKeyword = new ArrayList<>();
         for (int i = 0; i < this.tasks.size(); i++) {
-            if (this.tasks.get(i).toString().contains(keyword)) {
+            if (this.tasks.get(i).getDescription().contains(keyword)) {
                 listOfTaskWithKeyword.add(this.tasks.get(i));
             }
         }
@@ -148,6 +149,13 @@ public class TaskList {
      */
     public int getSize() {
         return tasks.size();
+    }
+
+    /**
+     * Sorts the ArrayList of Tasks.
+     */
+    public void sortList() {
+        Collections.sort(this.tasks);
     }
 
 }
