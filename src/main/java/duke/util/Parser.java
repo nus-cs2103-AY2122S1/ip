@@ -31,31 +31,14 @@ import duke.task.ToDo;
  * @author Chng Zi Hao
  */
 public class Parser {
-
-    /**
-     * Extract out the information given in user input by separating out command.
-     *
-     * @param input       User raw input.
-     * @param instruction The specific command given by user.
-     * @return String containing information that we need.
-     * @throws DukeException Prevent empty descriptions.
-     */
     private static String extractInfo(String input, Instruction instruction) throws DukeException {
         String[] info = input.split(" ", 2);
-        if (info.length < 2) {
+        if (info.length < 2 || info[1].equals("")) {
             throw new DukeMissingDescriptionException(instruction);
         }
         return info[1];
     }
 
-    /**
-     * Extract out the index given in user input by separating out command.
-     *
-     * @param input       User raw input.
-     * @param instruction The specific command given by user.
-     * @return int of the task user wants to select.
-     * @throws DukeException Prevent empty indexes.
-     */
     private static int extractIndex(String input, Instruction instruction) throws DukeException {
         String[] info = input.split(" ", 2);
         if (info.length < 2 || info[1].equals("")) {
@@ -64,13 +47,6 @@ public class Parser {
         return Integer.parseInt(info[1]) - 1;
     }
 
-    /**
-     * Format the raw information by splitting it to get the description and due date of deadline.
-     *
-     * @param info User input containing relevant information.
-     * @return String array with information of deadline split to description and date.
-     * @throws DukeException For missing arguments.
-     */
     private static String[] extractDeadline(String info) throws DukeException {
         if (!info.contains("/by")) {
             throw new DukeMissingArgumentException("/by");
@@ -84,13 +60,6 @@ public class Parser {
         return description;
     }
 
-    /**
-     * Format the raw information by splitting it to get the description and timeframe of event.
-     *
-     * @param info User input containing relevant information.
-     * @return String array with information of event split to description and event timeframe.
-     * @throws DukeException For missing arguments.
-     */
     private static String[] extractEvent(String info) throws DukeException {
         if (!info.contains("/at")) {
             throw new DukeMissingArgumentException("/at");
@@ -219,7 +188,8 @@ public class Parser {
      * @throws DukeException If any exception occurs when interpreting user input.
      */
     public Command parse(String input) throws DukeException {
-        Instruction instruction = Instruction.getValueOfLabel(input.split(" ")[0]);
+        String extractedInstruction = input.split(" ")[0];
+        Instruction instruction = Instruction.getValueOfLabel(extractedInstruction);
         switch (instruction) {
         case LIST:
             return new ListCommand();
@@ -255,6 +225,7 @@ public class Parser {
         case BYE:
             return new ExitCommand();
         default:
+            assert !extractedInstruction.matches("todo|event|deadline|list|help|find|filter|done|delete|bye");
             return new InvalidCommand();
         }
     }
