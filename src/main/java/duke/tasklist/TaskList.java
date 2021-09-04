@@ -42,14 +42,18 @@ public class TaskList {
      *
      * @param index Index of item that wants to be marked as done.
      */
-    public void markTaskAsDone(int index) {
+    public String markTaskAsDone(int index) {
+        String response = "";
+
         Task doneTask = getTask(index).markAsDone();
         list.set(index - 1, doneTask);
 
-        ui.print("Nice! I've marked this task as done:");
-        ui.print("    %s%n", doneTask.toString());
+        response += "Nice! I've marked this task as done:\n";
+        response += String.format("    %s%n", doneTask.toString());
 
         saveData();
+
+        return response;
     }
 
     /**
@@ -57,12 +61,15 @@ public class TaskList {
      *
      * @param item The task that is to be added.
      */
-    public void add(Task item) {
+    public String add(Task item) {
+        String response = "";
         addWithoutPrinting(item);
 
-        ui.print("Noted! I've added the following task:");
-        ui.print("    %s%n", item.toString());
-        printSize();
+        response += ("Noted! I've added the following task:\n");
+        response += String.format("    %s%n", item.toString());
+        response += printSize();
+
+        return response;
     }
 
     void addWithoutPrinting(Task item) {
@@ -75,14 +82,17 @@ public class TaskList {
      *
      * @param index Index of item that wants to be deleted.
      */
-    public void delete(int index) {
+    public String delete(int index) {
+        String response = "";
         Task removedItem = list.remove(index - 1);
 
-        ui.print("Got it. I've removed the following task:");
-        ui.print("    %s%n", removedItem.toString());
-        printSize();
+        response += ("Got it. I've removed the following task:\n");
+        response += String.format("    %s%n", removedItem.toString());
+        response += printSize();
 
         saveData();
+
+        return response;
     }
 
     /**
@@ -90,36 +100,40 @@ public class TaskList {
      *
      * @param keyword Keyword of task that wants to be found.
      */
-    public void find(String keyword) {
+    public String find(String keyword) {
+        String response = "";
         List<Task> filteredList = list.stream().filter(task -> task.getName().contains(keyword))
                 .collect(Collectors.toList());
         if (filteredList.size() > 0) {
-            ui.print("Here are the matching tasks that I found:");
-            printItems(filteredList);
+            response += ("Here are the matching tasks that I found:\n");
+            response += printItems(filteredList);
         } else {
-            ui.print("No tasks found.");
+            response += ("No tasks found.\n");
         }
+        return response;
     }
 
-    void printSize() {
-        ui.print("Total tasks: %d%n", list.size());
-    }
-
-    /**
-     * Prints the current list of tasks.
-     */
-    public void printItems() {
-        ui.print("Here are the tasks in your list:");
-        printItems(this.list);
+    String printSize() {
+        return String.format("Total tasks: %d%n", list.size());
     }
 
     /**
      * Prints the current list of tasks.
      */
-    public void printItems(List<Task> list) {
+    public String printItems() {
+        String response = "Here are the tasks in your list:\n";
+        return response + printItems(this.list);
+    }
+
+    /**
+     * Prints the current list of tasks.
+     */
+    public String printItems(List<Task> list) {
+        StringBuilder response = new StringBuilder();
         for (int i = 0; i < list.size(); i++) {
-            ui.print("%d. %s%n", (i + 1), list.get(i));
+            response.append(String.format("%d. %s%n", (i + 1), list.get(i)));
         }
+        return response.toString();
     }
 
     List<String> listItems() {
