@@ -1,8 +1,10 @@
 package meow;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Represents a task list that stores the tasks
@@ -132,21 +134,16 @@ public class TaskList {
      * Filter the list of meow.Task objects based on the keyword provided by the user,
      * and returns a list of meow.Task objects.
      *
-     * @param keywords The search keywords input by the user.
+     * @param keyword The search keywors input by the user.
      * @return A list of filtered meow.Task objects.
      */
-    public List<Task> searchTask(String ... keywords) {
-        List<Task> filteredTasks = new ArrayList<>();
-        for (int i = 0; i < this.tasksList.size(); i++) {
-            String description = this.tasksList.get(i).getDescription();
-            boolean resultFound = false;
-            for (int j = 0; j < keywords.length; j++) {
-                resultFound = resultFound || description.contains(keywords[j]);
-            }
-            if (resultFound) {
-                filteredTasks.add(this.tasksList.get(i));
-            }
-        }
+    public List<Task> searchTask(String keyword) {
+        Stream<Task> taskStream = this.tasksList.stream();
+        List<Task> filteredTasks =
+                taskStream
+                        .filter(task -> task.getDescription()
+                                .contains(keyword)).collect(Collectors.toList());
         return filteredTasks;
     }
+
 }
