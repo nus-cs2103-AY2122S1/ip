@@ -35,14 +35,6 @@ public class Duke extends Application {
     private static final int ERROR_OUTOFBOUNDS = 4;
     private static final int ERROR_UNKNOWN = 5;
 
-//    private static final String INSTRUCTIONS = "To add a todo task  --  todo <task>\n"
-//            + "To add a deadline  --  deadline <task> /by MMM dd yyyy HH:mm\n"
-//            + "To add an event  --  event <task> /at MMM dd yyyy HH:mm\n"
-//            + "To mark tasks as done  --  done <idx from list>\n"
-//            + "To delete tasks  --  delete <idx from list>\n"
-//            + "To search for task  --  find <keyword>\n"
-//            + "To see all contents of list  --  list";
-
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
