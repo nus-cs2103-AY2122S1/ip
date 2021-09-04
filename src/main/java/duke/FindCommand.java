@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a command to get all tasks that matches the sequence
@@ -27,12 +28,13 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         List<Task> savedTasks = tasks.getTasks();
         String message = "Here are the matching tasks in your list:\n";
-        int counter = 1;
-        for (Task i : savedTasks) {
-            if (i.getBody().contains(this.sequence)) {
-                message += counter + ". " + i + "\n";
-                counter++;
-            }
+        List<Task> matchedTasks = savedTasks
+                .stream()
+                .filter(task -> task.getBody().contains(this.sequence))
+                .collect(Collectors.toList());
+        for (int i = 0; i < matchedTasks.size(); i++) {
+            int label = i + 1;
+            message += label + ". " + matchedTasks.get(i) + "\n";
         }
         return message;
     }
