@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
     public void execute(TaskList tasklist, Storage storage, Ui ui) throws AisuException {
         Task deletedTask = tasklist.deleteTask(this.parseInt);
         storage.save(tasklist);
-        this.uiText = ui.formatText(" Noted~ I've removed this task:",
+        this.uiText = Ui.formatText(" Noted~ I've removed this task:",
                 " - " + deletedTask,
                 " Now you have " + tasklist.getListSize() + " task(s) in the list.\n");
     }

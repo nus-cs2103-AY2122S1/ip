@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public void execute(TaskList tasklist, Storage storage, Ui ui) {
-        this.uiText = ui.getGoodbyeMessage();
+        this.uiText = Ui.getGoodbyeMessage();
     }
 
     /** {@inheritDoc} */

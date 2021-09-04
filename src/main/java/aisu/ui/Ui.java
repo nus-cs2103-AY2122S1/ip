@@ -1,36 +1,25 @@
 package aisu.ui;
 
-import java.io.PrintStream;
-import java.util.Scanner;
-
 /**
  * A User Interface for Aisu.
  *
  * @author Liaw Xin Yan
  */
 public class Ui {
-    private static final String DIVIDER = "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=\n";
-    private static final String LOGO = " (`-')  _   _               (`-').->           \n"
-            + "(OO ).-/  (_)              ( OO)_       .->\n"
-            + "/ ,---.   ,-(`-') (`-')   (_)--\\_) ,--.(,--.\n"
-            + "| \\ /`.\\  | ( OO) ( OO).->/    _ / |  | |(`-')\n"
-            + "'-'|_.' | |  |  )(,------.\\_..`--. |  | |(OO )\n"
-            + "(|  .-. |(|  |_/  `------'.-._)   \\|  | | |  \\ \n"
-            + "|  | |  | |  |'->         \\      / \\  '-'(_ .'\n"
-            + "`--' `--' `--'             `-----'  `-----'   \n";
-    private static final int PADDING_LENGTH = 48;
-    private static String formattedInstructions;
+    private static final int PADDING_LENGTH = 20;
     private static final String GOODBYE_MESSAGE = "See you next time! :D";
-
-    private final Scanner in;
-    private final PrintStream out;
+    private static final String LOGO = "   _____  .__              \n"
+            + "  /  _  \\ |__| ________ __ \n"
+            + " /  /_\\  \\|  |/  ___/  |  \\\n"
+            + "/    |    \\  |\\___ \\|  |  /\n"
+            + "\\____|__  /__/____  >____/ \n"
+            + "        \\/        \\/       ";
+    private static String formattedInstructions;
 
     /**
      * Constructor to initialise the User Interface.
      */
     public Ui() {
-        this.in = new Scanner(System.in);
-        this.out = System.out;
         initInstructions("todo (task)", "Add tasks without any date/time attached to it",
                 "list", "Show list",
                 "done (taskNumber)", "Mark task as done",
@@ -38,7 +27,8 @@ public class Ui {
                 "event (task) /at (date)", "Add tasks that start at a specific time and ends at a specific time",
                 "find (keyword)", "Look for tasks with that keyword",
                 "delete (taskNumber)", "Delete task",
-                "bye", "Exit program");
+                "bye", "Exit program",
+                "help", "Show help page");
     }
 
     /**
@@ -64,43 +54,29 @@ public class Ui {
     }
 
     /**
-     * Gets the input from the user.
-     * @return input from the user in string format.
+     * Displays the welcome message from the bot.
+     * @return Welcome message.
      */
-    public String getInput() {
-        return this.in.nextLine();
+    public static String getWelcomeMessage() {
+        return formatText("\n" + LOGO + "\nHello, I'm Ai-su! How may I help you today?\n",
+                "You can:",
+                formattedInstructions);
     }
 
     /**
      * Retrieves the goodbye message from the bot.
      * @return Goodbye message.
      */
-    public String getGoodbyeMessage() {
+    public static String getGoodbyeMessage() {
         return GOODBYE_MESSAGE;
     }
 
     /**
-     * Displays the ASCII divider.
+     * Retrieves the help message from the bot.
+     * @return Help message.
      */
-    public void showDivider() {
-        this.out.println(DIVIDER);
-    }
-
-    /**
-     * Displays the welcome message.
-     */
-    public void showWelcomeMessage() {
-        this.out.println("\n" + LOGO + DIVIDER + " Hello, I'm Ai-su! How may I help you today?\n" + DIVIDER);
-        this.out.println("You can:");
-        this.out.println(formattedInstructions + "\n" + DIVIDER + "\n");
-    }
-
-    /**
-     * Displays the error message.
-     * @param message AisuException
-     */
-    public void showError(String message) {
-        this.out.println(message);
+    public static String getHelpMessage() {
+        return formattedInstructions;
     }
 
     /**
@@ -128,11 +104,11 @@ public class Ui {
      * @param message Message to be shown.
      * @return String format of the messages.
      */
-    public String formatText(String... message) {
+    public static String formatText(String... message) {
         StringBuilder result = new StringBuilder();
         for (String m: message) {
             result.append(m).append("\n");
         }
-        return result.toString();
+        return result.append("\n").toString();
     }
 }

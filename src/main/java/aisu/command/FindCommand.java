@@ -34,7 +34,12 @@ public class FindCommand extends Command {
     public void execute(TaskList tasklist, Storage storage, Ui ui) {
         List<Task> result = tasklist.findTasksWith(this.input);
         TaskList resultList = new TaskList(result);
-        this.uiText = ui.formatText("Here's what I found:", resultList.toString());
+        if (!result.isEmpty()) {
+            this.uiText = Ui.formatText("Here's what I found:", resultList.toString());
+        } else {
+            this.uiText = Ui.formatText("Didn't find anything with that keyword... Try searching again?");
+        }
+
     }
 
     /** {@inheritDoc} */

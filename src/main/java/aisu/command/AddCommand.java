@@ -50,7 +50,7 @@ public class AddCommand extends Command {
             throw new AisuException("Invalid input!");
         }
         storage.save(tasklist);
-        this.uiText = ui.formatText(" Got it! I've added this task:",
+        this.uiText = Ui.formatText(" Got it! I've added this task:",
                 " - " + newTask,
                 " Now you have " + tasklist.getListSize() + " task(s) in the list.\n");
     }

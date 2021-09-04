@@ -1,12 +1,6 @@
 package aisu.parser;
 
-import aisu.command.AddCommand;
-import aisu.command.Command;
-import aisu.command.DeleteCommand;
-import aisu.command.ExitCommand;
-import aisu.command.FindCommand;
-import aisu.command.MarkDoneCommand;
-import aisu.command.ShowListCommand;
+import aisu.command.*;
 import aisu.exception.AisuException;
 import aisu.tasklist.TaskList;
 
@@ -50,6 +44,9 @@ public class Parser {
 
         } else if (input.startsWith("find ")) {
             return new FindCommand(input.substring(5));
+
+        } else if (input.equals("help")) {
+            return new HelpCommand();
 
         } else {
             throw new AisuException("That's an invalid task format...");

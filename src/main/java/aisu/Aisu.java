@@ -40,46 +40,6 @@ public class Aisu {
     }
 
     /**
-     * Retrieves the task list data from the tasklist.
-     * @return The list containing tasks.
-     */
-    public List<Task> getTaskListData() {
-        return this.tasklist.getListData();
-    }
-
-    /**
-     * Retrieves the storage object used for storing data.
-     * @return The storage object.
-     */
-    public Storage getStorage() {
-        return this.storage;
-    }
-
-    /**
-     * Starts the tasklist program and requests for user input.
-     * If user types "bye", the program ends.
-     */
-    public void run() {
-        ui.showWelcomeMessage();
-
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                Command command = Parser.parse(ui.getInput());
-                ui.showDivider();
-                command.execute(this.tasklist, this.storage, this.ui);
-                isExit = command.isExit();
-            } catch (AisuException e) {
-                ui.showDivider();
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showDivider();
-            }
-        }
-    }
-
-    /**
      * Gets a response from the user.
      * @param input Input from the user.
      * @return Response from Aisu.
@@ -88,20 +48,9 @@ public class Aisu {
         try {
             Command command = Parser.parse(input);
             command.execute(this.tasklist, this.storage, this.ui);
-            System.out.println(command.showUiText());
             return command.showUiText();
         } catch (AisuException e) {
             return e.getMessage();
         }
-    }
-
-    /**
-     * Calls the run() function.
-     * Serves as an entrypoint of the program.
-     *
-     * @param args The command line arguments.
-     */
-    public static void main(String[] args) {
-        new Aisu("data", "test1.txt").run();
     }
 }

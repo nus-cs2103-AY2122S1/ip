@@ -1,6 +1,7 @@
 package aisu.ui.gui;
 
 import aisu.Aisu;
+import aisu.command.WelcomeCommand;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -14,9 +15,8 @@ import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
- *
- * @author Liaw Xin Yan
  */
+
 public class MainWindow extends AnchorPane {
     // The @FXML annotation marks a private or protected member and makes it accessible to FXML despite its modifier.
     // Without the annotation, we will have to make everything public and expose our UI to unwanted changes.
@@ -56,14 +56,9 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void showWelcome() {
-        String logo = "   _____  .__              \n"
-                + "  /  _  \\ |__| ________ __ \n"
-                + " /  /_\\  \\|  |/  ___/  |  \\\n"
-                + "/    |    \\  |\\___ \\|  |  /\n"
-                + "\\____|__  /__/____  >____/ \n"
-                + "        \\/        \\/       ";
-        String output = logo + "\n Hello, I'm Ai-su! How may I help you today? \n\n";
-        makeAisuSay(output);
+        WelcomeCommand welcome = new WelcomeCommand();
+        welcome.execute();
+        makeAisuSay(welcome.showUiText());
     }
 
     /**
