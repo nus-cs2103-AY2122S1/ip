@@ -2,7 +2,6 @@ package duke;
 
 // import java packages
 import java.util.ArrayList;
-import java.util.Scanner;
 
 // import duke packages
 import duke.command.Deadline;
@@ -28,7 +27,7 @@ public class Duke {
      * @param filePath Filepath to save tasks and load tasks.
      */
     public Duke(String filePath) {
-        ui = new Ui();
+        ui = new Ui("", "");
         storage = new Storage(filePath);
         try {
             commandList = new TaskList(storage.loadTasks());
@@ -39,21 +38,29 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke chatbot.
+     * Converts Duke to string format.
+     *
+     * @return Duke as a string.
      */
-    public void run() {
-        ui.sayHello();
+    @Override
+    public String toString() {
+        return "im a chatbot ☺ - calico";
+    }
+
+    /**
+     * Generates a response to user input.
+     *
+     * @param cmd Command from user
+     * @return Chatbot response
+     */
+    public String getResponse(String cmd) {
         int count = 0 + commandList.getLength();
 
-        // Create a scanner to read from standard input.
-        Scanner sc = new Scanner(System.in);
-        String cmd = sc.nextLine();
-
-        while (Parser.isNotBye(cmd)) {
+        if (Parser.isNotBye(cmd)) {
             try {
                 // when command given is "list"
                 if (Parser.isList(cmd)) {
-                    ui.printList(commandList);
+                    return ui.showList(commandList);
                 } else if (Parser.isDone(cmd)) {
                     // when command given is "done"
 
@@ -67,7 +74,7 @@ public class Duke {
                         // throw exception when itemNo not within limit
                         throw new DukeException("i cant seem to find the task you're looking for");
                     }
-                    ui.printTaskDone(commandList, itemNo - 1);
+                    return ui.showTaskDone(commandList, itemNo - 1);
                 } else if (Parser.isValidTask(cmd)) {
                     String task = Parser.getTaskName(cmd);
                     String desc = Parser.getDesc(cmd);
@@ -96,8 +103,8 @@ public class Duke {
                             throw new DukeException("the name of task is not valid");
                         }
                         storage.saveTasks(commandList.getTasks());
-                        ui.printTaskAdded(commandList, count);
                         count++;
+                        return ui.showTaskAdded(commandList, count - 1);
                     }
                 } else if (Parser.isDelete(cmd)) {
                     int itemNo = Parser.parseDeleteCmd(cmd);
@@ -105,10 +112,11 @@ public class Duke {
                     // Make sure itemNo is within limit
                     if ((itemNo <= count) && (itemNo > 0)) {
                         // Remove item from lists
-                        ui.printTaskDeleted(commandList, itemNo - 1);
+                        String deletionMessage = ui.showTaskDeleted(commandList, itemNo - 1);
                         commandList.remove(itemNo - 1);
                         storage.saveTasks(commandList.getTasks());
                         count--;
+                        return deletionMessage;
                     } else {
                         // throw exception when itemNo not within limit
                         throw new DukeException("i cant seem to find the task you're looking for");
@@ -122,9 +130,9 @@ public class Duke {
                     }
                     ArrayList<Task> matchingTasks = commandList.find(desc);
                     if (matchingTasks.isEmpty()) {
-                        ui.showNoMatch();
+                        return ui.showNoMatch();
                     } else {
-                        ui.showMatchingTasks(matchingTasks);
+                        return ui.showMatchingTasks(matchingTasks);
                     }
                 } else {
                     // throw exception when command not found
@@ -135,33 +143,21 @@ public class Duke {
                         throw new DukeException("im sorry, but i dont know what that means :(");
                     }
                 }
-                cmd = sc.nextLine();
             } catch (DukeException e) {
-                ui.showDukeError(e);
-                cmd = sc.nextLine();
+                return ui.showDukeError(e);
             }
         }
 
         // when command given is "bye"
-        ui.sayGoodbye();
+        return ui.sayGoodbye();
     }
 
     /**
-     * Starts the Duke chatbot.
+     * Say hello to user.
      *
-     * @param args Arguments to be passed to main function.
+     * @return Hello message.
      */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
-    /**
-     * Converts Duke to string format.
-     *
-     * @return Duke as a string.
-     */
-    @Override
-    public String toString() {
-        return "im a chatbot ☺ - calico";
+    public String intro() {
+        return ui.sayHello();
     }
 }
