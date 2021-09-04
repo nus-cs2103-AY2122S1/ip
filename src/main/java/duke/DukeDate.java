@@ -1,6 +1,7 @@
 package duke;
 
 import exceptions.DukeInvalidDateException;
+import exceptions.DukeInvalidStorageTaskException;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -80,13 +81,16 @@ public class DukeDate {
      * @param type The type of the saved DukeDate.
      * @return The reconverted DukeDates.
      */
-    public static DukeDate getDukeDateFromType(String dateString, int type) {
+    public static DukeDate getDukeDateFromStorage(String dateString, int type)
+            throws DukeInvalidStorageTaskException {
         if (type == DukeDate.HAS_STRING) {
             return new DukeDate(dateString);
         } else if (type == DukeDate.HAS_DATE) {
             return new DukeDate(LocalDate.parse(dateString, DateParser.PRINT_DATE_FORMATTER));
-        } else {
+        } else if (type == DukeDate.HAS_DATE_TIME){
             return new DukeDate(LocalDateTime.parse(dateString, DateParser.PRINT_DATE_TIME_FORMATTER));
+        } else {
+            throw new DukeInvalidStorageTaskException();
         }
     }
 
@@ -106,6 +110,7 @@ public class DukeDate {
         } else if (this.date != null) {
             return this.date.format(DateParser.PRINT_DATE_FORMATTER);
         } else {
+            assert dateString != null : "Encountered an error while reading a task date";
             return dateString;
         }
     }
