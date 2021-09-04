@@ -13,6 +13,7 @@ import static fan.cs2103t.duke.commons.Messages.MESSAGE_WRONG_DEADLINE_FORMAT;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import fan.cs2103t.duke.command.AddCommand;
 import fan.cs2103t.duke.command.Command;
@@ -96,8 +97,9 @@ public class Parser {
             if (input.equals("done")) {
                 throw new DukeException(MESSAGE_EMPTY_DONE_COMMAND);
             }
-            if (input.charAt(4) == ' ' && isValidNum(input.substring(5))) {
-                return new DoneCommand(Integer.parseInt(input.substring(5).trim()));
+            ArrayList<Integer> numbers = areValidNumbers(input.substring(5));
+            if (input.charAt(4) == ' ' && numbers != null) {
+                return new DoneCommand(numbers);
             } else {
                 throw new DukeException(MESSAGE_INVALID_INPUT);
             }
@@ -105,8 +107,9 @@ public class Parser {
             if (input.equals("delete")) {
                 throw new DukeException(MESSAGE_EMPTY_DELETE_COMMAND);
             }
-            if (input.charAt(6) == ' ' && isValidNum(input.substring(7))) {
-                return new DeleteCommand(Integer.parseInt(input.substring(7).trim()));
+            ArrayList<Integer> numbers = areValidNumbers(input.substring(7));
+            if (input.charAt(6) == ' ' && numbers != null) {
+                return new DeleteCommand(numbers);
             } else {
                 throw new DukeException(MESSAGE_INVALID_INPUT);
             }
@@ -125,13 +128,28 @@ public class Parser {
         throw new DukeException(MESSAGE_INVALID_INPUT);
     }
 
-    private boolean isValidNum(String s) {
-        try {
-            Integer.parseInt(s.trim());
-        } catch (Exception e) {
-            return false;
+    private ArrayList<Integer> areValidNumbers(String s) {
+        String[] strings = s.trim().split("\\s+");
+        ArrayList<Integer> numbers = new ArrayList<>();
+        for (String string : strings) {
+            Integer i = isValidNum(string);
+            if (i == null) {
+                return null;
+            } else {
+                numbers.add(i);
+            }
         }
-        return true;
+        return numbers;
+    }
+
+    private Integer isValidNum(String s) {
+        int i;
+        try {
+            i = Integer.parseInt(s.trim());
+        } catch (Exception e) {
+            return null;
+        }
+        return i;
     }
 
     private Todo parseTodo(String s) throws DukeException {
