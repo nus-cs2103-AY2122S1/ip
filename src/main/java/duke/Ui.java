@@ -4,18 +4,11 @@ import java.util.ArrayList;
 
 public class Ui {
 
-    private static final String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-
     /**
      * Displays a greeting message.
      */
     public String greet() {
-        return "Hello from\n" + logo +"\n"
-                + "What can I do for you?";
+        return "Hello from Duke!\nWhat can I do for you?";
     }
 
     /**
@@ -46,6 +39,20 @@ public class Ui {
     public String getDoneMessage(Task task) {
         return "Nice! I've marked this task as done:\n"
                 + "  " + task;
+    }
+
+    public String getListMessage(TaskList taskList) {
+        ArrayList<Task> tasks = taskList.getTaskList();
+        if (tasks == null || tasks.isEmpty()) {
+            return "You currently have no tasks!";
+        } else {
+            StringBuilder result = new StringBuilder();
+            result.append("Here are your tasks:\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                result.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+            }
+            return result.toString();
+        }
     }
 
     /**

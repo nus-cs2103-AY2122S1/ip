@@ -1,6 +1,6 @@
 package duke;
 
-import duke.exception.DukeException;
+import duke.exception.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -107,7 +107,7 @@ public class Task {
             try {
                 this.time = LocalDate.parse(time, DATE_TIME_FORMATTER);
             } catch (DateTimeParseException e) {
-                throw new DukeException.DateInputInvalidException();
+                throw new DateFormatException();
             }
         }
 
@@ -116,7 +116,7 @@ public class Task {
             try {
                 this.time = LocalDate.parse(time, DATE_TIME_FORMATTER);
             } catch (DateTimeParseException e) {
-                throw new DukeException.DateInputInvalidException();
+                throw new DateFormatException();
             }
         }
 
@@ -136,7 +136,7 @@ public class Task {
             try {
                 this.time = LocalDate.parse(time, DATE_TIME_FORMATTER);
             } catch (DateTimeParseException e) {
-                throw new DukeException.DateInputInvalidException();
+                throw new ReadFileException();
             }
         }
 
@@ -145,7 +145,7 @@ public class Task {
             try {
                 this.time = LocalDate.parse(time, DATE_TIME_FORMATTER);
             } catch (DateTimeParseException e) {
-                throw new DukeException.DateInputInvalidException();
+                throw new ReadFileException();
             }
         }
 
@@ -161,7 +161,7 @@ public class Task {
      *
      * @param str The String input read from the file.
      * @return The duke.Task whose data is stored in the file.
-     * @throws DukeException The exception thrown when the file data is invalid.
+     * @throws duke.exception.DukeException The exception thrown when the file data is invalid.
      */
     public static Task readTaskFromFile(String str) throws DukeException {
         String regex = "^\\[([TDE])]\\[([X ])] (.+)$";
@@ -180,7 +180,7 @@ public class Task {
             statusIcon =  m.group(2);
             details = m.group(3);
         } else {
-            throw new DukeException.FileDataInvalidException();
+            throw new ReadFileException();
         }
 
         boolean isDone;
@@ -188,7 +188,7 @@ public class Task {
         // parse task type
         Type type = Type.getTypeFromSymbol(taskSymbol);
         if (type == null) {
-            throw new DukeException.FileDataInvalidException();
+            throw new ReadFileException();
         }
 
         // parse status icon
@@ -197,7 +197,7 @@ public class Task {
         } else if (statusIcon.equals(NOT_DONE_STATUS_ICON)) {
             isDone = false;
         } else {
-            throw new DukeException.FileDataInvalidException();
+            throw new ReadFileException();
         }
 
         switch (type) {
@@ -213,7 +213,7 @@ public class Task {
                         return new Deadline(
                                 deadlineMatcher.group(1), isDone, deadlineMatcher.group(2));
                     } catch (DateTimeParseException e) {
-                        throw new DukeException.FileDataInvalidException();
+                        throw new ReadFileException();
                     }
                 }
             case EVENT:
@@ -226,11 +226,11 @@ public class Task {
                         return new Event(
                                 eventMatcher.group(1), isDone, eventMatcher.group(2));
                     } catch (DateTimeParseException e) {
-                        throw new DukeException.FileDataInvalidException();
+                        throw new ReadFileException();
                     }
                 }
             default:
-                throw new DukeException.FileDataInvalidException();
+                throw new ReadFileException();
         }
     }
 
@@ -239,7 +239,7 @@ public class Task {
      *
      * @param str The input from the user.
      * @return A duke.Task made by the user.
-     * @throws DukeException The exception thrown when input is invalid.
+     * @throws duke.exception.DukeException The exception thrown when input is invalid.
      */
     public static Task createTask(String str) throws DukeException {
 
@@ -263,7 +263,7 @@ public class Task {
                     || details == null;
 
             if (descIsEmpty) {
-                throw new DukeException.EmptyDescriptionException(type);
+                throw new EmptyDescException(type);
             }
         } else {
             throw new DukeException();
@@ -279,7 +279,7 @@ public class Task {
                 if (m_deadline.find()) {
                     return new Deadline(m_deadline.group(1), m_deadline.group(2));
                 }else {
-                    throw new DukeException.NoTimeException(type);
+                    throw new EmptyDateException(type);
                 }
             case EVENT:
                 Pattern p_event = Pattern.compile("^(.+) /at (.+)$");
@@ -288,7 +288,7 @@ public class Task {
                 if (m_event.find()) {
                     return new Event(m_event.group(1), m_event.group(2));
                 }else {
-                    throw new DukeException.NoTimeException(type);
+                    throw new EmptyDateException(type);
                 }
             default:
                 throw new DukeException();

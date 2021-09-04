@@ -33,15 +33,6 @@ public abstract class Command {
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     /**
-     * Returns whether a command is an ExitCommand.
-     *
-     * @return Whether a command is an ExitCommand.
-     */
-    public boolean isExit() {
-        return this instanceof ExitCommand;
-    }
-
-    /**
      * Creates a command of a given type from a given input.
      *
      * @param type The type of command.

@@ -33,4 +33,8 @@ public class Duke {
         }
         return output;
     }
+
+    public String greet() {
+        return ui.greet();
+    }
 }
