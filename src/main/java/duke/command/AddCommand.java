@@ -59,6 +59,8 @@ public class AddCommand extends Command {
             throw new DukeException("something went wrong with adding a task!");
         }
 
+        assert newTask!= null;
+
         tasks.add(newTask);
         storage.save(tasks);
         return generateMsg(newTask, tasks);
