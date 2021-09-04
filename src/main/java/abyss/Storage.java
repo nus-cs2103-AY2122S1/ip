@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import abyss.exception.LoadTaskException;
 import abyss.task.Task;
-import abyss.task.TaskList;
+import abyss.task.TaskManager;
 
 /**
  * Represents a storage file which stores user tasks.
@@ -38,8 +38,8 @@ public class Storage {
      * @throws IOException If there is error reading from file.
      * @throws LoadTaskException If there is invalid task in the file.
      */
-    public TaskList loadTasks() throws IOException, LoadTaskException {
-        TaskList tasks = new TaskList();
+    public TaskManager loadTasks() throws IOException, LoadTaskException {
+        TaskManager tasks = new TaskManager();
         FileReader fileReader = new FileReader(filePath);
         BufferedReader reader = new BufferedReader(fileReader);
         String line;
@@ -81,7 +81,7 @@ public class Storage {
      * @param tasks List of tasks to be stored.
      * @throws IOException If there is error writing to file.
      */
-    public void saveTasks(TaskList tasks) throws IOException {
+    public void saveTasks(TaskManager tasks) throws IOException {
         StringBuffer input = new StringBuffer();
         for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
             Task task = tasks.get(i);

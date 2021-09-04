@@ -1,7 +1,7 @@
 package abyss;
 
 import abyss.task.Task;
-import abyss.task.TaskList;
+import abyss.task.TaskManager;
 
 /**
  * Represents a storage file which stores and updates user tasks.
@@ -20,9 +20,9 @@ public abstract class Ui {
      * Returns reply after a task is successfully added.
      *
      * @param task Task that is added.
-     * @param numberOfTasks Number of tasks in the task list.
      */
-    public static String replyTaskAdded(Task task, int numberOfTasks) {
+    public static String replyTaskAdded(Task task) {
+        int numberOfTasks = Abyss.getNumberOfTasks();
         String addedMsg = "Task piece is added to the Abyss.";
         String tasksLeftMsg = "The Abyss now contains " + numberOfTasks + " task piece(s).";
         return reply(addedMsg, task.toString(), tasksLeftMsg);
@@ -48,7 +48,7 @@ public abstract class Ui {
      * @param tasks List of tasks.
      * @return Formatted reply.
      */
-    public static String formatListReply(TaskList tasks) {
+    public static String formatListReply(TaskManager tasks) {
         String reply = "";
         for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
             Task task = tasks.get(i);

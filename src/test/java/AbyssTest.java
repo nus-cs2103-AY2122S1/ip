@@ -7,14 +7,14 @@ import abyss.command.Parser;
 import abyss.exception.InvalidCommandException;
 import abyss.exception.InvalidTodoException;
 import abyss.task.Task;
-import abyss.task.TaskList;
+import abyss.task.TaskManager;
 import abyss.task.ToDo;
 
 public class AbyssTest {
     @Test
     public void addTodo() {
         String description = "CS2103 Weekly Quiz";
-        TaskList tasks = new TaskList();
+        TaskManager tasks = new TaskManager();
         Task todo = new ToDo(description);
         assertEquals(todo.toString(), tasks.addToDo(description).toString());
     }
