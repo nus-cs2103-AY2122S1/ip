@@ -19,7 +19,7 @@ public abstract class Task {
      * @throws AisuException if there is no description.
      */
     public Task(String description) throws AisuException {
-        if (description.length() == 0) {
+        if (description.isEmpty()) {
             throw new AisuException("The description cannot be empty!");
         }
         this.description = description;
