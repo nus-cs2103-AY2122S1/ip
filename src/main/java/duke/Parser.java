@@ -9,7 +9,16 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.RemoveCommand;
 import duke.command.RestoreCommand;
+import duke.exception.DukeException;
+import duke.exception.InvalidTaskNumException;
+import duke.exception.MissingArgumentException;
+import duke.exception.MissingKeywordException;
+import duke.exception.MissingTaskNumException;
+import duke.exception.UnrecognisedCommandException;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.TaskTypes;
+import duke.task.ToDo;
 
 /**
  * The Parser class encapsulates methods related to parsing user input.
@@ -25,100 +34,124 @@ public class Parser {
      * @throws DukeException when the given user input is invalid.
      */
     public static Command parse(String str) throws DukeException {
-        String[] strArr = str.split("\\s", 2);
 
-        switch (strArr[0]) {
+        String[] strArr = splitStringBySpace(str, 2);
+        String commandWord = strArr[0];
+
+        switch (commandWord) {
         case AddCommand.COMMAND_WORD:
-            if (strArr.length < 2 || strArr[1].isBlank()) {
-                throw new DukeException("you are missing arguments for the add command!");
-            }
-            return prepareAdd(strArr[1]);
+            return prepareAdd(strArr);
         case DoneCommand.COMMAND_WORD:
-            if (strArr.length < 2 || strArr[1].isBlank()) {
-                throw new DukeException("you did not specify a task number to mark done!");
-            }
-            return prepareDone(strArr[1]);
+            return prepareDone(strArr);
         case ListCommand.COMMAND_WORD:
-            if (strArr.length > 1) {
-                throw new DukeException("you typed in something i cannot recognise!\ndid you mean to type list?");
-            }
-            return new ListCommand();
+            return prepareList(strArr);
         case RemoveCommand.COMMAND_WORD:
-            if (strArr.length < 2 || strArr[1].isBlank()) {
-                throw new DukeException("you did not specify a task number to remove!");
-            }
-            return prepareRemove(strArr[1]);
+            return prepareRemove(strArr);
         case ClearCommand.COMMAND_WORD:
-            if (strArr.length > 1) {
-                throw new DukeException("you typed in something i cannot recognise!\ndid you mean to type clear?");
-            }
-            return new ClearCommand();
+            return prepareClear(strArr);
         case RestoreCommand.COMMAND_WORD:
-            if (strArr.length > 1) {
-                throw new DukeException("you typed in something i cannot recognise!\ndid you mean to type restore?");
-            }
-            return new RestoreCommand();
+            return prepareRestore(strArr);
         case ExitCommand.COMMAND_WORD:
-            if (strArr.length > 1) {
-                throw new DukeException("you typed in something i cannot recognise!\ndid you mean to type bye?");
-            }
-            return new ExitCommand();
+            return prepareExit(strArr);
         case FindCommand.COMMAND_WORD:
-            if (strArr.length < 2 || strArr[1].isBlank()) {
-                throw new DukeException("you did not specify a keyword to find!");
-            }
-            return new FindCommand(strArr[1]);
+            return prepareFind(strArr);
         default:
-            throw new DukeException("you typed in something i cannot recognise!");
+            throw new UnrecognisedCommandException();
         }
     }
 
-    private static Command prepareAdd(String args) throws DukeException {
-        String[] argArr = args.split("\\s", 2);
 
-        if (argArr.length < 2 || argArr[1].isBlank()) {
-            throw new DukeException("the description of a task cannot be empty!");
-        }
+    private static Command prepareAdd(String[] args) throws DukeException {
 
-        String taskArgs = argArr[1];
+        checkStrArrayMinLength(args, 2, new MissingArgumentException());
+        String[] taskArgs = splitStringBySpace(args[1], 2);
+        checkStrArrayMinLength(taskArgs, 2, new MissingArgumentException());
 
-        switch (argArr[0]) {
-        case "todo":
-            return new AddCommand(TaskTypes.TODO, taskArgs);
-        case "deadline":
-            if (!taskArgs.contains("/by")) {
-                throw new DukeException("you are missing the /by keyword");
-            }
-            return new AddCommand(TaskTypes.DEADLINE, taskArgs);
-        case "event":
-            if (!taskArgs.contains("/at")) {
-                throw new DukeException("you are missing the /at keyword");
-            }
-            return new AddCommand(TaskTypes.EVENT, taskArgs);
+        String taskCommandWord = taskArgs[0];
+        String taskDescription = taskArgs[1];
+
+        switch (taskCommandWord) {
+        case ToDo.COMMAND_WORD:
+            return new AddCommand(TaskTypes.TODO, taskDescription);
+        case Deadline.COMMAND_WORD:
+            checkKeyword(taskDescription, Deadline.KEYWORD);
+            return new AddCommand(TaskTypes.DEADLINE, taskDescription);
+        case Event.COMMAND_WORD:
+            checkKeyword(taskDescription, Event.KEYWORD);
+            return new AddCommand(TaskTypes.EVENT, taskDescription);
         default:
-            throw new DukeException("you typed in a task type i cannot recognise!");
+            throw new UnrecognisedCommandException();
         }
     }
 
-    private static Command prepareDone(String args) throws DukeException {
-        int num = parseNum(args);
+    private static Command prepareDone(String[] args) throws DukeException {
+        checkStrArrayMinLength(args, 2, new MissingTaskNumException("mark done"));
+        int num = parseNum(args[1]);
         return new DoneCommand(num - 1);
     }
 
-    private static Command prepareRemove(String args) throws DukeException {
-        int num = parseNum(args);
+    private static Command prepareList(String[] args) throws DukeException {
+        checkOneWordCommand(args, ListCommand.COMMAND_WORD);
+        return new ListCommand();
+    }
+
+    private static Command prepareRemove(String[] args) throws DukeException {
+        checkStrArrayMinLength(args, 2, new MissingTaskNumException("remove"));
+        int num = parseNum(args[1]);
         return new RemoveCommand(num - 1);
+    }
+
+    private static Command prepareClear(String[] args) throws DukeException {
+        checkOneWordCommand(args, ClearCommand.COMMAND_WORD);
+        return new ClearCommand();
+    }
+
+    private static Command prepareRestore(String[] args) throws DukeException {
+        checkOneWordCommand(args, RestoreCommand.COMMAND_WORD);
+        return new RestoreCommand();
+    }
+
+    private static Command prepareExit(String[] args) throws DukeException {
+        checkOneWordCommand(args, ExitCommand.COMMAND_WORD);
+        return new ExitCommand();
+    }
+
+    private static Command prepareFind(String[] args) throws DukeException {
+        checkStrArrayMinLength(args, 2, new MissingArgumentException());
+        return new FindCommand(args[1]);
     }
 
     private static int parseNum(String args) throws DukeException {
         try {
             int num = Integer.parseInt(args);
             if (num < 1) {
-                throw new DukeException("you typed an invalid number: " + num);
+                throw new InvalidTaskNumException(num);
             }
             return num;
         } catch (NumberFormatException e) {
-            throw new DukeException("you typed in an invalid input! " + e.getMessage());
+            throw new InvalidTaskNumException(e.getMessage());
+        }
+    }
+
+    private static String[] splitStringBySpace(String str, int limit) {
+        return str.split("\\s", limit);
+    }
+
+    private static void checkKeyword(String input, String keyword) throws MissingKeywordException {
+        if (!input.contains(keyword)) {
+            throw new MissingKeywordException(keyword);
+        }
+    }
+
+    private static void checkStrArrayMinLength(String[] input, int minLength, DukeException exception) throws DukeException {
+        if (input.length < minLength || input[minLength - 1].isBlank()) {
+            throw exception;
+        }
+    }
+
+    private static void checkOneWordCommand(String[] input, String didYouMean) throws DukeException {
+        if (input.length > 1) {
+            throw new UnrecognisedCommandException(didYouMean);
         }
     }
 }
