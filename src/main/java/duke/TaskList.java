@@ -30,7 +30,7 @@ public class TaskList {
      */
     public String toSaveData() {
         String data = "";
-        for (Task task : this.tasks) {
+        for (Task task : tasks) {
             data += task.toSaveData();
         }
         return data;
@@ -51,8 +51,8 @@ public class TaskList {
      */
     public String addNewTodo(String taskTitle) {
         Todo task = new Todo(taskTitle);
-        this.tasks.add(task);
-        return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
+        tasks.add(task);
+        return "Got it. I've added this task:\n\t" + task.toString() + countTasks();
     }
 
     /**
@@ -64,8 +64,8 @@ public class TaskList {
         int delimiter = taskTitle.indexOf("/by ");
         LocalDate due = LocalDate.parse(taskTitle.substring(delimiter + 4));
         Deadline task = new Deadline(taskTitle.substring(0, delimiter), due);
-        this.tasks.add(task);
-        return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
+        tasks.add(task);
+        return "Got it. I've added this task:\n\t" + task.toString() + countTasks();
     }
 
     /**
@@ -77,8 +77,8 @@ public class TaskList {
         int delimiter = taskTitle.indexOf("/at ");
         LocalDate due = LocalDate.parse(taskTitle.substring(delimiter + 4));
         Event task = new Event(taskTitle.substring(0, delimiter), due);
-        this.tasks.add(task);
-        return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
+        tasks.add(task);
+        return "Got it. I've added this task:\n\t" + task.toString() + countTasks();
     }
 
     /**
@@ -90,7 +90,7 @@ public class TaskList {
     public String completeTask(int taskNumber) {
         int taskIndex = taskNumber - 1;
         // Assumes that the task exists.
-        Task task = this.tasks.get(taskIndex);
+        Task task = tasks.get(taskIndex);
         task.completeTask();
         return "Nice! I've marked this task as done:\n\t" + task.toString();
     }
@@ -125,12 +125,14 @@ public class TaskList {
      * @param taskNumber an int representing the index of the task
      * @return the String representation of the deleted task
      */
-    public String deleteTask(int taskNumber) {
+    public String deleteTask(int taskNumber) throws DukeException {
         int taskIndex = taskNumber - 1;
-        // Assumes that the task exists.
+        if (taskIndex < 0 || taskIndex >= tasks.size()) {
+            throw new DukeException("The task you are trying to delete does not exist. :(");
+        }
         return "Noted. I've removed this task:\n\t"
-                + this.tasks.remove(taskIndex).toString()
-                + this.countTasks();
+                + tasks.remove(taskIndex).toString()
+                + countTasks();
     }
 
     /**
@@ -141,9 +143,9 @@ public class TaskList {
     @Override
     public String toString() {
         String output = "Here are the tasks in your list:";
-        for (int i = 0; i < this.tasks.size(); i++) {
-            int index = i + 1;
-            output += "\n" + index + "." + this.tasks.get(i).toString();
+        for (int i = 0; i < tasks.size(); i++) {
+            int indexNumber = i + 1;
+            output += "\n" + indexNumber + "." + tasks.get(i).toString();
         }
         return output;
     }
