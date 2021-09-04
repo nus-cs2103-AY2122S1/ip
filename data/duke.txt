@@ -1,6 +1,7 @@
 T|1|hello
 T|1|hi
-T|0|hello
-E|0|hellllo|Sep 30 2020 6pm
-E|0|party|Oct 10 2010 9pm
-T|1|procrastinate
+T|0|hahahaha
+T|0|hahahaha
+T|0|ha
+D|0|do homework|Sep 29 2019 7pm
+T|1|hahahahahaha
