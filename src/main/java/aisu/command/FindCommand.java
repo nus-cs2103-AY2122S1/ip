@@ -1,6 +1,9 @@
 package aisu.command;
 
+import java.util.List;
+
 import aisu.storage.Storage;
+import aisu.task.Task;
 import aisu.tasklist.TaskList;
 import aisu.ui.Ui;
 
@@ -26,8 +29,9 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList tasklist, Storage storage, Ui ui) {
-        String result = tasklist.findTasksWith(this.input);
-        this.uiText = ui.formatText("Here's what I found:", result);
+        List<Task> result = tasklist.findTasksWith(this.input);
+        TaskList resultList = new TaskList(result);
+        this.uiText = ui.formatText("Here's what I found:", resultList.toString());
     }
 
     /** {@inheritDoc} */
