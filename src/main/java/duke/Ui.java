@@ -45,6 +45,7 @@ public class Ui {
      * @return Added task.
      */
     public String showAddedTask(Task task) {
+        assert (task != null);
         String output = "Added: " + task.toString();
         System.out.println(output);
         return output + "\n"
@@ -59,6 +60,7 @@ public class Ui {
      * @return Deleted task.
      */
     public String showDeletedTask(Task toBeDeleted) {
+        assert (toBeDeleted != null);
         return "Noted. I've removed this task:\n"
                 + toBeDeleted + "\n"
                 + "Now you have " + this.taskList.size()
@@ -72,6 +74,7 @@ public class Ui {
      * @return Marked tasks
      */
     public String showMarkedAsDone(Task markedTask) {
+        assert (markedTask != null);
         return " Nice! I've marked this task as done:\n" + markedTask;
     }
 

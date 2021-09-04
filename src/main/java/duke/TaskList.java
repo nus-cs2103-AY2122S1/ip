@@ -46,6 +46,7 @@ public class TaskList {
      * @param task Task to be appended to this list
      */
     public void addTask(Task task) {
+        assert (task != null);
         this.tasks.add(task);
     }
 
@@ -55,6 +56,7 @@ public class TaskList {
      * @param toBeDeleted Task to be removed from this list, if present.
      */
     public void deleteTask(Task toBeDeleted) {
+        assert (toBeDeleted != null);
         tasks.remove(toBeDeleted);
     }
 
@@ -75,6 +77,7 @@ public class TaskList {
      * @return A ToDO object.
      */
     public ToDo createTodo(String task) {
+        assert (task != null);
         return new ToDo(task, false);
     }
 
@@ -87,6 +90,7 @@ public class TaskList {
      * @throws InvalidDateTimeException       If the date is invalid.
      */
     public DeadLine createDeadLine(String task) throws UnrecognizableCommandException, InvalidDateTimeException {
+        assert (task != null);
         if (!task.contains(" /by ")) {
             throw new UnrecognizableCommandException();
         }
@@ -111,6 +115,7 @@ public class TaskList {
      * @throws InvalidDateTimeException       If the date is invalid.
      */
     public Event createEvent(String task) throws UnrecognizableCommandException, InvalidDateTimeException {
+        assert (task != null);
         if (!task.contains(" /at ")) {
             throw new UnrecognizableCommandException();
         }

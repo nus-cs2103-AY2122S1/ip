@@ -11,7 +11,9 @@ import java.time.format.FormatStyle;
 public class Parser {
 
     private String parseAction(String command) {
-        return command.split(" ")[0];
+        String action = command.split(" ")[0];
+        assert (!action.isEmpty()); //returned action should not be empty
+        return action;
     }
 
     /**
@@ -54,7 +56,9 @@ public class Parser {
     public String parseTask(String command) throws EmptyDescriptionException {
         String action = this.parseAction(command);
         try {
-            return command.substring(action.length() + 1);
+            String task = command.substring(action.length() + 1);
+            assert (!task.isEmpty()); //returned task should not be empty
+            return task;
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException(action);
         }
