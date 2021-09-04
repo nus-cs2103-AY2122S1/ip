@@ -39,9 +39,7 @@ public class Deadline extends Task {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return String.format("[DeadL] %s %s (by: %s)",
-                this.getStatusIcon(),
-                this.description,
-                this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
+        return String.format("[DeadL] %s %s (by: %s)\nTags: %s", this.getStatusIcon(), this.description,
+                this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy")), this.getTags());
     }
 }

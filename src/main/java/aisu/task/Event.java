@@ -31,6 +31,7 @@ public class Event extends Task {
     /** {@inheritDoc} */
     @Override
     public String toString() {
-        return String.format("[Event] %s %s (at: %s)", this.getStatusIcon(), this.description, this.eventPeriod);
+        return String.format("[Event] %s %s (at: %s)\nTags: %s", this.getStatusIcon(), this.description,
+                this.eventPeriod, this.getTags());
     }
 }

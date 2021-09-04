@@ -1,8 +1,19 @@
 package aisu.parser;
 
-import aisu.command.*;
+import java.util.regex.PatternSyntaxException;
+
+import aisu.command.AddCommand;
+import aisu.command.Command;
+import aisu.command.DeleteCommand;
+import aisu.command.ExitCommand;
+import aisu.command.FindCommand;
+import aisu.command.HelpCommand;
+import aisu.command.MarkDoneCommand;
+import aisu.command.ShowListCommand;
+import aisu.command.TagCommand;
 import aisu.exception.AisuException;
 import aisu.tasklist.TaskList;
+
 
 /**
  * A Parser for text inputs.
@@ -23,6 +34,9 @@ public class Parser {
 
         if (input.equals("bye")) {
             return new ExitCommand();
+
+        } else if (input.equals("help")) {
+            return new HelpCommand();
 
         } else if (input.equals("list")) {
             return new ShowListCommand();
@@ -45,9 +59,13 @@ public class Parser {
         } else if (input.startsWith("find ")) {
             return new FindCommand(input.substring(5));
 
-        } else if (input.equals("help")) {
-            return new HelpCommand();
-
+        } else if (input.startsWith("tag ")) {
+            try {
+                String[] parsedData = input.substring(4).split(" /with ");
+                return new TagCommand(Integer.parseInt(parsedData[0].strip()), parsedData[1].strip());
+            } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException | NumberFormatException e) {
+                throw new AisuException("That's an invalid task format...");
+            }
         } else {
             throw new AisuException("That's an invalid task format...");
         }

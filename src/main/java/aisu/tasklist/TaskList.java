@@ -140,6 +140,19 @@ public class TaskList {
     }
 
     /**
+     * Adds a specified tag to a specified task.
+     * @param n Index of the task to add a tag for.
+     * @param tag The tag name.
+     * @return The tagged task.
+     * @throws AisuException if index is out of range.
+     */
+    public Task tagTask(int n, String tag) throws AisuException {
+        checkError(n);
+        this.list.get(n - 1).addTag(tag);
+        return this.getTaskAt(n);
+    }
+
+    /**
      * Finds tasks with a certain keyword in the tasklist.
      * @param keyword Keyword used for searching.
      * @return Tasklist with tasks containing that keyword.

@@ -1,5 +1,8 @@
 package aisu.task;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import aisu.exception.AisuException;
 
 /**
@@ -12,6 +15,7 @@ import aisu.exception.AisuException;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected List<String> tagsList = new ArrayList<>(); // allow for flexible tagging (any tag name is accepted)
 
     /**
      * Constructor to initialize the Task with a description.
@@ -40,6 +44,40 @@ public abstract class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Add a tag to the task.
+     * @param tag The tag to be added.
+     */
+    public void addTag(String tag) {
+        // check if tag exists.
+        if (!tag.isEmpty() && !tagsList.contains(tag)) {
+            tagsList.add(tag);
+        }
+    }
+
+    /**
+     * Removes a tag from the task.
+     * @param tag The tag to be removed.
+     */
+    public void removeTag(String tag) {
+        tagsList.remove(tag);
+    }
+
+    /**
+     * Returns a string representation of all the tags.
+     * @return The tags of the task.
+     */
+    public String getTags() {
+        if (tagsList.isEmpty()) {
+            return "";
+        }
+        StringBuilder result = new StringBuilder();
+        for (String tag : tagsList) {
+            result.append("#").append(tag).append(" ");
+        }
+        return result.toString();
     }
 
     /**

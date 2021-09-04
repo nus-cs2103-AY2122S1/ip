@@ -27,6 +27,7 @@ public class Ui {
                 "event (task) /at (date)", "Add tasks that start at a specific time and ends at a specific time",
                 "find (keyword)", "Look for tasks with that keyword",
                 "delete (taskNumber)", "Delete task",
+                "tag (taskNumber) /with (tagname)", "Add tag to task",
                 "bye", "Exit program",
                 "help", "Show help page");
     }
