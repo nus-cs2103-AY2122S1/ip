@@ -2,6 +2,8 @@ package duke.task;
 
 /**
  * Event class for implementing tasks that are events.
+ *
+ * @author Benjamin Lui
  */
 
 public class Event extends Task {

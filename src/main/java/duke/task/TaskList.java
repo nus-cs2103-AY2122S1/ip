@@ -3,7 +3,9 @@ package duke.task;
 import java.util.ArrayList;
 /**
  * Contains the list of tasks from the text file that was saved. Various methods
- * implemented to manipulate the the list of tasks.
+ * implemented to manipulate the list of tasks.
+ *
+ * @author Benjamin Lui
  */
 public class TaskList {
 
@@ -38,6 +40,8 @@ public class TaskList {
      * @return the task that was removed
      */
     public Task delete(int taskNumber) {
+        //boolean inList;
+        //assert inList = listOfTasks.size() - 1 > taskNumber : "task doesn't exist";
         return listOfTasks.remove(taskNumber);
     }
 
@@ -50,6 +54,7 @@ public class TaskList {
             Task currTask = listOfTasks.get(taskNumber);
             currTask.markAsDone();
         } catch (IndexOutOfBoundsException ioobe) {
+            System.out.println("Index out of bounds");
             return;
         }
     }

@@ -7,6 +7,8 @@ import duke.ui.Ui;
 
 /**
  * Contains the executables when the user uses the 'deadline' command.
+ *
+ * @author Benjamin Lui
  */
 public class DeadLineCommand extends Command {
     private String task;

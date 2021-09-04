@@ -9,6 +9,8 @@ import duke.ui.Ui;
 
 /**
  * Contains the executables when the user uses the 'Find' command.
+ *
+ * @author Benjamin Lui
  */
 public class FindCommand extends Command {
     private String[] keyword;

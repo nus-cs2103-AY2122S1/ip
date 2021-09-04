@@ -13,6 +13,8 @@ import duke.task.Todo;
 
 /**
  * Decodes the class from a list of strings in the file to an Array list of tasks.
+ *
+ * @author Benjamin Lui
  */
 
 public class TaskListDecoder {

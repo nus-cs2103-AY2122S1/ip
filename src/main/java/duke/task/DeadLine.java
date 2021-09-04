@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 /**
  * DeadLine class for implementing tasks that have a deadline.
  * Only accepts date inputs of the format yyyy-mm-dd.
+ *
+ * @author Benjamin Lui
  */
 public class DeadLine extends Task {
 

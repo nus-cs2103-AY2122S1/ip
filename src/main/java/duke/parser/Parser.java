@@ -14,6 +14,8 @@ import duke.command.ToDoCommand;
 
 /**
  * Processes the commands from duke.Duke and initialises the appropriate command for it.
+ *
+ * @author Benjamin Lui
  */
 
 public class Parser {

@@ -1,6 +1,5 @@
 package duke.storage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,6 +9,8 @@ import java.util.List;
 import duke.task.TaskList;
 /**
  * Contains the logic for file operations.
+ *
+ * @author Benjamin Lui
  */
 
 public class Storage {
@@ -25,7 +26,7 @@ public class Storage {
      * then a new file is created.
      * @return an ArrayList of tasks in the file
      */
-    public TaskList load() throws FileNotFoundException, IOException {
+    public TaskList load() throws IOException {
         return TaskListDecoder.decodeTaskList(Files.readAllLines(path));
     }
 
