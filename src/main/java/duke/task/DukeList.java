@@ -71,6 +71,8 @@ public class DukeList {
 
         if (state.equals("1")) {
             task.setDone();
+        } else {
+            assert state.equals("0") : "state can only be 0 or 1";
         }
 
         this.tasks.add(task);
