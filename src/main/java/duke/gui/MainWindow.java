@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        assert (!botImage.isBackgroundLoading()) : "Chat Bot Icon not loaded in GUI";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.greetUser(), botImage));
     }
 
@@ -48,6 +49,8 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = chatBot.getResponse(input);
+        assert (!userImage.isBackgroundLoading()) : "User Icon not loaded in GUI";
+        assert (!botImage.isBackgroundLoading()) : "Chat Bot Icon not loaded in GUI";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input + "    ", userImage),
                 DialogBox.getDukeDialog(response, botImage)
