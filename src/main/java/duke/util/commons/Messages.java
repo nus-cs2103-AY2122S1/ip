@@ -41,6 +41,6 @@ public class Messages {
 
     public static final String DEADLINE_NO_INPUT_ERROR_MESSAGE =
             "☹ OOPS!!! The deadline deadline must be filled in prefixed by /by";
-
+    public static final String EXPECTED_DATE_FORMAT = "Expected date format YYYY MM DD";
 
 }

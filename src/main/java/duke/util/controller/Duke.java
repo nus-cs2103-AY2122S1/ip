@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 
 import duke.util.commands.AddCommand;
 import duke.util.commands.CommandList;
+import duke.util.commons.Messages;
 import duke.util.parser.Parser;
 import duke.util.storage.Storage;
 import duke.util.tasks.DateTaskTable;
@@ -76,15 +77,11 @@ public class Duke {
             String result = cmds.executeAll();
             this.storage.write(this.tasks);
             return result;
-        } catch (DukeException e) {
+        } catch (DukeException | IOException e) {
             return e.getMessage();
         } catch (DateTimeParseException e) {
-            return "Expected date format YYYY MM DD";
-        } catch (IOException e) {
-            return e.getMessage();
+            return Messages.EXPECTED_DATE_FORMAT;
         }
-
-
     }
 
 
@@ -96,9 +93,7 @@ public class Duke {
      * @param string
      */
     public void addTodo(String string) {
-
         AddCommand taskAdd = new AddCommand(this.tasks, ToDo.of(string));
-
         taskAdd.execute();
         try {
             this.storage.write(this.tasks);
@@ -162,8 +157,6 @@ public class Duke {
 
     /**
      * Handles the moment when the remove button is pressed.
-     *
-     *
      */
     public void removeHandler(ObservableList<Task> itemsToRemove) {
         for (int i = 0; i < itemsToRemove.size(); i++) {
@@ -186,8 +179,6 @@ public class Duke {
      * A method to print the list to dukes list feature.
      * Renders the list command kind of obsolete. Is there a way to make
      * this method call not used?
-     *
-     *
      */
     public void printList() {
         Duke.out.setItems(FXCollections.observableArrayList(this.tasks));
@@ -196,8 +187,6 @@ public class Duke {
 
     public static void setOut(ListView<Task> viewer) {
         Duke.out = viewer;
-
-
     }
 
 

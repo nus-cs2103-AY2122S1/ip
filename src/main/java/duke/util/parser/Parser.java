@@ -74,89 +74,113 @@ public class Parser {
     public CommandList inputsParser(String input) throws DukeException, DateTimeParseException {
         String[] twoInputs = input.split(" ", 2);
         String cmd = twoInputs[0];
-        CommandList cmds = new CommandList();
-
+        CommandList commands = new CommandList();
         if (twoInputs.length == 1) {
-            //when there is only one input
-            switch(cmd) {
-            case BYE:
-                cmds.add(new ExitCommand());
-                break;
-            case LIST:
-                cmds.add(() -> ui.list(this.taskList));
-                break;
-
-            case DLIST:
-                //fallthrough
-            case DONE:
-                //fallthrough
-            case TODO:
-                //fallthrough
-            case DEADLINE:
-                //fallthrough
-            case EVENT:
-                throw new DukeException(String.format(Messages.TASK_NO_DESCRIPTOR_ERROR, cmd));
-            default:
-                throw new DukeException(Messages.TASK_NOT_UNDERSTOOD_ERROR);
-            }
+            noArgumentParser(cmd, commands);
         } else {
-
             String description = twoInputs[1];
-            switch (cmd) {
-
-            case FIND:
-                cmds.add(() -> ui.list(taskList.filter(t -> t.contains(description.trim()))));
-                break;
-            case DONE:
-                int i = Integer.parseInt(description) - 1;
-                if (i > taskList.size() || i < 0) {
-                    throw new DukeException(Messages.INVALID_DONE_INPUT);
-                }
-                Task b = taskList.get(i);
-                cmds.add(new DoneCommand(b, this.ui));
-                break;
-                //dlist does not work -- suspect is coz of the hashmap
-            case DLIST:
-                //to implement such a filter in tasklist
-                ArrayList<DatedTask> ls = dateTaskList.get(dateParse(description.trim()));
-                cmds.add(() -> {
-                    if (ls != null) {
-                        ui.list(ls);
-                    }
-                    return "";
-                });
-                break;
-            case DELETE:
-                cmds.add(new DelCommand(Integer.parseInt(description), this.taskList, this.dateTaskList));
-                break;
-            case TODO:
-                Task t = ToDo.of(description);
-                cmds.add(new AddCommand(taskList, t));
-                break;
-            case EVENT:
-                Event e = Event.of(description);
-                cmds.add(new AddCommand(taskList, e));
-                cmds.add(() -> {
-                    dateTaskList.add(e);
-                    return "";
-                });
-                break;
-            case DEADLINE:
-                Deadline d = Deadline.of(description);
-                cmds.add(new AddCommand(taskList, d));
-                cmds.add(() -> {
-                    dateTaskList.add(d);
-                    return "";
-                });
-                break;
-            default:
-                throw new DukeException(Messages.TASK_NOT_UNDERSTOOD_ERROR);
-
-            }
-
+            oneArgumentParser(cmd, commands, description);
         }
-        return cmds;
+        return commands;
     }
+
+    private void noArgumentParser(String cmd, CommandList commands) throws DukeException {
+        switch(cmd) {
+        case BYE:
+            commands.add(new ExitCommand());
+            break;
+        case LIST:
+            listCommandFromArray(commands, this.taskList);
+            break;
+        case DLIST:
+            //fallthrough
+        case DONE:
+            //fallthrough
+        case TODO:
+            //fallthrough
+        case DEADLINE:
+            //fallthrough
+        case EVENT:
+            throw new DukeException(String.format(Messages.TASK_NO_DESCRIPTOR_ERROR, cmd));
+        default:
+            throw new DukeException(Messages.TASK_NOT_UNDERSTOOD_ERROR);
+        }
+    }
+
+    private void oneArgumentParser(String cmd, CommandList commands, String description) throws DukeException {
+        switch (cmd) {
+        case FIND:
+            find(commands, description);
+            break;
+        case DONE:
+            markAsDone(commands, description);
+            break;
+        case DLIST:
+            dlist(commands, description);
+            break;
+        case DELETE:
+            delete(commands, description);
+            break;
+        case TODO:
+            todo(commands, description);
+            break;
+        case EVENT:
+            Event e = Event.of(description);
+            addDatedTask(commands, e);
+            break;
+        case DEADLINE:
+            Deadline d = Deadline.of(description);
+            addDatedTask(commands, d);
+            break;
+        default:
+            throw new DukeException(Messages.TASK_NOT_UNDERSTOOD_ERROR);
+        }
+    }
+
+    private void dlist(CommandList commands, String description) {
+        ArrayList<DatedTask> ls = dateTaskList.get(dateParse(description.trim()));
+        listCommandFromArray(commands, ls);
+    }
+
+    private void delete(CommandList commands, String description) {
+        commands.add(new DelCommand(Integer.parseInt(description), this.taskList, this.dateTaskList));
+    }
+
+    private void todo(CommandList commands, String description) {
+        Task t = ToDo.of(description);
+        commands.add(new AddCommand(taskList, t));
+    }
+
+    private void find(CommandList commands, String description) {
+        commands.add(() -> ui.list(taskList.filter(t -> t.contains(description.trim()))));
+    }
+
+    private void markAsDone(CommandList commands, String description) throws DukeException {
+        int i = Integer.parseInt(description) - 1;
+        if (i > taskList.size() || i < 0) {
+            throw new DukeException(Messages.INVALID_DONE_INPUT);
+        }
+        Task b = taskList.get(i);
+        commands.add(new DoneCommand(b, this.ui));
+    }
+
+    private void listCommandFromArray(CommandList cmds, ArrayList<? extends Task> ls) {
+        cmds.add(() -> {
+            if (ls != null) {
+                return ui.list(ls);
+            }
+            return "";
+        });
+    }
+
+    private void addDatedTask(CommandList cmds, DatedTask task) {
+        cmds.add(new AddCommand(taskList, task));
+        cmds.add(() -> {
+            dateTaskList.add(task);
+            return "";
+        });
+    }
+
 
 
 
@@ -170,7 +194,6 @@ public class Parser {
      * @return The LocalDate object representing the input date.
      */
     public static LocalDate dateParse(String s) {
-
         return LocalDate.parse(s.trim());
     }
 }
