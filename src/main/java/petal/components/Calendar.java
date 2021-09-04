@@ -31,7 +31,6 @@ public class Calendar {
      */
     public void addToCalendar(Timeable timeable) {
         LocalDate date = timeable.getDate();
-        //Optional is used here in case current is null, which means no prior event this date
         Optional<ArrayList<Timeable>> current = Optional.ofNullable(dateAndTimeables.get(date));
         if (current.isPresent()) {
             current.get().add(timeable);

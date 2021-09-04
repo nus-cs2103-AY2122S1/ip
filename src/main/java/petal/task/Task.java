@@ -1,7 +1,5 @@
 package petal.task;
 
-import java.time.LocalDate;
-
 /**
  * The Task class that encapsulates a directive given
  * by the user to track a certain activity and may have
@@ -12,18 +10,6 @@ public abstract class Task {
     //Properties of a Task
     private final String description;
     private boolean isDone;
-
-    /**
-     * Constructs a Task instance
-     *
-     * @param description The description of the task
-     * @param isDone  The boolean isDone, representing if the Task is done
-     * @param localDate The date of the Task
-     */
-    public Task(String description, boolean isDone, LocalDate localDate) {
-        this.description = capsFirstLetter(description);
-        this.isDone = isDone;
-    }
 
     /**
      * Constructs a Task instance
@@ -61,13 +47,11 @@ public abstract class Task {
     }
 
     /**
-     * Sets the task instance as done
+     * Sets the task instance as done and returns a completion message
      */
     public String taskDone() {
         this.isDone = true;
-        return "\nYou have completed the task: "
-                + "'"
-                + this.description + "'!"
+        return "\nYou have completed the task: '" + this.description + "'!"
                 + "\nI am so happy for you!\n";
     }
 
@@ -89,6 +73,9 @@ public abstract class Task {
      * @return True if contains keyword, false if not
      */
     public boolean isKeyWordPresent(String keyword) {
+        if (keyword.equals("")) {
+            return false;
+        }
         return description.toLowerCase().contains(keyword);
     }
 

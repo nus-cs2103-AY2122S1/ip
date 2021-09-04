@@ -23,10 +23,8 @@ import petal.task.ToDo;
  */
 public class Storage {
 
-    //True if folder and file for saving could be created properly
-    private boolean isLocationPresent;
+    private boolean isFolderAndFilePresent;
 
-    //Paths of the location of storage
     private final String folderPath;
     private final String filePath;
 
@@ -41,11 +39,12 @@ public class Storage {
         this.taskList = taskList;
         this.folderPath = System.getProperty("user.dir") + "/PetalData";
         this.filePath = folderPath + "/Tasks.txt";
-        isLocationPresent = true;
+        isFolderAndFilePresent = true;
     }
 
     /**
      * Creates the main PetalData folder, containing Tasks.txt
+     *
      * @return String greeting the user
      */
     public String createDirectory() {
@@ -58,8 +57,7 @@ public class Storage {
             File petalData = new File(filePath);
             petalData.createNewFile();
         } catch (IOException e) {
-            isLocationPresent = false;
-            return Responses.FILE_ERROR.toString();
+            isFolderAndFilePresent = false;
         }
         return Responses.START_MESSAGE.toString();
     }
@@ -67,7 +65,7 @@ public class Storage {
     /**
      * Parses the text from Tasks.txt in tasks and retrieves it as tasks. If it is
      * able to retrieve the tasks, this means that Petal was opened by the user at least
-     * once before
+     * once before.
      *
      * @return True if tasks were retrieved, false if no tasks (new user) or exception occurred
      */
@@ -75,33 +73,42 @@ public class Storage {
         try {
             File tasks = new File(filePath);
             Scanner scanner = new Scanner(tasks);
-            ArrayList<Task> addPasts = new ArrayList<>();
-            while (scanner.hasNextLine()) {
-                String taskLine = scanner.nextLine();
-                String[] components = taskLine.split("\\|");
-                boolean isDone = Objects.equals(components[1], "X");
-                switch (components[0]) {
-                case "T":
-                    addPasts.add(new ToDo(components[2], isDone));
-                    break;
-                case "D":
-                    assert components[3] != null;
-                    addPasts.add(new Deadline(components[2], components[3], isDone));
-                    break;
-                case "E":
-                    assert components[3] != null;
-                    addPasts.add(new Event(components[2], components[3], isDone));
-                    break;
-                default:
-                    break;
-                }
-            }
-            taskList.addSavedTasks(addPasts);
+            ArrayList<Task> savedTasks = readTasks(new ArrayList<>(), scanner);
+            taskList.addSavedTasks(savedTasks);
             scanner.close();
             return true;
         } catch (FileNotFoundException | NoSuchElementException e) {
             return false;
         }
+    }
+
+    /**
+     * Reads the saved tasks from the PetalData.txt file.
+     * Parses the text and converts them into the relevant Task objects
+     *
+     * @param tasks The ArrayList of tasks to be returned
+     * @param fileScanner The scanner that is used to scan the file
+     * @return ArrayList of the saved tasks
+     */
+    public ArrayList<Task> readTasks(ArrayList<Task> tasks, Scanner fileScanner) {
+        while (fileScanner.hasNextLine()) {
+            String taskLine = fileScanner.nextLine();
+
+            String[] components = taskLine.split("\\|");
+            String typeOfTask = components[0];
+            String descOfTask = components[2];
+            String dateTime = (typeOfTask.equals("D") || typeOfTask.equals("E")) ? components[3] : "";
+            boolean isDone = Objects.equals(components[1], "X");
+
+            if (typeOfTask.equals("T")) {
+                tasks.add(new ToDo(descOfTask, isDone));
+            } else if (typeOfTask.equals("D")) {
+                tasks.add(new Deadline(descOfTask, dateTime, isDone));
+            } else {
+                tasks.add(new Event(descOfTask, dateTime, isDone));
+            }
+        }
+        return tasks;
     }
 
     /**
@@ -111,7 +118,7 @@ public class Storage {
      * @throws IOException Thrown if tasks are not saved properly
      */
     public void saveTasks() throws IOException {
-        if (!isLocationPresent) {
+        if (!isFolderAndFilePresent) {
             return;
         }
         FileWriter fileWriter = new FileWriter(filePath);

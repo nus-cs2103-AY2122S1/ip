@@ -37,7 +37,6 @@ public class Petal {
      * Returns either start message or welcome back message
      */
     public void greetUser() {
-        //It calls createDirectory as it has to check if user has used Petal before
         ui.sendToGui(storage.createDirectory());
     }
 

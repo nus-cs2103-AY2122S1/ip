@@ -75,44 +75,67 @@ public class TaskList {
      * Handles the task, depending on the command given
      *
      * @param type The type of task: To.Do, deadline, event
-     * @param message The desc/time of the task
      * @throws EmptyDescException Thrown when the task lacks a description
      * @throws InvalidInputException Thrown when an invalid format is given or when a time is not given
      */
-    public String handleTask(String type, String message) throws EmptyDescException, InvalidInputException {
-        Task task;
-        String[] deadlineEvent = type.equals("deadline") ? message.split("/by")
-                : message.split("/at");
+    public String handleTask(String type, String description) throws EmptyDescException, InvalidInputException {
+        String[] deadlineEvent = (type.equals("deadline")) ? description.split("/by")
+                                                           : description.split("/at");
+        checkIfValidFormat(type, description, deadlineEvent);
+
+        if (type.equals("todo")) {
+            return handleToDo(description);
+        } else {
+            return handleTimeable(type, deadlineEvent);
+        }
+    }
+
+    /**
+     * Handles a To.Do task
+     *
+     * @param message The description
+     * @return The string representing that the task was added
+     */
+    private String handleToDo(String message) {
+        Task todo = new ToDo(message, false);
+        return addTask(todo);
+    }
+
+    /**
+     * Handles a Timeable (Deadline or Event)
+     *
+     * @param type The type of task (Deadline or Event)
+     * @param deadlineEvent The array that contains the description and date of the task
+     * @return The string representing that the task was added
+     */
+    private String handleTimeable(String type, String[] deadlineEvent) throws InvalidInputException {
+        try {
+            Task timeable = (type.equals("deadline")) ? new Deadline(deadlineEvent[0], deadlineEvent[1], false)
+                                                      : new Event(deadlineEvent[0], deadlineEvent[1], false);
+            calendar.addToCalendar((Timeable) timeable);
+            return addTask(timeable);
+        } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidInputException(Responses.INVALID_DATE_TIME);
+        }
+    }
+
+    /**
+     * Checks if the task command was given in the correct format
+     *
+     * @param type The type of task
+     * @param message The description of task
+     * @param deadlineEvent The array with the description/date (only for Timeable)
+     * @throws EmptyDescException Thrown if desc is empty
+     * @throws InvalidInputException Thrown if other components are missing from format
+     */
+    public void checkIfValidFormat(String type, String message, String[] deadlineEvent) throws EmptyDescException,
+            InvalidInputException {
         if (message.isBlank() || deadlineEvent[0].isBlank()) {
             throw new EmptyDescException(Responses.EMPTY_DESCRIPTION);
         }
         if ((type.equals("deadline") || type.equals("event")) && deadlineEvent.length < 2) {
-            //No time given or the command /by or /at wasn't given by the user
             throw new InvalidInputException(Responses.INVALID_FORMAT);
         }
-        switch (type) {
-        case "todo":
-            task = new ToDo(message, false);
-            break;
-        case "deadline":
-            try {
-                task = new Deadline(deadlineEvent[0], deadlineEvent[1], false);
-            } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-                throw new InvalidInputException(Responses.INVALID_DATE_TIME);
-            }
-            break;
-        default: //Represents the Event task
-            try {
-                task = new Event(deadlineEvent[0], deadlineEvent[1], false);
-            } catch (DateTimeParseException | ArrayIndexOutOfBoundsException e) {
-                throw new InvalidInputException(Responses.INVALID_DATE_TIME);
-            }
-        }
-        if (task.isTimeable()) {
-            assert task instanceof Timeable;
-            calendar.addToCalendar((Timeable) task);
-        }
-        return addTask(task);
     }
 
     /**
@@ -142,12 +165,11 @@ public class TaskList {
         }
         int count = 1;
         StringBuilder list = new StringBuilder();
-        for (Task m : tasks) {
-            //To ensure there isn't a newline at the top
+        for (Task t : tasks) {
             if (count == 1) {
-                list.append(count++).append(". ").append(m);
+                list.append(count++).append(". ").append(t);
             } else {
-                list.append("\n").append(count++).append(". ").append(m);
+                list.append("\n").append(count++).append(". ").append(t);
             }
         }
         return list.toString();
@@ -170,22 +192,18 @@ public class TaskList {
      */
     public String findTaskWithKeyword(String keyword) throws InvalidInputException {
         keyword = keyword.trim();
-        if (keyword.equals("")) {
-            throw new InvalidInputException(Responses.INVALID_FORMAT);
-        } else {
-            int count = 1;
-            StringBuilder result = new StringBuilder("Here are the tasks:");
-            for (Task t : tasks) {
-                if (t.isKeyWordPresent(keyword)) {
-                    result.append('\n').append(count++).append(". ").append(t);
-                }
-            }
-            if (count == 1) { //No tasks appended
-                return "No tasks!";
-            } else {
-                return result.toString();
+        int count = 1;
+        StringBuilder result = new StringBuilder("Here are the tasks:");
+        for (Task t : tasks) {
+            if (t.isKeyWordPresent(keyword)) {
+                result.append('\n').append(count).append(". ").append(t);
+                count += 1;
             }
         }
+        if (count == 1) { //No tasks appended
+            return "No tasks!";
+        }
+        return result.toString();
     }
 
     /**
@@ -194,9 +212,6 @@ public class TaskList {
      * @return Formatted string representation of all the user-added tasks
      */
     public String formatForSaving() {
-        if (tasks.size() == 0) {
-            return "";
-        }
         int count = 1;
         StringBuilder result = new StringBuilder();
         for (Task m : tasks) {

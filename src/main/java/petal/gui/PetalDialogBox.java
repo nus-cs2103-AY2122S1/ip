@@ -24,9 +24,6 @@ public class PetalDialogBox extends HBox {
     @FXML
     private Circle circle;
 
-    private final Image img = new Image(Objects.requireNonNull(this.getClass()
-                    .getResourceAsStream("/images/petal.jpg")));
-
     /**
      * Constructs a PetalDialogBox instance
      *
@@ -44,6 +41,8 @@ public class PetalDialogBox extends HBox {
         dialog.setText(text);
 
         circle.setStroke(Color.CYAN);
+        Image img = new Image(Objects.requireNonNull(this.getClass()
+                .getResourceAsStream("/images/petal.jpg")));
         circle.setFill(new ImagePattern(img));
     }
 
