@@ -1,15 +1,13 @@
 package duke.task;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 /**
  * The Task class encapsulates a task with a name and an indicator of its completion.
  * As every Task is one of various types of Tasks, this class is abstract.
  */
 public abstract class Task {
 
-    public static final String DATE_FORMAT = "dd/MM/yyyy";
+    private static final String DONE_MARKER = "X";
+    protected static final String DELIMITER = " | ";
 
     private String name;
     private boolean isDone;
@@ -25,23 +23,20 @@ public abstract class Task {
     }
 
     /**
-     * Returns a string representing the task.
-     *
-     * @return a string representing the task.
-     */
-    @Override
-    public String toString() {
-        if (isDone) {
-            return "[X] " + this.name;
-        }
-        return "[ ] " + this.name;
-    }
-
-    /**
      * Marks a task as done.
      */
     public void markDone() {
         this.isDone = true;
+    }
+
+    protected String generateToString(String taskInitial) {
+        String doneCheckbox;
+        if (isDone) {
+            doneCheckbox = "[" + DONE_MARKER + "] ";
+        } else {
+            doneCheckbox = "[ ] ";
+        }
+        return "[" + taskInitial + "]" + doneCheckbox + this.name;
     }
 
     /**
@@ -49,6 +44,10 @@ public abstract class Task {
      *
      * @return a String to be stored in the taskList.txt file.
      */
+    protected String generatePrintToFile(String taskInitial) {
+        return taskInitial + DELIMITER + (isDone ? 1 : 0) + DELIMITER + this.name;
+    };
+
     public abstract String printToFile();
 
     public String getName() {
@@ -59,7 +58,5 @@ public abstract class Task {
         return this.isDone;
     }
 
-    protected String formatDate(LocalDate date) {
-        return date.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
-    }
+
 }

@@ -6,6 +6,7 @@ package duke.task;
 public class ToDo extends Task {
 
     public static final String COMMAND_WORD = "todo";
+    public static final String TASK_INITIAL = "T";
 
     public ToDo(String name) {
         super(name);
@@ -18,7 +19,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return generateToString(TASK_INITIAL);
     }
 
     /**
@@ -27,6 +28,6 @@ public class ToDo extends Task {
      * @return a String representing the ToDo Task to be saved in the taskList.txt file.
      */
     public String printToFile() {
-        return "T | " + (this.getDone() ? 1 : 0) + " | " + this.getName();
+        return generatePrintToFile(TASK_INITIAL);
     }
 }
