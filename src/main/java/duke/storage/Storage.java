@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 import duke.exceptions.DukeException;
 import duke.tasks.Deadline;
+import duke.tasks.DoAfter;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -77,23 +78,35 @@ public class Storage {
                 String done = (atHand.charAt(4) == ' ') ? " " : "X";
                 String des;
                 Task t;
-
-                if (taskType.equals("T")) {
+                int openBracket;
+                LocalDate date;
+                switch (taskType) {
+                case "T":
                     des = atHand.substring(7);
                     t = new ToDo(done, des);
-                } else if (taskType.equals("E")) {
-                    int openBracket = atHand.indexOf('(');
+                    break;
+                case "E":
+                    openBracket = atHand.indexOf('(');
                     des = atHand.substring(7, openBracket - 1);
-                    LocalDate date = LocalDate.parse(atHand.substring(openBracket + 5, openBracket + 15));
+                    date = LocalDate.parse(atHand.substring(openBracket + 5, openBracket + 15));
                     ArrayList<LocalTime> startEnd = extractTimeEvent(atHand);
                     t = new Event(done, des, date, startEnd.get(0), startEnd.get(1));
-                } else if (taskType.equals("D")) {
-                    int openBracket = atHand.indexOf('(');
+                    break;
+                case "D":
+                    openBracket = atHand.indexOf('(');
                     des = atHand.substring(7, openBracket - 1);
-                    LocalDate date = LocalDate.parse(atHand.substring(openBracket + 5, openBracket + 15));
+                    date = LocalDate.parse(atHand.substring(openBracket + 5, openBracket + 15));
                     LocalTime time = extractTimeDeadline(atHand);
                     t = new Deadline(done, des, date, time);
-                } else {
+                    break;
+                case "A":
+                    openBracket = atHand.indexOf('(');
+                    des = atHand.substring(7, openBracket - 1);
+                    int closeBracket = atHand.lastIndexOf(')');
+                    String prevTaskDescription = atHand.substring(openBracket + 18, closeBracket);
+                    t = new DoAfter(done, des, prevTaskDescription);
+                    break;
+                default:
                     throw new DukeException("Task Type not recognised. Task not loaded into Duke chat-bot");
                 }
                 tList.add(t);

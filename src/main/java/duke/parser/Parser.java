@@ -22,16 +22,16 @@ public class Parser {
             return "list";
         } else if (des.contains("done") && des.startsWith("done")) {
             try {
-                String sNum = des.substring(des.indexOf(' ') + 1);
-                Integer.parseInt(sNum);
+                String stringNumber = des.substring(des.indexOf(' ') + 1);
+                Integer.parseInt(stringNumber);
                 return "done";
             } catch (NumberFormatException e) {
                 return null;
             }
         } else if (des.contains("delete") && des.startsWith("delete")) {
             try {
-                String sNum = des.substring(des.indexOf(' ') + 1);
-                Integer.parseInt(sNum);
+                String stringNumber = des.substring(des.indexOf(' ') + 1);
+                Integer.parseInt(stringNumber);
                 return "delete";
             } catch (NumberFormatException e) {
                 return null;
@@ -42,6 +42,14 @@ public class Parser {
             return "event";
         } else if (des.contains("todo") && des.startsWith("todo")) {
             return "todo";
+        } else if (des.contains("doafter") && des.startsWith("doafter")) {
+            try {
+                String stringNumber = des.substring(des.lastIndexOf(' ') + 1);
+                int num = Integer.parseInt(stringNumber);
+                return "doafter";
+            } catch (NumberFormatException e) {
+                return null;
+            }
         } else if (des.contains("find") && des.startsWith("find")) {
             return "find";
         } else {
