@@ -69,23 +69,28 @@ public class MainWindow extends Stage {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
 
-        // Delay exiting platform to allow goodbye message to be seen.
-        if (response.equals(duke.getUi().getGoodbyeMessage())) {
-            PauseTransition delay = new PauseTransition(Duration.seconds(1));
-            delay.setOnFinished(event -> Platform.exit());
-            delay.play();
+        // Only create dialog is user input is not whitespace(s) or null.
+        if (!input.isBlank()) {
+            String response = duke.getResponse(input);
+
+            // Allow Duke to say goodbye to the user before closing application.
+            if (response.equals(duke.getUi().getGoodbyeMessage())) {
+                PauseTransition delay = new PauseTransition(Duration.seconds(1));
+                delay.setOnFinished(event -> Platform.exit());
+                delay.play();
+            }
+
+            // Differentiate Duke's response from user response.
+            input = "You: " + input;
+            response = "Duke: " + response;
+
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
         }
 
-        // Differentiate Duke's response from user response.
-        input = "You: " + input;
-        response = "Duke: " + response;
-
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
         userInput.clear();
     }
 

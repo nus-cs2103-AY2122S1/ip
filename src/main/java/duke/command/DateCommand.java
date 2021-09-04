@@ -2,12 +2,12 @@ package duke.command;
 
 import java.time.LocalDate;
 
-import duke.exception.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
 import duke.Ui.UserCommands;
+import duke.exception.DukeException;
 import duke.exception.MissingDateException;
 import duke.exception.MissingSpaceAfterCommandException;
 import duke.task.Deadline;
@@ -66,6 +66,7 @@ public class DateCommand extends Command {
         String formattedDateString = Parser.parseLocalDate(localDate);
 
         StringBuilder datesBuilder = new StringBuilder();
+        // finds Deadlines and Events with LocalDate that matches date input from user.
         for (Task task : tasks.getTasks()) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
