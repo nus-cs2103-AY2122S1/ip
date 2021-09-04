@@ -10,9 +10,12 @@ import javafx.fxml.FXML;
  */
 public class Duke {
 
-    public GreetingBot dukeBot;
+    private GreetingBot dukeBot;
 
 
+    /**
+     * Constructor for Duke
+     */
     public Duke() {
         GreetingBot newBot = new GreetingBot();
         dukeBot = newBot;
@@ -20,11 +23,19 @@ public class Duke {
 
     }
 
-
+    /**
+     * Method to get dukeBot
+     *
+     * @return this dukeBot
+     */
+    public GreetingBot getDukeBot() {
+        return this.dukeBot;
+    }
 
 
     /**
      * Method that creates Duke's response.
+     *
      * @param input a string which is user input
      * @return the response by duke.
      */
@@ -34,9 +45,8 @@ public class Duke {
     }
 
 
+}
 
-
-    }
 
 
 

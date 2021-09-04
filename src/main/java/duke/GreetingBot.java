@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.LinkedList;
-import java.util.Scanner;
 
 
 /**
@@ -25,10 +24,19 @@ public class GreetingBot {
         ui = new Ui();
     }
 
+    /**
+     * method to start the bot
+     * @return a Greeting in a String
+     */
     public String startBot() {
         return this.ui.greet();
     }
 
+    /**
+     * Method to load up an existing list
+     * @param filePath the path of the list
+     * @return the message if loading failed or succeeds
+     */
     public String loadList(String filePath) {
         storage = new Storage(filePath);
         try {
@@ -70,43 +78,42 @@ public class GreetingBot {
      */
     protected String store(String input) {
         Parser parser = new Parser();
-            try {
-                String nextLine = input;
-                int action = parser.parse(nextLine);
-                if (action == 0) {
-                    return tasks.list();
-                } else if (action == 1) {
-                    return exitBot();
-                } else if (action == 2) {
-                    String message = tasks.setDone(nextLine);
-                    storage.updateData(tasks.getList());
-                    return message;
-                } else if (action == 3) {
-                    String message = tasks.deleteTask(nextLine);
-                    storage.updateData(tasks.getList());
-                    return message;
-                } else if (action == 4) {
-                    String message = tasks.newTodo(nextLine);
-                    storage.updateData(tasks.getList());
-                    return message;
-                } else if (action == 5) {
-                    String message = tasks.newDeadline(nextLine);
-                    storage.updateData(tasks.getList());
-                    return message;
-                } else if (action == 6) {
-                    String message = tasks.newEvent(nextLine);
-                    storage.updateData(tasks.getList());
-                    return message;
-                } else if (action == 7) {
-                    String message = tasks.findTask(nextLine);
-                    return message;
-                }
-
-            } catch (DukeException err) {
-                System.out.println(err.toString());
-                return err.toString();
+        try {
+            String nextLine = input;
+            int action = parser.parse(nextLine);
+            if (action == 0) {
+                return tasks.list();
+            } else if (action == 1) {
+                return exitBot();
+            } else if (action == 2) {
+                String message = tasks.setDone(nextLine);
+                storage.updateData(tasks.getList());
+                return message;
+            } else if (action == 3) {
+                String message = tasks.deleteTask(nextLine);
+                storage.updateData(tasks.getList());
+                return message;
+            } else if (action == 4) {
+                String message = tasks.newTodo(nextLine);
+                storage.updateData(tasks.getList());
+                return message;
+            } else if (action == 5) {
+                String message = tasks.newDeadline(nextLine);
+                storage.updateData(tasks.getList());
+                return message;
+            } else if (action == 6) {
+                String message = tasks.newEvent(nextLine);
+                storage.updateData(tasks.getList());
+                return message;
+            } else if (action == 7) {
+                String message = tasks.findTask(nextLine);
+                return message;
             }
-            return tasks.getInfo();
+        } catch (DukeException err) {
+            System.out.println(err.toString());
+            return err.toString();
+        }
+        return tasks.getInfo();
     }
 
 

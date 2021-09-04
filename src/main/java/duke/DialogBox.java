@@ -1,10 +1,11 @@
 package duke;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -14,9 +15,9 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 
-import java.io.IOException;
+
+
 
 /**
  * An example of a custom control using FXML.
@@ -30,6 +31,11 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * constructor for dialog box
+     * @param text text to be displayed
+     * @param img image to be displayed
+     */
     public DialogBox(String text, Image img) {
 
 
@@ -66,14 +72,15 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
 
         DialogBox box = new DialogBox(text, img);
-        box.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE,null,null)));
+        box.setBackground(new Background(new BackgroundFill(Color.LIGHTSKYBLUE, null, null)));
         return box;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW,null,null)));
+        db.setBackground(new Background(new BackgroundFill(Color.LIGHTYELLOW, null, null)));
         return db;
     }
+
 }

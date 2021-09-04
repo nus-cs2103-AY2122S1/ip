@@ -2,11 +2,9 @@ package duke;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 /**
@@ -27,19 +25,30 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.JPG"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
+    /**
+     * method to initialize the program.
+     */
     @FXML
     public void initialize() {
         duke = new Duke();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        addDukeDialogBox(duke.dukeBot.startBot());
-        addDukeDialogBox(duke.dukeBot.loadList("./data/list.txt"));
+        addDukeDialogBox(duke.getDukeBot().startBot());
+        addDukeDialogBox(duke.getDukeBot().loadList("./data/list.txt"));
     }
 
+    /**
+     * Method to set the duke variable.
+     * @param d the duke to be assigned to the class field.
+     */
     public void setDuke(Duke d) {
         duke = d;
 
     }
 
+    /**
+     * Method to add a DialogBox for a new Duke message.
+     * @param message the text of the message
+     */
     public void addDukeDialogBox(String message) {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(message, dukeImage)
@@ -59,6 +68,4 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
-
-
 }
