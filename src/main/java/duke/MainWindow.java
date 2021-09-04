@@ -66,8 +66,7 @@ public class MainWindow extends AnchorPane {
                                    Platform.exit();
                                    System.exit(0);
                                }
-                           },
-                    2*1000);
+                           }, 2*1000);
         } else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),

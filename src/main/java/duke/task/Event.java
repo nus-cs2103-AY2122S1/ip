@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Event Task class used by bot
+ * Event Task class used by bot.
  *
  * @author mrmrinal
  */

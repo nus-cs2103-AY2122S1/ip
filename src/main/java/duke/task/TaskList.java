@@ -14,8 +14,8 @@ import java.util.List;
 public class TaskList {
     
     private List<Task> items = new ArrayList<>(100);
-    private Ui ui = new Ui();
-    private Gui gui = new Gui();
+    private final Ui ui = new Ui();
+    private final Gui gui = new Gui();
 
     /**
      * Creates new TaskList instance.
@@ -30,17 +30,18 @@ public class TaskList {
      * Lists all the Tasks down in numerical form.
      */
     public String list() {
-        String r = "";
-        for (int i = 1; i <= items.size(); i++) {
-            r = r + gui.dukeResponse(i + ". "
-                    + items.get(i - 1) + "\n".toString());
+        if(items.size() < 1){
+            return "There are no tasks for you sir";
+        } else {
+            String r = "";
+            for (int i = 1; items.size() >= i; i++) {
+                r = r + gui.dukeResponse(i + ". "
+                        + items.get(i - 1) + "\n".toString());
+            }
+            r = r + gui.dukeResponse("");
+            return r;
         }
-        r = r + gui.dukeResponse("");
-        return r;
     }
-    
-    
-    
 
     /**
      * Marks a specific task as done.
@@ -96,7 +97,7 @@ public class TaskList {
         int list = 1;
         for(int i = 1; i <= items.size(); i++){
             if(this.getTask(i).description.contains(substring)){
-                r.append(gui.dukeResponse(list + ". " + items.get(i - 1)  + "\n".toString()));
+                r.append(gui.dukeResponse(list + ". " + items.get(i - 1)  + "\n"));
                 list++;
             }
         }
