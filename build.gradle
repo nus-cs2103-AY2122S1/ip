@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "petal.Petal"; //"petal.duke.Duke"
+    mainClassName = "petal.Petal" //"petal.Petal"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "petal"
     archiveClassifier = null
 }
 
@@ -58,4 +58,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }

@@ -24,12 +24,8 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Ui ui;
-
-    //Images to be used
 
     /**
      * Initializes the nodes
@@ -41,7 +37,7 @@ public class MainWindow extends AnchorPane {
 
     /**
      * Sets the Ui instance
-     * @param ui
+     * @param ui Ui instance to be set
      */
     public void setUi(Ui ui) {
         this.ui = ui;
@@ -59,10 +55,6 @@ public class MainWindow extends AnchorPane {
                 UserDialogBox.getUserDialog(input),
                 PetalDialogBox.getPetalDialog(output)
         );
-
-        if (output.equals(Responses.GOODBYE.toString())) {
-            Platform.exit();
-        }
         userInput.clear();
     }
 
@@ -78,6 +70,13 @@ public class MainWindow extends AnchorPane {
                 PetalDialogBox.getPetalDialog(output)
         );
         userInput.clear();
+    }
+
+    /**
+     * Terminates the current bot instance by exiting the GUI
+     */
+    public void terminatePetal() {
+          Platform.exit();
     }
 
     /**

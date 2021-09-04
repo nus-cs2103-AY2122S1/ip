@@ -24,7 +24,7 @@ public class ByeCommand implements Command {
             storage.saveTasks();
             return Responses.GOODBYE.toString();
         } catch (IOException e) {
-            return Responses.GOODBYE.toString() + "\n" + Responses.GOODBYE.toString();
+            return Responses.GOODBYE.toString();
         }
     }
 

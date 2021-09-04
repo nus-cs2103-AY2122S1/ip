@@ -49,10 +49,10 @@ public class Storage {
      * @return String greeting the user
      */
     public String createDirectory() {
+        if (hasUsedPetalBefore()) {
+            return Responses.WELCOME_BACK.toString();
+        }
         try {
-            if (hasUsedPetalBefore()) {
-                return Responses.WELCOME_BACK.toString();
-            }
             Path path = Paths.get(folderPath);
             Files.createDirectories(path);
             File petalData = new File(filePath);
@@ -85,9 +85,11 @@ public class Storage {
                     addPasts.add(new ToDo(components[2], isDone));
                     break;
                 case "D":
+                    assert components[3] != null;
                     addPasts.add(new Deadline(components[2], components[3], isDone));
                     break;
                 case "E":
+                    assert components[3] != null;
                     addPasts.add(new Event(components[2], components[3], isDone));
                     break;
                 default:
