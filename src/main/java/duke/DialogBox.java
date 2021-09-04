@@ -25,6 +25,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Sets the DialogBox.
+     *
+     * @param text Text used.
+     * @param img Image used.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -39,6 +45,12 @@ public class DialogBox extends HBox {
         displayPicture.setImage(img);
     }
 
+    /**
+     * Sets the DialogBox.
+     *
+     * @param l Label used.
+     * @param iv ImageView used.
+     */
     public DialogBox(Label l, ImageView iv) {
         dialog = l;
         displayPicture = iv;
@@ -61,20 +73,48 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns the formatted DialogBox.
+     *
+     * @param text Text used.
+     * @param img Image used.
+     * @return DialogBox returned.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns the formatted DialogBox.
+     *
+     * @param text Text used.
+     * @param img Image used.
+     * @return DialogBox returned.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
     }
 
+    /**
+     * Returns the formatted DialogBox.
+     *
+     * @param l Label used.
+     * @param iv ImageView used.
+     * @return DialogBox returned.
+     */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
     }
 
+    /**
+     * Returns the formatted DialogBox.
+     *
+     * @param l Label used.
+     * @param iv ImageView used.
+     * @return DialogBox returned.
+     */
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
         var db = new DialogBox(l, iv);
         db.flip();
