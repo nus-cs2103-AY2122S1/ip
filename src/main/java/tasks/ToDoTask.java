@@ -14,10 +14,10 @@ public final class ToDoTask extends Task {
     /**
      * Constructs a ToDoTask.
      *
-     * @param s the input string to describe the task
+     * @param description the input string to describe the task
      */
-    public ToDoTask(String s) {
-        super(s);
+    public ToDoTask(String description) {
+        super(description);
     }
 
     /**
@@ -38,9 +38,9 @@ public final class ToDoTask extends Task {
     @Override
     public String getSaveFormat() {
         if (super.getStatus().equals("[ ]")) {
-            return "T" + "|" + this.getTask().strip() + "|" + 0;
+            return "T" + "|" + this.getDescription().strip() + "|" + 0;
         } else {
-            return "T" + "|" + this.getTask().strip() + "|" + 1;
+            return "T" + "|" + this.getDescription().strip() + "|" + 1;
         }
     }
 }

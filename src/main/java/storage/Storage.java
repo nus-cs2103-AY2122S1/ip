@@ -36,10 +36,10 @@ public final class Storage {
         File saves = new File(FILE_PATH);
         try {
             if (!folder.exists() || !folder.isDirectory()) {
-                boolean isFolderCreated = folder.mkdir();
+                folder.mkdir();
             }
             if (!saves.exists()) {
-                boolean isSavesCreated = saves.createNewFile();
+                saves.createNewFile();
             }
         } catch (IOException e) {
             Ui.showInput(e.getMessage());
@@ -58,7 +58,7 @@ public final class Storage {
             Ui.showInput("something went wrong");
         }
         try {
-            boolean isFileCreated = file.createNewFile();
+            file.createNewFile();
             FileWriter writer = new FileWriter(FILE_PATH, true);
             for (Task t : currTasks) {
                 writer.write(t.getSaveFormat() + "\n");

@@ -36,7 +36,7 @@ public final class DeadlineCommand extends Command {
     public String execute(TaskList lst, Ui ui, Storage storage) {
         try {
             DeadLineTask d = new DeadLineTask(lst.filterInfo(getInput()),
-                    lst.lookForDeadline(getInput()));
+                    lst.getDeadline(getInput()));
             String result = lst.addTask(d);
             storage.resetFile(lst.getTasks());
             return result;

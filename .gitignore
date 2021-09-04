@@ -53,3 +53,4 @@ src/main/.idea/modules.xml
 src/main/.idea/vcs.xml
 src/main/.idea/.gitignore
 
+src/main/java/META-INF/MANIFEST.MF

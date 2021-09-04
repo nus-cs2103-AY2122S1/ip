@@ -29,7 +29,7 @@ public final class Ui {
 
     private static final String HELPER_MESSAGE = SEPARATOR + "\n"
             + "     The following can be used:\n" + "     Types of tasks: 'todo', 'deadline', 'event'\n"
-            + "     If you wish to add a task, please input in the form: '<Type of tasks.Task> <Name of tasks.Task>'"
+            + "     If you wish to add a task, please input in the form: '<Type of Task> <Name of Task>'"
             + " and include keyword '/at' OR '/by' followed by <Date> if relevant.\n"
             + "     If you wish to delete a task, please input in the form: 'delete <task index>'.\n"
             + "     If you wish to see the current tasks, please input 'list'.\n"

@@ -36,7 +36,7 @@ public final class EventCommand extends Command {
     public String execute(TaskList lst, Ui ui, Storage storage) {
         try {
             EventTask e = new EventTask(lst.filterInfo(getInput()),
-                    lst.searchForEventDay(getInput()));
+                    lst.getEventDay(getInput()));
             String result = lst.addTask(e);
             storage.resetFile(lst.getTasks());
             return result;

@@ -48,10 +48,10 @@ public final class FindCommand extends Command {
             for (int i = 0; i < tasksFound.size(); i++) {
                 if (i + 1 < tasksFound.size()) {
                     temp += "     " + (i + 1) + "." + tasksFound.get(i).getType()
-                            + tasksFound.get(i).getStatus() + " " + tasksFound.get(i).getTask() + "\n";
+                            + tasksFound.get(i).getStatus() + " " + tasksFound.get(i).getDescription() + "\n";
                 } else {
                     temp += "     " + (i + 1) + "." + tasksFound.get(i).getType()
-                            + tasksFound.get(i).getStatus() + " " + tasksFound.get(i).getTask();
+                            + tasksFound.get(i).getStatus() + " " + tasksFound.get(i).getDescription();
                 }
             }
             return temp;

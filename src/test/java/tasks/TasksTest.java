@@ -10,7 +10,7 @@ public class TasksTest {
   public void ToDoTaskTest1() {
     Task t = new ToDoTask("this");
     assertEquals("[T]", t.getType());
-    assertEquals("this", t.getTask());
+    assertEquals("this", t.getDescription());
     assertEquals("[ ]", t.getStatus());
     assertEquals("T|this|0", t.getSaveFormat());
     t.setIsDone();
@@ -36,7 +36,7 @@ public class TasksTest {
   public void EventTaskTest1() {
     Task t = new EventTask("this", "when");
     assertEquals("[E]", t.getType());
-    assertEquals("this (at: when)", t.getTask());
+    assertEquals("this (at: when)", t.getDescription());
     assertEquals("[ ]", t.getStatus());
     assertEquals("E|this|when|0", t.getSaveFormat());
     t.setIsDone();
@@ -60,7 +60,7 @@ public class TasksTest {
   @Test
   public void EventTaskTest4() {
     Task t = new EventTask("this", "2/12/2019 1800");
-    assertEquals("this (at: DECEMBER 2 2019)", t.getTask());
+    assertEquals("this (at: DECEMBER 2 2019)", t.getDescription());
     assertEquals("2019-12-02", t.getLocalDate().toString());
   }
 
@@ -68,7 +68,7 @@ public class TasksTest {
   public void DeadLineTaskTest1() {
     Task t = new DeadLineTask("this", "when");
     assertEquals("[D]", t.getType());
-    assertEquals("this (by: when)", t.getTask());
+    assertEquals("this (by: when)", t.getDescription());
     assertEquals("[ ]", t.getStatus());
     assertEquals("D|this|when|0", t.getSaveFormat());
     t.setIsDone();
@@ -92,7 +92,7 @@ public class TasksTest {
   @Test
   public void DeadLineTaskTest4() {
     Task t = new DeadLineTask("this", "2/12/2019 1800");
-    assertEquals("this (by: DECEMBER 2 2019)", t.getTask());
+    assertEquals("this (by: DECEMBER 2 2019)", t.getDescription());
     assertEquals("2019-12-02", t.getLocalDate().toString());
   }
 }

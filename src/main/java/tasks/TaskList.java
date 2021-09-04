@@ -32,15 +32,15 @@ public final class TaskList {
     /**
      * Gets the String representation of the date/deadline as input by user.
      *
-     * @param words the String array representation of the input by user
+     * @param userInput the String array representation of the input by user
      * @return the concatenated String that is the date specified by user
      */
-    public String filterInfo(ArrayList<String> words) {
+    public String filterInfo(ArrayList<String> userInput) {
         String temp = "";
-        for (int i = 1; i < words.size(); i++) {
-            if (!(words.get(i).equals("/at") || words.get(i).equals("/by"))
-                    || words.get(0).equalsIgnoreCase("todo")) {
-                temp += words.get(i) + " ";
+        for (int i = 1; i < userInput.size(); i++) {
+            if (!(userInput.get(i).equals("/at") || userInput.get(i).equals("/by"))
+                    || userInput.get(0).equalsIgnoreCase("todo")) {
+                temp += userInput.get(i) + " ";
             } else {
                 break;
             }
@@ -52,19 +52,19 @@ public final class TaskList {
      * Identifies the start of String representation of date of Event
      * by finding the "/at" expression.
      *
-     * @param args the String array representation of the input by user
+     * @param userInput the String array representation of the input by user
      * @return the String representation of the date by passing it to method
      * getDate which requires a starting index as an argument
      * @throws DukeException thrown when encountering a String Array without
      * the presence of "/at" expression, which is not a valid input for Event
      */
-    public String searchForEventDay(ArrayList<String> args) throws DukeException {
-        for (int i = 2; i < args.size(); i++) {
-            if (args.get(i).equals("/at")) {
-                if (i + 1 >= args.size()) {
+    public String getEventDay(ArrayList<String> userInput) throws DukeException {
+        for (int i = 2; i < userInput.size(); i++) {
+            if (userInput.get(i).equals("/at")) {
+                if (i + 1 >= userInput.size()) {
                     throw new DukeException("Oh no, date is missing :(");
                 } else {
-                    return getDate(args, i + 1);
+                    return getDate(userInput, i + 1);
                 }
             }
         }
@@ -75,19 +75,19 @@ public final class TaskList {
      * Identifies the start of String representation of date for Deadline
      * by finding the "/by" expression.
      *
-     * @param arg the String array representation of the input by user
+     * @param userInput the String array representation of the input by user
      * @return the String representation of the date by passing it to method
      * getDate which requires a starting index as an argument
      * @throws DukeException thrown when encountering a String Array without
      * the presence of "/by" expression, which is not a valid input for Deadline
      */
-    public String lookForDeadline(ArrayList<String> arg) throws DukeException {
-        for (int i = 2; i < arg.size(); i++) {
-            if (arg.get(i).equals("/by")) {
-                if (i + 1 >= arg.size()) {
+    public String getDeadline(ArrayList<String> userInput) throws DukeException {
+        for (int i = 2; i < userInput.size(); i++) {
+            if (userInput.get(i).equals("/by")) {
+                if (i + 1 >= userInput.size()) {
                     throw new DukeException("Uh oh, deadline is missing :(");
                 } else {
-                    return getDate(arg, i + 1);
+                    return getDate(userInput, i + 1);
                 }
             }
         }
@@ -98,17 +98,17 @@ public final class TaskList {
      * Creates a String representation of date by
      * concatenating a String from the starting index to the last index.
      *
-     * @param s the String array representation of the input by user
+     * @param userInput the String array representation of the input by user
      * @param start the starting index
      * @return String representation of date as input by user
      */
-    public String getDate(ArrayList<String> s, int start) {
+    public String getDate(ArrayList<String> userInput, int start) {
         String temp = "";
-        for (int i = start; i < s.size(); i++) {
-            if (i + 1 < s.size()) {
-                temp += s.get(i) + " ";
+        for (int i = start; i < userInput.size(); i++) {
+            if (i + 1 < userInput.size()) {
+                temp += userInput.get(i) + " ";
             } else {
-                temp += s.get(i);
+                temp += userInput.get(i);
             }
         }
         return temp;
@@ -117,14 +117,14 @@ public final class TaskList {
     /**
      * Adds tasks to the stored list of tasks.
      *
-     * @param t the task to be added/e
+     * @param task the task to be added
      */
-    public String addTask(Task t) {
+    public String addTask(Task task) {
         if (tasks == null) {
             tasks = new ArrayList<>();
         }
-        tasks.add(t);
-        return "     Successfully added:\n" + t.getType() + t.getStatus() + " " + t.getTask();
+        tasks.add(task);
+        return "     Successfully added:\n" + "     " + task.getType() + task.getStatus() + " " + task.getDescription();
     }
 
     /**
@@ -135,7 +135,7 @@ public final class TaskList {
             String temp = "     The current list has these items:\n";
             for (int i = 0; i < tasks.size(); i++) {
                 temp += "     " + (i + 1) + "." + tasks.get(i).getType() + tasks.get(i).getStatus() + " "
-                        + tasks.get(i).getTask() + "\n";
+                        + tasks.get(i).getDescription() + "\n";
             }
             return temp + "\n" + "     There are " + tasks.size() + " task(s) now, keep up!";
         } else {
@@ -146,23 +146,23 @@ public final class TaskList {
     /**
      * Deletes a task from the list.
      *
-     * @param ind the index of task to be deleted
+     * @param index the index of task to be deleted
      */
-    public String deleteTask(int ind) {
-        Task t = tasks.remove(ind);
+    public String deleteTask(int index) {
+        Task task = tasks.remove(index);
         return "     Noted, the following task has been deleted: \n"
-                + "     " + t.getType() + t.getStatus() + " " + t.getTask() + "\n"
+                + "     " + task.getType() + task.getStatus() + " " + task.getDescription() + "\n"
                 + "     Nice! there are " + tasks.size() + " task(s) left.";
     }
 
     /**
      * Checks if any tasks are due on a particular day.
      *
-     * @param s the date which user wants to check
+     * @param userInput the date which user wants to check
      */
-    public ArrayList<Task> findTasksDue(String s) {
+    public ArrayList<Task> findTasksDue(String userInput) {
         ArrayList<Task> dueItems = new ArrayList<>();
-        String[] date = s.split("/");
+        String[] date = userInput.split("/");
         LocalDate ref = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
         for (Task t : tasks) {
             if (!(t instanceof ToDoTask)) {
@@ -187,7 +187,7 @@ public final class TaskList {
         ArrayList<Task> matched = new ArrayList<>();
         if (!target.equals("")) {
             for (Task t : tasks) {
-                String temp = t.getTask();
+                String temp = t.getDescription();
                 if (temp.toLowerCase().contains(target.toLowerCase())) {
                     matched.add(t);
                 }

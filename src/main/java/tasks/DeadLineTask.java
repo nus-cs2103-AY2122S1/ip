@@ -25,11 +25,11 @@ public final class DeadLineTask extends Task {
      * stored as LocalDate. If so, save it, otherwise save
      * date as per user input.
      *
-     * @param s the input string to describe the Deadline task
+     * @param description the input string to describe the Deadline task
      * @param date the do-by-date
      */
-    public DeadLineTask(String s, String date) {
-        super(s);
+    public DeadLineTask(String description, String date) {
+        super(description);
         this.dueDate = date;
         String day = checkForDate(date);
         if (!day.equals("")) {
@@ -38,18 +38,18 @@ public final class DeadLineTask extends Task {
         }
     }
 
-    private String checkForDate(String s) {
+    private String checkForDate(String userInput) {
         String temp = "^[0-9]{1,2}[\\\\/][0-9]{1,2}[\\\\/][0-9]{4}\\s[0-9]{4}$";
         Pattern p = Pattern.compile(temp);
-        Matcher m = p.matcher(s);
+        Matcher m = p.matcher(userInput);
         if (m.find()) {
             return m.group();
         }
         return "";
     }
 
-    private LocalDate convertDate(String s) {
-        String[] date = s.substring(0, s.length() - 4).split("/");
+    private LocalDate convertDate(String input) {
+        String[] date = input.substring(0, input.length() - 4).split("/");
         int day = Integer.parseInt(date[0].replaceAll(" ", ""));
         int month = Integer.parseInt(date[1].replaceAll(" ", ""));
         int year = Integer.parseInt(date[2].replaceAll(" ", ""));
@@ -86,12 +86,12 @@ public final class DeadLineTask extends Task {
      * @return the description specific to the Deadline task
      */
     @Override
-    public String getTask() {
+    public String getDescription() {
         if (this.localDate == null) {
-            return super.getTask() + " " + "(by: " + this.dueDate + ")";
+            return super.getDescription() + " " + "(by: " + this.dueDate + ")";
         } else {
-            return super.getTask() + " " + "(by: " + Month.of(this.localDate.getMonthValue()) + " "
-                    + this.localDate.getDayOfMonth() + " " + this.localDate.getYear() + ")";
+            return super.getDescription() + " " + "(by: " + this.localDate.getDayOfMonth() + " "
+                    + Month.of(this.localDate.getMonthValue()) + " " + this.localDate.getYear() + ")";
         }
     }
 
@@ -101,7 +101,7 @@ public final class DeadLineTask extends Task {
      * @return the simple description of the task
      */
     public String getSimpleTaskDescription() {
-        return super.getTask();
+        return super.getDescription();
     }
 
     /**

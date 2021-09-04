@@ -19,10 +19,10 @@ public class Task {
     /**
      * Constructs a Task.
      *
-     * @param s the input string to describe the task
+     * @param description the input string to describe the task
      */
-    public Task(String s) {
-        this.task = s;
+    public Task(String description) {
+        this.task = description;
         this.isDone = "[ ]";
     }
 
@@ -38,7 +38,7 @@ public class Task {
         } else {
             result = "You have already completed this task before!";
         }
-        Ui.showInput(result, this.getType() + isDone + " " + this.getTask());
+        Ui.showInput(result, this.getType() + isDone + " " + this.getDescription());
     }
 
     /**
@@ -64,7 +64,7 @@ public class Task {
      *
      * @return the String that is the description of the task
      */
-    public String getTask() {
+    public String getDescription() {
         return this.task;
     }
 
