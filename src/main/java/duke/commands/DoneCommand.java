@@ -60,12 +60,7 @@ public class DoneCommand extends Command {
         } catch (IOException | IllegalArgumentException e) {
             return ui.printError(e.getMessage());
         } catch (IndexOutOfBoundsException e) {
-            // error when try to mark an invalid task as done / delete task
-            if (tasks.getSize() > 0) {
-                return "That task does not exist!\nPlease enter a number from 1 to " + tasks.getSize();
-            } else {
-                return "You have no tasks in your list to mark as done or delete.";
-            }
+            return ui.printInvalidTaskNumError(tasks);
         }
     }
 }

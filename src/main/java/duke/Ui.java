@@ -115,4 +115,18 @@ public class Ui {
     public String printError(String err) {
         return err;
     }
+
+    /**
+     * Prints the error message when the user enters an invalid task number.
+     *
+     * @param tasks List of tasks.
+     * @return Error message.
+     */
+    public String printInvalidTaskNumError(TaskList tasks) {
+        if (tasks.getSize() > 0) {
+            return "That task does not exist!\nPlease enter a number from 1 to " + tasks.getSize() + ".";
+        } else {
+            return "You have no tasks in your list to mark as done or delete.";
+        }
+    }
 }

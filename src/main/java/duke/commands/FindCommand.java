@@ -57,7 +57,6 @@ public class FindCommand extends Command {
             } else {
                 return tasks.findTask(userCommand.substring(COMMAND_LENGTH).strip());
             }
-
         } catch (IllegalArgumentException e) {
             return ui.printError(e.getMessage());
         }
