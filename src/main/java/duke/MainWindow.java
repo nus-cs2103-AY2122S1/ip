@@ -41,7 +41,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Boot up duke and load up task list.
+     * Boots up duke and load up task list.
      * @param d The duke bot you are booting up.
      */
     public void setDuke(Duke d) {

@@ -14,7 +14,7 @@ import duke.ui.Ui;
 public class FindCommand extends Command {
 
     /**
-     * The arguments associated with the command
+     * The arguments associated with the command.
      **/
     private String arguments;
 
