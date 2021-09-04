@@ -34,6 +34,8 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            assert ui != null : "Ui should have been initialised first!";
+            assert storage != null : "Storage should have been initialised first!";
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();

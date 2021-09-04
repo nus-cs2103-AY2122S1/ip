@@ -39,10 +39,6 @@ public class Ui {
         return showToUser(MESSAGE_EXIT);
     }
 
-    public String showLine() {
-        return showToUser(DIVIDER);
-    }
-
     public String showLoadingError() {
         return showToUser(
             DIVIDER,
@@ -50,16 +46,12 @@ public class Ui {
             DIVIDER);
     }
 
-    public String showError(String e) {
-        return showToUser(e);
-    }
-
     public String showMessage(String message) {
         return showToUser(message);
     }
 
     public String showTasks(TaskList tasks) {
-        String displayedTasks = "Here are your tasks:";
+        String displayedTasks = "Here are your tasks:\n";
         for (int i = 0; i < tasks.getSize(); i++) {
             displayedTasks += (tasks.getTask(i).toString() + "\n");
         }

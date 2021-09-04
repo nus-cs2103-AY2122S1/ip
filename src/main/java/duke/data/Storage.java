@@ -28,6 +28,7 @@ public class Storage {
         try {
             userData = new File(pathname);
             userData.createNewFile();
+            assert userData != null : "User's file data should not be null!";
         } catch (IOException e) {
             System.out.println("File not created");
         }
@@ -46,6 +47,7 @@ public class Storage {
             Scanner sc = new Scanner(userData);
             while (sc.hasNextLine()) {
                 String[] newTaskArray = sc.nextLine().split("\\|");
+                assert newTaskArray.length > 3 : "Invalid data found in file!";
                 String taskType = newTaskArray[0];
                 boolean isDone = newTaskArray[1].equals("1");
                 Task newTask = taskType.equals("D") ?

@@ -28,7 +28,7 @@ public class Parser {
     };
 
     /**
-     * The following methods shouldIgnore, isCommentLine, readCommand and the string COMMENT_LINE_FORMAT_REGEX
+     * The following methods shouldIgnore, isCommentLine and the string COMMENT_LINE_FORMAT_REGEX
      * were taken from addressbook-level2(https://github.com/se-edu/addressbook-level2) and edited slightly
      * to fit into iP
      */
@@ -69,6 +69,7 @@ public class Parser {
 
         String[] userInputArray = userInput.split(" ");
         String keyword = userInputArray[0];
+        assert keyword != null : "Keyword should not be null";
 
         switch (keyword) {
 

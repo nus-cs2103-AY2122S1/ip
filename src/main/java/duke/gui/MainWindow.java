@@ -42,6 +42,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        assert duke != null : "Duke should have been initialised first!";
         String input = userInput.getText();
         String response = duke.getResponse(input);
         if (response.equals(Ui.showGoodbye())) {
