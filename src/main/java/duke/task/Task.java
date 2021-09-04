@@ -21,10 +21,13 @@ public abstract class Task {
     Task(String... content) {
         // manipulate the array given to get the task content
         ArrayList<String> holder = new ArrayList<>(Arrays.asList(content));
+        // remove the first element which is indicative of command type
         holder.remove(0);
         holder.trimToSize();
+        // dateMarkerIndex = -1 if not found
         int dateMarkIndex = holder.indexOf("/");
-        String taskContent = holder.subList(0, dateMarkIndex == -1 ? holder.size() : dateMarkIndex)
+        int contentEndIndex = dateMarkIndex == -1 ? holder.size() : dateMarkIndex;
+        String taskContent = holder.subList(0, contentEndIndex)
                 .stream().reduce("", (a, b) -> a + " " + b).trim();
 
         this.content = taskContent;

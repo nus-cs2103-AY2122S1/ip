@@ -26,6 +26,7 @@ public class ListCommand extends Command {
      */
     public ListCommand(String... command) throws DukeException {
         if (isListOps(command)) {
+            // first element is the time
             this.localDate = LocalDate.parse(command[1]);
             isOps = true;
         } else {
@@ -43,9 +44,11 @@ public class ListCommand extends Command {
     public static boolean isListOps(String... input) throws DukeException {
         int length = input.length;
         if (length < 2) {
+            // guard clause
             return false;
         }
         try {
+            // first element is the time
             LocalDate holder = LocalDate.parse(input[1]);
             return true;
         } catch (DateTimeParseException e) {
