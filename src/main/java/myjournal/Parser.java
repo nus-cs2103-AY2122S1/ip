@@ -73,6 +73,7 @@ public class Parser {
      * @return A task which has been marked as done.
      */
     public static TaskList parseFind(Scanner line, TaskList tasks) {
+        assert tasks != null : "TaskList should not be null";
         if (!line.hasNext()) {
             throw new EmptyDescriptionException("OOPS!!! Please tell me which word you want to find!!");
         }
@@ -101,6 +102,7 @@ public class Parser {
      * @return A task which has been marked as done.
      */
     public static Task parseDone(Scanner line, TaskList tasks) {
+        assert tasks != null : "TaskList should not be null";
         if (!line.hasNextInt()) {
             throw new InvalidTaskNumberException("OOPS!!! Please specify the task "
                     + "that needs to be marked as done!");
@@ -119,6 +121,7 @@ public class Parser {
      * @param tasks The list of tasks.
      */
     public static String parseList(TaskList tasks) {
+        assert tasks != null : "TaskList should not be null";
         if (tasks.getSize() == 0) {
             return "You have no task!";
         } else {
@@ -138,6 +141,7 @@ public class Parser {
      * @return The task to be deleted.
      */
     public static Task parseDelete(Scanner line, TaskList tasks) {
+        assert tasks != null : "TaskList should not be null";
         if (!line.hasNextInt()) {
             throw new InvalidTaskNumberException("OOPS!!! Please specify the task "
                     + "that needs to be deleted!");
