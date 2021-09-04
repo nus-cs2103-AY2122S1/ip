@@ -21,6 +21,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public String execute(String des, TaskList tList) {
+        checkValidDes(des);
         return "Bye. Hope to see you again soon!\n";
     }
 }

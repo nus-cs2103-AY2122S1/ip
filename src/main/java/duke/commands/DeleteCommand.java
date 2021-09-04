@@ -27,6 +27,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(String des, TaskList tList) throws DukeException {
+        checkValidDes(des);
         ArrayList<Task> tasks = tList.getTaskList();
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);

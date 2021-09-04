@@ -24,6 +24,7 @@ public class ToDoCommand extends Command {
      * @throws DukeException if input for ToDo command is not properly formatted.
      */
     public String execute(String des, TaskList tList) throws DukeException {
+        checkValidDes(des);
         if (des.equals("todo")) {
             throw new DukeException("\"todo\" command not correctly formatted \nPlease insert task argument");
         }

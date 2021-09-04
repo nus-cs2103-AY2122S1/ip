@@ -23,6 +23,7 @@ public class HelpCommand extends Command {
      */
     @Override
     public String execute(String des, TaskList tList) {
+        checkValidDes(des);
         String result = "The possible commands are as follows:\n"
                 + "\n"
                 + "1. bye  -------- exit the Duke chat-bot\n"

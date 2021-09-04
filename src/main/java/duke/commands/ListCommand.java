@@ -24,6 +24,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(String des, TaskList tList) {
+        checkValidDes(des);
         String result = "Here are the tasks in your list:\n\n";
         ArrayList<Task> tasks = tList.getTaskList();
         int count = 1;
