@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * This methods adds a todo task.
+     * Returns a Todo Task.
      *
      * @param input Name of the task.
      * @param isDone Completion status of the task.
@@ -33,7 +33,7 @@ public class TaskList {
     }
 
     /**
-     * This methods adds a deadline task.
+     * Returns a Deadline Task.
      *
      * @param name Name of the deadline.
      * @param deadline The date and time of the deadline.
@@ -47,7 +47,7 @@ public class TaskList {
     }
 
     /**
-     * This methods adds a event task.
+     * Returns an Event Task.
      *
      * @param name Name of the event.
      * @param time The date and time of the event.
@@ -61,7 +61,7 @@ public class TaskList {
     }
 
     /**
-     * This method deletes the task specified by the index.
+     * Deletes the task by index and returns the deleted task.
      *
      * @param index Index of the task to be deleted.
      * @return The task that was deleted.
@@ -73,7 +73,7 @@ public class TaskList {
     }
 
     /**
-     * This method completes the task specified by the index.
+     * Marks the task by index as done and returns the completed task.
      *
      * @param index Index of the task to be completed.
      * @return The task that was completed.
@@ -85,7 +85,8 @@ public class TaskList {
     }
 
     /**
-     * This method returns all the tasks in the list in their string representation.
+     * Returns all the tasks in the list in their string representation.
+     *
      * @return String representation of all the tasks in the list.
      */
     public String getAllTasks() {
@@ -97,7 +98,8 @@ public class TaskList {
     }
 
     /**
-     * This methods returns the task by the give index.
+     * Returns the task by the given index.
+     *
      * @param index Index of the task to be returned
      * @return The task at that index.
      */
@@ -107,6 +109,7 @@ public class TaskList {
 
     /**
      * Gets the total number of tasks in the task list.
+     *
      * @return The total number of tasks.
      */
     public int getTotalTasksNumber() {
@@ -115,6 +118,7 @@ public class TaskList {
 
     /**
      * Finds all tasks that has user input keyword in their description.
+     *
      * @param name User input keyword.
      * @return String representation of all task that match keyword.
      */

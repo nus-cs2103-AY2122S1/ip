@@ -11,6 +11,7 @@ public class Task {
 
     /**
      * The constructor for the Task class.
+     *
      * @param name Name of the task.
      * @param isDone If the task is done or not.
      */
@@ -22,6 +23,7 @@ public class Task {
     /**
      * Gets the completion status of the task and returns a string
      * based on if it is complete or not.
+     *
      * @return "X" to mark a task as complete and " " as not complete.
      */
     public String getDoneMarker() {
@@ -32,6 +34,7 @@ public class Task {
      * Gets the completion status of the task and returns a string
      * based on if it is complete or not. This is to store the task
      * as a string for Storage.
+     *
      * @return "1" to mark a task as complete and "0" as not complete.
      */
     public String getDone() {
@@ -48,6 +51,7 @@ public class Task {
 
     /**
      * Gets the name of the task.
+     *
      * @return Name of the task.
      */
     public String getName() {
@@ -62,7 +66,8 @@ public class Task {
     }
 
     /**
-     * This methods returns the string value of a task.
+     * Returns the string value of a task.
+     *
      * @return The task in string.
      */
     @Override

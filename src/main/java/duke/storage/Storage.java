@@ -52,6 +52,7 @@ public class Storage {
     /**
      * This method reads from a hardcoded location and adds tasks
      * into the task list based on the text stored inside.
+     *
      * @return An ArrayList of the tasks.
      */
     public ArrayList<Task> loadTasks() {
@@ -96,6 +97,7 @@ public class Storage {
     /**
      * This method reads the tasks in tasklist and translates into
      * a special syntax to be saved in a text file.
+     *
      * @param tasklist The list of tasks.
      */
     public void saveTasks(TaskList tasklist) {

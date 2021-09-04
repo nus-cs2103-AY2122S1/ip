@@ -22,6 +22,7 @@ public class Duke {
 
     /**
      * Returns the output depending on the user's input command
+     *
      * @param input User input command
      * @return Bot response.
      */
@@ -37,6 +38,7 @@ public class Duke {
 
     /**
      * Returns the starting message when duke starts up.
+     *
      * @return Starting message.
      */
     public String getStart() {
@@ -45,6 +47,7 @@ public class Duke {
 
     /**
      * Returns the exit status of the program with 0 equals exit and 1 otherwise.
+     *
      * @return Int that corresponds to the exit status.
      */
     public int getExitStatus() {

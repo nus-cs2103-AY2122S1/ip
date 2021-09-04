@@ -14,7 +14,7 @@ public class Parser {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm");
 
     /**
-     * This method calls the corresponding ChatBot methods based on the user input.
+     * Returns the corresponding message based on the user input.
      *
      * @param input The user input.
      * @param bot

@@ -15,6 +15,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for an Deadline.
+     *
      * @param name Name of the Deadline.
      * @param deadline Time of the Deadline
      * @param isDone Completion status of the Deadline.
@@ -26,6 +27,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the time in a specified format.
+     *
      * @return Time in dd/MM/yy HHmm.
      */
     @Override
@@ -35,6 +37,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the marker "D" denoting deadline.
+     *
      * @return A string "D".
      */
     @Override
@@ -43,7 +46,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * The string representation of an Event.
+     * Returns the string representation of an Event.
+     *
      * @return Event in string.
      */
     @Override

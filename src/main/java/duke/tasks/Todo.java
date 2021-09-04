@@ -10,6 +10,7 @@ public class Todo extends Task {
 
     /**
      * Constructor for a Todo.
+     *
      * @param name Name of the Todo.
      * @param isDone Completion status of the Todo.
      */
@@ -19,6 +20,7 @@ public class Todo extends Task {
 
     /**
      * Returns the time in a specified format.
+     *
      * @return Time in dd/MM/yy HHmm.
      */
     @Override
@@ -28,6 +30,7 @@ public class Todo extends Task {
 
     /**
      * Returns the marker "E" denoting event.
+     *
      * @return A string "E".
      */
     @Override
@@ -36,7 +39,8 @@ public class Todo extends Task {
     }
 
     /**
-     * The string representation of an Event.
+     * Returns the string representation of an Event.
+     *
      * @return Event in string.
      */
     @Override

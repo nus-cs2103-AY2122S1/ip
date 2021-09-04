@@ -8,21 +8,21 @@ import duke.tasks.TaskList;
  */
 public class UI {
     /**
-     * This method is to print the starting message of Duke.
+     * Returns the starting message of Duke.
      */
     public String showStartMessage() {
         return "Hello! I'm Duke\n" + "What can I do for you?\n";
     }
 
     /**
-     * This method is to print the exiting message of Duke.
+     * Returns the exiting message of Duke.
      */
     public String showExitMessage() {
         return "bye! for now...\n";
     }
 
     /**
-     * This method is to print the message when duke successfully adds a task.
+     * Returns  the message when duke successfully adds a task.
      *
      * @param t The task that was added.
      * @param size The total number of tasks.
@@ -33,7 +33,7 @@ public class UI {
     }
 
     /**
-     * This method is to print the message when duke successfully marks a task as complete.
+     * Returns the message when duke successfully marks a task as complete.
      *
      * @param t The task that was completed.
      */
@@ -42,7 +42,7 @@ public class UI {
     }
 
     /**
-     * This method is to print the message when duke successfully deletes a task.
+     * Returns the message when duke successfully deletes a task.
      *
      * @param t The task that was added.
      * @param size The total number of tasks.
@@ -53,7 +53,7 @@ public class UI {
     }
 
     /**
-     * This method is to print the list of all tasks in TaskList.
+     * Returns the list of all tasks in TaskList.
      *
      * @param tasklist The TaskList object where all the tasks are stored.
      */
@@ -64,14 +64,14 @@ public class UI {
     }
 
     /**
-     * This method is to print the the list of all commands available to Duke.
+     * Returns the the list of all commands available to Duke.
      */
     public String showListOfCommands() {
         return "Unknown Command!\n";
     }
 
     /**
-     * This method is to print the error message.
+     * Returns the error message.
      *
      * @param errorMessage The error message of the exception thrown.
      */
@@ -80,7 +80,8 @@ public class UI {
     }
 
     /**
-     * Prints out the task that matched with the keyword with formatting.
+     * Returns the task that matched with the keyword with formatting.
+     *
      * @param tasks String input of the tasks found.
      */
     public String showFoundTask(String tasks) {
