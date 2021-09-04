@@ -68,7 +68,7 @@ public class TaskList {
         // stream here
         ArrayList<Task> filteredTaskList = taskList.stream()
                 .filter(ele -> ele.hasSchedule()
-                        && ele.getTime().equals(dateFilter.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))))
+                        && scheduleFormatChecker(ele, dateFilter))
                 .collect(Collectors.toCollection(ArrayList::new));
         StringBuilder result = new StringBuilder("");
         for (int i = 0; i < filteredTaskList.size(); i++) {
@@ -78,6 +78,10 @@ public class TaskList {
             result.append(entry);
         }
         return result.toString();
+    }
+
+    private boolean scheduleFormatChecker(duke.task.Task task, LocalDate dateFilter) {
+        return task.getTime().equals(dateFilter.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
 
     /**

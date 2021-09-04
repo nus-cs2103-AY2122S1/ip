@@ -20,7 +20,33 @@ import duke.task.Task;
  * @author Gu Geng
  */
 public class Storage {
-    private Path filePath;
+    /**
+     * A collection of done statuses, 1 indicates done and 0 not done.
+     *
+     * @author Gu Geng
+     */
+    private enum DoneStatus {
+        DONE("1"), NOT_DONE("0");
+        private final String value;
+        DoneStatus(String s) {
+            this.value = s;
+        }
+    }
+
+    /**
+     * A collection of indexes of the content array and what they mean respectively.
+     *
+     * @author Gu Geng
+     */
+    private enum Index {
+        TYPE(0), DONE_STATUS(1), CONTENT(2), TIME(3);
+        private final int value;
+        Index(int i) {
+            this.value = i;
+        }
+    }
+    private final Path filePath;
+
 
     /**
      * Returns a Storage instance with the file directory in the form of Path.
@@ -40,20 +66,13 @@ public class Storage {
     public ArrayList<duke.task.Task> load() throws DukeException {
         try {
             ArrayList<String> tasks = new ArrayList<>();
-            Path folderPath = Paths.get(filePath.toString(), "..");
-            if (!Files.exists(folderPath)) {
-                Files.createDirectories(folderPath);
-            }
-            if (!Files.exists(filePath)) {
-                Files.createFile(filePath);
-            }
+            createPath();
             File fileHolder = new File(filePath.toString());
-            Scanner s = new Scanner(fileHolder);
-            while (s.hasNext()) {
-                tasks.add(s.nextLine());
+            Scanner scanner = new Scanner(fileHolder);
+            while (scanner.hasNext()) {
+                tasks.add(scanner.nextLine());
             }
-            s.close();
-
+            scanner.close();
             return parseTaskList(tasks);
         } catch (IOException e) {
             throw new DukeException("D: OH NOOOOO! I cannot locate the file!!" + e.getMessage());
@@ -85,6 +104,7 @@ public class Storage {
         }
     }
 
+
     private ArrayList<duke.task.Task> parseTaskList(ArrayList<String> rawDatas) {
         ArrayList<duke.task.Task> result = rawDatas.stream().map(rawData -> {
             Task holder = null;
@@ -102,31 +122,58 @@ public class Storage {
     private duke.task.Task parseTask(String rawData) throws DukeException {
         String[] content = rawData.split(" \\| ");
 
-        switch (content[0]) {
+        switch (content[Index.TYPE.value]) {
         case "T":
-            duke.task.Todo todo = new duke.task.Todo("todo ", content[2].trim());
-            if (content[1].equals("1")) {
-                todo.doneTask();
-            }
-            return todo;
-
+            return createTodo(content);
         case "D":
-            duke.task.Deadline deadline = new duke.task.Deadline("deadline ",
-                    content[2].trim(), "/", content[3].trim());
-            if (content[1].equals("1")) {
-                deadline.doneTask();
-            }
-            return deadline;
-
+            return createDeadline(content);
         case "E":
-            duke.task.Event event = new duke.task.Event("event ", content[2].trim(), "/", content[3].trim());
-            if (content[1].equals("1")) {
-                event.doneTask();
-            }
-            return event;
-
+            return createEvent(content);
         default:
             throw new DukeException("D: OH NO! Something wrong in parsing from database!");
         }
+    }
+
+    private void createPath() throws IOException {
+        Path folderPath = Paths.get(filePath.toString(), "..");
+        if (!Files.exists(folderPath)) {
+            // create filepath if not existed
+            Files.createDirectories(folderPath);
+        }
+        assert !Files.exists(folderPath);
+        if (!Files.exists(filePath)) {
+            // create file if not existed
+            Files.createFile(filePath);
+        }
+        assert !Files.exists(filePath);
+    }
+
+    private duke.task.Todo createTodo(String[] content) {
+        duke.task.Todo todo = new duke.task.Todo("todo ", content[Index.CONTENT.value].trim());
+        if (content[Index.DONE_STATUS.value].equals(DoneStatus.DONE.value)) {
+            todo.doneTask();
+        }
+        assert content[Index.DONE_STATUS.value].equals(DoneStatus.NOT_DONE.value);
+        return todo;
+    }
+
+    private duke.task.Deadline createDeadline(String[] content) throws DukeException {
+        duke.task.Deadline deadline = new duke.task.Deadline("deadline ",
+                content[Index.CONTENT.value].trim(), "/", content[Index.TIME.value].trim());
+        if (content[Index.DONE_STATUS.value].equals(DoneStatus.DONE.value)) {
+            deadline.doneTask();
+        }
+        assert content[Index.DONE_STATUS.value].equals(DoneStatus.NOT_DONE.value);
+        return deadline;
+    }
+
+    private duke.task.Event createEvent(String[] content) throws DukeException {
+        duke.task.Event event = new duke.task.Event(
+                "event ", content[Index.CONTENT.value].trim(), "/", content[Index.TIME.value].trim());
+        if (content[Index.DONE_STATUS.value].equals(DoneStatus.DONE.value)) {
+            event.doneTask();
+        }
+        assert content[Index.DONE_STATUS.value].equals(DoneStatus.NOT_DONE.value);
+        return event;
     }
 }
