@@ -17,6 +17,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 public class Parser {
+    /** For separation of name and date in deadline input */
+    private static final String DEADLINE_DELIMITER = " /by";
+
+    /** For separation of name and date in event input */
+    private static final String EVENT_DELIMITER = " /at";
+
     /**
      * Reads and returns the corresponding command from a given string.
      *
@@ -61,7 +67,7 @@ public class Parser {
     }
 
     private Command addDeadline(String args) throws WrongArgumentDukeException {
-        String[] strArr = args.split(" /by ", 2);
+        String[] strArr = args.split(DEADLINE_DELIMITER, 2);
         if (strArr.length >= 2) {
             LocalDate date = getLocalDate(strArr[1]);
             return new AddTaskCommand(new Deadline(strArr[0], date));
@@ -72,7 +78,7 @@ public class Parser {
     }
 
     private Command addEvent(String args) throws WrongArgumentDukeException {
-        String[] strArr = args.split(" /at ", 2);
+        String[] strArr = args.split(EVENT_DELIMITER, 2);
         if (strArr.length >= 2) {
             LocalDate date = getLocalDate(strArr[1]);
             return new AddTaskCommand(new Event(strArr[0], date));

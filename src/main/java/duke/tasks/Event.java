@@ -3,6 +3,8 @@ package duke.tasks;
 import java.time.LocalDate;
 
 public class Event extends Task {
+    private static final String IDENTIFIER = "E";
+
     LocalDate time;
 
     public Event(String taskName, LocalDate time) {
@@ -16,7 +18,7 @@ public class Event extends Task {
     }
 
     public String getIdentifier() {
-        return "E";
+        return IDENTIFIER;
     }
 
     public String getDetailsWithDelimiter(String delimiter) {

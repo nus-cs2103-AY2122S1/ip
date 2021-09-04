@@ -1,6 +1,7 @@
 package duke.tasks;
 
 public class Todo extends Task {
+    private static final String IDENTIFIER = "T";
 
     public Todo(String taskName) {
         super(taskName);
@@ -12,7 +13,7 @@ public class Todo extends Task {
     }
 
     public String getIdentifier() {
-        return "T";
+        return IDENTIFIER;
     }
 
     public String getDetailsWithDelimiter(String delimiter) {

@@ -3,6 +3,7 @@ package duke.tasks;
 import java.time.LocalDate;
 
 public class Deadline extends Task {
+    private static final String IDENTIFIER = "D";
     LocalDate deadline;
 
     public Deadline(String taskName, LocalDate deadline) {
@@ -16,7 +17,7 @@ public class Deadline extends Task {
     }
 
     public String getIdentifier() {
-        return "D";
+        return IDENTIFIER;
     }
 
     public String getDetailsWithDelimiter(String delimiter) {

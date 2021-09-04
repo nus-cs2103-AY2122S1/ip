@@ -10,7 +10,6 @@ public class TaskUtils {
     public static String DELIMITER = " | ";
 
     /**
-     *
      * Returns a task encoded by the given String
      *
      * @param str
@@ -49,8 +48,7 @@ public class TaskUtils {
     }
 
     /**
-     *
-     * Return a string representation of a task for saving
+     * Returns a string representation of a task for saving
      *
      * @param task
      * @return specific string representation of a task

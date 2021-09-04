@@ -19,6 +19,7 @@ public class DeleteTaskCommand extends Command {
             throw new InvalidOperationDukeException("Number is out of bounds");
         }
         Task task = tasks.remove(index - 1);
+        assert tasks.size() == index - 1 || tasks.get(index - 1) != task;
 
         if (!fc.writeText(tasks.serialize())) {
             throw new UnsavedChangesException();
