@@ -18,6 +18,7 @@ import duke.exception.DukeException;
 import duke.exception.InvalidDateTimeFormatException;
 import duke.exception.InvalidLocalDateException;
 import duke.exception.InvalidNumberInputException;
+import duke.exception.InvalidPeriodException;
 import duke.exception.MissingDateException;
 import duke.exception.MissingDescriptorException;
 import duke.exception.MissingSpaceAfterCommandException;
@@ -111,7 +112,7 @@ public class Parser {
     }
 
     /**
-     * Parses a LocalDate into a string format "d MMMM yyyy" to be printed to the user.
+     * Parses a LocalDate into a string format "d MMMM yyyy" to be displayed to the user.
      * For instance, the LocalDate equivalent of 2020-01-01 will be parsed into "1 January 2020".
      *
      * @param localDate LocalDate to be parsed.
@@ -136,7 +137,7 @@ public class Parser {
      * @throws InvalidDateTimeFormatException If dateString represents a date later than "+999999999-12-31" or
      *                       earlier than "-999999999-01-01".
      */
-    public static LocalDate toLocalDate(String dateString) throws InvalidDateTimeFormatException {
+    public static LocalDate dateToLocalDate(String dateString) throws InvalidDateTimeFormatException {
         String[] split = dateString.split("[/\\s]");
 
         // Check if split has 3 elements. If not, this is already an invalid date format.
@@ -276,4 +277,31 @@ public class Parser {
         // Returns a String array with the task description and user input after descriptor.
         return new String[] {commandDescription, time};
     }
+
+    /**
+     * Splits userTimePeriodInput into a 2 element LocalDate array containing startDate and endDate.
+     *
+     * @return LocalDate Array containing startDate and endDate.
+     * @throws MissingDateException If user's time period input cannot be split into 2 by a single space.
+     * @throws InvalidPeriodException If user's time period is chronologically invalid.
+     * @throws DukeException If underlying methods fail.
+     */
+    public static LocalDate[] periodToLocalDate(String userTimePeriodInput) throws DukeException {
+        String[] split = userTimePeriodInput.split(" ");
+
+        // If userTimePeriodInput cannot be split into 2, it is assumed that user did not provide sufficient dates
+        if (split.length != 2) {
+            throw new MissingDateException();
+        }
+
+        LocalDate startDate = dateToLocalDate(split[0]);
+        LocalDate endDate = dateToLocalDate(split[1]);
+
+        if (endDate.compareTo(startDate) < 0) {
+            throw new InvalidPeriodException(split[0], split[1]);
+        }
+
+        return new LocalDate[]{startDate, endDate};
+    }
+
 }
