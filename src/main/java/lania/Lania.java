@@ -5,10 +5,6 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import lania.command.Command;
 import lania.exception.LaniaException;
 import lania.task.TaskList;
@@ -93,6 +89,6 @@ public class Lania {
      **/
     public static void main(String[] args) {
         Lania lania = new Lania("data/lania.txt");
-        lania.run();
+        Launcher.main(args);
     }
 }

@@ -1,5 +1,6 @@
 package lania;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -8,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import lania.command.Command;
+import lania.command.ExitCommand;
 import lania.exception.LaniaException;
 import lania.task.TaskList;
 
@@ -61,6 +63,9 @@ public class MainWindow extends AnchorPane {
         try {
             Command c = parser.parse(userInput.getText());
             String laniaText = c.execute(tasks, storage, ui);
+            if (c instanceof ExitCommand) {
+                Platform.exit();
+            }
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getLaniaDialog(laniaText, laniaImage)
