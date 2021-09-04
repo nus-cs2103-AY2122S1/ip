@@ -120,11 +120,7 @@ public class Parser {
         default:
             throw new DukeException("Invalid task type!");
         }
-        String[] trimmedArr = new String[argArr.length];
-        for (int i = 0; i < argArr.length; i++) {
-            trimmedArr[i] = argArr[i].trim();
-        }
-        return trimmedArr;
+        return Arrays.stream(argArr).map(String::trim).toArray(String[]::new);
     }
 
     /**
