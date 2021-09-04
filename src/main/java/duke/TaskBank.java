@@ -87,15 +87,15 @@ public class TaskBank {
     public ArrayList<Task> searchTasks(String query) {
         query = query.split(" ", 2)[1].trim();
 
-        ArrayList ret = new ArrayList<Task>();
+        ArrayList matchingTasks = new ArrayList<Task>();
 
         for (Task t : this.taskList) {
             if (t.getDescription().contains(query)) {
-                ret.add(t);
+                matchingTasks.add(t);
             }
         }
 
-        return ret;
+        return matchingTasks;
     }
 
     /**

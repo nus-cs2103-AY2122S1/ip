@@ -1,20 +1,14 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 import duke.util.DukeException;
+import duke.util.Utility;
 
 /**
  * A Task with a given finishing date.
  */
 public class Deadline extends Task {
-
-    private static final DateTimeFormatter DATE_SHORT_FORMATTER
-            = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private static final DateTimeFormatter DATE_MED_FORMATTER
-            = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
 
     private LocalDate by;
 
@@ -42,9 +36,11 @@ public class Deadline extends Task {
             throw new DukeException("I can't seem to find the deadline keyword");
         } else if (formattedString.length() <= 9
                 || formattedString.substring(9, byIndex).isEmpty()) {
+            //Checks for characters between "deadline " and "/by"
             throw new DukeException("the description of deadline cannot be empty");
         } else if (byIndex == formattedString.length()
                 || formattedString.length() < byIndex + 5) {
+            //Checks for characters after "/by"
             throw new DukeException("the [/by] time of deadline cannot be empty");
         }
     }
@@ -63,7 +59,7 @@ public class Deadline extends Task {
         int byIndex = formattedString.indexOf("/by");
         LocalDate time = LocalDate.parse(
                 formattedString.substring(byIndex + 4),
-                DATE_SHORT_FORMATTER);
+                Utility.DATE_SHORT_FORMATTER);
 
         return new Deadline(formattedString.substring(9, byIndex).trim(), time);
     }
@@ -71,7 +67,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         char statusIcon = this.isDone ? 'X' : ' ';
-        String timeString = DATE_MED_FORMATTER.format(this.by);
+        String timeString = Utility.DATE_MED_FORMATTER.format(this.by);
 
         return String.format("[%c] duke.task.Deadline: %s (by: %s)",
                 statusIcon, this.description, timeString);

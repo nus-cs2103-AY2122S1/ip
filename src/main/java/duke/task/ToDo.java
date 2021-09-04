@@ -22,6 +22,7 @@ public class ToDo extends Task {
         if (!keyword.equals("todo")) {
             throw new DukeException("I can't seem to find the todo keyword");
         } else if (formattedString.length() <= 5 || formattedString.substring(5).isEmpty()) {
+            //Checks for characters after "todo "
             throw new DukeException("the description of todo cannot be empty");
         }
     }

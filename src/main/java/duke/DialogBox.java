@@ -46,14 +46,23 @@ public class DialogBox extends HBox {
     }
 
     private void flip() {
+        //Reverse order of components
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
 
+        //Set alignment to top left / left
+        setAlignment(Pos.TOP_LEFT);
         dialog.setTextAlignment(TextAlignment.LEFT);
     }
 
+    /**
+     * Returns DialogBox belonging to the user.
+     *
+     * @param text user's message
+     * @param img user's profile picture
+     * @return user's dialog box
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.chatBubble.getStyleClass().add("userBubble");
@@ -64,6 +73,13 @@ public class DialogBox extends HBox {
         return db;
     }
 
+    /**
+     * Returns DialogBox belonging to the Duke.
+     *
+     * @param text Duke's message
+     * @param img Duke's profile picture
+     * @return Duke's dialog box
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

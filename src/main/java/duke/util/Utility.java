@@ -1,9 +1,17 @@
 package duke.util;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+
 /**
  * Contains various utility methods used by Duke.
  */
 public class Utility {
+
+    public static final DateTimeFormatter DATE_SHORT_FORMATTER
+            = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    public static final DateTimeFormatter DATE_MED_FORMATTER
+            = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
 
     /**
      * Extracts an integer from an input string, specifically,the integer after the prefix.

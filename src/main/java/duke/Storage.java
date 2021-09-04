@@ -53,10 +53,10 @@ public class Storage {
 
         // Else, deserialize data
         try {
-            FileInputStream f = new FileInputStream(dataFile);
-            ObjectInputStream i = new ObjectInputStream(f);
+            FileInputStream fileStream = new FileInputStream(dataFile);
+            ObjectInputStream inputStream = new ObjectInputStream(fileStream);
 
-            return (ArrayList<Task>) (i.readObject());
+            return (ArrayList<Task>) (inputStream.readObject());
         } catch (FileNotFoundException e) {
             System.out.println("WARNING: Task.Task list's save file missing.\n"
                     + e.getMessage());
@@ -78,11 +78,11 @@ public class Storage {
      */
     public void writeToDisk(ArrayList<Task> taskList) {
         try {
-            FileOutputStream f = new FileOutputStream(dataFile);
-            ObjectOutputStream o = new ObjectOutputStream(f);
+            FileOutputStream fileStream = new FileOutputStream(dataFile);
+            ObjectOutputStream outputStream = new ObjectOutputStream(fileStream);
 
-            o.writeObject(taskList);
-            o.close();
+            outputStream.writeObject(taskList);
+            outputStream.close();
         } catch (FileNotFoundException e) {
             System.out.println("WARNING: Task.Task list's save file missing.\n" + e.getMessage());
         } catch (IOException e) {
