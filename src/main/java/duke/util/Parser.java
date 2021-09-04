@@ -28,12 +28,14 @@ public class Parser {
     public static Command decipher(String command)
             throws CommandParamException, EmptyDescriptionException, UnknownCommandException {
         Scanner s = new Scanner(command);
-        String commandType = s.next();
+        String commandType = s.next().toLowerCase();
 
         switch (commandType) {
+        case "ls":
         case "list":
             return new ListCommand();
 
+        case "e":
         case "event":
             if (!s.hasNext()) {
                 throw new EmptyDescriptionException("event");
@@ -41,6 +43,7 @@ public class Parser {
             String eventDetails = s.nextLine().trim();
             return new AddCommand("event", eventDetails);
 
+        case "d":
         case "deadline":
             if (!s.hasNext()) {
                 throw new EmptyDescriptionException("deadline");
@@ -48,6 +51,7 @@ public class Parser {
             String deadlineDetails = s.nextLine().trim();
             return new AddCommand("deadline", deadlineDetails);
 
+        case "t":
         case "todo":
             if (!s.hasNext()) {
                 throw new EmptyDescriptionException("todo");
@@ -55,6 +59,7 @@ public class Parser {
             String description = s.nextLine().trim();
             return new AddCommand("todo", description);
 
+        case"dlt":
         case "delete":
             if (!s.hasNext()) {
                 throw new EmptyDescriptionException("delete");
@@ -65,6 +70,7 @@ public class Parser {
             int indexToDelete = s.nextInt() - 1;
             return new DeleteCommand(indexToDelete);
 
+        case "dn":
         case "done":
             if (!s.hasNext()) {
                 throw new EmptyDescriptionException("done");
@@ -75,6 +81,7 @@ public class Parser {
             int indexToMark = s.nextInt() - 1;
             return new DoneCommand(indexToMark);
 
+        case "f":
         case "find":
             if (!s.hasNext()) {
                 throw new EmptyDescriptionException("find");
