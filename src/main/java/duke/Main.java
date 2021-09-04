@@ -18,9 +18,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        System.out.println("does this run here");
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindows.fxml"));
             AnchorPane ap = fxmlLoader.load();
             fxmlLoader.<MainWindow>getController().setDuke(duke);
 
