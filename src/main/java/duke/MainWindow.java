@@ -25,8 +25,10 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke=new Duke();
 
-    private static final String INTRO = "Yo! I As you might know, I'm Michael Scott. The name of my bot version is Duke, " +
-            "cause my position is pretty much like the Duke - ME A BOSS! At least THAT'S WHAT SHE SAID";
+    private static final String INTRO = "Yo! As you might know, I'm Michael Scott. "
+            + "The name of my bot version is Duke, "
+            + "cause my position is pretty much like the Duke - "
+            + "ME A BOSS! At least THAT'S WHAT SHE SAID";
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpeg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));

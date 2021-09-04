@@ -25,8 +25,9 @@ public class Ui {
      * @return String to be displayed to the user.
      */
     public String showDelete(String task, TaskList tasks) {
-        return "    Got it. I've deleted this task:" + "\n" + task +  "\n" + "Now you have " +
-                tasks.numberOfTasks() + " tasks remaining in your list!";
+        return "    Got it. I've deleted this task:" + "\n" + task +  "\n"
+                + "Now you have " + tasks.numberOfTasks()
+                + " tasks remaining in your list!";
     }
 
     /**
@@ -61,7 +62,8 @@ public class Ui {
      * @return String to be displayed to the user.
      */
     public String showBye() {
-        String bye = "Bye. Hope to see you again soon! Just a little reminder : YOU ARE AWESOME - THAT'S WHAT SHE SAID :))";
+        String bye = "Bye. Hope to see you again soon! Just a little reminder : "
+                + "YOU ARE AWESOME - THAT'S WHAT SHE SAID :))";
         System.out.println(bye);
         return bye;
     }
@@ -72,8 +74,8 @@ public class Ui {
      * @return Error message for the particular exception.
      */
     public String showException(Exception e) {
-        String disp = e.getMessage();
-        System.out.println(disp);
-        return disp;
+        String display = e.getMessage();
+        System.out.println(display);
+        return display;
     }
 }

@@ -42,38 +42,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         if (existsDirPath) {
             if (existsFilePath) {
-                try {
-                    List<String> lines = Files.readAllLines(path);
-                    for (int i = 0; i < lines.size(); i++) {
-                        String line = lines.get(i);
-                        if (line.charAt(1) == 'T') {
-                            Task t = new Task(line, Duke.Category.TODO);
-                            t.setPreExisting();
-                            tasks.add(t);
-                            if (line.charAt(4) =='X') {
-                                t.markAsDone(i);
-                            }
-                        } else if (line.charAt(1) == 'D') {
-                            Task t = new Task(line, Duke.Category.DEADLINE);
-                            t.setPreExisting();
-                            tasks.add(t);
-                            if (line.charAt(4) == 'X') {
-                                t.markAsDone(i);
-                            }
-                        } else if (line.charAt(1) == 'E') {
-                            Task t = new Task(line, Duke.Category.EVENT);
-                            t.setPreExisting();
-                            tasks.add(t);
-                            if (line.charAt(4) =='X') {
-                                t.markAsDone(i);
-                            }
-                        }
-                    }
-                    return tasks;
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    return tasks;
-                }
+                loadHelper(path,tasks);
             } else {
                 try {
                     Files.createFile(path);
@@ -90,5 +59,47 @@ public class Storage {
             }
         }
         return tasks;
+    }
+
+    /**
+     * Helper method that supplements the load method
+     * to load tasks from the disk when the bot starts.
+     * @param path The path of the data text file.
+     * @param tasks The Task ArrayList.
+     * @return ArrayList of tasks that were loaded.
+     */
+    public ArrayList<Task> loadHelper(Path path, ArrayList<Task> tasks) {
+        try {
+            List<String> lines = Files.readAllLines(path);
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i);
+                if (line.charAt(1) == 'T') {
+                    Task t = new Task(line, Duke.Category.TODO);
+                    t.setPreExisting();
+                    tasks.add(t);
+                    if (line.charAt(4) =='X') {
+                        t.markAsDone(i);
+                    }
+                } else if (line.charAt(1) == 'D') {
+                    Task t = new Task(line, Duke.Category.DEADLINE);
+                    t.setPreExisting();
+                    tasks.add(t);
+                    if (line.charAt(4) == 'X') {
+                        t.markAsDone(i);
+                    }
+                } else if (line.charAt(1) == 'E') {
+                    Task t = new Task(line, Duke.Category.EVENT);
+                    t.setPreExisting();
+                    tasks.add(t);
+                    if (line.charAt(4) =='X') {
+                        t.markAsDone(i);
+                    }
+                }
+            }
+            return tasks;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return tasks;
+        }
     }
 }
