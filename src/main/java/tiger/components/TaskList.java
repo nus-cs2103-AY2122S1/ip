@@ -191,12 +191,18 @@ public class TaskList {
 
     @Override
     public String toString() {
+        String returnString = "";
         if (this.taskList.size() == 0) {
             return "You currently have no tasks.";
         }
-        String returnString = "";
         for (int i = 1; i < this.taskList.size() + 1; i++) {
-            String row = String.format("%d.\t %s", i, this.taskList.get(i - 1).toString());
+            String row;
+            if (i < 10) {
+                // pad with a space
+                row = String.format("%d.  %s", i, this.taskList.get(i - 1).toString());
+            } else {
+                row = String.format("%d. %s", i, this.taskList.get(i - 1).toString());
+            }
             if (i != this.taskList.size()) {
                 row += "\n";
             }

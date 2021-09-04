@@ -21,7 +21,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private final int FONT_SIZE = 14;
+    private final int FONT_SIZE = 13;
     private final int MILISECONDS_TO_SLEEP_BEFORE_QUITTING = 1000;
 
     private Tiger tiger = new Tiger();

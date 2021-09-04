@@ -19,10 +19,13 @@ import javafx.scene.text.Font;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
+    private final int FONT_SIZE = 13;
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+
 
     private DialogBox(String text, Image img) {
         try {
@@ -37,7 +40,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
         Font font = Font.loadFont(MainWindow.class.getResource("/fonts/VictorMono-Medium.ttf").toExternalForm(),
-                14);
+                FONT_SIZE);
         dialog.setFont(font);
     }
 
