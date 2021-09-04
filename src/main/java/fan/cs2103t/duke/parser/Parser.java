@@ -33,7 +33,7 @@ public class Parser {
      * @throws DukeException if the specified input cannot be interpreted as any existing Duke's command.
      */
     public Command parseCommand(String input) throws DukeException {
-        input = input.trim(); // to remove all leading and trailing space of user's input
+        input = input.trim(); // to remove all leading and trailing spaces from user's input
         if (input.equals("bye")) {
             return new ExitCommand();
         } else if (input.equals("list")) {

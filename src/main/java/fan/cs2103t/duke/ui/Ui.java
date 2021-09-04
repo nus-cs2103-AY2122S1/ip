@@ -64,6 +64,7 @@ public class Ui {
      * @param message the error message to be displayed.
      */
     public void showError(String message) {
+        assert message != null;
         displayText(message);
     }
 

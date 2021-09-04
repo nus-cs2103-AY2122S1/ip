@@ -80,6 +80,7 @@ public class Storage {
      * @throws DukeException if an I/O error occurs when saving the task list.
      */
     public void saveTaskList(TaskList list) throws DukeException {
+        assert new File(filePath).exists();
         try {
             FileWriter fw = new FileWriter(filePath);
             fw.write(list.printList());
