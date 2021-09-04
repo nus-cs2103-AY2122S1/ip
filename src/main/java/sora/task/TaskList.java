@@ -257,17 +257,16 @@ public class TaskList {
 
         // Reformat the list of tasks into a string
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < size - 1; i++) {
+        for (int i = 0; i < size; i++) {
             sb.append(i + 1)
                     .append(". ")
-                    .append(tasks.get(i))
-                    .append("\n");
-        }
+                    .append(tasks.get(i));
 
-        // Last task is special as it does not need the '\n'
-        sb.append(size)
-                .append(". ")
-                .append(tasks.get(size - 1));
+            // Last task is special as it does not need the '\n'
+            if (i + 1 != size) {
+                sb.append("\n");
+            }
+        }
 
         // Return string representation of the list of tasks
         return Message.LIST + "\n" + sb;
