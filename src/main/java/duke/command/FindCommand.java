@@ -26,11 +26,11 @@ public class FindCommand extends Command {
     /**
      * Executes the "Event" Command.
      */
-    public void execute() {
+    public String execute() {
         if (input.length() == 4) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("find"));
         }
         String wordToFind = input.substring(5);
-        taskList.findTask(wordToFind);
+        return taskList.findTask(wordToFind);
     }
 }

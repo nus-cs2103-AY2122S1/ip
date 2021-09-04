@@ -6,7 +6,10 @@ import java.util.Scanner;
 import duke.data.exception.DukeException;
 import duke.parser.Parser;
 import duke.ui.Ui;
-
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 /**
  * Entry point of Duke Chatbot.
@@ -16,43 +19,23 @@ import duke.ui.Ui;
  */
 public class Duke {
 
-    private Scanner myObj;
+    private Parser parser;
 
     /**
      * Constructor for the Parser class.
      */
     public Duke() {
-        this.myObj = new Scanner(System.in);
-    }
-
-    /**
-     * Initialises duke.
-     *
-     * @param args arguments supplied by the user at program launch.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
+        parser = new Parser();
     }
 
     /**
      * Runs duke until termination.
      */
-    public void run() {
-        Ui.printWelcomeMsg();
-        Parser parser = new Parser();
-        String command = myObj.nextLine();
-        while (!command.toLowerCase().equals("bye")) {
-            try {
-                parser.parse(command);
-            } catch (DukeException e) {
-                Ui.prettify(e.getMessage());
-            }
-            command = myObj.nextLine();
-        }
-
-        if (command.toLowerCase().equals("bye")) {
-            Ui.printGoodbyeMsg();
+    public String getResponse(String command) {
+        try {
+            return parser.parse(command);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 }

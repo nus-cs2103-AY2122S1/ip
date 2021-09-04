@@ -26,10 +26,10 @@ public class DoneCommand extends Command {
     /**
      * Executes the "Done" Command.
      */
-    public void execute() {
+    public String execute() {
         if (input.length() == 4) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("done"));
         }
-        taskList.markTaskAsDone(Integer.parseInt(input.substring(5)));
+        return taskList.markTaskAsDone(Integer.parseInt(input.substring(5)));
     }
 }

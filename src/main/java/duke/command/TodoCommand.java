@@ -27,12 +27,12 @@ public class TodoCommand extends Command {
     /**
      * Executes the "Todo" Command.
      */
-    public void execute() {
+    public String execute() {
         if (input.length() == 4) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("todo"));
         }
         Todo t = new Todo(input.substring(5));
-        taskList.addTask(t);
+        return taskList.addTask(t);
     }
 
 }

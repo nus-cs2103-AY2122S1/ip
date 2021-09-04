@@ -22,5 +22,5 @@ public abstract class Command {
     /**
      * Executes the Command.
      */
-    public abstract void execute();
+    public abstract String execute();
 }

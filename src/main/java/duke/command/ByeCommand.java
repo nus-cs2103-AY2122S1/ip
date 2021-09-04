@@ -23,8 +23,8 @@ public class ByeCommand extends Command {
      * Executes the "Bye" Command.
      */
     @Override
-    public void execute() {
-        Ui.printGoodbyeMsg();
+    public String execute() {
+        return Ui.getGoodbyeMsg();
     }
 }
 

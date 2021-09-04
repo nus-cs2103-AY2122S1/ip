@@ -21,7 +21,7 @@ public class ListCommand extends Command {
     /**
      * Executes the "List" Command.
      */
-    public void execute() {
-        super.taskList.listTasks();
+    public String execute() {
+        return super.taskList.listTasks();
     }
 }

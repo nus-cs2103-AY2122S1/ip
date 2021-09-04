@@ -13,31 +13,19 @@ public class Ui {
     private static final String TAB = "  ";
     private static final String LS = System.lineSeparator();
 
-
-    /**
-     * Formats the message to prettier and more readable.
-     *
-     * @param message String to be printed.
-     */
-    public static void prettify(String message) {
-        System.out.println(TAB + DIVIDER);
-        System.out.println(message);
-        System.out.println(TAB + DIVIDER);
-    }
-
     /**
      * Welcomes the user.
      */
-    public static void printWelcomeMsg() {
+    public static String getWelcomeMsg() {
         String message = TAB + TAB + Messages.MESSAGE_WELCOME_1 + LS + TAB + TAB + Messages.MESSAGE_WELCOME_2;
-        prettify(message);
+        return message;
     }
 
     /**
      * Says bye the user.
      */
-    public static void printGoodbyeMsg() {
-        prettify(Messages.MESSAGE_GOODBYE);
+    public static String getGoodbyeMsg() {
+        return Messages.MESSAGE_GOODBYE;
     }
 
     /**
@@ -102,17 +90,17 @@ public class Ui {
      * @param task String representing task
      * @param num Integer representing number of tasks left
      */
-    public static void printAddMsg(String task, Integer num) {
+    public static String getAddMsg(String task, Integer num) {
         String msg = Messages.MESSAGE_ADD + LS + TAB + TAB + TAB + task + LS
                 + String.format(Messages.MESSAGE_TASKS_LEFT, num);
-        prettify(msg);
+        return msg;
     }
 
     /**
      * Informs the user that task has been removed.
      */
-    public static void printNoSuchTaskMsg() {
-        prettify(Messages.MESSAGE_NO_TASKS_FOUND);
+    public static String getNoSuchTaskMsg() {
+        return Messages.MESSAGE_NO_TASKS_FOUND;
     }
 
     /**
@@ -121,10 +109,10 @@ public class Ui {
      * @param task String representing task
      * @param num Integer representing number of tasks left
      */
-    public static void printRemoveMsg(String task, Integer num) {
+    public static String getRemoveMsg(String task, Integer num) {
         String msg = Messages.MESSAGE_REMOVE + LS + TAB + TAB + TAB + task + LS
                 + String.format(Messages.MESSAGE_TASKS_LEFT, num);
-        prettify(msg);
+        return msg;
     }
 
     /**
@@ -132,8 +120,8 @@ public class Ui {
      *
      * @param task String representing task
      */
-    public static void printTaskDone(String task) {
+    public static String getTaskDone(String task) {
         String msg = TAB + Messages.MESSAGE_DONE + LS + TAB + TAB + task;
-        prettify(msg);
+        return msg;
     }
 }

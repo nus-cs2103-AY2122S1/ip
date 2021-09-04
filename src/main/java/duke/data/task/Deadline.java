@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-import duke.ui.Ui;
-
 /**
  * Class that represents a Deadline task.
  *
@@ -69,8 +67,9 @@ public class Deadline extends Task {
                         .format(targetFormat);
             }
         } catch (Exception e) {
-            Ui.prettify(e.getMessage());
-            return dateTime;
+            // return error msg?
+            return "error toh toh";
+            // return dateTime;
         }
         return convertedTime;
 

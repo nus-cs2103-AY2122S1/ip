@@ -1,6 +1,7 @@
 package duke.ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 
@@ -12,6 +13,6 @@ public class UiTest {
 
     @Test
     public void unknownInputMsgTest_success() {
-        assertEquals("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" ,Ui.getUnknownInputMsg());
+        assertEquals("     ☹ OOPS!!! I'm sorry, but I don't know what that means :-(" , Ui.getUnknownInputMsg());
     }
 }

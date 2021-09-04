@@ -26,10 +26,10 @@ public class DeleteCommand extends Command {
     /**
      * Executes the "Delete" Command.
      */
-    public void execute() {
+    public String execute() {
         if (input.length() == 6) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("delete"));
         }
-        super.taskList.removeTask(Integer.parseInt(input.substring(7)));
+        return super.taskList.removeTask(Integer.parseInt(input.substring(7)));
     }
 }

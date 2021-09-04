@@ -28,13 +28,18 @@ public class DeadlineCommand extends Command {
     /**
      * Executes the "Deadline" Command.
      */
-    public void execute() {
+    public String execute() {
         if (input.length() == 8) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("deadline"));
         }
-        String[] infoArray = input.substring(9).split("/by ", 2);
-        Deadline d = new Deadline(infoArray[0], infoArray[1]);
-        super.taskList.addTask(d);
+        try {
+            String[] infoArray = input.substring(9).split("/by ", 2);
+            Deadline d = new Deadline(infoArray[0], infoArray[1]);
+            return super.taskList.addTask(d);
+        } catch (Exception e) {
+            throw new DukeException(e.getMessage());
+        }
+
     }
 
 }

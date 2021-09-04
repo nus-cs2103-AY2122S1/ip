@@ -27,12 +27,12 @@ public class EventCommand extends Command {
     /**
      * Executes the "Event" Command.
      */
-    public void execute() {
+    public String execute() {
         if (input.length() == 5) {
             throw new DukeException(Ui.getEmptyDescriptionMsg("event"));
         }
         String[] infoArray = input.substring(6).split("/at ", 2);
         Event e = new Event(infoArray[0], infoArray[1]);
-        taskList.addTask(e);
+        return taskList.addTask(e);
     }
 }

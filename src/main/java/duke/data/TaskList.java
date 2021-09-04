@@ -33,10 +33,10 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    public void addTask(Task task) {
+    public String addTask(Task task) {
         list.add(task);
-        Ui.printAddMsg(task.toString(), getTotalTasks());
         this.writeFile(task);
+        return Ui.getAddMsg(task.toString(), getTotalTasks());
     }
 
     /**
@@ -44,7 +44,7 @@ public class TaskList {
      *
      * @param taskNum Task index of the task.
      */
-    public void removeTask(int taskNum) throws DukeException {
+    public String removeTask(int taskNum) throws DukeException {
         if (taskNum < 1) {
             throw new DukeException("negative item");
         } else if (list.size() == 0) {
@@ -54,8 +54,8 @@ public class TaskList {
         }
 
         Task item = list.remove(taskNum - 1);
-        Ui.printRemoveMsg(item.toString(), getTotalTasks());
         this.updateFile();
+        return Ui.getRemoveMsg(item.toString(), getTotalTasks());
     }
 
     /**
@@ -63,7 +63,7 @@ public class TaskList {
      *
      * @param taskNum Task index of the task.
      */
-    public void markTaskAsDone(int taskNum) throws DukeException {
+    public String markTaskAsDone(int taskNum) throws DukeException {
         if (taskNum < 1) {
             throw new DukeException("negative item");
         } else if (list.size() == 0) {
@@ -75,7 +75,7 @@ public class TaskList {
         Task item = list.get(taskNum - 1);
         item.markAsDone();
         this.updateFile();
-        Ui.printTaskDone(item.toString());
+        return Ui.getTaskDone(item.toString());
     }
 
     /**
@@ -107,7 +107,7 @@ public class TaskList {
      *
      * @param wordToFind is a String that represents the keyword to be searched.
      */
-    public void findTask(String wordToFind) {
+    public String findTask(String wordToFind) {
         ArrayList<String> tasks = new ArrayList<>();
         int index = 1;
         for (Task t: list) {
@@ -117,13 +117,13 @@ public class TaskList {
             }
         }
         if (tasks.size() == 0) {
-            Ui.printNoSuchTaskMsg();
+            return Ui.getNoSuchTaskMsg();
         } else {
             String msg = "     Here are the matching tasks in your list:" + System.lineSeparator();
             for (int i = 0; i < tasks.size(); i++) {
                 msg += String.format("    %d.%s", (i + 1), tasks.get(i).toString()) + System.lineSeparator();
             }
-            Ui.prettify(msg);
+            return msg;
         }
     }
 
@@ -133,12 +133,12 @@ public class TaskList {
     /**
      * list the total of all the tasks.
      */
-    public void listTasks() throws DukeException {
+    public String listTasks() throws DukeException {
         String msg = "    Here are the tasks in your list:" + System.lineSeparator();
         for (int i = 0; i < list.size(); i++) {
             msg += String.format("    %d.%s", (i + 1), list.get(i).toString()) + System.lineSeparator();
         }
-        Ui.prettify(msg);
+        return msg;
     }
 
     public void updateFile() throws DukeException {
