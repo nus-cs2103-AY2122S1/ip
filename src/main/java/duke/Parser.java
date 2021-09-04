@@ -61,7 +61,6 @@ public class Parser {
     public Command checkCommandTag(String input) throws IllegalFormatException, UnknownTagException {
         String commandTag = getCommandTag(input).toLowerCase();
 
-
         switch (commandTag) {
         case LIST_TAG:
             return new ListCommand();
@@ -180,9 +179,11 @@ public class Parser {
         if (details.length != 2) {
             throw new IllegalFormatException("Please follow the format:\n command 0.");
         }
+
         if (!isInteger(details[1])) {
             throw new IllegalFormatException("Please enter a valid id.");
         }
+
         return Integer.parseInt(details[1]) - 1;
     }
 
@@ -216,7 +217,12 @@ public class Parser {
             throw new IllegalFormatException("Please follow the format:\n find keyword.");
         }
 
-        return details[1];
+        String keyword = details[1];
+        if (keyword.isBlank()) {
+            throw new IllegalFormatException("Did you forget to enter a keyword?");
+        }
+
+        return keyword;
     }
 
 }
