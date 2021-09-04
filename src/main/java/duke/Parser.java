@@ -33,7 +33,7 @@ public class Parser {
             } else if (parsedUserInput[0].equals("todo") || parsedUserInput[0].equals("deadline") || parsedUserInput[0].equals("event")) {
                return new AddTaskCommand(fullCommand);
             } else {
-                throw new DukeException("☹ OOWOOPS!!! I'm sowwie, but I don't know what that mweans :-(");
+                throw new DukeException("OOWOOPS!!! I'm sowwie, but I don't know what that mweans :-(");
             }
         }
     }

@@ -5,6 +5,7 @@ import java.util.Scanner;
 public class Ui {
 
     private final String lines = "--------------------------------------------------------------------------------------------";
+    private String currentResponse;
 
     /**
      * Constructor for class Ui
@@ -18,7 +19,12 @@ public class Ui {
      * @param dukeReply response to be printed
      */
     public void reply(String dukeReply) {
-        System.out.println(dukeReply);
+        currentResponse = dukeReply;
+        //System.out.println(dukeReply);
+    }
+
+    public String getCurrentResponse() {
+        return this.currentResponse;
     }
 
     /**
@@ -73,6 +79,6 @@ public class Ui {
      * Prints the closing String
      */
     public void showClosingMessage() {
-        System.out.println("Good bye, see you soon!");
+        this.reply("Good bye, see you soon!");
     }
 }
