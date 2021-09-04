@@ -1,3 +1,0 @@
-[T][ ] todo1
-[D][ ] ddl1 (by: Thu, 26/Aug/2021 08:20 pm)
-[E][ ] event1 (at: Thu, 26/Aug/2021 08:20 pm)
