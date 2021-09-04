@@ -14,6 +14,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import virushade.tasks.TaskList;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * The Main class of the application.
  */
@@ -146,12 +149,31 @@ public class Virushade extends Application {
      * appends them to the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label virushadeText = new Label(getResponse(userInput.getText()));
+        String input = userInput.getText();
+        String output = getResponse(input);
+
+        Label userText = new Label(input);
+        Label virushadeText = new Label(output);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getVirushadeDialog(virushadeText, new ImageView(virushade))
         );
+
+        // Shutdown upon receiving exit message. Inspired by Zhang Shi Chen.
+        if (input.equals("bye")) {
+            // Disable all mode of input
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+
+            // Display exit message then exit after 1s.
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    System.exit(0);
+                }
+            }, 1000);
+        }
+
         userInput.clear();
     }
 

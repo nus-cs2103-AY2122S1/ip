@@ -178,14 +178,6 @@ public class TaskList {
     }
 
     /**
-     * Prints out all the tasks that have input text as a substring.
-     * @param text The input search text.
-     */
-    private static void find(String text) {
-        System.out.println(findFromList(text));
-    }
-
-    /**
      * Returns a string representation of all the tasks that have input text as a substring.
      *
      * @param text The input search text
