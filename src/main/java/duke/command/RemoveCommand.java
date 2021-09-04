@@ -1,8 +1,9 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeException;
+import duke.exception.InvalidTaskNumException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -30,7 +31,7 @@ public class RemoveCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskNum >= tasks.numTasks()) {
-            throw new DukeException("you typed an invalid number: " + (taskNum + 1));
+            throw new InvalidTaskNumException(taskNum + 1);
         }
         String msg;
 

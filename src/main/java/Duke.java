@@ -2,11 +2,11 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.Ui;
 import duke.command.Command;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 import javafx.application.Application;
 import javafx.application.Platform;

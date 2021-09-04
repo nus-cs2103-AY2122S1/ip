@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -17,6 +17,7 @@ import duke.task.ToDo;
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
+    private static final String BAD_ADD_ERROR_MSG = "something went wrong with adding a task!";
     private TaskTypes type;
     private String args;
 
@@ -56,7 +57,7 @@ public class AddCommand extends Command {
             newTask = new Event(args);
             break;
         default:
-            throw new DukeException("something went wrong with adding a task!");
+            throw new DukeException(BAD_ADD_ERROR_MSG);
         }
 
         tasks.add(newTask);

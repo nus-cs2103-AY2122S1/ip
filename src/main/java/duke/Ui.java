@@ -97,7 +97,7 @@ public class Ui {
      * @return a Label with the error message, with no icon
      */
     public Label errorMsgLabel(String msg) {
-        Label lbl = createMessageLabel("oh no! " + msg);
+        Label lbl = createMessageLabel(msg);
         VBox.setMargin(lbl, OUTPUT_MSG_INSETS);
         return lbl;
     }

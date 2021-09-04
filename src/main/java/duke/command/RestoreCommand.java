@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
@@ -11,6 +11,7 @@ import duke.task.TaskList;
 public class RestoreCommand extends Command {
 
     public static final String COMMAND_WORD = "restore";
+    private static final String SUCCESS_MSG = "This task list was restored:\n";
 
     public RestoreCommand() {
 
@@ -30,6 +31,6 @@ public class RestoreCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.restore();
         storage.save(tasks);
-        return "This task list was restored:\n" + tasks.listTaskArr();
+        return SUCCESS_MSG + tasks.listTaskArr();
     }
 }
