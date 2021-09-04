@@ -119,26 +119,68 @@ public class Parser {
 
         String lowerCaseInput = inputs[0].toLowerCase();
         switch (lowerCaseInput) {
+        case "l":
+            // Fallthrough
+        case "ls":
+            // Fallthrough
         case "list":
             return new ListCommand(list);
+        case "d":
+            // Fallthrough
         case "done":
             return new DoneCommand(list);
+        case "t":
+            // Fallthrough
+        case "td":
+            // Fallthrough
         case "todo":
+            // Fallthrough
+        case "dl":
             // Fallthrough
         case "deadline":
             // Fallthrough
+        case "e":
+            // Fallthrough
         case "event":
-            return new AddCommand(list, dataManager, lowerCaseInput);
+            String actualCommand = handleAddCommandAlias(lowerCaseInput);
+            return new AddCommand(list, dataManager, actualCommand);
+        case "bye":
+            // Fallthrough
         case "exit":
             return new ExitCommand();
+        case "del":
+            // Fallthrough
+        case "rm":
+            // Fallthrough
+        case "remove":
+            // Fallthrough
         case "delete":
             return new DeleteCommand(list);
         case "filter":
             return new FilterCommand(list);
+        case "f":
+            // Fallthrough
+        case "search":
+            // Fallthrough
         case "find":
             return new FindCommand(list);
         default:
             return new UnrecognisedCommand();
+        }
+    }
+
+    private String handleAddCommandAlias(String input) {
+        switch (input) {
+        case "t":
+            // Fallthrough
+        case "td":
+            return "todo";
+        case "e":
+            return "event";
+        case "dl":
+            return "deadline";
+        default: // User did not use shorter alias.
+            return input;
         }
     }
 }
