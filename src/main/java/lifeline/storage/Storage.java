@@ -87,7 +87,7 @@ public class Storage {
         TaskList savedTasks = new TaskList(new ArrayList<Task>());
         for (int i = 0; i < tasksAsJson.size(); i++) {
             JsonObject currTask = tasksAsJson.get(i).getAsJsonObject();
-            if (currTask.has("by")) {
+            if (currTask.has("dueDate")) {
                 addDeadlineTask(currTask, savedTasks);
             } else if (currTask.has("startTime")) {
                 addEventTask(currTask, savedTasks);
