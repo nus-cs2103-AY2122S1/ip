@@ -20,6 +20,7 @@ import aisu.tasklist.TaskList;
  *
  * @author Liaw Xin Yan
  */
+@SuppressWarnings("ALL")
 public class Storage {
     private final String dirPath;
     private final String fileName;
@@ -72,25 +73,30 @@ public class Storage {
         try {
             Scanner s = new Scanner(this.file);
             while (s.hasNext()) {
+
                 String[] temp = s.nextLine().split(";;");
-                Task tempTask;
-                switch(temp[0]) {
+                Task currTaskToLoad;
+                String taskLetter = temp[0];
+                boolean isMarkedDone = temp[1].equals("1");
+
+                switch(taskLetter) {
                 case "T":
-                    tempTask = new Todo(temp[2]);
+                    currTaskToLoad = new Todo(temp[2]);
                     break;
                 case "D":
-                    tempTask = new Deadline(temp[2], temp[3]);
+                    currTaskToLoad = new Deadline(temp[2], temp[3]);
                     break;
                 case "E":
-                    tempTask = new Event(temp[2], temp[3]);
+                    currTaskToLoad = new Event(temp[2], temp[3]);
                     break;
                 default:
                     throw new AisuException("No such task! Unchecked Exception Error...");
                 }
-                if (temp[1].equals("1")) {
-                    tempTask.markAsDone();
+
+                if (isMarkedDone) {
+                    currTaskToLoad.markAsDone();
                 }
-                result.add(tempTask);
+                result.add(currTaskToLoad);
             }
             return result;
         } catch (FileNotFoundException e) {
@@ -108,14 +114,20 @@ public class Storage {
         List<Task> list = currList.getListData();
         try {
             FileWriter fw = new FileWriter(this.dirPath + "/" + this.fileName);
+
             for (Task t : list) {
                 fw.write(t.parseData() + System.lineSeparator());
             }
+
             fw.close();
+
         } catch (IOException e) {
             System.out.println("Error saving file. Attempting to create the file...");
+
             // if file/folder doesn't exist, create a new one and call save again.
-            if (this.createFile()) {
+            boolean hasCreatedFile = this.createFile();
+
+            if (hasCreatedFile) {
                 this.save(currList);
             } else {
                 throw new AisuException("There is something wrong with the system.");

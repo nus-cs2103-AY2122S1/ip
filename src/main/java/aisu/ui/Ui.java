@@ -39,7 +39,6 @@ public class Ui {
                 "find (keyword)", "Look for tasks with that keyword",
                 "delete (taskNumber)", "Delete task",
                 "bye", "Exit program");
-
     }
 
     /**
@@ -50,11 +49,15 @@ public class Ui {
         StringBuilder result = new StringBuilder();
         int index = 0;
         while (index < instructions.length) {
-            result.append(padRightSpaces(String.format(" * %d) Type \"%s\"", (index + 2) / 2, instructions[index]),
+            int instructionNumber = (index + 2) / 2;
+            int descriptionIndex = index + 1;
+
+            result.append(padRightSpaces(String.format(" * %d) Type \"%s\"", instructionNumber, instructions[index]),
                             PADDING_LENGTH))
                     .append(" - ")
-                    .append(instructions[index + 1])
+                    .append(instructions[descriptionIndex])
                     .append("\n");
+
             index += 2;
         }
         formattedInstructions = result.toString();
@@ -93,13 +96,6 @@ public class Ui {
     }
 
     /**
-     * Displays the goodbye message.
-     */
-    public void showGoodbyeMessage() {
-        this.out.println(GOODBYE_MESSAGE);
-    }
-
-    /**
      * Displays the error message.
      * @param message AisuException
      */
@@ -125,17 +121,6 @@ public class Ui {
         }
 
         return sb.toString();
-    }
-
-    /**
-     * Shows message(s) to the user.
-     *
-     * @param message Message to be shown.
-     */
-    public void showToUser(String... message) {
-        for (String m : message) {
-            this.out.println(m);
-        }
     }
 
     /**
