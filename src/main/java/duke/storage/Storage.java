@@ -101,8 +101,8 @@ public class Storage {
     private static Task formatToRead(String s) throws DukeException {
         String[] info = s.split(" \\| ");
         Task task;
-
-        switch (info[0]) {
+        String letter = info[0];
+        switch (letter) {
         case "D":
             task = new Deadline(info[2], info[3]);
             break;

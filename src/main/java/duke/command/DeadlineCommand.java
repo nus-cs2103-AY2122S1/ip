@@ -27,6 +27,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes the "Deadline" Command.
+     * @return string that represents details of adding this deadline task.
      */
     public String execute() {
         if (input.length() == 8) {

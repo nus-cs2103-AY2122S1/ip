@@ -20,6 +20,7 @@ public class ListCommand extends Command {
 
     /**
      * Executes the "List" Command.
+     * @return string that represents details of listing all the tasks.
      */
     public String execute() {
         return super.taskList.listTasks();

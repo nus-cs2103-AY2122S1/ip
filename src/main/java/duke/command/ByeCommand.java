@@ -21,6 +21,7 @@ public class ByeCommand extends Command {
 
     /**
      * Executes the "Bye" Command.
+     *@return the string representing end of the application
      */
     @Override
     public String execute() {

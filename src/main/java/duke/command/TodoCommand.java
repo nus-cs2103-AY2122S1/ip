@@ -26,6 +26,7 @@ public class TodoCommand extends Command {
 
     /**
      * Executes the "Todo" Command.
+     * @return string that represents details of adding this Todo task.
      */
     public String execute() {
         if (input.length() == 4) {

@@ -25,6 +25,7 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the "Done" Command.
+     * @return string that represents details of completing this task.
      */
     public String execute() {
         if (input.length() == 4) {

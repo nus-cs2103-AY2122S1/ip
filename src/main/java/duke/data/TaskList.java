@@ -32,6 +32,7 @@ public class TaskList {
      * Adds a task to the tasklist.
      *
      * @param task Task to be added.
+     * @return string representation of the task added.
      */
     public String addTask(Task task) {
         list.add(task);
@@ -43,6 +44,7 @@ public class TaskList {
      * Deletes the task at the given task index.
      *
      * @param taskNum Task index of the task.
+     * @return string representation of the task removed.
      */
     public String removeTask(int taskNum) throws DukeException {
         if (taskNum < 1) {
@@ -62,6 +64,7 @@ public class TaskList {
      * Marks the task at the given task index as done.
      *
      * @param taskNum Task index of the task.
+     * @return string representation of task done.
      */
     public String markTaskAsDone(int taskNum) throws DukeException {
         if (taskNum < 1) {
@@ -106,11 +109,12 @@ public class TaskList {
      * Prints the task searched with keyword
      *
      * @param wordToFind is a String that represents the keyword to be searched.
+     * @return string representation of the task found.
      */
     public String findTask(String wordToFind) {
         ArrayList<String> tasks = new ArrayList<>();
         int index = 1;
-        for (Task t: list) {
+        for (Task t : list) {
             if (t.toString().contains(wordToFind)) {
                 tasks.add(String.format("    %d.%s", (index), t.toString()) + System.lineSeparator());
                 index++;
@@ -132,6 +136,7 @@ public class TaskList {
 
     /**
      * list the total of all the tasks.
+     * @return string representation of all the tasks.
      */
     public String listTasks() throws DukeException {
         String msg = "    Here are the tasks in your list:" + System.lineSeparator();

@@ -25,6 +25,7 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the "Delete" Command.
+     * @return string that represents details of deleting this task.
      */
     public String execute() {
         if (input.length() == 6) {

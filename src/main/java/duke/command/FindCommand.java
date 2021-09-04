@@ -25,6 +25,7 @@ public class FindCommand extends Command {
 
     /**
      * Executes the "Event" Command.
+     * @return string that represents details of searching up this task.
      */
     public String execute() {
         if (input.length() == 4) {

@@ -40,6 +40,7 @@ public class Parser {
      * Parses command and runs.
      *
      * @param input String representing the command.
+     * @return string representation of command parsed.
      */
     public String parse(String input) throws DukeException {
         String commandInput = input.split("\\s+")[0];

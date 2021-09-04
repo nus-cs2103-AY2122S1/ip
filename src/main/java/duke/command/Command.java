@@ -21,6 +21,7 @@ public abstract class Command {
 
     /**
      * Executes the Command.
+     * @return string of output of executing this command.
      */
     public abstract String execute();
 }
