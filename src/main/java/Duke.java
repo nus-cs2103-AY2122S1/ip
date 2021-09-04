@@ -48,7 +48,6 @@ public class Duke extends Application {
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.wrapPrint(e.getMessage());
             this.tasks = new TaskList();
         }
     }
@@ -62,29 +61,7 @@ public class Duke extends Application {
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.wrapPrint(e.getMessage());
             this.tasks = new TaskList();
-        }
-    }
-
-    /**
-     * The method that runs the Duke application.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                ui.printMsg(c.execute(tasks, ui, storage));
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.printError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
         }
     }
 
@@ -199,6 +176,6 @@ public class Duke extends Application {
      * @param args Unused.
      */
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke();
     }
 }

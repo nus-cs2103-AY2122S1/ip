@@ -23,7 +23,6 @@ public class Ui {
     private static final String BOB_IMG_PATH = "resources/images/bobthebuilder.jpg";
     private static final String PERSON_IMG_PATH = "resources/images/personicon.png";
 
-    private Scanner sc;
     private Image bobImage;
     private Image personImage;
 
@@ -33,7 +32,6 @@ public class Ui {
      * If images are not found, set the Images to null.
      */
     public Ui() {
-        this.sc = new Scanner(System.in);
         try {
             FileInputStream bobIconInput = new FileInputStream(BOB_IMG_PATH);
             FileInputStream personIconInput = new FileInputStream(PERSON_IMG_PATH);
@@ -43,58 +41,6 @@ public class Ui {
             bobImage = null;
             personImage = null;
         }
-    }
-
-    /**
-     * Wraps a given message above and below with lines and prints it.
-     *
-     * @param msg the message to wrap and print.
-     */
-    public void wrapPrint(String msg) {
-        showLine();
-        System.out.println(msg);
-        showLine();
-    }
-
-    /**
-     * Prints the divider line in the terminal.
-     */
-    public void showLine() {
-        System.out.println("____________________________________________________________");
-    }
-
-    /**
-     * Prints a given String in the terminal.
-     *
-     * @param msg the given String.
-     */
-    public void printMsg(String msg) {
-        System.out.println(msg);
-    }
-
-    /**
-     * Reads the user input.
-     *
-     * @return a String representing the input of the user.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Prints a given error message, prefixing it with "oh no!"
-     *
-     * @param msg the given error message.
-     */
-    public void printError(String msg) {
-        System.out.println("oh no! " + msg);
-    }
-
-    /**
-     * Prints the welcome message on the terminal.
-     */
-    public void showWelcome() {
-        wrapPrint(WELCOME_MSG);
     }
 
     /**
