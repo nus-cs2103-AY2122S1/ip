@@ -54,8 +54,11 @@ public class Parser {
         }
 
         if (splitBySpace[0].toLowerCase().equals("find")) {
-            String keyword = splitBySpace[1];
-            return Command.makeCommand(CommandsTypes.Find, keyword);
+            String[] keywords = new String[splitBySpace.length - 1];
+            for (int i = 1; i < splitBySpace.length; i++) {
+                keywords[i - 1] = splitBySpace[i];
+            }
+            return Command.makeCommand(CommandsTypes.Find, keywords);
         }
         String type = splitBySpace[0].toLowerCase();
         String taskDescription = Stream.of(input.split(" "))

@@ -28,10 +28,10 @@ public class MarkDoneCommand extends Command {
      * @param fileManager the filemanger that manages the storage of duke.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, FileManager fileManager) throws DukeException {
+    public String execute(Tasklist tasks, Ui ui, FileManager fileManager) throws DukeException {
         tasks.markDone(this.index);
-        ui.showMarkDone(tasks.getTask(this.index));
         fileManager.updateTaskList(tasks, ui);
+        return ui.showMarkDone(tasks.getTask(this.index));
     }
 
     /**

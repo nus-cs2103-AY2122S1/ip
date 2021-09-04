@@ -75,14 +75,14 @@ public abstract class Command {
     /**
      * Makes a command based on input.
      * @param type command type.
-     * @param keyword keyword to be executed on.
+     * @param keywords keywords to be executed on.
      * @return the command that is made.
      * @throws DukeException if input is invalid.
      */
-    public static Command makeCommand(CommandsTypes type, String keyword) throws DukeException {
+    public static Command makeCommand(CommandsTypes type, String ...keywords) throws DukeException {
         switch (type) {
         case Find:
-            return new FindCommand(keyword);
+            return new FindCommand(keywords);
         default:
             throw new DukeException("Invalid command inputted");
         }
@@ -96,6 +96,6 @@ public abstract class Command {
      * @param fileManager the filemanger that manages the storage of duke.
      * @throws DukeException if command has issues.
      */
-    public abstract void execute(Tasklist task, Ui ui, FileManager fileManager) throws DukeException;
+    public abstract String execute(Tasklist task, Ui ui, FileManager fileManager) throws DukeException;
     public abstract boolean isExit();
 }

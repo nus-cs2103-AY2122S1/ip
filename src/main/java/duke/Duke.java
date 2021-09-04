@@ -9,41 +9,40 @@ public class Duke {
     private FileManager filemanager;
     private Tasklist tasks;
     private Ui ui;
+    private static final String defaultFilePath = "taskList.txt";
 
     /**
      * Constructs Duke which stores the tasks in a file.
-     *
-     * @param filePath filepath for the file which the tasks will be solved in.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
-        filemanager = new FileManager(filePath);
+        filemanager = new FileManager(defaultFilePath);
         tasks = new Tasklist(filemanager.getTaskList());
     }
 
     /**
-     * Runs Duke to manage user's task.
+     * Returns string of Duke's welcome message.
+     *
+     * @return Duke's welcome messsage.
      */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, filemanager);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
-        }
+    public String sayHi() {
+        return this.ui.showWelcome();
     }
 
     /**
-     * To run Duke.
-     * @param args no arguments
+     * Returns Duke response to user's commmand.
+     *
+     * @param input user's command.
+     * @return Duke response.
      */
-    public static void main(String[] args) {
-        new Duke("taskList.txt").run();
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String uiStr = c.execute(tasks, ui, filemanager);
+            return uiStr;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
+

@@ -28,10 +28,10 @@ public class AddCommand extends Command {
      * @param fileManager the filemanger that manages the storage of duke.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, FileManager fileManager) {
+    public String execute(Tasklist tasks, Ui ui, FileManager fileManager) {
         tasks.add(this.toAddTask);
         fileManager.updateTaskList(tasks, ui);
-        ui.taskAdded(this.toAddTask, tasks.getNumTasks());
+        return ui.taskAdded(this.toAddTask, tasks.getNumTasks());
     }
 
     /**
@@ -44,6 +44,12 @@ public class AddCommand extends Command {
         return false;
     }
 
+    /**
+     * Returns string representation of AddCommand.
+     * For testing purposes.
+     *
+     * @return string representation of AddCommand.
+     */
     @Override
     public String toString() {
         return toAddTask.toString();

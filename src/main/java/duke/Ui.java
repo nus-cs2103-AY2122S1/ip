@@ -1,9 +1,8 @@
 package duke;
 
-import java.util.Scanner;
+import java.util.ArrayList;
 
 import duke.task.Task;
-
 
 
 /**
@@ -14,84 +13,85 @@ public class Ui {
 
     /**
      * Prints out sentence welcoming user when Duke starts.
+     *
+     * @return welcome message by Duke.
      */
-    public void showWelcome() {
-        System.out.println("Urgh I hate having to wake up. Why did you do that");
+    public String showWelcome() {
+        return "Urgh I hate having to wake up. Why did you do that";
     }
 
     /**
-     * Prints out confirmation when user adds a task.
+     * Returns confirmation when user adds a task.
      *
      * @param task the task which is added.
      * @param count the current number of tasks.
+     * @return confirmation when user adds a task.
      */
-    public void taskAdded(Task task, int count) {
+    public String taskAdded(Task task, int count) {
         String toPrint = String.format("     Got it. I've added this task:\n     "
                         + "%s\n     Now you have %x task%s in the list.",
                 task.toString(), count, count > 1 ? "s" : "");
-        System.out.println(strBreak + toPrint + "\n" + strBreak);
+        return strBreak + toPrint + "\n" + strBreak;
     }
 
     /**
-     * Prints out sentence saying bye when user exits.
+     * Return string saying bye.
+     *
+     * @return String saying bye.
      */
-    public void sayBye() {
-        System.out.println("Don't wake me up again");
+    public String sayBye() {
+        return "Don't wake me up again";
     }
 
     /**
-     * Prints out sentence confirming when user marks a task as done.
+     * Returns sentence confirming when user marks a task as done.
      *
      * @param task task that is marked done.
+     * @return sentence confirming when user marks a task as done.
      */
-    public void showMarkDone(Task task) {
-        System.out.println("Toight!\n" + task + " marked done.");
+    public String showMarkDone(Task task) {
+        return "Toight!\n" + task + " marked done.";
     }
 
     /**
-     * Prints our sentence confirming when user deletes a task.
+     * Returns sentence confirming when user deletes a task.
      *
      * @param task task that is deleted.
+     * @return string for delete command.
      */
-    public void deleteTask(Task task) {
-        System.out.println(task + " deleted. Bruh be more careful next time");
+    public String deleteTask(Task task) {
+        return task + " deleted. Bruh be more careful next time";
     }
 
     /**
-     * Prints out the list of current tasks.
+     * Return string of the list of current tasks.
      *
      * @param tasks the current list of tasks.
+     * @return string of list of current tasks.
      */
-    public void printList(Tasklist tasks) {
-        System.out.println(tasks);
+    public String printList(Tasklist tasks) {
+        return tasks.toString();
     }
 
     /**
-     * Prints out the error message of exception that was thrown.
+     * Returns string for exception thrown.
      *
      * @param e the exception that was thrown.
+     * @return string for exception thrown.
      */
-    public void showError(Exception e) {
-        System.out.println(e.getMessage());
+    public String showError(Exception e) {
+        return e.getMessage();
     }
 
     /**
-     * Reads the command that was input by user.
+     * Returns string for find command.
      *
-     * @return the command input that was input by user.
-     */
-    public String readCommand() {
-        Scanner sc = new Scanner(System.in);
-        return sc.nextLine();
-    }
-
-    /**
-     * Prints tasks that are related to keyword.
      * @param tasks tasks that are related to keyword.
-     * @param keyword keyword that user is searching for.
+     * @param keywords keywords that user is searching for.
+     * @return string for find command.
      */
-    public void printRelatedTasks(Tasklist tasks, String keyword) {
-        System.out.println("Your match tasks with " + keyword + ":");
-        this.printList(tasks);
+    public String printRelatedTasks(Tasklist tasks, ArrayList<String> keywords) {
+        String strKeywords = keywords.stream().reduce((x, y) -> x + " " + y).orElse("");
+        return "Your tasks that match with " + strKeywords + ":\n" + this.printList(tasks);
     }
 }

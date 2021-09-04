@@ -1,22 +1,26 @@
 package duke.command;
 
+import java.util.ArrayList;
+
 import duke.FileManager;
 import duke.Tasklist;
 import duke.Ui;
 
 /**
- * Command that finds tasks whose description has keyword.
+ * Command that finds tasks whose description have keywords.
  */
 public class FindCommand extends Command {
-    private String keyword;
+    private ArrayList<String> keywords = new ArrayList<>();
 
     /**
      * Makes a FindCommand which prints tasks which contain keyword.
      *
-     * @param keyword keyword to find related tasks.
+     * @param keywords keyword to find related tasks.
      */
-    public FindCommand(String keyword) {
-        this.keyword = keyword;
+    public FindCommand(String ...keywords) {
+        for (String keyword: keywords) {
+            this.keywords.add(keyword);
+        }
     }
 
     /**
@@ -27,9 +31,9 @@ public class FindCommand extends Command {
      * @param fileManager filemanager to manages storage.
      */
     @Override
-    public void execute(Tasklist tasks, Ui ui, FileManager fileManager) {
-        Tasklist relatedTasks = tasks.findRelated(this.keyword);
-        ui.printRelatedTasks(relatedTasks, this.keyword);
+    public String execute(Tasklist tasks, Ui ui, FileManager fileManager) {
+        Tasklist relatedTasks = tasks.findRelated(this.keywords);
+        return ui.printRelatedTasks(relatedTasks, this.keywords);
     }
 
     /**
