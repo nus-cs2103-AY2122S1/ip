@@ -1,6 +1,9 @@
 package duke.commands;
 
+import duke.exceptions.IllegalFormatException;
 import duke.exceptions.NoSuchTaskException;
+import duke.exceptions.UnknownTagException;
+import duke.exceptions.UpdateFailException;
 import duke.tasks.TaskList;
 
 /**
@@ -15,5 +18,5 @@ public abstract class Command {
      * @param taskList The list containing the tasks of the user.
      * @throws NoSuchTaskException May be thrown if the chat bot cannot find the task to execute the command.
      */
-    public abstract String executeCommand(TaskList taskList) throws NoSuchTaskException;
+    public abstract String executeCommand(TaskList taskList) throws NoSuchTaskException, UpdateFailException, UnknownTagException, IllegalFormatException;
 }

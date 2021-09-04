@@ -6,7 +6,7 @@ package duke.tasks;
 
 public class Task {
     // fields of each task
-    private final String description;
+    private String description;
     private boolean isDone;
 
     /**
@@ -37,6 +37,13 @@ public class Task {
     }
 
     /**
+     * Marks the task as incomplete.
+     */
+    public void markAsIncomplete() {
+        this.isDone = false;
+    }
+
+    /**
      * Returns the tag of the task.
      * Indicates which type of task is it.
      *
@@ -56,6 +63,22 @@ public class Task {
         return this.description;
     }
 
+    /**
+     * Sets the description of the task to the new description.
+     *
+     * @param desc New description of the task
+     */
+    public void setDescription(String desc) {
+        this.description = desc;
+    }
+
+    /**
+     * Sets the date of the task to the new date if it is a Deadline task or Event task.
+     * Otherwise, do nothing.
+     *
+     * @param date New date of the task
+     */
+    public void setDate(String date) { }
 
     /**
      * Returns the due date of the task if it belongs to the Deadline/Event type.

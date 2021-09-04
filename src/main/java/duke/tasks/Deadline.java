@@ -2,13 +2,14 @@ package duke.tasks;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Encapsulates the information for a Deadline object that contains the description, completion status and due date.
  */
 public class Deadline extends Task {
     public static final String TAG = "D";
-    private final LocalDate dateOfDeadline;
+    private LocalDate dateOfDeadline;
 
     /**
      * Constructs a new Deadline object with the specified task description, due date and task status.
@@ -30,6 +31,11 @@ public class Deadline extends Task {
     @Override
     public String getDueDate() {
         return this.dateOfDeadline.toString().trim();
+    }
+
+    @Override
+    public void setDate(String date) throws DateTimeParseException {
+        this.dateOfDeadline = LocalDate.parse(date);
     }
 
     @Override

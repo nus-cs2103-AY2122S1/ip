@@ -12,6 +12,7 @@ import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
+import duke.commands.UpdateCommand;
 import duke.exceptions.IllegalFormatException;
 import duke.exceptions.UnknownTagException;
 import duke.tasks.Deadline;
@@ -35,6 +36,7 @@ public class Parser {
     private final String DELETE_TAG = "delete";
     private final String FIND_TAG = "find";
     private final String EXIT_TAG = "bye";
+    private final String UPDATE_TAG = "update";
 
     /**
      * Returns the command tag of the input.
@@ -91,6 +93,11 @@ public class Parser {
         case FIND_TAG:
             String keyword = getKeyword(input);
             return new FindCommand(keyword);
+        case UPDATE_TAG:
+            int taskId = getUpdateId(input);
+            String tag = getUpdateTag(input);
+            String information = getUpdateInformation(input);
+            return new UpdateCommand(taskId, tag, information);
         default:
             throw new UnknownTagException();
         }
@@ -168,19 +175,19 @@ public class Parser {
         String[] details = spiltInputByKey(input, key);
 
         if (details.length != 2) {
-            String errorMsg = "Please follow the format:\n type description /by yyyy-mm-dd.";
+            String errorMsg = String.format("Please follow the format:\n type title %s yyyy-mm-dd.", key);
             throw new IllegalFormatException(errorMsg);
         }
 
         String dateString = details[1];
-        return getLocalDate(dateString);
+        return getLocalDate(dateString, key);
     }
 
-    private LocalDate getLocalDate(String detail) throws IllegalFormatException {
+    private LocalDate getLocalDate(String detail, String key) throws IllegalFormatException {
         try {
             return LocalDate.parse(detail);
         } catch (DateTimeParseException e) {
-            String errorMsg = "Please follow the format:\n type description /by yyyy-mm-dd.";
+            String errorMsg = String.format("Please follow the format:\n type title %s yyyy-mm-dd.", key);
             throw new IllegalFormatException(errorMsg);
         }
     }
@@ -197,7 +204,7 @@ public class Parser {
         String[] details = spiltInputByKey(input, key);
 
         if (details.length != 2) {
-            String errorMsg = "Please follow the format:\n command 0.";
+            String errorMsg = "Please follow the format:\n 'command' 'id'.";
             throw new IllegalFormatException(errorMsg);
         }
 
@@ -237,7 +244,7 @@ public class Parser {
         String[] details = spiltInputByKey(input, key);
 
         if (details.length < 2) {
-            String errorMsg = "Please follow the format:\n find keyword.";
+            String errorMsg = "Please follow the format:\n find 'keyword'.";
             throw new IllegalFormatException(errorMsg);
         }
 
@@ -250,4 +257,42 @@ public class Parser {
         return keyword;
     }
 
+    private int getUpdateId(String input) throws IllegalFormatException {
+        String[] details = getDetails(input);
+
+        String id = details[1];
+        if (!isInteger(id)) {
+            String errorMsg = "Please enter a valid id.";
+            throw new IllegalFormatException(errorMsg);
+        }
+
+        return Integer.parseInt(id) - 1;
+    }
+
+    /**
+     * Returns the information that needs to be updated.
+     *
+     * @param input User's input
+     * @return A String representing the information that needs to be updated.
+     */
+    private String getUpdateTag(String input) throws IllegalFormatException {
+        String[] details = getDetails(input);
+        return details[2];
+    }
+
+    private String getUpdateInformation(String input) throws IllegalFormatException {
+        String[] details = getDetails(input);
+        return details[3];
+    }
+
+    private String[] getDetails(String input) throws IllegalFormatException {
+        String key = " ";
+        String[] details = input.split(" ", 4);
+
+        if (details.length != 4) {
+            String errorMsg = "Please follow the format:\n update 'id' 'tag' 'info'";
+            throw new IllegalFormatException(errorMsg);
+        }
+        return details;
+    }
 }

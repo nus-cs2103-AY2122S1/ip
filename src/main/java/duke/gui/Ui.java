@@ -11,10 +11,11 @@ public class Ui {
         DISPLAY_LIST_MSG("There are the tasks you have:"),
         EMPTY_LIST_MSG("There is current no task in your list!"),
         TASK_DONE_MSG("Well done! You have completed: \n"),
-        TASK_ADDED_MSG("Got it. I've added this task: \n"),
-        TASK_DELETED_MSG("Got it. I've deleted this task: \n"),
+        TASK_ADDED_MSG("Roger. I've added this task: \n"),
+        TASK_DELETED_MSG("Roger. I've deleted this task: \n"),
         CHECK_TASK_COUNT_MSG(" tasks are in your list now!"),
-        NONE_MATCH_MSG("Sorry, I can't find anything that matches the keyword.");
+        NONE_MATCH_MSG("Sorry, I can't find anything that matches the keyword."),
+        UPDATE_TASK_MSG("Roger! I have updated this task: \n");
 
         private final String msg;
 
@@ -125,7 +126,17 @@ public class Ui {
         return errorMsg;
     }
 
-
+    /**
+     * Returns the message when a task is updated successfully.
+     *
+     * @param taskList The list containing the task
+     * @param id The id of the task that was updated
+     * @return A String representing hte message to be shown.
+     */
+    public static String printUpdateMessage(TaskList taskList, int id) {
+        String message = Message.UPDATE_TASK_MSG.msg + taskList.getTask(id);
+        return message;
+    }
 
 
 }
