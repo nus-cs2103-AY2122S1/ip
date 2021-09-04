@@ -1,7 +1,7 @@
 package duke.tasks;
 import java.util.ArrayList;
 
-/** Manage tasklists with filecontroller */
+/** Manage tasklists */
 public class TaskList {
     ArrayList<Task> storedList;
 
@@ -44,6 +44,12 @@ public class TaskList {
         storedList.add(task);
     }
 
+    /**
+     * Converts the whole task list to a String containing each individual
+     * task serialized and separated in different lines.
+     *
+     * @return String representation of entire task list serialized.
+     */
     public String serialize() {
         StringBuilder sb = new StringBuilder();
         boolean isFirst = true;
@@ -60,7 +66,7 @@ public class TaskList {
     }
 
     /**
-     * gets the size of the tasklist
+     * Gets the size of the tasklist
      * @return the size of the tasklist
      */
     public int size() {

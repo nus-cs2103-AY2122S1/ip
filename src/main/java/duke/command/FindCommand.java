@@ -16,6 +16,7 @@ public class FindCommand extends Command {
         StringBuilder sb = new StringBuilder();
         int size = tasks.size();
         int count = 0;
+        // looks for all tasks with name containing the string to find.
         for (int i = 0; i < size; i++) {
             Task task = tasks.get(i);
             String name = task.getName();

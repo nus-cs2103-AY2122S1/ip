@@ -52,6 +52,7 @@ public abstract class Task {
 
     /**
      * Returns the name of this task
+     * 
      * @return String representation of name
      */
     public String getName() {
