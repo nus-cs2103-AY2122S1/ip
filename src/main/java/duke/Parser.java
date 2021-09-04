@@ -1,14 +1,6 @@
 package duke;
 
-import duke.command.AddCommand;
-import duke.command.ClearCommand;
-import duke.command.Command;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.RemoveCommand;
-import duke.command.RestoreCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskNumException;
 import duke.exception.MissingArgumentException;
@@ -55,6 +47,8 @@ public class Parser {
             return prepareExit(strArr);
         case FindCommand.COMMAND_WORD:
             return prepareFind(strArr);
+        case UpdateCommand.COMMAND_WORD:
+            return prepareUpdate(strArr);
         default:
             throw new UnrecognisedCommandException();
         }
@@ -119,6 +113,38 @@ public class Parser {
         return new FindCommand(args[1]);
     }
 
+    private static Command prepareUpdate(String[] args) throws DukeException {
+        checkStrArrayMinLength(args, 2, new MissingArgumentException());
+        String nameKeyword = UpdateCommand.NAME_KEYWORD;
+        String timeKeyword = UpdateCommand.TIME_KEYWORD;
+
+        String params = args[1];
+        boolean hasNameKeyword = params.contains(nameKeyword);
+        boolean hasTimeKeyword = params.contains(timeKeyword);
+
+        if (!hasNameKeyword && !hasTimeKeyword) {
+            throw new MissingKeywordException(nameKeyword + " or " + timeKeyword);
+        }
+
+        String[] paramArr = params.split(UpdateCommand.SPLIT_REGEX);
+
+        int taskNum = parseNum(paramArr[0]) - 1;
+
+        if (hasNameKeyword && hasTimeKeyword) {
+            boolean isNameFirst = params.indexOf(nameKeyword) < params.indexOf(timeKeyword);
+            if (isNameFirst) {
+                return new UpdateCommand(taskNum, paramArr[1], paramArr[2]);
+            } else {
+                return new UpdateCommand(taskNum, paramArr[2], paramArr[1]);
+            }
+        } else if (hasNameKeyword) {
+            return new UpdateCommand(taskNum, paramArr[1], true);
+        } else {
+            return new UpdateCommand(taskNum, paramArr[1], false);
+        }
+
+    }
+
     private static int parseNum(String args) throws DukeException {
         try {
             int num = Integer.parseInt(args);
@@ -146,4 +172,5 @@ public class Parser {
             throw new UnrecognisedCommandException(didYouMean);
         }
     }
+
 }
