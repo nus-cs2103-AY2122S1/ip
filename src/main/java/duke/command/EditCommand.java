@@ -41,7 +41,7 @@ public class EditCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
-            Task editedTask;
+            Task editedTask = null;
             switch (this.editType) {
             case DONE:
                 editedTask = taskList.markAsDone(this.taskIndex);
@@ -50,8 +50,9 @@ public class EditCommand extends Command {
                 editedTask = taskList.delete(this.taskIndex);
                 break;
             default:
-                throw new DukeException("Unknown command.");
+                assert false : this.editType;
             }
+            assert editedTask != null : "Failed to retrieve edited task";
             storage.overwriteSave(taskList);
             return ui.formatEditedTask(editedTask, taskList.getNumberOfTasks(), this.editType);
         } catch (IndexOutOfBoundsException e) {
