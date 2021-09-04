@@ -17,6 +17,7 @@ public class FindCommand extends Command {
      * @param keyword The String to be found.
      */
     public FindCommand(String keyword) {
+        assert !keyword.isEmpty();
         this.keyword = keyword;
     }
 
@@ -28,6 +29,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) {
+        assert !keyword.isEmpty();
         String str = "Here are the matching tasks in your list:";
         StringBuilder stringBuilder = new StringBuilder(str);
         int index = 1;

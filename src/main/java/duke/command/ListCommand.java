@@ -25,6 +25,5 @@ public class ListCommand extends Command {
             stringBuilder.append("\n").append(index++).append(".").append(task);
         }
         return stringBuilder.toString();
-
     }
 }
