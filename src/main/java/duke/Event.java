@@ -8,6 +8,7 @@ public class Event extends Task {
 
     /**
      * creates an Event object
+     *
      * @param description takes in a String describing the task description
      * @param at takes in a String representing the time of the task
      */
@@ -18,6 +19,7 @@ public class Event extends Task {
 
     /**
      * gets event timing
+     *
      * @return getter method to get event time
      */
     public String getAt() {

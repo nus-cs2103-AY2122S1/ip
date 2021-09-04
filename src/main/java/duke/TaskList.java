@@ -18,6 +18,7 @@ public class TaskList {
 
     /**
      * Creates a TaskList object
+     *
      * @param list takes in a list of Task
      */
     TaskList(ArrayList<Task> list) {
@@ -26,6 +27,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list
+     *
      * @param t takes in a Task to be added
      */
     public void add(Task t) {
@@ -34,6 +36,7 @@ public class TaskList {
 
     /**
      * Gets the task in the specific index
+     *
      * @param getNum takes in a int representing the index
      * @return a Task at the specific index
      */
@@ -43,6 +46,7 @@ public class TaskList {
 
     /**
      * Gets the size of the list
+     *
      * @return a int representing the list size
      */
     public int size() {
@@ -51,6 +55,7 @@ public class TaskList {
 
     /**
      * Removes a task at the specific index from the list
+     *
      * @param delNum takes in a int representing the index
      */
     public void remove(int delNum) {

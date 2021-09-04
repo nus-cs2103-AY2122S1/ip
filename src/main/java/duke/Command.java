@@ -17,6 +17,7 @@ public class Command {
     }
     /**
      * executes different commands from user and save tasks into a file
+     *
      * @param tasks takes in TaskList object containing the list of tasks
      * @param ui takes in Ui object containing the list of message to user
      * @param save Storage object to store the TaskList
@@ -25,7 +26,6 @@ public class Command {
         Scanner sc = new Scanner(input);
         String filePath = "data/duke.txt";
         String command = Parser.parseCommand(sc.next());
-        System.out.println(command);
         switch(command) {
         case "bye":
             return ui.showBye();
@@ -53,6 +53,7 @@ public class Command {
                     throw new DukeException(ui.emptyDescriptionError());
                 }
                 tasks.add(todo);
+                save.writeToFile(filePath, tasks);
                 return ui.todo(tasks, todo);
             } catch (DukeException e) {
                 return e.getMessage();
@@ -62,6 +63,7 @@ public class Command {
             try {
                 Task delete = tasks.get(delNum);
                 tasks.remove(delNum);
+                save.writeToFile(filePath, tasks);
                 return ui.delete(tasks, delete);
             } catch (IndexOutOfBoundsException e) {
                 return ui.showDeleteError();
@@ -76,6 +78,7 @@ public class Command {
                 Task deadline = new Deadline(deadlineArr[0].trim(),
                         d1.format(DateTimeFormatter.ofPattern("MMM dd YYYY")));
                 tasks.add(deadline);
+                save.writeToFile(filePath, tasks);
                 return ui.deadline(tasks, deadline);
             } catch (DateTimeParseException e) {
                 ui.showDeadlineError();
@@ -91,6 +94,7 @@ public class Command {
                 }
                 Task event = new Event(eventArr[0].trim(), eventArr[1].trim());
                 tasks.add(event);
+                save.writeToFile(filePath, tasks);
                 return ui.event(tasks, event);
             } catch (DukeException e) {
                 return e.getMessage();
@@ -114,7 +118,6 @@ public class Command {
         default:
             return ui.defaultError();
         }
-        save.writeToFile(filePath, tasks);
         return null;
     }
 }

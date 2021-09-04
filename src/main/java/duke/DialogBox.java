@@ -27,6 +27,7 @@ public class DialogBox extends HBox {
 
     /**
      * creates a DialogBox object
+     *
      * @param text takes in a String representing the text
      * @param img takes in an img representing the image
      */

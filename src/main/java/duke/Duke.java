@@ -10,6 +10,7 @@ public class Duke {
 
     /**
      * creates a Duke object
+     *
      * @param filePath takes a String representing the directory
      */
     public Duke(String filePath) {
@@ -24,8 +25,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets a String representing the response
+     *
+     * @param input a String representing user command
+     * @return a String handling user command
      */
     public String getResponse(String input) {
         Command c = new Command(input);

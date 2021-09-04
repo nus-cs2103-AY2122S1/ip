@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Creates a Task object
+     *
      * @param description takes in a String describing the task description
      */
     public Task(String description) {
@@ -18,6 +19,7 @@ public class Task {
 
     /**
      * gets status of whether a Task is done
+     *
      * @return a String representing the status
      */
     public String getStatusIcon() {
@@ -26,6 +28,7 @@ public class Task {
 
     /**
      * gets description of Task
+     *
      * @return a String representing Task
      */
     public String getDescription() {

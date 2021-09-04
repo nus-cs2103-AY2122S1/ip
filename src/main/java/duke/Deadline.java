@@ -19,6 +19,7 @@ public class Deadline extends Task {
 
     /**
      * gets task deadline
+     *
      * @return a String representing the deadline
      */
     public String getBy() {

@@ -4,10 +4,11 @@ package duke;
  * Ui class provides methods for user interaction
  */
 public class Ui {
-    private final String line = "_______________________________________________________\n";
+    private final static String line = "_______________________________________________________\n";
 
     /**
      * Shows a welcome text
+     *
      * @return a String representing welcome text
      */
     public String showWelcome() {
@@ -16,6 +17,7 @@ public class Ui {
 
     /**
      * Shows a farewell text
+     *
      * @return a String representing farewell text
      */
     public String showBye() {
@@ -24,6 +26,7 @@ public class Ui {
 
     /**
      * Shows a response when user uses the 'list' command
+     *
      * @param list a String representing the list
      * @return a String representing the list with lines
      */
@@ -33,6 +36,7 @@ public class Ui {
 
     /**
      * Shows a response when user uses the 'done' command
+     *
      * @param t takes in a task that user marked as done
      * @return a String representing the done task
      */
@@ -42,6 +46,7 @@ public class Ui {
 
     /**
      * Shows a response when user uses the 'delete' command
+     *
      * @param tasks takes in a TaskList
      * @param delete takes in a Task representing the deleted task
      * @return a String representing the deleted task
@@ -53,24 +58,27 @@ public class Ui {
 
     /**
      * Shows error message for 'done' command when index is out of bound
+     *
      * @return a String representing the error message
      */
     public String showDoneError() {
         return "\n" + line
-                + "\n☹ OOPS!!! No such task to be done.\n" + line;
+                + "\nOOPS!!! No such task to be done.\n" + line;
     }
 
     /**
      * Shows error message for 'delete' command when index is out of bound
+     *
      * @return a String representing the error message
      */
     public String showDeleteError() {
         return "\n" + line
-                + "\n☹ OOPS!!! No such task to be deleted.\n" + line;
+                + "\nOOPS!!! No such task to be deleted.\n" + line;
     }
 
     /**
      * Shows a response when user uses the 'todo' command
+     *
      * @param tasks takes in a TaskList
      * @param todo takes in a Task that user added as todo
      * @return a String representing the todo Task
@@ -82,6 +90,7 @@ public class Ui {
 
     /**
      * Shows a response when user uses the 'deadline' command
+     *
      * @param tasks takes in a TaskList
      * @param deadline takes in a Task that user added as deadline
      * @return a String representing the deadline task
@@ -93,15 +102,17 @@ public class Ui {
 
     /**
      * Shows an error message for 'deadline' command if date is not in yyyy-mm-dd format
+     *
      * @return a String representing the error message
      */
     public String showDeadlineError() {
         return "\n" + line
-                + "\n☹ OOPS!!! The time must be in the format YYYY-MM-DD\n" + line;
+                + "\nOOPS!!! The time must be in the format YYYY-MM-DD\n" + line;
     }
 
     /**
      * Shows a response when user uses the 'event' command
+     *
      * @param tasks takes in a TaskList
      * @param event takes in a Task that user added as event
      * @return a String representing the event task
@@ -113,6 +124,7 @@ public class Ui {
 
     /**
      * Shows a respone when user uses the 'find' command
+     *
      * @param findList takes in a String representing the results of find
      * @return a String representing the task found by find
      */
@@ -122,18 +134,20 @@ public class Ui {
 
     /**
      * Shows an error message when description of task is empty
+     *
      * @return a String representing the error message
      */
     public String emptyDescriptionError() {
-        return "\n" + line + "\n☹ OOPS!!! The description cannot be empty.\n" + line;
+        return "\n" + line + "\nOOPS!!! The description cannot be empty.\n" + line;
     }
 
     /**
      * Shows an error message when user command is invalid
+     *
      * @return a String representing the error message
      */
     public String defaultError() {
         return "\n" + line
-                + "\n☹ OOPS!!! I'm sorry, but I don't know what that means :-(.\n" + line;
+                + "\nOOPS!!! I'm sorry, but I don't know what that means :-(.\n" + line;
     }
 }

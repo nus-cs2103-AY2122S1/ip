@@ -16,6 +16,7 @@ public class Storage {
 
     /**
      * creates a Storage object
+     *
      * @param filePath a String representing the directory of the file
      */
     Storage(String filePath) {
@@ -35,6 +36,7 @@ public class Storage {
 
     /**
      * saves tasks into a file
+     *
      * @param filePath a String representing the directory of the file
      * @param list list of tasks that will be written into the file
      */
@@ -55,6 +57,7 @@ public class Storage {
 
     /**
      * loads tasks from a file
+     *
      * @param filePath a String representing the directory of the file
      * @return return a TaskList object containing the list of tasks that was in the file
      * @throws FileNotFoundException
@@ -99,6 +102,7 @@ public class Storage {
 
     /**
      * returns text to add in save file
+     *
      * @param t takes in a task to be added into save file
      * @return a String representing text to be added
      */
@@ -120,6 +124,7 @@ public class Storage {
 
     /**
      * gets status icon for task
+     *
      * @param t takes in a task to check its status
      * @return a String representing the status
      */

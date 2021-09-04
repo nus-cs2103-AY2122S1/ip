@@ -6,6 +6,7 @@ package duke;
 public class Parser {
     /**
      * Converts the letters to lowercase to accept commands with uppercase letters
+     *
      * @param command takes in a String representing user's command
      * @return a String with only lower case letters representing user's command
      */
