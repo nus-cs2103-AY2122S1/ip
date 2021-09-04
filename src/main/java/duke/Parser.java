@@ -9,7 +9,17 @@ import duke.command.DoneCommand;
 import duke.command.ListCommand;
 import duke.error.DukeException;
 
+/**
+ * Deals with making sense of the user command.
+ */
 public class Parser {
+    /**
+     * Parses the command to return the specified command.
+     *
+     * @param fullCommand Full command entered by the user.
+     * @return The command.
+     * @throws DukeException If command is invalid or command format is incorrect.
+     */
     public static Command parse(String fullCommand) throws DukeException {
         String command;
         String description = "";

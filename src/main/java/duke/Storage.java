@@ -18,15 +18,30 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Deals with loading tasks from the file and saving tasks in the files.
+ */
 public class Storage {
     private String directoryPath;
     private String filePath;
 
+    /**
+     * Constructs a Storage object.
+     *
+     * @param directoryPath Path to data file directory.
+     * @param filePath Path to data file.
+     */
     public Storage (String directoryPath, String filePath) {
         this.directoryPath = directoryPath;
         this.filePath = directoryPath.concat(filePath);
     }
 
+    /**
+     * Loads the tasks from the data file.
+     *
+     * @return List of task loaded from the data file.
+     * @throws DukeException If something wrong happens.
+     */
     public ArrayList<Task> load() throws DukeException {
         File directory = new File(directoryPath);
         File dataFile = new File(filePath);
@@ -69,6 +84,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Saves the tasks in the list to the data file.
+     *
+     * @param tasks Current tasks.
+     * @throws IOException
+     */
     public void save(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter(filePath);
 

@@ -8,14 +8,30 @@ import duke.task.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Represents a command which finds tasks given a keyword.
+ */
 public class FindCommand extends Command {
     private final String keyword;
 
+    /**
+     * Constructs a FindCommand object.
+     *
+     * @param keyword Keyword used in searching the tasks.
+     */
     public FindCommand(String keyword) {
         isExit = false;
         this.keyword = keyword;
     }
 
+    /**
+     * Prints tasks that contain keyword.
+     *
+     * @param tasks List of tasks.
+     * @param ui UI object.
+     * @param storage Storage object.
+     * @throws DukeException If something goes wrong while saving.
+     */
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
         ui.showFind();
