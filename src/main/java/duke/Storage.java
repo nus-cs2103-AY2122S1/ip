@@ -65,6 +65,7 @@ public class Storage {
      * @throws DukeException If there was an error writing to the save file.
      */
     public void save(TaskList taskList) throws DukeException {
+        assert taskList != null : "Task list is not initialised.";
         try {
             BufferedWriter bw = new BufferedWriter(new FileWriter(this.filePath));
             for (Task task : taskList.get()) {
