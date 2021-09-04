@@ -52,6 +52,9 @@ public class Parser {
                 return new CommandDone(taskName);
             } else if (tokens[0].equals("exit")) {
                 return new CommandExit();
+            } else if (tokens[0].equals("find")) {
+                String keyword = String.join(" ", Arrays.copyOfRange(tokens, 1, tokens.length));
+                return new CommandFind(keyword);
             } else {
                 throw new IllegalArgumentException("Command not recognised");
             }
