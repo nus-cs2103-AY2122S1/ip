@@ -1,12 +1,15 @@
 package duke;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 
-public class MainDukeStarter extends Application {
+
+public class Main extends Application {
 
 
     /**
@@ -15,8 +18,19 @@ public class MainDukeStarter extends Application {
     @Override
     public void start(Stage stage) {
         Duke currDuke = Duke.getCurrDuke();
-        Duke.dukeStarter(currDuke);
 
-        Scene mainWindow = new Scene()
+
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(currDuke);
+            stage.show();
+            Duke.dukeStarter(currDuke);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 }
