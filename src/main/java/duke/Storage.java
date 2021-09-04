@@ -37,7 +37,7 @@ public class Storage {
             ArrayList<Task> savedList = new ArrayList<>();
 
             if (saveFile.isFile()) {
-                // If the save file exists, return the previously saved list.
+                // If the save file exists, simply load the data from the save file.
                 BufferedReader br = new BufferedReader(new FileReader(this.filePath));
                 String nextTask = br.readLine();
                 while (nextTask != null) {

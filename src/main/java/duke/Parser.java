@@ -100,7 +100,9 @@ public abstract class Parser {
         try {
             String[] splitAtComma = dateAndTime.split(", ");
             String toFormat = splitAtComma[0];
-            if (splitAtComma.length > 1) {
+            boolean hasInputAfterComma = splitAtComma.length > 1;
+
+            if (hasInputAfterComma) {
                 toFormat += "T" + splitAtComma[1];
             } else {
                 toFormat += "T" + "00:00";
@@ -122,7 +124,9 @@ public abstract class Parser {
      */
     public static int parseDoneCommand(String input) throws DukeException {
         String[] splitBySpace = input.split(" ");
-        if (splitBySpace.length > 1) {
+        boolean hasInputAfterSpace = splitBySpace.length > 1;
+
+        if (hasInputAfterSpace) {
             return Integer.parseInt(splitBySpace[1].trim());
 
         } else {
@@ -141,8 +145,10 @@ public abstract class Parser {
      */
     public static int parseDeleteCommand(String input) throws DukeException {
         String[] splitBySpace = input.split(" ", 2);
+        boolean hasInputAfterSpace = splitBySpace.length > 1
+                && splitBySpace[1].trim().length() > 0;
 
-        if (splitBySpace.length > 1 && splitBySpace[1].trim().length() > 0) {
+        if (hasInputAfterSpace) {
             return Integer.parseInt(splitBySpace[1].trim());
 
         } else {
@@ -161,7 +167,10 @@ public abstract class Parser {
      */
     public static String parseFindCommand(String input) throws DukeException {
         String[] splitBySpace = input.split(" ", 2);
-        if (splitBySpace.length > 1 && splitBySpace[1].trim().length() > 0) {
+        boolean hasInputAfterSpace = splitBySpace.length > 1
+                && splitBySpace[1].trim().length() > 0;
+
+        if (hasInputAfterSpace) {
             return splitBySpace[1].trim();
 
         } else {
@@ -190,9 +199,10 @@ public abstract class Parser {
      */
     public static Deadline parseDeadlineCommand(String input) throws DukeException {
         String[] nameAndDeadline = input.split(" /by ");
+        boolean hasInputAfterBy = nameAndDeadline.length > 1
+                && nameAndDeadline[1].trim().length() > 0;
 
-        if (nameAndDeadline.length > 1
-                && nameAndDeadline[1].trim().length() > 0) {
+        if (hasInputAfterBy) {
             LocalDateTime deadline = Parser
                     .formatDateTime(nameAndDeadline[1]);
             return new Deadline(nameAndDeadline[0], deadline,
@@ -214,15 +224,17 @@ public abstract class Parser {
      */
     public static Event parseEventCommand(String input) throws DukeException {
         String[] nameAndTime = input.split(" /at ");
+        boolean hasInputAfterAt = nameAndTime.length > 1
+                && nameAndTime[1].trim().length() > 0;
 
-        if (nameAndTime.length > 1
-                && nameAndTime[1].trim().length() > 0) {
+        if (hasInputAfterAt) {
             String[] splitEndTime = nameAndTime[1].split(" - ");
             LocalDateTime eventTime = Parser
                     .formatDateTime(splitEndTime[0]);
+            boolean hasInputAfterDash = splitEndTime.length > 1
+                    && splitEndTime[1].trim().length() > 0;
 
-            if (splitEndTime.length > 1
-                    && splitEndTime[1].trim().length() > 0) {
+            if (hasInputAfterDash) {
                 LocalTime endTime = LocalTime.parse(splitEndTime[1]);
                 return new Event(nameAndTime[0],
                         eventTime, endTime, false);

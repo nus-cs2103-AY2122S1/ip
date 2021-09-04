@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import duke.exception.DukeException;
 import duke.task.Task;
 
-import javafx.stage.Stage;
-
 /**
  * Handles the logic of Duke e.g. adding, saving and deleting tasks.
  */
@@ -58,7 +56,7 @@ public class Duke {
                     ui.printMessage(this.handleFunctionCommands(type, userInput));
 
                 } else if (isTaskCommand) {
-                    // Adds a Task to the task list.
+                    // Add a Task to the task list.
                     ui.printMessage(this.handleTaskCommand(type, userInput));
 
                 } else {
@@ -73,30 +71,26 @@ public class Duke {
 
     private String handleFunctionCommands(Parser.CommandType type, String userInput) throws DukeException {
         if (type == Parser.CommandType.EXIT) {
-            //Closes the program.
+            // Close the program.
             this.storage.save(this.taskList);
             this.isOpen = false;
             this.ui.exit();
             return Ui.CLOSING_MESSAGE;
 
         } else if (type == Parser.CommandType.LIST) {
-            // List all tasks in the task list.
             return this.taskList.listTasks();
 
         } else if (type == Parser.CommandType.DONE) {
-            // Mark a certain task as done.
             int taskNumber = Parser.parseDoneCommand(userInput);
             this.storage.save(this.taskList);
             return this.taskList.markTaskAsDone(taskNumber);
 
         } else if (type == Parser.CommandType.DELETE) {
-            // Deletes a task from the task list.
             int taskNumber = Parser.parseDeleteCommand(userInput);
             this.storage.save(this.taskList);
             return this.taskList.deleteTask(taskNumber);
 
         } else if (type == Parser.CommandType.FIND) {
-            // Finds the tasks in the task list that contain the String.
             String toSearch = Parser.parseFindCommand(userInput);
             return this.taskList.findTasksWithSubstring(toSearch);
 
@@ -108,8 +102,10 @@ public class Duke {
 
     private String handleTaskCommand(Parser.CommandType type, String userInput) throws DukeException {
         String[] splitBySpace = userInput.split(" ", 2);
+        boolean hasInputAfterSpace = splitBySpace.length > 1
+                && splitBySpace[1].trim().length() > 0;
 
-        if (splitBySpace.length > 1 && splitBySpace[1].trim().length() > 0) {
+        if (hasInputAfterSpace) {
             String substring = splitBySpace[1].trim();
             Task newTask;
             if (type == Parser.CommandType.TODO) {
@@ -152,7 +148,7 @@ public class Duke {
                 return this.handleFunctionCommands(type, userInput);
 
             } else if (isTaskCommand) {
-                // Adds a Task to the task list.
+                // Add a Task to the task list.
                 return this.handleTaskCommand(type, userInput);
 
             } else {
@@ -165,8 +161,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates and returns response from Duke.
+     *
+     * @param input The input from the user.
+     * @return Duke's response to the input.
      */
     public String getResponse(String input) {
         return runFromGui(input);
