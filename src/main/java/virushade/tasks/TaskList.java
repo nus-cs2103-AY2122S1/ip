@@ -46,9 +46,10 @@ public class TaskList {
      * Adds a Task to taskList.
      * @param addedTaskDescription Name of the added Task.
      * @param taskType The type of task to be added.
+     * @return A string to represent the addition.
      * @throws VirushadeException Thrown when there is trouble adding the task.
      */
-    public static void add(String addedTaskDescription, String taskType) throws VirushadeException {
+    public static String add(String addedTaskDescription, String taskType) throws VirushadeException {
         if (listCount < 100) {
             Task addedTask;
             String[] strings = StringManipulator.slashPartition(addedTaskDescription);
@@ -67,9 +68,8 @@ public class TaskList {
                 if (strings[1].startsWith("by ")) {
                     addedTask = new Deadline(strings[0], strings[1].substring(3), false);
                 } else {
-                    System.out.println("Please include a deadline after your task name. " +
+                    throw new VirushadeException("Please include a deadline after your task name. " +
                             "(e.g. /by Sunday)");
-                    return;
                 }
                 break;
 
@@ -77,9 +77,8 @@ public class TaskList {
                 if (strings[1].startsWith("at ")) {
                     addedTask = new Event(strings[0], strings[1].substring(3), false);
                 } else {
-                    System.out.println("Please include a time after your task name. " +
+                    throw new VirushadeException("Please include a time after your task name. " +
                             "(e.g. /at 12 noon)");
-                    return;
                 }
                 break;
 
@@ -90,9 +89,9 @@ public class TaskList {
 
             TASKS.add(addedTask);
             listCount++;
-            System.out.println("Added: " + addedTask.getTaskDescription());
-            System.out.printf("Now you have %d tasks in the list.\n", listCount);
             updateFile(generateList());
+            return ("Added: " + addedTask.getTaskDescription() +
+                    "\nNow you have " + listCount + " tasks in the list.\n");
         } else {
             throw new VirushadeException("Sorry, Virushade cannot keep track of more than 100 tasks!!!");
         }
@@ -101,9 +100,10 @@ public class TaskList {
     /**
      * Deletes the specified task.
      * @param str Input string, determines which task to delete.
+     * @return The string message of deletion.
      * @throws VirushadeException Thrown when there is trouble deleting the task.
      */
-    public static void delete(String str) throws VirushadeException {
+    public static String delete(String str) throws VirushadeException {
         try {
             // If what comes after "delete " is not an integer, this will throw a NumberFormatException.
             int index = Integer.parseInt(str);
@@ -115,8 +115,9 @@ public class TaskList {
                 TASKS.remove(index - 1);
                 deletedTask.deleteMessage();
                 listCount--;
-                System.out.printf("You have %d tasks in the list.\n", listCount);
                 updateFile(generateList());
+
+                return "You have " + listCount + " tasks in the list.\n";
             } else {
                 throw new VirushadeException("Please check that you have entered the correct number!");
             }
@@ -130,9 +131,10 @@ public class TaskList {
     /**
      * Marks a task as complete.
      * @param str Input string, determines which task to mark as complete.
+     * @return The string to notify of successful completion.
      * @throws VirushadeException Thrown when there is something wrong with the user input.
      */
-    public static void completeTask(String str) throws VirushadeException {
+    public static String completeTask(String str) throws VirushadeException {
 
         try {
             // If what comes after "done " is not an integer, this will throw a NumberFormatException.
@@ -142,8 +144,10 @@ public class TaskList {
                 throw new VirushadeException("Please enter an integer greater than 0.");
             } else if (index <= listCount) {
                 Task doneTask = TASKS.get(index - 1);
-                doneTask.completeTask();
+                String returnString = doneTask.completeTask();
                 updateFile(generateList());
+
+                return returnString;
             } else {
                 throw new VirushadeException("Please check that you have entered the correct number!");
             }
@@ -154,16 +158,9 @@ public class TaskList {
     }
 
     /**
-     * Display the stored values in taskList for the user.
-     */
-    public static void list() {
-        System.out.println(generateList());
-    }
-
-    /**
      * @return String representation of the tasks within TASK_ARRAY_LIST.
      */
-    private static String generateList() {
+    public static String generateList() {
         if (listCount == 0) {
             return "Nothing in the list as of now.";
         }
@@ -184,11 +181,17 @@ public class TaskList {
      * Prints out all the tasks that have input text as a substring.
      * @param text The input search text.
      */
-    public static void find(String text) {
+    private static void find(String text) {
         System.out.println(findFromList(text));
     }
 
-    private static String findFromList(String text) {
+    /**
+     * Returns a string representation of all the tasks that have input text as a substring.
+     *
+     * @param text The input search text
+     * @return All results matching the input.
+     */
+    public static String findFromList(String text) {
         StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:");
         int counter = 1;
         for(int i = 0; i < listCount; i++) {

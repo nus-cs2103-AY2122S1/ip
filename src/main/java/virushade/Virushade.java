@@ -20,7 +20,7 @@ import virushade.tasks.TaskList;
 public class Virushade extends Application {
     private Storage storageFile;
     private TaskList taskList;
-    private Ui ui;
+    private ResponseProcessor responseProcessor;
 
     private ScrollPane scrollPane;
     private TextField userInput;
@@ -29,7 +29,7 @@ public class Virushade extends Application {
     private Scene scene;
     private AnchorPane mainLayout;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image virushade = new Image(this.getClass().getResourceAsStream("/images/Virushade.png"));
 
     /**
      * The constructor for Virushade.
@@ -40,7 +40,7 @@ public class Virushade extends Application {
         try {
             TaskList taskList = new TaskList(storageFile);
         } catch (VirushadeException e) {
-            Ui.handleVirushadeException(e);
+            ResponseProcessor.handleVirushadeException(e);
         }
     }
 
@@ -68,7 +68,7 @@ public class Virushade extends Application {
         stage.setScene(scene);
         stage.show();
 
-        stage.setTitle("Duke");
+        stage.setTitle("Virushade");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -96,6 +96,8 @@ public class Virushade extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
+        sayHello();
+
         sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
             userInput.clear();
@@ -119,7 +121,15 @@ public class Virushade extends Application {
     }
 
     /**
-     * Iteration 1:
+     *
+     */
+    private void sayHello() {
+        Label virushadeText = new Label(ResponseProcessor.greet());
+        dialogContainer.getChildren().addAll(DialogBox.getVirushadeDialog(virushadeText, new ImageView(virushade)));
+        userInput.clear();
+    }
+
+    /**
      * Creates a label with the specified text and adds it to the dialog container.
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
@@ -132,16 +142,15 @@ public class Virushade extends Application {
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing Virushade's reply and then
+     * appends them to the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+        Label virushadeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getVirushadeDialog(virushadeText, new ImageView(virushade))
         );
         userInput.clear();
     }
@@ -151,6 +160,6 @@ public class Virushade extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return input;
+        return ResponseProcessor.handleMessage(input);
     }
 }

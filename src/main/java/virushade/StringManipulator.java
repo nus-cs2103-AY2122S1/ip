@@ -10,6 +10,7 @@ import java.time.format.DateTimeParseException;
 public class StringManipulator {
     /**
      * Partitions the string into 2, seperated by the first '/'.
+     *
      * @param str The input string
      * @return The pair of strings.
      */
@@ -31,7 +32,30 @@ public class StringManipulator {
     }
 
     /**
+     * Returns the first word and everything after the first ' ' of the String.
+     *
+     * @param input The input word.
+     * @return The pair of strings
+     */
+    public static String[] wordSeparator(String input) {
+        int index = input.indexOf(' ');
+
+        String[] pair = new String[2];
+
+        if (index > 1) {
+            pair[0] = input.substring(0, index).trim();
+            pair[1] = input.substring(index + 1).trim();
+        } else {
+            pair[0] = input;
+            pair[1] = "";
+        }
+
+        return pair;
+    }
+
+    /**
      * A function that returns everything after the first instance of '.'.
+     *
      * @param str The input string.
      * @return The substring of str after the first '.'.
      */
@@ -47,6 +71,7 @@ public class StringManipulator {
 
     /**
      * Converts the input string from 24-hour time to 12-hour time representation.
+     *
      * @param timeString The input string
      * @return The converted string.
      */
@@ -98,6 +123,7 @@ public class StringManipulator {
 
     /**
      * Converts the inputString into DD MMM YYYY format, or 12-hour time representation if applicable.
+     *
      * @param inputString The input string.
      * @return A string in DD MMM YYYY TIME format if inputString is in "YYYY-MM-DD TIME" format.
      */
