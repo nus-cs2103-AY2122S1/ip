@@ -11,6 +11,7 @@ import duke.command.Command;
 import duke.command.AddCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.SortCommand;
 import duke.command.DeleteCommand;
 import duke.command.DisplayCommand;
 import duke.command.MarkDoneCommand;
@@ -131,6 +132,9 @@ public class Parser {
 
         } else if (line.split(" ")[0].equals("find")) {
             return new FindCommand(line.substring(5));
+
+        } else if (line.equals("sort")) {
+            return new SortCommand();
 
         } else {
             return Parser.parseTask(line);
