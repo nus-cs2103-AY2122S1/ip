@@ -50,11 +50,15 @@ public class Ui {
         StringBuilder result = new StringBuilder();
         int index = 0;
         while (index < instructions.length) {
-            result.append(padRightSpaces(String.format(" * %d) Type \"%s\"", (index + 2) / 2, instructions[index]),
+            int instructionNumber = (index + 2) / 2;
+            int descriptionIndex = index + 1;
+
+            result.append(padRightSpaces(String.format(" * %d) Type \"%s\"", instructionNumber, instructions[index]),
                             PADDING_LENGTH))
                     .append(" - ")
-                    .append(instructions[index + 1])
+                    .append(instructions[descriptionIndex])
                     .append("\n");
+
             index += 2;
         }
         formattedInstructions = result.toString();
