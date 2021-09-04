@@ -106,6 +106,7 @@ public class Storage {
      * @throws DukeIoException If program is unable to write to file.
      */
     public void save(String data) throws DukeIoException {
+        assert file.exists() : "The data.txt file doesn't exist.";
         try {
             FileWriter fileWriter = new FileWriter(FILEPATH);
             fileWriter.write(data);
