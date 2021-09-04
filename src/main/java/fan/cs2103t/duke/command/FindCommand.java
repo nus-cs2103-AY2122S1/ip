@@ -45,19 +45,19 @@ public class FindCommand extends Command {
         StringBuilder result = new StringBuilder();
         ArrayList<Integer> count = new ArrayList<>();
         count.add(0);
-        AtomicBoolean hasFound = new AtomicBoolean(false);
+        AtomicBoolean isFound = new AtomicBoolean(false);
         taskList.getTasks().stream()
                 .forEachOrdered(t -> {
                     count.set(0, count.get(0) + 1);
                     if (t.getDescription().contains(searchQuery)) {
-                        hasFound.set(true);
+                        isFound.set(true);
                         result.append(count.get(0))
                                 .append(".")
                                 .append(t.getDescriptionWithStatus())
                                 .append("\n");
                     }
                 }); // simply replace the original for loop with stream; for the purpose of using stream only
-        if (hasFound.get()) {
+        if (isFound.get()) {
             result.setLength(result.length() - 1);
             output = String.format(MESSAGE_SUCCESSFULLY_FOUND_FORMAT, result);
         } else {
