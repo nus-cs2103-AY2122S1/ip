@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke("data/duke.txt");
+    private Duke duke = new Duke("duke.txt");
 
     public static void main(String[] args) {
         Application.launch(args);

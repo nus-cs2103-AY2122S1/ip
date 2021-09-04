@@ -1,8 +1,5 @@
 package duke.command;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import duke.data.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.ui.Ui;
@@ -12,17 +9,16 @@ import duke.task.TaskList;
  * Represents a command by the user.
  */
 public abstract class Command {
-    private CommandTypes commandType;
-    public enum CommandTypes {
+    private CommandType commandType;
+    public enum CommandType {
         LIST,
         TODO,
         DEADLINE,
         EVENT,
         DONE,
         DELETE,
-        UNDO,
         FIND,
-        BYE
+        EXIT
     }
 
     public Command() {}

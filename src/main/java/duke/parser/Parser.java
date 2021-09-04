@@ -1,7 +1,5 @@
 package duke.parser;
 
-import java.util.List;
-
 import duke.command.AddTaskCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -11,23 +9,29 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.data.DateAndTime;
 import duke.data.exceptions.DukeException;
-import duke.data.exceptions.EmptyTaskDescriptionException;
+import duke.data.exceptions.EmptyCommandInformationException;
+import duke.data.exceptions.EmptyTaskNameException;
 import duke.data.exceptions.InvalidDateAndTimeException;
 import duke.data.exceptions.InvalidInputException;
+import duke.ui.Message;
+import duke.ui.Tag;
 
 /**
  * Represents a parser that makes sense of what the user input is.
  */
 public class Parser {
-    private static final String TODO = "todo";
-    private static final String DEADLINE = "deadline";
-    private static final String EVENT = "event";
-    private static final String EXIT = "bye";
-    private static final String LIST = "list";
-    private static final String DONE = "done";
-    private static final String DELETE = "delete";
-    private static final String FIND = "find";
+    public static final String TODO = "todo";
+    public static final String DEADLINE = "deadline";
+    public static final String EVENT = "event";
+    public static final String EXIT = "exit";
+    public static final String LIST = "list";
+    public static final String DONE = "done";
+    public static final String DELETE = "delete";
+    public static final String FIND = "find";
 
+    /**
+     * Initialises a Parser object.
+     */
     public Parser() {}
 
     /**
@@ -38,179 +42,192 @@ public class Parser {
      * @throws DukeException
      */
     public Command parse(String command) throws DukeException {
-        String commandType = checkCommandType(command);
+        Command.CommandType commandType = getCommandType(command);
 
-        //hardcode cases change?
         switch (commandType) {
         case TODO:
             String todoName = getTaskName(command, commandType);
-            return new AddTaskCommand(TODO, todoName);
+            return new AddTaskCommand(Command.CommandType.TODO, todoName);
         case DEADLINE:
             String deadlineName = getTaskName(command, commandType);
-            String deadline = getDateAndTime(command, DEADLINE);
-            return new AddTaskCommand(DEADLINE, deadlineName, deadline);
+            String deadline = getDateAndTime(command, Command.CommandType.DEADLINE);
+            return new AddTaskCommand(Command.CommandType.DEADLINE, deadlineName, deadline);
         case EVENT:
             String eventName = getTaskName(command, commandType);
-            String eventTime = getDateAndTime(command, EVENT);
-            return new AddTaskCommand(EVENT, eventName, eventTime);
+            String eventTime = getDateAndTime(command, Command.CommandType.EVENT);
+            return new AddTaskCommand(Command.CommandType.EVENT, eventName, eventTime);
         case EXIT:
-            if (!command.equals(EXIT)) {
-                throw new InvalidInputException("invalid input");
-            }
-            Command exitCommand = new ExitCommand();
-            exitCommand.setExit();
-            return exitCommand;
+            return new ExitCommand();
         case LIST:
-            if (!command.equals(LIST)) {
-                throw new InvalidInputException("invalid input");
-            }
             return new ListCommand();
         case DONE:
-            if (command.equals(DONE)) {
-                throw new InvalidInputException("invalid task number entered");
-            } else {
-                if (!Character.isWhitespace(command.charAt(DONE.length()))) {
-                    throw new InvalidInputException("invalid input");
-                } else {
-                    int taskNumber = getTaskNumber(command);
-                    return new DoneCommand(taskNumber);
-                }
-            }
+            int markedTaskNumber = getTaskNumber(command);
+            return new DoneCommand(markedTaskNumber);
         case DELETE:
-            if (command.equals(DELETE)) {
-                throw new InvalidInputException("invalid task number entered");
-            } else {
-                if (!Character.isWhitespace(command.charAt(DELETE.length()))) {
-                    throw new InvalidInputException("invalid input");
-                } else {
-                    int taskNumber = getTaskNumber(command);
-                    return new DeleteCommand(taskNumber);
-                }
-            }
+            int deletedTaskNumber = getTaskNumber(command);
+            return new DeleteCommand(deletedTaskNumber);
         case FIND:
-            if (command.equals(FIND)) {
-                throw new InvalidInputException("invalid find");
-            } else {
-                if (!Character.isWhitespace(command.charAt(FIND.length()))) {
-                    throw new InvalidInputException("invalid input");
-                } else {
-                    return new FindCommand(command);
-                }
-            }
+            String searchTerm = getSearchTerm(command);
+            return new FindCommand(searchTerm);
         default:
-            throw new InvalidInputException("invalid input");
+            throw new InvalidInputException(Message.MESSAGE_INVALID_COMMAND);
         }
 
     }
 
-    private String getTaskName(String command, String commandType) throws InvalidInputException, EmptyTaskDescriptionException {
-        if (commandType.equals(TODO)) {
-            if (command.equals(TODO)) {
-                throw new EmptyTaskDescriptionException("Empty duke.task.Todo Description", TODO);
-            } else {
-                if (!Character.isWhitespace(command.charAt(TODO.length()))) {
-                    throw new InvalidInputException("invalid input");
-                } else {
-                    String taskName = command.substring(TODO.length() + 1);
-                    return taskName;
-                }
+    private String getTaskName(String command, Command.CommandType commandType) throws InvalidInputException,
+            EmptyTaskNameException, InvalidDateAndTimeException {
+        String[] splitCommandArray = command.split(Tag.NAME, 2);
+
+        switch (commandType) {
+        case TODO:
+            if (splitCommandArray.length == 1) {
+                throw new EmptyTaskNameException(Message.MESSAGE_EMPTY_TODO_NAME);
             }
-        } else {
-            if (command.equals(DEADLINE)) {
-                throw new EmptyTaskDescriptionException("Empty duke.task.Deadline Description", DEADLINE);
-            } else {
-                int startingIndex = command.indexOf(" ");
-                int endingIndex = command.indexOf("/");
-
-                if (!Character.isWhitespace(command.charAt(commandType.length())) || endingIndex < 0 ) {
-                    throw new InvalidInputException("invalid input");
-                }
-
-                //todo deadline return book being invalid input rather than invalid date.
-
-                String taskName = command.substring(startingIndex + 1, endingIndex - 1);
-
-                if (taskName.isEmpty()) {
-                    throw new EmptyTaskDescriptionException("empty task name", commandType);
-                }
-                return taskName;
+            return splitCommandArray[1].trim();
+        case DEADLINE:
+            if (splitCommandArray.length == 1) {
+                throw new EmptyTaskNameException(Message.MESSAGE_EMPTY_DEADLINE_NAME);
             }
+
+            String[] nameAndDateArray = splitCommandArray[1].split(Tag.BY, 2);
+            if (nameAndDateArray.length == 1){
+                throw new InvalidDateAndTimeException(Message.MESSAGE_MISSING_DEADLINE);
+            }
+            return nameAndDateArray[0].trim();
+        case EVENT:
+            if (splitCommandArray.length == 1) {
+                throw new EmptyTaskNameException(Message.MESSAGE_EMPTY_EVENT_NAME);
+            }
+
+            String[] nameAndEventTimeArray = splitCommandArray[1].split(Tag.AT, 2);
+            if (nameAndEventTimeArray.length == 1){
+                throw new InvalidDateAndTimeException(Message.MESSAGE_MISSING_EVENT_TIME);
+            }
+            return nameAndEventTimeArray[0].trim();
+        default:
+            throw new InvalidInputException(Message.MESSAGE_INVALID_COMMAND);
         }
     }
 
-    private String getDateAndTime(String message, String taskType) throws InvalidDateAndTimeException, InvalidInputException {
-        int startingIndex;
+    private String getDateAndTime(String message, Command.CommandType taskType) throws InvalidDateAndTimeException {
+        String[] splitCommandArray;
 
         switch (taskType) {
         case DEADLINE:
-            startingIndex = message.indexOf("/by ");
+            splitCommandArray = message.split(Tag.BY, 2);
 
-            if (startingIndex < 0 || startingIndex + 3 == message.length() - 1) {
-                throw new InvalidDateAndTimeException("missing deadline");
+            //Checks whether "by/" is present in the command input
+            if (splitCommandArray.length == 1) {
+                throw new InvalidDateAndTimeException(Message.MESSAGE_MISSING_DEADLINE);
             }
 
-            DateAndTime dateAndTime1 = new DateAndTime(message);
-            return dateAndTime1.getReformattedDateAndTime();
+            DateAndTime deadline = new DateAndTime(splitCommandArray[1].trim());
+            return deadline.getReformattedDateAndTime();
         case EVENT:
-            startingIndex = message.indexOf("/at ");
+            splitCommandArray = message.split(Tag.AT, 2);
 
-            if (startingIndex < 0 || startingIndex + 3 == message.length() - 1) {
-                throw new InvalidDateAndTimeException("missing event time");
+            //Checks whether "at/" is present in the command input
+            if (splitCommandArray.length == 1) {
+                throw new InvalidDateAndTimeException(Message.MESSAGE_MISSING_EVENT_TIME);
             }
 
-            DateAndTime dateAndTime2 = new DateAndTime(message);
-            return dateAndTime2.getReformattedDateAndTime();
+            DateAndTime eventTime = new DateAndTime(splitCommandArray[1].trim());
+            return eventTime.getReformattedDateAndTime();
         default:
-            throw new InvalidDateAndTimeException("invalid date and time");
+            throw new InvalidDateAndTimeException(Message.MESSAGE_INVALID_DATE_AND_TIME);
         }
     }
 
     private static int getTaskNumber (String message) throws InvalidInputException {
-        String numberString = "";
+        String taskNumberString = "";
         for (int i = 0; i < message.length(); i++) {
             char currentChar = message.charAt(i);
-            if (!numberString.isEmpty() && Character.isWhitespace(currentChar)) {
+            if (!taskNumberString.isEmpty() && Character.isWhitespace(currentChar)) {
                 break; //task number string complete
-            } else if (Character.isDigit(currentChar)) {
-                numberString += message.charAt(i);
-            } else {}
+            }
+
+            if (Character.isDigit(currentChar)) {
+                taskNumberString += message.charAt(i);
+            }
         }
 
-        int number;
-        if (numberString.isEmpty()) {
-            throw new InvalidInputException("invalid task number entered");
+        if (taskNumberString.isEmpty()) {
+            throw new InvalidInputException(Message.MESSAGE_INVALID_TASK_NUMBER);
         } else {
-            number = Integer.parseInt(numberString);
+            return Integer.parseInt(taskNumberString);
         }
-        return number;
     }
 
-    private String checkCommandType(String command) throws InvalidInputException {
-        List<String> commandTypes = Command.getCommandTypes();
-        String commandType = "";
-        boolean isCommandTypeComplete = false;
+    private String getSearchTerm(String message) {
+        int spaceIndex = message.indexOf(" ");
+        return message.substring(spaceIndex + 1);
+    }
 
-        for (int i = 0; i < command.length(); i++) {
-            if (isCommandTypeComplete) {
-                break;
-            } else if (Character.isWhitespace(command.charAt(i))) {
-                throw new InvalidInputException("invalid input");
-            } else {
-                commandType = commandType + Character.toString(command.charAt(i));
-                isCommandTypeComplete = matchCommandType(commandType, commandTypes);
-            }
+    private Command.CommandType getCommandType(String command) throws InvalidInputException, EmptyCommandInformationException {
+        String commandTypeString = getCommandTypeString(command);
+
+        switch (commandTypeString) {
+        case TODO:
+            return Command.CommandType.TODO;
+        case EVENT:
+            return Command.CommandType.EVENT;
+        case DEADLINE:
+            return Command.CommandType.DEADLINE;
+        case DELETE:
+            return Command.CommandType.DELETE;
+        case LIST:
+            return Command.CommandType.LIST;
+        case EXIT:
+            return Command.CommandType.EXIT;
+        case FIND:
+            return Command.CommandType.FIND;
+        case DONE:
+            return Command.CommandType.DONE;
+        default:
+            throw new InvalidInputException(Message.MESSAGE_INVALID_COMMAND);
         }
-
-        return commandType;
 
     }
 
-    private boolean matchCommandType(String commandType, List<String> commandTypes) {
-        for (int i = 0; i < commandTypes.size(); i++) {
-            if (commandType.equals(commandTypes.get(i))) {
-                return true;
-            }
+    private String getCommandTypeString(String command) throws InvalidInputException, EmptyCommandInformationException {
+        int spaceIndex = command.indexOf(" ");
+        boolean isCommandList = command.equals(LIST);
+        boolean isCommandExit = command.equals(EXIT);
+
+        //Checks whether command type is LIST or EXIT
+        if (isCommandList) {
+            return LIST;
         }
-        return false;
+
+        if (isCommandExit) {
+            return EXIT;
+        }
+
+        //Checks for invalid input
+        if (spaceIndex < 0) {
+            checkOnlyCommandTypeStringKeyed(command);
+        }
+        return command.substring(0, spaceIndex);
     }
+
+    private void checkOnlyCommandTypeStringKeyed(String command) throws EmptyCommandInformationException,
+            InvalidInputException {
+        switch (command) {
+        case TODO:
+            throw new EmptyCommandInformationException(Message.MESSAGE_EMPTY_TODO);
+        case DEADLINE:
+            throw new EmptyCommandInformationException(Message.MESSAGE_EMPTY_DEADLINE);
+        case EVENT:
+            throw new EmptyCommandInformationException(Message.MESSAGE_EMPTY_EVENT);
+        case DONE:
+        case DELETE:
+            throw new EmptyCommandInformationException(Message.MESSAGE_INVALID_TASK_NUMBER);
+        case FIND:
+            throw new EmptyCommandInformationException(Message.MESSAGE_INVALID_FIND);
+        default:
+            throw new InvalidInputException(Message.MESSAGE_INVALID_COMMAND);
+        }
+    }
+
 }

@@ -14,11 +14,6 @@ import duke.task.Todo;
  * Stores the tasks and data provided by the user, so that when the program re-opens data can be restored.
  */
 public class Storage {
-    //TODO create file method
-    //TODO error when tasklist is null for empty constructor
-    private static final String STORAGE_PATH = "data/duke.txt";
-    private static final File DATA_FILE = new File(STORAGE_PATH);
-
     private String storagePath;
     private File dataFile;
 
@@ -108,7 +103,7 @@ public class Storage {
         if (endingIndex < 0) { //case of todo
             return taskString.substring(startingIndex + 2);
         } else {
-            return taskString.substring(startingIndex + 2, endingIndex - 2);
+            return taskString.substring(startingIndex + 2, endingIndex - 1);
         }
     }
 
@@ -116,7 +111,7 @@ public class Storage {
         int startingIndex = taskString.indexOf(":");
         int endingIndex = taskString.indexOf(")");
 
-        return taskString.substring(startingIndex + 2, endingIndex - 1);
+        return taskString.substring(startingIndex + 2, endingIndex);
     }
 
     private String getTaskTypeFromString(String taskString) {
@@ -140,7 +135,7 @@ public class Storage {
      */
     public void saveData() {
         try {
-            FileWriter fileWriter = new FileWriter(DATA_FILE);
+            FileWriter fileWriter = new FileWriter(dataFile);
             listToTxt(fileWriter);
         } catch (IOException e) {
             //TODO when file dont exists

@@ -32,7 +32,7 @@ public class Duke {
         this.storageFile = storageFile;
         this.dataFile = new File(STORAGE_DIRECTORY + storageFile);
         ui = new Ui();
-        storage = new Storage(this.storageFile);
+        storage = new Storage(STORAGE_DIRECTORY + storageFile);
         try {
             boolean isFileCreated = dataFile.createNewFile();
             if (!isFileCreated) {

@@ -1,27 +1,43 @@
 package duke.command;
 
-import duke.data.exceptions.DukeException;
 import duke.data.exceptions.InvalidInputException;
 import duke.storage.Storage;
-import duke.ui.Message;
-import duke.ui.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
+import duke.ui.Message;
+import duke.ui.Ui;
 
+/**
+ * AddTaskCommand object allows a Task to be added to TaskList.
+ */
 public class AddTaskCommand extends Command {
-    private CommandTypes taskType;
+    /** Attributes for a AddTaskCommand object */
+    private CommandType taskType;
     private String taskName;
     private String dateAndTime;
 
-    public AddTaskCommand(CommandTypes taskType, String taskName) {
+    /**
+     * Initialises a AddTaskCommand object.
+     *
+     * @param taskType the type of task to be added
+     * @param taskName the task name of the added task
+     */
+    public AddTaskCommand(CommandType taskType, String taskName) {
         this.taskType = taskType;
         this.taskName = taskName;
     }
 
-    public AddTaskCommand(CommandTypes taskType, String taskName, String dateAndTime) {
+    /**
+     * Initialises a AddTaskCommand object with a dateAndTime attribute.
+     *
+     * @param taskType the type of task to be added
+     * @param taskName the task name of the added task
+     * @param dateAndTime the string representing the date and time for the added task
+     */
+    public AddTaskCommand(CommandType taskType, String taskName, String dateAndTime) {
         this.taskType = taskType;
         this.taskName = taskName;
         this.dateAndTime = dateAndTime;
