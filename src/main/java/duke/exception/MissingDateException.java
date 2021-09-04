@@ -1,13 +1,13 @@
 package duke.exception;
 
 /**
- * Represents an exception caused by user not providing a date.
+ * Represents an exception caused by user not providing the expected number of dates.
  */
 public class MissingDateException extends DukeException {
     /**
      * Constructor for MissingDateException.
      */
     public MissingDateException() {
-        super("No date is provided.");
+        super("Insufficient date input provided.");
     }
 }

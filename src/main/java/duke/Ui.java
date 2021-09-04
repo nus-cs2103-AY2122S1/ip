@@ -9,7 +9,8 @@ public class Ui {
     /** Enums for Duke chatbot descriptors */
     public enum Descriptors {
         AT("at"),
-        BY("by");
+        BY("by"),
+        WITHIN("within");
 
         private final String descriptor;
 
@@ -41,7 +42,8 @@ public class Ui {
         LIST("list"),
         DATE("date"),
         FIND("find"),
-        BYE("bye");
+        BYE("bye"),
+        PERIOD("period");
 
         private final String command;
 
@@ -133,14 +135,20 @@ public class Ui {
      * @param counter Total count of tasks found to fall on date being searched for.
      * @param deadlines Total count of Deadlines found to fall on date being searched for.
      * @param events Total count of Events found to fall on date being searched for.
+     * @param periods Total count of Periods with time periods within which the date being searched for falls within.
      * @param foundTasks String accumulation of matching tasks.
      * @return Standard response for success in finding tasks by date.
      */
-    public String getDateListSuccessMessage(String formattedDateString, int counter, int deadlines, int events,
-                                            String foundTasks) {
-        String start = "Here are the Deadlines or Events that fall on " + formattedDateString + ":\n";
-        String end = "A total of " + counter + " events (" + deadlines + " deadlines and "
-                + events + " events) fall on " + formattedDateString;
+    public String getDateListSuccessMessage(String formattedDateString,
+            int counter, int deadlines, int events, int periods,
+            String foundTasks) {
+        String start = "Here are the Deadlines, Events or Periods that fall on " + formattedDateString + ":\n";
+        String end = "A total of "
+                + counter + " tasks ("
+                + deadlines + " deadlines, "
+                + events + " events and "
+                + periods + " periods) fall on "
+                + formattedDateString;
         return start + foundTasks + end;
     }
 
