@@ -72,9 +72,8 @@ public class Ui extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
 
-            if (mainWindow != null) {
-                System.out.println("WARNING: more than one main window found!");
-            }
+            //There should only be a single instance of mainWindow
+            assert(mainWindow == null);
 
             mainWindow = fxmlLoader.getController();
             mainWindow.setInputHandler(inputHandler);
