@@ -62,15 +62,22 @@ public class Storage {
         return true;
     }
 
-    private Task convertStringToTask(String string) {
+    private Task convertStringToTask(String string) throws DukeException {
         String[] arr = string.split(",");
-        Task task = null;
-        if (arr[0].trim().contains("T")) {
+        String type = arr[0].trim();
+        Task task;
+        switch (type) {
+        case "T":
             task = new ToDo(arr[2].trim(), arr[1].trim().equals("1"));
-        } else if (arr[0].trim().contains("E")) {
+            break;
+        case "E":
             task = new Event(arr[2].trim(), arr[1].trim().equals("1"), LocalDate.parse(arr[3].trim()));
-        } else if (arr[0].trim().contains("D")) {
+            break;
+        case "D":
             task = new Deadline(arr[2].trim(), arr[1].trim().equals("1"), LocalDate.parse(arr[3].trim()));
+            break;
+        default:
+            throw new DukeException("Save file is corrupted");
         }
         return task;
     }
