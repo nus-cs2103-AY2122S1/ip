@@ -113,6 +113,11 @@ public class TaskList {
         return this.taskList;
     }
 
+    /**
+     * Deletes multiple tasks in TaskList at specified indices.
+     *
+     * @param taskIndices Indices to delete.
+     */
     public void deleteMultipleTasks(ArrayList<Integer> taskIndices) {
         Collections.sort(taskIndices);
         for (int i = taskIndices.size() - 1; i >= 0; i--) {
@@ -120,6 +125,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Completes multiple tasks in TaskList at specified indices
+     *
+     * @param taskIndices Indices to complete.
+     * @throws LifelineException if task is already completed.
+     */
     public void completeMultipleTasks(ArrayList<Integer> taskIndices) throws LifelineException {
         for (int i = taskIndices.size() - 1; i >= 0; i--) {
             this.completeTask(taskIndices.get(i));

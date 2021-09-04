@@ -95,12 +95,24 @@ public class Ui {
         return stringBuilder.toString();
     }
 
+    /**
+     * Informs user that tasks have been deleted and number of tasks left.
+     *
+     * @param taskList TaskList to inform user how many tasks are left.
+     * @return Information on deleted tasks and number of tasks left.
+     */
     public String showDeletedTaskMessage(TaskList taskList) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("I have deleted the tasks. You have " + taskList.getSize() + " tasks left");
         return stringBuilder.toString();
     }
 
+    /**
+     * Informs user that tasks have been completed and number of uncompleted tasks.
+     *
+     * @param taskList TaskList to inform user how many uncompleted tasks are left
+     * @return Information on completed tasks and number of uncompleted tasks left.
+     */
     public String showCompletedTaskMessage(TaskList taskList) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("I have completed the tasks. You have " + taskList.getNumberOfUncompletedTasks()
