@@ -1,13 +1,11 @@
 package meow;
 
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -37,6 +35,12 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * the dialog container. Clears the user input after processing.
+     *
+     * @param m The Meow object input.
+     */
     public void setMeow(Meow m) {
         meow = m;
     }

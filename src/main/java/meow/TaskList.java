@@ -15,7 +15,7 @@ public class TaskList {
      * A public constructor to initialize a meow.TaskList object which
      * stores the content from the local file.
      */
-    public TaskList(List tasksList) {
+    public TaskList(List<Task> tasksList) {
         this.tasksList = tasksList;
     }
 
@@ -66,7 +66,7 @@ public class TaskList {
                 int taskListLength = tasksList.size();
                 String task = taskListLength <= 1 ? " task " : " tasks ";
                 return "Noted. I've removed this task:\n"
-                        + removedTask.toString() +"\n"
+                        + removedTask.toString() + "\n"
                         + "Now you have " + taskListLength + task + "in the list.";
             } else {
                 throw new InvalidTaskIndex();

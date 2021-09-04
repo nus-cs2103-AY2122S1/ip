@@ -2,8 +2,6 @@ package meow;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Scanner;
-
 
 /**
  * Represents a chat bot Meow who will be performing different tasks
@@ -46,47 +44,40 @@ public class Meow {
         try {
             Command userCommand = this.parser.checkCommand(input);
             switch (userCommand) {
-            case BYE: {
+            case BYE:
                 System.exit(0);
-//                return this.ui.exit();
-            }
-            case LIST: {
+            case LIST:
                 return this.ui.displayList(this.tasks.getTasksList());
-            }
-            case DONE: {
+            case DONE:
                 String output = this.tasks.completeTask(this.parser.getTaskNumber(input));
                 this.storage.addArrayTaskToFile(this.tasks.getTasksList());
                 return output;
-            }
-            case FIND: {
+            case FIND:
                 List<Task> filteredTasks = this.tasks.searchTask(this.parser.getTaskNumber(input));
                 return this.ui.displaySearchList(filteredTasks);
-            }
-            case TODO: {
-                String task = this.parser.getTask(input, userCommand);
-                Todo newTodo = this.tasks.addTodo(task);
+            case TODO:
+                String todoTask = this.parser.getTask(input, userCommand);
+                Todo newTodo = this.tasks.addTodo(todoTask);
                 this.storage.addArrayTaskToFile(this.tasks.getTasksList());
                 return this.ui.printTaskList(this.tasks.getTasksList(), newTodo);
-            }
-            case EVENT: {
-                String task = this.parser.getTask(input, userCommand);
-                String[] taskAndDate = this.parser.getTaskAndDate(task, userCommand);
+            case EVENT:
+                String eventTask = this.parser.getTask(input, userCommand);
+                String[] eventTaskAndDate = this.parser.getTaskAndDate(eventTask, userCommand);
                 try {
-                    Event newEvent = this.tasks.addEvent(taskAndDate[0], taskAndDate[1]);
+                    Event newEvent = this.tasks.addEvent(eventTaskAndDate[0], eventTaskAndDate[1]);
                     this.storage.addArrayTaskToFile(this.tasks.getTasksList());
                     return this.ui.printTaskList(this.tasks.getTasksList(), newEvent);
                 } catch (ArrayIndexOutOfBoundsException exception) {
                     throw new EmptyEventTimeException();
                 }
-            }
-            case DEADLINE: {
-                String task = this.parser.getTask(input, userCommand);
-                String[] taskAndDate = this.parser.getTaskAndDate(task, userCommand);
+            case DEADLINE:
+                String deadlineTask = this.parser.getTask(input, userCommand);
+                String[] deadlineTaskAndDate = this.parser.getTaskAndDate(deadlineTask, userCommand);
                 try {
-                    String[] dateAndTime = taskAndDate[1].split(" ");
+                    String[] dateAndTime = deadlineTaskAndDate[1].split(" ");
                     if (this.parser.isLocalDateTime(dateAndTime[0], dateAndTime[1])) {
                         LocalDate date = this.parser.convertToLocalDate(dateAndTime[0]);
-                        Deadline newDeadline = this.tasks.addDeadline(taskAndDate[0], date, dateAndTime[1]);
+                        Deadline newDeadline = this.tasks.addDeadline(deadlineTaskAndDate[0], date, dateAndTime[1]);
                         this.storage.addArrayTaskToFile(this.tasks.getTasksList());
                         return this.ui.printTaskList(this.tasks.getTasksList(), newDeadline);
                     } else {
@@ -95,44 +86,16 @@ public class Meow {
                 } catch (ArrayIndexOutOfBoundsException exception) {
                     throw new EmptyDeadlineTimeException();
                 }
-
-            }
-            case DELETE: {
-                String output = this.tasks.deleteTask(this.parser.getTaskNumber(input));
+            case DELETE:
+                String deleteOutput = this.tasks.deleteTask(this.parser.getTaskNumber(input));
                 this.storage.addArrayTaskToFile(this.tasks.getTasksList());
-                return output;
-            }
-            default: {
+                return deleteOutput;
+            default:
                 throw new InvalidInputException();
-            }
             }
         } catch (IllegalArgumentException e) {
             throw new InvalidInputException();
         }
-    }
-
-    /**
-     * Runs the Meow chat bot.
-     */
-    public void run() {
-        // Greeting from chat bot.
-        this.ui.greet();
-        // Create a scanner to read from standard input.
-        Scanner scanner = new Scanner(System.in);
-        while (!this.isExit) {
-            try {
-                String input = scanner.nextLine();
-                processCommand(input);
-            } catch (MeowException exception) {
-                System.out.println(exception.toString());
-            }
-        }
-        // Clean up the scanner.
-        scanner.close();
-    }
-
-    public static void main(String[] args) {
-        new Meow().run();
     }
 
     /**
@@ -146,6 +109,4 @@ public class Meow {
             return e.toString();
         }
     }
-
-
 }

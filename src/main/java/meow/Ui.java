@@ -16,22 +16,19 @@ public class Ui {
 
     /**
      * Prints the greeting message from the chat bot cat Meow.
+     *
+     * @return A String representation of the goodbye message from the chat bot.
      */
     public String greet() {
         return "Meow: Hi human, I'm your cat Meow~ What can I do for you?";
     }
 
-    /**
-     * Prints the goodbye message from the chat bot cat Meow.
-     */
-    public String exit() {
-        return "Meow: Bye human, see you soon! Your cat Meow is going to sleep now~";
-    }
 
     /**
      * Displays all the tasks in the task list that the user has entered.
      *
      * @param tasksList The task list that stores the tasks input by the user.
+     * @return A list of tasks added by the user.
      * @throws NoItemInTheListException If the tasksList is empty.
      */
     public String displayList(List<Task> tasksList) throws NoItemInTheListException {
@@ -42,7 +39,6 @@ public class Ui {
                 Task task = tasksList.get(i);
                 list = list + (i + 1 + ". " + task.toString() + "\n");
             }
-
             return "Here are the tasks in your list:\n" + list;
         } else {
             throw new NoItemInTheListException();
@@ -53,6 +49,7 @@ public class Ui {
      * Displays all the tasks in the task list that the user has entered.
      *
      * @param filteredList The task list that stores the tasks input by the user.
+     * @return A list of tasks filtered by the keywords.
      * @throws NoSearchResultException If there is not matching result.
      */
     public String displaySearchList(List<Task> filteredList) throws NoSearchResultException {
@@ -75,6 +72,7 @@ public class Ui {
      *
      * @param tasksList The task list that stores the tasks input by the user.
      * @param taskAdded The new task that has been added to the list.
+     * @return The new task added by the user and all the tasks in the list.
      */
     public String printTaskList(List<Task> tasksList, Task taskAdded) {
         int taskListLength = tasksList.size();
@@ -85,7 +83,5 @@ public class Ui {
                 + taskListLength
                 + task
                 + "in the list.";
-
     }
-
 }

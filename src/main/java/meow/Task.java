@@ -22,6 +22,8 @@ public class Task {
 
     /**
      * Returns the description of the meow.Task object.
+     *
+     * @return The description of the meow.Task object.
      */
     public String getDescription() {
         return description; // mark done task with X
@@ -36,6 +38,8 @@ public class Task {
 
     /**
      * Returns the string representation of the meow.Task object.
+     *
+     * @return The string representation of the meow.Task object.
      */
     @Override
     public String toString() {
