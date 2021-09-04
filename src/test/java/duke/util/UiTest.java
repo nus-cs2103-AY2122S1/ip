@@ -79,9 +79,7 @@ class UiTest {
     @Test
     void testPrintHelp() {
         Ui ui = new Ui();
-        ui.printHelp();
-        assertEquals("--------------------------------------------------------------------------------\n"
-                + "Here is the list of my available commands!\n"
+        assertEquals("Here is the list of my available commands!\n"
                 + "1. todo [description] - Adds a ToDo task to task list\n"
                 + "2. deadline [description] /by [date] [time] - Adds a Deadline to task list.\n"
                 + "3. event [description] /at [date] [time]-[time] - Adds a Event to task list\n"
@@ -92,8 +90,7 @@ class UiTest {
                 + "6. done [index of completed task] - Marks specified tasks as completed\n"
                 + "7. delete [index of task to be deleted] - Deletes specified task\n"
                 + "8. find [keyword to search for] - Finds tasks by specific keyword\n"
-                + "9. bye - End the program\n"
-                + "--------------------------------------------------------------------------------",
-                outputStreamCaptor.toString().trim());
+                + "9. bye - End the program",
+                ui.getHelp());
     }
 }
