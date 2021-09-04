@@ -1,5 +1,6 @@
 package duke;
 
+import exceptions.DukeInvalidStorageTaskException;
 import tasks.Task;
 import tasks.TaskList;
 
@@ -104,9 +105,14 @@ public class Storage {
     private static void readTaskFromScanner(Scanner scanner, TaskList taskList) {
         int count = 0;
         while (scanner.hasNext()) {
-            Task task = Task.storageStringToTask(scanner.nextLine());
-            taskList.addSavedTaskFromStorage(task);
-            count++;
+            try {
+                Task task = Task.storageStringToTask(scanner.nextLine());
+                taskList.addSavedTask(task);
+                count++;
+            } catch (DukeInvalidStorageTaskException e) {
+                System.out.println("Unable to read a task from storage.");
+            }
+
         }
         if (count != 0) {
             System.out.println(count + " saved tasks were loaded from memory.\n");
