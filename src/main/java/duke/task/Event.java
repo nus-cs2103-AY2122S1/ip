@@ -9,6 +9,9 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
+    public static final String KEYWORD = "/at";
+    private static final String KEYWORD_WITH_SPACE = KEYWORD + " ";
+
     private String timeString;
     private LocalDate timeDate;
 
@@ -18,8 +21,8 @@ public class Event extends Task {
      * @param input the given String to parse
      */
     public Event(String input) {
-        super(input.substring(0, input.indexOf("/at ") - 1));
-        String time = input.substring(input.indexOf("/at ") + 4);
+        super(input.substring(0, input.indexOf(KEYWORD_WITH_SPACE) - 1));
+        String time = input.substring(input.indexOf(KEYWORD_WITH_SPACE) + KEYWORD_WITH_SPACE.length());
         try {
             this.timeDate = LocalDate.parse(time);
         } catch (DateTimeParseException e) {

@@ -1,10 +1,15 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * The Task class encapsulates a task with a name and an indicator of its completion.
  * As every Task is one of various types of Tasks, this class is abstract.
  */
 public abstract class Task {
+
+    public static final String DATE_FORMAT = "dd/MM/yyyy";
 
     private String name;
     private boolean isDone;
@@ -52,5 +57,9 @@ public abstract class Task {
 
     public boolean getDone() {
         return this.isDone;
+    }
+
+    protected String formatDate(LocalDate date) {
+        return date.format(DateTimeFormatter.ofPattern(DATE_FORMAT));
     }
 }

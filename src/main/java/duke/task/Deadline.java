@@ -1,13 +1,15 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
  * The Deadline class encapsulates a Task to be done by a given deadline.
  */
 public class Deadline extends Task {
+
+    public static final String KEYWORD = "/by";
+    private static final String KEYWORD_WITH_SPACE = KEYWORD + " ";
 
     private String dlineString;
     private LocalDate dlineDate;
@@ -18,8 +20,8 @@ public class Deadline extends Task {
      * @param input the given String to parse
      */
     public Deadline(String input) {
-        super(input.substring(0, input.indexOf("/by ") - 1));
-        String dline = input.substring(input.indexOf("/by ") + 4);
+        super(input.substring(0, input.indexOf(KEYWORD_WITH_SPACE) - 1));
+        String dline = input.substring(input.indexOf(KEYWORD_WITH_SPACE) + KEYWORD_WITH_SPACE.length());
         try {
             this.dlineDate = LocalDate.parse(dline);
         } catch (DateTimeParseException e) {
@@ -52,7 +54,7 @@ public class Deadline extends Task {
     public String toString() {
         String msg = "[D]" + super.toString() + " (by: ";
         if (dlineString == null) {
-            msg = msg + dlineDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + ")";
+            msg = msg + formatDate(dlineDate) + ")";
         } else {
             msg = msg + dlineString + ")";
         }
