@@ -32,6 +32,8 @@ public class Parser {
             return task -> task.deleteTask(input);
         } else if (input.matches("^find( .*)")) {
             return task -> task.find(input);
+        } else if (input.matches("^undo( .*)")) {
+            return task -> task.undo(input);
         } else {
             throw new UnknownCommandException();
         }

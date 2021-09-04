@@ -63,6 +63,8 @@ public class Duke {
         String response;
         try {
             response = Parser.parse(input).execute(tasks);
+            // add tasklist to stack of tasklists
+            tasks.addToStack();
             storage.saveData(tasks.getTasks());
         } catch (DukeException | IOException e) {
             response = e.getMessage();
@@ -86,6 +88,8 @@ public class Duke {
                         ? ui.getHelp()
                         : Parser.parse(input).execute(tasks);
                 ui.print(output);
+                // add tasklist to stack of tasklists
+                tasks.addToStack();
                 storage.saveData(tasks.getTasks());
             } catch (DukeException | IOException e) {
                 ui.print(e.getMessage());

@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Stack;
 
 import duke.exception.DukeException;
 import duke.exception.EmptyListException;
@@ -21,14 +22,17 @@ public class TaskList {
     private static final String ADD = "Nee added this task:";
     private static final String DELETE = "Nee has deleted this task:";
     private static final String FIND = "Nee found matching tasks!";
+    private static final String UNDO = "Nee undid your command!\nHere's your tasks!";
 
     private ArrayList<Task> tasks;
+    private Stack<ArrayList<Task>> taskListStack;
 
     /**
      * Constructor for {@code TaskList}.
      */
     public TaskList() {
         this(new ArrayList<>());
+        taskListStack = new Stack<>();
     }
 
     /**
@@ -38,6 +42,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+        taskListStack = new Stack<>();
     }
 
     /**
@@ -65,6 +70,7 @@ public class TaskList {
         if (taskNum <= 0 || taskNum > this.tasks.size()) {
             throw new TaskNotFoundException();
         }
+
         Task task = this.tasks.get(taskNum - 1);
         this.tasks.remove(taskNum - 1);
         // Show number of tasks in list
@@ -205,6 +211,47 @@ public class TaskList {
         }
         res.append(filteredTasks.size() + ".\t" + filteredTasks.get(filteredTasks.size() - 1));
         return FIND + "\n" + res;
+    }
+
+    public void addToStack() {
+        // Make a deep copy of task list
+        ArrayList<Task> newList = new ArrayList<>(tasks);
+        taskListStack.push(newList);
+    }
+
+
+    /**
+     * Restores task list by performing the undo operation.
+     *
+     * @param command The user input.
+     * @return The restored task list.
+     * @throws DukeException taskListStack is empty, no commands to undo.
+     */
+    public String undo(String command) throws DukeException {
+        String numOfStepsString = command.substring(5).trim();
+        if (numOfStepsString == null) {
+            throw new InvalidTaskException();
+        }
+        int numOfSteps = Integer.parseInt(numOfStepsString);
+
+        if (tasks.size() == 1) {
+            throw new DukeException("No commands to undo!");
+        }
+
+        for (int i = 0; i < numOfSteps; i++) {
+            if (taskListStack.size() == 1) {
+                throw new DukeException("No commands to undo!");
+            }
+            taskListStack.pop();
+        }
+        tasks = taskListStack.pop();
+
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < tasks.size() - 1; i++) {
+            res.append((i + 1) + ".\t" + tasks.get(i) + "\n");
+        }
+        res.append(tasks.size() + ".\t" + tasks.get(tasks.size() - 1));
+        return UNDO + "\n" + res;
     }
 
 }
