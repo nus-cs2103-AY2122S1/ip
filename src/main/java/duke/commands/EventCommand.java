@@ -29,6 +29,7 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(String des, TaskList tList) throws DukeException {
+        checkValidDes(des);
         if (des.equals("event")) {
             throw new DukeException("\"event\" command not correctly formatted \n"
                     + "Please insert task and timeframe arguments");

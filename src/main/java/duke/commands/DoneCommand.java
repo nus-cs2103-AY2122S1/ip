@@ -26,6 +26,7 @@ public class DoneCommand extends Command {
      * @throws DukeException if input for Delete command is not properly formatted.
      */
     public String execute(String des, TaskList tList) throws DukeException {
+        checkValidDes(des);
         ArrayList<Task> tasks = tList.getTaskList();
         String sNum = des.substring(des.lastIndexOf(' ') + 1);
         int num = Integer.parseInt(sNum);

@@ -20,6 +20,7 @@ public class FindCommand extends Command {
      *                       or if task has already been completed.
      */
     public String execute(String des, TaskList tList) throws DukeException {
+        checkValidDes(des);
         if (des.equals("find") || des.equals("find ")) {
             throw new DukeException("The \"find\" command accepts at least one search input.\nPlease add a keyword to search for.");
         }

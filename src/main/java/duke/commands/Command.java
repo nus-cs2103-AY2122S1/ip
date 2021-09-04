@@ -61,4 +61,15 @@ public abstract class Command {
         }
         return count;
     }
+
+    /**
+     * Checks for valid description using Java assert.
+     *
+     * @param des the user input into the Duke chat-box.
+     */
+    public void checkValidDes(String des) {
+        assert des != "";
+        assert des != null;
+        assert des.contains("/") == false;
+    }
 }

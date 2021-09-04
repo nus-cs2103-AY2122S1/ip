@@ -28,6 +28,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(String des, TaskList tList) throws DukeException {
+        checkValidDes(des);
         if (des.equals("deadline")) {
             throw new DukeException("\"deadline\" command not correctly formatted \n"
                     + "Please insert task and due date arguments");
