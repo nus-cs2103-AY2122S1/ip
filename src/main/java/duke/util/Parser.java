@@ -6,6 +6,7 @@ import duke.commands.AddCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
+import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.exceptions.CommandParamException;
@@ -89,6 +90,9 @@ public class Parser {
             String keyword = s.nextLine().trim();
             return new FindCommand(keyword);
 
+        case "bb": // this is only for CLI users, GUI users will not reach here.
+        case "bye":
+            return new ExitCommand();
         default:
             throw new UnknownCommandException();
         }
