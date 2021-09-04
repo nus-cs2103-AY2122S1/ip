@@ -10,7 +10,7 @@ public abstract class Task {
     /**
      * Public constructor to initialize a Task object.
      *
-     * @param description
+     * @param description The description of the Task.
      */
     public Task(String description) {
         this.description = description;
