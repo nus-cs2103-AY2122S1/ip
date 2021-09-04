@@ -40,10 +40,23 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        this.startUpMessage();
+    }
+
+    /**
+     * Shows the greeting message from the app.
+     */
+    public void startUpMessage() {
+        String welcomeMessage = new Ui().welcomeMessageGui();
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage)
+        );
     }
 
     /**
      * Sets the GUI's Duke object.
+     *
      * @param d duke object to be passed into MainWindow.
      */
     public void setDuke(Duke d) {
@@ -65,7 +78,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
 
-        System.out.println(userInput.getText());
         if (userInput.getText().equals("bye")) {
             CompletableFuture.delayedExecutor(closeTransition,
                     TimeUnit.MILLISECONDS).execute(() -> Platform.exit());

@@ -31,6 +31,7 @@ public class DialogBox extends HBox {
 
     /**
      * Constructs a new DialogBox.
+     *
      * @param text text to be shown on the user interface.
      * @param img image to be shown on the user interface.
      */
@@ -76,6 +77,7 @@ public class DialogBox extends HBox {
 
     /**
      * Retrieves a DialogBox for the user.
+     *
      * @param text text the user inputted.
      * @param img image avatar of the user
      * @return DialogBox containing the text of user and image of user.
@@ -86,6 +88,7 @@ public class DialogBox extends HBox {
 
     /**
      * Retrieves a DialogBox for duke.
+     *
      * @param text text the user inputted.
      * @param img image avatar of duke.
      * @return DialogBox containing the text from duke and image of duke.

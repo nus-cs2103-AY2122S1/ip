@@ -17,6 +17,7 @@ public class Ui {
 
     /**
      * Displays message input with horizontal borderlines on top and bottom.
+     *
      * @param input String message to be displayed to user
      */
     public void displayText(String input) {
@@ -53,6 +54,7 @@ public class Ui {
 
     /**
      * Displays the message for a task marked as Done.
+     *
      * @param taskMarked the task that was marked to be done.
      */
     public void markDoneMessage(String taskMarked) {
@@ -62,6 +64,7 @@ public class Ui {
 
     /**
      * Displays the message for a task marked as Done.
+     *
      * @param taskMarked the task that was marked to be done.
      * @return response informing user that task has been marked as done.
      */
@@ -72,6 +75,7 @@ public class Ui {
 
     /**
      * Message displayed when a task is deleted.
+     *
      * @param taskString the task deleted from the list.
      * @param listSize size of the task list after deletion.
      */
@@ -83,6 +87,7 @@ public class Ui {
 
     /**
      * Message displayed when a task is deleted.
+     *
      * @param taskString the task deleted from the list.
      * @param listSize size of the task list after deletion.
      * @return response informing user that task has been deleted.
@@ -102,6 +107,7 @@ public class Ui {
 
     /**
      * Displays when list is empty.
+     *
      * @return response informing user that the list is empty.
      */
     public String listEmptyMessageGui() {
@@ -109,7 +115,24 @@ public class Ui {
     }
 
     /**
+     * Replies with a message to inform users that no item match their find.
+     */
+    public void noMatchingResult() {
+        this.displayText("No item in your list fits your find criteria");
+    }
+
+    /**
+     * Replies with a message to inform users that no item match their find.
+     *
+     * @return string informing user that their find yield no result.
+     */
+    public String noMatchingResultGui() {
+        return "No item in your list fits your find criteria";
+    }
+
+    /**
      * Message displayed when a task is added.
+     *
      * @param taskString the task added.
      * @param listSize size of the task list after the addition.
      */
@@ -121,6 +144,7 @@ public class Ui {
 
     /**
      * Message displayed when a task is added.
+     *
      * @param taskString the task added.
      * @param listSize size of the task list after the addition.
      * @return response informing user that the task has been added to the list.
@@ -133,6 +157,7 @@ public class Ui {
 
     /**
      * Displays all items and their completion status.
+     *
      * @param taskList the list containing Task objects.
      */
     public void displayListTasks(List<Task> taskList) {
@@ -143,20 +168,20 @@ public class Ui {
             return;
         }
 
-        System.out.println(BORDERLINE);
+        String message = "";
 
         for (int i = 0; i < taskList.size(); i++) {
-
-            //displays the current task's status
             String inputMessage = String.format("%d. %s", i + 1, taskList.get(i).toString());
-            System.out.println(inputMessage);
+            message += inputMessage + "\n";
         }
 
-        System.out.println(BORDERLINE);
+        this.displayText(message);
+
     }
 
     /**
      * Displays all items and their completion status.
+     *
      * @param taskList the list containing Task objects.
      * @return response showing all the tasks in the list.
      */
@@ -199,24 +224,18 @@ public class Ui {
      * @param taskList the list containing filtered tasks.
      */
     public void displayFilteredTasks(List<Task> taskList) {
-
-        //shown when there are no tasks in the list
         if (taskList.isEmpty()) {
-            this.listEmptyMessage();
+            this.noMatchingResult();
             return;
         }
 
-        System.out.println(BORDERLINE);
-        System.out.println("Here are the matching tasks in your list:");
-
+        String message = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < taskList.size(); i++) {
-
-            //displays the current task's status
             String inputMessage = String.format("%d. %s", i + 1, taskList.get(i).toString());
-            System.out.println(inputMessage);
+            message += inputMessage;
         }
 
-        System.out.println(BORDERLINE);
+        this.displayText(message);
     }
 
     /**
@@ -225,22 +244,16 @@ public class Ui {
      * @return response showing all the tasks in the list that fit the filter criteria.
      */
     public String displayFilteredTasksGui(List<Task> taskList) {
-
-        //shown when there are no tasks in the list
         if (taskList.isEmpty()) {
-            return this.listEmptyMessageGui();
+            return this.noMatchingResultGui();
         }
 
         String message = "Here are the matching tasks in your list:\n";
-
         for (int i = 0; i < taskList.size(); i++) {
-
-            //displays the current task's status
             String inputMessage = String.format("%d. %s\n", i + 1, taskList.get(i).toString());
             message += inputMessage;
         }
+
         return message;
     }
-
-
 }
