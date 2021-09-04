@@ -76,6 +76,11 @@ public abstract class Task {
         String[] ssplit = s.split(DELIMITER, 4);
         Label currentType = Label.valueOf(ssplit[0]);
         boolean done = ssplit[1].equals(Task.DONE);
+        Task t = getTask(ssplit, currentType, done);
+        return t;
+    }
+
+    private static Task getTask(String[] ssplit, Label currentType, boolean done) throws DukeException {
         Task t;
         switch (currentType) {
         case T:

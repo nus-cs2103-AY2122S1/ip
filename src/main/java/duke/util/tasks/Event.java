@@ -22,9 +22,7 @@ public class Event extends DatedTask {
      */
     public static Event of(String total) throws DukeException {
         String[] ss = total.split("/at", 2);
-        if (ss.length == 0) {
-            throw new DukeException(Messages.EVENT_NO_INPUT_ERROR_MESSAGE);
-        }
+        enforceArguments(ss, Messages.EVENT_NO_INPUT_ERROR_MESSAGE);
         return new Event(ss[0], ss[1]);
     }
 

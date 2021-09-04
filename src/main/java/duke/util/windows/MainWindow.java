@@ -57,10 +57,18 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        scrollPanePropertyInit();
+        listSetSelectMultiple();
+    }
+
+    private void scrollPanePropertyInit() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         scrollPane.hvalueProperty().bind(dialogContainer.widthProperty());
         //To bind the width of the scroll pane to the dialog container
         scrollPane.fitToWidthProperty().bind(dialogContainer.fillWidthProperty());
+    }
+
+    private void listSetSelectMultiple() {
         listOfTasks.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 

@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import duke.util.commons.Messages;
 import duke.util.parser.Parser;
 
 
@@ -71,6 +72,20 @@ public abstract class DatedTask extends Task {
             ls.remove(this);
         }
 
+    }
+
+
+    /**
+     * Ensures that the arguments are inline with
+     * description {delimiter} date.
+     *
+     * @param ss
+     * @throws DukeException
+     */
+    protected static void enforceArguments(String[] ss, String errorMessage) throws DukeException {
+        if (ss.length == 0) {
+            throw new DukeException(errorMessage);
+        }
     }
 
 

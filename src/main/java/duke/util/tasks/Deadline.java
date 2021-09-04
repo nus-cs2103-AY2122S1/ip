@@ -30,11 +30,11 @@ public class Deadline extends DatedTask {
     public static Deadline of(String s) throws DukeException {
         assert s != null : "Deadline of s is null";
         String[] ss = s.split(Deadline.DELIMITER, 2);
-        if (ss.length == 0) {
-            throw new DukeException(Messages.DEADLINE_NO_INPUT_ERROR_MESSAGE);
-        }
+        enforceArguments(ss, Messages.DEADLINE_NO_INPUT_ERROR_MESSAGE);
         return new Deadline(ss[0], ss[1]);
     }
+
+
 
     /**
      * The factory method of Deadline that takes in the string

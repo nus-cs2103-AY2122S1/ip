@@ -59,26 +59,20 @@ public class Storage {
         File tempfile = new File(tempFilePath);
         //if the file does not exist
         if (!saveFile.exists()) {
-            //When the old save file does not exist
-            //do not have to use the tempfile
             saveFile.createNewFile();
-            FileWriter wr = new FileWriter(saveFilePath);
-            writeTasks(wr, inputs);
-            wr.close();
-
+            writeToPath(inputs, saveFilePath);
         } else {
-            //could use a temp file and switch after writing?
-            FileWriter wr = new FileWriter(tempFilePath);
-            writeTasks(wr, inputs);
-            wr.close();
+            writeToPath(inputs, tempFilePath);
             saveFile.delete();
             tempfile.renameTo(saveFile);
-
         }
-
-
     }
 
+    private void writeToPath(ArrayList<? extends Task> inputs, String saveFilePath) throws IOException {
+        FileWriter wr = new FileWriter(saveFilePath);
+        writeTasks(wr, inputs);
+        wr.close();
+    }
 
 
     private void writeTasks(FileWriter writer, ArrayList<? extends Task> inputs) throws IOException {
