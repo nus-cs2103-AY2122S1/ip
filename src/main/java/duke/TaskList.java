@@ -112,14 +112,11 @@ public class TaskList {
 
         resp.add("\tHere are the matching tasks in your list:");
 
-        int i = 1;
-
-        tasks.stream().filter(x -> x.isFound(target)).forEach(x -> resp.add("\t" + i + "." + x));
-
         IntStream.range(0, tasks.size())
                 .filter(x -> tasks.get(x).isFound(target))
                 .forEach(x -> {
-                    String tmp = "\t" + x + "." + tasks.get(x);
+                    int index = resp.size();
+                    String tmp = "\t" + index + "." + tasks.get(x);
                     resp.add(tmp);
                 });
 
