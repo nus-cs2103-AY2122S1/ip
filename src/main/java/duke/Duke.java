@@ -2,6 +2,7 @@ package duke;
 
 import duke.Ui.Commands;
 import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * Handles initialization of storage and tasks and running of Duke chatbot.

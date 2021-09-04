@@ -71,7 +71,7 @@ public class MainWindow extends Stage {
         String input = userInput.getText();
         String response = duke.getResponse(input);
 
-        // Allow Duke to say goodbye to the user before closing application.
+        // Delay exiting platform to allow goodbye message to be seen.
         if (response.equals(duke.getUi().getGoodbyeMessage())) {
             PauseTransition delay = new PauseTransition(Duration.seconds(1));
             delay.setOnFinished(event -> Platform.exit());

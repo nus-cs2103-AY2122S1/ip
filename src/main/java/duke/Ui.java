@@ -127,36 +127,21 @@ public class Ui {
     }
 
     /**
-     * Returns the standard response for finding tasks by date.
-     *
-     * @param formattedDateString Date being searched for.
-     * @return Standard response for finding tasks by date.
-     */
-    public String getDateListSuccessMessage(String formattedDateString) {
-        return "Here are the Deadlines or Events that fall on " + formattedDateString + ":";
-    }
-
-    /**
      * Returns the standard response for success in finding tasks by date.
      *
      * @param formattedDateString Date being searched for.
      * @param counter Total count of tasks found to fall on date being searched for.
      * @param deadlines Total count of Deadlines found to fall on date being searched for.
      * @param events Total count of Events found to fall on date being searched for.
+     * @param foundTasks String accumulation of matching tasks.
      * @return Standard response for success in finding tasks by date.
      */
-    public String getDateListSummaryMessage(String formattedDateString, int counter, int deadlines, int events) {
-        return "A total of " + counter + " events (" + deadlines + " deadlines and "
+    public String getDateListSuccessMessage(String formattedDateString, int counter, int deadlines, int events,
+                                            String foundTasks) {
+        String start = "Here are the Deadlines or Events that fall on " + formattedDateString + ":\n";
+        String end = "A total of " + counter + " events (" + deadlines + " deadlines and "
                 + events + " events) fall on " + formattedDateString;
-    }
-
-    /**
-     * Returns the standard response for beginning search for tasks matching a keyword.
-     *
-     * @return Standard response for beginning search for tasks matching a keyword.
-     */
-    public String getFindBeginMessage() {
-        return "Here are the matching tasks in your list:";
+        return start + foundTasks + end;
     }
 
     /**
@@ -164,11 +149,15 @@ public class Ui {
      *
      * @param counter Total count of tasks found to match the search keyword.
      * @param keyword Search keyword being searched for.
-     * @return Standard response for success in finding tasks that match a search keyword..
+     * @param foundTasks String accumulation of matching tasks.
+     * @return Standard response for success in finding tasks that match a search keyword.
      */
-    public String getFindSuccessMessage(int counter, String keyword) {
-        return "A total of " + counter
+    public String getFindSuccessMessage(int counter, String keyword, String foundTasks) {
+        String start = "Here are the matching tasks in your list:\n";
+        String end = "A total of " + counter
                 + " tasks in your list match your search keyword, " + keyword + ".";
+
+        return start + foundTasks + end;
     }
 
     /**

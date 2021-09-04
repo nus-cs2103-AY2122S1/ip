@@ -2,7 +2,7 @@ package duke.command;
 
 import java.time.LocalDate;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;

@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
@@ -58,11 +58,7 @@ public class FindCommand extends Command {
             }
         }
 
-        // Obtain standard responses from ui object.
-        String begin = ui.getFindBeginMessage();
-        String success = ui.getFindSuccessMessage(counter, keyword);
-
-        return begin + "\n" + foundTasks + success;
+        return ui.getFindSuccessMessage(counter, keyword, foundTasks.toString());
     }
 
     /**

@@ -2,7 +2,7 @@ package duke.command;
 
 import java.time.LocalDate;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
@@ -63,15 +63,14 @@ public class DateCommand extends Command {
         LocalDate localDate = Parser.toLocalDate(dateString);
         String formattedDateString = Parser.parseLocalDate(localDate);
 
-        String notification = ui.getDateListSuccessMessage(formattedDateString);
-
-        // Print Deadlines and Events with LocalDate that matches date input from user.
+        StringBuilder datesBuilder = new StringBuilder();
         for (Task task : tasks.getTasks()) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 if (localDate.equals(deadline.getTime())) {
                     counter++;
                     deadlines++;
+                    datesBuilder.append(counter).append(".").append(deadline).append("\n");
                     System.out.println(counter + "." + deadline);
                 }
             }
@@ -81,15 +80,13 @@ public class DateCommand extends Command {
                 if (localDate.equals(event.getTime())) {
                     counter++;
                     events++;
-                    System.out.println(counter + "." + event);
+                    datesBuilder.append(counter).append(".").append(event).append("\n");
                 }
             }
         }
 
-        // String describing a summary of matching tasks to the user.
-        String summary = ui.getDateListSummaryMessage(formattedDateString, counter, deadlines, events);
-
-        return notification + "\n" + summary;
+        return ui.getDateListSuccessMessage(formattedDateString,
+                counter, deadlines, events, datesBuilder.toString());
     }
 
     /**
@@ -103,7 +100,6 @@ public class DateCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storable storage) {
         try {
-            // Print tasks that fall on user specified date.
             return this.getTaskAtDate(tasks, ui);
         } catch (DukeException dukeException) {
             return dukeException.toString();

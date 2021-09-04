@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.DukeException;
+
 /**
  * The Storable interface ensures that any class that implements it will have the methods
  * readTasksFromData and saveTasksToData.
