@@ -51,7 +51,9 @@ public class Parser {
         if (!info.contains("/by")) {
             throw new DukeMissingArgumentException("/by");
         }
+
         String[] description = info.split(" /by ", 2);
+
         if (description.length < 2 || description[1].equals("")) {
             throw new DukeMissingDateTimeException();
         }
@@ -62,7 +64,9 @@ public class Parser {
         if (!info.contains("/at")) {
             throw new DukeMissingArgumentException("/at");
         }
+
         String[] description = info.split(" /at ", 2);
+
         if (description.length < 2 || description[1].equals("")) {
             throw new DukeMissingDateTimeException();
         }
@@ -78,24 +82,28 @@ public class Parser {
      */
     public static LocalDate parseDate(String date) throws DukeInvalidDateException {
         try {
-            // Reuse regex from
-            // https://www.javacodeexamples.com/java-regular-expression-validate-date-example-regex/1504
-            String[] dateSplit;
-            if (date.matches("\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|[3][01])")) {
-                // for yyyy-mm-dd
-                return LocalDate.parse(date);
-            } else if (date.matches("(0[1-9]|[12][0-9]|[3][01])-(0[1-9]|1[012])-\\d{4}")) {
-                // for dd-mm-yyyy
-                dateSplit = date.split("-", 3);
-                return LocalDate.parse(String.format("%s-%s-%s", dateSplit[2], dateSplit[1], dateSplit[0]));
-            } else if (date.matches("(0[1-9]|[12][0-9]|[3][01])/(0[1-9]|1[012])/\\d{4}")) {
-                // for dd/mm/yyyy
-                dateSplit = date.split("/", 3);
-                return LocalDate.parse(String.format("%s-%s-%s", dateSplit[2], dateSplit[1], dateSplit[0]));
-            } else {
-                throw new DukeInvalidDateException();
-            }
+            return getLocalDate(date);
         } catch (DateTimeException e) {
+            throw new DukeInvalidDateException();
+        }
+    }
+
+    private static LocalDate getLocalDate(String date) throws DukeInvalidDateException {
+        // Reuse regex from
+        // https://www.javacodeexamples.com/java-regular-expression-validate-date-example-regex/1504
+        String[] dateSplit;
+        if (date.matches("\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|[3][01])")) {
+            // for yyyy-mm-dd
+            return LocalDate.parse(date);
+        } else if (date.matches("(0[1-9]|[12][0-9]|[3][01])-(0[1-9]|1[012])-\\d{4}")) {
+            // for dd-mm-yyyy
+            dateSplit = date.split("-", 3);
+            return LocalDate.parse(String.format("%s-%s-%s", dateSplit[2], dateSplit[1], dateSplit[0]));
+        } else if (date.matches("(0[1-9]|[12][0-9]|[3][01])/(0[1-9]|1[012])/\\d{4}")) {
+            // for dd/mm/yyyy
+            dateSplit = date.split("/", 3);
+            return LocalDate.parse(String.format("%s-%s-%s", dateSplit[2], dateSplit[1], dateSplit[0]));
+        } else {
             throw new DukeInvalidDateException();
         }
     }
@@ -109,21 +117,25 @@ public class Parser {
      */
     public static LocalTime parseTime(String time) throws DukeInvalidTimeException {
         try {
-            // Reuse regex from
-            // https://www.geeksforgeeks.org/how-to-validate-time-in-24-hour-format-using-regular-expression/
-            if (time.length() == 4) {
-                String t = String.format("%s:%s", time.substring(0, 2), time.substring(2, 4));
-                if (t.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
-                    return LocalTime.parse(t);
-                } else {
-                    throw new DateTimeException("Invalid Time");
-                }
-            } else if (time.length() == 5 && time.split(":", 2).length == 2) {
-                return LocalTime.parse(time);
-            } else {
-                throw new DukeInvalidTimeException();
-            }
+            return getLocalTime(time);
         } catch (DateTimeException e) {
+            throw new DukeInvalidTimeException();
+        }
+    }
+
+    private static LocalTime getLocalTime(String time) throws DukeInvalidTimeException {
+        // Reuse regex from
+        // https://www.geeksforgeeks.org/how-to-validate-time-in-24-hour-format-using-regular-expression/
+        if (time.length() == 4) {
+            String t = String.format("%s:%s", time.substring(0, 2), time.substring(2, 4));
+            if (t.matches("([01]?[0-9]|2[0-3]):[0-5][0-9]")) {
+                return LocalTime.parse(t);
+            } else {
+                throw new DateTimeException("Invalid Time");
+            }
+        } else if (time.length() == 5 && time.split(":", 2).length == 2) {
+            return LocalTime.parse(time);
+        } else {
             throw new DukeInvalidTimeException();
         }
     }
@@ -137,7 +149,7 @@ public class Parser {
      * @return Array of String with date and time separated.
      * @throws DukeMissingDateTimeException If input does not contain time or date.
      */
-    public static String[] deadlineDateTimeSplit(String dateTime) throws DukeMissingDateTimeException {
+    public static String[] splitDeadlineDateTime(String dateTime) throws DukeMissingDateTimeException {
         String[] splitDateTime = dateTime.split(" ", 2);
         if (splitDateTime.length != 2) {
             throw new DukeMissingDateTimeException();
@@ -153,12 +165,15 @@ public class Parser {
      * @return Array of String with date and time separated.
      * @throws DukeMissingDateTimeException If input does not contain time or date.
      */
-    public static String[] eventDateTimeSplit(String dateTime) throws DukeMissingDateTimeException {
+    public static String[] splitEventDateTime(String dateTime) throws DukeMissingDateTimeException {
         String[] splitDateTime = dateTime.split(" ", 2);
+
         if (splitDateTime.length != 2) {
             throw new DukeMissingDateTimeException();
         }
+
         String[] splitStartEnd = splitDateTime[1].split("-", 2);
+
         if (splitStartEnd.length != 2) {
             throw new DukeMissingDateTimeException();
         }
@@ -174,7 +189,7 @@ public class Parser {
      */
     public Command parse(String input) throws DukeException {
         String extractedInstruction = input.split(" ")[0];
-        Instruction instruction = Instruction.valueOfLabel(extractedInstruction);
+        Instruction instruction = Instruction.getValueOfLabel(extractedInstruction);
         switch (instruction) {
         case LIST:
             return new ListCommand();
@@ -189,13 +204,13 @@ public class Parser {
             return new AddCommand(toDo);
         case DEADLINE:
             String[] deadlineInfo = extractDeadline(extractInfo(input, Instruction.DEADLINE));
-            String[] deadlineDateTime = deadlineDateTimeSplit(deadlineInfo[1]);
+            String[] deadlineDateTime = splitDeadlineDateTime(deadlineInfo[1]);
             Deadline deadline = new Deadline(deadlineInfo[0], parseDate(deadlineDateTime[0]),
                     parseTime(deadlineDateTime[1]));
             return new AddCommand(deadline);
         case EVENT:
             String[] eventInfo = extractEvent(extractInfo(input, Instruction.EVENT));
-            String[] eventDateTime = eventDateTimeSplit(eventInfo[1]);
+            String[] eventDateTime = splitEventDateTime(eventInfo[1]);
             Event event = new Event(eventInfo[0], parseDate(eventDateTime[0]), parseTime(eventDateTime[1]),
                     parseTime(eventDateTime[2]));
             return new AddCommand(event);

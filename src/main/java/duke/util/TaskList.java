@@ -45,9 +45,11 @@ public class TaskList {
         if (list.size() == 0) {
             return "List is empty. Add something to the list!\n";
         }
+
         String ls = "Here are the tasks in your list:\n";
         for (int i = 0; i < list.size(); i++) {
-            ls += String.format("%d.%s\n", i + 1, list.get(i));
+            int index = i + 1;
+            ls += String.format("%d.%s\n", index, list.get(i));
         }
         return ls;
     }
@@ -96,8 +98,8 @@ public class TaskList {
      */
     public String toDataFileInput() {
         String data = "";
-        for (int i = 0; i < list.size(); i++) {
-            data += list.get(i).format() + "\n";
+        for (Task task : list) {
+            data += task.format() + "\n";
         }
         return data;
     }
@@ -109,15 +111,8 @@ public class TaskList {
      * @return List of task on the specified date.
      */
     public String filterByDate(LocalDate date) {
-        String ls = "";
-        int count = 1;
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
-            if (task.hasDate(date)) {
-                ls += String.format("%d.%s\n", count, task);
-                count++;
-            }
-        }
+        String ls = generateFilteredList(date);
+
         if (ls.equals("")) {
             return "You do not have any tasks on this day! :>";
         } else {
@@ -132,19 +127,38 @@ public class TaskList {
      * @return List of task with the specific keyword.
      */
     public String filterByKeyword(String keyword) {
-        String ls = "";
-        int count = 1;
-        for (int i = 0; i < list.size(); i++) {
-            Task task = list.get(i);
-            if (task.hasKeyword(keyword)) {
-                ls += String.format("%d.%s\n", count, task);
-                count++;
-            }
-        }
+        String ls = generateFilteredList(keyword);
+
         if (ls.equals("")) {
             return "There is no task with this keyword! :<";
         } else {
             return "Here are the matching tasks in your list:\n" + ls;
         }
+    }
+
+    private String generateFilteredList(String keyword) {
+        StringBuilder ls = new StringBuilder();
+        int index = 1;
+
+        for (Task task : list) {
+            if (task.hasKeyword(keyword)) {
+                ls.append(String.format("%d.%s\n", index, task));
+                index++;
+            }
+        }
+        return ls.toString();
+    }
+
+    private String generateFilteredList(LocalDate date) {
+        StringBuilder ls = new StringBuilder();
+        int index = 1;
+
+        for (Task task : list) {
+            if (task.hasDate(date)) {
+                ls.append(String.format("%d.%s\n", index, task));
+                index++;
+            }
+        }
+        return ls.toString();
     }
 }

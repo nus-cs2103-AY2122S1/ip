@@ -8,7 +8,6 @@ import duke.util.Instruction;
  * @author Chng Zi Hao
  */
 public class DukeMissingIndexException extends DukeException {
-
     /**
      * Constructor for DukeMissingIndexException
      *

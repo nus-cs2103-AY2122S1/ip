@@ -8,6 +8,6 @@ class InstructionTest {
 
     @Test
     void testValueOfLabel() {
-        assertEquals(Instruction.DEADLINE, Instruction.valueOfLabel("deadline"));
+        assertEquals(Instruction.DEADLINE, Instruction.getValueOfLabel("deadline"));
     }
 }
