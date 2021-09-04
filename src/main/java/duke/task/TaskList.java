@@ -40,8 +40,8 @@ public class TaskList {
      * @return the task that was removed
      */
     public Task delete(int taskNumber) {
-        //boolean inList;
-        //assert inList = listOfTasks.size() - 1 > taskNumber : "task doesn't exist";
+        boolean inList;
+        assert inList = listOfTasks.size() - 1 > taskNumber : "task doesn't exist";
         return listOfTasks.remove(taskNumber);
     }
 
