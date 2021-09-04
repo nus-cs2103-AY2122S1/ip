@@ -1,4 +1,11 @@
-//deals with loading tasks from the file and saving tasks in the file
+package duke;
+
+import duke.error.DukeException;
+import duke.task.TaskList;
+import duke.task.Task;
+import duke.task.TodoTask;
+import duke.task.DeadlineTask;
+import duke.task.EventTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,17 +73,17 @@ public class Storage {
 
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task t = listOfTasks.get(i);
-            String type = t.type;
-            String description = t.description;
-            String isDone = t.isDone ? "1" : "0";
+            String type = t.getType();
+            String description = t.getDescription();
+            String isDone = t.getStatusIcon().equals("X") ? "1" : "0";
 
             String line = type + "/" + isDone + "/" + description;
-            if (t.type.equals("D")) {
+            if (type.equals("D")) {
                 DeadlineTask dt = (DeadlineTask) t;
-                line += "/" + dt.time;
-            } else if (t.type.equals("E")) {
+                line += "/" + dt.getTime();
+            } else if (type.equals("E")) {
                 EventTask et = (EventTask) t;
-                line += "/" + et.time;
+                line += "/" + et.getTime();
             }
             line += "\n";
             fw.write(line);

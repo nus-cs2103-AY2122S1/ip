@@ -1,6 +1,9 @@
-//abstract class other classes include : AddCommand, DeleteCommand, ExitCommand, ext.)
+package duke.command;
 
-import java.io.IOException;
+import duke.Storage;
+import duke.UI;
+import duke.error.DukeException;
+import duke.task.TaskList;
 
 public abstract class Command {
     boolean isExit;

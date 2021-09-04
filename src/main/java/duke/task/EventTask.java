@@ -1,3 +1,5 @@
+package duke.task;
+
 public class EventTask extends Task {
     protected String time;
 
@@ -11,6 +13,10 @@ public class EventTask extends Task {
         super(description, isDone);
         this.type = "E";
         this.time = time;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     @Override

@@ -1,20 +1,24 @@
+package duke.command;
+
+import duke.Storage;
+import duke.UI;
+import duke.error.DukeException;
+import duke.task.TaskList;
+
 import java.io.IOException;
 
-public class DoneCommand extends Command {
-    private int index;
+public class ListCommand extends Command {
 
-    public DoneCommand(int index) {
+    public ListCommand() {
         isExit = false;
-        this.index = index;
     }
 
     @Override
     public void execute(TaskList tasks, UI ui, Storage storage) throws DukeException {
-        if (index >= tasks.getSize()) {
-            throw new DukeException("OOPS!! task index is invalid");
+        ui.showList();
+        for (int i = 0; i < tasks.getSize(); i++) {
+            System.out.printf("%d.%s\n", i + 1, tasks.getTask(i));
         }
-        tasks.updateStatus(index);
-        ui.showDone(tasks.getTask(index));
 
         try {
             storage.save(tasks);

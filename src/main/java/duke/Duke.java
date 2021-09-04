@@ -1,4 +1,8 @@
-import java.io.IOException;
+package duke;
+
+import duke.command.Command;
+import duke.error.DukeException;
+import duke.task.TaskList;
 
 public class Duke {
     private Storage storage;

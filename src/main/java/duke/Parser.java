@@ -1,4 +1,13 @@
-//deals with making sense of the user command
+package duke;
+
+import duke.command.Command;
+import duke.command.AddCommand;
+import duke.command.DeleteCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.DoneCommand;
+import duke.command.ListCommand;
+import duke.error.DukeException;
 
 public class Parser {
     public static Command parse(String fullCommand) throws DukeException {

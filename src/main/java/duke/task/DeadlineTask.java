@@ -1,3 +1,7 @@
+package duke.task;
+
+import duke.error.DukeException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -19,6 +23,10 @@ public class DeadlineTask extends Task {
         super(description, isDone);
         this.type = "D";
         this.time = LocalDate.parse(time);
+    }
+
+    public String getTime() {
+        return time.toString();
     }
 
     @Override

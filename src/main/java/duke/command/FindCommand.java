@@ -1,7 +1,15 @@
+package duke.command;
+
+import duke.Storage;
+import duke.UI;
+import duke.error.DukeException;
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.IOException;
 
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     public FindCommand(String keyword) {
         isExit = false;
@@ -13,7 +21,7 @@ public class FindCommand extends Command {
         ui.showFind();
         for (int i = 0; i < tasks.getSize(); i++) {
             Task task = tasks.getTask(i);
-            if (task.description.contains(keyword)) {
+            if (task.getDescription().contains(keyword)) {
                 System.out.printf("%d.%s\n", i + 1, task);
             }
         }

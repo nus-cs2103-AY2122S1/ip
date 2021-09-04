@@ -1,6 +1,9 @@
+package duke.task;
+
+import duke.error.DukeException;
+
 import java.util.ArrayList;
 
-//constains the task list e/g. has operations to add/delete tasks in the list
 public class TaskList {
     private ArrayList<Task> tasks;
 
