@@ -34,16 +34,12 @@ public class TaskList {
      * Runs the program.
      */
     public void runProgram() {
-
         this.loadData();
 
-        //initialises the scanner
         Scanner sc = new Scanner(System.in);
         String input;
 
         while (true) {
-
-            //saves the latest copy of the task list
             this.saveData();
 
             //removes additional space from the input
@@ -51,42 +47,28 @@ public class TaskList {
 
             //removes space in the command input and stores the strings in an array
             String[] inputArr = Parser.sanitizeInput(input);
+            String firstCommand = inputArr[0];
 
             if (input.equals("bye")) {
                 break;
             } else if (input.equals("list")) {
                 messages.displayListTasks(this.taskList);
-            } else if (inputArr[0].equals("done")) {
+            } else if (firstCommand.equals("done")) {
                 //obtains the task number which we want to mark as done
                 Integer index = Integer.parseInt(inputArr[1]);
-
-                try {
-                    this.markAsDone(index);
-                } catch (DukeException e) {
-                    messages.displayText(e.toString());
-                }
-            } else if (inputArr[0].equals("delete")) {
+                this.markAsDone(index);
+            } else if (firstCommand.equals("delete")) {
                 //obtains the task number which we want to delete
                 Integer index = Integer.parseInt(inputArr[1]);
+                this.deleteTask(index);
 
-                try {
-                    this.deleteTask(index);
-                } catch (DukeException e) {
-                    messages.displayText(e.toString());
-                }
-            } else if (inputArr[0].equals("find")) {
+            } else if (firstCommand.equals("find")) {
                 this.findTasks(inputArr);
             } else {
-
-                //adds item input by the user into the inputList
-                try {
-                    this.addTask(inputArr);
-                } catch (DukeException e) {
-                    messages.displayText(e.toString());
-                }
+                //adds task
+                this.addTask(inputArr);
             }
         }
-        //terminates scanner
         sc.close();
     }
 
@@ -94,13 +76,8 @@ public class TaskList {
      * Runs the GUI program.
      */
     public String readGuiInput(String input) {
-
         this.loadData();
-
-        String responseMessage = "";
-
-        //removes additional space from the input
-        input = input.trim();
+        String responseMessage;
 
         //removes space in the command input and stores the strings in an array
         String[] inputArr = Parser.sanitizeInput(input);
@@ -110,34 +87,18 @@ public class TaskList {
         } else if (input.equals("list")) {
             responseMessage = messages.displayListTasksGui(this.taskList);
         } else if (inputArr[0].equals("done")) {
-
-            //obtains the task number which we want to mark as done
-            Integer index = Integer.parseInt(inputArr[1]);
-
-            try {
-                responseMessage = this.markAsDoneGui(index);
-            } catch (DukeException e) {
-                responseMessage = messages.displayTextGui(e.toString());
-            }
+            Integer taskNumber = Integer.parseInt(inputArr[1]);
+            responseMessage = this.markAsDoneGui(taskNumber);
 
         } else if (inputArr[0].equals("delete")) {
-            //obtains the task number which we want to delete
-            Integer index = Integer.parseInt(inputArr[1]);
+            Integer taskNumber = Integer.parseInt(inputArr[1]);
+            responseMessage = this.deleteTaskGui(taskNumber);
 
-            try {
-                responseMessage = this.deleteTaskGui(index);
-            } catch (DukeException e) {
-                responseMessage = messages.displayTextGui(e.toString());
-            }
         } else if (inputArr[0].equals("find")) {
             responseMessage = this.findTasksGui(inputArr);
         } else {
             //adds item input by the user into the inputList
-            try {
-                responseMessage = this.addTaskGui(inputArr);
-            } catch (DukeException e) {
-                responseMessage = messages.displayTextGui(e.toString());
-            }
+            responseMessage = this.addTaskGui(inputArr);
         }
 
         //saves the latest copy of the task list
@@ -160,7 +121,7 @@ public class TaskList {
      * @param inputArr String array containing input by the user.
      * @throws InvalidCommandException if inputArr length less than 2.
      */
-    public void addTask(String[] inputArr) throws InvalidCommandException {
+    public void addTask(String[] inputArr) {
         try {
             if (inputArr[0].equals("todo")) {
                 this.addTodo(inputArr);
@@ -186,7 +147,7 @@ public class TaskList {
      * @return reply to be displayed on GUI.
      * @throws InvalidCommandException if inputArr length less than 2.
      */
-    public String addTaskGui(String[] inputArr) throws InvalidCommandException {
+    public String addTaskGui(String[] inputArr) {
         try {
             if (inputArr[0].equals("todo")) {
                 return this.addTodoGui(inputArr);
@@ -212,7 +173,7 @@ public class TaskList {
      * @throws DescriptionException if inputArr length less than 2.
      */
     public void addTodo(String[] inputArr) throws DescriptionException {
-        if (inputArr.length < 2) {
+        if (this.descriptionInvalid(inputArr)) {
             throw new DescriptionException("todo");
         }
 
@@ -233,7 +194,7 @@ public class TaskList {
      * @throws DescriptionException if inputArr length less than 2.
      */
     public String addTodoGui(String[] inputArr) throws DescriptionException {
-        if (inputArr.length < 2) {
+        if (this.descriptionInvalid(inputArr)) {
             throw new DescriptionException("todo");
         }
 
@@ -254,7 +215,7 @@ public class TaskList {
      * @throws CommandException if "/by" is absent from input.
      */
     public void addDeadline(String[] inputArr) throws DescriptionException, CommandException {
-        if (inputArr.length < 2) {
+        if (this.descriptionInvalid(inputArr)) {
             throw new DescriptionException("deadline");
         }
 
@@ -280,14 +241,6 @@ public class TaskList {
         try {
             if (commandIndex + 1 <= inputArr.length - 1) {
                 String[] byArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
-
-                /*
-                if (byArray.length >= 3) {
-                    throw new DukeException("Command after /by should at most only have 2 parts
-                    for date and time!");
-                }
-                */
-
                 if (byArray.length == 1) {
                     LocalDate by = LocalDate.parse(byArray[0]);
                     Deadline deadlineTask = new Deadline(description, by);
@@ -315,9 +268,10 @@ public class TaskList {
      * @throws CommandException if "/by" is absent from input.
      */
     public String addDeadlineGui(String[] inputArr) throws DescriptionException, CommandException {
-        if (inputArr.length < 2) {
+        if (this.descriptionInvalid(inputArr)) {
             throw new DescriptionException("deadline");
         }
+
         boolean commandAbsent = true;
         int commandIndex = 1;
         for (int i = 0; i < inputArr.length; i++) {
@@ -369,7 +323,7 @@ public class TaskList {
      * @throws CommandException if "/at" is absent from input.
      */
     public void addEvent(String[] inputArr) throws DescriptionException, CommandException {
-        if (inputArr.length < 2) {
+        if (this.descriptionInvalid(inputArr)) {
             throw new DescriptionException("event");
         }
 
@@ -397,7 +351,6 @@ public class TaskList {
             String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
             at = String.join(" ", atArray);
         } else {
-            //TODO: might need to throw error here because this case is /by and nothing behind?
             at = "No data was inputted";
         }
 
@@ -415,7 +368,7 @@ public class TaskList {
      * @throws CommandException if "/at" is absent from input.
      */
     public String addEventGui(String[] inputArr) throws DescriptionException, CommandException {
-        if (inputArr.length < 2) {
+        if (this.descriptionInvalid(inputArr)) {
             throw new DescriptionException("event");
         }
 
@@ -443,7 +396,6 @@ public class TaskList {
             String[] atArray = Arrays.copyOfRange(inputArr, commandIndex + 1, inputArr.length);
             at = String.join(" ", atArray);
         } else {
-            //TODO: might need to throw error here because this case is /by and nothing behind?
             at = "No data was inputted";
         }
 
@@ -458,17 +410,17 @@ public class TaskList {
      * @param taskNumber task number to be marked as done.
      * @throws TaskNumberException if the number is less than 0 or more than taskList size.
      */
-    public void markAsDone(Integer taskNumber) throws TaskNumberException {
+    public void markAsDone(Integer taskNumber) {
         if (taskNumber > this.taskList.size() || taskNumber < 0) {
-            throw new TaskNumberException();
-
-        } else {
-            //because our list starts from index 0 instead of index 1
-            int realIndex = taskNumber - 1;
-            this.taskList.get(realIndex).markDone();
-
-            messages.markDoneMessage(this.taskList.get(realIndex).toString());
+            messages.displayText(new TaskNumberException().toString());
+            return;
         }
+
+        //because our list starts from index 0 instead of index 1
+        int realIndex = taskNumber - 1;
+        this.taskList.get(realIndex).markDone();
+
+        messages.markDoneMessage(this.taskList.get(realIndex).toString());
     }
 
     /**
@@ -476,38 +428,35 @@ public class TaskList {
      *
      * @param taskNumber task number to be marked as done.
      * @return reply to be displayed on GUI.
-     * @throws TaskNumberException if the number is less than 0 or more than taskList size.
      */
-    public String markAsDoneGui(Integer taskNumber) throws TaskNumberException {
+    public String markAsDoneGui(Integer taskNumber) {
         if (taskNumber > this.taskList.size() || taskNumber < 0) {
-            throw new TaskNumberException();
-
-        } else {
-            //because our list starts from index 0 instead of index 1
-            int realIndex = taskNumber - 1;
-            this.taskList.get(realIndex).markDone();
-
-            return messages.markDoneMessageGui(this.taskList.get(realIndex).toString());
+            return new TaskNumberException().toString();
         }
+
+        //because our list starts from index 0 instead of index 1
+        int realIndex = taskNumber - 1;
+        this.taskList.get(realIndex).markDone();
+
+        return messages.markDoneMessageGui(this.taskList.get(realIndex).toString());
     }
 
     /**
      * Deletes a task from the taskList.
      *
      * @param taskNumber task number to be deleted.
-     * @throws TaskNumberException if the number is less than 0 or more than taskList size.
      */
-    public void deleteTask(Integer taskNumber) throws TaskNumberException {
+    public void deleteTask(Integer taskNumber) {
         if (taskNumber > this.taskList.size() || taskNumber < 0) {
-            throw new TaskNumberException();
-
-        } else {
-            //because our list starts from index 0 instead of index 1
-            int realIndex = taskNumber - 1;
-            String removedTask = this.taskList.get(realIndex).toString();
-            this.taskList.remove(realIndex);
-            messages.taskDeleteMessage(removedTask, this.taskList.size());
+            messages.displayText(new TaskNumberException().toString());
+            return;
         }
+
+        //because our list starts from index 0 instead of index 1
+        int realIndex = taskNumber - 1;
+        String removedTask = this.taskList.get(realIndex).toString();
+        this.taskList.remove(realIndex);
+        messages.taskDeleteMessage(removedTask, this.taskList.size());
     }
 
     /**
@@ -515,19 +464,17 @@ public class TaskList {
      *
      * @param taskNumber task number to be deleted.
      * @return reply to be displayed on GUI.
-     * @throws TaskNumberException if the number is less than 0 or more than taskList size.
      */
-    public String deleteTaskGui(Integer taskNumber) throws TaskNumberException {
+    public String deleteTaskGui(Integer taskNumber) {
         if (taskNumber > this.taskList.size() || taskNumber < 0) {
-            throw new TaskNumberException();
-
-        } else {
-            //because our list starts from index 0 instead of index 1
-            int realIndex = taskNumber - 1;
-            String removedTask = this.taskList.get(realIndex).toString();
-            this.taskList.remove(realIndex);
-            return messages.taskDeleteMessageGui(removedTask, this.taskList.size());
+            return new TaskNumberException().toString();
         }
+
+        //because our list starts from index 0 instead of index 1
+        int realIndex = taskNumber - 1;
+        String removedTask = this.taskList.get(realIndex).toString();
+        this.taskList.remove(realIndex);
+        return messages.taskDeleteMessageGui(removedTask, this.taskList.size());
     }
 
     /**
@@ -582,6 +529,10 @@ public class TaskList {
                 .collect(Collectors.toList());
 
         return messages.displayFilteredTasksGui(filteredList);
+    }
+
+    public boolean descriptionInvalid(String[] inputArr) {
+        return inputArr.length < 2;
     }
 
 }

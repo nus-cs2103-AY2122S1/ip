@@ -21,7 +21,8 @@ public class Parser {
      * @return String array with no spaces.
      */
     public static String[] sanitizeInput(String input) {
-        String[] inputArr = input.split(" ");
+        String trimmedInput = input.trim();
+        String[] inputArr = trimmedInput.split(" ");
         return inputArr;
     }
 
