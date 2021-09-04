@@ -16,6 +16,7 @@ public class TaskList {
 
     /**
      * Adds task to the task arraylist.
+     *
      * @param task Task to be added.
      */
     public void addTaskToList(Task task) {
@@ -24,6 +25,7 @@ public class TaskList {
 
     /**
      * Returns a specific indexed task from the task arraylist.
+     *
      * @param i Index of the task to be returned.
      * @return Task with index i.
      */
@@ -35,6 +37,7 @@ public class TaskList {
 
     /**
      * Returns number of tasks in the list.
+     *
      * @return number of tasks in the task arraylist.
      */
     public int numberOfTasks() {
@@ -43,6 +46,7 @@ public class TaskList {
 
     /**
      * Deletes task from the list.
+     *
      * @param i Index of the task to be deleted.
      */
     public void deleteTask(int i) {
@@ -53,6 +57,7 @@ public class TaskList {
 
     /**
      * Converts whole TaskList to String.
+     *
      * @return string version of the TaskList.
      */
     public String stringifyWholeList() {
@@ -69,9 +74,26 @@ public class TaskList {
 
     /**
      * Returns the whole TaskList.
+     *
      * @return the whole TaskList.
      */
     public ArrayList<Task> getTaskList() {
         return arr;
+    }
+
+    /**
+     * Checks for duplicate tasks in the TaskList.
+     *
+     * @param taskContent Content of the new input task.
+     * @param category Category of the new input task.
+     * @return Boolean value of whether a duplicate exists.
+     */
+    public boolean hasDuplicate(String taskContent, String category) {
+        for (int j = 0; j < arr.size(); j++) {
+            if (arr.get(j).getTaskContent().contains(taskContent) && arr.get(j).getCategory().equals(category)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

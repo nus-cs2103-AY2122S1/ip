@@ -16,6 +16,7 @@ public class Add extends Command {
 
     /**
      * Runs the add command.
+     *
      * @param tasks TaskList containing all tasks.
      * @param ui Ui to display to the user.
      * @param storage Storage to store tasks.
@@ -28,6 +29,9 @@ public class Add extends Command {
                if (taskContent.equals("")) {
                    throw new TodoException("sorry your todo is empty");
                }
+               if(tasks.hasDuplicate(taskContent,"T")) {
+                   return ui.showDuplicate();
+               }
                Task t = new Task(taskContent, Duke.Category.TODO);
                tasks.addTaskToList(t);
                try {
@@ -38,6 +42,9 @@ public class Add extends Command {
                return ui.showAdd(t.toString());
            } else if (name.contains("deadline ")) {
                String taskContent = name.replace("deadline ", "").trim();
+               if(tasks.hasDuplicate(taskContent,"D")) {
+                   return ui.showDuplicate();
+               }
                Task t = new Task(taskContent, Duke.Category.DEADLINE);
                tasks.addTaskToList(t);
                try {
@@ -48,6 +55,9 @@ public class Add extends Command {
                return ui.showAdd(t.toString());
            } else if (name.contains("event ")) {
                String taskContent = name.replace("event ", "").trim();
+               if(tasks.hasDuplicate(taskContent,"E")) {
+                   return ui.showDuplicate();
+               }
                Task t = new Task(taskContent, Duke.Category.EVENT);
                tasks.addTaskToList(t);
                try {

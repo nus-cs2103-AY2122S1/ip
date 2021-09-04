@@ -7,6 +7,7 @@ public abstract class Command {
 
     /**
      * Abstract run method depending on the command.
+     *
      * @param tasks TaskList containing all tasks.
      * @param ui Ui to display to the user.
      * @param storage Storage to store tasks.

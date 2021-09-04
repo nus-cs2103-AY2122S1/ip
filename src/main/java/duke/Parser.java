@@ -17,6 +17,7 @@ public class Parser {
 
     /**
      * Parses the input task to extract the task content.
+     *
      * @return The actual task content.
      */
     public String parseTask() {
@@ -26,6 +27,7 @@ public class Parser {
 
     /**
      * Parses the input task to extract the date.
+     *
      * @return The date of the task.
      */
     public String parseTime() {
@@ -37,6 +39,7 @@ public class Parser {
 
     /**
      * Parses the user input to return the appropriate command.
+     *
      * @param inpCommand command entered by the user
      * @return Command matching the input.
      */

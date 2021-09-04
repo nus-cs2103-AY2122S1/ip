@@ -30,6 +30,7 @@ public class Task {
 
     /**
      * Marks a task in the list as done.
+     *
      * @param i index of task to be marked as done.
      */
     public void markAsDone(int i) {
@@ -38,6 +39,7 @@ public class Task {
 
     /**
      * Returns the category of the task.
+     *
      * @return the category of the task.
      */
     public String getCategory() {
@@ -53,6 +55,7 @@ public class Task {
     /**
      * Changes the status of the task icon depending on
      * whether the task is done or not.
+     *
      * @return The status icon of the task
      */
     public String getStatusIcon() {
@@ -61,6 +64,7 @@ public class Task {
 
     /**
      * Returns whether the task already exists in the hard disk.
+     *
      * @return boolean value of the isPreExisting field of the task.
      */
     public boolean getPreExisting() {
@@ -76,6 +80,7 @@ public class Task {
 
     /**
      * Returns the description of the task.
+     *
      * @return toString of a pre-existing ie pre-loaded task.
      */
     public String getDescription() {
@@ -85,6 +90,7 @@ public class Task {
 
     /**
      * Custom prints the task based on category.
+     *
      * @return String comprising the type and content of the task.
      */
     public String toString() {
@@ -97,5 +103,14 @@ public class Task {
             return "[E]" + "[" + this.getStatusIcon() + "] " + parser.parseTask()
                     + " (at: " + parser.parseTime() + ")";
         }
+    }
+
+    /**
+     * Returns the description field of the task.
+     *
+     * @return Description field of the task.
+     */
+    public String getTaskContent() {
+        return this.description;
     }
 }
