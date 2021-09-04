@@ -1,5 +1,22 @@
+.root {
+    -fx-focus-color: transparent;
+     -fx-faint-focus-color: transparent;
+}
+
 .button {
-    -fx-text-fill: blue;
+    -fx-text-fill: #494b53;
+}
+
+.hyperlink {
+    -fx-text-fill: #494b53;
+}
+
+.hyperlink:visited {
+    -fx-underline: false;
+}
+
+.hyperlink:hover {
+    -fx-text-fill: #444444;
 }
 
 .dialog {

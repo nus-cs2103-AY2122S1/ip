@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.HBox?>
 
 <?import javafx.scene.image.ImageView?>
+
 <fx:root prefWidth="372.0"
          minWidth="-Infinity"
          type="HBox"

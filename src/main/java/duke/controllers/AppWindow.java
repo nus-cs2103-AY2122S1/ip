@@ -7,6 +7,7 @@ import duke.Augury;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -69,13 +70,41 @@ public class AppWindow extends VBox {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = augury.getResponse(input);
+
+        if (input.trim().equals("")) {
+            return;
+        }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input),
                 DialogBox.getAuguryDialog(response, img)
         );
         userInput.clear();
+
         if (response.equals("The readiness is all.")) {
             Platform.exit();
         }
+    }
+
+    /**
+     * Creates a dialog box to display information about {@code Augury}.
+     * https://code.makery.ch/blog/javafx-dialogs-official/
+     */
+    @FXML
+    private void handleHelpButton() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("About Augury");
+        alert.setHeaderText(null);
+        alert.setContentText(Augury.HELP_MESSAGE);
+
+        alert.showAndWait();
+    }
+
+    /**
+     * Creates a dialog box to handle settings of {@code Augury}.
+     */
+    @FXML
+    private void handleSettingsButton() {
+        SettingsWindow.showSettingsWindow();
     }
 }

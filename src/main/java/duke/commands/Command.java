@@ -24,6 +24,8 @@ public abstract class Command {
             return new ExitCommand();
         case LIST:
             return new ListCommand();
+        case HELP:
+            return new HelpCommand();
         case MARKDONE:
             return new MarkDoneCommand(arguments);
         case DELETE:

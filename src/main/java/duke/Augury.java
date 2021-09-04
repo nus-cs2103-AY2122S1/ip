@@ -24,7 +24,7 @@ import duke.ui.Ui;
  * @author Jefferson (@qreoct)
  */
 public class Augury {
-    private static final String VER = "v1.1.0"; // C-Friendlier-Syntax
+    private static final String VER = "v1.2.0"; // A-BetterGui
     private static final String WELCOME =
             "\t+-------------------------------+\n"
           + "\t| *                 *         * |\n"
@@ -35,6 +35,11 @@ public class Augury {
           + "\t|      *             *          |\n"
           + "\t|             *         " + VER + "  |\n"
           + "\t+-------------------------------+";
+    public static final String HELP_MESSAGE =
+            "Augury is a task management application\n\n"
+          + "Type in your commands, such as 'list' to show all tasks, or 'todo shopping' to add a new task.\n\n"
+          + "To view full documentation of commands, please visit https://github.com/qreoct/ip\n\n"
+          + VER;
     private final TaskList taskList = new TaskList();
     private final Storage storage;
     private final Ui ui;
@@ -113,5 +118,14 @@ public class Augury {
         } catch (AuguryException e) {
             return e.getMessage() + "\n\t Please try again.";
         }
+    }
+
+    /**
+     * Returns the current Version of {@code Augury}, for debugging purposes.
+     *
+     * @return {@code String} representing version of {@code Augury}
+     */
+    public String getVer() {
+        return Augury.VER;
     }
 }
