@@ -6,7 +6,7 @@ package duke;
  * @author Ryan Tian Jun.
  */
 public class Intro {
-    private String intro = "Hello! I'm Duke!\n"
+    private String introMessage = "Hello! I'm Duke!\n"
             + "What can I do for you? Type something to get started!";
     private final Logo logo = new Logo();
 
@@ -21,6 +21,6 @@ public class Intro {
      * @return returns welcome message when user launches program.
      */
     public String printIntro() {
-        return "Hello from\n" + logo + "\n" + intro + "\n";
+        return "Hello from\n" + logo + "\n" + introMessage + "\n";
     }
 }
