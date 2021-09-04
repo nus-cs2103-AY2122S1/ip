@@ -162,6 +162,7 @@ public class Storage {
     }
 
     private boolean getIsDoneFromStorage(String storageIsDone) {
+        assert !storageIsDone.equals(null) : "Storage isDone value should not be null";
         if (storageIsDone.contains("1")) {
             return true;
         }
@@ -169,6 +170,7 @@ public class Storage {
     }
 
     private String getDescriptions(String[] storageDataArray) {
+        assert storageDataArray.length > 1 : "storageDataArray length should be greater than 1";
         try {
             return storageDataArray[2];
         } catch (ArrayIndexOutOfBoundsException err) {
@@ -177,6 +179,7 @@ public class Storage {
     }
 
     private String getDateTimeLocation(String[] storageDataArray) {
+        assert storageDataArray.length > 2 : "storageDataArray length should be greater than 2";
         try {
             return storageDataArray[3];
         } catch (ArrayIndexOutOfBoundsException err) {
@@ -186,9 +189,9 @@ public class Storage {
 
     private void clearsFileAndWrite(String stringToAppend) {
         try {
-            FileWriter fw = new FileWriter(this.data, false);
-            fw.append(stringToAppend);
-            fw.close();
+            FileWriter fileWriter = new FileWriter(this.data, false);
+            fileWriter.append(stringToAppend);
+            fileWriter.close();
         } catch (IOException err) {
             throw new DukeStorageDeleteException(err.toString());
         }
