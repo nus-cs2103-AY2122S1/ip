@@ -93,6 +93,8 @@ public class TaskList {
     public ArrayList<String> addTask(Task newItem) {
         ArrayList<String> resp = new ArrayList<>();
 
+        assert tasks != null : "The tasks List should be initialised before adding items";
+
         this.tasks.add(newItem);
 
         resp.add("\tGot it. I've added this task: ");

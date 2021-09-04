@@ -5,6 +5,9 @@ public class Task {
     private boolean isDone;
 
     public Task(String name) {
+        assert name != null : "Item name should not be null";
+        assert name != "" : "Item name should not be empty";
+
         this.name = name;
         this.isDone = false;
     }
