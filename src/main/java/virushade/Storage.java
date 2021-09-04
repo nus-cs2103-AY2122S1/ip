@@ -43,7 +43,7 @@ public class Storage {
                 tasks.add(scannedTask);
             }
         } catch (FileNotFoundException e) {
-            Ui.showCreatingFiles();
+            ResponseProcessor.showCreatingFiles();
             createFilePath(STORAGE_FILE);
         }
     }
@@ -56,11 +56,11 @@ public class Storage {
     private void createFilePath(File f) throws VirushadeException {
         try {
             if (f.getParentFile().mkdirs()) {
-                Ui.showCreatingDirectory();
+                ResponseProcessor.showCreatingDirectory();
             }
 
             if (f.createNewFile()) {
-                Ui.showCreatingFiles();
+                ResponseProcessor.showCreatingFiles();
             }
         } catch (IOException e) {
             throw new VirushadeException("Unable to create file.");

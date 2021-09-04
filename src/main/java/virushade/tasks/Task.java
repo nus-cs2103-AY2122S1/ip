@@ -78,18 +78,16 @@ public class Task {
     /**
      * Updates the task status of completion as done.
      */
-    public void completeTask() {
+    public String completeTask() {
         this.isDone = true;
-        System.out.println("Nice! I have marked this task as done: \n"
-                + this);
+        return "Nice! I have marked this task as done: \n" + this;
     }
 
     /**
      * The output message when the task is deleted.
      */
-    public void deleteMessage() {
-        System.out.println("Noted. I've removed this task: \n"
-                + this);
+    public String deleteMessage() {
+        return "Noted. I've removed this task: \n" + this;
     }
 
     /**
@@ -99,8 +97,6 @@ public class Task {
     public String getTaskDescription() {
         return taskDescription;
     }
-
-
 
     /**
      * @return The string representation for the task.
