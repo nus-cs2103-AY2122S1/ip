@@ -12,6 +12,7 @@ import aisu.ui.Ui;
 public class FindCommand extends Command {
     private final String input;
 
+    /** {@inheritDoc} */
     public FindCommand(String input) {
         this.input = input.trim();
     }
@@ -29,11 +30,7 @@ public class FindCommand extends Command {
         this.uiText = ui.formatText("Here's what I found:", result);
     }
 
-    /**
-     * Checks if the command is an Exit command.
-     *
-     * @return True if it is an Exit command.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isExit() {
         return false;

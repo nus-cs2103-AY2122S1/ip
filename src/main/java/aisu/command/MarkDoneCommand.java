@@ -2,9 +2,9 @@ package aisu.command;
 
 import aisu.exception.AisuException;
 import aisu.storage.Storage;
+import aisu.task.Task;
 import aisu.tasklist.TaskList;
 import aisu.ui.Ui;
-import aisu.task.Task;
 
 /**
  * Command to mark a task as done.
@@ -14,6 +14,7 @@ import aisu.task.Task;
 public class MarkDoneCommand extends Command {
     private final int parseInt;
 
+    /** {@inheritDoc} */
     public MarkDoneCommand(int parseInt) {
         this.parseInt = parseInt;
     }
@@ -33,11 +34,7 @@ public class MarkDoneCommand extends Command {
         this.uiText = ui.formatText(" Nice! I've marked this task as completed:", completedTask.toString());
     }
 
-    /**
-     * Checks if the command is an Exit command.
-     *
-     * @return True if it is an Exit command.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isExit() {
         return false;

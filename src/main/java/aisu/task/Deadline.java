@@ -1,9 +1,9 @@
 package aisu.task;
 
-import aisu.exception.AisuException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+
+import aisu.exception.AisuException;
 
 /**
  * A Deadline task.
@@ -14,6 +14,12 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     private final LocalDate deadline;
 
+    /**
+     * Constructor to initialize the Deadline Task with a description.
+     * @param description A writeup of the task details.
+     * @param deadline The deadline, in java LocalDate format, of the task.
+     * @throws AisuException if there is no description.
+     */
     public Deadline(String description, String deadline) throws AisuException {
         super(description);
         try {
@@ -24,21 +30,13 @@ public class Deadline extends Task {
         }
     }
 
-    /**
-     * Parses data in readable format to be stored in storage.
-     *
-     * @return Parsed data.
-     */
+    /** {@inheritDoc} */
     @Override
     public String parseData() {
         return "D;;" + (this.isDone ? "1" : "0") + ";;" + this.description + ";;" + this.deadline;
     }
 
-    /**
-     * Returns a string representation of the object.
-     *
-     * @return The Task in readable format.
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return String.format("[DeadL] %s %s (by: %s)",

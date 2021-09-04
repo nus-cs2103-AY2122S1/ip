@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class MainApp extends Application {
 
-    private Aisu aisu = new Aisu("data", "testGUI.txt");
+    private final Aisu aisu = new Aisu("data", "testGUI.txt");
 
     /**
      * Starts the Aisu application.

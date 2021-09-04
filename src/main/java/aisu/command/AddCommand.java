@@ -2,9 +2,9 @@ package aisu.command;
 
 import aisu.exception.AisuException;
 import aisu.storage.Storage;
+import aisu.task.Task;
 import aisu.tasklist.TaskList;
 import aisu.ui.Ui;
-import aisu.task.Task;
 
 /**
  * Command to add a task to the tasklist.
@@ -15,6 +15,11 @@ public class AddCommand extends Command {
     private final TaskList.TaskTypes taskType;
     private final String input;
 
+    /**
+     * Constructor to initialise the Add command.
+     * @param taskType The type of task to add to the tasklist.
+     * @param input The parsed user input, used as details for the task to be added.
+     */
     public AddCommand(TaskList.TaskTypes taskType, String input) {
         this.taskType = taskType;
         this.input = input;
@@ -50,11 +55,7 @@ public class AddCommand extends Command {
                 " Now you have " + tasklist.getListSize() + " task(s) in the list.\n");
     }
 
-    /**
-     * Checks if the command is an Exit command.
-     *
-     * @return True if it is an Exit command.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isExit() {
         return false;

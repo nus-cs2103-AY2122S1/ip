@@ -9,25 +9,22 @@ import aisu.exception.AisuException;
  * @author Liaw Xin Yan
  */
 public class Todo extends Task {
+    /**
+     * Constructor to initialize the To do Task with a description.
+     * @param description A writeup of the task details.
+     * @throws AisuException if there is no description.
+     */
     public Todo(String description) throws AisuException {
         super(description);
     }
 
-    /**
-     * Parses data in readable format to be stored in storage.
-     *
-     * @return Parsed data.
-     */
+    /** {@inheritDoc} */
     @Override
     public String parseData() {
         return "T;;" + (this.isDone ? "1" : "0") + ";;" + this.description;
     }
 
-    /**
-     * Returns a string representation of the object.
-     *
-     * @return The Task in readable format.
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return String.format("[To-do] %s %s", this.getStatusIcon(), this.description);

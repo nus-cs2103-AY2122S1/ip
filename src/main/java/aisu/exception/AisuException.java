@@ -11,11 +11,7 @@ public class AisuException extends Exception {
         super(message);
     }
 
-    /**
-     * Returns a string representation of the object.
-     *
-     * @return The Exception message.
-     */
+    /** {@inheritDoc} */
     @Override
     public String toString() {
         return "Oh no... " + this.getMessage();

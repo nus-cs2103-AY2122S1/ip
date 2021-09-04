@@ -1,13 +1,14 @@
 package aisu.tasklist;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import aisu.exception.AisuException;
 import aisu.task.Deadline;
 import aisu.task.Event;
 import aisu.task.Task;
 import aisu.task.Todo;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A TaskList class that stores Tasks as a list.

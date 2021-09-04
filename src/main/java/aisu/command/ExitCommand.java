@@ -11,16 +11,18 @@ import aisu.ui.Ui;
  */
 public class ExitCommand extends Command {
 
+    /**
+     * Sets the UI to display a goodbye message.
+     * @param tasklist TaskList used in Aisu.
+     * @param storage Storage used in Aisu.
+     * @param ui User interface used in Aisu.
+     */
     @Override
     public void execute(TaskList tasklist, Storage storage, Ui ui) {
         this.uiText = ui.getGoodbyeMessage();
     }
 
-    /**
-     * Checks if the command is an Exit command.
-     *
-     * @return True if it is an Exit command.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isExit() {
         return true;

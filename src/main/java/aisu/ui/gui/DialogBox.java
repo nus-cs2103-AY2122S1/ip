@@ -36,8 +36,8 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private Circle displayIcon;
-    // Variable to determine chatbox design, which depends on user.
-    private Boolean isAisu;
+    // Variable to determine chat box design, which depends on user.
+    private final Boolean isAisu;
 
     private DialogBox(String text, Image img, Boolean isAisu) {
         try {

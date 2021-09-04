@@ -2,9 +2,9 @@ package aisu.command;
 
 import aisu.exception.AisuException;
 import aisu.storage.Storage;
+import aisu.task.Task;
 import aisu.tasklist.TaskList;
 import aisu.ui.Ui;
-import aisu.task.Task;
 
 /**
  * Command to delete a task from the tasklist.
@@ -14,6 +14,10 @@ import aisu.task.Task;
 public class DeleteCommand extends Command {
     private final int parseInt;
 
+    /**
+     * Constructor to initialise the Delete command.
+     * @param parseInt The index of the task to be deleted.
+     */
     public DeleteCommand(int parseInt) {
         this.parseInt = parseInt;
     }
@@ -35,11 +39,7 @@ public class DeleteCommand extends Command {
                 " Now you have " + tasklist.getListSize() + " task(s) in the list.\n");
     }
 
-    /**
-     * Checks if the command is an Exit command.
-     *
-     * @return True if it is an Exit command.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isExit() {
         return false;

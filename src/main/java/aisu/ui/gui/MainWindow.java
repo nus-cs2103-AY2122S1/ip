@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
 
     private Aisu aisu;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/you.png"));
-    private Image aisuImage = new Image(this.getClass().getResourceAsStream("/images/bot.gif"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/you.png"));
+    private final Image aisuImage = new Image(this.getClass().getResourceAsStream("/images/bot.gif"));
 
     /**
      * Initialises Storage and TaskList used by Duke. Shows welcome message.
@@ -85,7 +85,7 @@ public class MainWindow extends AnchorPane {
         boolean isExit = false;
         String input = userInput.getText();
         String response = aisu.getResponse(input);
-        if (response == "See you next time! :D") {
+        if (response.equals("See you next time! :D")) {
             isExit = true;
         }
         dialogContainer.getChildren().addAll(
@@ -97,9 +97,7 @@ public class MainWindow extends AnchorPane {
         // @@author CheyanneSim-reused
         if (isExit) {
             PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
-            pause.setOnFinished(event -> {
-                Platform.exit();
-            });
+            pause.setOnFinished(event -> Platform.exit());
             pause.play();
         }
     }

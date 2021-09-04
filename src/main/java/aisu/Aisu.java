@@ -1,5 +1,7 @@
 package aisu;
 
+import java.util.List;
+
 import aisu.command.Command;
 import aisu.exception.AisuException;
 import aisu.parser.Parser;
@@ -8,9 +10,6 @@ import aisu.task.Task;
 import aisu.tasklist.TaskList;
 import aisu.ui.Ui;
 
-import java.util.List;
-
-
 /**
  * A tasklist chatbot, named Aisu.
  *
@@ -18,9 +17,14 @@ import java.util.List;
  */
 public class Aisu {
     private final Storage storage;
-    private TaskList tasklist;
     private final Ui ui;
+    private TaskList tasklist;
 
+    /**
+     * Constructor to initialise Aisu.
+     * @param dirPath Directory pathname for where the text file should be saved at.
+     * @param fileName The name of the text file to store the data.
+     */
     public Aisu(String dirPath, String fileName) {
         this.ui = new Ui();
         this.storage = new Storage(dirPath, fileName);
@@ -33,10 +37,18 @@ public class Aisu {
         }
     }
 
+    /**
+     * Retrieves the task list data from the tasklist.
+     * @return The list containing tasks.
+     */
     public List<Task> getTaskListData() {
         return this.tasklist.getListData();
     }
 
+    /**
+     * Retrieves the storage object used for storing data.
+     * @return The storage object.
+     */
     public Storage getStorage() {
         return this.storage;
     }
@@ -68,7 +80,7 @@ public class Aisu {
     /**
      * Gets a response from the user.
      * @param input Input from the user.
-     * @return Reponse from Aisu.
+     * @return Response from Aisu.
      */
     public String getResponse(String input) {
         try {

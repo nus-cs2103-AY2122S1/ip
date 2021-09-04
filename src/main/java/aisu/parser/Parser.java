@@ -1,6 +1,5 @@
 package aisu.parser;
 
-import aisu.tasklist.TaskList;
 import aisu.command.AddCommand;
 import aisu.command.Command;
 import aisu.command.DeleteCommand;
@@ -9,6 +8,7 @@ import aisu.command.FindCommand;
 import aisu.command.MarkDoneCommand;
 import aisu.command.ShowListCommand;
 import aisu.exception.AisuException;
+import aisu.tasklist.TaskList;
 
 /**
  * A Parser for text inputs.

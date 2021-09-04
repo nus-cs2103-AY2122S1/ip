@@ -13,6 +13,11 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor to initialize the Task with a description.
+     * @param description A writeup of the task details.
+     * @throws AisuException if there is no description.
+     */
     public Task(String description) throws AisuException {
         if (description.length() == 0) {
             throw new AisuException("The description cannot be empty!");

@@ -23,11 +23,7 @@ public class ShowListCommand extends Command {
         this.uiText = ui.formatText("Here's what you have in your list:", tasklist.toString());
     }
 
-    /**
-     * Checks if the command is an Exit command.
-     *
-     * @return True if it is an Exit command.
-     */
+    /** {@inheritDoc} */
     @Override
     public boolean isExit() {
         return false;

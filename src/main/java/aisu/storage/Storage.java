@@ -1,20 +1,19 @@
 package aisu.storage;
 
-import aisu.tasklist.TaskList;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import aisu.exception.AisuException;
 import aisu.task.Deadline;
 import aisu.task.Event;
 import aisu.task.Task;
 import aisu.task.Todo;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import aisu.tasklist.TaskList;
 
 /**
  * A storage to save and load tasks from the tasklist.
@@ -26,6 +25,11 @@ public class Storage {
     private final String fileName;
     private File file;
 
+    /**
+     * Constructor to initialise the storage with a directory path and file name for storing the tasklist in.
+     * @param dirPath Directory pathname for where the text file should be saved at.
+     * @param fileName The name of the text file to store the data.
+     */
     public Storage(String dirPath, String fileName) {
         this.dirPath = dirPath;
         this.fileName = fileName;
