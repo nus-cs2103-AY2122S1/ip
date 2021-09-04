@@ -21,7 +21,7 @@ public class Event extends Item {
             this.time = LocalDate.of(Integer.valueOf(dateArgs[0]),
                 Integer.valueOf(dateArgs[1]), Integer.valueOf(dateArgs[2]));
         } catch (NumberFormatException | DateTimeException e) {
-            throw new DukeException("please use format yyyy-mm-dd");
+            throw new DukeException("pwease use format yyyy-mm-dd");
         }
     }
 

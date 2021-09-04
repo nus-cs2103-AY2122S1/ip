@@ -25,11 +25,11 @@ public class AddEventCommand extends Command {
     public void parseLine(String line) throws DukeException {
         int idx = line.indexOf("/at");
         if (idx == -1) {
-            throw new DukeException("Please specify /at");
+            throw new DukeException("Pwease specify /at!!");
         } else if (idx == line.length() - 3 || idx == line.length() - 4) {
-            throw new DukeException("/at cannot be empty");
+            throw new DukeException("/at cannot emptyyy!!");
         } else if (idx == 6 || idx == 7) {
-            throw new DukeException("Message cannot be empty");
+            throw new DukeException("Message cannot be emptyyy!1!");
         }
 
         this.content = line.substring(6, idx - 1);
@@ -47,11 +47,11 @@ public class AddEventCommand extends Command {
     @Override
     public void execute(ItemList itemList, Ui ui) throws DukeException {
         ArrayList<String> printBuffer = new ArrayList<>();
-        printBuffer.add("Got it. I've added this task:");
+        printBuffer.add("Rawr x3 *notices task* OwO, what's this? Oo a new task:");
         Event toAdd = new Event(this.content, this.time);
         itemList.add(toAdd);
         printBuffer.add("  " + toAdd.toString());
-        printBuffer.add(String.format("Now you have %d tasks in the list.", itemList.size()));
+        printBuffer.add(String.format("Now u habe %d tasks in da list. OwO", itemList.size()));
         ui.println(printBuffer);
     }
 }

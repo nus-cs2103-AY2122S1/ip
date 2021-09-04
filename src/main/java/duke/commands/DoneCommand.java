@@ -35,7 +35,7 @@ public class DoneCommand extends Command {
     public void execute(ItemList itemList, Ui ui) {
         Item x = itemList.get(this.index);
         ArrayList<String> printBuffer = new ArrayList<>();
-        printBuffer.add("Nice! I've marked this task as done:");
+        printBuffer.add("NICE OWO! Me mark dis task as donned!!:");
         x.markAsDone();
         printBuffer.add("  " + x.toString());
         ui.println(printBuffer);

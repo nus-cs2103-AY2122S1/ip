@@ -21,5 +21,6 @@ public class ClearCommand extends Command {
     @Override
     public void execute(ItemList itemList, Ui ui) {
         itemList.clear();
+        ui.println("cleared!!");
     }
 }

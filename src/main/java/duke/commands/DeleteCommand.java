@@ -32,7 +32,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(ItemList itemList, Ui ui) {
         ArrayList<String> printBuffer = new ArrayList<>();
-        printBuffer.add("Noted. I've removed this task:");
+        printBuffer.add("This task got remuwuved uwu:");
         printBuffer.add("  " + itemList.remove(this.index).toString());
         ui.println(printBuffer);
     }

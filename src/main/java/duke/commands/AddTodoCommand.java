@@ -23,7 +23,7 @@ public class AddTodoCommand extends Command {
     @Override
     public void parseLine(String line) throws DukeException {
         if (line.length() <= 5) {
-            throw new DukeException("Argument cannot be empty.");
+            throw new DukeException("Arwgument cannawt be emptyyy!1!!");
         } else {
             this.content = line.substring(5);
         }
@@ -40,11 +40,11 @@ public class AddTodoCommand extends Command {
     @Override
     public void execute(ItemList itemList, Ui ui) {
         ArrayList<String> printBuffer = new ArrayList<>();
-        printBuffer.add("Got it. I've added this task:");
+        printBuffer.add("Rawr x3 *notices task* OwO, what's this? Oo a new task:");
         ToDo toAdd = new ToDo(this.content);
         itemList.add(toAdd);
         printBuffer.add("  " + toAdd.toString());
-        printBuffer.add(String.format("Now you have %d tasks in the list.", itemList.size()));
+        printBuffer.add(String.format("Now u habe %d tasks in da list. OwO)", itemList.size()));
         ui.println(printBuffer);
     }
 }

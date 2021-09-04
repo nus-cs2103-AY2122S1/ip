@@ -7,7 +7,7 @@ import duke.Ui;
  * Represents a command to terminate a <code>Duke</code> instance.
  */
 public class ByeCommand extends Command {
-    static final String GOODBYE = "Bye. Hope to see you again soon!";
+    static final String GOODBYE = "H-hope to see u again (/O/ / w/ / O/)<3";
 
     @Override
     public void parseLine(String line) {

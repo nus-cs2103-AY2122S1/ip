@@ -17,7 +17,7 @@ public class FindCommand extends Command {
     @Override
     public void parseLine(String line) throws DukeException {
         if (line.length() <= 5) {
-            throw new DukeException("Argument cannot be empty.");
+            throw new DukeException("Arwgument cannawt be emptyyy!1!!");
         } else {
             this.query = line.substring(5);
         }
@@ -35,10 +35,10 @@ public class FindCommand extends Command {
         Item currItem;
         ListIterator<Item> iterator = itemList.listIterator();
         if (!iterator.hasNext()) {
-            ui.println("Empty!");
+            ui.println("Nwo tasks uwu!");
         } else {
             ArrayList<String> printBuffer = new ArrayList<>();
-            printBuffer.add("Here are the matching in your list:");
+            printBuffer.add("Hwere are the matching tasks in your list:");
             Integer currIdx = 1;
             while (iterator.hasNext()) {
                 currItem = iterator.next();

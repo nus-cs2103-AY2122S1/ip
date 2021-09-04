@@ -13,11 +13,7 @@ import duke.commands.Command;
  * I/O.
  */
 public class Duke {
-    private static final String LOGO = "Hello from\n____        _        \n"
-        + "|  _ \\ _   _| | _____ \n"
-        + "| | | | | | | |/ / _ \\\n"
-        + "| |_| | |_| |   <  __/\n"
-        + "|____/ \\__,_|_|\\_\\___|\n";
+    private static final String LOGO = "Hewwo from dUWUk *w* OwO";
     private ItemList itemList;
     private Storage storage;
     private Ui ui;
