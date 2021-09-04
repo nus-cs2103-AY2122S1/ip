@@ -20,12 +20,20 @@ import duke.task.Todo;
 public class Storage {
     private final String filePath;
 
+    /**
+     * Constructor of the storage class.
+     *
+     * @param filePath the path to store the tasks list to.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
      * Loads task list from file path.
+     *
+     * @return the array list loaded from file path.
+     * @throws DukeException exception arising from reading file path.
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -64,6 +72,8 @@ public class Storage {
 
     /**
      * Creates file at the specified file path.
+     *
+     * @throws DukeException exception creating file.
      */
     private void createFile() throws DukeException {
         try {
@@ -79,6 +89,7 @@ public class Storage {
      * Saves task list to file path.
      *
      * @param taskList the path to save task list to.
+     * @throws DukeException exception when saving tasks.
      */
     public void save(TaskList taskList) throws DukeException {
         try {

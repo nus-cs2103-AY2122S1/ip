@@ -10,10 +10,18 @@ import duke.io.Ui;
 public class TaskList {
     private final ArrayList<Task> taskList;
 
+    /**
+     * Constructor for TaskList class. Initialises taskList to empty array.
+     */
     public TaskList() {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Constructor for TaskList class. Initialises taskList to the parameter.
+     *
+     * @param taskList the list of tasks encapsulated by TaskList class.
+     */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
@@ -79,9 +87,12 @@ public class TaskList {
     /**
      * Prints out the task list formatted and indented.
      *
-     * @return
+     * @return String representation of the list of tasks.
      */
     public String print(String message) {
+        if (taskList.size() == 0) {
+            return Ui.print("There are no items in your list now!");
+        }
         StringBuilder tasksString = new StringBuilder();
         if (!message.isEmpty()) {
             tasksString.append(message).append(System.lineSeparator());
