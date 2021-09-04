@@ -1,6 +1,7 @@
 package duke.util;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import duke.task.Task;
 
@@ -8,6 +9,15 @@ import duke.task.Task;
  * This is an Ui class that deals with interaction with Users.
  */
 public class Ui {
+
+    /**
+     * Class field of a Ui instance.
+     */
+    private Scanner scanner;
+
+    public Ui() {
+        this.scanner = new Scanner(System.in);
+    }
 
     /**
      * Returns the String for the standard welcome message user sees when initiating duke.
@@ -87,6 +97,25 @@ public class Ui {
             message += String.format("%d. %s\n", i + 1, tasks.get(i));
         }
         return message;
+    }
+
+    /**
+     * Returns the farewell message when the user says bye to Duke when using CLI.
+     */
+    public String bidFarewell() {
+        String farewellMessage = "Bye. Hope to see you again soon!";
+        this.scanner.close();
+        return farewellMessage;
+    }
+
+    /**
+     * Returns a string representing the command keyed in by the user.
+     *
+     * @return A String representing a single command.
+     */
+    public String readCommand() {
+        String command = this.scanner.nextLine();
+        return command;
     }
 
 }
