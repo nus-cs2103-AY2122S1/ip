@@ -25,6 +25,7 @@ public class TaskList {
      * @return The message telling the user that the task has been added.
      */
     public String addTask(Task task) {
+        assert task != null : "Attempting to add a null task";
         String message;
         this.tasks.add(task);
         this.numOfUncompletedTasks++;
@@ -41,7 +42,7 @@ public class TaskList {
      *
      * @param task The previously saved task to add to the taskList.
      */
-    public void addSavedTask(Task task) {
+    public void addSavedTaskFromStorage(Task task) {
         this.tasks.add(task);
         if (!task.isDone()) {
             this.numOfUncompletedTasks++;
@@ -63,6 +64,7 @@ public class TaskList {
             return message;
         }
         Task task = this.tasks.get(index - 1);
+        assert task != null : "Attempting to remove a null task";
         this.tasks.remove(index - 1);
         if (!task.isDone()) {
             numOfUncompletedTasks--;
@@ -88,7 +90,9 @@ public class TaskList {
             return "This task at index " + index + " has already been completed.\n";
         }
         String message;
-        this.tasks.get(index - 1).markAsDone();
+        Task task = this.tasks.get(index - 1);
+        assert task != null : "Attempting to edit a null task.";
+        task.markAsDone();
         this.numOfUncompletedTasks--;
         message = "congratulations! This task has been completed:\n"
                 + this.tasks.get(index - 1) + "\n";
