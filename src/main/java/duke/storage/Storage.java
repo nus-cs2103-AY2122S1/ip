@@ -1,5 +1,14 @@
 package duke.storage;
 
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.exception.InvalidInputException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -8,13 +17,6 @@ import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Ui;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
 
 /**
  * Represents a Storage object to keep of track changes to the task list.

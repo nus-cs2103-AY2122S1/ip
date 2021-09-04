@@ -58,6 +58,11 @@ public abstract class Task {
 
     public abstract String formatSave();
 
+    /**
+     * Returns String representation of Task.
+     *
+     * @return String representation of the task.
+     */
     public String toString() {
         assert description != null;
         return "[" + getStatusIcon() + "] " + description;

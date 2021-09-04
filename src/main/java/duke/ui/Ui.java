@@ -52,13 +52,13 @@ public class Ui {
      */
     public String showSupportedCommands() {
         String message = formatMessage(
-                "bye - ends current chat session"
-                , "deadline <description> (by: <date> <time>) - adds new Deadline"
-                , "event <description> (at: <date> <time>) - adds new Event"
-                , "list - shows your current task list"
-                , "done <task number> - marks task as done"
-                , "delete <task number> - deletes task from list"
-                , "find <keyword> - shows all tasks that contains keyword"
+                "bye - ends current chat session",
+                "deadline <description> (by: <date> <time>) - adds new Deadline",
+                "event <description> (at: <date> <time>) - adds new Event",
+                "list - shows your current task list",
+                "done <task number> - marks task as done",
+                "delete <task number> - deletes task from list",
+                "find <keyword> - shows all tasks that contains keyword"
         );
         return message;
     }
