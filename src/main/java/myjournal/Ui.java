@@ -32,6 +32,7 @@ public class Ui {
      * @return The task added.
      */
     public String taskAddPrint(TaskList taskList) {
+        assert taskList != null : "TaskList should not be null";
         return "Okay!! I've added the following task:\n"
                 + taskList.getTask(taskList.getSize() - 1) + "\n"
                 + "Now you have " + taskList.getSize() + " in the list";
@@ -44,6 +45,7 @@ public class Ui {
      * @return The task removed.
      */
     public String removeTaskPrint(Task task) {
+        assert task != null : "Task should not be null";
         return "Okay!! I have removed the following task:\n"
                 + task;
     }
@@ -55,6 +57,7 @@ public class Ui {
      * @return The tasks found.
      */
     public String findTaskPrint(TaskList tasks) {
+        assert tasks != null : "TaskList should not be null";
         if (tasks.getSize() == 0) {
             return "You have no task that matches the word!";
         } else {
@@ -73,6 +76,7 @@ public class Ui {
      * @return The task marked as done.
      */
     public String doneTaskPrint(Task task) {
+        assert task != null : "Task should not be null";
         return "Okay!! I have marked this task as done:\n" + task;
     }
 
