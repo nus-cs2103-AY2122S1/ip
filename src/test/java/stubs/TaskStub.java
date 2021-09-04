@@ -8,8 +8,8 @@ public class TaskStub extends Task {
 
     private boolean isDone;
 
-    public TaskStub(String description, boolean isDone, LocalDate localDate) {
-        super(description, isDone, localDate);
+    public TaskStub(String description, boolean isDone) {
+        super(description, isDone);
     }
 
     public TaskStub() {
