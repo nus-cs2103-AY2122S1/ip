@@ -1,5 +1,8 @@
 package duke;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,7 +20,15 @@ public class Ui {
      * Prints out the welcome message upon starting Duke.
      */
     public static String welcomeMessage() {
-        return "Welcome to Ben's. How may I help you?\n" + Storage.printStartingFileContents();
+        String filePath = "data/duke.txt";
+        Path storagePath = Paths.get(".", filePath);
+        if (!Files.exists(storagePath)) {
+            return "Welcome to Ben's. How may I help you?\n" + firstTimeMessage()
+                    + importantMessage();
+        } else {
+            return "Welcome to Ben's. How may I help you?\n" + Storage.printStartingFileContents()
+                    + importantMessage();
+        }
     }
 
     /**

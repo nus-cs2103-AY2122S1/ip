@@ -135,16 +135,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         String openingMessage = Ui.welcomeMessage();
-        dialogContainer.getChildren().add(new DialogBox(openingMessage, DUKE));
-
-        String displayMessage = Ui.firstTimeMessage();
-        dialogContainer.getChildren().add(new DialogBox(displayMessage, DUKE));
-
-        String importantMessage = Ui.importantMessage();
-        dialogContainer.getChildren().add(new DialogBox(importantMessage, DUKE));
-
-        String storage = Storage.printStartingFileContents();
-        dialogContainer.getChildren().add(new DialogBox(storage, DUKE));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(openingMessage, DUKE));
 
         // Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {

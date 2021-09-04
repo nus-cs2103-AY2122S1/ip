@@ -24,10 +24,10 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+            duke.start(stage);
+            duke.run();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            duke.run();
         }
     }
 }
