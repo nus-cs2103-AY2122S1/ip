@@ -44,7 +44,6 @@ public class Parser {
     /**
      * Checks user command format.
      *
-     * @param command user input command
      * @param typeOfCommand command format to check for
      * @param command user input command to check
      * @throws IllegalFormatException if user gives invalid command
