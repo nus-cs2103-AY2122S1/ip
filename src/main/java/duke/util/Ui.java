@@ -14,6 +14,7 @@ import duke.task.TaskList;
 public class Ui {
     private String logo;
     private String line;
+    private String newline = "\n";
 
     /**
      * Creates an Ui.
@@ -40,24 +41,31 @@ public class Ui {
 
     /**
      * Displays an error in loading file.
+     *
+     * @return Output of loading error.
      */
-    public void showLoadingError() {
-        System.out.println(line);
-        System.out.println("oh no.. i seem to have trouble loading the file");
-        System.out.println(line);
+    public String showLoadingError() {
+        String message = "";
+        message += line + newline;
+        message += "oh no.. i seem to have trouble loading the file" + newline;
+        message += line + newline;
+        return message;
     }
 
     /**
      * Displays a list of tasks.
      *
      * @param cmdList Task list to be displayed.
+     * @return String representation of task list.
      */
-    public void printList(TaskList cmdList) {
-        System.out.println(line);
+    public String showList(TaskList cmdList) {
+        String message = "";
+        message += line + newline;
         for (int i = 0; i < cmdList.getLength(); i++) {
-            System.out.println((i + 1) + "." + cmdList.get(i));
+            message += (i + 1) + "." + cmdList.get(i) + newline;
         }
-        System.out.println(line);
+        message += line + newline;
+        return message;
     }
 
     /**
@@ -65,12 +73,15 @@ public class Ui {
      *
      * @param cmdList List containing tasks.
      * @param i Index of task that is completed.
+     * @return Output of completing task.
      */
-    public void printTaskDone(TaskList cmdList, int i) {
-        System.out.println(line);
-        System.out.println("congrats on completing this task! :");
-        System.out.println("  " + cmdList.get(i));
-        System.out.println(line);
+    public String showTaskDone(TaskList cmdList, int i) {
+        String message = "";
+        message += line + newline;
+        message += "congrats on completing this task! :" + newline;
+        message += "  " + cmdList.get(i) + newline;
+        message += line + newline;
+        return message;
     }
 
     /**
@@ -78,13 +89,16 @@ public class Ui {
      *
      * @param cmdList List containing tasks.
      * @param i Index of task that is added.
+     * @return Output of adding task.
      */
-    public void printTaskAdded(TaskList cmdList, int i) {
-        System.out.println(line);
-        System.out.println("noted! ive added this task:");
-        System.out.println("  " + cmdList.get(i));
-        System.out.println("now you have " + cmdList.getLength() + " tasks in your list");
-        System.out.println(line);
+    public String showTaskAdded(TaskList cmdList, int i) {
+        String message = "";
+        message += line + newline;
+        message += "noted! ive added this task:" + newline;
+        message += "  " + cmdList.get(i) + newline;
+        message += "now you have " + cmdList.getLength() + " tasks in your list" + newline;
+        message += line + newline;
+        return message;
     }
 
     /**
@@ -92,67 +106,86 @@ public class Ui {
      *
      * @param cmdList List containing tasks.
      * @param i Index of task that is removed.
+     * @return Output of deleting task.
      */
-    public void printTaskDeleted(TaskList cmdList, int i) {
-        System.out.println(line);
-        System.out.println("ok, ive deleted this task :");
-        System.out.println("  " + cmdList.get(i));
-        System.out.println("now you have " + (cmdList.getLength() - 1) + " tasks in your list");
-        System.out.println(line);
+    public String showTaskDeleted(TaskList cmdList, int i) {
+        String message = "";
+        message += line + newline;
+        message += "ok, ive deleted this task :" + newline;
+        message += "  " + cmdList.get(i) + newline;
+        message += "now you have " + (cmdList.getLength() - 1) + " tasks in your list" + newline;
+        message += line + newline;
+        return message;
     }
 
     /**
      * Displays welcome message.
+     *
+     * @return Welcome message.
      */
-    public void sayHello() {
-        System.out.println("Hello from\n" + logo);
-        System.out.println(line);
-        System.out.println("hello! i'm calico ☺");
-        System.out.println("how can i assist you?");
-        System.out.println(line);
+    public String sayHello() {
+        String message = "";
+        message += "hello! i'm calico :)\n" + newline;
+        message += "how can i assist you?" + newline;
+        message += line + newline;
+        return message;
     }
 
     /**
      * Displays DukeException message.
      *
      * @param e DukeException to be displayed.
+     * @return DukeException message
      */
-    public void showDukeError(DukeException e) {
-        System.out.println(line);
-        System.out.println(e);
-        System.out.println(line);
+    public String showDukeError(DukeException e) {
+        String message = "";
+        message += line + newline;
+        message += e + newline;
+        message += line + newline;
+        return message;
     }
 
     /**
      * Displays goodbye message.
+     *
+     * @return Goodbye message.
      */
-    public void sayGoodbye() {
-        System.out.println(line);
-        System.out.println("bye friend!");
-        System.out.println(line);
+    public String sayGoodbye() {
+        String message = "";
+        message += line + newline;
+        message += "bye friend!" + newline;
+        message += line + newline;
+        return message;
     }
 
     /**
      * Displays successful query of matching tasks.
      *
      * @param results Successful matches.
+     * @return Output of matching tasks.
      */
-    public void showMatchingTasks(ArrayList<Task> results) {
-        System.out.println(line);
-        System.out.println("ive found some matches for your search query:");
+    public String showMatchingTasks(ArrayList<Task> results) {
+        String message = "";
+        message += line + newline;
+        message += "ive found some matches for your search query:" + newline;
         for (int i = 0; i < results.size(); i++) {
-            System.out.println((i + 1) + "." + results.get(i));
+            message += (i + 1) + "." + results.get(i) + newline;
         }
-        System.out.println(line);
+        message += line + newline;
+        return message;
     }
 
     /**
      * Displays no matches found
+     *
+     * @return Output of no matches.
      */
-    public void showNoMatch() {
-        System.out.println(line);
-        System.out.println("im sorry i couldn't find any matches :(");
-        System.out.println(line);
+    public String showNoMatch() {
+        String message = "";
+        message += line + newline;
+        message += "im sorry i couldn't find any matches :(" + newline;
+        message += line + newline;
+        return message;
     }
 
     /**
