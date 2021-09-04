@@ -9,7 +9,9 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
 
-    private String deadlineStr;
+    private static final char LABEL = 'D';
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+    private String deadlineWrongFormat; // Used to store incorrect deadline formats.
     private LocalDateTime deadline;
 
     /**
@@ -19,12 +21,12 @@ public class Deadline extends Task {
      * @param deadline Deadline of the deadline task.
      */
     public Deadline(String details, String deadline) {
-        super(details);
+        super(LABEL, details);
         try {
-            this.deadline = LocalDateTime.parse(deadline, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-            deadlineStr = null;
+            this.deadline = LocalDateTime.parse(deadline, FORMATTER);
+            deadlineWrongFormat = null;
         } catch (DateTimeParseException e) {
-            deadlineStr = deadline;
+            deadlineWrongFormat = deadline;
             this.deadline = null;
         }
     }
@@ -50,12 +52,15 @@ public class Deadline extends Task {
 
     /**
      * Returns deadline of task as a String.
-     * Most likely due to incorrect input format.
      *
      * @return Task deadline as a String.
      */
-    public String getDeadlineStr() {
-        return deadlineStr;
+    public String getDeadlineAsStr() {
+        if (deadline == null) {
+            return deadlineWrongFormat;
+        } else {
+            return deadline.format(FORMATTER);
+        }
     }
 
     /**
@@ -65,12 +70,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        if (deadline == null) {
-            return "[D]" + super.toString() + " (by: " + deadlineStr + ")";
-        } else {
-            return "[D]" + super.toString() + " (by: "
-                    + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
-                    + ")";
-        }
+        return "[" + LABEL + "]" + super.toString() + " (by: " + getDeadlineAsStr() + ")";
     }
 }

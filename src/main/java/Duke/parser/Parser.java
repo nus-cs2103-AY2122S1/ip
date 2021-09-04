@@ -19,7 +19,59 @@ public class Parser {
     public Parser() {}
 
     /**
-     * Parse user input.
+     * Gets the index of the center token in the input string.
+     *
+     * @param center The center token.
+     * @param input The input string.
+     * @return The index of the center token.
+     * @throws InvalidInputException Thrown when the center token does not exist
+     * or when the input string is empty.
+     */
+    private int getCenterIndex(String center, String input) throws InvalidInputException {
+        if (input.length() == 0) {
+            throw new InvalidInputException("Task description is missing in input.");
+        }
+        int centerIndex = input.indexOf(center);
+        if (centerIndex == -1) {
+            throw new InvalidInputException(center + " is missing in input.");
+        }
+        return centerIndex;
+    }
+
+    /**
+     * Gets the input before the center token in the input string.
+     *
+     * @param input The input string.
+     * @param centerIndex The index of the center token.
+     * @return The input before the center token.
+     * @throws InvalidInputException Thrown when there is no input before the center token.
+     */
+    private String inputBeforeCenter(String input, int centerIndex) throws InvalidInputException {
+        String strBeforeCenter = input.substring(0, centerIndex).trim();
+        if (strBeforeCenter.length() == 0) {
+            throw new InvalidInputException("There must be details before the center.");
+        }
+        return strBeforeCenter;
+    }
+
+    /**
+     * Gets the input after the center token in the input string.
+     *
+     * @param input The input string.
+     * @param centerIndex The index of the center token.
+     * @param centerLength The length of the center token.
+     * @return The input after the center token.
+     * @throws InvalidInputException Thrown when there is no input after the center token.
+     */
+    private String inputAfterCenter(String input, int centerIndex, int centerLength) throws InvalidInputException {
+        String strAfterCenter = input.substring(centerIndex).trim();
+        if (strAfterCenter.length() <= centerLength) {
+            throw new InvalidInputException("There must be details after the center.");
+        }
+        return strAfterCenter.substring(centerLength).trim();
+    }
+    /**
+     * Parse user input and divides it into the necessary components needed for Duke to respond accordingly.
      *
      * @param input User input.
      * @return HashMap containing the necessary information for Duke to respond to the input.
@@ -40,6 +92,8 @@ public class Parser {
             return data;
         }
 
+        assert !Objects.equals(cmd, "bye")
+                && !Objects.equals(cmd, "list") : cmd + " should have been returned.";
         input = input.substring(input.indexOf(cmd) + cmd.length()).trim();
 
         switch (cmd) {
@@ -60,65 +114,23 @@ public class Parser {
                 throw new InvalidInputException("To delete a task: enter \"delete (task number)\"");
             }
         case "todo":
+            getCenterIndex("", input);
+            data.put("details", input);
+            return data;
         case "deadline":
+            int byIndex = getCenterIndex("/by", input);
+            String deadlineDetails = inputBeforeCenter(input, byIndex);
+            String deadline = inputAfterCenter(input, byIndex, 3);
+            data.put("details", deadlineDetails);
+            data.put("deadline", deadline);
+            return data;
         case "event":
-            if (input.length() == 0) {
-                throw new InvalidInputException(cmd + " task needs a description.");
-            }
-
-            String center = null;
-            switch (cmd) {
-            case "todo":
-                center = "";
-                break;
-            case "deadline":
-                center = "/by";
-                break;
-            case "event":
-                center = "/at";
-                break;
-            default:
-                assert false : cmd + " not handled by the right case.";
-                break;
-            }
-
-            int centerIndex = input.indexOf(center);
-            if (centerIndex == -1) {
-                throw new InvalidInputException("To create a " + cmd + " task, " + center + " is required.\"");
-            }
-
-            String details = "";
-            String dateTime = "";
-
-            if (!cmd.equals("todo")) {
-                details = input.substring(0, centerIndex).trim();
-                dateTime = input.substring(centerIndex).trim();
-                if (details.length() == 0 || dateTime.length() <= center.length()) {
-                    throw new InvalidInputException(cmd + " task must have details before and after "
-                            + center + ".");
-                }
-            }
-
-            dateTime = dateTime.substring(center.length()).trim();
-
-            switch (cmd) {
-            case "todo":
-                data.put("details", input);
-                return data;
-            case "deadline":
-                data.put("details", details);
-                data.put("deadline", dateTime);
-                return data;
-            case "event":
-                data.put("details", details);
-                data.put("timing", dateTime);
-                return data;
-            default:
-                assert false : cmd + " not handled by the right case.";
-                break;
-            }
-            break;
-
+            int atIndex = getCenterIndex("/at", input);
+            String eventDetails = inputBeforeCenter(input, atIndex);
+            String timing = inputAfterCenter(input, atIndex, 3);
+            data.put("details", eventDetails);
+            data.put("timing", timing);
+            return data;
         case "date":
             try {
                 LocalDate date = LocalDate.parse(input, DateTimeFormatter.ofPattern("yyyy-MM-dd"));

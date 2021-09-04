@@ -7,15 +7,18 @@ import java.time.LocalDateTime;
  */
 public abstract class Task {
 
-    private String details;
+    private final char label;
+    private final String details;
     private boolean completed;
 
     /**
      * Constructor.
      *
+     * @param label Task label.
      * @param details Details of the task.
      */
-    public Task(String details) {
+    public Task(char label, String details) {
+        this.label = label;
         this.details = details;
         completed = false;
     }
@@ -52,6 +55,14 @@ public abstract class Task {
      */
     public abstract LocalDateTime getDate();
 
+    /**
+     * Returns task label.
+     *
+     * @return Task label.
+     */
+    public char getLabel() {
+        return label;
+    }
     /**
      * Returns a String representation of the task.
      *

@@ -16,7 +16,7 @@
                 <VBox fx:id="dialogContainer" maxHeight="627.0" prefHeight="627.0" prefWidth="380.0" />
          </content>
         </ScrollPane>
-      <ScrollPane hbarPolicy="NEVER" layoutX="400.0" prefWidth="399.0" vbarPolicy="ALWAYS" vmin="1.0" vvalue="1.0">
+      <ScrollPane hbarPolicy="NEVER" layoutX="400.0" prefHeight="65.0" prefWidth="399.0" vbarPolicy="ALWAYS" vmin="1.0" vvalue="1.0">
          <content>
             <Label fx:id="feedback" text="Label" />
          </content>

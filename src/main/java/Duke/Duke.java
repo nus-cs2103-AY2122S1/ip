@@ -1,18 +1,14 @@
 package duke;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
 
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidInstructionException;
+import duke.exception.StorageMissingException;
 import duke.gui.Main;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -29,10 +25,10 @@ import javafx.application.Application;
  */
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
-    private Parser parser;
+    private final Ui ui;
+    private final Parser parser;
 
     /**
      * Constructor.
@@ -45,12 +41,8 @@ public class Duke {
         try {
             ArrayList<String> savedTasks = storage.getStorageContents();
             taskList = new TaskList(savedTasks);
-        } catch (FileNotFoundException e) {
-            try {
-                new File(filePath).createNewFile();
-            } catch (IOException ex) {
-                ui.printException(ex, "File " + filePath + " does not exist and cannot be created.");
-            }
+        } catch (StorageMissingException e) {
+            ui.storageMissing(e, "");
             taskList = new TaskList();
         } catch (InvalidInputException e) {
             ui.invalidInput(e, "Please check data in " + filePath);
@@ -70,38 +62,22 @@ public class Duke {
         for (int i = 0; i < taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
             Class<? extends Task> taskClass = task.getClass();
+            assert taskClass == ToDo.class
+                    || taskClass == Deadline.class
+                    || taskClass == Event.class : taskClass.toString() + "  is not a recognized task.";
+            String type = "" + task.getLabel();
             String details = task.getDetails();
             String done = task.isCompleted()
                     ? "done"
                     : "not-done";
-            assert taskClass == ToDo.class
-                    || taskClass == Deadline.class
-                    || taskClass == Event.class : taskClass.toString() + "  is not a recognized task.";
             if (taskClass == ToDo.class) {
-                String type = "T";
                 contents += type + ' ' + done + ' ' + details;
             } else if (taskClass == Deadline.class) {
-                String type = "D";
-                LocalDateTime deadline = ((Deadline) task).getDeadline();
-                if (deadline == null) {
-                    contents += type + ' ' + done + ' ' + details + ' '
-                            + ((Deadline) task).getDeadlineStr();
-                } else {
-                    contents += type + ' ' + done + ' ' + details + ' '
-                            + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-                }
+                contents += type + ' ' + done + ' ' + details + ' '
+                        + ((Deadline) task).getDeadlineAsStr();
             } else if (taskClass == Event.class) {
-                String type = "E";
-                LocalDateTime timing = ((Event) task).getTiming();
-                if (timing == null) {
-                    contents += type + ' ' + done + ' ' + details + ' '
-                            + ((Event) task).getTimingStr();
-                } else {
-                    LocalTime endTime = ((Event) task).getEndTime();
-                    contents += type + ' ' + done + ' ' + details + ' '
-                            + timing.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm")) + '-'
-                            + endTime.format(DateTimeFormatter.ofPattern("HHmm"));
-                }
+                contents += type + ' ' + done + ' ' + details + ' '
+                        + ((Event) task).getTimingAsStr();
             }
             contents += System.lineSeparator();
         }

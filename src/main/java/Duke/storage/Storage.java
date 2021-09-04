@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.exception.StorageMissingException;
+
 /**
  * Represents the storage for Duke. Deals with Duke operations with stored data.
  */
 public class Storage {
 
-    private String filePath;
+    private final String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -20,16 +22,28 @@ public class Storage {
 
     /**
      * Gets the contents of the storage file.
+     * Returns an empty ArrayList if there is no stored content or file does not exist.
      *
      * @return ArrayList of Strings representing Tasks.
-     * @throws FileNotFoundException If file cannot be found.
+     * @throws StorageMissingException If file does not exist and cannot be created.
      */
-    public ArrayList<String> getStorageContents() throws FileNotFoundException {
-        File f = new File(filePath);
-        Scanner s = new Scanner(f);
+    public ArrayList<String> getStorageContents() throws StorageMissingException {
+        File file = new File(filePath);
+        Scanner scanner;
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException e) {
+            try {
+                file.createNewFile();
+                return new ArrayList<>();
+            } catch (IOException ex) {
+                throw new StorageMissingException(filePath + " cannot be found and cannot be created. "
+                        + "Entered tasks will not be saved.");
+            }
+        }
         ArrayList<String> contents = new ArrayList<>();
-        while (s.hasNext()) {
-            contents.add(s.nextLine());
+        while (scanner.hasNext()) {
+            contents.add(scanner.nextLine());
         }
         return contents;
     }
