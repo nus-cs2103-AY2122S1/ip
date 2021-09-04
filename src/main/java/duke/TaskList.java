@@ -18,15 +18,6 @@ public class TaskList {
         return tasks.add(t);
     }
 
-    @Override
-    public String toString() {
-        String s = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            s += String.format("%d.%s\n", i + 1, tasks.get(i));
-        }
-        return s;
-    }
-
     public Task markAsComplete(int i) throws IndexOutOfBoundsException {
         Task t = tasks.get(i - 1);
         t.markAsComplete();
@@ -41,6 +32,16 @@ public class TaskList {
         return tasks.size();
     }
 
+    public TaskList filter(String keyword) {
+        TaskList filteredTasks = new TaskList();
+        for (Task t: tasks) {
+            if (t.desc.matches(String.format(".*\\b%s\\b.*", keyword))) {
+                filteredTasks.addTask(t);
+            }
+        }
+        return filteredTasks;
+    }
+
     public ArrayList<String> toRepr() {
         ArrayList<String> arr = new ArrayList<>();
         for (Task t: tasks) {
@@ -49,4 +50,12 @@ public class TaskList {
         return arr;
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            s += String.format("%d.%s\n", i + 1, tasks.get(i));
+        }
+        return s;
+    }
 }
