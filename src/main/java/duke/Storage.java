@@ -47,15 +47,22 @@ public class Storage {
      */
     public List<Task> loadIntoDuke() {
         List<Task> items = new ArrayList<>();
+        assert this.path.equals("." +  File.separator + "data"
+                + File.separator + "duke.txt")
+                : "File path is not correct";
         try {
             if (!file.createNewFile()) {
                 Scanner sc = new Scanner(file);
                 while (sc.hasNextLine()) {
                     String task = sc.nextLine();
                     if (task.startsWith("T")) {
+                        assert task.startsWith("T | 0 |") || task.startsWith("T | 1 |")
+                                : "Error with todo formatting";
                         items.add(new ToDo(
                                 task.substring(8), Integer.parseInt(task.substring(4, 5))));
                     } else if (task.startsWith("D")) {
+                        assert task.startsWith("D | 0 |") || task.startsWith("D | 1 |")
+                                : "Error with deadline formatting";
                         String taskSubstring = task.substring((8));
                         items.add(new Deadline(
                                 taskSubstring.substring(0, taskSubstring.indexOf("|")),
@@ -64,6 +71,8 @@ public class Storage {
                         ));
                     } else {
                         String taskSubstring = task.substring((8));
+                        assert task.startsWith("E | 0 |") || task.startsWith("E | 1 |")
+                                : "Error with event formatting";
                         items.add(new Event(
                                 taskSubstring.substring(0, taskSubstring.indexOf("|")),
                                 taskSubstring.substring(taskSubstring.indexOf("|") + 2),
