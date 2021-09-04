@@ -1,15 +1,15 @@
 package duke.task;
 
 public class Task {
-     protected String taskName;
-     protected boolean isDone;
+    protected String taskName;
+    protected boolean isDone;
 
-     public Task(String taskName) {
-         this.taskName = taskName;
-         this.isDone = false;
-     }
+    public Task(String taskName) {
+        this.taskName = taskName;
+        this.isDone = false;
+    }
 
-     public void setDone() {
+    public void setDone() {
          isDone = true;
      }
 
