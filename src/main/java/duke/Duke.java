@@ -1,25 +1,25 @@
 package duke;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * Represents a chat-bot that stores list of tasks/events that the user
  * can add/delete/complete.
  */
 public class Duke {
-    static TaskList taskList;
-    static Storage storage;
-    static Ui ui;
+    private static TaskList taskList;
+    private static Storage storage;
+    private static Ui ui;
 
     /**
-     * Initialise the program by loading/creating the data file.
+     * Starts the program by loading/creating the data file.
      */
     static void init() {
         storage = new Storage("data/duke.txt");
@@ -52,6 +52,9 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the program.
+     */
     public static void main(String[] args) {
         init();
         ui.greet();

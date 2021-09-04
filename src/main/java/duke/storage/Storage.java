@@ -1,12 +1,5 @@
 package duke.storage;
 
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,32 +8,34 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 /**
  * Encapsulates a storage object that provides functionality
- * with regard to reading and writing from a file
+ * with regard to reading and writing from a file.
  */
 public class Storage {
 
-    // instance variable
     private final String filePath;
 
-    // constructors
-
     /**
-     * Constructor for the Storage object
+     * Constructs a Storage object.
      *
-     * @param filePath the path to the location of the file
+     * @param filePath the path to the location of the file.
      */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * A method to read the data from the file and load it as
-     * the TaskList
+     * Reads the data from the file and load it as the TaskList.
      *
-     * @return the TaskList that was saved in the file
-     * @throws IOException when the file cannot be found
+     * @return the TaskList that was saved in the file.
+     * @throws IOException when the file cannot be found.
      */
     public TaskList load() throws IOException {
         TaskList listTask = new TaskList(new ArrayList<>());
@@ -88,9 +83,9 @@ public class Storage {
     }
 
     /**
-     * A method to write the current task list to the file
+     * Writes the current task list to the file.
      *
-     * @param task the current TaskList to be written to the file
+     * @param task the current TaskList to be written to the file.
      */
     public void write(TaskList task) {
         try {

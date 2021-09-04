@@ -4,20 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Encapsulates the idea of a list of tasks stored in an ArrayList
+ * Encapsulates the idea of a list of tasks stored in an ArrayList.
  */
 public class TaskList {
-
-    // instance variables
-
-    private ArrayList<Task> tasks;
-
-    // constructors
+    private final ArrayList<Task> tasks;
 
     /**
-     * Construct an instance of a TaskList
+     * Constructs an instance of a TaskList.
      *
-     * @param tasks the initial ArrayList to be used
+     * @param tasks the initial ArrayList to be used.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
@@ -32,10 +27,10 @@ public class TaskList {
     }
 
     /**
-     * Get the task at the given index
+     * Gets the task at the given index.
      *
-     * @param index the index of the task to return
-     * @return the task at specified index
+     * @param index the index of the task to return.
+     * @return the task at specified index.
      */
     public Task get(int index) {
         return tasks.get(index);
@@ -46,28 +41,28 @@ public class TaskList {
     }
 
     /**
-     * Appends a task to end of the list
+     * Appends a task to end of the list.
      *
-     * @param task the task to add
+     * @param task the task to add.
      */
     public void add(Task task) {
         tasks.add(task);
     }
 
     /**
-     * Removes a task at the given index
+     * Removes a task at the given index.
      *
-     * @param index the index of the task to delete
+     * @param index the index of the task to delete.
      */
     public void remove(int index) {
         tasks.remove(index);
     }
 
     /**
-     * Enumerates (starting from 1) tasks in list using their string representations,
-     * and stores such enumerations in a list that is to be returned
+     * Enumerates (starting from 1) tasks in list using their string representations
+     * and stores such enumerations in a list that is to be returned.
      *
-     * @return list of enumerations
+     * @return list of enumerations.
      */
     public List<String> enumerate() {
         List<String> numList = new ArrayList<>();
@@ -77,6 +72,12 @@ public class TaskList {
         return numList;
     }
 
+    /**
+     * Filters current the TaskList for tasks that contains the given string.
+     *
+     * @param word the given word to be filtered.
+     * @return a TaskList containing tasks which only contain the given word.
+     */
     public TaskList filter(String word) {
         ArrayList<Task> filterList = new ArrayList<>();
         for (Task t : tasks) {

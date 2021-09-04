@@ -1,11 +1,11 @@
 package duke.task;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.testng.annotations.Test;
+
 public class TaskTest {
-    @Test
+    @org.junit.jupiter.api.Test
     void deadline_normalInput_writtenCorrectly() {
         assertEquals("D | 0 | Test Deadline | 25-06-2021 12:00",
                 new Deadline("Test Deadline", "25-06-2021 12:00").databaseString());
