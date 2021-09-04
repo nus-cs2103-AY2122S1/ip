@@ -58,6 +58,10 @@ public class Parser {
         return input.split(key);
     }
 
+    private String[] spiltInputByKey(String input, String key, int limit) {
+        return input.split(key, limit);
+    }
+
     /**
      * Returns a command that allows the chat bot to know the next course of action to take
      * based on the user input.
@@ -130,21 +134,16 @@ public class Parser {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private String getTaskDesc(String input) throws IllegalFormatException {
-        String startKey = " ";
-        String endKey = "/";
-        int startPosition = input.indexOf(startKey);
-        int endPosition = input.indexOf(endKey);
+        String key = " ";
+        String[] details = spiltInputByKey(input, key, 3);
 
-        boolean isStartPositionOutOfRange = startPosition < 0 || startPosition >= input.length();
-        boolean isEndPositionOutOfRange = endPosition < 0 || endPosition >= input.length();
-
-        if (isStartPositionOutOfRange || isEndPositionOutOfRange) {
+        if (details.length != 3) {
             String errorMsg = "Please follow the format:\n type description /xx yyyy-mm-dd\n"
                     + " Use /by for deadline, /at for event.";
             throw new IllegalFormatException(errorMsg);
         }
 
-        return input.substring(startPosition, endPosition).trim();
+        return details[1].trim();
     }
 
     /**
@@ -243,7 +242,7 @@ public class Parser {
         String key = "find ";
         String[] details = spiltInputByKey(input, key);
 
-        if (details.length < 2) {
+        if (details.length != 2) {
             String errorMsg = "Please follow the format:\n find 'keyword'.";
             throw new IllegalFormatException(errorMsg);
         }
@@ -287,7 +286,7 @@ public class Parser {
 
     private String[] getDetails(String input) throws IllegalFormatException {
         String key = " ";
-        String[] details = input.split(" ", 4);
+        String[] details = spiltInputByKey(input, key, 4);
 
         if (details.length != 4) {
             String errorMsg = "Please follow the format:\n update 'id' 'tag' 'info'";
