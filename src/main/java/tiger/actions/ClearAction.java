@@ -2,6 +2,7 @@ package tiger.actions;
 
 import tiger.app.AppState;
 import tiger.components.TaskList;
+import tiger.constants.Messages;
 
 /**
  * Represents the action of clearing the task list.
@@ -29,7 +30,6 @@ public class ClearAction extends Action {
 
     @Override
     public AppState run() {
-        String response = "I've cleared all your tasks!";
-        return new AppState(new TaskList(), response);
+        return new AppState(new TaskList(), Messages.TIGER_CLEAR_MESSAGE.getMessage());
     }
 }

@@ -1,6 +1,7 @@
 package tiger.actions;
 
 import tiger.app.AppState;
+import tiger.constants.Messages;
 
 /**
  * Represents the action of the user inputting an invalid command.
@@ -29,7 +30,6 @@ public class InvalidAction extends Action {
 
     @Override
     public AppState run() {
-        String response = "Please enter in a valid command.";
-        return new AppState(this.applicationState.getTaskList(), response);
+        return new AppState(this.applicationState.getTaskList(), Messages.TIGER_INVALID_COMMAND_MESSAGE.getMessage());
     }
 }

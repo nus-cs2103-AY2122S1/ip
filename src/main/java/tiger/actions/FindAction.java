@@ -2,6 +2,7 @@ package tiger.actions;
 
 import tiger.app.AppState;
 import tiger.components.TaskList;
+import tiger.constants.Messages;
 
 /**
  * Represents the action of the user finding a task.
@@ -32,7 +33,12 @@ public class FindAction extends Action {
 
     public AppState run() {
         TaskList newTaskList = this.applicationState.getTaskList().findRelevantTasks(this.findDescription);
-        String response = newTaskList.toString();
+        String response;
+        if (newTaskList.size() == 0) {
+            response = Messages.TIGER_CANNOT_FIND_TASKS_MESSAGE.getMessage();
+        } else {
+            response = newTaskList.toString();
+        }
         return new AppState(this.applicationState.getTaskList(), response);
     }
 

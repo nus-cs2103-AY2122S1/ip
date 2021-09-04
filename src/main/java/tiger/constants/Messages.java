@@ -11,7 +11,11 @@ public enum Messages {
             + " you didn't backup my memory, would you like to try a partial load to see what can be recovered? "
             + "[Y/N]\nPressing N will wipe data currently stored."),
     EXCEPTION_STORAGE_SAVE ("Error encountered in saving the file! Be sure you don't have the file open while "
-            + "writing!");
+            + "writing!"),
+    TIGER_BYE_MESSAGE("Bye. Hope to see you again soon!"),
+    TIGER_CLEAR_MESSAGE("I've cleared all your tasks!"),
+    TIGER_INVALID_COMMAND_MESSAGE("Please enter in a valid command."),
+    TIGER_CANNOT_FIND_TASKS_MESSAGE("I can't find any matching tasks.");
 
     private final String message;
 

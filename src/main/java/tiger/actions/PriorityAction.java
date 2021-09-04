@@ -2,6 +2,7 @@ package tiger.actions;
 
 import tiger.app.AppState;
 import tiger.components.TaskList;
+import tiger.constants.Messages;
 import tiger.constants.Priority;
 
 /**
@@ -33,10 +34,12 @@ public class PriorityAction extends Action {
 
     public AppState run() {
         TaskList newTaskList = this.applicationState.getTaskList().findTasksByPriority(this.findPriority);
-        String response = newTaskList.toString();
+        String response;
+        if (newTaskList.size() == 0) {
+            response = Messages.TIGER_CANNOT_FIND_TASKS_MESSAGE.getMessage();
+        } else {
+            response = newTaskList.toString();
+        }
         return new AppState(this.applicationState.getTaskList(), response);
     }
-
-
-
 }
