@@ -49,10 +49,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Method that returns new DialogBox for the bot.
+     * 
+     * @param text the text that is supposed to be shown
+     * @param img the image of the bot
+     * @return the user dialogue box back to the GUI interface
+     */ 
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Method that returns new DialogBox for the user.
+     *
+     * @param text the text that is supposed to be shown
+     * @param img the image of the user
+     * @return the user dialogue box back to the GUI interface
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

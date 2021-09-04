@@ -19,20 +19,17 @@ import duke.task.Event;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.util.Timer;
-import java.util.concurrent.TimeUnit;
 
 /**
  * A CLI bot which is based off Duke.
  *
  * @author mrmrinal
  */
-public class Duke extends Application{
+public class Duke extends Application {
 
     private final Storage storage;
     private final TaskList tasks;
-    private Ui ui;
-    private Gui gui;
+    private final Gui gui;
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -40,10 +37,10 @@ public class Duke extends Application{
     private Button sendButton;
     private Scene scene;
 
-    private Image userimg = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image dukeimg = new Image(this.getClass().getResourceAsStream("/images/nestor.png"));
+    private final Image userimg = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image dukeimg = new Image(this.getClass().getResourceAsStream("/images/nestor.png"));
 
-     public enum RequestType {
+    public enum RequestType {
         DEFAULT,
         FIND,
         DONE,
@@ -73,15 +70,13 @@ public class Duke extends Application{
      */
     public Duke(String filePath) {
         storage = new Storage(filePath);
-        ui = new Ui();
         gui = new Gui();
         tasks = new TaskList(storage.loadIntoDuke());
     }
-    
-    public Duke(){
+
+    public Duke() {
         storage = new Storage("." +  File.separator + "data"
                 + File.separator + "duke.txt");
-        ui = new Ui();
         gui = new Gui();
         tasks = new TaskList(storage.loadIntoDuke());
     }
@@ -89,16 +84,16 @@ public class Duke extends Application{
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
+     * @param input the input for which the bot has to make a response
      * @return The string that dukebot outputs
      */
     String getResponse(String input) {
         RequestType userRequest;
-        if(input.equals("bye")){
+        if (input.equals("bye")) {
             storage.writeToFile(tasks);
             return gui.farewellMessage();
         } else {
             userRequest = duke.Parser.parse(input);
-            
             switch (userRequest) {
                 case DEFAULT:
                     return tasks.list();
@@ -107,18 +102,19 @@ public class Duke extends Application{
                 case UNUSUAL:
                     return gui.unusualRequest();
                 case DONE:
-                    return done(input);
+                    return makeDone(input);
                 case DELETE:
-                    return delete(input);
+                    return deleteTask(input);
                 case DEADLINE:
                     return deadline(input);
                 case EVENT:
                     return event(input);
                 case TODO:
                     return todo(input);
+                default:
+                    return tasks.list();
             }
         }
-        return "";
     }
     
 
@@ -134,7 +130,7 @@ public class Duke extends Application{
 
     }
     
-    private String done(String userInput) {
+    private String makeDone(String userInput) {
         try {
             int task = Integer.parseInt(userInput.substring(5));
             if (task > 0 && task <= tasks.getSize()) {
@@ -153,7 +149,7 @@ public class Duke extends Application{
         }
     }
     
-    private String delete(String userInput) {
+    private String deleteTask(String userInput) {
         try {
             int task = Integer.parseInt(userInput.substring(7));
             if(task > 0 && task <= tasks.getSize()){
@@ -206,7 +202,7 @@ public class Duke extends Application{
     
     private String todo(String userInput) {
         try {
-            readActivity(userInput.substring(5), "todo");
+            readActivity(userInput.substring(5));
             String description = userInput.substring(5);
             Task t = new ToDo(description);
             tasks.addTask(t);
@@ -219,10 +215,9 @@ public class Duke extends Application{
         }
     }
     
-    private static void readActivity(String userTask, 
-                                     String taskType) throws DukeException {
+    private static void readActivity(String userTask) throws DukeException {
         if (userTask.length() <= 1) {
-            throw new DukeException("Enter valid " + taskType + " activity\n");
+            throw new DukeException("Enter valid " + "todo" + " activity description\n");
         }
     }
     
