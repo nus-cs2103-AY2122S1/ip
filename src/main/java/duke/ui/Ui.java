@@ -21,11 +21,10 @@ public class Ui {
     }
 
     /**
-     * Greets the user.
+     * Greets the user and shows available commands.
      */
     public static String greet() {
-        String message = "Hello! I'm Faker!" + '\n' + "What can I do for you?";
-        return message;
+        return formatMessage("Hello, I'm Faker! What can I do for you?", "Enter <help> for supported commands!");
     }
 
     /**
@@ -53,8 +52,8 @@ public class Ui {
     public String showSupportedCommands() {
         String message = formatMessage(
                 "bye - ends current chat session",
-                "deadline <description> (by: <date> <time>) - adds new Deadline",
-                "event <description> (at: <date> <time>) - adds new Event",
+                "deadline <description> (by: <yyyy-mm-dd> <hh:mm>) - adds new Deadline",
+                "event <description> (at: <yyyy-mm-dd> <hh:mm>) - adds new Event",
                 "list - shows your current task list",
                 "done <task number> - marks task as done",
                 "delete <task number> - deletes task from list",
