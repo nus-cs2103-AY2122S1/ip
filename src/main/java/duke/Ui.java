@@ -11,6 +11,7 @@ public class Ui {
 
     /**
      * Displays the Ui for the Add command.
+     *
      * @param task particular task being handled.
      * @return String to be displayed to the user.
      */
@@ -20,6 +21,7 @@ public class Ui {
 
     /**
      * Displays the Ui for the Delete command.
+     *
      * @param task particular task being handled.
      * @param tasks the TaskList.
      * @return String to be displayed to the user.
@@ -32,6 +34,7 @@ public class Ui {
 
     /**
      * Displays the Ui for the Done command.
+     *
      * @param task particular task being handled.
      * @return String to be displayed to the user.
      */
@@ -41,6 +44,7 @@ public class Ui {
 
     /**
      * Displays the Ui for the Find command.
+     *
      * @param task particular task being handled.
      * @return String to be displayed to the user.
      */
@@ -50,6 +54,7 @@ public class Ui {
 
     /**
      * Displays the Ui for the List command.
+     *
      * @param tasks the TaskList.
      * @return String to be displayed to the user.
      */
@@ -59,6 +64,7 @@ public class Ui {
 
     /**
      * Displays the Ui for the bye command.
+     *
      * @return String to be displayed to the user.
      */
     public String showBye() {
@@ -70,6 +76,7 @@ public class Ui {
 
     /**
      * Displays the Ui for exceptions.
+     *
      * @param e exception
      * @return Error message for the particular exception.
      */
@@ -77,5 +84,18 @@ public class Ui {
         String display = e.getMessage();
         System.out.println(display);
         return display;
+    }
+
+    /**
+     * Displays the Ui for the case where
+     * duplicate tasks exist.
+     *
+     * @return String to be displayed to the user.
+     */
+    public String showDuplicate() {
+        return "Sorry you already have the same task type with the "
+                + "same task description in your list!" + "\n"
+                + "Seems like you're too stressed mann lol...."
+                + "Please enter a different task!!!!";
     }
 }

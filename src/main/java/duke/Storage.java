@@ -21,6 +21,7 @@ public class Storage {
 
     /**
      * Overwrites content to the data file.
+     *
      * @param textToAdd text to be written.
      * @throws IOException exception to be thrown.
      */
@@ -32,6 +33,7 @@ public class Storage {
 
     /**
      * Loads tasks from the disk when the bot starts.
+     *
      * @return ArrayList of tasks that were loaded.
      */
     public ArrayList<Task> load() {
@@ -64,6 +66,7 @@ public class Storage {
     /**
      * Helper method that supplements the load method
      * to load tasks from the disk when the bot starts.
+     *
      * @param path The path of the data text file.
      * @param tasks The Task ArrayList.
      * @return ArrayList of tasks that were loaded.

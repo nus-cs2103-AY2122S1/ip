@@ -23,6 +23,7 @@ public class Duke {
 
     /**
      * Sends an appropriate response to the user.
+     *
      * @param input input from the user.
      * @return String format response.
      */
