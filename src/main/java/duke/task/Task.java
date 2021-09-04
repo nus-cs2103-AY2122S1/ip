@@ -27,6 +27,7 @@ public class Task {
 
     /**
      * Returns a {@code string} description of the task.
+     *
      * @return task name.
      */
     public String getTaskName() {
@@ -35,6 +36,7 @@ public class Task {
 
     /**
      * Returns a {@code boolean} value that indicates completion status of the task.
+     *
      * @return Completion status of task.
      */
     public boolean isDone() {
@@ -43,6 +45,7 @@ public class Task {
 
     /**
      * Returns a {@code string} representation of a task.
+     *
      * @return task name and whether it is completed.
      */
     @Override
