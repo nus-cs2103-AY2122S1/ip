@@ -1,6 +1,9 @@
 package duke;
 import java.util.Scanner;
 
+/**
+ * Ui bridges the user and the software, providing standard output and standard error channels
+ */
 public class Ui {
     Scanner scanner;
     static String logo = " ____        _        \n"

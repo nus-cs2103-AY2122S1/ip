@@ -1,8 +1,10 @@
 package duke;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Duke is the main entity coordinating the user interface, program state, persistent storage and list of tasks.
+ */
 public class Duke {
     private Ui ui;
     private Storage storage;

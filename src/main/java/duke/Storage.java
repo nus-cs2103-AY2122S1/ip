@@ -4,6 +4,9 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Storage is concerned with the persisting of the program state in a specified location of the computer's storage
+ */
 public class Storage {
     File file;
 
@@ -16,6 +19,11 @@ public class Storage {
         this.file = f;
     }
 
+    /**
+     * reads file line by line
+     * @return ArrayList of lines read from file
+     * @throws java.io.IOException if there is error accessing file
+     */
     public ArrayList<String> readFile() throws java.io.IOException {
         ArrayList<String> arr = new ArrayList<>();
         Scanner s = new Scanner(this.file);
@@ -25,6 +33,11 @@ public class Storage {
         return arr;
     }
 
+    /**
+     * writes to file line by line
+     * @param lines ArrayList of lines to be written to file
+     * @throws java.io.IOException if there is error accessing file
+     */
     public void writeFile(ArrayList<String> lines) throws java.io.IOException {
         FileWriter fw = new FileWriter(this.file, false);
         String data = "";
@@ -35,6 +48,11 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * appends line to file
+     * @param line to be appended to file
+     * @throws java.io.IOException
+     */
     public void appendFile(String line) throws java.io.IOException {
         FileWriter fw = new FileWriter(this.file, true);
         fw.write(line); // write each task

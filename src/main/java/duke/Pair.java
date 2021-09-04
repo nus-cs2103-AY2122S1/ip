@@ -1,6 +1,9 @@
 package duke;
 import java.util.List;
 
+/**
+ * Pair encapsulates a Command Enum value and a List of string arguments, facilitating communication between classes.
+ */
 public class Pair {
     private Command cmd;
     private List<String> lst;

@@ -1,8 +1,13 @@
 package duke;
 import java.util.List;
 
-public class Parser {
-
+public abstract class Parser {
+    /**
+     * Parses user input and returns the command with the supplied arguments
+     * @param input a line of string from stdin
+     * @return a pair Comprised of a Command and a List of arguments
+     * @throws DukeException if the input is invalid
+     */
     public static Pair parseInput(String input) throws DukeException {
         if (input.matches("bye")) {
             return new Pair(Command.EXIT, List.<String>of());

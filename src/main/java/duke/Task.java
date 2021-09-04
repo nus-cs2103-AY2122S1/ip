@@ -5,6 +5,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
+/**
+ * Task is a base class encapsulating a description and its completion status
+ */
 public abstract class Task {
     protected String desc;
     protected boolean isComplete;
