@@ -25,7 +25,8 @@ public abstract class TaskWithDateTime extends Task {
             return -1; // Deadline and Events in front of ToDo
         } else if (o instanceof TaskWithDateTime) {
             TaskWithDateTime taskWithDateTime = (TaskWithDateTime) o;
-            return compareDateTimeDescription(taskWithDateTime.date, taskWithDateTime.time, taskWithDateTime.description);
+            return compareDateTimeDescription(taskWithDateTime.date,
+                    taskWithDateTime.time, taskWithDateTime.description);
         } else {
             return 0;
         }
