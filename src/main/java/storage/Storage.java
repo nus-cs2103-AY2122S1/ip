@@ -46,21 +46,21 @@ public class Storage {
                 // process the line
                 String[] output = line.split("\\s\\|\\s");
                 switch (output[0]) {
-                    case "T":
-                        Task newTodo = new Todo(output[2], output[1].equals("1"));
-                        taskList.add(newTodo);
-                        break;
-                    case "D":
-                        Task newDeadline = new Deadline(output[2], output[3], output[1].equals("1"));
-                        taskList.add(newDeadline);
-                        break;
-                    case "E":
-                        Task newEvent = new Event(output[2], output[3], output[1].equals("1"));
-                        taskList.add(newEvent);
-                        break;
-                    default:
-                        System.out.println("Detected invalid task type. Please check...");
-                        break;
+                case "T":
+                    Task newTodo = new Todo(output[2], output[1].equals("1"));
+                    taskList.add(newTodo);
+                    break;
+                case "D":
+                    Task newDeadline = new Deadline(output[2], output[3], output[1].equals("1"));
+                    taskList.add(newDeadline);
+                    break;
+                case "E":
+                    Task newEvent = new Event(output[2], output[3], output[1].equals("1"));
+                    taskList.add(newEvent);
+                    break;
+                default:
+                    System.out.println("Detected invalid task type. Please check...");
+                    break;
                 }
             }
         } catch (IOException e1) {

@@ -26,7 +26,7 @@ public abstract class Command {
      */
     public static Command parse(String input) throws InvalidCommand, NullDescription, InvalidDateFormat {
         String[] output = input.split(" ");
-        if (output.length == 0 || output[0].isEmpty() || output[0].equals(" ")) {
+        if (output.length == 0 || output[0].equals(" ")) {
             throw new InvalidCommand();
         }
 
@@ -34,32 +34,32 @@ public abstract class Command {
         Command commandType = null;
 
         switch (command) {
-            case "bye":
-                commandType = new ExitCommand();
-                break;
-            case "done":
-                commandType = new DoneCommand(Integer.parseInt(output[1]) - 1);
-                break;
-            case "delete":
-                commandType = new DeleteCommand(Integer.parseInt(output[1]) - 1);
-                break;
-            case "list":
-                commandType = new ListCommand();
-                break;
-            case "find":
-                commandType = new FindCommand(output[1]);
-                break;
-            case "todo":
+        case "bye":
+            commandType = new ExitCommand();
+            break;
+        case "done":
+            commandType = new DoneCommand(Integer.parseInt(output[1]) - 1);
+            break;
+        case "delete":
+            commandType = new DeleteCommand(Integer.parseInt(output[1]) - 1);
+            break;
+        case "list":
+            commandType = new ListCommand();
+            break;
+        case "find":
+            commandType = new FindCommand(output[1]);
+            break;
+        case "todo":
 
-            case "deadline":
+        case "deadline":
 
-            case "event":
-                commandType = new AddCommand(input);
-                break;
-            default:
-                throw new InvalidCommand();
-        }
-        return commandType;
+        case "event":
+            commandType = new AddCommand(input);
+            break;
+        default:
+            throw new InvalidCommand();
+    }
+    return commandType;
     }
 
     /**

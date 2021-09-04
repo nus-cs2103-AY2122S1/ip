@@ -1,3 +1,5 @@
 T | 1 | Read Lecture Notes | 
 E | 1 | attend class | 2019-08-28 11:00
 D | 0 | finish tutorial | 2019-08-28 15:00
+T | 0 | greet me | 
+E | 0 | say hi | 2020-09-03 12:00

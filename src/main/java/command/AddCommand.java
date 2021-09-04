@@ -25,21 +25,21 @@ public class AddCommand extends Command {
 
     private void verifyDate(String dateInfo, String type) throws InvalidDateFormat {
         switch(type) {
-            case "deadline":
-                if (dateInfo.split(" /by ").length != 2 ||
-                        dateInfo.split(" /by ")[1].split(" ").length != 2) {
-                    throw new InvalidDateFormat();
-                };
-                break;
-            case "event":
-                if (dateInfo.split(" /at ").length != 2 ||
-                        dateInfo.split(" /at ")[1].split(" ").length != 2) {
-                    throw new InvalidDateFormat();
-                };
-                break;
-            default:
-                break;
-        }
+        case "deadline":
+            if (dateInfo.split(" /by ").length != 2 ||
+                    dateInfo.split(" /by ")[1].split(" ").length != 2) {
+                throw new InvalidDateFormat();
+            };
+            break;
+        case "event":
+            if (dateInfo.split(" /at ").length != 2 ||
+                    dateInfo.split(" /at ")[1].split(" ").length != 2) {
+                throw new InvalidDateFormat();
+            };
+            break;
+        default:
+            break;
+    }
     }
 
     /**
@@ -54,45 +54,45 @@ public class AddCommand extends Command {
         this.taskType = input.split(" ")[0];
 
         switch (input.split(" ")[0]) {
-            case "todo":
-                checkDescription(input, "todo");
-                this.taskInfo = input.substring(5);
-                break;
-            case "deadline":
-                checkDescription(input, "deadline");
-                this.taskInfo = input.substring(9);
-                verifyDate(taskInfo, "deadline");
-                break;
-            case "event":
-                checkDescription(input, "event");
-                this.taskInfo = input.substring(6);
-                verifyDate(taskInfo, "event");
-                break;
-            default:
-                System.out.println("Something went wrong...");
-                break;
-        }
+        case "todo":
+            checkDescription(input, "todo");
+            this.taskInfo = input.substring(5);
+            break;
+        case "deadline":
+            checkDescription(input, "deadline");
+            this.taskInfo = input.substring(9);
+            verifyDate(taskInfo, "deadline");
+            break;
+        case "event":
+            checkDescription(input, "event");
+            this.taskInfo = input.substring(6);
+            verifyDate(taskInfo, "event");
+            break;
+        default:
+            System.out.println("Something went wrong...");
+            break;
+    }
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormat {
         Task newTask = null;
 
         switch(taskType) {
-            case "todo":
-                newTask = new Todo(taskInfo, false);
-                break;
-            case "deadline":
-                String deadlineDescription = taskInfo.split(" /by ")[0];
-                String deadlineDate = taskInfo.split(" /by ")[1];
-                newTask = new Deadline(deadlineDescription, deadlineDate, false);
-                break;
-            case "event":
-                String eventDescription = taskInfo.split(" /at ")[0];
-                String eventDate = taskInfo.split(" /at ")[1];
-                newTask = new Event(eventDescription, eventDate, false);
-                break;
-            default:
-                System.out.println("Something went wrong...");
+        case "todo":
+            newTask = new Todo(taskInfo, false);
+            break;
+        case "deadline":
+            String deadlineDescription = taskInfo.split(" /by ")[0];
+            String deadlineDate = taskInfo.split(" /by ")[1];
+            newTask = new Deadline(deadlineDescription, deadlineDate, false);
+            break;
+        case "event":
+            String eventDescription = taskInfo.split(" /at ")[0];
+            String eventDate = taskInfo.split(" /at ")[1];
+            newTask = new Event(eventDescription, eventDate, false);
+            break;
+        default:
+            System.out.println("Something went wrong...");
         }
 
         tasks.addTask(newTask);
