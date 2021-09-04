@@ -1,5 +1,16 @@
 package fan.cs2103t.duke.parser;
 
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_EMPTY_DEADLINE_DEADLINE;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_EMPTY_DEADLINE_DESCRIPTION;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_EMPTY_DELETE_COMMAND;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_EMPTY_DONE_COMMAND;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_EMPTY_EVENT_DESCRIPTION;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_EMPTY_EVENT_TIME;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_EMPTY_SEARCH_COMMAND;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_EMPTY_TODO_DESCRIPTION;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_INVALID_INPUT;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_WRONG_DEADLINE_FORMAT;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -15,14 +26,11 @@ import fan.cs2103t.duke.task.Deadline;
 import fan.cs2103t.duke.task.Event;
 import fan.cs2103t.duke.task.Task;
 import fan.cs2103t.duke.task.Todo;
-import fan.cs2103t.duke.ui.Ui;
 
 /**
  * Represents a parser for Duke to parse input from users.
  */
 public class Parser {
-
-    private static final String INVALID_INPUT = Ui.INVALID_INPUT;
 
     /**
      * Parses the specified input from users.
@@ -45,9 +53,9 @@ public class Parser {
             } catch (DukeException e) {
                 String errorMessage = e.getMessage();
                 if (errorMessage.equals("wrong input format")) {
-                    throw new DukeException(INVALID_INPUT);
+                    throw new DukeException(MESSAGE_INVALID_INPUT);
                 } else if (errorMessage.equals("empty todo description")) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+                    throw new DukeException(MESSAGE_EMPTY_TODO_DESCRIPTION);
                 }
             }
         } else if (input.startsWith("deadline")) {
@@ -58,13 +66,13 @@ public class Parser {
                 String errorMessage = e.getMessage();
                 switch (errorMessage) {
                 case "wrong input format":
-                    throw new DukeException(INVALID_INPUT);
+                    throw new DukeException(MESSAGE_INVALID_INPUT);
                 case "empty deadline description":
-                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                case "empty deadline by":
-                    throw new DukeException("OOPS!!! The deadline of a deadline cannot be empty.");
+                    throw new DukeException(MESSAGE_EMPTY_DEADLINE_DESCRIPTION);
+                case "empty deadline deadline":
+                    throw new DukeException(MESSAGE_EMPTY_DEADLINE_DEADLINE);
                 case "wrong deadline format":
-                    throw new DukeException("OOPS!!! The deadline is in the wrong format.");
+                    throw new DukeException(MESSAGE_WRONG_DEADLINE_FORMAT);
                 default:
                 }
             }
@@ -76,45 +84,45 @@ public class Parser {
                 String errorMessage = e.getMessage();
                 switch (errorMessage) {
                 case "wrong input format":
-                    throw new DukeException(INVALID_INPUT);
+                    throw new DukeException(MESSAGE_INVALID_INPUT);
                 case "empty event description":
-                    throw new DukeException("OOPS!!! The description of an event cannot be empty.");
-                case "empty event at":
-                    throw new DukeException("OOPS!!! The start/end time of an event cannot be empty.");
+                    throw new DukeException(MESSAGE_EMPTY_EVENT_DESCRIPTION);
+                case "empty event time":
+                    throw new DukeException(MESSAGE_EMPTY_EVENT_TIME);
                 default:
                 }
             }
         } else if (input.startsWith("done")) {
             if (input.equals("done")) {
-                throw new DukeException("OOPS!!! Please tell me which task you have done.");
+                throw new DukeException(MESSAGE_EMPTY_DONE_COMMAND);
             }
             if (input.charAt(4) == ' ' && isValidNum(input.substring(5))) {
                 return new DoneCommand(Integer.parseInt(input.substring(5).trim()));
             } else {
-                throw new DukeException(INVALID_INPUT);
+                throw new DukeException(MESSAGE_INVALID_INPUT);
             }
         } else if (input.startsWith("delete")) {
             if (input.equals("delete")) {
-                throw new DukeException("OOPS!!! Please tell me which task you want to delete.");
+                throw new DukeException(MESSAGE_EMPTY_DELETE_COMMAND);
             }
             if (input.charAt(6) == ' ' && isValidNum(input.substring(7))) {
                 return new DeleteCommand(Integer.parseInt(input.substring(7).trim()));
             } else {
-                throw new DukeException(INVALID_INPUT);
+                throw new DukeException(MESSAGE_INVALID_INPUT);
             }
         } else if (input.startsWith("find")) {
             if (input.equals("find")) {
-                throw new DukeException("OOPS!!! The search query cannot be empty.");
+                throw new DukeException(MESSAGE_EMPTY_SEARCH_COMMAND);
             }
             if (input.charAt(4) == ' ') {
                 return new FindCommand(input.substring(5).trim());
             } else {
-                throw new DukeException(INVALID_INPUT);
+                throw new DukeException(MESSAGE_INVALID_INPUT);
             }
         } else {
-            throw new DukeException(INVALID_INPUT);
+            throw new DukeException(MESSAGE_INVALID_INPUT);
         }
-        throw new DukeException(INVALID_INPUT);
+        throw new DukeException(MESSAGE_INVALID_INPUT);
     }
 
     private boolean isValidNum(String s) {
@@ -176,11 +184,11 @@ public class Parser {
                 }
                 by = by.substring(4);
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("empty deadline by");
+                throw new DukeException("empty deadline deadline");
             }
             by = by.trim();
             if (by.equals("")) {
-                throw new DukeException("empty deadline by");
+                throw new DukeException("empty deadline deadline");
             }
 
             try {
@@ -224,11 +232,11 @@ public class Parser {
                 }
                 at = at.substring(4);
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("empty event at");
+                throw new DukeException("empty event time");
             }
             at = at.trim();
             if (at.equals("")) {
-                throw new DukeException("empty event at");
+                throw new DukeException("empty event time");
             }
         }
         return new Event(description, at);

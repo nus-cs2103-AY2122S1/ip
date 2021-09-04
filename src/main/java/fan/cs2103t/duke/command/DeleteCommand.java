@@ -1,5 +1,8 @@
 package fan.cs2103t.duke.command;
 
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_SUCCESSFULLY_DELETED_FORMAT;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_TASK_NOT_FOUND;
+
 import fan.cs2103t.duke.task.Task;
 import fan.cs2103t.duke.task.TaskList;
 import fan.cs2103t.duke.ui.Ui;
@@ -39,16 +42,13 @@ public class DeleteCommand extends Command {
             Task t = taskList.getTasks().get(taskIndex - 1);
             String description = t.getDescriptionWithStatus();
             if (taskList.deleteTask(taskIndex - 1)) {
-                output = "Noted. I've removed this task: \n"
-                        + "  " + description + "\n"
-                        + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.";
+                output = String.format(MESSAGE_SUCCESSFULLY_DELETED_FORMAT, description, taskList.getNumOfTasks());
                 ui.displayText(output);
-                // dataHandler.storeTaskList(taskList);
             } else {
                 System.exit(1);
             }
         } catch (IndexOutOfBoundsException ex) {
-            output = "Oops, the task doesn't seem to exist.";
+            output = MESSAGE_TASK_NOT_FOUND;
             ui.displayText(output);
         }
         return output;

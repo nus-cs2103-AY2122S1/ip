@@ -1,5 +1,6 @@
 package fan.cs2103t.duke.ui;
 
+import fan.cs2103t.duke.exception.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -36,6 +37,13 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(new Ui().greet(), dukeImage)
         );
+        try {
+            duke.initializeDukeWithStoragePath("data/duke.txt");
+        } catch (DukeException e) {
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(e.getMessage(), dukeImage)
+            );
+        }
     }
 
     /**

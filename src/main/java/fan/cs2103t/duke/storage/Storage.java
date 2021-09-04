@@ -1,5 +1,8 @@
 package fan.cs2103t.duke.storage;
 
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_ERROR_READING_DATA;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_ERROR_WRITING_DATA;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -56,19 +59,18 @@ public class Storage {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
             } catch (IOException e) {
-                System.err.println("\nOOPS!!! Fail to create data file!");
+                System.err.println("OOPS!!! Fail to create data file!");
                 System.exit(1);
             }
         }
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
-                Task t = parse(scanner.nextLine());
+                Task t = convertStringToTask(scanner.nextLine());
                 list.add(t);
             }
         } catch (Exception e) {
-            System.err.println("\nOOPS!!! An error occurred when reading from the data file.");
-            throw new DukeException("corrupted data file");
+            throw new DukeException(MESSAGE_ERROR_READING_DATA);
         }
         return new TaskList(list);
     }
@@ -87,11 +89,11 @@ public class Storage {
             fw.flush();
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("OOPS!!! An error occurred when writing to the data file.");
+            throw new DukeException(MESSAGE_ERROR_WRITING_DATA);
         }
     }
 
-    private Task parse(String task) {
+    private Task convertStringToTask(String task) {
         task = task.trim();
         int m = task.indexOf('.');
         task = task.substring(m + 1);

@@ -13,7 +13,6 @@ public class Ui {
             + " | |_| | |_| |   <  __/\n"
             + " |____/ \\__,_|_|\\_\\___|\n";
     public static final String DIVIDER = "____________________________________________________________";
-    public static final String INVALID_INPUT = "OOPS!!! I'm sorry, but I don't know what that means :-(";
 
     private final Scanner scanner;
 

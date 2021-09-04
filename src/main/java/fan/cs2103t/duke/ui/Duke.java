@@ -13,27 +13,35 @@ import fan.cs2103t.duke.task.TaskList;
  */
 public class Duke {
 
-    private final Storage storage;
-    private final Parser parser;
+    private Storage storage;
+    private Parser parser;
     private TaskList tasks;
-    private final Ui ui;
+    private Ui ui;
 
     /**
-     * Constructs Duke with the specified file path.
+     * Empty constructor.
+     */
+    public Duke() {}
+
+    /**
+     * Initializes Duke with the specified file path.
      * <p>
      * Initializes the UI manager, the storage manager, and the parser.
      * Duke's data will be stored in the file denoted by the specified file path.
      *
      * @param filePath the specified file path to store Duke's data.
+     * @throws DukeException if there occurs any error during initialization.
      */
-    public Duke(String filePath) {
+    public void initializeDukeWithStoragePath(String filePath) throws DukeException {
         ui = new Ui();
-        storage = new Storage(filePath);
         parser = new Parser();
+        storage = new Storage(filePath);
         try {
             tasks = storage.retrieveTaskList();
         } catch (DukeException e) {
             tasks = new TaskList();
+            storage.saveTaskList(tasks);
+            throw new DukeException(e.getMessage());
         }
     }
 
