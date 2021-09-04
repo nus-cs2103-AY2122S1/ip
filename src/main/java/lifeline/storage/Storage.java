@@ -8,7 +8,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
@@ -101,9 +100,10 @@ public class Storage {
 
     private void addDeadlineTask(JsonObject deadline, TaskList taskList) {
         String name = deadline.get("name").getAsString();
-        LocalDateTime by = gson.fromJson(deadline.get("by"), LocalDateTime.class);
+        LocalDate dueDate = gson.fromJson(deadline.get("dueDate"), LocalDate.class);
+        LocalTime dueTime = gson.fromJson(deadline.get("dueTime"), LocalTime.class);
         boolean isDone = deadline.get("isDone").getAsBoolean();
-        Deadline savedDeadline = new Deadline(name, by, isDone);
+        Deadline savedDeadline = new Deadline(name, dueDate, dueTime, isDone);
         taskList.add(savedDeadline);
     }
 

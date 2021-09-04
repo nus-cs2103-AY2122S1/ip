@@ -96,7 +96,7 @@ public class CommandHandlerTest {
         Storage storage = new Storage("test.json");
         TaskList taskList = new TaskList(new ArrayList<Task>());
         Ui ui = new Ui();
-        Command.EVENT.getExecute().apply("event wedding /at 04/03/21 1400-1600", storage, taskList, ui);
+        Command.EVENT.getExecute().apply("event wedding /at 04/03/21 1400 1600", storage, taskList, ui);
         assertEquals("[E][ ] wedding (at: Mar 4 2021 2:00 PM - 4:00 PM)", taskList.getTask(0).toString());
     }
 

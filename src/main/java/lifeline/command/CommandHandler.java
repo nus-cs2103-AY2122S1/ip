@@ -13,13 +13,12 @@ import static lifeline.util.ErrorString.ERROR_NON_INTEGER_INDEX;
 import static lifeline.util.ErrorString.ERROR_TODO_MISSING_DETAILS;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import lifeline.exception.LifelineException;
+import lifeline.parser.DateTimeParser;
 import lifeline.storage.Storage;
 import lifeline.task.Deadline;
 import lifeline.task.Event;
@@ -87,26 +86,11 @@ public class CommandHandler {
      */
     public static String handleDeadline(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
-        String[] commands = splitCommands(command);
-        assert Command.DEADLINE.hasCommand(commands[0]);
-        // Get Deadline name and details
-        String[] description = commands[1].split("/by", 2);
-        if (description.length != 2) {
-            throw new LifelineException(ERROR_DEADLINE_INCORRECT_FORMAT);
-        }
-        try {
-            // Parse date from user input
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy HHmm");
-            LocalDateTime dateTime = LocalDateTime.parse(description[1].trim(), formatter);
-
-            // Create new task
-            Task newTask = new Deadline(description[0].trim(), dateTime);
-            taskList.add(newTask);
-            storage.save(taskList);
-            return ui.showAddedTask(newTask);
-        } catch (DateTimeParseException e) {
-            throw new LifelineException(ERROR_DEADLINE_INCORRECT_FORMAT);
-        }
+        assert Command.DEADLINE.hasCommand(splitCommands(command)[0]);
+        Task newTask = createTask(command, "/by");
+        taskList.add(newTask);
+        storage.save(taskList);
+        return ui.showAddedTask(newTask);
     }
 
     /**
@@ -122,52 +106,11 @@ public class CommandHandler {
      */
     public static String handleEvent(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
-        String[] commands = splitCommands(command);
-        assert Command.EVENT.hasCommand(commands[0]);
-
-        // Get event name and details
-        String[] descriptions = commands[1].trim().split("/at", 2);
-        if (descriptions.length != 2) {
-            throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
-        }
-        String eventName = descriptions[0].trim();
-
-        // Get event date and duration
-        String[] eventDateAndDuration = descriptions[1].trim().split("\\s", 2);
-        if (eventDateAndDuration.length != 2) {
-            throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
-        }
-        String eventDate = eventDateAndDuration[0];
-        String eventDuration = eventDateAndDuration[1];
-
-        try {
-            // Create date pattern
-            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yy");
-
-            // Parse input date as LocalDate object
-            LocalDate date = LocalDate.parse(eventDate.trim(), dateFormatter);
-
-            // Get start time and endtime of event
-            String[] duration = eventDuration.split("-", 2);
-            if (duration.length != 2) {
-                throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
-            }
-
-            // Create time pattern
-            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
-
-            // Parse start time and end time as LocalTime Object
-            LocalTime startTime = LocalTime.parse(duration[0], timeFormatter);
-            LocalTime endTime = LocalTime.parse(duration[1], timeFormatter);
-
-            // Create new Task and add to tasklist
-            Task newTask = new Event(eventName, date, startTime, endTime);
-            taskList.add(newTask);
-            storage.save(taskList);
-            return ui.showAddedTask(newTask);
-        } catch (DateTimeParseException e) {
-            throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
-        }
+        assert Command.EVENT.hasCommand(splitCommands(command)[0]);
+        Task newTask = createTask(command, "/at");
+        taskList.add(newTask);
+        storage.save(taskList);
+        return ui.showAddedTask(newTask);
     }
 
     /**
@@ -184,8 +127,9 @@ public class CommandHandler {
             throws LifelineException {
         String[] commands = splitCommands(command);
         assert Command.FIND.hasCommand(commands[0]);
-        TaskList foundTasks = taskList.findTasks(commands[1].toLowerCase());
-        return ui.showFoundTasks(foundTasks, commands[1]);
+        String keyword = commands[1];
+        TaskList foundTasks = taskList.findTasks(keyword.toLowerCase());
+        return ui.showFoundTasks(foundTasks, keyword);
     }
 
     /**
@@ -201,9 +145,8 @@ public class CommandHandler {
      */
     public static String handleToDo(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
-        String[] commands = splitCommands(command);
-        assert Command.TODO.hasCommand(commands[0]);
-        Task newTask = new ToDo(commands[1].trim());
+        assert Command.TODO.hasCommand(splitCommands(command)[0]);
+        Task newTask = createTask(command);
         taskList.add(newTask);
         storage.save(taskList);
         return ui.showAddedTask(newTask);
@@ -250,6 +193,32 @@ public class CommandHandler {
         return ui.showDeletedTaskMessage(taskList);
     }
 
+    private static ArrayList<Integer> getIndicesFromCommand(String command) throws LifelineException {
+        String[] commands = splitCommands(command);
+        String indices = commands[1];
+        String[] splitIndices = indices.split("\\s*,\\s*");
+
+        ArrayList<Integer> indicesAsInteger = new ArrayList<>();
+        for (int i = 0; i < splitIndices.length; i++) {
+            try {
+                int taskIndex = Integer.parseInt(splitIndices[i]) - 1;
+                indicesAsInteger.add(taskIndex);
+            } catch (NumberFormatException e) {
+                throw new LifelineException(ERROR_NON_INTEGER_INDEX);
+            }
+        }
+        return indicesAsInteger;
+    }
+
+    private static void checkIndexBounds(ArrayList<Integer> indices, TaskList taskList) throws LifelineException {
+        for (int i = 0; i < indices.size(); i++) {
+            int currIndex = indices.get(i);
+            if (currIndex >= taskList.getSize() || currIndex < 0) {
+                throw new LifelineException(ERROR_INDEX_OUT_OF_BOUNDS);
+            }
+        }
+    }
+
     private static String[] splitCommands(String command) throws LifelineException {
         String[] commands = command.split("\\s", 2);
         if (commands.length < 2) {
@@ -278,32 +247,71 @@ public class CommandHandler {
 
     }
 
-    private static ArrayList<Integer> getIndicesFromCommand(String command) throws LifelineException {
+    private static Task createTask(String command) throws LifelineException {
         String[] commands = splitCommands(command);
-        ArrayList<Integer> indices = parseIndicesFromCommand(commands[1].trim());
-        return indices;
+        Task newTask = new ToDo(commands[1]);
+        return newTask;
     }
 
-    private static void checkIndexBounds(ArrayList<Integer> indices, TaskList taskList) throws LifelineException {
-        for (int i = 0; i < indices.size(); i++) {
-            int currIndex = indices.get(i);
-            if (currIndex >= taskList.getSize() || currIndex < 0) {
-                throw new LifelineException(ERROR_INDEX_OUT_OF_BOUNDS);
-            }
+
+    private static Task createTask(String command, String keyword) throws LifelineException {
+        String[] details = splitCommands(command);
+
+        if (Command.EVENT.hasCommand(details[0])) {
+            return createEvent(details[1], keyword);
+        }
+
+        assert Command.DEADLINE.hasCommand(details[0]);
+
+        return createDeadline(details[1], keyword);
+    }
+
+    private static Deadline createDeadline(String details, String keyword) throws LifelineException {
+        String[] descriptions = details.split(keyword, 2);
+
+        if (descriptions.length < 2) {
+            throw new LifelineException(ERROR_DEADLINE_INCORRECT_FORMAT);
+        }
+
+        String[] dateAndTime = descriptions[1].trim().split("\\s", 2);
+
+        if (dateAndTime.length < 2) {
+            throw new LifelineException(ERROR_DEADLINE_INCORRECT_FORMAT);
+        }
+
+        try {
+            LocalDate date = DateTimeParser.parseDate(dateAndTime[0].trim());
+            LocalTime time = DateTimeParser.parseTime(dateAndTime[1].trim());
+            return new Deadline(descriptions[0].trim(), date, time);
+        } catch (DateTimeParseException e) {
+            throw new LifelineException(ERROR_DEADLINE_INCORRECT_FORMAT);
         }
     }
 
-    private static ArrayList<Integer> parseIndicesFromCommand(String indices) throws LifelineException {
-        String[] splitIndices = indices.split("\\s*,\\s*");
-        ArrayList<Integer> indicesAsInteger = new ArrayList<>();
-        for (int i = 0; i < splitIndices.length; i++) {
-            try {
-                int taskIndex = Integer.parseInt(splitIndices[i]) - 1;
-                indicesAsInteger.add(taskIndex);
-            } catch (NumberFormatException e) {
-                throw new LifelineException(ERROR_NON_INTEGER_INDEX);
-            }
+    private static Event createEvent(String details, String keyword) throws LifelineException {
+        String[] descriptions = details.split(keyword, 2);
+
+        if (descriptions.length < 2) {
+            throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
         }
-        return indicesAsInteger;
+
+        String[] eventDateAndDuration = descriptions[1].trim().split("\\s", 3);
+
+        if (eventDateAndDuration.length < 3) {
+            throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
+        }
+
+        String eventDate = eventDateAndDuration[0];
+        String eventStartTime = eventDateAndDuration[1];
+        String eventEndTime = eventDateAndDuration[2];
+
+        try {
+            LocalDate date = DateTimeParser.parseDate(eventDate.trim());
+            LocalTime startTime = DateTimeParser.parseTime(eventStartTime.trim());
+            LocalTime endTime = DateTimeParser.parseTime(eventEndTime.trim());
+            return new Event(descriptions[0].trim(), date, startTime, endTime);
+        } catch (DateTimeParseException e) {
+            throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
+        }
     }
 }

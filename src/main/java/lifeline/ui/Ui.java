@@ -158,7 +158,7 @@ public class Ui {
                 + "delete <INDEX>: Deletes task at index. You can specify multiple indices separated by commas.\n"
                 + "find <KEYWORD>: Find all tasks containing keyword,\n"
                 + "deadline <DESC> /by <date> <time>: Creates Deadline.\n"
-                + "event <DESC> /at <date> <startTime>-<endTime>: Creates Event.\n"
+                + "event <DESC> /at <date> <startTime> <endTime>: Creates Event.\n"
                 + "todo <DESC>: Creates ToDo.\n"
                 + "help: Shows this message.\n";
     }
