@@ -24,6 +24,7 @@ public class TaskList {
      * @return Added to-do.
      */
     public Task addToDo(String description) {
+        assert !description.equals("") : "description of a todo cannot be empty";
         Task newTask = new ToDo(description);
         tasks.add(newTask);
         return newTask;
@@ -38,6 +39,8 @@ public class TaskList {
      * @throws DateTimeParseException If format of input date is wrong.
      */
     public Task addDeadline(String description, String by) throws DateTimeParseException {
+        assert !description.equals("") : "description of a deadline cannot be empty";
+        assert !by.equals("") : "date of a deadline cannot be empty";
         LocalDate date = LocalDate.parse(by);
         Task newTask = new Deadline(description, date);
         tasks.add(newTask);
@@ -53,6 +56,8 @@ public class TaskList {
      * @throws DateTimeParseException If format of input date is wrong.
      */
     public Task addEvent(String description, String at) throws DateTimeParseException {
+        assert !description.equals("") : "description of an event cannot be empty";
+        assert !at.equals("") : "date of an event cannot be empty";
         LocalDate date = LocalDate.parse(at);
         Task newTask = new Event(description, date);
         tasks.add(newTask);
