@@ -21,8 +21,6 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final String startMessage = "Hi there! How may I help you?";
-    private final String endMessage = "Bye. Hope to see you again!";
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -33,6 +31,8 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+        String startMessage = "Hi there! How may I help you?\n"
+                + "To access the help page, type \"help\"";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(startMessage, dukeImage)
         );
@@ -46,6 +46,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String response;
         String input = userInput.getText();
+        String endMessage = "Bye. Hope to see you again!";
 
         if (input.equals("bye")) {
             response = endMessage;

@@ -2,6 +2,7 @@ package duke.util;
 
 import duke.exceptions.IllegalFormatException;
 import duke.exceptions.UnknownCommandException;
+import duke.task.TaskList;
 
 /**
  * Encapsulates Parser of Duke bot.
@@ -15,9 +16,12 @@ public class Parser {
      * @throws UnknownCommandException invalid user command
      */
     public static Command parse(String command) throws IllegalFormatException, UnknownCommandException {
-        if (command.contains("list")) {
+        if (command.contains("help")) {
+            checkCommandFormat("help", command);
+            return TaskList::showHelp;
+        } else if (command.contains("list")) {
             checkCommandFormat("list", command);
-            return taskList -> taskList.printFullTaskList();
+            return TaskList::printFullTaskList;
         } else if (command.contains("todo")) {
             checkCommandFormat("todo", command);
             return taskList -> taskList.addTodo(command);
@@ -44,13 +48,16 @@ public class Parser {
     /**
      * Checks user command format.
      *
-     * @param command user input command
      * @param typeOfCommand command format to check for
      * @param command user input command to check
      * @throws IllegalFormatException if user gives invalid command
      */
     private static void checkCommandFormat(String typeOfCommand, String command)
             throws IllegalFormatException, UnknownCommandException {
+        String helpRegexToMatch = "^help";
+        String helpCorrectFormat = "help";
+        String listRegexToMatch = "^list";
+        String listCorrectFormat = "list";
         String toDoRegexToMatch = "^todo .*";
         String toDoCorrectFormat = "todo <todo description>";
         String eventRegexToMatch = "^event .* /at \\d{2}/\\d{2}/\\d{2} \\d{4}-\\d{4}";
@@ -65,6 +72,12 @@ public class Parser {
         String findTaskCorrectFormat = "find <keyword to find>";
 
         switch (typeOfCommand) {
+        case "help":
+            checkCommandFormat(command, helpRegexToMatch, helpCorrectFormat);
+            break;
+        case "list":
+            checkCommandFormat(command, listRegexToMatch, listCorrectFormat);
+            break;
         case "todo":
             checkCommandFormat(command, toDoRegexToMatch, toDoCorrectFormat);
             break;

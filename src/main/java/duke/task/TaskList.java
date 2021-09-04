@@ -234,6 +234,21 @@ public class TaskList {
     }
 
     /**
+     * Shows help page to guide user in usage of Duke bot.
+     *
+     * @return string representation of help page.
+     */
+    public String showHelp() {
+        return  "Show all tasks -> list\n"
+                + "Add Todo -> todo <todo description>\n"
+                + "Add Event -> event <event description> /at <dd/MM/yy> <HHmm>-<HHmm>\n"
+                + "Add Deadline -> deadline <deadline description> /by <dd/MM/yy> <HHmm>\n"
+                + "Mark task as done -> done <task index>\n"
+                + "Delete task -> delete <task index>\n"
+                + "Find task(s) -> find <keyword to find>";
+    }
+
+    /**
      * Generates message for successful addition of task.
      *
      * @param task task added to TaskList

@@ -16,7 +16,7 @@ import duke.util.Storage;
  */
 public class Duke {
     private final Storage storage;
-    private TaskList tasks;
+    private TaskList taskList;
 
     /**
      * Constructor for Duke.
@@ -26,9 +26,9 @@ public class Duke {
     public Duke(String filePath) {
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.loadFile());
+            taskList = new TaskList(storage.loadFile());
         } catch (DukeException | IOException e) {
-            tasks = new TaskList();
+            taskList = new TaskList();
         }
     }
 
@@ -41,8 +41,8 @@ public class Duke {
     public String getResponse(String command) {
         String message = "Duke:\n";
         try {
-            message = message.concat(Parser.parse(command).execute(tasks));
-            storage.saveFile(tasks);
+            message = message.concat(Parser.parse(command).execute(taskList));
+            storage.saveFile(taskList);
             return message;
         } catch (DukeException | IOException e) {
             message = message.concat(e.getMessage());
