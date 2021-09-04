@@ -11,6 +11,7 @@ public class Task {
 
     /**
      * Constructor of superclass Task.
+     *
      * @param description description of the task.
      */
     public Task(String description) {
@@ -20,6 +21,7 @@ public class Task {
 
     /**
      * Gets the status of the current task object.
+     *
      * @return the string status where X means done and blank is not done.
      */
     public String getStatusIcon() {
@@ -35,6 +37,7 @@ public class Task {
 
     /**
      * Retrieves the description of this task.
+     *
      * @return the string description of the task.
      */
     public String getDescription() {
@@ -43,6 +46,7 @@ public class Task {
 
     /**
      * Retrieves the boolean value of this object's isDone status.
+     *
      * @return boolean of this object's isDone.
      */
     public boolean getIsDone() {
@@ -51,6 +55,7 @@ public class Task {
 
     /**
      * Retrieves the description of this object's status.
+     *
      * @return string description of the object's status.
      */
     @Override

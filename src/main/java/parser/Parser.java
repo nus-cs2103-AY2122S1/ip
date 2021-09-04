@@ -16,6 +16,7 @@ public class Parser {
 
     /**
      * Splits string into an array, removing spaces.
+     *
      * @param input string to be segmented.
      * @return String array with no spaces.
      */
@@ -26,6 +27,7 @@ public class Parser {
 
     /**
      * Encodes an event description into base64 for storage.
+     *
      * @param eventTask event to be stored in storage.
      * @return encoded description of event.
      */
@@ -45,6 +47,7 @@ public class Parser {
 
     /**
      * Encodes a deadline description into base64 for storage.
+     *
      * @param deadlineTask event to be stored in storage.
      * @return encoded description of deadline.
      */
@@ -61,6 +64,7 @@ public class Parser {
 
     /**
      * Encodes a Todo description into base64 for storage.
+     *
      * @param todoTask event to be stored in storage.
      * @return encoded description of Todo.
      */

@@ -16,6 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor to create a new Deadline object.
+     *
      * @param description the description of the Deadline Task.
      * @param by due date of Deadline Task.
      */
@@ -26,6 +27,7 @@ public class Deadline extends Task {
 
     /**
      * Retrieves the parameter by as a string.
+     *
      * @return by property as a String.
      */
     public String getBy() {
@@ -34,6 +36,7 @@ public class Deadline extends Task {
 
     /**
      * Retrieves a string describing the Deadline's status.
+     *
      * @return string describing the Deadline's status.
      */
     @Override

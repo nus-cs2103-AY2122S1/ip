@@ -7,6 +7,7 @@ public class DescriptionException extends DukeException {
 
     /**
      * Constructs a new DescriptionException.
+     *
      * @param task task which does not have a description.
      */
     public DescriptionException(String task) {

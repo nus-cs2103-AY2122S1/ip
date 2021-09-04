@@ -7,6 +7,7 @@ public class CommandException extends DukeException {
 
     /**
      * Constructs a new CommandException.
+     *
      * @param task task to be added.
      * @param command command required.
      */

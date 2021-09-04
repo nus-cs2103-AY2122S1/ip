@@ -42,6 +42,7 @@ public class Storage {
 
     /**
      * Writes current list to local storage's text file.
+     *
      * @param taskList list to be saved.
      */
     public void writeToDatabase(List<Task> taskList) {
@@ -82,6 +83,7 @@ public class Storage {
 
     /**
      * Reads from local storage's text file.
+     *
      * @return list containing Tasks stored in local storage.
      */
     public List<Task> readFromDatabase() {

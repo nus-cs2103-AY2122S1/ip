@@ -13,6 +13,7 @@ public class Event extends Task {
 
     /**
      * Constructor for new Event object.
+     *
      * @param description description of the event.
      * @param at date in which the event is to be held at.
      */
@@ -23,6 +24,7 @@ public class Event extends Task {
 
     /**
      * Retrieves this event's at.
+     *
      * @return at.
      */
     public String getAt() {
@@ -31,6 +33,7 @@ public class Event extends Task {
 
     /**
      * Retrieves a string describing the Event's status.
+     *
      * @return string describing the Event's status.
      */
     @Override

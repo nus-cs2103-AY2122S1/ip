@@ -156,6 +156,7 @@ public class TaskList {
 
     /**
      * Adds a TooDo Task into the List containing Tasks.
+     *
      * @param inputArr String array containing input by the user.
      * @throws InvalidCommandException if inputArr length less than 2.
      */
@@ -180,6 +181,7 @@ public class TaskList {
 
     /**
      * Adds a TooDo Task into the List containing Tasks.
+     *
      * @param inputArr String array containing input by the user.
      * @return reply to be displayed on GUI.
      * @throws InvalidCommandException if inputArr length less than 2.
@@ -205,6 +207,7 @@ public class TaskList {
 
     /**
      * Adds a Todo Task into the List containing Tasks.
+     *
      * @param inputArr String array containing input by the user.
      * @throws DescriptionException if inputArr length less than 2.
      */
@@ -224,6 +227,7 @@ public class TaskList {
 
     /**
      * Adds a Todo Task into the List containing Tasks.
+     *
      * @param inputArr String array containing input by the user.
      * @return reply to be displayed on GUI.
      * @throws DescriptionException if inputArr length less than 2.
@@ -244,6 +248,7 @@ public class TaskList {
 
     /**
      * Adds a Deadline Task into the List containing Tasks.
+     *
      * @param inputArr String array containing input by the user.
      * @throws DescriptionException if inputArr length less than 2.
      * @throws CommandException if "/by" is absent from input.
@@ -303,6 +308,7 @@ public class TaskList {
 
     /**
      * Adds a Deadline Task into the List containing Tasks.
+     *
      * @param inputArr String array containing input by the user.
      * @return reply to be displayed on GUI.
      * @throws DescriptionException if inputArr length less than 2.
@@ -357,6 +363,7 @@ public class TaskList {
 
     /**
      * Adds an Event Task into the List containing Tasks.
+     *
      * @param inputArr String array containing input by the user.
      * @throws DescriptionException if inputArr length less than 2.
      * @throws CommandException if "/at" is absent from input.
@@ -401,6 +408,7 @@ public class TaskList {
 
     /**
      * Adds an Event Task into the List containing Tasks.
+     *
      * @param inputArr String array containing input by the user.
      * @return reply to be displayed on GUI.
      * @throws DescriptionException if inputArr length less than 2.
@@ -446,6 +454,7 @@ public class TaskList {
 
     /**
      * Marks a task in the taskList as done.
+     *
      * @param taskNumber task number to be marked as done.
      * @throws TaskNumberException if the number is less than 0 or more than taskList size.
      */
@@ -464,6 +473,7 @@ public class TaskList {
 
     /**
      * Marks a task in the taskList as done.
+     *
      * @param taskNumber task number to be marked as done.
      * @return reply to be displayed on GUI.
      * @throws TaskNumberException if the number is less than 0 or more than taskList size.
@@ -483,6 +493,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the taskList.
+     *
      * @param taskNumber task number to be deleted.
      * @throws TaskNumberException if the number is less than 0 or more than taskList size.
      */
@@ -501,6 +512,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the taskList.
+     *
      * @param taskNumber task number to be deleted.
      * @return reply to be displayed on GUI.
      * @throws TaskNumberException if the number is less than 0 or more than taskList size.
@@ -527,6 +539,7 @@ public class TaskList {
 
     /**
      * Displays the tasks that have the keywords inputted.
+     *
      * @param inputArr the array containing the keywords.
      */
     public void findTasks(String[] inputArr) {
@@ -548,6 +561,7 @@ public class TaskList {
 
     /**
      * Displays the tasks that have the keywords inputted.
+     *
      * @param inputArr the array containing the keywords.
      * @return reply to be displayed on GUI.
      */
