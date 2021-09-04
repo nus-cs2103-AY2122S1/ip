@@ -88,12 +88,8 @@ public class TaskList {
      */
     public ArrayList<Task> find(String find) {
         ArrayList<Task> foundList = new ArrayList<>();
-
-        this.taskList.forEach(task -> {
-            if (task.getDescription().contains(find)) {
-                foundList.add(task);
-            }
-        });
+        this.taskList.stream().filter(task -> task.getDescription().contains(find))
+                .forEach(filteredTask -> foundList.add(filteredTask));
 
         return foundList;
 
