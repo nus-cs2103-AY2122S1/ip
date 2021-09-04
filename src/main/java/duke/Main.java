@@ -16,6 +16,8 @@ public class Main extends Application {
         Scene scene = new Scene(mainWindow);
         stage.setScene(scene);
         stage.setTitle("DUKE!");
+        String css = getClass().getResource("/view/style.css").toExternalForm();
+        scene.getStylesheets().add(css);
         stage.show();
     }
 

@@ -48,8 +48,8 @@ public class TaskList {
             throw new TaskNotFoundException("☹ OH NO!!! The task cannot be found. \n   Please try again.");
         } else {
             Task deletedTask = tasks.get(item - 1);
-            tasks.remove(item);
             String display = "Noted. I've removed this task:\n  " + deletedTask.displayTask();
+            tasks.remove(item - 1);
             return display + "\n Now you have " + tasks.size() + " tasks in the list.";
         }
     }
