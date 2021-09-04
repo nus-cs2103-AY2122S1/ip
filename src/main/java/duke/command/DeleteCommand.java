@@ -37,6 +37,7 @@ public class DeleteCommand extends Command {
         if (index < 0 || index >= tasks.getSize()) {
             throw new DukeException("OOPS!! index is invalid");
         }
+
         Task task = tasks.deleteTask(index);
         ui.showDelete(task, tasks.getSize());
 

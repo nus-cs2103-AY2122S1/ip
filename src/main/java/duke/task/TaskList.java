@@ -57,11 +57,13 @@ public class TaskList {
         int timeIdxStart = description.indexOf("/");
 
         if(timeIdxStart == -1) {
-            throw new DukeException("OOPS!! format for deadline command is incorrect.\nthe format should be:\n\t[description] /by [date]");
+            throw new DukeException("OOPS!! format for deadline command is incorrect.\nthe format should be:\n"
+                    + "\t[description] /by [date]");
         }
 
         String task = description.substring(0, timeIdxStart);
         String time = description.substring(timeIdxStart + 4);
+        
         tasks.add(new DeadlineTask(task, time));
     }
 
@@ -75,11 +77,13 @@ public class TaskList {
         int timeIdxStart = description.indexOf("/");
 
         if(timeIdxStart == -1) {
-            throw new DukeException("OOPS!! format for event command is incorrect.\nthe format should be:\n\t[description] /at [time]");
+            throw new DukeException("OOPS!! format for event command is incorrect.\nthe format should be:\n"
+                    + "\t[description] /at [time]");
         }
 
         String task = description.substring(0, timeIdxStart);
         String time = description.substring(timeIdxStart + 4);
+
         tasks.add(new EventTask(task, time));
     }
 

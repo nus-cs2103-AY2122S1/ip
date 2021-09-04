@@ -34,45 +34,46 @@ public class Parser {
         }
 
         switch (command) {
-            case "bye":
-                return new ExitCommand();
-            case "done":
-                if (description.equals("")) {
-                    throw new DukeException("OOPS!! done needs the index of the task.");
-                }
+        case "bye":
+            return new ExitCommand();
+        case "done":
+            if (description.equals("")) {
+                throw new DukeException("OOPS!! done needs the index of the task.");
+            }
 
-                try {
-                    index = Integer.parseInt(description);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("OOPS!! the index needs to be a number.");
-                }
-                return new DoneCommand(index);
-            case "list":
-                return new ListCommand();
-            case "delete":
-                if (description.equals("")) {
-                    throw new DukeException("OOPS!! delete needs the index of the task.");
-                }
-                try {
-                    index = Integer.parseInt(description);
-                } catch (NumberFormatException e) {
-                    throw new DukeException("OOPS!! the index needs to be a number.");
-                }
-                return new DeleteCommand(index);
-            case "find":
-                if (description.equals("")) {
-                    throw new DukeException("OOPS!! find needs a keyword.");
-                }
-                return new FindCommand(description);
-            case "todo":
-            case "event":
-            case "deadline":
-                if (description.equals("")) {
-                    throw new DukeException("OOPS!! the description of " + command + " cannot be empty.");
-                }
-                return new AddCommand(command, description);
-            default:
-                throw new DukeException("OOPS!! I'm sorry, but I don't know what that means :-(");
+            try {
+                index = Integer.parseInt(description);
+            } catch (NumberFormatException e) {
+                throw new DukeException("OOPS!! the index needs to be a number.");
+            }
+            return new DoneCommand(index);
+        case "list":
+            return new ListCommand();
+        case "delete":
+            if (description.equals("")) {
+                throw new DukeException("OOPS!! delete needs the index of the task.");
+            }
+
+            try {
+                index = Integer.parseInt(description);
+            } catch (NumberFormatException e) {
+                throw new DukeException("OOPS!! the index needs to be a number.");
+            }
+            return new DeleteCommand(index);
+        case "find":
+            if (description.equals("")) {
+                throw new DukeException("OOPS!! find needs a keyword.");
+            }
+            return new FindCommand(description);
+        case "todo":
+        case "event":
+        case "deadline":
+            if (description.equals("")) {
+                throw new DukeException("OOPS!! the description of " + command + " cannot be empty.");
+            }
+            return new AddCommand(command, description);
+        default:
+            throw new DukeException("OOPS!! I'm sorry, but I don't know what that means :-(");
         }
     }
 }

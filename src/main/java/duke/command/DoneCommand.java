@@ -36,6 +36,7 @@ public class DoneCommand extends Command {
         if (index >= tasks.getSize()) {
             throw new DukeException("OOPS!! task index is invalid");
         }
+
         tasks.updateStatus(index);
         ui.showDone(tasks.getTask(index));
 

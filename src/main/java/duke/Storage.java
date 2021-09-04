@@ -31,7 +31,7 @@ public class Storage {
      * @param directoryPath Path to data file directory.
      * @param filePath Path to data file.
      */
-    public Storage (String directoryPath, String filePath) {
+    public Storage(String directoryPath, String filePath) {
         this.directoryPath = directoryPath;
         this.filePath = directoryPath.concat(filePath);
     }
@@ -53,9 +53,9 @@ public class Storage {
                 Files.createDirectories(Paths.get("data/"));
             }
             if (!dataFile.exists()) {
-                    dataFile.createNewFile();
+                dataFile.createNewFile();
             }
-        } catch (IOException e ) {
+        } catch (IOException e) {
             throw new DukeException("OOPS!! Something went wrong");
         }
 
@@ -97,6 +97,7 @@ public class Storage {
 
         for (int i = 0; i < listOfTasks.size(); i++) {
             Task t = listOfTasks.get(i);
+
             String type = t.getType();
             String description = t.getDescription();
             String isDone = t.getStatusIcon().equals("X") ? "1" : "0";
