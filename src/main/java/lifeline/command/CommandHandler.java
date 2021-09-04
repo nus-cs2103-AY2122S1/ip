@@ -231,15 +231,31 @@ public class CommandHandler {
     private static void handleIncompleteCommand(String command) throws LifelineException {
         switch (command) {
         case "done":
+            // Fallthrough
+        case "complete":
             throw new LifelineException(ERROR_DONE_MISSING_INDEX);
+        case "del":
+            // Fallthrough
         case "delete":
             throw new LifelineException(ERROR_DELETE_MISSING_INDEX);
+        case "t":
+            // Fallthrough
+        case "td":
+            // Fallthrough
         case "todo":
             throw new LifelineException(ERROR_TODO_MISSING_DETAILS);
+        case "d":
+            // Fallthrough
+        case "dl":
+            // Fallthrough
         case "deadline":
             throw new LifelineException(ERROR_DEADLINE_MISSING_DETAILS);
+        case "e":
+            // Fallthrough
         case "event":
             throw new LifelineException(ERROR_EVENT_MISSING_DETAILS);
+        case "f":
+            // Fallthrough
         case "find":
             throw new LifelineException(ERROR_FIND_MISSING_KEYWORD);
         default:
