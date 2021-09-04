@@ -32,6 +32,14 @@ public class AddCommand extends Command {
     private final DataManager dataManager;
     private final String taskType;
 
+    /**
+     * Constructs an AddCommand containing the current state of the todolist, datamanager and task
+     * type.
+     *
+     * @param list ToDoList currently used by Duke.
+     * @param dataManager DataManager currently used by Duke.
+     * @param taskType The type of add command used.
+     */
     public AddCommand(ToDoList list, DataManager dataManager, String taskType) {
         this.list = list;
         this.dataManager = dataManager;

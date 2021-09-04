@@ -8,6 +8,11 @@ package duke.exception;
  */
 
 public class NoSuchCommandException extends DukeException {
+    /**
+     * Constructs a NoSuchCommandException specified with the command that caused the error.
+     *
+     * @param command Command that caused a NoSuchCommandException to be thrown
+     */
     public NoSuchCommandException(String command) {
         super(String.format("NoSuchCommandException: Unrecognised command `%s`. Perhaps you made a typo?",
                 command));

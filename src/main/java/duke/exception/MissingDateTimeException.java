@@ -8,6 +8,11 @@ package duke.exception;
  */
 
 public class MissingDateTimeException extends DukeException {
+    /**
+     * Constructs a MissingDateTimeException.
+     *
+     * @param format Format of command that should be used to specify a date/time.
+     */
     public MissingDateTimeException(String format) {
         super(String.format("MissingDateTimeException: Command issued requires you to specify a date/time using "
                 + "%s", format));

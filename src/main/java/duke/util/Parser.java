@@ -30,6 +30,12 @@ public class Parser {
     private final ToDoList list;
     private final DataManager dataManager;
 
+    /**
+     * Constructs a parser with the current ToDoList and Datamanger used by Duke.
+     *
+     * @param list ToDoList currently used by Duke.
+     * @param dataManager DataManager currently used by Duke.
+     */
     public Parser(ToDoList list, DataManager dataManager) {
         this.list = list;
         this.dataManager = dataManager;

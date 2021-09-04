@@ -28,6 +28,11 @@ public class DataManager {
     // Relative path of file
     private final String filePath;
 
+    /**
+     * Constructs the DataManager that use the specified filepath as persistent storage for Duke.
+     *
+     * @param filePath The path to the file used for persistent storage.
+     */
     public DataManager(String filePath) {
         this.data = new File(filePath);
         this.filePath = filePath;

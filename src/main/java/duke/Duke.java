@@ -14,6 +14,11 @@ import duke.util.ToDoList;
 public class Duke {
     private final Parser parser;
 
+    /**
+     * Constructs a Duke instance that use the specified filepath for persistent storage.
+     *
+     * @param filePath Path of file used for persistent storage.
+     */
     public Duke(String filePath) {
         DataManager dataManager = new DataManager(filePath);
         ToDoList list = new ToDoList(dataManager.readData(), dataManager);
