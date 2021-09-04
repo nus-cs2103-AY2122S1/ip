@@ -17,6 +17,7 @@ public class Parser {
         String remainingWords = "";
         if (fullCommand.contains(" ")) {
             String[] splitFullCommand = fullCommand.split(" ", 2);
+            assert splitFullCommand.length == 2;
             firstWord = splitFullCommand[0];
             remainingWords = splitFullCommand[1];
         } else {

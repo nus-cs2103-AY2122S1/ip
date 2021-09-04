@@ -34,6 +34,7 @@ public class DoneCommand extends Command {
 
         // Mark task as done, and persist to text file
         Task t = tasks.markAsDone(index);
+        assert !t.equals(null);
         storage.save(tasks);
 
         // Return a description of the execution result

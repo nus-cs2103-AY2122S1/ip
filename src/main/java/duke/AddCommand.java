@@ -52,10 +52,11 @@ public class AddCommand extends Command {
             t = new Event(s, at);
             break;
         default:
-            break;
+            throw new DukeException("OOPS!!! There is no such task: " + taskType);
         }
 
         // Add task to list in Duke, and persist to text file
+        assert !t.equals(null);
         tasks.add(t);
         storage.append(t.toStringForFile() + System.lineSeparator());
 
