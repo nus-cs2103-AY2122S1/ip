@@ -69,14 +69,18 @@ public class Duke {
 
         for (int i = 0; i < taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
+            Class<? extends Task> taskClass = task.getClass();
             String details = task.getDetails();
             String done = task.isCompleted()
                     ? "done"
                     : "not-done";
-            if (task.getClass() == ToDo.class) {
+            assert taskClass == ToDo.class
+                    || taskClass == Deadline.class
+                    || taskClass == Event.class : taskClass.toString() + "  is not a recognized task.";
+            if (taskClass == ToDo.class) {
                 String type = "T";
                 contents += type + ' ' + done + ' ' + details;
-            } else if (task.getClass() == Deadline.class) {
+            } else if (taskClass == Deadline.class) {
                 String type = "D";
                 LocalDateTime deadline = ((Deadline) task).getDeadline();
                 if (deadline == null) {
@@ -86,7 +90,7 @@ public class Duke {
                     contents += type + ' ' + done + ' ' + details + ' '
                             + deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
                 }
-            } else if (task.getClass() == Event.class) {
+            } else if (taskClass == Event.class) {
                 String type = "E";
                 LocalDateTime timing = ((Event) task).getTiming();
                 if (timing == null) {
@@ -100,7 +104,6 @@ public class Duke {
                 }
             }
             contents += System.lineSeparator();
-
         }
         storage.writeToStorage(contents, false);
     }

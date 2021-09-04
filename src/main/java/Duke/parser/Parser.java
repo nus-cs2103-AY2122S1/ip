@@ -78,7 +78,7 @@ public class Parser {
                 center = "/at";
                 break;
             default:
-                // Outer switch statement confirms there to be only the above 3 cases.
+                assert false : cmd + " not handled by the right case.";
                 break;
             }
 
@@ -114,7 +114,7 @@ public class Parser {
                 data.put("timing", dateTime);
                 return data;
             default:
-                // Outer switch statement confirms there to be only the above 3 cases.
+                assert false : cmd + " not handled by the right case.";
                 break;
             }
             break;
