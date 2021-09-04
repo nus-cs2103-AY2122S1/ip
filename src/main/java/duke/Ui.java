@@ -37,6 +37,9 @@ public class Ui {
      */
     protected Ui(VBox dialogContainer) {
         super();
+
+        assert dialogContainer != null;
+
         inputReader = new Scanner(System.in);
         this.dialogContainer = dialogContainer;
     }

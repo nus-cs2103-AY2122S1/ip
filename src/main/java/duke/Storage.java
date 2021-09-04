@@ -25,6 +25,8 @@ public class Storage {
      * @param path Path to the log file to read from or write to.
      */
     protected Storage(String path) {
+        assert path != null;
+
         this.path = path;
     }
 

@@ -164,6 +164,8 @@ public class Duke extends Application {
      * @param stringInput String supplied by user.
      */
     private void processInput(String stringInput) {
+        assert stringInput != null : "processInput requires non empty input string";
+
         ui.echoUser(stringInput);
         try {
             Command parsedCommand = Parser.parse(stringInput);
