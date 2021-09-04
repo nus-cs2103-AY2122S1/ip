@@ -89,11 +89,11 @@ public class DukeGui extends Application {
 
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            echo();
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            echo();
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -101,25 +101,14 @@ public class DukeGui extends Application {
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Sends the user a copy of what they have input in the text input field.
      */
-    private void handleUserInput() {
+    private void echo() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 new UserDialogBox(userText, new ImageView(user)),
-                new DukeDialogBox(dukeText, new ImageView(duke))
+                new DukeDialogBox(userText, new ImageView(duke))
         );
         userInput.clear();
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
     }
 }

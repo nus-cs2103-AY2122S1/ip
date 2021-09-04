@@ -82,9 +82,7 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Passes user input to Duke and gets a corresponding response from Duke.
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
