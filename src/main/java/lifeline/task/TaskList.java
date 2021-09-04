@@ -4,6 +4,7 @@ import static lifeline.util.ErrorString.ERROR_NO_TASKS_FOUND;
 import static lifeline.util.ErrorString.ERROR_TASK_ALREADY_DONE;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import lifeline.exception.LifelineException;
 
@@ -113,6 +114,7 @@ public class TaskList {
     }
 
     public void deleteMultipleTasks(ArrayList<Integer> taskIndices) {
+        Collections.sort(taskIndices);
         for (int i = taskIndices.size() - 1; i >= 0; i--) {
             this.deleteTask(taskIndices.get(i));
         }

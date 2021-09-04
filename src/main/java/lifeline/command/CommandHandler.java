@@ -17,8 +17,10 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import lifeline.exception.LifelineException;
+import lifeline.parser.DateTimeParser;
 import lifeline.storage.Storage;
 import lifeline.task.Deadline;
 import lifeline.task.Event;
@@ -69,7 +71,7 @@ public class CommandHandler {
      * @return Help message to inform users on available commands and its usage.
      */
     public static String handleHelp(String command, Storage storage, TaskList taskList, Ui ui) {
-        assert command.equals("help");
+        assert Command.HELP.hasCommand(command);
         return ui.showHelpMessage();
     }
 
@@ -86,7 +88,7 @@ public class CommandHandler {
      */
     public static String handleDeadline(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
-        String[] commands = getCommands(command);
+        String[] commands = splitCommands(command);
         assert Command.DEADLINE.hasCommand(commands[0]);
         // Get Deadline name and details
         String[] description = commands[1].split("/by", 2);
@@ -121,7 +123,7 @@ public class CommandHandler {
      */
     public static String handleEvent(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
-        String[] commands = getCommands(command);
+        String[] commands = splitCommands(command);
         assert Command.EVENT.hasCommand(commands[0]);
 
         // Get event name and details
@@ -181,7 +183,7 @@ public class CommandHandler {
      */
     public static String handleFind(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
-        String[] commands = getCommands(command);
+        String[] commands = splitCommands(command);
         assert Command.FIND.hasCommand(commands[0]);
         TaskList foundTasks = taskList.findTasks(commands[1].toLowerCase());
         return ui.showFoundTasks(foundTasks, commands[1]);
@@ -200,7 +202,7 @@ public class CommandHandler {
      */
     public static String handleToDo(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
-        String[] commands = getCommands(command);
+        String[] commands = splitCommands(command);
         assert Command.TODO.hasCommand(commands[0]);
         Task newTask = new ToDo(commands[1].trim());
         taskList.add(newTask);
@@ -209,7 +211,7 @@ public class CommandHandler {
     }
 
     /**
-     * Marks a task at specified index as completed.
+     * Marks a tasks at indices as completed.
      *
      * @param command User input.
      * @param storage Storage to save or load tasks.
@@ -221,16 +223,16 @@ public class CommandHandler {
      */
     public static String handleDone(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
-        String[] commands = getCommands(command);
-        assert Command.DONE.hasCommand(commands[0]);
-        int taskIndex = convertIndexToInt(commands[0], commands[1], taskList);
-        taskList.completeTask(taskIndex);
+        assert Command.DONE.hasCommand(splitCommands(command)[0]);
+        ArrayList<Integer> indicesToDelete = getIndicesFromCommand(command);
+        checkIndexBounds(indicesToDelete, taskList);
+        taskList.completeMultipleTasks(indicesToDelete);
         storage.save(taskList);
-        return ui.showCompletedTask(taskList.getTask(taskIndex));
+        return ui.showCompletedTaskMessage(taskList);
     }
 
     /**
-     * Deletes a task at specified index.
+     * Deletes tasks at specified indices.
      *
      * @param command User input.
      * @param storage Storage to save or load tasks.
@@ -242,16 +244,14 @@ public class CommandHandler {
      */
     public static String handleDelete(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
-        String[] commands = getCommands(command);
-        assert Command.DELETE.hasCommand(commands[0]);
-        int taskIndex = convertIndexToInt(commands[0], commands[1], taskList);
-        Task taskToDelete = taskList.getTask(taskIndex);
-        taskList.deleteTask(taskIndex);
+        ArrayList<Integer> indicesToDelete = getIndicesFromCommand(command);
+        checkIndexBounds(indicesToDelete, taskList);
+        taskList.deleteMultipleTasks(indicesToDelete);
         storage.save(taskList);
-        return ui.showDeletedTask(taskToDelete);
+        return ui.showDeletedTaskMessage(taskList);
     }
 
-    private static String[] getCommands(String command) throws LifelineException {
+    private static String[] splitCommands(String command) throws LifelineException {
         String[] commands = command.split("\\s", 2);
         if (commands.length < 2) {
             handleIncompleteCommand(commands[0]);
@@ -279,15 +279,32 @@ public class CommandHandler {
 
     }
 
-    private static int convertIndexToInt(String command, String index, TaskList taskList) throws LifelineException {
-        try {
-            int taskIndex = Integer.parseInt(index) - 1;
-            if (taskIndex >= taskList.getSize() || taskIndex < 0) {
+    private static ArrayList<Integer> getIndicesFromCommand(String command) throws LifelineException {
+        String[] commands = splitCommands(command);
+        ArrayList<Integer> indices = parseIndicesFromCommand(commands[1].trim());
+        return indices;
+    }
+
+    private static void checkIndexBounds(ArrayList<Integer> indices, TaskList taskList) throws LifelineException {
+        for (int i = 0; i < indices.size(); i++) {
+            int currIndex = indices.get(i);
+            if (currIndex >= taskList.getSize() || currIndex < 0) {
                 throw new LifelineException(ERROR_INDEX_OUT_OF_BOUNDS);
             }
-            return taskIndex;
-        } catch (NumberFormatException e) {
-            throw new LifelineException(ERROR_NON_INTEGER_INDEX);
         }
+    }
+
+    private static ArrayList<Integer> parseIndicesFromCommand(String indices) throws LifelineException {
+        String[] splitIndices = indices.split("\\s*,\\s*");
+        ArrayList<Integer> indicesAsInteger = new ArrayList<>();
+        for (int i = 0; i < splitIndices.length; i++) {
+            try {
+                int taskIndex = Integer.parseInt(splitIndices[i]) - 1;
+                indicesAsInteger.add(taskIndex);
+            } catch (NumberFormatException e) {
+                throw new LifelineException(ERROR_NON_INTEGER_INDEX);
+            }
+        }
+        return indicesAsInteger;
     }
 }
