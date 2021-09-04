@@ -47,6 +47,20 @@ public class CommandHandler {
     }
 
     /**
+     * Displays available alias to user.
+     *
+     * @param command User input.
+     * @param storage Storage to save or load tasks.
+     * @param taskList List of tasks.
+     * @param ui Ui to display information to user.
+     * @return Available alias to user.
+     */
+    public static String handleAlias(String command, Storage storage, TaskList taskList, Ui ui) {
+        assert Command.ALIAS.hasCommand(command);
+        return ui.showAlias();
+    }
+
+    /**
      * Displays goodbye message to the user when user exits the program.
      *
      * @param command User input.

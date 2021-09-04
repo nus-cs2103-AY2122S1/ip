@@ -127,6 +127,24 @@ public class Ui {
     }
 
     /**
+     * Displays available alias to user.
+     *
+     * @return Aliases to user
+     */
+    public String showAlias() {
+        return "alias - a, al\n"
+                + "bye - b, bb, goodbye\n"
+                + "deadline - d, dl\n"
+                + "delete - del\n"
+                + "done - complete\n"
+                + "event - e\n"
+                + "find - f\n"
+                + "help - h\n"
+                + "list - l, ls\n"
+                + "todo - t, td\n";
+    }
+
+    /**
      * Returns string representation of error message.
      *
      * @param errorMessage Error to be displayed to user.

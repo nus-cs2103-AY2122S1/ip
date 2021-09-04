@@ -10,6 +10,7 @@ import lifeline.util.QuadFunction;
 
 public enum Command {
     // inspiration from https://alexpower.me/advanced-java-enum-features-you-need-to-know/
+    ALIAS(CommandHandler::handleAlias, "alias", "a", "al"),
     BYE(CommandHandler::handleBye, "bye", "bb", "goodbye", "b"),
     DEADLINE(CommandHandler::handleDeadline, "deadline", "d", "dl"),
     DELETE(CommandHandler::handleDelete, "delete", "del"),
