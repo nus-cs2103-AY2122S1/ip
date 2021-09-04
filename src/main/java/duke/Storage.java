@@ -30,7 +30,8 @@ public class Storage {
     }
 
     /**
-     * Reads the file of the storage and returns a ArrayList of Tasks from the storage.
+     * Reads the file of the storage with the help of a stream
+     * and returns a ArrayList of Tasks from the storage.
      *
      * @return ArrayList of Task that is stored.
      * @throws IOException When the file can not be accessed.
