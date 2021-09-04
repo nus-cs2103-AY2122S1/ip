@@ -28,6 +28,8 @@ public class Duke {
     public Duke(String pathName, boolean isGui) {
         storage = new Storage(pathName);
         ui = new Ui();
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
 
         try {
             tasks = new TaskList(storage.loadData());
@@ -46,6 +48,10 @@ public class Duke {
      * @return A {@code String} response.
      */
     public String getResponse(String input) {
+        assert tasks != null : "Tasks should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
+
         if (input.equals("bye")) {
             return ui.close();
         }
@@ -66,6 +72,9 @@ public class Duke {
      */
     public void run() {
         String input;
+        assert tasks != null : "Tasks should not be null";
+        assert ui != null : "Ui should not be null";
+        assert storage != null : "Storage should not be null";
 
         while (!(input = ui.getCommand()).equals("bye")) {
             try {

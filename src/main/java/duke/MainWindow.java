@@ -37,6 +37,8 @@ public class MainWindow extends VBox {
      */
     @FXML
     private void handleUserInput() {
+        assert duke != null : "Duke should not be null";
+
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
