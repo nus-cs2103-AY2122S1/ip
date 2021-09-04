@@ -41,6 +41,12 @@ public class Duke {
                 case READ:
                     this.ui.stdout(this.tasks.toString());
                     break;
+                case FIND:
+                    TaskList filteredTasks = this.tasks.filter(varargs.get(0));
+                    this.ui.stdout(
+                        String.format("Here are the matching tasks in your list:\n%s",
+                            filteredTasks.toString()));
+                    break;
                 case UPDATE_MARKASDONE:
                     i = Integer.parseInt(varargs.get(0));
                         t = this.tasks.markAsComplete(i);

@@ -6,5 +6,6 @@ public enum Command {
     CREATE_TODO,
     READ,
     UPDATE_MARKASDONE,
-    DELETE
+    DELETE,
+    FIND
 }

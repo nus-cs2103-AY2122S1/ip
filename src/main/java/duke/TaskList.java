@@ -32,17 +32,6 @@ public class TaskList {
         return tasks.add(t);
     }
 
-    /**
-     * @return a formatted String of all tasks for displaying
-     */
-    @Override
-    public String toString() {
-        String s = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            s += String.format("%d.%s\n", i + 1, tasks.get(i));
-        }
-        return s;
-    }
 
     /**
      * marks the task at 1-based index i as complete
@@ -74,6 +63,21 @@ public class TaskList {
     }
 
     /**
+     * creates a new TaskList containing only tasks from current list that match given string
+     * @param keyword string to search for
+     * @return new TaskList containing tasks that have description matching given string
+     */
+    public TaskList filter(String keyword) {
+        TaskList filteredTasks = new TaskList();
+        for (Task t: tasks) {
+            if (t.desc.matches(String.format(".*\\b%s\\b.*", keyword))) {
+                filteredTasks.addTask(t);
+            }
+        }
+        return filteredTasks;
+    }
+
+    /**
      * @return a formatted String of all tasks for writing to file
      */
     public ArrayList<String> toRepr() {
@@ -84,4 +88,12 @@ public class TaskList {
         return arr;
     }
 
+    @Override
+    public String toString() {
+        String s = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            s += String.format("%d.%s\n", i + 1, tasks.get(i));
+        }
+        return s;
+    }
 }
