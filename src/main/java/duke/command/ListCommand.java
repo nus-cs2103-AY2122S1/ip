@@ -6,6 +6,8 @@ import duke.ui.Ui;
 
 /**
  * Contains the executables for the 'list' command.
+ *
+ * @author Benjamin Lui
  */
 public class ListCommand extends Command {
     /**

@@ -6,6 +6,8 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 /**
  * Contains the executables for the 'event' command.
+ *
+ * @author Benjamin Lui
  */
 public class EventCommand extends Command {
 

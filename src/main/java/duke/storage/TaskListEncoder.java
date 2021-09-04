@@ -5,6 +5,8 @@ import java.util.List;
 import duke.task.TaskList;
 /**
  * Encodes a list of task and saves it in a text file.
+ *
+ * @author Benjamin Lui
  */
 
 public class TaskListEncoder {

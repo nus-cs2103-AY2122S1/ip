@@ -6,6 +6,8 @@ import duke.ui.Ui;
 
 /**
  * Command class that handles user commands.
+ *
+ * @author Benjamin Lui
  */
 public abstract class Command {
 

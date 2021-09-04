@@ -18,7 +18,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * Class that kick starts duke.Duke.
+ * Class that kick-starts duke.Duke.
+ *
+ * @author Benjamin Lui
  */
 
 public class Duke extends Application {

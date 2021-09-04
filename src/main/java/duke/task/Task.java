@@ -3,6 +3,8 @@ package duke.task;
  * Task class to represent the tasks in the list.
  * It supports (i) getting status icon
  * and (ii) marking a task as done
+ *
+ * @author Benjamin Lui
  */
 public class Task {
     protected String description;

@@ -7,6 +7,8 @@ import duke.ui.Ui;
 
 /**
  * Contains the executables when the user uses the 'bye' command.
+ *
+ * @author Benjamin Lui
  */
 public class ByeCommand extends Command {
     /**

@@ -2,7 +2,9 @@ package duke.storage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 /**
- * Seperates the date/time from the task, depending on the nature of the task.
+ * Separates the date/time from the task, depending on the nature of the task.
+ *
+ * @author Benjamin Lui
  */
 
 public class DesAndTime {

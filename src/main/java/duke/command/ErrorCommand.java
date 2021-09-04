@@ -6,6 +6,8 @@ import duke.ui.Ui;
 
 /**
  * Contains the executables when the user inputs an invalid command.
+ *
+ * @author Benjamin Lui
  */
 public class ErrorCommand extends Command {
     /**

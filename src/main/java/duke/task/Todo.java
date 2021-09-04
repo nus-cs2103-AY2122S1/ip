@@ -2,6 +2,8 @@ package duke.task;
 
 /**
  * Todo class for implementing tasks that are to be done.
+ *
+ * @author Benjamin Lui
  */
 public class Todo extends Task {
     /**

@@ -7,6 +7,8 @@ import duke.task.Task;
 import duke.task.TaskList;
 /**
  * Contains the logic to display the UI for the user to see.
+ *
+ * @author Benjamin Lui
  */
 
 public class Ui {
@@ -21,7 +23,7 @@ public class Ui {
      * @param taskList to output the list of tasks duke.Duke currently has at start
      */
     public String showWelcome(TaskList taskList) {
-        String greeting = "Hello! I'm duke.Duke\n" + "What can I do for you?\n";
+        String greeting = "Hello! I'm Duke\n" + "What can I do for you?\n";
         String currTasks = "These are the current tasks I have:\n";
         String lst = listView(taskList.getAllTasks());
         return greeting + currTasks + lst;
@@ -87,13 +89,13 @@ public class Ui {
      * @param lst the list of tasks to be displayed
      */
     public String listView(ArrayList<Task> lst) {
-        String res = "";
+        String list = "";
         int counter = 1;
         for (Task tsk : lst) {
-            res += counter + ". " + tsk.toString() + System.lineSeparator();
+            list += counter + ". " + tsk.toString() + System.lineSeparator();
             counter++;
         }
-        return "Here are the tasks in your list:\n" + res;
+        return "Here are the tasks in your list:\n" + list;
     }
 
     /**
