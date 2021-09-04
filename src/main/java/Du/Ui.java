@@ -5,8 +5,7 @@ public class Ui {
     /**
      * Public constructor for Ui
      */
-    public Ui() {
-    }
+    public Ui() {}
 
     /**
      * Shows error when there is one
@@ -31,9 +30,6 @@ public class Ui {
      * Ends programme when user inputs "bye"
      */
     public void close_programme() {
-
-        System.out.println("____________________________________________________________\n"
-                + "Bye. Hope to not see you again:P" + "\n"
-                + "____________________________________________________________");
+        System.out.println("Bye. Hope to not see you again:P");
     }
 }

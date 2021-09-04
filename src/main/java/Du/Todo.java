@@ -8,7 +8,6 @@ public class Todo extends Task {
         super(name, done, tasklist);
     }
 
-
     /**
      * Records the To do in a certain format to save to the file
      * @return String which the To do is formatted in
@@ -23,7 +22,6 @@ public class Todo extends Task {
         }
         return "T , " + state + " , " + name;
     }
-
 
     /**
      * toString method
