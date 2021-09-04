@@ -60,9 +60,7 @@ public class Storage {
      */
     public static boolean saveTaskList(ArrayList<? extends Task> taskListArr) {
         FileWriter fileWriter = Storage.createFileWriter(fileName);
-        if (fileWriter == null) {
-            return false;
-        }
+        assert fileWriter != null : "Unable to open storage file.";
         for (int i = 0; i < taskListArr.size(); i++) {
             Task task = taskListArr.get(i);
             String saveText = task.taskSaveString();
@@ -114,6 +112,7 @@ public class Storage {
             } catch (DukeInvalidStorageTaskException e) {
                 System.out.println("Unable to read a task from storage.");
             }
+
         }
         if (count != 0) {
             System.out.println(count + " saved tasks were loaded from memory.\n");
