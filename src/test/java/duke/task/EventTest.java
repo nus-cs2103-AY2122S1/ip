@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class EventTest {
     @Test
     public void testToString() {
@@ -23,6 +26,27 @@ public class EventTest {
         Event task = new Event(CompletionStatus.COMPLETED, "project meeting",
             "23/08/2021 2000 2200");
         assertEquals("X", task.getStatusIcon());
+    }
+
+    @Test
+    public void testGetDate() {
+        LocalDate date = LocalDate.of(2021, 9, 4);
+        Event task = new Event("project meeting", "04/09/2021 2000 2200");
+        assertEquals(date, task.getDate());
+    }
+
+    @Test
+    public void testGetTime() {
+        LocalTime time = LocalTime.of(20,0);
+        Event task = new Event("project meeting", "04/09/2021 2000 2200");
+        assertEquals(time, task.getTime());
+    }
+
+    @Test
+    public void testCheckDueBeforeDate() {
+        LocalDate date = LocalDate.of(2021, 9, 4);
+        Event task = new Event("project meeting", "04/09/2021 2000 2200");
+        assertEquals(true, task.checkDueBeforeDate(date));
     }
 
     @Test

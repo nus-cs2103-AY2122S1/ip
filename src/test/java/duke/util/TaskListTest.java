@@ -106,6 +106,33 @@ public class TaskListTest {
     }
 
     @Test
+    public void testGetNextDueTask_noIncompleteTasks() {
+        tasks.addToList("return book", "ToDo");
+        tasks.addToList("read book", "ToDo");
+        tasks.markTaskAsDone(1, 2);
+
+        assertEquals("Great job! You don't have any remaining tasks.\n", tasks.getNextDueTask());
+    }
+
+    @Test
+    public void testGetNextDueTask_multipleToDos() {
+        tasks.addToList("read book", "ToDo");
+        tasks.addToList("return book", "ToDo");
+
+        assertEquals("Reminder:\n  [T][ ] read book", tasks.getNextDueTask());
+    }
+
+    @Test
+    public void testGetNextDueTask_nonToDos() {
+        tasks.addToList("return book /by 23/08/2021 1800", "Deadline");
+        tasks.addToList("project meeting /at 2021-08-23 1400 1600", "Event");
+
+        assertEquals("Reminder:\n  [E][ ] project meeting (by: Aug 23 2021 14:00-16:00)",
+            tasks.getNextDueTask()
+        );
+    }
+
+    @Test
     public void testDeleteTask() {
         tasks.addToList("return book", "ToDo");
         assertEquals(
@@ -160,6 +187,34 @@ public class TaskListTest {
             "1:[T][ ] read book\n"
                 + "2:[D][ ] return book (by: Aug 23 2021 00:00)\n",
             tasks.listTasks("keyword", "re")
+        );
+    }
+
+    @Test
+    public void testListTasks_byReminderToday() {
+        /** Method uses current date (04/09/2021 as of writing this) so this check will fail after today. */
+        tasks.addToList("read book", "ToDo");
+        tasks.addToList("return book /by 04/09/2021 0000", "Deadline");
+        tasks.addToList("project meeting /at 2021-09-04 1400 1600", "Event");
+
+        assertEquals(
+            "1:[D][ ] return book (by: Sep 4 2021 00:00)\n"
+                + "2:[E][ ] project meeting (by: Sep 4 2021 14:00-16:00)\n",
+            tasks.listTasks("reminder", "0")
+        );
+    }
+
+    @Test
+    public void testListTasks_byReminderWeek() {
+        /** Method uses current date (04/09/2021 as of writing this) so this check will fail after today. */
+        tasks.addToList("read book", "ToDo");
+        tasks.addToList("return book /by 04/09/2021 0000", "Deadline");
+        tasks.addToList("project meeting /at 2021-09-08 1400 1600", "Event");
+
+        assertEquals(
+            "1:[D][ ] return book (by: Sep 4 2021 00:00)\n"
+                + "2:[E][ ] project meeting (by: Sep 8 2021 14:00-16:00)\n",
+            tasks.listTasks("reminder", "6")
         );
     }
 

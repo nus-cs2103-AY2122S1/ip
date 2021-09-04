@@ -90,6 +90,33 @@ public class Deadline extends Task {
         return super.formatString(DEADLINE_IDENTIFIER, String.format("%s %s", this.dueDate, this.dueTime));
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LocalDate getDate() {
+        return this.dueDate;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LocalTime getTime() {
+        return this.dueTime;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean checkDueBeforeDate(LocalDate date) {
+        LocalDate dateNow = LocalDate.now();
+        boolean isNotOverdue = this.dueDate.isAfter(dateNow) || this.dueDate.isEqual(dateNow);
+        boolean isBeforeDate = this.dueDate.isEqual(date) || this.dueDate.isBefore(date);
+        return isNotOverdue && isBeforeDate;
+    }
+
     @Override
     public String toString() {
         return String.format("[%s]%s (by: %s %s)", DEADLINE_IDENTIFIER, super.toString(), formatDate(), dueTime);

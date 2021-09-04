@@ -1,5 +1,8 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * The Task Class is a representation of a task that Duke is keeping track of.
  *
@@ -9,7 +12,7 @@ package duke.task;
  *
  * @author Benedict Chua
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
     private static final String INDENTATION = "  ";
     private String description;
     private boolean isDone;
@@ -31,6 +34,37 @@ public abstract class Task {
      * @return String of the formatted Task.
      */
     public abstract String convertToString();
+
+    /**
+     * Gets the date of the task.
+     * Default null if type of task doesn't support date.
+     *
+     * @return LocalDate of task.
+     */
+    public LocalDate getDate() {
+        return null;
+    }
+
+    /**
+     * Gets the time of the task.
+     * Default null if type of task doesn't support time.
+     *
+     * @return LocalTime of task.
+     */
+    public LocalTime getTime() {
+        return null;
+    }
+
+    /**
+     * Checks if the task is due before the given date.
+     * Defaults to false for tasks without dates.
+     *
+     * @param date LocalDate to be checked against
+     * @return boolean of the result from the check.
+     */
+    public boolean checkDueBeforeDate(LocalDate date) {
+        return false;
+    }
 
     /**
      * Returns the status of whether the task has been completed.
@@ -79,6 +113,15 @@ public abstract class Task {
     }
 
     /**
+     * Checks if task is completed and returns the result.
+     *
+     * @return boolean of whether task is completed or not.
+     */
+    public boolean checkIsCompleted() {
+        return this.isDone;
+    }
+
+    /**
      * Checks if task is due on the given date and returns the result.
      *
      * @param date String containing the date in the form dd/mm/yyyy, dd-mm-yyyy or yyyy-mm-dd.
@@ -98,6 +141,43 @@ public abstract class Task {
     public boolean containsKeyword(String keyword) {
         int result = this.description.toLowerCase().indexOf(keyword.toLowerCase());
         return result != -1;
+    }
+
+    /**
+     * Compares this task to the other task and returns a value based on which is more urgent.
+     * Urgency of a task depends on:
+     *   1. isDone
+     *   2. dueDate (tasks with due dates are more urgent than tasks without)
+     *   3. order of task in the TaskList
+     *
+     * @param other the other Task to compare to
+     * @return
+     */
+    @Override
+    public int compareTo(Task other) {
+        if (this.isDone && !other.isDone) {
+            return 1;
+        } else if (this.isDone && other.isDone) {
+            return -1;
+        } else  if (!this.isDone && other.isDone) {
+            return -1;
+        }
+
+        if (this instanceof ToDo && other instanceof ToDo) {
+            return -1;
+        } else if (this instanceof ToDo && !(other instanceof ToDo)) {
+            return 1;
+        } else {
+            assert !(this instanceof ToDo) : "This class is a ToDo";
+
+            int compareDate = this.getDate().compareTo(other.getDate());
+
+            if (compareDate == 0) {
+                return this.getTime().compareTo(other.getTime());
+            }
+
+            return compareDate;
+        }
     }
 
     @Override

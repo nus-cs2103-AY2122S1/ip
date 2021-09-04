@@ -95,6 +95,34 @@ public class Event extends Task {
             this.endTime));
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public LocalDate getDate() {
+        return this.eventDate;
+    }
+
+    /**
+     * Returns the start time of the Event.
+     * {@inheritDoc}
+     */
+    @Override
+    public LocalTime getTime() {
+        return this.startTime;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean checkDueBeforeDate(LocalDate date) {
+        LocalDate dateNow = LocalDate.now();
+        boolean isNotOverdue = this.eventDate.isAfter(dateNow) || this.eventDate.isEqual(dateNow);
+        boolean isBeforeDate = this.eventDate.isEqual(date) || this.eventDate.isBefore(date);
+        return isNotOverdue && isBeforeDate;
+    }
+
     @Override
     public String toString() {
         return String.format("[%S]%s (by: %s %s-%s)", EVENT_IDENTIFIER, super.toString(), formatDate(), this.startTime,

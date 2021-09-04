@@ -4,6 +4,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class DeadlineTest {
     @Test
     public void testToString() {
@@ -21,6 +24,27 @@ public class DeadlineTest {
     public void testGetStatusIcon() {
         Deadline task = new Deadline(CompletionStatus.COMPLETED, "return book", "23/08/2021 2000");
         assertEquals("X", task.getStatusIcon());
+    }
+
+    @Test
+    public void testGetDate() {
+        LocalDate date = LocalDate.of(2021, 9, 4);
+        Deadline task = new Deadline("return book", "04/09/2021 2000");
+        assertEquals(date, task.getDate());
+    }
+
+    @Test
+    public void testGetTime() {
+        LocalTime time = LocalTime.of(20,0);
+        Deadline task = new Deadline("return book", "04/09/2021 2000");
+        assertEquals(time, task.getTime());
+    }
+
+    @Test
+    public void testCheckDueBeforeDate() {
+        LocalDate date = LocalDate.of(2021, 9, 4);
+        Deadline task = new Deadline("return book", "04/09/2021 2000");
+        assertEquals(true, task.checkDueBeforeDate(date));
     }
 
     @Test

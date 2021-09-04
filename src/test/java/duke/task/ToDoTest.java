@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 public class ToDoTest {
     @Test
     public void testToString() {
@@ -21,6 +23,25 @@ public class ToDoTest {
     public void testGetStatusIcon() {
         ToDo task = new ToDo(CompletionStatus.COMPLETED, "read book");
         assertEquals("X", task.getStatusIcon());
+    }
+
+    @Test
+    public void testGetDate() {
+        ToDo task = new ToDo("read book");
+        assertEquals(null, task.getDate());
+    }
+
+    @Test
+    public void testGetTime() {
+        ToDo task = new ToDo("read book");
+        assertEquals(null, task.getTime());
+    }
+
+    @Test
+    public void testCheckDueBeforeDate() {
+        ToDo task = new ToDo("read book");
+        LocalDate date = LocalDate.now();
+        assertEquals(false, task.checkDueBeforeDate(date));
     }
 
     @Test
