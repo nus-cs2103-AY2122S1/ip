@@ -9,7 +9,6 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * A personal assistant chatbot that helps a person to keep track of various things.
@@ -19,7 +18,7 @@ import java.util.Scanner;
  */
 public class Duke extends DukeGui implements duke.Parser {
     private static final String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
-    private static final String FAREWELL_MESSAGE = "See you soon! :)";
+    private static final String FAREWELL_MESSAGE = "I've saved your tasks.\nSee you soon! :)";
     private static final String FAREWELL_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String COMPLETE_TASK_COMMAND = "done";
@@ -36,9 +35,9 @@ public class Duke extends DukeGui implements duke.Parser {
      * A constructor for Duke chatbot.
      */
     public Duke() {
-        this.taskList = new TaskList();
-        this.storage = new Storage("../../../../data/duke_storage.txt");
-        this.loadData();
+        taskList = new TaskList();
+        storage = new Storage("../../../../data/duke_storage.txt");
+        loadData();
     }
 
 
@@ -78,10 +77,10 @@ public class Duke extends DukeGui implements duke.Parser {
      * Loads data that is saved in a given filename, and parses the data to load tasks.
      */
     public void loadData() {
-        ArrayList<String> lines = this.storage.readLinesFromFile();
+        ArrayList<String> lines = storage.readLinesFromFile();
         for (int i = 0; i < lines.size(); i++) {
             Task task = Task.parseTaskFromSavedText(lines.get(i));
-            this.taskList.addTask(task);
+            taskList.addTask(task);
         }
     }
 
@@ -89,16 +88,10 @@ public class Duke extends DukeGui implements duke.Parser {
      * Saves Chatbot data to a given filename.
      */
     public void saveData() {
-        String content = this.taskList.toSaveData();
-        this.storage.overwriteNewFile();
-        this.storage.writeToFile(content);
-    }
+        String savedData = taskList.toSaveData();
 
-    /**
-     * Handles the logic when Duke is ended.
-     */
-    public void endDuke() {
-        this.saveData();
+        storage.overwriteNewFile();
+        storage.writeToFile(savedData);
     }
 
     /**
@@ -106,9 +99,18 @@ public class Duke extends DukeGui implements duke.Parser {
      */
     public void greet() {
         Label dukeText = new Label(GREETING_MESSAGE);
-        dialogContainer.getChildren().addAll(
+        dialogContainer.getChildren().add(
                 new DukeDialogBox(dukeText, new ImageView(duke))
         );
+    }
+
+    /**
+     * Saves the user's existing data and informs the user.
+     * @return A message informing the user that their data is saved.
+     */
+    public String endDuke() {
+        saveData();
+        return FAREWELL_MESSAGE;
     }
 
     /**
@@ -116,25 +118,23 @@ public class Duke extends DukeGui implements duke.Parser {
      */
     public String taskMode(String msg) {
         if (msg.equals(FAREWELL_COMMAND)) {
-            this.endDuke();
-            return FAREWELL_MESSAGE;
+            return endDuke();
         }
         try {
-            TaskList tasks = this.taskList;
             if (msg.equals(LIST_COMMAND)) {
-                return tasks.toString();
+                return taskList.toString();
             } else if (msg.startsWith(COMPLETE_TASK_COMMAND)) {
-                return tasks.completeTask(Parser.getIntFrom(COMPLETE_TASK_COMMAND, msg));
+                return taskList.completeTask(Parser.getIntFrom(COMPLETE_TASK_COMMAND, msg));
             } else if (msg.startsWith(FIND_TASK_COMMAND)) {
-                return tasks.findTasks(Parser.getStringFrom(FIND_TASK_COMMAND, msg));
+                return taskList.findTasks(Parser.getStringFrom(FIND_TASK_COMMAND, msg));
             } else if (msg.startsWith(DELETE_TASK_COMMAND)) {
-                return tasks.deleteTask(Parser.getIntFrom(DELETE_TASK_COMMAND, msg));
+                return taskList.deleteTask(Parser.getIntFrom(DELETE_TASK_COMMAND, msg));
             } else if (msg.startsWith(CREATE_TODO_COMMAND)) {
-                return tasks.addNewTodo(Parser.getStringFrom(CREATE_TODO_COMMAND, msg));
+                return taskList.addNewTodo(Parser.getStringFrom(CREATE_TODO_COMMAND, msg));
             } else if (msg.startsWith(CREATE_EVENT_COMMAND)) {
-                return tasks.addNewEvent(Parser.getStringFrom(CREATE_EVENT_COMMAND, msg));
+                return taskList.addNewEvent(Parser.getStringFrom(CREATE_EVENT_COMMAND, msg));
             } else if (msg.startsWith(CREATE_DEADLINE_COMMAND)) {
-                return tasks.addNewDeadline(Parser.getStringFrom(CREATE_DEADLINE_COMMAND, msg));
+                return taskList.addNewDeadline(Parser.getStringFrom(CREATE_DEADLINE_COMMAND, msg));
             } else {
                 throw new DukeException("I don't know what that command means." +
                         "\nPlease input a valid command.");
