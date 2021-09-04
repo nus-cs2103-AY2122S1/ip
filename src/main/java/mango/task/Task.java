@@ -53,7 +53,7 @@ public class Task {
      *
      * @return The string representation of the task.
      */
-    public String save() {
+    public String getSaveFormatString() {
         return String.format("%s:%s:%s:\n", this.getType(), this.getStatus(), this.description);
     }
 
@@ -83,6 +83,10 @@ public class Task {
      * @throws DukeException If the input array has a length of 1.
      */
     public static boolean isValid(String[] arr) throws DukeException {
+        if (arr.length == 1) {
+            throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
+        }
+
         return true;
     }
 

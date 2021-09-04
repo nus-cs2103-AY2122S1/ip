@@ -1,6 +1,10 @@
 package mango;
 
-import mango.task.*;
+import mango.task.Deadline;
+import mango.task.Event;
+import mango.task.Task;
+import mango.task.Todo;
+
 import java.util.ArrayList;
 
 /**
@@ -8,14 +12,14 @@ import java.util.ArrayList;
  * an ArrayList of <code>Task</code> objects.
  */
 public class TaskList {
-    private ArrayList<Task> list;
+    private ArrayList<Task> tasks;
     private int listIndex = 0;
 
     /**
      * Constructor for a TaskList.
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
@@ -24,7 +28,7 @@ public class TaskList {
      * @param tasks An ArrayList of Task objects.
      */
     public TaskList(ArrayList<Task> tasks) {
-        this.list = tasks;
+        this.tasks = tasks;
         this.listIndex = tasks.size();
     }
 
@@ -34,7 +38,7 @@ public class TaskList {
      * @return The task list.
      */
     public ArrayList<Task> getList() {
-        return this.list;
+        return this.tasks;
     }
 
     /**
@@ -45,43 +49,43 @@ public class TaskList {
      * @return The confirmation message that the task has been added.
      * @throws DukeException If the input string does not make sense.
      */
-    public String add(String str) throws DukeException {
-        String output = "";
+    public String addTask(String str) throws DukeException {
         Task newTask = null;
-        String[] arr1 = str.split(" ", 2);
-        String type = arr1[0];
-        String desc;
-        String date;
-        String[] arr2;
+        String[] splitUserInput = str.split(" ", 2);
+        String taskType = splitUserInput[0];
+        String taskDesc;
+        String taskDate;
+        String[] splitUserInputForDate;
 
-        switch (type) {
+        switch (taskType) {
         case "todo":
-            if (Todo.isValid(arr1)) {
-                desc = arr1[1];
-                newTask = new Todo(desc);
+            if (Todo.isValid(splitUserInput)) {
+                taskDesc = splitUserInput[1];
+                newTask = new Todo(taskDesc);
             }
             break;
         case "deadline":
-            if (Deadline.isValid(arr1)) {
-                arr2 = arr1[1].split(" /", 2);
-                desc = arr2[0];
-                date = arr2[1].substring(3);
-                newTask = new Deadline(desc, date);
+            if (Deadline.isValid(splitUserInput)) {
+                splitUserInputForDate = splitUserInput[1].split(" /", 2);
+                taskDesc = splitUserInputForDate[0];
+                taskDate = splitUserInputForDate[1].substring(3);
+                newTask = new Deadline(taskDesc, taskDate);
             }
             break;
         case "event":
-            if (Event.isValid(arr1)) {
-                arr2 = arr1[1].split(" /", 2);
-                desc = arr2[0];
-                date = arr2[1].substring(3);
-                newTask = new Event(desc, date);
+            if (Event.isValid(splitUserInput)) {
+                splitUserInputForDate = splitUserInput[1].split(" /", 2);
+                taskDesc = splitUserInputForDate[0];
+                taskDate = splitUserInputForDate[1].substring(3);
+                newTask = new Event(taskDesc, taskDate);
             }
             break;
         default:
             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
-        list.add(listIndex, newTask);
+        tasks.add(listIndex, newTask);
+
         String word;
         if (listIndex == 0) {
             word = "task";
@@ -89,9 +93,9 @@ public class TaskList {
             word = "tasks";
         }
 
-        output += "Got it. I've added this task:\n";
-        output += String.format("   [%s][%s] %s\n", newTask.getType(), newTask.getStatusIcon(), newTask.getDescription());
-        output += String.format("Now you have %d %s in the list.%n", listIndex + 1, word);
+        String output = "Got it. I've added this task:\n"
+                + String.format("   [%s][%s] %s\n", newTask.getType(), newTask.getStatusIcon(), newTask.getDescription())
+                + String.format("Now you have %d %s in the list.%n", listIndex + 1, word);
 
         listIndex++;
         return output;
@@ -104,15 +108,14 @@ public class TaskList {
      * @param completedTask The task that is to be marked as done.
      * @return The confirmation message that the task has been marked completed.
      */
-    public String complete(int completedTask) {
-        String output = "";
-        Task currentTask = list.get(completedTask - 1);
+    public String completeTask(int completedTask) {
+        Task currentTask = tasks.get(completedTask - 1);
         if (!currentTask.isDone()) {
             currentTask.markDone();
         }
 
-        output += "Nice! I've marked this task as done:\n";
-        output += String.format("[%s][X] %s\n", currentTask.getType(), currentTask.getDescription());
+        String output = "Nice! I've marked this task as done:\n"
+                + String.format("[%s][X] %s\n", currentTask.getType(), currentTask.getDescription());
 
         return output;
     }
@@ -124,12 +127,11 @@ public class TaskList {
      * @param deleteTask The task to be deleted.
      * @return The confirmation message that the task has been deleted.
      */
-    public String delete(int deleteTask) {
-        String output = "";
-        Task delTask = list.remove(deleteTask - 1);
+    public String deleteTask(int deleteTask) {
+        Task delTask = tasks.remove(deleteTask - 1);
         listIndex--;
-        output += "Noted. I've removed this task:\n";
-        output += String.format("[%s][%s] %s\n", delTask.getType(), delTask.getStatusIcon(), delTask.getDescription());
+        String output = "Noted. I've removed this task:\n"
+                + String.format("[%s][%s] %s\n", delTask.getType(), delTask.getStatusIcon(), delTask.getDescription());
 
         String word;
         if (listIndex == 1) {
@@ -148,13 +150,13 @@ public class TaskList {
      * @param str The string to find.
      * @return The tasks that match the keyword.
      */
-    public String find(String str) {
-        String output = "";
+    public String findTasks(String str) {
         int i = 0;
-        output += "Here are the matching tasks in your list:\n";
+        String output = "Here are the matching tasks in your list:\n";
+
         while (i < listIndex) {
             int num = i+1;
-            Task curr = list.get(i);
+            Task curr = tasks.get(i);
             if (curr.getDescription().contains(str)) {
                 output += String.format("%d. [%s][%s] %s\n", num, curr.getType(), curr.getStatusIcon(), curr.getDescription());
             }
@@ -168,13 +170,13 @@ public class TaskList {
      *
      * @return All tasks in the task list in a string.
      */
-    public String printList() {
-        String completeList = "";
+    public String toString() {
         int i = 0;
-        completeList += "Here are the tasks in your list:\n";
+        String completeList = "Here are the tasks in your list:\n";
+
         while (i < listIndex) {
             int num = i+1;
-            Task curr = list.get(i);
+            Task curr = tasks.get(i);
             completeList += String.format("%d. [%s][%s] %s\n", num, curr.getType(), curr.getStatusIcon(), curr.getDescription());
             i++;
         }
