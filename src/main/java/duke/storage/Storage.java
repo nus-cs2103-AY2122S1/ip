@@ -47,7 +47,7 @@ public class Storage {
     /**
      * Writes all tasks and their respective statuses to the tasks.txt file.
      *
-     * @param tList the TaskList object used to keep track of all tasks.
+     * @param tList TaskList object used to keep track of all tasks.
      */
     public static void writeToFile(TaskList tList) {
         ArrayList<Task> tasks = tList.getTaskList();
@@ -65,7 +65,7 @@ public class Storage {
     /**
      * Reads all previously entered tasks from tasks.txt and stores them in the Duke.
      *
-     * @param tList tList the TaskList object used to keep track of all tasks.
+     * @param tList TaskList object used to keep track of all tasks.
      */
     public static void readFromFile(TaskList tList) {
         try {
@@ -109,9 +109,9 @@ public class Storage {
     /**
      * Returns LocalDate object to represent the date that accompanies a task.
      *
-     * @param des the user input into the Duke chat-box.
+     * @param des User input into the Duke chat-box.
      * @return Date of a task.
-     * @throws DukeException when date is not properly formatted.
+     * @throws DukeException When date is not properly formatted.
      */
     public static LocalDate extractDate(String des) throws DukeException {
         try {
@@ -126,9 +126,9 @@ public class Storage {
     /**
      * Returns LocalTime object to represent the time that accompanies a Deadline task.
      *
-     * @param des the user input into the Duke chat-box.
+     * @param des User input into the Duke chat-box.
      * @return Time that deadline is due by.
-     * @throws DukeException when date is not properly formatted.
+     * @throws DukeException When date is not properly formatted.
      */
     public static LocalTime extractTimeDeadline(String des) throws DukeException {
         try {
@@ -143,9 +143,9 @@ public class Storage {
      * Returns ArrayList of LocalTime objects to represent the timings that accompany an Event task.
      * The start time is stored at index 0 while the end time is stored at index 1.
      *
-     * @param des the user input into the Duke chat-box.
+     * @param des User input into the Duke chat-box.
      * @return ArrayList of LocalTime objects containing start and end time of an event.
-     * @throws DukeException when date is not properly formatted.
+     * @throws DukeException When date is not properly formatted.
      */
     public static ArrayList<LocalTime> extractTimeEvent(String des) throws DukeException {
         try {

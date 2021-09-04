@@ -10,7 +10,8 @@ import duke.ui.Ui;
 public class Duke {
     /**
      * Initialises the chatBot and runs the Duke chatBot.
-     * @param args arguments for main method.
+     *
+     * @param args Arguments for main method.
      */
     public static void main(String[] args) {
         Ui chatBot = new Ui();
@@ -18,8 +19,10 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns response from Duke chat-bot for a given input.
+     *
+     * @param input User input into Duke chat-bot.
+     * @return String object representing response from Duke chat-bot.
      */
     public String getResponse(String input) {
         GraphicUi guiParser = new GraphicUi();

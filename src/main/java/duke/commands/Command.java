@@ -24,8 +24,8 @@ public abstract class Command {
     /**
      * Returns String representing specific commands executing their responsibilities.
      *
-     * @param des   the user input into the Duke chat-box.
-     * @param tList the TaskList object used to keep track of all tasks.
+     * @param des   User input into the Duke chat-box.
+     * @param tList TaskList object used to keep track of all tasks.
      * @return String representation of Command.
      * @throws DukeException on task-specific errors.
      */
@@ -34,7 +34,7 @@ public abstract class Command {
     /**
      * Returns string representing total number of tasks.
      *
-     * @param tList the TaskList object used to keep track of all tasks.
+     * @param tList TaskList object used to keep track of all tasks.
      * @return Total number of tasks.
      */
     public String numberOfTasks(TaskList tList) {
@@ -49,7 +49,7 @@ public abstract class Command {
     /**
      * Returns Integer type object that represents the number of blank spaces in the user input.
      *
-     * @param des the user input into the Duke chat-box.
+     * @param des User input into the Duke chat-box.
      * @return Number of blank spaces.
      */
     public int countSpaces(String des) {

@@ -15,7 +15,7 @@ public class TaskList {
     /**
      * Adds a task into the list of tasks.
      *
-     * @param t the Task object that is to be added.
+     * @param t Task object that is to be added.
      */
     public void add(Task t) {
         taskList.add(t);
@@ -25,7 +25,7 @@ public class TaskList {
     /**
      * Removes a task from the list of tasks.
      *
-     * @param num the int object that represents index of the task in the taskList that is to be removed.
+     * @param num int object that represents index of the task in the taskList that is to be removed.
      */
     public void remove(int num) {
         taskList.remove(num - 1);
