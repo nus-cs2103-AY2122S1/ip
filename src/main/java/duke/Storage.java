@@ -44,9 +44,8 @@ public class Storage {
 
             // Reads from file is there is anything in it
             Scanner fileReader = new Scanner(myFile);
-            boolean checker = true;
-            while (fileReader.hasNext() && checker) {
-                checker = myParser.scanInputs(fileReader, myTasks, false);
+            while (fileReader.hasNext()) {
+                myParser.scanInputs(fileReader, myTasks);
             }
             fileReader.close();
 

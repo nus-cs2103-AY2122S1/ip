@@ -36,47 +36,46 @@ public class TaskList {
     /**
      * Prints all the tasks in the list of tasks.
      */
-    public void printTaskList() {
+    public String printTaskList() {
+        String returnStr = "";
         for (int i = 1; i <= myTasks.size(); i++) {
-            System.out.println(i + ". " + myTasks.get(i - 1));
+            returnStr += i + ". " + myTasks.get(i - 1) + "\n";
         }
+        return returnStr;
     }
 
     /**
      * Marks a task as done.
      *
      * @param index index of the task to be marked as done
-     * @param printMsg boolean flag for whether to print a confirmation message or not
+     * @return a message
      */
-    public void markAsDone(int index, boolean printMsg) {
+    public String markAsDone(int index) {
         Task task = myTasks.get(index);
         boolean isDone = task.markAsDone();
-        if (printMsg) {
-            Ui.showTaskDoneMessage(task, isDone);
-        }
+        return Ui.getTaskDoneMessage(task, isDone);
     }
 
     /**
      * Deletes a task.
      *
      * @param index index of the task to be deleted
+     * @return a message
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         Task task = myTasks.remove(index);
-        Ui.showRemoveTaskMsg(task, myTasks.size());
+        return Ui.getRemoveTaskMsg(task, myTasks.size());
     }
 
     /**
      * Adds a task
      *
      * @param task the task to be added to the list of tasks
-     * @param printMsg boolean flag for whether to print a confirmation message or not
+     * @return a message
      */
-    public void addTask(Task task, boolean printMsg) {
+    public String addTask(Task task) {
         myTasks.add(task);
-        if (printMsg) {
-            Ui.showAddTaskMsg(task, myTasks.size());
-        }
+        return Ui.getAddTaskMsg(task, myTasks.size());
     }
 
     /**
@@ -84,20 +83,22 @@ public class TaskList {
      * Else tells user that search has yielded nothing.
      *
      * @param searchString the thing that user is searching for
+     * @return a message
      */
-    public void findTask(String searchString) {
+    public String findTask(String searchString) {
         boolean hasMatches = false;
+        String returnStr = "";
         for (int i = 1; i <= myTasks.size(); i++) {
             Task currTask = myTasks.get(i - 1);
             if (currTask.description.contains(searchString)) {
                 hasMatches = true;
-                System.out.println(i + ". " + currTask);
+                returnStr += i + ". " + currTask + "\n";
             }
         }
         if (!hasMatches) {
-            System.out.println("Nothing matched your search! Try something else.");
+            return "Nothing matched your search! Try something else.";
         } else {
-            System.out.println("End of find.");
+            return returnStr;
         }
     }
 }
