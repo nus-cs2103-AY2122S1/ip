@@ -71,13 +71,17 @@ public class Task {
      * @return a Task based on the parsed text
      */
     public static Task parseTaskFromSavedText(String text) {
-        char typeIndicator = text.charAt(0);
+        TypeIndicator typeIndicator = charToTypeEnum(text.charAt(0));
         char doneIndicator = text.charAt(1);
-        boolean isDone = doneIndicator == '1';
-        String timeDueString = text.substring(2, text.indexOf('|'));
-        LocalDate timeDue = timeDueString.length() ==  0 ? null : LocalDate.parse(timeDueString);
+        boolean isDone = (doneIndicator == '1');
         String title = text.substring(text.indexOf('|') + 1);
-        return createTaskWithDetail(charToTypeEnum(typeIndicator), isDone, title, timeDue);
+
+        String timeDueString = text.substring(2, text.indexOf('|'));
+        LocalDate timeDue = timeDueString.length() ==  0
+                ? null
+                : LocalDate.parse(timeDueString);
+
+        return createTaskWithDetail(typeIndicator, isDone, title, timeDue);
     }
 
 
@@ -86,19 +90,20 @@ public class Task {
      * @return a String that represents its saved state
      */
     public String toSaveData() {
-        int doneIndicator = this.isDone ? 1 : 0;
-        String timeDueString = this.timeDue == null
+        int doneIndicator = isDone ? 1 : 0;
+        String timeDueString = timeDue == null
                 ? ""
-                : this.timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                : timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
         return String.format("%s%s%s|%s\n",
-                this.typeIndicator, doneIndicator, timeDueString, this.title);
+                typeIndicator, doneIndicator, timeDueString, this.title);
     }
 
     /**
      * Marks a task as done.
      */
     public void completeTask() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -124,7 +129,7 @@ public class Task {
      * @return a boolean representing whether or not the task contains the keyword.
      */
     public boolean titleContains(String keyword) {
-        return this.title.contains(keyword);
+        return title.contains(keyword);
     }
 
     /**
@@ -134,7 +139,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String doneIndicator = this.isDone ? "x" : " ";
-        return String.format("[%s][%s] %s", typeIndicator, doneIndicator, this.title);
+        String doneIndicator = isDone ? "x" : " ";
+        return String.format("[%s][%s] %s", typeIndicator, doneIndicator, title);
     }
 }
