@@ -68,6 +68,7 @@ public abstract class Parser {
      * @return The task represented by the string.
      */
     public static Task convertStringToTask(String taskString) {
+        assert taskString.length() != 0 : "String representation of task is empty.";
         char type = taskString.charAt(1);
         boolean isDone = taskString.charAt(0) == 'X';
         String[] splitAtSlash = taskString.split("/");
@@ -123,6 +124,7 @@ public abstract class Parser {
      * @throws DukeException If the given done command has missing arguments.
      */
     public static int parseDoneCommand(String input) throws DukeException {
+        assert input.length() != 0 : "Invalid Done command.";
         String[] splitBySpace = input.split(" ");
         boolean hasInputAfterSpace = splitBySpace.length > 1;
 
@@ -144,6 +146,7 @@ public abstract class Parser {
      * @throws DukeException If the given delete command has missing arguments.
      */
     public static int parseDeleteCommand(String input) throws DukeException {
+        assert input.length() != 0 : "Invalid Delete command.";
         String[] splitBySpace = input.split(" ", 2);
         boolean hasInputAfterSpace = splitBySpace.length > 1
                 && splitBySpace[1].trim().length() > 0;
@@ -166,6 +169,7 @@ public abstract class Parser {
      * @throws DukeException If the given find command has missing arguments.
      */
     public static String parseFindCommand(String input) throws DukeException {
+        assert input.length() != 0 : "Invalid Find command.";
         String[] splitBySpace = input.split(" ", 2);
         boolean hasInputAfterSpace = splitBySpace.length > 1
                 && splitBySpace[1].trim().length() > 0;
@@ -186,6 +190,7 @@ public abstract class Parser {
      * @return The Todo object.
      */
     public static ToDo parseTodoCommand(String input) {
+        assert input.length() != 0 : "Invalid Todo command.";
         return new ToDo(input, false);
     }
 
@@ -198,6 +203,7 @@ public abstract class Parser {
      * @throws DukeException If the given deadline command has missing arguments.
      */
     public static Deadline parseDeadlineCommand(String input) throws DukeException {
+        assert input.length() != 0 : "Invalid Deadline command.";
         String[] nameAndDeadline = input.split(" /by ");
         boolean hasInputAfterBy = nameAndDeadline.length > 1
                 && nameAndDeadline[1].trim().length() > 0;
@@ -223,6 +229,7 @@ public abstract class Parser {
      * @throws DukeException If the given event command has missing arguments.
      */
     public static Event parseEventCommand(String input) throws DukeException {
+        assert input.length() != 0 : "Invalid Event command.";
         String[] nameAndTime = input.split(" /at ");
         boolean hasInputAfterAt = nameAndTime.length > 1
                 && nameAndTime[1].trim().length() > 0;
