@@ -126,7 +126,7 @@ public class TaskList {
     }
 
     /**
-     * Completes multiple tasks in TaskList at specified indices
+     * Completes multiple tasks in TaskList at specified indices.
      *
      * @param taskIndices Indices to complete.
      * @throws LifelineException if task is already completed.
@@ -137,6 +137,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns number of uncompleted tasks.
+     *
+     * @return Number of uncompleted tasks.
+     */
     public int getNumberOfUncompletedTasks() {
         int uncompletedTasks = 0;
         for (int i = 0; i < taskList.size(); i++) {
