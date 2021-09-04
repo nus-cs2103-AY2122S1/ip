@@ -6,7 +6,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 import duke.util.DataManager;
-import duke.util.ToDoList;
+import duke.util.TaskList;
 
 /**
  * This class encapsulates the command dealing with adding tasks to the list.
@@ -28,7 +28,7 @@ public class AddCommand extends Command {
     private static final String ERROR_EVENT_MISSING_DATE =
             "Please specify the date of this event using '/at <date>'.";
 
-    private final ToDoList list;
+    private final TaskList list;
     private final DataManager dataManager;
     private final String taskType;
 
@@ -40,7 +40,7 @@ public class AddCommand extends Command {
      * @param dataManager DataManager currently used by Duke.
      * @param taskType The type of add command used.
      */
-    public AddCommand(ToDoList list, DataManager dataManager, String taskType) {
+    public AddCommand(TaskList list, DataManager dataManager, String taskType) {
         this.list = list;
         this.dataManager = dataManager;
 

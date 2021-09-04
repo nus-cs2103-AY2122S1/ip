@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.exception.DukeException;
 import duke.util.Parser;
-import duke.util.ToDoList;
+import duke.util.TaskList;
 
 /**
  * This class encapsulates the command dealing with deleting tasks from the list.
@@ -11,9 +11,9 @@ import duke.util.ToDoList;
  * @version CS2103T AY21/22 Semester 1
  */
 public class DeleteCommand extends Command {
-    private final ToDoList list;
+    private final TaskList list;
 
-    public DeleteCommand(ToDoList list) {
+    public DeleteCommand(TaskList list) {
         this.list = list;
     }
 

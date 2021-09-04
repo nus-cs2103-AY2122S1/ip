@@ -3,7 +3,7 @@ package duke.command;
 import java.util.List;
 
 import duke.task.Task;
-import duke.util.ToDoList;
+import duke.util.TaskList;
 import duke.util.Ui;
 
 /**
@@ -20,9 +20,9 @@ public class FilterCommand extends Command {
     private static final String EMPTY_FILTERED_LIST =
             "There are no tasks on this day.";
 
-    private final ToDoList list;
+    private final TaskList list;
 
-    public FilterCommand(ToDoList list) {
+    public FilterCommand(TaskList list) {
         this.list = list;
     }
 

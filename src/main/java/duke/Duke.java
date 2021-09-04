@@ -3,7 +3,7 @@ package duke;
 import duke.command.Command;
 import duke.util.DataManager;
 import duke.util.Parser;
-import duke.util.ToDoList;
+import duke.util.TaskList;
 
 /**
  * This class encapsulates a CLI bot named Duke.
@@ -21,7 +21,7 @@ public class Duke {
      */
     public Duke(String filePath) {
         DataManager dataManager = new DataManager(filePath);
-        ToDoList list = new ToDoList(dataManager.readData(), dataManager);
+        TaskList list = new TaskList(dataManager.readData(), dataManager);
         parser = new Parser(list, dataManager);
     }
 

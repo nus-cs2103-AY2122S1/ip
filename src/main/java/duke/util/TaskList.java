@@ -1,6 +1,7 @@
 package duke.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,15 +17,28 @@ import duke.task.Task;
  * @author Tan Yi Guan
  * @version CS2103T AY21/22 Semester 1
  */
-public class ToDoList {
+public class TaskList {
     private static final String COMPLETE_TASK_MESSAGE = "Good job on completing this task!";
+    private static final String ERROR_TASK_ALREADY_CREATED =
+            "You have already added this task before! See what tasks you have by using the 'list' command.";
+    private static final String ERROR_MULTIPLE_TODOS_TASK_ALREADY_CREATED =
+            "There is a task that you have already added before! See what tasks you have by using the "
+                    + "'list' command.";
+
     private final ArrayList<Task> list;
     private final DataManager dataManager;
+    // @@author {zhuhangming}-reused
+    private final HashMap<String, Boolean> descriptions;
 
     /** Instantiates a new To do list. */
-    public ToDoList(ArrayList<Task> list, DataManager dataManager) {
+    public TaskList(ArrayList<Task> list, DataManager dataManager) {
         this.list = list;
         this.dataManager = dataManager;
+        this.descriptions = new HashMap<>();
+
+        for (Task t : list) {
+            descriptions.put(t.toString().toLowerCase(), true);
+        }
     }
 
     /** Gets the list of items that the user entered. */
@@ -39,21 +53,39 @@ public class ToDoList {
      * @return string to be printed out.
      */
     public String addToList(Task... tasks) {
-        if (tasks.length == 1) {
-            list.add(tasks[0]);
-            return String.format("Got it. I've added this task:" + Ui.LINE_SEPARATOR
-                            + "  %sNow you have %s tasks in the list.",
-                    tasks[0] + Ui.LINE_SEPARATOR, list.size());
-        } else {
-            assert tasks.length >= 2 : "There should be at least 2 tasks entered by the user.";
-            StringBuilder sb = new StringBuilder("Got it. I've added these tasks:\n");
-            for (Task t : tasks) {
-                list.add(t);
-                sb.append("  ").append(t).append("\n");
-            }
-            sb.append("Now you have ").append(list.size()).append(" tasks in the list.");
-            return sb.toString();
+        if (tasks.length > 1) {
+            return handleMultipleAddTask(tasks);
         }
+
+        return handleSingleAddTask(tasks[0]);
+    }
+
+    private String handleSingleAddTask(Task task) {
+        // @@author {zhuhangming}-reused
+        if (this.descriptions.containsKey(task.toString().toLowerCase())) {
+            return ERROR_TASK_ALREADY_CREATED;
+        }
+
+        list.add(task);
+        return String.format("Got it. I've added this task:" + Ui.LINE_SEPARATOR
+                        + "  %sNow you have %s tasks in the list.",
+                task + Ui.LINE_SEPARATOR, list.size());
+    }
+
+    private String handleMultipleAddTask(Task[] tasks) {
+        assert tasks.length >= 2 : "There should be at least 2 tasks entered by the user.";
+        StringBuilder sb = new StringBuilder("Got it. I've added these tasks:\n");
+        for (Task t : tasks) {
+            // @@author {zhuhangming}-reused
+            if (this.descriptions.containsKey(t.toString().toLowerCase())) {
+                return ERROR_MULTIPLE_TODOS_TASK_ALREADY_CREATED;
+            }
+
+            list.add(t);
+            sb.append("  ").append(t).append("\n");
+        }
+        sb.append("Now you have ").append(list.size()).append(" tasks in the list.");
+        return sb.toString();
     }
 
     /**

@@ -27,7 +27,7 @@ import duke.exception.MultipleKeywordsException;
  * @version CS2103T AY21/22 Semester 1
  */
 public class Parser {
-    private final ToDoList list;
+    private final TaskList list;
     private final DataManager dataManager;
 
     /**
@@ -36,7 +36,7 @@ public class Parser {
      * @param list ToDoList currently used by Duke.
      * @param dataManager DataManager currently used by Duke.
      */
-    public Parser(ToDoList list, DataManager dataManager) {
+    public Parser(TaskList list, DataManager dataManager) {
         this.list = list;
         this.dataManager = dataManager;
     }
