@@ -10,14 +10,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import static duke.Duke.DEFAULT_STORAGE_FILE_PATH;
-
 /**
  * A GUI for Duke using FXML.
  */
 public class Gui extends Application {
 
-    private Duke duke = new Duke(DEFAULT_STORAGE_FILE_PATH);
+    private final Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {

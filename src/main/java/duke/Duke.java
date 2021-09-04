@@ -8,7 +8,9 @@ import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
 import duke.ui.Ui;
+import duke.util.DukeProperties;
 import javafx.application.Application;
+
 
 /**
  * Represents the main Duke application.
@@ -22,11 +24,10 @@ public class Duke {
 
     /**
      * Constructor for a Duke object.
-     *
-     * @param filePath Path to the file where tasks should be stored.
      */
-    public Duke(String filePath) {
+    public Duke() {
         ui = new Ui();
+        String filePath = DukeProperties.getPropertyOrDefault("storage", DEFAULT_STORAGE_FILE_PATH);
         storage = new Storage(filePath);
         try {
             taskManager = new TaskManager(storage.loadTasks());
@@ -87,7 +88,7 @@ public class Duke {
      */
     public static void main(String[] args) {
         if (args.length > 0 && args[0].equals("-c")) {
-            new Duke(DEFAULT_STORAGE_FILE_PATH).run();
+            new Duke().run();
         } else {
             Application.launch(Gui.class, args);
         }
