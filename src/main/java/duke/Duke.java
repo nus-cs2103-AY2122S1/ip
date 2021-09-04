@@ -1,3 +1,6 @@
+package duke;
+import duke.components.*;
+import duke.task.*;
 import java.util.Scanner;
 
 public class Duke {

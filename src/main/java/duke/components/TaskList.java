@@ -1,7 +1,8 @@
+package duke.components;
+import duke.task.*;
 import java.util.ArrayList;
 import java.time.LocalDateTime;
 
-// contains the task list e.g., it has operations to add/delete tasks in the list
 public class TaskList {
     private ArrayList<Task> inputs;
     private Storage storage;

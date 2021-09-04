@@ -1,9 +1,9 @@
+package duke.components;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.time.format.DateTimeFormatter;
 
-// deals with making sense of the user command
 public class Parser {
     private final String end;
     private final String display;

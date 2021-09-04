@@ -1,4 +1,6 @@
-// deals with interactions with the user
+package duke.components;
+import duke.task.*;
+
 public class Ui {
     private final String lineBreak;
 

@@ -1,3 +1,5 @@
+package duke.components;
+import duke.task.*;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.io.File;
@@ -7,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-// deals with loading tasks from the file and saving tasks in the file
 public class Storage {
     private final File dataFile;
     private final File dataFolder;

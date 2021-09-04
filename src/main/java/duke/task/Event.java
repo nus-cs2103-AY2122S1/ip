@@ -1,7 +1,6 @@
-import java.time.LocalDate;
+package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class Event extends Task {
     protected LocalDateTime eveDateTime;
