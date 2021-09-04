@@ -57,6 +57,7 @@ public class Duke {
      *
      */
     public void exit() {
+        //todo change this magic number 0 into a final variable (EXIT or sth)
         if (getExitStatus() == 0) {
             new Thread() { //inspiration from Lim PeiYuan
                 @Override

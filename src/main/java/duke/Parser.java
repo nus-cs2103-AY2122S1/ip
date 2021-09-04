@@ -24,6 +24,8 @@ public class Parser {
         String[] inputs = input.split(" ", 2);
         String key = inputs[0];
 
+        //todo use enum here
+        // can make key.toUpper and pass in the values.
         switch (key) {
         case "bye":
             return bot.handleExit();
@@ -31,12 +33,14 @@ public class Parser {
             return bot.handleList();
         case "done":
             // check if a number is specified
+            //todo make a method that checks if a string has length x.
             if (inputs.length == 1) {
                 throw new DukeException("The task number cannot be empty you dum dum");
             }
             // check if the following string is a number
             int index = Integer.parseInt(inputs[1]);
             // check if the number is valid.
+            //todo make a method that checks if the index is out of bounds or make split into parts with variable declaration
             if (index <= 0 || index > bot.getTotalTasks()) {
                 throw new DukeException("Please enter a valid number");
             }

@@ -30,6 +30,7 @@ public class Storage {
      * This method makes a directory at a hardcoded location for the data to be stored.
      * If the directory is already made, nothing happens.
      */
+    //todo make this method more substantial, put a check to see if file exist first.
     public void makeDir() {
         File f = new File("./data");
     }
@@ -79,6 +80,8 @@ public class Storage {
                     load.add(t);
                     break;
                 default:
+                    //todo throw an error here since its not suppose to reach here
+                    //it might reach here if the user edit the file
                     break;
                 }
             }
@@ -102,6 +105,7 @@ public class Storage {
             for (int i = 0; i < tasklist.getTotalTasksNumber(); i++) {
                 StringBuilder s = new StringBuilder();
                 Task current = tasklist.getTask(i);
+                //todo change this code block to a method
                 s.append(current.getMarker());
                 s.append(STRING_TERMINATOR);
                 s.append(current.getDone());
