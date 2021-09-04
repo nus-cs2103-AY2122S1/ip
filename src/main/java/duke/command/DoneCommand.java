@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
+import duke.exception.DukeException;
+import duke.exception.InvalidTaskNumException;
 import duke.task.TaskList;
 
 /**
@@ -11,6 +11,7 @@ import duke.task.TaskList;
 public class DoneCommand extends Command {
 
     public static final String COMMAND_WORD = "done";
+    private static final String SUCCESS_MSG = "Nice! I've marked this task as done:\n  ";
     private int taskNum;
 
     public DoneCommand(int taskNum) {
@@ -22,18 +23,17 @@ public class DoneCommand extends Command {
      * Also saves the updated TaskList to taskList.txt
      *
      * @param tasks the given TaskList.
-     * @param ui the given Ui.
      * @param storage the given Storage.
      * @return the string for the Ui to print.
      * @throws DukeException when the index given is invalid.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (taskNum >= tasks.numTasks()) {
-            throw new DukeException("you typed an invalid number: " + (taskNum + 1));
+            throw new InvalidTaskNumException(taskNum + 1);
         }
         tasks.markTask(taskNum);
         storage.save(tasks);
-        return "Nice! I've marked this task as done:\n  " + tasks.getTask(taskNum);
+        return SUCCESS_MSG + tasks.getTask(taskNum);
     }
 }

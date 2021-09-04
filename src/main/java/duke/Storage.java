@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
+import duke.exception.StorageException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -19,6 +20,9 @@ import duke.task.ToDo;
  */
 public class Storage {
 
+    private static final String DIRECTORY_NAME = "data";
+    private static final String FILE_NAME = "taskList.txt";
+
     private String filePath;
 
     public Storage(String filePath) {
@@ -26,16 +30,16 @@ public class Storage {
     }
 
     /**
-     * Saves the given ArrayList of Tasks into data/taskList.txt.
+     * Saves the given ArrayList of Tasks according to the directory and file names.
      * Creates a new directory and file if they do not exist.
      *
      * @param lst the given ArrayList of Tasks.
-     * @throws DukeException when there is a problem with creating directories or files.
+     * @throws StorageException when there is a problem with creating directories or files.
      */
-    public void save(TaskList lst) throws DukeException {
+    public void save(TaskList lst) throws StorageException {
         // directory and file names
-        Path directory = Paths.get("data");
-        Path taskFile = directory.resolve("taskList.txt");
+        Path directory = Paths.get(DIRECTORY_NAME);
+        Path taskFile = directory.resolve(FILE_NAME);
 
         // to create string that's to be saved in the file
         StringBuilder res = new StringBuilder();
@@ -64,7 +68,7 @@ public class Storage {
             Files.writeString(taskFile, res.toString());
 
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new StorageException(e.getMessage());
         }
     }
 
@@ -73,9 +77,9 @@ public class Storage {
      * Throws a DukeException if the file does not exist.
      *
      * @return An ArrayList containing the tasks in the text file.
-     * @throws DukeException when the file does not exist.
+     * @throws StorageException when the file does not exist.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws StorageException {
         ArrayList<Task> result = new ArrayList<>();
 
         // directory and file names
@@ -84,7 +88,7 @@ public class Storage {
         // check if directory and file exist
         // if not return an empty ArrayList<Task>
         if (Files.notExists(taskFile)) {
-            throw new DukeException("text file given does not exist!");
+            throw new StorageException("text file given does not exist!");
         }
 
         // parse each line
@@ -97,7 +101,7 @@ public class Storage {
                 }
             );
         } catch (IOException e) {
-            throw new DukeException(e.getMessage());
+            throw new StorageException(e.getMessage());
         }
 
         return result;

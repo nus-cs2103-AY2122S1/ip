@@ -1,8 +1,7 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
-import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
@@ -21,13 +20,12 @@ public class ExitCommand extends Command {
      * Prints the Exit Message.
      *
      * @param tasks the given TaskList.
-     * @param ui the given Ui.
      * @param storage the given Storage.
      * @return the string for the Ui to print.
      * @throws DukeException shouldn't happen.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         return EXIT_MSG;
     }
 
