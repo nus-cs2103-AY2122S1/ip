@@ -64,8 +64,7 @@ public class Deadline extends Task {
                     + "a task description using a '/by' (only once).\n"
                     + "i.e. deadline return book /by 2021-12-25");
         }
-        Task deadline = new Deadline(deadlineParams[0], deadlineParams[1]);
-        return deadline;
+        return new Deadline(deadlineParams[0], deadlineParams[1]);
     }
 
     /**

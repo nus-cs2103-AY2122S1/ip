@@ -53,12 +53,13 @@ public class Storage {
                 char initialOfTask = task.toString().charAt(1);
                 String description = task.getDescription();
 
-                // Add a marker to tell if its done or not
+                // Add a marker to tell if its done or not i.e. 1 is done, 0 is not
                 toBeWritten.append(task.getIsDone() ? "1" : "0").append(SEPARATOR);
 
-                //Add the task type and description
+                // Add the task type and description
                 toBeWritten.append(initialOfTask).append(SEPARATOR).append(description);
 
+                // Add any extra information if needed
                 switch (initialOfTask) {
                 case 'T':
                     break;
@@ -74,6 +75,7 @@ public class Storage {
                     break;
                 }
 
+                // Add new line for next task
                 toBeWritten.append("\n");
             }
 

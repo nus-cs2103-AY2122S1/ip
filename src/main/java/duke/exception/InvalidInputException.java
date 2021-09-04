@@ -8,6 +8,6 @@ public class InvalidInputException extends DukeException {
      * Constructs an InvalidInputException.
      */
     public InvalidInputException() {
-        super("That is not a valid input!");
+        super("Meow! That is not a valid input!");
     }
 }
