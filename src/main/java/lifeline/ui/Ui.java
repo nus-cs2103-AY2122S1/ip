@@ -96,6 +96,31 @@ public class Ui {
     }
 
     /**
+     * Informs user that tasks have been deleted and number of tasks left.
+     *
+     * @param taskList TaskList to inform user how many tasks are left.
+     * @return Information on deleted tasks and number of tasks left.
+     */
+    public String showDeletedTaskMessage(TaskList taskList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("I have deleted the tasks. You have " + taskList.getSize() + " tasks left");
+        return stringBuilder.toString();
+    }
+
+    /**
+     * Informs user that tasks have been completed and number of uncompleted tasks.
+     *
+     * @param taskList TaskList to inform user how many uncompleted tasks are left
+     * @return Information on completed tasks and number of uncompleted tasks left.
+     */
+    public String showCompletedTaskMessage(TaskList taskList) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("I have completed the tasks. You have " + taskList.getNumberOfUncompletedTasks()
+                + " uncompleted tasks");
+        return stringBuilder.toString();
+    }
+
+    /**
      * Returns information on added task.
      *
      * @param task Addded task.
@@ -126,13 +151,14 @@ public class Ui {
      * @return Message to tell user what commands are available and what the commands do.
      */
     public String showHelpMessage() {
-        return "bye: Exits the program.\n"
+        return "Date should be specified as <dd/MM/yy> and time should be specified as <HHmm>\n"
+                + "bye: Exits the program.\n"
                 + "list: Lists your tasks.\n"
-                + "done <INDEX>: Marks task at index as done.\n"
-                + "delete <INDEX>: Deletes task at index.\n"
+                + "done <INDEX>: Marks task at index as done. You can specify multiple indices separated by commas.\n"
+                + "delete <INDEX>: Deletes task at index. You can specify multiple indices separated by commas.\n"
                 + "find <KEYWORD>: Find all tasks containing keyword,\n"
-                + "deadline <DESC> /by <dd/MM/yy> <HHmm>: Creates Deadline.\n"
-                + "event <DESC> /at <dd/MM/yy> <HHmm>-<HHmm>: Creates Event.\n"
+                + "deadline <DESC> /by <date> <time>: Creates Deadline.\n"
+                + "event <DESC> /at <date> <startTime>-<endTime>: Creates Event.\n"
                 + "todo <DESC>: Creates ToDo.\n"
                 + "help: Shows this message.\n";
     }

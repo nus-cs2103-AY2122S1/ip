@@ -4,6 +4,7 @@ import static lifeline.util.ErrorString.ERROR_NO_TASKS_FOUND;
 import static lifeline.util.ErrorString.ERROR_TASK_ALREADY_DONE;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import lifeline.exception.LifelineException;
 
@@ -110,5 +111,39 @@ public class TaskList {
      */
     public ArrayList<Task> getTaskList() {
         return this.taskList;
+    }
+
+    /**
+     * Deletes multiple tasks in TaskList at specified indices.
+     *
+     * @param taskIndices Indices to delete.
+     */
+    public void deleteMultipleTasks(ArrayList<Integer> taskIndices) {
+        Collections.sort(taskIndices);
+        for (int i = taskIndices.size() - 1; i >= 0; i--) {
+            this.deleteTask(taskIndices.get(i));
+        }
+    }
+
+    /**
+     * Completes multiple tasks in TaskList at specified indices
+     *
+     * @param taskIndices Indices to complete.
+     * @throws LifelineException if task is already completed.
+     */
+    public void completeMultipleTasks(ArrayList<Integer> taskIndices) throws LifelineException {
+        for (int i = taskIndices.size() - 1; i >= 0; i--) {
+            this.completeTask(taskIndices.get(i));
+        }
+    }
+
+    public int getNumberOfUncompletedTasks() {
+        int uncompletedTasks = 0;
+        for (int i = 0; i < taskList.size(); i++) {
+            if (!taskList.get(i).isDone()) {
+                uncompletedTasks++;
+            }
+        }
+        return uncompletedTasks;
     }
 }
