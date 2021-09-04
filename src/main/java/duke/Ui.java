@@ -4,7 +4,7 @@ package duke;
  * Ui class provides methods for user interaction
  */
 public class Ui {
-    private final static String line = "_______________________________________________________\n";
+    private static final String line = "_______________________________________________________\n";
 
     /**
      * Shows a welcome text
