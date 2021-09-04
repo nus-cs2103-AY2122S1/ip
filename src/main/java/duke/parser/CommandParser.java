@@ -10,6 +10,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
+import duke.command.LoadCommand;
 
 /**
  * Parses user input.
@@ -43,6 +44,8 @@ public class CommandParser {
             return new DeleteTaskCommand(commandArguments);
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+        case LoadCommand.COMMAND_WORD:
+            return new LoadCommand(commandArguments);
         default:
             return new HelpCommand();
         }
