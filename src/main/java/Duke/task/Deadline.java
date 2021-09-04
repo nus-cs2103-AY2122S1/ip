@@ -10,8 +10,8 @@ import java.time.format.DateTimeParseException;
 public class Deadline extends Task {
 
     private static final char LABEL = 'D';
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
-    private String deadlineWrongFormat; // Used to store incorrect deadline formats.
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
     private LocalDateTime deadline;
 
     /**
@@ -20,15 +20,9 @@ public class Deadline extends Task {
      * @param details Details of the deadline task.
      * @param deadline Deadline of the deadline task.
      */
-    public Deadline(String details, String deadline) {
+    public Deadline(String details, String deadline) throws DateTimeParseException {
         super(LABEL, details);
-        try {
-            this.deadline = LocalDateTime.parse(deadline, FORMATTER);
-            deadlineWrongFormat = null;
-        } catch (DateTimeParseException e) {
-            deadlineWrongFormat = deadline;
-            this.deadline = null;
-        }
+        this.deadline = LocalDateTime.parse(deadline, INPUT_FORMATTER);
     }
 
     /**
@@ -51,25 +45,12 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns deadline of task as a String.
-     *
-     * @return Task deadline as a String.
-     */
-    public String getDeadlineAsStr() {
-        if (deadline == null) {
-            return deadlineWrongFormat;
-        } else {
-            return deadline.format(FORMATTER);
-        }
-    }
-
-    /**
      * Returns a String representation of the task.
      *
      * @return String representation of the task.
      */
     @Override
     public String toString() {
-        return "[" + LABEL + "]" + super.toString() + " (by: " + getDeadlineAsStr() + ")";
+        return "[" + LABEL + "]" + super.toString() + " (by: " + deadline.format(OUTPUT_FORMATTER) + ")";
     }
 }
