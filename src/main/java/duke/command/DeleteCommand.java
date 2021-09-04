@@ -35,6 +35,7 @@ public class DeleteCommand extends Command {
     public static boolean isDeleteOps(String... input) {
         int length = input.length;
         if (length < 2) {
+            // guard clause
             return false;
         }
         try {

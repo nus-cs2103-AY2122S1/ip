@@ -38,6 +38,7 @@ public class DoneCommand extends Command {
     public static boolean isDoneOps(String... input) {
         int length = input.length;
         if (length < 2) {
+            // guard clause
             return false;
         }
         try {
@@ -61,6 +62,7 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (index > taskList.size()) {
+            // guard clause
             throw new DukeException("D: oopsie!!! The specified task does not exit.");
         }
         taskList.doneTask(index);

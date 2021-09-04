@@ -19,10 +19,12 @@ public class AddCommand extends Command {
      */
     public AddCommand(String... command) throws duke.DukeException {
         if (command.length == 1) {
+            // guard clause
             throw new duke.DukeException(" ☹ OOPS!!! The description of a task cannot be empty.");
         } else if (command[0].equals("todo")) {
             task = new duke.task.Todo(command);
         } else if (Arrays.asList(command).contains("/") && command.length <= 3) {
+            // guard clause
             throw new duke.DukeException(
                     " ☹ HEY DEAR! Please enter a date after / following the task description");
         } else if (command[0].equals("deadline")) {
