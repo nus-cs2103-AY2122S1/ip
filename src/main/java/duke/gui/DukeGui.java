@@ -22,6 +22,10 @@ public abstract class DukeGui extends Application {
     protected Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     protected Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
+    /**
+     * Creates the Duke GUI from a stage
+     * @param stage The stage on which to render the scene
+     */
     protected void setUpGui(Stage stage) {
         setUpGuiComponents(stage);
         adjustComponentSizes();

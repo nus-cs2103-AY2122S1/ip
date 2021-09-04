@@ -17,7 +17,7 @@ import java.util.Scanner;
  * @author Jovyn Tan
  * @version CS2103 AY21/22 Sem 1
  */
-public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
+public class Duke extends DukeGui implements duke.Parser {
     private static final String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
     private static final String FAREWELL_MESSAGE = "See you soon! :)";
     private static final String FAREWELL_COMMAND = "bye";
@@ -32,26 +32,6 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
     private Storage storage;
     private TaskList taskList;
 
-    private Scanner sc;
-
-    /**
-     * The entrypoint of the Duke chat bot.
-     * @param args The command line arguments.
-     */
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        Duke duke = new Duke();
-
-        duke.greet();
-        duke.run();
-    }
-
     /**
      * A constructor for Duke chatbot.
      */
@@ -59,7 +39,6 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
         this.taskList = new TaskList();
         this.storage = new Storage("../../../../data/duke_storage.txt");
         this.loadData();
-        this.sc = new Scanner(System.in);
     }
 
 
@@ -71,7 +50,6 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
     public void start(Stage stage) {
         setUpGui(stage);
 
-        // Handles user input
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
         });
@@ -79,6 +57,8 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
+        greet();
     }
 
     /**
@@ -103,7 +83,6 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
             Task task = Task.parseTaskFromSavedText(lines.get(i));
             this.taskList.addTask(task);
         }
-        ChatbotUI.printMessage("Loaded tasks from save file!", this.taskList.countTasks());
     }
 
     /**
@@ -120,21 +99,16 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
      */
     public void endDuke() {
         this.saveData();
-        ChatbotUI.printMessage(FAREWELL_MESSAGE);
     }
 
     /**
      * Prints a greeting to the user.
      */
     public void greet() {
-        ChatbotUI.printMessage(GREETING_MESSAGE);
-    }
-
-    public void run() {
-        String msg = ChatbotUI.acceptUserInput(this.sc).trim();
-        String output = taskMode(msg);
-        ChatbotUI.printMessage(output);
-        run();
+        Label dukeText = new Label(GREETING_MESSAGE);
+        dialogContainer.getChildren().addAll(
+                new DukeDialogBox(dukeText, new ImageView(duke))
+        );
     }
 
     /**
@@ -143,7 +117,7 @@ public class Duke extends DukeGui implements duke.ChatbotUI, duke.Parser {
     public String taskMode(String msg) {
         if (msg.equals(FAREWELL_COMMAND)) {
             this.endDuke();
-            return "I've saved the tasks. You can close Duke now!";
+            return FAREWELL_MESSAGE;
         }
         try {
             TaskList tasks = this.taskList;
