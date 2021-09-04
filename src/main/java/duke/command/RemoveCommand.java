@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidTaskNumException;
 import duke.task.Task;
@@ -29,7 +28,7 @@ public class RemoveCommand extends Command {
      * @throws DukeException when the given index is invalid.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         if (taskNum >= tasks.numTasks()) {
             throw new InvalidTaskNumException(taskNum + 1);
         }

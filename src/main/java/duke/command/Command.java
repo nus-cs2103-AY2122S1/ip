@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -12,15 +11,14 @@ import duke.task.TaskList;
 public abstract class Command {
 
     /**
-     * Executes the Command based on a given TaskList, Ui and Storage.
+     * Executes the Command based on a given TaskList and Storage.
      *
      * @param tasks the given TaskList.
-     * @param ui the given Ui.
      * @param storage the given Storage.
      * @return the string for the Ui to print.
      * @throws DukeException when the Command cannot be executed.
      */
-    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage) throws DukeException;
 
     /**
      * Returns true if the Command is the ExitCommand, false otherwise.

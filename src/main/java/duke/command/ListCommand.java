@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -21,13 +20,12 @@ public class ListCommand extends Command {
      * If there are no tasks in the TaskList, will print a message saying so.
      *
      * @param tasks the given TaskList.
-     * @param ui the given Ui.
      * @param storage the given Storage.
      * @return the string for the Ui to print.
      * @throws DukeException shouldn't happen.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         String msg = tasks.listTaskArr();
         if (msg.isBlank()) {
             msg = "No tasks in the list!";

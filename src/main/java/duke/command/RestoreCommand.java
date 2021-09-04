@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.Storage;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.TaskList;
 
@@ -28,7 +27,7 @@ public class RestoreCommand extends Command {
      * @throws DukeException when something goes wrong in the saving process.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.restore();
         storage.save(tasks);
         return SUCCESS_MSG + tasks.listTaskArr();
