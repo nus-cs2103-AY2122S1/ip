@@ -3,20 +3,20 @@ package Du;
 public class Ui {
 
     /**
-     * public constructor for Ui
+     * Public constructor for Ui
      */
     public Ui() {
     }
 
     /**
-     * shows error when there is one
+     * Shows error when there is one
      */
     public void showLoadingError() {
         System.out.println("Oops, there is an error somewhere, I'm not sure where it is exactly as well");
     }
 
     /**
-     * greets when the user first start the programme
+     * Greets when the user first start the programme
      */
     public String greet() {
         String logo = " ____\n"
@@ -28,7 +28,7 @@ public class Ui {
     }
 
     /**
-     * ends programme when user inputs "bye"
+     * Ends programme when user inputs "bye"
      */
     public void close_programme() {
 

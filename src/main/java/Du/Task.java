@@ -9,7 +9,7 @@ public class Task {
     protected TaskList taskList;
 
     /**
-     * public constructor to create a new task
+     * Public constructor to create a new task
      * @param name name of the task
      */
     public Task(String name, boolean done, TaskList tasklist) {
@@ -24,7 +24,7 @@ public class Task {
     }
 
     /**
-     * prints log for adding a task
+     * Prints log for adding a task
      */
     public String log_add_task() {
         return "Got it. I've added this task:\n"
@@ -33,7 +33,7 @@ public class Task {
     }
 
     /**
-     * changes task's done state to be true
+     * Changes task's done state to be true
      */
     public String finish_task() {
         this.isDone = true;

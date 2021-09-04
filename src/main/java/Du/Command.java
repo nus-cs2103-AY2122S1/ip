@@ -1,12 +1,12 @@
 package Du;
 
 /**
- * collections of methods that the bot can call
+ * Collections of methods that the bot can call
  */
 public class Command {
 
     /**
-     * repeats the command
+     * Repeats the command
      * used in level 1
      * @param command command passed to bot
      */

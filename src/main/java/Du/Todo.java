@@ -10,7 +10,7 @@ public class Todo extends Task {
 
 
     /**
-     * records the To do in a certain format to save to the file
+     * Records the To do in a certain format to save to the file
      * @return String which the To do is formatted in
      */
     @Override

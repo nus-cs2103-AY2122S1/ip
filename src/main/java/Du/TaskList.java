@@ -7,14 +7,14 @@ public class TaskList {
     protected static ArrayList<Task> list_of_tasks = new ArrayList<>();
 
     /**
-     * public constructor for TaskList
+     * Public constructor for TaskList
      */
     public TaskList() {
 
     }
 
     /**
-     * adds a Task to the TaskList
+     * Adds a Task to the TaskList
      * @param t Task added
      */
     public void addTask(Task t) {
@@ -23,7 +23,7 @@ public class TaskList {
 
 
     /**
-     * finds size of the TaskList
+     * Finds size of the TaskList
      * @return int
      */
     public int size() {
@@ -31,7 +31,7 @@ public class TaskList {
     }
 
     /**
-     * getter for list_of_task
+     * Getter for list_of_task
      * @return ArrayList
      */
     public ArrayList<Task> getList_of_tasks() {
@@ -39,7 +39,7 @@ public class TaskList {
     }
 
     /**
-     * removes task from the list
+     * Removes task from the list
      * @param order the number the task is labelled as
      */
     public String remove_task(int order) {
@@ -52,7 +52,7 @@ public class TaskList {
 
 
     /**
-     * prints list of task
+     * Prints list of task
      */
     public String print_list_of_tasks() {
         if (this.size() == 0) {
@@ -69,7 +69,7 @@ public class TaskList {
 
 
     /**
-     * finds the task in the list and mark it as done
+     * Finds the task in the list and mark it as done
      * @param order the number the task is labelled as
      */
     public String find_finished_task(int order) {
@@ -79,7 +79,7 @@ public class TaskList {
 
 
     /**
-     * searches for Tasks that contain the substring
+     * Searches for Tasks that contain the substring
      * @param substring the string that needs to be searched
      * @return an ArrayList of Tasks that contain the substring
      */
@@ -94,7 +94,7 @@ public class TaskList {
     }
 
     /**
-     * prints the Tasks that contain the substring from search function
+     * Prints the Tasks that contain the substring from search function
      * @param arraylist prints the Tasks in the arraylist
      */
     public String print(ArrayList<Task> arraylist) {

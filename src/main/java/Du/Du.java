@@ -9,7 +9,7 @@ public class Du {
     private Ui ui;
 
     /**
-     * public constructor for Du
+     * Public constructor for Du
      * @param filepath where the file will be saved for the data
      */
     public Du(String filepath) {
@@ -31,7 +31,7 @@ public class Du {
     }
 
     /**
-     * runs Du itself
+     * Runs Du itself
      * @throws IOException from p.parse()
      */
     public void start() {

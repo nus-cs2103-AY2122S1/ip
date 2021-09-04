@@ -7,7 +7,7 @@ public class Deadline extends Task {
     private LocalDateTime time;
 
     /**
-     * public constructor for Deadline
+     * Public constructor for Deadline
      * @param name description for Deadline
      * @param done whether the Deadline is done
      * @param tasklist the Tasklist the Deadline is under
@@ -19,7 +19,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * records the Deadline in a certain format to save to the file
+     * Records the Deadline in a certain format to save to the file
      * @return String which the Deadline is formatted in
      */
     @Override

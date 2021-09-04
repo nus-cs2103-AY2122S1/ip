@@ -10,7 +10,7 @@ public class Event extends Task {
     private LocalDateTime time;
 
     /**
-     * public constructor for Event
+     * Public constructor for Event
      * @param name description for Event
      * @param done whether the Event is done
      * @param tasklist the Tasklist the Event is under
@@ -23,7 +23,7 @@ public class Event extends Task {
 
 
     /**
-     * records the Event in a certain format to save to the file
+     * Records the Event in a certain format to save to the file
      * @return String which the Event is formatted in
      */
     @Override

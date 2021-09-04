@@ -14,7 +14,7 @@ public class Storage {
     protected TaskList tasks;
 
     /**
-     * public constructor for Storage
+     * Public constructor for Storage
      * @param filepath where the saved file is located at
      * @param tasks Tasklist with the list of tasks
      */
@@ -24,7 +24,7 @@ public class Storage {
     }
 
     /**
-     * loads previously recorded items if there is any
+     * Loads previously recorded items if there is any
      * @throws IOException
      */
     public String load() throws IOException {
@@ -50,7 +50,7 @@ public class Storage {
 
 
     /**
-     * reads the tasks if there is any from the saved file
+     * Reads the tasks if there is any from the saved file
      * @param task_name name from the file
      */
     public Task read_task(String task_name) {
@@ -73,7 +73,7 @@ public class Storage {
     }
 
     /**
-     * updates the records when programme ends
+     * Updates the records when programme ends
      * @param tasks list of tasks that needs to be added
      * @throws IOException
      */
