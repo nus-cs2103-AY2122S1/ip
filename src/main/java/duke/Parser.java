@@ -33,34 +33,24 @@ public class Parser {
      */
     public static Command parse(String... command) throws DukeException {
         String commandHolder = command[0];
-
         for (Parser.CommandWord c : Parser.CommandWord.values()) {
-
             // Goes through the CommandWord Enum to check any matches with valid commands
             if (c.value.equals(commandHolder)) {
                 switch (c) {
                 case BYE:
                     return new duke.command.ExitCommand();
-
                 case LIST:
                     return new duke.command.ListCommand(command);
-
                 case DONE:
                     return new duke.command.DoneCommand(command);
-
                 case DELETE:
                     return new duke.command.DeleteCommand(command);
-
                 case FIND:
                     return new duke.command.FindCommand(command);
-
                 case TODO:
-
                 case DEADLINE:
-
                 case EVENT:
                     return new duke.command.AddCommand(command);
-
                 default:
                     continue;
                 }

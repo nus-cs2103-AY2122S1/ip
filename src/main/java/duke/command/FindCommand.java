@@ -22,6 +22,7 @@ public class FindCommand extends Command {
      */
     public FindCommand(String... command) throws DukeException {
         if (command.length == 1) {
+            // guard clause
             throw new duke.DukeException(" D: OOPS!!! The description of a search cannot be empty.");
         } else {
             searchFilter = command[1];
