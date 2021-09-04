@@ -33,11 +33,13 @@ public class Parser {
      * @param line the input command to be parsed.
      * @throws TaskException When failed to parse.
      */
-    public static ToDo parseToDo(String line) {
+    private static ToDo parseToDo(String line) {
         if (line.length() <= 5) {
             throw new TaskException(new ToDo("?"));
         }
-        return new ToDo(line.substring(5));
+
+        String description = line.substring(5);
+        return new ToDo(description);
     }
 
     /**
@@ -47,12 +49,15 @@ public class Parser {
      * @return A new Deadline object.
      * @throws TaskException When failed to parse.
      */
-    public static Deadline parseDeadline(String line) {
+    private static Deadline parseDeadline(String line) {
         int pos = line.indexOf("/by");
         if (pos == -1 || line.length() < pos + 5) {
             throw new TaskException(new Deadline("?", "?"));
         }
-        return new Deadline(line.substring(9, pos-1), line.substring(pos+4));
+
+        String description = line.substring(9, pos - 1);
+        String byDescription = line.substring(pos + 4);
+        return new Deadline(description, byDescription);
     }
 
     /**
@@ -62,12 +67,41 @@ public class Parser {
      * @return A new Event object.
      * @throws TaskException When failed to parse.
      */
-    public static Event parseEvent(String line) {
+    private static Event parseEvent(String line) {
         int pos = line.indexOf("/at");
         if (pos == -1 || line.length() < pos + 5) {
             throw new TaskException(new Event("?", "?"));
         }
-        return new Event(line.substring(6, pos-1), line.substring(pos+4));
+
+        String description = line.substring(6, pos - 1);
+        String atDescription = line.substring(pos + 4);
+        return new Event(description, atDescription);
+    }
+
+    /**
+     * A static method to parse the input task creation commands from the user.
+     *
+     * @param line the input command to be parsed as a task.
+     * @return A new Command object that handles adding the parsed task.
+     * @throws DukeException When failed to parse.
+     */
+    private static Command parseTask(String line) throws DukeException {
+        Task task = null;
+        String type = line.split(" ")[0];
+        if (type.equals("todo")) {
+            task = Parser.parseToDo(line);
+
+        } else if (type.equals("deadline")) {
+            task = Parser.parseDeadline(line);
+        
+        } else if (type.equals("event")) {
+            task = Parser.parseEvent(line);
+
+        } else {
+            throw new UnknownCommandException(line);
+        }
+
+        return new AddCommand(task);
     }
 
     /**
@@ -99,22 +133,7 @@ public class Parser {
             return new FindCommand(line.substring(5));
 
         } else {
-            Task task = null;
-            String type = line.split(" ")[0];
-            if (type.equals("todo")) {
-                task = Parser.parseToDo(line);
-
-            } else if (type.equals("deadline")) {
-                task = Parser.parseDeadline(line);
-        
-            } else if (type.equals("event")) {
-                task = Parser.parseEvent(line);
-
-            } else {
-                throw new UnknownCommandException(line);
-            }
-
-            return new AddCommand(task);
+            return Parser.parseTask(line);
         }
     }
 }
