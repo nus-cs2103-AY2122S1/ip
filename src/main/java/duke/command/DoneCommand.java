@@ -30,7 +30,7 @@ public class DoneCommand extends Command{
         if (taskNumber > tasks.getSize() || taskNumber < 0) {
             throw new DukeException("Please insert a valid task.Task Number!");
         } else {
-            tasks.getTask(taskNumber).markAsDone();
+            tasks.markTaskAsDone(taskNumber);
             storage.save(tasks);
             return "Task marked as done!";
         }
