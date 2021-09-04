@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import duke.exception.CannotReadFileException;
 import duke.exception.CannotSaveFileException;
@@ -168,8 +169,10 @@ public class Storage implements Storable {
                 saveTasksToData(new TaskList(tasks));
             }
 
-            // Read from save file.
-            List<String> rawTasks = Files.readAllLines(absolutePathToSaveFile);
+            // Read from save file using streams.
+            List<String> rawTasks = new ArrayList<>();
+            Stream<String> lines = Files.lines(absolutePathToSaveFile);
+            lines.forEachOrdered(rawTasks::add);
 
             // Parse each line into a duke.task.Task object and save to tasks.
             for (int i = 0; i < rawTasks.size(); i++) {
