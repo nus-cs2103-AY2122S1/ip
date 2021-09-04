@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 /**
  * Class that is a chat bot that can store tasks.
  */
@@ -19,7 +21,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.parseFile());
-        } catch (Exception e) {
+        } catch (IOException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
@@ -34,30 +36,12 @@ public class Duke {
         return ui.greet();
     }
 
-    /**
-     * Driver function that runs the chat bot.
-     */
-    public void run() {
-        ui.greet();
-        while (isRunning) {
-            String instruction = ui.getInstruction();
-            if (checkBye(instruction)) {
-                break;
-            }
-            try {
-                Parser.parse(instruction, this.ui, this.tasks);
-            } catch (DukeException e) {
-                ui.printErrorMessage(e);
-            }
-        }
-        ui.sayFarewell();
-    }
 
     /**
      * Function that checks whether the user wants to exit the program.
      *
-     * @param instruction instruction given by the user
-     * @return a boolean on whether the program should terminate
+     * @param instruction instruction given by the user.
+     * @return a boolean on whether the program should terminate.
      */
     private boolean checkBye(String instruction) {
         assert instruction != null : "User has not input anything";
@@ -72,10 +56,6 @@ public class Duke {
         return false;
     }
 
-    public static void main(String[] args) {
-        new Duke("./data/duke.txt").run();
-    }
-
 
     /**
      * Returns response for each user input.
@@ -84,19 +64,14 @@ public class Duke {
      * @return String that duke would reply with.
      */
     public String getResponse(String input) {
-        try {
-            if (checkBye(input)) {
-                return ui.sayFarewell();
-            }
-            try {
-                return Parser.parse(input, this.ui, this.tasks);
-            } catch (DukeException e) {
-                return ui.printErrorMessage(e);
-            }
-        } catch (Exception e) {
-            System.out.println("something wrong here");
+        if (checkBye(input)) {
+            return ui.sayFarewell();
         }
-        return "";
+        try {
+            return Parser.parse(input, this.ui, this.tasks);
+        } catch (DukeException e) {
+            return ui.printErrorMessage(e);
+        }
     }
 }
 

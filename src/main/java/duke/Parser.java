@@ -4,15 +4,16 @@ package duke;
  * Class to represent parsing the commands
  */
 public class Parser {
-    private enum Commands { list, done, todo, event, deadline, delete, find }
+    private enum Commands { LIST, DONE, TODO, EVENT, DEADLINE, DELETE, FIND }
 
 
     /**
      * Method that parses instruction from the user.
      *
      * @param instruction user's instruction
+     * @return String Dialog to be printed by duke in the chat box.
      * @throws NoDescriptionError If user inputs nothing after a task command.
-     * @throws UnknownCommandError If user inputs a command that is outside the scope of the chat bot
+     * @throws UnknownCommandError If user inputs a command that is outside the scope of the chat bot.
      */
     public static String parse(String instruction, Ui ui, TaskList tasks)
             throws NoDescriptionError, UnknownCommandError {
@@ -36,23 +37,23 @@ public class Parser {
             throw new NoDescriptionError(operative);
         }
         switch (command) {
-        case list:
+        case LIST:
             return ui.printArrayList(tasks);
-        case find:
+        case FIND:
             keyword = splitInstructions[1];
             TaskList filtered = tasks.findMatchingTasks(keyword);
             return ui.findTaskMessage(filtered);
-        case done:
+        case DONE:
             item = splitInstructions[1];
             taskPointer = Integer.parseInt(item) - 1;
             tasks.get(taskPointer).markAsDone();
             return ui.completeTaskMessage(tasks.get(taskPointer));
-        case todo:
+        case TODO:
             item = splitInstructions[1];
             toAdd = new Todo(item);
             tasks.addTask(toAdd);
             return ui.addedTaskMessage(toAdd, tasks.getSize());
-        case event:
+        case EVENT:
             item = splitInstructions[1];
             temp = item.split("/at ");
             date = temp[1];
@@ -60,12 +61,12 @@ public class Parser {
             toAdd = new Event(description, date);
             tasks.addTask(toAdd);
             return ui.addedTaskMessage(toAdd, tasks.getSize());
-        case delete:
+        case DELETE:
             item = splitInstructions[1];
             taskPointer = Integer.parseInt(item) - 1;
             Task deleted = tasks.delete(taskPointer);
             return ui.deleteTaskMessage(deleted, tasks.getSize());
-        case deadline:
+        case DEADLINE:
             item = splitInstructions[1];
             temp = item.split("/by ");
             date = temp[1];
