@@ -12,22 +12,24 @@ import duke.ui.Ui;
  * needed to edit a task in the user's task list on Duke.
  */
 public class EditCommand extends Command {
+    private static final String INVALID_TASK_NUMBER_ERROR_MESSAGE = "Please enter a valid task number.";
+
     /** The edit type to be performed. */
     private EditType editType;
 
-    /** The index of the task of the task in the task list to be edited. */
-    private int taskIndex;
+    /** The user's input. */
+    private String userInput;
 
     /**
      * Constructs an edit command with information on the task to be edited
      * and the edit to be performed.
      *
      * @param editType The type of edit to be performed on the task.
-     * @param taskIndex The index of the task to be edited in the task list.
+     * @param userInput The user's input.
      */
-    public EditCommand(EditType editType, int taskIndex) {
+    public EditCommand(EditType editType, String userInput) {
         this.editType = editType;
-        this.taskIndex = taskIndex;
+        this.userInput = userInput;
     }
 
     /**
@@ -39,23 +41,25 @@ public class EditCommand extends Command {
      * @return A string to be displayed to the user on the user interface.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
+            String[] commandAndArgument = this.userInput.split(" ", 2);
+            int taskIndex = Integer.parseInt(commandAndArgument[1]) - 1;
             Task editedTask;
             switch (this.editType) {
             case DONE:
-                editedTask = taskList.markAsDone(this.taskIndex);
+                editedTask = taskList.markAsDone(taskIndex);
                 break;
             case DELETE:
-                editedTask = taskList.delete(this.taskIndex);
+                editedTask = taskList.delete(taskIndex);
                 break;
             default:
                 throw new DukeException("Unknown command.");
             }
             storage.overwriteSave(taskList);
             return ui.formatEditedTask(editedTask, taskList.getNumberOfTasks(), this.editType);
-        } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("Please enter a valid task number.");
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException(INVALID_TASK_NUMBER_ERROR_MESSAGE);
         }
     }
 
@@ -69,7 +73,7 @@ public class EditCommand extends Command {
     public boolean equals(Object other) {
         if (other instanceof EditCommand) {
             EditCommand otherCommand = (EditCommand) other;
-            return this.editType == otherCommand.editType && this.taskIndex == otherCommand.taskIndex;
+            return this.editType == otherCommand.editType && this.userInput == otherCommand.userInput;
         } else {
             return false;
         }
