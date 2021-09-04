@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
+import duke.exception.MissingKeywordException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -48,13 +49,13 @@ public class AddCommand extends Command {
 
         switch (type) {
         case TODO:
-            newTask = new ToDo(args);
+            newTask = createToDo(args);
             break;
         case DEADLINE:
-            newTask = new Deadline(args);
+            newTask = createDeadline(args);
             break;
         case EVENT:
-            newTask = new Event(args);
+            newTask = createEvent(args);
             break;
         default:
             throw new DukeException(BAD_ADD_ERROR_MSG);
@@ -65,9 +66,43 @@ public class AddCommand extends Command {
         return generateMsg(newTask, tasks);
     }
 
+    private ToDo createToDo(String args) {
+        return new ToDo(args);
+    }
+
+    private Deadline createDeadline(String args) throws MissingKeywordException {
+        checkKeywordExists(args, Deadline.KEYWORD_WITH_SPACE);
+
+        String[] argArr = splitStringByKeyword(args, Deadline.KEYWORD_WITH_SPACE);
+        String name = argArr[0];
+        String dline = argArr[1];
+
+        return new Deadline(name, dline);
+    }
+
+    private Event createEvent(String args) throws MissingKeywordException {
+        checkKeywordExists(args, Event.KEYWORD_WITH_SPACE);
+
+        String[] argArr = splitStringByKeyword(args, Event.KEYWORD_WITH_SPACE);
+        String name = argArr[0];
+        String time = argArr[1];
+
+        return new Event(name, time);
+    }
+
     private String generateMsg(Task tsk, TaskList tasks) {
         String msg = "Got it. I've added this task:\n  " + tsk + "\nNow you have " + tasks.numTasks();
         msg = tasks.numTasks() == 1 ? msg + " task in the list" : msg + " tasks in the list.";
         return msg;
+    }
+
+    private void checkKeywordExists(String input, String keyword) throws MissingKeywordException {
+        if (!input.contains(keyword)) {
+            throw new MissingKeywordException(keyword);
+        }
+    }
+
+    private String[] splitStringByKeyword(String input, String keyword) {
+        return input.split(keyword, 2);
     }
 }

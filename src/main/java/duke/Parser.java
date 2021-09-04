@@ -74,10 +74,8 @@ public class Parser {
         case ToDo.COMMAND_WORD:
             return new AddCommand(TaskTypes.TODO, taskDescription);
         case Deadline.COMMAND_WORD:
-            checkKeyword(taskDescription, Deadline.KEYWORD);
             return new AddCommand(TaskTypes.DEADLINE, taskDescription);
         case Event.COMMAND_WORD:
-            checkKeyword(taskDescription, Event.KEYWORD);
             return new AddCommand(TaskTypes.EVENT, taskDescription);
         default:
             throw new UnrecognisedCommandException();
@@ -135,12 +133,6 @@ public class Parser {
 
     private static String[] splitStringBySpace(String str, int limit) {
         return str.split("\\s", limit);
-    }
-
-    private static void checkKeyword(String input, String keyword) throws MissingKeywordException {
-        if (!input.contains(keyword)) {
-            throw new MissingKeywordException(keyword);
-        }
     }
 
     private static void checkStrArrayMinLength(String[] input, int minLength, DukeException exception) throws DukeException {
