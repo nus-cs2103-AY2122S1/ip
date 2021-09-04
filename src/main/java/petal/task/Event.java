@@ -30,6 +30,7 @@ public class Event extends Task implements Timeable {
         super(description = description.trim(), isDone);
         this.description = description;
         this.dateTime = (dateTime = dateTime.trim());
+
         String[] splitByWhiteSpace = dateTime.split(" ");
         this.date = Parser.parseDate(splitByWhiteSpace[0]);
         this.startTime = Parser.parseTime(splitByWhiteSpace[1]);
@@ -53,7 +54,8 @@ public class Event extends Task implements Timeable {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at " + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
-                .format(date) + " " + this.startTime + " to " + this.endTime + ")";
+        String formatDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(date);
+        return "[E]" + super.toString() + " (at " + formatDate + " " + this.startTime + " to "
+                + this.endTime + ")";
     }
 }

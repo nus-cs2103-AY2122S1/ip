@@ -51,8 +51,7 @@ public class Deadline extends Task implements Timeable {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(date)
-                + " " + this.time + ")";
+        String formatDate = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).format(date);
+        return "[D]" + super.toString() + " (by: " + formatDate + " " + this.time + ")";
     }
 }
