@@ -125,6 +125,8 @@ public class Duke extends Application {
      * @param actionType Type of action
      */
     public String echo(String userInput, String actionType) {
+        assert actionType.equals("removed") || actionType.equals("added") 
+                : "Unknown action type found in echo";
         return gui.dukeResponse("Got it sir, I have " + actionType + " this task:\n "
                 + userInput + "\nNow you have " + tasks.getSize() + " tasks in the list.\n");
 
@@ -132,6 +134,7 @@ public class Duke extends Application {
     
     private String makeDone(String userInput) {
         try {
+            assert userInput.substring(0, 4).equals("done") : "first 4 characters should be done";
             int task = Integer.parseInt(userInput.substring(5));
             if (task > 0 && task <= tasks.getSize()) {
                 tasks.markDone(task - 1);
@@ -179,6 +182,8 @@ public class Duke extends Application {
                 storage.addNewTask(t);
                 return echo(t.toString(), "added");
             } catch (Exception e) {
+                assert e.toString().startsWith("java.time.format.DateTimeParseException:") 
+                        : e.toString();
                 return gui.dukeResponse("Enter a valid date in the format yyyy-mm-dd\n");
             }
         }
@@ -211,6 +216,8 @@ public class Duke extends Application {
         } catch (DukeException e) {
             return gui.dukeResponse(e.getMessage());
         } catch (StringIndexOutOfBoundsException e) {
+            assert userInput.length() < 6 
+                    : "todo request was supposed to be smaller than 6 characters";
             return gui.dukeResponse("Enter a valid todo activity\n");
         }
     }
