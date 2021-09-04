@@ -57,14 +57,8 @@ public class Storage {
      * @throws LifelineException if unable to save to file.
      */
     public void save(TaskList tasks) throws LifelineException {
-        try {
-            createDirectoryIfMissing();
-            FileWriter fileWriter = new FileWriter(filePath);
-            fileWriter.write(gson.toJson(tasks.getTaskList(), ArrayList.class));
-            fileWriter.close();
-        } catch (IOException e) {
-            throw new LifelineException(ERROR_UNABLE_TO_SAVE_TASK);
-        }
+        createDirectoryIfMissing();
+        writeToFile(tasks);
     }
 
     /**
@@ -74,25 +68,35 @@ public class Storage {
      * @throws LifelineException if unable to load file.
      */
     public TaskList load() throws LifelineException {
+        JsonArray tasksAsJson = parseSavedTasksAsJsonArray();
+        TaskList savedTasks = getTasksFromJsonArray(tasksAsJson);
+        return savedTasks;
+    }
+
+    private JsonArray parseSavedTasksAsJsonArray() throws LifelineException {
         try {
             FileReader fileReader = new FileReader(filePath);
-            JsonArray arr = JsonParser.parseReader(fileReader).getAsJsonArray();
-            TaskList savedTasks = new TaskList(new ArrayList<Task>());
-            for (int i = 0; i < arr.size(); i++) {
-                JsonObject currTask = arr.get(i).getAsJsonObject();
-                if (currTask.has("by")) {
-                    addDeadlineTask(currTask, savedTasks);
-                } else if (currTask.has("startTime")) {
-                    addEventTask(currTask, savedTasks);
-                } else {
-                    addToDoTask(currTask, savedTasks);
-                }
-            }
+            JsonArray tasksAsJson = JsonParser.parseReader(fileReader).getAsJsonArray();
             fileReader.close();
-            return savedTasks;
+            return tasksAsJson;
         } catch (IOException e) {
             throw new LifelineException(ERROR_UNABLE_TO_FIND_SAVED_TASKS);
         }
+    }
+
+    private TaskList getTasksFromJsonArray(JsonArray tasksAsJson) {
+        TaskList savedTasks = new TaskList(new ArrayList<Task>());
+        for (int i = 0; i < tasksAsJson.size(); i++) {
+            JsonObject currTask = tasksAsJson.get(i).getAsJsonObject();
+            if (currTask.has("by")) {
+                addDeadlineTask(currTask, savedTasks);
+            } else if (currTask.has("startTime")) {
+                addEventTask(currTask, savedTasks);
+            } else {
+                addToDoTask(currTask, savedTasks);
+            }
+        }
+        return savedTasks;
     }
 
     private void addDeadlineTask(JsonObject deadline, TaskList taskList) {
@@ -125,5 +129,15 @@ public class Storage {
         String directoryToSaveTo = filePath.substring(0, indexOfLastFileSeparator == -1 ? 0 : indexOfLastFileSeparator);
         File directory = new File(directoryToSaveTo);
         directory.mkdirs();
+    }
+
+    private void writeToFile(TaskList tasks) throws LifelineException {
+        try {
+            FileWriter fileWriter = new FileWriter(filePath);
+            fileWriter.write(gson.toJson(tasks.getTaskList(), ArrayList.class));
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new LifelineException(ERROR_UNABLE_TO_SAVE_TASK);
+        }
     }
 }
