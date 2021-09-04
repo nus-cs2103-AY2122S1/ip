@@ -16,8 +16,8 @@ public class Ui {
     /**
      * Prints out the welcome message upon starting Duke.
      */
-    public void welcomeMessage() {
-        System.out.println("Welcome to Ben's. How may I help you?");
+    public static String welcomeMessage() {
+        return "Welcome to Ben's. How may I help you?\n" + Storage.printStartingFileContents();
     }
 
     /**
@@ -26,41 +26,42 @@ public class Ui {
      *
      * @param currList Contents of the file processed into the scanner.
      */
-    public static void printTasksOnLoad(Scanner currList) {
-        System.out.println("Current list:");
+    public static String printTasksOnLoad(Scanner currList) {
+        String output = "\nCurrent list:\n";
         int counter = 1;
         while (currList.hasNext()) {
-            System.out.println(counter + ". " + currList.nextLine());
+            output += counter + ". " + currList.nextLine();
             counter++;
         }
+        return output;
     }
 
     /**
      * Prints the message when user starts up Duke for the first time
      * (where no file has been created and no contents saved).
      */
-    public static void firstTimeMessage() {
-        System.out.println("\nNote: This is your first time using Duke. " +
-                "We will now create a new file for you.");
+    public static String firstTimeMessage() {
+        return "\nNote: This is your first time using Duke. " +
+                "We will now create a new file for you.\n";
     }
 
     /**
      * Displays vital information for what the user should input into Duke.
      * Displayed upon starting Duke or when user input fails.
      */
-    public static void importantMessage() {
-        System.out.println("\nImportant notes: \n1) For deadlines, it must contain the word 'by'" +
-                " and events must contain the word 'at'. ");
-        System.out.println("2) Deadlines and events must also contain the date and time as such:\n" +
+    public static String importantMessage() {
+        return "\nImportant notes: \n1) For deadlines, it must contain the word 'by'" +
+                " and events must contain the word 'at'. \n" +
+                "2) Deadlines and events must also contain the date and time as such:\n" +
                 "after by or at, in the form DATE TIME where the DATE must follow this format:" +
-                "YYYY-MM-DD;\n   and TIME must follow the 24hr format (e.g. 2pm = 1400)\n");
+                "YYYY-MM-DD;\n   and TIME must follow the 24hr format (e.g. 2pm = 1400)\n";
     }
 
     /**
      * Display message for an empty list.
      */
-    public static void emptyListMessage() {
-        System.out.println("    ***\n" + "    There is currently nothing in the list. \n" +
+    public static String emptyListMessage() {
+       return ("\n    ***\n" + "    There is currently nothing in the list. \n" +
                 "    ***\n");
     }
 
@@ -69,19 +70,19 @@ public class Ui {
      *
      * @param contents Tasks in the TaskList in Duke.
      */
-    public static void getCurrentTasks(ArrayList<Task> contents) {
+    public static String getCurrentTasks(ArrayList<Task> contents) {
         int counter = 1;
-        System.out.println("    ***\n" + "    These are your tasks in the list:");
+        String output = "\n    ***\n" + "    These are your tasks in the list:\n";
         for (Task x: contents) {
             if (x.wasSaved) {
-                System.out.println("      " + counter + ". " + x);
+                output += "      " + counter + ". " + x + "\n";
             } else {
-                System.out.println("      " + counter + ". " + x.getStatusIcon() + " " +
-                        x.getDescription());
+                output += "      " + counter + ". " + x.getStatusIcon() + " " + x.getDescription() + "\n";
                 counter++;
             }
         }
-        System.out.println("    ***\n");
+        output += "    ***\n";
+        return output;
     }
 
     /**
@@ -89,9 +90,9 @@ public class Ui {
      *
      * @param task Task that was completed by the user.
      */
-    public static void markTaskMessage(Task task) {
-        System.out.println("    ***\n" + "    You have successfully done this task:\n" +
-                "      " + task.getStatusIcon() + " " + task.getDescription() + "\n    ***\n");
+    public static String markTaskMessage(Task task) {
+        return "\n    ***\n" + "    You have successfully done this task:\n" +
+                "      " + task.getStatusIcon() + " " + task.getDescription() + "\n    ***\n";
     }
 
     /**
@@ -101,15 +102,15 @@ public class Ui {
      * @param task Task the user is adding.
      * @param count Size of the TaskList currently.
      */
-    public static void addTaskMessage(Task task, int count) {
+    public static String addTaskMessage(Task task, int count) {
         if (count == 1) {
-            System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
+            return "\n    ***\n" + "    Understood. Added the task:\n" + "      " +
                     task.printTask() + "\n    You now have " + count + " task in the list.\n" +
-                    "    ***\n");
+                    "    ***\n";
         } else {
-            System.out.println("    ***\n" + "    Understood. Added the task:\n" + "      " +
+            return "\n    ***\n" + "    Understood. Added the task:\n" + "      " +
                     task.printTask() + "\n    You now have " + count + " tasks in the list.\n" +
-                    "    ***\n");
+                    "    ***\n";
         }
     }
 
@@ -118,18 +119,18 @@ public class Ui {
      *
      * @param task Task removed by the user.
      */
-    public static void removeTaskMessage(Task task) {
-        System.out.println("    ***\n" + "    You have successfully removed this task:\n" +
-                "      " + task.getStatusIcon() + " " + task.getDescription() + "\n    ***\n");
+    public static String removeTaskMessage(Task task) {
+        return "\n    ***\n" + "    You have successfully removed this task:\n" +
+                "      " + task.getStatusIcon() + " " + task.getDescription() + "\n    ***\n";
     }
 
     /**
      * Displays an error message when user input is invalid.
      */
-    public static void invalidTaskMessage() {
-        System.out.println("Invalid input. \nYou may only use the following inputs: " +
-                "(bye, list, done, deadline, event, todo) and any text thereafter.");
-        importantMessage();
+    public static String invalidTaskMessage() {
+        return "\nInvalid input. \nYou may only use the following inputs: " +
+                "(bye, list, done, deadline, event, todo) and any text thereafter.\n"
+                + importantMessage();
     }
 
     /**
@@ -139,29 +140,30 @@ public class Ui {
      * @param matchingContents List of contents that contain the keywords
      *                         requested by the user.
      */
-    public static void searchList(ArrayList<Task> matchingContents) {
+    public static String searchList(ArrayList<Task> matchingContents) {
         int counter = 1;
-        System.out.println("    ***\n" + "    Here are the matching tasks in your list:");
+        String output = "\n    ***\n" + "    Here are the matching tasks in your list:\n";
         for (Task x: matchingContents) {
-            System.out.println("      " + counter + ". " + x.printTask());
+            output += "      " + counter + ". " + x.printTask() + "\n";
         }
-        System.out.println("    ***\n");
+        output += "    ***\n";
+        return output;
     }
 
     /**
      * Displays the message when user is unable to find a matching word in the
      * TaskList when searching.
      */
-    public static void searchFoundNothing() {
-        System.out.println("No task in the list matches your current search.");
+    public static String searchFoundNothing() {
+        return "\nNo task in the list matches your current search.\n";
     }
 
     /**
      * Displays a message indicating that contents have been written safely and correctly
      * to the designated file.
      */
-    public static void successfulWriteFileMessage() {
-        System.out.println("Successfully written contents to file.");
+    public static String successfulWriteFileMessage() {
+        return "Successfully written contents to file.\n";
     }
 
     /**
@@ -169,14 +171,14 @@ public class Ui {
      *
      * @param error Error thrown when file is failed to be written to.
      */
-    public static void failToWriteFileMessage(String error) {
-        System.out.println("Failed to write to the file. Error: " + error);
+    public static String failToWriteFileMessage(String error) {
+        return "Failed to write to the file. Error: \n" + error;
     }
 
     /**
      * Displays a goodbye message after user exits Duke (i.e. bye).
      */
-    public static void goodbyeMessage() {
-        System.out.println("\nGoodbye! Have a nice day. :)");
+    public static String goodbyeMessage() {
+        return "\nGoodbye! Have a nice day. :)";
     }
 }

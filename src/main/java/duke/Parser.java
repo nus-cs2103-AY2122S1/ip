@@ -18,34 +18,31 @@ public class Parser {
      * Evaluates user input into understandable code for
      * Duke to process. Saves data whenever the TaskList changes.
      *
-     * @param scanner Scanner used to process user input.
+     * @param userInput what the user inputted into Duke.
      */
-    public static void evaluateUserInput(Scanner scanner) {
-        String userInput = scanner.nextLine();
-
-        while (!userInput.equals("bye")) {
+    public static String evaluateUserInput(String userInput) {
+        if (!userInput.equals("bye")) {
             if (userInput.equals("list")) {
-                TaskList.printList();
+                return TaskList.printList();
             } else if (userInput.startsWith("done") || userInput.startsWith("delete")) {
                 try {
                     if (userInput.startsWith("done")) {
-                        TaskList.markTaskDone(userInput);
+                        return TaskList.markTaskDone(userInput);
                     } else {
-                        TaskList.removeTask(userInput);
+                        return TaskList.removeTask(userInput);
                     }
                 } catch (StringIndexOutOfBoundsException e) {
-                    System.out.println("Invalid input. Requires a number after done (e.g. done 1).");
+                    return "Invalid input. Requires a number after done (e.g. done 1).";
                 } catch (ArrayIndexOutOfBoundsException f) {
-                    System.out.println("Invalid number - Number is larger than list count.");
+                    return "Invalid number - Number is larger than list count.";
                 }
             } else if (userInput.startsWith("find")) {
-                TaskList.findTask(userInput);
+                return TaskList.findTask(userInput);
             } else {
-                TaskList.addTask(userInput);
+                return TaskList.addTask(userInput);
             }
-            Storage.writeFile();
-            userInput = scanner.nextLine();
         }
-
+        TaskList.markTasksSaved();
+        return Ui.goodbyeMessage();
     }
 }

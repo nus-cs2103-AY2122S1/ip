@@ -27,7 +27,7 @@ public class TaskList {
      *
      * @param userInput Line of user input which contains the task.
      */
-    public static void addTask(String userInput) {
+    public static String addTask(String userInput) {
         if (userInput.startsWith("deadline") || userInput.startsWith("event") ||
                 userInput.startsWith("todo")) {
             Task newTask;
@@ -39,9 +39,9 @@ public class TaskList {
                 newTask = new ToDo(userInput);
             }
             contents.add(newTask);
-            Ui.addTaskMessage(newTask, contents.size());
+            return Ui.addTaskMessage(newTask, contents.size()) + Storage.writeFile();
         } else {
-            Ui.invalidTaskMessage();
+            return Ui.invalidTaskMessage();
         }
     }
 
@@ -58,11 +58,11 @@ public class TaskList {
      * Prints out the list of current tasks. Displays a different
      * message if list is empty.
      */
-    public static void printList() {
+    public static String printList() {
         if (contents.size() == 0) {
-            Ui.emptyListMessage();
+            return Ui.emptyListMessage();
         } else {
-            Ui.getCurrentTasks(contents);
+            return Ui.getCurrentTasks(contents);
         }
     }
 
@@ -72,12 +72,12 @@ public class TaskList {
      *
      * @param userInput UserInput which indicates which task is done.
      */
-    public static void markTaskDone(String userInput) {
+    public static String markTaskDone(String userInput) {
         String index = userInput.substring(5);
         int x = Integer.parseInt(index);
         Task temp = contents.get(x - 1);
         temp.markDone();
-        Ui.markTaskMessage(temp);
+        return Ui.markTaskMessage(temp);
     }
 
     /**
@@ -85,18 +85,18 @@ public class TaskList {
      *
      * @param userInput UserInput which indicates which task is to be removed.
      */
-    public static void removeTask(String userInput) {
+    public static String removeTask(String userInput) {
         String index = userInput.substring(7);
         int x = Integer.parseInt(index);
         Task temp = contents.get(x - 1);
         contents.remove(temp);
-        Ui.removeTaskMessage(temp);
+        return Ui.removeTaskMessage(temp);
     }
 
     /**
      * Marks all tasks as saved to the file.
      */
-    public void markTasksSaved() {
+    public static void markTasksSaved() {
         for (Task x: contents) {
             x.markSaved();
         }
@@ -107,7 +107,7 @@ public class TaskList {
      *
      * @param userInput Search request by the user.
      */
-    public static void findTask(String userInput) {
+    public static String findTask(String userInput) {
         String keyword = userInput.substring(5);
         ArrayList<Task> matchingList = new ArrayList<>();
         int counter = 0;
@@ -118,9 +118,9 @@ public class TaskList {
             }
         }
         if (counter == 0) {
-            Ui.searchFoundNothing();
+            return Ui.searchFoundNothing();
         } else {
-            Ui.searchList(matchingList);
+            return Ui.searchList(matchingList);
         }
     }
 }

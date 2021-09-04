@@ -31,7 +31,7 @@ public class Storage {
     /**
      * Writes content to the given filepath with given content.
      */
-    public static void writeFile() {
+    public static String writeFile() {
         ArrayList<Task> currList = TaskList.getList();
         for (Task content : currList) {
             try {
@@ -39,23 +39,24 @@ public class Storage {
                 fw.write(content.printTask());
                 fw.close();
             } catch (IOException e) {
-                Ui.failToWriteFileMessage(e.getMessage());
+                return Ui.failToWriteFileMessage(e.getMessage());
             }
         }
+        return Ui.successfulWriteFileMessage();
     }
 
     /**
      * Prints out the file's contents just as Duke begins loading in the file,
      * to allow the user to see what contents are in the file that was previously saved.
      */
-    public void printStartingFileContents() {
+    public static String printStartingFileContents() {
         File testFile = new File(filePath);
         Scanner s;
         try {
             s = new Scanner(testFile);
-            Ui.printTasksOnLoad(s);
+            return Ui.printTasksOnLoad(s);
         } catch (FileNotFoundException e) {
-            Ui.firstTimeMessage();
+            return Ui.firstTimeMessage();
         }
     }
 
@@ -66,33 +67,29 @@ public class Storage {
      *
      * @return ArrayList to be stored in TaskList.
      */
-    public ArrayList<Task> load() {
+    public ArrayList<Task> load() throws FileNotFoundException {
         ArrayList<Task> newList = new ArrayList<>();
         File newFile = new File(filePath);
-        try {
-            Scanner readFile = new Scanner(newFile);
-            while (readFile.hasNext()) {
-                // read file line by line and decipher into arraylist
-                String nextLine = readFile.nextLine();
-                char typeOfTask = nextLine.charAt(1);
-                char isTaskDone = nextLine.charAt(4);
-                String description = nextLine.substring(6);
-                Task temp = null;
-                if (typeOfTask == 'D') {
-                    temp = new Deadline(description);
-                } else if (typeOfTask == 'E') {
-                    temp = new Event(description);
-                } else if (typeOfTask == 'T') {
-                    temp = new Task(description);
-                }
-                if (isTaskDone == 'X') {
-                    assert temp != null;
-                    temp.markSaved();
-                }
-                newList.add(temp);
+        Scanner readFile = new Scanner(newFile);
+        while (readFile.hasNext()) {
+            // read file line by line and decipher into arraylist
+            String nextLine = readFile.nextLine();
+            char typeOfTask = nextLine.charAt(1);
+            char isTaskDone = nextLine.charAt(4);
+            String description = nextLine.substring(6);
+            Task temp = null;
+            if (typeOfTask == 'D') {
+                temp = new Deadline(description);
+            } else if (typeOfTask == 'E') {
+                temp = new Event(description);
+            } else if (typeOfTask == 'T') {
+                temp = new Task(description);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println(e.getMessage());
+            if (isTaskDone == 'X') {
+                assert temp != null;
+                temp.markSaved();
+            }
+            newList.add(temp);
         }
         return newList;
     }
