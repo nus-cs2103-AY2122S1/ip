@@ -48,6 +48,8 @@ public class Parser {
             return getGetCommand(inputArr);
         case "find":
             return getFindCommand(inputArr);
+        case "help":
+            return new HelpCommand();
         default:
             throw new DukeException("I'm sorry but I don't understand what that means :(");
         }
