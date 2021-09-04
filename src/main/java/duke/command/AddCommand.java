@@ -29,6 +29,8 @@ public class AddCommand extends Command {
             task = new duke.task.Deadline(command);
         } else if (command[0].equals("event")) {
             task = new duke.task.Event(command);
+        } else {
+            assert false;
         }
     }
 
