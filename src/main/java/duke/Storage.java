@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Storage {
+    private final String LIST_ARCHIVE_DIVIDER = "---";
     private final String filePath;
 
     public Storage(String filePath) {
@@ -19,11 +20,17 @@ public class Storage {
      * Loads the task list from file storage.
      * @return the loaded task list.
      */
-    public List<Task> loadStorage() {
+    public List<Task>[] loadStorage() {
         File file = new File(filePath);
+
+        List<Task>[] results = new List[2];
+
         if (!file.exists()) {
             createEmptyFile(file);
-            return new ArrayList<>();
+
+            results[0] = new ArrayList<>();
+            results[1] = new ArrayList<>();
+            return results;
         }
 
         try {
@@ -31,19 +38,35 @@ public class Storage {
         } catch (FileNotFoundException e) {
             // create empty file, prepare for saving later
             System.err.println("Unable to read from the file");
-            return new ArrayList<>();
+            results[0] = new ArrayList<>();
+            results[1] = new ArrayList<>();
+            return results;
         } catch (DukeException e) {
             System.err.println(e.getMessage());
-            return new ArrayList<>();
+            results[0] = new ArrayList<>();
+            results[1] = new ArrayList<>();
+            return results;
         }
     }
 
-    private List<Task> readFromFile(File file) throws FileNotFoundException, DukeException{
+    private List<Task>[] readFromFile(File file) throws FileNotFoundException, DukeException{
         Scanner sc = new Scanner(file);
-        List<Task> tasks = new ArrayList<>();
 
+        boolean isReadingArchive = false;
+        List<Task>[] results = new List[2];
+
+        List<Task> tasks = new ArrayList<>();
         while (sc.hasNextLine()) {
             String currItem = sc.nextLine();
+
+            if (currItem.equals(LIST_ARCHIVE_DIVIDER)) {
+                results[0] = tasks;
+                isReadingArchive = true;
+                tasks = new ArrayList<>();
+                continue;
+            }
+
+
             String[] itemDetails = currItem.split("~");
 
             Task task;
@@ -64,7 +87,8 @@ public class Storage {
             tasks.add(task);
         }
 
-        return tasks;
+        results[1] = (isReadingArchive) ? tasks : new ArrayList<>();
+        return results;
     }
 
     private void createEmptyFile(File f) {
@@ -81,19 +105,26 @@ public class Storage {
      * Called when the program ends.
      * @param tasks the task list to be saved.
      */
-    public void saveStorage(List<Task> tasks) {
+    public void saveStorage(List<Task> tasks, List<Task> archives) {
         try {
-            writeToFile(tasks);
+            writeToFile(tasks, archives);
         } catch (IOException e) {
             System.err.println("Something went wrong. Unable to write to duke.Storage.");
         }
     }
 
-    private void writeToFile(List<Task> tasks) throws IOException {
+    private void writeToFile(List<Task> tasks, List<Task> archives) throws IOException {
         FileWriter fileWriter = new FileWriter(filePath);
         for (Task task : tasks) {
             fileWriter.write(task.toSaveString() + System.lineSeparator());
         }
+
+        fileWriter.write(LIST_ARCHIVE_DIVIDER + System.lineSeparator());
+
+        for (Task task : archives) {
+            fileWriter.write(task.toSaveString() + System.lineSeparator());
+        }
+
         fileWriter.close();
     }
 

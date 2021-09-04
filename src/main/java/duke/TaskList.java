@@ -32,6 +32,10 @@ public class TaskList {
         return tasks;
     }
 
+    public List<Task> getArchives() {
+        return archives;
+    }
+
     /**
      * Displays all the tasks in the list.
      */

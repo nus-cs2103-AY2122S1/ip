@@ -19,7 +19,7 @@ public class ExitCommand extends Command{
         ArrayList<String> resp = new ArrayList<>();
         resp.add(ui.displayBye());
 
-        storage.saveStorage(taskList.getTasks());
+        storage.saveStorage(taskList.getTasks(), taskList.getArchives());
 
         return resp;
     }
