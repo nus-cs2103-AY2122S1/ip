@@ -22,7 +22,6 @@ public class RemoveCommand extends Command {
      * Removes the Task corresponding to a given index from the given TaskList.
      *
      * @param tasks the given TaskList.
-     * @param ui the given Ui.
      * @param storage the given Storage.
      * @return the string for the Ui to print.
      * @throws DukeException when the given index is invalid.

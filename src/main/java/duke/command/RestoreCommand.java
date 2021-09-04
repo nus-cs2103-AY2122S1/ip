@@ -21,7 +21,6 @@ public class RestoreCommand extends Command {
      * Also saves the restored TaskList in taskList.txt.
      *
      * @param tasks the given TaskList.
-     * @param ui the given Ui.
      * @param storage the given Storage.
      * @return the string for the Ui to print.
      * @throws DukeException when something goes wrong in the saving process.
