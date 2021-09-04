@@ -14,7 +14,8 @@ public class DeleteCommand extends Command {
     /**
      * Returns a DeleteCommand object with the information provided.
      *
-     * @param command A String containing information that can possibility be used to create an DeleteCommand object.
+     * @param command A String array containing information
+     *                that can possibly be used to create an DeleteCommand object.
      * @throws duke.DukeException Will be thrown if information provided are insufficient/incorrect.
      */
     public DeleteCommand(String... command) throws DukeException {

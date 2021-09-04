@@ -146,5 +146,17 @@ public class Ui {
         return "Bye bye. Love you\n";
     }
 
+    /**
+     * Returns String when undo command is executed.
+     * @return A String
+     */
+    public String showUndo(boolean ifUndone, duke.TaskList taskList) {
+        if (ifUndone) {
+            return "Gotcha my dear! I have restored the previous version.\n" + taskList;
+        } else {
+            return "Dear there is no available version for me to restore to T.T";
+        }
+    }
+
 
 }

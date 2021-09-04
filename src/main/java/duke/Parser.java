@@ -17,7 +17,7 @@ public class Parser {
      */
     private enum CommandWord {
         TODO("todo"), DEADLINE("deadline"), EVENT("event"), FIND("find"),
-        DONE("done"), DELETE("delete"), BYE("bye"), LIST("list");
+        DONE("done"), DELETE("delete"), BYE("bye"), LIST("list"), UNDO("undo");
         private String value;
         private CommandWord(String value) {
             this.value = value;
@@ -47,6 +47,8 @@ public class Parser {
                     return new duke.command.DeleteCommand(command);
                 case FIND:
                     return new duke.command.FindCommand(command);
+                case UNDO:
+                    return new duke.command.UndoCommand(command);
                 case TODO:
                 case DEADLINE:
                 case EVENT:

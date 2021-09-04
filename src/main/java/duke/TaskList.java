@@ -15,6 +15,7 @@ import duke.task.Task;
  */
 public class TaskList {
     private ArrayList<duke.task.Task> taskList;
+    private ArrayList<duke.task.Task> previousList;
 
     /**
      * Returns a TaskList instance using an ArrayList of duke.task.Task objects.
@@ -23,6 +24,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<duke.task.Task> taskList) {
         this.taskList = taskList;
+        previousList = taskList;
     }
 
     /**
@@ -30,6 +32,7 @@ public class TaskList {
      */
     public TaskList() {
         taskList = new ArrayList<>();
+        previousList = new ArrayList<>();
     }
 
     /**
@@ -110,6 +113,7 @@ public class TaskList {
      * @param index An int indicating the position of Task in the ArrayList that is to be marked as done.
      */
     public void doneTask(int index) {
+        previousList = taskList;
         Task holder = taskList.get(index);
         holder.doneTask();
     }
@@ -120,6 +124,7 @@ public class TaskList {
      * @param index An int indicating the position of Task in the ArrayList to be deleted.
      */
     public void deleteTask(int index) {
+        previousList = taskList.stream().map(x -> x).collect(Collectors.toCollection(ArrayList::new));
         String holder = taskList.get(index).toString();
         taskList.remove(index);
         taskList.trimToSize();
@@ -131,6 +136,7 @@ public class TaskList {
      * @param task A duke.task.Task object that is to be added.
      */
     public void addTask(duke.task.Task task) {
+        previousList = taskList.stream().map(x -> x).collect(Collectors.toCollection(ArrayList::new));
         taskList.add(task);
     }
 
@@ -142,5 +148,19 @@ public class TaskList {
      */
     public duke.task.Task getTask(int index) {
         return taskList.get(index);
+    }
+
+    /**
+     * Undos the last operation done and restores the previous taskList.
+     *
+     * @return A boolean indicating if the undone operation is done.
+     */
+    public boolean ifUndone() {
+        if (!previousList.equals(taskList)) {
+            taskList = previousList;
+            return true;
+        } else {
+            return false;
+        }
     }
 }
