@@ -32,6 +32,9 @@ public class Duke {
         String message;
         try {
             command = Parser.parse(input);
+            assert this.tasks != null;
+            assert this.ui != null;
+            assert this.storage != null;
             message = command.execute(this.tasks, this.ui, this.storage);
             this.storage.updateFile(this.tasks.getTasks());
         } catch (Exception e) {
