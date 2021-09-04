@@ -103,7 +103,7 @@ public class TaskList {
         ListIterator<Task> iter = lst.listIterator();
 
         while (iter.hasNext()) {
-            res.append(iter.nextIndex() + 1).append(".").append(iter.next());
+            res.append(iter.nextIndex() + 1).append(". ").append(iter.next());
             if (iter.hasNext()) {
                 res.append("\n");
             }
