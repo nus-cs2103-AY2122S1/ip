@@ -7,7 +7,7 @@ import gnosis.ui.GnosisUI;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 
@@ -40,8 +40,8 @@ public class Gnosis extends Application {
         try {
 
             FXMLLoader fxmlLoader = new FXMLLoader(GnosisUI.class.getResource("/gnosis/ui/GnosisMainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            GridPane gridPane = fxmlLoader.load();
+            Scene scene = new Scene(gridPane);
             stage.setScene(scene);
 
             // Set up connection between Gnosis UI and Gnosis Logic Controller
@@ -57,4 +57,11 @@ public class Gnosis extends Application {
         }
     }
 
+    @Override
+    public void stop() throws Exception {
+        super.stop();
+        //When platform.exit() is called
+        //stop() will be called before closing application
+        System.out.println("Application is closed");
+    }
 }
