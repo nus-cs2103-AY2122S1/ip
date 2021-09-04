@@ -1,5 +1,7 @@
 package abyss.command;
 
+import abyss.Abyss;
+
 public class FindCommand implements Command {
     private String keyword;
 
@@ -7,7 +9,12 @@ public class FindCommand implements Command {
         this.keyword = keyword;
     }
 
-    public String getKeyword() {
-        return this.keyword;
+    /**
+     * Executes the find command.
+     *
+     * @return Response from executing the find command.
+     */
+    public String execute() {
+        return Abyss.getTaskManager().find(keyword);
     }
 }

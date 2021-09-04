@@ -1,5 +1,7 @@
 package abyss.command;
 
+import java.io.IOException;
+
 import abyss.Abyss;
 import abyss.exception.InvalidCommandException;
 
@@ -21,7 +23,6 @@ public class DeleteCommand implements Command {
             throw new InvalidCommandException("The Abyss is empty.");
         }
 
-
         int i = Integer.parseInt(content);
         if (i < 1 || i > Abyss.getNumberOfTasks()) {
             throw new InvalidCommandException("Index should be positive and not more than "
@@ -31,8 +32,17 @@ public class DeleteCommand implements Command {
         this.index = i;
     }
 
-    public int getIndex() {
-        return this.index;
+    /**
+     * Executes the delete command.
+     *
+     * @return Response from executing the delete command.
+     * @throws IOException If there is error saving to file.
+     */
+    @Override
+    public String execute() throws IOException {
+        String response = Abyss.getTaskManager().delete(index);
+        Abyss.getStorage().saveTasks(Abyss.getTaskManager());
+        return response;
     }
 }
 
