@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import duke.exception.StorageMissingException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -34,7 +35,7 @@ public class StorageTest {
             storage.writeToStorage("Coming from storage test.", false);
             ArrayList<String> results = storage.getStorageContents();
             assertEquals("Coming from storage test.", results.get(0));
-        } catch (IOException e) {
+        } catch (StorageMissingException | IOException e) {
             Assertions.fail();
         }
     }

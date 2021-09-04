@@ -10,7 +10,10 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
-    private String timingStr;
+    private static final char LABEL = 'E';
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("hh:mm a");
+    private String timingWrongFormat; // Used to store incorrect timing formats.
     private LocalDateTime timing;
     private LocalTime endTime;
 
@@ -21,22 +24,22 @@ public class Event extends Task {
      * @param timing Timing of the event task.
      */
     public Event(String details, String timing) {
-        super(details);
+        super(LABEL, details);
         if (timing.length() == 20) {
             try {
                 this.timing = LocalDateTime.parse(timing.substring(0, 15),
-                        DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                        DATE_TIME_FORMATTER);
                 endTime = LocalTime.parse(timing.substring(16),
-                        DateTimeFormatter.ofPattern("HHmm"));
+                        TIME_FORMATTER);
             } catch (DateTimeParseException e) {
-                timingStr = timing;
+                timingWrongFormat = timing;
                 this.timing = null;
-                this.endTime = null;
+                endTime = null;
             }
         } else {
-            timingStr = timing;
+            timingWrongFormat = timing;
             this.timing = null;
-            this.endTime = null;
+            endTime = null;
         }
     }
 
@@ -70,12 +73,16 @@ public class Event extends Task {
 
     /**
      * Returns timing of task as a String.
-     * Most likely due to incorrect input format.
      *
      * @return Task timing as a String.
      */
-    public String getTimingStr() {
-        return timingStr;
+    public String getTimingAsStr() {
+        if (timing == null) {
+            return timingWrongFormat;
+        } else {
+            return timing.format(DATE_TIME_FORMATTER)
+                    + "-" + endTime.format(TIME_FORMATTER);
+        }
     }
 
     /**
@@ -85,12 +92,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        if (timing == null || endTime == null) {
-            return "[E]" + super.toString() + " (at: " + timingStr + ")";
-        } else {
-            return "[E]" + super.toString() + " (at: "
-                    + timing.format(DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm a"))
-                    + " to " + endTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + ")";
-        }
+        return "[" + LABEL + "]" + super.toString() + " (at: " + getTimingAsStr() + ")";
     }
 }

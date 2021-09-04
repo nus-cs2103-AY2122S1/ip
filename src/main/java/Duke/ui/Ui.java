@@ -5,12 +5,15 @@ import java.time.format.DateTimeFormatter;
 
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidInstructionException;
+import duke.exception.StorageMissingException;
 import duke.task.Task;
 
 /**
  * Represents the user interface of Duke. Deals with Duke's interaction with the user.
  */
 public class Ui {
+
+    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd MMM yyyy");
 
     public Ui() {}
 
@@ -87,7 +90,7 @@ public class Ui {
      */
     public String matchingDate(LocalDate date) {
         String text = "Tasks happening on "
-                + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy"))
+                + date.format(DATE_FORMATTER)
                 + " are displayed on your right!";
         return text;
     }
@@ -113,6 +116,18 @@ public class Ui {
      * @return An invalid instruction message.
      */
     public String invalidInstruction(InvalidInstructionException e, String extra) {
+        return e.toString() + " " + extra;
+    }
+
+    /**
+     * Prints a storage missing message.
+     * When the storage file is not found and cannot be created.
+     *
+     * @param e The StorageMissingException.
+     * @param extra Extra details about the exception.
+     * @return A storage missing message.
+     */
+    public String storageMissing(StorageMissingException e, String extra) {
         return e.toString() + " " + extra;
     }
 

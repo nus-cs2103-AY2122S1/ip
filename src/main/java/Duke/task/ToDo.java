@@ -7,13 +7,14 @@ import java.time.LocalDateTime;
  */
 public class ToDo extends Task {
 
+    private static final char LABEL = 'T';
     /**
      * Constructor.
      *
      * @param details Details of the todo task.
      */
     public ToDo(String details) {
-        super(details);
+        super(LABEL, details);
     }
 
     /**
@@ -34,6 +35,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[" + LABEL + "]" + super.toString();
     }
 }
