@@ -3,6 +3,7 @@ package petal.components;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import petal.exception.EmptyDescException;
 import petal.exception.InvalidInputException;
@@ -142,8 +143,12 @@ public class TaskList {
         }
         int count = 1;
         StringBuilder list = new StringBuilder();
+<<<<<<< Updated upstream
         for (Task m : tasks) {
             //To ensure there isn't a newline at the top
+=======
+        for (Task t: tasks) {
+>>>>>>> Stashed changes
             if (count == 1) {
                 list.append(count++).append(". ").append(m);
             } else {
@@ -169,6 +174,7 @@ public class TaskList {
      * @param keyword The keyword to be found
      */
     public String findTaskWithKeyword(String keyword) throws InvalidInputException {
+<<<<<<< Updated upstream
         keyword = keyword.trim();
         if (keyword.equals("")) {
             throw new InvalidInputException(Responses.INVALID_FORMAT);
@@ -186,6 +192,16 @@ public class TaskList {
                 return result.toString();
             }
         }
+=======
+        final int[] count = {1};
+        StringBuilder result = new StringBuilder("Here are the tasks:");
+        tasks.stream().filter(x -> x.isKeyWordPresent(keyword))
+                      .forEach(x -> result.append('\n').append(count[0]++).append(". ").append(x));
+        if (count[0] == 1) {
+            return "No tasks!";
+        }
+        return result.toString();
+>>>>>>> Stashed changes
     }
 
     /**

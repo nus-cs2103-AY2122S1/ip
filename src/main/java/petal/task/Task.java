@@ -89,6 +89,13 @@ public abstract class Task {
      * @return True if contains keyword, false if not
      */
     public boolean isKeyWordPresent(String keyword) {
+<<<<<<< Updated upstream
+=======
+        keyword = keyword.trim();
+        if (keyword.equals("")) {
+            return false;
+        }
+>>>>>>> Stashed changes
         return description.toLowerCase().contains(keyword);
     }
 
