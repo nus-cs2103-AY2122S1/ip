@@ -15,6 +15,8 @@ public interface Parser {
      * @throws DukeException if that the description is invalid
      */
     static String getStringFrom(String command, String message) throws DukeException {
+        assert command.length() > 0;
+        assert message.length() > 1;
         if (message.length() <= command.length()) {
             throw new DukeException(
                     String.format("The description of a %s cannot be empty.", command)
