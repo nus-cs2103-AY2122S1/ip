@@ -4,6 +4,7 @@ import duke.DukeException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * The TaskList class stores the list of tasks.
@@ -161,20 +162,10 @@ public final class TaskList {
      * @param userInput the date which user wants to check
      */
     public ArrayList<Task> findTasksDue(String userInput) {
-        ArrayList<Task> dueItems = new ArrayList<>();
         String[] date = userInput.split("/");
         LocalDate ref = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
-        for (Task t : tasks) {
-            if (!(t instanceof ToDoTask)) {
-                LocalDate temp = t.getLocalDate();
-                if (temp != null) {
-                    if (temp.equals(ref)) {
-                        dueItems.add(t);
-                    }
-                }
-            }
-        }
-        return dueItems;
+        return (ArrayList<Task>) tasks.stream()
+                .filter(task -> task.getLocalDate().equals(ref)).collect(Collectors.toList());
     }
 
     /**
@@ -184,15 +175,8 @@ public final class TaskList {
      * @return list containing all tasks that match input keywords
      */
     public ArrayList<Task> findTask(String target) {
-        ArrayList<Task> matched = new ArrayList<>();
-        if (!target.equals("")) {
-            for (Task t : tasks) {
-                String temp = t.getDescription();
-                if (temp.toLowerCase().contains(target.toLowerCase())) {
-                    matched.add(t);
-                }
-            }
-        }
-        return matched;
+        return (ArrayList<Task>) tasks.stream().filter(
+                task -> task.getDescription().toLowerCase()
+                        .contains(target.toLowerCase())).collect(Collectors.toList());
     }
 }
