@@ -25,12 +25,12 @@ public abstract class Command {
      * @throws InvalidDateFormat If AddCommand is intended but the date format is not followed
      */
     public static Command parse(String input) throws InvalidCommand, NullDescription, InvalidDateFormat {
-        String[] output = input.split(" ");
-        if (output.length == 0 || output[0].equals(" ")) {
+        String[] commandSplitBySpace = input.split(" ");
+        if (commandSplitBySpace.length == 0 || commandSplitBySpace[0].equals(" ")) {
             throw new InvalidCommand();
         }
 
-        String command = output[0];
+        String command = commandSplitBySpace[0];
         Command commandType = null;
 
         switch (command) {
@@ -38,16 +38,16 @@ public abstract class Command {
             commandType = new ExitCommand();
             break;
         case "done":
-            commandType = new DoneCommand(Integer.parseInt(output[1]) - 1);
+            commandType = new DoneCommand(Integer.parseInt(commandSplitBySpace[1]) - 1);
             break;
         case "delete":
-            commandType = new DeleteCommand(Integer.parseInt(output[1]) - 1);
+            commandType = new DeleteCommand(Integer.parseInt(commandSplitBySpace[1]) - 1);
             break;
         case "list":
             commandType = new ListCommand();
             break;
         case "find":
-            commandType = new FindCommand(output[1]);
+            commandType = new FindCommand(commandSplitBySpace[1]);
             break;
         case "todo":
 
