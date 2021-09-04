@@ -6,6 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -19,6 +21,8 @@ public class JavaFX extends Application {
     private Button sendButton;
     private Scene scene;
     private Label label;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/bunny.png"));
 
     @Override
     //Most of these are from the CS2103 JavaFX tutorial
@@ -72,14 +76,11 @@ public class JavaFX extends Application {
         //step 3: add functionality to handle user input:
         //set an event for clicking send button
         sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText())); //define an event function
-            //that adds the label created from user input to the VBox
-            userInput.clear();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText())); //same as the code above
-            userInput.clear();
+            handleUserInput();
         });
 
         //scroll down to the end everytime dialogContainer changes height
@@ -97,5 +98,19 @@ public class JavaFX extends Application {
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
         return textToAdd;
+    }
+
+    private void handleUserInput() {
+        Label userText = new Label(userInput.getText());
+        Label dukeText = new Label(getResponse(userInput.getText()));
+        dialogContainer.getChildren().addAll(
+                new DialogBox(userText, new ImageView(user)),
+                new DialogBox(dukeText, new ImageView(duke))
+        );
+        userInput.clear();
+    }
+
+    private String getResponse(String input) {
+        return "Duke heard: " + input;
     }
 }
