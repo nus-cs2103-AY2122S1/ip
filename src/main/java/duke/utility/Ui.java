@@ -1,8 +1,8 @@
 package duke.utility;
 
-import java.util.Scanner;
-
 public class Ui {
+
+    private Parser parser;
 
     public Ui() {
     }
@@ -13,31 +13,23 @@ public class Ui {
      * @param storage the {@link duke.utility.Storage} this Ui is linked to.
      */
     public void startListening(TaskList tasks, Storage storage) {
-        Parser parser = new Parser(tasks, storage);
-        Scanner sc = new Scanner(System.in);
-        String welcomeMessage = "Hello I'm Duke!\nWhat can I do for you?";
-        this.printMessage(welcomeMessage);
+        this.parser = new Parser(tasks, storage);
 
-        boolean shouldContinue = true;
-        while (shouldContinue) {
-            String command = sc.nextLine();
-            String message = parser.parseCommand(command);
-            if (message.equals("TERMINATE")) {
-                shouldContinue = false;
-            } else {
-                this.printMessage(message);
-            }
-        }
-        printMessage("Goodbye for now!");
+        String welcomeMessage = "Hello I'm Duke!\nWhat can I do for you?";
+        // TODO print welcome message
     }
 
     /**
-     * Outputs a message.
-     * @param message the message to print.
+     * Receives input from user and sends it to the parser to parse
+     * @param input input from the user
+     * @return the result of parsing the input
      */
-    public void printMessage(String message) {
-        System.out.println("-------------------------");
-        System.out.println(message);
-        System.out.println("-------------------------");
+    public String receiveInputFromUser(String input) {
+        String message = parser.parseCommand(input);
+        if (message.equals("TERMINATE")) {
+            return "goodbye";
+        } else {
+            return message;
+        }
     }
 }
