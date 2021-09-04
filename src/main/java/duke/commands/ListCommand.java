@@ -18,6 +18,7 @@ public class ListCommand extends Command {
         if (taskList.getLength() == 0) {
             throw new DukeException("Your task list is empty :(");
         } else {
+            assert taskList.getLength() > 0 : "Task list has an invalid length";
             return "Here's your list!:\n" + taskList.toString();
         }
     }

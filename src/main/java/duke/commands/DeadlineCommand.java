@@ -41,6 +41,7 @@ public class DeadlineCommand extends Command {
         if (descInput.length() == 0) {
             throw new DukeException("Please specify a task description ><");
         } else {
+            assert descInput.length() > 0 : "Improper input length for deadline description";
             return descInput;
         }
     }
@@ -51,6 +52,7 @@ public class DeadlineCommand extends Command {
         if (deadlineInput.length() == 0) {
             throw new DukeException("Please specify a deadline for this task");
         } else {
+            assert deadlineInput.length() > 0 : "Improper input length for deadline";
             return deadlineInput;
         }
     }
@@ -64,7 +66,9 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList taskList) {
         taskList.add(newTask);
+        int listLen = taskList.getLength();
+        assert listLen > 0 : "There should be > 0 tasks in the list after adding";
         return "Just added:\n" + newTask.toString()
-                + "\nYou currently have " + taskList.getLength() + " tasks in the list.";
+                + "\nYou currently have " + listLen + " tasks in the list.";
     }
 }
