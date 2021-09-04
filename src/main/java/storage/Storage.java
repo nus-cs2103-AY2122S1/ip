@@ -43,7 +43,6 @@ public class Storage {
             Scanner scanner = new Scanner(new File(filePath));
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
-                // process the line
                 String[] output = line.split("\\s\\|\\s");
                 switch (output[0]) {
                 case "T":
@@ -65,8 +64,6 @@ public class Storage {
             }
         } catch (IOException e1) {
             System.out.println("Something went wrong: " + e1.getMessage());
-        } catch (InvalidDateFormat e2) {
-            throw new InvalidDateFormat();
         }
         return taskList;
     }
