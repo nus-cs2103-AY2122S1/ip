@@ -18,25 +18,12 @@ public class Ui {
      * @return A greeting message with an introduction.
      */
     public String greet() {
-        String output = "";
         String logo =
                 "   +--+--+--+--+\n" +
                 "   | m | a | n | g | o |\n" +
                 "   +--+--+--+--+\n\n";
 
-        output += "Hello from\n" + logo;
-        output += "Hello! I'm Mango\nWhat can I do for you?";
-
-        return output;
-    }
-
-    /**
-     * Echoes the input of the user.
-     *
-     * @param str The string input of the user.
-     */
-    public void echo(String str) {
-        System.out.println(str);
+        return "Hello from\n" + logo + "Hello! I'm Mango\nWhat can I do for you?";
     }
 
     /**
