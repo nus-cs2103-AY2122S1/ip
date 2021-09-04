@@ -78,6 +78,7 @@ public class Storage {
                     break;
 
                 default:
+                    assert false;
                 }
             }
             s.close();
