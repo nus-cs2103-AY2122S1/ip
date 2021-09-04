@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -56,8 +57,9 @@ public class Storage {
         while (sc.hasNextLine()) {
             String task = sc.nextLine();
             String[] tokens = task.split(";");
-            boolean isCompleted = tokens[1].equals("T");
-            String taskName = tokens[2];
+            System.out.println(Arrays.toString(tokens));
+            boolean isCompleted = tokens[2].equals("T");
+            String taskName = tokens[1];
             // format: duke.task type | isCompleted | event name | date/time
             switch (tokens[0]) {
             case "T":

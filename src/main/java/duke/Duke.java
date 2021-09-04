@@ -5,10 +5,6 @@ import java.io.IOException;
 import duke.utility.Storage;
 import duke.utility.TaskList;
 import duke.utility.Ui;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 /**<h1>Duke task tracker</h1>
  * The Duke program is an interactive task tracker that helps the user track general tasks, events and deadlines.
@@ -19,10 +15,11 @@ import javafx.stage.Stage;
  * @author Justin Ngo
  */
 
-public class Duke extends Application {
-    private Ui ui;
+public class Duke {
+    private final Ui ui;
     private TaskList tasks;
     private Storage storage;
+    private String storageStatus;
 
     /**
      * Initialises a new <code>Duke</code> object with its own {@link duke.utility.Ui} and
@@ -38,29 +35,29 @@ public class Duke extends Application {
             this.storage = new Storage(logPath);
             this.tasks = new TaskList(storage.loadPreviousTasks());
         } catch (IOException ex) {
-            System.out.println("Unable to create/open specified file.\nTasks will not be logged.");
+            this.storageStatus = "Unable to create/open specified file.\nTasks will not be logged.";
             this.storage = null;
             this.tasks = new TaskList();
         }
     }
 
-    public Duke() {
+    public boolean hasStorage() {
+        return this.storage == null;
     }
 
-    @Override
-    public void start(Stage stage) {
-        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
-        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
-
-        stage.setScene(scene); // Setting the stage to show our screen
-        stage.show(); // Render the stage.
+    public void setStorageStatus(String message) {
+        this.storageStatus = message;
     }
 
-    private void run() {
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method. TODO
+     */
+    String getResponse(String input) {
+        return this.ui.receiveInputFromUser(input);
+    }
+
+    void run() {
         this.ui.startListening(this.tasks, this.storage);
-    }
-
-    public static void main(String[] args) {
-        new Duke("taskLog.txt").run();
     }
 }
