@@ -67,7 +67,7 @@ public abstract class Task {
             return "[T]";
         } else if (this.type.equals(Type.EVENT)) {
             return "[E]";
-        } else if (this.type.equals(Type.DEADLINE)){
+        } else if (this.type.equals(Type.DEADLINE)) {
             // Deadline event
             return "[D]";
         } else {
@@ -99,10 +99,12 @@ public abstract class Task {
             loadedTask = Todo.newTodoTask(taskName);
             break;
         case "D":
-            loadedTask = new Deadline(taskName, DukeDate.getDukeDateFromStorage(strComponents[4].strip(), dukeDateType));
+            loadedTask = new Deadline(taskName,
+                    DukeDate.getDukeDateFromStorage(strComponents[4].strip(), dukeDateType));
             break;
         case "E":
-            loadedTask = new Event(taskName, DukeDate.getDukeDateFromStorage(strComponents[4].strip(), dukeDateType));
+            loadedTask = new Event(taskName,
+                    DukeDate.getDukeDateFromStorage(strComponents[4].strip(), dukeDateType));
             break;
         default:
             throw new DukeInvalidStorageTaskException();

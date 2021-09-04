@@ -12,8 +12,8 @@ public class DukeInvalidStorageTaskException extends Exception {
      * trying to load a saved task from local memory.
      */
     public DukeInvalidStorageTaskException() {
-        super("Unable to load some saved tasks from local storage. The file may have been edited previously." +
-                "Please check the taskList.txt file. Delete it if necessary.");
+        super("Unable to load some saved tasks from local storage. The file may have been edited previously."
+                + "Please check the taskList.txt file. Delete it if necessary.");
     }
 
 }
