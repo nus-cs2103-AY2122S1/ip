@@ -1,11 +1,9 @@
 package duke.task;
 
-import java.time.LocalDate;
-
 /**
  * Represents a task containing a description and a done status.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -48,15 +46,6 @@ public class Task {
     }
 
     /**
-     * Returns null.
-     *
-     * @return null.
-     */
-    public LocalDate getTime() {
-        return null;
-    }
-
-    /**
      * Marks this Task as done.
      */
     public void markAsDone() {
@@ -64,13 +53,11 @@ public class Task {
     }
 
     /**
-     * Returns null.
+     * Returns String identifier of this task.
      *
-     * @return null.
+     * @return Single letter String identifier of this task.
      */
-    public String getTaskType() {
-        return null;
-    }
+    public abstract String getTaskType();
 
     /**
      * Returns a formatted string that begins with this Task's done status and ends with its description.
