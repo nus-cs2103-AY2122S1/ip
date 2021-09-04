@@ -30,7 +30,7 @@ public class AddCommand extends Command{
                 newTask = new Todo(fullCommand.substring(5).strip());
             } else if (taskType == TaskEnum.DDL) {
                 newTask = Deadline.parseNewCommand(fullCommand);
-            } else {    // i.e. EVENT
+            } else {
                 newTask = Event.parseNewCommand(fullCommand);
             }
             return taskList.addTask(newTask);

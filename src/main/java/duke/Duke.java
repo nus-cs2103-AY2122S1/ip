@@ -60,7 +60,7 @@ public class Duke {//} extends Application {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
@@ -81,21 +81,14 @@ public class Duke {//} extends Application {
         boolean isExit = false;
 
         try {
-            //linesOfOutput.add(ui.showLine());
             Command c = Parser.parse(input);
             linesOfOutput.addAll(c.execute(tasks, ui, storage));
             isExit = c.isExit();
         } catch (DukeException e) {
             ui.showError(e.getMessage());
-        } finally {
-            //linesOfOutput.add(ui.showLine());
         }
 
-
-        //if (isExit)
-
         return new ResponseMessage(String.join("\n", linesOfOutput), isExit);
-        //return "Duke heard: " + input;
     }
 
     public String greetToGui() {
