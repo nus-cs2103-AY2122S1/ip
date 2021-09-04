@@ -81,14 +81,14 @@ public class Duke {//} extends Application {
         boolean isExit = false;
 
         try {
-            linesOfOutput.add(ui.showLine());
+            //linesOfOutput.add(ui.showLine());
             Command c = Parser.parse(input);
             linesOfOutput.addAll(c.execute(tasks, ui, storage));
             isExit = c.isExit();
         } catch (DukeException e) {
             ui.showError(e.getMessage());
         } finally {
-            linesOfOutput.add(ui.showLine());
+            //linesOfOutput.add(ui.showLine());
         }
 
 
