@@ -100,6 +100,9 @@ public class Parser {
      * @return A Task object.
      */
     public Task taskStringToTask(String taskString) {
+        assert (taskString != null);
+        assert (!taskString.isEmpty());
+
         String[] taskInfo = taskString.split(" \\| ");
         String taskType = taskInfo[0];
         boolean isDone = taskInfo[1].equals("[X]");
