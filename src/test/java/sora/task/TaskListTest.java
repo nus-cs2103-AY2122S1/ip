@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import org.junit.jupiter.api.Test;
 
 import sora.exception.EmptyListException;
+import sora.exception.EmptyResultException;
 import sora.exception.IllegalFormatException;
 import sora.exception.SoraException;
 import sora.exception.TaskNotFoundException;
@@ -356,12 +357,13 @@ class TaskListTest {
 
     @Test
     void findInList_nothingFound_exceptionThrown() {
+        String expected = "I found nothing... Maybe try another keyword?";
         TaskList taskList1 = new TaskList();
 
-        EmptyListException exception = assertThrows(EmptyListException.class,
+        EmptyResultException exception = assertThrows(EmptyResultException.class,
                 () -> taskList1.findInList("find test"));
 
-        assertEquals("Your list is empty! Maybe add some tasks into it?", exception.getMessage());
+        assertEquals(expected, exception.getMessage());
 
         ArrayList<Task> list = new ArrayList<>();
         list.add(new Task("task 1"));
@@ -369,10 +371,10 @@ class TaskListTest {
 
         TaskList taskList2 = new TaskList(list);
 
-        exception = assertThrows(EmptyListException.class,
+        exception = assertThrows(EmptyResultException.class,
                 () -> taskList2.findInList("find test"));
 
-        assertEquals("Your list is empty! Maybe add some tasks into it?", exception.getMessage());
+        assertEquals(expected, exception.getMessage());
     }
 
     @Test
