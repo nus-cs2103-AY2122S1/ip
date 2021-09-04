@@ -1,6 +1,7 @@
 package duke.parser;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -76,8 +77,74 @@ public class Parser {
         default:
             throw new DukeException("I'm sorry, but I don't know what \""
                     + fullCommand + "\" means :-(");
-
         }
+    }
+
+    /**
+     * Checks if task argument is empty during add commands.
+     *
+     * @param command   command used.
+     * @param arguments arguments passed along with the command.
+     * @throws DukeException if no arguments are given.
+     */
+    public static void checkAddTaskArgument(String command, String arguments) throws DukeException {
+        if (arguments.isEmpty()) {
+            throw new DukeException(String.format("The description of a %s cannot be left empty. "
+                    + "Please try again.", command));
+        }
+    }
+
+    /**
+     * Parses the argument depending on the task.
+     *
+     * @param command   command used.
+     * @param arguments arguments passed along with the command.
+     * @return The string array containing arguments split by description and time.
+     * @throws DukeException if arguments don't follow correct format.
+     */
+    public static String[] parseArguments(String command, String arguments) throws DukeException {
+        String[] argArr;
+        switch (command) {
+        case "deadline":
+            argArr = arguments.split("/by");
+            if (argArr.length == 1 || argArr[1].isEmpty()) {
+                throw new DukeException("Arguments do not follow proper format. Don't forget the /by");
+            }
+            break;
+        case "event":
+            argArr = arguments.split("/at");
+            if (argArr.length == 1 || argArr[1].isEmpty()) {
+                throw new DukeException("Arguments do not follow proper format. Don't forget the /at");
+            }
+            break;
+        default:
+            throw new DukeException("Invalid task type!");
+        }
+        String[] trimmedArr = new String[argArr.length];
+        for (int i = 0; i < argArr.length; i++) {
+            trimmedArr[i] = argArr[i].trim();
+        }
+        return trimmedArr;
+    }
+
+    /**
+     * Parses the index for done and delete commands.
+     *
+     * @param arguments The arguments passed along with command.
+     * @param taskSize  The length of the task list.
+     * @return The index given as an int.
+     * @throws DukeException if no index or invalid index given.
+     */
+    public static int parseIndex(String arguments, int taskSize) throws DukeException {
+        if (arguments.isEmpty()) {
+            throw new DukeException("No index was keyed in. Please try again.");
+        }
+
+        int index = Integer.parseInt(arguments);
+        if (index < 1 || index > taskSize) {
+            throw new DukeException("The index you entered is invalid. Please try again.");
+        }
+        return index;
     }
 
 }

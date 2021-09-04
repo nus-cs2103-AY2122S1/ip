@@ -83,5 +83,18 @@ public class TaskList {
     public void add(Task task) {
         tasks.add(task);
     }
-
+    
+    @Override
+    public String toString() {
+        StringBuilder tasksString = new StringBuilder();
+        if (tasks.isEmpty()) {
+            return tasksString + "  No tasks.";
+        } else {
+            for (int i = 0; i < tasks.size(); i++) {
+                Task currTask = tasks.get(i);
+                tasksString.append(i + 1).append(". ").append(currTask).append("\n");
+            }
+            return tasksString.toString();
+        }
+    }
 }

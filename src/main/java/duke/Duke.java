@@ -32,7 +32,7 @@ public class Duke {
      * The default path used when using the empty constructor.
      */
     private static final String DEFAULT_PATH = "./data/tasks.txt";
-    
+
     /**
      * Initializes the duke program with a given filePath.
      *
@@ -46,6 +46,7 @@ public class Duke {
 
     /**
      * Load tasks, returning the appropriate message.
+     *
      * @return A successful message, if task list is found, else return the error message.
      */
     public String loadTasks() {
@@ -68,9 +69,9 @@ public class Duke {
 
     /**
      * Generates a response to user input.
-     * 
+     *
      * @param input The String representing the user input.
-     * @return A string in response to the user input. 
+     * @return A string in response to the user input.
      */
     public String getResponse(String input) {
         try {
@@ -80,7 +81,7 @@ public class Duke {
             storage.write(tasks);
             return botResponse;
         } catch (DukeException e) {
-            return e.getMessage(); 
+            return e.getMessage();
         }
     }
 

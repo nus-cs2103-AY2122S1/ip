@@ -30,17 +30,10 @@ public abstract class Command {
      * @param tasks   The user's list of tasks.
      * @param ui      The ui interacting with the user.
      * @param storage The location where the list of tasks is stored.
-     * @throws DukeException
      * @return The output of executing the command.
+     * @throws DukeException
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-
-    /**
-     * Checks whether command terminate the program.
-     *
-     * @return true if command is the bye command; else false.
-     */
-    public abstract boolean isExit();
 
     /**
      * Returns the given command keyword.

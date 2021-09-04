@@ -26,8 +26,9 @@ public class DialogBox extends HBox {
 
     /**
      * The constructor for the Dialog Box.
+     *
      * @param text The text content of the dialog box.
-     * @param img The image attached to the dialog box.
+     * @param img  The image attached to the dialog box.
      */
     private DialogBox(String text, Image img) {
         try {
@@ -51,13 +52,15 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        dialog.setStyle("-fx-background-color: rgb(83, 194, 237); -fx-padding: 10 10 10 10; -fx-background-radius: 10px");
+        dialog.setStyle(
+                "-fx-background-color: rgb(83, 194, 237); -fx-padding: 10 10 10 10; -fx-background-radius: 10px");
     }
 
     /**
      * Gives the user dialog box.
+     *
      * @param text The text content of the dialog box.
-     * @param img The image attached to the dialog box.
+     * @param img  The image attached to the dialog box.
      * @return The dialog box by the user with the given text and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
@@ -66,10 +69,11 @@ public class DialogBox extends HBox {
 
     /**
      * Flips content and gives the Duke bot dialog box.
+     *
      * @param text The text content of the dialog box.
-     * @param img The image attached to the dialog box.
+     * @param img  The image attached to the dialog box.
      * @return The dialog box by the Duke bot with the given text and image.
-     */ 
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
