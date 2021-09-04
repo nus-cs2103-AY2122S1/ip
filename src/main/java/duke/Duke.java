@@ -20,18 +20,18 @@ public class Duke {
 
     private static Hashtable<String, Consumer<String>> initCommandTable() {
 
-        Hashtable<String, Consumer<String>> ret = new Hashtable<>();
+        Hashtable<String, Consumer<String>> table = new Hashtable<>();
 
-        ret.put("list", (x) -> Ui.printTasks(taskBank.getTasks()));
-        ret.put("event", (x) -> taskBank.addTask(x, Event::create));
-        ret.put("deadline", (x) -> taskBank.addTask(x, Deadline::create));
-        ret.put("todo", (x) -> taskBank.addTask(x, ToDo::create));
-        ret.put("done", (x) -> taskBank.markTask(x));
-        ret.put("delete", (x) -> taskBank.deleteTask(x));
-        ret.put("find", (x) -> Ui.printTasks(taskBank.searchTasks(x)));
-        ret.put("bye", (x) -> System.exit(0));
+        table.put("list", (x) -> Ui.printTasks(taskBank.getTasks()));
+        table.put("event", (x) -> taskBank.addTask(x, Event::create));
+        table.put("deadline", (x) -> taskBank.addTask(x, Deadline::create));
+        table.put("todo", (x) -> taskBank.addTask(x, ToDo::create));
+        table.put("done", (x) -> taskBank.markTask(x));
+        table.put("delete", (x) -> taskBank.deleteTask(x));
+        table.put("find", (x) -> Ui.printTasks(taskBank.searchTasks(x)));
+        table.put("bye", (x) -> System.exit(0));
 
-        return ret;
+        return table;
     }
 
     private static void parseInput(String input) {

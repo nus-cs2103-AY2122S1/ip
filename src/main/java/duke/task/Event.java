@@ -1,19 +1,14 @@
 package duke.task;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 
 import duke.util.DukeException;
+import duke.util.Utility;
 
 /**
  * Task with a time of occurrence.
  */
 public class Event extends Task {
-
-    private static final DateTimeFormatter DATE_SHORT_FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    private static final DateTimeFormatter DATE_MED_FORMATTER = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG);
-
     private LocalDate on;
 
     /**
@@ -39,9 +34,11 @@ public class Event extends Task {
             throw new DukeException("I can't seem to find the event keyword");
         } else if (formattedString.length() <= 6
                 || formattedString.substring(6, onIndex).isEmpty()) {
+            //Checks for characters between "Event " and "/on"
             throw new DukeException("the description of event cannot be empty");
         } else if (onIndex == formattedString.length()
                 || formattedString.length() < onIndex + 5) {
+            //Checks for characters after "/on"
             throw new DukeException("the [/on] time of event cannot be empty");
         }
     }
@@ -60,7 +57,7 @@ public class Event extends Task {
         int onIndex = formattedString.indexOf("/on ");
         LocalDate time = LocalDate.parse(
                 formattedString.substring(onIndex + 4),
-                DATE_SHORT_FORMATTER);
+                Utility.DATE_SHORT_FORMATTER);
 
         return new Event(formattedString.substring(6, onIndex).trim(), time);
     }
@@ -68,7 +65,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         char statusIcon = this.isDone ? 'X' : ' ';
-        String timeString = DATE_MED_FORMATTER.format(this.on);
+        String timeString = Utility.DATE_MED_FORMATTER.format(this.on);
 
         return String.format("[%c] Task.Event: %s (on: %s)",
                 statusIcon, this.description, timeString);
