@@ -65,11 +65,16 @@ public class Deadline extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return by;
+    }
+
+    @Override
     public String toString() {
         char statusIcon = this.isDone ? 'X' : ' ';
         String timeString = Utility.DATE_MED_FORMATTER.format(this.by);
 
-        return String.format("[%c] duke.task.Deadline: %s (by: %s)",
+        return String.format("[%c] Deadline: %s (by: %s)",
                 statusIcon, this.description, timeString);
     }
 

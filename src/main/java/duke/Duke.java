@@ -22,7 +22,7 @@ public class Duke {
 
         Hashtable<String, Consumer<String>> table = new Hashtable<>();
 
-        table.put("list", (x) -> Ui.printTasks(taskBank.getTasks()));
+        table.put("list", (x) -> Ui.printTasks(taskBank.getTasks(x)));
         table.put("event", (x) -> taskBank.addTask(x, Event::create));
         table.put("deadline", (x) -> taskBank.addTask(x, Deadline::create));
         table.put("todo", (x) -> taskBank.addTask(x, ToDo::create));

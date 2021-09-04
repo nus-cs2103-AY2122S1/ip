@@ -58,13 +58,13 @@ public class Storage {
 
             return (ArrayList<Task>) (inputStream.readObject());
         } catch (FileNotFoundException e) {
-            System.out.println("WARNING: Task.Task list's save file missing.\n"
+            System.out.println("WARNING: Task list's save file missing.\n"
                     + e.getMessage());
         } catch (IOException e) {
-            System.out.println("WARNING: Task.Task List not properly retrieved.\n"
+            System.out.println("WARNING: Task List not properly retrieved.\n"
                     + e.getMessage());
         } catch (ClassNotFoundException e) {
-            System.out.println("WARNING: Missing Class ArrayList<Task.Task>.\n"
+            System.out.println("WARNING: Missing Class ArrayList<Task>.\n"
                     + e.getMessage());
         }
 
@@ -84,9 +84,9 @@ public class Storage {
             outputStream.writeObject(taskList);
             outputStream.close();
         } catch (FileNotFoundException e) {
-            System.out.println("WARNING: Task.Task list's save file missing.\n" + e.getMessage());
+            System.out.println("WARNING: Task list's save file missing.\n" + e.getMessage());
         } catch (IOException e) {
-            System.out.println("WARNING: Task.Task List not properly saved.\n" + e.getMessage());
+            System.out.println("WARNING: Task List not properly saved.\n" + e.getMessage());
         }
     }
 
