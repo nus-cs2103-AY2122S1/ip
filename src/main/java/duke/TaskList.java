@@ -25,19 +25,16 @@ public class TaskList {
 
     /**
      * Searches for Tasks containing a search query.
+     * Features: case insensitive, partial string, by time,
+     * by tasks not done, by Type.
      *
      * @return returns List of all Tasks that contain the Query.
      */
     public String search(String query) {
-        List<Task> results = new ArrayList<>();
         String result = "Here's what I found!: \n";
+        List<Task> results = processQuery(query);
 
-        for (Task task : taskList) {
-            if (task.getDescription().contains(query)) {
-                results.add(task);
-            }
-        }
-
+        // Concatenates tasks into specified format
         if (results.size() == 0) {
             return "No matches found!";
         } else {
@@ -50,6 +47,63 @@ public class TaskList {
             }
         }
         return result;
+    }
+
+    private List<Task> processQuery(String query) {
+        List<Task> results = new ArrayList<>();
+
+        for (Task task : taskList) {
+            String taskLowerCase = task.getDescription().toLowerCase();
+            String queryLowerCase = query.toLowerCase();
+            String queryTag = query.length() >= 2 ? queryLowerCase.substring(0, 2) : "";
+
+            Task.Type taskType = task.getType();
+            boolean hasTime = (taskType == Task.Type.E || taskType == Task.Type.D);
+
+
+            // Searches based on whether task has been done
+            if (isTaskDone(task, queryTag)) {
+                results.add(task);
+                // Searches based on task type
+            } else if (isTaskType(task, queryTag, queryLowerCase)) {
+                results.add(task);
+                // Searches based on time
+            } else if (hasTime && isTime(task, queryLowerCase)) {
+                results.add(task);
+                // Search based on task description
+            } else if (taskLowerCase.contains(queryLowerCase)) {
+                results.add(task);
+            }
+        }
+        return results;
+    }
+
+    private boolean isTaskDone(Task task, String queryTag) {
+        boolean isTaskDone = task.isDone();
+        if (queryTag.contains("-d")) {
+            return !isTaskDone;
+        }
+        return false;
+    }
+
+    private boolean isTaskType(Task task, String queryTag, String queryLowerCase) {
+        Task.Type taskType = task.getType();
+        if (queryTag.contains("-t")) {
+            String queryTaskType = queryLowerCase.length() >= 2 ?queryLowerCase.substring(2).trim() : "";
+            if (taskType == Task.Type.T && queryTaskType.equals("t")) {
+                return true;
+            } else if (taskType == Task.Type.D && queryTaskType.equals("d")) {
+                return true;
+            } else if (taskType == Task.Type.E && queryTaskType.equals("e")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean isTime(Task task, String queryLowerCase) {
+        String timeLowerCase = task.getTime().toLowerCase();
+        return timeLowerCase.contains(queryLowerCase);
     }
 
     /**

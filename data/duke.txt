@@ -1,2 +1,7 @@
 T | 0 | test
 T | 0 | here
+D | 1 | study  | Feb 20 2019
+E | 0 | lunch  | Sunday
+T | 0 | TEST
+T | 1 | test t
+E | 0 | dinner  | Friday
