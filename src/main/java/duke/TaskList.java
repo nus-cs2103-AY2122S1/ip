@@ -27,13 +27,13 @@ public class TaskList {
         return s;
     }
 
-    public Task markAsComplete(int i)  {
+    public Task markAsComplete(int i) throws IndexOutOfBoundsException {
         Task t = tasks.get(i - 1);
         t.markAsComplete();
         return t;
     }
 
-    public Task deleteTask(int i)  {
+    public Task deleteTask(int i)  throws IndexOutOfBoundsException {
         return tasks.remove(i - 1);
     }
 

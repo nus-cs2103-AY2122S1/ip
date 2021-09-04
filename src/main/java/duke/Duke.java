@@ -40,18 +40,17 @@ public class Duke {
                     this.ui.stdout(this.tasks.toString());
                     break;
                 case UPDATE_MARKASDONE:
-                    this.ui.stdout("Nice! I've marked this task as done:");
                     i = Integer.parseInt(varargs.get(0));
-                    t = this.tasks.markAsComplete(i);
-                    this.ui.stdout(t.toString());
-                    this.storage.writeFile(this.tasks.toRepr());
+                        t = this.tasks.markAsComplete(i);
+                        this.ui.stdout(String.format("Nice! I've marked this task as done:\n%s", t));
+                        this.storage.writeFile(this.tasks.toRepr());
                     break;
                 case DELETE:
                     this.ui.stdout("Noted. I've removed this task:");
                     i = Integer.parseInt(varargs.get(0));
-                    t = this.tasks.deleteTask(i);
-                    this.ui.stdout(t.toString());
-                    this.storage.writeFile(this.tasks.toRepr());
+                        t = this.tasks.deleteTask(i);
+                        this.ui.stdout(String.format("Noted. I've removed this task:\n%s", t));
+                        this.storage.writeFile(this.tasks.toRepr());
                     break;
                 case CREATE_DEADLINE:
                     t = new Task.Deadline(false, varargs.get(0), varargs.get(1));
@@ -75,7 +74,7 @@ public class Duke {
                             t, tasks.numberOfTasks()));
                     break;
                 }
-            } catch (DukeException | java.io.IOException e) {
+            } catch (DukeException | java.io.IOException | IndexOutOfBoundsException e) {
                 this.ui.stderr(e.getMessage());
             }
         }
