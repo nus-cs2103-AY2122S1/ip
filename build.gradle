@@ -42,6 +42,8 @@ test {
 }
 
 application {
+//  adapted from: https://stackoverflow.com/questions/43937169/gradle-application-plugin-with-multiple-main-classes
+//  /46938169
     if (project.findProperty("chooseMain").toString() == "null") {
         mainClassName = "Launcher"
     } else {

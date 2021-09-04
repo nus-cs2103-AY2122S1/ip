@@ -33,8 +33,13 @@ jobs:
       - name: Run JUnit Tests
         run: ./gradlew clean test
 
+#        Builds the application with Launcher as the entry point of the app, compiles into a GUI application
+
       - name: Run GUI Build Tests
         run: ./gradlew clean shadowJar -PchooseMain=Launcher
+
+#        Builds the application with Tiger as the entry point of the app, compiles into CLI application used for testing
+#        purposes
 
       - name: Run CLI Build Tests
         run: ./gradlew clean shadowJar -PchooseMain=Tiger
