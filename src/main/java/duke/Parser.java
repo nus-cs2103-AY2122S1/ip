@@ -5,8 +5,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.Ui.UserCommands;
 import duke.Ui.Descriptors;
+import duke.Ui.UserCommands;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DateCommand;
@@ -15,6 +15,16 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.MarkCommand;
 import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeFormatException;
+import duke.exception.InvalidLocalDateException;
+import duke.exception.InvalidNumberInputException;
+import duke.exception.MissingDateException;
+import duke.exception.MissingDescriptorException;
+import duke.exception.MissingSpaceAfterCommandException;
+import duke.exception.MissingSpaceAfterDescriptorException;
+import duke.exception.MissingSpaceBeforeDescriptorException;
+import duke.exception.MissingTaskDescriptionException;
+import duke.exception.WrongDescriptorException;
 
 /**
  * Deals with making sense of user commands and inputs.
@@ -52,26 +62,27 @@ public class Parser {
      * the initial command "event" and if the initial command "event" is a valid command.
      *
      * @param userInput User's input into Duke chatbot.
-     * @param command The starting command of user's input.
-     * @param exceptionMessage Error message to be printed when user input is invalid.
-     * @throws DukeException If user command is invalid.
-     * @throws DukeException If user input contains missing spaces.
+     * @param userCommand The starting command of user's input.
+     * @param exception The exception to be thrown if input is invalid.
+     * @throws MissingSpaceAfterCommandException If user input contains missing spaces.
+     * @throws DukeException If user input is invalid.
      */
-    public static void checkInputValidity(String userInput, String command,
-            String exceptionMessage) throws DukeException {
+    public static void checkInputValidity(String userInput, UserCommands userCommand,
+            DukeException exception) throws DukeException {
+        String command = userCommand.getCommand();
 
         // If userInput is <= command length, it definitely does not contain desired inputs.
         if (userInput.length() <= command.length()) {
-            throw new DukeException(exceptionMessage);
+            throw exception;
         }
 
         // If userInput after command is not space, tell users that they are missing space.
         if (userInput.charAt(command.length()) != ' ') {
-            throw new DukeException(Ui.exceptionMissingSpaceAfterCommand(command));
+            throw new MissingSpaceAfterCommandException(userCommand);
         } else {
             // If user input is like so "command ", it also does not contain desired inputs, despite having space.
             if (userInput.length() == (command.length() + 1)) {
-                throw new DukeException(exceptionMessage);
+                throw exception;
             }
         }
     }
@@ -82,9 +93,9 @@ public class Parser {
      * @param original String to prepend zeroes to.
      * @param expected Length of output string.
      * @return String prepended with zeroes till desired length.
-     * @throws DukeException If string input is larger than expected length of output string.
+     * @throws InvalidDateTimeFormatException If string input is larger than expected length of output string.
      */
-    private static String padZeros(String original, int expected) throws DukeException {
+    private static String padZeros(String original, int expected) throws InvalidDateTimeFormatException {
         String output = original;
         if (original.length() < expected) {
             // Number of chars needed to meet desired length of output string.
@@ -93,7 +104,7 @@ public class Parser {
                 output = "0" + original;
             }
         } else if (original.length() > expected) {
-            throw new DukeException(Ui.exceptionInvalidDateTimeFormat());
+            throw new InvalidDateTimeFormatException();
         }
 
         return output;
@@ -105,13 +116,13 @@ public class Parser {
      *
      * @param localDate LocalDate to be parsed.
      * @return Formatted string representing the date of LocalDate in d MMMM yyyy format.
-     * @throws DukeException
+     * @throws InvalidLocalDateException If LocalDate cannot be parsed.
      */
-    public static String parseLocalDate(LocalDate localDate) throws DukeException {
+    public static String parseLocalDate(LocalDate localDate) throws InvalidLocalDateException {
         try {
             return localDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
         } catch (DateTimeException dateTimeException) {
-            throw new DukeException(Ui.exceptionInvalidLocalDate());
+            throw new InvalidLocalDateException();
         }
     }
 
@@ -121,16 +132,16 @@ public class Parser {
      *
      * @param dateString Formatted string to be parsed.
      * @return LocalDate equivalent of the date represented by dateString.
-     * @throws DukeException If dateString is of an invalid date format.
-     * @throws DukeException If dateString represents a date later than "+999999999-12-31" or
+     * @throws InvalidDateTimeFormatException If dateString is of an invalid date format.
+     * @throws InvalidDateTimeFormatException If dateString represents a date later than "+999999999-12-31" or
      *                       earlier than "-999999999-01-01".
      */
-    public static LocalDate toLocalDate(String dateString) throws DukeException {
+    public static LocalDate toLocalDate(String dateString) throws InvalidDateTimeFormatException {
         String[] split = dateString.split("[/\\s]");
 
         // Check if split has 3 elements. If not, this is already an invalid date format.
         if (split.length != 3) {
-            throw new DukeException(Ui.exceptionInvalidDateTimeFormat());
+            throw new InvalidDateTimeFormatException();
         }
 
         // Convert user date input into dd-mm-yyyy format
@@ -146,7 +157,7 @@ public class Parser {
         try {
             localDate = LocalDate.parse(stringBuilder.toString());
         } catch (DateTimeParseException dateTimeParseException) {
-            throw new DukeException(Ui.exceptionInvalidDateTimeFormat());
+            throw new InvalidDateTimeFormatException();
         }
 
         return localDate;
@@ -160,14 +171,14 @@ public class Parser {
      * @param userInput User's input into Duke chatbot.
      * @param command The identifying command in user input.
      * @return An int representing an index.
-     * @throws DukeException If user input for index cannot be parsed into Integer.
+     * @throws InvalidNumberInputException If user input for index cannot be parsed into Integer.
      */
-    public static int parseUserNumInput(String userInput, UserCommands command) throws DukeException {
+    public static int parseUserNumInput(String userInput, UserCommands command) throws InvalidNumberInputException {
         try {
             // Add 1 as user's number input is separated from command by 1 space.
             return Integer.parseInt(userInput.substring(command.getLength() + 1));
         } catch (NumberFormatException nfe) {
-            throw new DukeException(Ui.exceptionInvalidNumberInput(command));
+            throw new InvalidNumberInputException(command);
         }
     }
 
@@ -194,15 +205,17 @@ public class Parser {
      * @param userDescription User's input into Duke chatbot.
      * @param descriptor Descriptor to separate description and time with.
      * @param separator char that comes before the descriptor.
-     * @param command The initial command in user's input.
+     * @param userCommand The initial command in user's input.
      * @return String array of 2 elements with the task description at index 0 and time at index 1.
-     * @throws DukeException If user input is missing the expected descriptor or a time input.
-     * @throws DukeException If user input is missing a task description.
-     * @throws DukeException If user input is using the wrong descriptor.
-     * @throws DukeException If user input has missing spaces.
+     * @throws MissingDescriptorException If user input is missing the expected descriptor.
+     * @throws MissingDateException If user input is missing a date.
+     * @throws MissingTaskDescriptionException If user input is missing a task description.
+     * @throws WrongDescriptorException If user input is using the wrong descriptor.
+     * @throws MissingSpaceBeforeDescriptorException If user input has missing space before descriptor.
+     * @throws MissingSpaceAfterDescriptorException If user input has missing space after descriptor.
      */
     public static String[] parseUserDescriptionInput(String userDescription, Descriptors descriptor,
-                                                      char separator, UserCommands command) throws DukeException {
+                                                      char separator, UserCommands userCommand) throws DukeException {
         // Index of separator in userDescription.
         int separatorIdx = findIndex(userDescription, separator);
 
@@ -211,13 +224,14 @@ public class Parser {
 
         // Check if separator exists. Then check if there could be time input after descriptor.
         if ((separatorIdx == -1) || (userDescription.length() <= indexDescriptorSpace)) {
-            throw new DukeException(Ui.exceptionMissingDescriptor(descriptor, command));
+            throw new MissingDateException();
+            //throw new MissingDescriptorException(descriptor, userCommand);
         }
 
         // Events and duke.task.Deadline could have empty tasks but taken as they do due to their descriptors and time.
         // Need to run another check on whether their task descriptions are empty.
         if (separatorIdx == 0) {
-            throw new DukeException(Ui.exceptionMissingTaskDescription(command.getCommand()));
+            throw new MissingTaskDescriptionException(userCommand);
         }
 
         // Index of first character following space after descriptor.
@@ -231,29 +245,26 @@ public class Parser {
         }
 
         // Check whether the front of separatorIdx is an empty space.
-        boolean isNoSpaceBeforeSeparator = false;
-        if (userDescription.charAt(separatorIdx - 1) != ' ') {
-            isNoSpaceBeforeSeparator = true;
-        }
+        boolean isNoSpaceBeforeSeparator = userDescription.charAt(separatorIdx - 1) != ' ';
 
         // If descriptor wrong and no space before separator, it is likely that user did not provide descriptor.
         if (isDescriptorIncorrect && isNoSpaceBeforeSeparator) {
-            throw new DukeException(Ui.exceptionMissingDescriptor(descriptor, command));
+            throw new MissingDescriptorException(descriptor, userCommand);
         }
 
         // If only descriptor wrong, user gave wrong descriptor.
         if (isDescriptorIncorrect) {
-            throw new DukeException(Ui.exceptionWrongDescriptor(command, descriptor));
+            throw new WrongDescriptorException(descriptor, userCommand);
         }
 
         // If only no space, user did not include space before separator.
         if (isNoSpaceBeforeSeparator) {
-            throw new DukeException(Ui.exceptionMissingSpaceBeforeDescriptor(descriptor));
+            throw new MissingSpaceBeforeDescriptorException(descriptor);
         }
 
         // Check whether the back of descriptor is followed by a space.
         if (userDescription.charAt(indexAfterDescriptorSpace - 1) != ' ') {
-            throw new DukeException(Ui.exceptionMissingSpaceAfterDescriptor(descriptor));
+            throw new MissingSpaceAfterDescriptorException(descriptor);
         }
 
         // User's time input.

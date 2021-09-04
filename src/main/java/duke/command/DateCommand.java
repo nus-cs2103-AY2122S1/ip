@@ -8,6 +8,8 @@ import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
 import duke.Ui.UserCommands;
+import duke.exception.MissingDateException;
+import duke.exception.MissingSpaceAfterCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -34,9 +36,9 @@ public class DateCommand extends Command {
      * @param tasks TaskList to search in.
      * @param ui Ui to get enums, response messages and exception messages from.
      * @return String describing tasks falling on user specified date.
-     * @throws DukeException If user input is missing time input.
-     * @throws DukeException If user input has missing spaces.
-     * @throws DukeException If user input for time is in invalid date format.
+     * @throws MissingDateException If user input is missing time input.
+     * @throws MissingSpaceAfterCommandException If user input has missing spaces.
+     * @throws DukeException If underlying methods or checks fail.
      */
     private String getTaskAtDate(TaskList tasks, Ui ui) throws DukeException {
         // Initialize counters to track number of tasks, events and deadlines.
@@ -48,13 +50,13 @@ public class DateCommand extends Command {
         if (this.userInput.length() <= (UserCommands.DATE.getLength() + 1)) {
             // If nothing is provided, date to search for is not provided.
             // Unlike other commands, a single character following after command without space is an invalid date.
-            throw new DukeException(Ui.exceptionMissingDate());
+            throw new MissingDateException();
         }
 
         // Check for space after date command.
         // This prevents wrong date being read by reminding user to add space.
         if (this.userInput.charAt(UserCommands.DATE.getLength()) != ' ') {
-            throw new DukeException(Ui.exceptionMissingSpaceAfterCommand(UserCommands.DATE.getCommand()));
+            throw new MissingSpaceAfterCommandException(UserCommands.DATE);
         }
 
         // Parses user input into LocalDate. User input for date will follow "date" command.
@@ -71,7 +73,6 @@ public class DateCommand extends Command {
                     counter++;
                     deadlines++;
                     datesBuilder.append(counter).append(".").append(deadline).append("\n");
-                    System.out.println(counter + "." + deadline);
                 }
             }
 

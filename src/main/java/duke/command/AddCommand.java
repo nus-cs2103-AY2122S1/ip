@@ -2,13 +2,16 @@ package duke.command;
 
 import java.time.LocalDate;
 
-import duke.exception.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
-import duke.Ui.UserCommands;
 import duke.Ui.Descriptors;
+import duke.Ui.UserCommands;
+import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeFormatException;
+import duke.exception.InvalidUserCommandException;
+import duke.exception.MissingTaskDescriptionException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Todo;
@@ -41,37 +44,35 @@ public class AddCommand extends Command {
      * @param ui Ui to get enums, response messages and exception messages from.
      * @param separator char separator used to separate task description and time in Event and Deadline.
      * @return String describing task added and new total count of tasks.
-     * @throws DukeException If user command is invalid.
-     * @throws DukeException If user input does not provide task description.
-     * @throws DukeException If user input has missing spaces.
-     * @throws DukeException If user input for time is in invalid date format.
-     * @throws DukeException If user input does not contain descriptors by or at for Deadline and Event respectively.
-     * @throws DukeException If user input is missing time input for Deadline and Event.
+     * @throws MissingTaskDescriptionException If description is missing for task to be added.
+     * @throws DukeException If underlying methods or checks fail.
      */
     private String addTask(TaskList tasks, Ui ui, char separator) throws DukeException {
         // Checks for command given in user input.
-        String userCommand;
+        UserCommands userCommand;
         if (this.userInput.startsWith(UserCommands.TODO.getCommand())) {
-            userCommand = UserCommands.TODO.getCommand();
+            userCommand = UserCommands.TODO;
         } else if (this.userInput.startsWith(UserCommands.DEADLINE.getCommand())) {
-            userCommand = UserCommands.DEADLINE.getCommand();
+            userCommand = UserCommands.DEADLINE;
         } else if (this.userInput.startsWith(UserCommands.EVENT.getCommand())) {
-            userCommand = UserCommands.EVENT.getCommand();
+            userCommand = UserCommands.EVENT;
         } else {
-            throw new DukeException(Ui.exceptionInvalidUserCommand());
+            throw new InvalidUserCommandException(this.userInput);
         }
 
         // Preliminary check for any input following command.
         Parser.checkInputValidity(this.userInput, userCommand,
-                Ui.exceptionMissingTaskDescription(userCommand));
+                new MissingTaskDescriptionException(userCommand));
+
+        String userCommandString = userCommand.getCommand();
 
         // Extracts task description.
-        String description = this.userInput.substring(userCommand.length() + 1);
+        String description = this.userInput.substring(userCommandString.length() + 1);
 
         // Parses description and adds the corresponding task to tasks.
-        if (userCommand.equals(UserCommands.TODO.getCommand())) {
+        if (userCommandString.equals(UserCommands.TODO.getCommand())) {
             tasks.add(new Todo(description));
-        } else if (userCommand.equals(UserCommands.DEADLINE.getCommand())) {
+        } else if (userCommandString.equals(UserCommands.DEADLINE.getCommand())) {
             // Parses description into task description and time.
             String[] descriptions =
                     Parser.parseUserDescriptionInput(description, Descriptors.BY, separator, UserCommands.DEADLINE);

@@ -1,11 +1,13 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
 import duke.Ui.UserCommands;
+import duke.exception.DukeException;
+import duke.exception.InvalidIndexException;
+import duke.exception.MissingIndexException;
 
 /**
  * Represents a command that can be executed to mark a task as done, print the marked task,
@@ -33,15 +35,14 @@ public class MarkCommand extends Command {
      * @param tasks TaskList to mark a task in.
      * @param ui Ui to get enums, response messages and exception messages from.
      * @return String describing the marked task.
-     * @throws DukeException If user input is missing an index.
-     * @throws DukeException If user input for index is not an integer.
-     * @throws DukeException If user input for index is invalid.
+     * @throws MissingIndexException If user input is missing an index.
+     * @throws DukeException If underlying methods or checks fail.
      */
     private String markTask(TaskList tasks, Ui ui) throws DukeException {
 
         // Preliminary check for any input following command.
-        Parser.checkInputValidity(this.userInput, UserCommands.DONE.getCommand(),
-                Ui.exceptionMissingIndexForMarking());
+        Parser.checkInputValidity(this.userInput, UserCommands.DONE,
+                new MissingIndexException(UserCommands.DONE));
 
         // Parses integer in user input.
         int userNumInput = Parser.parseUserNumInput(this.userInput, UserCommands.DONE);
@@ -51,7 +52,7 @@ public class MarkCommand extends Command {
 
         // Checks for invalid index.
         if (idx >= tasks.size() || idx < 0) {
-            throw new DukeException(Ui.exceptionInvalidIndexForMarking());
+            throw new InvalidIndexException(UserCommands.DONE);
         }
 
         tasks.get(idx).markAsDone();

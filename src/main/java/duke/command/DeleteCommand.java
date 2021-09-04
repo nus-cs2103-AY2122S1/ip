@@ -1,11 +1,13 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
 import duke.Ui.UserCommands;
+import duke.exception.DukeException;
+import duke.exception.InvalidIndexException;
+import duke.exception.MissingIndexException;
 import duke.task.Task;
 
 /**
@@ -34,15 +36,14 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList to delete task from.
      * @param ui Ui to get enums, response messages and exception messages from.
      * @return String describing the task deleted and new total count of tasks.
-     * @throws DukeException If user input is missing an index.
-     * @throws DukeException If user input for index is not an integer.
-     * @throws DukeException If user input for index is invalid.
+     * @throws MissingIndexException If user input is missing an index.
+     * @throws DukeException If underlying methods or checks fail.
      */
     private String deleteTask(TaskList tasks, Ui ui) throws DukeException {
 
         // Preliminary check for any input following command.
-        Parser.checkInputValidity(this.userInput, UserCommands.DELETE.getCommand(),
-                Ui.exceptionMissingIndexForDelete());
+        Parser.checkInputValidity(this.userInput, UserCommands.DELETE,
+                new MissingIndexException(UserCommands.DELETE));
 
         // Parses integer in user input. 1 space is accounted for as it separates command and index.
         int userNumInput = Parser.parseUserNumInput(this.userInput, UserCommands.DELETE);
@@ -52,7 +53,7 @@ public class DeleteCommand extends Command {
 
         // Checks for invalid index.
         if (idx >= tasks.size() || idx < 0) {
-            throw new DukeException(Ui.exceptionInvalidIndexForDelete());
+            throw new InvalidIndexException(UserCommands.DELETE);
         }
 
         Task deletedTask = tasks.remove(idx);

@@ -6,6 +6,7 @@ import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
 import duke.Ui.UserCommands;
+import duke.exception.MissingSearchInputException;
 import duke.task.Task;
 
 /**
@@ -32,12 +33,11 @@ public class FindCommand extends Command {
      * @param tasks TaskList to perform search on.
      * @param ui Ui to get enums, response messages and exception messages from.
      * @return String describing found tasks that contain the search keyword.
-     * @throws DukeException If user input has missing spaces.
-     * @throws DukeException If user input has no search keyword.
+     * @throws DukeException If underlying methods or checks fail.
      */
     private String getTaskMatchingSearch(TaskList tasks, Ui ui) throws DukeException {
         // Preliminary check for validity of user input.
-        Parser.checkInputValidity(this.userInput, UserCommands.FIND.getCommand(), Ui.exceptionMissingSearchInput());
+        Parser.checkInputValidity(this.userInput, UserCommands.FIND, new MissingSearchInputException());
 
         // Initalize counter to track number of matching tasks.
         int counter = 0;
