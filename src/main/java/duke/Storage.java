@@ -43,23 +43,21 @@ public class Storage {
                 String description = splitLine[2];
 
                 // Store data from file into tasks arraylist
-                Task t;
+                Task t = null;
                 switch (taskType) {
                 case "T":
                     t = new Todo(description, isDone);
-                    tasks.add(t);
                     break;
                 case "D":
                     t = new Deadline(description, isDone, splitLine[3]);
-                    tasks.add(t);
                     break;
                 case "E":
                     t = new Event(description, isDone, splitLine[3]);
-                    tasks.add(t);
                     break;
                 default:
                     break;
                 }
+                tasks.add(t);
             }
 
             return tasks;
