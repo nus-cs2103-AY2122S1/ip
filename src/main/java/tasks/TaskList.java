@@ -25,11 +25,10 @@ public class TaskList {
      * @return The message telling the user that the task has been added.
      */
     public String addTask(Task task) {
-        String message;
         this.tasks.add(task);
         this.numOfUncompletedTasks++;
         totalNumOfTasks++;
-        message = "Got it! This task has been added:\n" + task + "\n" + this.getTaskListStatus();
+        String message = "Got it! This task has been added:\n" + task + "\n" + this.getTaskListStatus();
         this.saveTaskList();
         return message;
     }
@@ -57,10 +56,8 @@ public class TaskList {
      * @return The message that should be shown to the user after removing a task.
      */
     public String removeTask(int index) {
-        String message;
         if (index > this.tasks.size() || index <= 0) {
-            message = "A task could not be removed because it does not exist.\n";
-            return message;
+            return "A task could not be removed because it does not exist.\n";
         }
         Task task = this.tasks.get(index - 1);
         this.tasks.remove(index - 1);
@@ -68,7 +65,7 @@ public class TaskList {
             numOfUncompletedTasks--;
         }
         totalNumOfTasks--;
-        message = "Understood. I've removed this task:\n" + task + "\n";
+        String message = "Understood. I've removed this task:\n" + task + "\n";
         this.saveTaskList();
         return message;
     }
@@ -87,10 +84,9 @@ public class TaskList {
         if (this.tasks.get(index - 1).isDone()) {
             return "This task at index " + index + " has already been completed.\n";
         }
-        String message;
         this.tasks.get(index - 1).markAsDone();
         this.numOfUncompletedTasks--;
-        message = "congratulations! This task has been completed:\n"
+        String message = "congratulations! This task has been completed:\n"
                 + this.tasks.get(index - 1) + "\n";
         this.saveTaskList();
         return message;

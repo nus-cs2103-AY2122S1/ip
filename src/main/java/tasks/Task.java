@@ -1,6 +1,7 @@
 package tasks;
 
 import duke.DukeDate;
+import exceptions.DukeInvalidStorageTaskException;
 
 /**
  * A class that abstracts a task.
@@ -60,14 +61,19 @@ public abstract class Task {
      *
      * @return The required string representation.
      */
-    public String eventTypeToString() {
+    public String taskTypeToString() {
+        assert this.type != null : "Error while reading a task";
         if (this.type.equals(Type.TODO)) {
             return "[T]";
         } else if (this.type.equals(Type.EVENT)) {
             return "[E]";
-        } else {
+        } else if (this.type.equals(Type.DEADLINE)){
             // Deadline event
             return "[D]";
+        } else {
+            // Should not occur since we have checked that the task type is not null and there are only 3
+            // possible types of task which we handled above. Hence, a runtime exception is thrown here.
+            throw new RuntimeException("A task has no type.");
         }
     }
 
@@ -79,21 +85,28 @@ public abstract class Task {
      * @param saveString The String that represents the saved task.
      * @return The task converted from saveString.
      */
-    public static Task storageStringToTask(String saveString) {
+    public static Task storageStringToTask(String saveString) throws DukeInvalidStorageTaskException {
         String[] strComponents = saveString.split("\\|");
         String typeOfTask = strComponents[0].strip();
         boolean isDone = strComponents[1].strip().equals("1");
         int dukeDateType = Integer.parseInt(strComponents[2].strip());
         String taskName = strComponents[3].strip();
+
         Task loadedTask;
-        if (typeOfTask.equals("T")) {
+        switch (typeOfTask) {
+        case "T":
             loadedTask = Todo.newTodoTask(taskName);
-        } else if (typeOfTask.equals("D")) {
-            loadedTask = new Deadline(taskName, DukeDate.getDukeDateFromType(strComponents[4].strip(), dukeDateType));
-        } else {
-            // Event task
-            loadedTask = new Event(taskName, DukeDate.getDukeDateFromType(strComponents[4].strip(), dukeDateType));
+            break;
+        case "D":
+            loadedTask = new Deadline(taskName, DukeDate.getDukeDateFromStorage(strComponents[4].strip(), dukeDateType));
+            break;
+        case "E":
+            loadedTask = new Event(taskName, DukeDate.getDukeDateFromStorage(strComponents[4].strip(), dukeDateType));
+            break;
+        default:
+            throw new DukeInvalidStorageTaskException();
         }
+
         loadedTask.isDone = isDone;
         return loadedTask;
     }
@@ -106,9 +119,9 @@ public abstract class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return eventTypeToString() + "[X] " + this.taskDescription();
+            return taskTypeToString() + "[X] " + this.taskDescription();
         }
-        return eventTypeToString() + "[] " + this.taskDescription();
+        return taskTypeToString() + "[] " + this.taskDescription();
     }
 
     public String getTaskName() {
