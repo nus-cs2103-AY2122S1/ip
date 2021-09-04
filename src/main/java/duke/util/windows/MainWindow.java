@@ -70,6 +70,7 @@ public class MainWindow extends AnchorPane {
      * @param d The duke to be used.
      */
     public void setDuke(Duke d) {
+        assert d != null : "Duke that is set is null";
         duke = d;
         duke.setOut(listOfTasks);
         duke.printList();

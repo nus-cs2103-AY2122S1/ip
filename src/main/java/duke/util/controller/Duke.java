@@ -148,14 +148,13 @@ public class Duke {
     /**
      * Method to print the input string into the Text box text
      *
-     * @param text The Text to show at
-     * @param val The value to print in the text.
+     * @param out The Text to show at
+     * @param input The value to print in the text.
      */
-    public void printToText(Text text, String val) {
-        if (text == null) {
-            return;
-        }
-        text.setText(val);
+    public void printToText(Text out, String input) {
+        assert out != null : "Text output is null";
+        assert input != null : "String input is null";
+        out.setText(input);
 
     }
 
@@ -166,6 +165,7 @@ public class Duke {
      *
      */
     public void removeHandler(ObservableList<Task> itemsToRemove) {
+        assert itemsToRemove != null : "The items to remove is null";
         for (int i = 0; i < itemsToRemove.size(); i++) {
             this.tasks.remove(itemsToRemove.get(i));
         }
