@@ -1,23 +1,16 @@
 package duke.io;
 
-import duke.type.DukeCommand;
 import duke.exception.DukeFileSystemException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.type.DukeCommand;
 
 /**
  * A class that handles anything related to the parsing of information for Duke.
  */
 public class DukeParser {
-    /**
-     * Constructs a new instance of the DukeParser. No arguments are expected.
-     */
-    public DukeParser() {
-
-    }
-
     /**
      * Provides a task based on data read from line.
      *
