@@ -116,7 +116,8 @@ public class TaskList {
                 filteredList.addTask(task);
             }
         }
-        return String.format("I've filtered tasks containing '%s'.\n", keyword) + filteredList.toString();
+        return String.format("I've filtered tasks containing '%s'.\n", keyword)
+                + filteredList.toString();
     }
 
     /**

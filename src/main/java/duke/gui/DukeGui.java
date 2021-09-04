@@ -23,7 +23,7 @@ public abstract class DukeGui extends Application {
     protected Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     /**
-     * Creates the Duke GUI from a stage
+     * Creates the Duke GUI from a stage.
      * @param stage The stage on which to render the scene
      */
     protected void setUpGui(Stage stage) {
@@ -82,7 +82,7 @@ public abstract class DukeGui extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 }
