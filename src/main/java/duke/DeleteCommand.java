@@ -34,6 +34,7 @@ public class DeleteCommand extends Command {
 
         // Delete task from list of tasks, and persist to text file
         Task t = tasks.delete(index);
+        assert !t.equals(null);
         storage.save(tasks);
 
         // Return a description of the execution result
