@@ -13,34 +13,18 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
 
-    private Label text;
-    private ImageView displayPicture;
-
     /**
      * Public constructor for dialog box.
      * @param l label to display.
      * @param iv picture to display.
      */
     public DialogBox(Label l, ImageView iv) {
-        text = l;
-        displayPicture = iv;
-
-        text.setWrapText(true);
-        displayPicture.setFitWidth(100.0);
-        displayPicture.setFitHeight(100.0);
+        l.setWrapText(true);
+        iv.setFitWidth(100.0);
+        iv.setFitHeight(100.0);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, displayPicture);
-    }
-
-    /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
-     */
-    private void flip() {
-        this.setAlignment(Pos.TOP_LEFT);
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        this.getChildren().addAll(l, iv);
     }
 
     /**
@@ -52,6 +36,16 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(Label l, ImageView iv) {
         return new DialogBox(l, iv);
+    }
+
+    /**
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     */
+    private void flip() {
+        this.setAlignment(Pos.TOP_LEFT);
+        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        FXCollections.reverse(tmp);
+        this.getChildren().setAll(tmp);
     }
 
     /**
