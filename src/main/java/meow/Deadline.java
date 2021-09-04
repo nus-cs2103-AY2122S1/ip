@@ -23,6 +23,8 @@ public class Deadline extends Task {
 
     /**
      * Returns the string representation of the meow.Deadline object.
+     *
+     * @return The string representation of the meow.Deadline object.
      */
     @Override
     public String toString() {

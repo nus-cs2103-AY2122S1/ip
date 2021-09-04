@@ -15,6 +15,8 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of the meow.Todo object.
+     *
+     * @return The string representation of the meow.Todo object.
      */
     @Override
     public String toString() {

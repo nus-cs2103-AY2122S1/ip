@@ -58,12 +58,11 @@ public class Parser {
      * @return A boolean indicating whether the user input is valid date and valid time.
      */
     public boolean isLocalDateTime(String inputDate, String inputTime) {
-        System.out.println("input date: " + inputDate);
         String validator = "[0-9]{1,2}(/|-)[0-9]{1,2}(/|-)[0-9]{4}";
-        boolean dateValidated = inputDate.matches(validator);
+        boolean isValidDate = inputDate.matches(validator);
         int time = Integer.parseInt(inputTime);
-        boolean timeValidated = time >= 0 && time <= 2359;
-        return dateValidated && timeValidated;
+        boolean isValidTime = time >= 0 && time <= 2359;
+        return isValidDate && isValidTime;
     }
 
     /**

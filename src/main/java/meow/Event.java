@@ -18,6 +18,8 @@ public class Event extends Task {
 
     /**
      * Returns the string representation of the meow.Event object.
+     *
+     * @return The string representation of the meow.Event object.
      */
     @Override
     public String toString() {

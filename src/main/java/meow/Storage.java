@@ -59,6 +59,8 @@ public class Storage {
     }
 
     private void load(String input) {
+        final String COMPLETED = "1";
+
         String[] values = input.split(" \\| ");
         String typeOfTask = values[0].trim();
         assert(typeOfTask != null);
@@ -66,51 +68,50 @@ public class Storage {
         assert(completeStatus != null);
         String task = values[2].trim();
         assert(task != null);
-        
         switch (typeOfTask) {
-        case "T": {
+        case "T":
             Todo newTodo = new Todo(task);
-            if (completeStatus.equals("1")) {
+            if (completeStatus.equals(COMPLETED)) {
                 newTodo.markAsDone();
             }
             this.tasksList.add(newTodo);
             break;
-        }
-        case "D": {
+        case "D":
             String dateAndTime = values[3].trim();
             String[] dateTimeArray = dateAndTime.split(" ");
-            String date = "";
-            for (int i = 0; i < dateTimeArray.length - 1; i++) {
-                if (i == 1 && Integer.parseInt(dateTimeArray[i]) < 10) {
-                    date = date + "0" + dateTimeArray[i] + " ";
-                } else if (i == 2) {
-                    date = date + dateTimeArray[i];
-                } else {
-                    date = date + dateTimeArray[i] + " ";
-                }
-            }
-            LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("MMM d yyyy"));
+            LocalDate localDate = convertToLocalDate(dateTimeArray);
             Deadline newDeadline = new Deadline(task, localDate, dateTimeArray[3]);
-            if (completeStatus.equals("1")) {
+            if (completeStatus.equals(COMPLETED)) {
                 newDeadline.markAsDone();
             }
             this.tasksList.add(newDeadline);
-
             break;
-        }
-        case "E": {
-            String date = values[3].trim();
-            Event newEvent = new Event(task, date);
-            if (completeStatus.equals("1")) {
+        case "E":
+            String eventDate = values[3].trim();
+            Event newEvent = new Event(task, eventDate);
+            if (completeStatus.equals(COMPLETED)) {
                 newEvent.markAsDone();
             }
             this.tasksList.add(newEvent);
             break;
-        }
-        default: {
+        default:
             break;
         }
+    }
+
+    private LocalDate convertToLocalDate(String[] dateTimeArray) {
+        String deadlineDate = "";
+        for (int i = 0; i < dateTimeArray.length - 1; i++) {
+            if (i == 1 && Integer.parseInt(dateTimeArray[i]) < 10) {
+                deadlineDate = deadlineDate + "0" + dateTimeArray[i] + " ";
+            } else if (i == 2) {
+                deadlineDate = deadlineDate + dateTimeArray[i];
+            } else {
+                deadlineDate = deadlineDate + dateTimeArray[i] + " ";
+            }
         }
+        LocalDate localDate = LocalDate.parse(deadlineDate, DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return localDate;
     }
 
     /**
