@@ -8,6 +8,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import duke.task.Task;
+
 
 /**
  * A class that communicates and delivers the data between the running programme and database.
@@ -35,7 +39,7 @@ public class Storage {
      */
     public ArrayList<duke.task.Task> load() throws DukeException {
         try {
-            ArrayList<duke.task.Task> result = new ArrayList<>();
+            ArrayList<String> tasks = new ArrayList<>();
             Path folderPath = Paths.get(filePath.toString(), "..");
             if (!Files.exists(folderPath)) {
                 Files.createDirectories(folderPath);
@@ -46,42 +50,11 @@ public class Storage {
             File fileHolder = new File(filePath.toString());
             Scanner s = new Scanner(fileHolder);
             while (s.hasNext()) {
-                String holder = s.nextLine();
-                String[] content = holder.split(" \\| ");
-
-
-                switch (content[0]) {
-                case "T":
-                    duke.task.Todo todo = new duke.task.Todo("todo ", content[2].trim());
-                    if (content[1].equals("1")) {
-                        todo.doneTask();
-                    }
-                    result.add(todo);
-                    break;
-
-                case "D":
-                    duke.task.Deadline deadline = new duke.task.Deadline("deadline ",
-                            content[2].trim(), "/", content[3].trim());
-                    if (content[1].equals("1")) {
-                        deadline.doneTask();
-                    }
-                    result.add(deadline);
-                    break;
-
-                case "E":
-                    duke.task.Event event = new duke.task.Event(
-                            "event ", content[2].trim(), "/", content[3].trim());
-                    if (content[1].equals("1")) {
-                        event.doneTask();
-                    }
-                    result.add(event);
-                    break;
-
-                default:
-                }
+                tasks.add(s.nextLine());
             }
             s.close();
-            return result;
+
+            return parseTaskList(tasks);
         } catch (IOException e) {
             throw new DukeException("D: OH NOOOOO! I cannot locate the file!!" + e.getMessage());
         }
@@ -109,6 +82,51 @@ public class Storage {
             tempFile.delete();
         } catch (IOException e) {
             throw new DukeException("D: OH NOOOOO! Something wrong with the file!!" + e.getMessage());
+        }
+    }
+
+    private ArrayList<duke.task.Task> parseTaskList(ArrayList<String> rawDatas) {
+        ArrayList<duke.task.Task> result = rawDatas.stream().map(rawData -> {
+            Task holder = null;
+            try {
+                holder = parseTask(rawData);
+            } catch (DukeException e) {
+                e.printStackTrace();
+            }
+            return holder;
+        })
+                .collect(Collectors.toCollection(ArrayList::new));
+        return result;
+    }
+
+    private duke.task.Task parseTask(String rawData) throws DukeException {
+        String[] content = rawData.split(" \\| ");
+
+        switch (content[0]) {
+        case "T":
+            duke.task.Todo todo = new duke.task.Todo("todo ", content[2].trim());
+            if (content[1].equals("1")) {
+                todo.doneTask();
+            }
+            return todo;
+
+        case "D":
+            duke.task.Deadline deadline = new duke.task.Deadline("deadline ",
+                    content[2].trim(), "/", content[3].trim());
+            if (content[1].equals("1")) {
+                deadline.doneTask();
+            }
+            return deadline;
+
+        case "E":
+            duke.task.Event event = new duke.task.Event("event ", content[2].trim(), "/", content[3].trim());
+            if (content[1].equals("1")) {
+                event.doneTask();
+            }
+            return event;
+
+        default:
+            throw new DukeException("D: OH NO! Something wrong in parsing from database!");
         }
     }
 }

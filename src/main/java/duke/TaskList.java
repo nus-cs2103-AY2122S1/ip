@@ -65,6 +65,7 @@ public class TaskList {
      * @return A String representation of the ArrayList after being filtered by a LocalDate Object.
      */
     public String listSchedule(LocalDate dateFilter) {
+        // stream here
         ArrayList<Task> filteredTaskList = taskList.stream()
                 .filter(ele -> ele.hasSchedule()
                         && ele.getTime().equals(dateFilter.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))))
@@ -85,6 +86,7 @@ public class TaskList {
      * @return A String representation of the ArrayList after being filtered by a String.
      */
     public String listFind(String searchFilter) {
+        // stream here
         ArrayList<Task> filteredTaskList = this.taskList.stream()
                 .filter(ele -> ele.getContent().contains(searchFilter))
                 .collect(Collectors.toCollection(ArrayList::new));
