@@ -56,18 +56,6 @@ public class Ui {
     }
 
     /**
-     * Returns information regarding a task.
-     *
-     * @param task Task to get information from.
-     * @return Information about task.
-     */
-    public String showTask(Task task) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(task + "\n");
-        return stringBuilder.toString();
-    }
-
-    /**
      * Returns all tasks with specified keyword.
      *
      * @param foundTasks List of tasks containing keyword.
@@ -80,18 +68,6 @@ public class Ui {
         for (int i = 0; i < foundTasks.getSize(); i++) {
             stringBuilder.append(foundTasks.getTask(i) + "\n");
         }
-        return stringBuilder.toString();
-    }
-
-    /**
-     * Returns information on deleted task.
-     *
-     * @param task Deleted task.
-     * @return Information on deleted task.
-     */
-    public String showDeletedTask(Task task) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("I have removed the task:\n" + task + "\n");
         return stringBuilder.toString();
     }
 
@@ -129,19 +105,6 @@ public class Ui {
     public String showAddedTask(Task task) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("I have added this task for you:\n" + task + "\n");
-        return stringBuilder.toString();
-    }
-
-    /**
-     * Returns information on completed task.
-     *
-     * @param task Completed task.
-     * @return Information on completed task.
-     */
-    public String showCompletedTask(Task task) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("You have completed the " + task.getClass().getSimpleName().toLowerCase() + ":\n"
-                + task.getName() + "\n");
         return stringBuilder.toString();
     }
 
