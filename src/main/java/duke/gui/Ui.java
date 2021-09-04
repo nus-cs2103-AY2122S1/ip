@@ -9,6 +9,7 @@ public class Ui {
         WELCOME_MSG("Hello! I am Stoner!\nWhat can I do for you?"),
         EXIT_MSG("Good Bye. Don't have a good day... Have a great day!!!"),
         DISPLAY_LIST_MSG("There are the tasks you have:"),
+        EMPTY_LIST_MSG("There is current no task in your list!"),
         TASK_DONE_MSG("Well done! You have completed: \n"),
         TASK_ADDED_MSG("Got it. I've added this task: \n"),
         TASK_DELETED_MSG("Got it. I've deleted this task: \n"),
@@ -43,6 +44,10 @@ public class Ui {
      * @return A String representing the contents in the list.
      */
     public static String displayList(TaskList taskList) {
+        if (taskList.getTaskCount() == 0) {
+            return Message.EMPTY_LIST_MSG.msg;
+        }
+
         StringBuilder content = new StringBuilder(Message.DISPLAY_LIST_MSG.msg);
 
         for (int i = 0; i < taskList.getTaskCount(); i++) {
