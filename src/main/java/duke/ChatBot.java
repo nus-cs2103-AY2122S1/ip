@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.util.Status;
 
 /**
  * ChatBot is a class that encapsulates what a chat bot has.
@@ -19,7 +20,8 @@ public class ChatBot {
     private Storage s;
     private UI ui;
 
-    private int exitStatus = 1;
+//    private int exitStatus = 1;
+    private Status exitStatus = Status.START;
 
     /**
      * This is the constructor of ChatBot that initializes the UI and Storage.
@@ -45,7 +47,7 @@ public class ChatBot {
      * Returns the exit message.
      */
     public String handleExit() {
-        exitStatus = 0;
+        exitStatus = Status.STOP;
         return ui.showExitMessage();
     }
 
@@ -166,7 +168,7 @@ public class ChatBot {
      *
      * @return 0 to exit, 1 to continue.
      */
-    public int getExitStatus() {
+    public Status getExitStatus() {
         return exitStatus;
     }
 

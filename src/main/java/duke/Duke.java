@@ -2,6 +2,7 @@ package duke;
 
 import duke.exception.DukeException;
 
+import duke.util.Status;
 import javafx.application.Platform;
 
 /**
@@ -50,7 +51,7 @@ public class Duke {
      *
      * @return Int that corresponds to the exit status.
      */
-    public int getExitStatus() {
+    public Status getExitStatus() {
         return bot.getExitStatus();
     }
 
@@ -60,8 +61,7 @@ public class Duke {
      *
      */
     public void exit() {
-        //todo change this magic number 0 into a final variable (EXIT or sth)
-        if (getExitStatus() == 0) {
+        if (getExitStatus() == Status.STOP)  {
             new Thread() { //inspiration from Lim PeiYuan
                 @Override
                 public void run() {
