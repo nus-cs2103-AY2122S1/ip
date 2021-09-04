@@ -6,6 +6,7 @@ import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
+import duke.commands.DoAfterCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
 import duke.commands.FindCommand;
@@ -84,6 +85,9 @@ public class Ui {
                     break;
                 case "todo":
                     c = new ToDoCommand();
+                    break;
+                case "doafter":
+                    c = new DoAfterCommand();
                     break;
                 case "find":
                     c = new FindCommand();

@@ -25,6 +25,7 @@ public class DoneCommand extends Command {
      * @return String representation of DoneCommand.
      * @throws DukeException If input for Delete command is not properly formatted.
      */
+    @Override
     public String execute(String des, TaskList tList) throws DukeException {
         checkValidDes(des);
         ArrayList<Task> tasks = tList.getTaskList();
