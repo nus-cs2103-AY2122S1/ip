@@ -36,6 +36,11 @@ public class Deadline extends Task {
         return super.toData() + "~S~" + by;
     }
 
+    /**
+     * Converts task data into string form to be displayed in the GUI.
+     *
+     * @return String format of data to be displayed in GUI.
+     */
     @Override
     public String toString() {
         String byFormatted = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

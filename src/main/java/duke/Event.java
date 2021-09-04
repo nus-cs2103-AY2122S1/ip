@@ -26,6 +26,11 @@ public class Event extends Task {
         return super.toData() + "~S~" + at;
     }
 
+    /**
+     * Converts task data into string form to be displayed in the GUI.
+     *
+     * @return String format of data to be displayed in GUI.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
