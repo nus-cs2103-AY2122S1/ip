@@ -2,6 +2,8 @@ package duke;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.NoSuchElementException;
@@ -25,6 +27,8 @@ import javafx.application.Application;
  */
 public class Duke {
 
+    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HHmm");
     private final Storage storage;
     private TaskList taskList;
     private final Ui ui;
@@ -74,10 +78,11 @@ public class Duke {
                 contents += type + ' ' + done + ' ' + details;
             } else if (taskClass == Deadline.class) {
                 contents += type + ' ' + done + ' ' + details + ' '
-                        + ((Deadline) task).getDeadlineAsStr();
+                        + ((Deadline) task).getDeadline().format(DATE_TIME_FORMATTER);
             } else if (taskClass == Event.class) {
                 contents += type + ' ' + done + ' ' + details + ' '
-                        + ((Event) task).getTimingAsStr();
+                        + ((Event) task).getTiming().format(DATE_TIME_FORMATTER) + '-'
+                        + ((Event) task).getEndTime().format(TIME_FORMATTER);
             }
             contents += System.lineSeparator();
         }
@@ -126,12 +131,26 @@ public class Duke {
                 return new Pair<>(ui.addTaskMsg(todo),
                         getTasks());
             case "deadline":
-                Deadline deadline = new Deadline((String) input.get("details"), (String) input.get("deadline"));
+                Deadline deadline;
+                try {
+                    deadline = new Deadline((String) input.get("details"), (String) input.get("deadline"));
+                } catch (DateTimeParseException e) {
+                    return new Pair<>(ui.invalidDateTimeFormat(
+                            "Date and Time should be in the format: yyyy-mm-dd (24hr time)."),
+                            getTasks());
+                }
                 taskList.addTask(deadline);
                 return new Pair<>(ui.addTaskMsg(deadline),
                         getTasks());
             case "event":
-                Event event = new Event((String) input.get("details"), (String) input.get("timing"));
+                Event event;
+                try {
+                    event = new Event((String) input.get("details"), (String) input.get("timing"));
+                } catch (DateTimeParseException e) {
+                    return new Pair<>(ui.invalidDateTimeFormat(
+                            "Date and Time should be in the format: yyyy-mm-dd (24hr time)-(24hr time)."),
+                            getTasks());
+                }
                 taskList.addTask(event);
                 return new Pair<>(ui.addTaskMsg(event),
                         getTasks());
@@ -143,6 +162,11 @@ public class Duke {
                 String keyword = (String) input.get("keyword");
                 return new Pair<>(this.ui.matchingKeyword(keyword),
                         getTasks(keyword));
+            case "sort":
+                boolean reverse = (Boolean) input.get("reverse");
+                taskList.sort(reverse);
+                return new Pair<>(this.ui.sortMessage(reverse),
+                        getTasks());
             default:
                 throw new InvalidInstructionException((String) input.get("cmd"));
             }
