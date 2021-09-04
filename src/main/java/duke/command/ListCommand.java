@@ -23,9 +23,4 @@ public class ListCommand extends Command {
             return ui.showTasks(tasks);
         }
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

@@ -35,9 +35,4 @@ public class DoneCommand extends Command{
             return "Task marked as done!";
         }
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

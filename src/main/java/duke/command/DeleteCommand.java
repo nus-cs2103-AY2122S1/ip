@@ -35,9 +35,4 @@ public class DeleteCommand extends Command {
             return "Task deleted!";
         }
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }
