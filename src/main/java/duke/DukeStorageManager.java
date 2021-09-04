@@ -69,7 +69,7 @@ public class DukeStorageManager {
             // and when it happens, a new save file will be created instead.
 
             // According to this website:
-            // https://stackoverflow.com/questions/1575925/disable-logging-in-java-xerces-fatal-error-11-content-is-not-allowed-in-p
+            // https://stackoverflow.com/questions/1575925/
             // the fatal error is automatically logged into the console even if the exception is caught.
             // It also says that the next line below is the only way to stop the unwanted line from being printed.
             documentBuilder.setErrorHandler(null);

@@ -20,7 +20,8 @@ public class DeadlineTask extends BaseTask {
      * Used for creating a new Deadline Task.
      *
      * @param taskName the name or description of the task.
-     * @param byWhen describes when the task should be completed by. (In the format: D/M/YY, DD/MM/YYYY or DD Month YYYY)
+     * @param byWhen describes when the task should be completed by.
+     *               (In the format: D/M/YY, DD/MM/YYYY or DD Month YYYY)
      * @throws DukeExceptionBase when the byWhen field is not given in an acceptable format.
      */
     public DeadlineTask(String taskName, String byWhen) throws DukeExceptionBase {
@@ -48,7 +49,8 @@ public class DeadlineTask extends BaseTask {
      */
     private void parseByWhenInput(String byWhen) throws DukeExceptionBase {
         if (byWhen.length() <= 5) {
-            throw new DukeExceptionBase("DeadlineTask must contain a Date in 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY' formats.");
+            throw new DukeExceptionBase("DeadlineTask must contain a Date in 'D/M/YY',"
+                    + " 'DD/MM/YYYY' or 'DD Month YYYY' formats.");
         }
         // Check if year is in YY or YYYY form
         String last4Char = byWhen.substring(byWhen.length() - 4);
@@ -77,7 +79,7 @@ public class DeadlineTask extends BaseTask {
                     + "DeadlineTask must contain a Date in 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY' formats");
         }
     }
-    
+
 
     /**
      * Gets the String representation of the by when.
