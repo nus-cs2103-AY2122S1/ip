@@ -47,6 +47,14 @@ public class TaskList {
     }
 
     /**
+     * Checks if tasklist is empty.
+     * @return True if tasklist is empty.
+     */
+    public boolean isEmpty() {
+        return this.getListSize() == 0;
+    }
+
+    /**
      * Checks if a number is within range of the tasklist size.
      *
      * @param n Integer to be checked.

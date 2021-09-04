@@ -20,7 +20,11 @@ public class ShowListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasklist, Storage storage, Ui ui) {
-        this.uiText = ui.formatText("Here's what you have in your list:", tasklist.toString());
+        if (tasklist.isEmpty()) {
+            this.uiText = ui.formatText("Oops, the list is empty! :O");
+        } else {
+            this.uiText = ui.formatText("Here's what you have in your list:", tasklist.toString());
+        }
     }
 
     /** {@inheritDoc} */
