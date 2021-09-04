@@ -40,7 +40,8 @@ public class Event extends TimedTask {
     @Override
     public String toString() {
         try {
-            return "[E]" + super.toString() + " (at: " + Parser.parseLocalDate(super.date) + ")";
+            return "[" + this.getTaskType() + "]"
+                    + super.toString() + " (at: " + Parser.parseLocalDate(super.date) + ")";
         } catch (DukeException dukeException) {
             return dukeException.toString();
         }

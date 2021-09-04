@@ -40,7 +40,8 @@ public class Deadline extends TimedTask {
     @Override
     public String toString() {
         try {
-            return "[D]" + super.toString() + " (by: " + Parser.parseLocalDate(super.date) + ")";
+            return "[" + this.getTaskType() + "]"
+                    + super.toString() + " (by: " + Parser.parseLocalDate(super.date) + ")";
         } catch (DukeException dukeException) {
             return dukeException.toString();
         }

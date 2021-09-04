@@ -15,9 +15,11 @@ import duke.exception.CannotReadFileException;
 import duke.exception.CannotSaveFileException;
 import duke.exception.CorruptSaveFileException;
 import duke.exception.DukeException;
+import duke.exception.InvalidDateTimeFormatException;
 import duke.exception.InvalidLocalDateException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Period;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -28,6 +30,9 @@ public class Storage implements Storable {
 
     /** Tasks saved are separated by SAVE_SEPARATOR */
     private static final String SAVE_SEPARATOR = " ~ ";
+
+    /** Start date and End date in a time period are separated by PERIOD_SEPARATOR */
+    private static final String PERIOD_SEPARATOR = " -> ";
 
     /** Filename of file to be saved to */
     private final String saveFileName;
@@ -58,6 +63,19 @@ public class Storage implements Storable {
     }
 
     /**
+     * Converts start and end dates of Period into "dd/MM/yyyy" string format separated by PERIOD_SEPARATOR
+     * for saving.
+     *
+     * @param startDate StartDate of Period.
+     * @param endDate EndDate of Period.
+     * @return Formatted String suitable for saving.
+     * @throws InvalidLocalDateException If localDate cannot be parsed into save format.
+     */
+    private static String toSavePeriodFormat(LocalDate startDate, LocalDate endDate) throws InvalidLocalDateException {
+        return toSaveDateFormat(startDate) + PERIOD_SEPARATOR + toSaveDateFormat(endDate);
+    }
+
+    /**
      * Converts a Task into a formatted string suitable for saving.
      *
      * @param task Task to be converted.
@@ -77,7 +95,7 @@ public class Storage implements Storable {
         stringBuilder.append(done).append(SAVE_SEPARATOR);
         stringBuilder.append(task.getDescription());
 
-        // duke.task.Deadline tasks have time, so it is obtained and appended via stringBuilder.
+        // Deadline tasks have time, so it is obtained and appended via stringBuilder.
         if (taskType.equals("D")) {
             Deadline deadline = (Deadline) task;
             LocalDate localDate = deadline.getTime();
@@ -85,11 +103,21 @@ public class Storage implements Storable {
             stringBuilder.append(SAVE_SEPARATOR).append(time);
         }
 
-        // duke.task.Event tasks have time, so it is obtained and appended via stringBuilder.
+        // Event tasks have time, so it is obtained and appended via stringBuilder.
         if (taskType.equals("E")) {
             Event event = (Event) task;
             LocalDate localDate = event.getTime();
             String time = toSaveDateFormat(localDate);
+            stringBuilder.append(SAVE_SEPARATOR).append(time);
+        }
+
+        // Period tasks have time period, so it is obtained and appended via stringBuilder.
+        if (taskType.equals("P")) {
+            Period period = (Period) task;
+            LocalDate[] startEndDates = period.getPeriod();
+            LocalDate startDate = startEndDates[0];
+            LocalDate endDate = startEndDates[1];
+            String time = toSavePeriodFormat(startDate, endDate);
             stringBuilder.append(SAVE_SEPARATOR).append(time);
         }
 
@@ -123,12 +151,18 @@ public class Storage implements Storable {
                 task = new Todo(description);
                 break;
             case "D":
-                LocalDate by = Parser.toLocalDate(splitSaveString[3]);
+                LocalDate by = Parser.dateToLocalDate(splitSaveString[3]);
                 task = new Deadline(description, by);
                 break;
             case "E":
-                LocalDate at = Parser.toLocalDate(splitSaveString[3]);
+                LocalDate at = Parser.dateToLocalDate(splitSaveString[3]);
                 task = new Event(description, at);
+                break;
+            case "P":
+                LocalDate[] startEndDates = savedPeriodToLocalDate(splitSaveString[3]);
+                LocalDate startDate = startEndDates[0];
+                LocalDate endDate = startEndDates[1];
+                task = new Period(description, startDate, endDate);
                 break;
             default:
                 throw new CorruptSaveFileException();
@@ -142,6 +176,28 @@ public class Storage implements Storable {
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
             throw new CorruptSaveFileException();
         }
+    }
+
+    /**
+     * Converts saved period string into a 2 element LocalDate array consisting of start date and end date.
+     *
+     * @param savedPeriodString Saved period string.
+     * @return LocalDate array containing 2 elements, start and end date of the time period.
+     * @throws InvalidDateTimeFormatException If saved date strings cannot be converted to LocalDate.
+     * @throws CorruptSaveFileException If saved period String is saved in a wrong format.
+     */
+    private static LocalDate[] savedPeriodToLocalDate(String savedPeriodString) throws DukeException {
+        String[] split = savedPeriodString.split(PERIOD_SEPARATOR);
+
+        // If time period cannot be split into 2 by the PERIOD_SEPARATOR, then save file is corrupted.
+        if (split.length != 2) {
+            throw new CorruptSaveFileException();
+        }
+
+        LocalDate startDate = Parser.dateToLocalDate(split[0]);
+        LocalDate endDate = Parser.dateToLocalDate(split[1]);
+
+        return new LocalDate[]{startDate, endDate};
     }
 
     /**

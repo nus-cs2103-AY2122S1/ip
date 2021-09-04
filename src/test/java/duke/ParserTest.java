@@ -131,7 +131,7 @@ class ParserTest {
     @Test
     void toLocalDate_validDateString_localDate() throws DukeException {
         String dateString = "1/1/2020";
-        assertEquals(TIME, Parser.toLocalDate(dateString));
+        assertEquals(TIME, Parser.dateToLocalDate(dateString));
     }
 
     @Test
@@ -140,11 +140,11 @@ class ParserTest {
         String invalidDateString1 = "100/100";
 
         assertThrows(InvalidDateTimeFormatException.class, () -> {
-            Parser.toLocalDate(invalidDateString);
+            Parser.dateToLocalDate(invalidDateString);
         });
 
         assertThrows(InvalidDateTimeFormatException.class, () -> {
-            Parser.toLocalDate(invalidDateString1);
+            Parser.dateToLocalDate(invalidDateString1);
         });
     }
 

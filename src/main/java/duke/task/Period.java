@@ -2,10 +2,13 @@ package duke.task;
 
 import java.time.LocalDate;
 
+import duke.Parser;
+import duke.exception.DukeException;
+
 /**
  * Represents a task that must be done within a period of time.
  */
-public class PeriodTask extends Task {
+public class Period extends Task {
     protected LocalDate startDate;
     protected LocalDate endDate;
 
@@ -15,7 +18,7 @@ public class PeriodTask extends Task {
      *
      * @param description Description of the task.
      */
-    public PeriodTask(String description, LocalDate startDate, LocalDate endDate) {
+    public Period(String description, LocalDate startDate, LocalDate endDate) {
         super(description);
         this.startDate = startDate;
         this.endDate = endDate;
@@ -36,9 +39,20 @@ public class PeriodTask extends Task {
     }
 
     @Override
+    public String toString() {
+        try {
+            return "[" + this.getTaskType() + "]" + super.toString()
+                    + " (from: " + Parser.parseLocalDate(startDate)
+                    + " to: " + Parser.parseLocalDate(endDate) + ")";
+        } catch (DukeException dukeException) {
+            return dukeException.toString();
+        }
+    }
+
+    @Override
     public boolean equals(Object obj) {
-        if (obj instanceof PeriodTask) {
-            PeriodTask other = (PeriodTask) obj;
+        if (obj instanceof Period) {
+            Period other = (Period) obj;
 
             // Check if done status, description and start & end date are the same.
             boolean isDoneStatusSame = this.isDone == other.isDone;
