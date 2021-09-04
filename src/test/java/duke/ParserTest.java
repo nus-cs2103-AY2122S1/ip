@@ -63,15 +63,15 @@ class ParserTest {
     @Test
     void checkInputValidity_validInputs_noExceptionThrown() throws DukeException {
         String validInput = "done 1";
-        String validInputCommand = Ui.Commands.DONE.getCommand();
+        String validInputCommand = Ui.UserCommands.DONE.getCommand();
         String validInputExceptionMessage = Ui.exceptionMissingIndexForMarking();
 
         String validInput1 = "todo task";
-        String validInput1Command = Ui.Commands.TODO.getCommand();
+        String validInput1Command = Ui.UserCommands.TODO.getCommand();
         String validInput1ExceptionMessage = Ui.exceptionMissingIndexForDelete();
 
         String validInput2 = "event task /at 1/1/2020";
-        String validInput2Command = Ui.Commands.EVENT.getCommand();
+        String validInput2Command = Ui.UserCommands.EVENT.getCommand();
         String validInput2ExceptionMessage = Ui.exceptionMissingTaskDescription(validInput2Command);
 
         Parser.checkInputValidity(validInput, validInputCommand, validInputExceptionMessage);
@@ -82,15 +82,15 @@ class ParserTest {
     @Test
     void checkInputValidity_invalidInputs_dukeExceptionThrown() {
         String invalidInput = "done1";
-        String invalidInputCommand = Ui.Commands.DONE.getCommand();
+        String invalidInputCommand = Ui.UserCommands.DONE.getCommand();
         String invalidInputExceptionMessage = Ui.exceptionMissingSpaceAfterCommand(invalidInputCommand);
 
         String invalidInput1 = "delete ";
-        String invalidInput1Command = Ui.Commands.DELETE.getCommand();
+        String invalidInput1Command = Ui.UserCommands.DELETE.getCommand();
         String invalidInput1ExceptionMessage = Ui.exceptionMissingIndexForDelete();
 
         String invalidInput2 = "done";
-        String invalidInput2Command = Ui.Commands.DONE.getCommand();
+        String invalidInput2Command = Ui.UserCommands.DONE.getCommand();
         String invalidInput2ExceptionMessage = Ui.exceptionMissingIndexForMarking();
 
         DukeException dukeException = assertThrows(DukeException.class, () -> {
@@ -144,7 +144,7 @@ class ParserTest {
     @Test
     void parseUserNumInput_validNumInput_int() throws DukeException {
         String validNumInput = "done 1";
-        Ui.Commands validNumInputCommand = Ui.Commands.DONE;
+        Ui.UserCommands validNumInputCommand = Ui.UserCommands.DONE;
 
         assertEquals(1, Parser.parseUserNumInput(validNumInput, validNumInputCommand));
     }
@@ -152,7 +152,7 @@ class ParserTest {
     @Test
     void parseUserNumInput_invalidNumInput_dukeExceptionThrown() {
         String invalidNumInput = "done abc";
-        Ui.Commands invalidNumInputCommand = Ui.Commands.DONE;
+        Ui.UserCommands invalidNumInputCommand = Ui.UserCommands.DONE;
         String invalidNumInputExceptionMessage = Ui.exceptionInvalidNumberInput(invalidNumInputCommand);
 
         DukeException dukeException = assertThrows(DukeException.class, () -> {
@@ -164,7 +164,7 @@ class ParserTest {
 
     @Test
     void parseUserDescriptionInput_validDescriptionInput_arrayDescriptionTime() throws DukeException {
-        Ui.Commands command = Ui.Commands.EVENT;
+        Ui.UserCommands command = Ui.UserCommands.EVENT;
         Ui.Descriptors descriptor = Ui.Descriptors.AT;
         char separator = '/';
 
@@ -181,7 +181,7 @@ class ParserTest {
 
     @Test
     void parserUserDescriptionInput_invalidDescriptionInput_dukeExceptionThrown() {
-        Ui.Commands command = Ui.Commands.EVENT;
+        Ui.UserCommands command = Ui.UserCommands.EVENT;
         Ui.Descriptors descriptor = Ui.Descriptors.AT;
         char separator = '/';
 

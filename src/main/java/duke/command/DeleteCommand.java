@@ -5,7 +5,7 @@ import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
-import duke.Ui.Commands;
+import duke.Ui.UserCommands;
 import duke.task.Task;
 
 /**
@@ -41,11 +41,11 @@ public class DeleteCommand extends Command {
     private String deleteTask(TaskList tasks, Ui ui) throws DukeException {
 
         // Preliminary check for any input following command.
-        Parser.checkInputValidity(this.userInput, Commands.DELETE.getCommand(),
+        Parser.checkInputValidity(this.userInput, UserCommands.DELETE.getCommand(),
                 Ui.exceptionMissingIndexForDelete());
 
         // Parses integer in user input. 1 space is accounted for as it separates command and index.
-        int userNumInput = Parser.parseUserNumInput(this.userInput, Commands.DELETE);
+        int userNumInput = Parser.parseUserNumInput(this.userInput, UserCommands.DELETE);
 
         // Decrement integer from user input to match indexing of tasks.
         int idx = userNumInput - 1;

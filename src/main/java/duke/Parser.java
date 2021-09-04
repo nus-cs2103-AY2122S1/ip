@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.Ui.Commands;
+import duke.Ui.UserCommands;
 import duke.Ui.Descriptors;
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -28,16 +28,16 @@ public class Parser {
      * @return Command that can be executed to perform a set of actions.
      */
     public static Command parse(String userInput) {
-        if (userInput.equals(Commands.LIST.getCommand())) {
+        if (userInput.equals(UserCommands.LIST.getCommand())) {
             return new ListCommand(userInput);
         } else {
-            if (userInput.startsWith(Commands.DONE.getCommand())) {
+            if (userInput.startsWith(UserCommands.DONE.getCommand())) {
                 return new MarkCommand(userInput);
-            } else if (userInput.startsWith(Commands.DELETE.getCommand())) {
+            } else if (userInput.startsWith(UserCommands.DELETE.getCommand())) {
                 return new DeleteCommand(userInput);
-            } else if (userInput.startsWith(Commands.DATE.getCommand())) {
+            } else if (userInput.startsWith(UserCommands.DATE.getCommand())) {
                 return new DateCommand(userInput);
-            } else if (userInput.startsWith(Commands.FIND.getCommand())) {
+            } else if (userInput.startsWith(UserCommands.FIND.getCommand())) {
                 return new FindCommand(userInput);
             } else {
                 return new AddCommand(userInput);
@@ -162,7 +162,7 @@ public class Parser {
      * @return An int representing an index.
      * @throws DukeException If user input for index cannot be parsed into Integer.
      */
-    public static int parseUserNumInput(String userInput, Commands command) throws DukeException {
+    public static int parseUserNumInput(String userInput, UserCommands command) throws DukeException {
         try {
             // Add 1 as user's number input is separated from command by 1 space.
             return Integer.parseInt(userInput.substring(command.getLength() + 1));
@@ -202,7 +202,7 @@ public class Parser {
      * @throws DukeException If user input has missing spaces.
      */
     public static String[] parseUserDescriptionInput(String userDescription, Descriptors descriptor,
-                                                      char separator, Commands command) throws DukeException {
+                                                      char separator, UserCommands command) throws DukeException {
         // Index of separator in userDescription.
         int separatorIdx = findIndex(userDescription, separator);
 

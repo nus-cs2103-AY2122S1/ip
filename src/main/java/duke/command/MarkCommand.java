@@ -5,7 +5,7 @@ import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
-import duke.Ui.Commands;
+import duke.Ui.UserCommands;
 
 /**
  * Represents a command that can be executed to mark a task as done, print the marked task,
@@ -40,11 +40,11 @@ public class MarkCommand extends Command {
     private String markTask(TaskList tasks, Ui ui) throws DukeException {
 
         // Preliminary check for any input following command.
-        Parser.checkInputValidity(this.userInput, Commands.DONE.getCommand(),
+        Parser.checkInputValidity(this.userInput, UserCommands.DONE.getCommand(),
                 Ui.exceptionMissingIndexForMarking());
 
         // Parses integer in user input.
-        int userNumInput = Parser.parseUserNumInput(this.userInput, Commands.DONE);
+        int userNumInput = Parser.parseUserNumInput(this.userInput, UserCommands.DONE);
 
         // Decrement integer from user input to match indexing of tasks.
         int idx = userNumInput - 1;

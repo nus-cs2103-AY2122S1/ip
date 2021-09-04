@@ -7,7 +7,7 @@ import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
-import duke.Ui.Commands;
+import duke.Ui.UserCommands;
 import duke.Ui.Descriptors;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -51,12 +51,12 @@ public class AddCommand extends Command {
     private String addTask(TaskList tasks, Ui ui, char separator) throws DukeException {
         // Checks for command given in user input.
         String userCommand;
-        if (this.userInput.startsWith(Commands.TODO.getCommand())) {
-            userCommand = Commands.TODO.getCommand();
-        } else if (this.userInput.startsWith(Commands.DEADLINE.getCommand())) {
-            userCommand = Commands.DEADLINE.getCommand();
-        } else if (this.userInput.startsWith(Commands.EVENT.getCommand())) {
-            userCommand = Commands.EVENT.getCommand();
+        if (this.userInput.startsWith(UserCommands.TODO.getCommand())) {
+            userCommand = UserCommands.TODO.getCommand();
+        } else if (this.userInput.startsWith(UserCommands.DEADLINE.getCommand())) {
+            userCommand = UserCommands.DEADLINE.getCommand();
+        } else if (this.userInput.startsWith(UserCommands.EVENT.getCommand())) {
+            userCommand = UserCommands.EVENT.getCommand();
         } else {
             throw new DukeException(Ui.exceptionInvalidUserCommand());
         }
@@ -69,12 +69,12 @@ public class AddCommand extends Command {
         String description = this.userInput.substring(userCommand.length() + 1);
 
         // Parses description and adds the corresponding task to tasks.
-        if (userCommand.equals(Commands.TODO.getCommand())) {
+        if (userCommand.equals(UserCommands.TODO.getCommand())) {
             tasks.add(new Todo(description));
-        } else if (userCommand.equals(Commands.DEADLINE.getCommand())) {
+        } else if (userCommand.equals(UserCommands.DEADLINE.getCommand())) {
             // Parses description into task description and time.
             String[] descriptions =
-                    Parser.parseUserDescriptionInput(description, Descriptors.BY, separator, Commands.DEADLINE);
+                    Parser.parseUserDescriptionInput(description, Descriptors.BY, separator, UserCommands.DEADLINE);
 
             LocalDate localDate = Parser.toLocalDate(descriptions[1]);
 
@@ -82,7 +82,7 @@ public class AddCommand extends Command {
         } else {
             // Parses description into task description and time.
             String[] descriptions =
-                    Parser.parseUserDescriptionInput(description, Descriptors.AT, separator, Commands.EVENT);
+                    Parser.parseUserDescriptionInput(description, Descriptors.AT, separator, UserCommands.EVENT);
 
             LocalDate localDate = Parser.toLocalDate(descriptions[1]);
 

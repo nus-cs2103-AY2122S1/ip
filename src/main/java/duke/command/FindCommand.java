@@ -5,7 +5,7 @@ import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
-import duke.Ui.Commands;
+import duke.Ui.UserCommands;
 import duke.task.Task;
 
 /**
@@ -37,13 +37,13 @@ public class FindCommand extends Command {
      */
     private String getTaskMatchingSearch(TaskList tasks, Ui ui) throws DukeException {
         // Preliminary check for validity of user input.
-        Parser.checkInputValidity(this.userInput, Commands.FIND.getCommand(), Ui.exceptionMissingSearchInput());
+        Parser.checkInputValidity(this.userInput, UserCommands.FIND.getCommand(), Ui.exceptionMissingSearchInput());
 
         // Initalize counter to track number of matching tasks.
         int counter = 0;
 
         // Extract search keyword from 1 space after "find" command in user input.
-        String keyword = this.userInput.substring(Commands.FIND.getLength() + 1);
+        String keyword = this.userInput.substring(UserCommands.FIND.getLength() + 1);
 
         StringBuilder foundTasks = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {

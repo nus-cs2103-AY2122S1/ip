@@ -1,6 +1,6 @@
 package duke;
 
-import duke.Ui.Commands;
+import duke.Ui.UserCommands;
 import duke.command.Command;
 import duke.exception.DukeException;
 
@@ -52,7 +52,7 @@ public class Duke {
      * @return Duke's string output from executing input String.
      */
     public String getResponse(String input) {
-        if (!input.equals(Commands.BYE.getCommand())) {
+        if (!input.equals(UserCommands.BYE.getCommand())) {
             Command command = Parser.parse(input);
             return command.execute(this.tasks, this.ui, this.storage);
         }

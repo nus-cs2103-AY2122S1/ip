@@ -32,7 +32,7 @@ public class Ui {
     }
 
     /** Enums for Duke chatbot commands */
-    public enum Commands {
+    public enum UserCommands {
         TODO("todo"),
         DEADLINE("deadline"),
         EVENT("event"),
@@ -45,7 +45,7 @@ public class Ui {
 
         private final String command;
 
-        Commands(String command) {
+        UserCommands(String command) {
             this.command = command;
         }
 
@@ -253,7 +253,7 @@ public class Ui {
      * @param command The initial command of user input that contains the invalid number input.
      * @return Standard error message for invalid number input.
      */
-    public static String exceptionInvalidNumberInput(Commands command) {
+    public static String exceptionInvalidNumberInput(UserCommands command) {
         return "Index for " + command.getCommand() + " must be an integer.";
     }
 
@@ -264,7 +264,7 @@ public class Ui {
      * @param command The command that is used in tandem with descriptor.
      * @return Standard error message for missing descriptor.
      */
-    public static String exceptionMissingDescriptor(Descriptors descriptor, Commands command) {
+    public static String exceptionMissingDescriptor(Descriptors descriptor, UserCommands command) {
         return "/" + descriptor.getDescriptor()
                 + " must be provided and not empty for " + command.getCommand() + ".";
     }
@@ -290,7 +290,7 @@ public class Ui {
      * @param descriptors The correct descriptor.
      * @return Standard error message for wrong descriptor.
      */
-    public static String exceptionWrongDescriptor(Commands command, Descriptors descriptors) {
+    public static String exceptionWrongDescriptor(UserCommands command, Descriptors descriptors) {
         return "Wrong descriptor used. Descriptor for " + command.getCommand()
                 + " should be " + descriptors.getDescriptor() + ".";
     }
