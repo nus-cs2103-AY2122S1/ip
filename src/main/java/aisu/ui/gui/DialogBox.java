@@ -115,7 +115,6 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img, false);
         db.flip();
         return db;
-
     }
 
     /**

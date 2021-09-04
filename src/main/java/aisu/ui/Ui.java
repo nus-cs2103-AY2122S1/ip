@@ -39,7 +39,6 @@ public class Ui {
                 "find (keyword)", "Look for tasks with that keyword",
                 "delete (taskNumber)", "Delete task",
                 "bye", "Exit program");
-
     }
 
     /**

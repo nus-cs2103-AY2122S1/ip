@@ -65,7 +65,6 @@ public class MainWindow extends AnchorPane {
                 + "`--' `--' `--'             `-----'  `-----'   \n";
         String output = "\n Hello, I'm Ai-su! How may I help you today? \n\n";
         makeAisuSay(output);
-
     }
 
     /**
