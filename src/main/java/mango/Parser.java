@@ -36,7 +36,7 @@ public class Parser {
                 message = tasks.addTask(input);
             }
         } catch (DukeException e) {
-            System.out.println(e.getMessage());
+            return e.getMessage();
         }
         
         return message;

@@ -12,9 +12,10 @@ public class Event extends Task {
      *
      * @param description The description of the event.
      * @param date The date on which the event occurs.
+     * @param tag The tag attached to the event.
      */
-    public Event(String description, String date) {
-        super(description);
+    public Event(String description, String date, String tag) {
+        super(description, tag, false);
         this.date = date;
     }
 
@@ -24,9 +25,10 @@ public class Event extends Task {
      * @param description The description of the event.
      * @param date The date on which the event occurs.
      * @param status The completion status of the event.
+     * @param tag The tag attached to the event.
      */
-    public Event(String description, String date, String status) {
-        super(description, status.equals("true"));
+    public Event(String description, String date, String status, String tag) {
+        super(description, tag, status.equals("true"));
         this.date = date;
     }
 
@@ -57,6 +59,6 @@ public class Event extends Task {
      */
     @Override
     public String getSaveFormatString() {
-        return String.format("%s:%s:%s:%s\n", this.getType(), this.getStatus(), this.description, this.date);
+        return String.format("%s:%s:%s:%s:%s\n", this.getType(), this.getStatus(), this.description, this.date, this.tag);
     }
 }

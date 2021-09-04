@@ -9,17 +9,17 @@ import static org.junit.Assert.fail;
 public class TaskTest {
     @Test
     public void testDeadlineDescription() {
-        assertEquals("abc (by: Oct 15 2009)", new Deadline("abc", "2009-10-15").getDescription());
+        assertEquals("abc (by: Oct 15 2009) #fun", new Deadline("abc", "2009-10-15", "fun").getDescription());
     }
 
     @Test
     public void testEventDescription() {
-        assertEquals("abc (at: Mon)", new Event("abc", "Mon").getDescription());
+        assertEquals("abc (at: Mon) #urgent", new Event("abc", "Mon", "urgent").getDescription());
     }
 
     @Test
     public void testTodoDescription() {
-        assertEquals("abc", new Todo("abc").getDescription());
+        assertEquals("abc", new Todo("abc", "fun").getDescription());
     }
 
     @Test

@@ -10,9 +10,10 @@ public class Todo extends Task {
      * Constructor for a Todo.
      *
      * @param description The description of the todo.
+     * @param tag The tag attached to this deadline.
      */
-    public Todo(String description) {
-        super(description);
+    public Todo(String description, String tag) {
+        super(description, tag, false);
     }
 
     /**
@@ -21,8 +22,8 @@ public class Todo extends Task {
      * @param description The description of the todo.
      * @param status The completion status of the todo.
      */
-    public Todo(String description, String status) {
-        super(description, status.equals("true"));
+    public Todo(String description, String status, String tag) {
+        super(description, tag, status.equals("true"));
     }
 
     /**
@@ -52,6 +53,6 @@ public class Todo extends Task {
      */
     @Override
     public String getSaveFormatString() {
-        return String.format("%s:%s:%s:\n", this.getType(), this.getStatus(), this.description);
+        return String.format("%s:%s:%s::%s\n", this.getType(), this.getStatus(), this.description, this.tag);
     }
 }

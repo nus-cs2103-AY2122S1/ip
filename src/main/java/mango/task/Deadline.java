@@ -15,9 +15,10 @@ public class Deadline extends Task {
      *
      * @param description The description of the deadline.
      * @param date The date on which the deadline falls.
+     * @param tag The tag attached to this deadline.
      */
-    public Deadline(String description, String date) {
-        super(description);
+    public Deadline(String description, String date, String tag) {
+        super(description, tag, false);
         this.date = LocalDate.parse(date);
     }
 
@@ -27,9 +28,10 @@ public class Deadline extends Task {
      * @param description The description of the deadline.
      * @param date The date on which the deadline falls.
      * @param status The completion status of the deadline.
+     * @param tag The tag attached to this deadline.
      */
-    public Deadline(String description, String date, String status) {
-        super(description, status.equals("true"));
+    public Deadline(String description, String date, String status, String tag) {
+        super(description, tag, status.equals("true"));
         this.date = LocalDate.parse(date);
     }
 
@@ -60,6 +62,6 @@ public class Deadline extends Task {
      */
     @Override
     public String getSaveFormatString() {
-        return String.format("%s:%s:%s:%s\n", this.getType(), this.getStatus(), this.description, this.date);
+        return String.format("%s:%s:%s:%s:%s\n", this.getType(), this.getStatus(), this.description, this.date, this.tag);
     }
 }

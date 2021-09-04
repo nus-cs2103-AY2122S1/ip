@@ -50,18 +50,18 @@ public class Storage {
 
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         while (s.hasNext()) {
-            String[] task = s.nextLine().split(":", 4);
+            String[] task = s.nextLine().split(":", 5);
             Task toAdd;
 
             switch (task[0]) {
             case "D":
-                toAdd = new Deadline(task[2], task[3], task[1]);
+                toAdd = new Deadline(task[2], task[3], task[1], task[4]);
                 break;
             case "E":
-                toAdd = new Event(task[2], task[3], task[1]);
+                toAdd = new Event(task[2], task[3], task[1], task[4]);
                 break;
             case "T":
-                toAdd = new Todo(task[2], task[1]);
+                toAdd = new Todo(task[2], task[1], task[4]);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + task[0]);
