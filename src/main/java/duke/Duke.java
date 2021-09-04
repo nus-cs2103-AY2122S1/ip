@@ -6,7 +6,7 @@ import java.util.List;
  * Specifies the type of action to be taken by the duke.
  */
 enum ActionType {
-    LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, FIND, UNRECOGNIZED
+    LIST, TODO, DEADLINE, EVENT, DONE, DELETE, BYE, FIND, HELP, UNRECOGNIZED
 }
 
 /**
@@ -100,6 +100,9 @@ public class Duke {
         case BYE: {
             storage.saveProgress();
             return ui.bye();
+        }
+        case HELP:{
+            return ui.showHelp();
         }
         default:
             throw new UnrecognizableCommandException();
