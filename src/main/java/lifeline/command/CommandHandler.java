@@ -186,6 +186,7 @@ public class CommandHandler {
      */
     public static String handleDelete(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
+        assert Command.DELETE.hasCommand(splitCommands(command)[0]);
         ArrayList<Integer> indicesToDelete = getIndicesFromCommand(command);
         checkIndexBounds(indicesToDelete, taskList);
         taskList.deleteMultipleTasks(indicesToDelete);
