@@ -17,6 +17,7 @@ public abstract class Task {
      * @param description Name of user's task.
      */
     public Task(String description) {
+        assert description != "" : "Description is empty.";
         this.description = description;
         this.isDone = false;
     }
