@@ -40,8 +40,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         lifeline = new Lifeline("save" + File.separator + "tasks.json");
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String greetingMessage = lifeline.getGreetingMessage();
         dialogContainer.getChildren().add(DialogBox.getLifelineDialog(greetingMessage, lifelineImage));
     }
