@@ -101,7 +101,7 @@ public class Duke {
             storage.saveProgress();
             return ui.bye();
         }
-        case HELP:{
+        case HELP: {
             return ui.showHelp();
         }
         default:

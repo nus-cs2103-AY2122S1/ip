@@ -102,17 +102,21 @@ public class Ui {
         }
     }
 
+    /**
+     * Shows help.
+     * @return Help page.
+     */
     public String showHelp() {
-        String helpPage = "Available commands: \n" +
-                "list: show a list of tasks" + "\n" +
-                "done x: Mark a task at index x as done" + "\n" +
-                "deadline: create a deadline task" + "\n" +
-                "event: create an event task" + "\n" +
-                "todo: create a todo task" + "\n" +
-                "delete x: delete a task at index x" + "\n" +
-                "bye: exit the program" + "\n" +
-                "find: find tasks with keyword entries" + "\n" +
-                "help: show help page" + "\n";
+        String helpPage = "Available commands: \n"
+                + "list: show a list of tasks" + "\n"
+                + "done x: Mark a task at index x as done" + "\n"
+                + "deadline: create a deadline task" + "\n"
+                + "event: create an event task" + "\n"
+                + "todo: create a todo task" + "\n"
+                + "delete x: delete a task at index x" + "\n"
+                + "bye: exit the program" + "\n"
+                + "find: find tasks with keyword entries" + "\n"
+                + "help: show help page" + "\n";
         return helpPage;
     }
 }
