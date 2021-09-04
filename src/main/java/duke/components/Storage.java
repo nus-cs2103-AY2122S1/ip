@@ -25,7 +25,7 @@ public class Storage {
         // if data folder does not exist, create folder and file
         if (!dataFolder.exists()) {
             try {
-                File dataDirectory = new File("./data/data.txt");
+                File dataDirectory = new File("./duke/data/data.txt");
                 if (dataDirectory.createNewFile()) {
                     System.out.println("Data file has been created.");
                 }
@@ -38,7 +38,7 @@ public class Storage {
         // if data.txt does not exist, create file
         if (!dataFile.exists()) {
             try {
-                File dataDirectory = new File("./data/data.txt");
+                File dataDirectory = new File("./duke/data/data.txt");
                 if (dataDirectory.createNewFile()) {
                     System.out.println("Data file has been created.");
                 }
