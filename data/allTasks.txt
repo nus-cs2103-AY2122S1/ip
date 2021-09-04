@@ -1,2 +1,5 @@
 T | 0 | buy book
-T | 1 | open book
+T | 0 | 333
+D | 0 | return book  | error toh toh
+T | 0 | asdasda
+T | 0 | asklfnadnasdn
