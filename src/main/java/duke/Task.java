@@ -79,7 +79,8 @@ public class Task {
      * @return toString of a pre-existing ie pre-loaded task.
      */
     public String getDescription() {
-        return "[" + this.getCategory() + "]" + "[" + this.getStatusIcon() + "] " + this.description.split("\\s", 2)[1];
+        return "[" + this.getCategory() + "]" + "[" + this.getStatusIcon() + "] "
+                + this.description.split("\\s", 2)[1];
     }
 
     /**
@@ -90,9 +91,11 @@ public class Task {
         if (this.cat == Duke.Category.TODO) {
             return "[T]" + "[" + this.getStatusIcon() + "] " + this.description;
         } else if (this.cat == Duke.Category.DEADLINE) {
-            return "[D]" + "[" + this.getStatusIcon() + "] " + parser.parseTask() + " (by: " + parser.parseTime() + ")";
+            return "[D]" + "[" + this.getStatusIcon() + "] " + parser.parseTask()
+                    + " (by: " + parser.parseTime() + ")";
         } else {
-            return "[E]" + "[" + this.getStatusIcon() + "] " + parser.parseTask() + " (at: " + parser.parseTime() + ")";
+            return "[E]" + "[" + this.getStatusIcon() + "] " + parser.parseTask()
+                    + " (at: " + parser.parseTime() + ")";
         }
     }
 }
