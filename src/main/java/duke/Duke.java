@@ -51,6 +51,7 @@ public class Duke {
     public String loadTasks() {
         try {
             tasks = new TaskList(storage.load());
+            assert (tasks != null) : "Task list not initialized correctly";
             return "I have loaded up your tasks successfully.";
         } catch (DukeException e) {
             tasks = new TaskList();
@@ -73,6 +74,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
+            assert (storage != null) : "No storage initialized";
             Command c = Parser.parse(input);
             String botResponse = c.execute(tasks, ui, storage);
             storage.write(tasks);
