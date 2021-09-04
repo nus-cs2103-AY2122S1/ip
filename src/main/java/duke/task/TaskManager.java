@@ -56,6 +56,9 @@ public class TaskManager {
         return count;
     }
 
+    /**
+     * Overwrites the existing <code>taskList</code>.
+     */
     public void setTaskList(List<Task> taskList) {
         this.taskList = taskList;
     }

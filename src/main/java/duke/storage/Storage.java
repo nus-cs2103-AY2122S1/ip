@@ -39,10 +39,19 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns the path of the storage file.
+     */
     public String getFilePath() {
         return filePath;
     }
 
+    /**
+     * Sets the path of the storage file. Data will be stored to the new file subsequently.
+     *
+     * @param newFilePath The new path of the storage file.
+     * @throws DukeException If the file does not exist.
+     */
     public void setFilePath(String newFilePath) throws DukeException {
         File newFile = new File(newFilePath);
         if (!newFile.isFile()) {
@@ -82,6 +91,9 @@ public class Storage {
         return taskList;
     }
 
+    /**
+     * Returns a string with details on the file and tasks that are loaded.
+     */
     public String getTasksLoadedMessage(TaskManager taskManager) {
         return String.format("These are the tasks I found from %s.\n\n%s", getFilePath(), taskManager);
     }

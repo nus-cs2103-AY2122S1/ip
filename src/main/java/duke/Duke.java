@@ -11,7 +11,6 @@ import duke.ui.Ui;
 import duke.util.DukeProperties;
 import javafx.application.Application;
 
-
 /**
  * Represents the main Duke application.
  */

@@ -5,9 +5,12 @@ import duke.response.DukeResponse;
 import duke.storage.Storage;
 import duke.task.TaskManager;
 
+/**
+ * Represents a command for loading existing tasks from a specified file.
+ */
 public class LoadCommand extends Command {
     public static final String COMMAND_WORD = "load";
-    public static final String USAGE_MESSAGE = "To load tasks from a file, use 'load <file-path>'.";
+    public static final String USAGE_MESSAGE = "To load tasks from a file, use 'load <relative-file-path>'.";
 
     private final String commandArguments;
 
