@@ -5,7 +5,6 @@ package duke;
  */
 public class Duke {
     private boolean isRunning = true;
-    private enum Commands { list, done, todo, event, deadline, delete, find }
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
@@ -61,6 +60,7 @@ public class Duke {
      * @return a boolean on whether the program should terminate
      */
     private boolean checkBye(String instruction) {
+        assert instruction != null : "User has not input anything";
         if (instruction.equalsIgnoreCase("bye")) {
             isRunning = false;
             storage.fileClear();

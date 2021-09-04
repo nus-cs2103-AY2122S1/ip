@@ -1,9 +1,9 @@
 package duke;
 
 /**
- * Repressents the error when the user inputs an unknown command
+ * Represents the error when the user inputs an unknown command
  */
-public class UnknownCommandError extends DukeException{
+public class UnknownCommandError extends DukeException {
     /**
      * Returns a String representation of the error.
      *
