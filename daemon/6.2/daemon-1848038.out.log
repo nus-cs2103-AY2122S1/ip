@@ -1,0 +1,906 @@
+2021-09-04T22:57:16.550+0800 [DEBUG] [org.gradle.launcher.daemon.bootstrap.DaemonMain] Assuming the daemon was started with following jvm opts: [-XX:MaxMetaspaceSize=256m, -XX:+HeapDumpOnOutOfMemoryError, --add-opens, java.base/java.util=ALL-UNNAMED, --add-opens, java.base/java.lang=ALL-UNNAMED, --add-opens, java.base/java.lang.invoke=ALL-UNNAMED, --add-opens, java.prefs/java.util.prefs=ALL-UNNAMED, -Xms256m, -Xmx512m, -Dfile.encoding=UTF-8, -Duser.country=GB, -Duser.language=en, -Duser.variant]
+2021-09-04T22:57:16.648+0800 [INFO] [org.gradle.launcher.daemon.server.Daemon] start() called on daemon - DefaultDaemonContext[uid=65fc3d9c-5618-4fe3-843c-b51433c84ac5,javaHome=/usr/lib/jvm/java-11-openjdk-amd64,daemonRegistryDir=/home/bluehu/Downloads/School/CS2103/ip/daemon,pid=1848038,idleTimeout=10800000,priority=NORMAL,daemonOpts=-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=GB,-Duser.language=en,-Duser.variant]
+2021-09-04T22:57:16.661+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface wlp2s0
+2021-09-04T22:57:16.662+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? false
+2021-09-04T22:57:16.662+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding remote address /fe80:0:0:0:d2b5:8710:5a6e:616b%wlp2s0
+2021-09-04T22:57:16.662+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding remote address /192.168.1.59
+2021-09-04T22:57:16.662+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding IP addresses for network interface lo
+2021-09-04T22:57:16.664+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Is this a loopback interface? true
+2021-09-04T22:57:16.664+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding loopback address /0:0:0:0:0:0:0:1%lo
+2021-09-04T22:57:16.664+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.InetAddresses] Adding loopback address /127.0.0.1
+2021-09-04T22:57:16.665+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Listening on [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]].
+2021-09-04T22:57:16.671+0800 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] Daemon starting at: Sat Sep 04 22:57:16 SGT 2021, with address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:57:16.671+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Advertising the daemon address to the clients: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:57:16.671+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Advertised daemon context: DefaultDaemonContext[uid=65fc3d9c-5618-4fe3-843c-b51433c84ac5,javaHome=/usr/lib/jvm/java-11-openjdk-amd64,daemonRegistryDir=/home/bluehu/Downloads/School/CS2103/ip/daemon,pid=1848038,idleTimeout=10800000,priority=NORMAL,daemonOpts=-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=GB,-Duser.language=en,-Duser.variant]
+2021-09-04T22:57:16.672+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Storing daemon address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]], context: DefaultDaemonContext[uid=65fc3d9c-5618-4fe3-843c-b51433c84ac5,javaHome=/usr/lib/jvm/java-11-openjdk-amd64,daemonRegistryDir=/home/bluehu/Downloads/School/CS2103/ip/daemon,pid=1848038,idleTimeout=10800000,priority=NORMAL,daemonOpts=-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=GB,-Duser.language=en,-Duser.variant]
+2021-09-04T22:57:16.677+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T22:57:16.679+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:57:16.681+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:57:16.682+0800 [LIFECYCLE] [org.gradle.launcher.daemon.server.Daemon] Daemon server started.
+2021-09-04T22:57:16.683+0800 [DEBUG] [org.gradle.launcher.daemon.bootstrap.DaemonStartupCommunication] Completed writing the daemon greeting. Closing streams...
+2021-09-04T22:57:16.685+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:47484 to /127.0.0.1:35363.
+2021-09-04T22:57:16.688+0800 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] stopOnExpiration() called on daemon
+2021-09-04T22:57:16.689+0800 [DEBUG] [org.gradle.launcher.daemon.server.Daemon] awaitExpiration() called on daemon
+2021-09-04T22:57:16.690+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T22:57:16.738+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 19: received class org.gradle.launcher.daemon.protocol.Build
+2021-09-04T22:57:16.738+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 19: Received non-IO message from client: Build{id=18b23030-ab39-4d71-a0eb-fc7ac615feca, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T22:57:16.739+0800 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=18b23030-ab39-4d71-a0eb-fc7ac615feca, currentDir=/home/bluehu/Downloads/School/CS2103/ip}.
+2021-09-04T22:57:16.739+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=18b23030-ab39-4d71-a0eb-fc7ac615feca, currentDir=/home/bluehu/Downloads/School/CS2103/ip} with connection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47484.
+2021-09-04T22:57:16.741+0800 [ERROR] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=18b23030-ab39-4d71-a0eb-fc7ac615feca, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47484] after 0.0 minutes of idle
+2021-09-04T22:57:16.742+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:57:16.742+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:57:16.742+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T22:57:16.743+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:57:16.743+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:57:16.744+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T22:57:16.744+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T22:57:16.744+0800 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=18b23030-ab39-4d71-a0eb-fc7ac615feca, currentDir=/home/bluehu/Downloads/School/CS2103/ip}. Dispatching build started information...
+2021-09-04T22:57:16.745+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 21: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@11bcbffb
+2021-09-04T22:57:16.745+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 19: received class org.gradle.launcher.daemon.protocol.CloseInput
+2021-09-04T22:57:16.746+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 19: Received IO message from client: org.gradle.launcher.daemon.protocol.CloseInput@2e15e328
+2021-09-04T22:57:16.746+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: {PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin, XAUTHORITY=/run/user/1000/gdm/Xauthority, INVOCATION_ID=f253fb6caa75476c8b5fe76095c92bb9, LC_MEASUREMENT=en_GB.UTF-8, XMODIFIERS=@im=ibus, LC_TELEPHONE=en_GB.UTF-8, GDMSESSION=pop, XDG_DATA_DIRS=/usr/share/pop:/home/bluehu/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop, MANDATORY_PATH=/usr/share/gconf/pop.mandatory.path, LC_TIME=en_GB.UTF-8, SNAP_COMMON=/var/snap/intellij-idea-community/common, PAPERSIZE=a4, SNAP_INSTANCE_KEY=, GTK_IM_MODULE=ibus, DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus, SNAP_USER_COMMON=/home/bluehu/snap/intellij-idea-community/common, DEFAULTS_PATH=/usr/share/gconf/pop.default.path, SNAP_REVISION=320, XDG_CURRENT_DESKTOP=pop:GNOME, JOURNAL_STREAM=8:15225260, LC_PAPER=en_GB.UTF-8, USERNAME=bluehu, SESSION_MANAGER=local/pop-os:@/tmp/.ICE-unix/1700,unix/pop-os:/tmp/.ICE-unix/1700, LOGNAME=bluehu, PWD=/home/bluehu, MANAGERPID=1454, LANGUAGE=en_GB:en, GJS_DEBUG_TOPICS=JS ERROR;JS LOG, SHELL=/bin/bash, LC_ADDRESS=en_GB.UTF-8, GIO_LAUNCHED_DESKTOP_FILE=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, GNOME_DESKTOP_SESSION_ID=this-is-deprecated, GTK_MODULES=gail:atk-bridge:appmenu-gtk-module, SNAP_ARCH=amd64, SNAP_LIBRARY_PATH=/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void, XDG_SESSION_DESKTOP=pop, SSH_AGENT_LAUNCHER=gnome-keyring, SHLVL=0, LC_IDENTIFICATION=en_GB.UTF-8, LC_MONETARY=en_GB.UTF-8, SNAP_NAME=intellij-idea-community, QT_IM_MODULE=ibus, XDG_CONFIG_DIRS=/etc/xdg/xdg-pop:/etc/xdg, LANG=en_GB.UTF-8, SNAP_INSTANCE_NAME=intellij-idea-community, XDG_SESSION_TYPE=x11, SNAP_USER_DATA=/home/bluehu/snap/intellij-idea-community/320, DISPLAY=:1, SNAP_REEXEC=, SNAP_VERSION=2021.2.1, LC_NAME=en_GB.UTF-8, _=/usr/bin/dbus-update-activation-environment, XDG_SESSION_CLASS=user, SNAP_DATA=/var/snap/intellij-idea-community/320, GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1, DESKTOP_SESSION=pop, SNAP=/snap/intellij-idea-community/320, USER=bluehu, SNAP_REAL_HOME=/home/bluehu, XDG_MENU_PREFIX=gnome-, GIO_LAUNCHED_DESKTOP_FILE_PID=1809080, WINDOWPATH=2, QT_ACCESSIBILITY=1, GJS_DEBUG_OUTPUT=stderr, LC_NUMERIC=en_GB.UTF-8, SSH_AUTH_SOCK=/run/user/1000/keyring/ssh, GNOME_SHELL_SESSION_MODE=pop, SNAP_CONTEXT=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj, XDG_RUNTIME_DIR=/run/user/1000, HOME=/home/bluehu, SNAP_COOKIE=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj}
+2021-09-04T22:57:16.751+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2021-09-04T22:57:16.751+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 1848038). The daemon log file: /home/bluehu/Downloads/School/CS2103/ip/daemon/6.2/daemon-1848038.out.log
+2021-09-04T22:57:16.753+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting build in new daemon [memory: 536.9 MB]
+2021-09-04T22:57:16.755+0800 [INFO] [org.gradle.launcher.daemon.server.exec.ForwardClientInput] Closing daemon's stdin at end of input.
+2021-09-04T22:57:16.755+0800 [INFO] [org.gradle.launcher.daemon.server.exec.ForwardClientInput] The daemon will no longer process any standard input.
+2021-09-04T22:57:16.758+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2021-09-04T22:57:16.759+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=65fc3d9c-5618-4fe3-843c-b51433c84ac5,javaHome=/usr/lib/jvm/java-11-openjdk-amd64,daemonRegistryDir=/home/bluehu/Downloads/School/CS2103/ip/daemon,pid=1848038,idleTimeout=10800000,priority=NORMAL,daemonOpts=-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=GB,-Duser.language=en,-Duser.variant]
+
+BUILD SUCCESSFUL in 54s
+2021-09-04T22:58:10.783+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has finished executing the build.
+2021-09-04T22:58:10.786+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T22:58:10.787+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: finished waiting for DaemonCommandExecution[command = Build{id=18b23030-ab39-4d71-a0eb-fc7ac615feca, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47484]. Result org.gradle.launcher.daemon.server.DaemonStateCoordinator@2f454ba6 with state Busy
+2021-09-04T22:58:10.787+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: completed DaemonCommandExecution[command = Build{id=18b23030-ab39-4d71-a0eb-fc7ac615feca, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47484]
+2021-09-04T22:58:10.787+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T22:58:10.787+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as idle, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:58:10.787+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:58:10.788+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T22:58:10.788+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:10.788+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:10.788+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T22:58:10.789+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ReturnResult] Daemon is dispatching the build result: Success[value=org.gradle.launcher.exec.BuildActionResult@40cd35ec]
+2021-09-04T22:58:10.789+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: dispatching Success[value=org.gradle.launcher.exec.BuildActionResult@40cd35ec]
+2021-09-04T22:58:10.789+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Finishing executing command: Build{id=18b23030-ab39-4d71-a0eb-fc7ac615feca, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T22:58:10.829+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 19: received class org.gradle.launcher.daemon.protocol.Finished
+2021-09-04T22:58:10.830+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 19: Received non-IO message from client: org.gradle.launcher.daemon.protocol.Finished@22b3ac2c
+2021-09-04T22:58:10.830+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received finished message: org.gradle.launcher.daemon.protocol.Finished@22b3ac2c
+2021-09-04T22:58:10.830+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T22:58:10.830+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.SocketConnection] Discarding EOFException: java.io.EOFException
+2021-09-04T22:58:10.830+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 19: received null
+2021-09-04T22:58:10.831+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 19: Received end-of-input from client.
+2021-09-04T22:58:10.831+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T22:58:16.689+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:16.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:16.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:16.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:16.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:16.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:26.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:26.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:26.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:26.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:26.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:26.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:26.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:26.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:26.694+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:29.928+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:47536 to /127.0.0.1:35363.
+2021-09-04T22:58:29.944+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 50: received class org.gradle.launcher.daemon.protocol.Build
+2021-09-04T22:58:29.944+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 50: Received non-IO message from client: Build{id=34219df9-2ad1-482b-9403-190f183f0ddc, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T22:58:29.944+0800 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=34219df9-2ad1-482b-9403-190f183f0ddc, currentDir=/home/bluehu/Downloads/School/CS2103/ip}.
+2021-09-04T22:58:29.944+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=34219df9-2ad1-482b-9403-190f183f0ddc, currentDir=/home/bluehu/Downloads/School/CS2103/ip} with connection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47536.
+2021-09-04T22:58:29.945+0800 [ERROR] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=34219df9-2ad1-482b-9403-190f183f0ddc, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47536] after 0.0 minutes of idle
+2021-09-04T22:58:29.945+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:58:29.945+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:58:29.945+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T22:58:29.945+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:29.946+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:29.946+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T22:58:29.946+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T22:58:29.946+0800 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=34219df9-2ad1-482b-9403-190f183f0ddc, currentDir=/home/bluehu/Downloads/School/CS2103/ip}. Dispatching build started information...
+2021-09-04T22:58:29.946+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 21: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@5a15f16c
+2021-09-04T22:58:29.946+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: {PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin, XAUTHORITY=/run/user/1000/gdm/Xauthority, INVOCATION_ID=f253fb6caa75476c8b5fe76095c92bb9, LC_MEASUREMENT=en_GB.UTF-8, XMODIFIERS=@im=ibus, LC_TELEPHONE=en_GB.UTF-8, GDMSESSION=pop, XDG_DATA_DIRS=/usr/share/pop:/home/bluehu/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop, MANDATORY_PATH=/usr/share/gconf/pop.mandatory.path, LC_TIME=en_GB.UTF-8, SNAP_COMMON=/var/snap/intellij-idea-community/common, PAPERSIZE=a4, SNAP_INSTANCE_KEY=, GTK_IM_MODULE=ibus, DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus, SNAP_USER_COMMON=/home/bluehu/snap/intellij-idea-community/common, DEFAULTS_PATH=/usr/share/gconf/pop.default.path, SNAP_REVISION=320, XDG_CURRENT_DESKTOP=pop:GNOME, JOURNAL_STREAM=8:15225260, LC_PAPER=en_GB.UTF-8, USERNAME=bluehu, SESSION_MANAGER=local/pop-os:@/tmp/.ICE-unix/1700,unix/pop-os:/tmp/.ICE-unix/1700, LOGNAME=bluehu, PWD=/home/bluehu, MANAGERPID=1454, LANGUAGE=en_GB:en, GJS_DEBUG_TOPICS=JS ERROR;JS LOG, SHELL=/bin/bash, LC_ADDRESS=en_GB.UTF-8, GIO_LAUNCHED_DESKTOP_FILE=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, GNOME_DESKTOP_SESSION_ID=this-is-deprecated, GTK_MODULES=gail:atk-bridge:appmenu-gtk-module, SNAP_ARCH=amd64, SNAP_LIBRARY_PATH=/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void, XDG_SESSION_DESKTOP=pop, SSH_AGENT_LAUNCHER=gnome-keyring, SHLVL=0, LC_IDENTIFICATION=en_GB.UTF-8, LC_MONETARY=en_GB.UTF-8, SNAP_NAME=intellij-idea-community, QT_IM_MODULE=ibus, XDG_CONFIG_DIRS=/etc/xdg/xdg-pop:/etc/xdg, LANG=en_GB.UTF-8, SNAP_INSTANCE_NAME=intellij-idea-community, XDG_SESSION_TYPE=x11, SNAP_USER_DATA=/home/bluehu/snap/intellij-idea-community/320, DISPLAY=:1, SNAP_REEXEC=, SNAP_VERSION=2021.2.1, LC_NAME=en_GB.UTF-8, _=/usr/bin/dbus-update-activation-environment, XDG_SESSION_CLASS=user, SNAP_DATA=/var/snap/intellij-idea-community/320, GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1, DESKTOP_SESSION=pop, SNAP=/snap/intellij-idea-community/320, USER=bluehu, SNAP_REAL_HOME=/home/bluehu, XDG_MENU_PREFIX=gnome-, GIO_LAUNCHED_DESKTOP_FILE_PID=1809080, WINDOWPATH=2, QT_ACCESSIBILITY=1, GJS_DEBUG_OUTPUT=stderr, LC_NUMERIC=en_GB.UTF-8, SSH_AUTH_SOCK=/run/user/1000/keyring/ssh, GNOME_SHELL_SESSION_MODE=pop, SNAP_CONTEXT=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj, XDG_RUNTIME_DIR=/run/user/1000, HOME=/home/bluehu, SNAP_COOKIE=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj}
+2021-09-04T22:58:29.948+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2021-09-04T22:58:29.948+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 1848038). The daemon log file: /home/bluehu/Downloads/School/CS2103/ip/daemon/6.2/daemon-1848038.out.log
+2021-09-04T22:58:29.949+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting 2nd build in daemon [uptime: 1 mins 13.369 secs, performance: 100%, non-heap usage: 24% of 268.4 MB]
+2021-09-04T22:58:29.949+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2021-09-04T22:58:29.949+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=65fc3d9c-5618-4fe3-843c-b51433c84ac5,javaHome=/usr/lib/jvm/java-11-openjdk-amd64,daemonRegistryDir=/home/bluehu/Downloads/School/CS2103/ip/daemon,pid=1848038,idleTimeout=10800000,priority=NORMAL,daemonOpts=-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=GB,-Duser.language=en,-Duser.variant]
+Error: Main method not found in class Du.Du, please define the main method as:
+   public static void main(String[] args)
+or a JavaFX application class must extend javafx.application.Application
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':run'.
+> Process 'command '/usr/lib/jvm/java-11-openjdk-amd64/bin/java'' finished with non-zero exit value 1
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 1s
+3 actionable tasks: 2 executed, 1 up-to-date
+2021-09-04T22:58:31.456+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has finished executing the build.
+2021-09-04T22:58:31.459+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: finished waiting for DaemonCommandExecution[command = Build{id=34219df9-2ad1-482b-9403-190f183f0ddc, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47536]. Result org.gradle.launcher.daemon.server.DaemonStateCoordinator@2f454ba6 with state Busy
+2021-09-04T22:58:31.459+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: completed DaemonCommandExecution[command = Build{id=34219df9-2ad1-482b-9403-190f183f0ddc, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47536]
+2021-09-04T22:58:31.459+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T22:58:31.459+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as idle, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:58:31.459+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:58:31.459+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T22:58:31.460+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:31.460+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:31.460+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ReturnResult] Daemon is dispatching the build result: Success[value=org.gradle.launcher.exec.BuildActionResult@61492427]
+2021-09-04T22:58:31.460+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T22:58:31.460+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: dispatching Success[value=org.gradle.launcher.exec.BuildActionResult@61492427]
+2021-09-04T22:58:31.461+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Finishing executing command: Build{id=34219df9-2ad1-482b-9403-190f183f0ddc, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T22:58:31.462+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 50: received class org.gradle.launcher.daemon.protocol.CloseInput
+2021-09-04T22:58:31.463+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 50: Received IO message from client: org.gradle.launcher.daemon.protocol.CloseInput@482e1f56
+2021-09-04T22:58:31.463+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 50: received class org.gradle.launcher.daemon.protocol.Finished
+2021-09-04T22:58:31.463+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 50: Received non-IO message from client: org.gradle.launcher.daemon.protocol.Finished@68055e67
+2021-09-04T22:58:31.463+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received finished message: org.gradle.launcher.daemon.protocol.Finished@68055e67
+2021-09-04T22:58:31.463+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.SocketConnection] Discarding EOFException: java.io.EOFException
+2021-09-04T22:58:31.463+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T22:58:31.463+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 50: received null
+2021-09-04T22:58:31.463+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 50: Received end-of-input from client.
+2021-09-04T22:58:31.464+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T22:58:36.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:36.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:36.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:36.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:36.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:36.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:46.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:46.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:46.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:46.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:46.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:46.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:46.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:46.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:46.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:56.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:56.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:56.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:56.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:56.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:56.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:58:56.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:58:56.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:58:56.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:59:06.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:59:06.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:59:06.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:59:06.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:59:06.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:59:06.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:59:06.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:59:06.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:59:06.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:59:16.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:59:16.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:59:16.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:59:16.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:59:16.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:59:16.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:59:16.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:59:16.694+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:59:16.694+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:59:26.689+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:59:26.689+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:59:26.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:59:26.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:59:26.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:59:26.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:59:26.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T22:59:26.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:59:26.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:59:27.478+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:47538 to /127.0.0.1:35363.
+2021-09-04T22:59:27.481+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 89: received class org.gradle.launcher.daemon.protocol.Build
+2021-09-04T22:59:27.481+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 89: Received non-IO message from client: Build{id=f807a448-30a5-4ec4-952a-6113370ee0a1, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T22:59:27.481+0800 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=f807a448-30a5-4ec4-952a-6113370ee0a1, currentDir=/home/bluehu/Downloads/School/CS2103/ip}.
+2021-09-04T22:59:27.481+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=f807a448-30a5-4ec4-952a-6113370ee0a1, currentDir=/home/bluehu/Downloads/School/CS2103/ip} with connection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47538.
+2021-09-04T22:59:27.481+0800 [ERROR] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=f807a448-30a5-4ec4-952a-6113370ee0a1, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47538] after 0.0 minutes of idle
+2021-09-04T22:59:27.482+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:59:27.482+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T22:59:27.482+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T22:59:27.482+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T22:59:27.482+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T22:59:27.482+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T22:59:27.482+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T22:59:27.483+0800 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=f807a448-30a5-4ec4-952a-6113370ee0a1, currentDir=/home/bluehu/Downloads/School/CS2103/ip}. Dispatching build started information...
+2021-09-04T22:59:27.483+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 21: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@2a263789
+2021-09-04T22:59:27.483+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: {PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin, XAUTHORITY=/run/user/1000/gdm/Xauthority, INVOCATION_ID=f253fb6caa75476c8b5fe76095c92bb9, LC_MEASUREMENT=en_GB.UTF-8, XMODIFIERS=@im=ibus, LC_TELEPHONE=en_GB.UTF-8, GDMSESSION=pop, XDG_DATA_DIRS=/usr/share/pop:/home/bluehu/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop, MANDATORY_PATH=/usr/share/gconf/pop.mandatory.path, LC_TIME=en_GB.UTF-8, SNAP_COMMON=/var/snap/intellij-idea-community/common, PAPERSIZE=a4, SNAP_INSTANCE_KEY=, GTK_IM_MODULE=ibus, DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus, SNAP_USER_COMMON=/home/bluehu/snap/intellij-idea-community/common, DEFAULTS_PATH=/usr/share/gconf/pop.default.path, SNAP_REVISION=320, XDG_CURRENT_DESKTOP=pop:GNOME, JOURNAL_STREAM=8:15225260, LC_PAPER=en_GB.UTF-8, USERNAME=bluehu, SESSION_MANAGER=local/pop-os:@/tmp/.ICE-unix/1700,unix/pop-os:/tmp/.ICE-unix/1700, LOGNAME=bluehu, PWD=/home/bluehu, MANAGERPID=1454, LANGUAGE=en_GB:en, GJS_DEBUG_TOPICS=JS ERROR;JS LOG, SHELL=/bin/bash, LC_ADDRESS=en_GB.UTF-8, GIO_LAUNCHED_DESKTOP_FILE=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, GNOME_DESKTOP_SESSION_ID=this-is-deprecated, GTK_MODULES=gail:atk-bridge:appmenu-gtk-module, SNAP_ARCH=amd64, SNAP_LIBRARY_PATH=/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void, XDG_SESSION_DESKTOP=pop, SSH_AGENT_LAUNCHER=gnome-keyring, SHLVL=0, LC_IDENTIFICATION=en_GB.UTF-8, LC_MONETARY=en_GB.UTF-8, SNAP_NAME=intellij-idea-community, QT_IM_MODULE=ibus, XDG_CONFIG_DIRS=/etc/xdg/xdg-pop:/etc/xdg, LANG=en_GB.UTF-8, SNAP_INSTANCE_NAME=intellij-idea-community, XDG_SESSION_TYPE=x11, SNAP_USER_DATA=/home/bluehu/snap/intellij-idea-community/320, DISPLAY=:1, SNAP_REEXEC=, SNAP_VERSION=2021.2.1, LC_NAME=en_GB.UTF-8, _=/usr/bin/dbus-update-activation-environment, XDG_SESSION_CLASS=user, SNAP_DATA=/var/snap/intellij-idea-community/320, GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1, DESKTOP_SESSION=pop, SNAP=/snap/intellij-idea-community/320, USER=bluehu, SNAP_REAL_HOME=/home/bluehu, XDG_MENU_PREFIX=gnome-, GIO_LAUNCHED_DESKTOP_FILE_PID=1809080, WINDOWPATH=2, QT_ACCESSIBILITY=1, GJS_DEBUG_OUTPUT=stderr, LC_NUMERIC=en_GB.UTF-8, SSH_AUTH_SOCK=/run/user/1000/keyring/ssh, GNOME_SHELL_SESSION_MODE=pop, SNAP_CONTEXT=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj, XDG_RUNTIME_DIR=/run/user/1000, HOME=/home/bluehu, SNAP_COOKIE=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj}
+2021-09-04T22:59:27.484+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2021-09-04T22:59:27.484+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 1848038). The daemon log file: /home/bluehu/Downloads/School/CS2103/ip/daemon/6.2/daemon-1848038.out.log
+2021-09-04T22:59:27.485+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting 3rd build in daemon [uptime: 2 mins 10.906 secs, performance: 100%, non-heap usage: 28% of 268.4 MB]
+2021-09-04T22:59:27.485+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2021-09-04T22:59:27.485+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=65fc3d9c-5618-4fe3-843c-b51433c84ac5,javaHome=/usr/lib/jvm/java-11-openjdk-amd64,daemonRegistryDir=/home/bluehu/Downloads/School/CS2103/ip/daemon,pid=1848038,idleTimeout=10800000,priority=NORMAL,daemonOpts=-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=GB,-Duser.language=en,-Duser.variant]
+
+BUILD SUCCESSFUL in 2m 41s
+3 actionable tasks: 1 executed, 2 up-to-date
+2021-09-04T23:02:08.839+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has finished executing the build.
+2021-09-04T23:02:08.841+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: finished waiting for DaemonCommandExecution[command = Build{id=f807a448-30a5-4ec4-952a-6113370ee0a1, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47538]. Result org.gradle.launcher.daemon.server.DaemonStateCoordinator@2f454ba6 with state Busy
+2021-09-04T23:02:08.841+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: completed DaemonCommandExecution[command = Build{id=f807a448-30a5-4ec4-952a-6113370ee0a1, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47538]
+2021-09-04T23:02:08.841+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T23:02:08.841+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as idle, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:02:08.841+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:02:08.841+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T23:02:08.841+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:02:08.842+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:02:08.842+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ReturnResult] Daemon is dispatching the build result: Success[value=org.gradle.launcher.exec.BuildActionResult@522f700f]
+2021-09-04T23:02:08.842+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T23:02:08.842+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: dispatching Success[value=org.gradle.launcher.exec.BuildActionResult@522f700f]
+2021-09-04T23:02:08.842+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Finishing executing command: Build{id=f807a448-30a5-4ec4-952a-6113370ee0a1, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T23:02:08.843+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 89: received class org.gradle.launcher.daemon.protocol.CloseInput
+2021-09-04T23:02:08.843+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 89: Received IO message from client: org.gradle.launcher.daemon.protocol.CloseInput@696718df
+2021-09-04T23:02:08.843+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 89: received class org.gradle.launcher.daemon.protocol.Finished
+2021-09-04T23:02:08.843+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 89: Received non-IO message from client: org.gradle.launcher.daemon.protocol.Finished@2c659b97
+2021-09-04T23:02:08.843+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received finished message: org.gradle.launcher.daemon.protocol.Finished@2c659b97
+2021-09-04T23:02:08.843+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.SocketConnection] Discarding EOFException: java.io.EOFException
+2021-09-04T23:02:08.843+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T23:02:08.843+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 89: received null
+2021-09-04T23:02:08.843+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 89: Received end-of-input from client.
+2021-09-04T23:02:08.844+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T23:02:10.634+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:47600 to /127.0.0.1:35363.
+2021-09-04T23:02:10.639+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 120: received class org.gradle.launcher.daemon.protocol.Build
+2021-09-04T23:02:10.639+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 120: Received non-IO message from client: Build{id=54624047-ec30-4684-9fbf-29a6e2e999cd, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T23:02:10.640+0800 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=54624047-ec30-4684-9fbf-29a6e2e999cd, currentDir=/home/bluehu/Downloads/School/CS2103/ip}.
+2021-09-04T23:02:10.640+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=54624047-ec30-4684-9fbf-29a6e2e999cd, currentDir=/home/bluehu/Downloads/School/CS2103/ip} with connection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47600.
+2021-09-04T23:02:10.640+0800 [ERROR] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=54624047-ec30-4684-9fbf-29a6e2e999cd, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47600] after 0.0 minutes of idle
+2021-09-04T23:02:10.640+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:02:10.640+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:02:10.641+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T23:02:10.641+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:02:10.641+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:02:10.641+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T23:02:10.641+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T23:02:10.641+0800 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=54624047-ec30-4684-9fbf-29a6e2e999cd, currentDir=/home/bluehu/Downloads/School/CS2103/ip}. Dispatching build started information...
+2021-09-04T23:02:10.641+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 21: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@446c2e7a
+2021-09-04T23:02:10.642+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: {PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin, XAUTHORITY=/run/user/1000/gdm/Xauthority, INVOCATION_ID=f253fb6caa75476c8b5fe76095c92bb9, LC_MEASUREMENT=en_GB.UTF-8, XMODIFIERS=@im=ibus, LC_TELEPHONE=en_GB.UTF-8, GDMSESSION=pop, XDG_DATA_DIRS=/usr/share/pop:/home/bluehu/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop, MANDATORY_PATH=/usr/share/gconf/pop.mandatory.path, LC_TIME=en_GB.UTF-8, SNAP_COMMON=/var/snap/intellij-idea-community/common, PAPERSIZE=a4, SNAP_INSTANCE_KEY=, GTK_IM_MODULE=ibus, DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus, SNAP_USER_COMMON=/home/bluehu/snap/intellij-idea-community/common, DEFAULTS_PATH=/usr/share/gconf/pop.default.path, SNAP_REVISION=320, XDG_CURRENT_DESKTOP=pop:GNOME, JOURNAL_STREAM=8:15225260, LC_PAPER=en_GB.UTF-8, USERNAME=bluehu, SESSION_MANAGER=local/pop-os:@/tmp/.ICE-unix/1700,unix/pop-os:/tmp/.ICE-unix/1700, LOGNAME=bluehu, PWD=/home/bluehu, MANAGERPID=1454, LANGUAGE=en_GB:en, GJS_DEBUG_TOPICS=JS ERROR;JS LOG, SHELL=/bin/bash, LC_ADDRESS=en_GB.UTF-8, GIO_LAUNCHED_DESKTOP_FILE=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, GNOME_DESKTOP_SESSION_ID=this-is-deprecated, GTK_MODULES=gail:atk-bridge:appmenu-gtk-module, SNAP_ARCH=amd64, SNAP_LIBRARY_PATH=/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void, XDG_SESSION_DESKTOP=pop, SSH_AGENT_LAUNCHER=gnome-keyring, SHLVL=0, LC_IDENTIFICATION=en_GB.UTF-8, LC_MONETARY=en_GB.UTF-8, SNAP_NAME=intellij-idea-community, QT_IM_MODULE=ibus, XDG_CONFIG_DIRS=/etc/xdg/xdg-pop:/etc/xdg, LANG=en_GB.UTF-8, SNAP_INSTANCE_NAME=intellij-idea-community, XDG_SESSION_TYPE=x11, SNAP_USER_DATA=/home/bluehu/snap/intellij-idea-community/320, DISPLAY=:1, SNAP_REEXEC=, SNAP_VERSION=2021.2.1, LC_NAME=en_GB.UTF-8, _=/usr/bin/dbus-update-activation-environment, XDG_SESSION_CLASS=user, SNAP_DATA=/var/snap/intellij-idea-community/320, GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1, DESKTOP_SESSION=pop, SNAP=/snap/intellij-idea-community/320, USER=bluehu, SNAP_REAL_HOME=/home/bluehu, XDG_MENU_PREFIX=gnome-, GIO_LAUNCHED_DESKTOP_FILE_PID=1809080, WINDOWPATH=2, QT_ACCESSIBILITY=1, GJS_DEBUG_OUTPUT=stderr, LC_NUMERIC=en_GB.UTF-8, SSH_AUTH_SOCK=/run/user/1000/keyring/ssh, GNOME_SHELL_SESSION_MODE=pop, SNAP_CONTEXT=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj, XDG_RUNTIME_DIR=/run/user/1000, HOME=/home/bluehu, SNAP_COOKIE=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj}
+2021-09-04T23:02:10.643+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2021-09-04T23:02:10.643+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 1848038). The daemon log file: /home/bluehu/Downloads/School/CS2103/ip/daemon/6.2/daemon-1848038.out.log
+2021-09-04T23:02:10.643+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting 4th build in daemon [uptime: 4 mins 54.064 secs, performance: 100%, non-heap usage: 29% of 268.4 MB]
+2021-09-04T23:02:10.644+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2021-09-04T23:02:10.644+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=65fc3d9c-5618-4fe3-843c-b51433c84ac5,javaHome=/usr/lib/jvm/java-11-openjdk-amd64,daemonRegistryDir=/home/bluehu/Downloads/School/CS2103/ip/daemon,pid=1848038,idleTimeout=10800000,priority=NORMAL,daemonOpts=-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=GB,-Duser.language=en,-Duser.variant]
+Exception in thread "JavaFX Application Thread" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1787)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1670)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8879)
+	at com.sun.javafx.scene.control.behavior.TextFieldBehavior.fire(TextFieldBehavior.java:184)
+	at com.sun.javafx.scene.control.behavior.TextInputControlBehavior.lambda$keyMapping$62(TextInputControlBehavior.java:330)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:218)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$KeyHandler.process(Scene.java:4058)
+	at javafx.scene.Scene$KeyHandler.access$1500(Scene.java:4004)
+	at javafx.scene.Scene.processKeyEvent(Scene.java:2121)
+	at javafx.scene.Scene$ScenePeerListener.keyEvent(Scene.java:2595)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:217)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:149)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleKeyEvent$1(GlassViewEventHandler.java:248)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:390)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleKeyEvent(GlassViewEventHandler.java:247)
+	at com.sun.glass.ui.View.handleKeyEvent(View.java:547)
+	at com.sun.glass.ui.View.notifyKey(View.java:971)
+	at com.sun.glass.ui.gtk.GtkApplication._runLoop(Native Method)
+	at com.sun.glass.ui.gtk.GtkApplication.lambda$runLoop$11(GtkApplication.java:277)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:76)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:273)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:83)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1784)
+	... 47 more
+Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 2 out of bounds for length 2
+	at Du.Parser.parse_recurring(Parser.java:176)
+	at Du.Parser.parse_two_arguments(Parser.java:77)
+	at Du.Parser.parse(Parser.java:35)
+	at Du.MainWindow.handleUserInput(MainWindow.java:60)
+	... 59 more
+Exception in thread "JavaFX Application Thread" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1787)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1670)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8879)
+	at com.sun.javafx.scene.control.behavior.TextFieldBehavior.fire(TextFieldBehavior.java:184)
+	at com.sun.javafx.scene.control.behavior.TextInputControlBehavior.lambda$keyMapping$62(TextInputControlBehavior.java:330)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:218)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$KeyHandler.process(Scene.java:4058)
+	at javafx.scene.Scene$KeyHandler.access$1500(Scene.java:4004)
+	at javafx.scene.Scene.processKeyEvent(Scene.java:2121)
+	at javafx.scene.Scene$ScenePeerListener.keyEvent(Scene.java:2595)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:217)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:149)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleKeyEvent$1(GlassViewEventHandler.java:248)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:390)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleKeyEvent(GlassViewEventHandler.java:247)
+	at com.sun.glass.ui.View.handleKeyEvent(View.java:547)
+	at com.sun.glass.ui.View.notifyKey(View.java:971)
+	at com.sun.glass.ui.gtk.GtkApplication._runLoop(Native Method)
+	at com.sun.glass.ui.gtk.GtkApplication.lambda$runLoop$11(GtkApplication.java:277)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:76)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:273)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:83)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1784)
+	... 47 more
+Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 2 out of bounds for length 2
+	at Du.Parser.parse_recurring(Parser.java:176)
+	at Du.Parser.parse_two_arguments(Parser.java:77)
+	at Du.Parser.parse(Parser.java:35)
+	at Du.MainWindow.handleUserInput(MainWindow.java:60)
+	... 59 more
+Exception in thread "JavaFX Application Thread" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1787)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1670)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8879)
+	at com.sun.javafx.scene.control.behavior.TextFieldBehavior.fire(TextFieldBehavior.java:184)
+	at com.sun.javafx.scene.control.behavior.TextInputControlBehavior.lambda$keyMapping$62(TextInputControlBehavior.java:330)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:218)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$KeyHandler.process(Scene.java:4058)
+	at javafx.scene.Scene$KeyHandler.access$1500(Scene.java:4004)
+	at javafx.scene.Scene.processKeyEvent(Scene.java:2121)
+	at javafx.scene.Scene$ScenePeerListener.keyEvent(Scene.java:2595)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:217)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:149)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleKeyEvent$1(GlassViewEventHandler.java:248)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:390)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleKeyEvent(GlassViewEventHandler.java:247)
+	at com.sun.glass.ui.View.handleKeyEvent(View.java:547)
+	at com.sun.glass.ui.View.notifyKey(View.java:971)
+	at com.sun.glass.ui.gtk.GtkApplication._runLoop(Native Method)
+	at com.sun.glass.ui.gtk.GtkApplication.lambda$runLoop$11(GtkApplication.java:277)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:76)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:273)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:83)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1784)
+	... 47 more
+Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 2 out of bounds for length 2
+	at Du.Parser.parse_recurring(Parser.java:176)
+	at Du.Parser.parse_two_arguments(Parser.java:77)
+	at Du.Parser.parse(Parser.java:35)
+	at Du.MainWindow.handleUserInput(MainWindow.java:60)
+	... 59 more
+Exception in thread "JavaFX Application Thread" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1787)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1670)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8879)
+	at com.sun.javafx.scene.control.behavior.TextFieldBehavior.fire(TextFieldBehavior.java:184)
+	at com.sun.javafx.scene.control.behavior.TextInputControlBehavior.lambda$keyMapping$62(TextInputControlBehavior.java:330)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:218)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$KeyHandler.process(Scene.java:4058)
+	at javafx.scene.Scene$KeyHandler.access$1500(Scene.java:4004)
+	at javafx.scene.Scene.processKeyEvent(Scene.java:2121)
+	at javafx.scene.Scene$ScenePeerListener.keyEvent(Scene.java:2595)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:217)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:149)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleKeyEvent$1(GlassViewEventHandler.java:248)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:390)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleKeyEvent(GlassViewEventHandler.java:247)
+	at com.sun.glass.ui.View.handleKeyEvent(View.java:547)
+	at com.sun.glass.ui.View.notifyKey(View.java:971)
+	at com.sun.glass.ui.gtk.GtkApplication._runLoop(Native Method)
+	at com.sun.glass.ui.gtk.GtkApplication.lambda$runLoop$11(GtkApplication.java:277)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:76)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:273)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:83)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1784)
+	... 47 more
+Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 2 out of bounds for length 2
+	at Du.Parser.parse_recurring(Parser.java:176)
+	at Du.Parser.parse_two_arguments(Parser.java:77)
+	at Du.Parser.parse(Parser.java:35)
+	at Du.MainWindow.handleUserInput(MainWindow.java:60)
+	... 59 more
+Exception in thread "JavaFX Application Thread" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1787)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1670)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8879)
+	at com.sun.javafx.scene.control.behavior.TextFieldBehavior.fire(TextFieldBehavior.java:184)
+	at com.sun.javafx.scene.control.behavior.TextInputControlBehavior.lambda$keyMapping$62(TextInputControlBehavior.java:330)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:218)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$KeyHandler.process(Scene.java:4058)
+	at javafx.scene.Scene$KeyHandler.access$1500(Scene.java:4004)
+	at javafx.scene.Scene.processKeyEvent(Scene.java:2121)
+	at javafx.scene.Scene$ScenePeerListener.keyEvent(Scene.java:2595)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:217)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:149)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleKeyEvent$1(GlassViewEventHandler.java:248)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:390)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleKeyEvent(GlassViewEventHandler.java:247)
+	at com.sun.glass.ui.View.handleKeyEvent(View.java:547)
+	at com.sun.glass.ui.View.notifyKey(View.java:971)
+	at com.sun.glass.ui.gtk.GtkApplication._runLoop(Native Method)
+	at com.sun.glass.ui.gtk.GtkApplication.lambda$runLoop$11(GtkApplication.java:277)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:76)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:273)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:83)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1784)
+	... 47 more
+Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 2 out of bounds for length 2
+	at Du.Parser.parse_recurring(Parser.java:176)
+	at Du.Parser.parse_two_arguments(Parser.java:77)
+	at Du.Parser.parse(Parser.java:35)
+	at Du.MainWindow.handleUserInput(MainWindow.java:60)
+	... 59 more
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':Launcher.main()'.
+> Build cancelled while executing task ':Launcher.main()'
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 1m 24s
+3 actionable tasks: 2 executed, 1 up-to-date
+2021-09-04T23:03:34.717+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has finished executing the build.
+2021-09-04T23:03:35.028+0800 [DEBUG] [org.gradle.process.internal.DefaultExecHandle] Changing state to: ABORTED
+2021-09-04T23:03:35.029+0800 [DEBUG] [org.gradle.process.internal.DefaultExecHandle] Process 'command '/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java'' finished with exit value 143 (state: ABORTED)
+2021-09-04T23:03:35.029+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Cancel: daemon is busy, sleeping until state changes.
+2021-09-04T23:03:35.029+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Cancel: daemon is busy, sleeping until state changes.
+2021-09-04T23:03:35.029+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: finished waiting for DaemonCommandExecution[command = Build{id=54624047-ec30-4684-9fbf-29a6e2e999cd, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47600]. Result org.gradle.launcher.daemon.server.DaemonStateCoordinator@2f454ba6 with state Canceled
+2021-09-04T23:03:35.029+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: completed DaemonCommandExecution[command = Build{id=54624047-ec30-4684-9fbf-29a6e2e999cd, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47600]
+2021-09-04T23:03:35.029+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T23:03:35.029+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as idle, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:03:35.029+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:03:35.029+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T23:03:35.030+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:03:35.030+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:03:35.030+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ReturnResult] Daemon is dispatching the build result: Success[value=org.gradle.launcher.exec.BuildActionResult@e7c053]
+2021-09-04T23:03:35.030+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Cancel: daemon is idle now.
+2021-09-04T23:03:35.030+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: dispatching Success[value=org.gradle.launcher.exec.BuildActionResult@e7c053]
+2021-09-04T23:03:35.030+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T23:03:35.031+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Finishing executing command: Build{id=54624047-ec30-4684-9fbf-29a6e2e999cd, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T23:03:35.032+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 120: received class org.gradle.launcher.daemon.protocol.Finished
+2021-09-04T23:03:35.032+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 120: Received non-IO message from client: org.gradle.launcher.daemon.protocol.Finished@54adfb09
+2021-09-04T23:03:35.032+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received finished message: org.gradle.launcher.daemon.protocol.Finished@54adfb09
+2021-09-04T23:03:35.032+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.SocketConnection] Discarding EOFException: java.io.EOFException
+2021-09-04T23:03:35.032+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T23:03:35.033+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 120: received null
+2021-09-04T23:03:35.033+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 120: Received end-of-input from client.
+2021-09-04T23:03:35.033+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T23:03:35.171+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:47620 to /127.0.0.1:35363.
+2021-09-04T23:03:35.173+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 151: received class org.gradle.launcher.daemon.protocol.Build
+2021-09-04T23:03:35.173+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 151: Received non-IO message from client: Build{id=062d5ad0-e300-48ed-af21-ca59b68fb109, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T23:03:35.173+0800 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=062d5ad0-e300-48ed-af21-ca59b68fb109, currentDir=/home/bluehu/Downloads/School/CS2103/ip}.
+2021-09-04T23:03:35.173+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=062d5ad0-e300-48ed-af21-ca59b68fb109, currentDir=/home/bluehu/Downloads/School/CS2103/ip} with connection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47620.
+2021-09-04T23:03:35.173+0800 [ERROR] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=062d5ad0-e300-48ed-af21-ca59b68fb109, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47620] after 0.0 minutes of idle
+2021-09-04T23:03:35.173+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:03:35.173+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:03:35.173+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T23:03:35.174+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:03:35.174+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:03:35.174+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T23:03:35.174+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T23:03:35.174+0800 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=062d5ad0-e300-48ed-af21-ca59b68fb109, currentDir=/home/bluehu/Downloads/School/CS2103/ip}. Dispatching build started information...
+2021-09-04T23:03:35.174+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 21: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@6aa587c3
+2021-09-04T23:03:35.175+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: {PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin, XAUTHORITY=/run/user/1000/gdm/Xauthority, INVOCATION_ID=f253fb6caa75476c8b5fe76095c92bb9, LC_MEASUREMENT=en_GB.UTF-8, XMODIFIERS=@im=ibus, LC_TELEPHONE=en_GB.UTF-8, GDMSESSION=pop, XDG_DATA_DIRS=/usr/share/pop:/home/bluehu/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop, MANDATORY_PATH=/usr/share/gconf/pop.mandatory.path, LC_TIME=en_GB.UTF-8, SNAP_COMMON=/var/snap/intellij-idea-community/common, PAPERSIZE=a4, SNAP_INSTANCE_KEY=, GTK_IM_MODULE=ibus, DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus, SNAP_USER_COMMON=/home/bluehu/snap/intellij-idea-community/common, DEFAULTS_PATH=/usr/share/gconf/pop.default.path, SNAP_REVISION=320, XDG_CURRENT_DESKTOP=pop:GNOME, JOURNAL_STREAM=8:15225260, LC_PAPER=en_GB.UTF-8, USERNAME=bluehu, SESSION_MANAGER=local/pop-os:@/tmp/.ICE-unix/1700,unix/pop-os:/tmp/.ICE-unix/1700, LOGNAME=bluehu, PWD=/home/bluehu, MANAGERPID=1454, LANGUAGE=en_GB:en, GJS_DEBUG_TOPICS=JS ERROR;JS LOG, SHELL=/bin/bash, LC_ADDRESS=en_GB.UTF-8, GIO_LAUNCHED_DESKTOP_FILE=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, GNOME_DESKTOP_SESSION_ID=this-is-deprecated, GTK_MODULES=gail:atk-bridge:appmenu-gtk-module, SNAP_ARCH=amd64, SNAP_LIBRARY_PATH=/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void, XDG_SESSION_DESKTOP=pop, SSH_AGENT_LAUNCHER=gnome-keyring, SHLVL=0, LC_IDENTIFICATION=en_GB.UTF-8, LC_MONETARY=en_GB.UTF-8, SNAP_NAME=intellij-idea-community, QT_IM_MODULE=ibus, XDG_CONFIG_DIRS=/etc/xdg/xdg-pop:/etc/xdg, LANG=en_GB.UTF-8, SNAP_INSTANCE_NAME=intellij-idea-community, XDG_SESSION_TYPE=x11, SNAP_USER_DATA=/home/bluehu/snap/intellij-idea-community/320, DISPLAY=:1, SNAP_REEXEC=, SNAP_VERSION=2021.2.1, LC_NAME=en_GB.UTF-8, _=/usr/bin/dbus-update-activation-environment, XDG_SESSION_CLASS=user, SNAP_DATA=/var/snap/intellij-idea-community/320, GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1, DESKTOP_SESSION=pop, SNAP=/snap/intellij-idea-community/320, USER=bluehu, SNAP_REAL_HOME=/home/bluehu, XDG_MENU_PREFIX=gnome-, GIO_LAUNCHED_DESKTOP_FILE_PID=1809080, WINDOWPATH=2, QT_ACCESSIBILITY=1, GJS_DEBUG_OUTPUT=stderr, LC_NUMERIC=en_GB.UTF-8, SSH_AUTH_SOCK=/run/user/1000/keyring/ssh, GNOME_SHELL_SESSION_MODE=pop, SNAP_CONTEXT=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj, XDG_RUNTIME_DIR=/run/user/1000, HOME=/home/bluehu, SNAP_COOKIE=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj}
+2021-09-04T23:03:35.175+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2021-09-04T23:03:35.176+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 1848038). The daemon log file: /home/bluehu/Downloads/School/CS2103/ip/daemon/6.2/daemon-1848038.out.log
+2021-09-04T23:03:35.176+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting 5th build in daemon [uptime: 6 mins 18.597 secs, performance: 100%, non-heap usage: 29% of 268.4 MB]
+2021-09-04T23:03:35.176+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2021-09-04T23:03:35.176+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=65fc3d9c-5618-4fe3-843c-b51433c84ac5,javaHome=/usr/lib/jvm/java-11-openjdk-amd64,daemonRegistryDir=/home/bluehu/Downloads/School/CS2103/ip/daemon,pid=1848038,idleTimeout=10800000,priority=NORMAL,daemonOpts=-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=GB,-Duser.language=en,-Duser.variant]
+Exception in thread "JavaFX Application Thread" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1787)
+	at javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1670)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:49)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Node.fireEvent(Node.java:8879)
+	at com.sun.javafx.scene.control.behavior.TextFieldBehavior.fire(TextFieldBehavior.java:184)
+	at com.sun.javafx.scene.control.behavior.TextInputControlBehavior.lambda$keyMapping$62(TextInputControlBehavior.java:330)
+	at com.sun.javafx.scene.control.inputmap.InputMap.handle(InputMap.java:274)
+	at com.sun.javafx.event.CompositeEventHandler$NormalEventHandlerRecord.handleBubblingEvent(CompositeEventHandler.java:218)
+	at com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:80)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:238)
+	at com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.scene.Scene$KeyHandler.process(Scene.java:4058)
+	at javafx.scene.Scene$KeyHandler.access$1500(Scene.java:4004)
+	at javafx.scene.Scene.processKeyEvent(Scene.java:2121)
+	at javafx.scene.Scene$ScenePeerListener.keyEvent(Scene.java:2595)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:217)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler$KeyEventNotification.run(GlassViewEventHandler.java:149)
+	at java.base/java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleKeyEvent$1(GlassViewEventHandler.java:248)
+	at com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:390)
+	at com.sun.javafx.tk.quantum.GlassViewEventHandler.handleKeyEvent(GlassViewEventHandler.java:247)
+	at com.sun.glass.ui.View.handleKeyEvent(View.java:547)
+	at com.sun.glass.ui.View.notifyKey(View.java:971)
+	at com.sun.glass.ui.gtk.GtkApplication._runLoop(Native Method)
+	at com.sun.glass.ui.gtk.GtkApplication.lambda$runLoop$11(GtkApplication.java:277)
+	at java.base/java.lang.Thread.run(Thread.java:829)
+Caused by: java.lang.reflect.InvocationTargetException
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:76)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)
+	at com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:273)
+	at com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:83)
+	at javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1784)
+	... 47 more
+Caused by: java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
+	at Du.Parser.parse_two_arguments(Parser.java:62)
+	at Du.Parser.parse(Parser.java:35)
+	at Du.MainWindow.handleUserInput(MainWindow.java:60)
+	... 59 more
+Bye. Hope to not see you again:P
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':Launcher.main()'.
+> Build cancelled while executing task ':Launcher.main()'
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 3m 17s
+3 actionable tasks: 2 executed, 1 up-to-date
+2021-09-04T23:06:52.341+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has finished executing the build.
+2021-09-04T23:06:52.659+0800 [DEBUG] [org.gradle.process.internal.DefaultExecHandle] Changing state to: ABORTED
+2021-09-04T23:06:52.659+0800 [DEBUG] [org.gradle.process.internal.DefaultExecHandle] Process 'command '/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java'' finished with exit value 143 (state: ABORTED)
+2021-09-04T23:06:52.659+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Cancel: daemon is busy, sleeping until state changes.
+2021-09-04T23:06:52.659+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Cancel: daemon is busy, sleeping until state changes.
+2021-09-04T23:06:52.659+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: finished waiting for DaemonCommandExecution[command = Build{id=062d5ad0-e300-48ed-af21-ca59b68fb109, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47620]. Result org.gradle.launcher.daemon.server.DaemonStateCoordinator@2f454ba6 with state Canceled
+2021-09-04T23:06:52.659+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: completed DaemonCommandExecution[command = Build{id=062d5ad0-e300-48ed-af21-ca59b68fb109, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47620]
+2021-09-04T23:06:52.659+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T23:06:52.659+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as idle, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:06:52.659+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:06:52.659+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T23:06:52.660+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:06:52.660+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:06:52.660+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ReturnResult] Daemon is dispatching the build result: Success[value=org.gradle.launcher.exec.BuildActionResult@5c49bcf]
+2021-09-04T23:06:52.660+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Cancel: daemon is idle now.
+2021-09-04T23:06:52.660+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T23:06:52.660+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: dispatching Success[value=org.gradle.launcher.exec.BuildActionResult@5c49bcf]
+2021-09-04T23:06:52.661+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Finishing executing command: Build{id=062d5ad0-e300-48ed-af21-ca59b68fb109, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T23:06:52.663+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 151: received class org.gradle.launcher.daemon.protocol.Finished
+2021-09-04T23:06:52.663+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 151: Received non-IO message from client: org.gradle.launcher.daemon.protocol.Finished@20cbcadd
+2021-09-04T23:06:52.663+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received finished message: org.gradle.launcher.daemon.protocol.Finished@20cbcadd
+2021-09-04T23:06:52.663+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.SocketConnection] Discarding EOFException: java.io.EOFException
+2021-09-04T23:06:52.663+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T23:06:52.663+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 151: received null
+2021-09-04T23:06:52.664+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 151: Received end-of-input from client.
+2021-09-04T23:06:52.664+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T23:06:52.807+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:47662 to /127.0.0.1:35363.
+2021-09-04T23:06:52.810+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 182: received class org.gradle.launcher.daemon.protocol.Build
+2021-09-04T23:06:52.810+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 182: Received non-IO message from client: Build{id=8c68dd06-c759-4e61-afec-1bbb218dea01, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T23:06:52.810+0800 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=8c68dd06-c759-4e61-afec-1bbb218dea01, currentDir=/home/bluehu/Downloads/School/CS2103/ip}.
+2021-09-04T23:06:52.810+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=8c68dd06-c759-4e61-afec-1bbb218dea01, currentDir=/home/bluehu/Downloads/School/CS2103/ip} with connection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47662.
+2021-09-04T23:06:52.810+0800 [ERROR] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=8c68dd06-c759-4e61-afec-1bbb218dea01, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47662] after 0.0 minutes of idle
+2021-09-04T23:06:52.810+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:06:52.810+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:06:52.811+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T23:06:52.811+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:06:52.811+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:06:52.811+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T23:06:52.811+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T23:06:52.811+0800 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=8c68dd06-c759-4e61-afec-1bbb218dea01, currentDir=/home/bluehu/Downloads/School/CS2103/ip}. Dispatching build started information...
+2021-09-04T23:06:52.811+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 21: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@4e8d0b58
+2021-09-04T23:06:52.812+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: {PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin, XAUTHORITY=/run/user/1000/gdm/Xauthority, INVOCATION_ID=f253fb6caa75476c8b5fe76095c92bb9, LC_MEASUREMENT=en_GB.UTF-8, XMODIFIERS=@im=ibus, LC_TELEPHONE=en_GB.UTF-8, GDMSESSION=pop, XDG_DATA_DIRS=/usr/share/pop:/home/bluehu/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop, MANDATORY_PATH=/usr/share/gconf/pop.mandatory.path, LC_TIME=en_GB.UTF-8, SNAP_COMMON=/var/snap/intellij-idea-community/common, PAPERSIZE=a4, SNAP_INSTANCE_KEY=, GTK_IM_MODULE=ibus, DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus, SNAP_USER_COMMON=/home/bluehu/snap/intellij-idea-community/common, DEFAULTS_PATH=/usr/share/gconf/pop.default.path, SNAP_REVISION=320, XDG_CURRENT_DESKTOP=pop:GNOME, JOURNAL_STREAM=8:15225260, LC_PAPER=en_GB.UTF-8, USERNAME=bluehu, SESSION_MANAGER=local/pop-os:@/tmp/.ICE-unix/1700,unix/pop-os:/tmp/.ICE-unix/1700, LOGNAME=bluehu, PWD=/home/bluehu, MANAGERPID=1454, LANGUAGE=en_GB:en, GJS_DEBUG_TOPICS=JS ERROR;JS LOG, SHELL=/bin/bash, LC_ADDRESS=en_GB.UTF-8, GIO_LAUNCHED_DESKTOP_FILE=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, GNOME_DESKTOP_SESSION_ID=this-is-deprecated, GTK_MODULES=gail:atk-bridge:appmenu-gtk-module, SNAP_ARCH=amd64, SNAP_LIBRARY_PATH=/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void, XDG_SESSION_DESKTOP=pop, SSH_AGENT_LAUNCHER=gnome-keyring, SHLVL=0, LC_IDENTIFICATION=en_GB.UTF-8, LC_MONETARY=en_GB.UTF-8, SNAP_NAME=intellij-idea-community, QT_IM_MODULE=ibus, XDG_CONFIG_DIRS=/etc/xdg/xdg-pop:/etc/xdg, LANG=en_GB.UTF-8, SNAP_INSTANCE_NAME=intellij-idea-community, XDG_SESSION_TYPE=x11, SNAP_USER_DATA=/home/bluehu/snap/intellij-idea-community/320, DISPLAY=:1, SNAP_REEXEC=, SNAP_VERSION=2021.2.1, LC_NAME=en_GB.UTF-8, _=/usr/bin/dbus-update-activation-environment, XDG_SESSION_CLASS=user, SNAP_DATA=/var/snap/intellij-idea-community/320, GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1, DESKTOP_SESSION=pop, SNAP=/snap/intellij-idea-community/320, USER=bluehu, SNAP_REAL_HOME=/home/bluehu, XDG_MENU_PREFIX=gnome-, GIO_LAUNCHED_DESKTOP_FILE_PID=1809080, WINDOWPATH=2, QT_ACCESSIBILITY=1, GJS_DEBUG_OUTPUT=stderr, LC_NUMERIC=en_GB.UTF-8, SSH_AUTH_SOCK=/run/user/1000/keyring/ssh, GNOME_SHELL_SESSION_MODE=pop, SNAP_CONTEXT=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj, XDG_RUNTIME_DIR=/run/user/1000, HOME=/home/bluehu, SNAP_COOKIE=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj}
+2021-09-04T23:06:52.812+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2021-09-04T23:06:52.812+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 1848038). The daemon log file: /home/bluehu/Downloads/School/CS2103/ip/daemon/6.2/daemon-1848038.out.log
+2021-09-04T23:06:52.812+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting 6th build in daemon [uptime: 9 mins 36.234 secs, performance: 100%, non-heap usage: 29% of 268.4 MB]
+2021-09-04T23:06:52.813+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2021-09-04T23:06:52.813+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=65fc3d9c-5618-4fe3-843c-b51433c84ac5,javaHome=/usr/lib/jvm/java-11-openjdk-amd64,daemonRegistryDir=/home/bluehu/Downloads/School/CS2103/ip/daemon,pid=1848038,idleTimeout=10800000,priority=NORMAL,daemonOpts=-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=GB,-Duser.language=en,-Duser.variant]
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':Launcher.main()'.
+> Build cancelled while executing task ':Launcher.main()'
+
+* Try:
+Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output. Run with --scan to get full insights.
+
+* Get more help at https://help.gradle.org
+
+BUILD FAILED in 1m 11s
+3 actionable tasks: 2 executed, 1 up-to-date
+2021-09-04T23:08:04.386+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has finished executing the build.
+2021-09-04T23:08:04.696+0800 [DEBUG] [org.gradle.process.internal.DefaultExecHandle] Changing state to: ABORTED
+2021-09-04T23:08:04.696+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Cancel: daemon is busy, sleeping until state changes.
+2021-09-04T23:08:04.696+0800 [DEBUG] [org.gradle.process.internal.DefaultExecHandle] Process 'command '/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin/java'' finished with exit value 143 (state: ABORTED)
+2021-09-04T23:08:04.696+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Cancel: daemon is busy, sleeping until state changes.
+2021-09-04T23:08:04.696+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: finished waiting for DaemonCommandExecution[command = Build{id=8c68dd06-c759-4e61-afec-1bbb218dea01, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47662]. Result org.gradle.launcher.daemon.server.DaemonStateCoordinator@2f454ba6 with state Canceled
+2021-09-04T23:08:04.696+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: completed DaemonCommandExecution[command = Build{id=8c68dd06-c759-4e61-afec-1bbb218dea01, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47662]
+2021-09-04T23:08:04.696+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T23:08:04.696+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as idle, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:08:04.696+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:08:04.696+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T23:08:04.697+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:08:04.697+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:08:04.697+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ReturnResult] Daemon is dispatching the build result: Success[value=org.gradle.launcher.exec.BuildActionResult@3bc86b6a]
+2021-09-04T23:08:04.697+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Cancel: daemon is idle now.
+2021-09-04T23:08:04.697+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T23:08:04.697+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: dispatching Success[value=org.gradle.launcher.exec.BuildActionResult@3bc86b6a]
+2021-09-04T23:08:04.698+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Finishing executing command: Build{id=8c68dd06-c759-4e61-afec-1bbb218dea01, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T23:08:04.699+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 182: received class org.gradle.launcher.daemon.protocol.Finished
+2021-09-04T23:08:04.699+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 182: Received non-IO message from client: org.gradle.launcher.daemon.protocol.Finished@6ef90b88
+2021-09-04T23:08:04.699+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received finished message: org.gradle.launcher.daemon.protocol.Finished@6ef90b88
+2021-09-04T23:08:04.699+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T23:08:04.699+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.SocketConnection] Discarding EOFException: java.io.EOFException
+2021-09-04T23:08:04.700+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 182: received null
+2021-09-04T23:08:04.700+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 182: Received end-of-input from client.
+2021-09-04T23:08:04.700+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T23:08:04.886+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.TcpIncomingConnector] Accepted connection from /127.0.0.1:47666 to /127.0.0.1:35363.
+2021-09-04T23:08:04.889+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 213: received class org.gradle.launcher.daemon.protocol.Build
+2021-09-04T23:08:04.889+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 213: Received non-IO message from client: Build{id=b345b87c-e30a-4334-8376-13239468ca03, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T23:08:04.889+0800 [INFO] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received command: Build{id=b345b87c-e30a-4334-8376-13239468ca03, currentDir=/home/bluehu/Downloads/School/CS2103/ip}.
+2021-09-04T23:08:04.889+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Starting executing command: Build{id=b345b87c-e30a-4334-8376-13239468ca03, currentDir=/home/bluehu/Downloads/School/CS2103/ip} with connection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47666.
+2021-09-04T23:08:04.889+0800 [ERROR] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: started DaemonCommandExecution[command = Build{id=b345b87c-e30a-4334-8376-13239468ca03, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47666] after 0.0 minutes of idle
+2021-09-04T23:08:04.889+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as busy, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:08:04.890+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:08:04.890+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T23:08:04.890+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:08:04.890+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:08:04.891+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T23:08:04.891+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T23:08:04.891+0800 [INFO] [org.gradle.launcher.daemon.server.exec.StartBuildOrRespondWithBusy] Daemon is about to start building Build{id=b345b87c-e30a-4334-8376-13239468ca03, currentDir=/home/bluehu/Downloads/School/CS2103/ip}. Dispatching build started information...
+2021-09-04T23:08:04.891+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 21: dispatching org.gradle.launcher.daemon.protocol.BuildStarted@1cd5a6b1
+2021-09-04T23:08:04.892+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.EstablishBuildEnvironment] Configuring env variables: {PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin, XAUTHORITY=/run/user/1000/gdm/Xauthority, INVOCATION_ID=f253fb6caa75476c8b5fe76095c92bb9, LC_MEASUREMENT=en_GB.UTF-8, XMODIFIERS=@im=ibus, LC_TELEPHONE=en_GB.UTF-8, GDMSESSION=pop, XDG_DATA_DIRS=/usr/share/pop:/home/bluehu/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop, MANDATORY_PATH=/usr/share/gconf/pop.mandatory.path, LC_TIME=en_GB.UTF-8, SNAP_COMMON=/var/snap/intellij-idea-community/common, PAPERSIZE=a4, SNAP_INSTANCE_KEY=, GTK_IM_MODULE=ibus, DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus, SNAP_USER_COMMON=/home/bluehu/snap/intellij-idea-community/common, DEFAULTS_PATH=/usr/share/gconf/pop.default.path, SNAP_REVISION=320, XDG_CURRENT_DESKTOP=pop:GNOME, JOURNAL_STREAM=8:15225260, LC_PAPER=en_GB.UTF-8, USERNAME=bluehu, SESSION_MANAGER=local/pop-os:@/tmp/.ICE-unix/1700,unix/pop-os:/tmp/.ICE-unix/1700, LOGNAME=bluehu, PWD=/home/bluehu, MANAGERPID=1454, LANGUAGE=en_GB:en, GJS_DEBUG_TOPICS=JS ERROR;JS LOG, SHELL=/bin/bash, LC_ADDRESS=en_GB.UTF-8, GIO_LAUNCHED_DESKTOP_FILE=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, BAMF_DESKTOP_FILE_HINT=/var/lib/snapd/desktop/applications/intellij-idea-community_intellij-idea-community.desktop, GNOME_DESKTOP_SESSION_ID=this-is-deprecated, GTK_MODULES=gail:atk-bridge:appmenu-gtk-module, SNAP_ARCH=amd64, SNAP_LIBRARY_PATH=/var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void, XDG_SESSION_DESKTOP=pop, SSH_AGENT_LAUNCHER=gnome-keyring, SHLVL=0, LC_IDENTIFICATION=en_GB.UTF-8, LC_MONETARY=en_GB.UTF-8, SNAP_NAME=intellij-idea-community, QT_IM_MODULE=ibus, XDG_CONFIG_DIRS=/etc/xdg/xdg-pop:/etc/xdg, LANG=en_GB.UTF-8, SNAP_INSTANCE_NAME=intellij-idea-community, XDG_SESSION_TYPE=x11, SNAP_USER_DATA=/home/bluehu/snap/intellij-idea-community/320, DISPLAY=:1, SNAP_REEXEC=, SNAP_VERSION=2021.2.1, LC_NAME=en_GB.UTF-8, _=/usr/bin/dbus-update-activation-environment, XDG_SESSION_CLASS=user, SNAP_DATA=/var/snap/intellij-idea-community/320, GPG_AGENT_INFO=/run/user/1000/gnupg/S.gpg-agent:0:1, DESKTOP_SESSION=pop, SNAP=/snap/intellij-idea-community/320, USER=bluehu, SNAP_REAL_HOME=/home/bluehu, XDG_MENU_PREFIX=gnome-, GIO_LAUNCHED_DESKTOP_FILE_PID=1809080, WINDOWPATH=2, QT_ACCESSIBILITY=1, GJS_DEBUG_OUTPUT=stderr, LC_NUMERIC=en_GB.UTF-8, SSH_AUTH_SOCK=/run/user/1000/keyring/ssh, GNOME_SHELL_SESSION_MODE=pop, SNAP_CONTEXT=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj, XDG_RUNTIME_DIR=/run/user/1000, HOME=/home/bluehu, SNAP_COOKIE=JMQIuDJB4nrz97LcfWrth32btAAzamI2HhzFTUr_ZcxiAi92Gqnj}
+2021-09-04T23:08:04.892+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.LogToClient] About to start relaying all logs to the client via the connection.
+2021-09-04T23:08:04.892+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogToClient] The client will now receive all logging from the daemon (pid: 1848038). The daemon log file: /home/bluehu/Downloads/School/CS2103/ip/daemon/6.2/daemon-1848038.out.log
+2021-09-04T23:08:04.892+0800 [INFO] [org.gradle.launcher.daemon.server.exec.LogAndCheckHealth] Starting 7th build in daemon [uptime: 10 mins 48.314 secs, performance: 100%, non-heap usage: 29% of 268.4 MB]
+2021-09-04T23:08:04.893+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has started executing the build.
+2021-09-04T23:08:04.893+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] Executing build with daemon context: DefaultDaemonContext[uid=65fc3d9c-5618-4fe3-843c-b51433c84ac5,javaHome=/usr/lib/jvm/java-11-openjdk-amd64,daemonRegistryDir=/home/bluehu/Downloads/School/CS2103/ip/daemon,pid=1848038,idleTimeout=10800000,priority=NORMAL,daemonOpts=-XX:MaxMetaspaceSize=256m,-XX:+HeapDumpOnOutOfMemoryError,--add-opens,java.base/java.util=ALL-UNNAMED,--add-opens,java.base/java.lang=ALL-UNNAMED,--add-opens,java.base/java.lang.invoke=ALL-UNNAMED,--add-opens,java.prefs/java.util.prefs=ALL-UNNAMED,-Xms256m,-Xmx512m,-Dfile.encoding=UTF-8,-Duser.country=GB,-Duser.language=en,-Duser.variant]
+
+BUILD SUCCESSFUL in 4s
+3 actionable tasks: 1 executed, 2 up-to-date
+2021-09-04T23:08:09.489+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ExecuteBuild] The daemon has finished executing the build.
+2021-09-04T23:08:09.496+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T23:08:09.496+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: finished waiting for DaemonCommandExecution[command = Build{id=b345b87c-e30a-4334-8376-13239468ca03, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47666]. Result org.gradle.launcher.daemon.server.DaemonStateCoordinator@2f454ba6 with state Busy
+2021-09-04T23:08:09.496+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] Command execution: completed DaemonCommandExecution[command = Build{id=b345b87c-e30a-4334-8376-13239468ca03, currentDir=/home/bluehu/Downloads/School/CS2103/ip}, connection = DefaultDaemonConnection: socket connection from /127.0.0.1:35363 to /127.0.0.1:47666]
+2021-09-04T23:08:09.496+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] resetting idle timer
+2021-09-04T23:08:09.496+0800 [INFO] [org.gradle.launcher.daemon.server.DaemonRegistryUpdater] Marking the daemon as idle, address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:08:09.496+0800 [DEBUG] [org.gradle.launcher.daemon.registry.PersistentDaemonRegistry] Marking busy by address: [86d62b63-36e8-4ed0-840d-fd37092ec31b port:35363, addresses:[localhost/127.0.0.1]]
+2021-09-04T23:08:09.496+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire exclusive lock on daemon addresses registry.
+2021-09-04T23:08:09.497+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:08:09.497+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:08:09.497+0800 [DEBUG] [org.gradle.launcher.daemon.server.exec.ReturnResult] Daemon is dispatching the build result: Success[value=org.gradle.launcher.exec.BuildActionResult@34e5ee01]
+2021-09-04T23:08:09.497+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: dispatching Success[value=org.gradle.launcher.exec.BuildActionResult@34e5ee01]
+2021-09-04T23:08:09.497+0800 [DEBUG] [org.gradle.launcher.daemon.server.DaemonStateCoordinator] daemon is running. Sleeping until state changes.
+2021-09-04T23:08:09.497+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Finishing executing command: Build{id=b345b87c-e30a-4334-8376-13239468ca03, currentDir=/home/bluehu/Downloads/School/CS2103/ip}
+2021-09-04T23:08:09.497+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 213: received class org.gradle.launcher.daemon.protocol.CloseInput
+2021-09-04T23:08:09.497+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 213: Received IO message from client: org.gradle.launcher.daemon.protocol.CloseInput@2b0a5042
+2021-09-04T23:08:09.497+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 213: received class org.gradle.launcher.daemon.protocol.Finished
+2021-09-04T23:08:09.497+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 213: Received non-IO message from client: org.gradle.launcher.daemon.protocol.Finished@6e08cb47
+2021-09-04T23:08:09.498+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultIncomingConnectionHandler] Received finished message: org.gradle.launcher.daemon.protocol.Finished@6e08cb47
+2021-09-04T23:08:09.498+0800 [DEBUG] [org.gradle.internal.remote.internal.inet.SocketConnection] Discarding EOFException: java.io.EOFException
+2021-09-04T23:08:09.498+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 213: received null
+2021-09-04T23:08:09.498+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T23:08:09.498+0800 [DEBUG] [org.gradle.launcher.daemon.server.DefaultDaemonConnection] thread 213: Received end-of-input from client.
+2021-09-04T23:08:09.498+0800 [DEBUG] [org.gradle.launcher.daemon.server.SynchronizedDispatchConnection] thread 18: stopping connection
+2021-09-04T23:08:16.689+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T23:08:16.689+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:08:16.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:08:16.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T23:08:16.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:08:16.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:08:26.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T23:08:26.690+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:08:26.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:08:26.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T23:08:26.691+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:08:26.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.
+2021-09-04T23:08:26.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Waiting to acquire shared lock on daemon addresses registry.
+2021-09-04T23:08:26.692+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Lock acquired on daemon addresses registry.
+2021-09-04T23:08:26.693+0800 [DEBUG] [org.gradle.cache.internal.DefaultFileLockManager] Releasing lock on daemon addresses registry.

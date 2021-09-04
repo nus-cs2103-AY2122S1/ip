@@ -60,6 +60,7 @@ public class Parser {
             response = tasks.print(tasks.search(split_string[1]));
         } else if (Objects.equals(split_string[0], "delete")) {
             response = tasks.remove_task(Integer.parseInt(split_string[1])); // might want to find a way to check whether split_string[1] is an integer
+            return response;
         } else if (Objects.equals(split_string[0], "todo")) {
             // error handling when to do item is empty
             if (split_string.length <= 1) {
@@ -73,7 +74,9 @@ public class Parser {
                 response = parse_Deadline(split_string);
             } else if (Objects.equals(split_string[0], "event")) {
                 response = parse_Event(split_string);
-            } else {
+            } else if (Objects.equals(split_string[0], "recurring")) {
+                response = parse_recurring(split_string);
+            } else  {
                 response = "Oh noes, I don't understand:(, please input again";
                 return response;
             }
@@ -129,7 +132,7 @@ public class Parser {
         String[] task_time = split_string[1].split("/at ", 2);
         // error handling when there is no time for event
         if (task_time.length <= 1) {
-            response = "Oh noes, the event item needs to have a time that it is occuring at, please input again";
+            response = "Oh noes, the event item needs to have a time that it is occurring at, please input again";
             return response;
         }
         try {
@@ -141,6 +144,124 @@ public class Parser {
         LocalDateTime date = LocalDateTime.parse(task_time[1], formatter);
         Task task = new Event(task_time[0], false, tasks, date);
         response = task.log_add_task();
+        return response;
+    }
+
+    public String parse_recurring(String[] split_string) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String response = "";
+        // error handling when the recurring item is empty
+        if (split_string.length <= 1) {
+            response = "Oh noes, the recurring item cannot be empty, please input again";
+            return response;
+        }
+        // recurring weekly, 3, deadline do assignment /by datetime
+        // recurring daily, 5, event meeting /at datetime
+        // frequency is daily, weekly, monthly, yearly
+        String[] recurring_split = split_string[1].split(", ", 3);
+        if (recurring_split.length <= 1) {
+            response = "Oh noes, you need to input the frequency of recurrence and number of time it occurs";
+            return response;
+        }
+        if (recurring_split.length <= 2) {
+            response = "Oh noes, you need to input the task itself";
+            return response;
+        }
+        try {
+            int times = Integer.parseInt(recurring_split[1]);
+        } catch (NumberFormatException e) {
+            response = "you need to input in the following format: recurring <frequency>, <number of times>, deadline/event ";
+            return response;
+        }
+        int times = Integer.parseInt(recurring_split[1]);
+
+        String[] deadline_event_string = recurring_split[2].split(" ", 2);
+
+        if (Objects.equals(deadline_event_string[0], "deadline")) {
+            response = parse_recurring_Deadline(deadline_event_string, times, recurring_split[0]);
+        } else if (Objects.equals(deadline_event_string[0], "event")) {
+            response = parse_recurring_Event(deadline_event_string, times, recurring_split[0]);
+        } else {
+            response = "Oh noes, pls input either a deadline or event for it to be recurring";
+            return response;
+        }
+
+        return response;
+    }
+
+    public LocalDateTime add_frequency(String frequency, LocalDateTime time) {
+        if (Objects.equals(frequency, "daily")) {
+            return time.plusDays(1);
+        } else if (Objects.equals(frequency, "weekly")) {
+            return time.plusWeeks(1);
+        } else if (Objects.equals(frequency, "monthly")) {
+            return time.plusMonths(1);
+        } else if (Objects.equals(frequency, "yearly")) {
+            return time.plusYears(1);
+        }
+        return null;
+    }
+
+    public String parse_recurring_Deadline(String[] split_string, int number_of_times, String frequency) {
+        String response = "";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        // error handling when the deadline item is empty
+        if (split_string.length <= 1) {
+            response = "Oh noes, the Deadline item cannot be empty, please input again";
+            return response;
+        }
+        String[] task_time = split_string[1].split("/by ", 2);
+        // error handling when there is no time for deadline
+        if (task_time.length <= 1) {
+            response = "Oh noes, the deadline item needs to have a time to be done by, please input again";
+            return response;
+        }
+        try {
+            LocalDateTime date = LocalDateTime.parse(task_time[1], formatter);
+        } catch (DateTimeParseException e) {
+            response = "Invalid date format, please input the date in this format: yyyy-MM-dd HH:mm";
+            return response;
+        }
+        LocalDateTime date = LocalDateTime.parse(task_time[1], formatter);
+        Task task = new Deadline(task_time[0], false, tasks, date);
+        for (int i = 0; i < number_of_times - 1; i++) {
+            date = add_frequency(frequency, date);
+            Task t = new Deadline(task_time[0], false, tasks, date);
+        }
+
+        response = task.log_add_recurring_task(number_of_times, frequency);
+
+        return response;
+    }
+
+    public String parse_recurring_Event(String[] split_string, int number_of_times, String frequency) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String response = "";
+        // error handling when the event item is empty
+        if (split_string.length <= 1) {
+            response = "Oh noes, the event item cannot be empty, please input again";
+            return response;
+        }
+        String[] task_time = split_string[1].split("/at ", 2);
+        // error handling when there is no time for event
+        if (task_time.length <= 1) {
+            response = "Oh noes, the event item needs to have a time that it is occurring at, please input again";
+            return response;
+        }
+        try {
+            LocalDateTime date = LocalDateTime.parse(task_time[1], formatter);
+        } catch (DateTimeParseException e) {
+            response = "Invalid date format, please input the date in this format: yyyy-MM-dd HH:mm";
+            return response;
+        }
+        LocalDateTime date = LocalDateTime.parse(task_time[1], formatter);
+        Task task = new Event(task_time[0], false, tasks, date);
+        for (int i = 0; i < number_of_times - 1; i++) {
+            date = add_frequency(frequency, date);
+            Task t = new Event(task_time[0], false, tasks, date);
+        }
+
+        response = task.log_add_recurring_task(number_of_times, frequency);
         return response;
     }
 

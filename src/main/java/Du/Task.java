@@ -32,6 +32,12 @@ public class Task {
                 + "Now you have " + taskList.size() + " task(s) in the list.\n";
     }
 
+    public String log_add_recurring_task(int number_of_times, String frequency) {
+        return "Got it. I've added this task:\n"
+                + this + "\n" + frequency + " for " + number_of_times + " times\n"
+                + "Now you have " + taskList.size() + " task(s) in the list.\n";
+    }
+
     /**
      * Changes task's done state to be true
      */
