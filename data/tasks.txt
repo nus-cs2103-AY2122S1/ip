@@ -1,3 +1,4 @@
 E | 0 | project meeting | Aug 26 2021 19:15
 E | 0 | have dinner | 2021-08-28 14:20
 D | 0 | return book | 2021-08-27 14:15
+E | 0 | project | Aug 26 2021 19:15

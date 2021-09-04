@@ -157,7 +157,6 @@ public class Parser {
                 }
             }
             default: {
-//                ui.showUnknownMessage();
                 return ui.unknownMessageToString();
             }
         }

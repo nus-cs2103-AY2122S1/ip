@@ -23,15 +23,12 @@ public class Ui {
             + "To add a todo task  --  todo <task>\n"
             + "To add a deadline  --  deadline <task> /by MMM dd yyyy HH:mm\n"
             + "To add an event  --  event <task> /at MMM dd yyyy HH:mm\n"
-            + "To mark a task as done  --  done <index from list>\n"
-            + "To delete a tasks  --  delete <index from list>\n"
-            + "To search for a task  --  find <keyword>\n"
-            + "To see the contents of your list  --  list\n";
+            + "Other tasks include 'done', 'delete', 'find', 'list'";
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInputField;
-    private Button enterButton;
+    private Button sendButton;
     private Scene scene;
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -152,12 +149,11 @@ public class Ui {
         setUpUi(stage);
         setupEventHandlers();
 
+        displayGreeting();
         stage.setScene(scene);
         stage.show();
 
-        displayGreeting();
-
-        enterButton.setOnMouseClicked((event) -> {
+        sendButton.setOnMouseClicked((event) -> {
             handleUserInput(duke);
         });
 
@@ -175,7 +171,7 @@ public class Ui {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         userInputField = new TextField();
-        enterButton = new Button("Enter");
+        sendButton = new Button("Enter");
         AnchorPane mainLayout = new AnchorPane();
         scene = new Scene(mainLayout);
 
@@ -197,23 +193,23 @@ public class Ui {
 
         userInputField.setPrefWidth(435.0);
 
-        enterButton.setPrefWidth(55.0);
+        sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
-        AnchorPane.setBottomAnchor(enterButton, 1.0);
-        AnchorPane.setRightAnchor(enterButton, 1.0);
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
         AnchorPane.setLeftAnchor(userInputField, 1.0);
         AnchorPane.setBottomAnchor(userInputField, 1.0);
 
         scrollPane.setContent(dialogContainer);
-        mainLayout.getChildren().addAll(scrollPane, userInputField, enterButton);
+        mainLayout.getChildren().addAll(scrollPane, userInputField, sendButton);
     }
 
     /**
      * Sets up the events when buttons are clicked.
      */
     private void setupEventHandlers() {
-        enterButton.setOnMouseClicked((event) -> {
+        sendButton.setOnMouseClicked((event) -> {
             dialogContainer.getChildren().add(getDialogLabel(userInputField.getText()));
             userInputField.clear();
         });
@@ -258,9 +254,8 @@ public class Ui {
      * Creates display Dialogue Box when initialising GUI.
      */
     private void displayGreeting() {
-        Label greetingText = new Label(INSTRUCTIONS);
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(greetingText, new ImageView(dukeImage))
+                DialogBox.getDukeDialog(INSTRUCTIONS, dukeImage)
         );
     }
 
