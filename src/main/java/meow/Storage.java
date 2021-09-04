@@ -61,8 +61,12 @@ public class Storage {
     private void load(String input) {
         String[] values = input.split(" \\| ");
         String typeOfTask = values[0].trim();
+        assert(typeOfTask != null);
         String completeStatus = values[1].trim();
+        assert(completeStatus != null);
         String task = values[2].trim();
+        assert(task != null);
+        
         switch (typeOfTask) {
         case "T": {
             Todo newTodo = new Todo(task);

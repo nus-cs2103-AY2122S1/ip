@@ -121,6 +121,7 @@ public class Parser {
         try {
             String[] commandWord = input.split(" ");
             Meow.Command userCommand = Meow.Command.valueOf(commandWord[0].trim().toUpperCase());
+            assert(userCommand != null);
             return userCommand;
         } catch (IllegalArgumentException e) {
             throw new InvalidInputException();
@@ -138,6 +139,7 @@ public class Parser {
     public String getTaskNumber(String input) throws MeowException {
         try {
             String[] commandWord = input.split(" ");
+            assert(commandWord[1].trim() != null);
             return commandWord[1].trim();
         } catch (IllegalArgumentException e) {
             throw new InvalidInputException();
