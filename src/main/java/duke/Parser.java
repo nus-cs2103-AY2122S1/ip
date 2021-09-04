@@ -41,6 +41,8 @@ public class Parser {
             return ActionType.BYE;
         case "find":
             return ActionType.FIND;
+        case "help":
+            return ActionType.HELP;
         default:
             return ActionType.UNRECOGNIZED;
         }
