@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -20,7 +21,6 @@ public class ChatBot {
     private Storage s;
     private UI ui;
 
-//    private int exitStatus = 1;
     private Status exitStatus = Status.START;
 
     /**
@@ -129,6 +129,11 @@ public class ChatBot {
     public String handleFind(String name) {
         String findTask = tasklist.findTask(name);
         return ui.showFoundTask(findTask);
+    }
+
+    public String handleSort(String sortName) throws DukeException {
+        String sortedList = tasklist.sortTask(sortName);
+        return ui.showSortedTask(sortedList);
     }
 
     /**

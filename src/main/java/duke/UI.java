@@ -88,4 +88,8 @@ public class UI {
         return "Here are the matching tasks in your list:"
                 + tasks;
     }
+
+    public String showSortedTask(String tasks) {
+        return "Here are your sorted tasks:\n" + tasks;
+    }
 }

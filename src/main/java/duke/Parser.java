@@ -17,8 +17,8 @@ public class Parser {
      * Returns the corresponding message based on the user input.
      *
      * @param input The user input.
-     * @param bot
-     * @throws DukeException
+     * @param bot The chat bot that handles all the commands
+     * @throws DukeException Custom duke error
      */
     public String parse (String input, ChatBot bot) throws DukeException {
         String[] inputs = input.split(" ", 2);
@@ -97,7 +97,13 @@ public class Parser {
                 throw new DukeException("The task to find cannot be empty!");
             }
             return bot.handleFind(inputs[1].trim());
+        case "sort":
+            if (checkLength(inputs)) {
+                throw new DukeException("Please specify the type of sort (Name, Type)");
+            }
+            return bot.handleSort(inputs[1].trim());
         default:
+            System.out.println("i reached here");
             return bot.handleWrongCommand();
         }
     }
