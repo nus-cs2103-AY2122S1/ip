@@ -15,7 +15,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
- * This control represents a dialog box consisting of an ImageView to represent the duke's and user's face and
+ * This class represents a dialog box consisting of an ImageView to represent the duke's and user's face and
  * a label containing text from the user and duke.
  */
 public class DialogBox extends HBox {
@@ -26,13 +26,19 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
-            fxmlLoader.setController(this);
-            fxmlLoader.setRoot(this);
-            fxmlLoader.load();
+            setUpDialogBox(text, img);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setUpDialogBox(String text, Image img) throws IOException {
+        String resourceString = "/view/DialogBox.fxml";
+        FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(resourceString));
+
+        fxmlLoader.setController(this);
+        fxmlLoader.setRoot(this);
+        fxmlLoader.load();
 
         dialog.setText(text);
         displayPicture.setImage(img);

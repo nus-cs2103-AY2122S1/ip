@@ -40,6 +40,11 @@ public class Storage {
      * @throws IOException Error in creation of files and/or directories.
      */
     private void checkToMake() throws IOException {
+        checkDirectoryToMake();
+        checkFileToMake();
+    }
+
+    private void checkDirectoryToMake() {
         Path path = Paths.get(this.filePath);
         File dir = path.getParent().toFile();
 
@@ -47,14 +52,15 @@ public class Storage {
         if (!dir.exists()) {
             dir.mkdir();
         }
+    }
 
+    private void checkFileToMake() throws IOException {
         File dataFile = new File(this.filePath);
 
         // makes the specified file if it does not exist
         if (!dataFile.exists()) {
             dataFile.createNewFile();
         }
-
     }
 
     /**
@@ -65,16 +71,24 @@ public class Storage {
      */
     public void saveTask(TaskList taskList) throws IOException {
         FileWriter fw = new FileWriter(this.filePath);
+        writeToDataFile(taskList, fw);
+        fw.close();
+    }
+
+    private void writeToDataFile(TaskList taskList, FileWriter fw) throws IOException {
         BufferedWriter bw = new BufferedWriter(fw);
 
         for (int i = 0; i < taskList.getTaskCount(); i++) {
             Task task = taskList.getTask(i);
-            bw.write(String.format("%s/%s/%s/%s\n",
-                    task.getTag(), task.getStatusIcon(), task.getDescription(), task.getDueDate()));
+            bw.write(formatDataToSave(task));
         }
 
         bw.close();
-        fw.close();
+    }
+
+    private String formatDataToSave(Task task) {
+        return String.format("%s/%s/%s/%s\n",
+                task.getTag(), task.getStatusIcon(), task.getDescription(), task.getDueDate());
     }
 
     /**
@@ -86,10 +100,20 @@ public class Storage {
      */
     private TaskList loadData() throws FileNotFoundException, NoSuchTaskException {
         File dataFile = new File(this.filePath);
-        Scanner scanner = new Scanner(dataFile);
+        return readAndLoad(dataFile);
+    }
+
+    private TaskList readAndLoad(File file) throws FileNotFoundException, NoSuchTaskException {
+        Scanner scanner = new Scanner(file);
         TaskList taskList = new TaskList();
 
+        interpretLineAndAdd(scanner, taskList);
 
+        scanner.close();
+        return taskList;
+    }
+
+    private void interpretLineAndAdd(Scanner scanner, TaskList taskList) throws NoSuchTaskException {
         while (scanner.hasNextLine()) {
             String nextData = scanner.nextLine();
 
@@ -100,22 +124,24 @@ public class Storage {
             String desc = details[2];
             String dueDate = details[3];
 
-            if (type.equals(Todo.TAG)) {
-                Task t = new Todo(desc, isDone);
-                taskList.addTask(t);
-            } else if (type.equals(Deadline.TAG)) {
-                Task t = new Deadline(desc, LocalDate.parse(dueDate), isDone);
-                taskList.addTask(t);
-            } else if (type.equals(Event.TAG)) {
-                Task t = new Event(desc, LocalDate.parse(dueDate), isDone);
-                taskList.addTask(t);
-            } else {
-                throw new NoSuchTaskException();
-            }
+            categorizeAndLoad(taskList, type, isDone, desc, dueDate);
         }
+    }
 
-        scanner.close();
-        return taskList;
+    private void categorizeAndLoad(TaskList list, String type, boolean isDone, String desc, String dueDate)
+            throws NoSuchTaskException {
+        if (type.equals(Todo.TAG)) {
+            Task t = new Todo(desc, isDone);
+            list.addTask(t);
+        } else if (type.equals(Deadline.TAG)) {
+            Task t = new Deadline(desc, LocalDate.parse(dueDate), isDone);
+            list.addTask(t);
+        } else if (type.equals(Event.TAG)) {
+            Task t = new Event(desc, LocalDate.parse(dueDate), isDone);
+            list.addTask(t);
+        } else {
+            throw new NoSuchTaskException();
+        }
     }
 
     /**

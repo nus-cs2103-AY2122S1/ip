@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * Represents an exception for the chatbot.
+ * Represents an exception for the chat bot.
  * Thrown when an unknown tag is entered by the user.
  */
 

@@ -6,7 +6,7 @@ package duke.tasks;
 
 public class Task {
     // fields of each task
-    private String description;
+    private final String description;
     private boolean isDone;
 
     /**

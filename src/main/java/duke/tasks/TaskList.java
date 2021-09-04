@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Encapsulates the information of a TaskList object which contains an ArrayList of Task objects.
  */
 public class TaskList {
-    private ArrayList<Task> items;
+    private final ArrayList<Task> items;
 
     /**
      * Constructor that creates a TaskList object with the items properly initialised.
@@ -54,7 +54,7 @@ public class TaskList {
     /**
      * Returns the Task requested.
      *
-     * @param id The index of the task to be retrived from the TaskList
+     * @param id The index of the task to be retrieved from the TaskList
      * @return A Task.
      */
     public Task getTask(int id) {
@@ -65,7 +65,7 @@ public class TaskList {
      * Returns a TaskList containing all the tasks that contains the specified keyword.
      *
      * @param keyword The word used for the search.
-     * @return A TaskList contating all the tasks that contains the specified keyword.
+     * @return A TaskList containing all the tasks that contains the specified keyword.
      */
     public TaskList searchTaskByKeyword(String keyword) {
         TaskList resultList = new TaskList();
@@ -79,6 +79,16 @@ public class TaskList {
         }
 
         return resultList;
+    }
+
+    /**
+     * Returns true if taskList is empty.
+     * Otherwise, returns false.
+     *
+     * @return A boolean indicating if the taskList is empty.
+     */
+    public boolean isListEmpty() {
+        return items.size() == 0;
     }
 }
 

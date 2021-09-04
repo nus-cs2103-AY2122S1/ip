@@ -17,7 +17,11 @@ public class DeleteCommand extends Command {
 
     @Override
     public String executeCommand(TaskList taskList) throws NoSuchTaskException {
-        if (this.id >= 0 && this.id < taskList.getTaskCount()) {
+        boolean isIdPositive = this.id >= 0;
+        boolean isIdLessThanTaskCount = this.id < taskList.getTaskCount();
+        boolean isIdWithinRange = isIdPositive && isIdLessThanTaskCount;
+
+        if (isIdWithinRange) {
             Task task = taskList.getTask(this.id);
             taskList.deleteTask(this.id);
             return Ui.printDeleteTaskMessage(task, taskList.getTaskCount());
