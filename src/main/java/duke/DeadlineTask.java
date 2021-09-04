@@ -14,8 +14,6 @@ public class DeadlineTask extends BaseTask {
     /** 'by when' data is given in date form and stored here. */
     private LocalDate byWhenDate;
 
-//    /** Activates or deactivates Debug mode. */
-//    private boolean debugMode = false;
 
 
     /**
@@ -62,13 +60,10 @@ public class DeadlineTask extends BaseTask {
         DateTimeFormatter formatterToUse = null;
 
         if (hasSlash) {
-//            System.out.println("USING yy FORMATTER");
             formatterToUse = DateTimeFormatter.ofPattern("d/M/yy");
         } else if (hasSpaceAtFront) {
-//            System.out.println("USING LONG DATE FORMATTER");
             formatterToUse = DateTimeFormatter.ofPattern("d MMMM yyyy");
         } else {
-//            System.out.println("USING yyyy FORMATTER");
             formatterToUse = DateTimeFormatter.ofPattern("d/M/yyyy");
         }
 
@@ -78,20 +73,11 @@ public class DeadlineTask extends BaseTask {
             this.byWhenDate = byDate;
 
         } catch (DateTimeParseException e) {
-            throw new DukeExceptionBase("Deadline Date does not follow the format required. " +
-                    "DeadlineTask must contain a Date in 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY' formats");
+            throw new DukeExceptionBase("Deadline Date does not follow the format required. "
+                    + "DeadlineTask must contain a Date in 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY' formats");
         }
     }
-
-//    /**
-//     * Prints String if debug mode is activated.
-//     * @param str the String to print.
-//     */
-//    private void debugPrint(String str) {
-//        if (debugMode) {
-//            System.out.println(str);
-//        }
-//    }
+    
 
     /**
      * Gets the String representation of the by when.
