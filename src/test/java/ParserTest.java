@@ -1,95 +1,60 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.HashMap;
+import java.time.LocalDate;
+import java.util.Base64;
 
 import org.junit.jupiter.api.Test;
 
 import parser.Parser;
+import task.Deadline;
+import task.Event;
+import task.Todo;
 
 
 public class ParserTest {
-    @Test
-    public void parserCanParseAddEventWithManyWords() {
-        String input = "event go for dance /at 01/02/2111 1200";
-        HashMap<String, String> parsed = Parser.parseCommand(input);
 
-        assertEquals("event", parsed.get("command"));
-        assertEquals("go for dance", parsed.get("info"));
-        assertEquals("01/02/2111 1200", parsed.get("at"));
+    @Test
+    public void parserTestSanitization() {
+        String[] sanitisedInput = Parser.sanitizeInput("Hello World !#!@$% $TY%$^$%^$BR");
+
+        String[] correctSanitised = new String[]{"Hello", "World", "!#!@$%", "$TY%$^$%^$BR"};
+        assertEquals(sanitisedInput[0], correctSanitised[0]);
+        assertEquals(sanitisedInput[1], correctSanitised[1]);
+        assertEquals(sanitisedInput[2], correctSanitised[2]);
+        assertEquals(sanitisedInput[3], correctSanitised[3]);
     }
 
     @Test
-    public void parserCanParseAddEventWithOneWord() {
-        String input = "event dance /at 01/02/2111 1200";
-        HashMap<String, String> parsed = Parser.parseCommand(input);
+    public void parserTestEventEncode() {
+        Event eventTask = new Event("Party ALL DAy!", "Sentosa");
+        String encodedDescription = Base64.getEncoder().encodeToString(eventTask.getDescription().getBytes());
+        String encodedAt = Base64.getEncoder().encodeToString(eventTask.getAt().getBytes());
+        String eventText = "event " + eventTask.getIsDone() + " " + encodedAt + " " + encodedDescription;
 
-        assertEquals("event", parsed.get("command"));
-        assertEquals("dance", parsed.get("info"));
-        assertEquals("01/02/2111 1200", parsed.get("at"));
+        String parserEncoded = Parser.encodeEvent(eventTask);
+
+        assertEquals(parserEncoded, eventText);
     }
 
     @Test
-    public void parserCanParseAddDeadlineWithManyWords() {
-        String input = "deadline submit 2103 /by 01/02/2111 1200";
-        HashMap<String, String> parsed = Parser.parseCommand(input);
+    public void parserTestDeadlineEncode() {
+        Deadline deadlineTask = new Deadline("Get back to work", LocalDate.parse("2021-08-21"));
+        String encodedString = Base64.getEncoder().encodeToString(deadlineTask.getDescription().getBytes());
+        String dbEntry = "deadline " + deadlineTask.getIsDone() + " " + deadlineTask.getBy() + " " + encodedString;
 
-        assertEquals("deadline", parsed.get("command"));
-        assertEquals("submit 2103", parsed.get("info"));
-        assertEquals("01/02/2111 1200", parsed.get("by"));
+        String parserEncoded = Parser.encodeDeadline(deadlineTask);
+        assertEquals(parserEncoded, dbEntry);
     }
 
     @Test
-    public void parserCanParseAddDeadlineWithOneWord() {
-        String input = "deadline sleep /by 01/02/2111 1200";
-        HashMap<String, String> parsed = Parser.parseCommand(input);
+    public void parserTestTodoEncode() {
+        Todo todoTask = new Todo("Hangover from Sentosa...");
+        String encodedString = Base64.getEncoder().encodeToString(todoTask.getDescription().getBytes());
+        String dbEntry = "todo " + todoTask.getIsDone() + " " + encodedString;
 
-        assertEquals("deadline", parsed.get("command"));
-        assertEquals("sleep", parsed.get("info"));
-        assertEquals("01/02/2111 1200", parsed.get("by"));
-    }
+        String parserEncoded = Parser.encodeTodo(todoTask);
 
-    @Test
-    public void parserCanParseAddTodoWithManyWords() {
-        String input = "todo submit 2103";
-        HashMap<String, String> parsed = Parser.parseCommand(input);
-
-        assertEquals("todo", parsed.get("command"));
-        assertEquals("submit 2103", parsed.get("info"));
-    }
-
-    @Test
-    public void parserCanParseAddTodoWithOneWord() {
-        String input = "todo sleep";
-        HashMap<String, String> parsed = Parser.parseCommand(input);
-
-        assertEquals("todo", parsed.get("command"));
-        assertEquals("sleep", parsed.get("info"));
-    }
-
-    @Test
-    public void parserCanParseList() {
-        String input = "list";
-        HashMap<String, String> parsed = Parser.parseCommand(input);
-
-        assertEquals("list", parsed.get("command"));
-    }
-
-    @Test
-    public void parserCanParseDone() {
-        String input = "done 1";
-        HashMap<String, String> parsed = Parser.parseCommand(input);
-
-        assertEquals("done", parsed.get("command"));
-        assertEquals("1", parsed.get("info"));
-    }
-
-    @Test
-    public void parserCanParseDelete() {
-        String input = "delete 1";
-        HashMap<String, String> parsed = Parser.parseCommand(input);
-
-        assertEquals("delete", parsed.get("command"));
-        assertEquals("1", parsed.get("info"));
+        assertEquals(parserEncoded, dbEntry);
     }
 
 

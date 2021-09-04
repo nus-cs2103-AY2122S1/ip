@@ -11,7 +11,7 @@ import ui.Ui;
  * @since   2021-08-21
  */
 public class Duke {
-    TaskList engineGui = new TaskList();
+    private TaskList engineGui = new TaskList();
 
     /**
      * Initialises app.

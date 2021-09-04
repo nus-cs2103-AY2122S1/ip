@@ -1,10 +1,10 @@
 package parser;
 
+import java.util.Base64;
+
 import task.Deadline;
 import task.Event;
 import task.Todo;
-
-import java.util.Base64;
 
 /**
  * The Parser middleware provides dependency injection for classes that require common methods.

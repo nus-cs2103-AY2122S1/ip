@@ -12,10 +12,6 @@ repositories {
 dependencies {
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
-    implementation 'com.fasterxml.jackson.core:jackson-core:2.12.1'
-    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.12.1'
-    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.1'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.12.1'
 
     String javaFxVersion = '11'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'

@@ -1,9 +1,17 @@
 package tasklist;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+
+import exception.CommandException;
 import exception.DescriptionException;
 import exception.DukeException;
 import exception.InvalidCommandException;
-import exception.CommandException;
 import exception.TaskNumberException;
 import parser.Parser;
 import storage.Storage;
@@ -12,14 +20,6 @@ import task.Event;
 import task.Task;
 import task.Todo;
 import ui.Ui;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 /**
  * The TaskList class provides the functionality of editing the tasks list.
@@ -57,7 +57,6 @@ public class TaskList {
             } else if (input.equals("list")) {
                 messages.displayListTasks(this.taskList);
             } else if (inputArr[0].equals("done")) {
-                
                 //obtains the task number which we want to mark as done
                 Integer index = Integer.parseInt(inputArr[1]);
 
@@ -66,9 +65,7 @@ public class TaskList {
                 } catch (DukeException e) {
                     messages.displayText(e.toString());
                 }
-                
             } else if (inputArr[0].equals("delete")) {
-
                 //obtains the task number which we want to delete
                 Integer index = Integer.parseInt(inputArr[1]);
 
@@ -160,7 +157,7 @@ public class TaskList {
     /**
      * Adds a TooDo Task into the List containing Tasks.
      * @param inputArr String array containing input by the user.
-     * @throws InvalidCommandException if inputArr length < 2.
+     * @throws InvalidCommandException if inputArr length less than 2.
      */
     public void addTask(String[] inputArr) throws InvalidCommandException {
         try {
@@ -185,7 +182,7 @@ public class TaskList {
      * Adds a TooDo Task into the List containing Tasks.
      * @param inputArr String array containing input by the user.
      * @return reply to be displayed on GUI.
-     * @throws InvalidCommandException if inputArr length < 2.
+     * @throws InvalidCommandException if inputArr length less than 2.
      */
     public String addTaskGui(String[] inputArr) throws InvalidCommandException {
         try {
@@ -209,7 +206,7 @@ public class TaskList {
     /**
      * Adds a Todo Task into the List containing Tasks.
      * @param inputArr String array containing input by the user.
-     * @throws DescriptionException if inputArr length < 2.
+     * @throws DescriptionException if inputArr length less than 2.
      */
     public void addTodo(String[] inputArr) throws DescriptionException {
         if (inputArr.length < 2) {
@@ -229,7 +226,7 @@ public class TaskList {
      * Adds a Todo Task into the List containing Tasks.
      * @param inputArr String array containing input by the user.
      * @return reply to be displayed on GUI.
-     * @throws DescriptionException if inputArr length < 2.
+     * @throws DescriptionException if inputArr length less than 2.
      */
     public String addTodoGui(String[] inputArr) throws DescriptionException {
         if (inputArr.length < 2) {
@@ -248,7 +245,7 @@ public class TaskList {
     /**
      * Adds a Deadline Task into the List containing Tasks.
      * @param inputArr String array containing input by the user.
-     * @throws DescriptionException if inputArr length < 2.
+     * @throws DescriptionException if inputArr length less than 2.
      * @throws CommandException if "/by" is absent from input.
      */
     public void addDeadline(String[] inputArr) throws DescriptionException, CommandException {
@@ -308,7 +305,7 @@ public class TaskList {
      * Adds a Deadline Task into the List containing Tasks.
      * @param inputArr String array containing input by the user.
      * @return reply to be displayed on GUI.
-     * @throws DescriptionException if inputArr length < 2.
+     * @throws DescriptionException if inputArr length less than 2.
      * @throws CommandException if "/by" is absent from input.
      */
     public String addDeadlineGui(String[] inputArr) throws DescriptionException, CommandException {
@@ -361,7 +358,7 @@ public class TaskList {
     /**
      * Adds an Event Task into the List containing Tasks.
      * @param inputArr String array containing input by the user.
-     * @throws DescriptionException if inputArr length < 2.
+     * @throws DescriptionException if inputArr length less than 2.
      * @throws CommandException if "/at" is absent from input.
      */
     public void addEvent(String[] inputArr) throws DescriptionException, CommandException {
@@ -406,7 +403,7 @@ public class TaskList {
      * Adds an Event Task into the List containing Tasks.
      * @param inputArr String array containing input by the user.
      * @return reply to be displayed on GUI.
-     * @throws DescriptionException if inputArr length < 2.
+     * @throws DescriptionException if inputArr length less than 2.
      * @throws CommandException if "/at" is absent from input.
      */
     public String addEventGui(String[] inputArr) throws DescriptionException, CommandException {
@@ -450,7 +447,7 @@ public class TaskList {
     /**
      * Marks a task in the taskList as done.
      * @param taskNumber task number to be marked as done.
-     * @throws TaskNumberException if the number is < 0 or > taskList size.
+     * @throws TaskNumberException if the number is less than 0 or more than taskList size.
      */
     public void markAsDone(Integer taskNumber) throws TaskNumberException {
         if (taskNumber > this.taskList.size() || taskNumber < 0) {
@@ -469,7 +466,7 @@ public class TaskList {
      * Marks a task in the taskList as done.
      * @param taskNumber task number to be marked as done.
      * @return reply to be displayed on GUI.
-     * @throws TaskNumberException if the number is < 0 or > taskList size.
+     * @throws TaskNumberException if the number is less than 0 or more than taskList size.
      */
     public String markAsDoneGui(Integer taskNumber) throws TaskNumberException {
         if (taskNumber > this.taskList.size() || taskNumber < 0) {
@@ -487,7 +484,7 @@ public class TaskList {
     /**
      * Deletes a task from the taskList.
      * @param taskNumber task number to be deleted.
-     * @throws TaskNumberException if the number is < 0 or > taskList size.
+     * @throws TaskNumberException if the number is less than 0 or more than taskList size.
      */
     public void deleteTask(Integer taskNumber) throws TaskNumberException {
         if (taskNumber > this.taskList.size() || taskNumber < 0) {
@@ -506,7 +503,7 @@ public class TaskList {
      * Deletes a task from the taskList.
      * @param taskNumber task number to be deleted.
      * @return reply to be displayed on GUI.
-     * @throws TaskNumberException if the number is < 0 or > taskList size.
+     * @throws TaskNumberException if the number is less than 0 or more than taskList size.
      */
     public String deleteTaskGui(Integer taskNumber) throws TaskNumberException {
         if (taskNumber > this.taskList.size() || taskNumber < 0) {

@@ -1,8 +1,9 @@
 package ui;
 
+import java.util.List;
+
 import task.Task;
 
-import java.util.List;
 
 /**
  * The Ui class shows the response from a user's command line input.

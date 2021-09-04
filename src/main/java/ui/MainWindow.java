@@ -1,5 +1,8 @@
 package ui;
 
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.TimeUnit;
+
 import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,13 +13,13 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.TimeUnit;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private int closeTransition = 1000;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -27,8 +30,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-
-    private static int TRANSITION = 1000;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -66,7 +67,7 @@ public class MainWindow extends AnchorPane {
 
         System.out.println(userInput.getText());
         if (userInput.getText().equals("bye")) {
-            CompletableFuture.delayedExecutor(TRANSITION,
+            CompletableFuture.delayedExecutor(closeTransition,
                     TimeUnit.MILLISECONDS).execute(() -> Platform.exit());
         }
         userInput.clear();
