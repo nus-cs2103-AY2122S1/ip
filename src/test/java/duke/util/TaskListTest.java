@@ -47,9 +47,8 @@ class TaskListTest {
     @Test
     void testPrintTaskList() {
         taskList.addTask(new ToDo("homework"));
-        taskList.printTaskList();
         assertEquals("Here are the tasks in your list:\n"
-                + "1.[T][ ] homework", outputStreamCaptor.toString().trim());
+                + "1.[T][ ] homework\n", taskList.printTaskList());
     }
 
     @Test

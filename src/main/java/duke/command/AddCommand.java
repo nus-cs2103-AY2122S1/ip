@@ -32,6 +32,7 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert task != null : "Task is empty";
         String message = taskList.addTask(task);
         ui.formatPrint(message);
         return message;
