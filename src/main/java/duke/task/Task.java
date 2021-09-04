@@ -29,7 +29,9 @@ public abstract class Task {
      * @return a String where "X" represent completed and " " represents uncompleted.
      */
     public String getStatusIcon() {
-        return (isDone ? "X" : " "); // mark done task with X
+        String done = "X";
+        String incomplete = " ";
+        return (isDone ? done : incomplete); // mark done task with X
     }
 
     /**

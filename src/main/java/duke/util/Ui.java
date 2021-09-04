@@ -14,16 +14,16 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String WELCOMEMESSAGE = String.format("%s\n%s\n%s\n%s", DIVIDER, LOGO,
+    private static final String WELCOME_MESSAGE = String.format("%s\n%s\n%s\n%s", DIVIDER, LOGO,
             "Hello! I'm Duke :)\nWhat can I do for you? (Type 'help' to see what I can do!)", DIVIDER);
-    private static final String GOODBYEMESSAGE = "Bye :< Hope to see you again soon!";
+    private static final String GOODBYE_MESSAGE = "Bye :< Hope to see you again soon!";
 
     public void printWelcomeMessage() {
-        System.out.println(WELCOMEMESSAGE);
+        System.out.println(WELCOME_MESSAGE);
     }
 
     public void printGoodbyeMessage() {
-        System.out.println(GOODBYEMESSAGE);
+        System.out.println(GOODBYE_MESSAGE);
     }
 
     public void printPrompt() {
@@ -35,7 +35,7 @@ public class Ui {
     }
 
     public String getWelcomeMessage() {
-        return WELCOMEMESSAGE;
+        return WELCOME_MESSAGE;
     }
 
     /**

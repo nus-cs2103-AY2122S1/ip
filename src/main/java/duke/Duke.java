@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.command.Command;
 import duke.exception.DukeException;
@@ -36,30 +35,6 @@ public class Duke {
             taskList = new TaskList(new ArrayList<Task>(), storage);
         }
     }
-
-//    public static void main(String[] args) {
-//        new Duke().run();
-//    }
-//
-//    /**
-//     * Runs the Duke Program.
-//     */
-//    public void run() {
-//        ui.printWelcomeMessage();
-//        Scanner sc = new Scanner(System.in);
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                ui.printPrompt();
-//                String input = sc.nextLine();
-//                Command c = parser.parse(input);
-//                c.execute(taskList, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException e) {
-//                ui.formatPrint(e.getMessage());
-//            }
-//        }
-//    }
 
     public String getResponse(String input) {
         try {

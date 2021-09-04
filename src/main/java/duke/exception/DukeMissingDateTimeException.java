@@ -6,7 +6,6 @@ package duke.exception;
  * @author Chng Zi Hao
  */
 public class DukeMissingDateTimeException extends DukeException {
-
     /**
      * Constructor for DukeMissingDateTimeException.
      */

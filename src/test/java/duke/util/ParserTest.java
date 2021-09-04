@@ -35,7 +35,7 @@ class ParserTest {
     void testDeadlineDateTimeSplit() {
         try {
             String[] info = {"23/08/2021", "1800"};
-            assertArrayEquals(info, Parser.deadlineDateTimeSplit("23/08/2021 1800"));
+            assertArrayEquals(info, Parser.splitDeadlineDateTime("23/08/2021 1800"));
         } catch (DukeException e) {
             fail();
         }
@@ -45,7 +45,7 @@ class ParserTest {
     void testEventDateTimeSplit() {
         try {
             String[] info = {"23/08/2021", "1800", "2100"};
-            assertArrayEquals(info, Parser.eventDateTimeSplit("23/08/2021 1800-2100"));
+            assertArrayEquals(info, Parser.splitEventDateTime("23/08/2021 1800-2100"));
         } catch (DukeException e) {
             fail();
         }

@@ -6,7 +6,6 @@ package duke.exception;
  * @author Chng Zi Hao
  */
 public class DukeInvalidTimeException extends DukeException {
-
     /**
      * Constructor for DukeInvalidTimeException.
      */
