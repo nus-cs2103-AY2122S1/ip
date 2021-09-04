@@ -60,7 +60,7 @@ public class Deadline extends Task {
 
     private void setBy(String by, String format) throws ParseException {
         String[] dateAndTime = by.trim().split(" ", 2);
-        DateFormat format1 = new SimpleDateFormat(YMD_DATE_FORMAT);
+        DateFormat format1 = new SimpleDateFormat(format);
         Date date = format1.parse(dateAndTime[0]);
         DateFormat format2 = new SimpleDateFormat("d MMMMM yyyy, ");
         String dateString = format2.format(date);
@@ -68,7 +68,6 @@ public class Deadline extends Task {
                 && !dateAndTime[1].contains("am")) {
             int time = Integer.parseInt(dateAndTime[1]);
             date = new SimpleDateFormat("hhmm").parse(String.format("%04d", time));
-            // Set format: print the hours and minutes of the date, with AM or PM at the end
             SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
             this.by = dateString + sdf.format(date);
         } else {

@@ -24,39 +24,13 @@ public class Event extends Task {
 
         if (Pattern.matches(YMD_REGEX, dateAndTime[0])) {
             try {
-                DateFormat format1 = new SimpleDateFormat(YMD_DATE_FORMAT);
-                Date date = format1.parse(dateAndTime[0]);
-                DateFormat format2 = new SimpleDateFormat("d MMMMM yyyy, ");
-                String dateString = format2.format(date);
-                if (Pattern.matches("%04d", dateAndTime[1]) && !dateAndTime[1].contains("pm")
-                        && !dateAndTime[1].contains("am")) {
-                    int time = Integer.parseInt(dateAndTime[1]);
-                    date = new SimpleDateFormat("hhmm").parse(String.format("%04d", time));
-                    // Set format: print the hours and minutes of the date, with AM or PM at the end
-                    SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
-                    this.timing = dateString + sdf.format(date);
-                } else {
-                    this.timing = dateString + dateAndTime[1];
-                }
+                setTiming(timing, YMD_DATE_FORMAT);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
         } else if (Pattern.matches(DMY_REGEX, dateAndTime[0])) {
             try {
-                DateFormat format1 = new SimpleDateFormat(DMY_DATE_FORMAT);
-                Date date = format1.parse(dateAndTime[0]);
-                DateFormat format2 = new SimpleDateFormat("d MMMMM yyyy, ");
-                String dateString = format2.format(date);
-                if (Pattern.matches("%04d", dateAndTime[1]) && !dateAndTime[1].contains("pm")
-                        && !dateAndTime[1].contains("am")) {
-                    int time = Integer.parseInt(dateAndTime[1]);
-                    date = new SimpleDateFormat("hhmm").parse(String.format("%04d", time));
-                    // Set format: print the hours and minutes of the date, with AM or PM at the end
-                    SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
-                    this.timing = dateString + sdf.format(date);
-                } else {
-                    this.timing = dateString + dateAndTime[1];
-                }
+                setTiming(timing, DMY_DATE_FORMAT);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
@@ -82,5 +56,22 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + this.timing + ")";
+    }
+
+    private void setTiming(String timing, String format) throws ParseException {
+        String[] dateAndTime = timing.trim().split(" ", 2);
+        DateFormat format1 = new SimpleDateFormat(format);
+        Date date = format1.parse(dateAndTime[0]);
+        DateFormat format2 = new SimpleDateFormat("d MMMMM yyyy, ");
+        String dateString = format2.format(date);
+        if (Pattern.matches("%04d", dateAndTime[1]) && !dateAndTime[1].contains("pm")
+                && !dateAndTime[1].contains("am")) {
+            int time = Integer.parseInt(dateAndTime[1]);
+            date = new SimpleDateFormat("hhmm").parse(String.format("%04d", time));
+            SimpleDateFormat sdf = new SimpleDateFormat("h:mm a");
+            this.timing = dateString + sdf.format(date);
+        } else {
+            this.timing = dateString + dateAndTime[1];
+        }
     }
 }
