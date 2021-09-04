@@ -8,6 +8,7 @@ import bot.utility.TaskList;
  */
 public class DoneCommand extends Command {
     private final int index;
+
     /**
      * Returns a DoneCommand;
      *
@@ -16,6 +17,7 @@ public class DoneCommand extends Command {
     public DoneCommand(String indexString) {
         this.index = Integer.parseInt(indexString);
     }
+
     /**
      * Executes the Command and returns a String.
      *

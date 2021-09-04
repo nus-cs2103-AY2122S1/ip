@@ -9,6 +9,7 @@ public class Command {
     protected static final String INFORM_FORMAT = "Now you have %d tasks in the list.";
     protected static StringBuilder message;
     protected boolean canExit = false;
+
     /**
      * Returns a String, the contents of which are to implemented by subclasses.
      *
@@ -17,6 +18,7 @@ public class Command {
     public String execute() throws DukeException {
         throw new DukeException("This is not a valid Command");
     }
+
     /**
      * Returns a boolean to determine whether the program can exit.
      *

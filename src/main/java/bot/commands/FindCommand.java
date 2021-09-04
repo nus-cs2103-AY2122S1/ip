@@ -10,6 +10,7 @@ import bot.utility.TaskList;
  */
 public class FindCommand extends Command {
     private final String keyWord;
+
     /**
      * Returns a FindCommand with the specified key word.
      *
@@ -18,6 +19,7 @@ public class FindCommand extends Command {
     public FindCommand(String keyWord) {
         this.keyWord = keyWord;
     }
+
     /**
      * Executes the Command and returns a String.
      *

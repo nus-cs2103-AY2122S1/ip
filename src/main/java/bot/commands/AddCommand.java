@@ -15,6 +15,7 @@ public class AddCommand extends Command {
     protected static final String TASK_FORMAT = "\n\t Got it. I've added this task:\n\t\t%s\n\t ";
     private final String keyWord;
     private final String info;
+
     /**
      * Returns a AddCommand with the specified keyWord and info.
      *
@@ -25,6 +26,7 @@ public class AddCommand extends Command {
         this.keyWord = keyWord;
         this.info = info;
     }
+
     /**
      * Executes the Command and returns a String.
      *
@@ -53,6 +55,7 @@ public class AddCommand extends Command {
         }
         return "Hmm, this is quite the predicament. I can't comprehend the instruction.";
     }
+
     private String formatMessage(String objectString, int size) {
         return String.format(TASK_FORMAT, objectString) + String.format(INFORM_FORMAT, size);
     }
