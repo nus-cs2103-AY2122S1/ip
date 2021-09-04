@@ -8,7 +8,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
-    public Duke(String filePath) {
+    public Duke(String filePath) throws java.io.IOException {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.tasks = new TaskList();
@@ -81,7 +81,7 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws java.io.IOException {
         new Duke("data/tasks.txt").run();
     }
 }

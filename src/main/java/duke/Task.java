@@ -27,7 +27,7 @@ public abstract class Task {
 
     public static Task fromRepr(String s) throws DukeException {
         if (!s.matches("[TED][|][01][|].+[|].*")) {
-            throw new DukeException.ParseException(s);
+            throw new DukeException.InvalidReprException(s);
         }
         String[] arr = s.split("[|]");
         char ch = arr[0].charAt(0);
@@ -47,7 +47,7 @@ public abstract class Task {
             break;
 
         default:
-            throw new DukeException.ParseException(s); // shouldnt come here
+            throw new DukeException.InvalidReprException(s); // shouldnt come here
         }
         return t;
     }

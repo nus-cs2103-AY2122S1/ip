@@ -20,4 +20,10 @@ public abstract class DukeException extends Exception {
             super("Missing argument: " +  arg);
         }
     }
+
+    public static class InvalidReprException extends DukeException {
+        public InvalidReprException(String s) {
+            super("Invalid repr: " + s);
+        }
+    }
 }
