@@ -1,19 +1,24 @@
 package gnosis.ui;
 
+import java.io.File;
 import java.util.List;
 import java.util.Scanner;
 
 import gnosis.controller.GnosisController;
 import gnosis.model.Task;
+import gnosis.task.TaskStorageManager;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
 /**
  * The GnosisUI handles the user interaction with user.
@@ -38,6 +43,10 @@ public class GnosisUI extends AnchorPane {
 
     @FXML
     private Button sendButton;
+
+
+    @FXML
+    private MenuItem closeMenu;
 
     @FXML
     public void initialize() {
@@ -114,10 +123,12 @@ public class GnosisUI extends AnchorPane {
      */
     public void displayFoundTasksMessage(List<Task> foundTasks, String keyword) {
         displayMessage(GnosisConstants.LISTING_MATCH_KEYWORD_MESSAGE + keyword);
-        for (Task task: foundTasks) {
-            displayMessage(task.toString());
-        }
+        String message = "";
 
+        for (Task task: foundTasks) {
+            message += task.toString() + "\n";
+        }
+        displayMessage(message);
     }
 
     /**
@@ -142,9 +153,12 @@ public class GnosisUI extends AnchorPane {
             displayMessage("There is no task in the list.");
         } else {
             displayMessage("Listing all tasks in list:");
+            String message = "";
             for (int i = 0; i < len; i++) {
-                displayMessage((i + 1) + ". " + tasks.get(i));
+                message += (i + 1) + ". " + tasks.get(i) + "\n";
             }
+
+            displayMessage(message);
         }
     }
 
@@ -173,8 +187,33 @@ public class GnosisUI extends AnchorPane {
      * @param messages Messages to display to user.
      */
     public void displayMessage(String... messages) {
+
+        String msgs = "";
         for (String msg: messages) {
-            dialogContainer.getChildren().add(DialogBox.getGnosisDialog(msg));
+            msgs += msg + "\n";
+        }
+
+        dialogContainer.getChildren().add(DialogBox.getGnosisDialog(msgs));
+    }
+
+    public void setCloseMenuListener() {
+        Platform.exit();
+    }
+
+    public void setExportCsvListener(ActionEvent event) {
+        //allow user to export task to csv
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("CSV files (*.csv)", "*.csv");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        //Show save file dialog
+        File file = fileChooser.showSaveDialog(((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow());
+
+        if (file != null) {
+            //TaskStorageManager.exportTasks(file);
+            gnosisController.exportToCSV(file);
         }
     }
 }

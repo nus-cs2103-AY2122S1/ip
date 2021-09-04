@@ -1,5 +1,6 @@
 package gnosis.controller;
 
+import java.io.File;
 import java.util.List;
 
 import gnosis.model.Command;
@@ -115,5 +116,9 @@ public class GnosisController {
         }
 
         TaskStorageManager.writeTasksToFile(taskCommandManager.getTasks());
+    }
+
+    public void exportToCSV(File PathToExport) {
+        TaskStorageManager.copyTaskToPath(PathToExport);
     }
 }

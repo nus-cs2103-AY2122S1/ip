@@ -3,6 +3,7 @@ package gnosis.ui;
 import java.io.IOException;
 import java.util.Collections;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +11,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
@@ -22,7 +26,14 @@ public class DialogBox extends HBox {
     @FXML
     private Label dialog;
 
-    private DialogBox(String text) {
+    @FXML
+    private ImageView displayPicture;
+
+    private static Image user = new Image(DialogBox.class.getResourceAsStream("/images/user.png"));
+    private static Image bot = new Image(DialogBox.class.getResourceAsStream("/images/robot.png"));
+
+
+    private DialogBox(String text, Image image) {
         try {
             ///gnosis/ui/GnosisMainWindow.fxml
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/gnosis/ui/DialogBox.fxml"));
@@ -35,7 +46,11 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        //displayPicture.setImage(img);
+        displayPicture.setImage(image);
+
+        dialog.setWrapText(true);
+        displayPicture.setFitHeight(100);
+        displayPicture.setFitWidth(100);
     }
 
     /**
@@ -49,12 +64,16 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text) {
-        return new DialogBox(text);
+        var db = new DialogBox(text, user);
+        db.setStyle("-container-color: yellow");
+        return db;
     }
 
     public static DialogBox getGnosisDialog(String text) {
-        var db = new DialogBox(text);
+        var db = new DialogBox(text,bot);
+        db.setStyle("-container-color: cyan");
         db.flip();
         return db;
     }
+
 }

@@ -43,6 +43,7 @@ public class Gnosis extends Application {
             GridPane gridPane = fxmlLoader.load();
             Scene scene = new Scene(gridPane);
             stage.setScene(scene);
+            stage.setResizable(false);
 
             // Set up connection between Gnosis UI and Gnosis Logic Controller
             GnosisUI gnosisView = fxmlLoader.getController();

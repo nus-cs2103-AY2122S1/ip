@@ -1,3 +1,8 @@
-#dialog {
-    -fx-background-color: red;
+.dialogContainer {
+    -fx-background-color: -container-color;
 }
+
+#dialog {
+    -fx-text-fill: black;
+}
+

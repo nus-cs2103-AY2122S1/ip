@@ -1,8 +1,6 @@
 package gnosis.task;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -73,7 +71,7 @@ public class TaskStorageManager {
     }
 
 
-    public static List<Task> getTasksFromFile() {
+    private static List<Task> getTasksFromFile() {
 
         List<Task> tasks = new ArrayList<>();
         try {
@@ -121,5 +119,13 @@ public class TaskStorageManager {
 
     public static boolean isDataFileAvail() {
         return Files.isDirectory(Paths.get(DIRECTORY_PATH)) && FILE.exists();
+    }
+
+    public static void copyTaskToPath(File pathToExport) {
+        try {
+            Files.copy(FILE.toPath(), pathToExport.toPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
