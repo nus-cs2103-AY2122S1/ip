@@ -53,6 +53,9 @@ public class DukeException extends IllegalArgumentException {
             errorString = "OOPS!!! Please enter a valid time duration!"
                 + " Valid formats are (HHmm-HHmm or hh:mm a-hh:mm a)";
             break;
+        case "empty recurrence number":
+            errorString = "OOPS!!! Please enter a valid number of recurrence.";
+            break;
         default:
             assert false : "Unaccounted exception case";
         }
