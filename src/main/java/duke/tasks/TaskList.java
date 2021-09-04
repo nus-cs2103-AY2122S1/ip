@@ -67,6 +67,7 @@ public class TaskList {
      * @return The task that was deleted.
      */
     public Task deleteTask(int index) {
+        assert index < 0 && index > tasks.size();
         Task delete = tasks.get(index - 1);
         tasks.remove(index - 1);
         return delete;
@@ -79,6 +80,7 @@ public class TaskList {
      * @return The task that was completed.
      */
     public Task completeTask(int index) {
+        assert index < 0 && index > tasks.size();
         Task complete = tasks.get(index - 1);
         complete.completeTask();
         return complete;
