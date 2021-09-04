@@ -27,6 +27,7 @@ public class Storage {
 
     /**
      * Initialises a {@code Storage} instance that works with the given {@code pathName}.
+     *
      * @param pathName
      */
     public Storage(String pathName) {
@@ -116,6 +117,7 @@ public class Storage {
      * Saves data into file stored locally. If file does not exist,
      * create a new file, otherwise overwrite it.
      *
+     * @param tasks The list of tasks.
      * @throws DukeException Save file failed.
      * @throws IOException File exists but cannot be created or opened.
      */
