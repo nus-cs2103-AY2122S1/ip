@@ -2,6 +2,7 @@ package duke.util;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import duke.exception.DukeException;
 
@@ -70,10 +71,9 @@ public class UI {
      * then clears the output list.
      */
     public String getOutput() {
-        String output = "";
-        for (String line : outputLines) {
-            output += tab + " " + line + "\n";
-        }
+        String output = outputLines.stream()
+                .map(line -> tab + " " + line + "\n")
+                .reduce("", (x, y) -> x + y);
         clear();
         return output;
     }
