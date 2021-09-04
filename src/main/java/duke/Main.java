@@ -7,25 +7,38 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import duke.controller.MainWindow;
 
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke(Duke.STORAGE_FILEPATH);
+    private Duke duke = new Duke();
 
     @Override
     public void start(Stage stage) {
+        System.out.println("does this run here");
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
+
+//
+//            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+//            Scene scene = new Scene(fxmlLoader.load());
+//            fxmlLoader.<MainWindow>getController().setDuke(new Sora(false));
+//
+//            stage.setScene(scene);
+//            stage.setResizable(false);
+//            stage.initStyle(StageStyle.TRANSPARENT);
+//            stage.show();

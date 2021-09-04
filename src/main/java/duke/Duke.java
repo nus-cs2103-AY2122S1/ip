@@ -7,49 +7,56 @@ import duke.util.Storage;
 import duke.util.Ui;
 import java.io.File;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
+//import javafx.application.Application;
+//import javafx.scene.Scene;
+//import javafx.scene.control.Button;
+//import javafx.scene.control.Label;
+//import javafx.scene.control.ScrollPane;
+//import javafx.scene.control.TextField;
+//import javafx.scene.layout.AnchorPane;
+//import javafx.scene.layout.Region;
+//import javafx.scene.layout.VBox;
+//import javafx.stage.Stage;
+//import javafx.scene.image.Image;
+//import javafx.scene.image.ImageView;
 
 public class Duke {
     private final Parser PARSER;
     private final Ui UI;
-    public static final String STORAGE_FILEPATH = "data" + File.separatorChar + "duke-storage.txt";
+    private static final String STORAGE_FILEPATH = "data" + File.separatorChar + "duke-storage.txt";
 
-    public static void main(String[] args) {
-        new Duke(Duke.STORAGE_FILEPATH).run();
-    }
+//    public static void main(String[] args) {
+//        new Duke(Duke.STORAGE_FILEPATH).run();
+//    }
 
-    public Duke(String filePathToStorage) {
-        Storage dukeStore = new Storage(filePathToStorage);
+    public Duke() {
+        Storage dukeStore = new Storage(STORAGE_FILEPATH);
         TaskList taskList = TaskList.of(dukeStore);
         PARSER = Parser.initialize(taskList);
         UI = new Ui();
     }
 
-    public void run() {
-        while (UI.isRunning()) {
-            if (!UI.isPendingReply()) {
-                continue;
-            }
-
-            String userInput = UI.readCommand();
-            if (userInput.equals("bye")) {
-                UI.close();
-            }
-
-            try {
-                String reply = PARSER.parseCommand(userInput);
-                Ui.printFormatted(reply);
-            } catch (DukeException e) {
-                Ui.printFormatted(e.toString());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
+//    public void run() {
+//        while (UI.isRunning()) {
+//            if (!UI.isPendingReply()) {
+//                continue;
+//            }
+//
+//            String userInput = UI.readCommand();
+//            if (userInput.equals("bye")) {
+//                UI.close();
+//            }
+//
+//            try {
+//                String reply = PARSER.parseCommand(userInput);
+//                Ui.printFormatted(reply);
+//            } catch (DukeException e) {
+//                Ui.printFormatted(e.toString());
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     public String getResponse(String userInput) {
         return "Test response";
