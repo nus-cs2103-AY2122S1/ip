@@ -2,6 +2,7 @@ package aisu.tasklist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import aisu.exception.AisuException;
 import aisu.task.Deadline;
@@ -135,14 +136,9 @@ public class TaskList {
      * @param keyword Keyword used for searching.
      * @return Tasklist with tasks containing that keyword.
      */
-    public String findTasksWith(String keyword) {
-        StringBuilder result = new StringBuilder();
-        for (int i = 0; i < this.list.size(); i++) {
-            if (list.get(i).toString().contains(keyword)) {
-                result.append(i + 1).append(". ").append(list.get(i)).append("\n");
-            }
-        }
-        return result.toString();
+    public List<Task> findTasksWith(String keyword) {
+        // @@author {chrisgzf}-reused
+        return list.stream().filter(task -> task.toString().contains(keyword)).collect(Collectors.toList());
     }
 
     /**
