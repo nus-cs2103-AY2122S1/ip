@@ -2,6 +2,8 @@ package pix.ui;
 
 import java.util.Scanner;
 
+import pix.command.Command;
+
 /**
  * Class that manages all messages displayed on the UI.
  */
@@ -17,27 +19,11 @@ public class Ui {
 
     /**
      * Displays the welcome message for the user.
+     *
+     * @return Returns the welcome message of Pix.
      */
     public String displayWelcome() {
         return "This is Pix. Why did you summon me AGAIN...\nWhat do want now?";
-    }
-
-    /**
-     * Registers the user's next command.
-     *
-     * @return Returns the next command.
-     */
-    public String nextCommand() {
-        return scanner.nextLine();
-    }
-
-    /**
-     * Displays a message to the user.
-     *
-     * @param message Message to be displayed.
-     */
-    public void displayMessage(String message) {
-        System.out.println(message);
     }
 
     /**
@@ -48,11 +34,20 @@ public class Ui {
     }
 
     /**
-     * Displays the error message on the Ui.
+     * Displays a message that there is no command to undo.
      *
-     * @param errorMessage Message to be displayed
+     * @return Returns the message that there is no last command to undo.
      */
-    public void showError(String errorMessage) {
-        System.out.println(errorMessage);
+    public String showNoLastCommandMessage() {
+        return "You haven't done any command to change any data!";
+    }
+
+    /**
+     * Displays undo message when undoing the previous command
+     *
+     * @return Returns the message that the last command was undone.
+     */
+    public String showUndoMessage() {
+        return "I undid your last change. Maybe stop making mistakes?";
     }
 }

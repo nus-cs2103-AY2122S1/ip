@@ -9,12 +9,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import pix.Pix;
 import pix.exception.PixException;
-import pix.exception.PixIoException;
 import pix.exception.PixInvalidDateException;
+import pix.exception.PixIoException;
 import pix.task.Deadline;
 import pix.task.Event;
 import pix.task.Task;
+import pix.task.TaskList;
 import pix.task.Todo;
 
 /**
@@ -22,15 +24,17 @@ import pix.task.Todo;
  */
 public class Storage {
     private File file;
+    private Pix pix;
 
     /**
      * Constructor for the storage class.
      *
      * @param filePath Path to the file to read.
+     * @param pix Instance of Pix.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath, Pix pix) {
         this.file = new File(filePath);
-        System.out.println(file.getAbsolutePath());
+        this.pix = pix;
     }
 
     /**
@@ -48,21 +52,40 @@ public class Storage {
                 String[] strArray = line.split("\\|", 0);
                 switch (strArray[0]) {
                 case "T":
-                    //Add To Do Pix.task
-                    taskList.add(new Todo(strArray[2], Boolean.parseBoolean(strArray[1])));
+                    //Add To Do task
+                    if (strArray[1].equals("0")) {
+                        taskList.add(new Todo(strArray[2], false));
+                    } else if (strArray[1].equals("1")) {
+                        taskList.add(new Todo(strArray[2], true));
+                    } else {
+                        throw new PixIoException();
+                    }
                     break;
                 case "D":
-                    //Add Pix.task.Deadline Pix.task
-                    taskList.add(new Deadline(strArray[2], Boolean.parseBoolean(strArray[1]),
-                            LocalDate.parse(strArray[3])));
+                    //Add Deadline task
+                    if (strArray[1].equals("0")) {
+                        taskList.add(new Deadline(strArray[2], false,
+                                LocalDate.parse(strArray[3])));
+                    } else if (strArray[1].equals("1")) {
+                        taskList.add(new Deadline(strArray[2], true,
+                                LocalDate.parse(strArray[3])));
+                    } else {
+                        throw new PixIoException();
+                    }
                     break;
                 case "E":
-                    //Add Pix.task.Event Pix.task
-                    taskList.add(new Event(strArray[2], Boolean.parseBoolean(strArray[1]),
-                            LocalDate.parse(strArray[3])));
+                    //Add Event task
+                    if (strArray[1].equals("0")) {
+                        taskList.add(new Event(strArray[2], false,
+                                LocalDate.parse(strArray[3])));
+                    } else if (strArray[1].equals("1")) {
+                        taskList.add(new Event(strArray[2], true,
+                                LocalDate.parse(strArray[3])));
+                    } else {
+                        throw new PixIoException();
+                    }
                     break;
                 default:
-                    //throw Pix.exception.PixIOException
                     throw new PixIoException();
                 }
             }
@@ -78,21 +101,34 @@ public class Storage {
     }
 
     /**
-     * Saves the tasks in the Task List into Pix.txt.
+     * Saves the tasks in the Task List into Pix.txt if the user undoes a command.
      *
      * @param taskList Task list to write the data from.
      */
-    public void writeToFile(ArrayList<Task> taskList) throws IOException, PixIoException {
+    public void writeToFile(ArrayList<Task> taskList) throws PixIoException {
         assert file.exists() : "Pix.txt does not exist!";
         try {
-            //Clear the Pix.task list in the file and rewrite all tasks inside
+            //Clear the task list in the file and rewrite all tasks inside
             FileWriter pixFileWriter = new FileWriter(file);
             pixFileWriter.write("");
             for (Task task: taskList) {
                 pixFileWriter.write(task.getSaveName() + System.lineSeparator());
             }
             pixFileWriter.close();
-        } catch (IOException e) {
+            ArrayList<Task> updatedTaskList = load();
+            pix.setTaskList(updatedTaskList);
+        } catch (IOException | PixException e) {
+            throw new PixIoException();
+        }
+    }
+
+    /**
+     * Writes to file after an undo command was inputted.
+     */
+    public void undidChange(TaskList taskList) throws PixIoException {
+        try {
+            writeToFile(taskList.getTaskList());
+        } catch (PixException e) {
             throw new PixIoException();
         }
     }

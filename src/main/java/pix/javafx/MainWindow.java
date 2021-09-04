@@ -1,5 +1,6 @@
 package pix.javafx;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import pix.Pix;
 import pix.command.Command;
 import pix.exception.PixException;
@@ -43,19 +45,19 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         ui = new Ui();
-        try {
-            storage = new Storage("./data/Pix.txt");
-            taskList = new TaskList(storage.load());
-        } catch (PixException e) {
-            taskList = new TaskList();
-        }
-
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(DialogueBox.getPixDialog(ui.displayWelcome(), dukeImage));
     }
 
+    /**
+     * Sets the instance of Pix.
+     *
+     * @param pix Instance of Pix.
+     */
     public void setPix(Pix pix) {
         this.pix = pix;
+        storage = pix.getStorage();
+        taskList = pix.getTaskList();
     }
 
     /**
@@ -68,7 +70,15 @@ public class MainWindow extends AnchorPane {
         String response = "";
         try {
             Command command = Parser.parse(input);
-            response += command.trigger(storage, taskList, ui);
+            response += command.trigger(pix, storage, ui);
+            // @@author CheyanneSim-reused
+            if (response.contains("come back")) {
+                PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+                pause.setOnFinished(event -> {
+                    Platform.exit();
+                });
+                pause.play();
+            }
         } catch (PixException e) {
             response += e.getMessage();
         } finally {

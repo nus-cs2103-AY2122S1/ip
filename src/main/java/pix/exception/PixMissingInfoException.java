@@ -17,17 +17,17 @@ public class PixMissingInfoException extends PixException {
     public String getMessage() {
         switch (command) {
         case "todo":
-            return "The information of the todo Pix.task is incomplete!";
+            return "The information of the todo task is incomplete!";
         case "deadline":
             return "The information of the deadline is incomplete!";
         case "event":
             return "The information of the event is incomplete!";
         case "done":
-            return "Which Pix.task did you do?";
+            return "Which task did you do?";
         case "list":
-            return "You need to input a Pix.task number!";
+            return "You need to input a task number!";
         case "delete":
-            return "The Pix.task cannot be found. Which Pix.task do you want deleted?";
+            return "The task cannot be found. Which Pix.task do you want deleted?";
         case "find":
             return "Key in 1 word to search for! O-N-E!";
         default:

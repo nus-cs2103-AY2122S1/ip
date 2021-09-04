@@ -1,8 +1,8 @@
 package pix.command;
 
+import pix.Pix;
 import pix.exception.PixException;
 import pix.storage.Storage;
-import pix.task.TaskList;
 import pix.ui.Ui;
 
 /**
@@ -32,13 +32,11 @@ public abstract class Command {
     /**
      * Triggers the command and gives a string output depending on the command triggered.
      *
-     * @param storage Storage class to store information.
-     * @param taskList Task list class to store information about tasks.
-     * @param ui Ui class to display messages to the user.
-     *
+     * @param pix Pix class that get initialized with Pix.
+     * @param storage Storage class to store the data in.
+     * @param ui Ui class to display the messages to the user.
      * @return Returns a string output depending on the command.
-     *
      * @throws PixException Throws multiple exceptions depending on the tasks.
      */
-    public abstract String trigger(Storage storage, TaskList taskList, Ui ui) throws PixException;
+    public abstract String trigger(Pix pix, Storage storage, Ui ui) throws PixException;
 }
