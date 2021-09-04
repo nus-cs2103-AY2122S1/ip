@@ -184,7 +184,7 @@ public class Parser {
         } catch (DukeException e1) {
             System.out.println(e1.getMessage());
         }
-
+        
         assert newTask != null : "newTask should not be null";
         taskList.addTask(newTask);
         System.out.println("You have successfully added the following task!\n\n"
