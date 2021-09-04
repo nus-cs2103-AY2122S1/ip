@@ -1,14 +1,17 @@
 package duke.util;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
 
 import duke.command.ExitCommand;
-
-import static org.junit.jupiter.api.Assertions.*;
+import duke.exception.DukeException;
 
 public class ParserTest {
     @Test

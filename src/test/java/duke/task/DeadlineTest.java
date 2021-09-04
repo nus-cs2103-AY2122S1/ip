@@ -2,10 +2,10 @@ package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+import org.junit.jupiter.api.Test;
 
 public class DeadlineTest {
     @Test
@@ -35,7 +35,7 @@ public class DeadlineTest {
 
     @Test
     public void testGetTime() {
-        LocalTime time = LocalTime.of(20,0);
+        LocalTime time = LocalTime.of(20, 0);
         Deadline task = new Deadline("return book", "04/09/2021 2000");
         assertEquals(time, task.getTime());
     }

@@ -159,7 +159,7 @@ public abstract class Task implements Comparable<Task> {
             return 1;
         } else if (this.isDone && other.isDone) {
             return -1;
-        } else  if (!this.isDone && other.isDone) {
+        } else if (!this.isDone && other.isDone) {
             return -1;
         }
 

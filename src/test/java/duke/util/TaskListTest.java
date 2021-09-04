@@ -192,7 +192,7 @@ public class TaskListTest {
 
     @Test
     public void testListTasks_byReminderToday() {
-        /** Method uses current date (04/09/2021 as of writing this) so this check will fail after today. */
+        // Method uses current date (04/09/2021 as of writing this) so this check will fail after today.
         tasks.addToList("read book", "ToDo");
         tasks.addToList("return book /by 04/09/2021 0000", "Deadline");
         tasks.addToList("project meeting /at 2021-09-04 1400 1600", "Event");
@@ -206,7 +206,7 @@ public class TaskListTest {
 
     @Test
     public void testListTasks_byReminderWeek() {
-        /** Method uses current date (04/09/2021 as of writing this) so this check will fail after today. */
+        // Method uses current date (04/09/2021 as of writing this) so this check will fail after today.
         tasks.addToList("read book", "ToDo");
         tasks.addToList("return book /by 04/09/2021 0000", "Deadline");
         tasks.addToList("project meeting /at 2021-09-08 1400 1600", "Event");
