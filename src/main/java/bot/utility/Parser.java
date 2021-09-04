@@ -14,6 +14,7 @@ import bot.error.DukeException;
  * Represents a parser that can read and understand what to do with an input String.
  */
 public class Parser {
+
     /**
      * Returns a Command containing information according to the isntruction by the user.
      */
@@ -45,6 +46,7 @@ public class Parser {
             return new ErrorCommand();
         }
     }
+
     /**
      * Handles DukeExceptions for the chatBot
      * @param log The separate words in a given line

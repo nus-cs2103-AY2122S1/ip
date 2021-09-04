@@ -7,12 +7,14 @@ public class ErrorCommand extends Command {
     private static final String DEFAULT_ERROR_MESSAGE = "\n\t My dictionary does not contain this sophisticated "
             + "language.\n\t Maybe someday :)";
     private final String errorMessage;
+
     /**
      * Returns an ErrorCommand with a default error message;
      */
     public ErrorCommand() {
         this.errorMessage = DEFAULT_ERROR_MESSAGE;
     }
+
     /**
      * Returns an ErrorCommand with a specified error message;
      *
@@ -21,6 +23,7 @@ public class ErrorCommand extends Command {
     public ErrorCommand(String errorMessage) {
         this.errorMessage = errorMessage;
     }
+
     /**
      * Executes the Command and returns a String.
      *

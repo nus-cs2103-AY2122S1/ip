@@ -22,7 +22,6 @@ import bot.tasks.ToDo;
  */
 public class Logger {
     private static BufferedReader bufferedReader;
-    private Logger(String filepath) {}
     protected static void initialize() {
         Path path = Paths.get("tasks.txt");
         try {

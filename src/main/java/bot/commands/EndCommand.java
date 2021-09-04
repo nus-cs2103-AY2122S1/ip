@@ -10,6 +10,7 @@ import bot.utility.TaskList;
  * Represents a command to end the program.
  */
 public class EndCommand extends Command {
+
     /**
      * Executes the Command and returns a String.
      *
