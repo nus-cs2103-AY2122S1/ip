@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class TaskList {
     private List<Task> tasks;
@@ -38,10 +39,12 @@ public class TaskList {
         }
 
         resp.add("\tHere are the tasks in your list:");
-        for (int i = 0; i < this.tasks.size(); i++) {
-            resp.add(String.format("\t%d. %s",
-                    i+1, this.tasks.get(i)));
-        }
+
+        IntStream.range(0, tasks.size())
+                .forEach(x -> {
+                    resp.add(String.format("\t%d. %s", x+1, this.tasks.get(x)));
+                });
+
         return resp;
     }
 
@@ -110,12 +113,15 @@ public class TaskList {
         resp.add("\tHere are the matching tasks in your list:");
 
         int i = 1;
-        for (Task task :  this.tasks) {
-            if (task.isFound(target)) {
-                resp.add("\t" + i + "." + task);
-                i++;
-            }
-        }
+
+        tasks.stream().filter(x -> x.isFound(target)).forEach(x -> resp.add("\t" + i + "." + x));
+
+        IntStream.range(0, tasks.size())
+                .filter(x -> tasks.get(x).isFound(target))
+                .forEach(x -> {
+                    String tmp = "\t" + x + "." + tasks.get(x);
+                    resp.add(tmp);
+                });
 
         return resp;
     }
