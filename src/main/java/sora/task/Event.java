@@ -1,6 +1,7 @@
 package sora.task;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
@@ -29,6 +30,10 @@ public class Event extends Task {
         this.date = date;
         this.startTime = startTime;
         this.endTime = endTime;
+    }
+
+    protected LocalDateTime extractDateTime() {
+        return LocalDateTime.of(date, startTime);
     }
 
     /**

@@ -32,6 +32,8 @@ public class Parser {
             return (tasks) -> tasks.taskDelete(command);
         } else if (command.matches("^find( .*)?")) {
             return (tasks) -> tasks.findInList(command);
+        } else if (command.matches("^sort( .*)?")) {
+            return (tasks) -> tasks.sort(command);
         } else {
             throw new UnknownCommandException();
         }

@@ -1,12 +1,14 @@
 package sora.task;
 
+import java.time.LocalDateTime;
+
 /**
  * Represents a task.
  * Contains description of the task and whether it is completed.
  *
  * @author Zhang Shi Chen
  */
-public class Task {
+public class Task implements Comparable<Task> {
     private final String description;
     private boolean isDone;
 
@@ -64,5 +66,45 @@ public class Task {
     @Override
     public String toString() {
         return "[" + (isDone ? "X" : " ") + "] " + description;
+    }
+
+    /**
+     * Compares the current task with another task.
+     * Since todo does not have a time, it will always be behind.
+     * This method compares the date and time of deadline vs date and start time of event.
+     *
+     * @return An int value: 0 if the 2 tasks are same timing;
+     *         -1 if the current task occurs earlier than the other task;
+     *         1 if the current task occurs later than the other task.
+     */
+    @Override
+    public int compareTo(Task task) {
+        // Nothing to compare to yourself
+        if (this == task) {
+            return 0;
+        }
+
+        // Handle the case where there is a Todo
+        if (this instanceof Todo && task instanceof Todo) {
+            return 0;
+        }
+
+        if (this instanceof Todo) {
+            return 1;
+        }
+
+        if (task instanceof Todo) {
+            return -1;
+        }
+
+        // Obtain date time depending on whether they are Deadline or Event
+        LocalDateTime currTask = this instanceof Deadline
+                                 ? ((Deadline) this).dateTime
+                                 : ((Event) this).extractDateTime();
+        LocalDateTime otherTask = task instanceof Deadline
+                                  ? ((Deadline) task).dateTime
+                                  : ((Event) task).extractDateTime();
+
+        return currTask.compareTo(otherTask);
     }
 }
