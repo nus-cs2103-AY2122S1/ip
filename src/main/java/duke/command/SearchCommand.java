@@ -34,21 +34,21 @@ public class SearchCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList currList = new TaskList();
+        TaskList resultList = new TaskList();
         switch (type) {
         case DATE:
             String preTime = response.substring(5);
             String actualTime = Task.dateAndTime(preTime);
-            currList = tasks.tasksWithDate(actualTime);
+            resultList = tasks.tasksWithDate(actualTime);
             break;
         case FIND:
             String content = response.substring(5);
-            currList = tasks.tasksWithContent(content);
+            resultList = tasks.tasksWithContent(content);
             break;
         default:
             break;
         }
-        return ui.showList(currList, currList.getSize());
+        return ui.showList(resultList, resultList.getSize());
     }
 
     @Override

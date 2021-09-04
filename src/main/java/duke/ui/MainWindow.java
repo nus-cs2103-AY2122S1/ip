@@ -20,7 +20,7 @@ import duke.Duke;
  */
 public class MainWindow extends AnchorPane {
     private static final String GREETING = "Hello! I'm Duke, what can I do for you?";
-    private static final String FAREWELL = "Bye. Hope to see you again soon!";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -73,10 +73,5 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void showWelcome() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(GREETING, dukeImage));
-    }
-
-    @FXML
-    private void showFarewell() {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(FAREWELL, dukeImage));
     }
 }

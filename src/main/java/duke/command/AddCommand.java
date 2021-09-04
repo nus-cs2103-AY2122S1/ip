@@ -43,16 +43,16 @@ public class AddCommand extends Command {
             task = new Todo(response.substring(5));
             break;
         case DEADLINE:
-            String[] parts2 = response.substring(9).split(" /by ");
-            String content2 = parts2[0];
-            String time2 = parts2[1];
-            task = new Deadline(content2, time2);
+            String[] deadlineParts = response.substring(9).split(" /by ");
+            String deadlineContent = deadlineParts[0];
+            String deadlineTime = deadlineParts[1];
+            task = new Deadline(deadlineContent, deadlineTime);
             break;
         case EVENT:
-            String[] parts3 = response.substring(6).split(" /at ");
-            String content3 = parts3[0];
-            String time3 = parts3[1];
-            task = new Event(content3, time3);
+            String[] eventParts = response.substring(6).split(" /at ");
+            String eventContent = eventParts[0];
+            String eventTime = eventParts[1];
+            task = new Event(eventContent, eventTime);
             break;
         default:
             break;

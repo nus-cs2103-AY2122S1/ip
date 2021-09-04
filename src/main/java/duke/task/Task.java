@@ -94,12 +94,14 @@ public class Task {
         String day = parts[0];
         String month = parts[1];
         String year = parts[2];
+        //Get the value of day and month.
         int dayValue = Integer.parseInt(day);
         int monthValue = Integer.parseInt(month);
-        boolean validDay = dayValue <= 31 && dayValue >= 1;
-        boolean validMonth = monthValue <= 12 && monthValue >= 1;
-        return Parser.checkDigit(day) && Parser.checkDigit(year) && Parser.checkDigit(month) && validDay
-                && validMonth;
+        //Check whether they are valid or not.
+        boolean isValidDay = dayValue <= 31 && dayValue >= 1;
+        boolean isValidMonth = monthValue <= 12 && monthValue >= 1;
+        boolean isDigitForm = Parser.checkIsDigit(day) && Parser.checkIsDigit(year) && Parser.checkIsDigit(month);
+        return isDigitForm && isValidMonth && isValidDay;
     }
 
     /**
@@ -120,7 +122,7 @@ public class Task {
             }
             String date = parts[0];
             String time = parts[1];
-            if (date.length() > 10 || time.length() != 4 || !Parser.checkDigit(time)
+            if (date.length() > 10 || time.length() != 4 || !Parser.checkIsDigit(time)
                     || !date.contains("/")) {
                 return false;
             }
@@ -166,6 +168,7 @@ public class Task {
         if (isDate(preTime)) {
             int lens = preTime.length();
             String actualTime = getDate(transferToDateFormat(preTime));
+            assert actualTime != null;
             if (lens > 10) {
                 actualTime += " " + getTime(preTime.substring(lens - 4, lens));
             }

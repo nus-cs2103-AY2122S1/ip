@@ -22,10 +22,11 @@ public class MarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        int curr = Integer.parseInt(response.substring(5));
-        Task shouldMark = tasks.markElement(curr - 1);
+        int taskNumber = Integer.parseInt(response.substring(5));
+        assert taskNumber > 0;
+        Task shouldMark = tasks.markElement(taskNumber - 1);
         String stringForm = shouldMark.toString();
-        storage.replace(curr - 1, tasks);
+        storage.replace(taskNumber - 1, tasks);
         return ui.showDone(stringForm);
     }
 
