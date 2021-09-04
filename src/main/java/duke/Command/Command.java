@@ -18,7 +18,7 @@ public abstract class Command {
 
     /**
      * Checks if Command is ExitCommand
-     * 
+     *
      * @return true if ExitCommand
      */
     public abstract boolean isExit();

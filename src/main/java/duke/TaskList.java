@@ -65,7 +65,7 @@ public class TaskList {
      * @return Task that was deleted from list
      * @throws DukeException
      */
-    public Task deleteTask(int index) throws DukeException{
+    public Task deleteTask(int index) throws DukeException {
         Task task = getTask(index);
         list.remove(index);
         return task;
@@ -78,7 +78,7 @@ public class TaskList {
      * @return Task that was completed
      * @throws DukeException
      */
-    public Task doneTask(int index) throws DukeException{
+    public Task doneTask(int index) throws DukeException {
         Task task = getTask(index);
         task.setStatus(true);
         return task;

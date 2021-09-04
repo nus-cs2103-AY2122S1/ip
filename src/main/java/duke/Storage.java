@@ -24,10 +24,10 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> list = new ArrayList<>();
-        File list_data = new File(filepath);
+        File listData = new File(filepath);
         Scanner reader;
         try {
-            reader = new Scanner(list_data);
+            reader = new Scanner(listData);
         } catch (FileNotFoundException e) {
             throw new DukeException("File not found");
         }
@@ -36,15 +36,17 @@ public class Storage {
             String line = reader.nextLine();
             String[] data = line.split(" \\| ");
             switch (data[0]) {
-                case "todo":
-                    list.add(new Task.Todo(data[2], data[1].equals("0") ? false : true));
-                    break;
-                case "deadline":
-                    list.add(new Task.Deadline(data[2], data[1].equals("0") ? false : true, data[3]));
-                    break;
-                case "event":
-                    list.add(new Task.Event(data[2], data[1].equals("0") ? false : true, data[3]));
-                    break;
+            case "todo":
+                list.add(new Task.Todo(data[2], data[1].equals("0") ? false : true));
+                break;
+            case "deadline":
+                list.add(new Task.Deadline(data[2], data[1].equals("0") ? false : true, data[3]));
+                break;
+            case "event":
+                list.add(new Task.Event(data[2], data[1].equals("0") ? false : true, data[3]));
+                break;
+            default:
+                throw new DukeException("Invalid input");
             }
         }
         reader.close();

@@ -40,11 +40,10 @@ public class Task {
     }
 
     public void setStatus(boolean status) {
-        this.status= status;
+        this.status = status;
     }
 
-    public static class Todo extends Task{
-
+    public static class Todo extends Task {
         /**
          * Constructs Todo task
          *
@@ -72,7 +71,7 @@ public class Task {
 
     }
 
-    public static class Deadline extends Task{
+    public static class Deadline extends Task {
         private LocalDate by;
 
 
@@ -100,8 +99,8 @@ public class Task {
          */
         @Override
         public String getDescription() {
-            return super.getDescription() + "(by: " +
-                    this.by.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
+            return super.getDescription() + "(by: "
+                    + this.by.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
         }
 
         /**
@@ -116,7 +115,7 @@ public class Task {
 
     }
 
-    public static class Event extends Task{
+    public static class Event extends Task {
         private LocalDate at;
 
         /**
@@ -143,8 +142,8 @@ public class Task {
          */
         @Override
         public String getDescription() {
-            return super.getDescription() + "(at: " +
-                    this.at.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
+            return super.getDescription() + "(at: "
+                    + this.at.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)) + ")";
         }
 
         /**
