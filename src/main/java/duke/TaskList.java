@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Contains the task list.
@@ -138,21 +140,18 @@ public class TaskList {
      * @param keywords Keywords to be found among all tasks.
      * @return A list of matched tasks.
      */
-    public List<Task> findMatchedTasks(String ... keywords) {
-        List<Task> matchedTasks = new ArrayList<>();
+    public List<Task> findTask(String... keywords) {
+        Stream<Task> matchedTasksStream = Stream.empty();
         for (String keyword : keywords) {
-            matchedTasks.addAll(findTasksFromSingleKeyWord(keyword));
-        }
-        return matchedTasks;
-    }
-
-    private Collection<? extends Task> findTasksFromSingleKeyWord(String keyword) {
-        List<Task> matchedTasks = new ArrayList<>();
-        this.tasks.forEach((task) -> {
-            if (task.getDescription().contains(keyword)) {
-                matchedTasks.add(task);
+            if (keyword.isEmpty()) {
+                continue;
             }
-        });
-        return matchedTasks;
+            matchedTasksStream = this.tasks.stream()
+                    .filter((task) -> task.getDescription().contains(keyword) );
+        }
+      
+        return matchedTasksStream.collect(Collectors.toList());
     }
+        
+   
 }
