@@ -22,22 +22,21 @@ public class Storage {
      */
     public List<Task> loadFromDisk() {
         File folder = new File("data");
-        if (folder.isDirectory()) {
-            try {
-                File file = new File("data/duke.txt");
-                Scanner scanner = new Scanner(file);
-                while (scanner.hasNext()) {
-                    String taskString = scanner.nextLine();
-                    Task task = parser.taskStringToTask(taskString);
-                    this.tasks.add(task);
-                }
-            } catch (FileNotFoundException e) {
-                //create the file if it does not exist.
-                createFile();
-            }
-        } else {
-            //create both directory and file if they do not exist.
+        if (!folder.isDirectory()) {
             createDataFolder();
+            createFile();
+        }
+
+        try {
+            File file = new File("data/duke.txt");
+            Scanner scanner = new Scanner(file);
+            while (scanner.hasNext()) {
+                String taskString = scanner.nextLine();
+                Task task = parser.taskStringToTask(taskString);
+                this.tasks.add(task);
+            }
+        } catch (FileNotFoundException e) {
+            //create the file if it does not exist.
             createFile();
         }
         return tasks;

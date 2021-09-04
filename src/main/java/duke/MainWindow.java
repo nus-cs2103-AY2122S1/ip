@@ -33,8 +33,8 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! I'm Duke\nWhat can I do for you?", dukeImage)
+        String greeting = "Hello! I'm Duke\nWhat can I do for you?";
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(greeting, dukeImage)
         );
     }
 
@@ -55,7 +55,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.equals("bye")) {
+        String exitCommand = "bye";
+        if (input.equals(exitCommand)) {
             Platform.exit();
         }
         String response = duke.getResponse(input);
