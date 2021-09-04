@@ -11,6 +11,6 @@ public class TodoTest {
     public void getStatusIconTest() {
         Deadline deadline = new Deadline("sleep", "5pm");
         deadline.markAsDone();
-        assertEquals(deadline.getStatusIcon(), "X");
+        assertEquals(deadline.getStatusIcon(), "\u2713");
     }
 }
