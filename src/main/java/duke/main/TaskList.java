@@ -65,8 +65,8 @@ public class TaskList implements Iterable<Task> {
      * Prints all the Tasks in the TaskList line by line.
      */
     public void printList() {
-        if (taskList.size() == 0) {
-            System.out.println("You have no tasks! GOOD JOB!");
+        if (this.taskList.size() == 0) {
+            System.out.println("Meow! You have no tasks! GOOD JOB!");
             return;
         }
 
@@ -92,7 +92,7 @@ public class TaskList implements Iterable<Task> {
     public void printAllContains(String match) {
         boolean taskFound = false;
         for (int i = 0; i < this.taskList.size(); i++) {
-            String description = taskList.get(i).getDescription();
+            String description = this.taskList.get(i).getDescription();
             if (description.contains(match)) {
                 taskFound = true;
                 System.out.println("    Task " + (i + 1) + ". " + this.taskList.get(i));

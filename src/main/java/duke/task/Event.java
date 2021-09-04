@@ -50,8 +50,7 @@ public class Event extends Task {
                     + "a task description using an '/at' (only once).\n"
                     + "i.e. event project meeting /at Aug 6th 2-4pm");
         }
-        Task event = new Event(eventParams[0], eventParams[1]);
-        return event;
+        return new Event(eventParams[0], eventParams[1]);
     }
 
     /**
