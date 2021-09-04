@@ -13,11 +13,7 @@ public class UI {
 
     public static final String DIVIDER = "____________________________________________________________\n";
 
-    private Scanner sc;
-
-    public UI() {
-        Scanner sc = new Scanner(System.in);
-    }
+    private Scanner sc = new Scanner(System.in);
 
     public void showWelcome() {
         System.out.println("Hello from\n" + LOGO);

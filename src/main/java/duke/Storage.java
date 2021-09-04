@@ -12,6 +12,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,7 +24,7 @@ public class Storage {
 
     public Storage (String directoryPath, String filePath) {
         this.directoryPath = directoryPath;
-        this.filePath = filePath;
+        this.filePath = directoryPath.concat(filePath);
     }
 
     public ArrayList<Task> load() throws DukeException {
@@ -30,14 +33,15 @@ public class Storage {
 
         ArrayList<Task> tasks = new ArrayList<>();
 
-        if (!directory.exists()) {
-            throw new DukeException("OOPS!! Directory does not exist");
-        } else if (!dataFile.exists()) {
-            try {
-                dataFile.createNewFile();
-            } catch (IOException e ) {
-                throw new DukeException("OOPS!! Something went wrong");
+        try {
+            if (!directory.exists()) {
+                Files.createDirectories(Paths.get("data/"));
             }
+            if (!dataFile.exists()) {
+                    dataFile.createNewFile();
+            }
+        } catch (IOException e ) {
+            throw new DukeException("OOPS!! Something went wrong");
         }
 
         try {
@@ -62,12 +66,11 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new DukeException("OOPS!! Something went wrong");
         }
-
         return tasks;
     }
 
     public void save(TaskList tasks) throws IOException {
-        FileWriter fw = new FileWriter(directoryPath + filePath);
+        FileWriter fw = new FileWriter(filePath);
 
         ArrayList<Task> listOfTasks = tasks.getListOfTasks();
 
