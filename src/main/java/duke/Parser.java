@@ -38,35 +38,41 @@ public class Parser {
     public String parse(String input) {
         String[] segment = input.split(" ", 2);
 
+        int parameters = segment.length;
+
+        boolean hasBody = parameters == 2;
+
+        String command = segment[0];
+        String body = hasBody ? segment[1] : "";
         String response;
 
         try {
 
             if (!isStorageLoaded) {
-                this.storage.load();
+                storage.load();
                 isStorageLoaded = true;
             }
 
-            if (input.equals("list")) {
+            if (isValidList(input)) {
                 response = list.list();
-            } else if (segment[0].equals("done") && segment.length == 2) {
-                response = list.done(Integer.parseInt(segment[1]));
+            } else if (isValidDone(command, parameters)) {
+                response = list.done(Integer.parseInt(body));
                 storage.save();
-            } else if (segment[0].equals("delete") && segment.length == 2) {
-                response = list.delete(Integer.parseInt(segment[1]));
+            } else if (isValidDelete(command, parameters)) {
+                response = list.delete(Integer.parseInt(body));
                 storage.save();
-            } else if (segment[0].equals("todo")) {
-                response = list.addToDo(input.split("todo", 2)[1]);
+            } else if (isValidToDo(command)) {
+                response = list.addToDo(body);
                 storage.save();
-            } else if (segment[0].equals("deadline")) {
-                response = list.addDeadline(input.split("deadline", 2)[1]);
+            } else if (isValidDeadline(command)) {
+                response = list.addDeadline(body);
                 storage.save();
-            } else if (segment[0].equals("event")) {
-                response = list.addEvent(input.split("event", 2)[1]);
+            } else if (isValidEvent(command)) {
+                response = list.addEvent(body);
                 storage.save();
-            } else if (segment[0].equals("find")) {
-                response = list.find(input.split("find", 2)[1]);
-            } else if (input.equals("bye")) {
+            } else if (isValidFind(command)) {
+                response = list.find(body);
+            } else if (isValidExit(input)) {
                 response = Ui.DUKE_EXIT;
             } else {
                 throw new DukeException("☹ OOPS!!! I'm sorry,"
@@ -77,5 +83,37 @@ public class Parser {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    private boolean isValidList(String input) {
+        return input.equals("list");
+    }
+
+    private boolean isValidDone(String command, int parameters) {
+        return command.equals("done") && parameters == 2;
+    }
+
+    private boolean isValidDelete(String command, int parameters) {
+        return command.equals("delete") && parameters == 2;
+    }
+
+    private boolean isValidToDo(String command) {
+        return command.equals("todo");
+    }
+
+    private boolean isValidDeadline(String command) {
+        return command.equals("deadline");
+    }
+
+    private boolean isValidEvent(String command) {
+        return command.equals("event");
+    }
+
+    private boolean isValidFind(String command) {
+        return command.equals("find");
+    }
+
+    private boolean isValidExit(String input) {
+        return input.equals("bye");
     }
 }
