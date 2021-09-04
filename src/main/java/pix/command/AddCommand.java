@@ -1,8 +1,8 @@
 package pix.command;
 
+import pix.Pix;
 import pix.storage.Storage;
 import pix.task.Task;
-import pix.task.TaskList;
 import pix.ui.Ui;
 
 
@@ -25,14 +25,14 @@ public class AddCommand extends Command {
     /**
      * Triggers the add command which adds a task to the task list.
      *
+     * @param pix Pix class that get initialized with Pix.
      * @param storage Storage class to store the data in.
-     * @param taskList Task list class that has the task list to write from.
-     * @param ui Ui class to display the exit message.
-     *
+     * @param ui Ui class to display the messages to the user.
      * @return Returns the message to display.
      */
     @Override
-    public String trigger(Storage storage, TaskList taskList, Ui ui) {
-        return taskList.addTask(this.task, storage);
+    public String trigger(Pix pix, Storage storage, Ui ui) {
+        pix.setLastCommand(this);
+        return pix.getTaskList().addTask(this.task);
     }
 }

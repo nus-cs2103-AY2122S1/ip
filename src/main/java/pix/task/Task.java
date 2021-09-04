@@ -38,6 +38,13 @@ public abstract class Task {
     }
 
     /**
+     * Sets the task to incomplete.
+     */
+    public void uncompleteTask() {
+        isDone = false;
+    }
+
+    /**
      * Shows whether the task is completed.
      *
      * @return Returns true if the task is complete and false otherwise.

@@ -5,24 +5,21 @@ import pix.exception.PixException;
 import pix.storage.Storage;
 import pix.ui.Ui;
 
-/**
- * Command to delete a task from the task list.
- */
-public class DeleteCommand extends Command {
+
+
+public class UndoneCommand extends Command {
     private int taskNumber;
 
     /**
-     * Constructor for the delete command.
-     *
-     * @param taskNumber Task number to be deleted.
+     * Constructor for the undone command.
      */
-    public DeleteCommand(int taskNumber) {
+    public UndoneCommand(int taskNumber) {
         super(false);
         this.taskNumber = taskNumber;
     }
 
     /**
-     * Triggers the done command which completes a task in the task list.
+     * Triggers the undone command which uncompletes a task in the task list.
      *
      * @param pix Pix class that get initialized with Pix.
      * @param storage Storage class to store the data in.
@@ -32,6 +29,6 @@ public class DeleteCommand extends Command {
     @Override
     public String trigger(Pix pix, Storage storage, Ui ui) throws PixException {
         pix.setLastCommand(this);
-        return pix.getTaskList().deleteTask(taskNumber);
+        return pix.getTaskList().uncompleteTask(taskNumber);
     }
 }

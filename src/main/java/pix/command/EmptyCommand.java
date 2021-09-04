@@ -6,30 +6,26 @@ import pix.storage.Storage;
 import pix.ui.Ui;
 
 /**
- * Command to complete a task on the task list.
+ * An empty command that handles the case where the user tries to undo changes that do not exist.
  */
-public class DoneCommand extends Command {
-    private int taskNumber;
-
+public class EmptyCommand extends Command {
     /**
-     * Constructor for the done command.
+     * Constructor for the empty command.
      */
-    public DoneCommand(int taskNumber) {
+    public EmptyCommand() {
         super(false);
-        this.taskNumber = taskNumber;
     }
 
     /**
-     * Triggers the done command which completes a task in the task list.
+     * Triggers the empty command which displays a message to the user that
      *
      * @param pix Pix class that get initialized with Pix.
      * @param storage Storage class to store the data in.
      * @param ui Ui class to display the messages to the user.
-     * @return Returns the list of tasks to display.
+     * @return Returns the message to display.
      */
     @Override
     public String trigger(Pix pix, Storage storage, Ui ui) throws PixException {
-        pix.setLastCommand(this);
-        return pix.getTaskList().completeTask(taskNumber);
+        return ui.showNoLastCommandMessage();
     }
 }

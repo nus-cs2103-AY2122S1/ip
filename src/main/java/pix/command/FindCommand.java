@@ -1,8 +1,8 @@
 package pix.command;
 
+import pix.Pix;
 import pix.exception.PixException;
 import pix.storage.Storage;
-import pix.task.TaskList;
 import pix.ui.Ui;
 
 /**
@@ -24,15 +24,14 @@ public class FindCommand extends Command {
     /**
      * Triggers the find command which finds all tasks which contains the keyword in the task list.
      *
+     * @param pix Pix class that get initialized with Pix.
      * @param storage Storage class to store the data in.
-     * @param taskList Task list class that has the task list to write from.
-     * @param ui Ui class to display the exit message.
-     *
+     * @param ui Ui class to display the messages to the user.
      * @return Returns the list of tasks that contain the keyword.
      */
 
     @Override
-    public String trigger(Storage storage, TaskList taskList, Ui ui) throws PixException {
-        return taskList.findTasks(keyword);
+    public String trigger(Pix pix, Storage storage, Ui ui) throws PixException {
+        return pix.getTaskList().findTasks(keyword);
     }
 }

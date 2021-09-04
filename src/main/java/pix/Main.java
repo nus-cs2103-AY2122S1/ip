@@ -25,6 +25,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Pix");
+            fxmlLoader.<MainWindow>getController().setPix(pix);
             // @@author CheyanneSim-reused
             stage.setOnCloseRequest(event -> {
                 event.consume();
