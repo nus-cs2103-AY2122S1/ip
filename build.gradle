@@ -44,12 +44,15 @@ test {
     }
 }
 
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "dukeBai"
     archiveClassifier = null
 }
 
@@ -59,9 +62,20 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
 
 javafx {
     version = "11.0.2"
     modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "duke.Launcher"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

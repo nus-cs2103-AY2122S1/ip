@@ -28,6 +28,7 @@ public abstract class Command {
      * @param tasks TaskList that stores the list of tasks.
      * @param ui Ui instance that prints various messages.
      * @param storage Storage instance that reads and writes the task list.
+     * @return Message to show whether successful execution of the command or error.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 }
