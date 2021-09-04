@@ -14,6 +14,11 @@ public abstract class DukeException extends Exception{
         void exceptionMessage() {
             System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
         }
+
+        String stringExceptionMessage() {
+            return "☹ OOPS!!! The description of a todo cannot be empty.";
+        }
+
     }
 
     /**
@@ -23,6 +28,10 @@ public abstract class DukeException extends Exception{
         @Override
         void exceptionMessage() {
             System.out.println("☹ OOPS!!! The description of an event cannot be empty.");
+        }
+
+        String stringExceptionMessage() {
+            return "☹ OOPS!!! The description of an event cannot be empty.";
         }
     }
 
@@ -34,6 +43,10 @@ public abstract class DukeException extends Exception{
         void exceptionMessage() {
             System.out.println("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
+
+        String stringExceptionMessage() {
+            return"☹ OOPS!!! The description of a deadline cannot be empty.";
+        }
     }
 
     /**
@@ -43,6 +56,10 @@ public abstract class DukeException extends Exception{
         @Override
         void exceptionMessage() {
             System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+
+        String stringExceptionMessage() {
+            return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
         }
     }
 }
