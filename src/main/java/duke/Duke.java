@@ -15,7 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -60,15 +59,16 @@ public class Duke {
         boolean isExit = false;
 
         try {
-            botOutputs.add(ui.showLine());
+//            botOutputs.add(ui.showLine());
             Command c = Parser.parse(input);
             botOutputs.addAll(c.execute(tasks, ui, storage));
             isExit = c.isExit();
         } catch (UnknownException e) {
             ui.displayError(e.getMessage());
-        } finally {
-            botOutputs.add(ui.showLine());
-        }
+        } 
+//        finally {
+//            botOutputs.add(ui.showLine());
+//        }
 
         return new BotOutput(String.join("\n", botOutputs), isExit);
     }
@@ -86,15 +86,16 @@ public class Duke {
         while (!isExit) {
             try {
                 String fullCommand = ui.readNextLine();
-                ui.showLine(); // show the divider line ("_______")
+//                ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
             } catch (UnknownException e) {
                 ui.displayError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
+            } 
+//            finally {
+//                ui.showLine();
+//            }
         }
     }
 }

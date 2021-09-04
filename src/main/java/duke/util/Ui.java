@@ -27,12 +27,13 @@ public class Ui {
         bye();
     }
 
-    public String showLine() {
-        return "-----------------------------------------";
-    }
+//    public String showLine() {
+//        return "-----------------------------------------";
+//    }
 
     public static String greet() {
-        return "Hiiii~ I'm Duke created by Tianyue.\n" +
+        return "Hiiii~ I'm Duke! Just so you know I'm not a real human...\n" +
+                "I'm created by Tianyue to assist you in simple task management.\n" +
                 "How can I help you? :)";
     }
 
