@@ -1,3 +1,5 @@
+package ui;
+
 import chatbot.Dude;
 import dao.TaskDao;
 import dao.TaskDaoImpl;
@@ -8,8 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import logic.CommandLogicUnitImpl;
 import logic.ICommandLogicUnit;
-import ui.GuiUiImpl;
-import ui.IUi;
 import ui.view.MainWindowController;
 
 import java.io.IOException;
@@ -23,7 +23,7 @@ public class MainGui extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainGui.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             MainWindowController mainWindow = fxmlLoader.getController();
             

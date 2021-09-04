@@ -17,10 +17,10 @@ import java.util.logging.Logger;
 // with minor modifications
 
 /**
- * Main Gui that creates the window for chatting.
+ * Main.Main Gui that creates the window for chatting.
  */
 public class MainWindowController extends AnchorPane implements IWindowController {
-    private static final Logger logger = Logger.getLogger(DialogBox.class.getName());
+    private static final Logger logger = Logger.getLogger(MainWindowController.class.getName());
     private final Image userImage = new Image(Objects.requireNonNull(this.getClass()
             .getResourceAsStream("/images/User.png")));
     private final Image chatbotImage = new Image(Objects.requireNonNull(this.getClass()

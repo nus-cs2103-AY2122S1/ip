@@ -2,7 +2,6 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
 group 'org.example'
@@ -12,8 +11,10 @@ repositories {
     mavenCentral()
 }
 
+mainClassName = 'Main'
+
 dependencies {
-    String javaFxVersion = '11'
+    String javaFxVersion = '11.0.2'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
@@ -32,18 +33,21 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
-ext {
-    javaMainClass = "src.main.java.Dude"
-}
-
-application {
-    mainClassName = javaMainClass
-}
-
 checkstyle {
     toolVersion = '8.32'
 }
 
 test {
     useJUnitPlatform()
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    manifest {
+        attributes 'Main-Class': 'Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }

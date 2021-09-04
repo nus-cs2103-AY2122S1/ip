@@ -21,7 +21,7 @@ public class FileListStorage<T> {
     private final String filePath;
     
     /**
-     * Main constructor of FileListStorage.
+     * Main.Main constructor of FileListStorage.
      *
      * @param filePath String representing the path to the file, separated by / char.
      */
