@@ -15,6 +15,11 @@ public class Main extends Application {
 
     private MyJournal myJournal = new MyJournal();
 
+    /**
+     * Starts the stage.
+     *
+     * @param stage The stage.
+     */
     @Override
     public void start(Stage stage) {
         try {

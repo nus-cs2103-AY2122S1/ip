@@ -61,21 +61,9 @@ public class Storage {
                 todo.setState(isDone);
                 tasks.add(todo);
             } else {
-                String[] arr = taskDescription.split(" ");
-                String description = "";
-                String time = "";
-                boolean check = false;
-                for (String s : arr) {
-                    if (s.equals("|")) {
-                        check = true;
-                    } else {
-                        if (check) {
-                            time = time + " " + s;
-                        } else {
-                            description = description + s + " ";
-                        }
-                    }
-                }
+                String[] arr = taskDescription.split("|");
+                String description = arr[0];
+                String time = arr[1];
                 if (currLine.charAt(0) == 'E') {
                     Event event = new Event(description, time);
                     event.setState(isDone);

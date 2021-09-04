@@ -1,9 +1,12 @@
 T|0| watch movie
-E|0| watch fireworks | MONDAY, 23 Aug 2021 03:00pm
+E|0| w|a
 T|0| read book 
-E|0| watch | 2021/02/30
-E|1| watch | 2021/03/40
-E|1| watch | 2021/01/02
-D|0| do hw | THURSDAY, 16 Sep 2021 04:00am
+E|0| w|a
+E|1| w|a
+E|1| w|a
+D|0| d|o
 T|0| read 
-E|0| go party | SUNDAY, 5 Sep 2021 07:00pm
+E|0| g|o
+E|0| w|a
+D|0| d|o
+E|0| watch | Thu, May 06 2021 05:00 pm

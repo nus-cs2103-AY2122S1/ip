@@ -2,9 +2,8 @@ package myjournal;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.format.TextStyle;
-import java.util.Locale;
 import java.util.Scanner;
 
 import myjournal.exception.EmptyDescriptionException;
@@ -164,21 +163,13 @@ public class Parser {
             String currWord = line.next();
             if (isDate(currWord)) {
                 LocalDate date = LocalDate.parse(currWord);
-                String month = date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH);
-                String dateFormatted = date.getDayOfWeek().toString() + ", " + date.getDayOfMonth() + " " + month
-                        + " " + date.getYear();
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
+                String dateFormatted = dateFormatter.format(date);
                 parsed = parsed + " " + dateFormatted;
             } else if (isTime(currWord)) {
                 LocalTime time = LocalTime.parse(currWord);
-                String beforeOrAfterNoon = time.getHour() >= 12 ? "pm" : "am";
-                int hour = time.getHour() == 0
-                        ? 12
-                        : time.getHour() >= 12
-                        ? time.getHour() - 12
-                        : time.getHour();
-                int min = time.getMinute();
-                String timeFormatted = (String.valueOf(hour).length() == 1 ? "0" + hour : hour)
-                        + ":" + (min < 10 ? "0" + min : min) + beforeOrAfterNoon;
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("hh:mm a");
+                String timeFormatted = timeFormatter.format(time);
                 parsed = parsed + " " + timeFormatted;
             } else {
                 parsed = parsed + " " + currWord;
