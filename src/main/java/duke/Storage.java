@@ -29,8 +29,8 @@ public class Storage {
      * @param filePath File path of the data file.
      */
     public Storage(String filePath) {
+        assert (filePath == null) : "filePath is empty";
         this.filePath = filePath;
-        assert (!this.filePath.isEmpty()) : "filePath is empty";
     }
 
     /**
