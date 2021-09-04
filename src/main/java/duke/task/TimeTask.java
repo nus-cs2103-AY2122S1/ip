@@ -22,10 +22,19 @@ public abstract class TimeTask extends Task {
      */
     public TimeTask(String name, String time) {
         super(name);
+        editTime(time);
+    }
+
+    public void editTime(String newTime) {
+
+        // cannot have both timeDate and timeString containing values
+        // or else addTime won't work properly
         try {
-            this.timeDate = LocalDate.parse(time);
+            this.timeDate = LocalDate.parse(newTime);
+            this.timeString = null;
         } catch (DateTimeParseException e) {
-            this.timeString = time;
+            this.timeString = newTime;
+            this.timeDate = null;
         }
     }
 

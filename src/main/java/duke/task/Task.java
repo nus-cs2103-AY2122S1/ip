@@ -54,9 +54,8 @@ public abstract class Task {
         return this.name;
     }
 
-    public boolean getDone() {
-        return this.isDone;
+    public void editName(String newName) {
+        this.name = newName;
     }
-
 
 }
