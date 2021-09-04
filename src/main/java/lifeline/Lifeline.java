@@ -50,7 +50,7 @@ public class Lifeline {
     public String getResponse(String command) {
         try {
             Command c = Parser.parse(command);
-            return c.getExecute().apply(command, storage, taskList, ui);
+            return c.getExecute().apply(command.trim(), storage, taskList, ui);
         } catch (LifelineException e) {
             return ui.showError(e.getMessage());
         }
@@ -83,7 +83,7 @@ public class Lifeline {
                 }
                 System.out.println();
                 Command c = Parser.parse(fullCommand);
-                String response = c.getExecute().apply(fullCommand, storage, taskList, ui);
+                String response = c.getExecute().apply(fullCommand.trim(), storage, taskList, ui);
                 ui.printToConsole(response);
                 if (c == Command.BYE) {
                     isExit = true;
