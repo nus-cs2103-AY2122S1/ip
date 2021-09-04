@@ -71,7 +71,7 @@ public class AddCommand extends Command {
     }
 
     private Task createTask(String taskDescription) {
-        Task newTask;
+        Task newTask = null;
         switch (this.taskType) {
         case DEADLINE:
             if (taskDescription.contains(" /by ")) {
@@ -93,8 +93,9 @@ public class AddCommand extends Command {
             newTask = new ToDo(taskDescription);
             break;
         default:
-            throw new DukeException("Unknown command.");
+            assert false : this.taskType;
         }
+        assert newTask != null : "No new task created";
         return newTask;
     }
 

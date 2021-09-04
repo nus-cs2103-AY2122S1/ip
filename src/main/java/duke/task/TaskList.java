@@ -37,6 +37,7 @@ public class TaskList {
      * @return The current number of tasks in the task list.
      */
     public int getNumberOfTasks() {
+        assert this.numberOfTasks >= 0 : "Negative number of tasks";
         return this.numberOfTasks;
     }
 
@@ -57,6 +58,7 @@ public class TaskList {
      */
     public void add(Task task) {
         this.taskList.add(task);
+        assert this.numberOfTasks >= 0 : "Negative number of tasks";
         this.numberOfTasks++;
     }
 
@@ -69,6 +71,7 @@ public class TaskList {
     public Task delete(int taskIndex) {
         Task deletedTask = this.taskList.remove(taskIndex);
         this.numberOfTasks--;
+        assert this.numberOfTasks >= 0 : "Negative number of tasks";
         return deletedTask;
     }
 

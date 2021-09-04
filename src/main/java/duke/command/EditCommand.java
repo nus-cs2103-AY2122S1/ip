@@ -45,7 +45,7 @@ public class EditCommand extends Command {
         try {
             String[] commandAndArgument = this.userInput.split(" ", 2);
             int taskIndex = Integer.parseInt(commandAndArgument[1]) - 1;
-            Task editedTask;
+            Task editedTask = null;
             switch (this.editType) {
             case DONE:
                 editedTask = taskList.markAsDone(taskIndex);
@@ -54,8 +54,9 @@ public class EditCommand extends Command {
                 editedTask = taskList.delete(taskIndex);
                 break;
             default:
-                throw new DukeException("Unknown command.");
+                assert false : this.editType;
             }
+            assert editedTask != null : "Failed to retrieve edited task";
             storage.overwriteSave(taskList);
             return ui.formatEditedTask(editedTask, taskList.getNumberOfTasks(), this.editType);
         } catch (IndexOutOfBoundsException | NumberFormatException e) {
@@ -73,7 +74,7 @@ public class EditCommand extends Command {
     public boolean equals(Object other) {
         if (other instanceof EditCommand) {
             EditCommand otherCommand = (EditCommand) other;
-            return this.editType == otherCommand.editType && this.userInput == otherCommand.userInput;
+            return this.editType == otherCommand.editType && this.userInput.equals(otherCommand.userInput);
         } else {
             return false;
         }
