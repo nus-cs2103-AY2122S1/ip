@@ -167,14 +167,13 @@ public class Parser {
     private void alterTask(String input, Parser.TaskAction action)
             throws InvalidParamException, OutOfBoundsOfTaskListException {
         try {
-
             Task taskToBeAltered;
 
             // For user, the list starts at 1. However, our list index starts at 0
             int taskIndex = Integer.parseInt(input.substring(action.substringIndex)) - 1;
 
-            assert taskToBeAltered != null : "taskToBeAltered should no be null";
             taskToBeAltered = action.actionOnTask.apply(this.taskList, taskIndex);
+            assert taskToBeAltered != null : "taskToBeAltered should no be null";
             System.out.println("This task is successfully " + action.successMessage + "!\n\n"
                     + "    " + taskToBeAltered);
 
