@@ -15,6 +15,7 @@ public class TaskList {
     }
 
     public TaskList(ArrayList<Task> taskList) {
+        assert taskList != null : "Task list cannot be null";
         this.taskList = taskList;
     }
 
@@ -102,6 +103,7 @@ public class TaskList {
      * @return the filtered tasks.
      */
     public TaskList filter(String keyword) {
+        assert keyword != null : "Cannot filter a keyword that is null";
         ArrayList<Task> tasks = new ArrayList<>();
         for (Task task : taskList) {
             if (task.toString().contains(keyword)) {

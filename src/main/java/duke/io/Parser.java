@@ -82,6 +82,7 @@ public class Parser {
      * @return string to inform user of successful command.
      */
     private String addTask(Task input) {
+        assert input != null : "Cannot add a null task";
         tasks.add(input);
         return Ui.print(String.format("Got it. I've added this task:\n  %s\nNow you have %d %s in the list.",
                 input, tasks.size(), tasks.size() == 1 ? "task" : "tasks"));
