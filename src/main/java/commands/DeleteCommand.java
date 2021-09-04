@@ -25,34 +25,34 @@ public final class DeleteCommand extends Command {
     /**
      * Executes the command.
      *
-     * @param lst the TaskList object that stores the list of tasks
+     * @param list the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
-    public String execute(TaskList lst, Ui ui, Storage storage) {
-        if (super.getInput().size() == 1) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        if (getInput().size() == 1) {
             return "     Unable to delete task without an index. Please input index :)\n"
                     + "     Please input in the form: 'delete <task index>'.\n"
                     + "     Note: list can be used to see the current tasks.";
         } else {
-            if (lst.getTasks().isEmpty()) {
+            if (list.getTasks().isEmpty()) {
                 return "     List is empty, no tasks to delete, looking good!";
-            } else if (super.getInput().size() > 2) {
+            }
+            if (getInput().size() > 2) {
                 return "     Please input in the form: 'delete <index>'.";
-            } else {
-                try {
-                    int index = Integer.parseInt(super.getInput().get(1)) - 1;
-                    String result = lst.deleteTask(index);
-                    storage.resetFile(lst.getTasks());
-                    return result;
-                } catch (NumberFormatException e) {
-                    return "     Please use a number instead :(";
-                } catch (IndexOutOfBoundsException e) {
-                    return "     Please input a valid index :)\n"
-                            + "     Note: 'list' can be used to see the current tasks.";
-                }
+            }
+            try {
+                int index = Integer.parseInt(getInput().get(1)) - 1;
+                String result = list.deleteTask(index);
+                storage.resetFile(list.getTasks());
+                return result;
+            } catch (NumberFormatException e) {
+                return "     Please use a number instead :(";
+            } catch (IndexOutOfBoundsException e) {
+                return "     Please input a valid index :)\n"
+                        + "     Note: 'list' can be used to see the current tasks.";
             }
         }
     }

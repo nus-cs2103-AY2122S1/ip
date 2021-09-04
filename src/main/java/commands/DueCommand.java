@@ -27,15 +27,15 @@ public final class DueCommand extends Command {
     /**
      * Executes the command.
      *
-     * @param lst the TaskList object that stores the list of tasks
+     * @param list the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
-    public String execute(TaskList lst, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         try {
-            ArrayList<Task> tasksDue = lst.findTasksDue(getInput().get(1));
+            ArrayList<Task> tasksDue = list.findTasksDue(getInput().get(1));
             if (tasksDue.isEmpty()) {
                 return "     No tasks due!";
             }

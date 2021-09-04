@@ -111,10 +111,10 @@ public final class DeadLineTask extends Task {
      */
     @Override
     public String getSaveFormat() {
-        if (super.getStatus().equals("[ ]")) {
-            return "D" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 0;
+        if (getStatus().equals("[ ]")) {
+            return "D" + "|" + getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 0;
         } else {
-            return "D" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 1;
+            return "D" + "|" + getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 1;
         }
     }
 }

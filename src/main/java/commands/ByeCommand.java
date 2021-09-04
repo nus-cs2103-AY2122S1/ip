@@ -32,7 +32,6 @@ public final class ByeCommand extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
-        //Duke.terminate();
         return "Bye. Hope to see you again soon!";
     }
 }

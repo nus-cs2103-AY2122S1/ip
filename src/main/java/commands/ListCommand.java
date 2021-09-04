@@ -25,13 +25,13 @@ public final class ListCommand extends Command {
     /**
      * Executes the command.
      *
-     * @param lst the TaskList object that stores the list of tasks
+     * @param list the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
-    public String execute(TaskList lst, Ui ui, Storage storage) {
-        return lst.getList();
+    public String execute(TaskList list, Ui ui, Storage storage) {
+        return list.getList();
     }
 }

@@ -25,13 +25,13 @@ public final class FindCommand extends Command {
     /**
      * Executes the command.
      *
-     * @param lst the TaskList object that stores the list of tasks
+     * @param list the TaskList object that stores the list of tasks
      * @param ui the Ui object that interacts with the user
      * @param storage the Storage object that saves changes to stored tasks, if any
      * @return the message displaying the result
      */
     @Override
-    public String execute(TaskList lst, Ui ui, Storage storage) {
+    public String execute(TaskList list, Ui ui, Storage storage) {
         String target = "";
         for (int i = 1; i < getInput().size(); i++) {
             if (i + 1 < getInput().size()) {
@@ -40,7 +40,7 @@ public final class FindCommand extends Command {
                 target += getInput().get(i);
             }
         }
-        ArrayList<Task> tasksFound = lst.findTask(target);
+        ArrayList<Task> tasksFound = list.findTask(target);
         if (tasksFound.isEmpty()) {
             return "     No task tasks found!";
         } else {

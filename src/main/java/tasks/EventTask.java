@@ -113,10 +113,10 @@ public final class EventTask extends Task {
      */
     @Override
     public String getSaveFormat() {
-        if (super.getStatus().equals("[ ]")) {
-            return "E" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.date + "|" + 0;
+        if (getStatus().equals("[ ]")) {
+            return "E" + "|" + getSimpleTaskDescription().strip() + "|" + this.date + "|" + 0;
         } else {
-            return "E" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.date + "|" + 1;
+            return "E" + "|" + getSimpleTaskDescription().strip() + "|" + this.date + "|" + 1;
         }
     }
 }
