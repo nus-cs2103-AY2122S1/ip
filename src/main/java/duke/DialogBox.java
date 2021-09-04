@@ -12,7 +12,10 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * An example of a custom control using FXML.
@@ -52,6 +55,8 @@ public class DialogBox extends HBox {
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
+        assert this.getAlignment() == Pos.TOP_RIGHT
+                : "flip should only be used on a DialogBox that is aligned to TOP_RIGHT";
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
@@ -67,7 +72,9 @@ public class DialogBox extends HBox {
      * @return DialogBox containing specified text and image.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox db = new DialogBox(text, img);
+        db.setBackground(new Background(new BackgroundFill(Color.PEACHPUFF, null, null)));
+        return db;
     }
 
     /**
@@ -80,6 +87,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
+        db.setBackground(new Background(new BackgroundFill(Color.SEASHELL, null, null)));
         db.flip();
         return db;
     }
@@ -92,9 +100,7 @@ public class DialogBox extends HBox {
      * @return DialogBox containing welcome message and specified image.
      */
     public static DialogBox getDukeWelcome(Image img) {
-        DialogBox db = new DialogBox(ui.getWelcomeMessage(), img);
-        db.flip();
-        return db;
+        return getDukeDialog(ui.getWelcomeMessage(), img);
     }
 
     /**
@@ -105,8 +111,7 @@ public class DialogBox extends HBox {
      * @return DialogBox containing goodbye message and specified image.
      */
     public static DialogBox getDukeBye(Image img) {
-        DialogBox db = new DialogBox(ui.getGoodbyeMessage(), img);
-        db.flip();
-        return db;
+        return getDukeDialog(ui.getGoodbyeMessage(), img);
     }
+
 }
