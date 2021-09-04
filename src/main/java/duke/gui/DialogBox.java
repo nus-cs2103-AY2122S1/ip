@@ -7,6 +7,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -50,7 +51,8 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         setStyle("-fx-background-color: #abdff9");
-        dialog.setTranslateX(10);
+        dialog.setPadding(new Insets(0,0,0,0));
+        dialog.setTranslateX(2.5);
     }
 
     /**

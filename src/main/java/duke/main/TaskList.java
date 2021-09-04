@@ -62,6 +62,19 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Changes the Task at the given index to a new specified task.
+     *
+     * @param taskIndex Index of the Task in the TaskList to be changed.
+     * @param newTask Task that is going to replace another Task in the TaskList.
+     * @return Task that was changed and no longer in the TaskList.
+     */
+    public Task updateTask(int taskIndex, Task newTask) {
+        Task oldTask = this.removeTask(taskIndex);
+        this.taskList.add(taskIndex, newTask);
+        return oldTask;
+    }
+
+    /**
      * Prints all the Tasks in the TaskList line by line.
      */
     public void printList() {

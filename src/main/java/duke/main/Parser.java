@@ -22,7 +22,7 @@ public class Parser {
     private TaskList taskList;
 
     /**
-     * Enum that holds information about acting on a task, not including actions that changes the size of the TaskList.
+     * Enum that holds information about acting on a task, not including actions that result in new Tasks in the list.
      * Task actions include deleting a task (DELETE) and marking a Task as done (DONE).
      */
     private enum TaskAction {
@@ -132,6 +132,10 @@ public class Parser {
                 alterTask(input, Parser.TaskAction.DELETE);
                 this.taskList.printNumberOfTasks();
 
+            } else if (input.startsWith("update ")) {
+
+                updateTaskInTaskList(input);
+
             } else if (isTaskCommand(input)) {
 
                 vetoTask(input);
@@ -164,6 +168,7 @@ public class Parser {
      * @param input Input string from the user.
      * @param action TaskAction to be done.
      * @throws InvalidParamException If the information of the action in the input is in the wrong format.
+     * @throws OutOfBoundsOfTaskListException If the Task index given is out of the range of Tasks in the TaskList.
      */
     private void alterTask(String input, Parser.TaskAction action)
             throws InvalidParamException, OutOfBoundsOfTaskListException {
@@ -175,7 +180,7 @@ public class Parser {
             int taskIndex = Integer.parseInt(input.substring(action.substringIndex)) - 1;
 
             taskToBeAltered = action.actionOnTask.apply(this.taskList, taskIndex);
-            assert taskToBeAltered != null : "taskToBeAltered should no be null";
+            assert taskToBeAltered != null : "taskToBeAltered should not be null";
             System.out.println("This task is successfully " + action.successMessage + "!\n\n"
                     + "    " + taskToBeAltered);
 
@@ -193,17 +198,63 @@ public class Parser {
     }
 
     /**
-     * Checks the task that is being attempted to be added into the task list.
-     * If the input contains the appropriate information, the task is added.
+     * Checks the input and updates a specific task if the inputs are appropriate.
      *
      * @param input Input string from the user.
      * @throws NoDescriptionException If the description of the task is empty.
      * @throws InvalidParamException If the information of the task is in the wrong format.
+     * @throws OutOfBoundsOfTaskListException If the Task index given is out of the range of Tasks in the TaskList.
      */
-    private void vetoTask(String input) throws NoDescriptionException, InvalidParamException {
-        checkDescription(input);
-        Task newTask = decideTask(input);
-        addTask(newTask);
+    private void updateTaskInTaskList(String input) throws
+            NoDescriptionException, InvalidParamException, OutOfBoundsOfTaskListException {
+
+        String paramExceptionMessage = "Please use update in the following format:\n"
+                + "update (task number) (task + description + needed info)\n"
+                + "i.e update 2 event Career fair /at 2021-09-06";
+
+        try {
+            String[] params = input.split(" ", 3);
+            checkUpdateParams(params, paramExceptionMessage);
+
+            int taskIndex = Integer.parseInt(params[1]) - 1;
+            String taskDescription = params[2];
+
+            Task newTask = instantiateTask(taskDescription);
+            Task oldTask = this.taskList.updateTask(taskIndex, newTask);
+            System.out.println("This Task is successfully updated from:\n\n"
+                    + "    " + oldTask + "\n\n"
+                    + "to:\n\n"
+                    + "    "+ newTask);
+
+        } catch (NumberFormatException e1) {
+
+            throw new InvalidParamException(paramExceptionMessage);
+
+        } catch (IndexOutOfBoundsException e2) {
+
+            throw new OutOfBoundsOfTaskListException();
+
+        }
+    }
+
+    /**
+     * Checks whether the parameters of the update command are valid.
+     *
+     * @param params String array obtained from splitting the user input into parameters.
+     * @param paramExceptionMessage Message displayed if there is an InvalidParamException thrown.
+     * @throws InvalidParamException If the information of the task is in the wrong format.
+     * @throws NoDescriptionException If the description of the task is empty.
+     */
+    private void checkUpdateParams(String[] params, String paramExceptionMessage)
+            throws InvalidParamException, NoDescriptionException {
+        if (params.length < 3) {
+            throw new InvalidParamException(paramExceptionMessage);
+        }
+        String taskDescription = params[2];
+        if (!isTaskCommand(taskDescription)) {
+            throw new InvalidParamException(paramExceptionMessage);
+        }
+        checkDescription(taskDescription);
     }
 
     /**
@@ -215,6 +266,19 @@ public class Parser {
     private boolean isTaskCommand(String input) {
         return Stream.of(TaskToAdd.values())
                 .anyMatch(x -> input.startsWith(x.inputPrefix));
+    }
+
+    /**
+     * Checks the task that is being attempted to be added into the task list.
+     * If the input contains the appropriate information, the task is added.
+     *
+     * @param input Input string from the user.
+     * @throws NoDescriptionException If the description of the task is empty.
+     * @throws InvalidParamException If the information of the task is in the wrong format.
+     */
+    private void vetoTask(String input) throws NoDescriptionException, InvalidParamException {
+        checkDescription(input);
+        addIntoTaskList(instantiateTask(input));
     }
 
     /**
@@ -232,13 +296,14 @@ public class Parser {
     }
 
     /**
-     * Looks through the possible tasks that can be added and check if the input matches. If yes, add it.
+     * Looks through the possible tasks that can be added and check if the input matches.
+     * Once found, instantiate and return it.
      *
      * @param input Input string from the user.
      * @return Task to be added into the TaskList.
      * @throws InvalidParamException If the information of the task is in the wrong format.
      */
-    private Task decideTask(String input) throws InvalidParamException {
+    private Task instantiateTask(String input) throws InvalidParamException {
         Task newTask = null;
         for (TaskToAdd task : TaskToAdd.values()) {
             if (input.startsWith(task.inputPrefix)) {
@@ -255,7 +320,7 @@ public class Parser {
      *
      * @param task Task to add into the TaskList.
      */
-    private void addTask(Task task) {
+    private void addIntoTaskList(Task task) {
         this.taskList.addTask(task);
         System.out.println("You have successfully added the following task!\n\n"
                 + "    " + task);

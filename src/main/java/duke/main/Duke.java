@@ -26,7 +26,6 @@ public class Duke {
         storage = new Storage(taskList);
         parser = new Parser(taskList);
 
-        // Obtain data from save file if it exists
         storage.copyFromFileToList();
     }
 
