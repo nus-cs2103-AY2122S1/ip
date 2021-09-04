@@ -26,8 +26,6 @@ public class InvalidCommand extends Command {
         this.errorMessage = errorMessage;
     }
     
-    
-
     /**
      * Prints a message to let user's know that the command given was invalid.
      */
