@@ -28,6 +28,8 @@ public class TaskList {
      * @return Task with index i.
      */
     public Task getTaskFromList(int i) {
+        //insert java assertion to check if index is within bounds.
+        assert i >= 0 && i < arr.size();
         return arr.get(i);
     }
 
@@ -44,6 +46,8 @@ public class TaskList {
      * @param i Index of the task to be deleted.
      */
     public void deleteTask(int i) {
+        //insert java assertion to check if index is within bounds.
+        assert i >= 0 && i < arr.size();
         arr.remove(i);
     }
 
