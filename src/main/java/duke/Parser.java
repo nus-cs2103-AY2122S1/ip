@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.commands.AddCommand;
+import duke.commands.AddTodoCommand;
+import duke.commands.AddDeadlineCommand;
+import duke.commands.AddEventCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
@@ -142,35 +144,67 @@ public class Parser {
         if (input.trim().isEmpty()) {
             throw new DukeException("empty todo description");
         } else {
-            return new AddCommand(input.trim(), "todo");
+            return new AddTodoCommand(input.trim());
         }
     }
 
     private static Command parseDeadline(String input) throws DukeException {
+        String dateAndTime;
+        Object dateTimeObj;
+        int recurrenceNumber = 0;
+        String recurrenceType = " ";
+        boolean isRecurring = true;
         assert !input.isEmpty() : "Empty deadline event input";
         if (!input.contains("/by")) {
             throw new DukeException("empty deadline deadline");
         }
         String description = input.split("/by", 2)[0].trim();
-        String dateAndTime = input.split("/by", 2)[1].trim();
+        String afterDescription = input.split("/by", 2)[1].trim();
         if (description.isEmpty()) {
             throw new DukeException("empty deadline description");
-        } else if (dateAndTime.isEmpty()) {
+        } else if (afterDescription.isEmpty()) {
             throw new DukeException("empty deadline deadline");
+        }
+
+        if (afterDescription.contains("/daily")) {
+            recurrenceType = "/daily";
+        } else if (afterDescription.contains("/weekly")) {
+            recurrenceType = "/weekly";
+        } else {
+            isRecurring = false;
+        }
+        if (isRecurring) {
+            recurrenceNumber = parseRecurrence(afterDescription, recurrenceType);
+            dateAndTime = afterDescription.split(recurrenceType, 2)[0].trim();
+        } else {
+            dateAndTime = afterDescription;
         }
         if (isDateTime(dateAndTime)) {
             DateTimeFormatter format = DateTimeFormatter.ofPattern(detectedFormat);
-            LocalDateTime dateTimeObj = LocalDateTime.parse(dateAndTime, format);
-            return new AddCommand(description, dateTimeObj, "deadline");
+            dateTimeObj = LocalDateTime.parse(dateAndTime, format);
         } else if (isDate(dateAndTime)) {
             DateTimeFormatter format = DateTimeFormatter.ofPattern(detectedFormat);
-            LocalDate dateObj = LocalDate.parse(dateAndTime, format);
-            return new AddCommand(description, dateObj, "deadline");
+            dateTimeObj = LocalDate.parse(dateAndTime, format);
         } else {
             throw new DukeException("invalid deadline");
         }
-    }
 
+        if (isRecurring) {
+            return new AddDeadlineCommand(description, dateTimeObj, recurrenceType, recurrenceNumber);
+        }
+        return new AddDeadlineCommand(description, dateTimeObj);
+    }
+    private static int parseRecurrence(String input, String recurrenceType) throws DukeException {
+        String maybeRecurrenceNumber = input.split(recurrenceType, 2)[1].trim();
+        if (maybeRecurrenceNumber.isEmpty()) {
+            throw new DukeException("empty recurrence number");
+        }
+        try {
+            return Integer.parseInt(maybeRecurrenceNumber);
+        } catch (NumberFormatException e) {
+            throw new DukeException("non-integer input");
+        }
+    }
     /**
      * This method reads the stored String of text file in the Hard Disk which corresponds to a
      * Deadline type task and transforms it into a Deadline task object.
@@ -214,7 +248,7 @@ public class Parser {
         }
         LocalDate eventDate = LocalDate.parse(date, DateTimeFormatter.ofPattern(detectedFormat));
         if (isDuration(timeDuration)) {
-            return new AddCommand(description, eventDate, startTime, endTime, "event");
+            return new AddEventCommand(description, eventDate, startTime, endTime);
         } else {
             throw new DukeException("invalid event time");
         }
