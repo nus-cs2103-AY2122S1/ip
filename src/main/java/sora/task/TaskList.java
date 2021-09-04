@@ -54,17 +54,7 @@ public class TaskList {
         // Throw exception if user gives empty or non-integer task number
         validateCommand(command, "^delete [0-9]+", "delete [task number]");
 
-        int taskNumber;
-        try {
-            taskNumber = Integer.parseInt(command.substring(7)) - 1;
-        } catch (NumberFormatException e) {
-            throw new TaskNotFoundException();
-        }
-
-        // Throw exception if taskNumber is out of range
-        if (taskNumber < 0 || taskNumber >= tasks.size()) {
-            throw new TaskNotFoundException();
-        }
+        int taskNumber = extractTaskNumber(command, 7);
 
         // Delete the task
         Task task = tasks.remove(taskNumber);
@@ -93,9 +83,21 @@ public class TaskList {
         // Throw exception if user gives empty or non-integer task number
         validateCommand(command, "^done [0-9]+", "done [task number]");
 
+        int taskNumber = extractTaskNumber(command, 5);
+
+        // Mark the task as done
+        Task task = tasks.get(taskNumber);
+        task.markAsDone();
+
+        // Return confirmation message
+        return Message.DONE + "\n  " + task;
+    }
+
+    private int extractTaskNumber(String command, int prefixLength) throws TaskNotFoundException {
         int taskNumber;
+
         try {
-            taskNumber = Integer.parseInt(command.substring(5)) - 1;
+            taskNumber = Integer.parseInt(command.substring(prefixLength)) - 1;
         } catch (NumberFormatException e) {
             throw new TaskNotFoundException();
         }
@@ -105,12 +107,7 @@ public class TaskList {
             throw new TaskNotFoundException();
         }
 
-        // Mark the task as done
-        Task task = tasks.get(taskNumber);
-        task.markAsDone();
-
-        // Return confirmation message
-        return Message.DONE + "\n  " + task;
+        return taskNumber;
     }
 
     /**
