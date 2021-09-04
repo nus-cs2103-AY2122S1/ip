@@ -28,7 +28,7 @@ public class Augury {
     private static final String WELCOME =
             "\t+-------------------------------+\n"
           + "\t| *                 *         * |\n"
-          + "\t|   (`<       augury     *      |\n"
+          + "\t|   ('<       augury     *      |\n"
           + "\t| __/_)_______________________  |\n"
           + "\t|   ||                      *   |\n"
           + "\t|   ||   a task manager         |\n"

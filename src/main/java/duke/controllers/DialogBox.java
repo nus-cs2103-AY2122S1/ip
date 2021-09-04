@@ -10,6 +10,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 /**
@@ -22,6 +24,8 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private HBox dialogContainer;
+    @FXML
+    private ImageView displayPicture;
 
     private DialogBox(String text) {
         try {
@@ -33,7 +37,24 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
         dialog.setMinHeight(Label.USE_PREF_SIZE); // stops message from truncating
+        dialog.getStyleClass().add("dialog");
         dialog.setText(text);
+    }
+
+    private DialogBox(String text, Image img) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(AppWindow.class.getResource("/view/ImageDialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        dialog.setMinHeight(Label.USE_PREF_SIZE); // stops message from truncating
+        dialog.setText(text);
+        dialog.getStyleClass().add("dialog");
+        dialog.getStyleClass().add("dialog--augury");
+        displayPicture.setImage(img);
     }
 
     /**
@@ -48,14 +69,11 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text) {
         DialogBox userDialog = new DialogBox(text);
-        userDialog.getStyleClass().add("dialog");
         return userDialog;
     }
 
-    public static DialogBox getAuguryDialog(String text) {
-        DialogBox auguryDialog = new DialogBox(text);
-        auguryDialog.getStyleClass().add("dialog");
-        auguryDialog.getStyleClass().add("dialog--augury");
+    public static DialogBox getAuguryDialog(String text, Image img) {
+        DialogBox auguryDialog = new DialogBox(text, img);
         auguryDialog.flip();
         return auguryDialog;
     }

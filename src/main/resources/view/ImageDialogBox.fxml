@@ -10,7 +10,7 @@
          alignment="CENTER_RIGHT"
          xmlns="http://javafx.com/javafx/8.0.17"
          xmlns:fx="http://javafx.com/fxml/1">
-
+    
     <HBox fx:id="messageContainer">
         <Label fx:id="dialog"
                styleClass="dialog__text"
@@ -18,4 +18,10 @@
                wrapText="true"
                HBox.hgrow="ALWAYS"/>
     </HBox>
+
+    <ImageView fx:id="displayPicture"
+               fitHeight="55.0"
+               fitWidth="55.0"
+               pickOnBounds="true"
+               preserveRatio="true" />
 </fx:root>

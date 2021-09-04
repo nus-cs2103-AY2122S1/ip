@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 
 /**
@@ -26,6 +27,8 @@ public class AppWindow extends VBox {
     private Button sendButton;
 
     private Augury augury;
+
+    private Image img = new Image(this.getClass().getResourceAsStream("/images/bird.png"));
 
     /**
      * Main window of the {@code Augury} GUI.
@@ -46,7 +49,7 @@ public class AppWindow extends VBox {
 
         String welcomeMessage = "Welcome to Augury!";
         dialogContainer.getChildren().add(
-                DialogBox.getAuguryDialog(welcomeMessage)
+            DialogBox.getAuguryDialog(welcomeMessage, img)
         );
     }
 
@@ -68,7 +71,7 @@ public class AppWindow extends VBox {
         String response = augury.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input),
-                DialogBox.getAuguryDialog(response)
+                DialogBox.getAuguryDialog(response, img)
         );
         userInput.clear();
         if (response.equals("The readiness is all.")) {
