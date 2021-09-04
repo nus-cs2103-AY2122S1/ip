@@ -17,7 +17,8 @@ public class Ui {
      *
      */
     protected String greet() {
-        String greetingMessage = "What's up! I'm Duke! What can I help you with?" + "Here's the commands you can input for me!\n"
+        String greetingMessage = "What's up! I'm Duke! What can I help you with?"
+                + "Here's the commands you can input for me!\n"
                 + "\"list\" : lists the tasks in your list with their type and status (Done or not)\n"
                 + "\"done _\" : enter done followed by a whitespace and the"
                 + " number of the task you want to be set as done\n"
