@@ -46,11 +46,13 @@ public class Ui {
      */
     public String showAddedTask(Task task) {
         assert (task != null);
-        String output = "Added: " + task.toString();
-        System.out.println(output);
-        return output + "\n"
-                + "Now you have " + this.taskList.size() + " task"
-                + ((this.taskList.size() <= 1) ? "" : "s") + " in the list";
+        String addedNotification = "Added: " + task.toString();
+        String taskSize = Integer.toString(this.taskList.size());
+        boolean isLessThanTwoTasks = this.taskList.size() <= 1;
+        String fullNotification = addedNotification + "\n"
+                + "Now you have " + taskSize + " task"
+                +  (isLessThanTwoTasks ? "" : "s") + " in the list";
+        return fullNotification;
     }
 
     /**
@@ -61,10 +63,12 @@ public class Ui {
      */
     public String showDeletedTask(Task toBeDeleted) {
         assert (toBeDeleted != null);
-        return "Noted. I've removed this task:\n"
+        boolean isLessThanTwoTasks = this.taskList.size() <= 1;
+        String fullNotification = "Noted. I've removed this task:\n"
                 + toBeDeleted + "\n"
                 + "Now you have " + this.taskList.size()
-                + " task" + ((this.taskList.size() <= 1) ? "" : "s") + " in the list";
+                + " task" + (isLessThanTwoTasks ? "" : "s") + " in the list";
+        return fullNotification;
     }
 
     /**
@@ -75,7 +79,8 @@ public class Ui {
      */
     public String showMarkedAsDone(Task markedTask) {
         assert (markedTask != null);
-        return " Nice! I've marked this task as done:\n" + markedTask;
+        String fullNotification = " Nice! I've marked this task as done:\n" + markedTask;
+        return fullNotification;
     }
 
     /**
@@ -88,12 +93,12 @@ public class Ui {
         if (taskList.isEmpty()) {
             return "OOPS, I couldn't find anything in your task list.";
         } else {
-            String result = "Here are the matching tasks in your list:\n";
+            StringBuilder fullNotification = new StringBuilder("Here are the matching tasks in your list:\n");
 
             for (int i = 0; i < taskList.size(); i++) {
-                result += (i + 1) + ". " + taskList.get(i).toString() + "\n";
+                fullNotification.append(i + 1).append(". ").append(taskList.get(i).toString()).append("\n");
             }
-            return result;
+            return fullNotification.toString();
         }
     }
 }

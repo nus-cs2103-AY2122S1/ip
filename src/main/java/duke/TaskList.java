@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,6 +21,7 @@ public class TaskList {
      * @param tasks A list of tasks.
      */
     public TaskList(List<Task> tasks) {
+        assert (tasks != null);
         this.tasks = tasks;
     }
 
@@ -147,7 +149,9 @@ public class TaskList {
             matchedTasksStream = this.tasks.stream()
                     .filter((task) -> task.getDescription().contains(keyword) );
         }
-
+      
         return matchedTasksStream.collect(Collectors.toList());
     }
+        
+   
 }
