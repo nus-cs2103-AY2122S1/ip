@@ -9,10 +9,10 @@ public abstract class Task {
     protected String desc;
     protected boolean isComplete;
 
-    public Task(boolean isComplete, String desc) throws DukeException.EmptyDescriptionException {
+    public Task(boolean isComplete, String desc) throws DukeException.EmptyTaskDescriptionException {
         this.desc = desc.trim();
         if (desc.trim().length() == 0) {
-            throw new DukeException.EmptyDescriptionException();
+            throw new DukeException.EmptyTaskDescriptionException();
         }
         this.isComplete = isComplete;
     }
@@ -61,7 +61,7 @@ public abstract class Task {
         String at;
         LocalDate date;
 
-        public Event(boolean isComplete, String desc, String at) throws DukeException.EmptyDescriptionException {
+        public Event(boolean isComplete, String desc, String at) throws DukeException.EmptyTaskDescriptionException {
             super(isComplete, desc);
             this.at = at;
         }
@@ -81,7 +81,7 @@ public abstract class Task {
     public static class Deadline extends Task {
         String by;
         Optional<LocalDate> date;
-        public Deadline(boolean isComplete, String desc, String by) throws DukeException.EmptyDescriptionException {
+        public Deadline(boolean isComplete, String desc, String by) throws DukeException.EmptyTaskDescriptionException {
             super(isComplete, desc);
             try {
                 this.date = Optional.of(LocalDate.parse(by));
@@ -109,7 +109,7 @@ public abstract class Task {
 
     public static class Todo extends Task {
 
-        public Todo(boolean isComplete, String desc) throws DukeException.EmptyDescriptionException {
+        public Todo(boolean isComplete, String desc) throws DukeException.EmptyTaskDescriptionException {
             super(isComplete, desc);
         }
 

@@ -5,8 +5,8 @@ public abstract class DukeException extends Exception {
         super("☹ OOPS!!! " + s);
     }
 
-    public static class EmptyDescriptionException extends DukeException {
-        public EmptyDescriptionException() {
+    public static class EmptyTaskDescriptionException extends DukeException {
+        public EmptyTaskDescriptionException() {
             super("The description of a task cannot be empty.");
         }
     }
@@ -18,11 +18,6 @@ public abstract class DukeException extends Exception {
     public static class MissingArgumentException extends DukeException {
         public MissingArgumentException(String arg) {
             super("Missing argument: " +  arg);
-        }
-    }
-    public static class ParseException extends DukeException {
-        public ParseException(String s) {
-            super("Error reading line:" + s);
         }
     }
 }
