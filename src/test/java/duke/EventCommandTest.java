@@ -11,8 +11,6 @@ import duke.data.TaskList;
 import duke.data.task.Event;
 import duke.storage.Storage;
 
-
-
 public class EventCommandTest {
 
     @Test
@@ -26,6 +24,7 @@ public class EventCommandTest {
         final String expected = "Got it. I've added this task:  "
                 + commandTask
                 + "Now you have 1 tasks in the list.";
-        assertEquals(expected, command.execute(taskList, storage));
+        final String cleanOutput = command.execute(taskList, storage).replaceAll("(\\r|\\n)", "");
+        assertEquals(expected, cleanOutput);
     }
 }
