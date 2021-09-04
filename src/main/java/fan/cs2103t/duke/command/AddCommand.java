@@ -1,5 +1,7 @@
 package fan.cs2103t.duke.command;
 
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_SUCCESSFULLY_ADDED_FORMAT;
+
 import fan.cs2103t.duke.task.Task;
 import fan.cs2103t.duke.task.TaskList;
 import fan.cs2103t.duke.ui.Ui;
@@ -36,11 +38,9 @@ public class AddCommand extends Command {
     public String execute(TaskList taskList, Ui ui) {
         String output = null;
         if (taskList.addTask(task)) {
-            output = "Got it. I've added this task: \n"
-                    + "  " + task.getDescriptionWithStatus() + "\n"
-                    + "Now you have " + taskList.getNumOfTasks() + " tasks in the list.";
+            output = String.format(MESSAGE_SUCCESSFULLY_ADDED_FORMAT,
+                    task.getDescriptionWithStatus(), taskList.getNumOfTasks());
             ui.displayText(output);
-            // dataHandler.storeTaskList(taskList);
             return output;
         } else {
             System.exit(1);

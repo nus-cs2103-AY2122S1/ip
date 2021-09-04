@@ -1,5 +1,8 @@
 package fan.cs2103t.duke.command;
 
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_NOTHING_MATCHING_QUERY;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_SUCCESSFULLY_FOUND_FORMAT;
+
 import fan.cs2103t.duke.task.Task;
 import fan.cs2103t.duke.task.TaskList;
 import fan.cs2103t.duke.ui.Ui;
@@ -52,12 +55,11 @@ public class FindCommand extends Command {
         }
         if (hasFound) {
             result.setLength(result.length() - 1);
-            output = "Here are the matching tasks in your list: \n" + result;
-            ui.displayText(output);
+            output = String.format(MESSAGE_SUCCESSFULLY_FOUND_FORMAT, result);
         } else {
-            output = "It seems nothing in your list matches the search query...";
-            ui.displayText(output);
+            output = MESSAGE_NOTHING_MATCHING_QUERY;
         }
+        ui.displayText(output);
         return output;
     }
 

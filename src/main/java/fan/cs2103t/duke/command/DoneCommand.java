@@ -1,5 +1,9 @@
 package fan.cs2103t.duke.command;
 
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_SUCCESSFULLY_DONE_FORMAT;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_TASK_ALREADY_DONE;
+import static fan.cs2103t.duke.commons.Messages.MESSAGE_TASK_NOT_FOUND;
+
 import fan.cs2103t.duke.task.Task;
 import fan.cs2103t.duke.task.TaskList;
 import fan.cs2103t.duke.ui.Ui;
@@ -38,17 +42,15 @@ public class DoneCommand extends Command {
         try {
             Task t = taskList.getTasks().get(taskIndex - 1);
             if (t.getIsDone()) {
-                output = "You have already done this task!";
+                output = MESSAGE_TASK_ALREADY_DONE;
                 ui.displayText(output);
             } else {
                 t.markAsDone();
-                output = "Nice! I've marked this task as done: \n"
-                        + "  " + t.getDescriptionWithStatus();
+                output = String.format(MESSAGE_SUCCESSFULLY_DONE_FORMAT, t.getDescriptionWithStatus());
                 ui.displayText(output);
-                // dataHandler.storeTaskList(taskList);
             }
         } catch (IndexOutOfBoundsException ex) {
-            output = "Oops, the task doesn't seem to exist.";
+            output = MESSAGE_TASK_NOT_FOUND;
             ui.displayText(output);
         }
         return output;
