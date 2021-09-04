@@ -19,6 +19,8 @@ public class Parser {
 
     /**
      * Takes in commands from user and parse them
+     * @param command command taken in
+     * @return String response
      */
     public String parse(String command) {
         // remove any extra spaces if there is any
@@ -90,14 +92,12 @@ public class Parser {
                 response = "Oh noes, the Deadline item cannot be empty, please input again";
                 return response;
             }
-
             String[] task_time = split_string[1].split("/by ", 2);
             // error handling when there is no time for deadline
             if (task_time.length <= 1) {
                 response = "Oh noes, the deadline item needs to have a time to be done by, please input again";
                 return response;
             }
-
             try {
                 LocalDateTime date = LocalDateTime.parse(task_time[1], formatter);
             } catch (DateTimeParseException e) {
