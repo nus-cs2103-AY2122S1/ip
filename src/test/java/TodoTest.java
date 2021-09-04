@@ -1,7 +1,8 @@
-import duke.DukeException;
-import duke.Todo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
+import duke.Todo;
 
 public class TodoTest {
     @Test

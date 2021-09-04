@@ -1,12 +1,11 @@
 package duke;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.io.File;
-import java.io.FileWriter;
-
 /**
  * Represents the persistent storage for tasks in duke.Duke.
  */
@@ -87,6 +86,8 @@ public class Storage {
                 Deadline deadline = (Deadline) task;
                 data += String.format("D | %d | %s | %s\n",
                         isDone, task.getDescription(), deadline.getDate());
+                break;
+            default: // should not happen
                 break;
             }
         }
