@@ -107,7 +107,7 @@ public class Storage {
         while (scanner.hasNext()) {
             try {
                 Task task = Task.storageStringToTask(scanner.nextLine());
-                taskList.addSavedTask(task);
+                taskList.addSavedTaskFromStorage(task);
                 count++;
             } catch (DukeInvalidStorageTaskException e) {
                 System.out.println("Unable to read a task from storage.");
