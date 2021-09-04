@@ -25,11 +25,11 @@ public class ToDoListTest {
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
     private final String ls = System.lineSeparator();
-    private ToDoList tdlist;
+    private TaskList tdlist;
 
     @BeforeEach
     public void setUpStreams() {
-        tdlist = new ToDoList(new ArrayList<Task>(), null);
+        tdlist = new TaskList(new ArrayList<Task>(), null);
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }

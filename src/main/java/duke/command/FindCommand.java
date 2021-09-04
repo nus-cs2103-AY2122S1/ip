@@ -5,7 +5,7 @@ import java.util.List;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.util.Parser;
-import duke.util.ToDoList;
+import duke.util.TaskList;
 
 /**
  * This class encapsulates the command dealing with finding tasks matching a keyword.
@@ -14,9 +14,9 @@ import duke.util.ToDoList;
  * @version CS2103T AY21/22 Semester 1
  */
 public class FindCommand extends Command {
-    private final ToDoList list;
+    private final TaskList list;
 
-    public FindCommand(ToDoList list) {
+    public FindCommand(TaskList list) {
         this.list = list;
     }
 

@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.util.ToDoList;
+import duke.util.TaskList;
 
 /**
  * This class encapsulates the command dealing with printing the tasks in the tasks list.
@@ -9,9 +9,9 @@ import duke.util.ToDoList;
  * @version CS2103T AY21/22 Semester 1
  */
 public class ListCommand extends Command {
-    private final ToDoList list;
+    private final TaskList list;
 
-    public ListCommand(ToDoList list) {
+    public ListCommand(TaskList list) {
         this.list = list;
     }
 
