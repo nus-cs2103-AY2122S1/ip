@@ -9,11 +9,14 @@ import duke.data.Ui;
  * Command that deletes a Task from Tasklist when executed.
  */
 public class DeleteCommand extends Command {
-    /**
-     * Index of the task in TaskList
-     */
+    /** Index of the task in TaskList. */
     private int taskNumber;
 
+    /**
+     * Constructs DeleteCommand class.
+     *
+     * @param taskNumber Index of task in Tasklist that is to be deleted.
+     */
     public DeleteCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
@@ -21,9 +24,10 @@ public class DeleteCommand extends Command {
     /**
      * Deletes a task from the Tasklist.
      *
-     * @param tasks The list of tasks that a user has
-     * @param ui The ui that sends a message to the user once the task is deleted
-     * @param storage Saves the updated TaskList to disk
+     * @param tasks The list of tasks that a user has.
+     * @param ui The ui that sends a message to the user once the task is deleted.
+     * @param storage Saves the updated TaskList to disk.
+     * @return The message produced by ui.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
@@ -32,12 +36,7 @@ public class DeleteCommand extends Command {
         } else {
             tasks.deleteTask(taskNumber);
             storage.save(tasks);
-            return "Task deleted!";
+            return ui.showDeletedTask();
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

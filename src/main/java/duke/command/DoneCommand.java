@@ -9,11 +9,14 @@ import duke.data.Ui;
  * Command that marks a task as done when executed.
  */
 public class DoneCommand extends Command{
-    /**
-     * Index of the task in TaskList
-     */
+    /** Index of the task in TaskList. */
     private int taskNumber;
 
+    /**
+     * Constructs DoneCommand class.
+     *
+     * @param taskNumber Index of task in Tasklist that is to be mark as done.
+     */
     public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }
@@ -21,9 +24,10 @@ public class DoneCommand extends Command{
     /**
      * Marks a task from Tasklist as done.
      *
-     * @param tasks The list of tasks that a user has
-     * @param ui The ui that sends a message to the user once the task is marked as done
-     * @param storage Saves the updated TaskList to disk
+     * @param tasks The list of tasks that a user has.
+     * @param ui The ui that sends a message to the user once the task is marked as done.
+     * @param storage Saves the updated TaskList to disk.
+     * @return The message produced by ui.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
@@ -32,12 +36,7 @@ public class DoneCommand extends Command{
         } else {
             tasks.markTaskAsDone(taskNumber);
             storage.save(tasks);
-            return "Task marked as done!";
+            return ui.showDoneTask();
         }
-    }
-
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

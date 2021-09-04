@@ -17,11 +17,16 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructs Duke class.
+     *
+     * @param filePath path of the file used for loading and saving the user's tasks.
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = storage.load();
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();

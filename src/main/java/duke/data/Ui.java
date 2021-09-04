@@ -1,7 +1,5 @@
 package duke.data;
 
-import java.util.Scanner;
-
 /**
  * Class that deals with receiving input from the user and sending output to the user.
  */
@@ -15,10 +13,6 @@ public class Ui {
     /** Statement to show the user upon finding no saved file */
     private static final String MESSAGE_LOADING_ERROR = "No saved tasks were found.";
 
-    private static Scanner userInput = new Scanner(System.in);
-
-    private static final String DIVIDER = "===================================================";
-
     /** Shows message(s) to the user */
     public static String showToUser(String... message) {
         String displayedMessage = "";
@@ -28,29 +22,48 @@ public class Ui {
         return displayedMessage;
     }
 
-    public void showWelcome() {
-        showToUser(
-            DIVIDER,
-            MESSAGE_WELCOME,
-            DIVIDER);
+    /** Displays welcome message to the user. */
+    public static String showWelcome() {
+        return showToUser(MESSAGE_WELCOME);
     }
 
+    /** Displays goodbye message to the user. */
     public static String showGoodbye() {
         return showToUser(MESSAGE_EXIT);
     }
 
-    public String showLoadingError() {
-        return showToUser(
-            DIVIDER,
-            MESSAGE_LOADING_ERROR,
-            DIVIDER);
+    /** Displays error message to the user when user file is not loaded. */
+    public static String showLoadingError() {
+        return showToUser(MESSAGE_LOADING_ERROR);
     }
 
-    public String showMessage(String message) {
+    /** Displays confirmation message to the user when task is added. */
+    public static String showAddedTask() {
+        return showToUser("Task added successfully!");
+    }
+
+    /** Displays confirmation message to the user when task is deleted. */
+    public static String showDeletedTask() {
+        return showToUser("Task deleted successfully!");
+    }
+
+    /** Displays confirmation message to the user when task is marked as done. */
+    public static String showDoneTask() {
+        return showToUser("Task marked as done!");
+    }
+
+    /** Displays message to the user. */
+    public static String showMessage(String message) {
         return showToUser(message);
     }
 
-    public String showTasks(TaskList tasks) {
+    /**
+     * Displays the user's saved task(s) to the user.
+     *
+     * @param tasks Tasklist containing the user's saved tasks.
+     * @return A string of the user's saved task(s).
+     */
+    public static String showTasks(TaskList tasks) {
         String displayedTasks = "Here are your tasks:\n";
         for (int i = 0; i < tasks.getSize(); i++) {
             displayedTasks += (tasks.getTask(i).toString() + "\n");
