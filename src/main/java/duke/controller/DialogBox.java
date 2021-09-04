@@ -30,6 +30,8 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private HBox message;
 
     private DialogBox(String text, Image img) {
         try {
@@ -64,7 +66,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String s, Image iv) {
         DialogBox db = new DialogBox(s, iv);
-        db.setBackground(new Background(new BackgroundFill(color(0.2, 0.58, 1),
+        db.message.setBackground(new Background(new BackgroundFill(color(0.2, 0.58, 1),
                 new CornerRadii(15),
                 null)));
         return db;
@@ -79,7 +81,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String s, Image iv) {
         DialogBox db = new DialogBox(s, iv);
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(color(0.9, 0.9, 0.9),
+        db.message.setBackground(new Background(new BackgroundFill(color(0.9, 0.9, 0.9),
                 new CornerRadii(15),
                 null)));
         return db;
