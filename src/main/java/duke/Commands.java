@@ -8,8 +8,9 @@ public enum Commands {
     DONE("done"),
     DELETE("delete"),
     FIND("find"),
-    INVALID(""),
-    EXIT("exit");
+    CLEAR("clear"),
+    EXIT("exit"),
+    INVALID("");
 
     public final String userCommand;
 

@@ -69,6 +69,27 @@ public class Ui {
         System.out.println("\tNice! I've marked this task as done:\n\t  " + task);
     }
 
+    /**
+     * Shows a confirmation message to the user before clearing all tasks.
+     */
+    public void showConfirmClearTasks() {
+        System.out.println("\tAre you sure you want to clear your tasks?\ny/n:");
+    }
+
+    /**
+     * Shows to user that the task list has been cleared.
+     */
+    public void showClearTasks() {
+        System.out.println("\t All your tasks have been cleared!");
+    }
+
+    /**
+     * Shows to user that the task list will not be cleared.
+     */
+    public void showTasksNotCleared() {
+        System.out.println("\t Alright I won't clear your tasks :)");
+    }
+
     public void showError(String errorMessage) {
         System.out.println("\t" + errorMessage);
     }

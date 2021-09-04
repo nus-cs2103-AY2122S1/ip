@@ -4,6 +4,7 @@ import static duke.Commands.INVALID;
 
 import duke.DukeException.InvalidTaskIndexException;
 import duke.command.AddCommand;
+import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -56,6 +57,8 @@ public class Parser {
             return new DeleteCommand(toTaskIndex(userDescription));
         case FIND:
             return new FindCommand(userDescription);
+        case CLEAR:
+            return new ClearCommand();
         case EXIT:
             return new ExitCommand();
         default:

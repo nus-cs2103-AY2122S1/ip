@@ -81,7 +81,19 @@ public class Storage {
             }
             return taskList;
         } catch (FileNotFoundException e) {
-            throw new DukeException("Oops something went wrong :(");
+            throw new DukeException("Oops couldn't load your file :(");
+        }
+    }
+
+    /**
+     * Clears the list of tasks from a text file
+     * @throws DukeException The exception is thrown if an error occurred while writing to the text file.
+     */
+    public void clearTasks() throws DukeException {
+        try {
+            new FileWriter(filePath, false).close();
+        } catch (IOException e) {
+            throw new DukeException("Unable to clear tasks Perhaps something went wrong with your data file?");
         }
     }
 }

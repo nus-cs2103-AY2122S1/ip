@@ -48,4 +48,11 @@ public class TaskList {
     public void deleteTask(Task task) {
         taskList.remove(task);
     }
+
+    /**
+     * Clears all tasks from the task list.
+     */
+    public void clearTaskList() {
+        taskList.clear();
+    }
 }
