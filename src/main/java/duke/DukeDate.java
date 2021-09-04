@@ -80,6 +80,7 @@ public class DukeDate {
      * @param dateString The String that the DukeDate was saved as.
      * @param type The type of the saved DukeDate.
      * @return The reconverted DukeDates.
+     * @throws exceptions.DukeInvalidStorageTaskException When unable to read the date from storage.
      */
     public static DukeDate getDukeDateFromStorage(String dateString, int type)
             throws DukeInvalidStorageTaskException {

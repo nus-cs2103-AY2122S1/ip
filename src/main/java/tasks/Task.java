@@ -84,6 +84,7 @@ public abstract class Task {
      *
      * @param saveString The String that represents the saved task.
      * @return The task converted from saveString.
+     * @throws exceptions.DukeInvalidStorageTaskException when unable to read the type of task.
      */
     public static Task storageStringToTask(String saveString) throws DukeInvalidStorageTaskException {
         String[] strComponents = saveString.split("\\|");
