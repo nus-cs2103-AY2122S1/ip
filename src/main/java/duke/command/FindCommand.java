@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.Parser;
 import duke.Storable;
 import duke.TaskList;
 import duke.Ui;
 import duke.Ui.UserCommands;
+import duke.exception.DukeException;
 import duke.exception.MissingSearchInputException;
 import duke.task.Task;
 

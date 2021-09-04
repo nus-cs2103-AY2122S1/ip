@@ -2,8 +2,8 @@ package duke.task;
 
 import java.time.LocalDate;
 
-import duke.exception.DukeException;
 import duke.Parser;
+import duke.exception.DukeException;
 
 /**
  * Represents an event with a description and a date that it occurs on.
