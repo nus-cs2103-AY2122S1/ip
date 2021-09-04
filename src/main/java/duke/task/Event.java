@@ -9,6 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
 
+    public static final String COMMAND_WORD = "event";
     public static final String KEYWORD = "/at";
     private static final String KEYWORD_WITH_SPACE = KEYWORD + " ";
 

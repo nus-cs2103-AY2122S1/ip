@@ -8,6 +8,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
 
+    public static final String COMMAND_WORD = "deadline";
     public static final String KEYWORD = "/by";
     private static final String KEYWORD_WITH_SPACE = KEYWORD + " ";
 
