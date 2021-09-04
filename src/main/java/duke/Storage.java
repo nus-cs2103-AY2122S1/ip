@@ -59,9 +59,7 @@ public class Storage {
      */
     public static boolean saveTaskList(ArrayList<? extends Task> taskListArr) {
         FileWriter fileWriter = Storage.createFileWriter(fileName);
-        if (fileWriter == null) {
-            return false;
-        }
+        assert fileWriter != null : "Unable to open storage file.";
         for (int i = 0; i < taskListArr.size(); i++) {
             Task task = taskListArr.get(i);
             String saveText = task.taskSaveString();
@@ -107,7 +105,7 @@ public class Storage {
         int count = 0;
         while (scanner.hasNext()) {
             Task task = Task.storageStringToTask(scanner.nextLine());
-            taskList.addSavedTask(task);
+            taskList.addSavedTaskFromStorage(task);
             count++;
         }
         if (count != 0) {
