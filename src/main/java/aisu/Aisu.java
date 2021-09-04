@@ -26,6 +26,8 @@ public class Aisu {
      * @param fileName The name of the text file to store the data.
      */
     public Aisu(String dirPath, String fileName) {
+        assert (dirPath.length() >= 1 && fileName.length() >= 1) : "The directory and or filename cannot be empty.";
+
         this.ui = new Ui();
         this.storage = new Storage(dirPath, fileName);
 

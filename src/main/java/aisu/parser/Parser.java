@@ -25,6 +25,8 @@ public class Parser {
      * @throws AisuException if input is invalid.
      */
     public static Command parse(String input) throws AisuException {
+        assert input.length() >= 1 : "There needs to be text entered by the user.";
+
         if (input.equals("bye")) {
             return new ExitCommand();
 
