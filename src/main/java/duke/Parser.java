@@ -86,10 +86,13 @@ public class Parser {
      */
     public LocalDate stringToLocalDate(String date) throws InvalidDateTimeException {
         validateDateTime(date);
+        final int YEAR = 0;
+        final int MONTH = 1;
+        final int DAY = 2;
         String[] dateInfo = date.split("-");
-        String year = dateInfo[0];
-        String month = dateInfo[1];
-        String day = dateInfo[2];
+        String year = dateInfo[YEAR];
+        String month = dateInfo[MONTH];
+        String day = dateInfo[DAY];
         return LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
     }
 
@@ -100,17 +103,21 @@ public class Parser {
      * @return A Task object.
      */
     public Task taskStringToTask(String taskString) {
+        final int TASK_TYPE = 0;
+        final int IS_TASK_DONE = 1;
+        final int TASK_INFO = 2;
+        final int DATE_TIME = 3;
         String[] taskInfo = taskString.split(" \\| ");
-        String taskType = taskInfo[0];
-        boolean isDone = taskInfo[1].equals("[X]");
-        String taskDescription = taskInfo[2];
+        String taskType = taskInfo[TASK_TYPE];
+        boolean isDone = taskInfo[IS_TASK_DONE].equals("[X]");
+        String taskDescription = taskInfo[TASK_INFO];
         switch (taskType) {
         case "[D]":
             return new DeadLine(taskDescription,
-                    LocalDate.parse(taskInfo[3], DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)), isDone);
+                    LocalDate.parse(taskInfo[DATE_TIME], DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)), isDone);
         case "[E]":
             return new Event(taskDescription,
-                    LocalDate.parse(taskInfo[3], DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)), isDone);
+                    LocalDate.parse(taskInfo[DATE_TIME], DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)), isDone);
         default:
             return new ToDo(taskDescription, isDone);
         }

@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -136,16 +137,21 @@ public class TaskList {
      * @param keywords Keywords to be found among all tasks.
      * @return A list of matched tasks.
      */
-    public List<Task> findTask(String ... keywords) {
+    public List<Task> findMatchedTasks(String ... keywords) {
         List<Task> matchedTasks = new ArrayList<>();
         for (String keyword : keywords) {
-            this.tasks.forEach((task) -> {
-                if (task.getDescription().contains(keyword)) {
-                    matchedTasks.add(task);
-                }
-            });
+            matchedTasks.addAll(findTasksFromSingleKeyWord(keyword));
         }
+        return matchedTasks;
+    }
 
+    private Collection<? extends Task> findTasksFromSingleKeyWord(String keyword) {
+        List<Task> matchedTasks = new ArrayList<>();
+        this.tasks.forEach((task) -> {
+            if (task.getDescription().contains(keyword)) {
+                matchedTasks.add(task);
+            }
+        });
         return matchedTasks;
     }
 }

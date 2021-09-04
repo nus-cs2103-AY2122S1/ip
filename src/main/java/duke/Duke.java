@@ -94,7 +94,7 @@ public class Duke {
         case FIND: {
             String keywords = parser.parseTask(command);
             String[] keywordList = keywords.split(" ");
-            List<Task> matchedTasks = taskList.findTask(keywordList);
+            List<Task> matchedTasks = taskList.findMatchedTasks(keywordList);
             return ui.showFoundTask(matchedTasks);
         }
         case BYE: {
