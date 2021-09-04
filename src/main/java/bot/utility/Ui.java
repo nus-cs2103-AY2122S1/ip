@@ -1,6 +1,5 @@
 package bot.utility;
 
-import java.io.PrintStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -15,17 +14,7 @@ public class Ui {
      * Creates a UI object for the user to interact with.
      */
     public Ui() {
-        PrintStream out = System.out;
         this.in = new Scanner(System.in);
-    }
-
-    /**
-     * Returns the user input.
-     *
-     * @return A String entered by the user.
-     */
-    public String getUserInput() {
-        return in.nextLine();
     }
 
     /**
@@ -44,20 +33,6 @@ public class Ui {
         } else {
             System.out.println("\n\t Good evening!\n" + msg);
         }
-    }
-
-    /**
-     * Shows the user a message indicating what happened with their input.
-     *
-     * @param message The main message to the user.
-     * @return A response to user.
-     */
-    public String showToUser(String message) {
-        return message;
-    }
-
-    protected void close() {
-        in.close();
     }
 
     protected String greet() {
