@@ -20,6 +20,9 @@ class Parser {
      * @throws DukeException When the command keyword cannot be understood.
      */
     public static Command parse(String fullCommand) throws DukeException {
+        int commandLen = fullCommand.length();
+        assert commandLen > 0 : "The command should not be empty.";
+
         String keywork = fullCommand.split(" ")[0];
 
         switch (keywork) {
