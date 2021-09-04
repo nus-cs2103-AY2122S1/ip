@@ -53,4 +53,14 @@ public class TaskListTest {
         tasks2.add(new Todo("Finish iP3"));
         assertEquals(3, tasks2.size());
     }
+
+    @Test
+    public void sort() {
+        TaskList tasks = new TaskList();
+        tasks.add(new Todo("z"));
+        tasks.add(new Todo("a"));
+        assertEquals("1.[T][ ] z\n2.[T][ ] a", tasks.print());
+        tasks.sort();
+        assertEquals("1.[T][ ] a\n2.[T][ ] z", tasks.print());
+    }
 }
