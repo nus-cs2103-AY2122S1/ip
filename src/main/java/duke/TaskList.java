@@ -3,6 +3,8 @@ package duke;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Contains the task list.
@@ -136,16 +138,16 @@ public class TaskList {
      * @param keywords Keywords to be found among all tasks.
      * @return A list of matched tasks.
      */
-    public List<Task> findTask(String ... keywords) {
-        List<Task> matchedTasks = new ArrayList<>();
+    public List<Task> findTask(String... keywords) {
+        Stream<Task> matchedTasksStream = Stream.empty();
         for (String keyword : keywords) {
-            this.tasks.forEach((task) -> {
-                if (task.getDescription().contains(keyword)) {
-                    matchedTasks.add(task);
-                }
-            });
+            if (keyword.isEmpty()) {
+                continue;
+            }
+            matchedTasksStream = this.tasks.stream()
+                    .filter((task) -> task.getDescription().contains(keyword) );
         }
 
-        return matchedTasks;
+        return matchedTasksStream.collect(Collectors.toList());
     }
 }
