@@ -7,15 +7,16 @@ import java.util.Scanner;
  */
 public class Ui {
     private boolean isRunning;
-    private Scanner sc;
+//    private Scanner sc;
     private static final String INDENT = "    ";
     private static final String TOP_BORDER = "____________________________________";
     private static final String BOTTOM_BORDER = "------------------------------------";
-    private static final String LOGO = " ____        _        \n"
+    public static final String LOGO = " ____        _        \n"
                                     + "|  _ \\ _   _| | _____ \n"
                                     + "| | | | | | | |/ / _ \\\n"
                                     + "| |_| | |_| |   <  __/\n"
                                     + "|____/ \\__,_|_|\\_\\___|\n";
+    public static final String WELCOME_STATEMENT = "Hello! How would you like to manage your tasks today?\n";
     public static final String CLOSING_STATEMENT = "Bye, hope to see you again! :)";
 
     /**
@@ -30,7 +31,7 @@ public class Ui {
      * Starts the Ui and begins accepting inputs.
      */
     public void start() {
-        this.sc = new Scanner(System.in);
+//        this.sc = new Scanner(System.in);
         this.isRunning = true;
     }
 
@@ -38,33 +39,33 @@ public class Ui {
      * Closes the Ui and stops accepting inputs.
      */
     public void close() {
-        sc.close();
+//        sc.close();
         this.isRunning = false;
         printFormatted(CLOSING_STATEMENT);
     }
+//
+//    /**
+//     * Returns user inputted command.
+//     *
+//     * @return user inputted command
+//     */
+//    public String readCommand() {
+//        return sc.nextLine();
+//    }
 
-    /**
-     * Returns user inputted command.
-     *
-     * @return user inputted command
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
+//    /**
+//     * Checks if user has inputted a command
+//     *
+//     * @return boolean representing whether user has inputted a command
+//     */
+//    public boolean isPendingReply() {
+//        return sc.hasNext();
+//    }
 
-    /**
-     * Checks if user has inputted a command
-     *
-     * @return boolean representing whether user has inputted a command
-     */
-    public boolean isPendingReply() {
-        return sc.hasNext();
-    }
-
-    //getter
-    public boolean isRunning() {
-        return this.isRunning;
-    }
+//    //getter
+//    public boolean isRunning() {
+//        return this.isRunning;
+//    }
 
     /**
      * Helper function to print text in formatted manner

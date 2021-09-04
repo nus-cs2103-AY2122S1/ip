@@ -25,10 +25,6 @@ public class Duke {
     private final Ui UI;
     private static final String STORAGE_FILEPATH = "data" + File.separatorChar + "duke-storage.txt";
 
-//    public static void main(String[] args) {
-//        new Duke(Duke.STORAGE_FILEPATH).run();
-//    }
-
     public Duke() {
         Storage dukeStore = new Storage(STORAGE_FILEPATH);
         TaskList taskList = TaskList.of(dukeStore);
@@ -59,7 +55,15 @@ public class Duke {
 //    }
 
     public String getResponse(String userInput) {
-        return "Test response";
+        String reply = "defaultReply";
+        try {
+            reply = PARSER.parseCommand(userInput);
+        } catch (DukeException e) {
+            reply = e.toString();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return reply;
     }
 }
 
