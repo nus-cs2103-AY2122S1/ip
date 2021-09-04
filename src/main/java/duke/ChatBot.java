@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
+import duke.util.Status;
 
 /**
  * ChatBot is a class that encapsulates what a chat bot has.
@@ -19,7 +20,8 @@ public class ChatBot {
     private Storage s;
     private UI ui;
 
-    private int exitStatus = 1;
+//    private int exitStatus = 1;
+    private Status exitStatus = Status.START;
 
     /**
      * This is the constructor of ChatBot that initializes the UI and Storage.
@@ -42,24 +44,22 @@ public class ChatBot {
     }
 
     /**
-     * This method is to stop the program from running and prints
-     * out the exit message.
+     * Returns the exit message.
      */
     public String handleExit() {
-        exitStatus = 0;
+        exitStatus = Status.STOP;
         return ui.showExitMessage();
     }
 
     /**
-     * This method is to call the UI to print all the tasks that is stored.
+     * Returns the list of all tasks.
      */
     public String handleList() {
         return ui.getListMessage(tasklist);
     }
 
     /**
-     * This method is to mark the user specified task as done
-     * and print out the corresponding UI message.
+     * Marks the task as completed and returns the completed task message.
      *
      * @param index Index of the task.
      */
@@ -70,8 +70,8 @@ public class ChatBot {
     }
 
     /**
-     * This method is to add a new deadline to the storage and
-     * print out the add message when the task is added successfully.
+     * Adds a new deadline to the storage and
+     * returns the add message when the task is added successfully.
      *
      * @param name Name of the deadline.
      * @param deadline The date and time of the deadline.
@@ -83,8 +83,9 @@ public class ChatBot {
     }
 
     /**
-     * This method is to add a new task to the storage and
-     * print out the add message when the task is added successfully.
+     * Adds a new task to the storage and
+     * returns the add message when the task is added successfully.
+     *
      * @param name Name of the task.
      */
     public String handleTodo(String name) {
@@ -94,8 +95,8 @@ public class ChatBot {
     }
 
     /**
-     * This method is to add a new event to the storage and
-     * print out the add message when the task is added successfully.
+     * Adds a new event to the storage and
+     * returns the add message when the task is added successfully.
      *
      * @param name Name of the deadline.
      * @param time The date and time of the event.
@@ -108,8 +109,8 @@ public class ChatBot {
     }
 
     /**
-     * This method deletes the task specified by the user and
-     * print the delete message on successful deletion.
+     * Deletes the task specified by the user and
+     * returns the delete message on successful deletion.
      *
      * @param index Index of the task specified by the user.
      */
@@ -120,8 +121,9 @@ public class ChatBot {
     }
 
     /**
-     * This method calls TaskList to find tasks related to the
-     * input by the user and calls UI to display them.
+     * Finds the tasks related to the
+     * input by the user and returns the string representation to display.
+     *
      * @param name User input task to find.
      */
     public String handleFind(String name) {
@@ -130,14 +132,15 @@ public class ChatBot {
     }
 
     /**
-     * This method prints the list of all commands.
+     * Returns the list of all commands. (help)
      */
     public String handleWrongCommand() {
         return ui.showListOfCommands();
     }
 
     /**
-     * This method prints the error message thrown by the program.
+     * Returns the error message thrown by the program.
+     *
      * @param message The error message.
      */
     public String handleErrorMessage(String message) {
@@ -145,14 +148,15 @@ public class ChatBot {
     }
 
     /**
-     * Calls the UI to return the start message.
+     * Returns the start message.
      */
     public String handleStart() {
         return ui.showStartMessage();
     }
 
     /**
-     * This method gets the total number of tasks.
+     * Gets the total number of tasks.
+     *
      * @return total number of tasks.
      */
     public int getTotalTasks() {
@@ -161,9 +165,10 @@ public class ChatBot {
 
     /**
      * Returns an int depending on exit status.
+     *
      * @return 0 to exit, 1 to continue.
      */
-    public int getExitStatus() {
+    public Status getExitStatus() {
         return exitStatus;
     }
 

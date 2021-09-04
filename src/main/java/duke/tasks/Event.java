@@ -14,6 +14,7 @@ public class Event extends Task {
 
     /**
      * Constructor for an Event.
+     *
      * @param name Name of the Event.
      * @param time Time of the Event
      * @param isDone Completion status of the Event.
@@ -25,6 +26,7 @@ public class Event extends Task {
 
     /**
      * Returns the time in a specified format.
+     *
      * @return Time in dd/MM/yy HHmm.
      */
     @Override
@@ -34,6 +36,7 @@ public class Event extends Task {
 
     /**
      * Returns the marker "E" denoting event.
+     *
      * @return A string "E".
      */
     @Override
@@ -42,7 +45,8 @@ public class Event extends Task {
     }
 
     /**
-     * The string representation of an Event.
+     * Returns the string representation of an Event.
+     *
      * @return Event in string.
      */
     @Override
