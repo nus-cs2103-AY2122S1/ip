@@ -1,3 +1,5 @@
+package duke;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -32,6 +34,7 @@ public class Duke {
             System.out.println(this.toString());
         }
 
+        @Override
         public String toString(){
             return "[" + this.getStatusIcon() + "] " + this.description;
         }
@@ -43,6 +46,7 @@ public class Duke {
             super(description, isDone);
         }
 
+        @Override
         public String toString(){
             return "[T] " + "[" + this.getStatusIcon() + "] " + this.description;
         }
@@ -60,6 +64,7 @@ public class Duke {
             this.time = time;
         }
 
+        @Override
         public String toString(){
             //output: yyyy-mm-dd, time
             return "[D] " + "[" + this.getStatusIcon() + "] " + this.description
@@ -81,6 +86,7 @@ public class Duke {
 
         }
 
+        @Override
         public String toString(){
             return "[E] " + "[" + this.getStatusIcon() + "] " + this.description
                     + " (at: " + this.date + " " + this.startTime + " to " + this.endTime + ")";
@@ -205,11 +211,15 @@ public class Duke {
                     //read next line
                     line = reader.readLine();
                     lineNumber++;
+                    System.out.println();
                 }
+                System.out.println("Successfully loaded task list from file!");
                 reader.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Oops! I couldn't load the task list file.");
+                System.out.println("Starting over with a brand new list.");
             }
+
             return loadedList;
         }
 
@@ -231,8 +241,13 @@ public class Duke {
         public ArrayList<Task> getList(){
             return this.list;
         }
+
         public int getSize(){
             return this.list.size();
+        }
+
+        public Task getTask(int index){
+            return this.list.get(index);
         }
 
         //add a task at the end of the list
@@ -294,7 +309,7 @@ public class Duke {
                     System.out.println("Type \"help\" for list of commands, check for illegal characters/trailing spaces");
                     break;
                 case "emptyInput":
-                    System.out.println("Oops! Input is empty");
+                    System.out.println("Oops! Please input something.");
                     break;
                 case "invalidDate":
                     System.out.println("Oops! Please follow the format: dd/mm/yyyy hhmm or I can't process the date!");
@@ -306,10 +321,11 @@ public class Duke {
                     System.out.println("Oops! My task list is full, no new tasks can be added.");
                     break;
                 case "invalidIndex":
-                    System.out.println("Oops! Please enter a valid task number");
-
+                    System.out.println("Oops! Please enter a valid task number.");
+                    break;
+                default:
+                    System.out.println("Oops! An unknown error occurred.");
             }
-
 
         }
 
@@ -321,6 +337,7 @@ public class Duke {
             System.out.println("Ok! I've created and added the task below");
             System.out.println(t);
         }
+
     }
     public static class Parser{
 
@@ -354,6 +371,7 @@ public class Duke {
                                     ui.showError("invalidIndex");
                                     continue;
                                 }
+                                ui.showMessage("Ok I've marked the following task as done");
                                 list.markDone(index);
                                 break;
                             } catch (Exception e){
@@ -376,7 +394,10 @@ public class Duke {
                                     ui.showError("invalidIndex");
                                     continue;
                                 }
+                                ui.showMessage("Ok, boom this task is gone!");
+                                System.out.println(list.getTask(index));
                                 list.delete(index);
+                                ui.showMessage("There are now " + list.getSize() + " tasks");
                                 break;
                             } catch (Exception e){
                                 ui.showError("invalidIndex");
@@ -516,14 +537,7 @@ public class Duke {
         String FILEPATH = "./duke.txt";
         Storage storage = new Storage(FILEPATH);
 
-
-        try {
-            tasks = new TaskList(storage.load());
-            ui.showMessage("Task List loaded successfully!");
-        } catch (Exception e) {
-            ui.showError("loadFail");
-            tasks = new TaskList();
-        }
+        tasks = new TaskList(storage.load());
 
         //run program
         ui.showHelp();
