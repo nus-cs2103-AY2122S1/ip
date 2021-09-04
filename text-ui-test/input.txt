@@ -35,6 +35,14 @@ todo
 delete 2
 delete 1
 list
+find G
+find F
+find
+find ojfiopajspoifjio pqjpiojf iopqj pijp
+search A
+priority M
+done 3
+priority M
 delete 999
 clear
 event koifishy /at 2021-08-22 14:35 /priority H
@@ -46,6 +54,8 @@ event koifishy /at /priority
 event /at 2021-08-22 14:35 /priority H
 event /at /priority H
 list
+prioirty H
+priority
 deadline carpfishy /by 2021-08-22 14:35 /priority
 dateline carpfishy /at /priority S
 dateline /by 2021   -08-22 14:35 /priority M

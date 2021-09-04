@@ -148,6 +148,7 @@ public class TaskList {
     public TaskList findTasksByPriority(Priority priority) {
         List<Task> newTasks = this.taskList.stream()
                 .filter(t -> t.getPriority().equals(priority))
+                .filter(t -> !t.taskIsDone()) // get tasks that are not done only
                 .collect(Collectors.toList());
 
         TaskList taskList = new TaskList(new ArrayList<>(newTasks));
