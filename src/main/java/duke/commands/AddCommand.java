@@ -30,6 +30,9 @@ public class AddCommand extends Command {
      * @param storage Storage to store data of user.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        assert taskList != null;
+        assert ui != null;
+        assert storage != null;
         try {
             if (command.contains("todo")) {
                 String updatedTask = command.replace("todo", "").trim();
