@@ -47,7 +47,7 @@ public class Parser {
      * @throws IOException If an input or output operation is failed or interpreted.
      * @throws FindException If Find is incomplete.
      */
-    public void parseCommand() throws DukeException, DeleteException, IOException, FindException {
+    public String parseCommand() throws DukeException, DeleteException, IOException, FindException {
 
         Activity activity;
         if (command.equals("bye")) {
@@ -72,21 +72,18 @@ public class Parser {
 
         switch (activity) {
             case BYE: {
-                ui.showGoodbyeMessage();
                 storage.setExit();
-                return;
+                return ui.goodbyeMessageToString();
             }
             case DONE: {
                 int index = Integer.parseInt(command.substring(5)) - 1;
                 Task currentTask = tasks.get(index);
                 currentTask.setDone();
-                ui.showDoneMessage(currentTask);
                 storage.save(tasks);
-                break;
+                return ui.doneMessageToString(currentTask);
             }
             case LIST: {
-                ui.showListMessage(tasks);
-                break;
+                return ui.listMessageToString(tasks);
             }
             case TODO: {
                 String desc = command.substring(4);
@@ -97,9 +94,8 @@ public class Parser {
 
                 ToDo toDo = new ToDo(command.substring(5));
                 tasks.add(toDo);
-                ui.showTaskMessage(toDo, tasks);
                 storage.save(tasks);
-                break;
+                return ui.taskMessageToString(toDo, tasks);
             }
             case EVENT: {
                 String desc = command.substring(5);
@@ -112,9 +108,8 @@ public class Parser {
                 String dateAndTime = command.substring(escapeIndex + 4);
                 Event event = new Event(command.substring(6, escapeIndex - 1), dateAndTime);
                 tasks.add(event);
-                ui.showTaskMessage(event, tasks);
                 storage.save(tasks);
-                break;
+                return ui.taskMessageToString(event, tasks);
             }
             case DELETE: {
                 int index = Integer.parseInt(command.substring(7)) - 1;
@@ -125,9 +120,8 @@ public class Parser {
 
                 Task currentTask = tasks.get(index);
                 tasks.remove(index);
-                ui.showDeleteMessage(currentTask, tasks);
                 storage.save(tasks);
-                break;
+                return ui.deleteMessageToString(currentTask, tasks);
             }
             case DEADLINE: {
                 String desc = command.substring(8);
@@ -140,9 +134,8 @@ public class Parser {
                 String dateAndTime = command.substring(escapeIndex + 4);
                 Deadline deadline = new Deadline(command.substring(9, escapeIndex - 1), dateAndTime);
                 tasks.add(deadline);
-                ui.showTaskMessage(deadline, tasks);
                 storage.save(tasks);
-                break;
+                return ui.taskMessageToString(deadline, tasks);
             }
             case FIND: {
                 TaskList matchingTasks = new TaskList();
@@ -158,15 +151,14 @@ public class Parser {
                     }
                 }
                 if (matchingTasks.isEmpty()) {
-                    ui.showNothingFoundMessage();
+                    return ui.nothingFoundMessageToString();
                 } else {
-                    ui.showListMessage("matching", matchingTasks);
+                    return ui.listMessageToString("matching", matchingTasks);
                 }
-                break;
             }
             default: {
-                ui.showUnknownMessage();
-                break;
+//                ui.showUnknownMessage();
+                return ui.unknownMessageToString();
             }
         }
     }
