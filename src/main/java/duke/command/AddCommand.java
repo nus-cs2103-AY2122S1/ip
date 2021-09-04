@@ -1,13 +1,17 @@
 package duke.command;
 
 import duke.exceptions.UnclearInstructionException;
+
 import duke.task.Event;
 import duke.task.Deadline;
 import duke.task.Task;
-import duke.util.TaskList;
 import duke.task.Todo;
+
+import duke.util.TaskList;
 import duke.util.Ui;
 import duke.util.Storage;
+import duke.util.Parser;
+
 import java.util.ArrayList;
 
 /**
@@ -41,11 +45,11 @@ public class AddCommand extends Command {
             if (taskType.equals("todo")) {
                 newTask = new Todo(fullCommand.substring(5).strip());
             } else if (taskType.equals("deadline")) {
-                newTask = new Deadline(Deadline.extractTaskDescription(fullCommand), 
-                        Deadline.extractTaskTime(fullCommand));
+                newTask = new Deadline(Parser.extractTaskDescription(fullCommand), 
+                        Parser.extractTaskTime(fullCommand));
             } else if (taskType.equals("event"))  {
-                newTask = new Event(Event.extractTaskDescription(fullCommand), 
-                        Event.extractTaskTime(fullCommand));
+                newTask = new Event(Parser.extractTaskDescription(fullCommand), 
+                        Parser.extractTaskTime(fullCommand));
             }
             return taskList.addTask(newTask);
         } catch (UnclearInstructionException e) {

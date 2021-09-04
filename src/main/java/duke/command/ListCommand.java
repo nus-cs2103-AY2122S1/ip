@@ -19,7 +19,6 @@ public class ListCommand extends Command {
 
     @Override
     public ArrayList<String> execute(TaskList taskList, Ui ui, Storage storage) {
-        
         return taskList.list();
     }
 }

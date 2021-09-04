@@ -11,6 +11,7 @@ import java.util.ArrayList;
  * DeleteCommand class which handles the logic of deleting tasks.
  */
 public class DeleteCommand extends Command {
+    /** The full input command by the user */
     private final String fullCommand;
 
     /**

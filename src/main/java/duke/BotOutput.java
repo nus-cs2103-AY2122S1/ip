@@ -11,7 +11,7 @@ public class BotOutput {
         this.botOutput = botOutput;
         this.isExit = isExit;
     }
-
+    
     public String getBotOutput() {
         return botOutput;
     }

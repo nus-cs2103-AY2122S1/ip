@@ -72,13 +72,10 @@ public class Storage {
 
                 if (task_type.equals("T")) {
                     task = new Todo(itemDetails[2], itemDetails[1]);
-
                 } else if (task_type.equals("D")) {
                     task = new Deadline(itemDetails[2], itemDetails[1], itemDetails[3]);
-
                 } else if (task_type.equals("E")) {
                     task = new Event(itemDetails[2], itemDetails[1], itemDetails[3]);
-
                 } else {
                     throw new UnknownException();
                 }
