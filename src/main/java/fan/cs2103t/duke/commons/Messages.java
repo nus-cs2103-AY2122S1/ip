@@ -34,7 +34,8 @@ public class Messages {
             + "I've removed this task: \n %s\n";
     public static final String MESSAGE_TASK_NOT_FOUND_FORMAT = "Task %d: Oops, the task doesn't seem to exist.\n";
     public static final String MESSAGE_TASK_ALREADY_DONE_FORMAT = "Task %d: You have already done this task!\n";
-    public static final String MESSAGE_SUCCESSFULLY_DONE_FORMAT = "Task %d: Nice! I've marked this task as done: \n %s\n";
+    public static final String MESSAGE_SUCCESSFULLY_DONE_FORMAT = "Task %d: "
+            + "Nice! I've marked this task as done: \n %s\n";
     public static final String MESSAGE_SUCCESSFULLY_FOUND_FORMAT = "Here are the matching tasks in your list: \n%s";
 
 }
