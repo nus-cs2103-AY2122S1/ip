@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import sora.exception.EmptyListException;
+import sora.exception.EmptyResultException;
 import sora.exception.IllegalFormatException;
 import sora.exception.TaskNotFoundException;
 import sora.util.Message;
@@ -249,10 +250,11 @@ public class TaskList {
      *
      * @param command Command entered by user (find [keyword])
      * @return String representation of the list of matched tasks
-     * @throws EmptyListException If number of matched tasks in the list is 0
+     * @throws EmptyListException If number of tasks to print is empty
+     * @throws EmptyResultException If number of matched tasks in the list is 0
      * @throws IllegalFormatException If user inputs an invalid command
      */
-    public String findInList(String command) throws EmptyListException, IllegalFormatException {
+    public String findInList(String command) throws EmptyResultException, IllegalFormatException, EmptyListException {
         // Throw exception if command does not follow format
         validateCommand(command, "^find .*", "find [keyword]");
 
@@ -260,6 +262,11 @@ public class TaskList {
         List<Task> filteredTasks = tasks.stream()
                 .filter(task -> task.matchesKeyword(keyword))
                 .collect(Collectors.toList());
+
+        // Throw exception is search result is empty
+        if (filteredTasks.isEmpty()) {
+            throw new EmptyResultException();
+        }
 
         return printList(filteredTasks);
     }
