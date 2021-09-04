@@ -34,40 +34,23 @@ public class FindCommand extends Command {
      * @param tasks   The user's list of tasks.
      * @param ui      The ui interacting with the user.
      * @param storage The location where the list of tasks is stored.
-     * @throws DukeException If arguments are invalid.
      * @return The output of executing the command.
+     * @throws DukeException If arguments are invalid.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (arguments.isEmpty()) {
             throw new DukeException("No matching string was entered.");
         }
-        ArrayList<Task> matchedTasks = new ArrayList<>();
-        StringBuilder startingString = new StringBuilder("Here are the matching tasks in your list:\n");
+
+        TaskList matchedTasks = new TaskList();
         for (int i = 0; i < tasks.size(); i++) {
             if (tasks.get(i).getDescription().contains(arguments)) {
                 matchedTasks.add(tasks.get(i));
             }
         }
-        if (matchedTasks.isEmpty()) {
-            return startingString + "  There are no tasks that match your query. Try again.";
-        } else {
-            for (int i = 0; i < matchedTasks.size(); i++) {
-                Task currTask = matchedTasks.get(i);
-                startingString.append(i + 1).append(". ").append(currTask).append("\n");
-            }
-            return String.valueOf(startingString);
-        }
-    }
 
-    /**
-     * Checks whether command terminate the program.
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return "Here are the matching tasks in your list:" + matchedTasks;
     }
 
 }

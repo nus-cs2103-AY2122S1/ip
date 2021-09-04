@@ -27,26 +27,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        StringBuilder startingString = new StringBuilder("Here are the tasks in your list:\n");
-        if (tasks.isEmpty()) {
-            return startingString + "  You currently have no tasks. Why not add a task?";
-        } else {
-            for (int i = 0; i < tasks.size(); i++) {
-                Task currTask = tasks.get(i);
-                startingString.append(i + 1).append(". ").append(currTask).append("\n");
-            }
-            return startingString.toString();
-        }
-    }
-
-    /**
-     * Checks whether command terminate the program.
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return "Here are the tasks in your list:\n" + tasks;
     }
 
 }

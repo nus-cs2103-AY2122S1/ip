@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -32,35 +33,17 @@ public class DeleteCommand extends Command {
      * @param tasks   The user's list of tasks.
      * @param ui      The ui interacting with the user.
      * @param storage The location where the list of tasks is stored.
-     * @throws DukeException If arguments are invalid.
      * @return The output of executing the command.
+     * @throws DukeException If arguments are invalid.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (arguments.isEmpty()) {
-            throw new DukeException("No index was keyed in. Please try again.");
-        }
-
-        int index = Integer.parseInt(arguments);
-        if (index < 1 || index > tasks.size()) {
-            throw new DukeException("The index you entered is invalid. Please try again.");
-        }
-
+        int index = Parser.parseIndex(arguments, tasks.size());
         Task taskDeleted = tasks.remove(index - 1);
-        return "Noted! I've removed this task:\n" + "  " 
+        return "Noted! I've removed this task:\n" + "  "
                 + taskDeleted + "\nNow you have " + tasks.size()
                 + (tasks.size() == 1 ? " task" : " tasks")
                 + " in your list.";
-    }
-
-    /**
-     * Checks whether command terminate the program.
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 
 }

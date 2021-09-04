@@ -47,6 +47,7 @@ public class Storage {
         try {
             File data = new File(filePath);
             Scanner sc = new Scanner(data);
+            
             while (sc.hasNextLine()) {
                 String[] argArr = sc.nextLine().split("\\|");
                 Task taskToBeAdded;
@@ -66,6 +67,7 @@ public class Storage {
                 }
                 taskList.add(taskToBeAdded);
             }
+            
             sc.close();
             return taskList;
         } catch (FileNotFoundException e) {
@@ -84,15 +86,18 @@ public class Storage {
             Path filePath = Paths.get(this.filePath);
             Path directoryPath = filePath.getParent();
             File directoryName = new File(directoryPath.toString());
+            
             if (!directoryName.exists()) {
                 directoryName.mkdirs();
             }
+            
             FileWriter fw = new FileWriter(this.filePath);
             for (Task currTask : tasks.getTasks()) {
                 fw.write(currTask.getTaskType() + "|" + (currTask.getIsDone() ? "1" : "0") + "|"
                         + currTask.getDescription()
                         + (currTask.getTiming() == null ? "\n" : "|" + currTask.getTiming().toString() + "\n"));
             }
+            
             fw.close();
         } catch (IOException e) {
             throw new DukeException("Sorry, I was unable to store your list of tasks");

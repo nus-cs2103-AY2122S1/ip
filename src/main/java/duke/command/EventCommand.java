@@ -35,38 +35,20 @@ public class EventCommand extends Command {
      * @param tasks   The user's list of tasks.
      * @param ui      The ui interacting with the user.
      * @param storage The location where the list of tasks is stored.
-     * @throws DukeException If arguments are invalid.
      * @return The output of executing the command.
+     * @throws DukeException If arguments are invalid.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (arguments.isEmpty()) {
-            throw new DukeException(String.format("The description of a %s cannot be left empty. "
-                    + "Please try again.", this.getCommand()));
-        }
-
-        String[] argArr = arguments.split("/at");
-        if (argArr.length == 1 || argArr[1].isEmpty()) {
-            throw new DukeException("Arguments do not follow proper format. Don't forget the /at");
-        }
-
-        LocalDate newTaskDate = Parser.convertDate(argArr[1].trim());
-        Event newTask = new Event(argArr[0].trim(), newTaskDate);
+        Parser.checkAddTaskArgument(this.getCommand(), this.arguments);
+        String[] argArr = Parser.parseArguments(this.getCommand(), this.arguments);
+        LocalDate newTaskDate = Parser.convertDate(argArr[1]);
+        Event newTask = new Event(argArr[0], newTaskDate);
         tasks.add(newTask);
         return "Got it. I've added this task:\n" + "  "
                 + newTask + "\nNow you have " + tasks.size()
                 + (tasks.size() == 1 ? " task" : " tasks")
-                + " in your list."; 
-    }
-
-    /**
-     * Checks whether command terminate the program.
-     *
-     * @return false
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+                + " in your list.";
     }
 
 }

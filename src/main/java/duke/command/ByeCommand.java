@@ -18,8 +18,9 @@ public class ByeCommand extends Command {
 
     /**
      * Executes the main logic of the bye command.
-     * @param tasks The user's list of tasks.
-     * @param ui The ui interacting with the user.
+     *
+     * @param tasks   The user's list of tasks.
+     * @param ui      The ui interacting with the user.
      * @param storage The location where the list of tasks is stored.
      */
     @Override
@@ -27,12 +28,4 @@ public class ByeCommand extends Command {
         return "Bye. Hope to see you again soon!";
     }
 
-    /**
-     * Checks whether command terminates the program.
-     * @return true since the bye command is the terminating command.
-     */
-    @Override
-    public boolean isExit() {
-        return true;
-    }
 }
