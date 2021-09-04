@@ -27,6 +27,7 @@ public class Parser {
      * Parses input and handles user input accordingly.
      *
      * @param input command given by user input.
+     * @return response by duke in the form of a string.
      * @throws DukeException exception thrown due to invalid command or file writing error.
      */
     public String parse(String input) throws DukeException {
@@ -43,7 +44,7 @@ public class Parser {
         } catch (IllegalArgumentException e) {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
-        String message = "";
+        String message;
         switch (command) {
         case LIST:
             message = tasks.print();
@@ -93,6 +94,7 @@ public class Parser {
      *
      * @param userInput given by user.
      * @return string to inform user of successful command.
+     * @throws DukeException error when adding task.
      */
     private String addTodo(String... userInput) throws DukeException {
         try {
@@ -107,6 +109,7 @@ public class Parser {
      *
      * @param userInput given by user.
      * @return string to inform user of successful command.
+     * @throws DukeException error when adding task.
      */
     private String addDeadline(String... userInput) throws DukeException {
         try {
@@ -123,6 +126,7 @@ public class Parser {
      *
      * @param userInput given by user.
      * @return string to inform user of successful command.
+     * @throws DukeException error when adding task.
      */
     private String addEvent(String... userInput) throws DukeException {
         try {
@@ -139,6 +143,7 @@ public class Parser {
      *
      * @param userInput given by user.
      * @return string to inform user of successful command.
+     * @throws DukeException error when adding task.
      */
     private String deleteTask(String... userInput) throws DukeException {
         try {
@@ -160,6 +165,7 @@ public class Parser {
      *
      * @param userInput given by user.
      * @return string to inform user of successful command.
+     * @throws DukeException error when adding task.
      */
     private String findTask(String... userInput) throws DukeException {
         try {
@@ -174,6 +180,7 @@ public class Parser {
      *
      * @param userInput given by user.
      * @return string to inform user of successful command.
+     * @throws DukeException error when adding task.
      */
     private String setTaskDone(String... userInput) throws DukeException {
         try {

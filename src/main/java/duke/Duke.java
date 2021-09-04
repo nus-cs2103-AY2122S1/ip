@@ -15,7 +15,7 @@ public class Duke {
 
     private final Storage storage;
     private final Parser parser;
-    private final TaskList tasks;
+    private TaskList tasks;
 
     /**
      * Constructor for Duke class. Initializes the ui and storage.
@@ -23,17 +23,15 @@ public class Duke {
      * @param filePath the path to store the tasks.
      */
     public Duke(String filePath) {
-        TaskList tasks1;
         storage = new Storage(filePath);
 
         try {
-            tasks1 = new TaskList(storage.load());
+            tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             Ui.showLoadingError();
-            tasks1 = new TaskList();
+            tasks = new TaskList();
         }
 
-        tasks = tasks1;
         parser = new Parser(tasks);
     }
 
@@ -50,10 +48,24 @@ public class Duke {
      * Runs the duke app.
      */
     public void run() {
-        // initialize
         initialize();
+        startParser();
+        exit();
+    }
 
-        // parse
+    /**
+     * Initializes Duke.
+     *
+     * @return hi message.
+     */
+    public String initialize() {
+        return Ui.sayHi();
+    }
+
+    /**
+     * Starts the parsing of input
+     */
+    public void startParser() {
         Scanner scanner = new Scanner(System.in);
         String input;
 
@@ -64,19 +76,7 @@ public class Duke {
                 Ui.print(e.getMessage());
             }
         }
-
-        // end
-        exit();
         scanner.close();
-    }
-
-    /**
-     * Initializes Duke.
-     *
-     * @return hi message.
-     */
-    public String initialize() {
-        return Ui.sayHi();
     }
 
     /**

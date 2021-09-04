@@ -16,6 +16,11 @@ public class Main extends Application {
 
     private final Duke duke = new Duke("data/tasks.txt");
 
+    /**
+     * Overrides the start method in Application class.
+     *
+     * @param stage the stage for JavaFX.
+     */
     @Override
     public void start(Stage stage) {
         try {
