@@ -33,6 +33,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
+        assert(input != null);
         return engineGui.readGuiInput(input);
     }
 }

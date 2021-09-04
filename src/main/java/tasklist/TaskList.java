@@ -566,6 +566,8 @@ public class TaskList {
      * @return reply to be displayed on GUI.
      */
     public String findTasksGui(String[] inputArr) {
+        assert(inputArr.length != 0);
+
         List<Task> filteredList = this.taskList
                 .stream()
                 .filter(task -> {
