@@ -22,10 +22,10 @@ public class EventCommand extends Command {
     /**
      * Returns String object to describe execution of EventCommand.
      *
-     * @param des   the user input into the Duke chat-box.
-     * @param tList the TaskList object used to keep track of all tasks.
+     * @param des   User input into the Duke chat-box.
+     * @param tList TaskList object used to keep track of all tasks.
      * @return String representation of EventCommand.
-     * @throws DukeException if input for Delete command is not properly formatted.
+     * @throws DukeException If input for Delete command is not properly formatted.
      */
     @Override
     public String execute(String des, TaskList tList) throws DukeException {

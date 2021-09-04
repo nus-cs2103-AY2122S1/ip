@@ -20,10 +20,10 @@ public class DeleteCommand extends Command {
     /**
      * Returns String object to describe deletion of a task from the TaskList.
      *
-     * @param des   the user input into the Duke chat-box.
-     * @param tList the TaskList object used to keep track of all tasks.
+     * @param des   User input into the Duke chat-box.
+     * @param tList TaskList object used to keep track of all tasks.
      * @return String representation of DeleteCommand.
-     * @throws DukeException if input for Delete command is not properly formatted.
+     * @throws DukeException If input for Delete command is not properly formatted.
      */
     @Override
     public String execute(String des, TaskList tList) throws DukeException {
@@ -33,14 +33,14 @@ public class DeleteCommand extends Command {
         if (num <= 0 || num > tasks.size()) {
             throw new DukeException("The input number is not a valid task number \n"
                     + "Please refer to the task list using the \"list\" command");
-        } else if (this.countSpaces(des) > 1) {
+        }
+        if (this.countSpaces(des) > 1) {
             throw new DukeException("Too many arguments being provided to \"delete\" \n"
                     + "Please refer to proper usage of duke.commands with \"allCmd\"");
-        } else {
-            tList.remove(num);
-            Storage.createFile();
-            Storage.writeToFile(tList);
-            return "Successfully removed task " + num + "\n";
         }
+        tList.remove(num);
+        Storage.createFile();
+        Storage.writeToFile(tList);
+        return "Successfully removed task " + num + "\n";
     }
 }

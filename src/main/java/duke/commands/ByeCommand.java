@@ -15,8 +15,8 @@ public class ByeCommand extends Command {
     /**
      * Returns goodbye message.
      *
-     * @param des   the user input into the Duke chat-box.
-     * @param tList the TaskList object used to keep track of all tasks.
+     * @param des   User input into the Duke chat-box.
+     * @param tList TaskList object used to keep track of all tasks.
      * @return String object to describe execution of ByeCommand.
      */
     @Override

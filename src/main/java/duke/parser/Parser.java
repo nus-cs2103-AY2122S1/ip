@@ -2,7 +2,7 @@ package duke.parser;
 
 /**
  * Parser class used parse user input.
- * Contains methods that
+ * Contains method that
  * (i)    checks for keywords present in user input and returns the keyword found.
  */
 public class Parser {
@@ -10,7 +10,7 @@ public class Parser {
      * Returns String type object that informs the run() method which command should be called.
      * If no keyword is found, null is returned.
      *
-     * @param des the user input into the Duke chat-box.
+     * @param des User input into the Duke chat-box.
      * @return keyword present in user input
      */
     public String checkForKeyword(String des) {
@@ -44,7 +44,8 @@ public class Parser {
             return "todo";
         } else if (des.contains("find") && des.startsWith("find")) {
             return "find";
+        } else {
+            return null;
         }
-        return null;
     }
 }

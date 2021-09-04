@@ -26,7 +26,7 @@ public class GraphicUi {
      * Returns String representation of response from Duke. Runs the Duke chat-bot for the GUI. Takes in a String of user input and outputs the corresponding
      * Duke response.
      *
-     * @param des the user input into the Duke chat-box.
+     * @param des User input into the Duke chat-box.
      * @return String object representing the corresponding response from Duke.
      */
     public String run(String des) {
@@ -36,52 +36,48 @@ public class GraphicUi {
 
         Parser p = new Parser();
 
-        String command = p.checkForKeyword(des);
+        String keyword = p.checkForKeyword(des);
         try {
-            if (command == null) {
+            if (keyword == null) {
                 throw new DukeException(des + " is not a recognised command\n"
                         + "Please refer to the available commands using the \"help\" command");
-            } else {
-                Command c = null;
-                if (command.equals("bye")) {
-                    c = new ByeCommand();
-                    return c.execute(des, tList);
-                }
-
-                if (command.equals("help")) {
-                    c = new HelpCommand();
-                }
-
-                if (command.equals("list")) {
-                    c = new ListCommand();
-                }
-
-                if (command.equals("done")) {
-                    c = new DoneCommand();
-                }
-
-                if (command.equals("deadline")) {
-                    c = new DeadlineCommand();
-                }
-
-                if (command.equals("event")) {
-                    c = new EventCommand();
-                }
-
-                if (command.equals("todo")) {
-                    c = new ToDoCommand();
-                }
-
-                if (command.equals("delete")) {
-                    c = new DeleteCommand();
-                }
-
-                if (command.equals("find")) {
-                    c = new FindCommand();
-                }
-
-                return c.execute(des, tList);
             }
+            Command c;
+            switch (keyword) {
+            case "bye":
+                c = new ByeCommand();
+                System.out.print(c.execute(des, tList));
+                Ui.printLine();
+                System.exit(0);
+                break;
+            case "help":
+                c = new HelpCommand();
+                break;
+            case "list":
+                c = new ListCommand();
+                break;
+            case "done":
+                c = new DoneCommand();
+                break;
+            case "delete":
+                c = new DeleteCommand();
+                break;
+            case "deadline":
+                c = new DeadlineCommand();
+                break;
+            case "event":
+                c = new EventCommand();
+                break;
+            case "todo":
+                c = new ToDoCommand();
+                break;
+            case "find":
+                c = new FindCommand();
+                break;
+            default:
+                throw new DukeException("Error in parser. Ouput of parser not recognised.");
+            }
+            return c.execute(des, tList);
         } catch (DukeException e) {
             return e.getMessage();
         }

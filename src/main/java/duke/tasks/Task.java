@@ -17,7 +17,7 @@ public abstract class Task {
     /**
      * Constructor for Task
      *
-     * @param description the overview of the task for a particular instance.
+     * @param description Overview of the task for a particular instance.
      */
     public Task(String description) {
         this.description = description;

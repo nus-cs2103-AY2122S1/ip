@@ -49,56 +49,50 @@ public class Ui {
 
         while (true) {
             String des = sc.nextLine();
-            String command = p.checkForKeyword(des);
+            String keyword = p.checkForKeyword(des);
             try {
                 this.printLine();
-                if (command == null) {
+                Command c;
+                if (keyword == null) {
                     throw new DukeException(des + " is not a recognised command\n"
                             + "Please refer to the available commands using the \"help\" command");
-                } else {
-                    Command c = null;
-                    if (command.equals("bye")) {
-                        c = new ByeCommand();
-                        System.out.print(c.execute(des, tList));
-                        printLine();
-                        break;
-                    }
-
-                    if (command.equals("help")) {
-                        c = new HelpCommand();
-                    }
-
-                    if (command.equals("list")) {
-                        c = new ListCommand();
-                    }
-
-                    if (command.equals("done")) {
-                        c = new DoneCommand();
-                    }
-
-                    if (command.equals("deadline")) {
-                        c = new DeadlineCommand();
-                    }
-
-                    if (command.equals("event")) {
-                        c = new EventCommand();
-                    }
-
-                    if (command.equals("todo")) {
-                        c = new ToDoCommand();
-                    }
-
-                    if (command.equals("delete")) {
-                        c = new DeleteCommand();
-                    }
-
-                    if (command.equals("find")) {
-                        c = new FindCommand();
-                    }
-
-                    System.out.print(c.execute(des, tList));
-                    this.printLine();
                 }
+                switch (keyword) {
+                case "bye":
+                    c = new ByeCommand();
+                    System.out.print(c.execute(des, tList));
+                    printLine();
+                    System.exit(0);
+                    break;
+                case "help":
+                    c = new HelpCommand();
+                    break;
+                case "list":
+                    c = new ListCommand();
+                    break;
+                case "done":
+                    c = new DoneCommand();
+                    break;
+                case "delete":
+                    c = new DeleteCommand();
+                    break;
+                case "deadline":
+                    c = new DeadlineCommand();
+                    break;
+                case "event":
+                    c = new EventCommand();
+                    break;
+                case "todo":
+                    c = new ToDoCommand();
+                    break;
+                case "find":
+                    c = new FindCommand();
+                    break;
+                default:
+                    throw new DukeException("Error in parser. Ouput of parser not recognised.");
+                }
+                System.out.print(c.execute(des, tList));
+                this.printLine();
             } catch (DukeException e) {
                 System.out.println(e.getMessage());
                 this.printLine();
