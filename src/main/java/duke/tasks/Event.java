@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
     public static final String TAG = "E";
-    private LocalDate dateOfEvent;
+    private final LocalDate dateOfEvent;
 
     /**
      * Constructs a new Event object with the specified task description, due date and task status.

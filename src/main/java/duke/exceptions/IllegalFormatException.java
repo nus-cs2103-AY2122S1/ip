@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * Represents an exception for the chatbot.
+ * Represents an exception for the chat bot.
  * Thrown when user did not use the correct format when using the chat bot.
  * Example: deadline without /by, event without /at, etc
  */

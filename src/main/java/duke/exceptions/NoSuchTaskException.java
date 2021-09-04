@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * Represents an exception for the chatbot.
+ * Represents an exception for the chat bot.
  * Thrown when user tries to mark/delete tasks that are not in the list of tasks.
  * i.e User has enter the wrong value.
  */

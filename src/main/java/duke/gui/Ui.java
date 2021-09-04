@@ -16,7 +16,6 @@ public class Ui {
         CHECK_TASK_COUNT_MSG(" tasks are in your list now!"),
         NONE_MATCH_MSG("Sorry, I can't find anything that matches the keyword.");
 
-
         private final String msg;
 
         Message(String msg) {
@@ -24,30 +23,49 @@ public class Ui {
         }
     }
 
-
+    /**
+     * Returns the welcome message when the chat bot is started.
+     *
+     * @return A String representing the welcome message.
+     */
     public static String greetUser() {
         return Message.WELCOME_MSG.msg;
     }
 
+    /**
+     * Returns the goodbye message when the chat bot is terminated.
+     *
+     * @return A String representing the goodbye message.
+     */
     public static String exit() {
         return Message.EXIT_MSG.msg;
     }
 
+    /**
+     * Returns the message when the user has completed a task.
+     *
+     * @param task The task completed
+     * @return A String representing the task completed message to be displayed.
+     */
     public static String printTaskCompleteMessage(Task task) {
         return Message.TASK_DONE_MSG.msg + task;
     }
 
     /**
-     * Displays the contents in the list when the user asked for it.
+     * Returns a String containing the contents in the list when the user asked for it.
      *
      * @param taskList The list containing the tasks
      * @return A String representing the contents in the list.
      */
     public static String displayList(TaskList taskList) {
-        if (taskList.getTaskCount() == 0) {
+        if (taskList.isListEmpty()) {
             return Message.EMPTY_LIST_MSG.msg;
         }
 
+        return listToString(taskList);
+    }
+
+    private static String listToString(TaskList taskList) {
         StringBuilder content = new StringBuilder(Message.DISPLAY_LIST_MSG.msg);
 
         for (int i = 0; i < taskList.getTaskCount(); i++) {
@@ -60,12 +78,17 @@ public class Ui {
         return content.toString();
     }
 
+    /**
+     * Returns a String indicating that there is nothing in the list that matches the input.
+     *
+     * @return A String representing the none matched message to be displayed.
+     */
     public static String printNoneMatchMessage() {
         return Message.NONE_MATCH_MSG.msg;
     }
 
     /**
-     * Prints the message to be shown when the user deletes a task from the list.
+     * Returns the message to be shown when the user deletes a task from the list.
      *
      * @param task The task to be deleted
      * @param count Number of task in the list.
@@ -74,11 +97,12 @@ public class Ui {
     public static String printDeleteTaskMessage(Task task, int count) {
         String deletedTaskInfo = Message.TASK_DELETED_MSG.msg + task;
         String updatedListInfo = String.format("%d %s", count, Message.CHECK_TASK_COUNT_MSG.msg);
+
         return deletedTaskInfo + "\n" + updatedListInfo;
     }
 
     /**
-     * Prints the message to be shown when the user adds a task to the list.
+     * Returns the message to be shown when the user adds a task to the list.
      *
      * @param task The task to be deleted
      * @param count Number of task in the list.
@@ -87,9 +111,16 @@ public class Ui {
     public static String printAddTaskMessage(Task task, int count) {
         String addedTaskInfo = Message.TASK_ADDED_MSG.msg + task;
         String updatedListInfo = String.format("%d %s", count, Message.CHECK_TASK_COUNT_MSG.msg);
+
         return addedTaskInfo + "\n" + updatedListInfo;
     }
 
+    /**
+     * Returns the error message when an error has occurred.
+     *
+     * @param errorMsg The message to be shown when error occurred.
+     * @return A String representing the error message.
+     */
     public static String notifyError(String errorMsg) {
         return errorMsg;
     }

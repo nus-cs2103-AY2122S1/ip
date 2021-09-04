@@ -8,6 +8,7 @@ import duke.commands.DeadlineCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
@@ -25,7 +26,7 @@ import duke.tasks.Todo;
 public class Parser {
     private final boolean DEFAULT_STATUS = false;
 
-    // duke.commands.Command Tags for the chat bot
+    // Command Tags for the chat bot
     private final String LIST_TAG = "list";
     private final String DONE_TAG = "done";
     private final String TODO_TAG = "todo";
@@ -33,6 +34,7 @@ public class Parser {
     private final String EVENT_TAG = "event";
     private final String DELETE_TAG = "delete";
     private final String FIND_TAG = "find";
+    private final String EXIT_TAG = "bye";
 
     /**
      * Returns the command tag of the input.
@@ -44,9 +46,14 @@ public class Parser {
         if (!input.contains(" ")) {
             return input;
         } else {
-            String[] details = input.split(" ");
+            String key = " ";
+            String[] details = spiltInputByKey(input, key);
             return details[0];
         }
+    }
+
+    private String[] spiltInputByKey(String input, String key) {
+        return input.split(key);
     }
 
     /**
@@ -62,6 +69,8 @@ public class Parser {
         String commandTag = getCommandTag(input).toLowerCase();
 
         switch (commandTag) {
+        case EXIT_TAG:
+            return new ExitCommand();
         case LIST_TAG:
             return new ListCommand();
         case TODO_TAG:
@@ -95,10 +104,12 @@ public class Parser {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private String getTodoDesc(String input) throws IllegalFormatException {
-        String[] details = input.split("todo ");
+        String key = "todo ";
+        String[] details = spiltInputByKey(input, key);
 
         if (details.length != 2) {
-            throw new IllegalFormatException("Please ensure that you have typed todo keyword.");
+            String errorMsg = "Please ensure that you have typed todo keyword.";
+            throw new IllegalFormatException(errorMsg);
         }
 
         return details[1].trim();
@@ -112,13 +123,18 @@ public class Parser {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private String getTaskDesc(String input) throws IllegalFormatException {
-        int startPosition = input.indexOf(" ");
-        int endPosition = input.indexOf("/");
+        String startKey = " ";
+        String endKey = "/";
+        int startPosition = input.indexOf(startKey);
+        int endPosition = input.indexOf(endKey);
 
-        if (startPosition < 0 || startPosition >= input.length()
-                || endPosition < 0 || endPosition >= input.length()) {
-            throw new IllegalFormatException("Please follow the format:\n type description /xx yyyy-mm-dd\n"
-                    + " Use /by for deadline, /at for event.");
+        boolean isStartPositionOutOfRange = startPosition < 0 || startPosition >= input.length();
+        boolean isEndPositionOutOfRange = endPosition < 0 || endPosition >= input.length();
+
+        if (isStartPositionOutOfRange || isEndPositionOutOfRange) {
+            String errorMsg = "Please follow the format:\n type description /xx yyyy-mm-dd\n"
+                    + " Use /by for deadline, /at for event.";
+            throw new IllegalFormatException(errorMsg);
         }
 
         return input.substring(startPosition, endPosition).trim();
@@ -132,17 +148,8 @@ public class Parser {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private LocalDate getDeadlineDates(String input) throws IllegalFormatException {
-        String[] details = input.split("/by ");
-
-        if (details.length != 2) {
-            throw new IllegalFormatException("Please follow the format:\n type description /by yyyy-mm-dd.");
-        }
-
-        try {
-            return LocalDate.parse(details[1]);
-        } catch (DateTimeParseException e) {
-            throw new IllegalFormatException("Please follow the format:\n type description /by yyyy-mm-dd.");
-        }
+        String key = "/by ";
+        return getTaskDate(key, input);
     }
 
     /**
@@ -153,16 +160,28 @@ public class Parser {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private LocalDate getEventDates(String input) throws IllegalFormatException {
-        String[] details = input.split("/at ");
+        String key = "/at ";
+        return getTaskDate(key, input);
+    }
+
+    private LocalDate getTaskDate(String key, String input) throws IllegalFormatException {
+        String[] details = spiltInputByKey(input, key);
 
         if (details.length != 2) {
-            throw new IllegalFormatException("Please follow the format:\n type description /at yyyy-mm-dd.");
+            String errorMsg = "Please follow the format:\n type description /by yyyy-mm-dd.";
+            throw new IllegalFormatException(errorMsg);
         }
 
+        String dateString = details[1];
+        return getLocalDate(dateString);
+    }
+
+    private LocalDate getLocalDate(String detail) throws IllegalFormatException {
         try {
-            return LocalDate.parse(details[1]);
+            return LocalDate.parse(detail);
         } catch (DateTimeParseException e) {
-            throw new IllegalFormatException("Please follow the format:\n type description /at yyyy-mm-dd.");
+            String errorMsg = "Please follow the format:\n type description /by yyyy-mm-dd.";
+            throw new IllegalFormatException(errorMsg);
         }
     }
 
@@ -174,14 +193,17 @@ public class Parser {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private int getTaskId(String input) throws IllegalFormatException {
-        String[] details = input.split(" ");
+        String key = " ";
+        String[] details = spiltInputByKey(input, key);
 
         if (details.length != 2) {
-            throw new IllegalFormatException("Please follow the format:\n command 0.");
+            String errorMsg = "Please follow the format:\n command 0.";
+            throw new IllegalFormatException(errorMsg);
         }
 
         if (!isInteger(details[1])) {
-            throw new IllegalFormatException("Please enter a valid id.");
+            String errorMsg = "Please enter a valid id.";
+            throw new IllegalFormatException(errorMsg);
         }
 
         return Integer.parseInt(details[1]) - 1;
@@ -211,15 +233,18 @@ public class Parser {
      * @throws IllegalFormatException Wrong format used by user.
      */
     private String getKeyword(String input) throws IllegalFormatException {
-        String[] details = input.split("find ");
+        String key = "find ";
+        String[] details = spiltInputByKey(input, key);
 
         if (details.length < 2) {
-            throw new IllegalFormatException("Please follow the format:\n find keyword.");
+            String errorMsg = "Please follow the format:\n find keyword.";
+            throw new IllegalFormatException(errorMsg);
         }
 
         String keyword = details[1];
         if (keyword.isBlank()) {
-            throw new IllegalFormatException("Did you forget to enter a keyword?");
+            String errorMsg = "Did you forget to enter a keyword?";
+            throw new IllegalFormatException(errorMsg);
         }
 
         return keyword;
