@@ -1,10 +1,11 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.DukeException;
 import duke.ItemList;
-import duke.items.Deadline;
 import duke.Ui;
-import java.util.ArrayList;
+import duke.items.Deadline;
 
 /**
  * Represents a command to add a <code>Deadline</code> object to an

@@ -1,9 +1,10 @@
 package duke.commands;
 
-import duke.items.Item;
+import java.util.ArrayList;
+
 import duke.ItemList;
 import duke.Ui;
-import java.util.ArrayList;
+import duke.items.Item;
 
 /**
  * Represents a command to mark a specified <code>Item</code> from an
