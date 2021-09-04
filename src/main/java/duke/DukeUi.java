@@ -7,13 +7,14 @@ import java.util.ArrayList;
  */
 public class DukeUi {
 
-    /** Buffer containing what Duke is going to say. */
-    private ArrayList<String> dukeUiBuffer;
 
     /** Default line separator designs. */
     private static String sepLine = "===========================================";
     private static String sepLineOpen = "///<<<============ Duke Says: ===========>>>\\\\\\";
     private static String sepLineClose = "\\\\\\<<<===================================>>>///";
+
+    /** Buffer containing what Duke is going to say. */
+    private ArrayList<String> dukeUiBuffer;
 
 
     /**

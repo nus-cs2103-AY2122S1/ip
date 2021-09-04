@@ -1,24 +1,22 @@
 package duke;
 
-import duke.Tasks.BaseTask;
-
-
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+
+import duke.Tasks.BaseTask;
 
 /**
  * This class contains the main Duke class that runs the chat bot.
  */
 public class Duke {
 
-    /** Tracks whether the exit command was used. */
-    private boolean isExited;
-
-
     /** Storage and Management of Duke Objects. */
     private static Duke dukeInstance;
+
+    /** Tracks whether the exit command was used. */
+    private boolean isExited;
 
     private DukeCommandParser currDukeCmdParser;
     private DukeStorageManager currStorageMgr;
@@ -91,12 +89,13 @@ public class Duke {
 
     /**
      * The main method that starts the whole program.
-     * @param args Any arguments passed through the command-line when starting the program.
+     *
+     * @param currDuke The instance of Duke to start.
      */
-    public static void main(String[] args) {
-        Duke currDuke = getCurrDuke();
+    public static void dukeStarter(Duke currDuke) {
+
         // Load Save File only after Duke is created.
-        currDuke.getCurrStorageMgr().reloadSaveFromXMLDoc();
+        currDuke.getCurrStorageMgr().reloadSaveFromXmlDoc();
 
         System.out.println("Duke is running in the folder: " + System.getProperty("user.dir"));
 
@@ -148,15 +147,15 @@ public class Duke {
         if (cmdType == DukeCommandParser.CommandType.BYE) {
             this.dukeExiter();
         } else if (cmdType == DukeCommandParser.CommandType.LIST) {
-            this.listOutTDL();
+            this.listOutTdl();
         } else if (cmdType == DukeCommandParser.CommandType.MARK_TASK_DONE) {
-            this.markItemDoneInTDL(lastInput);
+            this.markItemDoneInTdl(lastInput);
         } else if (cmdType == DukeCommandParser.CommandType.DEL_TASK) {
-            this.deleteTaskInTDL(lastInput);
+            this.deleteTaskInTdl(lastInput);
         } else if (cmdType == DukeCommandParser.CommandType.ADD_TASK) {
-            this.addToTDL(lastInput, currTaskType);
+            this.addToTdl(lastInput, currTaskType);
         } else if (cmdType == DukeCommandParser.CommandType.FIND) {
-            this.findTaskInTDL(lastInput);
+            this.findTaskInTdl(lastInput);
 
         } else {
             unknownCommandEntered();
@@ -200,16 +199,16 @@ public class Duke {
         throw new DukeExceptionBase("Please enter something valid!");
     }
 
-    private void addToTDL(String str, BaseTask.TaskType currTaskType) throws DukeExceptionBase {
+    private void addToTdl(String str, BaseTask.TaskType currTaskType) throws DukeExceptionBase {
         this.currDukeList.tdlAdd(str, currTaskType);
     }
 
 
-    private void listOutTDL() {
+    private void listOutTdl() {
         this.currDukeList.printOutWholeList();
     }
 
-    private void markItemDoneInTDL(String command) throws DukeExceptionBase {
+    private void markItemDoneInTdl(String command) throws DukeExceptionBase {
         if (command.length() < 6) {
             throw new DukeExceptionBase("You need to specify a task to set as done.");
         }
@@ -226,7 +225,7 @@ public class Duke {
         dukeSays(dukeOutput);
     }
 
-    private void deleteTaskInTDL(String command) throws DukeExceptionBase {
+    private void deleteTaskInTdl(String command) throws DukeExceptionBase {
         if (command.length() < 8) {
             throw new DukeExceptionBase("You need to specify a task to delete.");
         }
@@ -243,7 +242,7 @@ public class Duke {
         dukeSays(dukeOutput);
     }
 
-    private void findTaskInTDL(String command) throws DukeExceptionBase {
+    private void findTaskInTdl(String command) throws DukeExceptionBase {
         if (command.length() < 6) {
             throw new DukeExceptionBase("You need to specify a keyword to find.");
         }
