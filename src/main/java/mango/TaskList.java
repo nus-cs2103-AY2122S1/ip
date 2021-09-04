@@ -56,29 +56,35 @@ public class TaskList {
         String taskType = splitUserInput[0];
         String taskDesc;
         String taskDate;
-        String[] splitUserInputForDate;
+        String taskTag;
 
         switch (taskType) {
         case "todo":
             if (Todo.isValid(splitUserInput)) {
-                taskDesc = splitUserInput[1];
-                newTask = new Todo(taskDesc);
+                String[] splitUserInputForTag = splitUserInput[1].split(" /", 2);
+                taskDesc = splitUserInputForTag[0];
+                taskTag = splitUserInputForTag[1].substring(4);
+                newTask = new Todo(taskDesc, taskTag);
             }
             break;
         case "deadline":
             if (Deadline.isValid(splitUserInput)) {
-                splitUserInputForDate = splitUserInput[1].split(" /", 2);
-                taskDesc = splitUserInputForDate[0];
-                taskDate = splitUserInputForDate[1].substring(3);
-                newTask = new Deadline(taskDesc, taskDate);
+                String[] splitUserInputForDateAndTag = splitUserInput[1].split(" /", 3);
+                taskDesc = splitUserInputForDateAndTag[0];
+                taskDate = splitUserInputForDateAndTag[1].substring(3);
+                taskTag = splitUserInputForDateAndTag[2].substring(4);
+
+                newTask = new Deadline(taskDesc, taskDate, taskTag);
             }
             break;
         case "event":
             if (Event.isValid(splitUserInput)) {
-                splitUserInputForDate = splitUserInput[1].split(" /", 2);
-                taskDesc = splitUserInputForDate[0];
-                taskDate = splitUserInputForDate[1].substring(3);
-                newTask = new Event(taskDesc, taskDate);
+                String[] splitUserInputForDateAndTag = splitUserInput[1].split(" /", 3);
+                taskDesc = splitUserInputForDateAndTag[0];
+                taskDate = splitUserInputForDateAndTag[1].substring(3);
+                taskTag = splitUserInputForDateAndTag[2].substring(4);
+
+                newTask = new Event(taskDesc, taskDate, taskTag);
             }
             break;
         default:
@@ -95,8 +101,8 @@ public class TaskList {
         }
 
         assert newTask != null;
-        String output = "Got it. I've added this task:\n"
-                + String.format("   [%s][%s] %s\n", newTask.getType(), newTask.getStatusIcon(), newTask.getDescription())
+        String output = "Got it. I've added this task:\n" + String.format("   [%s][%s] %s %s\n",
+                newTask.getType(), newTask.getStatusIcon(), newTask.getDescription(), newTask.getTag())
                 + String.format("Now you have %d %s in the list.%n", listIndex + 1, word);
 
         listIndex++;
@@ -117,7 +123,7 @@ public class TaskList {
         }
 
         String output = "Nice! I've marked this task as done:\n"
-                + String.format("[%s][X] %s\n", currentTask.getType(), currentTask.getDescription());
+                + String.format("[%s][X] %s %s\n", currentTask.getType(), currentTask.getDescription(), currentTask.getTag());
 
         return output;
     }
@@ -132,8 +138,8 @@ public class TaskList {
     public String deleteTask(int deleteTask) {
         Task delTask = tasks.remove(deleteTask - 1);
         listIndex--;
-        String output = "Noted. I've removed this task:\n"
-                + String.format("[%s][%s] %s\n", delTask.getType(), delTask.getStatusIcon(), delTask.getDescription());
+        String output = "Noted. I've removed this task:\n" + String.format("[%s][%s] %s %s\n",
+                delTask.getType(), delTask.getStatusIcon(), delTask.getDescription(), delTask.getTag());
 
         String word;
         if (listIndex == 1) {
@@ -160,7 +166,8 @@ public class TaskList {
             int num = i+1;
             Task curr = tasks.get(i);
             if (curr.getDescription().contains(str)) {
-                output += String.format("%d. [%s][%s] %s\n", num, curr.getType(), curr.getStatusIcon(), curr.getDescription());
+                output += String.format("%d. [%s][%s] %s %s\n",
+                        num, curr.getType(), curr.getStatusIcon(), curr.getDescription(), curr.getTag());
             }
             i++;
         }
@@ -179,7 +186,8 @@ public class TaskList {
         while (i < listIndex) {
             int num = i+1;
             Task curr = tasks.get(i);
-            completeList += String.format("%d. [%s][%s] %s\n", num, curr.getType(), curr.getStatusIcon(), curr.getDescription());
+            completeList += String.format("%d. [%s][%s] %s %s\n",
+                    num, curr.getType(), curr.getStatusIcon(), curr.getDescription(), curr.getTag());
             i++;
         }
 

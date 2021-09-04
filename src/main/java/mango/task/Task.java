@@ -8,26 +8,27 @@ import mango.DukeException;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String tag;
 
     /**
-     * Constructor of a Task.
-     *
-     * @param description The description of the Task.
-     */
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    /**
-     * Constructor of a Task, initialised with a completion status.
+     * Constructor of a Task, initialised with a completion status and a tag.
      *
      * @param description The description of a task.
-     * @param isDone The completions status of the task.
+     * @param tag The tag relevant to the task.
+     * @param isDone The completion status of the task.
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, String tag, boolean isDone) {
         this.description = description;
+        this.tag = "#" + tag;
         this.isDone = isDone;
+    }
+    
+    /**
+     * Retrieves the tag of the task.
+     * @return The tag attached to the task.
+     */
+    public String getTag() {
+        return this.tag;
     }
 
     /**
