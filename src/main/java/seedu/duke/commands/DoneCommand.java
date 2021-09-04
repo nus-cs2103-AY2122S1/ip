@@ -3,6 +3,7 @@ package seedu.duke.commands;
 import seedu.duke.exceptions.storage.DukeStorageUpdateException;
 import seedu.duke.storage.Storage;
 import seedu.duke.storage.TaskList;
+import seedu.duke.tasks.Task;
 
 public class DoneCommand extends Command {
     private final String taskId;
@@ -17,35 +18,39 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Helps to update the task in the list of tasks as done when this function is
-     * executed.
+     * Updates the {@code Task} in the {@code TaskList} as done when this function
+     * is executed.
      * 
-     * @param taskList the list of Tasks which is being stored.
+     * @param taskList contains an {@code ArrayList<Task>} where all {@code Task} is
+     *                 stored.
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
         int index = Integer.parseInt(this.taskId) - 1;
         try {
-            taskList.doneItem(index);
+            Task updatedTask = taskList.doneItem(index);
             storage.updateDone(index);
 
-            // return Ui.printMessage(
-            // Ui.DONE_MESSAGE + "\n" + Ui.INDENT + " " +
-            // taskList.getTaskList().get(index).toString());
-            return Ui.printMessage(Ui.DONE_MESSAGE + "\n" + taskList.getTaskList().get(index).toString());
+            return getReplyMessage(taskList, updatedTask);
+
         } catch (DukeStorageUpdateException err) {
             throw new DukeStorageUpdateException(err.toString());
         }
     }
 
+    private String getReplyMessage(TaskList taskList, Task updatedTask) {
+        return Ui.printMessage(Ui.DONE_MESSAGE + "\n" + updatedTask.toString());
+    }
+
     /**
      * Checks if the user wants to exit from the application.
      * 
-     * @return boolean whether the user wants to exit from the application.
+     * @return {@code false} as this command is not ready for user to exit the
+     *         application.
      */
     @Override
-    public boolean getIsExit() {
+    public boolean isExit() {
         return false;
     }
 }

@@ -5,9 +5,9 @@ public class Deadline extends Task {
     /**
      * Constructor. Default having the isDone parameter to be set as false.
      * 
-     * @param description description of the current Events object.
+     * @param description description of the current {@code Deadline} object.
      * @param dateTime    is the description of the location and time for the
-     *                    Events.
+     *                    {@code Deadline}.
      */
     public Deadline(String description, String dateTime) {
         super(description, dateTime);
@@ -17,10 +17,11 @@ public class Deadline extends Task {
      * Second Constructor which takes in additional boolean, to be able to set the
      * initial boolean status.
      * 
-     * @param description is the description of the Events.
+     * @param description is the description of the {@code Deadline}.
      * @param dateTime    is the description of the location and time for the
-     *                    Events.
-     * @param isDone      determine whether the Events are completed or not.
+     *                    current {@code Deadline}.
+     * @param isDone      determine whether the current {@code Deadline} is
+     *                    completed or not.
      */
     public Deadline(String description, String dateTime, boolean isDone) {
         super(description, dateTime, isDone);
@@ -38,10 +39,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Marks the current Deadline as done.
+     * Marks the current {@code Deadline} as done.
      * 
-     * @return a new Deadline object with the same description and by, but setting
-     *         isDone property to be true
+     * @return a new {@code Deadline} object with the same description and by, but
+     *         setting isDone property to be true
      */
     @Override
     public Deadline markAsDone() {
@@ -49,9 +50,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Describes the current Deadline object.
+     * Describes the current {@code Deadline}.
      * 
-     * @return a description of the current Deadline object.
+     * @return a description of the current {@code Deadline}.
      */
     @Override
     public String toString() {

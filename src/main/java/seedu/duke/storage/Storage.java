@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import seedu.duke.commands.Ui;
+import seedu.duke.exceptions.action.DukeActionOutOfBoundException;
 import seedu.duke.exceptions.storage.DukeStorageDeleteException;
 import seedu.duke.exceptions.storage.DukeStorageLoadException;
 import seedu.duke.exceptions.storage.DukeStorageSaveException;
@@ -17,69 +18,57 @@ import seedu.duke.tasks.Task;
 import seedu.duke.tasks.ToDos;
 
 public class Storage {
+    private static final String STORAGE_ISDONE_FALSE = "| 0 |";
+    private static final String STORAGE_ISDONE_TRUE = "| 1 |";
+
     private final File data;
 
     /**
      * Primary Constructor.
      */
     public Storage() {
-        this.data = new File("src/main/java/seedu/data/data.txt");
+        this.data = new File(Ui.DATA_LOCATION);
     }
 
     /**
      * Loads the saved Tasks from the txt file.
      * 
-     * @return ArrayList of Tasks containing all the previous Task
-     * @throws DukeStorageLoadException when file is not found in the given
+     * @return an {@code ArrayList<Task>} that contains all the previous Tasks.
+     * @throws DukeStorageLoadException when {@code File} is not found in the given
      *                                  location.
      * @see java.util.ArrayList
      */
     public ArrayList<Task> loadData() throws DukeStorageLoadException {
         ArrayList<Task> currList = new ArrayList<>();
-
         String currLine;
-        String type;
-        String descriptions;
-        String[] stringArr;
-        String dateTimeLocation;
-        boolean isDone;
+        String eventType;
+        String[] storageDataArray;
+        String storageIsDone;
+
         try {
             Scanner sc = new Scanner(data);
             while (sc.hasNext()) {
                 currLine = sc.nextLine();
-                stringArr = currLine.replace("|", "/").split(" / ");
-                type = currLine.split("")[0];
-                isDone = false;
-                switch (type) {
+                storageDataArray = currLine.replace("|", "/").split(" / ");
+                eventType = currLine.split("")[0];
+                storageIsDone = storageDataArray[1];
+                switch (eventType) {
+
                 case "T":
-                    descriptions = stringArr[2];
-                    ToDos todos;
-                    if (stringArr[1].contains("1")) {
-                        isDone = true;
-                    }
-                    todos = new ToDos(descriptions, isDone);
+                    ToDos todos = new ToDos(getDescriptions(storageDataArray), getIsDoneFromStorage(storageIsDone));
                     currList.add(todos);
                     break;
 
                 case "D":
-                    descriptions = stringArr[2];
-                    dateTimeLocation = stringArr[3];
-                    Deadline deadline;
-                    if (stringArr[1].contains("1")) {
-                        isDone = true;
-                    }
-                    deadline = new Deadline(descriptions, dateTimeLocation, isDone);
+                    Deadline deadline = new Deadline(getDescriptions(storageDataArray),
+                            getDateTimeLocation(storageDataArray), getIsDoneFromStorage(storageIsDone));
                     currList.add(deadline);
                     break;
 
                 case "E":
-                    descriptions = stringArr[2];
-                    dateTimeLocation = stringArr[3];
-                    Events event;
-                    if (stringArr[1].contains("1")) {
-                        isDone = true;
-                    }
-                    event = new Events(descriptions, dateTimeLocation, isDone);
+
+                    Events event = new Events(getDescriptions(storageDataArray), getDateTimeLocation(storageDataArray),
+                            getIsDoneFromStorage(storageIsDone));
                     currList.add(event);
                     break;
 
@@ -90,7 +79,7 @@ public class Storage {
             sc.close();
         } catch (IOException err) {
             throw new DukeStorageLoadException(Ui.ERROR_MESSAGE_STORAGE_LOAD);
-        } catch (IndexOutOfBoundsException err) {
+        } catch (ArrayIndexOutOfBoundsException err) {
             throw new DukeStorageLoadException(Ui.ERROR_MESSAGE_STORAGE_LOAD_OUT_OF_BOUND);
         }
         return currList;
@@ -99,7 +88,7 @@ public class Storage {
     /**
      * Appends a new line in the txt file which saves all the Task.
      * 
-     * @param textToAppend String to append into the txt file.
+     * @param textToAppend {@code String} to append into the txt file.
      * @throws DukeStorageSaveException when FileWriter is not able to read or
      *                                  locate the file from the given file path.
      */
@@ -114,16 +103,17 @@ public class Storage {
     }
 
     /**
-     * Helps to update the done status in the txt file.
+     * Updates the done status in the txt file.
      * 
-     * @param number is the Task id.
-     * @throws DukeStorageUpdateException when Scanner is not able to read or locate
-     *                                    the file from the given file path.
+     * @param number is the {@code Task} id.
+     * @throws DukeStorageUpdateException when {@code Scanner} is not able to read
+     *                                    or locate the {@code File} from the given
+     *                                    file path.
      */
     public void updateDone(int index) throws DukeStorageUpdateException {
         int count = 0;
         String currLine;
-        String finalAppend = "";
+        String stringToAppend = "";
 
         try {
             Scanner sc = new Scanner(this.data);
@@ -131,13 +121,11 @@ public class Storage {
                 currLine = sc.nextLine();
                 count++;
                 if (count == index) {
-                    currLine = currLine.replace("| 0 |", "| 1 |");
+                    currLine = currLine.replace(Storage.STORAGE_ISDONE_FALSE, Storage.STORAGE_ISDONE_TRUE);
                 }
-                finalAppend += currLine + "\n";
+                stringToAppend += currLine + "\n";
             }
-            FileWriter fw = new FileWriter(this.data, false);
-            fw.append(finalAppend);
-            fw.close();
+            clearsFileAndWrite(stringToAppend);
             sc.close();
         } catch (IOException err) {
             throw new DukeStorageUpdateException(err.toString());
@@ -145,16 +133,17 @@ public class Storage {
     }
 
     /**
-     * Helps to delete the Task from the saved txt file.
+     * Deletes the Task from the saved txt file.
      * 
-     * @param number is the Task id.
-     * @throws DukeStorageDeleteException when Scanner is not able to read or locate
-     *                                    the file from the given file path.
+     * @param number is the {@code Task} id.
+     * @throws DukeStorageDeleteException when {@code Scanner} is not able to read
+     *                                    or locate the {@code File} from the given
+     *                                    file path.
      */
     public void deleteTaskFromData(int index) throws DukeStorageDeleteException {
         int count = 0;
         String currLine;
-        String finalAppend = "";
+        String stringToAppend = "";
 
         try {
             Scanner sc = new Scanner(this.data);
@@ -162,13 +151,44 @@ public class Storage {
                 currLine = sc.nextLine();
                 count++;
                 if (count != index) {
-                    finalAppend += currLine + "\n";
+                    stringToAppend += currLine + "\n";
                 }
             }
-            FileWriter fw = new FileWriter(this.data, false);
-            fw.append(finalAppend);
-            fw.close();
+            clearsFileAndWrite(stringToAppend);
             sc.close();
+        } catch (IOException err) {
+            throw new DukeStorageLoadException(Ui.ERROR_MESSAGE_FILE_NOT_FOUND);
+        }
+    }
+
+    private boolean getIsDoneFromStorage(String storageIsDone) {
+        if (storageIsDone.contains("1")) {
+            return true;
+        }
+        return false;
+    }
+
+    private String getDescriptions(String[] storageDataArray) {
+        try {
+            return storageDataArray[2];
+        } catch (ArrayIndexOutOfBoundsException err) {
+            throw new DukeActionOutOfBoundException(Ui.ERROR_MESSAGE_STORAGE_LOAD_OUT_OF_BOUND);
+        }
+    }
+
+    private String getDateTimeLocation(String[] storageDataArray) {
+        try {
+            return storageDataArray[3];
+        } catch (ArrayIndexOutOfBoundsException err) {
+            throw new DukeActionOutOfBoundException(Ui.ERROR_MESSAGE_STORAGE_LOAD_OUT_OF_BOUND);
+        }
+    }
+
+    private void clearsFileAndWrite(String stringToAppend) {
+        try {
+            FileWriter fw = new FileWriter(this.data, false);
+            fw.append(stringToAppend);
+            fw.close();
         } catch (IOException err) {
             throw new DukeStorageDeleteException(err.toString());
         }

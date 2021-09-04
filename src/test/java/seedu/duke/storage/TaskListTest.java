@@ -15,7 +15,7 @@ public class TaskListTest {
         taskList.addTask(new ToDos("UnitTesting"));
 
         assertFalse(taskList.getTaskList().get(0).getIsDone());
-        taskList.doneItem("1");
+        taskList.doneItem(0);
         assertTrue(taskList.getTaskList().get(0).getIsDone());
     }
 
@@ -35,7 +35,7 @@ public class TaskListTest {
 
         assertEquals(1, taskList.getTaskList().size());
 
-        taskList.deleteItem("1");
+        taskList.deleteItem(0);
 
         assertEquals(0, taskList.getTaskList().size());
     }

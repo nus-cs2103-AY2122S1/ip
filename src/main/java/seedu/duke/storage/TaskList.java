@@ -17,9 +17,11 @@ public class TaskList {
     }
 
     /**
-     * Retrieves the list of tasks that is being stored in this class.
+     * Retrieves an {@code ArrayList<Task>} that is being stored in this
+     * {@code TaskList}.
      * 
-     * @return an ArrayList of tasks which is being stored.
+     * @return an {@code ArrayList<Task>} which is being stored on this
+     *         {@code TaskList}.
      * @see java.util.ArrayList
      */
     public ArrayList<Task> getTaskList() {
@@ -27,10 +29,11 @@ public class TaskList {
     }
 
     /**
-     * Loads previous saved Tasks from a txt file. Save it in this current TaskList
-     * in an ArrayList of Task object.
+     * Loads previous saved Tasks from a txt file. Save it in this current
+     * {@code TaskList} in an {@code ArrayList<Task>}.
      * 
-     * @param savedTasks this is the ArrayList of Task coming from the txt file.
+     * @param savedTasks this is the {@code ArrayList<Task>} coming from the txt
+     *                   file.
      * @see java.util.ArrayList
      */
     public void loadFromStorage(ArrayList<Task> savedTasks) {
@@ -38,14 +41,15 @@ public class TaskList {
     }
 
     /**
-     * Helps to mark the task in the list of Tasks as done.
+     * Marks the {@code Task} in the {@code ArrayList<Task>} as done.
      * 
-     * @param number is the Task id.
+     * @param number is the {@code Task} id.
      */
-    public void doneItem(int index) {
+    public Task doneItem(int index) {
         try {
-            Task curr = this.taskList.get(index);
-            this.taskList.set(index, curr.markAsDone());
+            Task doneTask = this.taskList.get(index).markAsDone();
+            this.taskList.set(index, doneTask);
+            return doneTask;
 
         } catch (IndexOutOfBoundsException err) {
             throw new DukeActionOutOfBoundException(Ui.ERROR_MESSAGE_ACTION_OUT_OF_BOUND);
@@ -53,18 +57,19 @@ public class TaskList {
     }
 
     /**
-     * Adds a particular task given by the user into the TaskList.
+     * Adds a particular {@code Task} given by the user into the {@code TaskList}.
      * 
-     * @param task is the task that is to be added into the TaskList.
+     * @param task is the {@code Task} that is to be added into the
+     *             {@code TaskList}.
      */
     public void addTask(Task task) {
         this.taskList.add(task);
     }
 
     /**
-     * Deletes a particular task that is present in the TaskList.
+     * Deletes a particular task that is present in the {@code TaskList}.
      * 
-     * @param number is the Task id.
+     * @param number is the {@code Task} id.
      */
     public Task deleteItem(int index) {
         try {
@@ -75,10 +80,11 @@ public class TaskList {
     }
 
     /**
-     * Helps to find the specific Task from the list based on the description given.
+     * Finds the specific {@code Task} from the {@code ArrayList<Task>} in
+     * {@code TaskList} based on the description given.
      * 
-     * @param find is the description coming from the user, which the list of Tasks
-     *             they would like to find.
+     * @param find is the description coming from the user, which the list of
+     *             {@code Task} they would like to find.
      */
     public ArrayList<Task> find(String find) {
         ArrayList<Task> foundList = new ArrayList<>();

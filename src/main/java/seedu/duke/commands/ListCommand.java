@@ -6,9 +6,10 @@ import seedu.duke.storage.TaskList;
 public class ListCommand extends Command {
 
     /**
-     * Helps to print the list of tasks that is on hand.
+     * Prints the list of {@code Task} that is on hand from {@code TaskList}.
      * 
-     * @param taskList the list of Tasks which is being stored.
+     * @param taskList contains an {@code ArrayList<Task>} where all {@code Task} is
+     *                 stored.
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
@@ -19,10 +20,11 @@ public class ListCommand extends Command {
     /**
      * Checks if the user wants to exit from the application.
      * 
-     * @return boolean whether the user wants to exit from the application.
+     * @return {@code false} as this command is not ready for user to exit the
+     *         application.
      */
     @Override
-    public boolean getIsExit() {
+    public boolean isExit() {
         return false;
     }
 }

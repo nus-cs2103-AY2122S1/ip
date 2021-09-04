@@ -18,35 +18,39 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Helps to delete the task from the list of tasks when this function is
+     * Deletes the {@code Task} from {@code TaskList} when this function is
      * executed.
      * 
-     * @param taskList the list of Tasks which is being stored.
+     * @param taskList contains an {@code ArrayList<Task>} where all {@code Task} is
+     *                 stored.
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        int index = Integer.parseInt(this.taskId) - 1;
         try {
+            int index = Integer.parseInt(this.taskId) - 1;
             Task deletedTask = taskList.deleteItem(index);
             storage.deleteTaskFromData(index);
-            // return Ui.printMessage("Noted. I've removed this task:\n" + Ui.INDENT + " "
-            // + deletedTask.toString() + "\n" + Ui.INDENT + "Now you have "
-            // + taskList.getTaskList().size() + " tasks in the list.");
-            return Ui.printMessage("Noted. I've removed this task:\n" + deletedTask.toString() + "\n" + "Now you have "
-                    + taskList.getTaskList().size() + " tasks in the list.");
+
+            return getReplyMessage(taskList, deletedTask);
         } catch (DukeStorageDeleteException err) {
             throw new DukeStorageDeleteException(err.toString());
         }
     }
 
+    private String getReplyMessage(TaskList taskList, Task deletedTask) {
+        return Ui.printMessage("Noted. I've removed this task:\n" + deletedTask.toString() + "\n" + "Now you have "
+                + taskList.getTaskList().size() + " tasks in the list.");
+    }
+
     /**
      * Checks if the user wants to exit from the application.
      * 
-     * @return boolean whether the user wants to exit from the application.
+     * @return {@code false} as this command is not ready for user to exit the
+     *         application.
      */
     @Override
-    public boolean getIsExit() {
+    public boolean isExit() {
         return false;
     };
 }

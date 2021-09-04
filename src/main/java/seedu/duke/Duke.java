@@ -1,7 +1,5 @@
 package seedu.duke;
 
-import java.util.Scanner;
-
 import seedu.duke.commands.Command;
 import seedu.duke.commands.Parser;
 import seedu.duke.commands.Ui;

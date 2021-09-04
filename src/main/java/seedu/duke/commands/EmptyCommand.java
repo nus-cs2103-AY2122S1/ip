@@ -8,20 +8,22 @@ public class EmptyCommand extends Command {
     /**
      * Empty Command that does nothing.
      * 
-     * @param taskList the list of Tasks which is being stored.
+     * @param taskList contains an {@code ArrayList<Task>} where all {@code Task} is
+     *                 stored.
      * @param storage  the database where the Tasks are being saved for progression.
      */
     public String execute(TaskList taskList, Storage storage) {
-        return "Hi how can I help you?";
+        return Ui.EMPTY_COMMAND_REPLY;
     }
 
     /**
      * Checks if the user wants to exit from the application.
      * 
-     * @return boolean whether the user wants to exit from the application.
+     * @return {@code false} as this command is not ready for user to exit the
+     *         application.
      */
     @Override
-    public boolean getIsExit() {
+    public boolean isExit() {
         return false;
     }
 }

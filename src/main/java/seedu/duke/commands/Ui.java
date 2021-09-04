@@ -5,13 +5,9 @@ import java.util.ArrayList;
 import seedu.duke.tasks.Task;
 
 public class Ui {
+    public static final String DATA_LOCATION = "src/main/java/seedu/data/data.txt";
     public static final String logo = " ____        _        \n" + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n" + "| |_| | |_| |   <  __/\n" + "|____/ \\__,_|_|\\_\\___|\n";
-    // public static final String INDENTED_HORIZONTAL_LINE = "
-    // ____________________________________________________________";
-    // public static final String INDENT = " ";
-    // public static final String INTRODUCTION = "Hello! I'm Ricky\n" + Ui.INDENT +
-    // "What can I do for you?";
     public static final String INTRODUCTION = "Hello! I'm Ricky\n" + "What can I do for you?";
     public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
     public static final String DONE_MESSAGE = "Nice! I've marked this task as done:";
@@ -21,6 +17,8 @@ public class Ui {
     public static final String NO_TASK_MESSAGE = "Good day! You have no task in hand right now.";
     public static final String FIND_ZERO_SIZE = "We are not able to find anything with that keyword. Please try again.";
     public static final String FIND_LIST_MESSAGE = "Here are the matching tasks in your list:";
+    public static final String EMPTY_COMMAND_REPLY = "Hi how can I help you?";
+    public static final String ERROR_MESSAGE_FILE_NOT_FOUND = "DukeStorageLoadException: File not found in the given file path.";
     public static final String ERROR_MESSAGE_STORAGE_DELETE = "DukeStorageDeleteException: Unable to delete following task from the storage.";
     public static final String ERROR_MESSAGE_STORAGE_UPDATE = "DukeStorageUpdateException: Unable to update data into the storage.";
     public static final String ERROR_MESSAGE_STORAGE_SAVE = "DukeStorageSaveException: Unable to write data into storage.";
@@ -29,7 +27,7 @@ public class Ui {
     public static final String ERROR_MESSAGE_ACTION_OUT_OF_BOUND = "DukeActionOutOfBoundException: There is no such index from the storage.";
 
     /**
-     * Helps to print out the common Ui Messages with proper formatting.
+     * Prints out the common Ui Messages with proper formatting.
      * 
      * @param message is the message which will be printed.
      */
@@ -47,13 +45,6 @@ public class Ui {
     }
 
     /**
-     * Prints the bye message.
-     */
-    public static String printBye() {
-        return Ui.printMessage(Ui.BYE_MESSAGE);
-    }
-
-    /**
      * Prints the list of tasks with numbering from the given taskList passed to
      * this function.
      * 
@@ -67,13 +58,10 @@ public class Ui {
         if (taskList.size() == 0) {
             return Ui.printMessage(zeroSizeMsg);
         }
-        // message = Ui.INDENTED_HORIZONTAL_LINE + "\n" + Ui.INDENT + listMsg + "\n";
         message = listMsg + "\n";
         for (int i = 0; i < taskList.size(); i++) {
-            // message += Ui.INDENT + (i + 1) + ". " + taskList.get(i).toString() + "\n";
             message += (i + 1) + ". " + taskList.get(i).toString() + "\n";
         }
-        // message += Ui.INDENTED_HORIZONTAL_LINE + "\n\n";
         return message;
     }
 }

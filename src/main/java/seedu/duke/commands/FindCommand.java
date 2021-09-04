@@ -7,32 +7,34 @@ import seedu.duke.storage.TaskList;
 import seedu.duke.tasks.Task;
 
 public class FindCommand extends Command {
-    private final String find;
+    private final String word;
 
-    public FindCommand(String find) {
-        this.find = find;
+    public FindCommand(String word) {
+        this.word = word;
     }
 
     /**
-     * Helps to find a list of Tasks which matches the user description when this
+     * Finds an {@code ArrayList<Task>} which matches the user description when this
      * command is executed.
      * 
-     * @param taskList the list of Tasks which is being stored.
+     * @param taskList contains an {@code ArrayList<Task>} where all {@code Task} is
+     *                 stored.
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
     public String execute(TaskList taskList, Storage storage) {
-        ArrayList<Task> foundList = taskList.find(this.find);
+        ArrayList<Task> foundList = taskList.find(this.word);
         return Ui.printList(foundList, Ui.FIND_ZERO_SIZE, Ui.FIND_LIST_MESSAGE);
     }
 
     /**
      * Checks if the user wants to exit from the application.
      * 
-     * @return boolean whether the user wants to exit from the application.
+     * @return {@code false} as this command is not ready for user to exit the
+     *         application.
      */
     @Override
-    public boolean getIsExit() {
+    public boolean isExit() {
         return false;
     }
 }

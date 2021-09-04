@@ -16,9 +16,10 @@ public class UiCommand extends Command {
     }
 
     /**
-     * Helps to print UI message for the user when command is executed.
+     * Prints UI message for the user when command is executed.
      * 
-     * @param taskList the list of Tasks which is being stored.
+     * @param taskList contains an {@code ArrayList<Task>} where all {@code Task} is
+     *                 stored.
      * @param storage  the database where the Tasks are being saved for progression.
      */
     @Override
@@ -29,10 +30,11 @@ public class UiCommand extends Command {
     /**
      * Checks if the user wants to exit from the application.
      * 
-     * @return boolean whether the user wants to exit from the application.
+     * @return {@code false} as this command is not ready for user to exit the
+     *         application.
      */
     @Override
-    public boolean getIsExit() {
+    public boolean isExit() {
         return false;
     }
 }

@@ -5,9 +5,8 @@ public class Events extends Task {
     /**
      * Constructor. Default having the isDone parameter to be set as false.
      * 
-     * @param description description of the current Events object.
-     * @param dateTime    is the description of the location and time for the
-     *                    Events.
+     * @param description description of the current {@code Events} object.
+     * @param dateTime    is the description of the location and time for the event.
      */
     public Events(String description, String dateTime) {
         super(description, dateTime);
@@ -16,10 +15,11 @@ public class Events extends Task {
     /**
      * Second Constructor. Initialising the parameters of the Events.
      * 
-     * @param description is the description of the Events.
+     * @param description is the description of the {@code Events}.
      * @param dateTime    is the description of the location and time for the
-     *                    Events.
-     * @param isDone      determine whether the Events are completed or not.
+     *                    {@code Events}.
+     * @param isDone      determine whether the current {@code Events} is completed
+     *                    or not.
      */
     public Events(String description, String dateTime, boolean isDone) {
         super(description, dateTime, isDone);
@@ -37,10 +37,10 @@ public class Events extends Task {
     }
 
     /**
-     * Marks the current Events as done.
+     * Marks the current {@code Events} as done.
      * 
-     * @return a new Events object with the same description and dayTime, but
-     *         setting isDone property to be true
+     * @return a new {@code Events} object with the same description and dayTime,
+     *         but setting isDone property to be true
      */
     @Override
     public Events markAsDone() {
@@ -48,9 +48,9 @@ public class Events extends Task {
     }
 
     /**
-     * Describes the current Events object.
+     * Describes the current {@code Events} object.
      * 
-     * @return a description of the current Events object.
+     * @return a description of the current {@code Events} object.
      */
     @Override
     public String toString() {
