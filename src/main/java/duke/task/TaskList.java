@@ -2,6 +2,7 @@ package duke.task;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 import duke.io.Ui;
 
@@ -71,15 +72,10 @@ public class TaskList {
      * @return String that represents the list of task.
      */
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            Task task = taskList.get(i);
-            sb.append(task.toDataFormat());
-            if (i != taskList.size() - 1) {
-                sb.append(System.lineSeparator());
-            }
-        }
-        return sb.toString();
+        return taskList
+                .stream()
+                .map(Task::toDataFormat)
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 
     /**
