@@ -6,6 +6,8 @@ public class Ui {
     private static final String LINE = "\t_________________________________________________\n";
     private static final String GREET = "Hi, my name is Nee ´･ᴗ･`. How can I help you?";
     private static final String EXIT = "Goodbye!~";
+    private static final String HELP = "Supported commands:\n" +
+            "todo, deadline, event, done, delete, find, list, bye";
 
     private final Scanner sc;
 
@@ -34,6 +36,10 @@ public class Ui {
     public void print(String input) {
         String s = LINE + "\t%s\n" + LINE;
         System.out.printf(s, input.replaceAll("\n", "\n\t"));
+    }
+
+    public String getHelp() {
+        return HELP;
     }
 
     /**

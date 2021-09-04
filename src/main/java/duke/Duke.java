@@ -56,6 +56,10 @@ public class Duke {
             return ui.close();
         }
 
+        if (input.equals("help")) {
+            return ui.getHelp();
+        }
+
         String response;
         try {
             response = Parser.parse(input).execute(tasks);
@@ -78,7 +82,9 @@ public class Duke {
 
         while (!(input = ui.getCommand()).equals("bye")) {
             try {
-                String output = Parser.parse(input).execute(tasks);
+                String output = input.equals("help")
+                        ? ui.getHelp()
+                        : Parser.parse(input).execute(tasks);
                 ui.print(output);
                 storage.saveData(tasks.getTasks());
             } catch (DukeException | IOException e) {
