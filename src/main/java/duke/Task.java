@@ -54,8 +54,7 @@ public class Task {
     public String toString() {
         if (this.isDone) {
             return " [X] " + this.body;
-        } else {
-            return " [ ] " + this.body;
         }
+        return " [ ] " + this.body;
     }
 }

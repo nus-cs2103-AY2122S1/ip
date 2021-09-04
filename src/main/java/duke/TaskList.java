@@ -38,12 +38,7 @@ public class TaskList {
      * @param task Task to replace with
      */
     public void replaceTask(int index, Task task) {
-        if (index >= this.tasks.size() || index < 0) {
-            DukeException exception = new DukeException("Number out of range!");
-            System.out.println(exception);
-        } else {
-            this.tasks.set(index, task);
-        }
+        this.tasks.set(index, task);
     }
 
     /**
@@ -51,11 +46,6 @@ public class TaskList {
      * @param index Index of task to be deleted
      */
     public void deleteTask(int index) {
-        if (index >= this.tasks.size() || index < 0) {
-            DukeException exception = new DukeException("Number out of range!");
-            System.out.println(exception);
-        } else {
-            this.tasks.remove(index);
-        }
+        this.tasks.remove(index);
     }
 }

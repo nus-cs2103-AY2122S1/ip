@@ -55,12 +55,11 @@ public class Event extends Task {
                     + " (at: "
                     + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                     + ")";
-        } else {
-            return "[E] [ ]"
-                    + this.getBody()
-                    + " (at: "
-                    + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
-                    + ")";
         }
+        return "[E] [ ]"
+                + this.getBody()
+                + " (at: "
+                + this.date.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + ")";
     }
 }

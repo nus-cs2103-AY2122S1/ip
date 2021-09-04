@@ -55,12 +55,11 @@ public class Deadline extends Task {
                     + " (by: "
                     + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                     + ")";
-        } else {
-            return "[D] [ ]"
-                    + this.getBody()
-                    + " (by: "
-                    + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
-                    + ")";
         }
+        return "[D] [ ]"
+                + this.getBody()
+                + " (by: "
+                + this.deadline.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
+                + ")";
     }
 }

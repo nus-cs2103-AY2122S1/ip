@@ -10,6 +10,7 @@ public abstract class Command {
      * @param tasks <code>TaskList</code> containing saved tasks
      * @param ui <code>Ui</code> responsible for user interactions
      * @param storage <code>Storage</code> responsible for saving tasks to drive
+     * @return corresponding message
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage);
 
