@@ -111,4 +111,26 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return this.taskList;
     }
+
+    public void deleteMultipleTasks(ArrayList<Integer> taskIndices) {
+        for (int i = taskIndices.size() - 1; i >= 0; i--) {
+            this.deleteTask(taskIndices.get(i));
+        }
+    }
+
+    public void completeMultipleTasks(ArrayList<Integer> taskIndices) throws LifelineException {
+        for (int i = taskIndices.size() - 1; i >= 0; i--) {
+            this.completeTask(taskIndices.get(i));
+        }
+    }
+
+    public int getNumberOfUncompletedTasks() {
+        int uncompletedTasks = 0;
+        for (int i = 0; i < taskList.size(); i++) {
+            if (!taskList.get(i).isDone()) {
+                uncompletedTasks++;
+            }
+        }
+        return uncompletedTasks;
+    }
 }
