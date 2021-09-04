@@ -35,7 +35,11 @@ public class Ui {
         this.displayText(this.WELCOME_MESSAGE);
     }
 
-
+    /**
+     * Displays welcome message when Duke program starts.
+     *
+     * @return string welcome message.
+     */
     public String welcomeMessageGui() {
         return WELCOME_MESSAGE;
     }
@@ -47,7 +51,11 @@ public class Ui {
         this.displayText(GOODBYE_MESSAGE);
     }
 
-
+    /**
+     * Displays goodbye message when user inputs "bye".
+     *
+     * @return string goodbye message.
+     */
     public String goodbyeMessageGui() {
         return GOODBYE_MESSAGE;
     }
@@ -167,7 +175,6 @@ public class Ui {
         }
 
         String message = "";
-
         for (int i = 0; i < taskList.size(); i++) {
             String inputMessage = String.format("%d. %s", i + 1, taskList.get(i).toString());
             message += inputMessage + "\n";
