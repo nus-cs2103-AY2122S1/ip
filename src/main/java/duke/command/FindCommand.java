@@ -4,9 +4,7 @@ import duke.FileController;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
-import java.util.ArrayList;
-
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private String toFind;
 

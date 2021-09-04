@@ -18,6 +18,7 @@ public class MarkDoneCommand extends Command {
             throw new InvalidOperationDukeException("Number is out of bounds");
         }
         tasks.get(index - 1).markDone();
+
         if (!fc.writeText(tasks.serialize())) {
             throw new UnsavedChangesException();
         }
