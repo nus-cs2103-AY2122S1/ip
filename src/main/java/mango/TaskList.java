@@ -29,6 +29,7 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
+        assert tasks != null;
         this.listIndex = tasks.size();
     }
 
@@ -81,7 +82,7 @@ public class TaskList {
             }
             break;
         default:
-            throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
 
         tasks.add(listIndex, newTask);
@@ -93,6 +94,7 @@ public class TaskList {
             word = "tasks";
         }
 
+        assert newTask != null;
         String output = "Got it. I've added this task:\n"
                 + String.format("   [%s][%s] %s\n", newTask.getType(), newTask.getStatusIcon(), newTask.getDescription())
                 + String.format("Now you have %d %s in the list.%n", listIndex + 1, word);
