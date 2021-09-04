@@ -140,7 +140,7 @@ public class TaskList {
      * @param keywords Keywords to be found among all tasks.
      * @return A list of matched tasks.
      */
-    public List<Task> findTask(String... keywords) {
+    public List<Task> findMatchedTasks(String... keywords) {
         Stream<Task> matchedTasksStream = Stream.empty();
         for (String keyword : keywords) {
             if (keyword.isEmpty()) {
