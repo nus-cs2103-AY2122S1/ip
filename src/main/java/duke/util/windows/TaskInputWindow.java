@@ -2,6 +2,7 @@ package duke.util.windows;
 
 import java.time.LocalDate;
 
+import duke.util.controller.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tab;
@@ -9,7 +10,7 @@ import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import duke.util.controller.Duke;
+
 
 /**
  * Input window for tasks to be sent to the Duke.

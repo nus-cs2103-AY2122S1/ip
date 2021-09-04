@@ -3,8 +3,6 @@ package duke.util.tasks;
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
-import javafx.collections.ListChangeListener;
-
 
 
 

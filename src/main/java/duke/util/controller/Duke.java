@@ -4,10 +4,6 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
-import javafx.scene.text.Text;
 import duke.util.commands.AddCommand;
 import duke.util.commands.CommandList;
 import duke.util.parser.Parser;
@@ -20,6 +16,11 @@ import duke.util.tasks.Task;
 import duke.util.tasks.TaskList;
 import duke.util.tasks.ToDo;
 import duke.util.ui.Ui;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.ListView;
+import javafx.scene.text.Text;
+
 
 
 /**

@@ -4,10 +4,10 @@ import duke.util.commons.Messages;
 import duke.util.tasks.Task;
 import duke.util.tasks.TaskList;
 import duke.util.ui.Ui;
+
 /**
  * Command representing the addition of a
  * task to the task list.
- *
  */
 public class AddCommand implements Command {
     private final TaskList tasks;

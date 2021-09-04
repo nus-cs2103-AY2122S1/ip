@@ -2,6 +2,8 @@ package duke.util.windows;
 
 import java.io.IOException;
 
+import duke.util.controller.Duke;
+import duke.util.tasks.Task;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,8 +19,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import duke.util.controller.Duke;
-import duke.util.tasks.Task;
+
 
 
 
