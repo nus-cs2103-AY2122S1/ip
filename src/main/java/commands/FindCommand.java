@@ -32,6 +32,9 @@ public final class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
+        assert lst != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         String target = "";
         for (int i = 1; i < getInput().size(); i++) {
             if (i + 1 < getInput().size()) {

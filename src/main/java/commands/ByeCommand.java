@@ -32,7 +32,9 @@ public final class ByeCommand extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
-        //Duke.terminate();
+        assert lst != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         return "Bye. Hope to see you again soon!";
     }
 }

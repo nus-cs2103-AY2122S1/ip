@@ -32,6 +32,9 @@ public final class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
+        assert lst != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         return lst.getList();
     }
 }

@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
  * as per input by user.
  */
 public final class DeadLineTask extends Task {
+
     /** Stores the type of task information that identifies a DeadlineTask */
     private final String taskType = "[D]";
 
@@ -49,6 +50,7 @@ public final class DeadLineTask extends Task {
     }
 
     private LocalDate convertDate(String input) {
+        assert input != null : "no date detected";
         String[] date = input.substring(0, input.length() - 4).split("/");
         int day = Integer.parseInt(date[0].replaceAll(" ", ""));
         int month = Integer.parseInt(date[1].replaceAll(" ", ""));
@@ -111,10 +113,10 @@ public final class DeadLineTask extends Task {
      */
     @Override
     public String getSaveFormat() {
-        if (super.getStatus().equals("[ ]")) {
-            return "D" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 0;
+        if (getStatus().equals("[ ]")) {
+            return "D" + "|" + getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 0;
         } else {
-            return "D" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 1;
+            return "D" + "|" + getSimpleTaskDescription().strip() + "|" + this.dueDate + "|" + 1;
         }
     }
 }

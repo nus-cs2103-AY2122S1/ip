@@ -38,7 +38,7 @@ public class Task {
         } else {
             result = "You have already completed this task before!";
         }
-        Ui.showInput(result, this.getType() + isDone + " " + this.getDescription());
+        Ui.showInput(result, getType() + isDone + " " + getDescription());
     }
 
     /**
