@@ -43,8 +43,8 @@ public class TaskList {
     }
 
     /**
-     * Gets the number of tasks in the tasklist.
-     * @return
+     * Gets the number of tasks in the task list.
+     * @return the size of the task list.
      */
     public int getSize() {
         return tasks.size();
@@ -70,7 +70,7 @@ public class TaskList {
         ArrayList<Task> result = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task temp = tasks.get(i);
-            if (tasks.get(i).filterByKeyword(keyword)) {
+            if (temp.filterByKeyword(keyword)) {
                 result.add(temp);
             }
         }

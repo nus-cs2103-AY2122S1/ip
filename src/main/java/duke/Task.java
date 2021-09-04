@@ -10,7 +10,7 @@ public class Task {
     /**
      * Class Constructor that creates a task based on the description.
      *
-     * @param description
+     * @param description description of a task.
      */
     public Task(String description) {
         this.description = description;
@@ -55,6 +55,4 @@ public class Task {
     public String toHistory() {
         return " | " + getStatusIcon() + " | " + this.description;
     }
-
-
 }

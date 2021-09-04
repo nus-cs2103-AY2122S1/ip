@@ -1,4 +1,5 @@
 package duke;
+import java.io.IOException;
 
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -8,13 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Controller for duke.MainWindow. Provides the layout for the other controls.
@@ -48,13 +46,13 @@ public class MainWindow extends Stage {
     }
 
     /**
-     * initiatises the
+     * Initialises the window in the application.
      */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! I'm Duke\n" + "What can I do for you?", dukeImage)
+                DialogBox.getDukeDialog(duke.greet(), dukeImage)
         );
     }
 
@@ -71,6 +69,8 @@ public class MainWindow extends Stage {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        assert input != null : "User should have entered something";
+        assert response != null : "Duke should return something";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

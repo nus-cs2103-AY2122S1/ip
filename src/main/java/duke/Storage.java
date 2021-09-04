@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -18,8 +19,8 @@ public class Storage {
      * @param filePath where the storage file is at.
      */
     public Storage (String filePath) {
-        File temp = new File(filePath);
         try {
+            File temp = new File(filePath);
             temp.getParentFile().mkdir();
             temp.createNewFile();
             this.file = temp;
@@ -33,20 +34,18 @@ public class Storage {
      * and returns a ArrayList of Tasks from the storage.
      *
      * @return ArrayList of Task that is stored.
+     * @throws IOException When the file can not be accessed.
      */
-    public ArrayList<Task> parseFile () {
+    public ArrayList<Task> parseFile () throws IOException {
         ArrayList<Task> history = new ArrayList<Task>();
-        try {
-            FileReader fileReader = new FileReader(file);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            String currentLine;
-            while ((currentLine = bufferedReader.readLine()) != null) {
-                Task temp = parseTask(currentLine);
-                history.add(temp);
-            }
-        } catch (Exception e) {
-            System.out.println("File is not found");
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        String currentLine;
+        while ((currentLine = bufferedReader.readLine()) != null) {
+            Task temp = parseTask(currentLine);
+            history.add(temp);
         }
+        bufferedReader.close();
         return history;
     }
 
@@ -104,7 +103,7 @@ public class Storage {
             bufferedWriter.write(text);
             bufferedWriter.newLine();
             bufferedWriter.close();
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Cant write to file");
         }
     }
