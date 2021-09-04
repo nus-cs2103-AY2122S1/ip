@@ -48,7 +48,8 @@ public class Storage {
         boolean dataPathExists = Files.exists(dirPath);
         if (!dataPathExists) {
             File dataDir = new File("data");
-            dataDir.mkdir();
+            boolean isCreated = dataDir.mkdir();
+            assert isCreated : "The directory /data should be created";
         }
 
         try {
