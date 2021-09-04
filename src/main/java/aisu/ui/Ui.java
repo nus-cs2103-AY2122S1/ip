@@ -96,13 +96,6 @@ public class Ui {
     }
 
     /**
-     * Displays the goodbye message.
-     */
-    public void showGoodbyeMessage() {
-        this.out.println(GOODBYE_MESSAGE);
-    }
-
-    /**
      * Displays the error message.
      * @param message AisuException
      */
@@ -128,17 +121,6 @@ public class Ui {
         }
 
         return sb.toString();
-    }
-
-    /**
-     * Shows message(s) to the user.
-     *
-     * @param message Message to be shown.
-     */
-    public void showToUser(String... message) {
-        for (String m : message) {
-            this.out.println(m);
-        }
     }
 
     /**
