@@ -100,10 +100,6 @@ public class Storage {
                 }
             }
         }
-        System.out.println("These are your current activities:");
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(tasks.get(i).toString());
-        }
         return tasks;
     }
 
