@@ -91,18 +91,18 @@ public class Parser {
     /**
      * Parses the user input and runs the corresponding command.
      *
-     * @param readIn A string containing the user input.
+     * @param userInput A string containing the user input.
      * @return A TaskList containing the updated Tasks after command is parsed.
      * @throws DukeException A Duke-specific exception that occurs when user input is parsed.
      */
-    public String parse(String readIn) throws DukeException {
-        if (readIn.equals("bye")) {
+    public String parse(String userInput) throws DukeException {
+        if (userInput.equals("bye")) {
             this.toExit = true;
             return "Bye. Hope to see you again soon!";
-        } else if (readIn.equals("list")) {
+        } else if (userInput.equals("list")) {
             return list(this.tasks);
         } else {
-            String[] commandArguments = readIn.split(" ", 2);
+            String[] commandArguments = userInput.split(" ", 2);
             String command = commandArguments[0];
             String arguments = "";
             if (commandArguments.length == 2) {
