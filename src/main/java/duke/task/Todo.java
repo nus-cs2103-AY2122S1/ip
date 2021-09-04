@@ -33,7 +33,6 @@ public class Todo extends Task {
      * @return To-do constructed from the given description.
      */
     public static Task setTodo(String input) {
-        Task todo = new Todo(input);
-        return todo;
+        return new Todo(input);
     }
 }

@@ -1,8 +1,12 @@
 package duke.main;
 
+import java.util.function.BiFunction;
+
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
+import duke.exception.InvalidParamException;
 import duke.exception.NoDescriptionException;
+import duke.exception.OutOfBoundsOfTaskListException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -21,8 +25,8 @@ public class Parser {
      * Task actions include deleting a task (DELETE) and marking a Task as done (DONE).
      */
     private enum TaskAction {
-        DELETE("delete", 7, "deleted"),
-        DONE("done", 5, "marked as done");
+        DELETE("delete", 7, "deleted", TaskList::removeTask),
+        DONE("done", 5, "marked as done", TaskList::markDoneInTaskList);
 
         /** Name of the task action */
         private String name;
@@ -30,6 +34,8 @@ public class Parser {
         private int substringIndex;
         /** Message fragment when the action is successfully completed */
         private String successMessage;
+        /** The method to act on the Task */
+        private BiFunction<TaskList, Integer, Task> actionOnTask;
 
         /**
          * Constructs a TaskAction.
@@ -37,11 +43,54 @@ public class Parser {
          * @param name Name of the TaskAction.
          * @param substringIndex Index to substring the input so as to remove the first word (command word).
          * @param successMessage Message fragment when the action is successfully completed.
+         * @param actionOnTask Method used to complete the action on a Task.
          */
-        TaskAction(String name, int substringIndex, String successMessage) {
+        TaskAction(String name, int substringIndex, String successMessage,
+                   BiFunction<TaskList, Integer, Task> actionOnTask) {
             this.name = name;
             this.substringIndex = substringIndex;
             this.successMessage = successMessage;
+            this.actionOnTask = actionOnTask;
+        }
+    }
+
+    /**
+     * Enum that holds information about a Task attempting to be added.
+     */
+    private enum TaskToAdd {
+        TODO("todo ", 5, Todo::setTodo),
+        DEADLINE("deadline ", 9, Deadline::setDeadline),
+        EVENT("event ", 6, Event::setEvent);
+
+        /**
+         * Acts similar to Java 8's functional interface `Function`, but its method throws an InvalidParamException.
+         *
+         * @param <T> The type that is input into the method
+         * @param <R> The type that is returned by the method
+         */
+        @FunctionalInterface
+        public interface CheckedFunction<T, R> {
+            R apply(T t) throws InvalidParamException;
+        }
+
+        /** What the user input should start with to refer to this Task */
+        private String inputPrefix;
+        /** Index to substring the user input with */
+        private int substringIndex;
+        /** The CheckedFunction used to return the Task to be added */
+        private CheckedFunction<String, Task> setTask;
+
+        /**
+         * Constructs the TaskToAdd.
+         *
+         * @param inputPrefix String that the input should start with to indicate what Task to add.
+         * @param substringIndex Index to substring the input so as to remove the first word (command word).
+         * @param setTask CheckedFunction used to return the Task to be added.
+         */
+        TaskToAdd(String inputPrefix, int substringIndex, CheckedFunction<String, Task> setTask) {
+            this.inputPrefix = inputPrefix;
+            this.substringIndex = substringIndex;
+            this.setTask = setTask;
         }
     }
 
@@ -60,31 +109,39 @@ public class Parser {
      * @param input Input string from the user.
      */
     public void handleInput(String input) {
-        if (input.equals("bye")) {
+        try {
+            if (input.equals("bye")) {
 
-            Duke.exit();
+                Duke.exit();
 
-        } else if (input.equals("list")) {
+            } else if (input.equals("list")) {
 
-            taskList.printList();
+                this.taskList.printList();
 
-        } else if (input.startsWith("find ")) {
+            } else if (input.startsWith("find ")) {
 
-            findTask(input);
+                findTask(input);
 
-        } else if (input.startsWith("done ")) {
+            } else if (input.startsWith("done ")) {
 
-            alterTask(input, Parser.TaskAction.DONE);
+                alterTask(input, Parser.TaskAction.DONE);
 
-        } else if (input.startsWith("delete ")) {
+            } else if (input.startsWith("delete ")) {
 
-            // If successfully deleted task, then print current number of tasks.
-            if (alterTask(input, Parser.TaskAction.DELETE)) {
-                taskList.printNumberOfTasks();
+                alterTask(input, Parser.TaskAction.DELETE);
+                this.taskList.printNumberOfTasks();
+
+            } else if (isTaskCommand(input)) {
+
+                vetoTask(input);
+
+            } else {
+
+                throw new InvalidInputException();
+
             }
-
-        } else {
-            vetoTask(input);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -93,16 +150,11 @@ public class Parser {
      *
      * @param input Input string from the user.
      */
-    private void findTask(String input) {
-        final int FIND_SUBSTRING_INDEX = 5;
-        try {
-            System.out.println("These tasks have descriptions that contain the phrase '"
-                    + input.substring(FIND_SUBSTRING_INDEX) + "'!\n");
-            taskList.printAllContains(input.substring(FIND_SUBSTRING_INDEX));
-        } catch (StringIndexOutOfBoundsException e) {
-            System.out.println("Please include a search term after the word 'find'.\n"
-                    + "i.e. Find meeting");
-        }
+    private void findTask(String input){
+        String searchTerm = input.split(" ", 2)[1];
+        System.out.println("These tasks have descriptions that contain the phrase:\n"
+                + "'" + searchTerm + "'\n");
+        this.taskList.printAllContains(searchTerm);
     }
 
     /**
@@ -110,38 +162,30 @@ public class Parser {
      *
      * @param input Input string from the user.
      * @param action TaskAction to be done.
-     * @return True if the TaskList is successfully altered, false otherwise.
+     * @throws InvalidParamException If the information of the action in the input is in the wrong format.
      */
-    private boolean alterTask(String input, Parser.TaskAction action) {
+    private void alterTask(String input, Parser.TaskAction action)
+            throws InvalidParamException, OutOfBoundsOfTaskListException {
         try {
 
             Task taskToBeAltered;
 
-            int index = Integer.parseInt(input.substring(action.substringIndex)) - 1;
+            // For user, the list starts at 1. However, our list index starts at 0
+            int taskIndex = Integer.parseInt(input.substring(action.substringIndex)) - 1;
 
-            if (action == Parser.TaskAction.DELETE) {
-                // If delete
-                taskToBeAltered = taskList.removeTask(index);
-            } else {
-                // If done
-                taskToBeAltered = taskList.markDoneInTaskList(index);
-            }
-
+            taskToBeAltered = action.actionOnTask.apply(this.taskList, taskIndex);
             System.out.println("This task is successfully " + action.successMessage + "!\n\n"
                     + "    " + taskToBeAltered);
-            return true;
 
         } catch (StringIndexOutOfBoundsException | NumberFormatException e1) {
 
-            System.out.println("Please specify which task you would like to have\n"
+            throw new InvalidParamException("Please specify which task you would like to have\n"
                     + action.successMessage + " by adding a single number after '" + action.name + "'!\n"
                     + "i.e. " + action.name + " 1");
-            return false;
 
         } catch (IndexOutOfBoundsException e2) {
 
-            System.out.println("There is no task under that number!");
-            return false;
+            throw new OutOfBoundsOfTaskListException();
 
         }
     }
@@ -151,46 +195,27 @@ public class Parser {
      * If the input contains the appropriate information, the task is added.
      *
      * @param input Input string from the user.
+     * @throws NoDescriptionException If the description of the task is empty.
+     * @throws InvalidParamException If the information of the task is in the wrong format.
      */
-    private void vetoTask(String input) {
-        Task newTask = null;
+    private void vetoTask(String input) throws NoDescriptionException, InvalidParamException {
+        checkDescription(input);
+        Task newTask = decideTask(input);
+        addTask(newTask);
+    }
 
-        try {
-            if (!input.startsWith("todo ") && !input.startsWith("deadline ") && !input.startsWith("event ")) {
-                throw new InvalidInputException();
-            }
-            // If it passes the if block, means it is a task-setting command
-
-            // Check if a task description is present
-            checkDescription(input);
-
-            if (input.startsWith("todo ")) {
-
-                // Set the to-do
-                newTask = Todo.setTodo(input.substring(5));
-
-            } else if (input.startsWith("deadline ")) {
-
-                // Set the deadline
-                newTask = Deadline.setDeadline(input.substring(9));
-
-            } else if (input.startsWith("event ")) {
-
-                // Set the event
-                newTask = Event.setEvent(input.substring(6));
-
-            }
-        } catch (DukeException e1) {
-            System.out.println(e1.getMessage());
+    /**
+     * Looks through all possible TaskToAdd and check if the input has a prefix that coincides with any of them.
+     *
+     * @param input Input string from the user.
+     * @return True if the input is a command to add a Task, false otherwise.
+     */
+    private boolean isTaskCommand(String input) {
+        boolean result = false;
+        for (TaskToAdd task : TaskToAdd.values()) {
+            result = result || input.startsWith(task.inputPrefix);
         }
-
-        // If there was no error, then add task.
-        if (newTask != null) {
-            taskList.addTask(newTask);
-            System.out.println("You have successfully added the following task!\n\n"
-                    + "    " + newTask);
-            taskList.printNumberOfTasks();
-        }
+        return result;
     }
 
     /**
@@ -205,5 +230,35 @@ public class Parser {
         if (inputArray.length == 1) {
             throw new NoDescriptionException(inputArray[0]);
         }
+    }
+
+    /**
+     * Looks through the possible tasks that can be added and check if the input matches. If yes, add it.
+     *
+     * @param input Input string from the user.
+     * @return Task to be added into the TaskList.
+     * @throws InvalidParamException If the information of the task is in the wrong format.
+     */
+    private Task decideTask(String input) throws InvalidParamException {
+        Task newTask = null;
+        for (TaskToAdd task : TaskToAdd.values()) {
+            if (input.startsWith(task.inputPrefix)) {
+                newTask = task.setTask.apply(input.substring(task.substringIndex));
+                break;
+            }
+        }
+        return newTask;
+    }
+
+    /**
+     * Adds the given Task into the TaskList and prints the confirmation.
+     *
+     * @param task Task to add into the TaskList.
+     */
+    private void addTask(Task task) {
+        this.taskList.addTask(task);
+        System.out.println("You have successfully added the following task!\n\n"
+                + "    " + task);
+        this.taskList.printNumberOfTasks();
     }
 }
