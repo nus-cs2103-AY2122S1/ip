@@ -94,16 +94,16 @@ public class Deadline extends Task {
     public String toString() {
         switch (deadlineDateType) {
 
-            case LocalDate:
-                return "[D]" + super.toString() + " (by: "
+        case LocalDate:
+            return "[D]" + super.toString() + " (by: "
                         + this.deadlineDate.format((DateTimeFormatter.ofPattern("MMM d yyyy"))) + ")";
 
-            case LocalDateTime:
-                return "[D]" + super.toString() + " (by: "
+        case LocalDateTime:
+            return "[D]" + super.toString() + " (by: "
                         + this.deadlineDateTime.format((DateTimeFormatter.ofPattern("MMM d yyyy HHmm")))+ ")";
 
-            default:
-                return "[D]" + super.toString() + " (by: "
+        default:
+            return "[D]" + super.toString() + " (by: "
                         + this.deadlineYearMonth.format((DateTimeFormatter.ofPattern("MMM yyyy"))) + ")";
         }
     }

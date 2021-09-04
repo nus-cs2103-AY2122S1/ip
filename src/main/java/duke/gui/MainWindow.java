@@ -2,6 +2,8 @@ package duke.gui;
 
 import duke.Duke;
 import duke.data.Ui;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +11,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -28,8 +32,14 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/CoffeeSip.png"));
 
     @FXML
+    private void sendIntroMessage() {
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage));
+    }
+
+    @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        sendIntroMessage();
     }
 
     public void setDuke(Duke d) {
@@ -45,13 +55,20 @@ public class MainWindow extends AnchorPane {
         assert duke != null : "Duke should have been initialised first!";
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        if (response.equals(Ui.showGoodbye())) {
-            System.exit(0);
-        }
         dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(input, userImage),
             DialogBox.getDukeDialog(response, dukeImage)
         );
+
+        // Referenced from https://github.com/zihaooo9/ip/commit/a9528849baeb23011b8225029e4ed8ea2b17235e
+        // @@author CheyanneSim-reused
+        if (response.contains(Ui.showGoodbye())) {
+            PauseTransition pause = new PauseTransition(Duration.seconds(1.5));
+            pause.setOnFinished(event -> {
+                Platform.exit();
+            });
+            pause.play();
+        }
         userInput.clear();
     }
 }
