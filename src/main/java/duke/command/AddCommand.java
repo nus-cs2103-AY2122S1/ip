@@ -15,7 +15,7 @@ import duke.ui.Ui;
  */
 public class AddCommand extends Command {
     private String response;
-    private int type;
+    private Operation type;
 
     /**
      * Adds the command.
@@ -23,7 +23,7 @@ public class AddCommand extends Command {
      * @param response The content of user input.
      * @param type The type of adding command.
      */
-    public AddCommand(String response, int type) {
+    public AddCommand(String response, Operation type) {
         this.response = response;
         this.type = type;
     }
@@ -39,16 +39,16 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         Task task = new Task("");
         switch (type) {
-        case 1:
+        case TODO:
             task = new Todo(response.substring(5));
             break;
-        case 2:
+        case DEADLINE:
             String[] parts2 = response.substring(9).split(" /by ");
             String content2 = parts2[0];
             String time2 = parts2[1];
             task = new Deadline(content2, time2);
             break;
-        case 3:
+        case EVENT:
             String[] parts3 = response.substring(6).split(" /at ");
             String content3 = parts3[0];
             String time3 = parts3[1];

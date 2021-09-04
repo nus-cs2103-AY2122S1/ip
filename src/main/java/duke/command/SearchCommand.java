@@ -11,7 +11,7 @@ import duke.ui.Ui;
  * Represents what the search command does.
  */
 public class SearchCommand extends Command {
-    private int type;
+    private Operation type;
     private String response;
 
     /**
@@ -20,7 +20,7 @@ public class SearchCommand extends Command {
      * @param response The user input.
      * @param type The type of search command.
      */
-    public SearchCommand(String response, int type) {
+    public SearchCommand(String response, Operation type) {
         this.response = response;
         this.type = type;
     }
@@ -36,12 +36,12 @@ public class SearchCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList currList = new TaskList();
         switch (type) {
-        case 1:
+        case DATE:
             String preTime = response.substring(5);
             String actualTime = Task.dateAndTime(preTime);
             currList = tasks.tasksWithDate(actualTime);
             break;
-        case 2:
+        case FIND:
             String content = response.substring(5);
             currList = tasks.tasksWithContent(content);
             break;

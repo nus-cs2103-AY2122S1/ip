@@ -65,39 +65,16 @@ public class Storage {
             StringBuilder sb = new StringBuilder();
             ArrayList<Task> taskList = new ArrayList<>();
             while (s.hasNextLine()) {
-                String curr = s.nextLine();
-                int lens = curr.length();
+                String task = s.nextLine();
+                int lens = task.length();
                 // No content
                 if (lens == 0) {
                     return new ArrayList<>();
                 }
-                String oneLine = curr + System.lineSeparator();
+                String oneLine = task + System.lineSeparator();
                 sb.append(oneLine);
-
                 // Judge data input to add tasks.
-                char type = curr.charAt(0);
-                char done = curr.charAt(4);
-                if (type == 'T') {
-                    Todo todo = new Todo(curr.substring(8, lens));
-                    if (done == '1') {
-                        todo.markAsDone();
-                    }
-                    taskList.add(todo);
-                } else {
-                    String[] parts = curr.substring(8, lens).split(" ~ ");
-                    String content = parts[0];
-                    String by = parts[1];
-                    Task deadlineOrEvent;
-                    if (type == 'D') {
-                        deadlineOrEvent = new Deadline(content, by);
-                    } else {
-                        deadlineOrEvent = new Event(content, by);
-                    }
-                    if (done == '1') {
-                        deadlineOrEvent.markAsDone();
-                    }
-                    taskList.add(deadlineOrEvent);
-                }
+                addRelatedTasks(task, taskList, lens);
             }
             content = sb.toString();
             return taskList;
@@ -106,7 +83,31 @@ public class Storage {
             throw new LoadingException();
         }
     }
-
+    public void addRelatedTasks(String task, ArrayList<Task> taskList, int lens) {
+        char type = task.charAt(0);
+        char done = task.charAt(4);
+        if (type == 'T') {
+            Todo todo = new Todo(task.substring(8, lens));
+            if (done == '1') {
+                todo.markAsDone();
+            }
+            taskList.add(todo);
+        } else {
+            String[] parts = task.substring(8, lens).split(" ~ ");
+            String content = parts[0];
+            String by = parts[1];
+            Task deadlineOrEvent;
+            if (type == 'D') {
+                deadlineOrEvent = new Deadline(content, by);
+            } else {
+                deadlineOrEvent = new Event(content, by);
+            }
+            if (done == '1') {
+                deadlineOrEvent.markAsDone();
+            }
+            taskList.add(deadlineOrEvent);
+        }
+    }
     /**
      * Writes the text to data file, which overwrites initial storage.
      *
@@ -150,12 +151,12 @@ public class Storage {
             prefix = "1";
         }
         if (type == 'T') {
-            dataForm = "T | " + prefix + " | " + task.substring(8, lens);
+            dataForm = "T | " + prefix + " | " + task.substring(7, lens);
         } else {
             if (type == 'E') {
                 split = "at: ";
             }
-            String[] parts = task.substring(8, lens).split(split);
+            String[] parts = task.substring(7, lens).split(split);
             String content = parts[0];
             int lensContent = content.length();
             content = content.substring(0, lensContent - 2);

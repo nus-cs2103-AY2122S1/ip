@@ -38,22 +38,6 @@ public class Ui {
     }
 
     /**
-     * Returns formatted string output.
-     *
-     * @param r The input string.
-     * @return Formatted string.
-     */
-    public String getPattern(String r) {
-        StringBuilder result = new StringBuilder();
-        StringBuilder curr = new StringBuilder();
-        String empty = "   ";
-        curr.append("*".repeat(80));
-        String out = empty + curr + "\n" + empty + r + "\n" + empty + curr + "\n";
-        result.append(out);
-        return result.toString();
-    }
-
-    /**
      * Shows the error message.
      *
      * @param message

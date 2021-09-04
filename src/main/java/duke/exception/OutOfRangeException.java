@@ -7,6 +7,7 @@ package duke.exception;
  */
 public class OutOfRangeException extends DukeException {
     public OutOfRangeException(String message) {
-        super("The index for " + message + " is out of range,please choose another one.");
+        super("The index for " + message + " is out of range, no task of that index is there." +
+                " Please choose another one.");
     }
 }

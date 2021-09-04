@@ -55,19 +55,19 @@ public class Parser {
             Operation op = checkResponse(response, len);
             switch (op) {
             case DEADLINE:
-                return new AddCommand(response, 2);
-            case TODO:
-                return new AddCommand(response, 1);
+                return new AddCommand(response, op);
             case EVENT:
-                return new AddCommand(response, 3);
+                return new AddCommand(response, op);
+            case TODO:
+                return new AddCommand(response, op);
             case DONE:
                 return new MarkCommand(response);
             case DELETE:
                 return new DeleteCommand(response);
             case DATE:
-                return new SearchCommand(response, 1);
+                return new SearchCommand(response, op);
             case FIND:
-                return new SearchCommand(response, 2);
+                return new SearchCommand(response, op);
             default:
                 return null;
             }

@@ -66,7 +66,7 @@ public class MainWindow extends AnchorPane {
                 public void run() {
                     System.exit(0);
                 }
-            }, 2000);
+            }, 1500);
         }
     }
 
