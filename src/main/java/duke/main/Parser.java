@@ -1,6 +1,7 @@
 package duke.main;
 
 import java.util.function.BiFunction;
+import java.util.stream.Stream;
 
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
@@ -167,6 +168,7 @@ public class Parser {
     private void alterTask(String input, Parser.TaskAction action)
             throws InvalidParamException, OutOfBoundsOfTaskListException {
         try {
+
             Task taskToBeAltered;
 
             // For user, the list starts at 1. However, our list index starts at 0
@@ -211,11 +213,8 @@ public class Parser {
      * @return True if the input is a command to add a Task, false otherwise.
      */
     private boolean isTaskCommand(String input) {
-        boolean result = false;
-        for (TaskToAdd task : TaskToAdd.values()) {
-            result = result || input.startsWith(task.inputPrefix);
-        }
-        return result;
+        return Stream.of(TaskToAdd.values())
+                .anyMatch(x -> input.startsWith(x.inputPrefix));
     }
 
     /**
