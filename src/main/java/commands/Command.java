@@ -11,15 +11,15 @@ import ui.Ui;
  */
 public abstract class Command {
 
-    private final ArrayList<String> input;
+    private final ArrayList<String> userInput;
 
     /**
      * Constructs the Command object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public Command(ArrayList<String> s) {
-        this.input = s;
+    public Command(ArrayList<String> userInput) {
+        this.userInput = userInput;
     }
 
     /**
@@ -28,7 +28,7 @@ public abstract class Command {
      * @return the user's line of input
      */
     public ArrayList<String> getInput() {
-        return input;
+        return userInput;
     }
 
     /**

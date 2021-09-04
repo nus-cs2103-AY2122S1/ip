@@ -16,10 +16,10 @@ public final class ListCommand extends Command {
     /**
      * Constructs the ListCommand object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public ListCommand(ArrayList<String> s) {
-        super(s);
+    public ListCommand(ArrayList<String> userInput) {
+        super(userInput);
     }
 
     /**

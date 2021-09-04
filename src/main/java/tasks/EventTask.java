@@ -11,20 +11,13 @@ import java.util.regex.Pattern;
  * as per input by user.
  */
 public final class EventTask extends Task {
-    /**
-     * Stores the type of task information
-     * that identifies a EventTask.
-     */
+    /** Stores the type of task information that identifies a EventTask */
     private final String taskType = "[E]";
 
-    /**
-     * Stores the date information of an Event task.
-     */
+    /** Stores the date information of an Event task */
     private final String date;
 
-    /**
-     * Stores the date information as a LocalDate.
-     */
+    /** Stores the date information as a LocalDate */
     private LocalDate localDate;
 
     /**

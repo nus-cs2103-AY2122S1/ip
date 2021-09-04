@@ -10,14 +10,10 @@ import ui.Ui;
  */
 public class Task {
 
-    /**
-     * Description of the task.
-     */
+    /** Description of the task */
     private final String task;
 
-    /**
-     * Status of the task.
-     */
+    /** Status of the task */
     private String isDone;
 
     /**

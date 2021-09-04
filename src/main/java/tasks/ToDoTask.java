@@ -8,10 +8,7 @@ package tasks;
 public final class ToDoTask extends Task {
 
 
-    /**
-     * Stores the type of task information
-     * that identifies a ToDoTask.
-     */
+    /** Stores the type of task information that identifies a ToDoTask */
     private final String taskType = "[T]";
 
     /**

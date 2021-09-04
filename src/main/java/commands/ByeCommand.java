@@ -16,10 +16,10 @@ public final class ByeCommand extends Command {
     /**
      * Constructs the ByeCommand object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public ByeCommand(ArrayList<String> s) {
-        super(s);
+    public ByeCommand(ArrayList<String> userInput) {
+        super(userInput);
     }
 
     /**

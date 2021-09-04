@@ -16,10 +16,10 @@ public final class FindCommand extends Command {
     /**
      * Constructs the FindCommand object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public FindCommand(ArrayList<String> s) {
-        super(s);
+    public FindCommand(ArrayList<String> userInput) {
+        super(userInput);
     }
 
     /**
@@ -42,9 +42,9 @@ public final class FindCommand extends Command {
         }
         ArrayList<Task> tasksFound = lst.findTask(target);
         if (tasksFound.isEmpty()) {
-            return "No task tasks found!";
+            return "     No task tasks found!";
         } else {
-            String temp = "The tasks found are: \n";
+            String temp = "     The tasks found are: \n";
             for (int i = 0; i < tasksFound.size(); i++) {
                 if (i + 1 < tasksFound.size()) {
                     temp += "     " + (i + 1) + "." + tasksFound.get(i).getType()

@@ -17,10 +17,10 @@ public final class ToDoCommand extends Command {
     /**
      * Constructs the ToDoCommand object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public ToDoCommand(ArrayList<String> s) {
-        super(s);
+    public ToDoCommand(ArrayList<String> userInput) {
+        super(userInput);
     }
 
     /**
@@ -34,7 +34,7 @@ public final class ToDoCommand extends Command {
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
         if (getInput().size() < 2) {
-            return "Oops, you have left out the task description for todo!";
+            return "     Oops, you have left out the task description for todo!";
         } else {
             ToDoTask t = new ToDoTask(lst.filterInfo(getInput()));
             String result = lst.addTask(t);

@@ -2,6 +2,7 @@ package commands;
 
 import java.util.ArrayList;
 
+import duke.DukeException;
 import storage.Storage;
 import tasks.EventTask;
 import tasks.TaskList;
@@ -17,10 +18,10 @@ public final class EventCommand extends Command {
     /**
      * Constructs the EventCommand object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public EventCommand(ArrayList<String> s) {
-        super(s);
+    public EventCommand(ArrayList<String> userInput) {
+        super(userInput);
     }
 
     /**
@@ -39,11 +40,11 @@ public final class EventCommand extends Command {
             String result = lst.addTask(e);
             storage.resetFile(lst.getTasks());
             return result;
-        } catch (IllegalArgumentException e) {
+        } catch (DukeException e) {
             if (e.getMessage().equals("event")) {
-                return "Invalid input :(" + "\n" + "Please input in the form: 'event <Name> /at <Date>'.";
+                return "     Invalid input :(" + "\n" + "     Please input in the form: 'event <Name> /at <Date>'.";
             } else {
-                return e.getMessage() + "\n" + "I can't add an event without a date!";
+                return "     " + e.getMessage() + "\n" + "     I can't add an event without a date!";
             }
         }
     }

@@ -11,20 +11,13 @@ import java.util.regex.Pattern;
  * as per input by user.
  */
 public final class DeadLineTask extends Task {
-    /**
-     * Stores the type of task information
-     * that identifies a DeadlineTask.
-     */
+    /** Stores the type of task information that identifies a DeadlineTask */
     private final String taskType = "[D]";
 
-    /**
-     * Stores the do-by-date information.
-     */
+    /** Stores the do-by-date information */
     private final String dueDate;
 
-    /**
-     * Stores the do-by-date information as a LocalDate.
-     */
+    /** Stores the do-by-date information as a LocalDate */
     private LocalDate localDate;
 
     /**

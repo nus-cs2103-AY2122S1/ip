@@ -15,10 +15,10 @@ public final class DeleteCommand extends Command {
     /**
      * Constructs the DeleteCommand object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public DeleteCommand(ArrayList<String> s) {
-        super(s);
+    public DeleteCommand(ArrayList<String> userInput) {
+        super(userInput);
     }
 
 
@@ -33,14 +33,14 @@ public final class DeleteCommand extends Command {
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
         if (super.getInput().size() == 1) {
-            return "Unable to delete task without an index. Please input index :)\n"
-                    + "Please input in the form: 'delete <task index>'.\n"
-                    + "Note: list can be used to see the current tasks.";
+            return "     Unable to delete task without an index. Please input index :)\n"
+                    + "     Please input in the form: 'delete <task index>'.\n"
+                    + "     Note: list can be used to see the current tasks.";
         } else {
             if (lst.getTasks().isEmpty()) {
-                return "List is empty, no tasks to delete, looking good!";
+                return "     List is empty, no tasks to delete, looking good!";
             } else if (super.getInput().size() > 2) {
-                return "Please input in the form: 'delete <index>'.";
+                return "     Please input in the form: 'delete <index>'.";
             } else {
                 try {
                     int index = Integer.parseInt(super.getInput().get(1)) - 1;
@@ -48,10 +48,10 @@ public final class DeleteCommand extends Command {
                     storage.resetFile(lst.getTasks());
                     return result;
                 } catch (NumberFormatException e) {
-                    return "Please use a number instead :(";
+                    return "     Please use a number instead :(";
                 } catch (IndexOutOfBoundsException e) {
-                    return "Please input a valid index :)\n"
-                            + "Note: 'list' can be used to see the current tasks.";
+                    return "     Please input a valid index :)\n"
+                            + "     Note: 'list' can be used to see the current tasks.";
                 }
             }
         }

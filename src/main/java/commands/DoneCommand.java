@@ -17,10 +17,10 @@ public final class DoneCommand extends Command {
     /**
      * Constructs the DoneCommand object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public DoneCommand(ArrayList<String> s) {
-        super(s);
+    public DoneCommand(ArrayList<String> userInput) {
+        super(userInput);
     }
 
 
@@ -49,12 +49,12 @@ public final class DoneCommand extends Command {
             tasks.get(index).setIsDone();
             storage.resetFile(tasks);
         } catch (IndexOutOfBoundsException e) {
-            return "Please input a valid index :)\n"
-                    + "Note: 'list' can be used to see the current tasks.";
+            return "     Please input a valid index :)\n"
+                    + "     Note: 'list' can be used to see the current tasks.";
         } catch (NumberFormatException e) {
-            return "Please use a number instead :(";
+            return "     Please use a number instead :(";
         } catch (IllegalArgumentException e) {
-            return e.getMessage();
+            return "     " + e.getMessage();
         }
         return "";
     }

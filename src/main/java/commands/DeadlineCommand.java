@@ -2,6 +2,7 @@ package commands;
 
 import java.util.ArrayList;
 
+import duke.DukeException;
 import storage.Storage;
 import tasks.DeadLineTask;
 import tasks.TaskList;
@@ -17,10 +18,10 @@ public final class DeadlineCommand extends Command {
     /**
      * Constructs the DeadlineCommand object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public DeadlineCommand(ArrayList<String> s) {
-        super(s);
+    public DeadlineCommand(ArrayList<String> userInput) {
+        super(userInput);
     }
 
     /**
@@ -39,12 +40,13 @@ public final class DeadlineCommand extends Command {
             String result = lst.addTask(d);
             storage.resetFile(lst.getTasks());
             return result;
-        } catch (IllegalArgumentException e) {
+        } catch (DukeException e) {
             if (e.getMessage().equals("deadline")) {
-                return "Invalid input :(\n"
-                        + "Please input in the form: 'deadline <Name> /by <Date>'.";
+                return "     Invalid input :(\n"
+                        + "     Please input in the form: 'deadline <Name> /by <Date>'.";
             } else {
-                return e.getMessage() + "\n" + "Hey, no deadline recorded does not mean no deadline >:(";
+                return "     " + e.getMessage() + "\n"
+                        + "     Hey, no deadline recorded does not mean no deadline >:(";
             }
         }
     }

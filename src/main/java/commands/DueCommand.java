@@ -1,8 +1,10 @@
 package commands;
 
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import storage.Storage;
+import tasks.Task;
 import tasks.TaskList;
 import ui.Ui;
 
@@ -16,10 +18,10 @@ public final class DueCommand extends Command {
     /**
      * Constructs the DueCommand object.
      *
-     * @param s the entire line of user input
+     * @param userInput the entire line of user input
      */
-    public DueCommand(ArrayList<String> s) {
-        super(s);
+    public DueCommand(ArrayList<String> userInput) {
+        super(userInput);
     }
 
     /**
@@ -33,10 +35,22 @@ public final class DueCommand extends Command {
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
         try {
-            String result = lst.anyTaskDue(getInput().get(1));
-            return result;
+            ArrayList<Task> tasksDue = lst.findTasksDue(getInput().get(1));
+            String temp = "     The tasks due are: \n";
+            for (int i = 0; i < tasksDue.size(); i++) {
+                if (i + 1 < tasksDue.size()) {
+                    temp += "     " + (i + 1) + "." + tasksDue.get(i).getType()
+                            + tasksDue.get(i).getStatus() + " " + tasksDue.get(i).getTask() + "\n";
+                } else {
+                    temp += "     " + (i + 1) + "." + tasksDue.get(i).getType()
+                            + tasksDue.get(i).getStatus() + " " + tasksDue.get(i).getTask();
+                }
+            }
+            return temp;
         } catch (IndexOutOfBoundsException e) {
-            return "Invalid input :(\n" + Ui.getHelperMessage();
+            return "     Invalid input :(\n" + Ui.getHelperMessage();
+        } catch (DateTimeParseException e) {
+            return "     Invalid input :( \n" + "     Please input 'due YYYY/MM/DD' with a valid date.";
         }
     }
 }
