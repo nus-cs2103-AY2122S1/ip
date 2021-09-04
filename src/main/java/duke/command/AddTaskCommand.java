@@ -16,6 +16,7 @@ public class AddTaskCommand extends Command {
 
     public String execute(TaskList tasks, FileController fc) throws UnsavedChangesException {
         tasks.add(task);
+        assert tasks.get(tasks.size() - 1) == task;
 
         if (!fc.writeText(tasks.serialize())) {
             throw new UnsavedChangesException();
