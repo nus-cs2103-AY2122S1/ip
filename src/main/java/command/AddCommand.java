@@ -71,7 +71,7 @@ public class AddCommand extends Command {
         default:
             System.out.println("Something went wrong...");
             break;
-    }
+        }
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws InvalidDateFormat {
