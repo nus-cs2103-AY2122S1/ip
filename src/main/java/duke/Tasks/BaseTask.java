@@ -7,7 +7,7 @@ import duke.DukeExceptionBase;
  *  This class encapsulates a Task element in Duke's TDList, and features
  *  various methods to manipulate the Task.
  */
-public class BaseTask {
+public abstract class BaseTask {
     private String taskName;
     private boolean isDone;
 
