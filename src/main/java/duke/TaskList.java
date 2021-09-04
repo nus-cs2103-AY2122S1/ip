@@ -40,8 +40,21 @@ public class TaskList {
      * Adds an existing task to the list of tasks.
      * @param task The task to be added to the list of tasks.
      */
-    public void addTask(Task task) {
-        this.tasks.add(task);
+    public void addTask(Task task) throws DukeException {
+        System.out.println(task.toString());
+        if (checkDuplicatedTask(task)) {
+            throw new DukeException("This task already exists in your list!");
+        }
+        tasks.add(task);
+    }
+
+    /**
+     * Indicates if a given task already exists in the task list.
+     * @param task The task to be checked for duplicates
+     * @return a boolean representing if the task is duplicated
+     */
+    public boolean checkDuplicatedTask(Task task) {
+        return tasks.stream().anyMatch(x -> x.toString().equals(task.toString()));
     }
 
     /**
@@ -50,9 +63,9 @@ public class TaskList {
      * @return the newly created To-do
      */
     public String addNewTodo(String taskTitle) {
-        Todo task = new Todo(taskTitle);
-        tasks.add(task);
-        return "Got it. I've added this task:\n\t" + task.toString() + countTasks();
+        Todo todo = new Todo(taskTitle);
+        addTask(todo);
+        return "Got it. I've added this task:\n\t" + todo.toString() + countTasks();
     }
 
     /**
@@ -63,9 +76,9 @@ public class TaskList {
     public String addNewDeadline(String taskTitle) {
         int delimiter = taskTitle.indexOf("/by ");
         LocalDate due = LocalDate.parse(taskTitle.substring(delimiter + 4));
-        Deadline task = new Deadline(taskTitle.substring(0, delimiter), due);
-        tasks.add(task);
-        return "Got it. I've added this task:\n\t" + task.toString() + countTasks();
+        Deadline deadline = new Deadline(taskTitle.substring(0, delimiter), due);
+        addTask(deadline);
+        return "Got it. I've added this task:\n\t" + deadline.toString() + countTasks();
     }
 
     /**
@@ -76,9 +89,9 @@ public class TaskList {
     public String addNewEvent(String taskTitle) {
         int delimiter = taskTitle.indexOf("/at ");
         LocalDate due = LocalDate.parse(taskTitle.substring(delimiter + 4));
-        Event task = new Event(taskTitle.substring(0, delimiter), due);
-        tasks.add(task);
-        return "Got it. I've added this task:\n\t" + task.toString() + countTasks();
+        Event event = new Event(taskTitle.substring(0, delimiter), due);
+        addTask(event);
+        return "Got it. I've added this task:\n\t" + event.toString() + countTasks();
     }
 
     /**
