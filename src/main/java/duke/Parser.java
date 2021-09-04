@@ -12,6 +12,9 @@ class Parser {
     private static final String CMD_EVENT = "event";
     private static final String CMD_DEL = "delete";
     private static final String CMD_FIND = "find";
+    private static final String CMD_ARCH = "archive";
+    private static final String CMD_UnARC = "unarchive";
+    private static final String CMD_ARCH_LIST = "list-archive";
 
     /**
      * Parses the given command to determine what to execute next.
@@ -27,11 +30,19 @@ class Parser {
 
         switch (keywork) {
         case CMD_LIST:
-            return new DisplayListCommand();
+            return new DisplayListCommand(true);
+        case CMD_ARCH_LIST:
+            return new DisplayListCommand(false);
+
         case CMD_DONE:
             return new DoneCommand(fullCommand);
         case CMD_DEL:
             return new DeleteCommand(fullCommand);
+        case CMD_ARCH:
+            return new ArchiveCommand(fullCommand, true);
+        case CMD_UnARC:
+            return new ArchiveCommand(fullCommand, false);
+
         case CMD_TODO:
             return new AddCommand(fullCommand, TaskEnum.TODO);
         case CMD_DDL:

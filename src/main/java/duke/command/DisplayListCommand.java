@@ -7,7 +7,11 @@ import duke.Ui;
 import java.util.ArrayList;
 
 public class DisplayListCommand extends Command{
-    public DisplayListCommand() {}
+    private final boolean isList;
+
+    public DisplayListCommand(boolean isList) {
+        this.isList = isList;
+    }
 
     @Override
     public boolean isExit() {
@@ -16,6 +20,8 @@ public class DisplayListCommand extends Command{
 
     @Override
     public ArrayList<String> execute(TaskList taskList, Ui ui, Storage storage) {
-        return taskList.displayList();
+        return (isList)
+                ? taskList.displayList()
+                : taskList.displayArchive();
     }
 }

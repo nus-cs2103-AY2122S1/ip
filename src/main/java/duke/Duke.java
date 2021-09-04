@@ -21,7 +21,7 @@ public class Duke {//} extends Application {
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILE_URL);
-        tasks = new TaskList(storage.loadStorage());
+        tasks = new TaskList(storage.loadStorage(), new ArrayList<>());  // todo
     }
 
     /**
