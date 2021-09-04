@@ -31,18 +31,18 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (query.isBlank()) {
             throw new DukeException("OOPS!!! You cannot search using an empty keyword.");
-        } else {
-            // Get the list of matching tasks
-            ArrayList<Task> matchingTasks = tasks.find(query);
-
-            // Create the response to be displayed
-            String output = "Here are the matching tasks in your list: \n\t ";
-            for (int i = 0; i < matchingTasks.size(); i++) {
-                output += String.valueOf(i + 1) + ". " + matchingTasks.get(i) + "\n\t ";
-            }
-
-            // Return a description of the execution result
-            return output;
         }
+
+        // Get the list of matching tasks
+        ArrayList<Task> matchingTasks = tasks.find(query);
+
+        // Create the response to be displayed
+        String output = "Here are the matching tasks in your list: \n\t ";
+        for (int i = 0; i < matchingTasks.size(); i++) {
+            output += String.valueOf(i + 1) + ". " + matchingTasks.get(i) + "\n\t ";
+        }
+
+        // Return a description of the execution result
+        return output;
     }
 }
