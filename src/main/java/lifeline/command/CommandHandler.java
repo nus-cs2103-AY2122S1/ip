@@ -101,7 +101,7 @@ public class CommandHandler {
     public static String handleDeadline(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         assert Command.DEADLINE.hasCommand(splitCommands(command)[0]);
-        Task newTask = createTask(command, "/by");
+        Task newTask = createDeadline(command);
         taskList.add(newTask);
         storage.save(taskList);
         return ui.showAddedTask(newTask);
@@ -121,7 +121,7 @@ public class CommandHandler {
     public static String handleEvent(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         assert Command.EVENT.hasCommand(splitCommands(command)[0]);
-        Task newTask = createTask(command, "/at");
+        Task newTask = createEvent(command);
         taskList.add(newTask);
         storage.save(taskList);
         return ui.showAddedTask(newTask);
@@ -160,7 +160,7 @@ public class CommandHandler {
     public static String handleToDo(String command, Storage storage, TaskList taskList, Ui ui)
             throws LifelineException {
         assert Command.TODO.hasCommand(splitCommands(command)[0]);
-        Task newTask = createTask(command);
+        Task newTask = createToDo(command);
         taskList.add(newTask);
         storage.save(taskList);
         return ui.showAddedTask(newTask);
@@ -278,27 +278,15 @@ public class CommandHandler {
 
     }
 
-    private static Task createTask(String command) throws LifelineException {
+    private static Task createToDo(String command) throws LifelineException {
         String[] commands = splitCommands(command);
         Task newTask = new ToDo(commands[1]);
         return newTask;
     }
 
-
-    private static Task createTask(String command, String keyword) throws LifelineException {
+    private static Deadline createDeadline(String command) throws LifelineException {
         String[] details = splitCommands(command);
-
-        if (Command.EVENT.hasCommand(details[0])) {
-            return createEvent(details[1], keyword);
-        }
-
-        assert Command.DEADLINE.hasCommand(details[0]);
-
-        return createDeadline(details[1], keyword);
-    }
-
-    private static Deadline createDeadline(String details, String keyword) throws LifelineException {
-        String[] descriptions = details.split(keyword, 2);
+        String[] descriptions = details[1].trim().split("/by", 2);
 
         if (descriptions.length < 2) {
             throw new LifelineException(ERROR_DEADLINE_INCORRECT_FORMAT);
@@ -319,8 +307,9 @@ public class CommandHandler {
         }
     }
 
-    private static Event createEvent(String details, String keyword) throws LifelineException {
-        String[] descriptions = details.split(keyword, 2);
+    private static Event createEvent(String command) throws LifelineException {
+        String[] details = splitCommands(command);
+        String[] descriptions = details[1].trim().split("/at", 2);
 
         if (descriptions.length < 2) {
             throw new LifelineException(ERROR_EVENT_INCORRECT_FORMAT);
