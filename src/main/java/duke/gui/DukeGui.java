@@ -13,7 +13,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class DukeGui extends Application {
+public abstract class DukeGui extends Application {
     protected ScrollPane scrollPane;
     protected VBox dialogContainer;
     protected TextField userInput;
@@ -23,10 +23,19 @@ public class DukeGui extends Application {
     protected Image duke = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     /**
+     * Creates the Duke GUI from a stage.
+     * @param stage The stage on which to render the scene
+     */
+    protected void setUpGui(Stage stage) {
+        setUpGuiComponents(stage);
+        adjustComponentSizes();
+    }
+
+    /**
      * Creates components of the GUI.
      * @param stage The stage on which to render the scene.
      */
-    protected void setUpGuiComponents(Stage stage) {
+    private void setUpGuiComponents(Stage stage) {
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -48,8 +57,6 @@ public class DukeGui extends Application {
 
         stage.setScene(scene);
         stage.show();
-
-        adjustComponentSizes();
     }
 
     /**
@@ -75,40 +82,7 @@ public class DukeGui extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-    }
-
-    /**
-     * Starts the JavaFX GUI.
-     * @param stage The primary stage that JavaFX provides
-     */
-    @Override
-    public void start(Stage stage) {
-        setUpGuiComponents(stage);
-
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            echo();
-        });
-
-        userInput.setOnAction((event) -> {
-            echo();
-        });
-
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
-
-    /**
-     * Sends the user a copy of what they have input in the text input field.
-     */
-    private void echo() {
-        Label userText = new Label(userInput.getText());
-        dialogContainer.getChildren().addAll(
-                new UserDialogBox(userText, new ImageView(user)),
-                new DukeDialogBox(userText, new ImageView(duke))
-        );
-        userInput.clear();
     }
 }
