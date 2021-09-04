@@ -30,6 +30,36 @@ public class FileManager {
     }
 
     /**
+     * A method that returns a task given the task details.
+     *
+     * @param taskArgs Array of task details.
+     * @return The task corresponding to the task details.
+     * @throws DukeException If unable to create a todo, deadline or event.
+     */
+    public Task getTask(String[] taskArgs) throws DukeException {
+        Task newTask = null;
+        String taskIcon = taskArgs[0];
+        boolean isDone = taskArgs[1].equals("1");
+        switch (taskIcon) {
+        case "T":
+            newTask = new Todo(taskArgs[2]);
+            break;
+        case "D":
+            newTask = new Deadline(taskArgs[2], taskArgs[3]);
+            break;
+        case "E":
+            newTask = new Event(taskArgs[2], taskArgs[3]);
+            break;
+        default:
+            assert false;
+        }
+        if (isDone) {
+            newTask.markAsDone();
+        }
+        return newTask;
+    }
+
+    /**
      * A method that reads a save file and returns the list of tasks.
      *
      * @return The list of tasks.
@@ -40,26 +70,8 @@ public class FileManager {
         try {
             Scanner sc = new Scanner(DATA_FILE);
             while (sc.hasNextLine()) {
-                Task newTask = null;
                 String[] curr = sc.nextLine().split("~S~");
-                String taskIcon = curr[0];
-                boolean isDone = curr[1].equals("1");
-                switch (taskIcon) {
-                case "T":
-                    newTask = new Todo(curr[2]);
-                    break;
-                case "D":
-                    newTask = new Deadline(curr[2], curr[3]);
-                    break;
-                case "E":
-                    newTask = new Event(curr[2], curr[3]);
-                    break;
-                default:
-                    break;
-                }
-                if (isDone) {
-                    newTask.markAsDone();
-                }
+                Task newTask = getTask(curr);
                 newList.add(newTask);
             }
         } catch (FileNotFoundException e) {
