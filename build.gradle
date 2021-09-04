@@ -45,7 +45,7 @@ test {
 }
 
 application {
-    mainClassName = "Aisu"
+    mainClassName = "aisu.ui.gui.Launcher"
 }
 
 shadowJar {
