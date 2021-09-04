@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Task class which contains description of task and whether task is done.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -50,5 +50,16 @@ public class Task {
      */
     public String toDataFormat() {
         return String.format("  | %s | %s", isDone ? "1" : "0", description);
+    }
+
+    /**
+     * Implements the compareTo function as required to be comparable.
+     *
+     * @param o the other task
+     * @return lexicographical ordering of the description.
+     */
+    @Override
+    public int compareTo(Task o) {
+        return this.description.compareTo(o.description);
     }
 }

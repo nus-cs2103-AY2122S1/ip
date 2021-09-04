@@ -49,6 +49,9 @@ public class Parser {
         case LIST:
             message = tasks.print();
             break;
+        case SORT:
+            message = tasks.sort();
+            break;
         case DONE:
             message = setTaskDone(userInput);
             break;

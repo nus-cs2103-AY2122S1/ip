@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.io.Ui;
 
@@ -81,13 +82,19 @@ public class TaskList {
         return sb.toString();
     }
 
+    /**
+     * Prints out the task list formatted and indented.
+     *
+     * @return String representation of the list of tasks.
+     */
     public String print() {
         return print("");
     }
 
     /**
-     * Prints out the task list formatted and indented.
+     * Prints out the task list formatted and indented with additional message.
      *
+     * @param message to be added.
      * @return String representation of the list of tasks.
      */
     public String print(String message) {
@@ -122,5 +129,15 @@ public class TaskList {
             }
         }
         return new TaskList(tasks);
+    }
+
+    /**
+     * Sorts the task list by alphabetical order of the description.
+     *
+     * @return String representation of the sorted task list.
+     */
+    public String sort() {
+        Collections.sort(taskList);
+        return print();
     }
 }
