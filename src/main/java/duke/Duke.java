@@ -54,6 +54,8 @@ public class Duke {
      * @param args Command line arguments
      */
     public static void main(String[] args) {
+        //Command table should be initialised at this point
+        assert(commandTable.keySet().size() > 0);
         Ui.setInputHandler(Duke::parseInput);
         Application.launch(Ui.class);
     }

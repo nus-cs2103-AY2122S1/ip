@@ -43,8 +43,6 @@ public class MainWindow extends AnchorPane {
      * @param text Given text
      */
     public void print(String text) {
-        int df = 8
-                + 9;
         this.dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(text, DUKE_IMG)
         );
