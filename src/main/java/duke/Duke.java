@@ -74,6 +74,7 @@ public class Duke extends Application {
         } else {
             images = loadImagesFromFile("DaUser.png", "DaDuke.png", getParameters().getRaw().get(0));
         }
+        assert (images != null && images.length >= 2) : "Images should be loaded.";
         // Container for chat message boxes to provide scroll functionality.
         ScrollPane scrollPane = new ScrollPane();
         // Contains main chat message content vertically
@@ -107,6 +108,8 @@ public class Duke extends Application {
 
 
         // set up the Duke chat bot agent.
+        assert images[0] != null : "User avatar image should exist";
+        assert images[1] != null : "Agent avatar image should exist";
         Duke guiDuke = new Duke(new GuiUserInputHandler(userChatInputField, dialogContainer,
                 images[0]),
                 new GuiUserOutputHandler(dialogContainer,

@@ -61,5 +61,6 @@ task precommit {
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }
