@@ -42,7 +42,8 @@ public class Launcher {
      * Starts the console program.
      */
     public static void startConsole() {
-        Lifeline lifeline = new Lifeline("save" + File.separator + "tasks.json");
+        String pathToSaveAndLoadTasks = "save" + File.separator + "tasks.json";
+        Lifeline lifeline = new Lifeline(pathToSaveAndLoadTasks);
         lifeline.start();
     }
 }
