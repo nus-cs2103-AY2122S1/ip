@@ -19,9 +19,13 @@ public class EventCommand extends DukeCommand {
     @Override
     public String run(DukeList list) {
         list.add(task);
+        return stringifyMessage(list.size());
+    }
+
+    private String stringifyMessage(int listSize) {
         return "Got it. I've added this task:\n"
                 + "  "
                 + task.toString() + "\n"
-                + "Now you have " + list.size() + " tasks in the list";
+                + "Now you have " + listSize + " tasks in the list";
     }
 }

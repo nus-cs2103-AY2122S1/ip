@@ -22,12 +22,16 @@ public class DeleteCommand extends DukeCommand {
         try {
             Task task = list.get(id);
             list.delete(id);
-            return "Noted. I've removed this task:\n"
-                    + "  "
-                    + task.toString() + "\n"
-                    + "Now you have " + list.size() + " tasks in the list";
+            return stringifyMessage(task.toString(), list.size());
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidArgumentsException();
         }
+    }
+
+    private String stringifyMessage(String taskString, int listSize) {
+        return "Noted. I've removed this task:\n"
+                + "  "
+                + taskString + "\n"
+                + "Now you have " + listSize + " tasks in the list";
     }
 }
