@@ -10,8 +10,8 @@ public class SortCommand extends Command {
     /** The command word that identifies a SortCommand instance. */
     public static final String COMMAND_WORD = "sort";
 
-    /** Length of command word for SortCommand. */
-    public static final int COMMAND_LENGTH = COMMAND_WORD.length();
+    /** Guide on how to use this command. */
+    public static final String MESSAGE_USAGE = COMMAND_WORD + " - sorts the task list in ascending date order.";
 
     /**
      * Returns true if the command is an exit command, return false otherwise.

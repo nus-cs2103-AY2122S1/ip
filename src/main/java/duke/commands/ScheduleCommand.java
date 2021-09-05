@@ -15,6 +15,11 @@ public class ScheduleCommand extends Command {
     /** Length of the command word. */
     public static final int COMMAND_LENGTH = COMMAND_WORD.length();
 
+    /** Guide on how to use this command. */
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + " <date> - finds a list of tasks at scheduled at the <date> in yyyy/MM/dd HHmm format.\n"
+            + "    📍 Example: " + COMMAND_WORD + " 2021/08/24";
+
     /**
      * Instantiates a ScheduleCommand object.
      *
