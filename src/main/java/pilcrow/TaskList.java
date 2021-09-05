@@ -2,7 +2,9 @@ package pilcrow;
 
 import java.util.ArrayList;
 
-// Abstraction to handle the list of tasks altered when Pilcrow runs
+/**
+ * Abstraction to handle list of tasks managed when the Pilcrow program runs.
+ */
 public class TaskList {
     private ArrayList<Task> taskList;
 
@@ -82,6 +84,9 @@ public class TaskList {
         return filteredTaskList;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         String tasksAsString = "";

@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// Abstraction to handle data stored onto the hard disk
+/**
+ * Abstraction to handle all data stored onto the hard disk.
+ */
 public class Storage {
     private String filePath;
 
@@ -49,7 +51,7 @@ public class Storage {
     }
 
     /**
-     * Save specified TaskList into Storage for later loading.
+     * Saves specified TaskList into Storage to be loaded later.
      * @param taskList TaskList to be stored.
      */
     public void save(TaskList taskList) {
@@ -64,6 +66,7 @@ public class Storage {
             pilcrowFileWriter.close();
         }  catch (IOException exception) {
             // Do nothing
+            // Should never happen
         }
     }
 }

@@ -22,7 +22,7 @@ public class Pilcrow {
     }
 
     /**
-     * Main function for Pilcrow
+     * Main function for Pilcrow. Acts as a starting point into the Pilcrow program.
      * @param args
      */
     public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class Pilcrow {
     }
 
     /**
-     * Runs the main body of the Pilcrow script.
+     * Runs the main body of the Pilcrow script, which will keep running until a command to exit is given.
      */
     private void run() {
         Boolean isExit = false;
@@ -52,8 +52,8 @@ public class Pilcrow {
     }
 
     /**
-     * Responds appropriately given a text input.
-     * @param input Text of the input.
+     * Responds appropriately given an entered text input.
+     * @param input Text of the entered input.
      * @return Text of Pilcrow's response.
      */
     public String respondToInput(String input) {
@@ -66,7 +66,6 @@ public class Pilcrow {
             Storage storage, TaskList taskList, Parser parser) {
         String text;
         switch (commandWord) {
-        // To fix indentation
         case "todo":
             // Fallthrough
         case "deadline":
@@ -75,6 +74,7 @@ public class Pilcrow {
             if (restOfCommand.length() == 0) {
                 throw new InvalidInputException("Must specify task name.");
             }
+
             Task task = Task.createTask(commandWord, restOfCommand, false);
             taskList.addTask(task);
             storage.save(taskList);
