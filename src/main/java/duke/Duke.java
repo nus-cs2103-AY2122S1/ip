@@ -32,6 +32,7 @@ public class Duke {
     //}
 
     String getResponse(String x) {
+        assert this.storage.getDoesFileExists();
         String input = x;
         String response;
         if (input.equals("list")) {
