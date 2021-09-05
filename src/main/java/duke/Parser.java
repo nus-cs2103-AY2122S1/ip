@@ -84,6 +84,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException("Task does not exist");
         }
+        taskList.saveTasksToStorage();
         return UI.done(taskNumber) + "\n" + UI.list(taskList);
     }
 
@@ -99,6 +100,7 @@ public class Parser {
         }
         String remaining = userString.substring(5);
         taskList.add(new ToDo(remaining));
+        taskList.saveTasksToStorage();
         return UI.added("todo") + "\n" + UI.numberOfTasks(taskList.size());
     }
 
@@ -121,6 +123,7 @@ public class Parser {
         String deadlineByString = userString.substring(byIndex + 4);
         LocalDate deadlineBy = LocalDate.parse(deadlineByString);
         taskList.add(new Deadline(deadlineName, deadlineBy));
+        taskList.saveTasksToStorage();
         return UI.added("deadline") + "\n" + UI.numberOfTasks(taskList.size());
     }
 
@@ -142,6 +145,7 @@ public class Parser {
         String eventAtString = userString.substring(atIndex + 4);
         LocalDate eventAt = LocalDate.parse(eventAtString);
         taskList.add(new Event(eventName, eventAt));
+        taskList.saveTasksToStorage();
         return UI.added("event") + "\n" + UI.numberOfTasks(taskList.size());
     }
 
@@ -161,6 +165,7 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskNumberException("Task does not exist");
         }
+        taskList.saveTasksToStorage();
         return UI.delete(deleteTaskNumber) + "\n" + UI.numberOfTasks(taskList.size())
                 + "\n" + UI.list(taskList);
     }
