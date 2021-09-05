@@ -56,4 +56,28 @@ public class Deadline extends Task {
             return "| D | " + super.toSaveString() + " | " + dateString + " | " + timeString;
         }
     }
+
+    @Override
+    public int compareTo(Task o) {
+        if (!(o instanceof Deadline)) {
+            return -1;
+        }
+        Deadline o1 = this;
+        Deadline o2 = (Deadline) o;
+        if (this.isDone ^ o.isDone) {
+            return this.isDone ? 1 : -1;
+        }
+        int comp = o1.date.compareTo(o2.date);
+        if (comp != 0) {
+            return comp;
+        } else {
+            if (o1.time == null ^ o2.time == null) {
+                return o1.time == null ? -1 : 1;
+            } else if (o1.time == null) {
+                return this.description.compareTo(o.description);
+            } else {
+                return o1.time.compareTo(o2.time);
+            }
+        }
+    }
 }

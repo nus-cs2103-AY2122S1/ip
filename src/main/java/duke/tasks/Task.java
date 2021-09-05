@@ -3,7 +3,7 @@ package duke.tasks;
 /**
  * Class to encapsulate a Task
  */
-public class Task {
+public abstract class Task implements Comparable<Task> {
 
     protected String description;
     protected boolean isDone;
@@ -59,5 +59,35 @@ public class Task {
      */
     public String toSaveString() {
         return this.getSaveIcon() + " | " + this.description;
+    }
+
+    @Override
+    public int compareTo(Task o) {
+        // 1: T, E, D
+        // 2: Not done, Done
+        // 3: Lexicographical for T description
+        //    DateTime for E, D
+        // 4: Lexicographical for E, D description
+        if (this instanceof ToDo) {
+            if (!(o instanceof ToDo)) {
+                return 1;
+            }
+            if (this.isDone ^ o.isDone) {
+                return this.isDone ? 1 : -1;
+            }
+            return this.description.compareTo(o.description);
+        }
+
+        if (this instanceof Event) {
+            Event o1 = (Event) this;
+            return o1.compareTo(o);
+        }
+
+        if (this instanceof Deadline) {
+            Deadline o1 = (Deadline) this;
+            return o1.compareTo(o);
+        }
+
+        return 0;
     }
 }
