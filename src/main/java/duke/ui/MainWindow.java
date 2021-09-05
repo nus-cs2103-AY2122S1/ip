@@ -1,6 +1,8 @@
 package duke.ui;
 
 import duke.Duke;
+import duke.Main;
+import duke.Ui;
 import duke.utils.Record;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -23,6 +26,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Main main;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/duke/images/MyLeftBall.gif"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/duke/images/MyRightBall.jpg"));
@@ -32,8 +36,9 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDukeAndMain(Duke duke, Main main) {
+        this.duke = duke;
+        this.main = main;
     }
 
     /**
@@ -45,10 +50,15 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         Record r = duke.getResponse(input);
         String response = r.msg();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
+        if (r.bye()) {
+            try {
+                main.stop();
+            } catch (Exception e) {
+                Ui.reply("Error in quitting Duke.");
+            }
+        }
     }
 }

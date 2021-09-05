@@ -1,10 +1,10 @@
 package duke;
 
 import java.io.IOException;
-import java.net.URL;
 
 import duke.ui.MainWindow;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -24,10 +24,17 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDukeAndMain(duke, this);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+    
+    @Override
+    public void stop() throws Exception {
+        Platform.exit();
+        System.exit(0);
+        super.stop();
     }
 }

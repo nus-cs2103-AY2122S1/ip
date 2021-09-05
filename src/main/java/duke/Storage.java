@@ -60,12 +60,12 @@ public class Storage {
         }
     }
 
-    public void update(TaskList db) throws DukeException {
+    public void update(TaskList database) throws DukeException {
         try {
             raf.seek(0);
             raf.setLength(0);
-            List<Task> dbList = db.getList();
-            for (Task a : dbList) {
+            List<Task> databaseList = database.getList();
+            for (Task a : databaseList) {
                 raf.writeBytes(a.toDatabaseFormat());
                 raf.writeBytes(System.lineSeparator());
             }

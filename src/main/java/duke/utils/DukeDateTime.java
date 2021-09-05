@@ -6,14 +6,42 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 public class DukeDateTime implements Comparable<DukeDateTime> {
+    private enum Level {TIME, DATE, DATETIME}
+
+    public enum Format {
+        DT_FULL("yyyy-MM-dd HH:mm", Level.DATETIME), // DT_SHORT("MM-dd HH:mm", Level.DATETIME),
+        TIME("HH:mm", Level.TIME), // DATE_SHORT("MM-dd", Level.DATE),
+        DATE_LONG("yyyy-MM-dd", Level.DATE),
+
+        PRINT_TIME("HH:mm", Level.TIME), // PRINT_DATE_SHORT("dd MMM", Level.DATE),
+        PRINT_DATE_LONG("dd MMM yyyy", Level.DATE);
+
+        protected final DateTimeFormatter format;
+        protected final String pattern;
+        protected String regex;
+        protected Level lvl;
+
+        Format(String pattern, Level lvl) {
+            this.pattern = pattern;
+            this.regex = pattern;
+            this.lvl = lvl;
+            String[] rep = {"d", "y", "M", "m", "H"};
+            for (String c : rep) {
+                this.regex = regex.replace(c, "\\d");
+            }
+            this.format = DateTimeFormatter.ofPattern(pattern);
+        }
+    }
     private LocalDateTime dateTime = null;
     private LocalDate date = null;
     private LocalTime time = null;
+
     /**
      * Instantiates an empty DukeDateTime.
      */
     public DukeDateTime() {
     }
+
     /**
      * Instantiates a new DukeDateTime based on a LocalDateTime.
      *
@@ -34,7 +62,8 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
         DukeDateTime out = new DukeDateTime();
         String[] args = arg.split(" ");
         if (args.length > 2) {
-            throw new DukeException(String.format("Incorrect date and time formatting:" + "\n\t\t \"%s\"" + "\n\t " + "Enter `help` to check the correct formatting.", arg));
+            throw new DukeException(String.format("Incorrect date and time formatting:" + "\n\t\t \"%s\"" 
+                    + "\n\t " + "Enter `help` to check the correct formatting.", arg));
         }
         if (args.length == 2) {
             out.dateTime = LocalDateTime.parse(arg, Format.DT_FULL.format);
@@ -46,25 +75,6 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
             }
         }
         return out;
-    }
-
-    public static void main(String[] args) {
-        System.out.println("Driver testing duke.utils.DukeDateTime");
-        String date = "2021-08-22";
-        String startTime = "04:20";
-        String endTime = "06:09";
-        String desc = "memes";
-        String eventArgs = date + " " + startTime + " ~ " + endTime;
-        String deadlineArgs = date + " " + startTime;
-
-        try {
-            System.out.println(DukeDateTime.parse(startTime).format());
-            System.out.println(DukeDateTime.parse(eventArgs.split(" ")[0]).format());
-            System.out.println(DukeDateTime.parse(eventArgs.split(" ")[1]).format());
-            System.out.println(DukeDateTime.parse(eventArgs).format());
-        } catch (DukeException e) {
-            System.err.println(e);
-        }
     }
 
     /**
@@ -157,30 +167,22 @@ public class DukeDateTime implements Comparable<DukeDateTime> {
         return "";
     }
 
-    private enum Level {TIME, DATE, DATETIME}
+    public static void main(String[] args) {
+        System.out.println("Driver testing duke.utils.DukeDateTime");
+        String date = "2021-08-22";
+        String startTime = "04:20";
+        String endTime = "06:09";
+        String desc = "memes";
+        String eventArgs = date + " " + startTime + " ~ " + endTime;
+        String deadlineArgs = date + " " + startTime;
 
-    public enum Format {
-        DT_FULL("yyyy-MM-dd HH:mm", Level.DATETIME), // DT_SHORT("MM-dd HH:mm", Level.DATETIME),
-        TIME("HH:mm", Level.TIME), // DATE_SHORT("MM-dd", Level.DATE),
-        DATE_LONG("yyyy-MM-dd", Level.DATE),
-
-        PRINT_TIME("HH:mm", Level.TIME), // PRINT_DATE_SHORT("dd MMM", Level.DATE),
-        PRINT_DATE_LONG("dd MMM yyyy", Level.DATE);
-
-        protected final DateTimeFormatter format;
-        protected final String pattern;
-        protected String regex;
-        protected Level lvl;
-
-        Format(String pattern, Level lvl) {
-            this.pattern = pattern;
-            this.regex = pattern;
-            this.lvl = lvl;
-            String[] rep = {"d", "y", "M", "m", "H"};
-            for (String c : rep) {
-                this.regex = regex.replace(c, "\\d");
-            }
-            this.format = DateTimeFormatter.ofPattern(pattern);
+        try {
+            System.out.println(DukeDateTime.parse(startTime).format());
+            System.out.println(DukeDateTime.parse(eventArgs.split(" ")[0]).format());
+            System.out.println(DukeDateTime.parse(eventArgs.split(" ")[1]).format());
+            System.out.println(DukeDateTime.parse(eventArgs).format());
+        } catch (DukeException e) {
+            System.err.println(e);
         }
     }
 }
