@@ -1,5 +1,7 @@
 package duke.storage;
 
+import duke.ui.Ui;
+
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 import java.io.File;
@@ -36,19 +38,15 @@ public class Storage {
     public void makeFile() {
         File textFile = new File(filepath);
         Path path = Paths.get("data");
-        if (!Files.isDirectory(path)) {
-            try {
+        try {
+            if (!Files.isDirectory(path)) {
                 Files.createDirectories(path);
-            } catch (IOException e) {
-                System.err.println("Failed to create directory!" + e.getMessage());
             }
-        }
-        if (!textFile.exists()) {
-            try {
+            else if (!textFile.exists()) {
                 textFile.createNewFile();
-            } catch (IOException e) {
-                System.err.println("Failed to create file!" + e.getMessage());
             }
+        } catch (IOException e) {
+            Ui.display(e.getMessage());
         }
     }
 
@@ -58,21 +56,25 @@ public class Storage {
      * @return String array containing commands separated by lines.
      */
     public String[] load() {
-        File textFile = new File(filepath);
-        Integer counter = 0;
+        File textFile = new File("data/duke.txt");
         String[] temp = new String[50];
         try {
-            Scanner s = new Scanner(textFile);
-            while (s.hasNext()) {
-                String command = s.nextLine();
-                temp[counter] = command;
-                counter++;
-            }
-            s.close();
+            loadHelper(textFile, temp);
         } catch (FileNotFoundException e) {
-            System.err.println("File does not exist" + e.getMessage());
+            Ui.display(e.getMessage());
         }
         return temp;
+    }
+
+    private void loadHelper(File textFile, String[] temp) throws FileNotFoundException {
+        int counter = 0;
+        Scanner s = new Scanner(textFile);
+        while (s.hasNext()) {
+            String command = s.nextLine();
+            temp[counter] = command;
+            counter++;
+        }
+        s.close();
     }
 
     /**
@@ -104,26 +106,29 @@ public class Storage {
             try {
                 Files.copy(Paths.get("data/duke.txt"), Paths.get("data/temp.txt"), REPLACE_EXISTING);
                 new FileWriter("data/duke.txt", false).close();
-                Scanner s = new Scanner(new File("data/temp.txt"));
-                int count = 1;
-                while (s.hasNextLine()) {
-                    String command = s.nextLine();
-                    if (count == taskNum) {
-                        String head = command.substring(0, 4);
-                        String tail = command.substring(5);
-                        appendToFile("data/duke.txt", head + "1" + tail);
-                        count++;
-                    } else {
-                        appendToFile("data/duke.txt", command);
-                        count++;
-                    }
-                }
-                s.close();
+                editFileContentsForCompletionHelper(taskNum);
                 Files.delete(Paths.get("data/temp.txt"));
             } catch (IOException e) {
-                System.err.println("Failed to create file!" + e.getMessage());
+                Ui.display(e.getMessage());
             }
         }
+    }
+
+    private void editFileContentsForCompletionHelper(int taskNum) throws IOException {
+        Scanner s = new Scanner(new File("data/temp.txt"));
+        int count = 1;
+        while (s.hasNextLine()) {
+            String command = s.nextLine();
+            if (count == taskNum) {
+                String head = command.substring(0, 4);
+                String tail = command.substring(5);
+                appendToFile("data/duke.txt", head + "1" + tail);
+            } else {
+                appendToFile("data/duke.txt", command);
+            }
+            count++;
+        }
+        s.close();
     }
 
     /**
@@ -137,22 +142,25 @@ public class Storage {
             try {
                 Files.copy(Paths.get("data/duke.txt"), Paths.get("data/temp.txt"), REPLACE_EXISTING);
                 new FileWriter("data/duke.txt", false).close();
-                Scanner s = new Scanner(new File("data/temp.txt"));
-                int count = 1;
-                while (s.hasNextLine()) {
-                    String command = s.nextLine();
-                    if (count == taskNum) {
-                        count++;
-                    } else {
-                        appendToFile("data/duke.txt", command);
-                        count++;
-                    }
-                }
-                s.close();
+                editFileContentsForDeletionHelper(taskNum);
                 Files.delete(Paths.get("data/temp.txt"));
             } catch (IOException e) {
-                System.err.println("Failed to create file!" + e.getMessage());
+                Ui.display(e.getMessage());
             }
         }
+    }
+
+    private void editFileContentsForDeletionHelper(int taskNum) throws IOException {
+        Scanner s = new Scanner(new File("data/temp.txt"));
+        int count = 1;
+        while (s.hasNextLine()) {
+            String command = s.nextLine();
+            if (count == taskNum) {
+            } else {
+                appendToFile("data/duke.txt", command);
+            }
+            count++;
+        }
+        s.close();
     }
 }

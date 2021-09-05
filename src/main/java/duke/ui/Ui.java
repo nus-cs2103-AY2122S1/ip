@@ -78,10 +78,6 @@ public class Ui {
      * @return String Array of output.
      */
     public static String[] printTaskCompleted(Task task) {
-        System.out.println("    ______________________________________");
-        System.out.println("     Nice! I've marked this task as done:");
-        System.out.printf("       %s\n", task);
-        System.out.println("    ______________________________________");
         return display("Nice! I've marked this task as done:",
                 task.toString());
     }
@@ -94,11 +90,6 @@ public class Ui {
      * @return String Array of output.
      */
     public static String[] printDeleteTask(Task task, int size) {
-        System.out.println("    ______________________________________");
-        System.out.println("     Noted. I've removed this task:");
-        System.out.printf("       %s\n", task);
-        System.out.printf("     Now you have %d tasks in the list.\n", size);
-        System.out.println("    ______________________________________");
         return display("Noted. I've removed this task:",
                 task.toString(), "Now you have " + size + " tasks in the list.");
     }
@@ -112,23 +103,22 @@ public class Ui {
     public static String[] printFindTask(Task[] result) {
         if (result[0] == null) {
             return display("There are no matching tasks in your list!");
-        } else {
-            int count = 0;
-            for (int i = 0; i < result.length; i++) {
-                if (result[i] == null) {
-                    break;
-                }
-                count++;
-            }
-            String[] output = new String[count + 1];
-            output[0] = "Here are the matching tasks in your list:";
-            for (int i = 0; i < result.length; i++) {
-                if (result[i] == null) {
-                    break;
-                }
-                output[i + 1] = (i + 1) + ". " + result[i].toString();
-            }
-            return output;
         }
+        int count = 0;
+        for (int i = 0; i < result.length; i++) {
+            if (result[i] == null) {
+                break;
+            }
+            count++;
+        }
+        String[] output = new String[count + 1];
+        output[0] = "Here are the matching tasks in your list:";
+        for (int i = 0; i < result.length; i++) {
+            if (result[i] == null) {
+                break;
+            }
+            output[i + 1] = (i + 1) + ". " + result[i].toString();
+        }
+        return output;
     }
 }

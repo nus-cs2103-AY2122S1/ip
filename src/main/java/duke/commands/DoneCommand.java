@@ -36,18 +36,16 @@ public class DoneCommand extends Command {
         } catch (StringIndexOutOfBoundsException err) {
             throw new DukeException("invalidNumberFormat");
         }
-        if (numeric) {
-            int taskNum = Integer.parseInt(restOfCommand) - 1;
-            if (taskNum < tasks.size()) {
-                Task currTask = tasks.get(taskNum);
-                currTask.setCompleted();
-                storage.editFileContentsForCompletion(taskNum + 1);
-                return Ui.printTaskCompleted(currTask);
-            } else {
-                throw new DukeException("invalidTaskNumber");
-            }
-        } else {
+        if (!numeric) {
             throw new DukeException("invalidNumberFormat");
         }
+        int taskNum = Integer.parseInt(restOfCommand) - 1;
+        if (!(taskNum < tasks.size())) {
+            throw new DukeException("invalidTaskNumber");
+        }
+        Task currTask = tasks.get(taskNum);
+        currTask.setCompleted();
+        storage.editFileContentsForCompletion(taskNum + 1);
+        return Ui.printTaskCompleted(currTask);
     }
 }
