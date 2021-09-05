@@ -33,6 +33,7 @@ public class TaskList {
      */
     @Override
     public String toString() {
+        assert !(store == null);
         return store.toString();
     }
 
@@ -85,6 +86,7 @@ public class TaskList {
      * @param task Task that is to be added.
      */
     public static void add(Task task) {
+        assert !(store == null);
         store.add(task);
     }
 
@@ -94,6 +96,7 @@ public class TaskList {
      * @return Number of Tasks inside the TaskList.
      */
     public int size() {
+        assert !(store == null);
         return store.size();
     }
 
@@ -104,6 +107,8 @@ public class TaskList {
      * @return Task at specified position in the TaskList.
      */
     public Task get(int taskNumber) {
+        assert !(store == null);
+        assert (taskNumber < store.size());
         return store.get(taskNumber);
     }
 
@@ -113,6 +118,8 @@ public class TaskList {
      * @param taskNumber Task Number to remove from the TaskList.
      */
     public void remove(int taskNumber) {
+        assert !(store == null);
+        assert (taskNumber < store.size());
         store.remove(taskNumber);
     }
 
@@ -124,6 +131,7 @@ public class TaskList {
      */
     public static String[] printList(String command) {
         String[] words = command.split(" ");
+        assert words[0].equals("list");
         if (words.length > 1) {
             throw new DukeException("invalidCommand");
         } else if (store.size() == 0) {

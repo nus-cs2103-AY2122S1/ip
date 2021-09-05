@@ -19,6 +19,7 @@ public class Deadline extends Task {
      */
     public Deadline(String name, String date) {
         super(name);
+        assert !(name == null);
         this.date = LocalDate.parse(date);
     }
 

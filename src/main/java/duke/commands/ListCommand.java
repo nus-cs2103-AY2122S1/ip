@@ -10,6 +10,7 @@ public class ListCommand extends Command {
     private String command;
 
     public ListCommand(String command) {
+        assert command.startsWith("list");
         this.command = command;
     }
 

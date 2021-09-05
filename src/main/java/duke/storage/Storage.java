@@ -26,6 +26,7 @@ public class Storage {
      * @param filepath Filepath of text file to store information in.
      */
     public Storage(String filepath) {
+        assert filepath != null;
         this.filepath = filepath;
         makeFile();
         load();
@@ -35,7 +36,7 @@ public class Storage {
      * Creates a folder and destination file if either of them do not exist.
      */
     public void makeFile() {
-        File textFile = new File("data/duke.txt");
+        File textFile = new File(filepath);
         Path path = Paths.get("data");
         try {
             if (!Files.isDirectory(path)) {

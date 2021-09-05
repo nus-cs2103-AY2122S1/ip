@@ -13,6 +13,7 @@ public class DeleteTaskCommand extends Command {
     private String command;
 
     public DeleteTaskCommand(String command) {
+        assert command.startsWith("delete");
         this.command = command;
     }
 
@@ -24,13 +25,16 @@ public class DeleteTaskCommand extends Command {
      * @return A String array containing output.
      */
     public String[] execute(Storage storage, TaskList tasks) {
-        String restOfCommand = command.substring(7);
+        String restOfCommand = "";
         boolean numeric;
         try {
+            restOfCommand = command.substring(7);
             int temp = Integer.parseInt(restOfCommand);
             numeric = true;
         } catch (NumberFormatException err) {
             numeric = false;
+        } catch (StringIndexOutOfBoundsException err) {
+            throw new DukeException("invalidNumberFormat");
         }
         if (!numeric) {
             throw new DukeException("invalidNumberFormatDelete");

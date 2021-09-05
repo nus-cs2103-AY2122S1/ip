@@ -18,6 +18,7 @@ public class AddEventCommand extends Command {
     private String command;
 
     public AddEventCommand(String command) {
+        assert command.startsWith("event");
         this.command = command;
     }
 
