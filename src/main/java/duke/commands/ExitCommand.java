@@ -16,6 +16,6 @@ public class ExitCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         super.exit();
 
-        setCommandOutput("Bye, have a nice day! :)");
+        setCommandOutput("EXIT_ROUTINE");
     }
 }
