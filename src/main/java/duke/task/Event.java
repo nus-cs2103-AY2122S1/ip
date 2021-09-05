@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.Parser;
+import duke.exception.DukeException;
+
 /**
  * A task that has a starting time and date, and an ending time and date.
  */
@@ -23,6 +26,44 @@ public class Event extends Task {
         super(taskDescription, isDone);
         this.dateAndTime = dateAndTime;
         this.endTime = endTime;
+    }
+
+    /**
+     Returns a new instance of Event with updated values.
+     *
+     * @param taskDescription The description of the updated Event.
+     * @param dateAndTime The date and time of the updated Event.
+     * @return A Event with the updated description or time, or both.
+     * @throws DukeException If the given date and time is invalid.
+     */
+    public Event update(String taskDescription, String dateAndTime) throws DukeException {
+        try {
+            String updatedDescription = taskDescription == null
+                    ? this.taskDescription
+                    : taskDescription;
+            LocalDateTime updatedTime = this.dateAndTime;
+            LocalTime updatedEndTime = this.endTime;
+
+            if (dateAndTime != null) {
+                String[] splitEndTime = dateAndTime.split(" - ");
+                updatedTime = Parser
+                        .formatDateTime(splitEndTime[0]);
+                boolean hasInputAfterDash = splitEndTime.length > 1
+                        && splitEndTime[1].trim().length() > 0;
+
+                if (hasInputAfterDash) {
+                    updatedEndTime = LocalTime.parse(splitEndTime[1]);
+                } else {
+                    throw new DukeException("☹ OOPS!!! Please provide an end "
+                            + "time for the event.");
+                }
+            }
+            return new Event(updatedDescription,
+                    updatedTime, updatedEndTime, this.isDone);
+
+        } catch (DukeException de) {
+            throw new DukeException(de.getMessage());
+        }
     }
 
     /**

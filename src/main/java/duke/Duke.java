@@ -31,42 +31,19 @@ public class Duke {
         }
     }
 
-    /**
-     * Runs the Duke bot.
-     */
-    public void run() {
-        this.isOpen = true;
+    private boolean checkIsFunctionCommand(Parser.CommandType type) {
+        return type == Parser.CommandType.EXIT
+                || type == Parser.CommandType.LIST
+                || type == Parser.CommandType.DONE
+                || type == Parser.CommandType.UPDATE
+                || type == Parser.CommandType.DELETE
+                || type == Parser.CommandType.FIND;
+    }
 
-        while (this.isOpen) {
-            try {
-                String userInput = this.ui.readCommand();
-                Parser.CommandType type = Parser.decipherInput(userInput);
-
-                boolean isFunctionCommand = type == Parser.CommandType.EXIT
-                        || type == Parser.CommandType.LIST
-                        || type == Parser.CommandType.DONE
-                        || type == Parser.CommandType.DELETE
-                        || type == Parser.CommandType.FIND;
-
-                boolean isTaskCommand = type == Parser.CommandType.TODO
-                        || type == Parser.CommandType.DEADLINE
-                        || type == Parser.CommandType.EVENT;
-
-                if (isFunctionCommand) {
-                    ui.printMessage(this.handleFunctionCommands(type, userInput));
-
-                } else if (isTaskCommand) {
-                    // Add a Task to the task list.
-                    ui.printMessage(this.handleTaskCommand(type, userInput));
-
-                } else {
-                    throw new DukeException(
-                            "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-                }
-            } catch (DukeException de) {
-                this.ui.showError(de);
-            }
-        }
+    private boolean checkIsTaskCommand(Parser.CommandType type) {
+        return type == Parser.CommandType.TODO
+                || type == Parser.CommandType.DEADLINE
+                || type == Parser.CommandType.EVENT;
     }
 
     private String handleFunctionCommands(Parser.CommandType type, String userInput) throws DukeException {
@@ -84,6 +61,11 @@ public class Duke {
             int taskNumber = Parser.parseDoneCommand(userInput);
             this.storage.save(this.taskList);
             return this.taskList.markTaskAsDone(taskNumber);
+
+        } else if (type == Parser.CommandType.UPDATE) {
+            String[] extractedValues = Parser.parseUpdateCommand(userInput);
+            this.storage.save(this.taskList);
+            return this.taskList.updateTask(extractedValues);
 
         } else if (type == Parser.CommandType.DELETE) {
             int taskNumber = Parser.parseDeleteCommand(userInput);
@@ -130,19 +112,43 @@ public class Duke {
         }
     }
 
+    /**
+     * Runs the Duke bot.
+     */
+    public void run() {
+        this.isOpen = true;
+
+        while (this.isOpen) {
+            try {
+                String userInput = this.ui.readCommand();
+                Parser.CommandType type = Parser.decipherInput(userInput);
+
+                boolean isFunctionCommand = checkIsFunctionCommand(type);
+                boolean isTaskCommand = checkIsTaskCommand(type);
+
+                if (isFunctionCommand) {
+                    ui.printMessage(this.handleFunctionCommands(type, userInput));
+
+                } else if (isTaskCommand) {
+                    // Add a Task to the task list.
+                    ui.printMessage(this.handleTaskCommand(type, userInput));
+
+                } else {
+                    throw new DukeException(
+                            "☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                }
+            } catch (DukeException de) {
+                this.ui.showError(de);
+            }
+        }
+    }
+
     private String runFromGui(String userInput) {
         try {
             Parser.CommandType type = Parser.decipherInput(userInput);
 
-            boolean isFunctionCommand = type == Parser.CommandType.EXIT
-                    || type == Parser.CommandType.LIST
-                    || type == Parser.CommandType.DONE
-                    || type == Parser.CommandType.DELETE
-                    || type == Parser.CommandType.FIND;
-
-            boolean isTaskCommand = type == Parser.CommandType.TODO
-                    || type == Parser.CommandType.DEADLINE
-                    || type == Parser.CommandType.EVENT;
+            boolean isFunctionCommand = checkIsFunctionCommand(type);
+            boolean isTaskCommand = checkIsTaskCommand(type);
 
             if (isFunctionCommand) {
                 return this.handleFunctionCommands(type, userInput);

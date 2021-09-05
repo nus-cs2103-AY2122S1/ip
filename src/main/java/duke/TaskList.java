@@ -83,6 +83,36 @@ public class TaskList {
     }
 
     /**
+     * Updates a certain task in the task list with new values, using its
+     * task number.
+     *
+     * @param valuesToUpdate The values to change for the task.
+     * @return A String output indicating that the task was updated.
+     * @throws DukeException If the task
+     */
+    public String updateTask(String[] valuesToUpdate) throws DukeException {
+        assert valuesToUpdate.length == 3
+                : "Not enough information provided to update task.";
+        int taskNumber = Integer.parseInt(valuesToUpdate[0]) - 1;
+        if (taskNumber >= this.tasks.size()) {
+            throw new DukeException("☹ OOPS!!! That task does not exist.");
+        }
+
+        Task taskToUpdate = this.tasks.get(taskNumber);
+        try {
+            this.tasks.set(taskNumber,
+                    taskToUpdate.update(valuesToUpdate[1], valuesToUpdate[2]));
+            return "Sure thing. I've replaced the following task:\n"
+                    + taskToUpdate.toString() + "\n"
+                    + "with this task:\n"
+                    + this.tasks.get(taskNumber).toString()
+                    + "\n";
+        } catch (DukeException de) {
+            throw new DukeException(de.getMessage());
+        }
+    }
+
+    /**
      * Deletes a certain task from the task list, using its task number.
      *
      * @param taskNumber The number of the task in the task list.

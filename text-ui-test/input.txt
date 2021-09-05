@@ -26,6 +26,15 @@ event project meeting
 deadline return book /by tonight
 event project meeting /at 12th Aug
 event project meeting /at 2021-08-06, 14:00
+list
+update 4 /d buy bread from store
+update 2 /d project discussion /t 2021-08-06, 15:00 - 16:00
+update 1 /t 2021-06-13
+update 2 /d project discussion on Zoom
+update
+update 3
+update 3 /t 2021-08-06
+update 20 /d buy new laptop
 done 100
 done -1
 done

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 /**
  * A task to be marked as done.
  */
@@ -13,6 +15,25 @@ public class ToDo extends Task {
      */
     public ToDo(String taskDescription, boolean isDone) {
         super(taskDescription, isDone);
+    }
+
+    /**
+     Returns a new instance of ToDo with updated values.
+     *
+     * @param taskDescription The description of the updated ToDo.
+     * @param dateAndTime A given date and time, invalid if not null.
+     * @return A ToDo with the updated description.
+     * @throws DukeException If a date and time was given.
+     */
+    public ToDo update(String taskDescription, String dateAndTime) throws DukeException {
+        String updatedDescription = taskDescription == null
+                ? this.taskDescription
+                : taskDescription;
+        if (dateAndTime != null) {
+            throw new DukeException("☹ Sorry kid, A todo cannot have a date and time.");
+        } else {
+            return new ToDo(updatedDescription, this.isDone);
+        }
     }
 
     /**

@@ -17,6 +17,7 @@ public abstract class Parser {
         EXIT,
         LIST,
         DONE,
+        UPDATE,
         DELETE,
         FIND,
         TODO,
@@ -24,6 +25,8 @@ public abstract class Parser {
         EVENT,
         UNKNOWN
     }
+    static final int MINIMUM_LENGTH_IF_CONTAINS_BOTH = 9;
+    static final int MINIMUM_LENGTH_IF_CONTAINS_ONE = 4;
 
     /**
      * Takes in the user's String input and determines the type of Duke command it is.
@@ -40,6 +43,9 @@ public abstract class Parser {
 
         } else if (input.startsWith("done")) {
             return CommandType.DONE;
+
+        } else if (input.startsWith("update")) {
+            return CommandType.UPDATE;
 
         } else if (input.startsWith("delete")) {
             return CommandType.DELETE;
@@ -126,7 +132,8 @@ public abstract class Parser {
     public static int parseDoneCommand(String input) throws DukeException {
         assert input.length() != 0 : "Invalid Done command.";
         String[] splitBySpace = input.split(" ");
-        boolean hasInputAfterSpace = splitBySpace.length > 1;
+        boolean hasInputAfterSpace = splitBySpace.length > 1
+                && splitBySpace[1].trim().length() > 0;
 
         if (hasInputAfterSpace) {
             return Integer.parseInt(splitBySpace[1].trim());
@@ -134,6 +141,83 @@ public abstract class Parser {
         } else {
             throw new DukeException("☹ OOPS!!! Please state which task number "
                     + "you want to mark\n as done.");
+        }
+    }
+
+    private static boolean checkIfInteger(String string) {
+        try {
+            Integer.parseInt(string);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    private static boolean findArguments(String string) {
+        boolean hasDescription = string.contains("/d");
+        boolean hasTime = string.contains("/t");
+        int actualLength = string.length();
+        if (hasDescription && hasTime) {
+            return actualLength >= MINIMUM_LENGTH_IF_CONTAINS_BOTH;
+        } else {
+            return hasDescription && actualLength >= MINIMUM_LENGTH_IF_CONTAINS_ONE
+                    || hasTime && actualLength >= MINIMUM_LENGTH_IF_CONTAINS_ONE;
+        }
+    }
+
+    private static String[] extractArguments(String string) {
+        String[] descriptionAndTime = new String[2];
+        int descriptionIndex = string.indexOf("/d ");
+        int timeIndex = string.indexOf("/t ");
+
+        if (descriptionIndex < 0) {
+            descriptionAndTime[1] = string.substring(timeIndex + 3);
+        } else if (timeIndex < 0) {
+            descriptionAndTime[0] = string.substring(descriptionIndex + 3);
+        } else if (descriptionIndex < timeIndex) {
+            String[] splitAtT = string.substring(descriptionIndex + 3).split("/t ");
+            descriptionAndTime[0] = splitAtT[0].trim();
+            descriptionAndTime[1] = splitAtT[1].trim();
+        } else {
+            String[] splitAtD = string.substring(timeIndex + 3).split("/d ");
+            descriptionAndTime[0] = splitAtD[1].trim();
+            descriptionAndTime[1] = splitAtD[0].trim();
+        }
+
+        return descriptionAndTime;
+    }
+
+    /**
+     * Takes in the string of the update command entered by the user and extracts the
+     * arguments passed into the update command.
+     *
+     * @param input The update command entered by the user.
+     * @return The extracted arguments of the update command.
+     * @throws DukeException If the given update command is missing arguments.
+     */
+    public static String[] parseUpdateCommand(String input) throws DukeException {
+        assert input.length() != 0 : "Invalid Update command.";
+        String[] splitBySpace = input.split(" ", 3);
+        boolean hasTaskNumber = splitBySpace.length > 1
+                && checkIfInteger(splitBySpace[1].trim());
+        boolean hasArguments = splitBySpace.length > 2
+                && findArguments(splitBySpace[2].trim());
+        boolean isValidUpdateCommand = hasTaskNumber && hasArguments;
+
+        if (isValidUpdateCommand) {
+            String[] numberDescriptionAndTime = new String[3];
+            numberDescriptionAndTime[0] = splitBySpace[1].trim();
+            String[] commandArguments = extractArguments(splitBySpace[2].trim());
+            numberDescriptionAndTime[1] = commandArguments[0];
+            numberDescriptionAndTime[2] = commandArguments[1];
+            return numberDescriptionAndTime;
+
+        } else if (!hasTaskNumber) {
+            throw new DukeException("☹ OOPS!!! Please state which task number "
+                    + "you want to update.");
+        } else {
+            throw new DukeException("☹ OOPS!!! Please provide a description or "
+                    + "time to update.");
         }
     }
 

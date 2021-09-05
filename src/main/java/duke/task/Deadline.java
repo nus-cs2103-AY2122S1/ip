@@ -3,6 +3,9 @@ package duke.task;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.Parser;
+import duke.exception.DukeException;
+
 /**
  * A task with a given deadline.
  */
@@ -19,6 +22,29 @@ public class Deadline extends Task {
     public Deadline(String taskDescription, LocalDateTime dateAndTime, boolean isDone) {
         super(taskDescription, isDone);
         this.dateAndTime = dateAndTime;
+    }
+
+    /**
+     Returns a new instance of Deadline with updated values.
+     *
+     * @param taskDescription The description of the updated Deadline.
+     * @param dateAndTime The date and time of the updated Deadline.
+     * @return A Deadline with the updated description or time, or both.
+     * @throws DukeException If the given date and time is invalid.
+     */
+    public Deadline update(String taskDescription, String dateAndTime) throws DukeException {
+        try {
+            String updatedDescription = taskDescription == null
+                    ? this.taskDescription
+                    : taskDescription;
+            LocalDateTime updatedTime = dateAndTime == null
+                    ? this.dateAndTime
+                    : Parser.formatDateTime(dateAndTime);
+            return new Deadline(updatedDescription, updatedTime, this.isDone);
+
+        } catch (DukeException de) {
+            throw new DukeException(de.getMessage());
+        }
     }
 
     /**
