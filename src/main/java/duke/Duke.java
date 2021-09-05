@@ -95,7 +95,8 @@ public class Duke {
             } else if (command.equals("deadline")) {
                 LocalDate date = LocalDate.parse(parsedInputString[2]);
                 LocalTime time = LocalTime.parse(parsedInputString[3]);
-                String deadlineDesc = parsedInputString[1]; //skip the "deadline "
+                String deadlineDesc = parsedInputString[1];
+
                 tasks.addTask(new Deadline(deadlineDesc, date, time));
                 taskListIsAddedTo = true;
 

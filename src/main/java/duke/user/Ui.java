@@ -8,7 +8,9 @@ import duke.data.TaskList;
 public class Ui {
 
     // ASCII DIVIDER to clean up the output
-    static final String DIVIDER = "----------------------------------------------------";
+    public static final String DIVIDER = "----------------------------------------------------";
+    public static final String DELIMITER = " | ";
+    public static final String SPLIT_DELIMITER = " \\| ";
 
     public Ui() {
     }

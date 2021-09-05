@@ -12,6 +12,8 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.user.DukeException;
+import duke.user.Ui;
 
 /**
  * Represents the storage portion of the Duke program.
@@ -44,8 +46,8 @@ public class Storage {
 
             // Loop through the taskList and parse the tasks to write it in the dataFile
             for (Task current : taskList) {
-                myWriter.write(current.getTaskType() + " | " + current.getDoneStatus() + " | "
-                        + current.getDescription() + " | " + current.getDueDate() + "\n");
+                myWriter.write(current.getTaskType() + Ui.DELIMITER + current.getDoneStatus() + Ui.DELIMITER
+                        + current.getDescription() + Ui.DELIMITER + current.getDueDate() + "\n");
             }
             myWriter.close(); // Must close the writer after each use
 
@@ -64,47 +66,42 @@ public class Storage {
     public ArrayList<Task> loadFromFile() {
         try { // Make a new file if possible
             dataFile.getParentFile().mkdirs();
-            if (dataFile.createNewFile()) {
-                //System.out.println("New task list saved at: " + dataFile.getName());
-            } else {
-                //System.out.println("Loading your previous task list...");
+            dataFile.createNewFile();
 
-                // Read the txt into the taskList arrayList
-                Scanner taskListReader = new Scanner(dataFile);
 
-                // While there are more tasks in the file
-                while (taskListReader.hasNext()) {
-                    String taskDetails = taskListReader.nextLine();
-                    if (taskDetails.startsWith("D ")) {
+            // Read the txt into the taskList arrayList
+            Scanner taskListReader = new Scanner(dataFile);
 
-                        // [0] is the Task category, [1] is isDone boolean, [2] is task desc, [3] is task dueDate
-                        if (taskDetails.split(" \\| ")[1].equals("0")) {
-                            taskList.add(new Deadline(taskDetails.split(" \\| ")[2],
-                                    LocalDate.parse(taskDetails.split(" \\| ")[3].split(" ")[0]),
-                                    LocalTime.parse(taskDetails.split(" \\| ")[3].split(" ")[1])));
-                        } else {
-                            taskList.add(new Deadline(taskDetails.split(" \\| ")[2],
-                                    LocalDate.parse(taskDetails.split(" \\| ")[3].split(" ")[0]),
-                                    LocalTime.parse(taskDetails.split(" \\| ")[3].split(" ")[1]),
-                                    true));
-                        }
-                    } else if (taskDetails.startsWith("E ")) {
-                        if (taskDetails.split(" \\| ")[1].equals("0")) {
-                            taskList.add(new Event(taskDetails.split(" \\| ")[2], taskDetails.split(" \\| ")[3]));
-                        } else {
-                            taskList.add(new Event(taskDetails.split(" \\| ")[2], taskDetails.split(" \\| ")[3], true));
-                        }
+            // While there are more tasks in the file
+            while (taskListReader.hasNext()) {
+                String taskDetails = taskListReader.nextLine();
 
-                    } else {
-                        if (taskDetails.split(" \\| ")[1].equals("0")) {
-                            taskList.add(new Todo(taskDetails.split(" \\| ")[2]));
-                        } else {
-                            taskList.add(new Todo(taskDetails.split(" \\| ")[2], true));
-                        }
-                    }
+                // [0] is the Task category, [1] is isDone boolean, [2] is task desc, [3] is task dueDate
+                int isDoneFlagIndex = 1;
+                int taskDescIndex = 2;
+                int dueDateTimeIndex = 3;
+
+                if (taskDetails.startsWith("D ")) {
+                    taskList.add(new Deadline(taskDetails.split(Ui.SPLIT_DELIMITER)[taskDescIndex],
+                            LocalDate.parse(taskDetails.split(Ui.SPLIT_DELIMITER)[dueDateTimeIndex].split(" ")[0]),
+                            LocalTime.parse(taskDetails.split(Ui.SPLIT_DELIMITER)[dueDateTimeIndex].split(" ")[1]),
+                            !taskDetails.split(Ui.SPLIT_DELIMITER)[isDoneFlagIndex].equals("0")));
+
+                } else if (taskDetails.startsWith("E ")) {
+                    taskList.add(new Event(taskDetails.split(Ui.SPLIT_DELIMITER)[taskDescIndex],
+                            taskDetails.split(Ui.SPLIT_DELIMITER)[dueDateTimeIndex],
+                            !taskDetails.split(Ui.SPLIT_DELIMITER)[isDoneFlagIndex].equals("0")));
+
+                } else if (taskDetails.startsWith("T ")) {
+                    taskList.add(new Todo(taskDetails.split(Ui.SPLIT_DELIMITER)[taskDescIndex],
+                            !taskDetails.split(Ui.SPLIT_DELIMITER)[isDoneFlagIndex].equals("0")));
+
+                } else {
+                    throw new DukeException("Unknown command type loaded from saved file!");
                 }
             }
-        } catch (IOException e) {
+
+        } catch (IOException | DukeException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
