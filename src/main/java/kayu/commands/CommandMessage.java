@@ -31,4 +31,7 @@ public class CommandMessage {
     protected static final String ERROR_UNKNOWN_COMMAND = "Instruction does not follows specified format.";
     protected static final String ERROR_EMPTY_PARAMS = "Command '%s' requires parameters to execute.";
     protected static final String ERROR_IMPROPER_FORMATTING = "Command '%s' is not formatted properly with key '%s'";
+    
+    // Assertion format.
+    protected static final String ASSERT_FAIL_NULL_PARAMS = "Parameter String should not be null.";
 }

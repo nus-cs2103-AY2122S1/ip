@@ -24,6 +24,8 @@ import kayu.task.Task;
  */
 public abstract class AddTaskCommand extends Command {
 
+    private static final String ASSERT_FAIL_INCOMPLETE_PARAMS = "Parameters extracted are not complete.";
+    
     private final DateTimeFormat dateTimeFormat;
 
     /**
@@ -54,7 +56,7 @@ public abstract class AddTaskCommand extends Command {
     }
 
     protected String extractDesc(String[] paramArray, String commandName) throws KayuException {
-        assert (paramArray.length >= 1);
+        assert (paramArray.length >= 1) : ASSERT_FAIL_INCOMPLETE_PARAMS;
         
         String desc = paramArray[0].trim();
         if (desc.isBlank()) {
@@ -64,7 +66,7 @@ public abstract class AddTaskCommand extends Command {
     }
 
     protected LocalDate extractDate(String[] paramArray) throws KayuException {
-        assert (paramArray.length == 3);
+        assert (paramArray.length == 3) : ASSERT_FAIL_INCOMPLETE_PARAMS;
         
         String dateString = paramArray[1].trim();
         List<DateTimeFormatter> dateFormatterList = dateTimeFormat.getDateFormats();
@@ -80,7 +82,7 @@ public abstract class AddTaskCommand extends Command {
     }
 
     protected LocalTime extractTime(String[] paramArray) throws KayuException {
-        assert (paramArray.length == 3);
+        assert (paramArray.length == 3) : ASSERT_FAIL_INCOMPLETE_PARAMS;
         
         String timeString = paramArray[2].trim().toUpperCase();
         List<DateTimeFormatter> timeFormatterList = dateTimeFormat.getTimeFormats();

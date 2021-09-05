@@ -1,5 +1,7 @@
 package kayu.commands;
 
+import static kayu.commands.CommandMessage.ASSERT_FAIL_NULL_PARAMS;
+
 import java.util.List;
 
 import kayu.exception.KayuException;
@@ -21,6 +23,7 @@ public abstract class Command {
      * @param commandParams String parameters fed into the command by user.
      */
     public Command(String commandParams) {
+        assert (commandParams != null) : ASSERT_FAIL_NULL_PARAMS;
         this.commandParams = commandParams;
     }
 
