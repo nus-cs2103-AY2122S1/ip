@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 import duke.data.TaskList;
 
 /**
- * OutputFormatter class that cotains and formats strings for output to the user
+ * OutputFormatter class that formats strings for output to the user
  */
 public class OutputFormatter {
     private OutputFormatter() {}
