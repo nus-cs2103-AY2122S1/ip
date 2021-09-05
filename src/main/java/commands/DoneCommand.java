@@ -36,6 +36,7 @@ public final class DoneCommand extends Command {
         assert ui != null : "invalid Ui object detected";
         assert storage != null : "invalid Storage object detected";
         ArrayList<Task> tasks = list.getTasks();
+        String result = "";
         try {
             if (getInput().size() == 1) {
                 throw new IllegalArgumentException("Please input index :)");
