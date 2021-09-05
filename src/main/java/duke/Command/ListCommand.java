@@ -7,9 +7,11 @@ import duke.Ui;
 public class ListCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print("All tasks:");
-        ui.print(tasks.allTasks());
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String result = "";
+        result += ("All tasks:" + "\n");
+        result += (tasks.allTasks());
+        return result;
     }
 
     @Override

@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task task;
         if (type.equals("todo")) {
             task = new Task.Todo(description, false);
@@ -35,9 +35,11 @@ public class AddCommand extends Command {
         }
 
         tasks.addTask(task);
-        ui.print("Added: " + task.getTaskType() + task.getStatusIcon() + " " + task.getDescription());
-        ui.print("There are " + tasks.size() + " tasks in the list");
+        String result = "";
+        result += ("Added: " + task.getTaskType() + task.getStatusIcon() + " " + task.getDescription() + "\n");
+        result += ("There are " + tasks.size() + " tasks in the list");
         storage.save(tasks);
+        return result;
     }
 
     @Override

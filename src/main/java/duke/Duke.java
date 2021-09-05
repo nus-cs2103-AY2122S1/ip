@@ -45,9 +45,16 @@ public class Duke {
 
     }
 
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            String output = c.execute(tasks, ui, storage);
+            return output;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
 
-    public static void main(String[] args) {
-        new Duke().run();
+
     }
-}
 
+}

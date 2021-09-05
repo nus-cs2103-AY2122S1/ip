@@ -14,7 +14,7 @@ public abstract class Command {
      * @param storage Storage object of bot
      * @throws DukeException
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     /**
      * Checks if Command is ExitCommand
