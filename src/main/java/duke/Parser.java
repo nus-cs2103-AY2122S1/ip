@@ -1,5 +1,11 @@
 package duke;
 
+/**
+ * Parser processes user input and commands.
+ *
+ * @author Samay Sagar
+ * @version CS2103 AY21/22 Sem 1
+ */
 public interface Parser {
     /**
      * Gets the description supplied by the user after a command.

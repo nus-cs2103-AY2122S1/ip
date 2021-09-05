@@ -7,6 +7,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+
+/**
+ * Storage handles the reading and writing of data to text files.
+ *
+ * @author Samay Sagar
+ * @version CS2103 AY21/22 Sem 1
+ */
 public class Storage {
     private final String dataStoragePath;
 

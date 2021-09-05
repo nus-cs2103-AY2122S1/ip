@@ -3,6 +3,12 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Task contains a title and can be completed or not completed.
+ *
+ * @author Samay Sagar
+ * @version CS2103 AY21/22 Sem 1
+ */
 public class Task {
     protected String description;
     protected boolean isDone;

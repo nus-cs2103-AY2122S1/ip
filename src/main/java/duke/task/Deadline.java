@@ -3,6 +3,12 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline is a Task that is due by a specified date.
+ *
+ * @author Samay Sagar
+ * @version CS2103 AY21/22 Sem 1
+ */
 public class Deadline extends Task {
     /**
      * A constructor for a Deadline that specifies whether or not it is completed.
