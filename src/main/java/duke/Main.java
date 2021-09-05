@@ -33,14 +33,9 @@ public class Main extends Application {
         assert ap != null;
         stage.setScene(new Scene(ap));
 
-        MainWindow mw = fxmlLoader.<MainWindow>getController();
-        try {
-            mw.setDuke(new Duke("data/tasks.txt"));
-        } catch (DukeException e) {
-            mw.printMessage(e.getMessage());
-        }
-
-        stage.show();
+        MainWindow mw = fxmlLoader.getController();
+        mw.setDuke(new Duke("data/tasks.txt", mw));
         mw.displayGreeting();
+        stage.show();
     }
 }

@@ -11,6 +11,7 @@ public class Duke {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
+    private final MainWindow mw;
 
     public enum Commands {
         LIST,
@@ -32,15 +33,44 @@ public class Duke {
     }
 
     /**
-     * Constructor to create Duke instance.
+     * Constructor without GUI reference for testing purposes.
      *
      * @param filePath Path to storage
      */
-    public Duke(String filePath) throws DukeException {
-        ui = new Ui();
-        storage = new Storage(filePath);
+    public Duke(String filePath) {
+        this.mw = null;
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
         if (storage.hasSave()) {
-            tasks = storage.load();
+            try {
+                tasks = storage.load();
+            } catch (DukeException e) {
+                tasks = new TaskList();
+            }
+        } else {
+            tasks = new TaskList();
+        }
+        assert(tasks != null);
+    }
+
+
+    /**
+     * Constructor to create Duke instance.
+     *
+     * @param filePath Path to storage
+     * @param mw MainWindow instance
+     */
+    public Duke(String filePath, MainWindow mw) {
+        this.mw = mw;
+        this.ui = new Ui();
+        this.storage = new Storage(filePath);
+        if (storage.hasSave()) {
+            try {
+                tasks = storage.load();
+            } catch (DukeException e) {
+                tasks = new TaskList();
+                this.mw.printMessage(e.toString());
+            }
         } else {
             tasks = new TaskList();
         }
