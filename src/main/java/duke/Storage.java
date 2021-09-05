@@ -19,6 +19,7 @@ import duke.task.Todo;
  */
 public class Storage {
     private final String filePath;
+    private final String DONE = "[X]";
 
     /**
      * Initialises Storage with a filePath for the dataFile.
@@ -92,55 +93,93 @@ public class Storage {
         String taskDetail = taskString.substring(7);
         switch (taskType) {
         case ("[T]"):
-            result = new Todo(taskDetail);
-            if (taskStatus.equals("[X]")) {
-                result.setDone();
-            }
+            result = getTodo(taskDetail, taskStatus);
             break;
         case ("[D]"):
-            String[] deadlineDescription = taskDetail
-                    .substring(0, taskDetail.length() - 1)
-                    .split("by: ", 2);
-            String[] dateTimeOfDeadline = deadlineDescription[1].split(", ", 2);
-            if (dateTimeOfDeadline.length == 1) {
-                result = new Deadline(deadlineDescription[0]
-                        .substring(0, deadlineDescription[0].length() - 2),
-                        LocalDate.parse(dateTimeOfDeadline[0], DateTimeFormatter.ofPattern("dd MMM yyyy")));
-            } else if (dateTimeOfDeadline.length == 2) {
-                result = new Deadline(deadlineDescription[0]
-                        .substring(0, deadlineDescription[0].length() - 2),
-                        LocalDate.parse(dateTimeOfDeadline[0], DateTimeFormatter.ofPattern("dd MMM yyyy")),
-                        LocalTime.parse(dateTimeOfDeadline[1]));
-            } else {
-                assert false;
-            }
-            if (taskStatus.equals("[X]")) {
-                result.setDone();
-            }
+            result = getDeadline(taskDetail, taskStatus);
             break;
         case ("[E]"):
-            String[] eventDescription = taskDetail
-                    .substring(0, taskDetail.length() - 1)
-                    .split("at: ", 2);
-            String[] dateTimeOfEvent = eventDescription[1].split(", ", 2);
-            if (dateTimeOfEvent.length == 1) {
-                result = new Event(eventDescription[0]
-                        .substring(0, eventDescription[0].length() - 2),
-                        LocalDate.parse(dateTimeOfEvent[0], DateTimeFormatter.ofPattern("dd MMM yyyy")));
-            } else if (dateTimeOfEvent.length == 2) {
-                result = new Deadline(eventDescription[0]
-                        .substring(0, eventDescription[0].length() - 2),
-                        LocalDate.parse(dateTimeOfEvent[0], DateTimeFormatter.ofPattern("dd MMM yyyy")),
-                        LocalTime.parse(dateTimeOfEvent[1]));
-            } else {
-                assert false;
-            }
-            if (taskStatus.equals("[X]")) {
-                result.setDone();
-            }
+            result = getEvent(taskDetail, taskStatus);
             break;
         default:
             assert false;
+        }
+        return result;
+    }
+
+    /**
+     * Returns a Todo from the given taskDetail and taskStatus.
+     *
+     * @param taskDetail detail of the todo.
+     * @param taskStatus status of the todo, done or undone.
+     * @return a Todo from the given taskDetail and taskStatus.
+     */
+    private Task getTodo(String taskDetail, String taskStatus) {
+        Task result = new Todo(taskDetail);
+        if (taskStatus.equals(DONE)) {
+            result.setDone();
+        }
+        return result;
+    }
+
+    /**
+     * Returns a Deadline from the given taskDetail and taskStatus.
+     *
+     * @param taskDetail detail of the deadline.
+     * @param taskStatus status of the deadline, done or undone.
+     * @return a Deadline from the given taskDetail and taskStatus.
+     */
+    private Task getDeadline(String taskDetail, String taskStatus) {
+        Task result = new Task();
+        String[] deadlineDescription = taskDetail
+                .substring(0, taskDetail.length() - 1)
+                .split("by: ", 2);
+        String[] dateTimeOfDeadline = deadlineDescription[1].split(", ", 2);
+        if (dateTimeOfDeadline.length == 1) {
+            result = new Deadline(deadlineDescription[0]
+                    .substring(0, deadlineDescription[0].length() - 2),
+                    LocalDate.parse(dateTimeOfDeadline[0], DateTimeFormatter.ofPattern("dd MMM yyyy")));
+        } else if (dateTimeOfDeadline.length == 2) {
+            result = new Deadline(deadlineDescription[0]
+                    .substring(0, deadlineDescription[0].length() - 2),
+                    LocalDate.parse(dateTimeOfDeadline[0], DateTimeFormatter.ofPattern("dd MMM yyyy")),
+                    LocalTime.parse(dateTimeOfDeadline[1]));
+        } else {
+            assert false;
+        }
+        if (taskStatus.equals(DONE)) {
+            result.setDone();
+        }
+        return result;
+    }
+
+    /**
+     * Returns an Event from the given taskDetail and taskStatus.
+     *
+     * @param taskDetail detail of the event.
+     * @param taskStatus status of the event, done or undone.
+     * @return an Event from the given taskDetail and taskStatus.
+     */
+    private Task getEvent(String taskDetail, String taskStatus) {
+        Task result = new Task();
+        String[] eventDescription = taskDetail
+                .substring(0, taskDetail.length() - 1)
+                .split("at: ", 2);
+        String[] dateTimeOfEvent = eventDescription[1].split(", ", 2);
+        if (dateTimeOfEvent.length == 1) {
+            result = new Event(eventDescription[0]
+                    .substring(0, eventDescription[0].length() - 2),
+                    LocalDate.parse(dateTimeOfEvent[0], DateTimeFormatter.ofPattern("dd MMM yyyy")));
+        } else if (dateTimeOfEvent.length == 2) {
+            result = new Deadline(eventDescription[0]
+                    .substring(0, eventDescription[0].length() - 2),
+                    LocalDate.parse(dateTimeOfEvent[0], DateTimeFormatter.ofPattern("dd MMM yyyy")),
+                    LocalTime.parse(dateTimeOfEvent[1]));
+        } else {
+            assert false;
+        }
+        if (taskStatus.equals(DONE)) {
+            result.setDone();
         }
         return result;
     }
