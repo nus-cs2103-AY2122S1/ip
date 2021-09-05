@@ -3,6 +3,8 @@
 /out/
 /*.iml
 *.log
+.classpath
+.project
 
 # Gradle build files
 /.gradle/
