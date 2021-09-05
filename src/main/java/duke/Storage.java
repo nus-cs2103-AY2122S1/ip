@@ -16,7 +16,6 @@ import java.util.Scanner;
  * Stores and retrieves information of the tasklist for Duke.
  */
 public class Storage {
-    private ArrayList<Task> toStore;
     private final String FILE_PATH;
     private final String DIR_PATH;
 
@@ -45,37 +44,17 @@ public class Storage {
                 String task = s.nextLine();
                 String[] splitTask = task.split("\\|");
 
-                if (splitTask.length == 3) {
+                if (splitTask[0].equals("T")) {
                     // it is todotask
-                    Task toAdd = new ToDo(splitTask[2]);
-
-                    if (splitTask[1].equals("1")) {
-                        toAdd.markAsDone();
-                    }
-
-                    output.add(toAdd);
-                } else {
-                    // can be event or deadline
-                    if (splitTask[0].equals("E")) {
-                        // event
-                        Task toAdd = new Event(splitTask[2], splitTask[3]);
-
-                        if (splitTask[1].equals("1")) {
-                            toAdd.markAsDone();
-                        }
-
-                        output.add(toAdd);
-                    } else {
-                        // deadline
-                        Task toAdd = new Deadline(splitTask[2], splitTask[3]);
-
-                        if (splitTask[1].equals("1")) {
-                            toAdd.markAsDone();
-                        }
-
-                        output.add(toAdd);
-                    }
+                    initialiseToDo(output, splitTask);
+                } else if (splitTask[0].equals("E")) {
+                    // event
+                    initialiseEvent(output, splitTask);
+                } else if (splitTask[0].equals("D")) {
+                    // deadline
+                    initialiseDeadline(output, splitTask);
                 }
+
             }
 
             return output;
@@ -85,23 +64,63 @@ public class Storage {
     }
 
     /**
+     * Initialises a Deadline Object and adds it to an ArrayList.
+     *
+     * @param tasks ArrayList for the Deadline Object to be added to.
+     * @param splitTask Details of the Deadline Object stored in an array.
+     */
+    private void initialiseDeadline(ArrayList<Task> tasks, String[] splitTask) {
+        Task toAdd = new Deadline(splitTask[2], splitTask[3]);
+
+        if (splitTask[1].equals("1")) {
+            toAdd.markAsDone();
+        }
+
+        tasks.add(toAdd);
+    }
+
+    /**
+     * Initialises an Event Object and adds it to an ArrayList.
+     *
+     * @param tasks ArrayList for the Event Object to be added to.
+     * @param splitTask Details of the Event Object stored in an array.
+     */
+    private void initialiseEvent(ArrayList<Task> tasks, String[] splitTask) {
+        Task toAdd = new Event(splitTask[2], splitTask[3]);
+
+        if (splitTask[1].equals("1")) {
+            toAdd.markAsDone();
+        }
+
+        tasks.add(toAdd);
+    }
+
+    /**
+     * Initialises a ToDo Object and adds it to an ArrayList.
+     *
+     * @param tasks ArrayList for the ToDo Object to be added to.
+     * @param splitTask Details of the ToDo Object stored in an array.
+     */
+    private void initialiseToDo(ArrayList<Task> tasks, String[] splitTask) {
+        Task toAdd = new ToDo(splitTask[2]);
+
+        if (splitTask[1].equals("1")) {
+            toAdd.markAsDone();
+        }
+
+        tasks.add(toAdd);
+    }
+
+    /**
      * Saves the taskList given by Duke into user's computer.
      *
-     * @param tasks taskList which is being saved into user's computer.
+     * @param taskList taskList which is being saved into user's computer.
      */
-    public void saveFile(TaskList tasks) {
+    public void saveFile(TaskList taskList) {
         try {
             FileWriter fw = new FileWriter(FILE_PATH);
 
-            String textToAdd = "";
-
-            for (int i = 0; i < tasks.getSize(); i++) {
-                if (i == 0) {
-                    textToAdd += tasks.taskSaveToString(i);
-                } else {
-                    textToAdd += "\n" + tasks.taskSaveToString(i);
-                }
-            }
+            String textToAdd = convertTaskListToSaveForm(taskList);
 
             fw.write(textToAdd);
             fw.close();
@@ -109,10 +128,30 @@ public class Storage {
             File file = new File(DIR_PATH);
 
             if (file.mkdir()) {
-                saveFile(tasks);
+                saveFile(taskList);
             } else {
                 System.out.println("Failed to create file");
             }
         }
+    }
+
+    /**
+     * Converts taskList into a text form which can be saved.
+     *
+     * @param taskList taskList to be saved.
+     * @return Text form of taskList to be saved.
+     */
+    private String convertTaskListToSaveForm(TaskList taskList) {
+        String textToAdd = "";
+
+        for (int i = 0; i < taskList.getSize(); i++) {
+            if (i == 0) {
+                textToAdd += taskList.taskSaveToString(i);
+            } else {
+                textToAdd += "\n" + taskList.taskSaveToString(i);
+            }
+        }
+
+        return textToAdd;
     }
 }

@@ -22,17 +22,25 @@ public class ListCommand extends Command {
     /**
      * Executes the ListCommand.
      *
-     * @param tasks TaskList of Tasks to be listed.
+     * @param taskList TaskList of Tasks to be listed.
      * @param ui Ui to print to users of Duke.
      * @param storage Storage to save and load TaskList of Duke.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.print(tasks);
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+        ui.print(taskList);
     }
 
+    /**
+     * Gets the String representation of the things printed in the
+     * execute method as well as execute list command.
+     *
+     * @param taskList TaskList of Tasks to be listed.
+     * @param ui Ui to get the String representation of the text printed.
+     * @param storage Storage to save and load TaskList of Duke.
+     */
     @Override
-    public String getExecutedString(TaskList tasks, Ui ui, Storage storage) {
-        return ui.getPrintString(tasks);
+    public String getExecutedString(TaskList taskList, Ui ui, Storage storage) {
+        return ui.getPrintString(taskList);
     }
 }
