@@ -100,7 +100,7 @@ public class Parser {
         try {
             newDate = LocalDateTime.parse(splitSnooze[1].trim(), fmt);
         } catch (DateTimeParseException e) {
-            return new String[]{"OOPS!!! You have entered an invalid date!"};
+            return new String[]{"OOPS!!! You have entered an invalid date or time!"};
         }
 
         if (task instanceof Todo) {
