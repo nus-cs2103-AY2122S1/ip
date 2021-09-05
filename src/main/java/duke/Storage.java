@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -72,18 +79,18 @@ public class Storage {
                 Task task = tasks.getTask(i);
                 char taskType = task.toString().charAt(2);
                 char isDone = '0';
-                if (task.isDone) {
+                if (task.getDone()) {
                     isDone = '1';
                 }
 
                 switch (taskType) {
                     case 'T':
-                        bw.write(taskType + " | " + isDone + " | " + task.description);
+                        bw.write(taskType + " | " + isDone + " | " + task.getDescription());
                         bw.newLine();
                         break;
                     case 'E':
                     case 'D':
-                        bw.write(taskType + " | " + isDone + " | " + task.description + " | " + task.getDate());
+                        bw.write(taskType + " | " + isDone + " | " + task.getDescription() + " | " + task.getDate());
                         bw.newLine();
                         break;
                     default:
