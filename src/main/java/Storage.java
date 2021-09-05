@@ -1,17 +1,25 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public interface DataHandler {
+public class Storage {
+    private final String dataStoragePath;
+
+    public Storage(String dataStoragePath) {
+        this.dataStoragePath = dataStoragePath;
+    }
+
     /**
      * Reads the text content of a given file.
-     * @param filename The name of the file to read from
      * @return An ArrayList of the lines read from a given file.
      */
-    public static ArrayList<String> readLinesFromFile(String filename) {
+    public ArrayList<String> readLines() {
         ArrayList<String> lines = new ArrayList<>();
         try {
-            File file = new File(filename);
+            File file = new File(this.dataStoragePath);
             Scanner sc = new Scanner(file);
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
@@ -27,11 +35,10 @@ public interface DataHandler {
     /**
      * Creates a file with the given filename.
      * If the file already exists, it will overwrite the existing file with a new file.
-     * @param filename The filename to be created.
      */
-    public static void overwriteNewFile(String filename) {
+    public void overwriteNewFile() {
         try {
-            FileWriter fileWriter = new FileWriter(filename, false);
+            FileWriter fileWriter = new FileWriter(this.dataStoragePath, false);
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
@@ -41,11 +48,10 @@ public interface DataHandler {
     /**
      * Writes a given String to a given file, without overwriting existing content.
      * @param content The content to be written to the file
-     * @param filename The file that is to be written to
      */
-    public static void writeToFile(String content, String filename) {
+    public void writeToFile(String content) {
         try {
-            FileWriter fileWriter = new FileWriter(filename, true);
+            FileWriter fileWriter = new FileWriter(this.dataStoragePath, true);
             fileWriter.write(content);
             fileWriter.close();
         } catch (IOException e) {

@@ -39,24 +39,25 @@ public class Task {
      * @param isDone a boolean representing whether or not the task has been completed
      * @param title a String representing the title of the task
      * @param timeDue a String representing when the task is due, if it is due.
-     * @return
+     * @return a Task that is created from the given details
      */
-    public static Task createTask(Type taskType, boolean isDone, String title, LocalDate timeDue) {
+    public static Task createTask(
+            Type taskType, boolean isDone, String title, LocalDate timeDue) {
         switch (taskType) {
-            case TODO:
-                return new ToDo(title, isDone);
             case DEADLINE:
                 return new Deadline(title, timeDue, isDone);
             case EVENT:
                 return new Event(title, timeDue, isDone);
+            default:
+                // If the type cannot be parsed, it defaults to TO-DO.
+                return new ToDo(title, isDone);
         }
-        // If the type cannot be parsed, it defaults to TO-DO.
-        return new ToDo(title, isDone);
+
     }
 
     /**
      * Parses structured text into a Task.
-     * Text must be of the format <typeIndicator><done><deadline>|<title>
+     * Text must be of the format [typeIndicator][done][deadline]|[title]
      * @param text The text to be parsed into a Task.
      * @return a Task based on the parsed text
      */
@@ -64,7 +65,8 @@ public class Task {
         char typeIndicator = text.charAt(0);
         char doneIndicator = text.charAt(1);
         boolean isDone = doneIndicator == '1';
-        LocalDate timeDue = LocalDate.parse(text.substring(2, text.indexOf('|')));
+        String timeDueString = text.substring(2, text.indexOf('|'));
+        LocalDate timeDue = timeDueString.length() ==  0 ? null : LocalDate.parse(timeDueString);
         String title = text.substring(text.indexOf('|') + 1);
         return createTask(charToTypeEnum(typeIndicator), isDone, title, timeDue);
     }
@@ -75,8 +77,10 @@ public class Task {
      */
     public String toSaveData() {
         int doneIndicator = this.isDone ? 1 : 0;
-        String timeDueString = this.timeDue == null ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        return String.format("%s%s%s|%s\n", this.type, doneIndicator, timeDueString, this.description);
+        String timeDueString = this.timeDue == null
+                ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        return String.format("%s%s%s|%s\n",
+                this.type, doneIndicator, timeDueString, this.description);
     }
 
     /**
@@ -97,16 +101,20 @@ public class Task {
         return String.format("[%s][%s] %s", type, doneIndicator, this.description);
     }
 
+    /**
+     * Given a char, convert it to a typeIndicator Enum.
+     * @param t The char to be converted to a TypeIndicators Enum
+     * @return a TypeIndicators enum
+     */
     public static Type charToTypeEnum(char t) {
         switch (t) {
-            case 'T':
-                return Type.TODO;
             case 'D':
                 return Type.DEADLINE;
             case 'E':
                 return Type.EVENT;
+            default:
+                // If the type cannot be inferred, return a TO-DO as default.
+                return Type.TODO;
         }
-        // If the type cannot be inferred, return a TO-DO as default.
-        return Type.TODO;
     }
 }

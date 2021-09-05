@@ -9,6 +9,11 @@ public class TaskList {
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
+
+    /**
+     * Converts a taskList to a text format that can be saved in a txt file.
+     * @return a String that represents the savable data of a TaskList.
+     */
     public String toSaveData() {
         String data = "";
         for (Task task : this.tasks) {
