@@ -52,6 +52,7 @@ public class MainWindow extends AnchorPane {
      * @param janet Instance of Janet
      */
     public void setJanet(Janet janet) {
+        assert(janet != null);
         this.janet = janet;
     }
 
@@ -69,6 +70,7 @@ public class MainWindow extends AnchorPane {
     }
 
     private void addDialogs(DialogBox... dialogs) {
+
         dialogContainer.getChildren().addAll(dialogs[0]);
         if (dialogs.length != 1) {
             addDialogs(Arrays.copyOfRange(dialogs, 1, dialogs.length));

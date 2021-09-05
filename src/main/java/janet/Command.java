@@ -61,6 +61,7 @@ public class Command {
      * @return Janet operation
      */
     public String getOperation() {
+        assert(operation != null);
         return operation;
     }
 
@@ -81,6 +82,7 @@ public class Command {
      * @return Description of task specified by user
      */
     public String getDescription() {
+        assert(description != null);
         return description;
     }
 
@@ -91,6 +93,7 @@ public class Command {
      * @return String representation of task time
      */
     public String getTime() {
+        assert(time != null);
         return time;
     }
 }

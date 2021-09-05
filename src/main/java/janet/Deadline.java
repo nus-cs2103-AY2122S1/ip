@@ -37,6 +37,7 @@ public class Deadline extends Task {
      * @return Formatted date string
      */
     public String parseByDate() {
+        assert(byDate != null);
         DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM d yyyy");
         return byDate.format(pattern);
     }

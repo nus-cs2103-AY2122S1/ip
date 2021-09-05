@@ -46,6 +46,7 @@ public class Janet {
      * @throws IOException When unable to write the save
      */
     String getResponseFromCommand(Command command) throws IOException {
+        assert(command.getOperation() != null);
         switch (command.getOperation()) {
         case "bye":
             Platform.exit();
