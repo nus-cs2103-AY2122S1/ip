@@ -68,6 +68,17 @@ public class TaskList {
     public ArrayList<Task> getTasks() {
         return tasks;
     }
+    public String findTasks(String keyword) {
+        String output = "Here are the matching tasks in your list: \n";
+        for (int i = 0; i < tasks.size(); i++) {
+            Task t = tasks.get(i);
+            String name = t.description;
+            if (name.contains(keyword)) {
+                output += (i + 1) + ". " + t.toString() + "\n";
+            }
+        }
+        return output;
+    }
 
     @Override
     public String toString() {

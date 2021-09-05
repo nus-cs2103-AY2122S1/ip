@@ -40,6 +40,10 @@ public class Ui {
         System.out.println("Here are the tasks on your list: ");
         System.out.println(t);
     }
+    public void displayFoundList(String keyword) {
+        System.out.println(dashedLine);
+        System.out.println(keyword);
+    }
     public void sayBye() {
         System.out.println(dashedLine);
         System.out.println("Bye! Hope to see you again soon!");

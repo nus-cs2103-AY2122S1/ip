@@ -48,6 +48,15 @@ public class Parser {
              String task = str[0];
              int num = Integer.parseInt(str[1]);
              return new DeleteCommand(num);
+         } else if(response.contains("find")) {
+             if (response.length() > 4) {
+                 String[] str = response.split(" ");
+                 String task = str[0];
+                 String keyword = str[1];
+                 return new FindCommand(keyword);
+             } else {
+                 throw new DukeException("☹ OOPS!!! The description of a find cannot be empty.");
+             }
          } else {
              throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-( " +
                         "Try todo, event, or deadline");
