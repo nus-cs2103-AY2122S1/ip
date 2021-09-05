@@ -21,17 +21,19 @@ public class Parser {
         String[] actionDescription = fullCommand.split(" ", 2);
         String action = actionDescription[0];
 
-        switch (action) {
-        case "bye":
+        CommandType commandType = CommandType.getCommandType(action);
+
+        switch (commandType) {
+        case BYE:
             return new ExitCommand();
 
-        case "list":
+        case LIST:
             return new ListCommand();
 
-        case "done":
+        case DONE:
             return new DoneCommand(getDescriptions(actionDescription));
 
-        case "todo":
+        case TODO:
             descriptions = getDescriptions(actionDescription);
             if (isBlank(descriptions)) {
                 return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
@@ -40,7 +42,7 @@ public class Parser {
             ToDos todos = new ToDos(descriptions);
             return new AddCommand(todos);
 
-        case "deadline":
+        case DEADLINE:
             descriptions = getDescriptions(actionDescription);
             if (isBlank(descriptions)) {
                 return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
@@ -49,7 +51,7 @@ public class Parser {
             Deadline deadline = new Deadline(getOnlyDescription(descriptions), getDeadlineDateTime(descriptions));
             return new AddCommand(deadline);
 
-        case "event":
+        case EVENT:
             descriptions = getDescriptions(actionDescription);
             if (isBlank(descriptions)) {
                 return new UiCommand(Ui.ERROR_MSG_EMPTY_DESCRIPTION);
@@ -58,18 +60,19 @@ public class Parser {
             Events event = new Events(getOnlyDescription(descriptions), getEventDateTime(descriptions));
             return new AddCommand(event);
 
-        case "delete":
+        case DELETE:
             return new DeleteCommand(getDescriptions(actionDescription));
 
-        case "find":
+        case FIND:
             return new FindCommand(getDescriptions(actionDescription));
 
-        case "":
+        case EMPTY:
             return new EmptyCommand();
 
         default:
             return new UiCommand(Ui.ERROR_MSG_UNKOWN_MSG);
         }
+
     }
 
     private String dateTimeFormatter(String unformattedDate) {

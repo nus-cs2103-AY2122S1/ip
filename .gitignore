@@ -7,7 +7,6 @@
 /.gradle/
 /build/
 src/main/resources/docs/
-src/main/java/seedu/data
 
 # MacOS custom attributes files created by Finder
 .DS_Store
@@ -22,3 +21,4 @@ bin/
 .project
 .settings
 
+src/main/java/seedu/data/data.txt
