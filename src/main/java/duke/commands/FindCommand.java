@@ -7,8 +7,11 @@ import main.java.duke.Storage;
 import main.java.duke.TaskList;
 import main.java.duke.tasks.Task;
 
+/**
+ * A command that looks for tasks with keyword given from the task list.
+ */
 public class FindCommand extends Command {
-    private String keyword;
+    private final String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -27,9 +30,9 @@ public class FindCommand extends Command {
             }
         }
         String message1 = ("Here are the matching tasks in your list: \n");
-        String message2 = "";
+        StringBuilder message2 = new StringBuilder();
         for (Task task : tasksWithKeyword) {
-            message2 += task.toString();
+            message2.append(task.toString());
         }
         return message1 + message2;
     }

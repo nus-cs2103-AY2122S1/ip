@@ -3,6 +3,9 @@ import java.util.ArrayList;
 
 import main.java.duke.tasks.Task;
 
+/**
+ * A list of tasks.
+ */
 public class TaskList {
     protected ArrayList<Task> taskList;
     /**

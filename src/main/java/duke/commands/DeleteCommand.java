@@ -7,8 +7,11 @@ import java.util.Scanner;
 import main.java.duke.*;
 import main.java.duke.tasks.Task;
 
+/**
+ * A command that deletes a task from a task list.
+ */
 public class DeleteCommand extends Command {
-    private int taskNum;
+    private final int taskNum;
 
     /**
      * Constructs a new delete task command with the given index.
@@ -25,8 +28,6 @@ public class DeleteCommand extends Command {
      * @param tasks given list of tasks
      * @param gui given gui object
      * @param storage given storage object
-     * @throws IOException
-     * @throws DukeException
      */
     public String execute(TaskList tasks, MainWindow gui, Storage storage) throws IOException, DukeException {
         if (tasks.getTaskList().size() < this.taskNum) {
@@ -39,16 +40,16 @@ public class DeleteCommand extends Command {
             taskList.remove(taskToDelete);
             String message1 = ("Noted. I've removed this task: \n");
             String message2 = taskToDelete.toString();
-            String taskform;
+            String taskForm;
             if (taskList.size() == 1 || taskList.size() == 0) {
-                taskform = " task";
+                taskForm = " task";
             } else {
-                taskform = " tasks";
+                taskForm = " tasks";
             }
-            String message3 = ("Now you have " + taskList.size() + taskform + " in the list.");
+            String message3 = ("Now you have " + taskList.size() + taskForm + " in the list.");
             return message1 + message2 + message3;
         }
-    };
+    }
 
     public boolean isExit() {
         return false;
