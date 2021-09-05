@@ -57,6 +57,7 @@ public class TaskList {
      * @return String representation of the completed task.
      */
     public String markIndexCompleted(int index) {
+        assert (index < this.taskList.size() && index > -1);
         Task selectedTask = this.taskList.get(index);
         selectedTask.markCompleted();
         return selectedTask.printTask();
@@ -69,6 +70,7 @@ public class TaskList {
      * @return String representation of the deleted task.
      */
     public String deleteIndex(int index) {
+        assert (index < this.taskList.size() && index > -1);
         Task selectedTask = this.taskList.get(index);
         this.taskList.remove(index);
         return selectedTask.printTask();
@@ -91,6 +93,7 @@ public class TaskList {
      * @return Specified task.
      */
     public Task getTask(int index) {
+        assert (index < this.taskList.size() && index > -1);
         return this.taskList.get(index);
     }
 
@@ -106,8 +109,7 @@ public class TaskList {
         int count = 1;
         for (int index = 0; index < this.taskList.size(); index++) {
             String currTask = this.taskList.get(index).printTask();
-            String currTaskDescription = currTask.split("\\Q[\\E.\\Q]\\E ", 2)[1];
-            if (currTaskDescription.contains(keyword)) {
+            if (currTask.contains(keyword)) {
                 result = result + count + "." + currTask + "\n";
                 count++;
             }
