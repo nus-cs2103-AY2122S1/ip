@@ -3,17 +3,8 @@ package duke.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.exception.EmptyTaskDescriptionException;
-import duke.exception.MissingKeywordException;
-import duke.exception.MissingTaskIndexException;
-import duke.exception.TimeNotSpecifiedException;
-import duke.exception.UnrecognisedCommandException;
+import duke.command.*;
+import duke.exception.*;
 
 /**
  * Parses user input.
@@ -34,7 +25,7 @@ public class Parser {
      */
     public Command parse(String command) throws UnrecognisedCommandException, MissingTaskIndexException,
             EmptyTaskDescriptionException, TimeNotSpecifiedException, DateTimeParseException,
-            MissingKeywordException {
+            MissingKeywordException, MissingTagDetailsException {
         // Splits the string on spaces
         String[] wordsArray = command.split(" ");
         String firstWord = wordsArray[0];
@@ -50,6 +41,8 @@ public class Parser {
             return deleteTask(command);
         } else if (firstWord.equals("find")) {
             return findTasks(command);
+        } else if (firstWord.equals("tag")) {
+            return tagTask(command);
         } else if (firstWord.equals("todo") || firstWord.equals("event") || firstWord.equals("deadline")) {
             return addTask(command);
         } else {
@@ -65,7 +58,8 @@ public class Parser {
             throw new MissingTaskIndexException();
         }
 
-        return new DoneCommand(Integer.valueOf(wordsArray[1]) - 1);
+        int taskId = Integer.valueOf(wordsArray[1]) - 1;
+        return new DoneCommand(taskId);
     }
 
     private DeleteCommand deleteTask(String userInput) throws MissingTaskIndexException {
@@ -76,7 +70,8 @@ public class Parser {
             throw new MissingTaskIndexException();
         }
 
-        return new DeleteCommand(Integer.valueOf(wordsArray[1]) - 1);
+        int taskId = Integer.valueOf(wordsArray[1]) - 1;
+        return new DeleteCommand(taskId);
     }
 
     private FindCommand findTasks(String userInput) throws MissingKeywordException {
@@ -87,7 +82,22 @@ public class Parser {
             throw new MissingKeywordException();
         }
 
-        return new FindCommand(wordsArray[1]);
+        String searchTerm = wordsArray[1];
+        return new FindCommand(searchTerm);
+    }
+
+    private TagCommand tagTask(String userInput) throws MissingTagDetailsException {
+        String[] wordsArray = userInput.split(" ");
+
+        // Checks if the task index and tag name are provided
+        if (wordsArray.length != 3 || !wordsArray[1].matches("-?\\d+(\\.\\d+)?")
+                || wordsArray[2].trim().isEmpty()) {
+            throw new MissingTagDetailsException();
+        }
+
+        int taskId = Integer.valueOf(wordsArray[1]) - 1;
+        String tagName = wordsArray[2];
+        return new TagCommand(taskId, tagName);
     }
 
     private AddCommand addTask(String userInput) throws EmptyTaskDescriptionException,

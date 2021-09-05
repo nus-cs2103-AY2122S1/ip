@@ -63,19 +63,24 @@ public class Storage {
         String[] taskStatus = lineOfWords.split(Pattern.quote(" | "));
         String taskType = taskStatus[0];
         String taskProgress = taskStatus[1];
-        String taskDescription = taskStatus[2];
+        String taskTag = taskStatus[2];
+        String taskDescription = taskStatus[3];
         Task taskToAdd;
 
         if (taskType.equals("T")) {
             taskToAdd = new Todo(taskDescription);
         } else if (taskType.equals("D")) {
-            taskToAdd = new Deadline(taskDescription, LocalDate.parse(taskStatus[3]));
+            taskToAdd = new Deadline(taskDescription, LocalDate.parse(taskStatus[4]));
         } else {
-            taskToAdd = new Event(taskDescription, LocalDate.parse(taskStatus[3]));
+            taskToAdd = new Event(taskDescription, LocalDate.parse(taskStatus[4]));
         }
 
         if (taskProgress.equals("1")) {
             taskToAdd.markAsDone();
+        }
+
+        if (!taskTag.trim().isEmpty()) {
+            taskToAdd.setTag(taskTag);
         }
 
         assert taskToAdd != null : "The task should be initialised as expected";
@@ -125,6 +130,9 @@ public class Storage {
         } else {
             currentLine += "0 | ";
         }
+
+        // Formatting the tag of the task
+        currentLine += task.getTag() + " | ";
 
         // Formatting the task description
         currentLine += task.getDescription() + " | ";

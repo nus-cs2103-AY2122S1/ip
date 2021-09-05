@@ -75,6 +75,23 @@ public class TaskList {
     }
 
     /**
+     * Tags a specified task in the list.
+     *
+     * @param taskId The index of the task to be tagged.
+     * @param tagName The name of the tag given to the task.
+     * @return The task that was tagged.
+     * @throws TaskIndexOutOfBoundsException If the task index is illegal.
+     */
+    public Task tagTask(int taskId, String tagName) throws TaskIndexOutOfBoundsException {
+        if (taskId < 0 || (taskId + 1) > taskList.size()) {
+            throw new TaskIndexOutOfBoundsException();
+        }
+        Task taskToBeTagged = taskList.get(taskId);
+        taskToBeTagged.setTag(tagName);
+        return taskToBeTagged;
+    }
+
+    /**
      * Returns the number of tasks in the list.
      *
      * @return The number of tasks.
