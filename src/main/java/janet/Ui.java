@@ -6,6 +6,9 @@ package janet;
  */
 public class Ui {
 
+    public static final String EXPECTED_SCHEDULE_QUERY = "The date for which you wish to view tasks cannot be empty.";
+    public static final String EXPECTED_DATE_GOT_OTHER =
+            "The date for which you wish to view tasks should be of the format YYYY-MM-DD.";
     static final String EXPECTED_SEARCH_QUERY = "The search query of a find operation cannot be empty.";
     static final String INTRO_STRING = "Hey there! I'm Good Janet. How many I help you today?";
     static final String EXPECTED_DONE_INDEX_GOT_NONE =
@@ -30,6 +33,9 @@ public class Ui {
      */
     public static String taskListString(TaskList taskList) {
         assert(taskList != null);
+        if (taskList.size() == 0) {
+            return "I did not find any tasks.";
+        }
         String output = "Here's what I found:\n";
         for (int i = 0; i < taskList.size(); i++) {
             output += String.format("%d. %s\n", i + 1, taskList.get(i));
