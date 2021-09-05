@@ -66,6 +66,7 @@ public class MainWindow extends AnchorPane {
 
         // Executes the appropriate command and displays a message to user
         String response = duke.getResponse(input);
+        assert !response.isEmpty() : "A response should be provided to the user";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
