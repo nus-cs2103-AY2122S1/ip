@@ -36,11 +36,10 @@ public class Parser {
     }
 
     /**
-     * Method that parses the user input and returns the relevant commands and arguments as
-     * strings in an array.
+     * Method that parses the user input and returns the relevant Command.
      *
-     * @return An array of Strings with valid commands and arguments.
-     * @throws DukeException If an invalid command or argument is given as user input.
+     * @return The Command to be executed.
+     * @throws DukeException If the user input is in an invalid format.
      */
     public Command parse() throws DukeException {
         if (input.equals("list")) {

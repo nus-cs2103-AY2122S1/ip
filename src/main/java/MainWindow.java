@@ -7,7 +7,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -26,13 +25,20 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpeg"));
-    
-    private static final Font FONT = new Font("Arial", 12); 
+
+    /**
+     * Initialises the main window.
+      */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Initialises Duke.
+     *
+     * @param d Instance of Duke to be used for the application.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }

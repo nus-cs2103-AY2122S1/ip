@@ -12,11 +12,4 @@ public class DukeException extends Exception {
     public DukeException(String msg) {
         super(msg);
     }
-
-    /**
-     * A method which displays the error message to the user.
-     */
-    public void print() {
-        System.out.println(super.getMessage());
-    }
 }

@@ -46,6 +46,7 @@ public class TaskList {
      * A method to delete a task or mark a task as done.
      *
      * @param input Array containing the command and the index of the task to be edited.
+     * @return The response to be displayed in the GUI.
      * @throws DukeException If an invalid index is given as input.
      */
     public String editTask(String[] input) throws DukeException {
@@ -106,6 +107,11 @@ public class TaskList {
         return data.toString();
     }
 
+    /**
+     * A method that returns the list as a string to be displayed in the GUI.
+     *
+     * @return String representation of the list.
+     */
     @Override
     public String toString() {
         String result = "";
