@@ -36,8 +36,7 @@ public class Message {
      */
     @Override
     public String toString() {
-        String separator = "____________________________________________________________";
-        return separator + "\n" + this.messageText + "\n" + separator;
+        return this.messageText;
     }
 }
 

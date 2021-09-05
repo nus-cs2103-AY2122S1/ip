@@ -8,5 +8,5 @@ import duke.messages.Message;
  * @author kevin9foong
  */
 public interface UserOutputHandler {
-    void writeMessage(Message msg);
+    void handleOutput(Message msg);
 }

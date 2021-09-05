@@ -44,7 +44,7 @@ public class AddDeadlineCommand extends Command {
             throws InvalidDateTimeFormatException,
             InvalidDeadlineBodyException, EmptyDeadlineBodyException, TaskFileIoException {
         Task addedDeadline = taskList.addTask(new Deadline(super.getUserInputBody()));
-        userOutputHandler.writeMessage(new TaskAddMessage(addedDeadline.toString(),
+        userOutputHandler.handleOutput(new TaskAddMessage(addedDeadline.toString(),
                 taskList.getNumOfTasks()));
     }
 

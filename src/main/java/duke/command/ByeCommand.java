@@ -29,7 +29,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void execute(UserOutputHandler userOutputHandler, TaskList taskList) {
-        userOutputHandler.writeMessage(new ByeMessage());
+        userOutputHandler.handleOutput(new ByeMessage());
     }
 
     /**

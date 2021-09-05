@@ -43,7 +43,7 @@ public class FindTasksCommand extends Command {
         List<Task> matchedTasks = taskList.getAllTasks().stream().filter(task ->
                 task.getDescription().contains(textFilter)).collect(Collectors.toList());
 
-        userOutputHandler.writeMessage(new TaskFindListMessage(matchedTasks));
+        userOutputHandler.handleOutput(new TaskFindListMessage(matchedTasks));
     }
 
     /**

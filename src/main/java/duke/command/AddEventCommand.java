@@ -41,7 +41,7 @@ public class AddEventCommand extends Command {
     public void execute(UserOutputHandler userOutputHandler, TaskList taskList)
             throws TaskFileIoException, EmptyEventBodyException, InvalidEventBodyException {
         Task addedTask = taskList.addTask(new Event(super.getUserInputBody()));
-        userOutputHandler.writeMessage(new TaskAddMessage(addedTask.toString(),
+        userOutputHandler.handleOutput(new TaskAddMessage(addedTask.toString(),
                 taskList.getNumOfTasks()));
     }
 

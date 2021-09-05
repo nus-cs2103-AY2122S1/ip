@@ -8,5 +8,5 @@ import java.io.IOException;
  * @author kevin9foong
  */
 public interface UserInputHandler {
-    String readInput() throws IOException;
+    String handleInput() throws IOException;
 }

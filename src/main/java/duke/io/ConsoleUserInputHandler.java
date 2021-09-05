@@ -18,7 +18,7 @@ public class ConsoleUserInputHandler implements UserInputHandler {
      * @return String which contains user input from the console.
      * @throws IOException thrown when failure to read from console occurs.
      */
-    public String readInput() throws IOException {
+    public String handleInput() throws IOException {
         return br.readLine();
     }
 }

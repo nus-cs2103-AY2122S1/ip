@@ -14,7 +14,7 @@ public class ConsoleUserOutputHandler implements UserOutputHandler {
      *
      * @param msg <code>Message</code> containing String data to be written as output.
      */
-    public void writeMessage(Message msg) {
+    public void handleOutput(Message msg) {
         System.out.println(msg.toString());
     }
 }

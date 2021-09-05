@@ -23,11 +23,9 @@ class AddDeadlineCommandTest {
         TaskList taskList = new TaskList(new TaskStorageStub());
         addDeadlineCommand.execute(userOutputHandlerStub, taskList);
 
-        assertEquals("____________________________________________________________\n"
-                        + "Got it. I've added this task:\n"
+        assertEquals("Got it. I've added this task:\n"
                         + "\t[D][ ] x (by: DECEMBER 12 2021)\n"
-                        + "Now you have 1 task in the list.\n"
-                        + "____________________________________________________________",
+                        + "Now you have 1 task in the list.",
                 userOutputHandlerStub.getWrittenMessage());
 
         assertEquals(1, taskList.getNumOfTasks());

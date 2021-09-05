@@ -39,7 +39,7 @@ public class AddTodoCommand extends Command {
     public void execute(UserOutputHandler userOutputHandler, TaskList taskList)
             throws TaskFileIoException, EmptyTodoBodyException {
         Task addedToDo = taskList.addTask(new ToDo(super.getUserInputBody()));
-        userOutputHandler.writeMessage(new TaskAddMessage(addedToDo.toString(),
+        userOutputHandler.handleOutput(new TaskAddMessage(addedToDo.toString(),
                 taskList.getNumOfTasks()));
     }
 

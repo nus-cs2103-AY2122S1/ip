@@ -36,28 +36,6 @@ public class FulfillmentHandler {
     }
 
     /**
-     * Initializes the CLI version of the Duke chat bot.
-     */
-    public void runCliChatBot() {
-        handleGreeting();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String userInput = userInputHandler.readInput();
-                Command userCommand = Parser.parse(userInput);
-                userCommand.execute(userOutputHandler, taskList);
-                isExit = userCommand.isExit();
-            } catch (DukeException e) {
-                userOutputHandler.writeMessage(new Message(e.getMessage()));
-            } catch (IOException ioe) {
-                userOutputHandler.writeMessage(new Message("OOPS!!! Unable to connect to "
-                        + "user input stream!"));
-            }
-        }
-    }
-
-    /**
      * Displays setup actions for GUI version of the chat bot which currently
      * only includes displaying a greeting message.
      */
@@ -71,21 +49,21 @@ public class FulfillmentHandler {
      */
     public void handleGuiUserCommandInput() {
         try {
-            String userCommandInput = userInputHandler.readInput();
+            String userCommandInput = userInputHandler.handleInput();
             Command userCommand = Parser.parse(userCommandInput);
             userCommand.execute(userOutputHandler, taskList);
             if (userCommand.isExit()) {
                 System.exit(0);
             }
         } catch (DukeException e) {
-            userOutputHandler.writeMessage(new Message(e.getMessage()));
+            userOutputHandler.handleOutput(new Message(e.getMessage()));
         } catch (IOException ioe) {
-            userOutputHandler.writeMessage(new Message("OOPS!!! Unable to connect to "
+            userOutputHandler.handleOutput(new Message("OOPS!!! Unable to connect to "
                     + "user input stream!"));
         }
     }
 
     private void handleGreeting() {
-        userOutputHandler.writeMessage(new GreetingMessage());
+        userOutputHandler.handleOutput(new GreetingMessage());
     }
 }

@@ -6,7 +6,7 @@ public class UserOutputHandlerStub implements UserOutputHandler {
     private String writtenMessage;
 
     @Override
-    public void writeMessage(Message msg) {
+    public void handleOutput(Message msg) {
         this.writtenMessage = msg.toString();
     }
 

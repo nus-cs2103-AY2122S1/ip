@@ -40,9 +40,9 @@ public class DeleteTaskCommand extends Command {
             // user input is 1 greater than index.
             int index = Integer.parseInt(super.getUserInputBody()) - 1;
             Task deletedTask = taskList.deleteTask(index);
-            userOutputHandler.writeMessage(new TaskDeleteMessage(deletedTask.toString(), taskList.getNumOfTasks()));
+            userOutputHandler.handleOutput(new TaskDeleteMessage(deletedTask.toString(), taskList.getNumOfTasks()));
         } catch (NumberFormatException nfe) {
-            userOutputHandler.writeMessage(new Message(MessageConstants.MESSAGE_INVALID_INTEGER));
+            userOutputHandler.handleOutput(new Message(MessageConstants.MESSAGE_INVALID_INTEGER));
         }
     }
 

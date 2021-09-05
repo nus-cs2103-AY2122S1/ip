@@ -30,7 +30,7 @@ public class ListTasksCommand extends Command {
      */
     @Override
     public void execute(UserOutputHandler userOutputHandler, TaskList taskList) {
-        userOutputHandler.writeMessage(new TaskListMessage(taskList.getAllTasks()));
+        userOutputHandler.handleOutput(new TaskListMessage(taskList.getAllTasks()));
     }
 
     /**
