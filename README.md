@@ -1,3 +1,4 @@
+[![Java CI with Gradle](https://github.com/Chang-CH/ip/actions/workflows/gradle.yml/badge.svg)](https://github.com/Chang-CH/ip/actions/workflows/gradle.yml)
 # duke.Duke project template
 
 This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
