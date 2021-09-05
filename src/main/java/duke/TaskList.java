@@ -30,19 +30,19 @@ public class TaskList {
     }
 
     /**
-     * Marks the task in index itemNum (1-indexed) as completed.
+     * Marks the task in index itemNum (0-indexed) as completed.
      *
-     * @param itemNum The number in the TaskList of the duke.Task to be mark completed (1-indexed).
+     * @param itemNum The number in the TaskList of the duke.Task to be mark completed (0-indexed).
      */
     public void markDone(int itemNum) {
-        Task task = al.get(itemNum - 1);
+        Task task = al.get(itemNum);
         task.markDone();
     }
 
     /**
      * Gets the task given its index.
      *
-     * @param index The index of the Task in the TaskList(0-indexed).
+     * @param index The index of the Task in the TaskList (0-indexed).
      * @return duke.Task with the index in the duke.TaskList.
      */
     public Task getTaskByIndex(int index) {
