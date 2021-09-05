@@ -27,6 +27,7 @@ public class Storage {
             String filename = "build/resources/main/duke/bin/duke.txt";
             txt = new File(filename);
             raf = new RandomAccessFile(txt, "rwd");
+            assert txt != null && raf != null;
             while (raf.getFilePointer() < raf.length()) {
                 Task t = parse(raf.readLine());
                 if (t != null) {
@@ -61,12 +62,12 @@ public class Storage {
         }
     }
 
-    public void update(TaskList db) throws DukeException {
+    public void update(TaskList database) throws DukeException {
         try {
             raf.seek(0);
             raf.setLength(0);
-            List<Task> dbList = db.getList();
-            for (Task a : dbList) {
+            List<Task> databaseList = database.getList();
+            for (Task a : databaseList) {
                 raf.writeBytes(a.toDatabaseFormat());
                 raf.writeBytes(System.lineSeparator());
             }
