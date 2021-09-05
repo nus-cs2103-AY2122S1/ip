@@ -6,6 +6,7 @@ import duke.ResponseLogic;
 import duke.Storage;
 import duke.task.TaskList;
 
+/** The Command class responsible for creating a new task with a time. */
 public class EventCommand extends Command {
 
     private String description;

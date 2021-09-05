@@ -13,7 +13,151 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 
+/** The class takes in a command, parses it and returns an executable Command object. */
 public class Parser {
+
+    /**
+     * Returns a ListCommand object based on the user's input.
+     *
+     * @param command The command entered by the user.
+     * @return A ListCommand object.
+     */
+    private static ListCommand getListCommand(String command) {
+        return new ListCommand();
+    }
+
+    /**
+     * Returns a DoneCommand object based on the user's input.
+     *
+     * @param command The command entered by the user.
+     * @return A DoneCommand object.
+     */
+    private static DoneCommand getDoneCommand(String command) {
+        int taskNumber = parseInt(command.split(" ")[1]);
+        return new DoneCommand(taskNumber);
+    }
+
+    /**
+     * Returns a DeleteCommand object based on the user's input.
+     *
+     * @param command The command entered by the user.
+     * @return A DeleteCommand object.
+     */
+    private static DeleteCommand getDeleteCommand(String command) {
+        int taskNumber = parseInt(command.split(" ")[1]);
+        return new DeleteCommand(taskNumber);
+    }
+
+    /**
+     * Returns a TodoCommand object based on the user's input.
+     *
+     * @param command The command entered by the user.
+     * @return A TodoCommand object.
+     * @throws DukeException If there is no description for the task.
+     */
+    private static TodoCommand getTodoCommand(String command) throws DukeException {
+        String[] splitCommand = command.split(" ", 2);
+        if (splitCommand.length == 1) {
+            throw new DukeException("Please fill in a description for todo.");
+        }
+        String description = splitCommand[1];
+        return new TodoCommand(description);
+    }
+
+    /**
+     * Returns a DeadlineCommand object based on the user's input.
+     *
+     * @param command The command entered by the user.
+     * @return A DeadlineCommand object.
+     * @throws DukeException If there is no description for the task, or the task is missing a deadline.
+     */
+    private static DeadlineCommand getDeadlineCommand(String command) throws DukeException {
+        String[] splitCommand = command.split(" ", 2);
+        if (splitCommand.length == 1) {
+            throw new DukeException("Please fill in a description for deadline.");
+        }
+
+        String description = splitCommand[1];
+        String[] splitDescription = description.split(" /by ");
+        if (splitDescription.length == 1) {
+            throw new DukeException("Please add in /by, following by a dateline.");
+        }
+
+        description = splitDescription[0];
+        String deadline = splitDescription[1];
+        return new DeadlineCommand(description, deadline);
+    }
+
+    /**
+     * Returns a EventCommand object based on the user's input.
+     *
+     * @param command The command entered by the user.
+     * @return A EventCommand object.
+     * @throws DukeException If there is no description for the task, or the task is missing a time.
+     */
+    private static EventCommand getEventCommand(String command) throws DukeException {
+        String[] splitCommand = command.split(" ", 2);
+        if (splitCommand.length == 1) {
+            throw new DukeException("Please fill in a description for event.");
+        }
+
+        String description = splitCommand[1];
+        String[] splitDescription = description.split(" /at ");
+        if (splitDescription.length == 1) {
+            throw new DukeException("Please add in /at, followed by the event's time.");
+        }
+
+        description = splitDescription[0];
+        String time = splitDescription[1];
+        return new EventCommand(description, time);
+    }
+
+    /**
+     * Returns a DateCommand object based on the user's input.
+     *
+     * @param command The command entered by the user.
+     * @return A DateCommand object.
+     * @throws DukeException If there is no valid date in the user's input.
+     */
+    private static DateCommand getDateCommand(String command) throws DukeException {
+        String[] splitCommand = command.split(" ", 2);
+        if (splitCommand.length == 1) {
+            throw new DukeException("Please fill in a date");
+        }
+        String date = splitCommand[1];
+        return new DateCommand(date);
+    }
+
+    /**
+     * Returns a ByeCommand object based on the user's input.
+     *
+     * @param command The command entered by the user.
+     * @return A ByeCommand object.
+     */
+    private static ByeCommand getByeCommand(String command) {
+        return new ByeCommand();
+    }
+
+    /**
+     * Returns a FindCommand object based on the user's input.
+     *
+     * @param command The command entered by the user.
+     * @return A FindCommand object.
+     * @throws DukeException If there is no valid keyword, or there is more than one keyword.
+     */
+    private static FindCommand getFindCommand(String command) throws DukeException {
+        String[] splitCommand = command.split(" ");
+        if (splitCommand.length == 1) {
+            throw new DukeException("Please fill in a keyword");
+        }
+
+        if (splitCommand.length > 2) {
+            throw new DukeException("Please only fill in one keyword");
+        }
+
+        String keyword = splitCommand[1];
+        return new FindCommand(keyword);
+    }
 
     /**
      * Parses the command entered by the user and returns a executable
@@ -25,80 +169,23 @@ public class Parser {
      */
     public static Command parse(String command) throws DukeException {
         if (command.equals("list")) {
-            return new ListCommand();
-
+            return getListCommand(command);
         } else if (command.startsWith("done")) {
-            int taskNumber = parseInt(command.split(" ")[1]);
-            return new DoneCommand(taskNumber);
-
+            return getDoneCommand(command);
         } else if (command.startsWith("delete")) {
-            int taskNumber = parseInt(command.split(" ")[1]);
-            return new DeleteCommand(taskNumber);
-
+            return getDeleteCommand(command);
         } else if (command.startsWith("todo")) {
-            String[] splitCommand = command.split(" ", 2);
-            if (splitCommand.length == 1) {
-                throw new DukeException("Please fill in a description for todo.");
-            }
-            String description = splitCommand[1];
-            return new TodoCommand(description);
-
+            return getTodoCommand(command);
         } else if (command.startsWith("deadline")) {
-            String[] splitCommand = command.split(" ", 2);
-            if (splitCommand.length == 1) {
-                throw new DukeException("Please fill in a description for deadline.");
-            }
-
-            String description = splitCommand[1];
-            String[] splitDescription = description.split(" /by ");
-            if (splitDescription.length == 1) {
-                throw new DukeException("Please add in /by, following by a dateline.");
-            }
-
-            description = splitDescription[0];
-            String deadline = splitDescription[1];
-            return new DeadlineCommand(description, deadline);
-
+            return getDeadlineCommand(command);
         } else if (command.startsWith(("event"))) {
-            String[] splitCommand = command.split(" ", 2);
-            if (splitCommand.length == 1) {
-                throw new DukeException("Please fill in a description for event.");
-            }
-
-            String description = splitCommand[1];
-            String[] splitDescription = description.split(" /at ");
-            if (splitDescription.length == 1) {
-                throw new DukeException("Please add in /at, followed by the event's time.");
-            }
-
-            description = splitDescription[0];
-            String time = splitDescription[1];
-            return new EventCommand(description, time);
-
+            return getEventCommand(command);
         } else if (command.startsWith(("date"))) {
-            String[] splitCommand = command.split(" ", 2);
-            if (splitCommand.length == 1) {
-                throw new DukeException("Please fill in a date");
-            }
-            String date = splitCommand[1];
-            return new DateCommand(date);
-
+            return getDateCommand(command);
         } else if (command.equals("bye")) {
-            return new ByeCommand();
-
+            return getByeCommand(command);
         } else if (command.startsWith("find")) {
-            String[] splitCommand = command.split(" ");
-            if (splitCommand.length == 1) {
-                throw new DukeException("Please fill in a keyword");
-            }
-
-            if (splitCommand.length > 2) {
-                throw new DukeException("Please only fill in one keyword");
-            }
-
-            String keyword = splitCommand[1];
-            return new FindCommand(keyword);
-
+            return getFindCommand(command);
         } else {
             throw new DukeException("I do not understand what that means :(");
         }

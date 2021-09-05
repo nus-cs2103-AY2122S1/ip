@@ -4,10 +4,16 @@ import duke.ResponseLogic;
 import duke.Storage;
 import duke.task.TaskList;
 
+/** The Command class responsible for finding tasks that contains a certain keyword. */
 public class FindCommand extends Command {
 
     private String keyword;
 
+    /**
+     * Initialize the keyword query.
+     *
+     * @param keyword The keyword query.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }

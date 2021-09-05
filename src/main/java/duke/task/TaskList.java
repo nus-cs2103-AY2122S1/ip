@@ -7,10 +7,16 @@ import java.util.List;
 import duke.ResponseLogic;
 import duke.Storage;
 
+/** The class which encapsulates the task list and its associated methods. */
 public class TaskList {
 
     private List<Task> tasks;
 
+    /**
+     * Initialize the task list.
+     *
+     * @param tasks The initial task list.
+     */
     public TaskList(List<Task> tasks) {
         this.tasks = tasks;
     }

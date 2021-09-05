@@ -30,6 +30,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserAvatar.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/LollipopAvatar.png"));
 
+    /** Initialize the scrollPane's vertical property such that the scrollPane always scrolls to the bottom
+     *  when a new response is created.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -39,6 +42,11 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Sends the chatbot's first message.
+     *
+     * @param message The chatbot's first message.
+     */
     public void sendFirstMessage(String message) {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
     }
@@ -62,6 +70,11 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     * Close the JavaFX application.
+     *
+     * @param event The ActionEvent which causes the application to close.
+     */
     private void handleExitProgram(ActionEvent event) {
         Object o = event.getSource();
         if (o instanceof Button) {

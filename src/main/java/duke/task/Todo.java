@@ -1,7 +1,13 @@
 package duke.task;
 
+/** The class that encapsulates a Task that has to be done. */
 public class Todo extends Task {
 
+    /**
+     * Initialize the description of the task.
+     *
+     * @param description The description of the task.
+     */
     public Todo(String description) {
         super(description);
     }

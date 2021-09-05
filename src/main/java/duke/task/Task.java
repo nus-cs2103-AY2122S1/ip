@@ -1,5 +1,6 @@
 package duke.task;
 
+/** A basic Task class. */
 public class Task {
     private String description;
     private boolean isDone;
@@ -19,17 +20,17 @@ public class Task {
         return String.format("[%s] %s", this.getStatusIcon(), this.description);
     }
 
-    /** Returns the status icon of the task */
+    /** Returns the status icon of the task. */
     public String getStatusIcon() {
         return (isDone ? "X" : " "); // mark done duke.task with X
     }
 
-    /** Returns the description of the task */
+    /** Returns the description of the task. */
     public String getDescription() {
         return this.description;
     }
 
-    /** Mark the task as done */
+    /** Mark the task as done. */
     public void markAsDone() {
         this.isDone = true;
     }

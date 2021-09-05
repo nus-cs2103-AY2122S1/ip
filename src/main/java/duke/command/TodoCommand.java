@@ -6,10 +6,16 @@ import duke.ResponseLogic;
 import duke.Storage;
 import duke.task.TaskList;
 
+/** The Command class responsible for creating a task that has to be done. */
 public class TodoCommand extends Command {
 
     private String description;
 
+    /**
+     * Initialize the description of the task.
+     *
+     * @param description The description of the task.
+     */
     public TodoCommand(String description) {
         this.description = description;
     }

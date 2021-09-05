@@ -6,6 +6,7 @@ import duke.ResponseLogic;
 import duke.Storage;
 import duke.task.TaskList;
 
+/** The class in which all commands inherit from. */
 public abstract class Command {
 
     /**
