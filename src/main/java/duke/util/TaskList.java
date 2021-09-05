@@ -81,11 +81,9 @@ public class TaskList {
     public String toString() {
         String taskListString = "";
         for (int i = 0; i < taskList.size(); i++) {
-            if (i == taskList.size() - 1) {
-                taskListString = taskListString + "     " + (i + 1) + "." + taskList.get(i);
-            } else {
-                taskListString = taskListString + "     " + (i + 1) + "." + taskList.get(i) + "\n";
-            }
+            taskListString = i == taskList.size() - 1
+                    ? taskListString + "     " + (i + 1) + "." + taskList.get(i)
+                    : taskListString + "     " + (i + 1) + "." + taskList.get(i) + "\n";
         }
         return taskListString;
     }
