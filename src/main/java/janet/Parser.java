@@ -17,6 +17,7 @@ public class Parser {
     public static Command parseUserInput(String input) throws JanetException {
         String[] inputStringParts = input.split(" ");
         String operation = inputStringParts[0];
+        assert(inputStringParts[0] != null);
         switch (operation) {
         case "bye":
             // Fallthrough
