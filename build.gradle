@@ -30,8 +30,6 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
-
-
 test {
     useJUnitPlatform()
 
@@ -55,9 +53,10 @@ shadowJar {
     archiveClassifier = null
 }
 
+
 checkstyle {
+    sourceSets = []
     toolVersion = '8.29'
-    checkstyleTest.enabled = false
 }
 
 run{
