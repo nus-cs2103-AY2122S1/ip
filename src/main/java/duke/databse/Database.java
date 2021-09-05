@@ -8,11 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.core.UI;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
+import duke.task.*;
 
 
 /**
@@ -120,6 +116,26 @@ public class Database {
             }
             Deadline deadline = new Deadline(taskname_ddl, isDone, tasktime_ddl);
             return deadline;
+        case "R":
+            String taskname_recur = "";
+            String tasktime_recur = "";
+            boolean timepart_recur = false;
+            for (int i = 1; i < s.length - 1; i++) {
+                if (s[i].startsWith("/")) {
+                    timepart_recur = true;
+                    tasktime_recur = s[i].substring(1);
+                } else if (timepart_recur) {
+                    tasktime_recur += " " + s[i];
+                } else {
+                    if (s[i + 1].startsWith("/")) {
+                        taskname_recur += s[i];
+                    } else {
+                        taskname_recur += s[i] + " ";
+                    }
+                }
+            }
+            RecurringTask recurringTask = new RecurringTask(taskname_recur, isDone, tasktime_recur);
+            return recurringTask;
         default:
             break;
         }
