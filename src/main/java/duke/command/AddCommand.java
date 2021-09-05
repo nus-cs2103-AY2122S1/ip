@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.DateTimeException;
 
+import duke.DukeException;
 import duke.InvalidDukeCommandException;
 import duke.TaskManager;
 import duke.task.Deadline;
@@ -30,7 +31,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String execute(TaskManager taskManager) throws InvalidDukeCommandException, DateTimeException {
+    public String execute(TaskManager taskManager) throws DukeException, DateTimeException {
         Task task;
         switch (type) {
         case "todo":
