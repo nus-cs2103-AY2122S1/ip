@@ -1,4 +1,4 @@
-package IP.duke.task;
+package duke.task;
 
 import IP.duke.main.DukeException;
 
