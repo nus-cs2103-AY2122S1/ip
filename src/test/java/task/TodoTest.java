@@ -10,7 +10,7 @@ public class TodoTest {
     @Test
     public void toDataFormat() {
         Todo todo = new Todo("Finish iP");
-        assertEquals("T | 0 | Finish iP", todo.toDataFormat());
+        assertEquals("T | 0 | Finish iP | ", todo.toDataFormat());
     }
 
     @Test

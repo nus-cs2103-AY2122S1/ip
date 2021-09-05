@@ -45,6 +45,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toDataFormat() {
-        return String.format("D | %s | %s | %s", isDone ? "1" : "0", description, by);
+        return String.format("D | %s | %s | %s | %s", isDone ? "1" : "0",
+                description, getPlacesRepresentation(), by);
     }
 }

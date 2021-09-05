@@ -16,7 +16,7 @@ public class TaskListTest {
     public void addTask_todo_success() {
         TaskList tasks = new TaskList();
         tasks.add(new Todo("Finish iP"));
-        assertEquals("T | 0 | Finish iP", tasks.toString());
+        assertEquals("T | 0 | Finish iP | ", tasks.toString());
     }
 
     @Test

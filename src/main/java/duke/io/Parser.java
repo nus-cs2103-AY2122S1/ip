@@ -2,6 +2,7 @@ package duke.io;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.place.Place;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Period;
@@ -67,6 +68,9 @@ public class Parser {
             break;
         case PERIOD:
             message = addPeriod(userInput);
+            break;
+        case PLACE:
+            message = addPlace(userInput);
             break;
         case DELETE:
             message = deleteTask(userInput);
@@ -160,6 +164,28 @@ public class Parser {
             return addTask(new Period(eventDescription, start, end));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Period description and times cannot be empty");
+        }
+    }
+
+    /**
+     * Adds a place to the list of tasks.
+     *
+     * @param userInput given by user.
+     * @return string to inform user of successful command.
+     * @throws DukeException error when adding place to task.
+     */
+    public String addPlace(String... userInput) throws DukeException {
+        try {
+            int i = Integer.parseInt(userInput[1].split(" /at ")[0]);
+            Task task = tasks.get(i - 1);
+            String taskWord = tasks.size() == 1
+                    ? "task"
+                    : "tasks";
+            task.addPlace(new Place(userInput[1].split(" /at ")[1]));
+            return Ui.print(String.format("Noted. I've added the place to the task:\n  "
+                    + "%s\nNow you have %d %s in the list.", task, tasks.size(), taskWord));
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw new DukeException("Please give a valid number!");
         }
     }
 

@@ -45,6 +45,7 @@ public class Event extends Task {
      */
     @Override
     public String toDataFormat() {
-        return String.format("E | %s | %s | %s", isDone ? "1" : "0", description, at);
+        return String.format("E | %s | %s | %s | %s", isDone ? "1" : "0",
+                description, getPlacesRepresentation(), at);
     }
 }
