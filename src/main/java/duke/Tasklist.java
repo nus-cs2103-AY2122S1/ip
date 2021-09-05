@@ -113,6 +113,25 @@ public class Tasklist {
     }
 
     /**
+     * Adds tags to tasks indicated the indexes
+     *
+     * @param indexes indexes of tasks to add the tags to
+     * @param tags the tags to be added to the tasks
+     */
+    public Tasklist addTags(ArrayList<Integer> indexes, ArrayList<String> tags) throws DukeException {
+        Tasklist taggedTasks = new Tasklist(new ArrayList<>());
+        for (int i = 0; i < indexes.size(); i++) {
+            if (indexes.get(i) > this.getNumTasks()) {
+                throw new DukeException("Invalid input. Index must be less than or equal to " + this.getNumTasks());
+            }
+            Task currentTask = this.getTask(indexes.get(i));
+            taggedTasks.add(currentTask);
+            currentTask.addTags(tags);
+        }
+        return taggedTasks;
+    }
+
+    /**
      * Gets a string that shows the list of current tasks.
      *
      * @return string that shows the list of current tasks

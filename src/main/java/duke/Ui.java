@@ -9,7 +9,6 @@ import duke.task.Task;
  * Class to handle the user interface of Duke.
  */
 public class Ui {
-    private static final String strBreak = "    ____________________________________________________________\n";
 
     /**
      * Prints out sentence welcoming user when Duke starts.
@@ -28,10 +27,10 @@ public class Ui {
      * @return confirmation when user adds a task.
      */
     public String taskAdded(Task task, int count) {
-        String toPrint = String.format("     Got it. I've added this task:\n     "
-                        + "%s\n     Now you have %x task%s in the list.",
+        String toPrint = String.format("Got it. I've added this task:\n     "
+                        + "%s\nNow you have %x task%s in the list.",
                 task.toString(), count, count > 1 ? "s" : "");
-        return strBreak + toPrint + "\n" + strBreak;
+        return toPrint;
     }
 
     /**
@@ -93,5 +92,17 @@ public class Ui {
     public String printRelatedTasks(Tasklist tasks, ArrayList<String> keywords) {
         String strKeywords = keywords.stream().reduce((x, y) -> x + " " + y).orElse("");
         return "Your tasks that match with " + strKeywords + ":\n" + this.printList(tasks);
+    }
+
+    /**
+     * Returns string for tag command.
+     *
+     * @param taggedTasks tasks that are tagged.
+     * @param tags tags for tasks.
+     * @return string for tag command.
+     */
+    public String showTagsAdded(Tasklist taggedTasks, ArrayList<String> tags) {
+        String tagString = tags.toString();
+        return "Tagged tasks:\n" + taggedTasks + " with " + tagString;
     }
 }
