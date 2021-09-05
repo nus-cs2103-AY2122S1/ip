@@ -1,10 +1,5 @@
 package duke;
 
-import duke.items.Deadline;
-import duke.items.Event;
-import duke.items.Item;
-import duke.items.ToDo;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -12,6 +7,11 @@ import java.io.IOException;
 import java.lang.StringBuilder;
 import java.util.ListIterator;
 import java.util.Scanner;
+
+import duke.items.Deadline;
+import duke.items.Event;
+import duke.items.Item;
+import duke.items.ToDo;
 
 /**
  * Handles loading and saving to-do lists to and from the system.
