@@ -160,10 +160,10 @@ public class CommandParser {
 
     private static Command parseFindCommand(String commandString) throws DukeException {
         String payload = commandString.substring(FIND_PREFIX.length()).trim();
-       if (payload.length() <= 0) {
-           throw new DukeException("Please indicate a keyword to find tasks!");
-       } else {
-           return new FindCommand(payload);
-       }
+        if (payload.length() <= 0) {
+            throw new DukeException("Please indicate a keyword to find tasks!");
+        } else {
+            return new FindCommand(payload);
+        }
     }
 }
