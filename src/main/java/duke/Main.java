@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.io.InputStream;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,21 +18,29 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
+        InputStream iconStream = this.getClass().getResourceAsStream("/images/mafu.png");
+        if (iconStream != null) {
+            stage.getIcons().add(new Image(iconStream));
+        }
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
+
+        AnchorPane ap = null;
         try {
-            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/mafu.png")));
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
-            stage.setScene(scene);
-            try {
-                fxmlLoader.<MainWindow>getController().setDuke(new Duke("data/tasks.txt"));
-            } catch (DukeException e) {
-                fxmlLoader.<MainWindow>getController().printMessage(e.getMessage());
-            }
-            stage.show();
-            fxmlLoader.<MainWindow>getController().displayGreeting();
+            ap = fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert ap != null;
+        stage.setScene(new Scene(ap));
+
+        MainWindow mw = fxmlLoader.<MainWindow>getController();
+        try {
+            mw.setDuke(new Duke("data/tasks.txt"));
+        } catch (DukeException e) {
+            mw.printMessage(e.getMessage());
+        }
+
+        stage.show();
+        mw.displayGreeting();
     }
 }

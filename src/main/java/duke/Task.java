@@ -20,7 +20,7 @@ public class Task {
     }
 
     /**
-     * Check if task description contains string.
+     * Checks if task description contains string.
      *
      * @param searchKey Serach string
      * @return true if contains string
@@ -55,7 +55,7 @@ public class Task {
     }
 
     /**
-     * String representation of a task for printing
+     * Returns string representation of a task for printing
      *
      * @return String to print
      */

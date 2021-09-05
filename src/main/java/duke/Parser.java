@@ -31,7 +31,6 @@ public class Parser {
     private Duke.TaskTypes taskType;
     private Temporal datetime;
     private String searchKey;
-    private boolean haveParameters;
 
     /**
      * Parses temporal string from load file.
@@ -64,6 +63,28 @@ public class Parser {
      * @throws DateTimeFormatException Invalid date-time format
      */
     public static Temporal parseTemporal(String datetime) throws DateTimeFormatException {
+        Temporal result;
+        try {
+            if (datetime.trim().split("\\s+", 2).length < 2) { // no time given
+                result = parseDate(datetime);
+            } else {
+                result = parseDateTime(datetime);
+            }
+        } catch (DateTimeFormatException e) {
+            result = parseSmart(datetime);
+        }
+        assert result != null;
+        return result;
+    }
+
+    /**
+     * Parses using Hawking external dependency. Uses NLP.
+     *
+     * @param datetime Input string
+     * @return Temporal instance
+     * @throws DateTimeFormatException Parse failed
+     */
+    private static Temporal parseSmart(String datetime) throws DateTimeFormatException {
         HawkingTimeParser parser = new HawkingTimeParser();
         DateTime jodaStart;
         DateTime jodaEnd;
@@ -73,46 +94,38 @@ public class Parser {
             jodaStart = po.getDateRange().getStart();
             jodaEnd = po.getDateRange().getEnd();
         } catch (Exception e) {
-            throw new DateTimeFormatException(datetime);
+            throw new DateTimeFormatException(datetime + " Could not parse using Hawkings!");
         }
         assert jodaStart != null && jodaEnd != null;
-        Temporal result;
+
+        LocalDateTime ldtStart;
+        LocalDateTime ldtEnd;
         try {
-            LocalDateTime ldtStart = LocalDateTime.of(
+            ldtStart = LocalDateTime.of(
                     jodaStart.getYear(),
                     jodaStart.getMonthOfYear(),
                     jodaStart.getDayOfMonth(),
                     jodaStart.getHourOfDay(),
                     jodaStart.getMinuteOfHour()
             );
-            LocalDateTime ldtEnd = LocalDateTime.of(
+            ldtEnd = LocalDateTime.of(
                     jodaEnd.getYear(),
                     jodaEnd.getMonthOfYear(),
                     jodaEnd.getDayOfMonth(),
                     jodaEnd.getHourOfDay(),
                     jodaEnd.getMinuteOfHour()
             );
-
-            if (ldtStart.plusHours(23).plusMinutes(59).equals(ldtEnd)) {
-                result = ldtEnd.toLocalDate();
-            } else if (ldtEnd.getHour() == 23 && ldtEnd.getMinute() == 59) {
-                result = ldtEnd.toLocalDate();
-            } else {
-                result = ldtEnd;
-            }
-
         } catch (DateTimeParseException e) {
-            throw new DateTimeFormatException(datetime + "could not convert to local date time!");
+            throw new DateTimeFormatException(datetime + " Could not convert to local date time!");
         }
-        assert result != null;
-        return result;
-        /*
-        if (datetime.trim().split("\\s+", 2).length < 2) { // no time given
-            return parseDate(datetime);
+
+        if (ldtStart.plusHours(23).plusMinutes(59).equals(ldtEnd)) {
+            return ldtEnd.toLocalDate();
+        } else if (ldtEnd.getHour() == 23 && ldtEnd.getMinute() == 59) {
+            return ldtEnd.toLocalDate();
         } else {
-            return parseDateTime(datetime);
+            return ldtEnd;
         }
-        */
     }
 
     /**
@@ -185,29 +198,39 @@ public class Parser {
         switch (command) {
         case LIST:
         case SAVE:
+        case LOAD:
+        case BYE:
             if (duke.taskSize() == 0) {
                 throw new EmptyListException(command);
             }
-        case LOAD:
-        case BYE:
-            haveParameters = false; // should have nothing after command
             break;
+
         case DONE:
         case DELETE:
         case FIND:
             if (duke.taskSize() == 0) {
                 throw new EmptyListException(command);
             }
-        default:
             if (s.length < 2) {
                 throw new NothingAfterCommand(command);
             } else {
-                haveParameters = parseParameters(s[1], duke);
+                parseParameters(s[1], duke);
             }
+            break;
+
+        default:
+            break;
         }
         return getParsedInput();
     }
 
+    /**
+     * Parses command of string.
+     *
+     * @param commandStr Command as string
+     * @return Command type
+     * @throws IllegalCommandException Not a command
+     */
     private Duke.Commands parseCommand(String commandStr) throws IllegalCommandException {
         try {
             return Duke.Commands.valueOf(commandStr);
@@ -216,29 +239,18 @@ public class Parser {
         }
     }
 
-    private boolean parseParameters(String argument, Duke duke) throws DukeException {
+    /**
+     * Assigns parameter values to instance.
+     *
+     * @param argument String arguments
+     * @param duke Duke instance
+     * @throws DukeException Parse failed
+     */
+    private void parseParameters(String argument, Duke duke) throws DukeException {
         switch (command) {
         case DONE:
         case DELETE:
-            if (argument.matches("[0-9]+")) {
-                try {
-                    index = Integer.parseInt(argument.trim()) - 1;
-                } catch (NumberFormatException e) {
-                    throw new TaskIndexNotInteger(duke.taskSize());
-                }
-            } else { // Extra Functionality: Done or delete by task type and name
-                String[] s = argument.split("\\s+", 2);
-                if (s.length < 2) {
-                    throw new MissingArguments(command);
-                }
-                String taskType = s[0].toUpperCase();
-                try {
-                    this.taskType = Duke.TaskTypes.valueOf(taskType);
-                } catch (IllegalArgumentException e) {
-                    throw new IllegalTaskTypeException(taskType);
-                }
-                description = s[1];
-            }
+            parseTaskIndexOrName(argument, duke);
             break;
 
         case FIND:
@@ -282,7 +294,35 @@ public class Parser {
         default:
             break;
         }
-        return true; // parsed succesfully
+    }
+
+    /**
+     * Parses task index or name.
+     *
+     * @param argument String argument
+     * @param duke Duke instance
+     * @throws DukeException Task cannot be found
+     */
+    private void parseTaskIndexOrName(String argument, Duke duke) throws DukeException {
+        if (argument.matches("[0-9]+")) {
+            try {
+                index = Integer.parseInt(argument.trim()) - 1;
+            } catch (NumberFormatException e) {
+                throw new TaskIndexNotInteger(duke.taskSize());
+            }
+        } else { // Extra Functionality: Done or delete by task type and name
+            String[] s = argument.split("\\s+", 2);
+            if (s.length < 2) {
+                throw new MissingArguments(command);
+            }
+            String taskType = s[0].toUpperCase();
+            try {
+                this.taskType = Duke.TaskTypes.valueOf(taskType);
+            } catch (IllegalArgumentException e) {
+                throw new IllegalTaskTypeException(taskType);
+            }
+            description = s[1];
+        }
     }
 
     private ParsedInput getParsedInput() {

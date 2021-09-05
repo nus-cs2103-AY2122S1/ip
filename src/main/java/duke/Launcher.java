@@ -4,7 +4,9 @@ import javafx.application.Application;
 
 /**
  * A launcher class to workaround classpath issues.
- * https://se-education.org/guides/tutorials/javaFx.html
+ *
+ * Adapted from:
+ * Lum, Jeffry (2021) JavaFX tutorial. https://se-education.org/guides/tutorials/javaFx.html
  */
 public class Launcher {
     public static void main(String[] args) {

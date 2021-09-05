@@ -47,7 +47,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Convert deadline into savable format.
+     * Converts deadline into savable format.
      *
      * @return String to save
      */
@@ -60,7 +60,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * String representation of deadline for printing.
+     * Returns string representation of deadline for printing.
      *
      * @return String to print
      */
