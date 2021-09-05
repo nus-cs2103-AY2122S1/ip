@@ -2,7 +2,7 @@ package duke;
 
 public class WrongInputException extends DukeException {
 
-    WrongInputException() {
+    public WrongInputException() {
         super();
     }
 

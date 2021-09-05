@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class Duke {
     private Storage storage;
@@ -31,9 +32,11 @@ public class Duke {
     //    return "Duke: " + input;
     //}
 
-    String getResponse(String x) {
+
+       
+    String getResponse(String input) {
+        input = input.toLowerCase(Locale.ROOT);
         assert this.storage.getDoesFileExists();
-        String input = x;
         String response;
         if (input.equals("list")) {
             //List task list
@@ -47,7 +50,7 @@ public class Duke {
             //Deletes task
             Integer removeTaskIndex = parser.deleteInputParser(input);
             Task removedTask = taskList.removeTask(removeTaskIndex);
-            response = this.ui.deleteTaskMsg(removedTask, this.taskList.getNoOfTask());
+            response = this.ui.deleteTaskMsg(removedTask, this.taskList.taskListSize());
         } else if (input.contains("find ")) {
             //Find tasks
             String keyword = parser.findInputParser(input);
@@ -60,27 +63,16 @@ public class Duke {
                 if (input.contains("todo")) {
                     newTask = new Todo(parser.toDoInputParser(input));
                 } else if (input.contains("deadline")) {
-                    if (!input.contains("/by")) {
-                        //for missing dateline
-                        throw new MissingDateException();
-                    } else {
-                        newTask = new Deadline(parser.deadlineInputTaskParser(input),
-                                parser.deadlineInputDateParser(input));
-                    }
+                    newTask = new Deadline(parser.deadlineInputParser(input)[0],
+                            parser.deadlineInputParser(input)[1]);
                 } else if (input.contains("event")) {
-                    if (!input.contains("/at")) {
-                        //for missing dateline
-                        throw new MissingDateException();
-                    } else {
-                        newTask = new Event(parser.eventInputTaskParser(input),
-                                parser.eventInputDateParser(input));
-                    }
+                    newTask = new Event(parser.eventInputParser(input)[0],
+                            parser.eventInputParser(input)[1]);
                 }
                 if (newTask != null) {
                     //Add task to the list and print message.
                     taskList.addTask(newTask);
-                    this.storage.saveFile(this.taskList);
-                    response = this.ui.addTaskMsg(newTask, this.taskList.getNoOfTask());
+                    response = this.ui.addTaskMsg(newTask, this.taskList.taskListSize());
                 } else {
                     //For invalid input message
                     throw new WrongInputException();
@@ -91,6 +83,7 @@ public class Duke {
                         + "\n");
             }
         }
+        this.storage.saveFile(this.taskList);
         return response;
     }
 }

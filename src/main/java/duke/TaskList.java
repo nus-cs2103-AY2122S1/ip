@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    private int noOfTask = 0;
+    private int numTasks = 0;
     private ArrayList<Task> taskList;
 
     public TaskList() {
@@ -17,7 +17,7 @@ public class TaskList {
      */
     public void addTask(Task task) {
         assert task != null;
-        this.noOfTask++;
+        this.numTasks++;
         this.taskList.add(task);
     }
 
@@ -56,7 +56,7 @@ public class TaskList {
      * @return The task that is removed.
      */
     public Task removeTask(int index) {
-        this.noOfTask -= 1;
+        this.numTasks -= 1;
         return taskList.remove(index);
     }
 
@@ -84,18 +84,13 @@ public class TaskList {
      */
     @Override
     public String toString() {
-        String str = "";
-        for (int j = 0; j < taskList.size(); j++) {
+        StringBuilder listBuilder = new StringBuilder();
+        for (int j = 0; j < taskListSize(); j++) {
             String listItem = (j + 1)
                     + "."
-                    + taskList.get(j).getTaskType()
-                    + taskList.get(j).checkIsDone()
-                    + " " + taskList.get(j).getDescription() + "\n";
-            str = str + listItem;
+                    + taskList.get(j).toString();
+            listBuilder = listBuilder.append(listItem).append(System.lineSeparator());
         }
-        return str;
-    }
-    public int getNoOfTask() {
-        return this.noOfTask;
+        return listBuilder.toString();
     }
 }
