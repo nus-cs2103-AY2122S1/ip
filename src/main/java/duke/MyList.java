@@ -81,6 +81,7 @@ public class MyList {
      *              for another input.
      */
     public String deleteTask(int index) {
+        assert (index > 0);
         Task removed = this.myList.remove(index - 1);
         return Ui.deleteTaskMessage(removed, this);
     }
