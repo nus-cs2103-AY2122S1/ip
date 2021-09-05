@@ -196,6 +196,7 @@ public class Parser {
         command = parseCommand(s[0].toUpperCase());
 
         switch (command) {
+        // List cannot be empty
         case LIST:
         case SAVE:
         case LOAD:
@@ -205,12 +206,24 @@ public class Parser {
             }
             break;
 
+        // List cannot be empty and must have args after command
         case DONE:
         case DELETE:
         case FIND:
             if (duke.taskSize() == 0) {
                 throw new EmptyListException(command);
             }
+            if (s.length < 2) {
+                throw new NothingAfterCommand(command);
+            } else {
+                parseParameters(s[1], duke);
+            }
+            break;
+
+        // Must have args after command
+        case TODO:
+        case EVENT:
+        case DEADLINE:
             if (s.length < 2) {
                 throw new NothingAfterCommand(command);
             } else {
