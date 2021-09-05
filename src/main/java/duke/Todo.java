@@ -17,7 +17,7 @@ public class Todo extends Task {
     }
 
     /**
-     * Convert todo to savable format.
+     * Converts todo to savable format.
      *
      * @return String to save
      */
@@ -26,7 +26,7 @@ public class Todo extends Task {
     }
 
     /**
-     * String representation of todo for printing
+     * Returns string representation of todo for printing
      *
      * @return String to print
      */

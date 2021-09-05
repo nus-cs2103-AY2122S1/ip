@@ -114,6 +114,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Returns if storage save file exists.
+     *
+     * @return True if save file exists
+     */
     public boolean hasSave() {
         return !(Files.notExists(filePath.getParent()) || Files.notExists(filePath));
     }

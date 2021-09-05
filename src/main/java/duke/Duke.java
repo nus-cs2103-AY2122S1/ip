@@ -47,6 +47,15 @@ public class Duke {
     }
 
     /**
+     * Returns Ui of Duke instance.
+     *
+     * @return Ui instance
+     */
+    public Ui getUi() {
+        return ui;
+    }
+
+    /**
      * Returns the size of the task list.
      *
      * @return size of task list.
@@ -66,6 +75,9 @@ public class Duke {
 
     /**
      * Gets response to user input.
+     *
+     * @param input String input
+     * @return Response to display
      */
     public String getResponse(String input) {
         // Set default to List tasks
@@ -84,7 +96,7 @@ public class Duke {
                 return ui.showExitMessage();
 
             case LIST:
-                return ui.print(tasks.toString());
+                return tasks.toString();
 
             case DONE:
                 if (parsedInput.description == null) {
@@ -104,9 +116,9 @@ public class Duke {
                 }
 
             case FIND:
-                return ui.print(tasks.find(parsedInput.searchKey).toString().replace(
+                return tasks.find(parsedInput.searchKey).toString().replace(
                         "Here are the tasks in your list, meow:",
-                        "Here are the matching tasks found, meow:"));
+                        "Here are the matching tasks found, meow:");
 
             case TODO:
                 // Extra Functionality: No duplicate tasks
@@ -151,7 +163,7 @@ public class Duke {
             }
 
         } catch (DukeException e) {
-            return ui.print(e.getMessage());
+            return e.getMessage();
         }
 
     }

@@ -16,10 +16,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.shape.Rectangle;
 
 /**
- * An example of a custom control using FXML.
- * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
- * containing text from the speaker.
- * https://se-education.org/guides/tutorials/javaFx.html
+ * Controller for DialogBox. Represents a dialog box consisting of an ImageView to represent the speaker's face and a
+ * label containing text from the speaker.
+ *
+ * Adapted from:
+ * Lum, Jeffry (2021) JavaFX tutorial. https://se-education.org/guides/tutorials/javaFx.html
  */
 public class DialogBox extends HBox {
     @FXML
@@ -29,6 +30,12 @@ public class DialogBox extends HBox {
     @FXML
     private Rectangle rectangle;
 
+    /**
+     * Constructor for factory methods to create a DialogBox.
+     *
+     * @param text Text of DialogBox
+     * @param img Image of DialogBox
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -55,10 +62,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns DialogBox of User input.
+     *
+     * @param text Text to display
+     * @param img Image to display
+     * @return DialogBox
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns DialogBox of Duke response.
+     *
+     * @param text Text to display
+     * @param img Image to display
+     * @return DialogBox
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

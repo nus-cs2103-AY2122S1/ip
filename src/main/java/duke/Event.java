@@ -48,7 +48,7 @@ public class Event extends Task {
 
 
     /**
-     * Convert event into savable format.
+     * Converts event into savable format.
      *
      * @return String to save
      */
@@ -60,7 +60,7 @@ public class Event extends Task {
     }
 
     /**
-     * String representation of event for printing
+     * Returns string representation of event for printing
      *
      * @return String to print
      */

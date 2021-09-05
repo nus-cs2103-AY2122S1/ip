@@ -10,16 +10,12 @@ public class ParsedInput implements Serializable {
 
     final Duke.Commands command;
     final String description;
-    @SuppressWarnings("checkstyle:VisibilityModifier")
-    Temporal dateTime;
-    @SuppressWarnings("checkstyle:VisibilityModifier")
-    int index;
-    @SuppressWarnings("checkstyle:VisibilityModifier")
-    Duke.TaskTypes taskType;
+    final Temporal dateTime;
+    final int index;
+    final Duke.TaskTypes taskType;
 
     /* Search key for find method */
-    @SuppressWarnings("checkstyle:VisibilityModifier")
-    String searchKey;
+    final String searchKey;
 
     /**
      * Constructor for ParsedInput instance.

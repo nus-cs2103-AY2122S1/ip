@@ -13,7 +13,9 @@ import javafx.util.Duration;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
- * https://se-education.org/guides/tutorials/javaFx.html
+ *
+ * Adapted from:
+ * Lum, Jeffry (2021) JavaFX tutorial. https://se-education.org/guides/tutorials/javaFx.html
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -30,19 +32,35 @@ public class MainWindow extends AnchorPane {
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/otaku.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mafu.png"));
 
+    /**
+     * Initializes the height of the scrollpane to adjust to the height of dialog container.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets duke instance of MainWindow.
+     *
+     * @param d Duke instance
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
 
+    /**
+     * Displays greeting on GUI.
+     */
     public void displayGreeting() {
-        printMessage(Ui.showGreet());
+        printMessage(duke.getUi().showGreet());
     }
 
+    /**
+     * Prints message onto the GUI.
+     *
+     * @param string String to print
+     */
     public void printMessage(String string) {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(string, dukeImage));
     }
@@ -62,7 +80,11 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
 
-        // https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
+        /*
+         * Adapted from:
+         * James_D (2014) StackOverflow: How to close a stage after a certain amount of time JavaFX
+         * https://stackoverflow.com/a/27334614
+         */
         if (duke.isQuit()) {
             PauseTransition pauseThenExit = new PauseTransition(Duration.seconds(0.5));
             pauseThenExit.setOnFinished(event -> Platform.exit());

@@ -120,21 +120,16 @@ public class TaskList {
      * @return Index of task if found else -1
      */
     public int getTaskIndex(String description, Duke.TaskTypes tt) {
-        int i;
         switch (tt) {
         case TODO:
-            i = taskList.indexOf(new Todo(description));
-            break;
+            return taskList.indexOf(new Todo(description));
         case DEADLINE:
-            i = taskList.indexOf(new Deadline(description));
-            break;
+            return taskList.indexOf(new Deadline(description));
         case EVENT:
-            i = taskList.indexOf(new Event(description));
-            break;
+            return taskList.indexOf(new Event(description));
         default:
-            i = -1; // unreachable by design if all task cases are there
+            return -1; // unreachable by design if all task cases are there
         }
-        return i;
     }
 
     /**
@@ -172,6 +167,4 @@ public class TaskList {
         }
         return s.toString();
     }
-
-
 }

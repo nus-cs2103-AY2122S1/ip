@@ -13,6 +13,9 @@ public class DukeException extends Exception {
 
 }
 
+/**
+ * Throws exception when Task index input is not an integer.
+ */
 class TaskIndexNotInteger extends DukeException {
 
     TaskIndexNotInteger(int length) {
@@ -21,6 +24,9 @@ class TaskIndexNotInteger extends DukeException {
 
 }
 
+/**
+ * Throws exception when Task cannot be found in task list.
+ */
 class TaskNotFound extends DukeException {
 
     TaskNotFound(String taskStr) {
@@ -29,6 +35,9 @@ class TaskNotFound extends DukeException {
 
 }
 
+/**
+ * Throws exception when task of same name exists.
+ */
 class TaskExistsException extends DukeException {
 
     TaskExistsException(Duke.TaskTypes taskTypes, String taskStr) {
@@ -37,6 +46,9 @@ class TaskExistsException extends DukeException {
 
 }
 
+/**
+ * Throws exception when task is integer but is out of bounds of task list.
+ */
 class TaskIndexOutOfBounds extends DukeException {
 
     TaskIndexOutOfBounds(int i, int length) {
@@ -45,6 +57,9 @@ class TaskIndexOutOfBounds extends DukeException {
 
 }
 
+/**
+ * Throws exception when expected parameters are missing.
+ */
 class MissingParams extends DukeException {
 
     MissingParams(String params) {
@@ -53,6 +68,9 @@ class MissingParams extends DukeException {
 
 }
 
+/**
+ * Throws exception when no arguments are passed after command.
+ */
 class NothingAfterCommand extends DukeException {
 
     NothingAfterCommand(Duke.Commands command) {
@@ -61,6 +79,9 @@ class NothingAfterCommand extends DukeException {
 
 }
 
+/**
+ * Throws exception when some expected arguments are missing.
+ */
 class MissingArguments extends DukeException {
 
     MissingArguments(Duke.Commands command) {
@@ -69,6 +90,9 @@ class MissingArguments extends DukeException {
 
 }
 
+/**
+ * Throws exception when list is empty.
+ */
 class EmptyListException extends DukeException {
 
     EmptyListException(Duke.Commands command) {
@@ -77,6 +101,9 @@ class EmptyListException extends DukeException {
 
 }
 
+/**
+ * Throws exception when input is not a command.
+ */
 class IllegalCommandException extends DukeException {
 
     IllegalCommandException(String commandStr) {
@@ -85,6 +112,9 @@ class IllegalCommandException extends DukeException {
 
 }
 
+/**
+ * Throws exception when task type does not exist.
+ */
 class IllegalTaskTypeException extends DukeException {
 
     IllegalTaskTypeException(String taskTypeStr) {
@@ -93,6 +123,9 @@ class IllegalTaskTypeException extends DukeException {
 
 }
 
+/**
+ * Throws exception when date and time are not in parsable format.
+ */
 class DateTimeFormatException extends DukeException {
 
     DateTimeFormatException(String datetime) {
@@ -102,6 +135,9 @@ class DateTimeFormatException extends DukeException {
     }
 }
 
+/**
+ * Throws exception when load file is corrupted or does not exist.
+ */
 class LoadFileCorrupted extends DukeException {
 
     LoadFileCorrupted() {
