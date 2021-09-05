@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.DukeException;
 
@@ -109,14 +110,14 @@ public class TaskList {
                 ? Integer.compare(tasks.indexOf(task1), tasks.indexOf(task2))
                 : dateTime1.compareTo(dateTime2);
         });
-        for (int i = 1; i <= tasks.size(); i++) {
+        IntStream.range(1, tasks.size() + 1).forEach(i -> {
             Task task = tasks.get(i - 1);
             String type = task.getTaskType();
             if (!task.isDone() && (// Task is not done and it is either to-do or the date is later than now.
                 type.equals("T") || task.getDateTime().isAfter(LocalDateTime.now()))) {
                 upcomingTasks.put(task, i);
             }
-        }
+        });
         return upcomingTasks.entrySet().stream().map(SimpleImmutableEntry::new)
             .collect(Collectors.toUnmodifiableList());
     }
@@ -128,9 +129,7 @@ public class TaskList {
      */
     public List<SimpleImmutableEntry<? extends Task, Integer>> getAllTasks() {
         List<SimpleImmutableEntry<? extends Task, Integer>> result = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            result.add(new SimpleImmutableEntry<>(tasks.get(i), i + 1));
-        }
+        IntStream.range(0, tasks.size()).forEach(i -> result.add(new SimpleImmutableEntry<>(tasks.get(i), i + 1)));
         return Collections.unmodifiableList(result);
     }
 
