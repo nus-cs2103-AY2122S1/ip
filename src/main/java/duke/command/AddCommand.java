@@ -9,7 +9,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-
 /**
  * Represents the command to add additional tasks. Accepted task so far are "todo" "deadline" and "event".
  */
@@ -51,7 +50,7 @@ public class AddCommand extends Command {
 
         return String.format("Got it. I've added this task: \n"
                 + "%s\n"
-                + "Now you have %d tasks in the list", task.toString(), taskManager.taskCount()
+                + "Now you have %d tasks in the list", task.toString(), taskManager.getNumOfTasks()
         );
     }
 }

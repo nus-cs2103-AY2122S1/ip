@@ -4,17 +4,16 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
 /**
  * Represents a deadline type task.
  */
 public class Deadline extends Task {
 
-    private final LocalDate time;
+    private final LocalDate date;
 
-    private Deadline(String description, LocalDate time) {
+    private Deadline(String description, LocalDate date) {
         super(description);
-        this.time = time;
+        this.date = date;
     }
 
     /**
@@ -36,8 +35,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String toDatabaseString() {
-        return String.format("%s|%s", super.toDatabaseString(), this.time);
+    public String toStorageString() {
+        return String.format("%s|%s", super.toStorageString(), this.date);
     }
 
     @Override
@@ -45,6 +44,6 @@ public class Deadline extends Task {
         return String.format("[%s]%s (by: %s)",
                 this.getTaskType(),
                 super.toString(),
-                this.time.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

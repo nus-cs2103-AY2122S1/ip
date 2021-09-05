@@ -28,10 +28,10 @@ public class ToDoTest {
         String desc = "TEST TODO";
         Task todo = ToDo.of(false, desc);
         assertEquals("[T][ ] TEST TODO", todo.toString());
-        assertEquals("T|0|TEST TODO", todo.toDatabaseString());
+        assertEquals("T|0|TEST TODO", todo.toStorageString());
         todo.markDone();
         assertEquals("[T][X] TEST TODO", todo.toString());
-        assertEquals("T|1|TEST TODO", todo.toDatabaseString());
+        assertEquals("T|1|TEST TODO", todo.toStorageString());
     }
 
 }

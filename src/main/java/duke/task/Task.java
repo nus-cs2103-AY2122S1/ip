@@ -47,7 +47,7 @@ public abstract class Task {
      *
      * @return String serialized for database.
      */
-    public String toDatabaseString() {
+    public String toStorageString() {
         return String.format("%s|%d|%s",
                 this.getTaskType(), this.isDone() ? 1 : 0, this.getDescription());
     }

@@ -34,10 +34,10 @@ public class DeadlineTest {
         Task task = Deadline.of(false, desc, "2020-02-02");
 
         assertEquals("[D][ ] TEST DEADLINE (by: Feb 2 2020)", task.toString());
-        assertEquals("D|0|TEST DEADLINE|2020-02-02", task.toDatabaseString());
+        assertEquals("D|0|TEST DEADLINE|2020-02-02", task.toStorageString());
         task.markDone();
         assertEquals("[D][X] TEST DEADLINE (by: Feb 2 2020)", task.toString());
-        assertEquals("D|1|TEST DEADLINE|2020-02-02", task.toDatabaseString());
+        assertEquals("D|1|TEST DEADLINE|2020-02-02", task.toStorageString());
     }
 
     @Test

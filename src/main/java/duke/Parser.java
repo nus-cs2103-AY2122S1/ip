@@ -33,26 +33,26 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "done":
-            assertInputSize(parts, 2, "Not enough arguments");
+            assertArgumentIsPresent(fullCommand);
             return new DoneCommand(Integer.parseInt(parts[1]));
         case "delete":
-            assertInputSize(parts, 2, "Not enough arguments");
+            assertArgumentIsPresent(fullCommand);
             return new DeleteCommand(Integer.parseInt(parts[1]) - 1);
         case "find":
-            assertInputSize(parts, 2, "Not enough arguments");
+            assertArgumentIsPresent(fullCommand);
             return new FindCommand(parts[1]);
         case "todo":
-            assertInputSize(parts, 2, "☹ OOPS!!! The description of a todo cannot be empty.");
+            assertDescriptionIsPresent(fullCommand);
             return new AddCommand(action, parts[1]);
         case "deadline":
-            assertInputSize(parts, 2, "Not enough arguments");
+            assertDescriptionIsPresent(fullCommand);
+            assertTimeIsPresent(fullCommand, " /by ");
             args = parts[1].split(" /by ");
-            assertInputSize(args, 2, "☹ OOPS!!! Insufficient args for deadline.");
             return new AddCommand(action, args);
         case "event":
-            assertInputSize(parts, 2, "Not enough arguments");
+            assertDescriptionIsPresent(fullCommand);
+            assertTimeIsPresent(fullCommand, " /at ");
             args = parts[1].split(" /at ");
-            assertInputSize(args, 2, "☹ OOPS!!! Insufficient args for event.");
             return new AddCommand(action, args);
         default:
             throw new InvalidDukeCommandException();
@@ -65,5 +65,23 @@ public class Parser {
         if (inputs.length != expectedSize) {
             throw new IllegalArgumentException(errorMsg);
         }
+    }
+
+    private static void assertArgumentIsPresent(String fullCommand) {
+        String[] inputs = fullCommand.split(" ", 2);
+        assertInputSize(inputs, 2, "Not enough arguments");
+    }
+
+    private static void assertDescriptionIsPresent(String fullCommand) {
+        String[] inputs = fullCommand.split(" ", 2);
+        String errorMsg = String.format("☹ OOPS!!! The description of a %s cannot be empty.", inputs[0]);
+        assertInputSize(inputs, 2, errorMsg);
+    }
+
+    private static void assertTimeIsPresent(String fullCommand, String delimiter) {
+        String[] inputs = fullCommand.split(" ", 2);
+        String[] args = inputs[1].split(delimiter, 2);
+        String errorMsg = String.format("☹ OOPS!!! Insufficient args for %s.", inputs[0]);
+        assertInputSize(args, 2, errorMsg);
     }
 }

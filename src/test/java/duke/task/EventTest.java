@@ -33,10 +33,10 @@ public class EventTest {
         Task task = Event.of(false, desc, "2020-02-02");
 
         assertEquals("[E][ ] TEST EVENT (at: Feb 2 2020)", task.toString());
-        assertEquals("E|0|TEST EVENT|2020-02-02", task.toDatabaseString());
+        assertEquals("E|0|TEST EVENT|2020-02-02", task.toStorageString());
         task.markDone();
         assertEquals("[E][X] TEST EVENT (at: Feb 2 2020)", task.toString());
-        assertEquals("E|1|TEST EVENT|2020-02-02", task.toDatabaseString());
+        assertEquals("E|1|TEST EVENT|2020-02-02", task.toStorageString());
     }
 
     @Test
