@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Main"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
@@ -58,6 +58,7 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }
 
 javafx {

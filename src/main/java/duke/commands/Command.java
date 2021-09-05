@@ -34,22 +34,6 @@ public abstract class Command {
         isActive = false;
     }
 
-    /**
-     * Constructs a message containing all tasks in the ArrayList.
-     *
-     * @param list list of tasks
-     * @return ArrayList in String format
-     */
-    public static String arrayToString(ArrayList<Task> list) {
-        String answer = "";
-        int counter = 1;
-        for (Task item : list) {
-            answer += String.format("%d: %s\n", counter, item.toString());
-            counter++;
-        }
-        return answer;
-    }
-
     public String getCommandOutput() {
         return commandOutput;
     }
