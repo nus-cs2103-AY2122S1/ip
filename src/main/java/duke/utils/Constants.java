@@ -5,7 +5,7 @@ package duke.utils;
  */
 public class Constants {
 
-    public static final String HELLO = "\nHello! I'm Duke\nWhat can I do for you?\n";
+    public static final String HELLO = "Hello! I'm Duke\nWhat can I do for you?";
     public static final String LINE = "=================================================================";
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"

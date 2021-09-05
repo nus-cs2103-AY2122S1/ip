@@ -1,7 +1,9 @@
-D | 0 | read book | Dec 31 2021
-D | 1 | return book | Jan 01 2022
-E | 0 | university fair | Jan 01 2022 0900
-T | 0 | assignments
-T | 0 | homework
-D | 0 | submit worksheet | Oct 13 2021
-T | 0 | task1
+T | 1 | task1
+T | 1 | task2
+T | 1 | task3
+D | 1 | d1 | Oct 12 2021
+D | 0 | d2 | Oct 12 2021
+D | 0 | d3 | Oct 12 2022
+E | 1 | e1 | Oct 12 2021 2000
+E | 0 | e2 | Oct 12 2022 2200
+E | 1 | e3 | Dec 10 2023 2100

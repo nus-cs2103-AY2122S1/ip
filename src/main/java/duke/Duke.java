@@ -15,15 +15,15 @@ public class Duke {
     private TaskList taskList;
     private final Ui ui;
     private final Storage storage;
-    private final String FILEPATH = "./data/duke.txt";
-    private final String FOLDERPATH = "./data";
+    private final String FILE_PATH = "src/main/java/data/duke.txt";
+    private final String FOLDER_PATH = "src/main/java/data";
 
     /**
      * Public constructor which initialises the ui, storage and tasklist before the chatbot runs
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage(FILEPATH, FOLDERPATH);
+        storage = new Storage(FILE_PATH, FOLDER_PATH);
         taskList = new TaskList();
         try {
             storage.readTasks(taskList);
@@ -36,29 +36,10 @@ public class Duke {
     /**
      * Starts the reading of the commands and the execution of the instructions
      */
-    public void run() {
-        ui.init();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.read();
-                ui.displayLine();
-                Command c = Parser.parse(fullCommand, taskList);
-                getResponse(fullCommand, ui);
-                storage.saveTasks(taskList);
-                isExit = c.isExit();
-            } catch (DukeException ex) {
-                ui.displayError(ex.getMessage());
-            } finally {
-                ui.displayLine();
-            }
-        }
-        System.exit(0);
-    }
-
 
     public String getResponse(String input, Ui ui) {
        try {
+           storage.saveTasks(taskList);
            Command c = Parser.parse(input, taskList);
            return c.execute(taskList, ui);
        } catch (DukeException ex) {

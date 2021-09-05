@@ -38,12 +38,12 @@ public class TaskList {
             stringBuilder.append("\n").append(i+1).append(". ").append(taskString);
         }
 
-        return "Here are the tasks in your list:" + stringBuilder.toString() + taskDoneMessage(allTasksDone);
+        return  stringBuilder.toString() + taskDoneMessage(allTasksDone);
     }
 
     public String taskDoneMessage(boolean allTasksDone){
         if (allTasksDone) {
-            return "All tasks are complete!!";
+            return "\nAll tasks are complete!!";
         } else {
             return "";
         }
@@ -60,6 +60,7 @@ public class TaskList {
             return "Now you have "+ taskList.size() +" tasks in the list.\n";
         }
     }
+
 
     public void add(Task task) {
         taskList.add(task);
