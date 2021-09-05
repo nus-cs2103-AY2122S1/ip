@@ -39,211 +39,193 @@ public class Parser {
     }
 
     /**
-     * Method to read the inputs of the user.
-     */
-    public void readInput() {
-
-        Scanner s = new Scanner(System.in);
-        String input = s.next();
-
-        if (!input.equals("bye")) {
-            if (input.equals("list")) {
-                this.list.listAll();
-            } else if (input.equals("done")) {
-                Scanner s1 = new Scanner(s.nextLine());
-                int counter = 0;
-                while (s1.hasNextInt()) {
-                    int index = s1.nextInt();
-                    this.list.markComplete(index);
-                    this.storage.writeToFile();
-                    counter++;
-                }
-                if (counter == 0) {
-                    Ui.invalidIndexMessage();
-                }
-            } else if (input.equals("todo")) {
-                Scanner s2 = new Scanner(s.nextLine());
-                String description = "";
-                while (s2.hasNextLine()) {
-                    description = s2.nextLine();
-                }
-                try {
-                    Todo newTodo = new Todo(description, false);
-                    this.list.addTask(newTodo);
-                    this.storage.writeToFile();
-                } catch (WrongCommandFormatException e) {
-                    Ui.formatExceptionMessage(e);
-                }
-
-            } else if (input.equals("deadline")) {
-                Scanner s3 = new Scanner(s.nextLine());
-                String description = "";
-                while (s3.hasNextLine()) {
-                    description = s3.nextLine();
-                }
-                try {
-                    Deadline newDeadline = new Deadline(description, false);
-                    this.list.addTask(newDeadline);
-                    this.storage.writeToFile();
-                } catch (WrongCommandFormatException e) {
-                    Ui.formatExceptionMessage(e);
-                }
-            } else if (input.equals("event")) {
-                Scanner s4 = new Scanner(s.nextLine());
-                String description = "";
-                while (s4.hasNextLine()) {
-                    description = s4.nextLine();
-                }
-                try {
-                    Event newEvent = new Event(description, false);
-                    this.list.addTask(newEvent);
-                    this.storage.writeToFile();
-                } catch (WrongCommandFormatException e) {
-                    Ui.formatExceptionMessage(e);
-                }
-            } else if (input.equals("delete")) {
-                Scanner s5 = new Scanner(s.nextLine());
-                if (s5.hasNextInt()) {
-                    int index = s5.nextInt();
-                    this.list.deleteTask(index);
-                    this.storage.writeToFile();
-                } else {
-                    Ui.invalidIndexMessage();
-                }
-            } else if (input.equals("setFormat")) {
-                Scanner s6 = new Scanner(s.nextLine());
-                if (s6.hasNextLine()) {
-                    try {
-                        Duke.setFormat(s6.nextLine().substring(1));
-                        Ui.formatUpdatedMessage();
-                        this.storage.writeToFile();
-                    } catch (IllegalArgumentException e) {
-                        Ui.unacceptableFormatMessage();
-                    }
-                } else {
-                    Ui.noFormatSpecifiedMessage();
-                }
-            } else if (input.equals("format")) {
-                Ui.currentDateFormatMessage();
-            } else if (input.equals("find")) {
-                Scanner s7 = new Scanner(s.nextLine());
-                if (s7.hasNextLine()) {
-                    this.list.find(s7.nextLine());
-                } else {
-                    Ui.noKeywordSpecifiedMessage();
-                }
-            } else {
-                Ui.noSpecificCmdMessage();
-            }
-        } else {
-            Ui.botShutdownMessage();
-            this.isRunning = false;
-        }
-    }
-
-    /**
      * Method to generate Dukes response based on the user command.
      * @param command The command the user enters.
      * @return The String representing Duke's response.
      */
-    public String dukeResponse(String command) {
+    public String getDukeResponse(String command) {
         Scanner s = new Scanner(command);
         String input = s.next();
         String response = "";
 
-        if (!input.equals("bye")) {
-            if (input.equals("list")) {
-                response = this.list.listAll();
-            } else if (input.equals("done")) {
-                Scanner s1 = new Scanner(s.nextLine());
-                int counter = 0;
-
-                while (s1.hasNextInt()) {
-                    int index = s1.nextInt();
-                    response += this.list.markComplete(index);
-                    this.storage.writeToFile();
-                    counter++;
-                }
-                if (counter == 0) {
-                    response = Ui.invalidIndexMessage();
-                }
-            } else if (input.equals("todo")) {
-                Scanner s2 = new Scanner(s.nextLine());
-                String description = "";
-                while (s2.hasNextLine()) {
-                    description = s2.nextLine();
-                }
-                try {
-                    Todo newTodo = new Todo(description, false);
-                    response = this.list.addTask(newTodo);
-                    this.storage.writeToFile();
-                } catch (WrongCommandFormatException e) {
-                    response = Ui.formatExceptionMessage(e);
-                }
-
-            } else if (input.equals("deadline")) {
-                Scanner s3 = new Scanner(s.nextLine());
-                String description = "";
-                while (s3.hasNextLine()) {
-                    description = s3.nextLine();
-                }
-                try {
-                    Deadline newDeadline = new Deadline(description, false);
-                    response = this.list.addTask(newDeadline);
-                    this.storage.writeToFile();
-                } catch (WrongCommandFormatException e) {
-                    response = Ui.formatExceptionMessage(e);
-                }
-            } else if (input.equals("event")) {
-                Scanner s4 = new Scanner(s.nextLine());
-                String description = "";
-                while (s4.hasNextLine()) {
-                    description = s4.nextLine();
-                }
-                try {
-                    Event newEvent = new Event(description, false);
-                    response = this.list.addTask(newEvent);
-                    this.storage.writeToFile();
-                } catch (WrongCommandFormatException e) {
-                    response = Ui.formatExceptionMessage(e);
-                }
-            } else if (input.equals("delete")) {
-                Scanner s5 = new Scanner(s.nextLine());
-                if (s5.hasNextInt()) {
-                    int index = s5.nextInt();
-                    response = this.list.deleteTask(index);
-                    this.storage.writeToFile();
-                } else {
-                    response = Ui.invalidIndexMessage();
-                }
-            } else if (input.equals("setFormat")) {
-                Scanner s6 = new Scanner(s.nextLine());
-                if (s6.hasNextLine()) {
-                    try {
-                        Duke.setFormat(s6.nextLine().substring(1));
-                        response = Ui.formatUpdatedMessage();
-                        this.storage.writeToFile();
-                    } catch (IllegalArgumentException e) {
-                        response = Ui.unacceptableFormatMessage();
-                    }
-                } else {
-                    response = Ui.noFormatSpecifiedMessage();
-                }
-            } else if (input.equals("format")) {
-                return Ui.currentDateFormatMessage();
-            } else if (input.equals("find")) {
-                Scanner s7 = new Scanner(s.nextLine());
-                if (s7.hasNextLine()) {
-                    response = this.list.find(s7.nextLine());
-                } else {
-                    response = Ui.noKeywordSpecifiedMessage();
-                }
-            } else {
-                response = Ui.noSpecificCmdMessage();
-            }
-        } else {
+        switch (input) {
+        case "list":
+            response = this.list.listAll();
+            break;
+        case "done":
+            response = getDoneResponse(s.nextLine());
+            break;
+        case "todo":
+            response = getTodoResponse(s.nextLine());
+            break;
+        case "deadline":
+            response = getDeadlineResponse(s.nextLine());
+            break;
+        case "event":
+            response = getEventResponse(s.nextLine());
+            break;
+        case "delete":
+            response = getDeleteResponse(s.nextLine());
+            break;
+        case "setFormat":
+            response = getSetFormatResponse(s.nextLine());
+            break;
+        case "format":
+            response = Ui.currentDateFormatMessage();
+            break;
+        case "find":
+            response = getFindResponse(s.nextLine());
+            break;
+        case "bye":
             response = Ui.botShutdownMessage();
             this.isRunning = false;
+            break;
+        default:
+            response = Ui.noSpecificCmdMessage();
+        }
+        return response;
+    }
+
+    /**
+     * Method to generate duke's response to a 'done' command.
+     * @param command The command
+     * @return Duke's response
+     */
+    private String getDoneResponse(String command) {
+        String response = "";
+        Scanner s = new Scanner(command);
+        int counter = 0;
+
+        while (s.hasNextInt()) {
+            int index = s.nextInt();
+            response += this.list.markComplete(index);
+            this.storage.writeToFile();
+            counter++;
+        }
+        if (counter == 0) {
+            response = Ui.invalidIndexMessage();
+        }
+        return response;
+    }
+
+    /**
+     * Method to generate duke's response to a 'todo' command.
+     * @param command The 'todo' command
+     * @return Duke's response.
+     */
+    private String getTodoResponse(String command) {
+        String response = "";
+        Scanner s = new Scanner(command);
+        String description = "";
+        while (s.hasNextLine()) {
+            description = s.nextLine();
+        }
+        try {
+            Todo newTodo = new Todo(description, false);
+            response = this.list.addTask(newTodo);
+            this.storage.writeToFile();
+        } catch (WrongCommandFormatException e) {
+            response = Ui.formatExceptionMessage(e);
+        }
+        return response;
+    }
+
+    /**
+     * Method to return duke's response to a 'deadline' command.
+     * @param command The 'deadline' command
+     * @return Duke's response.
+     */
+    private String getDeadlineResponse(String command) {
+        String response = "";
+        Scanner s = new Scanner(command);
+        String description = "";
+        while (s.hasNextLine()) {
+            description = s.nextLine();
+        }
+        try {
+            Deadline newDeadline = new Deadline(description, false);
+            response = this.list.addTask(newDeadline);
+            this.storage.writeToFile();
+        } catch (WrongCommandFormatException e) {
+            response = Ui.formatExceptionMessage(e);
+        }
+        return response;
+    }
+
+    /**
+     * Method to generate Duke's response to an 'event' command.
+     * @param command The 'event' command.
+     * @return Duke's response.
+     */
+    private String getEventResponse(String command) {
+        String response = "";
+        Scanner s = new Scanner(command);
+        String description = "";
+        while (s.hasNextLine()) {
+            description = s.nextLine();
+        }
+        try {
+            Event newEvent = new Event(description, false);
+            response = this.list.addTask(newEvent);
+            this.storage.writeToFile();
+        } catch (WrongCommandFormatException e) {
+            response = Ui.formatExceptionMessage(e);
+        }
+        return response;
+    }
+
+    /**
+     * Method to generate duke's response to a 'delete' command.
+     * @param command The 'delete' command.
+     * @return Duke's response.
+     */
+    private String getDeleteResponse(String command) {
+        String response = "";
+        Scanner s = new Scanner(command);
+        if (s.hasNextInt()) {
+            int index = s.nextInt();
+            response = this.list.deleteTask(index);
+            this.storage.writeToFile();
+        } else {
+            response = Ui.invalidIndexMessage();
+        }
+        return response;
+    }
+
+    /**
+     * Method to generate Duke's reponse to a 'setFormat' command.
+     * @param command The 'setFormat' command.
+     * @return Duke's response.
+     */
+    private String getSetFormatResponse(String command) {
+        String response = "";
+        Scanner s = new Scanner(command);
+        if (s.hasNextLine()) {
+            try {
+                Duke.setFormat(s.nextLine().substring(1));
+                response = Ui.formatUpdatedMessage();
+                this.storage.writeToFile();
+            } catch (IllegalArgumentException e) {
+                response = Ui.unacceptableFormatMessage();
+            }
+        } else {
+            response = Ui.noFormatSpecifiedMessage();
+        }
+        return response;
+    }
+
+    /**
+     * Method to generate Duke's response to a 'find' command.
+     * @param command The 'find' command.
+     * @return Duke's response.
+     */
+    private String getFindResponse(String command) {
+        String response = "";
+        Scanner s = new Scanner(command);
+        if (s.hasNextLine()) {
+            response = this.list.find(s.nextLine());
+        } else {
+            response = Ui.noKeywordSpecifiedMessage();
         }
         return response;
     }
