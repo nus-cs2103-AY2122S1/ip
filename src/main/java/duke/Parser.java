@@ -53,6 +53,8 @@ public class Parser {
                 return list();
             } else if (input.startsWith("find")) {
                 return find(input);
+            } else if (input.startsWith("snooze")) {
+                return snooze(input);
             } else {
                 return addTask(input);
             }
@@ -60,6 +62,22 @@ public class Parser {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private String[] snooze(String input) throws IOException {
+        //format: snooze 1 /to 2/2/2022 2222
+        String[] splitString = input.split(" ", 2);
+        if (splitString.length == 1) {
+            return new String[]{"OOPS!!! You have not inputted a task or a rescheduled time"};
+        }
+        String[] splitSnooze = splitString[1].split("/to", 2);
+        int taskIndex = Integer.parseInt(splitSnooze[0]);
+        Task task = tasks.get(taskIndex - 1);
+        LocalDateTime newDate = LocalDateTime.parse(splitSnooze[1], fmt);
+
+
+
+        return new String[]{};
     }
 
     private String[] addTask(String input) throws DukeException, IOException {
