@@ -9,11 +9,7 @@ import java.nio.file.Paths;
 import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.util.List;
-
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Storage object that handles file IO for tasks.
@@ -30,26 +26,20 @@ public class Storage {
     }
 
     /**
-     * Saves given list of tasks to file specified at instantiation.
+     * Saves given string data to file specified at instantiation.
      * If file does not exist, it will be created.
-     * The list of tasks will be formatted in easily parsable format delimited
-     * by |.
      *
-     * @param taskList The list of tasks to be saved.
+     * @param data The string data to be saved.
      * @throws IOException If something goes wrong with File operations.
      */
-    public void save(List<Task> taskList) throws IOException {
+    public void save(String data) throws IOException {
         boolean fileExists = Files.exists(path);
 
         if (!fileExists) {
             Files.createFile(path);
         }
         BufferedWriter file = Files.newBufferedWriter(path);
-
-        for (Task t : taskList) {
-            file.write(t.toDatabaseString() + "\n");
-        }
-
+        file.write(data);
         file.close();
     }
 
@@ -61,34 +51,15 @@ public class Storage {
      * @throws IOException       If something goes wrong with File operations.
      * @throws DateTimeException If file's date data is corrupted.
      */
-    public List<Task> load() throws IOException, DateTimeException {
+    public List<String> load() throws IOException, DateTimeException {
         boolean fileExists = Files.exists(path);
-        List<Task> taskList = new ArrayList<>();
 
         if (!fileExists) {
             return new ArrayList<>();
         }
 
         BufferedReader file = Files.newBufferedReader(path);
-        file.lines().forEachOrdered(line -> {
-            String[] parts = line.split("[|]");
-            String type = parts[0];
-            boolean isDone = parts[1].equals("1");
-            switch (type) {
-            case "T":
-                taskList.add(ToDo.of(isDone, parts[2]));
-                break;
-            case "D":
-                taskList.add(Deadline.of(isDone, parts[2], parts[3]));
-                break;
-            case "E":
-                taskList.add(Event.of(isDone, parts[2], parts[3]));
-                break;
-            default:
-                break;
-            }
-        });
+        return file.lines().collect(Collectors.toList());
 
-        return taskList;
     }
 }
