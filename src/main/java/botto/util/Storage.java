@@ -27,6 +27,7 @@ public class Storage {
      * @param filePath Filepath of the file that keeps track of the tasks
      */
     public Storage(String filePath) {
+        assert filePath != null : "The file path cannot be null";
         this.file = new File(filePath);
     }
 
@@ -92,6 +93,8 @@ public class Storage {
      * @throws BottoException  whenever an write operation is failed
      */
     public void save(List<Task> tasks) throws BottoException {
+        assert tasks != null : "tasks cannot be null";
+
         try {
             FileWriter fw = new FileWriter("data/botto.txt");
             StringBuilder data = new StringBuilder();
