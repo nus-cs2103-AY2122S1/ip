@@ -70,7 +70,8 @@ public abstract class Task {
      * @return string representation of the task to be saved in the hard disl/
      */
     protected String toSaveInFile(String time) {
-        return String.format("%s%s%s%s", this.description, time, Task.SEP, this.done ? "1" : "0");
+        String doneString = this.done ? "1" : "0";
+        return String.format("%s%s%s%s", this.description, time, Task.SEP, doneString);
     }
 
     public abstract String typeString();

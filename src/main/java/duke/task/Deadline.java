@@ -25,33 +25,13 @@ public class Deadline extends Task {
      */
     public static Deadline of(String input) throws DukeException {
         String[] eachWord = input.split("/by");
-        if (eachWord.length == 0 || eachWord[0].length() == 0 || eachWord[0].equals(" ")) {
-            throw new DukeException("Description cannot be empty. Type description before /by\nEg."
-                    + Deadline.inputExample);
-        }
-        if (eachWord.length == 1 || eachWord[1].length() == 0 || eachWord[1].equals(" ")) {
-            throw new DukeException("The date for this event cannot be empty. Type date after /by\nEg."
-                    + Deadline.inputExample);
-        }
+        checkForEmptyDescription(eachWord);
         String dateDescription = eachWord[1];
         String[] dateSplitBySpace = dateDescription.split(" ");
-        if (dateSplitBySpace.length < 3) {
-            throw new DukeException("Enter the date for this event in DD/MM/YYYY HHMM format\nEg."
-                    + Deadline.inputExample);
-        }
+        checkForEmptyDate(dateSplitBySpace);
         String[] dateArr = dateSplitBySpace[1].split("/");
-        if (dateArr.length < 3) {
-            throw new DukeException("Enter the date for this event in DD/MM/YYYY HHMM format\nEg."
-                    + Deadline.inputExample);
-        }
         try {
-            int year = Integer.parseInt(dateArr[2]);
-            int month = Integer.parseInt(dateArr[1]);
-            int date = Integer.parseInt(dateArr[0]);
-            int hour = Integer.parseInt(dateSplitBySpace[2].substring(0, dateSplitBySpace[2].length() - 2));
-            int min = Integer.parseInt(dateSplitBySpace[2].substring(dateSplitBySpace[2].length() - 2));
-            LocalDateTime dateTime = LocalDateTime.of(year, month, date, hour, min);
-            return new Deadline(eachWord[0], dateTime);
+            return getDeadline(eachWord[0], dateSplitBySpace[2], dateArr);
         } catch (NumberFormatException e) {
             throw new DukeException("Enter the date for this event in DD/MM/YYYY HHMM format\nEg."
                     + Deadline.inputExample);
@@ -66,8 +46,33 @@ public class Deadline extends Task {
         return null;
     }
 
+    private static Deadline getDeadline(String description, String s, String[] dateArr) {
+        int year = Integer.parseInt(dateArr[2]);
+        int month = Integer.parseInt(dateArr[1]);
+        int date = Integer.parseInt(dateArr[0]);
+        int hour = Integer.parseInt(s.substring(0, s.length() - 2));
+        int min = Integer.parseInt(s.substring(s.length() - 2));
+        LocalDateTime dateTime = LocalDateTime.of(year, month, date, hour, min);
+        return new Deadline(description, dateTime);
+    }
+
+    private static void checkForEmptyDate(String[] dateSplitBySpace) throws DukeException {
+        if (dateSplitBySpace.length < 3) {
+            throw new DukeException("Enter the date for this event in DD/MM/YYYY HHMM format\nEg."
+                    + Deadline.inputExample);
+        }
+    }
+
+    private static void checkForEmptyDescription(String[] eachWord) throws DukeException {
+        if (eachWord.length == 1 || eachWord[1].length() == 0 || eachWord[1].equals(" ")) {
+            throw new DukeException("The date for this event cannot be empty. Type date after /by\nEg."
+                    + Deadline.inputExample);
+        }
+    }
+
     /**
      * Returns string representation of deadline.
+     *
      * @return string representation of deadline.
      */
     @Override

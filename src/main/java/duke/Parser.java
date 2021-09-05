@@ -12,6 +12,7 @@ import duke.task.Task;
  * Class to parse the input by user.
  */
 public class Parser {
+
     /**
      * Parses input by user.
      *
@@ -31,39 +32,43 @@ public class Parser {
             throw new DukeException("Invalid input.");
         }
         if (splitBySpace[0].toLowerCase().equals("done")) {
-            try {
-                int index = Integer.parseInt(splitBySpace[1]);
-                if (index < 1) {
-                    throw new NumberFormatException();
-                }
-                return Command.makeCommand(CommandsTypes.MARK_DONE, index);
-            } catch (NumberFormatException e) {
-                throw new DukeException("Invalid index inputted after done. Please enter a positive integer");
-            }
+            return getDoneCommand(splitBySpace[1], CommandsTypes.MarkDone, "Invalid index inputted after done. Please enter a positive integer");
         }
         if (splitBySpace[0].toLowerCase().equals("delete")) {
-            try {
-                int index = Integer.parseInt(splitBySpace[1]);
-                if (index < 1) {
-                    throw new NumberFormatException();
-                }
-                return Command.makeCommand(CommandsTypes.DELETE, index);
-            } catch (NumberFormatException e) {
-                throw new DukeException("Invalid index inputted after delete. Please enter a positive integer");
-            }
+            return getDoneCommand(splitBySpace[1], CommandsTypes.MarkDone, "Invalid index inputted after done. Please enter a positive integer");
         }
 
         if (splitBySpace[0].toLowerCase().equals("find")) {
-            String[] keywords = new String[splitBySpace.length - 1];
-            for (int i = 1; i < splitBySpace.length; i++) {
-                keywords[i - 1] = splitBySpace[i];
-            }
-            return Command.makeCommand(CommandsTypes.FIND, keywords);
+            return getFindCommand(splitBySpace);
         }
-        String type = splitBySpace[0].toLowerCase();
+        return getAddCommand(input, splitBySpace[0]);
+    }
+
+    private static Command getAddCommand(String input, String s) throws DukeException {
+        String type = s.toLowerCase();
         String taskDescription = Stream.of(input.split(" "))
                 .skip(1).reduce("", (x, y) -> x + " " + y);
         Task newTask = Task.makeTask(type, taskDescription);
         return Command.makeCommand(CommandsTypes.ADD, newTask);
+    }
+
+    private static Command getFindCommand(String[] splitBySpace) throws DukeException {
+        String[] keywords = new String[splitBySpace.length - 1];
+        for (int i = 1; i < splitBySpace.length; i++) {
+            keywords[i - 1] = splitBySpace[i];
+        }
+        return Command.makeCommand(CommandsTypes.Find, keywords);
+    }
+
+    private static Command getDoneCommand(String s, CommandsTypes commandType, String s2) throws DukeException {
+        try {
+            int index = Integer.parseInt(s);
+            if (index < 1) {
+                throw new NumberFormatException();
+            }
+            return Command.makeCommand(commandType, index);
+        } catch (NumberFormatException e) {
+            throw new DukeException(s2);
+        }
     }
 }
