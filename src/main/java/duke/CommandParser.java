@@ -75,7 +75,8 @@ public class CommandParser {
     }
 
     private static Command parseMarkDoneCommand(String commandString) throws DukeException {
-        String payload = commandString.substring(TODO_PREFIX.length()).trim();
+        assert commandString.startsWith(DONE_PREFIX);
+        String payload = commandString.substring(DONE_PREFIX.length()).trim();
         if (payload.length() <= 0) {
             throw new DukeException("Please indicate a task number to mark as done!");
         } else {
@@ -91,6 +92,7 @@ public class CommandParser {
     }
 
     private static Command parseTodoCommand(String commandString) throws DukeException {
+        assert commandString.startsWith(TODO_PREFIX);
         String payload = commandString.substring(TODO_PREFIX.length()).trim();
         if (payload.length() <= 0) {
             throw new DukeException("Todo description cannot be empty!");
@@ -99,6 +101,7 @@ public class CommandParser {
     }
 
     private static Command parseDeadlineCommand(String commandString) throws DukeException {
+        assert commandString.startsWith(DEADLINE_PREFIX);
         String payload = commandString.substring(DEADLINE_PREFIX.length()).trim();
         int separatorIndex = payload.lastIndexOf("/by");
         if (separatorIndex < 0) {
@@ -120,6 +123,7 @@ public class CommandParser {
     }
 
     private static Command parseEventCommand(String commandString) throws DukeException {
+        assert commandString.startsWith(EVENT_PREFIX);
         String payload = commandString.substring(EVENT_PREFIX.length()).trim();
         int separatorIndex = payload.lastIndexOf("/at");
         if (separatorIndex < 0) {
@@ -141,6 +145,7 @@ public class CommandParser {
     }
 
     private static Command parseDeleteCommand(String commandString) throws DukeException {
+        assert commandString.startsWith(DELETE_PREFIX);
         String payload = commandString.substring(DELETE_PREFIX.length()).trim();
         if (payload.length() <= 0) {
             throw new DukeException("Please indicate a task number to delete!");
@@ -159,6 +164,7 @@ public class CommandParser {
     }
 
     private static Command parseFindCommand(String commandString) throws DukeException {
+        assert commandString.startsWith(FIND_PREFIX);
         String payload = commandString.substring(FIND_PREFIX.length()).trim();
         if (payload.length() <= 0) {
             throw new DukeException("Please indicate a keyword to find tasks!");
