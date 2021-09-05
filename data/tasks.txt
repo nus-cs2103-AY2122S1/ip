@@ -1,3 +1,3 @@
 T|1|borrow
-D|1|eat|2019-02-01
+D|1|eat food|2021-01-01
 E|0|meeting|monday

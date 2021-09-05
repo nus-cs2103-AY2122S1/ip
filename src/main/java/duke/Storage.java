@@ -3,6 +3,8 @@ package duke;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -21,10 +23,14 @@ public class Storage {
             if (!f.exists()) {
                 f.createNewFile();
             }
+        }catch(IOException e){
+               Files.createDirectories(Paths.get("data/"));
+               f.createNewFile();
+            }
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
                 String task = sc.nextLine();
-                String[] taskArr = task.split("//|");
+                String[] taskArr = task.split("///");
                 if (taskArr[0].equals("T")) {
                     Todo td = new Todo(taskArr[2]);
                     if (taskArr[1].equals("1")) {
@@ -33,6 +39,7 @@ public class Storage {
                     t.add(td);
                 }
                 if (taskArr[0].equals("D")) {
+                    System.out.println(taskArr[3]);
                     Deadline d = new Deadline(taskArr[2], taskArr[3]);
                     if (taskArr[1].equals("1")) {
                         d.markAsDone();
@@ -47,10 +54,6 @@ public class Storage {
                     t.add(e);
                 }
             }
-        } catch(IOException e){
-            System.out.println("OOPS!!! Directory not found. " + e.getMessage());
-            System.exit(0);
-        }
         return t;
     }
 
