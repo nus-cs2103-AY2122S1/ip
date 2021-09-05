@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class Storage {
     private File taskListFile;
-    private Boolean doesFileExists;
+    private Boolean doesFileExist;
 
     /**
      * Constructor for Storage class.
@@ -17,7 +17,7 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.taskListFile = new File(filePath);
-        this.doesFileExists = this.taskListFile.exists();
+        this.doesFileExist = this.taskListFile.exists();
     }
 
     /**
@@ -40,16 +40,18 @@ public class Storage {
                     break;
                 case "D":
                     String[] partsD = currTask.split("by: ");
-                    Task currDeadlineTask = new Deadline(partsD[0].replace(" (", ""),
-                            partsD[1].substring(0, 11),
-                            partsD[1].substring(12).replace(")", ""));
+                    String deadlineDescription = partsD[0].replace(" (", "");
+                    String deadlineDate = partsD[1].substring(0, 11);
+                    String deadlineTime = partsD[1].substring(12).replace(")", "");
+                    Task currDeadlineTask = new Deadline(deadlineDescription, deadlineDate, deadlineTime);
                     taskList.addTask(currDeadlineTask);
                     break;
                 case "E":
                     String[] partsE = currTask.split("at: ");
-                    Task currEventTask = new Event(partsE[0].replace(" (", ""),
-                            partsE[1].substring(0, 11),
-                            partsE[1].substring(12).replace(")", ""));
+                    String eventDescription = partsE[0].replace(" (", "");
+                    String eventDate = partsE[1].substring(0, 11);
+                    String eventTime = partsE[1].substring(12).replace(")", "");
+                    Task currEventTask = new Event(eventDescription, eventDate, eventTime);
                     taskList.addTask(currEventTask);
                     break;
                 default:
@@ -70,18 +72,9 @@ public class Storage {
      * @param taskList Task list that data is retrieved from.
      */
     public void saveFile(TaskList taskList) {
-        StringBuilder listBuilder = new StringBuilder();
-        for (int j = 0; j < taskList.getNoOfTask(); j++) {
-            String listItem = (j + 1)
-                    + "."
-                    + taskList.getTask(j).getTaskType()
-                    + taskList.getTask(j).checkIsDone()
-                    + " " + taskList.getTask(j).getDescription();
-            listBuilder.append(listItem).append(System.lineSeparator());
-        }
         try {
             FileWriter dukeTaskListWriter = new FileWriter(this.taskListFile);
-            dukeTaskListWriter.write(listBuilder.toString());
+            dukeTaskListWriter.write(taskList.toString());
             dukeTaskListWriter.close();
         } catch (IOException e) {
             System.out.print(e.toString());
@@ -94,7 +87,7 @@ public class Storage {
      * @return True if file exists and false if it does not.
      */
     public Boolean getDoesFileExists() {
-        return this.doesFileExists;
+        return this.doesFileExist;
     }
 
     /**
@@ -104,7 +97,7 @@ public class Storage {
         try {
             this.taskListFile.getParentFile().mkdir();
             this.taskListFile.createNewFile();
-            this.doesFileExists = true;
+            this.doesFileExist = true;
         } catch (IOException e) {
             System.out.print(e.toString());
         }
