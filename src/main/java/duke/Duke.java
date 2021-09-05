@@ -26,6 +26,7 @@ public class Duke {
         } catch (UserInputError e) {
             output = ui.formatOutput(e.getMessage());
         }
+        assert !output.equals("");
         return output;
     }
 }

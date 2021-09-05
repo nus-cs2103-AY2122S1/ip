@@ -7,6 +7,7 @@ public class Todo extends Task {
 
     public Todo(String description, boolean done) {
         super(description, Task.Type.TODO, done);
+        assert !description.trim().equals("");
     }
 
     @Override

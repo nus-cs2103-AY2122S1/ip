@@ -23,6 +23,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String when, boolean done) throws UserInputError {
         super(description, Task.Type.DEADLINE, done);
+        assert !description.trim().equals("");
         try {
             this.when = LocalDate.parse(when.trim());
         } catch (DateTimeException e) {
