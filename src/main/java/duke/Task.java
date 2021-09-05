@@ -7,7 +7,7 @@ public class Task {
     private String task;
     private Boolean isDone;
     private String statusIcon = " ";
-    private String taskSymbol;
+    private final String taskSymbol;
     private LocalDateTime date;
     private Utility utility;
 
@@ -18,6 +18,8 @@ public class Task {
      * @param date Date associated with task.
      */
     public Task(String task, String taskSymbol, LocalDateTime date) {
+        assert dateToString(date).length() != 0;
+
         this.task = task;
         this.isDone = false;
         this.taskSymbol = taskSymbol;

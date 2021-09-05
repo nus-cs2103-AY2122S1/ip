@@ -9,12 +9,7 @@ public class Duke{
         String filePath = "dukeData.txt";
         Storage storage = new Storage(filePath);
         TaskList tasks;
-        try {
-            tasks = new TaskList(storage.loadData());
-        } catch (Exception e) {
-            System.out.println(e + "hello");
-            tasks = new TaskList();
-        }
+        tasks = new TaskList(storage.loadData());
         parser = new Parser(storage, tasks);
     }
 
