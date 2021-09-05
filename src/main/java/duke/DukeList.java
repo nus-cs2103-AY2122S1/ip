@@ -77,7 +77,7 @@ public class DukeList implements Iterable<Task> {
         if (matches == 0) {
             return "No matches found";
         } else {
-            assert matches > 0: "Matches must be more then 0";
+            assert matches > 0 : "Matches must be more then 0";
             return matchesString.toString();
         }
     }
