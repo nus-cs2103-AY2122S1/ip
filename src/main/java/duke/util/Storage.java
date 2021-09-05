@@ -90,9 +90,12 @@ public class Storage {
                 String taskBy = taskComponents[3];
                 task = new Deadline(taskDescription, LocalDate.parse(taskBy));
                 break;
-            default:
+            case "E":
                 String taskAt = taskComponents[3];
                 task = new Event(taskDescription, taskAt);
+                break;
+            default:
+                task = null;
                 break;
             }
             assert task != null : "Task should not be null";
