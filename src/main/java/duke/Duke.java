@@ -39,7 +39,11 @@ public class Duke {
     public void mainLoop() {
         while (true) {
             String input = getQuery();
-            Ui.reply(getResponse(input).msg());
+            Record r = getResponse(input);
+            Ui.reply(r.msg());
+            if (r.bye()) {
+                break;
+            }
         }
     }
 
