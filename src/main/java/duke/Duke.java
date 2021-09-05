@@ -26,6 +26,7 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
     private Storage storage;
+    private boolean isRunning;
 
     /**
      * @param filePath to read/write task list data
@@ -58,6 +59,9 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);
+            if (!c.isActive()) {
+                isRunning = false;
+            }
             return c.getCommandOutput();
         } catch (DukeException e) {
             return e.getMessage();
@@ -65,5 +69,14 @@ public class Duke {
             return "Please enter the date and time "
                     + "in dd/mm/yyyy hh:mma format!";
         }
+    }
+
+    /**
+     * Checks whether the duke application is supposed to be running.
+     *
+     * @return true if application is meant to be running, false otherwise
+     */
+    public boolean getActiveStatus() {
+        return this.isRunning;
     }
 }

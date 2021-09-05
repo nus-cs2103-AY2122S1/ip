@@ -16,7 +16,7 @@ public class ListCommand extends Command {
             throw DukeException.emptyList();
         }
 
-        String output = ui.arrayToString(tasks);
+        String output = ui.tasklistToString(tasks);
         setCommandOutput(output);
     }
 }
