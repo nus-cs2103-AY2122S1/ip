@@ -100,7 +100,7 @@ public class Parser {
             return prepareFindCommand(userInputArray);
 
         case "contact":
-            return prepareContactCommand("contact ", userInput, userInputArray, "/about");
+            return prepareContactCommand( userInput, "/about");
 
         default:
             throw new DukeException("Invalid Keyword.");
@@ -294,26 +294,23 @@ public class Parser {
     /**
      * Checks for invalid inputs and returns a contact command if input is valid.
      *
-     * @param keyword The type of task.
      * @param userInput userInput from parse method.
-     * @param userInputArray userInputArray from parse method.
      * @param specialPhrase The string to split the task description(if any).
      * @return A ContactCommand.
      */
-    private static Command prepareContactCommand (String keyword,
-    String userInput, String[] userInputArray, String specialPhrase) {
-        String userInputWithoutKeyword = userInput.replace(keyword, "");
-        //Checks if there is a description
-        if (userInputArray.length == 1 || userInput.endsWith(specialPhrase)) {
-            throw new DukeException("The description of a contact cannot be empty.");
+    private static Command prepareContactCommand (String userInput, String specialPhrase) {
+        String userInputWithoutKeyword = userInput.replace("contact ", "");
+        //For contacts without details
+        if(!userInputWithoutKeyword.contains(specialPhrase)) {
+            return new ContactCommand(new Contact(userInputWithoutKeyword, " "));
         }
-        String[] updatedDeadline = userInputWithoutKeyword.split(" " + specialPhrase + " ");
+        String[] updatedContact = userInputWithoutKeyword.split(" " + specialPhrase + " ");
         //Returns error if user enters less/more than one special phrase
-        if (updatedDeadline.length != 2) {
+        if (updatedContact.length != 2) {
             throw new DukeException("I'm sorry, please have ONE " + specialPhrase + " in your description!");
         }
-        String deadlineDescription = updatedDeadline[0];
-        String deadlineDetail = updatedDeadline[1];
-        return new ContactCommand(new Contact(deadlineDescription, deadlineDetail));
+        String contactName = updatedContact[0];
+        String contactDetail = updatedContact[1];
+        return new ContactCommand(new Contact(contactName, contactDetail));
     }
 }
