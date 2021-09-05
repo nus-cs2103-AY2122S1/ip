@@ -35,7 +35,28 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        this.duke = new Duke();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+
+        if (duke.isFirstTimeUser()) {
+            tutorial();
+        } else {
+            welcomeUser();
+        }
+
+    }
+
+    private void tutorial() {
+        String tutorial = "Welcome!!! My name is Duke, your personal assistant!\n"
+                + "To get started, simply add a task by using the 'todo/deadline/event' command!";
+        String accessList = "To see all your items, enter 'list' command!";
+        String exit = "To save changes and exit, enter 'bye' command!";
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(tutorial, dukeImage),
+                DialogBox.getDukeDialog(accessList, dukeImage),
+                DialogBox.getDukeDialog(exit, dukeImage));
+    }
+
+    private void welcomeUser() {
         String welcomeMessage = String.format("%s\n%s\n%s", "Hello! I'm Duke :)", "What can I do for you?",
                 "(Type 'help' to see what I can do!)");
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(welcomeMessage, dukeImage));
@@ -62,6 +83,7 @@ public class MainWindow extends AnchorPane {
             });
             pause.play();
         }
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

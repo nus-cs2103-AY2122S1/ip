@@ -18,7 +18,7 @@ import duke.task.ToDo;
 
 
 /**
- * Storage class deals with loading tasks from the file and saving tasks in the file.
+ * Storage class deals with loading data from the file and saving tasks in the file.
  *
  * @author Chng Zi Hao
  */
@@ -26,9 +26,14 @@ public class Storage {
     private static final String DIRECTORY = "./data/";
     private static final String FILE_PATH = DIRECTORY + "data.txt";
     private final File file;
+    private boolean isFirstTimeUser;
 
+    /**
+     * Constructor for Storage.
+     */
     public Storage() {
         this.file = new File(FILE_PATH);
+        this.isFirstTimeUser = true;
     }
 
     /**
@@ -43,30 +48,30 @@ public class Storage {
 
         if (!file.exists()) {
             createFile();
-        }
-
-        if (file.length() == 0) {
-            System.out.println("No tasks to load!");
             return taskList;
         }
 
         try {
             extractDataFromFile(taskList);
             System.out.println("YAY! File has been loaded Successfully! :>");
+            return taskList;
         } catch (FileNotFoundException e) {
             throw new DukeIoException();
         } catch (DukeException e) {
             throw e;
-        } finally {
-            return taskList;
         }
-
     }
 
     private void extractDataFromFile (ArrayList<Task> taskList) throws FileNotFoundException, DukeException {
         Scanner fileReader = new Scanner(file);
         while (fileReader.hasNextLine()) {
             String data = fileReader.nextLine();
+
+            if (data.equals("1")) {
+                isFirstTimeUser = false;
+                continue;
+            }
+
             String[] dataBreakdown = data.split(" \\| ");
             Task task;
 
@@ -122,11 +127,16 @@ public class Storage {
         assert file.exists() : "The data.txt file doesn't exist.";
         try {
             FileWriter fileWriter = new FileWriter(FILE_PATH);
-            fileWriter.write(data);
+            String toBeSaved = "1\n" + data;
+            fileWriter.write(toBeSaved);
             fileWriter.close();
             System.out.println("File Saved successfully!");
         } catch (IOException e) {
             throw new DukeIoException();
         }
+    }
+
+    public boolean getUserStatus() {
+        return isFirstTimeUser;
     }
 }
