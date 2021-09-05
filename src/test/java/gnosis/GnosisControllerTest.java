@@ -1,21 +1,23 @@
 package gnosis;
 
-import gnosis.controller.GnosisController;
-import org.junit.jupiter.api.Test;
-import gnosis.ui.GnosisUI;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import gnosis.controller.GnosisController;
+import gnosis.ui.GnosisUI;
 
 
 public class GnosisControllerTest {
-    GnosisController gc;
-    GnosisUI view;
+
+    private GnosisController gc;
+    private GnosisUI view;
 
     @Test
     public void viewNotCreated_null_exceptionThrown() {
-        try{
+        try {
             gc = new GnosisController(view);
             Scanner sc = new Scanner(System.in);
             gc.loadGreetingMessage();
