@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * <code>content</code>.
  */
 public class AddTodoCommand extends Command {
+    private static final int COMMAND_LENGTH = 4;
     private String content;
 
     /**
@@ -22,10 +23,10 @@ public class AddTodoCommand extends Command {
      */
     @Override
     public void parseLine(String line) throws DukeException {
-        if (line.length() <= 5) {
+        if (line.length() <= COMMAND_LENGTH + 1) {
             throw new DukeException("Arwgument cannawt be emptyyy!1!!");
         } else {
-            this.content = line.substring(5);
+            this.content = line.substring(COMMAND_LENGTH + 1);
         }
     }
 

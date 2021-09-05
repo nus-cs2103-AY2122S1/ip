@@ -13,6 +13,8 @@ import duke.items.Deadline;
  * <code>content</code> and <code>time</code>.
  */
 public class AddDeadlineCommand extends Command {
+    private static final int BY_LENGTH = 3;
+    private static final int COMMAND_LENGTH = 9;
     private String content;
     private String time;
 
@@ -27,14 +29,14 @@ public class AddDeadlineCommand extends Command {
         int idx = line.indexOf("/by");
         if (idx == -1) {
             throw new DukeException("Pwease specify /by!!");
-        } else if (idx == line.length() - 3 || idx == line.length() - 4) {
+        } else if (idx == line.length() - BY_LENGTH || idx == line.length() - BY_LENGTH - 1) {
             throw new DukeException("/by cannot emptyyy!!");
-        } else if (idx == 9 || idx == 10) {
+        } else if (idx == COMMAND_LENGTH || idx == COMMAND_LENGTH + 1) {
             throw new DukeException("Message cannot be emptyyy!1!");
         }
 
-        this.content = line.substring(9, idx - 1);
-        this.time = line.substring(idx + 4);
+        this.content = line.substring(COMMAND_LENGTH + 1, idx - 1);
+        this.time = line.substring(idx + BY_LENGTH + 1);
     }
 
     /**

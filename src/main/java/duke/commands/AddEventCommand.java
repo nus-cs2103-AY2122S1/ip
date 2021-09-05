@@ -12,6 +12,8 @@ import java.util.ArrayList;
  * <code>content</code> and <code>time</code>.
  */
 public class AddEventCommand extends Command {
+    private static final int AT_LENGTH = 3;
+    private static final int COMMAND_LENGTH = 6;
     private String content;
     private String time;
 
@@ -25,15 +27,15 @@ public class AddEventCommand extends Command {
     public void parseLine(String line) throws DukeException {
         int idx = line.indexOf("/at");
         if (idx == -1) {
-            throw new DukeException("Pwease specify /at!!");
-        } else if (idx == line.length() - 3 || idx == line.length() - 4) {
-            throw new DukeException("/at cannot emptyyy!!");
-        } else if (idx == 6 || idx == 7) {
+            throw new DukeException("Pwease specify /by!!");
+        } else if (idx == line.length() - AT_LENGTH || idx == line.length() - AT_LENGTH - 1) {
+            throw new DukeException("/by cannot emptyyy!!");
+        } else if (idx == COMMAND_LENGTH || idx == COMMAND_LENGTH + 1) {
             throw new DukeException("Message cannot be emptyyy!1!");
         }
 
-        this.content = line.substring(6, idx - 1);
-        this.time = line.substring(idx + 4);
+        this.content = line.substring(COMMAND_LENGTH + 1, idx - 1);
+        this.time = line.substring(idx + AT_LENGTH + 1);
     }
 
     /**
