@@ -27,12 +27,12 @@ public class ListCommand extends Command {
         if (tasks.size() == 0) {
             return "You have not added anything to the list.";
         } else {
-            for (int i = 0; i < tasks.size(); i++) {
+            for (int i = 1; i < tasks.size() + 1; i++) {
                 Task task = tasks.get(i);
-                if (i < 9) {
-                    replyBuilder.append((i + 1) + ". " + "   " + task.toString() + "\n");
+                if (i < 10) {
+                    replyBuilder.append(i + ". " + "   " + task.toString() + "\n");
                 } else {
-                    replyBuilder.append((i + 1) + ". " + " " + task.toString() + "\n");
+                    replyBuilder.append(i + ". " + " " + task.toString() + "\n");
                 }
             }
         }

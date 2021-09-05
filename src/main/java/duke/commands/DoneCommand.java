@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.TaskList;
 
@@ -19,6 +20,7 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String desc, ArrayList<Integer> doneIndex) {
         super(desc);
+        Collections.sort(doneIndex);
         this.doneIndex = doneIndex;
     }
 
@@ -37,8 +39,8 @@ public class DoneCommand extends Command {
         }
 
         for (Integer index : doneIndex) {
-            tasks.markAsDone(index - 1);
-            replyBuilder.append(index + ". " + tasks.get(index - 1) + "\n"); //actual index is index - 1
+            tasks.markAsDone(index);
+            replyBuilder.append(index + ". " + tasks.get(index) + "\n"); //actual index is index - 1
         }
 
         return replyBuilder.toString();

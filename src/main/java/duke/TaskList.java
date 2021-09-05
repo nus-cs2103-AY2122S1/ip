@@ -32,7 +32,7 @@ public class TaskList {
      * @return the task at that index.
      */
     public Task get(int index) {
-        return list.get(index);
+        return list.get(index - 1);
     }
 
     /**
@@ -50,8 +50,8 @@ public class TaskList {
      * @param index the index of the task to be removed.
      */
     public void remove(int index) throws IOException {
-        list.remove(index);
-        storage.delete(index + 1);
+        list.remove(index - 1);
+        storage.delete(index);
     }
 
     /**
@@ -71,8 +71,8 @@ public class TaskList {
      * @throws IOException
      */
     public void markAsDone(int index) throws IOException {
-        list.get(index).markAsDone();
-        storage.markAsDone(index + 1);
+        list.get(index - 1).markAsDone();
+        storage.markAsDone(index);
     }
 
     /**

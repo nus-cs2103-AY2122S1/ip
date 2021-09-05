@@ -37,7 +37,7 @@ public class Duke {
     public String getResponse(String input) {
         String response = this.run(input);
         assert (response != null && !response.equals("")) : "Response must not be empty";
-        return this.run(input);
+        return response;
     }
 
     public String getWelcomeMsg() {

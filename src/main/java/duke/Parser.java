@@ -39,22 +39,26 @@ public class Parser {
         case "done":
             hasIndex(fullCommand);
 
-            ArrayList<Integer> doneIndex = new ArrayList<>();
-            for (int i = 0; i < fullCommand.length; i++) {
+            ArrayList<Integer> doneIndexes = new ArrayList<>();
+            for (int i = 1; i < fullCommand.length; i++) {
                 int index = Integer.parseInt(fullCommand[i]);
                 isValidIndex(index, tasks.size());
-                doneIndex.add(index);
+                doneIndexes.add(index);
             }
-
-            return new DoneCommand("done", doneIndex);
+            return new DoneCommand("done", doneIndexes);
 
         case "delete":
             hasIndex(fullCommand);
 
-            int deleteIndex = Integer.parseInt(fullCommand[1]);
-            isValidIndex(deleteIndex, tasks.size());
+            ArrayList<Integer> deleteIndexes = new ArrayList<>();
+            for (int i = 1; i < fullCommand.length; i++) {
+                int index = Integer.parseInt(fullCommand[i]);
+                isValidIndex(index, tasks.size());
+                deleteIndexes.add(index);
+            }
 
-            return new DeleteCommand("delete", deleteIndex);
+            return new DeleteCommand("delete", deleteIndexes);
+
         case "todo":
             desc = commandLine.replace("todo", "").trim();
 
