@@ -20,8 +20,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
 /**
- * Controller class for DialogBox, which represents a message in Duke
- * Consists of Image and Text
+ * Controller class for DialogBox, which represents a message in Duke.
+ * Consists of Image and Text.
  */
 public class DialogBox extends HBox {
     @FXML
@@ -30,10 +30,10 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Initialises a new DialogBox
+     * Initializes a new DialogBox.
      *
-     * @param text Text in the DialogBox
-     * @param img Image of the DialogBox
+     * @param text Text in the DialogBox.
+     * @param img Image of the DialogBox.
      */
     private DialogBox(String text, Image img) {
         try {
@@ -60,7 +60,7 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right
+     * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());

@@ -14,20 +14,20 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 /**
- * TaskList handles the loading, storing and interactions with tasks
+ * TaskList handles the loading, storing and interactions with tasks.
  */
 public class TaskList {
-    /** ArrayList containing all tasks **/
+    /** ArrayList containing all tasks. **/
     private final ArrayList<Task> tasks;
 
-    /** Storage instance for interaction with files **/
+    /** Storage instance for interaction with files. **/
     private final Storage storage;
 
     /**
-     * Initializes a new TaskList with the given file path
-     * Filepath is used to initialize a Storage instance
+     * Initializes a new TaskList with the given file path.
+     * Filepath is used to initialize a Storage instance.
      *
-     * @param filePath Path to storage file
+     * @param filePath Path to storage file.
      */
     public TaskList(String filePath) {
         this.tasks = new ArrayList<>();
@@ -36,46 +36,46 @@ public class TaskList {
     }
 
     /**
-     * Adds a new task to taskArrayList
+     * Adds a new task to taskArrayList.
      *
-     * @param task Task object to be added
+     * @param task Task object to be added.
      */
     public void add(Task task) {
         tasks.add(task);
     }
 
     /**
-     * Retrieves the task with the corresponding ID
+     * Retrieves the task with the corresponding ID.
      *
-     * @param id ID of task
-     * @return Task with corresponding ID
+     * @param id ID of task.
+     * @return Task with corresponding ID.
      */
     public Task get(int id) {
         return tasks.get(id - 1);
     }
 
     /**
-     * Removes the task with corresponding ID
+     * Removes the task with corresponding ID.
      *
-     * @param id ID of task
+     * @param id ID of task.
      */
     public void remove(int id) {
         tasks.remove(id - 1);
     }
 
     /**
-     * Retrieves the number of tasks currently
+     * Retrieves the number of tasks currently.
      *
-     * @return Number of tasks
+     * @return Number of tasks.
      */
     public int size() {
         return tasks.size();
     }
 
     /**
-     * Retrieves a list of tasks from previous sessions, stored in data/duke.txt
-     * If file does not exist, it will be created
-     * Parses and adds tasks line by line to taskArrayList
+     * Retrieves a list of tasks from previous sessions, stored in data/duke.txt.
+     * If file does not exist, it will be created.
+     * Parses and adds tasks line by line to taskArrayList.
      */
     public void getTasksFromStorage() {
         File dataFile = storage.getFile();
@@ -101,6 +101,7 @@ public class TaskList {
                 add(new Event(commandArr[2], eventDate, isDone));
                 break;
             default:
+                // Go on to the next line
                 continue;
             }
         }
@@ -108,7 +109,7 @@ public class TaskList {
     }
 
     /**
-     * Saves the current list of tasks to data/duke.txt to be used in future sessions
+     * Saves the current list of tasks to data/duke.txt to be used in future sessions.
      */
     public void saveTasksToStorage() {
         for (int i = 0; i < tasks.size(); i++) {
@@ -120,9 +121,12 @@ public class TaskList {
             } else if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
                 taskString = "D|" + isDone + task.getName() + "|" + deadline.getEndDate();
-            } else {
+            } else if (task instanceof Event) {
                 Event event = (Event) task;
                 taskString = "E|" + isDone + task.getName() + "|" + event.getEventDate();
+            } else {
+                // skip task
+                continue;
             }
             if (i == 0) {
                 storage.writeToDataFile(taskString);
@@ -133,9 +137,9 @@ public class TaskList {
     }
 
     /**
-     * Finds and prints a list of tasks with matching task name
+     * Finds and prints a list of tasks with matching task name.
      *
-     * @param taskName Name of task entered by user
+     * @param taskName Name of task entered by user.
      */
     public String find(String taskName) {
         String response = String.format("Here are your tasks that match %s:\n", taskName);

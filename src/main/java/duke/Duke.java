@@ -11,18 +11,18 @@ import duke.exceptions.MissingTaskNameException;
 import duke.exceptions.MissingTaskNumberException;
 
 /**
- * Duke is a Personal Assistant Chatbot that keeps track of various tasks
+ * Duke is a Personal Assistant Chatbot that keeps track of various tasks.
  *
  * @author Adam Oh Zhi Hong
  */
 public class Duke {
-    /** A class to keep track of all tasks of the Duke instance **/
+    /** A class to keep track of all tasks of the Duke instance. **/
     private final TaskList taskList = new TaskList("data/duke.txt");
 
     /**
-     * Gets a response from Duke
+     * Gets a response from Duke.
      *
-     * @return String response from Duke
+     * @return String response from Duke.
      */
     public String getResponse(String input) {
         String dukeResponse;
@@ -43,7 +43,7 @@ public class Duke {
         } catch (DateTimeParseException e) {
             dukeResponse = "Oops, did you enter your date in yyyy-mm-dd format?";
         } catch (DukeException e) {
-            dukeResponse = UI.dukeException();
+            dukeResponse = Ui.dukeException();
         }
         return dukeResponse;
     }
