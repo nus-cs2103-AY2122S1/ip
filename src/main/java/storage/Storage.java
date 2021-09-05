@@ -50,9 +50,9 @@ public final class Storage {
     /**
      * Saves the tasks to specified folder and file.
      *
-     * @param currTasks the list of tasks to be saved
+     * @param tasks the list of tasks to be saved
      */
-    public void resetFile(ArrayList<Task> currTasks) {
+    public void resetFile(ArrayList<Task> tasks) {
         File file = new File(FILE_PATH);
         if (!file.delete()) {
             Ui.showInput("something went wrong");
@@ -60,7 +60,7 @@ public final class Storage {
         try {
             file.createNewFile();
             FileWriter writer = new FileWriter(FILE_PATH, true);
-            for (Task t : currTasks) {
+            for (Task t : tasks) {
                 writer.write(t.getSaveFormat() + "\n");
                 writer.flush();
             }

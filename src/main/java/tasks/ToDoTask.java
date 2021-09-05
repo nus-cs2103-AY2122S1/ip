@@ -37,10 +37,10 @@ public final class ToDoTask extends Task {
      */
     @Override
     public String getSaveFormat() {
-        if (super.getStatus().equals("[ ]")) {
-            return "T" + "|" + this.getDescription().strip() + "|" + 0;
+        if (getStatus().equals("[ ]")) {
+            return "T" + "|" + getDescription().strip() + "|" + 0;
         } else {
-            return "T" + "|" + this.getDescription().strip() + "|" + 1;
+            return "T" + "|" + getDescription().strip() + "|" + 1;
         }
     }
 }

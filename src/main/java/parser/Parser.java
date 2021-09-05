@@ -24,24 +24,24 @@ public final class Parser {
     /**
      * Generates the command corresponding to user's input.
      *
-     * @param str input line of words, possibly containing any character
+     * @param userInput input line of words, possibly containing any character
      * @return the command corresponding to keywords or null if none detected
      */
-    public Command parse(String str) {
-        Command c = null;
+    public Command parse(String userInput) {
+        Command command = null;
         try {
             ArrayList<String> words = new ArrayList<>();
-            String[] arr = str.split("\\s+");
+            String[] arr = userInput.split("\\s+");
             for (String ss : arr) {
                 if (!ss.equals("")) {
                     words.add(ss);
                 }
             }
-            c = generateCommand(words);
+            command = generateCommand(words);
         } catch (DukeException e) {
             Ui.helperMessage();
         }
-        return c;
+        return command;
     }
 
     /**
@@ -73,7 +73,7 @@ public final class Parser {
         } else if (s.get(0).equalsIgnoreCase("find")) {
             return new FindCommand(s);
         } else {
-            throw new DukeException("Invalid command!");
+            throw new DukeException("Not a valid command!");
         }
     }
 }

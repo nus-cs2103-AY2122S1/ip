@@ -121,6 +121,8 @@ public final class TaskList {
      * @param task the task to be added
      */
     public String addTask(Task task) {
+        assert (task instanceof DeadLineTask) || (task instanceof EventTask) ||
+                (task instanceof ToDoTask) : "incorrect task created";
         if (tasks == null) {
             tasks = new ArrayList<>();
         }
@@ -164,9 +166,9 @@ public final class TaskList {
     public ArrayList<Task> findTasksDue(String userInput) {
         String[] date = userInput.split("/");
         LocalDate localDate = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
-        ArrayList<Task> excludeToDoTask = (ArrayList<Task>) tasks.stream().filter(task -> task.getLocalDate() != null)
+        ArrayList<Task> excludeIrrelevantTasks = (ArrayList<Task>) tasks.stream().filter(task -> task.getLocalDate() != null)
                 .collect(Collectors.toList());
-        return (ArrayList<Task>) excludeToDoTask.stream().filter(
+        return (ArrayList<Task>) excludeIrrelevantTasks.stream().filter(
                 task -> task.getLocalDate().equals(localDate)).collect(Collectors.toList());
     }
 
