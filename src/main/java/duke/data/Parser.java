@@ -248,11 +248,19 @@ public class Parser {
      * @return A DeleteCommand.
      */
     private static Command prepareDeleteCommand(String[] userInputArray) {
-        //checks if there is a 2nd input(task number to be deleted)
-        if (userInputArray.length == 2) {
+        if (userInputArray.length == 3) {
             try {
-                int taskNumber = Integer.parseInt(userInputArray[1]);
-                return new DeleteCommand(taskNumber - 1);
+                int taskNumber = Integer.parseInt(userInputArray[2]);
+                switch (userInputArray[1]) {
+                case "t" :
+                    return new DeleteCommand(taskNumber - 1, 0);
+
+                case "c" :
+                    return new DeleteCommand(taskNumber - 1, 1);
+
+                default:
+                    throw new DukeException("I'm sorry, please specify with list to delete from!");
+                }
             } catch (NumberFormatException e) {
                 throw new DukeException("I'm sorry, please input a number instead!");
             }

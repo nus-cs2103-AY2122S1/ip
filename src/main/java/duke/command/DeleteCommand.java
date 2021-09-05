@@ -11,14 +11,18 @@ import duke.data.Ui;
 public class DeleteCommand extends Command {
     /** Index of the task in TaskList. */
     private int taskNumber;
+    /** Integer to choose which list to delete from, 0 to delete a task, 1 to delete a contact*/
+    private int listToDeleteFrom;
 
     /**
      * Constructs DeleteCommand class.
      *
      * @param taskNumber Index of task in InformationList that is to be deleted.
+     * @param listToDeleteFrom Integer to specify which list of InformationList to delete from
      */
-    public DeleteCommand(int taskNumber) {
+    public DeleteCommand(int taskNumber, int listToDeleteFrom) {
         this.taskNumber = taskNumber;
+        this.listToDeleteFrom = listToDeleteFrom;
     }
 
     /**
@@ -31,12 +35,18 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(InformationList tasks, Ui ui, Storage storage) {
-        if (taskNumber > tasks.getTasksSize() || taskNumber <= 0) {
-            throw new DukeException("Please insert a valid Task Number!");
-        } else {
+        if (this.listToDeleteFrom == 0) {
+            if (taskNumber > tasks.getTasksSize() || taskNumber <= 0) {
+                throw new DukeException("Please insert a valid Task Number!");
+            }
             tasks.deleteTask(taskNumber);
-            storage.save(tasks);
-            return ui.showDeletedInformation();
+        } else {
+            if (taskNumber > tasks.getContactsSize() || taskNumber <= 0) {
+                throw new DukeException("Please insert a valid Contact Number!");
+            }
+            tasks.deleteContact(taskNumber);
         }
+        storage.save(tasks);
+        return ui.showDeletedInformation();
     }
 }
