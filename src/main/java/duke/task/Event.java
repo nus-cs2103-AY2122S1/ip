@@ -29,7 +29,7 @@ public class Event extends Task {
      * @return A boolean.
      */
     @Override
-    public boolean compareTime(String time) {
+    public boolean isTimeSame(String time) {
         return at.equals(time);
     }
 

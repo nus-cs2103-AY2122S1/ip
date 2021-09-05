@@ -175,7 +175,7 @@ public class Task {
         }
     }
 
-    public boolean compareTime(String time) {
+    public boolean isTimeSame(String time) {
         return true;
     }
 

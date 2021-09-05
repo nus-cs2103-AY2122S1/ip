@@ -27,7 +27,7 @@ public class Deadline extends Task {
      * @return A boolean.
      */
     @Override
-    public boolean compareTime(String time) {
+    public boolean isTimeSame(String time) {
         return by.equals(time);
     }
 

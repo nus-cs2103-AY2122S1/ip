@@ -70,12 +70,10 @@ public class TaskList {
      */
     public TaskList tasksWithDate(String time) {
         TaskList currList = new TaskList();
-        for (int i = 0; i < count; i++) {
-            Task currTask = taskList.get(i);
-            if (!(currTask instanceof Todo) && currTask.compareTime(time)) {
-                currList.addElement(currTask);
-            }
-        }
+        taskList.stream()
+                .filter(currTask -> !(currTask instanceof Todo))
+                .filter(currTask -> currTask.isTimeSame(time))
+                .forEach(currList::addElement);
         return currList;
     }
 
@@ -105,12 +103,9 @@ public class TaskList {
      */
     public TaskList tasksWithContent(String content) {
         TaskList currList = new TaskList();
-        for (int i = 0; i < count; i++) {
-            Task currTask = taskList.get(i);
-            if (currTask.contains(content)) {
-                currList.addElement(currTask);
-            }
-        }
+        taskList.stream()
+                .filter(currTask -> currTask.contains(content))
+                .forEach(currList::addElement);
         return currList;
     }
 }
