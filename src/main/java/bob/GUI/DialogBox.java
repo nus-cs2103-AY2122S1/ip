@@ -1,4 +1,4 @@
-package bob;
+package bob.GUI;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

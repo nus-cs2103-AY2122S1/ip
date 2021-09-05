@@ -1,5 +1,6 @@
-package bob;
+package bob.GUI;
 
+import bob.TaskList;
 import bob.exception.NoSearchResultException;
 import bob.task.Task;
 
@@ -37,7 +38,8 @@ public class Ui {
      * Returns message for when Bob is ready to receive commands from the user.
      */
     public String getGreetingMessage() {
-        return "OKKAYYY finally awake!\n Howwwwwwdy! I'm Bob :D\n What do you want?\n";
+        return "OKKAYYY finally awake!\nHowwwwwwdy! I'm Bob :D\nWhat do you want?\n"
+                + "(Psst... type 'help' if you don't know what to do!)";
     }
 
     /**
@@ -49,6 +51,16 @@ public class Ui {
         String result = "Here's your tasks! Wow I'm so helpful!\n";
         result = result + tasks.getList();
         return result;
+    }
+
+    /**
+     * Returns link to the user guide.
+     *
+     * @return Message referring the user to the user guide.
+     */
+    public String getHelpMessage() {
+        return "HA HA do you not know how to talk to me? Click on this message to view my guide then!\n"
+                + "(You'll need internet access though :p)";
     }
 
     /**

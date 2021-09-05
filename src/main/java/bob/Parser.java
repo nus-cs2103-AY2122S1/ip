@@ -1,5 +1,6 @@
 package bob;
 
+import bob.GUI.Ui;
 import bob.exception.*;
 
 import bob.task.Deadline;
@@ -35,6 +36,7 @@ public class Parser {
                     || input.matches("deadline(.*)") || input.matches("event(.*)")
                     || input.matches("find(.*)"));
             boolean isListCommand = Objects.equals(input, "list");
+            boolean isHelpCommand = Objects.equals(input, "help");
             boolean isDoneCommand = input.matches("done(.*)");
             boolean isDeleteCommand = input.matches("delete(.*)");
             boolean isTodoCommand = input.matches("todo(.*)");
@@ -44,6 +46,8 @@ public class Parser {
 
             if (isListCommand) {
                 return ui.getListMessage(tasks);
+            } else if (isHelpCommand) {
+                return ui.getHelpMessage();
             } else if (isDoneCommand) {
                 String[] splitResponse = input.split(" ", 2);
                 int index = Integer.parseInt(splitResponse[1]) - 1;
@@ -111,6 +115,7 @@ public class Parser {
     private void checkInput(String response, TaskList tasklist) throws InvalidInputException, NoTaskException,
             NoDeadlineException, NoEventTimingException, OutOfBoundsException, NoKeywordException, NoTaskAndDateException {
         boolean isListCommand = Objects.equals(response, "list");
+        boolean isHelpCommand = Objects.equals(response, "help");
         boolean isDoneCommand = response.matches("done(.*)");
         boolean isDeleteCommand = response.matches("delete(.*)");
         boolean isTodoCommand = response.matches("todo(.*)");
@@ -118,8 +123,8 @@ public class Parser {
         boolean isEventCommand = response.matches("event(.*)");
         boolean isSearchCommand = response.matches("find(.*)");
 
-        if (isListCommand) {
-            // Correct input checker, do nothing
+        if (isListCommand || isHelpCommand) {
+            // Correct input, do nothing
         } else if (isDoneCommand || isDeleteCommand) {
             String[] splitResponse = response.split(" ", 2);
             boolean isIndexLessThanOrEqualToZero = Integer.parseInt(splitResponse[1]) <= 0;
