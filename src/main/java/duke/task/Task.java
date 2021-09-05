@@ -17,15 +17,11 @@ public class Task {
         isDone = false;
     }
 
-    private String getStatusIcon() {
-        return isDone ? "X" : " ";
-    }
-
     /**
      * Marks this task as done.
      */
     public void markAsDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -34,7 +30,7 @@ public class Task {
      * @return the string representation of this task to be saved in storage.
      */
     public String toStringData() {
-        return (this.isDone ? "1" : "0") + " | " + this.description;
+        return String.format("%s | %s", isDone ? "1" : "0", description);
     }
 
     /**
@@ -44,6 +40,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return String.format("[%s] %s", isDone ? "X" : " ", description);
     }
 }

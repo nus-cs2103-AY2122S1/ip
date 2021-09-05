@@ -9,20 +9,6 @@ import duke.util.Ui;
  */
 public class ExitCommand extends Command {
     /**
-     * Defines the execution of the DeadlineCommand where a Deadline task is created and added to tasks.
-     *
-     * @param tasks   Tasks of the Duke program.
-     * @param ui      Ui of the Duke program.
-     * @param storage Storage of the Duke program.
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String response = "Bye. Hope to see you again soon!";
-        ui.showResponse(response);
-        ui.closeScanner();
-    }
-
-    /**
      * Returns the response after exiting the Duke program.
      *
      * @param tasks   Tasks of the Duke program.
@@ -31,7 +17,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
-        String response = "Bye. Hope to see you again soon!";
+        String response = "    Bye. Hope to see you again soon!";
         return response;
     }
 

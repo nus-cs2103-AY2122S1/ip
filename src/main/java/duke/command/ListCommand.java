@@ -9,24 +9,6 @@ import duke.util.Ui;
  */
 public class ListCommand extends Command {
     /**
-     * Defines the execution of the ListCommand where all created tasks are listed.
-     *
-     * @param tasks   Tasks of the Duke program.
-     * @param ui      Ui of the Duke program.
-     * @param storage Storage of the Duke program.
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        String response;
-        if (tasks.getSize() == 0) {
-            response = "You do not have any tasks.";
-        } else {
-            response = "Here are the tasks in your list:\n" + tasks;
-        }
-        ui.showResponse(response);
-    }
-
-    /**
      * Returns listings.
      *
      * @param tasks   Tasks of the Duke program.
@@ -35,12 +17,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
-        String response;
-        if (tasks.getSize() == 0) {
-            response = "You do not have any tasks.";
-        } else {
-            response = "Here are the tasks in your list:\n" + tasks;
-        }
+        String response = tasks.getSize() == 0
+                ? "    You do not have any tasks."
+                : "    Here are the tasks in your list:\n" + tasks;
         return response;
     }
 

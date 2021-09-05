@@ -18,29 +18,7 @@ public class TodoCommand extends Command {
      * @param description Description of the Todo task.
      */
     public TodoCommand(String description) {
-        this.todo = new Todo(description);
-    }
-
-    /**
-     * Defines the execution of the TodoCommand where a Todo task is created and added to tasks.
-     *
-     * @param tasks   Tasks of the Duke program.
-     * @param ui      Ui of the Duke program.
-     * @param storage Storage of the Duke program.
-     * @throws DukeException If changes cannot be saved to storage.
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.addTask(todo);
-
-        String response = "Got it. I've added this task:\n"
-                + "       " + todo + "\n"
-                + "     Now you have "
-                + tasks.getSize() + (tasks.getSize() > 1 ? " tasks" : " task")
-                + " in the list.";
-        ui.showResponse(response);
-
-        storage.save(tasks.getTaskList());
+        todo = new Todo(description);
     }
 
     /**
@@ -55,7 +33,7 @@ public class TodoCommand extends Command {
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(todo);
 
-        String response = "Got it. I've added this task:\n"
+        String response = "    Got it. I've added this task:\n"
                 + "       " + todo + "\n"
                 + "     Now you have "
                 + tasks.getSize() + (tasks.getSize() > 1 ? " tasks" : " task")

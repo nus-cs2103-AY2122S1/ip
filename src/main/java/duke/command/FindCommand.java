@@ -21,31 +21,6 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Defines the execution of the FindCommand where all task(s) with the given keyword is/are listed.
-     *
-     * @param tasks Tasks of the Duke program.
-     * @param ui Ui of the Duke program.
-     * @param storage Storage of the Duke program.
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList matchingTasks = new TaskList();
-        for (int i = 0; i < tasks.getSize(); i++) {
-            Task currTask = tasks.getTask(i);
-            if (currTask.toString().contains(keyword)) {
-                matchingTasks.addTask(currTask);
-            }
-        }
-        String response;
-        if (matchingTasks.getSize() == 0) {
-            response = "There are no matching tasks.";
-        } else {
-            response = "Here are the matching tasks in your list:\n" + matchingTasks;
-        }
-        ui.showResponse(response);
-    }
-
-    /**
      * Returns the response after finding all task(s) with the given keyword.
      *
      * @param tasks Tasks of the Duke program.
@@ -55,18 +30,14 @@ public class FindCommand extends Command {
     @Override
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
         TaskList matchingTasks = new TaskList();
-        for (int i = 0; i < tasks.getSize(); i++) {
-            Task currTask = tasks.getTask(i);
+        for (Task currTask : tasks.getTaskList()) {
             if (currTask.toString().contains(keyword)) {
                 matchingTasks.addTask(currTask);
             }
         }
-        String response;
-        if (matchingTasks.getSize() == 0) {
-            response = "There are no matching tasks.";
-        } else {
-            response = "Here are the matching tasks in your list:\n" + matchingTasks;
-        }
+        String response = matchingTasks.getSize() == 0
+                ? "    There are no matching tasks."
+                : "    Here are the matching tasks in your list:\n" + matchingTasks;
         return response;
     }
 

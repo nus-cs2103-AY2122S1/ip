@@ -68,13 +68,13 @@ public class Ui {
      * @param response Response to be printed onto the console after users inputted a command.
      */
     public void showResponse(String response) {
-        System.out.println("     " + response);
+        System.out.println(response);
     }
 
     /**
      * Closes the scanner.
      */
-    public void closeScanner() {
+    public void cleanup() {
         this.scanner.close();
     }
 }

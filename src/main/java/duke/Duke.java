@@ -42,10 +42,11 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
+                String input = ui.readCommand();
                 ui.showOpeningLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                Command c = Parser.parse(input);
+                String response = c.executeAndGetResponse(tasks, ui, storage);
+                ui.showResponse(response);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.toString());
@@ -53,6 +54,7 @@ public class Duke {
                 ui.showClosingLine();
             }
         }
+        ui.cleanup();
     }
 
     /**

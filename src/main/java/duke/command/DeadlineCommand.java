@@ -21,29 +21,7 @@ public class DeadlineCommand extends Command {
      * @param by          Deadline of the Deadline task.
      */
     public DeadlineCommand(String description, LocalDate by) {
-        this.deadline = new Deadline(description, by);
-    }
-
-    /**
-     * Defines the execution of the DeadlineCommand where a Deadline task is created and added to tasks.
-     *
-     * @param tasks   Tasks of the Duke program.
-     * @param ui      Ui of the Duke program.
-     * @param storage Storage of the Duke program.
-     * @throws DukeException If changes cannot be saved to storage.
-     */
-    @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.addTask(this.deadline);
-
-        String response = "Got it. I've added this task:\n"
-                + "       " + this.deadline + "\n"
-                + "     Now you have "
-                + tasks.getSize() + (tasks.getSize() > 1 ? " tasks" : " task")
-                + " in the list.";
-        ui.showResponse(response);
-
-        storage.save(tasks.getTaskList());
+        deadline = new Deadline(description, by);
     }
 
     /**
@@ -56,10 +34,10 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        tasks.addTask(this.deadline);
+        tasks.addTask(deadline);
 
-        String response = "Got it. I've added this task:\n"
-                + "       " + this.deadline + "\n"
+        String response = "    Got it. I've added this task:\n"
+                + "       " + deadline + "\n"
                 + "     Now you have "
                 + tasks.getSize() + (tasks.getSize() > 1 ? " tasks" : " task")
                 + " in the list.";

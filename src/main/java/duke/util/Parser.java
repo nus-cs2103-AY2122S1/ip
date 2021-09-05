@@ -58,12 +58,15 @@ public class Parser {
             if (commandComponents.length == 1) {
                 throw new MissingArgumentException("Done", "task");
             }
+
             // Extract task argument
             task = Integer.parseInt(commandComponents[1]) - 1;
+
             // Check for invalid task argument
             if (task < 0) {
                 throw new InvalidArgumentException(task);
             }
+
             // If pass all checking, create and return done command obj
             return new DoneCommand(task);
 
@@ -72,12 +75,15 @@ public class Parser {
             if (commandComponents.length == 1) {
                 throw new MissingArgumentException("Delete", "task");
             }
+
             // Extract task argument
             task = Integer.parseInt(commandComponents[1]) - 1;
+
             // Check for invalid task argument
             if (task < 0) {
                 throw new InvalidArgumentException(task);
             }
+
             // If pass all checking, create and return delete command obj
             return new DeleteCommand(task);
 
@@ -86,8 +92,10 @@ public class Parser {
             if (commandComponents.length == 1) {
                 throw new MissingArgumentException("Find", "keyword");
             }
+
             // Extract keyword argument
             keyword = commandComponents[1];
+
             // If pass all checking, create and return find command obj
             return new FindCommand(keyword);
 
@@ -98,18 +106,22 @@ public class Parser {
             }
             arguments = fullCommand.split(" ", 2)[1];
             argumentComponents = arguments.split(" /by ");
+
             // Extract description argument
             description = argumentComponents[0];
+
             // Check for missing by argument
             if (argumentComponents.length == 1) {
                 throw new MissingArgumentException("Deadline", "/by");
             }
+
             // Extract and parse by argument
             try {
                 by = LocalDate.parse(arguments.split(" /by ")[1]);
             } catch (DateTimeParseException err) {
                 throw new InvalidDateFormatException();
             }
+
             // If pass all checking, create and return deadline command obj
             return new DeadlineCommand(description, by);
 
@@ -120,13 +132,16 @@ public class Parser {
             }
             arguments = fullCommand.split(" ", 2)[1];
             argumentComponents = arguments.split(" /at ");
+
             // Extract description argument
             description = argumentComponents[0];
             if (argumentComponents.length == 1) {
                 throw new MissingArgumentException("Event", "/at");
             }
+
             // Extract at argument
             at = arguments.split(" /at ")[1];
+
             // If pass all checking, create and return event command obj
             return new EventCommand(description, at);
 
@@ -135,8 +150,10 @@ public class Parser {
             if (commandComponents.length == 1) {
                 throw new EmptyDescriptionException("Todo");
             }
+
             // Extract description argument
             description = fullCommand.split(" ", 2)[1];
+
             // If pass all checking, create and return event command obj
             return new TodoCommand(description);
 

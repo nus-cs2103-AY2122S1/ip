@@ -20,7 +20,7 @@ public class Todo extends Task {
      */
     @Override
     public String toStringData() {
-        return "T | " + super.toStringData();
+        return String.format("T | %s", super.toStringData());
     }
 
     /**
@@ -30,6 +30,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return String.format("[T]%s", super.toString());
     }
 }
