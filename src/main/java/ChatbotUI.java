@@ -1,7 +1,6 @@
 import java.util.Scanner;
 
 /**
-
  * ChatbotUI accepts user input, and outputs a given message.
  *
  * @author Jovyn Tan

@@ -21,7 +21,7 @@ public class Duke {
     private TaskList taskList;
 
     private Scanner sc;
-    private final String DATA_STORAGE_PATH = "../../data/duke_storage.txt";
+    private final String DATA_STORAGE_PATH = "data/duke_storage.txt";
 
     /**
      * The entrypoint of the Duke chat bot.
