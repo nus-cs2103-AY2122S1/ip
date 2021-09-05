@@ -33,6 +33,7 @@ public class Parser {
     public String[] checkInput(String input) throws DukeException {
 
         // Get the first word of the input String
+        assert input != null;
         String command = input.split(" ")[0];
         String[] extractedInfo;
         String parsedInput;
