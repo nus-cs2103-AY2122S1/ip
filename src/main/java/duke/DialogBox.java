@@ -30,7 +30,6 @@ public class DialogBox extends HBox {
     private TextArea dialog;
     @FXML
     private ImageView displayPicture;
-    private Circle circle;
 
     private DialogBox(String text, Image img) {
         try {
@@ -57,6 +56,11 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Create a user dialog box.
+     *
+     * @return a user dialog box with user's input message.
+     * */
     public static DialogBox getUserDialog(String text, Image img) {
         var box = new DialogBox(text, img);
         Background background = new Background(new BackgroundFill(Paint.valueOf("#00bfff"),
@@ -65,6 +69,11 @@ public class DialogBox extends HBox {
         return box;
     }
 
+    /**
+     * Create a response dialog box.
+     *
+     * @return a response dialog box with the result of executing user's command.
+     * */
     public static DialogBox getDukeDialog(String text, Image img) {
         var box = new DialogBox(text, img);
         Background background = new Background(new BackgroundFill(Paint.valueOf("#7fffd4"),

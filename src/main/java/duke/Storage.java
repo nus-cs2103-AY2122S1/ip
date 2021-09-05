@@ -17,7 +17,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private ArrayList<Task> userInputRecords;
+    private final ArrayList<Task> userInputRecords;
 
     /**
      * The constructor for a Storage Object.
@@ -81,13 +81,13 @@ public class Storage {
      * Loads the current task list from a user-specified file, upon receiving a load command.
      * Texts not recorded in the standard format wll be ignored.
      *
-     * @param filePath the filepath indicated by the user.
+     * @param userInput the user input containing a filepath.
      * @return the response on whether a file is successfully loaded.
      */
-    public String load(String filePath) {
+    public String load(String userInput) {
         try {
-            filePath = filePath.replace("load ", "");
-            Scanner scanner = new Scanner(Paths.get(filePath));
+            String path = userInput.replace("load ", "");
+            Scanner scanner = new Scanner(Paths.get(path));
             while (scanner.hasNextLine()) {
                 String itemInfo = scanner.nextLine();
                 addTask(itemInfo);
@@ -102,15 +102,15 @@ public class Storage {
     /**
      * Saves the current task list to a user-specified file, upon receiving a save command.
      *
-     * @param filePath the filepath indicated by the user.
+     * @param userInput the user input containing a filepath.
      * @return the response on whether a file is successfully saved.
      */
-    public String save(String filePath) {
+    public String save(String userInput) {
         try {
-            filePath = filePath.replace("save ", "");
-            Files.deleteIfExists(Path.of(filePath));
-            Files.createFile(Path.of(filePath));
-            FileWriter writer = new FileWriter(filePath);
+            String path = userInput.replace("save ", "");
+            Files.deleteIfExists(Path.of(path));
+            Files.createFile(Path.of(path));
+            FileWriter writer = new FileWriter(path);
             for (Task task : userInputRecords) {
                 writer.write(task.toStringRecord());
                 writer.write(System.getProperty("line.separator"));
@@ -127,17 +127,21 @@ public class Storage {
         int indexForDescriptionStart = 7;
         int indexForTimeStart = 5;
         Task task;
+        String description;
         if (taskRecord.startsWith("[T]")) {
-            task = new ToDo(taskRecord.substring(indexForDescriptionStart));
+            description = taskRecord.substring(indexForDescriptionStart);
+            task = new ToDo(description);
         } else if (taskRecord.startsWith("[D]")) {
-            task = new Deadline(taskRecord.substring(indexForDescriptionStart, taskRecord.indexOf("(by")),
-                    LocalDate.parse(taskRecord.substring(taskRecord.indexOf("(by") + indexForTimeStart,
-                            taskRecord.length() - 1)));
+            description = taskRecord.substring(indexForDescriptionStart, taskRecord.indexOf("(by"));
+            LocalDate deadline = LocalDate.parse(taskRecord.substring(taskRecord.indexOf("(by") + indexForTimeStart,
+                    taskRecord.length() - 1));
+            task = new Deadline(description, deadline);
         } else {
             assert taskRecord.startsWith("[E]");
-            task = new Event(taskRecord.substring(indexForDescriptionStart, taskRecord.indexOf("(at")),
-                    LocalDate.parse(taskRecord.substring(taskRecord.indexOf("(at") + indexForTimeStart,
-                            taskRecord.length() - 1)));
+            description = taskRecord.substring(indexForDescriptionStart, taskRecord.indexOf("(at"));
+            LocalDate date = LocalDate.parse(taskRecord.substring(taskRecord.indexOf("(at") + indexForTimeStart,
+                    taskRecord.length() - 1));
+            task = new Event(description, date);
         }
         setDone(taskRecord, task);
         userInputRecords.add(task);
