@@ -163,9 +163,11 @@ public final class TaskList {
      */
     public ArrayList<Task> findTasksDue(String userInput) {
         String[] date = userInput.split("/");
-        LocalDate ref = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
-        return (ArrayList<Task>) tasks.stream()
-                .filter(task -> task.getLocalDate().equals(ref)).collect(Collectors.toList());
+        LocalDate localDate = LocalDate.parse(date[0] + "-" + date[1] + "-" + date[2]);
+        ArrayList<Task> excludeToDoTask = (ArrayList<Task>) tasks.stream().filter(task -> task.getLocalDate() != null)
+                .collect(Collectors.toList());
+        return (ArrayList<Task>) excludeToDoTask.stream().filter(
+                task -> task.getLocalDate().equals(localDate)).collect(Collectors.toList());
     }
 
     /**

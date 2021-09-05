@@ -35,6 +35,7 @@ public final class DoneCommand extends Command {
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
         ArrayList<Task> tasks = lst.getTasks();
+        String result = "";
         try {
             if (getInput().size() == 1) {
                 throw new IllegalArgumentException("Please input index :)");
@@ -46,7 +47,7 @@ public final class DoneCommand extends Command {
             if (index >= tasks.size() || index < 0) {
                 throw new IllegalArgumentException("No such index. Please input correct index, no such index :(");
             }
-            tasks.get(index).setIsDone();
+            result = tasks.get(index).setIsDone();
             storage.resetFile(tasks);
         } catch (IndexOutOfBoundsException e) {
             return "     Please input a valid index :)\n"
@@ -56,6 +57,7 @@ public final class DoneCommand extends Command {
         } catch (IllegalArgumentException e) {
             return "     " + e.getMessage();
         }
-        return "";
+        assert !result.equals("") : "message for executing done is null";
+        return  result;
     }
 }
