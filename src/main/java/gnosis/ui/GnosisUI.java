@@ -61,10 +61,9 @@ public class GnosisUI extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input));
-        this.parseInput(input);
 
+        this.parseInput(input);
         userInput.clear();
     }
 
@@ -85,7 +84,6 @@ public class GnosisUI extends AnchorPane {
      */
     public void parseInput(String input) {
         Scanner sc = new Scanner(input);
-
         try {
             String command = sc.next();
             String action = "";

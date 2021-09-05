@@ -40,14 +40,6 @@ public class GnosisController {
     }
 
     /**
-     * loads Gnosis greeting message to UI.
-     *
-     */
-    public void loadGreetingMessage() {
-        view.displayGreetMessage(TaskStorageManager.isDataFileAvail());
-    }
-
-    /**
      * Executes specified command from input.
      *
      * @param command Command specified by user.
@@ -63,10 +55,11 @@ public class GnosisController {
         }
 
         // parse the commands
+        // current is only if - else branch
+        // future can include cases of other gnosis features, e.g. places
         if (gc == Command.BYE) {
             view.displayByeMessage();
         } else {
-            // default is only task Manager, but future can include cases of other gnosis features, e.g. phonebook
             this.executeTaskCommand(gc, commandInput);
         }
     }
@@ -81,41 +74,19 @@ public class GnosisController {
      * @throws NumberFormatException if taskInput for DONE and DELETE command cannot be converted to integer.
      */
     public void executeTaskCommand(Command gc, String taskInput) throws GnosisException, NumberFormatException {
-        switch (gc) {
-        case TODO:
-            Todo td = taskCommandManager.addTodo(taskInput);
-            view.updateTaskManagementViewMessage(gc.name(), td, taskCommandManager.getNumOfTasks());
-            break;
-        case DEADLINE:
-            Deadline dl = taskCommandManager.addDeadline(taskInput);
-            view.updateTaskManagementViewMessage(gc.name(), dl, taskCommandManager.getNumOfTasks());
-            break;
-        case EVENT:
-            Event evt = taskCommandManager.addEvent(taskInput);
-            view.updateTaskManagementViewMessage(gc.name(), evt, taskCommandManager.getNumOfTasks());
-            break;
-        case LIST:
-            view.displayAllTasksMessage(taskCommandManager.getTasks());
-            break;
-        case FIND:
-            List<Task> filteredTasks = taskCommandManager.findMatchingTasks(taskInput);
-            view.displayFoundTasksMessage(filteredTasks, taskInput);
-            break;
-        case DONE:
-            // only if "done" command is call, we retrieve task index from user
-            int taskIndex = Integer.parseInt(taskInput.trim()) - 1;
-            view.displayMarkedTaskMessage(taskCommandManager.markTaskAsDone(taskIndex), taskIndex + 1);
-            break;
-        case DELETE:
-            taskIndex = Integer.parseInt(taskInput.trim()) - 1;
-            Task task = taskCommandManager.deleteTask(taskIndex);
-            view.updateTaskManagementViewMessage(gc.name(), task, taskCommandManager.getNumOfTasks());
-            break;
-        default:
-            throw new GnosisException(GnosisConstants.COMMAND_NOT_FOUND_MESSAGE);
-        }
+        gc.setTaskActionHandler(this.view, taskCommandManager, gc, taskInput);
 
+        // For every command executed, update tasks to file
         TaskStorageManager.writeTasksToFile(taskCommandManager.getTasks());
+    }
+
+
+    /**
+     * loads Gnosis greeting message to UI.
+     *
+     */
+    public void loadGreetingMessage() {
+        view.displayGreetMessage(TaskStorageManager.isDataFileAvail());
     }
 
     public void exportToCSV(File PathToExport) {
