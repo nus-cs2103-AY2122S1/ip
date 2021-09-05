@@ -61,7 +61,7 @@ public class Ui {
      *
      * @return the output string
      */
-    public String goodByeMessage() {
+    public String getGoodByeMessage() {
         return ("Bye, " + name + "! Hope to see you again soon.");
     }
 
@@ -125,8 +125,8 @@ public class Ui {
      * @param maxTaskNumber        the size of the task list. This will ensure proper padding of numbers.
      * @return the output string
      */
-    public String allTasksMessage(List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
-                                  int maxTaskNumber) {
+    public String getAllTasksMessage(List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
+                                     int maxTaskNumber) {
         return (String.format("Ok, %s. I am getting all your tasks:\n%s", name,
             getMultipleTasksMessage(tasksWithTaskNumbers, maxTaskNumber)));
     }
@@ -138,7 +138,7 @@ public class Ui {
      * @param maxTaskNumber        the size of the task list. This will ensure proper padding of numbers.
      * @return the output string
      */
-    public String upcomingTasksMessage(
+    public String getUpcomingTasksMessage(
         List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
         int maxTaskNumber) {
         return String.format("Ok, %s. I am getting all your upcoming tasks:\n%s", name,
@@ -153,9 +153,9 @@ public class Ui {
      * @param maxTaskNumber        the size of the task list. This will ensure proper padding of numbers.
      * @return the output string
      */
-    public String tasksContainingMessage(String pattern,
-                                         List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
-                                         int maxTaskNumber) {
+    public String getTasksWithPatternMessage(String pattern,
+                                             List<SimpleImmutableEntry<? extends Task, Integer>> tasksWithTaskNumbers,
+                                             int maxTaskNumber) {
         return (String.format("Ok, %s. I am getting all tasks containing %s:\n%s", name, pattern,
             getMultipleTasksMessage(tasksWithTaskNumbers, maxTaskNumber)));
     }

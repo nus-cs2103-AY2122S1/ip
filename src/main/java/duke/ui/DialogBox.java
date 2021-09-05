@@ -47,12 +47,26 @@ public class DialogBox extends HBox {
         circleDisplayPicture.setFill(new ImagePattern(iv));
     }
 
-    public static DialogBox getUserDialog(String l, Image i) {
-        return new DialogBox(l, i);
+    /**
+     * Gets the user dialog box with the user input and their profile picture.
+     *
+     * @param userInput the user input
+     * @param profilePic the profile picture
+     * @return the user dialog box
+     */
+    public static DialogBox getUserDialog(String userInput, Image profilePic) {
+        return new DialogBox(userInput, profilePic);
     }
 
-    public static DialogBox getDukeDialog(String l, Image i) {
-        var db = new DialogBox(l, i);
+    /**
+     * Gets the duke dialog box with the output and duke's profile picture. This is flipped from the user dialog box.
+     *
+     * @param dukeOutput the output message by duke
+     * @param dukePic    the profile picture
+     * @return the duke dialog box
+     */
+    public static DialogBox getDukeDialog(String dukeOutput, Image dukePic) {
+        var db = new DialogBox(dukeOutput, dukePic);
         db.flip();
         return db;
     }

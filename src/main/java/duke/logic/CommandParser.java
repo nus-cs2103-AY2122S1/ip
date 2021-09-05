@@ -42,14 +42,14 @@ public class CommandParser {
             switch (commandEnum) {
             // Single word commands
             case BYE:
-                output = ui.goodByeMessage();
+                output = ui.getGoodByeMessage();
                 willExit = true;
                 return;
             case LIST:
-                output = ui.allTasksMessage(taskList.getAllTasks(), taskList.size());
+                output = ui.getAllTasksMessage(taskList.getAllTasks(), taskList.size());
                 return;
             case UPCOMING:
-                output = ui.upcomingTasksMessage(taskList.getUpcomingTasks(), taskList.size());
+                output = ui.getUpcomingTasksMessage(taskList.getUpcomingTasks(), taskList.size());
                 return;
             case HELP:
                 output = ui.displayHelpMessage(
@@ -83,7 +83,7 @@ public class CommandParser {
     private static String parseMultiword(String inputWords, CommandsEnum commandsEnum, TaskList taskList, Ui ui) {
         switch (commandsEnum) {
         case FIND:
-            return ui.tasksContainingMessage(inputWords,
+            return ui.getTasksWithPatternMessage(inputWords,
                 taskList.getTasksContaining(inputWords), taskList.size());
         case TODO: // fallthrough intended // From here on, there will be updates to the storage.
         case EVENT: // fallthrough intended
