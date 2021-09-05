@@ -16,7 +16,7 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.task.Task;
 import kayu.task.Todo;
@@ -49,7 +49,7 @@ public class TaskListTest {
             taskList.addTask(newTask);
             assertEquals(prevSize + 1, taskList.getCapacity());
 
-        } catch (DukeException exception) {
+        } catch (KayuException exception) {
             System.out.println(exception.getMessage());
             fail();
         }
@@ -63,7 +63,7 @@ public class TaskListTest {
             Task deletedTask = taskList.deleteTask(taskNumber);
             assertEquals(expectedDesc, deletedTask.getDescription());
             
-        } catch (DukeException exception) {
+        } catch (KayuException exception) {
             System.out.println(exception.getMessage());
             fail();
         }
@@ -76,7 +76,7 @@ public class TaskListTest {
             Task updatedTask = taskList.updateTaskAsDone(taskNumber);
             assertTrue(updatedTask.isDone());
             
-        } catch (DukeException exception) {
+        } catch (KayuException exception) {
             System.out.println(exception.getMessage());
             fail();
         }
@@ -95,7 +95,7 @@ public class TaskListTest {
             taskList.addTask(newTask);
             fail();
 
-        } catch (DukeException exception) {
+        } catch (KayuException exception) {
             assertEquals(FULL_CAPACITY_ERROR_MESSAGE, exception.getMessage());
         }
     }
@@ -107,7 +107,7 @@ public class TaskListTest {
             taskList.deleteTask(taskNumber);
             fail();
 
-        } catch (DukeException exception) {
+        } catch (KayuException exception) {
             String expected = String.format(INVALID_TASK_ERROR_MESSAGE, taskNumber);
             assertEquals(expected, exception.getMessage());
         }
@@ -121,7 +121,7 @@ public class TaskListTest {
             taskList.deleteTask(taskNumber);
             fail();
 
-        } catch (DukeException exception) {
+        } catch (KayuException exception) {
             assertEquals(EMPTY_LIST_ERROR_MESSAGE, exception.getMessage());
         }
     }

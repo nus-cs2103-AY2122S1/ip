@@ -2,11 +2,10 @@ package kayu.commands;
 
 import static kayu.commands.CommandMessage.MESSAGE_EMPTY_LIST;
 import static kayu.commands.CommandMessage.MESSAGE_LIST_CONTENTS;
-import static kayu.commands.CommandType.LIST;
 
 import java.util.List;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
@@ -25,19 +24,22 @@ public class ListCommand extends Command {
      * Initializes a List- {@link kayu.commands.Command}.
      */
     public ListCommand() {
-        super(LIST);
+        super();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
+    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
         List<Task> tasks = taskList.getTasks();
         if (tasks.isEmpty()) {
             return MESSAGE_EMPTY_LIST;
         }
-        
+        return generateFormattedTaskListResponse(tasks);
+    }
+    
+    private String generateFormattedTaskListResponse(List<Task> tasks) {
         StringBuilder tasksAsString = new StringBuilder(MESSAGE_LIST_CONTENTS);
         for (int idx = 0; idx < tasks.size(); idx++) {
             tasksAsString.append(String.format("\n%d. %s", idx + 1, tasks.get(idx)));

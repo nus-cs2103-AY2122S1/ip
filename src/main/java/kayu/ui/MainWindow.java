@@ -1,6 +1,6 @@
 package kayu.ui;
 
-import java.util.Objects;
+import java.io.InputStream;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -19,6 +19,8 @@ public class MainWindow extends AnchorPane {
     // Image paths (starting from /src/main/java/resources).
     private static final String KAYU_IMAGE_PATH = "/images/duke.png";
     private static final String USER_IMAGE_PATH = "/images/user.png";
+
+    private static final String ASSERT_FAIL_ABSENT_IMAGE = "Image path not present/valid.";
     
     @FXML
     private ScrollPane scrollPane;
@@ -34,18 +36,31 @@ public class MainWindow extends AnchorPane {
 
     private Kayu kayu;
     private Image userImage;
-    private Image dukeImage;
+    private Image kayuImage;
 
     /**
      * Initializes the UI window for user to interact with.
      */
     @FXML
     public void initialize() {
-        userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream(USER_IMAGE_PATH)));
-        dukeImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream(KAYU_IMAGE_PATH)));
-        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        
+        setImages();
+        fixWindowHeight();
         initialiseKayu();
+    }
+    
+    private void fixWindowHeight() {
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+    }
+    
+    private void setImages() {
+        InputStream kayuImageStream = this.getClass().getResourceAsStream(KAYU_IMAGE_PATH);
+        InputStream userImageStream = this.getClass().getResourceAsStream(USER_IMAGE_PATH);
+        
+        assert (kayuImageStream != null) : ASSERT_FAIL_ABSENT_IMAGE;
+        assert (userImageStream != null) : ASSERT_FAIL_ABSENT_IMAGE;
+
+        kayuImage = new Image(kayuImageStream);
+        userImage = new Image(userImageStream);
     }
 
     /**
@@ -54,7 +69,7 @@ public class MainWindow extends AnchorPane {
     private void initialiseKayu() {
         kayu = new Kayu();
         kayu.initialize();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(kayu.getGreeting(), dukeImage));
+        createKayuDialog(kayu.getGreeting());
     }
 
     /**
@@ -63,15 +78,25 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        String input = userInput.getText().trim();
-        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
-        userInput.clear();
+        String input = userInput.getText();
+        String response = kayu.executeAndRespond(input);
         
-        String response = kayu.getResponse(input);
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(response, dukeImage));
+        createUserDialog(input);
+        createKayuDialog(response);
         
         if (kayu.isRecentCommandBye()) {
             kayu.exit();
         }
+    }
+    
+    private void createUserDialog(String input) {
+        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        dialogContainer.getChildren().add(userDialog);
+        userInput.clear();
+    }
+    
+    private void createKayuDialog(String response) {
+        DialogBox kayuDialog = DialogBox.getKayuDialog(response, kayuImage);
+        dialogContainer.getChildren().add(kayuDialog);
     }
 }

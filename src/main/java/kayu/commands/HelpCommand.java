@@ -1,8 +1,6 @@
 package kayu.commands;
 
-import static kayu.commands.CommandType.HELP;
-
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
@@ -19,14 +17,14 @@ public class HelpCommand extends Command {
      * Initializes a Help- {@link kayu.commands.Command}.
      */
     public HelpCommand() {
-        super(HELP);
+        super();
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
+    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
         return "Commands:\n"
                 + "  - bye\n"
                 + "  - help \n"

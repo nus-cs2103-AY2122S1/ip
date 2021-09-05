@@ -4,7 +4,7 @@ import static kayu.commands.CommandMessage.ASSERT_FAIL_NULL_PARAMS;
 
 import java.util.List;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
@@ -16,28 +16,22 @@ import kayu.task.Task;
 public abstract class Command {
 
     protected final String commandParams;
-    private final CommandType commandType;
 
     /**
      * Initializes the Command instance.
      *
-     * @param commandType {@link kayu.commands.CommandType} for Command instance.
      * @param commandParams String parameters fed into the command by user.
      */
-    public Command(CommandType commandType, String commandParams) {
+    public Command(String commandParams) {
         assert (commandParams != null) : ASSERT_FAIL_NULL_PARAMS;
-        this.commandType = commandType;
         this.commandParams = commandParams;
     }
 
     /**
      * Initializes the Command instance.
      * Overloads the {@link #commandParams} as an empty String.
-     *
-     * @param commandType {@link kayu.commands.CommandType} for Command instance.
      */
-    public Command(CommandType commandType) {
-        this.commandType = commandType;
+    public Command() {
         this.commandParams = "";
     }
 
@@ -48,19 +42,10 @@ public abstract class Command {
      * @param taskList {@link kayu.service.TaskList} instance to execute on.
      * @param storage {@link kayu.storage.Storage} instance to save information with.
      * @return String feedback of execution/outcome.
-     * @throws DukeException If execution of Command fails.
+     * @throws KayuException If execution of Command fails.
      * @throws StorageException If saving of information using <code>storage</code> fails.
      */
-    public abstract String execute(TaskList taskList, Storage storage) throws DukeException, StorageException;
-
-    /**
-     * Returns the of the instance.
-     *
-     * @return {@link kayu.commands.CommandType} for Command instance.
-     */
-    public CommandType getCommandType() {
-        return commandType;
-    }
+    public abstract String execute(TaskList taskList, Storage storage) throws KayuException, StorageException;
 
     /**
      * Returns the command parameters fed.
@@ -72,13 +57,12 @@ public abstract class Command {
     }
 
     /**
-     * Checks if the Command instance is a {@link kayu.commands.ByeCommand}
-     * using its {@link #commandType}.
+     * Checks if the Command instance is a {@link kayu.commands.ByeCommand}.
      *
      * @return Boolean true if is {@link kayu.commands.ByeCommand}, else false.
      */
     public boolean isBye() {
-        return commandType.equals(CommandType.BYE);
+        return false;
     }
 
     /**
@@ -88,7 +72,7 @@ public abstract class Command {
      * @param storage {@link kayu.storage.Storage} instance to save information with.
      * @throws StorageException If saving of information using <code>storage</code> fails.
      */
-    public void saveTasks(TaskList taskList, Storage storage) throws StorageException {
+    public void updateFileStorage(TaskList taskList, Storage storage) throws StorageException {
         List<Task> tasks = taskList.getTasks();
         storage.saveTasks(tasks);
     }

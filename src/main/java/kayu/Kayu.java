@@ -3,7 +3,7 @@ package kayu;
 import java.util.List;
 
 import kayu.commands.Command;
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.parser.Parser;
 import kayu.service.Logger;
@@ -56,14 +56,18 @@ public class Kayu {
         try {
             logger.printLogo();
             logger.printMessage(GREETING);
-            List<Task> tasks = storage.load();
-            taskList.initializeTasks(tasks);
+            initializeTasks();
             
         } catch (StorageException exception) {
             logger.printError(exception.getMessage());
             exception.printStackTrace();
             exit(); // force terminate
         }
+    }
+    
+    private void initializeTasks() throws StorageException {
+        List<Task> tasks = storage.load();
+        taskList.initializeTasks(tasks);
     }
 
     /**
@@ -72,7 +76,7 @@ public class Kayu {
      * @param userInput User input string to parse and execute.
      * @return A String response from the parsing and execution of the command.
      */
-    public String getResponse(String userInput) {
+    public String executeAndRespond(String userInput) {
         String feedback;
         Command command = parser.parseToCommand(userInput);
         isRecentCommandBye = (command.isBye()); // updates internally as a field
@@ -81,7 +85,7 @@ public class Kayu {
             feedback = command.execute(taskList, storage);
             logger.printMessage(feedback);
 
-        } catch (DukeException exception) {
+        } catch (KayuException exception) {
             feedback = exception.getMessage();
             logger.printError(feedback);
 

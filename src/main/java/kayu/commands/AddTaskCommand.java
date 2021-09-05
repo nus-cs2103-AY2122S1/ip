@@ -11,8 +11,12 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
+import kayu.exception.StorageException;
 import kayu.parser.DateTimeFormat;
+import kayu.service.TaskList;
+import kayu.storage.Storage;
+import kayu.task.Task;
 
 /**
  * Holds shared methods that are used by {@link kayu.commands.Command}s that adds {@link kayu.task.Task}s
@@ -27,17 +31,16 @@ public abstract class AddTaskCommand extends Command {
     /**
      * Initializes an AddTaskCommand instance.
      *
-     * @param commandType {@link kayu.commands.CommandType} for Command instance.
      * @param commandParams String parameters fed into the command by user.
      * @param dateTimeFormat {@link kayu.parser.DateTimeFormat} used in parsing, if required.
      */
-    public AddTaskCommand(CommandType commandType, String commandParams, DateTimeFormat dateTimeFormat) {
-        super(commandType, commandParams);
+    public AddTaskCommand(String commandParams, DateTimeFormat dateTimeFormat) {
+        super(commandParams);
         this.dateTimeFormat = dateTimeFormat;
     }
     
     protected String[] splitUserParams(String userParams, String commandName, String splitKey)
-            throws DukeException {
+            throws KayuException {
         
         try {
             String[] splitOnKey = userParams.split(" /" + splitKey + ' ', 2);
@@ -45,24 +48,24 @@ public abstract class AddTaskCommand extends Command {
             return new String[] {splitOnKey[0], dateTime[0], dateTime[1]};
             
         } catch (ArrayIndexOutOfBoundsException exception) {
-            throw new DukeException(String.format(
+            throw new KayuException(String.format(
                     ERROR_IMPROPER_FORMATTING,
                     commandName,
                     splitKey));
         }
     }
 
-    protected String extractDesc(String[] paramArray, String commandName) throws DukeException {
+    protected String extractDesc(String[] paramArray, String commandName) throws KayuException {
         assert (paramArray.length >= 1) : ASSERT_FAIL_INCOMPLETE_PARAMS;
         
         String desc = paramArray[0].trim();
         if (desc.isBlank()) {
-            throw new DukeException(String.format(ERROR_EMPTY_PARAMS, commandName));
+            throw new KayuException(String.format(ERROR_EMPTY_PARAMS, commandName));
         }
         return desc;
     }
 
-    protected LocalDate extractDate(String[] paramArray) throws DukeException {
+    protected LocalDate extractDate(String[] paramArray) throws KayuException {
         assert (paramArray.length == 3) : ASSERT_FAIL_INCOMPLETE_PARAMS;
         
         String dateString = paramArray[1].trim();
@@ -72,13 +75,13 @@ public abstract class AddTaskCommand extends Command {
             try {
                 return LocalDate.parse(dateString, formatter);
             } catch (DateTimeParseException exception) {
-                // do nothing
+                // skip this and attempt to parse with the next possible format
             }
         }
-        throw new DukeException(ERROR_IMPROPER_DATE);
+        throw new KayuException(ERROR_IMPROPER_DATE);
     }
 
-    protected LocalTime extractTime(String[] paramArray) throws DukeException {
+    protected LocalTime extractTime(String[] paramArray) throws KayuException {
         assert (paramArray.length == 3) : ASSERT_FAIL_INCOMPLETE_PARAMS;
         
         String timeString = paramArray[2].trim().toUpperCase();
@@ -88,9 +91,14 @@ public abstract class AddTaskCommand extends Command {
             try {
                 return LocalTime.parse(timeString, formatter);
             } catch (DateTimeParseException exception) {
-                // do nothing
+                // skip this and attempt to parse with the next possible format
             }
         }
-        throw new DukeException(ERROR_IMPROPER_TIME);
+        throw new KayuException(ERROR_IMPROPER_TIME);
+    }
+
+    protected void updateTasks(TaskList taskList, Storage storage, Task task) throws KayuException, StorageException {
+        taskList.addTask(task);
+        super.updateFileStorage(taskList, storage);
     }
 }

@@ -3,11 +3,10 @@ package kayu.commands;
 import static kayu.commands.CommandMessage.ERROR_EMPTY_PARAMS;
 import static kayu.commands.CommandMessage.MESSAGE_MATCHING_CONTENTS;
 import static kayu.commands.CommandMessage.MESSAGE_NO_MATCHING_CONTENTS;
-import static kayu.commands.CommandType.FIND;
 
 import java.util.Map;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
@@ -28,30 +27,27 @@ public class FindCommand extends Command {
      * @param commandParams String parameters fed into the command by user.
      */
     public FindCommand(String commandParams) {
-        super(FIND, commandParams);
+        super(commandParams);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
+    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
+        String[] keywords = extractKeywords();
+        String formattedParameters = generateFormattedParameters(keywords); // for message
+        Map<Integer, Task> taskMap = taskList.findTasksByKeywords(keywords);
+        
+        return generateResponse(formattedParameters, taskMap);
+    }
+    
+    private String[] extractKeywords() throws KayuException {
         String keyword = commandParams.trim();
         if (keyword.isEmpty()) {
-            throw new DukeException(String.format(ERROR_EMPTY_PARAMS, COMMAND_WORD));
+            throw new KayuException(String.format(ERROR_EMPTY_PARAMS, COMMAND_WORD));
         }
-        
-        String[] keywords = keyword.split(" ");
-        String params = generateFormattedParameters(keywords); // for message
-        
-        Map<Integer, Task> taskMap = taskList.findTasksByKeywords(keywords);
-        if (taskMap.isEmpty()) {
-            return String.format(MESSAGE_NO_MATCHING_CONTENTS, params);
-        }
-        
-        String header = String.format(MESSAGE_MATCHING_CONTENTS, params);
-        String body = generateFormattedResponse(taskMap);
-        return header.concat(body);
+        return keyword.split(" ");
     }
 
     private String generateFormattedParameters(String... keywords) {
@@ -65,12 +61,22 @@ public class FindCommand extends Command {
         return parameters.toString();
     }
     
-    private String generateFormattedResponse(Map<Integer, Task> taskMap) {
+    private String generateFormattedTaskListResponse(Map<Integer, Task> taskMap) {
         StringBuilder resultTasksAsString = new StringBuilder();
         taskMap.forEach((number, task) -> {
             String line = String.format("\n%d. %s", number + 1, task);
             resultTasksAsString.append(line);
         });
         return resultTasksAsString.toString();
+    }
+    
+    private String generateResponse(String params, Map<Integer, Task> taskMap) {
+        if (taskMap.isEmpty()) {
+            return String.format(MESSAGE_NO_MATCHING_CONTENTS, params);
+        }
+        
+        String header = String.format(MESSAGE_MATCHING_CONTENTS, params);
+        String body = generateFormattedTaskListResponse(taskMap);
+        return header.concat(body);
     }
 }

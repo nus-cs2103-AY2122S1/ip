@@ -73,11 +73,12 @@ public abstract class Task {
 
     /**
      * Generates a String icon whether Task class is done or not.
+     * '[X]' represents done while '[ ]' represents not done.
      *
      * @return String icon based on done status.
      */
     public String getStatusIcon() {
-        return (isDone ? "[X] " : "[ ] "); // mark done Duke.task with X
+        return (isDone ? "[X] " : "[ ] ");
     }
 
     /**

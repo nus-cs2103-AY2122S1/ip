@@ -8,6 +8,7 @@ import java.util.List;
  * Contains DateTime formats for {@link kayu.parser.Parser} and {@link kayu.commands.Command}.
  */
 public class DateTimeFormat {
+    
     // Lists containing formats.
     private final List<DateTimeFormatter> dateFormats = new ArrayList<>();
     private final List<DateTimeFormatter> timeFormats = new ArrayList<>();
@@ -34,11 +35,13 @@ public class DateTimeFormat {
     private void initializeDateFormats() {
         dateFormats.clear();
         
+        // dates with dash -
         dateFormats.add(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         dateFormats.add(DateTimeFormatter.ofPattern("yyyy-M-dd"));
         dateFormats.add(DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         dateFormats.add(DateTimeFormatter.ofPattern("dd-M-yyyy"));
         
+        // dates with slash /
         dateFormats.add(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
         dateFormats.add(DateTimeFormatter.ofPattern("yyyy/M/dd"));
         dateFormats.add(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -48,9 +51,11 @@ public class DateTimeFormat {
     private void initializeTimeFormats() {
         timeFormats.clear();
         
+        // 24 hour formats
         timeFormats.add(DateTimeFormatter.ofPattern("HH:mm"));
         timeFormats.add(DateTimeFormatter.ofPattern("HHmm"));
 
+        // 12 hour formats
         timeFormats.add(DateTimeFormatter.ofPattern("hh:mm a"));
         timeFormats.add(DateTimeFormatter.ofPattern("hhmm a"));
     }

@@ -1,8 +1,6 @@
 package kayu.commands;
 
-import static kayu.commands.CommandType.BYE;
-
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
 import kayu.storage.Storage;
@@ -16,17 +14,17 @@ public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
 
     /**
-     * Initializes a Bye- {@link kayu.commands.Command}.
+     * {@inheritDoc}
      */
-    public ByeCommand() {
-        super(BYE);
+    public boolean isBye() {
+        return true;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException, StorageException {
+    public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
         return CommandMessage.MESSAGE_BYE;
     }
 }

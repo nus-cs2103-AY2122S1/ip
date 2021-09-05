@@ -28,8 +28,9 @@ public class Parser {
      */
     public Command parseToCommand(String userInput) {
         try {
-            String[] inputs = userInput.split(" ", 2);
+            String[] inputs = userInput.trim().split(" ", 2);
             String command = inputs[0];
+            String params;
             
             switch (command) {
             case ByeCommand.COMMAND_WORD:
@@ -42,22 +43,28 @@ public class Parser {
                 return new HelpCommand();
                 
             case DoneCommand.COMMAND_WORD:
-                return new DoneCommand(inputs[1]);
+                params = inputs[1];
+                return new DoneCommand(params);
                 
             case DeleteCommand.COMMAND_WORD:
-                return new DeleteCommand(inputs[1]);
+                params = inputs[1];
+                return new DeleteCommand(params);
                 
             case FindCommand.COMMAND_WORD:
-                return new FindCommand(inputs[1]);
+                params = inputs[1];
+                return new FindCommand(params);
                 
             case TodoCommand.COMMAND_WORD:
-                return new TodoCommand(inputs[1], dateTimeFormat);
+                params = inputs[1];
+                return new TodoCommand(params, dateTimeFormat);
                 
             case EventCommand.COMMAND_WORD:
-                return new EventCommand(inputs[1], dateTimeFormat);
+                params = inputs[1];
+                return new EventCommand(params, dateTimeFormat);
                 
             case DeadlineCommand.COMMAND_WORD:
-                return new DeadlineCommand(inputs[1], dateTimeFormat);
+                params = inputs[1];
+                return new DeadlineCommand(params, dateTimeFormat);
                                 
             default:
                 return (userInput.isBlank()) ? new EmptyCommand() : new InvalidCommand();

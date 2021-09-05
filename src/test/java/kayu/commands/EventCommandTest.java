@@ -15,7 +15,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import kayu.exception.DukeException;
+import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.parser.DateTimeFormat;
 import kayu.service.TaskList;
@@ -85,7 +85,7 @@ public class EventCommandTest {
             String feedback = eventCommand.execute(taskList, storage);
             assertEquals(expectedFeedback, feedback);
             
-        } catch (DukeException | StorageException exception) {
+        } catch (KayuException | StorageException exception) {
             System.out.println(exception.getMessage());
             fail();
         }
@@ -110,7 +110,7 @@ public class EventCommandTest {
                 String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, idx + 1);
                 assertEquals(expectedFeedback, feedback);
                 
-            } catch (DukeException | StorageException exception) {
+            } catch (KayuException | StorageException exception) {
                 System.out.println(exception.getMessage());
                 fail();
             }
@@ -136,7 +136,7 @@ public class EventCommandTest {
                 String expectedFeedback = String.format(MESSAGE_CREATED_EVENT, expectedTask, idx + 1);
                 assertEquals(expectedFeedback, feedback);
 
-            } catch (DukeException | StorageException exception) {
+            } catch (KayuException | StorageException exception) {
                 System.out.println(exception.getMessage());
                 fail();
             }
@@ -152,7 +152,7 @@ public class EventCommandTest {
             eventCommand.execute(taskList, storage);
             fail();
 
-        } catch (DukeException exception) {
+        } catch (KayuException exception) {
             assertEquals(CommandMessage.ERROR_IMPROPER_DATE, exception.getMessage());
         }
     }
@@ -166,7 +166,7 @@ public class EventCommandTest {
             eventCommand.execute(taskList, storage);
             fail();
 
-        } catch (DukeException exception) {
+        } catch (KayuException exception) {
             String expected = String.format(
                     ERROR_IMPROPER_FORMATTING,
                     EventCommand.COMMAND_WORD,

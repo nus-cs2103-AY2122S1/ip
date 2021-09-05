@@ -1,15 +1,5 @@
 package kayu.parser;
 
-import static kayu.commands.CommandType.BYE;
-import static kayu.commands.CommandType.DEADLINE;
-import static kayu.commands.CommandType.DELETE;
-import static kayu.commands.CommandType.DONE;
-import static kayu.commands.CommandType.EMPTY;
-import static kayu.commands.CommandType.EVENT;
-import static kayu.commands.CommandType.FIND;
-import static kayu.commands.CommandType.INVALID;
-import static kayu.commands.CommandType.LIST;
-import static kayu.commands.CommandType.TODO;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,8 +10,10 @@ import kayu.commands.Command;
 import kayu.commands.DeadlineCommand;
 import kayu.commands.DeleteCommand;
 import kayu.commands.DoneCommand;
+import kayu.commands.EmptyCommand;
 import kayu.commands.EventCommand;
 import kayu.commands.FindCommand;
+import kayu.commands.InvalidCommand;
 import kayu.commands.ListCommand;
 import kayu.commands.TodoCommand;
 
@@ -33,8 +25,8 @@ public class ParserTest {
     public void testParseWithBye() {
         String input = ByeCommand.COMMAND_WORD;
         Command command = parser.parseToCommand(input);
-        
-        assertEquals(BYE, command.getCommandType());
+
+        assertTrue(command instanceof ByeCommand);
         assertTrue(command.getCommandParams().isEmpty());
     }
     
@@ -42,8 +34,8 @@ public class ParserTest {
     public void testParseWithList() {
         String input = ListCommand.COMMAND_WORD;
         Command command = parser.parseToCommand(input);
-        
-        assertEquals(LIST, command.getCommandType());
+
+        assertTrue(command instanceof ListCommand);
         assertTrue(command.getCommandParams().isEmpty());
     }
     
@@ -52,8 +44,8 @@ public class ParserTest {
         String numberString = String.format("%d", 10);
         String input = DoneCommand.COMMAND_WORD + ' ' + numberString;
         Command command = parser.parseToCommand(input);
-        
-        assertEquals(DONE, command.getCommandType());
+
+        assertTrue(command instanceof DoneCommand);
         assertEquals(numberString, command.getCommandParams());
     }
 
@@ -63,7 +55,7 @@ public class ParserTest {
         String input = FindCommand.COMMAND_WORD + ' ' + keyword;
         Command command = parser.parseToCommand(input);
 
-        assertEquals(FIND, command.getCommandType());
+        assertTrue(command instanceof FindCommand);
         assertEquals(keyword, command.getCommandParams());
     }
     
@@ -72,8 +64,8 @@ public class ParserTest {
         String numberString = String.format("%d", 10);
         String input = DeleteCommand.COMMAND_WORD + ' ' + numberString;
         Command command = parser.parseToCommand(input);
-        
-        assertEquals(DELETE, command.getCommandType());
+
+        assertTrue(command instanceof DeleteCommand);
         assertEquals(numberString, command.getCommandParams());
     }
     
@@ -82,8 +74,8 @@ public class ParserTest {
         String params = "mock something";
         String input = TodoCommand.COMMAND_WORD + ' ' + params;
         Command command = parser.parseToCommand(input);
-        
-        assertEquals(TODO, command.getCommandType());
+
+        assertTrue(command instanceof TodoCommand);
         assertEquals(params, command.getCommandParams());
     }
 
@@ -93,7 +85,7 @@ public class ParserTest {
         String input = EventCommand.COMMAND_WORD + ' ' + params;
         Command command = parser.parseToCommand(input);
 
-        assertEquals(EVENT, command.getCommandType());
+        assertTrue(command instanceof EventCommand);
         assertEquals(params, command.getCommandParams());
     }
 
@@ -103,7 +95,7 @@ public class ParserTest {
         String input = DeadlineCommand.COMMAND_WORD + ' ' + params;
         Command command = parser.parseToCommand(input);
 
-        assertEquals(DEADLINE, command.getCommandType());
+        assertTrue(command instanceof DeadlineCommand);
         assertEquals(params, command.getCommandParams());
     }
     
@@ -111,8 +103,8 @@ public class ParserTest {
     public void testParseWithEmptyInput() {
         String input = "";
         Command command = parser.parseToCommand(input);
-        
-        assertEquals(EMPTY, command.getCommandType());
+
+        assertTrue(command instanceof EmptyCommand);
         assertTrue(command.getCommandParams().isEmpty());
     }
 
@@ -120,8 +112,8 @@ public class ParserTest {
     public void testParseWithPureWhitespace() {
         String input = "         ";
         Command command = parser.parseToCommand(input);
-        
-        assertEquals(EMPTY, command.getCommandType());
+
+        assertTrue(command instanceof EmptyCommand);
         assertTrue(command.getCommandParams().isEmpty());
     }
 
@@ -129,17 +121,8 @@ public class ParserTest {
     public void testParseWithInvalidInput() {
         String input = "gibberish";
         Command command = parser.parseToCommand(input);
-        
-        assertEquals(INVALID, command.getCommandType());
-        assertTrue(command.getCommandParams().isEmpty());
-    }
 
-    @Test
-    public void testParseWithImproperFormat() {
-        String input = "todo"; // requires params
-        Command command = parser.parseToCommand(input);
-        
-        assertEquals(INVALID, command.getCommandType());
+        assertTrue(command instanceof InvalidCommand);
         assertTrue(command.getCommandParams().isEmpty());
     }
 }
