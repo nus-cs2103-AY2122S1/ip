@@ -14,54 +14,44 @@ import duke.task.Todo;
  */
 public class AddCommand extends Command {
 
-    /** Enum that specifies the type of task being added */
+    /** Enum that specifies the type of task being added. */
     private final AddCommandType addType;
-    /** User inputted string */
-    private final String userInput;
-    /** List of tasks to run the command on */
+    /** Task Description. */
+    private final String description;
+    /** List of tasks to run the command on. */
     private final TaskList tasks;
+    /** Array of date time parameters for certain tasks. */
+    private final String[] dateTimeArgs;
+
 
     /**
      * Instantiates a new Add command.
      *
-     * @param addType   task type that is being added using AddCommand
-     * @param userInput user-inputted string
-     * @param tasks     list tasks to add the new task to
+     * @param addType      the type of task added.
+     * @param description  the description for task to be added.
+     * @param tasks        the list of tasks to add the new task to.
+     * @param dateTimeArgs the datetime parameters for tasks.
      */
-    public AddCommand(AddCommandType addType, String userInput, TaskList tasks) {
+    public AddCommand(AddCommandType addType, String description, TaskList tasks, String... dateTimeArgs) {
         this.addType = addType;
-        this.userInput = userInput;
+        this.description = description;
         this.tasks = tasks;
+        this.dateTimeArgs = dateTimeArgs;
     }
-
     @Override
     public String execute() {
         Task newTask = null;
-        String[] inputs = this.userInput.split(" ", 2);
-        String[] args;
-        String[] datetimeArgs;
+
         try {
             switch (this.addType) {
             case todo:
-                newTask = new Todo(inputs[1]);
+                newTask = createTodo();
                 break;
             case event:
-                args = inputs[1].split(" /at ", 2);
-                datetimeArgs = args[1].split(" ", 2);
-                if (datetimeArgs.length == 1) {
-                    newTask = new Event(args[0], args[1]);
-                } else {
-                    newTask = new Event(args[0], datetimeArgs[0], datetimeArgs[1]);
-                }
+                newTask = createEvent();
                 break;
             case deadline:
-                args = inputs[1].split(" /by ", 2);
-                datetimeArgs = args[1].split(" ", 2);
-                if (datetimeArgs.length == 1) {
-                    newTask = new Deadline(args[0], args[1]);
-                } else {
-                    newTask = new Deadline(args[0], datetimeArgs[0], datetimeArgs[1]);
-                }
+                newTask = createDeadline();
                 break;
             default:
                 break;
@@ -69,14 +59,51 @@ public class AddCommand extends Command {
         } catch (DateTimeParseException e) {
             return "☹ OOPS!!! Please enter an appropriate date (and optionally, 24-hour time)\n"
                                 + "Format: YYYY-MM-DD HH:MM";
-
         }
+
         this.tasks.add(newTask);
-        String returnString = "Got it. I've added this task:\n  "
+        return "Got it. I've added this task:\n  "
                 + newTask.toString() + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.";
-        return returnString;
     }
 
+    /**
+     * Instantiates a new instance of Todo based on user inputted parameters.
+     *
+     * @return a new instance of Todo task.
+     */
+    private Task createTodo() {
+        return new Todo(description);
+    }
+
+    /**
+     * Instantiates a new instance of Event based on user inputted parameters.
+     *
+     * @return a new instance of Event task.
+     * @throws DateTimeParseException when task creation fails to parse date/time.
+     */
+    private Task createEvent() throws DateTimeParseException {
+        // For events with only date information.
+        if (dateTimeArgs.length == 1) {
+            return new Event(description, dateTimeArgs[0]);
+        }
+        // For events with both date and time information./
+        return new Event(description, dateTimeArgs[0], dateTimeArgs[1]);
+    }
+
+    /**
+     * Instantiates a new instance of Deadline based on user inputted parameters.
+     *
+     * @return a new instance of Deadline task.
+     * @throws DateTimeParseException when task creation fails to parse date/time.
+     */
+    private Task createDeadline() throws DateTimeParseException {
+        // For events with only date information.
+        if (dateTimeArgs.length == 1) {
+            return new Deadline(description, dateTimeArgs[0]);
+        }
+        // For events with both date and time information.
+        return new Deadline(description, dateTimeArgs[0], dateTimeArgs[1]);
+    }
 
 }
