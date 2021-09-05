@@ -6,11 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.tasktype.Task;
+import duke.exception.WrongCommandFormatException;
 import duke.tasktype.Deadline;
 import duke.tasktype.Event;
+import duke.tasktype.Task;
 import duke.tasktype.Todo;
-import duke.exception.WrongCommandFormatException;
+
 
 /**
  * Class that represents the storage.
@@ -59,17 +60,19 @@ public class Storage {
         String taskDescription = s.substring(7);
         Task t = null;
         try {
-            if (s.substring(3,6). equals("[X]")) {
+            if (s.substring(3, 6).equals("[X]")) {
                 switch (taskType) {
                 case "[T]":
                     t = new Todo(taskDescription, true);
                     break;
                 case "[D]":
-                    t =  new Deadline(taskDescription, true);
+                    t = new Deadline(taskDescription, true);
                     break;
                 case "[E]":
-                    t =  new Event(taskDescription, true);
+                    t = new Event(taskDescription, true);
                     break;
+                default:
+                    // Leaves Task t as null
                 }
             } else {
                 switch (taskType) {
@@ -82,6 +85,8 @@ public class Storage {
                 case "[E]":
                     t = new Event(taskDescription, false);
                     break;
+                default:
+                    //leaves Task t as null
                 }
             }
         } catch (WrongCommandFormatException e) {

@@ -1,9 +1,13 @@
 package duke.exception;
 
-public class WrongCommandFormatException extends Exception{
+public class WrongCommandFormatException extends Exception {
 
     private String message;
 
+    /**
+     * Constructor for the exception
+     * @param message The error message that duke would return to the user.
+     */
     public WrongCommandFormatException(String message) {
         super(message);
         this.message = message;

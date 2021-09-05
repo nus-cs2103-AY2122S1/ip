@@ -2,12 +2,13 @@ package duke;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.VBox;
 
 public class Controller {
     @FXML
@@ -24,20 +25,19 @@ public class Controller {
     private Storage storage;
     private Image icon = new Image("https://static.zerochan.net/Shinomiya.Kaguya.full.2917139.png");
 
+    /**
+     * Constructor for the controller.
+     */
     public Controller() {
         this.list = new MyList();
         this.storage = new Storage(this.list, "./Data.txt");
         storage.load();
     }
 
-    public void enter(KeyEvent e){
-        System.out.println("HEllo");
-        if (e.getCode().equals(KeyCode.ENTER)) {
-            System.out.println("ENTER!");
-            handleUserInput(new ActionEvent());
-        }
-    }
-
+    /**
+     * Method to handle the user input when pressing enter or clicking the send button.
+     * @param e
+     */
     public void handleUserInput(ActionEvent e) {
 
         this.command = this.userInput.getText();

@@ -2,10 +2,11 @@ package duke;
 
 import java.util.Scanner;
 
+import duke.exception.WrongCommandFormatException;
 import duke.tasktype.Deadline;
 import duke.tasktype.Event;
 import duke.tasktype.Todo;
-import duke.exception.WrongCommandFormatException;
+
 
 /**
  * Class to handle all the user inputs.
@@ -55,7 +56,7 @@ public class Parser {
                     int index = s1.nextInt();
                     this.list.markComplete(index);
                     this.storage.writeToFile();
-                    counter ++;
+                    counter++;
                 }
                 if (counter == 0) {
                     Ui.invalidIndexMessage();
@@ -140,6 +141,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Method to generate Dukes response based on the user command.
+     * @param command The command the user enters.
+     * @return The String representing Duke's response.
+     */
     public String dukeResponse(String command) {
         Scanner s = new Scanner(command);
         String input = s.next();
@@ -156,7 +162,7 @@ public class Parser {
                     int index = s1.nextInt();
                     response += this.list.markComplete(index);
                     this.storage.writeToFile();
-                    counter ++;
+                    counter++;
                 }
                 if (counter == 0) {
                     response = Ui.invalidIndexMessage();

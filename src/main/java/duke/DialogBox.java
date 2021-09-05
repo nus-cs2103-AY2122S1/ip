@@ -13,6 +13,12 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
     private boolean isUser;
 
+    /**
+     * Constructor for the DialogBox.
+     * @param l The label containing the user message or Duke's reply.
+     * @param iv The profile image of the user or Duke
+     * @param isUser True if the DialogBox belongs to the user and false otherwise.
+     */
     public DialogBox(Label l, ImageView iv, boolean isUser) {
         this.text = l;
         this.displayPicture = iv;

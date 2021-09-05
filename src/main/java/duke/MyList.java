@@ -7,7 +7,7 @@ import duke.tasktype.Task;
 /**
  * duke.MyList class that encapsulates the bot list object and functionalities.
  *
- * @Author Houten Teo
+ * @author Houten Teo
  * @version CS2103T week 3
  */
 public class MyList {
@@ -23,7 +23,7 @@ public class MyList {
      * Adds the duke.tasks from the Data.txt file into the list if any.
      */
     public MyList() {
-          this.myList = new ArrayList<Task>();
+        this.myList = new ArrayList<Task>();
     }
 
     /**

@@ -1,11 +1,11 @@
 package testing;
 
-import duke.Duke;
-import duke.exception.WrongCommandFormatException;
-import duke.tasktype.Deadline;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import duke.Duke;
+import duke.exception.WrongCommandFormatException;
+import duke.tasktype.Deadline;
 
 public class DeadlineTest {
 

@@ -68,10 +68,9 @@ public class Deadline implements Task {
                 }
 
             } else {
-              this.description += next;
+                this.description += next;
             }
-        }
-         if (this.description.equals(" ")) {
+        } if (this.description.equals(" ")) {
             throw new WrongCommandFormatException(
                     "No task specified. Please specify a task before `/by`"
             );

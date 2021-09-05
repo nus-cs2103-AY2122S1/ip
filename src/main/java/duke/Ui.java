@@ -1,10 +1,11 @@
 package duke;
 
-import duke.tasktype.Task;
+import duke.exception.WrongCommandFormatException;
 import duke.tasktype.Deadline;
 import duke.tasktype.Event;
+import duke.tasktype.Task;
 import duke.tasktype.Todo;
-import duke.exception.WrongCommandFormatException;
+
 
 /**
  * Class that handles the user interface.
@@ -116,7 +117,7 @@ public class Ui {
             output = "Your list is empty.";
         } else {
             output = "Your list items: \n";
-            for (int i = 0; i < listLength; i ++) {
+            for (int i = 0; i < listLength; i++) {
                 Task t = list.getTask(i);
                 output += i + 1 + ". " + t.toString() + "\n";
             }
