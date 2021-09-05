@@ -50,32 +50,32 @@ public class Duke {
         return response;
     }
 
-//    /**
-//     * Runs the duke chatbot by loading the TaskList and calling the Ui and Parser
-//     */
-//    private void run() {
-//        System.out.println(ui.showWelcomeMessage1());
-//        System.out.println(Ui.LOGO);
-//        System.out.println(ui.showWelcomeMessage2());
-//        //noinspection finally
-//        try {
-//            System.out.println(storage.loadFileToList());
-//        } catch (FileNotFoundException e) {
-//            System.out.println(ui.showLoadingError());
-//        } finally {
-//            //noinspection InfiniteLoopStatement
-//            while (true) {
-//                String command = ui.getUserCommand();
-//                Parser parser = new Parser(this);
-//                String response = parser.handleInput(command);
-//                assert !response.equals("") : "there should be a response to the command";
-//                System.out.println(response);
-//            }
-//        }
-//    }
-//
-//    public static void main(String[] args) {
-//        new Duke().run();
-//    }
-//
+    /**
+     * Runs the duke chatbot by loading the TaskList and calling the Ui and Parser
+     */
+    private void run() {
+        System.out.println(ui.showWelcomeMessage1());
+        System.out.println(Ui.LOGO);
+        System.out.println(ui.showWelcomeMessage2());
+        //noinspection finally
+        try {
+            System.out.println(storage.loadFileToList());
+        } catch (FileNotFoundException e) {
+            System.out.println(ui.showLoadingError());
+        } finally {
+            //noinspection InfiniteLoopStatement
+            while (true) {
+                String command = ui.getUserCommand();
+                Parser parser = new Parser(this);
+                String response = parser.handleInput(command);
+                assert !response.equals("") : "there should be a response to the command";
+                System.out.println(response);
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        new Duke().run();
+    }
+
 }

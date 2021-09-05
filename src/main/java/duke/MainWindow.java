@@ -43,6 +43,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.parseGui(input, duke);
+        assert !response.equals("") : "there should be a response to the command";
         dialogContainer.getChildren().addAll(
             ChatBox.getUserDialog(input, userImage),
             ChatBox.getDukeDialog(response, dukeImage)
