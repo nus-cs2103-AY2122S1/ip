@@ -1,9 +1,17 @@
 package bob;
 
+import bob.GUI.DialogBox;
+import bob.GUI.HelpDialogBox;
+import bob.GUI.Ui;
 import bob.exception.DirectoryNotFoundException;
 import bob.exception.FileNotFoundException;
 
+
+import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Objects;
 
 import javafx.animation.PauseTransition;
@@ -11,6 +19,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -185,6 +194,7 @@ public class Bob extends Application{
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
+        // If the user types in the special command "bye" the GUI should terminate.
         if (Objects.equals(userInput.getText(), "bye")) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(userText, new ImageView(user)),
@@ -197,12 +207,32 @@ public class Bob extends Application{
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished( event -> Platform.exit() );
             delay.play();
-        } else {
-            Label dukeText = new Label(parser.getResponse(userInput.getText(), ui, tasks, storage));
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, new ImageView(user)),
-                    DialogBox.getBobDialog(dukeText, new ImageView(bob))
-            );
+        } else { // If the user types in any other command the GUI should show the corresponding response from Bob.
+            String response = parser.getResponse(userInput.getText(), ui, tasks, storage);
+            // If the user types in the help command Bob should return a hyperlink to the help page.
+            if (Objects.equals(userInput.getText(), "help")) {
+                Hyperlink dukeText = new Hyperlink(response);
+                dukeText.setVisited(true); // Set the hyperlink as visited so that the text is black.
+                dukeText.setOnAction(e -> {
+                    try {
+                        Desktop.getDesktop().browse(new URI("https://felwuzhere.wixsite.com/my-site-1"));
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (URISyntaxException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(userText, new ImageView(user)),
+                        new HelpDialogBox(dukeText, new ImageView(bob))
+                );
+            } else { // If the user types in any other command Bob should return its response as regular text.
+                Label dukeText = new Label(response);
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(userText, new ImageView(user)),
+                        DialogBox.getBobDialog(dukeText, new ImageView(bob))
+                );
+            }
             userInput.clear();
         }
     }
