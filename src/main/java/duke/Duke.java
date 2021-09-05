@@ -20,7 +20,12 @@ public class Duke {
         parser = new Parser();
     }
 
-
+    /**
+     * Gets String response to a particular input
+     *
+     * @param input Full input sent to duke
+     * @return String response after parsing input
+     */
     public String getResponse(String input) {
         try {
             Command c = parser.parseCommand(input);
