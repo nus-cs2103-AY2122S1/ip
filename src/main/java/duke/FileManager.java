@@ -85,14 +85,13 @@ public class FileManager {
      *
      * @param list The list of tasks to be saved.
      */
-    public void writeToFile(TaskList list) {
+    public void writeToFile(TaskList list) throws DukeException {
         try {
             FileWriter writer = new FileWriter(FILENAME);
             writer.write(list.convertToData());
             writer.close();
-            System.out.println("Your task list has been saved");
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            throw new DukeException("An error occurred while writing to the save file :(");
         }
     }
 }

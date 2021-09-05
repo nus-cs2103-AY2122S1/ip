@@ -32,7 +32,6 @@ public class Duke {
         try {
             Command command = parser.parse();
             String response = command.execute(list);
-            System.out.println(list.toString());
             fm.writeToFile(list);
             return response;
         } catch (DukeException e) {
