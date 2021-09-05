@@ -1,4 +1,7 @@
+import java.time.format.DateTimeParseException;
 import java.util.*;
+
+import java.time.LocalDate;
 
 public class Katheryne {
     public static void main(String[] args) throws KatheryneExceptions {
@@ -37,30 +40,49 @@ public class Katheryne {
                     }
                 } else if (userInput.equalsIgnoreCase("list")) {
                     System.out.println("Here's the list I've stored for you:");
-                    for(int i = 1; i <= lst.size(); i++) {
+                    for (int i = 1; i <= lst.size(); i++) {
                         System.out.println(i + ") " + lst.get(i - 1));
                     }
                 } else if (keywordInput[0].equalsIgnoreCase("deadline")) {
-                    if (keywordInput.length == 1) {
-                        throw new KatheryneExceptions("A deadline needs a description and a /by time to complete it");
-                    }
-                    String[] parsedDeadline = keywordInput[1].split(" /by ");
-                    if (parsedDeadline.length == 2) {
-                        lst.add(new Deadline(parsedDeadline[0], parsedDeadline[1]));
-                        System.out.println("'" + parsedDeadline[0] + "' added to your list, do by " + parsedDeadline[1]);
-                    } else {
-                        throw new KatheryneExceptions("A deadline needs a description and a /by time to complete it");
+                    try {
+                        String[] parsedDeadline = keywordInput[1].split("/by");
+                        if (parsedDeadline[0].isEmpty()) {
+                            throw new KatheryneExceptions(
+                                    "A deadline needs a description and a /by time in the format 2007-12-03. The " 
+                                            + "description is missing~");
+                        }
+                        if (parsedDeadline.length == 2) {
+                            lst.add(new Deadline(parsedDeadline[0].trim(), LocalDate.parse(parsedDeadline[1].trim())));
+                        } else {
+                            throw new KatheryneExceptions(
+                                    "A deadline needs a description and a /by time in the format 2007-12-03.");
+                        }
+                        System.out.println(
+                                "'" + parsedDeadline[0] + "' added to your list, do by " + parsedDeadline[1]);
+                    } catch (DateTimeParseException e) {
+                        throw new KatheryneExceptions(
+                                "The by time is in the wrong format. It must be in the format YYYY-MM-DD");
                     }
                 } else if (keywordInput[0].equalsIgnoreCase("event")) {
-                    if (keywordInput.length == 1) {
-                        throw new KatheryneExceptions("An event needs a description and an /at time when it occurs");
-                    }
-                    String[] parsedEvent = keywordInput[1].split(" /at ");
-                    if (parsedEvent.length == 2) {
-                        lst.add(new Event(parsedEvent[0], parsedEvent[1]));
-                        System.out.println("'" + parsedEvent[0] + "' added to your list, scheduled for " + parsedEvent[1]);
-                    } else {
-                        throw new KatheryneExceptions("An event needs a description and an /at time when it occurs");
+                    try {
+                        String[] parsedEvent = keywordInput[1].split(" /at ");
+                        if (parsedEvent[0].isEmpty()) {
+                            throw new KatheryneExceptions(
+                                    "An event needs a description and an /at time when it occurs in the format " 
+                                            + "2007-12-03. The description is missing");
+                        }
+                        if (parsedEvent.length == 2) {
+                            lst.add(new Event(parsedEvent[0].trim(), LocalDate.parse(parsedEvent[1].trim())));
+                            System.out.println(
+                                    "'" + parsedEvent[0] + "' added to your list, scheduled for " + parsedEvent[1]);
+                        } else {
+                            throw new KatheryneExceptions(
+                                    "An event needs a description and an /at time when it occurs in the format " 
+                                            + "2007-12-03.");
+                        }
+                    } catch (DateTimeParseException e) {
+                        throw new KatheryneExceptions(
+                                "The at time is in the wrong format. It must be in the format YYYY-MM-DD");
                     }
                 } else if (keywordInput[0].equalsIgnoreCase("todo")) {
                     if (keywordInput.length == 1) {
@@ -73,14 +95,14 @@ public class Katheryne {
                     throw new UnknownCommandException();
                 }
                 System.out.println("There are currently " + lst.size() + " items in your list.");
-            } catch(UnknownCommandException e) {
+            } catch (UnknownCommandException e) {
                 System.out.println(e.getMessage());
             } catch (KatheryneExceptions e) {
                 System.out.println(e.getMessage());
             } catch (NumberFormatException e) {
-                System.out.println("You need to specify a number in the correct format. ERROR: " 
+                System.out.println("You need to specify a number in the correct format. ERROR: "
                         + e.getMessage());
-            } 
+            }
 //            finally {
 //                continue;
 //            }
