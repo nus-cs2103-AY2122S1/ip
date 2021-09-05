@@ -2,12 +2,15 @@ package duke.task;
 
 import duke.DukeException;
 
+import java.util.ArrayList;
+
 /**
  * Abstract class that represent task.
  */
 public abstract class Task {
     private String description;
-    private boolean done = false;
+    private boolean isDone = false;
+    private ArrayList<String> tags = new ArrayList<>();
     public static final String SEP = "4%213";
 
     protected Task(String description) {
@@ -47,7 +50,7 @@ public abstract class Task {
      * Marks the task as done.
      */
     public void markDone() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -57,10 +60,11 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        String doneIndicator = this.done
+        String doneIndicator = this.isDone
                 ? "[X]"
                 : "[ ]";
-        return (doneIndicator + " " + this.description);
+        String tagsString = this.tags.toString();
+        return (doneIndicator + " " + this.description + tagsString);
     }
 
     /**
@@ -70,8 +74,22 @@ public abstract class Task {
      * @return string representation of the task to be saved in the hard disl/
      */
     protected String toSaveInFile(String time) {
-        String doneString = this.done ? "1" : "0";
-        return String.format("%s%s%s%s", this.description, time, Task.SEP, doneString);
+        System.out.println("tags are " + this.tags);
+        String doneString = this.isDone ? "1" : "0";
+        String tagString = this.tags.size() == 0
+                ? ""
+                : this.tags.toString();
+        return String.format("%s%s%s%s%s%s", this.description, time, Task.SEP, doneString, Task.SEP, this.tags);
+    }
+
+    /**
+     * Adds tags to task
+     *
+     * @param tags tags to be added to task
+     */
+    public void addTags(ArrayList<String> tags) {
+        System.out.println("Tags added are" + tags);
+        this.tags.addAll(tags);
     }
 
     public abstract String typeString();

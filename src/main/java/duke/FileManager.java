@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 import duke.task.Task;
@@ -61,13 +62,14 @@ public class FileManager {
     private static void getOneTask(Scanner fileReader, ArrayList<Task> tasks) throws DukeException {
         String nextLine = fileReader.nextLine();
         String[] splitString = nextLine.split(Task.SEP);
-        if (splitString.length < 3) {
-            throw new DukeException("Invalid input in file");
+        if (splitString.length < 4) {
+            assert false : "Invalid input in file";
         }
         Task newTask = Task.makeTask(splitString[0], splitString[1]);
         if (splitString[2].equals("1")) {
             newTask.markDone();
         }
+        newTask.addTags(FileManager.getTags(splitString[3]));
         tasks.add(newTask);
     }
 
@@ -85,5 +87,13 @@ public class FileManager {
         } catch (IOException e) {
             ui.showError(e);
         }
+    }
+
+    private static ArrayList<String> getTags(String arrayString) {
+        String stringWithoutBrackets = arrayString.substring(0, arrayString.length() - 1).substring(1);
+        String[] splitByComma = stringWithoutBrackets.split(",");
+        ArrayList<String> tags = new ArrayList<>();
+        Collections.addAll(tags, splitByComma);
+        return tags;
     }
 }

@@ -32,15 +32,20 @@ public class Parser {
             throw new DukeException("Invalid input.");
         }
         if (splitBySpace[0].toLowerCase().equals("done")) {
-            return getDoneCommand(splitBySpace[1], CommandsTypes.MARK_DONE, "Invalid index inputted after done. Please enter a positive integer");
+            return getCommand(splitBySpace[1], CommandsTypes.MARK_DONE, "Invalid index inputted after done. Please enter a positive integer");
         }
         if (splitBySpace[0].toLowerCase().equals("delete")) {
-            return getDoneCommand(splitBySpace[1], CommandsTypes.DELETE, "Invalid index inputted after done. Please enter a positive integer");
+            return getCommand(splitBySpace[1], CommandsTypes.DELETE, "Invalid index inputted after delete. Please enter a positive integer");
         }
 
         if (splitBySpace[0].toLowerCase().equals("find")) {
-            return getFindCommand(splitBySpace);
+            return getCommand(splitBySpace, CommandsTypes.FIND);
         }
+
+        if (splitBySpace[0].toLowerCase().equals("tag")) {
+            return getCommand(splitBySpace, CommandsTypes.TAG);
+        }
+
         return getAddCommand(input, splitBySpace[0]);
     }
 
@@ -52,15 +57,15 @@ public class Parser {
         return Command.makeCommand(CommandsTypes.ADD, newTask);
     }
 
-    private static Command getFindCommand(String[] splitBySpace) throws DukeException {
+    private static Command getCommand(String[] splitBySpace, CommandsTypes commandType) throws DukeException {
         String[] keywords = new String[splitBySpace.length - 1];
         for (int i = 1; i < splitBySpace.length; i++) {
             keywords[i - 1] = splitBySpace[i];
         }
-        return Command.makeCommand(CommandsTypes.FIND, keywords);
+        return Command.makeCommand(commandType, keywords);
     }
 
-    private static Command getDoneCommand(String s, CommandsTypes commandType, String s2) throws DukeException {
+    private static Command getCommand(String s, CommandsTypes commandType, String s2) throws DukeException {
         try {
             int index = Integer.parseInt(s);
             if (index < 1) {

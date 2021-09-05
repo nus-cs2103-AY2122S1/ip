@@ -44,12 +44,6 @@ public abstract class Command {
         case MARK_DONE: {
             return new MarkDoneCommand(index);
         }
-        case EXIT: {
-            return new ExitCommand();
-        }
-        case LIST: {
-            return new ListCommand();
-        }
         default:
             throw new DukeException("Invalid command inputted");
         }
@@ -85,8 +79,12 @@ public abstract class Command {
      */
     public static Command makeCommand(CommandsTypes type, String ...keywords) throws DukeException {
         switch (type) {
-        case FIND:
+        case FIND: {
             return new FindCommand(keywords);
+        }
+        case TAG: {
+            return new TagCommand(keywords);
+        }
         default:
             throw new DukeException("Invalid command inputted");
         }
@@ -95,12 +93,12 @@ public abstract class Command {
     /**
      * Command will execute.
      *
-     * @param task the task to be executed in the command.
+     * @param tasks the task to be executed in the command.
      * @param ui the ui to interact with the user.
      * @param fileManager the filemanger that manages the storage of duke.
      * @throws DukeException if command has issues.
      */
-    public abstract String execute(Tasklist task, Ui ui, FileManager fileManager) throws DukeException;
+    public abstract String execute(Tasklist tasks, Ui ui, FileManager fileManager) throws DukeException;
 
     public abstract boolean isExit();
 }

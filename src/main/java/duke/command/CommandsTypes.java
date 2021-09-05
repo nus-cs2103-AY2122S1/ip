@@ -9,5 +9,6 @@ public enum CommandsTypes {
     DELETE,
     MARK_DONE,
     LIST,
-    FIND
+    FIND,
+    TAG
 }
