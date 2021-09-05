@@ -22,7 +22,8 @@ public class Command {
      * @return response upon command execution
      */
     public String interpretCommand(String command, String description) {
-        Command matchingCommand = new Command();
+        new Command();
+        Command matchingCommand;
         switch (command) {
         case "greet":
             matchingCommand = new GreetCommand();

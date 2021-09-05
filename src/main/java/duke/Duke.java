@@ -42,7 +42,7 @@ public class Duke {
      */
     private String feedIntoParser(String command) {
         String response = PARSER.parse(command.toLowerCase(Locale.ROOT));
-        return response; // TODO
+        return response;
     }
 
     /**

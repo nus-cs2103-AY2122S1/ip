@@ -105,7 +105,7 @@ public class DukeException extends IllegalArgumentException {
          * @param message error message upon exception thrown
          */
         public InvalidCommandException(String message) {
-            super("I do not recognize your command! Try another command!");
+            super("I do not recognize your command \"" + message + "\". Try another command!");
         }
 
         /**
