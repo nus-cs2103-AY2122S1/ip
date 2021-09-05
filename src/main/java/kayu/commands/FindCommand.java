@@ -5,6 +5,7 @@ import static kayu.commands.CommandMessage.MESSAGE_MATCHING_CONTENTS;
 import static kayu.commands.CommandMessage.MESSAGE_NO_MATCHING_CONTENTS;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
@@ -51,23 +52,19 @@ public class FindCommand extends Command {
     }
 
     private String generateFormattedParameters(String... keywords) {
-        StringBuilder parameters = new StringBuilder();
-        for (int idx = 0; idx < keywords.length; idx++) {
-            parameters.append(keywords[idx]);
-            if (idx != keywords.length - 1) {
-                parameters.append(", ");
-            }
-        }
-        return parameters.toString();
+        return String.join(", ", keywords);
     }
     
     private String generateFormattedTaskListResponse(Map<Integer, Task> taskMap) {
-        StringBuilder resultTasksAsString = new StringBuilder();
-        taskMap.forEach((number, task) -> {
-            String line = String.format("\n%d. %s", number + 1, task);
-            resultTasksAsString.append(line);
-        });
-        return resultTasksAsString.toString();
+        return taskMap.entrySet().stream()
+                .map(this::convertToTaskString)
+                .collect(Collectors.joining("\n"));
+    }
+    
+    private String convertToTaskString(Map.Entry<Integer, Task> entry) {
+        int number = entry.getKey() + 1; // for 1-indexing
+        String taskAsString = entry.getValue().toString();
+        return String.format("%d. %s", number, taskAsString);
     }
     
     private String generateResponse(String params, Map<Integer, Task> taskMap) {

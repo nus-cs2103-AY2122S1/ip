@@ -8,7 +8,6 @@ import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -108,13 +107,9 @@ public class Storage {
     }
 
     protected List<Task> decodeAll(List<String> taskLines) throws StorageException {
-        List<Task> savedTaskList = new ArrayList<>();
-        
-        for (String stringTask: taskLines) {
-            Task task = decodeToTask(stringTask);
-            savedTaskList.add(task);
-        }
-        return savedTaskList;
+        return taskLines.stream()
+                .map(this::decodeToTask)
+                .collect(Collectors.toList());
     }
 
     protected Task decodeToTask(String stringTask) throws StorageException {

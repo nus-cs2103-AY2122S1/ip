@@ -4,6 +4,8 @@ import static kayu.commands.CommandMessage.MESSAGE_EMPTY_LIST;
 import static kayu.commands.CommandMessage.MESSAGE_LIST_CONTENTS;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
@@ -41,9 +43,13 @@ public class ListCommand extends Command {
     
     private String generateFormattedTaskListResponse(List<Task> tasks) {
         StringBuilder tasksAsString = new StringBuilder(MESSAGE_LIST_CONTENTS);
-        for (int idx = 0; idx < tasks.size(); idx++) {
-            tasksAsString.append(String.format("\n%d. %s", idx + 1, tasks.get(idx)));
-        }
+        
+        String stringedTasks = IntStream.range(0, tasks.size())
+                .boxed()
+                .map(idx -> String.format("%d. %s", idx + 1, tasks.get(idx)))
+                .collect(Collectors.joining("\n"));
+        
+        tasksAsString.append(stringedTasks);
         return tasksAsString.toString();
     }
 }

@@ -8,10 +8,10 @@ public class CommandMessage {
     // Message formats.
     protected static final String MESSAGE_EMPTY_LIST = "List is empty, try adding some tasks first.";
     protected static final String MESSAGE_TASK_DONE = "Nice! I've marked this task as done:\n  %s";
-    protected static final String MESSAGE_LIST_CONTENTS = "Here are the task(s) in your list:";
+    protected static final String MESSAGE_LIST_CONTENTS = "Here are the task(s) in your list:\n";
     protected static final String MESSAGE_BYE = "Bye. Hope to see you again soon!";
     protected static final String MESSAGE_MATCHING_CONTENTS =
-            "Here are the matching task(s) to the expressions(s) in '%s':";
+            "Here are the matching task(s) to the expressions(s) in '%s':\n";
     protected static final String MESSAGE_NO_MATCHING_CONTENTS =
             "There are no matching tasks to the expressions(s) in '%s'.";
     protected static final String MESSAGE_DELETED_TASK =
