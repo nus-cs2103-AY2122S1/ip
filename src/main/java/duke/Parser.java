@@ -10,7 +10,6 @@ import duke.commands.AddTodoCommand;
 import duke.commands.Command;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 
@@ -33,8 +32,6 @@ public class Parser {
         String desc;
 
         switch (command) {
-        case "bye":
-            return new ExitCommand("exit");
         case "list":
             return new ListCommand("list");
         case "done":
