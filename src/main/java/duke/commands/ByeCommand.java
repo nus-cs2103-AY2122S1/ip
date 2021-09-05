@@ -2,8 +2,8 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.PersistentStorage;
+import duke.Response;
 import duke.Tasklist;
-import duke.UI;
 
 /**
  * A class encapsulating a "bye" command from the user.
@@ -17,15 +17,17 @@ public class ByeCommand extends Command {
      * stored tasks to PersistentStorage.
      *
      * @param taskList The Tasklist associated with the Duke instance.
-     * @param ui The UI associated with the Duke instance.
+     * @param response The UI associated with the Duke instance.
      * @param storage The PersistentStorage associated with the Duke instance.
      * @throws DukeException if an error occured when saving tasks to PersistentStorage.
+     * @returns A CommandResult containing the exit message and a boolean to terminate the program.
      */
-    public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage)
+    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage)
             throws DukeException {
         try {
-            ui.showExitMsg();
             storage.saveTasks(taskList);
+            return new CommandResult(response.showExitMsg(), true);
+
         } catch (DukeException e) {
             throw new DukeException(e.getMessage());
         }

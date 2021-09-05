@@ -1,5 +1,4 @@
 T | 0 | bye
-T | 0 | why
 T | 0 | why there
 T | 0 | kekw
-D | 0 | why | 23-05-2020 23:00
+T | 0 | yoshi

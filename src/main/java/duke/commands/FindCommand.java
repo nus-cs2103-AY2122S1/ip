@@ -1,8 +1,8 @@
 package duke.commands;
 
 import duke.PersistentStorage;
+import duke.Response;
 import duke.Tasklist;
-import duke.UI;
 
 /**
  * Class encapsulating a "find" command by the user.
@@ -26,11 +26,12 @@ public class FindCommand extends Command {
      * and printing said tasks.
      *
      * @param taskList The Tasklist associated with the Duke instance
-     * @param ui The UI associated with the Duke instance
+     * @param response The UI associated with the Duke instance
      * @param storage The PersistentStorage associated with the Duke instance
+     * @return A Commandresult detailing the results of the find operation.
      */
-    public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage) {
+    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage) {
         Tasklist matchingTasks = taskList.findAllTasksWith(this.searchTerms);
-        ui.showMatchingTasks(matchingTasks);
+        return new CommandResult(response.showMatchingTasks(matchingTasks));
     }
 }

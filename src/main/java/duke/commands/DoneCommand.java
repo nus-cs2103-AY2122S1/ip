@@ -2,8 +2,8 @@ package duke.commands;
 
 import duke.DukeException;
 import duke.PersistentStorage;
+import duke.Response;
 import duke.Tasklist;
-import duke.UI;
 import duke.tasks.Task;
 
 /**
@@ -28,17 +28,19 @@ public class DoneCommand extends Command {
      * the completed task.
      *
      * @param taskList The Tasklist associated with the Duke instance.
-     * @param ui The UI associated with the Duke instance.
+     * @param response The UI associated with the Duke instance.
      * @param storage The PersistentStorage associated with the Duke instance.
+     * @return A CommandResult detailing the result of marking a Task as complete.
      * @throws DukeException if the provided target index is not in range.
      */
-    public void executeCommand(Tasklist taskList, UI ui, PersistentStorage storage) throws DukeException {
+    public CommandResult executeCommand(Tasklist taskList, Response response, PersistentStorage storage)
+            throws DukeException {
         // Validate target index
         if (this.target > taskList.getTotalTasks() || this.target < 1) {
             throw new DukeException("☹ OOPS!!! Please provide a valid task number.");
         }
 
         Task completed = taskList.markAsDone(target);
-        ui.showCompletedTask(completed);
+        return new CommandResult(response.showCompletedTask(completed));
     }
 }

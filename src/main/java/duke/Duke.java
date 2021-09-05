@@ -1,8 +1,7 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.commands.Command;
+import duke.commands.CommandResult;
 
 /**
  * Class that encapsulates the Duke application
@@ -11,52 +10,38 @@ public class Duke {
 
     private PersistentStorage storage;
     private Tasklist taskList;
-    private UI ui;
+    private Response response;
 
     /**
      * Public constructor for a Duke object
      *
-     * @param filePath A filepath to a text file that serves
-     *    as persistent storage for Duke.
+     * @param filePath A filepath to a text file that serves as persistent storage for Duke.
      */
     public Duke(String filePath) {
-        ui = new UI(new Scanner(System.in));
+        response = new Response();
         storage = new PersistentStorage(filePath);
 
         try {
             taskList = storage.loadTasks();
         } catch (DukeException e) {
-            ui.showLoadError();
+            response.showLoadError();
             taskList = new Tasklist();
         }
     }
 
     /**
-     * Runs the Duke application.
-     */
-    public void run() {
-        ui.showStartMsg();
-        Boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String rawCommand = ui.readCommand();
-                Command command = Parser.parse(rawCommand);
-                command.executeCommand(taskList, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showErrorMsg(e);
-            }
-        }
-    }
-
-    /**
-     * Main function to be run.
+     * Executes a command from the user and gets the result of executing that command.
      *
-     * @param args Command line arguments to main.
+     * @param input A String representing the input command by the user.
+     * @return A CommandResult encapsulating the result of executing the command provided by the user.
      */
-    public static void main(String[] args) {
-        Duke duke = new Duke("./data/taskdata.txt");
-        duke.run();
+    public CommandResult getResponse(String input) {
+        try {
+            Command command = Parser.parse(input);
+            CommandResult output = command.executeCommand(taskList, response, storage);
+            return output;
+        } catch (DukeException e) {
+            return new CommandResult(e.getMessage());
+        }
     }
 }
