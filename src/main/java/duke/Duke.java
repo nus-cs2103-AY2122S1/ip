@@ -30,6 +30,7 @@ public class Duke {
     public String getResponse(String input) {
         Parser parser = new Parser(input);
         try {
+            assert list instanceof TaskList : "Task list cannot be found";
             Command command = parser.parse();
             String response = command.execute(list);
             fm.writeToFile(list);

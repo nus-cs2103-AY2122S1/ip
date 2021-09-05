@@ -23,6 +23,7 @@ public class FindCommand extends Command {
         if (input.length() < 2) {
             throw new DukeException("Please specify a search keyword");
         } else {
+            assert input.length() >= 2 : "Improper input length for find command";
             String[] splitInput = input.split(" ");
             return splitInput[1].strip();
         }
