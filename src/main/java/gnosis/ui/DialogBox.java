@@ -3,7 +3,6 @@ package gnosis.ui;
 import java.io.IOException;
 import java.util.Collections;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,7 +10,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -23,15 +21,14 @@ import javafx.scene.layout.HBox;
  */
 public class DialogBox extends HBox {
 
+    private static Image user = new Image(DialogBox.class.getResourceAsStream("/images/user.png"));
+    private static Image bot = new Image(DialogBox.class.getResourceAsStream("/images/robot.png"));
+
     @FXML
     private Label dialog;
 
     @FXML
     private ImageView displayPicture;
-
-    private static Image user = new Image(DialogBox.class.getResourceAsStream("/images/user.png"));
-    private static Image bot = new Image(DialogBox.class.getResourceAsStream("/images/robot.png"));
-
 
     private DialogBox(String text, Image image) {
         try {
@@ -70,7 +67,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getGnosisDialog(String text) {
-        var db = new DialogBox(text,bot);
+        var db = new DialogBox(text, bot);
         db.setStyle("-container-color: cyan");
         db.flip();
         return db;

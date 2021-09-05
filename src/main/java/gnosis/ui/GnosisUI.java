@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 import gnosis.controller.GnosisController;
 import gnosis.model.Task;
-import gnosis.task.TaskStorageManager;
 import gnosis.util.GnosisConstants;
 import gnosis.util.GnosisException;
 import javafx.application.Platform;
@@ -63,9 +62,7 @@ public class GnosisUI extends AnchorPane {
 
         String input = userInput.getText();
         assert !input.trim().equals("") : "user input should not be empty";
-      
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input));
-
         this.parseInput(input);
         userInput.clear();
     }
@@ -212,11 +209,11 @@ public class GnosisUI extends AnchorPane {
         fileChooser.getExtensionFilters().add(extFilter);
 
         //Show save file dialog
-        File file = fileChooser.showSaveDialog(((MenuItem)event.getTarget()).getParentPopup().getOwnerWindow());
+        File file = fileChooser.showSaveDialog(((MenuItem) event.getTarget()).getParentPopup().getOwnerWindow());
 
         if (file != null) {
             //TaskStorageManager.exportTasks(file);
-            gnosisController.exportToCSV(file);
+            gnosisController.exportToCsv(file);
         }
     }
 }

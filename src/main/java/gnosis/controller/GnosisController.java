@@ -1,13 +1,8 @@
 package gnosis.controller;
 
 import java.io.File;
-import java.util.List;
 
 import gnosis.model.Command;
-import gnosis.model.Deadline;
-import gnosis.model.Event;
-import gnosis.model.Task;
-import gnosis.model.Todo;
 import gnosis.task.TaskCommandManager;
 import gnosis.task.TaskStorageManager;
 import gnosis.ui.GnosisUI;
@@ -89,7 +84,7 @@ public class GnosisController {
         view.displayGreetMessage(TaskStorageManager.isDataFileAvail());
     }
 
-    public void exportToCSV(File PathToExport) {
-        TaskStorageManager.copyTaskToPath(PathToExport);
+    public void exportToCsv(File pathToExport) {
+        TaskStorageManager.copyTaskToPath(pathToExport);
     }
 }
