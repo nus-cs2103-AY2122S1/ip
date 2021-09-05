@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * Exception to indicate when user enters a task without a name
+ * Exception to indicate when user enters a task without a name.
  * e.g. deadline
  */
 public class MissingTaskNameException extends DukeException {

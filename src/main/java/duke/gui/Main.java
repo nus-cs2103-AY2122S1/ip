@@ -10,16 +10,16 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * Connects the Duke Chatbot logic to the MainWindow GUI
+ * Connects the Duke Chatbot logic to the MainWindow GUI.
  */
 public class Main extends Application {
     /** Current instance of Duke **/
     private Duke duke = new Duke();
 
     /**
-     * Starts the GUI in MainWindow.fxml and links it to the current instance of Duke
+     * Starts the GUI in MainWindow.fxml and links it to the current instance of Duke.
      *
-     * @param stage The main window of the GUI
+     * @param stage The main window of the GUI.
      */
     @Override
     public void start(Stage stage) {

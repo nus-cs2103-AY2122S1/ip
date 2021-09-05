@@ -1,7 +1,7 @@
 package duke.exceptions;
 
 /**
- * Exception to indicate when users enter event without start time
+ * Exception to indicate when users enter event without start time.
  * e.g. event end of semester party
  */
 public class MissingEventTimeException extends DukeException {
