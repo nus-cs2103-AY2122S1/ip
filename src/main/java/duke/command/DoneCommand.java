@@ -21,7 +21,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Execute the command
+     * Executes the command
      *
      * @param tasks    the TaskList
      * @param ui       the Ui
@@ -33,12 +33,11 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.markAsDone(taskNumber - 1);
         storage.update(taskNumber, task, "m");
-//        ui.formatPrint("Nice! I've marked this task as done:", "  [X] " + task.toString());
         return "Nice! I've marked this task as done:\n" + "  [X] " + task.toString();
     }
 
     /**
-     * Check if the command is an ExitCommand
+     * Checks if the command is an ExitCommand
      *
      * @return           boolean stating if command is ExitCommand
      */
@@ -48,7 +47,7 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Return the toString of the class
+     * Returns the toString of the class
      *
      * @return           toString of the class
      */

@@ -15,14 +15,7 @@ public class Ui {
     }
 
     /**
-     * Format print the loading error message
-     */
-    public void showLoadingError() {
-        formatPrint("Loading Error");
-    }
-
-    /**
-     * Format print the given error message
+     * Formats print the given error message
      *
      * @param errorMessage the error message that is retrieved from the error
      */
@@ -31,33 +24,7 @@ public class Ui {
     }
 
     /**
-     * Format print the welcome message
-     */
-    public void showWelcome() {
-        String greeting = "Howdy, pardner!";
-        String question = "Is there anything old Vic can do you for?";
-        formatPrint(greeting, question);
-    }
-
-    /**
-     * Format print the farewell message
-     */
-    public void showFarewell() {
-        String bye = "See ya round, buckaroo.";
-        formatPrint(bye);
-    }
-
-    /**
-     * Return the string read by scanner next line
-     *
-     * @return      the string read from user input
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Format print the given varargs into the indented format
+     * Formats print the given varargs into the indented format
      *
      * @param lines the varargs containing all the lines to be printed with indentation
      */
@@ -70,23 +37,7 @@ public class Ui {
     }
 
     /**
-     * Format print all the tasks in TaskList with indentation
-     *
-     * @param tasks a TaskList of all the tasks
-     */
-    public void printList(TaskList tasks) {
-        int count = 1;
-        System.out.print("\n    ____________________________________________________________"
-                + "\n    Here are the tasks in your list:\n");
-        for (Task task : tasks.getList()) {
-            System.out.printf("     %d.%s\n", count, task.toString());
-            count++;
-        }
-        System.out.println("    ____________________________________________________________\n");
-    }
-
-    /**
-     * Format print all the tasks in TaskList with indentation
+     * Formats print all the tasks in TaskList with indentation
      *
      * @param tasks a TaskList of all the tasks
      */
