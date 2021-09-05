@@ -25,6 +25,7 @@ public class Parser {
      * @throws DukeException In the event that the user input is invalid.
      */
     public static Command parse(String... inputText) throws DukeException {
+        assert(inputText.length > 0);
         if (inputText.length == 1) {
             switch (inputText[0]) {
             case "bye":
