@@ -26,6 +26,7 @@ public class Ui {
      * @param inputStrings ArrayList of Strings to be printed.
      */
     public void println(ArrayList<String> inputStrings) {
+        assert inputStrings.size() != 0;
         String returnBuffer = "";
         for (String line : inputStrings) {
             returnBuffer = returnBuffer.concat("     " + line + "\n");
@@ -34,6 +35,7 @@ public class Ui {
     }
 
     public String flushBuffer() {
+        assert this.buffer.length() != 0;
         String save = this.buffer;
         this.buffer = "";
         return save;
