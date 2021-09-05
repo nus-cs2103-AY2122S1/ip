@@ -51,21 +51,21 @@ public class Ui {
         printDividerLine();
     }
 
-    protected static void printGoodbyeMessage() {
+    public static void printGoodbyeMessage() {
         printWithIndent("Bye. Hope to see you again soon!");
     }
 
-    protected static void printList(ArrayList<Task> taskList) {
+    public static void printList(ArrayList<Task> taskList) {
         for (int i = 0; i < taskList.size(); i++) {
             printWithIndent((i+1) + "." + taskList.get(i).toString());
         }
     }
 
-    protected static void printTaskCount(int listSize) {
+    public static void printTaskCount(int listSize) {
         printWithIndent(getTaskCountString(listSize));
     }
 
-    protected static void printFoundTasks(String[] tasks) {
+    public static void printFoundTasks(String[] tasks) {
         if (tasks != null) {
             printWithIndent("Here are the matching tasks in your list:");
             for (int i = 0; i < tasks.length; i++) {
@@ -76,17 +76,21 @@ public class Ui {
         }
     }
 
-    protected static void printNewTask(String taskStr) {
+    public static void printNewTask(String taskStr) {
         printWithIndent("Got it. I've added this task:");
         printWithIndent("  " + taskStr);
     }
 
-    protected static void printRemoveTask(String taskStr) {
+    public static void printRemoveTask(String taskStr) {
         printWithIndent("Noted. I've removed this task: ");
         printWithIndent("  " + taskStr);
     }
 
-    protected static void printMarkDone(String taskStr) {
+    public static void printRemoveAll() {
+        printWithIndent("Noted. I've removed all tasks from list.");
+    }
+
+    public static void printMarkDone(String taskStr) {
         Ui.printWithIndent("Nice! I've marked this task as done: ");
         Ui.printWithIndent("  " + taskStr);
     }

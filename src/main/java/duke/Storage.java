@@ -91,7 +91,7 @@ public class Storage {
      * @param textToWrite text to write to save file
      * @throws DukeException if failed to write to save file
      */
-    protected void writeLine(String textToWrite) throws DukeException {
+    public void writeLine(String textToWrite) throws DukeException {
         if (!this.initialized) return;
         try {
             FileWriter fileWriter = new FileWriter(savePath.toFile(), true);
@@ -107,7 +107,7 @@ public class Storage {
      * @param lineIndex index of line to remove
      * @throws DukeException if failed to write to save file
      */
-    protected void removeLine(int lineIndex) throws DukeException {
+    public void removeLine(int lineIndex) throws DukeException {
         if (!this.initialized) return;
         try {
             List<String> originalContent = Files.readAllLines(savePath);
@@ -119,12 +119,25 @@ public class Storage {
     }
 
     /**
+     * Remove all contents in save file
+     * @throws DukeException if failed to write to save file
+     */
+    public void removeAll() throws DukeException {
+        if (!this.initialized) return;
+        try {
+            Files.write(savePath, new ArrayList<String>());
+        } catch (IOException e) {
+            throw new DukeException(ExceptionType.FAIL_TO_WRITE, e.getMessage());
+        }
+    }
+
+    /**
      * Change a line in save file
      * @param lineIndex index of line to change
      * @param textToWrite new text at the line
      * @throws DukeException if failed to write to save file
      */
-    protected void setLine(int lineIndex, String textToWrite) throws DukeException {
+    public void setLine(int lineIndex, String textToWrite) throws DukeException {
         if (!this.initialized) return;
         try {
             List<String> originalContent = Files.readAllLines(savePath);

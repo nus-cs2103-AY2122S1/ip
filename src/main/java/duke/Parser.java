@@ -1,165 +1,92 @@
 package duke;
 
+import duke.Command.*;
 import duke.task.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Provides methods to parse user command and saved contents.
  */
 public class Parser {
     // Constant words
-    protected static final String WORD_EXIT = "bye";
-    protected static final String WORD_LIST = "list";
-    protected static final String WORD_MARK = "done ";
-    protected static final String WORD_TODO = "todo ";
-    protected static final String WORD_DEADLINE = "deadline ";
-    protected static final String WORD_DEADLINE_BY = " /by ";
-    protected static final String WORD_EVENT = "event ";
-    protected static final String WORD_EVENT_AT = " /at ";
-    protected static final String WORD_DELETE = "delete ";
+    protected static final String WORD_EXIT       = "bye";
+    protected static final String WORD_LIST       = "list";
+    protected static final String WORD_DELETE_ALL = "deleteall";
+    protected static final String WORD_DONE       = "done";
+    protected static final String WORD_DELETE     = "delete";
+    protected static final String WORD_FIND       = "find";
+
+    protected static final String WORD_TODO        = "todo";
+    protected static final String WORD_DEADLINE    = "deadline";
+    protected static final String WORD_DEADLINE_BY = "/by";
+    protected static final String WORD_EVENT       = "event";
+    protected static final String WORD_EVENT_AT    = "/at";
+
     protected static final String DIVIDER_WORD = " \\| ";
-    protected static final String WORD_FIND = "find ";
+
 
     /**
-     * Convert user command to {@link duke.DukeAction DukeAction}.
+     * Convert user input to {@link duke.Command ICommand}.
      * @param s user command
      * @param listSize size of current task list
-     * @return type of duke action
+     * @return command for duke to execute
      * @throws DukeException if user command is missing operand or invalid
      */
-    public static DukeAction stringToDukeAction(String s, int listSize) throws DukeException {
-        // Remove all leading whitespaces
-        s = s.stripLeading();
-
-        if (s.equals(WORD_EXIT)) {
-            return DukeAction.EXIT;
-        }
-        else if (s.equals(WORD_LIST)) {
-            return DukeAction.PRINT_LIST;
-        }
-        else if (isFind(s)) {
-            return DukeAction.FIND;
-        }
-        else if (isMarkDown(s, listSize)) {
-            return DukeAction.MARK_DONE;
-        }
-        else if (isDelete(s, listSize)) {
-            return DukeAction.DELETE;
-        }
-        else if (isToDo(s)) {
-                return DukeAction.TODO;
-        }
-        else if (isDeadline(s)) {
-            return DukeAction.DEADLINE;
-        }
-        else if (isEvent(s)) {
-            return DukeAction.EVENT;
+    public static ICommand parse(String s, int listSize) throws DukeException {
+        // Remove all leading and trailing whitespaces
+        s = s.strip();
+        String[] strArr = s.split(" ", 2);
+        if (strArr.length == 1) {
+            switch (strArr[0]) {
+                case WORD_EXIT:
+                    return new ExitCommand();
+                case WORD_LIST:
+                    return new ListCommand();
+                case WORD_DELETE_ALL:
+                    return new DeleteAllCommand();
+                case WORD_DONE:
+                case WORD_DELETE:
+                case WORD_FIND:
+                case WORD_TODO:
+                case WORD_DEADLINE:
+                case WORD_EVENT:
+                    throw new DukeException(ExceptionType.MISSING_OPERAND);
+                default:
+                    throw new DukeException(ExceptionType.INVALID_COMMAND);
+            }
         } else {
-            throw Arrays.asList(new String[] {"todo", "done", "event", "delete", "deadline", "find"})
-                    .contains(s)
-                    ? new DukeException(ExceptionType.MISSING_OPERAND)
-                    : new DukeException(ExceptionType.INVALID_COMMAND);
-        }
-    }
-
-    private static boolean isFind(String s) throws DukeException {
-        if (s.equals(WORD_FIND)) {
-            throw new DukeException(ExceptionType.MISSING_OPERAND);
-        }
-        return s.length() > WORD_FIND.length() && s.startsWith(WORD_FIND);
-    }
-
-    private static boolean isMarkDown(String s, int listSize) throws DukeException {
-        if (s.equals(WORD_MARK)) {
-            throw new DukeException(ExceptionType.MISSING_OPERAND);
-        }
-        if (s.length() > WORD_MARK.length() && s.startsWith(WORD_MARK)) {
-            try {
-                int taskIndex = parseMarkString(s);
-                if (taskIndex >= 0 && taskIndex < listSize) {
-                    return true;
-                } else {
-                    throw new DukeException(ExceptionType.INDEX_OUT_OF_BOUND);
-                }
-            } catch (NumberFormatException e) {
-                throw new DukeException(ExceptionType.INVALID_OPERAND);
+            switch (strArr[0]) {
+                case WORD_DONE:
+                    return new DoneCommand(tryParse_DoneOrDelete(strArr[1], listSize) - 1);
+                case WORD_DELETE:
+                    return new DeleteCommand(tryParse_DoneOrDelete(strArr[1], listSize) - 1);
+                case WORD_FIND:
+                    return new FindCommand(strArr[1]);
+                case WORD_TODO:
+                    return new AddCommand(strArr);
+                case WORD_DEADLINE:
+                    return new AddCommand(tryParse_Deadline(strArr[1]));
+                case WORD_EVENT:
+                    return new AddCommand(tryParse_Event(strArr[1]));
+                default:
+                    throw new DukeException(ExceptionType.INVALID_COMMAND);
             }
         }
-        return false;
     }
 
-    private static boolean isDelete(String s, int listSize) throws DukeException {
-        if (s.length() > WORD_DELETE.length() && s.startsWith(WORD_DELETE)) {
-            try {
-                int taskIndex = parseDeleteString(s);
-                if (taskIndex >= 0 && taskIndex < listSize) {
-                    return true;
-                }
-                else {
-                    throw new DukeException(ExceptionType.INDEX_OUT_OF_BOUND);
-                }
-            } catch (NumberFormatException e) {
-                throw new DukeException(ExceptionType.INVALID_OPERAND);
-            }
-        }
-        return false;
-    }
-
-    private static boolean isToDo(String s) throws DukeException {
-        if (s.startsWith(WORD_TODO)) {
-            if (s.length() <= WORD_TODO.length()) {
-                throw new DukeException(ExceptionType.MISSING_OPERAND);
+    private static int tryParse_DoneOrDelete(String s, int listSize) throws DukeException {
+        try {
+            int taskIndex = Integer.parseInt(s);
+            if (taskIndex >= 0 && taskIndex < listSize) {
+                return taskIndex;
             } else {
-                return true;
+                throw new DukeException(ExceptionType.INDEX_OUT_OF_BOUND);
             }
+        } catch (NumberFormatException e) {
+            throw new DukeException(ExceptionType.INVALID_OPERAND);
         }
-        return false;
-    }
-
-    private static boolean isDeadline(String s) throws DukeException {
-        if (s.startsWith(WORD_DEADLINE)) {
-            if (s.length() <= WORD_DEADLINE.length()) {
-                throw new DukeException(ExceptionType.MISSING_OPERAND);
-            } else if (s.contains(WORD_DEADLINE_BY)) {
-                String[] strArr = parseDeadlineString(s);
-                if (strArr.length == 2 && !strArr[0].equals("") && !strArr[1].equals("")) {
-                    return true;
-                } else {
-                    throw new DukeException(ExceptionType.MISSING_OPERAND);
-                }
-            } else {
-                throw new DukeException(ExceptionType.DDL_MISSING_KEYWORD);
-            }
-        }
-        return false;
-    }
-
-    private static boolean isEvent(String s) throws DukeException {
-        if (s.startsWith(WORD_EVENT)) {
-            if (s.length() <= WORD_EVENT.length()) {
-                throw new DukeException(ExceptionType.MISSING_OPERAND);
-            } else if (s.contains(WORD_EVENT_AT)) {
-                String[] strArr = parseEventString(s);
-                if (strArr.length == 2 && !strArr[0].equals("") && !strArr[1].equals("")) {
-                    return true;
-                } else {
-                    throw new DukeException(ExceptionType.MISSING_OPERAND);
-                }
-            } else {
-                throw new DukeException(ExceptionType.EVENT_MISSING_KEYWORD);
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Parses find command to get keyword.
-     * @param s find command
-     * @return keyword as string
-     */
-    protected static String parseFindString(String s) {
-        return s.substring(WORD_FIND.length());
     }
 
     /**
@@ -167,8 +94,20 @@ public class Parser {
      * @param s deadline command
      * @return An string array of length 2, with the first element being description and the second being due time.
      */
-    protected static String[] parseDeadlineString(String s) {
-        return s.substring(WORD_DEADLINE.length()).split(WORD_DEADLINE_BY, 2);
+    private static String[] tryParse_Deadline(String s) throws DukeException {
+        List<String> strList = Arrays.asList(s.split(" "));
+        if (strList.contains(WORD_DEADLINE_BY)) {
+            int i = strList.indexOf(WORD_DEADLINE_BY);
+            if (i == 0 || i == strList.size() - 1) {
+                throw new DukeException(ExceptionType.MISSING_OPERAND);
+            }
+            return new String[]{"deadline",
+                    s.split(WORD_DEADLINE_BY, 2)[0].stripTrailing(),
+                    s.split(WORD_DEADLINE_BY, 2)[1].stripLeading(),
+            };
+        } else {
+            throw new DukeException(ExceptionType.DDL_MISSING_KEYWORD);
+        }
     }
 
     /**
@@ -176,26 +115,20 @@ public class Parser {
      * @param s event command
      * @return An string array of length 2, with the first element being description and the second being time period.
      */
-    protected static String[] parseEventString(String s) throws DukeException {
-        return s.substring(WORD_EVENT.length()).split(WORD_EVENT_AT, 2);
-    }
-
-    /**
-     * Parses mark command to index of task to mark as done.
-     * @param s mark command
-     * @return index of task to mark as done
-     */
-    protected static int parseMarkString(String s) {
-        return Integer.parseInt(s.substring(WORD_MARK.length())) - 1;
-    }
-
-    /**
-     * Parses delete command to index of task to remove.
-     * @param s delete command
-     * @return index of task to remove
-     */
-    protected static int parseDeleteString(String s) {
-        return Integer.parseInt(s.substring(WORD_DELETE.length())) - 1;
+    private static String[] tryParse_Event(String s) throws DukeException {
+        List<String> strList = Arrays.asList(s.split(" "));
+        if (strList.contains(WORD_EVENT_AT)) {
+            int i = strList.indexOf(WORD_EVENT_AT);
+            if (i == 0 || i == strList.size() - 1) {
+                throw new DukeException(ExceptionType.MISSING_OPERAND);
+            }
+            return new String[]{"deadline",
+                    s.split(WORD_EVENT_AT, 2)[0].stripTrailing(),
+                    s.split(WORD_EVENT_AT, 2)[1].stripLeading(),
+            };
+        } else {
+            throw new DukeException(ExceptionType.EVENT_MISSING_KEYWORD);
+        }
     }
 
     /**

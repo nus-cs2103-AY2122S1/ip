@@ -23,4 +23,8 @@ public class TaskList extends ArrayList<Task>{
             }
         }
     }
+
+    public void deleteAll() {
+        super.clear();
+    }
 }

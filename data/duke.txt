@@ -1,7 +1,0 @@
-D | 0 | a | b
-D | 0 | d | 1
-D | 0 | d | null
-T | 0 | a
-T | 0 | asasda\
-E | 0 | asdaskd | asda
-D | 0 | asdad | asdkja

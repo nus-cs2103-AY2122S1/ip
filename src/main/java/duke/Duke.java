@@ -1,6 +1,6 @@
 package duke;
 
-import duke.task.*;
+import duke.Command.ICommand;
 
 /**
  * Wrapper of Duke's implementation.
@@ -66,40 +66,9 @@ public class Duke {
                     throw new DukeException(ExceptionType.PIPE_SYMBOL);
                 }
 
-                DukeAction dukeAction = Parser.stringToDukeAction(userInput, taskList.size());
-
-                switch (dukeAction) {
-                case EXIT:
-                    Ui.printGoodbyeMessage();
-                    isExit = true;
-                    break;
-                case PRINT_LIST:
-                    Ui.printList(taskList);
-                    break;
-                case MARK_DONE:
-                    onTaskDone(Parser.parseMarkString(userInput));
-                    break;
-                case DELETE:
-                    onTaskRemoved(Parser.parseDeleteString(userInput));
-                    break;
-                case FIND:
-                    onFindTask(Parser.parseFindString(userInput));
-                    break;
-                case TODO:
-                    ToDo toDo = new ToDo(userInput.substring(5));
-                    onNewTaskAdded(toDo);
-                    break;
-                case DEADLINE:
-                    String[] strArr = Parser.parseDeadlineString(userInput);
-                    Deadline deadline = new Deadline(strArr[0], strArr[1]);
-                    onNewTaskAdded(deadline);
-                    break;
-                case EVENT:
-                    String[] strArr_ = Parser.parseEventString(userInput);
-                    Event event = new Event(strArr_[0], strArr_[1]);
-                    onNewTaskAdded(event);
-                    break;
-                }
+                ICommand c = Parser.parse(userInput, taskList.size());
+                c.execute(this.taskList, this.ui, this.storage);
+                isExit = c.isExit();
                 Ui.printDividerLine();
             } catch (DukeException e) {
                 Ui.printErrorMessage(e, userInput);
@@ -110,36 +79,5 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke().run();
-    }
-
-    // Handlers
-
-    private void onFindTask(String keyWord) {
-        Ui.printFoundTasks(taskList.stream()
-                .filter(t -> t.getDescription().contains(keyWord))
-                .map(Task::toString)
-                .toArray(String[]::new)
-        );
-    }
-
-    private <T extends Task> void onNewTaskAdded(T t) throws DukeException{
-        taskList.add(t);
-        Ui.printNewTask(t.toString());
-        Ui.printTaskCount(taskList.size());
-        storage.writeLine(t.populateSaveData() + System.lineSeparator());
-    }
-
-    private void onTaskRemoved(int index) throws DukeException {
-        storage.removeLine(index);
-        Ui.printRemoveTask(taskList.get(index).toString());
-        taskList.remove(index);
-        Ui.printTaskCount(taskList.size());
-    }
-
-    private void onTaskDone(int index) throws DukeException {
-        Task task = taskList.get(index);
-        storage.setLine(index, task.toString());
-        task.setStatus(true);
-        Ui.printMarkDone(task.toString());
     }
 }

@@ -34,9 +34,9 @@ public class DukeException extends Exception {
         case MISSING_OPERAND:
             return "missing operand";
         case DDL_MISSING_KEYWORD:
-            return "missing keyword" + Parser.WORD_DEADLINE_BY;
+            return "missing keyword " + Parser.WORD_DEADLINE_BY;
         case EVENT_MISSING_KEYWORD:
-            return "missing keyword" + Parser.WORD_EVENT_AT;
+            return "missing keyword " + Parser.WORD_EVENT_AT;
         case INVALID_COMMAND:
             return "invalid command";
         case INVALID_OPERAND:
