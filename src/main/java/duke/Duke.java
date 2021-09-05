@@ -28,12 +28,6 @@ public class Duke {
         }
     }
 
-    //String getResponse(String input) {
-    //    return "Duke: " + input;
-    //}
-
-
-       
     String getResponse(String input) {
         input = input.toLowerCase(Locale.ROOT);
         assert this.storage.getDoesFileExists();
@@ -56,6 +50,8 @@ public class Duke {
             String keyword = parser.findInputParser(input);
             TaskList taskListWithKeyword = this.taskList.findTasks(keyword);
             response = this.ui.findTaskMsg(taskListWithKeyword);
+        } else if(input.equals("help")) {
+            response = this.ui.helpMsg();
         } else {
             try {
                 //Initialise the task if its a valid input.

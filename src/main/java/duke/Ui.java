@@ -78,4 +78,19 @@ public class Ui {
         return ("Are these what you were looking for?\n"
                 + taskList.toString());
     }
+
+    public String helpMsg() {
+        return "COMMAND | FORMAT\n"
+                + "todo            | todo {task}\n"
+                + "deadline      | deadline {task} /by {date in yyyy-mm-dd} {time in hhmm 24hr format}\n"
+                + "                    | eg. deadline homework /by 2020-12-31 2359\n"
+                + "event           | event {task} /at {date in yyyy-mm-dd} {time in hhmm 24hr format}\n"
+                + "                    | eg. event meeting /at 2020-12-31 2100\n"
+                + "list               | list\n"
+                + "done            | done {index}\n"
+                + "                    | eg. done 1\n"
+                + "delete          | delete {index}\n"
+                + "find             | find {keyword}\n"
+                + "                   | eg. find book\n";
+    }
 }
