@@ -62,13 +62,11 @@ public class GnosisUI extends AnchorPane {
     private void handleUserInput() {
 
         String input = userInput.getText();
-
-
         assert !input.trim().equals("") : "user input should not be empty";
-
+      
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input));
-        this.parseInput(input);
 
+        this.parseInput(input);
         userInput.clear();
     }
 
@@ -91,7 +89,6 @@ public class GnosisUI extends AnchorPane {
         assert input != null : "input should not be null";
 
         Scanner sc = new Scanner(input);
-
         try {
             String command = sc.next();
             String action = "";

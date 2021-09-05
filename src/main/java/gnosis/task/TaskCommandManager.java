@@ -32,7 +32,6 @@ public class TaskCommandManager {
      */
     public Todo addTodo(String todo) throws GnosisException {
         if (todo.trim().equalsIgnoreCase("")) {
-            // t0do empty exception
             throw new GnosisException(GnosisConstants.TODO_EMPTY_EXCEPT_MESSAGE);
         }
 
@@ -82,7 +81,6 @@ public class TaskCommandManager {
         }
 
         tasks.get(taskIndex).setDone(true);
-
         return tasks.get(taskIndex);
     }
 
