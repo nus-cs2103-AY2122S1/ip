@@ -76,9 +76,9 @@ public class Storage {
     }
 
     /**
-     * Converts a given string for the .txt save file to a valid Task
+     * Converts a given string for the txt save file to a valid Task
      *
-     * @param task String from .txt save file
+     * @param task String from txt save file
      * @return task.Task corresponding to the string
      * @throws ParseException Thrown if string from file contains errors
      */
@@ -86,7 +86,7 @@ public class Storage {
         String[] args = task.split("\\t");
         String taskType = args[0];
         try {
-            switch(taskType) {
+            switch (taskType) {
             case "T":
                 return new TaskTodo(args[2], args[1].equals("1"));
             case "D":

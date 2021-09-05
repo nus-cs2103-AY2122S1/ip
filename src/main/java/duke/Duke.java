@@ -5,14 +5,14 @@ import duke.command.Command;
 import task.TaskList;
 
 /**
- * Main Duke class
+ * Main Duke class.
  */
 public class Duke {
     private final DukeParser parser;
 
     /**
-     * Constructor
-     * Instantiates a (saved) task.Task List and a duke.DukeListener for duke.Duke
+     * Constructor.
+     * Instantiates a (saved) {@link task.TaskList} and a {@link duke.DukeParser}.
      */
     protected Duke() {
         TaskList taskList = Storage.loadList();
@@ -20,12 +20,11 @@ public class Duke {
     }
 
     /**
-     * Get response from duke from the GUI
+     * Get response from duke from the GUI.
      *
      * @param input String input from user
      */
     protected String getResponse(String input) {
-        // TaskList related inputs
         Command cmd = parser.parseInput(input);
         return cmd.execute();
     }

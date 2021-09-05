@@ -15,7 +15,7 @@ public class CommandHelp extends Command {
     }
 
     /**
-     * Display all commands
+     * Displays all commands
      */
     @Override
     public String execute() {

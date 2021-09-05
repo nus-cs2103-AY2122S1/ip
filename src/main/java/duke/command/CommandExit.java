@@ -21,6 +21,6 @@ public class CommandExit extends Command {
      */
     @Override
     public String execute() {
-        return Ui.goodBye();
+        return Ui.goodByeMessage();
     }
 }

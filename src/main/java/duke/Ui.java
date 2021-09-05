@@ -11,7 +11,7 @@ public class Ui {
     /**
      * Welcome text to display when duke.Duke starts up
      */
-    public static void intro() {
+    public static void introMessage() {
         String welcomeText = "When the Duke is sus";
 
         String mascot = "\n"
@@ -52,9 +52,9 @@ public class Ui {
     }
 
     /**
-     * Exit text
+     * Text to display when user exits (via gubbai command)
      */
-    public static String goodBye() {
+    public static String goodByeMessage() {
         return "kimi no unmei no hito wa boku jyanai";
     }
 }

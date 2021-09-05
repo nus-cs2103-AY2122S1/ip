@@ -60,7 +60,7 @@ public class CommandList extends Command {
     }
 
     /**
-     * Get arguments from a multi-argument string
+     * Gets arguments from a multi-argument string
      *
      * @param stringToParse String to parse
      * @return Arraylist with all filters to use to display list
