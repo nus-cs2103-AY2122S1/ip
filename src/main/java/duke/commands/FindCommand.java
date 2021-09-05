@@ -28,7 +28,7 @@ public class FindCommand extends Command {
         storage.write(tasks);
 
         String output = "Here are the tasks containing the word : \n" + toFind
-                + ui.arrayToString(filteredList);
+                + ui.tasklistToString(filteredList);
         setCommandOutput(output);
     }
 }

@@ -17,7 +17,8 @@ public class Ui {
      * @param list List of tasks to convert to string.
      * @return ArrayList in String format.
      */
-    public static String arrayToString(ArrayList<Task> list) {
+    public static String tasklistToString(ArrayList<Task> list) {
+        assert(list.size() > 0);
         String answer = "";
         int counter = 1;
         for (Task item : list) {
