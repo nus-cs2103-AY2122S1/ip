@@ -125,8 +125,10 @@ public class Parser {
             return LocalDateTime.parse(date, dtf);
         } catch (DateTimeParseException err) {
             throw new DukeException("Invalid date format\nPlease format date as the following:\n"
-                    + "Day/Month/Year H:mm OR\n"
-                    + "Day-Month-Year H:mm, in 24-hour format");
+                    + "Day/Month/Year H:mm or\n"
+                    + "Day-Month-Year H:mm, in 24-hour format\n"
+                    + "Month can be 3-letter word or a number "
+                    + "(e.g Jul or 7 or 07)");
         }
     }
 }
