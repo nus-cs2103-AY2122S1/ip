@@ -25,16 +25,23 @@ public class Event extends Task {
      */
     public static Event of(String input) throws DukeException {
         String[] eachWord = input.split("/at");
-        if (eachWord.length == 0 || eachWord[0].length() == 0 || eachWord[0].equals(" ")) {
-            throw new DukeException("Description cannot be empty. Type description before /at\nEg."
-                    + Event.inputExample);
-        }
-        if (eachWord.length == 1 || eachWord[1].length() == 0 || eachWord[1].equals(" ")) {
-            throw new DukeException("The date for this event cannot be empty. Type date after /at\nEg."
-                    + Event.inputExample);
-        }
+        checkForEmptyDescription(eachWord);
+        checkForEmptyDate(eachWord);
         String dateDescription = eachWord[1];
         String[] dateSplitBySpace = dateDescription.split(" ");
+        String[] dateArr = getDateArr(dateSplitBySpace);
+        try {
+            return getEvent(eachWord[0], dateSplitBySpace[2], dateArr);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Enter the date for this event in DD/MM/YYYY HHMM format\nEg."
+                    + Event.inputExample);
+        } catch (DateTimeException e) {
+            throw new DukeException("Invalid date inputed. Please check that the date is correct\nEg."
+                    + Event.inputExample);
+        }
+    }
+
+    private static String[] getDateArr(String[] dateSplitBySpace) throws DukeException {
         if (dateSplitBySpace.length < 3) {
             throw new DukeException("Enter the date for this event in DD/MM/YYYY HHMM format\nEg."
                     + Event.inputExample);
@@ -44,19 +51,29 @@ public class Event extends Task {
             throw new DukeException("Enter the date for this event in DD/MM/YYYY HHMM format\nEg."
                     + Event.inputExample);
         }
-        try {
-            int year = Integer.parseInt(dateArr[2]);
-            int month = Integer.parseInt(dateArr[1]);
-            int date = Integer.parseInt(dateArr[0]);
-            int hour = Integer.parseInt(dateSplitBySpace[2].substring(0, dateSplitBySpace[2].length() - 2));
-            int min = Integer.parseInt(dateSplitBySpace[2].substring(dateSplitBySpace[2].length() - 2));
-            LocalDateTime dateTime = LocalDateTime.of(year, month, date, hour, min);
-            return new Event(eachWord[0], dateTime);
-        } catch (NumberFormatException e) {
-            throw new DukeException("Enter the date for this event in DD/MM/YYYY HHMM format\nEg."
+        return dateArr;
+    }
+
+    private static Event getEvent(String description, String s, String[] dateArr) {
+        int year = Integer.parseInt(dateArr[2]);
+        int month = Integer.parseInt(dateArr[1]);
+        int date = Integer.parseInt(dateArr[0]);
+        int hour = Integer.parseInt(s.substring(0, s.length() - 2));
+        int min = Integer.parseInt(s.substring(s.length() - 2));
+        LocalDateTime dateTime = LocalDateTime.of(year, month, date, hour, min);
+        return new Event(description, dateTime);
+    }
+
+    private static void checkForEmptyDate(String[] eachWord) throws DukeException {
+        if (eachWord.length == 1 || eachWord[1].length() == 0 || eachWord[1].equals(" ")) {
+            throw new DukeException("The date for this event cannot be empty. Type date after /at\nEg."
                     + Event.inputExample);
-        } catch (DateTimeException e) {
-            throw new DukeException("Invalid date inputed. Please check that the date is correct\nEg."
+        }
+    }
+
+    private static void checkForEmptyDescription(String[] eachWord) throws DukeException {
+        if (eachWord.length == 0 || eachWord[0].length() == 0 || eachWord[0].equals(" ")) {
+            throw new DukeException("Description cannot be empty. Type description before /at\nEg."
                     + Event.inputExample);
         }
     }
