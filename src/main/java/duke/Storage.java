@@ -17,6 +17,9 @@ import duke.task.ToDo;
  * Reads and writes the task list on the disk.
  */
 public class Storage {
+    static final String DONE_FLAG = "1";
+    static final String STRING_SEPERATOR = "\\|";
+
     private final String path;
 
     /**
@@ -36,9 +39,6 @@ public class Storage {
      * @return TaskList of the tasks stored in the file.
      */
     protected TaskList load() {
-        final String DONE_FLAG = "1";
-        final String STRING_SEPERATOR = "\\|";
-
         TaskList tasks = new TaskList();
 
         try {

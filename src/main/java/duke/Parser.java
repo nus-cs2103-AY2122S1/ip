@@ -9,8 +9,8 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
-import duke.command.ListCommand;
 import duke.command.HelpCommand;
+import duke.command.ListCommand;
 // Duke Exceptions
 import duke.exception.DukeException;
 // Duke Tasks

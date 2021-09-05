@@ -17,6 +17,13 @@ import javafx.stage.Stage;
  * Main class of the project.
  */
 public class Duke extends Application {
+    static final double STAGE_WIDTH = 600.0;
+    static final double STAGE_HEIGHT = 400.0;
+    static final double SCROLL_WIDTH = 385.0;
+    static final double SCOLL_HEIGHT = 535.0;
+    static final double DEFAULT_PADDING = 10.0;
+    static final double INPUT_WIDTH = 325.0;
+    static final double BUTTON_WIDTH = 55.0;
 
     private final Storage storage;
     private Ui ui;
@@ -63,7 +70,6 @@ public class Duke extends Application {
     private void run() {
         assert storage != null : "Storage not properly initialized";
         assert tasks != null : "TaskList not properly initialized";
-        
         boolean isExit = false;
         ui.showWelcome();
 
@@ -126,14 +132,6 @@ public class Duke extends Application {
                            Stage primaryStage,
                            VBox dialogContainer,
                            Button sendButton) {
-
-        final double STAGE_WIDTH = 600.0;
-        final double STAGE_HEIGHT = 400.0;
-        final double SCROLL_WIDTH = 385.0;
-        final double SCOLL_HEIGHT = 535.0;
-        final double DEFAULT_PADDING = 10.0;
-        final double INPUT_WIDTH = 325.0;
-        final double BUTTON_WIDTH = 55.0;
 
         // GUI window settings
         primaryStage.setTitle("Duk");

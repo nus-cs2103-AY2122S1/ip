@@ -12,14 +12,12 @@ import duke.task.Task;
 public class TaskList {
 
     private final ArrayList<Task> tasks;
-    
     /**
      * Class constuctor.
      */
     public TaskList() {
         tasks = new ArrayList<>();
     }
-
 
     /**
      * Adds a task to the task list.
