@@ -41,8 +41,7 @@ public class Duke {
      * @return response received by the program
      */
     private String feedIntoParser(String command) {
-        String response = PARSER.parse(command.toLowerCase(Locale.ROOT));
-        return response; // TODO
+        return PARSER.parse(command.toLowerCase(Locale.ROOT)); // TODO
     }
 
     /**
