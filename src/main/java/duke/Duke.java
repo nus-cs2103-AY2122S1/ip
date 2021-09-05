@@ -42,12 +42,13 @@ public class Duke {
     }
 
     /**
-     * Returns a string containing the response from Dude to the given command in the input.
+     * Returns a string containing the response from Duke to the given command in the input.
      *
-     * @return String response from Dude.
+     * @return String response from Duke.
      */
     public String getResponse(String input) {
         try {
+            assert storage != null : "Storage is uninitialized";
             Command c = Parser.parse(input);
             c.execute(tasks, storage);
             return c.toString();
