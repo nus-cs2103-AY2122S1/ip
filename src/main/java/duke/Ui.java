@@ -36,7 +36,7 @@ public class Ui {
     }
 
     /**
-     * Prints the delete message.
+     * Prints a delete message.
      *
      * @param task
      * @return
@@ -76,7 +76,7 @@ public class Ui {
     }
 
     /**
-     * Prints all existing tasks
+     * Prints all existing tasks.
      *
      * @param tasks
      * @return
@@ -111,14 +111,6 @@ public class Ui {
     public String saveMessage() {
         return "Your data has been saved";
     }
-
-    /**
-     * Prints the Loading Error Message.
-     */
-    public void showLoadingError() {
-        System.out.println("There was an error reading the saved file :(");
-    }
-
 
     public String addedTaskMessage() {
         return "Got it. I've added this task: \n";

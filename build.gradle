@@ -65,5 +65,3 @@ checkstyle {
 run {
     standardInput = System.in
 }
-
-mainClassName = 'Duke'
