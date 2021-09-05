@@ -1,5 +1,7 @@
 package pilcrow;
 
+import com.sun.javafx.scene.control.skin.IntegerFieldSkin;
+
 import java.util.Scanner;
 
 /**
@@ -83,6 +85,7 @@ public class Pilcrow {
             text = ui.printTaskList(taskList);
             break;
         case "done":
+            assert(parser.getRestOfCommand().length() > 0);
             int index = parser.getIndex();
             taskList.setTaskIsDone(index, true);
             storage.save(taskList);
@@ -93,6 +96,7 @@ public class Pilcrow {
             text = ui.printTaskList(taskList.getFilteredTaskList(searchString));
             break;
         case "delete":
+            assert(parser.getRestOfCommand().length() > 0);
             index = parser.getIndex();
             taskList.deleteTask(index);
             storage.save(taskList);
