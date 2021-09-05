@@ -56,6 +56,8 @@ public class TaskList {
                     throw new IllegalArgumentException("Please specify type of task");
                 }
             }
+            assert taskToAdd != null;
+
             // Add task to data file
             dataToStore = taskToAdd.getDataRep();
             Files.writeString(dataPath, dataToStore + System.lineSeparator(), StandardOpenOption.APPEND);
@@ -82,6 +84,7 @@ public class TaskList {
         try {
             //Delete from ArrayList
             int taskToDel = Integer.parseInt(userInput.substring(7)) - 1;
+            assert taskToDel >= 0;
             Task task = this.tasks.get(taskToDel);
             this.tasks.remove(taskToDel);
             return(String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in list"
@@ -103,6 +106,7 @@ public class TaskList {
     public String markTaskDone(String userInput) {
         try {
             int taskIndex = Integer.parseInt(userInput.substring(5)) - 1;
+            assert taskIndex >= 0;
             Task task = this.tasks.get(taskIndex);
             if (task.checkStatus()) {
                 return("Youve already marked this task as done!");
