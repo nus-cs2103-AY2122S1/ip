@@ -143,6 +143,7 @@ public class TaskList {
      */
     public String find(String taskName) {
         String response = String.format("Here are your tasks that match %s:\n", taskName);
+        // Use Java streams to filter out the matching tasks
         List<Task> matchingTasks = tasks.stream()
                 .filter(task -> task.getName().contains(taskName))
                 .collect(Collectors.toList());
