@@ -82,7 +82,7 @@ public class TasklistTest {
         }
         String successMessage = "1.[T][ ] test1\n"
                 + "2.[D][ ] test12 (by: 24-Jul-2010 19:00)\n"
-                + "3.[E][ ] test123 (at: 24-Jul-2010 19:00 to 24-Dec-2010 00:00)";
+                + "3.[E][ ] test123 (at: 24-Jul-2010 19:00 to 24-Dec-2010 00:00)\n";
         assertEquals(temp.toString(), successMessage);
 
     }

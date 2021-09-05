@@ -74,7 +74,7 @@ public class Tasklist {
             throw new MissingArgumentException("time", event);
         } else {
 
-            assert strArr[1].trim().length() == 1 : "Invalid Time inputted";
+            assert strArr[1].trim().length() > 2 : "Invalid Time inputted";
             if (event.equals("deadline")) {
                 return new DukeDate(parseDateTime(strArr[1], event));
             } else {
