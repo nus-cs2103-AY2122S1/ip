@@ -15,6 +15,9 @@ public class CompleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui) throws UserInputError {
+        assert index < tasks.length();
+        assert index > 0;
+
         Task task = tasks.getTask(index);
         if (task.isDone()) {
             return ui.formatOutput("Great! But you have already completed this task!");

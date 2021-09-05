@@ -15,6 +15,9 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui) throws UserInputError {
+        assert index < tasks.length();
+        assert index > 0;
+
         Task deleted = tasks.getTask(index);
         tasks.deleteTask(index);
         Storage.writeDatabase(tasks);
