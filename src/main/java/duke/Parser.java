@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 
@@ -64,22 +65,73 @@ public class Parser {
         }
     }
 
+    /**
+     * Changes the time of the deadline or event
+     * Format: snooze {index} /to {time}
+     *
+     * @param input user command
+     * @return replies
+     * @throws IOException If can't write to file.
+     */
     private String[] snooze(String input) throws IOException {
         //format: snooze 1 /to 2/2/2022 2222
         String[] splitString = input.split(" ", 2);
+        ArrayList<String> results = new ArrayList<>();
         if (splitString.length == 1) {
             return new String[]{"OOPS!!! You have not inputted a task or a rescheduled time"};
         }
         String[] splitSnooze = splitString[1].split("/to", 2);
-        int taskIndex = Integer.parseInt(splitSnooze[0]);
+        int taskIndex;
+        try {
+            taskIndex = Integer.parseInt(splitSnooze[0].trim());
+        } catch (NumberFormatException e) {
+            return new String[]{"OOPS!!! You didn't enter a valid index"};
+        }
+        if (taskIndex - 1 > tasks.size()) {
+            return new String[]{"OOPS!!! You didn't enter a valid index"};
+        }
         Task task = tasks.get(taskIndex - 1);
-        LocalDateTime newDate = LocalDateTime.parse(splitSnooze[1], fmt);
+        results.add("\tYou have snoozed this task: ");
+        results.add(task.toString() + " to:\n");
+        if (splitSnooze.length == 1) {
+            return new String[]{"OOPS!!! Please enter a time"};
+        }
+        LocalDateTime newDate;
+        try {
+            newDate = LocalDateTime.parse(splitSnooze[1].trim(), fmt);
+        } catch (DateTimeParseException e) {
+            return new String[]{"OOPS!!! You have entered an invalid date!"};
+        }
 
+        if (task instanceof Todo) {
+            return new String[]{"OOPS!!! Todos don't have schedules"};
+        }
+        if (task instanceof Deadline) {
+            Deadline newDeadline = new Deadline(task.description, newDate);
+            tasks.set(taskIndex - 1, newDeadline);
+            storage.writeEntireFile();
+            results.add(newDeadline.toString());
+        }
+        if (task instanceof Event) {
+            Event newEvent = new Event(task.description, newDate);
+            tasks.set(taskIndex - 1, newEvent);
+            storage.writeEntireFile();
+            results.add(newEvent.toString());
+        }
 
-
-        return new String[]{};
+        return results.toArray(new String[0]);
     }
 
+    /**
+     * Adds task to file
+     * Format (todo): todo {description}
+     * Format (deadline): deadline {description} /by {time}
+     * Format (event): event {description} /at {time}
+     *
+     * @param input user command
+     * @return replies
+     * @throws IOException If can't write to file.
+     */
     private String[] addTask(String input) throws DukeException, IOException {
         String[] splitString = input.split(" ", 2);
         String type = splitString[0];
