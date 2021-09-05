@@ -15,11 +15,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-
-
 
 
 public class Duke extends Application {
@@ -33,6 +31,11 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
+    private final String LIST = "list";
+    private final String BYE = "bye";
+    private final String DONE = "done";
+    private final String DELETE = "delete";
+    private final String FIND = "find";
 
 
     /**
@@ -120,9 +123,9 @@ public class Duke extends Application {
 
 
     /**
-     * search for a task
-     * @param tasklist
-     * @param keyword
+     * search for a task from task list using a keyword
+     * @param tasklist a list that contains all the tasks
+     * @param keyword the keyword for searching
      * @return
      */
     public ArrayList<Task> searchTask(ArrayList<Task> tasklist, String keyword) {
@@ -149,11 +152,6 @@ public class Duke extends Application {
         ArrayList<Task> task = database.getData();
         int taskNum = task.size();
         String indentation = "       ";
-        final String LIST = "list";
-        final String BYE = "bye";
-        final String DONE = "done";
-        final String DELETE = "delete";
-        final String FIND = "find";
         String response = "";
 
         String keywords = input;
@@ -376,12 +374,10 @@ public class Duke extends Application {
                     response += "Got it. I've added this task:" + "\n";
                     response += indentation + "   [E][ ] " + taskname_event + " ( " + tasktime_event + " )\n";
                     response += indentation + "Now you have" + " " + taskNum + " " + "tasks in the list \n";
-
                     return response;
                 default:
                     return ui.unknown_message;
-            }
-
+                }
             } catch (ArrayIndexOutOfBoundsException e) {
                 return ui.index_message;
             }
@@ -389,33 +385,22 @@ public class Duke extends Application {
     }
 
     /**
-     * start the program
+     * start the duke
      */
     public void run() {
 
         ArrayList<Task> task = database.getData();
         int taskNum = task.size();
         String indentation = "       ";
-        final String LIST = "list";
-        final String BYE = "bye";
-        final String DONE = "done";
-        final String DELETE = "delete";
-        final String FIND = "find";
-
-
         boolean isEnd = false;
         System.out.println(ui.logo);
         System.out.println(ui.line);
         System.out.println(ui.greeting);
         System.out.println(ui.line);
         Scanner scanner = new Scanner(System.in);
-
-
         while (!isEnd) {
             String keywords = scanner.nextLine();
             String[] keyword = keywords.split(" ");
-
-
             switch(keyword[0]) {
             case FIND:
                 ArrayList<Task> result = searchTask(task, keyword[1]);
@@ -443,7 +428,6 @@ public class Duke extends Application {
                             System.out.println(s);
                         }
                     }
-
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(indentation + e.getMessage());
                 }
@@ -479,10 +463,8 @@ public class Duke extends Application {
                     System.out.println(indentation + e.getMessage());
                 }
                 System.out.println(ui.line);
-
                 break;
             case DONE:
-
                 try {
                     Integer num = Integer.valueOf(keyword[1]) - 1;
                     task.get(num).setDone(true);
@@ -492,7 +474,6 @@ public class Duke extends Application {
                     String s = indentation;
                     String s2 = "";
                     if (task.get(num) instanceof Todo) {
-
                         s += (task.get(num).getIndex() + 1) + "." + " [T]";
                         s2 = task.get(num).getName();
                     } else if (task.get(num) instanceof Deadline) {
@@ -502,26 +483,21 @@ public class Duke extends Application {
                         s += (task.get(num).getIndex() + 1) + "." + " [E]";
                         s2 = task.get(num).getName() + " " + "(" + " " + ((Event) task.get(num)).getTime() + " )";
                     }
-
                     s += "[X]" + s2;
                     System.out.println(s);
-
                     System.out.println(ui.line);
                 } catch (NullPointerException e) {
                     System.out.println(ui.no_task_message);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println(ui.task_num_message);
                 }
-
                 break;
             case DELETE:
                 try {
                     Integer num = Integer.valueOf(keyword[1]) - 1;
-
                     database.deleteData(num + 1);
                     String s = indentation + "     ";
                     String s2 = "";
-
                     if (task.get(num) instanceof Todo) {
                         s += (task.get(num).getIndex() + 1) + "." + " [T]";
                         s2 = task.get(num).getName();
@@ -606,10 +582,8 @@ public class Duke extends Application {
                             } else {
                                 taskname_todo += keyword[i] + " ";
                             }
-
                         }
                         Task todo = new Todo(taskname_todo, false);
-
                         task.add(todo);
                         database.writeToDatabase(todo);
                         taskNum++;
@@ -624,7 +598,6 @@ public class Duke extends Application {
                             System.out.println(ui.lack_content_message);
                             break;
                         }
-
                         String taskname_event = "";
                         String tasktime_event = "";
                         boolean timepart_event = false;
@@ -640,7 +613,6 @@ public class Duke extends Application {
                                 } else {
                                     taskname_event += keyword[i] + " ";
                                 }
-
                             }
                         }
                         if (tasktime_event.equals("")) {
@@ -660,18 +632,12 @@ public class Duke extends Application {
                     default:
                         System.out.println(ui.unknown_message);
                         break;
-
                     }
-
                 } catch (ArrayIndexOutOfBoundsException e) {
                     System.out.println(ui.index_message);
                 }
-
             }
         }
-
-
-
     }
 
     /**

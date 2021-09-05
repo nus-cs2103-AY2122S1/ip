@@ -38,6 +38,10 @@ public class Event extends Task {
         return false;
     }
 
+    /**
+     * return the time in a certain format
+     * @return
+     */
     public String getTime() {
         String[] s = this.time.split(" ");
 

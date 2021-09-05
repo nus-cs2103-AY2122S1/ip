@@ -35,7 +35,7 @@ public class Deadline extends Task {
 
 
     /**
-     * get time
+     * get time in a certain format
      * @return
      */
     public String getTime() {
