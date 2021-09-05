@@ -21,6 +21,8 @@ public class Storage {
      */
     public Storage(String filePath) {
         this.filePath = Path.of(filePath);
+        createIfNotExist(this.filePath.getParent(), this.filePath);
+        assert(hasSave());
     }
 
     /**
@@ -30,6 +32,7 @@ public class Storage {
      */
     public void save(TaskList taskList) throws DukeException {
         createIfNotExist(filePath.getParent(), filePath);
+        assert(hasSave());
         try {
             Files.writeString(filePath, taskList.saveString());
         } catch (IOException e) {
@@ -43,6 +46,7 @@ public class Storage {
      * @return Task list
      */
     public TaskList load() throws DukeException {
+        assert(hasSave());
         String s;
         try {
             s = Files.readString(filePath);
