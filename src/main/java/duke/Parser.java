@@ -4,7 +4,6 @@ import duke.command.*;
 import duke.exception.*;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Represents the Parser that parses all commands from user.
@@ -23,7 +22,7 @@ public class Parser {
         FIND("find"),
         TASK("task"),
         DELETE("delete"),
-        ERRORS("error");
+        NOT_FOUND("not found");
 
         private final String actionCommand;
 
@@ -42,7 +41,7 @@ public class Parser {
                     return a;
                 }
             }
-            return ERRORS;
+            return NOT_FOUND;
         }
     }
 
@@ -110,7 +109,8 @@ public class Parser {
         case TASK:
             c = new TaskCommand(d, userInput);
             break;
-        case ERRORS:
+        default:
+            assert false: "Command not found";
             throw new DukeIncorrectCommandWord(new IllegalArgumentException());
         }
 
