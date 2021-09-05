@@ -8,23 +8,23 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         this.description = description;
-        this.done = false;
+        this.isDone = false;
     }
 
     /**
      * Returns a ToDo instance.
      * @param description
-     * @param done
+     * @param isDone
      */
-    public Todo(String description, boolean done) {
+    public Todo(String description, boolean isDone) {
         this.description = description;
-        this.done = done;
+        this.isDone = isDone;
     }
 
     @Override
     public String toString() {
         String output = "[T]";
-        if (this.done) {
+        if (this.isDone) {
             output += "[X] ";
         } else {
             output += "[] ";
@@ -38,8 +38,8 @@ public class Todo extends Task {
      */
     public String toWriteString() {
         String output = Duke.COMMAND_TODO;
-        String done = (this.done ? "1" : "0");
-        output += DIVIDER + done + DIVIDER + this.description;
+        String isDone = (this.isDone ? "1" : "0");
+        output += DIVIDER + isDone + DIVIDER + this.description;
         return output;
     }
 }

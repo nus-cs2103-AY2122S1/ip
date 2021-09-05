@@ -39,21 +39,21 @@ public class TaskList {
         for (String taskAsString : taskArrayAsString) {
             String[] commands = taskAsString.split(" \\| ");
             String command = commands[0];
-            boolean done = commands[1].equals("1");
+            boolean isDone = commands[1].equals("1");
             String description = commands[2];
             switch (command) {
             case Duke.COMMAND_EVENT: {
                 String date = commands[3];
-                newTaskArray.add(new Event(description, date, done));
+                newTaskArray.add(new Event(description, date, isDone));
                 break;
             }
             case Duke.COMMAND_DEADLINE: {
                 String date = commands[3];
-                newTaskArray.add(new Deadline(description, date, done));
+                newTaskArray.add(new Deadline(description, date, isDone));
                 break;
             }
             case Duke.COMMAND_TODO: {
-                newTaskArray.add(new Todo(description, done));
+                newTaskArray.add(new Todo(description, isDone));
                 break;
             }
             default: { // TODO: Refactor this with exceptions
@@ -127,7 +127,7 @@ public class TaskList {
     }
 
     /**
-     * Marks the indexed task as done and prints a message.
+     * Marks the indexed task as isDone and prints a message.
      *
      * @param taskIndex
      */

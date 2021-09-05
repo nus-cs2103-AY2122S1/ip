@@ -1,7 +1,5 @@
 package duke;
 
-import javafx.application.Application;
-
 import java.util.List;
 
 public class Duke {
@@ -44,6 +42,7 @@ public class Duke {
     public Response handleCommands(String input) {
         String[] commands = input.split(" ");
         String command = commands[0];
+        assert !command.isEmpty() : "The given input command is empty or invalid";
         String message = "";
         boolean isBye = false;
         switch (command) {

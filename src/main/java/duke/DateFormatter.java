@@ -12,7 +12,7 @@ public class DateFormatter {
      * Formats date to use MMM d yyyy pattern
      *
      * @param date
-     * @return
+     * @return Formatted Date.
      */
     public static String formatDate(String date) {
         String outputDate = "";
