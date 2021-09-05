@@ -65,6 +65,10 @@ public class Parser {
     }
 
     public String findInputParser(String input) {
-        return input.substring(6);
+        if (input.length() < 5) {
+            throw new MissingKeywordException();
+        }
+        String keyword = input.substring(5);
+        return keyword;
     }
 }

@@ -46,7 +46,7 @@ public class Duke {
                 Integer removeTaskIndex = parser.deleteInputParser(input);
                 Task removedTask = taskList.removeTask(removeTaskIndex);
                 response = this.ui.deleteTaskMsg(removedTask, this.taskList.taskListSize());
-            } else if (input.contains("find ")) {
+            } else if (input.contains("find")) {
                 //Find tasks
                 String keyword = parser.findInputParser(input);
                 TaskList taskListWithKeyword = this.taskList.findTasks(keyword);

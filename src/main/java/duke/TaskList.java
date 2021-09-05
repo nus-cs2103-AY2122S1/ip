@@ -80,6 +80,7 @@ public class TaskList {
                 taskListWithKeyword.addTask(currTask);
             }
         }
+        System.out.print(taskListWithKeyword.taskListSize());
         return taskListWithKeyword;
     }
 
