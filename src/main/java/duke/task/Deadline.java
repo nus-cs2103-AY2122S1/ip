@@ -16,28 +16,24 @@ public class Deadline extends Task {
     /**
      * Constructor for a Deadline.
      *
-     * @param description String representing the description of the deadline task
-     * @param date        LocalDate object representing a date
-     * @param time        LocalTime object representing a time
+     * @param desc String representing the description of the deadline task
+     * @param date LocalDate object representing a date
+     * @param time LocalTime object representing a time
      */
-    public Deadline(String description, LocalDate date, LocalTime time) {
-        super(description);
-        this.deadlineDate = date;
-        this.deadlineTime = time;
-        this.dueDate = date.toString() + " " + time.toString();
-        this.taskType = "D";
+    public Deadline(String desc, LocalDate date, LocalTime time) {
+        this(desc, date, time, false);
     }
 
     /**
      * Alternate constructor for Deadline, which accepts a boolean indicating the isDone state.
      *
-     * @param description String representing the description of the deadline task
-     * @param date        LocalDate object representing a date
-     * @param time        LocalTime object representing a time
-     * @param isDone      Boolean representing whether the task has been completed
+     * @param desc   String representing the description of the deadline task
+     * @param date   LocalDate object representing a date
+     * @param time   LocalTime object representing a time
+     * @param isDone Boolean representing whether the task has been completed
      */
-    public Deadline(String description, LocalDate date, LocalTime time, Boolean isDone) {
-        super(description);
+    public Deadline(String desc, LocalDate date, LocalTime time, Boolean isDone) {
+        super(desc);
         this.deadlineDate = date;
         this.deadlineTime = time;
         this.dueDate = date.toString() + " " + time.toString();

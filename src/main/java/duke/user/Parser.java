@@ -36,6 +36,9 @@ public class Parser {
         String command = input.split(" ")[0];
         String[] extractedInfo;
         String parsedInput;
+        int taskDescIndex = 0;
+        int taskDateIndex = 1;
+        int taskTimeIndex = 2;
 
         // Switch statement to execute the correct axillary method
         switch (command) {
@@ -56,13 +59,16 @@ public class Parser {
 
         case "event":
             parsedInput = checkEvent(input);
-            extractedInfo = new String[]{command, parsedInput.split(" \\| ")[0], parsedInput.split(" \\| ")[1]};
+
+            extractedInfo = new String[]{command, parsedInput.split(Ui.SPLIT_DELIMITER)[taskDescIndex],
+                    parsedInput.split(Ui.SPLIT_DELIMITER)[taskDescIndex]};
             return extractedInfo;
 
         case "deadline":
             parsedInput = checkDeadline(input);
-            extractedInfo = new String[]{command, parsedInput.split(" \\| ")[0],
-                    parsedInput.split(" \\| ")[1], parsedInput.split(" \\| ")[2]};
+            extractedInfo = new String[]{command, parsedInput.split(Ui.SPLIT_DELIMITER)[taskDescIndex],
+                    parsedInput.split(Ui.SPLIT_DELIMITER)[taskDateIndex],
+                    parsedInput.split(Ui.SPLIT_DELIMITER)[taskTimeIndex]};
             return extractedInfo;
 
         // bye and list can be combined as these are meant to be one-word commands
@@ -91,7 +97,9 @@ public class Parser {
      * @throws DukeException if the task number is invalid
      */
     public String checkDone(String input) throws DukeException {
-        if (input.length() == 4) {
+        int lenOfDoneCommand = 4;
+
+        if (input.length() == lenOfDoneCommand) {
             throw new DukeException("Please use this format: 'done (task number)'");
         } else if (Integer.parseInt(input.split(" ")[1]) < 0
                 || Integer.parseInt(input.split(" ")[1]) > taskList.getLength()) {
@@ -108,7 +116,9 @@ public class Parser {
      * @throws DukeException if the task number is invalid
      */
     public String checkDelete(String input) throws DukeException {
-        if (input.length() == 6) {
+        int lenOfDeleteCommand = 6;
+
+        if (input.length() == lenOfDeleteCommand) {
             throw new DukeException("Please use this format: 'delete (task number)'");
         } else if (Integer.parseInt(input.split(" ")[1]) < 0
                 || Integer.parseInt(input.split(" ")[1]) > taskList.getLength()) {
@@ -126,17 +136,12 @@ public class Parser {
      */
     public String checkTodo(String input) throws DukeException {
 
-        System.out.println(input);
+        int lenOfTodoCommand = 5;
 
-        if (input.length() <= 5) {
+        if (input.length() <= lenOfTodoCommand || input.charAt(lenOfTodoCommand) == ' ') {
             throw new DukeException("The description of a todo cannot be empty!");
         }
-
-        if (input.charAt(5) == ' ') {
-            throw new DukeException("The description of a todo cannot be empty!");
-        }
-
-        return input.substring(5);
+        return input.substring(lenOfTodoCommand);
     }
 
     /**
@@ -148,20 +153,23 @@ public class Parser {
      */
     public String checkEvent(String input) throws DukeException {
 
+        int lenOfEventCommand = 6;
+        int lenOfAtKeyword = 4;
+        int eventDateIndex = input.indexOf("/at ") + lenOfAtKeyword;
+
         // need to check that for event they use the /at properly else reject
-        if (input.length() <= 6 || !input.contains("/at ")) {
+        if (input.length() <= lenOfEventCommand || !input.contains("/at ")) {
             throw new DukeException("Please use this format: 'event <task> /at <date and time>' "
                     + "to specify the date and time!");
         }
-        int eventDateIndex = input.indexOf("/at ") + 4;
 
-        String eventDesc = input.substring(6, eventDateIndex - 4);
-        if (input.charAt(6) == ' ' || input.charAt(6) == '/') {
+        String eventDesc = input.substring(lenOfEventCommand, eventDateIndex - lenOfAtKeyword);
+        if (input.charAt(lenOfEventCommand) == ' ' || input.charAt(lenOfEventCommand) == '/') {
             throw new DukeException("The description cannot be empty!");
         }
 
         String eventDate = input.substring(eventDateIndex);
-        return eventDesc + " | " + eventDate;
+        return eventDesc + Ui.DELIMITER + eventDate;
     }
 
     /**
@@ -172,31 +180,34 @@ public class Parser {
      * @throws DukeException if format is not followed
      */
     public String checkDeadline(String input) throws DukeException {
+
+        int lengthOfByKeyword = 4;
+        int deadlineDateIndex = input.indexOf("/by ") + lengthOfByKeyword;
+        int lengthOfDateFormat = 11;
+        int deadlineTimeIndex = deadlineDateIndex + lengthOfDateFormat;
+        int indexAfterDeadlineCommand = 9;
+
         // need to check that for deadline they use the /by properly else reject
         if (!input.contains("/by ")) {
             throw new DukeException("Please use this format: 'deadline <task> /by YYYY-MM-DD HH:MM' "
                     + "to specify the date and time!");
         }
 
-        // Hard coded numbers to account for the length of the /by and the date format
-        int deadlineDateIndex = input.indexOf("/by ") + 4;
-        int deadlineTimeIndex = deadlineDateIndex + 11;
-
         try {
             // Splits up the date and time from the initial string
-            String date = input.substring(deadlineDateIndex, deadlineDateIndex + 10);
+            String date = input.substring(deadlineDateIndex, deadlineDateIndex + lengthOfDateFormat - 1);
             String time = input.substring(deadlineTimeIndex);
 
             // Checks that the string can be parsed to time and date
             LocalTime.parse(time);
             LocalDate.parse(date);
 
-            if (input.charAt(9) == ' ' || input.charAt(9) == '/') {
+
+            if (input.charAt(indexAfterDeadlineCommand) == ' ' || input.charAt(indexAfterDeadlineCommand) == '/') {
                 throw new DukeException("The description cannot be empty!");
             }
-            String deadlineDesc = input.substring(9, deadlineDateIndex - 4); //skip the "deadline "
-
-            return deadlineDesc + " | " + date + " | " + time;
+            String deadlineDesc = input.substring(indexAfterDeadlineCommand, deadlineDateIndex - lengthOfByKeyword);
+            return deadlineDesc + Ui.DELIMITER + date + Ui.DELIMITER + time;
 
         } catch (DateTimeParseException | IndexOutOfBoundsException e) {
             throw new DukeException("Invalid date or time format! Use: YYYY-MM-DD HH:MM");
@@ -212,7 +223,9 @@ public class Parser {
      * @throws DukeException only one keyword was not used
      */
     public String checkFind(String input) throws DukeException {
-        if (input.length() == 4) {
+        int lenOfFindCommand = 4;
+
+        if (input.length() == lenOfFindCommand) {
             throw new DukeException("Please enter a keyword!");
         } else if (input.split(" ").length > 2) {
             throw new DukeException("Please enter ONLY 1 keyword!");

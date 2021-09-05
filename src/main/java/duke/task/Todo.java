@@ -13,9 +13,7 @@ public class Todo extends Task {
      * @param desc The description of the to do
      */
     public Todo(String desc) {
-        super(desc);
-        this.taskType = "T";
-        this.dueDate = "";
+        this(desc, false);
     }
 
     /**

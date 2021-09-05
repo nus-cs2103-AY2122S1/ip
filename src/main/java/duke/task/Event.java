@@ -14,9 +14,7 @@ public class Event extends Task {
      * @param at   The time and date of the event
      */
     public Event(String desc, String at) {
-        super(desc);
-        this.dueDate = at;
-        this.taskType = "E";
+        this(desc, at, false);
     }
 
     /**
