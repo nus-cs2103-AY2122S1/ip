@@ -35,28 +35,35 @@ public class Ui {
 
     /**
      * Method to print out the error message when user keys in an invalid index.
+     * @return the error message.
      */
     public static String invalidIndexMessage() {
+        System.out.println("Invalid index, please try again");
         return "Invalid index, please try again";
     }
 
     /**
      * Method to print out the message from the wrongCommandFormatException.
      * @param e the exception to get the message from.
+     * @return the error message.
      */
     public static String formatExceptionMessage(WrongCommandFormatException e) {
+        System.out.println(e.getMessage());
         return e.getMessage();
     }
 
     /**
      * Method to print out the message when the user updates the date format.
+     * @return The message.
      */
     public static String formatUpdatedMessage() {
+        System.out.println("Date format has been updated to: " + Duke.getFormat());
         return "Date format has been updated to: " + Duke.getFormat();
     }
 
     /**
      * Method to print out the message when the user tries to update into and invalid date format.
+     * @return the message.
      */
     public static String unacceptableFormatMessage() {
         System.out.println("Not an acceptable format. Please try again");
@@ -65,26 +72,37 @@ public class Ui {
 
     /**
      * Method to print out the current date format.
+     * @return the message.
      */
     public static String currentDateFormatMessage() {
+        System.out.println("Current format " + Duke.getFormat());
         return "Current format " + Duke.getFormat();
     }
 
+    /**
+     * Method to print and return the message when the user inputs an unrecognised command.
+     * @return The message.
+     */
     public static String noFormatSpecifiedMessage() {
+        System.out.println("No format specified. Please try again.");
         return "No format specified. Please try again.";
     }
 
     /**
      * Method when the user keys in and unrecognisable command.
+     * @return the message.
      */
     public static String noSpecificCmdMessage() {
+        System.out.println("No specific command specified. Please try again");
         return "No specific command specified. Please try again";
     }
 
     /**
      * Method to print out the goodbye message.
+     * @return the message.
      */
     public static String botShutdownMessage() {
+        System.out.println("Good riddance! Time to continue my beauty sleep :)");
         return "Good riddance! Time to continue my beauty sleep :)";
     }
 
@@ -92,6 +110,7 @@ public class Ui {
      * Method to inform the user what taks has been added and the number of items in the list.
      * @param t the task that the user added.
      * @param list the list that the task is added to.
+     * @return the message.
      */
     public static String addTaskMessage(Task t, MyList list) {
         int noOfItems = list.getListSize();
@@ -103,12 +122,14 @@ public class Ui {
         } else {
             s += "You now have " + noOfItems + " items in your list \n";
         }
+        System.out.println(s);
         return s;
     }
 
     /**
      * Method to print out all the items in the list.
      * @param list the list that contains the items to be printed out.
+     * @return the message.
      */
     public static String listAllMessage(MyList list) {
         int listLength = list.getListSize();
@@ -122,6 +143,7 @@ public class Ui {
                 output += i + 1 + ". " + t.toString() + "\n";
             }
         }
+        System.out.println(output);
         return output;
     }
 
@@ -129,6 +151,7 @@ public class Ui {
      * Method to inform the user what task has been deleted.
      * @param t The task that has been deleted.
      * @param list The list that the task has been deleted from.
+     * @return the message.
      */
     public static String deleteTaskMessage(Task t, MyList list) {
         int noOfItems = list.getListSize();
@@ -140,6 +163,7 @@ public class Ui {
         } else {
             s += "You now have " + noOfItems + " items in your list \n";
         }
+        System.out.println(s);
         return s;
     }
 
@@ -147,15 +171,18 @@ public class Ui {
      * Method to print out the message when the user tries to complete a task
      * that has already been completed.
      * @param t The completed task that the user tries to mark as complete
+     * @return the message
      */
     public static String taskAlrCompleted(Task t) {
         String s = "`" + t.getDescription().substring(1) + "`" + " is already completed.";
+        System.out.println(s);
         return s;
     }
 
     /**
      * Method to print out the message when the user marks an event as completed.
      * @param e The task that was marked as completed.
+     * @return the message
      */
     public static String markCompleteEvent(Event e) {
         String s = "Completed:"
@@ -164,20 +191,24 @@ public class Ui {
                 + e.getTimeframe()
                 + ")\n"
                 + "WEW that's another task completed";
+        System.out.println(s);
         return s;
     }
 
     /**
      * Method to print out the message when the user marks a to do as completed.
      * @param t The to do that was marked completed.
+     * @return the message.
      */
     public static String markCompleteTodo(Todo t) {
+        System.out.println("Finally! Took you long enough to complete:" + t.getDescription());
         return "Finally! Took you long enough to complete:" + t.getDescription();
     }
 
     /**
      * Method to print out the message when the user marks a deadline as completed.
      * @param d The deadline that was marked as completed.
+     * @return the message.
      */
     public static String markCompleteDeadline(Deadline d) {
         String s = "Completed: "
@@ -185,22 +216,27 @@ public class Ui {
                 + " (by:"
                 + d.getDeadline().format(d.getCurrentFormat()) + ")\n"
                 + "You didn't overshoot the deadline right?";
+        System.out.println(s);
         return s;
     }
 
     /**
      * Method to print out the number of matching tasks.
      * @param counter The number of matching tasks.
+     * @return the message.
      */
     public static String containsKeyword(int counter) {
 
         if (counter > 0) {
             if (counter == 1) {
-                return "THere is 1 matching task in your list: \n";
+                System.out.println("There is 1 matching task in your list: \n");
+                return "There is 1 matching task in your list: \n";
             } else {
-                return "THere are " + counter + " matching task in your list: \n";
+                System.out.println("There are " + counter + " matching task in your list: \n");
+                return "There are " + counter + " matching task in your list: \n";
             }
         } else {
+            System.out.println("There are no matching tasks in your list\n");
             return "There are no matching tasks in your list\n";
         }
     }
@@ -208,6 +244,7 @@ public class Ui {
     /**
      * Method to print out the string representations of all the matching tasks.
      * @param matchingList The array containing the matching tasks.
+     * @return the message.
      */
     public static String containsKeywordTask(Task[] matchingList) {
         int noOfItems = matchingList.length;
@@ -219,13 +256,16 @@ public class Ui {
                 s += index + ". " + matchingTask.toString() + "\n";
             }
         }
+        System.out.println(s);
         return s;
     }
 
     /**
      * Method to inform the user that he has not input a keyword after the find command.
+     * @return the message.
      */
     public static String noKeywordSpecifiedMessage() {
+        System.out.println("No keyword specified. Please try again");
         return "No keyword specified. Please try again";
     }
 }
