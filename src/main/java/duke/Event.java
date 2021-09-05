@@ -6,7 +6,7 @@ import java.time.LocalDate;
  * Represents a specific type of Task with an additional date field.
  */
 public class Event extends Task {
-    private LocalDate date;
+    private final LocalDate date;
 
     /**
      * The constructor for an Event Object.

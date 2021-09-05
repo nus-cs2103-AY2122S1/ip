@@ -5,14 +5,13 @@ package duke;
  */
 
 public class Duke {
-    private Parser parser;
-    private Storage storage;
+    private final Parser parser;
 
     /**
      * The constructor for a Duke Object.
      */
     public Duke() {
-        storage = new Storage();
+        Storage storage = new Storage();
         storage.autoLoad();
         parser = new Parser(new TaskList(storage));
     }
