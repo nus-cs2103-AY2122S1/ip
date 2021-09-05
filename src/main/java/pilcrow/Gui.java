@@ -27,7 +27,6 @@ public class Gui extends Application {
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
-
         pilcrow = new Pilcrow();
 
         //The container for the content of the chat to scroll.
@@ -87,7 +86,6 @@ public class Gui extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
-
 
     /**
      * Iteration 1:

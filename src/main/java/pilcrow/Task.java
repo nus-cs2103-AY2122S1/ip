@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Abstraction to represent a task.
+ */
 public class Task {
     protected String taskName;
     protected Boolean isDone;
@@ -15,7 +18,7 @@ public class Task {
 
     /**
      * Factory method to create a Task.
-     * @param taskType String representing type of Task to be created. Maybe "todo", "deadline" or "event".
+     * @param taskType String representing type of Task to be created. May be "todo", "deadline" or "event".
      * @param taskName Name of the Task to be created.
      * @param isDone Done status of the Task to be created.
      * @return Task with specified fields.
@@ -29,6 +32,8 @@ public class Task {
         } else if (taskType.equals("event")) {
             task = new Event(taskName, isDone);
         } else {
+            // If not any of the task subtypes
+            // Should never reach this point
             task = new Task("", false);
         }
         return task;
@@ -75,6 +80,9 @@ public class Task {
         return this.isDone;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         String taskAsString;
@@ -82,6 +90,9 @@ public class Task {
         return taskAsString;
     }
 
+    /**
+     * Abstraction to represent a Todo Task
+     */
     private static class ToDo extends Task {
         private ToDo(String taskName, Boolean isDone) {
             super(taskName, isDone);
@@ -97,6 +108,9 @@ public class Task {
             return storedTask;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public String toString() {
             String taskAsString;
@@ -105,6 +119,9 @@ public class Task {
         }
     }
 
+    /**
+     * Abstraction to represent a Deadline Task
+     */
     private static class Deadline extends Task {
         private LocalDate deadline;
 
@@ -148,6 +165,9 @@ public class Task {
             return this.deadline;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public String toString() {
             String taskAsString;
@@ -157,6 +177,9 @@ public class Task {
         }
     }
 
+    /**
+     * Abstraction to represent an Event Task
+     */
     private static class Event extends Task {
         private String duration;
 
@@ -196,6 +219,9 @@ public class Task {
             return this.duration;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         @Override
         public String toString() {
             String taskAsString;

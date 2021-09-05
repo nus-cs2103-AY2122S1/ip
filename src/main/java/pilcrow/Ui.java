@@ -1,6 +1,8 @@
 package pilcrow;
 
-// Abstraction to handle interactions with the user. Usually just prints text out.
+/**
+ * Abstraction to handle interactions with the user. Usually just prints text out.
+ */
 public class Ui {
     private static final String PILCROW_LOGO_FIRST = "              _____\n             /   | |\n            |    | |\n";
     private static final String PILCROW_LOGO_SECOND = "            |    | |\n             \\___| |\n                 | |\n";
@@ -19,7 +21,7 @@ public class Ui {
     }
 
     /**
-     * Prints out a TaskList, given a TaskList.
+     * Prints out a TaskList, given that TaskList.
      * @param taskList TaskList to be printed out.
      */
     public String printTaskList(TaskList taskList) {
@@ -73,7 +75,6 @@ public class Ui {
      * Used when the user exits the program.
      */
     public String printGoodbyeMessage() {
-//        String text = "C'est fini.\n";
         String text = "C'est fini.\n" + Ui.PILCROW_LOGO;
         System.out.println(text);
         return text;
