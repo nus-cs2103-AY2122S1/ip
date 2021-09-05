@@ -6,7 +6,6 @@ public class Ui {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private final String LINEBREAK = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 
     /**
      * Prints greeting message.
@@ -14,9 +13,7 @@ public class Ui {
     public String greetingMsg() {
         String str = "Hello from\n"
                 + LOGO
-                + LINEBREAK
-                + "My favorite partner is back! How can I help?\n"
-                + LINEBREAK;
+                + "My favorite partner is back! How can I help?\n";
         return (str);
     }
 
@@ -24,9 +21,7 @@ public class Ui {
      * Prints goodbye message.
      */
     public String goodbyeMsg() {
-        return (LINEBREAK
-                + "Have a good day, friend!\n"
-                + LINEBREAK);
+        return ("Have a good day, friend!\n");
     }
 
     /**
@@ -35,9 +30,7 @@ public class Ui {
      * @param taskList Task list to be printed.
      */
     public String listTaskList(TaskList taskList) {
-        return (LINEBREAK
-                + taskList.toString()
-                + LINEBREAK);
+        return taskList.toString();
     }
 
     /**
@@ -46,11 +39,8 @@ public class Ui {
      * @param task Task to be printed.
      */
     public String doneTaskMsg(Task task) {
-        return (LINEBREAK
-                + "Well Done, I'll get it marked:\n"
-                + task.checkIsDone()
-                + " " + task.getDescription() + "\n"
-                + LINEBREAK);
+        return ("Well Done, I'll get it marked:\n"
+                + task.toString() + "\n");
     }
 
     /**
@@ -59,15 +49,11 @@ public class Ui {
      * @param task Task to be printed.
      */
     public String deleteTaskMsg(Task task, int noOfTask) {
-        return (LINEBREAK
-                + "Roger! I will remove this task from the list: \n"
-                + task.getTaskType()
-                + task.checkIsDone()
-                + task.getDescription() + "\n"
+        return ("Roger! I will remove this task from the list: \n"
+                + task.toString() + "\n"
                 + "Now you have "
                 + noOfTask
-                + " tasks left in the list.\n"
-                + LINEBREAK);
+                + " tasks left in the list.\n");
     }
 
     /**
@@ -76,16 +62,11 @@ public class Ui {
      * @param task Task to be printed.
      */
     public String addTaskMsg(Task task, int noOfTask) {
-        return (LINEBREAK
-                + "Roger! I will add this task in: \n"
-                + task.getTaskType()
-                + task.checkIsDone()
-                + " "
-                + task.getDescription() + "\n"
+        return ("Roger! I will add this task in: \n"
+                + task.toString() + "\n"
                 + "Now you have "
                 + noOfTask
-                + " tasks left in the list.\n"
-                + LINEBREAK);
+                + " tasks left in the list.\n");
     }
 
     /**
@@ -94,9 +75,7 @@ public class Ui {
      * @param taskList Task list that contains relevant tasks to be printed.
      */
     public String findTaskMsg(TaskList taskList) {
-        return (LINEBREAK
-                + "Are these what you were looking for?\n"
-                + taskList.toString()
-                + LINEBREAK);
+        return ("Are these what you were looking for?\n"
+                + taskList.toString());
     }
 }

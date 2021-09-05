@@ -25,15 +25,6 @@ public class Task {
     }
 
     /**
-     * Returns the checkbox of the task.
-     *
-     * @return String representation of checkbox.
-     */
-    public String checkIsDone() {
-        return this.isDoneBox;
-    }
-
-    /**
      * Returns the description of the task.
      *
      * @return Description of task.
@@ -50,7 +41,11 @@ public class Task {
         this.isDoneBox = "[X]";
     }
 
-    public String getTaskType() {
-        return this.taskType;
+    @Override
+    public String toString() {
+        return this.taskType
+                + this.isDoneBox
+                + " "
+                + this.getDescription();
     }
 }

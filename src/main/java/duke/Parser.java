@@ -33,47 +33,35 @@ public class Parser {
     }
 
     /**
-     * Return the description of the deadline task when input "deadline xxx /by..." command.
+     * Splits the input into 2 strings, description and date of task.
      *
      * @param input Input of user.
-     * @return The deadline task description.
+     * @return An array containing description and date of task.
      */
-    public String deadlineInputTaskParser(String input) {
+    public String[] deadlineInputParser(String input) {
+        if (!input.contains("/by")) {
+            //for missing dateline
+            throw new MissingDateException();
+        }
         String[] parts = input.split(" /by ");
-        return parts[0].replace("deadline " , "");
+        parts[0] = parts[0].replace("deadline " , "");
+        return parts;
     }
 
     /**
-     * Return the date of the deadline task when input "deadline... /by xxxx-xx-xx xxxx" command.
+     * Splits the input into 2 strings, description and date of task.
      *
-     * @param input Inout of the user.
-     * @return The deadline task date.
+     * @param input Input of user.
+     * @return An array containing description and date of task.
      */
-    public String deadlineInputDateParser(String input) {
-        String[] parts = input.split(" /by ");
-        return parts[1];
-    }
-
-    /**
-     * Return the description of the event task when input "event xxx /at..." command.
-     *
-     * @param input Input of the user.
-     * @return The event task description.
-     */
-    public String eventInputTaskParser(String input) {
+    public String[] eventInputParser(String input) {
+        if (!input.contains("/at")) {
+            //for missing dateline
+            throw new MissingDateException();
+        }
         String[] parts = input.split(" /at ");
-        return parts[0].replace("event " , "");
-    }
-
-    /**
-     * Return the date of the event task when input "event... /at xxxx-xx-xx xxxx" command.
-     *
-     * @param input Input of the user.
-     * @return The event task date.
-     */
-    public String eventInputDateParser(String input) {
-        String[] parts = input.split(" /at ");
-        return parts[1];
+        parts[0] = parts[0].replace("event " , "");
+        return parts;
     }
 
     public String findInputParser(String input) {
