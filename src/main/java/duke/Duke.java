@@ -1,8 +1,5 @@
 package duke;
 
-import java.util.Locale;
-import java.util.Scanner;
-
 import duke.commands.Command;
 import duke.ui.DialogBox;
 
@@ -31,6 +28,8 @@ import javafx.stage.Stage;
 public class Duke extends Application {
 
     private static final String LOGO = "Hewwo from dUWUk *w* OwO";
+    private final Image IMAGE_USER = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private final Image IMAGE_DUKE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
     private ItemList itemList;
     private Storage storage;
     private Ui ui;
@@ -40,9 +39,6 @@ public class Duke extends Application {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     /**
      * Constructor.
@@ -55,7 +51,7 @@ public class Duke extends Application {
             this.storage = new Storage("duke/data/duke.txt");
             this.itemList = this.storage.loadState();
         } catch (DukeException e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -135,9 +131,9 @@ public class Duke extends Application {
             handleUserInput();
         });
 
-        Label startText = new Label(this.LOGO);
+        Label startText = new Label(LOGO);
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(startText, new ImageView(duke))
+                DialogBox.getDukeDialog(startText, new ImageView(IMAGE_DUKE))
         );
     }
 
@@ -161,12 +157,12 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
-        boolean isExit = (userInput.getText().toLowerCase().equals("bye"));
+        boolean isExit = (userInput.getText().equalsIgnoreCase("bye"));
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userText, new ImageView(IMAGE_USER)),
+                DialogBox.getDukeDialog(dukeText, new ImageView(IMAGE_DUKE))
         );
         userInput.clear();
 
