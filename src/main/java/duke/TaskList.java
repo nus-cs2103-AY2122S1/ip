@@ -207,6 +207,7 @@ public class TaskList {
      *
      */
     public void printAllTasks() {
+        assert this.ui != null;
         ui.addDialog("Here are the tasks in your list:", true);
         String list = "";
         for (int i = 0; i < listOfTasks.size(); i++) {
@@ -221,6 +222,7 @@ public class TaskList {
      * @param s The specified date.
      */
     public void printAllTasksOnDate(String s) {
+        assert this.ui != null;
         ui.addDialog("Here are the tasks in your list due on " + s + ":", true);
         int counter = 1;
         String list = "";
@@ -240,6 +242,7 @@ public class TaskList {
      * @param s The specified word.
      */
     public void printAllTasksWith(String s) {
+        assert this.ui != null;
         ui.addDialog("Here are the tasks in your list with the word: " + s + ":", true);
         int counter = 1;
         String list = "";

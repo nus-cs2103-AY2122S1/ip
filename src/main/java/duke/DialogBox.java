@@ -28,6 +28,7 @@ public class DialogBox extends HBox {
 
         text.setWrapText(true);
 
+        assert displayPicture != null;
         Circle cir = new Circle(0,0,45);
         cir.setStroke(Color.LIGHTCYAN);
         cir.setFill(new ImagePattern(displayPicture));

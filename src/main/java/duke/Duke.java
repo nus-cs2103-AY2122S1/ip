@@ -43,6 +43,9 @@ public class Duke extends Application {
     public void runCommand(String userInput) {
         try {
             Command c = Parser.parseCommand(userInput);
+            assert this.tasks != null;
+            assert this.storage != null;
+            assert this.ui != null;
             c.execute(tasks, storage, ui);
         } catch (DukeException e) {
             ui.addDialog(e.getMessage(), true);
@@ -58,13 +61,5 @@ public class Duke extends Application {
         stage.show();
 
     }
-
-/*
-    public static void main(String[] args) {
-        //new Duke("saves/saves.txt").run();
-        new Duke("saves/saves.txt").run();
-    }
-
- */
 
 }
