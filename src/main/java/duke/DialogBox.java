@@ -13,7 +13,6 @@ import javafx.scene.Node;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -44,7 +43,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        displayPicture.setClip(new Circle(50,50,50));
+        displayPicture.setClip(new Circle(50, 50, 50));
         displayPicture.setImage(img);
     }
 

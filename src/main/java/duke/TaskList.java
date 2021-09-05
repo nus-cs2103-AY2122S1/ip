@@ -76,9 +76,9 @@ public class TaskList {
      */
     public String delete(String userInput, ArrayList<Task> userInputRecords) {
         try {
-            int itemToDelete = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
-            Task itemDeleted = userInputRecords.get(itemToDelete);
-            userInputRecords.remove(itemToDelete);
+            int itemIndex = Integer.parseInt(userInput.replaceAll("[^0-9]", "")) - 1;
+            Task itemDeleted = userInputRecords.get(itemIndex);
+            userInputRecords.remove(itemIndex);
             storage.autoSave();
             return "Noted. I've removed this task:\n" + itemDeleted + "\n"
                     + "Now you have " + userInputRecords.size() + " tasks in the list.\n";
@@ -148,7 +148,7 @@ public class TaskList {
             StringBuilder builder = new StringBuilder();
             builder.append("Here are the matching tasks in your list:");
             for (int i = 0; i < searchResults.size(); i++) {
-                builder.append("     " + (i + 1) + "." + searchResults.get(i));
+                builder.append("     ").append(i + 1).append(".").append(searchResults.get(i));
             }
             return builder.toString();
         }
