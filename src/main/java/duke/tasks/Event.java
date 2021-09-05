@@ -23,6 +23,7 @@ public class Event extends Task {
      */
     public Event(String description, String when, boolean done) throws UserInputError {
         super(description, Task.Type.EVENT, done);
+        assert !description.trim().equals("");
         try {
             this.when = LocalDate.parse(when.trim());
         } catch (DateTimeException e) {
