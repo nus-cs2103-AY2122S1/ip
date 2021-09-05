@@ -35,7 +35,7 @@ public class TaskList {
      *
      * @return String of the current <code>TaskList</code> that has been formatted properly.
      */
-    public String printList() {
+    protected String printList() {
 
         String listToString = IntStream
             .range(0, list.size())
@@ -49,7 +49,17 @@ public class TaskList {
         return listToString;
     }
 
-    public String handleAddNotif() {
+    private void handleAddTags(Task task, String tags){
+        if (!tags.equals("[]")) { // if there are tags
+            String tagsCleaned = tags.substring(1, tags.length() - 1); // remove "[]"
+            ArrayList<String> tagsList = new ArrayList<>(Arrays.asList(tagsCleaned.split(", ")));;
+            for (String tag : tagsList) {
+                task.addTag(tag);
+            }
+        }
+    }
+
+    private String handleAddNotif() {
         String result = "\n" + duke.getUi().showAddTask();
         try {
             result = result + "\n" + duke.getStorage().saveListToFile();
@@ -86,13 +96,7 @@ public class TaskList {
         default:
         }
 
-        String tagsCleaned = tags.substring(1, tags.length() - 1);
-        if (!tagsCleaned.equals("")) {
-            ArrayList<String> tagsList = new ArrayList<>(Arrays.asList(tagsCleaned.split(", ")));;
-            for (String tag : tagsList) {
-                task.addTag(tag);
-            }
-        }
+        handleAddTags(task, tags);
 
         list.add(task);
 

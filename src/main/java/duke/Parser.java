@@ -392,7 +392,7 @@ public class Parser {
     }
 
     private void handleNewTask(String description, Object d1, Category category) {
-        appendResponse(duke.getTasks().createTask(description, d1, category, false, true, ""));
+        appendResponse(duke.getTasks().createTask(description, d1, category, false, true, "[]"));
     }
 
 }
