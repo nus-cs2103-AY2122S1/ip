@@ -33,7 +33,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String formattedTimeDue = this.timeDue == null
-                ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+                ? ""
+                : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return super.toString() + String.format(" (by: %s)", formattedTimeDue);
     }
 }
