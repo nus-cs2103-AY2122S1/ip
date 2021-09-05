@@ -15,6 +15,8 @@ class Deadline extends Task {
 
     protected String deadline;
     protected LocalDate date;
+    protected String symbol;
+    protected String dateFormat;
 
     /**
      * Constructor for Deadline.
@@ -25,6 +27,8 @@ class Deadline extends Task {
     public Deadline(String description, String deadline) {
         super(description);
         this.deadline = deadline;
+        symbol = "[D]";
+        dateFormat = "";
     }
 
     /**
@@ -38,6 +42,9 @@ class Deadline extends Task {
         super(description);
         this.date = date;
         this.deadline = deadline;
+        symbol = "[D]";
+        dateFormat = date.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
@@ -47,7 +54,7 @@ class Deadline extends Task {
      */
     public String getDeadLine() {
         if (date != null) {
-            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + deadline;
+            return dateFormat + " " + deadline;
         } else {
             return deadline;
         }
@@ -56,12 +63,12 @@ class Deadline extends Task {
     @Override
     public String toString() {
         if (date == null) {
-            return "[D]" + super.toString() + " (by: " + deadline + ")";
+            return symbol + super.toString() + " (by: "
+                    + deadline + ")";
         } else {
-            return "[D]" + super.toString() + " (by: " +
-                    date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + deadline + ")";
+            return symbol + super.toString() + " (by: "
+                    + dateFormat + " " + deadline + ")";
         }
-
     }
 
 }
