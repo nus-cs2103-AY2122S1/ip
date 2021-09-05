@@ -3,6 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
@@ -34,22 +35,24 @@ public class Parser {
         switch (command) {
         case "list":
             return new ListCommand("list");
-        case "done":
-            if (fullCommand.length == 1) {
-                throw new DukeException("Please give an index number");
-            }
 
-            int doneIndex = Integer.parseInt(fullCommand[1]);
-            checkIndex(doneIndex, tasks.size());
+        case "done":
+            hasIndex(fullCommand);
+
+            ArrayList<Integer> doneIndex = new ArrayList<>();
+            for (int i = 0; i < fullCommand.length; i++) {
+                int index = Integer.parseInt(fullCommand[i]);
+                isValidIndex(index, tasks.size());
+                doneIndex.add(index);
+            }
 
             return new DoneCommand("done", doneIndex);
+
         case "delete":
-            if (fullCommand.length == 1) {
-                throw new DukeException("Please give an index number");
-            }
+            hasIndex(fullCommand);
 
             int deleteIndex = Integer.parseInt(fullCommand[1]);
-            checkIndex(deleteIndex, tasks.size());
+            isValidIndex(deleteIndex, tasks.size());
 
             return new DeleteCommand("delete", deleteIndex);
         case "todo":
@@ -60,6 +63,7 @@ public class Parser {
             }
 
             return new AddTodoCommand(desc);
+
         case "deadline":
             String by;
 
@@ -103,6 +107,12 @@ public class Parser {
         }
     }
 
+    public static void hasIndex(String[] commandline) throws DukeException {
+        if (commandline.length == 1) {
+            throw new DukeException("Please give an index number");
+        }
+    }
+
     /**
      * Checks if the index number that the user input is valid.
      *
@@ -110,7 +120,7 @@ public class Parser {
      * @param lengthOfList the length of the user's TaskList.
      * @throws DukeException If the index number is negative or more than length of the TaskList.
      */
-    public static void checkIndex(int i, int lengthOfList) throws DukeException {
+    public static void isValidIndex(int i, int lengthOfList) throws DukeException {
         if (i <= 0) {
             throw new DukeException("Please give an index number > 0");
         } else if (i > lengthOfList) {
@@ -120,6 +130,7 @@ public class Parser {
 
     /**
      * Parses the date
+     *
      * @param date The date of the task in String format.
      * @return LocalDateTime of the task.
      * @throws DukeException If the date format is invalid
