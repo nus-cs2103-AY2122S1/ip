@@ -7,6 +7,8 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    protected String tag;
+    protected boolean isTagged;
 
     /**
      * Constructor for a Task instance that takes in a description.
@@ -54,12 +56,40 @@ public class Task {
     }
 
     /**
+     * Labels the task.
+     *
+     * @param tag The specified tag name.
+     */
+    public void setTag(String tag) {
+        this.tag = tag;
+        isTagged = true;
+    }
+
+    /**
+     * Returns the attached label of the task.
+     * If task is not tagged, return an empty String.
+     *
+     * @return The label of the task.
+     */
+    public String getTag() {
+        if (isTagged) {
+            return tag;
+        } else {
+            return " ";
+        }
+    }
+
+    /**
      * Returns the string representation of a Task instance.
      *
      * @return A string representing a Task instance.
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        if (isTagged) {
+            return "[" + getStatusIcon() + "][#" + tag + "] " + description;
+        } else {
+            return "[" + getStatusIcon() + "][ ] " + description;
+        }
     }
 }
