@@ -22,11 +22,15 @@ public class DoneCommand extends DukeCommand {
         try {
             Task task = list.get(id);
             task.markDone();
-            return "Nice! I've marked this task as done:\n"
-                    + "  "
-                    + task.toString();
+            return stringifyMessage(task.toString());
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidArgumentsException();
         }
+    }
+
+    private String stringifyMessage(String taskString) {
+        return "Nice! I've marked this task as done:\n"
+                + "  "
+                + taskString;
     }
 }
