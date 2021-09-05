@@ -4,18 +4,18 @@ package duke;
  * Represents a task that has a description and deadline.
  */
 public class Deadline extends Task {
-    protected String by;
+    protected String deadline;
 
     /**
      * A constructor to create a Deadline object.
      *
      * @param description The description of the Deadline object.
-     * @param by The deadline of the Deadline object.
+     * @param deadline The deadline of the Deadline object.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String deadline) {
         super(description);
-        this.by = by.equals("") ? "by: " : by;
-        super.deadline = this.by;
+        this.deadline = deadline.equals("") ? "by: " : deadline;
+        super.deadline = this.deadline;
     }
 
     /**
@@ -25,6 +25,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(" + by + ")";
+        return "[D]" + super.toString() + "(" + deadline + ")";
     }
 }

@@ -3,6 +3,7 @@ package duke;
 import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
+import static java.lang.Integer.decode;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -47,31 +48,33 @@ public class Parser {
     }
 
     /**
-     * Makes sense of the user input.
+     * Converts the user input.
      * @return A response given an input from the user.
      */
     public String parse(String input) {
         do {
             try {
                 arr = input.split(" ");
-                if (input.equals("bye")) {
-                    return ui.printBye();
-                } else if (arr[0].equals("done")) {
-                    return parseDone(arr);
-                } else if (arr[0].equals("delete")) {
-                    return parseDelete(arr);
-                } else if (arr[0].equals("todo")) {
-                    return parseTodo(arr);
-                } else if (arr[0].equals("deadline")) {
-                    return parseDeadline(arr);
-                } else if (arr[0].equals("event")) {
-                    return parseEvent(arr);
-                } else if (input.equals("list")) {
-                    return parseList();
-                } else if (arr[0].equals("find")) {
-                    return parseFind(arr);
-                } else {
-                    return "Command not Found";
+                String firstWord = arr[0];
+                switch (firstWord) {
+                    case "bye":
+                        return ui.printBye();
+                    case "done":
+                        return parseDone(arr);
+                    case "delete":
+                        return parseDelete(arr);
+                    case "todo":
+                        return parseTodo(arr);
+                    case "deadline":
+                        return parseDeadline(arr);
+                    case "event":
+                        return parseEvent(arr);
+                    case "list":
+                        return parseList();
+                    case "find":
+                        return parseFind(arr);
+                    default:
+                        throw new InvalidCommandException("Command Not Found");
                 }
             } catch (DukeException e) {
                 return e.toString();

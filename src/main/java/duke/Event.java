@@ -4,18 +4,18 @@ package duke;
  * Represents a task that has a description and time.
  */
 public class Event extends Task {
-    protected String by;
+    protected String deadline;
 
     /**
      * A constructor to create an Event object.
      *
      * @param description The description of an Event object.
-     * @param by The deadline of an Event object.
+     * @param deadline The deadline of an Event object.
      */
-    public Event(String description, String by) {
+    public Event(String description, String deadline) {
         super(description);
-        this.by = by.equals("") ? "at: " : by;
-        super.deadline = this.by;
+        this.deadline = deadline.equals("") ? "at: " : deadline;
+        super.deadline = this.deadline;
     }
 
     /**
@@ -25,6 +25,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(" + by + ")";
+        return "[E]" + super.toString() + "(" + deadline + ")";
     }
 }
