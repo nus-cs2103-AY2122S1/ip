@@ -1,6 +1,7 @@
 package pilcrow;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 /**
  * Abstraction to handle list of tasks managed when the Pilcrow program runs.
@@ -54,6 +55,25 @@ public class TaskList {
             throw new InvalidInputException("Must enter valid task number.");
         }
         this.taskList.remove(index);
+    }
+
+    /**
+     * Sorts a TaskList according to type, then by lexicographical ordering.
+     */
+    public void sortTaskList() {
+        this.taskList.sort((task1, task2) -> {
+                String type1 = task1.getType();
+                String type2 = task2.getType();
+                int typeComparison = type1.compareTo(type2);
+                if (typeComparison != 0) {
+                    return typeComparison;
+                }
+
+                String name1 = task1.getTaskName();
+                String name2 = task2.getTaskName();
+                int nameComparison = name1.compareTo(name2);
+                return nameComparison;
+            });
     }
 
     /**

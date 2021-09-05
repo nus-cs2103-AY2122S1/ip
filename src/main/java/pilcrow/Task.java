@@ -56,12 +56,21 @@ public class Task {
     }
 
     /**
-     * Dummy method, overridden by methods in subclasses.
+     * Dummy method to convert a Task into its stored form.
      * @return Dummy task
      */
     public String convertToStoredTask() {
         String storedTask = "";
         return storedTask;
+    }
+
+    /**
+     * Dummy method to return a task's type.
+     * @return Tasks's type, in String form.
+     */
+    public String getType() {
+        String taskType = "";
+        return taskType;
     }
 
     public Boolean containsString(String string) {
@@ -106,6 +115,14 @@ public class Task {
         public String convertToStoredTask() {
             String storedTask = "todo " + (this.isDone ? 'T' : 'F') + this.taskName;
             return storedTask;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public String getType() {
+            String taskType = "todo";
+            return taskType;
         }
 
         /**
@@ -161,6 +178,14 @@ public class Task {
             return storedTask;
         }
 
+        /**
+         * {@inheritDoc}
+         */
+        public String getType() {
+            String taskType = "deadline";
+            return taskType;
+        }
+
         public LocalDate getDeadline() {
             return this.deadline;
         }
@@ -213,6 +238,14 @@ public class Task {
         public String convertToStoredTask() {
             String storedTask = "event " + (this.isDone ? 'T' : 'F') + this.taskName + "/" + this.getDuration();
             return storedTask;
+        }
+
+        /**
+         * {@inheritDoc}
+         */
+        public String getType() {
+            String taskType = "deadline";
+            return taskType;
         }
 
         public String getDuration() {

@@ -51,6 +51,12 @@ public class Ui {
         return text;
     }
 
+    public String printTaskListSortedMessage() {
+        String text = "List of tasks is sorted.";
+        System.out.println(text);
+        return text;
+    }
+
     /**
      * Prints out an "Unaccepted Command" message.
      * Used when the user enters a command that is not recognized.

@@ -103,6 +103,10 @@ public class Pilcrow {
             storage.save(taskList);
             text = ui.printDeleteTaskMessage(index);
             break;
+        case "sort":
+            taskList.sortTaskList();
+            text = ui.printTaskListSortedMessage();
+            break;
         case "bye":
             text = ui.printGoodbyeMessage();
             break;
