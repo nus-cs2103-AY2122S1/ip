@@ -3,7 +3,7 @@ package duke;
 import java.util.Scanner;
 
 /**
- * duke.ChatbotUI accepts user input, and outputs a given message.
+ * ChatbotUI accepts user input, and outputs a given message.
  *
  * @author Jovyn Tan
  * @version CS2103 AY21/22 Sem 1
@@ -14,7 +14,7 @@ public interface ChatbotUI {
     *
     * @return A string that the user types into the console.
     */
-    public static String acceptUserInput(Scanner sc) {
+    static String acceptUserInput(Scanner sc) {
         String userInput = sc.nextLine();
         return userInput;
     }
@@ -24,7 +24,7 @@ public interface ChatbotUI {
     *
     * @param message The message to be printed out.
     */
-    public static void printMessage(String message) {
+    static void printMessage(String message) {
         System.out.println("---------------------------------------------------------");
         System.out.println("\t" + message.replace("\n", "\n\t"));
         System.out.println("---------------------------------------------------------");
