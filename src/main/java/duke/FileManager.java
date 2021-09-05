@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,31 +36,39 @@ public class FileManager {
             if (taskList.createNewFile()) {
                 return new ArrayList<>();
             } else {
-                Scanner fileReader = new Scanner(taskList);
-                ArrayList<Task> tasks = new ArrayList<>();
-                while (fileReader.hasNextLine()) {
-                    try {
-                        String nextLine = fileReader.nextLine();
-                        String[] splitString = nextLine.split(Task.SEP);
-                        if (splitString.length < 3) {
-                            throw new DukeException("Invalid input in file");
-                        }
-                        Task newTask = Task.makeTask(splitString[0], splitString[1]);
-                        if (splitString[2].equals("1")) {
-                            newTask.markDone();
-                        }
-                        tasks.add(newTask);
-                    } catch (DukeException e) {
-                        System.out.println("Invalid input in file");
-                    }
-                }
-                return tasks;
+                return getTasks(taskList);
             }
         } catch (IOException e) {
             System.out.println("Error occured initalising file");
             e.printStackTrace();
             return null;
         }
+    }
+
+    private static ArrayList<Task> getTasks(File taskList) throws FileNotFoundException {
+        Scanner fileReader = new Scanner(taskList);
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (fileReader.hasNextLine()) {
+            try {
+                getOneTask(fileReader, tasks);
+            } catch (DukeException e) {
+                System.out.println("Invalid input in file");
+            }
+        }
+        return tasks;
+    }
+
+    private static void getOneTask(Scanner fileReader, ArrayList<Task> tasks) throws DukeException {
+        String nextLine = fileReader.nextLine();
+        String[] splitString = nextLine.split(Task.SEP);
+        if (splitString.length < 3) {
+            throw new DukeException("Invalid input in file");
+        }
+        Task newTask = Task.makeTask(splitString[0], splitString[1]);
+        if (splitString[2].equals("1")) {
+            newTask.markDone();
+        }
+        tasks.add(newTask);
     }
 
     /**

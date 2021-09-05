@@ -16,6 +16,7 @@ public abstract class Task {
 
     /**
      * Makes a task based on the input.
+     *
      * @param type type of command.
      * @param description description of the command.
      * @return task based on input.
@@ -27,7 +28,7 @@ public abstract class Task {
         }
         switch (type) {
             case "todo": {
-                return (ToDos.of(description));
+                return (ToDo.of(description));
             }
             case "deadline": {
                 return (Deadline.of(description));
@@ -51,6 +52,7 @@ public abstract class Task {
 
     /**
      * Returns string representation of the task.
+     *
      * @return string representation of the task.
      */
     @Override
@@ -58,18 +60,19 @@ public abstract class Task {
         String doneIndicator = this.done
                 ? "[X]"
                 : "[ ]";
-        return (
-                doneIndicator + " " + this.description
-                );
+        return (doneIndicator + " " + this.description);
     }
 
     /**
      * Returns string representation of the task to be saved in the hard disk.
+     *
      * @param time time of the task.
      * @return string representation of the task to be saved in the hard disl/
      */
     protected String toSaveInFile(String time) {
-        return String.format("%s%s%s%s", this.description, time, Task.SEP, this.done ? "1" : "0");
+        String doneString = this.done ? "1" : "0";
+        return String.format("%s%s%s%s", this.description, time, Task.SEP, doneString);
     }
+
     public abstract String typeString();
 }

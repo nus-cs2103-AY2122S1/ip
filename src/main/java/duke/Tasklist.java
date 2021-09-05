@@ -122,12 +122,12 @@ public class Tasklist {
         if (this.count == 0) {
             return "Nothing on your list!";
         }
-        String str = "";
+        String strRepresentation = "";
         int count = 1;
         for (Task task: tasklist) {
-            str += count + ". " + task + "\n";
+            strRepresentation += count + ". " + task + "\n";
             count++;
         }
-        return str;
+        return strRepresentation;
     }
 }

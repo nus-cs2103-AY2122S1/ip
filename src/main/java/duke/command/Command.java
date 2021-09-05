@@ -12,6 +12,7 @@ import duke.task.Task;
 public abstract class Command {
     /**
      * Makes a command based on input.
+     *
      * @param type command type.
      * @param task the task to be executed.
      * @return the command that is made.
@@ -29,6 +30,7 @@ public abstract class Command {
 
     /**
      * Makes a command based on input.
+     *
      * @param type command type.
      * @param index index of command to be executed.
      * @return the command that is made.
@@ -55,6 +57,7 @@ public abstract class Command {
 
     /**
      * Makes a command based on input.
+     *
      * @param type command type.
      * @return the command that is made.
      * @throws DukeException if input is invalid.
@@ -74,6 +77,7 @@ public abstract class Command {
 
     /**
      * Makes a command based on input.
+     *
      * @param type command type.
      * @param keywords keywords to be executed on.
      * @return the command that is made.
@@ -97,5 +101,6 @@ public abstract class Command {
      * @throws DukeException if command has issues.
      */
     public abstract String execute(Tasklist task, Ui ui, FileManager fileManager) throws DukeException;
+
     public abstract boolean isExit();
 }
