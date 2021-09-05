@@ -32,28 +32,31 @@ public final class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
-        if (super.getInput().size() == 1) {
+        assert lst != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
+        if (getInput().size() == 1) {
             return "     Unable to delete task without an index. Please input index :)\n"
                     + "     Please input in the form: 'delete <task index>'.\n"
                     + "     Note: list can be used to see the current tasks.";
-        } else {
-            if (lst.getTasks().isEmpty()) {
-                return "     List is empty, no tasks to delete, looking good!";
-            } else if (super.getInput().size() > 2) {
-                return "     Please input in the form: 'delete <index>'.";
-            } else {
-                try {
-                    int index = Integer.parseInt(super.getInput().get(1)) - 1;
-                    String result = lst.deleteTask(index);
-                    storage.resetFile(lst.getTasks());
-                    return result;
-                } catch (NumberFormatException e) {
-                    return "     Please use a number instead :(";
-                } catch (IndexOutOfBoundsException e) {
-                    return "     Please input a valid index :)\n"
-                            + "     Note: 'list' can be used to see the current tasks.";
-                }
-            }
+        }
+        if (getInput().size() > 2) {
+            return "     Please input in the form: 'delete <index>'.";
+        }
+
+        if (lst.getTasks().isEmpty()) {
+            return "     List is empty, no tasks to delete, looking good!";
+        }
+        try {
+            int index = Integer.parseInt(getInput().get(1)) - 1;
+            String result = lst.deleteTask(index);
+            storage.resetFile(lst.getTasks());
+            return result;
+        } catch (NumberFormatException e) {
+            return "     Please use a number instead :(";
+        } catch (IndexOutOfBoundsException e) {
+            return "     Please input a valid index :)\n"
+                    + "     Note: 'list' can be used to see the current tasks.";
         }
     }
 }

@@ -14,7 +14,6 @@ import ui.Ui;
  */
 public final class DeadlineCommand extends Command {
 
-
     /**
      * Constructs the DeadlineCommand object.
      *
@@ -34,6 +33,9 @@ public final class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
+        assert lst != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         try {
             DeadLineTask d = new DeadLineTask(lst.filterInfo(getInput()),
                     lst.getDeadline(getInput()));

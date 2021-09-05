@@ -34,6 +34,9 @@ public final class DueCommand extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
+        assert lst != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         try {
             ArrayList<Task> tasksDue = lst.findTasksDue(getInput().get(1));
             if (tasksDue.isEmpty()) {

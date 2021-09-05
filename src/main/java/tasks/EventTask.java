@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
  * as per input by user.
  */
 public final class EventTask extends Task {
+
     /** Stores the type of task information that identifies a EventTask */
     private final String taskType = "[E]";
 
@@ -49,6 +50,7 @@ public final class EventTask extends Task {
     }
 
     private LocalDate convertDate(String input) {
+        assert input != null : "no date detected";
         String[] date = input.substring(0, input.length() - 4).split("/");
         int day = Integer.parseInt(date[0].replaceAll(" ", ""));
         int month = Integer.parseInt(date[1].replaceAll(" ", ""));
@@ -113,10 +115,10 @@ public final class EventTask extends Task {
      */
     @Override
     public String getSaveFormat() {
-        if (super.getStatus().equals("[ ]")) {
-            return "E" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.date + "|" + 0;
+        if (getStatus().equals("[ ]")) {
+            return "E" + "|" + getSimpleTaskDescription().strip() + "|" + this.date + "|" + 0;
         } else {
-            return "E" + "|" + this.getSimpleTaskDescription().strip() + "|" + this.date + "|" + 1;
+            return "E" + "|" + getSimpleTaskDescription().strip() + "|" + this.date + "|" + 1;
         }
     }
 }

@@ -34,6 +34,9 @@ public final class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList lst, Ui ui, Storage storage) {
+        assert lst != null : "invalid TaskList object detected";
+        assert ui != null : "invalid Ui object detected";
+        assert storage != null : "invalid Storage object detected";
         ArrayList<Task> tasks = lst.getTasks();
         try {
             if (getInput().size() == 1) {
