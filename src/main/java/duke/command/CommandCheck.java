@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import duke.ContactsList;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -47,7 +48,7 @@ public class CommandCheck extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage st, Ui ui) {
+    public void execute(TaskList tl, Storage st, Ui ui, ContactsList cl) {
         if (isValidArgument()) {
             tl.printAllTasksOnDate(arguments.get(0));
         } else {

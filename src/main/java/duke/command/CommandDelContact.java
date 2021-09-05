@@ -8,6 +8,8 @@ import duke.Ui;
 import duke.contact.Contact;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The CommandAddContact class handles the command "addcontact" that adds a new contact
@@ -16,12 +18,13 @@ import java.util.ArrayList;
  * @author Loh Wen Hao Aaron
  *
  */
-public class CommandAddContact extends Command {
-    public static final String KEYWORD = "addcontact";
+public class CommandDelContact extends Command {
+    public static final String KEYWORD = "delcontact";
+    private static final String ARG_FORMAT = "\\d|\\d\\d|100";
     private ArrayList<String> arguments;
 
 
-    public CommandAddContact(ArrayList<String> arguments) {
+    public CommandDelContact(ArrayList<String> arguments) {
         this.arguments = arguments;
     }
 
@@ -33,17 +36,26 @@ public class CommandAddContact extends Command {
      */
     @Override
     public boolean isValidArgument() {
-        return arguments.size() == 4;
+        if (arguments.size() == 1) {
+            Pattern pattern = Pattern.compile(ARG_FORMAT);
+            Matcher matcher = pattern.matcher(arguments.get(0));
+            return matcher.matches();
+        } else {
+            return false;
+        }
     }
 
     @Override
     public void execute(TaskList tl, Storage st, Ui ui, ContactsList cl) {
         if (isValidArgument()) {
-            Contact newContact = new Contact(arguments.get(0), arguments.get(1),
-                    arguments.get(2), arguments.get(3));
-            cl.addContact(newContact);
+            int number = Integer.parseInt(arguments.get(0)) - 1;
+            if (number + 1 <= cl.numberOfContacts() && number + 1 > 0) {
+                cl.removeContact(number);
+            } else {
+                throw new DukeException("That contact does not exist!");
+            }
         } else {
-            throw new DukeException("Invalid argument for Command: AddContact");
+            throw new DukeException("Invalid argument for command: delcontact");
         }
     }
 }

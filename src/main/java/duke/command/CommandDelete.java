@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.ContactsList;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -43,13 +44,11 @@ public class CommandDelete extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage st, Ui ui) {
+    public void execute(TaskList tl, Storage st, Ui ui, ContactsList cl) {
         if (isValidArgument()) {
             int number = Integer.parseInt(arguments.get(0)) - 1;
             if (number + 1 <= tl.numberOfTasks() && number + 1 > 0) {
-                ui.addDialog("Noted, I've removed this task\n" + tl.getTaskString(number), true);
                 tl.removeTask(number);
-                ui.addDialog("Now you have " + tl.numberOfTasks() + " tasks in the list.", true);
             } else {
                 throw new DukeException("That task does not exist!");
             }

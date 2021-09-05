@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
+import duke.ContactsList;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -61,7 +62,7 @@ public class CommandEvent extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage st, Ui ui) {
+    public void execute(TaskList tl, Storage st, Ui ui, ContactsList cl) {
         if (isValidArgument()) {
             Event newEvent;
             newEvent = new Event(arguments.get(0), arguments.get(2), arguments.get(3));

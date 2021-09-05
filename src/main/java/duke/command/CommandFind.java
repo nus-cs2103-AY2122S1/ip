@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.ContactsList;
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -43,7 +44,7 @@ public class CommandFind extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage st, Ui ui) {
+    public void execute(TaskList tl, Storage st, Ui ui, ContactsList cl) {
         if (isValidArgument()) {
             tl.printAllTasksContaining(arguments.get(0));
         } else {

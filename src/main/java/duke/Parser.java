@@ -3,8 +3,11 @@ package duke;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.command.CommandAddContact;
+import duke.command.CommandDelContact;
 import duke.command.Command;
 import duke.command.CommandCheck;
+import duke.command.CommandContacts;
 import duke.command.CommandDeadline;
 import duke.command.CommandDelete;
 import duke.command.CommandDone;
@@ -76,6 +79,12 @@ public class Parser {
             return new CommandCheck(arguments);
         case (CommandFind.KEYWORD):
             return new CommandFind(arguments);
+        case (CommandContacts.KEYWORD):
+            return new CommandContacts();
+        case (CommandAddContact.KEYWORD):
+            return new CommandAddContact(arguments);
+        case (CommandDelContact.KEYWORD):
+            return new CommandDelContact(arguments);
         default:
             return new CommandHelp();
 

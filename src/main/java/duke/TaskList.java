@@ -45,7 +45,7 @@ public class TaskList {
      *
      */
     public void initialiseTaskList() {
-        System.out.println("Loading save file...");
+        System.out.println("Loading task list save file...");
         ArrayList<String> tasks = new ArrayList<>();
         saveFileInput.add("T");
         tasks.add(saveFileInput.get(0));
@@ -138,7 +138,9 @@ public class TaskList {
         if (i > listOfTasks.size()) {
             throw new DukeException("Task does not exist!");
         } else {
+            ui.addDialog("Noted, I've removed this task\n" + listOfTasks.get(i), true);
             listOfTasks.remove(i);
+            ui.addDialog("Now you have " + numberOfTasks() + " tasks in the list.", true);
         }
         this.storage.updateSaveFile(this);
     }
