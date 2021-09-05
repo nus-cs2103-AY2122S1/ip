@@ -124,6 +124,7 @@ public class TaskList {
         if (database.size() == 0) {
             return "You have no tasks!";
         }
+        
         IntStream.range(0, database.size())
                 .forEach(x -> sb.append(String.format("\n\t %d. %s", x + 1, database.get(x))));
         return sb.substring(1);
