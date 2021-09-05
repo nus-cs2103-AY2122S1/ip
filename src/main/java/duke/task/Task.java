@@ -1,6 +1,8 @@
 package duke.task;
 
 
+import java.time.LocalDateTime;
+
 import duke.DukeException;
 
 
@@ -9,7 +11,7 @@ import duke.DukeException;
  *
  * @author Aiken Wong
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -121,6 +123,33 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    /**
+     * Returns the LocalDateTime stored in the task, if any.
+     * The LocalDateTime is to be used for comparison with other tasks.
+     *
+     * @return LocalDateTime for comparison.
+     */
+    protected LocalDateTime getComparisonTime() {
+        return null;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+
+        if (this.getComparisonTime() == null && task.getComparisonTime() == null) {
+            return 0;
+        } else if (this.getComparisonTime() == null) {
+            return -1;
+        } else if (task.getComparisonTime() == null) {
+            return 1;
+        } else {
+            return this.getComparisonTime().compareTo(task.getComparisonTime());
+        }
+
+
+    }
+
 
     @Override
     public String toString() {

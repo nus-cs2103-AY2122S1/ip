@@ -108,6 +108,12 @@ public class Deadline extends Task {
         return LocalDateTime.parse(date.toString());
     }
 
+    @Override
+    protected LocalDateTime getComparisonTime() {
+        return this.getDate();
+    }
+
+
 
     @Override
     public String toString() {

@@ -89,6 +89,13 @@ public class TaskList {
         return foundTasks;
     }
 
+    /**
+     * Sorts the current tasks by date.
+     */
+    public void sortByDate() {
+        this.tasks.sort(new TaskDateTimeComparator());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

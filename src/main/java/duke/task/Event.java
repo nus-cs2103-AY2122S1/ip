@@ -149,6 +149,12 @@ public class Event extends Task {
     }
 
     @Override
+    protected LocalDateTime getComparisonTime() {
+        return this.getStartDateTime();
+    }
+
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
