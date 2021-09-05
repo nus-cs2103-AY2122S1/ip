@@ -28,31 +28,59 @@ public class Task {
         String[] taskArr = task.split(" ", 2);
         String firstWord = taskArr[0];
 
-        if (firstWord.equals("todo")) {
-           if (taskArr.length < 2) {
-               throw new DukeMissingTaskDescription(new ToDo(" "), new IllegalArgumentException());
-           }
-           return new ToDo(taskArr[1]);
-        } else if (firstWord.equals("deadline")) {
-           if (taskArr.length < 2) {
-               String[] emptyString = new String[2];
-               throw new DukeMissingTaskDescription(new Deadline(emptyString), new IllegalArgumentException());
-           } else if (taskArr[1].split("/by", 2).length < 2){
-               String[] emptyString = new String[2];
-               throw new DukeIncorrectTaskDescription(new Deadline(emptyString), new IllegalArgumentException());
-           }
-           return new Deadline(taskArr[1].split("/by", 2));
-        } else if (firstWord.equals("event")) {
-           if (taskArr.length < 2) {
-               String[] emptyString = new String[2];
-               throw new DukeMissingTaskDescription(new Event(emptyString), new IllegalArgumentException());
-           } else if (taskArr[1].split("/at", 2).length < 2){
-               String[] emptyString = new String[2];
-               throw new DukeIncorrectTaskDescription(new Event(emptyString), new IllegalArgumentException());
-           }
-           return new Event(taskArr[1].split("/at", 2));
-        } else {
+        if (taskArr.length < 2) {
+            deriveTaskError(firstWord);
+        }
+
+        Task toCreate = deriveTask(firstWord, taskArr);
+
+        return toCreate;
+    }
+
+    private static void deriveTaskError(String firstWord) throws DukeException {
+        switch (firstWord) {
+        case "todo":
+            throw new DukeMissingTaskDescription(new ToDo(" "), new IllegalArgumentException());
+        case "deadline":
+            throw new DukeMissingTaskDescription(new Deadline(new String[2]), new IllegalArgumentException());
+        case "event":
+            throw new DukeMissingTaskDescription(new Event(new String[2]), new IllegalArgumentException());
+        default:
             throw new DukeIncorrectCommandWord(new IllegalArgumentException());
+        }
+    }
+
+    private static Task deriveTask(String firstWord, String[] taskArr) throws DukeException {
+        switch (firstWord) {
+        case "todo":
+            return new ToDo(taskArr[1]);
+        case "deadline":
+            checkFormat(firstWord, taskArr);
+            return new Deadline(taskArr[1].split("/by", 2));
+        case "event":
+            checkFormat(firstWord, taskArr);
+            return new Event(taskArr[1].split("/at", 2));
+        default:
+            throw new DukeIncorrectCommandWord(new IllegalArgumentException());
+        }
+    }
+
+    private static void checkFormat(String firstWord, String[] taskArr) {
+        switch (firstWord) {
+        case "deadline":
+            if (taskArr[1].split("/by", 2).length < 2){
+                String[] emptyString = new String[2];
+                throw new DukeIncorrectTaskDescription(new Deadline(emptyString), new IllegalArgumentException());
+            }
+            return;
+        case "event":
+            if (taskArr[1].split("/at", 2).length < 2){
+                String[] emptyString = new String[2];
+                throw new DukeIncorrectTaskDescription(new Event(emptyString), new IllegalArgumentException());
+            }
+            return;
+        default:
+            return;
         }
     }
 

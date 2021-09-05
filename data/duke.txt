@@ -1,3 +1,2 @@
-E | 1 | sep | 2021-10-03
-T | 0 | add do cs2100
+T | 1 | add do cs2100
 T | 0 | add task
