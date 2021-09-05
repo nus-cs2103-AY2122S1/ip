@@ -14,7 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    Duke currDuke = Duke.getCurrDuke();
+    private Duke currDuke = Duke.getCurrDuke();
 
 
     /**

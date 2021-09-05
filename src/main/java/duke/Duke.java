@@ -48,6 +48,7 @@ public class Duke {
     /**
      * Use to get the current instance of Duke that is running.
      * Creates a new instance of Duke if there is none running.
+     *
      * @return the Duke object that is running.
      */
     public static Duke getCurrDuke() {
@@ -58,7 +59,7 @@ public class Duke {
     }
 
     /**
-     * Getter for Duke's Command Parser.
+     * Gets Duke's Command Parser.
      *
      * @return the current Duke Command Parser.
      */
@@ -67,7 +68,7 @@ public class Duke {
     }
 
     /**
-     * Getter for Duke's Storage Manager.
+     * Gets Duke's Storage Manager.
      *
      * @return the current Duke Storage Manager.
      */
@@ -76,7 +77,7 @@ public class Duke {
     }
 
     /**
-     * Getter for Duke's current list manager.
+     * Gets Duke's current list manager.
      *
      * @return the current list manager.
      */
