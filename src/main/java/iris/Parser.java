@@ -35,39 +35,40 @@ public class Parser {
     /**
      * Parses a given command
      *
-     * @param command raw command string to parse
+     * @param fullCommand raw command string to parse
      * @return Command object representing the action to be taken
      * @throws IrisException if command is invalid
      */
-    public static Command parse(String command) throws IrisException {
-        if (command.equals("list")) {
+    public static Command parse(String fullCommand) throws IrisException {
+        String command = fullCommand.split(" ")[0];
+        String[] splitted;
+
+        switch (command) {
+        case "list":
             return new ListCommand();
-        } else if (command.startsWith("todo")) {
-            return new ToDoCommand(getMetadata(command));
-        } else if (command.startsWith("deadline")) {
-            String[] splitted = getMetadata(command).split(" /by ");
+        case "todo":
+            return new ToDoCommand(getMetadata(fullCommand));
+        case "deadline":
+            splitted = getMetadata(fullCommand).split(" /by ");
             if (splitted.length != 2) {
-                throw new IrisException("deadline should have 2 arguments: a name and a time");
+                throw new IrisException("Expected format: deadline [name] /by [date]");
             }
             return new DeadlineCommand(splitted[0], splitted[1]);
-        } else if (command.startsWith("event")) {
-            String[] splitted = getMetadata(command).split(" /at ");
+        case "event":
+            splitted = getMetadata(fullCommand).split(" /at ");
             if (splitted.length != 2) {
-                throw new IrisException("event should have 2 arguments: a name and a time");
+                throw new IrisException("Expected format: event [name] /at [date]");
             }
             return new EventCommand(splitted[0], splitted[1]);
-        } else if (command.startsWith("done")) {
-            int index = parseInt(getMetadata(command));
-            return new DoneCommand(index);
-        } else if (command.startsWith("delete")) {
-            int index = parseInt(getMetadata(command));
-            return new DeleteCommand(index);
-        } else if (command.startsWith("find")) {
-            String searchTerm = getMetadata(command);
-            return new FindCommand(searchTerm);
-        } else if (command.startsWith("bye")) {
+        case "done":
+            return new DoneCommand(parseInt(getMetadata(fullCommand)));
+        case "delete":
+            return new DeleteCommand(parseInt(getMetadata(fullCommand)));
+        case "find":
+            return new FindCommand(getMetadata(fullCommand));
+        case "bye":
             return new ByeCommand();
-        } else {
+        default:
             throw new IrisException("I'm sorry, but I don't know what that means.");
         }
     }
