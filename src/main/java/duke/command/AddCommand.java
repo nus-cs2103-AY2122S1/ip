@@ -10,6 +10,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Deadline;
+import duke.task.DoAfter;
 import duke.task.Event;
 import duke.task.ToDo;
 
@@ -80,6 +81,14 @@ public class AddCommand implements Command {
                     throw new DukeException("event format");
                 } else {
                     t.add(new Event(eventArr[0], eventArr[1]));
+                }
+                break;
+            case "DOAFTER":
+                String[] doAfterArr = taskString.split("/after", 2);
+                if (doAfterArr.length == 1) {
+                    throw new DukeException("do after format");
+                } else {
+                    t.add(new DoAfter(doAfterArr[0], doAfterArr[1]));
                 }
                 break;
             default:

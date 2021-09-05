@@ -14,7 +14,7 @@ public class DukeException extends Exception {
      */
     public DukeException(String errorType) {
         assert(errorType != null);
-        switch (errorType) {git st
+        switch (errorType) {
         case "invalid input":
             errorMessage = "Invalid input, try using todo, deadline or event";
             break;
@@ -34,6 +34,10 @@ public class DukeException extends Exception {
         case "event format":
             errorMessage = "Invalid event formatting!\n"
                     + "Proper format: event 'event description' /at 'location'";
+            break;
+        case "do after format":
+            errorMessage = "Invalid do after formatting!\n"
+                    + "Proper format: doafter 'doafter description' /after 'previous task'";
             break;
         case "initialization error":
             errorMessage = "data.txt is corrupted!\n"

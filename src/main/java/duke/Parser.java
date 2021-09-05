@@ -50,6 +50,7 @@ public class Parser {
             case "todo":
             case "deadline":
             case "event":
+            case "doafter":
                 return new AddCommand(inputText[1], inputText[0]);
             case "done":
                 return new DoneCommand(inputText[1]);
