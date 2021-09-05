@@ -3,6 +3,7 @@ package banana;
 import java.io.FileNotFoundException;
 import java.io.File;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -43,10 +44,11 @@ public class Storage {
      * @throws FileNotFoundException if the file does not exist.
      */
     public TaskList load(File f) throws FileNotFoundException {
-        TaskList tasks = new TaskList();
+        TaskList tasks = new TaskList(new ArrayList<>());
         Scanner sc = new Scanner(f);
         while (sc.hasNext()) {
             String line = sc.nextLine();
+            assert line.contains(" ~ ");
             String[] taskInfo = line.split(" ~ ");
             Task newTask;
             if (taskInfo[0].equals("T")) {

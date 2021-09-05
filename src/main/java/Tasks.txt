@@ -2,3 +2,4 @@ T ~ Yes ~ finish training
 T ~ Yes ~ eat food
 T ~ No ~ cook food
 T ~ No ~ kill titan
+No ~ food

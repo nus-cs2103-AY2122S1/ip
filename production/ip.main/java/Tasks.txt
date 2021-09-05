@@ -1,4 +1,5 @@
-T ~ Yes ~ shower
-T ~ No ~ eat food
-T ~ Yes ~ cook food
-T ~ No ~ nap
+T ~ Yes ~ finish training
+T ~ Yes ~ eat food
+T ~ No ~ cook food
+T ~ No ~ kill titan
+No ~ food

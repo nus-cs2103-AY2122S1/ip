@@ -44,7 +44,7 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    public Duke(){
+    public Duke() {
         hello = new Label("Hello I'm Hange! \n How can I help you?");
         try {
             user = new Image(new FileInputStream("levi.jpg"));
@@ -72,7 +72,6 @@ public class Duke extends Application {
                     new File(storage.getFilePath()));
         } catch (FileNotFoundException e) {
             System.out.println(e.getMessage());
-            tasks = new TaskList();
         }
     }
 
@@ -116,7 +115,7 @@ public class Duke extends Application {
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
     }
 
@@ -143,7 +142,6 @@ public class Duke extends Application {
      */
     public void addToScreen() {
         try {
-            assert !userInput.getText().equals("");
             Label userText = new Label(userInput.getText());
             Parser p = new Parser(userInput.getText());
             if (!userInput.getText().equals("bye")) {
@@ -178,27 +176,27 @@ public class Duke extends Application {
         String text = "";
         FileWriter fw = new FileWriter(
                 "/Users/ravi57004/ip/src/main/java/Tasks.txt", false);
-        if (!input.equals("bye")) {
-            for (int i = 0; i < tasks.getSize(); i++) {
-                String doneStr = "No";
-                if (tasks.getTask(i).getIsDone().equals("[X]")) {
-                    doneStr = "Yes";
-                }
-                if (tasks.getTask(i) instanceof ToDo) {
-                    text += "T ~ " + doneStr + " ~ " +
-                            tasks.getTask(i).getDescription() + "\n";
-                } else if (tasks.getTask(i) instanceof Deadline) {
-                    Deadline dl = (Deadline) tasks.getTask(i);
-                    text += "D ~ " + doneStr + " ~ " +
-                            tasks.getTask(i).getDescription() + " ~ " + dl.getDeadLine() + "\n";
-                } else if (tasks.getTask(i) instanceof Event) {
-                    Event ev = (Event) tasks.getTask(i);
-                    text += "E ~ " + doneStr + " ~ " +
-                            tasks.getTask(i).getDescription() + " ~ " + ev.getEvent() + "\n";
-                } else {
-                    text += doneStr + " ~ " +
-                            tasks.getTask(i).getDescription() + "\n";
-                }
+        for (int i = 0; i < tasks.getSize(); i++) {
+            String doneStr = "No";
+            Task currentTask = tasks.getTask(i);
+            assert currentTask != null;
+            if (currentTask.getIsDone().equals("[X]")) {
+                doneStr = "Yes";
+            }
+            if (currentTask instanceof ToDo) {
+                text += "T ~ " + doneStr + " ~ " +
+                        currentTask.getDescription() + "\n";
+            } else if (currentTask instanceof Deadline) {
+                Deadline dl = (Deadline) currentTask;
+                text += "D ~ " + doneStr + " ~ " +
+                        currentTask.getDescription() + " ~ " + dl.getDeadLine() + "\n";
+            } else if (currentTask instanceof Event) {
+                Event ev = (Event) currentTask;
+                text += "E ~ " + doneStr + " ~ " +
+                        currentTask.getDescription() + " ~ " + ev.getEvent() + "\n";
+            } else {
+                text += doneStr + " ~ " +
+                        currentTask.getDescription() + "\n";
             }
         }
         fw.write(text);

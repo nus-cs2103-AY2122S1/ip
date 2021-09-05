@@ -105,7 +105,6 @@ public class Parser {
     public String addTaskCommand(String input, TaskList tasks) {
         if (input.contains("todo")) {
             String info = input.substring(5);
-            assert !info.equals("");
             tasks.addTask(new ToDo(info));
         } else {
             tasks.addTask(new Task(input));
@@ -125,6 +124,7 @@ public class Parser {
      * @return the label.
      */
     public String deadlineOrEventCommand(String input, TaskList tasks) {
+        assert input.contains("deadline") || input.contains("event");
         if (input.contains("deadline")) {
             assert input.contains("/by");
             String[] info = input.substring(9).split(" /by ");
@@ -183,9 +183,8 @@ public class Parser {
      * @return the label.
      */
     public String findCommand(TaskList tasks) {
-        TaskList newTasks = new TaskList();
+        TaskList newTasks = new TaskList(new ArrayList<>());
         if (input.contains("find")) {
-            assert input.split(" ").length > 0;
             String item = input.split(" ")[1];
             for (int i = 0; i < tasks.getSize(); i++) {
                 if (tasks.getTask(i).getDescription().contains(item)) {
@@ -224,9 +223,9 @@ public class Parser {
      * Gets the date and time in correct
      * notation/format if necessary.
      *
-     * @param info the task information.
+     * @param info  the task information.
      * @param input the user input.
-     * @param type the Task type.
+     * @param type  the Task type.
      * @return the new Task.
      */
     public Task getDateAndTime(String[] info, String input, String type) {
@@ -242,7 +241,6 @@ public class Parser {
         if (potentialDate.length > 1 && potentialDate[0].contains("/")) {
             date = LocalDate.parse(parseDates(potentialDate[0]));
         }
-        assert type.equals("deadline") || type.equals("event");
         if (type.equals("deadline")) {
             if (date != null) {
                 return new Deadline(info[0], date, potentialDate[1]);
@@ -266,7 +264,6 @@ public class Parser {
      * @return the date.
      */
     public String parseDates(String date) {
-
         String[] sepIntoYearMonthDate = date.split("/");
         assert sepIntoYearMonthDate.length == 3;
         if (Integer.parseInt(sepIntoYearMonthDate[0]) < 10) {
@@ -293,5 +290,5 @@ public class Parser {
             return "";
         }
     }
-    
+
 }
