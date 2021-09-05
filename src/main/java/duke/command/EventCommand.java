@@ -8,7 +8,7 @@ import duke.task.Event;
 import duke.task.TaskList;
 
 /**
- * Command to add an event into the task list
+ * Command to add an event into the task list.
  */
 public class EventCommand extends Command {
     public EventCommand() {
@@ -16,13 +16,13 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Parses the user input for a name and a date,
-     * then creates the event and adds it into the taskList
+     * Parses the user input for a name and a date.
+     * Then creates the event and adds it into the taskList.
      *
-     * @param input Full user input
-     * @param taskList The list of tasks
-     * @return The response
-     * @throws DukeException Any exception caught when executing this command
+     * @param input Full user input.
+     * @param taskList The list of tasks.
+     * @return The response telling the user that an event has been created.
+     * @throws DukeException Any exception caught when executing this command.
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {

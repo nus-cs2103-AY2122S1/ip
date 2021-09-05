@@ -8,7 +8,7 @@ import duke.task.Deadline;
 import duke.task.TaskList;
 
 /**
- * Command to add a deadline into the task list
+ * Command to add a deadline into the task list.
  */
 public class DeadlineCommand extends Command {
     public DeadlineCommand() {
@@ -16,13 +16,13 @@ public class DeadlineCommand extends Command {
     }
 
     /**
-     * Parses the user input for a name and a date,
-     * then creates the deadline and adds it into the taskList
+     * Parses the user input for a name and a date.
+     * Then creates the deadline and adds it into the taskList.
      *
-     * @param input Full user input
-     * @param taskList The list of tasks
-     * @return The response
-     * @throws DukeException Any exception caught when executing this command
+     * @param input Full user input.
+     * @param taskList The list of tasks.
+     * @return The response telling the user that a deadline has been created.
+     * @throws DukeException Any exception caught when executing this command.
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {

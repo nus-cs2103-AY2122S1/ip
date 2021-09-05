@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.task.ToDo;
 
 /**
- * Command to add a todo into the task list
+ * Command to add a ToDo into the task list.
  */
 public class ToDoCommand extends Command {
     public ToDoCommand() {
@@ -13,13 +13,13 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Parses the user input for a name,
-     * then creates the ToDo and adds it into the taskList
+     * Parses the user input for a name.
+     * Then creates the ToDo and adds it into the taskList.
      *
-     * @param input Full user input
-     * @param taskList The list of tasks
-     * @return The response
-     * @throws DukeException Any exception caught when executing this command
+     * @param input Full user input.
+     * @param taskList The list of tasks.
+     * @return The response telling the user that a ToDo has been created.
+     * @throws DukeException Any exception caught when executing this command.
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {

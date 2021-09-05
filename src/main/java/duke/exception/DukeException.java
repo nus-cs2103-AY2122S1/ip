@@ -1,7 +1,7 @@
 package duke.exception;
 
 /**
- * Exception thrown when something expected goes wrong within Duke
+ * Exception thrown when something expected goes wrong within Duke.
  */
 public class DukeException extends Exception {
     public DukeException(String message) {
@@ -9,7 +9,9 @@ public class DukeException extends Exception {
     }
 
     /**
-     * Clears any queued message and prints the error message in red instead
+     * Returns a response string to be shown to the user.
+     *
+     * @return The response to be shown to the user with information about the error.
      */
     public String displayError() {
         return "Oops! Something went wrong :(\n" + getMessage();

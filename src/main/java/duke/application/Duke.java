@@ -20,9 +20,9 @@ public class Duke extends Application {
     private final Parser parser = new Parser(taskList);
 
     /**
-     * Loads the MainWindow from fxml, and initialises it, then sets it as the scene to be shown
+     * Loads the MainWindow from fxml, and initialises it, then sets it as the scene to be shown.
      *
-     * @param stage Provided primary stage
+     * @param stage Provided primary stage.
      */
     @Override
     public void start(Stage stage) {
@@ -32,6 +32,8 @@ public class Duke extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setParser(parser);
+            stage.setTitle("Duke");
+            stage.setResizable(false);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

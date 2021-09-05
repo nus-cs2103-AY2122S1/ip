@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Abstract class representing a task
+ * Abstract class representing a task.
  */
 public abstract class Task {
     protected boolean isDone;
@@ -10,7 +10,7 @@ public abstract class Task {
     /**
      * Constructor for a Task that sets its name and sets it to not done.
      *
-     * @param name name of the task
+     * @param name Name of the task.
      */
     public Task(String name) {
         this.name = name;
@@ -18,7 +18,7 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as done
+     * Marks the task as done.
      */
     public void doTask() {
         isDone = true;
@@ -27,7 +27,7 @@ public abstract class Task {
     /**
      * Returns whether the task is done.
      *
-     * @return true if task is done, false if task is not done
+     * @return True if task is done, false if task is not done.
      */
     public boolean isDone() {
         return isDone;
@@ -36,35 +36,25 @@ public abstract class Task {
     /**
      * Returns whether the task is expired. A task with no date is not expired.
      *
-     * @return whether the task is expired
+     * @return Whether the task is expired.
      */
     public boolean isExpired() {
         return false;
     }
 
     /**
-     * Returns whether the task is happening today.
-     * A task with no date is not happening today.
+     * Returns the name of the task.
      *
-     * @return whether the task is happening today
-     */
-    public boolean isToday() {
-        return false;
-    }
-
-    /**
-     * Returns the name of the task
-     *
-     * @return name of the task
+     * @return Name of the task.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Returns a string representation of the task, including its status and name
+     * Returns a string representation of the task, including its status and name.
      *
-     * @return string representation of the task
+     * @return String representation of the task.
      */
     @Override
     public String toString() {
@@ -72,9 +62,9 @@ public abstract class Task {
     }
 
     /**
-     * Returns a string compliant to the saveFile format
+     * Returns a string compliant to the saveFile format.
      *
-     * @return String to be saved as a line in save.csv
+     * @return String to be saved as a line in save.csv.
      */
     public String getSaveString() {
         return (isDone ? "o," : "x,") + name;

@@ -26,10 +26,10 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Generates a dialog box representing communication from one party
+     * Generates a dialog box representing communication from one party.
      *
-     * @param text Text to be written
-     * @param img Profile image of user
+     * @param text Text to be written.
+     * @param img Profile image of user.
      */
     private DialogBox(String text, Image img) {
         try {
@@ -56,22 +56,22 @@ public class DialogBox extends HBox {
     }
 
     /**
-     * Generates dialog box representing input from the user
+     * Generates dialog box representing input from the user.
      *
-     * @param text User input text
-     * @param img User profile image
-     * @return Dialog box representing input from the user
+     * @param text User input text.
+     * @param img User profile image.
+     * @return Dialog box representing input from the user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
     /**
-     * Generates dialog boxes representing response from Duke
+     * Generates dialog boxes representing response from Duke.
      *
-     * @param text Response text
-     * @param img Duke profile image
-     * @return Dialog box representing response from Duke
+     * @param text Response text.
+     * @param img Duke profile image.
+     * @return Dialog box representing response from Duke.
      */
     public static ArrayList<DialogBox> getDukeDialog(String text, Image img) {
         String[] lines = text.split("\n");

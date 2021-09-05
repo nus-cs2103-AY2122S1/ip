@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
- * Command to delete a task, or delete tasks that satisfy a specified condition
+ * Command to delete a task, or delete tasks that satisfy a specified condition.
  */
 public class DeleteCommand extends Command {
     public DeleteCommand() {
@@ -13,12 +13,12 @@ public class DeleteCommand extends Command {
 
     /**
      * Parses the user input for a taskNumber, or a condition.
-     * Then deletes the specified task, or all tasks matching the condition
+     * Then deletes the specified task, or all tasks matching the condition.
      *
-     * @param input Full user input
-     * @param taskList The list of tasks
-     * @return The response
-     * @throws DukeException Any exception caught when executing this command
+     * @param input Full user input.
+     * @param taskList The list of tasks.
+     * @return The response confirming deletion and telling the user the number of tasks left.
+     * @throws DukeException Any exception caught when executing this command.
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {

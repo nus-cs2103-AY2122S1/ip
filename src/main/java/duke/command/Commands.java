@@ -1,7 +1,7 @@
 package duke.command;
 
 /**
- * Enum of commands to cycle through and return the right command that matches user input
+ * Enum of commands to cycle through and return the right command that matches user input.
  */
 public enum Commands {
     EXIT (new ExitCommand()),
@@ -21,17 +21,17 @@ public enum Commands {
     /**
      * Checks if the first word of the user input matches this command.
      *
-     * @param firstWord first word of user input
-     * @return true if the first word of the user input matches this command
+     * @param firstWord First word of user input.
+     * @return True if the first word of the user input matches this command.
      */
     public boolean isCommand(String firstWord) {
         return firstWord.equals(command.getCommandString());
     }
 
     /**
-     * Returns the command of this type
+     * Returns the command of this type.
      *
-     * @return the Command
+     * @return The Command.
      */
     public Command getCommand() {
         return command;

@@ -6,7 +6,7 @@ import duke.exception.DukeException;
 import duke.io.Storage;
 
 /**
- * Class representing the list of tasks
+ * Class representing the list of tasks.
  */
 public class TaskList {
     private final ArrayList<Task> tasks;
@@ -15,7 +15,7 @@ public class TaskList {
     /**
      * Constructor of task list. Loads tasks from specified savefile.
      *
-     * @param storage The storage system that manages saving and loading
+     * @param storage The storage system that manages saving and loading.
      */
     public TaskList(Storage storage) {
         this.storage = storage;

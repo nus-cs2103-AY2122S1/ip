@@ -6,7 +6,7 @@ import duke.io.Storage;
 import duke.task.Task;
 
 /**
- * Storage stub used for testing that doesn't load or store
+ * Storage stub used for testing that doesn't load or store.
  */
 public class StorageStub extends Storage {
     public StorageStub() {
@@ -14,9 +14,9 @@ public class StorageStub extends Storage {
     }
 
     /**
-     * Does not load tasks
+     * Does not load tasks.
      *
-     * @return an empty list of tasks
+     * @return An empty list of tasks.
      */
     @Override
     public ArrayList<Task> load() {
@@ -24,9 +24,9 @@ public class StorageStub extends Storage {
     }
 
     /**
-     * Does not save tasks
+     * Does not save tasks.
      *
-     * @param tasks The tasks to be saved
+     * @param tasks The tasks to be saved.
      */
     @Override
     public void save(ArrayList<Task> tasks) {}

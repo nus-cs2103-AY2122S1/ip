@@ -14,7 +14,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 /**
- * Storage class that manages the saving and loading of the task list
+ * Storage class that manages the saving and loading of the task list.
  */
 public class Storage {
     private final File saveFile;
@@ -24,9 +24,9 @@ public class Storage {
     }
 
     /**
-     * Loads the taskList from the saveFile
+     * Loads the taskList from the saveFile.
      *
-     * @return false if the file does not exist, i.e. the user is a new user. true otherwise.
+     * @return False if the file does not exist, i.e. the user is a new user. True otherwise.
      */
     public ArrayList<Task> load() {
         try {
@@ -55,10 +55,10 @@ public class Storage {
     }
 
     /**
-     * Saves the taskList into save.csv
+     * Saves the taskList into save.csv.
      *
-     * @param tasks The tasks to be saved
-     * @throws DukeException Any exception caught that has to do with the I/O
+     * @param tasks The tasks to be saved.
+     * @throws DukeException Any exception caught that has to do with the I/O.
      */
     public void save(ArrayList<Task> tasks) throws DukeException {
         String taskListContent = convertToSaveString(tasks);
@@ -78,10 +78,10 @@ public class Storage {
     }
 
     /**
-     * Returns a string representing the tasks compliant to the save format
+     * Returns a string representing the tasks compliant to the save format.
      *
-     * @param tasks The tasks to be saved
-     * @return a string representing the tasks compliant to the save format
+     * @param tasks The tasks to be saved.
+     * @return A string representing the tasks compliant to the save format.
      */
     private String convertToSaveString(ArrayList<Task> tasks) {
         StringBuilder sb = new StringBuilder();

@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
     private Parser parser;
 
     /**
-     * Initialise settings, and greet user
+     * Initializes settings, and greets user.
      */
     @FXML
     public void initialize() {
@@ -37,8 +37,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Set the parser
-     * @param parser Parser to be set
+     * Sets the parser.
+     *
+     * @param parser Parser to be set.
      */
     public void setParser(Parser parser) {
         this.parser = parser;
@@ -58,18 +59,18 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Adds a dialog for the user to reflect user input being taken
+     * Adds a dialog for the user to reflect user input being taken.
      *
-     * @param input User input
+     * @param input User input.
      */
     private void addUserDialog(String input) {
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
     }
 
     /**
-     * Adds a dialog for Duke to reflect Duke's response
+     * Adds a dialog for Duke to reflect Duke's response.
      *
-     * @param response Response from Duke
+     * @param response Response from Duke.
      */
     private void addDukeDialog(String response) {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage));

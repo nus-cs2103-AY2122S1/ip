@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
- * Command to find a task that matches the search string
+ * Command to find a task that matches the search string.
  */
 public class FindCommand extends Command {
     public FindCommand() {
@@ -12,13 +12,13 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Parses the user input for a search string,
-     * then finds all tasks that contain the search string and lists them
+     * Parses the user input for a search string.
+     * Then finds all tasks that contain the search string and lists them.
      *
-     * @param input Full user input
-     * @param taskList The list of tasks
-     * @return The response
-     * @throws DukeException Exception thrown when search string is empty
+     * @param input Full user input.
+     * @param taskList The list of tasks.
+     * @return The response which lists all tasks that match the search string.
+     * @throws DukeException Exception thrown when search string is empty.
      */
     @Override
     public String parse(String input, TaskList taskList) throws DukeException {

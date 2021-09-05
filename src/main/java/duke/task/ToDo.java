@@ -1,18 +1,23 @@
 package duke.task;
 
 /**
- * Class representing a todo task that can be marked as done
+ * Class representing a ToDo task that can be marked as done.
  */
 public class ToDo extends Task {
+    /**
+     * Constructor for ToDo, setting its name, and marking it not done.
+     *
+     * @param name Name of the ToDo.
+     */
     public ToDo(String name) {
         super(name);
     }
 
     /**
-     * Loads a ToDo from data parsed from the save file
+     * Loads a ToDo from data parsed from the save file.
      *
-     * @param loadDatas A line from the csv, split by commas
-     * @return ToDo created from provided data
+     * @param loadDatas A line from the csv, split by commas.
+     * @return ToDo created from provided data.
      */
     public static ToDo load(String[] loadDatas) {
         boolean isDone = loadDatas[1].equals("o");
@@ -27,9 +32,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a string representation of the ToDo and its status
+     * Returns a string representation of the ToDo and its status.
      *
-     * @return string representation of the ToDo
+     * @return String representation of the ToDo.
      */
     @Override
     public String toString() {
@@ -37,9 +42,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a string representing the ToDo compliant to the saveFile format
+     * Returns a string representing the ToDo compliant to the saveFile format.
      *
-     * @return String to be saved as a line in save.csv
+     * @return String to be saved as a line in save.csv.
      */
     @Override
     public String getSaveString() {

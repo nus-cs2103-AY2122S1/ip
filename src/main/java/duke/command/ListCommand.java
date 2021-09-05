@@ -3,7 +3,7 @@ package duke.command;
 import duke.task.TaskList;
 
 /**
- * Command to list all tasks in the task list
+ * Command to list all tasks in the task list.
  */
 public class ListCommand extends Command {
     public ListCommand() {
@@ -11,11 +11,11 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Lists all tasks
+     * Lists all tasks.
      *
-     * @param input Full user input
-     * @param taskList The list of tasks
-     * @return The response
+     * @param input Full user input.
+     * @param taskList The list of tasks.
+     * @return The response that lists all tasks.
      */
     @Override
     public String parse(String input, TaskList taskList) {
