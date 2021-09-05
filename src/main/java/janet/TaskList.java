@@ -1,6 +1,9 @@
 package janet;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 /**
@@ -70,6 +73,21 @@ public class TaskList implements Serializable {
         for (int i = 0; i < this.size(); i++) {
             if (this.get(i).toString().contains(query)) {
                 output.add(this.get(i));
+            }
+        }
+        return output;
+    }
+
+    public TaskList findByDate(String query) {
+        LocalDate date = LocalDate.parse(query);
+        TaskList output = new TaskList();
+        for (int i = 0; i < this.size(); i++) {
+            Task task = this.get(i);
+            if (task instanceof Event && ((Event) task).atDate.equals(date)) {
+                output.add(task);
+            }
+            if (task instanceof Deadline && ((Deadline) task).byDate.equals(date)) {
+                output.add(task);
             }
         }
         return output;

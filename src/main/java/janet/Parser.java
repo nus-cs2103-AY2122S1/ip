@@ -1,5 +1,8 @@
 package janet;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 /**
  * Encapsulates the methods needed to parse the input given to Janet and convert
  * it into a Command that Janet understands.
@@ -35,6 +38,8 @@ public class Parser {
             return parseDelete(inputStringParts);
         case "find":
             return parseFind(input, inputStringParts);
+        case "schedule":
+            return parseSchedule(input, inputStringParts);
         default:
             throw new JanetException(Ui.UNRECOGNISED_OPERATION);
         }
@@ -117,7 +122,21 @@ public class Parser {
         }
 
         String operation = inputStringParts[0];
-        return new Command(inputStringParts[0], input.substring(operation.length() + 1));
+        return new Command(operation, input.substring(operation.length() + 1));
+    }
+
+    private static Command parseSchedule(String input, String[] inputStringParts) throws JanetException {
+        if (inputStringParts.length == 1) {
+            throw new JanetException(Ui.EXPECTED_SCHEDULE_QUERY);
+        }
+        String operation = inputStringParts[0];
+        String date = input.substring(operation.length() + 1);
+        try {
+            LocalDate.parse(date);
+        } catch (DateTimeParseException e) {
+            throw new JanetException(Ui.EXPECTED_DATE_GOT_OTHER);
+        }
+        return new Command(operation, date);
     }
 
 }

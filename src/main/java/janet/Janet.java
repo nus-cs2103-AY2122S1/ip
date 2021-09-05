@@ -65,6 +65,8 @@ public class Janet {
             return handleDelete(command);
         case "find":
             return handleFind(command);
+        case "schedule":
+            return handleSchedule(command);
         case "echo":
             return command.getDescription();
         default:
@@ -114,6 +116,11 @@ public class Janet {
 
     private String handleFind(Command command) {
         TaskList filteredTasks = tasks.find(command.getDescription());
+        return Ui.taskListString(filteredTasks);
+    }
+
+    private String handleSchedule(Command command) {
+        TaskList filteredTasks = tasks.findByDate(command.getDescription());
         return Ui.taskListString(filteredTasks);
     }
 }
