@@ -1,11 +1,17 @@
 package duke.task;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import duke.place.Place;
+
 /**
  * Task class which contains description of task and whether task is done.
  */
 public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
+    protected ArrayList<Place> places;
 
     /**
      * Constructor for the Task class.
@@ -13,8 +19,19 @@ public class Task implements Comparable<Task> {
      * @param description the description of the task.
      */
     public Task(String description) {
+        this.places = new ArrayList<>();
         this.description = description;
         isDone = false;
+    }
+
+    /**
+     * Adds a place to the task object.
+     *
+     * @param place the place to be associated with the task.
+     */
+    public void addPlace(Place place) {
+        assert places != null : "Places is not initialised";
+        places.add(place);
     }
 
     /**
@@ -36,11 +53,25 @@ public class Task implements Comparable<Task> {
     /**
      * Returns the string representation of the task.
      *
-     * @return string representation with status icon and description of task.
+     * @return string representation with status icon and description of task with the places.
      */
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        StringBuilder sb = new StringBuilder();
+        sb.append("[").append(getStatusIcon()).append("] ").append(description);
+        if (places.size() > 0) {
+            sb.append(", Places: ").append(getPlacesRepresentation());
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Gets the string representation of the list of places.
+     *
+     * @return string representation of list of places.
+     */
+    protected String getPlacesRepresentation() {
+        return places.stream().map(Place::toString).collect(Collectors.joining(", "));
     }
 
     /**
@@ -49,7 +80,7 @@ public class Task implements Comparable<Task> {
      * @return string representation used for storing task.
      */
     public String toDataFormat() {
-        return String.format("  | %s | %s", isDone ? "1" : "0", description);
+        return String.format("  | %s | %s | %s", isDone ? "1" : "0", description, getPlacesRepresentation());
     }
 
     /**

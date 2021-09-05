@@ -5,9 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import duke.exception.DukeException;
+import duke.place.Place;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Period;
@@ -43,26 +45,31 @@ public class Storage {
         try {
             Scanner s = new Scanner(f);
             while (s.hasNext()) {
-                String[] taskString = s.nextLine().trim().split(" \\| ");
+                String[] taskString = s.nextLine().split(" \\| ");
                 Task task;
                 switch (taskString[0]) {
                 case "T":
                     task = new Todo(taskString[2]);
                     break;
                 case "D":
-                    task = new Deadline(taskString[2], taskString[3]);
+                    task = new Deadline(taskString[2], taskString[4]);
                     break;
                 case "E":
-                    task = new Event(taskString[2], taskString[3]);
+                    task = new Event(taskString[2], taskString[4]);
                     break;
                 case "P":
-                    task = new Period(taskString[2], taskString[3], taskString[4]);
+                    task = new Period(taskString[2], taskString[4], taskString[5]);
                     break;
                 default:
                     throw new DukeException("Invalid task type found!");
                 }
                 if (taskString[1].equals("1")) {
                     task.setDone();
+                }
+
+                if (taskString.length > 3) {
+                    Arrays.stream(taskString[3].split(", "))
+                            .forEach(placeString -> task.addPlace(new Place(placeString)));
                 }
                 tasks.add(task);
             }

@@ -10,7 +10,7 @@ public class DeadlineTest {
     @Test
     public void toDataFormat() {
         Deadline deadline = new Deadline("Finish iP", "22 Aug 2021");
-        assertEquals("D | 0 | Finish iP | 22 Aug 2021", deadline.toDataFormat());
+        assertEquals("D | 0 | Finish iP |  | 22 Aug 2021", deadline.toDataFormat());
     }
 
     @Test
@@ -22,6 +22,6 @@ public class DeadlineTest {
     @Test
     public void dateParse() {
         Deadline deadline = new Deadline("Finish iP", "2021-11-12");
-        assertEquals("D | 0 | Finish iP | Nov 12 2021", deadline.toDataFormat());
+        assertEquals("D | 0 | Finish iP |  | Nov 12 2021", deadline.toDataFormat());
     }
 }

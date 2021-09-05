@@ -49,6 +49,7 @@ public class Period extends Task {
      */
     @Override
     public String toDataFormat() {
-        return String.format("P | %s | %s | %s | %s", isDone ? "1" : "0", description, startDate, endDate);
+        return String.format("P | %s | %s | %s | %s | %s", isDone ? "1" : "0",
+                description, getPlacesRepresentation(), startDate, endDate);
     }
 }

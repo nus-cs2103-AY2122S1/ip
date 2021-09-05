@@ -31,6 +31,6 @@ public class Todo extends Task {
      */
     @Override
     public String toDataFormat() {
-        return String.format("T | %s | %s", isDone ? "1" : "0", description);
+        return String.format("T | %s | %s | %s", isDone ? "1" : "0", description, getPlacesRepresentation());
     }
 }

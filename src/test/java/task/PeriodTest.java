@@ -10,7 +10,7 @@ public class PeriodTest {
     @Test
     public void toDataFormat() {
         Period period = new Period("Finish iP", "22 Aug 2021", "3 Sep 2021");
-        assertEquals("P | 0 | Finish iP | 22 Aug 2021 | 3 Sep 2021", period.toDataFormat());
+        assertEquals("P | 0 | Finish iP |  | 22 Aug 2021 | 3 Sep 2021", period.toDataFormat());
     }
 
     @Test
@@ -22,6 +22,6 @@ public class PeriodTest {
     @Test
     public void dateParse() {
         Period period = new Period("Finish iP", "2021-11-12", "2021-12-25");
-        assertEquals("P | 0 | Finish iP | Nov 12 2021 | Dec 25 2021", period.toDataFormat());
+        assertEquals("P | 0 | Finish iP |  | Nov 12 2021 | Dec 25 2021", period.toDataFormat());
     }
 }
