@@ -8,66 +8,7 @@ import duke.DukeException;
  * @author Wong Yun Rui Chris
  */
 public abstract class Task {
-    /**
-     *
-     * Enum for the different type of task
-     */
-    public enum TaskName {
-        TODO (""),
-        DEADLINE (" /by "),
-        EVENT (" /at ");
-
-        private final String split;
-
-        TaskName(String split) {
-            this.split = split;
-        }
-
-        /**
-         * Returns the corresponding regex/split needed to split the string input
-         * received to get correct output.
-         *
-         * @return The regex used to split the input String for these task type
-         */
-        public String getSplit() {
-            return this.split;
-        }
-
-        @Override
-        public String toString() {
-            return this.name().toLowerCase();
-        }
-
-        /**
-         * Returns the TaskName when provided with the string name of the type of task.
-         *
-         * @param s The string representation of the type of task
-         * @return The corresponding TaskName
-         * @throws DukeException Exception specific to duke.Duke
-         */
-        public static TaskName getTaskType(String s) throws DukeException {
-            switch (s) {
-            case "todo":
-                // Fallthrough
-            case "[T]":
-                return TODO;
-
-            case "deadline":
-                // Fallthrough
-            case "[D]":
-                return DEADLINE;
-
-            case "event":
-                // Fallthrough
-            case "[E]":
-                return EVENT;
-
-            default:
-                throw new DukeException("Something has gone very wrong!");
-            }
-        }
-    }
-
+    protected TaskName taskName;
     protected String description;
     protected boolean isDone;
 
@@ -77,7 +18,8 @@ public abstract class Task {
      * @param description The String description/name of the task
      * @param isDone The Boolean of if the task is done
      */
-    public Task(String description, Boolean isDone) {
+    protected Task(TaskName taskname, String description, Boolean isDone) {
+        this.taskName = taskname;
         this.description = description;
         this.isDone = isDone;
     }
@@ -127,5 +69,31 @@ public abstract class Task {
      */
     public boolean matchKeyword(String keyword) {
         return this.description.contains(keyword);
+    }
+
+    /**
+     * Factory method to return the corresponding task with the given task name.
+     *
+     * @param taskName Name of the task to be returned
+     * @param description Description for the task
+     * @param secondInput Time description for event and deadline task and should be null for todo task
+     * @param isDone The state of whether the task is done
+     * @return The task from the given inputs provided
+     * @throws DukeException Exception specific to duke.Duke
+     */
+    public static Task ofTask(TaskName taskName, String description, String secondInput, Boolean isDone)
+            throws DukeException {
+        switch (taskName) {
+        case TODO:
+            return new ToDo(description, isDone);
+
+        case DEADLINE:
+            return new Deadline(description, secondInput, isDone);
+
+        case EVENT:
+            return new Event(description, secondInput, isDone);
+        default:
+            throw new DukeException("Task name provided is incorrect");
+        }
     }
 }

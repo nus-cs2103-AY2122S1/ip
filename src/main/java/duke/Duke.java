@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 public class Duke extends Application {
     private final TaskList list;
     private final Storage storage;
-    private final Parser parser;
 
     /**
      * Public constructor to initialise Duke.
@@ -21,7 +20,6 @@ public class Duke extends Application {
     public Duke() {
         storage = new Storage("/data/duke.txt");
         list = storage.readData();
-        parser = new Parser();
     }
 
     @Override
@@ -45,6 +43,6 @@ public class Duke extends Application {
      * @throws DukeException Exceptions specific to Duke's input
      */
     public String handleInput(String input) throws DukeException {
-        return parser.handleInput(this.list, input);
+        return Parser.parseInput(this.list, input);
     }
 }

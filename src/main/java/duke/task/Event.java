@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * A wrapper for an duke.task.Event which is a duke.task.Task that start at a specific date/time.
+ * A wrapper for a duke.task.Event which is a duke.task.Task that start at a specific date/time.
  *
  * @author Wong Yun Rui Chris
  */
@@ -16,7 +16,7 @@ public class Event extends Task {
      * @param isDone The Boolean of if the task is done
      */
     public Event(String description, String at, Boolean isDone) {
-        super(description, isDone);
+        super(TaskName.EVENT, description, isDone);
         this.at = at;
     }
 
@@ -29,7 +29,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.at + ")";
+        return taskName.getTaskIcon() + super.toString() + " (at: " + this.at + ")";
     }
 
     /**
@@ -40,6 +40,6 @@ public class Event extends Task {
      */
     @Override
     public String toData() {
-        return "[E] | " + super.toData() + " | " + this.at;
+        return taskName.getTaskIcon() + " | " + super.toData() + " | " + this.at;
     }
 }

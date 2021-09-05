@@ -14,7 +14,7 @@ public class ToDo extends Task {
      * @param isDone The Boolean of if the task is done
      */
     public ToDo(String description, Boolean isDone) {
-        super(description, isDone);
+        super(TaskName.TODO, description, isDone);
     }
 
     /**
@@ -26,7 +26,7 @@ public class ToDo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return taskName.getTaskIcon() + super.toString();
     }
 
     /**
@@ -37,6 +37,6 @@ public class ToDo extends Task {
      */
     @Override
     public String toData() {
-        return "[T] | " + super.toData();
+        return this.taskName.getTaskIcon() + " | " + super.toData();
     }
 }
