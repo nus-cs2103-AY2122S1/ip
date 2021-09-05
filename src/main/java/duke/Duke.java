@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -8,7 +12,7 @@ import java.util.ArrayList;
  * @version CS2103 AY21/22 Sem 1
  */
 public class Duke implements ChatbotUI, Parser {
-    private static final String GREETING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
+    private static final String GREETING_MESSAGE = "Hello! I'm duke.Duke\nWhat can I do for you?";
     private static final String FAREWELL_MESSAGE = "See you soon! :)";
     private static final String FAREWELL_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
@@ -24,7 +28,7 @@ public class Duke implements ChatbotUI, Parser {
     private Scanner sc;
 
     /**
-     * The entrypoint of the Duke chat bot.
+     * The entrypoint of the duke.Duke chat bot.
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
@@ -42,7 +46,7 @@ public class Duke implements ChatbotUI, Parser {
     }
 
     /**
-     * A constructor for Duke chatbot.
+     * A constructor for duke.Duke chatbot.
      */
     public Duke(String dataStorage) {
         this.taskList = new TaskList();

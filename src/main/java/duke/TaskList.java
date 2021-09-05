@@ -1,10 +1,17 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
     private ArrayList<Task> tasks;
     /**
-     * A constructor for a TaskList which contains Tasks.
+     * A constructor for a duke.TaskList which contains Tasks.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -12,7 +19,7 @@ public class TaskList {
 
     /**
      * Converts a taskList to a text format that can be saved in a txt file.
-     * @return a String that represents the savable data of a TaskList.
+     * @return a String that represents the savable data of a duke.TaskList.
      */
     public String toSaveData() {
         String data = "";
@@ -31,7 +38,7 @@ public class TaskList {
     /**
      * Given a string, creates a To-do from that string and adds it to the list of task.
      * @param taskTitle a String of the title of the To-do to be added.
-     * @return the newly created Todo.
+     * @return the newly created duke.task.ToDo.
      */
     public String addNewTodo(String taskTitle) {
         ToDo task = new ToDo(taskTitle);
@@ -39,9 +46,9 @@ public class TaskList {
         return "Got it. I've added this task:\n\t" + task.toString() + this.countTasks();
     }
     /**
-     * Given a string, creates a Deadline from that string and adds it to the list of task.
-     * @param taskTitle a String of the title of the Deadline to be added.
-     * @return the newly created Deadline.
+     * Given a string, creates a duke.task.Deadline from that string and adds it to the list of task.
+     * @param taskTitle a String of the title of the duke.task.Deadline to be added.
+     * @return the newly created duke.task.Deadline.
      */
     public String addNewDeadline(String taskTitle) {
         int delimiter = taskTitle.indexOf("/by ");
@@ -52,9 +59,9 @@ public class TaskList {
     }
 
     /**
-     * Given a string, creates a Deadline from that string and adds it to the list of task.
-     * @param taskTitle a String of the title of the Deadline to be added.
-     * @return the newly created Deadline.
+     * Given a string, creates a duke.task.Deadline from that string and adds it to the list of task.
+     * @param taskTitle a String of the title of the duke.task.Deadline to be added.
+     * @return the newly created duke.task.Deadline.
      */
     public String addNewEvent(String taskTitle) {
         int delimiter = taskTitle.indexOf("/at ");

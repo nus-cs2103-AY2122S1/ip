@@ -1,7 +1,9 @@
+package duke;
+
 import java.util.Scanner;
 
 /**
- * ChatbotUI accepts user input, and outputs a given message.
+ * duke.ChatbotUI accepts user input, and outputs a given message.
  *
  * @author Jovyn Tan
  * @version CS2103 AY21/22 Sem 1

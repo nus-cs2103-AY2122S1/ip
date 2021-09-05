@@ -1,3 +1,7 @@
+package duke;
+
+import duke.DukeException;
+
 public interface Parser {
     /**
      * Gets the description supplied by the user after a command.
@@ -31,4 +35,4 @@ public interface Parser {
     static int getIntFrom(String command, String message) throws DukeException {
         return Integer.parseInt(getStringFrom(command, message));
     }
-} 
+}

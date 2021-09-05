@@ -1,3 +1,5 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -21,7 +23,7 @@ public class Task {
     }
 
     /**
-     * A constructor for a Task.
+     * A constructor for a duke.task.Task.
      *
      * @param description a String representing the user-input title of the task.
      * @param task the type of the task
@@ -39,7 +41,7 @@ public class Task {
      * @param isDone a boolean representing whether or not the task has been completed
      * @param title a String representing the title of the task
      * @param timeDue a String representing when the task is due, if it is due.
-     * @return a Task that is created from the given details
+     * @return a duke.task.Task that is created from the given details
      */
     public static Task createTask(
             Type taskType, boolean isDone, String title, LocalDate timeDue) {
@@ -56,10 +58,10 @@ public class Task {
     }
 
     /**
-     * Parses structured text into a Task.
+     * Parses structured text into a duke.task.Task.
      * Text must be of the format [typeIndicator][done][deadline]|[title]
-     * @param text The text to be parsed into a Task.
-     * @return a Task based on the parsed text
+     * @param text The text to be parsed into a duke.task.Task.
+     * @return a duke.task.Task based on the parsed text
      */
     public static Task parseTaskFromSavedText(String text) {
         char typeIndicator = text.charAt(0);

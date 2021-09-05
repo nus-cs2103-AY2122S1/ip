@@ -1,9 +1,11 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
     /**
-     * A constructor for a Deadline that specifies whether or not it is completed.
+     * A constructor for a duke.task.Deadline that specifies whether or not it is completed.
      * @param title a String representing the title of the deadline
      * @param timeDue a LocalDate representing time at which the deadline is due
      */
@@ -13,7 +15,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * A constructor for a Deadline that specifies whether or not it is completed.
+     * A constructor for a duke.task.Deadline that specifies whether or not it is completed.
      * @param title a String representing the title of the deadline
      * @param timeDue a LocalDate representing time at which the deadline is due
      * @param isDone a boolean representing whether or not the deadline is completed
@@ -24,9 +26,9 @@ public class Deadline extends Task {
         this.isDone = isDone;
     }
     /**
-     * Returns the string representation of a Deadline.
+     * Returns the string representation of a duke.task.Deadline.
      *
-     * @return A string describing the Deadline.
+     * @return A string describing the duke.task.Deadline.
      */
     @Override
     public String toString() {
