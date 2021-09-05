@@ -20,8 +20,9 @@ import duke.task.ToDo;
  * required data.txt file.
  */
 public class Storage {
+    static final String COMPLETE_TAG = "1";
+    static final String INCOMPLETE_TAG = "0";
     private final String filePath;
-
     /**
      * Class constructor specifying the file path for data.txt file.
      *
@@ -39,7 +40,7 @@ public class Storage {
      */
     private void initializeDone(Task t, String s) {
         assert(s.equals("1") || s.equals("0"));
-        if (s.equals("1")) {
+        if (s.equals(COMPLETE_TAG)) {
             t.setDone();
         }
     }
@@ -107,7 +108,7 @@ public class Storage {
             String savedString = "";
             for (int i = 0; i < t.getSize(); i++) {
                 Task task = t.get(i);
-                String completionState = task.isDone() ? "1" : "0";
+                String completionState = task.isDone() ? COMPLETE_TAG : INCOMPLETE_TAG;
                 savedString += task.getTag() + " | " + completionState + " | "
                         + task.getTaskName() + " | " + task.getAdditionalInfo() + "\n";
             }
