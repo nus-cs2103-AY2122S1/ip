@@ -92,17 +92,22 @@ public class Gui {
     private void handleUserInput() {
         DialogBox userText = DialogBox.getUserDialog(this.userInput.getText());
         DialogBox dukeText;
+        String inputString = this.userInput.getText();
         String parsedString = "";
 
+        if (inputString.isBlank()) {
+            return;
+        }
+
         try {
-            parsedString = duke.handleInput(this.userInput.getText());
+            parsedString = this.duke.handleInput(inputString);
             dukeText = DialogBox.getDukeDialog(Ui.showReply(parsedString));
         } catch (DukeException e) {
             dukeText = DialogBox.getErrorDialog(Ui.showErrorMessage(e));
         }
         this.dialogContainer.getChildren().addAll(userText, dukeText);
 
-        duke.saveDataToFile();
+        this.duke.saveDataToFile();
         this.userInput.clear();
 
         if (parsedString.equals("bye")) {

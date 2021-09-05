@@ -31,6 +31,7 @@ public class TaskList {
     public String addTask(Task.TaskName type, String input, Boolean isDone) throws DukeException {
         Task task;
         String[] inputArray;
+        assert !input.isBlank(): "Input cannot be null!";
 
         switch (type) {
         case TODO:
@@ -48,6 +49,8 @@ public class TaskList {
             } else if (inputArray[1].isBlank()) {
                 throw new DukeException("The date/time is missing from " + type + ".");
             }
+            assert inputArray[0] != null && inputArray[1] != null : "The description is null!";
+
             task = type == Task.TaskName.EVENT ? new Event(inputArray[0], inputArray[1], isDone)
                     : new Deadline(inputArray[0], inputArray[1], isDone);
             break;
@@ -98,6 +101,7 @@ public class TaskList {
      */
     public String markTask(String input) throws DukeException {
         int index;
+        assert !input.isBlank(): "Input cannot be null!";
 
         try {
             index = Integer.parseInt(input);
@@ -120,6 +124,7 @@ public class TaskList {
      */
     public String deleteTask(String input) throws DukeException {
         int index;
+        assert !input.isBlank(): "Input cannot be null!";
 
         try {
             index = Integer.parseInt(input);
@@ -142,6 +147,8 @@ public class TaskList {
      * @return The reply for Duke containing all the task matching the keyword
      */
     public String findTask(String input) {
+        assert !input.isBlank(): "Input cannot be null!";
+
         StringBuilder reply = new StringBuilder("Here are the tasks matching the keyword: ")
                 .append(input).append("\n");
         int i = 1;

@@ -16,8 +16,9 @@ public class Parser {
     public String handleInput(TaskList list, String input) throws DukeException {
         String[] inputArray = input.split(" ", 2);
         String reply = "";
+        String command = inputArray[0];
 
-        switch (inputArray[0]) {
+        switch (command) {
         case "list":
             reply = list.displayTask();
             break;
@@ -25,16 +26,16 @@ public class Parser {
         case "done":
             // Fallthrough
         case "delete":
-            if (inputArray.length == 1) {
+            if (inputArray.length == 1 || inputArray[1].isBlank()) {
                 throw new DukeException("The index is missing.");
             }
-            reply = inputArray[0].equals("done")
+            reply = command.equals("done")
                     ? list.markTask(inputArray[1])
                     : list.deleteTask(inputArray[1]);
             break;
 
         case "find":
-            if (inputArray.length == 1) {
+            if (inputArray.length == 1 || inputArray[1].isBlank()) {
                 throw new DukeException("The keyword is missing.");
             }
             reply = list.findTask(inputArray[1]);
@@ -46,9 +47,9 @@ public class Parser {
             // Fallthrough
         case "event":
             if (inputArray.length < 2 || inputArray[1].isBlank()) {
-                throw new DukeException("The description of " + inputArray[0] + " cannot be empty.");
+                throw new DukeException("The description of " + command + " cannot be empty.");
             }
-            reply = list.addTask(Task.TaskName.getTaskType(inputArray[0]), inputArray[1]);
+            reply = list.addTask(Task.TaskName.getTaskType(command), inputArray[1]);
             break;
 
         case "bye":
