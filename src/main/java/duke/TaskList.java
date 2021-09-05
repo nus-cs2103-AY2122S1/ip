@@ -186,7 +186,36 @@ public class TaskList {
             return "No matching tasks!";
         } else {
             String str = "";
-            str += "Here are the matching tasks in your list: \n";
+            str += "Here are the matching task(s) in your list: \n";
+            for (int i = 0; i < searchList.size(); i++) {
+                str += (i + 1) + "." + searchList.get(i).toString() + "\n";
+            }
+            return str;
+        }
+    }
+
+    /**
+     * Allows the user to search for any keyword in the tasks.
+     *
+     * @param search The search term.
+     * @return A string containing the list of tasks matching the keyword.
+     */
+    public String searchTask(String search) {
+        searchList = new ArrayList<>();
+        for (int i = 0; i < ls.size(); i++) {
+            String[] arr = ls.get(i).getDescription().split(" ");
+            for(int j = 0; j < arr.length; j++) {
+                if (arr[j].contains(search)) {
+                    searchList.add(ls.get(i));
+                    break;
+                }
+            }
+        }
+        if (searchList.size() == 0) {
+            return "No matching tasks!";
+        } else {
+            String str = "";
+            str += "Here are the matching keyword(s) in your list: \n";
             for (int i = 0; i < searchList.size(); i++) {
                 str += (i + 1) + "." + searchList.get(i).toString() + "\n";
             }

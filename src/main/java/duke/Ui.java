@@ -19,9 +19,10 @@ public class Ui {
                         + "   e.g \"deadline submit homework /by Sunday 12 pm\" \n"
                         + "2. \"list\" to see the list of tasks \n"
                         + "3. \"find [keyword]\" to find a matching task \n"
-                        + "4. \"done [number]\" to mark a particular task as done \n"
-                        + "5. \"delete [number]\" to delete a particular task \n"
-                        + "6. \"bye\" to exit"
+                        + "4. \"search [keyword]\" to find a matching keyword contained in a task \n"
+                        + "5. \"done [number]\" to mark a particular task as done \n"
+                        + "6. \"delete [number]\" to delete a particular task \n"
+                        + "7. \"bye\" to exit"
         );
     }
 

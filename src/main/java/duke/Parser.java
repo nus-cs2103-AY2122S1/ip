@@ -66,6 +66,8 @@ public class Parser {
                         return parseList();
                     case "find":
                         return parseFind(arr);
+                    case "search":
+                        return parseSearch(arr);
                     default:
                         throw new InvalidCommandException("Command Not Found");
                 }
@@ -173,6 +175,25 @@ public class Parser {
             throw new InvalidCommandException("Please enter a single keyword!");
         } else {
             return taskList.findTask(arr[1]);
+        }
+    }
+
+    /**
+     * Deals with the user input when the user types "find".
+     *
+     * @param arr Array of strings from the user input.
+     * @throws InvalidCommandException If the following input is not valid.
+     * @return A string containing a list of tasks that matches the keyword.
+     */
+    public String parseSearch(String[] arr) throws InvalidCommandException {
+        if (arr.length == 1) {
+            throw new InvalidCommandException("Please specify a keyword you want to search");
+        } else if (taskList.getSize() == 0) {
+            throw new InvalidCommandException("You have not added any task!");
+        } else if (arr.length > 2) {
+            throw new InvalidCommandException("Please enter a single keyword!");
+        } else {
+            return taskList.searchTask(arr[1]);
         }
     }
 

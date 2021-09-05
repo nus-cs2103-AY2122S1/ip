@@ -47,7 +47,6 @@ public class Storage {
                         break;
                     }
                 }
-                //String description = arr[1] + " ";
                 if (task.charAt(2) == 'D') {
                     String deadline = "";
                     for (int i = counter; i < arr.length; i++) {
