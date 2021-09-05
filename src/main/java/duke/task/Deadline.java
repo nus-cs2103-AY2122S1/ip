@@ -22,14 +22,13 @@ public class Deadline extends Task {
                 Integer.parseInt(dayMonthYear[0]));
         String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
 
-        if (dateTime.length > 1) {
-            String rawTime = dateTime[1];
-            String processedRawTime = rawTime.substring(0, 2) + ":" + rawTime.substring(2);
-            LocalTime time = LocalTime.parse(processedRawTime);
-            String formattedTime = time.format(DateTimeFormatter.ofPattern("h a"));
+        assert dateTime.length > 1;
+        String rawTime = dateTime[1];
+        String processedRawTime = rawTime.substring(0, 2) + ":" + rawTime.substring(2);
+        LocalTime time = LocalTime.parse(processedRawTime);
+        String formattedTime = time.format(DateTimeFormatter.ofPattern("h a"));
 
-            this.by = formattedDate + ", " + formattedTime;
-        }
+        this.by = formattedDate + ", " + formattedTime;
     }
 
     /**
