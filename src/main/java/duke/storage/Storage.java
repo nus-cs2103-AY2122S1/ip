@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-//
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -51,63 +50,70 @@ public class Storage {
      */
     public ArrayList<Task> load() throws LoadingException, IOException {
         String dir = System.getProperty("user.dir");
-        // inserts correct file path separator on *nix and Windows
-        // works on *nix
-        // works on Windows
         java.nio.file.Path path = java.nio.file.Paths.get(dir, "data");
         boolean directoryExists = java.nio.file.Files.exists(path);
         if (!directoryExists) {
             new File(dir + "/data").mkdir();
         }
         File f = new File(path + file);
+        Scanner s;
         try {
-            Scanner s = new Scanner(f);
-            StringBuilder sb = new StringBuilder();
-            ArrayList<Task> taskList = new ArrayList<>();
-            while (s.hasNextLine()) {
-                String task = s.nextLine();
-                int lens = task.length();
-                // No content
-                if (lens == 0) {
-                    return new ArrayList<>();
-                }
-                String oneLine = task + System.lineSeparator();
-                sb.append(oneLine);
-                // Judge data input to add tasks.
-                addRelatedTasks(task, taskList, lens);
-            }
-            content = sb.toString();
-            return taskList;
+            s = new Scanner(f);
         } catch (FileNotFoundException e) {
             f.createNewFile();
             throw new LoadingException();
         }
+        StringBuilder sb = new StringBuilder();
+        ArrayList<Task> taskList = new ArrayList<>();
+        while (s.hasNextLine()) {
+            String task = s.nextLine();
+            int lens = task.length();
+            String oneLine = task + System.lineSeparator();
+            sb.append(oneLine);
+            addRelatedTasks(task, taskList, lens);// Judge data input to add tasks.
+        }
+        content = sb.toString();//Update the content.
+        return taskList;
     }
+
+
     public void addRelatedTasks(String task, ArrayList<Task> taskList, int lens) {
         char type = task.charAt(0);
         char done = task.charAt(4);
         if (type == 'T') {
-            Todo todo = new Todo(task.substring(8, lens));
-            if (done == '1') {
-                todo.markAsDone();
-            }
-            taskList.add(todo);
+            taskList.add(addTodo(task, lens, done));
         } else {
-            String[] parts = task.substring(8, lens).split(" ~ ");
-            String content = parts[0];
-            String by = parts[1];
-            Task deadlineOrEvent;
-            if (type == 'D') {
-                deadlineOrEvent = new Deadline(content, by);
-            } else {
-                deadlineOrEvent = new Event(content, by);
-            }
-            if (done == '1') {
-                deadlineOrEvent.markAsDone();
-            }
-            taskList.add(deadlineOrEvent);
+            taskList.add(addEventOrDeadline(task, lens, type, done));
         }
     }
+
+    public Task addEventOrDeadline(String task, int lens, int type, char done) {
+        String[] parts = task.substring(8, lens).split(" ~ ");
+        String content = parts[0];
+        String time = parts[1];
+        Task deadlineOrEvent;
+        if (type == 'D') {
+            deadlineOrEvent = new Deadline(content, time);
+        } else {
+            deadlineOrEvent = new Event(content, time);
+        }
+        if (done == '1') {
+            deadlineOrEvent.markAsDone();
+        }
+        return deadlineOrEvent;
+    }
+
+    public Task addTodo(String task, int lens, char done) {
+        Task todo = new Task("");
+        if (done == '1') {
+            todo = new Todo(task.substring(8, lens));
+            todo.markAsDone();
+        } else {
+            todo = new Todo(task.substring(8, lens));
+        }
+        return todo;
+    }
+
     /**
      * Writes the text to data file, which overwrites initial storage.
      *
@@ -146,16 +152,15 @@ public class Storage {
         String split = "by: ";
         String prefix = "0";
         String dataForm;
-
+        if (type == 'E') {
+            split = "at: ";
+        }
         if (done == 'X') {
             prefix = "1";
         }
         if (type == 'T') {
             dataForm = "T | " + prefix + " | " + task.substring(7, lens);
         } else {
-            if (type == 'E') {
-                split = "at: ";
-            }
             String[] parts = task.substring(7, lens).split(split);
             String content = parts[0];
             int lensContent = content.length();
@@ -188,28 +193,26 @@ public class Storage {
      * @param tasks The task list.
      */
     public void replace(int place, TaskList tasks) {
-        try {
-            String dataFile = dir + "/data" + file;
-            String[] parts = content.split(System.lineSeparator());
-            int lens = parts.length;
-            String newData = "";
-            if (tasks != null) {
-                newData = transformToData(tasks.elementToString(place));
+        String dataFile = dir + "/data" + file;
+        String[] parts = content.split(System.lineSeparator());
+        int lens = parts.length;
+        String newData = "";
+        if (tasks != null) {
+            newData = transformToData(tasks.elementToString(place));
+        }
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < lens; i++) {
+            String temp = parts[i];
+            if (i == place && tasks == null) {
+                continue;
+            } else if (i == place) {
+                temp = newData;
             }
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < lens; i++) {
-                String temp = parts[i];
-                if (i == place) {
-                    if (tasks == null) {
-                        continue;
-                    } else {
-                        temp = newData;
-                    }
-                }
-                temp = temp + System.lineSeparator();
-                sb.append(temp);
-            }
-            content = sb.toString();
+            temp = temp + System.lineSeparator();
+            sb.append(temp);
+        }
+        content = sb.toString();
+        try{
             writeToFile(dataFile, content);
         } catch (IOException e) {
             System.out.println("Delete failed.");

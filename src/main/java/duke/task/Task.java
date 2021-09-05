@@ -108,33 +108,41 @@ public class Task {
      * @param input The user input of date.
      * @return True or not.
      */
-    public static boolean isDate(String input) {
+    public static boolean isDateInputFormat(String input) {
         int lens = input.length();
         if (lens > 10) {
-            if (!input.contains(" ")) {
-                return false;
-            }
-            String[] parts = input.split(" ");
-            if (parts.length != 2) {
-                return false;
-            }
-            String date = parts[0];
-            String time = parts[1];
-            if (date.length() > 10 || time.length() != 4 || !Parser.checkDigit(time)
-                    || !date.contains("/")) {
-                return false;
-            }
-            String[] subParts = date.split("/");
-            return isDateFirstPart(subParts);
+            return checkDateTime(input);
         } else {
-            if (lens < 8 || !input.contains("/")) {
-                return false;
-            }
-            String[] parts = input.split("/");
-            return isDateFirstPart(parts);
+           return checkOnlyDate(input, lens);
         }
     }
 
+    public static boolean checkDateTime(String input) {
+        if (!input.contains(" ")) {
+            return false;
+        }
+        String[] parts = input.split(" ");
+        if (parts.length != 2) {
+            return false;
+        }
+        String date = parts[0];
+        String time = parts[1];
+        boolean isLengthInValid = date.length() > 10 || time.length() != 4;
+        boolean isContentInValid = !Parser.checkDigit(time) || !date.contains("/");
+        if (isLengthInValid || isContentInValid) {
+            return false;
+        }
+        String[] subParts = date.split("/");
+        return isDateFirstPart(subParts);
+    }
+
+    public static boolean checkOnlyDate(String input, int lens) {
+        if (lens < 8 || !input.contains("/")) {
+            return false;
+        }
+        String[] parts = input.split("/");
+        return isDateFirstPart(parts);
+    }
     /**
      * Returns the correct time representation in string.
      *
@@ -162,14 +170,13 @@ public class Task {
      * @param preTime The time user input.
      * @return The specified form of time.
      */
-    public static String dateAndTime(String preTime) {
-        if (isDate(preTime)) {
-            int lens = preTime.length();
-            String actualTime = getDate(transferToDateFormat(preTime));
-            if (lens > 10) {
-                actualTime += " " + getTime(preTime.substring(lens - 4, lens));
-            }
-            return actualTime;
+    public static String formatOutputDateAndTime(String preTime) {
+        int lens = preTime.length();
+        if (isDateInputFormat(preTime) && lens <= 10) {
+            return getDate(transferToDateFormat(preTime));
+        } else if (isDateInputFormat(preTime)) {
+            return getDate(transferToDateFormat(preTime)) + " "
+                    + getTime(preTime.substring(lens - 4, lens));
         } else {
             return preTime;
         }

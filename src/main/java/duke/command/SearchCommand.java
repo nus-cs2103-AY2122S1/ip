@@ -38,7 +38,7 @@ public class SearchCommand extends Command {
         switch (type) {
         case DATE:
             String preTime = response.substring(5);
-            String actualTime = Task.dateAndTime(preTime);
+            String actualTime = Task.formatOutputDateAndTime(preTime);
             currList = tasks.tasksWithDate(actualTime);
             break;
         case FIND:

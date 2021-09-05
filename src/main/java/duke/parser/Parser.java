@@ -84,10 +84,13 @@ public class Parser {
      * @throws DukeException The exception related to duke.
      */
     public static Operation checkResponse(String response, int len) throws DukeException {
+        boolean isEmpty = response.equals("delete") || response.equals("todo") || response.equals("deadline")
+                || response.equals("event") || response.equals("done") || response.equals("date")
+                || response.equals("find");
         if (response.startsWith("find ") && len > 5) {
             return Operation.FIND;
         } else if (response.startsWith("date ")
-                && Task.isDate(response.substring(5))) {
+                && Task.isDateInputFormat(response.substring(5))) {
             return Operation.DATE;
         } else if (response.startsWith("done ")
                 && checkDigit(response.substring(5))) {
@@ -103,13 +106,10 @@ public class Parser {
         } else if (response.startsWith("delete ")
                 && checkDigit(response.substring(7))) {
             return Operation.DELETE;
-        } else if (response.equals("delete") || response.equals("todo") || response.equals("deadline")
-                || response.equals("event") || response.equals("done") || response.equals("date")
-                        || response.equals("find")) {
+        } else if (isEmpty) {
             throw new EmptyInputException(response);
         } else {
-            //This means there's no match of operations.
-            throw new NotRecognizeException();
+            throw new NotRecognizeException();//This means there's no match of operations.
         }
     }
 }
