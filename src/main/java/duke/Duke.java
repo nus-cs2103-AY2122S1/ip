@@ -1,8 +1,5 @@
 package duke;
 
-import duke.Tasks.BaseTask;
-
-
 import java.nio.file.InvalidPathException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,12 +10,11 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    /** Tracks whether the exit command was used. */
-    private boolean isExited;
-
-
     /** Storage and Management of Duke Objects. */
     private static Duke dukeInstance;
+
+    /** Tracks whether the exit command was used. */
+    private boolean isExited;
 
     private DukeCommandParser currDukeCmdParser;
     private DukeStorageManager currStorageMgr;
@@ -52,6 +48,7 @@ public class Duke {
     /**
      * Use to get the current instance of Duke that is running.
      * Creates a new instance of Duke if there is none running.
+     *
      * @return the Duke object that is running.
      */
     public static Duke getCurrDuke() {
@@ -62,7 +59,7 @@ public class Duke {
     }
 
     /**
-     * Getter for Duke's Command Parser.
+     * Gets Duke's Command Parser.
      *
      * @return the current Duke Command Parser.
      */
@@ -71,7 +68,7 @@ public class Duke {
     }
 
     /**
-     * Getter for Duke's Storage Manager.
+     * Gets Duke's Storage Manager.
      *
      * @return the current Duke Storage Manager.
      */
@@ -80,7 +77,7 @@ public class Duke {
     }
 
     /**
-     * Getter for Duke's current list manager.
+     * Gets Duke's current list manager.
      *
      * @return the current list manager.
      */
@@ -91,20 +88,21 @@ public class Duke {
 
     /**
      * The main method that starts the whole program.
-     * @param args Any arguments passed through the command-line when starting the program.
+     *
+     * @param currDuke The instance of Duke to start.
      */
-    public static void main(String[] args) {
-        Duke currDuke = getCurrDuke();
+    public static void dukeStarter(Duke currDuke) {
+
         // Load Save File only after Duke is created.
-        currDuke.getCurrStorageMgr().reloadSaveFromXMLDoc();
+        currDuke.getCurrStorageMgr().reloadSaveFromXmlDoc();
 
         System.out.println("Duke is running in the folder: " + System.getProperty("user.dir"));
 
         // Show Welcome Message
-        currDuke.currUiCtrl.printWelcomeMessage();
+        // currDuke.currUiCtrl.printWelcomeMessage();
 
-        // Start accepting input
-        currDuke.runInputLoopMain();
+        // Start accepting input (Not necessary anymore)
+        // currDuke.runInputLoopMain();
     }
 
     /**
@@ -133,6 +131,19 @@ public class Duke {
     }
 
     /**
+     * Use when the user enters something new in the GUI, in order to process the command.
+     *
+     * @param lastInput What the user entered into the GUI.
+     */
+    public void acceptUserInput(String lastInput) {
+        try {
+            this.processCmdInput(lastInput);
+        } catch (DukeExceptionBase dukeE) {
+            dukeE.dukeSayErrorMsg();
+        }
+    }
+
+    /**
      * Runs to process the command input using the command parser.
      *
      * @param lastInput   The command to process.
@@ -148,15 +159,15 @@ public class Duke {
         if (cmdType == DukeCommandParser.CommandType.BYE) {
             this.dukeExiter();
         } else if (cmdType == DukeCommandParser.CommandType.LIST) {
-            this.listOutTDL();
+            this.listOutTdl();
         } else if (cmdType == DukeCommandParser.CommandType.MARK_TASK_DONE) {
-            this.markItemDoneInTDL(lastInput);
+            this.markItemDoneInTdl(lastInput);
         } else if (cmdType == DukeCommandParser.CommandType.DEL_TASK) {
-            this.deleteTaskInTDL(lastInput);
+            this.deleteTaskInTdl(lastInput);
         } else if (cmdType == DukeCommandParser.CommandType.ADD_TASK) {
-            this.addToTDL(lastInput, currTaskType);
+            this.addToTdl(lastInput, currTaskType);
         } else if (cmdType == DukeCommandParser.CommandType.FIND) {
-            this.findTaskInTDL(lastInput);
+            this.findTaskInTdl(lastInput);
 
         } else {
             unknownCommandEntered();
@@ -173,7 +184,6 @@ public class Duke {
 
     /**
      * Used when Duke is supposed to say something.
-     * This would use the UI controller to print the message between 2 line separators.
      *
      * @param printThis The message to print inside Duke's text bubble
      */
@@ -182,7 +192,9 @@ public class Duke {
 
         // Updated to work with new UI Controller which contains a buffer
         currDuke.currUiCtrl.addToDukeBuffer(printThis);
-        currDuke.currUiCtrl.dukeBufferRelease();
+
+        // Buffer release is now done by Main Window
+        // currDuke.currUiCtrl.dukeBufferRelease();
     }
 
     /**
@@ -196,20 +208,38 @@ public class Duke {
         currDuke.currUiCtrl.addToDukeBuffer(printLater);
     }
 
+    /**
+     * Used to empty the text buffer containing what Duke is going to say.
+     *
+     * @return what Duke is going to say.
+     */
+    public String flushUiBuffer() {
+        return this.currUiCtrl.dukeBufferRelease();
+    }
+
+    /**
+     * Used to get the Welcome Message in String form. Also prints the welcome message in the console.
+     *
+     * @return the Welcome Message.
+     */
+    public String getWelcomeMessage() {
+        return this.currUiCtrl.printWelcomeMessage();
+    }
+
     private void unknownCommandEntered() throws DukeExceptionBase {
         throw new DukeExceptionBase("Please enter something valid!");
     }
 
-    private void addToTDL(String str, BaseTask.TaskType currTaskType) throws DukeExceptionBase {
+    private void addToTdl(String str, BaseTask.TaskType currTaskType) throws DukeExceptionBase {
         this.currDukeList.tdlAdd(str, currTaskType);
     }
 
 
-    private void listOutTDL() {
+    private void listOutTdl() {
         this.currDukeList.printOutWholeList();
     }
 
-    private void markItemDoneInTDL(String command) throws DukeExceptionBase {
+    private void markItemDoneInTdl(String command) throws DukeExceptionBase {
         if (command.length() < 6) {
             throw new DukeExceptionBase("You need to specify a task to set as done.");
         }
@@ -226,7 +256,7 @@ public class Duke {
         dukeSays(dukeOutput);
     }
 
-    private void deleteTaskInTDL(String command) throws DukeExceptionBase {
+    private void deleteTaskInTdl(String command) throws DukeExceptionBase {
         if (command.length() < 8) {
             throw new DukeExceptionBase("You need to specify a task to delete.");
         }
@@ -243,7 +273,7 @@ public class Duke {
         dukeSays(dukeOutput);
     }
 
-    private void findTaskInTDL(String command) throws DukeExceptionBase {
+    private void findTaskInTdl(String command) throws DukeExceptionBase {
         if (command.length() < 6) {
             throw new DukeExceptionBase("You need to specify a keyword to find.");
         }

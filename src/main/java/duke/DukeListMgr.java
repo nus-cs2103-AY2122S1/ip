@@ -1,10 +1,5 @@
 package duke;
 
-import duke.Tasks.DeadlineTask;
-import duke.Tasks.EventTask;
-import duke.Tasks.BaseTask;
-import duke.Tasks.ToDosTask;
-
 import java.util.ArrayList;
 
 /**
@@ -25,9 +20,7 @@ public class DukeListMgr {
      * Used for adding things to the to do list.
      *
      * @param str   Thing to add to the list.
-     *
      * @param currTaskType The type of the task to add.
-     *
      * @throws DukeExceptionBase when an invalid input is entered.
      */
     public void tdlAdd(String str, BaseTask.TaskType currTaskType) throws DukeExceptionBase {
@@ -100,9 +93,7 @@ public class DukeListMgr {
      * Used to mark the corresponding task as done.
      *
      * @param taskNo The task number in the list.
-     *
      * @return Duke's output from this command
-     *
      * @throws DukeExceptionBase when an invalid task is specified or if task is already done.
      */
     public String markTaskAsDone(int taskNo) throws DukeExceptionBase {
@@ -125,9 +116,7 @@ public class DukeListMgr {
      * Used to delete tasks from the list.
      *
      * @param taskNo The task number to delete.
-     *
      * @return Duke's output from this command
-     *
      * @throws DukeExceptionBase when an invalid task is specified.
      */
     public String deleteTask(int taskNo) throws DukeExceptionBase {

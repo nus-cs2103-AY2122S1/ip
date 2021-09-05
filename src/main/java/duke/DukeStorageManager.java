@@ -1,27 +1,27 @@
 
 package duke;
 
-import duke.Tasks.BaseTask;
-import duke.Tasks.DeadlineTask;
-import duke.Tasks.EventTask;
-import duke.Tasks.ToDosTask;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  * This class encapsulates the local storage functions of Duke.
@@ -59,19 +59,15 @@ public class DukeStorageManager {
             DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
 
             // Setting the error handler for the xml parser makes it such that when there is an
-            // error in the XML file, instead of a line saying "Fatal Error" printing in the console
+            // error in the XML file, instead of a line saying "Fatal Error" forcibly printed in the console
             // along with the SAXParseException being thrown, only the Exception is thrown.
 
-            // This stops "Fatal Error" from printing in console when a XML file with invalid contents is used
-            // because Duke is able to handle invalid XML files by creating a new file, thus printing the
-            // "Fatal Error" is not needed since this error has been foreseen and can be automatically handled.
-            // The SAXParseException is still thrown and caught as shown in the lines below,
-            // and when it happens, a new save file will be created instead.
-
-            // According to this website: https://stackoverflow.com/questions/1575925/disable-logging-in-java-xerces-fatal-error-11-content-is-not-allowed-in-p
+            // According to this website:
+            // https://stackoverflow.com/questions/1575925/
             // the fatal error is automatically logged into the console even if the exception is caught.
             // It also says that the next line below is the only way to stop the unwanted line from being printed.
-            documentBuilder.setErrorHandler(null);
+            // documentBuilder.setErrorHandler(null);
+            // We no longer have to set the redundant error message to not print because we are using a GUI.
 
             this.xmlSaveFileDoc = documentBuilder.parse(this.saveFile);
 
@@ -135,9 +131,9 @@ public class DukeStorageManager {
      * Run this to reload the save data from the XML doc obj into Duke's
      * List Manager.
      */
-    public void reloadSaveFromXMLDoc() {
+    public void reloadSaveFromXmlDoc() {
         if (this.xmlSaveFileDoc == null) {
-            System.out.println("No save file to load from.");
+            Duke.dukeLaterSay("No save file to load from.");
             return;
         }
 
@@ -146,7 +142,7 @@ public class DukeStorageManager {
 
         // There should be only 1 taskList node
         if (taskList.getLength() > 1) {
-            System.out.println("Loaded XML file contains more than 1 task list. Only first one will be loaded.");
+            Duke.dukeLaterSay("Loaded XML file contains more than 1 task list. Only first one will be loaded.");
         }
 
         Node firstTaskList = taskList.item(0);
@@ -195,7 +191,8 @@ public class DukeStorageManager {
                     taskExtraInfoNode = getFirstNodeByTagName(currTaskAssetElement, "taskExtraInfo");
 
                     try {
-                        createdTask = new DeadlineTask(taskDataNode.getTextContent(), taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
+                        createdTask = new DeadlineTask(taskDataNode.getTextContent(),
+                                taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
                     } catch (DukeExceptionBase e) {
                         // If date format of this Deadline Task is wrong, then don't load it.
                         createdTask = null;
@@ -204,11 +201,15 @@ public class DukeStorageManager {
                 case EVENT:
                     taskExtraInfoNode = getFirstNodeByTagName(currTaskAssetElement, "taskExtraInfo");
 
-                    createdTask = new EventTask(taskDataNode.getTextContent(), taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
+                    createdTask = new EventTask(taskDataNode.getTextContent(),
+                            taskExtraInfoNode.getTextContent(), isCurrTaskCompleted);
                     break;
                 case NONE:
-                    System.out.println("Unknown Task Type Loaded: " + currTaskType + " with data: " + taskDataNode.getTextContent());
+                default:
+                    System.out.println("Unknown Task Type Loaded: "
+                            + currTaskType + " with data: " + taskDataNode.getTextContent());
                     createdTask = null;
+                    break;
                 }
 
                 // In case of error while creating task - Don't add it to the list
@@ -281,7 +282,7 @@ public class DukeStorageManager {
 
 
             // Now write the file to local storage
-            this.writeCurrXMLDocToDisk();
+            this.writeCurrXmlDocToDisk();
 
 
         } catch (ParserConfigurationException e) {
@@ -334,6 +335,7 @@ public class DukeStorageManager {
             createdTaskElement.appendChild(taskExtraInfoElement);
             break;
         case NONE:
+        default:
             Duke.dukeLaterSay("Unidentified task type expected, cannot save this task: " + currTask.toString());
             createdTaskElement = null;
         }
@@ -344,7 +346,7 @@ public class DukeStorageManager {
     /**
      * Starts writing the current XML file in the Document thing to Disk.
      */
-    private void writeCurrXMLDocToDisk() {
+    private void writeCurrXmlDocToDisk() {
         if (this.xmlSaveFileDoc == null) {
             System.out.println("XML Document is null.");
         }

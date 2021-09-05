@@ -7,13 +7,14 @@ import java.util.ArrayList;
  */
 public class DukeUi {
 
-    /** Buffer containing what Duke is going to say. */
-    private ArrayList<String> dukeUiBuffer;
 
     /** Default line separator designs. */
     private static String sepLine = "===========================================";
     private static String sepLineOpen = "///<<<============ Duke Says: ===========>>>\\\\\\";
     private static String sepLineClose = "\\\\\\<<<===================================>>>///";
+
+    /** Buffer containing what Duke is going to say. */
+    private ArrayList<String> dukeUiBuffer;
 
 
     /**
@@ -36,35 +37,51 @@ public class DukeUi {
     /**
      * Used to release what Duke wants to say from the buffer.
      * This would print the message between 2 line separators.
+     *
+     * @return the String containing what Duke says at one go.
      */
-    public void dukeBufferRelease() {
+    public String dukeBufferRelease() {
+        // GUI Output
+        String returnThis = "";
+
+        for (String dukeLine : dukeUiBuffer) {
+            returnThis = returnThis + dukeLine + "\n";
+        }
+
+
+        // Text Output
         System.out.println("");
         System.out.println(sepLineOpen);
 
-        for (String dukeLine : dukeUiBuffer) {
-            System.out.println(dukeLine);
-        }
+
+        System.out.println(returnThis);
+
 
         System.out.println(sepLineClose);
 
         // Clear Duke output buffer so it can accept new lines
         this.dukeUiBuffer.clear();
+
+        return returnThis;
     }
 
 
     /**
-     * Prints the welcome message.
+     * Prints and returns the welcome message.
+     *
+     * @return the Welcome Message.
      */
-    public void printWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Give me something to do!");
+    public String printWelcomeMessage() {
+        String returnThis;
 
+        String logo = "The DUKE SEAGULL";
+        returnThis = "Hello from\n" + logo;
+        returnThis = returnThis + "\nGive me something to do!";
+
+        System.out.println(returnThis);
         System.out.println(sepLine);
+
+        return returnThis;
     }
 
 

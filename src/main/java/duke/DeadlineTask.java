@@ -1,6 +1,4 @@
-package duke.Tasks;
-
-import duke.DukeExceptionBase;
+package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,15 +14,14 @@ public class DeadlineTask extends BaseTask {
     /** 'by when' data is given in date form and stored here. */
     private LocalDate byWhenDate;
 
-//    /** Activates or deactivates Debug mode. */
-//    private boolean debugMode = false;
 
 
     /**
      * Used for creating a new Deadline Task.
      *
      * @param taskName the name or description of the task.
-     * @param byWhen describes when the task should be completed by. (In the format: D/M/YY, DD/MM/YYYY or DD Month YYYY)
+     * @param byWhen describes when the task should be completed by.
+     *               (In the format: D/M/YY, DD/MM/YYYY or DD Month YYYY)
      * @throws DukeExceptionBase when the byWhen field is not given in an acceptable format.
      */
     public DeadlineTask(String taskName, String byWhen) throws DukeExceptionBase {
@@ -52,7 +49,8 @@ public class DeadlineTask extends BaseTask {
      */
     private void parseByWhenInput(String byWhen) throws DukeExceptionBase {
         if (byWhen.length() <= 5) {
-            throw new DukeExceptionBase("DeadlineTask must contain a Date in 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY' formats.");
+            throw new DukeExceptionBase("DeadlineTask must contain a Date in 'D/M/YY',"
+                    + " 'DD/MM/YYYY' or 'DD Month YYYY' formats.");
         }
         // Check if year is in YY or YYYY form
         String last4Char = byWhen.substring(byWhen.length() - 4);
@@ -64,13 +62,10 @@ public class DeadlineTask extends BaseTask {
         DateTimeFormatter formatterToUse = null;
 
         if (hasSlash) {
-//            System.out.println("USING yy FORMATTER");
             formatterToUse = DateTimeFormatter.ofPattern("d/M/yy");
         } else if (hasSpaceAtFront) {
-//            System.out.println("USING LONG DATE FORMATTER");
             formatterToUse = DateTimeFormatter.ofPattern("d MMMM yyyy");
         } else {
-//            System.out.println("USING yyyy FORMATTER");
             formatterToUse = DateTimeFormatter.ofPattern("d/M/yyyy");
         }
 
@@ -80,20 +75,11 @@ public class DeadlineTask extends BaseTask {
             this.byWhenDate = byDate;
 
         } catch (DateTimeParseException e) {
-            throw new DukeExceptionBase("Deadline Date does not follow the format required. " +
-                    "DeadlineTask must contain a Date in 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY' formats");
+            throw new DukeExceptionBase("Deadline Date does not follow the format required. "
+                    + "DeadlineTask must contain a Date in 'D/M/YY', 'DD/MM/YYYY' or 'DD Month YYYY' formats");
         }
     }
 
-//    /**
-//     * Prints String if debug mode is activated.
-//     * @param str the String to print.
-//     */
-//    private void debugPrint(String str) {
-//        if (debugMode) {
-//            System.out.println(str);
-//        }
-//    }
 
     /**
      * Gets the String representation of the by when.
