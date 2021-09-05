@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.exception.DukeIncorrectInputs;
 import duke.exception.DukeNoSuchTask;
 import duke.exception.DukeUnableLoadTask;
 import duke.task.Task;
@@ -10,7 +9,6 @@ import duke.task.TaskList;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Represents a Duke chatbot that can add tasks
@@ -110,54 +108,17 @@ public class Duke {
         this.storage.loadSavedTasks(this);
     }
 
+    /**
+     * Finds the task from task list with matching keyword.
+     * @param keyword keyword that user wishes to find.
+     * @return task that contains the keyword.
+     */
     public TaskList findTasks(String keyword) {
         TaskList tasksFound = this.listOfTasks.findTasks(keyword);
         return tasksFound;
     }
 
-//    /**
-//     * Runs the chatbot Duke.
-//     * @param args user inputs that will turn into commands.
-//     */
-//    public static void main(String[] args) {
-//        Duke d = new Duke();
-//        // d.start(new Stage());
-//        d.openDukeChatBot();
-//        Scanner sc = new Scanner(System.in);
-//        File output = new File(d.FILE_PATH);
-//        if (!output.isFile()) {
-//            output.getParentFile().mkdirs(); // if user does not have existing file path
-//            try {
-//                output.createNewFile();
-//            } catch (IOException e) {
-//                Ui.printErrorMessage(e);
-//            }
-//        }
-//
-//        try {
-//            d.loadSavedTasks();
-//        } catch (IOException | DukeUnableLoadTask e) {
-//            Ui.printErrorMessage(e);
-//        }
-//
-//        while (d.isOpen) {
-//            try {
-//                String userInput = sc.nextLine().strip();
-//                Command toExecute = Parser.parse(userInput, d);
-//                toExecute.execute(d.listOfTasks);
-//            } catch (DukeException | IOException e) {
-//                Ui.printErrorMessage(e);
-//            }
-//        }
-//    }
-
-    /**
-     * Gets the response from the duke based on user input.
-     * @param input user input into the textfield.
-     * @return duke response based on user input.
-     * @throws DukeException if user input violates given rules.
-     */
-    public String getResponse(String input) throws DukeException {
+    private void createFileIfNoFile() {
         File output = new File(this.FILE_PATH);
 
         if (!output.isFile()) {
@@ -168,17 +129,31 @@ public class Duke {
                 throw new DukeException(e.getMessage(), e);
             }
         }
+    }
 
-        if (this.isOpen) {
-            try {
-                String userInput = input.strip();
-                Command toExecute = Parser.parse(userInput, this);
-                return toExecute.execute(this.listOfTasks);
-            } catch (DukeException | IOException e) {
-                throw new DukeException(e.getMessage(), e);
-            }
-        } else {
+    private String parseUserInput(String input) throws IOException, DukeException {
+        String userInput = input.strip();
+        Command toExecute = Parser.parse(userInput, this);
+        return toExecute.execute(this.listOfTasks);
+    }
+
+    /**
+     * Gets the response from the duke based on user input.
+     * @param input user input into the textfield.
+     * @return duke response based on user input.
+     * @throws DukeException if user input violates given rules.
+     */
+    public String getResponse(String input) throws DukeException {
+        if (!this.isOpen) {
             return "PROBLEM";
+        }
+
+        createFileIfNoFile();
+
+        try {
+            return parseUserInput(input);
+        } catch (DukeException | IOException e) {
+            throw new DukeException(e.getMessage(), e);
         }
 
     }

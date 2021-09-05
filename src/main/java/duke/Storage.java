@@ -31,12 +31,19 @@ public class Storage {
      */
     public void saveTasks(TaskList listOfTasks) throws IOException {
         StringBuffer tasksToWrite = new StringBuffer();
+        consolidateTasks(listOfTasks, tasksToWrite);
+        writeTasksToFile(tasksToWrite);
+    }
+
+    private void consolidateTasks(TaskList listOfTasks, StringBuffer tasksToWrite) {
         int len = listOfTasks.getTotalNumber();
 
         for (int i = 0; i < len; i++) {
             tasksToWrite.append(listOfTasks.getTask(i).saveToFile() + "\n");
         }
+    }
 
+    private void writeTasksToFile(StringBuffer tasksToWrite) throws IOException {
         FileWriter fileWriter = new FileWriter(this.FILE_PATH, false);
         fileWriter.write(tasksToWrite.toString());
         fileWriter.close();
@@ -51,7 +58,10 @@ public class Storage {
     public void loadSavedTasks(Duke duke) throws IOException, DukeUnableLoadTask {
         File f = new File(this.FILE_PATH);
         Scanner sc = new Scanner(f); // Scanner with file as source
+        processTasksToDuke(sc, duke);
+    }
 
+    private void processTasksToDuke(Scanner sc, Duke duke) {
         int i = 1; // index counter
 
         while (sc.hasNextLine()) {
