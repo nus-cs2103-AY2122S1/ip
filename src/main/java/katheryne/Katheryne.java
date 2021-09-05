@@ -1,3 +1,12 @@
+package katheryne;
+
+// import task classes
+import katheryne.task.Deadline;
+import katheryne.task.Event;
+import katheryne.task.Task;
+import katheryne.task.Todo;
+
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -24,7 +33,7 @@ import java.util.Scanner;
 @JsonTypeInfo(use = NAME, include = PROPERTY)
 
 /**
- * Chat bot Katheryne, used for simple todo lists
+ * Chat bot katheryne.Katheryne, used for simple todo lists
  */
 public class Katheryne {
     public static void main(String[] args) throws KatheryneExceptions {
@@ -150,7 +159,7 @@ public class Katheryne {
 
         // try to save the file
         try {
-            writer.writeValue(Paths.get("tasks.json").toFile(), lst);
+            Files.write(Paths.get("tasks.json"), writer.writeValueAsString(lst).getBytes(StandardCharsets.UTF_8));
             System.out.println("Ad Astra Abyssoque, Traveller!");
         } catch (IOException e) {
             System.out.println("Oh wait! Traveller, I couldn't catch that...");

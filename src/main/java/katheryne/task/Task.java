@@ -1,3 +1,5 @@
+package katheryne.task;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
@@ -6,15 +8,15 @@ import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
 
 @JsonTypeInfo(use = NAME, include = PROPERTY)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = Todo.class, name = "Todo"),
-        @JsonSubTypes.Type(value = Event.class, name = "Event"),
-        @JsonSubTypes.Type(value = Deadline.class, name = "Deadline")
+        @JsonSubTypes.Type(value = Todo.class, name = "katheryne.task.Todo"),
+        @JsonSubTypes.Type(value = Event.class, name = "katheryne.task.Event"),
+        @JsonSubTypes.Type(value = Deadline.class, name = "katheryne.task.Deadline")
 })
 
 /**
  * Class used for Tasks.
  */
-public class Task {
+public abstract class Task {
     private String description;
     private Boolean isDone = false;
 

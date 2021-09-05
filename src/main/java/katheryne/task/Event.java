@@ -1,8 +1,10 @@
+package katheryne.task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Creates an Event, a type of Task with a date it is held at.
+ * Creates an katheryne.task.Event, a type of katheryne.task.Task with a date it is held at.
  */
 public class Event extends Task {
     protected String stringAt;
@@ -14,7 +16,7 @@ public class Event extends Task {
     /**
      * Constructor for an event class.
      * 
-     * @param description a String which describes the task.
+     * @param description a String which describes the katheryne.task.
      * @param dateAt the LocalDate it is due at.
      */
     public Event(String description, LocalDate dateAt) {
@@ -24,8 +26,8 @@ public class Event extends Task {
     }
     
     // getters & setters (needed for jackson)
-    protected void setDateDueAt(LocalDate dateDueAt) {
-        this.dateAt = dateDueAt;
+    protected void setDateAt(LocalDate dateAt) {
+        this.dateAt = dateAt;
     }
 
     protected void setStringAt(String stringAt) {
