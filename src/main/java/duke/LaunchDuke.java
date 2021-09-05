@@ -1,23 +1,34 @@
 package duke;
-import java.io.FileNotFoundException;
+
+import javafxGUI.MainWindow;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
+import javafx.fxml.FXMLLoader;
+import java.io.IOException;
+import javafx.stage.Stage;
+
 
 /**
  * A Class to initialize Duke Object and run the entire program.
  * @author Jia Rong
  */
-public class LaunchDuke {
+public class LaunchDuke extends Application {
     private static final String path = "./data/duke.txt";
+    private Duke duke = new Duke(path);
 
-    /**
-     * Main method to run the duke object.
-     * @param args
-     * @throws FileNotFoundException if scanner in storage class
-     * cannot locate the text file to be written to or read from.
-     */
-
-    public static void main(
-            String[] args) throws FileNotFoundException {
-        Duke duke = new Duke(path);
-        duke.run();
+    @Override
+    public void start(Stage stage) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(LaunchDuke.class.getResource("/view/MainWindow.fxml"));
+            AnchorPane ap = fxmlLoader.load();
+            Scene scene = new Scene(ap);
+            stage.setScene(scene);
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 }

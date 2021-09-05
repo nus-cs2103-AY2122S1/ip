@@ -1,2 +1,1 @@
-E | 1 | proj meweting 12-09-2019 18:00
 T | 0 | read book

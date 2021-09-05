@@ -3,6 +3,7 @@ package duke;
 import duke.commands.Command;
 import java.io.FileNotFoundException;
 import duke.exceptions.DukeException;
+import javafx.application.Platform;
 
 /**
  * Duke object class. Contains methods to run the duke bot.
@@ -35,27 +36,31 @@ public class Duke {
     }
 
     /**
-     * Retrieves theresponse of th ebot given the input command by user.
-     * Interactis with the different classes to achieve the bot behaviour.
+     * gives the starting welcome message
+     * @return String welcome message
+     */
+    public String getWelcomeMessage() {
+        return ui.showWelcomeMsg();
+    }
+
+    /**
+     * Retrieves the response of the bot given the input command by user.
+     * Interacts with the different classes to achieve the bot behaviour.
      * Run stops when a "bye" command is entered and ends the bot processes.
      * 
      */
-    protected void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                System.err.println(e.getMessage());
-            } finally {
-                ui.showLine();
+    public String run(String fullCommand) {
+        try {
+            Command c = parser.parse(fullCommand);
+            String outputMessage = c.execute(tasks, ui, storage);
+            if (c.isExit()) {
+                Platform.exit();
             }
+            return outputMessage;
+        } catch (DukeException e) {
+            return ui.displayErrorMessage(e.getMessage());
         }
     }
+
 
 }

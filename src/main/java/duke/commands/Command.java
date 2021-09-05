@@ -39,7 +39,7 @@ public abstract class Command {
      * to the existing stored tasks
      * @throws DukeException if any of the commands come up erroneous
      */
-    public abstract void execute(TaskList tasks, 
+    public abstract String execute(TaskList tasks,
     Ui ui, Storage storage) throws DukeException;
 
 }

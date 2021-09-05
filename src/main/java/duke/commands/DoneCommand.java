@@ -17,7 +17,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(
+    public String execute(
             TaskList tasks, Ui ui,
             Storage storage) throws WrongDoneFormatException,
             DoneOutOfBoundsException {
@@ -28,6 +28,6 @@ public class DoneCommand extends Command {
         int taskNumber = Integer.valueOf(instructions[1]);
         Task completedTask = tasks.markTaskAsDone(taskNumber);
         storage.updateStorageList(tasks.getTaskList());
-        ui.displayCompletedMessage(completedTask.toString());
+        return ui.displayCompletedMessage(completedTask.toString());
     }
 }

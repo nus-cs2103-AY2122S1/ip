@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(
+    public String execute(
             TaskList tasks, Ui ui,
             Storage storage) throws WrongDeleteFormatException,
             DeleteOutOfBoundsException {
@@ -29,7 +29,7 @@ public class DeleteCommand extends Command {
         int taskNumber = Integer.valueOf(instructions[1]);
         Task taskRemoved = tasks.deleteTask(taskNumber);
         storage.updateStorageList(tasks.getTaskList());
-        ui.displayDeleteMessage(taskRemoved.toString(), tasks.getTaskListLength());
+        return ui.displayDeleteMessage(taskRemoved.toString(), tasks.getTaskListLength());
     }
 
     

@@ -1,12 +1,10 @@
 package duke;
-import java.util.Scanner;
 
 /**
  * Class that handles the interaction with the user
  * by displaying the information and receiving user inputs.
  */
 public class Ui {
-    private static final Scanner sc = new Scanner(System.in);
     private static final String GREETING_MESSAGE = "Hello! I'm Duke"
             + "\n"
             + "What can I do for you?";
@@ -19,8 +17,8 @@ public class Ui {
     /**
      * Prints out the welcome message when user first uses the bot.
      */
-    protected void showWelcome() {
-        System.out.println(GREETING_MESSAGE);
+    protected String showWelcomeMsg() {
+        return GREETING_MESSAGE;
     }
 
     /**
@@ -31,30 +29,11 @@ public class Ui {
     }
 
     /**
-     * Prints segmentation line.
-     */
-    protected void showLine() {
-        System.out.println("________________________________");
-    }
-
-    /**
-     * Returns user input as string to be
-     * used in the duke bot for processing.
-     *
-     * @return String of the user input
-     */
-    protected String readCommand() {
-        String userInput = sc.nextLine();
-        return userInput;
-    }
-
-    /**
      * Prints the exit message when user exits the bot
      * and closes the scanner classes.
      */
-    public void displayByeMessage() {
-        System.out.println("Bye. Hope to see you again soon!");
-        sc.close();
+    public String displayByeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -62,10 +41,10 @@ public class Ui {
      *
      * @param completedMessage String of task that is completed
      */
-    public void displayCompletedMessage(String completedMessage) {
-        System.out.println("Nice! I've marked this task as done:"
+    public String displayCompletedMessage(String completedMessage) {
+        return "Nice! I've marked this task as done:"
                 + "\n"
-                + completedMessage);
+                + completedMessage;
     }
 
     /**
@@ -74,12 +53,12 @@ public class Ui {
      * @param deleteMessage String of task to be deleted
      * @param taskLength Integer of length of taskList ArrayList
      */
-    public void displayDeleteMessage(String deleteMessage, int taskLength) {
-        System.out.println("Noted. I've removed this task"
+    public String displayDeleteMessage(String deleteMessage, int taskLength) {
+        return "Noted. I've removed this task"
                 + "\n"
                 + "Now you have "
                 + taskLength
-                + " tasks in the list.");
+                + " tasks in the list.";
     }
 
     /**
@@ -88,16 +67,16 @@ public class Ui {
      * @param displayMessage String of task to be added to TaskList
      * @param taskLength Integer of length of taskList ArrayList
      */
-    public void displayTaskInstructions(
+    public String displayTaskInstructions(
             String displayMessage,
             int taskLength) {
-        System.out.println("Got it. I've added this task:"
+        return "Got it. I've added this task:"
                 + "\n"
                 + displayMessage
                 + "\n"
                 + "Now you have "
                 + taskLength
-                + " tasks in the list.");
+                + " tasks in the list.";
     }
 
     /**
@@ -105,15 +84,19 @@ public class Ui {
      * 
      * @param listMessage String of the all the tasks stored in taskList
      */
-    public void displayTaskList(String listMessage) {
-        System.out.println("Here are the tasks in your list:"
+    public String displayTaskList(String listMessage) {
+        return "Here are the tasks in your list:"
                 + "\n"
-                + listMessage);
+                + listMessage;
     }
 
-    public void displayFoundTasks(String tasksFound) {
-        System.out.println("Here are the matching tasks in your list:"
+    public String displayFoundTasks(String tasksFound) {
+        return "Here are the matching tasks in your list:"
                 + "\n"
-                + tasksFound);
+                + tasksFound;
+    }
+
+    public String displayErrorMessage(String errorMessage) {
+        return errorMessage;
     }
 }

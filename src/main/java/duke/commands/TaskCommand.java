@@ -24,7 +24,7 @@ public class TaskCommand extends Command {
     }
 
     @Override
-    public void execute(
+    public String execute(
             TaskList taskList, Ui ui,
             Storage storage) throws WrongDateFormatException,
             WrongTimeFormatException,
@@ -43,8 +43,8 @@ public class TaskCommand extends Command {
             task = new Event(importantInstructions); 
         }
         taskList.addNewTask(task);
-        ui.displayTaskInstructions(task.toString(), taskList.getTaskListLength());
         storage.updateStorageList(taskList.getTaskList());
+        return ui.displayTaskInstructions(task.toString(), taskList.getTaskListLength());
     }
     
 }

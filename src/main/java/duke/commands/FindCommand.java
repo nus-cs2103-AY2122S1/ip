@@ -19,7 +19,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public void execute(
+    public String execute(
         TaskList tasks, Ui ui, 
         Storage storage) throws WrongFindFormatException,
         NoTaskMatchException {
@@ -34,7 +34,7 @@ public class FindCommand extends Command {
         if (displayString.length() == 0) {
             throw new NoTaskMatchException();
         }
-        ui.displayFoundTasks(displayString);
+        return ui.displayFoundTasks(displayString);
     }
 
     private String convertMatchingTaskToStringDisplay(

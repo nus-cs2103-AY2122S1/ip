@@ -226,10 +226,10 @@ public class Storage {
         boolean isDone = this.isTaskCompleted(trimFormatted);
         String[] finalFormatted = this.removeDigitIndicator(trimFormatted);
         String formattedIden = finalFormatted[0];
-        String[] finalToOutuput = this.
+        String[] finalToOutput = this.
                 updateToCommandConverterReadableFormat(
                         formattedIden, finalFormatted);
-        String outputStorageInput = String.join(" ", finalToOutuput);
+        String outputStorageInput = String.join(" ", finalToOutput);
         stringStorage.put(outputStorageInput, isDone);
     }
 
