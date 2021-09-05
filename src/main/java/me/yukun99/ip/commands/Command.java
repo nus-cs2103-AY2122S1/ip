@@ -7,6 +7,7 @@ import me.yukun99.ip.core.TaskList;
 import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotIllegalArgumentException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
+import me.yukun99.ip.exceptions.HelpBotIoException;
 
 /**
  * Commands sent to the HelpBot.
@@ -52,7 +53,10 @@ public abstract class Command {
      *
      * @throws HelpBotInvalidTaskTypeException If user tries to edit the time of a ToDo task.
      * @throws HelpBotIllegalArgumentException If user specified arguments are invalid or missing.
+     * @throws HelpBotDateTimeFormatException If user specifies the wrong date/time format.
+     * @throws HelpBotIoException If save/output files could not be accessed.
      */
     public abstract String getResponse()
-            throws HelpBotInvalidTaskTypeException, HelpBotIllegalArgumentException, HelpBotDateTimeFormatException;
+            throws HelpBotInvalidTaskTypeException, HelpBotIllegalArgumentException, HelpBotDateTimeFormatException,
+            HelpBotIoException;
 }

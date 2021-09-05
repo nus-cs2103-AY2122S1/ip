@@ -30,6 +30,6 @@ public class HelpBotIllegalArgumentException extends HelpBotException {
     @Override
     public String toString() {
         return super.toString()
-                + "\nThe following argument is invalid: " + argument;
+                + System.lineSeparator() + "The following argument is invalid: " + argument;
     }
 }

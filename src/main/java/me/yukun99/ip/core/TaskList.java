@@ -70,6 +70,7 @@ public class TaskList {
      * @return Updated task.
      * @throws HelpBotInvalidTaskException If specified Task index does not exist.
      * @throws HelpBotInvalidTaskTypeException If specified Task is an instance of ToDo.
+     * @throws HelpBotDateTimeFormatException If specified task date is not in the correct format.
      */
     public Task updateTask(String strIndex, String date)
             throws HelpBotInvalidTaskException, HelpBotInvalidTaskTypeException, HelpBotDateTimeFormatException {
@@ -108,9 +109,8 @@ public class TaskList {
             taskPairMap.remove(task);
             taskPairMap.put(task, update);
         } catch (HelpBotInvalidTaskTypeException ignored) {
-            //ignored
+            // ignore error here because we will never want to call updateDateTime for ToDo tasks.
         }
-        // ignore error here because we will never want to call updateDateTime for ToDo tasks.
     }
 
     /**

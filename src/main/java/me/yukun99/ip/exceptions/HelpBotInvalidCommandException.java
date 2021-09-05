@@ -19,6 +19,6 @@ public class HelpBotInvalidCommandException extends HelpBotException {
     @Override
     public String toString() {
         return super.toString()
-                + "\nThe following is not a command: " + command;
+                + System.lineSeparator() + "The following is not a command: " + command;
     }
 }

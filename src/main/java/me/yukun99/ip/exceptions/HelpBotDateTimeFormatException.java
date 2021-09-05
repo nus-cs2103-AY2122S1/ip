@@ -19,6 +19,6 @@ public class HelpBotDateTimeFormatException extends HelpBotException {
     @Override
     public String toString() {
         return super.toString()
-                + "\nThe following is not a valid date/time format: " + argument;
+                + System.lineSeparator() + "The following is not a valid date/time format: " + argument;
     }
 }

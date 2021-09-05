@@ -8,6 +8,7 @@ import me.yukun99.ip.core.TaskList;
 import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotIllegalArgumentException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
+import me.yukun99.ip.exceptions.HelpBotIoException;
 import me.yukun99.ip.tasks.Deadline;
 import me.yukun99.ip.tasks.Event;
 import me.yukun99.ip.tasks.Task;
@@ -33,7 +34,9 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String getResponse() throws HelpBotDateTimeFormatException, HelpBotIllegalArgumentException {
+    public String getResponse()
+            throws HelpBotDateTimeFormatException, HelpBotIllegalArgumentException, HelpBotIoException,
+            HelpBotInvalidTaskTypeException {
         Task task;
         switch (type) {
         case TODO:
@@ -52,7 +55,7 @@ public class AddCommand extends Command {
         try {
             dateTimePair = task.getDate();
         } catch (HelpBotInvalidTaskTypeException ignored) {
-            // ignored
+            // Ignored since addTask method handles null cases for dateTimePair i.e. when we're using ToDo task.
         } finally {
             taskList.addTask(task, dateTimePair);
         }
