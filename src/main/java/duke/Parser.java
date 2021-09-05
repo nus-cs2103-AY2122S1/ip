@@ -22,10 +22,10 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         if (input.replaceAll("\\s+", "").toLowerCase().equals("bye")) {
-            return Command.makeCommand(CommandsTypes.Exit);
+            return Command.makeCommand(CommandsTypes.EXIT);
         }
         if (input.replaceAll("\\s+", "").toLowerCase().equals("list")) {
-            return Command.makeCommand(CommandsTypes.List);
+            return Command.makeCommand(CommandsTypes.LIST);
         }
         String[] splitBySpace = input.split(" ");
         if (splitBySpace.length < 2) {
@@ -49,7 +49,7 @@ public class Parser {
         String taskDescription = Stream.of(input.split(" "))
                 .skip(1).reduce("", (x, y) -> x + " " + y);
         Task newTask = Task.makeTask(type, taskDescription);
-        return Command.makeCommand(CommandsTypes.Add, newTask);
+        return Command.makeCommand(CommandsTypes.ADD, newTask);
     }
 
     private static Command getFindCommand(String[] splitBySpace) throws DukeException {
