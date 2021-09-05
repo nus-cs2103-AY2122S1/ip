@@ -22,6 +22,7 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws TaskDoesNotExistException {
+        assert tasks != null : "Task list is not initialized";
         if (tasks.isTaskExists(this.taskNumber)) {
             Task taskDel = tasks.getTask(this.taskNumber - 1);
             tasks.deleteTask(this.taskNumber - 1);

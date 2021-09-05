@@ -22,6 +22,7 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws TaskDoesNotExistException {
+        assert tasks != null : "Task list is not initialized";
         if (tasks.isTaskExists(this.taskNumber)) {
             Task task = tasks.getTask(this.taskNumber - 1);
             task.markAsDone();
