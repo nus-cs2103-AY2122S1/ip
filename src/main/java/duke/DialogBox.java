@@ -35,12 +35,13 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.getStylesheets().add("/stylesheets/DialogBox.css");
         displayPicture.setImage(img);
         displayPicture.setClip(new Circle(40, 40, 40));
     }
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * Flips the dialog box such that the ImageView is on  the left and text on the right.
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
@@ -57,7 +58,6 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
-        db.setStyle("-fx-background-color: #ADD8E6;");
         return db;
     }
 
@@ -70,7 +70,6 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();
-        db.setStyle("-fx-background-color: #FFB6C1;");
         return db;
     }
 }
