@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import javafx.application.Application;
 
 /**
  * Interactive bot that manages one's tasks.

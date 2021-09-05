@@ -10,11 +10,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'junit:junit:3.8.2'
-    implementation 'junit:junit:4.12'
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
     String javaFxVersion = '11'
+
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'linux'
@@ -44,7 +41,7 @@ test {
 }
 
 application {
-    mainClassName = "duke.Duke"
+    mainClassName = "duke.Launcher"
 }
 
 shadowJar {
@@ -62,9 +59,5 @@ run{
 
 apply plugin : "java"
 ext {
-    javaMainClass = "duke.Duke"
+    javaMainClass = "duke.Launcher"
 }
-
-//application {
-//    mainClassName = ip.duke.Duke
-//}
