@@ -1,5 +1,3 @@
-1.[D][X] homework (by: Dec 31 2020 11:59PM)
-2.[E][ ] meeting (at: Dec 23 2020 7:00PM)
-3.[T][X] swim
-4.[T][ ] run
-5.[T][ ] borrow book
+1.[T][X] run
+2.[D][X] homework (by: Aug 09 2020 11:00AM)
+3.[T][ ] walk
