@@ -67,24 +67,97 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
+        String defaultUserAvatarFileName = "DaUser.png";
+        String defaultAgentAvatarFileName = "DaDuke.png";
         List<String> args = getParameters().getRaw();
         Image[] images;
         if (args.isEmpty()) {
-            images = loadImagesFromFile("DaUser.png", "DaDuke.png");
+            images = loadImagesFromFile(defaultUserAvatarFileName, defaultAgentAvatarFileName);
         } else {
-            images = loadImagesFromFile("DaUser.png", "DaDuke.png", getParameters().getRaw().get(0));
+            images = loadImagesFromFile(defaultUserAvatarFileName, defaultAgentAvatarFileName,
+                    getParameters().getRaw().get(0));
         }
-        // Container for chat message boxes to provide scroll functionality.
-        ScrollPane scrollPane = new ScrollPane();
+
         // Contains main chat message content vertically
+        boolean isBackgroundImagePresent = images.length >= 3 && images[2] != null;
+        VBox dialogContainer = isBackgroundImagePresent
+                ? generateDialogContainer(images[2])
+                : generateDialogContainer();
+
+        ScrollPane scrollPane = generateScrollPane(dialogContainer);
+
+        TextField userChatInputField = new TextField();
+        userChatInputField.setPrefWidth(325.0);
+        Button sendButton = new Button("Send");
+        sendButton.setPrefWidth(55.0);
+
+        // set up the Duke chat bot agent.
+        Duke guiDuke = new Duke(new GuiUserInputHandler(userChatInputField, dialogContainer, images[0]),
+                new GuiUserOutputHandler(dialogContainer, images[1]));
+        guiDuke.fulfillmentHandler.runGuiChatBotSetup();
+
+        // handles clicking of send button
+        sendButton.setOnMouseClicked(clickEvent -> {
+            guiDuke.fulfillmentHandler.handleGuiUserCommandInput();
+            userChatInputField.clear();
+        });
+        // handles entering to send message
+        userChatInputField.setOnAction(event -> {
+            guiDuke.fulfillmentHandler.handleGuiUserCommandInput();
+            userChatInputField.clear();
+        });
+
+        Scene scene = new Scene(generateChatBotMainLayout(userChatInputField, sendButton, scrollPane));
+        generateMainWindow(primaryStage, scene);
+        primaryStage.show();
+    }
+
+    private Stage generateMainWindow(Stage mainStage, Scene scene) {
+        mainStage.setScene(scene);
+        mainStage.setTitle("Duke");
+        mainStage.setResizable(false);
+        mainStage.setMinHeight(600.0);
+        mainStage.setMinWidth(400.0);
+
+        return mainStage;
+    }
+
+    private AnchorPane generateChatBotMainLayout(TextField userChatInputField,
+                                                 Button sendButton, ScrollPane dialogScrollPane) {
+        AnchorPane mainLayout = new AnchorPane();
+        mainLayout.getChildren().addAll(dialogScrollPane, userChatInputField, sendButton);
+        mainLayout.setPrefSize(400.0, 600.0);
+
+        AnchorPane.setBottomAnchor(sendButton, 1.0);
+        AnchorPane.setRightAnchor(sendButton, 1.0);
+        AnchorPane.setBottomAnchor(userChatInputField, 1.0);
+        AnchorPane.setLeftAnchor(userChatInputField, 1.0);
+        return mainLayout;
+    }
+
+    private VBox generateDialogContainer(Image... backgroundImage) {
         VBox dialogContainer = new VBox();
+
+        if (backgroundImage != null && backgroundImage.length >= 1 && backgroundImage[0] != null) {
+            dialogContainer.setBackground(new Background(
+                    new BackgroundImage(backgroundImage[0], BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                            BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+        }
+
         dialogContainer.setPadding(new Insets(20, 10, 20, 10));
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         dialogContainer.setSpacing(20.0);
-        // configures the scroll pane to scroll down to the end when its height changes.
-        dialogContainer.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
 
-        scrollPane.setContent(dialogContainer);
+        return dialogContainer;
+    }
+
+    private ScrollPane generateScrollPane(VBox scrollPaneContent) {
+        // Container for chat message boxes to provide scroll functionality.
+        ScrollPane scrollPane = new ScrollPane();
+        // configures the scroll pane to scroll down to the end when its height changes.
+        scrollPaneContent.heightProperty().addListener(observable -> scrollPane.setVvalue(1.0));
+
+        scrollPane.setContent(scrollPaneContent);
         scrollPane.setPrefSize(385.0, 535.0);
         scrollPane.setFitToWidth(true);
         scrollPane.setFitToHeight(true);
@@ -93,57 +166,7 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        if (images.length >= 3 && images[2] != null) {
-            dialogContainer.setBackground(new Background(
-                    new BackgroundImage(images[2], BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
-                            BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
-        }
-
-        TextField userChatInputField = new TextField();
-        userChatInputField.setPrefWidth(325.0);
-
-        Button sendButton = new Button("Send");
-        sendButton.setPrefWidth(55.0);
-
-
-        // set up the Duke chat bot agent.
-        Duke guiDuke = new Duke(new GuiUserInputHandler(userChatInputField, dialogContainer,
-                images[0]),
-                new GuiUserOutputHandler(dialogContainer,
-                        images[1]));
-        guiDuke.fulfillmentHandler.runGuiChatBotSetup();
-
-        // handle command submissions from user
-        // handles clicking of send button
-        sendButton.setOnMouseClicked(clickEvent -> {
-            guiDuke.fulfillmentHandler.handleGuiUserCommandInput();
-            userChatInputField.clear();
-        });
-
-        // handles entering to send message
-        userChatInputField.setOnAction(event -> {
-            guiDuke.fulfillmentHandler.handleGuiUserCommandInput();
-            userChatInputField.clear();
-        });
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userChatInputField, sendButton);
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setBottomAnchor(userChatInputField, 1.0);
-        AnchorPane.setLeftAnchor(userChatInputField, 1.0);
-
-        Scene scene = new Scene(mainLayout);
-
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Duke");
-        primaryStage.setResizable(false);
-        primaryStage.setMinHeight(600.0);
-        primaryStage.setMinWidth(400.0);
-        primaryStage.show();
+        return scrollPane;
     }
 
     /**

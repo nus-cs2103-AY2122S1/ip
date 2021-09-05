@@ -30,7 +30,9 @@ public class Deadline extends Task {
             throw new EmptyDeadlineBodyException();
         }
         String[] deadlineData = deadlineDataText.split("/by ", 2);
-        if (deadlineData.length != 2 || deadlineData[0].isEmpty() || deadlineData[1].isEmpty()) {
+        boolean isDeadlineBodyInvalid = deadlineData.length != 2
+                || deadlineData[0].isEmpty() || deadlineData[1].isEmpty();
+        if (isDeadlineBodyInvalid) {
             throw new InvalidDeadlineBodyException();
         }
         super.setDescription(deadlineData[0].trim());
