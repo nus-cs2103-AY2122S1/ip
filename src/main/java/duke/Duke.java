@@ -32,8 +32,11 @@ public class Duke {
     //    return "Duke: " + input;
     //}
 
+
+       
     String getResponse(String input) {
         input = input.toLowerCase(Locale.ROOT);
+        assert this.storage.getDoesFileExists();
         String response;
         if (input.equals("list")) {
             //List task list
