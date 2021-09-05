@@ -6,8 +6,14 @@ import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
+/**
+ * This is the sort command class that call for sorting of all tasks in the list.
+ */
 public class SortCommand extends Command {
 
+    /**
+     * This is the constructor for SortCommand.
+     */
     public SortCommand() {
         super("sort");
     }

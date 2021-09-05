@@ -3,6 +3,11 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * This is a TaskWithDateTime class that extends from Task.
+ * This class contains Date and Time fields and allow for comparison using Date, Time and Description,
+ * in order of priority.
+ */
 public abstract class TaskWithDateTime extends Task {
     /**
      * These are class fields of Deadline.
