@@ -113,28 +113,33 @@ public class Parser {
      * @throws CorruptedFileException If file line is invalid.
      */
     public static Task parseFileLine(String line) throws CorruptedFileException {
-        String[] splitted = line.split("%,", 4);
+        String[] splitLine = line.split("%,", 4);
         String input;
         TaskType type;
-        boolean isDone = Boolean.parseBoolean(splitted[1]);
-        switch (splitted[0]) {
+        boolean isDone = Boolean.parseBoolean(splitLine[1]);
+        switch (splitLine[0]) {
         case "T":
-            input = "todo " + splitted[2];
+            input = "todo " + splitLine[2];
             type = TaskType.TODO;
             break;
         case "D":
-            input = "deadline " + splitted[2] + " /by " + splitted[3];
+            input = "deadline " + splitLine[2] + " /by " + splitLine[3];
             type = TaskType.DEADLINE;
             break;
         case "E":
-            input = "event " + splitted[2] + " /at " + splitted[3];
+            input = "event " + splitLine[2] + " /at " + splitLine[3];
             type = TaskType.EVENT;
             break;
         default:
+            assert false : "Invalid task type";
             throw new CorruptedFileException();
         }
         try {
-            return parseTask(input, type);
+            Task task = parseTask(input, type);
+            if (isDone) {
+                task.markDone();
+            }
+            return task;
         } catch (InvalidArgumentsException | InvalidTaskException e) {
             throw new CorruptedFileException();
         }
@@ -228,6 +233,7 @@ public class Parser {
             }
             break;
         default:
+            assert false : "Invalid task type";
             throw new InvalidTaskException();
         }
         return task;

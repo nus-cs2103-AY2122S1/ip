@@ -21,6 +21,7 @@ public class Duke {
         } catch (CorruptedFileException e) {
             list = new DukeList();
         }
+        assert list != null : "List should be created";
     }
 
     public String getResponse(String input) {
@@ -31,6 +32,7 @@ public class Duke {
         } catch (DukeException e) {
             response = e.getMessage();
         }
+        assert !response.equals("") : "Response should not be empty";
         return response;
     }
 }

@@ -15,7 +15,7 @@ public class ExitCommand extends DukeCommand {
     public String run(DukeList list) throws CorruptedFileException {
         Platform.exit();
         Storage.saveFile(list);
-        return null;
+        return "Exiting";
     }
 
 }
