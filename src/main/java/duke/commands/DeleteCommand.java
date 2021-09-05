@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for DeleteCommand.
      *
-     * @param desc        description of the delete command.
+     * @param desc          description of the delete command.
      * @param deleteIndexes the index of the task to be deleted.
      */
     public DeleteCommand(String desc, ArrayList<Integer> deleteIndexes) {
