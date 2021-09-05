@@ -53,6 +53,9 @@ public class Storage {
      * @param items List of Task objects.
      */
     public void writeToFile(List<Task> items) {
+
+        assert items != null : "Task list is not initialized!";
+
         try {
             FileWriter myWriter = new FileWriter(this.filePath);
             String content = "";

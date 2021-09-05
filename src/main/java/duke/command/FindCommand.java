@@ -23,6 +23,7 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "Task list is not initialized";
         List<Task> filteredList = tasks.filter(this.searchQuery);
         String msg;
         if (filteredList.size() > 0) {

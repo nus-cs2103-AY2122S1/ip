@@ -55,6 +55,7 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "Task list is not initialized";
         switch (this.type) {
         case "todo":
             Todo todo = tasks.createTodo(this.description);
