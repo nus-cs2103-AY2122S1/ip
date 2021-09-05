@@ -1,8 +1,10 @@
 package duke.storage;
 
-import duke.DukeException;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class TaskListTest {
     @Test
