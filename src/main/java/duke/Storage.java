@@ -69,8 +69,14 @@ public class Storage {
                 toReturn.markAsDone();
             }
             return toReturn;
-        } else {
+        } else if (temp[0].equalsIgnoreCase("D")) {
             Deadline toReturn = new Deadline(temp[2], temp[3]);
+            if (temp[1].equalsIgnoreCase("1")) {
+                toReturn.markAsDone();
+            }
+            return toReturn;
+        } else {
+            Activity toReturn = new Activity(temp[2], temp[3]);
             if (temp[1].equalsIgnoreCase("1")) {
                 toReturn.markAsDone();
             }

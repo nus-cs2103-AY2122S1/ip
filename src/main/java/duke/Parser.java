@@ -1,10 +1,12 @@
 package duke;
 
+import java.util.Locale;
+
 /**
  * Class to represent parsing the commands
  */
 public class Parser {
-    private enum Commands { LIST, DONE, TODO, EVENT, DEADLINE, DELETE, FIND }
+    private enum Commands { LIST, DONE, TODO, EVENT, DEADLINE, DELETE, FIND, ACTIVITY }
 
 
     /**
@@ -17,6 +19,8 @@ public class Parser {
      */
     public static String parse(String instruction, Ui ui, TaskList tasks)
             throws NoDescriptionError, UnknownCommandError {
+
+        System.out.println(instruction);
         String[] splitInstructions = instruction.split(" ", 2);
         String operative = splitInstructions[0];
         Commands command;
@@ -28,7 +32,7 @@ public class Parser {
         Task toAdd;
         int taskPointer;
         try {
-            command = Commands.valueOf(operative);
+            command = Commands.valueOf(operative.toUpperCase());
         } catch (IllegalArgumentException e) {
             throw new UnknownCommandError();
         }
@@ -74,9 +78,16 @@ public class Parser {
             toAdd = new Deadline(description, date);
             tasks.addTask(toAdd);
             return ui.addedTaskMessage(toAdd, tasks.getSize());
+        case ACTIVITY:
+            item = splitInstructions[1];
+            temp = item.split("/for ");
+            date = temp[1];
+            description = temp[0];
+            toAdd = new Activity(description, date);
+            tasks.addTask(toAdd);
+            return ui.addedTaskMessage(toAdd, tasks.getSize());
         default:
-            break;
+            return "";
         }
-        return "";
     }
 }

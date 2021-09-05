@@ -52,7 +52,7 @@ public class MainWindow extends Stage {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.greet(), dukeImage)
+                DialogBox.getDukeDialog("Hello! I'm Duke\n" + "What can I do for you?", dukeImage)
         );
     }
 
