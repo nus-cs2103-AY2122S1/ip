@@ -44,28 +44,8 @@ public class Storage {
         try {
             Scanner fileScanner = new Scanner(dukeFile);
             while (fileScanner.hasNext()) {
-                // Splitting the line according to the characteristics of a task
                 String currentLine = fileScanner.nextLine();
-                String[] taskStatus = currentLine.split(Pattern.quote(" | "));
-                String taskType = taskStatus[0];
-                String taskProgress = taskStatus[1];
-                String taskDescription = taskStatus[2];
-                Task taskToAdd;
-
-                // Creating a Deadline/Event/Todo instance
-                if (taskType.equals("T")) {
-                    taskToAdd = new Todo(taskDescription);
-                } else if (taskType.equals("D")) {
-                    taskToAdd = new Deadline(taskDescription, LocalDate.parse(taskStatus[3]));
-                } else {
-                    taskToAdd = new Event(taskDescription, LocalDate.parse(taskStatus[3]));
-                }
-                if (taskProgress.equals("1")) {
-                    taskToAdd.markAsDone();
-                }
-
-                // Adding the created task to the task list
-                taskList.add(taskToAdd);
+                taskList.add(translateStringToTask(currentLine));
             }
             return taskList;
         } catch (FileNotFoundException e) {
@@ -78,6 +58,29 @@ public class Storage {
         }
     }
 
+    private Task translateStringToTask(String lineOfWords) {
+        // Splitting the line according to the characteristics of a task
+        String[] taskStatus = lineOfWords.split(Pattern.quote(" | "));
+        String taskType = taskStatus[0];
+        String taskProgress = taskStatus[1];
+        String taskDescription = taskStatus[2];
+        Task taskToAdd;
+
+        if (taskType.equals("T")) {
+            taskToAdd = new Todo(taskDescription);
+        } else if (taskType.equals("D")) {
+            taskToAdd = new Deadline(taskDescription, LocalDate.parse(taskStatus[3]));
+        } else {
+            taskToAdd = new Event(taskDescription, LocalDate.parse(taskStatus[3]));
+        }
+
+        if (taskProgress.equals("1")) {
+            taskToAdd.markAsDone();
+        }
+
+        return taskToAdd;
+    }
+
     /**
      * Saves the current tasks to the hard drive.
      *
@@ -88,37 +91,7 @@ public class Storage {
         String textToAdd = "";
         ArrayList<Task> tasksList = taskList.getTaskList();
         for (Task task : tasksList) {
-            // Initialising a String to store the characteristics of the task
-            String currentLine = "";
-
-            // Formatting the task type
-            if (task instanceof Todo) {
-                currentLine += "T | ";
-            } else if (task instanceof Deadline) {
-                currentLine += "D | ";
-            } else {
-                currentLine += "E | ";
-            }
-
-            // Formatting the completion status of the task
-            if (task.isDone()) {
-                currentLine += "1 | ";
-            } else {
-                currentLine += "0 | ";
-            }
-
-            // Formatting the task description
-            currentLine += task.getDescription() + " | ";
-
-            // Formatting the date associated with the task
-            if (task instanceof Deadline) {
-                currentLine += ((Deadline) task).getDate().toString();
-            } else if (task instanceof Event) {
-                currentLine += ((Event) task).getDate().toString();
-            }
-
-            // Concatenate the formatted line to textToAdd
-            textToAdd += currentLine + System.lineSeparator();
+            textToAdd += translateTaskToString(task) + System.lineSeparator();
         }
 
         // Write to the hard disk
@@ -129,5 +102,37 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Unable to write to ./data/dukeFile.txt");
         }
+    }
+
+    private String translateTaskToString(Task task) {
+        String currentLine = "";
+
+        // Formatting the task type
+        if (task instanceof Todo) {
+            currentLine += "T | ";
+        } else if (task instanceof Deadline) {
+            currentLine += "D | ";
+        } else {
+            currentLine += "E | ";
+        }
+
+        // Formatting the completion status of the task
+        if (task.isDone()) {
+            currentLine += "1 | ";
+        } else {
+            currentLine += "0 | ";
+        }
+
+        // Formatting the task description
+        currentLine += task.getDescription() + " | ";
+
+        // Formatting the date associated with the task
+        if (task instanceof Deadline) {
+            currentLine += ((Deadline) task).getDate().toString();
+        } else if (task instanceof Event) {
+            currentLine += ((Event) task).getDate().toString();
+        }
+
+        return currentLine;
     }
 }
