@@ -14,8 +14,6 @@ public class DateTimeHandler {
     private final String[] FORMATS = {
         "dd-MM-yyyy hh:mm a",
         "dd-MM-yyyy HHmm",
-        "dd/MM/yyyy hh:mm a",
-        "dd/MM/yyyy HHmm"
     };
 
     /**

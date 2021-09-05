@@ -15,8 +15,8 @@ public class Event extends Task {
      * @param isCompleted Completion status of task.
      * @param startDate Start date of task.
      */
-    public Event(String description, Boolean isCompleted, LocalDateTime startDate) {
-        super(description, isCompleted);
+    public Event(String description, Boolean isCompleted, LocalDateTime startDate, String[] tags) {
+        super(description, isCompleted, tags);
         this.startDate = startDate;
     }
 
@@ -27,6 +27,6 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + startDate + ")";
+        return super.toString() + " (at: " + startDate + ")" + super.getTags();
     }
 }

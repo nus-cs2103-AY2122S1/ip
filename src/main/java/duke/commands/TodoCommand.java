@@ -1,10 +1,13 @@
 package duke.commands;
 
 import duke.DateTimeHandler;
+import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Todo;
 import duke.Ui;
+
+import java.util.ArrayList;
 
 /**
  * Encapsulates the todo command, used to create a todo task
@@ -26,7 +29,16 @@ public class TodoCommand extends Command {
         if (args.length() == 0) {
             return "Please enter the name of the task after todo";
         }
-        Todo t = new Todo(args, false);
+        String description;
+        String[] tags = new String[0];
+        if (args.contains("/t")) {
+            ArrayList<String> parts = Parser.parseCommandArguments(args, "t");
+            description = parts.get(0);
+            tags = parts.get(1).split(" ");
+        } else {
+            description = args;
+        }
+        Todo t = new Todo(description, false, tags);
         tl.addToList(t);
         return ui.formatMessage(tl.taskAddedMessage(t));
     }

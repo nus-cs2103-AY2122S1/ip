@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 /**
  * Encapsulates a class which interacts with the output file to save data after.
@@ -42,32 +43,49 @@ public class Storage {
             String curLine;
             while ((curLine = br.readLine()) != null) {
                 String[] parts = curLine.split(" ", 3);
-                String[] descriptionParts;
                 char taskType = parts[0].charAt(1);
                 boolean isCompleted = parts[1].charAt(1) == 'X';
+
+                ArrayList<String> argumentParts;
+                String description;
+                LocalDateTime dateTime;
+                String[] tags = new String[0];
                 switch(taskType) {
                 case 'T':
-                    t.addToList(new Todo(parts[2], isCompleted));
+                    if (parts[2].contains(" (Tags: ")) {
+                        argumentParts = Parser.parseFileOutputArguments(parts[2], "Tags");
+                        description = argumentParts.get(0);
+                        tags = argumentParts.get(1).split(" ");
+                        t.addToList(new Todo(description, isCompleted, tags));
+                    } else {
+                        t.addToList(new Todo(parts[2], isCompleted, tags));
+                    }
                     break;
                 case 'D':
-                    descriptionParts = parts[2].split(" \\(by: ");
-                    assert descriptionParts.length == 2 : "Descriptor for deadline task should have 2 parts";
-                    Deadline d = new Deadline(
-                            descriptionParts[0],
-                            isCompleted,
-                            LocalDateTime.parse(descriptionParts[1].substring(0, descriptionParts[1].length() - 1))
-                    );
-                    t.addToList(d);
+                    if (parts[2].contains(" (Tags: ")) {
+                        argumentParts = Parser.parseFileOutputArguments(parts[2], "by", "Tags");
+                        description = argumentParts.get(0);
+                        dateTime = LocalDateTime.parse(argumentParts.get(1));
+                        tags = argumentParts.get(2).split(" ");
+                    } else {
+                        argumentParts = Parser.parseFileOutputArguments(parts[2], "by");
+                        description = argumentParts.get(0);
+                        dateTime = LocalDateTime.parse(argumentParts.get(1));
+                    }
+                    t.addToList(new Deadline(description, isCompleted, dateTime, tags));
                     break;
                 case 'E':
-                    descriptionParts = parts[2].split(" \\(at: ");
-                    assert descriptionParts.length == 2 : "Descriptor for event task should have 2 parts";
-                    Event e = new Event(
-                            descriptionParts[0],
-                            isCompleted,
-                            LocalDateTime.parse(descriptionParts[1].substring(0, descriptionParts[1].length() - 1))
-                    );
-                    t.addToList(e);
+                    if (parts[2].contains(" (Tags: ")) {
+                        argumentParts = Parser.parseFileOutputArguments(parts[2], "at", "Tags");
+                        description = argumentParts.get(0);
+                        dateTime = LocalDateTime.parse(argumentParts.get(1));
+                        tags = argumentParts.get(2).split(" ");
+                    } else {
+                        argumentParts = Parser.parseFileOutputArguments(parts[2], "at");
+                        description = argumentParts.get(0);
+                        dateTime = LocalDateTime.parse(argumentParts.get(1));
+                    }
+                    t.addToList(new Event(description, isCompleted, dateTime, tags));
                     break;
                 default:
                 }

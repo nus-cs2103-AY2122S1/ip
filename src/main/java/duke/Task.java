@@ -6,6 +6,7 @@ package duke;
 public abstract class Task {
     private final String description;
     private Boolean completionStatus;
+    private String[] tags;
 
     /**
      * Constructs a Task object. Only for use with extended classes.
@@ -13,9 +14,10 @@ public abstract class Task {
      * @param description Task description.
      * @param isCompleted Completion status of task.
      */
-    public Task(String description, Boolean isCompleted) {
+    public Task(String description, Boolean isCompleted, String[] tags) {
         this.description = description;
         this.completionStatus = isCompleted;
+        this.tags = tags;
     }
 
     public void completeTask() {
@@ -37,6 +39,23 @@ public abstract class Task {
      * @return The String icon.
      */
     public abstract String typeIcon();
+
+    /**
+     * Returns a String consisting of the tags attached to the current task.
+     *
+     * @return The String of tags.
+     */
+    public String getTags() {
+        if (tags.length == 0) {
+            return "";
+        }
+        StringBuilder result = new StringBuilder(" (Tags:");
+        for(String t : tags) {
+            result.append(" ").append(t);
+        }
+        result.append(")");
+        return result.toString();
+    }
 
     @Override
     public String toString() {

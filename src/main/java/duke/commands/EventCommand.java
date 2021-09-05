@@ -1,9 +1,11 @@
 package duke.commands;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import duke.DateTimeHandler;
 import duke.Event;
+import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -32,12 +34,23 @@ public class EventCommand extends Command {
         if (!args.contains("/at")) {
             return "Please enter the start date of the task after /at";
         }
-        String[] parts = args.split(" /at ");
-        LocalDateTime startDate = dth.parseDate(parts[1]);
+        String description, dateString;
+        String[] tags = new String[0];
+        if (args.contains("/t")) {
+            ArrayList<String> parts = Parser.parseCommandArguments(args, "at", "t");
+            description = parts.get(0);
+            dateString = parts.get(1);
+            tags = parts.get(2).split(" ");
+        } else {
+            ArrayList<String> parts = Parser.parseCommandArguments(args, "at");
+            description = parts.get(0);
+            dateString = parts.get(1);
+        }
+        LocalDateTime startDate = dth.parseDate(dateString);
         if (startDate == null) {
             return dth.invalidFormat();
         }
-        Event e = new Event(parts[0], false, startDate);
+        Event e = new Event(description, false, startDate, tags);
         tl.addToList(e);
         return ui.formatMessage(tl.taskAddedMessage(e));
     }

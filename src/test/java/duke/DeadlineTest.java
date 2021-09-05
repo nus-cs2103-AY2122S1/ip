@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeadlineTest {
     DateTimeHandler dth = new DateTimeHandler();
-    Deadline d = new Deadline("test1", false, dth.parseDate("22/08/2021 1500"));
+    Deadline d = new Deadline("test1", false, dth.parseDate("22/08/2021 1500"), new String[0]);
     @Test
     public void testDeadline() {
         assertEquals(d.typeIcon(), "[D]");

@@ -15,8 +15,8 @@ public class Deadline extends Task {
      * @param isCompleted Completion status of task.
      * @param deadlineDate Deadline of task.
      */
-    public Deadline(String description, Boolean isCompleted, LocalDateTime deadlineDate) {
-        super(description, isCompleted);
+    public Deadline(String description, Boolean isCompleted, LocalDateTime deadlineDate, String[] tags) {
+        super(description, isCompleted, tags);
         this.deadlineDate = deadlineDate;
     }
 
@@ -27,6 +27,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + deadlineDate + ")";
+        return super.toString() + " (by: " + deadlineDate + ")" + super.getTags();
     }
 }

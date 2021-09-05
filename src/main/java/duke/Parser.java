@@ -2,6 +2,8 @@ package duke;
 
 import duke.commands.*;
 
+import java.util.ArrayList;
+
 /**
  * Encapsulates a parser class which parses user input
  * and creates a different command object depending on the input.
@@ -35,6 +37,48 @@ public class Parser {
             }
         }
         return null;
+    }
+
+    public static ArrayList<String> parseCommandArguments(String command, String ... splitters) {
+        ArrayList<String> result = new ArrayList<>();
+        int firstSplitterIndex = command.indexOf("/");
+
+        if (firstSplitterIndex == -1) {
+            result.add(command);
+            return result;
+        }
+
+        result.add(command.substring(0, firstSplitterIndex));
+
+        for (String s : splitters) {
+            String[] argument = command.split(" /" + s + " ");
+            int nextSplitterIndex = argument[1].indexOf("/");
+            if (nextSplitterIndex == -1) {
+                result.add(argument[1]);
+            } else {
+                result.add(argument[1].substring(0, nextSplitterIndex - 1));
+            }
+        }
+        return result;
+    }
+
+    public static ArrayList<String> parseFileOutputArguments(String outputString, String ... splitters) {
+        ArrayList<String> result = new ArrayList<>();
+        int firstSplitterIndex = outputString.indexOf("(");
+
+        if (firstSplitterIndex == -1) {
+            result.add(outputString);
+            return result;
+        }
+
+        result.add(outputString.substring(0, firstSplitterIndex - 1));
+        for (String s : splitters) {
+            String[] argument = outputString.split(" \\(" + s + ": ");
+            int closeParenIndex = argument[1].indexOf(")");
+            result.add(argument[1].substring(0, closeParenIndex));
+        }
+        return result;
+
     }
 
 }

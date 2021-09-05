@@ -1,9 +1,11 @@
 package duke.commands;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import duke.DateTimeHandler;
 import duke.Deadline;
+import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -32,12 +34,25 @@ public class DeadlineCommand extends Command {
         if (!args.contains("/by")) {
             return "Please enter the deadline of the task after /by";
         }
-        String[] parts = args.split(" /by ");
-        LocalDateTime deadlineDate = dth.parseDate(parts[1]);
+
+        String description, dateString;
+        String[] tags = new String[0];
+        if (args.contains("/t")) {
+            ArrayList<String> parts = Parser.parseCommandArguments(args, "by", "t");
+            description = parts.get(0);
+            dateString = parts.get(1);
+            tags = parts.get(2).split(" ");
+            System.out.print(description + " " + dateString);
+        } else {
+            ArrayList<String> parts = Parser.parseCommandArguments(args, "by");
+            description = parts.get(0);
+            dateString = parts.get(1);
+        }
+        LocalDateTime deadlineDate = dth.parseDate(dateString);
         if (deadlineDate == null) {
             return dth.invalidFormat();
         }
-        Deadline d = new Deadline(parts[0], false, deadlineDate);
+        Deadline d = new Deadline(description, false, deadlineDate, tags);
         tl.addToList(d);
         return ui.formatMessage(tl.taskAddedMessage(d));
     }

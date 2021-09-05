@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class EventTest {
     DateTimeHandler dth = new DateTimeHandler();
-    Event e = new Event("test1", false, dth.parseDate("22/08/2021 1500"));
+    Event e = new Event("test1", false, dth.parseDate("22/08/2021 1500"), new String[0]);
     @Test
     public void testEvent() {
         assertEquals(e.typeIcon(), "[E]");
