@@ -2,6 +2,7 @@ package janet;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Objects;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -27,11 +28,13 @@ public class MainWindow extends AnchorPane {
 
     private Janet janet;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Eleanor.jpg"));
-    private Image janetImage = new Image(this.getClass().getResourceAsStream("/images/Janet.jpg"));
+    private final Image userImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/Eleanor.jpg")));
+    private final Image janetImage = new Image(Objects.requireNonNull(
+            this.getClass().getResourceAsStream("/images/Janet.jpg")));
 
     public MainWindow() {
-        janet = new Janet(this);
+        janet = new Janet();
     }
 
     /**
@@ -40,9 +43,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        addDialogsInChatBox(janetDialog(Ui.INTRO_STRING));
+        addDialogs(makeJanetDialog(Ui.INTRO_STRING));
     }
 
+    /**
+     * Sets the instance of Janet associated with the chat window.
+     *
+     * @param janet Instance of Janet
+     */
     public void setJanet(Janet janet) {
         assert(janet != null);
         this.janet = janet;
@@ -55,28 +63,25 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
-        assert(input != null);
-        String response = janet.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getJanetDialog(response, janetImage)
-        );
+        Command command = janet.getCommandFromInput(input);
+        String response = janet.getResponseFromCommand(command);
+        addDialogs(makeUserDialog(input), makeJanetDialog(response));
         userInput.clear();
     }
 
-    void addDialogsInChatBox(DialogBox... dialogs) {
-        assert(dialogs.length > 0);
+    private void addDialogs(DialogBox... dialogs) {
+
         dialogContainer.getChildren().addAll(dialogs[0]);
         if (dialogs.length != 1) {
-            addDialogsInChatBox(Arrays.copyOfRange(dialogs, 1, dialogs.length));
+            addDialogs(Arrays.copyOfRange(dialogs, 1, dialogs.length));
         }
     }
 
-    DialogBox janetDialog(String message) {
+    private DialogBox makeJanetDialog(String message) {
         return DialogBox.getJanetDialog(message, janetImage);
     }
 
-    DialogBox userDialog(String message) {
+    private DialogBox makeUserDialog(String message) {
         return DialogBox.getUserDialog(message, userImage);
     }
 }

@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Janet janet = new Janet(new MainWindow());
+    private final Janet janet = new Janet();
 
     @Override
     public void start(Stage stage) {

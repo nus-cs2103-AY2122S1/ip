@@ -11,15 +11,12 @@ import javafx.application.Platform;
 public class Janet {
     private final Storage storage;
     private TaskList tasks = new TaskList();
-    private MainWindow window;
 
     /**
      * Class constructor for Janet.
      */
-    public Janet(MainWindow window) {
+    public Janet() {
         storage = new Storage("janet.txt");
-        assert(window != null);
-        this.window = window;
         try {
             tasks = storage.readSave();
         } catch (IOException | ClassNotFoundException e) {
@@ -27,14 +24,28 @@ public class Janet {
         }
     }
 
-    String getResponse(String input) throws IOException {
-        Command command;
+    /**
+     * Returns a command that represents the user's input in the chat box.
+     *
+     * @param input String entered by the user into the chat box
+     * @return Command that Janet understands
+     */
+    Command getCommandFromInput(String input) {
         try {
-            command = Parser.parseUserInput(input);
+            return Parser.parseUserInput(input);
         } catch (JanetException e) {
-            return e.toString();
+            return new Command("echo", e.toString());
         }
-        Task task;
+    }
+
+    /**
+     * Returns the string to be shown in the chat as Janet's reply to user commands.
+     *
+     * @param command Command representing user's input
+     * @return String representing Janet's reply
+     * @throws IOException When unable to write the save
+     */
+    String getResponseFromCommand(Command command) throws IOException {
         assert(command.getOperation() != null);
         switch (command.getOperation()) {
         case "bye":
@@ -43,39 +54,66 @@ public class Janet {
         case "list":
             return Ui.taskListString(tasks);
         case "done":
-            task = tasks.get(command.getIndex() - 1);
-            task.setDone(true);
-            storage.writeSave(tasks);
-            return Ui.doneString(task);
+            return handleTaskDone(command);
         case "todo":
-            task = new ToDo(command.getDescription());
-            tasks.add(task);
-            storage.writeSave(tasks);
-            return Ui.addedString(task, tasks.size());
+            return handleNewToDo(command);
         case "deadline":
-            task = new Deadline(command.getDescription(), command.getTime());
-            tasks.add(task);
-            storage.writeSave(tasks);
-            return Ui.addedString(task, tasks.size());
+            return handleNewDeadline(command);
         case "event":
-            task = new Event(command.getDescription(), command.getTime());
-            tasks.add(task);
-            storage.writeSave(tasks);
-            return Ui.addedString(task, tasks.size());
+            return handleNewEvent(command);
         case "delete":
-            try {
-                task = tasks.get(command.getIndex() - 1);
-            } catch (IndexOutOfBoundsException e) {
-                return Ui.outOfBoundsString(command.getIndex());
-            }
-            tasks.delete(command.getIndex() - 1);
-            storage.writeSave(tasks);
-            return Ui.deletedString(task, tasks.size());
+            return handleDelete(command);
         case "find":
-            TaskList filteredTasks = tasks.find(command.getDescription());
-            return Ui.taskListString(filteredTasks);
+            return handleFind(command);
+        case "echo":
+            return command.getDescription();
         default:
             return "";
         }
+    }
+
+    private String handleTaskDone(Command command) throws IOException {
+        Task task = tasks.get(command.getIndex() - 1);
+        task.setDone(true);
+        storage.writeSave(tasks);
+        return Ui.doneString(task);
+    }
+
+    private String handleNewToDo(Command command) throws IOException {
+        ToDo task = new ToDo(command.getDescription());
+        tasks.add(task);
+        storage.writeSave(tasks);
+        return Ui.addedString(task, tasks.size());
+    }
+
+    private String handleNewDeadline(Command command) throws IOException {
+        Deadline task = new Deadline(command.getDescription(), command.getTime());
+        tasks.add(task);
+        storage.writeSave(tasks);
+        return Ui.addedString(task, tasks.size());
+    }
+
+    private String handleNewEvent(Command command) throws IOException {
+        Event task = new Event(command.getDescription(), command.getTime());
+        tasks.add(task);
+        storage.writeSave(tasks);
+        return Ui.addedString(task, tasks.size());
+    }
+
+    private String handleDelete(Command command) throws IOException {
+        Task task;
+        try {
+            task = tasks.get(command.getIndex() - 1);
+        } catch (IndexOutOfBoundsException e) {
+            return Ui.outOfBoundsString(command.getIndex());
+        }
+        tasks.delete(command.getIndex() - 1);
+        storage.writeSave(tasks);
+        return Ui.deletedString(task, tasks.size());
+    }
+
+    private String handleFind(Command command) {
+        TaskList filteredTasks = tasks.find(command.getDescription());
+        return Ui.taskListString(filteredTasks);
     }
 }
