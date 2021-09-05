@@ -6,6 +6,9 @@ import java.time.format.DateTimeParseException;
 
 import bobcat.exception.LogicException;
 
+/**
+ * A Task which represents a task with a starting time
+ */
 public class Event extends Task {
     protected LocalDate startTime;
 

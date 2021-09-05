@@ -1,6 +1,6 @@
 package bobcat.model.task;
 
-public class Task {
+public abstract class Task {
     private final String description;
     private boolean isDone;
 
@@ -19,10 +19,6 @@ public class Task {
 
     public void markDone() {
         isDone = true;
-    }
-
-    public void markIncomplete() {
-        isDone = false;
     }
 
     private String getStatus() {

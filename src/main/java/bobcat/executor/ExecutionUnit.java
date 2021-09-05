@@ -1,18 +1,21 @@
 package bobcat.executor;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
+import bobcat.exception.ExitException;
+import bobcat.executor.command.basic.Bye;
+import bobcat.executor.command.basic.Find;
+import bobcat.executor.command.create.Deadline;
+import bobcat.executor.command.create.Event;
+import bobcat.executor.command.create.ToDo;
+import bobcat.executor.command.mutate.Delete;
+import bobcat.executor.command.mutate.Done;
 import bobcat.executor.parser.QueryParser;
 import bobcat.model.TaskList;
-import bobcat.model.task.Deadline;
-import bobcat.model.task.Event;
-import bobcat.model.task.Task;
-import bobcat.model.task.ToDo;
 
+/**
+ * Executes the logic part of the commands of BobCat
+ */
 public class ExecutionUnit {
     private final QueryParser parser = new QueryParser();
     private final Storage storeExecutor = new Storage();
@@ -37,56 +40,41 @@ public class ExecutionUnit {
      * @return Array of strings representing information received after query is executed
      * @throws IOException may be thrown if given storagePath to ExecutionUnit does not exist
      */
-    public String[] executeCommand(String query) throws IOException {
+    public String[] executeCommand(String query) throws IOException { // Very sus...
         String[] queryArr;
         queryArr = parser.parse(query);
 
-        String command = queryArr[0];
-        switch (command) {
+        String[] reply;
+        switch (queryArr[0]) {
         case "list":
-            List<String> initialReply = new ArrayList<String>();
-            initialReply.add("Here are the tasks in your list:");
-            Task[] toShow = taskList.getAllTasks();
-            initialReply.addAll(Stream.iterate(1, x -> x + 1)
-                    .limit(toShow.length)
-                    .map(num -> num.toString() + "." + toShow[num - 1])
-                    .collect(Collectors.toList()));
-            return initialReply.toArray(new String[0]);
+            reply = bobcat.executor.command.basic.List.execute(taskList, queryArr);
+            break;
         case "bye":
-            return new String[]{"Bye! Hope to see you again soon!"};
+            reply = Bye.execute(taskList, queryArr);
+            throw new ExitException(reply[0]);
         case "find":
-            List<String> initReply = new ArrayList<String>();
-            initReply.add("Here are the matching tasks in your list:");
-            Task[] foundTasks = taskList.findByName(queryArr[1]);
-            initReply.addAll(Stream.iterate(1, x -> x + 1)
-                    .limit(foundTasks.length)
-                    .map(num -> num.toString() + "." + foundTasks[num - 1])
-                    .collect(Collectors.toList()));
-            return initReply.toArray(new String[0]);
+            reply = Find.execute(taskList, queryArr);
+            break;
         case "done":
-            Task markedTask = taskList.markDone(Integer.parseInt(queryArr[1]));
-            storeExecutor.saveStorage(storagePath, taskList);
-            return new String[]{"Nice! I've marked this task as done:", "  " + markedTask.toString()};
+            reply = Done.execute(taskList, queryArr);
+            break;
         case "delete":
-            Task deletedTask = taskList.deleteTaskByIdx(Integer.parseInt(queryArr[1]));
-            storeExecutor.saveStorage(storagePath, taskList);
-            return new String[]{"Noted. I've removed this task:",
-                "  " + deletedTask.toString(),
-                "Now you have " + taskList.numTasks() + " tasks in the list"};
+            reply = Delete.execute(taskList, queryArr);
+            break;
+        case "todo":
+            reply = ToDo.execute(taskList, queryArr);
+            break;
+        case "deadline":
+            reply = Deadline.execute(taskList, queryArr);
+            break;
+        case "event":
+            reply = Event.execute(taskList, queryArr);
+            break;
         default:
-            Task toAdd;
-            if (command.equals("todo")) {
-                toAdd = new ToDo(queryArr[1]);
-            } else if (command.equals("deadline")) {
-                toAdd = new Deadline(queryArr[1], queryArr[2]);
-            } else {
-                toAdd = new Event(queryArr[1], queryArr[2]);
-            }
-            Task addedTask = taskList.push(toAdd);
-            storeExecutor.saveStorage(storagePath, taskList);
-            return new String[]{"Got it. I've added this task:",
-                "  " + addedTask.toString(),
-                "Now you have " + taskList.numTasks() + " tasks in the list"};
+            reply = null;
+            break;
         }
+        storeExecutor.saveStorage(storagePath, taskList);
+        return reply;
     }
 }

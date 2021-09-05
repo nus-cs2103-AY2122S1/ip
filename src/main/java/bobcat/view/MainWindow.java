@@ -5,10 +5,10 @@ import java.util.Arrays;
 import java.util.Objects;
 
 import bobcat.exception.BobCatException;
+import bobcat.exception.ExitException;
 import bobcat.executor.ExecutionUnit;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -16,6 +16,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 public class MainWindow extends AnchorPane {
     @FXML
@@ -24,8 +26,6 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private final Image userImage = new Image(Objects.requireNonNull(this.getClass()
                                                         .getResourceAsStream("/images/DaUser.png")));
@@ -33,6 +33,7 @@ public class MainWindow extends AnchorPane {
                                                         .getResourceAsStream("/images/DaBobCat.png")));
 
     private ExecutionUnit executor;
+    private Stage stage;
 
     @FXML
     public void initialize() {
@@ -43,6 +44,10 @@ public class MainWindow extends AnchorPane {
         executor = d;
     }
 
+    public void setStage(Stage s) {
+        stage = s;
+    }
+
     @FXML
     private void handleUserInput(ActionEvent actionEvent) {
         String query = userInput.getText();
@@ -50,6 +55,8 @@ public class MainWindow extends AnchorPane {
 
         try {
             respondBobCat(executor.executeCommand(query));
+        } catch (ExitException e) {
+            stage.fireEvent(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
         } catch (BobCatException e) {
             respondError(e);
         } catch (IOException e) {
