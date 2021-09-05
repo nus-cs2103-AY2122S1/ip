@@ -45,6 +45,22 @@ public class Parser {
         }
     }
 
+    /**
+     * Interprets the full command entered in by the user and
+     * routes the command accordingly.
+     * @param userInput full command inputted by the user.
+     * @param d Duke chatbot that is in use.
+     * @return Command action that is interpreted from the user input.
+     * @throws IOException if there is an error in reading the file.
+     * @throws DukeException if there is an error from Duke's internal system.
+     */
+    public static Command parse(String userInput, Duke d) throws DukeException {
+        Action actionCommand = Parser.determineActionType(userInput);
+        Command c = getCommand(actionCommand, d, userInput);
+
+        return c;
+    }
+
     private static String getFirstWord(String s) {
         String[] arrString = s.split(" ", 2);
         return arrString[0];
@@ -73,23 +89,17 @@ public class Parser {
         return arrString[1];
     }
 
-    /**
-     * Interprets the full command entered in by the user and
-     * routes the command accordingly.
-     * @param userInput full command inputted by the user.
-     * @param d Duke chatbot that is in use.
-     * @return Command action that is interpreted from the user input.
-     * @throws IOException if there is an error in reading the file.
-     * @throws DukeException if there is an error from Duke's internal system.
-     */
-    public static Command parse(String userInput, Duke d) throws IOException, DukeException {
-        String firstWord = Parser.getFirstWord(userInput);
-        firstWord = firstWord.equals("todo") || firstWord.equals("event") || firstWord.equals("deadline")
+    private static Action determineActionType(String input) {
+        String firstWord = Parser.getFirstWord(input);
+        String type = firstWord.equals("todo") || firstWord.equals("event") || firstWord.equals("deadline")
                 ? "task" : firstWord;
-        Action actionCommand = Action.getAction(firstWord);
+        Action actionCommand = Action.getAction(type);
 
-        Command c = null;
+        return actionCommand;
+    }
 
+    private static Command getCommand(Action actionCommand, Duke d, String userInput) {
+        Command c;
         switch (actionCommand) {
         case BYE:
             c = new ByeCommand(d);

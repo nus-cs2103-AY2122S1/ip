@@ -12,8 +12,7 @@ import java.io.IOException;
 
 public class Main extends Application {
 
-    private Duke dukeChatbot = new Duke();
-
+    private final Duke dukeChatbot = new Duke();
 
     @Override
     public void start(Stage stage) throws Exception {

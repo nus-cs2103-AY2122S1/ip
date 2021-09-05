@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import duke.exception.DukeIncorrectInputs;
 import duke.exception.DukeNoSuchTask;
 import duke.exception.DukeUnableLoadTask;
 import duke.task.Task;
@@ -10,7 +9,6 @@ import duke.task.TaskList;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Represents a Duke chatbot that can add tasks
