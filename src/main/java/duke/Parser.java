@@ -7,24 +7,21 @@ import tasks.ToDo;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
  * Input parsing and displaying output to the user.
  */
 public class Parser {
-    private final Scanner sc;
     private final TaskList taskList;
 
     /**
      * Constructor for the class.
      */
     public Parser() {
-        this.sc = new Scanner(System.in);
         this.taskList = new TaskList();
     }
 
-    private String[] parseInput(String input) {
+    public String[] parseInput(String input) {
         return input.trim().split(" ", 2);
     }
 
@@ -42,16 +39,11 @@ public class Parser {
         return parsedNumber;
     }
 
-    private void handleBye() {
-        Ui.displayContentBetweenLines("Bye. Hope to see you again soon!");
-        sc.close();
-    }
-
     private void handleList(String[] parsedInput) throws DukeInvalidCommandException {
         if (parsedInput.length >= 2) {
             throw new DukeInvalidCommandException("OOPS!!! Do you mean 'list' ?");
         } else {
-            Ui.displayContentBetweenLines(taskList.toString());
+            Ui.displayWithLines(taskList.toString());
         }
     }
 
@@ -64,7 +56,7 @@ public class Parser {
         if (taskList.getSize() == 0) {
             throw new DukeInvalidCommandException("OOPS!!! The task list is currently empty.");
         }
-        Ui.displayContentBetweenLines(taskList.markTaskAsDone(taskIndex));
+        Ui.displayWithLines(taskList.markTaskAsDone(taskIndex));
     }
 
     private void handleDeadline(String[] parsedInput) throws DukeInvalidCommandException {
@@ -78,7 +70,7 @@ public class Parser {
         }
         try {
             LocalDate date = LocalDate.parse(parsedArguments[1]);
-            Ui.displayContentBetweenLines(taskList.addTask(new Deadline(parsedArguments[0], date)));
+            Ui.displayWithLines(taskList.addTask(new Deadline(parsedArguments[0], date)));
         } catch (DateTimeParseException e) {
             throw new DukeInvalidCommandException("OOPS!!! Wrong time format. Correct format should be yyyy-mm-dd");
         }
@@ -95,7 +87,7 @@ public class Parser {
         }
         try {
             LocalDate date = LocalDate.parse(parsedArguments[1]);
-            Ui.displayContentBetweenLines(taskList.addTask(new Event(parsedArguments[0], date)));
+            Ui.displayWithLines(taskList.addTask(new Event(parsedArguments[0], date)));
         } catch (DateTimeParseException e) {
             throw new DukeInvalidCommandException("OOPS!!! Wrong time format. Correct format should be yyyy-mm-dd");
         }
@@ -105,7 +97,7 @@ public class Parser {
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! The description of a todo task cannot be empty.");
         }
-        Ui.displayContentBetweenLines(taskList.addTask(new ToDo(parsedInput[1])));
+        Ui.displayWithLines(taskList.addTask(new ToDo(parsedInput[1])));
     }
 
     private void handleDelete(String[] parsedInput) throws DukeInvalidCommandException {
@@ -117,17 +109,17 @@ public class Parser {
         if (taskList.getSize() == 0) {
             throw new DukeInvalidCommandException("OOPS!!! The task list is currently empty.");
         }
-        Ui.displayContentBetweenLines(taskList.delete(taskIndex));
+        Ui.displayWithLines(taskList.delete(taskIndex));
     }
 
     private void handleFind(String[] parsedInput) throws DukeInvalidCommandException {
         if (parsedInput.length < 2) {
             throw new DukeInvalidCommandException("OOPS!!! Type in the keyword you want to search");
         }
-        Ui.displayContentBetweenLines(taskList.findTask(parsedInput[1]));
+        Ui.displayWithLines(taskList.findTask(parsedInput[1]));
     }
-
-    private void dukeCommandController(String[] parsedInput) throws DukeInvalidCommandException {
+    public void invokeCommand(String input) throws DukeInvalidCommandException {
+        String[] parsedInput = parseInput(input);
         switch (parsedInput[0]) {
         case "list":
             handleList(parsedInput);
@@ -153,24 +145,6 @@ public class Parser {
         default:
             throw new DukeInvalidCommandException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
-    }
-
-    /**
-     * Start the parser and begin the program
-     */
-    public void start() {
-        String currentCommand = sc.nextLine().trim();
-
-        while (!currentCommand.equals("bye")) {
-            try {
-                dukeCommandController(parseInput(currentCommand));
-            } catch (DukeInvalidCommandException e) {
-                Ui.displayContentBetweenLines(e.getMessage());
-            }
-            currentCommand = sc.nextLine().trim();
-        }
-
-        handleBye();
     }
 
 }

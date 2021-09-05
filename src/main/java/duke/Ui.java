@@ -1,13 +1,17 @@
 package duke;
 
+import java.util.Scanner;
+
 /**
  * Utility to help deals with interactions with the user
  */
 public class Ui {
+    private final Scanner sc = new Scanner(System.in);
+
     /**
      * Greet the user.
      */
-    public static void sendGreetings() {
+    private void sendGreetings() {
         String logo = "\t  ____        _        \n"
                 + "\t |  _ \\ _   _| | _____ \n"
                 + "\t | | | | | | | |/ / _ \\\n"
@@ -16,9 +20,17 @@ public class Ui {
 
         insertSeparateLine();
         System.out.println(logo);
-        displayContent("Hello! I'm Duke");
-        displayContent("What can I do for you?");
+        display("Hello! I'm Duke");
+        display("What can I do for you?");
         insertSeparateLine();
+    }
+
+    /**
+     * Send a "goodbye" message when the user closes the application.
+     */
+    private void sendFarewell() {
+        Ui.displayWithLines("Bye. Hope to see you again soon!");
+        sc.close();
     }
 
     /**
@@ -35,7 +47,7 @@ public class Ui {
      *
      * @param content Content to display.
      */
-    public static void displayContent(String content) {
+    public static void display(String content) {
         System.out.println("\t" + " " + content);
     }
 
@@ -44,9 +56,27 @@ public class Ui {
      *
      * @param content Content to display.
      */
-    public static void displayContentBetweenLines(String content) {
+    public static void displayWithLines(String content) {
         insertSeparateLine();
         System.out.println("\t" + " " + content);
         insertSeparateLine();
+    }
+
+    /**
+     * Start the user interface and begin the program
+     */
+    public void start() {
+        sendGreetings();
+        String currentCommand = sc.nextLine().trim();
+        Parser parser = new Parser();
+        while (!currentCommand.equals("bye")) {
+            try {
+                parser.invokeCommand(currentCommand);
+            } catch (DukeInvalidCommandException e) {
+                Ui.displayWithLines(e.getMessage());
+            }
+            currentCommand = sc.nextLine().trim();
+        }
+        sendFarewell();
     }
 }

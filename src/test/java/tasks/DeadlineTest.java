@@ -12,4 +12,5 @@ public class DeadlineTest {
         assertEquals("[D] [ ] run (by: Oct 20 2020)",
                 new Deadline("run", LocalDate.parse("2020-10-20")).toString());
     }
+
 }

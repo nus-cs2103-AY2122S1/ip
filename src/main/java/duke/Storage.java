@@ -37,7 +37,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            Ui.displayContent("Can't save the tasks");
+            Ui.display("Can't save the tasks");
         }
     }
 
@@ -63,7 +63,7 @@ public class Storage {
         } catch (DukeCorruptedSaveException e) {
             logs.delete();
             logs.createNewFile();
-            Ui.displayContent("There's an error with the save file, the saved task list is deleted");
+            Ui.display("There's an error with the save file, the saved task list is deleted");
         }
         return results;
     }

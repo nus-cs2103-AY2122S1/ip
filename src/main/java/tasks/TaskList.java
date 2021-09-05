@@ -22,7 +22,7 @@ public class TaskList {
             temp = Storage.loadTaskListFromHardDisk();
         } catch (IOException e) {
             temp = new ArrayList<>();
-            Ui.displayContent("Can't read the save file.");
+            Ui.display("Can't read the save file.");
         }
         this.tasks = temp;
     }
