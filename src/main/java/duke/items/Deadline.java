@@ -6,6 +6,10 @@ import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a deadline entry in a to-do list. It has a due date and
+ * a name.
+ */
 public class Deadline extends Item {
     private LocalDate time;
     private static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd yyyy");

@@ -14,7 +14,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(ItemList itemList, Ui ui) {
+    public void execute(ItemList items, Ui ui) {
         ui.println(GOODBYE);
     }
 

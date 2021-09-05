@@ -36,14 +36,14 @@ public class Storage {
     /**
      * Saves a to-do list to system storage.
      * 
-     * @param itemList List to save.
+     * @param items List to save.
      * @throws DukeException If an <code>IOException</code> occurs.
      */
-    public void saveState(ItemList itemList) throws DukeException {
+    public void saveState(ItemList items) throws DukeException {
         StringBuilder s = new StringBuilder();
 
         try {
-            ListIterator<Item> iterator = itemList.listIterator();
+            ListIterator<Item> iterator = items.listIterator();
             if (!iterator.hasNext()) {
                 s.append("");
             } else {
@@ -77,7 +77,7 @@ public class Storage {
      * @return <code>ItemList</code> object containing the saved data.
      */
     public ItemList loadState() {
-        ItemList itemList = new ItemList();
+        ItemList items = new ItemList();
         try {
             Scanner fileReader = new Scanner(this.file);
             while (fileReader.hasNextLine()) {
@@ -103,12 +103,12 @@ public class Storage {
                     toAdd.markAsDone();
                 }
 
-                itemList.add(toAdd);
+                items.add(toAdd);
             }
             fileReader.close();
         } catch (FileNotFoundException | DukeException e) {
             e.printStackTrace();
         }
-        return itemList;
+        return items;
     }
 }

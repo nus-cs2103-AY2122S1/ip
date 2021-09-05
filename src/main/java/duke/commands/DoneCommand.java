@@ -28,12 +28,12 @@ public class DoneCommand extends Command {
      * Marks the item specified by <code>index</code> in the
      * <code>ItemList</code> as done and updates the UI.
      * 
-     * @param itemList List to edit.
+     * @param items List to edit.
      * @param ui UI to update.
      */
     @Override
-    public void execute(ItemList itemList, Ui ui) {
-        Item x = itemList.get(this.index);
+    public void execute(ItemList items, Ui ui) {
+        Item x = items.get(this.index);
         ArrayList<String> printBuffer = new ArrayList<>();
         printBuffer.add("NICE OWO! Me mark dis task as donned!!:");
         x.markAsDone();

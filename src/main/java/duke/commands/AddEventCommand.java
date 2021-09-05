@@ -41,17 +41,17 @@ public class AddEventCommand extends Command {
      * Adds in-place, and updates the <code>Ui</code> object. The arguments
      * are taken from the class members.
      * 
-     * @param itemList List to add the item to.
+     * @param items List to add the item to.
      * @param ui Ui to update.
      */
     @Override
-    public void execute(ItemList itemList, Ui ui) throws DukeException {
+    public void execute(ItemList items, Ui ui) throws DukeException {
         ArrayList<String> printBuffer = new ArrayList<>();
         printBuffer.add("Rawr x3 *notices task* OwO, what's this? Oo a new task:");
         Event toAdd = new Event(this.content, this.time);
-        itemList.add(toAdd);
+        items.add(toAdd);
         printBuffer.add("  " + toAdd.toString());
-        printBuffer.add(String.format("Now u habe %d tasks in da list. OwO", itemList.size()));
+        printBuffer.add(String.format("Now u habe %d tasks in da list. OwO", items.size()));
         ui.println(printBuffer);
     }
 }

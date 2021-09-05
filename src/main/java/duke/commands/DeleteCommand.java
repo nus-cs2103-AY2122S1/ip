@@ -26,14 +26,14 @@ public class DeleteCommand extends Command {
      * Deletes the item specified by <code>index</code> in the
      * <code>ItemList</code> and updates the UI.
      * 
-     * @param itemList List to edit.
+     * @param items List to edit.
      * @param ui UI to update.
      */
     @Override
-    public void execute(ItemList itemList, Ui ui) {
+    public void execute(ItemList items, Ui ui) {
         ArrayList<String> printBuffer = new ArrayList<>();
         printBuffer.add("This task got remuwuved uwu:");
-        printBuffer.add("  " + itemList.remove(this.index).toString());
+        printBuffer.add("  " + items.remove(this.index).toString());
         ui.println(printBuffer);
     }
 }

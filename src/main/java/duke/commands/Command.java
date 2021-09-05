@@ -12,11 +12,11 @@ public abstract class Command {
     /**
      * Executes the command by altering the inputs.
      * 
-     * @param itemList List to update.
+     * @param items List to update.
      * @param ui UI to update.
      * @throws DukeException If errors occur.
      */
-    public abstract void execute(ItemList itemList, Ui ui) throws DukeException;
+    public abstract void execute(ItemList items, Ui ui) throws DukeException;
 
     /**
      * Reads the command arguments which spawned the object itself.
