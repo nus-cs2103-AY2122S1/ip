@@ -14,7 +14,7 @@ public abstract class Command {
      * @param taskList tasklist to be operated on
      * @throws DukeException
      */
-    public abstract void execute(TaskList taskList) throws DukeException;
+    public abstract String execute(TaskList taskList) throws DukeException;
 
     /**
      * returns the type of command

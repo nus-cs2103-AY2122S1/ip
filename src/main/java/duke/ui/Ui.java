@@ -10,24 +10,20 @@ import java.util.ArrayList;
  * Text UI of the application.
  */
 public class Ui {
-    public static final String DIVIDER = "=================================";
 
     /**
      * Generates and prints the welcome message upon the start of the application.
      */
-    public static void showWelcomeMessage() {
-        System.out.println("Hello from Duke!");
-        System.out.println("What do you need to do today?");
-        System.out.println(DIVIDER);
+    public static String showWelcomeMessage() {
+        return "Hello from Duke! \n"
+                + "What do you need to do today?";
     }
 
     /**
      * Generates and prints the Goodbye message before exiting Duke.
      */
-    public static void showExitMessage() {
-        System.out.println(DIVIDER);
-        System.out.println("See you! Have a nice day!");
-        System.out.println(DIVIDER);
+    public static String showExitMessage() {
+        return "See you! Have a nice day!";
     }
 
     /**
@@ -35,10 +31,9 @@ public class Ui {
      *
      * @param list the tasklist to show
      */
-    public static void showTaskList(TaskList list) {
-        System.out.println(DIVIDER);
-        System.out.println(list.toDisplay());
-        System.out.println(DIVIDER);
+    public static String showTaskList(TaskList list) {
+        return list.toDisplay();
+
 
     }
 
@@ -47,9 +42,8 @@ public class Ui {
      *
      * @param list the tasklist that is added unto
      */
-    public static void showAddedTask(TaskList list) {
-        System.out.println(DIVIDER);
-        System.out.printf("added: %s\n", list.getTask(list.count()));
+    public static String showAddedTask(TaskList list) {
+        return String.format("added: %s\n", list.getTask(list.count()));
     }
 
     /**
@@ -57,10 +51,8 @@ public class Ui {
      *
      * @param task the deleted task
      */
-    public static void showDeletedTask(Task task) {
-        System.out.println(DIVIDER);
-        System.out.println("Got it! I've removed this task:");
-        System.out.println(task);
+    public static String showDeletedTask(Task task) {
+        return "Got it! I've removed this task: \n" + task + "\n";
     }
 
     /**
@@ -68,11 +60,8 @@ public class Ui {
      *
      * @param task the completed task
      */
-    public static void showDoneTask(Task task) {
-        System.out.println(DIVIDER);
-        System.out.println("Good job! I've marked this task as done:");
-        System.out.println(task);
-        System.out.println(DIVIDER);
+    public static String showDoneTask(Task task) {
+        return "Good job! I've marked this task as done: \n" + task;
     }
 
     /**
@@ -80,9 +69,8 @@ public class Ui {
      *
      * @param tasks the tasklist
      */
-    public static void showTaskCount(TaskList tasks) {
-        System.out.printf("Now you have %d tasks in your list.%n%n", tasks.count());
-        System.out.println(DIVIDER);
+    public static String showTaskCount(TaskList tasks) {
+        return String.format("Now you have %d tasks in your list.%n%n", tasks.count());
 
     }
 
@@ -91,10 +79,8 @@ public class Ui {
      *
      * @param e the exception that caused the error
      */
-    public static void showErrorMessage(DukeException e) {
-        System.out.println(DIVIDER);
-        System.out.println(e.getMessage());
-        System.out.println(DIVIDER);
+    public static String showErrorMessage(DukeException e) {
+        return e.getMessage();
     }
 
     /**
@@ -103,17 +89,17 @@ public class Ui {
      *
      * @param results ArrayList of matching tasks
      */
-    public static void showFindResults(ArrayList<Task> results) {
-        System.out.println(DIVIDER);
+    public static String showFindResults(ArrayList<Task> results) {
         if (results.isEmpty()) {
-            System.out.println("Sorry, no matches found :(");
+            return "Sorry, no matches found :(";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            StringBuilder searchResults = new StringBuilder("Here are the matching tasks in your list: \n");
             int index = 1;
             for (Task item : results) {
-                System.out.println(index + ". " + item);
+                searchResults.append(index).append(". ").append(item).append("\n");
+                index += 1;
             }
+            return searchResults.toString();
         }
-        System.out.println(DIVIDER);
     }
 }

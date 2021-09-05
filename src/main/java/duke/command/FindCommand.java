@@ -23,9 +23,9 @@ public class FindCommand extends Command{
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         ArrayList<Task> results = taskList.find(keyword);
-        Ui.showFindResults(results);
+        return Ui.showFindResults(results);
     }
 
     /**

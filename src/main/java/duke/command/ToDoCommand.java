@@ -22,13 +22,11 @@ public class ToDoCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         String[] fields = new String[] {description};
-
         taskList.addTask(taskType.TODO, fields);
 
-        Ui.showAddedTask(taskList);
-        Ui.showTaskCount(taskList);
+        return Ui.showAddedTask(taskList) + Ui.showTaskCount(taskList);
     }
 
     /**

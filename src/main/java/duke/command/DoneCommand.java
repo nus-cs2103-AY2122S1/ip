@@ -22,10 +22,9 @@ public class DoneCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList) throws DukeException {
+    public String execute(TaskList taskList) throws DukeException {
         Task completedTask = taskList.doneTask(TaskNo); //throws DukeException
-
-        Ui.showDoneTask(completedTask);
+        return Ui.showDoneTask(completedTask);
     }
 
     /**

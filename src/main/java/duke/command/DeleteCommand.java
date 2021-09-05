@@ -22,11 +22,10 @@ public class DeleteCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList) throws DukeException {
+    public String execute(TaskList taskList) throws DukeException {
         Task deletedTask = taskList.deleteTask(TaskNo); //throws Duke Exception
-
-        Ui.showDeletedTask(deletedTask);
-        Ui.showTaskCount(taskList);
+        String output = Ui.showDeletedTask(deletedTask) + Ui.showTaskCount(taskList);
+        return output;
     }
 
     /**

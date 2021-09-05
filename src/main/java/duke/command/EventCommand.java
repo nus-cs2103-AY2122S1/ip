@@ -22,11 +22,9 @@ public class EventCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         taskList.addTask(taskType.EVENT, fields);
-
-        Ui.showAddedTask(taskList);
-        Ui.showTaskCount(taskList);
+        return Ui.showAddedTask(taskList) + Ui.showTaskCount(taskList);
     }
 
     /**
