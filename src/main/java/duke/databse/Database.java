@@ -199,7 +199,6 @@ public class Database {
         } catch (IOException e) {
             System.out.println(ui.wrong_message);
         }
-
         try {
             FileWriter fw = new FileWriter(file);
             fw.write(data);
