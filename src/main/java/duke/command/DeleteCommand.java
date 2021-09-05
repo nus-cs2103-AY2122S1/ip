@@ -31,9 +31,9 @@ public class DeleteCommand implements Command {
     public String run() throws DukeException {
         try {
             Task deleted = TaskList.getInstance().delete(index);
-            String message = "Okay, I have removed this task:\n" +
-                    deleted.toString() + "\n" +
-                    String.format(
+            String message = "Okay, I have removed this task:\n"
+                    + deleted.toString() + "\n"
+                    + String.format(
                             "Now you have %d task%s in your list.",
                             TaskList.getInstance().getSize(),
                             TaskList.getInstance().getSize() > 1 ? "s" : "");

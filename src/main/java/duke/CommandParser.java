@@ -103,13 +103,16 @@ public class CommandParser {
     private static Command parseDeadlineCommand(String commandString) throws DukeException {
         assert commandString.startsWith(DEADLINE_PREFIX);
         String payload = commandString.substring(DEADLINE_PREFIX.length()).trim();
-        final String SEPARATOR_STRING = "/by";
-        int separatorIndex = payload.lastIndexOf(SEPARATOR_STRING);
+        final String separatorString = "/by";
+        int separatorIndex = payload.lastIndexOf(separatorString);
         if (separatorIndex < 0) {
-            throw new DukeException("Please indicate in this format: deadline [description] " + SEPARATOR_STRING + " [due date].");
+            throw new DukeException(
+                    "Please indicate in this format: deadline [description] "
+                            + separatorString
+                            + " [due date].");
         }
         String deadlineContent = payload.substring(0, separatorIndex).trim();
-        String deadlineString = payload.substring(separatorIndex + SEPARATOR_STRING.length()).trim();
+        String deadlineString = payload.substring(separatorIndex + separatorString.length()).trim();
         if (deadlineContent.length() <= 0) {
             throw new DukeException("Please indicate the deadline description!");
         } else if (deadlineString.length() <= 0) {
@@ -126,13 +129,16 @@ public class CommandParser {
     private static Command parseEventCommand(String commandString) throws DukeException {
         assert commandString.startsWith(EVENT_PREFIX);
         String payload = commandString.substring(EVENT_PREFIX.length()).trim();
-        final String SEPARATOR_STRING = "/at";
-        int separatorIndex = payload.lastIndexOf(SEPARATOR_STRING);
+        final String separatorString = "/at";
+        int separatorIndex = payload.lastIndexOf(separatorString);
         if (separatorIndex < 0) {
-            throw new DukeException("Please indicate in this format: event [description] " + SEPARATOR_STRING + " [due date].");
+            throw new DukeException(
+                    "Please indicate in this format: event [description] "
+                            + separatorString
+                            + " [due date].");
         }
         String eventContent = payload.substring(0, separatorIndex).trim();
-        String eventDateString = payload.substring(separatorIndex + SEPARATOR_STRING.length()).trim();
+        String eventDateString = payload.substring(separatorIndex + separatorString.length()).trim();
         if (eventContent.length() <= 0) {
             throw new DukeException("Please indicate the event description!");
         } else if (eventDateString.length() <= 0) {

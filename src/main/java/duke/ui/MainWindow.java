@@ -1,7 +1,6 @@
 package duke.ui;
 
 import duke.Duke;
-
 import duke.command.ExitCommand;
 import javafx.application.Platform;
 import javafx.fxml.FXML;

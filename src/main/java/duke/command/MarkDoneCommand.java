@@ -34,8 +34,8 @@ public class MarkDoneCommand implements Command {
             throw new DukeException("Error marking task as done");
         }
         String resultString =
-                "Nice, I have marked this task as done:\n" +
-                TaskList.getInstance().get(index).toString();
+                "Nice, I have marked this task as done:\n"
+                        + TaskList.getInstance().get(index).toString();
         return resultString;
     }
 
