@@ -46,7 +46,8 @@ public class Event extends Task {
      * @return Formatted date string
      */
     public String parseAtDate() {
-        return getAtDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM d yyyy");
+        return getAtDate().format(pattern);
     }
 
     /**
@@ -57,9 +58,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString()
-                + " (at: "
-                + ((atDate == null) ? at : parseAtDate())
-                + ")";
+        String date = (atDate == null) ? at : parseAtDate();
+        String parentString = super.toString();
+        return String.format("[E]%s (at: %s)", parentString, date);
     }
 }

@@ -31,22 +31,14 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns the LocalDate object which represents the deadline of the task
-     *
-     * @return Deadline of the task
-     */
-    public LocalDate getByDate() {
-        return byDate;
-    }
-
-    /**
      * Returns a formatted String representing the deadline of the task in the form
      * MMM d YYYY.
      *
      * @return Formatted date string
      */
     public String parseByDate() {
-        return getByDate().format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        DateTimeFormatter pattern = DateTimeFormatter.ofPattern("MMM d yyyy");
+        return byDate.format(pattern);
     }
 
     /**
@@ -57,9 +49,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString()
-                + " (by: "
-                + ((byDate == null) ? by : parseByDate())
-                + ")";
+        String date = (byDate == null) ? by : parseByDate();
+        String parentString = super.toString();
+        return String.format("[D]%s (by: %s)", parentString, date);
     }
 }

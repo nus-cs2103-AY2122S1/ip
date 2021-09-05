@@ -23,55 +23,100 @@ public class Parser {
         case "list":
             return new Command(operation);
         case "done":
-            if (inputStringParts.length == 1) {
-                throw new JanetException(Ui.EXPECTED_DONE_INDEX_GOT_NONE);
-            }
-            try {
-                int doneTaskNum = Integer.parseInt(inputStringParts[1]);
-                return new Command(inputStringParts[0], doneTaskNum);
-            } catch (NumberFormatException e) {
-                throw new JanetException(Ui.EXPECTED_DONE_INDEX_GOT_OTHER);
-            }
+            return parseDone(inputStringParts);
         case "todo":
-            if (inputStringParts.length == 1) {
-                throw new JanetException(Ui.EXPECTED_TO_DO_DESCRIPTION);
-            }
-            return new Command(inputStringParts[0], input.substring(5));
+            return parseTodo(input, inputStringParts);
         case "deadline":
-            if (inputStringParts.length == 1) {
-                throw new JanetException(Ui.EXPECTED_DEADLINE_DESCRIPTION);
-            }
-            String[] descriptionAndBy = input.substring(9).split("/by ");
-            if (descriptionAndBy.length == 1) {
-                throw new JanetException(Ui.EXPECTED_DEADLINE_BY);
-            }
-            return new Command(inputStringParts[0], descriptionAndBy[0], descriptionAndBy[1]);
+            return parseDeadline(input, inputStringParts);
         case "event":
-            if (inputStringParts.length == 1) {
-                throw new JanetException(Ui.EXPECTED_EVENT_DESCRIPTION);
-            }
-            String[] descriptionAndAt = input.substring(6).split("/at ");
-            if (descriptionAndAt.length == 1) {
-                throw new JanetException(Ui.EXPECTED_EVENT_AT);
-            }
-            return new Command(inputStringParts[0], descriptionAndAt[0], descriptionAndAt[1]);
+            return parseEvent(input, inputStringParts);
         case "delete":
-            if (inputStringParts.length == 1) {
-                throw new JanetException(Ui.EXPECTED_DELETED_INDEX_GOT_NONE);
-            }
-            try {
-                int delTaskNum = Integer.parseInt(inputStringParts[1]);
-                return new Command(inputStringParts[0], delTaskNum);
-            } catch (NumberFormatException e) {
-                throw new JanetException(Ui.EXPECTED_DELETED_INDEX_GOT_OTHER);
-            }
+            return parseDelete(inputStringParts);
         case "find":
-            if (inputStringParts.length == 1) {
-                throw new JanetException(Ui.EXPECTED_SEARCH_QUERY);
-            }
-            return new Command(inputStringParts[0], input.substring(5));
+            return parseFind(input, inputStringParts);
         default:
             throw new JanetException(Ui.UNRECOGNISED_OPERATION);
         }
     }
+
+    private static Command parseDone(String[] inputStringParts) throws JanetException {
+        String operation = inputStringParts[0];
+        if (inputStringParts.length == 1) {
+            throw new JanetException(Ui.EXPECTED_DONE_INDEX_GOT_NONE);
+        }
+        try {
+            int doneTaskNum = Integer.parseInt(inputStringParts[1]);
+            return new Command(operation, doneTaskNum);
+        } catch (NumberFormatException e) {
+            throw new JanetException(Ui.EXPECTED_DONE_INDEX_GOT_OTHER);
+        }
+    }
+
+    private static Command parseTodo(String input, String[] inputStringParts) throws JanetException {
+        if (inputStringParts.length == 1) {
+            throw new JanetException(Ui.EXPECTED_TO_DO_DESCRIPTION);
+        }
+
+        String operation = inputStringParts[0];
+        String description = input.substring(operation.length() + 1);
+        return new Command(operation, description);
+    }
+
+    private static Command parseDeadline(String input, String[] inputStringParts) throws JanetException {
+        String operation = inputStringParts[0];
+        String[] descriptionAndBy = input.substring(operation.length() + 1).split("/by ");
+
+        // Guard clauses
+        if (inputStringParts.length == 1) {
+            throw new JanetException(Ui.EXPECTED_DEADLINE_DESCRIPTION);
+        }
+        if (descriptionAndBy.length == 1) {
+            throw new JanetException(Ui.EXPECTED_DEADLINE_BY);
+        }
+
+        String description = descriptionAndBy[0];
+        String by = descriptionAndBy[1];
+        return new Command(operation, description, by);
+    }
+
+    private static Command parseEvent(String input, String[] inputStringParts) throws JanetException {
+        String operation = inputStringParts[0];
+        String[] descriptionAndAt = input.substring(operation.length() + 1).split("/at ");
+
+        // Guard clauses
+        if (inputStringParts.length == 1) {
+            throw new JanetException(Ui.EXPECTED_EVENT_DESCRIPTION);
+        }
+        if (descriptionAndAt.length == 1) {
+            throw new JanetException(Ui.EXPECTED_EVENT_AT);
+        }
+
+        String description = descriptionAndAt[0];
+        String at = descriptionAndAt[1];
+        return new Command(operation, description, at);
+    }
+
+    private static Command parseDelete(String[] inputStringParts) throws JanetException {
+        if (inputStringParts.length == 1) {
+            throw new JanetException(Ui.EXPECTED_DELETED_INDEX_GOT_NONE);
+        }
+
+        String operation = inputStringParts[0];
+        try {
+            int indexOfTaskToDelete = Integer.parseInt(inputStringParts[1]);
+            return new Command(operation, indexOfTaskToDelete);
+        } catch (NumberFormatException e) {
+            throw new JanetException(Ui.EXPECTED_DELETED_INDEX_GOT_OTHER);
+        }
+    }
+
+    private static Command parseFind(String input, String[] inputStringParts) throws JanetException {
+        if (inputStringParts.length == 1) {
+            throw new JanetException(Ui.EXPECTED_SEARCH_QUERY);
+        }
+
+        String operation = inputStringParts[0];
+        return new Command(inputStringParts[0], input.substring(operation.length() + 1));
+    }
+
 }

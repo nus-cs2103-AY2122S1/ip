@@ -4,7 +4,7 @@ package janet;
  * Represents the action requested by the user that Janet understands.
  */
 public class Command {
-    private String operation;
+    private final String operation;
     private int index;
     private String description;
     private String time;

@@ -46,14 +46,13 @@ public class Storage {
      */
     public TaskList readSave() throws IOException, ClassNotFoundException {
         File f = new File(this.path);
-        if (!f.createNewFile()) { // save file exists
-            FileInputStream readData = new FileInputStream(this.path);
-            ObjectInputStream readStream = new ObjectInputStream(readData);
-            TaskList readList = (TaskList) readStream.readObject();
-            readStream.close();
-            return readList;
-        } else {
+        if (f.createNewFile()) { // created a blank save file
             return new TaskList();
         }
+        FileInputStream readData = new FileInputStream(this.path);
+        ObjectInputStream readStream = new ObjectInputStream(readData);
+        TaskList readList = (TaskList) readStream.readObject();
+        readStream.close();
+        return readList;
     }
 }
