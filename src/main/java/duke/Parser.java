@@ -22,6 +22,6 @@ public class Parser {
     }
 
     public boolean parseDelete(String input) {
-        return input.length() >= 6 && input.substring(0, 7).equals("delete ");
+        return input.length() >= 7 && input.substring(0, 7).equals("delete ");
     }
 }
