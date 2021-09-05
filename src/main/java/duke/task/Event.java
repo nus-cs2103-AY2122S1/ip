@@ -27,8 +27,8 @@ public class Event extends Task {
         DateTimeParser logicDateTimeParser = new DateTimeParser(startEventDateTime); // to parse start
         startTimeOfEvent = logicDateTimeParser.getTime();
         startDateOfEvent = logicDateTimeParser.getDate();
-        if (endEventDateTime == null ||
-            endEventDateTime.trim().isEmpty()) {
+        if (endEventDateTime == null
+            || endEventDateTime.trim().isEmpty()) {
             endDateOfEvent = startDateOfEvent;
             endTimeOfEvent = startTimeOfEvent;
         } else {

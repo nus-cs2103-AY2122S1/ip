@@ -42,6 +42,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
+        assert sequence == 0 : "Starting sequence should be 0.";
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         // Gets the first dialog
@@ -59,6 +60,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
+        assert dialogContainer.getChildren().size() != 0 : "Dialog container should always have at least 1 message.";
         String dukeText;
         switch (sequence) {
         case 0: // start
@@ -88,6 +90,7 @@ public class MainWindow extends AnchorPane {
             }
             break;
         default:
+            assert false : "Sequence not 0, 1 or 2.";
             dukeText = "Something went very wrong!";
         }
 
@@ -106,6 +109,7 @@ public class MainWindow extends AnchorPane {
     }
 
     private String getResponse(String input) {
+        assert input != null : "User input can never be null.";
         return ui.checkInput(input, duke);
     }
 }
