@@ -1,11 +1,13 @@
 package duke;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 import duke.commands.Command;
 import duke.ui.DialogBox;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -39,8 +41,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.jpg"));
 
     /**
      * Constructor.
@@ -55,34 +57,9 @@ public class Duke extends Application {
         } catch (DukeException e) {
             System.out.println(e);
         }
-
-        System.out.println(LOGO);
-        this.run();
     }
 
     public static void main(String[] args) {
-    }
-
-    /**
-     * Initializes the application to run the to-do list simulation.
-     */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        boolean isExit = false;
-        String currLine;
-        
-        while (!isExit && sc.hasNextLine()) {
-            try {
-                currLine = sc.nextLine();
-                Command currCommand = Parser.parse(currLine);
-                currCommand.execute(this.itemList, this.ui);
-                this.storage.saveState(this.itemList);
-                isExit = currCommand.isExit();
-            } catch (DukeException e) {
-                this.ui.println(e.toString());
-            }
-        }
-        sc.close();
     }
 
     @Override
@@ -157,6 +134,11 @@ public class Duke extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
+        Label startText = new Label(this.LOGO);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(startText, new ImageView(duke))
+        );
     }
 
     /**
@@ -179,6 +161,7 @@ public class Duke extends Application {
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
+        boolean isExit = (userInput.getText().toLowerCase().equals("bye"));
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -186,6 +169,10 @@ public class Duke extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
         userInput.clear();
+
+        if (isExit) {
+            Platform.exit();
+        }
     }
 
     /**
@@ -198,8 +185,8 @@ public class Duke extends Application {
             currCommand.execute(this.itemList, this.ui);
             this.storage.saveState(this.itemList);
         } catch (DukeException e) {
-            return(e.toString());
+            return e.toString();
         }
-        return "";
+        return this.ui.flushBuffer();
     }
 }

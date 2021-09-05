@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class Ui {
     static final String STYLE_LINE = "--------------------\n";
     static final String STYLE_INDENT = "     ";
+    private String buffer;
 
     /**
      * Prints to output. Styles the input before printing.
@@ -16,8 +17,7 @@ public class Ui {
      * @param inputString Input String to be printed.
      */
     public void println(String inputString) {
-        System.out.print(STYLE_INDENT + STYLE_LINE +
-                inputString + "\n" + STYLE_INDENT + STYLE_LINE);
+        this.buffer = inputString;
     }
 
     /**
@@ -26,10 +26,16 @@ public class Ui {
      * @param inputStrings ArrayList of Strings to be printed.
      */
     public void println(ArrayList<String> inputStrings) {
-        String returnBuffer = STYLE_INDENT + STYLE_LINE;
+        String returnBuffer = "";
         for (String line : inputStrings) {
             returnBuffer = returnBuffer.concat("     " + line + "\n");
         }
-        System.out.print(returnBuffer + STYLE_INDENT + STYLE_LINE);
+        this.buffer=  returnBuffer;
+    }
+
+    public String flushBuffer() {
+        String save = this.buffer;
+        this.buffer = "";
+        return save;
     }
 }
