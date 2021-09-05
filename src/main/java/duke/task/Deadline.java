@@ -58,7 +58,12 @@ public class Deadline extends Task {
         } catch (DateTimeException e) {
             throw new DukeException("Invalid date inputed. Please check that the date is correct\nEg."
                     + Deadline.inputExample);
+        } catch (Exception e) {
+            assert false : "Unknown exception being thrown in Deadline";
         }
+
+        assert false : "Error in of function in Deadline";
+        return null;
     }
 
     /**

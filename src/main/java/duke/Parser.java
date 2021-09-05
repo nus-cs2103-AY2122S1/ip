@@ -21,10 +21,10 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         if (input.replaceAll("\\s+", "").toLowerCase().equals("bye")) {
-            return Command.makeCommand(CommandsTypes.Exit);
+            return Command.makeCommand(CommandsTypes.EXIT);
         }
         if (input.replaceAll("\\s+", "").toLowerCase().equals("list")) {
-            return Command.makeCommand(CommandsTypes.List);
+            return Command.makeCommand(CommandsTypes.LIST);
         }
         String[] splitBySpace = input.split(" ");
         if (splitBySpace.length < 2) {
@@ -36,7 +36,7 @@ public class Parser {
                 if (index < 1) {
                     throw new NumberFormatException();
                 }
-                return Command.makeCommand(CommandsTypes.MarkDone, index);
+                return Command.makeCommand(CommandsTypes.MARK_DONE, index);
             } catch (NumberFormatException e) {
                 throw new DukeException("Invalid index inputted after done. Please enter a positive integer");
             }
@@ -47,7 +47,7 @@ public class Parser {
                 if (index < 1) {
                     throw new NumberFormatException();
                 }
-                return Command.makeCommand(CommandsTypes.Delete, index);
+                return Command.makeCommand(CommandsTypes.DELETE, index);
             } catch (NumberFormatException e) {
                 throw new DukeException("Invalid index inputted after delete. Please enter a positive integer");
             }
@@ -58,12 +58,12 @@ public class Parser {
             for (int i = 1; i < splitBySpace.length; i++) {
                 keywords[i - 1] = splitBySpace[i];
             }
-            return Command.makeCommand(CommandsTypes.Find, keywords);
+            return Command.makeCommand(CommandsTypes.FIND, keywords);
         }
         String type = splitBySpace[0].toLowerCase();
         String taskDescription = Stream.of(input.split(" "))
                 .skip(1).reduce("", (x, y) -> x + " " + y);
         Task newTask = Task.makeTask(type, taskDescription);
-        return Command.makeCommand(CommandsTypes.Add, newTask);
+        return Command.makeCommand(CommandsTypes.ADD, newTask);
     }
 }
