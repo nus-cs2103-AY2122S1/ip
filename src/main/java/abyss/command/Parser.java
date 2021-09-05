@@ -30,6 +30,8 @@ public abstract class Parser {
             return new EventCommand(content);
         case "DONE":
             return new DoneCommand(content);
+        case "EDIT":
+            return EditCommand.makeEditCommand(content);
         case "DELETE":
             return new DeleteCommand(content);
         case "FIND":

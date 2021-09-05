@@ -20,10 +20,6 @@ public class TodoCommand implements Command {
         this.description = description;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
     /**
      * Executes the add to-do command.
      *

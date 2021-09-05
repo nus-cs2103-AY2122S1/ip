@@ -3,7 +3,9 @@ package abyss.command;
 import java.io.IOException;
 
 import abyss.Abyss;
+import abyss.Ui;
 import abyss.exception.InvalidCommandException;
+import abyss.task.Task;
 
 /**
  * Represents a command to delete a task from the list of tasks.
@@ -19,17 +21,18 @@ public class DeleteCommand implements Command {
                                                   + "the index of the task piece.");
         }
 
-        if (Abyss.getNumberOfTasks() == 0) {
+        int numberOfTasks = Abyss.getTaskManager().getNumberOfTasks();
+        if (numberOfTasks == 0) {
             throw new InvalidCommandException("The Abyss is empty.");
         }
 
         int i = Integer.parseInt(content);
-        if (i < 1 || i > Abyss.getNumberOfTasks()) {
+        if (i < 1 || i > numberOfTasks) {
             throw new InvalidCommandException("Index should be positive and not more than "
-                                                  + Abyss.getNumberOfTasks());
+                                                  + numberOfTasks);
         }
 
-        this.index = i;
+        this.index = i - 1;
     }
 
     /**
@@ -40,9 +43,9 @@ public class DeleteCommand implements Command {
      */
     @Override
     public String execute() throws IOException {
-        String response = Abyss.getTaskManager().delete(index);
+        Task task = Abyss.getTaskManager().delete(index);
         Abyss.getStorage().saveTasks(Abyss.getTaskManager());
-        return response;
+        return Ui.replyTaskDeleted(task);
     }
 }
 
