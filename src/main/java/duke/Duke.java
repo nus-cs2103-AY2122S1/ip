@@ -20,6 +20,7 @@ public class Duke {
     private TaskList taskList;
     private final Parser parser;
     private final Ui ui;
+    private boolean isFirstTimeUser;
 
     /**
      * Constructor for Duke.
@@ -30,6 +31,7 @@ public class Duke {
         try {
             storage = new Storage();
             taskList = new TaskList(storage.retrieveData(), storage);
+            isFirstTimeUser = storage.getUserStatus();
         } catch (DukeException e) {
             ui.formatPrint(e.getMessage());
             taskList = new TaskList(new ArrayList<Task>(), storage);
@@ -43,5 +45,9 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    public boolean isFirstTimeUser() {
+        return this.isFirstTimeUser;
     }
 }
