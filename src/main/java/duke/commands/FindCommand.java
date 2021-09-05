@@ -19,7 +19,9 @@ public class FindCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String message = tasks.find(keyword);
+        TaskList filteredTasks = tasks.filter(keyword);
+        String message = String.format("Here are the matching %s in your list:\n%s",
+                filteredTasks.size() <= 1 ? "task" : "tasks", filteredTasks);
         return message;
     }
 }
