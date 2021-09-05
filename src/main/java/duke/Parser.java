@@ -1,5 +1,11 @@
 package duke;
 
+import com.zoho.hawking.HawkingTimeParser;
+import com.zoho.hawking.datetimeparser.configuration.HawkingConfiguration;
+import com.zoho.hawking.language.english.model.DatesFound;
+import com.zoho.hawking.language.english.model.ParserOutput;
+import org.joda.time.DateTime;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -7,6 +13,7 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.ChronoField;
 import java.time.temporal.Temporal;
+import java.util.Date;
 import java.util.Locale;
 
 /**
@@ -181,11 +188,55 @@ public class Parser {
      * @throws DateTimeFormatException Invalid date-time format
      */
     public static Temporal parseTemporal(String datetime) throws DateTimeFormatException {
+        HawkingTimeParser parser = new HawkingTimeParser();
+        DateTime jodaStart = null;
+        DateTime jodaEnd = null;
+        try {
+            DatesFound datesFound = parser.parse(datetime, new Date(), new HawkingConfiguration(), "eng");
+            ParserOutput po = datesFound.getParserOutputs().get(0);
+            jodaStart = po.getDateRange().getStart();
+            jodaEnd = po.getDateRange().getEnd();
+        } catch (Exception e) {
+            throw new DateTimeFormatException(datetime);
+        }
+        assert jodaStart != null && jodaEnd != null;
+        Temporal result = null;
+        try {
+            LocalDateTime ldtStart = LocalDateTime.of(
+                    jodaStart.getYear(),
+                    jodaStart.getMonthOfYear(),
+                    jodaStart.getDayOfMonth(),
+                    jodaStart.getHourOfDay(),
+                    jodaStart.getMinuteOfHour()
+            );
+            LocalDateTime ldtEnd = LocalDateTime.of(
+                    jodaEnd.getYear(),
+                    jodaEnd.getMonthOfYear(),
+                    jodaEnd.getDayOfMonth(),
+                    jodaEnd.getHourOfDay(),
+                    jodaEnd.getMinuteOfHour()
+            );
+
+            if (ldtStart.plusHours(23).plusMinutes(59).equals(ldtEnd)) {
+                result = ldtEnd.toLocalDate();
+            } else if (ldtEnd.getHour() == 23 && ldtEnd.getMinute() == 59) {
+                result = ldtEnd.toLocalDate();
+            } else {
+                result = ldtEnd;
+            }
+
+        } catch (DateTimeParseException e) {
+            throw new DateTimeFormatException(datetime + "could not convert to local date time!");
+        }
+        assert result != null;
+        return result;
+            /*
         if (datetime.trim().split("\\s+", 2).length < 2) { // no time given
             return parseDate(datetime);
         } else {
             return parseDateTime(datetime);
         }
+        */
     }
 
 
