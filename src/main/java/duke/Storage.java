@@ -48,6 +48,7 @@ public class Storage {
             while (sc.hasNext()) {
                 String t = sc.nextLine();
                 String[] task = t.split("\\|");
+                assert task.length >= 1 : "Invalid task input.";
 
                 switch (task[0]) {
                 case "T":
@@ -65,12 +66,14 @@ public class Storage {
                     break;
 
                 default:
+                    assert false : "Invalid input.";
                     break;
                 }
             }
         } else {
             f.getParentFile().mkdir();
-            f.createNewFile();
+            boolean isNewFileCreated = f.createNewFile();
+            assert isNewFileCreated : "New file not created for storage";
         }
 
         return items;

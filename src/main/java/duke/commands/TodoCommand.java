@@ -27,6 +27,8 @@ public class TodoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + " <description> - add a todo item\n"
             + "    📍 Example: " + COMMAND_WORD + " read book";
 
+    private static final String MISSING_DESC_ERR = "Please add a description for your todo!";
+
     private String userCommand;
 
     /**
@@ -48,14 +50,16 @@ public class TodoCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (userCommand.length() <= COMMAND_LENGTH) {
-                throw new IllegalArgumentException("Please add a description for your todo!");
-            } else {
-                Todo newTodo = new Todo(userCommand.substring(COMMAND_LENGTH).strip());
-                tasks.addTask(newTodo);
-                storage.save(tasks.getItems());
-
-                return ui.printTaskAdded(newTodo, tasks.getSize());
+                throw new IllegalArgumentException(MISSING_DESC_ERR);
             }
+
+            String description = userCommand.substring(COMMAND_LENGTH).strip();
+            Todo newTodo = new Todo(description);
+            tasks.addTask(newTodo);
+            storage.save(tasks.getItems());
+
+            return ui.printTaskAdded(newTodo, tasks.getSize());
+
         } catch (IOException | IllegalArgumentException e) {
             return ui.printError(e.getMessage());
         }

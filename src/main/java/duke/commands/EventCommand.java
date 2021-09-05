@@ -54,23 +54,32 @@ public class EventCommand extends Command {
             // splitCommand[0] will be of format event <description>.
             // splitCommand[1] will be the date.
             String[] splitCommand = userCommand.split("/at");
+            assert splitCommand.length > 0 : "Invalid event command";
 
-            if (userCommand.length() <= COMMAND_LENGTH || splitCommand[0].strip().length() <= COMMAND_LENGTH
-                    || splitCommand.length < 2) {
-                throw new IllegalArgumentException("Please add a description and/or date for your event!");
-            } else {
-                LocalDateTime date = LocalDateTime.parse(splitCommand[1].strip(), Command.INPUT_FORMATTER);
-                Event newEvent = new Event(splitCommand[0].substring(COMMAND_LENGTH).strip(), date);
+            boolean isDescAdded = splitCommand[0].strip().length() > COMMAND_LENGTH;
+            boolean isOneDateAdded = splitCommand.length == 2;
+            boolean isMultipleDateAdded = splitCommand.length > 2;
 
-                tasks.addTask(newEvent);
-                storage.save(tasks.getItems());
-
-                return ui.printTaskAdded(newEvent, tasks.getSize());
+            if (isMultipleDateAdded) {
+                throw new IllegalArgumentException(MULTIPLE_DATE_ERR);
+            } else if (!isDescAdded || !isOneDateAdded) {
+                throw new IllegalArgumentException(MISSING_DESC_DATE_ERR);
             }
+
+            String dateStr = splitCommand[1].strip();
+            String descStr = splitCommand[0].substring(COMMAND_LENGTH).strip();
+            LocalDateTime date = LocalDateTime.parse(dateStr, Command.INPUT_FORMATTER);
+            Event newEvent = new Event(descStr, date);
+
+            tasks.addTask(newEvent);
+            storage.save(tasks.getItems());
+
+            return ui.printTaskAdded(newEvent, tasks.getSize());
+
         } catch (IOException | IllegalArgumentException e) {
             return ui.printError(e.getMessage());
         } catch (DateTimeException e) {
-            return ui.printError("Please add a valid event date of format yyyy/MM/dd HHmm (24-hour format)!");
+            return ui.printError(INVALID_DATE_ERR);
         }
     }
 }
