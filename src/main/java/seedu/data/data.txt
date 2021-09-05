@@ -1,6 +1,12 @@
-T | 1 | borrow book 3
-T | 1 | borrow hello 4
-T | 1 | borrow book 5
 T | 1 | borrow hello 6
 T | 1 | borrow book 7
-T | 1 | borrow hello 8
+T | 0 | nothing eelse
+T | 1 | borrow hello 6
+T | 1 | borrow book 7
+T | 0 | nothing eelse
+T | 1 | borrow hello 6
+T | 1 | borrow book 7
+T | 0 | nothing eelse
+T | 1 | borrow hello 6
+T | 1 | borrow book 7
+T | 0 | nothing eelse

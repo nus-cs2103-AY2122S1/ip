@@ -149,10 +149,10 @@ public class Storage {
             Scanner sc = new Scanner(this.data);
             while (sc.hasNextLine()) {
                 currLine = sc.nextLine();
-                count++;
                 if (count != index) {
                     stringToAppend += currLine + "\n";
                 }
+                count++;
             }
             clearsFileAndWrite(stringToAppend);
             sc.close();
