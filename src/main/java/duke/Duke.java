@@ -27,6 +27,7 @@ public class Duke {
      */
     public Duke() {
         storage = new Storage(FILE_PATH);
+        assert storage.load() != null : "An ArrayList should be loadable from the storage system";
         tasks = new TaskList(storage.load());
         parser = new Parser();
     }
@@ -40,6 +41,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = parser.parse(input);
+            assert command != null : "A valid Command instance should be provided";
             return command.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
