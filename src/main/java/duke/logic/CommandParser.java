@@ -28,6 +28,7 @@ public class CommandParser {
      * @param input    The string input from the user.
      * @param storage  The storage logic that allows the command parser to write the task list data to it.
      * @param taskList The list of tasks.
+     * @param ui       The user interface generating output messages.
      */
     public CommandParser(String input, TaskList taskList, Storage storage, Ui ui) {
         if (input == null || input.equals("")) {
@@ -37,70 +38,76 @@ public class CommandParser {
         CommandsEnum commandEnum;
         try {
             commandEnum = CommandsEnum.valueOf(inputArr[0].toUpperCase());
-        } catch (IllegalArgumentException e) {
-            throw new DukeException(INVALID_COMMAND);
-        }
-        this.willExit = false;
-        switch (commandEnum) {
-        case BYE:
-            output = ui.goodByeMessage();
-            willExit = true;
-            return;
-        case LIST:
-            output = ui.allTasksMessage(taskList.getAllTasks(), taskList.size());
-            return;
-        case UPCOMING:
-            output = ui.upcomingTasksMessage(taskList.getUpcomingTasks(), taskList.size());
-            return;
-        case HELP:
-            try {
+            this.willExit = false;
+            switch (commandEnum) {
+            // Single word commands
+            case BYE:
+                output = ui.getGoodByeMessage();
+                willExit = true;
+                return;
+            case LIST:
+                output = ui.getAllTasksMessage(taskList.getAllTasks(), taskList.size());
+                return;
+            case UPCOMING:
+                output = ui.getUpcomingTasksMessage(taskList.getUpcomingTasks(), taskList.size());
+                return;
+            case HELP:
                 output = ui.displayHelpMessage(
                     inputArr.length == 1 ? null : CommandsEnum.valueOf(inputArr[1].toUpperCase()));
-            } catch (IllegalArgumentException e) {
-                throw new DukeException(INVALID_COMMAND);
-            }
-            return;
-        default:
-            if (inputArr.length < 2) {
-                throw new DukeException(TOO_LITTLE_ARGUMENTS_MESSAGE);
-            }
-            switch (commandEnum) {
-            case FIND:
-                output = ui.tasksContainingMessage(inputArr[1],
-                    taskList.getTasksContaining(inputArr[1]), taskList.size());
                 return;
-            case TODO: // fallthrough intended // From here on, there will be updates to the storage.
-            case EVENT: // fallthrough intended
-            case DEADLINE:
-                output = ui.addTaskMessage(addTask(commandEnum.name(), inputArr[1], taskList), taskList.size());
-                break;
             default:
-                int taskNumber;
-                try {
-                    taskNumber = Integer.parseInt(inputArr[1]);
-                } catch (NumberFormatException e) {
-                    throw new DukeException(INVALID_NUMBER_MESSAGE);
+                if (inputArr.length < 2) {
+                    throw new DukeException(TOO_LITTLE_ARGUMENTS_MESSAGE);
                 }
-                switch (commandEnum) {
-                case DONE:
-                    if (!taskList.markAsDone(taskNumber)) { // task already marked as done
-                        throw new DukeException("You have already marked this task (%s) as done",
-                            taskList.getTask(taskNumber));
-                    }
-                    output = ui.markAsDoneMessage(taskList.getTask(taskNumber));
-                    break;
-                case DELETE:
-                    output = ui.removeTaskMessage(taskList.removeTask(taskNumber), taskList.size());
-                    break;
-                default:
-                    throw new DukeException(INVALID_COMMAND);
-                }
+                output = parseMultiword(inputArr[1], commandEnum, taskList, ui);
             }
+        } catch (IllegalArgumentException e) {
+            throw new DukeException(INVALID_COMMAND);
         }
         try {
             storage.updateDukeTextFile();
         } catch (IOException e) {
             throw new DukeException(e.getMessage());
+        }
+    }
+
+    /**
+     * Parses the input if it contains more than 1 word.
+     *
+     * @param inputWords   The input string without the command.
+     * @param commandsEnum The enum representing the command.
+     * @param taskList     The list of tasks to be interacted with.
+     * @param ui           The user interface generating the output messages.
+     * @return The output string from ui.
+     */
+    private static String parseMultiword(String inputWords, CommandsEnum commandsEnum, TaskList taskList, Ui ui) {
+        switch (commandsEnum) {
+        case FIND:
+            return ui.getTasksWithPatternMessage(inputWords,
+                taskList.getTasksContaining(inputWords), taskList.size());
+        case TODO: // fallthrough intended // From here on, there will be updates to the storage.
+        case EVENT: // fallthrough intended
+        case DEADLINE:
+            return ui.addTaskMessage(addTask(commandsEnum.name(), inputWords, taskList), taskList.size());
+        default:
+            int taskNumber;
+            try {
+                taskNumber = Integer.parseInt(inputWords);
+            } catch (NumberFormatException e) {
+                throw new DukeException(INVALID_NUMBER_MESSAGE);
+            }
+            switch (commandsEnum) {
+            case DONE:
+                if (!taskList.markAsDone(taskNumber)) { // task already marked as done
+                    throw new DukeException("You have already marked this task (%s) as done",
+                        taskList.getTask(taskNumber));
+                }
+                return ui.markAsDoneMessage(taskList.getTask(taskNumber));
+            case DELETE:
+                return ui.removeTaskMessage(taskList.removeTask(taskNumber), taskList.size());
+            default:
+                throw new DukeException(INVALID_COMMAND);
+            }
         }
     }
 

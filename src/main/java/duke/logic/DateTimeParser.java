@@ -39,20 +39,29 @@ public class DateTimeParser {
         try {
             if (dateAndTime.length == 1) {
                 if (dateAndTime[0].contains("/")) { // User entered date
-                    date = LocalDate.parse(dateAndTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
                     time = LocalTime.parse("23:59");
                 } else { // User likely entered time
-                    time = LocalTime.parse(dateAndTime[0], DateTimeFormatter.ofPattern("H:m"));
+                    time = parseTime(dateAndTime[0]);
                     date = time.isAfter(relativeStartTime) ? relativeStartDate : relativeStartDate.plusDays(1);
+                    return;
                 }
             } else {
-                date = LocalDate.parse(dateAndTime[0], DateTimeFormatter.ofPattern("d/M/yyyy"));
-                time = LocalTime.parse(dateAndTime[1], DateTimeFormatter.ofPattern("H:m"));
+                time = parseTime(dateAndTime[1]);
             }
+            date = parseDate(dateAndTime[0]);
+
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid date and time format. Please enter them in the format: d/M/YYYY H:m.\n"
                 + "For example: 23/8/2021 14:00");
         }
+    }
+
+    private LocalDate parseDate(String date) {
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern("d/M/yyyy"));
+    }
+
+    private LocalTime parseTime(String time) {
+        return LocalTime.parse(time, DateTimeFormatter.ofPattern("H:m"));
     }
 
     /**
