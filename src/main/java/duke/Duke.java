@@ -108,18 +108,16 @@ public class Duke extends Application {
         });
 
         Scene scene = new Scene(generateChatBotMainLayout(userChatInputField, sendButton, scrollPane));
-        generateMainWindow(primaryStage, scene);
+        setUpMainWindow(primaryStage, scene);
         primaryStage.show();
     }
 
-    private Stage generateMainWindow(Stage mainStage, Scene scene) {
+    private void setUpMainWindow(Stage mainStage, Scene scene) {
         mainStage.setScene(scene);
         mainStage.setTitle("Duke");
         mainStage.setResizable(false);
         mainStage.setMinHeight(600.0);
         mainStage.setMinWidth(400.0);
-
-        return mainStage;
     }
 
     private AnchorPane generateChatBotMainLayout(TextField userChatInputField,
