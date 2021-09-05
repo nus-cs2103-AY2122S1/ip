@@ -120,8 +120,14 @@ public class Parser {
 
     private String deleteTask(String input) {
         String[] splitString = input.split(" ", 2);
-        int i = Integer.parseInt(splitString[1]) - 1;
-        Task removedTask = tasks.remove(i);
+        int index = Integer.parseInt(splitString[1]) - 1;
+        Task removedTask;
+        if (index > tasks.size() + 1) {
+            return "OOPS!!! The task doesn't exist!\n";
+        } else {
+            removedTask = tasks.remove(index);
+        }
+        assert removedTask != null : "Task removed must exist!";
         try {
             storage.writeEntireFile();
         } catch (IOException e) {
