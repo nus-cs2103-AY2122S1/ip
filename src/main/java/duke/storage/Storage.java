@@ -64,6 +64,8 @@ public class Storage {
                     taskToAdd.markAsDone();
                 }
 
+                assert taskToAdd != null : "The task should be initialised as expected";
+
                 // Adding the created task to the task list
                 taskList.add(taskToAdd);
             }
@@ -117,12 +119,15 @@ public class Storage {
                 currentLine += ((Event) task).getDate().toString();
             }
 
+            assert !currentLine.trim().isEmpty() : "The current line should be filled up with relevant details";
+
             // Concatenate the formatted line to textToAdd
             textToAdd += currentLine + System.lineSeparator();
         }
 
         // Write to the hard disk
         try {
+            assert Files.exists(Paths.get(this.filePath)) : "File path should exist";
             FileWriter fileWriter = new FileWriter(this.filePath);
             fileWriter.write(textToAdd);
             fileWriter.close();

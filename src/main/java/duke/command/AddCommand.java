@@ -64,10 +64,12 @@ public class AddCommand extends Command {
 
         // Displays a message indicating the task has been successfully added to the list
         String message = "Got it. I've added this task:\n" + "  " + taskToBeAdded + "\n";
-        if (tasks.getNumberOfTasks() <= 1) {
-            message += "Now you have " + tasks.getNumberOfTasks() + " task in the list.";
+        int numberOfTasks = tasks.getNumberOfTasks();
+        assert numberOfTasks >= 0 : "Number of tasks should not be negative";
+        if (numberOfTasks <= 1) {
+            message += "Now you have " + numberOfTasks + " task in the list.";
         } else {
-            message += "Now you have " + tasks.getNumberOfTasks() + " tasks in the list.";
+            message += "Now you have " + numberOfTasks + " tasks in the list.";
         }
 
         // Saves the current task list to the hard drive

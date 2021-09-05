@@ -47,6 +47,7 @@ public class TaskList {
             throw new TaskAlreadyDoneException();
         }
         specifiedTask.markAsDone();
+        assert specifiedTask.isDone() : "The task should be correctly marked as done";
         return specifiedTask;
     }
 

@@ -29,6 +29,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Storage storage) {
         TaskList tasksWithMatchingKeyword = tasks.findTasksWithKeyword(keyword);
+        assert tasksWithMatchingKeyword != null : "A TaskList instance should be returned";
         return "Here are the matching tasks in your list:\n" + tasksWithMatchingKeyword.toString();
     }
 }
