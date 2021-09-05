@@ -29,10 +29,15 @@ public class TaskManager {
      *
      * @param task any Task object is accepted.
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws DukeException {
         assert task != null : "Should not try to add a null task";
-        taskList.add(task);
-        save();
+        boolean isNewTask = taskList.stream().filter(t -> t.equals(task)).findFirst().isEmpty();
+        if (isNewTask) {
+            taskList.add(task);
+            save();
+        } else {
+            throw new DukeException("Task already in your list");
+        }
     }
 
     /**

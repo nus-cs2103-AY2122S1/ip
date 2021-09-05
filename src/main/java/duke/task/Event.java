@@ -56,4 +56,13 @@ public class Event extends Task {
                 super.toString(),
                 this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other instanceof Event) {
+            return ((Event) other).description.equals(this.description)
+                    && ((Event) other).date.isEqual(this.date);
+        }
+        return false;
+    }
 }
