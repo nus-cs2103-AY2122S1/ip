@@ -111,7 +111,6 @@ public class Duke {
      * Starts Duke to allow for inputs.
      */
     public void run() {
-        this.ui.showGreetMessage();
         this.storage.load();
         String userInput;
         boolean isExit = false;
@@ -161,14 +160,5 @@ public class Duke {
 
     public String getResponse(String input) {
         return executeInput(parser.parse(input));
-    }
-    /**
-     * Driver for the Duke class.
-     *
-     * @param args No args needed.
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke();
-        duke.run();
     }
 }

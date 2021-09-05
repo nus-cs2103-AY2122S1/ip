@@ -21,28 +21,6 @@ public class Ui {
     }
 
     /**
-     * Shows a greeting message.
-     */
-    public void showGreetMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-    }
-
-    /**
-     * Echoes the given command.
-     * @param t Command to be given.
-     */
-    public void echo(String t) {
-        System.out.println("-----------------------------------------\n"
-                + String.format("%s\n", t)
-                + "-----------------------------------------\n");
-    }
-
-    /**
      * Shows exit message.
      */
     public void showExitMessage() {
