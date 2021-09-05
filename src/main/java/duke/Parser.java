@@ -222,11 +222,11 @@ public class Parser {
         }
 
         String[] deadline = details[1].split(" ");
-        String deadlineDate = details[0];
+        String deadlineDate = deadline[0];
         if (deadline.length == 1) { // only date provided
             return new Deadline(deadlineDescription, LocalDate.parse(deadlineDate));
         } else if (deadline.length == 2) { // date and time provided
-            String deadlineTime = details[1];
+            String deadlineTime = deadline[1];
             return new Deadline(deadlineDescription, LocalDate.parse(deadlineDate),
                     LocalTime.parse(deadlineTime));
         } else {

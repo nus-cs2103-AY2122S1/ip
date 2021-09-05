@@ -52,15 +52,8 @@ public class Storage {
 
         try {
             // Display initialisation message
-            ui.showLine();
-            ui.showInitialise();
-            if (direc.mkdirs()) {
-                ui.showNewDataDirectory();
-            }
-            if (duke.createNewFile()) {
-                ui.showNewHardDisk();
-            }
-            ui.showLine();
+            direc.mkdirs();
+            duke.createNewFile();
 
             // Initialise file reader
             BufferedReader reader = new BufferedReader(new FileReader(duke));
