@@ -18,11 +18,15 @@ public class TaskList {
      * function adds a new Task into the taskList if valid.
      * @param newTask is the newly created Task to be added to the task list.
      */
-    public void addTask(Task newTask) {
+    public String addTask(Task newTask) {
         taskList.add(newTask);
-        System.out.println("Got it. I've added this task: ");
-        System.out.println("    " + newTask);
-        System.out.format("Now you have %d tasks in the list.\n", taskList.size());
+        return new StringBuilder().append("Got it. I've added this task: \n")
+                .append("    ")
+                .append(newTask)
+                .append("\n")
+                .append("Now you have ")
+                .append(Integer.toString(taskList.size()))
+                .append(" tasks in the list.\n").toString();
     }
 
     /**
@@ -39,7 +43,7 @@ public class TaskList {
      * @param newInput contains information for the Task to be deleted.
      * @throws Exception if the index provided is not within valid range.
      */
-    public void deleteTask(String[] newInput ) throws Exception{
+    public String deleteTask(String[] newInput ) throws Exception{
 
         if (newInput.length < 2) {
             throw new Exception("invalid Syntax for delete instruction");
@@ -49,7 +53,7 @@ public class TaskList {
                 System.out.println("Noted. I've removed this task: ");
                 System.out.println("    " + taskList.get(index - 1).toString());
                 taskList.remove(index - 1);
-                System.out.format("Now you have %d tasks in the list.\n", taskList.size());
+                return "Now you have "+ Integer.toString(taskList.size())+ "tasks in the list.\n";
             } else {
                 throw new Exception("index not within valid range");
             }
@@ -59,11 +63,17 @@ public class TaskList {
     /**
      * create a message to show all the tasks and their states.
      */
-    public void showList() {
+    @Override
+    public String toString() {
         int count = 0;
+        StringBuilder resultTable = new StringBuilder();
         for (Task action : taskList ) {
             count++;
-            System.out.format("%d. " + action + "\n", count);
+            resultTable.append(count)
+                    .append(". ")
+                    .append(action.toString())
+                    .append("\n");
         }
+        return resultTable.toString();
     }
 }

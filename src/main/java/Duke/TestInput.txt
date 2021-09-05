@@ -1,5 +1,0 @@
-Todo readline
-Deadline s /by 12/12/2019
-Events a /at 12/12/2019 1800
-done 1
-bye
