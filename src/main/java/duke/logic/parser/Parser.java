@@ -1,7 +1,13 @@
 package duke.logic.parser;
 
 import duke.exception.DukeInvalidCommandException;
-import duke.logic.command.*;
+import duke.logic.command.DeadlineCommand;
+import duke.logic.command.DeleteCommand;
+import duke.logic.command.DoneCommand;
+import duke.logic.command.EventCommand;
+import duke.logic.command.FindCommand;
+import duke.logic.command.ListCommand;
+import duke.logic.command.ToDoCommand;
 import duke.logic.tasks.Deadline;
 import duke.logic.tasks.Event;
 import duke.logic.tasks.TaskList;
@@ -19,8 +25,8 @@ public class Parser {
     /**
      * Constructor for the class.
      */
-    public Parser() {
-        this.taskList = new TaskList();
+    public Parser(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     private String[] parseInput(String input) {

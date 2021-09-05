@@ -3,6 +3,7 @@ package duke.gui;
 import duke.exception.DukeInvalidCommandException;
 import duke.logic.command.ByeCommand;
 import duke.logic.parser.Parser;
+import duke.logic.tasks.TaskList;
 
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ import java.util.Scanner;
  */
 public class TextUi {
     private final Scanner sc = new Scanner(System.in);
-
+    private final TaskList tasks = new TaskList();
     /**
      * Greet the user.
      */
@@ -24,7 +25,7 @@ public class TextUi {
 
         insertSeparateLine();
         System.out.println(logo);
-        display("Hello! I'm Duke");
+        display("Hello! I'm duke.logic.Duke");
         display("What can I do for you?");
         insertSeparateLine();
     }
@@ -64,7 +65,7 @@ public class TextUi {
     public void start() {
         sendGreetings();
         String currentCommand = sc.nextLine().trim();
-        Parser parser = new Parser();
+        Parser parser = new Parser(tasks);
 
         // a bit of hard-code here
         // find a way to get rid of this while loop condition
