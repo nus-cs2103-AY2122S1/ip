@@ -142,6 +142,7 @@ public class Duke extends Application {
      */
     private String getResponse(String input, Duke dukeBot, Parser parser, Storage data) {
         try {
+            assert !input.equals("bye") : "The command should not be bye";
             return dukeBot.todoList.addTask(input, parser, data);
         } catch (IOException e) {
             return "ERROR!";

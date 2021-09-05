@@ -17,6 +17,7 @@ public class Parser {
      */
     public String process(String input, List list, Storage storage) throws DukeException, IOException {
         String[] split = input.split(" ", 2);
+        assert split[0] != "list" : "The command should not be list";
         if (split[0].equals("done")) {
             return list.done(split);
         } else if (split[0].equals("delete")) {
