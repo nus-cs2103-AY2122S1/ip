@@ -15,12 +15,14 @@ public class HelpBotInvalidTaskTypeException extends HelpBotException {
      */
     public HelpBotInvalidTaskTypeException(Task.Type type) {
         super();
+        assert type != null;
         this.type = type;
     }
 
     @Override
     public String toString() {
         return super.toString()
-                + "\nThe operation could not be performed on task type: " + type.toString().toLowerCase();
+                + System.lineSeparator() + "The operation could not be performed on task type: "
+                + type.toString().toLowerCase();
     }
 }
