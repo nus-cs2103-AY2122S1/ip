@@ -26,6 +26,7 @@ public class Storage {
             String filename = Main.class.getResource("bin/duke.txt").getPath();
             txt = new File(filename);
             raf = new RandomAccessFile(txt, "rwd");
+            assert txt != null && raf != null;
             while (raf.getFilePointer() < raf.length()) {
                 Task t = parse(raf.readLine());
                 if (t != null) {
