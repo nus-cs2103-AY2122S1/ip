@@ -2,6 +2,7 @@ package botto.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Format for the Botto bot's event task
@@ -28,7 +29,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.getDefault());
         return "[E]" + super.toString() + " (at: " + formatter.format(this.dateTime) + ")";
     }
 }

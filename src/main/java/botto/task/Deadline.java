@@ -2,6 +2,7 @@ package botto.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 /**
  * Format for the Botto bot's deadline task
@@ -29,7 +30,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a", Locale.getDefault());
         return "[D]" + super.toString() + " (by: " + formatter.format(dateTime) + ")";
     }
 

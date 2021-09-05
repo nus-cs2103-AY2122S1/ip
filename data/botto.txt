@@ -1,3 +1,4 @@
 [T][ ] read book
 [T][X] return book
 [T][X] cs2103T iP
+[D][ ] cs2103t iP (by: 1/3/2020 3:00 am)
