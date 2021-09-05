@@ -70,6 +70,5 @@ public abstract class Command {
     public void checkValidDes(String des) {
         assert des != "";
         assert des != null;
-        assert des.contains("/") == false;
     }
 }
