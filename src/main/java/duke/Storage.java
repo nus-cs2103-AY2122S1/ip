@@ -40,14 +40,16 @@ public class Storage {
         while (reader.hasNextLine()) {
             String taskString = reader.nextLine();
             String[] splitDescription = taskString.split(" \\| ");
-            Task task;
+            Task task = null;
 
             if (splitDescription[0].equals("T")) {
                 task = new Todo(splitDescription[2]);
             } else if (splitDescription[0].equals("D")) {
                 task = new Deadline(splitDescription[2], splitDescription[3]);
-            } else {
+            } else if (splitDescription[0].equals("E")) {
                 task = new Event(splitDescription[2], splitDescription[3]);
+            } else {
+                assert false : task;
             }
 
             if (splitDescription[1].equals("1")) {
@@ -72,9 +74,11 @@ public class Storage {
             } else if (task instanceof Deadline) {
                 out.printf("D | %s | %s | %s%n", task.getStatusIcon() == "X" ? 1 : 0, task.getDescription(), (
                         (Deadline) task).getDeadline());
-            } else {
+            } else if (task instanceof Event) {
                 out.printf("E | %s | %s | %s%n", task.getStatusIcon() == "X" ? 1 : 0, task.getDescription(), (
                         (Event) task).getTime());
+            } else {
+                assert false : task;
             }
         }
         out.close();

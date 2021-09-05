@@ -36,8 +36,9 @@ public class Duke {
      */
     public String initializeTaskList() {
         try {
-            this.tasks = new TaskList(this.storage.load());
-            return this.responseLogic.welcomeResponse();
+            tasks = new TaskList(storage.load());
+            assert tasks != null : "Tasks variable is not initialized.";
+            return responseLogic.welcomeResponse();
         } catch (FileNotFoundException e) {
             new File("./data").mkdirs();
             try {
@@ -61,6 +62,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
+            assert c != null : "c variable is not null";
             return c.execute(this.tasks, this.responseLogic, this.storage);
         } catch (DukeException e) {
             return this.responseLogic.dukeExceptionResponse(e);
