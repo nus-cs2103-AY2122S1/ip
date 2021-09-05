@@ -3,7 +3,9 @@ package abyss.command;
 import java.io.IOException;
 
 import abyss.Abyss;
+import abyss.Ui;
 import abyss.exception.InvalidCommandException;
+import abyss.task.Task;
 
 /**
  * Represents a command to mark a task as done in the list of tasks.
@@ -19,18 +21,19 @@ public class DoneCommand implements Command {
                                                   + "the index of the task piece.");
         }
 
-        if (Abyss.getNumberOfTasks() == 0) {
+        int numberOftasks = Abyss.getTaskManager().getNumberOfTasks();
+        if (numberOftasks == 0) {
             throw new InvalidCommandException("The Abyss is empty.");
         }
 
 
         int i = Integer.parseInt(content);
-        if (i < 1 || i > Abyss.getNumberOfTasks()) {
+        if (i < 1 || i > numberOftasks) {
             throw new InvalidCommandException("Index should be positive and not more than "
-                                                  + Abyss.getNumberOfTasks());
+                                                  + numberOftasks);
         }
 
-        this.index = i;
+        this.index = i - 1;
     }
 
     /**
@@ -40,8 +43,8 @@ public class DoneCommand implements Command {
      * @throws IOException If there is error saving to file.
      */
     public String execute() throws IOException {
-        String response = Abyss.getTaskManager().markAsDone(index);
+        Task task = Abyss.getTaskManager().markAsDone(index);
         Abyss.getStorage().saveTasks(Abyss.getTaskManager());
-        return response;
+        return Ui.replyTaskMarked(task);
     }
 }

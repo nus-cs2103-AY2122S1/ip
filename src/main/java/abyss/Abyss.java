@@ -31,20 +31,16 @@ public class Abyss {
             storage = new Storage(FILE_PATH);
             taskManager = storage.loadTasks();
         } catch (IOException | LoadTaskException e) {
-            Ui.reply(e.getMessage());
+            response = Ui.formatReply(e.getMessage());
         }
 
         try {
             Command cmd = Parser.parseCommand(input);
             response = cmd.execute();
         } catch (AbyssException | IOException | DateTimeParseException e) {
-            response = Ui.reply(e.getMessage());
+            response = Ui.formatReply(e.getMessage());
         }
         return response;
-    }
-
-    public static int getNumberOfTasks() {
-        return taskManager.getNumberOfTasks();
     }
 
     public static TaskManager getTaskManager() {

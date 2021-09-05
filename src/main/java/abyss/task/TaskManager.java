@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import abyss.Ui;
+import abyss.exception.InvalidCommandException;
 
 /**
  * A task manager contains a task list and task actions.
@@ -25,68 +26,97 @@ public class TaskManager {
      */
     public Task addToDo(String description) {
         assert !description.equals("") : "description of a todo cannot be empty";
-        Task newTask = new ToDo(description);
-        tasks.add(newTask);
-        return newTask;
+
+        Task task = new ToDo(description);
+        tasks.add(task);
+        return task;
     }
 
     /**
      * Adds a new deadline to the task list.
      *
      * @param description Description for the new deadline.
-     * @param by Date of the new deadline.
+     * @param date Date of the new deadline.
      * @return Added deadline.
      * @throws DateTimeParseException If format of input date is wrong.
      */
-    public Task addDeadline(String description, String by) throws DateTimeParseException {
+    public Task addDeadline(String description, String date) throws DateTimeParseException {
         assert !description.equals("") : "description of a deadline cannot be empty";
-        assert !by.equals("") : "date of a deadline cannot be empty";
-        LocalDate date = LocalDate.parse(by);
-        Task newTask = new Deadline(description, date);
-        tasks.add(newTask);
-        return newTask;
+        assert !date.equals("") : "date of a deadline cannot be empty";
+
+        LocalDate parsedDate = LocalDate.parse(date);
+        Task task = new Deadline(description, parsedDate);
+        tasks.add(task);
+        return task;
     }
 
     /**
      * Adds a new event to the task list.
      *
      * @param description Description for the new event.
-     * @param at Date of the new event.
+     * @param date Date of the new event.
      * @return Added event.
      * @throws DateTimeParseException If format of input date is wrong.
      */
-    public Task addEvent(String description, String at) throws DateTimeParseException {
+    public Task addEvent(String description, String date) throws DateTimeParseException {
         assert !description.equals("") : "description of an event cannot be empty";
-        assert !at.equals("") : "date of an event cannot be empty";
-        LocalDate date = LocalDate.parse(at);
-        Task newTask = new Event(description, date);
-        tasks.add(newTask);
-        return newTask;
+        assert !date.equals("") : "date of an event cannot be empty";
+
+        LocalDate parsedDate = LocalDate.parse(date);
+        Task task = new Event(description, parsedDate);
+        tasks.add(task);
+        return task;
+    }
+
+    /**
+     * Edits the description of an existing task.
+     *
+     * @param i Index of the task to be edited.
+     * @param description New description of task.
+     */
+    public Task editDescription(int i, String description) {
+        assert !description.equals("") : "description of a task cannot be empty";
+
+        Task task = tasks.get(i);
+        task.setDescription(description);
+        return task;
+    }
+
+    /**
+     * Edits the date of an existing task.
+     *
+     * @param i Index of the task to be edited.
+     * @param date New date of task.
+     */
+    public Task editDate(int i, String date) throws InvalidCommandException, DateTimeParseException {
+        assert !date.equals("") : "date of a deadline or event cannot be empty";
+
+        LocalDate parsedDate = LocalDate.parse(date);
+        Task task = tasks.get(i);
+        task.setDate(parsedDate);
+        return task;
     }
 
     /**
      * Deletes a task from the task list.
      *
-     * @param i Index of the task list at which the task is to be deleted.
+     * @param i Index of the task to be deleted.
      */
-    public String delete(int i) {
-        String removedMsg = "Task piece is swallowed by the Abyss.";
-        String tasksLeftMsg = "The Abyss now contains " + (getNumberOfTasks() - 1) + " task piece(s).";
-        String task = tasks.get(i - 1).toString();
-        tasks.remove(i - 1);
-        return Ui.reply(removedMsg, task, tasksLeftMsg);
+    public Task delete(int i) {
+        Task task = tasks.get(i);
+        tasks.remove(i);
+        return task;
     }
 
     /**
      * Marks a task in the task list as done.
      *
-     * @param i Index of the task list at which the task is to be marked as done.
+     * @param i Index of the task to be marked as done.
      */
-    public String markAsDone(int i) {
-        Task task = tasks.get(i - 1);
+    public Task markAsDone(int i) {
+        Task task = tasks.get(i);
         task.markAsDone();
-        String markedTask = "  " + task.toString();
-        return Ui.reply("Task piece is lit up in the Abyss.", markedTask);
+        return task;
     }
 
     /**

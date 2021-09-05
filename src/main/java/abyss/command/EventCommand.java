@@ -25,10 +25,6 @@ public class EventCommand implements Command {
         this.date = parts[1];
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
     /**
      * Executes the add event command.
      *

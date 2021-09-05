@@ -1,5 +1,9 @@
 package abyss.task;
 
+import java.time.LocalDate;
+
+import abyss.exception.InvalidCommandException;
+
 /**
  * Represents an general task with a description and whether it is completed.
  */
@@ -7,14 +11,8 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
 
-    /**
-     * Constructs a task.
-     *
-     * @param description Description of the task.
-     */
-    public Task(String description) {
+    protected Task(String description) {
         this.description = description;
-        this.isDone = false;
     }
 
     private String getStatusIcon() {
@@ -28,6 +26,12 @@ public abstract class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public abstract void setDate(LocalDate date) throws InvalidCommandException;
 
     /**
      * Returns formatted details of the task.

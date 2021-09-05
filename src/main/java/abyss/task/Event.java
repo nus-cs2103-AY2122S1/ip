@@ -7,17 +7,21 @@ import java.time.format.DateTimeFormatter;
  * Represents an event with a description and date.
  */
 public class Event extends Task {
-    protected LocalDate at;
+    protected LocalDate date;
 
     /**
      * Constructs an event.
      *
      * @param description Description of the event.
-     * @param at Date of event.
+     * @param date Date of event.
      */
-    public Event(String description, LocalDate at) {
+    public Event(String description, LocalDate date) {
         super(description);
-        this.at = at;
+        this.date = date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     /**
@@ -27,7 +31,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "  [E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
+        return "  [E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("dd MMM yyyy")) + ")";
     }
 
     /**
@@ -37,6 +41,6 @@ public class Event extends Task {
      */
     @Override
     public String toFileEntry() {
-        return "E | " + super.getIsDone() + " | " + super.description + " | " + this.at;
+        return "E | " + super.getIsDone() + " | " + super.description + " | " + this.date;
     }
 }

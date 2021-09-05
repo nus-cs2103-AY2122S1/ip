@@ -78,13 +78,13 @@ public class Storage {
     /**
      * Save tasks from given task list into the storage file.
      *
-     * @param tasks List of tasks to be stored.
+     * @param taskManager List of tasks to be stored.
      * @throws IOException If there is error writing to file.
      */
-    public void saveTasks(TaskManager tasks) throws IOException {
+    public void saveTasks(TaskManager taskManager) throws IOException {
         StringBuffer input = new StringBuffer();
-        for (int i = 0; i < tasks.getNumberOfTasks(); i++) {
-            Task task = tasks.get(i);
+        for (int i = 0; i < taskManager.getNumberOfTasks(); i++) {
+            Task task = taskManager.get(i);
             input.append(task.toFileEntry());
             input.append("\n");
         }

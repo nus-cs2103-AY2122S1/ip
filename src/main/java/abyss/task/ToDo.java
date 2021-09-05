@@ -1,5 +1,9 @@
 package abyss.task;
 
+import java.time.LocalDate;
+
+import abyss.exception.InvalidCommandException;
+
 /**
  * Represents a to-do task with a description.
  */
@@ -11,6 +15,11 @@ public class ToDo extends Task {
      */
     public ToDo(String description) {
         super(description);
+    }
+
+    @Override
+    public void setDate(LocalDate date) throws InvalidCommandException {
+        throw new InvalidCommandException("Todo does not have a date field to be edited.");
     }
 
     /**

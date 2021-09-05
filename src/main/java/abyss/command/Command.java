@@ -2,6 +2,8 @@ package abyss.command;
 
 import java.io.IOException;
 
+import abyss.exception.AbyssException;
+
 /**
  * Represents a general user command.
  */
@@ -12,5 +14,5 @@ public interface Command {
      * @return Response from executing command.
      * @throws IOException If there is error writing to file.
      */
-    String execute() throws IOException;
+    String execute() throws IOException, AbyssException;
 }
