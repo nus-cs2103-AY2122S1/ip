@@ -63,11 +63,16 @@ public class Event extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return on;
+    }
+
+    @Override
     public String toString() {
         char statusIcon = this.isDone ? 'X' : ' ';
         String timeString = Utility.DATE_MED_FORMATTER.format(this.on);
 
-        return String.format("[%c] Task.Event: %s (on: %s)",
+        return String.format("[%c] Event: %s (on: %s)",
                 statusIcon, this.description, timeString);
     }
 

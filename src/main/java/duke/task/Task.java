@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  * A serializable item that contains a description and a boolean isDone.
@@ -28,6 +29,19 @@ public class Task implements Serializable {
 
     public String getDescription() {
         return this.description;
+    }
+
+    /**
+     * Get date of task. If task has no date associated to it, return the maximum value.
+     *
+     * @return Date of task
+     */
+    public LocalDate getDate() {
+        return LocalDate.MAX;
+    }
+
+    public Boolean isDone() {
+        return isDone;
     }
 
     @Override

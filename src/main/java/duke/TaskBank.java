@@ -1,11 +1,15 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.function.Function;
 
 import duke.task.Task;
 import duke.util.DukeException;
 import duke.util.Utility;
+import duke.util.sort.DoneSorter;
+import duke.util.sort.NameSorter;
+import duke.util.sort.TimeSorter;
 
 /**
  * Stores and manages the user's list of tasks.
@@ -87,7 +91,7 @@ public class TaskBank {
     public ArrayList<Task> searchTasks(String query) {
         query = query.split(" ", 2)[1].trim();
 
-        ArrayList matchingTasks = new ArrayList<Task>();
+        ArrayList<Task> matchingTasks = new ArrayList<>();
 
         for (Task t : this.taskList) {
             if (t.getDescription().contains(query)) {
@@ -98,11 +102,34 @@ public class TaskBank {
         return matchingTasks;
     }
 
+    private ArrayList<Task> sortTasks(Comparator<Task> cmp) {
+        ArrayList<Task> taskListCopy = new ArrayList<>(taskList);
+
+        taskListCopy.sort(cmp);
+
+        return taskListCopy;
+
+    }
+
     /**
      * Returns a copy of the list of tasks.
+     * If a sort order is specified, sort the copy before returning.
      *
+     * @param input input string
      */
-    public ArrayList<Task> getTasks() {
-        return new ArrayList<>(this.taskList);
+    public ArrayList<Task> getTasks(String input) {
+        String[] inputWords = input.split(" ");
+
+        if (inputWords.length == 1) {
+            return new ArrayList<>(this.taskList);
+        } else if (inputWords[1].equals("-name")) {
+            return sortTasks(new TimeSorter());
+        } else if (inputWords[1].equals("-time")) {
+            return sortTasks(new NameSorter());
+        } else if (inputWords[1].equals("-done")) {
+            return sortTasks(new DoneSorter());
+        } else {
+            throw new DukeException("I don't understand how you want me to list the tasks");
+        }
     }
 }
