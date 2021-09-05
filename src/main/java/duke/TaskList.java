@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import task.Task;
@@ -36,7 +37,8 @@ public class TaskList {
      */
     public String getTaskCount() {
         int taskCount = this.tasks.size();
-        return String.format("You have %d %s in the list.%n", taskCount, taskCount > 1 ? "tasks" : "task");
+        String taskNameFormat = taskCount > 1 ? "tasks" : "task";
+        return String.format("You have %d %s in the list.%n", taskCount, taskNameFormat);
     }
 
     public List<Task> getTasks() {
@@ -107,7 +109,8 @@ public class TaskList {
     public List<Task> findTask(String keyword) {
         List<Task> matches = new ArrayList<>();
         for (Task task : this.tasks) {
-            if (task.getDescription().contains(keyword)) {
+            String[] parts = task.getDescription().toLowerCase().split(" ");
+            if (Arrays.asList(parts).contains(keyword.toLowerCase())) {
                 matches.add(task);
             }
         }

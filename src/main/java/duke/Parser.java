@@ -33,7 +33,7 @@ public class Parser {
      */
     public static Command parse(String userInput) throws DukeException {
         String[] parts = userInput.split(" ");
-        String command = parts[0];
+        String command = parts[0].toLowerCase();
         int partsLength = parts.length;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm");
 
@@ -42,13 +42,13 @@ public class Parser {
             return new ExitCommand();
         case "todo":
             if (partsLength < 2) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             Task todo = new Todo(parts[1]);
             return new AddCommand(todo);
         case "deadline":
             if (partsLength < 2) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
+                throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             }
             String by = userInput.split(" /by ")[1];
             LocalDateTime deadlineDateTime = LocalDateTime.parse(by, formatter);
@@ -56,7 +56,7 @@ public class Parser {
             return new AddCommand(deadline);
         case "event":
             if (partsLength < 2) {
-                throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
+                throw new DukeException("OOPS!!! The description of an event cannot be empty.");
             }
             String at = userInput.split(" /at ")[1];
             LocalDateTime eventDateTime = LocalDateTime.parse(at, formatter);
@@ -66,21 +66,21 @@ public class Parser {
             return new ListCommand();
         case "done":
             if (partsLength < 2) {
-                throw new DukeException("☹ OOPS!!! You must provide the index of the task to mark as done.");
+                throw new DukeException("OOPS!!! You must provide the index of the task to mark as done.");
             }
             return new DoneCommand(parts[1]);
         case "delete":
             if (partsLength < 2) {
-                throw new DukeException("☹ OOPS!!! You must provide the index of the task to delete.");
+                throw new DukeException("OOPS!!! You must provide the index of the task to delete.");
             }
             return new DeleteCommand(parts[1]);
         case "find":
             if (partsLength != 2) {
-                throw new DukeException("☹ OOPS!!! You must provide a keyword.");
+                throw new DukeException("OOPS!!! You must provide a keyword.");
             }
             return new FindCommand(parts[1]);
         default:
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means (X_X)"
+            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means (X_X)"
                     + "\nPlease enter one of the following commands:\n todo <task>"
                     + "\n deadline <task> /by <deadline(in yyyy-MM-dd kkmm format)>"
                     + "\n event <event> /at <date(in yyyy-MM-dd kkmm format)>"
@@ -88,6 +88,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Gets the description of a task from the user input.
+     *
+     * @param parts The array of strings of the user input.
+     * @param partsLength Size of the array of strings of user input.
+     * @return The description of the task.
+     */
     private static String getDescription(String[] parts, int partsLength) {
         return String.join(" ", Arrays.copyOfRange(parts, 1, partsLength - 3));
     }
