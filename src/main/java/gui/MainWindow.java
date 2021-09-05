@@ -1,7 +1,7 @@
 package gui;
 
 import duke.Duke;
-import duke.UI;
+import duke.Ui;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
         Separator separator = new Separator();
         separator.setPadding(new Insets(10, 0, 10, 0));
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(UI.greet(), dukeImage), separator);
+                DialogBox.getDukeDialog(Ui.greet(), dukeImage), separator);
     }
 
     public void setDuke(Duke d) {

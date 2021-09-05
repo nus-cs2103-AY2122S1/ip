@@ -3,12 +3,12 @@ package duke;
 import java.util.Scanner;
 
 /**
- * UI for Duke.
+ * Ui for Duke.
  */
-public class UI {
+public class Ui {
     private final Scanner myScanner;
 
-    public UI() {
+    public Ui() {
         this.myScanner = new Scanner(System.in);
     }
     /**

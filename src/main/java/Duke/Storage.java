@@ -12,13 +12,20 @@ import duke.task.Event;
 import duke.task.ToDo;
 
 
-
-
+/**
+ * Storage saves tasks added by user and save it in a file as indicated by filepath.
+ */
 public class Storage {
     private static final int startOfTaskDes = 8;
     private static final int taskTypeIndex = 0;
     private static final int taskStatusIndex = 4;
     private final String filePath;
+
+    /**
+     * Constructs an instance of Storage which saves data for Duke.
+     *
+     * @param filePath directory of saved memory for Duke.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
@@ -30,7 +37,8 @@ public class Storage {
      * @return File to write
      */
     private File initStorageFile() {
-        File directory = new File("data");
+        String dirName = filePath.split("/duke.txt")[0];
+        File directory = new File(dirName);
         directory.mkdir();
         File storageFile = new File(filePath);
         try {
@@ -70,10 +78,11 @@ public class Storage {
                         task.completeTask();
                     }
                     tasks.addTask(task);
-                } else {
+                } else if (taskType == 'T') {
                     tasks.addTask(new ToDo(taskDesc));
                 }
             }
+            s.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
