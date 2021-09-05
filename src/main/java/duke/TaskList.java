@@ -98,6 +98,7 @@ public class TaskList {
         int taskIndex = 7;
         try {
             //Delete from ArrayList
+            assert taskToDel >= 0;
             int taskToDel = Integer.parseInt(userInput.substring(taskIndex)) - 1;
             Task task = this.tasks.get(taskToDel);
             this.tasks.remove(taskToDel);
@@ -120,6 +121,7 @@ public class TaskList {
     public String markTaskDone(String userInput) {
         try {
             int taskIndex = Integer.parseInt(userInput.substring(5)) - 1;
+            assert taskIndex >= 0;
             Task task = this.tasks.get(taskIndex);
             if (task.checkStatus()) {
                 return("Youve already marked this task as done!");
