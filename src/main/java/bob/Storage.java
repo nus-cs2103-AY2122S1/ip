@@ -61,7 +61,7 @@ public class Storage {
             while (s.hasNext()) {
                 String curr = s.nextLine();
                 Task newTask;
-                boolean isComplete = false;
+                boolean isComplete;
                 if (curr.matches("\\[T](.*)")) {
                     String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
                     newTask = new Todo(splitCurr[1]);
@@ -72,12 +72,15 @@ public class Storage {
                     String deadline = splitRight[1].substring(0, splitRight[1].length() - 1);
                     newTask = new Deadline(splitRight[0], formatDate(deadline));
                     isComplete = curr.contains("[X]");
-                } else {
+                } else if (curr.matches("\\[E](.*)")) {
                     String[] splitCurr = curr.split(" \\Q[\\E.\\Q]\\E ", 2);
                     String[] splitRight = splitCurr[1].split(" \\(at: ", 2);
                     String timing = splitRight[1].substring(0, splitRight[1].length() - 1);
                     newTask = new Event(splitRight[0], formatDate(timing));
                     isComplete = curr.contains("[X]");
+                } else { // Should never reach this branch.
+                    newTask = new Task("");
+                    isComplete = false;
                 }
                 tasks.add(newTask);
                 if (isComplete) {
@@ -98,9 +101,9 @@ public class Storage {
      * @return Date in the String format required to make a LocalDate object.
      */
     private String formatDate(String date) {
-        String day = "";
-        String month = "";
-        String year = "";
+        String day;
+        String month;
+        String year;
         String[] splitDate = date.split(" ", 3);
 
         day = splitDate[1].length() == 1 ? "0" + splitDate[1] : splitDate[1];
@@ -127,8 +130,10 @@ public class Storage {
             month = "10";
         case "Nov":
             month = "11";
-        default:
+        case "Dec":
             month = "12";
+        default:
+            month = "00"; // Should never reach this branch.
         }
         year = splitDate[2];
 
@@ -166,8 +171,10 @@ public class Storage {
             FileWriter writer = new FileWriter(this.path + "/bob.txt");
             writer.write("");
             writer.close();
-            for (int i = 0; i < Integer.parseInt(taskList.getNoOfTasks()); i++) {
-                appendToFile(taskList.getTask(i).printTask());
+            int noOfTasks = Integer.parseInt(taskList.getNoOfTasks());
+            for (int i = 0; i < noOfTasks; i++) {
+                String currTaskPrinted = taskList.getTask(i).printTask();
+                appendToFile(currTaskPrinted);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());

@@ -29,36 +29,49 @@ public class Parser {
     public String getResponse(String input, Ui ui, TaskList tasks, Storage storage) {
         try {
             checkInput(input, tasks);
+            String response = "";
+            boolean isListCommand = Objects.equals(input, "list");
+            boolean isDoneCommand = input.matches("done(.*)");
+            boolean isDeleteCommand = input.matches("delete(.*)");
+            boolean isTodoCommand = input.matches("todo(.*)");
+            boolean isDeadlineCommand = input.matches("deadline(.*)");
+            boolean isEventCommand = input.matches("event(.*)");
+            boolean isSearchCommand = input.matches("find(.*)");
 
-            if (Objects.equals(input, "list")) {
+            if (isListCommand) {
                 return ui.getListMessage(tasks);
-            } else if (input.matches("done(.*)")) {
+            } else if (isDoneCommand) {
                 String[] splitResponse = input.split(" ", 2);
+                int index = Integer.parseInt(splitResponse[1]) - 1;
+                response = ui.getIndexCompletedMessage(index, tasks);
                 storage.updateBobFile(tasks);
-                return ui.getIndexCompletedMessage(Integer.parseInt(splitResponse[1]) - 1, tasks);
-            } else if (input.matches("delete(.*)")) {
+            } else if (isDeleteCommand) {
                 String[] splitResponse = input.split(" ", 2);
+                int index = Integer.parseInt(splitResponse[1]) - 1;
+                response = ui.getIndexDeletedMessage(index, tasks);
                 storage.updateBobFile(tasks);
-                return ui.getIndexDeletedMessage(Integer.parseInt(splitResponse[1]) - 1, tasks);
-            } else if (input.matches("todo(.*)") || input.matches("deadline(.*)")
-                    || input.matches("event(.*)")) {
+            } else if (isTodoCommand || isDeadlineCommand || isEventCommand) {
                 String[] splitResponse = input.split(" ", 2);
                 Task newTask;
-                if (Objects.equals(splitResponse[0], "todo")) {
+                if (isTodoCommand) {
                     newTask = new Todo(splitResponse[1]);
-                } else if (Objects.equals(splitResponse[0], "deadline")) {
+                } else if (isDeadlineCommand) {
                     String[] splitAgain = splitResponse[1].split(" /by ", 2);
                     newTask = new Deadline(splitAgain[0], splitAgain[1]);
-                } else {
+                } else if (isEventCommand) {
                     String[] splitAgain = splitResponse[1].split(" /at ", 2);
                     newTask = new Event(splitAgain[0], splitAgain[1]);
+                } else { // Should never reach this branch.
+                    newTask = new Task("");
                 }
+                response = ui.getTaskAddedMessage(newTask, tasks);
                 storage.updateBobFile(tasks);
-                return ui.getTaskAddedMessage(newTask, tasks);
-            } else if (input.matches("find(.*)")) {
+            } else if (isSearchCommand) {
                 String[] splitResponse = input.split(" ", 2);
-                return ui.getSearchResultMessage(splitResponse[1], tasks);
+                response = ui.getSearchResultMessage(splitResponse[1], tasks);
             }
+            return response;
+
         } catch (InvalidDateException e) {
             return ui.getInvalidDateExceptionMessage();
         } catch (InvalidInputException e) {
@@ -76,9 +89,6 @@ public class Parser {
         } catch (OutOfBoundsException e) {
             return ui.getOutOfBoundsExceptionMessage();
         }
-
-        // Should never reach this line.
-        return "";
     }
 
     /**
@@ -96,44 +106,62 @@ public class Parser {
      */
     private void checkInput(String response, TaskList tasklist) throws InvalidInputException, NoTaskException,
             NoDeadlineException, NoEventTimingException, OutOfBoundsException, NoKeywordException, NoTaskAndDateException {
-        if (Objects.equals(response, "list")) {
+        boolean isListCommand = Objects.equals(response, "list");
+        boolean isDoneCommand = response.matches("done(.*)");
+        boolean isDeleteCommand = response.matches("delete(.*)");
+        boolean isTodoCommand = response.matches("todo(.*)");
+        boolean isDeadlineCommand = response.matches("deadline(.*)");
+        boolean isEventCommand = response.matches("event(.*)");
+        boolean isSearchCommand = response.matches("find(.*)");
+
+        if (isListCommand) {
             // Correct input checker, do nothing
-        } else if (response.matches("done(.*)") || response.matches("delete(.*)")) {
+        } else if (isDoneCommand || isDeleteCommand) {
             String[] splitResponse = response.split(" ", 2);
-            if (Integer.parseInt(splitResponse[1]) <= 0
-                    || Integer.parseInt(splitResponse[1]) > Integer.parseInt(tasklist.getNoOfTasks())) {
+            boolean isIndexLessThanOrEqualToZero = Integer.parseInt(splitResponse[1]) <= 0;
+            boolean isIndexGreaterThanListLength = Integer.parseInt(splitResponse[1])
+                    > Integer.parseInt(tasklist.getNoOfTasks());
+            if (isIndexLessThanOrEqualToZero || isIndexGreaterThanListLength) {
                 throw new OutOfBoundsException();
             }
-        } else if (response.matches("todo(.*)")) {
+        } else if (isTodoCommand) {
             String[] splitResponse = response.split(" ", 2);
-            if (splitResponse.length == 1) {
+            boolean hasNoTaskDescription = splitResponse.length == 1;
+            if (hasNoTaskDescription) {
                 throw new NoTaskException();
             }
-        } else if (response.matches("deadline(.*)")) {
+        } else if (isDeadlineCommand) {
             String[] splitResponse = response.split(" ", 2);
-            if (splitResponse.length == 1) {
+            boolean hasNoTaskDescription = splitResponse.length == 1;
+            boolean hasNoDate = !response.contains("/by");
+            boolean hasNoTaskAndDate = splitResponse.length == 2;
+            if (hasNoTaskDescription) {
                 throw new NoTaskException();
-            } else if (!response.contains("/by")) {
+            } else if (hasNoDate) {
                 throw new NoDeadlineException();
-            } else if (splitResponse.length == 2) {
+            } else if (hasNoTaskAndDate) {
                 throw new NoTaskAndDateException();
             } else if (splitResponse[1].split(" ", 3).length == 2){
                 throw new NoTaskException();
             }
-        } else if (response.matches("event(.*)")) {
+        } else if (isEventCommand) {
             String[] splitResponse = response.split(" ", 2);
-            if (splitResponse.length == 1) {
+            boolean hasNoTaskDescription = splitResponse.length == 1;
+            boolean hasNoDate = !response.contains("/at");
+            boolean hasNoTaskAndDate = splitResponse.length == 2;
+            if (hasNoTaskDescription) {
                 throw new NoTaskException();
-            } else if (!response.contains("/at")) {
+            } else if (hasNoDate) {
                 throw new NoEventTimingException();
-            } else if (splitResponse.length == 2) {
+            } else if (hasNoTaskAndDate) {
                 throw new NoTaskAndDateException();
-            } else if (splitResponse[1].split(" ", 3).length == 2){
+            } else if (splitResponse[1].split(" ", 3).length == 2) {
                 throw new NoTaskException();
             }
-        } else if (response.matches("find(.*)")) {
+        } else if (isSearchCommand) {
             String[] splitResponse = response.split(" ", 2);
-            if (splitResponse.length == 1) {
+            boolean hasNoSearchKeyword = splitResponse.length == 1;
+            if (hasNoSearchKeyword) {
                 throw new NoKeywordException();
             }
         } else {

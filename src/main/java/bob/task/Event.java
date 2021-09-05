@@ -38,6 +38,8 @@ public class Event extends Task {
      */
     @Override
     public String printTask() {
-        return "[E] " + super.printTask() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String eventHeader = "[E] ";
+        String formattedDate = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return eventHeader + super.printTask() + " (at: " + formattedDate + ")";
     }
 }

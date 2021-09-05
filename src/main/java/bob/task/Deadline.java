@@ -38,6 +38,8 @@ public class Deadline extends Task {
      */
     @Override
     public String printTask() {
-        return "[D] " + super.printTask() + " (by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String deadlineHeader = "[D] ";
+        String formattedDate = deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return deadlineHeader + super.printTask() + " (by: " + formattedDate + ")";
     }
 }
