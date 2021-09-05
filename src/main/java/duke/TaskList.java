@@ -95,6 +95,13 @@ public class TaskList {
     }
 
     /**
+     * Returns the size of the tasksList.
+     *
+     * @return the size of the tasksList.
+     */
+    public int getSize() { return tasks.size(); }
+
+    /**
      * Prints the list of tasks with description matching the keyWord.
      *
      * @param keyWord the search keyWord to filter the tasks.
