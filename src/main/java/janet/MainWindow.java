@@ -29,9 +29,9 @@ public class MainWindow extends AnchorPane {
     private Janet janet;
 
     private final Image userImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/Eleanor.jpg")));
+            this.getClass().getResourceAsStream("/images/Eleanor.png")));
     private final Image janetImage = new Image(Objects.requireNonNull(
-            this.getClass().getResourceAsStream("/images/Janet.jpg")));
+            this.getClass().getResourceAsStream("/images/Janet.png")));
 
     public MainWindow() {
         janet = new Janet();
