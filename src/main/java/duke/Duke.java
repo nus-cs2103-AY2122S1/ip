@@ -16,6 +16,7 @@ public class Duke {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
+    private final Parser parser;
 
     /**
      * Constructs a Duke instance.
@@ -25,6 +26,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        parser = new Parser();
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
@@ -43,7 +45,7 @@ public class Duke {
             try {
                 String input = ui.readInput();
                 ui.showLine();
-                Command c = Parser.parse(input);
+                Command c = parser.parse(input);
                 String message = c.execute(tasks, ui, storage);
                 ui.reply(message);
                 isExit = c.isExit();
@@ -64,7 +66,7 @@ public class Duke {
     public String getResponse(String input) {
         String response;
         try {
-            Command c = Parser.parse(input);
+            Command c = parser.parse(input);
             response = c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             response = e.getMessage();

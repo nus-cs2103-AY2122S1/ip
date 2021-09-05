@@ -78,34 +78,23 @@ public class TaskList {
     }
 
     /**
-     * Finds a list of tasks given the search query.
+     * Takes in a keyword and returns a TaskList of tasks with the given
+     * keyword in the description of the task. The matching is case-insensitive.
      *
      * @param keyword The search query.
-     * @return The message that contains the list of task that matches the search query.
+     * @return A TaskList of tasks that contains the keyword.
      */
-    public String find(String keyword) {
+    public TaskList filter(String keyword) {
         List<Task> filteredTasks = tasks
                 .stream()
-                .filter(task -> task.getDescription().contains(keyword))
+                .filter(task -> task.getDescription().toLowerCase().contains(keyword.toLowerCase()))
                 .collect(Collectors.toList());
-        String str = String.format("Here are the matching %s in your list:\n",
-                filteredTasks.size() <= 1 ? "task" : "tasks");
-        StringBuilder result = new StringBuilder(str);
-        int len = filteredTasks.size();
-        if (len == 0) {
-            return result.toString();
-        }
-        for (int i = 1; i < len; i++) {
-            result.append(String.format("%s. %s\n", i, filteredTasks.get(i - 1)));
-        }
-        result.append(String.format("%s. %s", len, filteredTasks.get(len - 1)));
-        return result.toString();
+        return new TaskList(filteredTasks);
     }
 
     @Override
     public String toString() {
-        String str = String.format("Here are the %s in your list:\n", tasks.size() <= 1 ? "task" : "tasks");
-        StringBuilder result = new StringBuilder(str);
+        StringBuilder result = new StringBuilder();
         int len = tasks.size();
         if (len == 0) {
             return result.toString();

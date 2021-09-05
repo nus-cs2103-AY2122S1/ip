@@ -3,11 +3,9 @@ package duke.storage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -44,13 +42,11 @@ public class Storage {
      * @throws DukeException If the file can not be found.
      */
     public boolean save(TaskList tasks) throws DukeException {
-        Path dirPath = Paths.get("data");
-        boolean dataPathExists = Files.exists(dirPath);
-        if (!dataPathExists) {
-            File dataDir = new File("data");
-            boolean isCreated = dataDir.mkdir();
-            assert isCreated : "The directory /data should be created";
-        }
+        // Make the directories to the file if it does not exist
+        String[] pathArr = filePath.split("/");
+        String[] dirArr = Arrays.copyOfRange(pathArr, 0, pathArr.length - 1);
+        String dirPath = String.join("/", dirArr);
+        new File(dirPath).mkdirs();
 
         try {
             File file = new File(filePath);
