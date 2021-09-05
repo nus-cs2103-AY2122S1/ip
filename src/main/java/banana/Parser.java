@@ -39,8 +39,7 @@ public class Parser {
      * @return the label
      */
     public static String displayLabel(String information) {
-        String label = information;
-        return label;
+        return information;
     }
 
     /**
@@ -62,9 +61,9 @@ public class Parser {
         } else if (input.contains("find")) {
             return findCommand(tasks);
         } else if (input.contains("deadline") || input.contains("event")) {
-            return deadlineOrEventCommand(input, tasks);
+            return deadlineOrEventCommand(tasks);
         } else {
-            return addTaskCommand(input, tasks);
+            return addTaskCommand(tasks);
         }
     }
 
@@ -77,8 +76,9 @@ public class Parser {
      */
     public String listCommand(TaskList tasks) {
         String itemCollection = getItems(tasks);
-        return displayLabel(("Here are the tasks in your list: \n"
-                + "     " + itemCollection));
+        String listText = "Here are the tasks in your list: \n"
+                + "     ";
+        return listText + itemCollection;
     }
 
     /**
@@ -91,27 +91,31 @@ public class Parser {
         int index = Integer.parseInt(input.substring(5, 6)) - 1;
         assert index >= 0;
         tasks.getTask(index).setIsDone();
-        return displayLabel("Nice! I've marked this task as done: \n" +
-                "       " + tasks.getTask(index).toString());
+        String doneText = "Nice! I've marked this task as done: \n"
+                + "       ";
+        return doneText + tasks.getTask(index).toString();
     }
 
     /**
      * Adds a task or the subclass ToDo.
      *
-     * @param input the user input.
      * @param tasks the list of tasks.
      * @return the label.
      */
-    public String addTaskCommand(String input, TaskList tasks) {
+    public String addTaskCommand(TaskList tasks) {
         if (input.contains("todo")) {
             String info = input.substring(5);
             tasks.addTask(new ToDo(info));
         } else {
             tasks.addTask(new Task(input));
         }
-        return displayLabel("Got it. I've added this task:  \n" +
-                "       " + tasks.getTask(tasks.getSize() - 1).toString() + "\n     " +
-                "Now you have " + Integer.toString(tasks.getSize()) + " tasks in the list.");
+        String addTaskText = "Got it. I've added this task:  \n"
+                + "       ";
+        String taskNumberText = "\n     "
+                + "Now you have " + Integer.toString(tasks.getSize())
+                + " tasks in the list.";
+        return addTaskText + tasks.getTask(
+                tasks.getSize() - 1).toString() + taskNumberText;
     }
 
     /**
@@ -119,24 +123,27 @@ public class Parser {
      * gets the time/date in correct format
      * if necessary.
      *
-     * @param input the user input.
      * @param tasks the list of tasks.
      * @return the label.
      */
-    public String deadlineOrEventCommand(String input, TaskList tasks) {
+    public String deadlineOrEventCommand(TaskList tasks) {
         assert input.contains("deadline") || input.contains("event");
         if (input.contains("deadline")) {
             assert input.contains("/by");
             String[] info = input.substring(9).split(" /by ");
-            tasks.addTask(getDateAndTime(info, input, "deadline"));
+            tasks.addTask(getDateAndTime(info, "deadline"));
         } else {
             assert input.contains("/at");
             String[] info = input.substring(6).split(" /at ");
-            tasks.addTask(getDateAndTime(info, input, "event"));
+            tasks.addTask(getDateAndTime(info, "event"));
         }
-        return displayLabel("Got it. I've added this task:  \n" +
-                "       " + tasks.getTask(tasks.getSize() - 1).toString() + "\n     Now you have "
-                + Integer.toString(tasks.getSize()) + " tasks in the list.");
+        String addTaskText = "Got it. I've added this task:  \n"
+                + "       ";
+        String taskNumberText = "\n     "
+                + "Now you have " + Integer.toString(tasks.getSize())
+                + " tasks in the list.";
+        return addTaskText + tasks.getTask(
+                tasks.getSize() - 1).toString() + taskNumberText;
     }
 
     /**
@@ -170,9 +177,13 @@ public class Parser {
         assert index >= 0;
         Task removedTask = tasks.getTask(index);
         tasks.removeTask(removedTask);
-        return displayLabel("Noted. I've removed this task:  \n" +
-                "       " + removedTask.toString() + "\n     Now you have "
-                + Integer.toString(tasks.getSize()) + " tasks in the list.");
+        String removeTaskText = "Noted. I've removed this task:  \n"
+                + "       ";
+        String taskNumberText = "\n     "
+                + "Now you have " + Integer.toString(tasks.getSize())
+                + " tasks in the list.";
+        return removeTaskText + removedTask.toString()
+                + taskNumberText;
     }
 
     /**
@@ -183,6 +194,7 @@ public class Parser {
      * @return the label.
      */
     public String findCommand(TaskList tasks) {
+        String outputText = "No matching tasks, sorry";
         TaskList newTasks = new TaskList(new ArrayList<>());
         if (input.contains("find")) {
             String item = input.split(" ")[1];
@@ -191,11 +203,11 @@ public class Parser {
                     newTasks.addTask(tasks.getTask(i));
                 }
             }
-            return displayLabel(
-                    "Here are the matching tasks in your list: \n" +
-                            "     " + getItems(newTasks));
+            outputText = "Here are the matching tasks "
+                    + "in your list: \n" + "     ";
+            return outputText + getItems(newTasks);
         }
-        return displayLabel("No matching tasks, sorry");
+        return outputText;
     }
 
     /**
@@ -223,12 +235,11 @@ public class Parser {
      * Gets the date and time in correct
      * notation/format if necessary.
      *
-     * @param info  the task information.
-     * @param input the user input.
-     * @param type  the Task type.
+     * @param info the task information.
+     * @param type the Task type.
      * @return the new Task.
      */
-    public Task getDateAndTime(String[] info, String input, String type) {
+    public Task getDateAndTime(String[] info, String type) {
         String[] potentialDate = info[1].split(" ");
         LocalDate date = null;
         if (!getTime(potentialDate[0]).equals("")) {

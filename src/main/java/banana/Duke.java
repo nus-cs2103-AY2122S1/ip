@@ -32,12 +32,14 @@ import java.io.FileNotFoundException;
 
 public class Duke extends Application {
 
+    private final Label HELLO_LABEL;
+    private final String FILE_PATH = "/Users/ravi57004/ip/src/main/java/Tasks.txt";
+
     private Image user;
     private Image bot;
-
-    private Label hello;
     private Storage storage;
     private TaskList tasks;
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -45,10 +47,11 @@ public class Duke extends Application {
     private Scene scene;
 
     public Duke() {
-        hello = new Label("Hello I'm Hange! \n How can I help you?");
+        String helloText = "Hello I'm Hange! \n How can I help you?";
+        HELLO_LABEL = new Label(helloText);
         try {
-            user = new Image(new FileInputStream("levi.jpg"));
-            bot = new Image(new FileInputStream("hange.jpg"));
+            user = new Image(new FileInputStream("hange.jpg"));
+            bot = new Image(new FileInputStream("levi.jpg"));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -66,6 +69,7 @@ public class Duke extends Application {
         scrollPane.setContent(dialogContainer);
         userInput = new TextField();
         sendButton = new Button("Send");
+
         try {
             storage = new Storage(filePath);
             tasks = storage.load(
@@ -82,8 +86,18 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage stage) {
-        init("/Users/ravi57004/ip/src/main/java/Tasks.txt");
+        init(FILE_PATH);
+        setStage(stage);
+        setLayout();
+        loadInformation();
+    }
 
+    /**
+     * Sets the frame of the program.
+     *
+     * @param stage the stage to be set.
+     */
+    public void setStage(Stage stage) {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
         scene = new Scene(mainLayout);
@@ -94,10 +108,6 @@ public class Duke extends Application {
         stage.setMinHeight(700.0);
         stage.setMinWidth(500.0);
         mainLayout.setPrefSize(500.0, 700.0);
-
-        setLayout();
-        loadInformation();
-
     }
 
     /**
@@ -112,6 +122,7 @@ public class Duke extends Application {
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         userInput.setPrefWidth(440.0);
         sendButton.setPrefWidth(55.0);
+
         AnchorPane.setTopAnchor(scrollPane, 1.0);
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
@@ -125,11 +136,12 @@ public class Duke extends Application {
      */
     public void loadInformation() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(hello, new ImageView(bot)));
+                DialogBox.getDukeDialog(HELLO_LABEL, new ImageView(bot)));
 
         sendButton.setOnMouseClicked((event) -> {
             addToScreen();
         });
+
         userInput.setOnAction((event) -> {
             addToScreen();
         });
@@ -138,22 +150,22 @@ public class Duke extends Application {
 
     /**
      * Adds user input/corresponding
-     * output to screen,
+     * output to screen.
      */
     public void addToScreen() {
         try {
             Label userText = new Label(userInput.getText());
             Parser p = new Parser(userInput.getText());
-            if (!userInput.getText().equals("bye")) {
-                String output = p.parseInput(tasks);
-                Label dukeText = new Label(output);
-                dialogContainer.getChildren().addAll(
-                        DialogBox.getUserDialog(userText, new ImageView(user)),
-                        DialogBox.getDukeDialog(dukeText, new ImageView(bot))
-                );
-                writeToFile(userInput.getText(), tasks);
-            } else {
+            String output = p.parseInput(tasks);
+            Label dukeText = new Label(output);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(userText, new ImageView(user)),
+                    DialogBox.getDukeDialog(dukeText, new ImageView(bot))
+            );
+            if (userInput.getText().equals("bye")) {
                 Platform.exit();
+            } else {
+                writeToFile();
             }
             userInput.clear();
         } catch (DukeException | IOException e) {
@@ -168,14 +180,12 @@ public class Duke extends Application {
      * Writes to the Tasks.txt file everytime
      * a change in tasks has occurred.
      *
-     * @param input user input.
-     * @param tasks the tasks to be managed.
      * @throws IOException if not able to write to the file.
      */
-    public static void writeToFile(String input, TaskList tasks) throws IOException {
+    public void writeToFile() throws IOException {
         String text = "";
         FileWriter fw = new FileWriter(
-                "/Users/ravi57004/ip/src/main/java/Tasks.txt", false);
+                FILE_PATH, false);
         for (int i = 0; i < tasks.getSize(); i++) {
             String doneStr = "No";
             Task currentTask = tasks.getTask(i);
@@ -184,19 +194,21 @@ public class Duke extends Application {
                 doneStr = "Yes";
             }
             if (currentTask instanceof ToDo) {
-                text += "T ~ " + doneStr + " ~ " +
-                        currentTask.getDescription() + "\n";
+                text += "T ~ " + doneStr + " ~ "
+                        + currentTask.getDescription() + "\n";
             } else if (currentTask instanceof Deadline) {
                 Deadline dl = (Deadline) currentTask;
-                text += "D ~ " + doneStr + " ~ " +
-                        currentTask.getDescription() + " ~ " + dl.getDeadLine() + "\n";
+                text += "D ~ " + doneStr + " ~ "
+                        + currentTask.getDescription() + " ~ "
+                        + dl.getDeadLine() + "\n";
             } else if (currentTask instanceof Event) {
                 Event ev = (Event) currentTask;
-                text += "E ~ " + doneStr + " ~ " +
-                        currentTask.getDescription() + " ~ " + ev.getEvent() + "\n";
+                text += "E ~ " + doneStr + " ~ "
+                        + currentTask.getDescription() + " ~ "
+                        + ev.getEvent() + "\n";
             } else {
-                text += doneStr + " ~ " +
-                        currentTask.getDescription() + "\n";
+                text += doneStr + " ~ "
+                        + currentTask.getDescription() + "\n";
             }
         }
         fw.write(text);

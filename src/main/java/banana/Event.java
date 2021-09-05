@@ -15,6 +15,8 @@ class Event extends Task {
 
     protected LocalDate date;
     protected String timing;
+    protected String symbol;
+    protected String dateFormat;
 
     /**
      * Constructor for Event.
@@ -25,6 +27,8 @@ class Event extends Task {
     public Event(String description, String timing) {
         super(description);
         this.timing = timing;
+        symbol = "[E]";
+        dateFormat = "";
     }
 
     /**
@@ -38,6 +42,9 @@ class Event extends Task {
         super(description);
         this.date = date;
         this.timing = timing;
+        symbol = "[E]";
+        dateFormat = date.format(
+                DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
     /**
@@ -47,7 +54,7 @@ class Event extends Task {
      */
     public String getEvent() {
         if (date != null) {
-            return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + timing;
+            return dateFormat + " " + timing;
         } else {
             return timing;
         }
@@ -56,10 +63,11 @@ class Event extends Task {
     @Override
     public String toString() {
         if (date == null) {
-            return "[E]" + super.toString() + " (at: " + timing + ")";
+            return symbol + super.toString() + " (at: "
+                    + timing + ")";
         } else {
-            return "[E]" + super.toString() + " (at: " +
-                    date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + timing + ")";
+            return "[E]" + super.toString() + " (at: "
+                    + dateFormat + " " + timing + ")";
         }
     }
 

@@ -45,7 +45,7 @@ public class TaskList {
      * @return the task.
      */
     public Task getTask(int index) {
-        //assert index >= 0;
+        assert index >= 0;
         return allTasks.get(index);
     }
 

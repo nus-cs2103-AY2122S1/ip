@@ -40,5 +40,5 @@ public class Ui {
     public String showLoadingError() {
         return "There was an error getting the input";
     }
-    
+
 }
