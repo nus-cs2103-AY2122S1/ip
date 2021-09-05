@@ -23,7 +23,11 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(new Duke("data/tasks.txt"));
+            try {
+                fxmlLoader.<MainWindow>getController().setDuke(new Duke("data/tasks.txt"));
+            } catch (DukeException e) {
+                fxmlLoader.<MainWindow>getController().printMessage(e.getMessage());
+            }
             stage.show();
             fxmlLoader.<MainWindow>getController().displayGreeting();
         } catch (IOException e) {

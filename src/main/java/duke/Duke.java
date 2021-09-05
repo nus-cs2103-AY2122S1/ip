@@ -36,10 +36,14 @@ public class Duke {
      *
      * @param filePath Path to storage
      */
-    public Duke(String filePath) {
+    public Duke(String filePath) throws DukeException {
         ui = new Ui();
         storage = new Storage(filePath);
-        tasks = new TaskList();
+        if (storage.hasSave()) {
+            tasks = storage.load();
+        } else {
+            tasks = new TaskList();
+        }
     }
 
     /**
@@ -135,7 +139,7 @@ public class Duke {
 
             case LOAD:
                 tasks = storage.load();
-                return ui.showLoadedMessage();
+                return ui.showLoadedMessage() + " " + getResponse("LIST");
 
             default:
                 throw new IllegalCommandException(""); // should be unreachable by design

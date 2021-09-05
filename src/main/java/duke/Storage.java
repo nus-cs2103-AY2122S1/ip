@@ -113,4 +113,8 @@ public class Storage {
             }
         }
     }
+
+    public boolean hasSave() {
+        return !(Files.notExists(filePath.getParent()) || Files.notExists(filePath));
+    }
 }

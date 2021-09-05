@@ -22,7 +22,11 @@ public class StorageTest {
 
         Storage storage = new Storage("data/test.txt");
 
-        storage.save(tasks);
+        try {
+            storage.save(tasks);
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
 
         String expected = "T | 0 | Finish this week's Ip tasks\n"
                 + "D | 0 | CS2100 Tutorial | Aug 24 2021 11.00AM\n"

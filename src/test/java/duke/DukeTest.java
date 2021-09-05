@@ -23,7 +23,12 @@ public class DukeTest {
     @Test
     public void byeTest() {
         String data = "bye\n";
-        String output = new Duke("data/test.txt").getResponse("bye");
+        String output = "";
+        try {
+            output = new Duke("data/test.txt").getResponse("bye");
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
         String expected = ("See you again, meow!\n").replaceAll("\n", "").replaceAll("\r", "");
 
         assertEquals(expected, output.replaceAll("\n", "").replaceAll("\r", ""));
@@ -32,7 +37,12 @@ public class DukeTest {
     @Test
     public void eventTest() {
         String data = "event christmas day /at 25Dec";
-        String output = new Duke("data/test.txt").getResponse(data);
+        String output = "";
+        try {
+            output = new Duke("data/test.txt").getResponse(data);
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
         String expected = ("Meow. I've added this task:\n"
                 + "   [E][ ] christmas day (at: Dec 25 2021 All day)\n"
                 + "Now you have 1 tasks in the list.\n").replaceAll("\n", "").replaceAll("\r", "");
