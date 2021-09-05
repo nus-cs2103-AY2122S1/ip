@@ -12,9 +12,10 @@ import javafx.scene.layout.VBox;
  */
 public class Dialog {
     private static final String BOT_NAME = "Botto";
+    private static final String GREETING = "Hello! I'm " + BOT_NAME
+            + ".\n What can I do for you?";
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/human.png"));
-    private Image bottoImage = new Image(this.getClass().getResourceAsStream("/images/botto.png"));
+    private final Image bottoImage = new Image(this.getClass().getResourceAsStream("/images/botto.png"));
     private VBox dialogContainer;
 
     /**
@@ -29,14 +30,8 @@ public class Dialog {
      * print the bot's welcome message
      */
     public void showWelcome() {
-        String greet = "Hello! I'm " + BOT_NAME + ".\n"
-                + "What can I do for you?";
-
-        dialogContainer.getChildren().add(
-                DialogBox.getBottoDialog(greet, bottoImage)
-        );
+        addToDialog(GREETING);
     }
-
 
     /**
      * print the user's tasks
@@ -45,16 +40,25 @@ public class Dialog {
      * @param header header message to be printed before printing the tasks
      */
     public void showTasks(List<Task> list, String header) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(header).append("\n");
+        String taskMessage = processTaskMessage(list, header);
+        addToDialog(taskMessage);
+    }
+
+    /**
+     * process the message that shows the tasks
+     * @param list list of tasks
+     * @param header header header message to be printed before printing the tasks
+     * @return formatted message that shows the user's tasks
+     */
+    private String processTaskMessage(List<Task> list, String header) {
+        StringBuilder taskMessage = new StringBuilder();
+        taskMessage.append(header).append("\n");
 
         for (int i = 0; i < list.size(); i++) {
             Task task = list.get(i);
-            stringBuilder.append(i + 1).append(". ").append(task).append("\n");
+            taskMessage.append(i + 1).append(". ").append(task).append("\n");
         }
-        dialogContainer.getChildren().add(
-                DialogBox.getBottoDialog(stringBuilder.toString(), bottoImage)
-        );
+        return taskMessage.toString();
     }
 
     /**
@@ -64,14 +68,21 @@ public class Dialog {
      * @param size total number of the user's tasks after addition
      */
     public void respondAdd(Task task, int size) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Got it! I've added this task:\n").append("  ")
-                .append(task).append("\n").append("Now you have ")
-                .append(size).append(" tasks in the list.");
+        String addMessage = processAddMessage(task, size);
 
-        dialogContainer.getChildren().add(
-                DialogBox.getBottoDialog(stringBuilder.toString(), bottoImage)
-        );
+        addToDialog(addMessage);
+    }
+
+    /**
+     * process the response message for add command
+     * @param task newly added task
+     * @param size total number of the user's tasks after addition
+     * @return response message for add command
+     */
+    private String processAddMessage(Task task, int size) {
+        return "Got it! I've added this task:\n" + "  "
+                + task + "\n" + "Now you have "
+                + size + " tasks in the list.";
     }
 
     /**
@@ -81,14 +92,20 @@ public class Dialog {
      * @param size total number of the user's tasks after deletion
      */
     public void respondDelete(Task task, int size) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Noted. I've removed this task:\n").append("  ")
-                .append(task).append("\n").append("Now you have ")
-                .append(size).append(" tasks in the list.");
+        String deleteMessage = processDeleteMessage(task, size);
+        addToDialog(deleteMessage);
+    }
 
-        dialogContainer.getChildren().add(
-                DialogBox.getBottoDialog(stringBuilder.toString(), bottoImage)
-        );
+    /**
+     * process the response message for delete command
+     * @param task deleted task
+     * @param size total number of the user's tasks after deletion
+     * @return response message for delete command
+     */
+    private String processDeleteMessage(Task task, int size) {
+        return "Noted. I've removed this task:\n"
+                + "  " + task + "\n"
+                + "Now you have " + size + " tasks in the list.";
     }
 
     /**
@@ -97,21 +114,26 @@ public class Dialog {
      * @param task the task which is just marked as done
      */
     public void respondDone(Task task) {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("Nice! I've marked this task as done:\n").append("  ").append(task);
+        String doneMessage = processDoneMessage(task);
 
-        dialogContainer.getChildren().add(
-                DialogBox.getBottoDialog(stringBuilder.toString(), bottoImage)
-        );
+        addToDialog(doneMessage);
+    }
+
+    /**
+     * process the response message for done command
+     * @param task the task which is just marked as done
+     * @return response message for done command
+     */
+    private String processDoneMessage(Task task) {
+        return "Nice! I've marked this task as done:\n"
+                + "  " + task;
     }
 
     /**
      * print a goodbye message
      */
     public void sayGoodBye() {
-        dialogContainer.getChildren().add(
-                DialogBox.getBottoDialog("Bye. Hope to see you again soon!", bottoImage)
-        );
+        addToDialog("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -120,6 +142,14 @@ public class Dialog {
      * @param message error message
      */
     public void showError(String message) {
+        addToDialog(message);
+    }
+
+    /**
+     * add message to the dialog
+     * @param message message to be added to the dialog
+     */
+    private void addToDialog(String message) {
         dialogContainer.getChildren().add(
                 DialogBox.getBottoDialog(message, bottoImage)
         );

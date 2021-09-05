@@ -54,7 +54,7 @@ public class Storage {
                 String next = scanner.nextLine();
                 boolean isDone = next.charAt(4) == 'X';
                 String[] info = next.substring(7).split(" [(]..: ");
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
+                DateTimeFormatter taskFormatter = DateTimeFormatter.ofPattern("d/M/yyyy h:mm a");
 
                 switch (next.charAt(1)) {
                 case 'T' :
@@ -62,11 +62,11 @@ public class Storage {
                     break;
                 case 'D' :
                     String deadline = info[1].substring(0, info[1].length() - 1);
-                    task = new Deadline(info[0], LocalDateTime.parse(deadline, formatter));
+                    task = new Deadline(info[0], LocalDateTime.parse(deadline, taskFormatter));
                     break;
                 case 'E' :
                     String eventTime = info[1].substring(0, info[1].length() - 1);
-                    task = new Event(info[0], LocalDateTime.parse(eventTime, formatter));
+                    task = new Event(info[0], LocalDateTime.parse(eventTime, taskFormatter));
                     break;
                 default:
                     continue;
