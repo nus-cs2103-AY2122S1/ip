@@ -12,7 +12,7 @@ public interface Parser {
      * @param command a String that describes the command (e.g. "event")
      * @param message the String that is input by the user (e.g. "event Meeting /at tomorrow")
      * @return a String representing the description after the command (e.g. "Meeting /at tomorrow")
-     * @throws DukeException indicates that the description is invalid
+     * @throws DukeException if that the description is invalid
      */
     static String getStringFrom(String command, String message) throws DukeException {
         if (message.length() <= command.length()) {
@@ -34,7 +34,7 @@ public interface Parser {
      * @param command A String command that comes before the desired number. (e.g. "delete")
      * @param message The String that is the full input by the user. (e.g. "delete 2")
      * @return an int representing the description of the command. (e.g. "2")
-     * @throws DukeException indicates that the description is invalid
+     * @throws DukeException if the description is invalid
      */
     static int getIntFrom(String command, String message) throws DukeException {
         return Integer.parseInt(getStringFrom(command, message));

@@ -19,7 +19,9 @@ public class Task {
         TODO('T'),
         EVENT('E'),
         DEADLINE('D');
-        public final char indicator;
+
+        private final char indicator;
+
         Type(char indicator) {
             this.indicator = indicator;
         }
@@ -52,13 +54,13 @@ public class Task {
     public static Task createTask(
             Type taskType, boolean isDone, String title, LocalDate timeDue) {
         switch (taskType) {
-            case DEADLINE:
-                return new Deadline(title, timeDue, isDone);
-            case EVENT:
-                return new Event(title, timeDue, isDone);
-            default:
-                // If the type cannot be parsed, it defaults to TO-DO.
-                return new ToDo(title, isDone);
+        case DEADLINE:
+            return new Deadline(title, timeDue, isDone);
+        case EVENT:
+            return new Event(title, timeDue, isDone);
+        default:
+            // If the type cannot be parsed, it defaults to TO-DO.
+            return new ToDo(title, isDone);
         }
 
     }
@@ -86,7 +88,8 @@ public class Task {
     public String toSaveData() {
         int doneIndicator = this.isDone ? 1 : 0;
         String timeDueString = this.timeDue == null
-                ? "" : this.timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                ? ""
+                : this.timeDue.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         return String.format("%s%s%s|%s\n",
                 this.type, doneIndicator, timeDueString, this.description);
     }
@@ -110,19 +113,19 @@ public class Task {
     }
 
     /**
-     * Given a char, convert it to a typeIndicator Enum.
-     * @param t The char to be converted to a TypeIndicators Enum
-     * @return a TypeIndicators enum
+     * Given a char, convert it to a type Enum.
+     * @param t The char to be converted to a Type Enum
+     * @return a Type enum
      */
     public static Type charToTypeEnum(char t) {
         switch (t) {
-            case 'D':
-                return Type.DEADLINE;
-            case 'E':
-                return Type.EVENT;
-            default:
-                // If the type cannot be inferred, return a TO-DO as default.
-                return Type.TODO;
+        case 'D':
+            return Type.DEADLINE;
+        case 'E':
+            return Type.EVENT;
+        default:
+            // If the type cannot be inferred, return a TO-DO as default.
+            return Type.TODO;
         }
     }
 }
