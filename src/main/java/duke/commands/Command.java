@@ -30,11 +30,6 @@ public abstract class Command {
     }
 
     /**
-     * Returns if the command is the exit command.
-     */
-    public abstract boolean isExit();
-
-    /**
      * Executes the command. Adds deadline to task list. Updates the save file.
      */
     public abstract String execute(TaskList tasks) throws IOException;

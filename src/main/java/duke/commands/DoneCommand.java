@@ -22,16 +22,6 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Returns if the command is the exit command.
-     *
-     * @return false since this command is not the exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
      * Executes the command. Adds deadline to task list. Updates the save file.
      *
      * @param tasks the task list.

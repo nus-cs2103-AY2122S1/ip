@@ -38,21 +38,27 @@ public class Parser {
             if (fullCommand.length == 1) {
                 throw new DukeException("Please give an index number");
             }
+
             int doneIndex = Integer.parseInt(fullCommand[1]);
             checkIndex(doneIndex, tasks.size());
+
             return new DoneCommand("done", doneIndex);
         case "delete":
             if (fullCommand.length == 1) {
                 throw new DukeException("Please give an index number");
             }
+
             int deleteIndex = Integer.parseInt(fullCommand[1]);
             checkIndex(deleteIndex, tasks.size());
+
             return new DeleteCommand("delete", deleteIndex);
         case "todo":
             desc = commandLine.replace("todo", "").trim();
+
             if (desc.equals("")) {
                 throw new DukeException("A to-do needs a description");
             }
+
             return new AddTodoCommand(desc);
         case "deadline":
             String by;
@@ -124,7 +130,8 @@ public class Parser {
         try {
             return LocalDateTime.parse(date, dtf);
         } catch (DateTimeParseException err) {
-            throw new DukeException("Invalid date format\nPlease format date as the following:\n"
+            throw new DukeException("Invalid date format\n"
+                    + "Please format date as the following:\n"
                     + "Day/Month/Year H:mm or\n"
                     + "Day-Month-Year H:mm, in 24-hour format\n"
                     + "Month can be 3-letter word or a number "

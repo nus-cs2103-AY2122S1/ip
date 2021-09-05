@@ -10,6 +10,7 @@ import duke.tasks.Todo;
  */
 public class AddTodoCommand extends Command {
 
+
     /**
      * Constructor for AddTodoCommand.
      *
@@ -17,16 +18,6 @@ public class AddTodoCommand extends Command {
      */
     public AddTodoCommand(String desc) {
         super(desc);
-    }
-
-    /**
-     * Returns if the command is the exit command.
-     *
-     * @return false since this command is not the exit command.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 
     /**
