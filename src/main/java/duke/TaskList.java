@@ -24,6 +24,7 @@ public class TaskList {
      * @return the taskList
      */
     public static ArrayList<Task> getTaskList() {
+        assert (taskList.size() == 100) : "Task list array has not been created.";
         return TaskList.taskList;
     }
 
@@ -32,6 +33,7 @@ public class TaskList {
      * @return the number of tasks currently save in user's hard disk (counter member)
      */
     public static int getCounter() {
+        assert (taskList.size() == 100) : "Task list array has not been created.";
         return TaskList.counter;
     }
 
@@ -40,6 +42,7 @@ public class TaskList {
      * @param currTask the task that is to be added to the taskList
      */
     public static void addTask(Task currTask) {
+        assert (taskList.size() == 100) : "Task list array has not been created.";
         TaskList.taskList.add(currTask);
         TaskList.counter++;
     }
@@ -51,6 +54,7 @@ public class TaskList {
      * in user's hard disk
      */
     public static void addTaskAndUpdate(Task currTask) throws IOException {
+        assert (taskList.size() == 100) : "Task list array has not been created.";
         TaskList.taskList.add(currTask);
         TaskList.counter++;
         appendToFile("data/jarvis.txt", (counter) + "." +
@@ -64,7 +68,8 @@ public class TaskList {
      * @throws IOException if there is an error in re-writing the list of tasks without the
      * deleted task
      */
-    public static void deleteTaskAndUpdate(Task currTask) throws IOException{
+    public static void deleteTaskAndUpdate(Task currTask) throws IOException {
+        assert (taskList.size() == 100) : "Task list array has not been created.";
         TaskList.taskList.remove(currTask);
         counter--;
         if (TaskList.getTaskList().size() == 0) {
