@@ -26,6 +26,7 @@ public class Ui {
 
     /**
      * Gets the next line of user input.
+     *
      * @return A String representing the next line of user input.
      */
     public String getNextLine() {

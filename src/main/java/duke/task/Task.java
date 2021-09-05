@@ -12,6 +12,7 @@ public class Task {
 
     /**
      * Class constructor to initialize a Task.
+     *
      * @param taskName The name or description of the Task.
      * @param isDone Whether or not the Task is done.
      */
@@ -29,6 +30,7 @@ public class Task {
 
     /**
      * Gets the Task name.
+     *
      * @return String representation of the Task name.
      */
     public String getTaskName() {
@@ -37,6 +39,7 @@ public class Task {
 
     /**
      * Returns the string representation of the Task.
+     *
      * @return The string representation of the Task.
      */
     @Override

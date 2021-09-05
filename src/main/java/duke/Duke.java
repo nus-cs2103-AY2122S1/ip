@@ -50,6 +50,7 @@ public class Duke {
 
     /**
      * Main method to begin Duke.
+     *
      * @param args Not used.
      */
     public static void main(String[] args) {

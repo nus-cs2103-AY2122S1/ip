@@ -9,6 +9,7 @@ public class Todo extends Task {
 
     /**
      * Class constructor to initialize a Todo.
+     *
      * @param taskName The name or description of the Todo.
      * @param isDone Whether or not the Todo is done.
      */
@@ -18,6 +19,7 @@ public class Todo extends Task {
 
     /**
      * Returns the string representation of the Todo.
+     *
      * @return The string representation of the Todo.
      */
     @Override

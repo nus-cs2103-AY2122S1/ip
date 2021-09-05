@@ -25,6 +25,7 @@ public class Storage {
 
     /**
      * Class constructor.
+     *
      * @param filePath A String representation of the location of the text file as a file path.
      */
     public Storage(String filePath) {
@@ -33,6 +34,7 @@ public class Storage {
 
     /**
      * Writes task data from the TaskList to the text file, line by line.
+     *
      * @param list The TaskList from which task data is used to write to the text file.
      * @throws DukeException In the case where the file is corrupted or cannot be located.
      */
