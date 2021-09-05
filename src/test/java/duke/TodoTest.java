@@ -21,6 +21,6 @@ public class TodoTest {
     @Test
     public void testTaskToString() {
         Todo todo = new Todo("merge branch", false);
-        assertEquals("T ~#~ 0 ~#~ merge branch ~#~ ", todo.taskToString());
+        assertEquals("T ~#~ 0 ~#~ merge branch ~#~ ", todo.convertTaskToString());
     }
 }

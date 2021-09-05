@@ -35,6 +35,6 @@ public class EventTest {
     @Test
     public void testTaskToString1() throws UserInputError {
         Event event = new Event("merge master", "2021-09-09", false);
-        assertEquals("E ~#~ 0 ~#~ merge master ~#~ 2021-09-09", event.taskToString());
+        assertEquals("E ~#~ 0 ~#~ merge master ~#~ 2021-09-09", event.convertTaskToString());
     }
 }

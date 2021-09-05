@@ -35,6 +35,6 @@ public class DeadlineTest {
     @Test
     public void testTaskToString1() throws UserInputError {
         Deadline deadline = new Deadline("merge master", "2021-09-09", false);
-        assertEquals("D ~#~ 0 ~#~ merge master ~#~ 2021-09-09", deadline.taskToString());
+        assertEquals("D ~#~ 0 ~#~ merge master ~#~ 2021-09-09", deadline.convertTaskToString());
     }
 }

@@ -124,7 +124,7 @@ public abstract class Task {
      *
      * @return String writeable to database.
      */
-    public String taskToString() {
+    public String convertTaskToString() {
         String type;
         String done = this.isDone ? "1" : "0";
 

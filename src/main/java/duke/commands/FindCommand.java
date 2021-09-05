@@ -10,6 +10,7 @@ public class FindCommand extends Command {
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
+
     @Override
     public String execute(TaskList tasks, Ui ui) throws UserInputError {
         StringBuilder op = new StringBuilder();
