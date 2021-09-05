@@ -1,9 +1,10 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.task.Task;
 
-import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * A personal assistant chatbot that helps a person to keep track of various things.
@@ -29,6 +30,16 @@ public class Duke implements ChatbotUI, Parser {
     private Scanner sc;
 
     /**
+     * A constructor for duke.Duke chatbot.
+     */
+    public Duke(String dataStorage) {
+        this.taskList = new TaskList();
+        this.storage = new Storage(dataStorage);
+        this.loadData();
+        this.sc = new Scanner(System.in);
+    }
+
+    /**
      * The entrypoint of the duke.Duke chat bot.
      * @param args The command line arguments.
      */
@@ -46,15 +57,7 @@ public class Duke implements ChatbotUI, Parser {
         duke.taskMode();
     }
 
-    /**
-     * A constructor for duke.Duke chatbot.
-     */
-    public Duke(String dataStorage) {
-        this.taskList = new TaskList();
-        this.storage = new Storage(dataStorage);
-        this.loadData();
-        this.sc = new Scanner(System.in);
-    }
+
 
     /**
      * Loads data that is saved in a given filename, and parses the data to load tasks.
@@ -76,10 +79,15 @@ public class Duke implements ChatbotUI, Parser {
         this.storage.overwriteNewFile();
         this.storage.writeToFile(content);
     }
+
+    /**
+     * Stops Duke.
+     */
     public void endDuke() {
         this.saveData();
         ChatbotUI.printMessage(FAREWELL_MESSAGE);
     }
+
     /**
      * Prints a greeting to the user.
      */
@@ -116,7 +124,7 @@ public class Duke implements ChatbotUI, Parser {
             } else if (msg.startsWith(COMPLETE_TASK_COMMAND)) {
                 output = tasks.completeTask(Parser.getIntFrom(COMPLETE_TASK_COMMAND, msg));
             } else if (msg.startsWith(FIND_TASK_COMMAND)) {
-                    output = tasks.findTasks(Parser.getStringFrom(FIND_TASK_COMMAND, msg));
+                output = tasks.findTasks(Parser.getStringFrom(FIND_TASK_COMMAND, msg));
             } else if (msg.startsWith(DELETE_TASK_COMMAND)) {
                 output = tasks.deleteTask(Parser.getIntFrom(DELETE_TASK_COMMAND, msg));
             } else if (msg.startsWith(CREATE_TODO_COMMAND)) {
@@ -126,8 +134,8 @@ public class Duke implements ChatbotUI, Parser {
             } else if (msg.startsWith(CREATE_DEADLINE_COMMAND)) {
                 output = tasks.addNewDeadline(Parser.getStringFrom(CREATE_DEADLINE_COMMAND, msg));
             } else {
-                throw new DukeException("I don't know what that command means." +
-                        "\nPlease input a valid command.");
+                throw new DukeException("I don't know what that command means."
+                        + "\nPlease input a valid command.");
             }
             ChatbotUI.printMessage(output);
         } catch (DukeException e) {

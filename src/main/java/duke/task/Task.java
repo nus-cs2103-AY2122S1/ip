@@ -76,7 +76,7 @@ public class Task {
         char doneIndicator = text.charAt(1);
         boolean isDone = doneIndicator == '1';
         String timeDueString = text.substring(2, text.indexOf('|'));
-        LocalDate timeDue = timeDueString.length() ==  0 ? null : LocalDate.parse(timeDueString);
+        LocalDate timeDue = timeDueString.length() == 0 ? null : LocalDate.parse(timeDueString);
         String title = text.substring(text.indexOf('|') + 1);
         return createTask(charToTypeEnum(typeIndicator), isDone, title, timeDue);
     }

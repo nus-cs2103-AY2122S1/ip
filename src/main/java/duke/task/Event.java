@@ -43,6 +43,6 @@ public class Event extends Task {
         String formattedTimeDue = this.timeDue == null
                 ? ""
                 : this.timeDue.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-            return super.toString() + String.format(" (at: %s)", formattedTimeDue);
+        return super.toString() + String.format(" (at: %s)", formattedTimeDue);
     }
 }
