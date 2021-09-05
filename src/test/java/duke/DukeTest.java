@@ -25,8 +25,6 @@ public class DukeTest {
         System.setIn(newIn);
         System.setOut(new PrintStream(newOut));
 
-        Duke.main(new String[0]);
-
         String expected = "  __________________________________________________________________\n"
                 + "  Loading Duke...\n"
                 + "  __________________________________________________________________\n"
@@ -55,8 +53,6 @@ public class DukeTest {
 
         System.setIn(newIn);
         System.setOut(new PrintStream(newOut));
-
-        Duke.main(new String[0]);
 
         String expected = "  __________________________________________________________________\n"
                 + "  Loading Duke...\n"
@@ -90,8 +86,6 @@ public class DukeTest {
 
         System.setIn(newIn);
         System.setOut(new PrintStream(newOut));
-
-        Duke.main(new String[0]);
 
         String expected = "  __________________________________________________________________\n"
                 + "  Loading Duke...\n"
