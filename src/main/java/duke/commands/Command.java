@@ -1,10 +1,7 @@
 package duke.commands;
 
-import java.util.ArrayList;
-
 import duke.DukeException;
 import duke.storage.Storage;
-import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 

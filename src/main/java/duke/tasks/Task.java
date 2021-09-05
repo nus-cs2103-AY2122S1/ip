@@ -32,6 +32,11 @@ public class Task {
         return String.format("[%s] :  %s", getStatusChar(), description);
     }
 
+    /**
+     * Gets the right format to store into text file.
+     *
+     * @return String representation of task corresponding to text file format.
+     */
     public String getData() {
         int isDoneBinary = isDone ? 1 : 0;
         return String.format("%d | %s", isDoneBinary, description);
