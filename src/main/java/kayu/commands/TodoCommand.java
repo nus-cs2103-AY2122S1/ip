@@ -1,7 +1,6 @@
 package kayu.commands;
 
 import static kayu.commands.CommandMessage.MESSAGE_CREATED_TODO;
-import static kayu.commands.CommandType.TODO;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
@@ -27,7 +26,7 @@ public class TodoCommand extends AddTaskCommand {
      * @param dateTimeFormat {@link kayu.parser.DateTimeFormat} used in parsing, if required.
      */
     public TodoCommand(String commandParams, DateTimeFormat dateTimeFormat) {
-        super(TODO, commandParams, dateTimeFormat);
+        super(commandParams, dateTimeFormat);
     }
 
     /**
@@ -35,11 +34,14 @@ public class TodoCommand extends AddTaskCommand {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
-        String desc = super.extractDesc(new String[] {commandParams}, COMMAND_WORD);
+        String desc = extractDesc();
         Task todo = new Todo(desc);
-        taskList.addTask(todo);
+        super.updateTasks(taskList, storage, todo);
         
-        super.saveTasks(taskList, storage);
         return String.format(MESSAGE_CREATED_TODO, todo, taskList.getCapacity());
+    }
+    
+    private String extractDesc() throws KayuException {
+        return super.extractDesc(new String[] {commandParams}, COMMAND_WORD);
     }
 }

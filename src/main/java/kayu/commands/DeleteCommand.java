@@ -2,7 +2,6 @@ package kayu.commands;
 
 import static kayu.commands.CommandMessage.ERROR_NOT_AN_INT_PARAM;
 import static kayu.commands.CommandMessage.MESSAGE_DELETED_TASK;
-import static kayu.commands.CommandType.DELETE;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
@@ -25,7 +24,7 @@ public class DeleteCommand extends Command {
      * @param commandParams String parameters fed into the command by user.
      */
     public DeleteCommand(String commandParams) {
-        super(DELETE, commandParams);
+        super(commandParams);
     }
 
     /**
@@ -36,7 +35,7 @@ public class DeleteCommand extends Command {
         try {
             int taskNumber = Integer.parseInt(commandParams);
             Task selectedTask = taskList.deleteTask(taskNumber);
-            super.saveTasks(taskList, storage);
+            super.updateFileStorage(taskList, storage);
             return String.format(MESSAGE_DELETED_TASK, selectedTask, taskList.getCapacity());
             
         } catch (NumberFormatException exception) {

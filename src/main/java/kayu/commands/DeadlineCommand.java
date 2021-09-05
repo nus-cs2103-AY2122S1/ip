@@ -1,7 +1,6 @@
 package kayu.commands;
 
 import static kayu.commands.CommandMessage.MESSAGE_CREATED_DEADLINE;
-import static kayu.commands.CommandType.DEADLINE;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -30,7 +29,7 @@ public class DeadlineCommand extends AddTaskCommand {
      * @param dateTimeFormat {@link kayu.parser.DateTimeFormat} used in parsing, if required.
      */
     public DeadlineCommand(String commandParams, DateTimeFormat dateTimeFormat) {
-        super(DEADLINE, commandParams, dateTimeFormat);
+        super(commandParams, dateTimeFormat);
     }
 
     /**
@@ -38,17 +37,23 @@ public class DeadlineCommand extends AddTaskCommand {
      */
     @Override
     public String execute(TaskList taskList, Storage storage) throws KayuException, StorageException {
-        String[] paramArray = super.splitUserParams(commandParams, COMMAND_WORD, Deadline.SPLIT_WORD);
+        String[] paramArray = getParamArray();
+        Task deadline = createDeadline(paramArray);
+        super.updateTasks(taskList, storage, deadline);
         
+        return String.format(MESSAGE_CREATED_DEADLINE, deadline, taskList.getCapacity());
+    }
+    
+    private Task createDeadline(String[] paramArray) throws KayuException {
         String desc = super.extractDesc(paramArray, COMMAND_WORD);
         LocalDate byDate = super.extractDate(paramArray);
         LocalTime byTime = super.extractTime(paramArray);
 
-        Task deadline = new Deadline(desc, byDate, byTime);
-        taskList.addTask(deadline);
-        super.saveTasks(taskList, storage);
-        
-        return String.format(MESSAGE_CREATED_DEADLINE, deadline, taskList.getCapacity());
+        return new Deadline(desc, byDate, byTime);
+    }
+    
+    private String[] getParamArray() throws KayuException {
+        return super.splitUserParams(commandParams, COMMAND_WORD, Deadline.SPLIT_WORD);
     }
 }
 

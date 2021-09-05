@@ -1,7 +1,6 @@
 package kayu.commands;
 
 import static kayu.commands.CommandMessage.ERROR_EMPTY_COMMAND;
-import static kayu.commands.CommandType.EMPTY;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
@@ -17,7 +16,7 @@ public class EmptyCommand extends Command {
      * Initializes an EmptyCommand- {@link kayu.commands.Command}.
      */
     public EmptyCommand() {
-        super(EMPTY);
+        super();
     }
 
     /**

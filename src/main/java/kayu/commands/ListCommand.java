@@ -2,7 +2,6 @@ package kayu.commands;
 
 import static kayu.commands.CommandMessage.MESSAGE_EMPTY_LIST;
 import static kayu.commands.CommandMessage.MESSAGE_LIST_CONTENTS;
-import static kayu.commands.CommandType.LIST;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class ListCommand extends Command {
      * Initializes a List- {@link kayu.commands.Command}.
      */
     public ListCommand() {
-        super(LIST);
+        super();
     }
 
     /**
@@ -37,7 +36,10 @@ public class ListCommand extends Command {
         if (tasks.isEmpty()) {
             return MESSAGE_EMPTY_LIST;
         }
-        
+        return generateFormattedTaskListResponse(tasks);
+    }
+    
+    private String generateFormattedTaskListResponse(List<Task> tasks) {
         StringBuilder tasksAsString = new StringBuilder(MESSAGE_LIST_CONTENTS);
         for (int idx = 0; idx < tasks.size(); idx++) {
             tasksAsString.append(String.format("\n%d. %s", idx + 1, tasks.get(idx)));

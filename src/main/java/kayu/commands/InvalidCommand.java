@@ -1,7 +1,6 @@
 package kayu.commands;
 
 import static kayu.commands.CommandMessage.ERROR_UNKNOWN_COMMAND;
-import static kayu.commands.CommandType.INVALID;
 
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
@@ -17,7 +16,7 @@ public class InvalidCommand extends Command {
      * Initializes an InvalidCommand- {@link kayu.commands.Command}.
      */
     public InvalidCommand() {
-        super(INVALID);
+        super();
     }
 
     /**

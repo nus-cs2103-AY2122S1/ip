@@ -12,7 +12,11 @@ import java.time.format.DateTimeParseException;
 import java.util.List;
 
 import kayu.exception.KayuException;
+import kayu.exception.StorageException;
 import kayu.parser.DateTimeFormat;
+import kayu.service.TaskList;
+import kayu.storage.Storage;
+import kayu.task.Task;
 
 /**
  * Holds shared methods that are used by {@link kayu.commands.Command}s that adds {@link kayu.task.Task}s
@@ -25,12 +29,11 @@ public abstract class AddTaskCommand extends Command {
     /**
      * Initializes an AddTaskCommand instance.
      *
-     * @param commandType {@link kayu.commands.CommandType} for Command instance.
      * @param commandParams String parameters fed into the command by user.
      * @param dateTimeFormat {@link kayu.parser.DateTimeFormat} used in parsing, if required.
      */
-    public AddTaskCommand(CommandType commandType, String commandParams, DateTimeFormat dateTimeFormat) {
-        super(commandType, commandParams);
+    public AddTaskCommand(String commandParams, DateTimeFormat dateTimeFormat) {
+        super(commandParams);
         this.dateTimeFormat = dateTimeFormat;
     }
     
@@ -91,6 +94,9 @@ public abstract class AddTaskCommand extends Command {
         }
         throw new KayuException(ERROR_IMPROPER_TIME);
     }
-    
-    
+
+    protected void updateTasks(TaskList taskList, Storage storage, Task task) throws KayuException, StorageException {
+        taskList.addTask(task);
+        super.updateFileStorage(taskList, storage);
+    }
 }

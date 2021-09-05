@@ -1,7 +1,5 @@
 package kayu.commands;
 
-import static kayu.commands.CommandType.BYE;
-
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
@@ -16,10 +14,10 @@ public class ByeCommand extends Command {
     public static final String COMMAND_WORD = "bye";
 
     /**
-     * Initializes a Bye- {@link kayu.commands.Command}.
+     * {@inheritDoc}
      */
-    public ByeCommand() {
-        super(BYE);
+    public boolean isBye() {
+        return true;
     }
 
     /**

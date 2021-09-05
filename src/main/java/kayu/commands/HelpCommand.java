@@ -1,7 +1,5 @@
 package kayu.commands;
 
-import static kayu.commands.CommandType.HELP;
-
 import kayu.exception.KayuException;
 import kayu.exception.StorageException;
 import kayu.service.TaskList;
@@ -19,7 +17,7 @@ public class HelpCommand extends Command {
      * Initializes a Help- {@link kayu.commands.Command}.
      */
     public HelpCommand() {
-        super(HELP);
+        super();
     }
 
     /**
