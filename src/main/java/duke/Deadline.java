@@ -18,11 +18,11 @@ public class Deadline extends Task {
      * @throws DukeException If the deadline is not in yyyy-mm-dd format.
      */
     public Deadline(String desc, String by) throws DukeException {
-        super(desc, "D");
+        super(desc, 'D');
         try {
             this.by = LocalDate.parse(by);
         } catch (DateTimeParseException e) {
-            throw new DukeException("duke.Deadline should be in the form yyyy-mm-dd"
+            throw new DukeException("Deadline should be in the form yyyy-mm-dd"
                     + "\ni.e. deadline read book /by 2021-06-18");
         }
     }

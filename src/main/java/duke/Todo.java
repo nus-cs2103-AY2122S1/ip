@@ -10,7 +10,7 @@ public class Todo extends Task {
      * @param desc The description of the task.
      */
     public Todo(String desc) {
-        super(desc, "T");
+        super(desc, 'T');
     }
 
     /**

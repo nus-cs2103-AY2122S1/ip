@@ -6,7 +6,7 @@ package duke;
 public abstract class Task {
     private String description;
     private boolean isDone;
-    private String icon;
+    private char icon;
 
     /**
      * Constructor for a Task object.
@@ -14,7 +14,7 @@ public abstract class Task {
      * @param description The description of the task.
      * @param icon Marker that indicates the type of task.
      */
-    public Task(String description, String icon) {
+    public Task(String description, char icon) {
         this.description = description;
         this.icon = icon;
         this.isDone = false;
@@ -27,6 +27,15 @@ public abstract class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "X" : " ");
+    }
+
+    /**
+     * A method that returns the icon for the respective task.
+     *
+     * @return The task icon.
+     */
+    public char getTaskIcon() {
+        return icon;
     }
 
     /**

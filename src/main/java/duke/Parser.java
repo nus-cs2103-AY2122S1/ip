@@ -6,6 +6,7 @@ import duke.commands.EditCommand;
 import duke.commands.EventCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
+import duke.commands.SortCommand;
 import duke.commands.TodoCommand;
 
 /**
@@ -44,6 +45,8 @@ public class Parser {
     public Command parse() throws DukeException {
         if (input.equals("list")) {
             return new ListCommand();
+        } else if (input.equals("sort")) {
+            return new SortCommand();
         } else if (isFindingTask()) {
             return new FindCommand(input);
         } else if (isEditingTask()) {

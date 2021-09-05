@@ -95,6 +95,21 @@ public class TaskList {
     }
 
     /**
+     * A method that sorts the task list by task.
+     *
+     * @return The response to be displayed in the GUI. 
+     */
+    public String sortByTask() {
+        ArrayList<Task> sortedList = new ArrayList<>();
+        for (Task task : taskList) {
+            sortedList.add(task);
+        }
+        sortedList.sort((o1, o2) -> Character.compare(o1.getTaskIcon(), o2.getTaskIcon()));
+        this.taskList = sortedList;
+        return "I've sorted your list by task:\n" + toString();
+    }
+
+    /**
      * A method that converts the task list to a suitable format to be saved in a save file.
      *
      * @return The formatted data as a string.

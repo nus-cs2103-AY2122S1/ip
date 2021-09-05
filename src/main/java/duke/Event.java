@@ -13,7 +13,7 @@ public class Event extends Task {
      * @param at Statement that indicates when the task starts.
      */
     public Event(String desc, String at) {
-        super(desc, "E");
+        super(desc, 'E');
         this.at = at;
     }
 
