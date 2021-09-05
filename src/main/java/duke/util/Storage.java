@@ -1,17 +1,16 @@
 package duke.util;
+import java.util.ArrayList;
 
 import duke.task.Task;
-
-import java.util.ArrayList;
 
 /**
  * Represents the storage operation of a hard disk.
  */
 public class Storage {
-    DukeDB dukeDb;
+    private Database database;
 
     public Storage(String filePath) {
-        dukeDb = new DukeDB(filePath);
+        database = new Database(filePath);
     }
 
     /**
@@ -19,8 +18,8 @@ public class Storage {
      *
      * @return Task List
      */
-    public ArrayList<Task> load(){
-        ArrayList<Task> tasks = dukeDb.readData();
+    public ArrayList<Task> load() {
+        ArrayList<Task> tasks = database.readData();
         return tasks;
     }
 
@@ -30,7 +29,7 @@ public class Storage {
      * @param task new item to be added
      */
     public void add(Task task) {
-        dukeDb.addData(task);
+        database.addData(task);
     }
 
     /**
@@ -39,7 +38,7 @@ public class Storage {
      * @param index the index of Task
      */
     public void done(int index) {
-        dukeDb.doneData(index);
+        database.doneData(index);
     }
 
     /**
@@ -48,6 +47,6 @@ public class Storage {
      * @param index the index of Task
      */
     public void delete(int index) {
-        dukeDb.deleteData(index);
+        database.deleteData(index);
     }
 }

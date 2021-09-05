@@ -1,8 +1,9 @@
 package duke.util;
+import java.util.ArrayList;
 
 import duke.task.Task;
 
-import java.util.ArrayList;
+
 
 /**
  * Represents a RAM for Duke.

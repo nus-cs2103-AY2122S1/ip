@@ -12,6 +12,11 @@ public class Event extends Task {
     protected LocalDateTime at;
     private Boolean hasTime = true;
 
+    /**
+     * Represents a new Event object.
+     * @param description
+     * @param at
+     */
     public Event(String description, String at) {
         super(description);
         this.at = parseTime(at);
@@ -37,14 +42,15 @@ public class Event extends Task {
         String[] str = time.split(" ");
         String[] oldDate = str[0].split("/");
         LocalDateTime localTime;
-        if(str.length > 1) {
-            String hour = str[1].substring(0,2);
-            String min = str[1].substring(2,4);
+        if (str.length > 1) {
+            String hour = str[1].substring(0, 2);
+            String min = str[1].substring(2, 4);
 
-            localTime = LocalDateTime.of(Integer.parseInt(oldDate[2]), Integer.parseInt(oldDate[1]), Integer.parseInt(oldDate[0]),
-                    Integer.parseInt(hour), Integer.parseInt(min));
+            localTime = LocalDateTime.of(Integer.parseInt(oldDate[2]), Integer.parseInt(oldDate[1]),
+                    Integer.parseInt(oldDate[0]), Integer.parseInt(hour), Integer.parseInt(min));
         } else {
-            localTime = LocalDate.of(Integer.parseInt(oldDate[2]), Integer.parseInt(oldDate[1]), Integer.parseInt(oldDate[0]))
+            localTime = LocalDate.of(Integer.parseInt(oldDate[2]), Integer.parseInt(oldDate[1]),
+                    Integer.parseInt(oldDate[0]))
                     .atStartOfDay();
             hasTime = false;
         }
@@ -54,7 +60,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String string = "[E]" + super.toString() + "(at: " ;
+        String string = "[E]" + super.toString() + "(at: ";
         if (hasTime) {
             string += at.format(DateTimeFormatter.ofPattern("HH:mm, MMM dd yyyy")) + ")";
         } else {
@@ -63,6 +69,10 @@ public class Event extends Task {
         return string;
     }
 
+    /**
+     * Tests Event class.
+     * @param args
+     */
     public static void main(String[] args) {
         Event e = new Event("return book", "2/12/2019 1800");
         System.out.println(e);

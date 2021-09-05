@@ -1,9 +1,10 @@
+import java.io.IOException;
+
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
 
-import java.io.IOException;
 
 /**
  * Represents the core of Duke.
@@ -14,6 +15,10 @@ public class Duke {
     private TaskList taskList;
     private Parser parser;
 
+    /**
+     * Represents a new Duke project.
+     * @param filePath
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
@@ -22,16 +27,16 @@ public class Duke {
     }
 
     /**
-     * Start the program
+     * Starts the program
      */
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
-        while(!isExit) {
+        while (!isExit) {
             String fullCommand = ui.readCommand();
             ui.showLine();
             isExit = parser.isExit(fullCommand);
-            if(!isExit) {
+            if (!isExit) {
                 parser.parse(fullCommand);
             }
         }

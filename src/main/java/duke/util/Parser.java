@@ -1,11 +1,12 @@
 package duke.util;
+import java.util.ArrayList;
 
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.util.ArrayList;
+
 
 /**
  * Represents a dealer to process a full command.
@@ -15,6 +16,12 @@ public class Parser {
     private Storage storage;
     private Ui ui;
 
+    /**
+     * Represents a new parser for Duke.
+     * @param taskList
+     * @param ui
+     * @param storage
+     */
     public Parser(TaskList taskList, Ui ui, Storage storage) {
         this.taskList = taskList;
         this.ui = ui;
@@ -29,7 +36,7 @@ public class Parser {
      */
     public void parse(String input) {
         String lowerCase = input.toLowerCase();
-        if(lowerCase.equals("bye")) {
+        if (lowerCase.equals("bye")) {
             return;
         } else if (lowerCase.equals("list")) {
             listCommand();
@@ -39,7 +46,7 @@ public class Parser {
                 throw new DukeException("OOPS!!! The timeline of a deadline cannot be empty.");
             }
             String item = input.substring(9, indexOfTime);
-            String by = input.substring(indexOfTime+4);
+            String by = input.substring(indexOfTime + 4);
             Task deadline = new Deadline(item, by);
             taskList.add(deadline);
             storage.add(deadline);
@@ -50,7 +57,7 @@ public class Parser {
                 throw new DukeException("OOPS!!! The timeline of a event cannot be empty.");
             }
             String item = input.substring(6, indexOfTime);
-            String at = input.substring(indexOfTime+4);
+            String at = input.substring(indexOfTime + 4);
             Task event = new Event(item, at);
             taskList.add(event);
             storage.add(event);
@@ -62,7 +69,7 @@ public class Parser {
                 taskList.add(todo);
                 storage.add(todo);
                 ui.showNewTask(todo);
-            } catch(StringIndexOutOfBoundsException e) {
+            } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("OOPS!!! The description of a event cannot be empty.");
             }
         } else if (lowerCase.startsWith("done")) {
@@ -93,7 +100,7 @@ public class Parser {
                 throw new DukeException("OOPS!!! The target of deleting duke.task cannot be empty.");
             }
         } else if (lowerCase.startsWith("find")) {
-            try{
+            try {
                 String keyword = lowerCase.substring(5).trim();
                 findKeyword(keyword);
             } catch (StringIndexOutOfBoundsException e) {
@@ -112,8 +119,8 @@ public class Parser {
         if (taskList.length() > 0) {
             items = items + "1. " + taskList.get(0).toString();
         }
-        for (int i = 2 ; i <= taskList.length(); i++) {
-            items = items + "\n    " + i + ". " + taskList.get(i-1).toString();
+        for (int i = 2; i <= taskList.length(); i++) {
+            items = items + "\n    " + i + ". " + taskList.get(i - 1).toString();
         }
         ui.showList(items);
     }
@@ -128,6 +135,10 @@ public class Parser {
         return command.toLowerCase().equals("bye");
     }
 
+    /**
+     * Finds items with keyword given by user.
+     * @param keyword
+     */
     public void findKeyword(String keyword) {
         ArrayList<Task> results = new ArrayList<>();
         for (int i = 0; i < taskList.length(); i++) {

@@ -1,16 +1,16 @@
-package test;
+package duke.util;
+
+import static org.testng.AssertJUnit.assertEquals;
+import static org.testng.AssertJUnit.fail;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
 
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.util.TaskList;
-import org.testng.annotations.Test;
-
-import java.util.ArrayList;
-
-import static org.testng.AssertJUnit.assertEquals;
-import static org.testng.AssertJUnit.fail;
 
 class TaskListTest {
 

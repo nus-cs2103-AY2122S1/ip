@@ -1,26 +1,27 @@
 package duke.util;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.format.DateTimeFormatter;
-
-import java.util.ArrayList;
-import java.util.Scanner;
-
 /**
  * Represents a hard disk.
  */
-public class DukeDB {
+public class Database {
     private File file;
 
-    public DukeDB(String filePath) {
+    /**
+     * Represents a database for Duke.
+     * @param filePath
+     */
+    public Database(String filePath) {
         try {
             file = new File(filePath);
             if (!file.exists()) {
@@ -58,7 +59,7 @@ public class DukeDB {
      */
     public void addData(Task task) {
         try {
-            FileWriter fileWriter = new FileWriter(file,true);
+            FileWriter fileWriter = new FileWriter(file, true);
             String out = "\n";
 
             if (task instanceof Deadline) {
@@ -69,17 +70,17 @@ public class DukeDB {
                 out += "E &";
             }
 
-            if(task.isDone()) {
+            if (task.isDone()) {
                 out += " 1 & ";
             } else {
                 out += " 0 & ";
             }
 
             out += task.getDescription();
-            if(task instanceof Deadline) {
+            if (task instanceof Deadline) {
                 out += " & " + ((Deadline) task).getBy().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
             }
-            if(task instanceof Event) {
+            if (task instanceof Event) {
                 out += " & " + ((Event) task).getAt().format(DateTimeFormatter.ofPattern("dd/MM/yyyy hhmm"));
             }
             fileWriter.write(out);
@@ -98,11 +99,11 @@ public class DukeDB {
     public void entireWriteData (ArrayList<Task> tasks) {
         try {
             FileWriter fileWriter = new FileWriter(file);
-            for(int i = 0 ; i < tasks.size();i++) {
+            for (int i = 0; i < tasks.size(); i++) {
 
                 Task task = tasks.get(i);
                 String out;
-                if(i > 0) {
+                if (i > 0) {
                     out = "\n";
                 } else {
                     out = "";
@@ -171,7 +172,7 @@ public class DukeDB {
         Task task;
         boolean isDone = false;
         String[] str = string.split("&");
-        for(int i = 0; i < str.length; i++) {
+        for (int i = 0; i < str.length; i++) {
             str[i] = str[i].trim();
         }
 
@@ -185,7 +186,7 @@ public class DukeDB {
         case "T":
             item = str[2];
             task = new Todo(item);
-            if(isDone) {
+            if (isDone) {
                 task.markAsDone();
             }
             break;
@@ -193,7 +194,7 @@ public class DukeDB {
             item = str[2];
             time = str[3];
             task = new Event(item, time);
-            if(isDone) {
+            if (isDone) {
                 task.markAsDone();
             }
             break;
@@ -201,7 +202,7 @@ public class DukeDB {
             item = str[2];
             time = str[3];
             task = new Deadline(item, time);
-            if(isDone) {
+            if (isDone) {
                 task.markAsDone();
             }
             break;
@@ -212,12 +213,17 @@ public class DukeDB {
         return task;
     }
 
+    /**
+     * Tests Task class.
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
-        DukeDB data = new DukeDB("data/tasks.txt");
+        Database data = new Database("data/tasks.txt");
 
         data.addData(new Todo("hahaha"));
         ArrayList<Task> lst = data.readData();
-        for (int i = 0 ; i < lst.size(); i++) {
+        for (int i = 0; i < lst.size(); i++) {
             System.out.println(lst.get(i));
         }
         data.deleteData(1);

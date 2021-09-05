@@ -1,14 +1,19 @@
 package duke.util;
-
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.task.Task;
+
+
+
 /**
- * Represents the User Interfacer of Duke.
+ * Represents the User Interface of Duke.
  */
 public class Ui {
+    /**
+     * Prints results out with a specific format.
+     * @param strings
+     */
     public void print(String... strings) {
         System.out.println("_________________________________________________");
         for (String string: strings) {
@@ -23,7 +28,6 @@ public class Ui {
     public void showLine() {
         System.out.println("_________________________________________________");
     }
-    
 
     /**
      * Prints a greeting.
@@ -91,8 +95,8 @@ public class Ui {
      */
     public void showFind(ArrayList<Task> results) {
         String words = "Here are the matching tasks in your list:";
-        for(int i = 1; i <= results.size(); i++) {
-            words = words + "\n    " + i + ". " + results.get(i-1);
+        for (int i = 1; i <= results.size(); i++) {
+            words = words + "\n    " + i + ". " + results.get(i - 1);
         }
         print(words);
     }
