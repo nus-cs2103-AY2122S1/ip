@@ -11,12 +11,12 @@ public class TaskTest {
     @Test
     public void getTaskTypeTest() {
         try {
-            assertEquals(Task.TaskName.getTaskType("[T]"), Task.TaskName.TODO);
-            assertEquals(Task.TaskName.getTaskType("todo"), Task.TaskName.TODO);
-            assertEquals(Task.TaskName.getTaskType("[D]"), Task.TaskName.DEADLINE);
-            assertEquals(Task.TaskName.getTaskType("deadline"), Task.TaskName.DEADLINE);
-            assertEquals(Task.TaskName.getTaskType("[E]"), Task.TaskName.EVENT);
-            assertEquals(Task.TaskName.getTaskType("event"), Task.TaskName.EVENT);
+            assertEquals(TaskName.getTaskType("[T]"), TaskName.TODO);
+            assertEquals(TaskName.getTaskType("todo"), TaskName.TODO);
+            assertEquals(TaskName.getTaskType("[D]"), TaskName.DEADLINE);
+            assertEquals(TaskName.getTaskType("deadline"), TaskName.DEADLINE);
+            assertEquals(TaskName.getTaskType("[E]"), TaskName.EVENT);
+            assertEquals(TaskName.getTaskType("event"), TaskName.EVENT);
         } catch (DukeException e) {
             System.out.println(e.getMessage());
         }

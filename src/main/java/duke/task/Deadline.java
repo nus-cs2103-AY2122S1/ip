@@ -21,7 +21,7 @@ public class Deadline extends Task {
      * @param by The String describing when the duke.task.Deadline need to be done by
      */
     public Deadline(String description, String by, Boolean isDone) {
-        super(description, isDone);
+        super(TaskName.DEADLINE, description, isDone);
         this.by = by;
         try {
             byLd = LocalDate.parse(by);
@@ -39,7 +39,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
+        return taskName.getTaskIcon() + super.toString() + " (by: "
                 + (byLd != null
                     ? byLd.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                     : this.by)
@@ -54,6 +54,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toData() {
-        return "[D] | " + super.toData() + " | " + this.by;
+        return taskName.getTaskIcon() + " | " + super.toData() + " | " + this.by;
     }
 }
