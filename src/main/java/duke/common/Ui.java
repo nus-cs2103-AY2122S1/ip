@@ -1,6 +1,7 @@
-package duke;
+package duke.common;
 
 import java.util.ArrayList;
+import duke.common.task.Task;
 
 public class Ui {
     /**

@@ -1,7 +1,8 @@
-package duke;
+package duke.common;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import duke.common.task.Task;
 
 /**
  *

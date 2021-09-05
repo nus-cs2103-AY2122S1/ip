@@ -1,5 +1,9 @@
-package duke;
+package duke.common;
 
+import duke.common.Parser;
+import duke.common.Storage;
+import duke.common.TaskList;
+import duke.common.Ui;
 import javafx.scene.image.Image;
 
 public class Duke {
@@ -41,6 +45,8 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return parser.parse(input, taskList, ui);
+        String response = parser.parse(input, taskList, ui);
+        storage.store(taskList);
+        return response;
     }
 }
