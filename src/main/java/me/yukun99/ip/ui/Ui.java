@@ -2,6 +2,9 @@ package me.yukun99.ip.ui;
 
 import java.io.IOException;
 import java.util.Objects;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,12 +14,17 @@ import me.yukun99.ip.core.Parser;
 import me.yukun99.ip.core.Storage;
 import me.yukun99.ip.core.TaskFinder;
 import me.yukun99.ip.core.TaskList;
+import me.yukun99.ip.exceptions.HelpBotIoException;
 import me.yukun99.ip.ui.elements.Window;
 
 /**
  * Class used to handle message the Ui and responses from the HelpBot.
  */
 public class Ui {
+    // Title of the HelpBot window.
+    private static final String TITLE = "Bob v2.0 - Why are you even using me?";
+    private static final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+
     // Name of the HelpBot.
     private final String name;
     // List of tasks to be completed.
@@ -52,15 +60,21 @@ public class Ui {
         stage.setResizable(false);
         try {
             AnchorPane anchorPane = fxmlLoader.load();
-            fxmlLoader.<Window>getController().setup(parser, this, storage, name);
+            fxmlLoader.<Window>getController().setup(parser, storage, name);
+            assert anchorPane != null;
             Scene scene = new Scene(anchorPane);
 
             stage.setScene(scene);
-            stage.setTitle("Bob v2.0 - Why are you even using me?");
+            stage.setTitle(TITLE);
             stage.setResizable(false);
             stage.show();
-        } catch (IOException ignored) {
-            // ignored
+        } catch (IOException e) {
+            System.out.println("Unable to load necessary files for GUI, closing in 3 seconds.");
+            executorService.schedule(stage::close, 3, TimeUnit.SECONDS);
+        } catch (HelpBotIoException e) {
+            System.out.println(
+                    "Unable to load tasks. Please delete your tasks file before continuing. Closing in 3 seconds.");
+            executorService.schedule(stage::close, 3, TimeUnit.SECONDS);
         }
     }
 

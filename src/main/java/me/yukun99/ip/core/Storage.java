@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import me.yukun99.ip.exceptions.HelpBotDateTimeFormatException;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskTypeException;
+import me.yukun99.ip.exceptions.HelpBotIoException;
 import me.yukun99.ip.tasks.Deadline;
 import me.yukun99.ip.tasks.Event;
 import me.yukun99.ip.tasks.Task;
@@ -18,7 +19,7 @@ import me.yukun99.ip.tasks.ToDo;
  */
 public class Storage {
     private final String outpath;
-    private final String filepath;
+    private final String savepath;
     private final TaskList taskList;
 
     /**
@@ -30,9 +31,10 @@ public class Storage {
      */
     public Storage(String filepath, TaskList taskList) throws IOException {
         this.taskList = taskList;
-        this.filepath = filepath.replace("\\", "/");
+        filepath.replace("\\", "/");
+        this.savepath = filepath + "/tasks.txt";
         this.outpath = filepath + "/ACTUAL.txt";
-        File previous = new File(this.filepath + "/ACTUAL.txt");
+        File previous = new File(outpath);
         if (previous.exists()) {
             previous.delete();
         }
@@ -43,19 +45,23 @@ public class Storage {
      * Saves reply message from the bot to output file.
      *
      * @param message Reply message from the bot.
-     * @throws IOException If message could not be written to file.
+     * @throws HelpBotIoException If message could not be written to file.
      */
-    public void saveMessage(String message) throws IOException {
-        FileWriter output = new FileWriter(outpath, true);
-        output.write(message);
-        output.close();
+    public void saveMessage(String message) throws HelpBotIoException {
+        try {
+            FileWriter output = new FileWriter(outpath, true);
+            output.write(message);
+            output.close();
+        } catch (IOException e) {
+            throw new HelpBotIoException(e, outpath);
+        }
     }
 
     /**
      * Loads previously saved tasks from file.
      */
     public void loadTasks() {
-        File saved = new File(filepath + "/tasks.txt");
+        File saved = new File(savepath);
         Scanner savedScanner;
         try {
             savedScanner = new Scanner(saved);
@@ -113,33 +119,36 @@ public class Storage {
      * Saves a task to file.
      *
      * @param task Task to be saved to file.
+     * @throws HelpBotIoException If task could not be saved.
      */
-    public void saveTask(Task task) {
+    public void saveTask(Task task) throws HelpBotIoException {
         try {
-            File previous = new File(filepath + "/tasks.txt");
+            File previous = new File(savepath);
             if (!previous.exists()) {
                 previous.createNewFile();
             }
-            FileWriter output = new FileWriter(filepath + "/tasks.txt", true);
+            FileWriter output = new FileWriter(savepath, true);
             String strTask = task.saveString();
             output.write(strTask);
             output.close();
-        } catch (IOException ignored) {
-            //ignored
+        } catch (IOException e) {
+            throw new HelpBotIoException(e, savepath);
         }
     }
 
     /**
      * Saves the updated task list to file.
+     *
+     * @throws HelpBotIoException If task could not be uploaded.
      */
-    public void updateTasks() {
+    public void updateTasks() throws HelpBotIoException {
         try {
-            FileWriter output = new FileWriter(filepath + "/tasks.txt");
+            FileWriter output = new FileWriter(savepath);
             String strTaskList = taskList.saveString();
             output.write(strTaskList);
             output.close();
-        } catch (IOException ignored) {
-            //ignored
+        } catch (IOException e) {
+            throw new HelpBotIoException(e, savepath);
         }
     }
 }

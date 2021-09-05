@@ -6,6 +6,7 @@ import java.util.List;
 import me.yukun99.ip.core.Storage;
 import me.yukun99.ip.core.TaskList;
 import me.yukun99.ip.exceptions.HelpBotInvalidTaskException;
+import me.yukun99.ip.exceptions.HelpBotIoException;
 import me.yukun99.ip.tasks.Task;
 import me.yukun99.ip.ui.Message;
 
@@ -25,7 +26,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String getResponse() throws HelpBotInvalidTaskException {
+    public String getResponse() throws HelpBotInvalidTaskException, HelpBotIoException {
         List<Task> deletedTasks = new ArrayList<>();
         if (args.length > 1) {
             deletedTasks = taskList.deleteTasks(args);

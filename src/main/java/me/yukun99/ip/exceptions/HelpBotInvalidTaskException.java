@@ -20,8 +20,8 @@ public class HelpBotInvalidTaskException extends HelpBotIllegalArgumentException
 
     @Override
     public String toString() {
-        return super.toString() + ", caused by:\n"
-                + "Index '" + task + "' does not correspond to a valid task, caused by:\n"
-                + super.getCause();
+        return super.toString() + ", caused by:"
+                + System.lineSeparator() + "Index '" + task + "' does not correspond to a valid task, caused by:"
+                + System.lineSeparator() + super.getCause();
     }
 }
