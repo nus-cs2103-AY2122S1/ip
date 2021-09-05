@@ -78,6 +78,7 @@ public class Storage {
         } else {
             try {
                 taskList.createNewFile();
+                assert taskList.exists() : "file at path " + this.filePath + " should exist";
                 return new TaskList(new ArrayList<Task>());
             } catch (IOException e) {
                 throw new DukeException("Something went wrong: " + e.getMessage());

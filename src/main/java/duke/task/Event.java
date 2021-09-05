@@ -100,6 +100,9 @@ public class Event extends Task {
         } else if (dateTimeStartInput.length == 2 && dateTimeStartInput.length == 2) {
             startDate = Parser.parseDateAndTime(dateTimeStartInput[0], dateTimeStartInput[1]);
             endDate = Parser.parseDateAndTime(dateTimeEndInput[0], dateTimeEndInput[1]);
+
+            assert startDate.compareTo(endDate) < 0 : "startDate should be earlier than endDate";
+
             isDateOnly = false;
         } else {
             throw new DukeException(exceptionMessage);
