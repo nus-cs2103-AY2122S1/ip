@@ -19,7 +19,13 @@ public class FindCommand extends Command {
      * @param tasks     the list of tasks to search from.
      */
     public FindCommand(String userInput, TaskList tasks) {
-        this.substring = userInput.split(" ", 2)[1];
+        assert userInput != null : "userInput cannot be null.";
+        assert tasks != null : "TaskList cannot be null.";
+
+        String[] splitUserInput = userInput.split(" ", 2);
+        assert splitUserInput.length == 2 : "userInput is incorrect!";
+
+        this.substring = splitUserInput[1];
         this.tasks = tasks;
     }
 

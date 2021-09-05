@@ -29,6 +29,10 @@ public class AddCommand extends Command {
      * @param tasks     list tasks to add the new task to
      */
     public AddCommand(AddCommandType addType, String userInput, TaskList tasks) {
+        assert userInput != null : "userInput cannot be null.";
+        assert tasks != null : "TaskList cannot be null.";
+        assert addType != null : "Command type cannot be null.";
+
         this.addType = addType;
         this.userInput = userInput;
         this.tasks = tasks;

@@ -16,6 +16,8 @@ public class ListCommand extends Command {
      * @param tasks list of tasks to list tasks from
      */
     public ListCommand(TaskList tasks) {
+        assert tasks != null : "TaskList cannot be null.";
+
         this.tasks = tasks;
     }
 

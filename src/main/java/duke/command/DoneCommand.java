@@ -19,6 +19,9 @@ public class DoneCommand extends Command {
      * @param tasks     list of tasks to mark a task done from.
      */
     public DoneCommand(String userInput, TaskList tasks) {
+        assert userInput != null : "userInput cannot be null.";
+        assert tasks != null : "TaskList cannot be null.";
+
         this.userInput = userInput;
         this.tasks = tasks;
     }

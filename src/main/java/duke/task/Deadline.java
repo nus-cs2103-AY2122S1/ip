@@ -30,6 +30,9 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String deadline) throws DateTimeParseException {
         super(description);
+
+        assert deadline != null : "Deadline date cannot be null.";
+
         isDateAndTime = false;
         this.deadlineDate = LocalDate.parse(deadline);
     }
@@ -44,6 +47,11 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String deadlineDate, String deadlineTime) throws DateTimeParseException {
         super(description);
+
+        assert deadlineDate != null : "Deadline date cannot be null.";
+        assert deadlineTime != null : "Deadline time cannot be null.";
+
+
         this.deadlineDate = LocalDate.parse(deadlineDate);
         this.deadlineTime = LocalTime.parse(deadlineTime);
         isDateAndTime = true;

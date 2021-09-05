@@ -30,6 +30,9 @@ public class Event extends Task {
      */
     public Event(String description, String eventDate) throws DateTimeParseException {
         super(description);
+
+        assert eventDate != null : "Event date cannot be null.";
+
         this.eventDate = LocalDate.parse(eventDate);
     }
 
@@ -43,6 +46,10 @@ public class Event extends Task {
      */
     public Event(String description, String eventDate, String eventTime) throws DateTimeParseException {
         super(description);
+
+        assert eventDate != null : "Event date cannot be null.";
+        assert eventTime != null : "Event date cannot be null.";
+
         this.eventDate = LocalDate.parse(eventDate);
         this.eventTime = LocalTime.parse(eventTime);
         isDateAndTime = true;

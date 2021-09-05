@@ -19,6 +19,9 @@ public class DeleteCommand extends Command {
      * @param tasks     list of tasks to delete the user-specified task from
      */
     public DeleteCommand(String userInput, TaskList tasks) {
+        assert userInput != null : "userInput cannot be null.";
+        assert tasks != null : "TaskList cannot be null.";
+
         this.userInput = userInput;
         this.tasks = tasks;
     }
