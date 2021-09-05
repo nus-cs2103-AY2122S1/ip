@@ -58,6 +58,8 @@ public class TaskList {
                 if (time.equals(date)) {
                     sb.append(responseLogic.taskWithIndexReponse(index, task));
                 }
+            } else {
+                assert false : task;
             }
         }
         return sb.toString();
