@@ -26,7 +26,7 @@ class Deadline extends Task {
     }
 
     @Override
-    public String saveAsString() {
-        return 1 + "\n" + super.saveAsString() + "\n" + by.format(INPUT_FORMAT) + "\n";
+    public String saveAsData() {
+        return 1 + "\n" + super.saveAsData() + "\n" + by.format(INPUT_FORMAT) + "\n";
     }
 }

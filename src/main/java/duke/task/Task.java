@@ -67,7 +67,8 @@ public class Task {
      *
      * @return The String representation of `Task` object in data.
      */
-    public String saveAsString() {
+    public String saveAsData() {
         return isDone + "\n" + description;
     }
 }
+
