@@ -20,7 +20,8 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    /**Toggles completion of Task
+    /**
+     * Toggles completion of Task
      *
      * @return New status of Task
      */
@@ -41,7 +42,7 @@ public abstract class Task {
     /**
      * String representation of Task
      *
-     * @return task display
+     * @return Task display
      */
     @Override
     public String toString() {

@@ -11,15 +11,15 @@ import task.TaskList;
  */
 public class CommandAddDeadline extends Command {
     private final TaskList taskList;
-    private final Matcher input;
+    private final String[] input;
 
     /**
      * Constructor
      *
      * @param taskList Task list
-     * @param groups Matcher with info needed to create the class
+     * @param input Array with info needed to create the class
      */
-    public CommandAddDeadline(TaskList taskList, Matcher groups) {
+    public CommandAddDeadline(TaskList taskList, String[] input) {
         this.commandName = "deadline <string> /by DD/MM/YYYY xxxx";
         this.description = "Creates a deadline task";
         this.arguments = new String[]{
@@ -29,7 +29,7 @@ public class CommandAddDeadline extends Command {
         };
 
         this.taskList = taskList;
-        input = groups;
+        this.input = input;
     }
 
     /**
@@ -39,9 +39,9 @@ public class CommandAddDeadline extends Command {
     public String execute() {
         try {
             return taskList.add(new TaskDeadline(
-                    input.group(1),
-                    Command.getDate(input.group(2)),
-                    input.group(3),
+                    input[0],
+                    Command.getDate(input[1]),
+                    input[2],
                     false));
         } catch (DateTimeParseException e) {
             return "Please enter a valid date! :(";

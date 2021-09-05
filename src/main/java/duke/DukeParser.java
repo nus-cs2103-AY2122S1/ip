@@ -20,24 +20,24 @@ import task.TaskList;
  */
 public class DukeParser {
 
-    private final TaskList taskList;
-
     /**
      * Patterns for the Parser to look out for in the input
      */
-    private final Pattern listPattern = Pattern.compile("list( .+)?", Pattern.CASE_INSENSITIVE);
-    private final Pattern donePattern = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
-    private final Pattern deletePattern = Pattern.compile("delete (\\d+)", Pattern.CASE_INSENSITIVE);
-    private final Pattern todoPattern = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
-    private final Pattern deadlinePattern = Pattern.compile(
+    private static final Pattern LIST_PATTERN = Pattern.compile("list( .+)?", Pattern.CASE_INSENSITIVE);
+    private static final Pattern DONE_PATTERN = Pattern.compile("done (\\d+)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern DELETE_PATTERN = Pattern.compile("delete (\\d+)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern TODO_PATTERN = Pattern.compile("todo (.+)", Pattern.CASE_INSENSITIVE);
+    private static final Pattern DEADLINE_PATTERN = Pattern.compile(
             "deadline (.+) /by (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
             Pattern.CASE_INSENSITIVE);
-    private final Pattern eventPattern = Pattern.compile(
+    private static final Pattern EVENT_PATTERN = Pattern.compile(
             "event (.+) /at (\\d{1,2}/\\d{1,2}/\\d{4}+)( \\d{4}+)?",
             Pattern.CASE_INSENSITIVE);
 
+    private final TaskList taskList;
+
     /**
-     * Constructor; instantiates the task list to be edited
+     * Constructor; Instantiates the task list to be edited
      *
      * @param tasks Task list to edit using this Parser object
      */
@@ -57,12 +57,12 @@ public class DukeParser {
             return new CommandHelp();
         }
 
-        final Matcher checkList = listPattern.matcher(input);
-        final Matcher checkDone = donePattern.matcher(input);
-        final Matcher checkDelete = deletePattern.matcher(input);
-        final Matcher checkTodo = todoPattern.matcher(input);
-        final Matcher checkDeadline = deadlinePattern.matcher(input);
-        final Matcher checkEvent = eventPattern.matcher(input);
+        final Matcher checkList = LIST_PATTERN.matcher(input);
+        final Matcher checkDone = DONE_PATTERN.matcher(input);
+        final Matcher checkDelete = DELETE_PATTERN.matcher(input);
+        final Matcher checkTodo = TODO_PATTERN.matcher(input);
+        final Matcher checkDeadline = DEADLINE_PATTERN.matcher(input);
+        final Matcher checkEvent = EVENT_PATTERN.matcher(input);
 
         if (checkList.matches()) {
             return new CommandList(taskList, checkList.group(1));
@@ -73,9 +73,15 @@ public class DukeParser {
         } else if (checkTodo.matches()) {
             return new CommandAddTodo(taskList, checkTodo.group(1));
         } else if (checkDeadline.matches()) {
-            return new CommandAddDeadline(taskList, checkDeadline);
+            return new CommandAddDeadline(taskList, new String[]{checkDeadline.group(1),
+                    checkDeadline.group(2),
+                    checkDeadline.group(3)
+            });
         } else if (checkEvent.matches()) {
-            return new CommandAddEvent(taskList, checkEvent);
+            return new CommandAddEvent(taskList, new String[]{checkEvent.group(1),
+                    checkEvent.group(2),
+                    checkEvent.group(3)
+            });
         } else {
             return new CommandInvalid(input);
         }

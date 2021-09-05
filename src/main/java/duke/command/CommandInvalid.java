@@ -22,7 +22,7 @@ public class CommandInvalid extends Command {
     }
 
     /**
-     * Display error message
+     * Displays error message
      */
     @Override
     public String execute() {

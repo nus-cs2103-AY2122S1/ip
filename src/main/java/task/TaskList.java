@@ -65,9 +65,9 @@ public class TaskList {
      */
     public String toggleDone(int index) {
         try {
-            boolean result = tasks.get(index - 1).toggleDone();
+            boolean isDone = tasks.get(index - 1).toggleDone();
             Storage.saveList(tasks);
-            return (result
+            return (isDone
                     ? "sugoi! Duke-san marked this task as done!"
                     : "Duke-san marked this task as not done!")
                     + '\n' + Ui.OUTPUT_SPACES + tasks.get(index - 1);
@@ -85,10 +85,10 @@ public class TaskList {
      */
     public String delete(int index) {
         try {
-            Task removed = tasks.remove(index - 1);
+            Task removedTask = tasks.remove(index - 1);
             Storage.saveList(tasks);
             return "Noted. Duke-san removed this task:"
-                    + removed
+                    + removedTask
                     + getSize();
         } catch (IndexOutOfBoundsException e) {
             return "There's no task at index " + index + "!!";
@@ -103,24 +103,24 @@ public class TaskList {
     public String displayList(ArrayList<Predicate<Task>> filters) {
         if (tasks.size() == 0) {
             return "There is nothing to display! :angery:";
-        } else {
-            // Get resultant list after applying all filters
-            List<Task> list = tasks.stream()
-                    .filter(task -> filters.stream()
-                            .allMatch(predicate -> predicate.test(task)))
-                    .collect(Collectors.toList());
-
-            if (list.size() == 0) {
-                return "There is nothing to display! :angery:";
-            } else {
-                // Add proper formatting and display list
-                StringBuilder result = new StringBuilder();
-                for (int i = 0; i < list.size(); i++) {
-                    result.append(i + 1).append(". ").append(list.get(i)).append('\n');
-                }
-
-                return result.toString();
-            }
         }
+
+        // Get resultant list after applying all filters
+        List<Task> filteredTasks = tasks.stream()
+                .filter(task -> filters.stream()
+                        .allMatch(predicate -> predicate.test(task)))
+                .collect(Collectors.toList());
+
+        if (filteredTasks.size() == 0) {
+            return "There is nothing to display! :angery:";
+        }
+
+        // Add proper formatting and return resultant list
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < filteredTasks.size(); i++) {
+            result.append(i + 1).append(". ").append(filteredTasks.get(i)).append('\n');
+        }
+
+        return result.toString();
     }
 }
