@@ -58,10 +58,10 @@ public class Storage {
     public void loadSavedTasks(Duke duke) throws IOException, DukeUnableLoadTask {
         File f = new File(this.FILE_PATH);
         Scanner sc = new Scanner(f); // Scanner with file as source
-        loadTasksToDuke(sc, duke);
+        processTasksToDuke(sc, duke);
     }
 
-    private void loadTasksToDuke(Scanner sc, Duke duke) {
+    private void processTasksToDuke(Scanner sc, Duke duke) {
         int i = 1; // index counter
 
         while (sc.hasNextLine()) {
