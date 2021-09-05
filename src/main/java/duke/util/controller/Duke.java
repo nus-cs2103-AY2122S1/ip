@@ -3,6 +3,7 @@ package duke.util.controller;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.function.Predicate;
 
 import duke.util.commands.AddCommand;
 import duke.util.commands.CommandList;
@@ -40,7 +41,7 @@ public class Duke {
     private final Storage storage;
     private final TaskList tasks;
     private final DateTaskTable dateTaskTable;
-
+    private TaskList displayTasks;
 
 
     /**
@@ -61,6 +62,7 @@ public class Duke {
         } catch (IOException | DukeException ex) {
             ui.print(ex.getMessage());
         }
+        this.displayTasks = this.tasks;
         ui.print_logo();
     }
 
@@ -167,8 +169,19 @@ public class Duke {
         } catch (IOException e) {
             ui.printErrorMessage(e);
         }
-
     }
+
+    /**
+     * Filters the stored tasks and outputs into
+     * the display section.
+     *
+     * @param filter The predicate to filter with, keeps the task in display if true.
+     */
+    public void filterDisplayList(Predicate<Task> filter) {
+        this.displayTasks = this.tasks.filter(filter);
+        this.printList();
+    }
+
 
 
 
@@ -181,7 +194,7 @@ public class Duke {
      * this method call not used?
      */
     public void printList() {
-        Duke.out.setItems(FXCollections.observableArrayList(this.tasks));
+        Duke.out.setItems(FXCollections.observableArrayList(this.displayTasks));
     }
 
 

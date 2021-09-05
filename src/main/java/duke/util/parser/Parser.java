@@ -3,6 +3,7 @@ package duke.util.parser;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 import duke.util.commands.AddCommand;
 import duke.util.commands.CommandList;
@@ -40,6 +41,7 @@ public class Parser {
     private static final String LIST = "list";
     private static final String BYE = "bye";
     private static final String FIND = "find";
+    private static final String THOROUGHFIND = "hfind";
     //is it just me or does the parser
     //have to contain all the objects to send the information to
     private final Ui ui;
@@ -110,7 +112,7 @@ public class Parser {
     private void oneArgumentParser(String cmd, CommandList commands, String description) throws DukeException {
         switch (cmd) {
         case FIND:
-            find(commands, description);
+            find(commands, t -> t.containsPattern(description));
             break;
         case DONE:
             markAsDone(commands, description);
@@ -151,8 +153,8 @@ public class Parser {
         commands.add(new AddCommand(taskList, t));
     }
 
-    private void find(CommandList commands, String description) {
-        commands.add(() -> ui.list(taskList.filter(t -> t.contains(description.trim()))));
+    private void find(CommandList commands, Predicate<Task> predicate) {
+        commands.add(() -> ui.list(taskList.filter(predicate)));
     }
 
     private void markAsDone(CommandList commands, String description) throws DukeException {

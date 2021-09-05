@@ -44,6 +44,8 @@ public class MainWindow extends AnchorPane {
     private ListView<Task> listOfTasks;
     @FXML
     private BorderPane borderPane;
+    @FXML
+    private TextField searchField;
 
     private Duke duke;
 
@@ -150,6 +152,22 @@ public class MainWindow extends AnchorPane {
             tasks.get(i).done();
         }
         duke.printList();
+    }
+
+    @FXML
+    private void handleSearchEntered() {
+        //when there is nothing entered
+        if (searchField.getText().equals("")) {
+            handleClearButton();
+            return;
+        }
+        duke.filterDisplayList(task -> task.containsPattern(searchField.getText()));
+
+    }
+
+    @FXML
+    private void handleClearButton() {
+        duke.filterDisplayList(task -> true);
     }
 
 

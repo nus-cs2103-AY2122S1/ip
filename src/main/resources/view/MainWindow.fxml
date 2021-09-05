@@ -21,7 +21,7 @@
          </items></ToolBar>
       <ScrollPane fx:id="scrollPane1" hbarPolicy="NEVER" hvalue="1.0" layoutX="522.0" layoutY="35.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" vvalue="1.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
          <content>
-            <ListView fx:id="listOfTasks" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="170.0" prefWidth="248.0" />
+            <ListView fx:id="listOfTasks" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="166.0" prefWidth="248.0" />
          </content>
       </ScrollPane>
       <Text fx:id="taskDisplay" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="216.0" AnchorPane.bottomAnchor="586.98828125" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="554.0" AnchorPane.topAnchor="-12.94921875" />
@@ -55,6 +55,9 @@
             <Button mnemonicParsing="false" onMouseClicked="#handleDoneTasks" prefHeight="55.0" prefWidth="121.0" text="Done" GridPane.columnIndex="1" />
          </children>
       </GridPane>
+      <TextField fx:id="searchField" layoutX="305.0" layoutY="35.0" onAction="#handleSearchEntered" prefHeight="25.0" prefWidth="164.0" promptText="Enter search value" />
+      <Button layoutX="468.0" layoutY="35.0" mnemonicParsing="false" onAction="#handleSearchEntered" text="Search" />
+      <Button layoutX="468.0" layoutY="60.0" mnemonicParsing="false" onAction="#handleClearButton" prefHeight="25.0" prefWidth="52.0" text="clear" />
       
     </children>
 </AnchorPane>

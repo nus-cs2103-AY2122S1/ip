@@ -128,6 +128,27 @@ public abstract class Task {
 
     }
 
+    /**
+     * Checks if the name contains the input string as a
+     * pattern, not case sensitive.
+     *
+     * @param s Input word.
+     * @return True when the input string pattern is in the name.
+     */
+    public boolean containsPattern(String s) {
+        String test = s.toLowerCase().trim();
+        String base = this.name.toLowerCase().trim();
+        for (int i = 0; i < base.length() - s.length() + 1; i++) {
+            if (test.equals(base.substring(i, i + test.length()))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
     @Override
     public String toString() {
         String checkBox = this.isDone
