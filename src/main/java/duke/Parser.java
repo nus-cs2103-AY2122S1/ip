@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Parse user's input, identify whether it is a valid command and calls relevant method(s) to execute the command.
@@ -38,7 +37,6 @@ public class Parser {
      **/
     private boolean checkDoneCommand(String userInput) {
         String copy = userInput.replace("done", "");
-        //Learnt from https://attacomsian.com/blog/java-extract-digits-from-string
         copy = copy.replaceAll("[0-9]", "");
         copy = copy.trim();
         return copy.isEmpty();
