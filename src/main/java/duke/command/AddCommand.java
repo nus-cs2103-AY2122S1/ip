@@ -38,14 +38,16 @@ public class AddCommand extends Command {
     public String execute() {
         Task newTask = null;
         String[] inputs = this.userInput.split(" ", 2);
-        String[] args = inputs[1].split(" /by ", 2);
-        String[] datetimeArgs = args[1].split(" ", 2);
+        String[] args;
+        String[] datetimeArgs;
         try {
             switch (this.addType) {
             case todo:
                 newTask = new Todo(inputs[1]);
                 break;
             case event:
+                args = inputs[1].split(" /at ", 2);
+                datetimeArgs = args[1].split(" ", 2);
                 if (datetimeArgs.length == 1) {
                     newTask = new Event(args[0], args[1]);
                 } else {
@@ -53,6 +55,8 @@ public class AddCommand extends Command {
                 }
                 break;
             case deadline:
+                args = inputs[1].split(" /by ", 2);
+                datetimeArgs = args[1].split(" ", 2);
                 if (datetimeArgs.length == 1) {
                     newTask = new Deadline(args[0], args[1]);
                 } else {

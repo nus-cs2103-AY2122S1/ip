@@ -42,7 +42,7 @@ public class TaskList {
      *
      * @param idx index of the task to be marked as done.
      */
-    public void markDone(int idx) {
+    public void markDone(int idx) throws IllegalArgumentException {
         if (idx < 0 || idx >= tasks.size()) {
             throw new IllegalArgumentException(
                     "☹ OOPS!!! Index entered is not valid. "
@@ -58,7 +58,7 @@ public class TaskList {
      * @param idx index of the task to get from storage.
      * @return the task.
      */
-    public Task get(int idx) {
+    public Task get(int idx) throws IllegalArgumentException {
         if (idx < 0 || idx >= tasks.size()) {
             throw new IllegalArgumentException(
                 "☹ OOPS!!! Index entered is not valid. "
@@ -73,7 +73,7 @@ public class TaskList {
      *
      * @param idx index of the task to delete from storage.
      */
-    public void delete(int idx) {
+    public void delete(int idx) throws IllegalArgumentException {
         if (idx < 0 || idx >= tasks.size()) {
             throw new IllegalArgumentException(
                 "☹ OOPS!!! Index entered is not valid. "
