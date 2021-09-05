@@ -38,6 +38,7 @@ public class Storage {
      * @param s The initialization value. 0 is not done. 1 is done.
      */
     private void initializeDone(Task t, String s) {
+        assert(s.equals("1") || s.equals("0"));
         if (s.equals("1")) {
             t.setDone();
         }
@@ -96,6 +97,7 @@ public class Storage {
      * @param t The list of tasks to be saved into the data.txt file.
      */
     public void save(TaskList t) {
+        assert(t != null);
         try {
             File fOld = new File(filePath);
             fOld.delete();

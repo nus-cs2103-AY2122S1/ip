@@ -13,6 +13,7 @@ public class DukeException extends Exception {
      * @param errorType The type of error to result in the correct error message
      */
     public DukeException(String errorType) {
+        assert(errorType != null);
         switch (errorType) {
         case "invalid input":
             errorMessage = "Invalid input, try using todo, deadline or event";

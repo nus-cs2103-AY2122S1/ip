@@ -35,6 +35,7 @@ public class TaskList {
      * @return The task at index i.
      */
     public Task get(int i) {
+        assert(i >= 0);
         return taskArr.get(i);
     }
 
@@ -45,6 +46,7 @@ public class TaskList {
      * @return The task that has been removed.
      */
     public Task remove(int i) {
+        assert(i >= 0);
         return taskArr.remove(i);
     }
 
