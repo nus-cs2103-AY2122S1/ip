@@ -148,7 +148,7 @@ public class Parser {
      */
     public String parseAddTask(String userInput, TaskList tasks, Duke.Type type) {
         if (type == Duke.Type.TODO) {
-            if (userInput.substring(4).trim().isEmpty()) {
+            if (isTodoDescEmpty(userInput)) {
                 return " OOPS!!! The description of a todo cannot be empty.";
             }
             tasks.addTask(new Todo(userInput.substring(5)));
@@ -156,44 +156,48 @@ public class Parser {
             return "Got it. I've added this task:\n" + "  " + tasks.getTask(tasks.size() - 1).toString() + "\n"
                     + "Now you have " + tasks.size() + " tasks in the list.";
         } else if (type == Duke.Type.DEADLINE) {
-            if (userInput.substring(8).trim().isEmpty()) {
+            if (isDeadlineDescEmpty(userInput)) {
                 return " OOPS!!! The description of a deadline cannot be empty.";
             }
-            int timeIndex = userInput.indexOf("/by");
-            if (timeIndex == -1) {
+            int slashIndex;
+            if (isByPresent(userInput)) {
+                slashIndex = userInput.indexOf("/by");
+            } else {
                 return " Please set a deadline by adding /by";
             }
             try {
-                tasks.addTask(new Deadline(userInput.substring(9, timeIndex - 1),
-                        LocalDate.parse(userInput.substring(timeIndex + 4, timeIndex + 14)),
-                        LocalTime.parse(userInput.substring(timeIndex + 15))));
+                tasks.addTask(new Deadline(userInput.substring(9, slashIndex - 1),
+                        LocalDate.parse(userInput.substring(slashIndex + 4, slashIndex + 14)),
+                        LocalTime.parse(userInput.substring(slashIndex + 15))));
             } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
                 return " Date and Time must be specified by YYYY-MM-DD HH:MM";
             }
-            storage.newTaskToData(userInput.substring(9, timeIndex - 1), Duke.Type.DEADLINE,
-                    userInput.substring(timeIndex + 4));
+            storage.newTaskToData(userInput.substring(9, slashIndex - 1), Duke.Type.DEADLINE,
+                    userInput.substring(slashIndex + 4));
             return "Got it. I've added this task:\n" + "  " + tasks.getTask(tasks.size() - 1).toString() + "\n"
                     + "Now you have " + tasks.size() + " tasks in the list.";
         } else {
             // At this point, type must be of Event
             assert type == Duke.Type.EVENT;
-            if (userInput.substring(5).trim().isEmpty()) {
+            if (isEventDescEmpty(userInput)) {
                 return " OOPS!!! The description of an event cannot be empty.";
             }
-            int timeIndex = userInput.indexOf("/at");
-            if (timeIndex == -1) {
-                return " Please set a deadline by adding /at";
+            int slashIndex;
+            if (isAtPresent(userInput)) {
+                slashIndex = userInput.indexOf("/at");
+            } else {
+                return " Please set a specified timing by adding /at";
             }
             try {
-                tasks.addTask(new Event(userInput.substring(6, timeIndex - 1),
-                        LocalDate.parse(userInput.substring(timeIndex + 4, timeIndex + 14)),
-                        LocalTime.parse(userInput.substring(timeIndex + 15))));
+                tasks.addTask(new Event(userInput.substring(6, slashIndex - 1),
+                        LocalDate.parse(userInput.substring(slashIndex + 4, slashIndex + 14)),
+                        LocalTime.parse(userInput.substring(slashIndex + 15))));
             } catch (DateTimeParseException | StringIndexOutOfBoundsException e) {
                 return " Date and Time must be specified by YYYY-MM-DD HH:MM";
             }
 
-            storage.newTaskToData(userInput.substring(6, timeIndex - 1), Duke.Type.EVENT,
-                    userInput.substring(timeIndex + 4));
+            storage.newTaskToData(userInput.substring(6, slashIndex - 1), Duke.Type.EVENT,
+                    userInput.substring(slashIndex + 4));
             return "Got it. I've added this task:\n" + "  " + tasks.getTask(tasks.size() - 1).toString() + "\n"
                     + "Now you have " + tasks.size() + " tasks in the list.";
         }
@@ -215,5 +219,58 @@ public class Parser {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Checks if description portion of user input is empty.
+     * @param todo User input from which is a Todo.
+     * @return True if description is empty, false if not empty.
+     */
+    private boolean isTodoDescEmpty(String todo) {
+        return todo.substring(4).trim().isEmpty();
+    }
+
+    /**
+     * Checks if description portion of user input is empty.
+     * @param deadline User input from which is a Deadline.
+     * @return True if description is empty, false if not empty.
+     */
+    private boolean isDeadlineDescEmpty(String deadline) {
+        return deadline.substring(8).trim().isEmpty();
+    }
+
+    /**
+     * Checks if description portion of user input is empty.
+     * @param event User input from which is an Event.
+     * @return True if description is empty, false if not empty.
+     */
+    private boolean isEventDescEmpty(String event) {
+        return event.substring(5).trim().isEmpty();
+    }
+
+    /**
+     * Checks if user input includes /by String to specify date and time.
+     * @param deadline User input
+     * @return True if /by String is present, false otherwise
+     */
+    private boolean isByPresent(String deadline) {
+        if (deadline.indexOf("/by") == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    /**
+     * Checks if user input includes /by String to specify date and time.
+     * @param event User input
+     * @return True if /at String is present, false otherwise
+     */
+    private boolean isAtPresent(String event) {
+        if (event.indexOf("/at") == -1) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }
