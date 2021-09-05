@@ -3,7 +3,7 @@ package duke.command;
 import duke.data.Storage;
 import duke.data.TaskList;
 import duke.data.Ui;
-import duke.task.Task;
+import duke.information.Task;
 
 /**
  * Command that adds a new Task to Tasklist when executed.
@@ -33,6 +33,6 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         tasks.addTask(task);
         storage.save(tasks);
-        return ui.showAddedTask();
+        return ui.showAddedInformation();
     }
 }

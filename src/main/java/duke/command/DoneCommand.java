@@ -31,7 +31,7 @@ public class DoneCommand extends Command{
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (taskNumber > tasks.getSize() || taskNumber < 0) {
+        if (taskNumber > tasks.getTasksSize() || taskNumber < 0) {
             throw new DukeException("Please insert a valid task.Task Number!");
         } else {
             tasks.markTaskAsDone(taskNumber);

@@ -1,9 +1,10 @@
 package duke.data;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.information.Contact;
+import duke.information.Deadline;
+import duke.information.Event;
+import duke.information.Task;
+import duke.information.ToDo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -55,6 +56,10 @@ public class Storage {
                 assert newTaskArray.length > 3 : "Invalid data found in file!";
                 Task newTask;
                 String taskType = newTaskArray[0];
+                if (taskType.equals("C")) {
+                    userDataList.addContact(new Contact(newTaskArray[1], newTaskArray[2]));
+                    continue;
+                }
                 boolean isDone = newTaskArray[1].equals("1");
                 switch (taskType) {
 
@@ -107,8 +112,11 @@ public class Storage {
     public void save(TaskList listOfUserTasks) {
         try {
             FileWriter newFile = new FileWriter(pathname);
-            for (int i = 0; i < listOfUserTasks.getSize(); i++) {
-                newFile.write(listOfUserTasks.getTask(i).toData());
+            for (int j = 0; j < listOfUserTasks.getTasksSize(); j++) {
+                newFile.write(listOfUserTasks.getTask(j).toData());
+            }
+            for (int i = 0; i < listOfUserTasks.getContactsSize(); i++) {
+                newFile.write(listOfUserTasks.getContact(i).toData());
             }
             newFile.close();
         } catch (IOException e) {

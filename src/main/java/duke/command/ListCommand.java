@@ -18,10 +18,10 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (tasks.getSize() == 0) {
+        if (tasks.getTotalSize() == 0) {
             return ui.showMessage("You have no tasks saved!");
         } else {
-            return ui.showTasks(tasks);
+            return ui.showTasks(tasks.searchTaskByKeyword("")) + ui.showContacts(tasks.searchContactByKeyword(""));
         }
     }
 }
