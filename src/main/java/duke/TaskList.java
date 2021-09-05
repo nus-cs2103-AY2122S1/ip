@@ -18,7 +18,6 @@ public class TaskList {
     /**
      * Constructor of TaskList.
      *
-     *
      * @throws FileNotFoundException when the file cannot be found.
      */
     public TaskList() throws IOException {
@@ -67,6 +66,7 @@ public class TaskList {
 
     /**
      * Marks a task as done and reflects it in the storage.
+     *
      * @param index of task to be marked as done.
      * @throws IOException
      */
@@ -77,8 +77,9 @@ public class TaskList {
 
     /**
      * Returns a list of task whose description includes the keyword.
-     * @param keyword
-     * @return
+     *
+     * @param keyword the keyword to be searched
+     * @return ArrayList containing tasks whose description contains the keyword.
      */
     public ArrayList<Task> filter(String keyword) {
         ArrayList<Task> temp = new ArrayList<>();

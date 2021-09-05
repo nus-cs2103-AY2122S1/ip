@@ -1,7 +1,6 @@
 package duke;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 import duke.commands.Command;
 
@@ -11,7 +10,6 @@ import duke.commands.Command;
 public class Duke {
 
     private TaskList tasks;
-    private Ui ui;
 
     /**
      * Constructor for Duke class.
@@ -20,7 +18,6 @@ public class Duke {
      */
     public Duke() throws IOException {
         this.tasks = new TaskList();
-        this.ui = new Ui(new Scanner(System.in));
     }
 
     /**
@@ -30,6 +27,7 @@ public class Duke {
         Parser parser = new Parser();
         try {
             Command c = parser.getCommand(input, tasks);
+            assert c != null : "Command c should not be null";
             return c.execute(tasks);
         } catch (DukeException | IOException e) {
             return "***WARNING*** An error has occurred:\n" + e.getMessage();
@@ -37,6 +35,8 @@ public class Duke {
     }
 
     public String getResponse(String input) {
+        String response = this.run(input);
+        assert (response != null && !response.equals("")) : "Response must not be empty";
         return this.run(input);
     }
 
