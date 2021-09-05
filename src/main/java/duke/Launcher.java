@@ -6,11 +6,11 @@ import javafx.application.Application;
  */
 public class Launcher {
     /**
-     * Main method to launch Duke.
+     * Main method to launch duke
      * @param args
      */
     public static void main(String[] args) {
-        //new Duke().startCli(); //Method to launch CLI version of duke
-        Application.launch(Duke.class, args); //Method to launch GUI version of duke
+        //new Duke().startCli(); // Method for launching the CLI version
+        Application.launch(Duke.class, args); // Method for launching the GUI version
     }
 }
