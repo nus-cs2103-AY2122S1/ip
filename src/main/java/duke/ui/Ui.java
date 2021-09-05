@@ -130,4 +130,18 @@ public class Ui {
         }
         return output;
     }
+
+    /**
+     * Prints out items in history ArrayList.
+     *
+     * @param input Input String array containing objects in history.
+     * @return Numbered list of items in history.
+     */
+    public static String[] printHistory(String[] input) {
+        for (int i = 0; i < input.length; i++) {
+            input[i] = (i + 1) + ". " + input[i];
+        }
+        return input;
+    }
+
 }

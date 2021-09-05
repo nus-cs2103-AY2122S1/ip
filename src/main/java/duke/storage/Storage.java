@@ -51,6 +51,29 @@ public class Storage {
     }
 
     /**
+     * Gets number of items in history.
+     *
+     * @return size of history ArrayList.
+     */
+    public int historySize() {
+        int len = this.history.size();
+        if (len == 0) {
+            throw new DukeException("noCommandsHaveBeenMade");
+        }
+        return len;
+    }
+
+    /**
+     * Gets particular String in history.
+     *
+     * @param index Index of that particular String.
+     * @return String at that index in history.
+     */
+    public String getHistoryAt(int index) {
+        return this.history.get(index);
+    }
+
+    /**
      * Deletes last item in history ArrayList.
      */
     public static void deleteLastCommand() {

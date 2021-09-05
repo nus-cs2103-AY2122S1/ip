@@ -14,6 +14,7 @@ public class DukeException extends RuntimeException {
     private final String INVALID_NUMBER_FORMAT_DELETE = "Enter a valid number in this format 'delete <number>'";
     private final String INVALID_FIND_TASK = "Enter a valid find task format 'find <task name>";
     private final String NO_CHANGES_TO_UNDO = "No changes to undo!";
+    private final String NO_COMMANDS_HAVE_BEEN_MADE = "No prior commands have been made!";
     private String type;
     private String errorMessage;
 
@@ -26,6 +27,9 @@ public class DukeException extends RuntimeException {
     public DukeException(String type) {
         this.type = type;
         switch (type) {
+        case ("noCommandsHaveBeenMade"):
+            errorMessage = NO_COMMANDS_HAVE_BEEN_MADE;
+            break;
         case ("noChangesToUndo"):
             errorMessage = NO_CHANGES_TO_UNDO;
             break;
