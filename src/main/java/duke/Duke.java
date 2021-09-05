@@ -68,6 +68,11 @@ public class Duke {
      * Gets response to user input.
      */
     public String getResponse(String input) {
+        // Set default to List tasks
+        if (input.equals("") || input.matches("[\\s+][\\n\\r]+")) {
+            input = "LIST";
+        }
+
         try {
             Parser parser = new Parser();
             ParsedInput parsedInput = parser.parse(input, this);
