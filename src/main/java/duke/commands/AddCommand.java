@@ -35,8 +35,12 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        int before = tasks.size();
         tasks.addTask(task);
+        int after = tasks.size();
+        assert after == before + 1 : "The size of the task list after adding a task should be one more than before";
         storage.save(tasks);
+
         int len = tasks.size();
         String message = String.format("Got it. I've added this task:\n  %s\nNow you have %d %s in the list.",
                 task.toString(),

@@ -39,8 +39,13 @@ public class DoneCommand extends Command {
         if (index <= 0 || index > tasks.size()) {
             throw new DukeException("Looks like there is no such task to be marked as done");
         }
+
+        assert index <= tasks.size() && index > 0
+                : "index should neither be negative nor bigger than the size of task list";
         Task task = tasks.markTaskAsDone(index);
+        assert task.getStatusIcon().equals("X") : "The status of the task should be done";
         storage.save(tasks);
+
         String message = String.format("Nice! I've marked this task as done:\n  %s", task);
         return message;
     }

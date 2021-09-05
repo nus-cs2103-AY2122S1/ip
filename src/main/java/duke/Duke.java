@@ -73,7 +73,7 @@ public class Duke {
     }
 
     /**
-     * This is the entry point for the Duke program.
+     * This is the entry point for the Duke program in CLI.
      *
      * @param args An array of String arguments to follow convention.
      */

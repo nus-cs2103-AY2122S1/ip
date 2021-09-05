@@ -3,7 +3,8 @@ package duke.ui;
 import java.util.Scanner;
 
 /**
- * Represents the user interface that handles the input and output of the program.
+ * Represents the user interface that handles the input and output of the program
+ * when used as a CLI.
  *
  * @author ruiquan
  */

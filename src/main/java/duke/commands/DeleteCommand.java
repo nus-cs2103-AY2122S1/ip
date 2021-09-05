@@ -39,8 +39,15 @@ public class DeleteCommand extends Command {
         if (index <= 0 || index > tasks.size()) {
             throw new DukeException("Looks like there is no such task to be deleted");
         }
+        assert index <= tasks.size() && index > 0
+                : "index should neither be negative nor bigger than the size of task list";
+        int before = tasks.size();
         Task task = tasks.deleteTask(index);
+        int after = tasks.size();
+        assert after == before - 1
+                : "The size of task list after deleting a task should be one lesser than before";
         storage.save(tasks);
+
         int len = tasks.size();
         String message = String.format("Noted. I've removed this task:\n  %s\nNow you have %d %s in the list.",
                 task.toString(),
