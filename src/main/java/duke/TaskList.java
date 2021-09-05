@@ -87,6 +87,7 @@ public class TaskList {
     }
 
     public Task getTask(int index) {
+        assert list.size() > index : "List size should be larger than index";
         return list.get(index);
     }
 
@@ -96,6 +97,7 @@ public class TaskList {
      * @param index The index at which the task should be deleted.
      */
     public void removeTask(int index) {
+        assert list.size() > index : "List size should be larger than index";
         list.remove(index);
     }
 

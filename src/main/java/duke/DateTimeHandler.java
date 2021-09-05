@@ -27,6 +27,7 @@ public class DateTimeHandler {
      * Constructs a DateTimeHandler object and populates dtfList.
      */
     public DateTimeHandler() {
+        assert FORMATS.length == dtfList.length : "DateTimeFormatter array should be same length as FORMATS array";
         for (int i = 0; i < FORMATS.length; i++) {
             dtfList[i] = DateTimeFormatter.ofPattern(FORMATS[i]);
         }
