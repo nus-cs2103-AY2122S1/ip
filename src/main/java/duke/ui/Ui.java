@@ -2,7 +2,9 @@ package duke.ui;
 
 import static java.util.AbstractMap.SimpleImmutableEntry;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import duke.Duke;
 import duke.DukeException;
@@ -107,15 +109,16 @@ public class Ui {
      * @return the output string
      */
     public String displayHelpMessage(CommandsEnum input) {
-        StringBuilder result = new StringBuilder();
-        if (input == null) {
-            for (CommandsEnum command : CommandsEnum.values()) {
-                result.append(command.helpMessage()).append("\n");
-            }
+        CommandsEnum cleanedInput = Optional.ofNullable(input).orElse(CommandsEnum.HELP);
+        if (cleanedInput == CommandsEnum.HELP) {
+            StringBuilder helpMessageBuilder = new StringBuilder();
+            helpMessageBuilder.append(cleanedInput.helpMessage());
+            Arrays.stream(CommandsEnum.values()).forEach(commandsEnum ->
+                helpMessageBuilder.append(commandsEnum.toString().toLowerCase()).append("\n"));
+            return helpMessageBuilder.toString().trim();
         } else {
-            result.append(input.helpMessage());
+            return cleanedInput.helpMessage();
         }
-        return result.toString().trim();
     }
 
     /**

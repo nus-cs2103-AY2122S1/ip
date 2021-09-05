@@ -51,14 +51,21 @@ public enum CommandsEnum {
                 + " with the date on 31 December 2090 on 12pm to 31 December 2090 12pm.";
         }
 
+    }, FIND() {
+        @Override
+        public String helpMessage() {
+            return "Usage: find <item>\n"
+                + "For example: find book\n"
+                + "This will list every task that contains \"book\".";
+        }
     }, HELP() {
         @Override
         public String helpMessage() {
-            return "Usage: help [command]\n"
-                + "For example: help\n"
-                + "This will display the help messages for every command. Alternatively,\n"
-                + "             help list\n"
-                + "This will display the help message for the list command.";
+            return "Hello! Duke is a chatbot for all your task management needs.\n"
+                + "With Duke, you can save todo items, events and deadlines all in one place!\n"
+                + "You can even share your data files with other users of Duke so that they have the same list.\n"
+                + "To get started, type \"help [command]\".\n"
+                + "Some available commands are:\n";
         }
 
 
@@ -80,13 +87,6 @@ public enum CommandsEnum {
         public String helpMessage() {
             return "Usage: upcoming\n"
                 + "This will display all the upcoming tasks, in chronological order.";
-        }
-    }, FIND() {
-        @Override
-        public String helpMessage() {
-            return "Usage: find <item>\n"
-                + "For example: find book\n"
-                + "This will list every task that contains \"book\".";
         }
     };
 
