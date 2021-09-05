@@ -17,7 +17,7 @@ import java.util.Scanner;
 public class DukeStorage {
 
     /** The destination of the stored data */
-    public String path;
+    private String path;
 
     /**
      * Constructor that initializes the storage for Duke
@@ -42,11 +42,11 @@ public class DukeStorage {
                 TaskList taskList = new TaskList();
 
                 String data = "";
-                while(sc.hasNext()) {
+                while (sc.hasNext()) {
                     data += sc.nextLine() + "\n";
                 }
 
-                if (data.equals("")){
+                if (data.equals("")) {
                     sc.close();
                     return new TaskList();
                 }

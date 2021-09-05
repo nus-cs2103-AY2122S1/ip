@@ -53,10 +53,10 @@ public class Ui {
         System.out.println("Got it. I've added this task:\n"
                 + "\t"
                 + task.toString()
-                +"\n"
+                + "\n"
                 + "Now you have "
                 + taskList.size()
-                +" tasks in your list\n"
+                + " tasks in your list\n"
                 + DIVIDER
         );
     }

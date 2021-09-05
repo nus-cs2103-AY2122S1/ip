@@ -32,9 +32,8 @@ public class Task {
     }
 
     /**
-     * Method that returns whether the task has been done or not
+     * Method that sets isDone to true
      *
-     * @return String "X" if task is done and " " if it is not done
      */
     public void setDone() {
         isDone = true;

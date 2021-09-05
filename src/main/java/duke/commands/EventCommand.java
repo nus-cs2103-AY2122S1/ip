@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
  * Class that contains the event command
  *
  */
-public class EventCommand extends Command{
+public class EventCommand extends Command {
 
     /** The description of the event command */
     private String description;

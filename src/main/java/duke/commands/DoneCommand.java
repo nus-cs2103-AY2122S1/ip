@@ -10,7 +10,7 @@ import duke.tasks.Task;
  * Class that contains the done command
  *
  */
-public class DoneCommand extends Command{
+public class DoneCommand extends Command {
 
     /** The index of the task to be marked done */
     private int index;

@@ -102,7 +102,7 @@ public class TaskList {
 
             String string = searchedStrArr[i];
 
-            for (int j = 0; j  < taskList.size(); j++) {
+            for (int j = 0; j < taskList.size(); j++) {
                 Task task = taskList.get(j);
 
                 if (task.getDescription().contains(string)) {
