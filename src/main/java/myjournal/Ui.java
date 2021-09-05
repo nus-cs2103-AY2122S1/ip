@@ -16,13 +16,16 @@ public class Ui {
     public static String welcomeMessage() {
         return "Hello!\n"
                 + "1. Type a task (todo/event/deadline) to be added into your task list,\n"
-                + "followed by the time for events and due date for deadlines \n"
-                + "in form of yyyy-mm-dd for date and hh:mm for time.\n"
+                + "   followed by the time for events and due date for deadlines \n"
+                + "   in form of yyyy-mm-dd for date and hh:mm for time.\n"
                 + "2. Type 'list' if you want to generate your task list.\n"
-                + "3. Type 'done [number]' to mark a task as done.\n"
-                + "4. Type 'delete [number]' to delete a task.\n"
+                + "3. Type 'done [task number]' to mark a task as done.\n"
+                + "4. Type 'delete [task number]' to delete a task.\n"
                 + "5. Type 'find [keyword]' to get the list of tasks with that keyword.\n"
-                + "6. Type 'bye' to exit";
+                + "6. Type 'edit [task number] time [the edited time]' to edit the time of the task.\n"
+                + "7. Type 'edit [task number] description [the edited description]' to edit the description"
+                + "   of the task.\n"
+                + "8. Type 'bye' to exit";
     }
 
     /**
@@ -47,6 +50,18 @@ public class Ui {
     public String removeTaskPrint(Task task) {
         assert task != null : "Task should not be null";
         return "Okay!! I have removed the following task:\n"
+                + task;
+    }
+
+    /**
+     * Prints the task that has been edited.
+     *
+     * @param task The task that has been edited.
+     * @return The task edited.
+     */
+    public String editTaskPrint(Task task) {
+        assert task != null : "Task should not be null";
+        return "Okay!! I have edited the following task:\n"
                 + task;
     }
 

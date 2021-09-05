@@ -5,14 +5,14 @@ package myjournal.exception;
  *
  * @author Felissa Faustine
  */
-public class InvalidWordException extends MyJournalException {
+public class InvalidCommandException extends MyJournalException {
 
     /**
      * The constructor for the InvalidTaskNumberExceptions.
      *
      * @param message The error message.
      */
-    public InvalidWordException(String message) {
+    public InvalidCommandException(String message) {
         super(message);
     }
 
@@ -23,6 +23,6 @@ public class InvalidWordException extends MyJournalException {
      */
     @Override
     public String toString() {
-        return "InvalidWordException: " + getMessage();
+        return "InvalidCommandException: " + getMessage();
     }
 }

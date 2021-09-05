@@ -37,6 +37,10 @@ public class Deadline extends Task {
         return "D";
     }
 
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     /**
      * Gets the string representation of the deadline task.
      *

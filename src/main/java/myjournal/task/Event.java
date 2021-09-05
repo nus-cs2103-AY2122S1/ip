@@ -37,6 +37,10 @@ public class Event extends Task {
         return "E";
     }
 
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     /**
      * Gets the string representation of the event.
      *

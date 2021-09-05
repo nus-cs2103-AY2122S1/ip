@@ -33,6 +33,9 @@ public class Todo extends Task {
         return "";
     }
 
+    public void setTime(String time) {
+    }
+
     /**
      * Gets the string representation of the todo task.
      *

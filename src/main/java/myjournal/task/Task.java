@@ -69,6 +69,12 @@ public abstract class Task {
      */
     public abstract String getTime();
 
+    public abstract void setTime(String time);
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
     /**
      * Returns the string representation of the task.
      *

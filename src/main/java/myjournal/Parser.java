@@ -7,9 +7,9 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 import myjournal.exception.EmptyDescriptionException;
+import myjournal.exception.InvalidCommandException;
 import myjournal.exception.InvalidTaskNumberException;
 import myjournal.exception.InvalidTypeException;
-import myjournal.exception.InvalidWordException;
 import myjournal.task.Deadline;
 import myjournal.task.Event;
 import myjournal.task.Task;
@@ -37,6 +37,8 @@ public class Parser {
                 return ui.removeTaskPrint(Parser.parseDelete(line, tasks));
             case "find":
                 return ui.findTaskPrint(Parser.parseFind(line, tasks));
+            case "edit":
+                return ui.editTaskPrint(Parser.parseEdit(line, tasks));
             case "list":
                 return Parser.parseList(tasks);
             case "todo":
@@ -57,7 +59,7 @@ public class Parser {
             return e.toString();
         } catch (EmptyDescriptionException e) {
             return e.toString();
-        } catch (InvalidWordException e) {
+        } catch (InvalidCommandException e) {
             return e.toString();
         } catch (DateTimeParseException exception) {
             return exception.toString();
@@ -78,7 +80,7 @@ public class Parser {
         }
         String find = line.next();
         if (line.hasNext()) {
-            throw new InvalidWordException("Please enter only one word!!");
+            throw new InvalidCommandException("Please enter only one word!!");
         }
         TaskList newList = new TaskList();
         for (int i = 0; i < tasks.getSize(); i++) {
@@ -111,6 +113,49 @@ public class Parser {
             throw new InvalidTaskNumberException("OOPS!!! Please enter a valid task number!");
         }
         tasks.getTask(index).setState(true);
+        return tasks.getTask(index);
+    }
+
+    /**
+     * Parses user's input for the command "edit".
+     *
+     * @param line The current line that is being parsed.
+     * @param tasks The list of tasks.
+     * @return A task which has been edited.
+     */
+    public static Task parseEdit(Scanner line, TaskList tasks) {
+        assert tasks != null : "TaskList should not be null";
+        if (!line.hasNext()) {
+            throw new InvalidTaskNumberException("OOPS!!! Please specify the task "
+                    + "that needs to be edited!");
+        }
+        String taskToBeEdited = line.nextLine();
+        String[] arrEdit = taskToBeEdited.split(" ");
+        if (!isInteger(arrEdit[1])) {
+            throw new InvalidTaskNumberException("OOPS!!! Please specify the task number of the task"
+                    + "that needs to be edited!");
+        }
+        int index = Integer.parseInt(arrEdit[1]) - 1;
+        if (index >= tasks.getSize() || index < 0 || tasks.getTask(index) == null) {
+            throw new InvalidTaskNumberException("OOPS!!! Please enter a valid task number!");
+        }
+        if (arrEdit.length < 4) {
+            throw new InvalidCommandException("Please specify what you want to edit.");
+        }
+        String infoToBeEdited = arrEdit[2];
+        if (!(infoToBeEdited.equals("time") || infoToBeEdited.equals("description"))) {
+            throw new InvalidCommandException("Please specify whether you want to edit time or description.");
+        }
+        String newInfo = "";
+        for (int i = 0; i < arrEdit.length - 3; i++) {
+            newInfo = newInfo + arrEdit[i + 3] + " ";
+        }
+        if (infoToBeEdited.equals("time")) {
+            Scanner time = new Scanner(newInfo);
+            tasks.getTask(index).setTime(getTimeDate(time));
+        } else {
+            tasks.getTask(index).setTaskName(newInfo);
+        }
         return tasks.getTask(index);
     }
 
