@@ -22,6 +22,7 @@ public class Todo extends Task {
      */
     @Override
     public String printTask() {
-        return "[T] " + super.printTask();
+        String todoHeader = "[T] ";
+        return todoHeader + super.printTask();
     }
 }
