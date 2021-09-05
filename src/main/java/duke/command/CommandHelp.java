@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ContactsList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -25,7 +26,7 @@ public class CommandHelp extends Command {
 
 
     @Override
-    public void execute(TaskList tl, Storage st, Ui ui) {
+    public void execute(TaskList tl, Storage st, Ui ui, ContactsList cl) {
         ui.addDialog(HELP_MESSAGE, true);
     }
 

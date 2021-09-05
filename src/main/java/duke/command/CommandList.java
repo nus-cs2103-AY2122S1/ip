@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ContactsList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -18,7 +19,7 @@ public class CommandList extends Command {
     }
 
     @Override
-    public void execute(TaskList tl, Storage st, Ui ui) {
+    public void execute(TaskList tl, Storage st, Ui ui, ContactsList cl) {
         tl.printAllTasks();
     }
 

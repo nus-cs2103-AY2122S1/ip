@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.ContactsList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -15,7 +16,7 @@ public class Command {
      * A method that executes the respective command. To be overrided by subclasses.
      *
      */
-    public void execute(TaskList tl, Storage st, Ui ui) {
+    public void execute(TaskList tl, Storage st, Ui ui, ContactsList cl) {
 
     }
 
