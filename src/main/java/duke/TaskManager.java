@@ -52,7 +52,7 @@ public class TaskManager {
         }
     }
 
-    public int taskCount() {
+    public int getNumOfTasks() {
         return taskList.size();
     }
 
@@ -119,7 +119,7 @@ public class TaskManager {
         try {
             StringBuilder data = new StringBuilder();
             for (Task t : taskList) {
-                data.append(t.toDatabaseString() + "\n");
+                data.append(t.toStorageString() + "\n");
             }
             storage.save(data.toString());
         } catch (IOException e) {

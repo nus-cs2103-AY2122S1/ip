@@ -19,6 +19,6 @@ public class DeleteCommand extends Command {
 
         return String.format("Noted. I've removed this task: \n"
                 + "%s\n"
-                + "Now you have %d tasks in the list.", deletedTask.toString(), taskManager.taskCount());
+                + "Now you have %d tasks in the list.", deletedTask.toString(), taskManager.getNumOfTasks());
     }
 }

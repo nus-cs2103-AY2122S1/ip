@@ -11,7 +11,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-
 /**
  * Represents the Duke bot engine, handles everything.
  */
@@ -26,7 +25,6 @@ public class Duke extends Application {
         this.ui = new Ui();
         this.taskManager = new TaskManager();
     }
-
 
     @Override
     public void start(Stage stage) {
