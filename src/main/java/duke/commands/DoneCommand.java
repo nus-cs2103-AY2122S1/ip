@@ -46,17 +46,18 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         try {
             if (this.userCommand.length() <= COMMAND_LENGTH) {
-                throw new IllegalArgumentException("Please enter a numeric character to mark your task as done!");
-            } else {
-                int index = Integer.parseInt(this.userCommand.substring(COMMAND_LENGTH).strip()) - 1;
-                tasks.markTaskDone(index);
-                storage.save(tasks.getItems());
-
-                return ui.printTaskDone(tasks.getTask(index));
+                throw new IllegalArgumentException(INVALID_NUM_ERR);
             }
+
+            String indexStr = this.userCommand.substring(COMMAND_LENGTH).strip();
+            int index = Integer.parseInt(indexStr) - 1;
+            tasks.markTaskDone(index);
+            storage.save(tasks.getItems());
+
+            return ui.printTaskDone(tasks.getTask(index));
         } catch (NumberFormatException e) {
             // error encountered when command followed by done is not Number e.g. done one
-            return ui.printError("Please enter a numeric character to mark your task as done!");
+            return ui.printError(INVALID_NUM_ERR);
         } catch (IOException | IllegalArgumentException e) {
             return ui.printError(e.getMessage());
         } catch (IndexOutOfBoundsException e) {

@@ -54,23 +54,31 @@ public class DeadlineCommand extends Command {
             // splitCommand[0] will be of format deadline <description>.
             // splitCommand[1] will be the date.
             String[] splitCommand = userCommand.split("/by");
+            assert splitCommand.length > 0 : "Invalid deadline command.";
 
-            if (userCommand.length() <= COMMAND_LENGTH || splitCommand[0].strip().length() <= COMMAND_LENGTH
-                    || splitCommand.length < 2) {
-                throw new IllegalArgumentException("Please add a description and/or deadline!");
-            } else {
-                LocalDateTime date = LocalDateTime.parse(splitCommand[1].strip(), Command.INPUT_FORMATTER);
-                Deadline newDeadline = new Deadline(splitCommand[0].substring(COMMAND_LENGTH).strip(), date);
+            boolean isDescAdded = splitCommand[0].strip().length() > COMMAND_LENGTH;
+            boolean isOneDeadlineAdded = splitCommand.length == 2;
+            boolean isMultipleDeadlineAdded = splitCommand.length > 2;
 
-                tasks.addTask(newDeadline);
-                storage.save(tasks.getItems());
-
-                return ui.printTaskAdded(newDeadline, tasks.getSize());
+            if (isMultipleDeadlineAdded) {
+                throw new IllegalArgumentException(MULTIPLE_DATE_ERR);
+            } else if (!isDescAdded || !isOneDeadlineAdded) {
+                throw new IllegalArgumentException(MISSING_DESC_DATE_ERR);
             }
+
+            String description = splitCommand[0].substring(COMMAND_LENGTH).strip();
+            String dateStr = splitCommand[1].strip();
+            LocalDateTime date = LocalDateTime.parse(dateStr, Command.INPUT_FORMATTER);
+            Deadline newDeadline = new Deadline(description, date);
+
+            tasks.addTask(newDeadline);
+            storage.save(tasks.getItems());
+
+            return ui.printTaskAdded(newDeadline, tasks.getSize());
         } catch (IOException | IllegalArgumentException e) {
             return ui.printError(e.getMessage());
         } catch (DateTimeException e) {
-            return ui.printError("Please add a valid deadline date of format yyyy/MM/dd HHmm (24-hour format)!");
+            return ui.printError(INVALID_DATE_ERR);
         }
     }
 }
