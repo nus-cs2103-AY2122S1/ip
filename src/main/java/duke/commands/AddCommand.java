@@ -24,6 +24,7 @@ public class AddCommand extends Command {
     public AddCommand(String description) {
         try {
             TaskList currentTask = TASKLIST.add(description);
+            assert currentTask != null : "Task was not added successfully";
             message = ("Got it. I have added this task:\n"
                     + currentTask + "\nNow you have "
                     + TaskList.listLength()

@@ -57,6 +57,7 @@ public class Event extends TaskList {
     @Override
     public String toString() {
         String status = this.getStatusIcon();
+        assert status != null : "Status cannot be null";
         if (localDate == null) {
             return "[E]" + "[" + status + "] " + this.description
                     + "(" + time + ")";

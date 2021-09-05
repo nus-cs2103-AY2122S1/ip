@@ -1,6 +1,5 @@
 package duke.task;
 
-import duke.commands.Command;
 import duke.exception.DukeException;
 import duke.storage.Storage;
 
@@ -18,7 +17,6 @@ public class TaskList {
     private boolean isDone;
     protected static final Storage FILE = new Storage("data/tasks.txt");
     protected static final ArrayList<TaskList> TASKS = new ArrayList<>();
-    protected static final Command USER_INTERFACE = new Command();
 
     /**
      * Creates an instance of a TaskList class. This is the parent task class which

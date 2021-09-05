@@ -85,7 +85,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-//            USER_INTERFACE.generalErrorWarning(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -101,7 +101,7 @@ public class Storage {
                 Parser.parseFromFile(line);
             }
         } catch (FileNotFoundException e) {
-            e.getMessage();
+            e.printStackTrace();
         }
     }
 }

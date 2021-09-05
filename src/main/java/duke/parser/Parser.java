@@ -73,6 +73,7 @@ public class Parser {
     public static String findTime(String input) {
         StringBuilder sb = new StringBuilder();
         int index = input.length() - 1;
+        assert index >= 0 : "Time cannot be of a negative number";
         for (int i = 0; i < 4; i++) {
             sb.append(input.charAt(index));
             index--;
@@ -97,6 +98,7 @@ public class Parser {
     public static String[] findTimeRange(String input) {
         StringBuilder sb = new StringBuilder();
         int index = input.length() - 1;
+        assert index >= 0 : "Time cannot be of a negative number";
         for (int i = 0; i < 9; i++) {
             sb.append(input.charAt(index));
             index--;
@@ -123,6 +125,7 @@ public class Parser {
         String postfix;
         String prefix;
         time = time % 2400;
+        assert time >= 0 : "Time cannot be of a negative number";
         if (time < 1300) {
             postfix = time >= 1200
                     ? "PM"
@@ -146,6 +149,10 @@ public class Parser {
      * @param deadlineTiming String reference variable that the method is to assign
      */
     public static void parseDeadlineTime(String input, LocalDate ld, String deadlineTiming) {
+
+        assert ld != null : "Date cannot be null";
+        assert deadlineTiming != null : "Deadline timing cannot be null";
+
         String[] parsedTime = input.split(" ");
         try {
             String timeFormat = parsedTime[2] + "-"
@@ -174,6 +181,11 @@ public class Parser {
      * @param endTime String reference variable that the method is to assign
      */
     public static void parseEventTime(String input, LocalDate ld, String startTime, String endTime) {
+
+        assert ld != null : "Date cannot be null";
+        assert startTime != null : "Start timing cannot be null";
+        assert endTime != null : "End timing cannot be null";
+
         String[] parsedTime = input.split(" ");
         try {
             String timeFormat = parsedTime[2] + "-"
@@ -209,6 +221,7 @@ public class Parser {
                 break;
             }
         }
+        assert index != 0 : "Index must be more than 0";
         return index < 10
                 ? "0" + index
                 : Integer.toString(index);

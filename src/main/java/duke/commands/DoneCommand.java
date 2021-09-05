@@ -22,6 +22,7 @@ public class DoneCommand extends Command {
     public DoneCommand(String description) {
         try {
             int index = Integer.parseInt(description) - 1;
+            assert index >= 0 : "Index is not allowed";
             if (TASKLIST.markDone(index)) {
                 message = "Nice! I've marked this task as done:\n" + TaskList.getTask(index);
             } else {
