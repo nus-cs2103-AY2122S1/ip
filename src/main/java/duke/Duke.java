@@ -32,28 +32,28 @@ public class Duke {
         input = input.toLowerCase(Locale.ROOT);
         assert this.storage.getDoesFileExists();
         String response;
-        if (input.equals("list")) {
-            //List task list
-            response = this.ui.listTaskList(this.taskList);
-        } else if (input.contains("done ")) {
-            //Set task as done
-            Integer listIndex = parser.doneInputParser(input);
-            this.taskList.setTaskDone(listIndex);
-            response = this.ui.doneTaskMsg(this.taskList.getTask(listIndex));
-        } else if (input.contains("delete ")) {
-            //Deletes task
-            Integer removeTaskIndex = parser.deleteInputParser(input);
-            Task removedTask = taskList.removeTask(removeTaskIndex);
-            response = this.ui.deleteTaskMsg(removedTask, this.taskList.taskListSize());
-        } else if (input.contains("find ")) {
-            //Find tasks
-            String keyword = parser.findInputParser(input);
-            TaskList taskListWithKeyword = this.taskList.findTasks(keyword);
-            response = this.ui.findTaskMsg(taskListWithKeyword);
-        } else if(input.equals("help")) {
-            response = this.ui.helpMsg();
-        } else {
-            try {
+        try {
+            if (input.equals("list")) {
+                //List task list
+                response = this.ui.listTaskList(this.taskList);
+            } else if (input.contains("done ")) {
+                //Set task as done
+                Integer listIndex = parser.doneInputParser(input);
+                this.taskList.setTaskDone(listIndex);
+                response = this.ui.doneTaskMsg(this.taskList.getTask(listIndex));
+            } else if (input.contains("delete ")) {
+                //Deletes task
+                Integer removeTaskIndex = parser.deleteInputParser(input);
+                Task removedTask = taskList.removeTask(removeTaskIndex);
+                response = this.ui.deleteTaskMsg(removedTask, this.taskList.taskListSize());
+            } else if (input.contains("find ")) {
+                //Find tasks
+                String keyword = parser.findInputParser(input);
+                TaskList taskListWithKeyword = this.taskList.findTasks(keyword);
+                response = this.ui.findTaskMsg(taskListWithKeyword);
+            } else if(input.equals("help")) {
+                response = this.ui.helpMsg();
+            } else {
                 //Initialise the task if its a valid input.
                 Task newTask = null;
                 if (input.contains("todo")) {
@@ -74,10 +74,10 @@ public class Duke {
                     throw new WrongInputException();
                 }
 
-            } catch (DukeException e) {
-                return (e.toString()
-                        + "\n");
             }
+        } catch (DukeException e) {
+            return (e.toString()
+                    + "\n");
         }
         this.storage.saveFile(this.taskList);
         return response;

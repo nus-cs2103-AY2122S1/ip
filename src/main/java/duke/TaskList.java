@@ -46,6 +46,9 @@ public class TaskList {
      * @param index Index of the task.
      */
     public void setTaskDone(int index) {
+        if (index > this.numTasks - 1) {
+            throw new IndexOutOfBoundException();
+        }
         taskList.get(index).markAsDone();
     }
 
@@ -56,6 +59,9 @@ public class TaskList {
      * @return The task that is removed.
      */
     public Task removeTask(int index) {
+        if (index > this.numTasks - 1) {
+            throw new IndexOutOfBoundException();
+        }
         this.numTasks -= 1;
         return taskList.remove(index);
     }
