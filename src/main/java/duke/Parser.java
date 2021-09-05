@@ -1,3 +1,5 @@
+package duke;
+
 public class Parser{
     public static Command parse(String response) throws DukeException {
          if (response.equals("list")) {

@@ -1,3 +1,5 @@
+package duke;
+
 public class Event extends Task{
     protected String by;
 
@@ -8,6 +10,6 @@ public class Event extends Task{
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (by: " + by + ")";
+        return "[E]" + super.toString() + " (at: " + by + ")";
     }
 }
