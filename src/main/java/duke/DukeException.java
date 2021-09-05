@@ -14,7 +14,7 @@ public class DukeException extends Exception {
      */
     public DukeException(String errorType) {
         assert(errorType != null);
-        switch (errorType) {
+        switch (errorType) {git st
         case "invalid input":
             errorMessage = "Invalid input, try using todo, deadline or event";
             break;
