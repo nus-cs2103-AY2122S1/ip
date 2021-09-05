@@ -1,23 +1,15 @@
 package duke.util;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 
 /**
- * Task representing the user interface of the program.
+ * A static class that help generate the text replies from Duke
  */
 public class Reply {
-    /** Scanner used to get input from the user. */
-    private final Scanner scanner;
-
     /**
-     * Constructor of Ui class.
+     * Constructor of Reply class.
      */
-
-    public Reply() {
-        scanner = new Scanner(System.in);
-    }
+    private Reply() { }
 
     /**
      * Shows a loading error.
