@@ -18,7 +18,9 @@ public class AddDeadlineCommand extends Command {
     private String command;
 
     public AddDeadlineCommand(String command) {
+        assert command.startsWith("deadline");
         this.command = command;
+
     }
 
     /**

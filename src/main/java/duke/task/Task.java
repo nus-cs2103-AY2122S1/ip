@@ -15,6 +15,7 @@ public abstract class Task {
      * @param name Name of Task object.
      */
     public Task(String name) {
+        assert !(name == null);
         this.name = name;
         this.isCompleted = false;
     }
