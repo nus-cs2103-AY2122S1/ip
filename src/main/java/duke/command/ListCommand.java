@@ -21,7 +21,7 @@ public class ListCommand implements Command {
      */
     @Override
     public String execute(TaskList t, Ui ui, Storage storage) {
-        String listString = "";
+        String listString = " These are your list of things to do:";
         if (t.getSize() == 0) {
             listString = "\n Your list is empty!";
         } else {
@@ -30,7 +30,7 @@ public class ListCommand implements Command {
                 listString += "\n " + count + ". " + t.get(i);
             }
         }
-        return ui.textFrame(" These are your list of things to do:" + listString);
+        return ui.textFrame(listString);
     }
 
     /**
