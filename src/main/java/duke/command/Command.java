@@ -19,7 +19,7 @@ public abstract class Command {
      */
     public static Command makeCommand(CommandsTypes type, Task task) throws DukeException {
         switch (type) {
-        case Add: {
+        case ADD: {
             return new AddCommand(task);
         }
         default:
@@ -36,16 +36,16 @@ public abstract class Command {
      */
     public static Command makeCommand(CommandsTypes type, int index) throws DukeException {
         switch (type) {
-        case Delete: {
+        case DELETE: {
             return new DeleteCommand(index);
         }
-        case MarkDone: {
+        case MARK_DONE: {
             return new MarkDoneCommand(index);
         }
-        case Exit: {
+        case EXIT: {
             return new ExitCommand();
         }
-        case List: {
+        case LIST: {
             return new ListCommand();
         }
         default:
@@ -61,10 +61,10 @@ public abstract class Command {
      */
     public static Command makeCommand(CommandsTypes type) throws DukeException {
         switch (type) {
-        case Exit: {
+        case EXIT: {
             return new ExitCommand();
         }
-        case List: {
+        case LIST: {
             return new ListCommand();
         }
         default:
@@ -81,7 +81,7 @@ public abstract class Command {
      */
     public static Command makeCommand(CommandsTypes type, String ...keywords) throws DukeException {
         switch (type) {
-        case Find:
+        case FIND:
             return new FindCommand(keywords);
         default:
             throw new DukeException("Invalid command inputted");
