@@ -91,4 +91,16 @@ public class Ui {
         String correctReply = tasksFound.isEmpty() ? notFoundReply : foundReply;
         return "\t" + correctReply + task + "\n" + tasksFound;
     }
+
+    /**
+     * Shows the formatted reply for the TaskList undoList/redoList method.
+     *
+     * @param tasks The undone/redone list of tasks
+     * @param isUndo True if is for undoList method and false for redoList method
+     * @return The String to be returned by the undoList/redoList method
+     */
+    public static String showUndoRedoListReply(String tasks, boolean isUndo) {
+        String type = isUndo ? "undone" : "redone";
+        return "\tLast command has been " + type + ". The tasks is now this:\n" + tasks;
+    }
 }

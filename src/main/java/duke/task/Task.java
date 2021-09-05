@@ -96,4 +96,6 @@ public abstract class Task {
             throw new DukeException("Task name provided is incorrect");
         }
     }
+
+    public abstract Task copy();
 }

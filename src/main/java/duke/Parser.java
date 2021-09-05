@@ -23,6 +23,18 @@ public class Parser {
             reply = list.displayTask();
             break;
 
+        case "undo":
+            reply = list.undoList();
+            break;
+
+        case "redo":
+            reply = list.redoList();
+            break;
+
+        case "bye":
+            reply = "bye";
+            break;
+
         case "done":
             // Fallthrough
         case "delete":
@@ -37,10 +49,6 @@ public class Parser {
             // Fallthrough
         case "event":
             reply = parseTwoInputCommand(list, inputArray);
-            break;
-
-        case "bye":
-            reply = "bye";
             break;
 
         default:

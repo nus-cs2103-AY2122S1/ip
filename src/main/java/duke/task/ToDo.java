@@ -39,4 +39,9 @@ public class ToDo extends Task {
     public String toData() {
         return this.taskName.getTaskIcon() + " | " + super.toData();
     }
+
+    @Override
+    public Task copy() {
+        return new ToDo(this.description, this.isDone);
+    }
 }
