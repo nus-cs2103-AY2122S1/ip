@@ -29,6 +29,7 @@ public class Deadline extends TaskList {
     public Deadline(String description, String time, boolean isExisting) throws FileNotFoundException {
         super(description);
         this.time = time;
+
         if (!isExisting) {
             localDate = Parser.findDate(time);
             deadLineTiming = Parser.findTime(time);

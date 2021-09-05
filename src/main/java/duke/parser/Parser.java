@@ -150,8 +150,8 @@ public class Parser {
      */
     public static void parseDeadlineTime(String input, LocalDate ld, String deadlineTiming) {
 
-        assert ld != null : "Date cannot be null";
-        assert deadlineTiming != null : "Deadline timing cannot be null";
+//        assert ld != null : "Date cannot be null";
+//        assert deadlineTiming != null : "Deadline timing cannot be null";
 
         String[] parsedTime = input.split(" ");
         try {
@@ -166,6 +166,7 @@ public class Parser {
             }
             ld = LocalDate.parse(timeFormat);
         } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println(e.getMessage());
             Duke.nullFunction();
         }
     }

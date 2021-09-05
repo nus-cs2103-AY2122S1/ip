@@ -16,7 +16,7 @@ public class TaskList {
     protected String description;
     private boolean isDone;
     protected static final Storage FILE = new Storage("data/tasks.txt");
-    protected static final ArrayList<TaskList> TASKS = new ArrayList<>();
+    protected static ArrayList<TaskList> tasks = new ArrayList<>();
 
     /**
      * Creates an instance of a TaskList class. This is the parent task class which
@@ -27,7 +27,7 @@ public class TaskList {
     protected TaskList(String description) {
         this.description = description;
         this.isDone = false;
-        TASKS.add(this);
+        tasks.add(this);
     }
 
     /**
@@ -40,7 +40,7 @@ public class TaskList {
      */
     private void setDone() {
         this.isDone = true;
-        FILE.overwriteList(TASKS);
+        FILE.overwriteList(tasks);
     }
 
     /**
@@ -54,10 +54,10 @@ public class TaskList {
      * @return true if task is successfully marked done; false otherwise
      */
     public boolean markDone(int index) {
-        if (index < 0 || index >= TASKS.size()) {
+        if (index < 0 || index >= tasks.size()) {
             return false;
         } else {
-            TASKS.get(index).setDone();
+            tasks.get(index).setDone();
             return true;
         }
     }
@@ -69,8 +69,8 @@ public class TaskList {
      * @param index the index of the task on the task list to be deleted
      */
     public void delete(int index) {
-        TASKS.remove(index);
-        FILE.overwriteList(TASKS);
+        tasks.remove(index);
+        FILE.overwriteList(tasks);
     }
 
     /**
@@ -96,7 +96,14 @@ public class TaskList {
                 emptyDescription = true;
                 break;
             }
-            return new Todo(splitTask[1], false);
+
+            String todoDescription = splitTask[1].trim() + " ";
+
+            if (checkDuplicate(todoDescription)) {
+                throw new DukeException.DuplicateTaskException(todoDescription);
+            }
+
+            return new Todo(todoDescription, false);
         case "deadline":
             if (splitTask.length == 1) {
                 emptyDescription = true;
@@ -109,7 +116,13 @@ public class TaskList {
                 break;
             }
 
-            return new Deadline(splitTime[0], splitTime[1], false);
+            String deadlineDescription = splitTime[0].trim() + " ";
+
+            if (checkDuplicate(deadlineDescription)) {
+                throw new DukeException.DuplicateTaskException(deadlineDescription);
+            }
+
+            return new Deadline(deadlineDescription, splitTime[1], false);
         case "event":
             if (splitTask.length == 1) {
                 emptyDescription = true;
@@ -122,7 +135,13 @@ public class TaskList {
                 break;
             }
 
-            return new Event(splitTimeEvent[0], splitTimeEvent[1], false);
+            String eventDescription = splitTimeEvent[0].trim() + " ";
+
+            if (checkDuplicate(eventDescription)) {
+                throw new DukeException.DuplicateTaskException(eventDescription);
+            }
+
+            return new Event(eventDescription, splitTimeEvent[1], false);
         default:
             throw new DukeException.InvalidCommandException(input);
         }
@@ -132,6 +151,24 @@ public class TaskList {
         } else {
             throw new DukeException.EmptyTimelineDescription(emptyTimelineError);
         }
+    }
+
+    /**
+     * Checks for duplicate tasks in the task list.
+     *
+     * @param description description of task inputted by user
+     * @return true if the task is a duplicate; false otherwise
+     */
+    private boolean checkDuplicate(String description) {
+        boolean isDuplicate = false;
+        for (TaskList t : tasks) {
+            String currentDescription = t.getDescription();
+            if (currentDescription.equals(description)) {
+                isDuplicate = true;
+                break;
+            }
+        }
+        return isDuplicate;
     }
 
     /**
@@ -169,7 +206,7 @@ public class TaskList {
      */
     public void loadArrayList() {
         FILE.loadFile();
-        FILE.overwriteList(TASKS);
+        FILE.overwriteList(tasks);
     }
 
     /**
@@ -179,10 +216,10 @@ public class TaskList {
      * @return the specified task retrieved from the task list
      */
     public static TaskList getTask(int index) {
-        if (index < 0 || index >= TASKS.size()) {
+        if (index < 0 || index >= tasks.size()) {
             return null;
         } else {
-            return TASKS.get(index);
+            return tasks.get(index);
         }
     }
 
@@ -195,7 +232,7 @@ public class TaskList {
      */
     public static ArrayList<TaskList> findMatching(String searchWord) {
         ArrayList<TaskList> matchingTasks = new ArrayList<>();
-        for (TaskList t : TASKS) {
+        for (TaskList t : tasks) {
             String description = t.getDescription();
             if (description.contains(searchWord)) {
                 matchingTasks.add(t);
@@ -225,7 +262,7 @@ public class TaskList {
      * @return length of task list
      */
     public static int listLength() {
-        return TASKS.size();
+        return tasks.size();
     }
 
     /**

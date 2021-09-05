@@ -145,6 +145,31 @@ public class DukeException extends IllegalArgumentException {
 
     /**
      * Represents the class of exception that is thrown whenever
+     * a user tries to add a duplicate task.
+     */
+    public static class DuplicateTaskException extends DukeException {
+
+        /**
+         * Constructs an instance of a duplicate task Duke Exception.
+         *
+         * @param message error message upon exception thrown
+         */
+        public DuplicateTaskException(String message) {
+            super("Your task \"" + message + "\" already exists! Try adding another task.");
+        }
+
+        /**
+         * Returns the string representation of a duplicate task exception.
+         *
+         * @return String representation of the general exception
+         */
+        public String toString() {
+            return super.toString();
+        }
+    }
+
+    /**
+     * Represents the class of exception that is thrown whenever
      * the specified file is not found.
      */
     public static class FileNotFoundException extends DukeException {
