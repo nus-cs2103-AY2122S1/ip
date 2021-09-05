@@ -33,7 +33,7 @@ public class Duke extends Application {
     private FulfillmentHandler fulfillmentHandler;
 
     /**
-     * Default constructor for <code>Duke</code> with no arguments.
+     * Constructs an instance of the <code>Duke</code> chat bot without assigning fulfillmentHandler field.
      */
     public Duke() {
     }

@@ -6,6 +6,7 @@ package duke.messages;
  * @author kevin9foong
  */
 public class GreetingMessage extends Message {
+
     /**
      * Constructs an instance of <code>GreetingMessage</code> which
      * greets the user.

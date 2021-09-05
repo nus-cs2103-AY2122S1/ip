@@ -44,7 +44,7 @@ public class TaskList {
     }
 
     /**
-     * Get task associated with index number in taskList.
+     * Retrieves task associated with index number in taskList.
      *
      * @param index index of task to get.
      * @return task associated with index number in taskList.

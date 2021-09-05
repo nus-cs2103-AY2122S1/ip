@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
 import duke.exceptions.InvalidTaskDataException;
 
 /**
- * This class encapsulates a user-added task
+ * This class encapsulates a user-added task.
  *
  * @author kevin9foong
  */
@@ -47,7 +47,7 @@ public abstract class Task {
     }
 
     /**
-     * Set description of this task.
+     * Sets description of this task.
      *
      * @param description description to be set as.
      */
@@ -64,7 +64,7 @@ public abstract class Task {
     }
 
     /**
-     * Convert this task's data to representation to be saved in file.
+     * Converts this task's data to representation to be saved in file.
      *
      * @return representation of this task's data
      */

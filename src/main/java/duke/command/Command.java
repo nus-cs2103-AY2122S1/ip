@@ -23,8 +23,7 @@ public abstract class Command {
      * @param taskList          handles task operations including adding, deleting, marking as done and retrieval.
      * @throws DukeException thrown when a failure occurs within the Duke chat bot.
      */
-    public abstract void execute(UserOutputHandler userOutputHandler, TaskList taskList)
-            throws DukeException;
+    public abstract void execute(UserOutputHandler userOutputHandler, TaskList taskList) throws DukeException;
 
     /**
      * Checks if program should terminate after this command.
