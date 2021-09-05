@@ -1,12 +1,5 @@
 package duke;
 
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
-import javafx.scene.Scene;
-
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
@@ -29,8 +22,8 @@ public class Duke {
     private boolean isRunning;
 
     /**
-     * @param filePath to read/write task list data
-     * @throws IOException
+     * @param filePath File path to read/write task list data to.
+     * @throws IOException If there is an error reading/writing to the filepath.
      */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
@@ -43,6 +36,9 @@ public class Duke {
 
     }
 
+    /**
+     * Default constructor for Duke application.
+     */
     public Duke() {
         ui = new Ui();
         storage = new Storage(FILEPATH);
@@ -55,6 +51,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Parses user input and gets appropriate response from Duke.
+     *
+     * @param input User command input.
+     * @return String representation of Duke response.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);

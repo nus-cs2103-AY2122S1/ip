@@ -55,9 +55,9 @@ public class Parser {
     /**
      * Parses user input into an executable command.
      *
-     * @param fullCommand text to be parsed into an executable command
-     * @return a Command for Duke program to execute
-     * @throws DukeException if the command executed has errors
+     * @param fullCommand Text to be parsed into an executable command.
+     * @return Command for Duke program to execute.
+     * @throws DukeException If the command executed has errors.
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] tokens = fullCommand.split("\\s+", 2);

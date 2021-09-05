@@ -1,22 +1,21 @@
 package duke.ui;
 
-import duke.tasks.Task;
-
 import java.util.ArrayList;
+
+import duke.tasks.Task;
 
 /**
  * Text UI of the application.
  */
 public class Ui {
     public Ui() {
-
     }
 
     /**
      * Constructs a message containing all tasks in the ArrayList.
      *
-     * @param list list of tasks
-     * @return ArrayList in String format
+     * @param list List of tasks to convert to string.
+     * @return ArrayList in String format.
      */
     public static String tasklistToString(ArrayList<Task> list) {
         assert(list.size() > 0);
