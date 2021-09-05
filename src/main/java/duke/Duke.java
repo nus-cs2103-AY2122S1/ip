@@ -44,6 +44,7 @@ public class Duke {
         } else {
             tasks = new TaskList();
         }
+        assert(tasks != null);
     }
 
     /**
