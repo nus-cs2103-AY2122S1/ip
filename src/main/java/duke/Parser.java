@@ -73,11 +73,7 @@ public class Parser {
                 } else {
                     return "Command not Found";
                 }
-            } catch (InvalidCommandException e) {
-                return e.toString();
-            } catch (EmptyDescriptionException e) {
-                return e.toString();
-            } catch (InvalidValueException e) {
+            } catch (DukeException e) {
                 return e.toString();
             } catch (DateTimeParseException e) {
                 return e.getMessage();
