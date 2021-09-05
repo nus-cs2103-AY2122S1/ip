@@ -33,46 +33,60 @@ public class TaskList {
      */
     public String addTask(String userInput, Path dataPath) {
         Task taskToAdd;
-        String dataToStore;
+
+        String[] input = userInput.split(" ");
+        String taskType = input[0].toLowerCase();
+        int taskIndex = input[0].length() + 1;
 
         try{
-            if (userInput.toLowerCase().startsWith("todo")) {
+            if (taskType.equals("todo")) {
                 taskToAdd = new ToDo(userInput.substring(5));
             } else {
-                String[] input = userInput.split(" ");
-
-                int taskIndex = input[0].length() + 1;
-                int dateIndex = userInput.indexOf("/");
-                String[] dateAndTask = utility.seperateDateFromTask(dateIndex,taskIndex, userInput);
-
-                String str = dateAndTask[1];
-                LocalDateTime dateTime = utility.stringToDate(str);
-
-                if (userInput.toLowerCase().startsWith("deadline")){
-                    taskToAdd = new Deadline(dateAndTask[0], dateTime);
-                } else if (userInput.toLowerCase().startsWith("event")) {
-                    taskToAdd = new Event(dateAndTask[0], dateTime);
-                } else {
-                    throw new IllegalArgumentException("Please specify type of task");
-                }
+                taskToAdd = addDatedTask(userInput, taskType, taskIndex);
             }
-            assert taskToAdd != null;
+            return saveTask(taskToAdd, dataPath);
 
-            // Add task to data file
-            dataToStore = taskToAdd.getDataRep();
-            Files.writeString(dataPath, dataToStore + System.lineSeparator(), StandardOpenOption.APPEND);
-
-            // Add task To arrayList
-            this.tasks.add(taskToAdd);
-
-            return(String.format("Got it. I've added this task:\n" +
-                    "%s\nNumber of tasks: %s", taskToAdd.toString(), tasks.size()));
-
-        } catch (IllegalArgumentException e) {
-            return("OOPS!!! I'm sorry, but I don't know what that means :-(");
-        } catch(IOException | StringIndexOutOfBoundsException | DateTimeParseException  e) {
+        } catch(IllegalArgumentException | IOException | StringIndexOutOfBoundsException | DateTimeParseException  e) {
             return("<taskType> <task> </by or /at> <yyyy-MM-dd HHmm>");
         }
+    }
+
+    public Task addDatedTask(String userInput, String taskType, int taskIndex) {
+        Task taskToAdd;
+        int dateIndex = taskType.equals("event") ? userInput.indexOf("/at") : userInput.indexOf("/by");
+        String[] dateAndTask = utility.seperateDateFromTask(dateIndex,taskIndex, userInput);
+        String task = dateAndTask[0];
+        String dateString = dateAndTask[1];
+        LocalDateTime dateTime = utility.stringToDate(dateString);
+
+        if (taskType.equals("deadline")){
+            taskToAdd = new Deadline(task, dateTime);
+        } else if (taskType.equals("event")) {
+            taskToAdd = new Event(task, dateTime);
+        } else {
+            throw new IllegalArgumentException("Please specify type of task");
+        }
+        return taskToAdd;
+    }
+
+    /**
+     * Saves task to datacfile and arraylist.
+     *
+     * @param task Task to be added.
+     * @param dataPath Path to data file.
+     * @return String message to be printed on screen.
+     * @throws IOException In case of invalid input.
+     */
+    public String saveTask(Task task, Path dataPath) throws IOException {
+        // Add task to data file
+        String dataToStore = task.getDataRep();
+        Files.writeString(dataPath, dataToStore + System.lineSeparator(), StandardOpenOption.APPEND);
+
+        // Add task To arrayList
+        this.tasks.add(task);
+
+        return(String.format("Got it. I've added this task:\n" +
+                "%s\nNumber of tasks: %s", task.toString(), tasks.size()));
     }
 
     /**
@@ -81,10 +95,11 @@ public class TaskList {
      * @param userInput String of task to delete.
      */
     public String deleteTask(String userInput) {
+        int taskIndex = 7;
         try {
             //Delete from ArrayList
-            int taskToDel = Integer.parseInt(userInput.substring(7)) - 1;
             assert taskToDel >= 0;
+            int taskToDel = Integer.parseInt(userInput.substring(taskIndex)) - 1;
             Task task = this.tasks.get(taskToDel);
             this.tasks.remove(taskToDel);
             return(String.format("Noted. I've removed this task:\n%s\nNow you have %s tasks in list"
