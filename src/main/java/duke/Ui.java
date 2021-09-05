@@ -1,38 +1,48 @@
 package duke;
 
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.Arrays;
 
 import duke.command.Command;
 import duke.command.CommandKeyword;
 import duke.exception.DukeException;
 import duke.task.Task;
+import javafx.fxml.FXML;
+import javafx.scene.image.Image;
+import javafx.scene.layout.VBox;
 
 /**
  * Deals with interactions with the user.
  */
 public class Ui {
-    private Scanner sc;
+    @FXML
+    private VBox dialogContainer;
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/mrbean.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/saitama.png"));
 
-    /**
-     * Constructs an Ui instance. Instantiate a scanner object to take in user's input.
-     */
-    public Ui() {
-        this.sc = new Scanner(System.in);
+    public Ui(VBox dialogContainer) {
+        this.dialogContainer = dialogContainer;
     }
-    private void printMessage(String message) {
-        String formatDisplay = String.format("\t%s", message.replaceAll("\n", "\n\t"));
-        System.out.println(formatDisplay);
+
+    private void formatMessage(String message) {
+        String formattedMessage = String.format("%s", message.replaceAll("\n", "\n\t"));
+        dialogContainer.getChildren().add(
+            DialogBox.getDukeDialog(formattedMessage, dukeImage)
+        );
+    }
+
+    public void showInput(String input) {
+        dialogContainer.getChildren().add(
+                DialogBox.getUserDialog(input, userImage));
     }
 
     /**
      * A welcome message to display to user when Duke starts.
      */
     public void greetUser() {
-        String greetMessage = "Hello! I'm Saitama";
-        String detailsMessage = "I do 100 sit-ups, 100 push-ups, 100 squats and a 10 kilometer run every day! No cap";
-        this.printMessage(greetMessage);
-        this.printMessage(detailsMessage);
+        String greetMessage = "Hello! I'm Saitama\nI do 100 sit-ups, 100 push-ups,"
+                + " 100 squats and a 10 kilometer run every day! No cap";
+        this.formatMessage(greetMessage);
     }
 
     /**
@@ -41,22 +51,21 @@ public class Ui {
      * @param e An exception thrown due to various reasons such as incorrect user command.
      */
     public void showError(DukeException e) {
-        this.printMessage(e.getMessage());
+        this.formatMessage(e.getMessage());
     }
 
     /**
      * A farewell message to display to user before ending the program.
      */
     public void showFarewell() {
-        this.sc.close();
-        this.printMessage("Hope to see you again!! ^_^");
+        this.formatMessage("Hope to see you again!! ^_^");
     }
 
     /**
      * A message that will display to user if there is an error loading tasks from the file.
      */
     public void showLoadingError() {
-        this.printMessage("There is an error while loading tasks.");
+        this.formatMessage("There is an error while loading tasks.");
     }
 
     /**
@@ -65,18 +74,12 @@ public class Ui {
      * @return A command object that consists of keyword and rest of the command.
      * @throws IllegalArgumentException If the command keyword is invalid.
      */
-    public Command readCommand() throws IllegalArgumentException {
-        String commandName = sc.next();
+    public Command readCommand(String input) throws IllegalArgumentException {
+        String[] stringArr = input.split(" ", 2);
+        String commandName = stringArr[0];
         CommandKeyword keyword = CommandKeyword.valueOf(commandName.toUpperCase());
-        String restOfCommand = sc.nextLine().trim();
+        String restOfCommand = stringArr.length > 1 ? stringArr[1] : "";
         return new Command(keyword, restOfCommand);
-    }
-
-    /**
-     * Clear any remaining user input.
-     */
-    public void clearInput() {
-        sc.nextLine();
     }
 
     /**
@@ -86,7 +89,7 @@ public class Ui {
      * @param totalTasks Total number of tasks in the list after the task is added.
      */
     public void showAddTask(Task task, int totalTasks) {
-        this.printMessage(String.format("Got it. I've added this task:"
+        this.formatMessage(String.format("Got it. I've added this task:"
                 + "\n\t%s"
                 + "\nNow you have %d tasks in the list.", task, totalTasks));
     }
@@ -99,13 +102,15 @@ public class Ui {
     public void showTasks(ArrayList<Task> tasks) {
         int len = tasks.size();
         if (len == 0) {
-            this.printMessage("No task is found!");
+            this.formatMessage("No task is found!");
         } else {
+            String message = "Here are the matching tasks in your list:\n";
             for (int i = 0; i < len; i++) {
                 int num = i + 1;
                 Task task = tasks.get(i);
-                this.printMessage(String.format("%d.%s", num, task));
+                message += String.format("%d.%s\n", num, task);
             }
+            this.formatMessage(message);
         }
     }
 
@@ -117,9 +122,9 @@ public class Ui {
      */
     public void showMarkedTask(Task task) {
         if (task != null) {
-            this.printMessage(String.format("Nice! I've marked this task as done: \n\t%s", task));
+            this.formatMessage(String.format("Nice! I've marked this task as done: \n\t%s", task));
         } else {
-            this.printMessage("There is no such task to mark!");
+            this.formatMessage("There is no such task to mark!");
         }
     }
 
@@ -132,10 +137,10 @@ public class Ui {
      */
     public void showDeletedTask(Task task, int totalTasks) {
         if (task != null) {
-            this.printMessage(String.format("Noted. I've removed this task: \n\t%s\n"
+            this.formatMessage(String.format("Noted. I've removed this task: \n\t%s\n"
                     + "Now you have %d tasks in the list.", task, totalTasks));
         } else {
-            this.printMessage("There is no such task to delete!");
+            this.formatMessage("There is no such task to delete!");
         }
     }
 
@@ -143,7 +148,7 @@ public class Ui {
      * A message to display to user if user did not include keywored when using the command find.
      */
     public void showNoKeyword() {
-        this.printMessage("There is no keyword to search for!");
+        this.formatMessage("There is no keyword to search for!");
     }
 
     /**
@@ -152,7 +157,6 @@ public class Ui {
      * @param tasks The arraylist of filtered tasks.
      */
     public void showFilteredTasks(ArrayList<Task> tasks) {
-        this.printMessage("Here are the matching tasks in your list:");
         this.showTasks(tasks);
     }
 }

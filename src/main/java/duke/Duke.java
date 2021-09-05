@@ -4,6 +4,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
+import javafx.scene.layout.VBox;
 
 /**
  * The main program of the chatbot Duke. Consists of Tasklist, Ui and Storage instances.
@@ -16,8 +17,9 @@ public class Duke {
     /**
      * Constructs a Duke chatbot.
      */
-    public Duke() {
-        this.ui = new Ui();
+    public Duke(VBox dialogContainer) {
+        this.ui = new Ui(dialogContainer);
+        ui.greetUser();
         this.storage = new Storage(this.ui);
         this.tasks = new TaskList(this.storage.load(), this.ui);
     }
@@ -27,22 +29,19 @@ public class Duke {
      */
     public void run() {
         this.ui.greetUser();
-        boolean shouldContinue = true;
-        while (shouldContinue) {
-            try {
-                Command command = this.ui.readCommand();
-                shouldContinue = Parser.parse(command, this.tasks, this.storage);
-            } catch (IllegalArgumentException e) { // caused by user entering a command that is invalid
-                this.ui.clearInput();
-                this.ui.showError(new InvalidCommandException());
-            } catch (DukeException e) {
-                this.ui.showError(e);
-            }
-        }
         this.ui.showFarewell();
     }
 
-    public static void main(String[] args) {
-        new Duke().run();
+    public String getResponse(String input) {
+        ui.showInput(input);
+        try {
+            Command command = this.ui.readCommand(input);
+            Parser.parse(command, this.tasks, this.storage);
+        } catch (IllegalArgumentException e) { // caused by user entering a command that is invalid
+            this.ui.showError(new InvalidCommandException());
+        } catch (DukeException e) {
+            this.ui.showError(e);
+        }
+        return "hi";
     }
 }
