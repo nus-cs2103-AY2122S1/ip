@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.Arrays;
+import java.util.List;
+
 import duke.data.TaskFileStorage;
 import duke.exceptions.DukeException;
 import duke.fulfillment.FulfillmentHandler;
@@ -17,6 +20,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -59,6 +67,13 @@ public class Duke extends Application {
      */
     @Override
     public void start(Stage primaryStage) {
+        List<String> args = getParameters().getRaw();
+        Image[] images;
+        if (args.isEmpty()) {
+            images = loadImagesFromFile("DaUser.png", "DaDuke.png");
+        } else {
+            images = loadImagesFromFile("DaUser.png", "DaDuke.png", getParameters().getRaw().get(0));
+        }
         // Container for chat message boxes to provide scroll functionality.
         ScrollPane scrollPane = new ScrollPane();
         // Contains main chat message content vertically
@@ -71,10 +86,18 @@ public class Duke extends Application {
 
         scrollPane.setContent(dialogContainer);
         scrollPane.setPrefSize(385.0, 535.0);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
+
+        if (images.length >= 3 && images[2] != null) {
+            dialogContainer.setBackground(new Background(
+                    new BackgroundImage(images[2], BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT,
+                            BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT)));
+        }
 
         TextField userChatInputField = new TextField();
         userChatInputField.setPrefWidth(325.0);
@@ -82,11 +105,12 @@ public class Duke extends Application {
         Button sendButton = new Button("Send");
         sendButton.setPrefWidth(55.0);
 
+
         // set up the Duke chat bot agent.
         Duke guiDuke = new Duke(new GuiUserInputHandler(userChatInputField, dialogContainer,
-                loadImageFromFile("DaUser.png")),
+                images[0]),
                 new GuiUserOutputHandler(dialogContainer,
-                        loadImageFromFile("DaDuke.png")));
+                        images[1]));
         guiDuke.fulfillmentHandler.runGuiChatBotSetup();
 
         // handle command submissions from user
@@ -129,5 +153,14 @@ public class Duke extends Application {
      */
     private Image loadImageFromFile(String imageFileName) {
         return new Image(this.getClass().getResourceAsStream("/images/" + imageFileName));
+    }
+
+    /**
+     * Loads custom images from provided file names placed in relative /resources/images directory.
+     * @param imageFileNames names of image files placed in relative /resources/images directory.
+     * @return loaded images.
+     */
+    private Image[] loadImagesFromFile(String ...imageFileNames) {
+        return Arrays.stream(imageFileNames).map(this::loadImageFromFile).toArray(Image[]::new);
     }
 }
