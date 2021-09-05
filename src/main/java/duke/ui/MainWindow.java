@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import duke.Duke;
 import duke.DukeException;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -101,7 +102,7 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
         if (ui.willExit()) {
             try {
-                System.exit(0);
+                Platform.exit();
             } catch (Exception e) {
                 e.printStackTrace();
             }
