@@ -21,6 +21,7 @@ public class TaskList {
 
     /**
      * Returns the taskList
+     *
      * @return the taskList
      */
     public static ArrayList<Task> getTaskList() {
@@ -29,6 +30,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks currently save in user's hard disk
+     *
      * @return the number of tasks currently save in user's hard disk (counter member)
      */
     public static int getCounter() {
@@ -36,7 +38,8 @@ public class TaskList {
     }
 
     /**
-     * To add a task to the taskList
+     * Adds a task to the taskList
+     *
      * @param currTask the task that is to be added to the taskList
      */
     public static void addTask(Task currTask) {
@@ -45,7 +48,8 @@ public class TaskList {
     }
 
     /**
-     * To add a task to the taskList and update the list of tasks in user's hard disk
+     * Adds a task to the taskList and update the list of tasks in user's hard disk
+     *
      * @param currTask the task that is to be added
      * @throws IOException if there is an error in appending the task to the list of tasks
      * in user's hard disk
@@ -59,7 +63,8 @@ public class TaskList {
     }
 
     /**
-     * To delete a task to the taskList and update the list of tasks in user's hard disk
+     * Deletes a task to the taskList and update the list of tasks in user's hard disk
+     *
      * @param currTask the task that is to be deleted
      * @throws IOException if there is an error in re-writing the list of tasks without the
      * deleted task
@@ -85,8 +90,9 @@ public class TaskList {
     }
 
     /**
-     * To write to the file in user's hard disk that stores a list of tasks or to overwrite
+     * Writes to the file in user's hard disk that stores a list of tasks or to overwrite
      * the contents of this file
+     *
      * @param filePath the relative path to the file
      * @param textToAdd the content that is to be written
      * @throws IOException if there is an error in writing to/overwriting the file
@@ -98,7 +104,8 @@ public class TaskList {
     }
 
     /**
-     * To append content to the file in user's hard disk that stores a list of tasks
+     * Appends content to the file in user's hard disk that stores a list of tasks
+     *
      * @param filePath the relative path to the file
      * @param textToAppend the content that is to be appended
      * @throws IOException if there is an error in appending to existing content of the file
