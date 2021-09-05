@@ -39,7 +39,7 @@ public class Duke implements ChatbotUI, Parser {
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
 
-        Duke duke = new Duke("data/duke_storage.txt");
+        Duke duke = new Duke("../../data/duke_storage.txt");
 
         duke.greet();
         duke.taskMode();
