@@ -1,5 +1,9 @@
 package duke.databse;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,7 +13,7 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-import java.io.*;
+
 
 /**
  * A class to CRUD file that stores task
@@ -58,7 +62,7 @@ public class Database {
 
     /**
      * parse data from string to task
-     * @param data
+     * @param data a string that contains a task information
      * @return
      */
     public Task parseData(String data) {
