@@ -11,19 +11,13 @@ import duke.tasks.Todo;
  * Adds a todo task to the task list.
  */
 public class TodoCommand extends Command {
-    /**
-     * The command word that identifies a DeleteCommand instance.
-     */
+    /** The command word that identifies a DeleteCommand instance. */
     public static final String COMMAND_WORD = "todo";
 
-    /**
-     * Length of the command word.
-     */
+    /** Length of the command word. */
     public static final int COMMAND_LENGTH = COMMAND_WORD.length();
 
-    /**
-     * Guide on how to use this command word.
-     */
+    /** Guide on how to use this command word. */
     public static final String MESSAGE_USAGE = COMMAND_WORD + " <description> - add a todo item\n"
             + "    📍 Example: " + COMMAND_WORD + " read book";
 

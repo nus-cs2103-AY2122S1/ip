@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -29,6 +30,10 @@ public class Event extends Task {
     public Event(String description, boolean isDone, LocalDateTime at) {
         super(description, isDone);
         this.at = at;
+    }
+
+    public LocalDate getAtDate() {
+        return this.at.toLocalDate();
     }
 
     /**
