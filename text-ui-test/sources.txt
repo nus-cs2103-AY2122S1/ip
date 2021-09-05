@@ -1,4 +1,5 @@
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\Duke.java
+C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\Main.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\Command.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\DeadlineCommand.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\command\DeleteCommand.java
@@ -21,6 +22,9 @@ C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\task\Deadline.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\task\Event.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\task\Task.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\task\Todo.java
+C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\ui\DialogBox.java
+C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\ui\Launcher.java
+C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\ui\MainWindow.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\util\Parser.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\util\Storage.java
 C:\Users\User\Documents\NUS\CS2103\iP\src\main\java\duke\util\TaskList.java

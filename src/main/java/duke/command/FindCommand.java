@@ -36,8 +36,8 @@ public class FindCommand extends Command {
             }
         }
         String response = matchingTasks.getSize() == 0
-                ? "    There are no matching tasks."
-                : "    Here are the matching tasks in your list:\n" + matchingTasks;
+                ? "     There are no matching tasks."
+                : "     Here are the matching tasks in your list:\n" + matchingTasks;
         return response;
     }
 

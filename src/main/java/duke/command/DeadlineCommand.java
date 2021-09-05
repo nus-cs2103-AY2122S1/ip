@@ -36,7 +36,7 @@ public class DeadlineCommand extends Command {
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.addTask(deadline);
 
-        String response = "    Got it. I've added this task:\n"
+        String response = "     Got it. I've added this task:\n"
                 + "       " + deadline + "\n"
                 + "     Now you have "
                 + tasks.getSize() + (tasks.getSize() > 1 ? " tasks" : " task")

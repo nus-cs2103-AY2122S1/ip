@@ -18,8 +18,8 @@ public class ListCommand extends Command {
     @Override
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
         String response = tasks.getSize() == 0
-                ? "    You do not have any tasks."
-                : "    Here are the tasks in your list:\n" + tasks;
+                ? "     You do not have any tasks."
+                : "     Here are the tasks in your list:\n" + tasks;
         return response;
     }
 

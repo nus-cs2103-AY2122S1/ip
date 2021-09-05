@@ -17,7 +17,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String executeAndGetResponse(TaskList tasks, Ui ui, Storage storage) {
-        String response = "    Bye. Hope to see you again soon!";
+        String response = "     Bye. Hope to see you again soon!";
         return response;
     }
 
