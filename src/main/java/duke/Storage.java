@@ -16,8 +16,8 @@ public class Storage {
 
     private static final String FILE_PATH = "./data/duke.txt";
 
-    private static final Set<String> VALID_TASK_TYPE = Set.of("T", "D", "E");
-    private static final Set<String> VALID_DONE_STATUS = Set.of("0", "1");
+    private static final Set<String> VALID_TASK_TYPES = Set.of("T", "D", "E");
+    private static final Set<String> VALID_DONE_STATUSES = Set.of("0", "1");
 
     public static List<Task> retrieveTaskList() throws FileNotFoundException {
         File file = new File(FILE_PATH);
@@ -43,7 +43,7 @@ public class Storage {
             throw new IllegalArgumentException("No separator bar | found");
         }
         String taskType = taskString.substring(0,firstBarIndex).strip();
-        if (!VALID_TASK_TYPE.contains(taskType)) {
+        if (!VALID_TASK_TYPES.contains(taskType)) {
             System.out.println(taskType);
             throw new IllegalArgumentException("Invalid Duke.Task Type (Expects: T, D or E)");
         }
@@ -51,8 +51,8 @@ public class Storage {
         if (secondBarIndex == -1) {
             throw new IllegalArgumentException("Second separator bar | not found");
         }
-        String doneStatus = taskString.substring(firstBarIndex + 1,secondBarIndex).strip();
-        if (!VALID_DONE_STATUS.contains(doneStatus)) {
+        String doneStatus = taskString.substring(firstBarIndex + 1, secondBarIndex).strip();
+        if (!VALID_DONE_STATUSES.contains(doneStatus)) {
             System.out.println(doneStatus);
             throw new IllegalArgumentException("Invalid Done Status (Expects: 1 or 0)");
         }

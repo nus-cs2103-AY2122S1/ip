@@ -3,74 +3,47 @@ package duke;
 import java.util.Scanner;
 
 /**
- * Represents a front end user interface.
+ * Represents a user interface that outputs message to user.
  */
 public class Ui {
 
-    public static void run() {
-
-        printDukeLogo();
-
-        TaskList userList;
-
-        // Load data and list task
-        try {
-            userList = TaskList.load();
-            System.out.println("Hello! Welcome back!");
-            System.out.println("These are the task(s) you have left off:");
-            userList.list();
-        } catch (Exception exception) {
-            userList = new TaskList();
-            System.out.println("Hello! I'm Duke");
-        }
-
-        System.out.println("What can I do for you?");
-
+    public static String getUserInput() {
         Scanner sc = new Scanner(System.in);
-
-        while (true) {
-            String inp = sc.nextLine();
-            if (inp.equals("bye")) {
-                System.out.println("Bye. Hope to see you again soon!");
-                break;
-            } else if (inp.equals("list")) { //check if command is "list"
-                userList.list();
-            } else if (inp.startsWith("done ")) { //check if command is "done"
-                int number = Integer.parseInt(inp.substring(5));
-                userList.markDone(number);
-            } else if (inp.startsWith("delete ")) { //check if command is "delete"
-                int number = Integer.parseInt(inp.substring(7));
-                userList.remove(number);
-            } else if (inp.startsWith("todo ")) { //check if command is "todo"
-                if (inp.length() == 5) {
-                    System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
-                }
-                Task task = new Todo(inp.substring(5));
-                userList.add(task);
-            } else if (inp.startsWith("deadline ")) { //check if command is "deadline"
-                int index = inp.indexOf("/by ");
-                Task task = new Deadline(inp.substring(9, index), inp.substring(index + 4));
-                userList.add(task);
-            } else if (inp.startsWith("event ")) { //check if command is "event"
-                int index = inp.indexOf("/at "); // find index of "/at "
-                Task task = new Event(inp.substring(6, index), inp.substring(index + 4));
-                userList.add(task);
-            } else if (inp.startsWith("find ")) {
-                userList.find(inp.substring(5));
-            } else {
-                // Invalid input
-                System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            }
-        }
+        return sc.nextLine();
     }
 
-    private static void printDukeLogo() {
+    public static void printDukeLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
+    }
+
+    public static void printNewUserWelcomeMessage() {
+        System.out.println("Hello! I'm Duke");
+    }
+
+    public static void printExistingUserWelcomeMessage() {
+        System.out.println("Hello! Welcome back!");
+    }
+
+    public static void printLeftoverTaskMessage(TaskList taskList) {
+        System.out.println("These are the task(s) you have left off:");
+        taskList.list();
+    }
+
+    public static void printInputRequestMessage() {
+        System.out.println("What can I do for you?");
+    }
+
+    public static void printByeMessage() {
+        System.out.println("Bye. Hope to see you again soon!");
+    }
+
+    public static void printInvalidCommandMessage() {
+        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
 }

@@ -9,14 +9,14 @@ import java.util.ArrayList;
  */
 public class TaskList {
 
-    protected List<Task> userList;
+    protected List<Task> taskList;
 
     public TaskList() {
-        userList = new ArrayList<>();
+        taskList = new ArrayList<>();
     }
 
     public TaskList(List<Task> taskList) {
-        userList = taskList;
+        this.taskList = taskList;
     }
 
     /**
@@ -25,10 +25,10 @@ public class TaskList {
      * @param task a task to be added to list
      */
     public void add(Task task) {
-        userList.add(task);
+        taskList.add(task);
         System.out.println("Got it. I've added this task: ");
         System.out.println(task);
-        System.out.println("Now you have " + userList.size() + " tasks in the list.");
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         save();
     }
 
@@ -38,7 +38,7 @@ public class TaskList {
      * @param number the task number in the task list
      */
     public void markDone(int number) {
-        Task task = userList.get(number - 1);
+        Task task = taskList.get(number - 1);
         task.markDone();
         System.out.println("Nice! I've marked this task as done: ");
         System.out.println(task);
@@ -51,11 +51,11 @@ public class TaskList {
      * @param number the task number in the task list
      */
     public void remove(int number) {
-        Task task = userList.get(number - 1);
-        userList.remove(number - 1);
+        Task task = taskList.get(number - 1);
+        taskList.remove(number - 1);
         System.out.println("Noted. I've removed this task: ");
         System.out.println(task);
-        System.out.println("Now you have " + userList.size() + " tasks in the list.");
+        System.out.println("Now you have " + taskList.size() + " tasks in the list.");
         save();
     }
 
@@ -64,7 +64,7 @@ public class TaskList {
      */
     public void list() {
         int counter = 1;
-        for (Task task:userList) {
+        for (Task task: taskList) {
             System.out.println(counter + "." + task);
             counter++;
         }
@@ -73,15 +73,37 @@ public class TaskList {
         }
     }
 
+    /**
+     * Prints all the task that contains the keyword.
+     *
+     * @param keyword a string to find task
+     */
     public void find(String keyword) {
         int counter = 1;
         System.out.println("The following tasks contain keyword: " + keyword);
-        for (Task task:userList) {
+        for (Task task: taskList) {
             if (task.getDescription().contains(keyword)) {
                 System.out.println(counter + "." + task);
             }
             counter++;
         }
+    }
+
+    /**
+     * Removes all task in task list.
+     */
+    public void clear() {
+        taskList = new ArrayList<>();
+        save();
+    }
+
+    /**
+     * Returns if task list is empty.
+     *
+     * @return if task list is empty
+     */
+    public boolean isEmpty() {
+        return taskList.isEmpty();
     }
 
     /**
@@ -98,7 +120,7 @@ public class TaskList {
      */
     public void save() {
         try {
-            Storage.saveTaskList(userList);
+            Storage.saveTaskList(taskList);
         } catch (Exception exception) {
             System.out.println("Saving failed: " + exception);
         }

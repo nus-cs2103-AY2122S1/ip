@@ -36,4 +36,19 @@ public enum Command {
             return "event";
         }
     },
+    FIND {
+        public String toString() {
+            return "find";
+        }
+    },
+    CLEAR {
+        public String toString() {
+            return "clear";
+        }
+    },
+    INVALID {
+        public String toString() {
+            return "invalid";
+        }
+    }
 }
