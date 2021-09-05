@@ -68,6 +68,7 @@ public class Parser {
             }
 
             // If pass all checking, create and return done command obj
+            assert task >= 0 : "Task should be non negative";
             return new DoneCommand(task);
 
         case Parser.DELETE_COMMAND:
@@ -85,6 +86,7 @@ public class Parser {
             }
 
             // If pass all checking, create and return delete command obj
+            assert task >= 0 : "Task should be non negative";
             return new DeleteCommand(task);
 
         case Parser.FIND_COMMAND:
@@ -97,6 +99,7 @@ public class Parser {
             keyword = commandComponents[1];
 
             // If pass all checking, create and return find command obj
+            assert !keyword.equals("") : "Keyword should be specified";
             return new FindCommand(keyword);
 
         case Parser.DEADLINE_COMMAND:
@@ -123,6 +126,7 @@ public class Parser {
             }
 
             // If pass all checking, create and return deadline command obj
+            assert !description.equals("") && by != null : "Description and by argument should be specified";
             return new DeadlineCommand(description, by);
 
         case Parser.EVENT_COMMAND:
@@ -143,6 +147,7 @@ public class Parser {
             at = arguments.split(" /at ")[1];
 
             // If pass all checking, create and return event command obj
+            assert !description.equals("") && at != null : "Description and at argument should be specified";
             return new EventCommand(description, at);
 
         case Parser.TODO_COMMAND:
@@ -155,6 +160,7 @@ public class Parser {
             description = fullCommand.split(" ", 2)[1];
 
             // If pass all checking, create and return event command obj
+            assert !description.equals("") : "Description should be specified";
             return new TodoCommand(description);
 
         case Parser.LIST_COMMAND:

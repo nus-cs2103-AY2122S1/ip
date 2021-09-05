@@ -12,7 +12,7 @@ public class Ui {
      * Constructs a user interface for the Duke program.
      */
     public Ui() {
-        this.scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
     }
 
     /**
@@ -32,10 +32,11 @@ public class Ui {
      * @return the line of command inputted by users.
      */
     public String readCommand() {
-        String nextLine = this.scanner.nextLine();
+        String nextLine = scanner.nextLine();
         while (nextLine.equals("")) {
-            nextLine = this.scanner.nextLine();
+            nextLine = scanner.nextLine();
         }
+        assert !nextLine.equals("") : "Next line should not be an empty string";
         return nextLine;
     }
 
@@ -75,6 +76,6 @@ public class Ui {
      * Closes the scanner.
      */
     public void cleanup() {
-        this.scanner.close();
+        scanner.close();
     }
 }
