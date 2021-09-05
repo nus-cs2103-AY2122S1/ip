@@ -37,12 +37,13 @@ public class Deadline extends Task {
      * @return Formatted data as a string
      */
     @Override
-    public String taskToString() {
-        return super.taskToString() + when;
+    public String convertTaskToString() {
+        return super.convertTaskToString() + when;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + when.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String formattedDate = when.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
 }

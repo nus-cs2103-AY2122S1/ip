@@ -45,7 +45,7 @@ public class Ui {
                         + INDENT
                         + task.toString()
                         + "\nNow you have "
-                        + taskList.length()
+                        + taskList.getNumOfTasks()
                         + " tasks in the list.";
         return formatOutput(output);
     }
@@ -61,7 +61,7 @@ public class Ui {
                         + INDENT
                         + task.toString()
                         + "\nNow you have "
-                        + taskList.length()
+                        + taskList.getNumOfTasks()
                         + " tasks in the list.";
         return formatOutput(output);
     }

@@ -37,12 +37,13 @@ public class Event extends Task {
      * @return Formatted data as a string
      */
     @Override
-    public String taskToString() {
-        return super.taskToString() + when;
+    public String convertTaskToString() {
+        return super.convertTaskToString() + when;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + when.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String formattedDate = when.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return "[E]" + super.toString() + " (at: " + formattedDate + ")";
     }
 }

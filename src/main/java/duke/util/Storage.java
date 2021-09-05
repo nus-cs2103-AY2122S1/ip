@@ -54,7 +54,7 @@ public class Storage {
 
         try {
             StringBuilder db = new StringBuilder();
-            taskList.toArrayList().forEach(x -> db.append(x.taskToString()).append(System.lineSeparator()));
+            taskList.toArrayList().forEach(x -> db.append(x.convertTaskToString()).append(System.lineSeparator()));
             byte[] dbByte = db.toString().getBytes();
 
             if (!Files.isDirectory(dirPath)) {

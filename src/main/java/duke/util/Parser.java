@@ -114,10 +114,10 @@ public class Parser {
             );
         }
 
-        if (index > taskList.length() - 1) {
+        if (index > taskList.getNumOfTasks() - 1) {
             throw new UserInputError(
                     "Invalid task reference!\nYou currently have "
-                            + taskList.length()
+                            + taskList.getNumOfTasks()
                             + " tasks."
             );
         }
