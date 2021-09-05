@@ -25,19 +25,18 @@ public abstract class TaskWithDateTime extends Task {
             return -1; // Deadline and Events in front of ToDo
         } else if (o instanceof TaskWithDateTime) {
             TaskWithDateTime taskWithDateTime = (TaskWithDateTime) o;
-            return compareDateTimeDescription(taskWithDateTime.date,
-                    taskWithDateTime.time, taskWithDateTime.description);
+            return compareDateTimeDescription(taskWithDateTime);
         } else {
             return 0;
         }
     }
 
-    private int compareDateTimeDescription(LocalDate otherDate, LocalTime otherTime, String otherDescription) {
-        int compareDateResult = this.date.compareTo(otherDate);
+    private int compareDateTimeDescription(TaskWithDateTime otherTask) {
+        int compareDateResult = this.date.compareTo(otherTask.date);
         if (compareDateResult == 0) { // same date
-            int compareTimeResult = this.time.compareTo(otherTime);
+            int compareTimeResult = this.time.compareTo(otherTask.time);
             if (compareTimeResult == 0) { // same time
-                return this.description.compareTo(otherDescription);
+                return this.description.compareTo(otherTask.description);
             } else {
                 return compareTimeResult;
             }
