@@ -5,8 +5,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.task.Task;
-
 /**
  * A class that encapsulates the saving/reading data for Duke.
  */
@@ -80,12 +78,7 @@ public class Storage {
             // read and update TaskList
             Scanner s = new Scanner(file);
             while (s.hasNext()) {
-                String[] inputArray = s.nextLine().split(" \\| ");
-                Task.TaskName type = Task.TaskName.getTaskType(inputArray[0]);
-
-                list.addTask(type, inputArray[2] + type.getSplit()
-                                + (type != Task.TaskName.TODO ? inputArray[3] : ""),
-                        inputArray[1].equals("1"));
+                Parser.parseSavedDataLine(list, s.nextLine());
             }
             return list;
         } catch (IOException | DukeException e) {
