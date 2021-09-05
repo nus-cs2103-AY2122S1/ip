@@ -48,7 +48,7 @@ public class EventCommand extends Command {
 
     private String getTime(String input) throws DukeException {
         String[] splitInput = input.split("/at");
-        String timeInput = splitInput[1].strip(); 
+        String timeInput = splitInput[1].strip();
         if (timeInput.length() == 0) {
             throw new DukeException("Please specify a time for this task");
         } else {

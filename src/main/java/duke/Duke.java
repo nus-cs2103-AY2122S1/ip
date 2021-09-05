@@ -36,7 +36,7 @@ public class Duke {
             fm.writeToFile(list);
             return response;
         } catch (DukeException e) {
-            return e.getMessage(); 
+            return e.getMessage();
         }
     }
 }

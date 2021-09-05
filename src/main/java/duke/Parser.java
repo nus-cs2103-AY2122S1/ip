@@ -7,7 +7,7 @@ import duke.commands.EventCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
 import duke.commands.TodoCommand;
-        
+
 /**
  * The Parser class that makes sense of the user input.
  */

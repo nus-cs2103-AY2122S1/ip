@@ -68,7 +68,7 @@ public class TaskList {
             return "Poof!\n" + deletedTask + "\nis gone"
                     + "\nNow you have " + taskList.size() + " tasks in the list";
         default:
-            assert false: command;
+            assert false : command;
             return "Didn't understand that :(";
         }
     }
