@@ -15,8 +15,7 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
-    public Duke() {
-    }
+    public Duke() {}
 
     /**
      * Sets up the Duke program by instantiating a user interface, a storage and a task list.

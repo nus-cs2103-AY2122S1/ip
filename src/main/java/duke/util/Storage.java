@@ -38,6 +38,7 @@ public class Storage {
             if (!dir.exists()) {
                 dir.mkdir();
             }
+            assert dir != null : "Directory should be created";
             filePathTemp += filePathComponents[i + 1];
         }
 
@@ -48,6 +49,7 @@ public class Storage {
         } catch (IOException e) {
             throw new StorageException();
         }
+        assert file != null : "File should be created";
     }
 
     /**
@@ -67,10 +69,12 @@ public class Storage {
         } catch (FileNotFoundException e) {
             throw new LoadingException();
         }
+        assert scanner != null : "Scanner should be created";
 
         while (scanner.hasNext()) {
             // Extract task components
             String taskRaw = scanner.nextLine();
+            assert !taskRaw.equals("") : "taskRaw should not be an empty string";
             String[] taskComponents = taskRaw.split(" \\| ");
             String taskType = taskComponents[0];
             String taskStatus = taskComponents[1];
@@ -91,6 +95,7 @@ public class Storage {
                 task = new Event(taskDescription, taskAt);
                 break;
             }
+            assert task != null : "Task should not be null";
 
             // Mark task as done if applicable
             if (taskStatus.equals("1")) {
@@ -115,6 +120,7 @@ public class Storage {
         try {
             // Instantiate file writer obj
             FileWriter fw = new FileWriter(file);
+            assert fw != null : "File writer should be created";
 
             // Write to file
             taskList.forEach(task -> {

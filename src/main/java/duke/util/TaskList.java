@@ -14,7 +14,7 @@ public class TaskList {
      * Constructs a TaskList with no task.
      */
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        taskList = new ArrayList<>();
     }
 
     /**
@@ -32,7 +32,7 @@ public class TaskList {
      * @return the list of tasks.
      */
     public ArrayList<Task> getTaskList() {
-        return this.taskList;
+        return taskList;
     }
 
     /**
@@ -41,7 +41,7 @@ public class TaskList {
      * @return the number of tasks.
      */
     public int getSize() {
-        return this.taskList.size();
+        return taskList.size();
     }
 
     /**
@@ -51,7 +51,7 @@ public class TaskList {
      * @return the task of the given index.
      */
     public Task getTask(int index) {
-        return this.taskList.get(index);
+        return taskList.get(index);
     }
 
     /**
@@ -60,7 +60,7 @@ public class TaskList {
      * @param task Task to be added to the existing list of tasks.
      */
     public void addTask(Task task) {
-        this.taskList.add(task);
+        taskList.add(task);
     }
 
     /**
@@ -69,7 +69,7 @@ public class TaskList {
      * @param index Index of the task to be deleted from the existing list of tasks
      */
     public void deleteTask(int index) {
-        this.taskList.remove(index);
+        taskList.remove(index);
     }
 
     /**
@@ -80,11 +80,11 @@ public class TaskList {
     @Override
     public String toString() {
         String taskListString = "";
-        for (int i = 0; i < this.taskList.size(); i++) {
-            if (i == this.taskList.size() - 1) {
-                taskListString = taskListString + "     " + (i + 1) + "." + this.taskList.get(i);
+        for (int i = 0; i < taskList.size(); i++) {
+            if (i == taskList.size() - 1) {
+                taskListString = taskListString + "     " + (i + 1) + "." + taskList.get(i);
             } else {
-                taskListString = taskListString + "     " + (i + 1) + "." + this.taskList.get(i) + "\n";
+                taskListString = taskListString + "     " + (i + 1) + "." + taskList.get(i) + "\n";
             }
         }
         return taskListString;
