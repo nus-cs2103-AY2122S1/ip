@@ -37,7 +37,7 @@ public class DialogBox extends HBox {
         dialog.setText(text);
         displayPicture.setImage(img);
 
-        Circle circle = new Circle(50,50, 50);
+        Circle circle = new Circle(50, 50, 50);
         displayPicture.setClip(circle);
     }
 
@@ -61,6 +61,4 @@ public class DialogBox extends HBox {
         db.setStyle("-fx-background-color: #182533; -fx-background-radius: 20px; -fx-border-radius: 20px;");
         return db;
     }
-
-
 }
