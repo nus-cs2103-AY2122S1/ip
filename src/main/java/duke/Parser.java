@@ -65,59 +65,47 @@ public class Parser {
     private String[] addTask(String input) throws DukeException, IOException {
         String[] splitString = input.split(" ", 2);
         String type = splitString[0];
+        Task task;
         switch (type) {
         case "todo":
             if (splitString.length == 1) {
-                throw new DukeException("OOPS!!! The description of a todo cannot be empty.\n");
+                return new String[]{"OOPS!!! The description of a todo cannot be empty.\n"};
             }
-            Todo todo = new Todo(splitString[1]);
-            tasks.add(todo);
-            storage.write(todo.save());
+            task = new Todo(splitString[1]);
             break;
         case "deadline":
             if (splitString.length == 1) {
                 return new String[]{"OOPS!!! The description of a deadline cannot be empty.\n"};
-                //throw new DukeException("OOPS!!! The description of a deadline cannot be empty.\n");
             }
             String[] splitDeadline = splitString[1].split(" /by ", 2);
             if (splitDeadline.length == 1) {
-                return new String[]{"OOPS!!! The description or deadline for a deadline cannot be"
-                        + " empty or it must be after a '/'"};
-                //throw new DukeException(
-                //        "OOPS!!! The description or deadline for a
-                //        deadline cannot be empty or it must be after a '/'");
+                return new String[]{"OOPS!!! The description or deadline can't be empty or it must be after a '/'"};
             }
-            Deadline deadline = new Deadline(splitDeadline[0], LocalDateTime.parse(splitDeadline[1], fmt));
-            tasks.add(deadline);
-            storage.write(deadline.save());
+            task = new Deadline(splitDeadline[0], LocalDateTime.parse(splitDeadline[1], fmt));
             break;
         case "event":
             if (splitString.length == 1) {
                 return new String[]{"OOPS! The description of an event cannot be empty.\n"};
-                //throw new DukeException("OOPS!!! The description of an event cannot be empty.\n");
             }
             String[] splitEvent = splitString[1].split(" /at ", 2);
             if (splitEvent.length == 1) {
-                return new String[]{"\tOOPS!!! The description or duration for an event "
-                        + "cannot be empty or it must be after a '/'"};
-                //throw new DukeException(
-                //      "\tOOPS!!! The description or duration for an event cannot be empty or it must be after a '/'");
+                return new String[]{"\tOOPS!!! The description or duration can't be empty or it must be after a '/'"};
             }
-            Event event = new Event(splitEvent[0], LocalDateTime.parse(splitEvent[1], fmt));
-            tasks.add(event);
-            storage.write(event.save());
+            task = new Event(splitEvent[0], LocalDateTime.parse(splitEvent[1], fmt));
             break;
         default:
             return new String[]{"OOPS!!! I'm sorry, but I don't know what that means :-("};
-            //throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
+        tasks.add(task);
+        storage.write(task.save());
+        return displayTasks();
+    }
+    private String[] displayTasks() {
         ArrayList<String> results = new ArrayList<>();
-        results.add("\tGot it. I've added this task:");
-        results.add("\t\t" + tasks.get(tasks.size() - 1).toString());
-        results.add("\tNow you have " + tasks.size() + " tasks in the list.");
+        results.add("\tGot it. I've added this task:\n\t\t" + tasks.get(tasks.size() - 1).toString()
+                + "\n\tNow you have " + tasks.size() + " tasks in the list.");
         return results.toArray(new String[0]);
     }
-
     private String deleteTask(String input) {
         String[] splitString = input.split(" ", 2);
         int index = Integer.parseInt(splitString[1]) - 1;
