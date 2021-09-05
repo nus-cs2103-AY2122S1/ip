@@ -30,7 +30,9 @@ public class Event extends Task {
         String[] startDatetimeArr = startInput.split("\\s+");
         String[] endDatetimeArr = endInput.split("\\s+");
 
-        if (startDatetimeArr.length == 2 && endDatetimeArr.length == 2) {
+        boolean isStartDatetime = startDatetimeArr.length == 2;
+        boolean isEndDatetime = endDatetimeArr.length == 2;
+        if (isStartDatetime && isEndDatetime) {
             this.startDatetime = new DateTime(startDatetimeArr[0].replace(",", ""),
                     startDatetimeArr[1].replace(",", ""));
             this.endDatetime = new DateTime(endDatetimeArr[0].replace(",", ""),
@@ -54,7 +56,9 @@ public class Event extends Task {
         String[] startDatetimeArr = datetimeInputArr[0].split(", ");
         String[] endDatetimeArr = datetimeInputArr[1].split(", ");
 
-        if (startDatetimeArr.length == 2 && endDatetimeArr.length == 2) {
+        boolean isStartDatetime = startDatetimeArr.length == 2;
+        boolean isEndDatetime = endDatetimeArr.length == 2;
+        if (isStartDatetime && isEndDatetime) {
             this.startDatetime = new DateTime(startDatetimeArr[0], startDatetimeArr[1]);
             this.endDatetime = new DateTime(endDatetimeArr[0], endDatetimeArr[1]);
         } else {

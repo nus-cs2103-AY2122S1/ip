@@ -114,7 +114,8 @@ public class Ui {
     public String addTask(String input, TaskList taskList) throws WrongFormatException {
         assert input.length() > 0;
 
-        if (input.replace("todo", "").replaceAll(" ", "").length() > 0) {
+        int numTasksToAdd = input.replace("todo", "").replaceAll(" ", "").length();
+        if (numTasksToAdd > 0) {
             taskList.addTask(input);
             return Ui.formatMessage(new Task(input).toString(), taskList);
         } else {
@@ -136,14 +137,15 @@ public class Ui {
             TooManyIndexesException {
         assert input.length() > 0;
 
-        if (input.split("\\s+").length == 2) {
+        int commandSize = input.split("\\s+").length;
+        if (commandSize == 2) {
             int taskNum = this.parser.tryIntParsing(input.split("\\s+")[1]);
             if (taskNum > taskList.length() || taskNum <= 0) {
                 throw new TaskIndexException();
             } else {
                 return taskList.markTaskDone(taskNum - 1);
             }
-        } else if (input.split("\\s+").length == 1) {
+        } else if (commandSize == 1) {
             throw new NoIndexException();
         } else {
             throw new TooManyIndexesException("mark");
@@ -166,7 +168,8 @@ public class Ui {
 
         if (input.split("\\s+").length == 2) {
             int taskNum = this.parser.tryIntParsing(input.split("\\s+")[1]);
-            if (taskNum > taskList.length() || taskNum <= 0) {
+            boolean isInvalidIndex = taskNum > taskList.length() || taskNum <= 0;
+            if (isInvalidIndex) {
                 throw new DeleteIndexException();
             } else {
                 return taskList.delete(taskNum - 1);
@@ -200,7 +203,8 @@ public class Ui {
     public String handleFind(String input, TaskList taskList) throws NoIndexException {
         assert input.length() > 0;
 
-        if (input.split("\\s+").length == 1) {
+        boolean hasNoIndex = input.split("\\s+").length == 1;
+        if (hasNoIndex) {
             throw new NoIndexException();
         } else {
             String matching = input.replaceFirst("find", "").trim();

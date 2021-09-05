@@ -12,6 +12,6 @@ public class NoIndexException extends SideException {
      * Initialises a NoIndexException.
      */
     public NoIndexException() {
-        super("Can't do anything without task number...");
+        super("Can't do anything without more info...");
     }
 }
