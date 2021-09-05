@@ -60,6 +60,7 @@ public class Duke {
      * @return item in the type Task.
      */
     public Task addTaskToList(String item) {
+        assert !item.equals("") : "description of task cannot be empty";
         Task task = Task.createTask(item);
         this.listOfTasks.addTaskToList(task);
         return task;
