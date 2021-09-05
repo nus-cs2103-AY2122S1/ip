@@ -90,9 +90,9 @@ public class TaskList {
      */
     public String done(String command) throws InvalidTaskIndexException, InvalidFormatException {
         int taskIdx = Parser.getIndexFromCommand(command);
+        boolean isValidIndex = taskIdx >= 1 && taskIdx <= tasks.size();
 
-        // Handle invalid index
-        if (taskIdx >= 1 && taskIdx <= tasks.size()) {
+        if (isValidIndex) {
             Task t = tasks.get(taskIdx - 1);
             assert t != null;
             t.markAsDone();
@@ -111,8 +111,11 @@ public class TaskList {
      * @throws EmptyTodoDescriptionException When the description is empty.
      */
     public String todo(String command) throws InvalidFormatException, EmptyTodoDescriptionException {
-        String[] matches = Parser.validateRegexAndMatch(command, "^todo (.+)", "todo {description}");
+        String regex = "^todo (.+)";
+        String validFormatDescription = "todo {description}";
+        String[] matches = Parser.validateRegexAndMatch(command, regex, validFormatDescription);
         String description = matches[1].trim();
+
         if (description.equals("")) {
             throw new EmptyTodoDescriptionException();
         }
@@ -130,8 +133,9 @@ public class TaskList {
      * @throws InvalidFormatException When the input command is of the wrong format.
      */
     public String deadline(String command) throws InvalidFormatException {
-        String[] matches = Parser.validateRegexAndMatch(command, "^deadline (.+) /by (.+)",
-                "deadline {description} /by {date}");
+        String regex = "^deadline (.+) /by (.+)";
+        String validFormatDescription = "deadline {description} /by {date}";
+        String[] matches = Parser.validateRegexAndMatch(command, regex, validFormatDescription);
 
         LocalDate date;
         try {
@@ -154,8 +158,9 @@ public class TaskList {
      * @throws InvalidFormatException When the input command is of the wrong format.
      */
     public String event(String command) throws InvalidFormatException {
-        String[] matches = Parser.validateRegexAndMatch(command, "^event (.+) /at (.+)",
-                "event {description} /at {time}");
+        String regex = "^event (.+) /at (.+)";
+        String validFormatDescription = "event {description} /at {time}";
+        String[] matches = Parser.validateRegexAndMatch(command, regex, validFormatDescription);
 
         Event newEvent = new Event(matches[1].trim(), matches[2].trim());
         assert newEvent != null;
@@ -173,9 +178,9 @@ public class TaskList {
      */
     public String delete(String command) throws InvalidTaskIndexException, InvalidFormatException {
         int taskIdx = Parser.getIndexFromCommand(command);
+        boolean isValidIndex = taskIdx >= 1 && taskIdx <= tasks.size();
 
-        // Handle invalid index
-        if (taskIdx >= 1 && taskIdx <= tasks.size()) {
+        if (isValidIndex) {
             Task t = tasks.get(taskIdx - 1);
             assert t != null;
             tasks.remove(taskIdx - 1);
@@ -193,9 +198,11 @@ public class TaskList {
      * @throws InvalidFormatException When the input command is of the wrong format.
      */
     public String find(String command) throws InvalidFormatException {
-        String[] matches = Parser.validateRegexAndMatch(command, "^find (.+)",
-                "find {search term}");
+        String regex = "^find (.+)";
+        String validFormatDescription = "find {search term}";
+        String[] matches = Parser.validateRegexAndMatch(command, regex, validFormatDescription);
         String searchTerm = matches[1];
+
         StringBuilder str = new StringBuilder("Here are the matching tasks in your list:\n");
         int counter = 1;
         for (Task t : this.tasks) {
