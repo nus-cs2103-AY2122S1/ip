@@ -30,16 +30,16 @@ public class AddCommand extends Command {
      */
     public String execute(TaskList tasks, MainWindow gui, Storage storage) throws IOException, DukeException {
         if (this.task instanceof Todo) {
-            storage.saveTaskToFile(task.toString() + "\n");
+            storage.saveTaskToFile(task.toString());
             return addTask(this.task, tasks);
         } else if (this.task instanceof Deadline) {
             Deadline deadline = (Deadline) this.task;
-            storage.saveTaskToFile(task.toString() + "\n");
+            storage.saveTaskToFile(task.toString());
             return addTask(deadline, tasks);
         } else {
             Event event = (Event) this.task;
             //System.out.println(event.timeFormatted);
-            storage.saveTaskToFile(task.toString() + "\n");
+            storage.saveTaskToFile(task.toString());
             return addTask(event, tasks);
         }
     };

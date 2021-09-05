@@ -43,6 +43,10 @@ test {
     maxHeapSize = '1G'
 }
 
+application {
+    mainClassName = "main.java.duke.Launcher"
+}
+
 checkstyle {
     toolVersion = '8.29'
     configFile = file("${rootDir}/config/checkstyle/checkstyle.xml")
@@ -51,4 +55,9 @@ checkstyle {
 javafx {
     version = "12"
     modules = [ 'javafx.controls' ]
+}
+
+shadowJar {
+    archiveBaseName = "duke"
+    archiveClassifier = null
 }
