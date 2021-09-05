@@ -42,6 +42,8 @@ public class EventCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) throws InvalidInputException,
         NoTimeException, NoActionException, SaveFileException {
+        assert tasks != null;
+        assert storage != null;
         if (action.trim().length() == 0) {
             throw new NoActionException("Command 'event' requires a task action");
         }

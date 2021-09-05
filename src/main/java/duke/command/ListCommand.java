@@ -19,6 +19,8 @@ public class ListCommand extends Command {
      * @param storage Storage class handling the persistence of the tasks
      */
     public CommandResult execute(TaskList tasks, Storage storage) {
+        assert tasks != null;
+        assert storage != null;
         return new CommandResult(Reply.showList(tasks), true, super.isExit());
     }
 

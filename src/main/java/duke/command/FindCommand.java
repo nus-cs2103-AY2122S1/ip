@@ -23,6 +23,8 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) throws NoActionException {
+        assert tasks != null;
+        assert storage != null;
         if (this.searchTerms.length() == 0) {
             throw new NoActionException("Command 'find' requires search terms to be provided.");
         }
